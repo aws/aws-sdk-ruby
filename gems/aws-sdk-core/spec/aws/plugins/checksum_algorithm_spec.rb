@@ -2,6 +2,7 @@
 
 require_relative '../../spec_helper'
 require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'delegate'
 
 module Aws
   module Plugins
@@ -284,6 +285,91 @@ module Aws
         end
       end
 
+      context 'IO-like request body compatibility' do
+        let(:payload) { "\x00\xff".b * 11 }
+        let(:expected_checksum) do
+          Base64.strict_encode64([Zlib.crc32(payload)].pack('N'))
+        end
+        let(:one_argument_reader) do
+          Class.new(StringIO) do
+            def read(length)
+              super(length)
+            end
+          end
+        end
+
+        def send_checksum_request(io)
+          operation = placement == 'header' ? :http_checksum_operation : :http_checksum_streaming_operation
+          client.stub_responses(operation, lambda do |context|
+            body = context.http_request.body
+            output = body.read(body.size)
+            headers = context.http_request.headers
+            expect(headers['content-length'].to_i).to eq(output.bytesize)
+            if placement == 'header'
+              expect(output).to eq(payload)
+              expect(headers['x-amz-checksum-crc32']).to eq(expected_checksum)
+            else
+              expected = "#{payload.bytesize.to_s(16)}\r\n#{payload}\r\n" \
+                         "0\r\nx-amz-checksum-crc32:#{expected_checksum}\r\n\r\n"
+              expect(output).to eq(expected)
+            end
+            {}
+          end)
+          client.public_send(operation, body: io, checksum_algorithm: 'CRC32')
+        end
+
+        %w[trailer].each do |location|
+          context "checksum in #{location}",
+                  skip: location == 'trailer' && defined?(JRUBY_VERSION) && 'Trailer checksums are disabled on JRuby' do
+            let(:placement) { location }
+
+            it 'supports a one-argument reader behind a delegator' do
+              send_checksum_request(SimpleDelegator.new(one_argument_reader.new(payload)))
+            end
+
+            it 'supports a reader that ignores the optional output buffer' do
+              klass = Class.new(one_argument_reader) do
+                def read(length, _buffer = nil)
+                  super(length)
+                end
+              end
+              send_checksum_request(klass.new(payload))
+            end
+
+            it 'supports a reader that returns a frozen String instead of filling the buffer' do
+              klass = Class.new(StringIO) do
+                def read(length, buffer = nil)
+                  return super if length.zero? || @returned_frozen
+
+                  @returned_frozen = true
+                  super(length).freeze
+                end
+              end
+              send_checksum_request(klass.new(payload))
+            end
+
+            it 'propagates payload read errors without retrying' do
+              klass = Class.new(StringIO) do
+                attr_reader :payload_reads
+
+                def read(length, buffer = nil)
+                  return super if length.zero?
+
+                  @payload_reads = (@payload_reads || 0) + 1
+                  super(1, buffer)
+                  raise ArgumentError, 'reader failed after consuming a byte'
+                end
+              end
+              io = klass.new(payload)
+              expect { send_checksum_request(io) }.to raise_error(
+                ArgumentError, 'reader failed after consuming a byte'
+              )
+              expect(io.payload_reads).to eq(1)
+            end
+          end
+        end
+      end
+
       context 'response checksum calculation' do
         it 'computes a validation_list' do
           resp = client.http_checksum_operation
@@ -481,18 +567,112 @@ module Aws
       end
 
       describe 'AwsChunkedTrailerDigestIO' do
+        let(:payload) { "\x00\xff".b * 11 }
+        let(:io) { StringIO.new(payload) }
+        let(:body) do
+          ChecksumAlgorithm::AwsChunkedTrailerDigestIO.new(
+            buffer_enabled: true,
+            io: io,
+            algorithm: 'CRC32',
+            location_name: 'x-amz-checksum-crc32'
+          )
+        end
+        let(:encoded_payload) do
+          checksum = Base64.strict_encode64([Zlib.crc32(payload)].pack('N'))
+          "a\r\n#{payload.byteslice(0, 10)}\r\n" \
+            "a\r\n#{payload.byteslice(10, 10)}\r\n" \
+            "2\r\n#{payload.byteslice(20, 2)}\r\n" \
+            "0\r\nx-amz-checksum-crc32:#{checksum}\r\n\r\n"
+        end
+
+        around do |example|
+          previous_chunk_size = Thread.current[:net_http_override_body_stream_chunk]
+          Thread.current[:net_http_override_body_stream_chunk] = 16
+          example.run
+        ensure
+          Thread.current[:net_http_override_body_stream_chunk] = previous_chunk_size
+        end
+
+        it 'supports a one-argument reader when buffer_enabled is omitted' do
+          klass = Class.new(StringIO) do
+            def read(length)
+              super(length)
+            end
+          end
+          body = ChecksumAlgorithm::AwsChunkedTrailerDigestIO.new(
+            io: klass.new(payload),
+            algorithm: 'CRC32',
+            location_name: 'x-amz-checksum-crc32'
+          )
+
+          expect(body.read).to eq(encoded_payload)
+          expect(body.read).to be_nil
+        end
+
         it 'rewinds IO on initialization' do
           io = StringIO.new('hello world')
           io.read # move to EOF
           expect(io.pos).to eq(11)
 
           ChecksumAlgorithm::AwsChunkedTrailerDigestIO.new(
+            buffer_enabled: true,
             io: io,
             algorithm: 'CRC32',
             location_name: 'x-amz-checksum-crc32'
           )
 
           expect(io.pos).to eq(0)
+        end
+
+        it 'reuses the input buffer without changing encoded binary chunks' do
+          buffers = []
+          allow(io).to receive(:read).and_wrap_original do |read, length, buffer|
+            buffers << buffer unless length.zero?
+            read.call(length, buffer)
+          end
+
+          output = String.new
+          buffer = String.new
+          output << buffer while body.read(7, buffer)
+
+          expect(output).to eq(encoded_payload)
+          expect(buffers.size).to eq(4) # three data chunks and EOF
+          expect(buffers.first).to be_a(String)
+          expect(buffers).to all(equal(buffers.first))
+          expect(body).to be_eof
+        end
+
+        it 'replays encoded content when rewound after EOF' do
+          expect(body.read).to eq(encoded_payload)
+          expect(body.read).to be_nil
+          body.rewind
+
+          expect(io).to receive(:read).with(10, an_instance_of(String))
+            .at_least(:once).and_call_original
+          expect(body.read).to eq(encoded_payload)
+          expect(body).to be_eof
+        end
+
+        [16, 17, 64].each do |length|
+          it "preserves chunk boundaries and the trailer with #{length}-byte reads" do
+            output = String.new
+            buffer = String.new
+            while (chunk = body.read(length, buffer))
+              expect(chunk).to equal(buffer)
+              expect(chunk.bytesize).to be <= length
+              output << chunk
+            end
+
+            expect(output).to eq(encoded_payload)
+            expect(body).to be_eof
+          end
+        end
+
+        it 'writes the checksum trailer for an empty input' do
+          io.truncate(0)
+
+          expect(body.read).to eq("0\r\nx-amz-checksum-crc32:AAAAAA==\r\n\r\n")
+          expect(body.read).to be_nil
         end
       end
     end
