@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - DynamoDB Streams clients default to 4 max attempts with a 25ms backoff scalar in `standard` and `adaptive` retry modes.
+
 1.105.0 (2026-11-09)
 ------------------
 
