@@ -264,7 +264,8 @@ module Aws::DeviceFarm
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::DeviceFarm
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -1902,7 +1903,7 @@ module Aws::DeviceFarm
     #         },
     #       ],
     #       execution_role_arn: "AmazonRoleResourceName",
-    #       insights_types: ["TEST_REPORT"], # accepts TEST_REPORT
+    #       insights_types: ["TEST_REPORT"], # accepts TEST_REPORT, NONE
     #     },
     #     project_arn: "AmazonResourceName",
     #   })
@@ -2569,6 +2570,7 @@ module Aws::DeviceFarm
     #   resp.run.web_url #=> String
     #   resp.run.skip_app_resign #=> Boolean
     #   resp.run.test_spec_arn #=> String
+    #   resp.run.test_package_arn #=> String
     #   resp.run.device_selection_result.filters #=> Array
     #   resp.run.device_selection_result.filters[0].attribute #=> String, one of "ARN", "PLATFORM", "OS_VERSION", "MODEL", "AVAILABILITY", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
     #   resp.run.device_selection_result.filters[0].operator #=> String, one of "EQUALS", "LESS_THAN", "LESS_THAN_OR_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUALS", "IN", "NOT_IN", "CONTAINS"
@@ -2586,7 +2588,7 @@ module Aws::DeviceFarm
     #   resp.run.environment_variables[0].name #=> String
     #   resp.run.environment_variables[0].value #=> String
     #   resp.run.insights_types #=> Array
-    #   resp.run.insights_types[0] #=> String, one of "TEST_REPORT"
+    #   resp.run.insights_types[0] #=> String, one of "TEST_REPORT", "NONE"
     #   resp.run.insights.status #=> String, one of "PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"
     #   resp.run.insights.job_report.message #=> String
     #   resp.run.insights.job_report.metrics.jobs_total #=> Integer
@@ -3014,7 +3016,7 @@ module Aws::DeviceFarm
     #   resp.artifacts #=> Array
     #   resp.artifacts[0].arn #=> String
     #   resp.artifacts[0].name #=> String
-    #   resp.artifacts[0].type #=> String, one of "UNKNOWN", "SCREENSHOT", "DEVICE_LOG", "MESSAGE_LOG", "VIDEO_LOG", "RESULT_LOG", "SERVICE_LOG", "WEBKIT_LOG", "INSTRUMENTATION_OUTPUT", "EXERCISER_MONKEY_OUTPUT", "CALABASH_JSON_OUTPUT", "CALABASH_PRETTY_OUTPUT", "CALABASH_STANDARD_OUTPUT", "CALABASH_JAVA_XML_OUTPUT", "AUTOMATION_OUTPUT", "APPIUM_SERVER_OUTPUT", "APPIUM_JAVA_OUTPUT", "APPIUM_JAVA_XML_OUTPUT", "APPIUM_PYTHON_OUTPUT", "APPIUM_PYTHON_XML_OUTPUT", "EXPLORER_EVENT_LOG", "EXPLORER_SUMMARY_LOG", "APPLICATION_CRASH_REPORT", "XCTEST_LOG", "VIDEO", "CUSTOMER_ARTIFACT", "CUSTOMER_ARTIFACT_LOG", "TESTSPEC_OUTPUT"
+    #   resp.artifacts[0].type #=> String, one of "UNKNOWN", "SCREENSHOT", "DEVICE_LOG", "MESSAGE_LOG", "VIDEO_LOG", "RESULT_LOG", "SERVICE_LOG", "WEBKIT_LOG", "INSTRUMENTATION_OUTPUT", "EXERCISER_MONKEY_OUTPUT", "CALABASH_JSON_OUTPUT", "CALABASH_PRETTY_OUTPUT", "CALABASH_STANDARD_OUTPUT", "CALABASH_JAVA_XML_OUTPUT", "AUTOMATION_OUTPUT", "APPIUM_SERVER_OUTPUT", "APPIUM_JAVA_OUTPUT", "APPIUM_JAVA_XML_OUTPUT", "APPIUM_PYTHON_OUTPUT", "APPIUM_PYTHON_XML_OUTPUT", "EXPLORER_EVENT_LOG", "EXPLORER_SUMMARY_LOG", "APPLICATION_CRASH_REPORT", "XCTEST_LOG", "VIDEO", "CUSTOMER_ARTIFACT", "CUSTOMER_ARTIFACT_LOG", "TESTSPEC_OUTPUT", "DEVICE_CONNECT_COMMAND_LOG"
     #   resp.artifacts[0].extension #=> String
     #   resp.artifacts[0].url #=> String
     #   resp.next_token #=> String
@@ -4191,6 +4193,7 @@ module Aws::DeviceFarm
     #   resp.runs[0].web_url #=> String
     #   resp.runs[0].skip_app_resign #=> Boolean
     #   resp.runs[0].test_spec_arn #=> String
+    #   resp.runs[0].test_package_arn #=> String
     #   resp.runs[0].device_selection_result.filters #=> Array
     #   resp.runs[0].device_selection_result.filters[0].attribute #=> String, one of "ARN", "PLATFORM", "OS_VERSION", "MODEL", "AVAILABILITY", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
     #   resp.runs[0].device_selection_result.filters[0].operator #=> String, one of "EQUALS", "LESS_THAN", "LESS_THAN_OR_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUALS", "IN", "NOT_IN", "CONTAINS"
@@ -4208,7 +4211,7 @@ module Aws::DeviceFarm
     #   resp.runs[0].environment_variables[0].name #=> String
     #   resp.runs[0].environment_variables[0].value #=> String
     #   resp.runs[0].insights_types #=> Array
-    #   resp.runs[0].insights_types[0] #=> String, one of "TEST_REPORT"
+    #   resp.runs[0].insights_types[0] #=> String, one of "TEST_REPORT", "NONE"
     #   resp.runs[0].insights.status #=> String, one of "PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"
     #   resp.runs[0].insights.job_report.message #=> String
     #   resp.runs[0].insights.job_report.metrics.jobs_total #=> Integer
@@ -5248,7 +5251,7 @@ module Aws::DeviceFarm
     #         },
     #       ],
     #       execution_role_arn: "AmazonRoleResourceName",
-    #       insights_types: ["TEST_REPORT"], # accepts TEST_REPORT
+    #       insights_types: ["TEST_REPORT"], # accepts TEST_REPORT, NONE
     #     },
     #     execution_configuration: {
     #       job_timeout_minutes: 1,
@@ -5321,6 +5324,7 @@ module Aws::DeviceFarm
     #   resp.run.web_url #=> String
     #   resp.run.skip_app_resign #=> Boolean
     #   resp.run.test_spec_arn #=> String
+    #   resp.run.test_package_arn #=> String
     #   resp.run.device_selection_result.filters #=> Array
     #   resp.run.device_selection_result.filters[0].attribute #=> String, one of "ARN", "PLATFORM", "OS_VERSION", "MODEL", "AVAILABILITY", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
     #   resp.run.device_selection_result.filters[0].operator #=> String, one of "EQUALS", "LESS_THAN", "LESS_THAN_OR_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUALS", "IN", "NOT_IN", "CONTAINS"
@@ -5338,7 +5342,7 @@ module Aws::DeviceFarm
     #   resp.run.environment_variables[0].name #=> String
     #   resp.run.environment_variables[0].value #=> String
     #   resp.run.insights_types #=> Array
-    #   resp.run.insights_types[0] #=> String, one of "TEST_REPORT"
+    #   resp.run.insights_types[0] #=> String, one of "TEST_REPORT", "NONE"
     #   resp.run.insights.status #=> String, one of "PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"
     #   resp.run.insights.job_report.message #=> String
     #   resp.run.insights.job_report.metrics.jobs_total #=> Integer
@@ -5655,6 +5659,7 @@ module Aws::DeviceFarm
     #   resp.run.web_url #=> String
     #   resp.run.skip_app_resign #=> Boolean
     #   resp.run.test_spec_arn #=> String
+    #   resp.run.test_package_arn #=> String
     #   resp.run.device_selection_result.filters #=> Array
     #   resp.run.device_selection_result.filters[0].attribute #=> String, one of "ARN", "PLATFORM", "OS_VERSION", "MODEL", "AVAILABILITY", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
     #   resp.run.device_selection_result.filters[0].operator #=> String, one of "EQUALS", "LESS_THAN", "LESS_THAN_OR_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUALS", "IN", "NOT_IN", "CONTAINS"
@@ -5672,7 +5677,7 @@ module Aws::DeviceFarm
     #   resp.run.environment_variables[0].name #=> String
     #   resp.run.environment_variables[0].value #=> String
     #   resp.run.insights_types #=> Array
-    #   resp.run.insights_types[0] #=> String, one of "TEST_REPORT"
+    #   resp.run.insights_types[0] #=> String, one of "TEST_REPORT", "NONE"
     #   resp.run.insights.status #=> String, one of "PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"
     #   resp.run.insights.job_report.message #=> String
     #   resp.run.insights.job_report.metrics.jobs_total #=> Integer
@@ -6358,7 +6363,7 @@ module Aws::DeviceFarm
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.120.0'
+      context[:gem_version] = '1.121.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

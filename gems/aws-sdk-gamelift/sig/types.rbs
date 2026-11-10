@@ -403,6 +403,7 @@ module Aws::GameLift
       attr_accessor custom_event_data: ::String
       attr_accessor notification_target: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor log_configuration: Types::GameSessionQueueLogConfiguration
       SENSITIVE: [:custom_event_data]
     end
 
@@ -1364,11 +1365,17 @@ module Aws::GameLift
       attr_accessor priority_configuration: Types::PriorityConfiguration
       attr_accessor custom_event_data: ::String
       attr_accessor notification_target: ::String
+      attr_accessor log_configuration: Types::GameSessionQueueLogConfiguration
       SENSITIVE: [:custom_event_data]
     end
 
     class GameSessionQueueDestination
       attr_accessor destination_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GameSessionQueueLogConfiguration
+      attr_accessor delivery_destinations: ::Array[Types::LogDeliveryDestination]
       SENSITIVE: []
     end
 
@@ -1728,6 +1735,12 @@ module Aws::GameLift
       attr_accessor log_destination: ("NONE" | "CLOUDWATCH" | "S3")
       attr_accessor s3_bucket_name: ::String
       attr_accessor log_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LogDeliveryDestination
+      attr_accessor log_destination: ("CLOUDWATCH" | "S3" | "FIREHOSE")
+      attr_accessor destination_arn: ::String
       SENSITIVE: []
     end
 
@@ -2410,6 +2423,8 @@ module Aws::GameLift
       attr_accessor priority_configuration: Types::PriorityConfiguration
       attr_accessor custom_event_data: ::String
       attr_accessor notification_target: ::String
+      attr_accessor add_log_delivery_destinations: ::Array[Types::LogDeliveryDestination]
+      attr_accessor remove_log_delivery_destinations: ::Array[Types::LogDeliveryDestination]
       SENSITIVE: [:custom_event_data]
     end
 

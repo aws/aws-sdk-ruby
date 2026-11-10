@@ -14,10 +14,11 @@ module Aws::Route53Profiles
     end
 
     class AssociateProfileRequest
-      attr_accessor name: ::String
       attr_accessor profile_id: ::String
       attr_accessor resource_id: ::String
+      attr_accessor name: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor priority: ::Integer
       SENSITIVE: []
     end
 
@@ -27,9 +28,9 @@ module Aws::Route53Profiles
     end
 
     class AssociateResourceToProfileRequest
-      attr_accessor name: ::String
       attr_accessor profile_id: ::String
       attr_accessor resource_arn: ::String
+      attr_accessor name: ::String
       attr_accessor resource_properties: ::String
       SENSITIVE: []
     end
@@ -45,8 +46,8 @@ module Aws::Route53Profiles
     end
 
     class CreateProfileRequest
-      attr_accessor client_token: ::String
       attr_accessor name: ::String
+      attr_accessor client_token: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -129,8 +130,8 @@ module Aws::Route53Profiles
     end
 
     class InvalidParameterException
-      attr_accessor field_name: ::String
       attr_accessor message: ::String
+      attr_accessor field_name: ::String
       SENSITIVE: []
     end
 
@@ -141,30 +142,31 @@ module Aws::Route53Profiles
     end
 
     class ListProfileAssociationsRequest
+      attr_accessor resource_id: ::String
+      attr_accessor profile_id: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor profile_id: ::String
-      attr_accessor resource_id: ::String
       SENSITIVE: []
     end
 
     class ListProfileAssociationsResponse
-      attr_accessor next_token: ::String
       attr_accessor profile_associations: ::Array[Types::ProfileAssociation]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListProfileResourceAssociationsRequest
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
       attr_accessor profile_id: ::String
       attr_accessor resource_type: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListProfileResourceAssociationsResponse
-      attr_accessor next_token: ::String
       attr_accessor profile_resource_associations: ::Array[Types::ProfileResourceAssociation]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -175,8 +177,8 @@ module Aws::Route53Profiles
     end
 
     class ListProfilesResponse
-      attr_accessor next_token: ::String
       attr_accessor profile_summaries: ::Array[Types::ProfileSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -191,50 +193,51 @@ module Aws::Route53Profiles
     end
 
     class Profile
-      attr_accessor arn: ::String
-      attr_accessor client_token: ::String
-      attr_accessor creation_time: ::Time
       attr_accessor id: ::String
-      attr_accessor modification_time: ::Time
+      attr_accessor arn: ::String
       attr_accessor name: ::String
       attr_accessor owner_id: ::String
-      attr_accessor share_status: ("NOT_SHARED" | "SHARED_WITH_ME" | "SHARED_BY_ME")
       attr_accessor status: ("COMPLETE" | "DELETING" | "UPDATING" | "CREATING" | "DELETED" | "FAILED")
       attr_accessor status_message: ::String
+      attr_accessor share_status: ("NOT_SHARED" | "SHARED_WITH_ME" | "SHARED_BY_ME")
+      attr_accessor creation_time: ::Time
+      attr_accessor modification_time: ::Time
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
     class ProfileAssociation
-      attr_accessor creation_time: ::Time
       attr_accessor id: ::String
-      attr_accessor modification_time: ::Time
       attr_accessor name: ::String
       attr_accessor owner_id: ::String
       attr_accessor profile_id: ::String
       attr_accessor resource_id: ::String
       attr_accessor status: ("COMPLETE" | "DELETING" | "UPDATING" | "CREATING" | "DELETED" | "FAILED")
       attr_accessor status_message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor modification_time: ::Time
+      attr_accessor priority: ::Integer
       SENSITIVE: []
     end
 
     class ProfileResourceAssociation
-      attr_accessor creation_time: ::Time
       attr_accessor id: ::String
-      attr_accessor modification_time: ::Time
       attr_accessor name: ::String
       attr_accessor owner_id: ::String
       attr_accessor profile_id: ::String
       attr_accessor resource_arn: ::String
-      attr_accessor resource_properties: ::String
       attr_accessor resource_type: ::String
+      attr_accessor resource_properties: ::String
       attr_accessor status: ("COMPLETE" | "DELETING" | "UPDATING" | "CREATING" | "DELETED" | "FAILED")
       attr_accessor status_message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor modification_time: ::Time
       SENSITIVE: []
     end
 
     class ProfileSummary
-      attr_accessor arn: ::String
       attr_accessor id: ::String
+      attr_accessor arn: ::String
       attr_accessor name: ::String
       attr_accessor share_status: ("NOT_SHARED" | "SHARED_WITH_ME" | "SHARED_BY_ME")
       SENSITIVE: []
@@ -281,9 +284,21 @@ module Aws::Route53Profiles
     class UntagResourceResponse < Aws::EmptyStructure
     end
 
-    class UpdateProfileResourceAssociationRequest
+    class UpdateProfileAssociationRequest
+      attr_accessor profile_association_id: ::String
       attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateProfileAssociationResponse
+      attr_accessor profile_association: Types::ProfileAssociation
+      SENSITIVE: []
+    end
+
+    class UpdateProfileResourceAssociationRequest
       attr_accessor profile_resource_association_id: ::String
+      attr_accessor name: ::String
       attr_accessor resource_properties: ::String
       SENSITIVE: []
     end

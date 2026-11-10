@@ -165,6 +165,7 @@ module Aws::GameLift
     DeleteVpcPeeringAuthorizationOutput = Shapes::StructureShape.new(name: 'DeleteVpcPeeringAuthorizationOutput')
     DeleteVpcPeeringConnectionInput = Shapes::StructureShape.new(name: 'DeleteVpcPeeringConnectionInput')
     DeleteVpcPeeringConnectionOutput = Shapes::StructureShape.new(name: 'DeleteVpcPeeringConnectionOutput')
+    DeliveryDestinationArnStringModel = Shapes::StringShape.new(name: 'DeliveryDestinationArnStringModel')
     DeploymentConfiguration = Shapes::StructureShape.new(name: 'DeploymentConfiguration')
     DeploymentDetails = Shapes::StructureShape.new(name: 'DeploymentDetails')
     DeploymentId = Shapes::StringShape.new(name: 'DeploymentId')
@@ -331,6 +332,7 @@ module Aws::GameLift
     GameSessionQueueDestination = Shapes::StructureShape.new(name: 'GameSessionQueueDestination')
     GameSessionQueueDestinationList = Shapes::ListShape.new(name: 'GameSessionQueueDestinationList')
     GameSessionQueueList = Shapes::ListShape.new(name: 'GameSessionQueueList')
+    GameSessionQueueLogConfiguration = Shapes::StructureShape.new(name: 'GameSessionQueueLogConfiguration')
     GameSessionQueueName = Shapes::StringShape.new(name: 'GameSessionQueueName')
     GameSessionQueueNameOrArn = Shapes::StringShape.new(name: 'GameSessionQueueNameOrArn')
     GameSessionQueueNameOrArnList = Shapes::ListShape.new(name: 'GameSessionQueueNameOrArnList')
@@ -430,6 +432,9 @@ module Aws::GameLift
     LocationalDeployment = Shapes::StructureShape.new(name: 'LocationalDeployment')
     LocationalDeployments = Shapes::MapShape.new(name: 'LocationalDeployments')
     LogConfiguration = Shapes::StructureShape.new(name: 'LogConfiguration')
+    LogDeliveryDestination = Shapes::StructureShape.new(name: 'LogDeliveryDestination')
+    LogDeliveryDestinationList = Shapes::ListShape.new(name: 'LogDeliveryDestinationList')
+    LogDeliveryDestinationType = Shapes::StringShape.new(name: 'LogDeliveryDestinationType')
     LogDestination = Shapes::StringShape.new(name: 'LogDestination')
     LogGroupArnStringModel = Shapes::StringShape.new(name: 'LogGroupArnStringModel')
     ManagedCapacityConfiguration = Shapes::StructureShape.new(name: 'ManagedCapacityConfiguration')
@@ -980,6 +985,7 @@ module Aws::GameLift
     CreateGameSessionQueueInput.add_member(:custom_event_data, Shapes::ShapeRef.new(shape: QueueCustomEventData, location_name: "CustomEventData"))
     CreateGameSessionQueueInput.add_member(:notification_target, Shapes::ShapeRef.new(shape: QueueSnsArnStringModel, location_name: "NotificationTarget"))
     CreateGameSessionQueueInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateGameSessionQueueInput.add_member(:log_configuration, Shapes::ShapeRef.new(shape: GameSessionQueueLogConfiguration, location_name: "LogConfiguration"))
     CreateGameSessionQueueInput.struct_class = Types::CreateGameSessionQueueInput
 
     CreateGameSessionQueueOutput.add_member(:game_session_queue, Shapes::ShapeRef.new(shape: GameSessionQueue, location_name: "GameSessionQueue"))
@@ -1714,6 +1720,7 @@ module Aws::GameLift
     GameSessionQueue.add_member(:priority_configuration, Shapes::ShapeRef.new(shape: PriorityConfiguration, location_name: "PriorityConfiguration"))
     GameSessionQueue.add_member(:custom_event_data, Shapes::ShapeRef.new(shape: QueueCustomEventData, location_name: "CustomEventData"))
     GameSessionQueue.add_member(:notification_target, Shapes::ShapeRef.new(shape: QueueSnsArnStringModel, location_name: "NotificationTarget"))
+    GameSessionQueue.add_member(:log_configuration, Shapes::ShapeRef.new(shape: GameSessionQueueLogConfiguration, location_name: "LogConfiguration"))
     GameSessionQueue.struct_class = Types::GameSessionQueue
 
     GameSessionQueueDestination.add_member(:destination_arn, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "DestinationArn"))
@@ -1722,6 +1729,9 @@ module Aws::GameLift
     GameSessionQueueDestinationList.member = Shapes::ShapeRef.new(shape: GameSessionQueueDestination)
 
     GameSessionQueueList.member = Shapes::ShapeRef.new(shape: GameSessionQueue)
+
+    GameSessionQueueLogConfiguration.add_member(:delivery_destinations, Shapes::ShapeRef.new(shape: LogDeliveryDestinationList, required: true, location_name: "DeliveryDestinations"))
+    GameSessionQueueLogConfiguration.struct_class = Types::GameSessionQueueLogConfiguration
 
     GameSessionQueueNameOrArnList.member = Shapes::ShapeRef.new(shape: GameSessionQueueNameOrArn)
 
@@ -2001,6 +2011,12 @@ module Aws::GameLift
     LogConfiguration.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "S3BucketName"))
     LogConfiguration.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArnStringModel, location_name: "LogGroupArn"))
     LogConfiguration.struct_class = Types::LogConfiguration
+
+    LogDeliveryDestination.add_member(:log_destination, Shapes::ShapeRef.new(shape: LogDeliveryDestinationType, required: true, location_name: "LogDestination"))
+    LogDeliveryDestination.add_member(:destination_arn, Shapes::ShapeRef.new(shape: DeliveryDestinationArnStringModel, location_name: "DestinationArn"))
+    LogDeliveryDestination.struct_class = Types::LogDeliveryDestination
+
+    LogDeliveryDestinationList.member = Shapes::ShapeRef.new(shape: LogDeliveryDestination)
 
     ManagedCapacityConfiguration.add_member(:zero_capacity_strategy, Shapes::ShapeRef.new(shape: ZeroCapacityStrategy, location_name: "ZeroCapacityStrategy"))
     ManagedCapacityConfiguration.add_member(:scale_in_after_inactivity_minutes, Shapes::ShapeRef.new(shape: ScaleInAfterInactivityMinutes, location_name: "ScaleInAfterInactivityMinutes"))
@@ -2564,6 +2580,8 @@ module Aws::GameLift
     UpdateGameSessionQueueInput.add_member(:priority_configuration, Shapes::ShapeRef.new(shape: PriorityConfiguration, location_name: "PriorityConfiguration"))
     UpdateGameSessionQueueInput.add_member(:custom_event_data, Shapes::ShapeRef.new(shape: QueueCustomEventData, location_name: "CustomEventData"))
     UpdateGameSessionQueueInput.add_member(:notification_target, Shapes::ShapeRef.new(shape: QueueSnsArnStringModel, location_name: "NotificationTarget"))
+    UpdateGameSessionQueueInput.add_member(:add_log_delivery_destinations, Shapes::ShapeRef.new(shape: LogDeliveryDestinationList, location_name: "AddLogDeliveryDestinations"))
+    UpdateGameSessionQueueInput.add_member(:remove_log_delivery_destinations, Shapes::ShapeRef.new(shape: LogDeliveryDestinationList, location_name: "RemoveLogDeliveryDestinations"))
     UpdateGameSessionQueueInput.struct_class = Types::UpdateGameSessionQueueInput
 
     UpdateGameSessionQueueOutput.add_member(:game_session_queue, Shapes::ShapeRef.new(shape: GameSessionQueue, location_name: "GameSessionQueue"))

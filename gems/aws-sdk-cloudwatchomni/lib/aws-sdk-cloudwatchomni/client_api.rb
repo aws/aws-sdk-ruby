@@ -112,6 +112,13 @@ module Aws::CloudWatchOmni
     CreateViewRequestClientTokenString = Shapes::StringShape.new(name: 'CreateViewRequestClientTokenString')
     CreateViewResponse = Shapes::StructureShape.new(name: 'CreateViewResponse')
     DashboardId = Shapes::StringShape.new(name: 'DashboardId')
+    DataAccessActionList = Shapes::ListShape.new(name: 'DataAccessActionList')
+    DataAccessActionName = Shapes::StringShape.new(name: 'DataAccessActionName')
+    DataAccessAuditContext = Shapes::MapShape.new(name: 'DataAccessAuditContext')
+    DataAccessAuditContextKeyString = Shapes::StringShape.new(name: 'DataAccessAuditContextKeyString')
+    DataAccessAuditContextValueString = Shapes::StringShape.new(name: 'DataAccessAuditContextValueString')
+    DataAccessTarget = Shapes::StructureShape.new(name: 'DataAccessTarget')
+    DataAccessTargetList = Shapes::ListShape.new(name: 'DataAccessTargetList')
     DeepLinkCode = Shapes::StringShape.new(name: 'DeepLinkCode')
     DeepLinkUrl = Shapes::StringShape.new(name: 'DeepLinkUrl')
     DeleteAccessGrantInput = Shapes::StructureShape.new(name: 'DeleteAccessGrantInput')
@@ -183,6 +190,9 @@ module Aws::CloudWatchOmni
     GetOmniDashboardOutput = Shapes::StructureShape.new(name: 'GetOmniDashboardOutput')
     GetSpaceCredentialsForOrganizationInput = Shapes::StructureShape.new(name: 'GetSpaceCredentialsForOrganizationInput')
     GetSpaceCredentialsForOrganizationOutput = Shapes::StructureShape.new(name: 'GetSpaceCredentialsForOrganizationOutput')
+    GetSpaceDataAccessInput = Shapes::StructureShape.new(name: 'GetSpaceDataAccessInput')
+    GetSpaceDataAccessInputDurationSecondsInteger = Shapes::IntegerShape.new(name: 'GetSpaceDataAccessInputDurationSecondsInteger')
+    GetSpaceDataAccessOutput = Shapes::StructureShape.new(name: 'GetSpaceDataAccessOutput')
     GetSpaceInput = Shapes::StructureShape.new(name: 'GetSpaceInput')
     GetSpaceOutput = Shapes::StructureShape.new(name: 'GetSpaceOutput')
     GetTelemetryQueryResultsRequest = Shapes::StructureShape.new(name: 'GetTelemetryQueryResultsRequest')
@@ -307,6 +317,7 @@ module Aws::CloudWatchOmni
     OrganizationPrincipalId = Shapes::StringShape.new(name: 'OrganizationPrincipalId')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PartialResults = Shapes::StructureShape.new(name: 'PartialResults')
+    PolicyTooLargeException = Shapes::StructureShape.new(name: 'PolicyTooLargeException')
     PrincipalId = Shapes::StringShape.new(name: 'PrincipalId')
     PrincipalSearchResult = Shapes::StructureShape.new(name: 'PrincipalSearchResult')
     PrincipalSearchResultList = Shapes::ListShape.new(name: 'PrincipalSearchResultList')
@@ -714,6 +725,16 @@ module Aws::CloudWatchOmni
     CreateViewResponse.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "arn"))
     CreateViewResponse.struct_class = Types::CreateViewResponse
 
+    DataAccessActionList.member = Shapes::ShapeRef.new(shape: DataAccessActionName)
+
+    DataAccessAuditContext.key = Shapes::ShapeRef.new(shape: DataAccessAuditContextKeyString)
+    DataAccessAuditContext.value = Shapes::ShapeRef.new(shape: DataAccessAuditContextValueString)
+
+    DataAccessTarget.add_member(:actions, Shapes::ShapeRef.new(shape: DataAccessActionList, required: true, location_name: "actions"))
+    DataAccessTarget.struct_class = Types::DataAccessTarget
+
+    DataAccessTargetList.member = Shapes::ShapeRef.new(shape: DataAccessTarget)
+
     DeleteAccessGrantInput.add_member(:grant_id, Shapes::ShapeRef.new(shape: GrantId, required: true, location_name: "grantId"))
     DeleteAccessGrantInput.struct_class = Types::DeleteAccessGrantInput
 
@@ -928,6 +949,15 @@ module Aws::CloudWatchOmni
 
     GetSpaceCredentialsForOrganizationOutput.add_member(:credentials, Shapes::ShapeRef.new(shape: AwsCredentials, required: true, location_name: "credentials"))
     GetSpaceCredentialsForOrganizationOutput.struct_class = Types::GetSpaceCredentialsForOrganizationOutput
+
+    GetSpaceDataAccessInput.add_member(:space_id, Shapes::ShapeRef.new(shape: SpaceId, required: true, location_name: "spaceId"))
+    GetSpaceDataAccessInput.add_member(:target_scopes, Shapes::ShapeRef.new(shape: DataAccessTargetList, required: true, location_name: "targetScopes"))
+    GetSpaceDataAccessInput.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: GetSpaceDataAccessInputDurationSecondsInteger, location_name: "durationSeconds"))
+    GetSpaceDataAccessInput.add_member(:audit_context, Shapes::ShapeRef.new(shape: DataAccessAuditContext, location_name: "auditContext"))
+    GetSpaceDataAccessInput.struct_class = Types::GetSpaceDataAccessInput
+
+    GetSpaceDataAccessOutput.add_member(:credentials, Shapes::ShapeRef.new(shape: AwsCredentials, required: true, location_name: "credentials"))
+    GetSpaceDataAccessOutput.struct_class = Types::GetSpaceDataAccessOutput
 
     GetSpaceInput.add_member(:space_id, Shapes::ShapeRef.new(shape: SpaceId, required: true, location_name: "spaceId"))
     GetSpaceInput.struct_class = Types::GetSpaceInput
@@ -1326,6 +1356,9 @@ module Aws::CloudWatchOmni
 
     PartialResults.add_member(:partial_results_detected, Shapes::ShapeRef.new(shape: Boolean, location_name: "partialResultsDetected"))
     PartialResults.struct_class = Types::PartialResults
+
+    PolicyTooLargeException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    PolicyTooLargeException.struct_class = Types::PolicyTooLargeException
 
     PrincipalSearchResult.add_member(:principal_id, Shapes::ShapeRef.new(shape: PrincipalId, required: true, location_name: "principalId"))
     PrincipalSearchResult.add_member(:principal_type, Shapes::ShapeRef.new(shape: PrincipalType, required: true, location_name: "principalType"))
@@ -2074,6 +2107,20 @@ module Aws::CloudWatchOmni
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_space_data_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSpaceDataAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSpaceDataAccessInput)
+        o.output = Shapes::ShapeRef.new(shape: GetSpaceDataAccessOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyTooLargeException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

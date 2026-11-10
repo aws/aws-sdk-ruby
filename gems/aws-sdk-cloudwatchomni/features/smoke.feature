@@ -8,18 +8,6 @@
 Feature: Smoke tests for CloudWatchOmni
 
   @cloudwatchomni @smoke
-  Scenario: GetSpaceNotFound
-    Given I create a 'Aws::CloudWatchOmni' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'get_space' with params:
-      """
-{"space_id":"00000000-0000-4000-8000-000000000000"}
-      """
-    Then I expect an error was raised
-
-  @cloudwatchomni @smoke
   Scenario: ListDomainsSuccess
     Given I create a 'Aws::CloudWatchOmni' client with config:
       """
@@ -42,3 +30,15 @@ Feature: Smoke tests for CloudWatchOmni
 {}
       """
     Then I expect an error was not raised
+
+  @cloudwatchomni @smoke
+  Scenario: GetSpaceNotFound
+    Given I create a 'Aws::CloudWatchOmni' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'get_space' with params:
+      """
+{"space_id":"00000000-0000-4000-8000-000000000000"}
+      """
+    Then I expect an error was raised

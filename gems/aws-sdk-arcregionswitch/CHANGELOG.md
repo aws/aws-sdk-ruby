@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2026-11-10)
+------------------
+
+* Feature - Adds RetryableConflictException to UpdatePlan so AWS SDKs automatically retry updates that conflict with a concurrent change.
+
 1.35.0 (2026-11-09)
 ------------------
 

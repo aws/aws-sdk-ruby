@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2026-11-10)
+------------------
+
+* Feature - Firewall Policy V2 for Network Firewall
+
 1.107.0 (2026-11-09)
 ------------------
 

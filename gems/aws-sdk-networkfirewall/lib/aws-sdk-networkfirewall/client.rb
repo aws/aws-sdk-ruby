@@ -264,7 +264,8 @@ module Aws::NetworkFirewall
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::NetworkFirewall
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -1394,6 +1395,232 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Creates a Next Generation policy according to the specifications.
+    #
+    # A Next Generation policy defines the behavior of a firewall in a
+    # collection of firewall engine and IPS engine rule groups and other
+    # settings. You can use one firewall policy for multiple firewalls. For
+    # more information, see [Next Generation policies][1] in the *Network
+    # Firewall Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-policies-v2.html
+    #
+    # @option params [required, String] :firewall_policy_v2_name
+    #   The descriptive name of the Next Generation policy. You can't change
+    #   the name of a firewall policy after you create it.
+    #
+    # @option params [required, Types::FirewallPolicyV2] :firewall_policy_v2
+    #   The rule groups and other settings that define the Next Generation
+    #   policy.
+    #
+    # @option params [String] :description
+    #   A description of the firewall policy.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The key:value pairs to associate with the resource.
+    #
+    # @option params [Boolean] :dry_run
+    #   Indicates whether you want Network Firewall to just check the validity
+    #   of the request, rather than run the request.
+    #
+    #   If set to `TRUE`, Network Firewall checks whether the request can run
+    #   successfully, but doesn't actually make the requested changes. The
+    #   call returns the value that the request would return if you ran it
+    #   with dry run set to `FALSE`, but doesn't make additions or changes to
+    #   your resources. This option allows you to make sure that you have the
+    #   required permissions to run the request and that your request
+    #   parameters are valid.
+    #
+    #   If set to `FALSE`, Network Firewall makes the requested changes to
+    #   your resources.
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   A complex type that contains settings for encryption of your firewall
+    #   policy resources.
+    #
+    # @return [Types::CreateFirewallPolicyV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFirewallPolicyV2Response#update_token #update_token} => String
+    #   * {Types::CreateFirewallPolicyV2Response#firewall_policy_v2_response #firewall_policy_v2_response} => Types::FirewallPolicyV2Response
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_firewall_policy_v2({
+    #     firewall_policy_v2_name: "ResourceName", # required
+    #     firewall_policy_v2: { # required
+    #       firewall_rule_group_entries: [
+    #         {
+    #           priority: 1,
+    #           resource_arn: "ResourceArn",
+    #           inline_rule_group: {
+    #             rules_source: { # required
+    #               rules_string: "RulesString",
+    #               firewall_rules: [
+    #                 {
+    #                   action: "ACCEPT", # required, accepts ACCEPT, DROP, REJECT, REJECT_DST, REJECT_BOTH
+    #                   action_scope: "FLOW", # required, accepts FLOW, TX, HOOK, PACKET
+    #                   hook: "TCP_ALL", # required, accepts TCP_ALL, TCP_FLOW_START, TCP_PRE_FLOW, TCP_PRE_STREAM, SCTP_ALL, SCTP_FLOW_START, SCTP_PRE_FLOW, SCTP_PRE_STREAM, IPV6_ALL, IPV6_FLOW_START, IPV6_PRE_FLOW, IPV6_PRE_STREAM, ICMPV6_ALL, ICMPV6_FLOW_START, ICMPV6_PRE_FLOW, ICMPV6_PRE_STREAM, UDP_ALL, UDP_FLOW_START, UDP_PRE_FLOW, UDP_PRE_STREAM, ICMP_ALL, ICMP_FLOW_START, ICMP_PRE_FLOW, ICMP_PRE_STREAM, ICMPV4_ALL, ICMPV4_FLOW_START, ICMPV4_PRE_FLOW, ICMPV4_PRE_STREAM, IP_ALL, IP_FLOW_START, IP_PRE_FLOW, IP_PRE_STREAM, IPV4_ALL, IPV4_FLOW_START, IPV4_PRE_FLOW, IPV4_PRE_STREAM, TLS_CLIENT_STARTED, TLS_CLIENT_HELLO, TLS_CLIENT_CERT, TLS_CLIENT_DATA, TLS_CLIENT_FINISHED, TLS_SERVER_STARTED, TLS_SERVER_HELLO, TLS_SERVER_CERT, TLS_SERVER_DATA, TLS_SERVER_FINISHED, HTTP1_REQUEST_STARTED, HTTP1_REQUEST_LINE, HTTP1_REQUEST_HEADERS, HTTP1_REQUEST_BODY, HTTP1_REQUEST_TRAILER, HTTP1_REQUEST_COMPLETE, HTTP1_RESPONSE_STARTED, HTTP1_RESPONSE_LINE, HTTP1_RESPONSE_HEADERS, HTTP1_RESPONSE_BODY, HTTP1_RESPONSE_TRAILER, HTTP1_RESPONSE_COMPLETE, HTTP2_STREAM_REQUEST_STARTED, HTTP2_STREAM_REQUEST_HEADERS, HTTP2_STREAM_REQUEST_DATA, HTTP2_STREAM_REQUEST_CLOSED, HTTP2_STREAM_REQUEST_COMPLETE, HTTP2_STREAM_RESPONSE_STARTED, HTTP2_STREAM_RESPONSE_HEADERS, HTTP2_STREAM_RESPONSE_DATA, HTTP2_STREAM_RESPONSE_CLOSED, HTTP2_STREAM_RESPONSE_COMPLETE, HTTP2_GLOBAL_REQUEST_STARTED, HTTP2_GLOBAL_REQUEST_COMPLETE, HTTP2_GLOBAL_RESPONSE_STARTED, HTTP2_GLOBAL_RESPONSE_COMPLETE, DOH2_STREAM_REQUEST_STARTED, DOH2_STREAM_REQUEST_HEADERS, DOH2_STREAM_REQUEST_DATA, DOH2_STREAM_REQUEST_CLOSED, DOH2_STREAM_REQUEST_COMPLETE, DOH2_STREAM_RESPONSE_STARTED, DOH2_STREAM_RESPONSE_HEADERS, DOH2_STREAM_RESPONSE_DATA, DOH2_STREAM_RESPONSE_CLOSED, DOH2_STREAM_RESPONSE_COMPLETE, DOH2_GLOBAL_REQUEST_STARTED, DOH2_GLOBAL_REQUEST_COMPLETE, DOH2_GLOBAL_RESPONSE_STARTED, DOH2_GLOBAL_RESPONSE_COMPLETE, DNS_REQUEST_STARTED, DNS_REQUEST_COMPLETE, DNS_RESPONSE_STARTED, DNS_RESPONSE_COMPLETE, SMTP_REQUEST_STARTED, SMTP_REQUEST_DATA, SMTP_REQUEST_COMPLETE, SMTP_RESPONSE_STARTED, SMTP_RESPONSE_DATA, SMTP_RESPONSE_COMPLETE, FTP_REQUEST_STARTED, FTP_REQUEST_COMPLETE, FTP_RESPONSE_STARTED, FTP_RESPONSE_COMPLETE, FTP_DATA_REQUEST_STARTED, FTP_DATA_REQUEST_COMPLETE, FTP_DATA_RESPONSE_STARTED, FTP_DATA_RESPONSE_COMPLETE, SMB_REQUEST_STARTED, SMB_REQUEST_COMPLETE, SMB_RESPONSE_STARTED, SMB_RESPONSE_COMPLETE, DCERPC_REQUEST_STARTED, DCERPC_REQUEST_COMPLETE, DCERPC_RESPONSE_STARTED, DCERPC_RESPONSE_COMPLETE, NFS_REQUEST_STARTED, NFS_REQUEST_COMPLETE, NFS_RESPONSE_STARTED, NFS_RESPONSE_COMPLETE, KRB5_REQUEST_STARTED, KRB5_REQUEST_COMPLETE, KRB5_RESPONSE_STARTED, KRB5_RESPONSE_COMPLETE, IKE_REQUEST_STARTED, IKE_REQUEST_COMPLETE, IKE_RESPONSE_STARTED, IKE_RESPONSE_COMPLETE, TFTP_REQUEST_STARTED, TFTP_REQUEST_COMPLETE, TFTP_RESPONSE_STARTED, TFTP_RESPONSE_COMPLETE, DHCP_REQUEST_STARTED, DHCP_REQUEST_COMPLETE, DHCP_RESPONSE_STARTED, DHCP_RESPONSE_COMPLETE, QUIC_REQUEST_STARTED, QUIC_REQUEST_COMPLETE, QUIC_RESPONSE_STARTED, QUIC_RESPONSE_COMPLETE, RDP_REQUEST_STARTED, RDP_REQUEST_COMPLETE, RDP_RESPONSE_STARTED, RDP_RESPONSE_COMPLETE, RFB_REQUEST_STARTED, RFB_REQUEST_COMPLETE, RFB_RESPONSE_STARTED, RFB_RESPONSE_COMPLETE, MQTT_REQUEST_STARTED, MQTT_REQUEST_COMPLETE, MQTT_RESPONSE_STARTED, MQTT_RESPONSE_COMPLETE, PGSQL_REQUEST_STARTED, PGSQL_REQUEST_COMPLETE, PGSQL_RESPONSE_STARTED, PGSQL_RESPONSE_COMPLETE, SNMP_REQUEST_STARTED, SNMP_REQUEST_COMPLETE, SNMP_RESPONSE_STARTED, SNMP_RESPONSE_COMPLETE, NTP_REQUEST_STARTED, NTP_REQUEST_COMPLETE, NTP_RESPONSE_STARTED, NTP_RESPONSE_COMPLETE, TELNET_REQUEST_STARTED, TELNET_REQUEST_COMPLETE, TELNET_RESPONSE_STARTED, TELNET_RESPONSE_COMPLETE, WEBSOCKET_REQUEST_STARTED, WEBSOCKET_REQUEST_COMPLETE, WEBSOCKET_RESPONSE_STARTED, WEBSOCKET_RESPONSE_COMPLETE, LDAP_REQUEST_STARTED, LDAP_REQUEST_COMPLETE, LDAP_RESPONSE_STARTED, LDAP_RESPONSE_COMPLETE, POP3_REQUEST_STARTED, POP3_REQUEST_COMPLETE, POP3_RESPONSE_STARTED, POP3_RESPONSE_COMPLETE, MDNS_REQUEST_STARTED, MDNS_REQUEST_COMPLETE, MDNS_RESPONSE_STARTED, MDNS_RESPONSE_COMPLETE, BITTORRENT_DHT_REQUEST_STARTED, BITTORRENT_DHT_REQUEST_COMPLETE, BITTORRENT_DHT_RESPONSE_STARTED, BITTORRENT_DHT_RESPONSE_COMPLETE, DNP3_REQUEST_STARTED, DNP3_REQUEST_COMPLETE, DNP3_RESPONSE_STARTED, DNP3_RESPONSE_COMPLETE, SSH_REQUEST_IN_PROGRESS, SSH_REQUEST_BANNER_WAIT_EOL, SSH_REQUEST_BANNER_DONE, SSH_REQUEST_FINISHED, SSH_RESPONSE_IN_PROGRESS, SSH_RESPONSE_BANNER_WAIT_EOL, SSH_RESPONSE_BANNER_DONE, SSH_RESPONSE_FINISHED
+    #                   protocol: "IP", # required, accepts IP, TCP, UDP, ICMP, HTTP, FTP, TLS, SMB, DNS, DCERPC, SSH, SMTP, MSN, KRB5, IKEV2, TFTP, NTP, DHCP, HTTP2, QUIC, ICMPV4, ICMPV6, SCTP, IPV4, IPV6, DOH2, FTP_DATA, NFS, RDP, RFB, MQTT, PGSQL, SNMP, TELNET, WEBSOCKET, LDAP, POP3, MDNS, BITTORRENT_DHT, DNP3
+    #                   source_i_ps: "Source",
+    #                   dest_i_ps: "Destination",
+    #                   source_ports: "Port",
+    #                   dest_ports: "Port",
+    #                   rule_options: [
+    #                     {
+    #                       keyword: "Keyword", # required
+    #                       settings: ["Setting"],
+    #                     },
+    #                   ],
+    #                   accept_prior_hooks: false,
+    #                   alert_enabled: false,
+    #                   bypass_ips_enabled: false,
+    #                   rule_metadata: {
+    #                     rule_enabled: false,
+    #                     rule_description: "RuleDescriptionText",
+    #                   },
+    #                 },
+    #               ],
+    #               rules_source_list: {
+    #                 targets: ["CollectionMember_String"], # required
+    #                 target_types: ["TLS_SNI"], # required, accepts TLS_SNI, HTTP_HOST, AWS_ROUTE_53_RESOLVED_DOMAIN
+    #                 generated_rules_type: "ALLOWLIST", # required, accepts ALLOWLIST, DENYLIST, REJECTLIST, ALERTLIST
+    #               },
+    #             },
+    #             rule_variables: {
+    #               ip_sets: {
+    #                 "RuleVariableName" => {
+    #                   definition: ["VariableDefinition"], # required
+    #                 },
+    #               },
+    #               port_sets: {
+    #                 "RuleVariableName" => {
+    #                   definition: ["VariableDefinition"],
+    #                 },
+    #               },
+    #             },
+    #             reference_sets: {
+    #               ip_set_references: {
+    #                 "IPSetReferenceName" => {
+    #                   reference_arn: "ResourceArn",
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
+    #       ],
+    #       ips_rule_group_entries: [
+    #         {
+    #           resource_arn: "ResourceArn",
+    #           inline_rule_group: {
+    #             rules_source: { # required
+    #               rules_string: "RulesString",
+    #             },
+    #             rule_variables: {
+    #               ip_sets: {
+    #                 "RuleVariableName" => {
+    #                   definition: ["VariableDefinition"], # required
+    #                 },
+    #               },
+    #               port_sets: {
+    #                 "RuleVariableName" => {
+    #                   definition: ["VariableDefinition"],
+    #                 },
+    #               },
+    #             },
+    #             reference_sets: {
+    #               ip_set_references: {
+    #                 "IPSetReferenceName" => {
+    #                   reference_arn: "ResourceArn",
+    #                 },
+    #               },
+    #             },
+    #           },
+    #           override: {
+    #             action: "DROP_TO_ALERT", # accepts DROP_TO_ALERT
+    #           },
+    #         },
+    #       ],
+    #       policy_mode: "ENFORCE", # accepts ENFORCE, MONITOR
+    #       firewall_default_action: "DROP", # accepts DROP, ACCEPT, REJECT, ALERT
+    #       stateful_engine_options: {
+    #         stream_exception_policy: "DROP", # accepts DROP, REJECT
+    #         flow_timeouts: {
+    #           tcp_idle_timeout_seconds: 1,
+    #         },
+    #       },
+    #       tls_inspection_configuration_arn: "ResourceArn",
+    #       policy_variables: {
+    #         rule_variables: {
+    #           "RuleVariableName" => {
+    #             definition: ["VariableDefinition"], # required
+    #           },
+    #         },
+    #       },
+    #       route_53_resolved_ip_validation: {
+    #         action: "REJECT", # required, accepts REJECT, DROP, ALERT
+    #         dns_firewall_rule_group_id: "DNSFirewallRuleGroupId", # required
+    #         dns_expiry_exception_policy: "REJECT", # required, accepts REJECT, DROP, CONTINUE
+    #         bypass_destination_validation_ip_ranges: [
+    #           {
+    #             address_definition: "AddressDefinition", # required
+    #           },
+    #         ],
+    #         source_ip_ranges: [
+    #           {
+    #             address_definition: "AddressDefinition", # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     description: "Description",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     dry_run: false,
+    #     encryption_configuration: {
+    #       key_id: "KeyId",
+    #       type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update_token #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_name #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_arn #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_id #=> String
+    #   resp.firewall_policy_v2_response.description #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
+    #   resp.firewall_policy_v2_response.status_message #=> String
+    #   resp.firewall_policy_v2_response.tags #=> Array
+    #   resp.firewall_policy_v2_response.tags[0].key #=> String
+    #   resp.firewall_policy_v2_response.tags[0].value #=> String
+    #   resp.firewall_policy_v2_response.consumed_firewall_rule_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.consumed_ips_rule_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.consumed_ips_domain_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.number_of_associations #=> Integer
+    #   resp.firewall_policy_v2_response.encryption_configuration.key_id #=> String
+    #   resp.firewall_policy_v2_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall_policy_v2_response.errors #=> Array
+    #   resp.firewall_policy_v2_response.errors[0].code #=> String, one of "DNS_FIREWALL_RULE_GROUP_UNAVAILABLE", "ROUTE53_RESOLVED_IP_VALIDATION_MISSING"
+    #   resp.firewall_policy_v2_response.errors[0].message #=> String
+    #   resp.firewall_policy_v2_response.errors[0].resource_id #=> String
+    #   resp.firewall_policy_v2_response.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateFirewallPolicyV2 AWS API Documentation
+    #
+    # @overload create_firewall_policy_v2(params = {})
+    # @param [Hash] params ({})
+    def create_firewall_policy_v2(params = {}, options = {})
+      req = build_request(:create_firewall_policy_v2, params)
+      req.send_request(options)
+    end
+
     # Creates an Network Firewall Proxy
     #
     # Attaches a Proxy configuration to a NAT Gateway.
@@ -1875,6 +2102,14 @@ module Aws::NetworkFirewall
     #
     #    </note>
     #
+    # @option params [Types::FirewallRuleGroup] :firewall_rule_group
+    #   An object that defines the rules in a firewall engine rule group, for
+    #   use in a Next Generation policy.
+    #
+    # @option params [Types::IpsRuleGroup] :ips_rule_group
+    #   An object that defines the rules in an IPS engine rule group, for use
+    #   in a Next Generation policy.
+    #
     # @option params [String] :rules
     #   A string containing stateful rule group rules specifications in
     #   Suricata flat format, with one rule per line. Use this to import your
@@ -1891,9 +2126,18 @@ module Aws::NetworkFirewall
     #   populated from your string.
     #
     # @option params [required, String] :type
-    #   Indicates whether the rule group is stateless or stateful. If the rule
-    #   group is stateless, it contains stateless rules. If it is stateful, it
-    #   contains stateful rules.
+    #   Indicates the type of the rule group. Valid values are:
+    #
+    #   * `STATELESS` - Stateless rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `STATEFUL` - Stateful rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `FIREWALL` - Firewall engine rules, for use in a Next Generation
+    #     policy.
+    #
+    #   * `IPS` - IPS engine rules, for use in a Next Generation policy.
     #
     # @option params [String] :description
     #   A description of the rule group.
@@ -2106,8 +2350,86 @@ module Aws::NetworkFirewall
     #         rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
     #       },
     #     },
+    #     firewall_rule_group: {
+    #       rules_source: { # required
+    #         rules_string: "RulesString",
+    #         firewall_rules: [
+    #           {
+    #             action: "ACCEPT", # required, accepts ACCEPT, DROP, REJECT, REJECT_DST, REJECT_BOTH
+    #             action_scope: "FLOW", # required, accepts FLOW, TX, HOOK, PACKET
+    #             hook: "TCP_ALL", # required, accepts TCP_ALL, TCP_FLOW_START, TCP_PRE_FLOW, TCP_PRE_STREAM, SCTP_ALL, SCTP_FLOW_START, SCTP_PRE_FLOW, SCTP_PRE_STREAM, IPV6_ALL, IPV6_FLOW_START, IPV6_PRE_FLOW, IPV6_PRE_STREAM, ICMPV6_ALL, ICMPV6_FLOW_START, ICMPV6_PRE_FLOW, ICMPV6_PRE_STREAM, UDP_ALL, UDP_FLOW_START, UDP_PRE_FLOW, UDP_PRE_STREAM, ICMP_ALL, ICMP_FLOW_START, ICMP_PRE_FLOW, ICMP_PRE_STREAM, ICMPV4_ALL, ICMPV4_FLOW_START, ICMPV4_PRE_FLOW, ICMPV4_PRE_STREAM, IP_ALL, IP_FLOW_START, IP_PRE_FLOW, IP_PRE_STREAM, IPV4_ALL, IPV4_FLOW_START, IPV4_PRE_FLOW, IPV4_PRE_STREAM, TLS_CLIENT_STARTED, TLS_CLIENT_HELLO, TLS_CLIENT_CERT, TLS_CLIENT_DATA, TLS_CLIENT_FINISHED, TLS_SERVER_STARTED, TLS_SERVER_HELLO, TLS_SERVER_CERT, TLS_SERVER_DATA, TLS_SERVER_FINISHED, HTTP1_REQUEST_STARTED, HTTP1_REQUEST_LINE, HTTP1_REQUEST_HEADERS, HTTP1_REQUEST_BODY, HTTP1_REQUEST_TRAILER, HTTP1_REQUEST_COMPLETE, HTTP1_RESPONSE_STARTED, HTTP1_RESPONSE_LINE, HTTP1_RESPONSE_HEADERS, HTTP1_RESPONSE_BODY, HTTP1_RESPONSE_TRAILER, HTTP1_RESPONSE_COMPLETE, HTTP2_STREAM_REQUEST_STARTED, HTTP2_STREAM_REQUEST_HEADERS, HTTP2_STREAM_REQUEST_DATA, HTTP2_STREAM_REQUEST_CLOSED, HTTP2_STREAM_REQUEST_COMPLETE, HTTP2_STREAM_RESPONSE_STARTED, HTTP2_STREAM_RESPONSE_HEADERS, HTTP2_STREAM_RESPONSE_DATA, HTTP2_STREAM_RESPONSE_CLOSED, HTTP2_STREAM_RESPONSE_COMPLETE, HTTP2_GLOBAL_REQUEST_STARTED, HTTP2_GLOBAL_REQUEST_COMPLETE, HTTP2_GLOBAL_RESPONSE_STARTED, HTTP2_GLOBAL_RESPONSE_COMPLETE, DOH2_STREAM_REQUEST_STARTED, DOH2_STREAM_REQUEST_HEADERS, DOH2_STREAM_REQUEST_DATA, DOH2_STREAM_REQUEST_CLOSED, DOH2_STREAM_REQUEST_COMPLETE, DOH2_STREAM_RESPONSE_STARTED, DOH2_STREAM_RESPONSE_HEADERS, DOH2_STREAM_RESPONSE_DATA, DOH2_STREAM_RESPONSE_CLOSED, DOH2_STREAM_RESPONSE_COMPLETE, DOH2_GLOBAL_REQUEST_STARTED, DOH2_GLOBAL_REQUEST_COMPLETE, DOH2_GLOBAL_RESPONSE_STARTED, DOH2_GLOBAL_RESPONSE_COMPLETE, DNS_REQUEST_STARTED, DNS_REQUEST_COMPLETE, DNS_RESPONSE_STARTED, DNS_RESPONSE_COMPLETE, SMTP_REQUEST_STARTED, SMTP_REQUEST_DATA, SMTP_REQUEST_COMPLETE, SMTP_RESPONSE_STARTED, SMTP_RESPONSE_DATA, SMTP_RESPONSE_COMPLETE, FTP_REQUEST_STARTED, FTP_REQUEST_COMPLETE, FTP_RESPONSE_STARTED, FTP_RESPONSE_COMPLETE, FTP_DATA_REQUEST_STARTED, FTP_DATA_REQUEST_COMPLETE, FTP_DATA_RESPONSE_STARTED, FTP_DATA_RESPONSE_COMPLETE, SMB_REQUEST_STARTED, SMB_REQUEST_COMPLETE, SMB_RESPONSE_STARTED, SMB_RESPONSE_COMPLETE, DCERPC_REQUEST_STARTED, DCERPC_REQUEST_COMPLETE, DCERPC_RESPONSE_STARTED, DCERPC_RESPONSE_COMPLETE, NFS_REQUEST_STARTED, NFS_REQUEST_COMPLETE, NFS_RESPONSE_STARTED, NFS_RESPONSE_COMPLETE, KRB5_REQUEST_STARTED, KRB5_REQUEST_COMPLETE, KRB5_RESPONSE_STARTED, KRB5_RESPONSE_COMPLETE, IKE_REQUEST_STARTED, IKE_REQUEST_COMPLETE, IKE_RESPONSE_STARTED, IKE_RESPONSE_COMPLETE, TFTP_REQUEST_STARTED, TFTP_REQUEST_COMPLETE, TFTP_RESPONSE_STARTED, TFTP_RESPONSE_COMPLETE, DHCP_REQUEST_STARTED, DHCP_REQUEST_COMPLETE, DHCP_RESPONSE_STARTED, DHCP_RESPONSE_COMPLETE, QUIC_REQUEST_STARTED, QUIC_REQUEST_COMPLETE, QUIC_RESPONSE_STARTED, QUIC_RESPONSE_COMPLETE, RDP_REQUEST_STARTED, RDP_REQUEST_COMPLETE, RDP_RESPONSE_STARTED, RDP_RESPONSE_COMPLETE, RFB_REQUEST_STARTED, RFB_REQUEST_COMPLETE, RFB_RESPONSE_STARTED, RFB_RESPONSE_COMPLETE, MQTT_REQUEST_STARTED, MQTT_REQUEST_COMPLETE, MQTT_RESPONSE_STARTED, MQTT_RESPONSE_COMPLETE, PGSQL_REQUEST_STARTED, PGSQL_REQUEST_COMPLETE, PGSQL_RESPONSE_STARTED, PGSQL_RESPONSE_COMPLETE, SNMP_REQUEST_STARTED, SNMP_REQUEST_COMPLETE, SNMP_RESPONSE_STARTED, SNMP_RESPONSE_COMPLETE, NTP_REQUEST_STARTED, NTP_REQUEST_COMPLETE, NTP_RESPONSE_STARTED, NTP_RESPONSE_COMPLETE, TELNET_REQUEST_STARTED, TELNET_REQUEST_COMPLETE, TELNET_RESPONSE_STARTED, TELNET_RESPONSE_COMPLETE, WEBSOCKET_REQUEST_STARTED, WEBSOCKET_REQUEST_COMPLETE, WEBSOCKET_RESPONSE_STARTED, WEBSOCKET_RESPONSE_COMPLETE, LDAP_REQUEST_STARTED, LDAP_REQUEST_COMPLETE, LDAP_RESPONSE_STARTED, LDAP_RESPONSE_COMPLETE, POP3_REQUEST_STARTED, POP3_REQUEST_COMPLETE, POP3_RESPONSE_STARTED, POP3_RESPONSE_COMPLETE, MDNS_REQUEST_STARTED, MDNS_REQUEST_COMPLETE, MDNS_RESPONSE_STARTED, MDNS_RESPONSE_COMPLETE, BITTORRENT_DHT_REQUEST_STARTED, BITTORRENT_DHT_REQUEST_COMPLETE, BITTORRENT_DHT_RESPONSE_STARTED, BITTORRENT_DHT_RESPONSE_COMPLETE, DNP3_REQUEST_STARTED, DNP3_REQUEST_COMPLETE, DNP3_RESPONSE_STARTED, DNP3_RESPONSE_COMPLETE, SSH_REQUEST_IN_PROGRESS, SSH_REQUEST_BANNER_WAIT_EOL, SSH_REQUEST_BANNER_DONE, SSH_REQUEST_FINISHED, SSH_RESPONSE_IN_PROGRESS, SSH_RESPONSE_BANNER_WAIT_EOL, SSH_RESPONSE_BANNER_DONE, SSH_RESPONSE_FINISHED
+    #             protocol: "IP", # required, accepts IP, TCP, UDP, ICMP, HTTP, FTP, TLS, SMB, DNS, DCERPC, SSH, SMTP, MSN, KRB5, IKEV2, TFTP, NTP, DHCP, HTTP2, QUIC, ICMPV4, ICMPV6, SCTP, IPV4, IPV6, DOH2, FTP_DATA, NFS, RDP, RFB, MQTT, PGSQL, SNMP, TELNET, WEBSOCKET, LDAP, POP3, MDNS, BITTORRENT_DHT, DNP3
+    #             source_i_ps: "Source",
+    #             dest_i_ps: "Destination",
+    #             source_ports: "Port",
+    #             dest_ports: "Port",
+    #             rule_options: [
+    #               {
+    #                 keyword: "Keyword", # required
+    #                 settings: ["Setting"],
+    #               },
+    #             ],
+    #             accept_prior_hooks: false,
+    #             alert_enabled: false,
+    #             bypass_ips_enabled: false,
+    #             rule_metadata: {
+    #               rule_enabled: false,
+    #               rule_description: "RuleDescriptionText",
+    #             },
+    #           },
+    #         ],
+    #         rules_source_list: {
+    #           targets: ["CollectionMember_String"], # required
+    #           target_types: ["TLS_SNI"], # required, accepts TLS_SNI, HTTP_HOST, AWS_ROUTE_53_RESOLVED_DOMAIN
+    #           generated_rules_type: "ALLOWLIST", # required, accepts ALLOWLIST, DENYLIST, REJECTLIST, ALERTLIST
+    #         },
+    #       },
+    #       rule_variables: {
+    #         ip_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["VariableDefinition"], # required
+    #           },
+    #         },
+    #         port_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["VariableDefinition"],
+    #           },
+    #         },
+    #       },
+    #       reference_sets: {
+    #         ip_set_references: {
+    #           "IPSetReferenceName" => {
+    #             reference_arn: "ResourceArn",
+    #           },
+    #         },
+    #       },
+    #     },
+    #     ips_rule_group: {
+    #       rules_source: { # required
+    #         rules_string: "RulesString",
+    #       },
+    #       rule_variables: {
+    #         ip_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["VariableDefinition"], # required
+    #           },
+    #         },
+    #         port_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["VariableDefinition"],
+    #           },
+    #         },
+    #       },
+    #       reference_sets: {
+    #         ip_set_references: {
+    #           "IPSetReferenceName" => {
+    #             reference_arn: "ResourceArn",
+    #           },
+    #         },
+    #       },
+    #     },
     #     rules: "RulesString",
-    #     type: "STATELESS", # required, accepts STATELESS, STATEFUL, STATEFUL_DOMAIN
+    #     type: "STATELESS", # required, accepts STATELESS, STATEFUL, STATEFUL_DOMAIN, FIREWALL, IPS
     #     description: "Description",
     #     capacity: 1, # required
     #     tags: [
@@ -2138,7 +2460,7 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.rule_group_name #=> String
     #   resp.rule_group_response.rule_group_id #=> String
     #   resp.rule_group_response.description #=> String
-    #   resp.rule_group_response.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN"
+    #   resp.rule_group_response.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN", "FIREWALL", "IPS"
     #   resp.rule_group_response.capacity #=> Integer
     #   resp.rule_group_response.rule_group_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
     #   resp.rule_group_response.tags #=> Array
@@ -2363,9 +2685,9 @@ module Aws::NetworkFirewall
     #
     # @option params [required, Types::SubnetMapping] :subnet_mapping
     #   The ID for a subnet that's used in an association with a firewall.
-    #   This is used in CreateFirewall, AssociateSubnets, and
-    #   CreateVpcEndpointAssociation. Network Firewall creates an instance of
-    #   the associated firewall in each subnet that you specify, to filter
+    #   This is used in `CreateFirewall`, `AssociateSubnets`, and
+    #   `CreateVpcEndpointAssociation`. Network Firewall creates an instance
+    #   of the associated firewall in each subnet that you specify, to filter
     #   traffic in the subnet's Availability Zone.
     #
     # @option params [String] :description
@@ -2631,6 +2953,62 @@ module Aws::NetworkFirewall
     # @param [Hash] params ({})
     def delete_firewall_policy(params = {}, options = {})
       req = build_request(:delete_firewall_policy, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified FirewallPolicyV2.
+    #
+    # @option params [String] :firewall_policy_v2_arn
+    #   The Amazon Resource Name (ARN) of the Next Generation policy.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :firewall_policy_v2_name
+    #   The descriptive name of the Next Generation policy. You can't change
+    #   the name of a firewall policy after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @return [Types::DeleteFirewallPolicyV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteFirewallPolicyV2Response#firewall_policy_v2_response #firewall_policy_v2_response} => Types::FirewallPolicyV2Response
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_firewall_policy_v2({
+    #     firewall_policy_v2_arn: "ResourceArn",
+    #     firewall_policy_v2_name: "ResourceName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_name #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_arn #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_id #=> String
+    #   resp.firewall_policy_v2_response.description #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
+    #   resp.firewall_policy_v2_response.status_message #=> String
+    #   resp.firewall_policy_v2_response.tags #=> Array
+    #   resp.firewall_policy_v2_response.tags[0].key #=> String
+    #   resp.firewall_policy_v2_response.tags[0].value #=> String
+    #   resp.firewall_policy_v2_response.consumed_firewall_rule_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.consumed_ips_rule_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.consumed_ips_domain_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.number_of_associations #=> Integer
+    #   resp.firewall_policy_v2_response.encryption_configuration.key_id #=> String
+    #   resp.firewall_policy_v2_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall_policy_v2_response.errors #=> Array
+    #   resp.firewall_policy_v2_response.errors[0].code #=> String, one of "DNS_FIREWALL_RULE_GROUP_UNAVAILABLE", "ROUTE53_RESOLVED_IP_VALIDATION_MISSING"
+    #   resp.firewall_policy_v2_response.errors[0].message #=> String
+    #   resp.firewall_policy_v2_response.errors[0].resource_id #=> String
+    #   resp.firewall_policy_v2_response.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteFirewallPolicyV2 AWS API Documentation
+    #
+    # @overload delete_firewall_policy_v2(params = {})
+    # @param [Hash] params ({})
+    def delete_firewall_policy_v2(params = {}, options = {})
+      req = build_request(:delete_firewall_policy_v2, params)
       req.send_request(options)
     end
 
@@ -2912,9 +3290,18 @@ module Aws::NetworkFirewall
     #   You must specify the ARN or the name, and you can specify both.
     #
     # @option params [String] :type
-    #   Indicates whether the rule group is stateless or stateful. If the rule
-    #   group is stateless, it contains stateless rules. If it is stateful, it
-    #   contains stateful rules.
+    #   Indicates the type of the rule group. Valid values are:
+    #
+    #   * `STATELESS` - Stateless rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `STATEFUL` - Stateful rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `FIREWALL` - Firewall engine rules, for use in a Next Generation
+    #     policy.
+    #
+    #   * `IPS` - IPS engine rules, for use in a Next Generation policy.
     #
     #   <note markdown="1"> This setting is required for requests that do not include the
     #   `RuleGroupARN`.
@@ -2930,7 +3317,7 @@ module Aws::NetworkFirewall
     #   resp = client.delete_rule_group({
     #     rule_group_name: "ResourceName",
     #     rule_group_arn: "ResourceArn",
-    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN
+    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN, FIREWALL, IPS
     #   })
     #
     # @example Response structure
@@ -2939,7 +3326,7 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.rule_group_name #=> String
     #   resp.rule_group_response.rule_group_id #=> String
     #   resp.rule_group_response.description #=> String
-    #   resp.rule_group_response.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN"
+    #   resp.rule_group_response.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN", "FIREWALL", "IPS"
     #   resp.rule_group_response.capacity #=> Integer
     #   resp.rule_group_response.rule_group_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
     #   resp.rule_group_response.tags #=> Array
@@ -3375,6 +3762,136 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Returns the data objects for the specified Next Generation policy.
+    #
+    # @option params [String] :firewall_policy_v2_arn
+    #   The Amazon Resource Name (ARN) of the Next Generation policy.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :firewall_policy_v2_name
+    #   The descriptive name of the Next Generation policy. You can't change
+    #   the name of a firewall policy after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :rule_output_format
+    #   The format in which to return the rules of any firewall engine rule
+    #   groups that are embedded in the policy. Specify `FIREWALL_RULES` for
+    #   structured `FirewallRule` objects or `RULES_STRING` for a
+    #   Suricata-compatible firewall-mode rule string. If you don't specify a
+    #   format, Network Firewall returns each embedded rule group in the
+    #   format you provided it in. Referenced rule groups aren't affected.
+    #
+    # @return [Types::DescribeFirewallPolicyV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFirewallPolicyV2Response#update_token #update_token} => String
+    #   * {Types::DescribeFirewallPolicyV2Response#firewall_policy_v2_response #firewall_policy_v2_response} => Types::FirewallPolicyV2Response
+    #   * {Types::DescribeFirewallPolicyV2Response#firewall_policy_v2 #firewall_policy_v2} => Types::FirewallPolicyV2
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_firewall_policy_v2({
+    #     firewall_policy_v2_arn: "ResourceArn",
+    #     firewall_policy_v2_name: "ResourceName",
+    #     rule_output_format: "FIREWALL_RULES", # accepts FIREWALL_RULES, RULES_STRING
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update_token #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_name #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_arn #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_id #=> String
+    #   resp.firewall_policy_v2_response.description #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
+    #   resp.firewall_policy_v2_response.status_message #=> String
+    #   resp.firewall_policy_v2_response.tags #=> Array
+    #   resp.firewall_policy_v2_response.tags[0].key #=> String
+    #   resp.firewall_policy_v2_response.tags[0].value #=> String
+    #   resp.firewall_policy_v2_response.consumed_firewall_rule_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.consumed_ips_rule_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.consumed_ips_domain_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.number_of_associations #=> Integer
+    #   resp.firewall_policy_v2_response.encryption_configuration.key_id #=> String
+    #   resp.firewall_policy_v2_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall_policy_v2_response.errors #=> Array
+    #   resp.firewall_policy_v2_response.errors[0].code #=> String, one of "DNS_FIREWALL_RULE_GROUP_UNAVAILABLE", "ROUTE53_RESOLVED_IP_VALIDATION_MISSING"
+    #   resp.firewall_policy_v2_response.errors[0].message #=> String
+    #   resp.firewall_policy_v2_response.errors[0].resource_id #=> String
+    #   resp.firewall_policy_v2_response.last_modified_time #=> Time
+    #   resp.firewall_policy_v2.firewall_rule_group_entries #=> Array
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].priority #=> Integer
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].resource_arn #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.rules_string #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules #=> Array
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].action #=> String, one of "ACCEPT", "DROP", "REJECT", "REJECT_DST", "REJECT_BOTH"
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].action_scope #=> String, one of "FLOW", "TX", "HOOK", "PACKET"
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].hook #=> String, one of "TCP_ALL", "TCP_FLOW_START", "TCP_PRE_FLOW", "TCP_PRE_STREAM", "SCTP_ALL", "SCTP_FLOW_START", "SCTP_PRE_FLOW", "SCTP_PRE_STREAM", "IPV6_ALL", "IPV6_FLOW_START", "IPV6_PRE_FLOW", "IPV6_PRE_STREAM", "ICMPV6_ALL", "ICMPV6_FLOW_START", "ICMPV6_PRE_FLOW", "ICMPV6_PRE_STREAM", "UDP_ALL", "UDP_FLOW_START", "UDP_PRE_FLOW", "UDP_PRE_STREAM", "ICMP_ALL", "ICMP_FLOW_START", "ICMP_PRE_FLOW", "ICMP_PRE_STREAM", "ICMPV4_ALL", "ICMPV4_FLOW_START", "ICMPV4_PRE_FLOW", "ICMPV4_PRE_STREAM", "IP_ALL", "IP_FLOW_START", "IP_PRE_FLOW", "IP_PRE_STREAM", "IPV4_ALL", "IPV4_FLOW_START", "IPV4_PRE_FLOW", "IPV4_PRE_STREAM", "TLS_CLIENT_STARTED", "TLS_CLIENT_HELLO", "TLS_CLIENT_CERT", "TLS_CLIENT_DATA", "TLS_CLIENT_FINISHED", "TLS_SERVER_STARTED", "TLS_SERVER_HELLO", "TLS_SERVER_CERT", "TLS_SERVER_DATA", "TLS_SERVER_FINISHED", "HTTP1_REQUEST_STARTED", "HTTP1_REQUEST_LINE", "HTTP1_REQUEST_HEADERS", "HTTP1_REQUEST_BODY", "HTTP1_REQUEST_TRAILER", "HTTP1_REQUEST_COMPLETE", "HTTP1_RESPONSE_STARTED", "HTTP1_RESPONSE_LINE", "HTTP1_RESPONSE_HEADERS", "HTTP1_RESPONSE_BODY", "HTTP1_RESPONSE_TRAILER", "HTTP1_RESPONSE_COMPLETE", "HTTP2_STREAM_REQUEST_STARTED", "HTTP2_STREAM_REQUEST_HEADERS", "HTTP2_STREAM_REQUEST_DATA", "HTTP2_STREAM_REQUEST_CLOSED", "HTTP2_STREAM_REQUEST_COMPLETE", "HTTP2_STREAM_RESPONSE_STARTED", "HTTP2_STREAM_RESPONSE_HEADERS", "HTTP2_STREAM_RESPONSE_DATA", "HTTP2_STREAM_RESPONSE_CLOSED", "HTTP2_STREAM_RESPONSE_COMPLETE", "HTTP2_GLOBAL_REQUEST_STARTED", "HTTP2_GLOBAL_REQUEST_COMPLETE", "HTTP2_GLOBAL_RESPONSE_STARTED", "HTTP2_GLOBAL_RESPONSE_COMPLETE", "DOH2_STREAM_REQUEST_STARTED", "DOH2_STREAM_REQUEST_HEADERS", "DOH2_STREAM_REQUEST_DATA", "DOH2_STREAM_REQUEST_CLOSED", "DOH2_STREAM_REQUEST_COMPLETE", "DOH2_STREAM_RESPONSE_STARTED", "DOH2_STREAM_RESPONSE_HEADERS", "DOH2_STREAM_RESPONSE_DATA", "DOH2_STREAM_RESPONSE_CLOSED", "DOH2_STREAM_RESPONSE_COMPLETE", "DOH2_GLOBAL_REQUEST_STARTED", "DOH2_GLOBAL_REQUEST_COMPLETE", "DOH2_GLOBAL_RESPONSE_STARTED", "DOH2_GLOBAL_RESPONSE_COMPLETE", "DNS_REQUEST_STARTED", "DNS_REQUEST_COMPLETE", "DNS_RESPONSE_STARTED", "DNS_RESPONSE_COMPLETE", "SMTP_REQUEST_STARTED", "SMTP_REQUEST_DATA", "SMTP_REQUEST_COMPLETE", "SMTP_RESPONSE_STARTED", "SMTP_RESPONSE_DATA", "SMTP_RESPONSE_COMPLETE", "FTP_REQUEST_STARTED", "FTP_REQUEST_COMPLETE", "FTP_RESPONSE_STARTED", "FTP_RESPONSE_COMPLETE", "FTP_DATA_REQUEST_STARTED", "FTP_DATA_REQUEST_COMPLETE", "FTP_DATA_RESPONSE_STARTED", "FTP_DATA_RESPONSE_COMPLETE", "SMB_REQUEST_STARTED", "SMB_REQUEST_COMPLETE", "SMB_RESPONSE_STARTED", "SMB_RESPONSE_COMPLETE", "DCERPC_REQUEST_STARTED", "DCERPC_REQUEST_COMPLETE", "DCERPC_RESPONSE_STARTED", "DCERPC_RESPONSE_COMPLETE", "NFS_REQUEST_STARTED", "NFS_REQUEST_COMPLETE", "NFS_RESPONSE_STARTED", "NFS_RESPONSE_COMPLETE", "KRB5_REQUEST_STARTED", "KRB5_REQUEST_COMPLETE", "KRB5_RESPONSE_STARTED", "KRB5_RESPONSE_COMPLETE", "IKE_REQUEST_STARTED", "IKE_REQUEST_COMPLETE", "IKE_RESPONSE_STARTED", "IKE_RESPONSE_COMPLETE", "TFTP_REQUEST_STARTED", "TFTP_REQUEST_COMPLETE", "TFTP_RESPONSE_STARTED", "TFTP_RESPONSE_COMPLETE", "DHCP_REQUEST_STARTED", "DHCP_REQUEST_COMPLETE", "DHCP_RESPONSE_STARTED", "DHCP_RESPONSE_COMPLETE", "QUIC_REQUEST_STARTED", "QUIC_REQUEST_COMPLETE", "QUIC_RESPONSE_STARTED", "QUIC_RESPONSE_COMPLETE", "RDP_REQUEST_STARTED", "RDP_REQUEST_COMPLETE", "RDP_RESPONSE_STARTED", "RDP_RESPONSE_COMPLETE", "RFB_REQUEST_STARTED", "RFB_REQUEST_COMPLETE", "RFB_RESPONSE_STARTED", "RFB_RESPONSE_COMPLETE", "MQTT_REQUEST_STARTED", "MQTT_REQUEST_COMPLETE", "MQTT_RESPONSE_STARTED", "MQTT_RESPONSE_COMPLETE", "PGSQL_REQUEST_STARTED", "PGSQL_REQUEST_COMPLETE", "PGSQL_RESPONSE_STARTED", "PGSQL_RESPONSE_COMPLETE", "SNMP_REQUEST_STARTED", "SNMP_REQUEST_COMPLETE", "SNMP_RESPONSE_STARTED", "SNMP_RESPONSE_COMPLETE", "NTP_REQUEST_STARTED", "NTP_REQUEST_COMPLETE", "NTP_RESPONSE_STARTED", "NTP_RESPONSE_COMPLETE", "TELNET_REQUEST_STARTED", "TELNET_REQUEST_COMPLETE", "TELNET_RESPONSE_STARTED", "TELNET_RESPONSE_COMPLETE", "WEBSOCKET_REQUEST_STARTED", "WEBSOCKET_REQUEST_COMPLETE", "WEBSOCKET_RESPONSE_STARTED", "WEBSOCKET_RESPONSE_COMPLETE", "LDAP_REQUEST_STARTED", "LDAP_REQUEST_COMPLETE", "LDAP_RESPONSE_STARTED", "LDAP_RESPONSE_COMPLETE", "POP3_REQUEST_STARTED", "POP3_REQUEST_COMPLETE", "POP3_RESPONSE_STARTED", "POP3_RESPONSE_COMPLETE", "MDNS_REQUEST_STARTED", "MDNS_REQUEST_COMPLETE", "MDNS_RESPONSE_STARTED", "MDNS_RESPONSE_COMPLETE", "BITTORRENT_DHT_REQUEST_STARTED", "BITTORRENT_DHT_REQUEST_COMPLETE", "BITTORRENT_DHT_RESPONSE_STARTED", "BITTORRENT_DHT_RESPONSE_COMPLETE", "DNP3_REQUEST_STARTED", "DNP3_REQUEST_COMPLETE", "DNP3_RESPONSE_STARTED", "DNP3_RESPONSE_COMPLETE", "SSH_REQUEST_IN_PROGRESS", "SSH_REQUEST_BANNER_WAIT_EOL", "SSH_REQUEST_BANNER_DONE", "SSH_REQUEST_FINISHED", "SSH_RESPONSE_IN_PROGRESS", "SSH_RESPONSE_BANNER_WAIT_EOL", "SSH_RESPONSE_BANNER_DONE", "SSH_RESPONSE_FINISHED"
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].protocol #=> String, one of "IP", "TCP", "UDP", "ICMP", "HTTP", "FTP", "TLS", "SMB", "DNS", "DCERPC", "SSH", "SMTP", "MSN", "KRB5", "IKEV2", "TFTP", "NTP", "DHCP", "HTTP2", "QUIC", "ICMPV4", "ICMPV6", "SCTP", "IPV4", "IPV6", "DOH2", "FTP_DATA", "NFS", "RDP", "RFB", "MQTT", "PGSQL", "SNMP", "TELNET", "WEBSOCKET", "LDAP", "POP3", "MDNS", "BITTORRENT_DHT", "DNP3"
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].source_i_ps #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].dest_i_ps #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].source_ports #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].dest_ports #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].rule_options #=> Array
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].rule_options[0].keyword #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].rule_options[0].settings #=> Array
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].rule_options[0].settings[0] #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].accept_prior_hooks #=> Boolean
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].alert_enabled #=> Boolean
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].bypass_ips_enabled #=> Boolean
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].rule_metadata.rule_enabled #=> Boolean
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].rule_metadata.rule_description #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.rules_source_list.targets #=> Array
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.rules_source_list.targets[0] #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.rules_source_list.target_types #=> Array
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.rules_source_list.target_types[0] #=> String, one of "TLS_SNI", "HTTP_HOST", "AWS_ROUTE_53_RESOLVED_DOMAIN"
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.rules_source_list.generated_rules_type #=> String, one of "ALLOWLIST", "DENYLIST", "REJECTLIST", "ALERTLIST"
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rule_variables.ip_sets #=> Hash
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rule_variables.ip_sets["RuleVariableName"].definition #=> Array
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rule_variables.ip_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rule_variables.port_sets #=> Hash
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rule_variables.port_sets["RuleVariableName"].definition #=> Array
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rule_variables.port_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.reference_sets.ip_set_references #=> Hash
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.reference_sets.ip_set_references["IPSetReferenceName"].reference_arn #=> String
+    #   resp.firewall_policy_v2.ips_rule_group_entries #=> Array
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].resource_arn #=> String
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.rules_source.rules_string #=> String
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.rule_variables.ip_sets #=> Hash
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.rule_variables.ip_sets["RuleVariableName"].definition #=> Array
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.rule_variables.ip_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.rule_variables.port_sets #=> Hash
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.rule_variables.port_sets["RuleVariableName"].definition #=> Array
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.rule_variables.port_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.reference_sets.ip_set_references #=> Hash
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.reference_sets.ip_set_references["IPSetReferenceName"].reference_arn #=> String
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].override.action #=> String, one of "DROP_TO_ALERT"
+    #   resp.firewall_policy_v2.policy_mode #=> String, one of "ENFORCE", "MONITOR"
+    #   resp.firewall_policy_v2.firewall_default_action #=> String, one of "DROP", "ACCEPT", "REJECT", "ALERT"
+    #   resp.firewall_policy_v2.stateful_engine_options.stream_exception_policy #=> String, one of "DROP", "REJECT"
+    #   resp.firewall_policy_v2.stateful_engine_options.flow_timeouts.tcp_idle_timeout_seconds #=> Integer
+    #   resp.firewall_policy_v2.tls_inspection_configuration_arn #=> String
+    #   resp.firewall_policy_v2.policy_variables.rule_variables #=> Hash
+    #   resp.firewall_policy_v2.policy_variables.rule_variables["RuleVariableName"].definition #=> Array
+    #   resp.firewall_policy_v2.policy_variables.rule_variables["RuleVariableName"].definition[0] #=> String
+    #   resp.firewall_policy_v2.route_53_resolved_ip_validation.action #=> String, one of "REJECT", "DROP", "ALERT"
+    #   resp.firewall_policy_v2.route_53_resolved_ip_validation.dns_firewall_rule_group_id #=> String
+    #   resp.firewall_policy_v2.route_53_resolved_ip_validation.dns_expiry_exception_policy #=> String, one of "REJECT", "DROP", "CONTINUE"
+    #   resp.firewall_policy_v2.route_53_resolved_ip_validation.bypass_destination_validation_ip_ranges #=> Array
+    #   resp.firewall_policy_v2.route_53_resolved_ip_validation.bypass_destination_validation_ip_ranges[0].address_definition #=> String
+    #   resp.firewall_policy_v2.route_53_resolved_ip_validation.source_ip_ranges #=> Array
+    #   resp.firewall_policy_v2.route_53_resolved_ip_validation.source_ip_ranges[0].address_definition #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFirewallPolicyV2 AWS API Documentation
+    #
+    # @overload describe_firewall_policy_v2(params = {})
+    # @param [Hash] params ({})
+    def describe_firewall_policy_v2(params = {}, options = {})
+      req = build_request(:describe_firewall_policy_v2, params)
+      req.send_request(options)
+    end
+
     # Returns key information about a specific flow operation.
     #
     # @option params [required, String] :firewall_arn
@@ -3790,9 +4307,18 @@ module Aws::NetworkFirewall
     #   You must specify the ARN or the name, and you can specify both.
     #
     # @option params [String] :type
-    #   Indicates whether the rule group is stateless or stateful. If the rule
-    #   group is stateless, it contains stateless rules. If it is stateful, it
-    #   contains stateful rules.
+    #   Indicates the type of the rule group. Valid values are:
+    #
+    #   * `STATELESS` - Stateless rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `STATEFUL` - Stateful rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `FIREWALL` - Firewall engine rules, for use in a Next Generation
+    #     policy.
+    #
+    #   * `IPS` - IPS engine rules, for use in a Next Generation policy.
     #
     #   <note markdown="1"> This setting is required for requests that do not include the
     #   `RuleGroupARN`.
@@ -3804,10 +4330,27 @@ module Aws::NetworkFirewall
     #   rules in the rule group for rule behavior such as asymmetric routing.
     #   If set to `TRUE`, Network Firewall runs the analysis.
     #
+    # @option params [String] :rule_output_format
+    #   For a firewall engine rule group, the format in which to return the
+    #   rules. Specify one of the following values:
+    #
+    #   * `FIREWALL_RULES` - Returns the rules as structured `FirewallRule`
+    #     objects.
+    #
+    #   * `RULES_STRING` - Returns the rules as a Suricata-compatible
+    #     firewall-mode rule string.
+    #
+    #   If you don't specify a format, Network Firewall returns the rules in
+    #   the format you provided them in. This setting applies only to
+    #   `FIREWALL` and `IPS` rule groups; IPS engine rule groups support only
+    #   `RULES_STRING`.
+    #
     # @return [Types::DescribeRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeRuleGroupResponse#update_token #update_token} => String
     #   * {Types::DescribeRuleGroupResponse#rule_group #rule_group} => Types::RuleGroup
+    #   * {Types::DescribeRuleGroupResponse#firewall_rule_group #firewall_rule_group} => Types::FirewallRuleGroup
+    #   * {Types::DescribeRuleGroupResponse#ips_rule_group #ips_rule_group} => Types::IpsRuleGroup
     #   * {Types::DescribeRuleGroupResponse#rule_group_response #rule_group_response} => Types::RuleGroupResponse
     #
     # @example Request syntax with placeholder values
@@ -3815,8 +4358,9 @@ module Aws::NetworkFirewall
     #   resp = client.describe_rule_group({
     #     rule_group_name: "ResourceName",
     #     rule_group_arn: "ResourceArn",
-    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN
+    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN, FIREWALL, IPS
     #     analyze_rule_group: false,
+    #     rule_output_format: "FIREWALL_RULES", # accepts FIREWALL_RULES, RULES_STRING
     #   })
     #
     # @example Response structure
@@ -3874,11 +4418,52 @@ module Aws::NetworkFirewall
     #   resp.rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions[0].action_definition.publish_metric_action.dimensions #=> Array
     #   resp.rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions[0].action_definition.publish_metric_action.dimensions[0].value #=> String
     #   resp.rule_group.stateful_rule_options.rule_order #=> String, one of "DEFAULT_ACTION_ORDER", "STRICT_ORDER"
+    #   resp.firewall_rule_group.rules_source.rules_string #=> String
+    #   resp.firewall_rule_group.rules_source.firewall_rules #=> Array
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].action #=> String, one of "ACCEPT", "DROP", "REJECT", "REJECT_DST", "REJECT_BOTH"
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].action_scope #=> String, one of "FLOW", "TX", "HOOK", "PACKET"
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].hook #=> String, one of "TCP_ALL", "TCP_FLOW_START", "TCP_PRE_FLOW", "TCP_PRE_STREAM", "SCTP_ALL", "SCTP_FLOW_START", "SCTP_PRE_FLOW", "SCTP_PRE_STREAM", "IPV6_ALL", "IPV6_FLOW_START", "IPV6_PRE_FLOW", "IPV6_PRE_STREAM", "ICMPV6_ALL", "ICMPV6_FLOW_START", "ICMPV6_PRE_FLOW", "ICMPV6_PRE_STREAM", "UDP_ALL", "UDP_FLOW_START", "UDP_PRE_FLOW", "UDP_PRE_STREAM", "ICMP_ALL", "ICMP_FLOW_START", "ICMP_PRE_FLOW", "ICMP_PRE_STREAM", "ICMPV4_ALL", "ICMPV4_FLOW_START", "ICMPV4_PRE_FLOW", "ICMPV4_PRE_STREAM", "IP_ALL", "IP_FLOW_START", "IP_PRE_FLOW", "IP_PRE_STREAM", "IPV4_ALL", "IPV4_FLOW_START", "IPV4_PRE_FLOW", "IPV4_PRE_STREAM", "TLS_CLIENT_STARTED", "TLS_CLIENT_HELLO", "TLS_CLIENT_CERT", "TLS_CLIENT_DATA", "TLS_CLIENT_FINISHED", "TLS_SERVER_STARTED", "TLS_SERVER_HELLO", "TLS_SERVER_CERT", "TLS_SERVER_DATA", "TLS_SERVER_FINISHED", "HTTP1_REQUEST_STARTED", "HTTP1_REQUEST_LINE", "HTTP1_REQUEST_HEADERS", "HTTP1_REQUEST_BODY", "HTTP1_REQUEST_TRAILER", "HTTP1_REQUEST_COMPLETE", "HTTP1_RESPONSE_STARTED", "HTTP1_RESPONSE_LINE", "HTTP1_RESPONSE_HEADERS", "HTTP1_RESPONSE_BODY", "HTTP1_RESPONSE_TRAILER", "HTTP1_RESPONSE_COMPLETE", "HTTP2_STREAM_REQUEST_STARTED", "HTTP2_STREAM_REQUEST_HEADERS", "HTTP2_STREAM_REQUEST_DATA", "HTTP2_STREAM_REQUEST_CLOSED", "HTTP2_STREAM_REQUEST_COMPLETE", "HTTP2_STREAM_RESPONSE_STARTED", "HTTP2_STREAM_RESPONSE_HEADERS", "HTTP2_STREAM_RESPONSE_DATA", "HTTP2_STREAM_RESPONSE_CLOSED", "HTTP2_STREAM_RESPONSE_COMPLETE", "HTTP2_GLOBAL_REQUEST_STARTED", "HTTP2_GLOBAL_REQUEST_COMPLETE", "HTTP2_GLOBAL_RESPONSE_STARTED", "HTTP2_GLOBAL_RESPONSE_COMPLETE", "DOH2_STREAM_REQUEST_STARTED", "DOH2_STREAM_REQUEST_HEADERS", "DOH2_STREAM_REQUEST_DATA", "DOH2_STREAM_REQUEST_CLOSED", "DOH2_STREAM_REQUEST_COMPLETE", "DOH2_STREAM_RESPONSE_STARTED", "DOH2_STREAM_RESPONSE_HEADERS", "DOH2_STREAM_RESPONSE_DATA", "DOH2_STREAM_RESPONSE_CLOSED", "DOH2_STREAM_RESPONSE_COMPLETE", "DOH2_GLOBAL_REQUEST_STARTED", "DOH2_GLOBAL_REQUEST_COMPLETE", "DOH2_GLOBAL_RESPONSE_STARTED", "DOH2_GLOBAL_RESPONSE_COMPLETE", "DNS_REQUEST_STARTED", "DNS_REQUEST_COMPLETE", "DNS_RESPONSE_STARTED", "DNS_RESPONSE_COMPLETE", "SMTP_REQUEST_STARTED", "SMTP_REQUEST_DATA", "SMTP_REQUEST_COMPLETE", "SMTP_RESPONSE_STARTED", "SMTP_RESPONSE_DATA", "SMTP_RESPONSE_COMPLETE", "FTP_REQUEST_STARTED", "FTP_REQUEST_COMPLETE", "FTP_RESPONSE_STARTED", "FTP_RESPONSE_COMPLETE", "FTP_DATA_REQUEST_STARTED", "FTP_DATA_REQUEST_COMPLETE", "FTP_DATA_RESPONSE_STARTED", "FTP_DATA_RESPONSE_COMPLETE", "SMB_REQUEST_STARTED", "SMB_REQUEST_COMPLETE", "SMB_RESPONSE_STARTED", "SMB_RESPONSE_COMPLETE", "DCERPC_REQUEST_STARTED", "DCERPC_REQUEST_COMPLETE", "DCERPC_RESPONSE_STARTED", "DCERPC_RESPONSE_COMPLETE", "NFS_REQUEST_STARTED", "NFS_REQUEST_COMPLETE", "NFS_RESPONSE_STARTED", "NFS_RESPONSE_COMPLETE", "KRB5_REQUEST_STARTED", "KRB5_REQUEST_COMPLETE", "KRB5_RESPONSE_STARTED", "KRB5_RESPONSE_COMPLETE", "IKE_REQUEST_STARTED", "IKE_REQUEST_COMPLETE", "IKE_RESPONSE_STARTED", "IKE_RESPONSE_COMPLETE", "TFTP_REQUEST_STARTED", "TFTP_REQUEST_COMPLETE", "TFTP_RESPONSE_STARTED", "TFTP_RESPONSE_COMPLETE", "DHCP_REQUEST_STARTED", "DHCP_REQUEST_COMPLETE", "DHCP_RESPONSE_STARTED", "DHCP_RESPONSE_COMPLETE", "QUIC_REQUEST_STARTED", "QUIC_REQUEST_COMPLETE", "QUIC_RESPONSE_STARTED", "QUIC_RESPONSE_COMPLETE", "RDP_REQUEST_STARTED", "RDP_REQUEST_COMPLETE", "RDP_RESPONSE_STARTED", "RDP_RESPONSE_COMPLETE", "RFB_REQUEST_STARTED", "RFB_REQUEST_COMPLETE", "RFB_RESPONSE_STARTED", "RFB_RESPONSE_COMPLETE", "MQTT_REQUEST_STARTED", "MQTT_REQUEST_COMPLETE", "MQTT_RESPONSE_STARTED", "MQTT_RESPONSE_COMPLETE", "PGSQL_REQUEST_STARTED", "PGSQL_REQUEST_COMPLETE", "PGSQL_RESPONSE_STARTED", "PGSQL_RESPONSE_COMPLETE", "SNMP_REQUEST_STARTED", "SNMP_REQUEST_COMPLETE", "SNMP_RESPONSE_STARTED", "SNMP_RESPONSE_COMPLETE", "NTP_REQUEST_STARTED", "NTP_REQUEST_COMPLETE", "NTP_RESPONSE_STARTED", "NTP_RESPONSE_COMPLETE", "TELNET_REQUEST_STARTED", "TELNET_REQUEST_COMPLETE", "TELNET_RESPONSE_STARTED", "TELNET_RESPONSE_COMPLETE", "WEBSOCKET_REQUEST_STARTED", "WEBSOCKET_REQUEST_COMPLETE", "WEBSOCKET_RESPONSE_STARTED", "WEBSOCKET_RESPONSE_COMPLETE", "LDAP_REQUEST_STARTED", "LDAP_REQUEST_COMPLETE", "LDAP_RESPONSE_STARTED", "LDAP_RESPONSE_COMPLETE", "POP3_REQUEST_STARTED", "POP3_REQUEST_COMPLETE", "POP3_RESPONSE_STARTED", "POP3_RESPONSE_COMPLETE", "MDNS_REQUEST_STARTED", "MDNS_REQUEST_COMPLETE", "MDNS_RESPONSE_STARTED", "MDNS_RESPONSE_COMPLETE", "BITTORRENT_DHT_REQUEST_STARTED", "BITTORRENT_DHT_REQUEST_COMPLETE", "BITTORRENT_DHT_RESPONSE_STARTED", "BITTORRENT_DHT_RESPONSE_COMPLETE", "DNP3_REQUEST_STARTED", "DNP3_REQUEST_COMPLETE", "DNP3_RESPONSE_STARTED", "DNP3_RESPONSE_COMPLETE", "SSH_REQUEST_IN_PROGRESS", "SSH_REQUEST_BANNER_WAIT_EOL", "SSH_REQUEST_BANNER_DONE", "SSH_REQUEST_FINISHED", "SSH_RESPONSE_IN_PROGRESS", "SSH_RESPONSE_BANNER_WAIT_EOL", "SSH_RESPONSE_BANNER_DONE", "SSH_RESPONSE_FINISHED"
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].protocol #=> String, one of "IP", "TCP", "UDP", "ICMP", "HTTP", "FTP", "TLS", "SMB", "DNS", "DCERPC", "SSH", "SMTP", "MSN", "KRB5", "IKEV2", "TFTP", "NTP", "DHCP", "HTTP2", "QUIC", "ICMPV4", "ICMPV6", "SCTP", "IPV4", "IPV6", "DOH2", "FTP_DATA", "NFS", "RDP", "RFB", "MQTT", "PGSQL", "SNMP", "TELNET", "WEBSOCKET", "LDAP", "POP3", "MDNS", "BITTORRENT_DHT", "DNP3"
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].source_i_ps #=> String
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].dest_i_ps #=> String
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].source_ports #=> String
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].dest_ports #=> String
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].rule_options #=> Array
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].rule_options[0].keyword #=> String
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].rule_options[0].settings #=> Array
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].rule_options[0].settings[0] #=> String
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].accept_prior_hooks #=> Boolean
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].alert_enabled #=> Boolean
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].bypass_ips_enabled #=> Boolean
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].rule_metadata.rule_enabled #=> Boolean
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].rule_metadata.rule_description #=> String
+    #   resp.firewall_rule_group.rules_source.rules_source_list.targets #=> Array
+    #   resp.firewall_rule_group.rules_source.rules_source_list.targets[0] #=> String
+    #   resp.firewall_rule_group.rules_source.rules_source_list.target_types #=> Array
+    #   resp.firewall_rule_group.rules_source.rules_source_list.target_types[0] #=> String, one of "TLS_SNI", "HTTP_HOST", "AWS_ROUTE_53_RESOLVED_DOMAIN"
+    #   resp.firewall_rule_group.rules_source.rules_source_list.generated_rules_type #=> String, one of "ALLOWLIST", "DENYLIST", "REJECTLIST", "ALERTLIST"
+    #   resp.firewall_rule_group.rule_variables.ip_sets #=> Hash
+    #   resp.firewall_rule_group.rule_variables.ip_sets["RuleVariableName"].definition #=> Array
+    #   resp.firewall_rule_group.rule_variables.ip_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.firewall_rule_group.rule_variables.port_sets #=> Hash
+    #   resp.firewall_rule_group.rule_variables.port_sets["RuleVariableName"].definition #=> Array
+    #   resp.firewall_rule_group.rule_variables.port_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.firewall_rule_group.reference_sets.ip_set_references #=> Hash
+    #   resp.firewall_rule_group.reference_sets.ip_set_references["IPSetReferenceName"].reference_arn #=> String
+    #   resp.ips_rule_group.rules_source.rules_string #=> String
+    #   resp.ips_rule_group.rule_variables.ip_sets #=> Hash
+    #   resp.ips_rule_group.rule_variables.ip_sets["RuleVariableName"].definition #=> Array
+    #   resp.ips_rule_group.rule_variables.ip_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.ips_rule_group.rule_variables.port_sets #=> Hash
+    #   resp.ips_rule_group.rule_variables.port_sets["RuleVariableName"].definition #=> Array
+    #   resp.ips_rule_group.rule_variables.port_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.ips_rule_group.reference_sets.ip_set_references #=> Hash
+    #   resp.ips_rule_group.reference_sets.ip_set_references["IPSetReferenceName"].reference_arn #=> String
     #   resp.rule_group_response.rule_group_arn #=> String
     #   resp.rule_group_response.rule_group_name #=> String
     #   resp.rule_group_response.rule_group_id #=> String
     #   resp.rule_group_response.description #=> String
-    #   resp.rule_group_response.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN"
+    #   resp.rule_group_response.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN", "FIREWALL", "IPS"
     #   resp.rule_group_response.capacity #=> Integer
     #   resp.rule_group_response.rule_group_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
     #   resp.rule_group_response.tags #=> Array
@@ -3927,9 +4512,18 @@ module Aws::NetworkFirewall
     #   You must specify the ARN or the name, and you can specify both.
     #
     # @option params [String] :type
-    #   Indicates whether the rule group is stateless or stateful. If the rule
-    #   group is stateless, it contains stateless rules. If it is stateful, it
-    #   contains stateful rules.
+    #   Indicates the type of the rule group. Valid values are:
+    #
+    #   * `STATELESS` - Stateless rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `STATEFUL` - Stateful rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `FIREWALL` - Firewall engine rules, for use in a Next Generation
+    #     policy.
+    #
+    #   * `IPS` - IPS engine rules, for use in a Next Generation policy.
     #
     #   <note markdown="1"> This setting is required for requests that do not include the
     #   `RuleGroupARN`.
@@ -3954,7 +4548,7 @@ module Aws::NetworkFirewall
     #   resp = client.describe_rule_group_metadata({
     #     rule_group_name: "ResourceName",
     #     rule_group_arn: "ResourceArn",
-    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN
+    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN, FIREWALL, IPS
     #   })
     #
     # @example Response structure
@@ -3962,7 +4556,7 @@ module Aws::NetworkFirewall
     #   resp.rule_group_arn #=> String
     #   resp.rule_group_name #=> String
     #   resp.description #=> String
-    #   resp.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN"
+    #   resp.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN", "FIREWALL", "IPS"
     #   resp.capacity #=> Integer
     #   resp.stateful_rule_options.rule_order #=> String, one of "DEFAULT_ACTION_ORDER", "STRICT_ORDER"
     #   resp.last_modified_time #=> Time
@@ -4021,7 +4615,7 @@ module Aws::NetworkFirewall
     #   resp = client.describe_rule_group_summary({
     #     rule_group_name: "ResourceName",
     #     rule_group_arn: "ResourceArn",
-    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN
+    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN, FIREWALL, IPS
     #   })
     #
     # @example Response structure
@@ -4639,6 +5233,53 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Retrieves the metadata for the Next Generation policies that you have
+    # defined. Depending on your setting for max results and the number of
+    # firewall policies, a single call might not return the full list.
+    #
+    # @option params [String] :next_token
+    #   When you request a list of objects with a `MaxResults` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   maximum you requested, Network Firewall returns a `NextToken` value in
+    #   the response. To retrieve the next batch of objects, use the token
+    #   returned from the prior request in your next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Network Firewall to return
+    #   for this request. If more objects are available, in the response,
+    #   Network Firewall provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    # @return [Types::ListFirewallPoliciesV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFirewallPoliciesV2Response#next_token #next_token} => String
+    #   * {Types::ListFirewallPoliciesV2Response#firewall_policies_v2 #firewall_policies_v2} => Array&lt;Types::FirewallPolicyV2Metadata&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_firewall_policies_v2({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.firewall_policies_v2 #=> Array
+    #   resp.firewall_policies_v2[0].name #=> String
+    #   resp.firewall_policies_v2[0].arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListFirewallPoliciesV2 AWS API Documentation
+    #
+    # @overload list_firewall_policies_v2(params = {})
+    # @param [Hash] params ({})
+    def list_firewall_policies_v2(params = {}, options = {})
+      req = build_request(:list_firewall_policies_v2, params)
+      req.send_request(options)
+    end
+
     # Retrieves the metadata for the firewalls that you have defined. If you
     # provide VPC identifiers in your request, this returns only the
     # firewalls for those VPCs.
@@ -5094,7 +5735,7 @@ module Aws::NetworkFirewall
     #     scope: "MANAGED", # accepts MANAGED, ACCOUNT
     #     managed_type: "AWS_MANAGED_THREAT_SIGNATURES", # accepts AWS_MANAGED_THREAT_SIGNATURES, AWS_MANAGED_DOMAIN_LISTS, ACTIVE_THREAT_DEFENSE, PARTNER_MANAGED
     #     subscription_status: "NOT_SUBSCRIBED", # accepts NOT_SUBSCRIBED, SUBSCRIBED
-    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN
+    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN, FIREWALL, IPS
     #   })
     #
     # @example Response structure
@@ -6455,6 +7096,235 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Updates the properties of the specified Next Generation policy.
+    #
+    # @option params [required, String] :update_token
+    #   A token used for optimistic locking. Network Firewall returns a token
+    #   to your requests that access the firewall policy. The token marks the
+    #   state of the policy resource at the time of the request.
+    #
+    #   To make changes to the policy, you provide the token in your request.
+    #   Network Firewall uses the token to ensure that the policy hasn't
+    #   changed since you last retrieved it. If it has changed, the operation
+    #   fails with an `InvalidTokenException`. If this happens, retrieve the
+    #   firewall policy again to get a current copy of it with current token.
+    #   Reapply your changes as needed, then try the operation again using the
+    #   new token.
+    #
+    # @option params [String] :firewall_policy_v2_arn
+    #   The Amazon Resource Name (ARN) of the Next Generation policy.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :firewall_policy_v2_name
+    #   The descriptive name of the Next Generation policy. You can't change
+    #   the name of a firewall policy after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [required, Types::FirewallPolicyV2] :firewall_policy_v2
+    #   The updated rule groups and other settings that define the Next
+    #   Generation policy.
+    #
+    # @option params [String] :description
+    #   A description of the firewall policy.
+    #
+    # @option params [Boolean] :dry_run
+    #   Indicates whether you want Network Firewall to just check the validity
+    #   of the request, rather than run the request.
+    #
+    #   If set to `TRUE`, Network Firewall checks whether the request can run
+    #   successfully, but doesn't actually make the requested changes. The
+    #   call returns the value that the request would return if you ran it
+    #   with dry run set to `FALSE`, but doesn't make additions or changes to
+    #   your resources. This option allows you to make sure that you have the
+    #   required permissions to run the request and that your request
+    #   parameters are valid.
+    #
+    #   If set to `FALSE`, Network Firewall makes the requested changes to
+    #   your resources.
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   A complex type that contains settings for encryption of your firewall
+    #   policy resources.
+    #
+    # @return [Types::UpdateFirewallPolicyV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFirewallPolicyV2Response#update_token #update_token} => String
+    #   * {Types::UpdateFirewallPolicyV2Response#firewall_policy_v2_response #firewall_policy_v2_response} => Types::FirewallPolicyV2Response
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_firewall_policy_v2({
+    #     update_token: "UpdateToken", # required
+    #     firewall_policy_v2_arn: "ResourceArn",
+    #     firewall_policy_v2_name: "ResourceName",
+    #     firewall_policy_v2: { # required
+    #       firewall_rule_group_entries: [
+    #         {
+    #           priority: 1,
+    #           resource_arn: "ResourceArn",
+    #           inline_rule_group: {
+    #             rules_source: { # required
+    #               rules_string: "RulesString",
+    #               firewall_rules: [
+    #                 {
+    #                   action: "ACCEPT", # required, accepts ACCEPT, DROP, REJECT, REJECT_DST, REJECT_BOTH
+    #                   action_scope: "FLOW", # required, accepts FLOW, TX, HOOK, PACKET
+    #                   hook: "TCP_ALL", # required, accepts TCP_ALL, TCP_FLOW_START, TCP_PRE_FLOW, TCP_PRE_STREAM, SCTP_ALL, SCTP_FLOW_START, SCTP_PRE_FLOW, SCTP_PRE_STREAM, IPV6_ALL, IPV6_FLOW_START, IPV6_PRE_FLOW, IPV6_PRE_STREAM, ICMPV6_ALL, ICMPV6_FLOW_START, ICMPV6_PRE_FLOW, ICMPV6_PRE_STREAM, UDP_ALL, UDP_FLOW_START, UDP_PRE_FLOW, UDP_PRE_STREAM, ICMP_ALL, ICMP_FLOW_START, ICMP_PRE_FLOW, ICMP_PRE_STREAM, ICMPV4_ALL, ICMPV4_FLOW_START, ICMPV4_PRE_FLOW, ICMPV4_PRE_STREAM, IP_ALL, IP_FLOW_START, IP_PRE_FLOW, IP_PRE_STREAM, IPV4_ALL, IPV4_FLOW_START, IPV4_PRE_FLOW, IPV4_PRE_STREAM, TLS_CLIENT_STARTED, TLS_CLIENT_HELLO, TLS_CLIENT_CERT, TLS_CLIENT_DATA, TLS_CLIENT_FINISHED, TLS_SERVER_STARTED, TLS_SERVER_HELLO, TLS_SERVER_CERT, TLS_SERVER_DATA, TLS_SERVER_FINISHED, HTTP1_REQUEST_STARTED, HTTP1_REQUEST_LINE, HTTP1_REQUEST_HEADERS, HTTP1_REQUEST_BODY, HTTP1_REQUEST_TRAILER, HTTP1_REQUEST_COMPLETE, HTTP1_RESPONSE_STARTED, HTTP1_RESPONSE_LINE, HTTP1_RESPONSE_HEADERS, HTTP1_RESPONSE_BODY, HTTP1_RESPONSE_TRAILER, HTTP1_RESPONSE_COMPLETE, HTTP2_STREAM_REQUEST_STARTED, HTTP2_STREAM_REQUEST_HEADERS, HTTP2_STREAM_REQUEST_DATA, HTTP2_STREAM_REQUEST_CLOSED, HTTP2_STREAM_REQUEST_COMPLETE, HTTP2_STREAM_RESPONSE_STARTED, HTTP2_STREAM_RESPONSE_HEADERS, HTTP2_STREAM_RESPONSE_DATA, HTTP2_STREAM_RESPONSE_CLOSED, HTTP2_STREAM_RESPONSE_COMPLETE, HTTP2_GLOBAL_REQUEST_STARTED, HTTP2_GLOBAL_REQUEST_COMPLETE, HTTP2_GLOBAL_RESPONSE_STARTED, HTTP2_GLOBAL_RESPONSE_COMPLETE, DOH2_STREAM_REQUEST_STARTED, DOH2_STREAM_REQUEST_HEADERS, DOH2_STREAM_REQUEST_DATA, DOH2_STREAM_REQUEST_CLOSED, DOH2_STREAM_REQUEST_COMPLETE, DOH2_STREAM_RESPONSE_STARTED, DOH2_STREAM_RESPONSE_HEADERS, DOH2_STREAM_RESPONSE_DATA, DOH2_STREAM_RESPONSE_CLOSED, DOH2_STREAM_RESPONSE_COMPLETE, DOH2_GLOBAL_REQUEST_STARTED, DOH2_GLOBAL_REQUEST_COMPLETE, DOH2_GLOBAL_RESPONSE_STARTED, DOH2_GLOBAL_RESPONSE_COMPLETE, DNS_REQUEST_STARTED, DNS_REQUEST_COMPLETE, DNS_RESPONSE_STARTED, DNS_RESPONSE_COMPLETE, SMTP_REQUEST_STARTED, SMTP_REQUEST_DATA, SMTP_REQUEST_COMPLETE, SMTP_RESPONSE_STARTED, SMTP_RESPONSE_DATA, SMTP_RESPONSE_COMPLETE, FTP_REQUEST_STARTED, FTP_REQUEST_COMPLETE, FTP_RESPONSE_STARTED, FTP_RESPONSE_COMPLETE, FTP_DATA_REQUEST_STARTED, FTP_DATA_REQUEST_COMPLETE, FTP_DATA_RESPONSE_STARTED, FTP_DATA_RESPONSE_COMPLETE, SMB_REQUEST_STARTED, SMB_REQUEST_COMPLETE, SMB_RESPONSE_STARTED, SMB_RESPONSE_COMPLETE, DCERPC_REQUEST_STARTED, DCERPC_REQUEST_COMPLETE, DCERPC_RESPONSE_STARTED, DCERPC_RESPONSE_COMPLETE, NFS_REQUEST_STARTED, NFS_REQUEST_COMPLETE, NFS_RESPONSE_STARTED, NFS_RESPONSE_COMPLETE, KRB5_REQUEST_STARTED, KRB5_REQUEST_COMPLETE, KRB5_RESPONSE_STARTED, KRB5_RESPONSE_COMPLETE, IKE_REQUEST_STARTED, IKE_REQUEST_COMPLETE, IKE_RESPONSE_STARTED, IKE_RESPONSE_COMPLETE, TFTP_REQUEST_STARTED, TFTP_REQUEST_COMPLETE, TFTP_RESPONSE_STARTED, TFTP_RESPONSE_COMPLETE, DHCP_REQUEST_STARTED, DHCP_REQUEST_COMPLETE, DHCP_RESPONSE_STARTED, DHCP_RESPONSE_COMPLETE, QUIC_REQUEST_STARTED, QUIC_REQUEST_COMPLETE, QUIC_RESPONSE_STARTED, QUIC_RESPONSE_COMPLETE, RDP_REQUEST_STARTED, RDP_REQUEST_COMPLETE, RDP_RESPONSE_STARTED, RDP_RESPONSE_COMPLETE, RFB_REQUEST_STARTED, RFB_REQUEST_COMPLETE, RFB_RESPONSE_STARTED, RFB_RESPONSE_COMPLETE, MQTT_REQUEST_STARTED, MQTT_REQUEST_COMPLETE, MQTT_RESPONSE_STARTED, MQTT_RESPONSE_COMPLETE, PGSQL_REQUEST_STARTED, PGSQL_REQUEST_COMPLETE, PGSQL_RESPONSE_STARTED, PGSQL_RESPONSE_COMPLETE, SNMP_REQUEST_STARTED, SNMP_REQUEST_COMPLETE, SNMP_RESPONSE_STARTED, SNMP_RESPONSE_COMPLETE, NTP_REQUEST_STARTED, NTP_REQUEST_COMPLETE, NTP_RESPONSE_STARTED, NTP_RESPONSE_COMPLETE, TELNET_REQUEST_STARTED, TELNET_REQUEST_COMPLETE, TELNET_RESPONSE_STARTED, TELNET_RESPONSE_COMPLETE, WEBSOCKET_REQUEST_STARTED, WEBSOCKET_REQUEST_COMPLETE, WEBSOCKET_RESPONSE_STARTED, WEBSOCKET_RESPONSE_COMPLETE, LDAP_REQUEST_STARTED, LDAP_REQUEST_COMPLETE, LDAP_RESPONSE_STARTED, LDAP_RESPONSE_COMPLETE, POP3_REQUEST_STARTED, POP3_REQUEST_COMPLETE, POP3_RESPONSE_STARTED, POP3_RESPONSE_COMPLETE, MDNS_REQUEST_STARTED, MDNS_REQUEST_COMPLETE, MDNS_RESPONSE_STARTED, MDNS_RESPONSE_COMPLETE, BITTORRENT_DHT_REQUEST_STARTED, BITTORRENT_DHT_REQUEST_COMPLETE, BITTORRENT_DHT_RESPONSE_STARTED, BITTORRENT_DHT_RESPONSE_COMPLETE, DNP3_REQUEST_STARTED, DNP3_REQUEST_COMPLETE, DNP3_RESPONSE_STARTED, DNP3_RESPONSE_COMPLETE, SSH_REQUEST_IN_PROGRESS, SSH_REQUEST_BANNER_WAIT_EOL, SSH_REQUEST_BANNER_DONE, SSH_REQUEST_FINISHED, SSH_RESPONSE_IN_PROGRESS, SSH_RESPONSE_BANNER_WAIT_EOL, SSH_RESPONSE_BANNER_DONE, SSH_RESPONSE_FINISHED
+    #                   protocol: "IP", # required, accepts IP, TCP, UDP, ICMP, HTTP, FTP, TLS, SMB, DNS, DCERPC, SSH, SMTP, MSN, KRB5, IKEV2, TFTP, NTP, DHCP, HTTP2, QUIC, ICMPV4, ICMPV6, SCTP, IPV4, IPV6, DOH2, FTP_DATA, NFS, RDP, RFB, MQTT, PGSQL, SNMP, TELNET, WEBSOCKET, LDAP, POP3, MDNS, BITTORRENT_DHT, DNP3
+    #                   source_i_ps: "Source",
+    #                   dest_i_ps: "Destination",
+    #                   source_ports: "Port",
+    #                   dest_ports: "Port",
+    #                   rule_options: [
+    #                     {
+    #                       keyword: "Keyword", # required
+    #                       settings: ["Setting"],
+    #                     },
+    #                   ],
+    #                   accept_prior_hooks: false,
+    #                   alert_enabled: false,
+    #                   bypass_ips_enabled: false,
+    #                   rule_metadata: {
+    #                     rule_enabled: false,
+    #                     rule_description: "RuleDescriptionText",
+    #                   },
+    #                 },
+    #               ],
+    #               rules_source_list: {
+    #                 targets: ["CollectionMember_String"], # required
+    #                 target_types: ["TLS_SNI"], # required, accepts TLS_SNI, HTTP_HOST, AWS_ROUTE_53_RESOLVED_DOMAIN
+    #                 generated_rules_type: "ALLOWLIST", # required, accepts ALLOWLIST, DENYLIST, REJECTLIST, ALERTLIST
+    #               },
+    #             },
+    #             rule_variables: {
+    #               ip_sets: {
+    #                 "RuleVariableName" => {
+    #                   definition: ["VariableDefinition"], # required
+    #                 },
+    #               },
+    #               port_sets: {
+    #                 "RuleVariableName" => {
+    #                   definition: ["VariableDefinition"],
+    #                 },
+    #               },
+    #             },
+    #             reference_sets: {
+    #               ip_set_references: {
+    #                 "IPSetReferenceName" => {
+    #                   reference_arn: "ResourceArn",
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
+    #       ],
+    #       ips_rule_group_entries: [
+    #         {
+    #           resource_arn: "ResourceArn",
+    #           inline_rule_group: {
+    #             rules_source: { # required
+    #               rules_string: "RulesString",
+    #             },
+    #             rule_variables: {
+    #               ip_sets: {
+    #                 "RuleVariableName" => {
+    #                   definition: ["VariableDefinition"], # required
+    #                 },
+    #               },
+    #               port_sets: {
+    #                 "RuleVariableName" => {
+    #                   definition: ["VariableDefinition"],
+    #                 },
+    #               },
+    #             },
+    #             reference_sets: {
+    #               ip_set_references: {
+    #                 "IPSetReferenceName" => {
+    #                   reference_arn: "ResourceArn",
+    #                 },
+    #               },
+    #             },
+    #           },
+    #           override: {
+    #             action: "DROP_TO_ALERT", # accepts DROP_TO_ALERT
+    #           },
+    #         },
+    #       ],
+    #       policy_mode: "ENFORCE", # accepts ENFORCE, MONITOR
+    #       firewall_default_action: "DROP", # accepts DROP, ACCEPT, REJECT, ALERT
+    #       stateful_engine_options: {
+    #         stream_exception_policy: "DROP", # accepts DROP, REJECT
+    #         flow_timeouts: {
+    #           tcp_idle_timeout_seconds: 1,
+    #         },
+    #       },
+    #       tls_inspection_configuration_arn: "ResourceArn",
+    #       policy_variables: {
+    #         rule_variables: {
+    #           "RuleVariableName" => {
+    #             definition: ["VariableDefinition"], # required
+    #           },
+    #         },
+    #       },
+    #       route_53_resolved_ip_validation: {
+    #         action: "REJECT", # required, accepts REJECT, DROP, ALERT
+    #         dns_firewall_rule_group_id: "DNSFirewallRuleGroupId", # required
+    #         dns_expiry_exception_policy: "REJECT", # required, accepts REJECT, DROP, CONTINUE
+    #         bypass_destination_validation_ip_ranges: [
+    #           {
+    #             address_definition: "AddressDefinition", # required
+    #           },
+    #         ],
+    #         source_ip_ranges: [
+    #           {
+    #             address_definition: "AddressDefinition", # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     description: "Description",
+    #     dry_run: false,
+    #     encryption_configuration: {
+    #       key_id: "KeyId",
+    #       type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update_token #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_name #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_arn #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_id #=> String
+    #   resp.firewall_policy_v2_response.description #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
+    #   resp.firewall_policy_v2_response.status_message #=> String
+    #   resp.firewall_policy_v2_response.tags #=> Array
+    #   resp.firewall_policy_v2_response.tags[0].key #=> String
+    #   resp.firewall_policy_v2_response.tags[0].value #=> String
+    #   resp.firewall_policy_v2_response.consumed_firewall_rule_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.consumed_ips_rule_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.consumed_ips_domain_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.number_of_associations #=> Integer
+    #   resp.firewall_policy_v2_response.encryption_configuration.key_id #=> String
+    #   resp.firewall_policy_v2_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall_policy_v2_response.errors #=> Array
+    #   resp.firewall_policy_v2_response.errors[0].code #=> String, one of "DNS_FIREWALL_RULE_GROUP_UNAVAILABLE", "ROUTE53_RESOLVED_IP_VALIDATION_MISSING"
+    #   resp.firewall_policy_v2_response.errors[0].message #=> String
+    #   resp.firewall_policy_v2_response.errors[0].resource_id #=> String
+    #   resp.firewall_policy_v2_response.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateFirewallPolicyV2 AWS API Documentation
+    #
+    # @overload update_firewall_policy_v2(params = {})
+    # @param [Hash] params ({})
+    def update_firewall_policy_v2(params = {}, options = {})
+      req = build_request(:update_firewall_policy_v2, params)
+      req.send_request(options)
+    end
+
     # Sets the logging configuration for the specified firewall.
     #
     # To change the logging configuration, retrieve the LoggingConfiguration
@@ -7099,6 +7969,14 @@ module Aws::NetworkFirewall
     #
     #    </note>
     #
+    # @option params [Types::FirewallRuleGroup] :firewall_rule_group
+    #   An object that defines the rules in a firewall engine rule group, for
+    #   use in a Next Generation policy.
+    #
+    # @option params [Types::IpsRuleGroup] :ips_rule_group
+    #   An object that defines the rules in an IPS engine rule group, for use
+    #   in a Next Generation policy.
+    #
     # @option params [String] :rules
     #   A string containing stateful rule group rules specifications in
     #   Suricata flat format, with one rule per line. Use this to import your
@@ -7115,9 +7993,18 @@ module Aws::NetworkFirewall
     #   populated from your string.
     #
     # @option params [String] :type
-    #   Indicates whether the rule group is stateless or stateful. If the rule
-    #   group is stateless, it contains stateless rules. If it is stateful, it
-    #   contains stateful rules.
+    #   Indicates the type of the rule group. Valid values are:
+    #
+    #   * `STATELESS` - Stateless rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `STATEFUL` - Stateful rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `FIREWALL` - Firewall engine rules, for use in a Next Generation
+    #     policy.
+    #
+    #   * `IPS` - IPS engine rules, for use in a Next Generation policy.
     #
     #   <note markdown="1"> This setting is required for requests that do not include the
     #   `RuleGroupARN`.
@@ -7280,8 +8167,86 @@ module Aws::NetworkFirewall
     #         rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
     #       },
     #     },
+    #     firewall_rule_group: {
+    #       rules_source: { # required
+    #         rules_string: "RulesString",
+    #         firewall_rules: [
+    #           {
+    #             action: "ACCEPT", # required, accepts ACCEPT, DROP, REJECT, REJECT_DST, REJECT_BOTH
+    #             action_scope: "FLOW", # required, accepts FLOW, TX, HOOK, PACKET
+    #             hook: "TCP_ALL", # required, accepts TCP_ALL, TCP_FLOW_START, TCP_PRE_FLOW, TCP_PRE_STREAM, SCTP_ALL, SCTP_FLOW_START, SCTP_PRE_FLOW, SCTP_PRE_STREAM, IPV6_ALL, IPV6_FLOW_START, IPV6_PRE_FLOW, IPV6_PRE_STREAM, ICMPV6_ALL, ICMPV6_FLOW_START, ICMPV6_PRE_FLOW, ICMPV6_PRE_STREAM, UDP_ALL, UDP_FLOW_START, UDP_PRE_FLOW, UDP_PRE_STREAM, ICMP_ALL, ICMP_FLOW_START, ICMP_PRE_FLOW, ICMP_PRE_STREAM, ICMPV4_ALL, ICMPV4_FLOW_START, ICMPV4_PRE_FLOW, ICMPV4_PRE_STREAM, IP_ALL, IP_FLOW_START, IP_PRE_FLOW, IP_PRE_STREAM, IPV4_ALL, IPV4_FLOW_START, IPV4_PRE_FLOW, IPV4_PRE_STREAM, TLS_CLIENT_STARTED, TLS_CLIENT_HELLO, TLS_CLIENT_CERT, TLS_CLIENT_DATA, TLS_CLIENT_FINISHED, TLS_SERVER_STARTED, TLS_SERVER_HELLO, TLS_SERVER_CERT, TLS_SERVER_DATA, TLS_SERVER_FINISHED, HTTP1_REQUEST_STARTED, HTTP1_REQUEST_LINE, HTTP1_REQUEST_HEADERS, HTTP1_REQUEST_BODY, HTTP1_REQUEST_TRAILER, HTTP1_REQUEST_COMPLETE, HTTP1_RESPONSE_STARTED, HTTP1_RESPONSE_LINE, HTTP1_RESPONSE_HEADERS, HTTP1_RESPONSE_BODY, HTTP1_RESPONSE_TRAILER, HTTP1_RESPONSE_COMPLETE, HTTP2_STREAM_REQUEST_STARTED, HTTP2_STREAM_REQUEST_HEADERS, HTTP2_STREAM_REQUEST_DATA, HTTP2_STREAM_REQUEST_CLOSED, HTTP2_STREAM_REQUEST_COMPLETE, HTTP2_STREAM_RESPONSE_STARTED, HTTP2_STREAM_RESPONSE_HEADERS, HTTP2_STREAM_RESPONSE_DATA, HTTP2_STREAM_RESPONSE_CLOSED, HTTP2_STREAM_RESPONSE_COMPLETE, HTTP2_GLOBAL_REQUEST_STARTED, HTTP2_GLOBAL_REQUEST_COMPLETE, HTTP2_GLOBAL_RESPONSE_STARTED, HTTP2_GLOBAL_RESPONSE_COMPLETE, DOH2_STREAM_REQUEST_STARTED, DOH2_STREAM_REQUEST_HEADERS, DOH2_STREAM_REQUEST_DATA, DOH2_STREAM_REQUEST_CLOSED, DOH2_STREAM_REQUEST_COMPLETE, DOH2_STREAM_RESPONSE_STARTED, DOH2_STREAM_RESPONSE_HEADERS, DOH2_STREAM_RESPONSE_DATA, DOH2_STREAM_RESPONSE_CLOSED, DOH2_STREAM_RESPONSE_COMPLETE, DOH2_GLOBAL_REQUEST_STARTED, DOH2_GLOBAL_REQUEST_COMPLETE, DOH2_GLOBAL_RESPONSE_STARTED, DOH2_GLOBAL_RESPONSE_COMPLETE, DNS_REQUEST_STARTED, DNS_REQUEST_COMPLETE, DNS_RESPONSE_STARTED, DNS_RESPONSE_COMPLETE, SMTP_REQUEST_STARTED, SMTP_REQUEST_DATA, SMTP_REQUEST_COMPLETE, SMTP_RESPONSE_STARTED, SMTP_RESPONSE_DATA, SMTP_RESPONSE_COMPLETE, FTP_REQUEST_STARTED, FTP_REQUEST_COMPLETE, FTP_RESPONSE_STARTED, FTP_RESPONSE_COMPLETE, FTP_DATA_REQUEST_STARTED, FTP_DATA_REQUEST_COMPLETE, FTP_DATA_RESPONSE_STARTED, FTP_DATA_RESPONSE_COMPLETE, SMB_REQUEST_STARTED, SMB_REQUEST_COMPLETE, SMB_RESPONSE_STARTED, SMB_RESPONSE_COMPLETE, DCERPC_REQUEST_STARTED, DCERPC_REQUEST_COMPLETE, DCERPC_RESPONSE_STARTED, DCERPC_RESPONSE_COMPLETE, NFS_REQUEST_STARTED, NFS_REQUEST_COMPLETE, NFS_RESPONSE_STARTED, NFS_RESPONSE_COMPLETE, KRB5_REQUEST_STARTED, KRB5_REQUEST_COMPLETE, KRB5_RESPONSE_STARTED, KRB5_RESPONSE_COMPLETE, IKE_REQUEST_STARTED, IKE_REQUEST_COMPLETE, IKE_RESPONSE_STARTED, IKE_RESPONSE_COMPLETE, TFTP_REQUEST_STARTED, TFTP_REQUEST_COMPLETE, TFTP_RESPONSE_STARTED, TFTP_RESPONSE_COMPLETE, DHCP_REQUEST_STARTED, DHCP_REQUEST_COMPLETE, DHCP_RESPONSE_STARTED, DHCP_RESPONSE_COMPLETE, QUIC_REQUEST_STARTED, QUIC_REQUEST_COMPLETE, QUIC_RESPONSE_STARTED, QUIC_RESPONSE_COMPLETE, RDP_REQUEST_STARTED, RDP_REQUEST_COMPLETE, RDP_RESPONSE_STARTED, RDP_RESPONSE_COMPLETE, RFB_REQUEST_STARTED, RFB_REQUEST_COMPLETE, RFB_RESPONSE_STARTED, RFB_RESPONSE_COMPLETE, MQTT_REQUEST_STARTED, MQTT_REQUEST_COMPLETE, MQTT_RESPONSE_STARTED, MQTT_RESPONSE_COMPLETE, PGSQL_REQUEST_STARTED, PGSQL_REQUEST_COMPLETE, PGSQL_RESPONSE_STARTED, PGSQL_RESPONSE_COMPLETE, SNMP_REQUEST_STARTED, SNMP_REQUEST_COMPLETE, SNMP_RESPONSE_STARTED, SNMP_RESPONSE_COMPLETE, NTP_REQUEST_STARTED, NTP_REQUEST_COMPLETE, NTP_RESPONSE_STARTED, NTP_RESPONSE_COMPLETE, TELNET_REQUEST_STARTED, TELNET_REQUEST_COMPLETE, TELNET_RESPONSE_STARTED, TELNET_RESPONSE_COMPLETE, WEBSOCKET_REQUEST_STARTED, WEBSOCKET_REQUEST_COMPLETE, WEBSOCKET_RESPONSE_STARTED, WEBSOCKET_RESPONSE_COMPLETE, LDAP_REQUEST_STARTED, LDAP_REQUEST_COMPLETE, LDAP_RESPONSE_STARTED, LDAP_RESPONSE_COMPLETE, POP3_REQUEST_STARTED, POP3_REQUEST_COMPLETE, POP3_RESPONSE_STARTED, POP3_RESPONSE_COMPLETE, MDNS_REQUEST_STARTED, MDNS_REQUEST_COMPLETE, MDNS_RESPONSE_STARTED, MDNS_RESPONSE_COMPLETE, BITTORRENT_DHT_REQUEST_STARTED, BITTORRENT_DHT_REQUEST_COMPLETE, BITTORRENT_DHT_RESPONSE_STARTED, BITTORRENT_DHT_RESPONSE_COMPLETE, DNP3_REQUEST_STARTED, DNP3_REQUEST_COMPLETE, DNP3_RESPONSE_STARTED, DNP3_RESPONSE_COMPLETE, SSH_REQUEST_IN_PROGRESS, SSH_REQUEST_BANNER_WAIT_EOL, SSH_REQUEST_BANNER_DONE, SSH_REQUEST_FINISHED, SSH_RESPONSE_IN_PROGRESS, SSH_RESPONSE_BANNER_WAIT_EOL, SSH_RESPONSE_BANNER_DONE, SSH_RESPONSE_FINISHED
+    #             protocol: "IP", # required, accepts IP, TCP, UDP, ICMP, HTTP, FTP, TLS, SMB, DNS, DCERPC, SSH, SMTP, MSN, KRB5, IKEV2, TFTP, NTP, DHCP, HTTP2, QUIC, ICMPV4, ICMPV6, SCTP, IPV4, IPV6, DOH2, FTP_DATA, NFS, RDP, RFB, MQTT, PGSQL, SNMP, TELNET, WEBSOCKET, LDAP, POP3, MDNS, BITTORRENT_DHT, DNP3
+    #             source_i_ps: "Source",
+    #             dest_i_ps: "Destination",
+    #             source_ports: "Port",
+    #             dest_ports: "Port",
+    #             rule_options: [
+    #               {
+    #                 keyword: "Keyword", # required
+    #                 settings: ["Setting"],
+    #               },
+    #             ],
+    #             accept_prior_hooks: false,
+    #             alert_enabled: false,
+    #             bypass_ips_enabled: false,
+    #             rule_metadata: {
+    #               rule_enabled: false,
+    #               rule_description: "RuleDescriptionText",
+    #             },
+    #           },
+    #         ],
+    #         rules_source_list: {
+    #           targets: ["CollectionMember_String"], # required
+    #           target_types: ["TLS_SNI"], # required, accepts TLS_SNI, HTTP_HOST, AWS_ROUTE_53_RESOLVED_DOMAIN
+    #           generated_rules_type: "ALLOWLIST", # required, accepts ALLOWLIST, DENYLIST, REJECTLIST, ALERTLIST
+    #         },
+    #       },
+    #       rule_variables: {
+    #         ip_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["VariableDefinition"], # required
+    #           },
+    #         },
+    #         port_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["VariableDefinition"],
+    #           },
+    #         },
+    #       },
+    #       reference_sets: {
+    #         ip_set_references: {
+    #           "IPSetReferenceName" => {
+    #             reference_arn: "ResourceArn",
+    #           },
+    #         },
+    #       },
+    #     },
+    #     ips_rule_group: {
+    #       rules_source: { # required
+    #         rules_string: "RulesString",
+    #       },
+    #       rule_variables: {
+    #         ip_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["VariableDefinition"], # required
+    #           },
+    #         },
+    #         port_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["VariableDefinition"],
+    #           },
+    #         },
+    #       },
+    #       reference_sets: {
+    #         ip_set_references: {
+    #           "IPSetReferenceName" => {
+    #             reference_arn: "ResourceArn",
+    #           },
+    #         },
+    #       },
+    #     },
     #     rules: "RulesString",
-    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN
+    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN, FIREWALL, IPS
     #     description: "Description",
     #     dry_run: false,
     #     encryption_configuration: {
@@ -7305,7 +8270,7 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.rule_group_name #=> String
     #   resp.rule_group_response.rule_group_id #=> String
     #   resp.rule_group_response.description #=> String
-    #   resp.rule_group_response.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN"
+    #   resp.rule_group_response.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN", "FIREWALL", "IPS"
     #   resp.rule_group_response.capacity #=> Integer
     #   resp.rule_group_response.rule_group_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
     #   resp.rule_group_response.tags #=> Array
@@ -7582,7 +8547,7 @@ module Aws::NetworkFirewall
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.108.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

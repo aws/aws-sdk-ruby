@@ -55,7 +55,7 @@ module Aws::BCMDashboards
   autoload :EndpointProvider, 'aws-sdk-bcmdashboards/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-bcmdashboards/endpoints'
 
-  GEM_VERSION = '1.25.0'
+  GEM_VERSION = '1.26.0'
 
 end
 

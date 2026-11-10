@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2026-11-10)
+------------------
+
+* Feature - This release adds the freeTrialSummary.trialEndTime field to DescribeAgreement and the freeTrialEndTime field to SearchAgreements results, so you can see when an agreement's free trial ends.
+
 1.55.0 (2026-11-09)
 ------------------
 

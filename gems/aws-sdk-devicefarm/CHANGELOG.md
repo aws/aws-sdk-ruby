@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2026-11-10)
+------------------
+
+* Feature - Adds the NONE insights type to disable insights generation for a run, a testPackageArn field in run details, and a new artifact type for device connect command logs.
+
 1.120.0 (2026-11-09)
 ------------------
 

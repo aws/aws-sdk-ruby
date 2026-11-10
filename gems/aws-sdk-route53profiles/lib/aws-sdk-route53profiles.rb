@@ -49,12 +49,13 @@ module Aws::Route53Profiles
   end
   autoload :Client, 'aws-sdk-route53profiles/client'
   autoload :Errors, 'aws-sdk-route53profiles/errors'
+  autoload :Waiters, 'aws-sdk-route53profiles/waiters'
   autoload :Resource, 'aws-sdk-route53profiles/resource'
   autoload :EndpointParameters, 'aws-sdk-route53profiles/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-route53profiles/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-route53profiles/endpoints'
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.48.0'
 
 end
 

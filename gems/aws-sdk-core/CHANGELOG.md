@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+3.267.0 (2026-11-10)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Updated Aws::Signin::Client with the latest API changes.
+
 * Feature - AWS SDK clients now use `standard` retry mode by default, providing consistent retry quotas and backoff behavior across AWS services. To continue using the previous behavior, set the client's `retry_mode` to `legacy` or set `AWS_RETRY_MODE=legacy`. The `AWS_NEW_RETRIES_2026` environment variable is no longer used.
 
 3.266.0 (2026-11-09)

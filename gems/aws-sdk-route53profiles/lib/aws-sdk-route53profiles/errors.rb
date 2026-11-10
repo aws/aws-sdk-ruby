@@ -87,6 +87,10 @@ module Aws::Route53Profiles
       def message
         @message || @data[:message]
       end
+
+      def retryable?
+        true
+      end
     end
 
     class InvalidNextTokenException < ServiceError
@@ -114,13 +118,13 @@ module Aws::Route53Profiles
       end
 
       # @return [String]
-      def field_name
-        @data[:field_name]
+      def message
+        @message || @data[:message]
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
+      def field_name
+        @data[:field_name]
       end
     end
 
@@ -196,6 +200,14 @@ module Aws::Route53Profiles
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      def retryable?
+        true
+      end
+
+      def throttling?
+        true
       end
     end
 

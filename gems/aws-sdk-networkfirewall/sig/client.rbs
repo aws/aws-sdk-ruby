@@ -291,6 +291,30 @@ module Aws
                                   ) -> _CreateFirewallPolicyResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFirewallPolicyResponseSuccess
 
+      interface _CreateFirewallPolicyV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFirewallPolicyV2Response]
+        def update_token: () -> ::String
+        def firewall_policy_v2_response: () -> Types::FirewallPolicyV2Response
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#create_firewall_policy_v2-instance_method
+      def create_firewall_policy_v2: (
+                                       firewall_policy_v2_name: ::String,
+                                       firewall_policy_v2: Params::firewall_policy_v2,
+                                       ?description: ::String,
+                                       ?tags: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String
+                                         }
+                                       ],
+                                       ?dry_run: bool,
+                                       ?encryption_configuration: {
+                                         key_id: ::String?,
+                                         type: ("CUSTOMER_KMS" | "AWS_OWNED_KMS_KEY")
+                                       }
+                                     ) -> _CreateFirewallPolicyV2ResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFirewallPolicyV2ResponseSuccess
+
       interface _CreateProxyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateProxyResponse]
         def proxy: () -> Types::Proxy
@@ -407,8 +431,10 @@ module Aws
       def create_rule_group: (
                                rule_group_name: ::String,
                                ?rule_group: Params::rule_group,
+                               ?firewall_rule_group: Params::firewall_rule_group,
+                               ?ips_rule_group: Params::ips_rule_group,
                                ?rules: ::String,
-                               type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN"),
+                               type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN" | "FIREWALL" | "IPS"),
                                ?description: ::String,
                                capacity: ::Integer,
                                ?tags: Array[
@@ -515,6 +541,17 @@ module Aws
                                   ) -> _DeleteFirewallPolicyResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFirewallPolicyResponseSuccess
 
+      interface _DeleteFirewallPolicyV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFirewallPolicyV2Response]
+        def firewall_policy_v2_response: () -> Types::FirewallPolicyV2Response
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#delete_firewall_policy_v2-instance_method
+      def delete_firewall_policy_v2: (
+                                       ?firewall_policy_v2_arn: ::String,
+                                       ?firewall_policy_v2_name: ::String
+                                     ) -> _DeleteFirewallPolicyV2ResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFirewallPolicyV2ResponseSuccess
+
       interface _DeleteNetworkFirewallTransitGatewayAttachmentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNetworkFirewallTransitGatewayAttachmentResponse]
         def transit_gateway_attachment_id: () -> ::String
@@ -593,7 +630,7 @@ module Aws
       def delete_rule_group: (
                                ?rule_group_name: ::String,
                                ?rule_group_arn: ::String,
-                               ?type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN")
+                               ?type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN" | "FIREWALL" | "IPS")
                              ) -> _DeleteRuleGroupResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRuleGroupResponseSuccess
 
@@ -679,6 +716,20 @@ module Aws
                                       ?firewall_policy_arn: ::String
                                     ) -> _DescribeFirewallPolicyResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFirewallPolicyResponseSuccess
+
+      interface _DescribeFirewallPolicyV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFirewallPolicyV2Response]
+        def update_token: () -> ::String
+        def firewall_policy_v2_response: () -> Types::FirewallPolicyV2Response
+        def firewall_policy_v2: () -> Types::FirewallPolicyV2
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_firewall_policy_v2-instance_method
+      def describe_firewall_policy_v2: (
+                                         ?firewall_policy_v2_arn: ::String,
+                                         ?firewall_policy_v2_name: ::String,
+                                         ?rule_output_format: ("FIREWALL_RULES" | "RULES_STRING")
+                                       ) -> _DescribeFirewallPolicyV2ResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFirewallPolicyV2ResponseSuccess
 
       interface _DescribeFlowOperationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFlowOperationResponse]
@@ -781,14 +832,17 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRuleGroupResponse]
         def update_token: () -> ::String
         def rule_group: () -> Types::RuleGroup
+        def firewall_rule_group: () -> Types::FirewallRuleGroup
+        def ips_rule_group: () -> Types::IpsRuleGroup
         def rule_group_response: () -> Types::RuleGroupResponse
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_rule_group-instance_method
       def describe_rule_group: (
                                  ?rule_group_name: ::String,
                                  ?rule_group_arn: ::String,
-                                 ?type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN"),
-                                 ?analyze_rule_group: bool
+                                 ?type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN" | "FIREWALL" | "IPS"),
+                                 ?analyze_rule_group: bool,
+                                 ?rule_output_format: ("FIREWALL_RULES" | "RULES_STRING")
                                ) -> _DescribeRuleGroupResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRuleGroupResponseSuccess
 
@@ -797,7 +851,7 @@ module Aws
         def rule_group_arn: () -> ::String
         def rule_group_name: () -> ::String
         def description: () -> ::String
-        def type: () -> ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN")
+        def type: () -> ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN" | "FIREWALL" | "IPS")
         def capacity: () -> ::Integer
         def stateful_rule_options: () -> Types::StatefulRuleOptions
         def last_modified_time: () -> ::Time
@@ -809,7 +863,7 @@ module Aws
       def describe_rule_group_metadata: (
                                           ?rule_group_name: ::String,
                                           ?rule_group_arn: ::String,
-                                          ?type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN")
+                                          ?type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN" | "FIREWALL" | "IPS")
                                         ) -> _DescribeRuleGroupMetadataResponseSuccess
                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRuleGroupMetadataResponseSuccess
 
@@ -823,7 +877,7 @@ module Aws
       def describe_rule_group_summary: (
                                          ?rule_group_name: ::String,
                                          ?rule_group_arn: ::String,
-                                         ?type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN")
+                                         ?type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN" | "FIREWALL" | "IPS")
                                        ) -> _DescribeRuleGroupSummaryResponseSuccess
                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRuleGroupSummaryResponseSuccess
 
@@ -960,6 +1014,18 @@ module Aws
                                   ) -> _ListFirewallPoliciesResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFirewallPoliciesResponseSuccess
 
+      interface _ListFirewallPoliciesV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFirewallPoliciesV2Response]
+        def next_token: () -> ::String
+        def firewall_policies_v2: () -> ::Array[Types::FirewallPolicyV2Metadata]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#list_firewall_policies_v2-instance_method
+      def list_firewall_policies_v2: (
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListFirewallPoliciesV2ResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFirewallPoliciesV2ResponseSuccess
+
       interface _ListFirewallsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListFirewallsResponse]
         def next_token: () -> ::String
@@ -1066,7 +1132,7 @@ module Aws
                               ?scope: ("MANAGED" | "ACCOUNT"),
                               ?managed_type: ("AWS_MANAGED_THREAT_SIGNATURES" | "AWS_MANAGED_DOMAIN_LISTS" | "ACTIVE_THREAT_DEFENSE" | "PARTNER_MANAGED"),
                               ?subscription_status: ("NOT_SUBSCRIBED" | "SUBSCRIBED"),
-                              ?type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN")
+                              ?type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN" | "FIREWALL" | "IPS")
                             ) -> _ListRuleGroupsResponseSuccess
                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRuleGroupsResponseSuccess
 
@@ -1363,6 +1429,26 @@ module Aws
                                                     ) -> _UpdateFirewallPolicyChangeProtectionResponseSuccess
                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallPolicyChangeProtectionResponseSuccess
 
+      interface _UpdateFirewallPolicyV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFirewallPolicyV2Response]
+        def update_token: () -> ::String
+        def firewall_policy_v2_response: () -> Types::FirewallPolicyV2Response
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#update_firewall_policy_v2-instance_method
+      def update_firewall_policy_v2: (
+                                       update_token: ::String,
+                                       ?firewall_policy_v2_arn: ::String,
+                                       ?firewall_policy_v2_name: ::String,
+                                       firewall_policy_v2: Params::firewall_policy_v2,
+                                       ?description: ::String,
+                                       ?dry_run: bool,
+                                       ?encryption_configuration: {
+                                         key_id: ::String?,
+                                         type: ("CUSTOMER_KMS" | "AWS_OWNED_KMS_KEY")
+                                       }
+                                     ) -> _UpdateFirewallPolicyV2ResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallPolicyV2ResponseSuccess
+
       interface _UpdateLoggingConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLoggingConfigurationResponse]
         def firewall_arn: () -> ::String
@@ -1542,8 +1628,10 @@ module Aws
                                ?rule_group_arn: ::String,
                                ?rule_group_name: ::String,
                                ?rule_group: Params::rule_group,
+                               ?firewall_rule_group: Params::firewall_rule_group,
+                               ?ips_rule_group: Params::ips_rule_group,
                                ?rules: ::String,
-                               ?type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN"),
+                               ?type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN" | "FIREWALL" | "IPS"),
                                ?description: ::String,
                                ?dry_run: bool,
                                ?encryption_configuration: {

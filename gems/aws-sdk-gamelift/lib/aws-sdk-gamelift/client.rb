@@ -264,7 +264,8 @@ module Aws::GameLift
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::GameLift
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -2811,9 +2812,8 @@ module Aws::GameLift
     # Container
     #
     # Creates a placement queue that processes requests for new game
-    # sessions. A queue uses FleetIQ algorithms to locate the best available
-    # placement locations for a new game session, and then prompts the game
-    # server process to start a new game session.
+    # sessions. A queue finds the best available game server, then prompts
+    # it to start a new game session.
     #
     # A game session queue is configured with a set of destinations (Amazon
     # GameLift Servers fleets or aliases) that determine where the queue can
@@ -2861,6 +2861,12 @@ module Aws::GameLift
     #   * Required parameters `Name` and `Destinations`
     #
     #   * `PlayerLatencyPolicies`
+    # * Create a queue that delivers game session placement insight logs to
+    #   one or more log destinations.
+    #
+    #   * Required parameters `Name` and `Destinations`
+    #
+    #   * `LogConfiguration`
     #
     # **Results**
     #
@@ -2928,9 +2934,9 @@ module Aws::GameLift
     #
     # @option params [Types::PriorityConfiguration] :priority_configuration
     #   Custom settings to use when prioritizing destinations and locations
-    #   for game session placements. This configuration replaces the FleetIQ
-    #   default prioritization process. Priority types that are not explicitly
-    #   named will be automatically applied at the end of the prioritization
+    #   for game session placements. This configuration replaces the default
+    #   prioritization process. Priority types that are not explicitly named
+    #   will be automatically applied at the end of the prioritization
     #   process.
     #
     # @option params [String] :custom_event_data
@@ -2957,6 +2963,13 @@ module Aws::GameLift
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @option params [Types::GameSessionQueueLogConfiguration] :log_configuration
+    #   An optional configuration that delivers game session placement insight
+    #   logs to one or more destinations of your choice. Use these logs to
+    #   diagnose why a game session placement is `FULFILLED`, `CANCELLED`,
+    #   `TIMED_OUT`, or `FAILED`, which locations were evaluated, and the
+    #   latency and cost factors that influenced each decision.
     #
     # @return [Types::CreateGameSessionQueueOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2993,6 +3006,14 @@ module Aws::GameLift
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     log_configuration: {
+    #       delivery_destinations: [ # required
+    #         {
+    #           log_destination: "CLOUDWATCH", # required, accepts CLOUDWATCH, S3, FIREHOSE
+    #           destination_arn: "DeliveryDestinationArnStringModel",
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -3013,6 +3034,9 @@ module Aws::GameLift
     #   resp.game_session_queue.priority_configuration.location_order[0] #=> String
     #   resp.game_session_queue.custom_event_data #=> String
     #   resp.game_session_queue.notification_target #=> String
+    #   resp.game_session_queue.log_configuration.delivery_destinations #=> Array
+    #   resp.game_session_queue.log_configuration.delivery_destinations[0].log_destination #=> String, one of "CLOUDWATCH", "S3", "FIREHOSE"
+    #   resp.game_session_queue.log_configuration.delivery_destinations[0].destination_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSessionQueue AWS API Documentation
     #
@@ -6650,6 +6674,9 @@ module Aws::GameLift
     #   resp.game_session_queues[0].priority_configuration.location_order[0] #=> String
     #   resp.game_session_queues[0].custom_event_data #=> String
     #   resp.game_session_queues[0].notification_target #=> String
+    #   resp.game_session_queues[0].log_configuration.delivery_destinations #=> Array
+    #   resp.game_session_queues[0].log_configuration.delivery_destinations[0].log_destination #=> String, one of "CLOUDWATCH", "S3", "FIREHOSE"
+    #   resp.game_session_queues[0].log_configuration.delivery_destinations[0].destination_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionQueues AWS API Documentation
@@ -12550,9 +12577,9 @@ module Aws::GameLift
     #
     # @option params [Types::PriorityConfiguration] :priority_configuration
     #   Custom settings to use when prioritizing destinations and locations
-    #   for game session placements. This configuration replaces the FleetIQ
-    #   default prioritization process. Priority types that are not explicitly
-    #   named will be automatically applied at the end of the prioritization
+    #   for game session placements. This configuration replaces the default
+    #   prioritization process. Priority types that are not explicitly named
+    #   will be automatically applied at the end of the prioritization
     #   process. To remove an existing priority configuration, pass in an
     #   empty set.
     #
@@ -12568,6 +12595,14 @@ module Aws::GameLift
     #
     #
     #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html
+    #
+    # @option params [Array<Types::LogDeliveryDestination>] :add_log_delivery_destinations
+    #   Log delivery destinations to add to the queue's log configuration
+    #   (`LogConfiguration`).
+    #
+    # @option params [Array<Types::LogDeliveryDestination>] :remove_log_delivery_destinations
+    #   Log delivery destinations to remove from the queue's log
+    #   configuration (`LogConfiguration`).
     #
     # @return [Types::UpdateGameSessionQueueOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12598,6 +12633,18 @@ module Aws::GameLift
     #     },
     #     custom_event_data: "QueueCustomEventData",
     #     notification_target: "QueueSnsArnStringModel",
+    #     add_log_delivery_destinations: [
+    #       {
+    #         log_destination: "CLOUDWATCH", # required, accepts CLOUDWATCH, S3, FIREHOSE
+    #         destination_arn: "DeliveryDestinationArnStringModel",
+    #       },
+    #     ],
+    #     remove_log_delivery_destinations: [
+    #       {
+    #         log_destination: "CLOUDWATCH", # required, accepts CLOUDWATCH, S3, FIREHOSE
+    #         destination_arn: "DeliveryDestinationArnStringModel",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -12618,6 +12665,9 @@ module Aws::GameLift
     #   resp.game_session_queue.priority_configuration.location_order[0] #=> String
     #   resp.game_session_queue.custom_event_data #=> String
     #   resp.game_session_queue.notification_target #=> String
+    #   resp.game_session_queue.log_configuration.delivery_destinations #=> Array
+    #   resp.game_session_queue.log_configuration.delivery_destinations[0].log_destination #=> String, one of "CLOUDWATCH", "S3", "FIREHOSE"
+    #   resp.game_session_queue.log_configuration.delivery_destinations[0].destination_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSessionQueue AWS API Documentation
     #
@@ -13076,7 +13126,7 @@ module Aws::GameLift
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.146.0'
+      context[:gem_version] = '1.147.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

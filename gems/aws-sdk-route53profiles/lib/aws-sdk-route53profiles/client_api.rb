@@ -53,6 +53,7 @@ module Aws::Route53Profiles
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    Priority = Shapes::IntegerShape.new(name: 'Priority')
     Profile = Shapes::StructureShape.new(name: 'Profile')
     ProfileAssociation = Shapes::StructureShape.new(name: 'ProfileAssociation')
     ProfileAssociations = Shapes::ListShape.new(name: 'ProfileAssociations')
@@ -79,6 +80,8 @@ module Aws::Route53Profiles
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateProfileAssociationRequest = Shapes::StructureShape.new(name: 'UpdateProfileAssociationRequest')
+    UpdateProfileAssociationResponse = Shapes::StructureShape.new(name: 'UpdateProfileAssociationResponse')
     UpdateProfileResourceAssociationRequest = Shapes::StructureShape.new(name: 'UpdateProfileResourceAssociationRequest')
     UpdateProfileResourceAssociationResponse = Shapes::StructureShape.new(name: 'UpdateProfileResourceAssociationResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
@@ -86,18 +89,19 @@ module Aws::Route53Profiles
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
-    AssociateProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     AssociateProfileRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ProfileId"))
     AssociateProfileRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
+    AssociateProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     AssociateProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    AssociateProfileRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority"))
     AssociateProfileRequest.struct_class = Types::AssociateProfileRequest
 
     AssociateProfileResponse.add_member(:profile_association, Shapes::ShapeRef.new(shape: ProfileAssociation, location_name: "ProfileAssociation"))
     AssociateProfileResponse.struct_class = Types::AssociateProfileResponse
 
-    AssociateResourceToProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     AssociateResourceToProfileRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ProfileId"))
     AssociateResourceToProfileRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
+    AssociateResourceToProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     AssociateResourceToProfileRequest.add_member(:resource_properties, Shapes::ShapeRef.new(shape: ResourceProperties, location_name: "ResourceProperties"))
     AssociateResourceToProfileRequest.struct_class = Types::AssociateResourceToProfileRequest
 
@@ -107,8 +111,8 @@ module Aws::Route53Profiles
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreatorRequestId, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    CreateProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreatorRequestId, required: true, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateProfileRequest.struct_class = Types::CreateProfileRequest
 
@@ -159,40 +163,41 @@ module Aws::Route53Profiles
     InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
 
-    InvalidParameterException.add_member(:field_name, Shapes::ShapeRef.new(shape: String, location_name: "FieldName"))
     InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "Message"))
+    InvalidParameterException.add_member(:field_name, Shapes::ShapeRef.new(shape: String, location_name: "FieldName"))
     InvalidParameterException.struct_class = Types::InvalidParameterException
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     LimitExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
+    ListProfileAssociationsRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location: "querystring", location_name: "resourceId"))
+    ListProfileAssociationsRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: ResourceId, location: "querystring", location_name: "profileId"))
     ListProfileAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListProfileAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
-    ListProfileAssociationsRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: ResourceId, location: "querystring", location_name: "profileId"))
-    ListProfileAssociationsRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location: "querystring", location_name: "resourceId"))
     ListProfileAssociationsRequest.struct_class = Types::ListProfileAssociationsRequest
 
-    ListProfileAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListProfileAssociationsResponse.add_member(:profile_associations, Shapes::ShapeRef.new(shape: ProfileAssociations, location_name: "ProfileAssociations"))
+    ListProfileAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListProfileAssociationsResponse.struct_class = Types::ListProfileAssociationsResponse
 
-    ListProfileResourceAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
-    ListProfileResourceAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListProfileResourceAssociationsRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "ProfileId"))
     ListProfileResourceAssociationsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "resourceType"))
+    ListProfileResourceAssociationsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, location: "querystring", location_name: "resourceArn"))
+    ListProfileResourceAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListProfileResourceAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListProfileResourceAssociationsRequest.struct_class = Types::ListProfileResourceAssociationsRequest
 
-    ListProfileResourceAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListProfileResourceAssociationsResponse.add_member(:profile_resource_associations, Shapes::ShapeRef.new(shape: ProfileResourceAssociations, location_name: "ProfileResourceAssociations"))
+    ListProfileResourceAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListProfileResourceAssociationsResponse.struct_class = Types::ListProfileResourceAssociationsResponse
 
     ListProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListProfilesRequest.struct_class = Types::ListProfilesRequest
 
-    ListProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListProfilesResponse.add_member(:profile_summaries, Shapes::ShapeRef.new(shape: ProfileSummaryList, location_name: "ProfileSummaries"))
+    ListProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListProfilesResponse.struct_class = Types::ListProfilesResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "ResourceArn"))
@@ -201,48 +206,49 @@ module Aws::Route53Profiles
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
-    Profile.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
-    Profile.add_member(:client_token, Shapes::ShapeRef.new(shape: CreatorRequestId, location_name: "ClientToken"))
-    Profile.add_member(:creation_time, Shapes::ShapeRef.new(shape: Rfc3339Timestamp, location_name: "CreationTime"))
     Profile.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
-    Profile.add_member(:modification_time, Shapes::ShapeRef.new(shape: Rfc3339Timestamp, location_name: "ModificationTime"))
+    Profile.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     Profile.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     Profile.add_member(:owner_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "OwnerId"))
-    Profile.add_member(:share_status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "ShareStatus"))
     Profile.add_member(:status, Shapes::ShapeRef.new(shape: ProfileStatus, location_name: "Status"))
     Profile.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    Profile.add_member(:share_status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "ShareStatus"))
+    Profile.add_member(:creation_time, Shapes::ShapeRef.new(shape: Rfc3339Timestamp, location_name: "CreationTime"))
+    Profile.add_member(:modification_time, Shapes::ShapeRef.new(shape: Rfc3339Timestamp, location_name: "ModificationTime"))
+    Profile.add_member(:client_token, Shapes::ShapeRef.new(shape: CreatorRequestId, location_name: "ClientToken"))
     Profile.struct_class = Types::Profile
 
-    ProfileAssociation.add_member(:creation_time, Shapes::ShapeRef.new(shape: Rfc3339Timestamp, location_name: "CreationTime"))
     ProfileAssociation.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
-    ProfileAssociation.add_member(:modification_time, Shapes::ShapeRef.new(shape: Rfc3339Timestamp, location_name: "ModificationTime"))
     ProfileAssociation.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     ProfileAssociation.add_member(:owner_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "OwnerId"))
     ProfileAssociation.add_member(:profile_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ProfileId"))
     ProfileAssociation.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId"))
     ProfileAssociation.add_member(:status, Shapes::ShapeRef.new(shape: ProfileStatus, location_name: "Status"))
     ProfileAssociation.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    ProfileAssociation.add_member(:creation_time, Shapes::ShapeRef.new(shape: Rfc3339Timestamp, location_name: "CreationTime"))
+    ProfileAssociation.add_member(:modification_time, Shapes::ShapeRef.new(shape: Rfc3339Timestamp, location_name: "ModificationTime"))
+    ProfileAssociation.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority"))
     ProfileAssociation.struct_class = Types::ProfileAssociation
 
     ProfileAssociations.member = Shapes::ShapeRef.new(shape: ProfileAssociation)
 
-    ProfileResourceAssociation.add_member(:creation_time, Shapes::ShapeRef.new(shape: Rfc3339Timestamp, location_name: "CreationTime"))
     ProfileResourceAssociation.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
-    ProfileResourceAssociation.add_member(:modification_time, Shapes::ShapeRef.new(shape: Rfc3339Timestamp, location_name: "ModificationTime"))
     ProfileResourceAssociation.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     ProfileResourceAssociation.add_member(:owner_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "OwnerId"))
     ProfileResourceAssociation.add_member(:profile_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ProfileId"))
     ProfileResourceAssociation.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ResourceArn"))
-    ProfileResourceAssociation.add_member(:resource_properties, Shapes::ShapeRef.new(shape: ResourceProperties, location_name: "ResourceProperties"))
     ProfileResourceAssociation.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    ProfileResourceAssociation.add_member(:resource_properties, Shapes::ShapeRef.new(shape: ResourceProperties, location_name: "ResourceProperties"))
     ProfileResourceAssociation.add_member(:status, Shapes::ShapeRef.new(shape: ProfileStatus, location_name: "Status"))
     ProfileResourceAssociation.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    ProfileResourceAssociation.add_member(:creation_time, Shapes::ShapeRef.new(shape: Rfc3339Timestamp, location_name: "CreationTime"))
+    ProfileResourceAssociation.add_member(:modification_time, Shapes::ShapeRef.new(shape: Rfc3339Timestamp, location_name: "ModificationTime"))
     ProfileResourceAssociation.struct_class = Types::ProfileResourceAssociation
 
     ProfileResourceAssociations.member = Shapes::ShapeRef.new(shape: ProfileResourceAssociation)
 
-    ProfileSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     ProfileSummary.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
+    ProfileSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     ProfileSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     ProfileSummary.add_member(:share_status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "ShareStatus"))
     ProfileSummary.struct_class = Types::ProfileSummary
@@ -283,8 +289,16 @@ module Aws::Route53Profiles
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
-    UpdateProfileResourceAssociationRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
+    UpdateProfileAssociationRequest.add_member(:profile_association_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "ProfileAssociationId"))
+    UpdateProfileAssociationRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
+    UpdateProfileAssociationRequest.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority"))
+    UpdateProfileAssociationRequest.struct_class = Types::UpdateProfileAssociationRequest
+
+    UpdateProfileAssociationResponse.add_member(:profile_association, Shapes::ShapeRef.new(shape: ProfileAssociation, required: true, location_name: "ProfileAssociation"))
+    UpdateProfileAssociationResponse.struct_class = Types::UpdateProfileAssociationResponse
+
     UpdateProfileResourceAssociationRequest.add_member(:profile_resource_association_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "ProfileResourceAssociationId"))
+    UpdateProfileResourceAssociationRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     UpdateProfileResourceAssociationRequest.add_member(:resource_properties, Shapes::ShapeRef.new(shape: ResourceProperties, location_name: "ResourceProperties"))
     UpdateProfileResourceAssociationRequest.struct_class = Types::UpdateProfileResourceAssociationRequest
 
@@ -302,8 +316,8 @@ module Aws::Route53Profiles
 
       api.metadata = {
         "apiVersion" => "2018-05-10",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "route53profiles",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],
         "serviceFullName" => "Route 53 Profiles",
@@ -336,8 +350,8 @@ module Aws::Route53Profiles
         o.input = Shapes::ShapeRef.new(shape: AssociateResourceToProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateResourceToProfileResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -392,8 +406,8 @@ module Aws::Route53Profiles
         o.input = Shapes::ShapeRef.new(shape: DisassociateResourceFromProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateResourceFromProfileResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -535,6 +549,22 @@ module Aws::Route53Profiles
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:update_profile_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateProfileAssociation"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/profileassociation/{ProfileAssociationId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateProfileAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateProfileAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:update_profile_resource_association, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateProfileResourceAssociation"
         o.http_method = "PATCH"
@@ -542,8 +572,8 @@ module Aws::Route53Profiles
         o.input = Shapes::ShapeRef.new(shape: UpdateProfileResourceAssociationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateProfileResourceAssociationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

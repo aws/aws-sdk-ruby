@@ -391,6 +391,30 @@ module Aws::PCS
 
     # A compute node group associated with a cluster.
     #
+    # @!attribute [rw] ami_id
+    #   The ID of the Amazon Machine Image (AMI) that PCS uses to launch
+    #   instances. If not present, PCS uses the AMI ID specified in the
+    #   custom launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The IDs of the EC2 security groups configured directly on the
+    #   compute node group. PCS uses these security groups instead of the
+    #   security groups in the custom launch template. This value isn't
+    #   present if security groups aren't configured directly on the
+    #   compute node group. In that case, PCS uses the security groups in
+    #   the custom launch template.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ssh_key_name
+    #   The name of the EC2 key pair configured directly on the compute node
+    #   group. PCS uses this key pair instead of the key pair in the custom
+    #   launch template. This value isn't present if a key pair isn't
+    #   configured directly on the compute node group. In that case, PCS
+    #   uses the key pair in the custom launch template, if one is
+    #   specified.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name that identifies the compute node group.
     #   @return [String]
@@ -437,12 +461,6 @@ module Aws::PCS
     #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html
     #   @return [String]
     #
-    # @!attribute [rw] ami_id
-    #   The ID of the Amazon Machine Image (AMI) that PCS uses to launch
-    #   instances. If not provided, PCS uses the AMI ID specified in the
-    #   custom launch template.
-    #   @return [String]
-    #
     # @!attribute [rw] subnet_ids
     #   The list of subnet IDs where instances are provisioned by the
     #   compute node group. The subnets must be in the same VPC as the
@@ -472,8 +490,23 @@ module Aws::PCS
     #   [4]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-odcr.html
     #   @return [String]
     #
+    # @!attribute [rw] launch_template_mode
+    #   Indicates whether the compute node group uses a custom launch
+    #   template or a launch template that PCS manages. The default value is
+    #   `CUSTOM`.
+    #
+    #   Valid values:
+    #
+    #   * `CUSTOM` – The compute node group uses the launch template in
+    #     `customLaunchTemplate`.
+    #
+    #   * `MANAGED` – PCS creates and manages the launch template.
+    #   @return [String]
+    #
     # @!attribute [rw] custom_launch_template
-    #   An Amazon EC2 launch template PCS uses to launch compute nodes.
+    #   The custom Amazon EC2 launch template associated with the compute
+    #   node group. This value is present when `launchTemplateMode` is
+    #   `CUSTOM` and isn't present when `launchTemplateMode` is `MANAGED`.
     #   @return [Types::CustomLaunchTemplate]
     #
     # @!attribute [rw] iam_instance_profile_arn
@@ -523,6 +556,9 @@ module Aws::PCS
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/ComputeNodeGroup AWS API Documentation
     #
     class ComputeNodeGroup < Struct.new(
+      :ami_id,
+      :security_group_ids,
+      :ssh_key_name,
       :name,
       :id,
       :arn,
@@ -530,9 +566,9 @@ module Aws::PCS
       :created_at,
       :modified_at,
       :status,
-      :ami_id,
       :subnet_ids,
       :purchase_option,
+      :launch_template_mode,
       :custom_launch_template,
       :iam_instance_profile_arn,
       :scaling_configuration,
@@ -761,7 +797,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -798,18 +834,53 @@ module Aws::PCS
       include Aws::Structure
     end
 
+    # @!attribute [rw] ami_id
+    #   The ID of the Amazon Machine Image (AMI) that PCS uses to launch
+    #   compute nodes (Amazon EC2 instances). This value overrides the AMI
+    #   ID in the custom launch template. If you don't provide this value,
+    #   PCS uses the AMI ID specified in the custom launch template. You
+    #   must provide this value if `launchTemplateMode` is `MANAGED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The IDs of the EC2 security groups to configure directly on the
+    #   compute node group. The security groups must be in the same VPC as
+    #   the cluster. PCS uses these security groups instead of the security
+    #   groups in the custom launch template. You can't specify this value
+    #   if the custom launch template defines network interfaces. If you
+    #   don't provide this value, PCS uses the security groups in the
+    #   custom launch template. You must provide this value if
+    #   `launchTemplateMode` is `MANAGED`. For more information, see
+    #   [Configuring instance settings for compute node groups in PCS][1] in
+    #   the *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_cng_instance-settings.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ssh_key_name
+    #   The name of the EC2 key pair to configure directly on the compute
+    #   node group. The key pair must exist in your account and Amazon Web
+    #   Services Region. PCS uses this key pair instead of the key pair in
+    #   the custom launch template. If you don't provide this value, PCS
+    #   uses the key pair in the custom launch template, if one is
+    #   specified. You must have permission for `ec2:DescribeKeyPairs`. If
+    #   you delete the key pair later, future instance launches can fail.
+    #   For more information, see [Configuring instance settings for compute
+    #   node groups in PCS][1] in the *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_cng_instance-settings.html
+    #   @return [String]
+    #
     # @!attribute [rw] cluster_identifier
     #   The name or ID of the cluster to create a compute node group in.
     #   @return [String]
     #
     # @!attribute [rw] compute_node_group_name
     #   A name to identify the cluster. Example: `MyCluster`
-    #   @return [String]
-    #
-    # @!attribute [rw] ami_id
-    #   The ID of the Amazon Machine Image (AMI) that PCS uses to launch
-    #   compute nodes (Amazon EC2 instances). If you don't provide this
-    #   value, PCS uses the AMI ID specified in the custom launch template.
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
@@ -840,8 +911,21 @@ module Aws::PCS
     #   [4]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-odcr.html
     #   @return [String]
     #
+    # @!attribute [rw] launch_template_mode
+    #   Specifies whether the compute node group uses a custom launch
+    #   template or a launch template that PCS manages. The default value is
+    #   `CUSTOM`.
+    #
+    #   If the value is `CUSTOM`, provide `customLaunchTemplate`. If the
+    #   value is `MANAGED`, omit `customLaunchTemplate` and provide `amiId`
+    #   and `securityGroupIds`.
+    #   @return [String]
+    #
     # @!attribute [rw] custom_launch_template
-    #   An Amazon EC2 launch template PCS uses to launch compute nodes.
+    #   The custom Amazon EC2 launch template to associate with the compute
+    #   node group. Specify the launch template `id` and `version` when
+    #   `launchTemplateMode` is `CUSTOM`. Don't specify this value when
+    #   `launchTemplateMode` is `MANAGED`.
     #   @return [Types::CustomLaunchTemplate]
     #
     # @!attribute [rw] iam_instance_profile_arn
@@ -890,7 +974,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -904,11 +988,14 @@ module Aws::PCS
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/CreateComputeNodeGroupRequest AWS API Documentation
     #
     class CreateComputeNodeGroupRequest < Struct.new(
+      :ami_id,
+      :security_group_ids,
+      :ssh_key_name,
       :cluster_identifier,
       :compute_node_group_name,
-      :ami_id,
       :subnet_ids,
       :purchase_option,
+      :launch_template_mode,
       :custom_launch_template,
       :iam_instance_profile_arn,
       :scaling_configuration,
@@ -958,7 +1045,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -994,17 +1081,19 @@ module Aws::PCS
       include Aws::Structure
     end
 
-    # An Amazon EC2 launch template PCS uses to launch compute nodes.
+    # An Amazon EC2 launch template PCS uses to launch compute nodes. The
+    # structure contains the launch template ID and version.
     #
     # @!attribute [rw] id
     #   The ID of the EC2 launch template to use to provision instances.
+    #   Specify this value together with `version`.
     #
     #   Example: `lt-xxxx`
     #   @return [String]
     #
     # @!attribute [rw] version
     #   The version of the EC2 launch template to use to provision
-    #   instances.
+    #   instances. Specify this value together with `id`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/CustomLaunchTemplate AWS API Documentation
@@ -1027,7 +1116,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1061,7 +1150,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1096,7 +1185,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2435,7 +2524,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2523,6 +2612,38 @@ module Aws::PCS
       include Aws::Structure
     end
 
+    # @!attribute [rw] ami_id
+    #   The ID of the Amazon Machine Image (AMI) that PCS uses to launch
+    #   instances. This value overrides the AMI ID in the custom launch
+    #   template. Specify an empty string (`""`) to remove the AMI ID from
+    #   the compute node group and use the AMI ID specified in the custom
+    #   launch template. Omit this value to leave the current setting
+    #   unchanged.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The IDs of the EC2 security groups to configure directly on the
+    #   compute node group. The security groups must be in the same VPC as
+    #   the cluster. PCS uses these security groups instead of the security
+    #   groups in the custom launch template. You can't specify this value
+    #   if the custom launch template defines network interfaces. Specify an
+    #   empty list (`[]`) to remove the security groups from the compute
+    #   node group and use the security groups in the custom launch
+    #   template. Omit this value to leave the current setting unchanged.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ssh_key_name
+    #   The name of the EC2 key pair to configure directly on the compute
+    #   node group. The key pair must exist in your account and Amazon Web
+    #   Services Region. PCS uses this key pair instead of the key pair in
+    #   the custom launch template. Specify an empty string (`""`) to remove
+    #   the key pair from the compute node group and use the key pair in the
+    #   custom launch template. Omit this value to leave the current setting
+    #   unchanged. You must have permission for `ec2:DescribeKeyPairs` to
+    #   specify a key pair. If you delete the key pair later, future
+    #   instance launches can fail.
+    #   @return [String]
+    #
     # @!attribute [rw] cluster_identifier
     #   The name or ID of the cluster of the compute node group.
     #   @return [String]
@@ -2531,19 +2652,49 @@ module Aws::PCS
     #   The name or ID of the compute node group.
     #   @return [String]
     #
-    # @!attribute [rw] ami_id
-    #   The ID of the Amazon Machine Image (AMI) that PCS uses to launch
-    #   instances. If not provided, PCS uses the AMI ID specified in the
-    #   custom launch template.
-    #   @return [String]
-    #
     # @!attribute [rw] subnet_ids
     #   The list of subnet IDs where the compute node group provisions
     #   instances. The subnets must be in the same VPC as the cluster.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] launch_template_mode
+    #   Specifies whether the compute node group uses a custom launch
+    #   template or a launch template that PCS manages. Omit this value to
+    #   keep the current mode.
+    #
+    #   Valid values:
+    #
+    #   * `CUSTOM` – Use a custom launch template. To switch from `MANAGED`,
+    #     also provide `customLaunchTemplate`. If the compute node group
+    #     already uses `CUSTOM` and you omit `customLaunchTemplate`, the
+    #     existing launch template is unchanged.
+    #
+    #   * `MANAGED` – Use a launch template created and managed by PCS. Omit
+    #     `customLaunchTemplate`. Switching to this mode removes the custom
+    #     launch template association but doesn't delete the launch
+    #     template.
+    #
+    #   When switching to `MANAGED`, the compute node group must have
+    #   `amiId` and `securityGroupIds` configured. You can set these values
+    #   in the same request.
+    #   @return [String]
+    #
     # @!attribute [rw] custom_launch_template
-    #   An Amazon EC2 launch template PCS uses to launch compute nodes.
+    #   The custom Amazon EC2 launch template to associate with the compute
+    #   node group. To set or change the custom launch template, specify
+    #   `id` and `version`. If you provide this value and omit
+    #   `launchTemplateMode`, the compute node group must already use
+    #   `CUSTOM` mode. To switch from `MANAGED` to `CUSTOM`, specify
+    #   `launchTemplateMode` as `CUSTOM` and provide this value. If the
+    #   compute node group already uses `CUSTOM`, omit this value while also
+    #   omitting `launchTemplateMode`, or while specifying `CUSTOM`, to keep
+    #   the existing custom launch template. For more information, see
+    #   [Migrating a compute node group from a custom launch template][1] in
+    #   the *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_cng_instance-settings-migrate.html
     #   @return [Types::CustomLaunchTemplate]
     #
     # @!attribute [rw] purchase_option
@@ -2610,7 +2761,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2619,10 +2770,13 @@ module Aws::PCS
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/UpdateComputeNodeGroupRequest AWS API Documentation
     #
     class UpdateComputeNodeGroupRequest < Struct.new(
+      :ami_id,
+      :security_group_ids,
+      :ssh_key_name,
       :cluster_identifier,
       :compute_node_group_identifier,
-      :ami_id,
       :subnet_ids,
+      :launch_template_mode,
       :custom_launch_template,
       :purchase_option,
       :spot_options,
@@ -2731,7 +2885,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.

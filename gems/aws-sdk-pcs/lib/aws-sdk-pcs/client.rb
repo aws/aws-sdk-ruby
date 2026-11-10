@@ -264,7 +264,8 @@ module Aws::PCS
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::PCS
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -533,7 +534,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -653,25 +654,61 @@ module Aws::PCS
     # you provide to this API action to launch compute nodes in your
     # account. You can only specify subnets in the same Amazon VPC as your
     # cluster. You receive billing charges for the compute nodes that PCS
-    # launches in your account. You must already have a launch template
-    # before you call this API. For more information, see [Launch an
-    # instance from a launch template][1] in the *Amazon Elastic Compute
-    # Cloud User Guide for Linux Instances*.
+    # launches in your account. You can configure common instance settings,
+    # such as the AMI, security groups, and SSH key pair, directly on the
+    # compute node group, or you can provide a custom EC2 launch template.
+    # To use a launch template that PCS manages, set `launchTemplateMode` to
+    # `MANAGED` and don't provide `customLaunchTemplate`. In this case, you
+    # must specify `amiId` and `securityGroupIds`. For more information, see
+    # [Configuring instance settings for compute node groups in PCS][1] in
+    # the *PCS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
+    # [1]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_cng_instance-settings.html
+    #
+    # @option params [String] :ami_id
+    #   The ID of the Amazon Machine Image (AMI) that PCS uses to launch
+    #   compute nodes (Amazon EC2 instances). This value overrides the AMI ID
+    #   in the custom launch template. If you don't provide this value, PCS
+    #   uses the AMI ID specified in the custom launch template. You must
+    #   provide this value if `launchTemplateMode` is `MANAGED`.
+    #
+    # @option params [Array<String>] :security_group_ids
+    #   The IDs of the EC2 security groups to configure directly on the
+    #   compute node group. The security groups must be in the same VPC as the
+    #   cluster. PCS uses these security groups instead of the security groups
+    #   in the custom launch template. You can't specify this value if the
+    #   custom launch template defines network interfaces. If you don't
+    #   provide this value, PCS uses the security groups in the custom launch
+    #   template. You must provide this value if `launchTemplateMode` is
+    #   `MANAGED`. For more information, see [Configuring instance settings
+    #   for compute node groups in PCS][1] in the *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_cng_instance-settings.html
+    #
+    # @option params [String] :ssh_key_name
+    #   The name of the EC2 key pair to configure directly on the compute node
+    #   group. The key pair must exist in your account and Amazon Web Services
+    #   Region. PCS uses this key pair instead of the key pair in the custom
+    #   launch template. If you don't provide this value, PCS uses the key
+    #   pair in the custom launch template, if one is specified. You must have
+    #   permission for `ec2:DescribeKeyPairs`. If you delete the key pair
+    #   later, future instance launches can fail. For more information, see
+    #   [Configuring instance settings for compute node groups in PCS][1] in
+    #   the *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_cng_instance-settings.html
     #
     # @option params [required, String] :cluster_identifier
     #   The name or ID of the cluster to create a compute node group in.
     #
     # @option params [required, String] :compute_node_group_name
     #   A name to identify the cluster. Example: `MyCluster`
-    #
-    # @option params [String] :ami_id
-    #   The ID of the Amazon Machine Image (AMI) that PCS uses to launch
-    #   compute nodes (Amazon EC2 instances). If you don't provide this
-    #   value, PCS uses the AMI ID specified in the custom launch template.
     #
     # @option params [required, Array<String>] :subnet_ids
     #   The list of subnet IDs where the compute node group launches
@@ -698,8 +735,19 @@ module Aws::PCS
     #   [3]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-iodcr.html
     #   [4]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-odcr.html
     #
-    # @option params [required, Types::CustomLaunchTemplate] :custom_launch_template
-    #   An Amazon EC2 launch template PCS uses to launch compute nodes.
+    # @option params [String] :launch_template_mode
+    #   Specifies whether the compute node group uses a custom launch template
+    #   or a launch template that PCS manages. The default value is `CUSTOM`.
+    #
+    #   If the value is `CUSTOM`, provide `customLaunchTemplate`. If the value
+    #   is `MANAGED`, omit `customLaunchTemplate` and provide `amiId` and
+    #   `securityGroupIds`.
+    #
+    # @option params [Types::CustomLaunchTemplate] :custom_launch_template
+    #   The custom Amazon EC2 launch template to associate with the compute
+    #   node group. Specify the launch template `id` and `version` when
+    #   `launchTemplateMode` is `CUSTOM`. Don't specify this value when
+    #   `launchTemplateMode` is `MANAGED`.
     #
     # @option params [required, String] :iam_instance_profile_arn
     #   The Amazon Resource Name (ARN) of the IAM instance profile used to
@@ -741,7 +789,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -757,12 +805,15 @@ module Aws::PCS
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_compute_node_group({
+    #     ami_id: "AmiId",
+    #     security_group_ids: ["SecurityGroupId"],
+    #     ssh_key_name: "KeyPairName",
     #     cluster_identifier: "ClusterIdentifier", # required
     #     compute_node_group_name: "ComputeNodeGroupName", # required
-    #     ami_id: "AmiId",
     #     subnet_ids: ["String"], # required
     #     purchase_option: "ONDEMAND", # accepts ONDEMAND, SPOT, CAPACITY_BLOCK, INTERRUPTIBLE_CAPACITY_RESERVATION
-    #     custom_launch_template: { # required
+    #     launch_template_mode: "CUSTOM", # accepts CUSTOM, MANAGED
+    #     custom_launch_template: {
     #       id: "String", # required
     #       version: "String", # required
     #     },
@@ -832,6 +883,10 @@ module Aws::PCS
     #
     # @example Response structure
     #
+    #   resp.compute_node_group.ami_id #=> String
+    #   resp.compute_node_group.security_group_ids #=> Array
+    #   resp.compute_node_group.security_group_ids[0] #=> String
+    #   resp.compute_node_group.ssh_key_name #=> String
     #   resp.compute_node_group.name #=> String
     #   resp.compute_node_group.id #=> String
     #   resp.compute_node_group.arn #=> String
@@ -839,10 +894,10 @@ module Aws::PCS
     #   resp.compute_node_group.created_at #=> Time
     #   resp.compute_node_group.modified_at #=> Time
     #   resp.compute_node_group.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED", "SUSPENDING", "SUSPENDED", "RESUMING"
-    #   resp.compute_node_group.ami_id #=> String
     #   resp.compute_node_group.subnet_ids #=> Array
     #   resp.compute_node_group.subnet_ids[0] #=> String
     #   resp.compute_node_group.purchase_option #=> String, one of "ONDEMAND", "SPOT", "CAPACITY_BLOCK", "INTERRUPTIBLE_CAPACITY_RESERVATION"
+    #   resp.compute_node_group.launch_template_mode #=> String, one of "CUSTOM", "MANAGED"
     #   resp.compute_node_group.custom_launch_template.id #=> String
     #   resp.compute_node_group.custom_launch_template.version #=> String
     #   resp.compute_node_group.iam_instance_profile_arn #=> String
@@ -914,7 +969,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -992,7 +1047,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1031,7 +1086,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1072,7 +1127,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1188,6 +1243,10 @@ module Aws::PCS
     #
     # @example Response structure
     #
+    #   resp.compute_node_group.ami_id #=> String
+    #   resp.compute_node_group.security_group_ids #=> Array
+    #   resp.compute_node_group.security_group_ids[0] #=> String
+    #   resp.compute_node_group.ssh_key_name #=> String
     #   resp.compute_node_group.name #=> String
     #   resp.compute_node_group.id #=> String
     #   resp.compute_node_group.arn #=> String
@@ -1195,10 +1254,10 @@ module Aws::PCS
     #   resp.compute_node_group.created_at #=> Time
     #   resp.compute_node_group.modified_at #=> Time
     #   resp.compute_node_group.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED", "SUSPENDING", "SUSPENDED", "RESUMING"
-    #   resp.compute_node_group.ami_id #=> String
     #   resp.compute_node_group.subnet_ids #=> Array
     #   resp.compute_node_group.subnet_ids[0] #=> String
     #   resp.compute_node_group.purchase_option #=> String, one of "ONDEMAND", "SPOT", "CAPACITY_BLOCK", "INTERRUPTIBLE_CAPACITY_RESERVATION"
+    #   resp.compute_node_group.launch_template_mode #=> String, one of "CUSTOM", "MANAGED"
     #   resp.compute_node_group.custom_launch_template.id #=> String
     #   resp.compute_node_group.custom_launch_template.version #=> String
     #   resp.compute_node_group.iam_instance_profile_arn #=> String
@@ -1642,7 +1701,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1758,23 +1817,79 @@ module Aws::PCS
     # networking, compute nodes, and settings specific to your scheduler
     # (such as Slurm).
     #
+    # @option params [String] :ami_id
+    #   The ID of the Amazon Machine Image (AMI) that PCS uses to launch
+    #   instances. This value overrides the AMI ID in the custom launch
+    #   template. Specify an empty string (`""`) to remove the AMI ID from the
+    #   compute node group and use the AMI ID specified in the custom launch
+    #   template. Omit this value to leave the current setting unchanged.
+    #
+    # @option params [Array<String>] :security_group_ids
+    #   The IDs of the EC2 security groups to configure directly on the
+    #   compute node group. The security groups must be in the same VPC as the
+    #   cluster. PCS uses these security groups instead of the security groups
+    #   in the custom launch template. You can't specify this value if the
+    #   custom launch template defines network interfaces. Specify an empty
+    #   list (`[]`) to remove the security groups from the compute node group
+    #   and use the security groups in the custom launch template. Omit this
+    #   value to leave the current setting unchanged.
+    #
+    # @option params [String] :ssh_key_name
+    #   The name of the EC2 key pair to configure directly on the compute node
+    #   group. The key pair must exist in your account and Amazon Web Services
+    #   Region. PCS uses this key pair instead of the key pair in the custom
+    #   launch template. Specify an empty string (`""`) to remove the key pair
+    #   from the compute node group and use the key pair in the custom launch
+    #   template. Omit this value to leave the current setting unchanged. You
+    #   must have permission for `ec2:DescribeKeyPairs` to specify a key pair.
+    #   If you delete the key pair later, future instance launches can fail.
+    #
     # @option params [required, String] :cluster_identifier
     #   The name or ID of the cluster of the compute node group.
     #
     # @option params [required, String] :compute_node_group_identifier
     #   The name or ID of the compute node group.
     #
-    # @option params [String] :ami_id
-    #   The ID of the Amazon Machine Image (AMI) that PCS uses to launch
-    #   instances. If not provided, PCS uses the AMI ID specified in the
-    #   custom launch template.
-    #
     # @option params [Array<String>] :subnet_ids
     #   The list of subnet IDs where the compute node group provisions
     #   instances. The subnets must be in the same VPC as the cluster.
     #
+    # @option params [String] :launch_template_mode
+    #   Specifies whether the compute node group uses a custom launch template
+    #   or a launch template that PCS manages. Omit this value to keep the
+    #   current mode.
+    #
+    #   Valid values:
+    #
+    #   * `CUSTOM` – Use a custom launch template. To switch from `MANAGED`,
+    #     also provide `customLaunchTemplate`. If the compute node group
+    #     already uses `CUSTOM` and you omit `customLaunchTemplate`, the
+    #     existing launch template is unchanged.
+    #
+    #   * `MANAGED` – Use a launch template created and managed by PCS. Omit
+    #     `customLaunchTemplate`. Switching to this mode removes the custom
+    #     launch template association but doesn't delete the launch template.
+    #
+    #   When switching to `MANAGED`, the compute node group must have `amiId`
+    #   and `securityGroupIds` configured. You can set these values in the
+    #   same request.
+    #
     # @option params [Types::CustomLaunchTemplate] :custom_launch_template
-    #   An Amazon EC2 launch template PCS uses to launch compute nodes.
+    #   The custom Amazon EC2 launch template to associate with the compute
+    #   node group. To set or change the custom launch template, specify `id`
+    #   and `version`. If you provide this value and omit
+    #   `launchTemplateMode`, the compute node group must already use `CUSTOM`
+    #   mode. To switch from `MANAGED` to `CUSTOM`, specify
+    #   `launchTemplateMode` as `CUSTOM` and provide this value. If the
+    #   compute node group already uses `CUSTOM`, omit this value while also
+    #   omitting `launchTemplateMode`, or while specifying `CUSTOM`, to keep
+    #   the existing custom launch template. For more information, see
+    #   [Migrating a compute node group from a custom launch template][1] in
+    #   the *PCS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_cng_instance-settings-migrate.html
     #
     # @option params [String] :purchase_option
     #   Specifies how EC2 instances are purchased on your behalf. PCS supports
@@ -1833,7 +1948,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1845,10 +1960,13 @@ module Aws::PCS
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_compute_node_group({
+    #     ami_id: "AmiIdOrEmpty",
+    #     security_group_ids: ["SecurityGroupId"],
+    #     ssh_key_name: "KeyPairNameOrEmpty",
     #     cluster_identifier: "ClusterIdentifier", # required
     #     compute_node_group_identifier: "ComputeNodeGroupIdentifier", # required
-    #     ami_id: "AmiId",
     #     subnet_ids: ["String"],
+    #     launch_template_mode: "CUSTOM", # accepts CUSTOM, MANAGED
     #     custom_launch_template: {
     #       id: "String", # required
     #       version: "String", # required
@@ -1912,6 +2030,10 @@ module Aws::PCS
     #
     # @example Response structure
     #
+    #   resp.compute_node_group.ami_id #=> String
+    #   resp.compute_node_group.security_group_ids #=> Array
+    #   resp.compute_node_group.security_group_ids[0] #=> String
+    #   resp.compute_node_group.ssh_key_name #=> String
     #   resp.compute_node_group.name #=> String
     #   resp.compute_node_group.id #=> String
     #   resp.compute_node_group.arn #=> String
@@ -1919,10 +2041,10 @@ module Aws::PCS
     #   resp.compute_node_group.created_at #=> Time
     #   resp.compute_node_group.modified_at #=> Time
     #   resp.compute_node_group.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "DELETED", "SUSPENDING", "SUSPENDED", "RESUMING"
-    #   resp.compute_node_group.ami_id #=> String
     #   resp.compute_node_group.subnet_ids #=> Array
     #   resp.compute_node_group.subnet_ids[0] #=> String
     #   resp.compute_node_group.purchase_option #=> String, one of "ONDEMAND", "SPOT", "CAPACITY_BLOCK", "INTERRUPTIBLE_CAPACITY_RESERVATION"
+    #   resp.compute_node_group.launch_template_mode #=> String, one of "CUSTOM", "MANAGED"
     #   resp.compute_node_group.custom_launch_template.id #=> String
     #   resp.compute_node_group.custom_launch_template.version #=> String
     #   resp.compute_node_group.iam_instance_profile_arn #=> String
@@ -1993,7 +2115,7 @@ module Aws::PCS
     #   request completes successfully, the subsequent retries with the same
     #   client token return the result from the original successful request
     #   and they have no additional effect. If you don't specify a client
-    #   token, the CLI and SDK automatically generate 1 for you.
+    #   token, the CLI and SDK automatically generate one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2068,7 +2190,7 @@ module Aws::PCS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pcs'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

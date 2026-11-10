@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2026-11-10)
+------------------
+
+* Feature - Adds support for server access logging for Amazon S3 table buckets with the new PutTableBucketLogging and GetTableBucketLogging APIs.
+
 1.43.0 (2026-11-09)
 ------------------
 

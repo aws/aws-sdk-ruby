@@ -303,6 +303,7 @@ module Aws::Connect
     Contact = Shapes::StructureShape.new(name: 'Contact')
     ContactAnalysis = Shapes::StructureShape.new(name: 'ContactAnalysis')
     ContactAnalysisReference = Shapes::StructureShape.new(name: 'ContactAnalysisReference')
+    ContactAnalysisReferenceState = Shapes::StructureShape.new(name: 'ContactAnalysisReferenceState')
     ContactConfiguration = Shapes::StructureShape.new(name: 'ContactConfiguration')
     ContactDataRequest = Shapes::StructureShape.new(name: 'ContactDataRequest')
     ContactDataRequestList = Shapes::ListShape.new(name: 'ContactDataRequestList')
@@ -369,6 +370,14 @@ module Aws::Connect
     ContactId = Shapes::StringShape.new(name: 'ContactId')
     ContactInitiationMethod = Shapes::StringShape.new(name: 'ContactInitiationMethod')
     ContactInteractionType = Shapes::StringShape.new(name: 'ContactInteractionType')
+    ContactLens = Shapes::StructureShape.new(name: 'ContactLens')
+    ContactLensAnalyticsModeList = Shapes::ListShape.new(name: 'ContactLensAnalyticsModeList')
+    ContactLensChannelConfiguration = Shapes::StructureShape.new(name: 'ContactLensChannelConfiguration')
+    ContactLensRedactionConfiguration = Shapes::StructureShape.new(name: 'ContactLensRedactionConfiguration')
+    ContactLensRedactionEntitiesList = Shapes::ListShape.new(name: 'ContactLensRedactionEntitiesList')
+    ContactLensSentimentConfiguration = Shapes::StructureShape.new(name: 'ContactLensSentimentConfiguration')
+    ContactLensSummaryConfiguration = Shapes::StructureShape.new(name: 'ContactLensSummaryConfiguration')
+    ContactLensSummaryModeList = Shapes::ListShape.new(name: 'ContactLensSummaryModeList')
     ContactMediaProcessingFailureMode = Shapes::StringShape.new(name: 'ContactMediaProcessingFailureMode')
     ContactMetricInfo = Shapes::StructureShape.new(name: 'ContactMetricInfo')
     ContactMetricName = Shapes::StringShape.new(name: 'ContactMetricName')
@@ -402,6 +411,8 @@ module Aws::Connect
     ControlPlaneAttributeFilter = Shapes::StructureShape.new(name: 'ControlPlaneAttributeFilter')
     ControlPlaneTagFilter = Shapes::StructureShape.new(name: 'ControlPlaneTagFilter')
     ControlPlaneUserAttributeFilter = Shapes::StructureShape.new(name: 'ControlPlaneUserAttributeFilter')
+    ConversationalAnalytics = Shapes::StructureShape.new(name: 'ConversationalAnalytics')
+    ConversationalAnalyticsConfiguration = Shapes::StructureShape.new(name: 'ConversationalAnalyticsConfiguration')
     Count = Shapes::IntegerShape.new(name: 'Count')
     CreateAgentStatusRequest = Shapes::StructureShape.new(name: 'CreateAgentStatusRequest')
     CreateAgentStatusResponse = Shapes::StructureShape.new(name: 'CreateAgentStatusResponse')
@@ -1176,6 +1187,7 @@ module Aws::Connect
     KinesisVideoStreamConfig = Shapes::StructureShape.new(name: 'KinesisVideoStreamConfig')
     LanguageConfiguration = Shapes::StructureShape.new(name: 'LanguageConfiguration')
     LanguageLocale = Shapes::StringShape.new(name: 'LanguageLocale')
+    LanguageLocales = Shapes::ListShape.new(name: 'LanguageLocales')
     LargeNextToken = Shapes::StringShape.new(name: 'LargeNextToken')
     LengthBoundary = Shapes::IntegerShape.new(name: 'LengthBoundary')
     LexBot = Shapes::StructureShape.new(name: 'LexBot')
@@ -3290,6 +3302,7 @@ module Aws::Connect
     Contact.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
     Contact.add_member(:next_contacts, Shapes::ShapeRef.new(shape: NextContacts, location_name: "NextContacts"))
     Contact.add_member(:global_resiliency_metadata, Shapes::ShapeRef.new(shape: GlobalResiliencyMetadata, location_name: "GlobalResiliencyMetadata"))
+    Contact.add_member(:contact_lens, Shapes::ShapeRef.new(shape: ContactLens, location_name: "ContactLens"))
     Contact.struct_class = Types::Contact
 
     ContactAnalysis.add_member(:transcript, Shapes::ShapeRef.new(shape: Transcript, location_name: "Transcript"))
@@ -3302,6 +3315,10 @@ module Aws::Connect
     ContactAnalysisReference.add_member(:analytics_mode, Shapes::ShapeRef.new(shape: AnalyticsMode, location_name: "AnalyticsMode"))
     ContactAnalysisReference.add_member(:is_redacted, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsRedacted"))
     ContactAnalysisReference.struct_class = Types::ContactAnalysisReference
+
+    ContactAnalysisReferenceState.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    ContactAnalysisReferenceState.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "StatusReason"))
+    ContactAnalysisReferenceState.struct_class = Types::ContactAnalysisReferenceState
 
     ContactConfiguration.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
     ContactConfiguration.add_member(:participant_role, Shapes::ShapeRef.new(shape: ParticipantRole, location_name: "ParticipantRole"))
@@ -3518,6 +3535,30 @@ module Aws::Connect
 
     ContactFlowVersionSummaryList.member = Shapes::ShapeRef.new(shape: ContactFlowVersionSummary)
 
+    ContactLens.add_member(:conversational_analytics, Shapes::ShapeRef.new(shape: ConversationalAnalytics, location_name: "ConversationalAnalytics"))
+    ContactLens.struct_class = Types::ContactLens
+
+    ContactLensAnalyticsModeList.member = Shapes::ShapeRef.new(shape: String)
+
+    ContactLensChannelConfiguration.add_member(:analytics_modes, Shapes::ShapeRef.new(shape: ContactLensAnalyticsModeList, location_name: "AnalyticsModes"))
+    ContactLensChannelConfiguration.struct_class = Types::ContactLensChannelConfiguration
+
+    ContactLensRedactionConfiguration.add_member(:behavior, Shapes::ShapeRef.new(shape: String, location_name: "Behavior"))
+    ContactLensRedactionConfiguration.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "Policy"))
+    ContactLensRedactionConfiguration.add_member(:entities, Shapes::ShapeRef.new(shape: ContactLensRedactionEntitiesList, location_name: "Entities"))
+    ContactLensRedactionConfiguration.add_member(:mask_mode, Shapes::ShapeRef.new(shape: String, location_name: "MaskMode"))
+    ContactLensRedactionConfiguration.struct_class = Types::ContactLensRedactionConfiguration
+
+    ContactLensRedactionEntitiesList.member = Shapes::ShapeRef.new(shape: String)
+
+    ContactLensSentimentConfiguration.add_member(:behavior, Shapes::ShapeRef.new(shape: String, location_name: "Behavior"))
+    ContactLensSentimentConfiguration.struct_class = Types::ContactLensSentimentConfiguration
+
+    ContactLensSummaryConfiguration.add_member(:summary_modes, Shapes::ShapeRef.new(shape: ContactLensSummaryModeList, location_name: "SummaryModes"))
+    ContactLensSummaryConfiguration.struct_class = Types::ContactLensSummaryConfiguration
+
+    ContactLensSummaryModeList.member = Shapes::ShapeRef.new(shape: String)
+
     ContactMetricInfo.add_member(:name, Shapes::ShapeRef.new(shape: ContactMetricName, required: true, location_name: "Name"))
     ContactMetricInfo.struct_class = Types::ContactMetricInfo
 
@@ -3612,6 +3653,19 @@ module Aws::Connect
     ControlPlaneUserAttributeFilter.add_member(:tag_condition, Shapes::ShapeRef.new(shape: TagCondition, location_name: "TagCondition"))
     ControlPlaneUserAttributeFilter.add_member(:hierarchy_group_condition, Shapes::ShapeRef.new(shape: HierarchyGroupCondition, location_name: "HierarchyGroupCondition"))
     ControlPlaneUserAttributeFilter.struct_class = Types::ControlPlaneUserAttributeFilter
+
+    ConversationalAnalytics.add_member(:configuration, Shapes::ShapeRef.new(shape: ConversationalAnalyticsConfiguration, location_name: "Configuration"))
+    ConversationalAnalytics.add_member(:contact_analysis_reference_state, Shapes::ShapeRef.new(shape: ContactAnalysisReferenceState, location_name: "ContactAnalysisReferenceState"))
+    ConversationalAnalytics.struct_class = Types::ConversationalAnalytics
+
+    ConversationalAnalyticsConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled", metadata: {"box" => true}))
+    ConversationalAnalyticsConfiguration.add_member(:language_locale, Shapes::ShapeRef.new(shape: String, location_name: "LanguageLocale"))
+    ConversationalAnalyticsConfiguration.add_member(:language_locales, Shapes::ShapeRef.new(shape: LanguageLocales, location_name: "LanguageLocales"))
+    ConversationalAnalyticsConfiguration.add_member(:channel_configuration, Shapes::ShapeRef.new(shape: ContactLensChannelConfiguration, location_name: "ChannelConfiguration"))
+    ConversationalAnalyticsConfiguration.add_member(:redaction_configuration, Shapes::ShapeRef.new(shape: ContactLensRedactionConfiguration, location_name: "RedactionConfiguration"))
+    ConversationalAnalyticsConfiguration.add_member(:summary_configuration, Shapes::ShapeRef.new(shape: ContactLensSummaryConfiguration, location_name: "SummaryConfiguration"))
+    ConversationalAnalyticsConfiguration.add_member(:sentiment_configuration, Shapes::ShapeRef.new(shape: ContactLensSentimentConfiguration, location_name: "SentimentConfiguration"))
+    ConversationalAnalyticsConfiguration.struct_class = Types::ConversationalAnalyticsConfiguration
 
     CreateAgentStatusRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     CreateAgentStatusRequest.add_member(:name, Shapes::ShapeRef.new(shape: AgentStatusName, required: true, location_name: "Name"))
@@ -6369,6 +6423,8 @@ module Aws::Connect
 
     LanguageConfiguration.add_member(:language_locale, Shapes::ShapeRef.new(shape: LanguageLocale, location_name: "LanguageLocale"))
     LanguageConfiguration.struct_class = Types::LanguageConfiguration
+
+    LanguageLocales.member = Shapes::ShapeRef.new(shape: LanguageLocale)
 
     LexBot.add_member(:name, Shapes::ShapeRef.new(shape: BotName, required: true, location_name: "Name"))
     LexBot.add_member(:lex_region, Shapes::ShapeRef.new(shape: LexRegion, required: true, location_name: "LexRegion"))

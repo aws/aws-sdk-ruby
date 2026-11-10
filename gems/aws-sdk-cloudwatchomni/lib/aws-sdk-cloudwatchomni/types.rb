@@ -1396,6 +1396,23 @@ module Aws::CloudWatchOmni
       include Aws::Structure
     end
 
+    # One requested scope: an explicit list of actions for one service. All
+    # actions in an entry share one service prefix. The same service may
+    # appear in more than one entry.
+    #
+    # @!attribute [rw] actions
+    #   The actions of one service, each with its service prefix, for
+    #   example "logs:StartQuery".
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudwatchomni-2025-01-01/DataAccessTarget AWS API Documentation
+    #
+    class DataAccessTarget < Struct.new(
+      :actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] grant_id
     #   The ID of the access grant to delete.
     #   @return [String]
@@ -2327,6 +2344,46 @@ module Aws::CloudWatchOmni
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudwatchomni-2025-01-01/GetSpaceCredentialsForOrganizationOutput AWS API Documentation
     #
     class GetSpaceCredentialsForOrganizationOutput < Struct.new(
+      :credentials)
+      SENSITIVE = [:credentials]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_id
+    #   The unique ID of the space to return credentials for.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_scopes
+    #   The actions to include in the credentials, grouped by service.
+    #   @return [Array<Types::DataAccessTarget>]
+    #
+    # @!attribute [rw] duration_seconds
+    #   The lifetime of the credentials, in seconds. Defaults to 3600.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] audit_context
+    #   Caller-supplied key-value pairs that are recorded for auditing. They
+    #   do not affect authorization or the permissions of the credentials.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudwatchomni-2025-01-01/GetSpaceDataAccessInput AWS API Documentation
+    #
+    class GetSpaceDataAccessInput < Struct.new(
+      :space_id,
+      :target_scopes,
+      :duration_seconds,
+      :audit_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] credentials
+    #   The temporary AWS credentials for the space.
+    #   @return [Types::AwsCredentials]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudwatchomni-2025-01-01/GetSpaceDataAccessOutput AWS API Documentation
+    #
+    class GetSpaceDataAccessOutput < Struct.new(
       :credentials)
       SENSITIVE = [:credentials]
       include Aws::Structure
@@ -4095,6 +4152,21 @@ module Aws::CloudWatchOmni
     #
     class PartialResults < Struct.new(
       :partial_results_detected)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The requested actions produce a credential that exceeds the maximum
+    # size. Request fewer actions.
+    #
+    # @!attribute [rw] message
+    #   A description of the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudwatchomni-2025-01-01/PolicyTooLargeException AWS API Documentation
+    #
+    class PolicyTooLargeException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -31,6 +31,11 @@ module Aws
       class ResourceNotFoundException < ServiceError
         def message: () -> ::String
       end
+      class RetryableConflictException < ServiceError
+        def message: () -> ::String
+        def resource_id: () -> ::String
+        def resource_type: () -> ::String
+      end
     end
   end
 end

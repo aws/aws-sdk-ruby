@@ -2503,6 +2503,31 @@ module Aws::ARCRegionswitch
       include Aws::Structure
     end
 
+    # The request conflicted with a concurrent modification of the same
+    # resource and did not take effect.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The identifier of the resource involved in the concurrent
+    #   modification.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource involved in the concurrent modification.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/RetryableConflictException AWS API Documentation
+    #
+    class RetryableConflictException < Struct.new(
+      :message,
+      :resource_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Amazon Route 53 health check.
     #
     # @!attribute [rw] hosted_zone_id

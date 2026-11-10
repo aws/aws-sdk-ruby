@@ -4140,6 +4140,12 @@ module Aws::Connect
     #   contact, including traffic distribution details.
     #   @return [Types::GlobalResiliencyMetadata]
     #
+    # @!attribute [rw] contact_lens
+    #   Information about the conversational analytics configuration applied
+    #   to the contact. This field is present only for contacts where
+    #   conversational analytics is enabled in the contact flow.
+    #   @return [Types::ContactLens]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Contact AWS API Documentation
     #
     class Contact < Struct.new(
@@ -4191,7 +4197,8 @@ module Aws::Connect
       :outbound_strategy,
       :attributes,
       :next_contacts,
-      :global_resiliency_metadata)
+      :global_resiliency_metadata,
+      :contact_lens)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -4249,6 +4256,37 @@ module Aws::Connect
       :arn,
       :analytics_mode,
       :is_redacted)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The current processing state of conversational analytics for a
+    # contact, including the analysis status and, when applicable, the
+    # reason for that status.
+    #
+    # @!attribute [rw] status
+    #   The status of conversational analytics processing for the contact.
+    #   Valid values:
+    #
+    #   * `REQUESTED` – Analysis has been requested for the contact and has
+    #     not finished.
+    #
+    #   * `COMPLETED` – Analysis finished successfully.
+    #
+    #   * `FAILED` – Analysis did not finish successfully. See
+    #     `StatusReason` for the cause.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the current analysis status. This value is populated
+    #   only when the status is `FAILED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactAnalysisReferenceState AWS API Documentation
+    #
+    class ContactAnalysisReferenceState < Struct.new(
+      :status,
+      :status_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5216,6 +5254,136 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about the conversational analytics configuration applied
+    # to the contact. This field is present only for contacts where
+    # conversational analytics is enabled in the contact flow.
+    #
+    # @!attribute [rw] conversational_analytics
+    #   The conversational analytics configuration applied to the contact.
+    #   @return [Types::ConversationalAnalytics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactLens AWS API Documentation
+    #
+    class ContactLens < Struct.new(
+      :conversational_analytics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The per-channel conversational analytics configuration for a contact.
+    #
+    # @!attribute [rw] analytics_modes
+    #   The conversational analytics modes enabled for the channel. Valid
+    #   values:
+    #
+    #   * `RealTime` – Real-time analysis is enabled during the contact.
+    #     Voice channel only.
+    #
+    #   * `PostContact` – Post-contact analysis is enabled after the contact
+    #     ends. Voice channel only.
+    #
+    #   * `ContactLens` – Conversational analytics is enabled for the
+    #     contact. Chat channel only.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactLensChannelConfiguration AWS API Documentation
+    #
+    class ContactLensChannelConfiguration < Struct.new(
+      :analytics_modes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The redaction configuration for conversational analytics transcripts.
+    #
+    # @!attribute [rw] behavior
+    #   Specifies whether redaction is enabled for sensitive data, such as
+    #   personal information, in the conversational analytics output. Valid
+    #   values:
+    #
+    #   * `Enable` – Redaction is applied according to the other values in
+    #     this object.
+    #
+    #   * `Disable` – Redaction is not applied, and all other values in this
+    #     object are ignored.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The redaction policy that determines which versions of the
+    #   transcript are stored. Valid values:
+    #
+    #   * `None` – No redaction is applied.
+    #
+    #   * `RedactedOnly` – Only the redacted transcript is stored.
+    #
+    #   * `RedactedAndOriginal` – Both the redacted and the original
+    #     transcript are stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] entities
+    #   The entity types to redact from the transcript (for example, `NAME`,
+    #   `EMAIL`, `ADDRESS`).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] mask_mode
+    #   How sensitive information is masked in the transcript. Valid values:
+    #
+    #   * `PII` – All redacted entities are replaced with the `[PII]`
+    #     string.
+    #
+    #   * `EntityType` – All redacted entities are replaced with the label
+    #     of the entity. For example, when the `EMAIL` entity is configured
+    #     for redaction, emails in the transcript are replaced with the
+    #     `[EMAIL]` string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactLensRedactionConfiguration AWS API Documentation
+    #
+    class ContactLensRedactionConfiguration < Struct.new(
+      :behavior,
+      :policy,
+      :entities,
+      :mask_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The conversational analytics sentiment analysis configuration for a
+    # contact.
+    #
+    # @!attribute [rw] behavior
+    #   Specifies whether sentiment analysis is enabled for the contact. The
+    #   default value is `Disable`. Valid values:
+    #
+    #   * `Enable` – Sentiment analysis is performed on the contact.
+    #
+    #   * `Disable` – Sentiment analysis is not performed on the contact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactLensSentimentConfiguration AWS API Documentation
+    #
+    class ContactLensSentimentConfiguration < Struct.new(
+      :behavior)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The conversational analytics summary configuration for a contact.
+    #
+    # @!attribute [rw] summary_modes
+    #   The conversational analytics summary modes enabled for the contact.
+    #   Valid values: `PostContact` \| `AutomatedInteraction` \|
+    #   `ContactChain`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactLensSummaryConfiguration AWS API Documentation
+    #
+    class ContactLensSummaryConfiguration < Struct.new(
+      :summary_modes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the details of a metric to be retrieved for a contact. Use
     # this object to specify which contact level metrics you want to include
     # in your GetContactMetrics request.
@@ -5639,6 +5807,74 @@ module Aws::Connect
       :and_condition,
       :tag_condition,
       :hierarchy_group_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the conversational analytics configuration and state for a
+    # contact.
+    #
+    # @!attribute [rw] configuration
+    #   The conversational analytics settings that apply to the contact.
+    #   @return [Types::ConversationalAnalyticsConfiguration]
+    #
+    # @!attribute [rw] contact_analysis_reference_state
+    #   The current state of conversational analytics processing for the
+    #   contact.
+    #   @return [Types::ContactAnalysisReferenceState]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ConversationalAnalytics AWS API Documentation
+    #
+    class ConversationalAnalytics < Struct.new(
+      :configuration,
+      :contact_analysis_reference_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The conversational analytics configuration settings for a contact.
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether conversational analytics is enabled for the
+    #   contact.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] language_locale
+    #   The language locale that conversational analytics uses to analyze
+    #   the contact (for example, `en-US`).
+    #   @return [String]
+    #
+    # @!attribute [rw] language_locales
+    #   The language locales that conversational analytics uses to analyze
+    #   the contact (for example, `en-US` and `es-ES`).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] channel_configuration
+    #   The per-channel conversational analytics settings for the contact.
+    #   @return [Types::ContactLensChannelConfiguration]
+    #
+    # @!attribute [rw] redaction_configuration
+    #   The redaction configuration for the contact transcript.
+    #   @return [Types::ContactLensRedactionConfiguration]
+    #
+    # @!attribute [rw] summary_configuration
+    #   The summary configuration for the contact.
+    #   @return [Types::ContactLensSummaryConfiguration]
+    #
+    # @!attribute [rw] sentiment_configuration
+    #   The sentiment analysis configuration for the contact.
+    #   @return [Types::ContactLensSentimentConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ConversationalAnalyticsConfiguration AWS API Documentation
+    #
+    class ConversationalAnalyticsConfiguration < Struct.new(
+      :enabled,
+      :language_locale,
+      :language_locales,
+      :channel_configuration,
+      :redaction_configuration,
+      :summary_configuration,
+      :sentiment_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27742,8 +27978,8 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Additional recipients for UpdateContact, allowing an empty list to
-    # clear CC recipients.
+    # The additional recipients of an outbound email that you can update. An
+    # empty list of `CcEmailAddresses` clears the existing CC recipients.
     #
     # @!attribute [rw] cc_email_addresses
     #   The additional CC email address recipients. You can specify up to 50

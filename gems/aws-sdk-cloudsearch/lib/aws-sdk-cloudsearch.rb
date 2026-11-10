@@ -54,7 +54,7 @@ module Aws::CloudSearch
   autoload :EndpointProvider, 'aws-sdk-cloudsearch/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudsearch/endpoints'
 
-  GEM_VERSION = '1.101.0'
+  GEM_VERSION = '1.102.0'
 
 end
 
