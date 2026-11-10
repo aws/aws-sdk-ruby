@@ -56,9 +56,9 @@ module Aws
       def read_structure(decoder, ref, target)
         shape = ref.shape
         target ||= shape.struct_class.new
-        lut = lookup_table(shape)
+        by_wire_name = members_by_wire_name(shape)
         decoder.each_map_key do |key|
-          if (pair = lut[key])
+          if (pair = by_wire_name[key])
             target[pair[0]] = read(decoder, pair[1])
           else
             decoder.decode_item
@@ -76,7 +76,7 @@ module Aws
         values = {}
         union = nil
         decoder.each_map_key do |key, size|
-          if direct && size == 1 && (pair = lookup_table(shape)[key])
+          if direct && size == 1 && (pair = members_by_wire_name(shape)[key])
             value = read(decoder, pair[1])
             if value.nil?
               values[key] = nil
@@ -123,12 +123,12 @@ module Aws
       end
 
       # Wire key => [member_name, member_ref], cached on the shape.
-      def lookup_table(shape)
-        shape.instance_variable_get(:@rpc_v2_lut) ||
-          shape.instance_variable_set(:@rpc_v2_lut, build_lookup_table(shape))
+      def members_by_wire_name(shape)
+        shape.instance_variable_get(:@rpc_v2_members_by_wire_name) ||
+          shape.instance_variable_set(:@rpc_v2_members_by_wire_name, build_members_by_wire_name(shape))
       end
 
-      def build_lookup_table(shape)
+      def build_members_by_wire_name(shape)
         table = {}
         shape.members.each do |name, member_ref|
           table[member_ref.location_name || name.to_s] = [name, member_ref]

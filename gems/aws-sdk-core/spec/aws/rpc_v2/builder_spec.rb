@@ -27,6 +27,13 @@ module Aws
         expect(bytes).to eq(Cbor::Encoder.new.add(expected).bytes)
         expect(Cbor::Decoder.new(bytes).decode).to eq(expected)
       end
+
+      it 'raises a Timeout::Error from the fast path without falling back' do
+        builder = Builder.new(rules)
+        allow_any_instance_of(Cbor::Encoder).to receive(:add_counted_map).and_raise(Timeout::Error)
+        expect(builder).not_to receive(:format)
+        expect { builder.serialize(string: 'x') }.to raise_error(Timeout::Error)
+      end
     end
   end
 end

@@ -10,211 +10,150 @@ module Aws
     # The fast paths must behave exactly like the original format/decode-then-walk code, which both classes
     # keep as their fallback: same bytes or struct, or the same exception class and message.
     describe 'Builder and Parser parity with the original algorithms' do
-      let(:api) do
-        ApiHelper.sample_api(api: {
-          'metadata' => {
-            'protocol' => 'smithy-rpc-v2-cbor', 'apiVersion' => '2020-01-01', 'endpointPrefix' => 'svc',
-            'serviceId' => 'Svc', 'signatureVersion' => 'v4', 'targetPrefix' => 'Svc'
-          },
-          'operations' => {
-            'Op' => {
-              'name' => 'Op', 'http' => { 'method' => 'POST', 'requestUri' => '/' },
-              'input' => { 'shape' => 'Item' }, 'output' => { 'shape' => 'Item' }
-            }
-          },
-          'shapes' => {
-            'Item' => {
-              'type' => 'structure',
-              'members' => {
-                'S' => { 'shape' => 'Str' }, 'I' => { 'shape' => 'Int' }, 'F' => { 'shape' => 'Dbl' },
-                'B' => { 'shape' => 'Bool' }, 'T' => { 'shape' => 'Time' }, 'Bl' => { 'shape' => 'Blob' },
-                'L' => { 'shape' => 'StrList' }, 'M' => { 'shape' => 'StrMap' }, 'U' => { 'shape' => 'Un' },
-                'Child' => { 'shape' => 'Item' }, 'Renamed' => { 'shape' => 'Str', 'locationName' => 'wire' },
-                'Wide' => { 'shape' => 'Wide' }, 'FU' => { 'shape' => 'FlatUn' }
-              }
-            },
-            'Wide' => {
-              'type' => 'structure',
-              'members' => (1..25).to_h { |i| ["W#{i}", { 'shape' => 'Str' }] }
-            },
-            'Un' => {
-              'type' => 'structure', 'union' => true,
-              'members' => { 'A' => { 'shape' => 'Str' }, 'N' => { 'shape' => 'Int' } }
-            },
-            # A union with a flattened list member, which query-compatible parsing defaults to [].
-            'FlatUn' => {
-              'type' => 'structure', 'union' => true,
-              'members' => { 'FL' => { 'shape' => 'FlatList' }, 'A' => { 'shape' => 'Str' } }
-            },
-            'FlatList' => { 'type' => 'list', 'member' => { 'shape' => 'Str' }, 'flattened' => true },
-            'StrList' => { 'type' => 'list', 'member' => { 'shape' => 'Str' } },
-            'StrMap' => { 'type' => 'map', 'key' => { 'shape' => 'Str' }, 'value' => { 'shape' => 'Str' } },
-            'Str' => { 'type' => 'string' }, 'Int' => { 'type' => 'integer' }, 'Dbl' => { 'type' => 'double' },
-            'Bool' => { 'type' => 'boolean' }, 'Time' => { 'type' => 'timestamp' }, 'Blob' => { 'type' => 'blob' }
-          }
-        })
-      end
+      let(:api) { ApiHelper.sample_api(api: JSON.load_file(File.expand_path('rpcv2-parity-api.json', __dir__))) }
       let(:input) { api.operation(:op).input }
       let(:output) { api.operation(:op).output }
 
       def outcome
         [:ok, yield]
       rescue StandardError => e
-        [:error, e.class, e.message]
+        # Ruby 3.2 and older include object addresses in NoMethodError messages.
+        [:error, e.class, e.message.gsub(/0x\h+/, '0x')]
       end
 
+      # Every case compares the fast path with the original code. Each group also pins the expected outcome, so a
+      # case cannot pass by taking the same unexpected path (for example an error) in both.
+      #   fast path:    serialize succeeds without calling the original #format
+      #   same result:  serialize succeeds; it may use the original #format
+      #   same error:   serialize raises what the original raises
       describe Builder do
-        def expect_parity(params)
+        def expect_parity(params, expectation)
           builder = Builder.new(input)
           old = outcome { RpcV2.encode(builder.send(:format, input, params.call)) }
+          expect(builder).not_to receive(:format) if expectation == :fast_path
           new = outcome { builder.serialize(params.call) }
           expect(new).to eq(old)
+          expect(new.first).to eq(expectation == :same_error ? :error : :ok)
         end
 
         {
-          'matching types' => lambda {
-            { s: 'héllo', i: 7, f: 1.5, b: true, t: Time.at(1_600_000_000), bl: 'raw',
-              l: %w[a b], m: { 'k' => 'v' }, u: { a: 'x' }, child: { s: 'nested' }, renamed: 'w' }
-          },
-          'Symbol and BINARY String for a string member' => -> { { s: :sym, child: { s: "\xff".b } } },
-          'non-UTF-8 strings with invalid bytes' => lambda {
-            { s: "a\xffb".dup.force_encoding('US-ASCII'), l: ['abc'.encode('UTF-16LE')],
-              m: { "caf\xe9".dup.force_encoding('ISO-8859-1') => 'v' } }
-          },
-          'valid non-UTF-8 strings' => lambda {
-            { s: 'abc'.encode('US-ASCII'), l: ['abc'.encode('UTF-16LE'), 'é'.encode('UTF-16BE')],
-              m: { 'k'.encode('ISO-8859-1') => 'v'.encode('Shift_JIS') } }
-          },
-          'Integer for a float member, Float for an integer member' => -> { { f: 1, i: 2.5 } },
-          'String for an integer member, BigDecimal for a float member' => -> { { i: '3', f: BigDecimal('1.25') } },
-          'non-boolean for a boolean member, Integer for a timestamp member' => -> { { b: 'yes', t: 5 } },
-          'nil elements and values' => -> { { l: ['a', nil], m: { 'k' => nil } } },
-          'Set for a list, Array of pairs for a map' => -> { { l: Set['a'], m: [%w[k v]] } },
-          'map keys that are Symbols, BINARY Strings and Integers' => -> { { m: { k: 'a', "\xfe".b => 'b', 1 => 'c' } } },
-          'IO for a blob' => -> { { bl: StringIO.new('io bytes') } },
-          'nil for a structure inside a list' => -> { { child: { l: [nil] } } },
-          'a structure with 24+ members set' => -> { { wide: (1..25).to_h { |i| [:"w#{i}", "v#{i}"] } } },
-          'a structure with exactly 23 and 24 members set' => lambda {
-            { wide: (1..23).to_h { |i| [:"w#{i}", 'v'] }, child: { wide: (1..24).to_h { |i| [:"w#{i}", 'v'] } } }
-          },
-          'String keys' => -> { { 's' => 'x', 'child' => { 'i' => 1 }, 'renamed' => 'w' } },
-          'a non-Symbol, non-String key with a nil value' => -> { { s: 'x', 1 => nil } },
-          'a non-Symbol, non-String key with a value' => -> { { 1 => 'x' } },
-          'unknown keys and nil values' => -> { { s: nil, nope: 'x', 'nope' => 'y', i: 3 } },
-          'a Struct for a structure' => -> { { child: Struct.new(:s, :i).new('x', 2) } },
-          'the same member as Symbol and String' => -> { { s: 'a', 's' => 'b' } },
-          'the same member as Symbol and String, custom location_name' => -> { { renamed: 'a', 'renamed' => 'b', i: 1 } },
-          'String before Symbol for the same member' => -> { { i: 1, 'renamed' => 'b', renamed: 'a' } },
-          'nil Symbol value plus String value for the same member' => -> { { renamed: nil, 'renamed' => 'b' } },
-          'an IO blob before the same member as Symbol and String' => lambda {
-            { bl: StringIO.new('payload'), renamed: 'a', 'renamed' => 'b' }
-          },
-          'a nested IO blob before the same member as Symbol and String' => lambda {
-            { child: { bl: StringIO.new('payload') }, s: 'a', 's' => 'b' }
-          },
-          'the same member as Symbol and BINARY String' => -> { { renamed: 'a', 'renamed'.b => 'b' } },
-          'the same member as two String keys of a compare_by_identity Hash' => lambda {
-            {}.compare_by_identity.tap { |h| h[+'renamed'] = 'a'; h[+'renamed'] = 'b' }
-          },
-          'an unencodable value overwritten by its String twin' => -> { { s: { 'x' => Set['a'] }, 's' => 'ok' } },
-          'an unencodable value before a value the original fails to format' => -> { { b: Set['a'], child: 'x' } },
-          'an IO for a list' => -> { { l: StringIO.new("a\nb\n") } },
-          'an IO for a structure' => -> { { child: StringIO.new('x') } }
-        }.each do |name, params|
-          it("matches for #{name}") { expect_parity(params) }
+          'params served by the fast path' => [:fast_path, {
+            'every member type' => lambda {
+              { string: 'héllo', integer: 7, double: 1.5, boolean: true, timestamp: Time.at(1_600_000_000),
+                blob: +'raw', string_list: %w[a b], string_map: { 'k' => 'v' }, union: { text: 'x' },
+                child: { string: 'nested' }, children: [{ string: 'a' }, { integer: 1 }], renamed: 'w' }
+            },
+            'a structure with 24+ members set' => -> { { wide: (1..25).to_h { |i| [:"field#{i}", "v#{i}"] } } },
+            'structures with exactly 23 and 24 members set' => lambda {
+              { wide: (1..23).to_h { |i| [:"field#{i}", 'v'] },
+                child: { wide: (1..24).to_h { |i| [:"field#{i}", 'v'] } } }
+            },
+            'String keys' => -> { { 'string' => 'x', 'child' => { 'integer' => 1 }, 'renamed' => 'w' } },
+            'a Struct for a structure' => -> { { child: Struct.new(:string, :integer).new('x', 2) } },
+            'unknown keys and nil values' => -> { { string: nil, not_a_member: 'x', 'not_a_member' => 'y', integer: 3 } },
+            'a Symbol and a BINARY String for string members' => -> { { string: :sym, child: { string: "\xff".b } } },
+            'valid non-UTF-8 strings' => lambda {
+              { string: 'abc'.encode('US-ASCII'), string_list: ['abc'.encode('UTF-16LE'), 'é'.encode('UTF-16BE')],
+                string_map: { 'k'.encode('ISO-8859-1') => 'v'.encode('Shift_JIS') } }
+            },
+            'an Integer for a double, a Float for an integer' => -> { { double: 1, integer: 2.5 } },
+            'a String for an integer, a BigDecimal for a double' => -> { { integer: '3', double: BigDecimal('1.25') } },
+            'a String for a boolean, an Integer for a timestamp' => -> { { boolean: 'yes', timestamp: 5 } },
+            'nil list elements and map values' => -> { { string_list: ['a', nil], string_map: { 'k' => nil } } },
+            'map keys that are Symbols, BINARY Strings and Integers' => lambda {
+              { string_map: { k: 'a', "\xfe".b => 'b', 1 => 'c' } }
+            }
+          }],
+          'params the fast path hands to the original code, with the same result' => [:same_result, {
+            'a Set for a list, an Array of pairs for a map' => -> { { string_list: Set['a'], string_map: [%w[k v]] } },
+            'an IO for a blob' => -> { { blob: StringIO.new('io bytes') } },
+            'an IO for a list' => -> { { string_list: StringIO.new("a\nb\n") } },
+            'a member as Symbol and String' => -> { { string: 'a', 'string' => 'b' } },
+            'a member with a location_name as Symbol and String' => -> { { renamed: 'a', 'renamed' => 'b', integer: 1 } },
+            'a member as String, then Symbol' => -> { { integer: 1, 'renamed' => 'b', renamed: 'a' } },
+            'a member as Symbol with nil, then String' => -> { { renamed: nil, 'renamed' => 'b' } },
+            'a member as Symbol and BINARY String' => -> { { renamed: 'a', 'renamed'.b => 'b' } },
+            'a member as two String keys of a compare_by_identity structure Hash' => lambda {
+              {}.compare_by_identity.tap { |h| h[+'renamed'] = 'a'; h[+'renamed'] = 'b' }
+            },
+            'two equal String keys of a compare_by_identity map' => lambda {
+              { string_map: {}.compare_by_identity.tap { |h| h[+'k'] = 'a'; h[+'k'] = 'b' } }
+            },
+            'an IO blob before a member as Symbol and String' => lambda {
+              { blob: StringIO.new('payload'), renamed: 'a', 'renamed' => 'b' }
+            },
+            'a nested IO blob before a member as Symbol and String' => lambda {
+              { child: { blob: StringIO.new('payload') }, string: 'a', 'string' => 'b' }
+            },
+            'an unencodable value overwritten by its String twin' => lambda {
+              { string: { 'x' => Set['a'] }, 'string' => 'ok' }
+            }
+          }],
+          'params the original rejects, so the fast path raises the same error' => [:same_error, {
+            'a frozen String for a blob' => -> { { blob: 'frozen' } },
+            'non-UTF-8 strings with invalid bytes' => lambda {
+              { string: "a\xffb".dup.force_encoding('US-ASCII'), string_list: ['abc'.encode('UTF-16LE')],
+                string_map: { "caf\xe9".dup.force_encoding('ISO-8859-1') => 'v' } }
+            },
+            'a nil element in a list of structures' => -> { { children: [nil, { string: 'x' }] } },
+            'a non-Symbol, non-String key with a nil value' => -> { { string: 'x', 1 => nil } },
+            'a non-Symbol, non-String key with a value' => -> { { 1 => 'x' } },
+            'an IO for a structure' => -> { { child: StringIO.new('x') } },
+            'an unencodable value before a value that fails to format' => -> { { boolean: Set['a'], child: 'x' } }
+          }]
+        }.each do |group, (expectation, cases)|
+          context(group) do
+            cases.each do |name, params|
+              it("matches for #{name}") { expect_parity(params, expectation) }
+            end
+          end
         end
       end
 
+      # Each case in rpcv2-parity-parse-tests.json has CBOR diagnostic notation for its input, and the
+      # original's result (structs as their non-nil members, unions with their __class) or error class.
       describe Parser do
-        def expect_parity(bytes, query_compatible: false)
-          parser = Parser.new(output, query_compatible: query_compatible)
-          old = outcome { normalize(parser.send(:parse_ref, output, RpcV2.decode(bytes.dup), nil)) }
-          new = outcome { normalize(parser.parse(bytes.dup)) }
-          expect(new).to eq(old)
-        end
-
         # Hash equality ignores order, so compare containers as ordered pairs.
-        def normalize(value)
+        def ordered(value)
           case value
-          when Struct then [value.class.name, value.each_pair.map { |k, v| [k, normalize(v)] }]
-          when Hash then [:hash, value.map { |k, v| [k, normalize(v)] }]
-          when Array then value.map { |v| normalize(v) }
+          when Struct then [value.class.name, value.each_pair.map { |k, v| [k, ordered(v)] }]
+          when Hash then [:hash, value.map { |k, v| [k, ordered(v)] }]
+          when Array then value.map { |v| ordered(v) }
           else value
           end
         end
 
-        def text(str)
-          b(0x60 + str.bytesize) + str.b
-        end
-
-        def cbor(value)
-          Cbor::Encoder.new.add(value).bytes
-        end
-
-        def b(*bytes)
-          bytes.pack('C*').force_encoding(Encoding::BINARY)
-        end
-
-        {
-          'matching types' => -> { cbor('S' => 'x', 'I' => 1, 'L' => %w[a], 'M' => { 'k' => 'v' }, 'U' => { 'A' => 'y' }) },
-          'renamed and unknown members' => -> { cbor('wire' => 'w', 'Nope' => [1, { 'x' => 2 }]) },
-          # {"S": null, "L": [null, undefined], "M": {"k": undefined}, "I": undefined}
-          'CBOR null and undefined values' => lambda {
-            b(0xa4, 0x61, 0x53, 0xf6, 0x61, 0x4c, 0x82, 0xf6, 0xf7,
-              0x61, 0x4d, 0xa1, 0x61, 0x6b, 0xf7, 0x61, 0x49, 0xf7)
-          },
-          'Integer for a string member, String for an integer member' => -> { cbor('S' => 5, 'I' => 'five') },
-          'array for a structure member, map for a list member' => -> { cbor('Child' => [1, 2], 'L' => { 'a' => 'b' }) },
-          # {"S": "ab" as indefinite text, "L": indefinite ["a"], "M": indefinite {"k": "v"}} as an indefinite map
-          'indefinite-length maps, arrays and strings' => lambda {
-            b(0xbf, 0x61, 0x53, 0x7f, 0x61, 0x61, 0x61, 0x62, 0xff,
-              0x61, 0x4c, 0x9f, 0x61, 0x61, 0xff,
-              0x61, 0x4d, 0xbf, 0x61, 0x6b, 0x61, 0x76, 0xff, 0xff)
-          },
-          'union with an unknown member' => -> { cbor('U' => { 'Z' => 1 }) },
-          'empty union' => -> { cbor('U' => {}) },
-          'union with only __type' => -> { cbor('U' => { '__type' => 't' }) },
-          'union member with a null value' => -> { cbor('U' => { 'A' => nil }) },
-          'union with two members' => -> { cbor('U' => { 'N' => 1, 'A' => 'x' }) },
-          'trailing bytes after the body' => -> { cbor('S' => 'x') + cbor(1) },
-          'a CBOR null body' => -> { b(0xf6) },
-          'nesting deeper than the decoder limit' => lambda {
-            deep = (1..130).reduce('S' => 'leaf') { |inner, _| { 'Child' => inner } }
-            cbor(deep)
-          },
-          'truncated body' => -> { cbor('S' => 'abcdef')[0..-3] },
-          'a non-map body with trailing bytes' => -> { b(0x05, 0x01) },
-          'a malformed member value with trailing bytes' => -> { cbor('Child' => 5) + b(0x01) },
-          'a list claiming more elements than the body holds' => -> { cbor('L' => [])[0..-2] + b(0x9a, 0x00, 0x0f, 0x42, 0x40) },
-          # {"M": {"k": "v", "k": null}}
-          'a duplicate map key whose last value is null' => lambda {
-            b(0xa1) + text('M') + b(0xa2) + text('k') + text('v') + text('k') + b(0xf6)
-          },
-          # {"M": {"k": "v1", "j": "x", "k": null, "k": "v2"}}
-          'duplicate map keys, null in between' => lambda {
-            b(0xa1) + text('M') + b(0xa4) + text('k') + text('v1') + text('j') + text('x') +
-              text('k') + b(0xf6) + text('k') + text('v2')
-          },
-          # {"U": {}, "U": {"A": "x"}}
-          'an empty union overwritten by a duplicate key' => lambda {
-            b(0xa2) + text('U') + b(0xa0) + text('U') + b(0xa1) + text('A') + text('x')
-          }
-        }.each do |name, body|
-          it("matches for #{name}") { expect_parity(instance_exec(&body)) }
-        end
-
-        {
-          'a union whose flattened list member comes first' => -> { cbor('FU' => { 'A' => 'x' }) },
-          'a union with only its flattened list member' => -> { cbor('FU' => { 'FL' => ['y'] }) },
-          'a structure with flattened members unset' => -> { cbor('S' => 'x') }
-        }.each do |name, body|
-          it("matches for #{name} when query compatible") do
-            expect_parity(instance_exec(&body), query_compatible: true)
+        def plain(value)
+          case value
+          when Aws::Structure::Union
+            { '__class' => value.class.name.split('::').last }.merge(plain_members(value))
+          when Struct then plain_members(value)
+          when Hash then value.to_h { |k, v| [k, plain(v)] }
+          when Array then value.map { |v| plain(v) }
+          when Symbol then value.to_s
+          else value
           end
         end
 
-        it 'raises the same error as before for an empty union' do
-          expect { Parser.new(output).parse(cbor('U' => {})) }.to raise_error(NoMethodError)
+        def plain_members(struct)
+          struct.each_pair.reject { |_, v| v.nil? }.to_h { |k, v| [k.to_s, plain(v)] }
+        end
+
+        JSON.load_file(File.expand_path('rpcv2-parity-parse-tests.json', __dir__)).each do |test|
+          it("matches for #{test['description']}") do
+            bytes = [test['input']].pack('H*')
+            parser = Parser.new(output, query_compatible: test.fetch('queryCompatible', false))
+            old = outcome { parser.send(:parse_ref, output, RpcV2.decode(bytes.dup), nil) }
+            new = outcome { parser.parse(bytes.dup) }
+            expect(ordered(new)).to eq(ordered(old))
+
+            if test.key?('error')
+              expect(new[0..1]).to eq([:error, Object.const_get(test['error'])])
+            else
+              expect(new[0]).to eq(:ok)
+              expect(ordered(plain(new[1]))).to eq(ordered(test['expect']))
+            end
+          end
         end
       end
     end

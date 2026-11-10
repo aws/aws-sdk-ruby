@@ -169,6 +169,7 @@ module Aws
           encoder = Encoder.new.add([value, 'ü'])
           expect(encoder.bytes.encoding).to eq(Encoding::BINARY)
           expect(value.encoding).to eq(Encoding::UTF_8)
+          expect(value).to eq('éa')
         end
 
         it 'transcodes ASCII-only strings in other encodings to the same bytes' do

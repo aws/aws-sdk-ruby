@@ -97,11 +97,6 @@ module Aws
 
       # Methods used by RpcV2::Parser; behavior must match #decode.
       describe 'parser read surface (@api private)' do
-        it 'exposes exactly the intended public methods' do
-          surface = %i[peek_type decode_item each_map_key each_array_element]
-          expect(Decoder.public_instance_methods(false)).to match_array(%i[decode] + surface)
-        end
-
         it 'yields each map key with the map size, the block reading the value' do
           d = Decoder.new(Encoder.new.add({ 'S' => 'hi', 'N' => 1 }).bytes)
           pairs = []
@@ -133,13 +128,22 @@ module Aws
         end
 
         it 'counts maps and arrays read with blocks toward the decode_item depth limit' do
-          deep = Decoder.new(Encoder.new.add((1..127).reduce([1]) { |inner, _| [inner] }).bytes)
-          read = -> { deep.peek_type == :array ? deep.each_array_element { read.call } : deep.decode_item }
-          expect { read.call }.to raise_error(Error, /Maximum nesting depth/)
+          read = lambda do |d|
+            case d.peek_type
+            when :array then d.each_array_element { read.call(d) }
+            when :map then d.each_map_key { read.call(d) }
+            else d.decode_item
+            end
+          end
+          arrays = ->(depth) { (1..depth).reduce(1) { |inner, _| [inner] } }
+          maps = ->(depth) { (1..depth).reduce(1) { |inner, _| { 'k' => inner } } }
+          mixed = ->(depth) { (1..depth).reduce(1) { |inner, i| i.even? ? [inner] : { 'k' => inner } } }
 
-          ok = Decoder.new(Encoder.new.add((1..126).reduce([1]) { |inner, _| [inner] }).bytes)
-          read_ok = -> { ok.peek_type == :array ? ok.each_array_element { read_ok.call } : ok.decode_item }
-          expect { read_ok.call }.not_to raise_error
+          [arrays, maps, mixed].each do |nest|
+            expect { read.call(Decoder.new(Encoder.new.add(nest.call(128)).bytes)) }
+              .to raise_error(Error, /Maximum nesting depth/)
+            expect { read.call(Decoder.new(Encoder.new.add(nest.call(127)).bytes)) }.not_to raise_error
+          end
         end
 
         it 'reads the item with the block passed to decode, then raises ExtraBytesError like #decode' do

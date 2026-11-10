@@ -26,9 +26,9 @@ module Aws
           encoder.bytes
         rescue Fallback
           RpcV2.encode(format(@rules, params))
-        rescue StandardError => e
-          raise if defined?(::Timeout::Error) && e.is_a?(::Timeout::Error) # raised into the thread by timeout < 0.4
-
+        rescue ::Timeout::Error
+          raise # raised into the thread by timeout < 0.4
+        rescue StandardError
           # Invalid params: #format formats all params before encoding and merges :name with "name", so its
           # result or error applies. The fast path has no side effects.
           RpcV2.encode(format(@rules, params))
@@ -37,7 +37,8 @@ module Aws
 
       private
 
-      # Raised before the fast path reads an IO or iterates a list or map that isn't an Array or Hash.
+      # Raised before the fast path reads an IO, iterates a list or map that isn't an Array or Hash, or writes
+      # keys that #format would merge.
       class Fallback < StandardError; end
       private_constant :Fallback
 
@@ -122,6 +123,9 @@ module Aws
       end
 
       def write_map(encoder, ref, values)
+        # #map collects into a plain Hash, which merges equal keys.
+        raise Fallback if values.compare_by_identity?
+
         value_ref, kind = container_plan(ref.shape, :value)
         encoder.start_map(values.size)
         values.each do |key, value|
