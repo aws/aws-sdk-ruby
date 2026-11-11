@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Reuse the chunk size header of full chunks when streaming request bodies with checksum trailers.
+
 * Feature - Reuse read buffers to reduce allocations when calculating request checksums sent in headers.
 
 3.267.0 (2026-11-10)
