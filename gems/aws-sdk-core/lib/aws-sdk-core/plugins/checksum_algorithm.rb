@@ -522,7 +522,7 @@ module Aws
           n_full_chunks = orig_body_size / @base_chunk_size
           partial_bytes = orig_body_size % @base_chunk_size
 
-          full_chunk_overhead = @base_chunk_size.to_s(HEX_BASE).size + CHUNK_OVERHEAD
+          full_chunk_overhead = @full_chunk_size_hex.bytesize + CHUNK_OVERHEAD
           chunked_body_size = n_full_chunks * (@base_chunk_size + full_chunk_overhead)
           unless partial_bytes.zero?
             chunked_body_size += partial_bytes.to_s(HEX_BASE).size + partial_bytes + CHUNK_OVERHEAD
