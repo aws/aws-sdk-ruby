@@ -52,6 +52,12 @@ module Seahorse
           expect(ref['key']).to eq('value')
         end
 
+        it 'returns nil for metadata that was never set' do
+          expect(ShapeRef.new[:key]).to be(nil)
+          expect(ShapeRef.new(shape: Shape.new)[:key]).to be(nil)
+          expect(Shape.new[:key]).to be(nil)
+        end
+
         it 'can be populated via .new' do
           shape = double('shape')
           ref = ShapeRef.new(
