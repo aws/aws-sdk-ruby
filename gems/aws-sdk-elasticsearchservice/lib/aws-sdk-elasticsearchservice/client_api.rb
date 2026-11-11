@@ -67,6 +67,10 @@ module Aws::ElasticsearchService
     ChangeProgressStageStatus = Shapes::StringShape.new(name: 'ChangeProgressStageStatus')
     ChangeProgressStatusDetails = Shapes::StructureShape.new(name: 'ChangeProgressStatusDetails')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    ClonedBlueGreenOptions = Shapes::StructureShape.new(name: 'ClonedBlueGreenOptions')
+    ClonedBlueGreenScheduledAction = Shapes::StructureShape.new(name: 'ClonedBlueGreenScheduledAction')
+    ClonedBlueGreenScheduledActionType = Shapes::StringShape.new(name: 'ClonedBlueGreenScheduledActionType')
+    ClonedBlueGreenUpgradeDetails = Shapes::StructureShape.new(name: 'ClonedBlueGreenUpgradeDetails')
     CloudWatchLogsLogGroupArn = Shapes::StringShape.new(name: 'CloudWatchLogsLogGroupArn')
     CognitoOptions = Shapes::StructureShape.new(name: 'CognitoOptions')
     CognitoOptionsStatus = Shapes::StructureShape.new(name: 'CognitoOptionsStatus')
@@ -88,6 +92,10 @@ module Aws::ElasticsearchService
     CreatedAt = Shapes::TimestampShape.new(name: 'CreatedAt')
     CrossClusterSearchConnectionId = Shapes::StringShape.new(name: 'CrossClusterSearchConnectionId')
     CrossClusterSearchConnectionStatusMessage = Shapes::StringShape.new(name: 'CrossClusterSearchConnectionStatusMessage')
+    CutoverOptions = Shapes::StructureShape.new(name: 'CutoverOptions')
+    CutoverRequestOptions = Shapes::StructureShape.new(name: 'CutoverRequestOptions')
+    CutoverStatus = Shapes::StringShape.new(name: 'CutoverStatus')
+    CutoverTarget = Shapes::StringShape.new(name: 'CutoverTarget')
     DeleteElasticsearchDomainRequest = Shapes::StructureShape.new(name: 'DeleteElasticsearchDomainRequest')
     DeleteElasticsearchDomainResponse = Shapes::StructureShape.new(name: 'DeleteElasticsearchDomainResponse')
     DeleteInboundCrossClusterSearchConnectionRequest = Shapes::StructureShape.new(name: 'DeleteInboundCrossClusterSearchConnectionRequest')
@@ -103,6 +111,8 @@ module Aws::ElasticsearchService
     DeploymentStrategy = Shapes::StringShape.new(name: 'DeploymentStrategy')
     DeploymentStrategyOptions = Shapes::StructureShape.new(name: 'DeploymentStrategyOptions')
     DeploymentStrategyOptionsStatus = Shapes::StructureShape.new(name: 'DeploymentStrategyOptionsStatus')
+    DeploymentStrategyOverride = Shapes::StringShape.new(name: 'DeploymentStrategyOverride')
+    DeploymentStrategyOverrideOptions = Shapes::StructureShape.new(name: 'DeploymentStrategyOverrideOptions')
     DeploymentType = Shapes::StringShape.new(name: 'DeploymentType')
     DescribeDomainAutoTunesRequest = Shapes::StructureShape.new(name: 'DescribeDomainAutoTunesRequest')
     DescribeDomainAutoTunesResponse = Shapes::StructureShape.new(name: 'DescribeDomainAutoTunesResponse')
@@ -292,6 +302,8 @@ module Aws::ElasticsearchService
     ReservedElasticsearchInstancePaymentOption = Shapes::StringShape.new(name: 'ReservedElasticsearchInstancePaymentOption')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RetentionAction = Shapes::StringShape.new(name: 'RetentionAction')
+    RetentionOptions = Shapes::UnionShape.new(name: 'RetentionOptions')
     RevokeVpcEndpointAccessRequest = Shapes::StructureShape.new(name: 'RevokeVpcEndpointAccessRequest')
     RevokeVpcEndpointAccessResponse = Shapes::StructureShape.new(name: 'RevokeVpcEndpointAccessResponse')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
@@ -330,7 +342,15 @@ module Aws::ElasticsearchService
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TimeUnit = Shapes::StringShape.new(name: 'TimeUnit')
     TotalNumberOfStages = Shapes::IntegerShape.new(name: 'TotalNumberOfStages')
+    TrafficPercent = Shapes::IntegerShape.new(name: 'TrafficPercent')
+    TrafficPercents = Shapes::StructureShape.new(name: 'TrafficPercents')
+    TrafficSplitOptions = Shapes::StructureShape.new(name: 'TrafficSplitOptions')
+    TrafficSplitRequestOptions = Shapes::StructureShape.new(name: 'TrafficSplitRequestOptions')
+    TrafficSplitStatus = Shapes::StringShape.new(name: 'TrafficSplitStatus')
+    TrafficStrategy = Shapes::StringShape.new(name: 'TrafficStrategy')
     UIntValue = Shapes::IntegerShape.new(name: 'UIntValue')
+    UpdateCloneRequest = Shapes::StructureShape.new(name: 'UpdateCloneRequest')
+    UpdateCloneResponse = Shapes::StructureShape.new(name: 'UpdateCloneResponse')
     UpdateElasticsearchDomainConfigRequest = Shapes::StructureShape.new(name: 'UpdateElasticsearchDomainConfigRequest')
     UpdateElasticsearchDomainConfigResponse = Shapes::StructureShape.new(name: 'UpdateElasticsearchDomainConfigResponse')
     UpdatePackageRequest = Shapes::StructureShape.new(name: 'UpdatePackageRequest')
@@ -542,7 +562,20 @@ module Aws::ElasticsearchService
     ChangeProgressStatusDetails.add_member(:config_change_status, Shapes::ShapeRef.new(shape: ConfigChangeStatus, location_name: "ConfigChangeStatus"))
     ChangeProgressStatusDetails.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "LastUpdatedTime"))
     ChangeProgressStatusDetails.add_member(:initiated_by, Shapes::ShapeRef.new(shape: InitiatedBy, location_name: "InitiatedBy"))
+    ChangeProgressStatusDetails.add_member(:cloned_blue_green_upgrade_details, Shapes::ShapeRef.new(shape: ClonedBlueGreenUpgradeDetails, location_name: "ClonedBlueGreenUpgradeDetails"))
     ChangeProgressStatusDetails.struct_class = Types::ChangeProgressStatusDetails
+
+    ClonedBlueGreenOptions.add_member(:retention_options, Shapes::ShapeRef.new(shape: RetentionOptions, location_name: "RetentionOptions"))
+    ClonedBlueGreenOptions.struct_class = Types::ClonedBlueGreenOptions
+
+    ClonedBlueGreenScheduledAction.add_member(:action, Shapes::ShapeRef.new(shape: ClonedBlueGreenScheduledActionType, location_name: "Action"))
+    ClonedBlueGreenScheduledAction.add_member(:scheduled_time, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "ScheduledTime"))
+    ClonedBlueGreenScheduledAction.struct_class = Types::ClonedBlueGreenScheduledAction
+
+    ClonedBlueGreenUpgradeDetails.add_member(:traffic_split, Shapes::ShapeRef.new(shape: TrafficPercents, location_name: "TrafficSplit"))
+    ClonedBlueGreenUpgradeDetails.add_member(:scheduled_action, Shapes::ShapeRef.new(shape: ClonedBlueGreenScheduledAction, location_name: "ScheduledAction"))
+    ClonedBlueGreenUpgradeDetails.add_member(:retention_in_hours, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "RetentionInHours"))
+    ClonedBlueGreenUpgradeDetails.struct_class = Types::ClonedBlueGreenUpgradeDetails
 
     CognitoOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     CognitoOptions.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolId, location_name: "UserPoolId"))
@@ -619,6 +652,13 @@ module Aws::ElasticsearchService
     CreateVpcEndpointResponse.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: VpcEndpoint, required: true, location_name: "VpcEndpoint"))
     CreateVpcEndpointResponse.struct_class = Types::CreateVpcEndpointResponse
 
+    CutoverOptions.add_member(:target, Shapes::ShapeRef.new(shape: CutoverTarget, required: true, location_name: "Target"))
+    CutoverOptions.add_member(:status, Shapes::ShapeRef.new(shape: CutoverStatus, required: true, location_name: "Status"))
+    CutoverOptions.struct_class = Types::CutoverOptions
+
+    CutoverRequestOptions.add_member(:target, Shapes::ShapeRef.new(shape: CutoverTarget, required: true, location_name: "Target"))
+    CutoverRequestOptions.struct_class = Types::CutoverRequestOptions
+
     DeleteElasticsearchDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     DeleteElasticsearchDomainRequest.struct_class = Types::DeleteElasticsearchDomainRequest
 
@@ -655,6 +695,10 @@ module Aws::ElasticsearchService
     DeploymentStrategyOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: DeploymentStrategyOptions, required: true, location_name: "Options"))
     DeploymentStrategyOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
     DeploymentStrategyOptionsStatus.struct_class = Types::DeploymentStrategyOptionsStatus
+
+    DeploymentStrategyOverrideOptions.add_member(:deployment_strategy, Shapes::ShapeRef.new(shape: DeploymentStrategyOverride, required: true, location_name: "DeploymentStrategy"))
+    DeploymentStrategyOverrideOptions.add_member(:cloned_blue_green_options, Shapes::ShapeRef.new(shape: ClonedBlueGreenOptions, location_name: "ClonedBlueGreenOptions"))
+    DeploymentStrategyOverrideOptions.struct_class = Types::DeploymentStrategyOverrideOptions
 
     DescribeDomainAutoTunesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     DescribeDomainAutoTunesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -1208,6 +1252,14 @@ module Aws::ElasticsearchService
 
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    RetentionOptions.add_member(:retention_in_hours, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "RetentionInHours"))
+    RetentionOptions.add_member(:retention_action, Shapes::ShapeRef.new(shape: RetentionAction, location_name: "RetentionAction"))
+    RetentionOptions.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RetentionOptions.add_member_subclass(:retention_in_hours, Types::RetentionOptions::RetentionInHours)
+    RetentionOptions.add_member_subclass(:retention_action, Types::RetentionOptions::RetentionAction)
+    RetentionOptions.add_member_subclass(:unknown, Types::RetentionOptions::Unknown)
+    RetentionOptions.struct_class = Types::RetentionOptions
+
     RevokeVpcEndpointAccessRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     RevokeVpcEndpointAccessRequest.add_member(:account, Shapes::ShapeRef.new(shape: AWSAccount, required: true, location_name: "Account"))
     RevokeVpcEndpointAccessRequest.struct_class = Types::RevokeVpcEndpointAccessRequest
@@ -1284,6 +1336,32 @@ module Aws::ElasticsearchService
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
 
+    TrafficPercents.add_member(:primary_read_traffic_percent, Shapes::ShapeRef.new(shape: TrafficPercent, required: true, location_name: "PrimaryReadTrafficPercent"))
+    TrafficPercents.add_member(:clone_read_traffic_percent, Shapes::ShapeRef.new(shape: TrafficPercent, required: true, location_name: "CloneReadTrafficPercent"))
+    TrafficPercents.struct_class = Types::TrafficPercents
+
+    TrafficSplitOptions.add_member(:current, Shapes::ShapeRef.new(shape: TrafficPercents, required: true, location_name: "Current"))
+    TrafficSplitOptions.add_member(:target, Shapes::ShapeRef.new(shape: TrafficPercents, required: true, location_name: "Target"))
+    TrafficSplitOptions.add_member(:status, Shapes::ShapeRef.new(shape: TrafficSplitStatus, required: true, location_name: "Status"))
+    TrafficSplitOptions.struct_class = Types::TrafficSplitOptions
+
+    TrafficSplitRequestOptions.add_member(:strategy, Shapes::ShapeRef.new(shape: TrafficStrategy, required: true, location_name: "Strategy"))
+    TrafficSplitRequestOptions.add_member(:clone_read_traffic_percent, Shapes::ShapeRef.new(shape: TrafficPercent, required: true, location_name: "CloneReadTrafficPercent"))
+    TrafficSplitRequestOptions.struct_class = Types::TrafficSplitRequestOptions
+
+    UpdateCloneRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    UpdateCloneRequest.add_member(:traffic_split_options, Shapes::ShapeRef.new(shape: TrafficSplitRequestOptions, location_name: "TrafficSplitOptions"))
+    UpdateCloneRequest.add_member(:cutover_options, Shapes::ShapeRef.new(shape: CutoverRequestOptions, location_name: "CutoverOptions"))
+    UpdateCloneRequest.add_member(:retention_options, Shapes::ShapeRef.new(shape: RetentionOptions, location_name: "RetentionOptions"))
+    UpdateCloneRequest.struct_class = Types::UpdateCloneRequest
+
+    UpdateCloneResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    UpdateCloneResponse.add_member(:change_id, Shapes::ShapeRef.new(shape: GUID, required: true, location_name: "ChangeId"))
+    UpdateCloneResponse.add_member(:cutover_options, Shapes::ShapeRef.new(shape: CutoverOptions, location_name: "CutoverOptions"))
+    UpdateCloneResponse.add_member(:traffic_split_options, Shapes::ShapeRef.new(shape: TrafficSplitOptions, location_name: "TrafficSplitOptions"))
+    UpdateCloneResponse.add_member(:retention_options, Shapes::ShapeRef.new(shape: RetentionOptions, location_name: "RetentionOptions"))
+    UpdateCloneResponse.struct_class = Types::UpdateCloneResponse
+
     UpdateElasticsearchDomainConfigRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     UpdateElasticsearchDomainConfigRequest.add_member(:elasticsearch_cluster_config, Shapes::ShapeRef.new(shape: ElasticsearchClusterConfig, location_name: "ElasticsearchClusterConfig"))
     UpdateElasticsearchDomainConfigRequest.add_member(:ebs_options, Shapes::ShapeRef.new(shape: EBSOptions, location_name: "EBSOptions"))
@@ -1328,11 +1406,13 @@ module Aws::ElasticsearchService
     UpgradeElasticsearchDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     UpgradeElasticsearchDomainRequest.add_member(:target_version, Shapes::ShapeRef.new(shape: ElasticsearchVersionString, required: true, location_name: "TargetVersion"))
     UpgradeElasticsearchDomainRequest.add_member(:perform_check_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerformCheckOnly"))
+    UpgradeElasticsearchDomainRequest.add_member(:deployment_strategy_options, Shapes::ShapeRef.new(shape: DeploymentStrategyOverrideOptions, location_name: "DeploymentStrategyOptions"))
     UpgradeElasticsearchDomainRequest.struct_class = Types::UpgradeElasticsearchDomainRequest
 
     UpgradeElasticsearchDomainResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
     UpgradeElasticsearchDomainResponse.add_member(:target_version, Shapes::ShapeRef.new(shape: ElasticsearchVersionString, location_name: "TargetVersion"))
     UpgradeElasticsearchDomainResponse.add_member(:perform_check_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerformCheckOnly"))
+    UpgradeElasticsearchDomainResponse.add_member(:deployment_strategy_options, Shapes::ShapeRef.new(shape: DeploymentStrategyOverrideOptions, location_name: "DeploymentStrategyOptions"))
     UpgradeElasticsearchDomainResponse.add_member(:change_progress_details, Shapes::ShapeRef.new(shape: ChangeProgressDetails, location_name: "ChangeProgressDetails"))
     UpgradeElasticsearchDomainResponse.struct_class = Types::UpgradeElasticsearchDomainResponse
 
@@ -2068,6 +2148,19 @@ module Aws::ElasticsearchService
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_clone, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateClone"
+        o.http_method = "POST"
+        o.http_request_uri = "/2015-01-01/es/domain/{DomainName}/clone"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCloneRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCloneResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
       end)
 
       api.add_operation(:update_elasticsearch_domain_config, Seahorse::Model::Operation.new.tap do |o|

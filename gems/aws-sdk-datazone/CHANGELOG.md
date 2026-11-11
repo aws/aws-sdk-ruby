@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.103.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.102.0 (2026-11-09)
+------------------
+
+* Feature - Adds support for Workday Data Connect and Workday Live Data Query connection types in Amazon DataZone connection APIs.
+
 1.101.0 (2026-11-06)
 ------------------
 

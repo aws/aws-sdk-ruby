@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2026-11-10)
+------------------
+
+* Feature - Release of GetSpaceDataAccess API - Used to get temporary credentials, limited to the requested actions, for working with data in a space.
+
+1.9.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.8.0 (2026-11-06)
 ------------------
 

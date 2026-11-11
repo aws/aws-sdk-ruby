@@ -264,7 +264,8 @@ module Aws::Batch
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::Batch
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -2571,6 +2572,12 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.allow_privilege_escalation #=> Boolean
     #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.read_only_root_filesystem #=> Boolean
     #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.run_as_non_root #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.capabilities.add #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.capabilities.add[0] #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.capabilities.drop #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.capabilities.drop[0] #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.seccomp_profile.type #=> String, one of "RuntimeDefault", "Localhost", "Unconfined"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.seccomp_profile.localhost_profile #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers #=> Array
     #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].name #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].image #=> String
@@ -2597,6 +2604,12 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.allow_privilege_escalation #=> Boolean
     #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.read_only_root_filesystem #=> Boolean
     #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.run_as_non_root #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.capabilities.add #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.capabilities.add[0] #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.capabilities.drop #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.capabilities.drop[0] #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.seccomp_profile.type #=> String, one of "RuntimeDefault", "Localhost", "Unconfined"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.seccomp_profile.localhost_profile #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.volumes #=> Array
     #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.volumes[0].name #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.volumes[0].host_path.path #=> String
@@ -2612,6 +2625,12 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.metadata.annotations["String"] #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.metadata.namespace #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.share_process_namespace #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.security_context.run_as_user #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.security_context.run_as_group #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.security_context.run_as_non_root #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.security_context.seccomp_profile.type #=> String, one of "RuntimeDefault", "Localhost", "Unconfined"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.security_context.seccomp_profile.localhost_profile #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].eks_properties.pod_properties.security_context.fs_group #=> Integer
     #   resp.job_definitions[0].node_properties.node_range_properties[0].consumable_resource_properties.consumable_resource_list #=> Array
     #   resp.job_definitions[0].node_properties.node_range_properties[0].consumable_resource_properties.consumable_resource_list[0].consumable_resource #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].consumable_resource_properties.consumable_resource_list[0].quantity #=> Integer
@@ -2731,6 +2750,12 @@ module Aws::Batch
     #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].security_context.allow_privilege_escalation #=> Boolean
     #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].security_context.read_only_root_filesystem #=> Boolean
     #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].security_context.run_as_non_root #=> Boolean
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].security_context.capabilities.add #=> Array
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].security_context.capabilities.add[0] #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].security_context.capabilities.drop #=> Array
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].security_context.capabilities.drop[0] #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].security_context.seccomp_profile.type #=> String, one of "RuntimeDefault", "Localhost", "Unconfined"
+    #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].security_context.seccomp_profile.localhost_profile #=> String
     #   resp.job_definitions[0].eks_properties.pod_properties.init_containers #=> Array
     #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].name #=> String
     #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].image #=> String
@@ -2757,6 +2782,12 @@ module Aws::Batch
     #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].security_context.allow_privilege_escalation #=> Boolean
     #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].security_context.read_only_root_filesystem #=> Boolean
     #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].security_context.run_as_non_root #=> Boolean
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].security_context.capabilities.add #=> Array
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].security_context.capabilities.add[0] #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].security_context.capabilities.drop #=> Array
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].security_context.capabilities.drop[0] #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].security_context.seccomp_profile.type #=> String, one of "RuntimeDefault", "Localhost", "Unconfined"
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].security_context.seccomp_profile.localhost_profile #=> String
     #   resp.job_definitions[0].eks_properties.pod_properties.volumes #=> Array
     #   resp.job_definitions[0].eks_properties.pod_properties.volumes[0].name #=> String
     #   resp.job_definitions[0].eks_properties.pod_properties.volumes[0].host_path.path #=> String
@@ -2772,6 +2803,12 @@ module Aws::Batch
     #   resp.job_definitions[0].eks_properties.pod_properties.metadata.annotations["String"] #=> String
     #   resp.job_definitions[0].eks_properties.pod_properties.metadata.namespace #=> String
     #   resp.job_definitions[0].eks_properties.pod_properties.share_process_namespace #=> Boolean
+    #   resp.job_definitions[0].eks_properties.pod_properties.security_context.run_as_user #=> Integer
+    #   resp.job_definitions[0].eks_properties.pod_properties.security_context.run_as_group #=> Integer
+    #   resp.job_definitions[0].eks_properties.pod_properties.security_context.run_as_non_root #=> Boolean
+    #   resp.job_definitions[0].eks_properties.pod_properties.security_context.seccomp_profile.type #=> String, one of "RuntimeDefault", "Localhost", "Unconfined"
+    #   resp.job_definitions[0].eks_properties.pod_properties.security_context.seccomp_profile.localhost_profile #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.security_context.fs_group #=> Integer
     #   resp.job_definitions[0].container_orchestration_type #=> String, one of "ECS", "EKS"
     #   resp.job_definitions[0].consumable_resource_properties.consumable_resource_list #=> Array
     #   resp.job_definitions[0].consumable_resource_properties.consumable_resource_list[0].consumable_resource #=> String
@@ -3276,6 +3313,12 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.allow_privilege_escalation #=> Boolean
     #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.read_only_root_filesystem #=> Boolean
     #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.run_as_non_root #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.capabilities.add #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.capabilities.add[0] #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.capabilities.drop #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.capabilities.drop[0] #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.seccomp_profile.type #=> String, one of "RuntimeDefault", "Localhost", "Unconfined"
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.containers[0].security_context.seccomp_profile.localhost_profile #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers #=> Array
     #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].name #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].image #=> String
@@ -3302,6 +3345,12 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.allow_privilege_escalation #=> Boolean
     #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.read_only_root_filesystem #=> Boolean
     #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.run_as_non_root #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.capabilities.add #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.capabilities.add[0] #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.capabilities.drop #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.capabilities.drop[0] #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.seccomp_profile.type #=> String, one of "RuntimeDefault", "Localhost", "Unconfined"
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.init_containers[0].security_context.seccomp_profile.localhost_profile #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.volumes #=> Array
     #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.volumes[0].name #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.volumes[0].host_path.path #=> String
@@ -3317,6 +3366,12 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.metadata.annotations["String"] #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.metadata.namespace #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.share_process_namespace #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.security_context.run_as_user #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.security_context.run_as_group #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.security_context.run_as_non_root #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.security_context.seccomp_profile.type #=> String, one of "RuntimeDefault", "Localhost", "Unconfined"
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.security_context.seccomp_profile.localhost_profile #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].eks_properties.pod_properties.security_context.fs_group #=> Integer
     #   resp.jobs[0].node_properties.node_range_properties[0].consumable_resource_properties.consumable_resource_list #=> Array
     #   resp.jobs[0].node_properties.node_range_properties[0].consumable_resource_properties.consumable_resource_list[0].consumable_resource #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].consumable_resource_properties.consumable_resource_list[0].quantity #=> Integer
@@ -3364,6 +3419,12 @@ module Aws::Batch
     #   resp.jobs[0].eks_properties.pod_properties.containers[0].security_context.allow_privilege_escalation #=> Boolean
     #   resp.jobs[0].eks_properties.pod_properties.containers[0].security_context.read_only_root_filesystem #=> Boolean
     #   resp.jobs[0].eks_properties.pod_properties.containers[0].security_context.run_as_non_root #=> Boolean
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].security_context.capabilities.add #=> Array
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].security_context.capabilities.add[0] #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].security_context.capabilities.drop #=> Array
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].security_context.capabilities.drop[0] #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].security_context.seccomp_profile.type #=> String, one of "RuntimeDefault", "Localhost", "Unconfined"
+    #   resp.jobs[0].eks_properties.pod_properties.containers[0].security_context.seccomp_profile.localhost_profile #=> String
     #   resp.jobs[0].eks_properties.pod_properties.init_containers #=> Array
     #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].name #=> String
     #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].image #=> String
@@ -3392,6 +3453,12 @@ module Aws::Batch
     #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].security_context.allow_privilege_escalation #=> Boolean
     #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].security_context.read_only_root_filesystem #=> Boolean
     #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].security_context.run_as_non_root #=> Boolean
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].security_context.capabilities.add #=> Array
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].security_context.capabilities.add[0] #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].security_context.capabilities.drop #=> Array
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].security_context.capabilities.drop[0] #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].security_context.seccomp_profile.type #=> String, one of "RuntimeDefault", "Localhost", "Unconfined"
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].security_context.seccomp_profile.localhost_profile #=> String
     #   resp.jobs[0].eks_properties.pod_properties.volumes #=> Array
     #   resp.jobs[0].eks_properties.pod_properties.volumes[0].name #=> String
     #   resp.jobs[0].eks_properties.pod_properties.volumes[0].host_path.path #=> String
@@ -3409,6 +3476,12 @@ module Aws::Batch
     #   resp.jobs[0].eks_properties.pod_properties.metadata.annotations["String"] #=> String
     #   resp.jobs[0].eks_properties.pod_properties.metadata.namespace #=> String
     #   resp.jobs[0].eks_properties.pod_properties.share_process_namespace #=> Boolean
+    #   resp.jobs[0].eks_properties.pod_properties.security_context.run_as_user #=> Integer
+    #   resp.jobs[0].eks_properties.pod_properties.security_context.run_as_group #=> Integer
+    #   resp.jobs[0].eks_properties.pod_properties.security_context.run_as_non_root #=> Boolean
+    #   resp.jobs[0].eks_properties.pod_properties.security_context.seccomp_profile.type #=> String, one of "RuntimeDefault", "Localhost", "Unconfined"
+    #   resp.jobs[0].eks_properties.pod_properties.security_context.seccomp_profile.localhost_profile #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.security_context.fs_group #=> Integer
     #   resp.jobs[0].eks_attempts #=> Array
     #   resp.jobs[0].eks_attempts[0].containers #=> Array
     #   resp.jobs[0].eks_attempts[0].containers[0].name #=> String
@@ -4672,9 +4745,16 @@ module Aws::Batch
     #   definitions.
     #
     #   <note markdown="1"> If the job runs on Fargate resources, then you must not specify
-    #   `nodeProperties`; use only `containerProperties`.
+    #   `nodeProperties`. We recommend `ecsProperties`, which supports both
+    #   single-container and multi-container jobs. `containerProperties` is
+    #   also supported for single-container jobs. For more information, see
+    #   [Multi-container jobs][1] in the *Batch User Guide*.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/multi-container-jobs.html
     #
     # @option params [Types::NodeProperties] :node_properties
     #   An object with properties specific to multi-node parallel jobs. If you
@@ -4683,7 +4763,9 @@ module Aws::Batch
     #   *Batch User Guide*.
     #
     #   <note markdown="1"> If the job runs on Fargate resources, then you must not specify
-    #   `nodeProperties`; use `containerProperties` instead.
+    #   `nodeProperties`. We recommend `ecsProperties`, which supports both
+    #   single-container and multi-container jobs. `containerProperties` is
+    #   also supported for single-container jobs.
     #
     #    </note>
     #
@@ -5439,6 +5521,14 @@ module Aws::Batch
     #                     allow_privilege_escalation: false,
     #                     read_only_root_filesystem: false,
     #                     run_as_non_root: false,
+    #                     capabilities: {
+    #                       add: ["EksContainerLinuxCapability"],
+    #                       drop: ["EksContainerLinuxCapability"],
+    #                     },
+    #                     seccomp_profile: {
+    #                       type: "RuntimeDefault", # required, accepts RuntimeDefault, Localhost, Unconfined
+    #                       localhost_profile: "EksSeccompLocalhostProfile",
+    #                     },
     #                   },
     #                 },
     #               ],
@@ -5478,6 +5568,14 @@ module Aws::Batch
     #                     allow_privilege_escalation: false,
     #                     read_only_root_filesystem: false,
     #                     run_as_non_root: false,
+    #                     capabilities: {
+    #                       add: ["EksContainerLinuxCapability"],
+    #                       drop: ["EksContainerLinuxCapability"],
+    #                     },
+    #                     seccomp_profile: {
+    #                       type: "RuntimeDefault", # required, accepts RuntimeDefault, Localhost, Unconfined
+    #                       localhost_profile: "EksSeccompLocalhostProfile",
+    #                     },
     #                   },
     #                 },
     #               ],
@@ -5511,6 +5609,16 @@ module Aws::Batch
     #                 namespace: "String",
     #               },
     #               share_process_namespace: false,
+    #               security_context: {
+    #                 run_as_user: 1,
+    #                 run_as_group: 1,
+    #                 run_as_non_root: false,
+    #                 seccomp_profile: {
+    #                   type: "RuntimeDefault", # required, accepts RuntimeDefault, Localhost, Unconfined
+    #                   localhost_profile: "EksSeccompLocalhostProfile",
+    #                 },
+    #                 fs_group: 1,
+    #               },
     #             },
     #           },
     #           consumable_resource_properties: {
@@ -5589,6 +5697,14 @@ module Aws::Batch
     #               allow_privilege_escalation: false,
     #               read_only_root_filesystem: false,
     #               run_as_non_root: false,
+    #               capabilities: {
+    #                 add: ["EksContainerLinuxCapability"],
+    #                 drop: ["EksContainerLinuxCapability"],
+    #               },
+    #               seccomp_profile: {
+    #                 type: "RuntimeDefault", # required, accepts RuntimeDefault, Localhost, Unconfined
+    #                 localhost_profile: "EksSeccompLocalhostProfile",
+    #               },
     #             },
     #           },
     #         ],
@@ -5628,6 +5744,14 @@ module Aws::Batch
     #               allow_privilege_escalation: false,
     #               read_only_root_filesystem: false,
     #               run_as_non_root: false,
+    #               capabilities: {
+    #                 add: ["EksContainerLinuxCapability"],
+    #                 drop: ["EksContainerLinuxCapability"],
+    #               },
+    #               seccomp_profile: {
+    #                 type: "RuntimeDefault", # required, accepts RuntimeDefault, Localhost, Unconfined
+    #                 localhost_profile: "EksSeccompLocalhostProfile",
+    #               },
     #             },
     #           },
     #         ],
@@ -5661,6 +5785,16 @@ module Aws::Batch
     #           namespace: "String",
     #         },
     #         share_process_namespace: false,
+    #         security_context: {
+    #           run_as_user: 1,
+    #           run_as_group: 1,
+    #           run_as_non_root: false,
+    #           seccomp_profile: {
+    #             type: "RuntimeDefault", # required, accepts RuntimeDefault, Localhost, Unconfined
+    #             localhost_profile: "EksSeccompLocalhostProfile",
+    #           },
+    #           fs_group: 1,
+    #         },
     #       },
     #     },
     #     ecs_properties: {
@@ -7418,7 +7552,7 @@ module Aws::Batch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.161.0'
+      context[:gem_version] = '1.163.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.147.0 (2026-11-10)
+------------------
+
+* Feature - Amazon GameLift Servers adds game session placement insights. Logs show how the queue's priority configuration, along with player latency and cost data, are applied to each placement request. Use game session placement insights to diagnose why game session placements succeed, fail, or time out.
+
+1.146.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.145.0 (2026-11-06)
 ------------------
 

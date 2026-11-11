@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Feature - DynamoDB Streams clients default to 4 max attempts with a 25ms backoff scalar in `standard` and `adaptive` retry modes.
+
+1.105.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.104.0 (2026-11-06)
 ------------------
 

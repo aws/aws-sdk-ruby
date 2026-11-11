@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.297.0 (2026-11-10)
+------------------
+
+* Feature - Amazon Connect now returns Contact Lens conversational analytics configuration in the DescribeContact API. Customers can retrieve a contact's analytics, redaction, summarization, and sentiment settings, consistent with the configuration already available in contact trace records and contact events.
+
+1.296.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.295.0 (2026-11-06)
 ------------------
 

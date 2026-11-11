@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.412.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.411.0 (2026-11-09)
+------------------
+
+* Feature - Adds support for pipelines that AWS manages, filter ListPipelines by ManagedBy and run them with your own role via RoleArn on StartPipelineExecution. Adds pipeline version aliases to reference versions by name. Adds HubContent step metadata to ListPipelineExecutionSteps.
+
 1.410.0 (2026-11-06)
 ------------------
 

@@ -136,12 +136,15 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#create_compute_node_group-instance_method
       def create_compute_node_group: (
+                                       ?ami_id: ::String,
+                                       ?security_group_ids: Array[::String],
+                                       ?ssh_key_name: ::String,
                                        cluster_identifier: ::String,
                                        compute_node_group_name: ::String,
-                                       ?ami_id: ::String,
                                        subnet_ids: Array[::String],
                                        ?purchase_option: ("ONDEMAND" | "SPOT" | "CAPACITY_BLOCK" | "INTERRUPTIBLE_CAPACITY_RESERVATION"),
-                                       custom_launch_template: {
+                                       ?launch_template_mode: ("CUSTOM" | "MANAGED"),
+                                       ?custom_launch_template: {
                                          id: ::String,
                                          version: ::String
                                        },
@@ -403,10 +406,13 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PCS/Client.html#update_compute_node_group-instance_method
       def update_compute_node_group: (
+                                       ?ami_id: ::String,
+                                       ?security_group_ids: Array[::String],
+                                       ?ssh_key_name: ::String,
                                        cluster_identifier: ::String,
                                        compute_node_group_identifier: ::String,
-                                       ?ami_id: ::String,
                                        ?subnet_ids: Array[::String],
+                                       ?launch_template_mode: ("CUSTOM" | "MANAGED"),
                                        ?custom_launch_template: {
                                          id: ::String,
                                          version: ::String

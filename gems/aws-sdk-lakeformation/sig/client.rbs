@@ -474,6 +474,18 @@ module Aws
                                               ) -> _GetEffectivePermissionsForPathResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEffectivePermissionsForPathResponseSuccess
 
+      interface _GetGlueFunctionSessionContextResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGlueFunctionSessionContextResponse]
+        def session_context_id: () -> ::String
+        def expiration: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#get_glue_function_session_context-instance_method
+      def get_glue_function_session_context: (
+                                               user_defined_function_arns: Array[::String],
+                                               ?duration_seconds: ::Integer
+                                             ) -> _GetGlueFunctionSessionContextResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGlueFunctionSessionContextResponseSuccess
+
       interface _GetLFTagResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetLFTagResponse]
         def catalog_id: () -> ::String
@@ -582,6 +594,22 @@ module Aws
                                                    ) -> _GetTemporaryDataLocationCredentialsResponseSuccess
                                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTemporaryDataLocationCredentialsResponseSuccess
 
+      interface _GetTemporaryGlueFunctionCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTemporaryGlueFunctionCredentialsResponse]
+        def access_key_id: () -> ::String
+        def secret_access_key: () -> ::String
+        def session_token: () -> ::String
+        def expiration: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#get_temporary_glue_function_credentials-instance_method
+      def get_temporary_glue_function_credentials: (
+                                                     user_defined_function_arn: ::String,
+                                                     ?audit_context: {
+                                                       additional_audit_context: ::String?
+                                                     }
+                                                   ) -> _GetTemporaryGlueFunctionCredentialsResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTemporaryGlueFunctionCredentialsResponseSuccess
+
       interface _GetTemporaryGluePartitionCredentialsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTemporaryGluePartitionCredentialsResponse]
         def access_key_id: () -> ::String
@@ -595,7 +623,7 @@ module Aws
                                                       partition: {
                                                         values: Array[::String]
                                                       },
-                                                      ?permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER")],
+                                                      ?permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER" | "EXECUTE")],
                                                       ?duration_seconds: ::Integer,
                                                       ?audit_context: {
                                                         additional_audit_context: ::String?
@@ -615,7 +643,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#get_temporary_glue_table_credentials-instance_method
       def get_temporary_glue_table_credentials: (
                                                   table_arn: ::String,
-                                                  ?permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER")],
+                                                  ?permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER" | "EXECUTE")],
                                                   ?duration_seconds: ::Integer,
                                                   ?audit_context: {
                                                     additional_audit_context: ::String?
@@ -668,11 +696,11 @@ module Aws
                                  data_lake_principal_identifier: ::String?
                                },
                                resource: Params::resource,
-                               permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER")],
+                               permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER" | "EXECUTE")],
                                ?condition: {
                                  expression: ::String?
                                },
-                               ?permissions_with_grant_option: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER")]
+                               ?permissions_with_grant_option: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER" | "EXECUTE")]
                              ) -> _GrantPermissionsResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GrantPermissionsResponseSuccess
 
@@ -749,7 +777,7 @@ module Aws
                               ?principal: {
                                 data_lake_principal_identifier: ::String?
                               },
-                              ?resource_type: ("CATALOG" | "DATABASE" | "TABLE" | "DATA_LOCATION" | "LF_TAG" | "LF_TAG_POLICY" | "LF_TAG_POLICY_DATABASE" | "LF_TAG_POLICY_TABLE" | "LF_NAMED_TAG_EXPRESSION"),
+                              ?resource_type: ("ANY_RESOURCE" | "CATALOG" | "DATABASE" | "TABLE" | "DATA_LOCATION" | "LF_TAG" | "LF_TAG_POLICY" | "LF_TAG_POLICY_DATABASE" | "LF_TAG_POLICY_TABLE" | "LF_NAMED_TAG_EXPRESSION" | "USER_DEFINED_FUNCTION"),
                               ?resource: Params::resource,
                               ?next_token: ::String,
                               ?max_results: ::Integer,
@@ -857,7 +885,7 @@ module Aws
                                           principal: {
                                             data_lake_principal_identifier: ::String?
                                           }?,
-                                          permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER")]?
+                                          permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER" | "EXECUTE")]?
                                         }
                                       ]?,
                                       create_table_default_permissions: Array[
@@ -865,7 +893,7 @@ module Aws
                                           principal: {
                                             data_lake_principal_identifier: ::String?
                                           }?,
-                                          permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER")]?
+                                          permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER" | "EXECUTE")]?
                                         }
                                       ]?,
                                       parameters: Hash[::String, ::String]?,
@@ -925,11 +953,11 @@ module Aws
                                   data_lake_principal_identifier: ::String?
                                 },
                                 resource: Params::resource,
-                                permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER")],
+                                permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER" | "EXECUTE")],
                                 ?condition: {
                                   expression: ::String?
                                 },
-                                ?permissions_with_grant_option: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER")]
+                                ?permissions_with_grant_option: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER" | "EXECUTE")]
                               ) -> _RevokePermissionsResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokePermissionsResponseSuccess
 

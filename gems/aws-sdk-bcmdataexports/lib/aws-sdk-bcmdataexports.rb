@@ -54,7 +54,7 @@ module Aws::BCMDataExports
   autoload :EndpointProvider, 'aws-sdk-bcmdataexports/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-bcmdataexports/endpoints'
 
-  GEM_VERSION = '1.50.0'
+  GEM_VERSION = '1.52.0'
 
 end
 

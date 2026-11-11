@@ -147,6 +147,7 @@ module Aws
                                     idle_runtime_session_timeout: ::Integer?,
                                     max_lifetime: ::Integer?
                                   },
+                                  ?hooks_configuration: Params::runtime_hooks_configuration,
                                   ?environment_variables: Hash[::String, ::String],
                                   ?filesystem_configurations: Array[
                                     Params::filesystem_configuration
@@ -163,6 +164,11 @@ module Aws
                                         from: ::Integer,
                                         to: ::Integer
                                       }?
+                                    }
+                                  ],
+                                  ?resource_configurations: Array[
+                                    {
+                                      minimum_memory_in_mi_b: ::Integer
                                     }
                                   ]
                                 ) -> _CreateAgentRuntimeResponseSuccess
@@ -556,6 +562,7 @@ module Aws
         def exception_level: () -> ("DEBUG")
         def web_acl_arn: () -> ::String
         def waf_configuration: () -> Types::WafConfiguration
+        def domain_override: () -> Types::DomainOverride
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_gateway-instance_method
       def create_gateway: (
@@ -576,7 +583,11 @@ module Aws
                               mode: ("LOG_ONLY" | "ENFORCE")
                             },
                             ?exception_level: ("DEBUG"),
-                            ?tags: Hash[::String, ::String]
+                            ?tags: Hash[::String, ::String],
+                            ?domain_override: {
+                              default_domain: ::String,
+                              alternate_domains: Array[::String]?
+                            }
                           ) -> _CreateGatewayResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGatewayResponseSuccess
 
@@ -1413,6 +1424,7 @@ module Aws
         def network_configuration: () -> Types::NetworkConfiguration
         def status: () -> ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
         def lifecycle_configuration: () -> Types::LifecycleConfiguration
+        def hooks_configuration: () -> Types::RuntimeHooksConfiguration
         def failure_reason: () -> ::String
         def description: () -> ::String
         def workload_identity_details: () -> Types::WorkloadIdentityDetails
@@ -1426,6 +1438,7 @@ module Aws
         def capacity_provider_configuration: () -> Types::CapacityProviderConfiguration
         def platform_version: () -> ::String
         def allowed_ports: () -> ::Array[Types::AllowedPort]
+        def resource_configurations: () -> ::Array[Types::ResourceConfiguration]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_agent_runtime-instance_method
       def get_agent_runtime: (
@@ -1689,6 +1702,7 @@ module Aws
         def exception_level: () -> ("DEBUG")
         def web_acl_arn: () -> ::String
         def waf_configuration: () -> Types::WafConfiguration
+        def domain_override: () -> Types::DomainOverride
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_gateway-instance_method
       def get_gateway: (
@@ -2769,6 +2783,7 @@ module Aws
                                     idle_runtime_session_timeout: ::Integer?,
                                     max_lifetime: ::Integer?
                                   },
+                                  ?hooks_configuration: Params::runtime_hooks_configuration,
                                   ?metadata_configuration: {
                                     require_mmdsv2: bool
                                   },
@@ -2787,6 +2802,11 @@ module Aws
                                         from: ::Integer,
                                         to: ::Integer
                                       }?
+                                    }
+                                  ],
+                                  ?resource_configurations: Array[
+                                    {
+                                      minimum_memory_in_mi_b: ::Integer
                                     }
                                   ],
                                   ?client_token: ::String
@@ -2985,6 +3005,7 @@ module Aws
         def exception_level: () -> ("DEBUG")
         def web_acl_arn: () -> ::String
         def waf_configuration: () -> Types::WafConfiguration
+        def domain_override: () -> Types::DomainOverride
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_gateway-instance_method
       def update_gateway: (
@@ -3012,6 +3033,10 @@ module Aws
                             ?exception_level: ("DEBUG"),
                             ?waf_configuration: {
                               failure_mode: ("FAIL_CLOSE" | "FAIL_OPEN")?
+                            },
+                            ?domain_override: {
+                              default_domain: ::String,
+                              alternate_domains: Array[::String]?
                             }
                           ) -> _UpdateGatewayResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGatewayResponseSuccess

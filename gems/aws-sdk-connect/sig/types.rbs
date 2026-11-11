@@ -1014,6 +1014,7 @@ module Aws::Connect
       attr_accessor attributes: ::Hash[::String, ::String]
       attr_accessor next_contacts: ::Array[Types::NextContactEntry]
       attr_accessor global_resiliency_metadata: Types::GlobalResiliencyMetadata
+      attr_accessor contact_lens: Types::ContactLens
       SENSITIVE: [:name, :description]
     end
 
@@ -1029,6 +1030,12 @@ module Aws::Connect
       attr_accessor arn: ::String
       attr_accessor analytics_mode: ("PostContact" | "RealTime" | "ContactLens" | "AutomatedInteraction")
       attr_accessor is_redacted: bool
+      SENSITIVE: []
+    end
+
+    class ContactAnalysisReferenceState
+      attr_accessor status: ::String
+      attr_accessor status_reason: ::String
       SENSITIVE: []
     end
 
@@ -1266,6 +1273,34 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ContactLens
+      attr_accessor conversational_analytics: Types::ConversationalAnalytics
+      SENSITIVE: []
+    end
+
+    class ContactLensChannelConfiguration
+      attr_accessor analytics_modes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ContactLensRedactionConfiguration
+      attr_accessor behavior: ::String
+      attr_accessor policy: ::String
+      attr_accessor entities: ::Array[::String]
+      attr_accessor mask_mode: ::String
+      SENSITIVE: []
+    end
+
+    class ContactLensSentimentConfiguration
+      attr_accessor behavior: ::String
+      SENSITIVE: []
+    end
+
+    class ContactLensSummaryConfiguration
+      attr_accessor summary_modes: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class ContactMetricInfo
       attr_accessor name: ("ESTIMATED_WAIT_TIME" | "POSITION_IN_QUEUE")
       SENSITIVE: []
@@ -1368,6 +1403,23 @@ module Aws::Connect
       attr_accessor and_condition: Types::AttributeAndCondition
       attr_accessor tag_condition: Types::TagCondition
       attr_accessor hierarchy_group_condition: Types::HierarchyGroupCondition
+      SENSITIVE: []
+    end
+
+    class ConversationalAnalytics
+      attr_accessor configuration: Types::ConversationalAnalyticsConfiguration
+      attr_accessor contact_analysis_reference_state: Types::ContactAnalysisReferenceState
+      SENSITIVE: []
+    end
+
+    class ConversationalAnalyticsConfiguration
+      attr_accessor enabled: bool
+      attr_accessor language_locale: ::String
+      attr_accessor language_locales: ::Array[::String]
+      attr_accessor channel_configuration: Types::ContactLensChannelConfiguration
+      attr_accessor redaction_configuration: Types::ContactLensRedactionConfiguration
+      attr_accessor summary_configuration: Types::ContactLensSummaryConfiguration
+      attr_accessor sentiment_configuration: Types::ContactLensSentimentConfiguration
       SENSITIVE: []
     end
 

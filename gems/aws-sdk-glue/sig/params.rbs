@@ -232,6 +232,104 @@ module Aws
       dlq_event_queue_arn: ::String?
     }
 
+      type data_quality_evaluation_config_glue_tables = {
+      catalog_id: ::String,
+      database_name: ::String?,
+      table_name_pattern: ::String?,
+      pre_processing_query: ::String?,
+      connection_name: ::String?,
+      additional_options: Hash[::String, ::String]?
+    }
+
+      type data_quality_evaluation_config_data_source = {
+      glue_tables: Params::data_quality_evaluation_config_glue_tables?
+    }
+
+      type row_level_results_options = {
+      max_rows_to_write: ::Integer?,
+      result_type: ("ALL" | "PASSED_ONLY" | "FAILED_ONLY")?,
+      catalog_table_config: {
+        database_name: ::String?,
+        table_name: ::String?,
+        s3_location: ::String?,
+        catalog_id: ::String?
+      }?
+    }
+
+      type distribution_results_options = {
+      write_distribution_results_enabled: bool?,
+      catalog_table_config: {
+        database_name: ::String?,
+        table_name: ::String?,
+        s3_location: ::String?,
+        catalog_id: ::String?
+      }?
+    }
+
+      type profiling_results_options = {
+      write_profiling_results_enabled: bool?,
+      catalog_table_config: {
+        database_name: ::String?,
+        table_name: ::String?,
+        s3_location: ::String?,
+        catalog_id: ::String?
+      }?,
+      distribution_results: Params::distribution_results_options?
+    }
+
+      type data_quality_rule_results_options = {
+      write_data_quality_rule_results_enabled: bool?,
+      catalog_table_config: {
+        database_name: ::String?,
+        table_name: ::String?,
+        s3_location: ::String?,
+        catalog_id: ::String?
+      }?
+    }
+
+      type observation_results_options = {
+      write_observation_results_enabled: bool?,
+      catalog_table_config: {
+        database_name: ::String?,
+        table_name: ::String?,
+        s3_location: ::String?,
+        catalog_id: ::String?
+      }?
+    }
+
+      type data_quality_evaluation_config_additional_run_options = {
+      cloud_watch_metrics_enabled: bool?,
+      results_s3_prefix: ::String?,
+      composite_rule_evaluation_method: ("COLUMN" | "ROW")?,
+      row_level_results: Params::row_level_results_options?,
+      profiling_results: Params::profiling_results_options?,
+      observation_scope: ("ALL" | "NONE")?,
+      observation_mode: ("SCHEDULED" | "FIXED")?,
+      data_quality_rule_results: Params::data_quality_rule_results_options?,
+      observation_results: Params::observation_results_options?,
+      custom_log_group_prefix: ::String?
+    }
+
+      type data_quality_glue_table = {
+      database_name: ::String,
+      table_name: ::String,
+      catalog_id: ::String?,
+      connection_name: ::String?,
+      additional_options: Hash[::String, ::String]?,
+      pre_processing_query: ::String?
+    }
+
+      type data_source = {
+      glue_table: {
+        database_name: ::String,
+        table_name: ::String,
+        catalog_id: ::String?,
+        connection_name: ::String?,
+        additional_options: Hash[::String, ::String]?
+      }?,
+      data_quality_glue_table: Params::data_quality_glue_table?
+    }
+
       type database_input = {
       name: ::String,
       description: ::String?,
@@ -2027,26 +2125,6 @@ module Aws
           param: bool?
         }
       ]?
-    }
-
-      type data_quality_glue_table = {
-      database_name: ::String,
-      table_name: ::String,
-      catalog_id: ::String?,
-      connection_name: ::String?,
-      additional_options: Hash[::String, ::String]?,
-      pre_processing_query: ::String?
-    }
-
-      type data_source = {
-      glue_table: {
-        database_name: ::String,
-        table_name: ::String,
-        catalog_id: ::String?,
-        connection_name: ::String?,
-        additional_options: Hash[::String, ::String]?
-      }?,
-      data_quality_glue_table: Params::data_quality_glue_table?
     }
 
       type connector_property = {

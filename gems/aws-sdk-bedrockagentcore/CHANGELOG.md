@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.67.0 (2026-11-09)
+------------------
+
+* Feature - Adds the InvokeWebSearch API, which searches the web using the AWS-managed web search and returns ranked results with a text extract from each page. Results can be filtered by domain and by publication time.
+
 1.66.0 (2026-11-06)
 ------------------
 

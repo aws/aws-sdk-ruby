@@ -218,6 +218,7 @@ module Aws::S3Control
     IdentityCenterApplicationArn = Shapes::StringShape.new(name: 'IdentityCenterApplicationArn')
     IdentityCenterArn = Shapes::StringShape.new(name: 'IdentityCenterArn')
     Include = Shapes::StructureShape.new(name: 'Include')
+    InstanceScope = Shapes::StringShape.new(name: 'InstanceScope')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
@@ -1118,11 +1119,13 @@ module Aws::S3Control
     GetDataAccessRequest.add_member(:privilege, Shapes::ShapeRef.new(shape: Privilege, location: "querystring", location_name: "privilege"))
     GetDataAccessRequest.add_member(:target_type, Shapes::ShapeRef.new(shape: S3PrefixType, location: "querystring", location_name: "targetType"))
     GetDataAccessRequest.add_member(:audit_context, Shapes::ShapeRef.new(shape: AuditContext, location: "querystring", location_name: "auditContext"))
+    GetDataAccessRequest.add_member(:instance_scope, Shapes::ShapeRef.new(shape: InstanceScope, location: "querystring", location_name: "instanceScope"))
     GetDataAccessRequest.struct_class = Types::GetDataAccessRequest
 
     GetDataAccessResult.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
     GetDataAccessResult.add_member(:matched_grant_target, Shapes::ShapeRef.new(shape: S3Prefix, location_name: "MatchedGrantTarget"))
     GetDataAccessResult.add_member(:grantee, Shapes::ShapeRef.new(shape: Grantee, location_name: "Grantee"))
+    GetDataAccessResult.add_member(:matched_instance_arn, Shapes::ShapeRef.new(shape: AccessGrantsInstanceArn, location_name: "MatchedInstanceArn"))
     GetDataAccessResult.struct_class = Types::GetDataAccessResult
 
     GetJobTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam" => {"name" => "AccountId"}}))
@@ -1456,6 +1459,7 @@ module Aws::S3Control
     ListCallerAccessGrantsEntry.add_member(:permission, Shapes::ShapeRef.new(shape: Permission, location_name: "Permission"))
     ListCallerAccessGrantsEntry.add_member(:grant_scope, Shapes::ShapeRef.new(shape: S3Prefix, location_name: "GrantScope"))
     ListCallerAccessGrantsEntry.add_member(:application_arn, Shapes::ShapeRef.new(shape: IdentityCenterApplicationArn, location_name: "ApplicationArn"))
+    ListCallerAccessGrantsEntry.add_member(:access_grants_instance_arn, Shapes::ShapeRef.new(shape: AccessGrantsInstanceArn, location_name: "AccessGrantsInstanceArn"))
     ListCallerAccessGrantsEntry.struct_class = Types::ListCallerAccessGrantsEntry
 
     ListCallerAccessGrantsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam" => {"name" => "AccountId"}}))
@@ -1463,6 +1467,7 @@ module Aws::S3Control
     ListCallerAccessGrantsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ContinuationToken, location: "querystring", location_name: "nextToken"))
     ListCallerAccessGrantsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListCallerAccessGrantsRequest.add_member(:allowed_by_application, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "allowedByApplication"))
+    ListCallerAccessGrantsRequest.add_member(:instance_scope, Shapes::ShapeRef.new(shape: InstanceScope, location: "querystring", location_name: "instanceScope"))
     ListCallerAccessGrantsRequest.struct_class = Types::ListCallerAccessGrantsRequest
 
     ListCallerAccessGrantsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: ContinuationToken, location_name: "NextToken"))

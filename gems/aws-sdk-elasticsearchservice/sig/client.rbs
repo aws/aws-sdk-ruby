@@ -704,6 +704,31 @@ module Aws
                                                        ) -> _StartElasticsearchServiceSoftwareUpdateResponseSuccess
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartElasticsearchServiceSoftwareUpdateResponseSuccess
 
+      interface _UpdateCloneResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCloneResponse]
+        def domain_name: () -> ::String
+        def change_id: () -> ::String
+        def cutover_options: () -> Types::CutoverOptions
+        def traffic_split_options: () -> Types::TrafficSplitOptions
+        def retention_options: () -> Types::RetentionOptions
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#update_clone-instance_method
+      def update_clone: (
+                          domain_name: ::String,
+                          ?traffic_split_options: {
+                            strategy: ("ShiftReadTrafficPercent"),
+                            clone_read_traffic_percent: ::Integer
+                          },
+                          ?cutover_options: {
+                            target: ("ClonedCluster" | "PrimaryCluster")
+                          },
+                          ?retention_options: {
+                            retention_in_hours: ::Integer?,
+                            retention_action: ("RollbackToPrimaryCluster" | "DeletePrimaryCluster")?
+                          }
+                        ) -> _UpdateCloneResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCloneResponseSuccess
+
       interface _UpdateElasticsearchDomainConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateElasticsearchDomainConfigResponse]
         def domain_config: () -> Types::ElasticsearchDomainConfig
@@ -810,13 +835,23 @@ module Aws
         def domain_name: () -> ::String
         def target_version: () -> ::String
         def perform_check_only: () -> bool
+        def deployment_strategy_options: () -> Types::DeploymentStrategyOverrideOptions
         def change_progress_details: () -> Types::ChangeProgressDetails
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#upgrade_elasticsearch_domain-instance_method
       def upgrade_elasticsearch_domain: (
                                           domain_name: ::String,
                                           target_version: ::String,
-                                          ?perform_check_only: bool
+                                          ?perform_check_only: bool,
+                                          ?deployment_strategy_options: {
+                                            deployment_strategy: ("ClonedBlueGreen"),
+                                            cloned_blue_green_options: {
+                                              retention_options: {
+                                                retention_in_hours: ::Integer?,
+                                                retention_action: ("RollbackToPrimaryCluster" | "DeletePrimaryCluster")?
+                                              }?
+                                            }?
+                                          }
                                         ) -> _UpgradeElasticsearchDomainResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpgradeElasticsearchDomainResponseSuccess
     end

@@ -264,7 +264,8 @@ module Aws::BedrockAgentCoreControl
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::BedrockAgentCoreControl
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -694,6 +695,12 @@ module Aws::BedrockAgentCoreControl
     # @option params [Types::LifecycleConfiguration] :lifecycle_configuration
     #   The life cycle configuration for the AgentCore Runtime.
     #
+    # @option params [Types::RuntimeHooksConfiguration] :hooks_configuration
+    #   The lifecycle hooks configuration for the AgentCore Runtime. Use
+    #   lifecycle hooks to run actions in the agent's container at fixed
+    #   points in the runtime's lifecycle, such as warming up the agent
+    #   before sessions are created.
+    #
     # @option params [Hash<String,String>] :environment_variables
     #   Environment variables to set in the AgentCore Runtime environment.
     #
@@ -722,6 +729,11 @@ module Aws::BedrockAgentCoreControl
     #   non-overlapping entries, each containing either a single port or an
     #   inclusive port range. Ports must be between `8000` and `12000`,
     #   excluding the reserved port `8443`.
+    #
+    # @option params [Array<Types::ResourceConfiguration>] :resource_configurations
+    #   The resource configurations for the AgentCore Runtime, such as the
+    #   minimum amount of memory to allocate to the runtime. You can specify
+    #   at most one resource configuration.
     #
     # @return [Types::CreateAgentRuntimeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -842,6 +854,18 @@ module Aws::BedrockAgentCoreControl
     #       idle_runtime_session_timeout: 1,
     #       max_lifetime: 1,
     #     },
+    #     hooks_configuration: {
+    #       build: {
+    #         warmup: {
+    #           action: { # required
+    #             http_post: {
+    #               path: "LifecycleHookPath", # required
+    #               port: 1,
+    #             },
+    #           },
+    #         },
+    #       },
+    #     },
     #     environment_variables: {
     #       "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #     },
@@ -878,6 +902,11 @@ module Aws::BedrockAgentCoreControl
     #           from: 1, # required
     #           to: 1, # required
     #         },
+    #       },
+    #     ],
+    #     resource_configurations: [
+    #       {
+    #         minimum_memory_in_mi_b: 1, # required
     #       },
     #     ],
     #   })
@@ -2101,6 +2130,11 @@ module Aws::BedrockAgentCoreControl
     #   A map of key-value pairs to associate with the gateway as metadata
     #   tags.
     #
+    # @option params [Types::DomainOverride] :domain_override
+    #   The public domain names that the gateway advertises in its OAuth
+    #   discovery URLs instead of the inbound Host header. Specify this when
+    #   clients reach the gateway through your own proxy or custom domain.
+    #
     # @return [Types::CreateGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGatewayResponse#gateway_arn #gateway_arn} => String
@@ -2125,6 +2159,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::CreateGatewayResponse#exception_level #exception_level} => String
     #   * {Types::CreateGatewayResponse#web_acl_arn #web_acl_arn} => String
     #   * {Types::CreateGatewayResponse#waf_configuration #waf_configuration} => Types::WafConfiguration
+    #   * {Types::CreateGatewayResponse#domain_override #domain_override} => Types::DomainOverride
     #
     # @example Request syntax with placeholder values
     #
@@ -2245,6 +2280,10 @@ module Aws::BedrockAgentCoreControl
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     domain_override: {
+    #       default_domain: "PublicDomainName", # required
+    #       alternate_domains: ["PublicDomainName"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -2326,6 +2365,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.exception_level #=> String, one of "DEBUG"
     #   resp.web_acl_arn #=> String
     #   resp.waf_configuration.failure_mode #=> String, one of "FAIL_CLOSE", "FAIL_OPEN"
+    #   resp.domain_override.default_domain #=> String
+    #   resp.domain_override.alternate_domains #=> Array
+    #   resp.domain_override.alternate_domains[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateGateway AWS API Documentation
     #
@@ -3865,8 +3907,8 @@ module Aws::BedrockAgentCoreControl
     #   permissions for the memory to access Amazon Web Services services.
     #
     # @option params [required, Integer] :event_expiry_duration
-    #   The duration after which memory events expire. Specified as an ISO
-    #   8601 duration.
+    #   The number of days after which memory events expire, between 7 and
+    #   3650 days.
     #
     # @option params [Array<Types::MemoryStrategyInput>] :memory_strategies
     #   The memory strategies to use for this memory. Strategies define how
@@ -7196,6 +7238,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetAgentRuntimeResponse#network_configuration #network_configuration} => Types::NetworkConfiguration
     #   * {Types::GetAgentRuntimeResponse#status #status} => String
     #   * {Types::GetAgentRuntimeResponse#lifecycle_configuration #lifecycle_configuration} => Types::LifecycleConfiguration
+    #   * {Types::GetAgentRuntimeResponse#hooks_configuration #hooks_configuration} => Types::RuntimeHooksConfiguration
     #   * {Types::GetAgentRuntimeResponse#failure_reason #failure_reason} => String
     #   * {Types::GetAgentRuntimeResponse#description #description} => String
     #   * {Types::GetAgentRuntimeResponse#workload_identity_details #workload_identity_details} => Types::WorkloadIdentityDetails
@@ -7209,6 +7252,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetAgentRuntimeResponse#capacity_provider_configuration #capacity_provider_configuration} => Types::CapacityProviderConfiguration
     #   * {Types::GetAgentRuntimeResponse#platform_version #platform_version} => String
     #   * {Types::GetAgentRuntimeResponse#allowed_ports #allowed_ports} => Array&lt;Types::AllowedPort&gt;
+    #   * {Types::GetAgentRuntimeResponse#resource_configurations #resource_configurations} => Array&lt;Types::ResourceConfiguration&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -7235,6 +7279,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.lifecycle_configuration.idle_runtime_session_timeout #=> Integer
     #   resp.lifecycle_configuration.max_lifetime #=> Integer
+    #   resp.hooks_configuration.build.warmup.action.http_post.path #=> String
+    #   resp.hooks_configuration.build.warmup.action.http_post.port #=> Integer
     #   resp.failure_reason #=> String
     #   resp.description #=> String
     #   resp.workload_identity_details.workload_identity_arn #=> String
@@ -7309,6 +7355,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.allowed_ports[0].port #=> Integer
     #   resp.allowed_ports[0].port_range.from #=> Integer
     #   resp.allowed_ports[0].port_range.to #=> Integer
+    #   resp.resource_configurations #=> Array
+    #   resp.resource_configurations[0].minimum_memory_in_mi_b #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntime AWS API Documentation
     #
@@ -8062,6 +8110,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetGatewayResponse#exception_level #exception_level} => String
     #   * {Types::GetGatewayResponse#web_acl_arn #web_acl_arn} => String
     #   * {Types::GetGatewayResponse#waf_configuration #waf_configuration} => Types::WafConfiguration
+    #   * {Types::GetGatewayResponse#domain_override #domain_override} => Types::DomainOverride
     #
     # @example Request syntax with placeholder values
     #
@@ -8148,6 +8197,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.exception_level #=> String, one of "DEBUG"
     #   resp.web_acl_arn #=> String
     #   resp.waf_configuration.failure_mode #=> String, one of "FAIL_CLOSE", "FAIL_OPEN"
+    #   resp.domain_override.default_domain #=> String
+    #   resp.domain_override.alternate_domains #=> Array
+    #   resp.domain_override.alternate_domains[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetGateway AWS API Documentation
     #
@@ -12755,6 +12807,9 @@ module Aws::BedrockAgentCoreControl
     # @option params [Types::LifecycleConfiguration] :lifecycle_configuration
     #   The updated life cycle configuration for the AgentCore Runtime.
     #
+    # @option params [Types::RuntimeHooksConfiguration] :hooks_configuration
+    #   The updated lifecycle hooks configuration for the AgentCore Runtime.
+    #
     # @option params [Types::RuntimeMetadataConfiguration] :metadata_configuration
     #   The updated configuration for microVM Metadata Service (MMDS) settings
     #   for the AgentCore Runtime.
@@ -12780,6 +12835,10 @@ module Aws::BedrockAgentCoreControl
     #   non-overlapping entries, each containing either a single port or an
     #   inclusive port range. Ports must be between `8000` and `12000`,
     #   excluding the reserved port `8443`.
+    #
+    # @option params [Array<Types::ResourceConfiguration>] :resource_configurations
+    #   The updated resource configurations for the AgentCore Runtime. You can
+    #   specify at most one resource configuration.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
@@ -12907,6 +12966,18 @@ module Aws::BedrockAgentCoreControl
     #       idle_runtime_session_timeout: 1,
     #       max_lifetime: 1,
     #     },
+    #     hooks_configuration: {
+    #       build: {
+    #         warmup: {
+    #           action: { # required
+    #             http_post: {
+    #               path: "LifecycleHookPath", # required
+    #               port: 1,
+    #             },
+    #           },
+    #         },
+    #       },
+    #     },
     #     metadata_configuration: {
     #       require_mmdsv2: false, # required
     #     },
@@ -12943,6 +13014,11 @@ module Aws::BedrockAgentCoreControl
     #           from: 1, # required
     #           to: 1, # required
     #         },
+    #       },
+    #     ],
+    #     resource_configurations: [
+    #       {
+    #         minimum_memory_in_mi_b: 1, # required
     #       },
     #     ],
     #     client_token: "ClientToken",
@@ -13684,6 +13760,12 @@ module Aws::BedrockAgentCoreControl
     # @option params [Types::WafConfiguration] :waf_configuration
     #   The updated Amazon Web Services WAF configuration for the gateway.
     #
+    # @option params [Types::DomainOverride] :domain_override
+    #   The updated public domain names that the gateway advertises in its
+    #   OAuth discovery URLs instead of the inbound Host header. Specify this
+    #   when clients reach the gateway through your own proxy or custom
+    #   domain.
+    #
     # @return [Types::UpdateGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateGatewayResponse#gateway_arn #gateway_arn} => String
@@ -13708,6 +13790,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::UpdateGatewayResponse#exception_level #exception_level} => String
     #   * {Types::UpdateGatewayResponse#web_acl_arn #web_acl_arn} => String
     #   * {Types::UpdateGatewayResponse#waf_configuration #waf_configuration} => Types::WafConfiguration
+    #   * {Types::UpdateGatewayResponse#domain_override #domain_override} => Types::DomainOverride
     #
     # @example Request syntax with placeholder values
     #
@@ -13833,6 +13916,10 @@ module Aws::BedrockAgentCoreControl
     #     waf_configuration: {
     #       failure_mode: "FAIL_CLOSE", # accepts FAIL_CLOSE, FAIL_OPEN
     #     },
+    #     domain_override: {
+    #       default_domain: "PublicDomainName", # required
+    #       alternate_domains: ["PublicDomainName"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -13914,6 +14001,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.exception_level #=> String, one of "DEBUG"
     #   resp.web_acl_arn #=> String
     #   resp.waf_configuration.failure_mode #=> String, one of "FAIL_CLOSE", "FAIL_OPEN"
+    #   resp.domain_override.default_domain #=> String
+    #   resp.domain_override.alternate_domains #=> Array
+    #   resp.domain_override.alternate_domains[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGateway AWS API Documentation
     #
@@ -15401,8 +15491,8 @@ module Aws::BedrockAgentCoreControl
     #   The updated description of the AgentCore Memory resource.
     #
     # @option params [Integer] :event_expiry_duration
-    #   The number of days after which memory events will expire, between 7
-    #   and 365 days.
+    #   The number of days after which memory events expire, between 7 and
+    #   3650 days.
     #
     # @option params [String] :memory_execution_role_arn
     #   The ARN of the IAM role that provides permissions for the AgentCore
@@ -17552,7 +17642,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

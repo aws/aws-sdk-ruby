@@ -1127,6 +1127,28 @@ module Aws
                           ) ?{ (*untyped) -> void } -> _InvokeHarnessResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeHarnessResponseSuccess
 
+      interface _InvokeWebSearchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeWebSearchOutput]
+        def results: () -> ::Array[Types::WebSearchResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#invoke_web_search-instance_method
+      def invoke_web_search: (
+                               web_search_id: ::String,
+                               search_query: ::String,
+                               ?max_results: ::Integer,
+                               ?filters: {
+                                 domain_filter: {
+                                   include: Array[::String]?,
+                                   exclude: Array[::String]?
+                                 }?,
+                                 published_date_filter: {
+                                   published_after: ::Time?,
+                                   published_before: ::Time?
+                                 }?
+                               }
+                             ) -> _InvokeWebSearchResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeWebSearchResponseSuccess
+
       interface _ListABTestsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListABTestsResponse]
         def ab_tests: () -> ::Array[Types::ABTestSummary]

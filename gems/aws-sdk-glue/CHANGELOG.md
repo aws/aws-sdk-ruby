@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.294.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.293.0 (2026-11-09)
+------------------
+
+* Feature - We are releasing five new APIs to allow customers to enable Catalog-level data quality monitoring in AWS Glue Data Catalog, a new feature to perform data quality evaluation on collections of GDC tables selected by the customer, on a schedule or event-driven basis, using a custom or managed ruleset.
+
 1.292.0 (2026-11-06)
 ------------------
 

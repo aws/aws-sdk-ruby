@@ -264,7 +264,8 @@ module Aws::Signin
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::Signin
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -480,6 +481,50 @@ module Aws::Signin
     end
 
     # @!group API Operations
+
+    # Creates a bearer token that represents your IAM credentials and can be
+    # used to access a supported AWS service. By default, the token is valid
+    # for 12 hours.
+    #
+    # @option params [required, String] :grant_type
+    #   The grant type. Must be "client\_credentials".
+    #
+    # @option params [required, String] :resource
+    #   The AWS service the bearer token is for. Example: "ecr.amazonaws.com".
+    #
+    # @option params [Integer] :duration_seconds
+    #   The requested token lifetime in seconds, from 300 (5 minutes) up to
+    #   the maximum allowed for the service, currently 43200 (12 hours). If
+    #   omitted, the token is valid for 12 hours.
+    #
+    # @return [Types::CreateBearerTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBearerTokenResponse#access_token #access_token} => String
+    #   * {Types::CreateBearerTokenResponse#token_type #token_type} => String
+    #   * {Types::CreateBearerTokenResponse#expires_in #expires_in} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_bearer_token({
+    #     grant_type: "ClientCredentialsGrantType", # required
+    #     resource: "Resource", # required
+    #     duration_seconds: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_token #=> String
+    #   resp.token_type #=> String
+    #   resp.expires_in #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/CreateBearerToken AWS API Documentation
+    #
+    # @overload create_bearer_token(params = {})
+    # @param [Hash] params ({})
+    def create_bearer_token(params = {}, options = {})
+      req = build_request(:create_bearer_token, params)
+      req.send_request(options)
+    end
 
     # Exchanges an authorization code or refresh token for an OAuth 2.0
     # access token and refresh token.
@@ -991,7 +1036,7 @@ module Aws::Signin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.265.0'
+      context[:gem_version] = '3.267.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

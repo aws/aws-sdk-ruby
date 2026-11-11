@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2026-11-10)
+------------------
+
+* Feature - Amazon Bedrock AgentCore Gateway now supports domainOverride so JWT-authorized gateways can advertise your public domain in OAuth discovery behind a proxy or custom domain. AgentCore Runtime adds warmup lifecycle hooks and specifying runtime memory via hooksConfiguration and resourceConfigurations.
+
+1.90.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.89.0 (2026-11-06)
 ------------------
 

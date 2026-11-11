@@ -41,7 +41,7 @@ module Aws
         }
       ]?,
       execution_role_arn: ::String?,
-      insights_types: Array[("TEST_REPORT")]?
+      insights_types: Array[("TEST_REPORT" | "NONE")]?
     }
 
     end

@@ -55,7 +55,7 @@ module Aws::Signer
   autoload :EndpointProvider, 'aws-sdk-signer/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-signer/endpoints'
 
-  GEM_VERSION = '1.96.0'
+  GEM_VERSION = '1.98.0'
 
 end
 

@@ -1051,6 +1051,24 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The lifecycle hooks that run when you create or update the AgentCore
+    # Runtime, before any sessions are created.
+    #
+    # @!attribute [rw] warmup
+    #   The hook that warms up your agent before any sessions are created.
+    #   Use this hook to load the resources that your sessions need, such as
+    #   models, libraries, or caches. Your hook must complete within 120
+    #   seconds.
+    #   @return [Types::LifecycleHook]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/BuildLifecycleHooks AWS API Documentation
+    #
+    class BuildLifecycleHooks < Struct.new(
+      :warmup)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for customer-managed compute capacity for the AgentCore
     # Runtime. A capacity provider runs the AgentCore Runtime on the
     # Instances compute type, using Amazon Web Services managed compute in
@@ -2358,6 +2376,13 @@ module Aws::BedrockAgentCoreControl
     #   The life cycle configuration for the AgentCore Runtime.
     #   @return [Types::LifecycleConfiguration]
     #
+    # @!attribute [rw] hooks_configuration
+    #   The lifecycle hooks configuration for the AgentCore Runtime. Use
+    #   lifecycle hooks to run actions in the agent's container at fixed
+    #   points in the runtime's lifecycle, such as warming up the agent
+    #   before sessions are created.
+    #   @return [Types::RuntimeHooksConfiguration]
+    #
     # @!attribute [rw] environment_variables
     #   Environment variables to set in the AgentCore Runtime environment.
     #   @return [Hash<String,String>]
@@ -2394,6 +2419,12 @@ module Aws::BedrockAgentCoreControl
     #   excluding the reserved port `8443`.
     #   @return [Array<Types::AllowedPort>]
     #
+    # @!attribute [rw] resource_configurations
+    #   The resource configurations for the AgentCore Runtime, such as the
+    #   minimum amount of memory to allocate to the runtime. You can specify
+    #   at most one resource configuration.
+    #   @return [Array<Types::ResourceConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateAgentRuntimeRequest AWS API Documentation
     #
     class CreateAgentRuntimeRequest < Struct.new(
@@ -2407,12 +2438,14 @@ module Aws::BedrockAgentCoreControl
       :request_header_configuration,
       :protocol_configuration,
       :lifecycle_configuration,
+      :hooks_configuration,
       :environment_variables,
       :filesystem_configurations,
       :capacity_provider_configuration,
       :tags,
       :platform_version,
-      :allowed_ports)
+      :allowed_ports,
+      :resource_configurations)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
     end
@@ -3530,6 +3563,12 @@ module Aws::BedrockAgentCoreControl
     #   tags.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] domain_override
+    #   The public domain names that the gateway advertises in its OAuth
+    #   discovery URLs instead of the inbound Host header. Specify this when
+    #   clients reach the gateway through your own proxy or custom domain.
+    #   @return [Types::DomainOverride]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateGatewayRequest AWS API Documentation
     #
     class CreateGatewayRequest < Struct.new(
@@ -3545,7 +3584,8 @@ module Aws::BedrockAgentCoreControl
       :interceptor_configurations,
       :policy_engine_configuration,
       :exception_level,
-      :tags)
+      :tags,
+      :domain_override)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -3650,6 +3690,11 @@ module Aws::BedrockAgentCoreControl
     #   The Amazon Web Services WAF configuration for the gateway.
     #   @return [Types::WafConfiguration]
     #
+    # @!attribute [rw] domain_override
+    #   The public domain names that the gateway advertises in its OAuth
+    #   discovery URLs instead of the inbound Host header.
+    #   @return [Types::DomainOverride]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateGatewayResponse AWS API Documentation
     #
     class CreateGatewayResponse < Struct.new(
@@ -3674,7 +3719,8 @@ module Aws::BedrockAgentCoreControl
       :workload_identity_details,
       :exception_level,
       :web_acl_arn,
-      :waf_configuration)
+      :waf_configuration,
+      :domain_override)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -4177,8 +4223,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] event_expiry_duration
-    #   The duration after which memory events expire. Specified as an ISO
-    #   8601 duration.
+    #   The number of days after which memory events expire, between 7 and
+    #   3650 days.
     #   @return [Integer]
     #
     # @!attribute [rw] memory_strategies
@@ -7391,6 +7437,35 @@ module Aws::BedrockAgentCoreControl
       class Unknown < DimensionRatingScale; end
     end
 
+    # The public domain names for a gateway that clients reach through your
+    # own proxy or custom domain. When you configure a domain override, the
+    # gateway advertises these domains instead of the inbound Host header in
+    # the URLs that it returns for OAuth discovery, such as the protected
+    # resource metadata and the `WWW-Authenticate` challenge.
+    #
+    # @!attribute [rw] default_domain
+    #   The default public domain name for the gateway. The gateway
+    #   advertises this domain when a request doesn't select a specific
+    #   domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] alternate_domains
+    #   Additional public domain names for the gateway, up to 10. Don't
+    #   repeat the default domain or list a domain more than once. A request
+    #   can select one of these domains, or the default domain, with the
+    #   `x-amzn-bedrock-agentcore-gateway-domain` header. The gateway
+    #   rejects a request that selects a domain that isn't configured.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DomainOverride AWS API Documentation
+    #
+    class DomainOverride < Struct.new(
+      :default_domain,
+      :alternate_domains)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for an Amazon EBS-backed persistent volume. The
     # service creates persistent volumes when a session first launches, and
     # the volumes survive instance termination. The volumes persist until
@@ -9007,6 +9082,10 @@ module Aws::BedrockAgentCoreControl
     #   The life cycle configuration for the AgentCore Runtime.
     #   @return [Types::LifecycleConfiguration]
     #
+    # @!attribute [rw] hooks_configuration
+    #   The lifecycle hooks configuration for the AgentCore Runtime.
+    #   @return [Types::RuntimeHooksConfiguration]
+    #
     # @!attribute [rw] failure_reason
     #   The reason for failure if the AgentCore Runtime is in a failed
     #   state.
@@ -9064,6 +9143,10 @@ module Aws::BedrockAgentCoreControl
     #   through the runtime's session URL.
     #   @return [Array<Types::AllowedPort>]
     #
+    # @!attribute [rw] resource_configurations
+    #   The resource configurations for the AgentCore Runtime.
+    #   @return [Array<Types::ResourceConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntimeResponse AWS API Documentation
     #
     class GetAgentRuntimeResponse < Struct.new(
@@ -9077,6 +9160,7 @@ module Aws::BedrockAgentCoreControl
       :network_configuration,
       :status,
       :lifecycle_configuration,
+      :hooks_configuration,
       :failure_reason,
       :description,
       :workload_identity_details,
@@ -9089,7 +9173,8 @@ module Aws::BedrockAgentCoreControl
       :filesystem_configurations,
       :capacity_provider_configuration,
       :platform_version,
-      :allowed_ports)
+      :allowed_ports,
+      :resource_configurations)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
     end
@@ -10127,6 +10212,11 @@ module Aws::BedrockAgentCoreControl
     #   The Amazon Web Services WAF configuration for the gateway.
     #   @return [Types::WafConfiguration]
     #
+    # @!attribute [rw] domain_override
+    #   The public domain names that the gateway advertises in its OAuth
+    #   discovery URLs instead of the inbound Host header.
+    #   @return [Types::DomainOverride]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetGatewayResponse AWS API Documentation
     #
     class GetGatewayResponse < Struct.new(
@@ -10151,7 +10241,8 @@ module Aws::BedrockAgentCoreControl
       :workload_identity_details,
       :exception_level,
       :web_acl_arn,
-      :waf_configuration)
+      :waf_configuration,
+      :domain_override)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -13248,6 +13339,32 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # A lifecycle hook action that sends an HTTP `POST` request to the
+    # agent's container. The path and port can't conflict with a path that
+    # your agent already serves for AgentCore Runtime, such as the
+    # protocol's invocation path or the health check path.
+    #
+    # @!attribute [rw] path
+    #   The path in the agent's container that AgentCore Runtime sends the
+    #   `POST` request to.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port in the agent's container that AgentCore Runtime sends the
+    #   `POST` request to. If you don't specify a port, the default is the
+    #   runtime's server port: the port in the protocol configuration if
+    #   one is set, otherwise the protocol's default port.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HttpPostLifecycleHookAction AWS API Documentation
+    #
+    class HttpPostLifecycleHookAction < Struct.new(
+      :path,
+      :port)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The HTTP target configuration for a gateway target. Contains the
     # configuration for HTTP-based target endpoints.
     #
@@ -14036,6 +14153,50 @@ module Aws::BedrockAgentCoreControl
       :max_lifetime)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # A lifecycle hook, which defines the action that AgentCore Runtime runs
+    # at a point in the runtime's lifecycle.
+    #
+    # @!attribute [rw] action
+    #   The action that AgentCore Runtime runs for the hook. Specify exactly
+    #   one action.
+    #   @return [Types::LifecycleHookAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/LifecycleHook AWS API Documentation
+    #
+    class LifecycleHook < Struct.new(
+      :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The action that a lifecycle hook runs. Specify exactly one member.
+    # Currently, `httpPost` is the only supported action.
+    #
+    # @note LifecycleHookAction is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note LifecycleHookAction is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of LifecycleHookAction corresponding to the set member.
+    #
+    # @!attribute [rw] http_post
+    #   Sends an HTTP `POST` request to your agent's container on the
+    #   specified port and path to run the hook. The hook succeeds if your
+    #   container returns a `2xx` response. The hook fails if your container
+    #   returns any other response or doesn't respond before the hook times
+    #   out.
+    #   @return [Types::HttpPostLifecycleHookAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/LifecycleHookAction AWS API Documentation
+    #
+    class LifecycleHookAction < Struct.new(
+      :http_post,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class HttpPost < LifecycleHookAction; end
+      class Unknown < LifecycleHookAction; end
     end
 
     # A single rule entry within a rate limit that maps dimension values to
@@ -19210,6 +19371,21 @@ module Aws::BedrockAgentCoreControl
       class Unknown < Resource; end
     end
 
+    # The resource configuration for an AgentCore Runtime.
+    #
+    # @!attribute [rw] minimum_memory_in_mi_b
+    #   The minimum amount of memory, in mebibytes, to allocate to the
+    #   AgentCore Runtime.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ResourceConfiguration AWS API Documentation
+    #
+    class ResourceConfiguration < Struct.new(
+      :minimum_memory_in_mi_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Exception thrown when a resource limit is exceeded.
     #
     # @!attribute [rw] message
@@ -19455,6 +19631,22 @@ module Aws::BedrockAgentCoreControl
       :sampling_config,
       :filters,
       :session_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The lifecycle hooks that AgentCore Runtime runs at fixed points in the
+    # runtime's lifecycle.
+    #
+    # @!attribute [rw] build
+    #   The hooks that run when you create or update the AgentCore Runtime,
+    #   before any sessions are created.
+    #   @return [Types::BuildLifecycleHooks]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/RuntimeHooksConfiguration AWS API Documentation
+    #
+    class RuntimeHooksConfiguration < Struct.new(
+      :build)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21595,6 +21787,10 @@ module Aws::BedrockAgentCoreControl
     #   The updated life cycle configuration for the AgentCore Runtime.
     #   @return [Types::LifecycleConfiguration]
     #
+    # @!attribute [rw] hooks_configuration
+    #   The updated lifecycle hooks configuration for the AgentCore Runtime.
+    #   @return [Types::RuntimeHooksConfiguration]
+    #
     # @!attribute [rw] metadata_configuration
     #   The updated configuration for microVM Metadata Service (MMDS)
     #   settings for the AgentCore Runtime.
@@ -21628,6 +21824,11 @@ module Aws::BedrockAgentCoreControl
     #   excluding the reserved port `8443`.
     #   @return [Array<Types::AllowedPort>]
     #
+    # @!attribute [rw] resource_configurations
+    #   The updated resource configurations for the AgentCore Runtime. You
+    #   can specify at most one resource configuration.
+    #   @return [Array<Types::ResourceConfiguration>]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -21648,12 +21849,14 @@ module Aws::BedrockAgentCoreControl
       :request_header_configuration,
       :protocol_configuration,
       :lifecycle_configuration,
+      :hooks_configuration,
       :metadata_configuration,
       :environment_variables,
       :filesystem_configurations,
       :capacity_provider_configuration,
       :platform_version,
       :allowed_ports,
+      :resource_configurations,
       :client_token)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
@@ -22422,6 +22625,13 @@ module Aws::BedrockAgentCoreControl
     #   The updated Amazon Web Services WAF configuration for the gateway.
     #   @return [Types::WafConfiguration]
     #
+    # @!attribute [rw] domain_override
+    #   The updated public domain names that the gateway advertises in its
+    #   OAuth discovery URLs instead of the inbound Host header. Specify
+    #   this when clients reach the gateway through your own proxy or custom
+    #   domain.
+    #   @return [Types::DomainOverride]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGatewayRequest AWS API Documentation
     #
     class UpdateGatewayRequest < Struct.new(
@@ -22438,7 +22648,8 @@ module Aws::BedrockAgentCoreControl
       :interceptor_configurations,
       :policy_engine_configuration,
       :exception_level,
-      :waf_configuration)
+      :waf_configuration,
+      :domain_override)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -22542,6 +22753,11 @@ module Aws::BedrockAgentCoreControl
     #   The Amazon Web Services WAF configuration for the gateway.
     #   @return [Types::WafConfiguration]
     #
+    # @!attribute [rw] domain_override
+    #   The public domain names that the gateway advertises in its OAuth
+    #   discovery URLs instead of the inbound Host header.
+    #   @return [Types::DomainOverride]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGatewayResponse AWS API Documentation
     #
     class UpdateGatewayResponse < Struct.new(
@@ -22566,7 +22782,8 @@ module Aws::BedrockAgentCoreControl
       :workload_identity_details,
       :exception_level,
       :web_acl_arn,
-      :waf_configuration)
+      :waf_configuration,
+      :domain_override)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -23037,8 +23254,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] event_expiry_duration
-    #   The number of days after which memory events will expire, between 7
-    #   and 365 days.
+    #   The number of days after which memory events expire, between 7 and
+    #   3650 days.
     #   @return [Integer]
     #
     # @!attribute [rw] memory_execution_role_arn

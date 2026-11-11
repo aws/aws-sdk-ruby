@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.146.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.145.0 (2026-11-09)
+------------------
+
+* Feature - Adds support for cross-account access grants with InstanceScope parameter for GetDataAccess and ListCallerAccessGrants operations in S3 Access Grants.
+
 1.144.0 (2026-11-06)
 ------------------
 

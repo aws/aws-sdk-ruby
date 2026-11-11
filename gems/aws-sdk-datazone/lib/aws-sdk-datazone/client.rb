@@ -264,7 +264,8 @@ module Aws::DataZone
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::DataZone
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -1975,7 +1976,7 @@ module Aws::DataZone
     #           },
     #           name: "GlueConnectionInputNameString",
     #           description: "String",
-    #           connection_type: "SNOWFLAKE", # accepts SNOWFLAKE, BIGQUERY, DOCUMENTDB, DYNAMODB, MYSQL, OPENSEARCH, ORACLE, POSTGRESQL, REDSHIFT, SAPHANA, SQLSERVER, TERADATA, VERTICA, ICEBERGRESTCATALOG, SNOWFLAKEICEBERGRESTCATALOG, DATABRICKSICEBERGRESTCATALOG
+    #           connection_type: "SNOWFLAKE", # accepts SNOWFLAKE, BIGQUERY, DOCUMENTDB, DYNAMODB, MYSQL, OPENSEARCH, ORACLE, POSTGRESQL, REDSHIFT, SAPHANA, SQLSERVER, TERADATA, VERTICA, ICEBERGRESTCATALOG, SNOWFLAKEICEBERGRESTCATALOG, DATABRICKSICEBERGRESTCATALOG, WORKDAYICEBERGRESTCATALOG, WORKDAYLDQ
     #           match_criteria: "GlueConnectionInputMatchCriteriaString",
     #           validate_credentials: false,
     #           validate_for_compute_environments: ["SPARK"], # accepts SPARK, ATHENA, PYTHON
@@ -2202,7 +2203,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].glue_connection_names[0] #=> String
     #   resp.physical_endpoints[0].glue_connection.name #=> String
     #   resp.physical_endpoints[0].glue_connection.description #=> String
-    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG"
+    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG", "WORKDAYICEBERGRESTCATALOG", "WORKDAYLDQ"
     #   resp.physical_endpoints[0].glue_connection.match_criteria #=> Array
     #   resp.physical_endpoints[0].glue_connection.match_criteria[0] #=> String
     #   resp.physical_endpoints[0].glue_connection.connection_properties #=> Hash
@@ -2328,7 +2329,7 @@ module Aws::DataZone
     #   resp.props.git_properties.default_branch #=> String
     #   resp.props.git_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
     #   resp.props.git_properties.error_message #=> String
-    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG"
+    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG", "WORKDAYICEBERGRESTCATALOG", "WORKDAYLDQ"
     #   resp.scope #=> String, one of "DOMAIN", "PROJECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateConnection AWS API Documentation
@@ -2821,7 +2822,8 @@ module Aws::DataZone
 
     # Creates a new user-defined designation with a Cedar permit policy. The
     # designation defines a named role that can be assigned to project
-    # members.
+    # members through `CreateProjectMembership` or granted through
+    # `AddPolicyGrant`.
     #
     # @option params [required, String] :domain_identifier
     #   The identifier of the Amazon DataZone domain in which the designation
@@ -2835,12 +2837,13 @@ module Aws::DataZone
     #   A human-readable description of the designation and its intended use.
     #
     # @option params [required, String] :policy
-    #   The Cedar permit policy that defines what actions holders of this
+    #   The Cedar permit policy that defines the actions holders of this
     #   designation are allowed to perform.
     #
     # @option params [Boolean] :deletion_protection
-    #   Whether deletion protection is enabled for this designation. Defaults
-    #   to true when omitted.
+    #   Specifies whether deletion protection is enabled for this designation.
+    #   Defaults to `true` when omitted. When enabled, `DeleteDesignation` is
+    #   rejected until protection is disabled through `UpdateDesignation`.
     #
     # @return [Types::CreateDesignationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5284,8 +5287,10 @@ module Aws::DataZone
       req.send_request(options)
     end
 
-    # Deletes a designation. Managed designations cannot be deleted. This
-    # operation is idempotent.
+    # Deletes a user-created designation. Managed designations cannot be
+    # deleted. The call fails if the designation has `deletionProtection`
+    # enabled or if any project member still holds it. This operation is
+    # idempotent.
     #
     # @option params [required, String] :domain_identifier
     #   The identifier of the Amazon DataZone domain that contains the
@@ -6526,7 +6531,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].glue_connection_names[0] #=> String
     #   resp.physical_endpoints[0].glue_connection.name #=> String
     #   resp.physical_endpoints[0].glue_connection.description #=> String
-    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG"
+    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG", "WORKDAYICEBERGRESTCATALOG", "WORKDAYLDQ"
     #   resp.physical_endpoints[0].glue_connection.match_criteria #=> Array
     #   resp.physical_endpoints[0].glue_connection.match_criteria[0] #=> String
     #   resp.physical_endpoints[0].glue_connection.connection_properties #=> Hash
@@ -6652,7 +6657,7 @@ module Aws::DataZone
     #   resp.props.git_properties.default_branch #=> String
     #   resp.props.git_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
     #   resp.props.git_properties.error_message #=> String
-    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG"
+    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG", "WORKDAYICEBERGRESTCATALOG", "WORKDAYLDQ"
     #   resp.scope #=> String, one of "DOMAIN", "PROJECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetConnection AWS API Documentation
@@ -6966,7 +6971,9 @@ module Aws::DataZone
       req.send_request(options)
     end
 
-    # Gets the details of a designation, including its Cedar policy.
+    # Gets the details of a designation, including its Cedar permit policy.
+    # Returns the full designation record for both system-managed and
+    # user-created designations.
     #
     # @option params [required, String] :domain_identifier
     #   The identifier of the Amazon DataZone domain that contains the
@@ -9418,7 +9425,7 @@ module Aws::DataZone
     #     name: "ConnectionName",
     #     environment_identifier: "EnvironmentId",
     #     project_identifier: "ProjectId",
-    #     type: "ATHENA", # accepts ATHENA, BIGQUERY, DATABRICKS, DOCUMENTDB, DYNAMODB, HYPERPOD, IAM, MYSQL, OPENSEARCH, ORACLE, POSTGRESQL, REDSHIFT, S3, SAPHANA, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, VERTICA, WORKFLOWS_MWAA, AMAZON_Q, MLFLOW, VPC, GIT, ICEBERGRESTCATALOG, SNOWFLAKEICEBERGRESTCATALOG, DATABRICKSICEBERGRESTCATALOG
+    #     type: "ATHENA", # accepts ATHENA, BIGQUERY, DATABRICKS, DOCUMENTDB, DYNAMODB, HYPERPOD, IAM, MYSQL, OPENSEARCH, ORACLE, POSTGRESQL, REDSHIFT, S3, SAPHANA, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, VERTICA, WORKFLOWS_MWAA, AMAZON_Q, MLFLOW, VPC, GIT, ICEBERGRESTCATALOG, SNOWFLAKEICEBERGRESTCATALOG, DATABRICKSICEBERGRESTCATALOG, WORKDAYICEBERGRESTCATALOG, WORKDAYLDQ
     #     scope: "DOMAIN", # accepts DOMAIN, PROJECT
     #   })
     #
@@ -9444,7 +9451,7 @@ module Aws::DataZone
     #   resp.items[0].physical_endpoints[0].glue_connection_names[0] #=> String
     #   resp.items[0].physical_endpoints[0].glue_connection.name #=> String
     #   resp.items[0].physical_endpoints[0].glue_connection.description #=> String
-    #   resp.items[0].physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG"
+    #   resp.items[0].physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG", "WORKDAYICEBERGRESTCATALOG", "WORKDAYLDQ"
     #   resp.items[0].physical_endpoints[0].glue_connection.match_criteria #=> Array
     #   resp.items[0].physical_endpoints[0].glue_connection.match_criteria[0] #=> String
     #   resp.items[0].physical_endpoints[0].glue_connection.connection_properties #=> Hash
@@ -9570,7 +9577,7 @@ module Aws::DataZone
     #   resp.items[0].props.git_properties.default_branch #=> String
     #   resp.items[0].props.git_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
     #   resp.items[0].props.git_properties.error_message #=> String
-    #   resp.items[0].type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG"
+    #   resp.items[0].type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG", "WORKDAYICEBERGRESTCATALOG", "WORKDAYLDQ"
     #   resp.items[0].scope #=> String, one of "DOMAIN", "PROJECT"
     #   resp.next_token #=> String
     #
@@ -9891,9 +9898,10 @@ module Aws::DataZone
       req.send_request(options)
     end
 
-    # Lists the designations in a domain. Returns system-managed
-    # designations first, followed by user-created designations sorted
-    # alphabetically by name.
+    # Lists the designations in a domain. The response returns
+    # system-managed designations first, followed by user-created
+    # designations in alphabetical order by name. Results are paginated. Use
+    # `nextToken` to retrieve additional pages of results.
     #
     # @option params [required, String] :domain_identifier
     #   The identifier of the Amazon DataZone domain that contains the
@@ -14891,7 +14899,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].glue_connection_names[0] #=> String
     #   resp.physical_endpoints[0].glue_connection.name #=> String
     #   resp.physical_endpoints[0].glue_connection.description #=> String
-    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG"
+    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG", "WORKDAYICEBERGRESTCATALOG", "WORKDAYLDQ"
     #   resp.physical_endpoints[0].glue_connection.match_criteria #=> Array
     #   resp.physical_endpoints[0].glue_connection.match_criteria[0] #=> String
     #   resp.physical_endpoints[0].glue_connection.connection_properties #=> Hash
@@ -15017,7 +15025,7 @@ module Aws::DataZone
     #   resp.props.git_properties.default_branch #=> String
     #   resp.props.git_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
     #   resp.props.git_properties.error_message #=> String
-    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG"
+    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT", "ICEBERGRESTCATALOG", "SNOWFLAKEICEBERGRESTCATALOG", "DATABRICKSICEBERGRESTCATALOG", "WORKDAYICEBERGRESTCATALOG", "WORKDAYLDQ"
     #   resp.scope #=> String, one of "DOMAIN", "PROJECT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateConnection AWS API Documentation
@@ -15252,8 +15260,8 @@ module Aws::DataZone
       req.send_request(options)
     end
 
-    # Updates an existing designation. Managed designations cannot be
-    # modified.
+    # Updates an existing user-created designation. Managed designations
+    # cannot be modified. Omit a field to leave its current value unchanged.
     #
     # @option params [required, String] :domain_identifier
     #   The identifier of the Amazon DataZone domain that contains the
@@ -15271,11 +15279,11 @@ module Aws::DataZone
     #   intended use.
     #
     # @option params [String] :policy
-    #   The updated Cedar permit policy.
+    #   The updated Cedar permit policy. Omit to keep the existing policy.
     #
     # @option params [Boolean] :deletion_protection
-    #   Whether deletion protection is enabled for this designation. Omit to
-    #   keep the existing value.
+    #   Specifies whether deletion protection is enabled for this designation.
+    #   Omit to keep the existing value.
     #
     # @return [Types::UpdateDesignationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -17054,7 +17062,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.103.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

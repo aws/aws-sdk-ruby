@@ -264,7 +264,8 @@ module Aws::S3Tables
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::S3Tables
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -1364,6 +1365,86 @@ module Aws::S3Tables
     # @param [Hash] params ({})
     def get_table_bucket_encryption(params = {}, options = {})
       req = build_request(:get_table_bucket_encryption, params)
+      req.send_request(options)
+    end
+
+    # Gets the server access logging configuration for a table bucket. For
+    # more information, see [Server access logging for table buckets][1] in
+    # the *Amazon Simple Storage Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:GetTableBucketLogging` permission to use
+    #   this operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-server-logs.html
+    #
+    # @option params [required, String] :table_bucket_arn
+    #   The Amazon Resource Name (ARN) of the table bucket.
+    #
+    # @return [Types::GetTableBucketLoggingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTableBucketLoggingResponse#table_bucket_logging_status #table_bucket_logging_status} => Types::TableBucketLoggingStatus
+    #
+    #
+    # @example Example: To get the server access logging configuration of a table bucket
+    #
+    #   # The following example gets the server access logging configuration of a table bucket that has logging enabled.
+    #
+    #   resp = client.get_table_bucket_logging({
+    #     table_bucket_arn: "arn:aws:s3tables:us-east-1:111122223333:bucket/amzn-s3-demo-table-bucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     table_bucket_logging_status: {
+    #       logging_enabled: {
+    #         target_bucket: "amzn-s3-demo-destination-bucket", 
+    #         target_object_key_format: {
+    #           partitioned_prefix: {
+    #             partition_date_source: "EventTime", 
+    #           }, 
+    #         }, 
+    #         target_prefix: "logs/", 
+    #       }, 
+    #     }, 
+    #   }
+    #
+    # @example Example: To get the server access logging configuration of a table bucket that has logging disabled
+    #
+    #   # The following example gets the server access logging configuration of a table bucket that has logging disabled. The
+    #   # response has an empty logging status.
+    #
+    #   resp = client.get_table_bucket_logging({
+    #     table_bucket_arn: "arn:aws:s3tables:us-east-1:111122223333:bucket/amzn-s3-demo-table-bucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     table_bucket_logging_status: {
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_table_bucket_logging({
+    #     table_bucket_arn: "TableBucketARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_bucket_logging_status.logging_enabled.target_bucket #=> String
+    #   resp.table_bucket_logging_status.logging_enabled.target_prefix #=> String
+    #   resp.table_bucket_logging_status.logging_enabled.target_object_key_format.partitioned_prefix.partition_date_source #=> String, one of "EventTime", "DeliveryTime"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/GetTableBucketLogging AWS API Documentation
+    #
+    # @overload get_table_bucket_logging(params = {})
+    # @param [Hash] params ({})
+    def get_table_bucket_logging(params = {}, options = {})
+      req = build_request(:get_table_bucket_logging, params)
       req.send_request(options)
     end
 
@@ -2513,6 +2594,89 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
+    # Sets, updates, or removes the server access logging configuration for
+    # a table bucket. When logging is enabled, Amazon S3 delivers a record
+    # of the requests made to the table bucket and its tables to the target
+    # general purpose bucket that you specify. To disable logging, call this
+    # operation with an empty `tableBucketLoggingStatus`. For more
+    # information, see [Server access logging for table buckets][1] in the
+    # *Amazon Simple Storage Service User Guide*.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:PutTableBucketLogging` permission to use
+    #   this operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-server-logs.html
+    #
+    # @option params [required, String] :table_bucket_arn
+    #   The Amazon Resource Name (ARN) of the table bucket.
+    #
+    # @option params [required, Types::TableBucketLoggingStatus] :table_bucket_logging_status
+    #   The logging status to apply to the table bucket. To disable logging,
+    #   specify an empty `tableBucketLoggingStatus`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To enable server access logging for a table bucket
+    #
+    #   # The following example enables server access logging for a table bucket. Logs are delivered to the specified general
+    #   # purpose bucket, with object keys partitioned by the time of the logged events.
+    #
+    #   resp = client.put_table_bucket_logging({
+    #     table_bucket_arn: "arn:aws:s3tables:us-east-1:111122223333:bucket/amzn-s3-demo-table-bucket", 
+    #     table_bucket_logging_status: {
+    #       logging_enabled: {
+    #         target_bucket: "amzn-s3-demo-destination-bucket", 
+    #         target_object_key_format: {
+    #           partitioned_prefix: {
+    #             partition_date_source: "EventTime", 
+    #           }, 
+    #         }, 
+    #         target_prefix: "logs/", 
+    #       }, 
+    #     }, 
+    #   })
+    #
+    # @example Example: To disable server access logging for a table bucket
+    #
+    #   # The following example disables server access logging for a table bucket by specifying an empty logging status.
+    #
+    #   resp = client.put_table_bucket_logging({
+    #     table_bucket_arn: "arn:aws:s3tables:us-east-1:111122223333:bucket/amzn-s3-demo-table-bucket", 
+    #     table_bucket_logging_status: {
+    #     }, 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_table_bucket_logging({
+    #     table_bucket_arn: "TableBucketARN", # required
+    #     table_bucket_logging_status: { # required
+    #       logging_enabled: {
+    #         target_bucket: "LoggingTargetBucket", # required
+    #         target_prefix: "LoggingTargetPrefix", # required
+    #         target_object_key_format: { # required
+    #           partitioned_prefix: { # required
+    #             partition_date_source: "EventTime", # required, accepts EventTime, DeliveryTime
+    #           },
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/PutTableBucketLogging AWS API Documentation
+    #
+    # @overload put_table_bucket_logging(params = {})
+    # @param [Hash] params ({})
+    def put_table_bucket_logging(params = {}, options = {})
+      req = build_request(:put_table_bucket_logging, params)
+      req.send_request(options)
+    end
+
     # Creates a new maintenance configuration or replaces an existing
     # maintenance configuration for a table bucket. For more information,
     # see [Amazon S3 table bucket maintenance][1] in the *Amazon Simple
@@ -3559,7 +3723,7 @@ module Aws::S3Tables
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3tables'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

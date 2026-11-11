@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2026-11-10)
+------------------
+
+* Feature - This release adds the freeTrialSummary.trialEndTime field to DescribeAgreement and the freeTrialEndTime field to SearchAgreements results, so you can see when an agreement's free trial ends.
+
+1.55.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.54.0 (2026-11-06)
 ------------------
 

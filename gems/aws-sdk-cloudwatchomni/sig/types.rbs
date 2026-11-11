@@ -354,6 +354,11 @@ module Aws::CloudWatchOmni
       SENSITIVE: []
     end
 
+    class DataAccessTarget
+      attr_accessor actions: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class DeleteAccessGrantInput
       attr_accessor grant_id: ::String
       SENSITIVE: []
@@ -646,6 +651,19 @@ module Aws::CloudWatchOmni
     end
 
     class GetSpaceCredentialsForOrganizationOutput
+      attr_accessor credentials: Types::AwsCredentials
+      SENSITIVE: [:credentials]
+    end
+
+    class GetSpaceDataAccessInput
+      attr_accessor space_id: ::String
+      attr_accessor target_scopes: ::Array[Types::DataAccessTarget]
+      attr_accessor duration_seconds: ::Integer
+      attr_accessor audit_context: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetSpaceDataAccessOutput
       attr_accessor credentials: Types::AwsCredentials
       SENSITIVE: [:credentials]
     end
@@ -1129,6 +1147,11 @@ module Aws::CloudWatchOmni
 
     class PartialResults
       attr_accessor partial_results_detected: bool
+      SENSITIVE: []
+    end
+
+    class PolicyTooLargeException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 

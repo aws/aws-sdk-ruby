@@ -8108,7 +8108,7 @@ module Aws::ECS
     #
     # * Linux platform version `1.4.0` or later.
     #
-    # * Windows platform version `1.0.0` or later.
+    # ^
     #
     # Consider the following when using the Fargate launch type:
     #
@@ -8152,7 +8152,7 @@ module Aws::ECS
     #
     #  * Linux platform version `1.4.0` or later.
     #
-    # * Windows platform version `1.0.0` or later.
+    # ^
     #
     #  </note>
     #
@@ -10322,6 +10322,28 @@ module Aws::ECS
     #   criteria.
     #   @return [Types::CapacityReservationRequest]
     #
+    # @!attribute [rw] nitro_enclaves_enabled
+    #   Specifies whether instances that this capacity provider launches
+    #   have [Nitro Sandbox][1] enabled. Enable this setting to run tasks
+    #   that use the `ISOLATED_SANDBOX` or `CONFIDENTIAL_SANDBOX` isolation
+    #   mode.
+    #
+    #   When you enable this setting, the capacity provider must include at
+    #   least one instance type that supports Nitro Sandbox. You can't
+    #   enable this setting together with local storage (the
+    #   `useLocalStorage` setting in `localStorageConfiguration`).
+    #
+    #   The default value is `false`.
+    #
+    #   For more information, see [Isolated and confidential tasks][2] in
+    #   *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/amazon-ec2-nitro-sandboxes.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/isolated-confidential-tasks.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/InstanceLaunchTemplate AWS API Documentation
     #
     class InstanceLaunchTemplate < Struct.new(
@@ -10334,7 +10356,8 @@ module Aws::ECS
       :instance_metadata_tags_propagation,
       :instance_requirements,
       :fips_enabled,
-      :capacity_reservations)
+      :capacity_reservations,
+      :nitro_enclaves_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15317,7 +15340,7 @@ module Aws::ECS
     #
     #    * Linux platform version `1.4.0` or later.
     #
-    #   * Windows platform version `1.0.0` or later.
+    #   ^
     #
     #    </note>
     #
@@ -15335,6 +15358,17 @@ module Aws::ECS
     #   allows for fault injection requests to be accepted from the task's
     #   containers. The default value is `false`.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] trusted_execution_configuration
+    #   The trusted execution configuration for tasks that use this task
+    #   definition, including the isolation mode and, if configured, an
+    #   attestation policy.
+    #
+    #   <note markdown="1"> Trusted execution is supported only for Amazon ECS Managed
+    #   Instances.
+    #
+    #    </note>
+    #   @return [Types::TrustedExecutionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinitionRequest AWS API Documentation
     #
@@ -15356,7 +15390,8 @@ module Aws::ECS
       :inference_accelerators,
       :ephemeral_storage,
       :runtime_platform,
-      :enable_fault_injection)
+      :enable_fault_injection,
+      :trusted_execution_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19100,6 +19135,17 @@ module Aws::ECS
     #   The Fargate ephemeral storage settings for the task.
     #   @return [Types::TaskEphemeralStorage]
     #
+    # @!attribute [rw] trusted_execution_summary
+    #   A summary of the trusted execution configuration for the task,
+    #   including the isolation mode. This is a read-only view of the
+    #   configuration that was set on the task definition.
+    #
+    #   <note markdown="1"> Trusted execution is supported only for Amazon ECS Managed
+    #   Instances.
+    #
+    #    </note>
+    #   @return [Types::TrustedExecutionSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Task AWS API Documentation
     #
     class Task < Struct.new(
@@ -19139,7 +19185,8 @@ module Aws::ECS
       :task_definition_arn,
       :version,
       :ephemeral_storage,
-      :fargate_ephemeral_storage)
+      :fargate_ephemeral_storage,
+      :trusted_execution_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19516,6 +19563,17 @@ module Aws::ECS
     #   `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] trusted_execution_configuration
+    #   The trusted execution configuration for tasks that use this task
+    #   definition, including the isolation mode and, if configured, an
+    #   attestation policy.
+    #
+    #   <note markdown="1"> Trusted execution is supported only for Amazon ECS Managed
+    #   Instances.
+    #
+    #    </note>
+    #   @return [Types::TrustedExecutionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskDefinition AWS API Documentation
     #
     class TaskDefinition < Struct.new(
@@ -19544,7 +19602,8 @@ module Aws::ECS
       :delete_requested_at,
       :registered_by,
       :ephemeral_storage,
-      :enable_fault_injection)
+      :enable_fault_injection,
+      :trusted_execution_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19893,7 +19952,7 @@ module Aws::ECS
     #
     #    * Linux platform version `1.4.0` or later.
     #
-    #   * Windows platform version `1.0.0` or later.
+    #   ^
     #
     #    </note>
     #   @return [Types::EphemeralStorage]
@@ -20316,6 +20375,118 @@ module Aws::ECS
     class TotalLocalStorageGBRequest < Struct.new(
       :min,
       :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The trusted execution configuration for a task. This configuration
+    # controls the isolation mode and attestation policy. You set this
+    # configuration when you register a task definition.
+    #
+    # <note markdown="1"> Trusted execution is supported only for Amazon ECS Managed Instances.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] isolation_mode
+    #   The isolation mode for tasks that use this task definition. The
+    #   isolation mode determines how a task is isolated from other tasks on
+    #   the same Amazon EC2 instance.
+    #
+    #   * `SHARED`: The task shares the underlying Amazon EC2 instance with
+    #     other tasks. This is the default isolation mode.
+    #
+    #   * `ISOLATED_SANDBOX`: The task runs in its own [Nitro Sandbox][1],
+    #     which is a lightweight virtual machine that is isolated by the
+    #     Amazon Web Services Nitro System. Each task's sandbox is isolated
+    #     from every other task's sandbox on the same Amazon EC2 instance,
+    #     so one task can't access another task's memory or storage. For
+    #     more information, see [Isolated and confidential tasks][2] in
+    #     *Amazon Elastic Container Service Developer Guide*.
+    #
+    #   * `CONFIDENTIAL_SANDBOX`: The task runs in its own [Nitro
+    #     Sandbox][1], which is a lightweight virtual machine that is
+    #     isolated by the Amazon Web Services Nitro System, with
+    #     cryptographic attestation. The host can't access the sandbox's
+    #     memory or storage, and only the approved workload can decrypt data
+    #     that you encrypt with your Key Management Service key. For more
+    #     information, see [Isolated and confidential tasks][2] in *Amazon
+    #     Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/amazon-ec2-nitro-sandboxes.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/isolated-confidential-tasks.html
+    #   @return [String]
+    #
+    # @!attribute [rw] attestation_policy
+    #   The base64-encoded attestation policy envelope for the task. The
+    #   policy specifies which containers are allowed to run and the runtime
+    #   configuration that is cryptographically attested. This parameter is
+    #   required when `isolationMode` is `CONFIDENTIAL_SANDBOX`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TrustedExecutionConfiguration AWS API Documentation
+    #
+    class TrustedExecutionConfiguration < Struct.new(
+      :isolation_mode,
+      :attestation_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the trusted execution configuration for a task. This is a
+    # read-only view of the isolation configuration that was set on the task
+    # definition. Use it to see a task's isolation configuration in the
+    # response to `DescribeTasks`, `RunTask`, or `StopTask` without calling
+    # `DescribeTaskDefinition`. This summary never includes the attestation
+    # policy itself.
+    #
+    # <note markdown="1"> Trusted execution is supported only for Amazon ECS Managed Instances.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] isolation_mode
+    #   The isolation mode that the task runs in. This value mirrors the
+    #   `isolationMode` that was set in the task definition's
+    #   `TrustedExecutionConfiguration`.
+    #
+    #   * `SHARED`: The task shares the underlying Amazon EC2 instance with
+    #     other tasks. This is the default isolation mode.
+    #
+    #   * `ISOLATED_SANDBOX`: The task runs in its own [Nitro Sandbox][1],
+    #     which is a lightweight virtual machine that is isolated by the
+    #     Amazon Web Services Nitro System. Each task's sandbox is isolated
+    #     from every other task's sandbox on the same Amazon EC2 instance,
+    #     so one task can't access another task's memory or storage. For
+    #     more information, see [Isolated and confidential tasks][2] in
+    #     *Amazon Elastic Container Service Developer Guide*.
+    #
+    #   * `CONFIDENTIAL_SANDBOX`: The task runs in its own [Nitro
+    #     Sandbox][1], which is a lightweight virtual machine that is
+    #     isolated by the Amazon Web Services Nitro System, with
+    #     cryptographic attestation. The host can't access the sandbox's
+    #     memory or storage, and only the approved workload can decrypt data
+    #     that you encrypt with your Key Management Service key. For more
+    #     information, see [Isolated and confidential tasks][2] in *Amazon
+    #     Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/amazon-ec2-nitro-sandboxes.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/isolated-confidential-tasks.html
+    #   @return [String]
+    #
+    # @!attribute [rw] attestation_policy_status
+    #   The status of the attestation policy for the task. This value is
+    #   present only for tasks that use the `CONFIDENTIAL_SANDBOX` isolation
+    #   mode.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TrustedExecutionSummary AWS API Documentation
+    #
+    class TrustedExecutionSummary < Struct.new(
+      :isolation_mode,
+      :attestation_policy_status)
       SENSITIVE = []
       include Aws::Structure
     end

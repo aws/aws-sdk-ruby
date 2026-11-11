@@ -419,6 +419,12 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class AliasOperations
+      attr_accessor add: ::Array[::String]
+      attr_accessor remove: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class AmazonQSettings
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor q_profile_arn: ::String
@@ -2034,6 +2040,21 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class CreateClusterExtensionRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor extension_name: ::String
+      attr_accessor extension_version: ::String
+      attr_accessor configuration_values: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateClusterExtensionResponse
+      attr_accessor extension_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateClusterRequest
       attr_accessor cluster_name: ::String
       attr_accessor instance_groups: ::Array[Types::ClusterInstanceGroupSpecification]
@@ -2796,6 +2817,7 @@ module Aws::SageMaker
       attr_accessor role_arn: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor parallelism_configuration: Types::ParallelismConfiguration
+      attr_accessor pipeline_version_aliases: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -3361,6 +3383,17 @@ module Aws::SageMaker
     class DeleteAssociationResponse
       attr_accessor source_arn: ::String
       attr_accessor destination_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterExtensionRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor extension_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterExtensionResponse
+      attr_accessor extension_arn: ::String
       SENSITIVE: []
     end
 
@@ -4021,6 +4054,18 @@ module Aws::SageMaker
 
     class DescribeClusterEventResponse
       attr_accessor event_details: Types::ClusterEventDetail
+      SENSITIVE: []
+    end
+
+    class DescribeClusterExtensionRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor extension_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClusterExtensionResponse
+      attr_accessor extension_details: Types::ExtensionDetails
+      attr_accessor node_summary: Types::ExtensionNodeSummary
       SENSITIVE: []
     end
 
@@ -5111,12 +5156,15 @@ module Aws::SageMaker
       attr_accessor selective_execution_config: Types::SelectiveExecutionConfig
       attr_accessor pipeline_version_id: ::Integer
       attr_accessor m_lflow_config: Types::MLflowConfiguration
+      attr_accessor pipeline_version_aliases: ::Array[::String]
+      attr_accessor role_arn: ::String
       SENSITIVE: []
     end
 
     class DescribePipelineRequest
       attr_accessor pipeline_name: ::String
       attr_accessor pipeline_version_id: ::Integer
+      attr_accessor pipeline_version_alias: ::String
       SENSITIVE: []
     end
 
@@ -5136,6 +5184,7 @@ module Aws::SageMaker
       attr_accessor parallelism_configuration: Types::ParallelismConfiguration
       attr_accessor pipeline_version_display_name: ::String
       attr_accessor pipeline_version_description: ::String
+      attr_accessor pipeline_version_aliases: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -6041,6 +6090,33 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class ExtensionDetails
+      attr_accessor cluster_arn: ::String
+      attr_accessor extension_arn: ::String
+      attr_accessor extension_name: ::String
+      attr_accessor extension_version: ::String
+      attr_accessor status: ("Creating" | "Active" | "CreateFailed" | "Updating" | "Deleting" | "DeleteFailed" | "Degraded" | "UpdateFailed")
+      attr_accessor configuration_values: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ExtensionNodeSummary
+      attr_accessor total_count: ::Integer
+      attr_accessor active_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExtensionSummary
+      attr_accessor extension_arn: ::String
+      attr_accessor extension_name: ::String
+      attr_accessor extension_version: ::String
+      attr_accessor status: ("Creating" | "Active" | "CreateFailed" | "Updating" | "Deleting" | "DeleteFailed" | "Degraded" | "UpdateFailed")
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
     class FSxLustreConfig
       attr_accessor size_in_gi_b: ::Integer
       attr_accessor per_unit_storage_throughput: ::Integer
@@ -6349,6 +6425,12 @@ module Aws::SageMaker
       attr_accessor hub_content_status: ("Available" | "Importing" | "Deleting" | "ImportFailed" | "DeleteFailed" | "PendingImport" | "PendingDelete")
       attr_accessor creation_time: ::Time
       attr_accessor original_creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class HubContentStepMetadata
+      attr_accessor hub_arn: ::String
+      attr_accessor hub_content_arn: ::String
       SENSITIVE: []
     end
 
@@ -7465,6 +7547,21 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class ListClusterExtensionsRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor creation_time_after: ::Time
+      attr_accessor creation_time_before: ::Time
+      SENSITIVE: []
+    end
+
+    class ListClusterExtensionsResponse
+      attr_accessor extensions: ::Array[Types::ExtensionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListClusterNodesRequest
       attr_accessor cluster_name: ::String
       attr_accessor creation_time_after: ::Time
@@ -8483,6 +8580,7 @@ module Aws::SageMaker
       attr_accessor sort_order: ("Ascending" | "Descending")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor pipeline_version_alias: ::String
       SENSITIVE: []
     end
 
@@ -8529,6 +8627,7 @@ module Aws::SageMaker
       attr_accessor sort_order: ("Ascending" | "Descending")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor managed_by: ("AWS" | "CUSTOMER")
       SENSITIVE: []
     end
 
@@ -10083,6 +10182,7 @@ module Aws::SageMaker
       attr_accessor athena: Types::AthenaStepMetadata
       attr_accessor cleanup: Types::CleanupStepMetadata
       attr_accessor for_each: Types::ForEachStepMetadata
+      attr_accessor hub_content: Types::HubContentStepMetadata
       SENSITIVE: []
     end
 
@@ -10093,6 +10193,7 @@ module Aws::SageMaker
       attr_accessor pipeline_execution_description: ::String
       attr_accessor pipeline_execution_display_name: ::String
       attr_accessor pipeline_execution_failure_reason: ::String
+      attr_accessor pipeline_version_aliases: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -10126,6 +10227,7 @@ module Aws::SageMaker
       attr_accessor last_executed_pipeline_execution_arn: ::String
       attr_accessor last_executed_pipeline_execution_display_name: ::String
       attr_accessor last_executed_pipeline_execution_status: ("Executing" | "Stopping" | "Stopped" | "Failed" | "Succeeded" | "CompletedWithFailures")
+      attr_accessor pipeline_version_aliases: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -10136,6 +10238,7 @@ module Aws::SageMaker
       attr_accessor pipeline_version_description: ::String
       attr_accessor pipeline_version_display_name: ::String
       attr_accessor last_execution_pipeline_execution_arn: ::String
+      attr_accessor pipeline_version_aliases: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -11291,6 +11394,8 @@ module Aws::SageMaker
       attr_accessor selective_execution_config: Types::SelectiveExecutionConfig
       attr_accessor pipeline_version_id: ::Integer
       attr_accessor mlflow_experiment_name: ::String
+      attr_accessor pipeline_version_alias: ::String
+      attr_accessor role_arn: ::String
       SENSITIVE: []
     end
 
@@ -12213,6 +12318,20 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class UpdateClusterExtensionRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor extension_arn: ::String
+      attr_accessor extension_version: ::String
+      attr_accessor configuration_values: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateClusterExtensionResponse
+      attr_accessor extension_arn: ::String
+      SENSITIVE: []
+    end
+
     class UpdateClusterRequest
       attr_accessor cluster_name: ::String
       attr_accessor instance_groups: ::Array[Types::ClusterInstanceGroupSpecification]
@@ -12685,6 +12804,7 @@ module Aws::SageMaker
       attr_accessor pipeline_description: ::String
       attr_accessor role_arn: ::String
       attr_accessor parallelism_configuration: Types::ParallelismConfiguration
+      attr_accessor pipeline_version_aliases: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -12699,6 +12819,7 @@ module Aws::SageMaker
       attr_accessor pipeline_version_id: ::Integer
       attr_accessor pipeline_version_display_name: ::String
       attr_accessor pipeline_version_description: ::String
+      attr_accessor pipeline_version_alias_operations: Types::AliasOperations
       SENSITIVE: []
     end
 

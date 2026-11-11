@@ -30,6 +30,7 @@ module Aws::CloudWatchOmni
   # * {AccessDeniedException}
   # * {ConflictException}
   # * {InternalServerException}
+  # * {PolicyTooLargeException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
@@ -112,6 +113,21 @@ module Aws::CloudWatchOmni
 
       def retryable?
         true
+      end
+    end
+
+    class PolicyTooLargeException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudWatchOmni::Types::PolicyTooLargeException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

@@ -53,6 +53,8 @@ module Aws::S3Tables
     GetNamespaceResponse = Shapes::StructureShape.new(name: 'GetNamespaceResponse')
     GetTableBucketEncryptionRequest = Shapes::StructureShape.new(name: 'GetTableBucketEncryptionRequest')
     GetTableBucketEncryptionResponse = Shapes::StructureShape.new(name: 'GetTableBucketEncryptionResponse')
+    GetTableBucketLoggingRequest = Shapes::StructureShape.new(name: 'GetTableBucketLoggingRequest')
+    GetTableBucketLoggingResponse = Shapes::StructureShape.new(name: 'GetTableBucketLoggingResponse')
     GetTableBucketMaintenanceConfigurationRequest = Shapes::StructureShape.new(name: 'GetTableBucketMaintenanceConfigurationRequest')
     GetTableBucketMaintenanceConfigurationResponse = Shapes::StructureShape.new(name: 'GetTableBucketMaintenanceConfigurationResponse')
     GetTableBucketMetricsConfigurationRequest = Shapes::StructureShape.new(name: 'GetTableBucketMetricsConfigurationRequest')
@@ -132,6 +134,9 @@ module Aws::S3Tables
     ListTablesResponse = Shapes::StructureShape.new(name: 'ListTablesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    LoggingEnabled = Shapes::StructureShape.new(name: 'LoggingEnabled')
+    LoggingTargetBucket = Shapes::StringShape.new(name: 'LoggingTargetBucket')
+    LoggingTargetPrefix = Shapes::StringShape.new(name: 'LoggingTargetPrefix')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaintenanceSettings = Shapes::StructureShape.new(name: 'MaintenanceSettings')
     MaintenanceStatus = Shapes::StringShape.new(name: 'MaintenanceStatus')
@@ -167,9 +172,12 @@ module Aws::S3Tables
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OpenTableFormat = Shapes::StringShape.new(name: 'OpenTableFormat')
+    PartitionDateSource = Shapes::StringShape.new(name: 'PartitionDateSource')
+    PartitionedPrefix = Shapes::StructureShape.new(name: 'PartitionedPrefix')
     PlanningStats = Shapes::StructureShape.new(name: 'PlanningStats')
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
     PutTableBucketEncryptionRequest = Shapes::StructureShape.new(name: 'PutTableBucketEncryptionRequest')
+    PutTableBucketLoggingRequest = Shapes::StructureShape.new(name: 'PutTableBucketLoggingRequest')
     PutTableBucketMaintenanceConfigurationRequest = Shapes::StructureShape.new(name: 'PutTableBucketMaintenanceConfigurationRequest')
     PutTableBucketMetricsConfigurationRequest = Shapes::StructureShape.new(name: 'PutTableBucketMetricsConfigurationRequest')
     PutTableBucketPolicyRequest = Shapes::StructureShape.new(name: 'PutTableBucketPolicyRequest')
@@ -212,6 +220,7 @@ module Aws::S3Tables
     TableARN = Shapes::StringShape.new(name: 'TableARN')
     TableBucketARN = Shapes::StringShape.new(name: 'TableBucketARN')
     TableBucketId = Shapes::StringShape.new(name: 'TableBucketId')
+    TableBucketLoggingStatus = Shapes::StructureShape.new(name: 'TableBucketLoggingStatus')
     TableBucketMaintenanceConfiguration = Shapes::MapShape.new(name: 'TableBucketMaintenanceConfiguration')
     TableBucketMaintenanceConfigurationValue = Shapes::StructureShape.new(name: 'TableBucketMaintenanceConfigurationValue')
     TableBucketMaintenanceSettings = Shapes::UnionShape.new(name: 'TableBucketMaintenanceSettings')
@@ -250,6 +259,7 @@ module Aws::S3Tables
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::MapShape.new(name: 'Tags')
+    TargetObjectKeyFormat = Shapes::StructureShape.new(name: 'TargetObjectKeyFormat')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UnmatchedSourceFieldsPolicy = Shapes::StringShape.new(name: 'UnmatchedSourceFieldsPolicy')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -388,6 +398,12 @@ module Aws::S3Tables
 
     GetTableBucketEncryptionResponse.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, required: true, location_name: "encryptionConfiguration"))
     GetTableBucketEncryptionResponse.struct_class = Types::GetTableBucketEncryptionResponse
+
+    GetTableBucketLoggingRequest.add_member(:table_bucket_arn, Shapes::ShapeRef.new(shape: TableBucketARN, required: true, location: "uri", location_name: "tableBucketARN"))
+    GetTableBucketLoggingRequest.struct_class = Types::GetTableBucketLoggingRequest
+
+    GetTableBucketLoggingResponse.add_member(:table_bucket_logging_status, Shapes::ShapeRef.new(shape: TableBucketLoggingStatus, required: true, location_name: "tableBucketLoggingStatus"))
+    GetTableBucketLoggingResponse.struct_class = Types::GetTableBucketLoggingResponse
 
     GetTableBucketMaintenanceConfigurationRequest.add_member(:table_bucket_arn, Shapes::ShapeRef.new(shape: TableBucketARN, required: true, location: "uri", location_name: "tableBucketARN"))
     GetTableBucketMaintenanceConfigurationRequest.struct_class = Types::GetTableBucketMaintenanceConfigurationRequest
@@ -681,6 +697,11 @@ module Aws::S3Tables
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    LoggingEnabled.add_member(:target_bucket, Shapes::ShapeRef.new(shape: LoggingTargetBucket, required: true, location_name: "targetBucket"))
+    LoggingEnabled.add_member(:target_prefix, Shapes::ShapeRef.new(shape: LoggingTargetPrefix, required: true, location_name: "targetPrefix"))
+    LoggingEnabled.add_member(:target_object_key_format, Shapes::ShapeRef.new(shape: TargetObjectKeyFormat, required: true, location_name: "targetObjectKeyFormat"))
+    LoggingEnabled.struct_class = Types::LoggingEnabled
+
     MaintenanceSettings.add_member(:iceberg_compaction, Shapes::ShapeRef.new(shape: MigrationCompactionSettings, location_name: "icebergCompaction"))
     MaintenanceSettings.add_member(:iceberg_snapshot_management, Shapes::ShapeRef.new(shape: MigrationSnapshotManagementSettings, location_name: "icebergSnapshotManagement"))
     MaintenanceSettings.struct_class = Types::MaintenanceSettings
@@ -762,6 +783,9 @@ module Aws::S3Tables
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     NotFoundException.struct_class = Types::NotFoundException
 
+    PartitionedPrefix.add_member(:partition_date_source, Shapes::ShapeRef.new(shape: PartitionDateSource, required: true, location_name: "partitionDateSource"))
+    PartitionedPrefix.struct_class = Types::PartitionedPrefix
+
     PlanningStats.add_member(:objects_scanned, Shapes::ShapeRef.new(shape: Long, location_name: "objectsScanned"))
     PlanningStats.add_member(:objects_planned, Shapes::ShapeRef.new(shape: Long, location_name: "objectsPlanned"))
     PlanningStats.add_member(:partition_count, Shapes::ShapeRef.new(shape: Long, location_name: "partitionCount"))
@@ -770,6 +794,10 @@ module Aws::S3Tables
     PutTableBucketEncryptionRequest.add_member(:table_bucket_arn, Shapes::ShapeRef.new(shape: TableBucketARN, required: true, location: "uri", location_name: "tableBucketARN"))
     PutTableBucketEncryptionRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, required: true, location_name: "encryptionConfiguration"))
     PutTableBucketEncryptionRequest.struct_class = Types::PutTableBucketEncryptionRequest
+
+    PutTableBucketLoggingRequest.add_member(:table_bucket_arn, Shapes::ShapeRef.new(shape: TableBucketARN, required: true, location: "uri", location_name: "tableBucketARN"))
+    PutTableBucketLoggingRequest.add_member(:table_bucket_logging_status, Shapes::ShapeRef.new(shape: TableBucketLoggingStatus, required: true, location_name: "tableBucketLoggingStatus"))
+    PutTableBucketLoggingRequest.struct_class = Types::PutTableBucketLoggingRequest
 
     PutTableBucketMaintenanceConfigurationRequest.add_member(:table_bucket_arn, Shapes::ShapeRef.new(shape: TableBucketARN, required: true, location: "uri", location_name: "tableBucketARN"))
     PutTableBucketMaintenanceConfigurationRequest.add_member(:type, Shapes::ShapeRef.new(shape: TableBucketMaintenanceType, required: true, location: "uri", location_name: "type"))
@@ -902,6 +930,9 @@ module Aws::S3Tables
     SyncTableMigrationResponse.add_member(:state, Shapes::ShapeRef.new(shape: MigrationState, required: true, location_name: "state"))
     SyncTableMigrationResponse.struct_class = Types::SyncTableMigrationResponse
 
+    TableBucketLoggingStatus.add_member(:logging_enabled, Shapes::ShapeRef.new(shape: LoggingEnabled, location_name: "loggingEnabled"))
+    TableBucketLoggingStatus.struct_class = Types::TableBucketLoggingStatus
+
     TableBucketMaintenanceConfiguration.key = Shapes::ShapeRef.new(shape: TableBucketMaintenanceType)
     TableBucketMaintenanceConfiguration.value = Shapes::ShapeRef.new(shape: TableBucketMaintenanceConfigurationValue)
 
@@ -1010,6 +1041,9 @@ module Aws::S3Tables
 
     Tags.key = Shapes::ShapeRef.new(shape: TagKey)
     Tags.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TargetObjectKeyFormat.add_member(:partitioned_prefix, Shapes::ShapeRef.new(shape: PartitionedPrefix, required: true, location_name: "partitionedPrefix"))
+    TargetObjectKeyFormat.struct_class = Types::TargetObjectKeyFormat
 
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
@@ -1305,6 +1339,20 @@ module Aws::S3Tables
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:get_table_bucket_logging, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTableBucketLogging"
+        o.http_method = "GET"
+        o.http_request_uri = "/buckets/{tableBucketARN}/logging"
+        o.input = Shapes::ShapeRef.new(shape: GetTableBucketLoggingRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTableBucketLoggingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
@@ -1635,6 +1683,20 @@ module Aws::S3Tables
         o.http_method = "PUT"
         o.http_request_uri = "/buckets/{tableBucketARN}/encryption"
         o.input = Shapes::ShapeRef.new(shape: PutTableBucketEncryptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:put_table_bucket_logging, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutTableBucketLogging"
+        o.http_method = "PUT"
+        o.http_request_uri = "/buckets/{tableBucketARN}/logging"
+        o.input = Shapes::ShapeRef.new(shape: PutTableBucketLoggingRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

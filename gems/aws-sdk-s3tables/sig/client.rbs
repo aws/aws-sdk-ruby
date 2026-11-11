@@ -297,6 +297,16 @@ module Aws
                                        ) -> _GetTableBucketEncryptionResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableBucketEncryptionResponseSuccess
 
+      interface _GetTableBucketLoggingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTableBucketLoggingResponse]
+        def table_bucket_logging_status: () -> Types::TableBucketLoggingStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#get_table_bucket_logging-instance_method
+      def get_table_bucket_logging: (
+                                      table_bucket_arn: ::String
+                                    ) -> _GetTableBucketLoggingResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableBucketLoggingResponseSuccess
+
       interface _GetTableBucketMaintenanceConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTableBucketMaintenanceConfigurationResponse]
         def table_bucket_arn: () -> ::String
@@ -580,6 +590,23 @@ module Aws
                                          }
                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#put_table_bucket_logging-instance_method
+      def put_table_bucket_logging: (
+                                      table_bucket_arn: ::String,
+                                      table_bucket_logging_status: {
+                                        logging_enabled: {
+                                          target_bucket: ::String,
+                                          target_prefix: ::String,
+                                          target_object_key_format: {
+                                            partitioned_prefix: {
+                                              partition_date_source: ("EventTime" | "DeliveryTime")
+                                            }
+                                          }
+                                        }?
+                                      }
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#put_table_bucket_maintenance_configuration-instance_method
       def put_table_bucket_maintenance_configuration: (

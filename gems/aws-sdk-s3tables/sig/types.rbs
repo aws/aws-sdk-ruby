@@ -186,6 +186,16 @@ module Aws::S3Tables
       SENSITIVE: []
     end
 
+    class GetTableBucketLoggingRequest
+      attr_accessor table_bucket_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTableBucketLoggingResponse
+      attr_accessor table_bucket_logging_status: Types::TableBucketLoggingStatus
+      SENSITIVE: []
+    end
+
     class GetTableBucketMaintenanceConfigurationRequest
       attr_accessor table_bucket_arn: ::String
       SENSITIVE: []
@@ -590,6 +600,13 @@ module Aws::S3Tables
       SENSITIVE: []
     end
 
+    class LoggingEnabled
+      attr_accessor target_bucket: ::String
+      attr_accessor target_prefix: ::String
+      attr_accessor target_object_key_format: Types::TargetObjectKeyFormat
+      SENSITIVE: []
+    end
+
     class MaintenanceSettings
       attr_accessor iceberg_compaction: Types::MigrationCompactionSettings
       attr_accessor iceberg_snapshot_management: Types::MigrationSnapshotManagementSettings
@@ -695,6 +712,11 @@ module Aws::S3Tables
       SENSITIVE: []
     end
 
+    class PartitionedPrefix
+      attr_accessor partition_date_source: ("EventTime" | "DeliveryTime")
+      SENSITIVE: []
+    end
+
     class PlanningStats
       attr_accessor objects_scanned: ::Integer
       attr_accessor objects_planned: ::Integer
@@ -705,6 +727,12 @@ module Aws::S3Tables
     class PutTableBucketEncryptionRequest
       attr_accessor table_bucket_arn: ::String
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class PutTableBucketLoggingRequest
+      attr_accessor table_bucket_arn: ::String
+      attr_accessor table_bucket_logging_status: Types::TableBucketLoggingStatus
       SENSITIVE: []
     end
 
@@ -882,6 +910,11 @@ module Aws::S3Tables
       SENSITIVE: []
     end
 
+    class TableBucketLoggingStatus
+      attr_accessor logging_enabled: Types::LoggingEnabled
+      SENSITIVE: []
+    end
+
     class TableBucketMaintenanceConfigurationValue
       attr_accessor status: ("enabled" | "disabled")
       attr_accessor settings: Types::TableBucketMaintenanceSettings
@@ -1007,6 +1040,11 @@ module Aws::S3Tables
     end
 
     class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TargetObjectKeyFormat
+      attr_accessor partitioned_prefix: Types::PartitionedPrefix
+      SENSITIVE: []
     end
 
     class TooManyRequestsException

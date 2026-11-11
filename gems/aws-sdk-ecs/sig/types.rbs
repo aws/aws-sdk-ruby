@@ -1792,6 +1792,7 @@ module Aws::ECS
       attr_accessor instance_requirements: Types::InstanceRequirementsRequest
       attr_accessor fips_enabled: bool
       attr_accessor capacity_reservations: Types::CapacityReservationRequest
+      attr_accessor nitro_enclaves_enabled: bool
       SENSITIVE: []
     end
 
@@ -1827,7 +1828,7 @@ module Aws::ECS
       attr_accessor accelerator_types: ::Array[("gpu" | "fpga" | "inference")]
       attr_accessor accelerator_count: Types::AcceleratorCountRequest
       attr_accessor accelerator_manufacturers: ::Array[("amazon-web-services" | "amd" | "nvidia" | "xilinx" | "habana")]
-      attr_accessor accelerator_names: ::Array[("a100" | "inferentia" | "k520" | "k80" | "m60" | "radeon-pro-v520" | "t4" | "vu9p" | "v100" | "a10g" | "h100" | "t4g")]
+      attr_accessor accelerator_names: ::Array[("a100" | "inferentia" | "k520" | "k80" | "m60" | "radeon-pro-v520" | "t4" | "vu9p" | "v100" | "a10g" | "h100" | "t4g" | "l40s" | "l4")]
       attr_accessor accelerator_total_memory_mi_b: Types::AcceleratorTotalMemoryMiBRequest
       attr_accessor network_bandwidth_gbps: Types::NetworkBandwidthGbpsRequest
       attr_accessor allowed_instance_types: ::Array[::String]
@@ -2556,6 +2557,7 @@ module Aws::ECS
       attr_accessor ephemeral_storage: Types::EphemeralStorage
       attr_accessor runtime_platform: Types::RuntimePlatform
       attr_accessor enable_fault_injection: bool
+      attr_accessor trusted_execution_configuration: Types::TrustedExecutionConfiguration
       SENSITIVE: []
     end
 
@@ -3142,6 +3144,7 @@ module Aws::ECS
       attr_accessor version: ::Integer
       attr_accessor ephemeral_storage: Types::EphemeralStorage
       attr_accessor fargate_ephemeral_storage: Types::TaskEphemeralStorage
+      attr_accessor trusted_execution_summary: Types::TrustedExecutionSummary
       SENSITIVE: []
     end
 
@@ -3172,6 +3175,7 @@ module Aws::ECS
       attr_accessor registered_by: ::String
       attr_accessor ephemeral_storage: Types::EphemeralStorage
       attr_accessor enable_fault_injection: bool
+      attr_accessor trusted_execution_configuration: Types::TrustedExecutionConfiguration
       SENSITIVE: []
     end
 
@@ -3281,6 +3285,18 @@ module Aws::ECS
     class TotalLocalStorageGBRequest
       attr_accessor min: ::Float
       attr_accessor max: ::Float
+      SENSITIVE: []
+    end
+
+    class TrustedExecutionConfiguration
+      attr_accessor isolation_mode: ("SHARED" | "ISOLATED_SANDBOX" | "CONFIDENTIAL_SANDBOX")
+      attr_accessor attestation_policy: ::String
+      SENSITIVE: []
+    end
+
+    class TrustedExecutionSummary
+      attr_accessor isolation_mode: ("SHARED" | "ISOLATED_SANDBOX" | "CONFIDENTIAL_SANDBOX")
+      attr_accessor attestation_policy_status: ("CONFIGURED")
       SENSITIVE: []
     end
 

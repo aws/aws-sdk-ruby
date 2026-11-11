@@ -264,7 +264,8 @@ module Aws::CloudWatchOmni
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::CloudWatchOmni
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -3665,6 +3666,98 @@ module Aws::CloudWatchOmni
       req.send_request(options)
     end
 
+    # Returns temporary credentials for working with data in a space,
+    # limited to the actions you request.
+    #
+    # The credentials allow only the requested actions that can be granted
+    # in the space and that your access grants allow. Requested actions that
+    # cannot be conferred are ignored rather than rejected.
+    #
+    # @option params [required, String] :space_id
+    #   The unique ID of the space to return credentials for.
+    #
+    # @option params [required, Array<Types::DataAccessTarget>] :target_scopes
+    #   The actions to include in the credentials, grouped by service.
+    #
+    # @option params [Integer] :duration_seconds
+    #   The lifetime of the credentials, in seconds. Defaults to 3600.
+    #
+    # @option params [Hash<String,String>] :audit_context
+    #   Caller-supplied key-value pairs that are recorded for auditing. They
+    #   do not affect authorization or the permissions of the credentials.
+    #
+    # @return [Types::GetSpaceDataAccessOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSpaceDataAccessOutput#credentials #credentials} => Types::AwsCredentials
+    #
+    #
+    # @example Example: Get data credentials for log queries
+    #
+    #   # The following example requests credentials that allow running log queries and reading metric data in a space. Payloads
+    #   # are shown as JSON; on the wire they are CBOR-encoded.
+    #
+    #   resp = client.get_space_data_access({
+    #     audit_context: {
+    #       "source" => "logs-console", 
+    #     }, 
+    #     duration_seconds: 3600, 
+    #     space_id: "a1b2c3d4-5e6f-4a3b-8c9d-0e1f2a3b4c5d", 
+    #     target_scopes: [
+    #       {
+    #         actions: [
+    #           "logs:StartQuery", 
+    #           "logs:GetQueryResults", 
+    #         ], 
+    #       }, 
+    #       {
+    #         actions: [
+    #           "cloudwatch:GetMetricData", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     credentials: {
+    #       access_key_id: "ASIAIOSFODNN7EXAMPLE", 
+    #       expiration: Time.parse("2026-10-20T19:22:31Z"), 
+    #       secret_access_key: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY", 
+    #       session_token: "EXAMPLE-SESSION-TOKEN", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_space_data_access({
+    #     space_id: "SpaceId", # required
+    #     target_scopes: [ # required
+    #       {
+    #         actions: ["DataAccessActionName"], # required
+    #       },
+    #     ],
+    #     duration_seconds: 1,
+    #     audit_context: {
+    #       "DataAccessAuditContextKeyString" => "DataAccessAuditContextValueString",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.credentials.access_key_id #=> String
+    #   resp.credentials.secret_access_key #=> String
+    #   resp.credentials.session_token #=> String
+    #   resp.credentials.expiration #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudwatchomni-2025-01-01/GetSpaceDataAccess AWS API Documentation
+    #
+    # @overload get_space_data_access(params = {})
+    # @param [Hash] params ({})
+    def get_space_data_access(params = {}, options = {})
+      req = build_request(:get_space_data_access, params)
+      req.send_request(options)
+    end
+
     # Returns the results for the specified query.
     #
     # @option params [required, String] :query_id
@@ -6066,7 +6159,7 @@ module Aws::CloudWatchOmni
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchomni'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

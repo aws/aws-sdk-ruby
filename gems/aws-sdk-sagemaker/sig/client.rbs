@@ -814,6 +814,26 @@ module Aws
                           ) -> _CreateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
 
+      interface _CreateClusterExtensionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterExtensionResponse]
+        def extension_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#create_cluster_extension-instance_method
+      def create_cluster_extension: (
+                                      cluster_arn: ::String,
+                                      extension_name: ::String,
+                                      ?extension_version: ::String,
+                                      ?configuration_values: ::String,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        }
+                                      ],
+                                      ?client_token: ::String
+                                    ) -> _CreateClusterExtensionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterExtensionResponseSuccess
+
       interface _CreateClusterSchedulerConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterSchedulerConfigResponse]
         def cluster_scheduler_config_arn: () -> ::String
@@ -2445,7 +2465,8 @@ module Aws
                              ],
                              ?parallelism_configuration: {
                                max_parallel_execution_steps: ::Integer
-                             }
+                             },
+                             ?pipeline_version_aliases: Array[::String]
                            ) -> _CreatePipelineResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePipelineResponseSuccess
 
@@ -3179,6 +3200,17 @@ module Aws
                           ) -> _DeleteClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterResponseSuccess
 
+      interface _DeleteClusterExtensionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClusterExtensionResponse]
+        def extension_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_cluster_extension-instance_method
+      def delete_cluster_extension: (
+                                      cluster_arn: ::String,
+                                      extension_arn: ::String
+                                    ) -> _DeleteClusterExtensionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterExtensionResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_cluster_scheduler_config-instance_method
       def delete_cluster_scheduler_config: (
                                              cluster_scheduler_config_id: ::String
@@ -3851,6 +3883,18 @@ module Aws
                                     cluster_name: ::String
                                   ) -> _DescribeClusterEventResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterEventResponseSuccess
+
+      interface _DescribeClusterExtensionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterExtensionResponse]
+        def extension_details: () -> Types::ExtensionDetails
+        def node_summary: () -> Types::ExtensionNodeSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_cluster_extension-instance_method
+      def describe_cluster_extension: (
+                                        cluster_arn: ::String,
+                                        extension_arn: ::String
+                                      ) -> _DescribeClusterExtensionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterExtensionResponseSuccess
 
       interface _DescribeClusterNodeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterNodeResponse]
@@ -4899,11 +4943,13 @@ module Aws
         def parallelism_configuration: () -> Types::ParallelismConfiguration
         def pipeline_version_display_name: () -> ::String
         def pipeline_version_description: () -> ::String
+        def pipeline_version_aliases: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_pipeline-instance_method
       def describe_pipeline: (
                                pipeline_name: ::String,
-                               ?pipeline_version_id: ::Integer
+                               ?pipeline_version_id: ::Integer,
+                               ?pipeline_version_alias: ::String
                              ) -> _DescribePipelineResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePipelineResponseSuccess
 
@@ -4935,6 +4981,8 @@ module Aws
         def selective_execution_config: () -> Types::SelectiveExecutionConfig
         def pipeline_version_id: () -> ::Integer
         def m_lflow_config: () -> Types::MLflowConfiguration
+        def pipeline_version_aliases: () -> ::Array[::String]
+        def role_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_pipeline_execution-instance_method
       def describe_pipeline_execution: (
@@ -5690,6 +5738,21 @@ module Aws
                                  ?next_token: ::String
                                ) -> _ListClusterEventsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClusterEventsResponseSuccess
+
+      interface _ListClusterExtensionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterExtensionsResponse]
+        def extensions: () -> ::Array[Types::ExtensionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_cluster_extensions-instance_method
+      def list_cluster_extensions: (
+                                     cluster_arn: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String,
+                                     ?creation_time_after: ::Time,
+                                     ?creation_time_before: ::Time
+                                   ) -> _ListClusterExtensionsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClusterExtensionsResponseSuccess
 
       interface _ListClusterNodesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterNodesResponse]
@@ -6721,7 +6784,8 @@ module Aws
                                       ?sort_by: ("CreationTime" | "PipelineExecutionArn"),
                                       ?sort_order: ("Ascending" | "Descending"),
                                       ?next_token: ::String,
-                                      ?max_results: ::Integer
+                                      ?max_results: ::Integer,
+                                      ?pipeline_version_alias: ::String
                                     ) -> _ListPipelineExecutionsResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPipelineExecutionsResponseSuccess
 
@@ -6767,7 +6831,8 @@ module Aws
                             ?sort_by: ("Name" | "CreationTime"),
                             ?sort_order: ("Ascending" | "Descending"),
                             ?next_token: ::String,
-                            ?max_results: ::Integer
+                            ?max_results: ::Integer,
+                            ?managed_by: ("AWS" | "CUSTOMER")
                           ) -> _ListPipelinesResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPipelinesResponseSuccess
 
@@ -7338,7 +7403,9 @@ module Aws
                                         ]
                                       },
                                       ?pipeline_version_id: ::Integer,
-                                      ?mlflow_experiment_name: ::String
+                                      ?mlflow_experiment_name: ::String,
+                                      ?pipeline_version_alias: ::String,
+                                      ?role_arn: ::String
                                     ) -> _StartPipelineExecutionResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPipelineExecutionResponseSuccess
 
@@ -7578,6 +7645,20 @@ module Aws
                             ?orchestrator: Params::cluster_orchestrator
                           ) -> _UpdateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterResponseSuccess
+
+      interface _UpdateClusterExtensionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClusterExtensionResponse]
+        def extension_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#update_cluster_extension-instance_method
+      def update_cluster_extension: (
+                                      cluster_arn: ::String,
+                                      extension_arn: ::String,
+                                      ?extension_version: ::String,
+                                      ?configuration_values: ::String,
+                                      ?client_token: ::String
+                                    ) -> _UpdateClusterExtensionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterExtensionResponseSuccess
 
       interface _UpdateClusterSchedulerConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClusterSchedulerConfigResponse]
@@ -8170,7 +8251,8 @@ module Aws
                              ?role_arn: ::String,
                              ?parallelism_configuration: {
                                max_parallel_execution_steps: ::Integer
-                             }
+                             },
+                             ?pipeline_version_aliases: Array[::String]
                            ) -> _UpdatePipelineResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePipelineResponseSuccess
 
@@ -8199,7 +8281,11 @@ module Aws
                                      pipeline_arn: ::String,
                                      pipeline_version_id: ::Integer,
                                      ?pipeline_version_display_name: ::String,
-                                     ?pipeline_version_description: ::String
+                                     ?pipeline_version_description: ::String,
+                                     ?pipeline_version_alias_operations: {
+                                       add: Array[::String]?,
+                                       remove: Array[::String]?
+                                     }
                                    ) -> _UpdatePipelineVersionResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePipelineVersionResponseSuccess
 

@@ -49,7 +49,7 @@ module Aws
         max: ::Integer?
       }?,
       accelerator_manufacturers: Array[("amazon-web-services" | "amd" | "nvidia" | "xilinx" | "habana")]?,
-      accelerator_names: Array[("a100" | "inferentia" | "k520" | "k80" | "m60" | "radeon-pro-v520" | "t4" | "vu9p" | "v100" | "a10g" | "h100" | "t4g")]?,
+      accelerator_names: Array[("a100" | "inferentia" | "k520" | "k80" | "m60" | "radeon-pro-v520" | "t4" | "vu9p" | "v100" | "a10g" | "h100" | "t4g" | "l40s" | "l4")]?,
       accelerator_total_memory_mi_b: {
         min: ::Integer?,
         max: ::Integer?

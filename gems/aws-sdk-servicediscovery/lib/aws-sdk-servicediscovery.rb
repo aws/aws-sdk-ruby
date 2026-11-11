@@ -54,7 +54,7 @@ module Aws::ServiceDiscovery
   autoload :EndpointProvider, 'aws-sdk-servicediscovery/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-servicediscovery/endpoints'
 
-  GEM_VERSION = '1.113.0'
+  GEM_VERSION = '1.115.0'
 
 end
 

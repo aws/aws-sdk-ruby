@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2026-11-10)
+------------------
+
+* Feature - Adds support for having multiple profiles on one VPC. This is done using a priority system to handle conflicts on the dataplane.
+
+1.47.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.46.0 (2026-11-06)
 ------------------
 

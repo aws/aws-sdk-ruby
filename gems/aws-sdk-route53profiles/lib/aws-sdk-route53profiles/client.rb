@@ -264,7 +264,8 @@ module Aws::Route53Profiles
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::Route53Profiles
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -481,18 +482,39 @@ module Aws::Route53Profiles
 
     # @!group API Operations
 
-    # Associates a Route 53 Profiles profile with a VPC. A VPC can have only
-    # one Profile associated with it, but a Profile can be associated with
-    # 1000 of VPCs (and you can request a higher quota). For more
-    # information, see
-    # [https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities][1].
+    # Associates a Route 53 Profiles profile with a VPC. A VPC can have up
+    # to two Profile associations. A Profile can be associated with up to
+    # 1,000 VPCs, and you can request a higher quota for the number of VPCs.
+    # For more information, see [Quotas on Route 53 Profiles][1].
+    #
+    # Route 53 VPC Resolver evaluates the Profile associations for a VPC in
+    # priority order, starting with the lowest `Priority` value. If the VPC
+    # has no other Profile associations, you can omit `Priority`, and the
+    # association gets priority 100. When the VPC already has a Profile
+    # association, you must specify a `Priority`, and each Profile
+    # association for the VPC must have a unique priority. To change the
+    # priority of an existing association, use `UpdateProfileAssociation`.
+    #
+    # The request fails with a `ValidationException` in these cases:
+    #
+    # * You omit `Priority`, and the VPC already has a Profile association.
+    #
+    # * Another Profile association for the VPC already uses the priority
+    #   that you specify.
+    #
+    # * The priority is outside the range 100–9900.
+    #
+    # * The Profile is already associated with the VPC, and you specify a
+    #   different `Name` or `Priority`. To change the priority, use
+    #   [UpdateProfileAssociation][2].
+    #
+    # The request fails with a `LimitExceededException` if the VPC already
+    # has the maximum number of Profile associations.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities
-    #
-    # @option params [required, String] :name
-    #   A name for the association.
+    # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities-route53-profiles
+    # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53profiles_UpdateProfileAssociation.html
     #
     # @option params [required, String] :profile_id
     #   ID of the Profile.
@@ -500,9 +522,22 @@ module Aws::Route53Profiles
     # @option params [required, String] :resource_id
     #   The ID of the VPC.
     #
+    # @option params [required, String] :name
+    #   A name for the association.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   A list of the tag keys and values that you want to identify the
     #   Profile association.
+    #
+    # @option params [Integer] :priority
+    #   The priority of the Profile association. Route 53 VPC Resolver
+    #   evaluates the Profile associations for a VPC in priority order,
+    #   starting with the lowest value.
+    #
+    #   When the VPC already has a Profile association, you must specify a
+    #   priority that no other Profile association for the VPC uses. If you
+    #   omit the priority for the first association with a VPC, the
+    #   association gets priority 100.
     #
     # @return [Types::AssociateProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -511,28 +546,30 @@ module Aws::Route53Profiles
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_profile({
-    #     name: "Name", # required
     #     profile_id: "ResourceId", # required
     #     resource_id: "ResourceId", # required
+    #     name: "Name", # required
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     priority: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.profile_association.creation_time #=> Time
     #   resp.profile_association.id #=> String
-    #   resp.profile_association.modification_time #=> Time
     #   resp.profile_association.name #=> String
     #   resp.profile_association.owner_id #=> String
     #   resp.profile_association.profile_id #=> String
     #   resp.profile_association.resource_id #=> String
     #   resp.profile_association.status #=> String, one of "COMPLETE", "DELETING", "UPDATING", "CREATING", "DELETED", "FAILED"
     #   resp.profile_association.status_message #=> String
+    #   resp.profile_association.creation_time #=> Time
+    #   resp.profile_association.modification_time #=> Time
+    #   resp.profile_association.priority #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/AssociateProfile AWS API Documentation
     #
@@ -543,16 +580,18 @@ module Aws::Route53Profiles
       req.send_request(options)
     end
 
-    # Associates a DNS reource configuration to a Route 53 Profile.
-    #
-    # @option params [required, String] :name
-    #   Name for the resource association.
+    # Associates a DNS resource configuration to a Route 53 Profile.
     #
     # @option params [required, String] :profile_id
     #   ID of the Profile.
     #
     # @option params [required, String] :resource_arn
-    #   Amazon resource number, ARN, of the DNS resource.
+    #   Amazon resource number, ARN, of the resource to associate. Either a
+    #   private hosted zone, DNS Firewall rule group, Resolver rule, or an
+    #   interface VPC endpoint.
+    #
+    # @option params [required, String] :name
+    #   Name for the resource association.
     #
     # @option params [String] :resource_properties
     #   If you are adding a DNS Firewall rule group, include also a priority.
@@ -568,25 +607,25 @@ module Aws::Route53Profiles
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_resource_to_profile({
-    #     name: "Name", # required
     #     profile_id: "ResourceId", # required
     #     resource_arn: "Arn", # required
+    #     name: "Name", # required
     #     resource_properties: "ResourceProperties",
     #   })
     #
     # @example Response structure
     #
-    #   resp.profile_resource_association.creation_time #=> Time
     #   resp.profile_resource_association.id #=> String
-    #   resp.profile_resource_association.modification_time #=> Time
     #   resp.profile_resource_association.name #=> String
     #   resp.profile_resource_association.owner_id #=> String
     #   resp.profile_resource_association.profile_id #=> String
     #   resp.profile_resource_association.resource_arn #=> String
-    #   resp.profile_resource_association.resource_properties #=> String
     #   resp.profile_resource_association.resource_type #=> String
+    #   resp.profile_resource_association.resource_properties #=> String
     #   resp.profile_resource_association.status #=> String, one of "COMPLETE", "DELETING", "UPDATING", "CREATING", "DELETED", "FAILED"
     #   resp.profile_resource_association.status_message #=> String
+    #   resp.profile_resource_association.creation_time #=> Time
+    #   resp.profile_resource_association.modification_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/AssociateResourceToProfile AWS API Documentation
     #
@@ -599,6 +638,9 @@ module Aws::Route53Profiles
 
     # Creates an empty Route 53 Profile.
     #
+    # @option params [required, String] :name
+    #   A name for the Profile.
+    #
     # @option params [required, String] :client_token
     #   `ClientToken` is an idempotency token that ensures a call to
     #   `CreateProfile` completes only once. You choose the value to pass. For
@@ -608,9 +650,6 @@ module Aws::Route53Profiles
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
-    #
-    # @option params [required, String] :name
-    #   A name for the Profile.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of the tag keys and values that you want to associate with the
@@ -623,8 +662,8 @@ module Aws::Route53Profiles
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_profile({
-    #     client_token: "CreatorRequestId", # required
     #     name: "Name", # required
+    #     client_token: "CreatorRequestId", # required
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -635,16 +674,16 @@ module Aws::Route53Profiles
     #
     # @example Response structure
     #
-    #   resp.profile.arn #=> String
-    #   resp.profile.client_token #=> String
-    #   resp.profile.creation_time #=> Time
     #   resp.profile.id #=> String
-    #   resp.profile.modification_time #=> Time
+    #   resp.profile.arn #=> String
     #   resp.profile.name #=> String
     #   resp.profile.owner_id #=> String
-    #   resp.profile.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
     #   resp.profile.status #=> String, one of "COMPLETE", "DELETING", "UPDATING", "CREATING", "DELETED", "FAILED"
     #   resp.profile.status_message #=> String
+    #   resp.profile.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
+    #   resp.profile.creation_time #=> Time
+    #   resp.profile.modification_time #=> Time
+    #   resp.profile.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/CreateProfile AWS API Documentation
     #
@@ -673,16 +712,16 @@ module Aws::Route53Profiles
     #
     # @example Response structure
     #
-    #   resp.profile.arn #=> String
-    #   resp.profile.client_token #=> String
-    #   resp.profile.creation_time #=> Time
     #   resp.profile.id #=> String
-    #   resp.profile.modification_time #=> Time
+    #   resp.profile.arn #=> String
     #   resp.profile.name #=> String
     #   resp.profile.owner_id #=> String
-    #   resp.profile.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
     #   resp.profile.status #=> String, one of "COMPLETE", "DELETING", "UPDATING", "CREATING", "DELETED", "FAILED"
     #   resp.profile.status_message #=> String
+    #   resp.profile.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
+    #   resp.profile.creation_time #=> Time
+    #   resp.profile.modification_time #=> Time
+    #   resp.profile.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/DeleteProfile AWS API Documentation
     #
@@ -714,15 +753,16 @@ module Aws::Route53Profiles
     #
     # @example Response structure
     #
-    #   resp.profile_association.creation_time #=> Time
     #   resp.profile_association.id #=> String
-    #   resp.profile_association.modification_time #=> Time
     #   resp.profile_association.name #=> String
     #   resp.profile_association.owner_id #=> String
     #   resp.profile_association.profile_id #=> String
     #   resp.profile_association.resource_id #=> String
     #   resp.profile_association.status #=> String, one of "COMPLETE", "DELETING", "UPDATING", "CREATING", "DELETED", "FAILED"
     #   resp.profile_association.status_message #=> String
+    #   resp.profile_association.creation_time #=> Time
+    #   resp.profile_association.modification_time #=> Time
+    #   resp.profile_association.priority #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/DisassociateProfile AWS API Documentation
     #
@@ -754,17 +794,17 @@ module Aws::Route53Profiles
     #
     # @example Response structure
     #
-    #   resp.profile_resource_association.creation_time #=> Time
     #   resp.profile_resource_association.id #=> String
-    #   resp.profile_resource_association.modification_time #=> Time
     #   resp.profile_resource_association.name #=> String
     #   resp.profile_resource_association.owner_id #=> String
     #   resp.profile_resource_association.profile_id #=> String
     #   resp.profile_resource_association.resource_arn #=> String
-    #   resp.profile_resource_association.resource_properties #=> String
     #   resp.profile_resource_association.resource_type #=> String
+    #   resp.profile_resource_association.resource_properties #=> String
     #   resp.profile_resource_association.status #=> String, one of "COMPLETE", "DELETING", "UPDATING", "CREATING", "DELETED", "FAILED"
     #   resp.profile_resource_association.status_message #=> String
+    #   resp.profile_resource_association.creation_time #=> Time
+    #   resp.profile_resource_association.modification_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/DisassociateResourceFromProfile AWS API Documentation
     #
@@ -794,16 +834,16 @@ module Aws::Route53Profiles
     #
     # @example Response structure
     #
-    #   resp.profile.arn #=> String
-    #   resp.profile.client_token #=> String
-    #   resp.profile.creation_time #=> Time
     #   resp.profile.id #=> String
-    #   resp.profile.modification_time #=> Time
+    #   resp.profile.arn #=> String
     #   resp.profile.name #=> String
     #   resp.profile.owner_id #=> String
-    #   resp.profile.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
     #   resp.profile.status #=> String, one of "COMPLETE", "DELETING", "UPDATING", "CREATING", "DELETED", "FAILED"
     #   resp.profile.status_message #=> String
+    #   resp.profile.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
+    #   resp.profile.creation_time #=> Time
+    #   resp.profile.modification_time #=> Time
+    #   resp.profile.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/GetProfile AWS API Documentation
     #
@@ -814,9 +854,9 @@ module Aws::Route53Profiles
       req.send_request(options)
     end
 
-    # Retrieves a Route 53 Profile association for a VPC. A VPC can have
-    # only one Profile association, but a Profile can be associated with up
-    # to 5000 VPCs.
+    # Retrieves a Route 53 Profile association for a VPC. A VPC can have up
+    # to two Profile associations, and a Profile can be associated with up
+    # to 1,000 VPCs.
     #
     # @option params [required, String] :profile_association_id
     #   The identifier of the association you want to get information about.
@@ -833,15 +873,16 @@ module Aws::Route53Profiles
     #
     # @example Response structure
     #
-    #   resp.profile_association.creation_time #=> Time
     #   resp.profile_association.id #=> String
-    #   resp.profile_association.modification_time #=> Time
     #   resp.profile_association.name #=> String
     #   resp.profile_association.owner_id #=> String
     #   resp.profile_association.profile_id #=> String
     #   resp.profile_association.resource_id #=> String
     #   resp.profile_association.status #=> String, one of "COMPLETE", "DELETING", "UPDATING", "CREATING", "DELETED", "FAILED"
     #   resp.profile_association.status_message #=> String
+    #   resp.profile_association.creation_time #=> Time
+    #   resp.profile_association.modification_time #=> Time
+    #   resp.profile_association.priority #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/GetProfileAssociation AWS API Documentation
     #
@@ -871,17 +912,17 @@ module Aws::Route53Profiles
     #
     # @example Response structure
     #
-    #   resp.profile_resource_association.creation_time #=> Time
     #   resp.profile_resource_association.id #=> String
-    #   resp.profile_resource_association.modification_time #=> Time
     #   resp.profile_resource_association.name #=> String
     #   resp.profile_resource_association.owner_id #=> String
     #   resp.profile_resource_association.profile_id #=> String
     #   resp.profile_resource_association.resource_arn #=> String
-    #   resp.profile_resource_association.resource_properties #=> String
     #   resp.profile_resource_association.resource_type #=> String
+    #   resp.profile_resource_association.resource_properties #=> String
     #   resp.profile_resource_association.status #=> String, one of "COMPLETE", "DELETING", "UPDATING", "CREATING", "DELETED", "FAILED"
     #   resp.profile_resource_association.status_message #=> String
+    #   resp.profile_resource_association.creation_time #=> Time
+    #   resp.profile_resource_association.modification_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/GetProfileResourceAssociation AWS API Documentation
     #
@@ -895,6 +936,12 @@ module Aws::Route53Profiles
     # Lists all the VPCs that the specified Route 53 Profile is associated
     # with.
     #
+    # @option params [String] :resource_id
+    #   ID of the VPC.
+    #
+    # @option params [String] :profile_id
+    #   ID of the Profile.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of objects that you want to return for this
     #   request. If more objects are available, in the response, a `NextToken`
@@ -913,41 +960,36 @@ module Aws::Route53Profiles
     #   retrieve the next batch of objects, use the token that was returned
     #   for the prior request in your next request.
     #
-    # @option params [String] :profile_id
-    #   ID of the Profile.
-    #
-    # @option params [String] :resource_id
-    #   ID of the VPC.
-    #
     # @return [Types::ListProfileAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListProfileAssociationsResponse#next_token #next_token} => String
     #   * {Types::ListProfileAssociationsResponse#profile_associations #profile_associations} => Array&lt;Types::ProfileAssociation&gt;
+    #   * {Types::ListProfileAssociationsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_profile_associations({
+    #     resource_id: "ResourceId",
+    #     profile_id: "ResourceId",
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     profile_id: "ResourceId",
-    #     resource_id: "ResourceId",
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.profile_associations #=> Array
-    #   resp.profile_associations[0].creation_time #=> Time
     #   resp.profile_associations[0].id #=> String
-    #   resp.profile_associations[0].modification_time #=> Time
     #   resp.profile_associations[0].name #=> String
     #   resp.profile_associations[0].owner_id #=> String
     #   resp.profile_associations[0].profile_id #=> String
     #   resp.profile_associations[0].resource_id #=> String
     #   resp.profile_associations[0].status #=> String, one of "COMPLETE", "DELETING", "UPDATING", "CREATING", "DELETED", "FAILED"
     #   resp.profile_associations[0].status_message #=> String
+    #   resp.profile_associations[0].creation_time #=> Time
+    #   resp.profile_associations[0].modification_time #=> Time
+    #   resp.profile_associations[0].priority #=> Integer
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/ListProfileAssociations AWS API Documentation
     #
@@ -961,6 +1003,16 @@ module Aws::Route53Profiles
     # Lists all the resource associations for the specified Route 53
     # Profile.
     #
+    # @option params [required, String] :profile_id
+    #   The ID of the Profile.
+    #
+    # @option params [String] :resource_type
+    #   ID of a resource if you want information on only one type.
+    #
+    # @option params [String] :resource_arn
+    #   The Amazon Resource Name (ARN) of a resource. If you specify this
+    #   parameter, only the association with that resource is returned.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of objects that you want to return for this
     #   request. If more objects are available, in the response, a `NextToken`
@@ -979,43 +1031,38 @@ module Aws::Route53Profiles
     #   retrieve the next batch of objects, use the token that was returned
     #   for the prior request in your next request.
     #
-    # @option params [required, String] :profile_id
-    #   The ID of the Profile.
-    #
-    # @option params [String] :resource_type
-    #   ID of a resource if you want information on only one type.
-    #
     # @return [Types::ListProfileResourceAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListProfileResourceAssociationsResponse#next_token #next_token} => String
     #   * {Types::ListProfileResourceAssociationsResponse#profile_resource_associations #profile_resource_associations} => Array&lt;Types::ProfileResourceAssociation&gt;
+    #   * {Types::ListProfileResourceAssociationsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_profile_resource_associations({
-    #     max_results: 1,
-    #     next_token: "NextToken",
     #     profile_id: "ResourceId", # required
     #     resource_type: "String",
+    #     resource_arn: "Arn",
+    #     max_results: 1,
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.profile_resource_associations #=> Array
-    #   resp.profile_resource_associations[0].creation_time #=> Time
     #   resp.profile_resource_associations[0].id #=> String
-    #   resp.profile_resource_associations[0].modification_time #=> Time
     #   resp.profile_resource_associations[0].name #=> String
     #   resp.profile_resource_associations[0].owner_id #=> String
     #   resp.profile_resource_associations[0].profile_id #=> String
     #   resp.profile_resource_associations[0].resource_arn #=> String
-    #   resp.profile_resource_associations[0].resource_properties #=> String
     #   resp.profile_resource_associations[0].resource_type #=> String
+    #   resp.profile_resource_associations[0].resource_properties #=> String
     #   resp.profile_resource_associations[0].status #=> String, one of "COMPLETE", "DELETING", "UPDATING", "CREATING", "DELETED", "FAILED"
     #   resp.profile_resource_associations[0].status_message #=> String
+    #   resp.profile_resource_associations[0].creation_time #=> Time
+    #   resp.profile_resource_associations[0].modification_time #=> Time
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/ListProfileResourceAssociations AWS API Documentation
     #
@@ -1049,8 +1096,8 @@ module Aws::Route53Profiles
     #
     # @return [Types::ListProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListProfilesResponse#next_token #next_token} => String
     #   * {Types::ListProfilesResponse#profile_summaries #profile_summaries} => Array&lt;Types::ProfileSummary&gt;
+    #   * {Types::ListProfilesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1063,12 +1110,12 @@ module Aws::Route53Profiles
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.profile_summaries #=> Array
-    #   resp.profile_summaries[0].arn #=> String
     #   resp.profile_summaries[0].id #=> String
+    #   resp.profile_summaries[0].arn #=> String
     #   resp.profile_summaries[0].name #=> String
     #   resp.profile_summaries[0].share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/ListProfiles AWS API Documentation
     #
@@ -1165,13 +1212,81 @@ module Aws::Route53Profiles
       req.send_request(options)
     end
 
-    # Updates the specified Route 53 Profile resourse association.
+    # Updates the name or priority of the specified Route 53 Profile
+    # association with a VPC. Route 53 VPC Resolver evaluates the Profile
+    # associations for a VPC in priority order, starting with the lowest
+    # value. Only the account that created the association can update it.
+    #
+    # When you change the priority, the association status is `UPDATING`
+    # until the change propagates, and then `COMPLETE`. While the status is
+    # `UPDATING`, Route 53 VPC Resolver might still use the previous
+    # priority for some queries. When the status is `COMPLETE`, the new
+    # priority applies to all queries from the VPC.
+    #
+    # The request fails with a `ValidationException` if another Profile
+    # association for the VPC already uses the priority that you specify, or
+    # if the priority is outside the range 100–9900.
+    #
+    # You can update an association whose status is `CREATING`, `UPDATING`,
+    # or `COMPLETE`. The request fails with a `ConflictException` if the
+    # association status is `DELETING`, `DELETED`, or `FAILED`, or if the
+    # account that owns the association is inactive.
+    #
+    # @option params [required, String] :profile_association_id
+    #   The ID of the Profile association to update.
     #
     # @option params [String] :name
-    #   Name of the resource association.
+    #   The name of the Profile association.
+    #
+    # @option params [Integer] :priority
+    #   The new priority of the Profile association. Route 53 VPC Resolver
+    #   evaluates the Profile associations for a VPC in priority order,
+    #   starting with the lowest value.
+    #
+    #   The priority must be unique among the Profile associations for the
+    #   VPC.
+    #
+    # @return [Types::UpdateProfileAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProfileAssociationResponse#profile_association #profile_association} => Types::ProfileAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_profile_association({
+    #     profile_association_id: "ResourceId", # required
+    #     name: "Name",
+    #     priority: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_association.id #=> String
+    #   resp.profile_association.name #=> String
+    #   resp.profile_association.owner_id #=> String
+    #   resp.profile_association.profile_id #=> String
+    #   resp.profile_association.resource_id #=> String
+    #   resp.profile_association.status #=> String, one of "COMPLETE", "DELETING", "UPDATING", "CREATING", "DELETED", "FAILED"
+    #   resp.profile_association.status_message #=> String
+    #   resp.profile_association.creation_time #=> Time
+    #   resp.profile_association.modification_time #=> Time
+    #   resp.profile_association.priority #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/UpdateProfileAssociation AWS API Documentation
+    #
+    # @overload update_profile_association(params = {})
+    # @param [Hash] params ({})
+    def update_profile_association(params = {}, options = {})
+      req = build_request(:update_profile_association, params)
+      req.send_request(options)
+    end
+
+    # Updates the specified Route 53 Profile resourse association.
     #
     # @option params [required, String] :profile_resource_association_id
     #   ID of the resource association.
+    #
+    # @option params [String] :name
+    #   Name of the resource association.
     #
     # @option params [String] :resource_properties
     #   If you are adding a DNS Firewall rule group, include also a priority.
@@ -1187,24 +1302,24 @@ module Aws::Route53Profiles
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_profile_resource_association({
-    #     name: "Name",
     #     profile_resource_association_id: "ResourceId", # required
+    #     name: "Name",
     #     resource_properties: "ResourceProperties",
     #   })
     #
     # @example Response structure
     #
-    #   resp.profile_resource_association.creation_time #=> Time
     #   resp.profile_resource_association.id #=> String
-    #   resp.profile_resource_association.modification_time #=> Time
     #   resp.profile_resource_association.name #=> String
     #   resp.profile_resource_association.owner_id #=> String
     #   resp.profile_resource_association.profile_id #=> String
     #   resp.profile_resource_association.resource_arn #=> String
-    #   resp.profile_resource_association.resource_properties #=> String
     #   resp.profile_resource_association.resource_type #=> String
+    #   resp.profile_resource_association.resource_properties #=> String
     #   resp.profile_resource_association.status #=> String, one of "COMPLETE", "DELETING", "UPDATING", "CREATING", "DELETED", "FAILED"
     #   resp.profile_resource_association.status_message #=> String
+    #   resp.profile_resource_association.creation_time #=> Time
+    #   resp.profile_resource_association.modification_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/UpdateProfileResourceAssociation AWS API Documentation
     #
@@ -1233,7 +1348,7 @@ module Aws::Route53Profiles
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53profiles'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

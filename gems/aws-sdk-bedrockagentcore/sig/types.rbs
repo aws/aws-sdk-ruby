@@ -706,6 +706,12 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class DomainFilter
+      attr_accessor include: ::Array[::String]
+      attr_accessor exclude: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class DuplicateIdException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1947,6 +1953,19 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class InvokeWebSearchInput
+      attr_accessor web_search_id: ::String
+      attr_accessor search_query: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: Types::WebSearchFilters
+      SENSITIVE: []
+    end
+
+    class InvokeWebSearchOutput
+      attr_accessor results: ::Array[Types::WebSearchResult]
+      SENSITIVE: []
+    end
+
     class KeyPressArguments
       attr_accessor key: ::String
       attr_accessor presses: ::Integer
@@ -2681,6 +2700,12 @@ module Aws::BedrockAgentCore
       end
     end
 
+    class PublishedDateFilter
+      attr_accessor published_after: ::Time
+      attr_accessor published_before: ::Time
+      SENSITIVE: []
+    end
+
     class RecommendationConfig
       attr_accessor system_prompt_recommendation_config: Types::SystemPromptRecommendationConfig
       attr_accessor tool_description_recommendation_config: Types::ToolDescriptionRecommendationConfig
@@ -2939,6 +2964,12 @@ module Aws::BedrockAgentCore
     class ServiceQuotaExceededException
       attr_accessor message: ::String
       attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
       SENSITIVE: []
     end
 
@@ -3507,6 +3538,20 @@ module Aws::BedrockAgentCore
     class ViewPort
       attr_accessor width: ::Integer
       attr_accessor height: ::Integer
+      SENSITIVE: []
+    end
+
+    class WebSearchFilters
+      attr_accessor domain_filter: Types::DomainFilter
+      attr_accessor published_date_filter: Types::PublishedDateFilter
+      SENSITIVE: []
+    end
+
+    class WebSearchResult
+      attr_accessor title: ::String
+      attr_accessor url: ::String
+      attr_accessor text: ::String
+      attr_accessor published_at: ::Time
       SENSITIVE: []
     end
 

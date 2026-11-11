@@ -729,11 +729,11 @@ module Aws::NetworkFirewall
     # Defines the mapping between an Availability Zone and a firewall
     # endpoint for a transit gateway-attached firewall. Each mapping
     # represents where the firewall can process traffic. You use these
-    # mappings when calling CreateFirewall, AssociateAvailabilityZones, and
-    # DisassociateAvailabilityZones.
+    # mappings when calling `CreateFirewall`, `AssociateAvailabilityZones`,
+    # and `DisassociateAvailabilityZones`.
     #
     # To retrieve the current Availability Zone mappings for a firewall, use
-    # DescribeFirewall.
+    # `DescribeFirewall`.
     #
     # @!attribute [rw] availability_zone
     #   The ID of the Availability Zone where the firewall endpoint is
@@ -1152,6 +1152,88 @@ module Aws::NetworkFirewall
     class CreateFirewallPolicyResponse < Struct.new(
       :update_token,
       :firewall_policy_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_policy_v2_name
+    #   The descriptive name of the Next Generation policy. You can't
+    #   change the name of a firewall policy after you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_policy_v2
+    #   The rule groups and other settings that define the Next Generation
+    #   policy.
+    #   @return [Types::FirewallPolicyV2]
+    #
+    # @!attribute [rw] description
+    #   A description of the firewall policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key:value pairs to associate with the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] dry_run
+    #   Indicates whether you want Network Firewall to just check the
+    #   validity of the request, rather than run the request.
+    #
+    #   If set to `TRUE`, Network Firewall checks whether the request can
+    #   run successfully, but doesn't actually make the requested changes.
+    #   The call returns the value that the request would return if you ran
+    #   it with dry run set to `FALSE`, but doesn't make additions or
+    #   changes to your resources. This option allows you to make sure that
+    #   you have the required permissions to run the request and that your
+    #   request parameters are valid.
+    #
+    #   If set to `FALSE`, Network Firewall makes the requested changes to
+    #   your resources.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   A complex type that contains settings for encryption of your
+    #   firewall policy resources.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateFirewallPolicyV2Request AWS API Documentation
+    #
+    class CreateFirewallPolicyV2Request < Struct.new(
+      :firewall_policy_v2_name,
+      :firewall_policy_v2,
+      :description,
+      :tags,
+      :dry_run,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update_token
+    #   A token used for optimistic locking. Network Firewall returns a
+    #   token to your requests that access the firewall policy. The token
+    #   marks the state of the policy resource at the time of the request.
+    #
+    #   To make changes to the policy, you provide the token in your
+    #   request. Network Firewall uses the token to ensure that the policy
+    #   hasn't changed since you last retrieved it. If it has changed, the
+    #   operation fails with an `InvalidTokenException`. If this happens,
+    #   retrieve the firewall policy again to get a current copy of it with
+    #   current token. Reapply your changes as needed, then try the
+    #   operation again using the new token.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_policy_v2_response
+    #   The high-level properties of the Next Generation policy. This, along
+    #   with the FirewallPolicyV2, define the policy. You can retrieve all
+    #   objects for a Next Generation policy by calling
+    #   DescribeFirewallPolicyV2.
+    #   @return [Types::FirewallPolicyV2Response]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateFirewallPolicyV2Response AWS API Documentation
+    #
+    class CreateFirewallPolicyV2Response < Struct.new(
+      :update_token,
+      :firewall_policy_v2_response)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1704,6 +1786,16 @@ module Aws::NetworkFirewall
     #    </note>
     #   @return [Types::RuleGroup]
     #
+    # @!attribute [rw] firewall_rule_group
+    #   An object that defines the rules in a firewall engine rule group,
+    #   for use in a Next Generation policy.
+    #   @return [Types::FirewallRuleGroup]
+    #
+    # @!attribute [rw] ips_rule_group
+    #   An object that defines the rules in an IPS engine rule group, for
+    #   use in a Next Generation policy.
+    #   @return [Types::IpsRuleGroup]
+    #
     # @!attribute [rw] rules
     #   A string containing stateful rule group rules specifications in
     #   Suricata flat format, with one rule per line. Use this to import
@@ -1721,9 +1813,18 @@ module Aws::NetworkFirewall
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   Indicates whether the rule group is stateless or stateful. If the
-    #   rule group is stateless, it contains stateless rules. If it is
-    #   stateful, it contains stateful rules.
+    #   Indicates the type of the rule group. Valid values are:
+    #
+    #   * `STATELESS` - Stateless rules, for use in a Classic Network
+    #     Firewall policy.
+    #
+    #   * `STATEFUL` - Stateful rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `FIREWALL` - Firewall engine rules, for use in a Next Generation
+    #     policy.
+    #
+    #   * `IPS` - IPS engine rules, for use in a Next Generation policy.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1837,6 +1938,8 @@ module Aws::NetworkFirewall
     class CreateRuleGroupRequest < Struct.new(
       :rule_group_name,
       :rule_group,
+      :firewall_rule_group,
+      :ips_rule_group,
       :rules,
       :type,
       :description,
@@ -1990,8 +2093,8 @@ module Aws::NetworkFirewall
     #
     # @!attribute [rw] subnet_mapping
     #   The ID for a subnet that's used in an association with a firewall.
-    #   This is used in CreateFirewall, AssociateSubnets, and
-    #   CreateVpcEndpointAssociation. Network Firewall creates an instance
+    #   This is used in `CreateFirewall`, `AssociateSubnets`, and
+    #   `CreateVpcEndpointAssociation`. Network Firewall creates an instance
     #   of the associated firewall in each subnet that you specify, to
     #   filter traffic in the subnet's Availability Zone.
     #   @return [Types::SubnetMapping]
@@ -2152,6 +2255,41 @@ module Aws::NetworkFirewall
     #
     class DeleteFirewallPolicyResponse < Struct.new(
       :firewall_policy_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_policy_v2_arn
+    #   The Amazon Resource Name (ARN) of the Next Generation policy.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_policy_v2_name
+    #   The descriptive name of the Next Generation policy. You can't
+    #   change the name of a firewall policy after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteFirewallPolicyV2Request AWS API Documentation
+    #
+    class DeleteFirewallPolicyV2Request < Struct.new(
+      :firewall_policy_v2_arn,
+      :firewall_policy_v2_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_policy_v2_response
+    #   The high-level properties of the Next Generation policy that you
+    #   asked to delete.
+    #   @return [Types::FirewallPolicyV2Response]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteFirewallPolicyV2Response AWS API Documentation
+    #
+    class DeleteFirewallPolicyV2Response < Struct.new(
+      :firewall_policy_v2_response)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2471,9 +2609,18 @@ module Aws::NetworkFirewall
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   Indicates whether the rule group is stateless or stateful. If the
-    #   rule group is stateless, it contains stateless rules. If it is
-    #   stateful, it contains stateful rules.
+    #   Indicates the type of the rule group. Valid values are:
+    #
+    #   * `STATELESS` - Stateless rules, for use in a Classic Network
+    #     Firewall policy.
+    #
+    #   * `STATEFUL` - Stateful rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `FIREWALL` - Firewall engine rules, for use in a Next Generation
+    #     policy.
+    #
+    #   * `IPS` - IPS engine rules, for use in a Next Generation policy.
     #
     #   <note markdown="1"> This setting is required for requests that do not include the
     #   `RuleGroupARN`.
@@ -2782,6 +2929,72 @@ module Aws::NetworkFirewall
       :update_token,
       :firewall_policy_response,
       :firewall_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] firewall_policy_v2_arn
+    #   The Amazon Resource Name (ARN) of the Next Generation policy.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_policy_v2_name
+    #   The descriptive name of the Next Generation policy. You can't
+    #   change the name of a firewall policy after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_output_format
+    #   The format in which to return the rules of any firewall engine rule
+    #   groups that are embedded in the policy. Specify `FIREWALL_RULES` for
+    #   structured `FirewallRule` objects or `RULES_STRING` for a
+    #   Suricata-compatible firewall-mode rule string. If you don't specify
+    #   a format, Network Firewall returns each embedded rule group in the
+    #   format you provided it in. Referenced rule groups aren't affected.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFirewallPolicyV2Request AWS API Documentation
+    #
+    class DescribeFirewallPolicyV2Request < Struct.new(
+      :firewall_policy_v2_arn,
+      :firewall_policy_v2_name,
+      :rule_output_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update_token
+    #   A token used for optimistic locking. Network Firewall returns a
+    #   token to your requests that access the firewall policy. The token
+    #   marks the state of the policy resource at the time of the request.
+    #
+    #   To make changes to the policy, you provide the token in your
+    #   request. Network Firewall uses the token to ensure that the policy
+    #   hasn't changed since you last retrieved it. If it has changed, the
+    #   operation fails with an `InvalidTokenException`. If this happens,
+    #   retrieve the firewall policy again to get a current copy of it with
+    #   current token. Reapply your changes as needed, then try the
+    #   operation again using the new token.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_policy_v2_response
+    #   The high-level properties of the Next Generation policy. This, along
+    #   with the FirewallPolicyV2, define the policy.
+    #   @return [Types::FirewallPolicyV2Response]
+    #
+    # @!attribute [rw] firewall_policy_v2
+    #   The rule groups and other settings that define the specified Next
+    #   Generation policy.
+    #   @return [Types::FirewallPolicyV2]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFirewallPolicyV2Response AWS API Documentation
+    #
+    class DescribeFirewallPolicyV2Response < Struct.new(
+      :update_token,
+      :firewall_policy_v2_response,
+      :firewall_policy_v2)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3375,9 +3588,18 @@ module Aws::NetworkFirewall
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   Indicates whether the rule group is stateless or stateful. If the
-    #   rule group is stateless, it contains stateless rules. If it is
-    #   stateful, it contains stateful rules.
+    #   Indicates the type of the rule group. Valid values are:
+    #
+    #   * `STATELESS` - Stateless rules, for use in a Classic Network
+    #     Firewall policy.
+    #
+    #   * `STATEFUL` - Stateful rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `FIREWALL` - Firewall engine rules, for use in a Next Generation
+    #     policy.
+    #
+    #   * `IPS` - IPS engine rules, for use in a Next Generation policy.
     #
     #   <note markdown="1"> This setting is required for requests that do not include the
     #   `RuleGroupARN`.
@@ -3414,9 +3636,18 @@ module Aws::NetworkFirewall
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   Indicates whether the rule group is stateless or stateful. If the
-    #   rule group is stateless, it contains stateless rules. If it is
-    #   stateful, it contains stateful rules.
+    #   Indicates the type of the rule group. Valid values are:
+    #
+    #   * `STATELESS` - Stateless rules, for use in a Classic Network
+    #     Firewall policy.
+    #
+    #   * `STATEFUL` - Stateful rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `FIREWALL` - Firewall engine rules, for use in a Next Generation
+    #     policy.
+    #
+    #   * `IPS` - IPS engine rules, for use in a Next Generation policy.
     #
     #   <note markdown="1"> This setting is required for requests that do not include the
     #   `RuleGroupARN`.
@@ -3490,9 +3721,18 @@ module Aws::NetworkFirewall
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   Indicates whether the rule group is stateless or stateful. If the
-    #   rule group is stateless, it contains stateless rules. If it is
-    #   stateful, it contains stateful rules.
+    #   Indicates the type of the rule group. Valid values are:
+    #
+    #   * `STATELESS` - Stateless rules, for use in a Classic Network
+    #     Firewall policy.
+    #
+    #   * `STATEFUL` - Stateful rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `FIREWALL` - Firewall engine rules, for use in a Next Generation
+    #     policy.
+    #
+    #   * `IPS` - IPS engine rules, for use in a Next Generation policy.
     #
     #   <note markdown="1"> This setting is required for requests that do not include the
     #   `RuleGroupARN`.
@@ -3506,13 +3746,30 @@ module Aws::NetworkFirewall
     #   routing. If set to `TRUE`, Network Firewall runs the analysis.
     #   @return [Boolean]
     #
+    # @!attribute [rw] rule_output_format
+    #   For a firewall engine rule group, the format in which to return the
+    #   rules. Specify one of the following values:
+    #
+    #   * `FIREWALL_RULES` - Returns the rules as structured `FirewallRule`
+    #     objects.
+    #
+    #   * `RULES_STRING` - Returns the rules as a Suricata-compatible
+    #     firewall-mode rule string.
+    #
+    #   If you don't specify a format, Network Firewall returns the rules
+    #   in the format you provided them in. This setting applies only to
+    #   `FIREWALL` and `IPS` rule groups; IPS engine rule groups support
+    #   only `RULES_STRING`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeRuleGroupRequest AWS API Documentation
     #
     class DescribeRuleGroupRequest < Struct.new(
       :rule_group_name,
       :rule_group_arn,
       :type,
-      :analyze_rule_group)
+      :analyze_rule_group,
+      :rule_output_format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3547,6 +3804,16 @@ module Aws::NetworkFirewall
     #   you can use a firewall policy in more than one firewall.
     #   @return [Types::RuleGroup]
     #
+    # @!attribute [rw] firewall_rule_group
+    #   The object that defines the rules in a firewall engine rule group,
+    #   for use in a Next Generation policy.
+    #   @return [Types::FirewallRuleGroup]
+    #
+    # @!attribute [rw] ips_rule_group
+    #   The object that defines the rules in an IPS engine rule group, for
+    #   use in a Next Generation policy.
+    #   @return [Types::IpsRuleGroup]
+    #
     # @!attribute [rw] rule_group_response
     #   The high-level properties of a rule group. This, along with the
     #   RuleGroup, define the rule group. You can retrieve all objects for a
@@ -3558,6 +3825,8 @@ module Aws::NetworkFirewall
     class DescribeRuleGroupResponse < Struct.new(
       :update_token,
       :rule_group,
+      :firewall_rule_group,
+      :ips_rule_group,
       :rule_group_response)
       SENSITIVE = []
       include Aws::Structure
@@ -4409,12 +4678,12 @@ module Aws::NetworkFirewall
     #   The settings that enable resolved IP validation for the policy.
     #   Resolved IP validation verifies that a connection's destination IP
     #   address is one that the Amazon Route 53 Resolver returned in a DNS
-    #   response for a domain. The response must come from a VPC that's
-    #   associated with the Route 53 Resolver DNS Firewall rule group that
-    #   you specify. This checks how the destination IP address was
-    #   obtained, instead of relying only on the domain that the client
-    #   asserts in its TLS Server Name Indication (SNI) or HTTP `Host`
-    #   header. For more information, see Route53ResolvedIPValidation.
+    #   response for a domain. A VPC that's associated with the Route 53
+    #   Resolver DNS Firewall rule group that you specify must send the
+    #   response. This checks how the destination IP address was obtained,
+    #   instead of relying only on the domain that the client asserts in its
+    #   TLS Server Name Indication (SNI) or HTTP `Host` header. For more
+    #   information, see Route53ResolvedIPValidation.
     #   @return [Types::Route53ResolvedIPValidation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FirewallPolicy AWS API Documentation
@@ -4599,6 +4868,537 @@ module Aws::NetworkFirewall
       :encryption_configuration,
       :errors,
       :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The object that defines a Next Generation policy. This, along with the
+    # FirewallPolicyV2Response, define the policy.
+    #
+    # A Next Generation policy defines how the firewall engine and IPS
+    # engine inspect and control your VPC network traffic. You define the
+    # policy as a firewall section and an IPS section, each a collection of
+    # rule groups, along with policy-wide settings such as the policy mode
+    # and default actions. For more information, see [Next Generation
+    # policies][1] in the *Network Firewall Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-policies-v2.html
+    #
+    # @!attribute [rw] firewall_rule_group_entries
+    #   The firewall section of the policy—the rule groups that the firewall
+    #   engine evaluates. Each entry references an existing firewall engine
+    #   rule group or embeds a rule group directly in the policy, and each
+    #   entry has a unique priority that sets its evaluation order within
+    #   the section.
+    #   @return [Array<Types::FirewallRuleGroupEntry>]
+    #
+    # @!attribute [rw] ips_rule_group_entries
+    #   The IPS section of the policy—the rule groups that the IPS engine
+    #   evaluates. Each entry references an existing IPS engine rule group
+    #   or embeds a rule group directly in the policy. IPS section entries
+    #   don't use a priority.
+    #   @return [Array<Types::IpsRuleGroupEntry>]
+    #
+    # @!attribute [rw] policy_mode
+    #   Indicates whether the policy's engines enforce their verdicts or
+    #   only report them. In `ENFORCE` mode, the firewall engine and IPS
+    #   engine apply their verdicts to traffic. In `MONITOR` mode, the
+    #   engines evaluate traffic and generate logs and metrics, but don't
+    #   block traffic, so you can observe how a policy would behave before
+    #   you enforce it. For more information, see [Next Generation
+    #   policies][1] in the *Network Firewall Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-policies-v2.html
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_default_action
+    #   The action that the firewall engine takes on traffic that doesn't
+    #   match any firewall engine rule at a hook. The firewall engine is
+    #   drop by default. You can set the default action to one of the
+    #   following:
+    #
+    #   * `DROP` - Block the traffic.
+    #
+    #   * `ACCEPT` - Allow the traffic.
+    #
+    #   * `REJECT` - Block the traffic and send a TCP reset packet back to
+    #     the client.
+    #
+    #   * `ALERT` - Allow the traffic and generate an alert log for the
+    #     traffic that reaches the default action at every hook. This is
+    #     distinct from setting the policy mode to `MONITOR`.
+    #
+    #   For more information, see [Next Generation policies][1] in the
+    #   *Network Firewall Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-policies-v2.html
+    #   @return [String]
+    #
+    # @!attribute [rw] stateful_engine_options
+    #   Additional options governing how the engines handle stateful
+    #   traffic, such as the stream exception policy and flow timeouts.
+    #   @return [Types::StatefulEngineOptionsV2]
+    #
+    # @!attribute [rw] tls_inspection_configuration_arn
+    #   The Amazon Resource Name (ARN) of the TLS inspection configuration
+    #   to use to decrypt traffic for inspection. Next Generation policies
+    #   support session holding only. For more information, see [Inspecting
+    #   SSL/TLS traffic with TLS inspection configurations][1] in the
+    #   *Network Firewall Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_variables
+    #   Contains variables that you can use to override default Suricata
+    #   settings in your Next Generation policy.
+    #   @return [Types::PolicyVariables]
+    #
+    # @!attribute [rw] route_53_resolved_ip_validation
+    #   The settings that enable resolved IP validation for the Next
+    #   Generation policy. Resolved IP validation verifies that a
+    #   connection's destination IP address is one that the Amazon Route 53
+    #   Resolver returned in a DNS response for a domain. A VPC that's
+    #   associated with the Route 53 Resolver DNS Firewall rule group that
+    #   you specify must send the response. This checks how the destination
+    #   IP address was obtained, instead of relying only on the domain that
+    #   the client asserts in its TLS Server Name Indication (SNI) or HTTP
+    #   `Host` header. For more information, see
+    #   Route53ResolvedIPValidation.
+    #   @return [Types::Route53ResolvedIPValidation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FirewallPolicyV2 AWS API Documentation
+    #
+    class FirewallPolicyV2 < Struct.new(
+      :firewall_rule_group_entries,
+      :ips_rule_group_entries,
+      :policy_mode,
+      :firewall_default_action,
+      :stateful_engine_options,
+      :tls_inspection_configuration_arn,
+      :policy_variables,
+      :route_53_resolved_ip_validation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # High-level information about a Next Generation policy, returned in a
+    # list of policies. To retrieve the policy's full properties, rule
+    # groups, and settings, use the Next Generation policy describe
+    # operation.
+    #
+    # @!attribute [rw] name
+    #   The descriptive name of the Next Generation policy. You can't
+    #   change the name of a firewall policy after you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Next Generation policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FirewallPolicyV2Metadata AWS API Documentation
+    #
+    class FirewallPolicyV2Metadata < Struct.new(
+      :name,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The high-level properties of a Next Generation policy. This includes
+    # the policy's identity, status, consumed capacity, and association
+    # count. Network Firewall returns this object in response to the Next
+    # Generation policy operations. To retrieve the policy's rule groups
+    # and settings, use the `FirewallPolicyV2` object.
+    #
+    # @!attribute [rw] firewall_policy_v2_name
+    #   The descriptive name of the Next Generation policy. You can't
+    #   change the name of a firewall policy after you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_policy_v2_arn
+    #   The Amazon Resource Name (ARN) of the Next Generation policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_policy_v2_id
+    #   The unique identifier of the Next Generation policy. Network
+    #   Firewall assigns this identifier when you create the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the Next Generation policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_policy_v2_status
+    #   The current status of the Next Generation policy. A policy must be
+    #   in the `ACTIVE` state before you can use it in a firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Additional information about the current status of the Next
+    #   Generation policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key-value tag pairs that are associated with the Next Generation
+    #   policy.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] consumed_firewall_rule_capacity
+    #   The number of firewall engine rule capacity units that the policy's
+    #   firewall section currently consumes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] consumed_ips_rule_capacity
+    #   The number of IPS engine rule capacity units that the policy's IPS
+    #   section currently consumes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] consumed_ips_domain_capacity
+    #   The number of IPS domain list capacity units that the policy's IPS
+    #   section currently consumes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_associations
+    #   The number of firewalls that are associated with the Next Generation
+    #   policy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   A complex type that contains the Amazon Web Services KMS encryption
+    #   configuration settings for your Next Generation policy.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @!attribute [rw] errors
+    #   Any configuration errors that apply to the Next Generation policy.
+    #   Network Firewall detects these errors asynchronously, after you
+    #   create or update the policy, so an error can appear after the
+    #   request that caused it has already succeeded. Each entry describes
+    #   the problem and how to resolve it, and Network Firewall clears it
+    #   automatically after you resolve the problem.
+    #   @return [Array<Types::FirewallPolicyError>]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The last time that the Next Generation policy was changed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FirewallPolicyV2Response AWS API Documentation
+    #
+    class FirewallPolicyV2Response < Struct.new(
+      :firewall_policy_v2_name,
+      :firewall_policy_v2_arn,
+      :firewall_policy_v2_id,
+      :description,
+      :firewall_policy_v2_status,
+      :status_message,
+      :tags,
+      :consumed_firewall_rule_capacity,
+      :consumed_ips_rule_capacity,
+      :consumed_ips_domain_capacity,
+      :number_of_associations,
+      :encryption_configuration,
+      :errors,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single structured firewall engine rule, for use in a firewall engine
+    # rule group or as an embedded rule in a Next Generation policy. A
+    # firewall rule accepts, drops, or rejects traffic at a connection-state
+    # hook. For more information about authoring firewall engine rules, see
+    # [Rule groups for a firewall using a Next Generation policy][1] in the
+    # *Network Firewall Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html
+    #
+    # @!attribute [rw] action
+    #   The action that the firewall engine takes on traffic that matches
+    #   the rule. The firewall engine supports the following actions:
+    #
+    #   * `ACCEPT` - Allow the traffic.
+    #
+    #   * `DROP` - Block the traffic and discontinue inspection.
+    #
+    #   * `REJECT` - Block the traffic and send a TCP reset packet back to
+    #     the client.
+    #
+    #   * `REJECT_DST` - Block the traffic and send a TCP reset packet to
+    #     the destination.
+    #
+    #   * `REJECT_BOTH` - Block the traffic and send a TCP reset packet to
+    #     both the client and the destination.
+    #
+    #   You combine the action with an action scope, for example
+    #   `accept:flow`. To send accepted traffic straight to its destination
+    #   and skip the IPS engine, pair an accept action with the
+    #   `BypassIPSEnabled` setting. For more information, see [Rule groups
+    #   for a firewall using a Next Generation policy][1] in the *Network
+    #   Firewall Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html
+    #   @return [String]
+    #
+    # @!attribute [rw] action_scope
+    #   The scope that controls how much of the matched traffic the action
+    #   applies to. The valid scopes depend on the action: `ACCEPT` supports
+    #   all four scopes, and `DROP`, `REJECT`, `REJECT_DST`, and
+    #   `REJECT_BOTH` support only `PACKET` and `FLOW`.
+    #
+    #   * `PACKET` - The current packet only.
+    #
+    #   * `HOOK` - The current hook only. The firewall engine evaluates the
+    #     connection again at the next hook.
+    #
+    #   * `TX` - The current transaction. The firewall engine continues to
+    #     evaluate later transactions on the connection.
+    #
+    #   * `FLOW` - The entire connection. For an accept action, the
+    #     connection skips the firewall engine's remaining hooks and
+    #     advances to the IPS engine.
+    #
+    #   In a Suricata-compatible rule string, you write the scope in
+    #   lowercase, for example `accept:flow`.
+    #   @return [String]
+    #
+    # @!attribute [rw] hook
+    #   The connection-state hook at which the firewall engine evaluates the
+    #   rule. The hook encodes both the protocol and the connection state,
+    #   for example a TCP hook or a TLS `client_hello` hook. For the hooks
+    #   that the firewall engine supports and how they map to the connection
+    #   lifecycle, see [Rule groups for a firewall using a Next Generation
+    #   policy][1] in the *Network Firewall Developer Guide* and the
+    #   [Suricata firewall mode documentation][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html
+    #   [2]: https://suricata.readthedocs.io/en/suricata-8.0.3/firewall/firewall-design.html
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol of the rule's hook. The protocol is derived from the
+    #   hook and must match the hook's protocol prefix. Network Firewall
+    #   rejects a rule whose protocol doesn't match its hook.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_i_ps
+    #   The source IP addresses and address ranges to inspect for, in CIDR
+    #   notation. A firewall rule always compiles to a forward-direction
+    #   rule, so you express inbound compared to outbound traffic through
+    #   the source and destination addresses.
+    #   @return [String]
+    #
+    # @!attribute [rw] dest_i_ps
+    #   The destination IP addresses and address ranges to inspect for, in
+    #   CIDR notation. A firewall rule always compiles to a
+    #   forward-direction rule, so you express inbound compared to outbound
+    #   traffic through the source and destination addresses.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_ports
+    #   The source ports to inspect for.
+    #   @return [String]
+    #
+    # @!attribute [rw] dest_ports
+    #   The destination ports to inspect for.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_options
+    #   Additional options for the rule. These are the Suricata
+    #   `RuleOptions` settings, such as the signature ID (`sid`) and match
+    #   keywords.
+    #   @return [Array<Types::RuleOption>]
+    #
+    # @!attribute [rw] accept_prior_hooks
+    #   Whether Network Firewall automatically accepts the earlier
+    #   application-layer hooks that a connection must pass to reach this
+    #   rule's hook. Because the firewall engine is drop by default,
+    #   accepting prior hooks lets you author a single rule for the hook you
+    #   care about, instead of also authoring a rule for each earlier hook.
+    #   This setting accepts the earlier application-layer hooks only; it
+    #   doesn't accept the TCP layer. For more information, see [Rule
+    #   groups for a firewall using a Next Generation policy][1] in the
+    #   *Network Firewall Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] alert_enabled
+    #   Specifies whether the rule also generates an alert log for the
+    #   traffic that it matches. Turning on alerting adds a secondary alert
+    #   action to the rule, so that Network Firewall logs the match in
+    #   addition to taking the rule's primary action.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] bypass_ips_enabled
+    #   Specifies whether an accepted connection bypasses the IPS engine. By
+    #   default, traffic that the firewall engine accepts advances to the
+    #   IPS engine for threat inspection. When you turn on this setting for
+    #   an accept rule, the accepted traffic goes straight to its
+    #   destination without IPS inspection. You can set the bypass only on
+    #   accept rules, and it uses the same scope as the rule's accept
+    #   action; only the `flow` and `packet` scopes support a bypass. For
+    #   more information, see [Rule groups for a firewall using a Next
+    #   Generation policy][1] in the *Network Firewall Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] rule_metadata
+    #   Optional metadata for the rule: whether the rule is enabled and a
+    #   description. Metadata doesn't change how the rule matches or acts
+    #   on traffic.
+    #   @return [Types::RuleMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FirewallRule AWS API Documentation
+    #
+    class FirewallRule < Struct.new(
+      :action,
+      :action_scope,
+      :hook,
+      :protocol,
+      :source_i_ps,
+      :dest_i_ps,
+      :source_ports,
+      :dest_ports,
+      :rule_options,
+      :accept_prior_hooks,
+      :alert_enabled,
+      :bypass_ips_enabled,
+      :rule_metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The object that defines a firewall engine rule group, for use in a
+    # Next Generation policy. A firewall engine rule group provides
+    # access-control rules that the firewall engine evaluates at
+    # connection-state hooks. You provide the rules as a Suricata-compatible
+    # rule string, as structured firewall rules, or generated from a list of
+    # domain names. For more information, see [Rule groups for a firewall
+    # using a Next Generation policy][1] in the *Network Firewall Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html
+    #
+    # @!attribute [rw] rules_source
+    #   The stateful inspection criteria for the firewall engine rule group.
+    #   @return [Types::FirewallRulesSource]
+    #
+    # @!attribute [rw] rule_variables
+    #   Settings that are available for use in the rules in the firewall
+    #   engine rule group, such as IP set and port variables that the rules
+    #   reference.
+    #   @return [Types::RuleVariables]
+    #
+    # @!attribute [rw] reference_sets
+    #   The list of a rule group's reference sets. Firewall engine rule
+    #   groups don't support IP set references (reference sets); this
+    #   setting applies to IPS engine rule groups. To use CIDR ranges in
+    #   firewall engine rules, use rule variables instead.
+    #   @return [Types::ReferenceSets]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FirewallRuleGroup AWS API Documentation
+    #
+    class FirewallRuleGroup < Struct.new(
+      :rules_source,
+      :rule_variables,
+      :reference_sets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single entry in the firewall section of a Next Generation policy. An
+    # entry either references an existing firewall engine rule group by ARN
+    # or embeds a rule group directly in the policy, and it carries the
+    # priority that sets the rule group's evaluation order within the
+    # firewall section.
+    #
+    # @!attribute [rw] priority
+    #   The priority of the rule group entry within the firewall section.
+    #   Network Firewall evaluates the firewall section's entries in order
+    #   of increasing priority value. Each entry in the firewall section
+    #   must have a unique priority.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of an existing firewall engine rule
+    #   group to reference in this entry. Provide either `ResourceArn` to
+    #   reference an existing rule group or `InlineRuleGroup` to embed a
+    #   rule group in the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] inline_rule_group
+    #   A firewall engine rule group defined directly in the policy, instead
+    #   of referenced by ARN. Provide either `InlineRuleGroup` to embed a
+    #   rule group or `ResourceArn` to reference an existing rule group. An
+    #   embedded rule group can't use a domain list rules source; to filter
+    #   on a domain list, reference a standalone rule group by ARN instead.
+    #   @return [Types::FirewallRuleGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FirewallRuleGroupEntry AWS API Documentation
+    #
+    class FirewallRuleGroupEntry < Struct.new(
+      :priority,
+      :resource_arn,
+      :inline_rule_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source of the rules for a firewall engine rule group. You provide
+    # the rules as a single Suricata-compatible rule string, as a list of
+    # structured firewall rules, or as a list of domain names to generate
+    # rules from.
+    #
+    # @!attribute [rw] rules_string
+    #   Firewall engine rules, provided as a single Suricata-compatible rule
+    #   string in firewall mode. Use this to provide rules that you've
+    #   already written in the Suricata firewall-mode format. For the rule
+    #   format, see [Rule groups for a firewall using a Next Generation
+    #   policy][1] in the *Network Firewall Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_rules
+    #   An array of individual firewall engine rules, provided as structured
+    #   rules rather than as a rule string.
+    #   @return [Array<Types::FirewallRule>]
+    #
+    # @!attribute [rw] rules_source_list
+    #   Stateful inspection criteria for a domain list, specified as the
+    #   list of domain names that Network Firewall generates firewall engine
+    #   rules from.
+    #   @return [Types::RulesSourceList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FirewallRulesSource AWS API Documentation
+    #
+    class FirewallRulesSource < Struct.new(
+      :rules_string,
+      :firewall_rules,
+      :rules_source_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5249,6 +6049,110 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # The object that defines an IPS engine rule group, for use in a Next
+    # Generation policy. An IPS engine rule group provides threat-detection
+    # rules that the IPS engine evaluates in the context of the traffic
+    # flow. You provide the rules as a Suricata-compatible rule string. For
+    # more information, see [Rule groups for a firewall using a Next
+    # Generation policy][1] in the *Network Firewall Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-v2.html
+    #
+    # @!attribute [rw] rules_source
+    #   The stateful inspection criteria for the IPS engine rule group.
+    #   @return [Types::IpsRulesSource]
+    #
+    # @!attribute [rw] rule_variables
+    #   Settings that are available for use in the rules in the IPS engine
+    #   rule group.
+    #   @return [Types::RuleVariables]
+    #
+    # @!attribute [rw] reference_sets
+    #   The list of a rule group's reference sets.
+    #   @return [Types::ReferenceSets]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/IpsRuleGroup AWS API Documentation
+    #
+    class IpsRuleGroup < Struct.new(
+      :rules_source,
+      :rule_variables,
+      :reference_sets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single entry in the IPS section of a Next Generation policy. An
+    # entry either references an existing IPS engine rule group by ARN or
+    # embeds a rule group directly in the policy. IPS section entries don't
+    # use a priority.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of an existing IPS engine rule group
+    #   to reference in this entry. Provide either `ResourceArn` to
+    #   reference an existing rule group or `InlineRuleGroup` to embed a
+    #   rule group in the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] inline_rule_group
+    #   An IPS engine rule group defined directly in the policy, instead of
+    #   referenced by ARN. Provide either `InlineRuleGroup` to embed a rule
+    #   group or `ResourceArn` to reference an existing rule group.
+    #   @return [Types::IpsRuleGroup]
+    #
+    # @!attribute [rw] override
+    #   The setting that allows the policy owner to change the behavior of
+    #   the IPS engine rule group within this policy, such as changing a
+    #   managed rule group's action from `DROP` to `ALERT`.
+    #   @return [Types::IpsRuleGroupOverride]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/IpsRuleGroupEntry AWS API Documentation
+    #
+    class IpsRuleGroupEntry < Struct.new(
+      :resource_arn,
+      :inline_rule_group,
+      :override)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The setting that allows the policy owner to change the behavior of an
+    # IPS engine rule group within a Next Generation policy.
+    #
+    # @!attribute [rw] action
+    #   The action that changes the rule group from `DROP` to `ALERT`. This
+    #   only applies to managed rule groups.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/IpsRuleGroupOverride AWS API Documentation
+    #
+    class IpsRuleGroupOverride < Struct.new(
+      :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source of the rules for an IPS engine rule group.
+    #
+    # @!attribute [rw] rules_string
+    #   IPS engine rules, provided as a single Suricata-compatible rule
+    #   string. For the rule format, see [Rules Format][1] on the Suricata
+    #   website.
+    #
+    #
+    #
+    #   [1]: https://suricata.readthedocs.io/en/suricata-8.0.3/rules/intro.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/IpsRulesSource AWS API Documentation
+    #
+    class IpsRulesSource < Struct.new(
+      :rules_string)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Unable to perform the operation because doing so would violate a limit
     # setting.
     #
@@ -5413,6 +6317,53 @@ module Aws::NetworkFirewall
     class ListFirewallPoliciesResponse < Struct.new(
       :next_token,
       :firewall_policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Network Firewall returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that you want Network Firewall to
+    #   return for this request. If more objects are available, in the
+    #   response, Network Firewall provides a `NextToken` value that you can
+    #   use in a subsequent call to get the next batch of objects.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListFirewallPoliciesV2Request AWS API Documentation
+    #
+    class ListFirewallPoliciesV2Request < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Network Firewall returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_policies_v2
+    #   The metadata for the Next Generation policies. Depending on your
+    #   setting for max results and the number of firewall policies that you
+    #   have, this might not be the full list.
+    #   @return [Array<Types::FirewallPolicyV2Metadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListFirewallPoliciesV2Response AWS API Documentation
+    #
+    class ListFirewallPoliciesV2Response < Struct.new(
+      :next_token,
+      :firewall_policies_v2)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6319,7 +7270,7 @@ module Aws::NetworkFirewall
     end
 
     # A NAT gateway that a proxy mode firewall uses to proxy traffic. This
-    # is used in CreateFirewall when `NoSourcePreservation` is `TRUE`.
+    # is used in `CreateFirewall` when `NoSourcePreservation` is `TRUE`.
     #
     # @!attribute [rw] nat_gateway_id
     #   A unique identifier for the NAT gateway to use with proxy resources.
@@ -7100,6 +8051,14 @@ module Aws::NetworkFirewall
     # `AWS_ROUTE_53_RESOLVED_DOMAIN` target type or the
     # `aws_route_53_resolved_domain` rule keyword.
     #
+    # Enabling or disabling resolved IP validation, or changing
+    # `DNSFirewallRuleGroupId`, may require a restart of the stateful engine
+    # in order to apply the change. When this occurs, existing connections
+    # will be treated according to your stream exception policy
+    # configuration. Changes to `Action`, `DNSExpiryExceptionPolicy`,
+    # `SourceIPRanges`, and `BypassDestinationValidationIPRanges` don't
+    # require a restart.
+    #
     # @!attribute [rw] action
     #   The action that Network Firewall takes for a connection whose
     #   destination IP address fails resolved IP validation. A destination
@@ -7136,6 +8095,9 @@ module Aws::NetworkFirewall
     #   have only one managed Route 53 Resolver DNS Firewall association.
     #   While a swap is in progress, Network Firewall rejects further
     #   changes to this setting. Wait until the swap completes, then retry.
+    #   The change may also require a restart of the stateful engine. When
+    #   this occurs, existing connections will be treated according to your
+    #   stream exception policy configuration.
     #   @return [String]
     #
     # @!attribute [rw] dns_expiry_exception_policy
@@ -7364,9 +8326,18 @@ module Aws::NetworkFirewall
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   Indicates whether the rule group is stateless or stateful. If the
-    #   rule group is stateless, it contains stateless rules. If it is
-    #   stateful, it contains stateful rules.
+    #   Indicates the type of the rule group. Valid values are:
+    #
+    #   * `STATELESS` - Stateless rules, for use in a Classic Network
+    #     Firewall policy.
+    #
+    #   * `STATEFUL` - Stateful rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `FIREWALL` - Firewall engine rules, for use in a Next Generation
+    #     policy.
+    #
+    #   * `IPS` - IPS engine rules, for use in a Next Generation policy.
     #   @return [String]
     #
     # @!attribute [rw] capacity
@@ -7466,6 +8437,34 @@ module Aws::NetworkFirewall
       :last_modified_time,
       :analysis_results,
       :summary_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata for a single firewall engine rule. Use it to disable a rule
+    # without removing it and to attach a description. When you describe a
+    # rule group in `RULES_STRING` format, Network Firewall renders a
+    # disabled rule and its description as `#` comment lines above the rule.
+    #
+    # @!attribute [rw] rule_enabled
+    #   Specifies whether the rule is active. The default is `TRUE`. When
+    #   you set this to `FALSE`, Network Firewall keeps the rule in the rule
+    #   group but doesn't evaluate it against traffic and doesn't count it
+    #   toward the rule group's consumed capacity.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] rule_description
+    #   A description of the rule, up to 512 characters. The description can
+    #   span multiple lines. A description line can't itself look like a
+    #   firewall rule; to disable a rule, set `RuleEnabled` to `FALSE`
+    #   instead.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/RuleMetadata AWS API Documentation
+    #
+    class RuleMetadata < Struct.new(
+      :rule_enabled,
+      :rule_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7586,7 +8585,7 @@ module Aws::NetworkFirewall
     #   together in a stateful rule group. Use this option to specify simple
     #   Suricata rules with protocol, source and destination, ports,
     #   direction, and rule options. For information about the Suricata
-    #   `Rules` format, see [Rules Format][1].
+    #   `Rules` format, see [Rules Format][1] on the Suricata website.
     #
     #
     #
@@ -8184,11 +9183,41 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # Configuration settings for the handling of stateful traffic in a Next
+    # Generation policy.
+    #
+    # @!attribute [rw] stream_exception_policy
+    #   How Network Firewall handles traffic on a network connection that
+    #   breaks midstream. A Next Generation policy supports `DROP` and
+    #   `REJECT`. For more information, see [Stream exception policy options
+    #   in your firewall policy][1] in the *Network Firewall Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/stream-exception-policy.html
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_timeouts
+    #   The amount of time that can pass without any traffic sent through
+    #   the firewall before the firewall determines that the connection is
+    #   idle.
+    #   @return [Types::FlowTimeouts]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/StatefulEngineOptionsV2 AWS API Documentation
+    #
+    class StatefulEngineOptionsV2 < Struct.new(
+      :stream_exception_policy,
+      :flow_timeouts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A single Suricata rules specification, for use in a stateful rule
     # group. Use this option to specify a simple Suricata rule with
     # protocol, source and destination, ports, direction, and rule options.
     # For information about the Suricata `Rules` format, see [Rules
-    # Format][1].
+    # Format][1] on the Suricata website.
     #
     #
     #
@@ -8429,9 +9458,9 @@ module Aws::NetworkFirewall
     end
 
     # The ID for a subnet that's used in an association with a firewall.
-    # This is used in CreateFirewall, AssociateSubnets, and
-    # CreateVpcEndpointAssociation. Network Firewall creates an instance of
-    # the associated firewall in each subnet that you specify, to filter
+    # This is used in `CreateFirewall`, `AssociateSubnets`, and
+    # `CreateVpcEndpointAssociation`. Network Firewall creates an instance
+    # of the associated firewall in each subnet that you specify, to filter
     # traffic in the subnet's Availability Zone.
     #
     # @!attribute [rw] subnet_id
@@ -9818,6 +10847,107 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # @!attribute [rw] update_token
+    #   A token used for optimistic locking. Network Firewall returns a
+    #   token to your requests that access the firewall policy. The token
+    #   marks the state of the policy resource at the time of the request.
+    #
+    #   To make changes to the policy, you provide the token in your
+    #   request. Network Firewall uses the token to ensure that the policy
+    #   hasn't changed since you last retrieved it. If it has changed, the
+    #   operation fails with an `InvalidTokenException`. If this happens,
+    #   retrieve the firewall policy again to get a current copy of it with
+    #   current token. Reapply your changes as needed, then try the
+    #   operation again using the new token.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_policy_v2_arn
+    #   The Amazon Resource Name (ARN) of the Next Generation policy.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_policy_v2_name
+    #   The descriptive name of the Next Generation policy. You can't
+    #   change the name of a firewall policy after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_policy_v2
+    #   The updated rule groups and other settings that define the Next
+    #   Generation policy.
+    #   @return [Types::FirewallPolicyV2]
+    #
+    # @!attribute [rw] description
+    #   A description of the firewall policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Indicates whether you want Network Firewall to just check the
+    #   validity of the request, rather than run the request.
+    #
+    #   If set to `TRUE`, Network Firewall checks whether the request can
+    #   run successfully, but doesn't actually make the requested changes.
+    #   The call returns the value that the request would return if you ran
+    #   it with dry run set to `FALSE`, but doesn't make additions or
+    #   changes to your resources. This option allows you to make sure that
+    #   you have the required permissions to run the request and that your
+    #   request parameters are valid.
+    #
+    #   If set to `FALSE`, Network Firewall makes the requested changes to
+    #   your resources.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   A complex type that contains settings for encryption of your
+    #   firewall policy resources.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateFirewallPolicyV2Request AWS API Documentation
+    #
+    class UpdateFirewallPolicyV2Request < Struct.new(
+      :update_token,
+      :firewall_policy_v2_arn,
+      :firewall_policy_v2_name,
+      :firewall_policy_v2,
+      :description,
+      :dry_run,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update_token
+    #   A token used for optimistic locking. Network Firewall returns a
+    #   token to your requests that access the firewall policy. The token
+    #   marks the state of the policy resource at the time of the request.
+    #
+    #   To make changes to the policy, you provide the token in your
+    #   request. Network Firewall uses the token to ensure that the policy
+    #   hasn't changed since you last retrieved it. If it has changed, the
+    #   operation fails with an `InvalidTokenException`. If this happens,
+    #   retrieve the firewall policy again to get a current copy of it with
+    #   current token. Reapply your changes as needed, then try the
+    #   operation again using the new token.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_policy_v2_response
+    #   The high-level properties of the Next Generation policy. This, along
+    #   with the FirewallPolicyV2, define the policy. You can retrieve all
+    #   objects for a Next Generation policy by calling
+    #   DescribeFirewallPolicyV2.
+    #   @return [Types::FirewallPolicyV2Response]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateFirewallPolicyV2Response AWS API Documentation
+    #
+    class UpdateFirewallPolicyV2Response < Struct.new(
+      :update_token,
+      :firewall_policy_v2_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] firewall_arn
     #   The Amazon Resource Name (ARN) of the firewall.
     #
@@ -10453,6 +11583,16 @@ module Aws::NetworkFirewall
     #    </note>
     #   @return [Types::RuleGroup]
     #
+    # @!attribute [rw] firewall_rule_group
+    #   An object that defines the rules in a firewall engine rule group,
+    #   for use in a Next Generation policy.
+    #   @return [Types::FirewallRuleGroup]
+    #
+    # @!attribute [rw] ips_rule_group
+    #   An object that defines the rules in an IPS engine rule group, for
+    #   use in a Next Generation policy.
+    #   @return [Types::IpsRuleGroup]
+    #
     # @!attribute [rw] rules
     #   A string containing stateful rule group rules specifications in
     #   Suricata flat format, with one rule per line. Use this to import
@@ -10470,9 +11610,18 @@ module Aws::NetworkFirewall
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   Indicates whether the rule group is stateless or stateful. If the
-    #   rule group is stateless, it contains stateless rules. If it is
-    #   stateful, it contains stateful rules.
+    #   Indicates the type of the rule group. Valid values are:
+    #
+    #   * `STATELESS` - Stateless rules, for use in a Classic Network
+    #     Firewall policy.
+    #
+    #   * `STATEFUL` - Stateful rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `FIREWALL` - Firewall engine rules, for use in a Next Generation
+    #     policy.
+    #
+    #   * `IPS` - IPS engine rules, for use in a Next Generation policy.
     #
     #   <note markdown="1"> This setting is required for requests that do not include the
     #   `RuleGroupARN`.
@@ -10532,6 +11681,8 @@ module Aws::NetworkFirewall
       :rule_group_arn,
       :rule_group_name,
       :rule_group,
+      :firewall_rule_group,
+      :ips_rule_group,
       :rules,
       :type,
       :description,
@@ -10778,11 +11929,11 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
-    # The VPC and subnets for a proxy mode firewall endpoint. This is used
-    # in CreateFirewall when `NoSourcePreservation` is `TRUE`, to specify
-    # where Network Firewall creates the firewall endpoint.
+    # Contains the VPC and subnets for a proxy mode firewall endpoint. You
+    # use it in `CreateFirewall` when `NoSourcePreservation` is `TRUE`, to
+    # specify where Network Firewall creates the firewall endpoint.
     #
-    # This differs from VpcEndpointAssociation, which defines additional
+    # This differs from `VpcEndpointAssociation`, which defines additional
     # secondary endpoints for a firewall in other VPCs.
     #
     # @!attribute [rw] vpc_id
@@ -10870,8 +12021,8 @@ module Aws::NetworkFirewall
     #
     # @!attribute [rw] subnet_mapping
     #   The ID for a subnet that's used in an association with a firewall.
-    #   This is used in CreateFirewall, AssociateSubnets, and
-    #   CreateVpcEndpointAssociation. Network Firewall creates an instance
+    #   This is used in `CreateFirewall`, `AssociateSubnets`, and
+    #   `CreateVpcEndpointAssociation`. Network Firewall creates an instance
     #   of the associated firewall in each subnet that you specify, to
     #   filter traffic in the subnet's Availability Zone.
     #   @return [Types::SubnetMapping]

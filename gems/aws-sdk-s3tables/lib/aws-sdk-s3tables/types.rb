@@ -682,6 +682,31 @@ module Aws::S3Tables
     end
 
     # @!attribute [rw] table_bucket_arn
+    #   The Amazon Resource Name (ARN) of the table bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/GetTableBucketLoggingRequest AWS API Documentation
+    #
+    class GetTableBucketLoggingRequest < Struct.new(
+      :table_bucket_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_bucket_logging_status
+    #   The logging status of the table bucket. If logging is disabled,
+    #   `loggingEnabled` is absent.
+    #   @return [Types::TableBucketLoggingStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/GetTableBucketLoggingResponse AWS API Documentation
+    #
+    class GetTableBucketLoggingResponse < Struct.new(
+      :table_bucket_logging_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket associated with
     #   the maintenance configuration.
     #   @return [String]
@@ -2135,6 +2160,40 @@ module Aws::S3Tables
       include Aws::Structure
     end
 
+    # Describes where logs are stored and the prefix that Amazon S3 assigns
+    # to all log object keys for a table bucket.
+    #
+    # @!attribute [rw] target_bucket
+    #   The name of the general purpose bucket that logs are delivered to.
+    #   The bucket must be in the same Amazon Web Services Region and owned
+    #   by the same Amazon Web Services account as the table bucket. The
+    #   bucket can't use SSE-KMS or DSSE-KMS default encryption, can't
+    #   have S3 Object Lock enabled, and can't have Requester Pays enabled.
+    #   You can deliver logs from multiple table buckets to the same target
+    #   bucket. In this case, choose a different `targetPrefix` for each
+    #   table bucket so that you can tell their log objects apart.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_prefix
+    #   The prefix for the keys of the log objects that are delivered to the
+    #   target bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_object_key_format
+    #   The key format of the log objects. Log object keys are always
+    #   partitioned by date.
+    #   @return [Types::TargetObjectKeyFormat]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/LoggingEnabled AWS API Documentation
+    #
+    class LoggingEnabled < Struct.new(
+      :target_bucket,
+      :target_prefix,
+      :target_object_key_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The maintenance settings for the destination table. The migration
     # applies them when it creates the table: snapshot management starts
     # then, and compaction starts after you complete the migration. If you
@@ -2658,6 +2717,24 @@ module Aws::S3Tables
       include Aws::Structure
     end
 
+    # Amazon S3 keys for log objects are partitioned in the following
+    # format:
+    # `[targetPrefix][SourceAccountId]/[SourceRegion]/[SourceTableBucket]/[YYYY]/[MM]/[DD]/[YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]`
+    #
+    # @!attribute [rw] partition_date_source
+    #   The date to use for the log object key partitions. Valid values are
+    #   `EventTime`, the time that the requests in the log were made, and
+    #   `DeliveryTime`, the time that the log was delivered.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/PartitionedPrefix AWS API Documentation
+    #
+    class PartitionedPrefix < Struct.new(
+      :partition_date_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Statistics about the source and the partitions in a migration.
     #
     # @!attribute [rw] objects_scanned
@@ -2703,6 +2780,24 @@ module Aws::S3Tables
     class PutTableBucketEncryptionRequest < Struct.new(
       :table_bucket_arn,
       :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_bucket_arn
+    #   The Amazon Resource Name (ARN) of the table bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_bucket_logging_status
+    #   The logging status to apply to the table bucket. To disable logging,
+    #   specify an empty `tableBucketLoggingStatus`.
+    #   @return [Types::TableBucketLoggingStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/PutTableBucketLoggingRequest AWS API Documentation
+    #
+    class PutTableBucketLoggingRequest < Struct.new(
+      :table_bucket_arn,
+      :table_bucket_logging_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3370,6 +3465,23 @@ module Aws::S3Tables
       include Aws::Structure
     end
 
+    # The server access logging status of a table bucket. To enable logging,
+    # specify `loggingEnabled`. To disable logging, specify an empty
+    # `TableBucketLoggingStatus`.
+    #
+    # @!attribute [rw] logging_enabled
+    #   Where logs for the table bucket are delivered and how the log
+    #   objects are named. Must be populated to enable logging.
+    #   @return [Types::LoggingEnabled]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/TableBucketLoggingStatus AWS API Documentation
+    #
+    class TableBucketLoggingStatus < Struct.new(
+      :logging_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about the values that define the maintenance configuration for
     # a table bucket.
     #
@@ -3782,6 +3894,21 @@ module Aws::S3Tables
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # The key format of the log objects. Only `partitionedPrefix` is
+    # supported.
+    #
+    # @!attribute [rw] partitioned_prefix
+    #   Partitions log object keys by date.
+    #   @return [Types::PartitionedPrefix]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/TargetObjectKeyFormat AWS API Documentation
+    #
+    class TargetObjectKeyFormat < Struct.new(
+      :partitioned_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The limit on the number of requests per second was exceeded.
     #

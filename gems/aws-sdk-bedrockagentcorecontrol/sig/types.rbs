@@ -305,6 +305,11 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: [:description]
     end
 
+    class BuildLifecycleHooks
+      attr_accessor warmup: Types::LifecycleHook
+      SENSITIVE: []
+    end
+
     class CapacityProviderConfiguration
       attr_accessor capacity_provider_arn: ::String
       SENSITIVE: []
@@ -689,12 +694,14 @@ module Aws::BedrockAgentCoreControl
       attr_accessor request_header_configuration: Types::RequestHeaderConfiguration
       attr_accessor protocol_configuration: Types::ProtocolConfiguration
       attr_accessor lifecycle_configuration: Types::LifecycleConfiguration
+      attr_accessor hooks_configuration: Types::RuntimeHooksConfiguration
       attr_accessor environment_variables: ::Hash[::String, ::String]
       attr_accessor filesystem_configurations: ::Array[Types::FilesystemConfiguration]
       attr_accessor capacity_provider_configuration: Types::CapacityProviderConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor platform_version: ::String
       attr_accessor allowed_ports: ::Array[Types::AllowedPort]
+      attr_accessor resource_configurations: ::Array[Types::ResourceConfiguration]
       SENSITIVE: [:description, :environment_variables]
     end
 
@@ -939,6 +946,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor policy_engine_configuration: Types::GatewayPolicyEngineConfiguration
       attr_accessor exception_level: ("DEBUG")
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor domain_override: Types::DomainOverride
       SENSITIVE: [:description]
     end
 
@@ -965,6 +973,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor exception_level: ("DEBUG")
       attr_accessor web_acl_arn: ::String
       attr_accessor waf_configuration: Types::WafConfiguration
+      attr_accessor domain_override: Types::DomainOverride
       SENSITIVE: [:description]
     end
 
@@ -1979,6 +1988,12 @@ module Aws::BedrockAgentCoreControl
       end
     end
 
+    class DomainOverride
+      attr_accessor default_domain: ::String
+      attr_accessor alternate_domains: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class EbsVolumeConfiguration
       attr_accessor name: ::String
       attr_accessor size_gi_b: ::Integer
@@ -2398,6 +2413,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor network_configuration: Types::NetworkConfiguration
       attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       attr_accessor lifecycle_configuration: Types::LifecycleConfiguration
+      attr_accessor hooks_configuration: Types::RuntimeHooksConfiguration
       attr_accessor failure_reason: ::String
       attr_accessor description: ::String
       attr_accessor workload_identity_details: Types::WorkloadIdentityDetails
@@ -2411,6 +2427,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor capacity_provider_configuration: Types::CapacityProviderConfiguration
       attr_accessor platform_version: ::String
       attr_accessor allowed_ports: ::Array[Types::AllowedPort]
+      attr_accessor resource_configurations: ::Array[Types::ResourceConfiguration]
       SENSITIVE: [:description, :environment_variables]
     end
 
@@ -2670,6 +2687,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor exception_level: ("DEBUG")
       attr_accessor web_acl_arn: ::String
       attr_accessor waf_configuration: Types::WafConfiguration
+      attr_accessor domain_override: Types::DomainOverride
       SENSITIVE: [:description]
     end
 
@@ -3561,6 +3579,12 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class HttpPostLifecycleHookAction
+      attr_accessor path: ::String
+      attr_accessor port: ::Integer
+      SENSITIVE: []
+    end
+
     class HttpTargetConfiguration
       attr_accessor agentcore_runtime: Types::RuntimeTargetConfiguration
       attr_accessor passthrough: Types::PassthroughTargetConfiguration
@@ -3796,6 +3820,22 @@ module Aws::BedrockAgentCoreControl
       attr_accessor idle_runtime_session_timeout: ::Integer
       attr_accessor max_lifetime: ::Integer
       SENSITIVE: []
+    end
+
+    class LifecycleHook
+      attr_accessor action: Types::LifecycleHookAction
+      SENSITIVE: []
+    end
+
+    class LifecycleHookAction
+      attr_accessor http_post: Types::HttpPostLifecycleHookAction
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class HttpPost < LifecycleHookAction
+      end
+      class Unknown < LifecycleHookAction
+      end
     end
 
     class LimitEntry
@@ -5275,6 +5315,11 @@ module Aws::BedrockAgentCoreControl
       end
     end
 
+    class ResourceConfiguration
+      attr_accessor minimum_memory_in_mi_b: ::Integer
+      SENSITIVE: []
+    end
+
     class ResourceLimitExceededException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -5345,6 +5390,11 @@ module Aws::BedrockAgentCoreControl
       attr_accessor sampling_config: Types::SamplingConfig
       attr_accessor filters: ::Array[Types::Filter]
       attr_accessor session_config: Types::SessionConfig
+      SENSITIVE: []
+    end
+
+    class RuntimeHooksConfiguration
+      attr_accessor build: Types::BuildLifecycleHooks
       SENSITIVE: []
     end
 
@@ -5978,12 +6028,14 @@ module Aws::BedrockAgentCoreControl
       attr_accessor request_header_configuration: Types::RequestHeaderConfiguration
       attr_accessor protocol_configuration: Types::ProtocolConfiguration
       attr_accessor lifecycle_configuration: Types::LifecycleConfiguration
+      attr_accessor hooks_configuration: Types::RuntimeHooksConfiguration
       attr_accessor metadata_configuration: Types::RuntimeMetadataConfiguration
       attr_accessor environment_variables: ::Hash[::String, ::String]
       attr_accessor filesystem_configurations: ::Array[Types::FilesystemConfiguration]
       attr_accessor capacity_provider_configuration: Types::CapacityProviderConfiguration
       attr_accessor platform_version: ::String
       attr_accessor allowed_ports: ::Array[Types::AllowedPort]
+      attr_accessor resource_configurations: ::Array[Types::ResourceConfiguration]
       attr_accessor client_token: ::String
       SENSITIVE: [:description, :environment_variables]
     end
@@ -6164,6 +6216,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor policy_engine_configuration: Types::GatewayPolicyEngineConfiguration
       attr_accessor exception_level: ("DEBUG")
       attr_accessor waf_configuration: Types::WafConfiguration
+      attr_accessor domain_override: Types::DomainOverride
       SENSITIVE: [:description]
     end
 
@@ -6190,6 +6243,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor exception_level: ("DEBUG")
       attr_accessor web_acl_arn: ::String
       attr_accessor waf_configuration: Types::WafConfiguration
+      attr_accessor domain_override: Types::DomainOverride
       SENSITIVE: [:description]
     end
 

@@ -264,7 +264,8 @@ module Aws::Connect
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::Connect
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -8477,6 +8478,22 @@ module Aws::Connect
     #   resp.contact.global_resiliency_metadata.active_region #=> String
     #   resp.contact.global_resiliency_metadata.origin_region #=> String
     #   resp.contact.global_resiliency_metadata.traffic_distribution_group_id #=> String
+    #   resp.contact.contact_lens.conversational_analytics.configuration.enabled #=> Boolean
+    #   resp.contact.contact_lens.conversational_analytics.configuration.language_locale #=> String
+    #   resp.contact.contact_lens.conversational_analytics.configuration.language_locales #=> Array
+    #   resp.contact.contact_lens.conversational_analytics.configuration.language_locales[0] #=> String
+    #   resp.contact.contact_lens.conversational_analytics.configuration.channel_configuration.analytics_modes #=> Array
+    #   resp.contact.contact_lens.conversational_analytics.configuration.channel_configuration.analytics_modes[0] #=> String
+    #   resp.contact.contact_lens.conversational_analytics.configuration.redaction_configuration.behavior #=> String
+    #   resp.contact.contact_lens.conversational_analytics.configuration.redaction_configuration.policy #=> String
+    #   resp.contact.contact_lens.conversational_analytics.configuration.redaction_configuration.entities #=> Array
+    #   resp.contact.contact_lens.conversational_analytics.configuration.redaction_configuration.entities[0] #=> String
+    #   resp.contact.contact_lens.conversational_analytics.configuration.redaction_configuration.mask_mode #=> String
+    #   resp.contact.contact_lens.conversational_analytics.configuration.summary_configuration.summary_modes #=> Array
+    #   resp.contact.contact_lens.conversational_analytics.configuration.summary_configuration.summary_modes[0] #=> String
+    #   resp.contact.contact_lens.conversational_analytics.configuration.sentiment_configuration.behavior #=> String
+    #   resp.contact.contact_lens.conversational_analytics.contact_analysis_reference_state.status #=> String
+    #   resp.contact.contact_lens.conversational_analytics.contact_analysis_reference_state.status_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContact AWS API Documentation
     #
@@ -20860,7 +20877,7 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Allows pausing an ongoing task contact.
+    # Pauses an ongoing task or email contact.
     #
     # @option params [required, String] :contact_id
     #   The identifier of the contact.
@@ -21070,7 +21087,7 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Allows resuming a task contact in a paused state.
+    # Resumes a task or email contact in a paused state.
     #
     # @option params [required, String] :contact_id
     #   The identifier of the contact.
@@ -32494,7 +32511,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.295.0'
+      context[:gem_version] = '1.297.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

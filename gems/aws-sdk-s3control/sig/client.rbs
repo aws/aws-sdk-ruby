@@ -902,6 +902,7 @@ module Aws
         def credentials: () -> Types::Credentials
         def matched_grant_target: () -> ::String
         def grantee: () -> Types::Grantee
+        def matched_instance_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_data_access-instance_method
       def get_data_access: (
@@ -911,7 +912,8 @@ module Aws
                              ?duration_seconds: ::Integer,
                              ?privilege: ("Minimal" | "Default"),
                              ?target_type: ("Object"),
-                             ?audit_context: ::String
+                             ?audit_context: ::String,
+                             ?instance_scope: ("SELF" | "ALL")
                            ) -> _GetDataAccessResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataAccessResponseSuccess
 
@@ -1113,7 +1115,8 @@ module Aws
                                        ?grant_scope: ::String,
                                        ?next_token: ::String,
                                        ?max_results: ::Integer,
-                                       ?allowed_by_application: bool
+                                       ?allowed_by_application: bool,
+                                       ?instance_scope: ("SELF" | "ALL")
                                      ) -> _ListCallerAccessGrantsResponseSuccess
                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCallerAccessGrantsResponseSuccess
 

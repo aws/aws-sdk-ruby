@@ -28,7 +28,7 @@ module Aws::DeviceFarm
     class Artifact
       attr_accessor arn: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("UNKNOWN" | "SCREENSHOT" | "DEVICE_LOG" | "MESSAGE_LOG" | "VIDEO_LOG" | "RESULT_LOG" | "SERVICE_LOG" | "WEBKIT_LOG" | "INSTRUMENTATION_OUTPUT" | "EXERCISER_MONKEY_OUTPUT" | "CALABASH_JSON_OUTPUT" | "CALABASH_PRETTY_OUTPUT" | "CALABASH_STANDARD_OUTPUT" | "CALABASH_JAVA_XML_OUTPUT" | "AUTOMATION_OUTPUT" | "APPIUM_SERVER_OUTPUT" | "APPIUM_JAVA_OUTPUT" | "APPIUM_JAVA_XML_OUTPUT" | "APPIUM_PYTHON_OUTPUT" | "APPIUM_PYTHON_XML_OUTPUT" | "EXPLORER_EVENT_LOG" | "EXPLORER_SUMMARY_LOG" | "APPLICATION_CRASH_REPORT" | "XCTEST_LOG" | "VIDEO" | "CUSTOMER_ARTIFACT" | "CUSTOMER_ARTIFACT_LOG" | "TESTSPEC_OUTPUT")
+      attr_accessor type: ("UNKNOWN" | "SCREENSHOT" | "DEVICE_LOG" | "MESSAGE_LOG" | "VIDEO_LOG" | "RESULT_LOG" | "SERVICE_LOG" | "WEBKIT_LOG" | "INSTRUMENTATION_OUTPUT" | "EXERCISER_MONKEY_OUTPUT" | "CALABASH_JSON_OUTPUT" | "CALABASH_PRETTY_OUTPUT" | "CALABASH_STANDARD_OUTPUT" | "CALABASH_JAVA_XML_OUTPUT" | "AUTOMATION_OUTPUT" | "APPIUM_SERVER_OUTPUT" | "APPIUM_JAVA_OUTPUT" | "APPIUM_JAVA_XML_OUTPUT" | "APPIUM_PYTHON_OUTPUT" | "APPIUM_PYTHON_XML_OUTPUT" | "EXPLORER_EVENT_LOG" | "EXPLORER_SUMMARY_LOG" | "APPLICATION_CRASH_REPORT" | "XCTEST_LOG" | "VIDEO" | "CUSTOMER_ARTIFACT" | "CUSTOMER_ARTIFACT_LOG" | "TESTSPEC_OUTPUT" | "DEVICE_CONNECT_COMMAND_LOG")
       attr_accessor extension: ::String
       attr_accessor url: ::String
       SENSITIVE: []
@@ -1164,11 +1164,12 @@ module Aws::DeviceFarm
       attr_accessor web_url: ::String
       attr_accessor skip_app_resign: bool
       attr_accessor test_spec_arn: ::String
+      attr_accessor test_package_arn: ::String
       attr_accessor device_selection_result: Types::DeviceSelectionResult
       attr_accessor vpc_config: Types::VpcConfig
       attr_accessor execution_role_arn: ::String
       attr_accessor environment_variables: ::Array[Types::EnvironmentVariable]
-      attr_accessor insights_types: ::Array[("TEST_REPORT")]
+      attr_accessor insights_types: ::Array[("TEST_REPORT" | "NONE")]
       attr_accessor insights: Types::RunInsights
       SENSITIVE: []
     end
@@ -1199,7 +1200,7 @@ module Aws::DeviceFarm
       attr_accessor billing_method: ("METERED" | "UNMETERED")
       attr_accessor environment_variables: ::Array[Types::EnvironmentVariable]
       attr_accessor execution_role_arn: ::String
-      attr_accessor insights_types: ::Array[("TEST_REPORT")]
+      attr_accessor insights_types: ::Array[("TEST_REPORT" | "NONE")]
       SENSITIVE: []
     end
 

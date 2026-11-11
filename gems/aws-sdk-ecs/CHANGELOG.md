@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.258.0 (2026-11-10)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.257.0 (2026-11-09)
+------------------
+
+* Feature - Amazon ECS Managed Instances now supports isolated and confidential tasks, which run in AWS Nitro Sandboxes. Configure them with trustedExecutionConfiguration in task definitions and nitroEnclavesEnabled in capacity providers.
+
 1.256.0 (2026-11-06)
 ------------------
 
