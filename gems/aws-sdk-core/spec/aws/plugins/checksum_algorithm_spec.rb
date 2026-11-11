@@ -685,6 +685,23 @@ module Aws
           end
         end
 
+        it 'sizes each chunk by the bytes the reader returned' do
+          short_read = true
+          allow(io).to receive(:read).and_wrap_original do |read, length, buffer|
+            length = [length, 4].min if short_read
+            short_read = false
+            read.call(length, buffer)
+          end
+          checksum = Base64.strict_encode64([Zlib.crc32(payload)].pack('N'))
+
+          expect(body.read).to eq(
+            "4\r\n#{payload.byteslice(0, 4)}\r\n" \
+            "a\r\n#{payload.byteslice(4, 10)}\r\n" \
+            "8\r\n#{payload.byteslice(14, 8)}\r\n" \
+            "0\r\nx-amz-checksum-crc32:#{checksum}\r\n\r\n"
+          )
+        end
+
         it 'writes the checksum trailer for an empty input' do
           io.truncate(0)
 
