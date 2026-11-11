@@ -469,6 +469,19 @@ module Aws
                       ) -> _GetLayoutResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLayoutResponseSuccess
 
+      interface _GetMergeCasesStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMergeCasesStatusResponse]
+        def status: () -> ("IN_PROGRESS" | "COMPLETED")
+        def primary_case_id: () -> ::String
+        def secondary_case_ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#get_merge_cases_status-instance_method
+      def get_merge_cases_status: (
+                                    domain_id: ::String,
+                                    case_id: ::String
+                                  ) -> _GetMergeCasesStatusResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMergeCasesStatusResponseSuccess
+
       interface _GetTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTemplateResponse]
         def template_id: () -> ::String
@@ -685,6 +698,37 @@ module Aws
                                   ]
                                 ) -> _SearchRelatedItemsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchRelatedItemsResponseSuccess
+
+      interface _StartMergeCasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMergeCasesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#start_merge_cases-instance_method
+      def start_merge_cases: (
+                               domain_id: ::String,
+                               case_id: ::String,
+                               secondary_case_ids: Array[::String],
+                               ?fields_configuration: Array[
+                                 {
+                                   field_ids: Array[
+                                     {
+                                       id: ::String
+                                     }
+                                   ],
+                                   source_case_id: ::String
+                                 }
+                               ],
+                               ?related_items_configuration: {
+                                 comment: bool?,
+                                 connect_case: bool?,
+                                 contact: bool?,
+                                 custom: bool?
+                               },
+                               ?performed_by: {
+                                 user_arn: ::String?,
+                                 custom_entity: ::String?
+                               }
+                             ) -> _StartMergeCasesResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMergeCasesResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#tag_resource-instance_method
       def tag_resource: (

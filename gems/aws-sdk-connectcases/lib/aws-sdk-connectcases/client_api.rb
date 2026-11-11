@@ -27,6 +27,8 @@ module Aws::ConnectCases
     AuditEventId = Shapes::StringShape.new(name: 'AuditEventId')
     AuditEventPerformedBy = Shapes::StructureShape.new(name: 'AuditEventPerformedBy')
     AuditEventType = Shapes::StringShape.new(name: 'AuditEventType')
+    AuditMergeMetadata = Shapes::StructureShape.new(name: 'AuditMergeMetadata')
+    AuditMergeMetadataMergeEventIdString = Shapes::StringShape.new(name: 'AuditMergeMetadataMergeEventIdString')
     BasicLayout = Shapes::StructureShape.new(name: 'BasicLayout')
     BatchCreateRelatedItemErrorEntry = Shapes::StructureShape.new(name: 'BatchCreateRelatedItemErrorEntry')
     BatchCreateRelatedItemErrorEntryList = Shapes::ListShape.new(name: 'BatchCreateRelatedItemErrorEntryList')
@@ -72,6 +74,7 @@ module Aws::ConnectCases
     CaseFilterAndAllList = Shapes::ListShape.new(name: 'CaseFilterAndAllList')
     CaseFilterOrAllList = Shapes::ListShape.new(name: 'CaseFilterOrAllList')
     CaseId = Shapes::StringShape.new(name: 'CaseId')
+    CaseIdList = Shapes::ListShape.new(name: 'CaseIdList')
     CaseIdentifier = Shapes::StructureShape.new(name: 'CaseIdentifier')
     CaseIdentifierUnion = Shapes::UnionShape.new(name: 'CaseIdentifierUnion')
     CaseRuleArn = Shapes::StringShape.new(name: 'CaseRuleArn')
@@ -167,6 +170,7 @@ module Aws::ConnectCases
     FieldGroupNameString = Shapes::StringShape.new(name: 'FieldGroupNameString')
     FieldId = Shapes::StringShape.new(name: 'FieldId')
     FieldIdentifier = Shapes::StructureShape.new(name: 'FieldIdentifier')
+    FieldIdentifierList = Shapes::ListShape.new(name: 'FieldIdentifierList')
     FieldIdentifierUnion = Shapes::UnionShape.new(name: 'FieldIdentifierUnion')
     FieldItem = Shapes::StructureShape.new(name: 'FieldItem')
     FieldName = Shapes::StringShape.new(name: 'FieldName')
@@ -184,6 +188,8 @@ module Aws::ConnectCases
     FieldValueList = Shapes::ListShape.new(name: 'FieldValueList')
     FieldValueUnion = Shapes::UnionShape.new(name: 'FieldValueUnion')
     FieldValueUnionStringValueString = Shapes::StringShape.new(name: 'FieldValueUnionStringValueString')
+    FieldsConfiguration = Shapes::StructureShape.new(name: 'FieldsConfiguration')
+    FieldsConfigurationList = Shapes::ListShape.new(name: 'FieldsConfigurationList')
     FileArn = Shapes::StringShape.new(name: 'FileArn')
     FileContent = Shapes::StructureShape.new(name: 'FileContent')
     FileFilter = Shapes::StructureShape.new(name: 'FileFilter')
@@ -203,6 +209,8 @@ module Aws::ConnectCases
     GetFieldResponse = Shapes::StructureShape.new(name: 'GetFieldResponse')
     GetLayoutRequest = Shapes::StructureShape.new(name: 'GetLayoutRequest')
     GetLayoutResponse = Shapes::StructureShape.new(name: 'GetLayoutResponse')
+    GetMergeCasesStatusRequest = Shapes::StructureShape.new(name: 'GetMergeCasesStatusRequest')
+    GetMergeCasesStatusResponse = Shapes::StructureShape.new(name: 'GetMergeCasesStatusResponse')
     GetTemplateRequest = Shapes::StructureShape.new(name: 'GetTemplateRequest')
     GetTemplateResponse = Shapes::StructureShape.new(name: 'GetTemplateResponse')
     HiddenCaseRule = Shapes::StructureShape.new(name: 'HiddenCaseRule')
@@ -241,6 +249,7 @@ module Aws::ConnectCases
     ListTemplatesResponse = Shapes::StructureShape.new(name: 'ListTemplatesResponse')
     ListTemplatesResponseTemplatesList = Shapes::ListShape.new(name: 'ListTemplatesResponseTemplatesList')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MergeStatus = Shapes::StringShape.new(name: 'MergeStatus')
     MutableTagKey = Shapes::StringShape.new(name: 'MutableTagKey')
     MutableTags = Shapes::MapShape.new(name: 'MutableTags')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -264,6 +273,7 @@ module Aws::ConnectCases
     RelatedItemType = Shapes::StringShape.new(name: 'RelatedItemType')
     RelatedItemTypeFilter = Shapes::UnionShape.new(name: 'RelatedItemTypeFilter')
     RelatedItemUpdateContent = Shapes::UnionShape.new(name: 'RelatedItemUpdateContent')
+    RelatedItemsConfiguration = Shapes::StructureShape.new(name: 'RelatedItemsConfiguration')
     RequiredCaseRule = Shapes::StructureShape.new(name: 'RequiredCaseRule')
     RequiredField = Shapes::StructureShape.new(name: 'RequiredField')
     RequiredFieldList = Shapes::ListShape.new(name: 'RequiredFieldList')
@@ -309,6 +319,9 @@ module Aws::ConnectCases
     SlaTargetTime = Shapes::TimestampShape.new(name: 'SlaTargetTime', timestampFormat: "iso8601")
     SlaType = Shapes::StringShape.new(name: 'SlaType')
     Sort = Shapes::StructureShape.new(name: 'Sort')
+    StartMergeCasesRequest = Shapes::StructureShape.new(name: 'StartMergeCasesRequest')
+    StartMergeCasesRequestSecondaryCaseIdsList = Shapes::ListShape.new(name: 'StartMergeCasesRequestSecondaryCaseIdsList')
+    StartMergeCasesResponse = Shapes::StructureShape.new(name: 'StartMergeCasesResponse')
     String = Shapes::StringShape.new(name: 'String')
     TagFilter = Shapes::UnionShape.new(name: 'TagFilter')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -363,6 +376,7 @@ module Aws::ConnectCases
     AuditEvent.add_member(:performed_time, Shapes::ShapeRef.new(shape: AuditEventDateTime, required: true, location_name: "performedTime"))
     AuditEvent.add_member(:fields, Shapes::ShapeRef.new(shape: AuditEventFieldList, required: true, location_name: "fields"))
     AuditEvent.add_member(:performed_by, Shapes::ShapeRef.new(shape: AuditEventPerformedBy, location_name: "performedBy"))
+    AuditEvent.add_member(:merge_metadata, Shapes::ShapeRef.new(shape: AuditMergeMetadata, location_name: "mergeMetadata"))
     AuditEvent.struct_class = Types::AuditEvent
 
     AuditEventField.add_member(:event_field_id, Shapes::ShapeRef.new(shape: AuditEventFieldId, required: true, location_name: "eventFieldId"))
@@ -389,6 +403,11 @@ module Aws::ConnectCases
     AuditEventPerformedBy.add_member(:user, Shapes::ShapeRef.new(shape: UserUnion, location_name: "user"))
     AuditEventPerformedBy.add_member(:iam_principal_arn, Shapes::ShapeRef.new(shape: IamPrincipalArn, required: true, location_name: "iamPrincipalArn"))
     AuditEventPerformedBy.struct_class = Types::AuditEventPerformedBy
+
+    AuditMergeMetadata.add_member(:merge_event_id, Shapes::ShapeRef.new(shape: AuditMergeMetadataMergeEventIdString, required: true, location_name: "mergeEventId"))
+    AuditMergeMetadata.add_member(:primary_case_id, Shapes::ShapeRef.new(shape: CaseId, required: true, location_name: "primaryCaseId"))
+    AuditMergeMetadata.add_member(:secondary_case_id, Shapes::ShapeRef.new(shape: CaseId, required: true, location_name: "secondaryCaseId"))
+    AuditMergeMetadata.struct_class = Types::AuditMergeMetadata
 
     BasicLayout.add_member(:top_panel, Shapes::ShapeRef.new(shape: LayoutSections, location_name: "topPanel"))
     BasicLayout.add_member(:more_info, Shapes::ShapeRef.new(shape: LayoutSections, location_name: "moreInfo"))
@@ -539,6 +558,8 @@ module Aws::ConnectCases
     CaseFilterAndAllList.member = Shapes::ShapeRef.new(shape: CaseFilter)
 
     CaseFilterOrAllList.member = Shapes::ShapeRef.new(shape: CaseFilter)
+
+    CaseIdList.member = Shapes::ShapeRef.new(shape: CaseId)
 
     CaseIdentifier.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, location_name: "caseId"))
     CaseIdentifier.add_member(:reference_number, Shapes::ShapeRef.new(shape: ReferenceNumber, location_name: "referenceNumber"))
@@ -829,6 +850,8 @@ module Aws::ConnectCases
     FieldIdentifier.add_member(:id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "id"))
     FieldIdentifier.struct_class = Types::FieldIdentifier
 
+    FieldIdentifierList.member = Shapes::ShapeRef.new(shape: FieldIdentifier)
+
     FieldIdentifierUnion.add_member(:id, Shapes::ShapeRef.new(shape: FieldId, location_name: "id"))
     FieldIdentifierUnion.add_member(:name, Shapes::ShapeRef.new(shape: FieldName, location_name: "name"))
     FieldIdentifierUnion.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -888,6 +911,12 @@ module Aws::ConnectCases
     FieldValueUnion.add_member_subclass(:user_arn_value, Types::FieldValueUnion::UserArnValue)
     FieldValueUnion.add_member_subclass(:unknown, Types::FieldValueUnion::Unknown)
     FieldValueUnion.struct_class = Types::FieldValueUnion
+
+    FieldsConfiguration.add_member(:field_ids, Shapes::ShapeRef.new(shape: FieldIdentifierList, required: true, location_name: "fieldIds"))
+    FieldsConfiguration.add_member(:source_case_id, Shapes::ShapeRef.new(shape: CaseId, required: true, location_name: "sourceCaseId"))
+    FieldsConfiguration.struct_class = Types::FieldsConfiguration
+
+    FieldsConfigurationList.member = Shapes::ShapeRef.new(shape: FieldsConfiguration)
 
     FileContent.add_member(:file_arn, Shapes::ShapeRef.new(shape: FileArn, required: true, location_name: "fileArn"))
     FileContent.struct_class = Types::FileContent
@@ -977,6 +1006,15 @@ module Aws::ConnectCases
     GetLayoutResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTime, location_name: "createdTime"))
     GetLayoutResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: LastModifiedTime, location_name: "lastModifiedTime"))
     GetLayoutResponse.struct_class = Types::GetLayoutResponse
+
+    GetMergeCasesStatusRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    GetMergeCasesStatusRequest.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, required: true, location: "uri", location_name: "caseId"))
+    GetMergeCasesStatusRequest.struct_class = Types::GetMergeCasesStatusRequest
+
+    GetMergeCasesStatusResponse.add_member(:status, Shapes::ShapeRef.new(shape: MergeStatus, required: true, location_name: "status"))
+    GetMergeCasesStatusResponse.add_member(:primary_case_id, Shapes::ShapeRef.new(shape: CaseId, location_name: "primaryCaseId"))
+    GetMergeCasesStatusResponse.add_member(:secondary_case_ids, Shapes::ShapeRef.new(shape: CaseIdList, location_name: "secondaryCaseIds"))
+    GetMergeCasesStatusResponse.struct_class = Types::GetMergeCasesStatusResponse
 
     GetTemplateRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
     GetTemplateRequest.add_member(:template_id, Shapes::ShapeRef.new(shape: TemplateId, required: true, location: "uri", location_name: "templateId"))
@@ -1198,6 +1236,12 @@ module Aws::ConnectCases
     RelatedItemUpdateContent.add_member_subclass(:unknown, Types::RelatedItemUpdateContent::Unknown)
     RelatedItemUpdateContent.struct_class = Types::RelatedItemUpdateContent
 
+    RelatedItemsConfiguration.add_member(:comment, Shapes::ShapeRef.new(shape: Boolean, location_name: "comment"))
+    RelatedItemsConfiguration.add_member(:connect_case, Shapes::ShapeRef.new(shape: Boolean, location_name: "connectCase"))
+    RelatedItemsConfiguration.add_member(:contact, Shapes::ShapeRef.new(shape: Boolean, location_name: "contact"))
+    RelatedItemsConfiguration.add_member(:custom, Shapes::ShapeRef.new(shape: Boolean, location_name: "custom"))
+    RelatedItemsConfiguration.struct_class = Types::RelatedItemsConfiguration
+
     RequiredCaseRule.add_member(:default_value, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "defaultValue"))
     RequiredCaseRule.add_member(:conditions, Shapes::ShapeRef.new(shape: BooleanConditionList, required: true, location_name: "conditions"))
     RequiredCaseRule.struct_class = Types::RequiredCaseRule
@@ -1338,6 +1382,18 @@ module Aws::ConnectCases
     Sort.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "fieldId"))
     Sort.add_member(:sort_order, Shapes::ShapeRef.new(shape: Order, required: true, location_name: "sortOrder"))
     Sort.struct_class = Types::Sort
+
+    StartMergeCasesRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    StartMergeCasesRequest.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, required: true, location: "uri", location_name: "caseId"))
+    StartMergeCasesRequest.add_member(:secondary_case_ids, Shapes::ShapeRef.new(shape: StartMergeCasesRequestSecondaryCaseIdsList, required: true, location_name: "secondaryCaseIds"))
+    StartMergeCasesRequest.add_member(:fields_configuration, Shapes::ShapeRef.new(shape: FieldsConfigurationList, location_name: "fieldsConfiguration"))
+    StartMergeCasesRequest.add_member(:related_items_configuration, Shapes::ShapeRef.new(shape: RelatedItemsConfiguration, location_name: "relatedItemsConfiguration"))
+    StartMergeCasesRequest.add_member(:performed_by, Shapes::ShapeRef.new(shape: UserUnion, location_name: "performedBy"))
+    StartMergeCasesRequest.struct_class = Types::StartMergeCasesRequest
+
+    StartMergeCasesRequestSecondaryCaseIdsList.member = Shapes::ShapeRef.new(shape: CaseId)
+
+    StartMergeCasesResponse.struct_class = Types::StartMergeCasesResponse
 
     TagFilter.add_member(:equal_to, Shapes::ShapeRef.new(shape: TagValue, location_name: "equalTo"))
     TagFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -1644,6 +1700,7 @@ module Aws::ConnectCases
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
@@ -1673,6 +1730,7 @@ module Aws::ConnectCases
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_case_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -1742,6 +1800,7 @@ module Aws::ConnectCases
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_template, Seahorse::Model::Operation.new.tap do |o|
@@ -1827,6 +1886,19 @@ module Aws::ConnectCases
         o.http_request_uri = "/domains/{domainId}/layouts/{layoutId}"
         o.input = Shapes::ShapeRef.new(shape: GetLayoutRequest)
         o.output = Shapes::ShapeRef.new(shape: GetLayoutResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_merge_cases_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMergeCasesStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/domains/{domainId}/cases/{caseId}/merge-status"
+        o.input = Shapes::ShapeRef.new(shape: GetMergeCasesStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMergeCasesStatusResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2063,6 +2135,21 @@ module Aws::ConnectCases
         )
       end)
 
+      api.add_operation(:start_merge_cases, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMergeCases"
+        o.http_method = "POST"
+        o.http_request_uri = "/domains/{domainId}/cases/{caseId}/merge"
+        o.input = Shapes::ShapeRef.new(shape: StartMergeCasesRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartMergeCasesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -2100,6 +2187,7 @@ module Aws::ConnectCases
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_case_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -2157,6 +2245,7 @@ module Aws::ConnectCases
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 

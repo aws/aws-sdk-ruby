@@ -2024,7 +2024,7 @@ module Aws::IdentityStore
     #     identity_store_id: "IdentityStoreId", # required
     #     network_configuration: {
     #       vpce_access_required: false, # required
-    #       api_restrict_source_vpcs: ["VpcIdType"],
+    #       api_restrict_source_vpcs: ["VpcArn"],
     #       api_allow_source_ips: ["IpCidrType"],
     #       scim_allow_source_ips: ["IpCidrType"],
     #     },
@@ -2134,7 +2134,7 @@ module Aws::IdentityStore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-identitystore'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

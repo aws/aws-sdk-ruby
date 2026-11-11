@@ -110,6 +110,7 @@ module Aws::MarketplaceMetering
       attr_accessor timestamp: ::Time
       attr_accessor usage_dimension: ::String
       attr_accessor usage_quantity: ::Integer
+      attr_accessor usage_quantity_as_decimal: ::String
       attr_accessor dry_run: bool
       attr_accessor usage_allocations: ::Array[Types::UsageAllocation]
       attr_accessor client_token: ::String
@@ -171,6 +172,7 @@ module Aws::MarketplaceMetering
 
     class UsageAllocation
       attr_accessor allocated_usage_quantity: ::Integer
+      attr_accessor allocated_usage_quantity_as_decimal: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -180,6 +182,7 @@ module Aws::MarketplaceMetering
       attr_accessor customer_identifier: ::String
       attr_accessor dimension: ::String
       attr_accessor quantity: ::Integer
+      attr_accessor quantity_as_decimal: ::String
       attr_accessor usage_allocations: ::Array[Types::UsageAllocation]
       attr_accessor customer_aws_account_id: ::String
       attr_accessor license_arn: ::String

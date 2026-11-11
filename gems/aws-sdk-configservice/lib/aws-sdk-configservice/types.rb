@@ -1914,7 +1914,11 @@ module Aws::ConfigService
     # @!attribute [rw] provider
     #   For service-linked configuration recorders that record resources
     #   from a third-party cloud service provider, indicates the cloud
-    #   service provider. Currently, `AZURE` is supported.
+    #   service provider. Valid values:
+    #
+    #   * `AZURE` – The recorder records resources from Microsoft Azure
+    #
+    #   * `GCP` – The recorder records resources from Google Cloud
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigurationRecorderSummary AWS API Documentation
@@ -2390,10 +2394,15 @@ module Aws::ConfigService
     #   The configuration for an Azure connector.
     #   @return [Types::AzureConnectorConfiguration]
     #
+    # @!attribute [rw] gcp
+    #   The configuration for a Google Cloud connector.
+    #   @return [Types::GcpConnectorConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConnectorConfiguration AWS API Documentation
     #
     class ConnectorConfiguration < Struct.new(
-      :azure)
+      :azure,
+      :gcp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2406,7 +2415,10 @@ module Aws::ConfigService
     #
     # @!attribute [rw] filter_values
     #   The value of the filter. For `provider`, valid values include:
-    #   `AZURE`.
+    #
+    #   * `AZURE` – The connector is for Microsoft Azure
+    #
+    #   * `GCP` – The connector is for Google Cloud
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConnectorFilter AWS API Documentation
@@ -2429,12 +2441,26 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] provider
-    #   The third-party cloud service provider. Currently, `AZURE` is
-    #   supported.
+    #   The third-party cloud service provider. Valid values:
+    #
+    #   * `AZURE` – The connector is for Microsoft Azure
+    #
+    #   * `GCP` – The connector is for Google Cloud
     #   @return [String]
     #
     # @!attribute [rw] tenant_identifier
-    #   The Azure tenant identifier for the connector.
+    #   The Azure tenant identifier for the connector. Returned only for
+    #   Azure connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] gcp_organization_id
+    #   The Google Cloud organization ID for the connector. Returned only
+    #   for Google Cloud connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_account_email
+    #   The email address of the Google Cloud service account for the
+    #   connector. Returned only for Google Cloud connectors.
     #   @return [String]
     #
     # @!attribute [rw] created_time
@@ -2448,6 +2474,8 @@ module Aws::ConfigService
       :name,
       :provider,
       :tenant_identifier,
+      :gcp_organization_id,
+      :service_account_email,
       :created_time)
       SENSITIVE = []
       include Aws::Structure
@@ -4498,6 +4526,46 @@ module Aws::ConfigService
     #
     class FieldInfo < Struct.new(
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration details for connecting to Google Cloud.
+    #
+    # @!attribute [rw] gcp_organization_id
+    #   The ID of the Google Cloud organization that contains the
+    #   connector's management project, which is the project of the service
+    #   account in `serviceAccountEmail`.
+    #
+    #   Required if the management project belongs to an organization. A
+    #   connector needs an organization ID to record an entire organization
+    #   or more than one project. Omit it only if the management project
+    #   doesn't belong to an organization. In that case, the connector can
+    #   record only the management project.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_account_email
+    #   The email address of the Google Cloud service account that Config
+    #   uses to access your Google Cloud resources. The format is
+    #   `SERVICE_ACCOUNT_NAME@PROJECT_ID.iam.gserviceaccount.com`.
+    #
+    #   The project that contains this service account is the connector's
+    #   management project. If the connector has no `gcpOrganizationId`, it
+    #   can record only the management project.
+    #   @return [String]
+    #
+    # @!attribute [rw] workload_identity_pool_provider
+    #   The full resource name of the Google Cloud workload identity pool
+    #   provider that trusts Config. The format is
+    #   `projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID/providers/PROVIDER_ID`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GcpConnectorConfiguration AWS API Documentation
+    #
+    class GcpConnectorConfiguration < Struct.new(
+      :gcp_organization_id,
+      :service_account_email,
+      :workload_identity_pool_provider)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9138,13 +9206,25 @@ module Aws::ConfigService
     #
     # @!attribute [rw] scope_type
     #   The type of scope for the third-party cloud resources. Valid values
-    #   include `tenant` and `subscription`.
+    #   include:
+    #
+    #   * `tenant` – Applies to all resources in an Azure tenant
+    #
+    #   * `subscription` – Applies to resources in the Azure subscriptions
+    #     you specify
+    #
+    #   * `organization` – Applies to all resources in a Google Cloud
+    #     organization
+    #
+    #   * `project` – Applies to resources in the Google Cloud projects you
+    #     specify
     #   @return [String]
     #
     # @!attribute [rw] scope_values
     #   The list of specific scope values for the third-party cloud
-    #   resources. For example, a list of Azure subscriptions or management
-    #   groups.
+    #   resources. For example, a list of Azure subscription IDs, or a list
+    #   of Google Cloud project IDs. Don't specify `scopeValues` when
+    #   `scopeType` is `tenant` or `organization`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] all_regions

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.117.0 (2026-11-11)
+------------------
+
+* Feature - AWS Marketplace Metering Service adds decimal quantity support to the MeterUsage and BatchMeterUsage APIs. This includes new request fields UsageQuantityAsDecimal (MeterUsage), QuantityAsDecimal (BatchMeterUsage), and AllocatedUsageQuantityAsDecimal (UsageAllocation for both APIs).
+
 1.116.0 (2026-11-10)
 ------------------
 

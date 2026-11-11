@@ -1180,6 +1180,7 @@ module Aws::KinesisAnalyticsV2
     #       },
     #       application_snapshot_configuration: {
     #         snapshots_enabled: false, # required
+    #         snapshot_mode: "APPLICATION_SNAPSHOTS_LEGACY", # accepts APPLICATION_SNAPSHOTS_LEGACY, ENHANCED_SNAPSHOTS
     #       },
     #       application_system_rollback_configuration: {
     #         rollback_enabled: false, # required
@@ -1307,6 +1308,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.application_code_configuration_description.code_content_description.s3_application_code_location_description.object_version #=> String
     #   resp.application_detail.application_configuration_description.run_configuration_description.application_restore_configuration_description.application_restore_type #=> String, one of "SKIP_RESTORE_FROM_SNAPSHOT", "RESTORE_FROM_LATEST_SNAPSHOT", "RESTORE_FROM_CUSTOM_SNAPSHOT"
     #   resp.application_detail.application_configuration_description.run_configuration_description.application_restore_configuration_description.snapshot_name #=> String
+    #   resp.application_detail.application_configuration_description.run_configuration_description.application_restore_configuration_description.snapshot_arn #=> String
     #   resp.application_detail.application_configuration_description.run_configuration_description.flink_run_configuration_description.allow_non_restored_state #=> Boolean
     #   resp.application_detail.application_configuration_description.flink_application_configuration_description.checkpoint_configuration_description.configuration_type #=> String, one of "DEFAULT", "CUSTOM"
     #   resp.application_detail.application_configuration_description.flink_application_configuration_description.checkpoint_configuration_description.checkpointing_enabled #=> Boolean
@@ -1326,6 +1328,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map #=> Hash
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map["PropertyKey"] #=> String
     #   resp.application_detail.application_configuration_description.application_snapshot_configuration_description.snapshots_enabled #=> Boolean
+    #   resp.application_detail.application_configuration_description.application_snapshot_configuration_description.snapshot_mode #=> String, one of "APPLICATION_SNAPSHOTS_LEGACY", "ENHANCED_SNAPSHOTS"
     #   resp.application_detail.application_configuration_description.application_system_rollback_configuration_description.rollback_enabled #=> Boolean
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions #=> Array
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].vpc_configuration_id #=> String
@@ -1448,6 +1451,85 @@ module Aws::KinesisAnalyticsV2
     # @param [Hash] params ({})
     def create_application_snapshot(params = {}, options = {})
       req = build_request(:create_application_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Creates an enhanced snapshot of the state data of a running Managed
+    # Service for Apache Flink application. The application must be in the
+    # `RUNNING` status, use Apache Flink version 1.20 or later, and use the
+    # `ENHANCED_SNAPSHOTS` snapshot mode.
+    #
+    # This operation is asynchronous. The response returns the snapshot ARN
+    # with the `CREATING` status. To check the status of the snapshot, use
+    # `DescribeSnapshot`. To track the progress of the operation, use
+    # `DescribeSnapshotOperation`.
+    #
+    # An application can have only one `CreateSnapshot` operation in
+    # progress at a time. For information about limits, see [Managed Service
+    # for Apache Flink Quotas][1]. For more information about snapshots, see
+    # [Enhanced Snapshots][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/managed-flink/latest/java/limits.html
+    # [2]: https://docs.aws.amazon.com/managed-flink/latest/java/how-snapshots.html
+    #
+    # @option params [required, String] :application_name
+    #   The name of the application.
+    #
+    # @option params [required, String] :snapshot_name
+    #   The name of the enhanced snapshot. The name must be unique among the
+    #   snapshots in your account and Region. You can't reuse the name of an
+    #   existing snapshot, including a snapshot in the `FAILED` status, until
+    #   you delete that snapshot. Names that begin with `SYSTEMSNAPSHOT` are
+    #   reserved.
+    #
+    # @option params [String] :snapshot_description
+    #   A summary description of the snapshot.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of one or more tags to assign to the snapshot. A tag is a
+    #   key-value pair that identifies a snapshot. For more information, see
+    #   [Using Tagging][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html
+    #
+    # @return [Types::CreateSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSnapshotResponse#snapshot_arn #snapshot_arn} => String
+    #   * {Types::CreateSnapshotResponse#snapshot_status #snapshot_status} => String
+    #   * {Types::CreateSnapshotResponse#snapshot_operation_id #snapshot_operation_id} => String
+    #   * {Types::CreateSnapshotResponse#snapshot_operation_status #snapshot_operation_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_snapshot({
+    #     application_name: "ApplicationName", # required
+    #     snapshot_name: "SnapshotV2Name", # required
+    #     snapshot_description: "SnapshotV2Description",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot_arn #=> String
+    #   resp.snapshot_status #=> String, one of "CREATING", "READY", "DELETING", "FAILED"
+    #   resp.snapshot_operation_id #=> String
+    #   resp.snapshot_operation_status #=> String, one of "IN_PROGRESS", "SUCCESSFUL", "FAILED", "CANCELLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateSnapshot AWS API Documentation
+    #
+    # @overload create_snapshot(params = {})
+    # @param [Hash] params ({})
+    def create_snapshot(params = {}, options = {})
+      req = build_request(:create_snapshot, params)
       req.send_request(options)
     end
 
@@ -1766,6 +1848,57 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
+    # Deletes an enhanced snapshot. Snapshots are not scoped to an
+    # application, so you can delete a snapshot independently of the
+    # application that it was created from.
+    #
+    # This operation is asynchronous. The response returns the snapshot ARN
+    # with the `DELETING` status. To track the progress of the operation,
+    # use `DescribeSnapshotOperation`.
+    #
+    # You can delete a snapshot in the `READY` or `FAILED` status. If a
+    # snapshot operation, such as an export, uses the snapshot, Managed
+    # Service for Apache Flink waits for that operation to finish before it
+    # deletes the snapshot. For a snapshot in any other status,
+    # `ResourceInUseException` is returned.
+    #
+    # @option params [required, String] :snapshot_name
+    #   The name of the enhanced snapshot to delete.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :snapshot_creation_timestamp
+    #   The creation timestamp of the enhanced snapshot to delete. Use the
+    #   `DescribeSnapshot` operation to get this value.
+    #
+    # @return [Types::DeleteSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSnapshotResponse#snapshot_arn #snapshot_arn} => String
+    #   * {Types::DeleteSnapshotResponse#snapshot_status #snapshot_status} => String
+    #   * {Types::DeleteSnapshotResponse#snapshot_operation_id #snapshot_operation_id} => String
+    #   * {Types::DeleteSnapshotResponse#snapshot_operation_status #snapshot_operation_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_snapshot({
+    #     snapshot_name: "SnapshotV2Name", # required
+    #     snapshot_creation_timestamp: Time.now, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot_arn #=> String
+    #   resp.snapshot_status #=> String, one of "CREATING", "READY", "DELETING", "FAILED"
+    #   resp.snapshot_operation_id #=> String
+    #   resp.snapshot_operation_status #=> String, one of "IN_PROGRESS", "SUCCESSFUL", "FAILED", "CANCELLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteSnapshot AWS API Documentation
+    #
+    # @overload delete_snapshot(params = {})
+    # @param [Hash] params ({})
+    def delete_snapshot(params = {}, options = {})
+      req = build_request(:delete_snapshot, params)
+      req.send_request(options)
+    end
+
     # Returns information about a specific Managed Service for Apache Flink
     # application.
     #
@@ -1857,6 +1990,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.application_code_configuration_description.code_content_description.s3_application_code_location_description.object_version #=> String
     #   resp.application_detail.application_configuration_description.run_configuration_description.application_restore_configuration_description.application_restore_type #=> String, one of "SKIP_RESTORE_FROM_SNAPSHOT", "RESTORE_FROM_LATEST_SNAPSHOT", "RESTORE_FROM_CUSTOM_SNAPSHOT"
     #   resp.application_detail.application_configuration_description.run_configuration_description.application_restore_configuration_description.snapshot_name #=> String
+    #   resp.application_detail.application_configuration_description.run_configuration_description.application_restore_configuration_description.snapshot_arn #=> String
     #   resp.application_detail.application_configuration_description.run_configuration_description.flink_run_configuration_description.allow_non_restored_state #=> Boolean
     #   resp.application_detail.application_configuration_description.flink_application_configuration_description.checkpoint_configuration_description.configuration_type #=> String, one of "DEFAULT", "CUSTOM"
     #   resp.application_detail.application_configuration_description.flink_application_configuration_description.checkpoint_configuration_description.checkpointing_enabled #=> Boolean
@@ -1876,6 +2010,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map #=> Hash
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map["PropertyKey"] #=> String
     #   resp.application_detail.application_configuration_description.application_snapshot_configuration_description.snapshots_enabled #=> Boolean
+    #   resp.application_detail.application_configuration_description.application_snapshot_configuration_description.snapshot_mode #=> String, one of "APPLICATION_SNAPSHOTS_LEGACY", "ENHANCED_SNAPSHOTS"
     #   resp.application_detail.application_configuration_description.application_system_rollback_configuration_description.rollback_enabled #=> Boolean
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions #=> Array
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].vpc_configuration_id #=> String
@@ -2098,6 +2233,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_version_detail.application_configuration_description.application_code_configuration_description.code_content_description.s3_application_code_location_description.object_version #=> String
     #   resp.application_version_detail.application_configuration_description.run_configuration_description.application_restore_configuration_description.application_restore_type #=> String, one of "SKIP_RESTORE_FROM_SNAPSHOT", "RESTORE_FROM_LATEST_SNAPSHOT", "RESTORE_FROM_CUSTOM_SNAPSHOT"
     #   resp.application_version_detail.application_configuration_description.run_configuration_description.application_restore_configuration_description.snapshot_name #=> String
+    #   resp.application_version_detail.application_configuration_description.run_configuration_description.application_restore_configuration_description.snapshot_arn #=> String
     #   resp.application_version_detail.application_configuration_description.run_configuration_description.flink_run_configuration_description.allow_non_restored_state #=> Boolean
     #   resp.application_version_detail.application_configuration_description.flink_application_configuration_description.checkpoint_configuration_description.configuration_type #=> String, one of "DEFAULT", "CUSTOM"
     #   resp.application_version_detail.application_configuration_description.flink_application_configuration_description.checkpoint_configuration_description.checkpointing_enabled #=> Boolean
@@ -2117,6 +2253,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_version_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map #=> Hash
     #   resp.application_version_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map["PropertyKey"] #=> String
     #   resp.application_version_detail.application_configuration_description.application_snapshot_configuration_description.snapshots_enabled #=> Boolean
+    #   resp.application_version_detail.application_configuration_description.application_snapshot_configuration_description.snapshot_mode #=> String, one of "APPLICATION_SNAPSHOTS_LEGACY", "ENHANCED_SNAPSHOTS"
     #   resp.application_version_detail.application_configuration_description.application_system_rollback_configuration_description.rollback_enabled #=> Boolean
     #   resp.application_version_detail.application_configuration_description.vpc_configuration_descriptions #=> Array
     #   resp.application_version_detail.application_configuration_description.vpc_configuration_descriptions[0].vpc_configuration_id #=> String
@@ -2158,6 +2295,110 @@ module Aws::KinesisAnalyticsV2
     # @param [Hash] params ({})
     def describe_application_version(params = {}, options = {})
       req = build_request(:describe_application_version, params)
+      req.send_request(options)
+    end
+
+    # Returns information about an enhanced snapshot. To see a list of the
+    # snapshots in your account, use `ListSnapshots`.
+    #
+    # @option params [required, String] :snapshot_name
+    #   The name of the enhanced snapshot. You can retrieve this value using
+    #   `ListSnapshots`.
+    #
+    # @return [Types::DescribeSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSnapshotResponse#snapshot_info_details #snapshot_info_details} => Types::SnapshotInfoDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_snapshot({
+    #     snapshot_name: "SnapshotV2Name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot_info_details.snapshot_name #=> String
+    #   resp.snapshot_info_details.snapshot_arn #=> String
+    #   resp.snapshot_info_details.snapshot_description #=> String
+    #   resp.snapshot_info_details.snapshot_status #=> String, one of "CREATING", "READY", "DELETING", "FAILED"
+    #   resp.snapshot_info_details.snapshot_creation_timestamp #=> Time
+    #   resp.snapshot_info_details.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0", "FLINK-1_15", "ZEPPELIN-FLINK-3_0", "FLINK-1_18", "FLINK-1_19", "FLINK-1_20", "FLINK-2_2", "FLINK-2_3"
+    #   resp.snapshot_info_details.snapshot_size_in_bytes #=> Integer
+    #   resp.snapshot_info_details.snapshot_encryption_configuration_description.key_id #=> String
+    #   resp.snapshot_info_details.snapshot_encryption_configuration_description.key_type #=> String, one of "AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"
+    #   resp.snapshot_info_details.snapshot_initiator #=> String, one of "USER", "SYSTEM"
+    #   resp.snapshot_info_details.snapshot_initiator_operation #=> String, one of "CreateSnapshot", "ImportSnapshot", "SystemCreateSnapshot"
+    #   resp.snapshot_info_details.snapshot_source_description.s3_prefix_location.bucket_arn #=> String
+    #   resp.snapshot_info_details.snapshot_source_description.s3_prefix_location.key_prefix #=> String
+    #   resp.snapshot_info_details.snapshot_source_description.source_application_description.application_name #=> String
+    #   resp.snapshot_info_details.snapshot_source_description.source_application_description.application_creation_timestamp #=> Time
+    #   resp.snapshot_info_details.snapshot_source_description.source_application_description.application_version_id #=> Integer
+    #   resp.snapshot_info_details.snapshot_format #=> String, one of "CANONICAL"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeSnapshot AWS API Documentation
+    #
+    # @overload describe_snapshot(params = {})
+    # @param [Hash] params ({})
+    def describe_snapshot(params = {}, options = {})
+      req = build_request(:describe_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Provides a detailed description of a specified operation that was
+    # performed on an enhanced snapshot. To see a list of the operations of
+    # a snapshot, use `ListSnapshotOperations`.
+    #
+    # Snapshot operations are available for 90 days after they are created.
+    #
+    # @option params [required, String] :snapshot_name
+    #   The name of the enhanced snapshot.
+    #
+    # @option params [required, String] :snapshot_operation_id
+    #   The ID of the snapshot operation. You can retrieve this value using
+    #   `ListSnapshotOperations`.
+    #
+    # @return [Types::DescribeSnapshotOperationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSnapshotOperationResponse#snapshot_operation_info_details #snapshot_operation_info_details} => Types::SnapshotOperationInfoDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_snapshot_operation({
+    #     snapshot_name: "SnapshotV2Name", # required
+    #     snapshot_operation_id: "SnapshotOperationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot_operation_info_details.snapshot_operation_id #=> String
+    #   resp.snapshot_operation_info_details.snapshot_operation #=> String, one of "CreateSnapshot", "DeleteSnapshot", "ImportSnapshot", "ExportSnapshot", "SystemCreateSnapshot"
+    #   resp.snapshot_operation_info_details.snapshot_operation_status #=> String, one of "IN_PROGRESS", "SUCCESSFUL", "FAILED", "CANCELLED"
+    #   resp.snapshot_operation_info_details.snapshot_arn #=> String
+    #   resp.snapshot_operation_info_details.source_encryption_configuration_description.key_id #=> String
+    #   resp.snapshot_operation_info_details.source_encryption_configuration_description.key_type #=> String, one of "AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"
+    #   resp.snapshot_operation_info_details.destination_encryption_configuration_description.key_id #=> String
+    #   resp.snapshot_operation_info_details.destination_encryption_configuration_description.key_type #=> String, one of "AWS_OWNED_KEY", "CUSTOMER_MANAGED_KEY"
+    #   resp.snapshot_operation_info_details.snapshot_source_location_description.location_type #=> String, one of "S3"
+    #   resp.snapshot_operation_info_details.snapshot_source_location_description.s3_prefix_location.bucket_arn #=> String
+    #   resp.snapshot_operation_info_details.snapshot_source_location_description.s3_prefix_location.key_prefix #=> String
+    #   resp.snapshot_operation_info_details.snapshot_source_location_description.s3_prefix_location.exported_prefix #=> String
+    #   resp.snapshot_operation_info_details.snapshot_destination_location_description.location_type #=> String, one of "S3"
+    #   resp.snapshot_operation_info_details.snapshot_destination_location_description.s3_prefix_location.bucket_arn #=> String
+    #   resp.snapshot_operation_info_details.snapshot_destination_location_description.s3_prefix_location.key_prefix #=> String
+    #   resp.snapshot_operation_info_details.snapshot_destination_location_description.s3_prefix_location.exported_prefix #=> String
+    #   resp.snapshot_operation_info_details.application_operation_description.application_operation_id #=> String
+    #   resp.snapshot_operation_info_details.application_operation_description.application_name #=> String
+    #   resp.snapshot_operation_info_details.start_time #=> Time
+    #   resp.snapshot_operation_info_details.end_time #=> Time
+    #   resp.snapshot_operation_info_details.snapshot_operation_failure_details.error_info.error_code #=> String
+    #   resp.snapshot_operation_info_details.snapshot_operation_failure_details.error_info.error_string #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeSnapshotOperation AWS API Documentation
+    #
+    # @overload describe_snapshot_operation(params = {})
+    # @param [Hash] params ({})
+    def describe_snapshot_operation(params = {}, options = {})
+      req = build_request(:describe_snapshot_operation, params)
       req.send_request(options)
     end
 
@@ -2241,6 +2482,168 @@ module Aws::KinesisAnalyticsV2
     # @param [Hash] params ({})
     def discover_input_schema(params = {}, options = {})
       req = build_request(:discover_input_schema, params)
+      req.send_request(options)
+    end
+
+    # Exports the data of an enhanced snapshot to an Amazon S3 location.
+    # Managed Service for Apache Flink assumes the IAM role that you specify
+    # in `ExportDestinationConfiguration` to write the snapshot data. The
+    # snapshot must be in the `READY` status.
+    #
+    # This operation is asynchronous. To track the progress of the export,
+    # use `DescribeSnapshotOperation`.
+    #
+    # A snapshot can have only one export in progress at a time. If an
+    # export of the snapshot is already in progress,
+    # `LimitExceededException` is returned.
+    #
+    # For more information, see [Import and export][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/managed-flink/latest/java/snapshots-import-export.html
+    #
+    # @option params [required, String] :snapshot_name
+    #   The name of the enhanced snapshot to export.
+    #
+    # @option params [required, Types::ExportDestinationConfiguration] :export_destination_configuration
+    #   Describes the location, IAM role, and encryption configuration of the
+    #   export destination.
+    #
+    # @return [Types::ExportSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportSnapshotResponse#snapshot_operation_id #snapshot_operation_id} => String
+    #   * {Types::ExportSnapshotResponse#snapshot_operation_status #snapshot_operation_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_snapshot({
+    #     snapshot_name: "SnapshotV2Name", # required
+    #     export_destination_configuration: { # required
+    #       destination_type: "S3", # required, accepts S3
+    #       export_role_arn: "RoleARN", # required
+    #       destination_encryption_configuration: {
+    #         key_id: "KeyId",
+    #         key_type: "AWS_OWNED_KEY", # required, accepts AWS_OWNED_KEY, CUSTOMER_MANAGED_KEY
+    #       },
+    #       destination_s3_prefix_location: { # required
+    #         bucket_arn: "BucketARN", # required
+    #         key_prefix: "KeyPrefix", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot_operation_id #=> String
+    #   resp.snapshot_operation_status #=> String, one of "IN_PROGRESS", "SUCCESSFUL", "FAILED", "CANCELLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ExportSnapshot AWS API Documentation
+    #
+    # @overload export_snapshot(params = {})
+    # @param [Hash] params ({})
+    def export_snapshot(params = {}, options = {})
+      req = build_request(:export_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Imports an Apache Flink savepoint from an Amazon S3 location as an
+    # enhanced snapshot. Managed Service for Apache Flink assumes the IAM
+    # role that you specify in `ImportSourceConfiguration` to read the
+    # savepoint data.
+    #
+    # This operation is asynchronous. The response returns the snapshot ARN
+    # with the `CREATING` status. To track the progress of the import, use
+    # `DescribeSnapshotOperation`.
+    #
+    # For more information, see [Import and export][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/managed-flink/latest/java/snapshots-import-export.html
+    #
+    # @option params [required, String] :snapshot_name
+    #   The name of the enhanced snapshot. The name must be unique among the
+    #   snapshots in your account and Region. You can't reuse the name of an
+    #   existing snapshot, including a snapshot in the `FAILED` status, until
+    #   you delete that snapshot. Names that begin with `SYSTEMSNAPSHOT` are
+    #   reserved.
+    #
+    # @option params [required, Types::ImportSourceConfiguration] :import_source_configuration
+    #   Describes the location, IAM role, and encryption configuration of the
+    #   savepoint data to import.
+    #
+    # @option params [Types::SnapshotEncryptionConfiguration] :destination_encryption_configuration
+    #   The encryption configuration of the imported snapshot. If you don't
+    #   specify this parameter, the snapshot is encrypted using a key of type
+    #   `AWS_OWNED_KEY`. If you specify a KMS key, you must specify the key
+    #   ARN.
+    #
+    # @option params [String] :snapshot_description
+    #   A summary description of the snapshot.
+    #
+    # @option params [String] :snapshot_format
+    #   The format of the snapshot being imported.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of one or more tags to assign to the snapshot. A tag is a
+    #   key-value pair that identifies a snapshot. For more information, see
+    #   [Using Tagging][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html
+    #
+    # @return [Types::ImportSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportSnapshotResponse#snapshot_arn #snapshot_arn} => String
+    #   * {Types::ImportSnapshotResponse#snapshot_status #snapshot_status} => String
+    #   * {Types::ImportSnapshotResponse#snapshot_operation_id #snapshot_operation_id} => String
+    #   * {Types::ImportSnapshotResponse#snapshot_operation_status #snapshot_operation_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_snapshot({
+    #     snapshot_name: "SnapshotV2Name", # required
+    #     import_source_configuration: { # required
+    #       source_type: "S3", # required, accepts S3
+    #       import_role_arn: "RoleARN", # required
+    #       source_encryption_configuration: {
+    #         key_id: "KeyId",
+    #         key_type: "AWS_OWNED_KEY", # required, accepts AWS_OWNED_KEY, CUSTOMER_MANAGED_KEY
+    #       },
+    #       source_s3_prefix_location: { # required
+    #         bucket_arn: "BucketARN", # required
+    #         key_prefix: "KeyPrefix", # required
+    #       },
+    #     },
+    #     destination_encryption_configuration: {
+    #       key_id: "KeyId",
+    #       key_type: "AWS_OWNED_KEY", # required, accepts AWS_OWNED_KEY, CUSTOMER_MANAGED_KEY
+    #     },
+    #     snapshot_description: "SnapshotV2Description",
+    #     snapshot_format: "CANONICAL", # accepts CANONICAL
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot_arn #=> String
+    #   resp.snapshot_status #=> String, one of "CREATING", "READY", "DELETING", "FAILED"
+    #   resp.snapshot_operation_id #=> String
+    #   resp.snapshot_operation_status #=> String, one of "IN_PROGRESS", "SUCCESSFUL", "FAILED", "CANCELLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ImportSnapshot AWS API Documentation
+    #
+    # @overload import_snapshot(params = {})
+    # @param [Hash] params ({})
+    def import_snapshot(params = {}, options = {})
+      req = build_request(:import_snapshot, params)
       req.send_request(options)
     end
 
@@ -2469,6 +2872,144 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
+    # Lists the operations that were performed on the specified enhanced
+    # snapshot, such as `CreateSnapshot`, `ImportSnapshot`, and
+    # `ExportSnapshot`. The response includes a summary of each operation.
+    #
+    # You can specify only one of the `SnapshotOperation` or
+    # `SnapshotOperationStatus` filters in a request. If you specify both,
+    # `InvalidArgumentException` is returned.
+    #
+    # To get the complete description of a specific operation, use
+    # `DescribeSnapshotOperation`. Snapshot operations are available for 90
+    # days after they are created.
+    #
+    # @option params [required, String] :snapshot_name
+    #   The name of the enhanced snapshot.
+    #
+    # @option params [String] :snapshot_operation
+    #   Use this parameter to list only the operations of the specified type.
+    #
+    # @option params [String] :snapshot_operation_status
+    #   Use this parameter to list only the operations with the specified
+    #   status.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of snapshot operations to list.
+    #
+    # @option params [String] :next_token
+    #   A pagination token that can be used in a subsequent request.
+    #
+    # @return [Types::ListSnapshotOperationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSnapshotOperationsResponse#snapshot_operation_info_list #snapshot_operation_info_list} => Array&lt;Types::SnapshotOperationInfo&gt;
+    #   * {Types::ListSnapshotOperationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_snapshot_operations({
+    #     snapshot_name: "SnapshotV2Name", # required
+    #     snapshot_operation: "CreateSnapshot", # accepts CreateSnapshot, DeleteSnapshot, ImportSnapshot, ExportSnapshot, SystemCreateSnapshot
+    #     snapshot_operation_status: "IN_PROGRESS", # accepts IN_PROGRESS, SUCCESSFUL, FAILED, CANCELLED
+    #     limit: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot_operation_info_list #=> Array
+    #   resp.snapshot_operation_info_list[0].snapshot_operation_id #=> String
+    #   resp.snapshot_operation_info_list[0].snapshot_operation #=> String, one of "CreateSnapshot", "DeleteSnapshot", "ImportSnapshot", "ExportSnapshot", "SystemCreateSnapshot"
+    #   resp.snapshot_operation_info_list[0].snapshot_operation_status #=> String, one of "IN_PROGRESS", "SUCCESSFUL", "FAILED", "CANCELLED"
+    #   resp.snapshot_operation_info_list[0].start_time #=> Time
+    #   resp.snapshot_operation_info_list[0].end_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListSnapshotOperations AWS API Documentation
+    #
+    # @overload list_snapshot_operations(params = {})
+    # @param [Hash] params ({})
+    def list_snapshot_operations(params = {}, options = {})
+      req = build_request(:list_snapshot_operations, params)
+      req.send_request(options)
+    end
+
+    # Lists the enhanced snapshots in your account. Snapshots are not scoped
+    # to an application. To list the snapshots that were created from a
+    # specific application, use the `SourceApplicationName` parameter.
+    #
+    # You can specify only one of the following filters in a request:
+    # `SourceApplicationName`, `SnapshotInitiator`,
+    # `SnapshotInitiatorOperation`, or `SnapshotStatus`. If you specify more
+    # than one filter, `InvalidArgumentException` is returned.
+    #
+    # The results are sorted in descending order of snapshot creation
+    # timestamp. To get detailed information about a specific snapshot, use
+    # `DescribeSnapshot`.
+    #
+    # @option params [String] :source_application_name
+    #   The name of the application.
+    #
+    # @option params [String] :snapshot_initiator
+    #   Use this parameter to list only the snapshots with the specified
+    #   initiator.
+    #
+    # @option params [String] :snapshot_initiator_operation
+    #   Use this parameter to list only the snapshots that were created by the
+    #   specified operation.
+    #
+    # @option params [String] :snapshot_status
+    #   Use this parameter to list only the snapshots with the specified
+    #   status.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of snapshots to list.
+    #
+    # @option params [String] :next_token
+    #   A pagination token that can be used in a subsequent request.
+    #
+    # @return [Types::ListSnapshotsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSnapshotsResponse#snapshot_info_list #snapshot_info_list} => Array&lt;Types::SnapshotInfo&gt;
+    #   * {Types::ListSnapshotsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_snapshots({
+    #     source_application_name: "ApplicationName",
+    #     snapshot_initiator: "USER", # accepts USER, SYSTEM
+    #     snapshot_initiator_operation: "CreateSnapshot", # accepts CreateSnapshot, ImportSnapshot, SystemCreateSnapshot
+    #     snapshot_status: "CREATING", # accepts CREATING, READY, DELETING, FAILED
+    #     limit: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot_info_list #=> Array
+    #   resp.snapshot_info_list[0].snapshot_name #=> String
+    #   resp.snapshot_info_list[0].snapshot_arn #=> String
+    #   resp.snapshot_info_list[0].snapshot_status #=> String, one of "CREATING", "READY", "DELETING", "FAILED"
+    #   resp.snapshot_info_list[0].snapshot_creation_timestamp #=> Time
+    #   resp.snapshot_info_list[0].snapshot_initiator #=> String, one of "USER", "SYSTEM"
+    #   resp.snapshot_info_list[0].snapshot_initiator_operation #=> String, one of "CreateSnapshot", "ImportSnapshot", "SystemCreateSnapshot"
+    #   resp.snapshot_info_list[0].source_application_name #=> String
+    #   resp.snapshot_info_list[0].snapshot_format #=> String, one of "CANONICAL"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListSnapshots AWS API Documentation
+    #
+    # @overload list_snapshots(params = {})
+    # @param [Hash] params ({})
+    def list_snapshots(params = {}, options = {})
+      req = build_request(:list_snapshots, params)
+      req.send_request(options)
+    end
+
     # Retrieves the list of key-value tags assigned to the application. For
     # more information, see [Using Tagging][1].
     #
@@ -2601,6 +3142,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.application_code_configuration_description.code_content_description.s3_application_code_location_description.object_version #=> String
     #   resp.application_detail.application_configuration_description.run_configuration_description.application_restore_configuration_description.application_restore_type #=> String, one of "SKIP_RESTORE_FROM_SNAPSHOT", "RESTORE_FROM_LATEST_SNAPSHOT", "RESTORE_FROM_CUSTOM_SNAPSHOT"
     #   resp.application_detail.application_configuration_description.run_configuration_description.application_restore_configuration_description.snapshot_name #=> String
+    #   resp.application_detail.application_configuration_description.run_configuration_description.application_restore_configuration_description.snapshot_arn #=> String
     #   resp.application_detail.application_configuration_description.run_configuration_description.flink_run_configuration_description.allow_non_restored_state #=> Boolean
     #   resp.application_detail.application_configuration_description.flink_application_configuration_description.checkpoint_configuration_description.configuration_type #=> String, one of "DEFAULT", "CUSTOM"
     #   resp.application_detail.application_configuration_description.flink_application_configuration_description.checkpoint_configuration_description.checkpointing_enabled #=> Boolean
@@ -2620,6 +3162,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map #=> Hash
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map["PropertyKey"] #=> String
     #   resp.application_detail.application_configuration_description.application_snapshot_configuration_description.snapshots_enabled #=> Boolean
+    #   resp.application_detail.application_configuration_description.application_snapshot_configuration_description.snapshot_mode #=> String, one of "APPLICATION_SNAPSHOTS_LEGACY", "ENHANCED_SNAPSHOTS"
     #   resp.application_detail.application_configuration_description.application_system_rollback_configuration_description.rollback_enabled #=> Boolean
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions #=> Array
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].vpc_configuration_id #=> String
@@ -2699,6 +3242,7 @@ module Aws::KinesisAnalyticsV2
     #       application_restore_configuration: {
     #         application_restore_type: "SKIP_RESTORE_FROM_SNAPSHOT", # required, accepts SKIP_RESTORE_FROM_SNAPSHOT, RESTORE_FROM_LATEST_SNAPSHOT, RESTORE_FROM_CUSTOM_SNAPSHOT
     #         snapshot_name: "SnapshotName",
+    #         snapshot_arn: "SnapshotArn",
     #       },
     #     },
     #   })
@@ -3040,6 +3584,7 @@ module Aws::KinesisAnalyticsV2
     #       },
     #       application_snapshot_configuration_update: {
     #         snapshots_enabled_update: false, # required
+    #         snapshot_mode_update: "APPLICATION_SNAPSHOTS_LEGACY", # accepts APPLICATION_SNAPSHOTS_LEGACY, ENHANCED_SNAPSHOTS
     #       },
     #       application_system_rollback_configuration_update: {
     #         rollback_enabled_update: false, # required
@@ -3095,6 +3640,7 @@ module Aws::KinesisAnalyticsV2
     #       application_restore_configuration: {
     #         application_restore_type: "SKIP_RESTORE_FROM_SNAPSHOT", # required, accepts SKIP_RESTORE_FROM_SNAPSHOT, RESTORE_FROM_LATEST_SNAPSHOT, RESTORE_FROM_CUSTOM_SNAPSHOT
     #         snapshot_name: "SnapshotName",
+    #         snapshot_arn: "SnapshotArn",
     #       },
     #     },
     #     cloud_watch_logging_option_updates: [
@@ -3174,6 +3720,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.application_code_configuration_description.code_content_description.s3_application_code_location_description.object_version #=> String
     #   resp.application_detail.application_configuration_description.run_configuration_description.application_restore_configuration_description.application_restore_type #=> String, one of "SKIP_RESTORE_FROM_SNAPSHOT", "RESTORE_FROM_LATEST_SNAPSHOT", "RESTORE_FROM_CUSTOM_SNAPSHOT"
     #   resp.application_detail.application_configuration_description.run_configuration_description.application_restore_configuration_description.snapshot_name #=> String
+    #   resp.application_detail.application_configuration_description.run_configuration_description.application_restore_configuration_description.snapshot_arn #=> String
     #   resp.application_detail.application_configuration_description.run_configuration_description.flink_run_configuration_description.allow_non_restored_state #=> Boolean
     #   resp.application_detail.application_configuration_description.flink_application_configuration_description.checkpoint_configuration_description.configuration_type #=> String, one of "DEFAULT", "CUSTOM"
     #   resp.application_detail.application_configuration_description.flink_application_configuration_description.checkpoint_configuration_description.checkpointing_enabled #=> Boolean
@@ -3193,6 +3740,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map #=> Hash
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map["PropertyKey"] #=> String
     #   resp.application_detail.application_configuration_description.application_snapshot_configuration_description.snapshots_enabled #=> Boolean
+    #   resp.application_detail.application_configuration_description.application_snapshot_configuration_description.snapshot_mode #=> String, one of "APPLICATION_SNAPSHOTS_LEGACY", "ENHANCED_SNAPSHOTS"
     #   resp.application_detail.application_configuration_description.application_system_rollback_configuration_description.rollback_enabled #=> Boolean
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions #=> Array
     #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].vpc_configuration_id #=> String
@@ -3321,7 +3869,7 @@ module Aws::KinesisAnalyticsV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesisanalyticsv2'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

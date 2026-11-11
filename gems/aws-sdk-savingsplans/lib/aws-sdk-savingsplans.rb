@@ -54,7 +54,7 @@ module Aws::SavingsPlans
   autoload :EndpointProvider, 'aws-sdk-savingsplans/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-savingsplans/endpoints'
 
-  GEM_VERSION = '1.91.0'
+  GEM_VERSION = '1.92.0'
 
 end
 

@@ -2040,13 +2040,14 @@ module Aws::WorkSpaces
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "workspaces",
         "jsonVersion" => "1.1",
-        "protocol" => "json",
-        "protocols" => ["json"],
+        "protocol" => "smithy-rpc-v2-cbor",
+        "protocols" => ["smithy-rpc-v2-cbor", "json"],
         "serviceFullName" => "Amazon WorkSpaces",
         "serviceId" => "WorkSpaces",
         "signatureVersion" => "v4",
         "targetPrefix" => "WorkspacesService",
         "uid" => "workspaces-2015-04-08",
+        "xmlNamespace" => "http://workspaces.amazonaws.com/api/v1",
       }
 
       api.add_operation(:accept_account_link_invitation, Seahorse::Model::Operation.new.tap do |o|

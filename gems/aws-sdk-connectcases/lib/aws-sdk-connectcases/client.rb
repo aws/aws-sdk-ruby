@@ -1487,14 +1487,19 @@ module Aws::ConnectCases
     #   [DescribeUser][3] permission on the ARN of the user that you
     #   provide.
     #
-    # **Endpoints**: See [Connect Customer endpoints and quotas][4].
+    # * If the case is the secondary case of a merge that is running, the
+    #   request fails with a `ConflictException`. For more information, see
+    #   [StartMergeCases][4].
+    #
+    # **Endpoints**: See [Connect Customer endpoints and quotas][5].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#cases-quotas
     # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeContact.html
     # [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
-    # [4]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
+    # [4]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_StartMergeCases.html
+    # [5]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
     #
     # @option params [required, String] :domain_id
     #   The unique identifier of the Cases domain.
@@ -1713,8 +1718,16 @@ module Aws::ConnectCases
     #
     # * Perform any operations that require the CaseID
     #
+    # You can't delete a case while it's part of a merge that is running,
+    # as either the primary or the secondary case. The request fails with a
+    # `ConflictException`. For more information, see [StartMergeCases][1].
+    #
     # This action is irreversible. After you delete a case, you cannot
     # recover its data.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_StartMergeCases.html
     #
     # @option params [required, String] :domain_id
     #   A unique identifier of the Cases domain.
@@ -1913,9 +1926,14 @@ module Aws::ConnectCases
     #
     #  </note>
     #
+    # If the case is the secondary case of a merge that is running, the
+    # request fails with a `ConflictException`. For more information, see
+    # [StartMergeCases][2].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteAttachedFile.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_StartMergeCases.html
     #
     # @option params [required, String] :domain_id
     #   A unique identifier of the Cases domain.
@@ -2080,7 +2098,7 @@ module Aws::ConnectCases
     #   resp.next_token #=> String
     #   resp.audit_events #=> Array
     #   resp.audit_events[0].event_id #=> String
-    #   resp.audit_events[0].type #=> String, one of "Case.Created", "Case.Updated", "RelatedItem.Created", "RelatedItem.Deleted", "RelatedItem.Updated"
+    #   resp.audit_events[0].type #=> String, one of "Case.Created", "Case.Updated", "RelatedItem.Created", "RelatedItem.Deleted", "RelatedItem.Updated", "Case.Merged"
     #   resp.audit_events[0].related_item_type #=> String, one of "Contact", "Comment", "File", "Sla", "ConnectCase", "Custom"
     #   resp.audit_events[0].performed_time #=> Time
     #   resp.audit_events[0].fields #=> Array
@@ -2096,6 +2114,9 @@ module Aws::ConnectCases
     #   resp.audit_events[0].performed_by.user.user_arn #=> String
     #   resp.audit_events[0].performed_by.user.custom_entity #=> String
     #   resp.audit_events[0].performed_by.iam_principal_arn #=> String
+    #   resp.audit_events[0].merge_metadata.merge_event_id #=> String
+    #   resp.audit_events[0].merge_metadata.primary_case_id #=> String
+    #   resp.audit_events[0].merge_metadata.secondary_case_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/GetCaseAuditEvents AWS API Documentation
     #
@@ -2227,6 +2248,64 @@ module Aws::ConnectCases
     # @param [Hash] params ({})
     def get_layout(params = {}, options = {})
       req = build_request(:get_layout, params)
+      req.send_request(options)
+    end
+
+    # Returns the merge status of a case. Use this operation to track a
+    # merge that you started with [StartMergeCases][1], or to check whether
+    # a case is part of a merge before you modify it.
+    #
+    # The operation returns the following, depending on the case:
+    #
+    # * For the primary case or the secondary case of a merge that is
+    #   running, it returns `IN_PROGRESS`.
+    #
+    # * For a case that was merged into another case as the secondary case,
+    #   it returns `COMPLETED`.
+    #
+    # * For any other case, it returns a `ResourceNotFoundException`. This
+    #   includes the primary case after its merge finishes.
+    #
+    # **Endpoints**: See [Connect Customer endpoints and quotas][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_StartMergeCases.html
+    # [2]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
+    #
+    # @option params [required, String] :domain_id
+    #   The unique identifier of the Cases domain.
+    #
+    # @option params [required, String] :case_id
+    #   The unique identifier of the case. This can be the primary case or the
+    #   secondary case of a merge.
+    #
+    # @return [Types::GetMergeCasesStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMergeCasesStatusResponse#status #status} => String
+    #   * {Types::GetMergeCasesStatusResponse#primary_case_id #primary_case_id} => String
+    #   * {Types::GetMergeCasesStatusResponse#secondary_case_ids #secondary_case_ids} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_merge_cases_status({
+    #     domain_id: "DomainId", # required
+    #     case_id: "CaseId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "IN_PROGRESS", "COMPLETED"
+    #   resp.primary_case_id #=> String
+    #   resp.secondary_case_ids #=> Array
+    #   resp.secondary_case_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/GetMergeCasesStatus AWS API Documentation
+    #
+    # @overload get_merge_cases_status(params = {})
+    # @param [Hash] params ({})
+    def get_merge_cases_status(params = {}, options = {})
+      req = build_request(:get_merge_cases_status, params)
       req.send_request(options)
     end
 
@@ -3346,6 +3425,160 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
+    # Merges a secondary case into a primary case. The primary case, which
+    # you specify in the request URI, remains active. Both cases must belong
+    # to the same domain.
+    #
+    # The merge runs asynchronously. To track its progress, call
+    # [GetMergeCasesStatus][1]. When the merge finishes, the selected field
+    # values and related items from the secondary case are on the primary
+    # case, the two cases are linked, and the secondary case is closed. Both
+    # cases record the merge in their audit history. For more information,
+    # see [GetCaseAuditEvents][2].
+    #
+    # **Important things to know**
+    #
+    # * Both cases must have the same customer, or at least one of them must
+    #   have no customer.
+    #
+    # * While the merge runs, you can't modify the secondary case or its
+    #   related items, and you can't delete the primary case. These
+    #   requests return a `ConflictException`.
+    #
+    # * After the merge, the secondary case can be reopened, updated, and
+    #   deleted, but it can't be merged again.
+    #
+    # The request fails with a `ValidationException`, and no merge starts,
+    # if:
+    #
+    # * The primary case and the secondary case are the same case.
+    #
+    # * Either case is closed.
+    #
+    # * Both cases have a customer, and the customers are different.
+    #
+    # * `fieldsConfiguration` selects a field that can't be merged, or a
+    #   field that the secondary case doesn't have.
+    #
+    # * After the merge, the primary case would have more than 500 field
+    #   values, or would exceed the maximum case size.
+    #
+    # The request fails with a `ServiceQuotaExceededException` if, after the
+    # merge, either case would exceed the quota for related items per case.
+    # For the primary case, the count is its existing related items, plus
+    # the related items moved from the secondary case, plus the new case
+    # link. See [Connect Customer Cases quotas][3].
+    #
+    # The request fails with a `ConflictException` if either case is already
+    # part of a merge that is running, or was previously merged into another
+    # case as the secondary case.
+    #
+    # **Endpoints**: See [Connect Customer endpoints and quotas][4].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_GetMergeCasesStatus.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_GetCaseAuditEvents.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#cases-quotas
+    # [4]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
+    #
+    # @option params [required, String] :domain_id
+    #   The unique identifier of the Cases domain.
+    #
+    # @option params [required, String] :case_id
+    #   The unique identifier of the primary case. The primary case remains
+    #   active and receives the merged field values and related items. The
+    #   cases can use different templates, and the primary case keeps its
+    #   template.
+    #
+    # @option params [required, Array<String>] :secondary_case_ids
+    #   The unique identifier of the secondary case to merge into the primary
+    #   case. The secondary case is closed when the merge finishes. Specify
+    #   exactly one case ID.
+    #
+    # @option params [Array<Types::FieldsConfiguration>] :fields_configuration
+    #   The fields whose values to take from the secondary case. You can only
+    #   merge custom fields and the following system fields: `assigned_queue`,
+    #   `assigned_user`, `summary`, and `case_reason`. If you select any other
+    #   system field, the request fails with a `ValidationException`.
+    #
+    #   For each field that can be merged, the merge works as follows:
+    #
+    #   * If you select the field, the primary case gets the secondary case's
+    #     value. If the secondary case's value is empty, the primary case's
+    #     value is cleared.
+    #
+    #   * If you don't select the field and the primary case has a value for
+    #     it, the primary case keeps its value.
+    #
+    #   * If you don't select the field and the primary case doesn't have
+    #     the field, or its value is empty, the primary case gets the
+    #     secondary case's value. This applies even when the field isn't on
+    #     the primary case's template.
+    #
+    #   Field values are read from both cases when the merge runs, so changes
+    #   that you make to the primary case after you start the merge are taken
+    #   into account.
+    #
+    #   Specify at most one entry, and set its `sourceCaseId` to the secondary
+    #   case ID.
+    #
+    # @option params [Types::RelatedItemsConfiguration] :related_items_configuration
+    #   The types of related items to move from the secondary case to the
+    #   primary case. Related items of a type that you don't select, or set
+    #   to `false`, stay on the closed secondary case. If you omit this
+    #   parameter, no related items are moved.
+    #
+    #   File, SLA, and work plan related items are never moved. They stay on
+    #   the secondary case.
+    #
+    # @option params [Types::UserUnion] :performed_by
+    #   The user who performed the merge. If you provide `userArn`, you must
+    #   also have [DescribeUser][1] permission on the ARN of that user.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_merge_cases({
+    #     domain_id: "DomainId", # required
+    #     case_id: "CaseId", # required
+    #     secondary_case_ids: ["CaseId"], # required
+    #     fields_configuration: [
+    #       {
+    #         field_ids: [ # required
+    #           {
+    #             id: "FieldId", # required
+    #           },
+    #         ],
+    #         source_case_id: "CaseId", # required
+    #       },
+    #     ],
+    #     related_items_configuration: {
+    #       comment: false,
+    #       connect_case: false,
+    #       contact: false,
+    #       custom: false,
+    #     },
+    #     performed_by: {
+    #       user_arn: "UserArn",
+    #       custom_entity: "CustomEntity",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/StartMergeCases AWS API Documentation
+    #
+    # @overload start_merge_cases(params = {})
+    # @param [Hash] params ({})
+    def start_merge_cases(params = {}, options = {})
+      req = build_request(:start_merge_cases, params)
+      req.send_request(options)
+    end
+
     # Adds tags to a resource.
     #
     # @option params [required, String] :arn
@@ -3412,12 +3645,17 @@ module Aws::ConnectCases
     # received as an array of id/value pairs identical to the `CreateCase`
     # input.
     #
+    #  If the case is the secondary case of a merge that is running, the
+    # request fails with a `ConflictException`. For more information, see
+    # [StartMergeCases][2].
+    #
     #  If the action is successful, the service sends back an HTTP 200
     # response with an empty HTTP body.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_StartMergeCases.html
     #
     # @option params [required, String] :domain_id
     #   The unique identifier of the Cases domain.
@@ -3750,14 +3988,19 @@ module Aws::ConnectCases
     #
     # * [System case fields][3] cannot be used in a custom related item.
     #
-    # **Endpoints**: See [Connect Customer endpoints and quotas][4].
+    # * If the case is the secondary case of a merge that is running, the
+    #   request fails with a `ConflictException`. For more information, see
+    #   [StartMergeCases][4].
+    #
+    # **Endpoints**: See [Connect Customer endpoints and quotas][5].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#cases-quotas
     # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
     # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/case-fields.html#system-case-fields
-    # [4]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
+    # [4]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_StartMergeCases.html
+    # [5]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
     #
     # @option params [required, String] :domain_id
     #   The unique identifier of the Cases domain.
@@ -3989,7 +4232,7 @@ module Aws::ConnectCases
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -73,7 +73,7 @@ module Aws::HealthLake
   autoload :AsyncClient, 'aws-sdk-healthlake/async_client'
   autoload :EventStreams, 'aws-sdk-healthlake/event_streams'
 
-  GEM_VERSION = '1.81.0'
+  GEM_VERSION = '1.82.0'
 
 end
 

@@ -1472,6 +1472,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor custom_claims: ::Array[Types::CustomClaimValidationType]
       attr_accessor private_endpoint: Types::PrivateEndpoint
       attr_accessor private_endpoint_overrides: ::Array[Types::PrivateEndpointOverride]
+      attr_accessor certificate_configurations: ::Array[Types::CertificateConfiguration]
       attr_accessor allowed_workload_configuration: Types::AllowedWorkloadConfiguration
       SENSITIVE: []
     end
@@ -1498,6 +1499,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor private_key_jwt_config: Types::PrivateKeyJwtConfig
       attr_accessor private_endpoint: Types::PrivateEndpoint
       attr_accessor private_endpoint_overrides: ::Array[Types::PrivateEndpointOverride]
+      attr_accessor certificate_configurations: ::Array[Types::CertificateConfiguration]
       SENSITIVE: [:client_secret]
     end
 
@@ -1508,6 +1510,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor client_authentication_method: ("CLIENT_SECRET_BASIC" | "CLIENT_SECRET_POST" | "AWS_IAM_ID_TOKEN_JWT" | "PRIVATE_KEY_JWT")
       attr_accessor private_endpoint: Types::PrivateEndpoint
       attr_accessor private_endpoint_overrides: ::Array[Types::PrivateEndpointOverride]
+      attr_accessor certificate_configurations: ::Array[Types::CertificateConfiguration]
       attr_accessor private_key_jwt_config: Types::PrivateKeyJwtConfig
       SENSITIVE: []
     end
@@ -3416,7 +3419,22 @@ module Aws::BedrockAgentCoreControl
     class HarnessRemoteMcpConfig
       attr_accessor url: ::String
       attr_accessor headers: ::Hash[::String, ::String]
+      attr_accessor outbound_auth: Types::HarnessRemoteMcpOutboundAuth
       SENSITIVE: [:url, :headers]
+    end
+
+    class HarnessRemoteMcpOutboundAuth
+      attr_accessor aws_iam: Types::IamCredentialProvider
+      attr_accessor none: Types::Unit
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AwsIam < HarnessRemoteMcpOutboundAuth
+      end
+      class None < HarnessRemoteMcpOutboundAuth
+      end
+      class Unknown < HarnessRemoteMcpOutboundAuth
+      end
     end
 
     class HarnessSkill

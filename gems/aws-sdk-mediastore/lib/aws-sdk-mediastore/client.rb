@@ -1260,7 +1260,7 @@ module Aws::MediaStore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediastore'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

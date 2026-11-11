@@ -9023,8 +9023,8 @@ module Aws::EC2
     #
     # @option params [String] :traffic_type
     #   The type of traffic to monitor (accepted traffic, rejected traffic, or
-    #   all traffic). This parameter is not supported for transit gateway
-    #   resource types. It is required for the other resource types.
+    #   all traffic). This parameter is not supported for transit gateway or
+    #   Cloud WAN resource types. It is required for the other resource types.
     #
     # @option params [String] :log_destination_type
     #   The type of destination for the flow log data.
@@ -9061,8 +9061,9 @@ module Aws::EC2
     #   flow log is created using the default format. If you specify this
     #   parameter, you must include at least one field. For more information
     #   about the available fields, see [Flow log records][1] in the *Amazon
-    #   VPC User Guide* or [Transit Gateway Flow Log records][2] in the
-    #   *Amazon Web Services Transit Gateway Guide*.
+    #   VPC User Guide*, [Transit Gateway Flow Log records][2] in the *Amazon
+    #   Web Services Transit Gateway Guide*, or [Cloud WAN Flow Log
+    #   records][3] in the *Amazon Web Services Cloud WAN User Guide*.
     #
     #   Specify the fields using the `${field-id}` format, separated by
     #   spaces.
@@ -9071,6 +9072,7 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html
     #   [2]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-flow-logs.html#flow-log-records
+    #   [3]: https://docs.aws.amazon.com/network-manager/latest/cloudwan/cwan-flow-logs.html
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the flow logs.
@@ -9079,7 +9081,7 @@ module Aws::EC2
     #   The maximum interval of time during which a flow of packets is
     #   captured and aggregated into a flow log record. The possible values
     #   are 60 seconds (1 minute) or 600 seconds (10 minutes). This parameter
-    #   must be 60 seconds for transit gateway resource types.
+    #   must be 60 seconds for transit gateway and Cloud WAN resource types.
     #
     #   When a network interface is attached to a [Nitro-based instance][1],
     #   the aggregation interval is always 60 seconds or less, regardless of
@@ -9113,7 +9115,7 @@ module Aws::EC2
     #     deliver_cross_account_role: "String",
     #     log_group_name: "String",
     #     resource_ids: ["FlowLogResourceId"], # required
-    #     resource_type: "VPC", # required, accepts VPC, Subnet, NetworkInterface, TransitGateway, TransitGatewayAttachment, RegionalNatGateway
+    #     resource_type: "VPC", # required, accepts VPC, Subnet, NetworkInterface, TransitGateway, TransitGatewayAttachment, RegionalNatGateway, CoreNetwork, CoreNetworkEdge, CoreNetworkAttachment
     #     traffic_type: "ACCEPT", # accepts ACCEPT, REJECT, ALL
     #     log_destination_type: "cloud-watch-logs", # accepts cloud-watch-logs, s3, kinesis-data-firehose
     #     log_destination: "String",
@@ -55733,7 +55735,8 @@ module Aws::EC2
     #   started quickly
     #
     # <note markdown="1"> `GetFlowLogsIntegrationTemplate` does not support integration between
-    # Amazon Web Services Transit Gateway Flow Logs and Amazon Athena.
+    # Amazon Web Services Transit Gateway Flow Logs or Amazon Web Services
+    # Cloud WAN Flow Logs and Amazon Athena.
     #
     #  </note>
     #
@@ -78633,7 +78636,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.667.0'
+      context[:gem_version] = '1.668.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

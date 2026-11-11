@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2026-11-11)
+------------------
+
+* Feature - Support SigV4 request signing (cryptographically signed) in the Bedrock AgentCore Harness MCP connector tool.
+
 1.68.0 (2026-11-10)
 ------------------
 

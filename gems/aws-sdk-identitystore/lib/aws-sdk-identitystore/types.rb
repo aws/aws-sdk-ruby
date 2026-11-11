@@ -1869,9 +1869,9 @@ module Aws::IdentityStore
     #   @return [Boolean]
     #
     # @!attribute [rw] api_restrict_source_vpcs
-    #   A list of virtual private cloud (VPC) IDs that are allowed to access
-    #   the identity store API operations. A request is denied unless it
-    #   originates from a VPC in this list, or from an IP address in
+    #   A list of virtual private cloud (VPC) ARNs that are allowed to
+    #   access the identity store API operations. A request is denied unless
+    #   it originates from a VPC in this list, or from an IP address in
     #   `ApiAllowSourceIps` if you specified one. If you don't specify a
     #   value, access isn't restricted to specific VPCs, but the VPC
     #   endpoint requirement set by `VpceAccessRequired` still applies.
@@ -1922,9 +1922,9 @@ module Aws::IdentityStore
     #   @return [Boolean]
     #
     # @!attribute [rw] api_restrict_source_vpcs
-    #   A list of virtual private cloud (VPC) IDs that are allowed to access
-    #   the identity store API operations. A request is denied unless it
-    #   originates from a VPC in this list, or from an IP address in
+    #   A list of virtual private cloud (VPC) ARNs that are allowed to
+    #   access the identity store API operations. A request is denied unless
+    #   it originates from a VPC in this list, or from an IP address in
     #   `ApiAllowSourceIps` if one is configured. If this field is empty,
     #   access isn't restricted to specific VPCs, but the VPC endpoint
     #   requirement from `VpceAccessRequired` still applies.

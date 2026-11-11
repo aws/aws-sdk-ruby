@@ -1948,8 +1948,8 @@ module Aws::ServiceCatalog
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "servicecatalog",
         "jsonVersion" => "1.1",
-        "protocol" => "json",
-        "protocols" => ["json"],
+        "protocol" => "smithy-rpc-v2-cbor",
+        "protocols" => ["smithy-rpc-v2-cbor", "json"],
         "serviceFullName" => "AWS Service Catalog",
         "serviceId" => "Service Catalog",
         "signatureVersion" => "v4",
@@ -2681,6 +2681,12 @@ module Aws::ServiceCatalog
         o.output = Shapes::ShapeRef.new(shape: ListProvisionedProductPlansOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "page_token"
+          }
+        )
       end)
 
       api.add_operation(:list_provisioning_artifacts, Seahorse::Model::Operation.new.tap do |o|
@@ -2716,6 +2722,12 @@ module Aws::ServiceCatalog
         o.input = Shapes::ShapeRef.new(shape: ListRecordHistoryInput)
         o.output = Shapes::ShapeRef.new(shape: ListRecordHistoryOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "page_token"
+          }
+        )
       end)
 
       api.add_operation(:list_resources_for_tag_option, Seahorse::Model::Operation.new.tap do |o|
@@ -2774,6 +2786,12 @@ module Aws::ServiceCatalog
         o.output = Shapes::ShapeRef.new(shape: ListStackInstancesForProvisionedProductOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "page_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tag_options, Seahorse::Model::Operation.new.tap do |o|
@@ -2849,6 +2867,12 @@ module Aws::ServiceCatalog
         o.input = Shapes::ShapeRef.new(shape: ScanProvisionedProductsInput)
         o.output = Shapes::ShapeRef.new(shape: ScanProvisionedProductsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "page_token"
+          }
+        )
       end)
 
       api.add_operation(:search_products, Seahorse::Model::Operation.new.tap do |o|

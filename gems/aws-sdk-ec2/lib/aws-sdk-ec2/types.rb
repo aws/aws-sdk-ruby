@@ -11926,7 +11926,8 @@ module Aws::EC2
     # @!attribute [rw] traffic_type
     #   The type of traffic to monitor (accepted traffic, rejected traffic,
     #   or all traffic). This parameter is not supported for transit gateway
-    #   resource types. It is required for the other resource types.
+    #   or Cloud WAN resource types. It is required for the other resource
+    #   types.
     #   @return [String]
     #
     # @!attribute [rw] log_destination_type
@@ -11966,8 +11967,9 @@ module Aws::EC2
     #   flow log is created using the default format. If you specify this
     #   parameter, you must include at least one field. For more information
     #   about the available fields, see [Flow log records][1] in the *Amazon
-    #   VPC User Guide* or [Transit Gateway Flow Log records][2] in the
-    #   *Amazon Web Services Transit Gateway Guide*.
+    #   VPC User Guide*, [Transit Gateway Flow Log records][2] in the
+    #   *Amazon Web Services Transit Gateway Guide*, or [Cloud WAN Flow Log
+    #   records][3] in the *Amazon Web Services Cloud WAN User Guide*.
     #
     #   Specify the fields using the `${field-id}` format, separated by
     #   spaces.
@@ -11976,6 +11978,7 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html
     #   [2]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-flow-logs.html#flow-log-records
+    #   [3]: https://docs.aws.amazon.com/network-manager/latest/cloudwan/cwan-flow-logs.html
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
@@ -11986,7 +11989,8 @@ module Aws::EC2
     #   The maximum interval of time during which a flow of packets is
     #   captured and aggregated into a flow log record. The possible values
     #   are 60 seconds (1 minute) or 600 seconds (10 minutes). This
-    #   parameter must be 60 seconds for transit gateway resource types.
+    #   parameter must be 60 seconds for transit gateway and Cloud WAN
+    #   resource types.
     #
     #   When a network interface is attached to a [Nitro-based instance][1],
     #   the aggregation interval is always 60 seconds or less, regardless of

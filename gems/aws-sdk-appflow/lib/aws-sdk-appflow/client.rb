@@ -3389,7 +3389,7 @@ module Aws::Appflow
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

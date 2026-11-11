@@ -5210,13 +5210,48 @@ module Aws::BedrockAgentCore
     #   Custom headers to include when connecting to the remote MCP server.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] outbound_auth
+    #   How the harness authenticates to this MCP server. Defaults to no
+    #   authentication.
+    #   @return [Types::HarnessRemoteMcpOutboundAuth]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/HarnessRemoteMcpConfig AWS API Documentation
     #
     class HarnessRemoteMcpConfig < Struct.new(
       :url,
-      :headers)
+      :headers,
+      :outbound_auth)
       SENSITIVE = [:url, :headers]
       include Aws::Structure
+    end
+
+    # Authentication method for calling a remote MCP server.
+    #
+    # @note HarnessRemoteMcpOutboundAuth is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] aws_iam
+    #   Sign requests to the remote MCP server with Signature Version 4
+    #   (SigV4) using the harness execution role. If you don't specify a
+    #   Region, the harness Region is used.
+    #   @return [Types::IamCredentialProvider]
+    #
+    # @!attribute [rw] none
+    #   No authentication.
+    #   @return [Types::Unit]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/HarnessRemoteMcpOutboundAuth AWS API Documentation
+    #
+    class HarnessRemoteMcpOutboundAuth < Struct.new(
+      :aws_iam,
+      :none,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AwsIam < HarnessRemoteMcpOutboundAuth; end
+      class None < HarnessRemoteMcpOutboundAuth; end
+      class Unknown < HarnessRemoteMcpOutboundAuth; end
     end
 
     # A skill available to the agent.
@@ -5662,6 +5697,31 @@ module Aws::BedrockAgentCore
       :name,
       :type,
       :server_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An IAM credential provider for authenticating requests. This structure
+    # contains the configuration for authenticating with a target endpoint
+    # using IAM credentials and SigV4 signing.
+    #
+    # @!attribute [rw] service
+    #   The name of the Amazon Web Services service used for SigV4 signing.
+    #   This value identifies the service to authenticate with when sending
+    #   requests to the target endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region used for SigV4 signing. If not
+    #   specified, defaults to the Region of the resource that makes the
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/IamCredentialProvider AWS API Documentation
+    #
+    class IamCredentialProvider < Struct.new(
+      :service,
+      :region)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -2575,7 +2575,7 @@ module Aws::EC2
       attr_accessor deliver_cross_account_role: ::String
       attr_accessor log_group_name: ::String
       attr_accessor resource_ids: ::Array[::String]
-      attr_accessor resource_type: ("VPC" | "Subnet" | "NetworkInterface" | "TransitGateway" | "TransitGatewayAttachment" | "RegionalNatGateway")
+      attr_accessor resource_type: ("VPC" | "Subnet" | "NetworkInterface" | "TransitGateway" | "TransitGatewayAttachment" | "RegionalNatGateway" | "CoreNetwork" | "CoreNetworkEdge" | "CoreNetworkAttachment")
       attr_accessor traffic_type: ("ACCEPT" | "REJECT" | "ALL")
       attr_accessor log_destination_type: ("cloud-watch-logs" | "s3" | "kinesis-data-firehose")
       attr_accessor log_destination: ::String

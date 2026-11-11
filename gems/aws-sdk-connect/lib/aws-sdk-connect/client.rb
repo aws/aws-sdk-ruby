@@ -3789,7 +3789,7 @@ module Aws::Connect
     #       contact_interaction_type: "AGENT", # required, accepts AGENT, AUTOMATED, CUSTOMER
     #     },
     #     language_configuration: {
-    #       form_language: "de-DE", # accepts de-DE, en-US, es-ES, fr-FR, it-IT, pt-BR, ja-JP, ko-KR, zh-CN, ms-MY
+    #       form_language: "de-DE", # accepts de-DE, en-US, es-ES, fr-FR, it-IT, pt-BR, ja-JP, ko-KR, zh-CN, ms-MY, af-ZA, sq-AL, am-ET, ar-AE, ar-SA, hy-AM, eu-ES, be-BY, bs-BA, bg-BG, ca-ES, ckb-IR, ckb-IQ, zh-TW, hr-HR, cs-CZ, da-DK, nl-BE, nl-NL, en-AU, en-IN, en-IE, en-NZ, en-AB, en-SG, en-ZA, en-GB, en-WL, fa-IR, fa-AF, fi-FI, fr-BE, fr-CA, ga-IE, gl-ES, ka-GE, de-AT, de-CH, el-GR, gu-IN, ht-HT, he-IL, hi-IN, hu-HU, is-IS, id-ID, jv-ID, km-KH, kn-IN, kk-KZ, lo-LA, lv-LV, lt-LT, mk-MK, ml-IN, mr-IN, ne-NP, no-NO, or-IN, ps-AF, pl-PL, pt-PT, pa-IN, ro-RO, ru-RU, sr-RS, si-LK, sk-SK, sl-SI, es-MX, es-US, su-ID, sw-BI, sw-KE, sw-RW, sw-TZ, sw-UG, sv-SE, tl-PH, ta-IN, te-IN, th-TH, tr-TR, uk-UA, uz-UZ, vi-VN, zu-ZA, my-MM, so-SO, yue-HK, et-EE, hmn, lg-UG, cy-GB, xh-ZA, bn-BD
     #     },
     #     ai_version: "EvaluationFormAIVersion",
     #   })
@@ -8707,7 +8707,7 @@ module Aws::Connect
     #   resp.evaluation_form.scoring_strategy.score_thresholds[0].max_score_percentage #=> Float
     #   resp.evaluation_form.auto_evaluation_configuration.enabled #=> Boolean
     #   resp.evaluation_form.target_configuration.contact_interaction_type #=> String, one of "AGENT", "AUTOMATED", "CUSTOMER"
-    #   resp.evaluation_form.language_configuration.form_language #=> String, one of "de-DE", "en-US", "es-ES", "fr-FR", "it-IT", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "ms-MY"
+    #   resp.evaluation_form.language_configuration.form_language #=> String, one of "de-DE", "en-US", "es-ES", "fr-FR", "it-IT", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "ms-MY", "af-ZA", "sq-AL", "am-ET", "ar-AE", "ar-SA", "hy-AM", "eu-ES", "be-BY", "bs-BA", "bg-BG", "ca-ES", "ckb-IR", "ckb-IQ", "zh-TW", "hr-HR", "cs-CZ", "da-DK", "nl-BE", "nl-NL", "en-AU", "en-IN", "en-IE", "en-NZ", "en-AB", "en-SG", "en-ZA", "en-GB", "en-WL", "fa-IR", "fa-AF", "fi-FI", "fr-BE", "fr-CA", "ga-IE", "gl-ES", "ka-GE", "de-AT", "de-CH", "el-GR", "gu-IN", "ht-HT", "he-IL", "hi-IN", "hu-HU", "is-IS", "id-ID", "jv-ID", "km-KH", "kn-IN", "kk-KZ", "lo-LA", "lv-LV", "lt-LT", "mk-MK", "ml-IN", "mr-IN", "ne-NP", "no-NO", "or-IN", "ps-AF", "pl-PL", "pt-PT", "pa-IN", "ro-RO", "ru-RU", "sr-RS", "si-LK", "sk-SK", "sl-SI", "es-MX", "es-US", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "sv-SE", "tl-PH", "ta-IN", "te-IN", "th-TH", "tr-TR", "uk-UA", "uz-UZ", "vi-VN", "zu-ZA", "my-MM", "so-SO", "yue-HK", "et-EE", "hmn", "lg-UG", "cy-GB", "xh-ZA", "bn-BD"
     #   resp.evaluation_form.review_configuration.review_notification_recipients #=> Array
     #   resp.evaluation_form.review_configuration.review_notification_recipients[0].type #=> String, one of "USER_ID"
     #   resp.evaluation_form.review_configuration.review_notification_recipients[0].value.user_id #=> String
@@ -9258,7 +9258,7 @@ module Aws::Connect
     #   resp.evaluation_form.tags #=> Hash
     #   resp.evaluation_form.tags["TagKey"] #=> String
     #   resp.evaluation_form.target_configuration.contact_interaction_type #=> String, one of "AGENT", "AUTOMATED", "CUSTOMER"
-    #   resp.evaluation_form.language_configuration.form_language #=> String, one of "de-DE", "en-US", "es-ES", "fr-FR", "it-IT", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "ms-MY"
+    #   resp.evaluation_form.language_configuration.form_language #=> String, one of "de-DE", "en-US", "es-ES", "fr-FR", "it-IT", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "ms-MY", "af-ZA", "sq-AL", "am-ET", "ar-AE", "ar-SA", "hy-AM", "eu-ES", "be-BY", "bs-BA", "bg-BG", "ca-ES", "ckb-IR", "ckb-IQ", "zh-TW", "hr-HR", "cs-CZ", "da-DK", "nl-BE", "nl-NL", "en-AU", "en-IN", "en-IE", "en-NZ", "en-AB", "en-SG", "en-ZA", "en-GB", "en-WL", "fa-IR", "fa-AF", "fi-FI", "fr-BE", "fr-CA", "ga-IE", "gl-ES", "ka-GE", "de-AT", "de-CH", "el-GR", "gu-IN", "ht-HT", "he-IL", "hi-IN", "hu-HU", "is-IS", "id-ID", "jv-ID", "km-KH", "kn-IN", "kk-KZ", "lo-LA", "lv-LV", "lt-LT", "mk-MK", "ml-IN", "mr-IN", "ne-NP", "no-NO", "or-IN", "ps-AF", "pl-PL", "pt-PT", "pa-IN", "ro-RO", "ru-RU", "sr-RS", "si-LK", "sk-SK", "sl-SI", "es-MX", "es-US", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "sv-SE", "tl-PH", "ta-IN", "te-IN", "th-TH", "tr-TR", "uk-UA", "uz-UZ", "vi-VN", "zu-ZA", "my-MM", "so-SO", "yue-HK", "et-EE", "hmn", "lg-UG", "cy-GB", "xh-ZA", "bn-BD"
     #   resp.evaluation_form.latest_validation_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.evaluation_form.last_validation_time #=> Time
     #   resp.evaluation_form.ai_version #=> String
@@ -22413,7 +22413,7 @@ module Aws::Connect
     #   resp.evaluation_form_search_summary_list[0].latest_version #=> Integer
     #   resp.evaluation_form_search_summary_list[0].active_version #=> Integer
     #   resp.evaluation_form_search_summary_list[0].auto_evaluation_enabled #=> Boolean
-    #   resp.evaluation_form_search_summary_list[0].evaluation_form_language #=> String, one of "de-DE", "en-US", "es-ES", "fr-FR", "it-IT", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "ms-MY"
+    #   resp.evaluation_form_search_summary_list[0].evaluation_form_language #=> String, one of "de-DE", "en-US", "es-ES", "fr-FR", "it-IT", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "ms-MY", "af-ZA", "sq-AL", "am-ET", "ar-AE", "ar-SA", "hy-AM", "eu-ES", "be-BY", "bs-BA", "bg-BG", "ca-ES", "ckb-IR", "ckb-IQ", "zh-TW", "hr-HR", "cs-CZ", "da-DK", "nl-BE", "nl-NL", "en-AU", "en-IN", "en-IE", "en-NZ", "en-AB", "en-SG", "en-ZA", "en-GB", "en-WL", "fa-IR", "fa-AF", "fi-FI", "fr-BE", "fr-CA", "ga-IE", "gl-ES", "ka-GE", "de-AT", "de-CH", "el-GR", "gu-IN", "ht-HT", "he-IL", "hi-IN", "hu-HU", "is-IS", "id-ID", "jv-ID", "km-KH", "kn-IN", "kk-KZ", "lo-LA", "lv-LV", "lt-LT", "mk-MK", "ml-IN", "mr-IN", "ne-NP", "no-NO", "or-IN", "ps-AF", "pl-PL", "pt-PT", "pa-IN", "ro-RO", "ru-RU", "sr-RS", "si-LK", "sk-SK", "sl-SI", "es-MX", "es-US", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "sv-SE", "tl-PH", "ta-IN", "te-IN", "th-TH", "tr-TR", "uk-UA", "uz-UZ", "vi-VN", "zu-ZA", "my-MM", "so-SO", "yue-HK", "et-EE", "hmn", "lg-UG", "cy-GB", "xh-ZA", "bn-BD"
     #   resp.evaluation_form_search_summary_list[0].contact_interaction_type #=> String, one of "AGENT", "AUTOMATED", "CUSTOMER"
     #   resp.evaluation_form_search_summary_list[0].tags #=> Hash
     #   resp.evaluation_form_search_summary_list[0].tags["TagKey"] #=> String
@@ -29458,7 +29458,7 @@ module Aws::Connect
     #       contact_interaction_type: "AGENT", # required, accepts AGENT, AUTOMATED, CUSTOMER
     #     },
     #     language_configuration: {
-    #       form_language: "de-DE", # accepts de-DE, en-US, es-ES, fr-FR, it-IT, pt-BR, ja-JP, ko-KR, zh-CN, ms-MY
+    #       form_language: "de-DE", # accepts de-DE, en-US, es-ES, fr-FR, it-IT, pt-BR, ja-JP, ko-KR, zh-CN, ms-MY, af-ZA, sq-AL, am-ET, ar-AE, ar-SA, hy-AM, eu-ES, be-BY, bs-BA, bg-BG, ca-ES, ckb-IR, ckb-IQ, zh-TW, hr-HR, cs-CZ, da-DK, nl-BE, nl-NL, en-AU, en-IN, en-IE, en-NZ, en-AB, en-SG, en-ZA, en-GB, en-WL, fa-IR, fa-AF, fi-FI, fr-BE, fr-CA, ga-IE, gl-ES, ka-GE, de-AT, de-CH, el-GR, gu-IN, ht-HT, he-IL, hi-IN, hu-HU, is-IS, id-ID, jv-ID, km-KH, kn-IN, kk-KZ, lo-LA, lv-LV, lt-LT, mk-MK, ml-IN, mr-IN, ne-NP, no-NO, or-IN, ps-AF, pl-PL, pt-PT, pa-IN, ro-RO, ru-RU, sr-RS, si-LK, sk-SK, sl-SI, es-MX, es-US, su-ID, sw-BI, sw-KE, sw-RW, sw-TZ, sw-UG, sv-SE, tl-PH, ta-IN, te-IN, th-TH, tr-TR, uk-UA, uz-UZ, vi-VN, zu-ZA, my-MM, so-SO, yue-HK, et-EE, hmn, lg-UG, cy-GB, xh-ZA, bn-BD
     #     },
     #     ai_version: "EvaluationFormAIVersion",
     #   })
@@ -32511,7 +32511,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.297.0'
+      context[:gem_version] = '1.298.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

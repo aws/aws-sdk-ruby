@@ -345,6 +345,7 @@ module Aws::BedrockAgentCore
     HarnessReasoningContentBlockDelta = Shapes::UnionShape.new(name: 'HarnessReasoningContentBlockDelta')
     HarnessReasoningTextBlock = Shapes::StructureShape.new(name: 'HarnessReasoningTextBlock')
     HarnessRemoteMcpConfig = Shapes::StructureShape.new(name: 'HarnessRemoteMcpConfig')
+    HarnessRemoteMcpOutboundAuth = Shapes::UnionShape.new(name: 'HarnessRemoteMcpOutboundAuth')
     HarnessRemoteMcpUrl = Shapes::StringShape.new(name: 'HarnessRemoteMcpUrl')
     HarnessSkill = Shapes::UnionShape.new(name: 'HarnessSkill')
     HarnessSkillAwsSkillsSource = Shapes::StructureShape.new(name: 'HarnessSkillAwsSkillsSource')
@@ -388,6 +389,9 @@ module Aws::BedrockAgentCore
     HttpHeaderValue = Shapes::StringShape.new(name: 'HttpHeaderValue')
     HttpHeadersMap = Shapes::MapShape.new(name: 'HttpHeadersMap')
     HttpResponseCode = Shapes::IntegerShape.new(name: 'HttpResponseCode')
+    IamCredentialProvider = Shapes::StructureShape.new(name: 'IamCredentialProvider')
+    IamCredentialProviderRegionString = Shapes::StringShape.new(name: 'IamCredentialProviderRegionString')
+    IamCredentialProviderServiceString = Shapes::StringShape.new(name: 'IamCredentialProviderServiceString')
     IgnoredReferenceInputField = Shapes::StringShape.new(name: 'IgnoredReferenceInputField')
     IgnoredReferenceInputFields = Shapes::ListShape.new(name: 'IgnoredReferenceInputFields')
     IngestDataInput = Shapes::StructureShape.new(name: 'IngestDataInput')
@@ -2042,7 +2046,16 @@ module Aws::BedrockAgentCore
 
     HarnessRemoteMcpConfig.add_member(:url, Shapes::ShapeRef.new(shape: HarnessRemoteMcpUrl, required: true, location_name: "url"))
     HarnessRemoteMcpConfig.add_member(:headers, Shapes::ShapeRef.new(shape: HttpHeadersMap, location_name: "headers"))
+    HarnessRemoteMcpConfig.add_member(:outbound_auth, Shapes::ShapeRef.new(shape: HarnessRemoteMcpOutboundAuth, location_name: "outboundAuth"))
     HarnessRemoteMcpConfig.struct_class = Types::HarnessRemoteMcpConfig
+
+    HarnessRemoteMcpOutboundAuth.add_member(:aws_iam, Shapes::ShapeRef.new(shape: IamCredentialProvider, location_name: "awsIam"))
+    HarnessRemoteMcpOutboundAuth.add_member(:none, Shapes::ShapeRef.new(shape: Unit, location_name: "none"))
+    HarnessRemoteMcpOutboundAuth.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    HarnessRemoteMcpOutboundAuth.add_member_subclass(:aws_iam, Types::HarnessRemoteMcpOutboundAuth::AwsIam)
+    HarnessRemoteMcpOutboundAuth.add_member_subclass(:none, Types::HarnessRemoteMcpOutboundAuth::None)
+    HarnessRemoteMcpOutboundAuth.add_member_subclass(:unknown, Types::HarnessRemoteMcpOutboundAuth::Unknown)
+    HarnessRemoteMcpOutboundAuth.struct_class = Types::HarnessRemoteMcpOutboundAuth
 
     HarnessSkill.add_member(:path, Shapes::ShapeRef.new(shape: HarnessSkillPath, location_name: "path"))
     HarnessSkill.add_member(:s3, Shapes::ShapeRef.new(shape: HarnessSkillS3Source, location_name: "s3"))
@@ -2163,6 +2176,10 @@ module Aws::BedrockAgentCore
 
     HttpHeadersMap.key = Shapes::ShapeRef.new(shape: HttpHeaderKey)
     HttpHeadersMap.value = Shapes::ShapeRef.new(shape: HttpHeaderValue)
+
+    IamCredentialProvider.add_member(:service, Shapes::ShapeRef.new(shape: IamCredentialProviderServiceString, required: true, location_name: "service"))
+    IamCredentialProvider.add_member(:region, Shapes::ShapeRef.new(shape: IamCredentialProviderRegionString, location_name: "region"))
+    IamCredentialProvider.struct_class = Types::IamCredentialProvider
 
     IgnoredReferenceInputFields.member = Shapes::ShapeRef.new(shape: IgnoredReferenceInputField)
 

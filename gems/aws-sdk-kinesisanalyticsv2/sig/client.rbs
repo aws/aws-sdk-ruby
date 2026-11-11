@@ -241,7 +241,8 @@ module Aws
                                     code_content_type: ("PLAINTEXT" | "ZIPFILE")
                                   }?,
                                   application_snapshot_configuration: {
-                                    snapshots_enabled: bool
+                                    snapshots_enabled: bool,
+                                    snapshot_mode: ("APPLICATION_SNAPSHOTS_LEGACY" | "ENHANCED_SNAPSHOTS")?
                                   }?,
                                   application_system_rollback_configuration: {
                                     rollback_enabled: bool
@@ -312,6 +313,27 @@ module Aws
                                          snapshot_name: ::String
                                        ) -> _CreateApplicationSnapshotResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationSnapshotResponseSuccess
+
+      interface _CreateSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSnapshotResponse]
+        def snapshot_arn: () -> ::String
+        def snapshot_status: () -> ("CREATING" | "READY" | "DELETING" | "FAILED")
+        def snapshot_operation_id: () -> ::String
+        def snapshot_operation_status: () -> ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "CANCELLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#create_snapshot-instance_method
+      def create_snapshot: (
+                             application_name: ::String,
+                             snapshot_name: ::String,
+                             ?snapshot_description: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String?
+                               }
+                             ]
+                           ) -> _CreateSnapshotResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapshotResponseSuccess
 
       interface _DeleteApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApplicationResponse]
@@ -404,6 +426,20 @@ module Aws
                                                 ) -> _DeleteApplicationVpcConfigurationResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApplicationVpcConfigurationResponseSuccess
 
+      interface _DeleteSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSnapshotResponse]
+        def snapshot_arn: () -> ::String
+        def snapshot_status: () -> ("CREATING" | "READY" | "DELETING" | "FAILED")
+        def snapshot_operation_id: () -> ::String
+        def snapshot_operation_status: () -> ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "CANCELLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#delete_snapshot-instance_method
+      def delete_snapshot: (
+                             snapshot_name: ::String,
+                             snapshot_creation_timestamp: ::Time
+                           ) -> _DeleteSnapshotResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSnapshotResponseSuccess
+
       interface _DescribeApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApplicationResponse]
         def application_detail: () -> Types::ApplicationDetail
@@ -448,6 +484,27 @@ module Aws
                                         ) -> _DescribeApplicationVersionResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeApplicationVersionResponseSuccess
 
+      interface _DescribeSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSnapshotResponse]
+        def snapshot_info_details: () -> Types::SnapshotInfoDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#describe_snapshot-instance_method
+      def describe_snapshot: (
+                               snapshot_name: ::String
+                             ) -> _DescribeSnapshotResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSnapshotResponseSuccess
+
+      interface _DescribeSnapshotOperationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSnapshotOperationResponse]
+        def snapshot_operation_info_details: () -> Types::SnapshotOperationInfoDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#describe_snapshot_operation-instance_method
+      def describe_snapshot_operation: (
+                                         snapshot_name: ::String,
+                                         snapshot_operation_id: ::String
+                                       ) -> _DescribeSnapshotOperationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSnapshotOperationResponseSuccess
+
       interface _DiscoverInputSchemaResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DiscoverInputSchemaResponse]
         def input_schema: () -> Types::SourceSchema
@@ -473,6 +530,66 @@ module Aws
                                    }
                                  ) -> _DiscoverInputSchemaResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DiscoverInputSchemaResponseSuccess
+
+      interface _ExportSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportSnapshotResponse]
+        def snapshot_operation_id: () -> ::String
+        def snapshot_operation_status: () -> ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "CANCELLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#export_snapshot-instance_method
+      def export_snapshot: (
+                             snapshot_name: ::String,
+                             export_destination_configuration: {
+                               destination_type: ("S3"),
+                               export_role_arn: ::String,
+                               destination_encryption_configuration: {
+                                 key_id: ::String?,
+                                 key_type: ("AWS_OWNED_KEY" | "CUSTOMER_MANAGED_KEY")
+                               }?,
+                               destination_s3_prefix_location: {
+                                 bucket_arn: ::String,
+                                 key_prefix: ::String
+                               }
+                             }
+                           ) -> _ExportSnapshotResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportSnapshotResponseSuccess
+
+      interface _ImportSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportSnapshotResponse]
+        def snapshot_arn: () -> ::String
+        def snapshot_status: () -> ("CREATING" | "READY" | "DELETING" | "FAILED")
+        def snapshot_operation_id: () -> ::String
+        def snapshot_operation_status: () -> ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "CANCELLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#import_snapshot-instance_method
+      def import_snapshot: (
+                             snapshot_name: ::String,
+                             import_source_configuration: {
+                               source_type: ("S3"),
+                               import_role_arn: ::String,
+                               source_encryption_configuration: {
+                                 key_id: ::String?,
+                                 key_type: ("AWS_OWNED_KEY" | "CUSTOMER_MANAGED_KEY")
+                               }?,
+                               source_s3_prefix_location: {
+                                 bucket_arn: ::String,
+                                 key_prefix: ::String
+                               }
+                             },
+                             ?destination_encryption_configuration: {
+                               key_id: ::String?,
+                               key_type: ("AWS_OWNED_KEY" | "CUSTOMER_MANAGED_KEY")
+                             },
+                             ?snapshot_description: ::String,
+                             ?snapshot_format: ("CANONICAL"),
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String?
+                               }
+                             ]
+                           ) -> _ImportSnapshotResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportSnapshotResponseSuccess
 
       interface _ListApplicationOperationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationOperationsResponse]
@@ -527,6 +644,37 @@ module Aws
                              ) -> _ListApplicationsResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationsResponseSuccess
 
+      interface _ListSnapshotOperationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSnapshotOperationsResponse]
+        def snapshot_operation_info_list: () -> ::Array[Types::SnapshotOperationInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#list_snapshot_operations-instance_method
+      def list_snapshot_operations: (
+                                      snapshot_name: ::String,
+                                      ?snapshot_operation: ("CreateSnapshot" | "DeleteSnapshot" | "ImportSnapshot" | "ExportSnapshot" | "SystemCreateSnapshot"),
+                                      ?snapshot_operation_status: ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED" | "CANCELLED"),
+                                      ?limit: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListSnapshotOperationsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSnapshotOperationsResponseSuccess
+
+      interface _ListSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSnapshotsResponse]
+        def snapshot_info_list: () -> ::Array[Types::SnapshotInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisAnalyticsV2/Client.html#list_snapshots-instance_method
+      def list_snapshots: (
+                            ?source_application_name: ::String,
+                            ?snapshot_initiator: ("USER" | "SYSTEM"),
+                            ?snapshot_initiator_operation: ("CreateSnapshot" | "ImportSnapshot" | "SystemCreateSnapshot"),
+                            ?snapshot_status: ("CREATING" | "READY" | "DELETING" | "FAILED"),
+                            ?limit: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListSnapshotsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSnapshotsResponseSuccess
+
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
         def tags: () -> ::Array[Types::Tag]
@@ -570,7 +718,8 @@ module Aws
                                  ]?,
                                  application_restore_configuration: {
                                    application_restore_type: ("SKIP_RESTORE_FROM_SNAPSHOT" | "RESTORE_FROM_LATEST_SNAPSHOT" | "RESTORE_FROM_CUSTOM_SNAPSHOT"),
-                                   snapshot_name: ::String?
+                                   snapshot_name: ::String?,
+                                   snapshot_arn: ::String?
                                  }?
                                }
                              ) -> _StartApplicationResponseSuccess
@@ -724,7 +873,8 @@ module Aws
                                     ]
                                   }?,
                                   application_snapshot_configuration_update: {
-                                    snapshots_enabled_update: bool
+                                    snapshots_enabled_update: bool,
+                                    snapshot_mode_update: ("APPLICATION_SNAPSHOTS_LEGACY" | "ENHANCED_SNAPSHOTS")?
                                   }?,
                                   application_system_rollback_configuration_update: {
                                     rollback_enabled_update: bool
@@ -767,7 +917,8 @@ module Aws
                                   }?,
                                   application_restore_configuration: {
                                     application_restore_type: ("SKIP_RESTORE_FROM_SNAPSHOT" | "RESTORE_FROM_LATEST_SNAPSHOT" | "RESTORE_FROM_CUSTOM_SNAPSHOT"),
-                                    snapshot_name: ::String?
+                                    snapshot_name: ::String?,
+                                    snapshot_arn: ::String?
                                   }?
                                 },
                                 ?cloud_watch_logging_option_updates: Array[

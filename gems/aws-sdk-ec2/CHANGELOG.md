@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.668.0 (2026-11-11)
+------------------
+
+* Feature - Adds support for AWS Cloud WAN Flow Logs. The CreateFlowLogs API now accepts CoreNetwork, CoreNetworkEdge, and CoreNetworkAttachment resource types, enabling customers to capture information about IP traffic traversing their Cloud WAN core networks.
+
 1.667.0 (2026-11-10)
 ------------------
 

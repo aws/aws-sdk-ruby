@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.298.0 (2026-11-11)
+------------------
+
+* Feature - Added support for 96 new languages for AI-powered automated evaluations. Chat interactions support all 96 languages. Voice interactions support 57 languages, those with transcription available through post-call conversational analytics.
+
 1.297.0 (2026-11-10)
 ------------------
 

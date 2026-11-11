@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2026-11-11)
+------------------
+
+* Feature - This release adds support for Enhanced Snapshots in Amazon Managed Service for Apache Flink, enabling application state to be managed as a standalone resource that customers can export, import, and reuse across applications.
+
 1.106.0 (2026-11-10)
 ------------------
 

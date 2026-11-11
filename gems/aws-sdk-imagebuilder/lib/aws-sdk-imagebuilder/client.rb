@@ -5373,7 +5373,11 @@ module Aws::Imagebuilder
     #   the components that your account owns.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. Use the `nextToken`
@@ -5534,7 +5538,11 @@ module Aws::Imagebuilder
     #   option with the `version` filter.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. Use the `nextToken`
@@ -5673,7 +5681,11 @@ module Aws::Imagebuilder
     #   * `platform`
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. Use the `nextToken`
@@ -5757,7 +5769,11 @@ module Aws::Imagebuilder
     #   You can filter on `name` to streamline results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. Use the `nextToken`
@@ -5863,7 +5879,11 @@ module Aws::Imagebuilder
     #   * `version`
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. Use the `nextToken`
@@ -6019,7 +6039,11 @@ module Aws::Imagebuilder
     #   packages you want to list. The value must be a full build version ARN.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. Use the `nextToken`
@@ -6109,7 +6133,11 @@ module Aws::Imagebuilder
     #   * `version`
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. Use the `nextToken`
@@ -6266,7 +6294,11 @@ module Aws::Imagebuilder
     #   * `status`
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. Use the `nextToken`
@@ -6414,7 +6446,11 @@ module Aws::Imagebuilder
     #   * `platform`
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. Use the `nextToken`
@@ -6642,7 +6678,11 @@ module Aws::Imagebuilder
     #   listed.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. Use the `nextToken`
@@ -6847,7 +6887,11 @@ module Aws::Imagebuilder
     #   `version` filter.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. Use the `nextToken`
@@ -6964,7 +7008,11 @@ module Aws::Imagebuilder
     #   You can filter on `name` to streamline results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. Use the `nextToken`
@@ -7076,7 +7124,11 @@ module Aws::Imagebuilder
     #   response contains an empty list.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. Use the `nextToken`
@@ -7155,7 +7207,11 @@ module Aws::Imagebuilder
     # Retrieves the lifecycle runtime history for the specified resource.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. Use the `nextToken`
@@ -7240,7 +7296,11 @@ module Aws::Imagebuilder
     #   shown.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. Use the `nextToken`
@@ -7383,7 +7443,11 @@ module Aws::Imagebuilder
     # To send a response, call SendWorkflowStepAction.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. Use the `nextToken`
@@ -7459,7 +7523,11 @@ module Aws::Imagebuilder
     #   the workflows in your account.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. Use the `nextToken`
@@ -7546,7 +7614,11 @@ module Aws::Imagebuilder
     # specific image build version.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. Use the `nextToken`
@@ -7652,7 +7724,11 @@ module Aws::Imagebuilder
     # workflow that you specify in the request.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. Use the `nextToken`
@@ -7822,7 +7898,11 @@ module Aws::Imagebuilder
     #   with the `version` filter.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. Use the `nextToken`
@@ -9376,7 +9456,7 @@ module Aws::Imagebuilder
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.123.0'
+      context[:gem_version] = '1.124.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

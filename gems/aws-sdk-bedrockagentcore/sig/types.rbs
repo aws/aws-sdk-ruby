@@ -1566,7 +1566,22 @@ module Aws::BedrockAgentCore
     class HarnessRemoteMcpConfig
       attr_accessor url: ::String
       attr_accessor headers: ::Hash[::String, ::String]
+      attr_accessor outbound_auth: Types::HarnessRemoteMcpOutboundAuth
       SENSITIVE: [:url, :headers]
+    end
+
+    class HarnessRemoteMcpOutboundAuth
+      attr_accessor aws_iam: Types::IamCredentialProvider
+      attr_accessor none: Types::Unit
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AwsIam < HarnessRemoteMcpOutboundAuth
+      end
+      class None < HarnessRemoteMcpOutboundAuth
+      end
+      class Unknown < HarnessRemoteMcpOutboundAuth
+      end
     end
 
     class HarnessSkill
@@ -1733,6 +1748,12 @@ module Aws::BedrockAgentCore
       attr_accessor name: ::String
       attr_accessor type: ("tool_use" | "server_tool_use" | "mcp_tool_use")
       attr_accessor server_name: ::String
+      SENSITIVE: []
+    end
+
+    class IamCredentialProvider
+      attr_accessor service: ::String
+      attr_accessor region: ::String
       SENSITIVE: []
     end
 

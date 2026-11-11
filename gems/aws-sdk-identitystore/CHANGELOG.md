@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2026-11-11)
+------------------
+
+* Feature - Updated ApiRestrictSourceVpcs in NetworkConfiguration to accept VPC ARNs in addition to VPC IDs.
+
 1.84.0 (2026-11-10)
 ------------------
 

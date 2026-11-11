@@ -1730,7 +1730,7 @@ module Aws::CostOptimizationHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-costoptimizationhub'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

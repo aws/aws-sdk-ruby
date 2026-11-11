@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.168.0 (2026-11-11)
+------------------
+
+* Feature - AWS Config now supports connectors for Google Cloud. PutConnector accepts a Google Cloud connector configuration, and ListConnectors returns Google Cloud connector details.
+
 1.167.0 (2026-11-10)
 ------------------
 

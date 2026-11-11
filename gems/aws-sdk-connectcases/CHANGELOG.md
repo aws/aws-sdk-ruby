@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2026-11-11)
+------------------
+
+* Feature - This release adds APIs that allow customers to merge cases to consolidate case history, and get the status of an ongoing case merge operation.
+
 1.82.0 (2026-11-10)
 ------------------
 

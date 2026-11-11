@@ -4280,6 +4280,8 @@ module Aws::ServiceCatalog
     #   * {Types::ListProvisionedProductPlansOutput#provisioned_product_plans #provisioned_product_plans} => Array&lt;Types::ProvisionedProductPlanSummary&gt;
     #   * {Types::ListProvisionedProductPlansOutput#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_provisioned_product_plans({
@@ -4452,6 +4454,8 @@ module Aws::ServiceCatalog
     #
     #   * {Types::ListRecordHistoryOutput#record_details #record_details} => Array&lt;Types::RecordDetail&gt;
     #   * {Types::ListRecordHistoryOutput#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4689,6 +4693,8 @@ module Aws::ServiceCatalog
     #
     #   * {Types::ListStackInstancesForProvisionedProductOutput#stack_instances #stack_instances} => Array&lt;Types::StackInstance&gt;
     #   * {Types::ListStackInstancesForProvisionedProductOutput#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5149,6 +5155,8 @@ module Aws::ServiceCatalog
     #
     #   * {Types::ScanProvisionedProductsOutput#provisioned_products #provisioned_products} => Array&lt;Types::ProvisionedProductDetail&gt;
     #   * {Types::ScanProvisionedProductsOutput#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6385,7 +6393,7 @@ module Aws::ServiceCatalog
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.143.0'
+      context[:gem_version] = '1.144.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

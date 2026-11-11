@@ -34,7 +34,10 @@ module Aws::ConnectCases
     #
     #   Valid Values: `Case.Created` \| `Case.Updated` \|
     #   `RelatedItem.Created` \| `RelatedItem.Updated` \|
-    #   `RelatedItem.Deleted`
+    #   `RelatedItem.Deleted` \| `Case.Merged`
+    #
+    #   `Case.Merged` summarizes a merge on each of the two cases that took
+    #   part in it.
     #   @return [String]
     #
     # @!attribute [rw] related_item_type
@@ -53,6 +56,16 @@ module Aws::ConnectCases
     #   Information of the user which performed the audit.
     #   @return [Types::AuditEventPerformedBy]
     #
+    # @!attribute [rw] merge_metadata
+    #   Information about the merge that produced this audit event. Present
+    #   only on audit events produced by a merge. For more information, see
+    #   [StartMergeCases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_StartMergeCases.html
+    #   @return [Types::AuditMergeMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/AuditEvent AWS API Documentation
     #
     class AuditEvent < Struct.new(
@@ -61,7 +74,8 @@ module Aws::ConnectCases
       :related_item_type,
       :performed_time,
       :fields,
-      :performed_by)
+      :performed_by,
+      :merge_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -158,6 +172,32 @@ module Aws::ConnectCases
     class AuditEventPerformedBy < Struct.new(
       :user,
       :iam_principal_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the merge that produced an audit event.
+    #
+    # @!attribute [rw] merge_event_id
+    #   The unique identifier of the merge. All audit events produced by the
+    #   same merge, on both cases, have the same value. Use it to group the
+    #   changes that a merge made.
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_case_id
+    #   The unique identifier of the primary case of the merge.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_case_id
+    #   The unique identifier of the secondary case of the merge.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/AuditMergeMetadata AWS API Documentation
+    #
+    class AuditMergeMetadata < Struct.new(
+      :merge_event_id,
+      :primary_case_id,
+      :secondary_case_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2221,6 +2261,29 @@ module Aws::ConnectCases
       class Unknown < FieldValueUnion; end
     end
 
+    # Specifies the fields whose values to take from the secondary case when
+    # you merge cases.
+    #
+    # @!attribute [rw] field_ids
+    #   The fields whose values to take from the source case. Each field
+    #   must exist on the source case and must be a field that can be
+    #   merged. Don't list the same field more than once.
+    #   @return [Array<Types::FieldIdentifier>]
+    #
+    # @!attribute [rw] source_case_id
+    #   The unique identifier of the case to take the field values from.
+    #   This must be the secondary case.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/FieldsConfiguration AWS API Documentation
+    #
+    class FieldsConfiguration < Struct.new(
+      :field_ids,
+      :source_case_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that represents a content of an Connect Customer file
     # object.
     #
@@ -2621,6 +2684,46 @@ module Aws::ConnectCases
       :deleted,
       :created_time,
       :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_id
+    #   The unique identifier of the Cases domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] case_id
+    #   The unique identifier of the case. This can be the primary case or
+    #   the secondary case of a merge.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/GetMergeCasesStatusRequest AWS API Documentation
+    #
+    class GetMergeCasesStatusRequest < Struct.new(
+      :domain_id,
+      :case_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The merge status of the case.
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_case_id
+    #   The unique identifier of the primary case of the merge.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_case_ids
+    #   The unique identifiers of the secondary cases of the merge.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/GetMergeCasesStatusResponse AWS API Documentation
+    #
+    class GetMergeCasesStatusResponse < Struct.new(
+      :status,
+      :primary_case_id,
+      :secondary_case_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3496,6 +3599,42 @@ module Aws::ConnectCases
       class Unknown < RelatedItemUpdateContent; end
     end
 
+    # Specifies which types of related items to move from the secondary case
+    # to the primary case when you merge cases. Moved related items keep
+    # their related item ID, creator, association time, and tags.
+    #
+    # @!attribute [rw] comment
+    #   Whether to move Comment related items to the primary case.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] connect_case
+    #   Whether to move Case related items to the primary case. If the
+    #   primary case already links to the same case, the secondary case's
+    #   link is removed instead of moved.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] contact
+    #   Whether to move Contact related items to the primary case. If the
+    #   same contact is related to both cases, the primary case keeps its
+    #   related item and gets any tag keys that only the secondary case's
+    #   related item has.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] custom
+    #   Whether to move Custom related items to the primary case.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/RelatedItemsConfiguration AWS API Documentation
+    #
+    class RelatedItemsConfiguration < Struct.new(
+      :comment,
+      :connect_case,
+      :contact,
+      :custom)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Required rule type, used to indicate whether a field is required. In
     # the Connect Customer admin website, case rules are known as *case
     # field conditions*. For more information about case field conditions,
@@ -4081,6 +4220,88 @@ module Aws::ConnectCases
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] domain_id
+    #   The unique identifier of the Cases domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] case_id
+    #   The unique identifier of the primary case. The primary case remains
+    #   active and receives the merged field values and related items. The
+    #   cases can use different templates, and the primary case keeps its
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_case_ids
+    #   The unique identifier of the secondary case to merge into the
+    #   primary case. The secondary case is closed when the merge finishes.
+    #   Specify exactly one case ID.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] fields_configuration
+    #   The fields whose values to take from the secondary case. You can
+    #   only merge custom fields and the following system fields:
+    #   `assigned_queue`, `assigned_user`, `summary`, and `case_reason`. If
+    #   you select any other system field, the request fails with a
+    #   `ValidationException`.
+    #
+    #   For each field that can be merged, the merge works as follows:
+    #
+    #   * If you select the field, the primary case gets the secondary
+    #     case's value. If the secondary case's value is empty, the
+    #     primary case's value is cleared.
+    #
+    #   * If you don't select the field and the primary case has a value
+    #     for it, the primary case keeps its value.
+    #
+    #   * If you don't select the field and the primary case doesn't have
+    #     the field, or its value is empty, the primary case gets the
+    #     secondary case's value. This applies even when the field isn't
+    #     on the primary case's template.
+    #
+    #   Field values are read from both cases when the merge runs, so
+    #   changes that you make to the primary case after you start the merge
+    #   are taken into account.
+    #
+    #   Specify at most one entry, and set its `sourceCaseId` to the
+    #   secondary case ID.
+    #   @return [Array<Types::FieldsConfiguration>]
+    #
+    # @!attribute [rw] related_items_configuration
+    #   The types of related items to move from the secondary case to the
+    #   primary case. Related items of a type that you don't select, or set
+    #   to `false`, stay on the closed secondary case. If you omit this
+    #   parameter, no related items are moved.
+    #
+    #   File, SLA, and work plan related items are never moved. They stay on
+    #   the secondary case.
+    #   @return [Types::RelatedItemsConfiguration]
+    #
+    # @!attribute [rw] performed_by
+    #   The user who performed the merge. If you provide `userArn`, you must
+    #   also have [DescribeUser][1] permission on the ARN of that user.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
+    #   @return [Types::UserUnion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/StartMergeCasesRequest AWS API Documentation
+    #
+    class StartMergeCasesRequest < Struct.new(
+      :domain_id,
+      :case_id,
+      :secondary_case_ids,
+      :fields_configuration,
+      :related_items_configuration,
+      :performed_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/StartMergeCasesResponse AWS API Documentation
+    #
+    class StartMergeCasesResponse < Aws::EmptyStructure; end
 
     # A filter for tags. Only one value can be provided.
     #

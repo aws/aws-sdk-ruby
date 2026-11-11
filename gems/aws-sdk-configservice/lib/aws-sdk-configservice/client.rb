@@ -3728,6 +3728,9 @@ module Aws::ConfigService
     #   resp.connector.arn #=> String
     #   resp.connector.connector_configuration.azure.tenant_identifier #=> String
     #   resp.connector.connector_configuration.azure.client_identifier #=> String
+    #   resp.connector.connector_configuration.gcp.gcp_organization_id #=> String
+    #   resp.connector.connector_configuration.gcp.service_account_email #=> String
+    #   resp.connector.connector_configuration.gcp.workload_identity_pool_provider #=> String
     #   resp.connector.created_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetConnector AWS API Documentation
@@ -4344,7 +4347,7 @@ module Aws::ConfigService
     #   resp.configuration_recorder_summaries[0].name #=> String
     #   resp.configuration_recorder_summaries[0].service_principal #=> String
     #   resp.configuration_recorder_summaries[0].recording_scope #=> String, one of "INTERNAL", "PAID"
-    #   resp.configuration_recorder_summaries[0].provider #=> String, one of "AZURE"
+    #   resp.configuration_recorder_summaries[0].provider #=> String, one of "AZURE", "GCP"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListConfigurationRecorders AWS API Documentation
@@ -4480,8 +4483,10 @@ module Aws::ConfigService
     #   resp.connector_summaries #=> Array
     #   resp.connector_summaries[0].arn #=> String
     #   resp.connector_summaries[0].name #=> String
-    #   resp.connector_summaries[0].provider #=> String, one of "AZURE"
+    #   resp.connector_summaries[0].provider #=> String, one of "AZURE", "GCP"
     #   resp.connector_summaries[0].tenant_identifier #=> String
+    #   resp.connector_summaries[0].gcp_organization_id #=> String
+    #   resp.connector_summaries[0].service_account_email #=> String
     #   resp.connector_summaries[0].created_time #=> Time
     #   resp.next_token #=> String
     #
@@ -5401,6 +5406,11 @@ module Aws::ConfigService
     #       azure: {
     #         tenant_identifier: "AzureTenantIdentifier", # required
     #         client_identifier: "AzureClientIdentifier", # required
+    #       },
+    #       gcp: {
+    #         gcp_organization_id: "GcpOrganizationId",
+    #         service_account_email: "GcpServiceAccountEmail", # required
+    #         workload_identity_pool_provider: "GcpWorkloadIdentityPoolProvider", # required
     #       },
     #     },
     #     tags: [
@@ -6991,7 +7001,7 @@ module Aws::ConfigService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.167.0'
+      context[:gem_version] = '1.168.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

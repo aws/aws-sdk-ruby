@@ -28169,7 +28169,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.211.0'
+      context[:gem_version] = '1.212.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

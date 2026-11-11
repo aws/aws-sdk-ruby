@@ -2123,6 +2123,7 @@ module Aws::MediaPackageV2
     #           ],
     #         },
     #         compactness: "STANDARD", # accepts STANDARD, NONE
+    #         bandwidth_reporting_mode: "AVERAGE", # accepts AVERAGE, MAX
     #         audio_timeline_pattern: "NONE", # accepts NONE, PATTERNED
     #         subtitle_configuration: {
     #           ttml_configuration: {
@@ -2287,6 +2288,7 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].dvb_settings.error_metrics[0].reporting_url #=> String
     #   resp.dash_manifests[0].dvb_settings.error_metrics[0].probability #=> Integer
     #   resp.dash_manifests[0].compactness #=> String, one of "STANDARD", "NONE"
+    #   resp.dash_manifests[0].bandwidth_reporting_mode #=> String, one of "AVERAGE", "MAX"
     #   resp.dash_manifests[0].audio_timeline_pattern #=> String, one of "NONE", "PATTERNED"
     #   resp.dash_manifests[0].subtitle_configuration.ttml_configuration.ttml_profile #=> String, one of "IMSC_1", "EBU_TT_D_101"
     #   resp.dash_manifests[0].uri_path_type #=> String, one of "LEAF", "ROOT"
@@ -3312,6 +3314,7 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].dvb_settings.error_metrics[0].reporting_url #=> String
     #   resp.dash_manifests[0].dvb_settings.error_metrics[0].probability #=> Integer
     #   resp.dash_manifests[0].compactness #=> String, one of "STANDARD", "NONE"
+    #   resp.dash_manifests[0].bandwidth_reporting_mode #=> String, one of "AVERAGE", "MAX"
     #   resp.dash_manifests[0].audio_timeline_pattern #=> String, one of "NONE", "PATTERNED"
     #   resp.dash_manifests[0].subtitle_configuration.ttml_configuration.ttml_profile #=> String, one of "IMSC_1", "EBU_TT_D_101"
     #   resp.dash_manifests[0].uri_path_type #=> String, one of "LEAF", "ROOT"
@@ -5416,6 +5419,7 @@ module Aws::MediaPackageV2
     #           ],
     #         },
     #         compactness: "STANDARD", # accepts STANDARD, NONE
+    #         bandwidth_reporting_mode: "AVERAGE", # accepts AVERAGE, MAX
     #         audio_timeline_pattern: "NONE", # accepts NONE, PATTERNED
     #         subtitle_configuration: {
     #           ttml_configuration: {
@@ -5599,6 +5603,7 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].dvb_settings.error_metrics[0].reporting_url #=> String
     #   resp.dash_manifests[0].dvb_settings.error_metrics[0].probability #=> Integer
     #   resp.dash_manifests[0].compactness #=> String, one of "STANDARD", "NONE"
+    #   resp.dash_manifests[0].bandwidth_reporting_mode #=> String, one of "AVERAGE", "MAX"
     #   resp.dash_manifests[0].audio_timeline_pattern #=> String, one of "NONE", "PATTERNED"
     #   resp.dash_manifests[0].subtitle_configuration.ttml_configuration.ttml_profile #=> String, one of "IMSC_1", "EBU_TT_D_101"
     #   resp.dash_manifests[0].uri_path_type #=> String, one of "LEAF", "ROOT"
@@ -5631,7 +5636,7 @@ module Aws::MediaPackageV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

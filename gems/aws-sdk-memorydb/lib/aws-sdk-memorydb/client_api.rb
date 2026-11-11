@@ -1190,8 +1190,8 @@ module Aws::MemoryDB
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "memory-db",
         "jsonVersion" => "1.1",
-        "protocol" => "json",
-        "protocols" => ["json"],
+        "protocol" => "smithy-rpc-v2-cbor",
+        "protocols" => ["smithy-rpc-v2-cbor", "json"],
         "serviceAbbreviation" => "Amazon MemoryDB",
         "serviceFullName" => "Amazon MemoryDB",
         "serviceId" => "MemoryDB",
@@ -1199,6 +1199,7 @@ module Aws::MemoryDB
         "signingName" => "memorydb",
         "targetPrefix" => "AmazonMemoryDB",
         "uid" => "memorydb-2021-01-01",
+        "xmlNamespace" => "http://memorydb.amazonaws.com/doc/2021-01-01/",
       }
 
       api.add_operation(:batch_update_cluster, Seahorse::Model::Operation.new.tap do |o|

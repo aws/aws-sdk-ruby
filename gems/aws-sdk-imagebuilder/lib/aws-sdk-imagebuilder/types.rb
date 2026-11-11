@@ -3284,6 +3284,10 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] values
     #   The filter values. Filter values are case-sensitive.
+    #
+    #   The `name` filter can use a wildcard: `web*` matches names that
+    #   begin with `web`, and `*web*` matches names that contain `web`. The
+    #   wildcard isn't supported in other positions or in other filters.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/Filter AWS API Documentation
@@ -6836,7 +6840,11 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -6919,7 +6927,11 @@ module Aws::Imagebuilder
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -6990,7 +7002,11 @@ module Aws::Imagebuilder
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -7039,7 +7055,11 @@ module Aws::Imagebuilder
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -7105,7 +7125,11 @@ module Aws::Imagebuilder
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -7156,7 +7180,11 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -7213,7 +7241,11 @@ module Aws::Imagebuilder
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -7274,7 +7306,11 @@ module Aws::Imagebuilder
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -7335,7 +7371,11 @@ module Aws::Imagebuilder
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -7478,7 +7518,11 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ImageScanFindingsFilter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -7550,7 +7594,11 @@ module Aws::Imagebuilder
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -7618,7 +7666,11 @@ module Aws::Imagebuilder
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -7678,7 +7730,11 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -7729,7 +7785,11 @@ module Aws::Imagebuilder
     end
 
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -7782,7 +7842,11 @@ module Aws::Imagebuilder
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -7847,7 +7911,11 @@ module Aws::Imagebuilder
     end
 
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -7896,7 +7964,11 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -7936,7 +8008,11 @@ module Aws::Imagebuilder
     end
 
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -8002,7 +8078,11 @@ module Aws::Imagebuilder
     end
 
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -8096,7 +8176,11 @@ module Aws::Imagebuilder
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in a single request.
+    #   The maximum number of items to return in a single request. If you
+    #   don't specify a value, Image Builder returns up to 25 items. The
+    #   largest page size that you can request is 100 items. A page can
+    #   contain fewer items than the maximum, with a `nextToken` to continue
+    #   paging.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token

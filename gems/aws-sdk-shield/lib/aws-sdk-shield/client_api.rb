@@ -675,14 +675,15 @@ module Aws::Shield
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "shield",
         "jsonVersion" => "1.1",
-        "protocol" => "json",
-        "protocols" => ["json"],
+        "protocol" => "smithy-rpc-v2-cbor",
+        "protocols" => ["smithy-rpc-v2-cbor", "json"],
         "serviceAbbreviation" => "AWS Shield",
         "serviceFullName" => "AWS Shield",
         "serviceId" => "Shield",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSShield_20160616",
         "uid" => "shield-2016-06-02",
+        "xmlNamespace" => "http://ddp.amazonaws.com/doc/2016-06-02/",
       }
 
       api.add_operation(:associate_drt_log_bucket, Seahorse::Model::Operation.new.tap do |o|

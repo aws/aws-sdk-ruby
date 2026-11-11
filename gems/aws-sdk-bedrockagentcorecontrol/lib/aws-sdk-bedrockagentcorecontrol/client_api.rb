@@ -682,6 +682,7 @@ module Aws::BedrockAgentCoreControl
     HarnessOpenAiApiFormat = Shapes::StringShape.new(name: 'HarnessOpenAiApiFormat')
     HarnessOpenAiModelConfig = Shapes::StructureShape.new(name: 'HarnessOpenAiModelConfig')
     HarnessRemoteMcpConfig = Shapes::StructureShape.new(name: 'HarnessRemoteMcpConfig')
+    HarnessRemoteMcpOutboundAuth = Shapes::UnionShape.new(name: 'HarnessRemoteMcpOutboundAuth')
     HarnessRemoteMcpUrl = Shapes::StringShape.new(name: 'HarnessRemoteMcpUrl')
     HarnessSkill = Shapes::UnionShape.new(name: 'HarnessSkill')
     HarnessSkillAwsSkillsSource = Shapes::StructureShape.new(name: 'HarnessSkillAwsSkillsSource')
@@ -2654,6 +2655,7 @@ module Aws::BedrockAgentCoreControl
     CustomJWTAuthorizerConfiguration.add_member(:custom_claims, Shapes::ShapeRef.new(shape: CustomClaimValidationsType, location_name: "customClaims"))
     CustomJWTAuthorizerConfiguration.add_member(:private_endpoint, Shapes::ShapeRef.new(shape: PrivateEndpoint, location_name: "privateEndpoint"))
     CustomJWTAuthorizerConfiguration.add_member(:private_endpoint_overrides, Shapes::ShapeRef.new(shape: PrivateEndpointOverrides, location_name: "privateEndpointOverrides"))
+    CustomJWTAuthorizerConfiguration.add_member(:certificate_configurations, Shapes::ShapeRef.new(shape: CertificateConfigurationList, location_name: "certificateConfigurations"))
     CustomJWTAuthorizerConfiguration.add_member(:allowed_workload_configuration, Shapes::ShapeRef.new(shape: AllowedWorkloadConfiguration, location_name: "allowedWorkloadConfiguration"))
     CustomJWTAuthorizerConfiguration.struct_class = Types::CustomJWTAuthorizerConfiguration
 
@@ -2676,6 +2678,7 @@ module Aws::BedrockAgentCoreControl
     CustomOauth2ProviderConfigInput.add_member(:private_key_jwt_config, Shapes::ShapeRef.new(shape: PrivateKeyJwtConfig, location_name: "privateKeyJwtConfig"))
     CustomOauth2ProviderConfigInput.add_member(:private_endpoint, Shapes::ShapeRef.new(shape: PrivateEndpoint, location_name: "privateEndpoint"))
     CustomOauth2ProviderConfigInput.add_member(:private_endpoint_overrides, Shapes::ShapeRef.new(shape: PrivateEndpointOverrides, location_name: "privateEndpointOverrides"))
+    CustomOauth2ProviderConfigInput.add_member(:certificate_configurations, Shapes::ShapeRef.new(shape: CertificateConfigurationList, location_name: "certificateConfigurations"))
     CustomOauth2ProviderConfigInput.struct_class = Types::CustomOauth2ProviderConfigInput
 
     CustomOauth2ProviderConfigOutput.add_member(:oauth_discovery, Shapes::ShapeRef.new(shape: Oauth2Discovery, required: true, location_name: "oauthDiscovery"))
@@ -2684,6 +2687,7 @@ module Aws::BedrockAgentCoreControl
     CustomOauth2ProviderConfigOutput.add_member(:client_authentication_method, Shapes::ShapeRef.new(shape: ClientAuthenticationMethodType, location_name: "clientAuthenticationMethod"))
     CustomOauth2ProviderConfigOutput.add_member(:private_endpoint, Shapes::ShapeRef.new(shape: PrivateEndpoint, location_name: "privateEndpoint"))
     CustomOauth2ProviderConfigOutput.add_member(:private_endpoint_overrides, Shapes::ShapeRef.new(shape: PrivateEndpointOverrides, location_name: "privateEndpointOverrides"))
+    CustomOauth2ProviderConfigOutput.add_member(:certificate_configurations, Shapes::ShapeRef.new(shape: CertificateConfigurationList, location_name: "certificateConfigurations"))
     CustomOauth2ProviderConfigOutput.add_member(:private_key_jwt_config, Shapes::ShapeRef.new(shape: PrivateKeyJwtConfig, location_name: "privateKeyJwtConfig"))
     CustomOauth2ProviderConfigOutput.struct_class = Types::CustomOauth2ProviderConfigOutput
 
@@ -4144,7 +4148,16 @@ module Aws::BedrockAgentCoreControl
 
     HarnessRemoteMcpConfig.add_member(:url, Shapes::ShapeRef.new(shape: HarnessRemoteMcpUrl, required: true, location_name: "url"))
     HarnessRemoteMcpConfig.add_member(:headers, Shapes::ShapeRef.new(shape: HttpHeadersMap, location_name: "headers"))
+    HarnessRemoteMcpConfig.add_member(:outbound_auth, Shapes::ShapeRef.new(shape: HarnessRemoteMcpOutboundAuth, location_name: "outboundAuth"))
     HarnessRemoteMcpConfig.struct_class = Types::HarnessRemoteMcpConfig
+
+    HarnessRemoteMcpOutboundAuth.add_member(:aws_iam, Shapes::ShapeRef.new(shape: IamCredentialProvider, location_name: "awsIam"))
+    HarnessRemoteMcpOutboundAuth.add_member(:none, Shapes::ShapeRef.new(shape: Unit, location_name: "none"))
+    HarnessRemoteMcpOutboundAuth.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    HarnessRemoteMcpOutboundAuth.add_member_subclass(:aws_iam, Types::HarnessRemoteMcpOutboundAuth::AwsIam)
+    HarnessRemoteMcpOutboundAuth.add_member_subclass(:none, Types::HarnessRemoteMcpOutboundAuth::None)
+    HarnessRemoteMcpOutboundAuth.add_member_subclass(:unknown, Types::HarnessRemoteMcpOutboundAuth::Unknown)
+    HarnessRemoteMcpOutboundAuth.struct_class = Types::HarnessRemoteMcpOutboundAuth
 
     HarnessSkill.add_member(:path, Shapes::ShapeRef.new(shape: HarnessSkillPath, location_name: "path"))
     HarnessSkill.add_member(:s3, Shapes::ShapeRef.new(shape: HarnessSkillS3Source, location_name: "s3"))

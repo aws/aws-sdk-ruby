@@ -832,6 +832,17 @@ module Aws::BedrockAgentCoreControl
     #             },
     #           },
     #         ],
+    #         certificate_configurations: [
+    #           {
+    #             s3: {
+    #               uri: "CertificateS3Uri", # required
+    #               bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #             },
+    #             secrets_manager: {
+    #               secret_arn: "CertificateSecretArn", # required
+    #             },
+    #           },
+    #         ],
     #         allowed_workload_configuration: {
     #           hosting_environments: [
     #             {
@@ -2241,6 +2252,17 @@ module Aws::BedrockAgentCoreControl
     #             },
     #           },
     #         ],
+    #         certificate_configurations: [
+    #           {
+    #             s3: {
+    #               uri: "CertificateS3Uri", # required
+    #               bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #             },
+    #             secrets_manager: {
+    #               secret_arn: "CertificateSecretArn", # required
+    #             },
+    #           },
+    #         ],
     #         allowed_workload_configuration: {
     #           hosting_environments: [
     #             {
@@ -2346,6 +2368,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -3400,6 +3426,17 @@ module Aws::BedrockAgentCoreControl
     #             },
     #           },
     #         ],
+    #         certificate_configurations: [
+    #           {
+    #             s3: {
+    #               uri: "CertificateS3Uri", # required
+    #               bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #             },
+    #             secrets_manager: {
+    #               secret_arn: "CertificateSecretArn", # required
+    #             },
+    #           },
+    #         ],
     #         allowed_workload_configuration: {
     #           hosting_environments: [
     #             {
@@ -3466,6 +3503,14 @@ module Aws::BedrockAgentCoreControl
     #             url: "HarnessRemoteMcpUrl", # required
     #             headers: {
     #               "HttpHeaderKey" => "HttpHeaderValue",
+    #             },
+    #             outbound_auth: {
+    #               aws_iam: {
+    #                 service: "IamCredentialProviderServiceString", # required
+    #                 region: "IamCredentialProviderRegionString",
+    #               },
+    #               none: {
+    #               },
     #             },
     #           },
     #           agent_core_browser: {
@@ -3673,6 +3718,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.tools[0].config.remote_mcp.url #=> String
     #   resp.harness.tools[0].config.remote_mcp.headers #=> Hash
     #   resp.harness.tools[0].config.remote_mcp.headers["HttpHeaderKey"] #=> String
+    #   resp.harness.tools[0].config.remote_mcp.outbound_auth.aws_iam.service #=> String
+    #   resp.harness.tools[0].config.remote_mcp.outbound_auth.aws_iam.region #=> String
     #   resp.harness.tools[0].config.agent_core_browser.browser_arn #=> String
     #   resp.harness.tools[0].config.agent_core_gateway.gateway_arn #=> String
     #   resp.harness.tools[0].config.agent_core_gateway.outbound_auth.oauth.provider_arn #=> String
@@ -3760,6 +3807,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -4532,6 +4583,17 @@ module Aws::BedrockAgentCoreControl
     #             },
     #           },
     #         ],
+    #         certificate_configurations: [
+    #           {
+    #             s3: {
+    #               uri: "CertificateS3Uri", # required
+    #               bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #             },
+    #             secrets_manager: {
+    #               secret_arn: "CertificateSecretArn", # required
+    #             },
+    #           },
+    #         ],
     #       },
     #       google_oauth_2_provider_config: {
     #         client_id: "ClientIdType", # required
@@ -4660,6 +4722,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations #=> Array
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations[0].s3.uri #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.private_key_source.kms_key_source.kms_key_arn #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.signing_algorithm #=> String, one of "RS256", "PS256", "ES256"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.additional_header_claims #=> Hash
@@ -5238,6 +5304,17 @@ module Aws::BedrockAgentCoreControl
     #             },
     #           },
     #         ],
+    #         certificate_configurations: [
+    #           {
+    #             s3: {
+    #               uri: "CertificateS3Uri", # required
+    #               bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #             },
+    #             secrets_manager: {
+    #               secret_arn: "CertificateSecretArn", # required
+    #             },
+    #           },
+    #         ],
     #         allowed_workload_configuration: {
     #           hosting_environments: [
     #             {
@@ -5300,6 +5377,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -5667,6 +5748,17 @@ module Aws::BedrockAgentCoreControl
     #                 },
     #                 routing_domain: "RoutingDomain",
     #               },
+    #             },
+    #           },
+    #         ],
+    #         certificate_configurations: [
+    #           {
+    #             s3: {
+    #               uri: "CertificateS3Uri", # required
+    #               bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #             },
+    #             secrets_manager: {
+    #               secret_arn: "CertificateSecretArn", # required
     #             },
     #           },
     #         ],
@@ -6587,6 +6679,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.tools[0].config.remote_mcp.url #=> String
     #   resp.harness.tools[0].config.remote_mcp.headers #=> Hash
     #   resp.harness.tools[0].config.remote_mcp.headers["HttpHeaderKey"] #=> String
+    #   resp.harness.tools[0].config.remote_mcp.outbound_auth.aws_iam.service #=> String
+    #   resp.harness.tools[0].config.remote_mcp.outbound_auth.aws_iam.region #=> String
     #   resp.harness.tools[0].config.agent_core_browser.browser_arn #=> String
     #   resp.harness.tools[0].config.agent_core_gateway.gateway_arn #=> String
     #   resp.harness.tools[0].config.agent_core_gateway.outbound_auth.oauth.provider_arn #=> String
@@ -6674,6 +6768,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -7334,6 +7432,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -8178,6 +8280,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -8618,6 +8724,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.tools[0].config.remote_mcp.url #=> String
     #   resp.harness.tools[0].config.remote_mcp.headers #=> Hash
     #   resp.harness.tools[0].config.remote_mcp.headers["HttpHeaderKey"] #=> String
+    #   resp.harness.tools[0].config.remote_mcp.outbound_auth.aws_iam.service #=> String
+    #   resp.harness.tools[0].config.remote_mcp.outbound_auth.aws_iam.region #=> String
     #   resp.harness.tools[0].config.agent_core_browser.browser_arn #=> String
     #   resp.harness.tools[0].config.agent_core_gateway.gateway_arn #=> String
     #   resp.harness.tools[0].config.agent_core_gateway.outbound_auth.oauth.provider_arn #=> String
@@ -8705,6 +8813,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -9019,6 +9131,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations #=> Array
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations[0].s3.uri #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.private_key_source.kms_key_source.kms_key_arn #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.signing_algorithm #=> String, one of "RS256", "PS256", "ES256"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.additional_header_claims #=> Hash
@@ -9370,6 +9486,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -9811,6 +9931,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -12944,6 +13068,17 @@ module Aws::BedrockAgentCoreControl
     #             },
     #           },
     #         ],
+    #         certificate_configurations: [
+    #           {
+    #             s3: {
+    #               uri: "CertificateS3Uri", # required
+    #               bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #             },
+    #             secrets_manager: {
+    #               secret_arn: "CertificateSecretArn", # required
+    #             },
+    #           },
+    #         ],
     #         allowed_workload_configuration: {
     #           hosting_environments: [
     #             {
@@ -13872,6 +14007,17 @@ module Aws::BedrockAgentCoreControl
     #             },
     #           },
     #         ],
+    #         certificate_configurations: [
+    #           {
+    #             s3: {
+    #               uri: "CertificateS3Uri", # required
+    #               bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #             },
+    #             secrets_manager: {
+    #               secret_arn: "CertificateSecretArn", # required
+    #             },
+    #           },
+    #         ],
     #         allowed_workload_configuration: {
     #           hosting_environments: [
     #             {
@@ -13982,6 +14128,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -14999,6 +15149,17 @@ module Aws::BedrockAgentCoreControl
     #               },
     #             },
     #           ],
+    #           certificate_configurations: [
+    #             {
+    #               s3: {
+    #                 uri: "CertificateS3Uri", # required
+    #                 bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #               },
+    #               secrets_manager: {
+    #                 secret_arn: "CertificateSecretArn", # required
+    #               },
+    #             },
+    #           ],
     #           allowed_workload_configuration: {
     #             hosting_environments: [
     #               {
@@ -15066,6 +15227,14 @@ module Aws::BedrockAgentCoreControl
     #             url: "HarnessRemoteMcpUrl", # required
     #             headers: {
     #               "HttpHeaderKey" => "HttpHeaderValue",
+    #             },
+    #             outbound_auth: {
+    #               aws_iam: {
+    #                 service: "IamCredentialProviderServiceString", # required
+    #                 region: "IamCredentialProviderRegionString",
+    #               },
+    #               none: {
+    #               },
     #             },
     #           },
     #           agent_core_browser: {
@@ -15272,6 +15441,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.tools[0].config.remote_mcp.url #=> String
     #   resp.harness.tools[0].config.remote_mcp.headers #=> Hash
     #   resp.harness.tools[0].config.remote_mcp.headers["HttpHeaderKey"] #=> String
+    #   resp.harness.tools[0].config.remote_mcp.outbound_auth.aws_iam.service #=> String
+    #   resp.harness.tools[0].config.remote_mcp.outbound_auth.aws_iam.region #=> String
     #   resp.harness.tools[0].config.agent_core_browser.browser_arn #=> String
     #   resp.harness.tools[0].config.agent_core_gateway.gateway_arn #=> String
     #   resp.harness.tools[0].config.agent_core_gateway.outbound_auth.oauth.provider_arn #=> String
@@ -15359,6 +15530,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.harness.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.harness.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -16281,6 +16456,17 @@ module Aws::BedrockAgentCoreControl
     #             },
     #           },
     #         ],
+    #         certificate_configurations: [
+    #           {
+    #             s3: {
+    #               uri: "CertificateS3Uri", # required
+    #               bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #             },
+    #             secrets_manager: {
+    #               secret_arn: "CertificateSecretArn", # required
+    #             },
+    #           },
+    #         ],
     #       },
     #       google_oauth_2_provider_config: {
     #         client_id: "ClientIdType", # required
@@ -16407,6 +16593,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations #=> Array
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations[0].s3.uri #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.private_key_source.kms_key_source.kms_key_arn #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.signing_algorithm #=> String, one of "RS256", "PS256", "ES256"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_key_jwt_config.additional_header_claims #=> Hash
@@ -16927,6 +17117,17 @@ module Aws::BedrockAgentCoreControl
     #             },
     #           },
     #         ],
+    #         certificate_configurations: [
+    #           {
+    #             s3: {
+    #               uri: "CertificateS3Uri", # required
+    #               bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #             },
+    #             secrets_manager: {
+    #               secret_arn: "CertificateSecretArn", # required
+    #             },
+    #           },
+    #         ],
     #         allowed_workload_configuration: {
     #           hosting_environments: [
     #             {
@@ -17244,6 +17445,17 @@ module Aws::BedrockAgentCoreControl
     #               },
     #             },
     #           ],
+    #           certificate_configurations: [
+    #             {
+    #               s3: {
+    #                 uri: "CertificateS3Uri", # required
+    #                 bucket_owner_account_id: "CertificateBucketOwnerAccountId",
+    #               },
+    #               secrets_manager: {
+    #                 secret_arn: "CertificateSecretArn", # required
+    #               },
+    #             },
+    #           ],
     #           allowed_workload_configuration: {
     #             hosting_environments: [
     #               {
@@ -17307,6 +17519,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.uri #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].s3.bucket_owner_account_id #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.certificate_configurations[0].secrets_manager.secret_arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments #=> Array
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments[0].arn #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.workload_identities #=> Array
@@ -17642,7 +17858,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

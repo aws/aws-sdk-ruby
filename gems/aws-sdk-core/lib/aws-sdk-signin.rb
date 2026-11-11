@@ -56,7 +56,7 @@ module Aws::Signin
   autoload :EndpointProvider, 'aws-sdk-signin/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-signin/endpoints'
 
-  GEM_VERSION = '3.267.0'
+  GEM_VERSION = '3.268.0'
 
 end
 

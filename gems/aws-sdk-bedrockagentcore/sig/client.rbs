@@ -1068,7 +1068,15 @@ module Aws
                                 config: {
                                   remote_mcp: {
                                     url: ::String,
-                                    headers: Hash[::String, ::String]?
+                                    headers: Hash[::String, ::String]?,
+                                    outbound_auth: {
+                                      aws_iam: {
+                                        service: ::String,
+                                        region: ::String?
+                                      }?,
+                                      none: {
+                                      }?
+                                    }?
                                   }?,
                                   agent_core_browser: {
                                     browser_arn: ::String?

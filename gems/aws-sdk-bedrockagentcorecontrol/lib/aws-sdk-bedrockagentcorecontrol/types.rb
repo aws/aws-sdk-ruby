@@ -1247,11 +1247,11 @@ module Aws::BedrockAgentCoreControl
     end
 
     # A reference to a private certificate authority (CA) certificate that
-    # the gateway uses to verify TLS connections to the target endpoint. Use
-    # this when the target presents a certificate issued by a private CA
-    # that is not trusted by default. Specify exactly one certificate
-    # source. The configuration is a reference only and never contains the
-    # certificate content.
+    # AgentCore uses to verify TLS connections to an endpoint, such as a
+    # gateway target or an identity provider, that presents a certificate
+    # issued by a private CA that is not trusted by default. Specify exactly
+    # one certificate source. The configuration is a reference only and
+    # never contains the certificate content.
     #
     # @note CertificateConfiguration is a union - when making an API calls you must set exactly one of the members.
     #
@@ -5733,6 +5733,16 @@ module Aws::BedrockAgentCoreControl
     #   configuration.
     #   @return [Array<Types::PrivateEndpointOverride>]
     #
+    # @!attribute [rw] certificate_configurations
+    #   The private certificate authority (CA) configurations for the
+    #   identity provider. Use this to have AgentCore Identity trust a
+    #   private CA when establishing TLS connections to identity provider
+    #   endpoints. You can specify only one certificate authority
+    #   configuration in this list. Provide the certificate by reference to
+    #   an Amazon S3 object or an Amazon Web Services Secrets Manager
+    #   secret. You can use this only together with `privateEndpoint`.
+    #   @return [Array<Types::CertificateConfiguration>]
+    #
     # @!attribute [rw] allowed_workload_configuration
     #   The configuration that restricts which workloads in the request's
     #   identity chain are allowed to invoke the target, identified by their
@@ -5752,6 +5762,7 @@ module Aws::BedrockAgentCoreControl
       :custom_claims,
       :private_endpoint,
       :private_endpoint_overrides,
+      :certificate_configurations,
       :allowed_workload_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -5861,6 +5872,16 @@ module Aws::BedrockAgentCoreControl
     #   configuration.
     #   @return [Array<Types::PrivateEndpointOverride>]
     #
+    # @!attribute [rw] certificate_configurations
+    #   The private certificate authority (CA) configurations for the
+    #   identity provider. Use this to have AgentCore Identity trust a
+    #   private CA when establishing TLS connections to identity provider
+    #   endpoints. You can specify only one certificate authority
+    #   configuration in this list. Provide the certificate by reference to
+    #   an Amazon S3 object or an Amazon Web Services Secrets Manager
+    #   secret. You can use this only together with `privateEndpoint`.
+    #   @return [Array<Types::CertificateConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CustomOauth2ProviderConfigInput AWS API Documentation
     #
     class CustomOauth2ProviderConfigInput < Struct.new(
@@ -5873,7 +5894,8 @@ module Aws::BedrockAgentCoreControl
       :client_authentication_method,
       :private_key_jwt_config,
       :private_endpoint,
-      :private_endpoint_overrides)
+      :private_endpoint_overrides,
+      :certificate_configurations)
       SENSITIVE = [:client_secret]
       include Aws::Structure
     end
@@ -5908,6 +5930,16 @@ module Aws::BedrockAgentCoreControl
     #   configuration.
     #   @return [Array<Types::PrivateEndpointOverride>]
     #
+    # @!attribute [rw] certificate_configurations
+    #   The private certificate authority (CA) configurations for the
+    #   identity provider. Use this to have AgentCore Identity trust a
+    #   private CA when establishing TLS connections to identity provider
+    #   endpoints. You can specify only one certificate authority
+    #   configuration in this list. Provide the certificate by reference to
+    #   an Amazon S3 object or an Amazon Web Services Secrets Manager
+    #   secret. You can use this only together with `privateEndpoint`.
+    #   @return [Array<Types::CertificateConfiguration>]
+    #
     # @!attribute [rw] private_key_jwt_config
     #   The configuration for private\_key\_jwt client authentication used
     #   by this OAuth2 credential provider.
@@ -5922,6 +5954,7 @@ module Aws::BedrockAgentCoreControl
       :client_authentication_method,
       :private_endpoint,
       :private_endpoint_overrides,
+      :certificate_configurations,
       :private_key_jwt_config)
       SENSITIVE = []
       include Aws::Structure
@@ -12133,11 +12166,11 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] lifecycle_configuration
-    #   LifecycleConfiguration lets you manage the lifecycle of runtime
-    #   sessions and resources in AgentCore Runtime. This configuration
-    #   helps optimize resource utilization by automatically cleaning up
-    #   idle sessions and preventing long-running instances from consuming
-    #   resources indefinitely.
+    #   The lifecycle configuration for the harness's runtime environment.
+    #   For a harness, `idleRuntimeSessionTimeout` and `maxLifetime` each
+    #   accept a value between 60 and 28800 seconds (8 hours), and
+    #   `idleRuntimeSessionTimeout` must be less than or equal to
+    #   `maxLifetime`.
     #   @return [Types::LifecycleConfiguration]
     #
     # @!attribute [rw] network_configuration
@@ -12164,11 +12197,12 @@ module Aws::BedrockAgentCoreControl
     # The AgentCore Runtime environment request configuration.
     #
     # @!attribute [rw] lifecycle_configuration
-    #   LifecycleConfiguration lets you manage the lifecycle of runtime
-    #   sessions and resources in AgentCore Runtime. This configuration
-    #   helps optimize resource utilization by automatically cleaning up
-    #   idle sessions and preventing long-running instances from consuming
-    #   resources indefinitely.
+    #   The lifecycle configuration for the harness's runtime environment.
+    #   For a harness, `idleRuntimeSessionTimeout` and `maxLifetime` each
+    #   accept a value between 60 and 28800 seconds (8 hours), and
+    #   `idleRuntimeSessionTimeout` must be less than or equal to
+    #   `maxLifetime`. Values above 28800 seconds are rejected with a
+    #   `ValidationException`.
     #   @return [Types::LifecycleConfiguration]
     #
     # @!attribute [rw] network_configuration
@@ -12870,13 +12904,50 @@ module Aws::BedrockAgentCoreControl
     #   Custom headers to include when connecting to the remote MCP server.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] outbound_auth
+    #   How the harness authenticates to this MCP server. Defaults to no
+    #   authentication.
+    #   @return [Types::HarnessRemoteMcpOutboundAuth]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessRemoteMcpConfig AWS API Documentation
     #
     class HarnessRemoteMcpConfig < Struct.new(
       :url,
-      :headers)
+      :headers,
+      :outbound_auth)
       SENSITIVE = [:url, :headers]
       include Aws::Structure
+    end
+
+    # Authentication method for calling a remote MCP server.
+    #
+    # @note HarnessRemoteMcpOutboundAuth is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note HarnessRemoteMcpOutboundAuth is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of HarnessRemoteMcpOutboundAuth corresponding to the set member.
+    #
+    # @!attribute [rw] aws_iam
+    #   Sign requests to the remote MCP server with Signature Version 4
+    #   (SigV4) using the harness execution role. If you don't specify a
+    #   Region, the harness Region is used.
+    #   @return [Types::IamCredentialProvider]
+    #
+    # @!attribute [rw] none
+    #   No authentication.
+    #   @return [Types::Unit]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessRemoteMcpOutboundAuth AWS API Documentation
+    #
+    class HarnessRemoteMcpOutboundAuth < Struct.new(
+      :aws_iam,
+      :none,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AwsIam < HarnessRemoteMcpOutboundAuth; end
+      class None < HarnessRemoteMcpOutboundAuth; end
+      class Unknown < HarnessRemoteMcpOutboundAuth; end
     end
 
     # A skill available to the agent.

@@ -4140,6 +4140,14 @@ module Aws::BedrockAgentCore
     #             headers: {
     #               "HttpHeaderKey" => "HttpHeaderValue",
     #             },
+    #             outbound_auth: {
+    #               aws_iam: {
+    #                 service: "IamCredentialProviderServiceString", # required
+    #                 region: "IamCredentialProviderRegionString",
+    #               },
+    #               none: {
+    #               },
+    #             },
     #           },
     #           agent_core_browser: {
     #             browser_arn: "HarnessBrowserArn",
@@ -6761,7 +6769,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

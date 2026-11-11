@@ -669,13 +669,14 @@ module Aws::Route53Domains
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "route53domains",
         "jsonVersion" => "1.1",
-        "protocol" => "json",
-        "protocols" => ["json"],
+        "protocol" => "smithy-rpc-v2-cbor",
+        "protocols" => ["smithy-rpc-v2-cbor", "json"],
         "serviceFullName" => "Amazon Route 53 Domains",
         "serviceId" => "Route 53 Domains",
         "signatureVersion" => "v4",
         "targetPrefix" => "Route53Domains_v20140515",
         "uid" => "route53domains-2014-05-15",
+        "xmlNamespace" => "https://route53domains.amazonaws.com/doc/2014-05-15/",
       }
 
       api.add_operation(:accept_domain_transfer_from_another_aws_account, Seahorse::Model::Operation.new.tap do |o|

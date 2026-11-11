@@ -55,7 +55,7 @@ module Aws::ElasticLoadBalancingV2
   autoload :EndpointProvider, 'aws-sdk-elasticloadbalancingv2/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-elasticloadbalancingv2/endpoints'
 
-  GEM_VERSION = '1.168.0'
+  GEM_VERSION = '1.169.0'
 
 end
 

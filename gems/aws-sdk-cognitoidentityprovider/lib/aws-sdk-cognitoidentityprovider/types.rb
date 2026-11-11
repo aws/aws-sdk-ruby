@@ -1690,6 +1690,49 @@ module Aws::CognitoIdentityProvider
     end
 
     # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The username of the user whose sessions you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that Amazon Cognito returned in a previous
+    #   response. Use this value to retrieve the next page of results if a
+    #   `NextToken` was included in a prior response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListUserSessionsRequest AWS API Documentation
+    #
+    class AdminListUserSessionsRequest < Struct.new(
+      :user_pool_id,
+      :username,
+      :next_token)
+      SENSITIVE = [:username]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sessions
+    #   A list of the user's active sessions. Each element describes one
+    #   token session or SSO session.
+    #   @return [Array<Types::SessionDescriptionType>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use in a subsequent request to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListUserSessionsResponse AWS API Documentation
+    #
+    class AdminListUserSessionsResponse < Struct.new(
+      :sessions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
     #   The ID of the user pool that contains the group and the user that
     #   you want to remove.
     #   @return [String]
@@ -2278,6 +2321,49 @@ module Aws::CognitoIdentityProvider
       SENSITIVE = [:session]
       include Aws::Structure
     end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The username of the user who owns the session. The username must
+    #   match the user associated with the `SessionId`, to confirm they are
+    #   the intended target user.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The ID of the session to revoke. This is a 28-character string of
+    #   lowercase letters and digits, prefixed with `tkn` for a token
+    #   session or `sso` for an SSO session.
+    #   @return [String]
+    #
+    # @!attribute [rw] revoke_associated_sessions
+    #   Specifies whether to also revoke the sessions that are linked to the
+    #   targeted session. `NONE`, the default, revokes only the targeted
+    #   session. `LINKED` also revokes the directly linked session or
+    #   sessions, interpreted relative to the type of the targeted session:
+    #   revoking a token session also revokes the parent SSO session it came
+    #   through, and revoking an SSO session also revokes the token sessions
+    #   that came through it. The set of linked sessions is eventually
+    #   consistent, so associated sessions are typically revoked within a
+    #   few seconds.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRevokeUserSessionRequest AWS API Documentation
+    #
+    class AdminRevokeUserSessionRequest < Struct.new(
+      :user_pool_id,
+      :username,
+      :session_id,
+      :revoke_associated_sessions)
+      SENSITIVE = [:username]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRevokeUserSessionResponse AWS API Documentation
+    #
+    class AdminRevokeUserSessionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] sms_mfa_settings
     #   User preferences for SMS message MFA. Activates or deactivates SMS
@@ -3209,6 +3295,29 @@ module Aws::CognitoIdentityProvider
       :expires_in,
       :token_type)
       SENSITIVE = [:access_token]
+      include Aws::Structure
+    end
+
+    # The SSO session settings for a user pool app client.
+    #
+    # @!attribute [rw] max_validity_minutes
+    #   The maximum amount of time, in minutes, that this app client
+    #   silently reuses an existing SSO session, returning a new set of
+    #   tokens without requiring the user to re-authenticate, measured from
+    #   the user's last fresh authentication. The minimum value is `0` and
+    #   the maximum value is `129600` (90 days). The default is `60`. A
+    #   value of `0` means that this app client never silently reuses the
+    #   SSO session and always re-authenticates the user. The SSO session
+    #   record and its cookie are still created regardless of this value,
+    #   and other app clients in the same user pool can still reuse the
+    #   session.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ClientSSOSessionConfigType AWS API Documentation
+    #
+    class ClientSSOSessionConfigType < Struct.new(
+      :max_validity_minutes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7366,6 +7475,46 @@ module Aws::CognitoIdentityProvider
     end
 
     # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the app client.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client where you want to retrieve the session
+    #   configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserPoolClientSessionConfigurationRequest AWS API Documentation
+    #
+    class GetUserPoolClientSessionConfigurationRequest < Struct.new(
+      :user_pool_id,
+      :client_id)
+      SENSITIVE = [:client_id]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the app client.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client that the session configuration applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] sso_session
+    #   The SSO session settings for the app client.
+    #   @return [Types::ClientSSOSessionConfigType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserPoolClientSessionConfigurationResponse AWS API Documentation
+    #
+    class GetUserPoolClientSessionConfigurationResponse < Struct.new(
+      :user_pool_id,
+      :client_id,
+      :sso_session)
+      SENSITIVE = [:client_id]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
     #   The ID of the user pool where you want to query WebAuthn and MFA
     #   configuration.
     #   @return [String]
@@ -7430,6 +7579,41 @@ module Aws::CognitoIdentityProvider
       :email_mfa_configuration,
       :mfa_configuration,
       :web_authn_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool where you want to retrieve the session
+    #   configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserPoolSessionConfigurationRequest AWS API Documentation
+    #
+    class GetUserPoolSessionConfigurationRequest < Struct.new(
+      :user_pool_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that the session configuration applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_session_tracking
+    #   Indicates whether session tracking is enabled for the user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_session
+    #   The pool-wide token session settings for the user pool.
+    #   @return [Types::UserPoolTokenSessionConfigType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserPoolSessionConfigurationResponse AWS API Documentation
+    #
+    class GetUserPoolSessionConfigurationResponse < Struct.new(
+      :user_pool_id,
+      :user_session_tracking,
+      :token_session)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9254,6 +9438,46 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # @!attribute [rw] access_token
+    #   A valid access token that Amazon Cognito issued to the user whose
+    #   sessions you want to list. Amazon Cognito derives the user pool and
+    #   username from this token.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that Amazon Cognito returned in a previous
+    #   response. Use this value to retrieve the next page of results if a
+    #   `NextToken` was included in a prior response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserSessionsRequest AWS API Documentation
+    #
+    class ListUserSessionsRequest < Struct.new(
+      :access_token,
+      :next_token)
+      SENSITIVE = [:access_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sessions
+    #   A list of the user's active sessions. Each element describes one
+    #   token session or SSO session.
+    #   @return [Array<Types::SessionDescriptionType>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use in a subsequent request to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserSessionsResponse AWS API Documentation
+    #
+    class ListUserSessionsResponse < Struct.new(
+      :sessions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] user_pool_id
     #   The ID of the user pool where you want to view the membership of the
     #   requested group.
@@ -10892,12 +11116,24 @@ module Aws::CognitoIdentityProvider
     #   secret.
     #   @return [String]
     #
+    # @!attribute [rw] revoke_associated_sessions
+    #   Specifies whether to also revoke the SSO session that is linked to
+    #   the token session being revoked. `NONE`, the default, revokes only
+    #   the token session that is associated with the refresh token.
+    #   `LINKED` also revokes the parent SSO session that the token session
+    #   came through; the other token sessions that came through that SSO
+    #   session aren't revoked. `LINKED` has no effect when session
+    #   tracking is disabled or when the token session has no parent SSO
+    #   session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RevokeTokenRequest AWS API Documentation
     #
     class RevokeTokenRequest < Struct.new(
       :token,
       :client_id,
-      :client_secret)
+      :client_secret,
+      :revoke_associated_sessions)
       SENSITIVE = [:token, :client_id, :client_secret]
       include Aws::Structure
     end
@@ -10905,6 +11141,45 @@ module Aws::CognitoIdentityProvider
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RevokeTokenResponse AWS API Documentation
     #
     class RevokeTokenResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] access_token
+    #   A valid access token that Amazon Cognito issued to the user. Amazon
+    #   Cognito uses this token to authorize the request and to identify the
+    #   user.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The ID of the session to revoke. This is a 28-character string of
+    #   lowercase letters and digits, prefixed with `tkn` for a token
+    #   session or `sso` for an SSO session. This value can't identify the
+    #   caller's own current session.
+    #   @return [String]
+    #
+    # @!attribute [rw] revoke_associated_sessions
+    #   Specifies whether to also revoke the sessions that are linked to the
+    #   targeted session. `NONE`, the default, revokes only the targeted
+    #   session. `LINKED` also revokes the directly linked session or
+    #   sessions, interpreted relative to the type of the targeted session:
+    #   revoking a token session also revokes the parent SSO session it came
+    #   through, and revoking an SSO session also revokes the token sessions
+    #   that came through it. The set of linked sessions is eventually
+    #   consistent, so associated sessions are typically revoked within a
+    #   few seconds.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RevokeUserSessionRequest AWS API Documentation
+    #
+    class RevokeUserSessionRequest < Struct.new(
+      :access_token,
+      :session_id,
+      :revoke_associated_sessions)
+      SENSITIVE = [:access_token]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RevokeUserSessionResponse AWS API Documentation
+    #
+    class RevokeUserSessionResponse < Aws::EmptyStructure; end
 
     # The settings of risk configuration for threat protection with threat
     # protection in a user pool.
@@ -11162,6 +11437,112 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # Describes an active user session. Amazon Cognito returns this type in
+    # the responses of `ListUserSessions` and `AdminListUserSessions`, for
+    # both token sessions and SSO sessions.
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier for the session. This is a 28-character string
+    #   of lowercase letters and digits, prefixed with `tkn` for a token
+    #   session or `sso` for an SSO session.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_type
+    #   The type of the session. Valid values are `TOKEN` and `SSO`.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client that the session belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_date
+    #   The date and time when the session was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_active_date
+    #   The date and time of the most recent activity on the session. For a
+    #   token session, this is the most recent token refresh or rotation; a
+    #   new authentication creates a new token session rather than updating
+    #   an existing one. For an SSO session, this is the most recent
+    #   authentication, token grant, or token rotation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] device_type
+    #   A description of the device associated with the most recent activity
+    #   on the session, derived from the parsed user agent (operating system
+    #   and browser or app). Amazon Cognito overwrites this value on each
+    #   sign-in, refresh, and rotation. The value can be `unknown`. The
+    #   maximum length is 1,024 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_ip_address
+    #   The IP address associated with the most recent activity on the
+    #   session. Amazon Cognito overwrites this value on each refresh and
+    #   rotation. The maximum length is 128 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_location
+    #   The geographic location of the most recent activity on the session,
+    #   derived from the IP address.
+    #   @return [Types::SessionLocationType]
+    #
+    # @!attribute [rw] origin_session_id
+    #   For a token session, the ID of the SSO session that the token
+    #   session originated from. This value is null for sessions that were
+    #   initiated through the API and didn't come through an SSO session.
+    #   Amazon Cognito returns this value for token sessions only.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_current_session
+    #   Specifies whether this session matches the access token supplied in
+    #   the request. This value is always `false` for the
+    #   `AdminListUserSessions` operation, which doesn't take an access
+    #   token.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SessionDescriptionType AWS API Documentation
+    #
+    class SessionDescriptionType < Struct.new(
+      :session_id,
+      :session_type,
+      :client_id,
+      :create_date,
+      :last_active_date,
+      :device_type,
+      :last_ip_address,
+      :last_location,
+      :origin_session_id,
+      :is_current_session)
+      SENSITIVE = [:client_id, :last_ip_address]
+      include Aws::Structure
+    end
+
+    # The geographic location of the most recent activity on a session,
+    # derived from the IP address.
+    #
+    # @!attribute [rw] city
+    #   The city of the most recent activity on the session, derived from
+    #   the IP address. This value can be null if geo-IP resolution fails.
+    #   The maximum length is 256 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] country
+    #   The country of the most recent activity on the session, derived from
+    #   the IP address and returned in English (for example, `United
+    #   States`). This is a country name as returned by the geo-IP database,
+    #   not an ISO country code, and can be `unknown` if geo-IP resolution
+    #   fails.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SessionLocationType AWS API Documentation
+    #
+    class SessionLocationType < Struct.new(
+      :city,
+      :country)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] user_pool_id
     #   The ID of the user pool where you want to configure logging.
     #   @return [String]
@@ -11363,6 +11744,51 @@ module Aws::CognitoIdentityProvider
     class SetUserMFAPreferenceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the app client.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client that you want to configure.
+    #   @return [String]
+    #
+    # @!attribute [rw] sso_session
+    #   The SSO session settings for the app client.
+    #   @return [Types::ClientSSOSessionConfigType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserPoolClientSessionConfigurationRequest AWS API Documentation
+    #
+    class SetUserPoolClientSessionConfigurationRequest < Struct.new(
+      :user_pool_id,
+      :client_id,
+      :sso_session)
+      SENSITIVE = [:client_id]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the app client.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client that the session configuration was applied
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] sso_session
+    #   The SSO session settings that were applied to the app client.
+    #   @return [Types::ClientSSOSessionConfigType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserPoolClientSessionConfigurationResponse AWS API Documentation
+    #
+    class SetUserPoolClientSessionConfigurationResponse < Struct.new(
+      :user_pool_id,
+      :client_id,
+      :sso_session)
+      SENSITIVE = [:client_id]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
     #   The user pool ID.
     #   @return [String]
     #
@@ -11474,6 +11900,57 @@ module Aws::CognitoIdentityProvider
       :email_mfa_configuration,
       :mfa_configuration,
       :web_authn_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool where you want to configure session
+    #   tracking.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_session_tracking
+    #   Specifies whether Amazon Cognito tracks sessions for users in the
+    #   user pool. Set this value to `ENABLED` to turn on server-side
+    #   session tracking, or `DISABLED` to turn it off. When you set this
+    #   value to `DISABLED` while the user pool remains active, existing
+    #   client-level session configurations are retained but dormant, and
+    #   are reactivated when you enable tracking again.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_session
+    #   The pool-wide token session settings to apply.
+    #   @return [Types::UserPoolTokenSessionConfigType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserPoolSessionConfigurationRequest AWS API Documentation
+    #
+    class SetUserPoolSessionConfigurationRequest < Struct.new(
+      :user_pool_id,
+      :user_session_tracking,
+      :token_session)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that the session configuration was applied
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_session_tracking
+    #   The session tracking setting that was applied to the user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_session
+    #   The pool-wide token session settings that were applied.
+    #   @return [Types::UserPoolTokenSessionConfigType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserPoolSessionConfigurationResponse AWS API Documentation
+    #
+    class SetUserPoolSessionConfigurationResponse < Struct.new(
+      :user_pool_id,
+      :user_session_tracking,
+      :token_session)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14735,6 +15212,26 @@ module Aws::CognitoIdentityProvider
     #
     class UserPoolTaggingException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The pool-wide token session settings for a user pool.
+    #
+    # @!attribute [rw] max_per_user
+    #   The maximum number of active token sessions that a user can have
+    #   across the user pool. The minimum value is `1` and the maximum value
+    #   is `100`. The default is `20`. When a user reaches this limit, the
+    #   next successful authentication automatically evicts that user's
+    #   least recently used token session before it creates the new session.
+    #   Lowering this value doesn't evict existing sessions on its own; the
+    #   user is brought back within the limit on their next sign-in.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolTokenSessionConfigType AWS API Documentation
+    #
+    class UserPoolTokenSessionConfigType < Struct.new(
+      :max_per_user)
       SENSITIVE = []
       include Aws::Structure
     end

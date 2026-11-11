@@ -2183,7 +2183,7 @@ module Aws::SSMIncidents
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssmincidents'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

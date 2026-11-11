@@ -826,6 +826,27 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
+    # Describes the application operation that initiated a snapshot
+    # operation. To get information about the application operation, use
+    # `DescribeApplicationOperation`.
+    #
+    # @!attribute [rw] application_operation_id
+    #   The operation ID of the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_name
+    #   The name of the application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationOperationDescription AWS API Documentation
+    #
+    class ApplicationOperationDescription < Struct.new(
+      :application_operation_id,
+      :application_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A description of the aplication operation that provides information
     # about the updates that were made to the application.
     #
@@ -916,11 +937,19 @@ module Aws::KinesisAnalyticsV2
     #   `ApplicationRestoreType`.
     #   @return [String]
     #
+    # @!attribute [rw] snapshot_arn
+    #   The identifier of an existing enhanced snapshot of application state
+    #   to use to restart an application. The application uses this value if
+    #   `RESTORE_FROM_CUSTOM_SNAPSHOT` is specified for the
+    #   `ApplicationRestoreType` and `SnapshotMode` is `ENHANCED_SNAPSHOTS`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationRestoreConfiguration AWS API Documentation
     #
     class ApplicationRestoreConfiguration < Struct.new(
       :application_restore_type,
-      :snapshot_name)
+      :snapshot_name,
+      :snapshot_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -932,11 +961,27 @@ module Aws::KinesisAnalyticsV2
     #   Describes whether snapshots are enabled for a Managed Service for
     #   Apache Flink application.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] snapshot_mode
+    #   Specifies the snapshot mode for a Managed Service for Apache Flink
+    #   application. To use enhanced snapshots, specify
+    #   `ENHANCED_SNAPSHOTS`. If you don't specify this parameter, the
+    #   application uses `APPLICATION_SNAPSHOTS_LEGACY`. For more
+    #   information, see [Enhanced Snapshots][1].
+    #
+    #   To use `ENHANCED_SNAPSHOTS`, the application must use Apache Flink
+    #   version 1.20 or later.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-flink/latest/java/how-snapshots.html
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationSnapshotConfiguration AWS API Documentation
     #
     class ApplicationSnapshotConfiguration < Struct.new(
-      :snapshots_enabled)
+      :snapshots_enabled,
+      :snapshot_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -949,10 +994,16 @@ module Aws::KinesisAnalyticsV2
     #   Apache Flink application.
     #   @return [Boolean]
     #
+    # @!attribute [rw] snapshot_mode
+    #   Describes the snapshot mode of a Managed Service for Apache Flink
+    #   application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationSnapshotConfigurationDescription AWS API Documentation
     #
     class ApplicationSnapshotConfigurationDescription < Struct.new(
-      :snapshots_enabled)
+      :snapshots_enabled,
+      :snapshot_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -965,10 +1016,27 @@ module Aws::KinesisAnalyticsV2
     #   application.
     #   @return [Boolean]
     #
+    # @!attribute [rw] snapshot_mode_update
+    #   Describes updates to the snapshot mode of a Managed Service for
+    #   Apache Flink application. You can update the snapshot mode from
+    #   `APPLICATION_SNAPSHOTS_LEGACY` to `ENHANCED_SNAPSHOTS`. You can't
+    #   use `UpdateApplication` to change the snapshot mode back to
+    #   `APPLICATION_SNAPSHOTS_LEGACY`.
+    #
+    #   To return to `APPLICATION_SNAPSHOTS_LEGACY`, use
+    #   `RollbackApplication`. After you update an application that uses
+    #   `ENHANCED_SNAPSHOTS`, you can't roll it back to
+    #   `APPLICATION_SNAPSHOTS_LEGACY`.
+    #
+    #   To use `ENHANCED_SNAPSHOTS`, the application must use Apache Flink
+    #   version 1.20 or later.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationSnapshotConfigurationUpdate AWS API Documentation
     #
     class ApplicationSnapshotConfigurationUpdate < Struct.new(
-      :snapshots_enabled_update)
+      :snapshots_enabled_update,
+      :snapshot_mode_update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1576,8 +1644,8 @@ module Aws::KinesisAnalyticsV2
     end
 
     # Exception thrown as a result of concurrent modifications to an
-    # application. This error can be the result of attempting to modify an
-    # application without using the current application ID.
+    # application or snapshot. This error can be the result of attempting to
+    # modify an application without using the current application ID.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1720,6 +1788,72 @@ module Aws::KinesisAnalyticsV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateApplicationSnapshotResponse AWS API Documentation
     #
     class CreateApplicationSnapshotResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] application_name
+    #   The name of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_name
+    #   The name of the enhanced snapshot. The name must be unique among the
+    #   snapshots in your account and Region. You can't reuse the name of
+    #   an existing snapshot, including a snapshot in the `FAILED` status,
+    #   until you delete that snapshot. Names that begin with
+    #   `SYSTEMSNAPSHOT` are reserved.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_description
+    #   A summary description of the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of one or more tags to assign to the snapshot. A tag is a
+    #   key-value pair that identifies a snapshot. For more information, see
+    #   [Using Tagging][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateSnapshotRequest AWS API Documentation
+    #
+    class CreateSnapshotRequest < Struct.new(
+      :application_name,
+      :snapshot_name,
+      :snapshot_description,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_arn
+    #   The ARN of the enhanced snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_status
+    #   The status of the snapshot. When Managed Service for Apache Flink
+    #   accepts the request, the status is `CREATING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_operation_id
+    #   The ID of the snapshot operation. You can use this value with
+    #   `DescribeSnapshotOperation` to track the progress of the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_operation_status
+    #   The status of the snapshot operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateSnapshotResponse AWS API Documentation
+    #
+    class CreateSnapshotResponse < Struct.new(
+      :snapshot_arn,
+      :snapshot_status,
+      :snapshot_operation_id,
+      :snapshot_operation_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Specifies dependency JARs, as well as JAR files that contain
     # user-defined functions (UDF).
@@ -2094,6 +2228,56 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] snapshot_name
+    #   The name of the enhanced snapshot to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_creation_timestamp
+    #   The creation timestamp of the enhanced snapshot to delete. Use the
+    #   `DescribeSnapshot` operation to get this value.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteSnapshotRequest AWS API Documentation
+    #
+    class DeleteSnapshotRequest < Struct.new(
+      :snapshot_name,
+      :snapshot_creation_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_arn
+    #   The ARN of the enhanced snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_status
+    #   The status of the snapshot. When Managed Service for Apache Flink
+    #   accepts the request, the status is `DELETING`. If a snapshot
+    #   operation, such as an export, uses the snapshot, the status stays
+    #   `DELETING` until that operation finishes and Managed Service for
+    #   Apache Flink deletes the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_operation_id
+    #   The ID of the snapshot operation. You can use this value with
+    #   `DescribeSnapshotOperation` to track the progress of the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_operation_status
+    #   The status of the snapshot operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteSnapshotResponse AWS API Documentation
+    #
+    class DeleteSnapshotResponse < Struct.new(
+      :snapshot_arn,
+      :snapshot_status,
+      :snapshot_operation_id,
+      :snapshot_operation_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The information required to deploy a Managed Service for Apache Flink
     # Studio notebook as an application with durable state.
     #
@@ -2276,6 +2460,61 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] snapshot_name
+    #   The name of the enhanced snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_operation_id
+    #   The ID of the snapshot operation. You can retrieve this value using
+    #   `ListSnapshotOperations`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeSnapshotOperationRequest AWS API Documentation
+    #
+    class DescribeSnapshotOperationRequest < Struct.new(
+      :snapshot_name,
+      :snapshot_operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_operation_info_details
+    #   An object containing information about the snapshot operation.
+    #   @return [Types::SnapshotOperationInfoDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeSnapshotOperationResponse AWS API Documentation
+    #
+    class DescribeSnapshotOperationResponse < Struct.new(
+      :snapshot_operation_info_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_name
+    #   The name of the enhanced snapshot. You can retrieve this value using
+    #   `ListSnapshots`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeSnapshotRequest AWS API Documentation
+    #
+    class DescribeSnapshotRequest < Struct.new(
+      :snapshot_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_info_details
+    #   An object containing information about the enhanced snapshot.
+    #   @return [Types::SnapshotInfoDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DescribeSnapshotResponse AWS API Documentation
+    #
+    class DescribeSnapshotResponse < Struct.new(
+      :snapshot_info_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the data format when records are written to the destination
     # in a SQL-based Kinesis Data Analytics application.
     #
@@ -2358,6 +2597,26 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
+    # Describes the encryption configuration of snapshot data for a snapshot
+    # operation.
+    #
+    # @!attribute [rw] key_id
+    #   The KMS key used for encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_type
+    #   Specifies the type of key used for encryption.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/EncryptionConfigurationDescription AWS API Documentation
+    #
+    class EncryptionConfigurationDescription < Struct.new(
+      :key_id,
+      :key_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes execution properties for a Managed Service for Apache Flink
     # application.
     #
@@ -2412,6 +2671,87 @@ module Aws::KinesisAnalyticsV2
     #
     class ErrorInfo < Struct.new(
       :error_string)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the destination of the exported snapshot data.
+    #
+    # @!attribute [rw] destination_type
+    #   The type of the destination location. The only supported value is
+    #   `S3`.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_role_arn
+    #   The ARN of the IAM role that Managed Service for Apache Flink
+    #   assumes to write the snapshot data to the destination location. For
+    #   information about the permissions that this role requires, see
+    #   [Import and export][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-flink/latest/java/snapshots-import-export.html
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_encryption_configuration
+    #   The encryption configuration of the exported snapshot data. If you
+    #   don't specify this parameter, Managed Service for Apache Flink uses
+    #   a key of type `AWS_OWNED_KEY`. If you specify a KMS key, you must
+    #   specify the key ARN.
+    #   @return [Types::SnapshotEncryptionConfiguration]
+    #
+    # @!attribute [rw] destination_s3_prefix_location
+    #   The Amazon S3 bucket and key prefix to export the snapshot data to.
+    #   Managed Service for Apache Flink writes the data under a unique
+    #   prefix that it appends to the key prefix that you specify. After the
+    #   export completes, use `DescribeSnapshotOperation` to get the full
+    #   prefix. The bucket must be owned by your account and must be in the
+    #   same Region as the request.
+    #   @return [Types::S3PrefixLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ExportDestinationConfiguration AWS API Documentation
+    #
+    class ExportDestinationConfiguration < Struct.new(
+      :destination_type,
+      :export_role_arn,
+      :destination_encryption_configuration,
+      :destination_s3_prefix_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_name
+    #   The name of the enhanced snapshot to export.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_destination_configuration
+    #   Describes the location, IAM role, and encryption configuration of
+    #   the export destination.
+    #   @return [Types::ExportDestinationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ExportSnapshotRequest AWS API Documentation
+    #
+    class ExportSnapshotRequest < Struct.new(
+      :snapshot_name,
+      :export_destination_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_operation_id
+    #   The ID of the snapshot operation. You can use this value with
+    #   `DescribeSnapshotOperation` to track the progress of the export.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_operation_status
+    #   The status of the snapshot operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ExportSnapshotResponse AWS API Documentation
+    #
+    class ExportSnapshotResponse < Struct.new(
+      :snapshot_operation_id,
+      :snapshot_operation_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2599,6 +2939,127 @@ module Aws::KinesisAnalyticsV2
     #
     class GlueDataCatalogConfigurationUpdate < Struct.new(
       :database_arn_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_name
+    #   The name of the enhanced snapshot. The name must be unique among the
+    #   snapshots in your account and Region. You can't reuse the name of
+    #   an existing snapshot, including a snapshot in the `FAILED` status,
+    #   until you delete that snapshot. Names that begin with
+    #   `SYSTEMSNAPSHOT` are reserved.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_source_configuration
+    #   Describes the location, IAM role, and encryption configuration of
+    #   the savepoint data to import.
+    #   @return [Types::ImportSourceConfiguration]
+    #
+    # @!attribute [rw] destination_encryption_configuration
+    #   The encryption configuration of the imported snapshot. If you don't
+    #   specify this parameter, the snapshot is encrypted using a key of
+    #   type `AWS_OWNED_KEY`. If you specify a KMS key, you must specify the
+    #   key ARN.
+    #   @return [Types::SnapshotEncryptionConfiguration]
+    #
+    # @!attribute [rw] snapshot_description
+    #   A summary description of the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_format
+    #   The format of the snapshot being imported.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of one or more tags to assign to the snapshot. A tag is a
+    #   key-value pair that identifies a snapshot. For more information, see
+    #   [Using Tagging][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ImportSnapshotRequest AWS API Documentation
+    #
+    class ImportSnapshotRequest < Struct.new(
+      :snapshot_name,
+      :import_source_configuration,
+      :destination_encryption_configuration,
+      :snapshot_description,
+      :snapshot_format,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_arn
+    #   The ARN of the enhanced snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_status
+    #   The status of the snapshot. When Managed Service for Apache Flink
+    #   accepts the request, the status is `CREATING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_operation_id
+    #   The ID of the snapshot operation. You can use this value with
+    #   `DescribeSnapshotOperation` to track the progress of the import.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_operation_status
+    #   The status of the snapshot operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ImportSnapshotResponse AWS API Documentation
+    #
+    class ImportSnapshotResponse < Struct.new(
+      :snapshot_arn,
+      :snapshot_status,
+      :snapshot_operation_id,
+      :snapshot_operation_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the source of the savepoint data to import.
+    #
+    # @!attribute [rw] source_type
+    #   The type of the source location. The only supported value is `S3`.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_role_arn
+    #   The ARN of the IAM role that Managed Service for Apache Flink
+    #   assumes to read the savepoint data from the source location. For
+    #   information about the permissions that this role requires, see
+    #   [Import and export][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-flink/latest/java/snapshots-import-export.html
+    #   @return [String]
+    #
+    # @!attribute [rw] source_encryption_configuration
+    #   The encryption configuration of the savepoint data at the source
+    #   location. If you don't specify this parameter, Managed Service for
+    #   Apache Flink uses a key of type `AWS_OWNED_KEY`. If you specify a
+    #   KMS key, you must specify the key ARN.
+    #   @return [Types::SnapshotEncryptionConfiguration]
+    #
+    # @!attribute [rw] source_s3_prefix_location
+    #   The Amazon S3 bucket and key prefix that contain the savepoint data
+    #   to import. The bucket must be owned by your account and must be in
+    #   the same Region as the request.
+    #   @return [Types::S3PrefixLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ImportSourceConfiguration AWS API Documentation
+    #
+    class ImportSourceConfiguration < Struct.new(
+      :source_type,
+      :import_role_arn,
+      :source_encryption_configuration,
+      :source_s3_prefix_location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3623,6 +4084,114 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] snapshot_name
+    #   The name of the enhanced snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_operation
+    #   Use this parameter to list only the operations of the specified
+    #   type.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_operation_status
+    #   Use this parameter to list only the operations with the specified
+    #   status.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of snapshot operations to list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in a subsequent request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListSnapshotOperationsRequest AWS API Documentation
+    #
+    class ListSnapshotOperationsRequest < Struct.new(
+      :snapshot_name,
+      :snapshot_operation,
+      :snapshot_operation_status,
+      :limit,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_operation_info_list
+    #   A list of `SnapshotOperationInfo` objects.
+    #   @return [Array<Types::SnapshotOperationInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in a subsequent request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListSnapshotOperationsResponse AWS API Documentation
+    #
+    class ListSnapshotOperationsResponse < Struct.new(
+      :snapshot_operation_info_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_application_name
+    #   The name of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_initiator
+    #   Use this parameter to list only the snapshots with the specified
+    #   initiator.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_initiator_operation
+    #   Use this parameter to list only the snapshots that were created by
+    #   the specified operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_status
+    #   Use this parameter to list only the snapshots with the specified
+    #   status.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of snapshots to list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in a subsequent request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListSnapshotsRequest AWS API Documentation
+    #
+    class ListSnapshotsRequest < Struct.new(
+      :source_application_name,
+      :snapshot_initiator,
+      :snapshot_initiator_operation,
+      :snapshot_status,
+      :limit,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_info_list
+    #   A list of `SnapshotInfo` objects.
+    #   @return [Array<Types::SnapshotInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in a subsequent request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListSnapshotsResponse AWS API Documentation
+    #
+    class ListSnapshotsResponse < Struct.new(
+      :snapshot_info_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN of the application for which to retrieve tags.
     #   @return [String]
@@ -4291,7 +4860,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # The application is not available for this operation.
+    # The application or snapshot is not available for this operation.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4304,7 +4873,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Specified application can't be found.
+    # The specified application, snapshot, or snapshot operation can't be
+    # found.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4605,6 +5175,25 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
+    # Specifies an Amazon S3 bucket and key prefix.
+    #
+    # @!attribute [rw] bucket_arn
+    #   The ARN of the Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_prefix
+    #   The key prefix in the Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/S3PrefixLocation AWS API Documentation
+    #
+    class S3PrefixLocation < Struct.new(
+      :bucket_arn,
+      :key_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # For a SQL-based Kinesis Data Analytics application, identifies the
     # Amazon S3 bucket and object that contains the reference data.
     #
@@ -4732,6 +5321,397 @@ module Aws::KinesisAnalyticsV2
       :snapshot_creation_timestamp,
       :runtime_environment,
       :application_encryption_configuration_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the encryption configuration of snapshot data.
+    #
+    # @!attribute [rw] key_id
+    #   The KMS key used for encryption. `KeyId` is used only when `KeyType`
+    #   is `CUSTOMER_MANAGED_KEY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_type
+    #   Specifies the type of key used for encryption.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/SnapshotEncryptionConfiguration AWS API Documentation
+    #
+    class SnapshotEncryptionConfiguration < Struct.new(
+      :key_id,
+      :key_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A description of the error that caused a snapshot operation to fail.
+    #
+    # @!attribute [rw] error_code
+    #   The error code that identifies the cause of the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_string
+    #   An error message that is returned when an operation fails.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/SnapshotErrorInfo AWS API Documentation
+    #
+    class SnapshotErrorInfo < Struct.new(
+      :error_code,
+      :error_string)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides summary information about an enhanced snapshot.
+    #
+    # @!attribute [rw] snapshot_name
+    #   The name of the enhanced snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_arn
+    #   The ARN of the enhanced snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_status
+    #   The status of the enhanced snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_creation_timestamp
+    #   The timestamp that indicates when the snapshot was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] snapshot_initiator
+    #   Indicates who initiated the snapshot. `USER` indicates a snapshot
+    #   that you created or imported. `SYSTEM` indicates a snapshot that
+    #   Managed Service for Apache Flink created.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_initiator_operation
+    #   The operation that created the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_application_name
+    #   The name of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_format
+    #   The format of the snapshot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/SnapshotInfo AWS API Documentation
+    #
+    class SnapshotInfo < Struct.new(
+      :snapshot_name,
+      :snapshot_arn,
+      :snapshot_status,
+      :snapshot_creation_timestamp,
+      :snapshot_initiator,
+      :snapshot_initiator_operation,
+      :source_application_name,
+      :snapshot_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an enhanced snapshot.
+    #
+    # @!attribute [rw] snapshot_name
+    #   The name of the enhanced snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_arn
+    #   The ARN of the enhanced snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_description
+    #   The summary description of the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_status
+    #   The status of the enhanced snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_creation_timestamp
+    #   The timestamp that indicates when the snapshot was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] runtime_environment
+    #   The Flink runtime of the application that the snapshot was created
+    #   from. This field is not present for imported snapshots.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_size_in_bytes
+    #   The size of the snapshot, in bytes. The value is `0` until the
+    #   snapshot status is `READY`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] snapshot_encryption_configuration_description
+    #   Describes the encryption settings of data at rest for the snapshot.
+    #   @return [Types::SnapshotEncryptionConfiguration]
+    #
+    # @!attribute [rw] snapshot_initiator
+    #   Indicates who initiated the snapshot. `USER` indicates a snapshot
+    #   that you created or imported. `SYSTEM` indicates a snapshot that
+    #   Managed Service for Apache Flink created.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_initiator_operation
+    #   The operation that created the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_source_description
+    #   Describes the source of the snapshot.
+    #   @return [Types::SnapshotSourceDescription]
+    #
+    # @!attribute [rw] snapshot_format
+    #   The format of the snapshot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/SnapshotInfoDetails AWS API Documentation
+    #
+    class SnapshotInfoDetails < Struct.new(
+      :snapshot_name,
+      :snapshot_arn,
+      :snapshot_description,
+      :snapshot_status,
+      :snapshot_creation_timestamp,
+      :runtime_environment,
+      :snapshot_size_in_bytes,
+      :snapshot_encryption_configuration_description,
+      :snapshot_initiator,
+      :snapshot_initiator_operation,
+      :snapshot_source_description,
+      :snapshot_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a description of the snapshot operation failure.
+    #
+    # @!attribute [rw] error_info
+    #   A description of the error that caused the snapshot operation to
+    #   fail.
+    #   @return [Types::SnapshotErrorInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/SnapshotOperationFailureDetails AWS API Documentation
+    #
+    class SnapshotOperationFailureDetails < Struct.new(
+      :error_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides summary information about an operation that was performed on
+    # an enhanced snapshot.
+    #
+    # @!attribute [rw] snapshot_operation_id
+    #   The ID of the snapshot operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_operation
+    #   The type of operation that was performed on the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_operation_status
+    #   The status of the snapshot operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp that indicates when the operation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp that indicates when the operation finished. This field
+    #   is present only after the operation completes.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/SnapshotOperationInfo AWS API Documentation
+    #
+    class SnapshotOperationInfo < Struct.new(
+      :snapshot_operation_id,
+      :snapshot_operation,
+      :snapshot_operation_status,
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A description of a snapshot operation that provides information about
+    # the operation that was performed on an enhanced snapshot.
+    #
+    # @!attribute [rw] snapshot_operation_id
+    #   The ID of the snapshot operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_operation
+    #   The type of operation that was performed on the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_operation_status
+    #   The status of the snapshot operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_arn
+    #   The ARN of the enhanced snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_encryption_configuration_description
+    #   Describes the encryption configuration of the source data. This
+    #   field is present only for `ImportSnapshot` operation.
+    #   @return [Types::EncryptionConfigurationDescription]
+    #
+    # @!attribute [rw] destination_encryption_configuration_description
+    #   Describes the encryption configuration of the destination data. This
+    #   field is present only for `ImportSnapshot` and `ExportSnapshot`
+    #   operations.
+    #   @return [Types::EncryptionConfigurationDescription]
+    #
+    # @!attribute [rw] snapshot_source_location_description
+    #   Describes the location that the snapshot data was read from. This
+    #   field is present only for `ImportSnapshot` operations.
+    #   @return [Types::SnapshotOperationLocationDescription]
+    #
+    # @!attribute [rw] snapshot_destination_location_description
+    #   Describes the location that the snapshot data was written to. This
+    #   field is present only for `ExportSnapshot` operations, after the
+    #   operation completes.
+    #   @return [Types::SnapshotOperationLocationDescription]
+    #
+    # @!attribute [rw] application_operation_description
+    #   Describes the application operation that initiated the snapshot
+    #   operation. This field is present only for `SystemCreateSnapshot`
+    #   operations.
+    #   @return [Types::ApplicationOperationDescription]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp that indicates when the operation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp that indicates when the operation finished. This field
+    #   is present only after the operation completes.
+    #   @return [Time]
+    #
+    # @!attribute [rw] snapshot_operation_failure_details
+    #   Provides a description of the operation failure. This field is
+    #   present only if `SnapshotOperationStatus` is `FAILED`.
+    #   @return [Types::SnapshotOperationFailureDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/SnapshotOperationInfoDetails AWS API Documentation
+    #
+    class SnapshotOperationInfoDetails < Struct.new(
+      :snapshot_operation_id,
+      :snapshot_operation,
+      :snapshot_operation_status,
+      :snapshot_arn,
+      :source_encryption_configuration_description,
+      :destination_encryption_configuration_description,
+      :snapshot_source_location_description,
+      :snapshot_destination_location_description,
+      :application_operation_description,
+      :start_time,
+      :end_time,
+      :snapshot_operation_failure_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the location of snapshot data for a snapshot operation.
+    #
+    # @!attribute [rw] location_type
+    #   The type of the location. The only supported value is `S3`.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_prefix_location
+    #   Describes the Amazon S3 bucket and key prefix of the location.
+    #   @return [Types::SnapshotOperationS3PrefixLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/SnapshotOperationLocationDescription AWS API Documentation
+    #
+    class SnapshotOperationLocationDescription < Struct.new(
+      :location_type,
+      :s3_prefix_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Amazon S3 bucket and key prefix for a snapshot operation.
+    #
+    # @!attribute [rw] bucket_arn
+    #   The ARN of the Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_prefix
+    #   The key prefix in the Amazon S3 bucket that you specified in the
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] exported_prefix
+    #   The full key prefix that the exported snapshot data was written to.
+    #   This value includes the unique prefix that Managed Service for
+    #   Apache Flink appends to `KeyPrefix`. This field is present only
+    #   after an `ExportSnapshot` operation completes successfully.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/SnapshotOperationS3PrefixLocation AWS API Documentation
+    #
+    class SnapshotOperationS3PrefixLocation < Struct.new(
+      :bucket_arn,
+      :key_prefix,
+      :exported_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the source of an enhanced snapshot. For a snapshot that was
+    # created from an application, `SourceApplicationDescription` is
+    # present. For an imported snapshot, `S3PrefixLocation` is present.
+    #
+    # @!attribute [rw] s3_prefix_location
+    #   The Amazon S3 location that the snapshot was imported from. This
+    #   field is present only if `SnapshotInitiatorOperation` is
+    #   `ImportSnapshot`.
+    #   @return [Types::S3PrefixLocation]
+    #
+    # @!attribute [rw] source_application_description
+    #   Describes the application that the snapshot was created from. This
+    #   field is not present for imported snapshots.
+    #   @return [Types::SourceApplicationDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/SnapshotSourceDescription AWS API Documentation
+    #
+    class SnapshotSourceDescription < Struct.new(
+      :s3_prefix_location,
+      :source_application_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the application that an enhanced snapshot was created from.
+    #
+    # @!attribute [rw] application_name
+    #   The name of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_creation_timestamp
+    #   The timestamp that indicates when the source application was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] application_version_id
+    #   The version ID of the source application when the snapshot was
+    #   created.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/SourceApplicationDescription AWS API Documentation
+    #
+    class SourceApplicationDescription < Struct.new(
+      :application_name,
+      :application_creation_timestamp,
+      :application_version_id)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -43,6 +43,7 @@ module Aws::KinesisAnalyticsV2
     ApplicationMaintenanceWindowStartTime = Shapes::StringShape.new(name: 'ApplicationMaintenanceWindowStartTime')
     ApplicationMode = Shapes::StringShape.new(name: 'ApplicationMode')
     ApplicationName = Shapes::StringShape.new(name: 'ApplicationName')
+    ApplicationOperationDescription = Shapes::StructureShape.new(name: 'ApplicationOperationDescription')
     ApplicationOperationInfo = Shapes::StructureShape.new(name: 'ApplicationOperationInfo')
     ApplicationOperationInfoDetails = Shapes::StructureShape.new(name: 'ApplicationOperationInfoDetails')
     ApplicationOperationInfoList = Shapes::ListShape.new(name: 'ApplicationOperationInfoList')
@@ -96,6 +97,8 @@ module Aws::KinesisAnalyticsV2
     CreateApplicationResponse = Shapes::StructureShape.new(name: 'CreateApplicationResponse')
     CreateApplicationSnapshotRequest = Shapes::StructureShape.new(name: 'CreateApplicationSnapshotRequest')
     CreateApplicationSnapshotResponse = Shapes::StructureShape.new(name: 'CreateApplicationSnapshotResponse')
+    CreateSnapshotRequest = Shapes::StructureShape.new(name: 'CreateSnapshotRequest')
+    CreateSnapshotResponse = Shapes::StructureShape.new(name: 'CreateSnapshotResponse')
     CustomArtifactConfiguration = Shapes::StructureShape.new(name: 'CustomArtifactConfiguration')
     CustomArtifactConfigurationDescription = Shapes::StructureShape.new(name: 'CustomArtifactConfigurationDescription')
     CustomArtifactsConfigurationDescriptionList = Shapes::ListShape.new(name: 'CustomArtifactsConfigurationDescriptionList')
@@ -115,6 +118,8 @@ module Aws::KinesisAnalyticsV2
     DeleteApplicationSnapshotResponse = Shapes::StructureShape.new(name: 'DeleteApplicationSnapshotResponse')
     DeleteApplicationVpcConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationVpcConfigurationRequest')
     DeleteApplicationVpcConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteApplicationVpcConfigurationResponse')
+    DeleteSnapshotRequest = Shapes::StructureShape.new(name: 'DeleteSnapshotRequest')
+    DeleteSnapshotResponse = Shapes::StructureShape.new(name: 'DeleteSnapshotResponse')
     DeployAsApplicationConfiguration = Shapes::StructureShape.new(name: 'DeployAsApplicationConfiguration')
     DeployAsApplicationConfigurationDescription = Shapes::StructureShape.new(name: 'DeployAsApplicationConfigurationDescription')
     DeployAsApplicationConfigurationUpdate = Shapes::StructureShape.new(name: 'DeployAsApplicationConfigurationUpdate')
@@ -126,15 +131,23 @@ module Aws::KinesisAnalyticsV2
     DescribeApplicationSnapshotResponse = Shapes::StructureShape.new(name: 'DescribeApplicationSnapshotResponse')
     DescribeApplicationVersionRequest = Shapes::StructureShape.new(name: 'DescribeApplicationVersionRequest')
     DescribeApplicationVersionResponse = Shapes::StructureShape.new(name: 'DescribeApplicationVersionResponse')
+    DescribeSnapshotOperationRequest = Shapes::StructureShape.new(name: 'DescribeSnapshotOperationRequest')
+    DescribeSnapshotOperationResponse = Shapes::StructureShape.new(name: 'DescribeSnapshotOperationResponse')
+    DescribeSnapshotRequest = Shapes::StructureShape.new(name: 'DescribeSnapshotRequest')
+    DescribeSnapshotResponse = Shapes::StructureShape.new(name: 'DescribeSnapshotResponse')
     DestinationSchema = Shapes::StructureShape.new(name: 'DestinationSchema')
     DiscoverInputSchemaRequest = Shapes::StructureShape.new(name: 'DiscoverInputSchemaRequest')
     DiscoverInputSchemaResponse = Shapes::StructureShape.new(name: 'DiscoverInputSchemaResponse')
+    EncryptionConfigurationDescription = Shapes::StructureShape.new(name: 'EncryptionConfigurationDescription')
     EnvironmentProperties = Shapes::StructureShape.new(name: 'EnvironmentProperties')
     EnvironmentPropertyDescriptions = Shapes::StructureShape.new(name: 'EnvironmentPropertyDescriptions')
     EnvironmentPropertyUpdates = Shapes::StructureShape.new(name: 'EnvironmentPropertyUpdates')
     ErrorInfo = Shapes::StructureShape.new(name: 'ErrorInfo')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorString = Shapes::StringShape.new(name: 'ErrorString')
+    ExportDestinationConfiguration = Shapes::StructureShape.new(name: 'ExportDestinationConfiguration')
+    ExportSnapshotRequest = Shapes::StructureShape.new(name: 'ExportSnapshotRequest')
+    ExportSnapshotResponse = Shapes::StructureShape.new(name: 'ExportSnapshotResponse')
     FileKey = Shapes::StringShape.new(name: 'FileKey')
     FlinkApplicationConfiguration = Shapes::StructureShape.new(name: 'FlinkApplicationConfiguration')
     FlinkApplicationConfigurationDescription = Shapes::StructureShape.new(name: 'FlinkApplicationConfigurationDescription')
@@ -144,6 +157,9 @@ module Aws::KinesisAnalyticsV2
     GlueDataCatalogConfigurationDescription = Shapes::StructureShape.new(name: 'GlueDataCatalogConfigurationDescription')
     GlueDataCatalogConfigurationUpdate = Shapes::StructureShape.new(name: 'GlueDataCatalogConfigurationUpdate')
     Id = Shapes::StringShape.new(name: 'Id')
+    ImportSnapshotRequest = Shapes::StructureShape.new(name: 'ImportSnapshotRequest')
+    ImportSnapshotResponse = Shapes::StructureShape.new(name: 'ImportSnapshotResponse')
+    ImportSourceConfiguration = Shapes::StructureShape.new(name: 'ImportSourceConfiguration')
     InAppStreamName = Shapes::StringShape.new(name: 'InAppStreamName')
     InAppStreamNames = Shapes::ListShape.new(name: 'InAppStreamNames')
     InAppTableName = Shapes::StringShape.new(name: 'InAppTableName')
@@ -171,6 +187,7 @@ module Aws::KinesisAnalyticsV2
     JSONMappingParameters = Shapes::StructureShape.new(name: 'JSONMappingParameters')
     JobPlanDescription = Shapes::StringShape.new(name: 'JobPlanDescription')
     KeyId = Shapes::StringShape.new(name: 'KeyId')
+    KeyPrefix = Shapes::StringShape.new(name: 'KeyPrefix')
     KeyType = Shapes::StringShape.new(name: 'KeyType')
     KinesisAnalyticsARN = Shapes::StringShape.new(name: 'KinesisAnalyticsARN')
     KinesisFirehoseInput = Shapes::StructureShape.new(name: 'KinesisFirehoseInput')
@@ -200,7 +217,13 @@ module Aws::KinesisAnalyticsV2
     ListApplicationsInputLimit = Shapes::IntegerShape.new(name: 'ListApplicationsInputLimit')
     ListApplicationsRequest = Shapes::StructureShape.new(name: 'ListApplicationsRequest')
     ListApplicationsResponse = Shapes::StructureShape.new(name: 'ListApplicationsResponse')
+    ListSnapshotOperationsLimit = Shapes::IntegerShape.new(name: 'ListSnapshotOperationsLimit')
+    ListSnapshotOperationsRequest = Shapes::StructureShape.new(name: 'ListSnapshotOperationsRequest')
+    ListSnapshotOperationsResponse = Shapes::StructureShape.new(name: 'ListSnapshotOperationsResponse')
     ListSnapshotsInputLimit = Shapes::IntegerShape.new(name: 'ListSnapshotsInputLimit')
+    ListSnapshotsLimit = Shapes::IntegerShape.new(name: 'ListSnapshotsLimit')
+    ListSnapshotsRequest = Shapes::StructureShape.new(name: 'ListSnapshotsRequest')
+    ListSnapshotsResponse = Shapes::StructureShape.new(name: 'ListSnapshotsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LogLevel = Shapes::StringShape.new(name: 'LogLevel')
@@ -279,6 +302,7 @@ module Aws::KinesisAnalyticsV2
     S3ContentBaseLocationUpdate = Shapes::StructureShape.new(name: 'S3ContentBaseLocationUpdate')
     S3ContentLocation = Shapes::StructureShape.new(name: 'S3ContentLocation')
     S3ContentLocationUpdate = Shapes::StructureShape.new(name: 'S3ContentLocationUpdate')
+    S3PrefixLocation = Shapes::StructureShape.new(name: 'S3PrefixLocation')
     S3ReferenceDataSource = Shapes::StructureShape.new(name: 'S3ReferenceDataSource')
     S3ReferenceDataSourceDescription = Shapes::StructureShape.new(name: 'S3ReferenceDataSourceDescription')
     S3ReferenceDataSourceUpdate = Shapes::StructureShape.new(name: 'S3ReferenceDataSourceUpdate')
@@ -286,10 +310,35 @@ module Aws::KinesisAnalyticsV2
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SessionExpirationDurationInSeconds = Shapes::IntegerShape.new(name: 'SessionExpirationDurationInSeconds')
+    SnapshotArn = Shapes::StringShape.new(name: 'SnapshotArn')
     SnapshotDetails = Shapes::StructureShape.new(name: 'SnapshotDetails')
+    SnapshotEncryptionConfiguration = Shapes::StructureShape.new(name: 'SnapshotEncryptionConfiguration')
+    SnapshotErrorInfo = Shapes::StructureShape.new(name: 'SnapshotErrorInfo')
+    SnapshotFormat = Shapes::StringShape.new(name: 'SnapshotFormat')
+    SnapshotInfo = Shapes::StructureShape.new(name: 'SnapshotInfo')
+    SnapshotInfoDetails = Shapes::StructureShape.new(name: 'SnapshotInfoDetails')
+    SnapshotInfoList = Shapes::ListShape.new(name: 'SnapshotInfoList')
+    SnapshotInitiator = Shapes::StringShape.new(name: 'SnapshotInitiator')
+    SnapshotInitiatorOperation = Shapes::StringShape.new(name: 'SnapshotInitiatorOperation')
+    SnapshotMode = Shapes::StringShape.new(name: 'SnapshotMode')
     SnapshotName = Shapes::StringShape.new(name: 'SnapshotName')
+    SnapshotOperation = Shapes::StringShape.new(name: 'SnapshotOperation')
+    SnapshotOperationErrorCode = Shapes::StringShape.new(name: 'SnapshotOperationErrorCode')
+    SnapshotOperationFailureDetails = Shapes::StructureShape.new(name: 'SnapshotOperationFailureDetails')
+    SnapshotOperationId = Shapes::StringShape.new(name: 'SnapshotOperationId')
+    SnapshotOperationInfo = Shapes::StructureShape.new(name: 'SnapshotOperationInfo')
+    SnapshotOperationInfoDetails = Shapes::StructureShape.new(name: 'SnapshotOperationInfoDetails')
+    SnapshotOperationInfoList = Shapes::ListShape.new(name: 'SnapshotOperationInfoList')
+    SnapshotOperationLocationDescription = Shapes::StructureShape.new(name: 'SnapshotOperationLocationDescription')
+    SnapshotOperationS3PrefixLocation = Shapes::StructureShape.new(name: 'SnapshotOperationS3PrefixLocation')
+    SnapshotOperationStatus = Shapes::StringShape.new(name: 'SnapshotOperationStatus')
+    SnapshotSizeInBytes = Shapes::IntegerShape.new(name: 'SnapshotSizeInBytes')
+    SnapshotSourceDescription = Shapes::StructureShape.new(name: 'SnapshotSourceDescription')
     SnapshotStatus = Shapes::StringShape.new(name: 'SnapshotStatus')
     SnapshotSummaries = Shapes::ListShape.new(name: 'SnapshotSummaries')
+    SnapshotV2Description = Shapes::StringShape.new(name: 'SnapshotV2Description')
+    SnapshotV2Name = Shapes::StringShape.new(name: 'SnapshotV2Name')
+    SourceApplicationDescription = Shapes::StructureShape.new(name: 'SourceApplicationDescription')
     SourceSchema = Shapes::StructureShape.new(name: 'SourceSchema')
     SqlApplicationConfiguration = Shapes::StructureShape.new(name: 'SqlApplicationConfiguration')
     SqlApplicationConfigurationDescription = Shapes::StructureShape.new(name: 'SqlApplicationConfigurationDescription')
@@ -300,6 +349,7 @@ module Aws::KinesisAnalyticsV2
     StartApplicationResponse = Shapes::StructureShape.new(name: 'StartApplicationResponse')
     StopApplicationRequest = Shapes::StructureShape.new(name: 'StopApplicationRequest')
     StopApplicationResponse = Shapes::StructureShape.new(name: 'StopApplicationResponse')
+    StorageLocationType = Shapes::StringShape.new(name: 'StorageLocationType')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -487,6 +537,10 @@ module Aws::KinesisAnalyticsV2
     ApplicationMaintenanceConfigurationUpdate.add_member(:application_maintenance_window_start_time_update, Shapes::ShapeRef.new(shape: ApplicationMaintenanceWindowStartTime, required: true, location_name: "ApplicationMaintenanceWindowStartTimeUpdate"))
     ApplicationMaintenanceConfigurationUpdate.struct_class = Types::ApplicationMaintenanceConfigurationUpdate
 
+    ApplicationOperationDescription.add_member(:application_operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "ApplicationOperationId"))
+    ApplicationOperationDescription.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "ApplicationName"))
+    ApplicationOperationDescription.struct_class = Types::ApplicationOperationDescription
+
     ApplicationOperationInfo.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "Operation"))
     ApplicationOperationInfo.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
     ApplicationOperationInfo.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
@@ -506,15 +560,19 @@ module Aws::KinesisAnalyticsV2
 
     ApplicationRestoreConfiguration.add_member(:application_restore_type, Shapes::ShapeRef.new(shape: ApplicationRestoreType, required: true, location_name: "ApplicationRestoreType"))
     ApplicationRestoreConfiguration.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: SnapshotName, location_name: "SnapshotName"))
+    ApplicationRestoreConfiguration.add_member(:snapshot_arn, Shapes::ShapeRef.new(shape: SnapshotArn, location_name: "SnapshotArn"))
     ApplicationRestoreConfiguration.struct_class = Types::ApplicationRestoreConfiguration
 
     ApplicationSnapshotConfiguration.add_member(:snapshots_enabled, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "SnapshotsEnabled"))
+    ApplicationSnapshotConfiguration.add_member(:snapshot_mode, Shapes::ShapeRef.new(shape: SnapshotMode, location_name: "SnapshotMode"))
     ApplicationSnapshotConfiguration.struct_class = Types::ApplicationSnapshotConfiguration
 
     ApplicationSnapshotConfigurationDescription.add_member(:snapshots_enabled, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "SnapshotsEnabled"))
+    ApplicationSnapshotConfigurationDescription.add_member(:snapshot_mode, Shapes::ShapeRef.new(shape: SnapshotMode, location_name: "SnapshotMode"))
     ApplicationSnapshotConfigurationDescription.struct_class = Types::ApplicationSnapshotConfigurationDescription
 
     ApplicationSnapshotConfigurationUpdate.add_member(:snapshots_enabled_update, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "SnapshotsEnabledUpdate"))
+    ApplicationSnapshotConfigurationUpdate.add_member(:snapshot_mode_update, Shapes::ShapeRef.new(shape: SnapshotMode, location_name: "SnapshotModeUpdate"))
     ApplicationSnapshotConfigurationUpdate.struct_class = Types::ApplicationSnapshotConfigurationUpdate
 
     ApplicationSummaries.member = Shapes::ShapeRef.new(shape: ApplicationSummary)
@@ -644,6 +702,18 @@ module Aws::KinesisAnalyticsV2
 
     CreateApplicationSnapshotResponse.struct_class = Types::CreateApplicationSnapshotResponse
 
+    CreateSnapshotRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
+    CreateSnapshotRequest.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: SnapshotV2Name, required: true, location_name: "SnapshotName"))
+    CreateSnapshotRequest.add_member(:snapshot_description, Shapes::ShapeRef.new(shape: SnapshotV2Description, location_name: "SnapshotDescription"))
+    CreateSnapshotRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateSnapshotRequest.struct_class = Types::CreateSnapshotRequest
+
+    CreateSnapshotResponse.add_member(:snapshot_arn, Shapes::ShapeRef.new(shape: SnapshotArn, required: true, location_name: "SnapshotArn"))
+    CreateSnapshotResponse.add_member(:snapshot_status, Shapes::ShapeRef.new(shape: SnapshotStatus, required: true, location_name: "SnapshotStatus"))
+    CreateSnapshotResponse.add_member(:snapshot_operation_id, Shapes::ShapeRef.new(shape: SnapshotOperationId, required: true, location_name: "SnapshotOperationId"))
+    CreateSnapshotResponse.add_member(:snapshot_operation_status, Shapes::ShapeRef.new(shape: SnapshotOperationStatus, required: true, location_name: "SnapshotOperationStatus"))
+    CreateSnapshotResponse.struct_class = Types::CreateSnapshotResponse
+
     CustomArtifactConfiguration.add_member(:artifact_type, Shapes::ShapeRef.new(shape: ArtifactType, required: true, location_name: "ArtifactType"))
     CustomArtifactConfiguration.add_member(:s3_content_location, Shapes::ShapeRef.new(shape: S3ContentLocation, location_name: "S3ContentLocation"))
     CustomArtifactConfiguration.add_member(:maven_reference, Shapes::ShapeRef.new(shape: MavenReference, location_name: "MavenReference"))
@@ -721,6 +791,16 @@ module Aws::KinesisAnalyticsV2
     DeleteApplicationVpcConfigurationResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
     DeleteApplicationVpcConfigurationResponse.struct_class = Types::DeleteApplicationVpcConfigurationResponse
 
+    DeleteSnapshotRequest.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: SnapshotV2Name, required: true, location_name: "SnapshotName"))
+    DeleteSnapshotRequest.add_member(:snapshot_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "SnapshotCreationTimestamp"))
+    DeleteSnapshotRequest.struct_class = Types::DeleteSnapshotRequest
+
+    DeleteSnapshotResponse.add_member(:snapshot_arn, Shapes::ShapeRef.new(shape: SnapshotArn, required: true, location_name: "SnapshotArn"))
+    DeleteSnapshotResponse.add_member(:snapshot_status, Shapes::ShapeRef.new(shape: SnapshotStatus, required: true, location_name: "SnapshotStatus"))
+    DeleteSnapshotResponse.add_member(:snapshot_operation_id, Shapes::ShapeRef.new(shape: SnapshotOperationId, required: true, location_name: "SnapshotOperationId"))
+    DeleteSnapshotResponse.add_member(:snapshot_operation_status, Shapes::ShapeRef.new(shape: SnapshotOperationStatus, required: true, location_name: "SnapshotOperationStatus"))
+    DeleteSnapshotResponse.struct_class = Types::DeleteSnapshotResponse
+
     DeployAsApplicationConfiguration.add_member(:s3_content_location, Shapes::ShapeRef.new(shape: S3ContentBaseLocation, required: true, location_name: "S3ContentLocation"))
     DeployAsApplicationConfiguration.struct_class = Types::DeployAsApplicationConfiguration
 
@@ -758,6 +838,19 @@ module Aws::KinesisAnalyticsV2
     DescribeApplicationVersionResponse.add_member(:application_version_detail, Shapes::ShapeRef.new(shape: ApplicationDetail, location_name: "ApplicationVersionDetail"))
     DescribeApplicationVersionResponse.struct_class = Types::DescribeApplicationVersionResponse
 
+    DescribeSnapshotOperationRequest.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: SnapshotV2Name, required: true, location_name: "SnapshotName"))
+    DescribeSnapshotOperationRequest.add_member(:snapshot_operation_id, Shapes::ShapeRef.new(shape: SnapshotOperationId, required: true, location_name: "SnapshotOperationId"))
+    DescribeSnapshotOperationRequest.struct_class = Types::DescribeSnapshotOperationRequest
+
+    DescribeSnapshotOperationResponse.add_member(:snapshot_operation_info_details, Shapes::ShapeRef.new(shape: SnapshotOperationInfoDetails, required: true, location_name: "SnapshotOperationInfoDetails"))
+    DescribeSnapshotOperationResponse.struct_class = Types::DescribeSnapshotOperationResponse
+
+    DescribeSnapshotRequest.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: SnapshotV2Name, required: true, location_name: "SnapshotName"))
+    DescribeSnapshotRequest.struct_class = Types::DescribeSnapshotRequest
+
+    DescribeSnapshotResponse.add_member(:snapshot_info_details, Shapes::ShapeRef.new(shape: SnapshotInfoDetails, required: true, location_name: "SnapshotInfoDetails"))
+    DescribeSnapshotResponse.struct_class = Types::DescribeSnapshotResponse
+
     DestinationSchema.add_member(:record_format_type, Shapes::ShapeRef.new(shape: RecordFormatType, required: true, location_name: "RecordFormatType"))
     DestinationSchema.struct_class = Types::DestinationSchema
 
@@ -774,6 +867,10 @@ module Aws::KinesisAnalyticsV2
     DiscoverInputSchemaResponse.add_member(:raw_input_records, Shapes::ShapeRef.new(shape: RawInputRecords, location_name: "RawInputRecords"))
     DiscoverInputSchemaResponse.struct_class = Types::DiscoverInputSchemaResponse
 
+    EncryptionConfigurationDescription.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyId, location_name: "KeyId"))
+    EncryptionConfigurationDescription.add_member(:key_type, Shapes::ShapeRef.new(shape: KeyType, required: true, location_name: "KeyType"))
+    EncryptionConfigurationDescription.struct_class = Types::EncryptionConfigurationDescription
+
     EnvironmentProperties.add_member(:property_groups, Shapes::ShapeRef.new(shape: PropertyGroups, required: true, location_name: "PropertyGroups"))
     EnvironmentProperties.struct_class = Types::EnvironmentProperties
 
@@ -785,6 +882,20 @@ module Aws::KinesisAnalyticsV2
 
     ErrorInfo.add_member(:error_string, Shapes::ShapeRef.new(shape: ErrorString, location_name: "ErrorString"))
     ErrorInfo.struct_class = Types::ErrorInfo
+
+    ExportDestinationConfiguration.add_member(:destination_type, Shapes::ShapeRef.new(shape: StorageLocationType, required: true, location_name: "DestinationType"))
+    ExportDestinationConfiguration.add_member(:export_role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "ExportRoleArn"))
+    ExportDestinationConfiguration.add_member(:destination_encryption_configuration, Shapes::ShapeRef.new(shape: SnapshotEncryptionConfiguration, location_name: "DestinationEncryptionConfiguration"))
+    ExportDestinationConfiguration.add_member(:destination_s3_prefix_location, Shapes::ShapeRef.new(shape: S3PrefixLocation, required: true, location_name: "DestinationS3PrefixLocation"))
+    ExportDestinationConfiguration.struct_class = Types::ExportDestinationConfiguration
+
+    ExportSnapshotRequest.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: SnapshotV2Name, required: true, location_name: "SnapshotName"))
+    ExportSnapshotRequest.add_member(:export_destination_configuration, Shapes::ShapeRef.new(shape: ExportDestinationConfiguration, required: true, location_name: "ExportDestinationConfiguration"))
+    ExportSnapshotRequest.struct_class = Types::ExportSnapshotRequest
+
+    ExportSnapshotResponse.add_member(:snapshot_operation_id, Shapes::ShapeRef.new(shape: SnapshotOperationId, required: true, location_name: "SnapshotOperationId"))
+    ExportSnapshotResponse.add_member(:snapshot_operation_status, Shapes::ShapeRef.new(shape: SnapshotOperationStatus, required: true, location_name: "SnapshotOperationStatus"))
+    ExportSnapshotResponse.struct_class = Types::ExportSnapshotResponse
 
     FlinkApplicationConfiguration.add_member(:checkpoint_configuration, Shapes::ShapeRef.new(shape: CheckpointConfiguration, location_name: "CheckpointConfiguration"))
     FlinkApplicationConfiguration.add_member(:monitoring_configuration, Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "MonitoringConfiguration"))
@@ -813,6 +924,26 @@ module Aws::KinesisAnalyticsV2
 
     GlueDataCatalogConfigurationUpdate.add_member(:database_arn_update, Shapes::ShapeRef.new(shape: DatabaseARN, required: true, location_name: "DatabaseARNUpdate"))
     GlueDataCatalogConfigurationUpdate.struct_class = Types::GlueDataCatalogConfigurationUpdate
+
+    ImportSnapshotRequest.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: SnapshotV2Name, required: true, location_name: "SnapshotName"))
+    ImportSnapshotRequest.add_member(:import_source_configuration, Shapes::ShapeRef.new(shape: ImportSourceConfiguration, required: true, location_name: "ImportSourceConfiguration"))
+    ImportSnapshotRequest.add_member(:destination_encryption_configuration, Shapes::ShapeRef.new(shape: SnapshotEncryptionConfiguration, location_name: "DestinationEncryptionConfiguration"))
+    ImportSnapshotRequest.add_member(:snapshot_description, Shapes::ShapeRef.new(shape: SnapshotV2Description, location_name: "SnapshotDescription"))
+    ImportSnapshotRequest.add_member(:snapshot_format, Shapes::ShapeRef.new(shape: SnapshotFormat, location_name: "SnapshotFormat"))
+    ImportSnapshotRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ImportSnapshotRequest.struct_class = Types::ImportSnapshotRequest
+
+    ImportSnapshotResponse.add_member(:snapshot_arn, Shapes::ShapeRef.new(shape: SnapshotArn, required: true, location_name: "SnapshotArn"))
+    ImportSnapshotResponse.add_member(:snapshot_status, Shapes::ShapeRef.new(shape: SnapshotStatus, required: true, location_name: "SnapshotStatus"))
+    ImportSnapshotResponse.add_member(:snapshot_operation_id, Shapes::ShapeRef.new(shape: SnapshotOperationId, required: true, location_name: "SnapshotOperationId"))
+    ImportSnapshotResponse.add_member(:snapshot_operation_status, Shapes::ShapeRef.new(shape: SnapshotOperationStatus, required: true, location_name: "SnapshotOperationStatus"))
+    ImportSnapshotResponse.struct_class = Types::ImportSnapshotResponse
+
+    ImportSourceConfiguration.add_member(:source_type, Shapes::ShapeRef.new(shape: StorageLocationType, required: true, location_name: "SourceType"))
+    ImportSourceConfiguration.add_member(:import_role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "ImportRoleArn"))
+    ImportSourceConfiguration.add_member(:source_encryption_configuration, Shapes::ShapeRef.new(shape: SnapshotEncryptionConfiguration, location_name: "SourceEncryptionConfiguration"))
+    ImportSourceConfiguration.add_member(:source_s3_prefix_location, Shapes::ShapeRef.new(shape: S3PrefixLocation, required: true, location_name: "SourceS3PrefixLocation"))
+    ImportSourceConfiguration.struct_class = Types::ImportSourceConfiguration
 
     InAppStreamNames.member = Shapes::ShapeRef.new(shape: InAppStreamName)
 
@@ -984,6 +1115,29 @@ module Aws::KinesisAnalyticsV2
     ListApplicationsResponse.add_member(:application_summaries, Shapes::ShapeRef.new(shape: ApplicationSummaries, required: true, location_name: "ApplicationSummaries"))
     ListApplicationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "NextToken"))
     ListApplicationsResponse.struct_class = Types::ListApplicationsResponse
+
+    ListSnapshotOperationsRequest.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: SnapshotV2Name, required: true, location_name: "SnapshotName"))
+    ListSnapshotOperationsRequest.add_member(:snapshot_operation, Shapes::ShapeRef.new(shape: SnapshotOperation, location_name: "SnapshotOperation"))
+    ListSnapshotOperationsRequest.add_member(:snapshot_operation_status, Shapes::ShapeRef.new(shape: SnapshotOperationStatus, location_name: "SnapshotOperationStatus"))
+    ListSnapshotOperationsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: ListSnapshotOperationsLimit, location_name: "Limit"))
+    ListSnapshotOperationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSnapshotOperationsRequest.struct_class = Types::ListSnapshotOperationsRequest
+
+    ListSnapshotOperationsResponse.add_member(:snapshot_operation_info_list, Shapes::ShapeRef.new(shape: SnapshotOperationInfoList, required: true, location_name: "SnapshotOperationInfoList"))
+    ListSnapshotOperationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSnapshotOperationsResponse.struct_class = Types::ListSnapshotOperationsResponse
+
+    ListSnapshotsRequest.add_member(:source_application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "SourceApplicationName"))
+    ListSnapshotsRequest.add_member(:snapshot_initiator, Shapes::ShapeRef.new(shape: SnapshotInitiator, location_name: "SnapshotInitiator"))
+    ListSnapshotsRequest.add_member(:snapshot_initiator_operation, Shapes::ShapeRef.new(shape: SnapshotInitiatorOperation, location_name: "SnapshotInitiatorOperation"))
+    ListSnapshotsRequest.add_member(:snapshot_status, Shapes::ShapeRef.new(shape: SnapshotStatus, location_name: "SnapshotStatus"))
+    ListSnapshotsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: ListSnapshotsLimit, location_name: "Limit"))
+    ListSnapshotsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSnapshotsRequest.struct_class = Types::ListSnapshotsRequest
+
+    ListSnapshotsResponse.add_member(:snapshot_info_list, Shapes::ShapeRef.new(shape: SnapshotInfoList, required: true, location_name: "SnapshotInfoList"))
+    ListSnapshotsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSnapshotsResponse.struct_class = Types::ListSnapshotsResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: KinesisAnalyticsARN, required: true, location_name: "ResourceARN"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -1179,6 +1333,10 @@ module Aws::KinesisAnalyticsV2
     S3ContentLocationUpdate.add_member(:object_version_update, Shapes::ShapeRef.new(shape: ObjectVersion, location_name: "ObjectVersionUpdate"))
     S3ContentLocationUpdate.struct_class = Types::S3ContentLocationUpdate
 
+    S3PrefixLocation.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, required: true, location_name: "BucketARN"))
+    S3PrefixLocation.add_member(:key_prefix, Shapes::ShapeRef.new(shape: KeyPrefix, required: true, location_name: "KeyPrefix"))
+    S3PrefixLocation.struct_class = Types::S3PrefixLocation
+
     S3ReferenceDataSource.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, location_name: "BucketARN"))
     S3ReferenceDataSource.add_member(:file_key, Shapes::ShapeRef.new(shape: FileKey, location_name: "FileKey"))
     S3ReferenceDataSource.struct_class = Types::S3ReferenceDataSource
@@ -1205,7 +1363,85 @@ module Aws::KinesisAnalyticsV2
     SnapshotDetails.add_member(:application_encryption_configuration_description, Shapes::ShapeRef.new(shape: ApplicationEncryptionConfigurationDescription, location_name: "ApplicationEncryptionConfigurationDescription"))
     SnapshotDetails.struct_class = Types::SnapshotDetails
 
+    SnapshotEncryptionConfiguration.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyId, location_name: "KeyId"))
+    SnapshotEncryptionConfiguration.add_member(:key_type, Shapes::ShapeRef.new(shape: KeyType, required: true, location_name: "KeyType"))
+    SnapshotEncryptionConfiguration.struct_class = Types::SnapshotEncryptionConfiguration
+
+    SnapshotErrorInfo.add_member(:error_code, Shapes::ShapeRef.new(shape: SnapshotOperationErrorCode, location_name: "ErrorCode"))
+    SnapshotErrorInfo.add_member(:error_string, Shapes::ShapeRef.new(shape: ErrorString, location_name: "ErrorString"))
+    SnapshotErrorInfo.struct_class = Types::SnapshotErrorInfo
+
+    SnapshotInfo.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: SnapshotV2Name, required: true, location_name: "SnapshotName"))
+    SnapshotInfo.add_member(:snapshot_arn, Shapes::ShapeRef.new(shape: SnapshotArn, required: true, location_name: "SnapshotArn"))
+    SnapshotInfo.add_member(:snapshot_status, Shapes::ShapeRef.new(shape: SnapshotStatus, required: true, location_name: "SnapshotStatus"))
+    SnapshotInfo.add_member(:snapshot_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "SnapshotCreationTimestamp"))
+    SnapshotInfo.add_member(:snapshot_initiator, Shapes::ShapeRef.new(shape: SnapshotInitiator, required: true, location_name: "SnapshotInitiator"))
+    SnapshotInfo.add_member(:snapshot_initiator_operation, Shapes::ShapeRef.new(shape: SnapshotInitiatorOperation, required: true, location_name: "SnapshotInitiatorOperation"))
+    SnapshotInfo.add_member(:source_application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "SourceApplicationName"))
+    SnapshotInfo.add_member(:snapshot_format, Shapes::ShapeRef.new(shape: SnapshotFormat, required: true, location_name: "SnapshotFormat"))
+    SnapshotInfo.struct_class = Types::SnapshotInfo
+
+    SnapshotInfoDetails.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: SnapshotV2Name, required: true, location_name: "SnapshotName"))
+    SnapshotInfoDetails.add_member(:snapshot_arn, Shapes::ShapeRef.new(shape: SnapshotArn, required: true, location_name: "SnapshotArn"))
+    SnapshotInfoDetails.add_member(:snapshot_description, Shapes::ShapeRef.new(shape: SnapshotV2Description, location_name: "SnapshotDescription"))
+    SnapshotInfoDetails.add_member(:snapshot_status, Shapes::ShapeRef.new(shape: SnapshotStatus, required: true, location_name: "SnapshotStatus"))
+    SnapshotInfoDetails.add_member(:snapshot_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "SnapshotCreationTimestamp"))
+    SnapshotInfoDetails.add_member(:runtime_environment, Shapes::ShapeRef.new(shape: RuntimeEnvironment, location_name: "RuntimeEnvironment"))
+    SnapshotInfoDetails.add_member(:snapshot_size_in_bytes, Shapes::ShapeRef.new(shape: SnapshotSizeInBytes, location_name: "SnapshotSizeInBytes"))
+    SnapshotInfoDetails.add_member(:snapshot_encryption_configuration_description, Shapes::ShapeRef.new(shape: SnapshotEncryptionConfiguration, location_name: "SnapshotEncryptionConfigurationDescription"))
+    SnapshotInfoDetails.add_member(:snapshot_initiator, Shapes::ShapeRef.new(shape: SnapshotInitiator, required: true, location_name: "SnapshotInitiator"))
+    SnapshotInfoDetails.add_member(:snapshot_initiator_operation, Shapes::ShapeRef.new(shape: SnapshotInitiatorOperation, required: true, location_name: "SnapshotInitiatorOperation"))
+    SnapshotInfoDetails.add_member(:snapshot_source_description, Shapes::ShapeRef.new(shape: SnapshotSourceDescription, required: true, location_name: "SnapshotSourceDescription"))
+    SnapshotInfoDetails.add_member(:snapshot_format, Shapes::ShapeRef.new(shape: SnapshotFormat, required: true, location_name: "SnapshotFormat"))
+    SnapshotInfoDetails.struct_class = Types::SnapshotInfoDetails
+
+    SnapshotInfoList.member = Shapes::ShapeRef.new(shape: SnapshotInfo)
+
+    SnapshotOperationFailureDetails.add_member(:error_info, Shapes::ShapeRef.new(shape: SnapshotErrorInfo, location_name: "ErrorInfo"))
+    SnapshotOperationFailureDetails.struct_class = Types::SnapshotOperationFailureDetails
+
+    SnapshotOperationInfo.add_member(:snapshot_operation_id, Shapes::ShapeRef.new(shape: SnapshotOperationId, required: true, location_name: "SnapshotOperationId"))
+    SnapshotOperationInfo.add_member(:snapshot_operation, Shapes::ShapeRef.new(shape: SnapshotOperation, required: true, location_name: "SnapshotOperation"))
+    SnapshotOperationInfo.add_member(:snapshot_operation_status, Shapes::ShapeRef.new(shape: SnapshotOperationStatus, required: true, location_name: "SnapshotOperationStatus"))
+    SnapshotOperationInfo.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    SnapshotOperationInfo.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    SnapshotOperationInfo.struct_class = Types::SnapshotOperationInfo
+
+    SnapshotOperationInfoDetails.add_member(:snapshot_operation_id, Shapes::ShapeRef.new(shape: SnapshotOperationId, required: true, location_name: "SnapshotOperationId"))
+    SnapshotOperationInfoDetails.add_member(:snapshot_operation, Shapes::ShapeRef.new(shape: SnapshotOperation, required: true, location_name: "SnapshotOperation"))
+    SnapshotOperationInfoDetails.add_member(:snapshot_operation_status, Shapes::ShapeRef.new(shape: SnapshotOperationStatus, required: true, location_name: "SnapshotOperationStatus"))
+    SnapshotOperationInfoDetails.add_member(:snapshot_arn, Shapes::ShapeRef.new(shape: SnapshotArn, required: true, location_name: "SnapshotArn"))
+    SnapshotOperationInfoDetails.add_member(:source_encryption_configuration_description, Shapes::ShapeRef.new(shape: EncryptionConfigurationDescription, location_name: "SourceEncryptionConfigurationDescription"))
+    SnapshotOperationInfoDetails.add_member(:destination_encryption_configuration_description, Shapes::ShapeRef.new(shape: EncryptionConfigurationDescription, location_name: "DestinationEncryptionConfigurationDescription"))
+    SnapshotOperationInfoDetails.add_member(:snapshot_source_location_description, Shapes::ShapeRef.new(shape: SnapshotOperationLocationDescription, location_name: "SnapshotSourceLocationDescription"))
+    SnapshotOperationInfoDetails.add_member(:snapshot_destination_location_description, Shapes::ShapeRef.new(shape: SnapshotOperationLocationDescription, location_name: "SnapshotDestinationLocationDescription"))
+    SnapshotOperationInfoDetails.add_member(:application_operation_description, Shapes::ShapeRef.new(shape: ApplicationOperationDescription, location_name: "ApplicationOperationDescription"))
+    SnapshotOperationInfoDetails.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    SnapshotOperationInfoDetails.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    SnapshotOperationInfoDetails.add_member(:snapshot_operation_failure_details, Shapes::ShapeRef.new(shape: SnapshotOperationFailureDetails, location_name: "SnapshotOperationFailureDetails"))
+    SnapshotOperationInfoDetails.struct_class = Types::SnapshotOperationInfoDetails
+
+    SnapshotOperationInfoList.member = Shapes::ShapeRef.new(shape: SnapshotOperationInfo)
+
+    SnapshotOperationLocationDescription.add_member(:location_type, Shapes::ShapeRef.new(shape: StorageLocationType, required: true, location_name: "LocationType"))
+    SnapshotOperationLocationDescription.add_member(:s3_prefix_location, Shapes::ShapeRef.new(shape: SnapshotOperationS3PrefixLocation, required: true, location_name: "S3PrefixLocation"))
+    SnapshotOperationLocationDescription.struct_class = Types::SnapshotOperationLocationDescription
+
+    SnapshotOperationS3PrefixLocation.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, required: true, location_name: "BucketARN"))
+    SnapshotOperationS3PrefixLocation.add_member(:key_prefix, Shapes::ShapeRef.new(shape: KeyPrefix, required: true, location_name: "KeyPrefix"))
+    SnapshotOperationS3PrefixLocation.add_member(:exported_prefix, Shapes::ShapeRef.new(shape: KeyPrefix, location_name: "ExportedPrefix"))
+    SnapshotOperationS3PrefixLocation.struct_class = Types::SnapshotOperationS3PrefixLocation
+
+    SnapshotSourceDescription.add_member(:s3_prefix_location, Shapes::ShapeRef.new(shape: S3PrefixLocation, location_name: "S3PrefixLocation"))
+    SnapshotSourceDescription.add_member(:source_application_description, Shapes::ShapeRef.new(shape: SourceApplicationDescription, location_name: "SourceApplicationDescription"))
+    SnapshotSourceDescription.struct_class = Types::SnapshotSourceDescription
+
     SnapshotSummaries.member = Shapes::ShapeRef.new(shape: SnapshotDetails)
+
+    SourceApplicationDescription.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
+    SourceApplicationDescription.add_member(:application_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ApplicationCreationTimestamp"))
+    SourceApplicationDescription.add_member(:application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "ApplicationVersionId"))
+    SourceApplicationDescription.struct_class = Types::SourceApplicationDescription
 
     SourceSchema.add_member(:record_format, Shapes::ShapeRef.new(shape: RecordFormat, required: true, location_name: "RecordFormat"))
     SourceSchema.add_member(:record_encoding, Shapes::ShapeRef.new(shape: RecordEncoding, location_name: "RecordEncoding"))
@@ -1494,6 +1730,21 @@ module Aws::KinesisAnalyticsV2
         o.errors << Shapes::ShapeRef.new(shape: InvalidApplicationConfigurationException)
       end)
 
+      api.add_operation(:create_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSnapshotResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidApplicationConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
       api.add_operation(:delete_application, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteApplication"
         o.http_method = "POST"
@@ -1588,6 +1839,19 @@ module Aws::KinesisAnalyticsV2
         o.errors << Shapes::ShapeRef.new(shape: InvalidApplicationConfigurationException)
       end)
 
+      api.add_operation(:delete_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSnapshotResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
       api.add_operation(:describe_application, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeApplication"
         o.http_method = "POST"
@@ -1632,6 +1896,28 @@ module Aws::KinesisAnalyticsV2
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
+      api.add_operation(:describe_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeSnapshotResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
+      api.add_operation(:describe_snapshot_operation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeSnapshotOperation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeSnapshotOperationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeSnapshotOperationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
       api.add_operation(:discover_input_schema, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DiscoverInputSchema"
         o.http_method = "POST"
@@ -1643,6 +1929,34 @@ module Aws::KinesisAnalyticsV2
         o.errors << Shapes::ShapeRef.new(shape: ResourceProvisionedThroughputExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
+      api.add_operation(:export_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExportSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ExportSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: ExportSnapshotResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
+      api.add_operation(:import_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ImportSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ImportSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: ImportSnapshotResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
@@ -1711,6 +2025,39 @@ module Aws::KinesisAnalyticsV2
         )
       end)
 
+      api.add_operation(:list_snapshot_operations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSnapshotOperations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListSnapshotOperationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSnapshotOperationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_snapshots, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSnapshots"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListSnapshotsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSnapshotsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "POST"
@@ -1747,6 +2094,7 @@ module Aws::KinesisAnalyticsV2
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidApplicationConfigurationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:stop_application, Seahorse::Model::Operation.new.tap do |o|
@@ -1803,6 +2151,7 @@ module Aws::KinesisAnalyticsV2
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidApplicationConfigurationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:update_application_maintenance_configuration, Seahorse::Model::Operation.new.tap do |o|

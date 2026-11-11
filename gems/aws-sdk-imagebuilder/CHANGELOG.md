@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.124.0 (2026-11-11)
+------------------
+
+* Feature - Update list operations to support wildcard name filtering and page sizes up to 100 results via MaxResults
+
 1.123.0 (2026-11-10)
 ------------------
 

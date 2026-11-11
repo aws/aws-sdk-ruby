@@ -15,11 +15,12 @@ module Aws::ConnectCases
 
     class AuditEvent
       attr_accessor event_id: ::String
-      attr_accessor type: ("Case.Created" | "Case.Updated" | "RelatedItem.Created" | "RelatedItem.Deleted" | "RelatedItem.Updated")
+      attr_accessor type: ("Case.Created" | "Case.Updated" | "RelatedItem.Created" | "RelatedItem.Deleted" | "RelatedItem.Updated" | "Case.Merged")
       attr_accessor related_item_type: ("Contact" | "Comment" | "File" | "Sla" | "ConnectCase" | "Custom")
       attr_accessor performed_time: ::Time
       attr_accessor fields: ::Array[Types::AuditEventField]
       attr_accessor performed_by: Types::AuditEventPerformedBy
+      attr_accessor merge_metadata: Types::AuditMergeMetadata
       SENSITIVE: []
     end
 
@@ -56,6 +57,13 @@ module Aws::ConnectCases
     class AuditEventPerformedBy
       attr_accessor user: Types::UserUnion
       attr_accessor iam_principal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AuditMergeMetadata
+      attr_accessor merge_event_id: ::String
+      attr_accessor primary_case_id: ::String
+      attr_accessor secondary_case_id: ::String
       SENSITIVE: []
     end
 
@@ -720,6 +728,12 @@ module Aws::ConnectCases
       end
     end
 
+    class FieldsConfiguration
+      attr_accessor field_ids: ::Array[Types::FieldIdentifier]
+      attr_accessor source_case_id: ::String
+      SENSITIVE: []
+    end
+
     class FileContent
       attr_accessor file_arn: ::String
       SENSITIVE: []
@@ -828,6 +842,19 @@ module Aws::ConnectCases
       attr_accessor deleted: bool
       attr_accessor created_time: ::Time
       attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetMergeCasesStatusRequest
+      attr_accessor domain_id: ::String
+      attr_accessor case_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMergeCasesStatusResponse
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETED")
+      attr_accessor primary_case_id: ::String
+      attr_accessor secondary_case_ids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1141,6 +1168,14 @@ module Aws::ConnectCases
       end
     end
 
+    class RelatedItemsConfiguration
+      attr_accessor comment: bool
+      attr_accessor connect_case: bool
+      attr_accessor contact: bool
+      attr_accessor custom: bool
+      SENSITIVE: []
+    end
+
     class RequiredCaseRule
       attr_accessor default_value: bool
       attr_accessor conditions: ::Array[Types::BooleanCondition]
@@ -1304,6 +1339,19 @@ module Aws::ConnectCases
       attr_accessor field_id: ::String
       attr_accessor sort_order: ("Asc" | "Desc")
       SENSITIVE: []
+    end
+
+    class StartMergeCasesRequest
+      attr_accessor domain_id: ::String
+      attr_accessor case_id: ::String
+      attr_accessor secondary_case_ids: ::Array[::String]
+      attr_accessor fields_configuration: ::Array[Types::FieldsConfiguration]
+      attr_accessor related_items_configuration: Types::RelatedItemsConfiguration
+      attr_accessor performed_by: Types::UserUnion
+      SENSITIVE: []
+    end
+
+    class StartMergeCasesResponse < Aws::EmptyStructure
     end
 
     class TagFilter

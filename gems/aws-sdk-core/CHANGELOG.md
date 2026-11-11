@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.268.0 (2026-11-11)
+------------------
+
 * Feature - Reuse read buffers to reduce allocations when calculating request checksums sent in headers.
 
 3.267.0 (2026-11-10)
