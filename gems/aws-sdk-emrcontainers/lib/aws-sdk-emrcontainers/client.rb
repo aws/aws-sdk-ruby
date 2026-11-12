@@ -861,8 +861,9 @@ module Aws::EMRContainers
     #
     # @option params [Types::SchedulerConfiguration] :scheduler_configuration
     #   The scheduler configuration (concurrency and queue limits) to apply to
-    #   the virtual cluster at creation time. When omitted, no limits are
-    #   applied.
+    #   the virtual cluster at creation time. If you omit this field, the
+    #   service applies a default limit of 1,000 concurrent job runs and does
+    #   not limit queue depth.
     #
     # @return [Types::CreateVirtualClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2059,8 +2060,10 @@ module Aws::EMRContainers
     #
     # @option params [Types::SchedulerConfiguration] :scheduler_configuration
     #   The scheduler configuration to apply to the virtual cluster. The new
-    #   configuration fully replaces the existing one. If you omit a field,
-    #   the corresponding limit is removed.
+    #   configuration fully replaces the existing one. If you omit
+    #   `maxInQueueJobRuns`, the service removes the queue-depth limit. If you
+    #   omit `maxConcurrentJobRuns`, the service applies the default limit of
+    #   1,000 concurrent job runs.
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure that
@@ -2133,7 +2136,7 @@ module Aws::EMRContainers
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-emrcontainers'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

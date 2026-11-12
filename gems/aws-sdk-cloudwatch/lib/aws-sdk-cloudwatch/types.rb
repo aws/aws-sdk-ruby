@@ -907,6 +907,22 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   The ID of the metric data query definition to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteMetricDataQueryDefinitionInput AWS API Documentation
+    #
+    class DeleteMetricDataQueryDefinitionInput < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteMetricDataQueryDefinitionOutput AWS API Documentation
+    #
+    class DeleteMetricDataQueryDefinitionOutput < Aws::EmptyStructure; end
+
     # @!attribute [rw] name
     #   The name of the metric stream to delete.
     #   @return [String]
@@ -2070,6 +2086,67 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   The ID of the metric data query definition to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricDataQueryDefinitionInput AWS API Documentation
+    #
+    class GetMetricDataQueryDefinitionInput < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the metric data query definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the metric data query definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The path of the metric data query definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   The query expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The language of the expression. Valid values are the following:
+    #
+    #   * `PROMQL` – A PromQL query.
+    #
+    #   * `SQL` – A CloudWatch Metrics Insights query.
+    #
+    #   * `METRIC_MATH` – A metric math expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when you created the metric data query definition.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when you last updated the metric data query
+    #   definition.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricDataQueryDefinitionOutput AWS API Documentation
+    #
+    class GetMetricDataQueryDefinitionOutput < Struct.new(
+      :id,
+      :arn,
+      :path,
+      :expression,
+      :type,
+      :created_at,
+      :updated_at)
+      SENSITIVE = [:expression]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] namespace
     #   The namespace of the metric, with or without spaces.
     #   @return [String]
@@ -2990,6 +3067,43 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   The maximum number of metric data query definitions to return in one
+    #   call. The default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned by a previous call to indicate where to continue
+    #   retrieving results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetricDataQueryDefinitionsInput AWS API Documentation
+    #
+    class ListMetricDataQueryDefinitionsInput < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of metric data query definition summaries.
+    #   @return [Array<Types::MetricDataQueryDefinitionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of results. If this
+    #   field is absent, there are no more results to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetricDataQueryDefinitionsOutput AWS API Documentation
+    #
+    class ListMetricDataQueryDefinitionsOutput < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   Include this value, if it was returned by the previous call, to get
     #   the next set of metric streams.
@@ -3882,6 +3996,43 @@ module Aws::CloudWatch
       :return_data,
       :period,
       :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a metric data query definition. To get the
+    # expression, call `GetMetricDataQueryDefinition`.
+    #
+    # @!attribute [rw] id
+    #   The ID of the metric data query definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The path of the metric data query definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The language of the expression. Valid values are the following:
+    #
+    #   * `PROMQL` – A PromQL query.
+    #
+    #   * `SQL` – A CloudWatch Metrics Insights query.
+    #
+    #   * `METRIC_MATH` – A metric math expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when you last updated the metric data query
+    #   definition.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricDataQueryDefinitionSummary AWS API Documentation
+    #
+    class MetricDataQueryDefinitionSummary < Struct.new(
+      :id,
+      :path,
+      :type,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5761,6 +5912,105 @@ module Aws::CloudWatch
       :entity_metric_data,
       :strict_entity_validation)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the metric data query definition to update. Omit this
+    #   parameter to create a definition. CloudWatch then generates the ID
+    #   and returns it in the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The name of the metric data query definition. Use slashes (`/`) to
+    #   organize definitions into folders, for example `team/web/latency`.
+    #   The path must meet the following requirements:
+    #
+    #   * It must be unique in your account and Region.
+    #
+    #   * It can't start or end with a slash.
+    #
+    #   * It can't contain an empty folder name (`//`).
+    #
+    #   * It can be at most 1,015 bytes when encoded as UTF-8.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   The query expression, in the language that `Type` specifies.
+    #   CloudWatch doesn't validate or run the expression when you save it.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The language of the expression. Valid values are the following:
+    #
+    #   * `PROMQL` – A PromQL query.
+    #
+    #   * `SQL` – A CloudWatch Metrics Insights query.
+    #
+    #   * `METRIC_MATH` – A metric math expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs to associate with the metric data query
+    #   definition. You can use tags to categorize definitions and to
+    #   control access to them. Tags are applied only when the request
+    #   creates a definition, that is, when you omit `Id`. To change the
+    #   tags of an existing definition, use `TagResource` and
+    #   `UntagResource`.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricDataQueryDefinitionInput AWS API Documentation
+    #
+    class PutMetricDataQueryDefinitionInput < Struct.new(
+      :id,
+      :path,
+      :expression,
+      :type,
+      :tags)
+      SENSITIVE = [:expression]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the metric data query definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the metric data query definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The path of the metric data query definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   The query expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The language of the expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when you created the metric data query definition.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when you last updated the metric data query
+    #   definition.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricDataQueryDefinitionOutput AWS API Documentation
+    #
+    class PutMetricDataQueryDefinitionOutput < Struct.new(
+      :id,
+      :arn,
+      :path,
+      :expression,
+      :type,
+      :created_at,
+      :updated_at)
+      SENSITIVE = [:expression]
       include Aws::Structure
     end
 

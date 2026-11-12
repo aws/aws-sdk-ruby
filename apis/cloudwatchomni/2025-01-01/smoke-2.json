@@ -14,11 +14,13 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListSpacesSuccess",
-    "operationName" : "ListSpaces",
-    "input" : { },
+    "id" : "GetSpaceNotFound",
+    "operationName" : "GetSpace",
+    "input" : {
+      "spaceId" : "00000000-0000-4000-8000-000000000000"
+    },
     "expectation" : {
-      "success" : { }
+      "failure" : { }
     },
     "config" : {
       "region" : "us-east-1",
@@ -27,13 +29,11 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetSpaceNotFound",
-    "operationName" : "GetSpace",
-    "input" : {
-      "spaceId" : "00000000-0000-4000-8000-000000000000"
-    },
+    "id" : "ListSpacesSuccess",
+    "operationName" : "ListSpaces",
+    "input" : { },
     "expectation" : {
-      "failure" : { }
+      "success" : { }
     },
     "config" : {
       "region" : "us-east-1",

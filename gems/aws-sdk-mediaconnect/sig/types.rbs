@@ -20,7 +20,7 @@ module Aws::MediaConnect
       attr_accessor name: ::String
       attr_accessor network_name: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq" | "rtmp-push")
       attr_accessor ttl: ::Integer
       SENSITIVE: []
     end
@@ -31,7 +31,7 @@ module Aws::MediaConnect
       attr_accessor name: ::String
       attr_accessor network_name: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq" | "rtmp-push")
       SENSITIVE: []
     end
 
@@ -162,7 +162,7 @@ module Aws::MediaConnect
       attr_accessor min_latency: ::Integer
       attr_accessor name: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq" | "rtmp-push")
       attr_accessor remote_id: ::String
       attr_accessor sender_control_port: ::Integer
       attr_accessor smoothing_latency: ::Integer
@@ -176,6 +176,7 @@ module Aws::MediaConnect
       attr_accessor router_integration_transit_encryption: Types::FlowTransitEncryption
       attr_accessor ndi_output_timecode_source: ("EMBEDDED_TIMECODE" | "UTC_SYSTEM_TIME")
       attr_accessor ndi_audio_reference_level: ::Integer
+      attr_accessor rtmp_push_settings: Types::RtmpPushOutputSettings
       SENSITIVE: []
     end
 
@@ -184,10 +185,19 @@ module Aws::MediaConnect
       SENSITIVE: []
     end
 
+    class AutoPidMapConfiguration
+      attr_accessor start_pid: ::Integer
+      attr_accessor pids_per_program: ::Integer
+      SENSITIVE: []
+    end
+
     class AutomaticEncryptionKeyConfiguration < Aws::EmptyStructure
     end
 
     class AutomaticEndpointEncryptionConfiguration < Aws::EmptyStructure
+    end
+
+    class AutomaticRtmpPushNamingConfiguration < Aws::EmptyStructure
     end
 
     class BadRequestException
@@ -331,7 +341,7 @@ module Aws::MediaConnect
       attr_accessor name: ::String
       attr_accessor network_name: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq" | "rtmp-push")
       attr_accessor ttl: ::Integer
       SENSITIVE: []
     end
@@ -342,7 +352,7 @@ module Aws::MediaConnect
       attr_accessor name: ::String
       attr_accessor network_name: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq" | "rtmp-push")
       SENSITIVE: []
     end
 
@@ -510,6 +520,7 @@ module Aws::MediaConnect
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor fabric_configuration: Types::FabricConfiguration
       attr_accessor client_token: ::String
+      attr_accessor processors: Types::RouterOutputProcessors
       SENSITIVE: []
     end
 
@@ -654,6 +665,7 @@ module Aws::MediaConnect
       attr_accessor timestamp: ::Time
       attr_accessor transport_media_info: Types::TransportMediaInfo
       attr_accessor ndi_info: Types::NdiSourceMetadataInfo
+      attr_accessor rtmp_info: Types::RtmpSourceMetadataInfo
       SENSITIVE: []
     end
 
@@ -912,7 +924,23 @@ module Aws::MediaConnect
 
     class FabricConfiguration
       attr_accessor recovery_latency_mode: ("BALANCED" | "LOW_LATENCY")
+      attr_accessor switching_mode: ("IMMEDIATE" | "KEY_FRAME")
+      attr_accessor switching_configuration: Types::FabricSwitchingConfiguration
       SENSITIVE: []
+    end
+
+    class FabricSwitchingConfiguration
+      attr_accessor immediate: Types::ImmediateFabricSwitchingConfiguration
+      attr_accessor key_frame: Types::KeyFrameFabricSwitchingConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Immediate < FabricSwitchingConfiguration
+      end
+      class KeyFrame < FabricSwitchingConfiguration
+      end
+      class Unknown < FabricSwitchingConfiguration
+      end
     end
 
     class FailoverConfig
@@ -934,12 +962,14 @@ module Aws::MediaConnect
     class FailoverRouterInputIndexedStreamDetails
       attr_accessor source_index: ::Integer
       attr_accessor source_ip_address: ::String
+      attr_accessor rtmp_push: Types::RtmpPushStreamDetails
       SENSITIVE: []
     end
 
     class FailoverRouterInputProtocolConfiguration
       attr_accessor rist: Types::RistRouterInputConfiguration
       attr_accessor srt_listener: Types::SrtListenerRouterInputConfiguration
+      attr_accessor rtmp_push: Types::RtmpPushRouterInputConfiguration
       attr_accessor srt_caller: Types::SrtCallerRouterInputConfiguration
       attr_accessor rtp: Types::RtpRouterInputConfiguration
       attr_accessor unknown: untyped
@@ -948,6 +978,8 @@ module Aws::MediaConnect
       class Rist < FailoverRouterInputProtocolConfiguration
       end
       class SrtListener < FailoverRouterInputProtocolConfiguration
+      end
+      class RtmpPush < FailoverRouterInputProtocolConfiguration
       end
       class SrtCaller < FailoverRouterInputProtocolConfiguration
       end
@@ -1186,6 +1218,9 @@ module Aws::MediaConnect
       SENSITIVE: []
     end
 
+    class ImmediateFabricSwitchingConfiguration < Aws::EmptyStructure
+    end
+
     class IngressGatewayBridge
       attr_accessor instance_id: ::String
       attr_accessor max_bitrate: ::Integer
@@ -1218,6 +1253,11 @@ module Aws::MediaConnect
 
     class InternalServerErrorException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KeyFrameFabricSwitchingConfiguration
+      attr_accessor key_frame_wait_milliseconds: ::Integer
       SENSITIVE: []
     end
 
@@ -1566,6 +1606,12 @@ module Aws::MediaConnect
       end
     end
 
+    class ManualRtmpPushNamingConfiguration
+      attr_accessor application_name: ::String
+      attr_accessor stream_name: ::String
+      SENSITIVE: []
+    end
+
     class MediaConnectFlowRouterInputConfiguration
       attr_accessor flow_arn: ::String
       attr_accessor flow_output_arn: ::String
@@ -1697,12 +1743,18 @@ module Aws::MediaConnect
     class MergeRouterInputProtocolConfiguration
       attr_accessor rtp: Types::RtpRouterInputConfiguration
       attr_accessor rist: Types::RistRouterInputConfiguration
+      attr_accessor srt_listener: Types::SrtListenerRouterInputConfiguration
+      attr_accessor srt_caller: Types::SrtCallerRouterInputConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Rtp < MergeRouterInputProtocolConfiguration
       end
       class Rist < MergeRouterInputProtocolConfiguration
+      end
+      class SrtListener < MergeRouterInputProtocolConfiguration
+      end
+      class SrtCaller < MergeRouterInputProtocolConfiguration
       end
       class Unknown < MergeRouterInputProtocolConfiguration
       end
@@ -1836,10 +1888,61 @@ module Aws::MediaConnect
       SENSITIVE: []
     end
 
+    class Passthrough < Aws::EmptyStructure
+    end
+
+    class PidMapRule
+      attr_accessor match_expression: ::String
+      attr_accessor action: ::String
+      SENSITIVE: []
+    end
+
     class PreferredDayTimeMaintenanceConfiguration
       attr_accessor day: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")
       attr_accessor time: ::String
       SENSITIVE: []
+    end
+
+    class ProgramClockReferencePidConfiguration
+      attr_accessor passthrough: Types::Passthrough
+      attr_accessor set: ::Integer
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Passthrough < ProgramClockReferencePidConfiguration
+      end
+      class Set < ProgramClockReferencePidConfiguration
+      end
+      class Unknown < ProgramClockReferencePidConfiguration
+      end
+    end
+
+    class ProgramMapTablePidConfiguration
+      attr_accessor passthrough: Types::Passthrough
+      attr_accessor set: ::Integer
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Passthrough < ProgramMapTablePidConfiguration
+      end
+      class Set < ProgramMapTablePidConfiguration
+      end
+      class Unknown < ProgramMapTablePidConfiguration
+      end
+    end
+
+    class ProgramNumberConfiguration
+      attr_accessor passthrough: Types::Passthrough
+      attr_accessor set: ::Integer
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Passthrough < ProgramNumberConfiguration
+      end
+      class Set < ProgramNumberConfiguration
+      end
+      class Unknown < ProgramNumberConfiguration
+      end
     end
 
     class PublicDestinationEndpointNetworkingConfiguration
@@ -2204,10 +2307,13 @@ module Aws::MediaConnect
 
     class RouterInputMetadata
       attr_accessor transport_stream_media_info: Types::TransportMediaInfo
+      attr_accessor rtmp_info: Types::RtmpSourceMetadataInfo
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class TransportStreamMediaInfo < RouterInputMetadata
+      end
+      class RtmpInfo < RouterInputMetadata
       end
       class Unknown < RouterInputMetadata
       end
@@ -2216,6 +2322,7 @@ module Aws::MediaConnect
     class RouterInputProtocolConfiguration
       attr_accessor rist: Types::RistRouterInputConfiguration
       attr_accessor srt_listener: Types::SrtListenerRouterInputConfiguration
+      attr_accessor rtmp_push: Types::RtmpPushRouterInputConfiguration
       attr_accessor srt_caller: Types::SrtCallerRouterInputConfiguration
       attr_accessor rtp: Types::RtpRouterInputConfiguration
       attr_accessor unknown: untyped
@@ -2224,6 +2331,8 @@ module Aws::MediaConnect
       class Rist < RouterInputProtocolConfiguration
       end
       class SrtListener < RouterInputProtocolConfiguration
+      end
+      class RtmpPush < RouterInputProtocolConfiguration
       end
       class SrtCaller < RouterInputProtocolConfiguration
       end
@@ -2376,6 +2485,7 @@ module Aws::MediaConnect
       attr_accessor maintenance_schedule_type: ("WINDOW")
       attr_accessor maintenance_schedule: Types::MaintenanceSchedule
       attr_accessor fabric_configuration: Types::FabricConfiguration
+      attr_accessor processors: Types::RouterOutputProcessors
       attr_accessor associated_source_endpoint_arns: ::Array[::String]
       SENSITIVE: []
     end
@@ -2429,6 +2539,11 @@ module Aws::MediaConnect
     class RouterOutputMessage
       attr_accessor code: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RouterOutputProcessors
+      attr_accessor single_program_transport_stream_pid_map: Types::SingleProgramTransportStreamPidMapConfiguration
       SENSITIVE: []
     end
 
@@ -2500,12 +2615,80 @@ module Aws::MediaConnect
       end
     end
 
+    class RtmpMediaInfo
+      attr_accessor streams: ::Array[Types::RtmpMediaStreamInfo]
+      SENSITIVE: []
+    end
+
+    class RtmpMediaStreamInfo
+      attr_accessor stream_id: ::Integer
+      attr_accessor stream_type: ("VIDEO" | "AUDIO" | "DATA" | "UNKNOWN")
+      attr_accessor codec: ::String
+      attr_accessor frame_rate: ::String
+      attr_accessor frame_resolution: Types::FrameResolution
+      attr_accessor scan_mode: ("progressive" | "interlace" | "progressive-segmented-frame")
+      attr_accessor color: Types::ColorInformation
+      attr_accessor channels: ::Integer
+      attr_accessor sample_rate: ::Integer
+      attr_accessor sample_size: ::Integer
+      attr_accessor language: ::String
+      SENSITIVE: []
+    end
+
+    class RtmpPushNamingConfiguration
+      attr_accessor manual: Types::ManualRtmpPushNamingConfiguration
+      attr_accessor automatic: Types::AutomaticRtmpPushNamingConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Manual < RtmpPushNamingConfiguration
+      end
+      class Automatic < RtmpPushNamingConfiguration
+      end
+      class Unknown < RtmpPushNamingConfiguration
+      end
+    end
+
+    class RtmpPushOutputSettings
+      attr_accessor application_name: ::String
+      attr_accessor stream_name: ::String
+      attr_accessor tls_encryption: Types::TlsEncryption
+      SENSITIVE: []
+    end
+
+    class RtmpPushRouterInputConfiguration
+      attr_accessor port: ::Integer
+      attr_accessor naming_type: ("MANUAL" | "AUTOMATIC")
+      attr_accessor naming_configuration: Types::RtmpPushNamingConfiguration
+      SENSITIVE: []
+    end
+
     class RtmpPushRouterOutputConfiguration
       attr_accessor destination_address: ::String
       attr_accessor destination_port: ::Integer
       attr_accessor application_name: ::String
       attr_accessor stream_name: ::String
       attr_accessor tls_encryption: Types::TlsEncryption
+      SENSITIVE: []
+    end
+
+    class RtmpPushSourceSettings
+      attr_accessor application_name: ::String
+      attr_accessor stream_name: ::String
+      attr_accessor naming_type: ("MANUAL" | "AUTOMATIC")
+      SENSITIVE: []
+    end
+
+    class RtmpPushStreamDetails
+      attr_accessor application_name: ::String
+      attr_accessor stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class RtmpSourceMetadataInfo
+      attr_accessor application_name: ::String
+      attr_accessor stream_name: ::String
+      attr_accessor media_info: Types::RtmpMediaInfo
       SENSITIVE: []
     end
 
@@ -2558,6 +2741,11 @@ module Aws::MediaConnect
       SENSITIVE: []
     end
 
+    class SetRtmpPushSourceSettings
+      attr_accessor naming_configuration: Types::RtmpPushNamingConfiguration
+      SENSITIVE: []
+    end
+
     class SetSourceRequest
       attr_accessor decryption: Types::Encryption
       attr_accessor description: ::String
@@ -2569,7 +2757,7 @@ module Aws::MediaConnect
       attr_accessor media_stream_source_configurations: ::Array[Types::MediaStreamSourceConfigurationRequest]
       attr_accessor min_latency: ::Integer
       attr_accessor name: ::String
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq" | "rtmp-push")
       attr_accessor sender_control_port: ::Integer
       attr_accessor sender_ip_address: ::String
       attr_accessor source_listener_address: ::String
@@ -2582,6 +2770,7 @@ module Aws::MediaConnect
       attr_accessor source_tags: ::Hash[::String, ::String]
       attr_accessor router_integration_state: ("ENABLED" | "DISABLED")
       attr_accessor router_integration_transit_decryption: Types::FlowTransitEncryption
+      attr_accessor rtmp_push_settings: Types::SetRtmpPushSourceSettings
       SENSITIVE: []
     end
 
@@ -2594,6 +2783,17 @@ module Aws::MediaConnect
     class SilentAudioConfiguration
       attr_accessor state: ("ENABLED" | "DISABLED")
       attr_accessor threshold_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class SingleProgramTransportStreamPidMapConfiguration
+      attr_accessor rules: ::Array[Types::PidMapRule]
+      attr_accessor default_action: ::String
+      attr_accessor transport_stream_id: Types::TransportStreamIdConfiguration
+      attr_accessor program_number: Types::ProgramNumberConfiguration
+      attr_accessor program_map_table_pid: Types::ProgramMapTablePidConfiguration
+      attr_accessor program_clock_reference_pid: Types::ProgramClockReferencePidConfiguration
+      attr_accessor auto: Types::AutoPidMapConfiguration
       SENSITIVE: []
     end
 
@@ -2864,12 +3064,13 @@ module Aws::MediaConnect
     class StandardRouterInputConfiguration
       attr_accessor network_interface_arn: ::String
       attr_accessor protocol_configuration: Types::RouterInputProtocolConfiguration
-      attr_accessor protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER")
+      attr_accessor protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER" | "RTMP_PUSH")
       SENSITIVE: []
     end
 
     class StandardRouterInputStreamDetails
       attr_accessor source_ip_address: ::String
+      attr_accessor rtmp_push: Types::RtmpPushStreamDetails
       SENSITIVE: []
     end
 
@@ -3078,7 +3279,7 @@ module Aws::MediaConnect
       attr_accessor max_latency: ::Integer
       attr_accessor max_sync_buffer: ::Integer
       attr_accessor min_latency: ::Integer
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq" | "rtmp-push")
       attr_accessor remote_id: ::String
       attr_accessor sender_control_port: ::Integer
       attr_accessor sender_ip_address: ::String
@@ -3091,6 +3292,8 @@ module Aws::MediaConnect
       attr_accessor ndi_source_settings: Types::NdiSourceSettings
       attr_accessor ndi_output_timecode_source: ("EMBEDDED_TIMECODE" | "UTC_SYSTEM_TIME")
       attr_accessor ndi_audio_reference_level: ::Integer
+      attr_accessor rtmp_push_source_settings: Types::RtmpPushSourceSettings
+      attr_accessor rtmp_push_output_settings: Types::RtmpPushOutputSettings
       SENSITIVE: []
     end
 
@@ -3109,8 +3312,24 @@ module Aws::MediaConnect
       attr_accessor pid: ::Integer
       attr_accessor sample_rate: ::Integer
       attr_accessor sample_size: ::Integer
+      attr_accessor scan_mode: ("progressive" | "interlace" | "progressive-segmented-frame")
       attr_accessor stream_type: ::String
+      attr_accessor language: ::String
       SENSITIVE: []
+    end
+
+    class TransportStreamIdConfiguration
+      attr_accessor passthrough: Types::Passthrough
+      attr_accessor set: ::Integer
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Passthrough < TransportStreamIdConfiguration
+      end
+      class Set < TransportStreamIdConfiguration
+      end
+      class Unknown < TransportStreamIdConfiguration
+      end
     end
 
     class TransportStreamProgram
@@ -3144,7 +3363,7 @@ module Aws::MediaConnect
       attr_accessor ip_address: ::String
       attr_accessor network_name: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq" | "rtmp-push")
       attr_accessor ttl: ::Integer
       SENSITIVE: []
     end
@@ -3154,7 +3373,7 @@ module Aws::MediaConnect
       attr_accessor multicast_source_settings: Types::MulticastSourceSettings
       attr_accessor network_name: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq" | "rtmp-push")
       SENSITIVE: []
     end
 
@@ -3292,7 +3511,7 @@ module Aws::MediaConnect
       attr_accessor min_latency: ::Integer
       attr_accessor output_arn: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq" | "rtmp-push")
       attr_accessor remote_id: ::String
       attr_accessor sender_control_port: ::Integer
       attr_accessor sender_ip_address: ::String
@@ -3306,6 +3525,7 @@ module Aws::MediaConnect
       attr_accessor router_integration_transit_encryption: Types::FlowTransitEncryption
       attr_accessor ndi_output_timecode_source: ("EMBEDDED_TIMECODE" | "UTC_SYSTEM_TIME")
       attr_accessor ndi_audio_reference_level: ::Integer
+      attr_accessor rtmp_push_settings: Types::RtmpPushOutputSettings
       SENSITIVE: []
     end
 
@@ -3342,7 +3562,7 @@ module Aws::MediaConnect
       attr_accessor max_sync_buffer: ::Integer
       attr_accessor media_stream_source_configurations: ::Array[Types::MediaStreamSourceConfigurationRequest]
       attr_accessor min_latency: ::Integer
-      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq" | "rtmp-push")
       attr_accessor sender_control_port: ::Integer
       attr_accessor sender_ip_address: ::String
       attr_accessor source_arn: ::String
@@ -3355,6 +3575,7 @@ module Aws::MediaConnect
       attr_accessor ndi_source_settings: Types::NdiSourceSettings
       attr_accessor router_integration_state: ("ENABLED" | "DISABLED")
       attr_accessor router_integration_transit_decryption: Types::FlowTransitEncryption
+      attr_accessor rtmp_push_settings: Types::SetRtmpPushSourceSettings
       SENSITIVE: []
     end
 
@@ -3434,6 +3655,7 @@ module Aws::MediaConnect
       attr_accessor tier: ("OUTPUT_100" | "OUTPUT_50" | "OUTPUT_20" | "OUTPUT_500" | "OUTPUT_250")
       attr_accessor maintenance_configuration: Types::MaintenanceConfiguration
       attr_accessor fabric_configuration: Types::FabricConfiguration
+      attr_accessor processors: Types::RouterOutputProcessors
       SENSITIVE: []
     end
 

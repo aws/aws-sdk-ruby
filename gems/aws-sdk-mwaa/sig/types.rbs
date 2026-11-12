@@ -50,6 +50,8 @@ module Aws::MWAA
       attr_accessor endpoint_management: ("CUSTOMER" | "SERVICE")
       attr_accessor min_webservers: ::Integer
       attr_accessor max_webservers: ::Integer
+      attr_accessor identity_center_configuration: Types::IdentityCenterConfiguration
+      attr_accessor teams: ::Hash[::String, Types::TeamConfig]
       SENSITIVE: [:airflow_configuration_options]
     end
 
@@ -120,6 +122,8 @@ module Aws::MWAA
       attr_accessor endpoint_management: ("CUSTOMER" | "SERVICE")
       attr_accessor min_webservers: ::Integer
       attr_accessor max_webservers: ::Integer
+      attr_accessor identity_center_configuration: Types::IdentityCenterConfiguration
+      attr_accessor teams: ::Hash[::String, Types::TeamConfig]
       SENSITIVE: [:airflow_configuration_options]
     end
 
@@ -130,6 +134,12 @@ module Aws::MWAA
 
     class GetEnvironmentOutput
       attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class IdentityCenterConfiguration
+      attr_accessor start_url: ::String
+      attr_accessor identity_store_id: ::String
       SENSITIVE: []
     end
 
@@ -279,6 +289,12 @@ module Aws::MWAA
     class TagResourceOutput < Aws::EmptyStructure
     end
 
+    class TeamConfig
+      attr_accessor source_bucket_arn: ::String
+      attr_accessor dag_s3_path: ::String
+      SENSITIVE: []
+    end
+
     class UntagResourceInput
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
@@ -312,6 +328,8 @@ module Aws::MWAA
       attr_accessor startup_script_s3_object_version: ::String
       attr_accessor webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY" | "PUBLIC_AND_PRIVATE")
       attr_accessor weekly_maintenance_window_start: ::String
+      attr_accessor identity_center_configuration: Types::IdentityCenterConfiguration
+      attr_accessor teams: Types::UpdateTeamsInput
       SENSITIVE: [:airflow_configuration_options]
     end
 
@@ -328,6 +346,12 @@ module Aws::MWAA
 
     class UpdateNetworkConfigurationInput
       attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateTeamsInput
+      attr_accessor add_or_update: ::Hash[::String, Types::TeamConfig]
+      attr_accessor remove: ::Array[::String]
       SENSITIVE: []
     end
 

@@ -20727,6 +20727,14 @@ module Aws::SageMaker
     #   The last modified time of the hub content.
     #   @return [Time]
     #
+    # @!attribute [rw] created_by
+    #   Information about the user who created the hub content.
+    #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Information about the user who last modified the hub content.
+    #   @return [Types::UserContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHubContentResponse AWS API Documentation
     #
     class DescribeHubContentResponse < Struct.new(
@@ -20749,7 +20757,9 @@ module Aws::SageMaker
       :hub_content_status,
       :failure_reason,
       :creation_time,
-      :last_modified_time)
+      :last_modified_time,
+      :created_by,
+      :last_modified_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20806,6 +20816,14 @@ module Aws::SageMaker
     #   The date and time that the hub was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] created_by
+    #   Information about the user who created the hub.
+    #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Information about the user who last modified the hub.
+    #   @return [Types::UserContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHubResponse AWS API Documentation
     #
     class DescribeHubResponse < Struct.new(
@@ -20818,7 +20836,9 @@ module Aws::SageMaker
       :hub_status,
       :failure_reason,
       :creation_time,
-      :last_modified_time)
+      :last_modified_time,
+      :created_by,
+      :last_modified_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23808,7 +23828,7 @@ module Aws::SageMaker
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that the execution
     #   uses. SageMaker returns this value only for executions of pipelines
-    #   that AWS manages.
+    #   that Amazon Web Services manages.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineExecutionResponse AWS API Documentation
@@ -29298,6 +29318,14 @@ module Aws::SageMaker
     #   The last modified time of the hub content.
     #   @return [Time]
     #
+    # @!attribute [rw] created_by
+    #   Information about the user who created the hub content.
+    #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Information about the user who last modified the hub content.
+    #   @return [Types::UserContext]
+    #
     # @!attribute [rw] tags
     #   Any tags associated with the hub content.
     #   @return [Array<Types::Tag>]
@@ -29325,6 +29353,8 @@ module Aws::SageMaker
       :failure_reason,
       :creation_time,
       :last_modified_time,
+      :created_by,
+      :last_modified_by,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -40369,9 +40399,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] managed_by
     #   Filters the pipelines by who manages them. Specify `AWS` to return
-    #   pipelines that AWS manages, or `CUSTOMER` to return pipelines that
-    #   you created. If you don't specify a value, the response includes
-    #   both.
+    #   pipelines that Amazon Web Services manages, or `CUSTOMER` to return
+    #   pipelines that you created. If you don't specify a value, the
+    #   response includes both.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListPipelinesRequest AWS API Documentation
@@ -53622,8 +53652,9 @@ module Aws::SageMaker
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that the execution
     #   uses. You must specify this parameter when you start an execution of
-    #   a pipeline that AWS manages. You can't specify it for a pipeline
-    #   that you create, because its executions use the pipeline's role.
+    #   a pipeline that Amazon Web Services manages. You can't specify it
+    #   for a pipeline that you create, because its executions use the
+    #   pipeline's role.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartPipelineExecutionRequest AWS API Documentation
@@ -60847,8 +60878,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] iam_identity
     #   The IAM Identity details associated with the user. These details are
-    #   associated with model package groups, model packages, and project
-    #   entities only.
+    #   associated with model package groups, model packages, project
+    #   entities, hubs, and hub content only.
     #   @return [Types::IamIdentity]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UserContext AWS API Documentation

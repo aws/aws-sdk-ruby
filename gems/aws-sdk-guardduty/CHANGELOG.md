@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.178.0 (2026-11-12)
+------------------
+
+* Feature - Adds the ListInvestigationRecords API, which returns the step-by-step records of a completed investigation. Adds investigation scope details and an optional structured summary to GetInvestigation. Adds filter criteria and investigation type to ListInvestigations.
+
 1.177.0 (2026-11-11)
 ------------------
 

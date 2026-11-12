@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2026-11-12)
+------------------
+
+* Feature - Add aggregationTemporality and monotonicity to GetContextGraph MetricMetadata
+
 1.11.0 (2026-11-11)
 ------------------
 

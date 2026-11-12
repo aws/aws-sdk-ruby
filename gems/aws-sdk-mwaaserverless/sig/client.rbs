@@ -80,6 +80,20 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _CreateAirflowUiUrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAirflowUiUrlResponse]
+        def authorized_url: () -> ::String
+        def session_id: () -> ::String
+        def url_expires_at: () -> ::Time
+        def session_expires_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAAServerless/Client.html#create_airflow_ui_url-instance_method
+      def create_airflow_ui_url: (
+                                   ?expires_in_seconds: ::Integer,
+                                   ?session_duration_in_seconds: ::Integer
+                                 ) -> _CreateAirflowUiUrlResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAirflowUiUrlResponseSuccess
+
       interface _CreateWorkflowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkflowResponse]
         def workflow_arn: () -> ::String

@@ -299,6 +299,9 @@ module Aws::GameLiftStreams
       attr_accessor export_files_metadata: Types::ExportFilesMetadata
       attr_accessor role_arn: ::String
       attr_accessor display_configuration: Types::DisplayConfiguration
+      attr_accessor application_started_at: ::Time
+      attr_accessor streaming_started_at: ::Time
+      attr_accessor streaming_ended_at: ::Time
       SENSITIVE: [:signal_request, :signal_response, :role_arn]
     end
 
@@ -548,6 +551,9 @@ module Aws::GameLiftStreams
       attr_accessor export_files_metadata: Types::ExportFilesMetadata
       attr_accessor role_arn: ::String
       attr_accessor display_configuration: Types::DisplayConfiguration
+      attr_accessor application_started_at: ::Time
+      attr_accessor streaming_started_at: ::Time
+      attr_accessor streaming_ended_at: ::Time
       SENSITIVE: [:signal_request, :signal_response, :role_arn]
     end
 

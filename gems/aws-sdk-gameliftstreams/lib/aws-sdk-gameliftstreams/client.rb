@@ -2130,6 +2130,9 @@ module Aws::GameLiftStreams
     #   * {Types::GetStreamSessionOutput#export_files_metadata #export_files_metadata} => Types::ExportFilesMetadata
     #   * {Types::GetStreamSessionOutput#role_arn #role_arn} => String
     #   * {Types::GetStreamSessionOutput#display_configuration #display_configuration} => Types::DisplayConfiguration
+    #   * {Types::GetStreamSessionOutput#application_started_at #application_started_at} => Time
+    #   * {Types::GetStreamSessionOutput#streaming_started_at #streaming_started_at} => Time
+    #   * {Types::GetStreamSessionOutput#streaming_ended_at #streaming_ended_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -2168,6 +2171,9 @@ module Aws::GameLiftStreams
     #   resp.role_arn #=> String
     #   resp.display_configuration.resolution.width #=> Integer
     #   resp.display_configuration.resolution.height #=> Integer
+    #   resp.application_started_at #=> Time
+    #   resp.streaming_started_at #=> Time
+    #   resp.streaming_ended_at #=> Time
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3114,6 +3120,9 @@ module Aws::GameLiftStreams
     #   * {Types::StartStreamSessionOutput#export_files_metadata #export_files_metadata} => Types::ExportFilesMetadata
     #   * {Types::StartStreamSessionOutput#role_arn #role_arn} => String
     #   * {Types::StartStreamSessionOutput#display_configuration #display_configuration} => Types::DisplayConfiguration
+    #   * {Types::StartStreamSessionOutput#application_started_at #application_started_at} => Time
+    #   * {Types::StartStreamSessionOutput#streaming_started_at #streaming_started_at} => Time
+    #   * {Types::StartStreamSessionOutput#streaming_ended_at #streaming_ended_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -3174,6 +3183,9 @@ module Aws::GameLiftStreams
     #   resp.role_arn #=> String
     #   resp.display_configuration.resolution.width #=> Integer
     #   resp.display_configuration.resolution.height #=> Integer
+    #   resp.application_started_at #=> Time
+    #   resp.streaming_started_at #=> Time
+    #   resp.streaming_ended_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/StartStreamSession AWS API Documentation
     #
@@ -3609,7 +3621,7 @@ module Aws::GameLiftStreams
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-gameliftstreams'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

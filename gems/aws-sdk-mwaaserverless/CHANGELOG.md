@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2026-11-12)
+------------------
+
+* Feature - Adds support for Airflow UI in MWAA Serverless
+
 1.22.0 (2026-11-11)
 ------------------
 

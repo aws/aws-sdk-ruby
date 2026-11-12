@@ -268,8 +268,10 @@ module Aws::CloudWatchOmni
     Long = Shapes::IntegerShape.new(name: 'Long')
     Metadata = Shapes::StructureShape.new(name: 'Metadata')
     MetadataAttributeMap = Shapes::MapShape.new(name: 'MetadataAttributeMap')
+    MetricAggregationTemporality = Shapes::StringShape.new(name: 'MetricAggregationTemporality')
     MetricMetadata = Shapes::StructureShape.new(name: 'MetricMetadata')
     MetricMetadataList = Shapes::ListShape.new(name: 'MetricMetadataList')
+    MetricMonotonicity = Shapes::StringShape.new(name: 'MetricMonotonicity')
     MetricSemantics = Shapes::StructureShape.new(name: 'MetricSemantics')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NoData = Shapes::StructureShape.new(name: 'NoData')
@@ -1191,6 +1193,8 @@ module Aws::CloudWatchOmni
     MetricMetadata.add_member(:metric_type, Shapes::ShapeRef.new(shape: String, location_name: "metricType"))
     MetricMetadata.add_member(:attributes, Shapes::ShapeRef.new(shape: MetadataAttributeMap, location_name: "attributes"))
     MetricMetadata.add_member(:semantics, Shapes::ShapeRef.new(shape: MetricSemantics, location_name: "semantics"))
+    MetricMetadata.add_member(:aggregation_temporality, Shapes::ShapeRef.new(shape: MetricAggregationTemporality, location_name: "aggregationTemporality"))
+    MetricMetadata.add_member(:monotonicity, Shapes::ShapeRef.new(shape: MetricMonotonicity, location_name: "monotonicity"))
     MetricMetadata.struct_class = Types::MetricMetadata
 
     MetricMetadataList.member = Shapes::ShapeRef.new(shape: MetricMetadata)

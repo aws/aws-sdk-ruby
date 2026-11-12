@@ -4511,6 +4511,8 @@ module Aws::SageMaker
       attr_accessor failure_reason: ::String
       attr_accessor creation_time: ::Time
       attr_accessor last_modified_time: ::Time
+      attr_accessor created_by: Types::UserContext
+      attr_accessor last_modified_by: Types::UserContext
       SENSITIVE: []
     end
 
@@ -4530,6 +4532,8 @@ module Aws::SageMaker
       attr_accessor failure_reason: ::String
       attr_accessor creation_time: ::Time
       attr_accessor last_modified_time: ::Time
+      attr_accessor created_by: Types::UserContext
+      attr_accessor last_modified_by: Types::UserContext
       SENSITIVE: []
     end
 
@@ -6401,6 +6405,8 @@ module Aws::SageMaker
       attr_accessor failure_reason: ::String
       attr_accessor creation_time: ::Time
       attr_accessor last_modified_time: ::Time
+      attr_accessor created_by: Types::UserContext
+      attr_accessor last_modified_by: Types::UserContext
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end

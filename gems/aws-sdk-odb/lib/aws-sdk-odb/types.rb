@@ -140,6 +140,52 @@ module Aws::Odb
     #
     class AssociateIamRoleToResourceOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] cloud_vm_cluster_id
+    #   The unique identifier of the VM cluster to add virtual machines to.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_servers
+    #   The list of database server IDs for the virtual machines to add to
+    #   the VM cluster.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/AssociateVirtualMachinesToCloudVmClusterInput AWS API Documentation
+    #
+    class AssociateVirtualMachinesToCloudVmClusterInput < Struct.new(
+      :cloud_vm_cluster_id,
+      :db_servers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_name
+    #   The user-friendly name for the VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the current status of the VM cluster,
+    #   if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_vm_cluster_id
+    #   The unique identifier of the VM cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/AssociateVirtualMachinesToCloudVmClusterOutput AWS API Documentation
+    #
+    class AssociateVirtualMachinesToCloudVmClusterOutput < Struct.new(
+      :display_name,
+      :status,
+      :status_reason,
+      :cloud_vm_cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] exadb_vm_cluster_id
     #   The unique identifier of the Exascale VM cluster to add virtual
     #   machines to.
@@ -2156,6 +2202,11 @@ module Aws::Odb
     #   resource constraints.
     #   @return [Integer]
     #
+    # @!attribute [rw] ocpus_lowest_scaled_value
+    #   The minimum value to which you can scale down the number of CPU
+    #   cores.
+    #   @return [Integer]
+    #
     # @!attribute [rw] provisionable_autonomous_container_databases
     #   The number of Autonomous CDBs that can be provisioned in the
     #   Autonomous VM cluster.
@@ -2263,6 +2314,7 @@ module Aws::Odb
       :memory_size_in_g_bs,
       :node_count,
       :non_provisionable_autonomous_container_databases,
+      :ocpus_lowest_scaled_value,
       :provisionable_autonomous_container_databases,
       :provisioned_autonomous_container_databases,
       :provisioned_cpus,
@@ -2478,6 +2530,11 @@ module Aws::Odb
     #   resource constraints.
     #   @return [Integer]
     #
+    # @!attribute [rw] ocpus_lowest_scaled_value
+    #   The minimum value to which you can scale down the number of CPU
+    #   cores.
+    #   @return [Integer]
+    #
     # @!attribute [rw] provisionable_autonomous_container_databases
     #   The number of Autonomous CDBs that you can provision in the
     #   Autonomous VM cluster.
@@ -2584,6 +2641,7 @@ module Aws::Odb
       :memory_size_in_g_bs,
       :node_count,
       :non_provisionable_autonomous_container_databases,
+      :ocpus_lowest_scaled_value,
       :provisionable_autonomous_container_databases,
       :provisioned_autonomous_container_databases,
       :provisioned_cpus,
@@ -6431,6 +6489,53 @@ module Aws::Odb
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/DisassociateIamRoleFromResourceOutput AWS API Documentation
     #
     class DisassociateIamRoleFromResourceOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] cloud_vm_cluster_id
+    #   The unique identifier of the VM cluster to remove virtual machines
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_servers
+    #   The list of database server IDs for the virtual machines to remove
+    #   from the VM cluster.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/DisassociateVirtualMachinesFromCloudVmClusterInput AWS API Documentation
+    #
+    class DisassociateVirtualMachinesFromCloudVmClusterInput < Struct.new(
+      :cloud_vm_cluster_id,
+      :db_servers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_name
+    #   The user-friendly name for the VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the current status of the VM cluster,
+    #   if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_vm_cluster_id
+    #   The unique identifier of the VM cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/DisassociateVirtualMachinesFromCloudVmClusterOutput AWS API Documentation
+    #
+    class DisassociateVirtualMachinesFromCloudVmClusterOutput < Struct.new(
+      :display_name,
+      :status,
+      :status_reason,
+      :cloud_vm_cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] exadb_vm_cluster_id
     #   The unique identifier of the Exascale VM cluster to remove virtual
@@ -11144,8 +11249,31 @@ module Aws::Odb
       include Aws::Structure
     end
 
-    # @!attribute [rw] cloud_exadata_infrastructure_id
-    #   The unique identifier of the Exadata infrastructure to update.
+    # @!attribute [rw] cloud_autonomous_vm_cluster_id
+    #   The unique identifier of the Autonomous VM cluster to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] autonomous_data_storage_size_in_t_bs
+    #   The data storage size to allocate for Autonomous Databases in the
+    #   Autonomous VM cluster, in terabytes (TB).
+    #   @return [Float]
+    #
+    # @!attribute [rw] cpu_core_count_per_node
+    #   The number of CPU cores to enable per node in the Autonomous VM
+    #   cluster. If you don't specify a value, the existing number of CPU
+    #   cores per node is retained.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   A user-provided description of the Autonomous VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   A new user-friendly name for the Autonomous VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_model
+    #   The Oracle license model to apply to the Autonomous VM cluster.
     #   @return [String]
     #
     # @!attribute [rw] maintenance_window
@@ -11153,11 +11281,87 @@ module Aws::Odb
     #   system updates take place during the maintenance window.
     #   @return [Types::MaintenanceWindow]
     #
+    # @!attribute [rw] total_container_databases
+    #   The total number of Autonomous Container Databases that can be
+    #   created in the Autonomous VM cluster.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateCloudAutonomousVmClusterInput AWS API Documentation
+    #
+    class UpdateCloudAutonomousVmClusterInput < Struct.new(
+      :cloud_autonomous_vm_cluster_id,
+      :autonomous_data_storage_size_in_t_bs,
+      :cpu_core_count_per_node,
+      :description,
+      :display_name,
+      :license_model,
+      :maintenance_window,
+      :total_container_databases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_name
+    #   The user-friendly name of the updated Autonomous VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Autonomous VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the current status of the Autonomous VM
+    #   cluster, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_autonomous_vm_cluster_id
+    #   The unique identifier of the updated Autonomous VM cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateCloudAutonomousVmClusterOutput AWS API Documentation
+    #
+    class UpdateCloudAutonomousVmClusterOutput < Struct.new(
+      :display_name,
+      :status,
+      :status_reason,
+      :cloud_autonomous_vm_cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cloud_exadata_infrastructure_id
+    #   The unique identifier of the Exadata infrastructure to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   A new user-friendly name for the Exadata infrastructure.
+    #   @return [String]
+    #
+    # @!attribute [rw] compute_count
+    #   The number of database servers for the Exadata infrastructure.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maintenance_window
+    #   The maintenance window configuration for the Exadata Cloud
+    #   infrastructure.
+    #
+    #   This allows you to define when maintenance operations such as
+    #   patching and updates can be performed on the infrastructure.
+    #   @return [Types::MaintenanceWindow]
+    #
+    # @!attribute [rw] storage_count
+    #   The number of storage servers to activate for the Exadata
+    #   infrastructure.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateCloudExadataInfrastructureInput AWS API Documentation
     #
     class UpdateCloudExadataInfrastructureInput < Struct.new(
       :cloud_exadata_infrastructure_id,
-      :maintenance_window)
+      :display_name,
+      :compute_count,
+      :maintenance_window,
+      :storage_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11187,6 +11391,139 @@ module Aws::Odb
       :status,
       :status_reason,
       :cloud_exadata_infrastructure_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cloud_exadata_infrastructure_id
+    #   The unique identifier or Amazon Resource Name (ARN) of the Exadata
+    #   infrastructure to update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateCloudExadataInfrastructureStorageCapacityInput AWS API Documentation
+    #
+    class UpdateCloudExadataInfrastructureStorageCapacityInput < Struct.new(
+      :cloud_exadata_infrastructure_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_name
+    #   The user-friendly name of the updated Exadata infrastructure.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Exadata infrastructure.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the current status of the Exadata
+    #   infrastructure, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_exadata_infrastructure_id
+    #   The unique identifier of the updated Exadata infrastructure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateCloudExadataInfrastructureStorageCapacityOutput AWS API Documentation
+    #
+    class UpdateCloudExadataInfrastructureStorageCapacityOutput < Struct.new(
+      :display_name,
+      :status,
+      :status_reason,
+      :cloud_exadata_infrastructure_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cloud_vm_cluster_id
+    #   The unique identifier of the VM cluster to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] cpu_core_count
+    #   The number of CPU cores to enable on the VM cluster. If you don't
+    #   specify a value, the existing number of CPU cores is retained.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_collection_options
+    #   The set of preferences for the diagnostic collection options for the
+    #   VM cluster.
+    #   @return [Types::DataCollectionOptions]
+    #
+    # @!attribute [rw] data_storage_size_in_t_bs
+    #   The size of the data disk group, in terabytes (TB), to allocate for
+    #   the VM cluster.
+    #   @return [Float]
+    #
+    # @!attribute [rw] db_node_storage_size_in_g_bs
+    #   The amount of local node storage, in gigabytes (GB), to allocate for
+    #   the VM cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] display_name
+    #   A new user-friendly name for the VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssh_public_keys
+    #   The public key portion of one or more key pairs used for SSH access
+    #   to the VM cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] license_model
+    #   The Oracle license model to apply to the VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] memory_size_in_g_bs
+    #   The amount of memory, in gigabytes (GB), to allocate for the VM
+    #   cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_size_in_g_bs
+    #   The amount of local node storage, in gigabytes (GB), to allocate to
+    #   the VM cluster.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateCloudVmClusterInput AWS API Documentation
+    #
+    class UpdateCloudVmClusterInput < Struct.new(
+      :cloud_vm_cluster_id,
+      :cpu_core_count,
+      :data_collection_options,
+      :data_storage_size_in_t_bs,
+      :db_node_storage_size_in_g_bs,
+      :display_name,
+      :ssh_public_keys,
+      :license_model,
+      :memory_size_in_g_bs,
+      :storage_size_in_g_bs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_name
+    #   The user-friendly name of the updated VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the current status of the VM cluster,
+    #   if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_vm_cluster_id
+    #   The unique identifier of the updated VM cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateCloudVmClusterOutput AWS API Documentation
+    #
+    class UpdateCloudVmClusterOutput < Struct.new(
+      :display_name,
+      :status,
+      :status_reason,
+      :cloud_vm_cluster_id)
       SENSITIVE = []
       include Aws::Structure
     end

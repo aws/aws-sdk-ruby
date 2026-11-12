@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.160.0 (2026-11-12)
+------------------
+
+* Feature - Adds support for saving, retrieving, listing, and deleting CloudWatch metric data query definitions.
+
 1.159.0 (2026-11-11)
 ------------------
 

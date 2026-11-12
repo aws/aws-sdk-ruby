@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:secretsmanager)
 # structure.
 #
 #     secrets_manager = Aws::SecretsManager::Client.new
-#     resp = secrets_manager.batch_get_secret_value(params)
+#     resp = secrets_manager.associate_cross_account_replica(params)
 #
 # See {Client} for more information.
 #
@@ -54,7 +54,7 @@ module Aws::SecretsManager
   autoload :EndpointProvider, 'aws-sdk-secretsmanager/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-secretsmanager/endpoints'
 
-  GEM_VERSION = '1.146.0'
+  GEM_VERSION = '1.147.0'
 
 end
 

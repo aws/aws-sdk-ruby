@@ -970,6 +970,8 @@ module Aws::CloudWatchOmni
       attr_accessor metric_type: ::String
       attr_accessor attributes: ::Hash[::String, ::String]
       attr_accessor semantics: Types::MetricSemantics
+      attr_accessor aggregation_temporality: ("delta" | "cumulative")
+      attr_accessor monotonicity: ("monotonic" | "non_monotonic")
       SENSITIVE: []
     end
 

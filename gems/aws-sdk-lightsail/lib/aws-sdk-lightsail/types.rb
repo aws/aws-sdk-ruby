@@ -1964,6 +1964,67 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @!attribute [rw] subdomain_name
+    #   The subdomain to check (for example, `mysite` or `blog.mysite`).
+    #
+    #   A subdomain can contain one or two labels separated by a period
+    #   (`.`). Each label must start and end with a lowercase letter or a
+    #   number, and can contain only lowercase letters, numbers, and hyphens
+    #   (`-`). The name can be up to 39 characters long, including periods.
+    #   Labels that start with `xn--` aren't supported, and some names are
+    #   reserved.
+    #
+    #   Specify only the subdomain. A web address, such as
+    #   `mysite.amazonlightsail.com`, isn't accepted.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserve
+    #   Specifies whether to reserve the subdomain for your account if it's
+    #   available. A reservation holds the subdomain for 15 minutes so that
+    #   other accounts can't create it. Checking the subdomain again
+    #   doesn't extend the reservation.
+    #
+    #   For a nested subdomain, such as `blog.mysite`, the top-level
+    #   subdomain (`mysite`) is reserved.
+    #
+    #   You can have up to 5 active reservations at a time.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CheckSubdomainAvailabilityRequest AWS API Documentation
+    #
+    class CheckSubdomainAvailabilityRequest < Struct.new(
+      :subdomain_name,
+      :reserve)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] available
+    #   A Boolean value that indicates whether the subdomain is available to
+    #   create.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] reservation_expires_at
+    #   The timestamp when the reservation of the subdomain expires.
+    #
+    #   The expiry is returned only when your account holds an active
+    #   reservation for the subdomain.
+    #   @return [Time]
+    #
+    # @!attribute [rw] subdomain_name
+    #   The subdomain that was checked.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CheckSubdomainAvailabilityResult AWS API Documentation
+    #
+    class CheckSubdomainAvailabilityResult < Struct.new(
+      :available,
+      :reservation_expires_at,
+      :subdomain_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] port_info
     #   An object to describe the ports to close for the specified instance.
     #   @return [Types::PortInfo]
@@ -3831,6 +3892,19 @@ module Aws::Lightsail
     #     `AWSManagedRulesBotControlRuleSet` rule groups.
     #   @return [Array<Types::WafRule>]
     #
+    # @!attribute [rw] subdomain_name
+    #   The Lightsail subdomain to create and associate with the
+    #   distribution (for example, `mysite`, for the web address
+    #   `mysite.amazonlightsail.com`).
+    #
+    #   After the distribution is deployed, Lightsail creates the subdomain
+    #   and associates it with the distribution. If Lightsail can't create
+    #   or associate the subdomain, it still creates the distribution, but
+    #   the `CreateDistribution` operation fails and the `state` of the
+    #   distribution's `subdomain` is `Error`. To check the status, use the
+    #   `subdomain` parameter of the distribution.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDistributionRequest AWS API Documentation
     #
     class CreateDistributionRequest < Struct.new(
@@ -3848,7 +3922,8 @@ module Aws::Lightsail
       :default_root_object,
       :custom_error_responses,
       :enable_waf,
-      :waf_rules)
+      :waf_rules,
+      :subdomain_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4930,6 +5005,58 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @!attribute [rw] subdomain_name
+    #   The subdomain to create (for example, `mysite` or `blog.mysite`).
+    #
+    #   A subdomain can contain one or two labels separated by a period
+    #   (`.`). Each label must start and end with a lowercase letter or a
+    #   number, and can contain only lowercase letters, numbers, and hyphens
+    #   (`-`). The name can be up to 39 characters long, including periods.
+    #   Labels that start with `xn--` aren't supported, and some names are
+    #   reserved.
+    #
+    #   Specify only the subdomain. A web address, such as
+    #   `mysite.amazonlightsail.com`, isn't accepted.
+    #
+    #   To create a nested subdomain, you must own the top-level subdomain
+    #   or be able to create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tag keys and optional values to add to the subdomain during
+    #   create.
+    #
+    #   Use the `TagResource` action to tag a resource after it's created.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateSubdomainRequest AWS API Documentation
+    #
+    class CreateSubdomainRequest < Struct.new(
+      :subdomain_name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subdomain
+    #   An object that describes the subdomain that was created.
+    #   @return [Types::Subdomain]
+    #
+    # @!attribute [rw] operation
+    #   An object that describes the result of the action, such as the
+    #   status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateSubdomainResult AWS API Documentation
+    #
+    class CreateSubdomainResult < Struct.new(
+      :subdomain,
+      :operation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] alarm_name
     #   The name of the alarm to delete.
     #   @return [String]
@@ -5610,6 +5737,42 @@ module Aws::Lightsail
     #
     class DeleteRelationalDatabaseSnapshotResult < Struct.new(
       :operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subdomain_name
+    #   The subdomain to delete (for example, `mysite` or `blog.mysite`),
+    #   not its web address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteSubdomainRequest AWS API Documentation
+    #
+    class DeleteSubdomainRequest < Struct.new(
+      :subdomain_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subdomain
+    #   An object that describes the top-level subdomain in the `IMPLICIT`
+    #   state.
+    #
+    #   This parameter is returned only when you delete a top-level
+    #   subdomain that has nested subdomains.
+    #   @return [Types::Subdomain]
+    #
+    # @!attribute [rw] operation
+    #   An object that describes the result of the action, such as the
+    #   status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteSubdomainResult AWS API Documentation
+    #
+    class DeleteSubdomainResult < Struct.new(
+      :subdomain,
+      :operation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10069,6 +10232,58 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @!attribute [rw] subdomain_name
+    #   The subdomain for which to return information (for example, `mysite`
+    #   or `blog.mysite`), not its web address.
+    #
+    #   When omitted, the response includes all of your subdomains.
+    #
+    #   You can't specify this parameter together with the `pageToken`
+    #   parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_token
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetSubdomains` request. If
+    #   your results are paginated, the response will return a next page
+    #   token that you can specify as the page token in a subsequent
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetSubdomainsRequest AWS API Documentation
+    #
+    class GetSubdomainsRequest < Struct.new(
+      :subdomain_name,
+      :page_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subdomains
+    #   An array of objects that describe your subdomains.
+    #   @return [Array<Types::Subdomain>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The token to advance to the next page of results from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another `GetSubdomains`
+    #   request and specify the next page token using the `pageToken`
+    #   parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetSubdomainsResult AWS API Documentation
+    #
+    class GetSubdomainsResult < Struct.new(
+      :subdomains,
+      :next_page_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the request headers that a Lightsail distribution bases
     # caching on.
     #
@@ -11619,17 +11834,30 @@ module Aws::Lightsail
     #   The object (for example, `index.html`) that the distribution returns
     #   when a viewer requests the root URL of the distribution (`/`)
     #   instead of a specific object.
+    #
+    #   This value is returned only when you specify `distributionName` in
+    #   your `GetDistributions` request. It isn't included in the response
+    #   when you list all of your distributions.
     #   @return [String]
     #
     # @!attribute [rw] custom_error_responses
     #   An array of objects that describe the custom error responses
     #   configured for the distribution.
+    #
+    #   This value is returned only when you specify `distributionName` in
+    #   your `GetDistributions` request. It isn't included in the response
+    #   when you list all of your distributions.
     #   @return [Array<Types::DistributionCustomErrorResponse>]
     #
     # @!attribute [rw] waf
     #   An object that describes the Web Application Firewall (WAF)
     #   configuration of the distribution.
     #   @return [Types::WafConfig]
+    #
+    # @!attribute [rw] subdomain
+    #   An object that describes the Lightsail subdomain that's associated
+    #   with the distribution, or is being associated with it.
+    #   @return [Types::LightsailDistributionSubdomain]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LightsailDistribution AWS API Documentation
     #
@@ -11657,7 +11885,54 @@ module Aws::Lightsail
       :viewer_minimum_tls_protocol_version,
       :default_root_object,
       :custom_error_responses,
-      :waf)
+      :waf,
+      :subdomain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the Lightsail subdomain of a distribution. The distribution
+    # is reachable at the subdomain's web address, which is the subdomain
+    # followed by `amazonlightsail.com`.
+    #
+    # @!attribute [rw] name
+    #   The subdomain (for example, `mysite`), not its web address.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the subdomain for the distribution.
+    #
+    #   The following states are possible:
+    #
+    #   * `Creating` – The subdomain is being created.
+    #
+    #   * `Attaching` – The subdomain is being associated with the
+    #     distribution.
+    #
+    #   * `Attached` – The subdomain is associated with the distribution.
+    #
+    #   * `Error` – The subdomain couldn't be created or associated with
+    #     the distribution. For more information, see the `errorCode` and
+    #     `errorDetails` parameters.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code that describes why the subdomain is in the `Error`
+    #   state.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_details
+    #   The details of the error that caused the subdomain to be in the
+    #   `Error` state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LightsailDistributionSubdomain AWS API Documentation
+    #
+    class LightsailDistributionSubdomain < Struct.new(
+      :name,
+      :state,
+      :error_code,
+      :error_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14844,6 +15119,168 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes a Lightsail subdomain. A subdomain is the name that you
+    # choose, such as `mysite` or `blog.mysite`. Its web address is the
+    # subdomain followed by `amazonlightsail.com`, such as
+    # `blog.mysite.amazonlightsail.com`. You can associate a subdomain with
+    # a Lightsail resource to make the resource reachable at the web
+    # address.
+    #
+    # @!attribute [rw] subdomain_name
+    #   The subdomain (for example, `mysite` or `blog.mysite`). To get the
+    #   web address, use the `fqdn` parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the subdomain.
+    #
+    #   If you create a subdomain with a depth of 2, such as `blog.mysite`,
+    #   without first creating the subdomain with a depth of 1 (`mysite`),
+    #   Lightsail holds `mysite` for your account in the `IMPLICIT` state.
+    #   It doesn't have an ARN until you create a subdomain with that name.
+    #   @return [String]
+    #
+    # @!attribute [rw] fqdn
+    #   The web address of the subdomain, which is the subdomain followed by
+    #   `amazonlightsail.com` (for example,
+    #   `blog.mysite.amazonlightsail.com`).
+    #   @return [String]
+    #
+    # @!attribute [rw] depth
+    #   The number of labels in the subdomain. A top-level subdomain, such
+    #   as `mysite`, has a depth of `1`. A nested subdomain, such as
+    #   `blog.mysite`, has a depth of `2`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   The state of the subdomain.
+    #
+    #   The following states are possible:
+    #
+    #   * `CREATING` – The subdomain is being created.
+    #
+    #   * `CREATE_FAILED` – The subdomain couldn't be created. Delete the
+    #     subdomain, and then create it again if the name is still
+    #     available.
+    #
+    #   * `UNATTACHED` – The subdomain is ready, and isn't associated with
+    #     a resource.
+    #
+    #   * `ATTACHING` – The subdomain is being associated with a resource.
+    #
+    #   * `ATTACHED` – The subdomain is associated with a resource, and
+    #     routes traffic to it.
+    #
+    #   * `DETACHING` – The subdomain is being disassociated from a
+    #     resource.
+    #
+    #   * `TRANSFERRING` – The subdomain is being moved from one resource to
+    #     another resource.
+    #
+    #   * `IMPLICIT` – The subdomain is the parent of one or more nested
+    #     subdomains that you created, but you didn't create the parent
+    #     subdomain itself. You can't associate or delete a subdomain in
+    #     this state. To use it, create it with the `CreateSubdomain`
+    #     action.
+    #   @return [String]
+    #
+    # @!attribute [rw] attached_resource
+    #   An object that describes the resource that the subdomain is
+    #   associated with.
+    #
+    #   When the subdomain is in the `TRANSFERRING` state, this is the
+    #   resource that the subdomain is being moved from.
+    #   @return [Types::SubdomainAttachableResource]
+    #
+    # @!attribute [rw] attaching_resource
+    #   An object that describes the resource that the subdomain is being
+    #   associated with.
+    #
+    #   This parameter is returned only when the subdomain is in the
+    #   `ATTACHING` or `TRANSFERRING` state.
+    #   @return [Types::SubdomainAttachableResource]
+    #
+    # @!attribute [rw] location
+    #   An object that describes the location of the subdomain, such as the
+    #   AWS Region.
+    #   @return [Types::ResourceLocation]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the subdomain was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] parent_fqdn
+    #   The web address of the parent subdomain (for example,
+    #   `mysite.amazonlightsail.com` for `blog.mysite`).
+    #
+    #   This parameter isn't returned for a subdomain with a depth of 1.
+    #   @return [String]
+    #
+    # @!attribute [rw] children
+    #   An array of objects that describe the nested subdomains of the
+    #   subdomain.
+    #
+    #   This parameter is returned only by the `GetSubdomains` action when
+    #   you don't specify a subdomain.
+    #   @return [Array<Types::Subdomain>]
+    #
+    # @!attribute [rw] tags
+    #   The tag keys and optional values for the subdomain. For more
+    #   information about tags in Lightsail, see the [Lightsail Developer
+    #   Guide][1].
+    #
+    #   This parameter is returned only by the `GetSubdomains` action when
+    #   you specify a subdomain.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Subdomain AWS API Documentation
+    #
+    class Subdomain < Struct.new(
+      :subdomain_name,
+      :arn,
+      :fqdn,
+      :depth,
+      :state,
+      :attached_resource,
+      :attaching_resource,
+      :location,
+      :created_at,
+      :parent_fqdn,
+      :children,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a Lightsail resource that a subdomain is associated with, or
+    # is being associated with.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] attached_at
+    #   The timestamp when the subdomain was associated with the resource.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/SubdomainAttachableResource AWS API Documentation
+    #
+    class SubdomainAttachableResource < Struct.new(
+      :arn,
+      :name,
+      :attached_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a tag key and optional value assigned to an Amazon Lightsail
     # resource.
     #
@@ -15856,6 +16293,66 @@ module Aws::Lightsail
     #
     class UpdateRelationalDatabaseResult < Struct.new(
       :operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subdomain_name
+    #   The subdomain to update (for example, `mysite` or `blog.mysite`),
+    #   not its web address.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The association change to make.
+    #
+    #   The following actions are possible:
+    #
+    #   * `ASSOCIATE` – Associates the subdomain with the resource that you
+    #     specify in the `targetResourceArn` parameter. The subdomain must
+    #     be in the `UNATTACHED` state.
+    #
+    #   * `DISASSOCIATE` – Disassociates the subdomain from its current
+    #     resource. The subdomain must be in the `ATTACHED` state.
+    #
+    #   * `TRANSFER` – Moves the subdomain from its current resource to the
+    #     resource that you specify in the `targetResourceArn` parameter.
+    #     The subdomain must be in the `ATTACHED` state. You can transfer
+    #     each subdomain only once in a 24-hour period.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to associate the
+    #   subdomain with. The resource must be in your account.
+    #
+    #   This parameter is required when the `action` is `ASSOCIATE` or
+    #   `TRANSFER`. It's ignored when the `action` is `DISASSOCIATE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateSubdomainAssociationRequest AWS API Documentation
+    #
+    class UpdateSubdomainAssociationRequest < Struct.new(
+      :subdomain_name,
+      :action,
+      :target_resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subdomain
+    #   An object that describes the subdomain that was updated.
+    #   @return [Types::Subdomain]
+    #
+    # @!attribute [rw] operation
+    #   An object that describes the result of the action, such as the
+    #   status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateSubdomainAssociationResult AWS API Documentation
+    #
+    class UpdateSubdomainAssociationResult < Struct.new(
+      :subdomain,
+      :operation)
       SENSITIVE = []
       include Aws::Structure
     end

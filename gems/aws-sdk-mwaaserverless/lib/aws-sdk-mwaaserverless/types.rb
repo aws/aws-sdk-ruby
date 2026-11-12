@@ -72,6 +72,57 @@ module Aws::MWAAServerless
       include Aws::Structure
     end
 
+    # @!attribute [rw] expires_in_seconds
+    #   Specifies the number of seconds that the launch URL stays valid.
+    #   This value limits only the time to open the URL, not the length of
+    #   the UI session. The default is 300.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_duration_in_seconds
+    #   Specifies the number of seconds that the UI session lasts, starting
+    #   from when you call this operation. The default is 43200 (12 hours).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-serverless-2024-07-26/CreateAirflowUiUrlRequest AWS API Documentation
+    #
+    class CreateAirflowUiUrlRequest < Struct.new(
+      :expires_in_seconds,
+      :session_duration_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authorized_url
+    #   The launch URL that opens the Airflow UI. Open it in a browser
+    #   before `UrlExpiresAt`. The UI session uses the permissions of the
+    #   identity that called this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The URL starts a UI session that has this identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] url_expires_at
+    #   The launch URL stops being valid at this time. The value is in ISO
+    #   8601 date-time format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] session_expires_at
+    #   The UI session ends at this time. The value is in ISO 8601 date-time
+    #   format. After this time, create a new URL to open the UI again.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-serverless-2024-07-26/CreateAirflowUiUrlResponse AWS API Documentation
+    #
+    class CreateAirflowUiUrlResponse < Struct.new(
+      :authorized_url,
+      :session_id,
+      :url_expires_at,
+      :session_expires_at)
+      SENSITIVE = [:authorized_url, :session_id]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the workflow. You must use unique workflow names within
     #   your Amazon Web Services account. The service generates a unique
@@ -581,14 +632,8 @@ module Aws::MWAAServerless
     #   @return [Time]
     #
     # @!attribute [rw] schedule_configuration
-    #   The schedule configuration for the workflow, including cron
-    #   expressions for automated execution. Amazon Managed Workflows for
-    #   Apache Airflow Serverless uses EventBridge Scheduler for
-    #   cost-effective, timezone-aware scheduling. When a workflow includes
-    #   schedule information in its YAML definition, the service
-    #   automatically configures the appropriate triggers for automated
-    #   execution. Only one version of a workflow can have an active
-    #   schedule at any given time.
+    #   The schedule configuration for the workflow. Only one version of a
+    #   workflow can have an active schedule at any given time.
     #   @return [Types::ScheduleConfiguration]
     #
     # @!attribute [rw] role_arn
@@ -1068,20 +1113,30 @@ module Aws::MWAAServerless
       include Aws::Structure
     end
 
-    # The configuration to use to schedule automated workflow execution
-    # using cron expressions. Amazon Managed Workflows for Apache Airflow
-    # Serverless integrates with EventBridge Scheduler to provide
-    # cost-effective, timezone-aware scheduling capabilities. The service
-    # supports both time-based and event-based scheduling (event-based
-    # scheduling available post-GA). When a workflow definition includes
-    # scheduling information, Amazon Managed Workflows for Apache Airflow
-    # Serverless automatically configures the appropriate triggers and
-    # ensures only one version of a workflow has an active schedule at any
-    # time.
+    # Contains the configuration used to schedule automated workflow
+    # execution. Only one version of a workflow can have an active schedule
+    # at any time.
     #
     # @!attribute [rw] cron_expression
-    #   A cron expression that defines when the workflow is automatically
-    #   executed. Uses standard cron syntax.
+    #   The schedule expression that determines when the workflow runs, as
+    #   specified in the `schedule` parameter of the workflow's YAML
+    #   definition. You can specify one of the following types of schedule
+    #   expressions:
+    #
+    #   * Apache Airflow cron expression – Five fields, such as `0 12 1 *
+    #     *`.
+    #
+    #   * Apache Airflow schedule preset – `@hourly`, `@daily`, `@weekly`,
+    #     `@monthly`, `@yearly`, or `@annually`.
+    #
+    #   * EventBridge Scheduler rate expression – For example, `rate(5
+    #     minutes)`. Supported units are minutes, hours, and days.
+    #
+    #   * EventBridge Scheduler cron expression – Six fields, such as
+    #     `cron(0 12 * * ? *)`.
+    #
+    #   In a cron expression, specify either a day-of-month or a
+    #   day-of-week, not both.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-serverless-2024-07-26/ScheduleConfiguration AWS API Documentation

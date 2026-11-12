@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.210.0 (2026-11-12)
+------------------
+
+* Feature - AWS Elemental MediaLive now adds a caption language setting for MediaPackage V2 output groups that signals a stream carries no closed captions.
+
 1.209.0 (2026-11-11)
 ------------------
 

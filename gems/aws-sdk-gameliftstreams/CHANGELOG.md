@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2026-11-12)
+------------------
+
+* Feature - Adds support for ApplicationStartedAt on stream sessions, a timestamp that indicates when the application launched for the stream session, returned by GetStreamSession and StartStreamSession. Also added streamingStartedAt and streamingEndedAt.
+
 1.46.0 (2026-11-11)
 ------------------
 

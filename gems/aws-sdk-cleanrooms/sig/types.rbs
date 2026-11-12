@@ -2728,6 +2728,7 @@ module Aws::CleanRooms
     class ProtectedJobError
       attr_accessor message: ::String
       attr_accessor code: ::String
+      attr_accessor retry: Types::RetryInfo
       SENSITIVE: []
     end
 
@@ -2899,6 +2900,7 @@ module Aws::CleanRooms
     class ProtectedQueryError
       attr_accessor message: ::String
       attr_accessor code: ::String
+      attr_accessor retry: Types::RetryInfo
       SENSITIVE: []
     end
 
@@ -3028,6 +3030,11 @@ module Aws::CleanRooms
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
       attr_accessor resource_type: ("CONFIGURED_TABLE" | "COLLABORATION" | "MEMBERSHIP" | "CONFIGURED_TABLE_ASSOCIATION")
+      SENSITIVE: []
+    end
+
+    class RetryInfo
+      attr_accessor retryable: bool
       SENSITIVE: []
     end
 

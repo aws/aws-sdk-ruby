@@ -31,6 +31,20 @@ module Aws::MWAAServerless
       SENSITIVE: []
     end
 
+    class CreateAirflowUiUrlRequest
+      attr_accessor expires_in_seconds: ::Integer
+      attr_accessor session_duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateAirflowUiUrlResponse
+      attr_accessor authorized_url: ::String
+      attr_accessor session_id: ::String
+      attr_accessor url_expires_at: ::Time
+      attr_accessor session_expires_at: ::Time
+      SENSITIVE: [:authorized_url, :session_id]
+    end
+
     class CreateWorkflowRequest
       attr_accessor name: ::String
       attr_accessor client_token: ::String

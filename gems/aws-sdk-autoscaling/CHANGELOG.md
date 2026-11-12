@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.179.0 (2026-11-12)
+------------------
+
+* Feature - Amazon EC2 Auto Scaling now supports ASGAverageCPUUtilizationHighResolution as a predefined metric type for target tracking scaling policies.
+
 1.178.0 (2026-11-11)
 ------------------
 

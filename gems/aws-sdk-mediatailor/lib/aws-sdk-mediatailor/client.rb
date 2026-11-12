@@ -581,8 +581,8 @@ module Aws::MediaTailor
     #       exclude_event_types: ["AD_MARKER_FOUND"], # accepts AD_MARKER_FOUND, NON_AD_MARKER_FOUND, MAKING_ADS_REQUEST, MODIFIED_TARGET_URL, VAST_REDIRECT, EMPTY_VAST_RESPONSE, EMPTY_VMAP_RESPONSE, VAST_RESPONSE, REDIRECTED_VAST_RESPONSE, FILLED_AVAIL, FILLED_OVERLAY_AVAIL, BEACON_FIRED, WARNING_NO_ADVERTISEMENTS, WARNING_VPAID_AD_DROPPED, WARNING_URL_VARIABLE_SUBSTITUTION_FAILED, ERROR_UNKNOWN, ERROR_UNKNOWN_HOST, ERROR_DISALLOWED_HOST, ERROR_ADS_IO, ERROR_ADS_TIMEOUT, ERROR_ADS_RESPONSE_PARSE, ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT, ERROR_ADS_INVALID_RESPONSE, ERROR_VAST_REDIRECT_EMPTY_RESPONSE, ERROR_VAST_REDIRECT_MULTIPLE_VAST, ERROR_VAST_REDIRECT_FAILED, ERROR_VAST_MISSING_MEDIAFILES, ERROR_VAST_MISSING_CREATIVES, ERROR_VAST_MISSING_OVERLAYS, ERROR_VAST_MISSING_IMPRESSION, ERROR_VAST_INVALID_VAST_AD_TAG_URI, ERROR_VAST_MULTIPLE_TRACKING_EVENTS, ERROR_VAST_MULTIPLE_LINEAR, ERROR_VAST_INVALID_MEDIA_FILE, ERROR_FIRING_BEACON_FAILED, ERROR_PERSONALIZATION_DISABLED, VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET, VOD_TIME_BASED_AVAIL_PLAN_SUCCESS, VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS, INTERSTITIAL_VOD_SUCCESS, INTERSTITIAL_VOD_FAILURE, PRE_ADS_REQUEST_HOOK_ERROR, PRE_ADS_REQUEST_FUNCTION_ERROR, BEACON_RECEIVED, POST_ADS_RESPONSE_HOOK_ERROR, POST_ADS_RESPONSE_FUNCTION_ERROR, PRE_MANIFEST_INSERTION_HOOK_ERROR, PRE_MANIFEST_INSERTION_FUNCTION_ERROR
     #     },
     #     manifest_service_interaction_log: {
-    #       publish_opt_in_event_types: ["PRE_SESSION_INIT_HOOK_SUMMARY"], # accepts PRE_SESSION_INIT_HOOK_SUMMARY, PRE_SESSION_INIT_FUNCTION_COMPLETED
-    #       exclude_event_types: ["GENERATED_MANIFEST"], # accepts GENERATED_MANIFEST, ORIGIN_MANIFEST, SESSION_INITIALIZED, TRACKING_RESPONSE, CONFIG_SYNTAX_ERROR, CONFIG_SECURITY_ERROR, UNKNOWN_HOST, TIMEOUT_ERROR, CONNECTION_ERROR, IO_ERROR, UNKNOWN_ERROR, HOST_DISALLOWED, PARSING_ERROR, MANIFEST_ERROR, NO_MASTER_OR_MEDIA_PLAYLIST, NO_MASTER_PLAYLIST, NO_MEDIA_PLAYLIST, INCOMPATIBLE_HLS_VERSION, SCTE35_PARSING_ERROR, INVALID_SINGLE_PERIOD_DASH_MANIFEST, UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST, LAST_PERIOD_MISSING_AUDIO, LAST_PERIOD_MISSING_AUDIO_WARNING, ERROR_ORIGIN_PREFIX_INTERPOLATION, ERROR_ADS_INTERPOLATION, ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION, ERROR_CDN_AD_SEGMENT_INTERPOLATION, ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION, ERROR_SLATE_AD_URL_INTERPOLATION, ERROR_PROFILE_NAME_INTERPOLATION, ERROR_BUMPER_START_INTERPOLATION, ERROR_BUMPER_END_INTERPOLATION, PRE_SESSION_INIT_HOOK_ERROR, PRE_SESSION_INIT_FUNCTION_ERROR
+    #       publish_opt_in_event_types: ["PRE_SESSION_INIT_HOOK_SUMMARY"], # accepts PRE_SESSION_INIT_HOOK_SUMMARY, PRE_SESSION_INIT_FUNCTION_COMPLETED, POST_ORIGIN_RESPONSE_HOOK_SUMMARY, POST_ORIGIN_RESPONSE_FUNCTION_COMPLETED
+    #       exclude_event_types: ["GENERATED_MANIFEST"], # accepts GENERATED_MANIFEST, ORIGIN_MANIFEST, SESSION_INITIALIZED, TRACKING_RESPONSE, CONFIG_SYNTAX_ERROR, CONFIG_SECURITY_ERROR, UNKNOWN_HOST, TIMEOUT_ERROR, CONNECTION_ERROR, IO_ERROR, UNKNOWN_ERROR, HOST_DISALLOWED, PARSING_ERROR, MANIFEST_ERROR, NO_MASTER_OR_MEDIA_PLAYLIST, NO_MASTER_PLAYLIST, NO_MEDIA_PLAYLIST, INCOMPATIBLE_HLS_VERSION, SCTE35_PARSING_ERROR, INVALID_SINGLE_PERIOD_DASH_MANIFEST, UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST, LAST_PERIOD_MISSING_AUDIO, LAST_PERIOD_MISSING_AUDIO_WARNING, ERROR_ORIGIN_PREFIX_INTERPOLATION, ERROR_ADS_INTERPOLATION, ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION, ERROR_CDN_AD_SEGMENT_INTERPOLATION, ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION, ERROR_SLATE_AD_URL_INTERPOLATION, ERROR_PROFILE_NAME_INTERPOLATION, ERROR_BUMPER_START_INTERPOLATION, ERROR_BUMPER_END_INTERPOLATION, PRE_SESSION_INIT_HOOK_ERROR, PRE_SESSION_INIT_FUNCTION_ERROR, POST_ORIGIN_RESPONSE_HOOK_ERROR, POST_ORIGIN_RESPONSE_FUNCTION_ERROR
     #     },
     #   })
     #
@@ -597,9 +597,9 @@ module Aws::MediaTailor
     #   resp.ads_interaction_log.exclude_event_types #=> Array
     #   resp.ads_interaction_log.exclude_event_types[0] #=> String, one of "AD_MARKER_FOUND", "NON_AD_MARKER_FOUND", "MAKING_ADS_REQUEST", "MODIFIED_TARGET_URL", "VAST_REDIRECT", "EMPTY_VAST_RESPONSE", "EMPTY_VMAP_RESPONSE", "VAST_RESPONSE", "REDIRECTED_VAST_RESPONSE", "FILLED_AVAIL", "FILLED_OVERLAY_AVAIL", "BEACON_FIRED", "WARNING_NO_ADVERTISEMENTS", "WARNING_VPAID_AD_DROPPED", "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED", "ERROR_UNKNOWN", "ERROR_UNKNOWN_HOST", "ERROR_DISALLOWED_HOST", "ERROR_ADS_IO", "ERROR_ADS_TIMEOUT", "ERROR_ADS_RESPONSE_PARSE", "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT", "ERROR_ADS_INVALID_RESPONSE", "ERROR_VAST_REDIRECT_EMPTY_RESPONSE", "ERROR_VAST_REDIRECT_MULTIPLE_VAST", "ERROR_VAST_REDIRECT_FAILED", "ERROR_VAST_MISSING_MEDIAFILES", "ERROR_VAST_MISSING_CREATIVES", "ERROR_VAST_MISSING_OVERLAYS", "ERROR_VAST_MISSING_IMPRESSION", "ERROR_VAST_INVALID_VAST_AD_TAG_URI", "ERROR_VAST_MULTIPLE_TRACKING_EVENTS", "ERROR_VAST_MULTIPLE_LINEAR", "ERROR_VAST_INVALID_MEDIA_FILE", "ERROR_FIRING_BEACON_FAILED", "ERROR_PERSONALIZATION_DISABLED", "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET", "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS", "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS", "INTERSTITIAL_VOD_SUCCESS", "INTERSTITIAL_VOD_FAILURE", "PRE_ADS_REQUEST_HOOK_ERROR", "PRE_ADS_REQUEST_FUNCTION_ERROR", "BEACON_RECEIVED", "POST_ADS_RESPONSE_HOOK_ERROR", "POST_ADS_RESPONSE_FUNCTION_ERROR", "PRE_MANIFEST_INSERTION_HOOK_ERROR", "PRE_MANIFEST_INSERTION_FUNCTION_ERROR"
     #   resp.manifest_service_interaction_log.publish_opt_in_event_types #=> Array
-    #   resp.manifest_service_interaction_log.publish_opt_in_event_types[0] #=> String, one of "PRE_SESSION_INIT_HOOK_SUMMARY", "PRE_SESSION_INIT_FUNCTION_COMPLETED"
+    #   resp.manifest_service_interaction_log.publish_opt_in_event_types[0] #=> String, one of "PRE_SESSION_INIT_HOOK_SUMMARY", "PRE_SESSION_INIT_FUNCTION_COMPLETED", "POST_ORIGIN_RESPONSE_HOOK_SUMMARY", "POST_ORIGIN_RESPONSE_FUNCTION_COMPLETED"
     #   resp.manifest_service_interaction_log.exclude_event_types #=> Array
-    #   resp.manifest_service_interaction_log.exclude_event_types[0] #=> String, one of "GENERATED_MANIFEST", "ORIGIN_MANIFEST", "SESSION_INITIALIZED", "TRACKING_RESPONSE", "CONFIG_SYNTAX_ERROR", "CONFIG_SECURITY_ERROR", "UNKNOWN_HOST", "TIMEOUT_ERROR", "CONNECTION_ERROR", "IO_ERROR", "UNKNOWN_ERROR", "HOST_DISALLOWED", "PARSING_ERROR", "MANIFEST_ERROR", "NO_MASTER_OR_MEDIA_PLAYLIST", "NO_MASTER_PLAYLIST", "NO_MEDIA_PLAYLIST", "INCOMPATIBLE_HLS_VERSION", "SCTE35_PARSING_ERROR", "INVALID_SINGLE_PERIOD_DASH_MANIFEST", "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST", "LAST_PERIOD_MISSING_AUDIO", "LAST_PERIOD_MISSING_AUDIO_WARNING", "ERROR_ORIGIN_PREFIX_INTERPOLATION", "ERROR_ADS_INTERPOLATION", "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION", "ERROR_CDN_AD_SEGMENT_INTERPOLATION", "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION", "ERROR_SLATE_AD_URL_INTERPOLATION", "ERROR_PROFILE_NAME_INTERPOLATION", "ERROR_BUMPER_START_INTERPOLATION", "ERROR_BUMPER_END_INTERPOLATION", "PRE_SESSION_INIT_HOOK_ERROR", "PRE_SESSION_INIT_FUNCTION_ERROR"
+    #   resp.manifest_service_interaction_log.exclude_event_types[0] #=> String, one of "GENERATED_MANIFEST", "ORIGIN_MANIFEST", "SESSION_INITIALIZED", "TRACKING_RESPONSE", "CONFIG_SYNTAX_ERROR", "CONFIG_SECURITY_ERROR", "UNKNOWN_HOST", "TIMEOUT_ERROR", "CONNECTION_ERROR", "IO_ERROR", "UNKNOWN_ERROR", "HOST_DISALLOWED", "PARSING_ERROR", "MANIFEST_ERROR", "NO_MASTER_OR_MEDIA_PLAYLIST", "NO_MASTER_PLAYLIST", "NO_MEDIA_PLAYLIST", "INCOMPATIBLE_HLS_VERSION", "SCTE35_PARSING_ERROR", "INVALID_SINGLE_PERIOD_DASH_MANIFEST", "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST", "LAST_PERIOD_MISSING_AUDIO", "LAST_PERIOD_MISSING_AUDIO_WARNING", "ERROR_ORIGIN_PREFIX_INTERPOLATION", "ERROR_ADS_INTERPOLATION", "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION", "ERROR_CDN_AD_SEGMENT_INTERPOLATION", "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION", "ERROR_SLATE_AD_URL_INTERPOLATION", "ERROR_PROFILE_NAME_INTERPOLATION", "ERROR_BUMPER_START_INTERPOLATION", "ERROR_BUMPER_END_INTERPOLATION", "PRE_SESSION_INIT_HOOK_ERROR", "PRE_SESSION_INIT_FUNCTION_ERROR", "POST_ORIGIN_RESPONSE_HOOK_ERROR", "POST_ORIGIN_RESPONSE_FUNCTION_ERROR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ConfigureLogsForPlaybackConfiguration AWS API Documentation
     #
@@ -2150,6 +2150,7 @@ module Aws::MediaTailor
     #   * {Types::GetFunctionResponse#concurrent_executor_configuration #concurrent_executor_configuration} => Types::ConcurrentExecutorConfiguration
     #   * {Types::GetFunctionResponse#sequential_executor_configuration #sequential_executor_configuration} => Types::SequentialExecutorConfiguration
     #   * {Types::GetFunctionResponse#vast_request_configuration #vast_request_configuration} => Types::VastRequestConfiguration
+    #   * {Types::GetFunctionResponse#hls_tag_processor_configuration #hls_tag_processor_configuration} => Types::HlsTagProcessorConfiguration
     #   * {Types::GetFunctionResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetFunctionResponse#arn #arn} => String
     #
@@ -2162,7 +2163,7 @@ module Aws::MediaTailor
     # @example Response structure
     #
     #   resp.function_id #=> String
-    #   resp.function_type #=> String, one of "HTTP_REQUEST", "AWS_SERVICE_REQUEST", "CUSTOM_OUTPUT", "CONCURRENT_EXECUTOR", "SEQUENTIAL_EXECUTOR", "VAST_REQUEST"
+    #   resp.function_type #=> String, one of "HTTP_REQUEST", "AWS_SERVICE_REQUEST", "CUSTOM_OUTPUT", "CONCURRENT_EXECUTOR", "SEQUENTIAL_EXECUTOR", "VAST_REQUEST", "HLS_TAG_PROCESSOR"
     #   resp.description #=> String
     #   resp.http_request_configuration.runtime #=> String, one of "JSONATA"
     #   resp.http_request_configuration.output #=> Hash
@@ -2222,6 +2223,12 @@ module Aws::MediaTailor
     #   resp.vast_request_configuration.cache.ttl_minimum_seconds #=> Integer
     #   resp.vast_request_configuration.cache.ttl_maximum_seconds #=> Integer
     #   resp.vast_request_configuration.cache.key #=> String
+    #   resp.hls_tag_processor_configuration.runtime #=> String, one of "JSONATA"
+    #   resp.hls_tag_processor_configuration.output #=> Hash
+    #   resp.hls_tag_processor_configuration.output["__string"] #=> String
+    #   resp.hls_tag_processor_configuration.tag_filter #=> Array
+    #   resp.hls_tag_processor_configuration.tag_filter[0] #=> String, one of "EXT-X-DATERANGE"
+    #   resp.hls_tag_processor_configuration.run_condition #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #   resp.arn #=> String
@@ -2315,9 +2322,9 @@ module Aws::MediaTailor
     #   resp.log_configuration.ads_interaction_log.exclude_event_types #=> Array
     #   resp.log_configuration.ads_interaction_log.exclude_event_types[0] #=> String, one of "AD_MARKER_FOUND", "NON_AD_MARKER_FOUND", "MAKING_ADS_REQUEST", "MODIFIED_TARGET_URL", "VAST_REDIRECT", "EMPTY_VAST_RESPONSE", "EMPTY_VMAP_RESPONSE", "VAST_RESPONSE", "REDIRECTED_VAST_RESPONSE", "FILLED_AVAIL", "FILLED_OVERLAY_AVAIL", "BEACON_FIRED", "WARNING_NO_ADVERTISEMENTS", "WARNING_VPAID_AD_DROPPED", "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED", "ERROR_UNKNOWN", "ERROR_UNKNOWN_HOST", "ERROR_DISALLOWED_HOST", "ERROR_ADS_IO", "ERROR_ADS_TIMEOUT", "ERROR_ADS_RESPONSE_PARSE", "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT", "ERROR_ADS_INVALID_RESPONSE", "ERROR_VAST_REDIRECT_EMPTY_RESPONSE", "ERROR_VAST_REDIRECT_MULTIPLE_VAST", "ERROR_VAST_REDIRECT_FAILED", "ERROR_VAST_MISSING_MEDIAFILES", "ERROR_VAST_MISSING_CREATIVES", "ERROR_VAST_MISSING_OVERLAYS", "ERROR_VAST_MISSING_IMPRESSION", "ERROR_VAST_INVALID_VAST_AD_TAG_URI", "ERROR_VAST_MULTIPLE_TRACKING_EVENTS", "ERROR_VAST_MULTIPLE_LINEAR", "ERROR_VAST_INVALID_MEDIA_FILE", "ERROR_FIRING_BEACON_FAILED", "ERROR_PERSONALIZATION_DISABLED", "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET", "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS", "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS", "INTERSTITIAL_VOD_SUCCESS", "INTERSTITIAL_VOD_FAILURE", "PRE_ADS_REQUEST_HOOK_ERROR", "PRE_ADS_REQUEST_FUNCTION_ERROR", "BEACON_RECEIVED", "POST_ADS_RESPONSE_HOOK_ERROR", "POST_ADS_RESPONSE_FUNCTION_ERROR", "PRE_MANIFEST_INSERTION_HOOK_ERROR", "PRE_MANIFEST_INSERTION_FUNCTION_ERROR"
     #   resp.log_configuration.manifest_service_interaction_log.publish_opt_in_event_types #=> Array
-    #   resp.log_configuration.manifest_service_interaction_log.publish_opt_in_event_types[0] #=> String, one of "PRE_SESSION_INIT_HOOK_SUMMARY", "PRE_SESSION_INIT_FUNCTION_COMPLETED"
+    #   resp.log_configuration.manifest_service_interaction_log.publish_opt_in_event_types[0] #=> String, one of "PRE_SESSION_INIT_HOOK_SUMMARY", "PRE_SESSION_INIT_FUNCTION_COMPLETED", "POST_ORIGIN_RESPONSE_HOOK_SUMMARY", "POST_ORIGIN_RESPONSE_FUNCTION_COMPLETED"
     #   resp.log_configuration.manifest_service_interaction_log.exclude_event_types #=> Array
-    #   resp.log_configuration.manifest_service_interaction_log.exclude_event_types[0] #=> String, one of "GENERATED_MANIFEST", "ORIGIN_MANIFEST", "SESSION_INITIALIZED", "TRACKING_RESPONSE", "CONFIG_SYNTAX_ERROR", "CONFIG_SECURITY_ERROR", "UNKNOWN_HOST", "TIMEOUT_ERROR", "CONNECTION_ERROR", "IO_ERROR", "UNKNOWN_ERROR", "HOST_DISALLOWED", "PARSING_ERROR", "MANIFEST_ERROR", "NO_MASTER_OR_MEDIA_PLAYLIST", "NO_MASTER_PLAYLIST", "NO_MEDIA_PLAYLIST", "INCOMPATIBLE_HLS_VERSION", "SCTE35_PARSING_ERROR", "INVALID_SINGLE_PERIOD_DASH_MANIFEST", "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST", "LAST_PERIOD_MISSING_AUDIO", "LAST_PERIOD_MISSING_AUDIO_WARNING", "ERROR_ORIGIN_PREFIX_INTERPOLATION", "ERROR_ADS_INTERPOLATION", "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION", "ERROR_CDN_AD_SEGMENT_INTERPOLATION", "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION", "ERROR_SLATE_AD_URL_INTERPOLATION", "ERROR_PROFILE_NAME_INTERPOLATION", "ERROR_BUMPER_START_INTERPOLATION", "ERROR_BUMPER_END_INTERPOLATION", "PRE_SESSION_INIT_HOOK_ERROR", "PRE_SESSION_INIT_FUNCTION_ERROR"
+    #   resp.log_configuration.manifest_service_interaction_log.exclude_event_types[0] #=> String, one of "GENERATED_MANIFEST", "ORIGIN_MANIFEST", "SESSION_INITIALIZED", "TRACKING_RESPONSE", "CONFIG_SYNTAX_ERROR", "CONFIG_SECURITY_ERROR", "UNKNOWN_HOST", "TIMEOUT_ERROR", "CONNECTION_ERROR", "IO_ERROR", "UNKNOWN_ERROR", "HOST_DISALLOWED", "PARSING_ERROR", "MANIFEST_ERROR", "NO_MASTER_OR_MEDIA_PLAYLIST", "NO_MASTER_PLAYLIST", "NO_MEDIA_PLAYLIST", "INCOMPATIBLE_HLS_VERSION", "SCTE35_PARSING_ERROR", "INVALID_SINGLE_PERIOD_DASH_MANIFEST", "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST", "LAST_PERIOD_MISSING_AUDIO", "LAST_PERIOD_MISSING_AUDIO_WARNING", "ERROR_ORIGIN_PREFIX_INTERPOLATION", "ERROR_ADS_INTERPOLATION", "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION", "ERROR_CDN_AD_SEGMENT_INTERPOLATION", "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION", "ERROR_SLATE_AD_URL_INTERPOLATION", "ERROR_PROFILE_NAME_INTERPOLATION", "ERROR_BUMPER_START_INTERPOLATION", "ERROR_BUMPER_END_INTERPOLATION", "PRE_SESSION_INIT_HOOK_ERROR", "PRE_SESSION_INIT_FUNCTION_ERROR", "POST_ORIGIN_RESPONSE_HOOK_ERROR", "POST_ORIGIN_RESPONSE_FUNCTION_ERROR"
     #   resp.manifest_processing_rules.ad_marker_passthrough.enabled #=> Boolean
     #   resp.name #=> String
     #   resp.personalization_threshold_seconds #=> Integer
@@ -2644,7 +2651,7 @@ module Aws::MediaTailor
     #
     #   resp.items #=> Array
     #   resp.items[0].function_id #=> String
-    #   resp.items[0].function_type #=> String, one of "HTTP_REQUEST", "AWS_SERVICE_REQUEST", "CUSTOM_OUTPUT", "CONCURRENT_EXECUTOR", "SEQUENTIAL_EXECUTOR", "VAST_REQUEST"
+    #   resp.items[0].function_type #=> String, one of "HTTP_REQUEST", "AWS_SERVICE_REQUEST", "CUSTOM_OUTPUT", "CONCURRENT_EXECUTOR", "SEQUENTIAL_EXECUTOR", "VAST_REQUEST", "HLS_TAG_PROCESSOR"
     #   resp.items[0].description #=> String
     #   resp.items[0].http_request_configuration.runtime #=> String, one of "JSONATA"
     #   resp.items[0].http_request_configuration.output #=> Hash
@@ -2704,6 +2711,12 @@ module Aws::MediaTailor
     #   resp.items[0].vast_request_configuration.cache.ttl_minimum_seconds #=> Integer
     #   resp.items[0].vast_request_configuration.cache.ttl_maximum_seconds #=> Integer
     #   resp.items[0].vast_request_configuration.cache.key #=> String
+    #   resp.items[0].hls_tag_processor_configuration.runtime #=> String, one of "JSONATA"
+    #   resp.items[0].hls_tag_processor_configuration.output #=> Hash
+    #   resp.items[0].hls_tag_processor_configuration.output["__string"] #=> String
+    #   resp.items[0].hls_tag_processor_configuration.tag_filter #=> Array
+    #   resp.items[0].hls_tag_processor_configuration.tag_filter[0] #=> String, one of "EXT-X-DATERANGE"
+    #   resp.items[0].hls_tag_processor_configuration.run_condition #=> String
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["__string"] #=> String
     #   resp.items[0].arn #=> String
@@ -2867,9 +2880,9 @@ module Aws::MediaTailor
     #   resp.items[0].log_configuration.ads_interaction_log.exclude_event_types #=> Array
     #   resp.items[0].log_configuration.ads_interaction_log.exclude_event_types[0] #=> String, one of "AD_MARKER_FOUND", "NON_AD_MARKER_FOUND", "MAKING_ADS_REQUEST", "MODIFIED_TARGET_URL", "VAST_REDIRECT", "EMPTY_VAST_RESPONSE", "EMPTY_VMAP_RESPONSE", "VAST_RESPONSE", "REDIRECTED_VAST_RESPONSE", "FILLED_AVAIL", "FILLED_OVERLAY_AVAIL", "BEACON_FIRED", "WARNING_NO_ADVERTISEMENTS", "WARNING_VPAID_AD_DROPPED", "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED", "ERROR_UNKNOWN", "ERROR_UNKNOWN_HOST", "ERROR_DISALLOWED_HOST", "ERROR_ADS_IO", "ERROR_ADS_TIMEOUT", "ERROR_ADS_RESPONSE_PARSE", "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT", "ERROR_ADS_INVALID_RESPONSE", "ERROR_VAST_REDIRECT_EMPTY_RESPONSE", "ERROR_VAST_REDIRECT_MULTIPLE_VAST", "ERROR_VAST_REDIRECT_FAILED", "ERROR_VAST_MISSING_MEDIAFILES", "ERROR_VAST_MISSING_CREATIVES", "ERROR_VAST_MISSING_OVERLAYS", "ERROR_VAST_MISSING_IMPRESSION", "ERROR_VAST_INVALID_VAST_AD_TAG_URI", "ERROR_VAST_MULTIPLE_TRACKING_EVENTS", "ERROR_VAST_MULTIPLE_LINEAR", "ERROR_VAST_INVALID_MEDIA_FILE", "ERROR_FIRING_BEACON_FAILED", "ERROR_PERSONALIZATION_DISABLED", "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET", "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS", "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS", "INTERSTITIAL_VOD_SUCCESS", "INTERSTITIAL_VOD_FAILURE", "PRE_ADS_REQUEST_HOOK_ERROR", "PRE_ADS_REQUEST_FUNCTION_ERROR", "BEACON_RECEIVED", "POST_ADS_RESPONSE_HOOK_ERROR", "POST_ADS_RESPONSE_FUNCTION_ERROR", "PRE_MANIFEST_INSERTION_HOOK_ERROR", "PRE_MANIFEST_INSERTION_FUNCTION_ERROR"
     #   resp.items[0].log_configuration.manifest_service_interaction_log.publish_opt_in_event_types #=> Array
-    #   resp.items[0].log_configuration.manifest_service_interaction_log.publish_opt_in_event_types[0] #=> String, one of "PRE_SESSION_INIT_HOOK_SUMMARY", "PRE_SESSION_INIT_FUNCTION_COMPLETED"
+    #   resp.items[0].log_configuration.manifest_service_interaction_log.publish_opt_in_event_types[0] #=> String, one of "PRE_SESSION_INIT_HOOK_SUMMARY", "PRE_SESSION_INIT_FUNCTION_COMPLETED", "POST_ORIGIN_RESPONSE_HOOK_SUMMARY", "POST_ORIGIN_RESPONSE_FUNCTION_COMPLETED"
     #   resp.items[0].log_configuration.manifest_service_interaction_log.exclude_event_types #=> Array
-    #   resp.items[0].log_configuration.manifest_service_interaction_log.exclude_event_types[0] #=> String, one of "GENERATED_MANIFEST", "ORIGIN_MANIFEST", "SESSION_INITIALIZED", "TRACKING_RESPONSE", "CONFIG_SYNTAX_ERROR", "CONFIG_SECURITY_ERROR", "UNKNOWN_HOST", "TIMEOUT_ERROR", "CONNECTION_ERROR", "IO_ERROR", "UNKNOWN_ERROR", "HOST_DISALLOWED", "PARSING_ERROR", "MANIFEST_ERROR", "NO_MASTER_OR_MEDIA_PLAYLIST", "NO_MASTER_PLAYLIST", "NO_MEDIA_PLAYLIST", "INCOMPATIBLE_HLS_VERSION", "SCTE35_PARSING_ERROR", "INVALID_SINGLE_PERIOD_DASH_MANIFEST", "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST", "LAST_PERIOD_MISSING_AUDIO", "LAST_PERIOD_MISSING_AUDIO_WARNING", "ERROR_ORIGIN_PREFIX_INTERPOLATION", "ERROR_ADS_INTERPOLATION", "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION", "ERROR_CDN_AD_SEGMENT_INTERPOLATION", "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION", "ERROR_SLATE_AD_URL_INTERPOLATION", "ERROR_PROFILE_NAME_INTERPOLATION", "ERROR_BUMPER_START_INTERPOLATION", "ERROR_BUMPER_END_INTERPOLATION", "PRE_SESSION_INIT_HOOK_ERROR", "PRE_SESSION_INIT_FUNCTION_ERROR"
+    #   resp.items[0].log_configuration.manifest_service_interaction_log.exclude_event_types[0] #=> String, one of "GENERATED_MANIFEST", "ORIGIN_MANIFEST", "SESSION_INITIALIZED", "TRACKING_RESPONSE", "CONFIG_SYNTAX_ERROR", "CONFIG_SECURITY_ERROR", "UNKNOWN_HOST", "TIMEOUT_ERROR", "CONNECTION_ERROR", "IO_ERROR", "UNKNOWN_ERROR", "HOST_DISALLOWED", "PARSING_ERROR", "MANIFEST_ERROR", "NO_MASTER_OR_MEDIA_PLAYLIST", "NO_MASTER_PLAYLIST", "NO_MEDIA_PLAYLIST", "INCOMPATIBLE_HLS_VERSION", "SCTE35_PARSING_ERROR", "INVALID_SINGLE_PERIOD_DASH_MANIFEST", "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST", "LAST_PERIOD_MISSING_AUDIO", "LAST_PERIOD_MISSING_AUDIO_WARNING", "ERROR_ORIGIN_PREFIX_INTERPOLATION", "ERROR_ADS_INTERPOLATION", "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION", "ERROR_CDN_AD_SEGMENT_INTERPOLATION", "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION", "ERROR_SLATE_AD_URL_INTERPOLATION", "ERROR_PROFILE_NAME_INTERPOLATION", "ERROR_BUMPER_START_INTERPOLATION", "ERROR_BUMPER_END_INTERPOLATION", "PRE_SESSION_INIT_HOOK_ERROR", "PRE_SESSION_INIT_FUNCTION_ERROR", "POST_ORIGIN_RESPONSE_HOOK_ERROR", "POST_ORIGIN_RESPONSE_FUNCTION_ERROR"
     #   resp.items[0].manifest_processing_rules.ad_marker_passthrough.enabled #=> Boolean
     #   resp.items[0].name #=> String
     #   resp.items[0].personalization_threshold_seconds #=> Integer
@@ -3252,6 +3265,9 @@ module Aws::MediaTailor
     #     supported AWS service API and evaluates output expressions that can
     #     reference the response.
     #
+    #   * `HLS_TAG_PROCESSOR` – Reads and changes HLS tags in the origin
+    #     manifest at the `POST_ORIGIN_RESPONSE` lifecycle hook.
+    #
     #   * `VAST_REQUEST` – Calls a VAST endpoint, parses the response as VAST,
     #     and makes the parsed ads available to output expressions.
     #
@@ -3302,6 +3318,11 @@ module Aws::MediaTailor
     #   method, URL, headers, body, timeout, and output expressions. Required
     #   when `FunctionType` is `VAST_REQUEST`.
     #
+    # @option params [Types::HlsTagProcessorConfiguration] :hls_tag_processor_configuration
+    #   The configuration for an `HLS_TAG_PROCESSOR` function. Specifies the
+    #   runtime, tag filter, optional run condition, and output expressions.
+    #   Required when `FunctionType` is `HLS_TAG_PROCESSOR`.
+    #
     # @option params [Hash<String,String>] :tags
     #   The tags to assign to the function. Tags are key-value pairs that you
     #   can associate with Amazon resources to help with organization, access
@@ -3323,6 +3344,7 @@ module Aws::MediaTailor
     #   * {Types::PutFunctionResponse#concurrent_executor_configuration #concurrent_executor_configuration} => Types::ConcurrentExecutorConfiguration
     #   * {Types::PutFunctionResponse#sequential_executor_configuration #sequential_executor_configuration} => Types::SequentialExecutorConfiguration
     #   * {Types::PutFunctionResponse#vast_request_configuration #vast_request_configuration} => Types::VastRequestConfiguration
+    #   * {Types::PutFunctionResponse#hls_tag_processor_configuration #hls_tag_processor_configuration} => Types::HlsTagProcessorConfiguration
     #   * {Types::PutFunctionResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::PutFunctionResponse#arn #arn} => String
     #
@@ -3330,7 +3352,7 @@ module Aws::MediaTailor
     #
     #   resp = client.put_function({
     #     function_id: "__string", # required
-    #     function_type: "HTTP_REQUEST", # required, accepts HTTP_REQUEST, AWS_SERVICE_REQUEST, CUSTOM_OUTPUT, CONCURRENT_EXECUTOR, SEQUENTIAL_EXECUTOR, VAST_REQUEST
+    #     function_type: "HTTP_REQUEST", # required, accepts HTTP_REQUEST, AWS_SERVICE_REQUEST, CUSTOM_OUTPUT, CONCURRENT_EXECUTOR, SEQUENTIAL_EXECUTOR, VAST_REQUEST, HLS_TAG_PROCESSOR
     #     description: "__string",
     #     http_request_configuration: {
     #       runtime: "JSONATA", # required, accepts JSONATA
@@ -3423,6 +3445,14 @@ module Aws::MediaTailor
     #         key: "__string",
     #       },
     #     },
+    #     hls_tag_processor_configuration: {
+    #       runtime: "JSONATA", # required, accepts JSONATA
+    #       output: {
+    #         "__string" => "__string",
+    #       },
+    #       tag_filter: ["EXT-X-DATERANGE"], # required, accepts EXT-X-DATERANGE
+    #       run_condition: "__string",
+    #     },
     #     tags: {
     #       "__string" => "__string",
     #     },
@@ -3431,7 +3461,7 @@ module Aws::MediaTailor
     # @example Response structure
     #
     #   resp.function_id #=> String
-    #   resp.function_type #=> String, one of "HTTP_REQUEST", "AWS_SERVICE_REQUEST", "CUSTOM_OUTPUT", "CONCURRENT_EXECUTOR", "SEQUENTIAL_EXECUTOR", "VAST_REQUEST"
+    #   resp.function_type #=> String, one of "HTTP_REQUEST", "AWS_SERVICE_REQUEST", "CUSTOM_OUTPUT", "CONCURRENT_EXECUTOR", "SEQUENTIAL_EXECUTOR", "VAST_REQUEST", "HLS_TAG_PROCESSOR"
     #   resp.description #=> String
     #   resp.http_request_configuration.runtime #=> String, one of "JSONATA"
     #   resp.http_request_configuration.output #=> Hash
@@ -3491,6 +3521,12 @@ module Aws::MediaTailor
     #   resp.vast_request_configuration.cache.ttl_minimum_seconds #=> Integer
     #   resp.vast_request_configuration.cache.ttl_maximum_seconds #=> Integer
     #   resp.vast_request_configuration.cache.key #=> String
+    #   resp.hls_tag_processor_configuration.runtime #=> String, one of "JSONATA"
+    #   resp.hls_tag_processor_configuration.output #=> Hash
+    #   resp.hls_tag_processor_configuration.output["__string"] #=> String
+    #   resp.hls_tag_processor_configuration.tag_filter #=> Array
+    #   resp.hls_tag_processor_configuration.tag_filter[0] #=> String, one of "EXT-X-DATERANGE"
+    #   resp.hls_tag_processor_configuration.run_condition #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #   resp.arn #=> String
@@ -3634,9 +3670,10 @@ module Aws::MediaTailor
     #   A map of lifecycle hook event names to function identifiers. The
     #   function mapping specifies which function MediaTailor executes at each
     #   lifecycle hook during ad insertion. Valid keys are
-    #   `PRE_SESSION_INITIALIZATION`, `PRE_ADS_REQUEST`, `POST_ADS_RESPONSE`,
-    #   and `PRE_MANIFEST_INSERTION`. For more information, see [Functions
-    #   lifecycle hooks][1] in the *MediaTailor User Guide*.
+    #   `PRE_SESSION_INITIALIZATION`, `POST_ORIGIN_RESPONSE`,
+    #   `PRE_ADS_REQUEST`, `POST_ADS_RESPONSE`, and `PRE_MANIFEST_INSERTION`.
+    #   For more information, see [Functions lifecycle hooks][1] in the
+    #   *MediaTailor User Guide*.
     #
     #
     #
@@ -3815,9 +3852,9 @@ module Aws::MediaTailor
     #   resp.log_configuration.ads_interaction_log.exclude_event_types #=> Array
     #   resp.log_configuration.ads_interaction_log.exclude_event_types[0] #=> String, one of "AD_MARKER_FOUND", "NON_AD_MARKER_FOUND", "MAKING_ADS_REQUEST", "MODIFIED_TARGET_URL", "VAST_REDIRECT", "EMPTY_VAST_RESPONSE", "EMPTY_VMAP_RESPONSE", "VAST_RESPONSE", "REDIRECTED_VAST_RESPONSE", "FILLED_AVAIL", "FILLED_OVERLAY_AVAIL", "BEACON_FIRED", "WARNING_NO_ADVERTISEMENTS", "WARNING_VPAID_AD_DROPPED", "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED", "ERROR_UNKNOWN", "ERROR_UNKNOWN_HOST", "ERROR_DISALLOWED_HOST", "ERROR_ADS_IO", "ERROR_ADS_TIMEOUT", "ERROR_ADS_RESPONSE_PARSE", "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT", "ERROR_ADS_INVALID_RESPONSE", "ERROR_VAST_REDIRECT_EMPTY_RESPONSE", "ERROR_VAST_REDIRECT_MULTIPLE_VAST", "ERROR_VAST_REDIRECT_FAILED", "ERROR_VAST_MISSING_MEDIAFILES", "ERROR_VAST_MISSING_CREATIVES", "ERROR_VAST_MISSING_OVERLAYS", "ERROR_VAST_MISSING_IMPRESSION", "ERROR_VAST_INVALID_VAST_AD_TAG_URI", "ERROR_VAST_MULTIPLE_TRACKING_EVENTS", "ERROR_VAST_MULTIPLE_LINEAR", "ERROR_VAST_INVALID_MEDIA_FILE", "ERROR_FIRING_BEACON_FAILED", "ERROR_PERSONALIZATION_DISABLED", "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET", "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS", "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS", "INTERSTITIAL_VOD_SUCCESS", "INTERSTITIAL_VOD_FAILURE", "PRE_ADS_REQUEST_HOOK_ERROR", "PRE_ADS_REQUEST_FUNCTION_ERROR", "BEACON_RECEIVED", "POST_ADS_RESPONSE_HOOK_ERROR", "POST_ADS_RESPONSE_FUNCTION_ERROR", "PRE_MANIFEST_INSERTION_HOOK_ERROR", "PRE_MANIFEST_INSERTION_FUNCTION_ERROR"
     #   resp.log_configuration.manifest_service_interaction_log.publish_opt_in_event_types #=> Array
-    #   resp.log_configuration.manifest_service_interaction_log.publish_opt_in_event_types[0] #=> String, one of "PRE_SESSION_INIT_HOOK_SUMMARY", "PRE_SESSION_INIT_FUNCTION_COMPLETED"
+    #   resp.log_configuration.manifest_service_interaction_log.publish_opt_in_event_types[0] #=> String, one of "PRE_SESSION_INIT_HOOK_SUMMARY", "PRE_SESSION_INIT_FUNCTION_COMPLETED", "POST_ORIGIN_RESPONSE_HOOK_SUMMARY", "POST_ORIGIN_RESPONSE_FUNCTION_COMPLETED"
     #   resp.log_configuration.manifest_service_interaction_log.exclude_event_types #=> Array
-    #   resp.log_configuration.manifest_service_interaction_log.exclude_event_types[0] #=> String, one of "GENERATED_MANIFEST", "ORIGIN_MANIFEST", "SESSION_INITIALIZED", "TRACKING_RESPONSE", "CONFIG_SYNTAX_ERROR", "CONFIG_SECURITY_ERROR", "UNKNOWN_HOST", "TIMEOUT_ERROR", "CONNECTION_ERROR", "IO_ERROR", "UNKNOWN_ERROR", "HOST_DISALLOWED", "PARSING_ERROR", "MANIFEST_ERROR", "NO_MASTER_OR_MEDIA_PLAYLIST", "NO_MASTER_PLAYLIST", "NO_MEDIA_PLAYLIST", "INCOMPATIBLE_HLS_VERSION", "SCTE35_PARSING_ERROR", "INVALID_SINGLE_PERIOD_DASH_MANIFEST", "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST", "LAST_PERIOD_MISSING_AUDIO", "LAST_PERIOD_MISSING_AUDIO_WARNING", "ERROR_ORIGIN_PREFIX_INTERPOLATION", "ERROR_ADS_INTERPOLATION", "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION", "ERROR_CDN_AD_SEGMENT_INTERPOLATION", "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION", "ERROR_SLATE_AD_URL_INTERPOLATION", "ERROR_PROFILE_NAME_INTERPOLATION", "ERROR_BUMPER_START_INTERPOLATION", "ERROR_BUMPER_END_INTERPOLATION", "PRE_SESSION_INIT_HOOK_ERROR", "PRE_SESSION_INIT_FUNCTION_ERROR"
+    #   resp.log_configuration.manifest_service_interaction_log.exclude_event_types[0] #=> String, one of "GENERATED_MANIFEST", "ORIGIN_MANIFEST", "SESSION_INITIALIZED", "TRACKING_RESPONSE", "CONFIG_SYNTAX_ERROR", "CONFIG_SECURITY_ERROR", "UNKNOWN_HOST", "TIMEOUT_ERROR", "CONNECTION_ERROR", "IO_ERROR", "UNKNOWN_ERROR", "HOST_DISALLOWED", "PARSING_ERROR", "MANIFEST_ERROR", "NO_MASTER_OR_MEDIA_PLAYLIST", "NO_MASTER_PLAYLIST", "NO_MEDIA_PLAYLIST", "INCOMPATIBLE_HLS_VERSION", "SCTE35_PARSING_ERROR", "INVALID_SINGLE_PERIOD_DASH_MANIFEST", "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST", "LAST_PERIOD_MISSING_AUDIO", "LAST_PERIOD_MISSING_AUDIO_WARNING", "ERROR_ORIGIN_PREFIX_INTERPOLATION", "ERROR_ADS_INTERPOLATION", "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION", "ERROR_CDN_AD_SEGMENT_INTERPOLATION", "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION", "ERROR_SLATE_AD_URL_INTERPOLATION", "ERROR_PROFILE_NAME_INTERPOLATION", "ERROR_BUMPER_START_INTERPOLATION", "ERROR_BUMPER_END_INTERPOLATION", "PRE_SESSION_INIT_HOOK_ERROR", "PRE_SESSION_INIT_FUNCTION_ERROR", "POST_ORIGIN_RESPONSE_HOOK_ERROR", "POST_ORIGIN_RESPONSE_FUNCTION_ERROR"
     #   resp.manifest_processing_rules.ad_marker_passthrough.enabled #=> Boolean
     #   resp.name #=> String
     #   resp.personalization_threshold_seconds #=> Integer
@@ -4538,7 +4575,7 @@ module Aws::MediaTailor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.141.0'
+      context[:gem_version] = '1.142.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -6442,6 +6442,9 @@ module Aws::AutoScaling
     #   * `ASGAverageCPUUtilization` - Average CPU utilization of the Auto
     #     Scaling group.
     #
+    #   * `ASGAverageCPUUtilizationHighResolution` - Average CPU utilization
+    #     of the Auto Scaling group using a high-resolution metric.
+    #
     #   * `ASGAverageNetworkIn` - Average number of bytes received on all
     #     network interfaces by the Auto Scaling group.
     #
@@ -6450,6 +6453,11 @@ module Aws::AutoScaling
     #
     #   * `ALBRequestCountPerTarget` - Average Application Load Balancer
     #     request count per target for your Auto Scaling group.
+    #
+    #   To help ensure that target tracking has metric data to use for the
+    #   `ASGAverageCPUUtilizationHighResolution` metric type, configure the
+    #   Auto Scaling group's launch template and existing instances to
+    #   publish high-resolution CPU utilization metrics.
     #   @return [String]
     #
     # @!attribute [rw] resource_label
@@ -7201,6 +7209,8 @@ module Aws::AutoScaling
     #   The following predefined metrics are available:
     #
     #   * `ASGAverageCPUUtilization`
+    #
+    #   * `ASGAverageCPUUtilizationHighResolution`
     #
     #   * `ASGAverageNetworkIn`
     #

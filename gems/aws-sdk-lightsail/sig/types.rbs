@@ -76,7 +76,7 @@ module Aws::Lightsail
       attr_accessor arn: ::String
       attr_accessor created_at: ::Time
       attr_accessor location: Types::ResourceLocation
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor support_code: ::String
       attr_accessor monitored_resource_info: Types::MonitoredResourceInfo
       attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold")
@@ -338,6 +338,19 @@ module Aws::Lightsail
       SENSITIVE: []
     end
 
+    class CheckSubdomainAvailabilityRequest
+      attr_accessor subdomain_name: ::String
+      attr_accessor reserve: bool
+      SENSITIVE: []
+    end
+
+    class CheckSubdomainAvailabilityResult
+      attr_accessor available: bool
+      attr_accessor reservation_expires_at: ::Time
+      attr_accessor subdomain_name: ::String
+      SENSITIVE: []
+    end
+
     class CloseInstancePublicPortsRequest
       attr_accessor port_info: Types::PortInfo
       attr_accessor instance_name: ::String
@@ -354,7 +367,7 @@ module Aws::Lightsail
       attr_accessor arn: ::String
       attr_accessor created_at: ::Time
       attr_accessor location: Types::ResourceLocation
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor state: ("Started" | "Succeeded" | "Failed")
       attr_accessor source_info: ::Array[Types::CloudFormationStackRecordSourceInfo]
       attr_accessor destination_info: Types::DestinationInfo
@@ -376,7 +389,7 @@ module Aws::Lightsail
       attr_accessor arn: ::String
       attr_accessor created_at: ::Time
       attr_accessor location: Types::ResourceLocation
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor support_code: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
@@ -402,7 +415,7 @@ module Aws::Lightsail
       attr_accessor arn: ::String
       attr_accessor created_at: ::Time
       attr_accessor location: Types::ResourceLocation
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor power: ("nano" | "micro" | "small" | "medium" | "large" | "xlarge")
       attr_accessor power_id: ::String
@@ -683,6 +696,7 @@ module Aws::Lightsail
       attr_accessor custom_error_responses: ::Array[Types::DistributionCustomErrorResponse]
       attr_accessor enable_waf: bool
       attr_accessor waf_rules: ::Array[Types::WafRule]
+      attr_accessor subdomain_name: ::String
       SENSITIVE: []
     end
 
@@ -874,6 +888,18 @@ module Aws::Lightsail
 
     class CreateRelationalDatabaseSnapshotResult
       attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class CreateSubdomainRequest
+      attr_accessor subdomain_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSubdomainResult
+      attr_accessor subdomain: Types::Subdomain
+      attr_accessor operation: Types::Operation
       SENSITIVE: []
     end
 
@@ -1095,6 +1121,17 @@ module Aws::Lightsail
       SENSITIVE: []
     end
 
+    class DeleteSubdomainRequest
+      attr_accessor subdomain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSubdomainResult
+      attr_accessor subdomain: Types::Subdomain
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
     class DestinationInfo
       attr_accessor id: ::String
       attr_accessor service: ::String
@@ -1159,7 +1196,7 @@ module Aws::Lightsail
       attr_accessor support_code: ::String
       attr_accessor created_at: ::Time
       attr_accessor location: Types::ResourceLocation
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor add_ons: ::Array[Types::AddOn]
       attr_accessor size_in_gb: ::Integer
@@ -1195,7 +1232,7 @@ module Aws::Lightsail
       attr_accessor support_code: ::String
       attr_accessor created_at: ::Time
       attr_accessor location: Types::ResourceLocation
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor size_in_gb: ::Integer
       attr_accessor state: ("pending" | "completed" | "error" | "unknown")
@@ -1242,7 +1279,7 @@ module Aws::Lightsail
       attr_accessor support_code: ::String
       attr_accessor created_at: ::Time
       attr_accessor location: Types::ResourceLocation
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor domain_entries: ::Array[Types::DomainEntry]
       attr_accessor registered_domain_delegation_info: Types::RegisteredDomainDelegationInfo
@@ -1309,7 +1346,7 @@ module Aws::Lightsail
       attr_accessor arn: ::String
       attr_accessor created_at: ::Time
       attr_accessor location: Types::ResourceLocation
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor state: ("Started" | "Succeeded" | "Failed")
       attr_accessor source_info: Types::ExportSnapshotRecordSourceInfo
       attr_accessor destination_info: Types::DestinationInfo
@@ -1369,7 +1406,7 @@ module Aws::Lightsail
 
     class GetAutoSnapshotsResult
       attr_accessor resource_name: ::String
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor auto_snapshots: ::Array[Types::AutoSnapshotDetails]
       SENSITIVE: []
     end
@@ -2100,6 +2137,18 @@ module Aws::Lightsail
       SENSITIVE: []
     end
 
+    class GetSubdomainsRequest
+      attr_accessor subdomain_name: ::String
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSubdomainsResult
+      attr_accessor subdomains: ::Array[Types::Subdomain]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
     class HeaderObject
       attr_accessor option: ("none" | "allow-list" | "all")
       attr_accessor headers_allow_list: ::Array[("Accept" | "Accept-Charset" | "Accept-Datetime" | "Accept-Encoding" | "Accept-Language" | "Authorization" | "CloudFront-Forwarded-Proto" | "CloudFront-Is-Desktop-Viewer" | "CloudFront-Is-Mobile-Viewer" | "CloudFront-Is-SmartTV-Viewer" | "CloudFront-Is-Tablet-Viewer" | "CloudFront-Viewer-Country" | "Host" | "Origin" | "Referer")]
@@ -2143,7 +2192,7 @@ module Aws::Lightsail
       attr_accessor support_code: ::String
       attr_accessor created_at: ::Time
       attr_accessor location: Types::ResourceLocation
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor blueprint_id: ::String
       attr_accessor blueprint_name: ::String
@@ -2267,7 +2316,7 @@ module Aws::Lightsail
       attr_accessor support_code: ::String
       attr_accessor created_at: ::Time
       attr_accessor location: Types::ResourceLocation
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor state: ("pending" | "error" | "available")
       attr_accessor progress: ::String
@@ -2316,7 +2365,7 @@ module Aws::Lightsail
       attr_accessor support_code: ::String
       attr_accessor created_at: ::Time
       attr_accessor location: Types::ResourceLocation
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor fingerprint: ::String
       SENSITIVE: []
@@ -2328,7 +2377,7 @@ module Aws::Lightsail
       attr_accessor support_code: ::String
       attr_accessor created_at: ::Time
       attr_accessor location: Types::ResourceLocation
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor alternative_domain_names: ::Array[::String]
       attr_accessor status: ::String
       attr_accessor is_enabled: bool
@@ -2347,6 +2396,15 @@ module Aws::Lightsail
       attr_accessor default_root_object: ::String
       attr_accessor custom_error_responses: ::Array[Types::DistributionCustomErrorResponse]
       attr_accessor waf: Types::WafConfig
+      attr_accessor subdomain: Types::LightsailDistributionSubdomain
+      SENSITIVE: []
+    end
+
+    class LightsailDistributionSubdomain
+      attr_accessor name: ::String
+      attr_accessor state: ("Creating" | "Attaching" | "Attached" | "Error")
+      attr_accessor error_code: ::String
+      attr_accessor error_details: ::String
       SENSITIVE: []
     end
 
@@ -2356,7 +2414,7 @@ module Aws::Lightsail
       attr_accessor support_code: ::String
       attr_accessor created_at: ::Time
       attr_accessor location: Types::ResourceLocation
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor dns_name: ::String
       attr_accessor state: ("active" | "provisioning" | "active_impaired" | "failed" | "unknown")
@@ -2379,7 +2437,7 @@ module Aws::Lightsail
       attr_accessor support_code: ::String
       attr_accessor created_at: ::Time
       attr_accessor location: Types::ResourceLocation
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor load_balancer_name: ::String
       attr_accessor is_attached: bool
@@ -2465,7 +2523,7 @@ module Aws::Lightsail
     class MonitoredResourceInfo
       attr_accessor arn: ::String
       attr_accessor name: ::String
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       SENSITIVE: []
     end
 
@@ -2502,12 +2560,12 @@ module Aws::Lightsail
     class Operation
       attr_accessor id: ::String
       attr_accessor resource_name: ::String
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor created_at: ::Time
       attr_accessor location: Types::ResourceLocation
       attr_accessor is_terminal: bool
       attr_accessor operation_details: ::String
-      attr_accessor operation_type: ("DeleteKnownHostKeys" | "DeleteInstance" | "CreateInstance" | "StopInstance" | "StartInstance" | "RebootInstance" | "OpenInstancePublicPorts" | "PutInstancePublicPorts" | "CloseInstancePublicPorts" | "AllocateStaticIp" | "ReleaseStaticIp" | "AttachStaticIp" | "DetachStaticIp" | "UpdateDomainEntry" | "DeleteDomainEntry" | "CreateDomain" | "DeleteDomain" | "CreateInstanceSnapshot" | "DeleteInstanceSnapshot" | "CreateInstancesFromSnapshot" | "CreateLoadBalancer" | "DeleteLoadBalancer" | "AttachInstancesToLoadBalancer" | "DetachInstancesFromLoadBalancer" | "UpdateLoadBalancerAttribute" | "CreateLoadBalancerTlsCertificate" | "DeleteLoadBalancerTlsCertificate" | "AttachLoadBalancerTlsCertificate" | "CreateDisk" | "DeleteDisk" | "AttachDisk" | "DetachDisk" | "CreateDiskSnapshot" | "DeleteDiskSnapshot" | "CreateDiskFromSnapshot" | "CreateRelationalDatabase" | "UpdateRelationalDatabase" | "DeleteRelationalDatabase" | "CreateRelationalDatabaseFromSnapshot" | "CreateRelationalDatabaseSnapshot" | "DeleteRelationalDatabaseSnapshot" | "UpdateRelationalDatabaseParameters" | "StartRelationalDatabase" | "RebootRelationalDatabase" | "StopRelationalDatabase" | "EnableAddOn" | "DisableAddOn" | "PutAlarm" | "GetAlarms" | "DeleteAlarm" | "TestAlarm" | "CreateContactMethod" | "GetContactMethods" | "SendContactMethodVerification" | "DeleteContactMethod" | "CreateDistribution" | "UpdateDistribution" | "DeleteDistribution" | "ResetDistributionCache" | "AttachCertificateToDistribution" | "DetachCertificateFromDistribution" | "UpdateDistributionBundle" | "SetIpAddressType" | "CreateCertificate" | "DeleteCertificate" | "CreateContainerService" | "UpdateContainerService" | "DeleteContainerService" | "CreateContainerServiceDeployment" | "CreateContainerServiceRegistryLogin" | "RegisterContainerImage" | "DeleteContainerImage" | "CreateBucket" | "DeleteBucket" | "CreateBucketAccessKey" | "DeleteBucketAccessKey" | "UpdateBucketBundle" | "UpdateBucket" | "SetResourceAccessForBucket" | "UpdateInstanceMetadataOptions" | "StartGUISession" | "StopGUISession" | "SetupInstanceHttps" | "GetProfile")
+      attr_accessor operation_type: ("DeleteKnownHostKeys" | "DeleteInstance" | "CreateInstance" | "StopInstance" | "StartInstance" | "RebootInstance" | "OpenInstancePublicPorts" | "PutInstancePublicPorts" | "CloseInstancePublicPorts" | "AllocateStaticIp" | "ReleaseStaticIp" | "AttachStaticIp" | "DetachStaticIp" | "UpdateDomainEntry" | "DeleteDomainEntry" | "CreateDomain" | "DeleteDomain" | "CreateInstanceSnapshot" | "DeleteInstanceSnapshot" | "CreateInstancesFromSnapshot" | "CreateLoadBalancer" | "DeleteLoadBalancer" | "AttachInstancesToLoadBalancer" | "DetachInstancesFromLoadBalancer" | "UpdateLoadBalancerAttribute" | "CreateLoadBalancerTlsCertificate" | "DeleteLoadBalancerTlsCertificate" | "AttachLoadBalancerTlsCertificate" | "CreateDisk" | "DeleteDisk" | "AttachDisk" | "DetachDisk" | "CreateDiskSnapshot" | "DeleteDiskSnapshot" | "CreateDiskFromSnapshot" | "CreateRelationalDatabase" | "UpdateRelationalDatabase" | "DeleteRelationalDatabase" | "CreateRelationalDatabaseFromSnapshot" | "CreateRelationalDatabaseSnapshot" | "DeleteRelationalDatabaseSnapshot" | "UpdateRelationalDatabaseParameters" | "StartRelationalDatabase" | "RebootRelationalDatabase" | "StopRelationalDatabase" | "EnableAddOn" | "DisableAddOn" | "PutAlarm" | "GetAlarms" | "DeleteAlarm" | "TestAlarm" | "CreateContactMethod" | "GetContactMethods" | "SendContactMethodVerification" | "DeleteContactMethod" | "CreateDistribution" | "UpdateDistribution" | "DeleteDistribution" | "ResetDistributionCache" | "AttachCertificateToDistribution" | "DetachCertificateFromDistribution" | "UpdateDistributionBundle" | "SetIpAddressType" | "CreateCertificate" | "DeleteCertificate" | "CreateContainerService" | "UpdateContainerService" | "DeleteContainerService" | "CreateContainerServiceDeployment" | "CreateContainerServiceRegistryLogin" | "RegisterContainerImage" | "DeleteContainerImage" | "CreateBucket" | "DeleteBucket" | "CreateBucketAccessKey" | "DeleteBucketAccessKey" | "UpdateBucketBundle" | "UpdateBucket" | "SetResourceAccessForBucket" | "UpdateInstanceMetadataOptions" | "StartGUISession" | "StopGUISession" | "SetupInstanceHttps" | "GetProfile" | "CreateSubdomain" | "UpdateSubdomainAssociation" | "DeleteSubdomain")
       attr_accessor status: ("NotStarted" | "Started" | "Failed" | "Completed" | "Succeeded")
       attr_accessor status_changed_at: ::Time
       attr_accessor error_code: ::String
@@ -2525,7 +2583,7 @@ module Aws::Lightsail
 
     class Origin
       attr_accessor name: ::String
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-north-1" | "eu-south-2" | "ca-central-1" | "ap-east-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-southeast-3" | "ap-southeast-5" | "sa-east-1")
       attr_accessor protocol_policy: ("http-only" | "https-only")
       attr_accessor response_timeout: ::Integer
@@ -2695,7 +2753,7 @@ module Aws::Lightsail
       attr_accessor support_code: ::String
       attr_accessor created_at: ::Time
       attr_accessor location: Types::ResourceLocation
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor relational_database_blueprint_id: ::String
       attr_accessor relational_database_bundle_id: ::String
@@ -2781,7 +2839,7 @@ module Aws::Lightsail
       attr_accessor support_code: ::String
       attr_accessor created_at: ::Time
       attr_accessor location: Types::ResourceLocation
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor engine: ::String
       attr_accessor engine_version: ::String
@@ -2826,7 +2884,7 @@ module Aws::Lightsail
 
     class ResourceBudgetEstimate
       attr_accessor resource_name: ::String
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor cost_estimates: ::Array[Types::CostEstimate]
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
@@ -2878,7 +2936,7 @@ module Aws::Lightsail
     end
 
     class SetIpAddressTypeRequest
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor resource_name: ::String
       attr_accessor ip_address_type: ("dualstack" | "ipv4" | "ipv6")
       attr_accessor accept_bundle_update: bool
@@ -2927,7 +2985,7 @@ module Aws::Lightsail
       attr_accessor arn: ::String
       attr_accessor created_at: ::Time
       attr_accessor location: Types::ResourceLocation
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       SENSITIVE: []
     end
 
@@ -2988,7 +3046,7 @@ module Aws::Lightsail
       attr_accessor support_code: ::String
       attr_accessor created_at: ::Time
       attr_accessor location: Types::ResourceLocation
-      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
       attr_accessor ip_address: ::String
       attr_accessor attached_to: ::String
       attr_accessor is_attached: bool
@@ -3030,6 +3088,29 @@ module Aws::Lightsail
 
     class StopRelationalDatabaseResult
       attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class Subdomain
+      attr_accessor subdomain_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor fqdn: ::String
+      attr_accessor depth: ::Integer
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "UNATTACHED" | "ATTACHING" | "ATTACHED" | "DETACHING" | "TRANSFERRING" | "IMPLICIT")
+      attr_accessor attached_resource: Types::SubdomainAttachableResource
+      attr_accessor attaching_resource: Types::SubdomainAttachableResource
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor created_at: ::Time
+      attr_accessor parent_fqdn: ::String
+      attr_accessor children: ::Array[Types::Subdomain]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class SubdomainAttachableResource
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor attached_at: ::Time
       SENSITIVE: []
     end
 
@@ -3237,6 +3318,19 @@ module Aws::Lightsail
 
     class UpdateRelationalDatabaseResult
       attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class UpdateSubdomainAssociationRequest
+      attr_accessor subdomain_name: ::String
+      attr_accessor action: ("ASSOCIATE" | "DISASSOCIATE" | "TRANSFER")
+      attr_accessor target_resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSubdomainAssociationResult
+      attr_accessor subdomain: Types::Subdomain
+      attr_accessor operation: Types::Operation
       SENSITIVE: []
     end
 

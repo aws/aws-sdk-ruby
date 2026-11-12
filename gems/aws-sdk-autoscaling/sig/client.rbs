@@ -871,7 +871,7 @@ module Aws
                                 ?estimated_instance_warmup: ::Integer,
                                 ?target_tracking_configuration: {
                                   predefined_metric_specification: {
-                                    predefined_metric_type: ("ASGAverageCPUUtilization" | "ASGAverageNetworkIn" | "ASGAverageNetworkOut" | "ALBRequestCountPerTarget"),
+                                    predefined_metric_type: ("ASGAverageCPUUtilization" | "ASGAverageCPUUtilizationHighResolution" | "ASGAverageNetworkIn" | "ASGAverageNetworkOut" | "ALBRequestCountPerTarget"),
                                     resource_label: ::String?
                                   }?,
                                   customized_metric_specification: {

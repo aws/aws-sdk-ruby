@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.150.0 (2026-11-12)
+------------------
+
+* Feature - Amazon Route 53 now supports Record Set Protection, which blocks changes to protected records in a hosted zone.
+
 1.149.0 (2026-11-11)
 ------------------
 

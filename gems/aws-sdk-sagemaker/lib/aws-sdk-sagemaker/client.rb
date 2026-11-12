@@ -17487,6 +17487,8 @@ module Aws::SageMaker
     #   * {Types::DescribeHubResponse#failure_reason #failure_reason} => String
     #   * {Types::DescribeHubResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeHubResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeHubResponse#created_by #created_by} => Types::UserContext
+    #   * {Types::DescribeHubResponse#last_modified_by #last_modified_by} => Types::UserContext
     #
     # @example Request syntax with placeholder values
     #
@@ -17507,6 +17509,18 @@ module Aws::SageMaker
     #   resp.failure_reason #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
+    #   resp.created_by.user_profile_arn #=> String
+    #   resp.created_by.user_profile_name #=> String
+    #   resp.created_by.domain_id #=> String
+    #   resp.created_by.iam_identity.arn #=> String
+    #   resp.created_by.iam_identity.principal_id #=> String
+    #   resp.created_by.iam_identity.source_identity #=> String
+    #   resp.last_modified_by.user_profile_arn #=> String
+    #   resp.last_modified_by.user_profile_name #=> String
+    #   resp.last_modified_by.domain_id #=> String
+    #   resp.last_modified_by.iam_identity.arn #=> String
+    #   resp.last_modified_by.iam_identity.principal_id #=> String
+    #   resp.last_modified_by.iam_identity.source_identity #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHub AWS API Documentation
     #
@@ -17553,6 +17567,8 @@ module Aws::SageMaker
     #   * {Types::DescribeHubContentResponse#failure_reason #failure_reason} => String
     #   * {Types::DescribeHubContentResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeHubContentResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeHubContentResponse#created_by #created_by} => Types::UserContext
+    #   * {Types::DescribeHubContentResponse#last_modified_by #last_modified_by} => Types::UserContext
     #
     # @example Request syntax with placeholder values
     #
@@ -17588,6 +17604,18 @@ module Aws::SageMaker
     #   resp.failure_reason #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
+    #   resp.created_by.user_profile_arn #=> String
+    #   resp.created_by.user_profile_name #=> String
+    #   resp.created_by.domain_id #=> String
+    #   resp.created_by.iam_identity.arn #=> String
+    #   resp.created_by.iam_identity.principal_id #=> String
+    #   resp.created_by.iam_identity.source_identity #=> String
+    #   resp.last_modified_by.user_profile_arn #=> String
+    #   resp.last_modified_by.user_profile_name #=> String
+    #   resp.last_modified_by.domain_id #=> String
+    #   resp.last_modified_by.iam_identity.arn #=> String
+    #   resp.last_modified_by.iam_identity.principal_id #=> String
+    #   resp.last_modified_by.iam_identity.source_identity #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHubContent AWS API Documentation
     #
@@ -28041,8 +28069,9 @@ module Aws::SageMaker
     #
     # @option params [String] :managed_by
     #   Filters the pipelines by who manages them. Specify `AWS` to return
-    #   pipelines that AWS manages, or `CUSTOMER` to return pipelines that you
-    #   created. If you don't specify a value, the response includes both.
+    #   pipelines that Amazon Web Services manages, or `CUSTOMER` to return
+    #   pipelines that you created. If you don't specify a value, the
+    #   response includes both.
     #
     # @return [Types::ListPipelinesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -30381,8 +30410,9 @@ module Aws::SageMaker
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that the execution
     #   uses. You must specify this parameter when you start an execution of a
-    #   pipeline that AWS manages. You can't specify it for a pipeline that
-    #   you create, because its executions use the pipeline's role.
+    #   pipeline that Amazon Web Services manages. You can't specify it for a
+    #   pipeline that you create, because its executions use the pipeline's
+    #   role.
     #
     # @return [Types::StartPipelineExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -35549,7 +35579,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.413.0'
+      context[:gem_version] = '1.414.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -4297,6 +4297,8 @@ module Aws
         def failure_reason: () -> ::String
         def creation_time: () -> ::Time
         def last_modified_time: () -> ::Time
+        def created_by: () -> Types::UserContext
+        def last_modified_by: () -> Types::UserContext
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_hub-instance_method
       def describe_hub: (
@@ -4326,6 +4328,8 @@ module Aws
         def failure_reason: () -> ::String
         def creation_time: () -> ::Time
         def last_modified_time: () -> ::Time
+        def created_by: () -> Types::UserContext
+        def last_modified_by: () -> Types::UserContext
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_hub_content-instance_method
       def describe_hub_content: (

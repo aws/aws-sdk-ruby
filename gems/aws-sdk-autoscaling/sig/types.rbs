@@ -1148,7 +1148,7 @@ module Aws::AutoScaling
     end
 
     class PredefinedMetricSpecification
-      attr_accessor predefined_metric_type: ("ASGAverageCPUUtilization" | "ASGAverageNetworkIn" | "ASGAverageNetworkOut" | "ALBRequestCountPerTarget")
+      attr_accessor predefined_metric_type: ("ASGAverageCPUUtilization" | "ASGAverageCPUUtilizationHighResolution" | "ASGAverageNetworkIn" | "ASGAverageNetworkOut" | "ALBRequestCountPerTarget")
       attr_accessor resource_label: ::String
       SENSITIVE: []
     end

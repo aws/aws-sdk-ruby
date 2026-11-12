@@ -4896,6 +4896,8 @@ module Aws::Connect
       attr_accessor source_application_url: ::String
       attr_accessor source_application_name: ::String
       attr_accessor source_type: ("SALESFORCE" | "ZENDESK" | "CASES")
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       SENSITIVE: []
     end
 

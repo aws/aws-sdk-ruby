@@ -2569,6 +2569,10 @@ module Aws::MediaTailor
     #   The configuration for a `VAST_REQUEST` function.
     #   @return [Types::VastRequestConfiguration]
     #
+    # @!attribute [rw] hls_tag_processor_configuration
+    #   The configuration for an `HLS_TAG_PROCESSOR` function.
+    #   @return [Types::HlsTagProcessorConfiguration]
+    #
     # @!attribute [rw] tags
     #   The tags assigned to the function. Tags are key-value pairs that you
     #   can associate with Amazon resources to help with organization,
@@ -2596,6 +2600,7 @@ module Aws::MediaTailor
       :concurrent_executor_configuration,
       :sequential_executor_configuration,
       :vast_request_configuration,
+      :hls_tag_processor_configuration,
       :tags,
       :arn)
       SENSITIVE = []
@@ -2775,6 +2780,10 @@ module Aws::MediaTailor
     #   The configuration for a `VAST_REQUEST` function.
     #   @return [Types::VastRequestConfiguration]
     #
+    # @!attribute [rw] hls_tag_processor_configuration
+    #   The configuration for an `HLS_TAG_PROCESSOR` function.
+    #   @return [Types::HlsTagProcessorConfiguration]
+    #
     # @!attribute [rw] tags
     #   The tags assigned to the function. Tags are key-value pairs that you
     #   can associate with Amazon resources to help with organization,
@@ -2802,6 +2811,7 @@ module Aws::MediaTailor
       :concurrent_executor_configuration,
       :sequential_executor_configuration,
       :vast_request_configuration,
+      :hls_tag_processor_configuration,
       :tags,
       :arn)
       SENSITIVE = []
@@ -2996,10 +3006,10 @@ module Aws::MediaTailor
     #   A map of lifecycle hook event names to function identifiers. The
     #   function mapping specifies which function MediaTailor executes at
     #   each lifecycle hook during ad insertion. Valid keys are
-    #   `PRE_SESSION_INITIALIZATION`, `PRE_ADS_REQUEST`,
-    #   `POST_ADS_RESPONSE`, and `PRE_MANIFEST_INSERTION`. For more
-    #   information, see [Functions lifecycle hooks][1] in the *MediaTailor
-    #   User Guide*.
+    #   `PRE_SESSION_INITIALIZATION`, `POST_ORIGIN_RESPONSE`,
+    #   `PRE_ADS_REQUEST`, `POST_ADS_RESPONSE`, and
+    #   `PRE_MANIFEST_INSERTION`. For more information, see [Functions
+    #   lifecycle hooks][1] in the *MediaTailor User Guide*.
     #
     #
     #
@@ -3202,6 +3212,59 @@ module Aws::MediaTailor
     class HlsPlaylistSettings < Struct.new(
       :manifest_window_seconds,
       :ad_markup_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for an `HLS_TAG_PROCESSOR` function. Specifies the
+    # HLS tags that trigger evaluation, an optional run condition, and
+    # output expressions. Each evaluation must update, remove, or pass
+    # through the matching tag and can also write player session parameters
+    # or temporary values. For more information, see
+    # [HLS\_TAG\_PROCESSOR][1] in the *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-types-hls-tag-processor.html
+    #
+    # @!attribute [rw] runtime
+    #   The expression language used to evaluate expressions in the function
+    #   configuration. The only supported value is `JSONATA`.
+    #   @return [String]
+    #
+    # @!attribute [rw] output
+    #   A map of output bindings that MediaTailor evaluates for each HLS tag
+    #   that matches `TagFilter` and, when specified, passes `RunCondition`.
+    #   The required `tag` binding must return exactly one tag action:
+    #   `$updateTag`, `$removeTag`, or `$passthroughTag`. Optional
+    #   `player_params.<name>` bindings write strings, numbers, or booleans
+    #   that persist for the player session. Optional `temp.<name>` bindings
+    #   hold any JSON value for the current invocation and are not
+    #   persisted. For more information about expression syntax, see
+    #   [JSONata expression reference][1] in the *MediaTailor User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-jsonata.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tag_filter
+    #   A list of HLS tag names that trigger function evaluation. Specify
+    #   `["EXT-X-DATERANGE"]`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] run_condition
+    #   JSONata expression that must evaluate to true for the processor to
+    #   run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/HlsTagProcessorConfiguration AWS API Documentation
+    #
+    class HlsTagProcessorConfiguration < Struct.new(
+      :runtime,
+      :output,
+      :tag_filter,
+      :run_condition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4342,10 +4405,10 @@ module Aws::MediaTailor
     #   A map of lifecycle hook event names to function identifiers. The
     #   function mapping specifies which function MediaTailor executes at
     #   each lifecycle hook during ad insertion. Valid keys are
-    #   `PRE_SESSION_INITIALIZATION`, `PRE_ADS_REQUEST`,
-    #   `POST_ADS_RESPONSE`, and `PRE_MANIFEST_INSERTION`. For more
-    #   information, see [Functions lifecycle hooks][1] in the *MediaTailor
-    #   User Guide*.
+    #   `PRE_SESSION_INITIALIZATION`, `POST_ORIGIN_RESPONSE`,
+    #   `PRE_ADS_REQUEST`, `POST_ADS_RESPONSE`, and
+    #   `PRE_MANIFEST_INSERTION`. For more information, see [Functions
+    #   lifecycle hooks][1] in the *MediaTailor User Guide*.
     #
     #
     #
@@ -4672,6 +4735,9 @@ module Aws::MediaTailor
     #     supported AWS service API and evaluates output expressions that
     #     can reference the response.
     #
+    #   * `HLS_TAG_PROCESSOR` – Reads and changes HLS tags in the origin
+    #     manifest at the `POST_ORIGIN_RESPONSE` lifecycle hook.
+    #
     #   * `VAST_REQUEST` – Calls a VAST endpoint, parses the response as
     #     VAST, and makes the parsed ads available to output expressions.
     #
@@ -4731,6 +4797,12 @@ module Aws::MediaTailor
     #   Required when `FunctionType` is `VAST_REQUEST`.
     #   @return [Types::VastRequestConfiguration]
     #
+    # @!attribute [rw] hls_tag_processor_configuration
+    #   The configuration for an `HLS_TAG_PROCESSOR` function. Specifies the
+    #   runtime, tag filter, optional run condition, and output expressions.
+    #   Required when `FunctionType` is `HLS_TAG_PROCESSOR`.
+    #   @return [Types::HlsTagProcessorConfiguration]
+    #
     # @!attribute [rw] tags
     #   The tags to assign to the function. Tags are key-value pairs that
     #   you can associate with Amazon resources to help with organization,
@@ -4754,6 +4826,7 @@ module Aws::MediaTailor
       :concurrent_executor_configuration,
       :sequential_executor_configuration,
       :vast_request_configuration,
+      :hls_tag_processor_configuration,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -4798,6 +4871,10 @@ module Aws::MediaTailor
     #   The configuration for a `VAST_REQUEST` function.
     #   @return [Types::VastRequestConfiguration]
     #
+    # @!attribute [rw] hls_tag_processor_configuration
+    #   The configuration for an `HLS_TAG_PROCESSOR` function.
+    #   @return [Types::HlsTagProcessorConfiguration]
+    #
     # @!attribute [rw] tags
     #   The tags assigned to the function. Tags are key-value pairs that you
     #   can associate with Amazon resources to help with organization,
@@ -4825,6 +4902,7 @@ module Aws::MediaTailor
       :concurrent_executor_configuration,
       :sequential_executor_configuration,
       :vast_request_configuration,
+      :hls_tag_processor_configuration,
       :tags,
       :arn)
       SENSITIVE = []
@@ -4973,10 +5051,10 @@ module Aws::MediaTailor
     #   A map of lifecycle hook event names to function identifiers. The
     #   function mapping specifies which function MediaTailor executes at
     #   each lifecycle hook during ad insertion. Valid keys are
-    #   `PRE_SESSION_INITIALIZATION`, `PRE_ADS_REQUEST`,
-    #   `POST_ADS_RESPONSE`, and `PRE_MANIFEST_INSERTION`. For more
-    #   information, see [Functions lifecycle hooks][1] in the *MediaTailor
-    #   User Guide*.
+    #   `PRE_SESSION_INITIALIZATION`, `POST_ORIGIN_RESPONSE`,
+    #   `PRE_ADS_REQUEST`, `POST_ADS_RESPONSE`, and
+    #   `PRE_MANIFEST_INSERTION`. For more information, see [Functions
+    #   lifecycle hooks][1] in the *MediaTailor User Guide*.
     #
     #
     #
@@ -5208,10 +5286,10 @@ module Aws::MediaTailor
     #   A map of lifecycle hook event names to function identifiers. The
     #   function mapping specifies which function MediaTailor executes at
     #   each lifecycle hook during ad insertion. Valid keys are
-    #   `PRE_SESSION_INITIALIZATION`, `PRE_ADS_REQUEST`,
-    #   `POST_ADS_RESPONSE`, and `PRE_MANIFEST_INSERTION`. For more
-    #   information, see [Functions lifecycle hooks][1] in the *MediaTailor
-    #   User Guide*.
+    #   `PRE_SESSION_INITIALIZATION`, `POST_ORIGIN_RESPONSE`,
+    #   `PRE_ADS_REQUEST`, `POST_ADS_RESPONSE`, and
+    #   `PRE_MANIFEST_INSERTION`. For more information, see [Functions
+    #   lifecycle hooks][1] in the *MediaTailor User Guide*.
     #
     #
     #

@@ -4087,7 +4087,7 @@ module Aws::AutoScaling
     #   resp.scaling_policies[0].alarms #=> Array
     #   resp.scaling_policies[0].alarms[0].alarm_name #=> String
     #   resp.scaling_policies[0].alarms[0].alarm_arn #=> String
-    #   resp.scaling_policies[0].target_tracking_configuration.predefined_metric_specification.predefined_metric_type #=> String, one of "ASGAverageCPUUtilization", "ASGAverageNetworkIn", "ASGAverageNetworkOut", "ALBRequestCountPerTarget"
+    #   resp.scaling_policies[0].target_tracking_configuration.predefined_metric_specification.predefined_metric_type #=> String, one of "ASGAverageCPUUtilization", "ASGAverageCPUUtilizationHighResolution", "ASGAverageNetworkIn", "ASGAverageNetworkOut", "ALBRequestCountPerTarget"
     #   resp.scaling_policies[0].target_tracking_configuration.predefined_metric_specification.resource_label #=> String
     #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.metric_name #=> String
     #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.namespace #=> String
@@ -6176,6 +6176,8 @@ module Aws::AutoScaling
     #
     #   * `ASGAverageCPUUtilization`
     #
+    #   * `ASGAverageCPUUtilizationHighResolution`
+    #
     #   * `ASGAverageNetworkIn`
     #
     #   * `ASGAverageNetworkOut`
@@ -6281,7 +6283,7 @@ module Aws::AutoScaling
     #     estimated_instance_warmup: 1,
     #     target_tracking_configuration: {
     #       predefined_metric_specification: {
-    #         predefined_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, ALBRequestCountPerTarget
+    #         predefined_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageCPUUtilizationHighResolution, ASGAverageNetworkIn, ASGAverageNetworkOut, ALBRequestCountPerTarget
     #         resource_label: "XmlStringMaxLen1023",
     #       },
     #       customized_metric_specification: {
@@ -8075,7 +8077,7 @@ module Aws::AutoScaling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.178.0'
+      context[:gem_version] = '1.179.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

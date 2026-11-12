@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:mwaaserverless)
 # structure.
 #
 #     mwaa_serverless = Aws::MWAAServerless::Client.new
-#     resp = mwaa_serverless.create_workflow(params)
+#     resp = mwaa_serverless.create_airflow_ui_url(params)
 #
 # See {Client} for more information.
 #
@@ -55,7 +55,7 @@ module Aws::MWAAServerless
   autoload :EndpointProvider, 'aws-sdk-mwaaserverless/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mwaaserverless/endpoints'
 
-  GEM_VERSION = '1.22.0'
+  GEM_VERSION = '1.23.0'
 
 end
 

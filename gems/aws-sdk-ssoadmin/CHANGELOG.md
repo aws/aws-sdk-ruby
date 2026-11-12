@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2026-11-12)
+------------------
+
+* Feature - Adds support for Network Controls on IAM Identity Center instances. You can now require that access to your instance and AWS managed applications originate from VPC endpoints in your organization, and optionally narrow that perimeter to specific VPCs, IP ranges, or application exceptions.
+
 1.91.0 (2026-11-11)
 ------------------
 

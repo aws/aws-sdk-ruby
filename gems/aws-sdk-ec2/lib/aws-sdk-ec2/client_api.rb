@@ -663,6 +663,8 @@ module Aws::EC2
     CreateMacSystemIntegrityProtectionModificationTaskResult = Shapes::StructureShape.new(name: 'CreateMacSystemIntegrityProtectionModificationTaskResult')
     CreateManagedPrefixListRequest = Shapes::StructureShape.new(name: 'CreateManagedPrefixListRequest')
     CreateManagedPrefixListResult = Shapes::StructureShape.new(name: 'CreateManagedPrefixListResult')
+    CreateMetricCategoryRequest = Shapes::StructureShape.new(name: 'CreateMetricCategoryRequest')
+    CreateMetricCategoryResult = Shapes::StructureShape.new(name: 'CreateMetricCategoryResult')
     CreateNatGatewayRequest = Shapes::StructureShape.new(name: 'CreateNatGatewayRequest')
     CreateNatGatewayResult = Shapes::StructureShape.new(name: 'CreateNatGatewayResult')
     CreateNetworkAclEntryRequest = Shapes::StructureShape.new(name: 'CreateNetworkAclEntryRequest')
@@ -922,6 +924,8 @@ module Aws::EC2
     DeleteLocalGatewayVirtualInterfaceResult = Shapes::StructureShape.new(name: 'DeleteLocalGatewayVirtualInterfaceResult')
     DeleteManagedPrefixListRequest = Shapes::StructureShape.new(name: 'DeleteManagedPrefixListRequest')
     DeleteManagedPrefixListResult = Shapes::StructureShape.new(name: 'DeleteManagedPrefixListResult')
+    DeleteMetricCategoryRequest = Shapes::StructureShape.new(name: 'DeleteMetricCategoryRequest')
+    DeleteMetricCategoryResult = Shapes::StructureShape.new(name: 'DeleteMetricCategoryResult')
     DeleteNatGatewayRequest = Shapes::StructureShape.new(name: 'DeleteNatGatewayRequest')
     DeleteNatGatewayResult = Shapes::StructureShape.new(name: 'DeleteNatGatewayResult')
     DeleteNetworkAclEntryRequest = Shapes::StructureShape.new(name: 'DeleteNetworkAclEntryRequest')
@@ -1313,6 +1317,9 @@ module Aws::EC2
     DescribeMacModificationTasksResult = Shapes::StructureShape.new(name: 'DescribeMacModificationTasksResult')
     DescribeManagedPrefixListsRequest = Shapes::StructureShape.new(name: 'DescribeManagedPrefixListsRequest')
     DescribeManagedPrefixListsResult = Shapes::StructureShape.new(name: 'DescribeManagedPrefixListsResult')
+    DescribeMetricCategoriesMaxResults = Shapes::IntegerShape.new(name: 'DescribeMetricCategoriesMaxResults')
+    DescribeMetricCategoriesRequest = Shapes::StructureShape.new(name: 'DescribeMetricCategoriesRequest')
+    DescribeMetricCategoriesResult = Shapes::StructureShape.new(name: 'DescribeMetricCategoriesResult')
     DescribeMovingAddressesMaxResults = Shapes::IntegerShape.new(name: 'DescribeMovingAddressesMaxResults')
     DescribeMovingAddressesRequest = Shapes::StructureShape.new(name: 'DescribeMovingAddressesRequest')
     DescribeMovingAddressesResult = Shapes::StructureShape.new(name: 'DescribeMovingAddressesResult')
@@ -2841,6 +2848,12 @@ module Aws::EC2
     MemorySize = Shapes::IntegerShape.new(name: 'MemorySize')
     MetadataDefaultHttpTokensState = Shapes::StringShape.new(name: 'MetadataDefaultHttpTokensState')
     Metric = Shapes::StringShape.new(name: 'Metric')
+    MetricCategory = Shapes::StructureShape.new(name: 'MetricCategory')
+    MetricCategoryId = Shapes::StringShape.new(name: 'MetricCategoryId')
+    MetricCategoryIdList = Shapes::ListShape.new(name: 'MetricCategoryIdList')
+    MetricCategoryList = Shapes::ListShape.new(name: 'MetricCategoryList')
+    MetricCategoryMetricName = Shapes::StringShape.new(name: 'MetricCategoryMetricName')
+    MetricCategoryMetricNameList = Shapes::ListShape.new(name: 'MetricCategoryMetricNameList')
     MetricDataResult = Shapes::StructureShape.new(name: 'MetricDataResult')
     MetricDataResultSet = Shapes::ListShape.new(name: 'MetricDataResultSet')
     MetricDimensionResultSet = Shapes::ListShape.new(name: 'MetricDimensionResultSet')
@@ -2937,6 +2950,8 @@ module Aws::EC2
     ModifyManagedPrefixListResult = Shapes::StructureShape.new(name: 'ModifyManagedPrefixListResult')
     ModifyManagedResourceVisibilityRequest = Shapes::StructureShape.new(name: 'ModifyManagedResourceVisibilityRequest')
     ModifyManagedResourceVisibilityResult = Shapes::StructureShape.new(name: 'ModifyManagedResourceVisibilityResult')
+    ModifyMetricCategoryRequest = Shapes::StructureShape.new(name: 'ModifyMetricCategoryRequest')
+    ModifyMetricCategoryResult = Shapes::StructureShape.new(name: 'ModifyMetricCategoryResult')
     ModifyNetworkInterfaceAttributeRequest = Shapes::StructureShape.new(name: 'ModifyNetworkInterfaceAttributeRequest')
     ModifyPrivateDnsNameOptionsRequest = Shapes::StructureShape.new(name: 'ModifyPrivateDnsNameOptionsRequest')
     ModifyPrivateDnsNameOptionsResult = Shapes::StructureShape.new(name: 'ModifyPrivateDnsNameOptionsResult')
@@ -4455,6 +4470,8 @@ module Aws::EC2
     AccountVpcEncryptionControlExclusions.add_member(:lambda, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionState, location_name: "lambda"))
     AccountVpcEncryptionControlExclusions.add_member(:vpc_lattice, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionState, location_name: "vpcLattice"))
     AccountVpcEncryptionControlExclusions.add_member(:elastic_file_system, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionState, location_name: "elasticFileSystem"))
+    AccountVpcEncryptionControlExclusions.add_member(:global_accelerator, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionState, location_name: "globalAccelerator"))
+    AccountVpcEncryptionControlExclusions.add_member(:api_gateway_v2, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionState, location_name: "apiGatewayV2"))
     AccountVpcEncryptionControlExclusions.struct_class = Types::AccountVpcEncryptionControlExclusions
 
     ActiveInstance.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
@@ -6840,6 +6857,15 @@ module Aws::EC2
     CreateManagedPrefixListResult.add_member(:prefix_list, Shapes::ShapeRef.new(shape: ManagedPrefixList, location_name: "prefixList"))
     CreateManagedPrefixListResult.struct_class = Types::CreateManagedPrefixListResult
 
+    CreateMetricCategoryRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricCategoryMetricNameList, required: true, location_name: "Metric"))
+    CreateMetricCategoryRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateMetricCategoryRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateMetricCategoryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateMetricCategoryRequest.struct_class = Types::CreateMetricCategoryRequest
+
+    CreateMetricCategoryResult.add_member(:metric_category, Shapes::ShapeRef.new(shape: MetricCategory, location_name: "metricCategory"))
+    CreateMetricCategoryResult.struct_class = Types::CreateMetricCategoryResult
+
     CreateNatGatewayRequest.add_member(:availability_mode, Shapes::ShapeRef.new(shape: AvailabilityMode, location_name: "AvailabilityMode"))
     CreateNatGatewayRequest.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, location_name: "AllocationId"))
     CreateNatGatewayRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
@@ -8058,6 +8084,13 @@ module Aws::EC2
 
     DeleteManagedPrefixListResult.add_member(:prefix_list, Shapes::ShapeRef.new(shape: ManagedPrefixList, location_name: "prefixList"))
     DeleteManagedPrefixListResult.struct_class = Types::DeleteManagedPrefixListResult
+
+    DeleteMetricCategoryRequest.add_member(:metric_category_id, Shapes::ShapeRef.new(shape: MetricCategoryId, required: true, location_name: "MetricCategoryId"))
+    DeleteMetricCategoryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteMetricCategoryRequest.struct_class = Types::DeleteMetricCategoryRequest
+
+    DeleteMetricCategoryResult.add_member(:metric_category_id, Shapes::ShapeRef.new(shape: MetricCategoryId, location_name: "metricCategoryId"))
+    DeleteMetricCategoryResult.struct_class = Types::DeleteMetricCategoryResult
 
     DeleteNatGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DeleteNatGatewayRequest.add_member(:nat_gateway_id, Shapes::ShapeRef.new(shape: NatGatewayId, required: true, location_name: "NatGatewayId"))
@@ -9692,6 +9725,17 @@ module Aws::EC2
     DescribeManagedPrefixListsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeManagedPrefixListsResult.add_member(:prefix_lists, Shapes::ShapeRef.new(shape: ManagedPrefixListSet, location_name: "prefixListSet"))
     DescribeManagedPrefixListsResult.struct_class = Types::DescribeManagedPrefixListsResult
+
+    DescribeMetricCategoriesRequest.add_member(:metric_category_ids, Shapes::ShapeRef.new(shape: MetricCategoryIdList, location_name: "MetricCategoryId"))
+    DescribeMetricCategoriesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeMetricCategoriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeMetricCategoriesMaxResults, location_name: "MaxResults"))
+    DescribeMetricCategoriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeMetricCategoriesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeMetricCategoriesRequest.struct_class = Types::DescribeMetricCategoriesRequest
+
+    DescribeMetricCategoriesResult.add_member(:metric_categories, Shapes::ShapeRef.new(shape: MetricCategoryList, location_name: "metricCategorySet"))
+    DescribeMetricCategoriesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeMetricCategoriesResult.struct_class = Types::DescribeMetricCategoriesResult
 
     DescribeMovingAddressesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DescribeMovingAddressesRequest.add_member(:public_ips, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "publicIp"))
@@ -15210,9 +15254,11 @@ module Aws::EC2
     LaunchTemplateVersionSet.member = Shapes::ShapeRef.new(shape: LaunchTemplateVersion, location_name: "item")
 
     LaunchTemplatesMonitoring.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    LaunchTemplatesMonitoring.add_member(:metric_category_ids, Shapes::ShapeRef.new(shape: MetricCategoryIdList, location_name: "metricCategoryIdSet"))
     LaunchTemplatesMonitoring.struct_class = Types::LaunchTemplatesMonitoring
 
     LaunchTemplatesMonitoringRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    LaunchTemplatesMonitoringRequest.add_member(:metric_category_ids, Shapes::ShapeRef.new(shape: MetricCategoryIdList, location_name: "MetricCategoryId"))
     LaunchTemplatesMonitoringRequest.struct_class = Types::LaunchTemplatesMonitoringRequest
 
     LicenseConfiguration.add_member(:license_configuration_arn, Shapes::ShapeRef.new(shape: String, location_name: "licenseConfigurationArn"))
@@ -15514,6 +15560,17 @@ module Aws::EC2
     MemoryMiBRequest.add_member(:max, Shapes::ShapeRef.new(shape: Integer, location_name: "Max"))
     MemoryMiBRequest.struct_class = Types::MemoryMiBRequest
 
+    MetricCategory.add_member(:metric_category_id, Shapes::ShapeRef.new(shape: MetricCategoryId, location_name: "metricCategoryId"))
+    MetricCategory.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricCategoryMetricNameList, location_name: "metricSet"))
+    MetricCategory.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    MetricCategory.struct_class = Types::MetricCategory
+
+    MetricCategoryIdList.member = Shapes::ShapeRef.new(shape: MetricCategoryId, location_name: "item")
+
+    MetricCategoryList.member = Shapes::ShapeRef.new(shape: MetricCategory, location_name: "item")
+
+    MetricCategoryMetricNameList.member = Shapes::ShapeRef.new(shape: MetricCategoryMetricName, location_name: "item")
+
     MetricDataResult.add_member(:dimension, Shapes::ShapeRef.new(shape: CapacityManagerDimension, location_name: "dimension"))
     MetricDataResult.add_member(:timestamp, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "timestamp"))
     MetricDataResult.add_member(:metric_values, Shapes::ShapeRef.new(shape: MetricValueSet, location_name: "metricValueSet"))
@@ -15563,6 +15620,8 @@ module Aws::EC2
     ModifyAccountVpcEncryptionControlRequest.add_member(:lambda, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "Lambda"))
     ModifyAccountVpcEncryptionControlRequest.add_member(:vpc_lattice, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "VpcLattice"))
     ModifyAccountVpcEncryptionControlRequest.add_member(:elastic_file_system, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "ElasticFileSystem"))
+    ModifyAccountVpcEncryptionControlRequest.add_member(:global_accelerator, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "GlobalAccelerator"))
+    ModifyAccountVpcEncryptionControlRequest.add_member(:api_gateway_v2, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "ApiGatewayV2"))
     ModifyAccountVpcEncryptionControlRequest.struct_class = Types::ModifyAccountVpcEncryptionControlRequest
 
     ModifyAccountVpcEncryptionControlResult.add_member(:account_vpc_encryption_control, Shapes::ShapeRef.new(shape: AccountVpcEncryptionControl, location_name: "accountVpcEncryptionControl"))
@@ -16038,6 +16097,14 @@ module Aws::EC2
     ModifyManagedResourceVisibilityResult.add_member(:visibility, Shapes::ShapeRef.new(shape: ManagedResourceVisibilitySettings, location_name: "visibility"))
     ModifyManagedResourceVisibilityResult.struct_class = Types::ModifyManagedResourceVisibilityResult
 
+    ModifyMetricCategoryRequest.add_member(:metric_category_id, Shapes::ShapeRef.new(shape: MetricCategoryId, required: true, location_name: "MetricCategoryId"))
+    ModifyMetricCategoryRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricCategoryMetricNameList, required: true, location_name: "Metric"))
+    ModifyMetricCategoryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyMetricCategoryRequest.struct_class = Types::ModifyMetricCategoryRequest
+
+    ModifyMetricCategoryResult.add_member(:metric_category, Shapes::ShapeRef.new(shape: MetricCategory, location_name: "metricCategory"))
+    ModifyMetricCategoryResult.struct_class = Types::ModifyMetricCategoryResult
+
     ModifyNetworkInterfaceAttributeRequest.add_member(:ena_srd_specification, Shapes::ShapeRef.new(shape: EnaSrdSpecification, location_name: "EnaSrdSpecification"))
     ModifyNetworkInterfaceAttributeRequest.add_member(:enable_primary_ipv_6, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnablePrimaryIpv6"))
     ModifyNetworkInterfaceAttributeRequest.add_member(:connection_tracking_specification, Shapes::ShapeRef.new(shape: ConnectionTrackingSpecificationRequest, location_name: "ConnectionTrackingSpecification"))
@@ -16439,6 +16506,8 @@ module Aws::EC2
     ModifyVpcEncryptionControlRequest.add_member(:lambda_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "LambdaExclusion"))
     ModifyVpcEncryptionControlRequest.add_member(:vpc_lattice_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "VpcLatticeExclusion"))
     ModifyVpcEncryptionControlRequest.add_member(:elastic_file_system_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "ElasticFileSystemExclusion"))
+    ModifyVpcEncryptionControlRequest.add_member(:global_accelerator_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "GlobalAcceleratorExclusion"))
+    ModifyVpcEncryptionControlRequest.add_member(:api_gateway_v2_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "ApiGatewayV2Exclusion"))
     ModifyVpcEncryptionControlRequest.struct_class = Types::ModifyVpcEncryptionControlRequest
 
     ModifyVpcEncryptionControlResult.add_member(:vpc_encryption_control, Shapes::ShapeRef.new(shape: VpcEncryptionControl, location_name: "vpcEncryptionControl"))
@@ -16601,12 +16670,14 @@ module Aws::EC2
     ModifyVpnTunnelOptionsSpecification.struct_class = Types::ModifyVpnTunnelOptionsSpecification
 
     MonitorInstancesRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, required: true, location_name: "InstanceId"))
+    MonitorInstancesRequest.add_member(:metric_category_ids, Shapes::ShapeRef.new(shape: MetricCategoryIdList, location_name: "MetricCategoryId"))
     MonitorInstancesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     MonitorInstancesRequest.struct_class = Types::MonitorInstancesRequest
 
     MonitorInstancesResult.add_member(:instance_monitorings, Shapes::ShapeRef.new(shape: InstanceMonitoringList, location_name: "instancesSet"))
     MonitorInstancesResult.struct_class = Types::MonitorInstancesResult
 
+    Monitoring.add_member(:metric_category_ids, Shapes::ShapeRef.new(shape: MetricCategoryIdList, location_name: "metricCategoryIdSet"))
     Monitoring.add_member(:state, Shapes::ShapeRef.new(shape: MonitoringState, location_name: "state"))
     Monitoring.struct_class = Types::Monitoring
 
@@ -18513,6 +18584,7 @@ module Aws::EC2
 
     RuleOptionList.member = Shapes::ShapeRef.new(shape: RuleOption, location_name: "item")
 
+    RunInstancesMonitoringEnabled.add_member(:metric_category_ids, Shapes::ShapeRef.new(shape: MetricCategoryIdList, location_name: "MetricCategoryId"))
     RunInstancesMonitoringEnabled.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
     RunInstancesMonitoringEnabled.struct_class = Types::RunInstancesMonitoringEnabled
 
@@ -20257,6 +20329,7 @@ module Aws::EC2
     UnlockSnapshotResult.struct_class = Types::UnlockSnapshotResult
 
     UnmonitorInstancesRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, required: true, location_name: "InstanceId"))
+    UnmonitorInstancesRequest.add_member(:metric_category_ids, Shapes::ShapeRef.new(shape: MetricCategoryIdList, location_name: "MetricCategoryId"))
     UnmonitorInstancesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     UnmonitorInstancesRequest.struct_class = Types::UnmonitorInstancesRequest
 
@@ -20874,6 +20947,8 @@ module Aws::EC2
     VpcEncryptionControlConfiguration.add_member(:lambda_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "LambdaExclusion"))
     VpcEncryptionControlConfiguration.add_member(:vpc_lattice_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "VpcLatticeExclusion"))
     VpcEncryptionControlConfiguration.add_member(:elastic_file_system_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "ElasticFileSystemExclusion"))
+    VpcEncryptionControlConfiguration.add_member(:global_accelerator_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "GlobalAcceleratorExclusion"))
+    VpcEncryptionControlConfiguration.add_member(:api_gateway_v2_exclusion, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionStateInput, location_name: "ApiGatewayV2Exclusion"))
     VpcEncryptionControlConfiguration.struct_class = Types::VpcEncryptionControlConfiguration
 
     VpcEncryptionControlExclusion.add_member(:state, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionState, location_name: "state"))
@@ -20888,6 +20963,8 @@ module Aws::EC2
     VpcEncryptionControlExclusions.add_member(:lambda, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusion, location_name: "lambda"))
     VpcEncryptionControlExclusions.add_member(:vpc_lattice, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusion, location_name: "vpcLattice"))
     VpcEncryptionControlExclusions.add_member(:elastic_file_system, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusion, location_name: "elasticFileSystem"))
+    VpcEncryptionControlExclusions.add_member(:global_accelerator, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusion, location_name: "globalAccelerator"))
+    VpcEncryptionControlExclusions.add_member(:api_gateway_v2, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusion, location_name: "apiGatewayV2"))
     VpcEncryptionControlExclusions.struct_class = Types::VpcEncryptionControlExclusions
 
     VpcEncryptionControlIdList.member = Shapes::ShapeRef.new(shape: VpcEncryptionControlId, location_name: "item")
@@ -22086,6 +22163,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: CreateManagedPrefixListResult)
       end)
 
+      api.add_operation(:create_metric_category, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMetricCategory"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateMetricCategoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateMetricCategoryResult)
+      end)
+
       api.add_operation(:create_nat_gateway, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateNatGateway"
         o.http_method = "POST"
@@ -22876,6 +22961,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteManagedPrefixListRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteManagedPrefixListResult)
+      end)
+
+      api.add_operation(:delete_metric_category, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMetricCategory"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteMetricCategoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteMetricCategoryResult)
       end)
 
       api.add_operation(:delete_nat_gateway, Seahorse::Model::Operation.new.tap do |o|
@@ -24650,6 +24743,20 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeManagedPrefixListsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeManagedPrefixListsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_metric_categories, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMetricCategories"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMetricCategoriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMetricCategoriesResult)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -27665,6 +27772,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyManagedResourceVisibilityRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyManagedResourceVisibilityResult)
+      end)
+
+      api.add_operation(:modify_metric_category, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyMetricCategory"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyMetricCategoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyMetricCategoryResult)
       end)
 
       api.add_operation(:modify_network_interface_attribute, Seahorse::Model::Operation.new.tap do |o|

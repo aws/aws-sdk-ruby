@@ -262,6 +262,15 @@ module Aws::Route53
       SENSITIVE: []
     end
 
+    class CreateResourceRecordSetProtectionsRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor protections: ::Array[Types::ResourceRecordSetProtectionConfig]
+      SENSITIVE: []
+    end
+
+    class CreateResourceRecordSetProtectionsResponse < Aws::EmptyStructure
+    end
+
     class CreateReusableDelegationSetRequest
       attr_accessor caller_reference: ::String
       attr_accessor hosted_zone_id: ::String
@@ -424,6 +433,15 @@ module Aws::Route53
     end
 
     class DeleteQueryLoggingConfigResponse < Aws::EmptyStructure
+    end
+
+    class DeleteResourceRecordSetProtectionsRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor protections: ::Array[Types::ResourceRecordSetProtectionKey]
+      SENSITIVE: []
+    end
+
+    class DeleteResourceRecordSetProtectionsResponse < Aws::EmptyStructure
     end
 
     class DeleteReusableDelegationSetRequest
@@ -883,6 +901,12 @@ module Aws::Route53
       SENSITIVE: []
     end
 
+    class InvalidResourceRecordSetProtectionBatch
+      attr_accessor message: ::String
+      attr_accessor errors: ::Array[Types::ProtectionError]
+      SENSITIVE: []
+    end
+
     class InvalidSigningStatus
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1085,6 +1109,21 @@ module Aws::Route53
 
     class ListQueryLoggingConfigsResponse
       attr_accessor query_logging_configs: ::Array[Types::QueryLoggingConfig]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceRecordSetProtectionsRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor start_record_name: ::String
+      attr_accessor start_record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceRecordSetProtectionsResponse
+      attr_accessor resource_record_set_protections: ::Array[Types::ResourceRecordSetProtection]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1318,6 +1357,20 @@ module Aws::Route53
       SENSITIVE: []
     end
 
+    class ProtectionAlreadyExists
+      attr_accessor message: ::String
+      attr_accessor errors: ::Array[Types::ProtectionError]
+      SENSITIVE: []
+    end
+
+    class ProtectionError
+      attr_accessor record_name: ::String
+      attr_accessor record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class PublicZoneVPCAssociation
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1356,6 +1409,26 @@ module Aws::Route53
       attr_accessor traffic_policy_instance_id: ::String
       attr_accessor cidr_routing_config: Types::CidrRoutingConfig
       attr_accessor geo_proximity_location: Types::GeoProximityLocation
+      SENSITIVE: []
+    end
+
+    class ResourceRecordSetProtection
+      attr_accessor record_name: ::String
+      attr_accessor record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceRecordSetProtectionConfig
+      attr_accessor record_name: ::String
+      attr_accessor record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceRecordSetProtectionKey
+      attr_accessor record_name: ::String
+      attr_accessor record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
       SENSITIVE: []
     end
 

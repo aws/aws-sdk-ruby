@@ -18175,6 +18175,8 @@ module Aws::Connect
     #   resp.integration_association_summary_list[0].source_application_url #=> String
     #   resp.integration_association_summary_list[0].source_application_name #=> String
     #   resp.integration_association_summary_list[0].source_type #=> String, one of "SALESFORCE", "ZENDESK", "CASES"
+    #   resp.integration_association_summary_list[0].last_modified_time #=> Time
+    #   resp.integration_association_summary_list[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListIntegrationAssociations AWS API Documentation
@@ -31669,8 +31671,10 @@ module Aws::Connect
     #   for each channel. ACW timeout specifies how many seconds agents have
     #   for after contact work, such as entering notes about the contact. The
     #   minimum setting is 1 second, and the maximum is 2,000,000 seconds (24
-    #   days). Enter 0 for an indefinite amount of time, meaning agents must
-    #   manually choose to end ACW.
+    #   days). For the CHAT channel, the maximum for a specific duration is
+    #   5,400 seconds (90 minutes); higher values end ACW after 90 minutes.
+    #   For all channels, including chat, you can enter 0 for an indefinite
+    #   amount of time, meaning agents must manually choose to end ACW.
     #
     # @option params [Array<Types::PhoneNumberConfig>] :phone_number_configs
     #   The list of phone number configuration settings for each channel.
@@ -32511,7 +32515,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.298.0'
+      context[:gem_version] = '1.299.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

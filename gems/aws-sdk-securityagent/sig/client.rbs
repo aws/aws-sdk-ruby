@@ -575,6 +575,7 @@ module Aws
                             },
                             ?network_traffic_config: Params::network_traffic_config,
                             ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED"),
+                            ?clean_up_strategy: ("BEST_EFFORT_DELETE" | "RETAIN_ALL"),
                             ?disable_managed_skills: Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")],
                             ?max_task_hours: ::Float,
                             ?report_destination: {
@@ -1659,6 +1660,7 @@ module Aws
                             },
                             ?network_traffic_config: Params::network_traffic_config,
                             ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED"),
+                            ?clean_up_strategy: ("BEST_EFFORT_DELETE" | "RETAIN_ALL"),
                             ?disable_managed_skills: Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")],
                             ?max_task_hours: ::Float,
                             ?report_destination: {

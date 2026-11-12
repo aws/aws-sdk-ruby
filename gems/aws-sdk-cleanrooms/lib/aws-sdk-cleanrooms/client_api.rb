@@ -644,6 +644,7 @@ module Aws::CleanRooms
     ResourceStatus = Shapes::StringShape.new(name: 'ResourceStatus')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResultFormat = Shapes::StringShape.new(name: 'ResultFormat')
+    RetryInfo = Shapes::StructureShape.new(name: 'RetryInfo')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3Location = Shapes::StructureShape.new(name: 'S3Location')
     S3LocationBucketString = Shapes::StringShape.new(name: 'S3LocationBucketString')
@@ -2875,6 +2876,7 @@ module Aws::CleanRooms
 
     ProtectedJobError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ProtectedJobError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    ProtectedJobError.add_member(:retry, Shapes::ShapeRef.new(shape: RetryInfo, location_name: "retry"))
     ProtectedJobError.struct_class = Types::ProtectedJobError
 
     ProtectedJobMemberOutputConfigurationInput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
@@ -2997,6 +2999,7 @@ module Aws::CleanRooms
 
     ProtectedQueryError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ProtectedQueryError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    ProtectedQueryError.add_member(:retry, Shapes::ShapeRef.new(shape: RetryInfo, location_name: "retry"))
     ProtectedQueryError.struct_class = Types::ProtectedQueryError
 
     ProtectedQueryMemberOutputConfiguration.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
@@ -3093,6 +3096,9 @@ module Aws::CleanRooms
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    RetryInfo.add_member(:retryable, Shapes::ShapeRef.new(shape: Boolean, location_name: "retryable"))
+    RetryInfo.struct_class = Types::RetryInfo
 
     S3Location.add_member(:bucket, Shapes::ShapeRef.new(shape: S3LocationBucketString, required: true, location_name: "bucket"))
     S3Location.add_member(:key, Shapes::ShapeRef.new(shape: S3LocationKeyString, required: true, location_name: "key"))

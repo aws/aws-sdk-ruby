@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.142.0 (2026-11-12)
+------------------
+
+* Feature - Add post origin manifest hook, add HLS tag processor
+
 1.141.0 (2026-11-11)
 ------------------
 

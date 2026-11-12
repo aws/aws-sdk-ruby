@@ -97,6 +97,8 @@ module Aws::CloudWatch
     DatasetArn = Shapes::StringShape.new(name: 'DatasetArn')
     DatasetId = Shapes::StringShape.new(name: 'DatasetId')
     DatasetIdentifier = Shapes::StringShape.new(name: 'DatasetIdentifier')
+    DefinitionId = Shapes::StringShape.new(name: 'DefinitionId')
+    DefinitionPath = Shapes::StringShape.new(name: 'DefinitionPath')
     DeleteAlarmMuteRuleInput = Shapes::StructureShape.new(name: 'DeleteAlarmMuteRuleInput')
     DeleteAlarmsInput = Shapes::StructureShape.new(name: 'DeleteAlarmsInput')
     DeleteAnomalyDetectorInput = Shapes::StructureShape.new(name: 'DeleteAnomalyDetectorInput')
@@ -105,6 +107,8 @@ module Aws::CloudWatch
     DeleteDashboardsOutput = Shapes::StructureShape.new(name: 'DeleteDashboardsOutput')
     DeleteInsightRulesInput = Shapes::StructureShape.new(name: 'DeleteInsightRulesInput')
     DeleteInsightRulesOutput = Shapes::StructureShape.new(name: 'DeleteInsightRulesOutput')
+    DeleteMetricDataQueryDefinitionInput = Shapes::StructureShape.new(name: 'DeleteMetricDataQueryDefinitionInput')
+    DeleteMetricDataQueryDefinitionOutput = Shapes::StructureShape.new(name: 'DeleteMetricDataQueryDefinitionOutput')
     DeleteMetricStreamInput = Shapes::StructureShape.new(name: 'DeleteMetricStreamInput')
     DeleteMetricStreamOutput = Shapes::StructureShape.new(name: 'DeleteMetricStreamOutput')
     DeleteResourceMetricsConfigurationInput = Shapes::StructureShape.new(name: 'DeleteResourceMetricsConfigurationInput')
@@ -173,6 +177,8 @@ module Aws::CloudWatch
     GetMetricDataLabelTimezone = Shapes::StringShape.new(name: 'GetMetricDataLabelTimezone')
     GetMetricDataMaxDatapoints = Shapes::IntegerShape.new(name: 'GetMetricDataMaxDatapoints')
     GetMetricDataOutput = Shapes::StructureShape.new(name: 'GetMetricDataOutput')
+    GetMetricDataQueryDefinitionInput = Shapes::StructureShape.new(name: 'GetMetricDataQueryDefinitionInput')
+    GetMetricDataQueryDefinitionOutput = Shapes::StructureShape.new(name: 'GetMetricDataQueryDefinitionOutput')
     GetMetricStatisticsInput = Shapes::StructureShape.new(name: 'GetMetricStatisticsInput')
     GetMetricStatisticsOutput = Shapes::StructureShape.new(name: 'GetMetricStatisticsOutput')
     GetMetricStreamInput = Shapes::StructureShape.new(name: 'GetMetricStreamInput')
@@ -234,6 +240,8 @@ module Aws::CloudWatch
     ListDashboardsOutput = Shapes::StructureShape.new(name: 'ListDashboardsOutput')
     ListManagedInsightRulesInput = Shapes::StructureShape.new(name: 'ListManagedInsightRulesInput')
     ListManagedInsightRulesOutput = Shapes::StructureShape.new(name: 'ListManagedInsightRulesOutput')
+    ListMetricDataQueryDefinitionsInput = Shapes::StructureShape.new(name: 'ListMetricDataQueryDefinitionsInput')
+    ListMetricDataQueryDefinitionsOutput = Shapes::StructureShape.new(name: 'ListMetricDataQueryDefinitionsOutput')
     ListMetricStreamsInput = Shapes::StructureShape.new(name: 'ListMetricStreamsInput')
     ListMetricStreamsMaxResults = Shapes::IntegerShape.new(name: 'ListMetricStreamsMaxResults')
     ListMetricStreamsOutput = Shapes::StructureShape.new(name: 'ListMetricStreamsOutput')
@@ -250,6 +258,7 @@ module Aws::CloudWatch
     ManagedRuleState = Shapes::StructureShape.new(name: 'ManagedRuleState')
     ManagedRules = Shapes::ListShape.new(name: 'ManagedRules')
     MaxRecords = Shapes::IntegerShape.new(name: 'MaxRecords')
+    MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxReturnedResultsCount = Shapes::IntegerShape.new(name: 'MaxReturnedResultsCount')
     Message = Shapes::StringShape.new(name: 'Message')
     MessageData = Shapes::StructureShape.new(name: 'MessageData')
@@ -262,11 +271,15 @@ module Aws::CloudWatch
     MetricData = Shapes::ListShape.new(name: 'MetricData')
     MetricDataQueries = Shapes::ListShape.new(name: 'MetricDataQueries')
     MetricDataQuery = Shapes::StructureShape.new(name: 'MetricDataQuery')
+    MetricDataQueryDefinitionNextToken = Shapes::StringShape.new(name: 'MetricDataQueryDefinitionNextToken')
+    MetricDataQueryDefinitionSummaries = Shapes::ListShape.new(name: 'MetricDataQueryDefinitionSummaries')
+    MetricDataQueryDefinitionSummary = Shapes::StructureShape.new(name: 'MetricDataQueryDefinitionSummary')
     MetricDataResult = Shapes::StructureShape.new(name: 'MetricDataResult')
     MetricDataResultMessages = Shapes::ListShape.new(name: 'MetricDataResultMessages')
     MetricDataResults = Shapes::ListShape.new(name: 'MetricDataResults')
     MetricDatum = Shapes::StructureShape.new(name: 'MetricDatum')
     MetricExpression = Shapes::StringShape.new(name: 'MetricExpression')
+    MetricExpressionString = Shapes::StringShape.new(name: 'MetricExpressionString')
     MetricId = Shapes::StringShape.new(name: 'MetricId')
     MetricLabel = Shapes::StringShape.new(name: 'MetricLabel')
     MetricMathAnomalyDetector = Shapes::StructureShape.new(name: 'MetricMathAnomalyDetector')
@@ -322,12 +335,15 @@ module Aws::CloudWatch
     PutManagedInsightRulesOutput = Shapes::StructureShape.new(name: 'PutManagedInsightRulesOutput')
     PutMetricAlarmInput = Shapes::StructureShape.new(name: 'PutMetricAlarmInput')
     PutMetricDataInput = Shapes::StructureShape.new(name: 'PutMetricDataInput')
+    PutMetricDataQueryDefinitionInput = Shapes::StructureShape.new(name: 'PutMetricDataQueryDefinitionInput')
+    PutMetricDataQueryDefinitionOutput = Shapes::StructureShape.new(name: 'PutMetricDataQueryDefinitionOutput')
     PutMetricStreamInput = Shapes::StructureShape.new(name: 'PutMetricStreamInput')
     PutMetricStreamOutput = Shapes::StructureShape.new(name: 'PutMetricStreamOutput')
     Query = Shapes::StringShape.new(name: 'Query')
     QueryResultsToAlarm = Shapes::IntegerShape.new(name: 'QueryResultsToAlarm')
     QueryResultsToEvaluate = Shapes::IntegerShape.new(name: 'QueryResultsToEvaluate')
     QueryString = Shapes::StringShape.new(name: 'QueryString')
+    QueryType = Shapes::StringShape.new(name: 'QueryType')
     Range = Shapes::StructureShape.new(name: 'Range')
     RecentlyActive = Shapes::StringShape.new(name: 'RecentlyActive')
     RecoveryPeriod = Shapes::IntegerShape.new(name: 'RecoveryPeriod')
@@ -594,6 +610,11 @@ module Aws::CloudWatch
     DeleteInsightRulesOutput.add_member(:failures, Shapes::ShapeRef.new(shape: BatchFailures, location_name: "Failures"))
     DeleteInsightRulesOutput.struct_class = Types::DeleteInsightRulesOutput
 
+    DeleteMetricDataQueryDefinitionInput.add_member(:id, Shapes::ShapeRef.new(shape: DefinitionId, required: true, location_name: "Id"))
+    DeleteMetricDataQueryDefinitionInput.struct_class = Types::DeleteMetricDataQueryDefinitionInput
+
+    DeleteMetricDataQueryDefinitionOutput.struct_class = Types::DeleteMetricDataQueryDefinitionOutput
+
     DeleteMetricStreamInput.add_member(:name, Shapes::ShapeRef.new(shape: MetricStreamName, required: true, location_name: "Name"))
     DeleteMetricStreamInput.struct_class = Types::DeleteMetricStreamInput
 
@@ -806,6 +827,18 @@ module Aws::CloudWatch
     GetMetricDataOutput.add_member(:messages, Shapes::ShapeRef.new(shape: MetricDataResultMessages, location_name: "Messages"))
     GetMetricDataOutput.struct_class = Types::GetMetricDataOutput
 
+    GetMetricDataQueryDefinitionInput.add_member(:id, Shapes::ShapeRef.new(shape: DefinitionId, required: true, location_name: "Id"))
+    GetMetricDataQueryDefinitionInput.struct_class = Types::GetMetricDataQueryDefinitionInput
+
+    GetMetricDataQueryDefinitionOutput.add_member(:id, Shapes::ShapeRef.new(shape: DefinitionId, required: true, location_name: "Id"))
+    GetMetricDataQueryDefinitionOutput.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "Arn"))
+    GetMetricDataQueryDefinitionOutput.add_member(:path, Shapes::ShapeRef.new(shape: DefinitionPath, required: true, location_name: "Path"))
+    GetMetricDataQueryDefinitionOutput.add_member(:expression, Shapes::ShapeRef.new(shape: MetricExpressionString, required: true, location_name: "Expression"))
+    GetMetricDataQueryDefinitionOutput.add_member(:type, Shapes::ShapeRef.new(shape: QueryType, required: true, location_name: "Type"))
+    GetMetricDataQueryDefinitionOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
+    GetMetricDataQueryDefinitionOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdatedAt"))
+    GetMetricDataQueryDefinitionOutput.struct_class = Types::GetMetricDataQueryDefinitionOutput
+
     GetMetricStatisticsInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
     GetMetricStatisticsInput.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
     GetMetricStatisticsInput.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
@@ -962,6 +995,14 @@ module Aws::CloudWatch
     ListManagedInsightRulesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListManagedInsightRulesOutput.struct_class = Types::ListManagedInsightRulesOutput
 
+    ListMetricDataQueryDefinitionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListMetricDataQueryDefinitionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: MetricDataQueryDefinitionNextToken, location_name: "NextToken"))
+    ListMetricDataQueryDefinitionsInput.struct_class = Types::ListMetricDataQueryDefinitionsInput
+
+    ListMetricDataQueryDefinitionsOutput.add_member(:items, Shapes::ShapeRef.new(shape: MetricDataQueryDefinitionSummaries, required: true, location_name: "Items"))
+    ListMetricDataQueryDefinitionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: MetricDataQueryDefinitionNextToken, location_name: "NextToken"))
+    ListMetricDataQueryDefinitionsOutput.struct_class = Types::ListMetricDataQueryDefinitionsOutput
+
     ListMetricStreamsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListMetricStreamsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListMetricStreamsMaxResults, location_name: "MaxResults"))
     ListMetricStreamsInput.struct_class = Types::ListMetricStreamsInput
@@ -1100,6 +1141,14 @@ module Aws::CloudWatch
     MetricDataQuery.add_member(:period, Shapes::ShapeRef.new(shape: Period, location_name: "Period"))
     MetricDataQuery.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     MetricDataQuery.struct_class = Types::MetricDataQuery
+
+    MetricDataQueryDefinitionSummaries.member = Shapes::ShapeRef.new(shape: MetricDataQueryDefinitionSummary)
+
+    MetricDataQueryDefinitionSummary.add_member(:id, Shapes::ShapeRef.new(shape: DefinitionId, required: true, location_name: "Id"))
+    MetricDataQueryDefinitionSummary.add_member(:path, Shapes::ShapeRef.new(shape: DefinitionPath, required: true, location_name: "Path"))
+    MetricDataQueryDefinitionSummary.add_member(:type, Shapes::ShapeRef.new(shape: QueryType, required: true, location_name: "Type"))
+    MetricDataQueryDefinitionSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    MetricDataQueryDefinitionSummary.struct_class = Types::MetricDataQueryDefinitionSummary
 
     MetricDataResult.add_member(:id, Shapes::ShapeRef.new(shape: MetricId, location_name: "Id"))
     MetricDataResult.add_member(:label, Shapes::ShapeRef.new(shape: MetricLabel, location_name: "Label"))
@@ -1308,6 +1357,22 @@ module Aws::CloudWatch
     PutMetricDataInput.add_member(:entity_metric_data, Shapes::ShapeRef.new(shape: EntityMetricDataList, location_name: "EntityMetricData"))
     PutMetricDataInput.add_member(:strict_entity_validation, Shapes::ShapeRef.new(shape: StrictEntityValidation, location_name: "StrictEntityValidation", metadata: {"box" => true}))
     PutMetricDataInput.struct_class = Types::PutMetricDataInput
+
+    PutMetricDataQueryDefinitionInput.add_member(:id, Shapes::ShapeRef.new(shape: DefinitionId, location_name: "Id"))
+    PutMetricDataQueryDefinitionInput.add_member(:path, Shapes::ShapeRef.new(shape: DefinitionPath, required: true, location_name: "Path"))
+    PutMetricDataQueryDefinitionInput.add_member(:expression, Shapes::ShapeRef.new(shape: MetricExpressionString, required: true, location_name: "Expression"))
+    PutMetricDataQueryDefinitionInput.add_member(:type, Shapes::ShapeRef.new(shape: QueryType, required: true, location_name: "Type"))
+    PutMetricDataQueryDefinitionInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    PutMetricDataQueryDefinitionInput.struct_class = Types::PutMetricDataQueryDefinitionInput
+
+    PutMetricDataQueryDefinitionOutput.add_member(:id, Shapes::ShapeRef.new(shape: DefinitionId, required: true, location_name: "Id"))
+    PutMetricDataQueryDefinitionOutput.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "Arn"))
+    PutMetricDataQueryDefinitionOutput.add_member(:path, Shapes::ShapeRef.new(shape: DefinitionPath, required: true, location_name: "Path"))
+    PutMetricDataQueryDefinitionOutput.add_member(:expression, Shapes::ShapeRef.new(shape: MetricExpressionString, required: true, location_name: "Expression"))
+    PutMetricDataQueryDefinitionOutput.add_member(:type, Shapes::ShapeRef.new(shape: QueryType, required: true, location_name: "Type"))
+    PutMetricDataQueryDefinitionOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
+    PutMetricDataQueryDefinitionOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdatedAt"))
+    PutMetricDataQueryDefinitionOutput.struct_class = Types::PutMetricDataQueryDefinitionOutput
 
     PutMetricStreamInput.add_member(:name, Shapes::ShapeRef.new(shape: MetricStreamName, required: true, location_name: "Name"))
     PutMetricStreamInput.add_member(:include_filters, Shapes::ShapeRef.new(shape: MetricStreamFilters, location_name: "IncludeFilters"))
@@ -1568,6 +1633,14 @@ module Aws::CloudWatch
         o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
       end)
 
+      api.add_operation(:delete_metric_data_query_definition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMetricDataQueryDefinition"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteMetricDataQueryDefinitionInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteMetricDataQueryDefinitionOutput)
+      end)
+
       api.add_operation(:delete_metric_stream, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteMetricStream"
         o.http_method = "POST"
@@ -1771,6 +1844,15 @@ module Aws::CloudWatch
         )
       end)
 
+      api.add_operation(:get_metric_data_query_definition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMetricDataQueryDefinition"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMetricDataQueryDefinitionInput)
+        o.output = Shapes::ShapeRef.new(shape: GetMetricDataQueryDefinitionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:get_metric_statistics, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetMetricStatistics"
         o.http_method = "POST"
@@ -1861,6 +1943,20 @@ module Aws::CloudWatch
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_metric_data_query_definitions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMetricDataQueryDefinitions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListMetricDataQueryDefinitionsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListMetricDataQueryDefinitionsOutput)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2008,6 +2104,17 @@ module Aws::CloudWatch
         o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
+      end)
+
+      api.add_operation(:put_metric_data_query_definition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutMetricDataQueryDefinition"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutMetricDataQueryDefinitionInput)
+        o.output = Shapes::ShapeRef.new(shape: PutMetricDataQueryDefinitionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:put_metric_stream, Seahorse::Model::Operation.new.tap do |o|

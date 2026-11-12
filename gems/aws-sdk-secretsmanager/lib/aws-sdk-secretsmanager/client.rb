@@ -489,6 +489,132 @@ module Aws::SecretsManager
 
     # @!group API Operations
 
+    # Links a primary secret in your account to a replica secret in a
+    # different Amazon Web Services account and starts replication to this
+    # replica. The replica secret must already exist in the other Amazon Web
+    # Services account. Create the replica with CreateSecret and set its
+    # `CrossAccountPrimaryARN` field set to this primary secret's ARN. When
+    # you call AssociateCrossAccountReplica, Secrets Manager calls
+    # AcceptCrossAccountReplication on the replica secret on your behalf.
+    #
+    # The primary and replica secrets must be in the same Amazon Web
+    # Services Region and partition, and you must call this operation from
+    # the account that owns the primary secret. A primary secret can have at
+    # most one cross-account replica. This operation is idempotent, so you
+    # can call it again for the same replica to repair replication. If the
+    # association fails, Secrets Manager does not modify either the primary
+    # or replica secret.
+    #
+    # Secrets Manager generates a CloudTrail log entry when you call this
+    # action. Do not include sensitive information in request parameters
+    # because it might be logged. For more information, see [Logging Secrets
+    # Manager events with CloudTrail][1].
+    #
+    # <b>Required permissions: </b>
+    # `secretsmanager:AssociateCrossAccountReplica`,
+    # `secretsmanager:GetSecretValue` on the primary secret, and
+    # `secretsmanager:AcceptCrossAccountReplication` on the replica secret.
+    # You must also have `kms:Decrypt` permission for the Key Management
+    # Service (KMS) key that encrypts the primary secret, and `kms:Encrypt`
+    # permission for the Amazon Web Services KMS key that encrypts the
+    # replica secret. If you supply `ReplicationRoleARN`, you also need
+    # `iam:PassRole` for that role. For more information, see [ IAM policy
+    # actions for Secrets Manager][2] and [Authentication and access control
+    # in Secrets Manager][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    #
+    # @option params [required, String] :secret_id
+    #   The ARN or name of the primary secret in your account to replicate.
+    #
+    #   For an ARN, we recommend that you specify a complete ARN rather than a
+    #   partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
+    #
+    # @option params [required, String] :cross_account_replica_arn
+    #   The ARN of the replica secret in the other Amazon Web Services
+    #   account. The replica secret must be in the same Region and partition
+    #   as the primary secret. Additionally, the replica account owner must
+    #   have created the replica secret as a cross-account replica of the
+    #   primary secret. For more information see CreateSecret.
+    #
+    # @option params [String] :replica_restriction
+    #   Whether the replica account must belong to the same Amazon Web
+    #   Services organization as the primary account:
+    #
+    #   * `SameOrg`, which requires the replica account to be in the same
+    #     organization as the primary account. This is the default.
+    #
+    #   * `NoRestriction`, which allows the replica account to be in any
+    #     organization.
+    #
+    # @option params [String] :replication_role_arn
+    #   The ARN of an IAM role in the primary account that Secrets Manager
+    #   assumes to perform replication. If you don't include this field,
+    #   Secrets Manager replicates using the credentials of caller who updates
+    #   the primary secret. For more information, see [ Cross-account
+    #   replication permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/cross-account-replicate-permissions.html
+    #
+    # @return [Types::AssociateCrossAccountReplicaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateCrossAccountReplicaResponse#arn #arn} => String
+    #   * {Types::AssociateCrossAccountReplicaResponse#cross_account_replica_arn #cross_account_replica_arn} => String
+    #   * {Types::AssociateCrossAccountReplicaResponse#replication_status #replication_status} => String
+    #
+    #
+    # @example Example: To replicate a secret to another account
+    #
+    #   # The following example links a primary secret to a replica secret in another AWS account and starts replication. The
+    #   # replica secret was previously created in the other account using CreateSecret with the CrossAccountPrimaryARN set to
+    #   # this primary secret.
+    #
+    #   resp = client.associate_cross_account_replica({
+    #     cross_account_replica_arn: "arn:aws:secretsmanager:us-west-2:222222222222:secret:MyReplicaSecret-a1b2c3", 
+    #     secret_id: "MyTestDatabaseSecret", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #     cross_account_replica_arn: "arn:aws:secretsmanager:us-west-2:222222222222:secret:MyReplicaSecret-a1b2c3", 
+    #     replication_status: "InProgress", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_cross_account_replica({
+    #     secret_id: "SecretIdType", # required
+    #     cross_account_replica_arn: "SecretARNType", # required
+    #     replica_restriction: "SameOrg", # accepts SameOrg, NoRestriction
+    #     replication_role_arn: "RoleARNType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.cross_account_replica_arn #=> String
+    #   resp.replication_status #=> String, one of "InSync", "Failed", "InProgress", "Pending", "Detached"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/AssociateCrossAccountReplica AWS API Documentation
+    #
+    # @overload associate_cross_account_replica(params = {})
+    # @param [Hash] params ({})
+    def associate_cross_account_replica(params = {}, options = {})
+      req = build_request(:associate_cross_account_replica, params)
+      req.send_request(options)
+    end
+
     # Retrieves the contents of the encrypted fields `SecretString` or
     # `SecretBinary` for up to 20 secrets. To retrieve a single secret, call
     # GetSecretValue.
@@ -649,7 +775,7 @@ module Aws::SecretsManager
     # to determine whether to roll back to the previous version of the
     # secret by moving the staging label `AWSCURRENT` to the version that
     # has `AWSPENDING`. To determine which version has a specific staging
-    # label, call ListSecretVersionIds. Then use UpdateSecretVersionStage to
+    # label, call DescribeSecret. Then use UpdateSecretVersionStage to
     # change staging labels. For more information, see [How rotation
     # works][1].
     #
@@ -729,9 +855,10 @@ module Aws::SecretsManager
     # credentials such as a user name and password, an OAuth token, or other
     # secret information that you store in an encrypted form in Secrets
     # Manager. The secret also includes the connection information to access
-    # a database or other service, which Secrets Manager doesn't encrypt. A
-    # secret in Secrets Manager consists of both the protected secret data
-    # and the important information needed to manage the secret.
+    # a database or other service. Secrets Manager does not encrypt this
+    # connection information. A secret in Secrets Manager consists of both
+    # the encrypted secret versions and the metadata that Secrets Manager
+    # uses to manage the secret.
     #
     # For secrets that use *managed rotation*, you need to create the secret
     # through the managing service. For more information, see [Secrets
@@ -743,7 +870,7 @@ module Aws::SecretsManager
     # To create a secret, you can provide the secret value to be encrypted
     # in either the `SecretString` parameter or the `SecretBinary`
     # parameter, but not both. If you include `SecretString` or
-    # `SecretBinary` then Secrets Manager creates an initial secret version
+    # `SecretBinary`, then Secrets Manager creates an initial secret version
     # and automatically attaches the staging label `AWSCURRENT` to it.
     #
     # For database credentials you want to rotate, for Secrets Manager to be
@@ -757,12 +884,17 @@ module Aws::SecretsManager
     # it for you automatically. All users and roles in the Amazon Web
     # Services account automatically have access to use
     # `aws/secretsmanager`. Creating `aws/secretsmanager` can result in a
-    # one-time significant delay in returning the result.
+    # one-time delay to complete the secret creation.
     #
     # If the secret is in a different Amazon Web Services account from the
     # credentials calling the API, then you can't use `aws/secretsmanager`
     # to encrypt the secret, and you must create and use a customer managed
     # KMS key.
+    #
+    # To create a cross-account replica secret, include
+    # `CrossAccountPrimaryARN`. The replica must use a customer managed KMS
+    # key, and can't include `AddReplicaRegions`, `Description`,
+    # `SecretBinary`, `SecretString`, or `Type`.
     #
     # Secrets Manager generates a CloudTrail log entry when you call this
     # action. Do not include sensitive information in request parameters
@@ -773,7 +905,9 @@ module Aws::SecretsManager
     # <b>Required permissions: </b> `secretsmanager:CreateSecret`. If you
     # include tags in the secret, you also need
     # `secretsmanager:TagResource`. To add replica Regions, you must also
-    # have `secretsmanager:ReplicateSecretToRegions`. For more information,
+    # have `secretsmanager:ReplicateSecretToRegions`. To create a
+    # cross-account replica secret, you must also have
+    # `secretsmanager:PutResourcePolicy` permissions. For more information,
     # see [ IAM policy actions for Secrets Manager][5] and [Authentication
     # and access control in Secrets Manager][6].
     #
@@ -962,6 +1096,15 @@ module Aws::SecretsManager
     #
     #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/managed-external-secrets.html
     #
+    # @option params [String] :cross_account_primary_arn
+    #   The ARN of a primary secret in another Amazon Web Services account.
+    #   Include this field to create a cross-account replica secret that
+    #   receives replicated data from that primary secret. The primary secret
+    #   must be in the same Amazon Web Services Region and partition as the
+    #   replica, and you must specify a customer managed KMS key in
+    #   `KmsKeyId`. You can't include `SecretString`, `SecretBinary`,
+    #   `Description`, `AddReplicaRegions`, or `Type`.
+    #
     # @return [Types::CreateSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSecretResponse#arn #arn} => String
@@ -989,6 +1132,24 @@ module Aws::SecretsManager
     #     version_id: "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1", 
     #   }
     #
+    # @example Example: To create a cross-account replica secret
+    #
+    #   # The following example creates a secret that receives replicated data from a primary secret in another AWS account, by
+    #   # setting the CrossAccountPrimaryARN parameter. After creating the replica, link it to the primary secret from the primary
+    #   # account with AssociateCrossAccountReplica.
+    #
+    #   resp = client.create_secret({
+    #     cross_account_primary_arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #     kms_key_id: "arn:aws:kms:us-west-2:222222222222:key/EXAMPLE1-90ab-cdef-fedc-ba987EXAMPLE", 
+    #     name: "MyReplicaSecret", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:222222222222:secret:MyReplicaSecret-a1b2c3", 
+    #     name: "MyReplicaSecret", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_secret({
@@ -1012,6 +1173,7 @@ module Aws::SecretsManager
     #     ],
     #     force_overwrite_replica_secret: false,
     #     type: "MedeaTypeType",
+    #     cross_account_primary_arn: "SecretARNType",
     #   })
     #
     # @example Response structure
@@ -1022,7 +1184,7 @@ module Aws::SecretsManager
     #   resp.replication_status #=> Array
     #   resp.replication_status[0].region #=> String
     #   resp.replication_status[0].kms_key_id #=> String
-    #   resp.replication_status[0].status #=> String, one of "InSync", "Failed", "InProgress"
+    #   resp.replication_status[0].status #=> String, one of "InSync", "Failed", "InProgress", "Pending", "Detached"
     #   resp.replication_status[0].status_message #=> String
     #   resp.replication_status[0].last_accessed_date #=> Time
     #
@@ -1064,10 +1226,17 @@ module Aws::SecretsManager
     #
     #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #
+    # @option params [String] :policy_name
+    #   The name of the resource policy to delete. If you don't specify this
+    #   field, Secrets Manager uses `default`. You can only delete the
+    #   `default` policy; if you specify any other name, the operation returns
+    #   an `InvalidParameterException`.
+    #
     # @return [Types::DeleteResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteResourcePolicyResponse#arn #arn} => String
     #   * {Types::DeleteResourcePolicyResponse#name #name} => String
+    #   * {Types::DeleteResourcePolicyResponse#policy_name #policy_name} => String
     #
     #
     # @example Example: To delete the resource-based policy attached to a secret
@@ -1082,18 +1251,21 @@ module Aws::SecretsManager
     #   {
     #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
     #     name: "MyTestDatabaseSecret", 
+    #     policy_name: "default", 
     #   }
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_resource_policy({
     #     secret_id: "SecretIdType", # required
+    #     policy_name: "ResourcePolicyNameType",
     #   })
     #
     # @example Response structure
     #
     #   resp.arn #=> String
     #   resp.name #=> String
+    #   resp.policy_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DeleteResourcePolicy AWS API Documentation
     #
@@ -1115,6 +1287,14 @@ module Aws::SecretsManager
     # Regions. You must first delete the replicas using
     # RemoveRegionsFromReplication, and then delete the primary secret. When
     # you delete a replica, it is deleted immediately.
+    #
+    # You can't delete a cross-account primary secret that is associated
+    # with a cross-account replica secret. You must first disassociate each
+    # of the replicas using DisassociateCrossAccountReplica, before deleting
+    # the primary secret. Similarly, you can't delete a cross-account
+    # replica secret without first stopping replication. Call
+    # StopReplicationToReplica to stop replication, and then you can delete
+    # the secret.
     #
     # You can't directly delete a version of a secret. Instead, you remove
     # all staging labels from the version using UpdateSecretVersionStage.
@@ -1244,6 +1424,14 @@ module Aws::SecretsManager
     # secret value. Secrets Manager only returns fields that have a value in
     # the response.
     #
+    # <note markdown="1"> The `VersionIdsToStages` field in the response includes every version
+    # ID that has a staging label attached, even if that version doesn't
+    # contain a secret value. In contrast, `ListSecretVersionIds` only
+    # returns versions that contain a secret value. To check whether a
+    # secret version contains a value, call GetSecretValue.
+    #
+    #  </note>
+    #
     # Secrets Manager generates a CloudTrail log entry when you call this
     # action. Do not include sensitive information in request parameters
     # because it might be logged. For more information, see [Logging Secrets
@@ -1292,6 +1480,8 @@ module Aws::SecretsManager
     #   * {Types::DescribeSecretResponse#created_date #created_date} => Time
     #   * {Types::DescribeSecretResponse#primary_region #primary_region} => String
     #   * {Types::DescribeSecretResponse#replication_status #replication_status} => Array&lt;Types::ReplicationStatusType&gt;
+    #   * {Types::DescribeSecretResponse#cross_account_primary #cross_account_primary} => Types::CrossAccountPrimaryType
+    #   * {Types::DescribeSecretResponse#cross_account_replicas #cross_account_replicas} => Array&lt;Types::CrossAccountReplicaEntry&gt;
     #
     #
     # @example Example: To retrieve the details of a secret
@@ -1378,9 +1568,17 @@ module Aws::SecretsManager
     #   resp.replication_status #=> Array
     #   resp.replication_status[0].region #=> String
     #   resp.replication_status[0].kms_key_id #=> String
-    #   resp.replication_status[0].status #=> String, one of "InSync", "Failed", "InProgress"
+    #   resp.replication_status[0].status #=> String, one of "InSync", "Failed", "InProgress", "Pending", "Detached"
     #   resp.replication_status[0].status_message #=> String
     #   resp.replication_status[0].last_accessed_date #=> Time
+    #   resp.cross_account_primary.primary_secret_arn #=> String
+    #   resp.cross_account_primary.replication_status #=> String, one of "InSync", "Failed", "InProgress", "Pending", "Detached"
+    #   resp.cross_account_primary.status_message #=> String
+    #   resp.cross_account_replicas #=> Array
+    #   resp.cross_account_replicas[0].replica_secret_arn #=> String
+    #   resp.cross_account_replicas[0].replication_role_arn #=> String
+    #   resp.cross_account_replicas[0].replication_status #=> String, one of "InSync", "Failed", "InProgress", "Pending", "Detached"
+    #   resp.cross_account_replicas[0].status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DescribeSecret AWS API Documentation
     #
@@ -1388,6 +1586,97 @@ module Aws::SecretsManager
     # @param [Hash] params ({})
     def describe_secret(params = {}, options = {})
       req = build_request(:describe_secret, params)
+      req.send_request(options)
+    end
+
+    # Removes the link between a primary secret in your account and a
+    # cross-account replica secret, and stops replication to the replica
+    # secret. Call this operation on the primary secret. This action removes
+    # the replica association created by AssociateCrossAccountReplica.
+    #
+    # Disassociating the replica from the primary does not delete the
+    # replica secret or convert the replica secret to a standalone secret.
+    # The replica secret remains in the other account and its replication
+    # status changes to `Detached`. Secrets Manager no longer sends updates
+    # from the primary secret to the replica secret after disassociation. To
+    # convert a detached replica into a standalone secret, call
+    # StopReplicationToReplica on the replica secret.
+    #
+    # You must disassociate a cross-account replica before you call
+    # DeleteSecret for the primary secret. The DeleteSecret call fails if
+    # any replicas are still associated with the primary secret.
+    #
+    # Secrets Manager generates a CloudTrail log entry when you call this
+    # action. Do not include sensitive information in request parameters
+    # because it might be logged. For more information, see [Logging Secrets
+    # Manager events with CloudTrail][1].
+    #
+    # <b>Required permissions: </b>
+    # `secretsmanager:DisassociateCrossAccountReplica`. For more
+    # information, see [ IAM policy actions for Secrets Manager][2] and
+    # [Authentication and access control in Secrets Manager][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    #
+    # @option params [required, String] :secret_id
+    #   The ARN or name of the primary secret in your account.
+    #
+    #   For an ARN, we recommend that you specify a complete ARN rather than a
+    #   partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
+    #
+    # @option params [required, String] :cross_account_replica_arn
+    #   The ARN of the cross-account replica secret to unlink from the primary
+    #   secret.
+    #
+    # @return [Types::DisassociateCrossAccountReplicaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateCrossAccountReplicaResponse#arn #arn} => String
+    #   * {Types::DisassociateCrossAccountReplicaResponse#cross_account_replica_arn #cross_account_replica_arn} => String
+    #
+    #
+    # @example Example: To stop replicating a secret to another account from the primary account
+    #
+    #   # The following example, called from the primary account, removes the link between a primary secret and its cross-account
+    #   # replica and stops replication. The replica secret remains in the other account, now with a replication status of
+    #   # Detached.
+    #
+    #   resp = client.disassociate_cross_account_replica({
+    #     cross_account_replica_arn: "arn:aws:secretsmanager:us-west-2:222222222222:secret:MyReplicaSecret-a1b2c3", 
+    #     secret_id: "MyTestDatabaseSecret", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #     cross_account_replica_arn: "arn:aws:secretsmanager:us-west-2:222222222222:secret:MyReplicaSecret-a1b2c3", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_cross_account_replica({
+    #     secret_id: "SecretIdType", # required
+    #     cross_account_replica_arn: "SecretARNType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.cross_account_replica_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DisassociateCrossAccountReplica AWS API Documentation
+    #
+    # @overload disassociate_cross_account_replica(params = {})
+    # @param [Hash] params ({})
+    def disassociate_cross_account_replica(params = {}, options = {})
+      req = build_request(:disassociate_cross_account_replica, params)
       req.send_request(options)
     end
 
@@ -1524,11 +1813,18 @@ module Aws::SecretsManager
     #
     #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #
+    # @option params [String] :policy_name
+    #   The name of the resource policy to retrieve. If you don't specify
+    #   this field, Secrets Manager uses `default`. If you specify a name
+    #   other than `default` and no policy with that name exists, the
+    #   operation returns a `ResourceNotFoundException`.
+    #
     # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetResourcePolicyResponse#arn #arn} => String
     #   * {Types::GetResourcePolicyResponse#name #name} => String
     #   * {Types::GetResourcePolicyResponse#resource_policy #resource_policy} => String
+    #   * {Types::GetResourcePolicyResponse#policy_name #policy_name} => String
     #
     #
     # @example Example: To retrieve the resource-based policy attached to a secret
@@ -1543,6 +1839,7 @@ module Aws::SecretsManager
     #   {
     #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
     #     name: "MyTestDatabaseSecret", 
+    #     policy_name: "default", 
     #     resource_policy: "{\n\"Version\":\"2012-10-17\",\n\"Statement\":[{\n\"Effect\":\"Allow\",\n\"Principal\":{\n\"AWS\":\"arn:aws:iam::123456789012:root\"\n},\n\"Action\":\"secretsmanager:GetSecretValue\",\n\"Resource\":\"*\"\n}]\n}", 
     #   }
     #
@@ -1550,6 +1847,7 @@ module Aws::SecretsManager
     #
     #   resp = client.get_resource_policy({
     #     secret_id: "SecretIdType", # required
+    #     policy_name: "ResourcePolicyNameType",
     #   })
     #
     # @example Response structure
@@ -1557,6 +1855,7 @@ module Aws::SecretsManager
     #   resp.arn #=> String
     #   resp.name #=> String
     #   resp.resource_policy #=> String
+    #   resp.policy_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/GetResourcePolicy AWS API Documentation
     #
@@ -1695,11 +1994,110 @@ module Aws::SecretsManager
       req.send_request(options)
     end
 
+    # Lists the resource-based policies attached to a secret. The response
+    # contains only the names of the policies, not their contents. Secrets
+    # Manager lists `default` first, followed by any other policies in
+    # alphabetical order. To get the contents of a policy, use
+    # GetResourcePolicy. You can modify only the `default` policy.
+    #
+    # Secrets Manager generates a CloudTrail log entry when you call this
+    # action. Do not include sensitive information in request parameters
+    # because it might be logged. For more information, see [Logging Secrets
+    # Manager events with CloudTrail][1].
+    #
+    # <b>Required permissions: </b> `secretsmanager:ListResourcePolicies`.
+    # For more information, see [ IAM policy actions for Secrets Manager][2]
+    # and [Authentication and access control in Secrets Manager][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    #
+    # @option params [required, String] :secret_id
+    #   The ARN or name of the secret.
+    #
+    #   For an ARN, we recommend that you specify a complete ARN rather than a
+    #   partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
+    #
+    # @option params [Integer] :max_results
+    #   The number of results to include in the response. If you don't
+    #   specify this value, the service returns up to 100 results.
+    #
+    #   If there are more results available, in the response, Secrets Manager
+    #   includes `NextToken`. To get the next results, call
+    #   `ListResourcePolicies` again with the value from `NextToken`.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates where the output should continue from, if a
+    #   previous call did not show all results. To get the next results, call
+    #   `ListResourcePolicies` again with this value.
+    #
+    # @return [Types::ListResourcePoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourcePoliciesResponse#resource_policies #resource_policies} => Array&lt;Types::ResourcePolicySummary&gt;
+    #   * {Types::ListResourcePoliciesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list the resource-based policies attached to a secret
+    #
+    #   # The following example shows how to list the resource-based policies attached to a secret.
+    #
+    #   resp = client.list_resource_policies({
+    #     secret_id: "MyTestDatabaseSecret", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     resource_policies: [
+    #       {
+    #         policy_name: "default", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_policies({
+    #     secret_id: "SecretIdType", # required
+    #     max_results: 1,
+    #     next_token: "NextTokenType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_policies #=> Array
+    #   resp.resource_policies[0].policy_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ListResourcePolicies AWS API Documentation
+    #
+    # @overload list_resource_policies(params = {})
+    # @param [Hash] params ({})
+    def list_resource_policies(params = {}, options = {})
+      req = build_request(:list_resource_policies, params)
+      req.send_request(options)
+    end
+
     # Lists the versions of a secret. Secrets Manager uses staging labels to
     # indicate the different versions of a secret. For more information, see
     # [ Secrets Manager concepts: Versions][1].
     #
     # To list the secrets in the account, use ListSecrets.
+    #
+    # <note markdown="1"> `ListSecretVersionIds` only returns versions that contain a secret
+    # value. To see all version IDs that have staging labels attached,
+    # including ones without a secret value, call `DescribeSecret` and check
+    # `VersionIdsToStages`.
+    #
+    #  </note>
     #
     # Secrets Manager generates a CloudTrail log entry when you call this
     # action. Do not include sensitive information in request parameters
@@ -2022,6 +2420,12 @@ module Aws::SecretsManager
     #
     #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_examples.html
     #
+    # @option params [String] :policy_name
+    #   The name of the resource policy to attach. If you don't specify this
+    #   field, Secrets Manager uses `default`. You can only attach the
+    #   `default` policy; if you specify any other name, the operation returns
+    #   an `InvalidParameterException`.
+    #
     # @option params [Boolean] :block_public_policy
     #   Specifies whether to block resource-based policies that allow broad
     #   access to the secret, for example those that use a wildcard for the
@@ -2050,6 +2454,7 @@ module Aws::SecretsManager
     #
     #   * {Types::PutResourcePolicyResponse#arn #arn} => String
     #   * {Types::PutResourcePolicyResponse#name #name} => String
+    #   * {Types::PutResourcePolicyResponse#policy_name #policy_name} => String
     #
     #
     # @example Example: To add a resource-based policy to a secret
@@ -2065,6 +2470,7 @@ module Aws::SecretsManager
     #   {
     #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
     #     name: "MyTestDatabaseSecret", 
+    #     policy_name: "default", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -2072,6 +2478,7 @@ module Aws::SecretsManager
     #   resp = client.put_resource_policy({
     #     secret_id: "SecretIdType", # required
     #     resource_policy: "NonEmptyResourcePolicyType", # required
+    #     policy_name: "ResourcePolicyNameType",
     #     block_public_policy: false,
     #   })
     #
@@ -2079,6 +2486,7 @@ module Aws::SecretsManager
     #
     #   resp.arn #=> String
     #   resp.name #=> String
+    #   resp.policy_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/PutResourcePolicy AWS API Documentation
     #
@@ -2358,7 +2766,7 @@ module Aws::SecretsManager
     #   resp.replication_status #=> Array
     #   resp.replication_status[0].region #=> String
     #   resp.replication_status[0].kms_key_id #=> String
-    #   resp.replication_status[0].status #=> String, one of "InSync", "Failed", "InProgress"
+    #   resp.replication_status[0].status #=> String, one of "InSync", "Failed", "InProgress", "Pending", "Detached"
     #   resp.replication_status[0].status_message #=> String
     #   resp.replication_status[0].last_accessed_date #=> Time
     #
@@ -2456,7 +2864,7 @@ module Aws::SecretsManager
     #   resp.replication_status #=> Array
     #   resp.replication_status[0].region #=> String
     #   resp.replication_status[0].kms_key_id #=> String
-    #   resp.replication_status[0].status #=> String, one of "InSync", "Failed", "InProgress"
+    #   resp.replication_status[0].status #=> String, one of "InSync", "Failed", "InProgress", "Pending", "Detached"
     #   resp.replication_status[0].status_message #=> String
     #   resp.replication_status[0].last_accessed_date #=> Time
     #
@@ -2769,11 +3177,21 @@ module Aws::SecretsManager
       req.send_request(options)
     end
 
-    # Removes the link between the replica secret and the primary secret and
-    # promotes the replica to a primary secret in the replica Region.
+    # Removes the link between a replica secret and its primary secret, and
+    # stops replication to the replica. You call this operation from the
+    # replica account or Region. Depending on the type of replica, the
+    # behavior is:
     #
-    # You must call this operation from the Region in which you want to
-    # promote the replica to a primary secret.
+    # * **Cross-Region replica**: promotes the replica to a standalone
+    #   primary secret in the replica Region.
+    #
+    # * **Cross-account replica**: promotes the replica in your account to a
+    #   standalone secret and stops replication from its primary secret in
+    #   the other account. Secrets Manager updates the primary secret's
+    #   replication status to `Detached` for this replica.
+    #
+    # To stop cross-account replication from the primary account instead,
+    # use DisassociateCrossAccountReplica.
     #
     # Secrets Manager generates a CloudTrail log entry when you call this
     # action. Do not include sensitive information in request parameters
@@ -2781,9 +3199,11 @@ module Aws::SecretsManager
     # Manager events with CloudTrail][1].
     #
     # <b>Required permissions: </b>
-    # `secretsmanager:StopReplicationToReplica`. For more information, see [
-    # IAM policy actions for Secrets Manager][2] and [Authentication and
-    # access control in Secrets Manager][3].
+    # `secretsmanager:StopReplicationToReplica`. For cross-account replica
+    # secrets, you must also have `secretsmanager:DeleteResourcePolicy`
+    # permissions. For more information, see [ IAM policy actions for
+    # Secrets Manager][2] and [Authentication and access control in Secrets
+    # Manager][3].
     #
     #
     #
@@ -2792,13 +3212,31 @@ module Aws::SecretsManager
     # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
-    #   The name of the secret or the replica ARN. The replica ARN is the same
-    #   as the original primary secret ARN expect the Region is changed to the
-    #   replica Region.
+    #   The ARN or name of the replica secret.
+    #
+    #   For a cross-region replica, the replica ARN is the same as the
+    #   original primary secret ARN except that the Region is changed to the
+    #   replica Region. For a cross-account replica, this is the ARN or name
+    #   of the replica secret in your account.
     #
     # @return [Types::StopReplicationToReplicaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StopReplicationToReplicaResponse#arn #arn} => String
+    #
+    #
+    # @example Example: To stop cross-account replication from the replica account
+    #
+    #   # The following example, called from the replica account, unlinks a cross-account replica secret from its primary secret
+    #   # in another account and stops replication. The secret remains in the replica account as a standalone secret.
+    #
+    #   resp = client.stop_replication_to_replica({
+    #     secret_id: "arn:aws:secretsmanager:us-west-2:222222222222:secret:MyReplicaSecret-a1b2c3", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:222222222222:secret:MyReplicaSecret-a1b2c3", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3518,7 +3956,7 @@ module Aws::SecretsManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.146.0'
+      context[:gem_version] = '1.147.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

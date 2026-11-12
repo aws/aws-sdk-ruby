@@ -61,6 +61,20 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class AccountAffectedResource
+      attr_accessor identifier: ::String
+      attr_accessor type: ("EC2_INSTANCE" | "EBS_VOLUME" | "S3_BUCKET" | "IAM_ROLE" | "IAM_USER" | "IAM_ACCESS_KEY" | "LAMBDA_FUNCTION" | "EKS_CLUSTER" | "ECS_CLUSTER" | "KUBERNETES_WORKLOAD" | "RDS_INSTANCE" | "RDS_DB_USER" | "EC2_SECURITY_GROUP")
+      attr_accessor finding_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class AccountAnalysis
+      attr_accessor findings_summary: Types::FindingsSummary
+      attr_accessor tactic_coverage: ::Array[Types::TacticCoverage]
+      attr_accessor affected_resources: ::Array[Types::AccountAffectedResource]
+      SENSITIVE: []
+    end
+
     class AccountDetail
       attr_accessor account_id: ::String
       attr_accessor email: ::String
@@ -79,10 +93,29 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class AccountOverview
+      attr_accessor account_id: ::String
+      attr_accessor account_status: ::String
+      attr_accessor detector_id: ::String
+      attr_accessor region: ::String
+      attr_accessor delegated_admin_account_id: ::String
+      attr_accessor total_member_accounts: ::Integer
+      attr_accessor total_findings: ::Integer
+      attr_accessor affected_account_count: ::Integer
+      attr_accessor account_rankings: ::Array[Types::MemberAccountRanking]
+      SENSITIVE: []
+    end
+
     class AccountStatistics
       attr_accessor account_id: ::String
       attr_accessor last_generated_at: ::Time
       attr_accessor total_findings: ::Integer
+      SENSITIVE: []
+    end
+
+    class AccountSummary
+      attr_accessor account_id: ::String
+      attr_accessor finding_count: ::Integer
       SENSITIVE: []
     end
 
@@ -103,6 +136,12 @@ module Aws::GuardDuty
     class Activity
       attr_accessor type: ("API_CALL")
       attr_accessor api: Types::ApiCall
+      SENSITIVE: []
+    end
+
+    class ActivityWindow
+      attr_accessor first_seen_at: ::Time
+      attr_accessor last_seen_at: ::Time
       SENSITIVE: []
     end
 
@@ -147,8 +186,26 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class AffectedResource
+      attr_accessor identifier: ::String
+      attr_accessor type: ("EC2_INSTANCE" | "EBS_VOLUME" | "S3_BUCKET" | "IAM_ROLE" | "IAM_USER" | "IAM_ACCESS_KEY" | "LAMBDA_FUNCTION" | "EKS_CLUSTER" | "ECS_CLUSTER" | "KUBERNETES_WORKLOAD" | "RDS_INSTANCE" | "RDS_DB_USER" | "EC2_SECURITY_GROUP")
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
     class AgentDetails
       attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class AnalysisRecord
+      attr_accessor analysis_type: ("REPUTATION" | "THREAT_ASSESSMENT" | "RDS_THREAT_ASSESSMENT" | "KUBERNETES_POLICY_VIOLATION" | "S3_EXPOSURE" | "S3_ACTOR_CONTEXT" | "S3_PEN_TEST" | "PROCESS_LINEAGE" | "TREND" | "BASELINE")
+      attr_accessor threat_assessment: Types::InvestigationThreatAssessment
+      attr_accessor kubernetes_policy_violation: Types::KubernetesPolicyViolation
+      attr_accessor s3_analysis: Types::S3Analysis
+      attr_accessor processes: ::Array[Types::Process]
+      attr_accessor account_analysis: Types::InvestigationAccountAnalysis
+      attr_accessor indicators: ::Array[Types::InvestigationIndicator]
       SENSITIVE: []
     end
 
@@ -175,6 +232,14 @@ module Aws::GuardDuty
       attr_accessor service: ::String
       attr_accessor error: ::String
       attr_accessor user_agent: ::String
+      SENSITIVE: []
+    end
+
+    class ArchiveDistribution
+      attr_accessor archived_count: ::Integer
+      attr_accessor unarchived_count: ::Integer
+      attr_accessor archived_percentage: ::Float
+      attr_accessor unarchived_percentage: ::Float
       SENSITIVE: []
     end
 
@@ -210,6 +275,21 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class Attack
+      attr_accessor tactic: Types::ThreatReference
+      attr_accessor technique: Types::ThreatReference
+      attr_accessor findings: ::Array[Types::FindingReference]
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class AttackPhase
+      attr_accessor phase: ("Reconnaissance" | "Resource Development" | "Initial Access" | "Execution" | "Persistence" | "Privilege Escalation" | "Defense Evasion" | "Credential Access" | "Discovery" | "Lateral Movement" | "Collection" | "Command and Control" | "Exfiltration" | "Impact")
+      attr_accessor description: ::String
+      attr_accessor attacks: ::Array[Types::Attack]
+      SENSITIVE: []
+    end
+
     class AutonomousSystem
       attr_accessor name: ::String
       attr_accessor number: ::Integer
@@ -237,6 +317,13 @@ module Aws::GuardDuty
     class BadRequestException
       attr_accessor message: ::String
       attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class Baseline
+      attr_accessor total_findings: ::Integer
+      attr_accessor baseline_findings: ::Array[Types::FindingTypeClassification]
+      attr_accessor anomalous_findings: ::Array[Types::FindingTypeClassification]
       SENSITIVE: []
     end
 
@@ -363,6 +450,37 @@ module Aws::GuardDuty
     class ContinuousScanDetails
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CorrelatedFinding
+      attr_accessor finding_type: ::String
+      attr_accessor count: ::Integer
+      attr_accessor severity_max: ::Float
+      attr_accessor correlation_reasons: ::Array[("HIGH_SEVERITY" | "SAME_RESOURCE" | "SAME_BEHAVIOR")]
+      attr_accessor finding_ids: ::Array[::String]
+      attr_accessor shared_resources: ::Array[Types::SharedResource]
+      attr_accessor shared_behaviors: ::Array[Types::SharedBehavior]
+      SENSITIVE: []
+    end
+
+    class Countermeasure
+      attr_accessor defense_tactic: ("Isolate" | "Evict" | "Restore" | "Harden" | "Detect")
+      attr_accessor actions: ::Array[Types::CountermeasureAction]
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CountermeasureAction
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor priority: ("IMMEDIATE" | "SHORT_TERM" | "STRATEGIC")
+      attr_accessor defense_technique: ::String
+      attr_accessor mitigates: ::Array[::String]
+      attr_accessor cli_commands: ::Array[::String]
+      attr_accessor disposition_id: ::Integer
+      attr_accessor disposition: ("Isolated" | "Blocked" | "Deleted" | "Access Revoked" | "Logged")
+      attr_accessor affected_resources: ::Array[Types::AffectedResource]
       SENSITIVE: []
     end
 
@@ -877,6 +995,14 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class DetectionCoverage
+      attr_accessor protection_plans: ::Array[Types::ProtectionPlan]
+      attr_accessor foundational_data_sources: ::Array[("CLOUD_TRAIL" | "DNS_LOGS" | "FLOW_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "EKS_ADDON_MANAGEMENT" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")]
+      attr_accessor coverage_gaps: ::String
+      attr_accessor key_observation: ::String
+      SENSITIVE: []
+    end
+
     class DetectionRuleEc2Requirements
       attr_accessor min_agent_version: ::String
       SENSITIVE: []
@@ -997,6 +1123,25 @@ module Aws::GuardDuty
 
     class DisassociateMembersResponse
       attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class Distribution
+      attr_accessor dimension: ("SEVERITY" | "TYPE" | "RESOURCE" | "ATTACK_VECTOR" | "ARCHIVE")
+      attr_accessor total_findings: ::Integer
+      attr_accessor severity_breakdown: Types::SeverityBreakdown
+      attr_accessor finding_types: ::Array[Types::TypeDistribution]
+      attr_accessor top_finding_types: ::Array[Types::FindingTypeCount]
+      attr_accessor resources: ::Array[Types::ResourceDistribution]
+      attr_accessor attack_vectors: ::Array[Types::TacticCoverage]
+      attr_accessor archive: Types::ArchiveDistribution
+      SENSITIVE: []
+    end
+
+    class DnsContext
+      attr_accessor domain_suffix: ::String
+      attr_accessor other_domains: ::String
+      attr_accessor resolver_history: ::String
       SENSITIVE: []
     end
 
@@ -1159,6 +1304,14 @@ module Aws::GuardDuty
     class EnableOrganizationAdminAccountResponse < Aws::EmptyStructure
     end
 
+    class Enrichment
+      attr_accessor country_name: ::String
+      attr_accessor asn_org: ::String
+      attr_accessor threat_list_name: ::String
+      attr_accessor threat_name: ::String
+      SENSITIVE: []
+    end
+
     class Evidence
       attr_accessor threat_intelligence_details: ::Array[Types::ThreatIntelligenceDetail]
       SENSITIVE: []
@@ -1167,6 +1320,47 @@ module Aws::GuardDuty
     class FargateDetails
       attr_accessor issues: ::Array[::String]
       attr_accessor management_type: ("AUTO_MANAGED" | "MANUAL" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class FetchCriterion
+      attr_accessor field: ::String
+      attr_accessor condition: ("EQUALS" | "NOT_EQUALS" | "GREATER_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN" | "LESS_THAN_OR_EQUAL")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FetchQuery
+      attr_accessor criteria: ::Array[Types::FetchCriterion]
+      attr_accessor time_window: Types::FetchTimeWindow
+      attr_accessor row_limit: ::Integer
+      attr_accessor account_id: ::String
+      attr_accessor indicator: ::String
+      attr_accessor indicator_type: ("IP" | "DOMAIN" | "FILE")
+      attr_accessor finding_type: ::String
+      attr_accessor finding_id: ::String
+      SENSITIVE: [:indicator]
+    end
+
+    class FetchRecord
+      attr_accessor fetch_type: ("FINDINGS" | "DETECTOR" | "REPUTATION" | "FINDING_TYPE_DOCUMENTATION" | "CLOUD_TRAIL_RAW_EVENTS" | "RUNTIME_SIGNALS" | "MEMBER_ACCOUNTS")
+      attr_accessor query: Types::FetchQuery
+      attr_accessor result: Types::FetchResult
+      SENSITIVE: []
+    end
+
+    class FetchResult
+      attr_accessor item_ids: ::Array[::String]
+      attr_accessor total_count: ::Integer
+      attr_accessor features: ::Array[Types::InvestigationDetectorFeatureConfiguration]
+      attr_accessor verdict: ("THREAT" | "BENIGN" | "NEUTRAL")
+      attr_accessor documentation: Types::FindingTypeDocumentation
+      SENSITIVE: []
+    end
+
+    class FetchTimeWindow
+      attr_accessor started_at: ::Time
+      attr_accessor duration_in_minutes: ::Integer
       SENSITIVE: []
     end
 
@@ -1214,6 +1408,22 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class FindingDetail
+      attr_accessor finding_id: ::String
+      attr_accessor finding_type: ::String
+      attr_accessor severity: ::String
+      attr_accessor account_id: ::String
+      attr_accessor region: ::String
+      attr_accessor activity_window: Types::ActivityWindow
+      SENSITIVE: []
+    end
+
+    class FindingReference
+      attr_accessor finding_type: ::String
+      attr_accessor uid: ::String
+      SENSITIVE: []
+    end
+
     class FindingStatistics
       attr_accessor count_by_severity: ::Hash[::String, ::Integer]
       attr_accessor grouped_by_account: ::Array[Types::AccountStatistics]
@@ -1224,10 +1434,43 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class FindingTypeClassification
+      attr_accessor finding_type: ::String
+      attr_accessor classification: ::String
+      attr_accessor count: ::Integer
+      attr_accessor percentage: ::Float
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class FindingTypeCount
+      attr_accessor finding_type: ::String
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
+    class FindingTypeDocumentation
+      attr_accessor description: ::String
+      attr_accessor severity: ::String
+      attr_accessor feature: ::String
+      attr_accessor full_description: ::String
+      attr_accessor remediation: ::String
+      attr_accessor learn_more_links: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class FindingTypeStatistics
       attr_accessor finding_type: ::String
       attr_accessor last_generated_at: ::Time
       attr_accessor total_findings: ::Integer
+      SENSITIVE: []
+    end
+
+    class FindingsSummary
+      attr_accessor total_findings: ::Integer
+      attr_accessor severity_breakdown: Types::SeverityBreakdown
+      attr_accessor top_finding_types: ::Array[Types::FindingTypeCount]
+      attr_accessor by_time_window: ::Array[Types::TimeWindowGroup]
       SENSITIVE: []
     end
 
@@ -1386,6 +1629,7 @@ module Aws::GuardDuty
     class GetInvestigationRequest
       attr_accessor detector_id: ::String
       attr_accessor investigation_id: ::String
+      attr_accessor summary_format: ("STRING" | "STRUCTURED")
       SENSITIVE: []
     end
 
@@ -1664,15 +1908,153 @@ module Aws::GuardDuty
       attr_accessor risk: ::String
       attr_accessor confidence: ("Unknown" | "Low" | "Medium" | "High")
       attr_accessor summary: ::String
+      attr_accessor summary_data: Types::InvestigationSummaryData
+      attr_accessor scope: Types::InvestigationScope
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor error: ::String
       SENSITIVE: []
     end
 
+    class InvestigationAccountAnalysis
+      attr_accessor trend: Types::Trend
+      attr_accessor baseline: Types::Baseline
+      SENSITIVE: []
+    end
+
+    class InvestigationActor
+      attr_accessor access_key_id: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor user_name: ::String
+      attr_accessor user_type: ::String
+      attr_accessor user_agent: ::String
+      SENSITIVE: []
+    end
+
+    class InvestigationDetectorFeatureConfiguration
+      attr_accessor name: ("CLOUD_TRAIL" | "DNS_LOGS" | "FLOW_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "EKS_ADDON_MANAGEMENT" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class InvestigationEc2Instance
+      attr_accessor instance_id: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor instance_state: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor private_ip_address: ::String
+      attr_accessor public_ip: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor image_id: ::String
+      attr_accessor launched_at: ::Time
+      SENSITIVE: [:private_ip_address]
+    end
+
+    class InvestigationEcsCluster
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class InvestigationEksCluster
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ::String
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class InvestigationFilterCondition
+      attr_accessor equals: ::Array[::String]
+      attr_accessor not_equals: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InvestigationFilterCriteria
+      attr_accessor criterion: ::Hash[("STATUS" | "RISK_LEVEL" | "CONFIDENCE" | "FINDING_ID" | "INVESTIGATION_TYPE"), Types::InvestigationFilterCondition]
+      SENSITIVE: []
+    end
+
+    class InvestigationIndicator
+      attr_accessor value: ::String
+      attr_accessor type: ("IP" | "DOMAIN" | "FILE")
+      SENSITIVE: [:value]
+    end
+
+    class InvestigationKubernetesWorkload
+      attr_accessor workload_type: ::String
+      attr_accessor workload_name: ::String
+      attr_accessor containers: ::String
+      attr_accessor volumes: ::String
+      attr_accessor security_context: ::String
+      SENSITIVE: []
+    end
+
+    class InvestigationMalwareScan
+      attr_accessor scan_id: ::String
+      attr_accessor scan_type: ("BACKUP_INITIATED" | "ON_DEMAND" | "GUARDDUTY_INITIATED")
+      attr_accessor scan_category: ("FULL_SCAN" | "INCREMENTAL_SCAN")
+      attr_accessor trigger_finding_id: ::String
+      attr_accessor engine_sources: ::String
+      attr_accessor scan_started_at: ::Time
+      attr_accessor scan_completed_at: ::Time
+      attr_accessor files_scanned: ::Integer
+      attr_accessor gigabytes_scanned: ::Float
+      attr_accessor volumes_scanned: ::Integer
+      attr_accessor infected_file_count: ::Integer
+      attr_accessor resource_type: ::String
+      attr_accessor resource_identifier: ::String
+      attr_accessor highest_severity: ::String
+      attr_accessor highest_severity_threat_name: ::String
+      attr_accessor unique_threat_count: ::Integer
+      attr_accessor total_infected_items: ::Integer
+      attr_accessor threats: ::Array[Types::MalwareThreat]
+      SENSITIVE: []
+    end
+
     class InvestigationMetadata
       attr_accessor version: ::String
       attr_accessor product: Types::Product
+      SENSITIVE: []
+    end
+
+    class InvestigationRecord
+      attr_accessor record_id: ::String
+      attr_accessor type: ("OBSERVATION" | "ANALYSIS" | "UPDATE" | "FETCH" | "METADATA")
+      attr_accessor title: ::String
+      attr_accessor narrative: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor supporting_data: Types::SupportingData
+      SENSITIVE: []
+    end
+
+    class InvestigationResource
+      attr_accessor uid: ::String
+      attr_accessor name: ::String
+      attr_accessor resource_type: ("EC2_INSTANCE" | "EBS_VOLUME" | "S3_BUCKET" | "IAM_ROLE" | "IAM_USER" | "IAM_ACCESS_KEY" | "LAMBDA_FUNCTION" | "EKS_CLUSTER" | "ECS_CLUSTER" | "KUBERNETES_WORKLOAD" | "RDS_INSTANCE" | "RDS_DB_USER" | "EC2_SECURITY_GROUP")
+      attr_accessor data: Types::InvestigationResourceData
+      SENSITIVE: []
+    end
+
+    class InvestigationResourceData
+      attr_accessor ec2_instance: Types::InvestigationEc2Instance
+      attr_accessor lambda_function: Types::LambdaFunction
+      attr_accessor rds_db_instance: Types::RdsDbInstance
+      attr_accessor rds_db_user: Types::RdsDbUser
+      attr_accessor eks_cluster: Types::InvestigationEksCluster
+      attr_accessor ecs_cluster: Types::InvestigationEcsCluster
+      SENSITIVE: []
+    end
+
+    class InvestigationScope
+      attr_accessor investigation_type: ("FINDING" | "ACCOUNT" | "ORGANIZATION")
+      attr_accessor finding_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor admin_account_id: ::String
+      attr_accessor query_time_window: Types::QueryTimeWindow
       SENSITIVE: []
     end
 
@@ -1689,9 +2071,35 @@ module Aws::GuardDuty
       attr_accessor risk_level: ("Info" | "Low" | "Medium" | "High" | "Critical")
       attr_accessor confidence: ("Unknown" | "Low" | "Medium" | "High")
       attr_accessor title: ::String
+      attr_accessor investigation_type: ("FINDING" | "ACCOUNT" | "ORGANIZATION")
+      attr_accessor finding_id: ::String
       attr_accessor account_id: ::String
+      attr_accessor admin_account_id: ::String
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class InvestigationSummaryData
+      attr_accessor finding_type: ::String
+      attr_accessor threat_assessment: Types::ThreatAssessment
+      attr_accessor countermeasures: ::Array[Types::Countermeasure]
+      attr_accessor account_analysis: Types::AccountAnalysis
+      attr_accessor organization_analysis: Types::OrganizationAnalysis
+      attr_accessor key_observations: Types::KeyObservations
+      attr_accessor recommendations: ::Array[Types::Recommendation]
+      SENSITIVE: []
+    end
+
+    class InvestigationThreatAssessment
+      attr_accessor reputation: Types::Reputation
+      attr_accessor threat_confidence: ("VERY_HIGH" | "HIGH" | "MEDIUM" | "LOW")
+      attr_accessor classification: ::String
+      attr_accessor assessment: ::String
+      attr_accessor authentication_context: ::String
+      attr_accessor rds_control_plane_activity: ::String
+      attr_accessor ip_account_activity: ::String
+      attr_accessor credential_compromise: ::String
       SENSITIVE: []
     end
 
@@ -1727,6 +2135,46 @@ module Aws::GuardDuty
     class ItemPath
       attr_accessor nested_item_path: ::String
       attr_accessor hash: ::String
+      SENSITIVE: []
+    end
+
+    class KeyObservations
+      attr_accessor title: ::String
+      attr_accessor narrative: ::String
+      attr_accessor observations: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class KubernetesActivity
+      attr_accessor api_call: Types::KubernetesApiCall
+      attr_accessor anomaly: Types::KubernetesAnomaly
+      attr_accessor workload: Types::InvestigationKubernetesWorkload
+      attr_accessor enrichment: Types::Enrichment
+      SENSITIVE: []
+    end
+
+    class KubernetesAnomaly
+      attr_accessor unusual_behavior: ::String
+      attr_accessor baseline_context: ::String
+      attr_accessor anomaly_score: ::String
+      attr_accessor training_period: ::String
+      SENSITIVE: []
+    end
+
+    class KubernetesApiCall
+      attr_accessor cluster_name: ::String
+      attr_accessor username: ::String
+      attr_accessor user_groups: ::String
+      attr_accessor user_id: ::String
+      attr_accessor verb: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor request_uri: ::String
+      attr_accessor status_code: ::Integer
+      attr_accessor source_ips: ::String
+      attr_accessor user_agent: ::String
+      attr_accessor event_count: ::Integer
       SENSITIVE: []
     end
 
@@ -1781,6 +2229,16 @@ module Aws::GuardDuty
       attr_accessor resource: ::String
       attr_accessor namespace: ::String
       attr_accessor allowed: bool
+      SENSITIVE: []
+    end
+
+    class KubernetesPolicyViolation
+      attr_accessor violation_type: ::String
+      attr_accessor affected_resource: ::String
+      attr_accessor subject: ::String
+      attr_accessor granted_access: ::String
+      attr_accessor exposure_vector: ::String
+      attr_accessor misconfiguration_impact: ::String
       SENSITIVE: []
     end
 
@@ -1840,6 +2298,18 @@ module Aws::GuardDuty
       attr_accessor role: ::String
       attr_accessor vpc_config: Types::VpcConfig
       attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class LambdaFunction
+      attr_accessor function_name: ::String
+      attr_accessor function_arn: ::String
+      attr_accessor function_version: ::String
+      attr_accessor role: ::String
+      attr_accessor description: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor vpc_configuration_summary: ::String
       SENSITIVE: []
     end
 
@@ -1964,8 +2434,26 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class ListInvestigationRecordsRequest
+      attr_accessor detector_id: ::String
+      attr_accessor investigation_id: ::String
+      attr_accessor record_types: ::Array[("OBSERVATION" | "ANALYSIS" | "UPDATE" | "FETCH" | "METADATA")]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInvestigationRecordsResponse
+      attr_accessor investigation_id: ::String
+      attr_accessor status: ("RUNNING" | "COMPLETED" | "FAILED")
+      attr_accessor records: ::Array[Types::InvestigationRecord]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListInvestigationsRequest
       attr_accessor detector_id: ::String
+      attr_accessor filter_criteria: Types::InvestigationFilterCriteria
       attr_accessor sort_criteria: Types::InvestigationSortCriteria
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -2199,6 +2687,14 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class MalwareThreat
+      attr_accessor name: ::String
+      attr_accessor severity: ::String
+      attr_accessor infected_file_count: ::Integer
+      attr_accessor sample_files: ::String
+      SENSITIVE: []
+    end
+
     class Master
       attr_accessor account_id: ::String
       attr_accessor invitation_id: ::String
@@ -2217,6 +2713,15 @@ module Aws::GuardDuty
       attr_accessor updated_at: ::String
       attr_accessor administrator_id: ::String
       SENSITIVE: [:email]
+    end
+
+    class MemberAccountRanking
+      attr_accessor rank: ::Integer
+      attr_accessor account_id: ::String
+      attr_accessor finding_count: ::Integer
+      attr_accessor risk_level: ("Info" | "Low" | "Medium" | "High" | "Critical")
+      attr_accessor risk_rationale: ::String
+      SENSITIVE: []
     end
 
     class MemberAdditionalConfiguration
@@ -2256,8 +2761,40 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class MetadataRecord
+      attr_accessor total_time_milliseconds: ::Integer
+      SENSITIVE: []
+    end
+
     class ModelDetail
       attr_accessor model_id: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkActivity
+      attr_accessor protocol: ::String
+      attr_accessor direction: ::String
+      attr_accessor method: ::String
+      attr_accessor blocked: ::String
+      attr_accessor platform: ::String
+      attr_accessor ports: Types::NetworkPorts
+      attr_accessor traffic: Types::NetworkTraffic
+      attr_accessor anomaly: Types::NetworkAnomaly
+      attr_accessor dns: Types::DnsContext
+      attr_accessor counts: Types::NetworkCounts
+      attr_accessor enrichment: Types::Enrichment
+      SENSITIVE: []
+    end
+
+    class NetworkAnomaly
+      attr_accessor baseline_bytes: ::String
+      attr_accessor deviation: ::String
+      attr_accessor profile_age_days: ::Integer
+      attr_accessor remote_service: ::String
+      attr_accessor remote_region: ::String
+      attr_accessor duration: ::String
+      attr_accessor reset_ratio: ::String
+      attr_accessor target_host_count: ::Integer
       SENSITIVE: []
     end
 
@@ -2275,6 +2812,14 @@ module Aws::GuardDuty
       attr_accessor local_network_interface: ::String
       attr_accessor remote_ip_details: Types::RemoteIpDetails
       attr_accessor remote_port_details: Types::RemotePortDetails
+      SENSITIVE: []
+    end
+
+    class NetworkCounts
+      attr_accessor request_count: ::Integer
+      attr_accessor total_attempts: ::Integer
+      attr_accessor suspicious_attempts: ::Integer
+      attr_accessor reset_attempts: ::Integer
       SENSITIVE: []
     end
 
@@ -2311,9 +2856,53 @@ module Aws::GuardDuty
       SENSITIVE: [:private_ip_address]
     end
 
+    class NetworkPorts
+      attr_accessor target_port: ::String
+      attr_accessor remote_port: ::String
+      attr_accessor resolver_port: ::String
+      attr_accessor ports: ::String
+      attr_accessor ports_used: ::String
+      attr_accessor port_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class NetworkTraffic
+      attr_accessor bytes_sent: ::Integer
+      attr_accessor bytes_received: ::Integer
+      SENSITIVE: []
+    end
+
+    class ObservationRecord
+      attr_accessor observation_type: ("FINDING_DETAIL" | "RESOURCE" | "NETWORK_ACTIVITY" | "RDS_LOGIN_ACTIVITY" | "S3_ACTIVITY" | "KUBERNETES_ACTIVITY" | "MALWARE_SCAN" | "RELATED_FINDINGS" | "DETECTION_COVERAGE" | "ACCOUNT_OVERVIEW" | "RECOMMENDATION" | "RUNTIME_SIGNALS" | "DISTRIBUTION" | "REPRESENTATIVE_RESOURCE")
+      attr_accessor finding_detail: Types::FindingDetail
+      attr_accessor resource: Types::InvestigationResource
+      attr_accessor network_activity: Types::NetworkActivity
+      attr_accessor rds_login_activity: Types::RdsLoginActivity
+      attr_accessor s3_activity: Types::S3Activity
+      attr_accessor kubernetes_activity: Types::KubernetesActivity
+      attr_accessor malware_scan: Types::InvestigationMalwareScan
+      attr_accessor related_findings: Types::RelatedFindings
+      attr_accessor detection_coverage: Types::DetectionCoverage
+      attr_accessor account_overview: Types::AccountOverview
+      attr_accessor recommendations: ::Array[Types::Recommendation]
+      attr_accessor runtime_signals: Types::RuntimeSignals
+      attr_accessor distribution: Types::Distribution
+      attr_accessor representative_resources: ::Array[Types::RepresentativeFinding]
+      attr_accessor indicators: ::Array[Types::InvestigationIndicator]
+      SENSITIVE: []
+    end
+
     class Observations
       attr_accessor text: ::Array[::String]
       attr_accessor number: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class ObservedFindingType
+      attr_accessor finding_type: ::String
+      attr_accessor count: ::Integer
+      attr_accessor severity_max: ::Float
+      attr_accessor shared_resources: ::Array[Types::SharedResource]
       SENSITIVE: []
     end
 
@@ -2334,6 +2923,12 @@ module Aws::GuardDuty
     class OrganizationAdditionalConfigurationResult
       attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT" | "RDS_DATA_RISK")
       attr_accessor auto_enable: ("NEW" | "NONE" | "ALL")
+      SENSITIVE: []
+    end
+
+    class OrganizationAnalysis
+      attr_accessor findings_summary: Types::OrganizationFindingsSummary
+      attr_accessor account_breakdown: ::Array[Types::AccountSummary]
       SENSITIVE: []
     end
 
@@ -2391,6 +2986,16 @@ module Aws::GuardDuty
     class OrganizationFeatureStatisticsAdditionalConfiguration
       attr_accessor name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT" | "RDS_DATA_RISK")
       attr_accessor enabled_accounts_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class OrganizationFindingsSummary
+      attr_accessor total_findings: ::Integer
+      attr_accessor severity_breakdown: Types::SeverityBreakdown
+      attr_accessor top_finding_types: ::Array[Types::FindingTypeCount]
+      attr_accessor by_time_window: ::Array[Types::TimeWindowGroup]
+      attr_accessor total_account_count: ::Integer
+      attr_accessor affected_account_count: ::Integer
       SENSITIVE: []
     end
 
@@ -2483,6 +3088,15 @@ module Aws::GuardDuty
       SENSITIVE: [:private_ip_address]
     end
 
+    class Process
+      attr_accessor uuid: ::String
+      attr_accessor name: ::String
+      attr_accessor path: ::String
+      attr_accessor parent_uuid: ::String
+      attr_accessor findings: ::Array[Types::FindingReference]
+      SENSITIVE: []
+    end
+
     class ProcessDetails
       attr_accessor name: ::String
       attr_accessor executable_path: ::String
@@ -2512,6 +3126,12 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class ProtectionPlan
+      attr_accessor name: ("CLOUD_TRAIL" | "DNS_LOGS" | "FLOW_LOGS" | "S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "EKS_RUNTIME_MONITORING" | "EKS_ADDON_MANAGEMENT" | "LAMBDA_NETWORK_LOGS" | "RUNTIME_MONITORING" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class PublicAccess
       attr_accessor permission_configuration: Types::PermissionConfiguration
       attr_accessor effective_permission: ::String
@@ -2526,6 +3146,22 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class QueryTimeWindow
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class RdsDbInstance
+      attr_accessor db_instance_identifier: ::String
+      attr_accessor db_cluster_identifier: ::String
+      attr_accessor db_instance_arn: ::String
+      attr_accessor dbi_resource_id: ::String
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      SENSITIVE: []
+    end
+
     class RdsDbInstanceDetails
       attr_accessor db_instance_identifier: ::String
       attr_accessor engine: ::String
@@ -2534,6 +3170,15 @@ module Aws::GuardDuty
       attr_accessor db_instance_arn: ::String
       attr_accessor dbi_resource_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class RdsDbUser
+      attr_accessor user: ::String
+      attr_accessor application: ::String
+      attr_accessor database: ::String
+      attr_accessor auth_method: ::String
+      attr_accessor ssl: ::String
       SENSITIVE: []
     end
 
@@ -2557,9 +3202,28 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class RdsLoginActivity
+      attr_accessor outcome: ::String
+      attr_accessor rate: ::String
+      attr_accessor anomaly_context: ::String
+      attr_accessor login_count: ::Integer
+      attr_accessor activity_window: Types::ActivityWindow
+      attr_accessor enrichment: Types::Enrichment
+      SENSITIVE: []
+    end
+
     class RdsLoginAttemptAction
       attr_accessor remote_ip_details: Types::RemoteIpDetails
       attr_accessor login_attributes: ::Array[Types::LoginAttribute]
+      SENSITIVE: []
+    end
+
+    class Recommendation
+      attr_accessor title: ::String
+      attr_accessor rationale: ::String
+      attr_accessor category: ("ENABLE_PROTECTION" | "FURTHER_INVESTIGATION" | "SUPPRESSION_RULE" | "HARDENING" | "MONITORING")
+      attr_accessor priority: ("IMMEDIATE" | "SHORT_TERM" | "STRATEGIC")
+      attr_accessor cli_commands: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -2573,6 +3237,12 @@ module Aws::GuardDuty
       attr_accessor recovery_point_arn: ::String
       attr_accessor backup_vault_name: ::String
       attr_accessor continuous_scan_details: Types::ScanConfigurationContinuousScanDetails
+      SENSITIVE: []
+    end
+
+    class RelatedFindings
+      attr_accessor correlated: ::Array[Types::CorrelatedFinding]
+      attr_accessor observed: ::Array[Types::ObservedFindingType]
       SENSITIVE: []
     end
 
@@ -2596,6 +3266,23 @@ module Aws::GuardDuty
     class RemotePortDetails
       attr_accessor port: ::Integer
       attr_accessor port_name: ::String
+      SENSITIVE: []
+    end
+
+    class RepresentativeFinding
+      attr_accessor resource_type: ::String
+      attr_accessor identifier: ::String
+      attr_accessor finding_id: ::String
+      attr_accessor finding_count: ::Integer
+      attr_accessor risk_level: ("Info" | "Low" | "Medium" | "High" | "Critical")
+      attr_accessor risk_rationale: ::String
+      SENSITIVE: []
+    end
+
+    class Reputation
+      attr_accessor finding_time_disposition: ::String
+      attr_accessor current_disposition: ::String
+      attr_accessor reputation_comparison: ::String
       SENSITIVE: []
     end
 
@@ -2644,6 +3331,13 @@ module Aws::GuardDuty
 
     class ResourceDetails
       attr_accessor instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceDistribution
+      attr_accessor resource_type: ::String
+      attr_accessor identifier: ::String
+      attr_accessor count: ::Integer
       SENSITIVE: []
     end
 
@@ -2751,6 +3445,42 @@ module Aws::GuardDuty
     class RuntimeDetails
       attr_accessor process: Types::ProcessDetails
       attr_accessor context: Types::RuntimeContext
+      SENSITIVE: []
+    end
+
+    class RuntimeSignals
+      attr_accessor signal_groups: ::Array[Types::SignalGroup]
+      attr_accessor key_observation: ::String
+      SENSITIVE: []
+    end
+
+    class S3Activity
+      attr_accessor api: ::String
+      attr_accessor affected_bucket: ::String
+      attr_accessor other_s3_activity: ::String
+      attr_accessor non_s3_activity: ::String
+      attr_accessor session_assessment: ::String
+      attr_accessor event_count: ::Integer
+      attr_accessor actor: Types::InvestigationActor
+      attr_accessor source_ip: ::String
+      attr_accessor enrichment: Types::Enrichment
+      attr_accessor activity_window: Types::ActivityWindow
+      SENSITIVE: []
+    end
+
+    class S3Analysis
+      attr_accessor finding_subtype: ::String
+      attr_accessor effective_permission: ::String
+      attr_accessor block_public_access_settings: ::String
+      attr_accessor exposure: ::String
+      attr_accessor user_agent: ::String
+      attr_accessor user_agent_classification: ::String
+      attr_accessor source_ip: ::String
+      attr_accessor ip_reputation: ::String
+      attr_accessor actor_assessment: ::String
+      attr_accessor s3_api_activity: ::String
+      attr_accessor source_context: ::String
+      attr_accessor authorization_assessment: ::String
       SENSITIVE: []
     end
 
@@ -3006,10 +3736,31 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class SeverityBreakdown
+      attr_accessor critical: ::Integer
+      attr_accessor high: ::Integer
+      attr_accessor medium: ::Integer
+      attr_accessor low: ::Integer
+      attr_accessor info: ::Integer
+      SENSITIVE: []
+    end
+
     class SeverityStatistics
       attr_accessor last_generated_at: ::Time
       attr_accessor severity: ::Float
       attr_accessor total_findings: ::Integer
+      SENSITIVE: []
+    end
+
+    class SharedBehavior
+      attr_accessor path: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SharedResource
+      attr_accessor resource_type: ::String
+      attr_accessor identifier: ::String
       SENSITIVE: []
     end
 
@@ -3029,6 +3780,13 @@ module Aws::GuardDuty
       attr_accessor endpoint_ids: ::Array[::String]
       attr_accessor signal_indicators: ::Array[Types::Indicator]
       attr_accessor activities: ::Array[Types::Activity]
+      SENSITIVE: []
+    end
+
+    class SignalGroup
+      attr_accessor finding_type: ::String
+      attr_accessor severity: ::Float
+      attr_accessor count: ::Integer
       SENSITIVE: []
     end
 
@@ -3079,6 +3837,34 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class SupportingData
+      attr_accessor fetch: Types::FetchRecord
+      attr_accessor analysis: Types::AnalysisRecord
+      attr_accessor observation: Types::ObservationRecord
+      attr_accessor metadata: Types::MetadataRecord
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Fetch < SupportingData
+      end
+      class Analysis < SupportingData
+      end
+      class Observation < SupportingData
+      end
+      class Metadata < SupportingData
+      end
+      class Unknown < SupportingData
+      end
+    end
+
+    class TacticCoverage
+      attr_accessor phase: ("Reconnaissance" | "Resource Development" | "Initial Access" | "Execution" | "Persistence" | "Privilege Escalation" | "Defense Evasion" | "Credential Access" | "Discovery" | "Lateral Movement" | "Collection" | "Command and Control" | "Exfiltration" | "Impact")
+      attr_accessor finding_count: ::Integer
+      attr_accessor finding_types: ::Array[::String]
+      attr_accessor techniques: ::Array[Types::TechniqueCoverage]
+      SENSITIVE: []
+    end
+
     class Tag
       attr_accessor key: ::String
       attr_accessor value: ::String
@@ -3094,6 +3880,13 @@ module Aws::GuardDuty
     class TagResourceResponse < Aws::EmptyStructure
     end
 
+    class TechniqueCoverage
+      attr_accessor technique: Types::ThreatReference
+      attr_accessor finding_count: ::Integer
+      attr_accessor finding_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class Threat
       attr_accessor name: ::String
       attr_accessor source: ::String
@@ -3101,6 +3894,12 @@ module Aws::GuardDuty
       attr_accessor count: ::Integer
       attr_accessor hash: ::String
       attr_accessor item_details: ::Array[Types::ItemDetails]
+      SENSITIVE: []
+    end
+
+    class ThreatAssessment
+      attr_accessor attack_progression: ::Array[Types::AttackPhase]
+      attr_accessor threat_actor_profile: ::String
       SENSITIVE: []
     end
 
@@ -3119,8 +3918,21 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class ThreatReference
+      attr_accessor name: ::String
+      attr_accessor uid: ::String
+      SENSITIVE: []
+    end
+
     class ThreatsDetectedItemCount
       attr_accessor files: ::Integer
+      SENSITIVE: []
+    end
+
+    class TimeWindowGroup
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor finding_count: ::Integer
       SENSITIVE: []
     end
 
@@ -3130,10 +3942,27 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class Trend
+      attr_accessor granularity: ("DAY" | "WEEK" | "MONTH")
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor total_findings: ::Integer
+      attr_accessor by_time_window: ::Array[Types::TimeWindowGroup]
+      SENSITIVE: []
+    end
+
     class TriggerDetails
       attr_accessor guard_duty_finding_id: ::String
       attr_accessor description: ::String
       attr_accessor trigger_type: ("BACKUP" | "GUARDDUTY")
+      SENSITIVE: []
+    end
+
+    class TypeDistribution
+      attr_accessor finding_type: ::String
+      attr_accessor count: ::Integer
+      attr_accessor percentage: ::Float
+      attr_accessor dominant_severity: ::String
       SENSITIVE: []
     end
 

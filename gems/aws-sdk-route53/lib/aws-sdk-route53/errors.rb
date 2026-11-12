@@ -58,6 +58,7 @@ module Aws::Route53
   # * {InvalidKeySigningKeyName}
   # * {InvalidKeySigningKeyStatus}
   # * {InvalidPaginationToken}
+  # * {InvalidResourceRecordSetProtectionBatch}
   # * {InvalidSigningStatus}
   # * {InvalidTrafficPolicyDocument}
   # * {InvalidVPCId}
@@ -81,6 +82,7 @@ module Aws::Route53
   # * {NoSuchTrafficPolicyInstance}
   # * {NotAuthorizedException}
   # * {PriorRequestNotComplete}
+  # * {ProtectionAlreadyExists}
   # * {PublicZoneVPCAssociation}
   # * {QueryLoggingConfigAlreadyExists}
   # * {ThrottlingException}
@@ -573,6 +575,26 @@ module Aws::Route53
       end
     end
 
+    class InvalidResourceRecordSetProtectionBatch < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::InvalidResourceRecordSetProtectionBatch] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def errors
+        @data[:errors]
+      end
+    end
+
     class InvalidSigningStatus < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -915,6 +937,26 @@ module Aws::Route53
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class ProtectionAlreadyExists < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::ProtectionAlreadyExists] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def errors
+        @data[:errors]
       end
     end
 

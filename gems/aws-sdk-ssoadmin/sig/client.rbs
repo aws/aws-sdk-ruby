@@ -441,6 +441,7 @@ module Aws
         def primary_region: () -> ::String
         def regions: () -> ::Array[Types::RegionMetadata]
         def encryption_configuration_details: () -> Types::EncryptionConfigurationDetails
+        def network_configuration_details: () -> Types::NetworkConfigurationInfo
         def permission_sets_enabled: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#describe_instance-instance_method
@@ -1085,7 +1086,13 @@ module Aws
                                key_type: ("AWS_OWNED_KMS_KEY" | "CUSTOMER_MANAGED_KEY"),
                                kms_key_arn: ::String?
                              },
-                             ?permission_sets_enabled: bool
+                             ?permission_sets_enabled: bool,
+                             ?network_configuration: {
+                               vpce_access_required: bool,
+                               restrict_source_vpcs: Array[::String]?,
+                               allow_source_ips: Array[::String]?,
+                               exclude_application_arns: Array[::String]?
+                             }
                            ) -> _UpdateInstanceResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInstanceResponseSuccess
 

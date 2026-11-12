@@ -489,8 +489,9 @@ module Aws::EMRContainers
     #
     # @!attribute [rw] scheduler_configuration
     #   The scheduler configuration (concurrency and queue limits) to apply
-    #   to the virtual cluster at creation time. When omitted, no limits are
-    #   applied.
+    #   to the virtual cluster at creation time. If you omit this field, the
+    #   service applies a default limit of 1,000 concurrent job runs and
+    #   does not limit queue depth.
     #   @return [Types::SchedulerConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/CreateVirtualClusterRequest AWS API Documentation
@@ -1864,8 +1865,9 @@ module Aws::EMRContainers
 
     # The scheduler configuration for a virtual cluster on Amazon EMR on
     # EKS. It controls how many job runs can run concurrently and how many
-    # can wait in the queue. When not set, no concurrency or queue limits
-    # are applied.
+    # can wait in the queue. If you omit this configuration, the service
+    # applies a default limit of 1,000 concurrent job runs and does not
+    # limit queue depth.
     #
     # @!attribute [rw] max_in_queue_job_runs
     #   The maximum number of job runs that can be in the `PENDING` or
@@ -1879,7 +1881,8 @@ module Aws::EMRContainers
     #   The maximum number of job runs that can be in the `RUNNING` state at
     #   any time for the virtual cluster. As running slots free up, queued
     #   job runs start automatically. If you omit this field, the service
-    #   applies no concurrency limit.
+    #   applies a default limit of 1,000 concurrent job runs to the virtual
+    #   cluster.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/SchedulerConfiguration AWS API Documentation
@@ -2237,8 +2240,10 @@ module Aws::EMRContainers
     #
     # @!attribute [rw] scheduler_configuration
     #   The scheduler configuration to apply to the virtual cluster. The new
-    #   configuration fully replaces the existing one. If you omit a field,
-    #   the corresponding limit is removed.
+    #   configuration fully replaces the existing one. If you omit
+    #   `maxInQueueJobRuns`, the service removes the queue-depth limit. If
+    #   you omit `maxConcurrentJobRuns`, the service applies the default
+    #   limit of 1,000 concurrent job runs.
     #   @return [Types::SchedulerConfiguration]
     #
     # @!attribute [rw] client_token

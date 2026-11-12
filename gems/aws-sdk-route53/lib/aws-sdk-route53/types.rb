@@ -1570,6 +1570,31 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # @!attribute [rw] hosted_zone_id
+    #   The ID of the hosted zone that contains the resource record sets
+    #   that you want to protect.
+    #   @return [String]
+    #
+    # @!attribute [rw] protections
+    #   The protections to create. Each entry specifies a resource record
+    #   set name and type, and an optional comment. The list must contain at
+    #   least one entry and can contain up to 100 entries. Each name and
+    #   type can appear only once in the list.
+    #   @return [Array<Types::ResourceRecordSetProtectionConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateResourceRecordSetProtectionsRequest AWS API Documentation
+    #
+    class CreateResourceRecordSetProtectionsRequest < Struct.new(
+      :hosted_zone_id,
+      :protections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateResourceRecordSetProtectionsResponse AWS API Documentation
+    #
+    class CreateResourceRecordSetProtectionsResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] caller_reference
     #   A unique string that identifies the request, and that allows you to
     #   retry failed `CreateReusableDelegationSet` requests without the risk
@@ -2129,6 +2154,30 @@ module Aws::Route53
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteQueryLoggingConfigResponse AWS API Documentation
     #
     class DeleteQueryLoggingConfigResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] hosted_zone_id
+    #   The ID of the hosted zone that contains the protections that you
+    #   want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] protections
+    #   The name and type of each protection to delete. The list must
+    #   contain at least one entry and can contain up to 100 entries. Each
+    #   name and type can appear only once in the list.
+    #   @return [Array<Types::ResourceRecordSetProtectionKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteResourceRecordSetProtectionsRequest AWS API Documentation
+    #
+    class DeleteResourceRecordSetProtectionsRequest < Struct.new(
+      :hosted_zone_id,
+      :protections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteResourceRecordSetProtectionsResponse AWS API Documentation
+    #
+    class DeleteResourceRecordSetProtectionsResponse < Aws::EmptyStructure; end
 
     # A request to delete a reusable delegation set.
     #
@@ -4085,6 +4134,11 @@ module Aws::Route53
     # more error messages. Each error message indicates one error in the
     # change batch.
     #
+    # Route 53 also returns this error when the change batch creates,
+    # updates, or deletes a resource record set whose name and type have a
+    # resource record set protection. To make the change, first delete the
+    # protection by using `DeleteResourceRecordSetProtections`.
+    #
     # @!attribute [rw] messages
     #   @return [Array<String>]
     #
@@ -4177,6 +4231,30 @@ module Aws::Route53
     #
     class InvalidPaginationToken < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One or more entries in the request couldn't be processed, so Route 53
+    # didn't create or delete any of the protections in the request. The
+    # `Errors` element lists the failing entries and the reason that each
+    # one failed.
+    #
+    # @!attribute [rw] message
+    #   A message that explains why Route 53 couldn't process the
+    #   `CreateResourceRecordSetProtections` or
+    #   `DeleteResourceRecordSetProtections` request.
+    #   @return [String]
+    #
+    # @!attribute [rw] errors
+    #   The entries that failed, with the reason that each one failed.
+    #   @return [Array<Types::ProtectionError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/InvalidResourceRecordSetProtectionBatch AWS API Documentation
+    #
+    class InvalidResourceRecordSetProtectionBatch < Struct.new(
+      :message,
+      :errors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5220,6 +5298,73 @@ module Aws::Route53
     #
     class ListQueryLoggingConfigsResponse < Struct.new(
       :query_logging_configs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hosted_zone_id
+    #   The ID of the hosted zone that contains the protections that you
+    #   want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_record_name
+    #   The first resource record set name that you want Route 53 to list
+    #   protections for. If you don't specify a value, the list starts with
+    #   the first protection in the hosted zone.
+    #
+    #   If you specify `NextToken`, Route 53 ignores `StartRecordName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_record_type
+    #   The first resource record set type, within the name specified by
+    #   `StartRecordName`, that you want Route 53 to list protections for.
+    #   If you specify `StartRecordType`, you must also specify
+    #   `StartRecordName`.
+    #
+    #   If you specify `NextToken`, Route 53 ignores `StartRecordType`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of protections that you want Route 53 to return
+    #   in this response. If you don't specify a value, or if you specify a
+    #   value greater than 300, Route 53 returns up to 300 protections.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the response to a previous `ListResourceRecordSetProtections`
+    #   request included a `NextToken` element, specify that value here to
+    #   get the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListResourceRecordSetProtectionsRequest AWS API Documentation
+    #
+    class ListResourceRecordSetProtectionsRequest < Struct.new(
+      :hosted_zone_id,
+      :start_record_name,
+      :start_record_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_record_set_protections
+    #   The protections in the hosted zone. The list is empty if the hosted
+    #   zone has no protections.
+    #   @return [Array<Types::ResourceRecordSetProtection>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are more protections to list, a token that you can specify
+    #   in the `NextToken` parameter of another request to get the next page
+    #   of results. If there are no more protections to list, the response
+    #   doesn't include `NextToken`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListResourceRecordSetProtectionsResponse AWS API Documentation
+    #
+    class ListResourceRecordSetProtectionsResponse < Struct.new(
+      :resource_record_set_protections,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -6305,6 +6450,71 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # A protection already exists for every name and type in the request, so
+    # Route 53 didn't create any protections. The `Errors` element lists
+    # each entry.
+    #
+    # @!attribute [rw] message
+    #   A message that explains that a protection already exists for every
+    #   name and type in the `CreateResourceRecordSetProtections` request.
+    #   @return [String]
+    #
+    # @!attribute [rw] errors
+    #   The entries that already have a protection.
+    #   @return [Array<Types::ProtectionError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ProtectionAlreadyExists AWS API Documentation
+    #
+    class ProtectionAlreadyExists < Struct.new(
+      :message,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes one entry in a `CreateResourceRecordSetProtections` or
+    # `DeleteResourceRecordSetProtections` request that Route 53 couldn't
+    # process.
+    #
+    # @!attribute [rw] record_name
+    #   The name in the failing entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_type
+    #   The record type in the failing entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The reason that the entry failed. Valid values include the
+    #   following:
+    #
+    #   * `InvalidInput` means that the entry isn't valid. For example, the
+    #     name isn't a valid DNS name, the name isn't in the hosted zone,
+    #     the record type can't be protected, or the same name and type
+    #     appear more than once in the request.
+    #
+    #   * `ProtectionAlreadyExists` means that a protection already exists
+    #     for the name and type.
+    #
+    #   * `ProtectionNotFound` means that no protection exists for the name
+    #     and type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message that explains why Route 53 couldn't process the entry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ProtectionError AWS API Documentation
+    #
+    class ProtectionError < Struct.new(
+      :record_name,
+      :record_type,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You're trying to associate a VPC with a public hosted zone. Amazon
     # Route 53 doesn't support associating a VPC with a public hosted zone.
     #
@@ -6954,6 +7164,88 @@ module Aws::Route53
       :traffic_policy_instance_id,
       :cidr_routing_config,
       :geo_proximity_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A protection for the resource record sets in a hosted zone that have
+    # the specified name and type. While the protection exists, Route 53
+    # rejects `ChangeResourceRecordSets` requests that create, update, or
+    # delete those resource record sets.
+    #
+    # @!attribute [rw] record_name
+    #   The name of the protected resource record sets.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_type
+    #   The DNS record type of the protected resource record sets.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   The comment that was specified when the protection was created, if
+    #   any.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ResourceRecordSetProtection AWS API Documentation
+    #
+    class ResourceRecordSetProtection < Struct.new(
+      :record_name,
+      :record_type,
+      :comment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A protection to create for the resource record sets in a hosted zone
+    # that have the specified name and type.
+    #
+    # @!attribute [rw] record_name
+    #   The name of the resource record sets to protect, for example,
+    #   `www.example.com`. The name must be the name of the hosted zone or a
+    #   subdomain of it.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_type
+    #   The DNS record type of the resource record sets to protect. You
+    #   can't protect records of type `DNAME` or of the DNSSEC record types
+    #   that Route 53 manages.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   An optional comment about the protection, for example, the reason
+    #   that the resource record sets are protected. The comment can be up
+    #   to 256 characters long. If you don't specify a comment, the
+    #   protection doesn't have a comment. When Route 53 rejects a
+    #   `ChangeResourceRecordSets` request because of this protection, the
+    #   error message includes the comment, so don't include sensitive
+    #   information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ResourceRecordSetProtectionConfig AWS API Documentation
+    #
+    class ResourceRecordSetProtectionConfig < Struct.new(
+      :record_name,
+      :record_type,
+      :comment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The name and type that identify a resource record set protection.
+    #
+    # @!attribute [rw] record_name
+    #   The name of the protected resource record sets.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_type
+    #   The DNS record type of the protected resource record sets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ResourceRecordSetProtectionKey AWS API Documentation
+    #
+    class ResourceRecordSetProtectionKey < Struct.new(
+      :record_name,
+      :record_type)
       SENSITIVE = []
       include Aws::Structure
     end

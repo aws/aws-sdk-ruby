@@ -147,6 +147,19 @@ module Aws
                             ) -> _AttachStaticIpResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachStaticIpResponseSuccess
 
+      interface _CheckSubdomainAvailabilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CheckSubdomainAvailabilityResult]
+        def available: () -> bool
+        def reservation_expires_at: () -> ::Time
+        def subdomain_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#check_subdomain_availability-instance_method
+      def check_subdomain_availability: (
+                                          subdomain_name: ::String,
+                                          ?reserve: bool
+                                        ) -> _CheckSubdomainAvailabilityResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CheckSubdomainAvailabilityResponseSuccess
+
       interface _CloseInstancePublicPortsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CloseInstancePublicPortsResult]
         def operation: () -> Types::Operation
@@ -428,7 +441,8 @@ module Aws
                                  ?enable_waf: bool,
                                  ?waf_rules: Array[
                                    Params::waf_rule
-                                 ]
+                                 ],
+                                 ?subdomain_name: ::String
                                ) -> _CreateDistributionResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDistributionResponseSuccess
 
@@ -676,6 +690,23 @@ module Aws
                                                ) -> _CreateRelationalDatabaseSnapshotResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRelationalDatabaseSnapshotResponseSuccess
 
+      interface _CreateSubdomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSubdomainResult]
+        def subdomain: () -> Types::Subdomain
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_subdomain-instance_method
+      def create_subdomain: (
+                              subdomain_name: ::String,
+                              ?tags: Array[
+                                {
+                                  key: ::String?,
+                                  value: ::String?
+                                }
+                              ]
+                            ) -> _CreateSubdomainResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSubdomainResponseSuccess
+
       interface _DeleteAlarmResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAlarmResult]
         def operations: () -> ::Array[Types::Operation]
@@ -896,6 +927,17 @@ module Aws
                                                ) -> _DeleteRelationalDatabaseSnapshotResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRelationalDatabaseSnapshotResponseSuccess
 
+      interface _DeleteSubdomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSubdomainResult]
+        def subdomain: () -> Types::Subdomain
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_subdomain-instance_method
+      def delete_subdomain: (
+                              subdomain_name: ::String
+                            ) -> _DeleteSubdomainResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSubdomainResponseSuccess
+
       interface _DetachCertificateFromDistributionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DetachCertificateFromDistributionResult]
         def operation: () -> Types::Operation
@@ -1007,7 +1049,7 @@ module Aws
       interface _GetAutoSnapshotsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAutoSnapshotsResult]
         def resource_name: () -> ::String
-        def resource_type: () -> ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+        def resource_type: () -> ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain")
         def auto_snapshots: () -> ::Array[Types::AutoSnapshotDetails]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_auto_snapshots-instance_method
@@ -1751,6 +1793,18 @@ module Aws
                           ) -> _GetStaticIpsResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStaticIpsResponseSuccess
 
+      interface _GetSubdomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSubdomainsResult]
+        def subdomains: () -> ::Array[Types::Subdomain]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_subdomains-instance_method
+      def get_subdomains: (
+                            ?subdomain_name: ::String,
+                            ?page_token: ::String
+                          ) -> _GetSubdomainsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSubdomainsResponseSuccess
+
       interface _ImportKeyPairResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ImportKeyPairResult]
         def operation: () -> Types::Operation
@@ -1900,7 +1954,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#set_ip_address_type-instance_method
       def set_ip_address_type: (
-                                 resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket"),
+                                 resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket" | "Subdomain"),
                                  resource_name: ::String,
                                  ip_address_type: ("dualstack" | "ipv4" | "ipv6"),
                                  ?accept_bundle_update: bool
@@ -2244,6 +2298,19 @@ module Aws
                                                    ]
                                                  ) -> _UpdateRelationalDatabaseParametersResponseSuccess
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRelationalDatabaseParametersResponseSuccess
+
+      interface _UpdateSubdomainAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSubdomainAssociationResult]
+        def subdomain: () -> Types::Subdomain
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#update_subdomain_association-instance_method
+      def update_subdomain_association: (
+                                          subdomain_name: ::String,
+                                          action: ("ASSOCIATE" | "DISASSOCIATE" | "TRANSFER"),
+                                          ?target_resource_arn: ::String
+                                        ) -> _UpdateSubdomainAssociationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSubdomainAssociationResponseSuccess
     end
   end
 end

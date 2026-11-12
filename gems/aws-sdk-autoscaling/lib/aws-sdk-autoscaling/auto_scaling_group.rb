@@ -737,7 +737,7 @@ module Aws::AutoScaling
     #     estimated_instance_warmup: 1,
     #     target_tracking_configuration: {
     #       predefined_metric_specification: {
-    #         predefined_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, ALBRequestCountPerTarget
+    #         predefined_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageCPUUtilizationHighResolution, ASGAverageNetworkIn, ASGAverageNetworkOut, ALBRequestCountPerTarget
     #         resource_label: "XmlStringMaxLen1023",
     #       },
     #       customized_metric_specification: {
@@ -985,6 +985,8 @@ module Aws::AutoScaling
     #   The following predefined metrics are available:
     #
     #   * `ASGAverageCPUUtilization`
+    #
+    #   * `ASGAverageCPUUtilizationHighResolution`
     #
     #   * `ASGAverageNetworkIn`
     #

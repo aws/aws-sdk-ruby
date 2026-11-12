@@ -354,6 +354,28 @@ module Aws::MWAA
     #   mw1.micro, which defaults to `1`.
     #   @return [Integer]
     #
+    # @!attribute [rw] identity_center_configuration
+    #   The Amazon Web Services IAM Identity Center configuration used to
+    #   authenticate users to the Apache Airflow web UI for your
+    #   environment.
+    #   @return [Types::IdentityCenterConfiguration]
+    #
+    # @!attribute [rw] teams
+    #   A map of teams to configure for Apache Airflow multi-team support on
+    #   your Amazon MWAA environment. Each entry maps a team name to a
+    #   object that defines the Amazon S3 location of that team's DAG code.
+    #   The team name must match the display name of an Amazon Web Services
+    #   IAM Identity Center group that you associate with your environment,
+    #   so you must configure IAM Identity Center for the environment before
+    #   you add teams. You can configure between `1` and `20` teams. For
+    #   more information, refer to [Apache Airflow multi-team
+    #   environments][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/multi-team-environments.html
+    #   @return [Hash<String,Types::TeamConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/CreateEnvironmentInput AWS API Documentation
     #
     class CreateEnvironmentInput < Struct.new(
@@ -381,7 +403,9 @@ module Aws::MWAA
       :schedulers,
       :endpoint_management,
       :min_webservers,
-      :max_webservers)
+      :max_webservers,
+      :identity_center_configuration,
+      :teams)
       SENSITIVE = [:airflow_configuration_options]
       include Aws::Structure
     end
@@ -857,6 +881,26 @@ module Aws::MWAA
     #   mw1.micro, which defaults to `1`.
     #   @return [Integer]
     #
+    # @!attribute [rw] identity_center_configuration
+    #   The Amazon Web Services IAM Identity Center configuration used to
+    #   authenticate users to the Apache Airflow web UI for your
+    #   environment.
+    #   @return [Types::IdentityCenterConfiguration]
+    #
+    # @!attribute [rw] teams
+    #   The teams configured for Apache Airflow multi-team support on your
+    #   Amazon MWAA environment. Each entry maps a team name to its
+    #   settings, which define the Amazon S3 location of that team's DAG
+    #   code. Each team name matches the display name of the Amazon Web
+    #   Services IAM Identity Center group associated with the team. For
+    #   more information, refer to [Apache Airflow multi-team
+    #   environments][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/multi-team-environments.html
+    #   @return [Hash<String,Types::TeamConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/Environment AWS API Documentation
     #
     class Environment < Struct.new(
@@ -893,7 +937,9 @@ module Aws::MWAA
       :celery_executor_queue,
       :endpoint_management,
       :min_webservers,
-      :max_webservers)
+      :max_webservers,
+      :identity_center_configuration,
+      :teams)
       SENSITIVE = [:airflow_configuration_options]
       include Aws::Structure
     end
@@ -919,6 +965,31 @@ module Aws::MWAA
     #
     class GetEnvironmentOutput < Struct.new(
       :environment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the Amazon Web Services IAM Identity Center configuration
+    # used to authenticate users to the Apache Airflow web UI for your
+    # Amazon MWAA environment.
+    #
+    # @!attribute [rw] start_url
+    #   The Amazon Web Services access portal URL of the IAM Identity Center
+    #   instance associated with your environment. For example,
+    #   `https://my-portal.awsapps.com/start`.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_store_id
+    #   The identifier of the identity store associated with the IAM
+    #   Identity Center instance for your environment. For example,
+    #   `d-1234567890`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/IdentityCenterConfiguration AWS API Documentation
+    #
+    class IdentityCenterConfiguration < Struct.new(
+      :start_url,
+      :identity_store_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1468,6 +1539,64 @@ module Aws::MWAA
     #
     class TagResourceOutput < Aws::EmptyStructure; end
 
+    # Describes the configuration for a single team in Apache Airflow
+    # multi-team support on your Amazon MWAA environment. A team
+    # configuration defines the Amazon S3 location of the DAG code for the
+    # team. The team name that maps to this configuration must match the
+    # display name of an Amazon Web Services IAM Identity Center group
+    # associated with your environment. For more information, refer to
+    # [Apache Airflow multi-team environments][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/multi-team-environments.html
+    #
+    # @!attribute [rw] source_bucket_arn
+    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where the
+    #   team's DAG code and supporting files are stored. For example,
+    #   `arn:aws:s3:::my-airflow-bucket-unique-name`. For more information,
+    #   refer to [Create an Amazon S3 bucket for Amazon MWAA][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dag_s3_path
+    #   The relative path to the DAGs folder for the team in the team's
+    #   Amazon S3 bucket. For example, `dags/team-a`. For more information,
+    #   refer to [Adding or updating DAGs][1].
+    #
+    #   DAG folders can't overlap. A team folder can't be inside the
+    #   global folder or another team's folder, and the global folder
+    #   can't be inside a team folder. Amazon Managed Workflows for Apache
+    #   Airflow (Amazon MWAA) compares folder paths as Amazon S3 prefixes,
+    #   so the trailing slash matters:
+    #
+    #   * `s3://amzn-s3-demo-bucket/dags/` and
+    #     `s3://amzn-s3-demo-bucket/dags/team-a/` overlap, because the first
+    #     path is a prefix of the second.
+    #
+    #   * `s3://amzn-s3-demo-bucket/dags/` and
+    #     `s3://amzn-s3-demo-bucket/dags-team-a/` don't overlap.
+    #
+    #   * `s3://amzn-s3-demo-bucket/teams/team-a/` and
+    #     `s3://amzn-s3-demo-bucket/teams/team-b/` don't overlap.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/TeamConfig AWS API Documentation
+    #
+    class TeamConfig < Struct.new(
+      :source_bucket_arn,
+      :dag_s3_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Amazon MWAA environment. For
     #   example,
@@ -1755,6 +1884,24 @@ module Aws::MWAA
     #   only.
     #   @return [String]
     #
+    # @!attribute [rw] identity_center_configuration
+    #   The Amazon Web Services IAM Identity Center configuration used to
+    #   authenticate users to the Apache Airflow web UI for your
+    #   environment.
+    #   @return [Types::IdentityCenterConfiguration]
+    #
+    # @!attribute [rw] teams
+    #   Updates the teams configured for Apache Airflow multi-team support
+    #   on your Amazon MWAA environment. Use `AddOrUpdate` to add new teams
+    #   or change the configuration of existing teams, and `Remove` to
+    #   remove teams by name. For more information, refer to [Apache Airflow
+    #   multi-team environments][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/multi-team-environments.html
+    #   @return [Types::UpdateTeamsInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/UpdateEnvironmentInput AWS API Documentation
     #
     class UpdateEnvironmentInput < Struct.new(
@@ -1780,7 +1927,9 @@ module Aws::MWAA
       :startup_script_s3_path,
       :startup_script_s3_object_version,
       :webserver_access_mode,
-      :weekly_maintenance_window_start)
+      :weekly_maintenance_window_start,
+      :identity_center_configuration,
+      :teams)
       SENSITIVE = [:airflow_configuration_options]
       include Aws::Structure
     end
@@ -1842,6 +1991,35 @@ module Aws::MWAA
     #
     class UpdateNetworkConfigurationInput < Struct.new(
       :security_group_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the changes to the teams configured for Apache Airflow
+    # multi-team support when you update your Amazon MWAA environment. Use
+    # `AddOrUpdate` to add or modify teams, and `Remove` to remove teams by
+    # name.
+    #
+    # @!attribute [rw] add_or_update
+    #   A map of teams to add to your environment, or to update if they
+    #   already exist. Each entry maps a team name to its settings. Each
+    #   team name must match the display name of an Amazon Web Services IAM
+    #   Identity Center group associated with your environment. You can
+    #   configure between `1` and `20` teams.
+    #   @return [Hash<String,Types::TeamConfig>]
+    #
+    # @!attribute [rw] remove
+    #   A list of team names to remove from your environment. For example,
+    #   `team-a`. You can remove between `1` and `20` teams in a single
+    #   update. Removing a team does not delete the team's DAG code from
+    #   Amazon S3.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/UpdateTeamsInput AWS API Documentation
+    #
+    class UpdateTeamsInput < Struct.new(
+      :add_or_update,
+      :remove)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -620,7 +620,8 @@ module Aws
           }
         }
       ]?,
-      watermarking_settings: Params::media_package_v2_watermarking_settings?
+      watermarking_settings: Params::media_package_v2_watermarking_settings?,
+      caption_language_setting: ("AUTO" | "NONE")?
     }
 
       type media_package_group_settings = {

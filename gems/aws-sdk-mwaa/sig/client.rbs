@@ -123,7 +123,15 @@ module Aws
                                 ?schedulers: ::Integer,
                                 ?endpoint_management: ("CUSTOMER" | "SERVICE"),
                                 ?min_webservers: ::Integer,
-                                ?max_webservers: ::Integer
+                                ?max_webservers: ::Integer,
+                                ?identity_center_configuration: {
+                                  start_url: ::String?,
+                                  identity_store_id: ::String?
+                                },
+                                ?teams: Hash[::String, {
+                                    source_bucket_arn: ::String,
+                                    dag_s3_path: ::String
+                                  }]
                               ) -> _CreateEnvironmentResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentResponseSuccess
 
@@ -277,7 +285,18 @@ module Aws
                                 ?startup_script_s3_path: ::String,
                                 ?startup_script_s3_object_version: ::String,
                                 ?webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY" | "PUBLIC_AND_PRIVATE"),
-                                ?weekly_maintenance_window_start: ::String
+                                ?weekly_maintenance_window_start: ::String,
+                                ?identity_center_configuration: {
+                                  start_url: ::String?,
+                                  identity_store_id: ::String?
+                                },
+                                ?teams: {
+                                  add_or_update: Hash[::String, {
+                                      source_bucket_arn: ::String,
+                                      dag_s3_path: ::String
+                                    }]?,
+                                  remove: Array[::String]?
+                                }
                               ) -> _UpdateEnvironmentResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentResponseSuccess
     end

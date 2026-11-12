@@ -739,6 +739,19 @@ module Aws::Route53
     #
     #  </note>
     #
+    # **Protected Resource Record Sets**
+    #
+    # If a resource record set protection exists for a name and type, Route
+    # 53 rejects any change in the change batch that creates, updates, or
+    # deletes a resource record set with that name and type. Because change
+    # batches are transactional, Route 53 rejects the entire request and
+    # returns an `InvalidChangeBatch` error. Route 53 identifies each
+    # protected resource record set in the error message and includes the
+    # protection's comment, if any. To make the change, first delete the
+    # protection by using `DeleteResourceRecordSetProtections`. To see which
+    # resource record sets are protected, use
+    # `ListResourceRecordSetProtections`.
+    #
     # **Traffic Flow**
     #
     # To create resource record sets for complex routing configurations, use
@@ -2281,6 +2294,77 @@ module Aws::Route53
       req.send_request(options)
     end
 
+    # Creates one or more resource record set protections in a hosted zone.
+    # A protection applies to every resource record set in the hosted zone
+    # that has the specified name and type. While a protection exists, Route
+    # 53 rejects any `ChangeResourceRecordSets` request that creates,
+    # updates, or deletes a resource record set with that name and type, and
+    # returns an `InvalidChangeBatch` error. To change a protected resource
+    # record set, first delete its protection by using
+    # `DeleteResourceRecordSetProtections`.
+    #
+    # You can create a protection for a name and type that doesn't have a
+    # resource record set yet. In that case, Route 53 also rejects requests
+    # to create that resource record set.
+    #
+    # You can't delete a hosted zone that has protections. To delete the
+    # hosted zone, first delete all of its protections by using
+    # `DeleteResourceRecordSetProtections`.
+    #
+    # The request is atomic. Route 53 either creates all of the protections
+    # in the request or none of them. If one or more entries fail, the
+    # response is an error that lists the failing entries and the reason
+    # that each one failed. Route 53 checks for invalid entries before it
+    # checks for existing protections, so if any entry is invalid, the error
+    # lists only the invalid entries.
+    #
+    # The error that Route 53 returns depends on the failures:
+    #
+    # * If every entry already has a protection, Route 53 returns a
+    #   `ProtectionAlreadyExists` error.
+    #
+    # * For any other combination of failures, Route 53 returns an
+    #   `InvalidResourceRecordSetProtectionBatch` error.
+    #
+    # You can specify up to 100 protections in one request. The number of
+    # protections that you can have in a hosted zone is limited by a quota.
+    # If the request would exceed that quota, Route 53 returns a
+    # `LimitsExceeded` error.
+    #
+    # @option params [required, String] :hosted_zone_id
+    #   The ID of the hosted zone that contains the resource record sets that
+    #   you want to protect.
+    #
+    # @option params [required, Array<Types::ResourceRecordSetProtectionConfig>] :protections
+    #   The protections to create. Each entry specifies a resource record set
+    #   name and type, and an optional comment. The list must contain at least
+    #   one entry and can contain up to 100 entries. Each name and type can
+    #   appear only once in the list.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_resource_record_set_protections({
+    #     hosted_zone_id: "ResourceId", # required
+    #     protections: [ # required
+    #       {
+    #         record_name: "DNSName", # required
+    #         record_type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS, TLSA, SSHFP, SVCB, HTTPS
+    #         comment: "ResourceDescription",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateResourceRecordSetProtections AWS API Documentation
+    #
+    # @overload create_resource_record_set_protections(params = {})
+    # @param [Hash] params ({})
+    def create_resource_record_set_protections(params = {}, options = {})
+      req = build_request(:create_resource_record_set_protections, params)
+      req.send_request(options)
+    end
+
     # Creates a delegation set (a group of four name servers) that can be
     # reused by multiple hosted zones that were created by the same Amazon
     # Web Services account.
@@ -2762,6 +2846,11 @@ module Aws::Route53
     # `HostedZoneNotEmpty` error. For information about deleting records,
     # see [ChangeResourceRecordSets][3].
     #
+    # You also can't delete a hosted zone that has resource record set
+    # protections. To see the protections in a hosted zone, use
+    # `ListResourceRecordSetProtections`. To delete them, use
+    # `DeleteResourceRecordSetProtections`.
+    #
     # To verify that the hosted zone has been deleted, do one of the
     # following:
     #
@@ -2882,6 +2971,51 @@ module Aws::Route53
     # @param [Hash] params ({})
     def delete_query_logging_config(params = {}, options = {})
       req = build_request(:delete_query_logging_config, params)
+      req.send_request(options)
+    end
+
+    # Deletes one or more resource record set protections from a hosted
+    # zone. After a protection is deleted, you can change the resource
+    # record sets that have that name and type by using
+    # `ChangeResourceRecordSets`.
+    #
+    # The request is atomic. Route 53 either deletes all of the protections
+    # in the request or none of them. If one or more entries fail, for
+    # example because no protection exists for the specified name and type,
+    # Route 53 returns an `InvalidResourceRecordSetProtectionBatch` error
+    # that lists the failing entries and the reason that each one failed.
+    #
+    # You can specify up to 100 protections in one request.
+    #
+    # @option params [required, String] :hosted_zone_id
+    #   The ID of the hosted zone that contains the protections that you want
+    #   to delete.
+    #
+    # @option params [required, Array<Types::ResourceRecordSetProtectionKey>] :protections
+    #   The name and type of each protection to delete. The list must contain
+    #   at least one entry and can contain up to 100 entries. Each name and
+    #   type can appear only once in the list.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_record_set_protections({
+    #     hosted_zone_id: "ResourceId", # required
+    #     protections: [ # required
+    #       {
+    #         record_name: "DNSName", # required
+    #         record_type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS, TLSA, SSHFP, SVCB, HTTPS
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteResourceRecordSetProtections AWS API Documentation
+    #
+    # @overload delete_resource_record_set_protections(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_record_set_protections(params = {}, options = {})
+      req = build_request(:delete_resource_record_set_protections, params)
       req.send_request(options)
     end
 
@@ -4761,6 +4895,78 @@ module Aws::Route53
       req.send_request(options)
     end
 
+    # Lists the resource record set protections in a hosted zone. We
+    # recommend using pagination to ensure that the operation returns
+    # quickly and successfully.
+    #
+    # If the response includes a `NextToken` element, there are more
+    # protections to list. To get the next page of results, submit another
+    # request and specify the value of `NextToken` in the `NextToken`
+    # parameter.
+    #
+    # @option params [required, String] :hosted_zone_id
+    #   The ID of the hosted zone that contains the protections that you want
+    #   to list.
+    #
+    # @option params [String] :start_record_name
+    #   The first resource record set name that you want Route 53 to list
+    #   protections for. If you don't specify a value, the list starts with
+    #   the first protection in the hosted zone.
+    #
+    #   If you specify `NextToken`, Route 53 ignores `StartRecordName`.
+    #
+    # @option params [String] :start_record_type
+    #   The first resource record set type, within the name specified by
+    #   `StartRecordName`, that you want Route 53 to list protections for. If
+    #   you specify `StartRecordType`, you must also specify
+    #   `StartRecordName`.
+    #
+    #   If you specify `NextToken`, Route 53 ignores `StartRecordType`.
+    #
+    # @option params [String] :max_results
+    #   The maximum number of protections that you want Route 53 to return in
+    #   this response. If you don't specify a value, or if you specify a
+    #   value greater than 300, Route 53 returns up to 300 protections.
+    #
+    # @option params [String] :next_token
+    #   If the response to a previous `ListResourceRecordSetProtections`
+    #   request included a `NextToken` element, specify that value here to get
+    #   the next page of results.
+    #
+    # @return [Types::ListResourceRecordSetProtectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourceRecordSetProtectionsResponse#resource_record_set_protections #resource_record_set_protections} => Array&lt;Types::ResourceRecordSetProtection&gt;
+    #   * {Types::ListResourceRecordSetProtectionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_record_set_protections({
+    #     hosted_zone_id: "ResourceId", # required
+    #     start_record_name: "DNSName",
+    #     start_record_type: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS, TLSA, SSHFP, SVCB, HTTPS
+    #     max_results: "MaxResults",
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_record_set_protections #=> Array
+    #   resp.resource_record_set_protections[0].record_name #=> String
+    #   resp.resource_record_set_protections[0].record_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS", "TLSA", "SSHFP", "SVCB", "HTTPS"
+    #   resp.resource_record_set_protections[0].comment #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListResourceRecordSetProtections AWS API Documentation
+    #
+    # @overload list_resource_record_set_protections(params = {})
+    # @param [Hash] params ({})
+    def list_resource_record_set_protections(params = {}, options = {})
+      req = build_request(:list_resource_record_set_protections, params)
+      req.send_request(options)
+    end
+
     # Lists the resource record sets in a specified hosted zone.
     #
     # `ListResourceRecordSets` returns up to 300 resource record sets at a
@@ -6344,7 +6550,7 @@ module Aws::Route53
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.149.0'
+      context[:gem_version] = '1.150.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

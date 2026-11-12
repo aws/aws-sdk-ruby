@@ -13,7 +13,7 @@ module Aws
       name: ::String,
       network_name: ::String,
       port: ::Integer,
-      protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq"),
+      protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq" | "rtmp-push"),
       ttl: ::Integer
     }
 
@@ -29,7 +29,7 @@ module Aws
       name: ::String,
       network_name: ::String,
       port: ::Integer,
-      protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
+      protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq" | "rtmp-push")
     }
 
       type add_bridge_source_request = {
@@ -95,6 +95,18 @@ module Aws
       encryption_key_configuration: Params::flow_transit_encryption_key_configuration
     }
 
+      type rtmp_push_output_settings = {
+      application_name: ::String,
+      stream_name: ::String,
+      tls_encryption: {
+        encryption_type: ("PUBLIC")?,
+        encryption_configuration: {
+          public: {
+          }?
+        }
+      }?
+    }
+
       type add_output_request = {
       cidr_allow_list: Array[::String]?,
       description: ::String?,
@@ -107,7 +119,7 @@ module Aws
       min_latency: ::Integer?,
       name: ::String?,
       port: ::Integer?,
-      protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")?,
+      protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq" | "rtmp-push")?,
       remote_id: ::String?,
       sender_control_port: ::Integer?,
       smoothing_latency: ::Integer?,
@@ -122,7 +134,8 @@ module Aws
       router_integration_state: ("ENABLED" | "DISABLED")?,
       router_integration_transit_encryption: Params::flow_transit_encryption?,
       ndi_output_timecode_source: ("EMBEDDED_TIMECODE" | "UTC_SYSTEM_TIME")?,
-      ndi_audio_reference_level: ::Integer?
+      ndi_audio_reference_level: ::Integer?,
+      rtmp_push_settings: Params::rtmp_push_output_settings?
     }
 
       type media_stream_output_configuration_request = {
@@ -143,6 +156,19 @@ module Aws
       media_stream_name: ::String
     }
 
+      type rtmp_push_naming_configuration = {
+      manual: {
+        application_name: ::String,
+        stream_name: ::String
+      }?,
+      automatic: {
+      }?
+    }
+
+      type set_rtmp_push_source_settings = {
+      naming_configuration: Params::rtmp_push_naming_configuration
+    }
+
       type set_source_request = {
       decryption: Params::encryption?,
       description: ::String?,
@@ -156,7 +182,7 @@ module Aws
       ]?,
       min_latency: ::Integer?,
       name: ::String?,
-      protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")?,
+      protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq" | "rtmp-push")?,
       sender_control_port: ::Integer?,
       sender_ip_address: ::String?,
       source_listener_address: ::String?,
@@ -176,7 +202,8 @@ module Aws
       }?,
       source_tags: Hash[::String, ::String]?,
       router_integration_state: ("ENABLED" | "DISABLED")?,
-      router_integration_transit_decryption: Params::flow_transit_encryption?
+      router_integration_transit_decryption: Params::flow_transit_encryption?,
+      rtmp_push_settings: Params::set_rtmp_push_source_settings?
     }
 
       type media_stream_source_configuration_request = {
@@ -287,6 +314,12 @@ module Aws
       }?
     }
 
+      type rtmp_push_router_input_configuration = {
+      port: ::Integer,
+      naming_type: ("MANUAL" | "AUTOMATIC")?,
+      naming_configuration: Params::rtmp_push_naming_configuration
+    }
+
       type srt_caller_router_input_configuration = {
       source_address: ::String,
       source_port: ::Integer,
@@ -306,6 +339,7 @@ module Aws
         recovery_latency_milliseconds: ::Integer
       }?,
       srt_listener: Params::srt_listener_router_input_configuration?,
+      rtmp_push: Params::rtmp_push_router_input_configuration?,
       srt_caller: Params::srt_caller_router_input_configuration?,
       rtp: {
         port: ::Integer,
@@ -316,7 +350,7 @@ module Aws
       type standard_router_input_configuration = {
       network_interface_arn: ::String,
       protocol_configuration: Params::router_input_protocol_configuration,
-      protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER")?
+      protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER" | "RTMP_PUSH")?
     }
 
       type media_live_transit_encryption_key_configuration = {
@@ -378,6 +412,7 @@ module Aws
         recovery_latency_milliseconds: ::Integer
       }?,
       srt_listener: Params::srt_listener_router_input_configuration?,
+      rtmp_push: Params::rtmp_push_router_input_configuration?,
       srt_caller: Params::srt_caller_router_input_configuration?,
       rtp: {
         port: ::Integer,
@@ -393,7 +428,9 @@ module Aws
       rist: {
         port: ::Integer,
         recovery_latency_milliseconds: ::Integer
-      }?
+      }?,
+      srt_listener: Params::srt_listener_router_input_configuration?,
+      srt_caller: Params::srt_caller_router_input_configuration?
     }
 
       type router_input_transit_encryption_key_configuration = {
@@ -534,6 +571,56 @@ module Aws
       media_connect_flow: Params::media_connect_flow_router_output_configuration?,
       media_live_input: Params::media_live_input_router_output_configuration?,
       source_endpoint: Params::source_endpoint_router_output_configuration?
+    }
+
+      type fabric_configuration = {
+      recovery_latency_mode: ("BALANCED" | "LOW_LATENCY"),
+      switching_mode: ("IMMEDIATE" | "KEY_FRAME")?,
+      switching_configuration: {
+        immediate: {
+        }?,
+        key_frame: {
+          key_frame_wait_milliseconds: ::Integer?
+        }?
+      }?
+    }
+
+      type single_program_transport_stream_pid_map_configuration = {
+      rules: Array[
+        {
+          match_expression: ::String,
+          action: ::String
+        }
+      ],
+      default_action: ::String,
+      transport_stream_id: {
+        passthrough: {
+        }?,
+        set: ::Integer?
+      }?,
+      program_number: {
+        passthrough: {
+        }?,
+        set: ::Integer?
+      }?,
+      program_map_table_pid: {
+        passthrough: {
+        }?,
+        set: ::Integer?
+      }?,
+      program_clock_reference_pid: {
+        passthrough: {
+        }?,
+        set: ::Integer?
+      }?,
+      auto: {
+        start_pid: ::Integer,
+        pids_per_program: ::Integer
+      }?
+    }
+
+      type router_output_processors = {
+      single_program_transport_stream_pid_map: Params::single_program_transport_stream_pid_map_configuration?
     }
 
       type standard_destination_endpoint_networking_configuration = {

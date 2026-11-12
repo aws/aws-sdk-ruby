@@ -489,6 +489,59 @@ module Aws::MWAAServerless
 
     # @!group API Operations
 
+    # Creates a launch URL that opens the Apache Airflow UI for your
+    # workflows in Amazon Managed Workflows for Apache Airflow Serverless.
+    # The UI shows the workflows in your account in the current AWS Region.
+    # To start a UI session, open the URL in a browser before it expires.
+    #
+    # The UI runs with the permissions of the IAM identity that you use to
+    # call this operation. You see only the workflows, workflow runs, and
+    # logs that the identity can read, and you can start a workflow run only
+    # if the identity has permission to start one.
+    #
+    # The UI session uses the caller's permissions. The session works only
+    # from the network address that opened the URL. It ends at
+    # `SessionExpiresAt` or when you sign out from the UI.
+    #
+    # @option params [Integer] :expires_in_seconds
+    #   Specifies the number of seconds that the launch URL stays valid. This
+    #   value limits only the time to open the URL, not the length of the UI
+    #   session. The default is 300.
+    #
+    # @option params [Integer] :session_duration_in_seconds
+    #   Specifies the number of seconds that the UI session lasts, starting
+    #   from when you call this operation. The default is 43200 (12 hours).
+    #
+    # @return [Types::CreateAirflowUiUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAirflowUiUrlResponse#authorized_url #authorized_url} => String
+    #   * {Types::CreateAirflowUiUrlResponse#session_id #session_id} => String
+    #   * {Types::CreateAirflowUiUrlResponse#url_expires_at #url_expires_at} => Time
+    #   * {Types::CreateAirflowUiUrlResponse#session_expires_at #session_expires_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_airflow_ui_url({
+    #     expires_in_seconds: 1,
+    #     session_duration_in_seconds: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authorized_url #=> String
+    #   resp.session_id #=> String
+    #   resp.url_expires_at #=> Time
+    #   resp.session_expires_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-serverless-2024-07-26/CreateAirflowUiUrl AWS API Documentation
+    #
+    # @overload create_airflow_ui_url(params = {})
+    # @param [Hash] params ({})
+    def create_airflow_ui_url(params = {}, options = {})
+      req = build_request(:create_airflow_ui_url, params)
+      req.send_request(options)
+    end
+
     # Creates a new workflow in Amazon Managed Workflows for Apache Airflow
     # Serverless. This operation initializes a workflow with the specified
     # configuration including the workflow definition, execution role, and
@@ -1463,7 +1516,7 @@ module Aws::MWAAServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mwaaserverless'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

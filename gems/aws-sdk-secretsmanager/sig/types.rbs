@@ -15,6 +15,21 @@ module Aws::SecretsManager
       SENSITIVE: []
     end
 
+    class AssociateCrossAccountReplicaRequest
+      attr_accessor secret_id: ::String
+      attr_accessor cross_account_replica_arn: ::String
+      attr_accessor replica_restriction: ("SameOrg" | "NoRestriction")
+      attr_accessor replication_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateCrossAccountReplicaResponse
+      attr_accessor arn: ::String
+      attr_accessor cross_account_replica_arn: ::String
+      attr_accessor replication_status: ("InSync" | "Failed" | "InProgress" | "Pending" | "Detached")
+      SENSITIVE: []
+    end
+
     class BatchGetSecretValueRequest
       attr_accessor secret_id_list: ::Array[::String]
       attr_accessor filters: ::Array[Types::Filter]
@@ -53,6 +68,7 @@ module Aws::SecretsManager
       attr_accessor add_replica_regions: ::Array[Types::ReplicaRegionType]
       attr_accessor force_overwrite_replica_secret: bool
       attr_accessor type: ::String
+      attr_accessor cross_account_primary_arn: ::String
       SENSITIVE: [:secret_binary, :secret_string]
     end
 
@@ -64,6 +80,21 @@ module Aws::SecretsManager
       SENSITIVE: []
     end
 
+    class CrossAccountPrimaryType
+      attr_accessor primary_secret_arn: ::String
+      attr_accessor replication_status: ("InSync" | "Failed" | "InProgress" | "Pending" | "Detached")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class CrossAccountReplicaEntry
+      attr_accessor replica_secret_arn: ::String
+      attr_accessor replication_role_arn: ::String
+      attr_accessor replication_status: ("InSync" | "Failed" | "InProgress" | "Pending" | "Detached")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
     class DecryptionFailure
       attr_accessor message: ::String
       SENSITIVE: []
@@ -71,12 +102,14 @@ module Aws::SecretsManager
 
     class DeleteResourcePolicyRequest
       attr_accessor secret_id: ::String
+      attr_accessor policy_name: ::String
       SENSITIVE: []
     end
 
     class DeleteResourcePolicyResponse
       attr_accessor arn: ::String
       attr_accessor name: ::String
+      attr_accessor policy_name: ::String
       SENSITIVE: []
     end
 
@@ -121,6 +154,20 @@ module Aws::SecretsManager
       attr_accessor created_date: ::Time
       attr_accessor primary_region: ::String
       attr_accessor replication_status: ::Array[Types::ReplicationStatusType]
+      attr_accessor cross_account_primary: Types::CrossAccountPrimaryType
+      attr_accessor cross_account_replicas: ::Array[Types::CrossAccountReplicaEntry]
+      SENSITIVE: []
+    end
+
+    class DisassociateCrossAccountReplicaRequest
+      attr_accessor secret_id: ::String
+      attr_accessor cross_account_replica_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateCrossAccountReplicaResponse
+      attr_accessor arn: ::String
+      attr_accessor cross_account_replica_arn: ::String
       SENSITIVE: []
     end
 
@@ -160,6 +207,7 @@ module Aws::SecretsManager
 
     class GetResourcePolicyRequest
       attr_accessor secret_id: ::String
+      attr_accessor policy_name: ::String
       SENSITIVE: []
     end
 
@@ -167,6 +215,7 @@ module Aws::SecretsManager
       attr_accessor arn: ::String
       attr_accessor name: ::String
       attr_accessor resource_policy: ::String
+      attr_accessor policy_name: ::String
       SENSITIVE: []
     end
 
@@ -210,6 +259,19 @@ module Aws::SecretsManager
 
     class LimitExceededException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourcePoliciesRequest
+      attr_accessor secret_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourcePoliciesResponse
+      attr_accessor resource_policies: ::Array[Types::ResourcePolicySummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -263,6 +325,7 @@ module Aws::SecretsManager
     class PutResourcePolicyRequest
       attr_accessor secret_id: ::String
       attr_accessor resource_policy: ::String
+      attr_accessor policy_name: ::String
       attr_accessor block_public_policy: bool
       SENSITIVE: []
     end
@@ -270,6 +333,7 @@ module Aws::SecretsManager
     class PutResourcePolicyResponse
       attr_accessor arn: ::String
       attr_accessor name: ::String
+      attr_accessor policy_name: ::String
       SENSITIVE: []
     end
 
@@ -325,7 +389,7 @@ module Aws::SecretsManager
     class ReplicationStatusType
       attr_accessor region: ::String
       attr_accessor kms_key_id: ::String
-      attr_accessor status: ("InSync" | "Failed" | "InProgress")
+      attr_accessor status: ("InSync" | "Failed" | "InProgress" | "Pending" | "Detached")
       attr_accessor status_message: ::String
       attr_accessor last_accessed_date: ::Time
       SENSITIVE: []
@@ -338,6 +402,11 @@ module Aws::SecretsManager
 
     class ResourceNotFoundException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourcePolicySummary
+      attr_accessor policy_name: ::String
       SENSITIVE: []
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.669.0 (2026-11-12)
+------------------
+
+* Feature - This release adds support for multiple features, including EC2 Image Builder image recipes and container recipes in AMI usage reports, Amazon EC2 Detailed Monitoring adds opt-in metrics, and Global Accelerator and API Gateway V2 as resource exclusions for VPC Encryption Control.
+
 1.668.0 (2026-11-11)
 ------------------
 

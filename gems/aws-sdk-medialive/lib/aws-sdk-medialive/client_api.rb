@@ -735,6 +735,7 @@ module Aws::MediaLive
     MediaPackageOutputDestinationSettings = Shapes::StructureShape.new(name: 'MediaPackageOutputDestinationSettings')
     MediaPackageOutputSettings = Shapes::StructureShape.new(name: 'MediaPackageOutputSettings')
     MediaPackageV2AbWatermarkerIrdetoSettings = Shapes::StructureShape.new(name: 'MediaPackageV2AbWatermarkerIrdetoSettings')
+    MediaPackageV2CaptionLanguageSetting = Shapes::StringShape.new(name: 'MediaPackageV2CaptionLanguageSetting')
     MediaPackageV2DestinationSettings = Shapes::StructureShape.new(name: 'MediaPackageV2DestinationSettings')
     MediaPackageV2GroupSettings = Shapes::StructureShape.new(name: 'MediaPackageV2GroupSettings')
     MediaPackageV2WatermarkingSettings = Shapes::StructureShape.new(name: 'MediaPackageV2WatermarkingSettings')
@@ -4357,6 +4358,7 @@ module Aws::MediaLive
     MediaPackageV2GroupSettings.add_member(:timed_metadata_passthrough, Shapes::ShapeRef.new(shape: CmafTimedMetadataPassthrough, location_name: "timedMetadataPassthrough"))
     MediaPackageV2GroupSettings.add_member(:additional_destinations, Shapes::ShapeRef.new(shape: __listOfMediaPackageAdditionalDestinations, location_name: "additionalDestinations"))
     MediaPackageV2GroupSettings.add_member(:watermarking_settings, Shapes::ShapeRef.new(shape: MediaPackageV2WatermarkingSettings, location_name: "watermarkingSettings"))
+    MediaPackageV2GroupSettings.add_member(:caption_language_setting, Shapes::ShapeRef.new(shape: MediaPackageV2CaptionLanguageSetting, location_name: "captionLanguageSetting"))
     MediaPackageV2GroupSettings.struct_class = Types::MediaPackageV2GroupSettings
 
     MediaPackageV2WatermarkingSettings.add_member(:media_package_v2_ab_watermarker_irdeto_settings, Shapes::ShapeRef.new(shape: MediaPackageV2AbWatermarkerIrdetoSettings, location_name: "mediaPackageV2AbWatermarkerIrdetoSettings"))

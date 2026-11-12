@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2026-11-12)
+------------------
+
+* Feature - MediaConnect adds four features. (1) RTMP Push on Router Input and Flows (RTMP, RTMPS, eRTMP). (2) PID Remapping on Router rewrites PIDs inline without transcoding. (3) Key Frame Switching transitions router inputs on video boundaries. (4) SRT Merge Input bonds redundant SRT streams.
+
 1.120.0 (2026-11-11)
 ------------------
 

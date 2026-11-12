@@ -625,6 +625,14 @@ module Aws::EC2
     #   The exclusion configuration for Elastic File System service.
     #   @return [String]
     #
+    # @!attribute [rw] global_accelerator
+    #   The exclusion configuration for AWS Global Accelerator.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_gateway_v2
+    #   The exclusion configuration for Amazon API Gateway V2.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AccountVpcEncryptionControlExclusions AWS API Documentation
     #
     class AccountVpcEncryptionControlExclusions < Struct.new(
@@ -635,7 +643,9 @@ module Aws::EC2
       :vpc_peering,
       :lambda,
       :vpc_lattice,
-      :elastic_file_system)
+      :elastic_file_system,
+      :global_accelerator,
+      :api_gateway_v2)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11926,8 +11936,7 @@ module Aws::EC2
     # @!attribute [rw] traffic_type
     #   The type of traffic to monitor (accepted traffic, rejected traffic,
     #   or all traffic). This parameter is not supported for transit gateway
-    #   or Cloud WAN resource types. It is required for the other resource
-    #   types.
+    #   resource types. It is required for the other resource types.
     #   @return [String]
     #
     # @!attribute [rw] log_destination_type
@@ -11967,9 +11976,8 @@ module Aws::EC2
     #   flow log is created using the default format. If you specify this
     #   parameter, you must include at least one field. For more information
     #   about the available fields, see [Flow log records][1] in the *Amazon
-    #   VPC User Guide*, [Transit Gateway Flow Log records][2] in the
-    #   *Amazon Web Services Transit Gateway Guide*, or [Cloud WAN Flow Log
-    #   records][3] in the *Amazon Web Services Cloud WAN User Guide*.
+    #   VPC User Guide* or [Transit Gateway Flow Log records][2] in the
+    #   *Amazon Web Services Transit Gateway Guide*.
     #
     #   Specify the fields using the `${field-id}` format, separated by
     #   spaces.
@@ -11978,7 +11986,6 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html
     #   [2]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-flow-logs.html#flow-log-records
-    #   [3]: https://docs.aws.amazon.com/network-manager/latest/cloudwan/cwan-flow-logs.html
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
@@ -11989,8 +11996,7 @@ module Aws::EC2
     #   The maximum interval of time during which a flow of packets is
     #   captured and aggregated into a flow log record. The possible values
     #   are 60 seconds (1 minute) or 600 seconds (10 minutes). This
-    #   parameter must be 60 seconds for transit gateway and Cloud WAN
-    #   resource types.
+    #   parameter must be 60 seconds for transit gateway resource types.
     #
     #   When a network interface is attached to a [Nitro-based instance][1],
     #   the aggregation interval is always 60 seconds or less, regardless of
@@ -14243,6 +14249,64 @@ module Aws::EC2
     #
     class CreateManagedPrefixListResult < Struct.new(
       :prefix_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metrics
+    #   The names of the metrics to include in the metric category.
+    #
+    #   Specify each metric by its Amazon CloudWatch metric name or its
+    #   OpenTelemetry metric name. The two names for a measurement are
+    #   separate entries, and you can include both.
+    #
+    #   In Regions where Amazon CloudWatch OpenTelemetry metrics aren't
+    #   available, you can't specify OpenTelemetry metric names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the metric category during creation.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateMetricCategoryRequest AWS API Documentation
+    #
+    class CreateMetricCategoryRequest < Struct.new(
+      :metrics,
+      :tag_specifications,
+      :client_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_category
+    #   Information about the metric category.
+    #   @return [Types::MetricCategory]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateMetricCategoryResult AWS API Documentation
+    #
+    class CreateMetricCategoryResult < Struct.new(
+      :metric_category)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21111,6 +21175,38 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] metric_category_id
+    #   The ID of the metric category.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteMetricCategoryRequest AWS API Documentation
+    #
+    class DeleteMetricCategoryRequest < Struct.new(
+      :metric_category_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_category_id
+    #   The ID of the metric category that was deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteMetricCategoryResult AWS API Documentation
+    #
+    class DeleteMetricCategoryResult < Struct.new(
+      :metric_category_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -27496,7 +27592,8 @@ module Aws::EC2
     #     for example, `2025-11-29T*`, which matches an entire day.
     #
     #   * `resource-type` - The resource type (`ec2:Instance` \|
-    #     `ec2:LaunchTemplate`).
+    #     `ec2:LaunchTemplate` \| `imagebuilder:ImageRecipe` \|
+    #     `imagebuilder:ContainerRecipe`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] dry_run
@@ -31603,6 +31700,74 @@ module Aws::EC2
     class DescribeManagedPrefixListsResult < Struct.new(
       :next_token,
       :prefix_lists)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_category_ids
+    #   The IDs of the metric categories. If you specify IDs, you can't
+    #   specify `MaxResults` or `NextToken`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   The filters.
+    #
+    #   * `metric-name` - The name of a metric in the metric category.
+    #
+    #   ^
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #   Valid range: 5 - 100.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeMetricCategoriesRequest AWS API Documentation
+    #
+    class DescribeMetricCategoriesRequest < Struct.new(
+      :metric_category_ids,
+      :filters,
+      :max_results,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_categories
+    #   Information about the metric categories.
+    #   @return [Array<Types::MetricCategory>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeMetricCategoriesResult AWS API Documentation
+    #
+    class DescribeMetricCategoriesResult < Struct.new(
+      :metric_categories,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -52933,7 +53098,8 @@ module Aws::EC2
     # type.
     #
     # @!attribute [rw] resource_type
-    #   The type of resource (`ec2:Instance` or `ec2:LaunchTemplate`).
+    #   The type of resource (`ec2:Instance` \| `ec2:LaunchTemplate` \|
+    #   `imagebuilder:ImageRecipe` \| `imagebuilder:ContainerRecipe`).
     #   @return [String]
     #
     # @!attribute [rw] report_id
@@ -52976,7 +53142,8 @@ module Aws::EC2
     # @!attribute [rw] resource_type
     #   The resource type.
     #
-    #   Valid values: `ec2:Instance` \| `ec2:LaunchTemplate`
+    #   Valid values: `ec2:Instance` \| `ec2:LaunchTemplate` \|
+    #   `imagebuilder:ImageRecipe` \| `imagebuilder:ContainerRecipe`
     #   @return [String]
     #
     # @!attribute [rw] resource_type_options
@@ -53044,7 +53211,8 @@ module Aws::EC2
     # @!attribute [rw] resource_type
     #   The resource type.
     #
-    #   Valid values: `ec2:Instance` \| `ec2:LaunchTemplate`
+    #   Valid values: `ec2:Instance` \| `ec2:LaunchTemplate` \|
+    #   `imagebuilder:ImageRecipe` \| `imagebuilder:ContainerRecipe`
     #   @return [String]
     #
     # @!attribute [rw] resource_type_options
@@ -63833,10 +64001,15 @@ module Aws::EC2
     #   monitoring is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] metric_category_ids
+    #   The IDs of the metric categories to associate with the instance.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplatesMonitoring AWS API Documentation
     #
     class LaunchTemplatesMonitoring < Struct.new(
-      :enabled)
+      :enabled,
+      :metric_category_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -63848,10 +64021,16 @@ module Aws::EC2
     #   monitoring is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] metric_category_ids
+    #   The IDs of the metric categories to associate with the instance. To
+    #   specify metric categories, you must also enable detailed monitoring.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplatesMonitoringRequest AWS API Documentation
     #
     class LaunchTemplatesMonitoringRequest < Struct.new(
-      :enabled)
+      :enabled,
+      :metric_category_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -65230,6 +65409,32 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes a metric category. A metric category is a set of additional
+    # metrics that you can associate with an instance that has detailed
+    # monitoring enabled.
+    #
+    # @!attribute [rw] metric_category_id
+    #   The ID of the metric category.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics
+    #   The names of the metrics in the metric category.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the metric category.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MetricCategory AWS API Documentation
+    #
+    class MetricCategory < Struct.new(
+      :metric_category_id,
+      :metrics,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains a single data point from a capacity metrics query, including
     # the dimension values, timestamp, and metric values for that specific
     # combination.
@@ -65443,6 +65648,16 @@ module Aws::EC2
     #   account-level encryption enforcement.
     #   @return [String]
     #
+    # @!attribute [rw] global_accelerator
+    #   Specifies whether to exclude AWS Global Accelerator from
+    #   account-level encryption enforcement.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_gateway_v2
+    #   Specifies whether to exclude Amazon API Gateway V2 from
+    #   account-level encryption enforcement.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyAccountVpcEncryptionControlRequest AWS API Documentation
     #
     class ModifyAccountVpcEncryptionControlRequest < Struct.new(
@@ -65455,7 +65670,9 @@ module Aws::EC2
       :vpc_peering,
       :lambda,
       :vpc_lattice,
-      :elastic_file_system)
+      :elastic_file_system,
+      :global_accelerator,
+      :api_gateway_v2)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -68496,6 +68713,51 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] metric_category_id
+    #   The ID of the metric category.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics
+    #   The names of the metrics for the metric category. These metrics
+    #   replace the existing metrics, and must differ from the current set.
+    #
+    #   Specify each metric by its Amazon CloudWatch metric name or its
+    #   OpenTelemetry metric name. The two names for a measurement are
+    #   separate entries, and you can include both.
+    #
+    #   In Regions where Amazon CloudWatch OpenTelemetry metrics aren't
+    #   available, you can't specify OpenTelemetry metric names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyMetricCategoryRequest AWS API Documentation
+    #
+    class ModifyMetricCategoryRequest < Struct.new(
+      :metric_category_id,
+      :metrics,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_category
+    #   Information about the metric category.
+    #   @return [Types::MetricCategory]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyMetricCategoryResult AWS API Documentation
+    #
+    class ModifyMetricCategoryResult < Struct.new(
+      :metric_category)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the parameters for ModifyNetworkInterfaceAttribute.
     #
     # @!attribute [rw] ena_srd_specification
@@ -70822,6 +71084,16 @@ module Aws::EC2
     #   encryption enforcement.
     #   @return [String]
     #
+    # @!attribute [rw] global_accelerator_exclusion
+    #   Specifies whether to exclude AWS Global Accelerator traffic from
+    #   encryption enforcement.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_gateway_v2_exclusion
+    #   Specifies whether to exclude Amazon API Gateway V2 traffic from
+    #   encryption enforcement.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEncryptionControlRequest AWS API Documentation
     #
     class ModifyVpcEncryptionControlRequest < Struct.new(
@@ -70835,7 +71107,9 @@ module Aws::EC2
       :vpc_peering_exclusion,
       :lambda_exclusion,
       :vpc_lattice_exclusion,
-      :elastic_file_system_exclusion)
+      :elastic_file_system_exclusion,
+      :global_accelerator_exclusion,
+      :api_gateway_v2_exclusion)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -71750,6 +72024,12 @@ module Aws::EC2
     #   The IDs of the instances.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] metric_category_ids
+    #   The IDs of the metric categories to associate with the instances.
+    #   The specified metric categories are added to any metric categories
+    #   that are already associated with the instances.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
@@ -71761,6 +72041,7 @@ module Aws::EC2
     #
     class MonitorInstancesRequest < Struct.new(
       :instance_ids,
+      :metric_category_ids,
       :dry_run)
       SENSITIVE = []
       include Aws::Structure
@@ -71780,6 +72061,11 @@ module Aws::EC2
 
     # Describes the monitoring of an instance.
     #
+    # @!attribute [rw] metric_category_ids
+    #   The IDs of the metric categories that are associated with the
+    #   instance.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] state
     #   Indicates whether detailed monitoring is enabled. Otherwise, basic
     #   monitoring is enabled.
@@ -71788,6 +72074,7 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Monitoring AWS API Documentation
     #
     class Monitoring < Struct.new(
+      :metric_category_ids,
       :state)
       SENSITIVE = []
       include Aws::Structure
@@ -81281,6 +81568,11 @@ module Aws::EC2
 
     # Describes the monitoring of an instance.
     #
+    # @!attribute [rw] metric_category_ids
+    #   The IDs of the metric categories to associate with the instance. To
+    #   specify metric categories, you must also enable detailed monitoring.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] enabled
     #   Indicates whether detailed monitoring is enabled. Otherwise, basic
     #   monitoring is enabled.
@@ -81289,6 +81581,7 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstancesMonitoringEnabled AWS API Documentation
     #
     class RunInstancesMonitoringEnabled < Struct.new(
+      :metric_category_ids,
       :enabled)
       SENSITIVE = []
       include Aws::Structure
@@ -90401,6 +90694,14 @@ module Aws::EC2
     #   The IDs of the instances.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] metric_category_ids
+    #   The IDs of the metric categories to remove from the instances. If
+    #   you specify metric categories, only those metric categories are
+    #   removed and detailed monitoring remains enabled. If you don't
+    #   specify metric categories, detailed monitoring and all metric
+    #   categories are turned off.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
@@ -90412,6 +90713,7 @@ module Aws::EC2
     #
     class UnmonitorInstancesRequest < Struct.new(
       :instance_ids,
+      :metric_category_ids,
       :dry_run)
       SENSITIVE = []
       include Aws::Structure
@@ -93186,6 +93488,16 @@ module Aws::EC2
     #   encryption enforcement.
     #   @return [String]
     #
+    # @!attribute [rw] global_accelerator_exclusion
+    #   Specifies whether to exclude AWS Global Accelerator traffic from
+    #   encryption enforcement.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_gateway_v2_exclusion
+    #   Specifies whether to exclude Amazon API Gateway V2 traffic from
+    #   encryption enforcement.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEncryptionControlConfiguration AWS API Documentation
     #
     class VpcEncryptionControlConfiguration < Struct.new(
@@ -93197,7 +93509,9 @@ module Aws::EC2
       :vpc_peering_exclusion,
       :lambda_exclusion,
       :vpc_lattice_exclusion,
-      :elastic_file_system_exclusion)
+      :elastic_file_system_exclusion,
+      :global_accelerator_exclusion,
+      :api_gateway_v2_exclusion)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -93272,6 +93586,14 @@ module Aws::EC2
     #   The exclusion configuration for Elastic File System traffic.
     #   @return [Types::VpcEncryptionControlExclusion]
     #
+    # @!attribute [rw] global_accelerator
+    #   The exclusion configuration for AWS Global Accelerator traffic.
+    #   @return [Types::VpcEncryptionControlExclusion]
+    #
+    # @!attribute [rw] api_gateway_v2
+    #   The exclusion configuration for Amazon API Gateway V2 traffic.
+    #   @return [Types::VpcEncryptionControlExclusion]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEncryptionControlExclusions AWS API Documentation
     #
     class VpcEncryptionControlExclusions < Struct.new(
@@ -93282,7 +93604,9 @@ module Aws::EC2
       :vpc_peering,
       :lambda,
       :vpc_lattice,
-      :elastic_file_system)
+      :elastic_file_system,
+      :global_accelerator,
+      :api_gateway_v2)
       SENSITIVE = []
       include Aws::Structure
     end

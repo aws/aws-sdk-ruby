@@ -506,7 +506,7 @@ module Aws::MediaConnect
     #           name: "String", # required
     #           network_name: "String", # required
     #           port: 1, # required
-    #           protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq
+    #           protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq, rtmp-push
     #           ttl: 1, # required
     #         },
     #       },
@@ -524,7 +524,7 @@ module Aws::MediaConnect
     #   resp.outputs[0].network_output.name #=> String
     #   resp.outputs[0].network_output.network_name #=> String
     #   resp.outputs[0].network_output.port #=> Integer
-    #   resp.outputs[0].network_output.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.outputs[0].network_output.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #   resp.outputs[0].network_output.ttl #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddBridgeOutputs AWS API Documentation
@@ -570,7 +570,7 @@ module Aws::MediaConnect
     #           name: "String", # required
     #           network_name: "String", # required
     #           port: 1, # required
-    #           protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq
+    #           protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq, rtmp-push
     #         },
     #       },
     #     ],
@@ -589,7 +589,7 @@ module Aws::MediaConnect
     #   resp.sources[0].network_source.name #=> String
     #   resp.sources[0].network_source.network_name #=> String
     #   resp.sources[0].network_source.port #=> Integer
-    #   resp.sources[0].network_source.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.sources[0].network_source.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddBridgeSources AWS API Documentation
     #
@@ -733,7 +733,7 @@ module Aws::MediaConnect
     #         min_latency: 1,
     #         name: "String",
     #         port: 1,
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq, rtmp-push
     #         remote_id: "String",
     #         sender_control_port: 1,
     #         smoothing_latency: 1,
@@ -761,6 +761,17 @@ module Aws::MediaConnect
     #         },
     #         ndi_output_timecode_source: "EMBEDDED_TIMECODE", # accepts EMBEDDED_TIMECODE, UTC_SYSTEM_TIME
     #         ndi_audio_reference_level: 1,
+    #         rtmp_push_settings: {
+    #           application_name: "String", # required
+    #           stream_name: "String", # required
+    #           tls_encryption: {
+    #             encryption_type: "PUBLIC", # accepts PUBLIC
+    #             encryption_configuration: { # required
+    #               public: {
+    #               },
+    #             },
+    #           },
+    #         },
     #       },
     #     ],
     #   })
@@ -803,7 +814,7 @@ module Aws::MediaConnect
     #   resp.outputs[0].transport.max_latency #=> Integer
     #   resp.outputs[0].transport.max_sync_buffer #=> Integer
     #   resp.outputs[0].transport.min_latency #=> Integer
-    #   resp.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #   resp.outputs[0].transport.remote_id #=> String
     #   resp.outputs[0].transport.sender_control_port #=> Integer
     #   resp.outputs[0].transport.sender_ip_address #=> String
@@ -817,6 +828,12 @@ module Aws::MediaConnect
     #   resp.outputs[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.outputs[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
     #   resp.outputs[0].transport.ndi_audio_reference_level #=> Integer
+    #   resp.outputs[0].transport.rtmp_push_source_settings.application_name #=> String
+    #   resp.outputs[0].transport.rtmp_push_source_settings.stream_name #=> String
+    #   resp.outputs[0].transport.rtmp_push_source_settings.naming_type #=> String, one of "MANUAL", "AUTOMATIC"
+    #   resp.outputs[0].transport.rtmp_push_output_settings.application_name #=> String
+    #   resp.outputs[0].transport.rtmp_push_output_settings.stream_name #=> String
+    #   resp.outputs[0].transport.rtmp_push_output_settings.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.outputs[0].bridge_arn #=> String
     #   resp.outputs[0].bridge_ports #=> Array
@@ -890,7 +907,7 @@ module Aws::MediaConnect
     #         ],
     #         min_latency: 1,
     #         name: "String",
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq, rtmp-push
     #         sender_control_port: 1,
     #         sender_ip_address: "String",
     #         source_listener_address: "String",
@@ -918,6 +935,16 @@ module Aws::MediaConnect
     #             secrets_manager: {
     #               secret_arn: "SecretArn", # required
     #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             },
+    #           },
+    #         },
+    #         rtmp_push_settings: {
+    #           naming_configuration: { # required
+    #             manual: {
+    #               application_name: "String", # required
+    #               stream_name: "String", # required
     #             },
     #             automatic: {
     #             },
@@ -962,7 +989,7 @@ module Aws::MediaConnect
     #   resp.sources[0].transport.max_latency #=> Integer
     #   resp.sources[0].transport.max_sync_buffer #=> Integer
     #   resp.sources[0].transport.min_latency #=> Integer
-    #   resp.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #   resp.sources[0].transport.remote_id #=> String
     #   resp.sources[0].transport.sender_control_port #=> Integer
     #   resp.sources[0].transport.sender_ip_address #=> String
@@ -976,6 +1003,12 @@ module Aws::MediaConnect
     #   resp.sources[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.sources[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
     #   resp.sources[0].transport.ndi_audio_reference_level #=> Integer
+    #   resp.sources[0].transport.rtmp_push_source_settings.application_name #=> String
+    #   resp.sources[0].transport.rtmp_push_source_settings.stream_name #=> String
+    #   resp.sources[0].transport.rtmp_push_source_settings.naming_type #=> String, one of "MANUAL", "AUTOMATIC"
+    #   resp.sources[0].transport.rtmp_push_output_settings.application_name #=> String
+    #   resp.sources[0].transport.rtmp_push_output_settings.stream_name #=> String
+    #   resp.sources[0].transport.rtmp_push_output_settings.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.sources[0].vpc_interface_name #=> String
     #   resp.sources[0].whitelist_cidr #=> String
     #   resp.sources[0].gateway_bridge_source.bridge_arn #=> String
@@ -1184,6 +1217,10 @@ module Aws::MediaConnect
     #   resp.router_inputs[0].configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
     #   resp.router_inputs[0].configuration.standard.protocol_configuration.srt_listener.decryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_inputs[0].configuration.standard.protocol_configuration.srt_listener.decryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_inputs[0].configuration.standard.protocol_configuration.rtmp_push.port #=> Integer
+    #   resp.router_inputs[0].configuration.standard.protocol_configuration.rtmp_push.naming_type #=> String, one of "MANUAL", "AUTOMATIC"
+    #   resp.router_inputs[0].configuration.standard.protocol_configuration.rtmp_push.naming_configuration.manual.application_name #=> String
+    #   resp.router_inputs[0].configuration.standard.protocol_configuration.rtmp_push.naming_configuration.manual.stream_name #=> String
     #   resp.router_inputs[0].configuration.standard.protocol_configuration.srt_caller.source_address #=> String
     #   resp.router_inputs[0].configuration.standard.protocol_configuration.srt_caller.source_port #=> Integer
     #   resp.router_inputs[0].configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
@@ -1192,7 +1229,7 @@ module Aws::MediaConnect
     #   resp.router_inputs[0].configuration.standard.protocol_configuration.srt_caller.decryption_configuration.encryption_key.role_arn #=> String
     #   resp.router_inputs[0].configuration.standard.protocol_configuration.rtp.port #=> Integer
     #   resp.router_inputs[0].configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
-    #   resp.router_inputs[0].configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.router_inputs[0].configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"
     #   resp.router_inputs[0].configuration.media_live_channel.media_live_channel_arn #=> String
     #   resp.router_inputs[0].configuration.media_live_channel.media_live_pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
     #   resp.router_inputs[0].configuration.media_live_channel.media_live_channel_output_name #=> String
@@ -1207,6 +1244,10 @@ module Aws::MediaConnect
     #   resp.router_inputs[0].configuration.failover.protocol_configurations[0].srt_listener.minimum_latency_milliseconds #=> Integer
     #   resp.router_inputs[0].configuration.failover.protocol_configurations[0].srt_listener.decryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_inputs[0].configuration.failover.protocol_configurations[0].srt_listener.decryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_inputs[0].configuration.failover.protocol_configurations[0].rtmp_push.port #=> Integer
+    #   resp.router_inputs[0].configuration.failover.protocol_configurations[0].rtmp_push.naming_type #=> String, one of "MANUAL", "AUTOMATIC"
+    #   resp.router_inputs[0].configuration.failover.protocol_configurations[0].rtmp_push.naming_configuration.manual.application_name #=> String
+    #   resp.router_inputs[0].configuration.failover.protocol_configurations[0].rtmp_push.naming_configuration.manual.stream_name #=> String
     #   resp.router_inputs[0].configuration.failover.protocol_configurations[0].srt_caller.source_address #=> String
     #   resp.router_inputs[0].configuration.failover.protocol_configurations[0].srt_caller.source_port #=> Integer
     #   resp.router_inputs[0].configuration.failover.protocol_configurations[0].srt_caller.minimum_latency_milliseconds #=> Integer
@@ -1228,6 +1269,16 @@ module Aws::MediaConnect
     #   resp.router_inputs[0].configuration.merge.protocol_configurations[0].rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_inputs[0].configuration.merge.protocol_configurations[0].rist.port #=> Integer
     #   resp.router_inputs[0].configuration.merge.protocol_configurations[0].rist.recovery_latency_milliseconds #=> Integer
+    #   resp.router_inputs[0].configuration.merge.protocol_configurations[0].srt_listener.port #=> Integer
+    #   resp.router_inputs[0].configuration.merge.protocol_configurations[0].srt_listener.minimum_latency_milliseconds #=> Integer
+    #   resp.router_inputs[0].configuration.merge.protocol_configurations[0].srt_listener.decryption_configuration.encryption_key.secret_arn #=> String
+    #   resp.router_inputs[0].configuration.merge.protocol_configurations[0].srt_listener.decryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_inputs[0].configuration.merge.protocol_configurations[0].srt_caller.source_address #=> String
+    #   resp.router_inputs[0].configuration.merge.protocol_configurations[0].srt_caller.source_port #=> Integer
+    #   resp.router_inputs[0].configuration.merge.protocol_configurations[0].srt_caller.minimum_latency_milliseconds #=> Integer
+    #   resp.router_inputs[0].configuration.merge.protocol_configurations[0].srt_caller.stream_id #=> String
+    #   resp.router_inputs[0].configuration.merge.protocol_configurations[0].srt_caller.decryption_configuration.encryption_key.secret_arn #=> String
+    #   resp.router_inputs[0].configuration.merge.protocol_configurations[0].srt_caller.decryption_configuration.encryption_key.role_arn #=> String
     #   resp.router_inputs[0].configuration.merge.merge_recovery_window_milliseconds #=> Integer
     #   resp.router_inputs[0].routed_outputs #=> Integer
     #   resp.router_inputs[0].maximum_routed_outputs #=> Integer
@@ -1247,10 +1298,16 @@ module Aws::MediaConnect
     #   resp.router_inputs[0].tags #=> Hash
     #   resp.router_inputs[0].tags["String"] #=> String
     #   resp.router_inputs[0].stream_details.standard.source_ip_address #=> String
+    #   resp.router_inputs[0].stream_details.standard.rtmp_push.application_name #=> String
+    #   resp.router_inputs[0].stream_details.standard.rtmp_push.stream_name #=> String
     #   resp.router_inputs[0].stream_details.failover.source_index_zero_stream_details.source_index #=> Integer
     #   resp.router_inputs[0].stream_details.failover.source_index_zero_stream_details.source_ip_address #=> String
+    #   resp.router_inputs[0].stream_details.failover.source_index_zero_stream_details.rtmp_push.application_name #=> String
+    #   resp.router_inputs[0].stream_details.failover.source_index_zero_stream_details.rtmp_push.stream_name #=> String
     #   resp.router_inputs[0].stream_details.failover.source_index_one_stream_details.source_index #=> Integer
     #   resp.router_inputs[0].stream_details.failover.source_index_one_stream_details.source_ip_address #=> String
+    #   resp.router_inputs[0].stream_details.failover.source_index_one_stream_details.rtmp_push.application_name #=> String
+    #   resp.router_inputs[0].stream_details.failover.source_index_one_stream_details.rtmp_push.stream_name #=> String
     #   resp.router_inputs[0].stream_details.merge.source_index_zero_stream_details.source_index #=> Integer
     #   resp.router_inputs[0].stream_details.merge.source_index_zero_stream_details.source_ip_address #=> String
     #   resp.router_inputs[0].stream_details.merge.source_index_one_stream_details.source_index #=> Integer
@@ -1424,6 +1481,18 @@ module Aws::MediaConnect
     #   resp.router_outputs[0].maintenance_schedule.window.end #=> Time
     #   resp.router_outputs[0].maintenance_schedule.window.scheduled_time #=> Time
     #   resp.router_outputs[0].fabric_configuration.recovery_latency_mode #=> String, one of "BALANCED", "LOW_LATENCY"
+    #   resp.router_outputs[0].fabric_configuration.switching_mode #=> String, one of "IMMEDIATE", "KEY_FRAME"
+    #   resp.router_outputs[0].fabric_configuration.switching_configuration.key_frame.key_frame_wait_milliseconds #=> Integer
+    #   resp.router_outputs[0].processors.single_program_transport_stream_pid_map.rules #=> Array
+    #   resp.router_outputs[0].processors.single_program_transport_stream_pid_map.rules[0].match_expression #=> String
+    #   resp.router_outputs[0].processors.single_program_transport_stream_pid_map.rules[0].action #=> String
+    #   resp.router_outputs[0].processors.single_program_transport_stream_pid_map.default_action #=> String
+    #   resp.router_outputs[0].processors.single_program_transport_stream_pid_map.transport_stream_id.set #=> Integer
+    #   resp.router_outputs[0].processors.single_program_transport_stream_pid_map.program_number.set #=> Integer
+    #   resp.router_outputs[0].processors.single_program_transport_stream_pid_map.program_map_table_pid.set #=> Integer
+    #   resp.router_outputs[0].processors.single_program_transport_stream_pid_map.program_clock_reference_pid.set #=> Integer
+    #   resp.router_outputs[0].processors.single_program_transport_stream_pid_map.auto.start_pid #=> Integer
+    #   resp.router_outputs[0].processors.single_program_transport_stream_pid_map.auto.pids_per_program #=> Integer
     #   resp.router_outputs[0].associated_source_endpoint_arns #=> Array
     #   resp.router_outputs[0].associated_source_endpoint_arns[0] #=> String
     #   resp.errors #=> Array
@@ -1624,7 +1693,7 @@ module Aws::MediaConnect
     #           name: "String", # required
     #           network_name: "String", # required
     #           port: 1, # required
-    #           protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq
+    #           protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq, rtmp-push
     #           ttl: 1, # required
     #         },
     #       },
@@ -1655,7 +1724,7 @@ module Aws::MediaConnect
     #           name: "String", # required
     #           network_name: "String", # required
     #           port: 1, # required
-    #           protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq
+    #           protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq, rtmp-push
     #         },
     #       },
     #     ],
@@ -1683,7 +1752,7 @@ module Aws::MediaConnect
     #   resp.bridge.outputs[0].network_output.name #=> String
     #   resp.bridge.outputs[0].network_output.network_name #=> String
     #   resp.bridge.outputs[0].network_output.port #=> Integer
-    #   resp.bridge.outputs[0].network_output.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.bridge.outputs[0].network_output.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #   resp.bridge.outputs[0].network_output.ttl #=> Integer
     #   resp.bridge.placement_arn #=> String
     #   resp.bridge.source_failover_config.failover_mode #=> String, one of "MERGE", "FAILOVER"
@@ -1700,7 +1769,7 @@ module Aws::MediaConnect
     #   resp.bridge.sources[0].network_source.name #=> String
     #   resp.bridge.sources[0].network_source.network_name #=> String
     #   resp.bridge.sources[0].network_source.port #=> Integer
-    #   resp.bridge.sources[0].network_source.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.bridge.sources[0].network_source.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateBridge AWS API Documentation
     #
@@ -1864,7 +1933,7 @@ module Aws::MediaConnect
     #         min_latency: 1,
     #         name: "String",
     #         port: 1,
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq, rtmp-push
     #         remote_id: "String",
     #         sender_control_port: 1,
     #         smoothing_latency: 1,
@@ -1892,6 +1961,17 @@ module Aws::MediaConnect
     #         },
     #         ndi_output_timecode_source: "EMBEDDED_TIMECODE", # accepts EMBEDDED_TIMECODE, UTC_SYSTEM_TIME
     #         ndi_audio_reference_level: 1,
+    #         rtmp_push_settings: {
+    #           application_name: "String", # required
+    #           stream_name: "String", # required
+    #           tls_encryption: {
+    #             encryption_type: "PUBLIC", # accepts PUBLIC
+    #             encryption_configuration: { # required
+    #               public: {
+    #               },
+    #             },
+    #           },
+    #         },
     #       },
     #     ],
     #     source: {
@@ -1928,7 +2008,7 @@ module Aws::MediaConnect
     #       ],
     #       min_latency: 1,
     #       name: "String",
-    #       protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq
+    #       protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq, rtmp-push
     #       sender_control_port: 1,
     #       sender_ip_address: "String",
     #       source_listener_address: "String",
@@ -1956,6 +2036,16 @@ module Aws::MediaConnect
     #           secrets_manager: {
     #             secret_arn: "SecretArn", # required
     #             role_arn: "RoleArn", # required
+    #           },
+    #           automatic: {
+    #           },
+    #         },
+    #       },
+    #       rtmp_push_settings: {
+    #         naming_configuration: { # required
+    #           manual: {
+    #             application_name: "String", # required
+    #             stream_name: "String", # required
     #           },
     #           automatic: {
     #           },
@@ -2005,7 +2095,7 @@ module Aws::MediaConnect
     #         ],
     #         min_latency: 1,
     #         name: "String",
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq, rtmp-push
     #         sender_control_port: 1,
     #         sender_ip_address: "String",
     #         source_listener_address: "String",
@@ -2033,6 +2123,16 @@ module Aws::MediaConnect
     #             secrets_manager: {
     #               secret_arn: "SecretArn", # required
     #               role_arn: "RoleArn", # required
+    #             },
+    #             automatic: {
+    #             },
+    #           },
+    #         },
+    #         rtmp_push_settings: {
+    #           naming_configuration: { # required
+    #             manual: {
+    #               application_name: "String", # required
+    #               stream_name: "String", # required
     #             },
     #             automatic: {
     #             },
@@ -2176,7 +2276,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.max_latency #=> Integer
     #   resp.flow.outputs[0].transport.max_sync_buffer #=> Integer
     #   resp.flow.outputs[0].transport.min_latency #=> Integer
-    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.sender_control_port #=> Integer
     #   resp.flow.outputs[0].transport.sender_ip_address #=> String
@@ -2190,6 +2290,12 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.outputs[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
     #   resp.flow.outputs[0].transport.ndi_audio_reference_level #=> Integer
+    #   resp.flow.outputs[0].transport.rtmp_push_source_settings.application_name #=> String
+    #   resp.flow.outputs[0].transport.rtmp_push_source_settings.stream_name #=> String
+    #   resp.flow.outputs[0].transport.rtmp_push_source_settings.naming_type #=> String, one of "MANUAL", "AUTOMATIC"
+    #   resp.flow.outputs[0].transport.rtmp_push_output_settings.application_name #=> String
+    #   resp.flow.outputs[0].transport.rtmp_push_output_settings.stream_name #=> String
+    #   resp.flow.outputs[0].transport.rtmp_push_output_settings.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.flow.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.flow.outputs[0].bridge_arn #=> String
     #   resp.flow.outputs[0].bridge_ports #=> Array
@@ -2232,7 +2338,7 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.max_latency #=> Integer
     #   resp.flow.source.transport.max_sync_buffer #=> Integer
     #   resp.flow.source.transport.min_latency #=> Integer
-    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #   resp.flow.source.transport.remote_id #=> String
     #   resp.flow.source.transport.sender_control_port #=> Integer
     #   resp.flow.source.transport.sender_ip_address #=> String
@@ -2246,6 +2352,12 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.source.transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
     #   resp.flow.source.transport.ndi_audio_reference_level #=> Integer
+    #   resp.flow.source.transport.rtmp_push_source_settings.application_name #=> String
+    #   resp.flow.source.transport.rtmp_push_source_settings.stream_name #=> String
+    #   resp.flow.source.transport.rtmp_push_source_settings.naming_type #=> String, one of "MANUAL", "AUTOMATIC"
+    #   resp.flow.source.transport.rtmp_push_output_settings.application_name #=> String
+    #   resp.flow.source.transport.rtmp_push_output_settings.stream_name #=> String
+    #   resp.flow.source.transport.rtmp_push_output_settings.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
     #   resp.flow.source.gateway_bridge_source.bridge_arn #=> String
@@ -2292,7 +2404,7 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.max_latency #=> Integer
     #   resp.flow.sources[0].transport.max_sync_buffer #=> Integer
     #   resp.flow.sources[0].transport.min_latency #=> Integer
-    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #   resp.flow.sources[0].transport.remote_id #=> String
     #   resp.flow.sources[0].transport.sender_control_port #=> Integer
     #   resp.flow.sources[0].transport.sender_ip_address #=> String
@@ -2306,6 +2418,12 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.sources[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
     #   resp.flow.sources[0].transport.ndi_audio_reference_level #=> Integer
+    #   resp.flow.sources[0].transport.rtmp_push_source_settings.application_name #=> String
+    #   resp.flow.sources[0].transport.rtmp_push_source_settings.stream_name #=> String
+    #   resp.flow.sources[0].transport.rtmp_push_source_settings.naming_type #=> String, one of "MANUAL", "AUTOMATIC"
+    #   resp.flow.sources[0].transport.rtmp_push_output_settings.application_name #=> String
+    #   resp.flow.sources[0].transport.rtmp_push_output_settings.stream_name #=> String
+    #   resp.flow.sources[0].transport.rtmp_push_output_settings.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.flow.sources[0].vpc_interface_name #=> String
     #   resp.flow.sources[0].whitelist_cidr #=> String
     #   resp.flow.sources[0].gateway_bridge_source.bridge_arn #=> String
@@ -2520,6 +2638,18 @@ module Aws::MediaConnect
     #               },
     #             },
     #           },
+    #           rtmp_push: {
+    #             port: 1, # required
+    #             naming_type: "MANUAL", # accepts MANUAL, AUTOMATIC
+    #             naming_configuration: { # required
+    #               manual: {
+    #                 application_name: "String", # required
+    #                 stream_name: "String", # required
+    #               },
+    #               automatic: {
+    #               },
+    #             },
+    #           },
     #           srt_caller: {
     #             source_address: "String", # required
     #             source_port: 1, # required
@@ -2537,7 +2667,7 @@ module Aws::MediaConnect
     #             forward_error_correction: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         },
-    #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER
+    #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER, RTMP_PUSH
     #       },
     #       media_live_channel: {
     #         media_live_channel_arn: "MediaLiveChannelArn",
@@ -2570,6 +2700,18 @@ module Aws::MediaConnect
     #                 encryption_key: { # required
     #                   secret_arn: "SecretArn", # required
     #                   role_arn: "RoleArn", # required
+    #                 },
+    #               },
+    #             },
+    #             rtmp_push: {
+    #               port: 1, # required
+    #               naming_type: "MANUAL", # accepts MANUAL, AUTOMATIC
+    #               naming_configuration: { # required
+    #                 manual: {
+    #                   application_name: "String", # required
+    #                   stream_name: "String", # required
+    #                 },
+    #                 automatic: {
     #                 },
     #               },
     #             },
@@ -2620,6 +2762,28 @@ module Aws::MediaConnect
     #             rist: {
     #               port: 1, # required
     #               recovery_latency_milliseconds: 1, # required
+    #             },
+    #             srt_listener: {
+    #               port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               decryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 },
+    #               },
+    #             },
+    #             srt_caller: {
+    #               source_address: "String", # required
+    #               source_port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               stream_id: "String",
+    #               decryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 },
+    #               },
     #             },
     #           },
     #         ],
@@ -2690,6 +2854,10 @@ module Aws::MediaConnect
     #   resp.router_input.configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
     #   resp.router_input.configuration.standard.protocol_configuration.srt_listener.decryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_input.configuration.standard.protocol_configuration.srt_listener.decryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_input.configuration.standard.protocol_configuration.rtmp_push.port #=> Integer
+    #   resp.router_input.configuration.standard.protocol_configuration.rtmp_push.naming_type #=> String, one of "MANUAL", "AUTOMATIC"
+    #   resp.router_input.configuration.standard.protocol_configuration.rtmp_push.naming_configuration.manual.application_name #=> String
+    #   resp.router_input.configuration.standard.protocol_configuration.rtmp_push.naming_configuration.manual.stream_name #=> String
     #   resp.router_input.configuration.standard.protocol_configuration.srt_caller.source_address #=> String
     #   resp.router_input.configuration.standard.protocol_configuration.srt_caller.source_port #=> Integer
     #   resp.router_input.configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
@@ -2698,7 +2866,7 @@ module Aws::MediaConnect
     #   resp.router_input.configuration.standard.protocol_configuration.srt_caller.decryption_configuration.encryption_key.role_arn #=> String
     #   resp.router_input.configuration.standard.protocol_configuration.rtp.port #=> Integer
     #   resp.router_input.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
-    #   resp.router_input.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.router_input.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"
     #   resp.router_input.configuration.media_live_channel.media_live_channel_arn #=> String
     #   resp.router_input.configuration.media_live_channel.media_live_pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
     #   resp.router_input.configuration.media_live_channel.media_live_channel_output_name #=> String
@@ -2713,6 +2881,10 @@ module Aws::MediaConnect
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_listener.minimum_latency_milliseconds #=> Integer
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_listener.decryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_listener.decryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_input.configuration.failover.protocol_configurations[0].rtmp_push.port #=> Integer
+    #   resp.router_input.configuration.failover.protocol_configurations[0].rtmp_push.naming_type #=> String, one of "MANUAL", "AUTOMATIC"
+    #   resp.router_input.configuration.failover.protocol_configurations[0].rtmp_push.naming_configuration.manual.application_name #=> String
+    #   resp.router_input.configuration.failover.protocol_configurations[0].rtmp_push.naming_configuration.manual.stream_name #=> String
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_caller.source_address #=> String
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_caller.source_port #=> Integer
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_caller.minimum_latency_milliseconds #=> Integer
@@ -2734,6 +2906,16 @@ module Aws::MediaConnect
     #   resp.router_input.configuration.merge.protocol_configurations[0].rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_input.configuration.merge.protocol_configurations[0].rist.port #=> Integer
     #   resp.router_input.configuration.merge.protocol_configurations[0].rist.recovery_latency_milliseconds #=> Integer
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_listener.port #=> Integer
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_listener.minimum_latency_milliseconds #=> Integer
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_listener.decryption_configuration.encryption_key.secret_arn #=> String
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_listener.decryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_caller.source_address #=> String
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_caller.source_port #=> Integer
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_caller.minimum_latency_milliseconds #=> Integer
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_caller.stream_id #=> String
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_caller.decryption_configuration.encryption_key.secret_arn #=> String
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_caller.decryption_configuration.encryption_key.role_arn #=> String
     #   resp.router_input.configuration.merge.merge_recovery_window_milliseconds #=> Integer
     #   resp.router_input.routed_outputs #=> Integer
     #   resp.router_input.maximum_routed_outputs #=> Integer
@@ -2753,10 +2935,16 @@ module Aws::MediaConnect
     #   resp.router_input.tags #=> Hash
     #   resp.router_input.tags["String"] #=> String
     #   resp.router_input.stream_details.standard.source_ip_address #=> String
+    #   resp.router_input.stream_details.standard.rtmp_push.application_name #=> String
+    #   resp.router_input.stream_details.standard.rtmp_push.stream_name #=> String
     #   resp.router_input.stream_details.failover.source_index_zero_stream_details.source_index #=> Integer
     #   resp.router_input.stream_details.failover.source_index_zero_stream_details.source_ip_address #=> String
+    #   resp.router_input.stream_details.failover.source_index_zero_stream_details.rtmp_push.application_name #=> String
+    #   resp.router_input.stream_details.failover.source_index_zero_stream_details.rtmp_push.stream_name #=> String
     #   resp.router_input.stream_details.failover.source_index_one_stream_details.source_index #=> Integer
     #   resp.router_input.stream_details.failover.source_index_one_stream_details.source_ip_address #=> String
+    #   resp.router_input.stream_details.failover.source_index_one_stream_details.rtmp_push.application_name #=> String
+    #   resp.router_input.stream_details.failover.source_index_one_stream_details.rtmp_push.stream_name #=> String
     #   resp.router_input.stream_details.merge.source_index_zero_stream_details.source_index #=> Integer
     #   resp.router_input.stream_details.merge.source_index_zero_stream_details.source_ip_address #=> String
     #   resp.router_input.stream_details.merge.source_index_one_stream_details.source_index #=> Integer
@@ -2926,6 +3114,9 @@ module Aws::MediaConnect
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Types::RouterOutputProcessors] :processors
+    #   The processor settings for the router output.
+    #
     # @return [Types::CreateRouterOutputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRouterOutputResponse#router_output #router_output} => Types::RouterOutput
@@ -3048,8 +3239,51 @@ module Aws::MediaConnect
     #     },
     #     fabric_configuration: {
     #       recovery_latency_mode: "BALANCED", # required, accepts BALANCED, LOW_LATENCY
+    #       switching_mode: "IMMEDIATE", # accepts IMMEDIATE, KEY_FRAME
+    #       switching_configuration: {
+    #         immediate: {
+    #         },
+    #         key_frame: {
+    #           key_frame_wait_milliseconds: 1,
+    #         },
+    #       },
     #     },
     #     client_token: "ClientToken",
+    #     processors: {
+    #       single_program_transport_stream_pid_map: {
+    #         rules: [ # required
+    #           {
+    #             match_expression: "PidMapRuleMatchExpressionString", # required
+    #             action: "ActionString", # required
+    #           },
+    #         ],
+    #         default_action: "ActionString", # required
+    #         transport_stream_id: {
+    #           passthrough: {
+    #           },
+    #           set: 1,
+    #         },
+    #         program_number: {
+    #           passthrough: {
+    #           },
+    #           set: 1,
+    #         },
+    #         program_map_table_pid: {
+    #           passthrough: {
+    #           },
+    #           set: 1,
+    #         },
+    #         program_clock_reference_pid: {
+    #           passthrough: {
+    #           },
+    #           set: 1,
+    #         },
+    #         auto: {
+    #           start_pid: 1, # required
+    #           pids_per_program: 1, # required
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -3119,6 +3353,18 @@ module Aws::MediaConnect
     #   resp.router_output.maintenance_schedule.window.end #=> Time
     #   resp.router_output.maintenance_schedule.window.scheduled_time #=> Time
     #   resp.router_output.fabric_configuration.recovery_latency_mode #=> String, one of "BALANCED", "LOW_LATENCY"
+    #   resp.router_output.fabric_configuration.switching_mode #=> String, one of "IMMEDIATE", "KEY_FRAME"
+    #   resp.router_output.fabric_configuration.switching_configuration.key_frame.key_frame_wait_milliseconds #=> Integer
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.rules #=> Array
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.rules[0].match_expression #=> String
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.rules[0].action #=> String
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.default_action #=> String
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.transport_stream_id.set #=> Integer
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.program_number.set #=> Integer
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.program_map_table_pid.set #=> Integer
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.program_clock_reference_pid.set #=> Integer
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.auto.start_pid #=> Integer
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.auto.pids_per_program #=> Integer
     #   resp.router_output.associated_source_endpoint_arns #=> Array
     #   resp.router_output.associated_source_endpoint_arns[0] #=> String
     #
@@ -3456,7 +3702,7 @@ module Aws::MediaConnect
     #   resp.bridge.outputs[0].network_output.name #=> String
     #   resp.bridge.outputs[0].network_output.network_name #=> String
     #   resp.bridge.outputs[0].network_output.port #=> Integer
-    #   resp.bridge.outputs[0].network_output.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.bridge.outputs[0].network_output.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #   resp.bridge.outputs[0].network_output.ttl #=> Integer
     #   resp.bridge.placement_arn #=> String
     #   resp.bridge.source_failover_config.failover_mode #=> String, one of "MERGE", "FAILOVER"
@@ -3473,7 +3719,7 @@ module Aws::MediaConnect
     #   resp.bridge.sources[0].network_source.name #=> String
     #   resp.bridge.sources[0].network_source.network_name #=> String
     #   resp.bridge.sources[0].network_source.port #=> Integer
-    #   resp.bridge.sources[0].network_source.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.bridge.sources[0].network_source.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeBridge AWS API Documentation
     #
@@ -3577,7 +3823,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.max_latency #=> Integer
     #   resp.flow.outputs[0].transport.max_sync_buffer #=> Integer
     #   resp.flow.outputs[0].transport.min_latency #=> Integer
-    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.sender_control_port #=> Integer
     #   resp.flow.outputs[0].transport.sender_ip_address #=> String
@@ -3591,6 +3837,12 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.outputs[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
     #   resp.flow.outputs[0].transport.ndi_audio_reference_level #=> Integer
+    #   resp.flow.outputs[0].transport.rtmp_push_source_settings.application_name #=> String
+    #   resp.flow.outputs[0].transport.rtmp_push_source_settings.stream_name #=> String
+    #   resp.flow.outputs[0].transport.rtmp_push_source_settings.naming_type #=> String, one of "MANUAL", "AUTOMATIC"
+    #   resp.flow.outputs[0].transport.rtmp_push_output_settings.application_name #=> String
+    #   resp.flow.outputs[0].transport.rtmp_push_output_settings.stream_name #=> String
+    #   resp.flow.outputs[0].transport.rtmp_push_output_settings.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.flow.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.flow.outputs[0].bridge_arn #=> String
     #   resp.flow.outputs[0].bridge_ports #=> Array
@@ -3633,7 +3885,7 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.max_latency #=> Integer
     #   resp.flow.source.transport.max_sync_buffer #=> Integer
     #   resp.flow.source.transport.min_latency #=> Integer
-    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #   resp.flow.source.transport.remote_id #=> String
     #   resp.flow.source.transport.sender_control_port #=> Integer
     #   resp.flow.source.transport.sender_ip_address #=> String
@@ -3647,6 +3899,12 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.source.transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
     #   resp.flow.source.transport.ndi_audio_reference_level #=> Integer
+    #   resp.flow.source.transport.rtmp_push_source_settings.application_name #=> String
+    #   resp.flow.source.transport.rtmp_push_source_settings.stream_name #=> String
+    #   resp.flow.source.transport.rtmp_push_source_settings.naming_type #=> String, one of "MANUAL", "AUTOMATIC"
+    #   resp.flow.source.transport.rtmp_push_output_settings.application_name #=> String
+    #   resp.flow.source.transport.rtmp_push_output_settings.stream_name #=> String
+    #   resp.flow.source.transport.rtmp_push_output_settings.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
     #   resp.flow.source.gateway_bridge_source.bridge_arn #=> String
@@ -3693,7 +3951,7 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.max_latency #=> Integer
     #   resp.flow.sources[0].transport.max_sync_buffer #=> Integer
     #   resp.flow.sources[0].transport.min_latency #=> Integer
-    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #   resp.flow.sources[0].transport.remote_id #=> String
     #   resp.flow.sources[0].transport.sender_control_port #=> Integer
     #   resp.flow.sources[0].transport.sender_ip_address #=> String
@@ -3707,6 +3965,12 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.sources[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
     #   resp.flow.sources[0].transport.ndi_audio_reference_level #=> Integer
+    #   resp.flow.sources[0].transport.rtmp_push_source_settings.application_name #=> String
+    #   resp.flow.sources[0].transport.rtmp_push_source_settings.stream_name #=> String
+    #   resp.flow.sources[0].transport.rtmp_push_source_settings.naming_type #=> String, one of "MANUAL", "AUTOMATIC"
+    #   resp.flow.sources[0].transport.rtmp_push_output_settings.application_name #=> String
+    #   resp.flow.sources[0].transport.rtmp_push_output_settings.stream_name #=> String
+    #   resp.flow.sources[0].transport.rtmp_push_output_settings.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.flow.sources[0].vpc_interface_name #=> String
     #   resp.flow.sources[0].whitelist_cidr #=> String
     #   resp.flow.sources[0].gateway_bridge_source.bridge_arn #=> String
@@ -3784,6 +4048,7 @@ module Aws::MediaConnect
     #   * {Types::DescribeFlowSourceMetadataResponse#timestamp #timestamp} => Time
     #   * {Types::DescribeFlowSourceMetadataResponse#transport_media_info #transport_media_info} => Types::TransportMediaInfo
     #   * {Types::DescribeFlowSourceMetadataResponse#ndi_info #ndi_info} => Types::NdiSourceMetadataInfo
+    #   * {Types::DescribeFlowSourceMetadataResponse#rtmp_info #rtmp_info} => Types::RtmpSourceMetadataInfo
     #
     # @example Request syntax with placeholder values
     #
@@ -3816,7 +4081,9 @@ module Aws::MediaConnect
     #   resp.transport_media_info.programs[0].streams[0].pid #=> Integer
     #   resp.transport_media_info.programs[0].streams[0].sample_rate #=> Integer
     #   resp.transport_media_info.programs[0].streams[0].sample_size #=> Integer
+    #   resp.transport_media_info.programs[0].streams[0].scan_mode #=> String, one of "progressive", "interlace", "progressive-segmented-frame"
     #   resp.transport_media_info.programs[0].streams[0].stream_type #=> String
+    #   resp.transport_media_info.programs[0].streams[0].language #=> String
     #   resp.transport_media_info.ts_id #=> Integer
     #   resp.ndi_info.active_source.source_name #=> String
     #   resp.ndi_info.discovered_sources #=> Array
@@ -3838,6 +4105,23 @@ module Aws::MediaConnect
     #   resp.ndi_info.messages[0].code #=> String
     #   resp.ndi_info.messages[0].message #=> String
     #   resp.ndi_info.messages[0].resource_name #=> String
+    #   resp.rtmp_info.application_name #=> String
+    #   resp.rtmp_info.stream_name #=> String
+    #   resp.rtmp_info.media_info.streams #=> Array
+    #   resp.rtmp_info.media_info.streams[0].stream_id #=> Integer
+    #   resp.rtmp_info.media_info.streams[0].stream_type #=> String, one of "VIDEO", "AUDIO", "DATA", "UNKNOWN"
+    #   resp.rtmp_info.media_info.streams[0].codec #=> String
+    #   resp.rtmp_info.media_info.streams[0].frame_rate #=> String
+    #   resp.rtmp_info.media_info.streams[0].frame_resolution.frame_height #=> Integer
+    #   resp.rtmp_info.media_info.streams[0].frame_resolution.frame_width #=> Integer
+    #   resp.rtmp_info.media_info.streams[0].scan_mode #=> String, one of "progressive", "interlace", "progressive-segmented-frame"
+    #   resp.rtmp_info.media_info.streams[0].color.colorimetry #=> String, one of "BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "GENERIC_FILM", "BT2020", "SMPTE428", "SMPTE431", "SMPTE432"
+    #   resp.rtmp_info.media_info.streams[0].color.transfer_characteristics #=> String, one of "BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "LINEAR", "LOG100", "LOG316", "IEC61966_2_4", "BT1361_ECG", "IEC61966_2_1", "BT2020_10", "BT2020_12", "BT2100_PQ", "SMPTE428", "BT2100_HLG"
+    #   resp.rtmp_info.media_info.streams[0].color.matrix_coefficients #=> String, one of "IDENTITY", "BT709", "FCC", "BT470BG", "BT601", "SMPTE240M", "YCGCO", "BT2020_NCL", "BT2020_CL", "SMPTE2085", "CHROMATICITY_DERIVED_NCL", "CHROMATICITY_DERIVED_CL", "BT2100_ICTCP", "IPT_C2"
+    #   resp.rtmp_info.media_info.streams[0].channels #=> Integer
+    #   resp.rtmp_info.media_info.streams[0].sample_rate #=> Integer
+    #   resp.rtmp_info.media_info.streams[0].sample_size #=> Integer
+    #   resp.rtmp_info.media_info.streams[0].language #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeFlowSourceMetadata AWS API Documentation
     #
@@ -4218,6 +4502,10 @@ module Aws::MediaConnect
     #   resp.router_input.configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
     #   resp.router_input.configuration.standard.protocol_configuration.srt_listener.decryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_input.configuration.standard.protocol_configuration.srt_listener.decryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_input.configuration.standard.protocol_configuration.rtmp_push.port #=> Integer
+    #   resp.router_input.configuration.standard.protocol_configuration.rtmp_push.naming_type #=> String, one of "MANUAL", "AUTOMATIC"
+    #   resp.router_input.configuration.standard.protocol_configuration.rtmp_push.naming_configuration.manual.application_name #=> String
+    #   resp.router_input.configuration.standard.protocol_configuration.rtmp_push.naming_configuration.manual.stream_name #=> String
     #   resp.router_input.configuration.standard.protocol_configuration.srt_caller.source_address #=> String
     #   resp.router_input.configuration.standard.protocol_configuration.srt_caller.source_port #=> Integer
     #   resp.router_input.configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
@@ -4226,7 +4514,7 @@ module Aws::MediaConnect
     #   resp.router_input.configuration.standard.protocol_configuration.srt_caller.decryption_configuration.encryption_key.role_arn #=> String
     #   resp.router_input.configuration.standard.protocol_configuration.rtp.port #=> Integer
     #   resp.router_input.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
-    #   resp.router_input.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.router_input.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"
     #   resp.router_input.configuration.media_live_channel.media_live_channel_arn #=> String
     #   resp.router_input.configuration.media_live_channel.media_live_pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
     #   resp.router_input.configuration.media_live_channel.media_live_channel_output_name #=> String
@@ -4241,6 +4529,10 @@ module Aws::MediaConnect
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_listener.minimum_latency_milliseconds #=> Integer
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_listener.decryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_listener.decryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_input.configuration.failover.protocol_configurations[0].rtmp_push.port #=> Integer
+    #   resp.router_input.configuration.failover.protocol_configurations[0].rtmp_push.naming_type #=> String, one of "MANUAL", "AUTOMATIC"
+    #   resp.router_input.configuration.failover.protocol_configurations[0].rtmp_push.naming_configuration.manual.application_name #=> String
+    #   resp.router_input.configuration.failover.protocol_configurations[0].rtmp_push.naming_configuration.manual.stream_name #=> String
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_caller.source_address #=> String
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_caller.source_port #=> Integer
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_caller.minimum_latency_milliseconds #=> Integer
@@ -4262,6 +4554,16 @@ module Aws::MediaConnect
     #   resp.router_input.configuration.merge.protocol_configurations[0].rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_input.configuration.merge.protocol_configurations[0].rist.port #=> Integer
     #   resp.router_input.configuration.merge.protocol_configurations[0].rist.recovery_latency_milliseconds #=> Integer
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_listener.port #=> Integer
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_listener.minimum_latency_milliseconds #=> Integer
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_listener.decryption_configuration.encryption_key.secret_arn #=> String
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_listener.decryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_caller.source_address #=> String
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_caller.source_port #=> Integer
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_caller.minimum_latency_milliseconds #=> Integer
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_caller.stream_id #=> String
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_caller.decryption_configuration.encryption_key.secret_arn #=> String
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_caller.decryption_configuration.encryption_key.role_arn #=> String
     #   resp.router_input.configuration.merge.merge_recovery_window_milliseconds #=> Integer
     #   resp.router_input.routed_outputs #=> Integer
     #   resp.router_input.maximum_routed_outputs #=> Integer
@@ -4281,10 +4583,16 @@ module Aws::MediaConnect
     #   resp.router_input.tags #=> Hash
     #   resp.router_input.tags["String"] #=> String
     #   resp.router_input.stream_details.standard.source_ip_address #=> String
+    #   resp.router_input.stream_details.standard.rtmp_push.application_name #=> String
+    #   resp.router_input.stream_details.standard.rtmp_push.stream_name #=> String
     #   resp.router_input.stream_details.failover.source_index_zero_stream_details.source_index #=> Integer
     #   resp.router_input.stream_details.failover.source_index_zero_stream_details.source_ip_address #=> String
+    #   resp.router_input.stream_details.failover.source_index_zero_stream_details.rtmp_push.application_name #=> String
+    #   resp.router_input.stream_details.failover.source_index_zero_stream_details.rtmp_push.stream_name #=> String
     #   resp.router_input.stream_details.failover.source_index_one_stream_details.source_index #=> Integer
     #   resp.router_input.stream_details.failover.source_index_one_stream_details.source_ip_address #=> String
+    #   resp.router_input.stream_details.failover.source_index_one_stream_details.rtmp_push.application_name #=> String
+    #   resp.router_input.stream_details.failover.source_index_one_stream_details.rtmp_push.stream_name #=> String
     #   resp.router_input.stream_details.merge.source_index_zero_stream_details.source_index #=> Integer
     #   resp.router_input.stream_details.merge.source_index_zero_stream_details.source_ip_address #=> String
     #   resp.router_input.stream_details.merge.source_index_one_stream_details.source_index #=> Integer
@@ -4367,8 +4675,27 @@ module Aws::MediaConnect
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].pid #=> Integer
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].sample_rate #=> Integer
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].sample_size #=> Integer
+    #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].scan_mode #=> String, one of "progressive", "interlace", "progressive-segmented-frame"
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].stream_type #=> String
+    #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].language #=> String
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.ts_id #=> Integer
+    #   resp.source_metadata_details.router_input_metadata.rtmp_info.application_name #=> String
+    #   resp.source_metadata_details.router_input_metadata.rtmp_info.stream_name #=> String
+    #   resp.source_metadata_details.router_input_metadata.rtmp_info.media_info.streams #=> Array
+    #   resp.source_metadata_details.router_input_metadata.rtmp_info.media_info.streams[0].stream_id #=> Integer
+    #   resp.source_metadata_details.router_input_metadata.rtmp_info.media_info.streams[0].stream_type #=> String, one of "VIDEO", "AUDIO", "DATA", "UNKNOWN"
+    #   resp.source_metadata_details.router_input_metadata.rtmp_info.media_info.streams[0].codec #=> String
+    #   resp.source_metadata_details.router_input_metadata.rtmp_info.media_info.streams[0].frame_rate #=> String
+    #   resp.source_metadata_details.router_input_metadata.rtmp_info.media_info.streams[0].frame_resolution.frame_height #=> Integer
+    #   resp.source_metadata_details.router_input_metadata.rtmp_info.media_info.streams[0].frame_resolution.frame_width #=> Integer
+    #   resp.source_metadata_details.router_input_metadata.rtmp_info.media_info.streams[0].scan_mode #=> String, one of "progressive", "interlace", "progressive-segmented-frame"
+    #   resp.source_metadata_details.router_input_metadata.rtmp_info.media_info.streams[0].color.colorimetry #=> String, one of "BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "GENERIC_FILM", "BT2020", "SMPTE428", "SMPTE431", "SMPTE432"
+    #   resp.source_metadata_details.router_input_metadata.rtmp_info.media_info.streams[0].color.transfer_characteristics #=> String, one of "BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "LINEAR", "LOG100", "LOG316", "IEC61966_2_4", "BT1361_ECG", "IEC61966_2_1", "BT2020_10", "BT2020_12", "BT2100_PQ", "SMPTE428", "BT2100_HLG"
+    #   resp.source_metadata_details.router_input_metadata.rtmp_info.media_info.streams[0].color.matrix_coefficients #=> String, one of "IDENTITY", "BT709", "FCC", "BT470BG", "BT601", "SMPTE240M", "YCGCO", "BT2020_NCL", "BT2020_CL", "SMPTE2085", "CHROMATICITY_DERIVED_NCL", "CHROMATICITY_DERIVED_CL", "BT2100_ICTCP", "IPT_C2"
+    #   resp.source_metadata_details.router_input_metadata.rtmp_info.media_info.streams[0].channels #=> Integer
+    #   resp.source_metadata_details.router_input_metadata.rtmp_info.media_info.streams[0].sample_rate #=> Integer
+    #   resp.source_metadata_details.router_input_metadata.rtmp_info.media_info.streams[0].sample_size #=> Integer
+    #   resp.source_metadata_details.router_input_metadata.rtmp_info.media_info.streams[0].language #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/GetRouterInputSourceMetadata AWS API Documentation
     #
@@ -4548,6 +4875,18 @@ module Aws::MediaConnect
     #   resp.router_output.maintenance_schedule.window.end #=> Time
     #   resp.router_output.maintenance_schedule.window.scheduled_time #=> Time
     #   resp.router_output.fabric_configuration.recovery_latency_mode #=> String, one of "BALANCED", "LOW_LATENCY"
+    #   resp.router_output.fabric_configuration.switching_mode #=> String, one of "IMMEDIATE", "KEY_FRAME"
+    #   resp.router_output.fabric_configuration.switching_configuration.key_frame.key_frame_wait_milliseconds #=> Integer
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.rules #=> Array
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.rules[0].match_expression #=> String
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.rules[0].action #=> String
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.default_action #=> String
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.transport_stream_id.set #=> Integer
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.program_number.set #=> Integer
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.program_map_table_pid.set #=> Integer
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.program_clock_reference_pid.set #=> Integer
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.auto.start_pid #=> Integer
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.auto.pids_per_program #=> Integer
     #   resp.router_output.associated_source_endpoint_arns #=> Array
     #   resp.router_output.associated_source_endpoint_arns[0] #=> String
     #
@@ -6704,7 +7043,7 @@ module Aws::MediaConnect
     #   resp.bridge.outputs[0].network_output.name #=> String
     #   resp.bridge.outputs[0].network_output.network_name #=> String
     #   resp.bridge.outputs[0].network_output.port #=> Integer
-    #   resp.bridge.outputs[0].network_output.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.bridge.outputs[0].network_output.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #   resp.bridge.outputs[0].network_output.ttl #=> Integer
     #   resp.bridge.placement_arn #=> String
     #   resp.bridge.source_failover_config.failover_mode #=> String, one of "MERGE", "FAILOVER"
@@ -6721,7 +7060,7 @@ module Aws::MediaConnect
     #   resp.bridge.sources[0].network_source.name #=> String
     #   resp.bridge.sources[0].network_source.network_name #=> String
     #   resp.bridge.sources[0].network_source.port #=> Integer
-    #   resp.bridge.sources[0].network_source.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.bridge.sources[0].network_source.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateBridge AWS API Documentation
     #
@@ -6756,7 +7095,7 @@ module Aws::MediaConnect
     #       ip_address: "String",
     #       network_name: "String",
     #       port: 1,
-    #       protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq
+    #       protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq, rtmp-push
     #       ttl: 1,
     #     },
     #     output_name: "String", # required
@@ -6772,7 +7111,7 @@ module Aws::MediaConnect
     #   resp.output.network_output.name #=> String
     #   resp.output.network_output.network_name #=> String
     #   resp.output.network_output.port #=> Integer
-    #   resp.output.network_output.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.output.network_output.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #   resp.output.network_output.ttl #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateBridgeOutput AWS API Documentation
@@ -6820,7 +7159,7 @@ module Aws::MediaConnect
     #       },
     #       network_name: "String",
     #       port: 1,
-    #       protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq
+    #       protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq, rtmp-push
     #     },
     #     source_name: "String", # required
     #   })
@@ -6837,7 +7176,7 @@ module Aws::MediaConnect
     #   resp.source.network_source.name #=> String
     #   resp.source.network_source.network_name #=> String
     #   resp.source.network_source.port #=> Integer
-    #   resp.source.network_source.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.source.network_source.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateBridgeSource AWS API Documentation
     #
@@ -7218,7 +7557,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.max_latency #=> Integer
     #   resp.flow.outputs[0].transport.max_sync_buffer #=> Integer
     #   resp.flow.outputs[0].transport.min_latency #=> Integer
-    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.sender_control_port #=> Integer
     #   resp.flow.outputs[0].transport.sender_ip_address #=> String
@@ -7232,6 +7571,12 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.outputs[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
     #   resp.flow.outputs[0].transport.ndi_audio_reference_level #=> Integer
+    #   resp.flow.outputs[0].transport.rtmp_push_source_settings.application_name #=> String
+    #   resp.flow.outputs[0].transport.rtmp_push_source_settings.stream_name #=> String
+    #   resp.flow.outputs[0].transport.rtmp_push_source_settings.naming_type #=> String, one of "MANUAL", "AUTOMATIC"
+    #   resp.flow.outputs[0].transport.rtmp_push_output_settings.application_name #=> String
+    #   resp.flow.outputs[0].transport.rtmp_push_output_settings.stream_name #=> String
+    #   resp.flow.outputs[0].transport.rtmp_push_output_settings.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.flow.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.flow.outputs[0].bridge_arn #=> String
     #   resp.flow.outputs[0].bridge_ports #=> Array
@@ -7274,7 +7619,7 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.max_latency #=> Integer
     #   resp.flow.source.transport.max_sync_buffer #=> Integer
     #   resp.flow.source.transport.min_latency #=> Integer
-    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #   resp.flow.source.transport.remote_id #=> String
     #   resp.flow.source.transport.sender_control_port #=> Integer
     #   resp.flow.source.transport.sender_ip_address #=> String
@@ -7288,6 +7633,12 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.source.transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
     #   resp.flow.source.transport.ndi_audio_reference_level #=> Integer
+    #   resp.flow.source.transport.rtmp_push_source_settings.application_name #=> String
+    #   resp.flow.source.transport.rtmp_push_source_settings.stream_name #=> String
+    #   resp.flow.source.transport.rtmp_push_source_settings.naming_type #=> String, one of "MANUAL", "AUTOMATIC"
+    #   resp.flow.source.transport.rtmp_push_output_settings.application_name #=> String
+    #   resp.flow.source.transport.rtmp_push_output_settings.stream_name #=> String
+    #   resp.flow.source.transport.rtmp_push_output_settings.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
     #   resp.flow.source.gateway_bridge_source.bridge_arn #=> String
@@ -7334,7 +7685,7 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.max_latency #=> Integer
     #   resp.flow.sources[0].transport.max_sync_buffer #=> Integer
     #   resp.flow.sources[0].transport.min_latency #=> Integer
-    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #   resp.flow.sources[0].transport.remote_id #=> String
     #   resp.flow.sources[0].transport.sender_control_port #=> Integer
     #   resp.flow.sources[0].transport.sender_ip_address #=> String
@@ -7348,6 +7699,12 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.sources[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
     #   resp.flow.sources[0].transport.ndi_audio_reference_level #=> Integer
+    #   resp.flow.sources[0].transport.rtmp_push_source_settings.application_name #=> String
+    #   resp.flow.sources[0].transport.rtmp_push_source_settings.stream_name #=> String
+    #   resp.flow.sources[0].transport.rtmp_push_source_settings.naming_type #=> String, one of "MANUAL", "AUTOMATIC"
+    #   resp.flow.sources[0].transport.rtmp_push_output_settings.application_name #=> String
+    #   resp.flow.sources[0].transport.rtmp_push_output_settings.stream_name #=> String
+    #   resp.flow.sources[0].transport.rtmp_push_output_settings.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.flow.sources[0].vpc_interface_name #=> String
     #   resp.flow.sources[0].whitelist_cidr #=> String
     #   resp.flow.sources[0].gateway_bridge_source.bridge_arn #=> String
@@ -7684,6 +8041,11 @@ module Aws::MediaConnect
     #   (EBU). If you don't specify this field, MediaConnect leaves the value
     #   unchanged.
     #
+    # @option params [Types::RtmpPushOutputSettings] :rtmp_push_settings
+    #   The settings for an output that pushes a stream to a destination using
+    #   the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over
+    #   TLS) when TLS encryption is specified.
+    #
     # @return [Types::UpdateFlowOutputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFlowOutputResponse#flow_arn #flow_arn} => String
@@ -7730,7 +8092,7 @@ module Aws::MediaConnect
     #     min_latency: 1,
     #     output_arn: "UpdateFlowOutputRequestOutputArnString", # required
     #     port: 1,
-    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq
+    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq, rtmp-push
     #     remote_id: "String",
     #     sender_control_port: 1,
     #     sender_ip_address: "String",
@@ -7756,6 +8118,17 @@ module Aws::MediaConnect
     #     },
     #     ndi_output_timecode_source: "EMBEDDED_TIMECODE", # accepts EMBEDDED_TIMECODE, UTC_SYSTEM_TIME
     #     ndi_audio_reference_level: 1,
+    #     rtmp_push_settings: {
+    #       application_name: "String", # required
+    #       stream_name: "String", # required
+    #       tls_encryption: {
+    #         encryption_type: "PUBLIC", # accepts PUBLIC
+    #         encryption_configuration: { # required
+    #           public: {
+    #           },
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -7795,7 +8168,7 @@ module Aws::MediaConnect
     #   resp.output.transport.max_latency #=> Integer
     #   resp.output.transport.max_sync_buffer #=> Integer
     #   resp.output.transport.min_latency #=> Integer
-    #   resp.output.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.output.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #   resp.output.transport.remote_id #=> String
     #   resp.output.transport.sender_control_port #=> Integer
     #   resp.output.transport.sender_ip_address #=> String
@@ -7809,6 +8182,12 @@ module Aws::MediaConnect
     #   resp.output.transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.output.transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
     #   resp.output.transport.ndi_audio_reference_level #=> Integer
+    #   resp.output.transport.rtmp_push_source_settings.application_name #=> String
+    #   resp.output.transport.rtmp_push_source_settings.stream_name #=> String
+    #   resp.output.transport.rtmp_push_source_settings.naming_type #=> String, one of "MANUAL", "AUTOMATIC"
+    #   resp.output.transport.rtmp_push_output_settings.application_name #=> String
+    #   resp.output.transport.rtmp_push_output_settings.stream_name #=> String
+    #   resp.output.transport.rtmp_push_output_settings.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.output.vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.output.bridge_arn #=> String
     #   resp.output.bridge_ports #=> Array
@@ -7953,6 +8332,9 @@ module Aws::MediaConnect
     #   The encryption configuration for the flow source when router
     #   integration is enabled.
     #
+    # @option params [Types::SetRtmpPushSourceSettings] :rtmp_push_settings
+    #   The settings for the RTMP (Real-Time Messaging Protocol) source.
+    #
     # @return [Types::UpdateFlowSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFlowSourceResponse#flow_arn #flow_arn} => String
@@ -7994,7 +8376,7 @@ module Aws::MediaConnect
     #       },
     #     ],
     #     min_latency: 1,
-    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq
+    #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, srt-caller, fujitsu-qos, udp, ndi-speed-hq, rtmp-push
     #     sender_control_port: 1,
     #     sender_ip_address: "String",
     #     source_arn: "UpdateFlowSourceRequestSourceArnString", # required
@@ -8020,6 +8402,16 @@ module Aws::MediaConnect
     #         secrets_manager: {
     #           secret_arn: "SecretArn", # required
     #           role_arn: "RoleArn", # required
+    #         },
+    #         automatic: {
+    #         },
+    #       },
+    #     },
+    #     rtmp_push_settings: {
+    #       naming_configuration: { # required
+    #         manual: {
+    #           application_name: "String", # required
+    #           stream_name: "String", # required
     #         },
     #         automatic: {
     #         },
@@ -8061,7 +8453,7 @@ module Aws::MediaConnect
     #   resp.source.transport.max_latency #=> Integer
     #   resp.source.transport.max_sync_buffer #=> Integer
     #   resp.source.transport.min_latency #=> Integer
-    #   resp.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq"
+    #   resp.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist", "st2110-jpegxs", "cdi", "srt-listener", "srt-caller", "fujitsu-qos", "udp", "ndi-speed-hq", "rtmp-push"
     #   resp.source.transport.remote_id #=> String
     #   resp.source.transport.sender_control_port #=> Integer
     #   resp.source.transport.sender_ip_address #=> String
@@ -8075,6 +8467,12 @@ module Aws::MediaConnect
     #   resp.source.transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.source.transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
     #   resp.source.transport.ndi_audio_reference_level #=> Integer
+    #   resp.source.transport.rtmp_push_source_settings.application_name #=> String
+    #   resp.source.transport.rtmp_push_source_settings.stream_name #=> String
+    #   resp.source.transport.rtmp_push_source_settings.naming_type #=> String, one of "MANUAL", "AUTOMATIC"
+    #   resp.source.transport.rtmp_push_output_settings.application_name #=> String
+    #   resp.source.transport.rtmp_push_output_settings.stream_name #=> String
+    #   resp.source.transport.rtmp_push_output_settings.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.source.vpc_interface_name #=> String
     #   resp.source.whitelist_cidr #=> String
     #   resp.source.gateway_bridge_source.bridge_arn #=> String
@@ -8222,6 +8620,18 @@ module Aws::MediaConnect
     #               },
     #             },
     #           },
+    #           rtmp_push: {
+    #             port: 1, # required
+    #             naming_type: "MANUAL", # accepts MANUAL, AUTOMATIC
+    #             naming_configuration: { # required
+    #               manual: {
+    #                 application_name: "String", # required
+    #                 stream_name: "String", # required
+    #               },
+    #               automatic: {
+    #               },
+    #             },
+    #           },
     #           srt_caller: {
     #             source_address: "String", # required
     #             source_port: 1, # required
@@ -8239,7 +8649,7 @@ module Aws::MediaConnect
     #             forward_error_correction: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         },
-    #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER
+    #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER, RTMP_PUSH
     #       },
     #       media_live_channel: {
     #         media_live_channel_arn: "MediaLiveChannelArn",
@@ -8272,6 +8682,18 @@ module Aws::MediaConnect
     #                 encryption_key: { # required
     #                   secret_arn: "SecretArn", # required
     #                   role_arn: "RoleArn", # required
+    #                 },
+    #               },
+    #             },
+    #             rtmp_push: {
+    #               port: 1, # required
+    #               naming_type: "MANUAL", # accepts MANUAL, AUTOMATIC
+    #               naming_configuration: { # required
+    #                 manual: {
+    #                   application_name: "String", # required
+    #                   stream_name: "String", # required
+    #                 },
+    #                 automatic: {
     #                 },
     #               },
     #             },
@@ -8322,6 +8744,28 @@ module Aws::MediaConnect
     #             rist: {
     #               port: 1, # required
     #               recovery_latency_milliseconds: 1, # required
+    #             },
+    #             srt_listener: {
+    #               port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               decryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 },
+    #               },
+    #             },
+    #             srt_caller: {
+    #               source_address: "String", # required
+    #               source_port: 1, # required
+    #               minimum_latency_milliseconds: 1, # required
+    #               stream_id: "String",
+    #               decryption_configuration: {
+    #                 encryption_key: { # required
+    #                   secret_arn: "SecretArn", # required
+    #                   role_arn: "RoleArn", # required
+    #                 },
+    #               },
     #             },
     #           },
     #         ],
@@ -8386,6 +8830,10 @@ module Aws::MediaConnect
     #   resp.router_input.configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
     #   resp.router_input.configuration.standard.protocol_configuration.srt_listener.decryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_input.configuration.standard.protocol_configuration.srt_listener.decryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_input.configuration.standard.protocol_configuration.rtmp_push.port #=> Integer
+    #   resp.router_input.configuration.standard.protocol_configuration.rtmp_push.naming_type #=> String, one of "MANUAL", "AUTOMATIC"
+    #   resp.router_input.configuration.standard.protocol_configuration.rtmp_push.naming_configuration.manual.application_name #=> String
+    #   resp.router_input.configuration.standard.protocol_configuration.rtmp_push.naming_configuration.manual.stream_name #=> String
     #   resp.router_input.configuration.standard.protocol_configuration.srt_caller.source_address #=> String
     #   resp.router_input.configuration.standard.protocol_configuration.srt_caller.source_port #=> Integer
     #   resp.router_input.configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
@@ -8394,7 +8842,7 @@ module Aws::MediaConnect
     #   resp.router_input.configuration.standard.protocol_configuration.srt_caller.decryption_configuration.encryption_key.role_arn #=> String
     #   resp.router_input.configuration.standard.protocol_configuration.rtp.port #=> Integer
     #   resp.router_input.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
-    #   resp.router_input.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.router_input.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"
     #   resp.router_input.configuration.media_live_channel.media_live_channel_arn #=> String
     #   resp.router_input.configuration.media_live_channel.media_live_pipeline_id #=> String, one of "PIPELINE_0", "PIPELINE_1"
     #   resp.router_input.configuration.media_live_channel.media_live_channel_output_name #=> String
@@ -8409,6 +8857,10 @@ module Aws::MediaConnect
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_listener.minimum_latency_milliseconds #=> Integer
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_listener.decryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_listener.decryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_input.configuration.failover.protocol_configurations[0].rtmp_push.port #=> Integer
+    #   resp.router_input.configuration.failover.protocol_configurations[0].rtmp_push.naming_type #=> String, one of "MANUAL", "AUTOMATIC"
+    #   resp.router_input.configuration.failover.protocol_configurations[0].rtmp_push.naming_configuration.manual.application_name #=> String
+    #   resp.router_input.configuration.failover.protocol_configurations[0].rtmp_push.naming_configuration.manual.stream_name #=> String
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_caller.source_address #=> String
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_caller.source_port #=> Integer
     #   resp.router_input.configuration.failover.protocol_configurations[0].srt_caller.minimum_latency_milliseconds #=> Integer
@@ -8430,6 +8882,16 @@ module Aws::MediaConnect
     #   resp.router_input.configuration.merge.protocol_configurations[0].rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_input.configuration.merge.protocol_configurations[0].rist.port #=> Integer
     #   resp.router_input.configuration.merge.protocol_configurations[0].rist.recovery_latency_milliseconds #=> Integer
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_listener.port #=> Integer
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_listener.minimum_latency_milliseconds #=> Integer
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_listener.decryption_configuration.encryption_key.secret_arn #=> String
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_listener.decryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_caller.source_address #=> String
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_caller.source_port #=> Integer
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_caller.minimum_latency_milliseconds #=> Integer
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_caller.stream_id #=> String
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_caller.decryption_configuration.encryption_key.secret_arn #=> String
+    #   resp.router_input.configuration.merge.protocol_configurations[0].srt_caller.decryption_configuration.encryption_key.role_arn #=> String
     #   resp.router_input.configuration.merge.merge_recovery_window_milliseconds #=> Integer
     #   resp.router_input.routed_outputs #=> Integer
     #   resp.router_input.maximum_routed_outputs #=> Integer
@@ -8449,10 +8911,16 @@ module Aws::MediaConnect
     #   resp.router_input.tags #=> Hash
     #   resp.router_input.tags["String"] #=> String
     #   resp.router_input.stream_details.standard.source_ip_address #=> String
+    #   resp.router_input.stream_details.standard.rtmp_push.application_name #=> String
+    #   resp.router_input.stream_details.standard.rtmp_push.stream_name #=> String
     #   resp.router_input.stream_details.failover.source_index_zero_stream_details.source_index #=> Integer
     #   resp.router_input.stream_details.failover.source_index_zero_stream_details.source_ip_address #=> String
+    #   resp.router_input.stream_details.failover.source_index_zero_stream_details.rtmp_push.application_name #=> String
+    #   resp.router_input.stream_details.failover.source_index_zero_stream_details.rtmp_push.stream_name #=> String
     #   resp.router_input.stream_details.failover.source_index_one_stream_details.source_index #=> Integer
     #   resp.router_input.stream_details.failover.source_index_one_stream_details.source_ip_address #=> String
+    #   resp.router_input.stream_details.failover.source_index_one_stream_details.rtmp_push.application_name #=> String
+    #   resp.router_input.stream_details.failover.source_index_one_stream_details.rtmp_push.stream_name #=> String
     #   resp.router_input.stream_details.merge.source_index_zero_stream_details.source_index #=> Integer
     #   resp.router_input.stream_details.merge.source_index_zero_stream_details.source_ip_address #=> String
     #   resp.router_input.stream_details.merge.source_index_one_stream_details.source_index #=> Integer
@@ -8601,6 +9069,12 @@ module Aws::MediaConnect
     #   route. You must unroute the output before updating the fabric
     #   configuration.
     #
+    # @option params [Types::RouterOutputProcessors] :processors
+    #   The updated processor settings for the router output. When you update
+    #   the processors, include every setting that you want to keep.
+    #   MediaConnect resets the settings that you don't specify to their
+    #   defaults.
+    #
     # @return [Types::UpdateRouterOutputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateRouterOutputResponse#router_output #router_output} => Types::RouterOutput
@@ -8719,6 +9193,49 @@ module Aws::MediaConnect
     #     },
     #     fabric_configuration: {
     #       recovery_latency_mode: "BALANCED", # required, accepts BALANCED, LOW_LATENCY
+    #       switching_mode: "IMMEDIATE", # accepts IMMEDIATE, KEY_FRAME
+    #       switching_configuration: {
+    #         immediate: {
+    #         },
+    #         key_frame: {
+    #           key_frame_wait_milliseconds: 1,
+    #         },
+    #       },
+    #     },
+    #     processors: {
+    #       single_program_transport_stream_pid_map: {
+    #         rules: [ # required
+    #           {
+    #             match_expression: "PidMapRuleMatchExpressionString", # required
+    #             action: "ActionString", # required
+    #           },
+    #         ],
+    #         default_action: "ActionString", # required
+    #         transport_stream_id: {
+    #           passthrough: {
+    #           },
+    #           set: 1,
+    #         },
+    #         program_number: {
+    #           passthrough: {
+    #           },
+    #           set: 1,
+    #         },
+    #         program_map_table_pid: {
+    #           passthrough: {
+    #           },
+    #           set: 1,
+    #         },
+    #         program_clock_reference_pid: {
+    #           passthrough: {
+    #           },
+    #           set: 1,
+    #         },
+    #         auto: {
+    #           start_pid: 1, # required
+    #           pids_per_program: 1, # required
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -8789,6 +9306,18 @@ module Aws::MediaConnect
     #   resp.router_output.maintenance_schedule.window.end #=> Time
     #   resp.router_output.maintenance_schedule.window.scheduled_time #=> Time
     #   resp.router_output.fabric_configuration.recovery_latency_mode #=> String, one of "BALANCED", "LOW_LATENCY"
+    #   resp.router_output.fabric_configuration.switching_mode #=> String, one of "IMMEDIATE", "KEY_FRAME"
+    #   resp.router_output.fabric_configuration.switching_configuration.key_frame.key_frame_wait_milliseconds #=> Integer
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.rules #=> Array
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.rules[0].match_expression #=> String
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.rules[0].action #=> String
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.default_action #=> String
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.transport_stream_id.set #=> Integer
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.program_number.set #=> Integer
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.program_map_table_pid.set #=> Integer
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.program_clock_reference_pid.set #=> Integer
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.auto.start_pid #=> Integer
+    #   resp.router_output.processors.single_program_transport_stream_pid_map.auto.pids_per_program #=> Integer
     #   resp.router_output.associated_source_endpoint_arns #=> Array
     #   resp.router_output.associated_source_endpoint_arns[0] #=> String
     #
@@ -8965,7 +9494,7 @@ module Aws::MediaConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.120.0'
+      context[:gem_version] = '1.121.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2565,6 +2565,10 @@ module Aws::SecurityAgent
     #   The code remediation strategy for the pentest. Valid values are
     #   AUTOMATIC and DISABLED.
     #
+    # @option params [String] :clean_up_strategy
+    #   The strategy for cleaning up resources after pentest job completion.
+    #   Valid values are BEST\_EFFORT\_DELETE and RETAIN\_ALL.
+    #
     # @option params [Array<String>] :disable_managed_skills
     #   A list of managed skills to disable for this pentest. Valid values
     #   include FINDING\_PERSONALIZATION and LOGIN\_OPTIMIZATION.
@@ -2693,6 +2697,7 @@ module Aws::SecurityAgent
     #       ],
     #     },
     #     code_remediation_strategy: "AUTOMATIC", # accepts AUTOMATIC, DISABLED
+    #     clean_up_strategy: "BEST_EFFORT_DELETE", # accepts BEST_EFFORT_DELETE, RETAIN_ALL
     #     disable_managed_skills: ["FINDING_PERSONALIZATION"], # accepts FINDING_PERSONALIZATION, LOGIN_OPTIMIZATION
     #     max_task_hours: 1.0,
     #     report_destination: {
@@ -6195,6 +6200,10 @@ module Aws::SecurityAgent
     # @option params [String] :code_remediation_strategy
     #   The updated code remediation strategy for the pentest.
     #
+    # @option params [String] :clean_up_strategy
+    #   The updated strategy for cleaning up resources after pentest job
+    #   completion.
+    #
     # @option params [Array<String>] :disable_managed_skills
     #   The updated list of managed skills to disable for this pentest. Valid
     #   values include FINDING\_PERSONALIZATION and LOGIN\_OPTIMIZATION.
@@ -6323,6 +6332,7 @@ module Aws::SecurityAgent
     #       ],
     #     },
     #     code_remediation_strategy: "AUTOMATIC", # accepts AUTOMATIC, DISABLED
+    #     clean_up_strategy: "BEST_EFFORT_DELETE", # accepts BEST_EFFORT_DELETE, RETAIN_ALL
     #     disable_managed_skills: ["FINDING_PERSONALIZATION"], # accepts FINDING_PERSONALIZATION, LOGIN_OPTIMIZATION
     #     max_task_hours: 1.0,
     #     report_destination: {
@@ -6972,7 +6982,7 @@ module Aws::SecurityAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityagent'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

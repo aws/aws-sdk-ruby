@@ -1811,6 +1811,7 @@ module Aws::SSOAdmin
     #   * {Types::DescribeInstanceResponse#primary_region #primary_region} => String
     #   * {Types::DescribeInstanceResponse#regions #regions} => Array&lt;Types::RegionMetadata&gt;
     #   * {Types::DescribeInstanceResponse#encryption_configuration_details #encryption_configuration_details} => Types::EncryptionConfigurationDetails
+    #   * {Types::DescribeInstanceResponse#network_configuration_details #network_configuration_details} => Types::NetworkConfigurationInfo
     #   * {Types::DescribeInstanceResponse#permission_sets_enabled #permission_sets_enabled} => Boolean
     #
     # @example Request syntax with placeholder values
@@ -1839,6 +1840,13 @@ module Aws::SSOAdmin
     #   resp.encryption_configuration_details.kms_key_arn #=> String
     #   resp.encryption_configuration_details.encryption_status #=> String, one of "UPDATING", "ENABLED", "UPDATE_FAILED"
     #   resp.encryption_configuration_details.encryption_status_reason #=> String
+    #   resp.network_configuration_details.vpce_access_required #=> Boolean
+    #   resp.network_configuration_details.restrict_source_vpcs #=> Array
+    #   resp.network_configuration_details.restrict_source_vpcs[0] #=> String
+    #   resp.network_configuration_details.allow_source_ips #=> Array
+    #   resp.network_configuration_details.allow_source_ips[0] #=> String
+    #   resp.network_configuration_details.exclude_application_arns #=> Array
+    #   resp.network_configuration_details.exclude_application_arns[0] #=> String
     #   resp.permission_sets_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeInstance AWS API Documentation
@@ -4172,10 +4180,13 @@ module Aws::SSOAdmin
     # * Enable permission sets for the instance by specifying
     #   `PermissionSetsEnabled`.
     #
-    # If you specify both `EncryptionConfiguration` and
-    # `PermissionSetsEnabled` in a request, the request returns a
-    # `ValidationException`. To perform both operations, call
-    # `UpdateInstance` separately for each. You can make the two calls in
+    # * Update the network configuration of the instance by specifying
+    #   `NetworkConfiguration`.
+    #
+    # A request that specifies more than one of `EncryptionConfiguration`,
+    # `PermissionSetsEnabled`, and `NetworkConfiguration` returns a
+    # `ValidationException`. To perform more than one of these operations,
+    # call `UpdateInstance` separately for each. The calls can be made in
     # parallel.
     #
     # @option params [String] :name
@@ -4193,16 +4204,30 @@ module Aws::SSOAdmin
     #   instance. You can use this to configure customer managed KMS keys or
     #   Amazon Web Services owned KMS keys for encrypting your instance data.
     #
+    #   <note markdown="1"> You can't set more than one of `EncryptionConfiguration`,
+    #   `PermissionSetsEnabled`, and `NetworkConfiguration` in the same
+    #   request. To configure more than one of them, make a separate
+    #   `UpdateInstance` call for each. These calls can be made in parallel.
+    #
+    #    </note>
+    #
     # @option params [Boolean] :permission_sets_enabled
     #   Enables permission sets for this Identity Center instance. The only
     #   accepted value is `true `. After permission sets are enabled, they
     #   cannot be disabled.
     #
-    #   <note markdown="1"> You can't set `EncryptionConfiguration` and `PermissionSetsEnabled`
-    #   in the same request. To configure both, make two separate
-    #   `UpdateInstance` calls. You can make these calls in parallel.
+    # @option params [Types::NetworkConfigurationInfo] :network_configuration
+    #   Specifies the network access controls for your Identity Center
+    #   instance. Use this to require that access to your instance and to
+    #   applications originates from VPC endpoints, and to optionally restrict
+    #   which VPCs are permitted, allow specific IP address ranges that bypass
+    #   the VPC endpoint requirement, or exempt specific applications from the
+    #   controls.
     #
-    #    </note>
+    #   If you omit `NetworkConfiguration`, the stored network configuration
+    #   is preserved. If you specify `NetworkConfiguration`, it replaces the
+    #   stored network configuration in its entirety. Any list that you omit
+    #   from the object, or include as an empty list, is cleared.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4216,6 +4241,12 @@ module Aws::SSOAdmin
     #       kms_key_arn: "KmsKeyArn",
     #     },
     #     permission_sets_enabled: false,
+    #     network_configuration: {
+    #       vpce_access_required: false, # required
+    #       restrict_source_vpcs: ["VpcArn"],
+    #       allow_source_ips: ["IpCidrType"],
+    #       exclude_application_arns: ["FirstOrThirdPartyApplicationArnType"],
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UpdateInstance AWS API Documentation
@@ -4383,7 +4414,7 @@ module Aws::SSOAdmin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssoadmin'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

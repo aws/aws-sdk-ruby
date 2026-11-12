@@ -415,6 +415,9 @@ module Aws::GameLiftStreams
     GetStreamSessionOutput.add_member(:export_files_metadata, Shapes::ShapeRef.new(shape: ExportFilesMetadata, location_name: "ExportFilesMetadata"))
     GetStreamSessionOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "RoleArn"))
     GetStreamSessionOutput.add_member(:display_configuration, Shapes::ShapeRef.new(shape: DisplayConfiguration, location_name: "DisplayConfiguration"))
+    GetStreamSessionOutput.add_member(:application_started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ApplicationStartedAt"))
+    GetStreamSessionOutput.add_member(:streaming_started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StreamingStartedAt"))
+    GetStreamSessionOutput.add_member(:streaming_ended_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StreamingEndedAt"))
     GetStreamSessionOutput.struct_class = Types::GetStreamSessionOutput
 
     GetStreamUrlInput.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))
@@ -620,6 +623,9 @@ module Aws::GameLiftStreams
     StartStreamSessionOutput.add_member(:export_files_metadata, Shapes::ShapeRef.new(shape: ExportFilesMetadata, location_name: "ExportFilesMetadata"))
     StartStreamSessionOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "RoleArn"))
     StartStreamSessionOutput.add_member(:display_configuration, Shapes::ShapeRef.new(shape: DisplayConfiguration, location_name: "DisplayConfiguration"))
+    StartStreamSessionOutput.add_member(:application_started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ApplicationStartedAt"))
+    StartStreamSessionOutput.add_member(:streaming_started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StreamingStartedAt"))
+    StartStreamSessionOutput.add_member(:streaming_ended_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StreamingEndedAt"))
     StartStreamSessionOutput.struct_class = Types::StartStreamSessionOutput
 
     StreamGroupSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "Arn"))

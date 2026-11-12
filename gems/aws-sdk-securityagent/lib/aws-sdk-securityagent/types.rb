@@ -2962,6 +2962,11 @@ module Aws::SecurityAgent
     #   AUTOMATIC and DISABLED.
     #   @return [String]
     #
+    # @!attribute [rw] clean_up_strategy
+    #   The strategy for cleaning up resources after pentest job completion.
+    #   Valid values are BEST\_EFFORT\_DELETE and RETAIN\_ALL.
+    #   @return [String]
+    #
     # @!attribute [rw] disable_managed_skills
     #   A list of managed skills to disable for this pentest. Valid values
     #   include FINDING\_PERSONALIZATION and LOGIN\_OPTIMIZATION.
@@ -3002,6 +3007,7 @@ module Aws::SecurityAgent
       :vpc_config,
       :network_traffic_config,
       :code_remediation_strategy,
+      :clean_up_strategy,
       :disable_managed_skills,
       :max_task_hours,
       :report_destination,
@@ -9754,6 +9760,11 @@ module Aws::SecurityAgent
     #   The updated code remediation strategy for the pentest.
     #   @return [String]
     #
+    # @!attribute [rw] clean_up_strategy
+    #   The updated strategy for cleaning up resources after pentest job
+    #   completion.
+    #   @return [String]
+    #
     # @!attribute [rw] disable_managed_skills
     #   The updated list of managed skills to disable for this pentest.
     #   Valid values include FINDING\_PERSONALIZATION and
@@ -9795,6 +9806,7 @@ module Aws::SecurityAgent
       :vpc_config,
       :network_traffic_config,
       :code_remediation_strategy,
+      :clean_up_strategy,
       :disable_managed_skills,
       :max_task_hours,
       :report_destination,

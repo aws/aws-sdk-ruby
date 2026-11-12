@@ -2951,6 +2951,66 @@ module Aws::CloudWatchOmni
     #     ], 
     #   }
     #
+    # @example Example: Return metric aggregation metadata
+    #
+    #   # The following example returns aggregation metadata for a metric stream observed on a service over a one-hour window. The
+    #   # metric attributes identify its producing service and instrumentation scope; additional data point dimensions can
+    #   # identify multiple time series. Payloads are shown as JSON; on the wire they are CBOR-encoded.
+    #
+    #   resp = client.get_context_graph({
+    #     depth: 0, 
+    #     end_time: Time.parse("2026-09-16T01:00:00Z"), 
+    #     include_metadata: true, 
+    #     max_results: 1, 
+    #     node_filters: {
+    #       node_id: "svc:checkout-service", 
+    #     }, 
+    #     start_time: Time.parse("2026-09-16T00:00:00Z"), 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     nodes: [
+    #       {
+    #         metadata: {
+    #           metrics: [
+    #             {
+    #               name: "traces.span.metrics.calls", 
+    #               aggregation_temporality: "cumulative", 
+    #               attributes: {
+    #                 "@instrumentation.@name" => "otel.cloudwatch.spanmetrics", 
+    #                 "@resource.service.name" => "checkout-service", 
+    #                 "@resource.service.namespace" => "ecommerce", 
+    #               }, 
+    #               metric_type: "sum", 
+    #               monotonicity: "monotonic", 
+    #               semantics: {
+    #                 unit: "{request}", 
+    #               }, 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         name: "checkout-service", 
+    #         first_observed_at: Time.parse("2026-09-16T00:03:00Z"), 
+    #         last_observed_at: Time.parse("2026-09-16T00:58:00Z"), 
+    #         node_id: "svc:checkout-service", 
+    #         node_properties: {
+    #           cloud_provider: "aws", 
+    #           namespace: "ecommerce", 
+    #           region: "us-east-1", 
+    #           source_account_id: "123456789012", 
+    #         }, 
+    #         node_type: "SERVICE", 
+    #         signal_types: [
+    #           "METRICS", 
+    #         ], 
+    #         sources: [
+    #           "TELEMETRY", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_context_graph({
@@ -3035,6 +3095,8 @@ module Aws::CloudWatchOmni
     #   resp.nodes[0].metadata.metrics[0].attributes["String"] #=> String
     #   resp.nodes[0].metadata.metrics[0].semantics.description #=> String
     #   resp.nodes[0].metadata.metrics[0].semantics.unit #=> String
+    #   resp.nodes[0].metadata.metrics[0].aggregation_temporality #=> String, one of "delta", "cumulative"
+    #   resp.nodes[0].metadata.metrics[0].monotonicity #=> String, one of "monotonic", "non_monotonic"
     #   resp.nodes[0].metadata.semantics.purpose #=> String
     #   resp.nodes[0].metadata.semantics.language #=> String
     #   resp.nodes[0].metadata.semantics.framework #=> String
@@ -3082,6 +3144,8 @@ module Aws::CloudWatchOmni
     #   resp.nodes[0].edges[0].metadata.metrics[0].attributes["String"] #=> String
     #   resp.nodes[0].edges[0].metadata.metrics[0].semantics.description #=> String
     #   resp.nodes[0].edges[0].metadata.metrics[0].semantics.unit #=> String
+    #   resp.nodes[0].edges[0].metadata.metrics[0].aggregation_temporality #=> String, one of "delta", "cumulative"
+    #   resp.nodes[0].edges[0].metadata.metrics[0].monotonicity #=> String, one of "monotonic", "non_monotonic"
     #   resp.nodes[0].edges[0].metadata.semantics.purpose #=> String
     #   resp.nodes[0].edges[0].metadata.semantics.language #=> String
     #   resp.nodes[0].edges[0].metadata.semantics.framework #=> String
@@ -6159,7 +6223,7 @@ module Aws::CloudWatchOmni
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchomni'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -124,6 +124,8 @@ module Aws::MediaTailor
     GetPrefetchScheduleResponse = Shapes::StructureShape.new(name: 'GetPrefetchScheduleResponse')
     HlsConfiguration = Shapes::StructureShape.new(name: 'HlsConfiguration')
     HlsPlaylistSettings = Shapes::StructureShape.new(name: 'HlsPlaylistSettings')
+    HlsTagName = Shapes::StringShape.new(name: 'HlsTagName')
+    HlsTagProcessorConfiguration = Shapes::StructureShape.new(name: 'HlsTagProcessorConfiguration')
     HttpConfiguration = Shapes::StructureShape.new(name: 'HttpConfiguration')
     HttpPackageConfiguration = Shapes::StructureShape.new(name: 'HttpPackageConfiguration')
     HttpPackageConfigurations = Shapes::ListShape.new(name: 'HttpPackageConfigurations')
@@ -216,6 +218,7 @@ module Aws::MediaTailor
     StreamingMediaFileConditioning = Shapes::StringShape.new(name: 'StreamingMediaFileConditioning')
     String = Shapes::StringShape.new(name: 'String')
     StringMap = Shapes::MapShape.new(name: 'StringMap')
+    TagFilterList = Shapes::ListShape.new(name: 'TagFilterList')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     Tier = Shapes::StringShape.new(name: 'Tier')
     TimeShiftConfiguration = Shapes::StructureShape.new(name: 'TimeShiftConfiguration')
@@ -714,6 +717,7 @@ module Aws::MediaTailor
     Function.add_member(:concurrent_executor_configuration, Shapes::ShapeRef.new(shape: ConcurrentExecutorConfiguration, location_name: "ConcurrentExecutorConfiguration"))
     Function.add_member(:sequential_executor_configuration, Shapes::ShapeRef.new(shape: SequentialExecutorConfiguration, location_name: "SequentialExecutorConfiguration"))
     Function.add_member(:vast_request_configuration, Shapes::ShapeRef.new(shape: VastRequestConfiguration, location_name: "VastRequestConfiguration"))
+    Function.add_member(:hls_tag_processor_configuration, Shapes::ShapeRef.new(shape: HlsTagProcessorConfiguration, location_name: "HlsTagProcessorConfiguration"))
     Function.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     Function.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
     Function.struct_class = Types::Function
@@ -755,6 +759,7 @@ module Aws::MediaTailor
     GetFunctionResponse.add_member(:concurrent_executor_configuration, Shapes::ShapeRef.new(shape: ConcurrentExecutorConfiguration, location_name: "ConcurrentExecutorConfiguration"))
     GetFunctionResponse.add_member(:sequential_executor_configuration, Shapes::ShapeRef.new(shape: SequentialExecutorConfiguration, location_name: "SequentialExecutorConfiguration"))
     GetFunctionResponse.add_member(:vast_request_configuration, Shapes::ShapeRef.new(shape: VastRequestConfiguration, location_name: "VastRequestConfiguration"))
+    GetFunctionResponse.add_member(:hls_tag_processor_configuration, Shapes::ShapeRef.new(shape: HlsTagProcessorConfiguration, location_name: "HlsTagProcessorConfiguration"))
     GetFunctionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     GetFunctionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
     GetFunctionResponse.struct_class = Types::GetFunctionResponse
@@ -815,6 +820,12 @@ module Aws::MediaTailor
     HlsPlaylistSettings.add_member(:manifest_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "ManifestWindowSeconds"))
     HlsPlaylistSettings.add_member(:ad_markup_type, Shapes::ShapeRef.new(shape: adMarkupTypes, location_name: "AdMarkupType"))
     HlsPlaylistSettings.struct_class = Types::HlsPlaylistSettings
+
+    HlsTagProcessorConfiguration.add_member(:runtime, Shapes::ShapeRef.new(shape: RuntimeType, required: true, location_name: "Runtime"))
+    HlsTagProcessorConfiguration.add_member(:output, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "Output"))
+    HlsTagProcessorConfiguration.add_member(:tag_filter, Shapes::ShapeRef.new(shape: TagFilterList, required: true, location_name: "TagFilter"))
+    HlsTagProcessorConfiguration.add_member(:run_condition, Shapes::ShapeRef.new(shape: __string, location_name: "RunCondition"))
+    HlsTagProcessorConfiguration.struct_class = Types::HlsTagProcessorConfiguration
 
     HttpConfiguration.add_member(:base_url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "BaseUrl"))
     HttpConfiguration.struct_class = Types::HttpConfiguration
@@ -1035,6 +1046,7 @@ module Aws::MediaTailor
     PutFunctionRequest.add_member(:concurrent_executor_configuration, Shapes::ShapeRef.new(shape: ConcurrentExecutorConfiguration, location_name: "ConcurrentExecutorConfiguration"))
     PutFunctionRequest.add_member(:sequential_executor_configuration, Shapes::ShapeRef.new(shape: SequentialExecutorConfiguration, location_name: "SequentialExecutorConfiguration"))
     PutFunctionRequest.add_member(:vast_request_configuration, Shapes::ShapeRef.new(shape: VastRequestConfiguration, location_name: "VastRequestConfiguration"))
+    PutFunctionRequest.add_member(:hls_tag_processor_configuration, Shapes::ShapeRef.new(shape: HlsTagProcessorConfiguration, location_name: "HlsTagProcessorConfiguration"))
     PutFunctionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     PutFunctionRequest.struct_class = Types::PutFunctionRequest
 
@@ -1047,6 +1059,7 @@ module Aws::MediaTailor
     PutFunctionResponse.add_member(:concurrent_executor_configuration, Shapes::ShapeRef.new(shape: ConcurrentExecutorConfiguration, location_name: "ConcurrentExecutorConfiguration"))
     PutFunctionResponse.add_member(:sequential_executor_configuration, Shapes::ShapeRef.new(shape: SequentialExecutorConfiguration, location_name: "SequentialExecutorConfiguration"))
     PutFunctionResponse.add_member(:vast_request_configuration, Shapes::ShapeRef.new(shape: VastRequestConfiguration, location_name: "VastRequestConfiguration"))
+    PutFunctionResponse.add_member(:hls_tag_processor_configuration, Shapes::ShapeRef.new(shape: HlsTagProcessorConfiguration, location_name: "HlsTagProcessorConfiguration"))
     PutFunctionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     PutFunctionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
     PutFunctionResponse.struct_class = Types::PutFunctionResponse
@@ -1224,6 +1237,8 @@ module Aws::MediaTailor
 
     StringMap.key = Shapes::ShapeRef.new(shape: __string)
     StringMap.value = Shapes::ShapeRef.new(shape: __string)
+
+    TagFilterList.member = Shapes::ShapeRef.new(shape: HlsTagName)
 
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ResourceArn"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, required: true, location_name: "tags"))

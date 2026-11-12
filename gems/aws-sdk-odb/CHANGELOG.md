@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2026-11-12)
+------------------
+
+* Feature - ODB now supports scaling for Exadata Dedicated offerings. Customers can scale database and storage servers on Exadata infrastructure, resize VM clusters and Autonomous VM clusters, and add or remove virtual machines in a VM cluster.
+
 1.41.0 (2026-11-11)
 ------------------
 

@@ -130,8 +130,12 @@ module Aws::Connect
     # Configuration settings for after contact work (ACW) timeout.
     #
     # @!attribute [rw] after_contact_work_time_limit
-    #   The ACW timeout duration in seconds. Minimum: 1 second. Maximum:
-    #   2,000,000 seconds (24 days). Enter 0 for indefinite ACW time.
+    #   The after contact work (ACW) timeout duration in seconds. Minimum: 1
+    #   second. Maximum: 2,000,000 seconds (24 days). For the CHAT channel,
+    #   the maximum for a specific duration is 5,400 seconds (90 minutes);
+    #   higher values end ACW after 90 minutes. For all channels, including
+    #   chat, you can enter 0 for an indefinite amount of time, meaning
+    #   agents must manually choose to end ACW.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AfterContactWorkConfig AWS API Documentation
@@ -22387,6 +22391,15 @@ module Aws::Connect
     #   The name of the source.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the integration association was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the integration association was
+    #   last modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/IntegrationAssociationSummary AWS API Documentation
     #
     class IntegrationAssociationSummary < Struct.new(
@@ -22397,7 +22410,9 @@ module Aws::Connect
       :integration_arn,
       :source_application_url,
       :source_application_name,
-      :source_type)
+      :source_type,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41360,8 +41375,11 @@ module Aws::Connect
     #   for each channel. ACW timeout specifies how many seconds agents have
     #   for after contact work, such as entering notes about the contact.
     #   The minimum setting is 1 second, and the maximum is 2,000,000
-    #   seconds (24 days). Enter 0 for an indefinite amount of time, meaning
-    #   agents must manually choose to end ACW.
+    #   seconds (24 days). For the CHAT channel, the maximum for a specific
+    #   duration is 5,400 seconds (90 minutes); higher values end ACW after
+    #   90 minutes. For all channels, including chat, you can enter 0 for an
+    #   indefinite amount of time, meaning agents must manually choose to
+    #   end ACW.
     #   @return [Array<Types::AfterContactWorkConfigPerChannel>]
     #
     # @!attribute [rw] phone_number_configs
@@ -42409,10 +42427,13 @@ module Aws::Connect
     # @!attribute [rw] after_contact_work_time_limit
     #   The After Call Work (ACW) timeout setting, in seconds. This
     #   parameter has a minimum value of 0 and a maximum value of 2,000,000
-    #   seconds (24 days). Enter 0 if you don't want to allocate a specific
-    #   amount of ACW time. It essentially means an indefinite amount of
-    #   time. When the conversation ends, ACW starts; the agent must choose
-    #   Close contact to end ACW.
+    #   seconds (24 days). For the CHAT channel, the maximum for a specific
+    #   duration is 5,400 seconds (90 minutes); higher values end ACW after
+    #   90 minutes. For all channels, including chat, you can enter 0 if you
+    #   don't want to allocate a specific amount of ACW time. It
+    #   essentially means an indefinite amount of time. When the
+    #   conversation ends, ACW starts; the agent must choose Close contact
+    #   to end ACW.
     #
     #   <note markdown="1"> When returned by a `SearchUsers` call, `AfterContactWorkTimeLimit`
     #   is returned in milliseconds.

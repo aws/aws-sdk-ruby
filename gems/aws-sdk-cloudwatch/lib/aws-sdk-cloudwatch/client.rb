@@ -957,6 +957,39 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Deletes a metric data query definition.
+    #
+    # This operation is idempotent. If the definition doesn't exist, the
+    # operation succeeds without returning an error.
+    #
+    # **Permissions**
+    #
+    # To delete a definition, you need the
+    # `cloudwatch:DeleteMetricDataQueryDefinition` permission on the metric
+    # data query definition resource. You can use the
+    # `aws:ResourceTag/${TagKey}` condition key to control access based on
+    # the tags of the definition.
+    #
+    # @option params [required, String] :id
+    #   The ID of the metric data query definition to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_metric_data_query_definition({
+    #     id: "DefinitionId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteMetricDataQueryDefinition AWS API Documentation
+    #
+    # @overload delete_metric_data_query_definition(params = {})
+    # @param [Hash] params ({})
+    def delete_metric_data_query_definition(params = {}, options = {})
+      req = build_request(:delete_metric_data_query_definition, params)
+      req.send_request(options)
+    end
+
     # Permanently deletes the metric stream that you specify.
     #
     # @option params [required, String] :name
@@ -2454,6 +2487,54 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Returns a metric data query definition, including its expression.
+    #
+    # **Permissions**
+    #
+    # To get a definition, you need the
+    # `cloudwatch:GetMetricDataQueryDefinition` permission on the metric
+    # data query definition resource. You can use the
+    # `aws:ResourceTag/${TagKey}` condition key to control access based on
+    # the tags of the definition.
+    #
+    # @option params [required, String] :id
+    #   The ID of the metric data query definition to retrieve.
+    #
+    # @return [Types::GetMetricDataQueryDefinitionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMetricDataQueryDefinitionOutput#id #id} => String
+    #   * {Types::GetMetricDataQueryDefinitionOutput#arn #arn} => String
+    #   * {Types::GetMetricDataQueryDefinitionOutput#path #path} => String
+    #   * {Types::GetMetricDataQueryDefinitionOutput#expression #expression} => String
+    #   * {Types::GetMetricDataQueryDefinitionOutput#type #type} => String
+    #   * {Types::GetMetricDataQueryDefinitionOutput#created_at #created_at} => Time
+    #   * {Types::GetMetricDataQueryDefinitionOutput#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_metric_data_query_definition({
+    #     id: "DefinitionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.path #=> String
+    #   resp.expression #=> String
+    #   resp.type #=> String, one of "PROMQL", "SQL", "METRIC_MATH"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricDataQueryDefinition AWS API Documentation
+    #
+    # @overload get_metric_data_query_definition(params = {})
+    # @param [Hash] params ({})
+    def get_metric_data_query_definition(params = {}, options = {})
+      req = build_request(:get_metric_data_query_definition, params)
+      req.send_request(options)
+    end
+
     # Gets statistics for the specified metric.
     #
     # The maximum number of data points returned from a single call is
@@ -3102,6 +3183,61 @@ module Aws::CloudWatch
     # @param [Hash] params ({})
     def list_managed_insight_rules(params = {}, options = {})
       req = build_request(:list_managed_insight_rules, params)
+      req.send_request(options)
+    end
+
+    # Lists the metric data query definitions in your account and Region.
+    #
+    # The results are summaries that don't include the expression. To get
+    # the full definition, call `GetMetricDataQueryDefinition` with its ID.
+    #
+    # This operation supports pagination. Use the `MaxResults` and
+    # `NextToken` parameters to retrieve results in multiple calls.
+    #
+    # **Permissions**
+    #
+    # To list definitions, you need the
+    # `cloudwatch:ListMetricDataQueryDefinitions` permission. This
+    # permission applies to all definitions in the account and Region. The
+    # results aren't filtered by tags.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of metric data query definitions to return in one
+    #   call. The default is 100.
+    #
+    # @option params [String] :next_token
+    #   The token returned by a previous call to indicate where to continue
+    #   retrieving results.
+    #
+    # @return [Types::ListMetricDataQueryDefinitionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMetricDataQueryDefinitionsOutput#items #items} => Array&lt;Types::MetricDataQueryDefinitionSummary&gt;
+    #   * {Types::ListMetricDataQueryDefinitionsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_metric_data_query_definitions({
+    #     max_results: 1,
+    #     next_token: "MetricDataQueryDefinitionNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].path #=> String
+    #   resp.items[0].type #=> String, one of "PROMQL", "SQL", "METRIC_MATH"
+    #   resp.items[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetricDataQueryDefinitions AWS API Documentation
+    #
+    # @overload list_metric_data_query_definitions(params = {})
+    # @param [Hash] params ({})
+    def list_metric_data_query_definitions(params = {}, options = {})
+      req = build_request(:list_metric_data_query_definitions, params)
       req.send_request(options)
     end
 
@@ -5220,6 +5356,120 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Creates or updates a metric data query definition.
+    #
+    # A metric data query definition saves a metric query so that you can
+    # reuse it later. It includes the query expression, the query language,
+    # and a path that names the definition and can organize it into folders.
+    # When you save a definition, CloudWatch doesn't validate or run its
+    # expression.
+    #
+    # To create a definition, omit `Id`. CloudWatch generates the ID and
+    # returns it. To update a definition, specify its `Id`. An update
+    # replaces the path, expression, and type, and keeps the creation time.
+    #
+    # The path must be unique in your account and Region. If another
+    # definition already uses the path, the request fails with a
+    # `ConflictException`.
+    #
+    # You can have up to 1,000 metric data query definitions in each Region
+    # of your account. A request that would create more fails with a
+    # `LimitExceededException`.
+    #
+    # **Permissions**
+    #
+    # To create or update a definition, you need the
+    # `cloudwatch:PutMetricDataQueryDefinition` permission on the metric
+    # data query definition resource. The resource ARN has the format
+    # `arn:aws:cloudwatch:Region:account-id:metric-query-definition/Id`.
+    #
+    # To add tags when you create a definition, you also need the
+    # `cloudwatch:TagResource` permission. You can use the
+    # `aws:RequestTag/${TagKey}` and `aws:TagKeys` condition keys to control
+    # which tags can be added.
+    #
+    # @option params [String] :id
+    #   The ID of the metric data query definition to update. Omit this
+    #   parameter to create a definition. CloudWatch then generates the ID and
+    #   returns it in the response.
+    #
+    # @option params [required, String] :path
+    #   The name of the metric data query definition. Use slashes (`/`) to
+    #   organize definitions into folders, for example `team/web/latency`. The
+    #   path must meet the following requirements:
+    #
+    #   * It must be unique in your account and Region.
+    #
+    #   * It can't start or end with a slash.
+    #
+    #   * It can't contain an empty folder name (`//`).
+    #
+    #   * It can be at most 1,015 bytes when encoded as UTF-8.
+    #
+    # @option params [required, String] :expression
+    #   The query expression, in the language that `Type` specifies.
+    #   CloudWatch doesn't validate or run the expression when you save it.
+    #
+    # @option params [required, String] :type
+    #   The language of the expression. Valid values are the following:
+    #
+    #   * `PROMQL` – A PromQL query.
+    #
+    #   * `SQL` – A CloudWatch Metrics Insights query.
+    #
+    #   * `METRIC_MATH` – A metric math expression.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs to associate with the metric data query
+    #   definition. You can use tags to categorize definitions and to control
+    #   access to them. Tags are applied only when the request creates a
+    #   definition, that is, when you omit `Id`. To change the tags of an
+    #   existing definition, use `TagResource` and `UntagResource`.
+    #
+    # @return [Types::PutMetricDataQueryDefinitionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutMetricDataQueryDefinitionOutput#id #id} => String
+    #   * {Types::PutMetricDataQueryDefinitionOutput#arn #arn} => String
+    #   * {Types::PutMetricDataQueryDefinitionOutput#path #path} => String
+    #   * {Types::PutMetricDataQueryDefinitionOutput#expression #expression} => String
+    #   * {Types::PutMetricDataQueryDefinitionOutput#type #type} => String
+    #   * {Types::PutMetricDataQueryDefinitionOutput#created_at #created_at} => Time
+    #   * {Types::PutMetricDataQueryDefinitionOutput#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_metric_data_query_definition({
+    #     id: "DefinitionId",
+    #     path: "DefinitionPath", # required
+    #     expression: "MetricExpressionString", # required
+    #     type: "PROMQL", # required, accepts PROMQL, SQL, METRIC_MATH
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.path #=> String
+    #   resp.expression #=> String
+    #   resp.type #=> String, one of "PROMQL", "SQL", "METRIC_MATH"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricDataQueryDefinition AWS API Documentation
+    #
+    # @overload put_metric_data_query_definition(params = {})
+    # @param [Hash] params ({})
+    def put_metric_data_query_definition(params = {}, options = {})
+      req = build_request(:put_metric_data_query_definition, params)
+      req.send_request(options)
+    end
+
     # Creates or updates a metric stream. Metric streams can automatically
     # stream CloudWatch metrics to Amazon Web Services destinations,
     # including Amazon S3, and to many third-party solutions.
@@ -5920,7 +6170,7 @@ module Aws::CloudWatch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.159.0'
+      context[:gem_version] = '1.160.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2026-11-12)
+------------------
+
+* Feature - Adds support for cleanup strategy in CreatePentestInput and UpdatePentestInput.
+
 1.34.0 (2026-11-11)
 ------------------
 

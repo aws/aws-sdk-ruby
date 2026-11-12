@@ -5092,6 +5092,12 @@ module Aws::GuardDuty
     # Retrieves the results and status of a specific GuardDuty
     # investigation.
     #
+    # GuardDuty returns the results, including the summary and the scope of
+    # the investigation, only when the investigation status is `COMPLETED`.
+    # By default, GuardDuty returns the summary as text in `Summary`. To
+    # return a typed summary in `SummaryData` instead, set `SummaryFormat`
+    # to `STRUCTURED`.
+    #
     # An administrator account can retrieve any investigation within the
     # organization. Member accounts can only retrieve investigations that
     # belong to them.
@@ -5110,6 +5116,17 @@ module Aws::GuardDuty
     # @option params [required, String] :investigation_id
     #   The unique identifier of the investigation to retrieve.
     #
+    # @option params [String] :summary_format
+    #   The format in which to return the investigation summary. Possible
+    #   values:
+    #
+    #   * `STRING` – (Default) Returns the summary as text in `Summary`.
+    #
+    #   * `STRUCTURED` – Returns a typed summary in `SummaryData`.
+    #
+    #   GuardDuty returns a summary only when the investigation status is
+    #   `COMPLETED`.
+    #
     # @return [Types::GetInvestigationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetInvestigationResponse#investigation #investigation} => Types::Investigation
@@ -5119,6 +5136,7 @@ module Aws::GuardDuty
     #   resp = client.get_investigation({
     #     detector_id: "DetectorId", # required
     #     investigation_id: "InvestigationId", # required
+    #     summary_format: "STRING", # accepts STRING, STRUCTURED
     #   })
     #
     # @example Response structure
@@ -5137,6 +5155,101 @@ module Aws::GuardDuty
     #   resp.investigation.risk #=> String
     #   resp.investigation.confidence #=> String, one of "Unknown", "Low", "Medium", "High"
     #   resp.investigation.summary #=> String
+    #   resp.investigation.summary_data.finding_type #=> String
+    #   resp.investigation.summary_data.threat_assessment.attack_progression #=> Array
+    #   resp.investigation.summary_data.threat_assessment.attack_progression[0].phase #=> String, one of "Reconnaissance", "Resource Development", "Initial Access", "Execution", "Persistence", "Privilege Escalation", "Defense Evasion", "Credential Access", "Discovery", "Lateral Movement", "Collection", "Command and Control", "Exfiltration", "Impact"
+    #   resp.investigation.summary_data.threat_assessment.attack_progression[0].description #=> String
+    #   resp.investigation.summary_data.threat_assessment.attack_progression[0].attacks #=> Array
+    #   resp.investigation.summary_data.threat_assessment.attack_progression[0].attacks[0].tactic.name #=> String
+    #   resp.investigation.summary_data.threat_assessment.attack_progression[0].attacks[0].tactic.uid #=> String
+    #   resp.investigation.summary_data.threat_assessment.attack_progression[0].attacks[0].technique.name #=> String
+    #   resp.investigation.summary_data.threat_assessment.attack_progression[0].attacks[0].technique.uid #=> String
+    #   resp.investigation.summary_data.threat_assessment.attack_progression[0].attacks[0].findings #=> Array
+    #   resp.investigation.summary_data.threat_assessment.attack_progression[0].attacks[0].findings[0].finding_type #=> String
+    #   resp.investigation.summary_data.threat_assessment.attack_progression[0].attacks[0].findings[0].uid #=> String
+    #   resp.investigation.summary_data.threat_assessment.attack_progression[0].attacks[0].version #=> String
+    #   resp.investigation.summary_data.threat_assessment.threat_actor_profile #=> String
+    #   resp.investigation.summary_data.countermeasures #=> Array
+    #   resp.investigation.summary_data.countermeasures[0].defense_tactic #=> String, one of "Isolate", "Evict", "Restore", "Harden", "Detect"
+    #   resp.investigation.summary_data.countermeasures[0].actions #=> Array
+    #   resp.investigation.summary_data.countermeasures[0].actions[0].title #=> String
+    #   resp.investigation.summary_data.countermeasures[0].actions[0].description #=> String
+    #   resp.investigation.summary_data.countermeasures[0].actions[0].priority #=> String, one of "IMMEDIATE", "SHORT_TERM", "STRATEGIC"
+    #   resp.investigation.summary_data.countermeasures[0].actions[0].defense_technique #=> String
+    #   resp.investigation.summary_data.countermeasures[0].actions[0].mitigates #=> Array
+    #   resp.investigation.summary_data.countermeasures[0].actions[0].mitigates[0] #=> String
+    #   resp.investigation.summary_data.countermeasures[0].actions[0].cli_commands #=> Array
+    #   resp.investigation.summary_data.countermeasures[0].actions[0].cli_commands[0] #=> String
+    #   resp.investigation.summary_data.countermeasures[0].actions[0].disposition_id #=> Integer
+    #   resp.investigation.summary_data.countermeasures[0].actions[0].disposition #=> String, one of "Isolated", "Blocked", "Deleted", "Access Revoked", "Logged"
+    #   resp.investigation.summary_data.countermeasures[0].actions[0].affected_resources #=> Array
+    #   resp.investigation.summary_data.countermeasures[0].actions[0].affected_resources[0].identifier #=> String
+    #   resp.investigation.summary_data.countermeasures[0].actions[0].affected_resources[0].type #=> String, one of "EC2_INSTANCE", "EBS_VOLUME", "S3_BUCKET", "IAM_ROLE", "IAM_USER", "IAM_ACCESS_KEY", "LAMBDA_FUNCTION", "EKS_CLUSTER", "ECS_CLUSTER", "KUBERNETES_WORKLOAD", "RDS_INSTANCE", "RDS_DB_USER", "EC2_SECURITY_GROUP"
+    #   resp.investigation.summary_data.countermeasures[0].actions[0].affected_resources[0].arn #=> String
+    #   resp.investigation.summary_data.countermeasures[0].description #=> String
+    #   resp.investigation.summary_data.account_analysis.findings_summary.total_findings #=> Integer
+    #   resp.investigation.summary_data.account_analysis.findings_summary.severity_breakdown.critical #=> Integer
+    #   resp.investigation.summary_data.account_analysis.findings_summary.severity_breakdown.high #=> Integer
+    #   resp.investigation.summary_data.account_analysis.findings_summary.severity_breakdown.medium #=> Integer
+    #   resp.investigation.summary_data.account_analysis.findings_summary.severity_breakdown.low #=> Integer
+    #   resp.investigation.summary_data.account_analysis.findings_summary.severity_breakdown.info #=> Integer
+    #   resp.investigation.summary_data.account_analysis.findings_summary.top_finding_types #=> Array
+    #   resp.investigation.summary_data.account_analysis.findings_summary.top_finding_types[0].finding_type #=> String
+    #   resp.investigation.summary_data.account_analysis.findings_summary.top_finding_types[0].count #=> Integer
+    #   resp.investigation.summary_data.account_analysis.findings_summary.by_time_window #=> Array
+    #   resp.investigation.summary_data.account_analysis.findings_summary.by_time_window[0].start_time #=> Time
+    #   resp.investigation.summary_data.account_analysis.findings_summary.by_time_window[0].end_time #=> Time
+    #   resp.investigation.summary_data.account_analysis.findings_summary.by_time_window[0].finding_count #=> Integer
+    #   resp.investigation.summary_data.account_analysis.tactic_coverage #=> Array
+    #   resp.investigation.summary_data.account_analysis.tactic_coverage[0].phase #=> String, one of "Reconnaissance", "Resource Development", "Initial Access", "Execution", "Persistence", "Privilege Escalation", "Defense Evasion", "Credential Access", "Discovery", "Lateral Movement", "Collection", "Command and Control", "Exfiltration", "Impact"
+    #   resp.investigation.summary_data.account_analysis.tactic_coverage[0].finding_count #=> Integer
+    #   resp.investigation.summary_data.account_analysis.tactic_coverage[0].finding_types #=> Array
+    #   resp.investigation.summary_data.account_analysis.tactic_coverage[0].finding_types[0] #=> String
+    #   resp.investigation.summary_data.account_analysis.tactic_coverage[0].techniques #=> Array
+    #   resp.investigation.summary_data.account_analysis.tactic_coverage[0].techniques[0].technique.name #=> String
+    #   resp.investigation.summary_data.account_analysis.tactic_coverage[0].techniques[0].technique.uid #=> String
+    #   resp.investigation.summary_data.account_analysis.tactic_coverage[0].techniques[0].finding_count #=> Integer
+    #   resp.investigation.summary_data.account_analysis.tactic_coverage[0].techniques[0].finding_types #=> Array
+    #   resp.investigation.summary_data.account_analysis.tactic_coverage[0].techniques[0].finding_types[0] #=> String
+    #   resp.investigation.summary_data.account_analysis.affected_resources #=> Array
+    #   resp.investigation.summary_data.account_analysis.affected_resources[0].identifier #=> String
+    #   resp.investigation.summary_data.account_analysis.affected_resources[0].type #=> String, one of "EC2_INSTANCE", "EBS_VOLUME", "S3_BUCKET", "IAM_ROLE", "IAM_USER", "IAM_ACCESS_KEY", "LAMBDA_FUNCTION", "EKS_CLUSTER", "ECS_CLUSTER", "KUBERNETES_WORKLOAD", "RDS_INSTANCE", "RDS_DB_USER", "EC2_SECURITY_GROUP"
+    #   resp.investigation.summary_data.account_analysis.affected_resources[0].finding_count #=> Integer
+    #   resp.investigation.summary_data.organization_analysis.findings_summary.total_findings #=> Integer
+    #   resp.investigation.summary_data.organization_analysis.findings_summary.severity_breakdown.critical #=> Integer
+    #   resp.investigation.summary_data.organization_analysis.findings_summary.severity_breakdown.high #=> Integer
+    #   resp.investigation.summary_data.organization_analysis.findings_summary.severity_breakdown.medium #=> Integer
+    #   resp.investigation.summary_data.organization_analysis.findings_summary.severity_breakdown.low #=> Integer
+    #   resp.investigation.summary_data.organization_analysis.findings_summary.severity_breakdown.info #=> Integer
+    #   resp.investigation.summary_data.organization_analysis.findings_summary.top_finding_types #=> Array
+    #   resp.investigation.summary_data.organization_analysis.findings_summary.top_finding_types[0].finding_type #=> String
+    #   resp.investigation.summary_data.organization_analysis.findings_summary.top_finding_types[0].count #=> Integer
+    #   resp.investigation.summary_data.organization_analysis.findings_summary.by_time_window #=> Array
+    #   resp.investigation.summary_data.organization_analysis.findings_summary.by_time_window[0].start_time #=> Time
+    #   resp.investigation.summary_data.organization_analysis.findings_summary.by_time_window[0].end_time #=> Time
+    #   resp.investigation.summary_data.organization_analysis.findings_summary.by_time_window[0].finding_count #=> Integer
+    #   resp.investigation.summary_data.organization_analysis.findings_summary.total_account_count #=> Integer
+    #   resp.investigation.summary_data.organization_analysis.findings_summary.affected_account_count #=> Integer
+    #   resp.investigation.summary_data.organization_analysis.account_breakdown #=> Array
+    #   resp.investigation.summary_data.organization_analysis.account_breakdown[0].account_id #=> String
+    #   resp.investigation.summary_data.organization_analysis.account_breakdown[0].finding_count #=> Integer
+    #   resp.investigation.summary_data.key_observations.title #=> String
+    #   resp.investigation.summary_data.key_observations.narrative #=> String
+    #   resp.investigation.summary_data.key_observations.observations #=> Array
+    #   resp.investigation.summary_data.key_observations.observations[0] #=> String
+    #   resp.investigation.summary_data.recommendations #=> Array
+    #   resp.investigation.summary_data.recommendations[0].title #=> String
+    #   resp.investigation.summary_data.recommendations[0].rationale #=> String
+    #   resp.investigation.summary_data.recommendations[0].category #=> String, one of "ENABLE_PROTECTION", "FURTHER_INVESTIGATION", "SUPPRESSION_RULE", "HARDENING", "MONITORING"
+    #   resp.investigation.summary_data.recommendations[0].priority #=> String, one of "IMMEDIATE", "SHORT_TERM", "STRATEGIC"
+    #   resp.investigation.summary_data.recommendations[0].cli_commands #=> Array
+    #   resp.investigation.summary_data.recommendations[0].cli_commands[0] #=> String
+    #   resp.investigation.scope.investigation_type #=> String, one of "FINDING", "ACCOUNT", "ORGANIZATION"
+    #   resp.investigation.scope.finding_id #=> String
+    #   resp.investigation.scope.account_id #=> String
+    #   resp.investigation.scope.admin_account_id #=> String
+    #   resp.investigation.scope.query_time_window.start_time #=> Time
+    #   resp.investigation.scope.query_time_window.end_time #=> Time
     #   resp.investigation.start_time #=> Time
     #   resp.investigation.end_time #=> Time
     #   resp.investigation.error #=> String
@@ -6630,8 +6743,446 @@ module Aws::GuardDuty
     # (Frankfurt), Europe (Ireland), Europe (London), Europe (Paris), Europe
     # (Stockholm), and Asia Pacific (Tokyo).
     #
+    # Returns the records for a specific GuardDuty investigation. Each
+    # record is one step in the reasoning that GuardDuty followed to reach
+    # the results of the investigation.
+    #
+    # An administrator account can list the records of any investigation
+    # within the organization. Member accounts can only list the records of
+    # investigations that belong to them.
+    #
+    # @option params [required, String] :detector_id
+    #   The unique ID of the GuardDuty detector associated with the
+    #   investigation.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings page
+    #   in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
+    # @option params [required, String] :investigation_id
+    #   The unique identifier of the investigation whose records you want to
+    #   list.
+    #
+    # @option params [Array<String>] :record_types
+    #   The types of records to return. Possible values are `UPDATE`, `FETCH`,
+    #   `OBSERVATION`, `ANALYSIS`, and `METADATA`. If you don't specify this
+    #   parameter, GuardDuty returns records of all types.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of records to return in a single response. Valid
+    #   values are 1 to 50. The default value is 20. A response can contain
+    #   fewer records than this value, or no records, and still include a
+    #   `NextToken`.
+    #
+    # @option params [String] :next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action, fill nextToken in the request with the
+    #   value of NextToken from the previous response to continue listing
+    #   data. Use the same `InvestigationId` and `RecordTypes` values that you
+    #   used in the previous request.
+    #
+    #   If you specify this parameter for an investigation whose status isn't
+    #   `COMPLETED`, the operation returns a `BadRequestException`. A
+    #   `NextToken` expires 24 hours after it's returned.
+    #
+    # @return [Types::ListInvestigationRecordsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInvestigationRecordsResponse#investigation_id #investigation_id} => String
+    #   * {Types::ListInvestigationRecordsResponse#status #status} => String
+    #   * {Types::ListInvestigationRecordsResponse#records #records} => Array&lt;Types::InvestigationRecord&gt;
+    #   * {Types::ListInvestigationRecordsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_investigation_records({
+    #     detector_id: "DetectorId", # required
+    #     investigation_id: "InvestigationId", # required
+    #     record_types: ["OBSERVATION"], # accepts OBSERVATION, ANALYSIS, UPDATE, FETCH, METADATA
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.investigation_id #=> String
+    #   resp.status #=> String, one of "RUNNING", "COMPLETED", "FAILED"
+    #   resp.records #=> Array
+    #   resp.records[0].record_id #=> String
+    #   resp.records[0].type #=> String, one of "OBSERVATION", "ANALYSIS", "UPDATE", "FETCH", "METADATA"
+    #   resp.records[0].title #=> String
+    #   resp.records[0].narrative #=> String
+    #   resp.records[0].created_at #=> Time
+    #   resp.records[0].supporting_data.fetch.fetch_type #=> String, one of "FINDINGS", "DETECTOR", "REPUTATION", "FINDING_TYPE_DOCUMENTATION", "CLOUD_TRAIL_RAW_EVENTS", "RUNTIME_SIGNALS", "MEMBER_ACCOUNTS"
+    #   resp.records[0].supporting_data.fetch.query.criteria #=> Array
+    #   resp.records[0].supporting_data.fetch.query.criteria[0].field #=> String
+    #   resp.records[0].supporting_data.fetch.query.criteria[0].condition #=> String, one of "EQUALS", "NOT_EQUALS", "GREATER_THAN", "GREATER_THAN_OR_EQUAL", "LESS_THAN", "LESS_THAN_OR_EQUAL"
+    #   resp.records[0].supporting_data.fetch.query.criteria[0].values #=> Array
+    #   resp.records[0].supporting_data.fetch.query.criteria[0].values[0] #=> String
+    #   resp.records[0].supporting_data.fetch.query.time_window.started_at #=> Time
+    #   resp.records[0].supporting_data.fetch.query.time_window.duration_in_minutes #=> Integer
+    #   resp.records[0].supporting_data.fetch.query.row_limit #=> Integer
+    #   resp.records[0].supporting_data.fetch.query.account_id #=> String
+    #   resp.records[0].supporting_data.fetch.query.indicator #=> String
+    #   resp.records[0].supporting_data.fetch.query.indicator_type #=> String, one of "IP", "DOMAIN", "FILE"
+    #   resp.records[0].supporting_data.fetch.query.finding_type #=> String
+    #   resp.records[0].supporting_data.fetch.query.finding_id #=> String
+    #   resp.records[0].supporting_data.fetch.result.item_ids #=> Array
+    #   resp.records[0].supporting_data.fetch.result.item_ids[0] #=> String
+    #   resp.records[0].supporting_data.fetch.result.total_count #=> Integer
+    #   resp.records[0].supporting_data.fetch.result.features #=> Array
+    #   resp.records[0].supporting_data.fetch.result.features[0].name #=> String, one of "CLOUD_TRAIL", "DNS_LOGS", "FLOW_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "EKS_RUNTIME_MONITORING", "EKS_ADDON_MANAGEMENT", "LAMBDA_NETWORK_LOGS", "RUNTIME_MONITORING", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
+    #   resp.records[0].supporting_data.fetch.result.features[0].status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.records[0].supporting_data.fetch.result.features[0].updated_at #=> Time
+    #   resp.records[0].supporting_data.fetch.result.verdict #=> String, one of "THREAT", "BENIGN", "NEUTRAL"
+    #   resp.records[0].supporting_data.fetch.result.documentation.description #=> String
+    #   resp.records[0].supporting_data.fetch.result.documentation.severity #=> String
+    #   resp.records[0].supporting_data.fetch.result.documentation.feature #=> String
+    #   resp.records[0].supporting_data.fetch.result.documentation.full_description #=> String
+    #   resp.records[0].supporting_data.fetch.result.documentation.remediation #=> String
+    #   resp.records[0].supporting_data.fetch.result.documentation.learn_more_links #=> Array
+    #   resp.records[0].supporting_data.fetch.result.documentation.learn_more_links[0] #=> String
+    #   resp.records[0].supporting_data.analysis.analysis_type #=> String, one of "REPUTATION", "THREAT_ASSESSMENT", "RDS_THREAT_ASSESSMENT", "KUBERNETES_POLICY_VIOLATION", "S3_EXPOSURE", "S3_ACTOR_CONTEXT", "S3_PEN_TEST", "PROCESS_LINEAGE", "TREND", "BASELINE"
+    #   resp.records[0].supporting_data.analysis.threat_assessment.reputation.finding_time_disposition #=> String
+    #   resp.records[0].supporting_data.analysis.threat_assessment.reputation.current_disposition #=> String
+    #   resp.records[0].supporting_data.analysis.threat_assessment.reputation.reputation_comparison #=> String
+    #   resp.records[0].supporting_data.analysis.threat_assessment.threat_confidence #=> String, one of "VERY_HIGH", "HIGH", "MEDIUM", "LOW"
+    #   resp.records[0].supporting_data.analysis.threat_assessment.classification #=> String
+    #   resp.records[0].supporting_data.analysis.threat_assessment.assessment #=> String
+    #   resp.records[0].supporting_data.analysis.threat_assessment.authentication_context #=> String
+    #   resp.records[0].supporting_data.analysis.threat_assessment.rds_control_plane_activity #=> String
+    #   resp.records[0].supporting_data.analysis.threat_assessment.ip_account_activity #=> String
+    #   resp.records[0].supporting_data.analysis.threat_assessment.credential_compromise #=> String
+    #   resp.records[0].supporting_data.analysis.kubernetes_policy_violation.violation_type #=> String
+    #   resp.records[0].supporting_data.analysis.kubernetes_policy_violation.affected_resource #=> String
+    #   resp.records[0].supporting_data.analysis.kubernetes_policy_violation.subject #=> String
+    #   resp.records[0].supporting_data.analysis.kubernetes_policy_violation.granted_access #=> String
+    #   resp.records[0].supporting_data.analysis.kubernetes_policy_violation.exposure_vector #=> String
+    #   resp.records[0].supporting_data.analysis.kubernetes_policy_violation.misconfiguration_impact #=> String
+    #   resp.records[0].supporting_data.analysis.s3_analysis.finding_subtype #=> String
+    #   resp.records[0].supporting_data.analysis.s3_analysis.effective_permission #=> String
+    #   resp.records[0].supporting_data.analysis.s3_analysis.block_public_access_settings #=> String
+    #   resp.records[0].supporting_data.analysis.s3_analysis.exposure #=> String
+    #   resp.records[0].supporting_data.analysis.s3_analysis.user_agent #=> String
+    #   resp.records[0].supporting_data.analysis.s3_analysis.user_agent_classification #=> String
+    #   resp.records[0].supporting_data.analysis.s3_analysis.source_ip #=> String
+    #   resp.records[0].supporting_data.analysis.s3_analysis.ip_reputation #=> String
+    #   resp.records[0].supporting_data.analysis.s3_analysis.actor_assessment #=> String
+    #   resp.records[0].supporting_data.analysis.s3_analysis.s3_api_activity #=> String
+    #   resp.records[0].supporting_data.analysis.s3_analysis.source_context #=> String
+    #   resp.records[0].supporting_data.analysis.s3_analysis.authorization_assessment #=> String
+    #   resp.records[0].supporting_data.analysis.processes #=> Array
+    #   resp.records[0].supporting_data.analysis.processes[0].uuid #=> String
+    #   resp.records[0].supporting_data.analysis.processes[0].name #=> String
+    #   resp.records[0].supporting_data.analysis.processes[0].path #=> String
+    #   resp.records[0].supporting_data.analysis.processes[0].parent_uuid #=> String
+    #   resp.records[0].supporting_data.analysis.processes[0].findings #=> Array
+    #   resp.records[0].supporting_data.analysis.processes[0].findings[0].finding_type #=> String
+    #   resp.records[0].supporting_data.analysis.processes[0].findings[0].uid #=> String
+    #   resp.records[0].supporting_data.analysis.account_analysis.trend.granularity #=> String, one of "DAY", "WEEK", "MONTH"
+    #   resp.records[0].supporting_data.analysis.account_analysis.trend.started_at #=> Time
+    #   resp.records[0].supporting_data.analysis.account_analysis.trend.ended_at #=> Time
+    #   resp.records[0].supporting_data.analysis.account_analysis.trend.total_findings #=> Integer
+    #   resp.records[0].supporting_data.analysis.account_analysis.trend.by_time_window #=> Array
+    #   resp.records[0].supporting_data.analysis.account_analysis.trend.by_time_window[0].start_time #=> Time
+    #   resp.records[0].supporting_data.analysis.account_analysis.trend.by_time_window[0].end_time #=> Time
+    #   resp.records[0].supporting_data.analysis.account_analysis.trend.by_time_window[0].finding_count #=> Integer
+    #   resp.records[0].supporting_data.analysis.account_analysis.baseline.total_findings #=> Integer
+    #   resp.records[0].supporting_data.analysis.account_analysis.baseline.baseline_findings #=> Array
+    #   resp.records[0].supporting_data.analysis.account_analysis.baseline.baseline_findings[0].finding_type #=> String
+    #   resp.records[0].supporting_data.analysis.account_analysis.baseline.baseline_findings[0].classification #=> String
+    #   resp.records[0].supporting_data.analysis.account_analysis.baseline.baseline_findings[0].count #=> Integer
+    #   resp.records[0].supporting_data.analysis.account_analysis.baseline.baseline_findings[0].percentage #=> Float
+    #   resp.records[0].supporting_data.analysis.account_analysis.baseline.baseline_findings[0].description #=> String
+    #   resp.records[0].supporting_data.analysis.account_analysis.baseline.anomalous_findings #=> Array
+    #   resp.records[0].supporting_data.analysis.account_analysis.baseline.anomalous_findings[0].finding_type #=> String
+    #   resp.records[0].supporting_data.analysis.account_analysis.baseline.anomalous_findings[0].classification #=> String
+    #   resp.records[0].supporting_data.analysis.account_analysis.baseline.anomalous_findings[0].count #=> Integer
+    #   resp.records[0].supporting_data.analysis.account_analysis.baseline.anomalous_findings[0].percentage #=> Float
+    #   resp.records[0].supporting_data.analysis.account_analysis.baseline.anomalous_findings[0].description #=> String
+    #   resp.records[0].supporting_data.analysis.indicators #=> Array
+    #   resp.records[0].supporting_data.analysis.indicators[0].value #=> String
+    #   resp.records[0].supporting_data.analysis.indicators[0].type #=> String, one of "IP", "DOMAIN", "FILE"
+    #   resp.records[0].supporting_data.observation.observation_type #=> String, one of "FINDING_DETAIL", "RESOURCE", "NETWORK_ACTIVITY", "RDS_LOGIN_ACTIVITY", "S3_ACTIVITY", "KUBERNETES_ACTIVITY", "MALWARE_SCAN", "RELATED_FINDINGS", "DETECTION_COVERAGE", "ACCOUNT_OVERVIEW", "RECOMMENDATION", "RUNTIME_SIGNALS", "DISTRIBUTION", "REPRESENTATIVE_RESOURCE"
+    #   resp.records[0].supporting_data.observation.finding_detail.finding_id #=> String
+    #   resp.records[0].supporting_data.observation.finding_detail.finding_type #=> String
+    #   resp.records[0].supporting_data.observation.finding_detail.severity #=> String
+    #   resp.records[0].supporting_data.observation.finding_detail.account_id #=> String
+    #   resp.records[0].supporting_data.observation.finding_detail.region #=> String
+    #   resp.records[0].supporting_data.observation.finding_detail.activity_window.first_seen_at #=> Time
+    #   resp.records[0].supporting_data.observation.finding_detail.activity_window.last_seen_at #=> Time
+    #   resp.records[0].supporting_data.observation.resource.uid #=> String
+    #   resp.records[0].supporting_data.observation.resource.name #=> String
+    #   resp.records[0].supporting_data.observation.resource.resource_type #=> String, one of "EC2_INSTANCE", "EBS_VOLUME", "S3_BUCKET", "IAM_ROLE", "IAM_USER", "IAM_ACCESS_KEY", "LAMBDA_FUNCTION", "EKS_CLUSTER", "ECS_CLUSTER", "KUBERNETES_WORKLOAD", "RDS_INSTANCE", "RDS_DB_USER", "EC2_SECURITY_GROUP"
+    #   resp.records[0].supporting_data.observation.resource.data.ec2_instance.instance_id #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.ec2_instance.instance_type #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.ec2_instance.instance_state #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.ec2_instance.availability_zone #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.ec2_instance.private_ip_address #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.ec2_instance.public_ip #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.ec2_instance.vpc_id #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.ec2_instance.subnet_id #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.ec2_instance.image_id #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.ec2_instance.launched_at #=> Time
+    #   resp.records[0].supporting_data.observation.resource.data.lambda_function.function_name #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.lambda_function.function_arn #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.lambda_function.function_version #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.lambda_function.role #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.lambda_function.description #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.lambda_function.revision_id #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.lambda_function.updated_at #=> Time
+    #   resp.records[0].supporting_data.observation.resource.data.lambda_function.vpc_configuration_summary #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.rds_db_instance.db_instance_identifier #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.rds_db_instance.db_cluster_identifier #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.rds_db_instance.db_instance_arn #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.rds_db_instance.dbi_resource_id #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.rds_db_instance.engine #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.rds_db_instance.engine_version #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.rds_db_user.user #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.rds_db_user.application #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.rds_db_user.database #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.rds_db_user.auth_method #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.rds_db_user.ssl #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.eks_cluster.name #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.eks_cluster.arn #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.eks_cluster.status #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.eks_cluster.vpc_id #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.ecs_cluster.name #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.ecs_cluster.arn #=> String
+    #   resp.records[0].supporting_data.observation.resource.data.ecs_cluster.status #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.protocol #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.direction #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.method #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.blocked #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.platform #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.ports.target_port #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.ports.remote_port #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.ports.resolver_port #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.ports.ports #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.ports.ports_used #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.ports.port_count #=> Integer
+    #   resp.records[0].supporting_data.observation.network_activity.traffic.bytes_sent #=> Integer
+    #   resp.records[0].supporting_data.observation.network_activity.traffic.bytes_received #=> Integer
+    #   resp.records[0].supporting_data.observation.network_activity.anomaly.baseline_bytes #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.anomaly.deviation #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.anomaly.profile_age_days #=> Integer
+    #   resp.records[0].supporting_data.observation.network_activity.anomaly.remote_service #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.anomaly.remote_region #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.anomaly.duration #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.anomaly.reset_ratio #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.anomaly.target_host_count #=> Integer
+    #   resp.records[0].supporting_data.observation.network_activity.dns.domain_suffix #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.dns.other_domains #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.dns.resolver_history #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.counts.request_count #=> Integer
+    #   resp.records[0].supporting_data.observation.network_activity.counts.total_attempts #=> Integer
+    #   resp.records[0].supporting_data.observation.network_activity.counts.suspicious_attempts #=> Integer
+    #   resp.records[0].supporting_data.observation.network_activity.counts.reset_attempts #=> Integer
+    #   resp.records[0].supporting_data.observation.network_activity.enrichment.country_name #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.enrichment.asn_org #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.enrichment.threat_list_name #=> String
+    #   resp.records[0].supporting_data.observation.network_activity.enrichment.threat_name #=> String
+    #   resp.records[0].supporting_data.observation.rds_login_activity.outcome #=> String
+    #   resp.records[0].supporting_data.observation.rds_login_activity.rate #=> String
+    #   resp.records[0].supporting_data.observation.rds_login_activity.anomaly_context #=> String
+    #   resp.records[0].supporting_data.observation.rds_login_activity.login_count #=> Integer
+    #   resp.records[0].supporting_data.observation.rds_login_activity.activity_window.first_seen_at #=> Time
+    #   resp.records[0].supporting_data.observation.rds_login_activity.activity_window.last_seen_at #=> Time
+    #   resp.records[0].supporting_data.observation.rds_login_activity.enrichment.country_name #=> String
+    #   resp.records[0].supporting_data.observation.rds_login_activity.enrichment.asn_org #=> String
+    #   resp.records[0].supporting_data.observation.rds_login_activity.enrichment.threat_list_name #=> String
+    #   resp.records[0].supporting_data.observation.rds_login_activity.enrichment.threat_name #=> String
+    #   resp.records[0].supporting_data.observation.s3_activity.api #=> String
+    #   resp.records[0].supporting_data.observation.s3_activity.affected_bucket #=> String
+    #   resp.records[0].supporting_data.observation.s3_activity.other_s3_activity #=> String
+    #   resp.records[0].supporting_data.observation.s3_activity.non_s3_activity #=> String
+    #   resp.records[0].supporting_data.observation.s3_activity.session_assessment #=> String
+    #   resp.records[0].supporting_data.observation.s3_activity.event_count #=> Integer
+    #   resp.records[0].supporting_data.observation.s3_activity.actor.access_key_id #=> String
+    #   resp.records[0].supporting_data.observation.s3_activity.actor.principal_id #=> String
+    #   resp.records[0].supporting_data.observation.s3_activity.actor.user_name #=> String
+    #   resp.records[0].supporting_data.observation.s3_activity.actor.user_type #=> String
+    #   resp.records[0].supporting_data.observation.s3_activity.actor.user_agent #=> String
+    #   resp.records[0].supporting_data.observation.s3_activity.source_ip #=> String
+    #   resp.records[0].supporting_data.observation.s3_activity.enrichment.country_name #=> String
+    #   resp.records[0].supporting_data.observation.s3_activity.enrichment.asn_org #=> String
+    #   resp.records[0].supporting_data.observation.s3_activity.enrichment.threat_list_name #=> String
+    #   resp.records[0].supporting_data.observation.s3_activity.enrichment.threat_name #=> String
+    #   resp.records[0].supporting_data.observation.s3_activity.activity_window.first_seen_at #=> Time
+    #   resp.records[0].supporting_data.observation.s3_activity.activity_window.last_seen_at #=> Time
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.api_call.cluster_name #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.api_call.username #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.api_call.user_groups #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.api_call.user_id #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.api_call.verb #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.api_call.resource_type #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.api_call.resource_name #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.api_call.namespace #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.api_call.request_uri #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.api_call.status_code #=> Integer
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.api_call.source_ips #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.api_call.user_agent #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.api_call.event_count #=> Integer
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.anomaly.unusual_behavior #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.anomaly.baseline_context #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.anomaly.anomaly_score #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.anomaly.training_period #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.workload.workload_type #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.workload.workload_name #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.workload.containers #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.workload.volumes #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.workload.security_context #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.enrichment.country_name #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.enrichment.asn_org #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.enrichment.threat_list_name #=> String
+    #   resp.records[0].supporting_data.observation.kubernetes_activity.enrichment.threat_name #=> String
+    #   resp.records[0].supporting_data.observation.malware_scan.scan_id #=> String
+    #   resp.records[0].supporting_data.observation.malware_scan.scan_type #=> String, one of "BACKUP_INITIATED", "ON_DEMAND", "GUARDDUTY_INITIATED"
+    #   resp.records[0].supporting_data.observation.malware_scan.scan_category #=> String, one of "FULL_SCAN", "INCREMENTAL_SCAN"
+    #   resp.records[0].supporting_data.observation.malware_scan.trigger_finding_id #=> String
+    #   resp.records[0].supporting_data.observation.malware_scan.engine_sources #=> String
+    #   resp.records[0].supporting_data.observation.malware_scan.scan_started_at #=> Time
+    #   resp.records[0].supporting_data.observation.malware_scan.scan_completed_at #=> Time
+    #   resp.records[0].supporting_data.observation.malware_scan.files_scanned #=> Integer
+    #   resp.records[0].supporting_data.observation.malware_scan.gigabytes_scanned #=> Float
+    #   resp.records[0].supporting_data.observation.malware_scan.volumes_scanned #=> Integer
+    #   resp.records[0].supporting_data.observation.malware_scan.infected_file_count #=> Integer
+    #   resp.records[0].supporting_data.observation.malware_scan.resource_type #=> String
+    #   resp.records[0].supporting_data.observation.malware_scan.resource_identifier #=> String
+    #   resp.records[0].supporting_data.observation.malware_scan.highest_severity #=> String
+    #   resp.records[0].supporting_data.observation.malware_scan.highest_severity_threat_name #=> String
+    #   resp.records[0].supporting_data.observation.malware_scan.unique_threat_count #=> Integer
+    #   resp.records[0].supporting_data.observation.malware_scan.total_infected_items #=> Integer
+    #   resp.records[0].supporting_data.observation.malware_scan.threats #=> Array
+    #   resp.records[0].supporting_data.observation.malware_scan.threats[0].name #=> String
+    #   resp.records[0].supporting_data.observation.malware_scan.threats[0].severity #=> String
+    #   resp.records[0].supporting_data.observation.malware_scan.threats[0].infected_file_count #=> Integer
+    #   resp.records[0].supporting_data.observation.malware_scan.threats[0].sample_files #=> String
+    #   resp.records[0].supporting_data.observation.related_findings.correlated #=> Array
+    #   resp.records[0].supporting_data.observation.related_findings.correlated[0].finding_type #=> String
+    #   resp.records[0].supporting_data.observation.related_findings.correlated[0].count #=> Integer
+    #   resp.records[0].supporting_data.observation.related_findings.correlated[0].severity_max #=> Float
+    #   resp.records[0].supporting_data.observation.related_findings.correlated[0].correlation_reasons #=> Array
+    #   resp.records[0].supporting_data.observation.related_findings.correlated[0].correlation_reasons[0] #=> String, one of "HIGH_SEVERITY", "SAME_RESOURCE", "SAME_BEHAVIOR"
+    #   resp.records[0].supporting_data.observation.related_findings.correlated[0].finding_ids #=> Array
+    #   resp.records[0].supporting_data.observation.related_findings.correlated[0].finding_ids[0] #=> String
+    #   resp.records[0].supporting_data.observation.related_findings.correlated[0].shared_resources #=> Array
+    #   resp.records[0].supporting_data.observation.related_findings.correlated[0].shared_resources[0].resource_type #=> String
+    #   resp.records[0].supporting_data.observation.related_findings.correlated[0].shared_resources[0].identifier #=> String
+    #   resp.records[0].supporting_data.observation.related_findings.correlated[0].shared_behaviors #=> Array
+    #   resp.records[0].supporting_data.observation.related_findings.correlated[0].shared_behaviors[0].path #=> String
+    #   resp.records[0].supporting_data.observation.related_findings.correlated[0].shared_behaviors[0].value #=> String
+    #   resp.records[0].supporting_data.observation.related_findings.observed #=> Array
+    #   resp.records[0].supporting_data.observation.related_findings.observed[0].finding_type #=> String
+    #   resp.records[0].supporting_data.observation.related_findings.observed[0].count #=> Integer
+    #   resp.records[0].supporting_data.observation.related_findings.observed[0].severity_max #=> Float
+    #   resp.records[0].supporting_data.observation.related_findings.observed[0].shared_resources #=> Array
+    #   resp.records[0].supporting_data.observation.related_findings.observed[0].shared_resources[0].resource_type #=> String
+    #   resp.records[0].supporting_data.observation.related_findings.observed[0].shared_resources[0].identifier #=> String
+    #   resp.records[0].supporting_data.observation.detection_coverage.protection_plans #=> Array
+    #   resp.records[0].supporting_data.observation.detection_coverage.protection_plans[0].name #=> String, one of "CLOUD_TRAIL", "DNS_LOGS", "FLOW_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "EKS_RUNTIME_MONITORING", "EKS_ADDON_MANAGEMENT", "LAMBDA_NETWORK_LOGS", "RUNTIME_MONITORING", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
+    #   resp.records[0].supporting_data.observation.detection_coverage.protection_plans[0].status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.records[0].supporting_data.observation.detection_coverage.foundational_data_sources #=> Array
+    #   resp.records[0].supporting_data.observation.detection_coverage.foundational_data_sources[0] #=> String, one of "CLOUD_TRAIL", "DNS_LOGS", "FLOW_LOGS", "S3_DATA_EVENTS", "EKS_AUDIT_LOGS", "EBS_MALWARE_PROTECTION", "RDS_LOGIN_EVENTS", "EKS_RUNTIME_MONITORING", "EKS_ADDON_MANAGEMENT", "LAMBDA_NETWORK_LOGS", "RUNTIME_MONITORING", "ECS_FARGATE_AGENT_MANAGEMENT", "EC2_AGENT_MANAGEMENT"
+    #   resp.records[0].supporting_data.observation.detection_coverage.coverage_gaps #=> String
+    #   resp.records[0].supporting_data.observation.detection_coverage.key_observation #=> String
+    #   resp.records[0].supporting_data.observation.account_overview.account_id #=> String
+    #   resp.records[0].supporting_data.observation.account_overview.account_status #=> String
+    #   resp.records[0].supporting_data.observation.account_overview.detector_id #=> String
+    #   resp.records[0].supporting_data.observation.account_overview.region #=> String
+    #   resp.records[0].supporting_data.observation.account_overview.delegated_admin_account_id #=> String
+    #   resp.records[0].supporting_data.observation.account_overview.total_member_accounts #=> Integer
+    #   resp.records[0].supporting_data.observation.account_overview.total_findings #=> Integer
+    #   resp.records[0].supporting_data.observation.account_overview.affected_account_count #=> Integer
+    #   resp.records[0].supporting_data.observation.account_overview.account_rankings #=> Array
+    #   resp.records[0].supporting_data.observation.account_overview.account_rankings[0].rank #=> Integer
+    #   resp.records[0].supporting_data.observation.account_overview.account_rankings[0].account_id #=> String
+    #   resp.records[0].supporting_data.observation.account_overview.account_rankings[0].finding_count #=> Integer
+    #   resp.records[0].supporting_data.observation.account_overview.account_rankings[0].risk_level #=> String, one of "Info", "Low", "Medium", "High", "Critical"
+    #   resp.records[0].supporting_data.observation.account_overview.account_rankings[0].risk_rationale #=> String
+    #   resp.records[0].supporting_data.observation.recommendations #=> Array
+    #   resp.records[0].supporting_data.observation.recommendations[0].title #=> String
+    #   resp.records[0].supporting_data.observation.recommendations[0].rationale #=> String
+    #   resp.records[0].supporting_data.observation.recommendations[0].category #=> String, one of "ENABLE_PROTECTION", "FURTHER_INVESTIGATION", "SUPPRESSION_RULE", "HARDENING", "MONITORING"
+    #   resp.records[0].supporting_data.observation.recommendations[0].priority #=> String, one of "IMMEDIATE", "SHORT_TERM", "STRATEGIC"
+    #   resp.records[0].supporting_data.observation.recommendations[0].cli_commands #=> Array
+    #   resp.records[0].supporting_data.observation.recommendations[0].cli_commands[0] #=> String
+    #   resp.records[0].supporting_data.observation.runtime_signals.signal_groups #=> Array
+    #   resp.records[0].supporting_data.observation.runtime_signals.signal_groups[0].finding_type #=> String
+    #   resp.records[0].supporting_data.observation.runtime_signals.signal_groups[0].severity #=> Float
+    #   resp.records[0].supporting_data.observation.runtime_signals.signal_groups[0].count #=> Integer
+    #   resp.records[0].supporting_data.observation.runtime_signals.key_observation #=> String
+    #   resp.records[0].supporting_data.observation.distribution.dimension #=> String, one of "SEVERITY", "TYPE", "RESOURCE", "ATTACK_VECTOR", "ARCHIVE"
+    #   resp.records[0].supporting_data.observation.distribution.total_findings #=> Integer
+    #   resp.records[0].supporting_data.observation.distribution.severity_breakdown.critical #=> Integer
+    #   resp.records[0].supporting_data.observation.distribution.severity_breakdown.high #=> Integer
+    #   resp.records[0].supporting_data.observation.distribution.severity_breakdown.medium #=> Integer
+    #   resp.records[0].supporting_data.observation.distribution.severity_breakdown.low #=> Integer
+    #   resp.records[0].supporting_data.observation.distribution.severity_breakdown.info #=> Integer
+    #   resp.records[0].supporting_data.observation.distribution.finding_types #=> Array
+    #   resp.records[0].supporting_data.observation.distribution.finding_types[0].finding_type #=> String
+    #   resp.records[0].supporting_data.observation.distribution.finding_types[0].count #=> Integer
+    #   resp.records[0].supporting_data.observation.distribution.finding_types[0].percentage #=> Float
+    #   resp.records[0].supporting_data.observation.distribution.finding_types[0].dominant_severity #=> String
+    #   resp.records[0].supporting_data.observation.distribution.top_finding_types #=> Array
+    #   resp.records[0].supporting_data.observation.distribution.top_finding_types[0].finding_type #=> String
+    #   resp.records[0].supporting_data.observation.distribution.top_finding_types[0].count #=> Integer
+    #   resp.records[0].supporting_data.observation.distribution.resources #=> Array
+    #   resp.records[0].supporting_data.observation.distribution.resources[0].resource_type #=> String
+    #   resp.records[0].supporting_data.observation.distribution.resources[0].identifier #=> String
+    #   resp.records[0].supporting_data.observation.distribution.resources[0].count #=> Integer
+    #   resp.records[0].supporting_data.observation.distribution.attack_vectors #=> Array
+    #   resp.records[0].supporting_data.observation.distribution.attack_vectors[0].phase #=> String, one of "Reconnaissance", "Resource Development", "Initial Access", "Execution", "Persistence", "Privilege Escalation", "Defense Evasion", "Credential Access", "Discovery", "Lateral Movement", "Collection", "Command and Control", "Exfiltration", "Impact"
+    #   resp.records[0].supporting_data.observation.distribution.attack_vectors[0].finding_count #=> Integer
+    #   resp.records[0].supporting_data.observation.distribution.attack_vectors[0].finding_types #=> Array
+    #   resp.records[0].supporting_data.observation.distribution.attack_vectors[0].finding_types[0] #=> String
+    #   resp.records[0].supporting_data.observation.distribution.attack_vectors[0].techniques #=> Array
+    #   resp.records[0].supporting_data.observation.distribution.attack_vectors[0].techniques[0].technique.name #=> String
+    #   resp.records[0].supporting_data.observation.distribution.attack_vectors[0].techniques[0].technique.uid #=> String
+    #   resp.records[0].supporting_data.observation.distribution.attack_vectors[0].techniques[0].finding_count #=> Integer
+    #   resp.records[0].supporting_data.observation.distribution.attack_vectors[0].techniques[0].finding_types #=> Array
+    #   resp.records[0].supporting_data.observation.distribution.attack_vectors[0].techniques[0].finding_types[0] #=> String
+    #   resp.records[0].supporting_data.observation.distribution.archive.archived_count #=> Integer
+    #   resp.records[0].supporting_data.observation.distribution.archive.unarchived_count #=> Integer
+    #   resp.records[0].supporting_data.observation.distribution.archive.archived_percentage #=> Float
+    #   resp.records[0].supporting_data.observation.distribution.archive.unarchived_percentage #=> Float
+    #   resp.records[0].supporting_data.observation.representative_resources #=> Array
+    #   resp.records[0].supporting_data.observation.representative_resources[0].resource_type #=> String
+    #   resp.records[0].supporting_data.observation.representative_resources[0].identifier #=> String
+    #   resp.records[0].supporting_data.observation.representative_resources[0].finding_id #=> String
+    #   resp.records[0].supporting_data.observation.representative_resources[0].finding_count #=> Integer
+    #   resp.records[0].supporting_data.observation.representative_resources[0].risk_level #=> String, one of "Info", "Low", "Medium", "High", "Critical"
+    #   resp.records[0].supporting_data.observation.representative_resources[0].risk_rationale #=> String
+    #   resp.records[0].supporting_data.observation.indicators #=> Array
+    #   resp.records[0].supporting_data.observation.indicators[0].value #=> String
+    #   resp.records[0].supporting_data.observation.indicators[0].type #=> String, one of "IP", "DOMAIN", "FILE"
+    #   resp.records[0].supporting_data.metadata.total_time_milliseconds #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListInvestigationRecords AWS API Documentation
+    #
+    # @overload list_investigation_records(params = {})
+    # @param [Hash] params ({})
+    def list_investigation_records(params = {}, options = {})
+      req = build_request(:list_investigation_records, params)
+      req.send_request(options)
+    end
+
+    # This API is currently available as a preview. This feature is
+    # available in the following Amazon Web Services Regions: US East (N.
+    # Virginia), US East (Ohio), US West (Oregon), Canada (Central), Europe
+    # (Frankfurt), Europe (Ireland), Europe (London), Europe (Paris), Europe
+    # (Stockholm), and Asia Pacific (Tokyo).
+    #
     # Returns a list of investigations associated with the specified
-    # GuardDuty detector.
+    # GuardDuty detector. You can filter the investigations by status, risk
+    # level, confidence, finding ID, and investigation type, and sort them
+    # by start time, end time, status, risk level, or confidence.
     #
     # An administrator account sees all investigations across the
     # organization. Member accounts see only the investigations that belong
@@ -6647,6 +7198,10 @@ module Aws::GuardDuty
     #
     #
     #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #
+    # @option params [Types::InvestigationFilterCriteria] :filter_criteria
+    #   The criteria used to filter investigations. GuardDuty returns only the
+    #   investigations that match all of the specified criteria.
     #
     # @option params [Types::InvestigationSortCriteria] :sort_criteria
     #   Represents the criteria used for sorting investigations.
@@ -6673,6 +7228,14 @@ module Aws::GuardDuty
     #
     #   resp = client.list_investigations({
     #     detector_id: "DetectorId", # required
+    #     filter_criteria: {
+    #       criterion: {
+    #         "STATUS" => {
+    #           equals: ["String"],
+    #           not_equals: ["String"],
+    #         },
+    #       },
+    #     },
     #     sort_criteria: {
     #       attribute_name: "START_TIME", # accepts START_TIME, END_TIME, STATUS, RISK_LEVEL, CONFIDENCE
     #       order_by: "ASC", # accepts ASC, DESC
@@ -6690,7 +7253,10 @@ module Aws::GuardDuty
     #   resp.investigations[0].risk_level #=> String, one of "Info", "Low", "Medium", "High", "Critical"
     #   resp.investigations[0].confidence #=> String, one of "Unknown", "Low", "Medium", "High"
     #   resp.investigations[0].title #=> String
+    #   resp.investigations[0].investigation_type #=> String, one of "FINDING", "ACCOUNT", "ORGANIZATION"
+    #   resp.investigations[0].finding_id #=> String
     #   resp.investigations[0].account_id #=> String
+    #   resp.investigations[0].admin_account_id #=> String
     #   resp.investigations[0].start_time #=> Time
     #   resp.investigations[0].end_time #=> Time
     #   resp.next_token #=> String
@@ -9755,7 +10321,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.177.0'
+      context[:gem_version] = '1.178.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

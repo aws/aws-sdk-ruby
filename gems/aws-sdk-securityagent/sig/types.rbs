@@ -816,6 +816,7 @@ module Aws::SecurityAgent
       attr_accessor vpc_config: Types::VpcConfig
       attr_accessor network_traffic_config: Types::NetworkTrafficConfig
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
+      attr_accessor clean_up_strategy: ("BEST_EFFORT_DELETE" | "RETAIN_ALL")
       attr_accessor disable_managed_skills: ::Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")]
       attr_accessor max_task_hours: ::Float
       attr_accessor report_destination: Types::ReportDestination
@@ -2661,6 +2662,7 @@ module Aws::SecurityAgent
       attr_accessor vpc_config: Types::VpcConfig
       attr_accessor network_traffic_config: Types::NetworkTrafficConfig
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
+      attr_accessor clean_up_strategy: ("BEST_EFFORT_DELETE" | "RETAIN_ALL")
       attr_accessor disable_managed_skills: ::Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")]
       attr_accessor max_task_hours: ::Float
       attr_accessor report_destination: Types::ReportDestination

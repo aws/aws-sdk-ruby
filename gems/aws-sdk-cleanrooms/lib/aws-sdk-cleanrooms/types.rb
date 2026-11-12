@@ -9899,21 +9899,59 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
-    # The protected job error.
+    # Details of the error that caused the protected job to fail.
     #
     # @!attribute [rw] message
-    #   The message for the protected job error.
+    #   A description of why the protected job failed.
     #   @return [String]
     #
     # @!attribute [rw] code
-    #   The error code for the protected job.
+    #   A code that identifies the category of the failure. Valid values
+    #   are:
+    #
+    #   * `MALFORMED_SCRIPT` – The job script or its execution environment
+    #     is not valid (code, imports, entry point, virtual environment, or
+    #     dependencies).
+    #
+    #   * `RESOURCE_NOT_FOUND` – A referenced resource doesn't exist.
+    #
+    #   * `INVALID_RESOURCE` – A referenced resource exists, but you can't
+    #     use it because its configuration, state, or data is not valid.
+    #
+    #   * `RESOURCE_ACCESS_DENIED` – A required permission is missing for a
+    #     data source or resource.
+    #
+    #   * `INSUFFICIENT_COMPUTE` – The job exceeded the available compute
+    #     (memory, disk, or time).
+    #
+    #   * `TRANSIENT_ERROR` – A temporary condition caused the failure, such
+    #     as throttling or a network interruption.
+    #
+    #   * `INTERNAL_ERROR` – Clean Rooms encountered an unexpected error. If
+    #     the error persists, contact AWS Support.
+    #
+    #   * `UNKNOWN_ERROR` – The failure couldn't be classified.
+    #
+    #   For more information about error codes, see
+    #   [https://docs.aws.amazon.com/clean-rooms/latest/userguide/error-codes.html][1]
+    #   in the Clean Rooms User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/clean-rooms/latest/userguide/error-codes.html
     #   @return [String]
+    #
+    # @!attribute [rw] retry
+    #   Contains information about whether running the same protected job
+    #   again might succeed.
+    #   @return [Types::RetryInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobError AWS API Documentation
     #
     class ProtectedJobError < Struct.new(
       :message,
-      :code)
+      :code,
+      :retry)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10428,21 +10466,58 @@ module Aws::CleanRooms
       class Unknown < ProtectedQueryDistributeOutputConfigurationLocation; end
     end
 
-    # Details of errors thrown by the protected query.
+    # Details of the error that caused the protected query to fail.
     #
     # @!attribute [rw] message
-    #   A description of why the query failed.
+    #   A description of why the protected query failed.
     #   @return [String]
     #
     # @!attribute [rw] code
-    #   An error code for the error.
+    #   A code that identifies the category of the failure. Valid values
+    #   are:
+    #
+    #   * `MALFORMED_QUERY` – The query is not valid (syntax, semantics,
+    #     columns, or an unsupported operation).
+    #
+    #   * `RESOURCE_NOT_FOUND` – A referenced resource doesn't exist.
+    #
+    #   * `INVALID_RESOURCE` – A referenced resource exists, but you can't
+    #     use it because its configuration, state, or data is not valid.
+    #
+    #   * `RESOURCE_ACCESS_DENIED` – A required permission is missing for a
+    #     data source or resource.
+    #
+    #   * `INSUFFICIENT_COMPUTE` – The query exceeded the available compute
+    #     (memory, disk, or time).
+    #
+    #   * `TRANSIENT_ERROR` – A temporary condition caused the failure, such
+    #     as throttling or a network interruption.
+    #
+    #   * `INTERNAL_ERROR` – Clean Rooms encountered an unexpected error. If
+    #     the error persists, contact AWS Support.
+    #
+    #   * `UNKNOWN_ERROR` – The failure couldn't be classified.
+    #
+    #   For more information about error codes, see
+    #   [https://docs.aws.amazon.com/clean-rooms/latest/userguide/error-codes.html][1]
+    #   in the Clean Rooms User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/clean-rooms/latest/userguide/error-codes.html
     #   @return [String]
+    #
+    # @!attribute [rw] retry
+    #   Contains information about whether running the same protected query
+    #   again might succeed.
+    #   @return [Types::RetryInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedQueryError AWS API Documentation
     #
     class ProtectedQueryError < Struct.new(
       :message,
-      :code)
+      :code,
+      :retry)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10837,6 +10912,23 @@ module Aws::CleanRooms
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about whether running a failed protected query or
+    # protected job again might succeed.
+    #
+    # @!attribute [rw] retryable
+    #   Specifies whether running the same request again might succeed.
+    #   `true` means that the failure was transient. `false` means that
+    #   running the same request again is not expected to succeed.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/RetryInfo AWS API Documentation
+    #
+    class RetryInfo < Struct.new(
+      :retryable)
       SENSITIVE = []
       include Aws::Structure
     end

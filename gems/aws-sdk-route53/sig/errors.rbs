@@ -105,6 +105,10 @@ module Aws
       class InvalidPaginationToken < ServiceError
         def message: () -> ::String
       end
+      class InvalidResourceRecordSetProtectionBatch < ServiceError
+        def message: () -> ::String
+        def errors: () -> ::String
+      end
       class InvalidSigningStatus < ServiceError
         def message: () -> ::String
       end
@@ -173,6 +177,10 @@ module Aws
       end
       class PriorRequestNotComplete < ServiceError
         def message: () -> ::String
+      end
+      class ProtectionAlreadyExists < ServiceError
+        def message: () -> ::String
+        def errors: () -> ::String
       end
       class PublicZoneVPCAssociation < ServiceError
         def message: () -> ::String

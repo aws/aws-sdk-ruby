@@ -4033,6 +4033,7 @@ module Aws::CleanRooms
     #   resp.protected_job.result.output.member_list[0].account_id #=> String
     #   resp.protected_job.error.message #=> String
     #   resp.protected_job.error.code #=> String
+    #   resp.protected_job.error.retry.retryable #=> Boolean
     #   resp.protected_job.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
     #   resp.protected_job.compute_configuration.worker.number #=> Integer
     #   resp.protected_job.compute_configuration.worker.properties.spark #=> Hash
@@ -4102,6 +4103,7 @@ module Aws::CleanRooms
     #   resp.protected_query.result.output.distribute.member_list[0].account_id #=> String
     #   resp.protected_query.error.message #=> String
     #   resp.protected_query.error.code #=> String
+    #   resp.protected_query.error.retry.retryable #=> Boolean
     #   resp.protected_query.differential_privacy.sensitivity_parameters #=> Array
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_type #=> String, one of "AVG", "COUNT", "COUNT_DISTINCT", "SUM", "STDDEV"
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_expression #=> String
@@ -6090,6 +6092,7 @@ module Aws::CleanRooms
     #   resp.protected_job.result.output.member_list[0].account_id #=> String
     #   resp.protected_job.error.message #=> String
     #   resp.protected_job.error.code #=> String
+    #   resp.protected_job.error.retry.retryable #=> Boolean
     #   resp.protected_job.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
     #   resp.protected_job.compute_configuration.worker.number #=> Integer
     #   resp.protected_job.compute_configuration.worker.properties.spark #=> Hash
@@ -6224,6 +6227,7 @@ module Aws::CleanRooms
     #   resp.protected_query.result.output.distribute.member_list[0].account_id #=> String
     #   resp.protected_query.error.message #=> String
     #   resp.protected_query.error.code #=> String
+    #   resp.protected_query.error.retry.retryable #=> Boolean
     #   resp.protected_query.differential_privacy.sensitivity_parameters #=> Array
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_type #=> String, one of "AVG", "COUNT", "COUNT_DISTINCT", "SUM", "STDDEV"
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_expression #=> String
@@ -7605,6 +7609,7 @@ module Aws::CleanRooms
     #   resp.protected_job.result.output.member_list[0].account_id #=> String
     #   resp.protected_job.error.message #=> String
     #   resp.protected_job.error.code #=> String
+    #   resp.protected_job.error.retry.retryable #=> Boolean
     #   resp.protected_job.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
     #   resp.protected_job.compute_configuration.worker.number #=> Integer
     #   resp.protected_job.compute_configuration.worker.properties.spark #=> Hash
@@ -7679,6 +7684,7 @@ module Aws::CleanRooms
     #   resp.protected_query.result.output.distribute.member_list[0].account_id #=> String
     #   resp.protected_query.error.message #=> String
     #   resp.protected_query.error.code #=> String
+    #   resp.protected_query.error.retry.retryable #=> Boolean
     #   resp.protected_query.differential_privacy.sensitivity_parameters #=> Array
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_type #=> String, one of "AVG", "COUNT", "COUNT_DISTINCT", "SUM", "STDDEV"
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_expression #=> String
@@ -7718,7 +7724,7 @@ module Aws::CleanRooms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

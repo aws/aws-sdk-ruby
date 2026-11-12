@@ -188,6 +188,60 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains the number of findings associated with a resource.
+    #
+    # @!attribute [rw] identifier
+    #   The identifier of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the resource. Possible values are `EC2_INSTANCE`,
+    #   `EBS_VOLUME`, `S3_BUCKET`, `IAM_ROLE`, `IAM_USER`, `IAM_ACCESS_KEY`,
+    #   `LAMBDA_FUNCTION`, `EKS_CLUSTER`, `ECS_CLUSTER`,
+    #   `KUBERNETES_WORKLOAD`, `RDS_INSTANCE`, `RDS_DB_USER`, and
+    #   `EC2_SECURITY_GROUP`.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_count
+    #   The number of findings associated with the resource.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccountAffectedResource AWS API Documentation
+    #
+    class AccountAffectedResource < Struct.new(
+      :identifier,
+      :type,
+      :finding_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains an analysis of the findings in an Amazon Web Services
+    # account.
+    #
+    # @!attribute [rw] findings_summary
+    #   A summary of the findings in the account.
+    #   @return [Types::FindingsSummary]
+    #
+    # @!attribute [rw] tactic_coverage
+    #   The findings in the account, mapped to MITRE ATT&amp;CK tactics and
+    #   techniques.
+    #   @return [Array<Types::TacticCoverage>]
+    #
+    # @!attribute [rw] affected_resources
+    #   The resources in the account that are associated with findings.
+    #   @return [Array<Types::AccountAffectedResource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccountAnalysis AWS API Documentation
+    #
+    class AccountAnalysis < Struct.new(
+      :findings_summary,
+      :tactic_coverage,
+      :affected_resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the account.
     #
     # @!attribute [rw] account_id
@@ -270,6 +324,61 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains overview information about an account, including its findings
+    # and, for an organization, its member accounts.
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_status
+    #   The status of the account.
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_id
+    #   The ID of the detector of the account.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region of the detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] delegated_admin_account_id
+    #   The account ID of the GuardDuty delegated administrator account.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_member_accounts
+    #   The total number of member accounts.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_findings
+    #   The total number of findings.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] affected_account_count
+    #   The number of accounts that have findings.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] account_rankings
+    #   A ranking of member accounts.
+    #   @return [Array<Types::MemberAccountRanking>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccountOverview AWS API Documentation
+    #
+    class AccountOverview < Struct.new(
+      :account_id,
+      :account_status,
+      :detector_id,
+      :region,
+      :delegated_admin_account_id,
+      :total_member_accounts,
+      :total_findings,
+      :affected_account_count,
+      :account_rankings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a list of map of accounts with the number of findings
     # associated with each account.
     #
@@ -292,6 +401,25 @@ module Aws::GuardDuty
       :account_id,
       :last_generated_at,
       :total_findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the number of findings in an Amazon Web Services account.
+    #
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_count
+    #   The number of findings in the account.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccountSummary AWS API Documentation
+    #
+    class AccountSummary < Struct.new(
+      :account_id,
+      :finding_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -378,6 +506,25 @@ module Aws::GuardDuty
     class Activity < Struct.new(
       :type,
       :api)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the time range during which activity was observed.
+    #
+    # @!attribute [rw] first_seen_at
+    #   The timestamp at which the activity was first observed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_seen_at
+    #   The timestamp at which the activity was last observed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ActivityWindow AWS API Documentation
+    #
+    class ActivityWindow < Struct.new(
+      :first_seen_at,
+      :last_seen_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -533,6 +680,34 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about a resource that an action applies to.
+    #
+    # @!attribute [rw] identifier
+    #   The identifier of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the resource. Possible values are `EC2_INSTANCE`,
+    #   `EBS_VOLUME`, `S3_BUCKET`, `IAM_ROLE`, `IAM_USER`, `IAM_ACCESS_KEY`,
+    #   `LAMBDA_FUNCTION`, `EKS_CLUSTER`, `ECS_CLUSTER`,
+    #   `KUBERNETES_WORKLOAD`, `RDS_INSTANCE`, `RDS_DB_USER`, and
+    #   `EC2_SECURITY_GROUP`.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AffectedResource AWS API Documentation
+    #
+    class AffectedResource < Struct.new(
+      :identifier,
+      :type,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the installed GuardDuty security agent.
     #
     # @!attribute [rw] version
@@ -543,6 +718,67 @@ module Aws::GuardDuty
     #
     class AgentDetails < Struct.new(
       :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains an assessment that GuardDuty derived from the data during an
+    # investigation, such as a threat assessment, a comparison against
+    # normal behavior, or a process lineage. The record contains at most one
+    # of the payload members, the one that corresponds to `AnalysisType`.
+    # `Indicators` can accompany any analysis type.
+    #
+    # @!attribute [rw] analysis_type
+    #   The kind of analysis. The value identifies the payload member that
+    #   can be set: `REPUTATION`, `THREAT_ASSESSMENT`, and
+    #   `RDS_THREAT_ASSESSMENT` (`ThreatAssessment`);
+    #   `KUBERNETES_POLICY_VIOLATION` (`KubernetesPolicyViolation`);
+    #   `S3_EXPOSURE`, `S3_ACTOR_CONTEXT`, and `S3_PEN_TEST` (`S3Analysis`);
+    #   `PROCESS_LINEAGE` (`Processes`); and `TREND` and `BASELINE`
+    #   (`AccountAnalysis`).
+    #   @return [String]
+    #
+    # @!attribute [rw] threat_assessment
+    #   A threat assessment. Set when `AnalysisType` is `REPUTATION`,
+    #   `THREAT_ASSESSMENT`, or `RDS_THREAT_ASSESSMENT`.
+    #   @return [Types::InvestigationThreatAssessment]
+    #
+    # @!attribute [rw] kubernetes_policy_violation
+    #   An assessment of a Kubernetes policy violation. Set when
+    #   `AnalysisType` is `KUBERNETES_POLICY_VIOLATION`.
+    #   @return [Types::KubernetesPolicyViolation]
+    #
+    # @!attribute [rw] s3_analysis
+    #   An analysis of Amazon S3 activity or exposure. Set when
+    #   `AnalysisType` is `S3_EXPOSURE`, `S3_ACTOR_CONTEXT`, or
+    #   `S3_PEN_TEST`.
+    #   @return [Types::S3Analysis]
+    #
+    # @!attribute [rw] processes
+    #   The processes in a process lineage. Set when `AnalysisType` is
+    #   `PROCESS_LINEAGE`.
+    #   @return [Array<Types::Process>]
+    #
+    # @!attribute [rw] account_analysis
+    #   An analysis of the findings in an account over time. Set when
+    #   `AnalysisType` is `TREND` or `BASELINE`.
+    #   @return [Types::InvestigationAccountAnalysis]
+    #
+    # @!attribute [rw] indicators
+    #   The threat indicators associated with the analysis, such as an IP
+    #   address, a domain, or a file hash.
+    #   @return [Array<Types::InvestigationIndicator>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AnalysisRecord AWS API Documentation
+    #
+    class AnalysisRecord < Struct.new(
+      :analysis_type,
+      :threat_assessment,
+      :kubernetes_policy_violation,
+      :s3_analysis,
+      :processes,
+      :account_analysis,
+      :indicators)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -632,6 +868,36 @@ module Aws::GuardDuty
       :service,
       :error,
       :user_agent)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the number and percentage of archived and unarchived
+    # findings.
+    #
+    # @!attribute [rw] archived_count
+    #   The number of archived findings.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unarchived_count
+    #   The number of unarchived findings.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] archived_percentage
+    #   The percentage of findings that are archived, from 0 to 100.
+    #   @return [Float]
+    #
+    # @!attribute [rw] unarchived_percentage
+    #   The percentage of findings that are unarchived, from 0 to 100.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ArchiveDistribution AWS API Documentation
+    #
+    class ArchiveDistribution < Struct.new(
+      :archived_count,
+      :unarchived_count,
+      :archived_percentage,
+      :unarchived_percentage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -760,6 +1026,66 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains a MITRE ATT&amp;CK tactic and technique observed during an
+    # attack, with the findings that are associated with them.
+    #
+    # @!attribute [rw] tactic
+    #   The MITRE ATT&amp;CK tactic.
+    #   @return [Types::ThreatReference]
+    #
+    # @!attribute [rw] technique
+    #   The MITRE ATT&amp;CK technique.
+    #   @return [Types::ThreatReference]
+    #
+    # @!attribute [rw] findings
+    #   The findings associated with the tactic and technique.
+    #   @return [Array<Types::FindingReference>]
+    #
+    # @!attribute [rw] version
+    #   The version of the attack framework that the tactic and technique
+    #   classification uses.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Attack AWS API Documentation
+    #
+    class Attack < Struct.new(
+      :tactic,
+      :technique,
+      :findings,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about one phase of an attack.
+    #
+    # @!attribute [rw] phase
+    #   The MITRE ATT&amp;CK tactic of the phase. Possible values are
+    #   `Reconnaissance`, `Resource Development`, `Initial Access`,
+    #   `Execution`, `Persistence`, `Privilege Escalation`, `Defense
+    #   Evasion`, `Credential Access`, `Discovery`, `Lateral Movement`,
+    #   `Collection`, `Command and Control`, `Exfiltration`, and `Impact`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the activity in this phase.
+    #   @return [String]
+    #
+    # @!attribute [rw] attacks
+    #   The MITRE ATT&amp;CK tactics and techniques observed in this phase,
+    #   with the findings that are associated with them.
+    #   @return [Array<Types::Attack>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AttackPhase AWS API Documentation
+    #
+    class AttackPhase < Struct.new(
+      :phase,
+      :description,
+      :attacks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the Autonomous System (AS) associated with
     # the network endpoints involved in an attack sequence.
     #
@@ -871,6 +1197,31 @@ module Aws::GuardDuty
     class BadRequestException < Struct.new(
       :message,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a comparison of findings against the normal behavior of an
+    # account.
+    #
+    # @!attribute [rw] total_findings
+    #   The total number of findings.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] baseline_findings
+    #   The finding types that are consistent with normal behavior.
+    #   @return [Array<Types::FindingTypeClassification>]
+    #
+    # @!attribute [rw] anomalous_findings
+    #   The finding types that deviate from normal behavior.
+    #   @return [Array<Types::FindingTypeClassification>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Baseline AWS API Documentation
+    #
+    class Baseline < Struct.new(
+      :total_findings,
+      :baseline_findings,
+      :anomalous_findings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1389,6 +1740,139 @@ module Aws::GuardDuty
     class ContinuousScanDetails < Struct.new(
       :start_time,
       :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a group of correlated findings that have
+    # the same finding type.
+    #
+    # @!attribute [rw] finding_type
+    #   The finding type of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of correlated findings of this type. This value can be
+    #   greater than the number of IDs in `FindingIds`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] severity_max
+    #   The highest severity score among the findings in the group, from 0
+    #   to 10.
+    #   @return [Float]
+    #
+    # @!attribute [rw] correlation_reasons
+    #   The reasons why GuardDuty correlated the findings. Possible values
+    #   are `HIGH_SEVERITY`, `SAME_RESOURCE`, and `SAME_BEHAVIOR`. A value
+    #   can appear more than once.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] finding_ids
+    #   A sample of the IDs of the findings in the group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] shared_resources
+    #   The resources that the findings in the group share with the
+    #   investigated activity.
+    #   @return [Array<Types::SharedResource>]
+    #
+    # @!attribute [rw] shared_behaviors
+    #   The behaviors that the findings in the group share with the
+    #   investigated activity.
+    #   @return [Array<Types::SharedBehavior>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CorrelatedFinding AWS API Documentation
+    #
+    class CorrelatedFinding < Struct.new(
+      :finding_type,
+      :count,
+      :severity_max,
+      :correlation_reasons,
+      :finding_ids,
+      :shared_resources,
+      :shared_behaviors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the actions that you can take for one defensive tactic.
+    #
+    # @!attribute [rw] defense_tactic
+    #   The defensive tactic. Possible values are `Isolate`, `Evict`,
+    #   `Restore`, `Harden`, and `Detect`.
+    #   @return [String]
+    #
+    # @!attribute [rw] actions
+    #   The actions for the defensive tactic.
+    #   @return [Array<Types::CountermeasureAction>]
+    #
+    # @!attribute [rw] description
+    #   A description of the countermeasure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Countermeasure AWS API Documentation
+    #
+    class Countermeasure < Struct.new(
+      :defense_tactic,
+      :actions,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains an action that you can take to respond to a threat.
+    #
+    # @!attribute [rw] title
+    #   A short title for the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The priority of the action. Possible values are `IMMEDIATE`,
+    #   `SHORT_TERM`, and `STRATEGIC`.
+    #   @return [String]
+    #
+    # @!attribute [rw] defense_technique
+    #   The defensive technique that the action applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] mitigates
+    #   The MITRE ATT&amp;CK technique IDs that the action mitigates, such
+    #   as `T1059.004`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cli_commands
+    #   CLI commands that you can run to carry out the action.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] disposition_id
+    #   The numeric identifier of the action's disposition.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] disposition
+    #   The outcome of the action. Possible values are `Isolated`,
+    #   `Blocked`, `Deleted`, `Access Revoked`, and `Logged`.
+    #   @return [String]
+    #
+    # @!attribute [rw] affected_resources
+    #   The resources that the action applies to.
+    #   @return [Array<Types::AffectedResource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CountermeasureAction AWS API Documentation
+    #
+    class CountermeasureAction < Struct.new(
+      :title,
+      :description,
+      :priority,
+      :defense_technique,
+      :mitigates,
+      :cli_commands,
+      :disposition_id,
+      :disposition,
+      :affected_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4767,6 +5251,38 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about your detection coverage, such as the status
+    # of protection plans and foundational data sources.
+    #
+    # @!attribute [rw] protection_plans
+    #   The protection plans and their status.
+    #   @return [Array<Types::ProtectionPlan>]
+    #
+    # @!attribute [rw] foundational_data_sources
+    #   The foundational data sources, such as `CLOUD_TRAIL`, `DNS_LOGS`,
+    #   and `FLOW_LOGS`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] coverage_gaps
+    #   A description of the gaps in detection coverage. A record doesn't
+    #   include both `CoverageGaps` and `KeyObservation`.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_observation
+    #   A key observation about detection coverage.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DetectionCoverage AWS API Documentation
+    #
+    class DetectionCoverage < Struct.new(
+      :protection_plans,
+      :foundational_data_sources,
+      :coverage_gaps,
+      :key_observation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The requirements for running a Runtime Monitoring custom detection
     # rule on Amazon EC2.
     #
@@ -5202,6 +5718,84 @@ module Aws::GuardDuty
     #
     class DisassociateMembersResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a breakdown of findings along a dimension, such as severity
+    # or finding type.
+    #
+    # @!attribute [rw] dimension
+    #   The dimension of the breakdown. The value identifies the breakdown
+    #   that the record describes: `SEVERITY` (`SeverityBreakdown`), `TYPE`
+    #   (`FindingTypes` or `TopFindingTypes`), `RESOURCE` (`Resources`),
+    #   `ATTACK_VECTOR` (`AttackVectors`), and `ARCHIVE` (`Archive`).
+    #   @return [String]
+    #
+    # @!attribute [rw] total_findings
+    #   The total number of findings in the breakdown.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] severity_breakdown
+    #   The number of findings at each severity level.
+    #   @return [Types::SeverityBreakdown]
+    #
+    # @!attribute [rw] finding_types
+    #   The findings broken down by finding type, with counts and
+    #   percentages.
+    #   @return [Array<Types::TypeDistribution>]
+    #
+    # @!attribute [rw] top_finding_types
+    #   The finding types that have the most findings, with counts.
+    #   @return [Array<Types::FindingTypeCount>]
+    #
+    # @!attribute [rw] resources
+    #   The findings broken down by affected resource.
+    #   @return [Array<Types::ResourceDistribution>]
+    #
+    # @!attribute [rw] attack_vectors
+    #   The findings broken down by MITRE ATT&amp;CK tactic.
+    #   @return [Array<Types::TacticCoverage>]
+    #
+    # @!attribute [rw] archive
+    #   The number and percentage of archived and unarchived findings.
+    #   @return [Types::ArchiveDistribution]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Distribution AWS API Documentation
+    #
+    class Distribution < Struct.new(
+      :dimension,
+      :total_findings,
+      :severity_breakdown,
+      :finding_types,
+      :top_finding_types,
+      :resources,
+      :attack_vectors,
+      :archive)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains DNS details about network activity.
+    #
+    # @!attribute [rw] domain_suffix
+    #   The suffix of the domain that was queried.
+    #   @return [String]
+    #
+    # @!attribute [rw] other_domains
+    #   Other domains that were queried.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolver_history
+    #   The DNS resolution history for the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DnsContext AWS API Documentation
+    #
+    class DnsContext < Struct.new(
+      :domain_suffix,
+      :other_domains,
+      :resolver_history)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5818,6 +6412,37 @@ module Aws::GuardDuty
     #
     class EnableOrganizationAdminAccountResponse < Aws::EmptyStructure; end
 
+    # Contains additional context about activity, such as geolocation and
+    # threat intelligence information. Not every member is set.
+    #
+    # @!attribute [rw] country_name
+    #   The name of the country associated with the activity.
+    #   @return [String]
+    #
+    # @!attribute [rw] asn_org
+    #   The name of the organization that owns the autonomous system number
+    #   (ASN).
+    #   @return [String]
+    #
+    # @!attribute [rw] threat_list_name
+    #   The name of the threat list that contains the indicator.
+    #   @return [String]
+    #
+    # @!attribute [rw] threat_name
+    #   The name of the threat.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Enrichment AWS API Documentation
+    #
+    class Enrichment < Struct.new(
+      :country_name,
+      :asn_org,
+      :threat_list_name,
+      :threat_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the reason that the finding was generated.
     #
     # @!attribute [rw] threat_intelligence_details
@@ -5861,6 +6486,194 @@ module Aws::GuardDuty
     class FargateDetails < Struct.new(
       :issues,
       :management_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a filter condition that GuardDuty applied when it retrieved
+    # data.
+    #
+    # @!attribute [rw] field
+    #   The name of the field that the condition applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] condition
+    #   The comparison operator of the condition. Possible values are
+    #   `EQUALS`, `NOT_EQUALS`, `GREATER_THAN`, `GREATER_THAN_OR_EQUAL`,
+    #   `LESS_THAN`, and `LESS_THAN_OR_EQUAL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values that the field is compared against. Numeric and Boolean
+    #   values are represented as strings.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FetchCriterion AWS API Documentation
+    #
+    class FetchCriterion < Struct.new(
+      :field,
+      :condition,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the parameters of a request that GuardDuty made to retrieve
+    # data during an investigation. The members that are set depend on the
+    # `FetchType` of the record.
+    #
+    # @!attribute [rw] criteria
+    #   The filter criteria that GuardDuty applied to the request.
+    #   @return [Array<Types::FetchCriterion>]
+    #
+    # @!attribute [rw] time_window
+    #   The time range of the data that GuardDuty requested.
+    #   @return [Types::FetchTimeWindow]
+    #
+    # @!attribute [rw] row_limit
+    #   The maximum number of rows that GuardDuty requested. Valid values
+    #   are 1 to 1,000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID that the request was made for.
+    #   @return [String]
+    #
+    # @!attribute [rw] indicator
+    #   The threat indicator that GuardDuty looked up, such as an IP
+    #   address, a domain, or a file hash.
+    #   @return [String]
+    #
+    # @!attribute [rw] indicator_type
+    #   The type of the threat indicator. Possible values are `IP`,
+    #   `DOMAIN`, and `FILE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_type
+    #   The finding type whose documentation GuardDuty retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_id
+    #   The ID of the finding that GuardDuty retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FetchQuery AWS API Documentation
+    #
+    class FetchQuery < Struct.new(
+      :criteria,
+      :time_window,
+      :row_limit,
+      :account_id,
+      :indicator,
+      :indicator_type,
+      :finding_type,
+      :finding_id)
+      SENSITIVE = [:indicator]
+      include Aws::Structure
+    end
+
+    # Contains information about data that GuardDuty retrieved during an
+    # investigation, including what GuardDuty requested and what it
+    # received.
+    #
+    # @!attribute [rw] fetch_type
+    #   The kind of data that GuardDuty retrieved. The value determines
+    #   which members of `Query` and `Result` can be set. Possible values:
+    #
+    #   * `FINDINGS` – GuardDuty findings.
+    #
+    #   * `DETECTOR` – The configuration of a GuardDuty detector.
+    #
+    #   * `REPUTATION` – Reputation information about a threat indicator,
+    #     such as an IP address, a domain, or a file hash.
+    #
+    #   * `FINDING_TYPE_DOCUMENTATION` – The documentation for a finding
+    #     type.
+    #
+    #   * `CLOUD_TRAIL_RAW_EVENTS` – Amazon Web Services CloudTrail events.
+    #
+    #   * `RUNTIME_SIGNALS` – Runtime signals.
+    #
+    #   * `MEMBER_ACCOUNTS` – A list of member accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] query
+    #   The request that GuardDuty made. Not every record includes a query.
+    #   @return [Types::FetchQuery]
+    #
+    # @!attribute [rw] result
+    #   The data that GuardDuty received in response to the request. Not
+    #   every record includes a result.
+    #   @return [Types::FetchResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FetchRecord AWS API Documentation
+    #
+    class FetchRecord < Struct.new(
+      :fetch_type,
+      :query,
+      :result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the data that GuardDuty received in response to a request
+    # during an investigation. The members that are set depend on the
+    # `FetchType` of the record.
+    #
+    # @!attribute [rw] item_ids
+    #   The identifiers of the items that were returned, such as finding
+    #   IDs, event IDs, signal IDs, or account IDs, depending on
+    #   `FetchType`. The list contains at most 50 identifiers; `TotalCount`
+    #   can be larger.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] total_count
+    #   The total number of items that were returned. This value can be
+    #   greater than the number of identifiers in `ItemIds`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] features
+    #   The configuration of the detector features that GuardDuty retrieved.
+    #   @return [Array<Types::InvestigationDetectorFeatureConfiguration>]
+    #
+    # @!attribute [rw] verdict
+    #   The reputation verdict for the threat indicator. Possible values are
+    #   `THREAT`, `BENIGN`, and `NEUTRAL`. If the lookup returned more than
+    #   one result, the verdict describes the first result.
+    #   @return [String]
+    #
+    # @!attribute [rw] documentation
+    #   The documentation for the finding type that GuardDuty retrieved.
+    #   @return [Types::FindingTypeDocumentation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FetchResult AWS API Documentation
+    #
+    class FetchResult < Struct.new(
+      :item_ids,
+      :total_count,
+      :features,
+      :verdict,
+      :documentation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the time range of the data that GuardDuty requested. The
+    # range is defined by a start time and a duration.
+    #
+    # @!attribute [rw] started_at
+    #   The timestamp at which the time range starts.
+    #   @return [Time]
+    #
+    # @!attribute [rw] duration_in_minutes
+    #   The length of the time range, in minutes. Valid values are 1 to 120.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FetchTimeWindow AWS API Documentation
+    #
+    class FetchTimeWindow < Struct.new(
+      :started_at,
+      :duration_in_minutes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6055,6 +6868,65 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains details about a GuardDuty finding.
+    #
+    # @!attribute [rw] finding_id
+    #   The ID of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_type
+    #   The type of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The severity of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account in which the finding was
+    #   generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region in which the finding was generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] activity_window
+    #   The time range of the activity that the finding describes.
+    #   @return [Types::ActivityWindow]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FindingDetail AWS API Documentation
+    #
+    class FindingDetail < Struct.new(
+      :finding_id,
+      :finding_type,
+      :severity,
+      :account_id,
+      :region,
+      :activity_window)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a reference to a GuardDuty finding.
+    #
+    # @!attribute [rw] finding_type
+    #   The type of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] uid
+    #   The ID of the finding.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FindingReference AWS API Documentation
+    #
+    class FindingReference < Struct.new(
+      :finding_type,
+      :uid)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about finding statistics.
     #
     # @!attribute [rw] count_by_severity
@@ -6106,6 +6978,102 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about how a finding type compares with normal
+    # behavior.
+    #
+    # @!attribute [rw] finding_type
+    #   The finding type.
+    #   @return [String]
+    #
+    # @!attribute [rw] classification
+    #   The classification of the finding type.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of findings of this type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] percentage
+    #   The percentage of findings that are of this type, from 0 to 100.
+    #   @return [Float]
+    #
+    # @!attribute [rw] description
+    #   A description of the classification.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FindingTypeClassification AWS API Documentation
+    #
+    class FindingTypeClassification < Struct.new(
+      :finding_type,
+      :classification,
+      :count,
+      :percentage,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the number of findings of a finding type.
+    #
+    # @!attribute [rw] finding_type
+    #   The finding type.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of findings of this type.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FindingTypeCount AWS API Documentation
+    #
+    class FindingTypeCount < Struct.new(
+      :finding_type,
+      :count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a finding type from the GuardDuty
+    # documentation.
+    #
+    # @!attribute [rw] description
+    #   A short description of the finding type.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The severity of the finding type, as stated in the documentation.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature
+    #   The label that the documentation uses for the GuardDuty capability
+    #   associated with the finding type. This value isn't a detector
+    #   feature name.
+    #   @return [String]
+    #
+    # @!attribute [rw] full_description
+    #   The full description of the finding type.
+    #   @return [String]
+    #
+    # @!attribute [rw] remediation
+    #   The recommended steps to remediate the finding type.
+    #   @return [String]
+    #
+    # @!attribute [rw] learn_more_links
+    #   Links to more information about the finding type.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FindingTypeDocumentation AWS API Documentation
+    #
+    class FindingTypeDocumentation < Struct.new(
+      :description,
+      :severity,
+      :feature,
+      :full_description,
+      :remediation,
+      :learn_more_links)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about each finding type associated with the
     # `groupedByFindingType` statistics.
     #
@@ -6129,6 +7097,35 @@ module Aws::GuardDuty
       :finding_type,
       :last_generated_at,
       :total_findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a summary of findings.
+    #
+    # @!attribute [rw] total_findings
+    #   The total number of findings.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] severity_breakdown
+    #   The number of findings at each severity level.
+    #   @return [Types::SeverityBreakdown]
+    #
+    # @!attribute [rw] top_finding_types
+    #   The finding types that have the most findings, with counts.
+    #   @return [Array<Types::FindingTypeCount>]
+    #
+    # @!attribute [rw] by_time_window
+    #   The number of findings in each time window.
+    #   @return [Array<Types::TimeWindowGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FindingsSummary AWS API Documentation
+    #
+    class FindingsSummary < Struct.new(
+      :total_findings,
+      :severity_breakdown,
+      :top_finding_types,
+      :by_time_window)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6689,11 +7686,24 @@ module Aws::GuardDuty
     #   The unique identifier of the investigation to retrieve.
     #   @return [String]
     #
+    # @!attribute [rw] summary_format
+    #   The format in which to return the investigation summary. Possible
+    #   values:
+    #
+    #   * `STRING` – (Default) Returns the summary as text in `Summary`.
+    #
+    #   * `STRUCTURED` – Returns a typed summary in `SummaryData`.
+    #
+    #   GuardDuty returns a summary only when the investigation status is
+    #   `COMPLETED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetInvestigationRequest AWS API Documentation
     #
     class GetInvestigationRequest < Struct.new(
       :detector_id,
-      :investigation_id)
+      :investigation_id,
+      :summary_format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7758,10 +8768,29 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] summary
-    #   A structured summary of the investigation findings, including
-    #   affected resources, threat assessment, and recommended remediation
-    #   steps.
+    #   A summary of the investigation results as text, up to 262,144
+    #   characters. Returned only when the investigation status is
+    #   `COMPLETED`. When you set `SummaryFormat` to `STRUCTURED`, the
+    #   summary is returned in `SummaryData` instead, unless it isn't
+    #   available in a structured form, in which case it's returned in this
+    #   field.
     #   @return [String]
+    #
+    # @!attribute [rw] summary_data
+    #   A structured summary of the investigation results. GuardDuty returns
+    #   this field only when you set `SummaryFormat` to `STRUCTURED`, the
+    #   investigation status is `COMPLETED`, and the summary is available in
+    #   a structured form. When this field is returned, `Summary` isn't
+    #   returned.
+    #   @return [Types::InvestigationSummaryData]
+    #
+    # @!attribute [rw] scope
+    #   Information about what the investigation analyzed, including the
+    #   investigation type, the finding, account, or organization that was
+    #   analyzed, and, for `ACCOUNT` and `ORGANIZATION` investigations, the
+    #   time window over which the investigation queried data. Returned only
+    #   when the investigation status is `COMPLETED`.
+    #   @return [Types::InvestigationScope]
     #
     # @!attribute [rw] start_time
     #   The timestamp at which the investigation started.
@@ -7788,9 +8817,423 @@ module Aws::GuardDuty
       :risk,
       :confidence,
       :summary,
+      :summary_data,
+      :scope,
       :start_time,
       :end_time,
       :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains an analysis of the findings in an account. Either `Trend` or
+    # `Baseline` is set, depending on the `AnalysisType` of the record.
+    #
+    # @!attribute [rw] trend
+    #   The trend of findings over time. Set when `AnalysisType` is `TREND`.
+    #   @return [Types::Trend]
+    #
+    # @!attribute [rw] baseline
+    #   A comparison of findings against normal behavior. Set when
+    #   `AnalysisType` is `BASELINE`.
+    #   @return [Types::Baseline]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InvestigationAccountAnalysis AWS API Documentation
+    #
+    class InvestigationAccountAnalysis < Struct.new(
+      :trend,
+      :baseline)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the identity that performed an activity.
+    #
+    # @!attribute [rw] access_key_id
+    #   The access key ID that the identity used.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_id
+    #   The ID of the principal.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_type
+    #   The type of the identity, such as `IAMUser`, `AssumedRole`, or
+    #   `Root`.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_agent
+    #   The user agent that the identity used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InvestigationActor AWS API Documentation
+    #
+    class InvestigationActor < Struct.new(
+      :access_key_id,
+      :principal_id,
+      :user_name,
+      :user_type,
+      :user_agent)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the configuration of a detector feature.
+    # Each member is optional.
+    #
+    # @!attribute [rw] name
+    #   The name of the feature. Possible values are `CLOUD_TRAIL`,
+    #   `DNS_LOGS`, `FLOW_LOGS`, `S3_DATA_EVENTS`, `EKS_AUDIT_LOGS`,
+    #   `EBS_MALWARE_PROTECTION`, `RDS_LOGIN_EVENTS`,
+    #   `EKS_RUNTIME_MONITORING`, `EKS_ADDON_MANAGEMENT`,
+    #   `LAMBDA_NETWORK_LOGS`, `RUNTIME_MONITORING`,
+    #   `ECS_FARGATE_AGENT_MANAGEMENT`, and `EC2_AGENT_MANAGEMENT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the feature. Possible values are `ENABLED` and
+    #   `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp at which the feature configuration was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InvestigationDetectorFeatureConfiguration AWS API Documentation
+    #
+    class InvestigationDetectorFeatureConfiguration < Struct.new(
+      :name,
+      :status,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about an Amazon EC2 instance.
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_state
+    #   The state of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_address
+    #   The private IP address of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ip
+    #   The public IP address of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC in which the instance runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet in which the instance runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the Amazon Machine Image (AMI) that was used to launch the
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] launched_at
+    #   The timestamp at which the instance was launched.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InvestigationEc2Instance AWS API Documentation
+    #
+    class InvestigationEc2Instance < Struct.new(
+      :instance_id,
+      :instance_type,
+      :instance_state,
+      :availability_zone,
+      :private_ip_address,
+      :public_ip,
+      :vpc_id,
+      :subnet_id,
+      :image_id,
+      :launched_at)
+      SENSITIVE = [:private_ip_address]
+      include Aws::Structure
+    end
+
+    # Contains details about an Amazon ECS cluster.
+    #
+    # @!attribute [rw] name
+    #   The name of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InvestigationEcsCluster AWS API Documentation
+    #
+    class InvestigationEcsCluster < Struct.new(
+      :name,
+      :arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about an Amazon EKS cluster.
+    #
+    # @!attribute [rw] name
+    #   The name of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC that is associated with the cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InvestigationEksCluster AWS API Documentation
+    #
+    class InvestigationEksCluster < Struct.new(
+      :name,
+      :arn,
+      :status,
+      :vpc_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the values that an investigation attribute must match.
+    # Specify `Equals`, `NotEquals`, or both, each with at least one value.
+    # If you specify both, an investigation must match both conditions.
+    #
+    # @!attribute [rw] equals
+    #   The values to match. An investigation matches if its attribute value
+    #   equals any of the specified values.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_equals
+    #   The values to exclude. An investigation matches only if its
+    #   attribute value doesn't equal any of the specified values. An
+    #   investigation that has no value for the attribute also matches.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InvestigationFilterCondition AWS API Documentation
+    #
+    class InvestigationFilterCondition < Struct.new(
+      :equals,
+      :not_equals)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the criteria used to filter investigations.
+    #
+    # @!attribute [rw] criterion
+    #   A map of investigation attributes to the conditions that they must
+    #   match. When you specify more than one attribute, an investigation
+    #   must match the conditions for every attribute. Valid attributes and
+    #   values:
+    #
+    #   * `STATUS` – `RUNNING`, `COMPLETED`, and `FAILED`.
+    #
+    #   * `RISK_LEVEL` – `Info`, `Low`, `Medium`, `High`, and `Critical`.
+    #
+    #   * `CONFIDENCE` – `Unknown`, `Low`, `Medium`, and `High`.
+    #
+    #   * `FINDING_ID` – A finding ID, which is 32 lowercase hexadecimal
+    #     characters.
+    #
+    #   * `INVESTIGATION_TYPE` – `FINDING`, `ACCOUNT`, and `ORGANIZATION`.
+    #
+    #   Values are case sensitive. GuardDuty sets the risk level,
+    #   confidence, and investigation type of an investigation only when the
+    #   investigation completes.
+    #   @return [Hash<String,Types::InvestigationFilterCondition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InvestigationFilterCriteria AWS API Documentation
+    #
+    class InvestigationFilterCriteria < Struct.new(
+      :criterion)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a threat indicator, such as an IP address, a domain, or a
+    # file hash.
+    #
+    # @!attribute [rw] value
+    #   The value of the indicator.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the indicator. Possible values are `IP`, `DOMAIN`, and
+    #   `FILE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InvestigationIndicator AWS API Documentation
+    #
+    class InvestigationIndicator < Struct.new(
+      :value,
+      :type)
+      SENSITIVE = [:value]
+      include Aws::Structure
+    end
+
+    # Contains details about a Kubernetes workload.
+    #
+    # @!attribute [rw] workload_type
+    #   The type of the workload.
+    #   @return [String]
+    #
+    # @!attribute [rw] workload_name
+    #   The name of the workload.
+    #   @return [String]
+    #
+    # @!attribute [rw] containers
+    #   The containers in the workload.
+    #   @return [String]
+    #
+    # @!attribute [rw] volumes
+    #   The volumes of the workload.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_context
+    #   The security context of the workload.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InvestigationKubernetesWorkload AWS API Documentation
+    #
+    class InvestigationKubernetesWorkload < Struct.new(
+      :workload_type,
+      :workload_name,
+      :containers,
+      :volumes,
+      :security_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a malware scan.
+    #
+    # @!attribute [rw] scan_id
+    #   The ID of the scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_type
+    #   The type of the scan. Possible values are `BACKUP_INITIATED`,
+    #   `ON_DEMAND`, and `GUARDDUTY_INITIATED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_category
+    #   The category of the scan. Possible values are `FULL_SCAN` and
+    #   `INCREMENTAL_SCAN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] trigger_finding_id
+    #   The ID of the finding that initiated the scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_sources
+    #   The scan engines that the scan used.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_started_at
+    #   The timestamp at which the scan started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] scan_completed_at
+    #   The timestamp at which the scan completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] files_scanned
+    #   The number of files that the scan scanned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gigabytes_scanned
+    #   The amount of data that the scan scanned, in GB.
+    #   @return [Float]
+    #
+    # @!attribute [rw] volumes_scanned
+    #   The number of volumes that the scan scanned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] infected_file_count
+    #   The number of infected files.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the scanned resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   The identifier of the scanned resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] highest_severity
+    #   The highest severity among the threats that the scan detected.
+    #   @return [String]
+    #
+    # @!attribute [rw] highest_severity_threat_name
+    #   The name of the threat that has the highest severity.
+    #   @return [String]
+    #
+    # @!attribute [rw] unique_threat_count
+    #   The number of unique threats that the scan detected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_infected_items
+    #   The total number of infected items.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] threats
+    #   The threats that the scan detected.
+    #   @return [Array<Types::MalwareThreat>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InvestigationMalwareScan AWS API Documentation
+    #
+    class InvestigationMalwareScan < Struct.new(
+      :scan_id,
+      :scan_type,
+      :scan_category,
+      :trigger_finding_id,
+      :engine_sources,
+      :scan_started_at,
+      :scan_completed_at,
+      :files_scanned,
+      :gigabytes_scanned,
+      :volumes_scanned,
+      :infected_file_count,
+      :resource_type,
+      :resource_identifier,
+      :highest_severity,
+      :highest_severity_threat_name,
+      :unique_threat_count,
+      :total_infected_items,
+      :threats)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7811,6 +9254,194 @@ module Aws::GuardDuty
     class InvestigationMetadata < Struct.new(
       :version,
       :product)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about one step in the reasoning that GuardDuty
+    # followed during an investigation.
+    #
+    # @!attribute [rw] record_id
+    #   The unique identifier of the record.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the record. Possible values:
+    #
+    #   * `UPDATE` – A progress milestone, such as the request that started
+    #     the investigation or a response from GuardDuty.
+    #
+    #   * `FETCH` – Data that GuardDuty retrieved for the investigation,
+    #     such as a finding, a detector configuration, or a list of your
+    #     member accounts. The record includes what GuardDuty requested and
+    #     what it received.
+    #
+    #   * `OBSERVATION` – A fact that GuardDuty noted about your
+    #     environment, such as the affected resource, the activity on that
+    #     resource, or your detection coverage.
+    #
+    #   * `ANALYSIS` – An assessment that GuardDuty derived from the data,
+    #     such as a threat assessment, a comparison against normal behavior,
+    #     or a process lineage.
+    #
+    #   * `METADATA` – Operational details about the investigation itself,
+    #     such as how long the investigation took.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A short title that describes the step.
+    #   @return [String]
+    #
+    # @!attribute [rw] narrative
+    #   A plain-text explanation of the step. A narrative can span several
+    #   paragraphs. Not every record includes a narrative.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp at which GuardDuty created the record.
+    #   @return [Time]
+    #
+    # @!attribute [rw] supporting_data
+    #   The structured details for the step. The member that is set matches
+    #   the record type. `UPDATE` records never include supporting data, and
+    #   records of other types don't always include it.
+    #   @return [Types::SupportingData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InvestigationRecord AWS API Documentation
+    #
+    class InvestigationRecord < Struct.new(
+      :record_id,
+      :type,
+      :title,
+      :narrative,
+      :created_at,
+      :supporting_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an Amazon Web Services resource that is
+    # relevant to an investigation.
+    #
+    # @!attribute [rw] uid
+    #   The unique identifier of the resource. This is the Amazon Resource
+    #   Name (ARN) of the resource when it's available. Otherwise, it's
+    #   the name or ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource. Possible values are `EC2_INSTANCE`,
+    #   `EBS_VOLUME`, `S3_BUCKET`, `IAM_ROLE`, `IAM_USER`, `IAM_ACCESS_KEY`,
+    #   `LAMBDA_FUNCTION`, `EKS_CLUSTER`, `ECS_CLUSTER`,
+    #   `KUBERNETES_WORKLOAD`, `RDS_INSTANCE`, `RDS_DB_USER`, and
+    #   `EC2_SECURITY_GROUP`.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   Details that are specific to the type of the resource.
+    #   @return [Types::InvestigationResourceData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InvestigationResource AWS API Documentation
+    #
+    class InvestigationResource < Struct.new(
+      :uid,
+      :name,
+      :resource_type,
+      :data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details that are specific to the type of a resource. The
+    # member that is set matches the `ResourceType` of the resource, except
+    # that `RdsDbInstance` and `RdsDbUser` can be set together.
+    #
+    # @!attribute [rw] ec2_instance
+    #   Details about an Amazon EC2 instance.
+    #   @return [Types::InvestigationEc2Instance]
+    #
+    # @!attribute [rw] lambda_function
+    #   Details about an Lambda function.
+    #   @return [Types::LambdaFunction]
+    #
+    # @!attribute [rw] rds_db_instance
+    #   Details about an Amazon RDS database instance.
+    #   @return [Types::RdsDbInstance]
+    #
+    # @!attribute [rw] rds_db_user
+    #   Details about the user that logged in to an Amazon RDS database
+    #   instance.
+    #   @return [Types::RdsDbUser]
+    #
+    # @!attribute [rw] eks_cluster
+    #   Details about an Amazon EKS cluster.
+    #   @return [Types::InvestigationEksCluster]
+    #
+    # @!attribute [rw] ecs_cluster
+    #   Details about an Amazon ECS cluster.
+    #   @return [Types::InvestigationEcsCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InvestigationResourceData AWS API Documentation
+    #
+    class InvestigationResourceData < Struct.new(
+      :ec2_instance,
+      :lambda_function,
+      :rds_db_instance,
+      :rds_db_user,
+      :eks_cluster,
+      :ecs_cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about what an investigation analyzed. Only the
+    # identifier that matches `InvestigationType` is set.
+    #
+    # @!attribute [rw] investigation_type
+    #   The type of investigation. Possible values:
+    #
+    #   * `FINDING` – An investigation of a specific GuardDuty finding.
+    #
+    #   * `ACCOUNT` – An investigation of the threat posture of an Amazon
+    #     Web Services account.
+    #
+    #   * `ORGANIZATION` – An investigation of your organization's threat
+    #     posture.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_id
+    #   The ID of the finding that the investigation analyzed. Set only when
+    #   `InvestigationType` is `FINDING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that the investigation
+    #   analyzed. Set only when `InvestigationType` is `ACCOUNT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] admin_account_id
+    #   The ID of the administrator account of the organization that the
+    #   investigation analyzed. Set only when `InvestigationType` is
+    #   `ORGANIZATION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_time_window
+    #   The time window over which the investigation queried data, set only
+    #   when `InvestigationType` is `ACCOUNT` or `ORGANIZATION`.
+    #   @return [Types::QueryTimeWindow]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InvestigationScope AWS API Documentation
+    #
+    class InvestigationScope < Struct.new(
+      :investigation_type,
+      :finding_id,
+      :account_id,
+      :admin_account_id,
+      :query_time_window)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7861,9 +9492,27 @@ module Aws::GuardDuty
     #   A short title summarizing the investigation.
     #   @return [String]
     #
+    # @!attribute [rw] investigation_type
+    #   The type of investigation. Possible values are `FINDING`, `ACCOUNT`,
+    #   and `ORGANIZATION`. GuardDuty sets this field when the investigation
+    #   completes.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_id
+    #   For a `FINDING` investigation, the ID of the finding that the
+    #   investigation analyzed. GuardDuty sets this field when the
+    #   investigation completes.
+    #   @return [String]
+    #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID associated with the
     #   investigation.
+    #   @return [String]
+    #
+    # @!attribute [rw] admin_account_id
+    #   For an `ORGANIZATION` investigation, the ID of the administrator
+    #   account of the organization that the investigation analyzed.
+    #   GuardDuty sets this field when the investigation completes.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -7883,9 +9532,117 @@ module Aws::GuardDuty
       :risk_level,
       :confidence,
       :title,
+      :investigation_type,
+      :finding_id,
       :account_id,
+      :admin_account_id,
       :start_time,
       :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the structured summary of a GuardDuty investigation. The
+    # fields that are present depend on the investigation type.
+    #
+    # @!attribute [rw] finding_type
+    #   For a `FINDING` investigation, the type of the finding that the
+    #   investigation analyzed.
+    #   @return [String]
+    #
+    # @!attribute [rw] threat_assessment
+    #   For a `FINDING` investigation, an assessment of the threat,
+    #   including how the attack progressed.
+    #   @return [Types::ThreatAssessment]
+    #
+    # @!attribute [rw] countermeasures
+    #   For a `FINDING` investigation, actions that you can take to respond
+    #   to the threat, grouped by defensive tactic.
+    #   @return [Array<Types::Countermeasure>]
+    #
+    # @!attribute [rw] account_analysis
+    #   For an `ACCOUNT` investigation, an analysis of the findings in the
+    #   investigated account.
+    #   @return [Types::AccountAnalysis]
+    #
+    # @!attribute [rw] organization_analysis
+    #   For an `ORGANIZATION` investigation, an analysis of the findings
+    #   across the organization.
+    #   @return [Types::OrganizationAnalysis]
+    #
+    # @!attribute [rw] key_observations
+    #   The key observations of the investigation.
+    #   @return [Types::KeyObservations]
+    #
+    # @!attribute [rw] recommendations
+    #   For an `ACCOUNT` or `ORGANIZATION` investigation, the recommended
+    #   actions.
+    #   @return [Array<Types::Recommendation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InvestigationSummaryData AWS API Documentation
+    #
+    class InvestigationSummaryData < Struct.new(
+      :finding_type,
+      :threat_assessment,
+      :countermeasures,
+      :account_analysis,
+      :organization_analysis,
+      :key_observations,
+      :recommendations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a threat assessment. The members that are set depend on the
+    # `AnalysisType` of the record.
+    #
+    # @!attribute [rw] reputation
+    #   Reputation information about a threat indicator. Set when
+    #   `AnalysisType` is `REPUTATION`.
+    #   @return [Types::Reputation]
+    #
+    # @!attribute [rw] threat_confidence
+    #   The confidence in the threat assessment. Possible values are
+    #   `VERY_HIGH`, `HIGH`, `MEDIUM`, and `LOW`.
+    #   @return [String]
+    #
+    # @!attribute [rw] classification
+    #   The classification of the threat.
+    #   @return [String]
+    #
+    # @!attribute [rw] assessment
+    #   The assessment of the threat.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_context
+    #   Context about how the identity involved in the activity
+    #   authenticated.
+    #   @return [String]
+    #
+    # @!attribute [rw] rds_control_plane_activity
+    #   An assessment of Amazon RDS control plane activity that is related
+    #   to the threat.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_account_activity
+    #   An assessment of the activity from the IP address in the account.
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_compromise
+    #   An assessment of whether credentials were compromised.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InvestigationThreatAssessment AWS API Documentation
+    #
+    class InvestigationThreatAssessment < Struct.new(
+      :reputation,
+      :threat_confidence,
+      :classification,
+      :assessment,
+      :authentication_context,
+      :rds_control_plane_activity,
+      :ip_account_activity,
+      :credential_compromise)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8019,6 +9776,165 @@ module Aws::GuardDuty
     class ItemPath < Struct.new(
       :nested_item_path,
       :hash)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the key observations of an investigation.
+    #
+    # @!attribute [rw] title
+    #   A short title for the key observations.
+    #   @return [String]
+    #
+    # @!attribute [rw] narrative
+    #   A narrative explanation of the key observations.
+    #   @return [String]
+    #
+    # @!attribute [rw] observations
+    #   The individual key observations.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KeyObservations AWS API Documentation
+    #
+    class KeyObservations < Struct.new(
+      :title,
+      :narrative,
+      :observations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about Kubernetes activity. A record contains either
+    # `ApiCall` and `Enrichment`, or `Anomaly` and `Workload`.
+    #
+    # @!attribute [rw] api_call
+    #   Details about a Kubernetes API call.
+    #   @return [Types::KubernetesApiCall]
+    #
+    # @!attribute [rw] anomaly
+    #   Details about anomalous Kubernetes behavior.
+    #   @return [Types::KubernetesAnomaly]
+    #
+    # @!attribute [rw] workload
+    #   The Kubernetes workload that is associated with the anomaly.
+    #   @return [Types::InvestigationKubernetesWorkload]
+    #
+    # @!attribute [rw] enrichment
+    #   Additional context about the API call, such as geolocation
+    #   information.
+    #   @return [Types::Enrichment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesActivity AWS API Documentation
+    #
+    class KubernetesActivity < Struct.new(
+      :api_call,
+      :anomaly,
+      :workload,
+      :enrichment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about anomalous Kubernetes behavior.
+    #
+    # @!attribute [rw] unusual_behavior
+    #   A description of the unusual behavior.
+    #   @return [String]
+    #
+    # @!attribute [rw] baseline_context
+    #   A description of the normal behavior that the activity was compared
+    #   against.
+    #   @return [String]
+    #
+    # @!attribute [rw] anomaly_score
+    #   The anomaly score of the behavior.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_period
+    #   The period over which the normal behavior was established.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesAnomaly AWS API Documentation
+    #
+    class KubernetesAnomaly < Struct.new(
+      :unusual_behavior,
+      :baseline_context,
+      :anomaly_score,
+      :training_period)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a Kubernetes API call.
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The Kubernetes user name of the caller.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_groups
+    #   The Kubernetes groups of the caller.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The ID of the caller.
+    #   @return [String]
+    #
+    # @!attribute [rw] verb
+    #   The Kubernetes API verb, such as `get` or `create`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the Kubernetes resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the Kubernetes resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The Kubernetes namespace of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_uri
+    #   The URI of the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   The status code of the API call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] source_ips
+    #   The source IP addresses of the API call.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_agent
+    #   The user agent of the caller.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_count
+    #   The number of matching API calls.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesApiCall AWS API Documentation
+    #
+    class KubernetesApiCall < Struct.new(
+      :cluster_name,
+      :username,
+      :user_groups,
+      :user_id,
+      :verb,
+      :resource_type,
+      :resource_name,
+      :namespace,
+      :request_uri,
+      :status_code,
+      :source_ips,
+      :user_agent,
+      :event_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8216,6 +10132,46 @@ module Aws::GuardDuty
       :resource,
       :namespace,
       :allowed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains an assessment of a Kubernetes policy violation.
+    #
+    # @!attribute [rw] violation_type
+    #   The type of the violation.
+    #   @return [String]
+    #
+    # @!attribute [rw] affected_resource
+    #   The Kubernetes resource that the violation affects.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject
+    #   The Kubernetes subject, such as a user, a group, or a service
+    #   account, that the violation involves.
+    #   @return [String]
+    #
+    # @!attribute [rw] granted_access
+    #   The access that the violation grants.
+    #   @return [String]
+    #
+    # @!attribute [rw] exposure_vector
+    #   How the misconfiguration exposes the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] misconfiguration_impact
+    #   The potential impact of the misconfiguration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesPolicyViolation AWS API Documentation
+    #
+    class KubernetesPolicyViolation < Struct.new(
+      :violation_type,
+      :affected_resource,
+      :subject,
+      :granted_access,
+      :exposure_vector,
+      :misconfiguration_impact)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8460,6 +10416,56 @@ module Aws::GuardDuty
       :role,
       :vpc_config,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about an Lambda function.
+    #
+    # @!attribute [rw] function_name
+    #   The name of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_arn
+    #   The Amazon Resource Name (ARN) of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_version
+    #   The version of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The execution role of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID of the function version.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp at which the function was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] vpc_configuration_summary
+    #   A summary of the VPC configuration of the function, as a single
+    #   string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/LambdaFunction AWS API Documentation
+    #
+    class LambdaFunction < Struct.new(
+      :function_name,
+      :function_arn,
+      :function_version,
+      :role,
+      :description,
+      :revision_id,
+      :updated_at,
+      :vpc_configuration_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9034,6 +11040,96 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] detector_id
+    #   The unique ID of the GuardDuty detector associated with the
+    #   investigation.
+    #
+    #   To find the `detectorId` in the current Region, see the Settings
+    #   page in the GuardDuty console, or run the [ListDetectors][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+    #   @return [String]
+    #
+    # @!attribute [rw] investigation_id
+    #   The unique identifier of the investigation whose records you want to
+    #   list.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_types
+    #   The types of records to return. Possible values are `UPDATE`,
+    #   `FETCH`, `OBSERVATION`, `ANALYSIS`, and `METADATA`. If you don't
+    #   specify this parameter, GuardDuty returns records of all types.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of records to return in a single response. Valid
+    #   values are 1 to 50. The default value is 20. A response can contain
+    #   fewer records than this value, or no records, and still include a
+    #   `NextToken`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action, fill nextToken in the request with
+    #   the value of NextToken from the previous response to continue
+    #   listing data. Use the same `InvestigationId` and `RecordTypes`
+    #   values that you used in the previous request.
+    #
+    #   If you specify this parameter for an investigation whose status
+    #   isn't `COMPLETED`, the operation returns a `BadRequestException`. A
+    #   `NextToken` expires 24 hours after it's returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListInvestigationRecordsRequest AWS API Documentation
+    #
+    class ListInvestigationRecordsRequest < Struct.new(
+      :detector_id,
+      :investigation_id,
+      :record_types,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] investigation_id
+    #   The unique identifier of the investigation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the investigation. Possible values are
+    #   `RUNNING`, `COMPLETED`, and `FAILED`. Records are returned only when
+    #   the status is `COMPLETED`. If the status is `RUNNING` or `FAILED`,
+    #   the response contains an empty list of records and no `NextToken`.
+    #   @return [String]
+    #
+    # @!attribute [rw] records
+    #   The records for the investigation, in the order that GuardDuty
+    #   created them, oldest first. This list can contain fewer records than
+    #   `MaxResults`, or no records, even when more records are available.
+    #   To check for more records, use `NextToken`.
+    #   @return [Array<Types::InvestigationRecord>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination parameter to be used on the next list operation to
+    #   retrieve more items. If this value is absent, there are no more
+    #   records to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListInvestigationRecordsResponse AWS API Documentation
+    #
+    class ListInvestigationRecordsResponse < Struct.new(
+      :investigation_id,
+      :status,
+      :records,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] detector_id
     #   The unique ID of the GuardDuty detector whose investigations you
     #   want to list.
     #
@@ -9044,6 +11140,11 @@ module Aws::GuardDuty
     #
     #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #   @return [String]
+    #
+    # @!attribute [rw] filter_criteria
+    #   The criteria used to filter investigations. GuardDuty returns only
+    #   the investigations that match all of the specified criteria.
+    #   @return [Types::InvestigationFilterCriteria]
     #
     # @!attribute [rw] sort_criteria
     #   Represents the criteria used for sorting investigations.
@@ -9066,6 +11167,7 @@ module Aws::GuardDuty
     #
     class ListInvestigationsRequest < Struct.new(
       :detector_id,
+      :filter_criteria,
       :sort_criteria,
       :max_results,
       :next_token)
@@ -9916,6 +12018,35 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about a threat that a malware scan detected.
+    #
+    # @!attribute [rw] name
+    #   The name of the threat.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The severity of the threat.
+    #   @return [String]
+    #
+    # @!attribute [rw] infected_file_count
+    #   The number of files that the threat infected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sample_files
+    #   Examples of files that the threat infected.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/MalwareThreat AWS API Documentation
+    #
+    class MalwareThreat < Struct.new(
+      :name,
+      :severity,
+      :infected_file_count,
+      :sample_files)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the administrator account and invitation.
     #
     # @!attribute [rw] account_id
@@ -9994,6 +12125,42 @@ module Aws::GuardDuty
       :updated_at,
       :administrator_id)
       SENSITIVE = [:email]
+      include Aws::Structure
+    end
+
+    # Contains information about the position of a member account in a
+    # ranking.
+    #
+    # @!attribute [rw] rank
+    #   The position of the account in the ranking.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID of the member account.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_count
+    #   The number of findings in the account.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] risk_level
+    #   The assessed risk level of the account. Possible values are `Info`,
+    #   `Low`, `Medium`, `High`, and `Critical`.
+    #   @return [String]
+    #
+    # @!attribute [rw] risk_rationale
+    #   The reason for the assessed risk level.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/MemberAccountRanking AWS API Documentation
+    #
+    class MemberAccountRanking < Struct.new(
+      :rank,
+      :account_id,
+      :finding_count,
+      :risk_level,
+      :risk_rationale)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10137,6 +12304,21 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains operational details about an investigation, such as how long
+    # it took.
+    #
+    # @!attribute [rw] total_time_milliseconds
+    #   The total time that the investigation took, in milliseconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/MetadataRecord AWS API Documentation
+    #
+    class MetadataRecord < Struct.new(
+      :total_time_milliseconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the AI model involved in a finding.
     #
     # @!attribute [rw] model_id
@@ -10147,6 +12329,124 @@ module Aws::GuardDuty
     #
     class ModelDetail < Struct.new(
       :model_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about network activity.
+    #
+    # @!attribute [rw] protocol
+    #   The network protocol of the activity.
+    #   @return [String]
+    #
+    # @!attribute [rw] direction
+    #   The direction of the network connection, such as inbound or
+    #   outbound.
+    #   @return [String]
+    #
+    # @!attribute [rw] method
+    #   The method that the network activity used.
+    #   @return [String]
+    #
+    # @!attribute [rw] blocked
+    #   Indicates whether the network connection was blocked.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The platform on which the network activity was observed.
+    #   @return [String]
+    #
+    # @!attribute [rw] ports
+    #   The ports that the network activity involved.
+    #   @return [Types::NetworkPorts]
+    #
+    # @!attribute [rw] traffic
+    #   The amount of data that the network activity transferred.
+    #   @return [Types::NetworkTraffic]
+    #
+    # @!attribute [rw] anomaly
+    #   Details about how the network activity deviates from normal
+    #   behavior.
+    #   @return [Types::NetworkAnomaly]
+    #
+    # @!attribute [rw] dns
+    #   DNS details about the network activity.
+    #   @return [Types::DnsContext]
+    #
+    # @!attribute [rw] counts
+    #   Counts that describe the network activity, such as the number of
+    #   requests or connection attempts.
+    #   @return [Types::NetworkCounts]
+    #
+    # @!attribute [rw] enrichment
+    #   Additional context about the network activity, such as geolocation
+    #   and threat intelligence information.
+    #   @return [Types::Enrichment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/NetworkActivity AWS API Documentation
+    #
+    class NetworkActivity < Struct.new(
+      :protocol,
+      :direction,
+      :method,
+      :blocked,
+      :platform,
+      :ports,
+      :traffic,
+      :anomaly,
+      :dns,
+      :counts,
+      :enrichment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about how network activity deviates from normal
+    # behavior.
+    #
+    # @!attribute [rw] baseline_bytes
+    #   The amount of data that is typical for the normal behavior.
+    #   @return [String]
+    #
+    # @!attribute [rw] deviation
+    #   How much the activity deviates from normal behavior.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_age_days
+    #   The number of days of activity that the normal behavior is based on.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] remote_service
+    #   The remote service that the activity involved.
+    #   @return [String]
+    #
+    # @!attribute [rw] remote_region
+    #   The Region of the remote endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] duration
+    #   The duration of the activity.
+    #   @return [String]
+    #
+    # @!attribute [rw] reset_ratio
+    #   The ratio of connection attempts that were reset.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_host_count
+    #   The number of target hosts.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/NetworkAnomaly AWS API Documentation
+    #
+    class NetworkAnomaly < Struct.new(
+      :baseline_bytes,
+      :deviation,
+      :profile_age_days,
+      :remote_service,
+      :remote_region,
+      :duration,
+      :reset_ratio,
+      :target_host_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10213,6 +12513,36 @@ module Aws::GuardDuty
       :local_network_interface,
       :remote_ip_details,
       :remote_port_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains counts that describe network activity, such as the number of
+    # requests or connection attempts.
+    #
+    # @!attribute [rw] request_count
+    #   The number of requests.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_attempts
+    #   The total number of connection attempts.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] suspicious_attempts
+    #   The number of connection attempts that were suspicious.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] reset_attempts
+    #   The number of connection attempts that were reset.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/NetworkCounts AWS API Documentation
+    #
+    class NetworkCounts < Struct.new(
+      :request_count,
+      :total_attempts,
+      :suspicious_attempts,
+      :reset_attempts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10351,6 +12681,184 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the ports that network activity involved. A
+    # port value can be a single port, a range such as `51000-51010`, or a
+    # comma-separated list such as `443,8080`.
+    #
+    # @!attribute [rw] target_port
+    #   The port on the target of the activity.
+    #   @return [String]
+    #
+    # @!attribute [rw] remote_port
+    #   The port on the remote host.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolver_port
+    #   The port of the DNS resolver.
+    #   @return [String]
+    #
+    # @!attribute [rw] ports
+    #   The ports that the activity involved.
+    #   @return [String]
+    #
+    # @!attribute [rw] ports_used
+    #   The ports that the activity used.
+    #   @return [String]
+    #
+    # @!attribute [rw] port_count
+    #   The number of ports that the activity involved.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/NetworkPorts AWS API Documentation
+    #
+    class NetworkPorts < Struct.new(
+      :target_port,
+      :remote_port,
+      :resolver_port,
+      :ports,
+      :ports_used,
+      :port_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the amount of data that network activity transferred.
+    #
+    # @!attribute [rw] bytes_sent
+    #   The number of bytes sent.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bytes_received
+    #   The number of bytes received.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/NetworkTraffic AWS API Documentation
+    #
+    class NetworkTraffic < Struct.new(
+      :bytes_sent,
+      :bytes_received)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a fact that GuardDuty noted about your environment during an
+    # investigation, such as the affected resource, the activity on that
+    # resource, or your detection coverage. The record contains at most one
+    # of the payload members, the one that matches `ObservationType`.
+    # `Indicators` can accompany any observation type.
+    #
+    # @!attribute [rw] observation_type
+    #   The kind of observation. The value identifies the payload member
+    #   that can be set: `FINDING_DETAIL` (`FindingDetail`), `RESOURCE`
+    #   (`Resource`), `NETWORK_ACTIVITY` (`NetworkActivity`),
+    #   `RDS_LOGIN_ACTIVITY` (`RdsLoginActivity`), `S3_ACTIVITY`
+    #   (`S3Activity`), `KUBERNETES_ACTIVITY` (`KubernetesActivity`),
+    #   `MALWARE_SCAN` (`MalwareScan`), `RELATED_FINDINGS`
+    #   (`RelatedFindings`), `DETECTION_COVERAGE` (`DetectionCoverage`),
+    #   `ACCOUNT_OVERVIEW` (`AccountOverview`), `RECOMMENDATION`
+    #   (`Recommendations`), `RUNTIME_SIGNALS` (`RuntimeSignals`),
+    #   `DISTRIBUTION` (`Distribution`), and `REPRESENTATIVE_RESOURCE`
+    #   (`RepresentativeResources`).
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_detail
+    #   Details about a GuardDuty finding. Set when `ObservationType` is
+    #   `FINDING_DETAIL`.
+    #   @return [Types::FindingDetail]
+    #
+    # @!attribute [rw] resource
+    #   Details about an affected resource. Set when `ObservationType` is
+    #   `RESOURCE`.
+    #   @return [Types::InvestigationResource]
+    #
+    # @!attribute [rw] network_activity
+    #   Details about network activity. Set when `ObservationType` is
+    #   `NETWORK_ACTIVITY`.
+    #   @return [Types::NetworkActivity]
+    #
+    # @!attribute [rw] rds_login_activity
+    #   Details about login activity on an Amazon RDS database. Set when
+    #   `ObservationType` is `RDS_LOGIN_ACTIVITY`.
+    #   @return [Types::RdsLoginActivity]
+    #
+    # @!attribute [rw] s3_activity
+    #   Details about Amazon S3 activity. Set when `ObservationType` is
+    #   `S3_ACTIVITY`.
+    #   @return [Types::S3Activity]
+    #
+    # @!attribute [rw] kubernetes_activity
+    #   Details about Kubernetes activity. Set when `ObservationType` is
+    #   `KUBERNETES_ACTIVITY`.
+    #   @return [Types::KubernetesActivity]
+    #
+    # @!attribute [rw] malware_scan
+    #   Details about a malware scan. Set when `ObservationType` is
+    #   `MALWARE_SCAN`.
+    #   @return [Types::InvestigationMalwareScan]
+    #
+    # @!attribute [rw] related_findings
+    #   Details about findings that are related to the investigated
+    #   activity. Set when `ObservationType` is `RELATED_FINDINGS`.
+    #   @return [Types::RelatedFindings]
+    #
+    # @!attribute [rw] detection_coverage
+    #   Details about your detection coverage. Set when `ObservationType` is
+    #   `DETECTION_COVERAGE`.
+    #   @return [Types::DetectionCoverage]
+    #
+    # @!attribute [rw] account_overview
+    #   Overview information about an account. Set when `ObservationType` is
+    #   `ACCOUNT_OVERVIEW`.
+    #   @return [Types::AccountOverview]
+    #
+    # @!attribute [rw] recommendations
+    #   Recommended actions. Set when `ObservationType` is `RECOMMENDATION`.
+    #   @return [Array<Types::Recommendation>]
+    #
+    # @!attribute [rw] runtime_signals
+    #   A summary of runtime signals. Set when `ObservationType` is
+    #   `RUNTIME_SIGNALS`.
+    #   @return [Types::RuntimeSignals]
+    #
+    # @!attribute [rw] distribution
+    #   A breakdown of findings along one dimension. Set when
+    #   `ObservationType` is `DISTRIBUTION`.
+    #   @return [Types::Distribution]
+    #
+    # @!attribute [rw] representative_resources
+    #   Representative findings for the affected resources, one finding for
+    #   each resource. Set when `ObservationType` is
+    #   `REPRESENTATIVE_RESOURCE`.
+    #   @return [Array<Types::RepresentativeFinding>]
+    #
+    # @!attribute [rw] indicators
+    #   The threat indicators associated with the observation, such as an IP
+    #   address, a domain, or a file hash.
+    #   @return [Array<Types::InvestigationIndicator>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ObservationRecord AWS API Documentation
+    #
+    class ObservationRecord < Struct.new(
+      :observation_type,
+      :finding_detail,
+      :resource,
+      :network_activity,
+      :rds_login_activity,
+      :s3_activity,
+      :kubernetes_activity,
+      :malware_scan,
+      :related_findings,
+      :detection_coverage,
+      :account_overview,
+      :recommendations,
+      :runtime_signals,
+      :distribution,
+      :representative_resources,
+      :indicators)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the observed behavior.
     #
     # @!attribute [rw] text
@@ -10366,6 +12874,37 @@ module Aws::GuardDuty
     class Observations < Struct.new(
       :text,
       :number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a finding type that GuardDuty observed.
+    #
+    # @!attribute [rw] finding_type
+    #   The finding type.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of findings of this type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] severity_max
+    #   The highest severity score among the findings of this type, from 0
+    #   to 10.
+    #   @return [Float]
+    #
+    # @!attribute [rw] shared_resources
+    #   The resources that the findings of this type share with the
+    #   investigated activity.
+    #   @return [Array<Types::SharedResource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ObservedFindingType AWS API Documentation
+    #
+    class ObservedFindingType < Struct.new(
+      :finding_type,
+      :count,
+      :severity_max,
+      :shared_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10480,6 +13019,26 @@ module Aws::GuardDuty
     class OrganizationAdditionalConfigurationResult < Struct.new(
       :name,
       :auto_enable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains an analysis of the findings across an organization.
+    #
+    # @!attribute [rw] findings_summary
+    #   A summary of the findings across the organization.
+    #   @return [Types::OrganizationFindingsSummary]
+    #
+    # @!attribute [rw] account_breakdown
+    #   The accounts in the organization that have findings, with the number
+    #   of findings in each.
+    #   @return [Array<Types::AccountSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationAnalysis AWS API Documentation
+    #
+    class OrganizationAnalysis < Struct.new(
+      :findings_summary,
+      :account_breakdown)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10716,6 +13275,46 @@ module Aws::GuardDuty
     class OrganizationFeatureStatisticsAdditionalConfiguration < Struct.new(
       :name,
       :enabled_accounts_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a summary of findings across an organization.
+    #
+    # @!attribute [rw] total_findings
+    #   The total number of findings across the organization.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] severity_breakdown
+    #   The number of findings at each severity level across the
+    #   organization.
+    #   @return [Types::SeverityBreakdown]
+    #
+    # @!attribute [rw] top_finding_types
+    #   The finding types that have the most findings, with counts.
+    #   @return [Array<Types::FindingTypeCount>]
+    #
+    # @!attribute [rw] by_time_window
+    #   The number of findings in each time window.
+    #   @return [Array<Types::TimeWindowGroup>]
+    #
+    # @!attribute [rw] total_account_count
+    #   The total number of accounts in the organization.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] affected_account_count
+    #   The number of accounts that have findings.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationFindingsSummary AWS API Documentation
+    #
+    class OrganizationFindingsSummary < Struct.new(
+      :total_findings,
+      :severity_breakdown,
+      :top_finding_types,
+      :by_time_window,
+      :total_account_count,
+      :affected_account_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11024,6 +13623,42 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about a process in a process lineage.
+    # `ParentUuid` links each process to its parent process.
+    #
+    # @!attribute [rw] uuid
+    #   The unique identifier of the process.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the process.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The path of the process executable.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_uuid
+    #   The unique identifier of the parent process. Not set for the root
+    #   process.
+    #   @return [String]
+    #
+    # @!attribute [rw] findings
+    #   The findings associated with this process.
+    #   @return [Array<Types::FindingReference>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Process AWS API Documentation
+    #
+    class Process < Struct.new(
+      :uuid,
+      :name,
+      :path,
+      :parent_uuid,
+      :findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the observed process.
     #
     # @!attribute [rw] name
@@ -11138,6 +13773,31 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the status of a protection plan.
+    #
+    # @!attribute [rw] name
+    #   The name of the protection plan. Possible values are `CLOUD_TRAIL`,
+    #   `DNS_LOGS`, `FLOW_LOGS`, `S3_DATA_EVENTS`, `EKS_AUDIT_LOGS`,
+    #   `EBS_MALWARE_PROTECTION`, `RDS_LOGIN_EVENTS`,
+    #   `EKS_RUNTIME_MONITORING`, `EKS_ADDON_MANAGEMENT`,
+    #   `LAMBDA_NETWORK_LOGS`, `RUNTIME_MONITORING`,
+    #   `ECS_FARGATE_AGENT_MANAGEMENT`, and `EC2_AGENT_MANAGEMENT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the protection plan. Possible values are `ENABLED` and
+    #   `DISABLED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ProtectionPlan AWS API Documentation
+    #
+    class ProtectionPlan < Struct.new(
+      :name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the public access policies that apply to the S3 bucket.
     #
     # @!attribute [rw] permission_configuration
@@ -11201,6 +13861,64 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains the start and end of a time window.
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp at which the time window starts.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp at which the time window ends.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/QueryTimeWindow AWS API Documentation
+    #
+    class QueryTimeWindow < Struct.new(
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about an Amazon RDS database instance.
+    #
+    # @!attribute [rw] db_instance_identifier
+    #   The identifier of the database instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The identifier of the database cluster that contains the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_instance_arn
+    #   The Amazon Resource Name (ARN) of the database instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] dbi_resource_id
+    #   The unique resource ID of the database instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The database engine of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The version of the database engine.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RdsDbInstance AWS API Documentation
+    #
+    class RdsDbInstance < Struct.new(
+      :db_instance_identifier,
+      :db_cluster_identifier,
+      :db_instance_arn,
+      :dbi_resource_id,
+      :engine,
+      :engine_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the resource type `RDSDBInstance` involved
     # in a GuardDuty finding.
     #
@@ -11247,6 +13965,41 @@ module Aws::GuardDuty
       :db_instance_arn,
       :dbi_resource_id,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the user that logged in to an Amazon RDS
+    # database instance.
+    #
+    # @!attribute [rw] user
+    #   The user name that was used to log in.
+    #   @return [String]
+    #
+    # @!attribute [rw] application
+    #   The name of the application that was used to log in.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database that the user logged in to.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_method
+    #   The authentication method that the user used.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl
+    #   The version of Secure Sockets Layer (SSL) that the connection used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RdsDbUser AWS API Documentation
+    #
+    class RdsDbUser < Struct.new(
+      :user,
+      :application,
+      :database,
+      :auth_method,
+      :ssl)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11335,6 +14088,47 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains details about login activity on an Amazon RDS database.
+    #
+    # @!attribute [rw] outcome
+    #   The outcome of the login attempts.
+    #   @return [String]
+    #
+    # @!attribute [rw] rate
+    #   The rate of the login attempts.
+    #   @return [String]
+    #
+    # @!attribute [rw] anomaly_context
+    #   An explanation of how the login activity deviates from normal
+    #   behavior.
+    #   @return [String]
+    #
+    # @!attribute [rw] login_count
+    #   The number of login attempts.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] activity_window
+    #   The time range of the login activity.
+    #   @return [Types::ActivityWindow]
+    #
+    # @!attribute [rw] enrichment
+    #   Additional context about the login activity, such as geolocation
+    #   information.
+    #   @return [Types::Enrichment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RdsLoginActivity AWS API Documentation
+    #
+    class RdsLoginActivity < Struct.new(
+      :outcome,
+      :rate,
+      :anomaly_context,
+      :login_count,
+      :activity_window,
+      :enrichment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Indicates that a login attempt was made to the potentially compromised
     # database from a remote IP address.
     #
@@ -11351,6 +14145,43 @@ module Aws::GuardDuty
     class RdsLoginAttemptAction < Struct.new(
       :remote_ip_details,
       :login_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a recommended action.
+    #
+    # @!attribute [rw] title
+    #   A short title for the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] rationale
+    #   The reason for the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] category
+    #   The category of the recommendation. Possible values are
+    #   `ENABLE_PROTECTION`, `FURTHER_INVESTIGATION`, `SUPPRESSION_RULE`,
+    #   `HARDENING`, and `MONITORING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The priority of the recommendation. Possible values are `IMMEDIATE`,
+    #   `SHORT_TERM`, and `STRATEGIC`.
+    #   @return [String]
+    #
+    # @!attribute [rw] cli_commands
+    #   CLI commands that you can run to carry out the recommendation.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Recommendation AWS API Documentation
+    #
+    class Recommendation < Struct.new(
+      :title,
+      :rationale,
+      :category,
+      :priority,
+      :cli_commands)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11399,6 +14230,28 @@ module Aws::GuardDuty
       :recovery_point_arn,
       :backup_vault_name,
       :continuous_scan_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about findings that are related to the
+    # investigated activity.
+    #
+    # @!attribute [rw] correlated
+    #   The findings that GuardDuty correlated with the investigated
+    #   activity, grouped by finding type.
+    #   @return [Array<Types::CorrelatedFinding>]
+    #
+    # @!attribute [rw] observed
+    #   Other finding types that GuardDuty observed, with counts. These
+    #   entries don't include finding IDs.
+    #   @return [Array<Types::ObservedFindingType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RelatedFindings AWS API Documentation
+    #
+    class RelatedFindings < Struct.new(
+      :correlated,
+      :observed)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11486,6 +14339,72 @@ module Aws::GuardDuty
     class RemotePortDetails < Struct.new(
       :port,
       :port_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a representative finding for an affected resource. GuardDuty
+    # selects one finding for each affected resource, based on severity.
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the affected resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The identifier of the affected resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_id
+    #   The ID of the representative finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_count
+    #   The number of findings for the resource.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] risk_level
+    #   The assessed risk level of the resource. Possible values are `Info`,
+    #   `Low`, `Medium`, `High`, and `Critical`.
+    #   @return [String]
+    #
+    # @!attribute [rw] risk_rationale
+    #   The reason for the assessed risk level.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RepresentativeFinding AWS API Documentation
+    #
+    class RepresentativeFinding < Struct.new(
+      :resource_type,
+      :identifier,
+      :finding_id,
+      :finding_count,
+      :risk_level,
+      :risk_rationale)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains reputation information about a threat indicator.
+    #
+    # @!attribute [rw] finding_time_disposition
+    #   The reputation of the indicator at the time of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_disposition
+    #   The current reputation of the indicator.
+    #   @return [String]
+    #
+    # @!attribute [rw] reputation_comparison
+    #   A comparison of the reputation at the time of the finding with the
+    #   current reputation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Reputation AWS API Documentation
+    #
+    class Reputation < Struct.new(
+      :finding_time_disposition,
+      :current_disposition,
+      :reputation_comparison)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11726,6 +14645,30 @@ module Aws::GuardDuty
     #
     class ResourceDetails < Struct.new(
       :instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the number of findings for a resource.
+    #
+    # @!attribute [rw] resource_type
+    #   The display name of the resource type, such as `Instance`.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The identifier of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of findings for the resource.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ResourceDistribution AWS API Documentation
+    #
+    class ResourceDistribution < Struct.new(
+      :resource_type,
+      :identifier,
+      :count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12224,6 +15167,162 @@ module Aws::GuardDuty
     class RuntimeDetails < Struct.new(
       :process,
       :context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a summary of runtime signals.
+    #
+    # @!attribute [rw] signal_groups
+    #   The runtime signals, grouped by finding type.
+    #   @return [Array<Types::SignalGroup>]
+    #
+    # @!attribute [rw] key_observation
+    #   A key observation about the runtime signals.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RuntimeSignals AWS API Documentation
+    #
+    class RuntimeSignals < Struct.new(
+      :signal_groups,
+      :key_observation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about Amazon S3 activity.
+    #
+    # @!attribute [rw] api
+    #   The Amazon S3 API operation that was called.
+    #   @return [String]
+    #
+    # @!attribute [rw] affected_bucket
+    #   The name of the affected bucket, or `account-wide` if the activity
+    #   isn't limited to one bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] other_s3_activity
+    #   Other Amazon S3 activity that is related to the observation.
+    #   @return [String]
+    #
+    # @!attribute [rw] non_s3_activity
+    #   Related activity on Amazon Web Services services other than Amazon
+    #   S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_assessment
+    #   An assessment of the session in which the activity occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_count
+    #   The number of events.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] actor
+    #   The identity that performed the activity.
+    #   @return [Types::InvestigationActor]
+    #
+    # @!attribute [rw] source_ip
+    #   The source address of the activity, or a description of the source.
+    #   @return [String]
+    #
+    # @!attribute [rw] enrichment
+    #   Additional context about the activity, such as geolocation
+    #   information.
+    #   @return [Types::Enrichment]
+    #
+    # @!attribute [rw] activity_window
+    #   The time range of the activity.
+    #   @return [Types::ActivityWindow]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/S3Activity AWS API Documentation
+    #
+    class S3Activity < Struct.new(
+      :api,
+      :affected_bucket,
+      :other_s3_activity,
+      :non_s3_activity,
+      :session_assessment,
+      :event_count,
+      :actor,
+      :source_ip,
+      :enrichment,
+      :activity_window)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains an analysis of Amazon S3 activity or exposure. The members
+    # that can be set depend on `AnalysisType`: `S3_EXPOSURE`
+    # (`FindingSubtype`, `EffectivePermission`, `BlockPublicAccessSettings`,
+    # and `Exposure`), `S3_ACTOR_CONTEXT` (`UserAgent`,
+    # `UserAgentClassification`, `SourceIp`, `IpReputation`, and
+    # `ActorAssessment`), and `S3_PEN_TEST` (`UserAgent`, `S3ApiActivity`,
+    # `SourceContext`, and `AuthorizationAssessment`).
+    #
+    # @!attribute [rw] finding_subtype
+    #   The subtype of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_permission
+    #   The effective permission of the Amazon S3 resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_public_access_settings
+    #   A description of the Amazon S3 Block Public Access settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] exposure
+    #   An assessment of the exposure of the Amazon S3 resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_agent
+    #   The user agent of the caller.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_agent_classification
+    #   The classification of the user agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_ip
+    #   The source address of the activity, or a description of the source.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_reputation
+    #   The reputation of the source IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] actor_assessment
+    #   An assessment of the identity that performed the activity.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_api_activity
+    #   A description of the Amazon S3 API activity.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_context
+    #   Context about the source of the activity.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_assessment
+    #   An assessment of whether the activity was authorized.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/S3Analysis AWS API Documentation
+    #
+    class S3Analysis < Struct.new(
+      :finding_subtype,
+      :effective_permission,
+      :block_public_access_settings,
+      :exposure,
+      :user_agent,
+      :user_agent_classification,
+      :source_ip,
+      :ip_reputation,
+      :actor_assessment,
+      :s3_api_activity,
+      :source_context,
+      :authorization_assessment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13223,6 +16322,40 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains the number of findings at each severity level.
+    #
+    # @!attribute [rw] critical
+    #   The number of findings that have Critical severity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] high
+    #   The number of findings that have High severity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] medium
+    #   The number of findings that have Medium severity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] low
+    #   The number of findings that have Low severity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] info
+    #   The number of findings that have Info severity.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SeverityBreakdown AWS API Documentation
+    #
+    class SeverityBreakdown < Struct.new(
+      :critical,
+      :high,
+      :medium,
+      :low,
+      :info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about severity level for each finding type.
     #
     # @!attribute [rw] last_generated_at
@@ -13244,6 +16377,45 @@ module Aws::GuardDuty
       :last_generated_at,
       :severity,
       :total_findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a behavior that related findings share.
+    #
+    # @!attribute [rw] path
+    #   The JSON path of the finding attribute that matched.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value that matched.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SharedBehavior AWS API Documentation
+    #
+    class SharedBehavior < Struct.new(
+      :path,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a resource that related findings share.
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource. This value isn't limited to the resource
+    #   types of `InvestigationResource`.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The identifier of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SharedResource AWS API Documentation
+    #
+    class SharedResource < Struct.new(
+      :resource_type,
+      :identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13366,6 +16538,31 @@ module Aws::GuardDuty
       :endpoint_ids,
       :signal_indicators,
       :activities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a group of runtime signals that have the
+    # same finding type.
+    #
+    # @!attribute [rw] finding_type
+    #   The finding type of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The severity score of the signals in the group, from 0 to 10.
+    #   @return [Float]
+    #
+    # @!attribute [rw] count
+    #   The number of signals in the group.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SignalGroup AWS API Documentation
+    #
+    class SignalGroup < Struct.new(
+      :finding_type,
+      :severity,
+      :count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13538,6 +16735,85 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains the structured details for an investigation record. Only the
+    # member that matches the record type is set.
+    #
+    # @note SupportingData is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SupportingData corresponding to the set member.
+    #
+    # @!attribute [rw] fetch
+    #   Details about data that GuardDuty retrieved. Set for `FETCH`
+    #   records.
+    #   @return [Types::FetchRecord]
+    #
+    # @!attribute [rw] analysis
+    #   Details about an assessment that GuardDuty derived from the data.
+    #   Set for `ANALYSIS` records.
+    #   @return [Types::AnalysisRecord]
+    #
+    # @!attribute [rw] observation
+    #   Details about a fact that GuardDuty noted about your environment.
+    #   Set for `OBSERVATION` records.
+    #   @return [Types::ObservationRecord]
+    #
+    # @!attribute [rw] metadata
+    #   Operational details about the investigation. Set for `METADATA`
+    #   records.
+    #   @return [Types::MetadataRecord]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SupportingData AWS API Documentation
+    #
+    class SupportingData < Struct.new(
+      :fetch,
+      :analysis,
+      :observation,
+      :metadata,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Fetch < SupportingData; end
+      class Analysis < SupportingData; end
+      class Observation < SupportingData; end
+      class Metadata < SupportingData; end
+      class Unknown < SupportingData; end
+    end
+
+    # Contains information about the findings associated with a MITRE
+    # ATT&amp;CK tactic.
+    #
+    # @!attribute [rw] phase
+    #   The name of the tactic. Possible values are `Reconnaissance`,
+    #   `Resource Development`, `Initial Access`, `Execution`,
+    #   `Persistence`, `Privilege Escalation`, `Defense Evasion`,
+    #   `Credential Access`, `Discovery`, `Lateral Movement`, `Collection`,
+    #   `Command and Control`, `Exfiltration`, and `Impact`.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_count
+    #   The number of findings associated with the tactic.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] finding_types
+    #   The finding types associated with the tactic.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] techniques
+    #   The MITRE ATT&amp;CK techniques within the tactic that are
+    #   associated with findings.
+    #   @return [Array<Types::TechniqueCoverage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/TacticCoverage AWS API Documentation
+    #
+    class TacticCoverage < Struct.new(
+      :phase,
+      :finding_count,
+      :finding_types,
+      :techniques)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a tag key-value pair.
     #
     # @!attribute [rw] key
@@ -13579,6 +16855,31 @@ module Aws::GuardDuty
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # Contains information about the findings associated with a MITRE
+    # ATT&amp;CK technique.
+    #
+    # @!attribute [rw] technique
+    #   The technique.
+    #   @return [Types::ThreatReference]
+    #
+    # @!attribute [rw] finding_count
+    #   The number of findings associated with the technique.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] finding_types
+    #   The finding types associated with the technique.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/TechniqueCoverage AWS API Documentation
+    #
+    class TechniqueCoverage < Struct.new(
+      :technique,
+      :finding_count,
+      :finding_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the detected threats associated with the generated
     # finding.
     #
@@ -13618,6 +16919,26 @@ module Aws::GuardDuty
       :count,
       :hash,
       :item_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains an assessment of the threat that a `FINDING` investigation
+    # identified.
+    #
+    # @!attribute [rw] attack_progression
+    #   The phases of the attack, in terms of MITRE ATT&amp;CK tactics.
+    #   @return [Array<Types::AttackPhase>]
+    #
+    # @!attribute [rw] threat_actor_profile
+    #   A description of the likely threat actor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ThreatAssessment AWS API Documentation
+    #
+    class ThreatAssessment < Struct.new(
+      :attack_progression,
+      :threat_actor_profile)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13679,6 +17000,26 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains a reference to a MITRE ATT&amp;CK tactic or technique.
+    #
+    # @!attribute [rw] name
+    #   The name of the tactic or technique.
+    #   @return [String]
+    #
+    # @!attribute [rw] uid
+    #   The MITRE ATT&amp;CK identifier of the tactic or technique, such as
+    #   `TA0002` or `T1059.004`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ThreatReference AWS API Documentation
+    #
+    class ThreatReference < Struct.new(
+      :name,
+      :uid)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains total number of infected files.
     #
     # @!attribute [rw] files
@@ -13689,6 +17030,30 @@ module Aws::GuardDuty
     #
     class ThreatsDetectedItemCount < Struct.new(
       :files)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the number of findings in a time window.
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp at which the time window starts.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp at which the time window ends.
+    #   @return [Time]
+    #
+    # @!attribute [rw] finding_count
+    #   The number of findings in the time window.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/TimeWindowGroup AWS API Documentation
+    #
+    class TimeWindowGroup < Struct.new(
+      :start_time,
+      :end_time,
+      :finding_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13713,6 +17078,41 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the number of findings over time.
+    #
+    # @!attribute [rw] granularity
+    #   The length of each time window in the trend. Possible values are
+    #   `DAY`, `WEEK`, and `MONTH`.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The timestamp at which the period of the trend starts.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The timestamp at which the period of the trend ends.
+    #   @return [Time]
+    #
+    # @!attribute [rw] total_findings
+    #   The total number of findings in the period.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] by_time_window
+    #   The number of findings in each time window.
+    #   @return [Array<Types::TimeWindowGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Trend AWS API Documentation
+    #
+    class Trend < Struct.new(
+      :granularity,
+      :started_at,
+      :ended_at,
+      :total_findings,
+      :by_time_window)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the reason the scan was triggered.
     #
     # @!attribute [rw] guard_duty_finding_id
@@ -13733,6 +17133,35 @@ module Aws::GuardDuty
       :guard_duty_finding_id,
       :description,
       :trigger_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the number and percentage of findings of a finding type.
+    #
+    # @!attribute [rw] finding_type
+    #   The finding type.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of findings of this type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] percentage
+    #   The percentage of findings that are of this type, from 0 to 100.
+    #   @return [Float]
+    #
+    # @!attribute [rw] dominant_severity
+    #   The most common severity among findings of this type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/TypeDistribution AWS API Documentation
+    #
+    class TypeDistribution < Struct.new(
+      :finding_type,
+      :count,
+      :percentage,
+      :dominant_severity)
       SENSITIVE = []
       include Aws::Structure
     end

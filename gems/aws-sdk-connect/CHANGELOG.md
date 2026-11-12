@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.299.0 (2026-11-12)
+------------------
+
+* Feature - This release adds a LastModifiedTime and LastModifiedRegion field to ListIntegrationAssociations so customers can see at what time and in which Region an IntegrationAssociation was last modified in.
+
 1.298.0 (2026-11-11)
 ------------------
 
