@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.165.0 (2026-11-13)
+------------------
+
+* Feature - Adding support for dynamic client registration.
+
 1.164.0 (2026-11-11)
 ------------------
 

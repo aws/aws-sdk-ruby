@@ -249,6 +249,10 @@ module Aws::AppStream
     GetExportImageTaskResult = Shapes::StructureShape.new(name: 'GetExportImageTaskResult')
     Image = Shapes::StructureShape.new(name: 'Image')
     ImageBuilder = Shapes::StructureShape.new(name: 'ImageBuilder')
+    ImageBuilderAgentAccessConfig = Shapes::StructureShape.new(name: 'ImageBuilderAgentAccessConfig')
+    ImageBuilderAgentAccessConfigForUpdate = Shapes::StructureShape.new(name: 'ImageBuilderAgentAccessConfigForUpdate')
+    ImageBuilderAttribute = Shapes::StringShape.new(name: 'ImageBuilderAttribute')
+    ImageBuilderAttributes = Shapes::ListShape.new(name: 'ImageBuilderAttributes')
     ImageBuilderList = Shapes::ListShape.new(name: 'ImageBuilderList')
     ImageBuilderState = Shapes::StringShape.new(name: 'ImageBuilderState')
     ImageBuilderStateChangeReason = Shapes::StructureShape.new(name: 'ImageBuilderStateChangeReason')
@@ -270,6 +274,7 @@ module Aws::AppStream
     InvalidAccountStatusException = Shapes::StructureShape.new(name: 'InvalidAccountStatusException')
     InvalidParameterCombinationException = Shapes::StructureShape.new(name: 'InvalidParameterCombinationException')
     InvalidRoleException = Shapes::StructureShape.new(name: 'InvalidRoleException')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LastReportGenerationExecutionError = Shapes::StructureShape.new(name: 'LastReportGenerationExecutionError')
     LastReportGenerationExecutionErrors = Shapes::ListShape.new(name: 'LastReportGenerationExecutionErrors')
     LatestAppstreamAgentVersion = Shapes::StringShape.new(name: 'LatestAppstreamAgentVersion')
@@ -392,6 +397,8 @@ module Aws::AppStream
     UpdateEntitlementResult = Shapes::StructureShape.new(name: 'UpdateEntitlementResult')
     UpdateFleetRequest = Shapes::StructureShape.new(name: 'UpdateFleetRequest')
     UpdateFleetResult = Shapes::StructureShape.new(name: 'UpdateFleetResult')
+    UpdateImageBuilderRequest = Shapes::StructureShape.new(name: 'UpdateImageBuilderRequest')
+    UpdateImageBuilderResult = Shapes::StructureShape.new(name: 'UpdateImageBuilderResult')
     UpdateImagePermissionsRequest = Shapes::StructureShape.new(name: 'UpdateImagePermissionsRequest')
     UpdateImagePermissionsResult = Shapes::StructureShape.new(name: 'UpdateImagePermissionsResult')
     UpdateStackRequest = Shapes::StructureShape.new(name: 'UpdateStackRequest')
@@ -445,6 +452,8 @@ module Aws::AppStream
     AgentAccessConfig.add_member(:settings, Shapes::ShapeRef.new(shape: AgentAccessSettingList, required: true, location_name: "Settings"))
     AgentAccessConfig.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, location_name: "S3BucketArn"))
     AgentAccessConfig.add_member(:screenshots_upload_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "ScreenshotsUploadEnabled"))
+    AgentAccessConfig.add_member(:replay_session_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "ReplaySessionEnabled"))
+    AgentAccessConfig.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
     AgentAccessConfig.add_member(:screen_resolution, Shapes::ShapeRef.new(shape: ScreenResolution, required: true, location_name: "ScreenResolution"))
     AgentAccessConfig.add_member(:screen_image_format, Shapes::ShapeRef.new(shape: ScreenImageFormat, required: true, location_name: "ScreenImageFormat"))
     AgentAccessConfig.add_member(:user_control_mode, Shapes::ShapeRef.new(shape: UserControlMode, location_name: "UserControlMode"))
@@ -453,6 +462,8 @@ module Aws::AppStream
     AgentAccessConfigForUpdate.add_member(:settings, Shapes::ShapeRef.new(shape: AgentAccessSettingList, location_name: "Settings"))
     AgentAccessConfigForUpdate.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, location_name: "S3BucketArn"))
     AgentAccessConfigForUpdate.add_member(:screenshots_upload_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "ScreenshotsUploadEnabled"))
+    AgentAccessConfigForUpdate.add_member(:replay_session_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "ReplaySessionEnabled"))
+    AgentAccessConfigForUpdate.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
     AgentAccessConfigForUpdate.add_member(:screen_resolution, Shapes::ShapeRef.new(shape: ScreenResolution, location_name: "ScreenResolution"))
     AgentAccessConfigForUpdate.add_member(:screen_image_format, Shapes::ShapeRef.new(shape: ScreenImageFormat, location_name: "ScreenImageFormat"))
     AgentAccessConfigForUpdate.add_member(:user_control_mode, Shapes::ShapeRef.new(shape: UserControlMode, location_name: "UserControlMode"))
@@ -770,6 +781,7 @@ module Aws::AppStream
     CreateImageBuilderRequest.add_member(:softwares_to_install, Shapes::ShapeRef.new(shape: StringList, location_name: "SoftwaresToInstall"))
     CreateImageBuilderRequest.add_member(:softwares_to_uninstall, Shapes::ShapeRef.new(shape: StringList, location_name: "SoftwaresToUninstall"))
     CreateImageBuilderRequest.add_member(:disable_imdsv1, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableIMDSV1"))
+    CreateImageBuilderRequest.add_member(:agent_access_config, Shapes::ShapeRef.new(shape: ImageBuilderAgentAccessConfig, location_name: "AgentAccessConfig"))
     CreateImageBuilderRequest.struct_class = Types::CreateImageBuilderRequest
 
     CreateImageBuilderResult.add_member(:image_builder, Shapes::ShapeRef.new(shape: ImageBuilder, location_name: "ImageBuilder"))
@@ -1339,7 +1351,26 @@ module Aws::AppStream
     ImageBuilder.add_member(:root_volume_config, Shapes::ShapeRef.new(shape: VolumeConfig, location_name: "RootVolumeConfig"))
     ImageBuilder.add_member(:latest_appstream_agent_version, Shapes::ShapeRef.new(shape: LatestAppstreamAgentVersion, location_name: "LatestAppstreamAgentVersion"))
     ImageBuilder.add_member(:disable_imdsv1, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DisableIMDSV1"))
+    ImageBuilder.add_member(:agent_access_config, Shapes::ShapeRef.new(shape: ImageBuilderAgentAccessConfig, location_name: "AgentAccessConfig"))
     ImageBuilder.struct_class = Types::ImageBuilder
+
+    ImageBuilderAgentAccessConfig.add_member(:settings, Shapes::ShapeRef.new(shape: AgentAccessSettingList, required: true, location_name: "Settings"))
+    ImageBuilderAgentAccessConfig.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, location_name: "S3BucketArn"))
+    ImageBuilderAgentAccessConfig.add_member(:screenshots_upload_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "ScreenshotsUploadEnabled"))
+    ImageBuilderAgentAccessConfig.add_member(:screen_resolution, Shapes::ShapeRef.new(shape: ScreenResolution, required: true, location_name: "ScreenResolution"))
+    ImageBuilderAgentAccessConfig.add_member(:screen_image_format, Shapes::ShapeRef.new(shape: ScreenImageFormat, required: true, location_name: "ScreenImageFormat"))
+    ImageBuilderAgentAccessConfig.add_member(:user_control_mode, Shapes::ShapeRef.new(shape: UserControlMode, location_name: "UserControlMode"))
+    ImageBuilderAgentAccessConfig.struct_class = Types::ImageBuilderAgentAccessConfig
+
+    ImageBuilderAgentAccessConfigForUpdate.add_member(:settings, Shapes::ShapeRef.new(shape: AgentAccessSettingList, location_name: "Settings"))
+    ImageBuilderAgentAccessConfigForUpdate.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, location_name: "S3BucketArn"))
+    ImageBuilderAgentAccessConfigForUpdate.add_member(:screenshots_upload_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "ScreenshotsUploadEnabled"))
+    ImageBuilderAgentAccessConfigForUpdate.add_member(:screen_resolution, Shapes::ShapeRef.new(shape: ScreenResolution, location_name: "ScreenResolution"))
+    ImageBuilderAgentAccessConfigForUpdate.add_member(:screen_image_format, Shapes::ShapeRef.new(shape: ScreenImageFormat, location_name: "ScreenImageFormat"))
+    ImageBuilderAgentAccessConfigForUpdate.add_member(:user_control_mode, Shapes::ShapeRef.new(shape: UserControlMode, location_name: "UserControlMode"))
+    ImageBuilderAgentAccessConfigForUpdate.struct_class = Types::ImageBuilderAgentAccessConfigForUpdate
+
+    ImageBuilderAttributes.member = Shapes::ShapeRef.new(shape: ImageBuilderAttribute)
 
     ImageBuilderList.member = Shapes::ShapeRef.new(shape: ImageBuilder)
 
@@ -1704,6 +1735,16 @@ module Aws::AppStream
 
     UpdateFleetResult.add_member(:fleet, Shapes::ShapeRef.new(shape: Fleet, location_name: "Fleet"))
     UpdateFleetResult.struct_class = Types::UpdateFleetResult
+
+    UpdateImageBuilderRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    UpdateImageBuilderRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateImageBuilderRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
+    UpdateImageBuilderRequest.add_member(:agent_access_config, Shapes::ShapeRef.new(shape: ImageBuilderAgentAccessConfigForUpdate, location_name: "AgentAccessConfig"))
+    UpdateImageBuilderRequest.add_member(:attributes_to_delete, Shapes::ShapeRef.new(shape: ImageBuilderAttributes, location_name: "AttributesToDelete"))
+    UpdateImageBuilderRequest.struct_class = Types::UpdateImageBuilderRequest
+
+    UpdateImageBuilderResult.add_member(:image_builder, Shapes::ShapeRef.new(shape: ImageBuilder, location_name: "ImageBuilder"))
+    UpdateImageBuilderResult.struct_class = Types::UpdateImageBuilderResult
 
     UpdateImagePermissionsRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     UpdateImagePermissionsRequest.add_member(:shared_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "SharedAccountId"))
@@ -2851,6 +2892,21 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+      end)
+
+      api.add_operation(:update_image_builder, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateImageBuilder"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateImageBuilderRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateImageBuilderResult)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_image_permissions, Seahorse::Model::Operation.new.tap do |o|

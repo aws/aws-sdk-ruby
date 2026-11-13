@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.156.0 (2026-11-13)
+------------------
+
+* Feature - Amazon WorkSpaces Agent Access now supports image builders, so AI agents can install, configure, and test applications before you create an image. New Replay Session delivers a video of screenshots, a transcript, and a report for each agent session, optionally encrypted with your own KMS key.
+
 1.155.0 (2026-11-11)
 ------------------
 

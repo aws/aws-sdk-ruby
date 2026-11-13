@@ -312,6 +312,7 @@ module Aws::SSM
       attr_accessor association_id: ::String
       attr_accessor change_request_name: ::String
       attr_accessor variables: ::Hash[::String, ::Array[::String]]
+      attr_accessor targets_summary: Types::TargetsSummary
       SENSITIVE: []
     end
 
@@ -440,17 +441,20 @@ module Aws::SSM
 
     class CloudConnectorConfiguration
       attr_accessor azure_configuration: Types::AzureConfiguration
+      attr_accessor gcp_configuration: Types::GcpConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class AzureConfiguration < CloudConnectorConfiguration
+      end
+      class GcpConfiguration < CloudConnectorConfiguration
       end
       class Unknown < CloudConnectorConfiguration
       end
     end
 
     class CloudConnectorFilter
-      attr_accessor filter_key: ("SubscriptionId" | "TenantId")
+      attr_accessor filter_key: ("SubscriptionId" | "TenantId" | "ProjectId" | "OrganizationId")
       attr_accessor filter_values: ::Array[::String]
       SENSITIVE: []
     end
@@ -462,6 +466,8 @@ module Aws::SSM
       attr_accessor role_arn: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor provider: ("Azure" | "GCP")
+      attr_accessor config_connector_arn: ::String
       SENSITIVE: []
     end
 
@@ -1708,6 +1714,31 @@ module Aws::SSM
       SENSITIVE: []
     end
 
+    class GcpConfiguration
+      attr_accessor organization_id: ::String
+      attr_accessor workload_identity_pool_provider: ::String
+      attr_accessor service_account_email: ::String
+      attr_accessor targets: Types::GcpConfigurationTargets
+      SENSITIVE: []
+    end
+
+    class GcpConfigurationTargets
+      attr_accessor projects: ::Array[Types::GcpProject]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Projects < GcpConfigurationTargets
+      end
+      class Unknown < GcpConfigurationTargets
+      end
+    end
+
+    class GcpProject
+      attr_accessor project_id: ::String
+      attr_accessor project_display_name: ::String
+      SENSITIVE: []
+    end
+
     class GetAccessTokenRequest
       attr_accessor access_request_id: ::String
       SENSITIVE: []
@@ -2241,7 +2272,7 @@ module Aws::SSM
       attr_accessor platform_name: ::String
       attr_accessor platform_version: ::String
       attr_accessor resource_type: ("ManagedInstance" | "EC2Instance")
-      attr_accessor source_type: ("AWS::EC2::Instance" | "AWS::IoT::Thing" | "AWS::SSM::ManagedInstance" | "Microsoft.Compute/virtualMachines")
+      attr_accessor source_type: ("AWS::EC2::Instance" | "AWS::IoT::Thing" | "AWS::SSM::ManagedInstance" | "Microsoft.Compute/virtualMachines" | "compute.googleapis.com/Instance")
       attr_accessor source_id: ::String
       attr_accessor source_location: ::String
       attr_accessor availability_zone: ::String
@@ -2270,7 +2301,7 @@ module Aws::SSM
       attr_accessor last_successful_association_execution_date: ::Time
       attr_accessor association_overview: Types::InstanceAggregatedAssociationOverview
       attr_accessor source_id: ::String
-      attr_accessor source_type: ("AWS::EC2::Instance" | "AWS::IoT::Thing" | "AWS::SSM::ManagedInstance" | "Microsoft.Compute/virtualMachines")
+      attr_accessor source_type: ("AWS::EC2::Instance" | "AWS::IoT::Thing" | "AWS::SSM::ManagedInstance" | "Microsoft.Compute/virtualMachines" | "compute.googleapis.com/Instance")
       attr_accessor source_location: ::String
       SENSITIVE: [:ip_address]
     end
@@ -2347,7 +2378,7 @@ module Aws::SSM
       attr_accessor last_successful_association_execution_date: ::Time
       attr_accessor association_overview: Types::InstanceAggregatedAssociationOverview
       attr_accessor source_id: ::String
-      attr_accessor source_type: ("AWS::EC2::Instance" | "AWS::IoT::Thing" | "AWS::SSM::ManagedInstance" | "Microsoft.Compute/virtualMachines")
+      attr_accessor source_type: ("AWS::EC2::Instance" | "AWS::IoT::Thing" | "AWS::SSM::ManagedInstance" | "Microsoft.Compute/virtualMachines" | "compute.googleapis.com/Instance")
       attr_accessor source_location: ::String
       attr_accessor availability_zone: ::String
       SENSITIVE: [:ip_address]
@@ -4337,6 +4368,15 @@ module Aws::SSM
       SENSITIVE: []
     end
 
+    class TargetsSummary
+      attr_accessor total_count: ::Integer
+      attr_accessor started_count: ::Integer
+      attr_accessor completed_count: ::Integer
+      attr_accessor successful_count: ::Integer
+      attr_accessor failed_count: ::Integer
+      SENSITIVE: []
+    end
+
     class TerminateSessionRequest
       attr_accessor session_id: ::String
       SENSITIVE: []
@@ -4728,7 +4768,7 @@ module Aws::SSM
 
     class ValidationFinding
       attr_accessor type: ("INFO" | "WARN" | "ERROR")
-      attr_accessor code: ("TargetInaccessible" | "TargetUnusable" | "TargetStateWarning" | "AwsRoleAssumptionFailed" | "WebIdentityTokenFailed" | "OutboundWebIdentityFederationDisabled" | "ProviderCredentialCreationFailed" | "TenantSummary" | "SubscriptionAccessible")
+      attr_accessor code: ("TargetInaccessible" | "TargetUnusable" | "TargetMissingPermissions" | "TargetApiDisabled" | "TargetStateWarning" | "AwsRoleAssumptionFailed" | "WebIdentityTokenFailed" | "OutboundWebIdentityFederationDisabled" | "ProviderCredentialCreationFailed" | "TenantSummary" | "SubscriptionAccessible")
       attr_accessor message: ::String
       attr_accessor provider_message: ::String
       attr_accessor scope: Types::ValidationFindingScope
@@ -4736,7 +4776,7 @@ module Aws::SSM
     end
 
     class ValidationFindingScope
-      attr_accessor type: ("azure:tenant" | "azure:subscription")
+      attr_accessor type: ("azure:tenant" | "azure:subscription" | "gcp:organization" | "gcp:project")
       attr_accessor id: ::String
       SENSITIVE: []
     end

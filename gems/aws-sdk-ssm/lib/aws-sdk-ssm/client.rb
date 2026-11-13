@@ -1542,9 +1542,10 @@ module Aws::SSM
     #   The configuration details for connecting to the third-party cloud
     #   environment.
     #
-    # @option params [required, String] :config_connector_arn
-    #   The ARN of the Amazon Web Services Config connector associated with
-    #   this cloud connector.
+    # @option params [String] :config_connector_arn
+    #   The ARN of the Amazon Web Services Config connector to associate with
+    #   this cloud connector. If you omit it, the cloud connector is created
+    #   without Amazon Web Services Config integration.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Optional metadata that you assign to a resource. Tags enable you to
@@ -1576,8 +1577,21 @@ module Aws::SSM
     #           ],
     #         },
     #       },
+    #       gcp_configuration: {
+    #         organization_id: "GcpOrganizationId",
+    #         workload_identity_pool_provider: "GcpWorkloadIdentityPoolProvider", # required
+    #         service_account_email: "GcpServiceAccountEmail", # required
+    #         targets: {
+    #           projects: [
+    #             {
+    #               project_id: "GcpProjectId", # required
+    #               project_display_name: "GcpProjectDisplayName",
+    #             },
+    #           ],
+    #         },
+    #       },
     #     },
-    #     config_connector_arn: "ConfigConnectorArn", # required
+    #     config_connector_arn: "ConfigConnectorArn",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -4410,7 +4424,7 @@ module Aws::SSM
     #   resp.instance_information_list[0].association_overview.instance_association_status_aggregated_count #=> Hash
     #   resp.instance_information_list[0].association_overview.instance_association_status_aggregated_count["StatusName"] #=> Integer
     #   resp.instance_information_list[0].source_id #=> String
-    #   resp.instance_information_list[0].source_type #=> String, one of "AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance", "Microsoft.Compute/virtualMachines"
+    #   resp.instance_information_list[0].source_type #=> String, one of "AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance", "Microsoft.Compute/virtualMachines", "compute.googleapis.com/Instance"
     #   resp.instance_information_list[0].source_location #=> String
     #   resp.next_token #=> String
     #
@@ -4731,7 +4745,7 @@ module Aws::SSM
     #   resp.instance_properties[0].association_overview.instance_association_status_aggregated_count #=> Hash
     #   resp.instance_properties[0].association_overview.instance_association_status_aggregated_count["StatusName"] #=> Integer
     #   resp.instance_properties[0].source_id #=> String
-    #   resp.instance_properties[0].source_type #=> String, one of "AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance", "Microsoft.Compute/virtualMachines"
+    #   resp.instance_properties[0].source_type #=> String, one of "AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance", "Microsoft.Compute/virtualMachines", "compute.googleapis.com/Instance"
     #   resp.instance_properties[0].source_location #=> String
     #   resp.instance_properties[0].availability_zone #=> String
     #   resp.next_token #=> String
@@ -6234,6 +6248,11 @@ module Aws::SSM
     #   resp.automation_execution.variables #=> Hash
     #   resp.automation_execution.variables["AutomationParameterKey"] #=> Array
     #   resp.automation_execution.variables["AutomationParameterKey"][0] #=> String
+    #   resp.automation_execution.targets_summary.total_count #=> Integer
+    #   resp.automation_execution.targets_summary.started_count #=> Integer
+    #   resp.automation_execution.targets_summary.completed_count #=> Integer
+    #   resp.automation_execution.targets_summary.successful_count #=> Integer
+    #   resp.automation_execution.targets_summary.failed_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetAutomationExecution AWS API Documentation
     #
@@ -6343,6 +6362,12 @@ module Aws::SSM
     #   resp.configuration.azure_configuration.targets.subscriptions #=> Array
     #   resp.configuration.azure_configuration.targets.subscriptions[0].id #=> String
     #   resp.configuration.azure_configuration.targets.subscriptions[0].display_name #=> String
+    #   resp.configuration.gcp_configuration.organization_id #=> String
+    #   resp.configuration.gcp_configuration.workload_identity_pool_provider #=> String
+    #   resp.configuration.gcp_configuration.service_account_email #=> String
+    #   resp.configuration.gcp_configuration.targets.projects #=> Array
+    #   resp.configuration.gcp_configuration.targets.projects[0].project_id #=> String
+    #   resp.configuration.gcp_configuration.targets.projects[0].project_display_name #=> String
     #   resp.config_connector_arn #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
@@ -8423,7 +8448,7 @@ module Aws::SSM
     #     next_token: "NextToken",
     #     filters: [
     #       {
-    #         filter_key: "SubscriptionId", # accepts SubscriptionId, TenantId
+    #         filter_key: "SubscriptionId", # accepts SubscriptionId, TenantId, ProjectId, OrganizationId
     #         filter_values: ["CloudConnectorFilterValue"],
     #       },
     #     ],
@@ -8438,6 +8463,8 @@ module Aws::SSM
     #   resp.cloud_connectors[0].role_arn #=> String
     #   resp.cloud_connectors[0].created_at #=> Time
     #   resp.cloud_connectors[0].updated_at #=> Time
+    #   resp.cloud_connectors[0].provider #=> String, one of "Azure", "GCP"
+    #   resp.cloud_connectors[0].config_connector_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCloudConnectors AWS API Documentation
@@ -9201,7 +9228,7 @@ module Aws::SSM
     #   resp.nodes[0].node_type.instance.platform_name #=> String
     #   resp.nodes[0].node_type.instance.platform_version #=> String
     #   resp.nodes[0].node_type.instance.resource_type #=> String, one of "ManagedInstance", "EC2Instance"
-    #   resp.nodes[0].node_type.instance.source_type #=> String, one of "AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance", "Microsoft.Compute/virtualMachines"
+    #   resp.nodes[0].node_type.instance.source_type #=> String, one of "AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance", "Microsoft.Compute/virtualMachines", "compute.googleapis.com/Instance"
     #   resp.nodes[0].node_type.instance.source_id #=> String
     #   resp.nodes[0].node_type.instance.source_location #=> String
     #   resp.nodes[0].node_type.instance.availability_zone #=> String
@@ -10172,6 +10199,8 @@ module Aws::SSM
     #
     #   * The parameter uses a parameter policy.
     #
+    #   * The parameter uses the `url`, `json`, or `jsonc` data type.
+    #
     #   * More than 10,000 parameters already exist in your Amazon Web
     #     Services account in the current Amazon Web Services Region.
     #
@@ -10214,8 +10243,9 @@ module Aws::SSM
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html
     #
     # @option params [String] :data_type
-    #   The data type for a `String` parameter. Supported data types include
-    #   plain text and Amazon Machine Image (AMI) IDs.
+    #   The data type of the parameter value. Parameter Store validates the
+    #   value against the data type when you create or update the parameter.
+    #   The default is `text`, which performs no validation.
     #
     #   **The following data type values are supported.**
     #
@@ -10224,6 +10254,45 @@ module Aws::SSM
     #   * `aws:ec2:image`
     #
     #   * `aws:ssm:integration`
+    #
+    #   * `aws:region`
+    #
+    #   * `aws:account:id`
+    #
+    #   * `boolean`
+    #
+    #   * `integer`
+    #
+    #   * `float`
+    #
+    #   * `binary`
+    #
+    #   * `hostname`
+    #
+    #   * `email`
+    #
+    #   * `ipv4-address`
+    #
+    #   * `ipv6-address`
+    #
+    #   * `url`
+    #
+    #   * `json`
+    #
+    #   * `jsonc`
+    #
+    #   For more information about the supported data types, see [Working with
+    #   parameter data types in Parameter Store][1].
+    #
+    #   <note markdown="1"> Regardless of a parameter's data type, the Parameter Store API
+    #   operations that retrieve parameters, such as `GetParameter`,
+    #   `GetParameters`, and `GetParametersByPath`, return the parameter value
+    #   as a string. For example, if a parameter has the data type `integer`
+    #   and the value `443`, `GetParameter` returns the value as the string
+    #   `"443"`. Convert the value to the type your application needs after
+    #   you retrieve it.
+    #
+    #    </note>
     #
     #   When you create a `String` parameter and specify `aws:ec2:image`,
     #   Amazon Web Services Systems Manager validates the parameter value is
@@ -10241,16 +10310,17 @@ module Aws::SSM
     #   success, but the asynchronous validation will fail and the parameter
     #   will not be created or updated. To monitor whether your
     #   `aws:ec2:image` parameters are created successfully, see [Setting up
-    #   notifications or trigger actions based on Parameter Store events][1].
+    #   notifications or trigger actions based on Parameter Store events][2].
     #   For more information about AMI format validation , see [Native
-    #   parameter support for Amazon Machine Image IDs][2].
+    #   parameter support for Amazon Machine Image IDs][3].
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-cwe.html
-    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-data-types.html
+    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-cwe.html
+    #   [3]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html
     #
     # @return [Types::PutParameterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12727,6 +12797,19 @@ module Aws::SSM
     #           ],
     #         },
     #       },
+    #       gcp_configuration: {
+    #         organization_id: "GcpOrganizationId",
+    #         workload_identity_pool_provider: "GcpWorkloadIdentityPoolProvider", # required
+    #         service_account_email: "GcpServiceAccountEmail", # required
+    #         targets: {
+    #           projects: [
+    #             {
+    #               project_id: "GcpProjectId", # required
+    #               project_display_name: "GcpProjectDisplayName",
+    #             },
+    #           ],
+    #         },
+    #       },
     #     },
     #     description: "CloudConnectorDescription",
     #   })
@@ -14226,10 +14309,10 @@ module Aws::SSM
     #
     #   resp.validation_findings #=> Array
     #   resp.validation_findings[0].type #=> String, one of "INFO", "WARN", "ERROR"
-    #   resp.validation_findings[0].code #=> String, one of "TargetInaccessible", "TargetUnusable", "TargetStateWarning", "AwsRoleAssumptionFailed", "WebIdentityTokenFailed", "OutboundWebIdentityFederationDisabled", "ProviderCredentialCreationFailed", "TenantSummary", "SubscriptionAccessible"
+    #   resp.validation_findings[0].code #=> String, one of "TargetInaccessible", "TargetUnusable", "TargetMissingPermissions", "TargetApiDisabled", "TargetStateWarning", "AwsRoleAssumptionFailed", "WebIdentityTokenFailed", "OutboundWebIdentityFederationDisabled", "ProviderCredentialCreationFailed", "TenantSummary", "SubscriptionAccessible"
     #   resp.validation_findings[0].message #=> String
     #   resp.validation_findings[0].provider_message #=> String
-    #   resp.validation_findings[0].scope.type #=> String, one of "azure:tenant", "azure:subscription"
+    #   resp.validation_findings[0].scope.type #=> String, one of "azure:tenant", "azure:subscription", "gcp:organization", "gcp:project"
     #   resp.validation_findings[0].scope.id #=> String
     #   resp.next_token #=> String
     #
@@ -14260,7 +14343,7 @@ module Aws::SSM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.233.0'
+      context[:gem_version] = '1.234.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

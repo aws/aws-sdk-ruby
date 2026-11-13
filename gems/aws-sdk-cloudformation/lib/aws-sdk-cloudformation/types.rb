@@ -7520,6 +7520,20 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # The input for the RemoveAlias action.
+    #
+    # @!attribute [rw] alias_name
+    #   The alias name to remove.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RemoveAliasInput AWS API Documentation
+    #
+    class RemoveAliasInput < Struct.new(
+      :alias_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # For extensions that are modules, a public third-party extension that
     # must be activated in your account in order for the module itself to be
     # activated.
@@ -8514,6 +8528,35 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # The input for the SetAlias action.
+    #
+    # @!attribute [rw] stack_name
+    #   The name or unique stack ID of the stack to assign an alias to.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_name
+    #   The alias to assign to the stack. The alias can then be used in
+    #   place of the stack name in any API call that accepts `StackName`.
+    #
+    #   The name must be unique within the same account and Region. It
+    #   cannot match an existing stack name or another active alias.
+    #
+    #   <note markdown="1"> An alias name can contain only alphanumeric characters
+    #   (case-sensitive) and hyphens. It must start with an alphabetic
+    #   character and can't be longer than 128 characters.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SetAliasInput AWS API Documentation
+    #
+    class SetAliasInput < Struct.new(
+      :stack_name,
+      :alias_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input for the SetStackPolicy action.
     #
     # @!attribute [rw] stack_name
@@ -8890,6 +8933,12 @@ module Aws::CloudFormation
     #   stack.
     #   @return [Array<Types::OperationEntry>]
     #
+    # @!attribute [rw] alias_name
+    #   The alias assigned to the stack, if one has been set. An alias is an
+    #   alternative name that can be used in place of the stack name in any
+    #   CloudFormation API call that accepts the `StackName` parameter.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Stack AWS API Documentation
     #
     class Stack < Struct.new(
@@ -8919,7 +8968,8 @@ module Aws::CloudFormation
       :retain_except_on_create,
       :deletion_mode,
       :detailed_status,
-      :last_operations)
+      :last_operations,
+      :alias_name)
       SENSITIVE = []
       include Aws::Structure
     end

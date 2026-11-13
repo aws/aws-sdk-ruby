@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.212.0 (2026-11-13)
+------------------
+
+* Feature - Adds support for customer-managed runtimes in the CreateFunction and UpdateFunctionConfiguration APIs. Functions can now use a customer-managed runtime and receive its updates automatically, or pin to a specific runtime version using the existing runtime controls.
+
 1.211.0 (2026-11-11)
 ------------------
 

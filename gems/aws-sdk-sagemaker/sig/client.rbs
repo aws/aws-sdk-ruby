@@ -3888,6 +3888,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterExtensionResponse]
         def extension_details: () -> Types::ExtensionDetails
         def node_summary: () -> Types::ExtensionNodeSummary
+        def health: () -> Types::ExtensionHealth
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_cluster_extension-instance_method
       def describe_cluster_extension: (
@@ -3907,6 +3908,23 @@ module Aws
                                    ?node_logical_id: ::String
                                  ) -> _DescribeClusterNodeResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterNodeResponseSuccess
+
+      interface _DescribeClusterOperationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterOperationResponse]
+        def operation_id: () -> ::String
+        def cluster_arn: () -> ::String
+        def type: () -> ("Scaling" | "DeepHealthCheck")
+        def status: () -> ("InProgress" | "Superseded" | "Done")
+        def creation_time: () -> ::Time
+        def scaling_details: () -> ::Array[Types::ClusterOperationScalingDetails]
+        def deep_health_check_details: () -> ::Array[Types::InstanceGroupHealthCheckConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_cluster_operation-instance_method
+      def describe_cluster_operation: (
+                                        cluster_name: ::String,
+                                        operation_id: ::String
+                                      ) -> _DescribeClusterOperationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterOperationResponseSuccess
 
       interface _DescribeClusterSchedulerConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterSchedulerConfigResponse]
@@ -5738,10 +5756,24 @@ module Aws
                                  ?sort_by: ("EventTime"),
                                  ?sort_order: ("Ascending" | "Descending"),
                                  ?resource_type: ("Cluster" | "InstanceGroup" | "Instance"),
+                                 ?operation_id: ::String,
                                  ?max_results: ::Integer,
                                  ?next_token: ::String
                                ) -> _ListClusterEventsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClusterEventsResponseSuccess
+
+      interface _ListClusterExtensionVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterExtensionVersionsResponse]
+        def extension_versions: () -> ::Array[Types::ExtensionVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_cluster_extension_versions-instance_method
+      def list_cluster_extension_versions: (
+                                             extension_name: ::String,
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _ListClusterExtensionVersionsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClusterExtensionVersionsResponseSuccess
 
       interface _ListClusterExtensionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterExtensionsResponse]
@@ -5776,6 +5808,25 @@ module Aws
                                 ?include_node_logical_ids: bool
                               ) -> _ListClusterNodesResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClusterNodesResponseSuccess
+
+      interface _ListClusterOperationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterOperationsResponse]
+        def next_token: () -> ::String
+        def cluster_operation_summaries: () -> ::Array[Types::ClusterOperationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_cluster_operations-instance_method
+      def list_cluster_operations: (
+                                     cluster_name: ::String,
+                                     ?status: ("InProgress" | "Superseded" | "Done"),
+                                     ?type: ("Scaling" | "DeepHealthCheck"),
+                                     ?creation_time_after: ::Time,
+                                     ?creation_time_before: ::Time,
+                                     ?sort_by: ("CreationTime"),
+                                     ?sort_order: ("Ascending" | "Descending"),
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListClusterOperationsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClusterOperationsResponseSuccess
 
       interface _ListClusterSchedulerConfigsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterSchedulerConfigsResponse]

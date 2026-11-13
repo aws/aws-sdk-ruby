@@ -625,7 +625,10 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] association_status
     #   The current status of the association between a target and a
-    #   configuration policy.
+    #   configuration policy. Possible values are `PENDING`, `SUCCESS`,
+    #   `FAILED`, and `DISABLED`. The value is `DISABLED` when central
+    #   configuration is disabled because the organization is managed by
+    #   Security Hub CSPM policies in Organizations.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AssociationFilters AWS API Documentation
@@ -23088,7 +23091,18 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] association_status
     #   The current status of the association between the specified target
-    #   and the configuration.
+    #   and the configuration. Possible values are:
+    #
+    #   * `PENDING` - The association is in progress.
+    #
+    #   * `SUCCESS` - The association succeeded.
+    #
+    #   * `FAILED` - The association failed. For details, see
+    #     `AssociationStatusMessage`.
+    #
+    #   * `DISABLED` - Central configuration is disabled because the
+    #     organization is managed by Security Hub CSPM policies in
+    #     Organizations.
     #   @return [String]
     #
     # @!attribute [rw] association_status_message
@@ -26545,7 +26559,18 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] association_status
     #   The current status of the association between the specified target
-    #   and the configuration.
+    #   and the configuration. Possible values are:
+    #
+    #   * `PENDING` - The association is in progress.
+    #
+    #   * `SUCCESS` - The association succeeded.
+    #
+    #   * `FAILED` - The association failed. For details, see
+    #     `AssociationStatusMessage`.
+    #
+    #   * `DISABLED` - Central configuration is disabled because the
+    #     organization is managed by Security Hub CSPM policies in
+    #     Organizations.
     #   @return [String]
     #
     # @!attribute [rw] association_status_message
@@ -30453,6 +30478,10 @@ module Aws::SecurityHub
     #   `ConfigurationType` for the organization. If your
     #   `ConfigurationType` is local configuration, then the value of
     #   `Status` is always `ENABLED`.
+    #
+    #   If the value of `Status` is `DISABLED`, central configuration is
+    #   disabled because the organization is managed by Security Hub CSPM
+    #   policies in Organizations.
     #   @return [String]
     #
     # @!attribute [rw] status_message
@@ -35576,7 +35605,18 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] association_status
     #   The current status of the association between the specified target
-    #   and the configuration.
+    #   and the configuration. Possible values are:
+    #
+    #   * `PENDING` - The association is in progress.
+    #
+    #   * `SUCCESS` - The association succeeded.
+    #
+    #   * `FAILED` - The association failed. For details, see
+    #     `AssociationStatusMessage`.
+    #
+    #   * `DISABLED` - Central configuration is disabled because the
+    #     organization is managed by Security Hub CSPM policies in
+    #     Organizations.
     #   @return [String]
     #
     # @!attribute [rw] association_status_message

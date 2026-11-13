@@ -29,6 +29,7 @@ module Aws::RolesAnywhere
       attr_accessor enabled: bool
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor accept_role_session_name: bool
+      attr_accessor alias_name: ::String
       SENSITIVE: []
     end
 
@@ -39,6 +40,7 @@ module Aws::RolesAnywhere
       attr_accessor crl_dp_revocation_enabled: bool
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor notification_settings: ::Array[Types::NotificationSetting]
+      attr_accessor alias_name: ::String
       SENSITIVE: []
     end
 
@@ -61,6 +63,9 @@ module Aws::RolesAnywhere
       attr_accessor trust_anchor_arn: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor alias_name: ::String
+      attr_accessor alias_arn: ::String
+      attr_accessor previous_alias_name: ::String
       SENSITIVE: []
     end
 
@@ -87,6 +92,7 @@ module Aws::RolesAnywhere
       attr_accessor enabled: bool
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor trust_anchor_arn: ::String
+      attr_accessor alias_name: ::String
       SENSITIVE: []
     end
 
@@ -180,6 +186,9 @@ module Aws::RolesAnywhere
       attr_accessor duration_seconds: ::Integer
       attr_accessor accept_role_session_name: bool
       attr_accessor attribute_mappings: ::Array[Types::AttributeMapping]
+      attr_accessor alias_name: ::String
+      attr_accessor alias_arn: ::String
+      attr_accessor previous_alias_name: ::String
       SENSITIVE: []
     end
 
@@ -332,6 +341,9 @@ module Aws::RolesAnywhere
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor notification_settings: ::Array[Types::NotificationSettingDetail]
+      attr_accessor alias_name: ::String
+      attr_accessor alias_arn: ::String
+      attr_accessor previous_alias_name: ::String
       SENSITIVE: []
     end
 
@@ -353,6 +365,7 @@ module Aws::RolesAnywhere
       attr_accessor crl_id: ::String
       attr_accessor name: ::String
       attr_accessor crl_data: ::String
+      attr_accessor alias_name: ::String
       SENSITIVE: []
     end
 
@@ -364,6 +377,7 @@ module Aws::RolesAnywhere
       attr_accessor managed_policy_arns: ::Array[::String]
       attr_accessor duration_seconds: ::Integer
       attr_accessor accept_role_session_name: bool
+      attr_accessor alias_name: ::String
       SENSITIVE: []
     end
 
@@ -372,6 +386,7 @@ module Aws::RolesAnywhere
       attr_accessor name: ::String
       attr_accessor source: Types::Source
       attr_accessor crl_dp_revocation_enabled: bool
+      attr_accessor alias_name: ::String
       SENSITIVE: []
     end
 

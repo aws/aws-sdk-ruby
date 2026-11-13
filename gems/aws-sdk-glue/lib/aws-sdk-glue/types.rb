@@ -7242,11 +7242,18 @@ module Aws::Glue
     #   the developer guide.
     #
     #   Jobs that are created without specifying a Glue version default to
-    #   Glue 5.1.
+    #   Glue 6.0.
+    #
+    #   Set `GlueVersion` to `auto` to turn on automatic version upgrades
+    #   for the job. For more information, see [Automatic version upgrades
+    #   for Glue jobs][2] in the developer guide. For the job requirements,
+    #   see [Before you start][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
+    #   [2]: https://docs.aws.amazon.com/glue/latest/dg/auto-version-upgrades.html
+    #   [3]: https://docs.aws.amazon.com/glue/latest/dg/auto-version-upgrades.html#auto-version-upgrades-before-you-start
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
@@ -16382,9 +16389,10 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] auto_upgrade_evaluation_summary
-    #   The Amazon S3 URI of the terminal-state evaluation summary,
-    #   available once the analysis reaches a terminal status (`SUCCEEDED`
-    #   or `FAILED`).
+    #   A presigned URL for downloading the auto upgrade evaluation summary
+    #   for the analysis. Available once the analysis reaches a terminal
+    #   status (`SUCCEEDED` or `FAILED`). The URL expires after 1 hour.
+    #   Calling `GetJobUpgradeAnalysis` again returns a new URL.
     #   @return [String]
     #
     # @!attribute [rw] error_message
@@ -16392,10 +16400,11 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] auto_upgrade_eligibility_summary
-    #   The Amazon S3 URI of the consent report summarizing upgrade
-    #   assessment findings. Populated when the analysis reaches
-    #   `WAITING_FOR_CONSENT` and remains available in all subsequent
-    #   states.
+    #   A presigned URL for downloading the auto upgrade eligibility
+    #   summary, which lists the compatibility results for the job.
+    #   Available once the analysis reaches `WAITING_FOR_CONSENT` and in all
+    #   subsequent states. The URL expires after 1 hour. Calling
+    #   `GetJobUpgradeAnalysis` again returns a new URL.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobUpgradeAnalysisResponse AWS API Documentation
@@ -21307,11 +21316,18 @@ module Aws::Glue
     #   the developer guide.
     #
     #   Jobs that are created without specifying a Glue version default to
-    #   Glue 5.1.
+    #   Glue 6.0.
+    #
+    #   Set `GlueVersion` to `auto` to turn on automatic version upgrades
+    #   for the job. For more information, see [Automatic version upgrades
+    #   for Glue jobs][2] in the developer guide. For the job requirements,
+    #   see [Before you start][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
+    #   [2]: https://docs.aws.amazon.com/glue/latest/dg/auto-version-upgrades.html
+    #   [3]: https://docs.aws.amazon.com/glue/latest/dg/auto-version-upgrades.html#auto-version-upgrades-before-you-start
     #   @return [String]
     #
     # @!attribute [rw] code_gen_configuration_nodes
@@ -22151,9 +22167,16 @@ module Aws::Glue
     #   If not provided in the update request, the Glue version retains the
     #   value from the existing job definition.
     #
+    #   Set `GlueVersion` to `auto` to turn on automatic version upgrades
+    #   for the job. For more information, see [Automatic version upgrades
+    #   for Glue jobs][2] in the developer guide. For the job requirements,
+    #   see [Before you start][3].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
+    #   [2]: https://docs.aws.amazon.com/glue/latest/dg/auto-version-upgrades.html
+    #   [3]: https://docs.aws.amazon.com/glue/latest/dg/auto-version-upgrades.html#auto-version-upgrades-before-you-start
     #   @return [String]
     #
     # @!attribute [rw] code_gen_configuration_nodes

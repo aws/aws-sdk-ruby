@@ -55,7 +55,7 @@ module Aws::NetworkFirewall
   autoload :EndpointProvider, 'aws-sdk-networkfirewall/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-networkfirewall/endpoints'
 
-  GEM_VERSION = '1.109.0'
+  GEM_VERSION = '1.110.0'
 
 end
 

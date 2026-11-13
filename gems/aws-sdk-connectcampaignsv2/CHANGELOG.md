@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2026-11-13)
+------------------
+
+* Feature - Adds LastModifiedTime to DescribeCampaign and ListCampaigns responses.
+
 1.43.0 (2026-11-11)
 ------------------
 

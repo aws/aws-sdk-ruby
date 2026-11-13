@@ -14,11 +14,10 @@ module Aws::Scheduler
     # task, and whether a public IP address is to be used. This structure is
     # relevant only for ECS tasks that use the awsvpc network mode.
     #
-    # @!attribute [rw] assign_public_ip
-    #   Specifies whether the task's elastic network interface receives a
-    #   public IP address. You can specify `ENABLED` only when `LaunchType`
-    #   in `EcsParameters` is set to `FARGATE`.
-    #   @return [String]
+    # @!attribute [rw] subnets
+    #   Specifies the subnets associated with the task. These subnets must
+    #   all be in the same VPC. You can specify as many as 16 subnets.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] security_groups
     #   Specifies the security groups associated with the task. These
@@ -27,29 +26,23 @@ module Aws::Scheduler
     #   default security group for the VPC is used.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] subnets
-    #   Specifies the subnets associated with the task. These subnets must
-    #   all be in the same VPC. You can specify as many as 16 subnets.
-    #   @return [Array<String>]
+    # @!attribute [rw] assign_public_ip
+    #   Specifies whether the task's elastic network interface receives a
+    #   public IP address. You can specify `ENABLED` only when `LaunchType`
+    #   in `EcsParameters` is set to `FARGATE`.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/AwsVpcConfiguration AWS API Documentation
     #
     class AwsVpcConfiguration < Struct.new(
-      :assign_public_ip,
+      :subnets,
       :security_groups,
-      :subnets)
+      :assign_public_ip)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The details of a capacity provider strategy.
-    #
-    # @!attribute [rw] base
-    #   The base value designates how many tasks, at a minimum, to run on
-    #   the specified capacity provider. Only one capacity provider in a
-    #   capacity provider strategy can have a base defined. If no value is
-    #   specified, the default value of `0` is used.
-    #   @return [Integer]
     #
     # @!attribute [rw] capacity_provider
     #   The short name of the capacity provider.
@@ -62,12 +55,19 @@ module Aws::Scheduler
     #   base value, if defined, is satisfied.
     #   @return [Integer]
     #
+    # @!attribute [rw] base
+    #   The base value designates how many tasks, at a minimum, to run on
+    #   the specified capacity provider. Only one capacity provider in a
+    #   capacity provider strategy can have a base defined. If no value is
+    #   specified, the default value of `0` is used.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/CapacityProviderStrategyItem AWS API Documentation
     #
     class CapacityProviderStrategyItem < Struct.new(
-      :base,
       :capacity_provider,
-      :weight)
+      :weight,
+      :base)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -85,6 +85,14 @@ module Aws::Scheduler
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the schedule group that you are creating.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags to associate with the schedule group.
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. If you do not specify a client token,
@@ -95,20 +103,12 @@ module Aws::Scheduler
     #   not need to pass this option.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   The name of the schedule group that you are creating.
-    #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   The list of tags to associate with the schedule group.
-    #   @return [Array<Types::Tag>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/CreateScheduleGroupInput AWS API Documentation
     #
     class CreateScheduleGroupInput < Struct.new(
-      :client_token,
       :name,
-      :tags)
+      :tags,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -125,49 +125,13 @@ module Aws::Scheduler
       include Aws::Structure
     end
 
-    # @!attribute [rw] action_after_completion
-    #   Specifies the action that EventBridge Scheduler applies to the
-    #   schedule after the schedule completes invoking the target.
+    # @!attribute [rw] name
+    #   The name of the schedule that you are creating.
     #   @return [String]
-    #
-    # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
-    #   idempotency of the request. If you do not specify a client token,
-    #   EventBridge Scheduler uses a randomly generated token for the
-    #   request to ensure idempotency.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   The description you specify for the schedule.
-    #   @return [String]
-    #
-    # @!attribute [rw] end_date
-    #   The date, in UTC, before which the schedule can invoke its target.
-    #   Depending on the schedule's recurrence expression, invocations
-    #   might stop on, or before, the `EndDate` you specify. EventBridge
-    #   Scheduler ignores `EndDate` for one-time schedules.
-    #   @return [Time]
-    #
-    # @!attribute [rw] flexible_time_window
-    #   Allows you to configure a time window during which EventBridge
-    #   Scheduler invokes the schedule.
-    #   @return [Types::FlexibleTimeWindow]
     #
     # @!attribute [rw] group_name
     #   The name of the schedule group to associate with this schedule. If
     #   you omit this, the default schedule group is used.
-    #   @return [String]
-    #
-    # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) for the customer managed KMS key that
-    #   EventBridge Scheduler will use to encrypt and decrypt your data.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of the schedule that you are creating.
     #   @return [String]
     #
     # @!attribute [rw] schedule_expression
@@ -204,10 +168,6 @@ module Aws::Scheduler
     #   [1]: https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html
     #   @return [String]
     #
-    # @!attribute [rw] schedule_expression_timezone
-    #   The timezone in which the scheduling expression is evaluated.
-    #   @return [String]
-    #
     # @!attribute [rw] start_date
     #   The date, in UTC, after which the schedule can begin invoking its
     #   target. Depending on the schedule's recurrence expression,
@@ -215,30 +175,70 @@ module Aws::Scheduler
     #   EventBridge Scheduler ignores `StartDate` for one-time schedules.
     #   @return [Time]
     #
+    # @!attribute [rw] end_date
+    #   The date, in UTC, before which the schedule can invoke its target.
+    #   Depending on the schedule's recurrence expression, invocations
+    #   might stop on, or before, the `EndDate` you specify. EventBridge
+    #   Scheduler ignores `EndDate` for one-time schedules.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description you specify for the schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_expression_timezone
+    #   The timezone in which the scheduling expression is evaluated.
+    #   @return [String]
+    #
     # @!attribute [rw] state
     #   Specifies whether the schedule is enabled or disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) for the customer managed KMS key that
+    #   EventBridge Scheduler will use to encrypt and decrypt your data.
     #   @return [String]
     #
     # @!attribute [rw] target
     #   The schedule's target.
     #   @return [Types::Target]
     #
+    # @!attribute [rw] flexible_time_window
+    #   Allows you to configure a time window during which EventBridge
+    #   Scheduler invokes the schedule.
+    #   @return [Types::FlexibleTimeWindow]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. If you do not specify a client token,
+    #   EventBridge Scheduler uses a randomly generated token for the
+    #   request to ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_after_completion
+    #   Specifies the action that EventBridge Scheduler applies to the
+    #   schedule after the schedule completes invoking the target.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/CreateScheduleInput AWS API Documentation
     #
     class CreateScheduleInput < Struct.new(
-      :action_after_completion,
-      :client_token,
-      :description,
-      :end_date,
-      :flexible_time_window,
-      :group_name,
-      :kms_key_arn,
       :name,
+      :group_name,
       :schedule_expression,
-      :schedule_expression_timezone,
       :start_date,
+      :end_date,
+      :description,
+      :schedule_expression_timezone,
       :state,
-      :target)
+      :kms_key_arn,
+      :target,
+      :flexible_time_window,
+      :client_token,
+      :action_after_completion)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -273,6 +273,10 @@ module Aws::Scheduler
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the schedule group to delete.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. If you do not specify a client token,
@@ -283,15 +287,11 @@ module Aws::Scheduler
     #   not need to pass this option.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   The name of the schedule group to delete.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/DeleteScheduleGroupInput AWS API Documentation
     #
     class DeleteScheduleGroupInput < Struct.new(
-      :client_token,
-      :name)
+      :name,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -300,6 +300,15 @@ module Aws::Scheduler
     #
     class DeleteScheduleGroupOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] name
+    #   The name of the schedule to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the schedule group associated with this schedule. If you
+    #   omit this, the default schedule group is used.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. If you do not specify a client token,
@@ -310,21 +319,12 @@ module Aws::Scheduler
     #   not need to pass this option.
     #   @return [String]
     #
-    # @!attribute [rw] group_name
-    #   The name of the schedule group associated with this schedule. If you
-    #   omit this, the default schedule group is used.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of the schedule to delete.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/DeleteScheduleInput AWS API Documentation
     #
     class DeleteScheduleInput < Struct.new(
-      :client_token,
+      :name,
       :group_name,
-      :name)
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -339,6 +339,43 @@ module Aws::Scheduler
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html
+    #
+    # @!attribute [rw] task_definition_arn
+    #   The Amazon Resource Name (ARN) of the task definition to use if the
+    #   event target is an Amazon ECS task.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_count
+    #   The number of tasks to create based on `TaskDefinition`. The default
+    #   is `1`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] launch_type
+    #   Specifies the launch type on which your task is running. The launch
+    #   type that you specify here must match one of the launch type
+    #   (compatibilities) of the target task. The `FARGATE` value is
+    #   supported only in the Regions where Fargate with Amazon ECS is
+    #   supported. For more information, see [Amazon Web Services Fargate on
+    #   Amazon ECS][1] in the *Amazon ECS Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
+    #   @return [String]
+    #
+    # @!attribute [rw] network_configuration
+    #   This structure specifies the network configuration for an ECS task.
+    #   @return [Types::NetworkConfiguration]
+    #
+    # @!attribute [rw] platform_version
+    #   Specifies the platform version for the task. Specify only the
+    #   numeric portion of the platform version, such as `1.1.0`.
+    #   @return [String]
+    #
+    # @!attribute [rw] group
+    #   Specifies an ECS task group for the task. The maximum length is 255
+    #   characters.
+    #   @return [String]
     #
     # @!attribute [rw] capacity_provider_strategy
     #   The capacity provider strategy to use for the task.
@@ -360,28 +397,6 @@ module Aws::Scheduler
     #   functionality on all containers in the task.
     #   @return [Boolean]
     #
-    # @!attribute [rw] group
-    #   Specifies an ECS task group for the task. The maximum length is 255
-    #   characters.
-    #   @return [String]
-    #
-    # @!attribute [rw] launch_type
-    #   Specifies the launch type on which your task is running. The launch
-    #   type that you specify here must match one of the launch type
-    #   (compatibilities) of the target task. The `FARGATE` value is
-    #   supported only in the Regions where Fargate with Amazon ECS is
-    #   supported. For more information, see [AWS Fargate on Amazon ECS][1]
-    #   in the *Amazon ECS Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
-    #   @return [String]
-    #
-    # @!attribute [rw] network_configuration
-    #   This structure specifies the network configuration for an ECS task.
-    #   @return [Types::NetworkConfiguration]
-    #
     # @!attribute [rw] placement_constraints
     #   An array of placement constraint objects to use for the task. You
     #   can specify up to 10 constraints per task (including constraints in
@@ -391,11 +406,6 @@ module Aws::Scheduler
     # @!attribute [rw] placement_strategy
     #   The task placement strategy for a task or service.
     #   @return [Array<Types::PlacementStrategy>]
-    #
-    # @!attribute [rw] platform_version
-    #   Specifies the platform version for the task. Specify only the
-    #   numeric portion of the platform version, such as `1.1.0`.
-    #   @return [String]
     #
     # @!attribute [rw] propagate_tags
     #   Specifies whether to propagate the tags from the task definition to
@@ -424,33 +434,23 @@ module Aws::Scheduler
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html
     #   @return [Array<Hash<String,String>>]
     #
-    # @!attribute [rw] task_count
-    #   The number of tasks to create based on `TaskDefinition`. The default
-    #   is `1`.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] task_definition_arn
-    #   The Amazon Resource Name (ARN) of the task definition to use if the
-    #   event target is an Amazon ECS task.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/EcsParameters AWS API Documentation
     #
     class EcsParameters < Struct.new(
+      :task_definition_arn,
+      :task_count,
+      :launch_type,
+      :network_configuration,
+      :platform_version,
+      :group,
       :capacity_provider_strategy,
       :enable_ecs_managed_tags,
       :enable_execute_command,
-      :group,
-      :launch_type,
-      :network_configuration,
       :placement_constraints,
       :placement_strategy,
-      :platform_version,
       :propagate_tags,
       :reference_id,
-      :tags,
-      :task_count,
-      :task_definition_arn)
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -480,23 +480,69 @@ module Aws::Scheduler
       include Aws::Structure
     end
 
+    # The templated target type for the EventBridge event bus v2 [
+    # `PutEvents` ][1] API operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eventbridgev2/latest/APIReference/API_PutEvents.html
+    #
+    # @!attribute [rw] detail_type
+    #   A free-form string, with a maximum of 128 characters, used to decide
+    #   what fields to expect in the event detail.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source of the event. The source can't start with the `aws.`
+    #   prefix.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/EventBridgePutEventsV2Parameters AWS API Documentation
+    #
+    class EventBridgePutEventsV2Parameters < Struct.new(
+      :detail_type,
+      :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The templated target type for the EventBridge event bus v2 [
+    # `PutRawEvents` ][1] API operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eventbridgev2/latest/APIReference/API_PutRawEvents.html
+    #
+    # @!attribute [rw] metadata
+    #   Optional metadata key-value pairs you define. Keys must be 1-128
+    #   characters and must not contain "/".
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/EventBridgePutRawEventsParameters AWS API Documentation
+    #
+    class EventBridgePutRawEventsParameters < Struct.new(
+      :metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Allows you to configure a time window during which EventBridge
     # Scheduler invokes the schedule.
-    #
-    # @!attribute [rw] maximum_window_in_minutes
-    #   The maximum time window during which a schedule can be invoked.
-    #   @return [Integer]
     #
     # @!attribute [rw] mode
     #   Determines whether the schedule is invoked within a flexible time
     #   window.
     #   @return [String]
     #
+    # @!attribute [rw] maximum_window_in_minutes
+    #   The maximum time window during which a schedule can be invoked.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/FlexibleTimeWindow AWS API Documentation
     #
     class FlexibleTimeWindow < Struct.new(
-      :maximum_window_in_minutes,
-      :mode)
+      :mode,
+      :maximum_window_in_minutes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -517,14 +563,6 @@ module Aws::Scheduler
     #   The Amazon Resource Name (ARN) of the schedule group.
     #   @return [String]
     #
-    # @!attribute [rw] creation_date
-    #   The time at which the schedule group was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] last_modification_date
-    #   The time at which the schedule group was last modified.
-    #   @return [Time]
-    #
     # @!attribute [rw] name
     #   The name of the schedule group.
     #   @return [String]
@@ -533,78 +571,52 @@ module Aws::Scheduler
     #   Specifies the state of the schedule group.
     #   @return [String]
     #
+    # @!attribute [rw] creation_date
+    #   The time at which the schedule group was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modification_date
+    #   The time at which the schedule group was last modified.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/GetScheduleGroupOutput AWS API Documentation
     #
     class GetScheduleGroupOutput < Struct.new(
       :arn,
-      :creation_date,
-      :last_modification_date,
       :name,
-      :state)
+      :state,
+      :creation_date,
+      :last_modification_date)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the schedule to retrieve.
+    #   @return [String]
+    #
     # @!attribute [rw] group_name
     #   The name of the schedule group associated with this schedule. If you
     #   omit this, EventBridge Scheduler assumes that the schedule is
     #   associated with the default group.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   The name of the schedule to retrieve.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/GetScheduleInput AWS API Documentation
     #
     class GetScheduleInput < Struct.new(
-      :group_name,
-      :name)
+      :name,
+      :group_name)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] action_after_completion
-    #   Indicates the action that EventBridge Scheduler applies to the
-    #   schedule after the schedule completes invoking the target.
-    #   @return [String]
-    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the schedule.
     #   @return [String]
     #
-    # @!attribute [rw] creation_date
-    #   The time at which the schedule was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] description
-    #   The description of the schedule.
-    #   @return [String]
-    #
-    # @!attribute [rw] end_date
-    #   The date, in UTC, before which the schedule can invoke its target.
-    #   Depending on the schedule's recurrence expression, invocations
-    #   might stop on, or before, the `EndDate` you specify. EventBridge
-    #   Scheduler ignores `EndDate` for one-time schedules.
-    #   @return [Time]
-    #
-    # @!attribute [rw] flexible_time_window
-    #   Allows you to configure a time window during which EventBridge
-    #   Scheduler invokes the schedule.
-    #   @return [Types::FlexibleTimeWindow]
-    #
     # @!attribute [rw] group_name
     #   The name of the schedule group associated with this schedule.
     #   @return [String]
-    #
-    # @!attribute [rw] kms_key_arn
-    #   The ARN for a customer managed KMS Key that is be used to encrypt
-    #   and decrypt your data.
-    #   @return [String]
-    #
-    # @!attribute [rw] last_modification_date
-    #   The time at which the schedule was last modified.
-    #   @return [Time]
     #
     # @!attribute [rw] name
     #   The name of the schedule.
@@ -644,10 +656,6 @@ module Aws::Scheduler
     #   [1]: https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html
     #   @return [String]
     #
-    # @!attribute [rw] schedule_expression_timezone
-    #   The timezone in which the scheduling expression is evaluated.
-    #   @return [String]
-    #
     # @!attribute [rw] start_date
     #   The date, in UTC, after which the schedule can begin invoking its
     #   target. Depending on the schedule's recurrence expression,
@@ -655,32 +663,70 @@ module Aws::Scheduler
     #   EventBridge Scheduler ignores `StartDate` for one-time schedules.
     #   @return [Time]
     #
+    # @!attribute [rw] end_date
+    #   The date, in UTC, before which the schedule can invoke its target.
+    #   Depending on the schedule's recurrence expression, invocations
+    #   might stop on, or before, the `EndDate` you specify. EventBridge
+    #   Scheduler ignores `EndDate` for one-time schedules.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_expression_timezone
+    #   The timezone in which the scheduling expression is evaluated.
+    #   @return [String]
+    #
     # @!attribute [rw] state
     #   Specifies whether the schedule is enabled or disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The time at which the schedule was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modification_date
+    #   The time at which the schedule was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN for a customer managed KMS Key that is be used to encrypt
+    #   and decrypt your data.
     #   @return [String]
     #
     # @!attribute [rw] target
     #   The schedule target.
     #   @return [Types::Target]
     #
+    # @!attribute [rw] flexible_time_window
+    #   Allows you to configure a time window during which EventBridge
+    #   Scheduler invokes the schedule.
+    #   @return [Types::FlexibleTimeWindow]
+    #
+    # @!attribute [rw] action_after_completion
+    #   Indicates the action that EventBridge Scheduler applies to the
+    #   schedule after the schedule completes invoking the target.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/GetScheduleOutput AWS API Documentation
     #
     class GetScheduleOutput < Struct.new(
-      :action_after_completion,
       :arn,
-      :creation_date,
-      :description,
-      :end_date,
-      :flexible_time_window,
       :group_name,
-      :kms_key_arn,
-      :last_modification_date,
       :name,
       :schedule_expression,
-      :schedule_expression_timezone,
       :start_date,
+      :end_date,
+      :description,
+      :schedule_expression_timezone,
       :state,
-      :target)
+      :creation_date,
+      :last_modification_date,
+      :kms_key_arn,
+      :target,
+      :flexible_time_window,
+      :action_after_completion)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -698,8 +744,12 @@ module Aws::Scheduler
       include Aws::Structure
     end
 
-    # The templated target type for the Amazon Kinesis [ `PutRecord`
-    # ](kinesis/latest/APIReference/API_PutRecord.html) API operation.
+    # The templated target type for the Amazon Kinesis [ `PutRecord` ][1]
+    # API operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesis/latest/APIReference/API_PutRecord.html
     #
     # @!attribute [rw] partition_key
     #   Specifies the shard to which EventBridge Scheduler sends the event.
@@ -719,12 +769,6 @@ module Aws::Scheduler
       include Aws::Structure
     end
 
-    # @!attribute [rw] max_results
-    #   If specified, limits the number of results returned by this
-    #   operation. The operation also returns a `NextToken` which you can
-    #   use in a subsequent operation to retrieve the next set of results.
-    #   @return [Integer]
-    #
     # @!attribute [rw] name_prefix
     #   The name prefix that you can use to return a filtered list of your
     #   schedule groups.
@@ -735,12 +779,18 @@ module Aws::Scheduler
     #   results.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   If specified, limits the number of results returned by this
+    #   operation. The operation also returns a `NextToken` which you can
+    #   use in a subsequent operation to retrieve the next set of results.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/ListScheduleGroupsInput AWS API Documentation
     #
     class ListScheduleGroupsInput < Struct.new(
-      :max_results,
       :name_prefix,
-      :next_token)
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -768,19 +818,8 @@ module Aws::Scheduler
     #   group matches the given filter.
     #   @return [String]
     #
-    # @!attribute [rw] max_results
-    #   If specified, limits the number of results returned by this
-    #   operation. The operation also returns a `NextToken` which you can
-    #   use in a subsequent operation to retrieve the next set of results.
-    #   @return [Integer]
-    #
     # @!attribute [rw] name_prefix
     #   Schedule name prefix to return the filtered list of resources.
-    #   @return [String]
-    #
-    # @!attribute [rw] next_token
-    #   The token returned by a previous call to retrieve the next set of
-    #   results.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -788,14 +827,25 @@ module Aws::Scheduler
     #   the given filter.
     #   @return [String]
     #
+    # @!attribute [rw] next_token
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   If specified, limits the number of results returned by this
+    #   operation. The operation also returns a `NextToken` which you can
+    #   use in a subsequent operation to retrieve the next set of results.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/ListSchedulesInput AWS API Documentation
     #
     class ListSchedulesInput < Struct.new(
       :group_name,
-      :max_results,
       :name_prefix,
+      :state,
       :next_token,
-      :state)
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -861,6 +911,13 @@ module Aws::Scheduler
 
     # An object representing a constraint on task placement.
     #
+    # @!attribute [rw] type
+    #   The type of constraint. Use `distinctInstance` to ensure that each
+    #   task in a particular group is running on a different container
+    #   instance. Use `memberOf` to restrict the selection to a group of
+    #   valid candidates.
+    #   @return [String]
+    #
     # @!attribute [rw] expression
     #   A cluster query language expression to apply to the constraint. You
     #   cannot specify an expression if the constraint type is
@@ -869,36 +926,19 @@ module Aws::Scheduler
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/latest/developerguide/cluster-query-language.html
-    #   @return [String]
-    #
-    # @!attribute [rw] type
-    #   The type of constraint. Use `distinctInstance` to ensure that each
-    #   task in a particular group is running on a different container
-    #   instance. Use `memberOf` to restrict the selection to a group of
-    #   valid candidates.
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/PlacementConstraint AWS API Documentation
     #
     class PlacementConstraint < Struct.new(
-      :expression,
-      :type)
+      :type,
+      :expression)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The task placement strategy for a task or service.
-    #
-    # @!attribute [rw] field
-    #   The field to apply the placement strategy against. For the spread
-    #   placement strategy, valid values are `instanceId` (or `instanceId`,
-    #   which has the same effect), or any platform or custom attribute that
-    #   is applied to a container instance, such as
-    #   `attribute:ecs.availability-zone`. For the binpack placement
-    #   strategy, valid values are `cpu` and `memory`. For the random
-    #   placement strategy, this field is not used.
-    #   @return [String]
     #
     # @!attribute [rw] type
     #   The type of placement strategy. The random placement strategy
@@ -911,11 +951,21 @@ module Aws::Scheduler
     #   least amount of remaining memory (but still enough to run the task).
     #   @return [String]
     #
+    # @!attribute [rw] field
+    #   The field to apply the placement strategy against. For the spread
+    #   placement strategy, valid values are `instanceId` (or `instanceId`,
+    #   which has the same effect), or any platform or custom attribute that
+    #   is applied to a container instance, such as
+    #   `attribute:ecs.availability-zone`. For the binpack placement
+    #   strategy, valid values are `cpu` and `memory`. For the random
+    #   placement strategy, this field is not used.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/PlacementStrategy AWS API Documentation
     #
     class PlacementStrategy < Struct.new(
-      :field,
-      :type)
+      :type,
+      :field)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1007,14 +1057,6 @@ module Aws::Scheduler
     #   The Amazon Resource Name (ARN) of the schedule group.
     #   @return [String]
     #
-    # @!attribute [rw] creation_date
-    #   The time at which the schedule group was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] last_modification_date
-    #   The time at which the schedule group was last modified.
-    #   @return [Time]
-    #
     # @!attribute [rw] name
     #   The name of the schedule group.
     #   @return [String]
@@ -1023,14 +1065,22 @@ module Aws::Scheduler
     #   Specifies the state of the schedule group.
     #   @return [String]
     #
+    # @!attribute [rw] creation_date
+    #   The time at which the schedule group was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modification_date
+    #   The time at which the schedule group was last modified.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/ScheduleGroupSummary AWS API Documentation
     #
     class ScheduleGroupSummary < Struct.new(
       :arn,
-      :creation_date,
-      :last_modification_date,
       :name,
-      :state)
+      :state,
+      :creation_date,
+      :last_modification_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1041,25 +1091,25 @@ module Aws::Scheduler
     #   The Amazon Resource Name (ARN) of the schedule.
     #   @return [String]
     #
-    # @!attribute [rw] creation_date
-    #   The time at which the schedule was created.
-    #   @return [Time]
+    # @!attribute [rw] name
+    #   The name of the schedule.
+    #   @return [String]
     #
     # @!attribute [rw] group_name
     #   The name of the schedule group associated with this schedule.
     #   @return [String]
     #
-    # @!attribute [rw] last_modification_date
-    #   The time at which the schedule was last modified.
-    #   @return [Time]
-    #
-    # @!attribute [rw] name
-    #   The name of the schedule.
-    #   @return [String]
-    #
     # @!attribute [rw] state
     #   Specifies whether the schedule is enabled or disabled.
     #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The time at which the schedule was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modification_date
+    #   The time at which the schedule was last modified.
+    #   @return [Time]
     #
     # @!attribute [rw] target
     #   The schedule's target details.
@@ -1069,11 +1119,11 @@ module Aws::Scheduler
     #
     class ScheduleSummary < Struct.new(
       :arn,
-      :creation_date,
-      :group_name,
-      :last_modification_date,
       :name,
+      :group_name,
       :state,
+      :creation_date,
+      :last_modification_date,
       :target)
       SENSITIVE = []
       include Aws::Structure
@@ -1167,12 +1217,34 @@ module Aws::Scheduler
     #   The Amazon Resource Name (ARN) of the target.
     #   @return [String]
     #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that EventBridge
+    #   Scheduler will use for this target when the schedule is invoked.
+    #   @return [String]
+    #
     # @!attribute [rw] dead_letter_config
     #   An object that contains information about an Amazon SQS queue that
     #   EventBridge Scheduler uses as a dead-letter queue for your schedule.
     #   If specified, EventBridge Scheduler delivers failed events that
     #   could not be successfully delivered to a target to the queue.
     #   @return [Types::DeadLetterConfig]
+    #
+    # @!attribute [rw] retry_policy
+    #   A `RetryPolicy` object that includes information about the retry
+    #   policy settings, including the maximum age of an event, and the
+    #   maximum number of times EventBridge Scheduler will try to deliver
+    #   the event to a target.
+    #   @return [Types::RetryPolicy]
+    #
+    # @!attribute [rw] input
+    #   The text, or well-formed JSON, passed to the target. If you are
+    #   configuring a templated Lambda, Amazon Web Services Step Functions,
+    #   or Amazon EventBridge target, the input must be a well-formed JSON.
+    #   For all other target types, a JSON is not required. If you do not
+    #   specify anything for this field, EventBridge Scheduler delivers a
+    #   default notification to the target. The maximum size of the `Input`
+    #   field is 256 KB.
+    #   @return [String]
     #
     # @!attribute [rw] ecs_parameters
     #   The templated target type for the Amazon ECS [ `RunTask` ][1] API
@@ -1192,31 +1264,32 @@ module Aws::Scheduler
     #   [1]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html
     #   @return [Types::EventBridgeParameters]
     #
-    # @!attribute [rw] input
-    #   The text, or well-formed JSON, passed to the target. If you are
-    #   configuring a templated Lambda, AWS Step Functions, or Amazon
-    #   EventBridge target, the input must be a well-formed JSON. For all
-    #   other target types, a JSON is not required. If you do not specify
-    #   anything for this field, EventBridge Scheduler delivers a default
-    #   notification to the target.
-    #   @return [String]
+    # @!attribute [rw] event_bridge_put_events_v2_parameters
+    #   The templated target type for the EventBridge event bus v2 [
+    #   `PutEvents` ][1] API operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridgev2/latest/APIReference/API_PutEvents.html
+    #   @return [Types::EventBridgePutEventsV2Parameters]
+    #
+    # @!attribute [rw] event_bridge_put_raw_events_parameters
+    #   The templated target type for the EventBridge event bus v2 [
+    #   `PutRawEvents` ][1] API operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridgev2/latest/APIReference/API_PutRawEvents.html
+    #   @return [Types::EventBridgePutRawEventsParameters]
     #
     # @!attribute [rw] kinesis_parameters
-    #   The templated target type for the Amazon Kinesis [ `PutRecord`
-    #   ](kinesis/latest/APIReference/API_PutRecord.html) API operation.
+    #   The templated target type for the Amazon Kinesis [ `PutRecord` ][1]
+    #   API operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesis/latest/APIReference/API_PutRecord.html
     #   @return [Types::KinesisParameters]
-    #
-    # @!attribute [rw] retry_policy
-    #   A `RetryPolicy` object that includes information about the retry
-    #   policy settings, including the maximum age of an event, and the
-    #   maximum number of times EventBridge Scheduler will try to deliver
-    #   the event to a target.
-    #   @return [Types::RetryPolicy]
-    #
-    # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role that EventBridge
-    #   Scheduler will use for this target when the schedule is invoked.
-    #   @return [String]
     #
     # @!attribute [rw] sage_maker_pipeline_parameters
     #   The templated target type for the Amazon SageMaker [
@@ -1245,13 +1318,15 @@ module Aws::Scheduler
     #
     class Target < Struct.new(
       :arn,
+      :role_arn,
       :dead_letter_config,
+      :retry_policy,
+      :input,
       :ecs_parameters,
       :event_bridge_parameters,
-      :input,
+      :event_bridge_put_events_v2_parameters,
+      :event_bridge_put_raw_events_parameters,
       :kinesis_parameters,
-      :retry_policy,
-      :role_arn,
       :sage_maker_pipeline_parameters,
       :sqs_parameters)
       SENSITIVE = []
@@ -1307,36 +1382,9 @@ module Aws::Scheduler
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
-    # @!attribute [rw] action_after_completion
-    #   Specifies the action that EventBridge Scheduler applies to the
-    #   schedule after the schedule completes invoking the target.
+    # @!attribute [rw] name
+    #   The name of the schedule that you are updating.
     #   @return [String]
-    #
-    # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
-    #   idempotency of the request. If you do not specify a client token,
-    #   EventBridge Scheduler uses a randomly generated token for the
-    #   request to ensure idempotency.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   The description you specify for the schedule.
-    #   @return [String]
-    #
-    # @!attribute [rw] end_date
-    #   The date, in UTC, before which the schedule can invoke its target.
-    #   Depending on the schedule's recurrence expression, invocations
-    #   might stop on, or before, the `EndDate` you specify. EventBridge
-    #   Scheduler ignores `EndDate` for one-time schedules.
-    #   @return [Time]
-    #
-    # @!attribute [rw] flexible_time_window
-    #   Allows you to configure a time window during which EventBridge
-    #   Scheduler invokes the schedule.
-    #   @return [Types::FlexibleTimeWindow]
     #
     # @!attribute [rw] group_name
     #   The name of the schedule group with which the schedule is
@@ -1344,15 +1392,6 @@ module Aws::Scheduler
     #   Scheduler to find the schedule you want to update. If you omit this
     #   value, EventBridge Scheduler assumes the group is associated to the
     #   default group.
-    #   @return [String]
-    #
-    # @!attribute [rw] kms_key_arn
-    #   The ARN for the customer managed KMS key that that you want
-    #   EventBridge Scheduler to use to encrypt and decrypt your data.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of the schedule that you are updating.
     #   @return [String]
     #
     # @!attribute [rw] schedule_expression
@@ -1389,10 +1428,6 @@ module Aws::Scheduler
     #   [1]: https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html
     #   @return [String]
     #
-    # @!attribute [rw] schedule_expression_timezone
-    #   The timezone in which the scheduling expression is evaluated.
-    #   @return [String]
-    #
     # @!attribute [rw] start_date
     #   The date, in UTC, after which the schedule can begin invoking its
     #   target. Depending on the schedule's recurrence expression,
@@ -1400,8 +1435,28 @@ module Aws::Scheduler
     #   EventBridge Scheduler ignores `StartDate` for one-time schedules.
     #   @return [Time]
     #
+    # @!attribute [rw] end_date
+    #   The date, in UTC, before which the schedule can invoke its target.
+    #   Depending on the schedule's recurrence expression, invocations
+    #   might stop on, or before, the `EndDate` you specify. EventBridge
+    #   Scheduler ignores `EndDate` for one-time schedules.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description you specify for the schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_expression_timezone
+    #   The timezone in which the scheduling expression is evaluated.
+    #   @return [String]
+    #
     # @!attribute [rw] state
     #   Specifies whether the schedule is enabled or disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN for the customer managed KMS key that that you want
+    #   EventBridge Scheduler to use to encrypt and decrypt your data.
     #   @return [String]
     #
     # @!attribute [rw] target
@@ -1409,22 +1464,42 @@ module Aws::Scheduler
     #   that your schedule invokes.
     #   @return [Types::Target]
     #
+    # @!attribute [rw] flexible_time_window
+    #   Allows you to configure a time window during which EventBridge
+    #   Scheduler invokes the schedule.
+    #   @return [Types::FlexibleTimeWindow]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. If you do not specify a client token,
+    #   EventBridge Scheduler uses a randomly generated token for the
+    #   request to ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_after_completion
+    #   Specifies the action that EventBridge Scheduler applies to the
+    #   schedule after the schedule completes invoking the target.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/UpdateScheduleInput AWS API Documentation
     #
     class UpdateScheduleInput < Struct.new(
-      :action_after_completion,
-      :client_token,
-      :description,
-      :end_date,
-      :flexible_time_window,
-      :group_name,
-      :kms_key_arn,
       :name,
+      :group_name,
       :schedule_expression,
-      :schedule_expression_timezone,
       :start_date,
+      :end_date,
+      :description,
+      :schedule_expression_timezone,
       :state,
-      :target)
+      :kms_key_arn,
+      :target,
+      :flexible_time_window,
+      :client_token,
+      :action_after_completion)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1441,8 +1516,8 @@ module Aws::Scheduler
       include Aws::Structure
     end
 
-    # The input fails to satisfy the constraints specified by an AWS
-    # service.
+    # The input fails to satisfy the constraints specified by an Amazon Web
+    # Services service.
     #
     # @!attribute [rw] message
     #   @return [String]

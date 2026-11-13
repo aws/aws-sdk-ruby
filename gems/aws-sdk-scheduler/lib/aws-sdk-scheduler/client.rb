@@ -484,42 +484,12 @@ module Aws::Scheduler
 
     # Creates the specified schedule.
     #
-    # @option params [String] :action_after_completion
-    #   Specifies the action that EventBridge Scheduler applies to the
-    #   schedule after the schedule completes invoking the target.
-    #
-    # @option params [String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
-    #   idempotency of the request. If you do not specify a client token,
-    #   EventBridge Scheduler uses a randomly generated token for the request
-    #   to ensure idempotency.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
-    # @option params [String] :description
-    #   The description you specify for the schedule.
-    #
-    # @option params [Time,DateTime,Date,Integer,String] :end_date
-    #   The date, in UTC, before which the schedule can invoke its target.
-    #   Depending on the schedule's recurrence expression, invocations might
-    #   stop on, or before, the `EndDate` you specify. EventBridge Scheduler
-    #   ignores `EndDate` for one-time schedules.
-    #
-    # @option params [required, Types::FlexibleTimeWindow] :flexible_time_window
-    #   Allows you to configure a time window during which EventBridge
-    #   Scheduler invokes the schedule.
+    # @option params [required, String] :name
+    #   The name of the schedule that you are creating.
     #
     # @option params [String] :group_name
     #   The name of the schedule group to associate with this schedule. If you
     #   omit this, the default schedule group is used.
-    #
-    # @option params [String] :kms_key_arn
-    #   The Amazon Resource Name (ARN) for the customer managed KMS key that
-    #   EventBridge Scheduler will use to encrypt and decrypt your data.
-    #
-    # @option params [required, String] :name
-    #   The name of the schedule that you are creating.
     #
     # @option params [required, String] :schedule_expression
     #   The expression that defines when the schedule runs. The following
@@ -554,20 +524,50 @@ module Aws::Scheduler
     #
     #   [1]: https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html
     #
-    # @option params [String] :schedule_expression_timezone
-    #   The timezone in which the scheduling expression is evaluated.
-    #
     # @option params [Time,DateTime,Date,Integer,String] :start_date
     #   The date, in UTC, after which the schedule can begin invoking its
     #   target. Depending on the schedule's recurrence expression,
     #   invocations might occur on, or after, the `StartDate` you specify.
     #   EventBridge Scheduler ignores `StartDate` for one-time schedules.
     #
+    # @option params [Time,DateTime,Date,Integer,String] :end_date
+    #   The date, in UTC, before which the schedule can invoke its target.
+    #   Depending on the schedule's recurrence expression, invocations might
+    #   stop on, or before, the `EndDate` you specify. EventBridge Scheduler
+    #   ignores `EndDate` for one-time schedules.
+    #
+    # @option params [String] :description
+    #   The description you specify for the schedule.
+    #
+    # @option params [String] :schedule_expression_timezone
+    #   The timezone in which the scheduling expression is evaluated.
+    #
     # @option params [String] :state
     #   Specifies whether the schedule is enabled or disabled.
     #
+    # @option params [String] :kms_key_arn
+    #   The Amazon Resource Name (ARN) for the customer managed KMS key that
+    #   EventBridge Scheduler will use to encrypt and decrypt your data.
+    #
     # @option params [required, Types::Target] :target
     #   The schedule's target.
+    #
+    # @option params [required, Types::FlexibleTimeWindow] :flexible_time_window
+    #   Allows you to configure a time window during which EventBridge
+    #   Scheduler invokes the schedule.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. If you do not specify a client token,
+    #   EventBridge Scheduler uses a randomly generated token for the request
+    #   to ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :action_after_completion
+    #   Specifies the action that EventBridge Scheduler applies to the
+    #   schedule after the schedule completes invoking the target.
     #
     # @return [Types::CreateScheduleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -576,58 +576,60 @@ module Aws::Scheduler
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_schedule({
-    #     action_after_completion: "NONE", # accepts NONE, DELETE
-    #     client_token: "ClientToken",
-    #     description: "Description",
-    #     end_date: Time.now,
-    #     flexible_time_window: { # required
-    #       maximum_window_in_minutes: 1,
-    #       mode: "OFF", # required, accepts OFF, FLEXIBLE
-    #     },
-    #     group_name: "ScheduleGroupName",
-    #     kms_key_arn: "KmsKeyArn",
     #     name: "Name", # required
+    #     group_name: "ScheduleGroupName",
     #     schedule_expression: "ScheduleExpression", # required
-    #     schedule_expression_timezone: "ScheduleExpressionTimezone",
     #     start_date: Time.now,
+    #     end_date: Time.now,
+    #     description: "Description",
+    #     schedule_expression_timezone: "ScheduleExpressionTimezone",
     #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #     kms_key_arn: "KmsKeyArn",
     #     target: { # required
     #       arn: "TargetArn", # required
+    #       role_arn: "RoleArn", # required
     #       dead_letter_config: {
     #         arn: "DeadLetterConfigArnString",
     #       },
+    #       retry_policy: {
+    #         maximum_event_age_in_seconds: 1,
+    #         maximum_retry_attempts: 1,
+    #       },
+    #       input: "TargetInput",
     #       ecs_parameters: {
+    #         task_definition_arn: "TaskDefinitionArn", # required
+    #         task_count: 1,
+    #         launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
+    #         network_configuration: {
+    #           awsvpc_configuration: {
+    #             subnets: ["Subnet"], # required
+    #             security_groups: ["SecurityGroup"],
+    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         },
+    #         platform_version: "PlatformVersion",
+    #         group: "Group",
     #         capacity_provider_strategy: [
     #           {
-    #             base: 1,
     #             capacity_provider: "CapacityProvider", # required
     #             weight: 1,
+    #             base: 1,
     #           },
     #         ],
     #         enable_ecs_managed_tags: false,
     #         enable_execute_command: false,
-    #         group: "Group",
-    #         launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
-    #         network_configuration: {
-    #           awsvpc_configuration: {
-    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #             security_groups: ["SecurityGroup"],
-    #             subnets: ["Subnet"], # required
-    #           },
-    #         },
     #         placement_constraints: [
     #           {
-    #             expression: "PlacementConstraintExpression",
     #             type: "distinctInstance", # accepts distinctInstance, memberOf
+    #             expression: "PlacementConstraintExpression",
     #           },
     #         ],
     #         placement_strategy: [
     #           {
-    #             field: "PlacementStrategyField",
     #             type: "random", # accepts random, spread, binpack
+    #             field: "PlacementStrategyField",
     #           },
     #         ],
-    #         platform_version: "PlatformVersion",
     #         propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION
     #         reference_id: "ReferenceId",
     #         tags: [
@@ -635,22 +637,23 @@ module Aws::Scheduler
     #             "TagKey" => "TagValue",
     #           },
     #         ],
-    #         task_count: 1,
-    #         task_definition_arn: "TaskDefinitionArn", # required
     #       },
     #       event_bridge_parameters: {
     #         detail_type: "DetailType", # required
     #         source: "Source", # required
     #       },
-    #       input: "TargetInput",
+    #       event_bridge_put_events_v2_parameters: {
+    #         detail_type: "DetailType", # required
+    #         source: "Source", # required
+    #       },
+    #       event_bridge_put_raw_events_parameters: {
+    #         metadata: {
+    #           "EventBridgeMetadataKey" => "EventBridgeMetadataValue",
+    #         },
+    #       },
     #       kinesis_parameters: {
     #         partition_key: "TargetPartitionKey", # required
     #       },
-    #       retry_policy: {
-    #         maximum_event_age_in_seconds: 1,
-    #         maximum_retry_attempts: 1,
-    #       },
-    #       role_arn: "RoleArn", # required
     #       sage_maker_pipeline_parameters: {
     #         pipeline_parameter_list: [
     #           {
@@ -663,6 +666,12 @@ module Aws::Scheduler
     #         message_group_id: "MessageGroupId",
     #       },
     #     },
+    #     flexible_time_window: { # required
+    #       mode: "OFF", # required, accepts OFF, FLEXIBLE
+    #       maximum_window_in_minutes: 1,
+    #     },
+    #     client_token: "ClientToken",
+    #     action_after_completion: "NONE", # accepts NONE, DELETE
     #   })
     #
     # @example Response structure
@@ -680,6 +689,12 @@ module Aws::Scheduler
 
     # Creates the specified schedule group.
     #
+    # @option params [required, String] :name
+    #   The name of the schedule group that you are creating.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The list of tags to associate with the schedule group.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. If you do not specify a client token,
@@ -689,12 +704,6 @@ module Aws::Scheduler
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :name
-    #   The name of the schedule group that you are creating.
-    #
-    # @option params [Array<Types::Tag>] :tags
-    #   The list of tags to associate with the schedule group.
-    #
     # @return [Types::CreateScheduleGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateScheduleGroupOutput#schedule_group_arn #schedule_group_arn} => String
@@ -702,7 +711,6 @@ module Aws::Scheduler
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_schedule_group({
-    #     client_token: "ClientToken",
     #     name: "ScheduleGroupName", # required
     #     tags: [
     #       {
@@ -710,6 +718,7 @@ module Aws::Scheduler
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     client_token: "ClientToken",
     #   })
     #
     # @example Response structure
@@ -727,6 +736,13 @@ module Aws::Scheduler
 
     # Deletes the specified schedule.
     #
+    # @option params [required, String] :name
+    #   The name of the schedule to delete.
+    #
+    # @option params [String] :group_name
+    #   The name of the schedule group associated with this schedule. If you
+    #   omit this, the default schedule group is used.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. If you do not specify a client token,
@@ -736,21 +752,14 @@ module Aws::Scheduler
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [String] :group_name
-    #   The name of the schedule group associated with this schedule. If you
-    #   omit this, the default schedule group is used.
-    #
-    # @option params [required, String] :name
-    #   The name of the schedule to delete.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_schedule({
-    #     client_token: "ClientToken",
-    #     group_name: "ScheduleGroupName",
     #     name: "Name", # required
+    #     group_name: "ScheduleGroupName",
+    #     client_token: "ClientToken",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/DeleteSchedule AWS API Documentation
@@ -775,6 +784,9 @@ module Aws::Scheduler
     #
     #  </note>
     #
+    # @option params [required, String] :name
+    #   The name of the schedule group to delete.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. If you do not specify a client token,
@@ -784,16 +796,13 @@ module Aws::Scheduler
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, String] :name
-    #   The name of the schedule group to delete.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_schedule_group({
-    #     client_token: "ClientToken",
     #     name: "ScheduleGroupName", # required
+    #     client_token: "ClientToken",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/DeleteScheduleGroup AWS API Documentation
@@ -807,96 +816,100 @@ module Aws::Scheduler
 
     # Retrieves the specified schedule.
     #
+    # @option params [required, String] :name
+    #   The name of the schedule to retrieve.
+    #
     # @option params [String] :group_name
     #   The name of the schedule group associated with this schedule. If you
     #   omit this, EventBridge Scheduler assumes that the schedule is
     #   associated with the default group.
     #
-    # @option params [required, String] :name
-    #   The name of the schedule to retrieve.
-    #
     # @return [Types::GetScheduleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetScheduleOutput#action_after_completion #action_after_completion} => String
     #   * {Types::GetScheduleOutput#arn #arn} => String
-    #   * {Types::GetScheduleOutput#creation_date #creation_date} => Time
-    #   * {Types::GetScheduleOutput#description #description} => String
-    #   * {Types::GetScheduleOutput#end_date #end_date} => Time
-    #   * {Types::GetScheduleOutput#flexible_time_window #flexible_time_window} => Types::FlexibleTimeWindow
     #   * {Types::GetScheduleOutput#group_name #group_name} => String
-    #   * {Types::GetScheduleOutput#kms_key_arn #kms_key_arn} => String
-    #   * {Types::GetScheduleOutput#last_modification_date #last_modification_date} => Time
     #   * {Types::GetScheduleOutput#name #name} => String
     #   * {Types::GetScheduleOutput#schedule_expression #schedule_expression} => String
-    #   * {Types::GetScheduleOutput#schedule_expression_timezone #schedule_expression_timezone} => String
     #   * {Types::GetScheduleOutput#start_date #start_date} => Time
+    #   * {Types::GetScheduleOutput#end_date #end_date} => Time
+    #   * {Types::GetScheduleOutput#description #description} => String
+    #   * {Types::GetScheduleOutput#schedule_expression_timezone #schedule_expression_timezone} => String
     #   * {Types::GetScheduleOutput#state #state} => String
+    #   * {Types::GetScheduleOutput#creation_date #creation_date} => Time
+    #   * {Types::GetScheduleOutput#last_modification_date #last_modification_date} => Time
+    #   * {Types::GetScheduleOutput#kms_key_arn #kms_key_arn} => String
     #   * {Types::GetScheduleOutput#target #target} => Types::Target
+    #   * {Types::GetScheduleOutput#flexible_time_window #flexible_time_window} => Types::FlexibleTimeWindow
+    #   * {Types::GetScheduleOutput#action_after_completion #action_after_completion} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_schedule({
-    #     group_name: "ScheduleGroupName",
     #     name: "Name", # required
+    #     group_name: "ScheduleGroupName",
     #   })
     #
     # @example Response structure
     #
-    #   resp.action_after_completion #=> String, one of "NONE", "DELETE"
     #   resp.arn #=> String
-    #   resp.creation_date #=> Time
-    #   resp.description #=> String
-    #   resp.end_date #=> Time
-    #   resp.flexible_time_window.maximum_window_in_minutes #=> Integer
-    #   resp.flexible_time_window.mode #=> String, one of "OFF", "FLEXIBLE"
     #   resp.group_name #=> String
-    #   resp.kms_key_arn #=> String
-    #   resp.last_modification_date #=> Time
     #   resp.name #=> String
     #   resp.schedule_expression #=> String
-    #   resp.schedule_expression_timezone #=> String
     #   resp.start_date #=> Time
+    #   resp.end_date #=> Time
+    #   resp.description #=> String
+    #   resp.schedule_expression_timezone #=> String
     #   resp.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.creation_date #=> Time
+    #   resp.last_modification_date #=> Time
+    #   resp.kms_key_arn #=> String
     #   resp.target.arn #=> String
+    #   resp.target.role_arn #=> String
     #   resp.target.dead_letter_config.arn #=> String
-    #   resp.target.ecs_parameters.capacity_provider_strategy #=> Array
-    #   resp.target.ecs_parameters.capacity_provider_strategy[0].base #=> Integer
-    #   resp.target.ecs_parameters.capacity_provider_strategy[0].capacity_provider #=> String
-    #   resp.target.ecs_parameters.capacity_provider_strategy[0].weight #=> Integer
-    #   resp.target.ecs_parameters.enable_ecs_managed_tags #=> Boolean
-    #   resp.target.ecs_parameters.enable_execute_command #=> Boolean
-    #   resp.target.ecs_parameters.group #=> String
+    #   resp.target.retry_policy.maximum_event_age_in_seconds #=> Integer
+    #   resp.target.retry_policy.maximum_retry_attempts #=> Integer
+    #   resp.target.input #=> String
+    #   resp.target.ecs_parameters.task_definition_arn #=> String
+    #   resp.target.ecs_parameters.task_count #=> Integer
     #   resp.target.ecs_parameters.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
-    #   resp.target.ecs_parameters.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
-    #   resp.target.ecs_parameters.network_configuration.awsvpc_configuration.security_groups #=> Array
-    #   resp.target.ecs_parameters.network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.target.ecs_parameters.network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.target.ecs_parameters.network_configuration.awsvpc_configuration.subnets[0] #=> String
-    #   resp.target.ecs_parameters.placement_constraints #=> Array
-    #   resp.target.ecs_parameters.placement_constraints[0].expression #=> String
-    #   resp.target.ecs_parameters.placement_constraints[0].type #=> String, one of "distinctInstance", "memberOf"
-    #   resp.target.ecs_parameters.placement_strategy #=> Array
-    #   resp.target.ecs_parameters.placement_strategy[0].field #=> String
-    #   resp.target.ecs_parameters.placement_strategy[0].type #=> String, one of "random", "spread", "binpack"
+    #   resp.target.ecs_parameters.network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.target.ecs_parameters.network_configuration.awsvpc_configuration.security_groups[0] #=> String
+    #   resp.target.ecs_parameters.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.target.ecs_parameters.platform_version #=> String
+    #   resp.target.ecs_parameters.group #=> String
+    #   resp.target.ecs_parameters.capacity_provider_strategy #=> Array
+    #   resp.target.ecs_parameters.capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.target.ecs_parameters.capacity_provider_strategy[0].weight #=> Integer
+    #   resp.target.ecs_parameters.capacity_provider_strategy[0].base #=> Integer
+    #   resp.target.ecs_parameters.enable_ecs_managed_tags #=> Boolean
+    #   resp.target.ecs_parameters.enable_execute_command #=> Boolean
+    #   resp.target.ecs_parameters.placement_constraints #=> Array
+    #   resp.target.ecs_parameters.placement_constraints[0].type #=> String, one of "distinctInstance", "memberOf"
+    #   resp.target.ecs_parameters.placement_constraints[0].expression #=> String
+    #   resp.target.ecs_parameters.placement_strategy #=> Array
+    #   resp.target.ecs_parameters.placement_strategy[0].type #=> String, one of "random", "spread", "binpack"
+    #   resp.target.ecs_parameters.placement_strategy[0].field #=> String
     #   resp.target.ecs_parameters.propagate_tags #=> String, one of "TASK_DEFINITION"
     #   resp.target.ecs_parameters.reference_id #=> String
     #   resp.target.ecs_parameters.tags #=> Array
     #   resp.target.ecs_parameters.tags[0] #=> Hash
     #   resp.target.ecs_parameters.tags[0]["TagKey"] #=> String
-    #   resp.target.ecs_parameters.task_count #=> Integer
-    #   resp.target.ecs_parameters.task_definition_arn #=> String
     #   resp.target.event_bridge_parameters.detail_type #=> String
     #   resp.target.event_bridge_parameters.source #=> String
-    #   resp.target.input #=> String
+    #   resp.target.event_bridge_put_events_v2_parameters.detail_type #=> String
+    #   resp.target.event_bridge_put_events_v2_parameters.source #=> String
+    #   resp.target.event_bridge_put_raw_events_parameters.metadata #=> Hash
+    #   resp.target.event_bridge_put_raw_events_parameters.metadata["EventBridgeMetadataKey"] #=> String
     #   resp.target.kinesis_parameters.partition_key #=> String
-    #   resp.target.retry_policy.maximum_event_age_in_seconds #=> Integer
-    #   resp.target.retry_policy.maximum_retry_attempts #=> Integer
-    #   resp.target.role_arn #=> String
     #   resp.target.sage_maker_pipeline_parameters.pipeline_parameter_list #=> Array
     #   resp.target.sage_maker_pipeline_parameters.pipeline_parameter_list[0].name #=> String
     #   resp.target.sage_maker_pipeline_parameters.pipeline_parameter_list[0].value #=> String
     #   resp.target.sqs_parameters.message_group_id #=> String
+    #   resp.flexible_time_window.mode #=> String, one of "OFF", "FLEXIBLE"
+    #   resp.flexible_time_window.maximum_window_in_minutes #=> Integer
+    #   resp.action_after_completion #=> String, one of "NONE", "DELETE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/GetSchedule AWS API Documentation
     #
@@ -915,10 +928,10 @@ module Aws::Scheduler
     # @return [Types::GetScheduleGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetScheduleGroupOutput#arn #arn} => String
-    #   * {Types::GetScheduleGroupOutput#creation_date #creation_date} => Time
-    #   * {Types::GetScheduleGroupOutput#last_modification_date #last_modification_date} => Time
     #   * {Types::GetScheduleGroupOutput#name #name} => String
     #   * {Types::GetScheduleGroupOutput#state #state} => String
+    #   * {Types::GetScheduleGroupOutput#creation_date #creation_date} => Time
+    #   * {Types::GetScheduleGroupOutput#last_modification_date #last_modification_date} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -929,10 +942,10 @@ module Aws::Scheduler
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.creation_date #=> Time
-    #   resp.last_modification_date #=> Time
     #   resp.name #=> String
     #   resp.state #=> String, one of "ACTIVE", "DELETING"
+    #   resp.creation_date #=> Time
+    #   resp.last_modification_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/GetScheduleGroup AWS API Documentation
     #
@@ -945,11 +958,6 @@ module Aws::Scheduler
 
     # Returns a paginated list of your schedule groups.
     #
-    # @option params [Integer] :max_results
-    #   If specified, limits the number of results returned by this operation.
-    #   The operation also returns a `NextToken` which you can use in a
-    #   subsequent operation to retrieve the next set of results.
-    #
     # @option params [String] :name_prefix
     #   The name prefix that you can use to return a filtered list of your
     #   schedule groups.
@@ -957,6 +965,11 @@ module Aws::Scheduler
     # @option params [String] :next_token
     #   The token returned by a previous call to retrieve the next set of
     #   results.
+    #
+    # @option params [Integer] :max_results
+    #   If specified, limits the number of results returned by this operation.
+    #   The operation also returns a `NextToken` which you can use in a
+    #   subsequent operation to retrieve the next set of results.
     #
     # @return [Types::ListScheduleGroupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -968,9 +981,9 @@ module Aws::Scheduler
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_schedule_groups({
-    #     max_results: 1,
     #     name_prefix: "ScheduleGroupNamePrefix",
     #     next_token: "NextToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -978,10 +991,10 @@ module Aws::Scheduler
     #   resp.next_token #=> String
     #   resp.schedule_groups #=> Array
     #   resp.schedule_groups[0].arn #=> String
-    #   resp.schedule_groups[0].creation_date #=> Time
-    #   resp.schedule_groups[0].last_modification_date #=> Time
     #   resp.schedule_groups[0].name #=> String
     #   resp.schedule_groups[0].state #=> String, one of "ACTIVE", "DELETING"
+    #   resp.schedule_groups[0].creation_date #=> Time
+    #   resp.schedule_groups[0].last_modification_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/ListScheduleGroups AWS API Documentation
     #
@@ -998,21 +1011,21 @@ module Aws::Scheduler
     #   If specified, only lists the schedules whose associated schedule group
     #   matches the given filter.
     #
-    # @option params [Integer] :max_results
-    #   If specified, limits the number of results returned by this operation.
-    #   The operation also returns a `NextToken` which you can use in a
-    #   subsequent operation to retrieve the next set of results.
-    #
     # @option params [String] :name_prefix
     #   Schedule name prefix to return the filtered list of resources.
+    #
+    # @option params [String] :state
+    #   If specified, only lists the schedules whose current state matches the
+    #   given filter.
     #
     # @option params [String] :next_token
     #   The token returned by a previous call to retrieve the next set of
     #   results.
     #
-    # @option params [String] :state
-    #   If specified, only lists the schedules whose current state matches the
-    #   given filter.
+    # @option params [Integer] :max_results
+    #   If specified, limits the number of results returned by this operation.
+    #   The operation also returns a `NextToken` which you can use in a
+    #   subsequent operation to retrieve the next set of results.
     #
     # @return [Types::ListSchedulesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1025,10 +1038,10 @@ module Aws::Scheduler
     #
     #   resp = client.list_schedules({
     #     group_name: "ScheduleGroupName",
-    #     max_results: 1,
     #     name_prefix: "NamePrefix",
-    #     next_token: "NextToken",
     #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #     next_token: "NextToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -1036,11 +1049,11 @@ module Aws::Scheduler
     #   resp.next_token #=> String
     #   resp.schedules #=> Array
     #   resp.schedules[0].arn #=> String
-    #   resp.schedules[0].creation_date #=> Time
-    #   resp.schedules[0].group_name #=> String
-    #   resp.schedules[0].last_modification_date #=> Time
     #   resp.schedules[0].name #=> String
+    #   resp.schedules[0].group_name #=> String
     #   resp.schedules[0].state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.schedules[0].creation_date #=> Time
+    #   resp.schedules[0].last_modification_date #=> Time
     #   resp.schedules[0].target.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/scheduler-2021-06-30/ListSchedules AWS API Documentation
@@ -1156,44 +1169,14 @@ module Aws::Scheduler
     # `GetSchedule` API operation and make a note of all optional parameters
     # for your `UpdateSchedule` call.
     #
-    # @option params [String] :action_after_completion
-    #   Specifies the action that EventBridge Scheduler applies to the
-    #   schedule after the schedule completes invoking the target.
-    #
-    # @option params [String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
-    #   idempotency of the request. If you do not specify a client token,
-    #   EventBridge Scheduler uses a randomly generated token for the request
-    #   to ensure idempotency.
-    #
-    #   **A suitable default value is auto-generated.** You should normally
-    #   not need to pass this option.**
-    #
-    # @option params [String] :description
-    #   The description you specify for the schedule.
-    #
-    # @option params [Time,DateTime,Date,Integer,String] :end_date
-    #   The date, in UTC, before which the schedule can invoke its target.
-    #   Depending on the schedule's recurrence expression, invocations might
-    #   stop on, or before, the `EndDate` you specify. EventBridge Scheduler
-    #   ignores `EndDate` for one-time schedules.
-    #
-    # @option params [required, Types::FlexibleTimeWindow] :flexible_time_window
-    #   Allows you to configure a time window during which EventBridge
-    #   Scheduler invokes the schedule.
+    # @option params [required, String] :name
+    #   The name of the schedule that you are updating.
     #
     # @option params [String] :group_name
     #   The name of the schedule group with which the schedule is associated.
     #   You must provide this value in order for EventBridge Scheduler to find
     #   the schedule you want to update. If you omit this value, EventBridge
     #   Scheduler assumes the group is associated to the default group.
-    #
-    # @option params [String] :kms_key_arn
-    #   The ARN for the customer managed KMS key that that you want
-    #   EventBridge Scheduler to use to encrypt and decrypt your data.
-    #
-    # @option params [required, String] :name
-    #   The name of the schedule that you are updating.
     #
     # @option params [required, String] :schedule_expression
     #   The expression that defines when the schedule runs. The following
@@ -1228,21 +1211,51 @@ module Aws::Scheduler
     #
     #   [1]: https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html
     #
-    # @option params [String] :schedule_expression_timezone
-    #   The timezone in which the scheduling expression is evaluated.
-    #
     # @option params [Time,DateTime,Date,Integer,String] :start_date
     #   The date, in UTC, after which the schedule can begin invoking its
     #   target. Depending on the schedule's recurrence expression,
     #   invocations might occur on, or after, the `StartDate` you specify.
     #   EventBridge Scheduler ignores `StartDate` for one-time schedules.
     #
+    # @option params [Time,DateTime,Date,Integer,String] :end_date
+    #   The date, in UTC, before which the schedule can invoke its target.
+    #   Depending on the schedule's recurrence expression, invocations might
+    #   stop on, or before, the `EndDate` you specify. EventBridge Scheduler
+    #   ignores `EndDate` for one-time schedules.
+    #
+    # @option params [String] :description
+    #   The description you specify for the schedule.
+    #
+    # @option params [String] :schedule_expression_timezone
+    #   The timezone in which the scheduling expression is evaluated.
+    #
     # @option params [String] :state
     #   Specifies whether the schedule is enabled or disabled.
+    #
+    # @option params [String] :kms_key_arn
+    #   The ARN for the customer managed KMS key that that you want
+    #   EventBridge Scheduler to use to encrypt and decrypt your data.
     #
     # @option params [required, Types::Target] :target
     #   The schedule target. You can use this operation to change the target
     #   that your schedule invokes.
+    #
+    # @option params [required, Types::FlexibleTimeWindow] :flexible_time_window
+    #   Allows you to configure a time window during which EventBridge
+    #   Scheduler invokes the schedule.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. If you do not specify a client token,
+    #   EventBridge Scheduler uses a randomly generated token for the request
+    #   to ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :action_after_completion
+    #   Specifies the action that EventBridge Scheduler applies to the
+    #   schedule after the schedule completes invoking the target.
     #
     # @return [Types::UpdateScheduleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1251,58 +1264,60 @@ module Aws::Scheduler
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_schedule({
-    #     action_after_completion: "NONE", # accepts NONE, DELETE
-    #     client_token: "ClientToken",
-    #     description: "Description",
-    #     end_date: Time.now,
-    #     flexible_time_window: { # required
-    #       maximum_window_in_minutes: 1,
-    #       mode: "OFF", # required, accepts OFF, FLEXIBLE
-    #     },
-    #     group_name: "ScheduleGroupName",
-    #     kms_key_arn: "KmsKeyArn",
     #     name: "Name", # required
+    #     group_name: "ScheduleGroupName",
     #     schedule_expression: "ScheduleExpression", # required
-    #     schedule_expression_timezone: "ScheduleExpressionTimezone",
     #     start_date: Time.now,
+    #     end_date: Time.now,
+    #     description: "Description",
+    #     schedule_expression_timezone: "ScheduleExpressionTimezone",
     #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #     kms_key_arn: "KmsKeyArn",
     #     target: { # required
     #       arn: "TargetArn", # required
+    #       role_arn: "RoleArn", # required
     #       dead_letter_config: {
     #         arn: "DeadLetterConfigArnString",
     #       },
+    #       retry_policy: {
+    #         maximum_event_age_in_seconds: 1,
+    #         maximum_retry_attempts: 1,
+    #       },
+    #       input: "TargetInput",
     #       ecs_parameters: {
+    #         task_definition_arn: "TaskDefinitionArn", # required
+    #         task_count: 1,
+    #         launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
+    #         network_configuration: {
+    #           awsvpc_configuration: {
+    #             subnets: ["Subnet"], # required
+    #             security_groups: ["SecurityGroup"],
+    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         },
+    #         platform_version: "PlatformVersion",
+    #         group: "Group",
     #         capacity_provider_strategy: [
     #           {
-    #             base: 1,
     #             capacity_provider: "CapacityProvider", # required
     #             weight: 1,
+    #             base: 1,
     #           },
     #         ],
     #         enable_ecs_managed_tags: false,
     #         enable_execute_command: false,
-    #         group: "Group",
-    #         launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
-    #         network_configuration: {
-    #           awsvpc_configuration: {
-    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #             security_groups: ["SecurityGroup"],
-    #             subnets: ["Subnet"], # required
-    #           },
-    #         },
     #         placement_constraints: [
     #           {
-    #             expression: "PlacementConstraintExpression",
     #             type: "distinctInstance", # accepts distinctInstance, memberOf
+    #             expression: "PlacementConstraintExpression",
     #           },
     #         ],
     #         placement_strategy: [
     #           {
-    #             field: "PlacementStrategyField",
     #             type: "random", # accepts random, spread, binpack
+    #             field: "PlacementStrategyField",
     #           },
     #         ],
-    #         platform_version: "PlatformVersion",
     #         propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION
     #         reference_id: "ReferenceId",
     #         tags: [
@@ -1310,22 +1325,23 @@ module Aws::Scheduler
     #             "TagKey" => "TagValue",
     #           },
     #         ],
-    #         task_count: 1,
-    #         task_definition_arn: "TaskDefinitionArn", # required
     #       },
     #       event_bridge_parameters: {
     #         detail_type: "DetailType", # required
     #         source: "Source", # required
     #       },
-    #       input: "TargetInput",
+    #       event_bridge_put_events_v2_parameters: {
+    #         detail_type: "DetailType", # required
+    #         source: "Source", # required
+    #       },
+    #       event_bridge_put_raw_events_parameters: {
+    #         metadata: {
+    #           "EventBridgeMetadataKey" => "EventBridgeMetadataValue",
+    #         },
+    #       },
     #       kinesis_parameters: {
     #         partition_key: "TargetPartitionKey", # required
     #       },
-    #       retry_policy: {
-    #         maximum_event_age_in_seconds: 1,
-    #         maximum_retry_attempts: 1,
-    #       },
-    #       role_arn: "RoleArn", # required
     #       sage_maker_pipeline_parameters: {
     #         pipeline_parameter_list: [
     #           {
@@ -1338,6 +1354,12 @@ module Aws::Scheduler
     #         message_group_id: "MessageGroupId",
     #       },
     #     },
+    #     flexible_time_window: { # required
+    #       mode: "OFF", # required, accepts OFF, FLEXIBLE
+    #       maximum_window_in_minutes: 1,
+    #     },
+    #     client_token: "ClientToken",
+    #     action_after_completion: "NONE", # accepts NONE, DELETE
     #   })
     #
     # @example Response structure
@@ -1371,7 +1393,7 @@ module Aws::Scheduler
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-scheduler'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

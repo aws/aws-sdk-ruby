@@ -1621,8 +1621,11 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] workflows
     #   The array of workflow configuration objects for builds that this
-    #   pipeline starts. You must also specify `executionRole` when you
-    #   provide workflows.
+    #   pipeline starts. If you specify workflows, they replace the default
+    #   workflows that Image Builder otherwise runs for the pipeline's
+    #   builds. For example, if your list doesn't include a test workflow,
+    #   the pipeline's builds don't run one. You must also specify
+    #   `executionRole` when you provide workflows.
     #   @return [Array<Types::WorkflowConfiguration>]
     #
     # @!attribute [rw] execution_role
@@ -3280,6 +3283,13 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] name
     #   The name of the filter. Filter names are case-sensitive.
+    #
+    #   The `name` filter matches the name that you gave the resource when
+    #   you created it, exactly as you entered it. It doesn't match the
+    #   name segment of the resource ARN, which Image Builder converts to
+    #   lowercase with hyphens in place of spaces and underscores. For
+    #   example, a resource named `My Image` has an ARN that contains
+    #   `my-image` – filter on `My Image` to find it.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -4999,9 +5009,10 @@ module Aws::Imagebuilder
     #   Amazon ECR repository from your `ecrConfiguration` settings.
     #
     #   To use container image scans, you must activate Amazon Inspector for
-    #   Amazon ECR scanning in your account. The Image Builder
-    #   `ListImageScanFindings` operation returns the findings of these
-    #   scans.
+    #   Amazon ECR scanning in the account and Amazon Web Services Region
+    #   where the build runs. Amazon Inspector activation is Regional. The
+    #   Image Builder `ListImageScanFindings` operation returns the findings
+    #   of these scans.
     #   @return [Boolean]
     #
     # @!attribute [rw] ecr_configuration
@@ -5016,8 +5027,9 @@ module Aws::Imagebuilder
     #
     #   * With `TEST_INSTANCE_CVE`, Amazon Inspector scans the test instance
     #     during image tests. To use this scan, you must activate Amazon
-    #     Inspector for Amazon EC2 scanning in your account. The Image
-    #     Builder `ListImageScanFindings` operation returns the findings.
+    #     Inspector for Amazon EC2 scanning in the account and Amazon Web
+    #     Services Region where the build runs. The Image Builder
+    #     `ListImageScanFindings` operation returns the findings.
     #
     #   * With `ON_DEMAND_AMI_CVE`, Amazon Inspector starts an on-demand
     #     scan of the output AMI during image tests. To use this scan, you
@@ -6837,6 +6849,9 @@ module Aws::Imagebuilder
     #   ARN must specify an exact version, without a build number suffix. If
     #   you don't specify an ARN, Image Builder returns build versions for
     #   the components that your account owns.
+    #
+    #   If the ARN that you specify doesn't exist, Image Builder returns an
+    #   empty list rather than a `ResourceNotFoundException` error.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -7108,6 +7123,9 @@ module Aws::Imagebuilder
     #   (`<major>.<minor>.<patch>`) - wildcards aren't allowed. This
     #   parameter is optional. If you don't specify it, Image Builder
     #   returns build versions for all of the images in your account.
+    #
+    #   If the ARN that you specify doesn't exist, Image Builder returns an
+    #   empty list rather than a `ResourceNotFoundException` error.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -7230,6 +7248,9 @@ module Aws::Imagebuilder
     # @!attribute [rw] image_pipeline_arn
     #   The Amazon Resource Name (ARN) of the image pipeline whose images
     #   you want to view.
+    #
+    #   If the ARN that you specify doesn't exist, Image Builder returns an
+    #   empty list rather than a `ResourceNotFoundException` error.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -9617,8 +9638,11 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] workflows
     #   The array of workflow configuration objects for builds that this
-    #   pipeline starts. You must also specify `executionRole` when you
-    #   provide workflows.
+    #   pipeline starts. If you specify workflows, they replace the default
+    #   workflows that Image Builder otherwise runs for the pipeline's
+    #   builds. For example, if your list doesn't include a test workflow,
+    #   the pipeline's builds don't run one. You must also specify
+    #   `executionRole` when you provide workflows.
     #   @return [Array<Types::WorkflowConfiguration>]
     #
     # @!attribute [rw] logging_configuration

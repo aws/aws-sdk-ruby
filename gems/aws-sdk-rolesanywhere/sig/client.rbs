@@ -98,7 +98,8 @@ module Aws
                                 value: ::String
                               }
                             ],
-                            ?accept_role_session_name: bool
+                            ?accept_role_session_name: bool,
+                            ?alias_name: ::String
                           ) -> _CreateProfileResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProfileResponseSuccess
 
@@ -131,7 +132,8 @@ module Aws
                                      threshold: ::Integer?,
                                      channel: ("ALL")?
                                    }
-                                 ]
+                                 ],
+                                 ?alias_name: ::String
                                ) -> _CreateTrustAnchorResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrustAnchorResponseSuccess
 
@@ -292,7 +294,8 @@ module Aws
                             value: ::String
                           }
                         ],
-                        trust_anchor_arn: ::String
+                        trust_anchor_arn: ::String,
+                        ?alias_name: ::String
                       ) -> _ImportCrlResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportCrlResponseSuccess
 
@@ -437,7 +440,8 @@ module Aws
       def update_crl: (
                         crl_id: ::String,
                         ?name: ::String,
-                        ?crl_data: ::String
+                        ?crl_data: ::String,
+                        ?alias_name: ::String
                       ) -> _UpdateCrlResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCrlResponseSuccess
 
@@ -453,7 +457,8 @@ module Aws
                             ?role_arns: Array[::String],
                             ?managed_policy_arns: Array[::String],
                             ?duration_seconds: ::Integer,
-                            ?accept_role_session_name: bool
+                            ?accept_role_session_name: bool,
+                            ?alias_name: ::String
                           ) -> _UpdateProfileResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProfileResponseSuccess
 
@@ -472,7 +477,8 @@ module Aws
                                      acm_pca_arn: ::String?
                                    }?
                                  },
-                                 ?crl_dp_revocation_enabled: bool
+                                 ?crl_dp_revocation_enabled: bool,
+                                 ?alias_name: ::String
                                ) -> _UpdateTrustAnchorResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTrustAnchorResponseSuccess
     end

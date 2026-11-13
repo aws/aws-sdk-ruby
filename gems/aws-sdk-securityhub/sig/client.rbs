@@ -4709,7 +4709,7 @@ module Aws
         def target_type: () -> ("ACCOUNT" | "ORGANIZATIONAL_UNIT" | "ROOT")
         def association_type: () -> ("INHERITED" | "APPLIED")
         def updated_at: () -> ::Time
-        def association_status: () -> ("PENDING" | "SUCCESS" | "FAILED")
+        def association_status: () -> ("PENDING" | "SUCCESS" | "FAILED" | "DISABLED")
         def association_status_message: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#get_configuration_policy_association-instance_method
@@ -5251,7 +5251,7 @@ module Aws
                                                     ?filters: {
                                                       configuration_policy_id: ::String?,
                                                       association_type: ("INHERITED" | "APPLIED")?,
-                                                      association_status: ("PENDING" | "SUCCESS" | "FAILED")?
+                                                      association_status: ("PENDING" | "SUCCESS" | "FAILED" | "DISABLED")?
                                                     }
                                                   ) -> _ListConfigurationPolicyAssociationsResponseSuccess
                                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfigurationPolicyAssociationsResponseSuccess
@@ -5450,7 +5450,7 @@ module Aws
         def target_type: () -> ("ACCOUNT" | "ORGANIZATIONAL_UNIT" | "ROOT")
         def association_type: () -> ("INHERITED" | "APPLIED")
         def updated_at: () -> ::Time
-        def association_status: () -> ("PENDING" | "SUCCESS" | "FAILED")
+        def association_status: () -> ("PENDING" | "SUCCESS" | "FAILED" | "DISABLED")
         def association_status_message: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#start_configuration_policy_association-instance_method
@@ -5692,7 +5692,7 @@ module Aws
                                                ?auto_enable_standards: ("NONE" | "DEFAULT"),
                                                ?organization_configuration: {
                                                  configuration_type: ("CENTRAL" | "LOCAL")?,
-                                                 status: ("PENDING" | "ENABLED" | "FAILED")?,
+                                                 status: ("PENDING" | "ENABLED" | "FAILED" | "DISABLED")?,
                                                  status_message: ::String?
                                                }
                                              ) -> _UpdateOrganizationConfigurationResponseSuccess

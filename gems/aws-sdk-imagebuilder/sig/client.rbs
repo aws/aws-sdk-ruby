@@ -1450,6 +1450,12 @@ module Aws
                                      client_token: ::String
                                    ) -> _UpdateLifecyclePolicyResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLifecyclePolicyResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#wait_until-instance_method
+      def wait_until: (:image_available waiter_name, 
+                    image_build_version_arn: ::String
+                  ) -> Client::_GetImageResponseSuccess
+                    | (:image_available waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetImageResponseSuccess
     end
   end
 end

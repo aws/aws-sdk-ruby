@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2026-11-13)
+------------------
+
+* Feature - Amazon Q in Connect now supports additional message template attributes. You can personalize message templates using case fields, Amazon Connect Customer Profiles calculated attributes, and product recommendations.
+
 1.74.0 (2026-11-11)
 ------------------
 

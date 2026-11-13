@@ -1057,6 +1057,7 @@ module Aws::ConnectCampaignsV2
     #   resp.campaign.communication_limits_override.all_channel_subtypes.communication_limits_list[0].frequency #=> Integer
     #   resp.campaign.communication_limits_override.all_channel_subtypes.communication_limits_list[0].unit #=> String, one of "DAY"
     #   resp.campaign.communication_limits_override.instance_limits_handling #=> String, one of "OPT_IN", "OPT_OUT"
+    #   resp.campaign.last_modified_time #=> Time
     #   resp.campaign.tags #=> Hash
     #   resp.campaign.tags["TagKey"] #=> String
     #
@@ -1273,6 +1274,7 @@ module Aws::ConnectCampaignsV2
     #   resp.campaign_summary_list[0].entry_limits_config.max_entry_count #=> Integer
     #   resp.campaign_summary_list[0].entry_limits_config.min_entry_interval #=> String
     #   resp.campaign_summary_list[0].connect_campaign_flow_arn #=> String
+    #   resp.campaign_summary_list[0].last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/ListCampaigns AWS API Documentation
     #
@@ -2174,7 +2176,7 @@ module Aws::ConnectCampaignsV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcampaignsv2'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

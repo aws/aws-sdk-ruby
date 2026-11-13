@@ -3806,6 +3806,15 @@ module Aws::QConnect
     #   The custom attributes in customer profile attributes.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] recommendations
+    #   The recommendations that are associated with the customer profile.
+    #   @return [Array<Types::ProfileRecommendation>]
+    #
+    # @!attribute [rw] calculated_attributes
+    #   The calculated attributes from the customer profile that are used
+    #   with the message template.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CustomerProfileAttributes AWS API Documentation
     #
     class CustomerProfileAttributes < Struct.new(
@@ -3866,8 +3875,10 @@ module Aws::QConnect
       :billing_postal_code,
       :billing_province,
       :billing_state,
-      :custom)
-      SENSITIVE = [:profile_id, :profile_arn, :first_name, :middle_name, :last_name, :account_number, :email_address, :phone_number, :additional_information, :party_type, :business_name, :birth_date, :gender, :mobile_phone_number, :home_phone_number, :business_phone_number, :business_email_address, :address1, :address2, :address3, :address4, :city, :county, :country, :postal_code, :province, :state, :shipping_address_1, :shipping_address_2, :shipping_address_3, :shipping_address_4, :shipping_city, :shipping_county, :shipping_country, :shipping_postal_code, :shipping_province, :shipping_state, :mailing_address_1, :mailing_address_2, :mailing_address_3, :mailing_address_4, :mailing_city, :mailing_county, :mailing_country, :mailing_postal_code, :mailing_province, :mailing_state, :billing_address_1, :billing_address_2, :billing_address_3, :billing_address_4, :billing_city, :billing_county, :billing_country, :billing_postal_code, :billing_province, :billing_state, :custom]
+      :custom,
+      :recommendations,
+      :calculated_attributes)
+      SENSITIVE = [:profile_id, :profile_arn, :first_name, :middle_name, :last_name, :account_number, :email_address, :phone_number, :additional_information, :party_type, :business_name, :birth_date, :gender, :mobile_phone_number, :home_phone_number, :business_phone_number, :business_email_address, :address1, :address2, :address3, :address4, :city, :county, :country, :postal_code, :province, :state, :shipping_address_1, :shipping_address_2, :shipping_address_3, :shipping_address_4, :shipping_city, :shipping_county, :shipping_country, :shipping_postal_code, :shipping_province, :shipping_state, :mailing_address_1, :mailing_address_2, :mailing_address_3, :mailing_address_4, :mailing_city, :mailing_county, :mailing_country, :mailing_postal_code, :mailing_province, :mailing_state, :billing_address_1, :billing_address_2, :billing_address_3, :billing_address_4, :billing_city, :billing_county, :billing_country, :billing_postal_code, :billing_province, :billing_state, :custom, :calculated_attributes]
       include Aws::Structure
     end
 
@@ -7718,14 +7729,19 @@ module Aws::QConnect
     #   The custom attributes that are used with the message template.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] case_attributes
+    #   The case attributes that are used with the message template.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/MessageTemplateAttributes AWS API Documentation
     #
     class MessageTemplateAttributes < Struct.new(
       :system_attributes,
       :agent_attributes,
       :customer_profile_attributes,
-      :custom_attributes)
-      SENSITIVE = [:custom_attributes]
+      :custom_attributes,
+      :case_attributes)
+      SENSITIVE = [:custom_attributes, :case_attributes]
       include Aws::Structure
     end
 
@@ -8775,6 +8791,102 @@ module Aws::QConnect
     class ProactiveRecommendationDataDetails < Struct.new(
       :next_message_token)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a catalog item, including its identifier,
+    # name, price, and other attributes that are used in recommendations.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the catalog item.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the catalog item.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The code of the catalog item.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the catalog item.
+    #   @return [String]
+    #
+    # @!attribute [rw] category
+    #   The category of the catalog item.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the catalog item.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_information
+    #   Additional information about the catalog item.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_link
+    #   The URL of the image of the catalog item.
+    #   @return [String]
+    #
+    # @!attribute [rw] link
+    #   The URL of the catalog item.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the catalog item was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the catalog item was last updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] price
+    #   The price of the catalog item.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   The custom attributes of the catalog item.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ProfileCatalogItem AWS API Documentation
+    #
+    class ProfileCatalogItem < Struct.new(
+      :id,
+      :name,
+      :code,
+      :type,
+      :category,
+      :description,
+      :additional_information,
+      :image_link,
+      :link,
+      :created_at,
+      :updated_at,
+      :price,
+      :attributes)
+      SENSITIVE = [:id, :name, :code, :type, :category, :description, :additional_information, :image_link, :link, :created_at, :updated_at, :price, :attributes]
+      include Aws::Structure
+    end
+
+    # Contains information about a recommendation that is associated with a
+    # customer profile, including the relevance score and the associated
+    # catalog item.
+    #
+    # @!attribute [rw] score
+    #   The relevance score of the recommendation.
+    #   @return [Float]
+    #
+    # @!attribute [rw] catalog_item
+    #   The catalog item that is associated with the recommendation.
+    #   @return [Types::ProfileCatalogItem]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ProfileRecommendation AWS API Documentation
+    #
+    class ProfileRecommendation < Struct.new(
+      :score,
+      :catalog_item)
+      SENSITIVE = [:score]
       include Aws::Structure
     end
 

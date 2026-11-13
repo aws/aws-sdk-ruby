@@ -151,7 +151,7 @@ module Aws::SecurityHub
     class AssociationFilters
       attr_accessor configuration_policy_id: ::String
       attr_accessor association_type: ("INHERITED" | "APPLIED")
-      attr_accessor association_status: ("PENDING" | "SUCCESS" | "FAILED")
+      attr_accessor association_status: ("PENDING" | "SUCCESS" | "FAILED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -5057,7 +5057,7 @@ module Aws::SecurityHub
       attr_accessor target_type: ("ACCOUNT" | "ORGANIZATIONAL_UNIT" | "ROOT")
       attr_accessor association_type: ("INHERITED" | "APPLIED")
       attr_accessor updated_at: ::Time
-      attr_accessor association_status: ("PENDING" | "SUCCESS" | "FAILED")
+      attr_accessor association_status: ("PENDING" | "SUCCESS" | "FAILED" | "DISABLED")
       attr_accessor association_status_message: ::String
       SENSITIVE: []
     end
@@ -6003,7 +6003,7 @@ module Aws::SecurityHub
       attr_accessor target_type: ("ACCOUNT" | "ORGANIZATIONAL_UNIT" | "ROOT")
       attr_accessor association_type: ("INHERITED" | "APPLIED")
       attr_accessor updated_at: ::Time
-      attr_accessor association_status: ("PENDING" | "SUCCESS" | "FAILED")
+      attr_accessor association_status: ("PENDING" | "SUCCESS" | "FAILED" | "DISABLED")
       attr_accessor association_status_message: ::String
       SENSITIVE: []
     end
@@ -6981,7 +6981,7 @@ module Aws::SecurityHub
 
     class OrganizationConfiguration
       attr_accessor configuration_type: ("CENTRAL" | "LOCAL")
-      attr_accessor status: ("PENDING" | "ENABLED" | "FAILED")
+      attr_accessor status: ("PENDING" | "ENABLED" | "FAILED" | "DISABLED")
       attr_accessor status_message: ::String
       SENSITIVE: []
     end
@@ -8177,7 +8177,7 @@ module Aws::SecurityHub
       attr_accessor target_type: ("ACCOUNT" | "ORGANIZATIONAL_UNIT" | "ROOT")
       attr_accessor association_type: ("INHERITED" | "APPLIED")
       attr_accessor updated_at: ::Time
-      attr_accessor association_status: ("PENDING" | "SUCCESS" | "FAILED")
+      attr_accessor association_status: ("PENDING" | "SUCCESS" | "FAILED" | "DISABLED")
       attr_accessor association_status_message: ::String
       SENSITIVE: []
     end

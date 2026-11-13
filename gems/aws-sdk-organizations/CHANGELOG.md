@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.162.0 (2026-11-13)
+------------------
+
+* Feature - Add support for policy operations on the SECURITYHUB CSPM POLICY policy type.
+
 1.161.0 (2026-11-11)
 ------------------
 

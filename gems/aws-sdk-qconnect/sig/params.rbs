@@ -432,7 +432,11 @@ module Aws
       billing_postal_code: ::String?,
       billing_province: ::String?,
       billing_state: ::String?,
-      custom: Hash[::String, ::String]?
+      custom: Hash[::String, ::String]?,
+      recommendations: Array[
+        Params::profile_recommendation
+      ]?,
+      calculated_attributes: Hash[::String, ::String]?
     }
 
       type message_template_attributes = {
@@ -442,7 +446,29 @@ module Aws
         last_name: ::String?
       }?,
       customer_profile_attributes: Params::customer_profile_attributes?,
-      custom_attributes: Hash[::String, ::String]?
+      custom_attributes: Hash[::String, ::String]?,
+      case_attributes: Hash[::String, ::String]?
+    }
+
+      type profile_catalog_item = {
+      id: ::String?,
+      name: ::String?,
+      code: ::String?,
+      type: ::String?,
+      category: ::String?,
+      description: ::String?,
+      additional_information: ::String?,
+      image_link: ::String?,
+      link: ::String?,
+      created_at: ::String?,
+      updated_at: ::String?,
+      price: ::String?,
+      attributes: Hash[::String, ::String]?
+    }
+
+      type profile_recommendation = {
+      score: ::Float?,
+      catalog_item: Params::profile_catalog_item?
     }
 
       type retrieval_filter_configuration = {

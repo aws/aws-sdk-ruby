@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.165.0 (2026-11-13)
+------------------
+
+* Feature - Minor documentation updates only
+
 1.164.0 (2026-11-11)
 ------------------
 

@@ -4906,6 +4906,7 @@ module Aws::CognitoIdentityProvider
     #   resp.resource_server.scopes #=> Array
     #   resp.resource_server.scopes[0].scope_name #=> String
     #   resp.resource_server.scopes[0].scope_description #=> String
+    #   resp.resource_server.managed_by #=> String, one of "COGNITO"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateResourceServer AWS API Documentation
     #
@@ -5340,6 +5341,17 @@ module Aws::CognitoIdentityProvider
     #
     #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
     #   [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html
+    #
+    # @option params [Types::DcrConfigurationType] :dcr_configuration
+    #   The dynamic client registration configuration for the user pool. With
+    #   dynamic client registration, applications can register their own app
+    #   clients at runtime through the registration endpoint of your user pool
+    #   domain. To activate this setting, your user pool must be in the [
+    #   Essentials tier][1] or higher.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
     #
     # @option params [Types::UsernameConfigurationType] :username_configuration
     #   Sets the case sensitivity option for sign-in usernames. When
@@ -6009,6 +6021,13 @@ module Aws::CognitoIdentityProvider
     #         custom_auth_mode: "AUDIT", # accepts AUDIT, ENFORCED
     #       },
     #     },
+    #     dcr_configuration: {
+    #       enable_status: "Enabled", # accepts Enabled, Disabled
+    #       open_dcr_enabled: false,
+    #       authenticated_grant_types: ["code"], # accepts code, implicit, client_credentials
+    #       open_dcr_grant_types: ["code"], # accepts code, implicit, client_credentials
+    #       allowed_scopes: ["ScopeType"],
+    #     },
     #     username_configuration: {
     #       case_sensitive: false, # required
     #     },
@@ -6131,6 +6150,14 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_subject #=> String
     #   resp.user_pool.user_pool_add_ons.advanced_security_mode #=> String, one of "OFF", "AUDIT", "ENFORCED"
     #   resp.user_pool.user_pool_add_ons.advanced_security_additional_flows.custom_auth_mode #=> String, one of "AUDIT", "ENFORCED"
+    #   resp.user_pool.dcr_configuration.enable_status #=> String, one of "Enabled", "Disabled"
+    #   resp.user_pool.dcr_configuration.open_dcr_enabled #=> Boolean
+    #   resp.user_pool.dcr_configuration.authenticated_grant_types #=> Array
+    #   resp.user_pool.dcr_configuration.authenticated_grant_types[0] #=> String, one of "code", "implicit", "client_credentials"
+    #   resp.user_pool.dcr_configuration.open_dcr_grant_types #=> Array
+    #   resp.user_pool.dcr_configuration.open_dcr_grant_types[0] #=> String, one of "code", "implicit", "client_credentials"
+    #   resp.user_pool.dcr_configuration.allowed_scopes #=> Array
+    #   resp.user_pool.dcr_configuration.allowed_scopes[0] #=> String
     #   resp.user_pool.username_configuration.case_sensitive #=> Boolean
     #   resp.user_pool.arn #=> String
     #   resp.user_pool.account_recovery_setting.recovery_mechanisms #=> Array
@@ -6762,6 +6789,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.auth_session_validity #=> Integer
     #   resp.user_pool_client.refresh_token_rotation.feature #=> String, one of "ENABLED", "DISABLED"
     #   resp.user_pool_client.refresh_token_rotation.retry_grace_period_seconds #=> Integer
+    #   resp.user_pool_client.client_type #=> String, one of "REGULAR", "DCR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolClient AWS API Documentation
     #
@@ -7752,6 +7780,7 @@ module Aws::CognitoIdentityProvider
     #   resp.resource_server.scopes #=> Array
     #   resp.resource_server.scopes[0].scope_name #=> String
     #   resp.resource_server.scopes[0].scope_description #=> String
+    #   resp.resource_server.managed_by #=> String, one of "COGNITO"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeResourceServer AWS API Documentation
     #
@@ -8153,6 +8182,14 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_subject #=> String
     #   resp.user_pool.user_pool_add_ons.advanced_security_mode #=> String, one of "OFF", "AUDIT", "ENFORCED"
     #   resp.user_pool.user_pool_add_ons.advanced_security_additional_flows.custom_auth_mode #=> String, one of "AUDIT", "ENFORCED"
+    #   resp.user_pool.dcr_configuration.enable_status #=> String, one of "Enabled", "Disabled"
+    #   resp.user_pool.dcr_configuration.open_dcr_enabled #=> Boolean
+    #   resp.user_pool.dcr_configuration.authenticated_grant_types #=> Array
+    #   resp.user_pool.dcr_configuration.authenticated_grant_types[0] #=> String, one of "code", "implicit", "client_credentials"
+    #   resp.user_pool.dcr_configuration.open_dcr_grant_types #=> Array
+    #   resp.user_pool.dcr_configuration.open_dcr_grant_types[0] #=> String, one of "code", "implicit", "client_credentials"
+    #   resp.user_pool.dcr_configuration.allowed_scopes #=> Array
+    #   resp.user_pool.dcr_configuration.allowed_scopes[0] #=> String
     #   resp.user_pool.username_configuration.case_sensitive #=> Boolean
     #   resp.user_pool.arn #=> String
     #   resp.user_pool.account_recovery_setting.recovery_mechanisms #=> Array
@@ -8259,6 +8296,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.auth_session_validity #=> Integer
     #   resp.user_pool_client.refresh_token_rotation.feature #=> String, one of "ENABLED", "DISABLED"
     #   resp.user_pool_client.refresh_token_rotation.retry_grace_period_seconds #=> Integer
+    #   resp.user_pool_client.client_type #=> String, one of "REGULAR", "DCR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolClient AWS API Documentation
     #
@@ -10398,6 +10436,7 @@ module Aws::CognitoIdentityProvider
     #   resp.resource_servers[0].scopes #=> Array
     #   resp.resource_servers[0].scopes[0].scope_name #=> String
     #   resp.resource_servers[0].scopes[0].scope_description #=> String
+    #   resp.resource_servers[0].managed_by #=> String, one of "COGNITO"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListResourceServers AWS API Documentation
@@ -10680,6 +10719,26 @@ module Aws::CognitoIdentityProvider
     #   list. Subsequent requests return a new pagination token. By use of
     #   this token, you can paginate through the full list of items.
     #
+    # @option params [String] :client_type
+    #   Returns only app clients of this type. For dynamic client registration
+    #   (`DCR`) and other app clients, the following values are valid.
+    #
+    #   REGULAR
+    #
+    #   : An app client not created through dynamic client registration.
+    #
+    #   DCR
+    #
+    #   : An app client created through dynamic client registration.
+    #
+    #   If you omit `ClientType`, the response includes app clients of all
+    #   types. When you set this filter, a page of results can contain fewer
+    #   app clients than `MaxResults`, or none, while the response still
+    #   includes a `NextToken`. Continue to request pages until the response
+    #   has no `NextToken`. The app clients in the response don't include
+    #   their type. To get the type of an app client, call
+    #   `DescribeUserPoolClient`.
+    #
     # @return [Types::ListUserPoolClientsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListUserPoolClientsResponse#user_pool_clients #user_pool_clients} => Array&lt;Types::UserPoolClientDescription&gt;
@@ -10693,6 +10752,7 @@ module Aws::CognitoIdentityProvider
     #     user_pool_id: "UserPoolIdType", # required
     #     max_results: 1,
     #     next_token: "PaginationKey",
+    #     client_type: "REGULAR", # accepts REGULAR, DCR
     #   })
     #
     # @example Response structure
@@ -13998,6 +14058,7 @@ module Aws::CognitoIdentityProvider
     #   resp.resource_server.scopes #=> Array
     #   resp.resource_server.scopes[0].scope_name #=> String
     #   resp.resource_server.scopes[0].scope_description #=> String
+    #   resp.resource_server.managed_by #=> String, one of "COGNITO"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateResourceServer AWS API Documentation
     #
@@ -14449,6 +14510,26 @@ module Aws::CognitoIdentityProvider
     #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
     #   [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html
     #
+    # @option params [Types::DcrConfigurationType] :dcr_configuration
+    #   The dynamic client registration configuration for the user pool. With
+    #   dynamic client registration, applications can register their own app
+    #   clients at runtime through the registration endpoint of your user pool
+    #   domain. To activate this setting, your user pool must be in the [
+    #   Essentials tier][1] or higher.
+    #
+    #   If you omit this parameter, Amazon Cognito keeps the existing
+    #   configuration. If you include it, Amazon Cognito replaces the existing
+    #   configuration with the one that you provide. Members that you omit
+    #   revert to their default values, and an omitted `EnableStatus` turns
+    #   dynamic client registration on.
+    #
+    #   To change the feature plan of the user pool to Lite, you must also set
+    #   `EnableStatus` to `Disabled`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
+    #
     # @option params [Types::AccountRecoverySettingType] :account_recovery_setting
     #   The available verified method a user can use to recover their password
     #   when they call `ForgotPassword`. You can use this setting to define a
@@ -14607,6 +14688,13 @@ module Aws::CognitoIdentityProvider
     #       advanced_security_additional_flows: {
     #         custom_auth_mode: "AUDIT", # accepts AUDIT, ENFORCED
     #       },
+    #     },
+    #     dcr_configuration: {
+    #       enable_status: "Enabled", # accepts Enabled, Disabled
+    #       open_dcr_enabled: false,
+    #       authenticated_grant_types: ["code"], # accepts code, implicit, client_credentials
+    #       open_dcr_grant_types: ["code"], # accepts code, implicit, client_credentials
+    #       allowed_scopes: ["ScopeType"],
     #     },
     #     account_recovery_setting: {
     #       recovery_mechanisms: [
@@ -15106,6 +15194,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.auth_session_validity #=> Integer
     #   resp.user_pool_client.refresh_token_rotation.feature #=> String, one of "ENABLED", "DISABLED"
     #   resp.user_pool_client.refresh_token_rotation.retry_grace_period_seconds #=> Integer
+    #   resp.user_pool_client.client_type #=> String, one of "REGULAR", "DCR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolClient AWS API Documentation
     #
@@ -15454,7 +15543,7 @@ module Aws::CognitoIdentityProvider
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.164.0'
+      context[:gem_version] = '1.165.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

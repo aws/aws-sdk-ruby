@@ -798,6 +798,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor admin_create_user_config: Types::AdminCreateUserConfigType
       attr_accessor schema: ::Array[Types::SchemaAttributeType]
       attr_accessor user_pool_add_ons: Types::UserPoolAddOnsType
+      attr_accessor dcr_configuration: Types::DcrConfigurationType
       attr_accessor username_configuration: Types::UsernameConfigurationType
       attr_accessor account_recovery_setting: Types::AccountRecoverySettingType
       attr_accessor user_pool_tier: ("LITE" | "ESSENTIALS" | "PLUS")
@@ -827,6 +828,15 @@ module Aws::CognitoIdentityProvider
     class CustomSMSLambdaVersionConfigType
       attr_accessor lambda_version: ("V1_0")
       attr_accessor lambda_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DcrConfigurationType
+      attr_accessor enable_status: ("Enabled" | "Disabled")
+      attr_accessor open_dcr_enabled: bool
+      attr_accessor authenticated_grant_types: ::Array[("code" | "implicit" | "client_credentials")]
+      attr_accessor open_dcr_grant_types: ::Array[("code" | "implicit" | "client_credentials")]
+      attr_accessor allowed_scopes: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1661,6 +1671,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor user_pool_id: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor client_type: ("REGULAR" | "DCR")
       SENSITIVE: []
     end
 
@@ -1931,6 +1942,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor identifier: ::String
       attr_accessor name: ::String
       attr_accessor scopes: ::Array[Types::ResourceServerScopeType]
+      attr_accessor managed_by: ("COGNITO")
       SENSITIVE: []
     end
 
@@ -2551,6 +2563,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor user_pool_tags: ::Hash[::String, ::String]
       attr_accessor admin_create_user_config: Types::AdminCreateUserConfigType
       attr_accessor user_pool_add_ons: Types::UserPoolAddOnsType
+      attr_accessor dcr_configuration: Types::DcrConfigurationType
       attr_accessor account_recovery_setting: Types::AccountRecoverySettingType
       attr_accessor pool_name: ::String
       attr_accessor user_pool_tier: ("LITE" | "ESSENTIALS" | "PLUS")
@@ -2657,6 +2670,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor enable_propagate_additional_user_context_data: bool
       attr_accessor auth_session_validity: ::Integer
       attr_accessor refresh_token_rotation: Types::RefreshTokenRotationType
+      attr_accessor client_type: ("REGULAR" | "DCR")
       SENSITIVE: [:client_id, :client_secret]
     end
 
@@ -2726,6 +2740,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor custom_domain: ::String
       attr_accessor admin_create_user_config: Types::AdminCreateUserConfigType
       attr_accessor user_pool_add_ons: Types::UserPoolAddOnsType
+      attr_accessor dcr_configuration: Types::DcrConfigurationType
       attr_accessor username_configuration: Types::UsernameConfigurationType
       attr_accessor arn: ::String
       attr_accessor account_recovery_setting: Types::AccountRecoverySettingType

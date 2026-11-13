@@ -15,6 +15,7 @@ module Aws::RolesAnywhere
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AliasName = Shapes::StringShape.new(name: 'AliasName')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AttributeMapping = Shapes::StructureShape.new(name: 'AttributeMapping')
     AttributeMappings = Shapes::ListShape.new(name: 'AttributeMappings')
@@ -26,9 +27,12 @@ module Aws::RolesAnywhere
     CreateTrustAnchorRequest = Shapes::StructureShape.new(name: 'CreateTrustAnchorRequest')
     CredentialSummaries = Shapes::ListShape.new(name: 'CredentialSummaries')
     CredentialSummary = Shapes::StructureShape.new(name: 'CredentialSummary')
+    CrlAliasArn = Shapes::StringShape.new(name: 'CrlAliasArn')
     CrlDetail = Shapes::StructureShape.new(name: 'CrlDetail')
     CrlDetailResponse = Shapes::StructureShape.new(name: 'CrlDetailResponse')
     CrlDetails = Shapes::ListShape.new(name: 'CrlDetails')
+    CrlIdentifier = Shapes::StringShape.new(name: 'CrlIdentifier')
+    CrlResourceArn = Shapes::StringShape.new(name: 'CrlResourceArn')
     DeleteAttributeMappingRequest = Shapes::StructureShape.new(name: 'DeleteAttributeMappingRequest')
     DeleteAttributeMappingResponse = Shapes::StructureShape.new(name: 'DeleteAttributeMappingResponse')
     ImportCrlRequest = Shapes::StructureShape.new(name: 'ImportCrlRequest')
@@ -63,10 +67,12 @@ module Aws::RolesAnywhere
     NotificationSettingKeys = Shapes::ListShape.new(name: 'NotificationSettingKeys')
     NotificationSettingThresholdInteger = Shapes::IntegerShape.new(name: 'NotificationSettingThresholdInteger')
     NotificationSettings = Shapes::ListShape.new(name: 'NotificationSettings')
-    ProfileArn = Shapes::StringShape.new(name: 'ProfileArn')
+    ProfileAliasArn = Shapes::StringShape.new(name: 'ProfileAliasArn')
     ProfileDetail = Shapes::StructureShape.new(name: 'ProfileDetail')
     ProfileDetailResponse = Shapes::StructureShape.new(name: 'ProfileDetailResponse')
     ProfileDetails = Shapes::ListShape.new(name: 'ProfileDetails')
+    ProfileIdentifier = Shapes::StringShape.new(name: 'ProfileIdentifier')
+    ProfileResourceArn = Shapes::StringShape.new(name: 'ProfileResourceArn')
     PutAttributeMappingRequest = Shapes::StructureShape.new(name: 'PutAttributeMappingRequest')
     PutAttributeMappingResponse = Shapes::StructureShape.new(name: 'PutAttributeMappingResponse')
     PutNotificationSettingsRequest = Shapes::StructureShape.new(name: 'PutNotificationSettingsRequest')
@@ -100,10 +106,13 @@ module Aws::RolesAnywhere
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
-    TrustAnchorArn = Shapes::StringShape.new(name: 'TrustAnchorArn')
+    TrustAnchorAliasArn = Shapes::StringShape.new(name: 'TrustAnchorAliasArn')
     TrustAnchorDetail = Shapes::StructureShape.new(name: 'TrustAnchorDetail')
     TrustAnchorDetailResponse = Shapes::StructureShape.new(name: 'TrustAnchorDetailResponse')
     TrustAnchorDetails = Shapes::ListShape.new(name: 'TrustAnchorDetails')
+    TrustAnchorIdentifier = Shapes::StringShape.new(name: 'TrustAnchorIdentifier')
+    TrustAnchorIdentifierArn = Shapes::StringShape.new(name: 'TrustAnchorIdentifierArn')
+    TrustAnchorResourceArn = Shapes::StringShape.new(name: 'TrustAnchorResourceArn')
     TrustAnchorType = Shapes::StringShape.new(name: 'TrustAnchorType')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -134,6 +143,7 @@ module Aws::RolesAnywhere
     CreateProfileRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     CreateProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateProfileRequest.add_member(:accept_role_session_name, Shapes::ShapeRef.new(shape: Boolean, location_name: "acceptRoleSessionName"))
+    CreateProfileRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, location_name: "aliasName"))
     CreateProfileRequest.struct_class = Types::CreateProfileRequest
 
     CreateTrustAnchorRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
@@ -142,6 +152,7 @@ module Aws::RolesAnywhere
     CreateTrustAnchorRequest.add_member(:crl_dp_revocation_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "crlDpRevocationEnabled"))
     CreateTrustAnchorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateTrustAnchorRequest.add_member(:notification_settings, Shapes::ShapeRef.new(shape: NotificationSettings, location_name: "notificationSettings"))
+    CreateTrustAnchorRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, location_name: "aliasName"))
     CreateTrustAnchorRequest.struct_class = Types::CreateTrustAnchorRequest
 
     CredentialSummaries.member = Shapes::ShapeRef.new(shape: CredentialSummary)
@@ -155,13 +166,16 @@ module Aws::RolesAnywhere
     CredentialSummary.struct_class = Types::CredentialSummary
 
     CrlDetail.add_member(:crl_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "crlId"))
-    CrlDetail.add_member(:crl_arn, Shapes::ShapeRef.new(shape: String, location_name: "crlArn"))
+    CrlDetail.add_member(:crl_arn, Shapes::ShapeRef.new(shape: CrlResourceArn, location_name: "crlArn"))
     CrlDetail.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     CrlDetail.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     CrlDetail.add_member(:crl_data, Shapes::ShapeRef.new(shape: Blob, location_name: "crlData"))
-    CrlDetail.add_member(:trust_anchor_arn, Shapes::ShapeRef.new(shape: String, location_name: "trustAnchorArn"))
+    CrlDetail.add_member(:trust_anchor_arn, Shapes::ShapeRef.new(shape: TrustAnchorResourceArn, location_name: "trustAnchorArn"))
     CrlDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     CrlDetail.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    CrlDetail.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, location_name: "aliasName"))
+    CrlDetail.add_member(:alias_arn, Shapes::ShapeRef.new(shape: CrlAliasArn, location_name: "aliasArn"))
+    CrlDetail.add_member(:previous_alias_name, Shapes::ShapeRef.new(shape: AliasName, location_name: "previousAliasName"))
     CrlDetail.struct_class = Types::CrlDetail
 
     CrlDetailResponse.add_member(:crl, Shapes::ShapeRef.new(shape: CrlDetail, required: true, location_name: "crl"))
@@ -169,7 +183,7 @@ module Aws::RolesAnywhere
 
     CrlDetails.member = Shapes::ShapeRef.new(shape: CrlDetail)
 
-    DeleteAttributeMappingRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "profileId"))
+    DeleteAttributeMappingRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: ProfileIdentifier, required: true, location: "uri", location_name: "profileId"))
     DeleteAttributeMappingRequest.add_member(:certificate_field, Shapes::ShapeRef.new(shape: CertificateField, required: true, location: "querystring", location_name: "certificateField"))
     DeleteAttributeMappingRequest.add_member(:specifiers, Shapes::ShapeRef.new(shape: SpecifierList, location: "querystring", location_name: "specifiers"))
     DeleteAttributeMappingRequest.struct_class = Types::DeleteAttributeMappingRequest
@@ -181,7 +195,8 @@ module Aws::RolesAnywhere
     ImportCrlRequest.add_member(:crl_data, Shapes::ShapeRef.new(shape: ImportCrlRequestCrlDataBlob, required: true, location_name: "crlData"))
     ImportCrlRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     ImportCrlRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
-    ImportCrlRequest.add_member(:trust_anchor_arn, Shapes::ShapeRef.new(shape: TrustAnchorArn, required: true, location_name: "trustAnchorArn"))
+    ImportCrlRequest.add_member(:trust_anchor_arn, Shapes::ShapeRef.new(shape: TrustAnchorIdentifierArn, required: true, location_name: "trustAnchorArn"))
+    ImportCrlRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, location_name: "aliasName"))
     ImportCrlRequest.struct_class = Types::ImportCrlRequest
 
     InstanceProperties.member = Shapes::ShapeRef.new(shape: InstanceProperty)
@@ -251,7 +266,7 @@ module Aws::RolesAnywhere
     NotificationSettings.member = Shapes::ShapeRef.new(shape: NotificationSetting)
 
     ProfileDetail.add_member(:profile_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "profileId"))
-    ProfileDetail.add_member(:profile_arn, Shapes::ShapeRef.new(shape: ProfileArn, location_name: "profileArn"))
+    ProfileDetail.add_member(:profile_arn, Shapes::ShapeRef.new(shape: ProfileResourceArn, location_name: "profileArn"))
     ProfileDetail.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     ProfileDetail.add_member(:require_instance_properties, Shapes::ShapeRef.new(shape: Boolean, location_name: "requireInstanceProperties"))
     ProfileDetail.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
@@ -264,6 +279,9 @@ module Aws::RolesAnywhere
     ProfileDetail.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "durationSeconds"))
     ProfileDetail.add_member(:accept_role_session_name, Shapes::ShapeRef.new(shape: Boolean, location_name: "acceptRoleSessionName"))
     ProfileDetail.add_member(:attribute_mappings, Shapes::ShapeRef.new(shape: AttributeMappings, location_name: "attributeMappings"))
+    ProfileDetail.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, location_name: "aliasName"))
+    ProfileDetail.add_member(:alias_arn, Shapes::ShapeRef.new(shape: ProfileAliasArn, location_name: "aliasArn"))
+    ProfileDetail.add_member(:previous_alias_name, Shapes::ShapeRef.new(shape: AliasName, location_name: "previousAliasName"))
     ProfileDetail.struct_class = Types::ProfileDetail
 
     ProfileDetailResponse.add_member(:profile, Shapes::ShapeRef.new(shape: ProfileDetail, location_name: "profile"))
@@ -271,7 +289,7 @@ module Aws::RolesAnywhere
 
     ProfileDetails.member = Shapes::ShapeRef.new(shape: ProfileDetail)
 
-    PutAttributeMappingRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "profileId"))
+    PutAttributeMappingRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: ProfileIdentifier, required: true, location: "uri", location_name: "profileId"))
     PutAttributeMappingRequest.add_member(:certificate_field, Shapes::ShapeRef.new(shape: CertificateField, required: true, location_name: "certificateField"))
     PutAttributeMappingRequest.add_member(:mapping_rules, Shapes::ShapeRef.new(shape: MappingRules, required: true, location_name: "mappingRules"))
     PutAttributeMappingRequest.struct_class = Types::PutAttributeMappingRequest
@@ -298,16 +316,16 @@ module Aws::RolesAnywhere
 
     RoleArnList.member = Shapes::ShapeRef.new(shape: RoleArn)
 
-    ScalarCrlRequest.add_member(:crl_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "crlId"))
+    ScalarCrlRequest.add_member(:crl_id, Shapes::ShapeRef.new(shape: CrlIdentifier, required: true, location: "uri", location_name: "crlId"))
     ScalarCrlRequest.struct_class = Types::ScalarCrlRequest
 
-    ScalarProfileRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "profileId"))
+    ScalarProfileRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: ProfileIdentifier, required: true, location: "uri", location_name: "profileId"))
     ScalarProfileRequest.struct_class = Types::ScalarProfileRequest
 
     ScalarSubjectRequest.add_member(:subject_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "subjectId"))
     ScalarSubjectRequest.struct_class = Types::ScalarSubjectRequest
 
-    ScalarTrustAnchorRequest.add_member(:trust_anchor_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "trustAnchorId"))
+    ScalarTrustAnchorRequest.add_member(:trust_anchor_id, Shapes::ShapeRef.new(shape: TrustAnchorIdentifier, required: true, location: "uri", location_name: "trustAnchorId"))
     ScalarTrustAnchorRequest.struct_class = Types::ScalarTrustAnchorRequest
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -371,7 +389,7 @@ module Aws::RolesAnywhere
     TooManyTagsException.struct_class = Types::TooManyTagsException
 
     TrustAnchorDetail.add_member(:trust_anchor_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "trustAnchorId"))
-    TrustAnchorDetail.add_member(:trust_anchor_arn, Shapes::ShapeRef.new(shape: String, location_name: "trustAnchorArn"))
+    TrustAnchorDetail.add_member(:trust_anchor_arn, Shapes::ShapeRef.new(shape: TrustAnchorResourceArn, location_name: "trustAnchorArn"))
     TrustAnchorDetail.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     TrustAnchorDetail.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
     TrustAnchorDetail.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
@@ -379,6 +397,9 @@ module Aws::RolesAnywhere
     TrustAnchorDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     TrustAnchorDetail.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     TrustAnchorDetail.add_member(:notification_settings, Shapes::ShapeRef.new(shape: NotificationSettingDetails, location_name: "notificationSettings"))
+    TrustAnchorDetail.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, location_name: "aliasName"))
+    TrustAnchorDetail.add_member(:alias_arn, Shapes::ShapeRef.new(shape: TrustAnchorAliasArn, location_name: "aliasArn"))
+    TrustAnchorDetail.add_member(:previous_alias_name, Shapes::ShapeRef.new(shape: AliasName, location_name: "previousAliasName"))
     TrustAnchorDetail.struct_class = Types::TrustAnchorDetail
 
     TrustAnchorDetailResponse.add_member(:trust_anchor, Shapes::ShapeRef.new(shape: TrustAnchorDetail, required: true, location_name: "trustAnchor"))
@@ -392,24 +413,27 @@ module Aws::RolesAnywhere
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
-    UpdateCrlRequest.add_member(:crl_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "crlId"))
+    UpdateCrlRequest.add_member(:crl_id, Shapes::ShapeRef.new(shape: CrlIdentifier, required: true, location: "uri", location_name: "crlId"))
     UpdateCrlRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     UpdateCrlRequest.add_member(:crl_data, Shapes::ShapeRef.new(shape: UpdateCrlRequestCrlDataBlob, location_name: "crlData"))
+    UpdateCrlRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, location_name: "aliasName"))
     UpdateCrlRequest.struct_class = Types::UpdateCrlRequest
 
-    UpdateProfileRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "profileId"))
+    UpdateProfileRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: ProfileIdentifier, required: true, location: "uri", location_name: "profileId"))
     UpdateProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     UpdateProfileRequest.add_member(:session_policy, Shapes::ShapeRef.new(shape: UpdateProfileRequestSessionPolicyString, location_name: "sessionPolicy"))
     UpdateProfileRequest.add_member(:role_arns, Shapes::ShapeRef.new(shape: RoleArnList, location_name: "roleArns"))
     UpdateProfileRequest.add_member(:managed_policy_arns, Shapes::ShapeRef.new(shape: ManagedPolicyList, location_name: "managedPolicyArns"))
     UpdateProfileRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: UpdateProfileRequestDurationSecondsInteger, location_name: "durationSeconds"))
     UpdateProfileRequest.add_member(:accept_role_session_name, Shapes::ShapeRef.new(shape: Boolean, location_name: "acceptRoleSessionName"))
+    UpdateProfileRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, location_name: "aliasName"))
     UpdateProfileRequest.struct_class = Types::UpdateProfileRequest
 
-    UpdateTrustAnchorRequest.add_member(:trust_anchor_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "trustAnchorId"))
+    UpdateTrustAnchorRequest.add_member(:trust_anchor_id, Shapes::ShapeRef.new(shape: TrustAnchorIdentifier, required: true, location: "uri", location_name: "trustAnchorId"))
     UpdateTrustAnchorRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     UpdateTrustAnchorRequest.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
     UpdateTrustAnchorRequest.add_member(:crl_dp_revocation_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "crlDpRevocationEnabled"))
+    UpdateTrustAnchorRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, location_name: "aliasName"))
     UpdateTrustAnchorRequest.struct_class = Types::UpdateTrustAnchorRequest
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))

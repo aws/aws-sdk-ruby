@@ -182,6 +182,8 @@ module Aws::EC2
     AssociateIpamResourceDiscoveryResult = Shapes::StructureShape.new(name: 'AssociateIpamResourceDiscoveryResult')
     AssociateNatGatewayAddressRequest = Shapes::StructureShape.new(name: 'AssociateNatGatewayAddressRequest')
     AssociateNatGatewayAddressResult = Shapes::StructureShape.new(name: 'AssociateNatGatewayAddressResult')
+    AssociateNetworkingFlexCostAllocationPolicyRequest = Shapes::StructureShape.new(name: 'AssociateNetworkingFlexCostAllocationPolicyRequest')
+    AssociateNetworkingFlexCostAllocationPolicyResult = Shapes::StructureShape.new(name: 'AssociateNetworkingFlexCostAllocationPolicyResult')
     AssociateRouteServerRequest = Shapes::StructureShape.new(name: 'AssociateRouteServerRequest')
     AssociateRouteServerResult = Shapes::StructureShape.new(name: 'AssociateRouteServerResult')
     AssociateRouteTableRequest = Shapes::StructureShape.new(name: 'AssociateRouteTableRequest')
@@ -678,6 +680,8 @@ module Aws::EC2
     CreateNetworkInterfacePermissionResult = Shapes::StructureShape.new(name: 'CreateNetworkInterfacePermissionResult')
     CreateNetworkInterfaceRequest = Shapes::StructureShape.new(name: 'CreateNetworkInterfaceRequest')
     CreateNetworkInterfaceResult = Shapes::StructureShape.new(name: 'CreateNetworkInterfaceResult')
+    CreateNetworkingFlexCostAllocationPolicyRequest = Shapes::StructureShape.new(name: 'CreateNetworkingFlexCostAllocationPolicyRequest')
+    CreateNetworkingFlexCostAllocationPolicyResult = Shapes::StructureShape.new(name: 'CreateNetworkingFlexCostAllocationPolicyResult')
     CreatePlacementGroupRequest = Shapes::StructureShape.new(name: 'CreatePlacementGroupRequest')
     CreatePlacementGroupResult = Shapes::StructureShape.new(name: 'CreatePlacementGroupResult')
     CreatePublicIpv4PoolRequest = Shapes::StructureShape.new(name: 'CreatePublicIpv4PoolRequest')
@@ -941,6 +945,8 @@ module Aws::EC2
     DeleteNetworkInterfacePermissionRequest = Shapes::StructureShape.new(name: 'DeleteNetworkInterfacePermissionRequest')
     DeleteNetworkInterfacePermissionResult = Shapes::StructureShape.new(name: 'DeleteNetworkInterfacePermissionResult')
     DeleteNetworkInterfaceRequest = Shapes::StructureShape.new(name: 'DeleteNetworkInterfaceRequest')
+    DeleteNetworkingFlexCostAllocationPoliciesRequest = Shapes::StructureShape.new(name: 'DeleteNetworkingFlexCostAllocationPoliciesRequest')
+    DeleteNetworkingFlexCostAllocationPoliciesResult = Shapes::StructureShape.new(name: 'DeleteNetworkingFlexCostAllocationPoliciesResult')
     DeletePlacementGroupRequest = Shapes::StructureShape.new(name: 'DeletePlacementGroupRequest')
     DeletePublicIpv4PoolRequest = Shapes::StructureShape.new(name: 'DeletePublicIpv4PoolRequest')
     DeletePublicIpv4PoolResult = Shapes::StructureShape.new(name: 'DeletePublicIpv4PoolResult')
@@ -1185,6 +1191,7 @@ module Aws::EC2
     DescribeFleetsInstancesSet = Shapes::ListShape.new(name: 'DescribeFleetsInstancesSet')
     DescribeFleetsRequest = Shapes::StructureShape.new(name: 'DescribeFleetsRequest')
     DescribeFleetsResult = Shapes::StructureShape.new(name: 'DescribeFleetsResult')
+    DescribeFlexCostAllocationPoliciesMaxResults = Shapes::IntegerShape.new(name: 'DescribeFlexCostAllocationPoliciesMaxResults')
     DescribeFlowLogsRequest = Shapes::StructureShape.new(name: 'DescribeFlowLogsRequest')
     DescribeFlowLogsResult = Shapes::StructureShape.new(name: 'DescribeFlowLogsResult')
     DescribeFpgaImageAttributeRequest = Shapes::StructureShape.new(name: 'DescribeFpgaImageAttributeRequest')
@@ -1345,6 +1352,10 @@ module Aws::EC2
     DescribeNetworkInterfacesMaxResults = Shapes::IntegerShape.new(name: 'DescribeNetworkInterfacesMaxResults')
     DescribeNetworkInterfacesRequest = Shapes::StructureShape.new(name: 'DescribeNetworkInterfacesRequest')
     DescribeNetworkInterfacesResult = Shapes::StructureShape.new(name: 'DescribeNetworkInterfacesResult')
+    DescribeNetworkingFlexCostAllocationPoliciesRequest = Shapes::StructureShape.new(name: 'DescribeNetworkingFlexCostAllocationPoliciesRequest')
+    DescribeNetworkingFlexCostAllocationPoliciesResult = Shapes::StructureShape.new(name: 'DescribeNetworkingFlexCostAllocationPoliciesResult')
+    DescribeNetworkingFlexCostAllocationPolicyAssociationsRequest = Shapes::StructureShape.new(name: 'DescribeNetworkingFlexCostAllocationPolicyAssociationsRequest')
+    DescribeNetworkingFlexCostAllocationPolicyAssociationsResult = Shapes::StructureShape.new(name: 'DescribeNetworkingFlexCostAllocationPolicyAssociationsResult')
     DescribeOutpostLagsRequest = Shapes::StructureShape.new(name: 'DescribeOutpostLagsRequest')
     DescribeOutpostLagsResult = Shapes::StructureShape.new(name: 'DescribeOutpostLagsResult')
     DescribePlacementGroupsRequest = Shapes::StructureShape.new(name: 'DescribePlacementGroupsRequest')
@@ -1634,6 +1645,8 @@ module Aws::EC2
     DisassociateIpamResourceDiscoveryResult = Shapes::StructureShape.new(name: 'DisassociateIpamResourceDiscoveryResult')
     DisassociateNatGatewayAddressRequest = Shapes::StructureShape.new(name: 'DisassociateNatGatewayAddressRequest')
     DisassociateNatGatewayAddressResult = Shapes::StructureShape.new(name: 'DisassociateNatGatewayAddressResult')
+    DisassociateNetworkingFlexCostAllocationPolicyRequest = Shapes::StructureShape.new(name: 'DisassociateNetworkingFlexCostAllocationPolicyRequest')
+    DisassociateNetworkingFlexCostAllocationPolicyResult = Shapes::StructureShape.new(name: 'DisassociateNetworkingFlexCostAllocationPolicyResult')
     DisassociateRouteServerRequest = Shapes::StructureShape.new(name: 'DisassociateRouteServerRequest')
     DisassociateRouteServerResult = Shapes::StructureShape.new(name: 'DisassociateRouteServerResult')
     DisassociateRouteTableRequest = Shapes::StructureShape.new(name: 'DisassociateRouteTableRequest')
@@ -1891,6 +1904,40 @@ module Aws::EC2
     FleetSpotMaintenanceStrategiesRequest = Shapes::StructureShape.new(name: 'FleetSpotMaintenanceStrategiesRequest')
     FleetStateCode = Shapes::StringShape.new(name: 'FleetStateCode')
     FleetType = Shapes::StringShape.new(name: 'FleetType')
+    FlexCostAllocationAssociationMode = Shapes::StringShape.new(name: 'FlexCostAllocationAssociationMode')
+    FlexCostAllocationCidrLabel = Shapes::StringShape.new(name: 'FlexCostAllocationCidrLabel')
+    FlexCostAllocationCidrMapping = Shapes::StructureShape.new(name: 'FlexCostAllocationCidrMapping')
+    FlexCostAllocationCidrMappingCidrRangeString = Shapes::StringShape.new(name: 'FlexCostAllocationCidrMappingCidrRangeString')
+    FlexCostAllocationCidrMappingList = Shapes::ListShape.new(name: 'FlexCostAllocationCidrMappingList')
+    FlexCostAllocationCidrRangeSpecifications = Shapes::StructureShape.new(name: 'FlexCostAllocationCidrRangeSpecifications')
+    FlexCostAllocationCidrRangeSpecificationsPrefixesTypeString = Shapes::StringShape.new(name: 'FlexCostAllocationCidrRangeSpecificationsPrefixesTypeString')
+    FlexCostAllocationCostDimension = Shapes::StringShape.new(name: 'FlexCostAllocationCostDimension')
+    FlexCostAllocationCostDimensionList = Shapes::ListShape.new(name: 'FlexCostAllocationCostDimensionList')
+    FlexCostAllocationNetworkResourceId = Shapes::StringShape.new(name: 'FlexCostAllocationNetworkResourceId')
+    FlexCostAllocationNetworkResourceIdList = Shapes::ListShape.new(name: 'FlexCostAllocationNetworkResourceIdList')
+    FlexCostAllocationNetworkResourceScope = Shapes::StructureShape.new(name: 'FlexCostAllocationNetworkResourceScope')
+    FlexCostAllocationNetworkResourceScopeIdList = Shapes::ListShape.new(name: 'FlexCostAllocationNetworkResourceScopeIdList')
+    FlexCostAllocationNetworkResourceScopeType = Shapes::StringShape.new(name: 'FlexCostAllocationNetworkResourceScopeType')
+    FlexCostAllocationNetworkResourceType = Shapes::StringShape.new(name: 'FlexCostAllocationNetworkResourceType')
+    FlexCostAllocationOperationFailure = Shapes::StructureShape.new(name: 'FlexCostAllocationOperationFailure')
+    FlexCostAllocationOperationFailureList = Shapes::ListShape.new(name: 'FlexCostAllocationOperationFailureList')
+    FlexCostAllocationPolicyArn = Shapes::StringShape.new(name: 'FlexCostAllocationPolicyArn')
+    FlexCostAllocationPolicyAssociationDescription = Shapes::StructureShape.new(name: 'FlexCostAllocationPolicyAssociationDescription')
+    FlexCostAllocationPolicyAssociationId = Shapes::StringShape.new(name: 'FlexCostAllocationPolicyAssociationId')
+    FlexCostAllocationPolicyAssociationIdList = Shapes::ListShape.new(name: 'FlexCostAllocationPolicyAssociationIdList')
+    FlexCostAllocationPolicyAssociationSet = Shapes::ListShape.new(name: 'FlexCostAllocationPolicyAssociationSet')
+    FlexCostAllocationPolicyDescription = Shapes::StructureShape.new(name: 'FlexCostAllocationPolicyDescription')
+    FlexCostAllocationPolicyDisassociateAssociationIdList = Shapes::ListShape.new(name: 'FlexCostAllocationPolicyDisassociateAssociationIdList')
+    FlexCostAllocationPolicyId = Shapes::StringShape.new(name: 'FlexCostAllocationPolicyId')
+    FlexCostAllocationPolicyIdList = Shapes::ListShape.new(name: 'FlexCostAllocationPolicyIdList')
+    FlexCostAllocationPolicyIdSet = Shapes::ListShape.new(name: 'FlexCostAllocationPolicyIdSet')
+    FlexCostAllocationPolicySet = Shapes::ListShape.new(name: 'FlexCostAllocationPolicySet')
+    FlexCostAllocationPolicyVersion = Shapes::StructureShape.new(name: 'FlexCostAllocationPolicyVersion')
+    FlexCostAllocationPolicyVersionNumber = Shapes::IntegerShape.new(name: 'FlexCostAllocationPolicyVersionNumber')
+    FlexCostAllocationPolicyVersionSet = Shapes::ListShape.new(name: 'FlexCostAllocationPolicyVersionSet')
+    FlexCostAllocationReportingGranularity = Shapes::StringShape.new(name: 'FlexCostAllocationReportingGranularity')
+    FlexCostAllocationReportingGranularityList = Shapes::ListShape.new(name: 'FlexCostAllocationReportingGranularityList')
+    FlexCostAllocationVersionsToIncludeList = Shapes::ListShape.new(name: 'FlexCostAllocationVersionsToIncludeList')
     FlexibleEnaQueuesSupport = Shapes::StringShape.new(name: 'FlexibleEnaQueuesSupport')
     Float = Shapes::FloatShape.new(name: 'Float')
     FlowLog = Shapes::StructureShape.new(name: 'FlowLog')
@@ -2037,6 +2084,8 @@ module Aws::EC2
     GetNetworkInsightsAccessScopeAnalysisFindingsResult = Shapes::StructureShape.new(name: 'GetNetworkInsightsAccessScopeAnalysisFindingsResult')
     GetNetworkInsightsAccessScopeContentRequest = Shapes::StructureShape.new(name: 'GetNetworkInsightsAccessScopeContentRequest')
     GetNetworkInsightsAccessScopeContentResult = Shapes::StructureShape.new(name: 'GetNetworkInsightsAccessScopeContentResult')
+    GetNetworkingFlexCostAllocationPolicyVersionsRequest = Shapes::StructureShape.new(name: 'GetNetworkingFlexCostAllocationPolicyVersionsRequest')
+    GetNetworkingFlexCostAllocationPolicyVersionsResult = Shapes::StructureShape.new(name: 'GetNetworkingFlexCostAllocationPolicyVersionsResult')
     GetPasswordDataRequest = Shapes::StructureShape.new(name: 'GetPasswordDataRequest')
     GetPasswordDataResult = Shapes::StructureShape.new(name: 'GetPasswordDataResult')
     GetReservedInstancesExchangeQuoteRequest = Shapes::StructureShape.new(name: 'GetReservedInstancesExchangeQuoteRequest')
@@ -2318,6 +2367,7 @@ module Aws::EC2
     InstanceEventWindowTimeRangeRequestSet = Shapes::ListShape.new(name: 'InstanceEventWindowTimeRangeRequestSet')
     InstanceExportDetails = Shapes::StructureShape.new(name: 'InstanceExportDetails')
     InstanceFamilyCreditSpecification = Shapes::StructureShape.new(name: 'InstanceFamilyCreditSpecification')
+    InstanceFlexCostAllocationPolicyDocument = Shapes::StructureShape.new(name: 'InstanceFlexCostAllocationPolicyDocument')
     InstanceGeneration = Shapes::StringShape.new(name: 'InstanceGeneration')
     InstanceGenerationSet = Shapes::ListShape.new(name: 'InstanceGenerationSet')
     InstanceHealthStatus = Shapes::StringShape.new(name: 'InstanceHealthStatus')
@@ -2953,6 +3003,8 @@ module Aws::EC2
     ModifyMetricCategoryRequest = Shapes::StructureShape.new(name: 'ModifyMetricCategoryRequest')
     ModifyMetricCategoryResult = Shapes::StructureShape.new(name: 'ModifyMetricCategoryResult')
     ModifyNetworkInterfaceAttributeRequest = Shapes::StructureShape.new(name: 'ModifyNetworkInterfaceAttributeRequest')
+    ModifyNetworkingFlexCostAllocationPolicyRequest = Shapes::StructureShape.new(name: 'ModifyNetworkingFlexCostAllocationPolicyRequest')
+    ModifyNetworkingFlexCostAllocationPolicyResult = Shapes::StructureShape.new(name: 'ModifyNetworkingFlexCostAllocationPolicyResult')
     ModifyPrivateDnsNameOptionsRequest = Shapes::StructureShape.new(name: 'ModifyPrivateDnsNameOptionsRequest')
     ModifyPrivateDnsNameOptionsResult = Shapes::StructureShape.new(name: 'ModifyPrivateDnsNameOptionsResult')
     ModifyPublicIpDnsNameOptionsRequest = Shapes::StructureShape.new(name: 'ModifyPublicIpDnsNameOptionsRequest')
@@ -3062,6 +3114,7 @@ module Aws::EC2
     MovingAddressStatus = Shapes::StructureShape.new(name: 'MovingAddressStatus')
     MovingAddressStatusSet = Shapes::ListShape.new(name: 'MovingAddressStatusSet')
     MulticastSupportValue = Shapes::StringShape.new(name: 'MulticastSupportValue')
+    NatFlexCostAllocationPolicyDocument = Shapes::StructureShape.new(name: 'NatFlexCostAllocationPolicyDocument')
     NatGateway = Shapes::StructureShape.new(name: 'NatGateway')
     NatGatewayAddress = Shapes::StructureShape.new(name: 'NatGatewayAddress')
     NatGatewayAddressList = Shapes::ListShape.new(name: 'NatGatewayAddressList')
@@ -3201,6 +3254,7 @@ module Aws::EC2
     PayerResponsibilityType = Shapes::StringShape.new(name: 'PayerResponsibilityType')
     PaymentOption = Shapes::StringShape.new(name: 'PaymentOption')
     PciId = Shapes::StructureShape.new(name: 'PciId')
+    PcxFlexCostAllocationPolicyDocument = Shapes::StructureShape.new(name: 'PcxFlexCostAllocationPolicyDocument')
     PeakBandwidthInGbps = Shapes::FloatShape.new(name: 'PeakBandwidthInGbps')
     PeeringAttachmentStatus = Shapes::StructureShape.new(name: 'PeeringAttachmentStatus')
     PeeringConnectionOptions = Shapes::StructureShape.new(name: 'PeeringConnectionOptions')
@@ -4956,6 +5010,17 @@ module Aws::EC2
     AssociateNatGatewayAddressResult.add_member(:nat_gateway_id, Shapes::ShapeRef.new(shape: NatGatewayId, location_name: "natGatewayId"))
     AssociateNatGatewayAddressResult.add_member(:nat_gateway_addresses, Shapes::ShapeRef.new(shape: NatGatewayAddressList, location_name: "natGatewayAddressSet"))
     AssociateNatGatewayAddressResult.struct_class = Types::AssociateNatGatewayAddressResult
+
+    AssociateNetworkingFlexCostAllocationPolicyRequest.add_member(:fca_policy_id, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyId, required: true, location_name: "FcaPolicyId"))
+    AssociateNetworkingFlexCostAllocationPolicyRequest.add_member(:network_resource_ids, Shapes::ShapeRef.new(shape: FlexCostAllocationNetworkResourceIdList, location_name: "NetworkResourceIds"))
+    AssociateNetworkingFlexCostAllocationPolicyRequest.add_member(:network_resource_scope, Shapes::ShapeRef.new(shape: FlexCostAllocationNetworkResourceScope, location_name: "NetworkResourceScope"))
+    AssociateNetworkingFlexCostAllocationPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    AssociateNetworkingFlexCostAllocationPolicyRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    AssociateNetworkingFlexCostAllocationPolicyRequest.struct_class = Types::AssociateNetworkingFlexCostAllocationPolicyRequest
+
+    AssociateNetworkingFlexCostAllocationPolicyResult.add_member(:fca_policy_associations, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyAssociationSet, location_name: "fcaPolicyAssociations"))
+    AssociateNetworkingFlexCostAllocationPolicyResult.add_member(:fca_policy_association_failures, Shapes::ShapeRef.new(shape: FlexCostAllocationOperationFailureList, location_name: "fcaPolicyAssociationFailures"))
+    AssociateNetworkingFlexCostAllocationPolicyResult.struct_class = Types::AssociateNetworkingFlexCostAllocationPolicyResult
 
     AssociateRouteServerRequest.add_member(:route_server_id, Shapes::ShapeRef.new(shape: RouteServerId, required: true, location_name: "RouteServerId"))
     AssociateRouteServerRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
@@ -6969,6 +7034,23 @@ module Aws::EC2
     CreateNetworkInterfaceResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     CreateNetworkInterfaceResult.struct_class = Types::CreateNetworkInterfaceResult
 
+    CreateNetworkingFlexCostAllocationPolicyRequest.add_member(:network_resource_type, Shapes::ShapeRef.new(shape: FlexCostAllocationNetworkResourceType, required: true, location_name: "NetworkResourceType"))
+    CreateNetworkingFlexCostAllocationPolicyRequest.add_member(:nat_fca_policy_document, Shapes::ShapeRef.new(shape: NatFlexCostAllocationPolicyDocument, location_name: "NatFcaPolicyDocument"))
+    CreateNetworkingFlexCostAllocationPolicyRequest.add_member(:instance_fca_policy_document, Shapes::ShapeRef.new(shape: InstanceFlexCostAllocationPolicyDocument, location_name: "InstanceFcaPolicyDocument"))
+    CreateNetworkingFlexCostAllocationPolicyRequest.add_member(:pcx_fca_policy_document, Shapes::ShapeRef.new(shape: PcxFlexCostAllocationPolicyDocument, location_name: "PcxFcaPolicyDocument"))
+    CreateNetworkingFlexCostAllocationPolicyRequest.add_member(:show_back_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "ShowBackEnabled"))
+    CreateNetworkingFlexCostAllocationPolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateNetworkingFlexCostAllocationPolicyRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
+    CreateNetworkingFlexCostAllocationPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateNetworkingFlexCostAllocationPolicyRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateNetworkingFlexCostAllocationPolicyRequest.struct_class = Types::CreateNetworkingFlexCostAllocationPolicyRequest
+
+    CreateNetworkingFlexCostAllocationPolicyResult.add_member(:fca_policy_id, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyId, location_name: "fcaPolicyId"))
+    CreateNetworkingFlexCostAllocationPolicyResult.add_member(:fca_policy_arn, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyArn, location_name: "fcaPolicyArn"))
+    CreateNetworkingFlexCostAllocationPolicyResult.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "createdAt"))
+    CreateNetworkingFlexCostAllocationPolicyResult.add_member(:expected_effective_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "expectedEffectiveAt"))
+    CreateNetworkingFlexCostAllocationPolicyResult.struct_class = Types::CreateNetworkingFlexCostAllocationPolicyResult
+
     CreatePlacementGroupRequest.add_member(:partition_count, Shapes::ShapeRef.new(shape: Integer, location_name: "PartitionCount"))
     CreatePlacementGroupRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreatePlacementGroupRequest.add_member(:spread_level, Shapes::ShapeRef.new(shape: SpreadLevel, location_name: "SpreadLevel"))
@@ -8148,6 +8230,14 @@ module Aws::EC2
     DeleteNetworkInterfaceRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeleteNetworkInterfaceRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, required: true, location_name: "networkInterfaceId"))
     DeleteNetworkInterfaceRequest.struct_class = Types::DeleteNetworkInterfaceRequest
+
+    DeleteNetworkingFlexCostAllocationPoliciesRequest.add_member(:fca_policy_ids, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyIdList, required: true, location_name: "FcaPolicyIds"))
+    DeleteNetworkingFlexCostAllocationPoliciesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteNetworkingFlexCostAllocationPoliciesRequest.struct_class = Types::DeleteNetworkingFlexCostAllocationPoliciesRequest
+
+    DeleteNetworkingFlexCostAllocationPoliciesResult.add_member(:successful, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyIdList, location_name: "successful"))
+    DeleteNetworkingFlexCostAllocationPoliciesResult.add_member(:failed, Shapes::ShapeRef.new(shape: FlexCostAllocationOperationFailureList, location_name: "failed"))
+    DeleteNetworkingFlexCostAllocationPoliciesResult.struct_class = Types::DeleteNetworkingFlexCostAllocationPoliciesResult
 
     DeletePlacementGroupRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeletePlacementGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: PlacementGroupNameWithResolver, required: true, location_name: "groupName"))
@@ -9855,6 +9945,28 @@ module Aws::EC2
     DescribeNetworkInterfacesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeNetworkInterfacesResult.struct_class = Types::DescribeNetworkInterfacesResult
 
+    DescribeNetworkingFlexCostAllocationPoliciesRequest.add_member(:fca_policy_ids, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyIdSet, location_name: "FcaPolicyIds"))
+    DescribeNetworkingFlexCostAllocationPoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeFlexCostAllocationPoliciesMaxResults, location_name: "MaxResults"))
+    DescribeNetworkingFlexCostAllocationPoliciesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeNetworkingFlexCostAllocationPoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeNetworkingFlexCostAllocationPoliciesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeNetworkingFlexCostAllocationPoliciesRequest.struct_class = Types::DescribeNetworkingFlexCostAllocationPoliciesRequest
+
+    DescribeNetworkingFlexCostAllocationPoliciesResult.add_member(:flex_cost_allocation_policies, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicySet, location_name: "flexCostAllocationPolicies"))
+    DescribeNetworkingFlexCostAllocationPoliciesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeNetworkingFlexCostAllocationPoliciesResult.struct_class = Types::DescribeNetworkingFlexCostAllocationPoliciesResult
+
+    DescribeNetworkingFlexCostAllocationPolicyAssociationsRequest.add_member(:fca_policy_association_ids, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyAssociationIdList, location_name: "FcaPolicyAssociationIds"))
+    DescribeNetworkingFlexCostAllocationPolicyAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeFlexCostAllocationPoliciesMaxResults, location_name: "MaxResults"))
+    DescribeNetworkingFlexCostAllocationPolicyAssociationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeNetworkingFlexCostAllocationPolicyAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeNetworkingFlexCostAllocationPolicyAssociationsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeNetworkingFlexCostAllocationPolicyAssociationsRequest.struct_class = Types::DescribeNetworkingFlexCostAllocationPolicyAssociationsRequest
+
+    DescribeNetworkingFlexCostAllocationPolicyAssociationsResult.add_member(:fca_policy_associations, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyAssociationSet, location_name: "fcaPolicyAssociations"))
+    DescribeNetworkingFlexCostAllocationPolicyAssociationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeNetworkingFlexCostAllocationPolicyAssociationsResult.struct_class = Types::DescribeNetworkingFlexCostAllocationPolicyAssociationsResult
+
     DescribeOutpostLagsRequest.add_member(:outpost_lag_ids, Shapes::ShapeRef.new(shape: OutpostLagIdSet, location_name: "OutpostLagId"))
     DescribeOutpostLagsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeOutpostLagsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: OutpostLagMaxResults, location_name: "MaxResults"))
@@ -11119,6 +11231,14 @@ module Aws::EC2
     DisassociateNatGatewayAddressResult.add_member(:nat_gateway_addresses, Shapes::ShapeRef.new(shape: NatGatewayAddressList, location_name: "natGatewayAddressSet"))
     DisassociateNatGatewayAddressResult.struct_class = Types::DisassociateNatGatewayAddressResult
 
+    DisassociateNetworkingFlexCostAllocationPolicyRequest.add_member(:fca_policy_association_ids, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyDisassociateAssociationIdList, required: true, location_name: "FcaPolicyAssociationIds"))
+    DisassociateNetworkingFlexCostAllocationPolicyRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisassociateNetworkingFlexCostAllocationPolicyRequest.struct_class = Types::DisassociateNetworkingFlexCostAllocationPolicyRequest
+
+    DisassociateNetworkingFlexCostAllocationPolicyResult.add_member(:fca_policy_disassociations, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyAssociationIdList, location_name: "fcaPolicyDisassociations"))
+    DisassociateNetworkingFlexCostAllocationPolicyResult.add_member(:fca_policy_disassociation_failures, Shapes::ShapeRef.new(shape: FlexCostAllocationOperationFailureList, location_name: "fcaPolicyDisassociationFailures"))
+    DisassociateNetworkingFlexCostAllocationPolicyResult.struct_class = Types::DisassociateNetworkingFlexCostAllocationPolicyResult
+
     DisassociateRouteServerRequest.add_member(:route_server_id, Shapes::ShapeRef.new(shape: RouteServerId, required: true, location_name: "RouteServerId"))
     DisassociateRouteServerRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
     DisassociateRouteServerRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -12056,6 +12176,90 @@ module Aws::EC2
     FleetSpotMaintenanceStrategiesRequest.add_member(:capacity_rebalance, Shapes::ShapeRef.new(shape: FleetSpotCapacityRebalanceRequest, location_name: "CapacityRebalance"))
     FleetSpotMaintenanceStrategiesRequest.struct_class = Types::FleetSpotMaintenanceStrategiesRequest
 
+    FlexCostAllocationCidrMapping.add_member(:cidr_range, Shapes::ShapeRef.new(shape: FlexCostAllocationCidrMappingCidrRangeString, required: true, location_name: "CidrRange"))
+    FlexCostAllocationCidrMapping.add_member(:cidr_label, Shapes::ShapeRef.new(shape: FlexCostAllocationCidrLabel, required: true, location_name: "CidrLabel"))
+    FlexCostAllocationCidrMapping.struct_class = Types::FlexCostAllocationCidrMapping
+
+    FlexCostAllocationCidrMappingList.member = Shapes::ShapeRef.new(shape: FlexCostAllocationCidrMapping, location_name: "item")
+
+    FlexCostAllocationCidrRangeSpecifications.add_member(:prefixes_type, Shapes::ShapeRef.new(shape: FlexCostAllocationCidrRangeSpecificationsPrefixesTypeString, required: true, location_name: "PrefixesType"))
+    FlexCostAllocationCidrRangeSpecifications.add_member(:prefixes, Shapes::ShapeRef.new(shape: FlexCostAllocationCidrMappingList, required: true, location_name: "Prefixes"))
+    FlexCostAllocationCidrRangeSpecifications.struct_class = Types::FlexCostAllocationCidrRangeSpecifications
+
+    FlexCostAllocationCostDimensionList.member = Shapes::ShapeRef.new(shape: FlexCostAllocationCostDimension, location_name: "item")
+
+    FlexCostAllocationNetworkResourceIdList.member = Shapes::ShapeRef.new(shape: FlexCostAllocationNetworkResourceId, location_name: "item")
+
+    FlexCostAllocationNetworkResourceScope.add_member(:resource_type, Shapes::ShapeRef.new(shape: FlexCostAllocationNetworkResourceScopeType, required: true, location_name: "ResourceType"))
+    FlexCostAllocationNetworkResourceScope.add_member(:resource_ids, Shapes::ShapeRef.new(shape: FlexCostAllocationNetworkResourceScopeIdList, required: true, location_name: "ResourceIds"))
+    FlexCostAllocationNetworkResourceScope.struct_class = Types::FlexCostAllocationNetworkResourceScope
+
+    FlexCostAllocationNetworkResourceScopeIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
+    FlexCostAllocationOperationFailure.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
+    FlexCostAllocationOperationFailure.add_member(:failure_code, Shapes::ShapeRef.new(shape: String, location_name: "failureCode"))
+    FlexCostAllocationOperationFailure.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
+    FlexCostAllocationOperationFailure.struct_class = Types::FlexCostAllocationOperationFailure
+
+    FlexCostAllocationOperationFailureList.member = Shapes::ShapeRef.new(shape: FlexCostAllocationOperationFailure, location_name: "item")
+
+    FlexCostAllocationPolicyAssociationDescription.add_member(:fca_policy_association_id, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyAssociationId, location_name: "fcaPolicyAssociationId"))
+    FlexCostAllocationPolicyAssociationDescription.add_member(:fca_policy_id, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyId, location_name: "fcaPolicyId"))
+    FlexCostAllocationPolicyAssociationDescription.add_member(:network_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "networkResourceId"))
+    FlexCostAllocationPolicyAssociationDescription.add_member(:owner_account, Shapes::ShapeRef.new(shape: String, location_name: "ownerAccount"))
+    FlexCostAllocationPolicyAssociationDescription.add_member(:associated_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "associatedAt"))
+    FlexCostAllocationPolicyAssociationDescription.add_member(:expected_effective_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "expectedEffectiveAt"))
+    FlexCostAllocationPolicyAssociationDescription.add_member(:association_mode, Shapes::ShapeRef.new(shape: FlexCostAllocationAssociationMode, location_name: "associationMode"))
+    FlexCostAllocationPolicyAssociationDescription.add_member(:managed_by, Shapes::ShapeRef.new(shape: ManagedBy, location_name: "managedBy"))
+    FlexCostAllocationPolicyAssociationDescription.struct_class = Types::FlexCostAllocationPolicyAssociationDescription
+
+    FlexCostAllocationPolicyAssociationIdList.member = Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyAssociationId, location_name: "item")
+
+    FlexCostAllocationPolicyAssociationSet.member = Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyAssociationDescription, location_name: "item")
+
+    FlexCostAllocationPolicyDescription.add_member(:fca_policy_id, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyId, location_name: "fcaPolicyId"))
+    FlexCostAllocationPolicyDescription.add_member(:fca_policy_arn, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyArn, location_name: "fcaPolicyArn"))
+    FlexCostAllocationPolicyDescription.add_member(:network_resource_type, Shapes::ShapeRef.new(shape: FlexCostAllocationNetworkResourceType, location_name: "networkResourceType"))
+    FlexCostAllocationPolicyDescription.add_member(:nat_fca_policy_document, Shapes::ShapeRef.new(shape: NatFlexCostAllocationPolicyDocument, location_name: "natFcaPolicyDocument"))
+    FlexCostAllocationPolicyDescription.add_member(:instance_fca_policy_document, Shapes::ShapeRef.new(shape: InstanceFlexCostAllocationPolicyDocument, location_name: "instanceFcaPolicyDocument"))
+    FlexCostAllocationPolicyDescription.add_member(:pcx_fca_policy_document, Shapes::ShapeRef.new(shape: PcxFlexCostAllocationPolicyDocument, location_name: "pcxFcaPolicyDocument"))
+    FlexCostAllocationPolicyDescription.add_member(:show_back_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "showBackEnabled"))
+    FlexCostAllocationPolicyDescription.add_member(:owner_account, Shapes::ShapeRef.new(shape: String, location_name: "ownerAccount"))
+    FlexCostAllocationPolicyDescription.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    FlexCostAllocationPolicyDescription.add_member(:latest_version, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyVersionNumber, location_name: "latestVersion"))
+    FlexCostAllocationPolicyDescription.add_member(:version_expected_effective_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "versionExpectedEffectiveAt"))
+    FlexCostAllocationPolicyDescription.add_member(:policy_created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "policyCreatedAt"))
+    FlexCostAllocationPolicyDescription.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "updatedAt"))
+    FlexCostAllocationPolicyDescription.add_member(:managed_by, Shapes::ShapeRef.new(shape: ManagedBy, location_name: "managedBy"))
+    FlexCostAllocationPolicyDescription.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    FlexCostAllocationPolicyDescription.struct_class = Types::FlexCostAllocationPolicyDescription
+
+    FlexCostAllocationPolicyDisassociateAssociationIdList.member = Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyAssociationId, location_name: "item")
+
+    FlexCostAllocationPolicyIdList.member = Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyId, location_name: "item")
+
+    FlexCostAllocationPolicyIdSet.member = Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyId, location_name: "item")
+
+    FlexCostAllocationPolicySet.member = Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyDescription, location_name: "item")
+
+    FlexCostAllocationPolicyVersion.add_member(:fca_policy_id, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyId, location_name: "fcaPolicyId"))
+    FlexCostAllocationPolicyVersion.add_member(:version, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyVersionNumber, location_name: "version"))
+    FlexCostAllocationPolicyVersion.add_member(:network_resource_type, Shapes::ShapeRef.new(shape: FlexCostAllocationNetworkResourceType, location_name: "networkResourceType"))
+    FlexCostAllocationPolicyVersion.add_member(:nat_fca_policy_document, Shapes::ShapeRef.new(shape: NatFlexCostAllocationPolicyDocument, location_name: "natFcaPolicyDocument"))
+    FlexCostAllocationPolicyVersion.add_member(:instance_fca_policy_document, Shapes::ShapeRef.new(shape: InstanceFlexCostAllocationPolicyDocument, location_name: "instanceFcaPolicyDocument"))
+    FlexCostAllocationPolicyVersion.add_member(:pcx_fca_policy_document, Shapes::ShapeRef.new(shape: PcxFlexCostAllocationPolicyDocument, location_name: "pcxFcaPolicyDocument"))
+    FlexCostAllocationPolicyVersion.add_member(:show_back_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "showBackEnabled"))
+    FlexCostAllocationPolicyVersion.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    FlexCostAllocationPolicyVersion.add_member(:expected_effective_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "expectedEffectiveAt"))
+    FlexCostAllocationPolicyVersion.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "createdAt"))
+    FlexCostAllocationPolicyVersion.struct_class = Types::FlexCostAllocationPolicyVersion
+
+    FlexCostAllocationPolicyVersionSet.member = Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyVersion, location_name: "item")
+
+    FlexCostAllocationReportingGranularityList.member = Shapes::ShapeRef.new(shape: FlexCostAllocationReportingGranularity, location_name: "item")
+
+    FlexCostAllocationVersionsToIncludeList.member = Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyVersionNumber, location_name: "item")
+
     FlowLog.add_member(:creation_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "creationTime"))
     FlowLog.add_member(:deliver_logs_error_message, Shapes::ShapeRef.new(shape: String, location_name: "deliverLogsErrorMessage"))
     FlowLog.add_member(:deliver_logs_permission_arn, Shapes::ShapeRef.new(shape: String, location_name: "deliverLogsPermissionArn"))
@@ -12717,6 +12921,14 @@ module Aws::EC2
 
     GetNetworkInsightsAccessScopeContentResult.add_member(:network_insights_access_scope_content, Shapes::ShapeRef.new(shape: NetworkInsightsAccessScopeContent, location_name: "networkInsightsAccessScopeContent"))
     GetNetworkInsightsAccessScopeContentResult.struct_class = Types::GetNetworkInsightsAccessScopeContentResult
+
+    GetNetworkingFlexCostAllocationPolicyVersionsRequest.add_member(:fca_policy_id, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyId, required: true, location_name: "FcaPolicyId"))
+    GetNetworkingFlexCostAllocationPolicyVersionsRequest.add_member(:versions_to_include, Shapes::ShapeRef.new(shape: FlexCostAllocationVersionsToIncludeList, location_name: "VersionsToInclude"))
+    GetNetworkingFlexCostAllocationPolicyVersionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetNetworkingFlexCostAllocationPolicyVersionsRequest.struct_class = Types::GetNetworkingFlexCostAllocationPolicyVersionsRequest
+
+    GetNetworkingFlexCostAllocationPolicyVersionsResult.add_member(:fca_policy_versions, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyVersionSet, location_name: "fcaPolicyVersions"))
+    GetNetworkingFlexCostAllocationPolicyVersionsResult.struct_class = Types::GetNetworkingFlexCostAllocationPolicyVersionsResult
 
     GetPasswordDataRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     GetPasswordDataRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -13819,6 +14031,11 @@ module Aws::EC2
     InstanceFamilyCreditSpecification.add_member(:instance_family, Shapes::ShapeRef.new(shape: UnlimitedSupportedInstanceFamily, location_name: "instanceFamily"))
     InstanceFamilyCreditSpecification.add_member(:cpu_credits, Shapes::ShapeRef.new(shape: String, location_name: "cpuCredits"))
     InstanceFamilyCreditSpecification.struct_class = Types::InstanceFamilyCreditSpecification
+
+    InstanceFlexCostAllocationPolicyDocument.add_member(:reporting_granularity, Shapes::ShapeRef.new(shape: FlexCostAllocationReportingGranularityList, required: true, location_name: "ReportingGranularity"))
+    InstanceFlexCostAllocationPolicyDocument.add_member(:dimensions, Shapes::ShapeRef.new(shape: FlexCostAllocationCostDimensionList, required: true, location_name: "Dimensions"))
+    InstanceFlexCostAllocationPolicyDocument.add_member(:cidr_range_specifications, Shapes::ShapeRef.new(shape: FlexCostAllocationCidrRangeSpecifications, location_name: "CidrRangeSpecifications"))
+    InstanceFlexCostAllocationPolicyDocument.struct_class = Types::InstanceFlexCostAllocationPolicyDocument
 
     InstanceGenerationSet.member = Shapes::ShapeRef.new(shape: InstanceGeneration, location_name: "item")
 
@@ -16118,6 +16335,22 @@ module Aws::EC2
     ModifyNetworkInterfaceAttributeRequest.add_member(:attachment, Shapes::ShapeRef.new(shape: NetworkInterfaceAttachmentChanges, location_name: "attachment"))
     ModifyNetworkInterfaceAttributeRequest.struct_class = Types::ModifyNetworkInterfaceAttributeRequest
 
+    ModifyNetworkingFlexCostAllocationPolicyRequest.add_member(:fca_policy_id, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyId, required: true, location_name: "FcaPolicyId"))
+    ModifyNetworkingFlexCostAllocationPolicyRequest.add_member(:nat_fca_policy_document, Shapes::ShapeRef.new(shape: NatFlexCostAllocationPolicyDocument, location_name: "NatFcaPolicyDocument"))
+    ModifyNetworkingFlexCostAllocationPolicyRequest.add_member(:instance_fca_policy_document, Shapes::ShapeRef.new(shape: InstanceFlexCostAllocationPolicyDocument, location_name: "InstanceFcaPolicyDocument"))
+    ModifyNetworkingFlexCostAllocationPolicyRequest.add_member(:pcx_fca_policy_document, Shapes::ShapeRef.new(shape: PcxFlexCostAllocationPolicyDocument, location_name: "PcxFcaPolicyDocument"))
+    ModifyNetworkingFlexCostAllocationPolicyRequest.add_member(:show_back_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "ShowBackEnabled"))
+    ModifyNetworkingFlexCostAllocationPolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ModifyNetworkingFlexCostAllocationPolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    ModifyNetworkingFlexCostAllocationPolicyRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyNetworkingFlexCostAllocationPolicyRequest.struct_class = Types::ModifyNetworkingFlexCostAllocationPolicyRequest
+
+    ModifyNetworkingFlexCostAllocationPolicyResult.add_member(:fca_policy_id, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyId, location_name: "fcaPolicyId"))
+    ModifyNetworkingFlexCostAllocationPolicyResult.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "updatedAt"))
+    ModifyNetworkingFlexCostAllocationPolicyResult.add_member(:version, Shapes::ShapeRef.new(shape: FlexCostAllocationPolicyVersionNumber, location_name: "version"))
+    ModifyNetworkingFlexCostAllocationPolicyResult.add_member(:version_expected_effective_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "versionExpectedEffectiveAt"))
+    ModifyNetworkingFlexCostAllocationPolicyResult.struct_class = Types::ModifyNetworkingFlexCostAllocationPolicyResult
+
     ModifyPrivateDnsNameOptionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyPrivateDnsNameOptionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     ModifyPrivateDnsNameOptionsRequest.add_member(:private_dns_hostname_type, Shapes::ShapeRef.new(shape: HostnameType, location_name: "PrivateDnsHostnameType"))
@@ -16716,6 +16949,11 @@ module Aws::EC2
 
     MovingAddressStatusSet.member = Shapes::ShapeRef.new(shape: MovingAddressStatus, location_name: "item")
 
+    NatFlexCostAllocationPolicyDocument.add_member(:reporting_granularity, Shapes::ShapeRef.new(shape: FlexCostAllocationReportingGranularityList, required: true, location_name: "ReportingGranularity"))
+    NatFlexCostAllocationPolicyDocument.add_member(:dimensions, Shapes::ShapeRef.new(shape: FlexCostAllocationCostDimensionList, required: true, location_name: "Dimensions"))
+    NatFlexCostAllocationPolicyDocument.add_member(:cidr_range_specifications, Shapes::ShapeRef.new(shape: FlexCostAllocationCidrRangeSpecifications, location_name: "CidrRangeSpecifications"))
+    NatFlexCostAllocationPolicyDocument.struct_class = Types::NatFlexCostAllocationPolicyDocument
+
     NatGateway.add_member(:create_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "createTime"))
     NatGateway.add_member(:delete_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "deleteTime"))
     NatGateway.add_member(:failure_code, Shapes::ShapeRef.new(shape: String, location_name: "failureCode"))
@@ -17196,6 +17434,11 @@ module Aws::EC2
     PciId.add_member(:subsystem_id, Shapes::ShapeRef.new(shape: String, location_name: "SubsystemId"))
     PciId.add_member(:subsystem_vendor_id, Shapes::ShapeRef.new(shape: String, location_name: "SubsystemVendorId"))
     PciId.struct_class = Types::PciId
+
+    PcxFlexCostAllocationPolicyDocument.add_member(:reporting_granularity, Shapes::ShapeRef.new(shape: FlexCostAllocationReportingGranularityList, required: true, location_name: "ReportingGranularity"))
+    PcxFlexCostAllocationPolicyDocument.add_member(:dimensions, Shapes::ShapeRef.new(shape: FlexCostAllocationCostDimensionList, required: true, location_name: "Dimensions"))
+    PcxFlexCostAllocationPolicyDocument.add_member(:cidr_range_specifications, Shapes::ShapeRef.new(shape: FlexCostAllocationCidrRangeSpecifications, location_name: "CidrRangeSpecifications"))
+    PcxFlexCostAllocationPolicyDocument.struct_class = Types::PcxFlexCostAllocationPolicyDocument
 
     PeeringAttachmentStatus.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
     PeeringAttachmentStatus.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -21475,6 +21718,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: AssociateNatGatewayAddressResult)
       end)
 
+      api.add_operation(:associate_networking_flex_cost_allocation_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateNetworkingFlexCostAllocationPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateNetworkingFlexCostAllocationPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateNetworkingFlexCostAllocationPolicyResult)
+      end)
+
       api.add_operation(:associate_route_server, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateRouteServer"
         o.http_method = "POST"
@@ -22225,6 +22476,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateNetworkInterfacePermissionRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateNetworkInterfacePermissionResult)
+      end)
+
+      api.add_operation(:create_networking_flex_cost_allocation_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateNetworkingFlexCostAllocationPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateNetworkingFlexCostAllocationPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateNetworkingFlexCostAllocationPolicyResult)
       end)
 
       api.add_operation(:create_placement_group, Seahorse::Model::Operation.new.tap do |o|
@@ -23041,6 +23300,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteNetworkInterfacePermissionRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteNetworkInterfacePermissionResult)
+      end)
+
+      api.add_operation(:delete_networking_flex_cost_allocation_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteNetworkingFlexCostAllocationPolicies"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteNetworkingFlexCostAllocationPoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteNetworkingFlexCostAllocationPoliciesResult)
       end)
 
       api.add_operation(:delete_placement_group, Seahorse::Model::Operation.new.tap do |o|
@@ -24899,6 +25166,34 @@ module Aws::EC2
         )
       end)
 
+      api.add_operation(:describe_networking_flex_cost_allocation_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeNetworkingFlexCostAllocationPolicies"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeNetworkingFlexCostAllocationPoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeNetworkingFlexCostAllocationPoliciesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_networking_flex_cost_allocation_policy_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeNetworkingFlexCostAllocationPolicyAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeNetworkingFlexCostAllocationPolicyAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeNetworkingFlexCostAllocationPolicyAssociationsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_outpost_lags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeOutpostLags"
         o.http_method = "POST"
@@ -26206,6 +26501,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DisassociateNatGatewayAddressResult)
       end)
 
+      api.add_operation(:disassociate_networking_flex_cost_allocation_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateNetworkingFlexCostAllocationPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateNetworkingFlexCostAllocationPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateNetworkingFlexCostAllocationPolicyResult)
+      end)
+
       api.add_operation(:disassociate_route_server, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateRouteServer"
         o.http_method = "POST"
@@ -27078,6 +27381,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: GetNetworkInsightsAccessScopeContentResult)
       end)
 
+      api.add_operation(:get_networking_flex_cost_allocation_policy_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetNetworkingFlexCostAllocationPolicyVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetNetworkingFlexCostAllocationPolicyVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetNetworkingFlexCostAllocationPolicyVersionsResult)
+      end)
+
       api.add_operation(:get_password_data, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetPasswordData"
         o.http_method = "POST"
@@ -27788,6 +28099,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyNetworkInterfaceAttributeRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:modify_networking_flex_cost_allocation_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyNetworkingFlexCostAllocationPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyNetworkingFlexCostAllocationPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyNetworkingFlexCostAllocationPolicyResult)
       end)
 
       api.add_operation(:modify_private_dns_name_options, Seahorse::Model::Operation.new.tap do |o|

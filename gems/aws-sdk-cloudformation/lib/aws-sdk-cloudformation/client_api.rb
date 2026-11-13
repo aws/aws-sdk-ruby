@@ -31,6 +31,7 @@ module Aws::CloudFormation
     AfterContext = Shapes::StringShape.new(name: 'AfterContext')
     AfterValue = Shapes::StringShape.new(name: 'AfterValue')
     AfterValueFrom = Shapes::StringShape.new(name: 'AfterValueFrom')
+    AliasName = Shapes::StringShape.new(name: 'AliasName')
     AllowedValue = Shapes::StringShape.new(name: 'AllowedValue')
     AllowedValues = Shapes::ListShape.new(name: 'AllowedValues')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException', error: {"code" => "AlreadyExistsException", "httpStatusCode" => 400, "senderFault" => true})
@@ -406,6 +407,7 @@ module Aws::CloudFormation
     RelatedResources = Shapes::ListShape.new(name: 'RelatedResources')
     RemediationMessageRemediationMessage = Shapes::StringShape.new(name: 'RemediationMessageRemediationMessage')
     RemediationMessageStatusMessage = Shapes::StringShape.new(name: 'RemediationMessageStatusMessage')
+    RemoveAliasInput = Shapes::StructureShape.new(name: 'RemoveAliasInput')
     Replacement = Shapes::StringShape.new(name: 'Replacement')
     RequestToken = Shapes::StringShape.new(name: 'RequestToken')
     RequiredActivatedType = Shapes::StructureShape.new(name: 'RequiredActivatedType')
@@ -488,6 +490,7 @@ module Aws::CloudFormation
     ScannedResourceIdentifiers = Shapes::ListShape.new(name: 'ScannedResourceIdentifiers')
     ScannedResources = Shapes::ListShape.new(name: 'ScannedResources')
     Scope = Shapes::ListShape.new(name: 'Scope')
+    SetAliasInput = Shapes::StructureShape.new(name: 'SetAliasInput')
     SetStackPolicyInput = Shapes::StructureShape.new(name: 'SetStackPolicyInput')
     SetTypeConfigurationInput = Shapes::StructureShape.new(name: 'SetTypeConfigurationInput')
     SetTypeConfigurationOutput = Shapes::StructureShape.new(name: 'SetTypeConfigurationOutput')
@@ -1779,6 +1782,9 @@ module Aws::CloudFormation
 
     RelatedResources.member = Shapes::ShapeRef.new(shape: ScannedResource)
 
+    RemoveAliasInput.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, required: true, location_name: "AliasName"))
+    RemoveAliasInput.struct_class = Types::RemoveAliasInput
+
     RequiredActivatedType.add_member(:type_name_alias, Shapes::ShapeRef.new(shape: TypeName, location_name: "TypeNameAlias"))
     RequiredActivatedType.add_member(:original_type_name, Shapes::ShapeRef.new(shape: TypeName, location_name: "OriginalTypeName"))
     RequiredActivatedType.add_member(:publisher_id, Shapes::ShapeRef.new(shape: PublisherId, location_name: "PublisherId"))
@@ -1942,6 +1948,10 @@ module Aws::CloudFormation
 
     Scope.member = Shapes::ShapeRef.new(shape: ResourceAttribute)
 
+    SetAliasInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, required: true, location_name: "StackName"))
+    SetAliasInput.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, required: true, location_name: "AliasName"))
+    SetAliasInput.struct_class = Types::SetAliasInput
+
     SetStackPolicyInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, required: true, location_name: "StackName"))
     SetStackPolicyInput.add_member(:stack_policy_body, Shapes::ShapeRef.new(shape: StackPolicyBody, location_name: "StackPolicyBody"))
     SetStackPolicyInput.add_member(:stack_policy_url, Shapes::ShapeRef.new(shape: StackPolicyURL, location_name: "StackPolicyURL"))
@@ -1998,6 +2008,7 @@ module Aws::CloudFormation
     Stack.add_member(:deletion_mode, Shapes::ShapeRef.new(shape: DeletionMode, location_name: "DeletionMode"))
     Stack.add_member(:detailed_status, Shapes::ShapeRef.new(shape: DetailedStatus, location_name: "DetailedStatus"))
     Stack.add_member(:last_operations, Shapes::ShapeRef.new(shape: LastOperations, location_name: "LastOperations"))
+    Stack.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, location_name: "AliasName"))
     Stack.struct_class = Types::Stack
 
     StackDefinition.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, location_name: "StackName"))
@@ -3420,6 +3431,14 @@ module Aws::CloudFormation
         o.errors << Shapes::ShapeRef.new(shape: CFNRegistryException)
       end)
 
+      api.add_operation(:remove_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveAlias"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RemoveAliasInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
       api.add_operation(:rollback_stack, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RollbackStack"
         o.http_method = "POST"
@@ -3427,6 +3446,16 @@ module Aws::CloudFormation
         o.input = Shapes::ShapeRef.new(shape: RollbackStackInput)
         o.output = Shapes::ShapeRef.new(shape: RollbackStackOutput)
         o.errors << Shapes::ShapeRef.new(shape: TokenAlreadyExistsException)
+      end)
+
+      api.add_operation(:set_alias, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SetAlias"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SetAliasInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
       end)
 
       api.add_operation(:set_stack_policy, Seahorse::Model::Operation.new.tap do |o|

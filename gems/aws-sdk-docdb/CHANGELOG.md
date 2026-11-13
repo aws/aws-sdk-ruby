@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2026-11-13)
+------------------
+
+* Feature - Update the documentation for the --engine-version flag for cluster creation
+
 1.121.0 (2026-11-11)
 ------------------
 

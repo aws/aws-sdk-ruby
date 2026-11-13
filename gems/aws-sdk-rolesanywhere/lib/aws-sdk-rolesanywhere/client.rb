@@ -528,6 +528,26 @@ module Aws::RolesAnywhere
     #   Used to determine if a custom role session name will be accepted in a
     #   temporary credential request.
     #
+    # @option params [String] :alias_name
+    #   An alias for the profile. When you set an alias, the response includes
+    #   the alias ARN of the profile in `aliasArn`.
+    #
+    #   An alias name contains 1 to 256 characters. It must begin with a
+    #   letter (A-Z or a-z). It can contain only letters (A-Z and a-z),
+    #   numbers (0-9), underscores (\_), hyphens (-), and forward slashes (/).
+    #   A forward slash can appear only between two other characters, so an
+    #   alias name can't end with a forward slash or contain two in a row.
+    #   Alias names that begin with `aws/`, in any combination of uppercase
+    #   and lowercase letters, are reserved. Alias names are case sensitive.
+    #
+    #   The alias name must be unique among resources of the same type in your
+    #   account and Region. If another resource of the same type already has
+    #   the alias, the request fails with a `ValidationException`. An invalid
+    #   or reserved alias name also causes a `ValidationException`.
+    #
+    #   If you omit this parameter or specify an empty string, the resource is
+    #   created without an alias.
+    #
     # @return [Types::ProfileDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ProfileDetailResponse#profile #profile} => Types::ProfileDetail
@@ -549,6 +569,7 @@ module Aws::RolesAnywhere
     #       },
     #     ],
     #     accept_role_session_name: false,
+    #     alias_name: "AliasName",
     #   })
     #
     # @example Response structure
@@ -572,6 +593,9 @@ module Aws::RolesAnywhere
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
+    #   resp.profile.alias_name #=> String
+    #   resp.profile.alias_arn #=> String
+    #   resp.profile.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/CreateProfile AWS API Documentation
     #
@@ -610,6 +634,26 @@ module Aws::RolesAnywhere
     # @option params [Array<Types::NotificationSetting>] :notification_settings
     #   A list of notification settings to be associated to the trust anchor.
     #
+    # @option params [String] :alias_name
+    #   An alias for the trust anchor. When you set an alias, the response
+    #   includes the alias ARN of the trust anchor in `aliasArn`.
+    #
+    #   An alias name contains 1 to 256 characters. It must begin with a
+    #   letter (A-Z or a-z). It can contain only letters (A-Z and a-z),
+    #   numbers (0-9), underscores (\_), hyphens (-), and forward slashes (/).
+    #   A forward slash can appear only between two other characters, so an
+    #   alias name can't end with a forward slash or contain two in a row.
+    #   Alias names that begin with `aws/`, in any combination of uppercase
+    #   and lowercase letters, are reserved. Alias names are case sensitive.
+    #
+    #   The alias name must be unique among resources of the same type in your
+    #   account and Region. If another resource of the same type already has
+    #   the alias, the request fails with a `ValidationException`. An invalid
+    #   or reserved alias name also causes a `ValidationException`.
+    #
+    #   If you omit this parameter or specify an empty string, the resource is
+    #   created without an alias.
+    #
     # @return [Types::TrustAnchorDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::TrustAnchorDetailResponse#trust_anchor #trust_anchor} => Types::TrustAnchorDetail
@@ -641,6 +685,7 @@ module Aws::RolesAnywhere
     #         channel: "ALL", # accepts ALL
     #       },
     #     ],
+    #     alias_name: "AliasName",
     #   })
     #
     # @example Response structure
@@ -661,6 +706,9 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
     #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
     #   resp.trust_anchor.notification_settings[0].configured_by #=> String
+    #   resp.trust_anchor.alias_name #=> String
+    #   resp.trust_anchor.alias_arn #=> String
+    #   resp.trust_anchor.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/CreateTrustAnchor AWS API Documentation
     #
@@ -675,7 +723,15 @@ module Aws::RolesAnywhere
     # profile.
     #
     # @option params [required, String] :profile_id
-    #   The unique identifier of the profile.
+    #   The profile to act on. You can specify one of the following:
+    #
+    #   * The profile ID.
+    #
+    #   * The profile ARN.
+    #
+    #   * The alias ARN of the profile.
+    #
+    #   An ARN must be for a profile in your account and Region.
     #
     # @option params [required, String] :certificate_field
     #   Fields (x509Subject, x509Issuer and x509SAN) within X.509
@@ -735,7 +791,7 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_attribute_mapping({
-    #     profile_id: "Uuid", # required
+    #     profile_id: "ProfileIdentifier", # required
     #     certificate_field: "x509Subject", # required, accepts x509Subject, x509Issuer, x509SAN
     #     specifiers: ["String"],
     #   })
@@ -761,6 +817,9 @@ module Aws::RolesAnywhere
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
+    #   resp.profile.alias_name #=> String
+    #   resp.profile.alias_arn #=> String
+    #   resp.profile.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/DeleteAttributeMapping AWS API Documentation
     #
@@ -776,7 +835,16 @@ module Aws::RolesAnywhere
     # <b>Required permissions: </b> `rolesanywhere:DeleteCrl`.
     #
     # @option params [required, String] :crl_id
-    #   The unique identifier of the certificate revocation list (CRL).
+    #   The certificate revocation list (CRL) to act on. You can specify one
+    #   of the following:
+    #
+    #   * The CRL ID.
+    #
+    #   * The CRL ARN.
+    #
+    #   * The alias ARN of the CRL.
+    #
+    #   An ARN must be for a CRL in your account and Region.
     #
     # @return [Types::CrlDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -785,7 +853,7 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_crl({
-    #     crl_id: "Uuid", # required
+    #     crl_id: "CrlIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -798,6 +866,9 @@ module Aws::RolesAnywhere
     #   resp.crl.trust_anchor_arn #=> String
     #   resp.crl.created_at #=> Time
     #   resp.crl.updated_at #=> Time
+    #   resp.crl.alias_name #=> String
+    #   resp.crl.alias_arn #=> String
+    #   resp.crl.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/DeleteCrl AWS API Documentation
     #
@@ -813,7 +884,15 @@ module Aws::RolesAnywhere
     # <b>Required permissions: </b> `rolesanywhere:DeleteProfile`.
     #
     # @option params [required, String] :profile_id
-    #   The unique identifier of the profile.
+    #   The profile to act on. You can specify one of the following:
+    #
+    #   * The profile ID.
+    #
+    #   * The profile ARN.
+    #
+    #   * The alias ARN of the profile.
+    #
+    #   An ARN must be for a profile in your account and Region.
     #
     # @return [Types::ProfileDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -822,7 +901,7 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_profile({
-    #     profile_id: "Uuid", # required
+    #     profile_id: "ProfileIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -846,6 +925,9 @@ module Aws::RolesAnywhere
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
+    #   resp.profile.alias_name #=> String
+    #   resp.profile.alias_arn #=> String
+    #   resp.profile.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/DeleteProfile AWS API Documentation
     #
@@ -861,7 +943,15 @@ module Aws::RolesAnywhere
     # <b>Required permissions: </b> `rolesanywhere:DeleteTrustAnchor`.
     #
     # @option params [required, String] :trust_anchor_id
-    #   The unique identifier of the trust anchor.
+    #   The trust anchor to act on. You can specify one of the following:
+    #
+    #   * The trust anchor ID.
+    #
+    #   * The trust anchor ARN.
+    #
+    #   * The alias ARN of the trust anchor.
+    #
+    #   An ARN must be for a trust anchor in your account and Region.
     #
     # @return [Types::TrustAnchorDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -870,7 +960,7 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_trust_anchor({
-    #     trust_anchor_id: "Uuid", # required
+    #     trust_anchor_id: "TrustAnchorIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -891,6 +981,9 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
     #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
     #   resp.trust_anchor.notification_settings[0].configured_by #=> String
+    #   resp.trust_anchor.alias_name #=> String
+    #   resp.trust_anchor.alias_arn #=> String
+    #   resp.trust_anchor.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/DeleteTrustAnchor AWS API Documentation
     #
@@ -906,7 +999,16 @@ module Aws::RolesAnywhere
     # <b>Required permissions: </b> `rolesanywhere:DisableCrl`.
     #
     # @option params [required, String] :crl_id
-    #   The unique identifier of the certificate revocation list (CRL).
+    #   The certificate revocation list (CRL) to act on. You can specify one
+    #   of the following:
+    #
+    #   * The CRL ID.
+    #
+    #   * The CRL ARN.
+    #
+    #   * The alias ARN of the CRL.
+    #
+    #   An ARN must be for a CRL in your account and Region.
     #
     # @return [Types::CrlDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -915,7 +1017,7 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.disable_crl({
-    #     crl_id: "Uuid", # required
+    #     crl_id: "CrlIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -928,6 +1030,9 @@ module Aws::RolesAnywhere
     #   resp.crl.trust_anchor_arn #=> String
     #   resp.crl.created_at #=> Time
     #   resp.crl.updated_at #=> Time
+    #   resp.crl.alias_name #=> String
+    #   resp.crl.alias_arn #=> String
+    #   resp.crl.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/DisableCrl AWS API Documentation
     #
@@ -944,7 +1049,15 @@ module Aws::RolesAnywhere
     # <b>Required permissions: </b> `rolesanywhere:DisableProfile`.
     #
     # @option params [required, String] :profile_id
-    #   The unique identifier of the profile.
+    #   The profile to act on. You can specify one of the following:
+    #
+    #   * The profile ID.
+    #
+    #   * The profile ARN.
+    #
+    #   * The alias ARN of the profile.
+    #
+    #   An ARN must be for a profile in your account and Region.
     #
     # @return [Types::ProfileDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -953,7 +1066,7 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.disable_profile({
-    #     profile_id: "Uuid", # required
+    #     profile_id: "ProfileIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -977,6 +1090,9 @@ module Aws::RolesAnywhere
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
+    #   resp.profile.alias_name #=> String
+    #   resp.profile.alias_arn #=> String
+    #   resp.profile.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/DisableProfile AWS API Documentation
     #
@@ -993,7 +1109,15 @@ module Aws::RolesAnywhere
     # <b>Required permissions: </b> `rolesanywhere:DisableTrustAnchor`.
     #
     # @option params [required, String] :trust_anchor_id
-    #   The unique identifier of the trust anchor.
+    #   The trust anchor to act on. You can specify one of the following:
+    #
+    #   * The trust anchor ID.
+    #
+    #   * The trust anchor ARN.
+    #
+    #   * The alias ARN of the trust anchor.
+    #
+    #   An ARN must be for a trust anchor in your account and Region.
     #
     # @return [Types::TrustAnchorDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1002,7 +1126,7 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.disable_trust_anchor({
-    #     trust_anchor_id: "Uuid", # required
+    #     trust_anchor_id: "TrustAnchorIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -1023,6 +1147,9 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
     #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
     #   resp.trust_anchor.notification_settings[0].configured_by #=> String
+    #   resp.trust_anchor.alias_name #=> String
+    #   resp.trust_anchor.alias_arn #=> String
+    #   resp.trust_anchor.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/DisableTrustAnchor AWS API Documentation
     #
@@ -1040,7 +1167,16 @@ module Aws::RolesAnywhere
     # <b>Required permissions: </b> `rolesanywhere:EnableCrl`.
     #
     # @option params [required, String] :crl_id
-    #   The unique identifier of the certificate revocation list (CRL).
+    #   The certificate revocation list (CRL) to act on. You can specify one
+    #   of the following:
+    #
+    #   * The CRL ID.
+    #
+    #   * The CRL ARN.
+    #
+    #   * The alias ARN of the CRL.
+    #
+    #   An ARN must be for a CRL in your account and Region.
     #
     # @return [Types::CrlDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1049,7 +1185,7 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.enable_crl({
-    #     crl_id: "Uuid", # required
+    #     crl_id: "CrlIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -1062,6 +1198,9 @@ module Aws::RolesAnywhere
     #   resp.crl.trust_anchor_arn #=> String
     #   resp.crl.created_at #=> Time
     #   resp.crl.updated_at #=> Time
+    #   resp.crl.alias_name #=> String
+    #   resp.crl.alias_arn #=> String
+    #   resp.crl.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/EnableCrl AWS API Documentation
     #
@@ -1077,7 +1216,15 @@ module Aws::RolesAnywhere
     # <b>Required permissions: </b> `rolesanywhere:EnableProfile`.
     #
     # @option params [required, String] :profile_id
-    #   The unique identifier of the profile.
+    #   The profile to act on. You can specify one of the following:
+    #
+    #   * The profile ID.
+    #
+    #   * The profile ARN.
+    #
+    #   * The alias ARN of the profile.
+    #
+    #   An ARN must be for a profile in your account and Region.
     #
     # @return [Types::ProfileDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1086,7 +1233,7 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.enable_profile({
-    #     profile_id: "Uuid", # required
+    #     profile_id: "ProfileIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -1110,6 +1257,9 @@ module Aws::RolesAnywhere
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
+    #   resp.profile.alias_name #=> String
+    #   resp.profile.alias_arn #=> String
+    #   resp.profile.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/EnableProfile AWS API Documentation
     #
@@ -1126,7 +1276,15 @@ module Aws::RolesAnywhere
     # <b>Required permissions: </b> `rolesanywhere:EnableTrustAnchor`.
     #
     # @option params [required, String] :trust_anchor_id
-    #   The unique identifier of the trust anchor.
+    #   The trust anchor to act on. You can specify one of the following:
+    #
+    #   * The trust anchor ID.
+    #
+    #   * The trust anchor ARN.
+    #
+    #   * The alias ARN of the trust anchor.
+    #
+    #   An ARN must be for a trust anchor in your account and Region.
     #
     # @return [Types::TrustAnchorDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1135,7 +1293,7 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.enable_trust_anchor({
-    #     trust_anchor_id: "Uuid", # required
+    #     trust_anchor_id: "TrustAnchorIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -1156,6 +1314,9 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
     #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
     #   resp.trust_anchor.notification_settings[0].configured_by #=> String
+    #   resp.trust_anchor.alias_name #=> String
+    #   resp.trust_anchor.alias_arn #=> String
+    #   resp.trust_anchor.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/EnableTrustAnchor AWS API Documentation
     #
@@ -1171,7 +1332,16 @@ module Aws::RolesAnywhere
     # <b>Required permissions: </b> `rolesanywhere:GetCrl`.
     #
     # @option params [required, String] :crl_id
-    #   The unique identifier of the certificate revocation list (CRL).
+    #   The certificate revocation list (CRL) to act on. You can specify one
+    #   of the following:
+    #
+    #   * The CRL ID.
+    #
+    #   * The CRL ARN.
+    #
+    #   * The alias ARN of the CRL.
+    #
+    #   An ARN must be for a CRL in your account and Region.
     #
     # @return [Types::CrlDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1180,7 +1350,7 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_crl({
-    #     crl_id: "Uuid", # required
+    #     crl_id: "CrlIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -1193,6 +1363,9 @@ module Aws::RolesAnywhere
     #   resp.crl.trust_anchor_arn #=> String
     #   resp.crl.created_at #=> Time
     #   resp.crl.updated_at #=> Time
+    #   resp.crl.alias_name #=> String
+    #   resp.crl.alias_arn #=> String
+    #   resp.crl.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/GetCrl AWS API Documentation
     #
@@ -1208,7 +1381,15 @@ module Aws::RolesAnywhere
     # <b>Required permissions: </b> `rolesanywhere:GetProfile`.
     #
     # @option params [required, String] :profile_id
-    #   The unique identifier of the profile.
+    #   The profile to act on. You can specify one of the following:
+    #
+    #   * The profile ID.
+    #
+    #   * The profile ARN.
+    #
+    #   * The alias ARN of the profile.
+    #
+    #   An ARN must be for a profile in your account and Region.
     #
     # @return [Types::ProfileDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1217,7 +1398,7 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_profile({
-    #     profile_id: "Uuid", # required
+    #     profile_id: "ProfileIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -1241,6 +1422,9 @@ module Aws::RolesAnywhere
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
+    #   resp.profile.alias_name #=> String
+    #   resp.profile.alias_arn #=> String
+    #   resp.profile.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/GetProfile AWS API Documentation
     #
@@ -1308,7 +1492,15 @@ module Aws::RolesAnywhere
     # <b>Required permissions: </b> `rolesanywhere:GetTrustAnchor`.
     #
     # @option params [required, String] :trust_anchor_id
-    #   The unique identifier of the trust anchor.
+    #   The trust anchor to act on. You can specify one of the following:
+    #
+    #   * The trust anchor ID.
+    #
+    #   * The trust anchor ARN.
+    #
+    #   * The alias ARN of the trust anchor.
+    #
+    #   An ARN must be for a trust anchor in your account and Region.
     #
     # @return [Types::TrustAnchorDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1317,7 +1509,7 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_trust_anchor({
-    #     trust_anchor_id: "Uuid", # required
+    #     trust_anchor_id: "TrustAnchorIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -1338,6 +1530,9 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
     #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
     #   resp.trust_anchor.notification_settings[0].configured_by #=> String
+    #   resp.trust_anchor.alias_name #=> String
+    #   resp.trust_anchor.alias_arn #=> String
+    #   resp.trust_anchor.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/GetTrustAnchor AWS API Documentation
     #
@@ -1369,8 +1564,31 @@ module Aws::RolesAnywhere
     #   A list of tags to attach to the certificate revocation list (CRL).
     #
     # @option params [required, String] :trust_anchor_arn
-    #   The ARN of the TrustAnchor the certificate revocation list (CRL) will
-    #   provide revocation for.
+    #   The ARN of the trust anchor that the certificate revocation list (CRL)
+    #   provides revocation for. Specify the trust anchor ARN that contains
+    #   the trust anchor ID. This parameter doesn't support alias ARNs. If
+    #   you specify an alias ARN, the request fails with
+    #   `ResourceNotFoundException`.
+    #
+    # @option params [String] :alias_name
+    #   An alias for the certificate revocation list (CRL). When you set an
+    #   alias, the response includes the alias ARN of the CRL in `aliasArn`.
+    #
+    #   An alias name contains 1 to 256 characters. It must begin with a
+    #   letter (A-Z or a-z). It can contain only letters (A-Z and a-z),
+    #   numbers (0-9), underscores (\_), hyphens (-), and forward slashes (/).
+    #   A forward slash can appear only between two other characters, so an
+    #   alias name can't end with a forward slash or contain two in a row.
+    #   Alias names that begin with `aws/`, in any combination of uppercase
+    #   and lowercase letters, are reserved. Alias names are case sensitive.
+    #
+    #   The alias name must be unique among resources of the same type in your
+    #   account and Region. If another resource of the same type already has
+    #   the alias, the request fails with a `ValidationException`. An invalid
+    #   or reserved alias name also causes a `ValidationException`.
+    #
+    #   If you omit this parameter or specify an empty string, the resource is
+    #   created without an alias.
     #
     # @return [Types::CrlDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1388,7 +1606,8 @@ module Aws::RolesAnywhere
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     trust_anchor_arn: "TrustAnchorArn", # required
+    #     trust_anchor_arn: "TrustAnchorIdentifierArn", # required
+    #     alias_name: "AliasName",
     #   })
     #
     # @example Response structure
@@ -1401,6 +1620,9 @@ module Aws::RolesAnywhere
     #   resp.crl.trust_anchor_arn #=> String
     #   resp.crl.created_at #=> Time
     #   resp.crl.updated_at #=> Time
+    #   resp.crl.alias_name #=> String
+    #   resp.crl.alias_arn #=> String
+    #   resp.crl.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ImportCrl AWS API Documentation
     #
@@ -1450,6 +1672,9 @@ module Aws::RolesAnywhere
     #   resp.crls[0].trust_anchor_arn #=> String
     #   resp.crls[0].created_at #=> Time
     #   resp.crls[0].updated_at #=> Time
+    #   resp.crls[0].alias_name #=> String
+    #   resp.crls[0].alias_arn #=> String
+    #   resp.crls[0].previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ListCrls AWS API Documentation
     #
@@ -1510,6 +1735,9 @@ module Aws::RolesAnywhere
     #   resp.profiles[0].attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profiles[0].attribute_mappings[0].mapping_rules #=> Array
     #   resp.profiles[0].attribute_mappings[0].mapping_rules[0].specifier #=> String
+    #   resp.profiles[0].alias_name #=> String
+    #   resp.profiles[0].alias_arn #=> String
+    #   resp.profiles[0].previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ListProfiles AWS API Documentation
     #
@@ -1647,6 +1875,9 @@ module Aws::RolesAnywhere
     #   resp.trust_anchors[0].notification_settings[0].threshold #=> Integer
     #   resp.trust_anchors[0].notification_settings[0].channel #=> String, one of "ALL"
     #   resp.trust_anchors[0].notification_settings[0].configured_by #=> String
+    #   resp.trust_anchors[0].alias_name #=> String
+    #   resp.trust_anchors[0].alias_arn #=> String
+    #   resp.trust_anchors[0].previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ListTrustAnchors AWS API Documentation
     #
@@ -1662,7 +1893,15 @@ module Aws::RolesAnywhere
     # specifiers that have contextual meanings.
     #
     # @option params [required, String] :profile_id
-    #   The unique identifier of the profile.
+    #   The profile to act on. You can specify one of the following:
+    #
+    #   * The profile ID.
+    #
+    #   * The profile ARN.
+    #
+    #   * The alias ARN of the profile.
+    #
+    #   An ARN must be for a profile in your account and Region.
     #
     # @option params [required, String] :certificate_field
     #   Fields (x509Subject, x509Issuer and x509SAN) within X.509
@@ -1723,7 +1962,7 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_attribute_mapping({
-    #     profile_id: "Uuid", # required
+    #     profile_id: "ProfileIdentifier", # required
     #     certificate_field: "x509Subject", # required, accepts x509Subject, x509Issuer, x509SAN
     #     mapping_rules: [ # required
     #       {
@@ -1753,6 +1992,9 @@ module Aws::RolesAnywhere
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
+    #   resp.profile.alias_name #=> String
+    #   resp.profile.alias_arn #=> String
+    #   resp.profile.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/PutAttributeMapping AWS API Documentation
     #
@@ -1861,6 +2103,9 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
     #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
     #   resp.trust_anchor.notification_settings[0].configured_by #=> String
+    #   resp.trust_anchor.alias_name #=> String
+    #   resp.trust_anchor.alias_arn #=> String
+    #   resp.trust_anchor.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/PutNotificationSettings AWS API Documentation
     #
@@ -1964,6 +2209,9 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
     #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
     #   resp.trust_anchor.notification_settings[0].configured_by #=> String
+    #   resp.trust_anchor.alias_name #=> String
+    #   resp.trust_anchor.alias_arn #=> String
+    #   resp.trust_anchor.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ResetNotificationSettings AWS API Documentation
     #
@@ -2043,13 +2291,50 @@ module Aws::RolesAnywhere
     # <b>Required permissions: </b> `rolesanywhere:UpdateCrl`.
     #
     # @option params [required, String] :crl_id
-    #   The unique identifier of the certificate revocation list (CRL).
+    #   The certificate revocation list (CRL) to act on. You can specify one
+    #   of the following:
+    #
+    #   * The CRL ID.
+    #
+    #   * The CRL ARN.
+    #
+    #   * The alias ARN of the CRL.
+    #
+    #   An ARN must be for a CRL in your account and Region.
     #
     # @option params [String] :name
     #   The name of the Crl.
     #
     # @option params [String, StringIO, File] :crl_data
     #   The x509 v3 specified certificate revocation list (CRL).
+    #
+    # @option params [String] :alias_name
+    #   The alias for the certificate revocation list (CRL).
+    #
+    #   You can use this parameter in the following ways:
+    #
+    #   * To set or change the alias, specify the new alias name. After the
+    #     change, the previous alias ARN no longer identifies the resource.
+    #     You can then assign the previous alias to another resource of the
+    #     same type. A change can take a short time to take effect for
+    #     requests that use an alias ARN.
+    #
+    #   * To remove the alias, specify an empty string.
+    #
+    #   * To keep the current alias, omit this parameter.
+    #
+    #   An alias name contains 1 to 256 characters. It must begin with a
+    #   letter (A-Z or a-z). It can contain only letters (A-Z and a-z),
+    #   numbers (0-9), underscores (\_), hyphens (-), and forward slashes (/).
+    #   A forward slash can appear only between two other characters, so an
+    #   alias name can't end with a forward slash or contain two in a row.
+    #   Alias names that begin with `aws/`, in any combination of uppercase
+    #   and lowercase letters, are reserved. Alias names are case sensitive.
+    #
+    #   The alias name must be unique among resources of the same type in your
+    #   account and Region. If another resource of the same type already has
+    #   the alias, the request fails with a `ValidationException`. An invalid
+    #   or reserved alias name also causes a `ValidationException`.
     #
     # @return [Types::CrlDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2058,9 +2343,10 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_crl({
-    #     crl_id: "Uuid", # required
+    #     crl_id: "CrlIdentifier", # required
     #     name: "ResourceName",
     #     crl_data: "data",
+    #     alias_name: "AliasName",
     #   })
     #
     # @example Response structure
@@ -2073,6 +2359,9 @@ module Aws::RolesAnywhere
     #   resp.crl.trust_anchor_arn #=> String
     #   resp.crl.created_at #=> Time
     #   resp.crl.updated_at #=> Time
+    #   resp.crl.alias_name #=> String
+    #   resp.crl.alias_arn #=> String
+    #   resp.crl.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/UpdateCrl AWS API Documentation
     #
@@ -2090,7 +2379,15 @@ module Aws::RolesAnywhere
     # <b>Required permissions: </b> `rolesanywhere:UpdateProfile`.
     #
     # @option params [required, String] :profile_id
-    #   The unique identifier of the profile.
+    #   The profile to act on. You can specify one of the following:
+    #
+    #   * The profile ID.
+    #
+    #   * The profile ARN.
+    #
+    #   * The alias ARN of the profile.
+    #
+    #   An ARN must be for a profile in your account and Region.
     #
     # @option params [String] :name
     #   The name of the profile.
@@ -2121,6 +2418,34 @@ module Aws::RolesAnywhere
     #   Used to determine if a custom role session name will be accepted in a
     #   temporary credential request.
     #
+    # @option params [String] :alias_name
+    #   The alias for the profile.
+    #
+    #   You can use this parameter in the following ways:
+    #
+    #   * To set or change the alias, specify the new alias name. After the
+    #     change, the previous alias ARN no longer identifies the resource.
+    #     You can then assign the previous alias to another resource of the
+    #     same type. A change can take a short time to take effect for
+    #     requests that use an alias ARN.
+    #
+    #   * To remove the alias, specify an empty string.
+    #
+    #   * To keep the current alias, omit this parameter.
+    #
+    #   An alias name contains 1 to 256 characters. It must begin with a
+    #   letter (A-Z or a-z). It can contain only letters (A-Z and a-z),
+    #   numbers (0-9), underscores (\_), hyphens (-), and forward slashes (/).
+    #   A forward slash can appear only between two other characters, so an
+    #   alias name can't end with a forward slash or contain two in a row.
+    #   Alias names that begin with `aws/`, in any combination of uppercase
+    #   and lowercase letters, are reserved. Alias names are case sensitive.
+    #
+    #   The alias name must be unique among resources of the same type in your
+    #   account and Region. If another resource of the same type already has
+    #   the alias, the request fails with a `ValidationException`. An invalid
+    #   or reserved alias name also causes a `ValidationException`.
+    #
     # @return [Types::ProfileDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ProfileDetailResponse#profile #profile} => Types::ProfileDetail
@@ -2128,13 +2453,14 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_profile({
-    #     profile_id: "Uuid", # required
+    #     profile_id: "ProfileIdentifier", # required
     #     name: "ResourceName",
     #     session_policy: "UpdateProfileRequestSessionPolicyString",
     #     role_arns: ["RoleArn"],
     #     managed_policy_arns: ["ManagedPolicyListMemberString"],
     #     duration_seconds: 1,
     #     accept_role_session_name: false,
+    #     alias_name: "AliasName",
     #   })
     #
     # @example Response structure
@@ -2158,6 +2484,9 @@ module Aws::RolesAnywhere
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
+    #   resp.profile.alias_name #=> String
+    #   resp.profile.alias_arn #=> String
+    #   resp.profile.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/UpdateProfile AWS API Documentation
     #
@@ -2179,7 +2508,15 @@ module Aws::RolesAnywhere
     # <b>Required permissions: </b> `rolesanywhere:UpdateTrustAnchor`.
     #
     # @option params [required, String] :trust_anchor_id
-    #   The unique identifier of the trust anchor.
+    #   The trust anchor to act on. You can specify one of the following:
+    #
+    #   * The trust anchor ID.
+    #
+    #   * The trust anchor ARN.
+    #
+    #   * The alias ARN of the trust anchor.
+    #
+    #   An ARN must be for a trust anchor in your account and Region.
     #
     # @option params [String] :name
     #   The name of the trust anchor.
@@ -2191,6 +2528,34 @@ module Aws::RolesAnywhere
     #   Specifies whether the trust anchor checks certificate revocation
     #   status against CRL distribution points.
     #
+    # @option params [String] :alias_name
+    #   The alias for the trust anchor.
+    #
+    #   You can use this parameter in the following ways:
+    #
+    #   * To set or change the alias, specify the new alias name. After the
+    #     change, the previous alias ARN no longer identifies the resource.
+    #     You can then assign the previous alias to another resource of the
+    #     same type. A change can take a short time to take effect for
+    #     requests that use an alias ARN.
+    #
+    #   * To remove the alias, specify an empty string.
+    #
+    #   * To keep the current alias, omit this parameter.
+    #
+    #   An alias name contains 1 to 256 characters. It must begin with a
+    #   letter (A-Z or a-z). It can contain only letters (A-Z and a-z),
+    #   numbers (0-9), underscores (\_), hyphens (-), and forward slashes (/).
+    #   A forward slash can appear only between two other characters, so an
+    #   alias name can't end with a forward slash or contain two in a row.
+    #   Alias names that begin with `aws/`, in any combination of uppercase
+    #   and lowercase letters, are reserved. Alias names are case sensitive.
+    #
+    #   The alias name must be unique among resources of the same type in your
+    #   account and Region. If another resource of the same type already has
+    #   the alias, the request fails with a `ValidationException`. An invalid
+    #   or reserved alias name also causes a `ValidationException`.
+    #
     # @return [Types::TrustAnchorDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::TrustAnchorDetailResponse#trust_anchor #trust_anchor} => Types::TrustAnchorDetail
@@ -2198,7 +2563,7 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_trust_anchor({
-    #     trust_anchor_id: "Uuid", # required
+    #     trust_anchor_id: "TrustAnchorIdentifier", # required
     #     name: "ResourceName",
     #     source: {
     #       source_type: "AWS_ACM_PCA", # accepts AWS_ACM_PCA, CERTIFICATE_BUNDLE, SELF_SIGNED_REPOSITORY
@@ -2208,6 +2573,7 @@ module Aws::RolesAnywhere
     #       },
     #     },
     #     crl_dp_revocation_enabled: false,
+    #     alias_name: "AliasName",
     #   })
     #
     # @example Response structure
@@ -2228,6 +2594,9 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
     #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
     #   resp.trust_anchor.notification_settings[0].configured_by #=> String
+    #   resp.trust_anchor.alias_name #=> String
+    #   resp.trust_anchor.alias_arn #=> String
+    #   resp.trust_anchor.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/UpdateTrustAnchor AWS API Documentation
     #
@@ -2256,7 +2625,7 @@ module Aws::RolesAnywhere
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rolesanywhere'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

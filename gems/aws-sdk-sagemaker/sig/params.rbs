@@ -264,11 +264,16 @@ module Aws
     }
 
       type cluster_auto_patch_config = {
-      patching_strategy: ("WhenIdle" | "WhenAllIdle"),
+      patching_strategy: ("WhenIdle" | "WhenAllIdle" | "DrainFirst"),
       patch_schedule: {
         next_patch_date: ::Time?
       }?,
-      deployment_config: Params::deployment_configuration?
+      deployment_config: Params::deployment_configuration?,
+      idle_wait_window_in_seconds: ::Integer?,
+      drain_policy: {
+        drain_timeout_in_seconds: ::Integer?,
+        on_drain_timeout: ("Force" | "Skip")?
+      }?
     }
 
       type cluster_kubernetes_config = {

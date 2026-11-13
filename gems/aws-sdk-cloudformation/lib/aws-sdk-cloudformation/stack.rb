@@ -257,6 +257,14 @@ module Aws::CloudFormation
       data[:last_operations]
     end
 
+    # The alias assigned to the stack, if one has been set. An alias is an
+    # alternative name that can be used in place of the stack name in any
+    # CloudFormation API call that accepts the `StackName` parameter.
+    # @return [String]
+    def alias_name
+      data[:alias_name]
+    end
+
     # @!endgroup
 
     # @return [Client]

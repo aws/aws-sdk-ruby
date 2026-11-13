@@ -1677,11 +1677,11 @@ module Aws::Lambda
     #   default value is infinite (-1). When set to infinite (-1), failed
     #   records are retried until the record expires.
     #
-    #   For Kafka `Stream` consumption mode, the default is `-1` (infinite
-    #   retries; capped at 10 when an on-failure destination is configured).
-    #   For Kafka `Queue` consumption mode, the default is `0`, and if no
-    #   on-failure destination is configured the Kafka broker performs
-    #   retries.
+    #   For Kafka event source mappings with `ConsumptionMode` set to
+    #   `Queue`, the value -1 (infinite retries) is not supported and the
+    #   default is 0 (no retries). Lambda releases failed records back to
+    #   the broker, which redelivers them up to the share group's
+    #   `group.share.delivery.count.limit`.
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -2028,6 +2028,12 @@ module Aws::Lambda
     #   execution even after interruptions.
     #   @return [Types::DurableConfig]
     #
+    # @!attribute [rw] runtime_config
+    #   The customer-managed runtime configuration for your function.
+    #   Specifies the customer-managed runtime and the runtime alias that
+    #   your function uses.
+    #   @return [Types::FunctionRuntimeConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionRequest AWS API Documentation
     #
     class CreateFunctionRequest < Struct.new(
@@ -2058,7 +2064,8 @@ module Aws::Lambda
       :logging_config,
       :tenancy_config,
       :capacity_provider_config,
-      :durable_config)
+      :durable_config,
+      :runtime_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4148,6 +4155,12 @@ module Aws::Lambda
     #   function is configured for durability.
     #   @return [Types::DurableConfig]
     #
+    # @!attribute [rw] runtime_config
+    #   The customer-managed runtime configuration for your function.
+    #   Specifies the customer-managed runtime and the runtime alias that
+    #   your function uses.
+    #   @return [Types::FunctionRuntimeConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration AWS API Documentation
     #
     class FunctionConfiguration < Struct.new(
@@ -4190,7 +4203,8 @@ module Aws::Lambda
       :tenancy_config,
       :capacity_provider_config,
       :config_sha_256,
-      :durable_config)
+      :durable_config,
+      :runtime_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4244,6 +4258,29 @@ module Aws::Lambda
       :maximum_retry_attempts,
       :maximum_event_age_in_seconds,
       :destination_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The customer-managed runtime configuration for your function.
+    # Specifies the customer-managed runtime and the runtime alias that your
+    # function uses.
+    #
+    # @!attribute [rw] runtime_arn
+    #   The Amazon Resource Name (ARN) of the customer-managed runtime that
+    #   your function uses.
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime_alias
+    #   The name of the customer-managed runtime alias that your function
+    #   uses. A runtime alias is a name that points to a runtime version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionRuntimeConfig AWS API Documentation
+    #
+    class FunctionRuntimeConfig < Struct.new(
+      :runtime_arn,
+      :runtime_alias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8796,6 +8833,25 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # The runtime alias for your function is no longer available. Update
+    # your function to use an available runtime alias.
+    #
+    # @!attribute [rw] type
+    #   Indicates the exception type for a deleted runtime alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RuntimeAliasDeletedException AWS API Documentation
+    #
+    class RuntimeAliasDeletedException < Struct.new(
+      :type,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The ARN of the runtime and any errors that occured.
     #
     # @!attribute [rw] runtime_version_arn
@@ -8812,6 +8868,26 @@ module Aws::Lambda
     class RuntimeVersionConfig < Struct.new(
       :runtime_version_arn,
       :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The runtime version used by your function is no longer available.
+    # Update your function to use an available runtime version or runtime
+    # alias.
+    #
+    # @!attribute [rw] type
+    #   Indicates the exception type for a deleted runtime version.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RuntimeVersionDeletedException AWS API Documentation
+    #
+    class RuntimeVersionDeletedException < Struct.new(
+      :type,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8980,17 +9056,19 @@ module Aws::Lambda
     #
     # @!attribute [rw] consumption_mode
     #   The mode that Lambda uses to consume records from your self-managed
-    #   Apache Kafka topic. The default is `Stream`.
+    #   Apache Kafka topic. Valid values are the following:
     #
-    #   * `Stream` – Lambda consumes records using a Kafka consumer group
-    #     and preserves the order of records within each partition. This is
-    #     the default when you omit `ConsumptionMode`.
+    #   * `Stream` (default) – Lambda consumes records using a Kafka
+    #     consumer group and preserves the order of records within each
+    #     partition.
     #
     #   * `Queue` – Lambda consumes records using a Kafka share group.
-    #     Multiple consumers can process records from the same partitions
-    #     concurrently. Queue mode does not preserve per-partition order.
-    #     Queue mode requires an Apache Kafka cluster running version 4.2 or
+    #     Multiple consumers can process records from the same partition
+    #     concurrently, so Lambda doesn't preserve per-partition order. To
+    #     use Queue mode, your cluster must run Apache Kafka version 4.2 or
     #     later with share groups enabled.
+    #
+    #   If you omit this parameter, Lambda uses `Stream`.
     #
     #   You cannot change `ConsumptionMode` after you create the event
     #   source mapping. To use a different consumption mode, create a new
@@ -9995,11 +10073,11 @@ module Aws::Lambda
     #   default value is infinite (-1). When set to infinite (-1), failed
     #   records are retried until the record expires.
     #
-    #   For Kafka `Stream` consumption mode, the default is `-1` (infinite
-    #   retries; capped at 10 when an on-failure destination is configured).
-    #   For Kafka `Queue` consumption mode, the default is `0`, and if no
-    #   on-failure destination is configured the Kafka broker performs
-    #   retries.
+    #   For Kafka event source mappings with `ConsumptionMode` set to
+    #   `Queue`, the value -1 (infinite retries) is not supported and the
+    #   default is 0 (no retries). Lambda releases failed records back to
+    #   the broker, which redelivers them up to the share group's
+    #   `group.share.delivery.count.limit`.
     #   @return [Integer]
     #
     # @!attribute [rw] tumbling_window_in_seconds
@@ -10399,6 +10477,12 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html
     #   @return [Types::DurableConfig]
     #
+    # @!attribute [rw] runtime_config
+    #   The customer-managed runtime configuration for your function.
+    #   Specifies the customer-managed runtime and the runtime alias that
+    #   your function uses.
+    #   @return [Types::FunctionRuntimeConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfigurationRequest AWS API Documentation
     #
     class UpdateFunctionConfigurationRequest < Struct.new(
@@ -10422,7 +10506,8 @@ module Aws::Lambda
       :snap_start,
       :logging_config,
       :capacity_provider_config,
-      :durable_config)
+      :durable_config,
+      :runtime_config)
       SENSITIVE = []
       include Aws::Structure
     end

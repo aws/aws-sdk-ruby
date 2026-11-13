@@ -1187,7 +1187,7 @@ module Aws::SecurityHub
     #   resp.configuration_policy_associations[0].target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT", "ROOT"
     #   resp.configuration_policy_associations[0].association_type #=> String, one of "INHERITED", "APPLIED"
     #   resp.configuration_policy_associations[0].updated_at #=> Time
-    #   resp.configuration_policy_associations[0].association_status #=> String, one of "PENDING", "SUCCESS", "FAILED"
+    #   resp.configuration_policy_associations[0].association_status #=> String, one of "PENDING", "SUCCESS", "FAILED", "DISABLED"
     #   resp.configuration_policy_associations[0].association_status_message #=> String
     #   resp.unprocessed_configuration_policy_associations #=> Array
     #   resp.unprocessed_configuration_policy_associations[0].configuration_policy_association_identifiers.target.account_id #=> String
@@ -5274,7 +5274,7 @@ module Aws::SecurityHub
     #   resp.member_account_limit_reached #=> Boolean
     #   resp.auto_enable_standards #=> String, one of "NONE", "DEFAULT"
     #   resp.organization_configuration.configuration_type #=> String, one of "CENTRAL", "LOCAL"
-    #   resp.organization_configuration.status #=> String, one of "PENDING", "ENABLED", "FAILED"
+    #   resp.organization_configuration.status #=> String, one of "PENDING", "ENABLED", "FAILED", "DISABLED"
     #   resp.organization_configuration.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeOrganizationConfiguration AWS API Documentation
@@ -6601,7 +6601,7 @@ module Aws::SecurityHub
     #   resp.target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT", "ROOT"
     #   resp.association_type #=> String, one of "INHERITED", "APPLIED"
     #   resp.updated_at #=> Time
-    #   resp.association_status #=> String, one of "PENDING", "SUCCESS", "FAILED"
+    #   resp.association_status #=> String, one of "PENDING", "SUCCESS", "FAILED", "DISABLED"
     #   resp.association_status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetConfigurationPolicyAssociation AWS API Documentation
@@ -10029,13 +10029,16 @@ module Aws::SecurityHub
     # `PackageVersion`.
     #
     # You can use the `Scopes` parameter to define the data boundary for the
-    # query. Currently, `Scopes` supports `AwsOrganizations`, which lets you
-    # retrieve resources from your entire organization or from specific
-    # organizational units. Only the delegated administrator account can use
-    # `Scopes`.
+    # query. Currently, `Scopes` supports `AwsOrganizations`. With
+    # `AwsOrganizations`, you can retrieve resources from your entire
+    # organization or from specific organizational units. Only the delegated
+    # administrator account can use `Scopes`.
     #
     # You can use the `Filters` parameter to further refine results based on
     # resource attributes, such as `ResourceType` or `Region`.
+    #
+    # This operation returns paginated results. To retrieve additional
+    # results, use the `NextToken` value from the previous response.
     #
     # @option params [required, String] :package_name
     #   The name of the software package, for example `openssl`. This value
@@ -10172,10 +10175,10 @@ module Aws::SecurityHub
     # three to the count.
     #
     # You can use the `Scopes` parameter to define the data boundary for the
-    # query. Currently, `Scopes` supports `AwsOrganizations`, which lets you
-    # aggregate software from your entire organization or from specific
-    # organizational units. Only the delegated administrator account can use
-    # `Scopes`.
+    # query. Currently, `Scopes` supports `AwsOrganizations`. With
+    # `AwsOrganizations`, you can aggregate software from your entire
+    # organization or from specific organizational units. Only the delegated
+    # administrator account can use `Scopes`.
     #
     # This operation doesn't paginate. Use `MaxStatisticResults` to control
     # how many grouping values are returned.
@@ -10273,10 +10276,10 @@ module Aws::SecurityHub
     # the number of resources that contain that package.
     #
     # You can use the `Scopes` parameter to define the data boundary for the
-    # query. Currently, `Scopes` supports `AwsOrganizations`, which lets you
-    # retrieve software from your entire organization or from specific
-    # organizational units. Only the delegated administrator account can use
-    # `Scopes`.
+    # query. Currently, `Scopes` supports `AwsOrganizations`. With
+    # `AwsOrganizations`, you can retrieve software from your entire
+    # organization or from specific organizational units. Only the delegated
+    # administrator account can use `Scopes`.
     #
     # You can use the `Filters` parameter to refine results based on package
     # and resource attributes. You can use `Scopes` and `Filters`
@@ -10287,6 +10290,9 @@ module Aws::SecurityHub
     # To list the resources that contain a specific package, use
     # `GetSoftwareResourcesV2`. To get counts of software grouped by a
     # field, use `GetSoftwareStatisticsV2`.
+    #
+    # This operation returns paginated results. To retrieve additional
+    # results, use the `NextToken` value from the previous response.
     #
     # @option params [Types::SoftwareFilters] :filters
     #   Filters software packages based on a set of criteria. You can nest
@@ -10793,7 +10799,7 @@ module Aws::SecurityHub
     #     filters: {
     #       configuration_policy_id: "NonEmptyString",
     #       association_type: "INHERITED", # accepts INHERITED, APPLIED
-    #       association_status: "PENDING", # accepts PENDING, SUCCESS, FAILED
+    #       association_status: "PENDING", # accepts PENDING, SUCCESS, FAILED, DISABLED
     #     },
     #   })
     #
@@ -10805,7 +10811,7 @@ module Aws::SecurityHub
     #   resp.configuration_policy_association_summaries[0].target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT", "ROOT"
     #   resp.configuration_policy_association_summaries[0].association_type #=> String, one of "INHERITED", "APPLIED"
     #   resp.configuration_policy_association_summaries[0].updated_at #=> Time
-    #   resp.configuration_policy_association_summaries[0].association_status #=> String, one of "PENDING", "SUCCESS", "FAILED"
+    #   resp.configuration_policy_association_summaries[0].association_status #=> String, one of "PENDING", "SUCCESS", "FAILED", "DISABLED"
     #   resp.configuration_policy_association_summaries[0].association_status_message #=> String
     #   resp.next_token #=> String
     #
@@ -12052,7 +12058,7 @@ module Aws::SecurityHub
     #   resp.target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT", "ROOT"
     #   resp.association_type #=> String, one of "INHERITED", "APPLIED"
     #   resp.updated_at #=> Time
-    #   resp.association_status #=> String, one of "PENDING", "SUCCESS", "FAILED"
+    #   resp.association_status #=> String, one of "PENDING", "SUCCESS", "FAILED", "DISABLED"
     #   resp.association_status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StartConfigurationPolicyAssociation AWS API Documentation
@@ -14846,7 +14852,7 @@ module Aws::SecurityHub
     #     auto_enable_standards: "NONE", # accepts NONE, DEFAULT
     #     organization_configuration: {
     #       configuration_type: "CENTRAL", # accepts CENTRAL, LOCAL
-    #       status: "PENDING", # accepts PENDING, ENABLED, FAILED
+    #       status: "PENDING", # accepts PENDING, ENABLED, FAILED, DISABLED
     #       status_message: "NonEmptyString",
     #     },
     #   })
@@ -15055,7 +15061,7 @@ module Aws::SecurityHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.178.0'
+      context[:gem_version] = '1.179.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

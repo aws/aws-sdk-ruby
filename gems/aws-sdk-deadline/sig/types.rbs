@@ -21,7 +21,7 @@ module Aws::Deadline
     end
 
     class AcceleratorSelection
-      attr_accessor name: ("t4" | "a10g" | "l4" | "l40s" | "rtx-pro-server-6000")
+      attr_accessor name: ("t4" | "a10g" | "l4" | "l40s" | "rtx-pro-server-6000" | "rtx-pro-4500")
       attr_accessor runtime: ::String
       SENSITIVE: []
     end

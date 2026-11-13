@@ -100,6 +100,80 @@ module Aws
                                     ) -> _CreateNetworkConnectorResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNetworkConnectorResponseSuccess
 
+      interface _CreateRuntimeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRuntimeResponse]
+        def arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def license_info: () -> ::String
+        def release_lifecycle: () -> Types::RuntimeReleaseLifecycle
+        def created: () -> ::String
+        def last_modified: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaCore/Client.html#create_runtime-instance_method
+      def create_runtime: (
+                            name: ::String,
+                            ?tags: Hash[::String, ::String],
+                            ?description: ::String,
+                            ?license_info: ::String,
+                            ?release_lifecycle: {
+                              release_state: ("PREVIEW" | "GA" | "DEPRECATED")?,
+                              deprecation_date: ::String?,
+                              function_create_block_date: ::String?,
+                              function_update_block_date: ::String?
+                            }
+                          ) -> _CreateRuntimeResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRuntimeResponseSuccess
+
+      interface _CreateRuntimeAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRuntimeAliasResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+        def runtime_version: () -> ::String
+        def runtime_version_arn: () -> ::String
+        def state: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "PENDING_DELETION")
+        def description: () -> ::String
+        def release_lifecycle: () -> Types::RuntimeReleaseLifecycle
+        def created: () -> ::String
+        def last_modified: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaCore/Client.html#create_runtime_alias-instance_method
+      def create_runtime_alias: (
+                                  runtime_name: ::String,
+                                  runtime_version: ::String,
+                                  name: ::String,
+                                  ?description: ::String,
+                                  ?release_lifecycle: {
+                                    release_state: ("PREVIEW" | "GA" | "DEPRECATED")?,
+                                    deprecation_date: ::String?,
+                                    function_create_block_date: ::String?,
+                                    function_update_block_date: ::String?
+                                  }
+                                ) -> _CreateRuntimeAliasResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRuntimeAliasResponseSuccess
+
+      interface _CreateRuntimeVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRuntimeVersionResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+        def resolved_uri: () -> ::String
+        def state: () -> ("CREATING" | "ACTIVE" | "FAILED" | "DELETING" | "PENDING_DELETION")
+        def release_notes: () -> ::String
+        def platforms: () -> ::Array[Types::Platform]
+        def compatibility: () -> Types::Compatibility
+        def created: () -> ::String
+        def last_modified: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaCore/Client.html#create_runtime_version-instance_method
+      def create_runtime_version: (
+                                    runtime_name: ::String,
+                                    image_uri: ::String,
+                                    name: ::String,
+                                    ?release_notes: ::String,
+                                    ?dry_run: bool
+                                  ) -> _CreateRuntimeVersionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRuntimeVersionResponseSuccess
+
       interface _DeleteNetworkConnectorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNetworkConnectorResponse]
         def arn: () -> ::String
@@ -116,6 +190,38 @@ module Aws
                                       identifier: ::String
                                     ) -> _DeleteNetworkConnectorResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNetworkConnectorResponseSuccess
+
+      interface _DeleteRuntimeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRuntimeResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaCore/Client.html#delete_runtime-instance_method
+      def delete_runtime: (
+                            runtime_name: ::String,
+                            ?recovery_window_in_days: ::Integer
+                          ) -> _DeleteRuntimeResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRuntimeResponseSuccess
+
+      interface _DeleteRuntimeAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRuntimeAliasResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaCore/Client.html#delete_runtime_alias-instance_method
+      def delete_runtime_alias: (
+                                  runtime_name: ::String,
+                                  name: ::String,
+                                  ?recovery_window_in_days: ::Integer
+                                ) -> _DeleteRuntimeAliasResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRuntimeAliasResponseSuccess
+
+      interface _DeleteRuntimeVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRuntimeVersionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaCore/Client.html#delete_runtime_version-instance_method
+      def delete_runtime_version: (
+                                    runtime_name: ::String,
+                                    name: ::String,
+                                    ?recovery_window_in_days: ::Integer
+                                  ) -> _DeleteRuntimeVersionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRuntimeVersionResponseSuccess
 
       interface _GetNetworkConnectorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetNetworkConnectorResponse]
@@ -141,6 +247,66 @@ module Aws
                                    identifier: ::String
                                  ) -> _GetNetworkConnectorResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNetworkConnectorResponseSuccess
+
+      interface _GetRuntimeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRuntimeResponse]
+        def arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def license_info: () -> ::String
+        def release_lifecycle: () -> Types::RuntimeReleaseLifecycle
+        def state: () -> ("ACTIVE" | "PENDING_DELETION" | "DELETING" | "FAILED")
+        def pending_deletion_at: () -> ::String
+        def created: () -> ::String
+        def last_modified: () -> ::String
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaCore/Client.html#get_runtime-instance_method
+      def get_runtime: (
+                         runtime_name: ::String
+                       ) -> _GetRuntimeResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRuntimeResponseSuccess
+
+      interface _GetRuntimeAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRuntimeAliasResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+        def runtime_version: () -> ::String
+        def runtime_version_arn: () -> ::String
+        def state: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "PENDING_DELETION")
+        def pending_deletion_at: () -> ::String
+        def description: () -> ::String
+        def compatibility: () -> Types::Compatibility
+        def release_lifecycle: () -> Types::RuntimeReleaseLifecycle
+        def created: () -> ::String
+        def last_modified: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaCore/Client.html#get_runtime_alias-instance_method
+      def get_runtime_alias: (
+                               runtime_name: ::String,
+                               name: ::String
+                             ) -> _GetRuntimeAliasResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRuntimeAliasResponseSuccess
+
+      interface _GetRuntimeVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRuntimeVersionResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+        def resolved_uri: () -> ::String
+        def state: () -> ("CREATING" | "ACTIVE" | "FAILED" | "DELETING" | "PENDING_DELETION")
+        def pending_deletion_at: () -> ::String
+        def release_notes: () -> ::String
+        def platforms: () -> ::Array[Types::Platform]
+        def compatibility: () -> Types::Compatibility
+        def created: () -> ::String
+        def last_modified: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaCore/Client.html#get_runtime_version-instance_method
+      def get_runtime_version: (
+                                 runtime_name: ::String,
+                                 name: ::String
+                               ) -> _GetRuntimeVersionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRuntimeVersionResponseSuccess
 
       interface _ListNetworkConnectorVersionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworkConnectorVersionsResponse]
@@ -169,6 +335,61 @@ module Aws
                                    ) -> _ListNetworkConnectorsResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkConnectorsResponseSuccess
 
+      interface _ListRuntimeAliasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRuntimeAliasesResponse]
+        def items: () -> ::Array[Types::RuntimeAliasInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaCore/Client.html#list_runtime_aliases-instance_method
+      def list_runtime_aliases: (
+                                  runtime_name: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListRuntimeAliasesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRuntimeAliasesResponseSuccess
+
+      interface _ListRuntimeVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRuntimeVersionsResponse]
+        def items: () -> ::Array[Types::RuntimeVersionInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaCore/Client.html#list_runtime_versions-instance_method
+      def list_runtime_versions: (
+                                   runtime_name: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _ListRuntimeVersionsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRuntimeVersionsResponseSuccess
+
+      interface _ListRuntimesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRuntimesResponse]
+        def next_token: () -> ::String
+        def items: () -> ::Array[Types::RuntimeInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaCore/Client.html#list_runtimes-instance_method
+      def list_runtimes: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListRuntimesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRuntimesResponseSuccess
+
+      interface _RestoreRuntimeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreRuntimeResponse]
+        def runtime_name: () -> ::String
+        def runtime_version: () -> ::String
+        def runtime_alias: () -> ::String
+        def arn: () -> ::String
+        def state: () -> ("ACTIVE" | "PENDING_DELETION" | "DELETING" | "FAILED")
+        def last_modified: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaCore/Client.html#restore_runtime-instance_method
+      def restore_runtime: (
+                             runtime_name: ::String,
+                             ?runtime_version: ::String,
+                             ?runtime_alias: ::String
+                           ) -> _RestoreRuntimeResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreRuntimeResponseSuccess
+
       interface _UpdateNetworkConnectorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNetworkConnectorResponse]
         def arn: () -> ::String
@@ -191,6 +412,91 @@ module Aws
                                       ?client_token: ::String
                                     ) -> _UpdateNetworkConnectorResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNetworkConnectorResponseSuccess
+
+      interface _UpdateRuntimeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRuntimeResponse]
+        def arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def license_info: () -> ::String
+        def release_lifecycle: () -> Types::RuntimeReleaseLifecycle
+        def created: () -> ::String
+        def last_modified: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaCore/Client.html#update_runtime-instance_method
+      def update_runtime: (
+                            runtime_name: ::String,
+                            ?description: ::String,
+                            ?license_info: ::String,
+                            ?release_lifecycle: {
+                              release_state: ("PREVIEW" | "GA" | "DEPRECATED")?,
+                              deprecation_date: ::String?,
+                              function_create_block_date: ::String?,
+                              function_update_block_date: ::String?
+                            }
+                          ) -> _UpdateRuntimeResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRuntimeResponseSuccess
+
+      interface _UpdateRuntimeAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRuntimeAliasResponse]
+        def runtime_name: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+        def runtime_version: () -> ::String
+        def runtime_version_arn: () -> ::String
+        def state: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "PENDING_DELETION")
+        def description: () -> ::String
+        def compatibility: () -> Types::Compatibility
+        def release_lifecycle: () -> Types::RuntimeReleaseLifecycle
+        def created: () -> ::String
+        def last_modified: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaCore/Client.html#update_runtime_alias-instance_method
+      def update_runtime_alias: (
+                                  runtime_name: ::String,
+                                  name: ::String,
+                                  runtime_version: ::String,
+                                  ?description: ::String,
+                                  ?release_lifecycle: {
+                                    release_state: ("PREVIEW" | "GA" | "DEPRECATED")?,
+                                    deprecation_date: ::String?,
+                                    function_create_block_date: ::String?,
+                                    function_update_block_date: ::String?
+                                  }
+                                ) -> _UpdateRuntimeAliasResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRuntimeAliasResponseSuccess
+
+      interface _UpdateRuntimeVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRuntimeVersionResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+        def resolved_uri: () -> ::String
+        def state: () -> ("CREATING" | "ACTIVE" | "FAILED" | "DELETING" | "PENDING_DELETION")
+        def release_notes: () -> ::String
+        def platforms: () -> ::Array[Types::Platform]
+        def compatibility: () -> Types::Compatibility
+        def created: () -> ::String
+        def last_modified: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaCore/Client.html#update_runtime_version-instance_method
+      def update_runtime_version: (
+                                    runtime_name: ::String,
+                                    name: ::String,
+                                    release_notes: ::String
+                                  ) -> _UpdateRuntimeVersionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRuntimeVersionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaCore/Client.html#wait_until-instance_method
+      def wait_until: (:runtime_alias_active waiter_name, 
+                    runtime_name: ::String,
+                    name: ::String
+                  ) -> Client::_GetRuntimeAliasResponseSuccess
+                    | (:runtime_alias_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetRuntimeAliasResponseSuccess
+                    | (:runtime_version_active waiter_name, 
+                    runtime_name: ::String,
+                    name: ::String
+                  ) -> Client::_GetRuntimeVersionResponseSuccess
+                    | (:runtime_version_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetRuntimeVersionResponseSuccess
     end
   end
 end

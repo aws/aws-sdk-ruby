@@ -652,6 +652,10 @@ module Aws::DevOpsAgent
     #             channel_id: "MSTeamsChannelId", # required
     #           },
     #         },
+    #         bidirectional: {
+    #           role_arn: "RoleArn", # required
+    #           enabled: false,
+    #         },
     #       },
     #       release_management: {
     #         name: "DisplayName", # required
@@ -758,6 +762,8 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.msteams.transmission_target.ops_oncall_target.channel_id #=> String
     #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_name #=> String
     #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_id #=> String
+    #   resp.association.configuration.msteams.bidirectional.role_arn #=> String
+    #   resp.association.configuration.msteams.bidirectional.enabled #=> Boolean
     #   resp.association.configuration.release_management.name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.private_connection_name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.runtime_role_arn #=> String
@@ -1932,6 +1938,8 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.msteams.transmission_target.ops_oncall_target.channel_id #=> String
     #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_name #=> String
     #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_id #=> String
+    #   resp.association.configuration.msteams.bidirectional.role_arn #=> String
+    #   resp.association.configuration.msteams.bidirectional.enabled #=> Boolean
     #   resp.association.configuration.release_management.name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.private_connection_name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.runtime_role_arn #=> String
@@ -2606,6 +2614,8 @@ module Aws::DevOpsAgent
     #   resp.associations[0].configuration.msteams.transmission_target.ops_oncall_target.channel_id #=> String
     #   resp.associations[0].configuration.msteams.transmission_target.ops_sre_target.channel_name #=> String
     #   resp.associations[0].configuration.msteams.transmission_target.ops_sre_target.channel_id #=> String
+    #   resp.associations[0].configuration.msteams.bidirectional.role_arn #=> String
+    #   resp.associations[0].configuration.msteams.bidirectional.enabled #=> Boolean
     #   resp.associations[0].configuration.release_management.name #=> String
     #   resp.associations[0].configuration.release_management.network_access.private_access.private_connection_name #=> String
     #   resp.associations[0].configuration.release_management.network_access.private_access.runtime_role_arn #=> String
@@ -4446,6 +4456,10 @@ module Aws::DevOpsAgent
     #             channel_id: "MSTeamsChannelId", # required
     #           },
     #         },
+    #         bidirectional: {
+    #           role_arn: "RoleArn", # required
+    #           enabled: false,
+    #         },
     #       },
     #       release_management: {
     #         name: "DisplayName", # required
@@ -4552,6 +4566,8 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.msteams.transmission_target.ops_oncall_target.channel_id #=> String
     #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_name #=> String
     #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_id #=> String
+    #   resp.association.configuration.msteams.bidirectional.role_arn #=> String
+    #   resp.association.configuration.msteams.bidirectional.enabled #=> Boolean
     #   resp.association.configuration.release_management.name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.private_connection_name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.runtime_role_arn #=> String
@@ -4946,7 +4962,7 @@ module Aws::DevOpsAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-devopsagent'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

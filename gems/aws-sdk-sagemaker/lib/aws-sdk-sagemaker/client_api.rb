@@ -461,6 +461,7 @@ module Aws::SageMaker
     ClusterCapacityType = Shapes::StringShape.new(name: 'ClusterCapacityType')
     ClusterConfigMode = Shapes::StringShape.new(name: 'ClusterConfigMode')
     ClusterDnsName = Shapes::StringShape.new(name: 'ClusterDnsName')
+    ClusterDrainPolicy = Shapes::StructureShape.new(name: 'ClusterDrainPolicy')
     ClusterEbsVolumeConfig = Shapes::StructureShape.new(name: 'ClusterEbsVolumeConfig')
     ClusterEbsVolumeSizeInGB = Shapes::IntegerShape.new(name: 'ClusterEbsVolumeSizeInGB')
     ClusterEventDetail = Shapes::StructureShape.new(name: 'ClusterEventDetail')
@@ -526,6 +527,18 @@ module Aws::SageMaker
     ClusterNodeSummary = Shapes::StructureShape.new(name: 'ClusterNodeSummary')
     ClusterNonNegativeInstanceCount = Shapes::IntegerShape.new(name: 'ClusterNonNegativeInstanceCount')
     ClusterOnDemandOptions = Shapes::StructureShape.new(name: 'ClusterOnDemandOptions')
+    ClusterOnDrainTimeout = Shapes::StringShape.new(name: 'ClusterOnDrainTimeout')
+    ClusterOperationCount = Shapes::IntegerShape.new(name: 'ClusterOperationCount')
+    ClusterOperationId = Shapes::StringShape.new(name: 'ClusterOperationId')
+    ClusterOperationMaxResults = Shapes::IntegerShape.new(name: 'ClusterOperationMaxResults')
+    ClusterOperationScalingConfiguration = Shapes::StructureShape.new(name: 'ClusterOperationScalingConfiguration')
+    ClusterOperationScalingDetails = Shapes::StructureShape.new(name: 'ClusterOperationScalingDetails')
+    ClusterOperationScalingDetailsList = Shapes::ListShape.new(name: 'ClusterOperationScalingDetailsList')
+    ClusterOperationSortBy = Shapes::StringShape.new(name: 'ClusterOperationSortBy')
+    ClusterOperationStatus = Shapes::StringShape.new(name: 'ClusterOperationStatus')
+    ClusterOperationSummaries = Shapes::ListShape.new(name: 'ClusterOperationSummaries')
+    ClusterOperationSummary = Shapes::StructureShape.new(name: 'ClusterOperationSummary')
+    ClusterOperationType = Shapes::StringShape.new(name: 'ClusterOperationType')
     ClusterOrchestrator = Shapes::StructureShape.new(name: 'ClusterOrchestrator')
     ClusterOrchestratorEksConfig = Shapes::StructureShape.new(name: 'ClusterOrchestratorEksConfig')
     ClusterOrchestratorSlurmConfig = Shapes::StructureShape.new(name: 'ClusterOrchestratorSlurmConfig')
@@ -966,6 +979,8 @@ module Aws::SageMaker
     DescribeClusterExtensionResponse = Shapes::StructureShape.new(name: 'DescribeClusterExtensionResponse')
     DescribeClusterNodeRequest = Shapes::StructureShape.new(name: 'DescribeClusterNodeRequest')
     DescribeClusterNodeResponse = Shapes::StructureShape.new(name: 'DescribeClusterNodeResponse')
+    DescribeClusterOperationRequest = Shapes::StructureShape.new(name: 'DescribeClusterOperationRequest')
+    DescribeClusterOperationResponse = Shapes::StructureShape.new(name: 'DescribeClusterOperationResponse')
     DescribeClusterRequest = Shapes::StructureShape.new(name: 'DescribeClusterRequest')
     DescribeClusterResponse = Shapes::StructureShape.new(name: 'DescribeClusterResponse')
     DescribeClusterSchedulerConfigRequest = Shapes::StructureShape.new(name: 'DescribeClusterSchedulerConfigRequest')
@@ -1150,6 +1165,7 @@ module Aws::SageMaker
     DomainStatus = Shapes::StringShape.new(name: 'DomainStatus')
     Double = Shapes::FloatShape.new(name: 'Double')
     DoubleParameterValue = Shapes::FloatShape.new(name: 'DoubleParameterValue')
+    DrainTimeoutInSecondsValue = Shapes::IntegerShape.new(name: 'DrainTimeoutInSecondsValue')
     DriftCheckBaselines = Shapes::StructureShape.new(name: 'DriftCheckBaselines')
     DriftCheckBias = Shapes::StructureShape.new(name: 'DriftCheckBias')
     DriftCheckExplainability = Shapes::StructureShape.new(name: 'DriftCheckExplainability')
@@ -1277,6 +1293,11 @@ module Aws::SageMaker
     ExtensionArn = Shapes::StringShape.new(name: 'ExtensionArn')
     ExtensionConfigurationValues = Shapes::StringShape.new(name: 'ExtensionConfigurationValues')
     ExtensionDetails = Shapes::StructureShape.new(name: 'ExtensionDetails')
+    ExtensionHealth = Shapes::StructureShape.new(name: 'ExtensionHealth')
+    ExtensionHealthIssue = Shapes::StructureShape.new(name: 'ExtensionHealthIssue')
+    ExtensionHealthIssueCode = Shapes::StringShape.new(name: 'ExtensionHealthIssueCode')
+    ExtensionHealthIssueMessage = Shapes::StringShape.new(name: 'ExtensionHealthIssueMessage')
+    ExtensionHealthIssues = Shapes::ListShape.new(name: 'ExtensionHealthIssues')
     ExtensionName = Shapes::StringShape.new(name: 'ExtensionName')
     ExtensionNodeCount = Shapes::IntegerShape.new(name: 'ExtensionNodeCount')
     ExtensionNodeSummary = Shapes::StructureShape.new(name: 'ExtensionNodeSummary')
@@ -1284,6 +1305,8 @@ module Aws::SageMaker
     ExtensionSummaries = Shapes::ListShape.new(name: 'ExtensionSummaries')
     ExtensionSummary = Shapes::StructureShape.new(name: 'ExtensionSummary')
     ExtensionVersion = Shapes::StringShape.new(name: 'ExtensionVersion')
+    ExtensionVersionSummaries = Shapes::ListShape.new(name: 'ExtensionVersionSummaries')
+    ExtensionVersionSummary = Shapes::StructureShape.new(name: 'ExtensionVersionSummary')
     FSxLustreConfig = Shapes::StructureShape.new(name: 'FSxLustreConfig')
     FSxLustreFileSystem = Shapes::StructureShape.new(name: 'FSxLustreFileSystem')
     FSxLustreFileSystemConfig = Shapes::StructureShape.new(name: 'FSxLustreFileSystemConfig')
@@ -1489,6 +1512,7 @@ module Aws::SageMaker
     IdleResourceSharing = Shapes::StringShape.new(name: 'IdleResourceSharing')
     IdleSettings = Shapes::StructureShape.new(name: 'IdleSettings')
     IdleTimeoutInMinutes = Shapes::IntegerShape.new(name: 'IdleTimeoutInMinutes')
+    IdleWaitWindowInSecondsValue = Shapes::IntegerShape.new(name: 'IdleWaitWindowInSecondsValue')
     Image = Shapes::StructureShape.new(name: 'Image')
     ImageArn = Shapes::StringShape.new(name: 'ImageArn')
     ImageBaseImage = Shapes::StringShape.new(name: 'ImageBaseImage')
@@ -1727,10 +1751,14 @@ module Aws::SageMaker
     ListCandidatesForAutoMLJobResponse = Shapes::StructureShape.new(name: 'ListCandidatesForAutoMLJobResponse')
     ListClusterEventsRequest = Shapes::StructureShape.new(name: 'ListClusterEventsRequest')
     ListClusterEventsResponse = Shapes::StructureShape.new(name: 'ListClusterEventsResponse')
+    ListClusterExtensionVersionsRequest = Shapes::StructureShape.new(name: 'ListClusterExtensionVersionsRequest')
+    ListClusterExtensionVersionsResponse = Shapes::StructureShape.new(name: 'ListClusterExtensionVersionsResponse')
     ListClusterExtensionsRequest = Shapes::StructureShape.new(name: 'ListClusterExtensionsRequest')
     ListClusterExtensionsResponse = Shapes::StructureShape.new(name: 'ListClusterExtensionsResponse')
     ListClusterNodesRequest = Shapes::StructureShape.new(name: 'ListClusterNodesRequest')
     ListClusterNodesResponse = Shapes::StructureShape.new(name: 'ListClusterNodesResponse')
+    ListClusterOperationsRequest = Shapes::StructureShape.new(name: 'ListClusterOperationsRequest')
+    ListClusterOperationsResponse = Shapes::StructureShape.new(name: 'ListClusterOperationsResponse')
     ListClusterSchedulerConfigsRequest = Shapes::StructureShape.new(name: 'ListClusterSchedulerConfigsRequest')
     ListClusterSchedulerConfigsResponse = Shapes::StructureShape.new(name: 'ListClusterSchedulerConfigsResponse')
     ListClustersRequest = Shapes::StructureShape.new(name: 'ListClustersRequest')
@@ -4214,12 +4242,16 @@ module Aws::SageMaker
     ClusterAutoPatchConfig.add_member(:patching_strategy, Shapes::ShapeRef.new(shape: ClusterPatchingStrategy, required: true, location_name: "PatchingStrategy"))
     ClusterAutoPatchConfig.add_member(:patch_schedule, Shapes::ShapeRef.new(shape: ClusterPatchSchedule, location_name: "PatchSchedule"))
     ClusterAutoPatchConfig.add_member(:deployment_config, Shapes::ShapeRef.new(shape: DeploymentConfiguration, location_name: "DeploymentConfig"))
+    ClusterAutoPatchConfig.add_member(:idle_wait_window_in_seconds, Shapes::ShapeRef.new(shape: IdleWaitWindowInSecondsValue, location_name: "IdleWaitWindowInSeconds"))
+    ClusterAutoPatchConfig.add_member(:drain_policy, Shapes::ShapeRef.new(shape: ClusterDrainPolicy, location_name: "DrainPolicy"))
     ClusterAutoPatchConfig.struct_class = Types::ClusterAutoPatchConfig
 
     ClusterAutoPatchConfigDetails.add_member(:patching_strategy, Shapes::ShapeRef.new(shape: ClusterPatchingStrategy, location_name: "PatchingStrategy"))
     ClusterAutoPatchConfigDetails.add_member(:current_patch_schedule, Shapes::ShapeRef.new(shape: ClusterPatchScheduleDetails, location_name: "CurrentPatchSchedule"))
     ClusterAutoPatchConfigDetails.add_member(:desired_patch_schedule, Shapes::ShapeRef.new(shape: ClusterPatchScheduleDetails, location_name: "DesiredPatchSchedule"))
     ClusterAutoPatchConfigDetails.add_member(:deployment_config, Shapes::ShapeRef.new(shape: DeploymentConfiguration, location_name: "DeploymentConfig"))
+    ClusterAutoPatchConfigDetails.add_member(:idle_wait_window_in_seconds, Shapes::ShapeRef.new(shape: IdleWaitWindowInSecondsValue, location_name: "IdleWaitWindowInSeconds"))
+    ClusterAutoPatchConfigDetails.add_member(:drain_policy, Shapes::ShapeRef.new(shape: ClusterDrainPolicy, location_name: "DrainPolicy"))
     ClusterAutoPatchConfigDetails.struct_class = Types::ClusterAutoPatchConfigDetails
 
     ClusterAutoScalingConfig.add_member(:mode, Shapes::ShapeRef.new(shape: ClusterAutoScalingMode, required: true, location_name: "Mode"))
@@ -4238,6 +4270,10 @@ module Aws::SageMaker
     ClusterCapacityRequirements.add_member(:on_demand, Shapes::ShapeRef.new(shape: ClusterOnDemandOptions, location_name: "OnDemand"))
     ClusterCapacityRequirements.struct_class = Types::ClusterCapacityRequirements
 
+    ClusterDrainPolicy.add_member(:drain_timeout_in_seconds, Shapes::ShapeRef.new(shape: DrainTimeoutInSecondsValue, location_name: "DrainTimeoutInSeconds"))
+    ClusterDrainPolicy.add_member(:on_drain_timeout, Shapes::ShapeRef.new(shape: ClusterOnDrainTimeout, location_name: "OnDrainTimeout"))
+    ClusterDrainPolicy.struct_class = Types::ClusterDrainPolicy
+
     ClusterEbsVolumeConfig.add_member(:volume_size_in_gb, Shapes::ShapeRef.new(shape: ClusterEbsVolumeSizeInGB, location_name: "VolumeSizeInGB"))
     ClusterEbsVolumeConfig.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     ClusterEbsVolumeConfig.add_member(:root_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "RootVolume", metadata: {"box" => true}))
@@ -4253,6 +4289,7 @@ module Aws::SageMaker
     ClusterEventDetail.add_member(:event_details, Shapes::ShapeRef.new(shape: EventDetails, location_name: "EventDetails"))
     ClusterEventDetail.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     ClusterEventDetail.add_member(:event_level, Shapes::ShapeRef.new(shape: ClusterEventLevel, location_name: "EventLevel"))
+    ClusterEventDetail.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClusterOperationId, location_name: "OperationId"))
     ClusterEventDetail.struct_class = Types::ClusterEventDetail
 
     ClusterEventSummaries.member = Shapes::ShapeRef.new(shape: ClusterEventSummary)
@@ -4266,6 +4303,7 @@ module Aws::SageMaker
     ClusterEventSummary.add_member(:event_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EventTime"))
     ClusterEventSummary.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     ClusterEventSummary.add_member(:event_level, Shapes::ShapeRef.new(shape: ClusterEventLevel, location_name: "EventLevel"))
+    ClusterEventSummary.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClusterOperationId, location_name: "OperationId"))
     ClusterEventSummary.struct_class = Types::ClusterEventSummary
 
     ClusterFsxLustreConfig.add_member(:dns_name, Shapes::ShapeRef.new(shape: ClusterDnsName, required: true, location_name: "DnsName"))
@@ -4462,6 +4500,28 @@ module Aws::SageMaker
     ClusterNodeSummary.struct_class = Types::ClusterNodeSummary
 
     ClusterOnDemandOptions.struct_class = Types::ClusterOnDemandOptions
+
+    ClusterOperationScalingConfiguration.add_member(:current_count, Shapes::ShapeRef.new(shape: ClusterOperationCount, location_name: "CurrentCount"))
+    ClusterOperationScalingConfiguration.add_member(:target_count, Shapes::ShapeRef.new(shape: ClusterOperationCount, location_name: "TargetCount"))
+    ClusterOperationScalingConfiguration.add_member(:min_count, Shapes::ShapeRef.new(shape: ClusterOperationCount, location_name: "MinCount"))
+    ClusterOperationScalingConfiguration.struct_class = Types::ClusterOperationScalingConfiguration
+
+    ClusterOperationScalingDetails.add_member(:instance_group_name, Shapes::ShapeRef.new(shape: String, location_name: "InstanceGroupName"))
+    ClusterOperationScalingDetails.add_member(:status, Shapes::ShapeRef.new(shape: ClusterOperationStatus, location_name: "Status"))
+    ClusterOperationScalingDetails.add_member(:original, Shapes::ShapeRef.new(shape: ClusterOperationScalingConfiguration, location_name: "Original"))
+    ClusterOperationScalingDetails.add_member(:desired, Shapes::ShapeRef.new(shape: ClusterOperationScalingConfiguration, location_name: "Desired"))
+    ClusterOperationScalingDetails.struct_class = Types::ClusterOperationScalingDetails
+
+    ClusterOperationScalingDetailsList.member = Shapes::ShapeRef.new(shape: ClusterOperationScalingDetails)
+
+    ClusterOperationSummaries.member = Shapes::ShapeRef.new(shape: ClusterOperationSummary)
+
+    ClusterOperationSummary.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClusterOperationId, location_name: "OperationId"))
+    ClusterOperationSummary.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, location_name: "ClusterArn"))
+    ClusterOperationSummary.add_member(:type, Shapes::ShapeRef.new(shape: ClusterOperationType, location_name: "Type"))
+    ClusterOperationSummary.add_member(:status, Shapes::ShapeRef.new(shape: ClusterOperationStatus, location_name: "Status"))
+    ClusterOperationSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    ClusterOperationSummary.struct_class = Types::ClusterOperationSummary
 
     ClusterOrchestrator.add_member(:eks, Shapes::ShapeRef.new(shape: ClusterOrchestratorEksConfig, location_name: "Eks"))
     ClusterOrchestrator.add_member(:slurm, Shapes::ShapeRef.new(shape: ClusterOrchestratorSlurmConfig, location_name: "Slurm"))
@@ -6385,6 +6445,7 @@ module Aws::SageMaker
 
     DescribeClusterExtensionResponse.add_member(:extension_details, Shapes::ShapeRef.new(shape: ExtensionDetails, required: true, location_name: "ExtensionDetails"))
     DescribeClusterExtensionResponse.add_member(:node_summary, Shapes::ShapeRef.new(shape: ExtensionNodeSummary, location_name: "NodeSummary"))
+    DescribeClusterExtensionResponse.add_member(:health, Shapes::ShapeRef.new(shape: ExtensionHealth, location_name: "Health"))
     DescribeClusterExtensionResponse.struct_class = Types::DescribeClusterExtensionResponse
 
     DescribeClusterNodeRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
@@ -6394,6 +6455,19 @@ module Aws::SageMaker
 
     DescribeClusterNodeResponse.add_member(:node_details, Shapes::ShapeRef.new(shape: ClusterNodeDetails, required: true, location_name: "NodeDetails"))
     DescribeClusterNodeResponse.struct_class = Types::DescribeClusterNodeResponse
+
+    DescribeClusterOperationRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
+    DescribeClusterOperationRequest.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClusterOperationId, required: true, location_name: "OperationId"))
+    DescribeClusterOperationRequest.struct_class = Types::DescribeClusterOperationRequest
+
+    DescribeClusterOperationResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClusterOperationId, location_name: "OperationId"))
+    DescribeClusterOperationResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, location_name: "ClusterArn"))
+    DescribeClusterOperationResponse.add_member(:type, Shapes::ShapeRef.new(shape: ClusterOperationType, location_name: "Type"))
+    DescribeClusterOperationResponse.add_member(:status, Shapes::ShapeRef.new(shape: ClusterOperationStatus, location_name: "Status"))
+    DescribeClusterOperationResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    DescribeClusterOperationResponse.add_member(:scaling_details, Shapes::ShapeRef.new(shape: ClusterOperationScalingDetailsList, location_name: "ScalingDetails"))
+    DescribeClusterOperationResponse.add_member(:deep_health_check_details, Shapes::ShapeRef.new(shape: DeepHealthCheckConfigurations, location_name: "DeepHealthCheckDetails"))
+    DescribeClusterOperationResponse.struct_class = Types::DescribeClusterOperationResponse
 
     DescribeClusterRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
     DescribeClusterRequest.struct_class = Types::DescribeClusterRequest
@@ -8067,6 +8141,16 @@ module Aws::SageMaker
     ExtensionDetails.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     ExtensionDetails.struct_class = Types::ExtensionDetails
 
+    ExtensionHealth.add_member(:issues, Shapes::ShapeRef.new(shape: ExtensionHealthIssues, required: true, location_name: "Issues"))
+    ExtensionHealth.struct_class = Types::ExtensionHealth
+
+    ExtensionHealthIssue.add_member(:code, Shapes::ShapeRef.new(shape: ExtensionHealthIssueCode, required: true, location_name: "Code"))
+    ExtensionHealthIssue.add_member(:message, Shapes::ShapeRef.new(shape: ExtensionHealthIssueMessage, required: true, location_name: "Message"))
+    ExtensionHealthIssue.add_member(:node_count, Shapes::ShapeRef.new(shape: ExtensionNodeCount, required: true, location_name: "NodeCount"))
+    ExtensionHealthIssue.struct_class = Types::ExtensionHealthIssue
+
+    ExtensionHealthIssues.member = Shapes::ShapeRef.new(shape: ExtensionHealthIssue)
+
     ExtensionNodeSummary.add_member(:total_count, Shapes::ShapeRef.new(shape: ExtensionNodeCount, required: true, location_name: "TotalCount"))
     ExtensionNodeSummary.add_member(:active_count, Shapes::ShapeRef.new(shape: ExtensionNodeCount, required: true, location_name: "ActiveCount"))
     ExtensionNodeSummary.struct_class = Types::ExtensionNodeSummary
@@ -8079,6 +8163,11 @@ module Aws::SageMaker
     ExtensionSummary.add_member(:status, Shapes::ShapeRef.new(shape: ExtensionStatus, required: true, location_name: "Status"))
     ExtensionSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     ExtensionSummary.struct_class = Types::ExtensionSummary
+
+    ExtensionVersionSummaries.member = Shapes::ShapeRef.new(shape: ExtensionVersionSummary)
+
+    ExtensionVersionSummary.add_member(:extension_version, Shapes::ShapeRef.new(shape: ExtensionVersion, required: true, location_name: "ExtensionVersion"))
+    ExtensionVersionSummary.struct_class = Types::ExtensionVersionSummary
 
     FSxLustreConfig.add_member(:size_in_gi_b, Shapes::ShapeRef.new(shape: FSxLustreSizeInGiB, required: true, location_name: "SizeInGiB"))
     FSxLustreConfig.add_member(:per_unit_storage_throughput, Shapes::ShapeRef.new(shape: FSxLustrePerUnitStorageThroughput, required: true, location_name: "PerUnitStorageThroughput"))
@@ -9295,6 +9384,7 @@ module Aws::SageMaker
     ListClusterEventsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: EventSortBy, location_name: "SortBy"))
     ListClusterEventsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
     ListClusterEventsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ClusterEventResourceType, location_name: "ResourceType"))
+    ListClusterEventsRequest.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClusterOperationId, location_name: "OperationId"))
     ListClusterEventsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ClusterEventMaxResults, location_name: "MaxResults"))
     ListClusterEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListClusterEventsRequest.struct_class = Types::ListClusterEventsRequest
@@ -9302,6 +9392,15 @@ module Aws::SageMaker
     ListClusterEventsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListClusterEventsResponse.add_member(:events, Shapes::ShapeRef.new(shape: ClusterEventSummaries, location_name: "Events"))
     ListClusterEventsResponse.struct_class = Types::ListClusterEventsResponse
+
+    ListClusterExtensionVersionsRequest.add_member(:extension_name, Shapes::ShapeRef.new(shape: ExtensionName, required: true, location_name: "ExtensionName"))
+    ListClusterExtensionVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListClusterExtensionVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListClusterExtensionVersionsRequest.struct_class = Types::ListClusterExtensionVersionsRequest
+
+    ListClusterExtensionVersionsResponse.add_member(:extension_versions, Shapes::ShapeRef.new(shape: ExtensionVersionSummaries, required: true, location_name: "ExtensionVersions"))
+    ListClusterExtensionVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListClusterExtensionVersionsResponse.struct_class = Types::ListClusterExtensionVersionsResponse
 
     ListClusterExtensionsRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
     ListClusterExtensionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -9328,6 +9427,21 @@ module Aws::SageMaker
     ListClusterNodesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListClusterNodesResponse.add_member(:cluster_node_summaries, Shapes::ShapeRef.new(shape: ClusterNodeSummaries, required: true, location_name: "ClusterNodeSummaries"))
     ListClusterNodesResponse.struct_class = Types::ListClusterNodesResponse
+
+    ListClusterOperationsRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
+    ListClusterOperationsRequest.add_member(:status, Shapes::ShapeRef.new(shape: ClusterOperationStatus, location_name: "Status"))
+    ListClusterOperationsRequest.add_member(:type, Shapes::ShapeRef.new(shape: ClusterOperationType, location_name: "Type"))
+    ListClusterOperationsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeAfter"))
+    ListClusterOperationsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeBefore"))
+    ListClusterOperationsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: ClusterOperationSortBy, location_name: "SortBy"))
+    ListClusterOperationsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    ListClusterOperationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ClusterOperationMaxResults, location_name: "MaxResults"))
+    ListClusterOperationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListClusterOperationsRequest.struct_class = Types::ListClusterOperationsRequest
+
+    ListClusterOperationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListClusterOperationsResponse.add_member(:cluster_operation_summaries, Shapes::ShapeRef.new(shape: ClusterOperationSummaries, location_name: "ClusterOperationSummaries"))
+    ListClusterOperationsResponse.struct_class = Types::ListClusterOperationsResponse
 
     ListClusterSchedulerConfigsRequest.add_member(:created_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAfter"))
     ListClusterSchedulerConfigsRequest.add_member(:created_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedBefore"))
@@ -15372,6 +15486,15 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
+      api.add_operation(:describe_cluster_operation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeClusterOperation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeClusterOperationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeClusterOperationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
       api.add_operation(:describe_cluster_scheduler_config, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeClusterSchedulerConfig"
         o.http_method = "POST"
@@ -16234,6 +16357,20 @@ module Aws::SageMaker
         )
       end)
 
+      api.add_operation(:list_cluster_extension_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListClusterExtensionVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListClusterExtensionVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListClusterExtensionVersionsResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_cluster_extensions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListClusterExtensions"
         o.http_method = "POST"
@@ -16255,6 +16392,21 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListClusterNodesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListClusterNodesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_cluster_operations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListClusterOperations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListClusterOperationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListClusterOperationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

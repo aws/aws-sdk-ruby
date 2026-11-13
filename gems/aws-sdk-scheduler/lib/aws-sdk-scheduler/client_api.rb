@@ -41,7 +41,12 @@ module Aws::Scheduler
     EnableECSManagedTags = Shapes::BooleanShape.new(name: 'EnableECSManagedTags')
     EnableExecuteCommand = Shapes::BooleanShape.new(name: 'EnableExecuteCommand')
     EndDate = Shapes::TimestampShape.new(name: 'EndDate')
+    EventBridgeMetadataKey = Shapes::StringShape.new(name: 'EventBridgeMetadataKey')
+    EventBridgeMetadataMap = Shapes::MapShape.new(name: 'EventBridgeMetadataMap')
+    EventBridgeMetadataValue = Shapes::StringShape.new(name: 'EventBridgeMetadataValue')
     EventBridgeParameters = Shapes::StructureShape.new(name: 'EventBridgeParameters')
+    EventBridgePutEventsV2Parameters = Shapes::StructureShape.new(name: 'EventBridgePutEventsV2Parameters')
+    EventBridgePutRawEventsParameters = Shapes::StructureShape.new(name: 'EventBridgePutRawEventsParameters')
     FlexibleTimeWindow = Shapes::StructureShape.new(name: 'FlexibleTimeWindow')
     FlexibleTimeWindowMode = Shapes::StringShape.new(name: 'FlexibleTimeWindowMode')
     GetScheduleGroupInput = Shapes::StructureShape.new(name: 'GetScheduleGroupInput')
@@ -133,42 +138,42 @@ module Aws::Scheduler
     UpdateScheduleOutput = Shapes::StructureShape.new(name: 'UpdateScheduleOutput')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
 
-    AwsVpcConfiguration.add_member(:assign_public_ip, Shapes::ShapeRef.new(shape: AssignPublicIp, location_name: "AssignPublicIp"))
-    AwsVpcConfiguration.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, location_name: "SecurityGroups"))
     AwsVpcConfiguration.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, required: true, location_name: "Subnets"))
+    AwsVpcConfiguration.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, location_name: "SecurityGroups"))
+    AwsVpcConfiguration.add_member(:assign_public_ip, Shapes::ShapeRef.new(shape: AssignPublicIp, location_name: "AssignPublicIp"))
     AwsVpcConfiguration.struct_class = Types::AwsVpcConfiguration
 
     CapacityProviderStrategy.member = Shapes::ShapeRef.new(shape: CapacityProviderStrategyItem)
 
-    CapacityProviderStrategyItem.add_member(:base, Shapes::ShapeRef.new(shape: CapacityProviderStrategyItemBase, location_name: "base"))
     CapacityProviderStrategyItem.add_member(:capacity_provider, Shapes::ShapeRef.new(shape: CapacityProvider, required: true, location_name: "capacityProvider"))
     CapacityProviderStrategyItem.add_member(:weight, Shapes::ShapeRef.new(shape: CapacityProviderStrategyItemWeight, location_name: "weight"))
+    CapacityProviderStrategyItem.add_member(:base, Shapes::ShapeRef.new(shape: CapacityProviderStrategyItemBase, location_name: "base"))
     CapacityProviderStrategyItem.struct_class = Types::CapacityProviderStrategyItem
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateScheduleGroupInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateScheduleGroupInput.add_member(:name, Shapes::ShapeRef.new(shape: ScheduleGroupName, required: true, location: "uri", location_name: "Name"))
     CreateScheduleGroupInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateScheduleGroupInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateScheduleGroupInput.struct_class = Types::CreateScheduleGroupInput
 
     CreateScheduleGroupOutput.add_member(:schedule_group_arn, Shapes::ShapeRef.new(shape: ScheduleGroupArn, required: true, location_name: "ScheduleGroupArn"))
     CreateScheduleGroupOutput.struct_class = Types::CreateScheduleGroupOutput
 
-    CreateScheduleInput.add_member(:action_after_completion, Shapes::ShapeRef.new(shape: ActionAfterCompletion, location_name: "ActionAfterCompletion"))
-    CreateScheduleInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
-    CreateScheduleInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    CreateScheduleInput.add_member(:end_date, Shapes::ShapeRef.new(shape: EndDate, location_name: "EndDate"))
-    CreateScheduleInput.add_member(:flexible_time_window, Shapes::ShapeRef.new(shape: FlexibleTimeWindow, required: true, location_name: "FlexibleTimeWindow"))
-    CreateScheduleInput.add_member(:group_name, Shapes::ShapeRef.new(shape: ScheduleGroupName, location_name: "GroupName"))
-    CreateScheduleInput.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
     CreateScheduleInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "Name"))
+    CreateScheduleInput.add_member(:group_name, Shapes::ShapeRef.new(shape: ScheduleGroupName, location_name: "GroupName"))
     CreateScheduleInput.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, required: true, location_name: "ScheduleExpression"))
-    CreateScheduleInput.add_member(:schedule_expression_timezone, Shapes::ShapeRef.new(shape: ScheduleExpressionTimezone, location_name: "ScheduleExpressionTimezone"))
     CreateScheduleInput.add_member(:start_date, Shapes::ShapeRef.new(shape: StartDate, location_name: "StartDate"))
+    CreateScheduleInput.add_member(:end_date, Shapes::ShapeRef.new(shape: EndDate, location_name: "EndDate"))
+    CreateScheduleInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateScheduleInput.add_member(:schedule_expression_timezone, Shapes::ShapeRef.new(shape: ScheduleExpressionTimezone, location_name: "ScheduleExpressionTimezone"))
     CreateScheduleInput.add_member(:state, Shapes::ShapeRef.new(shape: ScheduleState, location_name: "State"))
+    CreateScheduleInput.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
     CreateScheduleInput.add_member(:target, Shapes::ShapeRef.new(shape: Target, required: true, location_name: "Target"))
+    CreateScheduleInput.add_member(:flexible_time_window, Shapes::ShapeRef.new(shape: FlexibleTimeWindow, required: true, location_name: "FlexibleTimeWindow"))
+    CreateScheduleInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateScheduleInput.add_member(:action_after_completion, Shapes::ShapeRef.new(shape: ActionAfterCompletion, location_name: "ActionAfterCompletion"))
     CreateScheduleInput.struct_class = Types::CreateScheduleInput
 
     CreateScheduleOutput.add_member(:schedule_arn, Shapes::ShapeRef.new(shape: ScheduleArn, required: true, location_name: "ScheduleArn"))
@@ -177,72 +182,82 @@ module Aws::Scheduler
     DeadLetterConfig.add_member(:arn, Shapes::ShapeRef.new(shape: DeadLetterConfigArnString, location_name: "Arn"))
     DeadLetterConfig.struct_class = Types::DeadLetterConfig
 
-    DeleteScheduleGroupInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteScheduleGroupInput.add_member(:name, Shapes::ShapeRef.new(shape: ScheduleGroupName, required: true, location: "uri", location_name: "Name"))
+    DeleteScheduleGroupInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteScheduleGroupInput.struct_class = Types::DeleteScheduleGroupInput
 
     DeleteScheduleGroupOutput.struct_class = Types::DeleteScheduleGroupOutput
 
-    DeleteScheduleInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
-    DeleteScheduleInput.add_member(:group_name, Shapes::ShapeRef.new(shape: ScheduleGroupName, location: "querystring", location_name: "groupName"))
     DeleteScheduleInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "Name"))
+    DeleteScheduleInput.add_member(:group_name, Shapes::ShapeRef.new(shape: ScheduleGroupName, location: "querystring", location_name: "groupName"))
+    DeleteScheduleInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteScheduleInput.struct_class = Types::DeleteScheduleInput
 
     DeleteScheduleOutput.struct_class = Types::DeleteScheduleOutput
 
+    EcsParameters.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: TaskDefinitionArn, required: true, location_name: "TaskDefinitionArn"))
+    EcsParameters.add_member(:task_count, Shapes::ShapeRef.new(shape: TaskCount, location_name: "TaskCount"))
+    EcsParameters.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "LaunchType"))
+    EcsParameters.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
+    EcsParameters.add_member(:platform_version, Shapes::ShapeRef.new(shape: PlatformVersion, location_name: "PlatformVersion"))
+    EcsParameters.add_member(:group, Shapes::ShapeRef.new(shape: Group, location_name: "Group"))
     EcsParameters.add_member(:capacity_provider_strategy, Shapes::ShapeRef.new(shape: CapacityProviderStrategy, location_name: "CapacityProviderStrategy"))
     EcsParameters.add_member(:enable_ecs_managed_tags, Shapes::ShapeRef.new(shape: EnableECSManagedTags, location_name: "EnableECSManagedTags"))
     EcsParameters.add_member(:enable_execute_command, Shapes::ShapeRef.new(shape: EnableExecuteCommand, location_name: "EnableExecuteCommand"))
-    EcsParameters.add_member(:group, Shapes::ShapeRef.new(shape: Group, location_name: "Group"))
-    EcsParameters.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "LaunchType"))
-    EcsParameters.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
     EcsParameters.add_member(:placement_constraints, Shapes::ShapeRef.new(shape: PlacementConstraints, location_name: "PlacementConstraints"))
     EcsParameters.add_member(:placement_strategy, Shapes::ShapeRef.new(shape: PlacementStrategies, location_name: "PlacementStrategy"))
-    EcsParameters.add_member(:platform_version, Shapes::ShapeRef.new(shape: PlatformVersion, location_name: "PlatformVersion"))
     EcsParameters.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: PropagateTags, location_name: "PropagateTags"))
     EcsParameters.add_member(:reference_id, Shapes::ShapeRef.new(shape: ReferenceId, location_name: "ReferenceId"))
     EcsParameters.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
-    EcsParameters.add_member(:task_count, Shapes::ShapeRef.new(shape: TaskCount, location_name: "TaskCount"))
-    EcsParameters.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: TaskDefinitionArn, required: true, location_name: "TaskDefinitionArn"))
     EcsParameters.struct_class = Types::EcsParameters
+
+    EventBridgeMetadataMap.key = Shapes::ShapeRef.new(shape: EventBridgeMetadataKey)
+    EventBridgeMetadataMap.value = Shapes::ShapeRef.new(shape: EventBridgeMetadataValue)
 
     EventBridgeParameters.add_member(:detail_type, Shapes::ShapeRef.new(shape: DetailType, required: true, location_name: "DetailType"))
     EventBridgeParameters.add_member(:source, Shapes::ShapeRef.new(shape: Source, required: true, location_name: "Source"))
     EventBridgeParameters.struct_class = Types::EventBridgeParameters
 
-    FlexibleTimeWindow.add_member(:maximum_window_in_minutes, Shapes::ShapeRef.new(shape: MaximumWindowInMinutes, location_name: "MaximumWindowInMinutes"))
+    EventBridgePutEventsV2Parameters.add_member(:detail_type, Shapes::ShapeRef.new(shape: DetailType, required: true, location_name: "DetailType"))
+    EventBridgePutEventsV2Parameters.add_member(:source, Shapes::ShapeRef.new(shape: Source, required: true, location_name: "Source"))
+    EventBridgePutEventsV2Parameters.struct_class = Types::EventBridgePutEventsV2Parameters
+
+    EventBridgePutRawEventsParameters.add_member(:metadata, Shapes::ShapeRef.new(shape: EventBridgeMetadataMap, location_name: "Metadata"))
+    EventBridgePutRawEventsParameters.struct_class = Types::EventBridgePutRawEventsParameters
+
     FlexibleTimeWindow.add_member(:mode, Shapes::ShapeRef.new(shape: FlexibleTimeWindowMode, required: true, location_name: "Mode"))
+    FlexibleTimeWindow.add_member(:maximum_window_in_minutes, Shapes::ShapeRef.new(shape: MaximumWindowInMinutes, location_name: "MaximumWindowInMinutes"))
     FlexibleTimeWindow.struct_class = Types::FlexibleTimeWindow
 
     GetScheduleGroupInput.add_member(:name, Shapes::ShapeRef.new(shape: ScheduleGroupName, required: true, location: "uri", location_name: "Name"))
     GetScheduleGroupInput.struct_class = Types::GetScheduleGroupInput
 
     GetScheduleGroupOutput.add_member(:arn, Shapes::ShapeRef.new(shape: ScheduleGroupArn, location_name: "Arn"))
-    GetScheduleGroupOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
-    GetScheduleGroupOutput.add_member(:last_modification_date, Shapes::ShapeRef.new(shape: LastModificationDate, location_name: "LastModificationDate"))
     GetScheduleGroupOutput.add_member(:name, Shapes::ShapeRef.new(shape: ScheduleGroupName, location_name: "Name"))
     GetScheduleGroupOutput.add_member(:state, Shapes::ShapeRef.new(shape: ScheduleGroupState, location_name: "State"))
+    GetScheduleGroupOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
+    GetScheduleGroupOutput.add_member(:last_modification_date, Shapes::ShapeRef.new(shape: LastModificationDate, location_name: "LastModificationDate"))
     GetScheduleGroupOutput.struct_class = Types::GetScheduleGroupOutput
 
-    GetScheduleInput.add_member(:group_name, Shapes::ShapeRef.new(shape: ScheduleGroupName, location: "querystring", location_name: "groupName"))
     GetScheduleInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "Name"))
+    GetScheduleInput.add_member(:group_name, Shapes::ShapeRef.new(shape: ScheduleGroupName, location: "querystring", location_name: "groupName"))
     GetScheduleInput.struct_class = Types::GetScheduleInput
 
-    GetScheduleOutput.add_member(:action_after_completion, Shapes::ShapeRef.new(shape: ActionAfterCompletion, location_name: "ActionAfterCompletion"))
     GetScheduleOutput.add_member(:arn, Shapes::ShapeRef.new(shape: ScheduleArn, location_name: "Arn"))
-    GetScheduleOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
-    GetScheduleOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    GetScheduleOutput.add_member(:end_date, Shapes::ShapeRef.new(shape: EndDate, location_name: "EndDate"))
-    GetScheduleOutput.add_member(:flexible_time_window, Shapes::ShapeRef.new(shape: FlexibleTimeWindow, location_name: "FlexibleTimeWindow"))
     GetScheduleOutput.add_member(:group_name, Shapes::ShapeRef.new(shape: ScheduleGroupName, location_name: "GroupName"))
-    GetScheduleOutput.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
-    GetScheduleOutput.add_member(:last_modification_date, Shapes::ShapeRef.new(shape: LastModificationDate, location_name: "LastModificationDate"))
     GetScheduleOutput.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     GetScheduleOutput.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "ScheduleExpression"))
-    GetScheduleOutput.add_member(:schedule_expression_timezone, Shapes::ShapeRef.new(shape: ScheduleExpressionTimezone, location_name: "ScheduleExpressionTimezone"))
     GetScheduleOutput.add_member(:start_date, Shapes::ShapeRef.new(shape: StartDate, location_name: "StartDate"))
+    GetScheduleOutput.add_member(:end_date, Shapes::ShapeRef.new(shape: EndDate, location_name: "EndDate"))
+    GetScheduleOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    GetScheduleOutput.add_member(:schedule_expression_timezone, Shapes::ShapeRef.new(shape: ScheduleExpressionTimezone, location_name: "ScheduleExpressionTimezone"))
     GetScheduleOutput.add_member(:state, Shapes::ShapeRef.new(shape: ScheduleState, location_name: "State"))
+    GetScheduleOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
+    GetScheduleOutput.add_member(:last_modification_date, Shapes::ShapeRef.new(shape: LastModificationDate, location_name: "LastModificationDate"))
+    GetScheduleOutput.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
     GetScheduleOutput.add_member(:target, Shapes::ShapeRef.new(shape: Target, location_name: "Target"))
+    GetScheduleOutput.add_member(:flexible_time_window, Shapes::ShapeRef.new(shape: FlexibleTimeWindow, location_name: "FlexibleTimeWindow"))
+    GetScheduleOutput.add_member(:action_after_completion, Shapes::ShapeRef.new(shape: ActionAfterCompletion, location_name: "ActionAfterCompletion"))
     GetScheduleOutput.struct_class = Types::GetScheduleOutput
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
@@ -251,9 +266,9 @@ module Aws::Scheduler
     KinesisParameters.add_member(:partition_key, Shapes::ShapeRef.new(shape: TargetPartitionKey, required: true, location_name: "PartitionKey"))
     KinesisParameters.struct_class = Types::KinesisParameters
 
-    ListScheduleGroupsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
     ListScheduleGroupsInput.add_member(:name_prefix, Shapes::ShapeRef.new(shape: ScheduleGroupNamePrefix, location: "querystring", location_name: "NamePrefix"))
     ListScheduleGroupsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListScheduleGroupsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
     ListScheduleGroupsInput.struct_class = Types::ListScheduleGroupsInput
 
     ListScheduleGroupsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -261,10 +276,10 @@ module Aws::Scheduler
     ListScheduleGroupsOutput.struct_class = Types::ListScheduleGroupsOutput
 
     ListSchedulesInput.add_member(:group_name, Shapes::ShapeRef.new(shape: ScheduleGroupName, location: "querystring", location_name: "ScheduleGroup"))
-    ListSchedulesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
     ListSchedulesInput.add_member(:name_prefix, Shapes::ShapeRef.new(shape: NamePrefix, location: "querystring", location_name: "NamePrefix"))
-    ListSchedulesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
     ListSchedulesInput.add_member(:state, Shapes::ShapeRef.new(shape: ScheduleState, location: "querystring", location_name: "State"))
+    ListSchedulesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListSchedulesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
     ListSchedulesInput.struct_class = Types::ListSchedulesInput
 
     ListSchedulesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -280,16 +295,16 @@ module Aws::Scheduler
     NetworkConfiguration.add_member(:awsvpc_configuration, Shapes::ShapeRef.new(shape: AwsVpcConfiguration, location_name: "awsvpcConfiguration"))
     NetworkConfiguration.struct_class = Types::NetworkConfiguration
 
-    PlacementConstraint.add_member(:expression, Shapes::ShapeRef.new(shape: PlacementConstraintExpression, location_name: "expression"))
     PlacementConstraint.add_member(:type, Shapes::ShapeRef.new(shape: PlacementConstraintType, location_name: "type"))
+    PlacementConstraint.add_member(:expression, Shapes::ShapeRef.new(shape: PlacementConstraintExpression, location_name: "expression"))
     PlacementConstraint.struct_class = Types::PlacementConstraint
 
     PlacementConstraints.member = Shapes::ShapeRef.new(shape: PlacementConstraint)
 
     PlacementStrategies.member = Shapes::ShapeRef.new(shape: PlacementStrategy)
 
-    PlacementStrategy.add_member(:field, Shapes::ShapeRef.new(shape: PlacementStrategyField, location_name: "field"))
     PlacementStrategy.add_member(:type, Shapes::ShapeRef.new(shape: PlacementStrategyType, location_name: "type"))
+    PlacementStrategy.add_member(:field, Shapes::ShapeRef.new(shape: PlacementStrategyField, location_name: "field"))
     PlacementStrategy.struct_class = Types::PlacementStrategy
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
@@ -311,20 +326,20 @@ module Aws::Scheduler
     ScheduleGroupList.member = Shapes::ShapeRef.new(shape: ScheduleGroupSummary)
 
     ScheduleGroupSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ScheduleGroupArn, location_name: "Arn"))
-    ScheduleGroupSummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
-    ScheduleGroupSummary.add_member(:last_modification_date, Shapes::ShapeRef.new(shape: LastModificationDate, location_name: "LastModificationDate"))
     ScheduleGroupSummary.add_member(:name, Shapes::ShapeRef.new(shape: ScheduleGroupName, location_name: "Name"))
     ScheduleGroupSummary.add_member(:state, Shapes::ShapeRef.new(shape: ScheduleGroupState, location_name: "State"))
+    ScheduleGroupSummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
+    ScheduleGroupSummary.add_member(:last_modification_date, Shapes::ShapeRef.new(shape: LastModificationDate, location_name: "LastModificationDate"))
     ScheduleGroupSummary.struct_class = Types::ScheduleGroupSummary
 
     ScheduleList.member = Shapes::ShapeRef.new(shape: ScheduleSummary)
 
     ScheduleSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ScheduleArn, location_name: "Arn"))
-    ScheduleSummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
-    ScheduleSummary.add_member(:group_name, Shapes::ShapeRef.new(shape: ScheduleGroupName, location_name: "GroupName"))
-    ScheduleSummary.add_member(:last_modification_date, Shapes::ShapeRef.new(shape: LastModificationDate, location_name: "LastModificationDate"))
     ScheduleSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
+    ScheduleSummary.add_member(:group_name, Shapes::ShapeRef.new(shape: ScheduleGroupName, location_name: "GroupName"))
     ScheduleSummary.add_member(:state, Shapes::ShapeRef.new(shape: ScheduleState, location_name: "State"))
+    ScheduleSummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
+    ScheduleSummary.add_member(:last_modification_date, Shapes::ShapeRef.new(shape: LastModificationDate, location_name: "LastModificationDate"))
     ScheduleSummary.add_member(:target, Shapes::ShapeRef.new(shape: TargetSummary, location_name: "Target"))
     ScheduleSummary.struct_class = Types::ScheduleSummary
 
@@ -358,13 +373,15 @@ module Aws::Scheduler
     Tags.member = Shapes::ShapeRef.new(shape: TagMap)
 
     Target.add_member(:arn, Shapes::ShapeRef.new(shape: TargetArn, required: true, location_name: "Arn"))
+    Target.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     Target.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
+    Target.add_member(:retry_policy, Shapes::ShapeRef.new(shape: RetryPolicy, location_name: "RetryPolicy"))
+    Target.add_member(:input, Shapes::ShapeRef.new(shape: TargetInput, location_name: "Input"))
     Target.add_member(:ecs_parameters, Shapes::ShapeRef.new(shape: EcsParameters, location_name: "EcsParameters"))
     Target.add_member(:event_bridge_parameters, Shapes::ShapeRef.new(shape: EventBridgeParameters, location_name: "EventBridgeParameters"))
-    Target.add_member(:input, Shapes::ShapeRef.new(shape: TargetInput, location_name: "Input"))
+    Target.add_member(:event_bridge_put_events_v2_parameters, Shapes::ShapeRef.new(shape: EventBridgePutEventsV2Parameters, location_name: "EventBridgePutEventsV2Parameters"))
+    Target.add_member(:event_bridge_put_raw_events_parameters, Shapes::ShapeRef.new(shape: EventBridgePutRawEventsParameters, location_name: "EventBridgePutRawEventsParameters"))
     Target.add_member(:kinesis_parameters, Shapes::ShapeRef.new(shape: KinesisParameters, location_name: "KinesisParameters"))
-    Target.add_member(:retry_policy, Shapes::ShapeRef.new(shape: RetryPolicy, location_name: "RetryPolicy"))
-    Target.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     Target.add_member(:sage_maker_pipeline_parameters, Shapes::ShapeRef.new(shape: SageMakerPipelineParameters, location_name: "SageMakerPipelineParameters"))
     Target.add_member(:sqs_parameters, Shapes::ShapeRef.new(shape: SqsParameters, location_name: "SqsParameters"))
     Target.struct_class = Types::Target
@@ -381,19 +398,19 @@ module Aws::Scheduler
 
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
-    UpdateScheduleInput.add_member(:action_after_completion, Shapes::ShapeRef.new(shape: ActionAfterCompletion, location_name: "ActionAfterCompletion"))
-    UpdateScheduleInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
-    UpdateScheduleInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
-    UpdateScheduleInput.add_member(:end_date, Shapes::ShapeRef.new(shape: EndDate, location_name: "EndDate"))
-    UpdateScheduleInput.add_member(:flexible_time_window, Shapes::ShapeRef.new(shape: FlexibleTimeWindow, required: true, location_name: "FlexibleTimeWindow"))
-    UpdateScheduleInput.add_member(:group_name, Shapes::ShapeRef.new(shape: ScheduleGroupName, location_name: "GroupName"))
-    UpdateScheduleInput.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
     UpdateScheduleInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "Name"))
+    UpdateScheduleInput.add_member(:group_name, Shapes::ShapeRef.new(shape: ScheduleGroupName, location_name: "GroupName"))
     UpdateScheduleInput.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, required: true, location_name: "ScheduleExpression"))
-    UpdateScheduleInput.add_member(:schedule_expression_timezone, Shapes::ShapeRef.new(shape: ScheduleExpressionTimezone, location_name: "ScheduleExpressionTimezone"))
     UpdateScheduleInput.add_member(:start_date, Shapes::ShapeRef.new(shape: StartDate, location_name: "StartDate"))
+    UpdateScheduleInput.add_member(:end_date, Shapes::ShapeRef.new(shape: EndDate, location_name: "EndDate"))
+    UpdateScheduleInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateScheduleInput.add_member(:schedule_expression_timezone, Shapes::ShapeRef.new(shape: ScheduleExpressionTimezone, location_name: "ScheduleExpressionTimezone"))
     UpdateScheduleInput.add_member(:state, Shapes::ShapeRef.new(shape: ScheduleState, location_name: "State"))
+    UpdateScheduleInput.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
     UpdateScheduleInput.add_member(:target, Shapes::ShapeRef.new(shape: Target, required: true, location_name: "Target"))
+    UpdateScheduleInput.add_member(:flexible_time_window, Shapes::ShapeRef.new(shape: FlexibleTimeWindow, required: true, location_name: "FlexibleTimeWindow"))
+    UpdateScheduleInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    UpdateScheduleInput.add_member(:action_after_completion, Shapes::ShapeRef.new(shape: ActionAfterCompletion, location_name: "ActionAfterCompletion"))
     UpdateScheduleInput.struct_class = Types::UpdateScheduleInput
 
     UpdateScheduleOutput.add_member(:schedule_arn, Shapes::ShapeRef.new(shape: ScheduleArn, required: true, location_name: "ScheduleArn"))
@@ -410,9 +427,10 @@ module Aws::Scheduler
 
       api.metadata = {
         "apiVersion" => "2021-06-30",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "scheduler",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon EventBridge Scheduler",
         "serviceId" => "Scheduler",
         "signatureVersion" => "v4",
@@ -430,8 +448,8 @@ module Aws::Scheduler
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:create_schedule_group, Seahorse::Model::Operation.new.tap do |o|
@@ -453,6 +471,7 @@ module Aws::Scheduler
         o.http_request_uri = "/schedules/{Name}"
         o.input = Shapes::ShapeRef.new(shape: DeleteScheduleInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteScheduleOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -479,6 +498,7 @@ module Aws::Scheduler
         o.http_request_uri = "/schedules/{Name}"
         o.input = Shapes::ShapeRef.new(shape: GetScheduleInput)
         o.output = Shapes::ShapeRef.new(shape: GetScheduleOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -576,6 +596,7 @@ module Aws::Scheduler
         o.http_request_uri = "/schedules/{Name}"
         o.input = Shapes::ShapeRef.new(shape: UpdateScheduleInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateScheduleOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

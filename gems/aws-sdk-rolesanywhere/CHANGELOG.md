@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2026-11-13)
+------------------
+
+* Feature - This release adds resource aliases for IAM Roles Anywhere trust anchors, profiles, and certificate revocation lists (CRLs). Assign an optional, unique alias name to a resource and use its alias ARN wherever an identifier is accepted, including CreateSession.
+
 1.67.0 (2026-11-11)
 ------------------
 

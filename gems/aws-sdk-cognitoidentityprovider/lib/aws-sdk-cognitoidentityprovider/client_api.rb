@@ -150,6 +150,7 @@ module Aws::CognitoIdentityProvider
     ClientSecretDescriptorType = Shapes::StructureShape.new(name: 'ClientSecretDescriptorType')
     ClientSecretIdType = Shapes::StringShape.new(name: 'ClientSecretIdType')
     ClientSecretType = Shapes::StringShape.new(name: 'ClientSecretType')
+    ClientTypeType = Shapes::StringShape.new(name: 'ClientTypeType')
     CloudWatchLogsConfigurationType = Shapes::StructureShape.new(name: 'CloudWatchLogsConfigurationType')
     CodeDeliveryDetailsListType = Shapes::ListShape.new(name: 'CodeDeliveryDetailsListType')
     CodeDeliveryDetailsType = Shapes::StructureShape.new(name: 'CodeDeliveryDetailsType')
@@ -200,6 +201,7 @@ module Aws::CognitoIdentityProvider
     CustomSMSLambdaVersionConfigType = Shapes::StructureShape.new(name: 'CustomSMSLambdaVersionConfigType')
     CustomSMSSenderLambdaVersionType = Shapes::StringShape.new(name: 'CustomSMSSenderLambdaVersionType')
     DateType = Shapes::TimestampShape.new(name: 'DateType')
+    DcrConfigurationType = Shapes::StructureShape.new(name: 'DcrConfigurationType')
     DefaultEmailOptionType = Shapes::StringShape.new(name: 'DefaultEmailOptionType')
     DeleteGroupRequest = Shapes::StructureShape.new(name: 'DeleteGroupRequest')
     DeleteIdentityProviderRequest = Shapes::StructureShape.new(name: 'DeleteIdentityProviderRequest')
@@ -478,6 +480,7 @@ module Aws::CognitoIdentityProvider
     ResourceIdType = Shapes::StringShape.new(name: 'ResourceIdType')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceServerIdentifierType = Shapes::StringShape.new(name: 'ResourceServerIdentifierType')
+    ResourceServerManagedByType = Shapes::StringShape.new(name: 'ResourceServerManagedByType')
     ResourceServerNameType = Shapes::StringShape.new(name: 'ResourceServerNameType')
     ResourceServerScopeDescriptionType = Shapes::StringShape.new(name: 'ResourceServerScopeDescriptionType')
     ResourceServerScopeListType = Shapes::ListShape.new(name: 'ResourceServerScopeListType')
@@ -1314,6 +1317,7 @@ module Aws::CognitoIdentityProvider
     CreateUserPoolRequest.add_member(:admin_create_user_config, Shapes::ShapeRef.new(shape: AdminCreateUserConfigType, location_name: "AdminCreateUserConfig"))
     CreateUserPoolRequest.add_member(:schema, Shapes::ShapeRef.new(shape: SchemaAttributesListType, location_name: "Schema"))
     CreateUserPoolRequest.add_member(:user_pool_add_ons, Shapes::ShapeRef.new(shape: UserPoolAddOnsType, location_name: "UserPoolAddOns"))
+    CreateUserPoolRequest.add_member(:dcr_configuration, Shapes::ShapeRef.new(shape: DcrConfigurationType, location_name: "DcrConfiguration"))
     CreateUserPoolRequest.add_member(:username_configuration, Shapes::ShapeRef.new(shape: UsernameConfigurationType, location_name: "UsernameConfiguration"))
     CreateUserPoolRequest.add_member(:account_recovery_setting, Shapes::ShapeRef.new(shape: AccountRecoverySettingType, location_name: "AccountRecoverySetting"))
     CreateUserPoolRequest.add_member(:user_pool_tier, Shapes::ShapeRef.new(shape: UserPoolTierType, location_name: "UserPoolTier"))
@@ -1338,6 +1342,13 @@ module Aws::CognitoIdentityProvider
     CustomSMSLambdaVersionConfigType.add_member(:lambda_version, Shapes::ShapeRef.new(shape: CustomSMSSenderLambdaVersionType, required: true, location_name: "LambdaVersion"))
     CustomSMSLambdaVersionConfigType.add_member(:lambda_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "LambdaArn"))
     CustomSMSLambdaVersionConfigType.struct_class = Types::CustomSMSLambdaVersionConfigType
+
+    DcrConfigurationType.add_member(:enable_status, Shapes::ShapeRef.new(shape: StatusType, location_name: "EnableStatus"))
+    DcrConfigurationType.add_member(:open_dcr_enabled, Shapes::ShapeRef.new(shape: BooleanType, location_name: "OpenDcrEnabled"))
+    DcrConfigurationType.add_member(:authenticated_grant_types, Shapes::ShapeRef.new(shape: OAuthFlowsType, location_name: "AuthenticatedGrantTypes"))
+    DcrConfigurationType.add_member(:open_dcr_grant_types, Shapes::ShapeRef.new(shape: OAuthFlowsType, location_name: "OpenDcrGrantTypes"))
+    DcrConfigurationType.add_member(:allowed_scopes, Shapes::ShapeRef.new(shape: ScopeListType, location_name: "AllowedScopes"))
+    DcrConfigurationType.struct_class = Types::DcrConfigurationType
 
     DeleteGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupNameType, required: true, location_name: "GroupName"))
     DeleteGroupRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
@@ -1923,6 +1934,7 @@ module Aws::CognitoIdentityProvider
     ListUserPoolClientsRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     ListUserPoolClientsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: QueryLimit, location_name: "MaxResults"))
     ListUserPoolClientsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationKey, location_name: "NextToken"))
+    ListUserPoolClientsRequest.add_member(:client_type, Shapes::ShapeRef.new(shape: ClientTypeType, location_name: "ClientType"))
     ListUserPoolClientsRequest.struct_class = Types::ListUserPoolClientsRequest
 
     ListUserPoolClientsResponse.add_member(:user_pool_clients, Shapes::ShapeRef.new(shape: UserPoolClientListType, location_name: "UserPoolClients"))
@@ -2130,6 +2142,7 @@ module Aws::CognitoIdentityProvider
     ResourceServerType.add_member(:identifier, Shapes::ShapeRef.new(shape: ResourceServerIdentifierType, location_name: "Identifier"))
     ResourceServerType.add_member(:name, Shapes::ShapeRef.new(shape: ResourceServerNameType, location_name: "Name"))
     ResourceServerType.add_member(:scopes, Shapes::ShapeRef.new(shape: ResourceServerScopeListType, location_name: "Scopes"))
+    ResourceServerType.add_member(:managed_by, Shapes::ShapeRef.new(shape: ResourceServerManagedByType, location_name: "ManagedBy"))
     ResourceServerType.struct_class = Types::ResourceServerType
 
     ResourceServersListType.member = Shapes::ShapeRef.new(shape: ResourceServerType)
@@ -2597,6 +2610,7 @@ module Aws::CognitoIdentityProvider
     UpdateUserPoolRequest.add_member(:user_pool_tags, Shapes::ShapeRef.new(shape: UserPoolTagsType, location_name: "UserPoolTags"))
     UpdateUserPoolRequest.add_member(:admin_create_user_config, Shapes::ShapeRef.new(shape: AdminCreateUserConfigType, location_name: "AdminCreateUserConfig"))
     UpdateUserPoolRequest.add_member(:user_pool_add_ons, Shapes::ShapeRef.new(shape: UserPoolAddOnsType, location_name: "UserPoolAddOns"))
+    UpdateUserPoolRequest.add_member(:dcr_configuration, Shapes::ShapeRef.new(shape: DcrConfigurationType, location_name: "DcrConfiguration"))
     UpdateUserPoolRequest.add_member(:account_recovery_setting, Shapes::ShapeRef.new(shape: AccountRecoverySettingType, location_name: "AccountRecoverySetting"))
     UpdateUserPoolRequest.add_member(:pool_name, Shapes::ShapeRef.new(shape: UserPoolNameType, location_name: "PoolName"))
     UpdateUserPoolRequest.add_member(:user_pool_tier, Shapes::ShapeRef.new(shape: UserPoolTierType, location_name: "UserPoolTier"))
@@ -2686,6 +2700,7 @@ module Aws::CognitoIdentityProvider
     UserPoolClientType.add_member(:enable_propagate_additional_user_context_data, Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "EnablePropagateAdditionalUserContextData"))
     UserPoolClientType.add_member(:auth_session_validity, Shapes::ShapeRef.new(shape: AuthSessionValidityType, location_name: "AuthSessionValidity"))
     UserPoolClientType.add_member(:refresh_token_rotation, Shapes::ShapeRef.new(shape: RefreshTokenRotationType, location_name: "RefreshTokenRotation"))
+    UserPoolClientType.add_member(:client_type, Shapes::ShapeRef.new(shape: ClientTypeType, location_name: "ClientType"))
     UserPoolClientType.struct_class = Types::UserPoolClientType
 
     UserPoolDescriptionType.add_member(:id, Shapes::ShapeRef.new(shape: UserPoolIdType, location_name: "Id"))
@@ -2752,6 +2767,7 @@ module Aws::CognitoIdentityProvider
     UserPoolType.add_member(:custom_domain, Shapes::ShapeRef.new(shape: DomainType, location_name: "CustomDomain"))
     UserPoolType.add_member(:admin_create_user_config, Shapes::ShapeRef.new(shape: AdminCreateUserConfigType, location_name: "AdminCreateUserConfig"))
     UserPoolType.add_member(:user_pool_add_ons, Shapes::ShapeRef.new(shape: UserPoolAddOnsType, location_name: "UserPoolAddOns"))
+    UserPoolType.add_member(:dcr_configuration, Shapes::ShapeRef.new(shape: DcrConfigurationType, location_name: "DcrConfiguration"))
     UserPoolType.add_member(:username_configuration, Shapes::ShapeRef.new(shape: UsernameConfigurationType, location_name: "UsernameConfiguration"))
     UserPoolType.add_member(:arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "Arn"))
     UserPoolType.add_member(:account_recovery_setting, Shapes::ShapeRef.new(shape: AccountRecoverySettingType, location_name: "AccountRecoverySetting"))

@@ -9,16 +9,16 @@ module Aws::Scheduler
   module Types
 
     class AwsVpcConfiguration
-      attr_accessor assign_public_ip: ("ENABLED" | "DISABLED")
-      attr_accessor security_groups: ::Array[::String]
       attr_accessor subnets: ::Array[::String]
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor assign_public_ip: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
     class CapacityProviderStrategyItem
-      attr_accessor base: ::Integer
       attr_accessor capacity_provider: ::String
       attr_accessor weight: ::Integer
+      attr_accessor base: ::Integer
       SENSITIVE: []
     end
 
@@ -28,9 +28,9 @@ module Aws::Scheduler
     end
 
     class CreateScheduleGroupInput
-      attr_accessor client_token: ::String
       attr_accessor name: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -40,19 +40,19 @@ module Aws::Scheduler
     end
 
     class CreateScheduleInput
-      attr_accessor action_after_completion: ("NONE" | "DELETE")
-      attr_accessor client_token: ::String
-      attr_accessor description: ::String
-      attr_accessor end_date: ::Time
-      attr_accessor flexible_time_window: Types::FlexibleTimeWindow
-      attr_accessor group_name: ::String
-      attr_accessor kms_key_arn: ::String
       attr_accessor name: ::String
+      attr_accessor group_name: ::String
       attr_accessor schedule_expression: ::String
-      attr_accessor schedule_expression_timezone: ::String
       attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor schedule_expression_timezone: ::String
       attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor kms_key_arn: ::String
       attr_accessor target: Types::Target
+      attr_accessor flexible_time_window: Types::FlexibleTimeWindow
+      attr_accessor client_token: ::String
+      attr_accessor action_after_completion: ("NONE" | "DELETE")
       SENSITIVE: []
     end
 
@@ -67,8 +67,8 @@ module Aws::Scheduler
     end
 
     class DeleteScheduleGroupInput
-      attr_accessor client_token: ::String
       attr_accessor name: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -76,9 +76,9 @@ module Aws::Scheduler
     end
 
     class DeleteScheduleInput
-      attr_accessor client_token: ::String
-      attr_accessor group_name: ::String
       attr_accessor name: ::String
+      attr_accessor group_name: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -86,20 +86,20 @@ module Aws::Scheduler
     end
 
     class EcsParameters
+      attr_accessor task_definition_arn: ::String
+      attr_accessor task_count: ::Integer
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor platform_version: ::String
+      attr_accessor group: ::String
       attr_accessor capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
       attr_accessor enable_ecs_managed_tags: bool
       attr_accessor enable_execute_command: bool
-      attr_accessor group: ::String
-      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
-      attr_accessor network_configuration: Types::NetworkConfiguration
       attr_accessor placement_constraints: ::Array[Types::PlacementConstraint]
       attr_accessor placement_strategy: ::Array[Types::PlacementStrategy]
-      attr_accessor platform_version: ::String
       attr_accessor propagate_tags: ("TASK_DEFINITION")
       attr_accessor reference_id: ::String
       attr_accessor tags: ::Array[::Hash[::String, ::String]]
-      attr_accessor task_count: ::Integer
-      attr_accessor task_definition_arn: ::String
       SENSITIVE: []
     end
 
@@ -109,9 +109,20 @@ module Aws::Scheduler
       SENSITIVE: []
     end
 
+    class EventBridgePutEventsV2Parameters
+      attr_accessor detail_type: ::String
+      attr_accessor source: ::String
+      SENSITIVE: []
+    end
+
+    class EventBridgePutRawEventsParameters
+      attr_accessor metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class FlexibleTimeWindow
-      attr_accessor maximum_window_in_minutes: ::Integer
       attr_accessor mode: ("OFF" | "FLEXIBLE")
+      attr_accessor maximum_window_in_minutes: ::Integer
       SENSITIVE: []
     end
 
@@ -122,35 +133,35 @@ module Aws::Scheduler
 
     class GetScheduleGroupOutput
       attr_accessor arn: ::String
-      attr_accessor creation_date: ::Time
-      attr_accessor last_modification_date: ::Time
       attr_accessor name: ::String
       attr_accessor state: ("ACTIVE" | "DELETING")
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modification_date: ::Time
       SENSITIVE: []
     end
 
     class GetScheduleInput
-      attr_accessor group_name: ::String
       attr_accessor name: ::String
+      attr_accessor group_name: ::String
       SENSITIVE: []
     end
 
     class GetScheduleOutput
-      attr_accessor action_after_completion: ("NONE" | "DELETE")
       attr_accessor arn: ::String
-      attr_accessor creation_date: ::Time
-      attr_accessor description: ::String
-      attr_accessor end_date: ::Time
-      attr_accessor flexible_time_window: Types::FlexibleTimeWindow
       attr_accessor group_name: ::String
-      attr_accessor kms_key_arn: ::String
-      attr_accessor last_modification_date: ::Time
       attr_accessor name: ::String
       attr_accessor schedule_expression: ::String
-      attr_accessor schedule_expression_timezone: ::String
       attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor schedule_expression_timezone: ::String
       attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modification_date: ::Time
+      attr_accessor kms_key_arn: ::String
       attr_accessor target: Types::Target
+      attr_accessor flexible_time_window: Types::FlexibleTimeWindow
+      attr_accessor action_after_completion: ("NONE" | "DELETE")
       SENSITIVE: []
     end
 
@@ -165,9 +176,9 @@ module Aws::Scheduler
     end
 
     class ListScheduleGroupsInput
-      attr_accessor max_results: ::Integer
       attr_accessor name_prefix: ::String
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -179,10 +190,10 @@ module Aws::Scheduler
 
     class ListSchedulesInput
       attr_accessor group_name: ::String
-      attr_accessor max_results: ::Integer
       attr_accessor name_prefix: ::String
-      attr_accessor next_token: ::String
       attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -208,14 +219,14 @@ module Aws::Scheduler
     end
 
     class PlacementConstraint
-      attr_accessor expression: ::String
       attr_accessor type: ("distinctInstance" | "memberOf")
+      attr_accessor expression: ::String
       SENSITIVE: []
     end
 
     class PlacementStrategy
-      attr_accessor field: ::String
       attr_accessor type: ("random" | "spread" | "binpack")
+      attr_accessor field: ::String
       SENSITIVE: []
     end
 
@@ -243,20 +254,20 @@ module Aws::Scheduler
 
     class ScheduleGroupSummary
       attr_accessor arn: ::String
-      attr_accessor creation_date: ::Time
-      attr_accessor last_modification_date: ::Time
       attr_accessor name: ::String
       attr_accessor state: ("ACTIVE" | "DELETING")
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modification_date: ::Time
       SENSITIVE: []
     end
 
     class ScheduleSummary
       attr_accessor arn: ::String
-      attr_accessor creation_date: ::Time
-      attr_accessor group_name: ::String
-      attr_accessor last_modification_date: ::Time
       attr_accessor name: ::String
+      attr_accessor group_name: ::String
       attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modification_date: ::Time
       attr_accessor target: Types::TargetSummary
       SENSITIVE: []
     end
@@ -288,13 +299,15 @@ module Aws::Scheduler
 
     class Target
       attr_accessor arn: ::String
+      attr_accessor role_arn: ::String
       attr_accessor dead_letter_config: Types::DeadLetterConfig
+      attr_accessor retry_policy: Types::RetryPolicy
+      attr_accessor input: ::String
       attr_accessor ecs_parameters: Types::EcsParameters
       attr_accessor event_bridge_parameters: Types::EventBridgeParameters
-      attr_accessor input: ::String
+      attr_accessor event_bridge_put_events_v2_parameters: Types::EventBridgePutEventsV2Parameters
+      attr_accessor event_bridge_put_raw_events_parameters: Types::EventBridgePutRawEventsParameters
       attr_accessor kinesis_parameters: Types::KinesisParameters
-      attr_accessor retry_policy: Types::RetryPolicy
-      attr_accessor role_arn: ::String
       attr_accessor sage_maker_pipeline_parameters: Types::SageMakerPipelineParameters
       attr_accessor sqs_parameters: Types::SqsParameters
       SENSITIVE: []
@@ -320,19 +333,19 @@ module Aws::Scheduler
     end
 
     class UpdateScheduleInput
-      attr_accessor action_after_completion: ("NONE" | "DELETE")
-      attr_accessor client_token: ::String
-      attr_accessor description: ::String
-      attr_accessor end_date: ::Time
-      attr_accessor flexible_time_window: Types::FlexibleTimeWindow
-      attr_accessor group_name: ::String
-      attr_accessor kms_key_arn: ::String
       attr_accessor name: ::String
+      attr_accessor group_name: ::String
       attr_accessor schedule_expression: ::String
-      attr_accessor schedule_expression_timezone: ::String
       attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor schedule_expression_timezone: ::String
       attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor kms_key_arn: ::String
       attr_accessor target: Types::Target
+      attr_accessor flexible_time_window: Types::FlexibleTimeWindow
+      attr_accessor client_token: ::String
+      attr_accessor action_after_completion: ("NONE" | "DELETE")
       SENSITIVE: []
     end
 

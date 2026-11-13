@@ -6341,6 +6341,14 @@ module Aws::SageMaker
     #     idle before patching. All instances are uncordoned after patching
     #     completes. If not all instances become idle, no patching occurs
     #     and all instances remain on the previous AMI version.
+    #
+    #   * `DrainFirst`: Designed for workloads that never become idle, such
+    #     as inference. Cordons instances, evicts the running pods, and then
+    #     patches each instance in batches. Each instance is uncordoned
+    #     after patching. Use `DrainPolicy` to control how long to wait for
+    #     pods to drain and what happens if the drain times out. Requires
+    #     `MaximumBatchSize` in `DeploymentConfig`. Available only for
+    #     clusters that use Amazon EKS as the orchestrator.
     #   @return [String]
     #
     # @!attribute [rw] patch_schedule
@@ -6353,12 +6361,30 @@ module Aws::SageMaker
     #   rolling patching strategy.
     #   @return [Types::DeploymentConfiguration]
     #
+    # @!attribute [rw] idle_wait_window_in_seconds
+    #   The maximum time, in seconds, that automatic patching waits for
+    #   instances to become idle after a scheduled patch starts. Automatic
+    #   patching uncordons instances that don't become idle within this
+    #   window, and they remain on the previous AMI version. Valid values
+    #   are from 3600 (1 hour) to 2160000 (25 days). The default is 86400
+    #   (24 hours). This setting applies only to the `WhenIdle` and
+    #   `WhenAllIdle` strategies.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] drain_policy
+    #   The policy that controls how pods are evicted from an instance
+    #   before it is patched. Valid only when `PatchingStrategy` is
+    #   `DrainFirst`.
+    #   @return [Types::ClusterDrainPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterAutoPatchConfig AWS API Documentation
     #
     class ClusterAutoPatchConfig < Struct.new(
       :patching_strategy,
       :patch_schedule,
-      :deployment_config)
+      :deployment_config,
+      :idle_wait_window_in_seconds,
+      :drain_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6380,6 +6406,14 @@ module Aws::SageMaker
     #     idle before patching. All instances are uncordoned after patching
     #     completes. If not all instances become idle, no patching occurs
     #     and all instances remain on the previous AMI version.
+    #
+    #   * `DrainFirst`: Designed for workloads that never become idle, such
+    #     as inference. Cordons instances, evicts the running pods, and then
+    #     patches each instance in batches. Each instance is uncordoned
+    #     after patching. Use `DrainPolicy` to control how long to wait for
+    #     pods to drain and what happens if the drain times out. Requires
+    #     `MaximumBatchSize` in `DeploymentConfig`. Available only for
+    #     clusters that use Amazon EKS as the orchestrator.
     #   @return [String]
     #
     # @!attribute [rw] current_patch_schedule
@@ -6395,13 +6429,29 @@ module Aws::SageMaker
     #   The deployment configuration for rolling patch updates.
     #   @return [Types::DeploymentConfiguration]
     #
+    # @!attribute [rw] idle_wait_window_in_seconds
+    #   The maximum time, in seconds, that automatic patching waits for
+    #   instances to become idle after a scheduled patch starts. Automatic
+    #   patching uncordons instances that don't become idle within this
+    #   window, and they remain on the previous AMI version. The default is
+    #   86400 (24 hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] drain_policy
+    #   The policy that controls how pods are evicted from an instance
+    #   before it is patched. Applies only when `PatchingStrategy` is
+    #   `DrainFirst`.
+    #   @return [Types::ClusterDrainPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterAutoPatchConfigDetails AWS API Documentation
     #
     class ClusterAutoPatchConfigDetails < Struct.new(
       :patching_strategy,
       :current_patch_schedule,
       :desired_patch_schedule,
-      :deployment_config)
+      :deployment_config,
+      :idle_wait_window_in_seconds,
+      :drain_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6476,6 +6526,39 @@ module Aws::SageMaker
     class ClusterCapacityRequirements < Struct.new(
       :spot,
       :on_demand)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies how pods are evicted from an instance before it is patched
+    # with the `DrainFirst` strategy. By default, evictions respect
+    # Kubernetes Pod Disruption Budgets.
+    #
+    # @!attribute [rw] drain_timeout_in_seconds
+    #   The maximum time, in seconds, to wait for the pods on an instance to
+    #   drain. Valid values are from 0 to 5400 (90 minutes). The default is
+    #   3600 (1 hour).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] on_drain_timeout
+    #   The action to take if the pods on an instance don't drain within
+    #   `DrainTimeoutInSeconds`. The default is `Skip`.
+    #
+    #   * `Skip`: Doesn't patch the instance. The instance is uncordoned
+    #     and remains on the previous AMI version. This can leave the
+    #     instance group partially patched. You can then use
+    #     UpdateClusterSoftware with the desired ImageReleaseVersion to
+    #     manually update the remaining instances.
+    #
+    #   * `Force`: Deletes the remaining pods without respecting Pod
+    #     Disruption Budgets, and then patches the instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterDrainPolicy AWS API Documentation
+    #
+    class ClusterDrainPolicy < Struct.new(
+      :drain_timeout_in_seconds,
+      :on_drain_timeout)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6588,6 +6671,12 @@ module Aws::SageMaker
     #   and `Error`.
     #   @return [String]
     #
+    # @!attribute [rw] operation_id
+    #   The unique identifier (UUID) of the cluster operation that the event
+    #   is associated with, such as a scaling operation. This field is not
+    #   returned when the event is not associated with an operation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterEventDetail AWS API Documentation
     #
     class ClusterEventDetail < Struct.new(
@@ -6600,7 +6689,8 @@ module Aws::SageMaker
       :event_time,
       :event_details,
       :description,
-      :event_level)
+      :event_level,
+      :operation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6648,6 +6738,12 @@ module Aws::SageMaker
     #   and `Error`.
     #   @return [String]
     #
+    # @!attribute [rw] operation_id
+    #   The unique identifier (UUID) of the cluster operation that the event
+    #   is associated with, such as a scaling operation. This field is not
+    #   returned when the event is not associated with an operation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterEventSummary AWS API Documentation
     #
     class ClusterEventSummary < Struct.new(
@@ -6659,7 +6755,8 @@ module Aws::SageMaker
       :resource_type,
       :event_time,
       :description,
-      :event_level)
+      :event_level,
+      :operation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7776,6 +7873,107 @@ module Aws::SageMaker
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterOnDemandOptions AWS API Documentation
     #
     class ClusterOnDemandOptions < Aws::EmptyStructure; end
+
+    # A point-in-time snapshot of an instance group's scaling
+    # configuration. This structure represents both the original
+    # configuration before the operation and the desired configuration
+    # requested by the operation.
+    #
+    # @!attribute [rw] current_count
+    #   The number of instances that were in the instance group at the time
+    #   of the operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_count
+    #   The target number of instances for the instance group.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_count
+    #   The minimum number of instances that must be available in the
+    #   instance group of a HyperPod cluster before it transitions to
+    #   `InService` status.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterOperationScalingConfiguration AWS API Documentation
+    #
+    class ClusterOperationScalingConfiguration < Struct.new(
+      :current_count,
+      :target_count,
+      :min_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scaling details for a single instance group that is affected by a
+    # cluster operation.
+    #
+    # @!attribute [rw] instance_group_name
+    #   The name of the instance group being scaled.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the scaling operation for this instance group. Valid
+    #   values are `InProgress`, `Superseded`, or `Done`.
+    #   @return [String]
+    #
+    # @!attribute [rw] original
+    #   The scaling configuration of the instance group before the scaling
+    #   operation was applied, including its current, target, and minimum
+    #   instance counts.
+    #   @return [Types::ClusterOperationScalingConfiguration]
+    #
+    # @!attribute [rw] desired
+    #   The desired scaling configuration of the instance group for the
+    #   scaling operation, including its target and minimum instance counts.
+    #   @return [Types::ClusterOperationScalingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterOperationScalingDetails AWS API Documentation
+    #
+    class ClusterOperationScalingDetails < Struct.new(
+      :instance_group_name,
+      :status,
+      :original,
+      :desired)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of an operation performed on a HyperPod cluster.
+    #
+    # @!attribute [rw] operation_id
+    #   The unique identifier (UUID) of the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the HyperPod cluster associated
+    #   with the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the operation. Valid values are `Scaling` or
+    #   `DeepHealthCheck`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the operation. Valid values are `InProgress`,
+    #   `Superseded`, or `Done`.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp when the operation was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterOperationSummary AWS API Documentation
+    #
+    class ClusterOperationSummary < Struct.new(
+      :operation_id,
+      :cluster_arn,
+      :type,
+      :status,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The type of orchestrator used for the SageMaker HyperPod cluster.
     #
@@ -18781,11 +18979,23 @@ module Aws::SageMaker
     #   configuration.
     #   @return [Types::ExtensionNodeSummary]
     #
+    # @!attribute [rw] health
+    #   The problems that affect the extension on the cluster's nodes,
+    #   grouped by cause, with the number of nodes that each problem
+    #   affects. Use it to find out why `ActiveCount` is lower than
+    #   `TotalCount`, or why the status is `Degraded`, `CreateFailed`, or
+    #   `UpdateFailed`. SageMaker HyperPod omits `Health` when no node has a
+    #   problem. Nodes where SageMaker HyperPod hasn't finished installing
+    #   or updating the extension aren't counted in any issue, unless an
+    #   earlier attempt failed on them.
+    #   @return [Types::ExtensionHealth]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterExtensionResponse AWS API Documentation
     #
     class DescribeClusterExtensionResponse < Struct.new(
       :extension_details,
-      :node_summary)
+      :node_summary,
+      :health)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18824,6 +19034,72 @@ module Aws::SageMaker
     #
     class DescribeClusterNodeResponse < Struct.new(
       :node_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name or Amazon Resource Name (ARN) of the HyperPod cluster
+    #   associated with the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_id
+    #   The unique identifier (UUID) of the operation to describe. This ID
+    #   can be obtained from the `ListClusterOperations` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterOperationRequest AWS API Documentation
+    #
+    class DescribeClusterOperationRequest < Struct.new(
+      :cluster_name,
+      :operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_id
+    #   The unique identifier (UUID) of the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the HyperPod cluster associated
+    #   with the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the operation. Valid values are `Scaling` or
+    #   `DeepHealthCheck`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the operation. Valid values are `InProgress`,
+    #   `Superseded`, or `Done`.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp when the operation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] scaling_details
+    #   The per-instance-group scaling details for the operation. This field
+    #   is populated when the operation `Type` is `Scaling`.
+    #   @return [Array<Types::ClusterOperationScalingDetails>]
+    #
+    # @!attribute [rw] deep_health_check_details
+    #   The deep health check details for the operation. This field is
+    #   populated when the operation `Type` is `DeepHealthCheck`.
+    #   @return [Array<Types::InstanceGroupHealthCheckConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterOperationResponse AWS API Documentation
+    #
+    class DescribeClusterOperationResponse < Struct.new(
+      :operation_id,
+      :cluster_arn,
+      :type,
+      :status,
+      :creation_time,
+      :scaling_details,
+      :deep_health_check_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27951,6 +28227,56 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Contains information about the problems that affect an extension on
+    # the nodes of a SageMaker HyperPod cluster, including how many nodes
+    # each problem affects. `DescribeClusterExtension` returns
+    # `ExtensionHealth` only when at least one node has a problem.
+    #
+    # @!attribute [rw] issues
+    #   The problems that affect the extension, grouped by cause, from the
+    #   problem that affects the most nodes to the one that affects the
+    #   fewest. SageMaker HyperPod counts each node in at most one issue.
+    #   The list contains at most 20 issues. If more than 20 different
+    #   problems exist, the list shows the 19 that affect the most nodes,
+    #   and the 20th issue has the code `Other` and counts the nodes that
+    #   the remaining problems affect.
+    #   @return [Array<Types::ExtensionHealthIssue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ExtensionHealth AWS API Documentation
+    #
+    class ExtensionHealth < Struct.new(
+      :issues)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a problem that affects an extension on one or more
+    # nodes of a SageMaker HyperPod cluster, including the number of nodes
+    # that it affects.
+    #
+    # @!attribute [rw] code
+    #   A code that describes the type of issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the problem, for example the setting or component
+    #   to check. Every node with the same problem has the same message.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_count
+    #   The number of nodes that have this problem.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ExtensionHealthIssue AWS API Documentation
+    #
+    class ExtensionHealthIssue < Struct.new(
+      :code,
+      :message,
+      :node_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A summary of an extension's installation across the nodes of a
     # SageMaker HyperPod cluster.
     #
@@ -27962,8 +28288,11 @@ module Aws::SageMaker
     #
     # @!attribute [rw] active_count
     #   The number of nodes that are running the extension's current
-    #   version and configuration. While SageMaker HyperPod creates or
-    #   updates the extension, `ActiveCount` is lower than `TotalCount`.
+    #   version and configuration. Nodes that report the extension as
+    #   unhealthy aren't counted. While SageMaker HyperPod creates or
+    #   updates the extension, `ActiveCount` is lower than `TotalCount`. To
+    #   see why nodes aren't counted, see `Health` in
+    #   `DescribeClusterExtension`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ExtensionNodeSummary AWS API Documentation
@@ -28006,6 +28335,22 @@ module Aws::SageMaker
       :extension_version,
       :status,
       :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A version of an extension that you can install on a SageMaker HyperPod
+    # cluster.
+    #
+    # @!attribute [rw] extension_version
+    #   The version of the extension, in `MAJOR.MINOR.PATCH` format, for
+    #   example `1.0.0`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ExtensionVersionSummary AWS API Documentation
+    #
+    class ExtensionVersionSummary < Struct.new(
+      :extension_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35853,6 +36198,13 @@ module Aws::SageMaker
     #   `Cluster`, `InstanceGroup`, or `Instance`.
     #   @return [String]
     #
+    # @!attribute [rw] operation_id
+    #   The unique identifier (UUID) of a cluster operation for which to
+    #   filter events. If specified, only events associated with this
+    #   operation are returned. This ID can be obtained from the
+    #   `ListClusterOperations` operation.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of events to return in the response. Valid range
     #   is 1 to 100.
@@ -35874,6 +36226,7 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       :resource_type,
+      :operation_id,
       :max_results,
       :next_token)
       SENSITIVE = []
@@ -35894,6 +36247,52 @@ module Aws::SageMaker
     class ListClusterEventsResponse < Struct.new(
       :next_token,
       :events)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] extension_name
+    #   The name of the extension whose versions you want to list, for
+    #   example `sagemaker-observability`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of versions to return in the response. If you
+    #   don't specify a value, SageMaker HyperPod returns up to 100
+    #   versions.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous `ListClusterExtensionVersions` request
+    #   was truncated, the response includes a `NextToken`. To retrieve the
+    #   next set of versions, use the token in the next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterExtensionVersionsRequest AWS API Documentation
+    #
+    class ListClusterExtensionVersionsRequest < Struct.new(
+      :extension_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] extension_versions
+    #   The versions of the extension that you can install, from the highest
+    #   version to the lowest.
+    #   @return [Array<Types::ExtensionVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, a token that you can use in the next
+    #   request to retrieve the next set of versions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterExtensionVersionsResponse AWS API Documentation
+    #
+    class ListClusterExtensionVersionsResponse < Struct.new(
+      :extension_versions,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36065,6 +36464,87 @@ module Aws::SageMaker
     class ListClusterNodesResponse < Struct.new(
       :next_token,
       :cluster_node_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name or Amazon Resource Name (ARN) of the HyperPod cluster for
+    #   which to list operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The operation status to filter by. If specified, only operations
+    #   with this status are returned. Valid values are `InProgress`,
+    #   `Superseded`, or `Done`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The operation type to filter by. If specified, only operations of
+    #   this type are returned. Valid values are `Scaling` or
+    #   `DeepHealthCheck`.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time_after
+    #   The start of the time range for filtering operations. Only
+    #   operations created after this time are included in the results.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   The end of the time range for filtering operations. Only operations
+    #   created before this time are included in the results.
+    #   @return [Time]
+    #
+    # @!attribute [rw] sort_by
+    #   The field to use for sorting the operation list. Currently, the only
+    #   supported value is `CreationTime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The order in which to sort the results. Valid values are `Ascending`
+    #   or `Descending` (the default is `Descending`).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of operations to return in the response. Valid
+    #   range is 1 to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to retrieve the next set of results. This token is obtained
+    #   from the output of a previous `ListClusterOperations` call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterOperationsRequest AWS API Documentation
+    #
+    class ListClusterOperationsRequest < Struct.new(
+      :cluster_name,
+      :status,
+      :type,
+      :creation_time_after,
+      :creation_time_before,
+      :sort_by,
+      :sort_order,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token to retrieve the next set of results. Include this token in
+    #   subsequent `ListClusterOperations` calls to fetch more operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_operation_summaries
+    #   A list of operation summaries matching the specified criteria.
+    #   @return [Array<Types::ClusterOperationSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterOperationsResponse AWS API Documentation
+    #
+    class ListClusterOperationsResponse < Struct.new(
+      :next_token,
+      :cluster_operation_summaries)
       SENSITIVE = []
       include Aws::Structure
     end

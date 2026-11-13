@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.296.0 (2026-11-13)
+------------------
+
+* Feature - Field description update for auto upgrade summaries
+
 1.295.0 (2026-11-11)
 ------------------
 

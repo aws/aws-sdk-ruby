@@ -2934,7 +2934,7 @@ module Aws::SageMaker
     #         },
     #         image_id: "ImageId",
     #         auto_patch_config: {
-    #           patching_strategy: "WhenIdle", # required, accepts WhenIdle, WhenAllIdle
+    #           patching_strategy: "WhenIdle", # required, accepts WhenIdle, WhenAllIdle, DrainFirst
     #           patch_schedule: {
     #             next_patch_date: Time.now,
     #           },
@@ -2955,6 +2955,11 @@ module Aws::SageMaker
     #                 alarm_name: "AlarmName", # required
     #               },
     #             ],
+    #           },
+    #           idle_wait_window_in_seconds: 1,
+    #           drain_policy: {
+    #             drain_timeout_in_seconds: 1,
+    #             on_drain_timeout: "Force", # accepts Force, Skip
     #           },
     #         },
     #         image_release_version: "ImageReleaseVersion",
@@ -15482,7 +15487,7 @@ module Aws::SageMaker
     #   resp.instance_groups[0].scheduled_update_config.deployment_config.wait_interval_in_seconds #=> Integer
     #   resp.instance_groups[0].scheduled_update_config.deployment_config.auto_rollback_configuration #=> Array
     #   resp.instance_groups[0].scheduled_update_config.deployment_config.auto_rollback_configuration[0].alarm_name #=> String
-    #   resp.instance_groups[0].auto_patch_config.patching_strategy #=> String, one of "WhenIdle", "WhenAllIdle"
+    #   resp.instance_groups[0].auto_patch_config.patching_strategy #=> String, one of "WhenIdle", "WhenAllIdle", "DrainFirst"
     #   resp.instance_groups[0].auto_patch_config.current_patch_schedule.next_patch_date #=> Time
     #   resp.instance_groups[0].auto_patch_config.desired_patch_schedule.next_patch_date #=> Time
     #   resp.instance_groups[0].auto_patch_config.deployment_config.rolling_update_policy.maximum_batch_size.type #=> String, one of "INSTANCE_COUNT", "CAPACITY_PERCENTAGE"
@@ -15492,6 +15497,9 @@ module Aws::SageMaker
     #   resp.instance_groups[0].auto_patch_config.deployment_config.wait_interval_in_seconds #=> Integer
     #   resp.instance_groups[0].auto_patch_config.deployment_config.auto_rollback_configuration #=> Array
     #   resp.instance_groups[0].auto_patch_config.deployment_config.auto_rollback_configuration[0].alarm_name #=> String
+    #   resp.instance_groups[0].auto_patch_config.idle_wait_window_in_seconds #=> Integer
+    #   resp.instance_groups[0].auto_patch_config.drain_policy.drain_timeout_in_seconds #=> Integer
+    #   resp.instance_groups[0].auto_patch_config.drain_policy.on_drain_timeout #=> String, one of "Force", "Skip"
     #   resp.instance_groups[0].current_image_id #=> String
     #   resp.instance_groups[0].desired_image_id #=> String
     #   resp.instance_groups[0].current_image_release_version #=> String
@@ -15663,6 +15671,7 @@ module Aws::SageMaker
     #   resp.event_details.event_details.event_metadata.slurm_health.reason #=> String, one of "DaemonDown", "DaemonDisabled", "DbUnreachable"
     #   resp.event_details.description #=> String
     #   resp.event_details.event_level #=> String, one of "Info", "Warn", "Error"
+    #   resp.event_details.operation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterEvent AWS API Documentation
     #
@@ -15676,7 +15685,9 @@ module Aws::SageMaker
     # Retrieves information about an extension installed on a SageMaker
     # HyperPod cluster. The information includes the extension's version,
     # configuration, and status, and a summary of how many cluster nodes are
-    # running the current version and configuration of the extension.
+    # running the current version and configuration of the extension. If the
+    # extension has problems on some nodes, the response also lists the
+    # problems and how many nodes each one affects.
     #
     # @option params [required, String] :cluster_arn
     #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on
@@ -15692,6 +15703,7 @@ module Aws::SageMaker
     #
     #   * {Types::DescribeClusterExtensionResponse#extension_details #extension_details} => Types::ExtensionDetails
     #   * {Types::DescribeClusterExtensionResponse#node_summary #node_summary} => Types::ExtensionNodeSummary
+    #   * {Types::DescribeClusterExtensionResponse#health #health} => Types::ExtensionHealth
     #
     # @example Request syntax with placeholder values
     #
@@ -15712,6 +15724,10 @@ module Aws::SageMaker
     #   resp.extension_details.last_modified_time #=> Time
     #   resp.node_summary.total_count #=> Integer
     #   resp.node_summary.active_count #=> Integer
+    #   resp.health.issues #=> Array
+    #   resp.health.issues[0].code #=> String, one of "InvalidConfiguration", "ConfigurationConflict", "AccessDenied", "ResourceNotFound", "DependencyUnreachable", "ExtensionUnhealthy", "InternalFailure", "Other"
+    #   resp.health.issues[0].message #=> String
+    #   resp.health.issues[0].node_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterExtension AWS API Documentation
     #
@@ -15810,6 +15826,68 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def describe_cluster_node(params = {}, options = {})
       req = build_request(:describe_cluster_node, params)
+      req.send_request(options)
+    end
+
+    # Retrieves detailed information about a specific operation for a given
+    # HyperPod cluster, such as a scaling operation or a deep health check.
+    # Use the `OperationId` returned by the `ListClusterOperations`
+    # operation to identify the operation to describe.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name or Amazon Resource Name (ARN) of the HyperPod cluster
+    #   associated with the operation.
+    #
+    # @option params [required, String] :operation_id
+    #   The unique identifier (UUID) of the operation to describe. This ID can
+    #   be obtained from the `ListClusterOperations` operation.
+    #
+    # @return [Types::DescribeClusterOperationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeClusterOperationResponse#operation_id #operation_id} => String
+    #   * {Types::DescribeClusterOperationResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::DescribeClusterOperationResponse#type #type} => String
+    #   * {Types::DescribeClusterOperationResponse#status #status} => String
+    #   * {Types::DescribeClusterOperationResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeClusterOperationResponse#scaling_details #scaling_details} => Array&lt;Types::ClusterOperationScalingDetails&gt;
+    #   * {Types::DescribeClusterOperationResponse#deep_health_check_details #deep_health_check_details} => Array&lt;Types::InstanceGroupHealthCheckConfiguration&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_cluster_operation({
+    #     cluster_name: "ClusterNameOrArn", # required
+    #     operation_id: "ClusterOperationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_id #=> String
+    #   resp.cluster_arn #=> String
+    #   resp.type #=> String, one of "Scaling", "DeepHealthCheck"
+    #   resp.status #=> String, one of "InProgress", "Superseded", "Done"
+    #   resp.creation_time #=> Time
+    #   resp.scaling_details #=> Array
+    #   resp.scaling_details[0].instance_group_name #=> String
+    #   resp.scaling_details[0].status #=> String, one of "InProgress", "Superseded", "Done"
+    #   resp.scaling_details[0].original.current_count #=> Integer
+    #   resp.scaling_details[0].original.target_count #=> Integer
+    #   resp.scaling_details[0].original.min_count #=> Integer
+    #   resp.scaling_details[0].desired.current_count #=> Integer
+    #   resp.scaling_details[0].desired.target_count #=> Integer
+    #   resp.scaling_details[0].desired.min_count #=> Integer
+    #   resp.deep_health_check_details #=> Array
+    #   resp.deep_health_check_details[0].instance_group_name #=> String
+    #   resp.deep_health_check_details[0].instance_ids #=> Array
+    #   resp.deep_health_check_details[0].instance_ids[0] #=> String
+    #   resp.deep_health_check_details[0].deep_health_checks #=> Array
+    #   resp.deep_health_check_details[0].deep_health_checks[0] #=> String, one of "InstanceStress", "InstanceConnectivity", "MultiNodeTrainingValidation"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterOperation AWS API Documentation
+    #
+    # @overload describe_cluster_operation(params = {})
+    # @param [Hash] params ({})
+    def describe_cluster_operation(params = {}, options = {})
+      req = build_request(:describe_cluster_operation, params)
       req.send_request(options)
     end
 
@@ -23275,6 +23353,12 @@ module Aws::SageMaker
     #   The type of resource for which to filter events. Valid values are
     #   `Cluster`, `InstanceGroup`, or `Instance`.
     #
+    # @option params [String] :operation_id
+    #   The unique identifier (UUID) of a cluster operation for which to
+    #   filter events. If specified, only events associated with this
+    #   operation are returned. This ID can be obtained from the
+    #   `ListClusterOperations` operation.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of events to return in the response. Valid range is
     #   1 to 100.
@@ -23301,6 +23385,7 @@ module Aws::SageMaker
     #     sort_by: "EventTime", # accepts EventTime
     #     sort_order: "Ascending", # accepts Ascending, Descending
     #     resource_type: "Cluster", # accepts Cluster, InstanceGroup, Instance
+    #     operation_id: "ClusterOperationId",
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -23318,6 +23403,7 @@ module Aws::SageMaker
     #   resp.events[0].event_time #=> Time
     #   resp.events[0].description #=> String
     #   resp.events[0].event_level #=> String, one of "Info", "Warn", "Error"
+    #   resp.events[0].operation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterEvents AWS API Documentation
     #
@@ -23325,6 +23411,59 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def list_cluster_events(params = {}, options = {})
       req = build_request(:list_cluster_events, params)
+      req.send_request(options)
+    end
+
+    # Lists the versions of an extension that you can install on a SageMaker
+    # HyperPod cluster, from the highest version to the lowest. Use a
+    # version from this list as the `ExtensionVersion` in
+    # `CreateClusterExtension` or `UpdateClusterExtension`.
+    #
+    # The list contains only versions that you can install. Versions that
+    # SageMaker HyperPod no longer offers for new installations don't
+    # appear. If SageMaker HyperPod doesn't offer an extension with the
+    # name that you specify, the response contains an empty list.
+    #
+    # @option params [required, String] :extension_name
+    #   The name of the extension whose versions you want to list, for example
+    #   `sagemaker-observability`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of versions to return in the response. If you
+    #   don't specify a value, SageMaker HyperPod returns up to 100 versions.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous `ListClusterExtensionVersions` request
+    #   was truncated, the response includes a `NextToken`. To retrieve the
+    #   next set of versions, use the token in the next request.
+    #
+    # @return [Types::ListClusterExtensionVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListClusterExtensionVersionsResponse#extension_versions #extension_versions} => Array&lt;Types::ExtensionVersionSummary&gt;
+    #   * {Types::ListClusterExtensionVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cluster_extension_versions({
+    #     extension_name: "ExtensionName", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.extension_versions #=> Array
+    #   resp.extension_versions[0].extension_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterExtensionVersions AWS API Documentation
+    #
+    # @overload list_cluster_extension_versions(params = {})
+    # @param [Hash] params ({})
+    def list_cluster_extension_versions(params = {}, options = {})
+      req = build_request(:list_cluster_extension_versions, params)
       req.send_request(options)
     end
 
@@ -23507,6 +23646,87 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def list_cluster_nodes(params = {}, options = {})
       req = build_request(:list_cluster_nodes, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of operation summaries for a specified HyperPod
+    # cluster, such as scaling operations and deep health checks. The
+    # operation supports filtering, sorting, and pagination of results.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name or Amazon Resource Name (ARN) of the HyperPod cluster for
+    #   which to list operations.
+    #
+    # @option params [String] :status
+    #   The operation status to filter by. If specified, only operations with
+    #   this status are returned. Valid values are `InProgress`, `Superseded`,
+    #   or `Done`.
+    #
+    # @option params [String] :type
+    #   The operation type to filter by. If specified, only operations of this
+    #   type are returned. Valid values are `Scaling` or `DeepHealthCheck`.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   The start of the time range for filtering operations. Only operations
+    #   created after this time are included in the results.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   The end of the time range for filtering operations. Only operations
+    #   created before this time are included in the results.
+    #
+    # @option params [String] :sort_by
+    #   The field to use for sorting the operation list. Currently, the only
+    #   supported value is `CreationTime`.
+    #
+    # @option params [String] :sort_order
+    #   The order in which to sort the results. Valid values are `Ascending`
+    #   or `Descending` (the default is `Descending`).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of operations to return in the response. Valid
+    #   range is 1 to 100.
+    #
+    # @option params [String] :next_token
+    #   A token to retrieve the next set of results. This token is obtained
+    #   from the output of a previous `ListClusterOperations` call.
+    #
+    # @return [Types::ListClusterOperationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListClusterOperationsResponse#next_token #next_token} => String
+    #   * {Types::ListClusterOperationsResponse#cluster_operation_summaries #cluster_operation_summaries} => Array&lt;Types::ClusterOperationSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cluster_operations({
+    #     cluster_name: "ClusterNameOrArn", # required
+    #     status: "InProgress", # accepts InProgress, Superseded, Done
+    #     type: "Scaling", # accepts Scaling, DeepHealthCheck
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     sort_by: "CreationTime", # accepts CreationTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.cluster_operation_summaries #=> Array
+    #   resp.cluster_operation_summaries[0].operation_id #=> String
+    #   resp.cluster_operation_summaries[0].cluster_arn #=> String
+    #   resp.cluster_operation_summaries[0].type #=> String, one of "Scaling", "DeepHealthCheck"
+    #   resp.cluster_operation_summaries[0].status #=> String, one of "InProgress", "Superseded", "Done"
+    #   resp.cluster_operation_summaries[0].creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterOperations AWS API Documentation
+    #
+    # @overload list_cluster_operations(params = {})
+    # @param [Hash] params ({})
+    def list_cluster_operations(params = {}, options = {})
+      req = build_request(:list_cluster_operations, params)
       req.send_request(options)
     end
 
@@ -31405,7 +31625,7 @@ module Aws::SageMaker
     #         },
     #         image_id: "ImageId",
     #         auto_patch_config: {
-    #           patching_strategy: "WhenIdle", # required, accepts WhenIdle, WhenAllIdle
+    #           patching_strategy: "WhenIdle", # required, accepts WhenIdle, WhenAllIdle, DrainFirst
     #           patch_schedule: {
     #             next_patch_date: Time.now,
     #           },
@@ -31426,6 +31646,11 @@ module Aws::SageMaker
     #                 alarm_name: "AlarmName", # required
     #               },
     #             ],
+    #           },
+    #           idle_wait_window_in_seconds: 1,
+    #           drain_policy: {
+    #             drain_timeout_in_seconds: 1,
+    #             on_drain_timeout: "Force", # accepts Force, Skip
     #           },
     #         },
     #         image_release_version: "ImageReleaseVersion",
@@ -31579,6 +31804,11 @@ module Aws::SageMaker
     # * **Version:** You can update to a later version. You can't update to
     #   an earlier version. To use an earlier version, delete the extension
     #   and create it again with that version.
+    #
+    # To retry the operation on nodes where it failed, fix the cause that
+    # `DescribeClusterExtension` reports in `Health`, and then send an
+    # `UpdateClusterExtension` request that doesn't change the version or
+    # the configuration.
     #
     # You can't update an extension while it is being deleted.
     #
@@ -35579,7 +35809,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.414.0'
+      context[:gem_version] = '1.415.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

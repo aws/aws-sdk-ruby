@@ -87,7 +87,9 @@ module Aws::QConnect
     BedrockKnowledgeBaseArn = Shapes::StringShape.new(name: 'BedrockKnowledgeBaseArn')
     BedrockModelArnForParsing = Shapes::StringShape.new(name: 'BedrockModelArnForParsing')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CalculatedAttributes = Shapes::MapShape.new(name: 'CalculatedAttributes')
     CaseArn = Shapes::StringShape.new(name: 'CaseArn')
+    CaseAttributes = Shapes::MapShape.new(name: 'CaseAttributes')
     CaseSummarizationAIAgentConfiguration = Shapes::StructureShape.new(name: 'CaseSummarizationAIAgentConfiguration')
     CaseSummarizationChunkDataDetails = Shapes::StructureShape.new(name: 'CaseSummarizationChunkDataDetails')
     CaseSummarizationInputData = Shapes::StructureShape.new(name: 'CaseSummarizationInputData')
@@ -459,6 +461,11 @@ module Aws::QConnect
     Priority = Shapes::StringShape.new(name: 'Priority')
     ProactiveRecommendationDataDetails = Shapes::StructureShape.new(name: 'ProactiveRecommendationDataDetails')
     Probability = Shapes::FloatShape.new(name: 'Probability')
+    ProfileCatalogItem = Shapes::StructureShape.new(name: 'ProfileCatalogItem')
+    ProfileCatalogItemAttributes = Shapes::MapShape.new(name: 'ProfileCatalogItemAttributes')
+    ProfileRecommendation = Shapes::StructureShape.new(name: 'ProfileRecommendation')
+    ProfileRecommendationScore = Shapes::FloatShape.new(name: 'ProfileRecommendationScore')
+    ProfileRecommendations = Shapes::ListShape.new(name: 'ProfileRecommendations')
     PushADMMessageTemplateContent = Shapes::StructureShape.new(name: 'PushADMMessageTemplateContent')
     PushAPNSMessageTemplateContent = Shapes::StructureShape.new(name: 'PushAPNSMessageTemplateContent')
     PushBaiduMessageTemplateContent = Shapes::StructureShape.new(name: 'PushBaiduMessageTemplateContent')
@@ -1058,6 +1065,12 @@ module Aws::QConnect
     BedrockFoundationModelConfigurationForParsing.add_member(:parsing_prompt, Shapes::ShapeRef.new(shape: ParsingPrompt, location_name: "parsingPrompt"))
     BedrockFoundationModelConfigurationForParsing.struct_class = Types::BedrockFoundationModelConfigurationForParsing
 
+    CalculatedAttributes.key = Shapes::ShapeRef.new(shape: MessageTemplateAttributeKey)
+    CalculatedAttributes.value = Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue)
+
+    CaseAttributes.key = Shapes::ShapeRef.new(shape: MessageTemplateAttributeKey)
+    CaseAttributes.value = Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue)
+
     CaseSummarizationAIAgentConfiguration.add_member(:case_summarization_ai_prompt_id, Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: "caseSummarizationAIPromptId"))
     CaseSummarizationAIAgentConfiguration.add_member(:case_summarization_ai_guardrail_id, Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: "caseSummarizationAIGuardrailId"))
     CaseSummarizationAIAgentConfiguration.add_member(:locale, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "locale"))
@@ -1469,6 +1482,8 @@ module Aws::QConnect
     CustomerProfileAttributes.add_member(:billing_province, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "billingProvince"))
     CustomerProfileAttributes.add_member(:billing_state, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "billingState"))
     CustomerProfileAttributes.add_member(:custom, Shapes::ShapeRef.new(shape: CustomAttributes, location_name: "custom"))
+    CustomerProfileAttributes.add_member(:recommendations, Shapes::ShapeRef.new(shape: ProfileRecommendations, location_name: "recommendations"))
+    CustomerProfileAttributes.add_member(:calculated_attributes, Shapes::ShapeRef.new(shape: CalculatedAttributes, location_name: "calculatedAttributes"))
     CustomerProfileAttributes.struct_class = Types::CustomerProfileAttributes
 
     DataDetails.add_member(:content_data, Shapes::ShapeRef.new(shape: ContentDataDetails, location_name: "contentData"))
@@ -2274,6 +2289,7 @@ module Aws::QConnect
     MessageTemplateAttributes.add_member(:agent_attributes, Shapes::ShapeRef.new(shape: AgentAttributes, location_name: "agentAttributes"))
     MessageTemplateAttributes.add_member(:customer_profile_attributes, Shapes::ShapeRef.new(shape: CustomerProfileAttributes, location_name: "customerProfileAttributes"))
     MessageTemplateAttributes.add_member(:custom_attributes, Shapes::ShapeRef.new(shape: CustomAttributes, location_name: "customAttributes"))
+    MessageTemplateAttributes.add_member(:case_attributes, Shapes::ShapeRef.new(shape: CaseAttributes, location_name: "caseAttributes"))
     MessageTemplateAttributes.struct_class = Types::MessageTemplateAttributes
 
     MessageTemplateBodyContentProvider.add_member(:content, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "content"))
@@ -2509,6 +2525,30 @@ module Aws::QConnect
 
     ProactiveRecommendationDataDetails.add_member(:next_message_token, Shapes::ShapeRef.new(shape: NextToken, required: true, location_name: "nextMessageToken"))
     ProactiveRecommendationDataDetails.struct_class = Types::ProactiveRecommendationDataDetails
+
+    ProfileCatalogItem.add_member(:id, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "id"))
+    ProfileCatalogItem.add_member(:name, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "name"))
+    ProfileCatalogItem.add_member(:code, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "code"))
+    ProfileCatalogItem.add_member(:type, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "type"))
+    ProfileCatalogItem.add_member(:category, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "category"))
+    ProfileCatalogItem.add_member(:description, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "description"))
+    ProfileCatalogItem.add_member(:additional_information, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "additionalInformation"))
+    ProfileCatalogItem.add_member(:image_link, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "imageLink"))
+    ProfileCatalogItem.add_member(:link, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "link"))
+    ProfileCatalogItem.add_member(:created_at, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "createdAt"))
+    ProfileCatalogItem.add_member(:updated_at, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "updatedAt"))
+    ProfileCatalogItem.add_member(:price, Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue, location_name: "price"))
+    ProfileCatalogItem.add_member(:attributes, Shapes::ShapeRef.new(shape: ProfileCatalogItemAttributes, location_name: "attributes"))
+    ProfileCatalogItem.struct_class = Types::ProfileCatalogItem
+
+    ProfileCatalogItemAttributes.key = Shapes::ShapeRef.new(shape: MessageTemplateAttributeKey)
+    ProfileCatalogItemAttributes.value = Shapes::ShapeRef.new(shape: MessageTemplateAttributeValue)
+
+    ProfileRecommendation.add_member(:score, Shapes::ShapeRef.new(shape: ProfileRecommendationScore, location_name: "score"))
+    ProfileRecommendation.add_member(:catalog_item, Shapes::ShapeRef.new(shape: ProfileCatalogItem, location_name: "catalogItem"))
+    ProfileRecommendation.struct_class = Types::ProfileRecommendation
+
+    ProfileRecommendations.member = Shapes::ShapeRef.new(shape: ProfileRecommendation)
 
     PushADMMessageTemplateContent.add_member(:title, Shapes::ShapeRef.new(shape: NonEmptyUnlimitedString, location_name: "title"))
     PushADMMessageTemplateContent.add_member(:body, Shapes::ShapeRef.new(shape: MessageTemplateBodyContentProvider, location_name: "body"))

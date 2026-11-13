@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2026-11-13)
+------------------
+
+* Feature - Initial release of the customer-managed runtime APIs. Runtime publishers can now create, version, and manage custom runtimes, and use aliases to roll out new runtime versions to the functions that use them.
+
 1.14.0 (2026-11-11)
 ------------------
 

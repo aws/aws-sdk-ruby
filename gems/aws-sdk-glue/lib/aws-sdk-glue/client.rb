@@ -4075,11 +4075,18 @@ module Aws::Glue
     #   developer guide.
     #
     #   Jobs that are created without specifying a Glue version default to
-    #   Glue 5.1.
+    #   Glue 6.0.
+    #
+    #   Set `GlueVersion` to `auto` to turn on automatic version upgrades for
+    #   the job. For more information, see [Automatic version upgrades for
+    #   Glue jobs][2] in the developer guide. For the job requirements, see
+    #   [Before you start][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
+    #   [2]: https://docs.aws.amazon.com/glue/latest/dg/auto-version-upgrades.html
+    #   [3]: https://docs.aws.amazon.com/glue/latest/dg/auto-version-upgrades.html#auto-version-upgrades-before-you-start
     #
     # @option params [Integer] :number_of_workers
     #   The number of workers of a defined `workerType` that are allocated
@@ -22935,7 +22942,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.295.0'
+      context[:gem_version] = '1.296.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

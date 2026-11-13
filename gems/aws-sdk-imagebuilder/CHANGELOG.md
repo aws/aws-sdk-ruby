@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2026-11-13)
+------------------
+
+* Feature - Add documentation clarification around List API behavior, and add image available waiter
+
 1.124.0 (2026-11-11)
 ------------------
 

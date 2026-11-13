@@ -2617,8 +2617,36 @@ module Aws::QConnect
     #         custom: {
     #           "MessageTemplateAttributeKey" => "MessageTemplateAttributeValue",
     #         },
+    #         recommendations: [
+    #           {
+    #             score: 1.0,
+    #             catalog_item: {
+    #               id: "MessageTemplateAttributeValue",
+    #               name: "MessageTemplateAttributeValue",
+    #               code: "MessageTemplateAttributeValue",
+    #               type: "MessageTemplateAttributeValue",
+    #               category: "MessageTemplateAttributeValue",
+    #               description: "MessageTemplateAttributeValue",
+    #               additional_information: "MessageTemplateAttributeValue",
+    #               image_link: "MessageTemplateAttributeValue",
+    #               link: "MessageTemplateAttributeValue",
+    #               created_at: "MessageTemplateAttributeValue",
+    #               updated_at: "MessageTemplateAttributeValue",
+    #               price: "MessageTemplateAttributeValue",
+    #               attributes: {
+    #                 "MessageTemplateAttributeKey" => "MessageTemplateAttributeValue",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         calculated_attributes: {
+    #           "MessageTemplateAttributeKey" => "MessageTemplateAttributeValue",
+    #         },
     #       },
     #       custom_attributes: {
+    #         "MessageTemplateAttributeKey" => "MessageTemplateAttributeValue",
+    #       },
+    #       case_attributes: {
     #         "MessageTemplateAttributeKey" => "MessageTemplateAttributeValue",
     #       },
     #     },
@@ -2763,10 +2791,30 @@ module Aws::QConnect
     #   resp.message_template.default_attributes.customer_profile_attributes.billing_state #=> String
     #   resp.message_template.default_attributes.customer_profile_attributes.custom #=> Hash
     #   resp.message_template.default_attributes.customer_profile_attributes.custom["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations #=> Array
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].score #=> Float
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.id #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.type #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.category #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.description #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.additional_information #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.image_link #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.link #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.created_at #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.updated_at #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.price #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.attributes #=> Hash
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.attributes["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.calculated_attributes #=> Hash
+    #   resp.message_template.default_attributes.customer_profile_attributes.calculated_attributes["MessageTemplateAttributeKey"] #=> String
     #   resp.message_template.default_attributes.custom_attributes #=> Hash
     #   resp.message_template.default_attributes.custom_attributes["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.case_attributes #=> Hash
+    #   resp.message_template.default_attributes.case_attributes["MessageTemplateAttributeKey"] #=> String
     #   resp.message_template.attribute_types #=> Array
-    #   resp.message_template.attribute_types[0] #=> String, one of "SYSTEM", "AGENT", "CUSTOMER_PROFILE", "CUSTOM"
+    #   resp.message_template.attribute_types[0] #=> String, one of "SYSTEM", "AGENT", "CUSTOMER_PROFILE", "CUSTOM", "CASE"
     #   resp.message_template.message_template_content_sha_256 #=> String
     #   resp.message_template.tags #=> Hash
     #   resp.message_template.tags["TagKey"] #=> String
@@ -3023,10 +3071,30 @@ module Aws::QConnect
     #   resp.message_template.default_attributes.customer_profile_attributes.billing_state #=> String
     #   resp.message_template.default_attributes.customer_profile_attributes.custom #=> Hash
     #   resp.message_template.default_attributes.customer_profile_attributes.custom["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations #=> Array
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].score #=> Float
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.id #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.type #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.category #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.description #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.additional_information #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.image_link #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.link #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.created_at #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.updated_at #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.price #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.attributes #=> Hash
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.attributes["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.calculated_attributes #=> Hash
+    #   resp.message_template.default_attributes.customer_profile_attributes.calculated_attributes["MessageTemplateAttributeKey"] #=> String
     #   resp.message_template.default_attributes.custom_attributes #=> Hash
     #   resp.message_template.default_attributes.custom_attributes["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.case_attributes #=> Hash
+    #   resp.message_template.default_attributes.case_attributes["MessageTemplateAttributeKey"] #=> String
     #   resp.message_template.attribute_types #=> Array
-    #   resp.message_template.attribute_types[0] #=> String, one of "SYSTEM", "AGENT", "CUSTOMER_PROFILE", "CUSTOM"
+    #   resp.message_template.attribute_types[0] #=> String, one of "SYSTEM", "AGENT", "CUSTOMER_PROFILE", "CUSTOM", "CASE"
     #   resp.message_template.attachments #=> Array
     #   resp.message_template.attachments[0].content_disposition #=> String, one of "ATTACHMENT"
     #   resp.message_template.attachments[0].name #=> String
@@ -4667,10 +4735,30 @@ module Aws::QConnect
     #   resp.message_template.default_attributes.customer_profile_attributes.billing_state #=> String
     #   resp.message_template.default_attributes.customer_profile_attributes.custom #=> Hash
     #   resp.message_template.default_attributes.customer_profile_attributes.custom["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations #=> Array
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].score #=> Float
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.id #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.type #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.category #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.description #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.additional_information #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.image_link #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.link #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.created_at #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.updated_at #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.price #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.attributes #=> Hash
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.attributes["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.calculated_attributes #=> Hash
+    #   resp.message_template.default_attributes.customer_profile_attributes.calculated_attributes["MessageTemplateAttributeKey"] #=> String
     #   resp.message_template.default_attributes.custom_attributes #=> Hash
     #   resp.message_template.default_attributes.custom_attributes["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.case_attributes #=> Hash
+    #   resp.message_template.default_attributes.case_attributes["MessageTemplateAttributeKey"] #=> String
     #   resp.message_template.attribute_types #=> Array
-    #   resp.message_template.attribute_types[0] #=> String, one of "SYSTEM", "AGENT", "CUSTOMER_PROFILE", "CUSTOM"
+    #   resp.message_template.attribute_types[0] #=> String, one of "SYSTEM", "AGENT", "CUSTOMER_PROFILE", "CUSTOM", "CASE"
     #   resp.message_template.attachments #=> Array
     #   resp.message_template.attachments[0].content_disposition #=> String, one of "ATTACHMENT"
     #   resp.message_template.attachments[0].name #=> String
@@ -7185,8 +7273,36 @@ module Aws::QConnect
     #         custom: {
     #           "MessageTemplateAttributeKey" => "MessageTemplateAttributeValue",
     #         },
+    #         recommendations: [
+    #           {
+    #             score: 1.0,
+    #             catalog_item: {
+    #               id: "MessageTemplateAttributeValue",
+    #               name: "MessageTemplateAttributeValue",
+    #               code: "MessageTemplateAttributeValue",
+    #               type: "MessageTemplateAttributeValue",
+    #               category: "MessageTemplateAttributeValue",
+    #               description: "MessageTemplateAttributeValue",
+    #               additional_information: "MessageTemplateAttributeValue",
+    #               image_link: "MessageTemplateAttributeValue",
+    #               link: "MessageTemplateAttributeValue",
+    #               created_at: "MessageTemplateAttributeValue",
+    #               updated_at: "MessageTemplateAttributeValue",
+    #               price: "MessageTemplateAttributeValue",
+    #               attributes: {
+    #                 "MessageTemplateAttributeKey" => "MessageTemplateAttributeValue",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         calculated_attributes: {
+    #           "MessageTemplateAttributeKey" => "MessageTemplateAttributeValue",
+    #         },
     #       },
     #       custom_attributes: {
+    #         "MessageTemplateAttributeKey" => "MessageTemplateAttributeValue",
+    #       },
+    #       case_attributes: {
     #         "MessageTemplateAttributeKey" => "MessageTemplateAttributeValue",
     #       },
     #     },
@@ -9338,8 +9454,36 @@ module Aws::QConnect
     #         custom: {
     #           "MessageTemplateAttributeKey" => "MessageTemplateAttributeValue",
     #         },
+    #         recommendations: [
+    #           {
+    #             score: 1.0,
+    #             catalog_item: {
+    #               id: "MessageTemplateAttributeValue",
+    #               name: "MessageTemplateAttributeValue",
+    #               code: "MessageTemplateAttributeValue",
+    #               type: "MessageTemplateAttributeValue",
+    #               category: "MessageTemplateAttributeValue",
+    #               description: "MessageTemplateAttributeValue",
+    #               additional_information: "MessageTemplateAttributeValue",
+    #               image_link: "MessageTemplateAttributeValue",
+    #               link: "MessageTemplateAttributeValue",
+    #               created_at: "MessageTemplateAttributeValue",
+    #               updated_at: "MessageTemplateAttributeValue",
+    #               price: "MessageTemplateAttributeValue",
+    #               attributes: {
+    #                 "MessageTemplateAttributeKey" => "MessageTemplateAttributeValue",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         calculated_attributes: {
+    #           "MessageTemplateAttributeKey" => "MessageTemplateAttributeValue",
+    #         },
     #       },
     #       custom_attributes: {
+    #         "MessageTemplateAttributeKey" => "MessageTemplateAttributeValue",
+    #       },
+    #       case_attributes: {
     #         "MessageTemplateAttributeKey" => "MessageTemplateAttributeValue",
     #       },
     #     },
@@ -9476,10 +9620,30 @@ module Aws::QConnect
     #   resp.message_template.default_attributes.customer_profile_attributes.billing_state #=> String
     #   resp.message_template.default_attributes.customer_profile_attributes.custom #=> Hash
     #   resp.message_template.default_attributes.customer_profile_attributes.custom["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations #=> Array
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].score #=> Float
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.id #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.type #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.category #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.description #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.additional_information #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.image_link #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.link #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.created_at #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.updated_at #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.price #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.attributes #=> Hash
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.attributes["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.calculated_attributes #=> Hash
+    #   resp.message_template.default_attributes.customer_profile_attributes.calculated_attributes["MessageTemplateAttributeKey"] #=> String
     #   resp.message_template.default_attributes.custom_attributes #=> Hash
     #   resp.message_template.default_attributes.custom_attributes["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.case_attributes #=> Hash
+    #   resp.message_template.default_attributes.case_attributes["MessageTemplateAttributeKey"] #=> String
     #   resp.message_template.attribute_types #=> Array
-    #   resp.message_template.attribute_types[0] #=> String, one of "SYSTEM", "AGENT", "CUSTOMER_PROFILE", "CUSTOM"
+    #   resp.message_template.attribute_types[0] #=> String, one of "SYSTEM", "AGENT", "CUSTOMER_PROFILE", "CUSTOM", "CASE"
     #   resp.message_template.message_template_content_sha_256 #=> String
     #   resp.message_template.tags #=> Hash
     #   resp.message_template.tags["TagKey"] #=> String
@@ -9666,10 +9830,30 @@ module Aws::QConnect
     #   resp.message_template.default_attributes.customer_profile_attributes.billing_state #=> String
     #   resp.message_template.default_attributes.customer_profile_attributes.custom #=> Hash
     #   resp.message_template.default_attributes.customer_profile_attributes.custom["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations #=> Array
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].score #=> Float
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.id #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.name #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.code #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.type #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.category #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.description #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.additional_information #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.image_link #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.link #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.created_at #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.updated_at #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.price #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.attributes #=> Hash
+    #   resp.message_template.default_attributes.customer_profile_attributes.recommendations[0].catalog_item.attributes["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.customer_profile_attributes.calculated_attributes #=> Hash
+    #   resp.message_template.default_attributes.customer_profile_attributes.calculated_attributes["MessageTemplateAttributeKey"] #=> String
     #   resp.message_template.default_attributes.custom_attributes #=> Hash
     #   resp.message_template.default_attributes.custom_attributes["MessageTemplateAttributeKey"] #=> String
+    #   resp.message_template.default_attributes.case_attributes #=> Hash
+    #   resp.message_template.default_attributes.case_attributes["MessageTemplateAttributeKey"] #=> String
     #   resp.message_template.attribute_types #=> Array
-    #   resp.message_template.attribute_types[0] #=> String, one of "SYSTEM", "AGENT", "CUSTOMER_PROFILE", "CUSTOM"
+    #   resp.message_template.attribute_types[0] #=> String, one of "SYSTEM", "AGENT", "CUSTOMER_PROFILE", "CUSTOM", "CASE"
     #   resp.message_template.message_template_content_sha_256 #=> String
     #   resp.message_template.tags #=> Hash
     #   resp.message_template.tags["TagKey"] #=> String
@@ -9997,7 +10181,7 @@ module Aws::QConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qconnect'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

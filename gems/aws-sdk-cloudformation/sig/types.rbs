@@ -1409,6 +1409,11 @@ module Aws::CloudFormation
       SENSITIVE: []
     end
 
+    class RemoveAliasInput
+      attr_accessor alias_name: ::String
+      SENSITIVE: []
+    end
+
     class RequiredActivatedType
       attr_accessor type_name_alias: ::String
       attr_accessor original_type_name: ::String
@@ -1572,6 +1577,12 @@ module Aws::CloudFormation
       SENSITIVE: []
     end
 
+    class SetAliasInput
+      attr_accessor stack_name: ::String
+      attr_accessor alias_name: ::String
+      SENSITIVE: []
+    end
+
     class SetStackPolicyInput
       attr_accessor stack_name: ::String
       attr_accessor stack_policy_body: ::String
@@ -1640,6 +1651,7 @@ module Aws::CloudFormation
       attr_accessor deletion_mode: ("STANDARD" | "FORCE_DELETE_STACK")
       attr_accessor detailed_status: ("CONFIGURATION_COMPLETE" | "VALIDATION_FAILED")
       attr_accessor last_operations: ::Array[Types::OperationEntry]
+      attr_accessor alias_name: ::String
       SENSITIVE: []
     end
 

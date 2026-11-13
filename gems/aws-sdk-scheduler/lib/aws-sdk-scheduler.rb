@@ -49,12 +49,13 @@ module Aws::Scheduler
   end
   autoload :Client, 'aws-sdk-scheduler/client'
   autoload :Errors, 'aws-sdk-scheduler/errors'
+  autoload :Waiters, 'aws-sdk-scheduler/waiters'
   autoload :Resource, 'aws-sdk-scheduler/resource'
   autoload :EndpointParameters, 'aws-sdk-scheduler/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-scheduler/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-scheduler/endpoints'
 
-  GEM_VERSION = '1.61.0'
+  GEM_VERSION = '1.62.0'
 
 end
 

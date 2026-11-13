@@ -586,7 +586,8 @@ module Aws::DocDB
     # @option params [required, String] :apply_action
     #   The pending maintenance action to apply to this resource.
     #
-    #   Valid values: `system-update`, `db-upgrade`
+    #   Valid values: `system-update`, `db-upgrade`,
+    #   `serverless-platform-version-update`
     #
     # @option params [required, String] :opt_in_type
     #   A value that specifies the type of opt-in request or undoes an opt-in
@@ -931,10 +932,27 @@ module Aws::DocDB
     #   Valid values: `docdb`
     #
     # @option params [String] :engine_version
-    #   The version number of the database engine to use. The
-    #   `--engine-version` will default to the latest major engine version.
-    #   For production workloads, we recommend explicitly declaring this
-    #   parameter with the intended major engine version.
+    #   The version number of the database engine to use. Amazon DocumentDB
+    #   resolves the value of this parameter as follows:
+    #
+    #   * If you omit this parameter or specify `8.0`, Amazon DocumentDB uses
+    #     the newest available 8.0 minor version in the Amazon Web Services
+    #     Region.
+    #
+    #   * If you specify `5.0`, Amazon DocumentDB uses the 5.0 long-term
+    #     support (LTS) minor version. This resolution moves only when a new
+    #     5.0 LTS minor version is declared.
+    #
+    #   * If you specify a fully qualified version, such as `8.0.1` or
+    #     `5.0.2`, Amazon DocumentDB uses exactly that version.
+    #
+    #   For production workloads, explicitly declare this parameter with a
+    #   fully qualified engine version rather than relying on resolution. A
+    #   fully qualified version keeps the engine version of the cluster
+    #   independent of the Amazon Web Services Region in which you create it
+    #   and of the minor versions that are available when the request is made.
+    #   This matters most for requests issued by scripts, automation,
+    #   infrastructure-as-code templates, and pinned SDK clients.
     #
     # @option params [Integer] :port
     #   The port number on which the instances in the cluster accept
@@ -6106,7 +6124,7 @@ module Aws::DocDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-docdb'
-      context[:gem_version] = '1.121.0'
+      context[:gem_version] = '1.122.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

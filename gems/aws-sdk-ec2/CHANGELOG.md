@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.670.0 (2026-11-13)
+------------------
+
+* Feature - Adds support for Networking Flexible Cost Allocation APIs, enabling Network Admin, Architect, and Engineers to break down shared networking costs by the resources that generated the traffic.
+
 1.669.0 (2026-11-12)
 ------------------
 

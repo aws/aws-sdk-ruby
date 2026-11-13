@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.179.0 (2026-11-13)
+------------------
+
+* Feature - New DISABLED status for Security Hub CSPM Central Configuration.
+
 1.178.0 (2026-11-11)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.415.0 (2026-11-13)
+------------------
+
+* Feature - New feature for Sagemaker Hyperpod Slurm clusters to install Extensions and view cluster operations.
+
 1.414.0 (2026-11-12)
 ------------------
 

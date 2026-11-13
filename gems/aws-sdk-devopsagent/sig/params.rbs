@@ -74,7 +74,11 @@ module Aws
       type ms_teams_configuration = {
       team_id: ::String,
       team_name: ::String,
-      transmission_target: Params::ms_teams_transmission_target
+      transmission_target: Params::ms_teams_transmission_target,
+      bidirectional: {
+        role_arn: ::String,
+        enabled: bool?
+      }?
     }
 
       type release_management_configuration = {

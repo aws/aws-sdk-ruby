@@ -49,12 +49,13 @@ module Aws::Imagebuilder
   end
   autoload :Client, 'aws-sdk-imagebuilder/client'
   autoload :Errors, 'aws-sdk-imagebuilder/errors'
+  autoload :Waiters, 'aws-sdk-imagebuilder/waiters'
   autoload :Resource, 'aws-sdk-imagebuilder/resource'
   autoload :EndpointParameters, 'aws-sdk-imagebuilder/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-imagebuilder/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-imagebuilder/endpoints'
 
-  GEM_VERSION = '1.124.0'
+  GEM_VERSION = '1.125.0'
 
 end
 

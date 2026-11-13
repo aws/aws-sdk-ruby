@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2026-11-13)
+------------------
+
+* Feature - Amazon VPC Lattice now supports modification of resource configuration DNS resolution on Resource Gateways
+
 1.66.0 (2026-11-11)
 ------------------
 

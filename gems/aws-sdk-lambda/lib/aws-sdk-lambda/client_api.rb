@@ -222,6 +222,9 @@ module Aws::Lambda
     FunctionName = Shapes::StringShape.new(name: 'FunctionName')
     FunctionResponseType = Shapes::StringShape.new(name: 'FunctionResponseType')
     FunctionResponseTypeList = Shapes::ListShape.new(name: 'FunctionResponseTypeList')
+    FunctionRuntimeAlias = Shapes::StringShape.new(name: 'FunctionRuntimeAlias')
+    FunctionRuntimeArn = Shapes::StringShape.new(name: 'FunctionRuntimeArn')
+    FunctionRuntimeConfig = Shapes::StructureShape.new(name: 'FunctionRuntimeConfig')
     FunctionScalingConfig = Shapes::StructureShape.new(name: 'FunctionScalingConfig')
     FunctionScalingConfigExecutionEnvironments = Shapes::IntegerShape.new(name: 'FunctionScalingConfigExecutionEnvironments')
     FunctionUrl = Shapes::StringShape.new(name: 'FunctionUrl')
@@ -332,6 +335,7 @@ module Aws::Lambda
     LayerArn = Shapes::StringShape.new(name: 'LayerArn')
     LayerList = Shapes::ListShape.new(name: 'LayerList')
     LayerName = Shapes::StringShape.new(name: 'LayerName')
+    LayerNameOrArn = Shapes::StringShape.new(name: 'LayerNameOrArn')
     LayerPermissionAllowedAction = Shapes::StringShape.new(name: 'LayerPermissionAllowedAction')
     LayerPermissionAllowedPrincipal = Shapes::StringShape.new(name: 'LayerPermissionAllowedPrincipal')
     LayerVersionArn = Shapes::StringShape.new(name: 'LayerVersionArn')
@@ -485,8 +489,10 @@ module Aws::Lambda
     RevisionId = Shapes::StringShape.new(name: 'RevisionId')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     Runtime = Shapes::StringShape.new(name: 'Runtime')
+    RuntimeAliasDeletedException = Shapes::StructureShape.new(name: 'RuntimeAliasDeletedException')
     RuntimeVersionArn = Shapes::StringShape.new(name: 'RuntimeVersionArn')
     RuntimeVersionConfig = Shapes::StructureShape.new(name: 'RuntimeVersionConfig')
+    RuntimeVersionDeletedException = Shapes::StructureShape.new(name: 'RuntimeVersionDeletedException')
     RuntimeVersionError = Shapes::StructureShape.new(name: 'RuntimeVersionError')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3FilesConfig = Shapes::StructureShape.new(name: 'S3FilesConfig')
@@ -616,7 +622,7 @@ module Aws::Lambda
     AccountUsage.add_member(:function_count, Shapes::ShapeRef.new(shape: Long, location_name: "FunctionCount"))
     AccountUsage.struct_class = Types::AccountUsage
 
-    AddLayerVersionPermissionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
+    AddLayerVersionPermissionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerNameOrArn, required: true, location: "uri", location_name: "LayerName"))
     AddLayerVersionPermissionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: LayerVersionNumber, required: true, location: "uri", location_name: "VersionNumber"))
     AddLayerVersionPermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: StatementId, required: true, location_name: "StatementId"))
     AddLayerVersionPermissionRequest.add_member(:action, Shapes::ShapeRef.new(shape: LayerPermissionAllowedAction, required: true, location_name: "Action"))
@@ -950,6 +956,7 @@ module Aws::Lambda
     CreateFunctionRequest.add_member(:tenancy_config, Shapes::ShapeRef.new(shape: TenancyConfig, location_name: "TenancyConfig"))
     CreateFunctionRequest.add_member(:capacity_provider_config, Shapes::ShapeRef.new(shape: CapacityProviderConfig, location_name: "CapacityProviderConfig"))
     CreateFunctionRequest.add_member(:durable_config, Shapes::ShapeRef.new(shape: DurableConfig, location_name: "DurableConfig"))
+    CreateFunctionRequest.add_member(:runtime_config, Shapes::ShapeRef.new(shape: FunctionRuntimeConfig, location_name: "RuntimeConfig"))
     CreateFunctionRequest.struct_class = Types::CreateFunctionRequest
 
     CreateFunctionUrlConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionUrlFunctionName, required: true, location: "uri", location_name: "FunctionName"))
@@ -1009,7 +1016,7 @@ module Aws::Lambda
     DeleteFunctionUrlConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: FunctionUrlQualifier, location: "querystring", location_name: "Qualifier"))
     DeleteFunctionUrlConfigRequest.struct_class = Types::DeleteFunctionUrlConfigRequest
 
-    DeleteLayerVersionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
+    DeleteLayerVersionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerNameOrArn, required: true, location: "uri", location_name: "LayerName"))
     DeleteLayerVersionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: LayerVersionNumber, required: true, location: "uri", location_name: "VersionNumber"))
     DeleteLayerVersionRequest.struct_class = Types::DeleteLayerVersionRequest
 
@@ -1311,6 +1318,7 @@ module Aws::Lambda
     FunctionConfiguration.add_member(:capacity_provider_config, Shapes::ShapeRef.new(shape: CapacityProviderConfig, location_name: "CapacityProviderConfig"))
     FunctionConfiguration.add_member(:config_sha_256, Shapes::ShapeRef.new(shape: String, location_name: "ConfigSha256"))
     FunctionConfiguration.add_member(:durable_config, Shapes::ShapeRef.new(shape: DurableConfig, location_name: "DurableConfig"))
+    FunctionConfiguration.add_member(:runtime_config, Shapes::ShapeRef.new(shape: FunctionRuntimeConfig, location_name: "RuntimeConfig"))
     FunctionConfiguration.struct_class = Types::FunctionConfiguration
 
     FunctionEventInvokeConfig.add_member(:last_modified, Shapes::ShapeRef.new(shape: Date, location_name: "LastModified"))
@@ -1325,6 +1333,10 @@ module Aws::Lambda
     FunctionList.member = Shapes::ShapeRef.new(shape: FunctionConfiguration)
 
     FunctionResponseTypeList.member = Shapes::ShapeRef.new(shape: FunctionResponseType)
+
+    FunctionRuntimeConfig.add_member(:runtime_arn, Shapes::ShapeRef.new(shape: FunctionRuntimeArn, required: true, location_name: "RuntimeArn"))
+    FunctionRuntimeConfig.add_member(:runtime_alias, Shapes::ShapeRef.new(shape: FunctionRuntimeAlias, required: true, location_name: "RuntimeAlias"))
+    FunctionRuntimeConfig.struct_class = Types::FunctionRuntimeConfig
 
     FunctionScalingConfig.add_member(:min_execution_environments, Shapes::ShapeRef.new(shape: FunctionScalingConfigExecutionEnvironments, location_name: "MinExecutionEnvironments"))
     FunctionScalingConfig.add_member(:max_execution_environments, Shapes::ShapeRef.new(shape: FunctionScalingConfigExecutionEnvironments, location_name: "MaxExecutionEnvironments"))
@@ -1479,7 +1491,7 @@ module Aws::Lambda
     GetLayerVersionByArnRequest.add_member(:arn, Shapes::ShapeRef.new(shape: LayerVersionArn, required: true, location: "querystring", location_name: "Arn"))
     GetLayerVersionByArnRequest.struct_class = Types::GetLayerVersionByArnRequest
 
-    GetLayerVersionPolicyRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
+    GetLayerVersionPolicyRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerNameOrArn, required: true, location: "uri", location_name: "LayerName"))
     GetLayerVersionPolicyRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: LayerVersionNumber, required: true, location: "uri", location_name: "VersionNumber"))
     GetLayerVersionPolicyRequest.struct_class = Types::GetLayerVersionPolicyRequest
 
@@ -1487,7 +1499,7 @@ module Aws::Lambda
     GetLayerVersionPolicyResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location_name: "RevisionId"))
     GetLayerVersionPolicyResponse.struct_class = Types::GetLayerVersionPolicyResponse
 
-    GetLayerVersionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
+    GetLayerVersionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerNameOrArn, required: true, location: "uri", location_name: "LayerName"))
     GetLayerVersionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: LayerVersionNumber, required: true, location: "uri", location_name: "VersionNumber"))
     GetLayerVersionRequest.struct_class = Types::GetLayerVersionRequest
 
@@ -1838,7 +1850,7 @@ module Aws::Lambda
 
     ListLayerVersionsRequest.add_member(:compatible_architecture, Shapes::ShapeRef.new(shape: Architecture, location: "querystring", location_name: "CompatibleArchitecture"))
     ListLayerVersionsRequest.add_member(:compatible_runtime, Shapes::ShapeRef.new(shape: Runtime, location: "querystring", location_name: "CompatibleRuntime"))
-    ListLayerVersionsRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
+    ListLayerVersionsRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerNameOrArn, required: true, location: "uri", location_name: "LayerName"))
     ListLayerVersionsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "Marker"))
     ListLayerVersionsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxLayerListItems, location: "querystring", location_name: "MaxItems"))
     ListLayerVersionsRequest.struct_class = Types::ListLayerVersionsRequest
@@ -1975,7 +1987,7 @@ module Aws::Lambda
     PublicPolicyException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     PublicPolicyException.struct_class = Types::PublicPolicyException
 
-    PublishLayerVersionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
+    PublishLayerVersionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerNameOrArn, required: true, location: "uri", location_name: "LayerName"))
     PublishLayerVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     PublishLayerVersionRequest.add_member(:content, Shapes::ShapeRef.new(shape: LayerVersionContentInput, required: true, location_name: "Content"))
     PublishLayerVersionRequest.add_member(:compatible_architectures, Shapes::ShapeRef.new(shape: CompatibleArchitectures, location_name: "CompatibleArchitectures"))
@@ -2074,7 +2086,7 @@ module Aws::Lambda
     RecursiveInvocationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     RecursiveInvocationException.struct_class = Types::RecursiveInvocationException
 
-    RemoveLayerVersionPermissionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
+    RemoveLayerVersionPermissionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerNameOrArn, required: true, location: "uri", location_name: "LayerName"))
     RemoveLayerVersionPermissionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: LayerVersionNumber, required: true, location: "uri", location_name: "VersionNumber"))
     RemoveLayerVersionPermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: StatementId, required: true, location: "uri", location_name: "StatementId"))
     RemoveLayerVersionPermissionRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "RevisionId"))
@@ -2115,9 +2127,17 @@ module Aws::Lambda
     RetryDetails.add_member(:next_attempt_delay_seconds, Shapes::ShapeRef.new(shape: DurationSeconds, location_name: "NextAttemptDelaySeconds"))
     RetryDetails.struct_class = Types::RetryDetails
 
+    RuntimeAliasDeletedException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    RuntimeAliasDeletedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    RuntimeAliasDeletedException.struct_class = Types::RuntimeAliasDeletedException
+
     RuntimeVersionConfig.add_member(:runtime_version_arn, Shapes::ShapeRef.new(shape: RuntimeVersionArn, location_name: "RuntimeVersionArn"))
     RuntimeVersionConfig.add_member(:error, Shapes::ShapeRef.new(shape: RuntimeVersionError, location_name: "Error"))
     RuntimeVersionConfig.struct_class = Types::RuntimeVersionConfig
+
+    RuntimeVersionDeletedException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    RuntimeVersionDeletedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    RuntimeVersionDeletedException.struct_class = Types::RuntimeVersionDeletedException
 
     RuntimeVersionError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
     RuntimeVersionError.add_member(:message, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Message"))
@@ -2384,6 +2404,7 @@ module Aws::Lambda
     UpdateFunctionConfigurationRequest.add_member(:logging_config, Shapes::ShapeRef.new(shape: LoggingConfig, location_name: "LoggingConfig"))
     UpdateFunctionConfigurationRequest.add_member(:capacity_provider_config, Shapes::ShapeRef.new(shape: CapacityProviderConfig, location_name: "CapacityProviderConfig"))
     UpdateFunctionConfigurationRequest.add_member(:durable_config, Shapes::ShapeRef.new(shape: DurableConfig, location_name: "DurableConfig"))
+    UpdateFunctionConfigurationRequest.add_member(:runtime_config, Shapes::ShapeRef.new(shape: FunctionRuntimeConfig, location_name: "RuntimeConfig"))
     UpdateFunctionConfigurationRequest.struct_class = Types::UpdateFunctionConfigurationRequest
 
     UpdateFunctionEventInvokeConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location: "uri", location_name: "FunctionName"))
@@ -3043,6 +3064,7 @@ module Aws::Lambda
         o.http_request_uri = "/2015-03-31/functions/{FunctionName}/invocations"
         o.input = Shapes::ShapeRef.new(shape: InvocationRequest)
         o.output = Shapes::ShapeRef.new(shape: InvocationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: RuntimeAliasDeletedException)
         o.errors << Shapes::ShapeRef.new(shape: CodeArtifactUserDeletedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -3068,6 +3090,7 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: EFSIOException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: RuntimeVersionDeletedException)
         o.errors << Shapes::ShapeRef.new(shape: ENILimitReachedException)
         o.errors << Shapes::ShapeRef.new(shape: SnapStartNotReadyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
@@ -3132,6 +3155,7 @@ module Aws::Lambda
         o.http_request_uri = "/2021-11-15/functions/{FunctionName}/response-streaming-invocations"
         o.input = Shapes::ShapeRef.new(shape: InvokeWithResponseStreamRequest)
         o.output = Shapes::ShapeRef.new(shape: InvokeWithResponseStreamResponse)
+        o.errors << Shapes::ShapeRef.new(shape: RuntimeAliasDeletedException)
         o.errors << Shapes::ShapeRef.new(shape: CodeArtifactUserDeletedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -3157,6 +3181,7 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: EFSIOException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: RuntimeVersionDeletedException)
         o.errors << Shapes::ShapeRef.new(shape: ENILimitReachedException)
         o.errors << Shapes::ShapeRef.new(shape: SnapStartNotReadyException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
@@ -3576,6 +3601,7 @@ module Aws::Lambda
         o.input = Shapes::ShapeRef.new(shape: RemoveLayerVersionPermissionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

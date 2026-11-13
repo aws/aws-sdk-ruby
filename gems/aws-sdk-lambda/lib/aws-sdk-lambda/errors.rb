@@ -70,6 +70,8 @@ module Aws::Lambda
   # * {ResourceInUseException}
   # * {ResourceNotFoundException}
   # * {ResourceNotReadyException}
+  # * {RuntimeAliasDeletedException}
+  # * {RuntimeVersionDeletedException}
   # * {S3FilesMountConnectivityException}
   # * {S3FilesMountFailureException}
   # * {S3FilesMountTimeoutException}
@@ -940,6 +942,46 @@ module Aws::Lambda
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Lambda::Types::ResourceNotReadyException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def type
+        @data[:type]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class RuntimeAliasDeletedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Lambda::Types::RuntimeAliasDeletedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def type
+        @data[:type]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class RuntimeVersionDeletedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Lambda::Types::RuntimeVersionDeletedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

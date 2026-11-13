@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2026-11-13)
+------------------
+
+* Feature - AWS DevOps Agent adds bidirectional communication for Microsoft Teams associations. Set msteams.bidirectional with an IAM role so the agent answers mentions in your Teams channels.
+
 1.28.0 (2026-11-11)
 ------------------
 

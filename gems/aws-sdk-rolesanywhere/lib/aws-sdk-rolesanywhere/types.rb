@@ -93,6 +93,29 @@ module Aws::RolesAnywhere
     #   a temporary credential request.
     #   @return [Boolean]
     #
+    # @!attribute [rw] alias_name
+    #   An alias for the profile. When you set an alias, the response
+    #   includes the alias ARN of the profile in `aliasArn`.
+    #
+    #   An alias name contains 1 to 256 characters. It must begin with a
+    #   letter (A-Z or a-z). It can contain only letters (A-Z and a-z),
+    #   numbers (0-9), underscores (\_), hyphens (-), and forward slashes
+    #   (/). A forward slash can appear only between two other characters,
+    #   so an alias name can't end with a forward slash or contain two in a
+    #   row. Alias names that begin with `aws/`, in any combination of
+    #   uppercase and lowercase letters, are reserved. Alias names are case
+    #   sensitive.
+    #
+    #   The alias name must be unique among resources of the same type in
+    #   your account and Region. If another resource of the same type
+    #   already has the alias, the request fails with a
+    #   `ValidationException`. An invalid or reserved alias name also causes
+    #   a `ValidationException`.
+    #
+    #   If you omit this parameter or specify an empty string, the resource
+    #   is created without an alias.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/CreateProfileRequest AWS API Documentation
     #
     class CreateProfileRequest < Struct.new(
@@ -104,7 +127,8 @@ module Aws::RolesAnywhere
       :duration_seconds,
       :enabled,
       :tags,
-      :accept_role_session_name)
+      :accept_role_session_name,
+      :alias_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -135,6 +159,29 @@ module Aws::RolesAnywhere
     #   anchor.
     #   @return [Array<Types::NotificationSetting>]
     #
+    # @!attribute [rw] alias_name
+    #   An alias for the trust anchor. When you set an alias, the response
+    #   includes the alias ARN of the trust anchor in `aliasArn`.
+    #
+    #   An alias name contains 1 to 256 characters. It must begin with a
+    #   letter (A-Z or a-z). It can contain only letters (A-Z and a-z),
+    #   numbers (0-9), underscores (\_), hyphens (-), and forward slashes
+    #   (/). A forward slash can appear only between two other characters,
+    #   so an alias name can't end with a forward slash or contain two in a
+    #   row. Alias names that begin with `aws/`, in any combination of
+    #   uppercase and lowercase letters, are reserved. Alias names are case
+    #   sensitive.
+    #
+    #   The alias name must be unique among resources of the same type in
+    #   your account and Region. If another resource of the same type
+    #   already has the alias, the request fails with a
+    #   `ValidationException`. An invalid or reserved alias name also causes
+    #   a `ValidationException`.
+    #
+    #   If you omit this parameter or specify an empty string, the resource
+    #   is created without an alias.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/CreateTrustAnchorRequest AWS API Documentation
     #
     class CreateTrustAnchorRequest < Struct.new(
@@ -143,7 +190,8 @@ module Aws::RolesAnywhere
       :enabled,
       :crl_dp_revocation_enabled,
       :tags,
-      :notification_settings)
+      :notification_settings,
+      :alias_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -229,6 +277,32 @@ module Aws::RolesAnywhere
     #   was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] alias_name
+    #   The alias of the certificate revocation list (CRL). Present only if
+    #   the CRL has an alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_arn
+    #   The alias ARN of the certificate revocation list (CRL), in the form
+    #   `arn:partition:rolesanywhere:region:account:alias/crl/alias-name `.
+    #   Present only if the CRL has an alias.
+    #
+    #   You can use the alias ARN in place of the resource ID or ARN in the
+    #   request parameters whose descriptions say that they accept an alias
+    #   ARN. Don't use the alias ARN in Identity and Access Management
+    #   (IAM) policies. A policy statement that names an alias ARN doesn't
+    #   apply to the resource that holds the alias. Write policies with the
+    #   ARN that contains the resource ID instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_alias_name
+    #   The alias that the resource had before the update request. IAM Roles
+    #   Anywhere returns this value only in the response to an update
+    #   request that changed or removed an existing alias. It isn't
+    #   returned when the alias was unchanged, when the resource had no
+    #   alias before the request, or by other operations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/CrlDetail AWS API Documentation
     #
     class CrlDetail < Struct.new(
@@ -239,7 +313,10 @@ module Aws::RolesAnywhere
       :crl_data,
       :trust_anchor_arn,
       :created_at,
-      :updated_at)
+      :updated_at,
+      :alias_name,
+      :alias_arn,
+      :previous_alias_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -258,7 +335,15 @@ module Aws::RolesAnywhere
     end
 
     # @!attribute [rw] profile_id
-    #   The unique identifier of the profile.
+    #   The profile to act on. You can specify one of the following:
+    #
+    #   * The profile ID.
+    #
+    #   * The profile ARN.
+    #
+    #   * The alias ARN of the profile.
+    #
+    #   An ARN must be for a profile in your account and Region.
     #   @return [String]
     #
     # @!attribute [rw] certificate_field
@@ -310,8 +395,34 @@ module Aws::RolesAnywhere
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] trust_anchor_arn
-    #   The ARN of the TrustAnchor the certificate revocation list (CRL)
-    #   will provide revocation for.
+    #   The ARN of the trust anchor that the certificate revocation list
+    #   (CRL) provides revocation for. Specify the trust anchor ARN that
+    #   contains the trust anchor ID. This parameter doesn't support alias
+    #   ARNs. If you specify an alias ARN, the request fails with
+    #   `ResourceNotFoundException`.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_name
+    #   An alias for the certificate revocation list (CRL). When you set an
+    #   alias, the response includes the alias ARN of the CRL in `aliasArn`.
+    #
+    #   An alias name contains 1 to 256 characters. It must begin with a
+    #   letter (A-Z or a-z). It can contain only letters (A-Z and a-z),
+    #   numbers (0-9), underscores (\_), hyphens (-), and forward slashes
+    #   (/). A forward slash can appear only between two other characters,
+    #   so an alias name can't end with a forward slash or contain two in a
+    #   row. Alias names that begin with `aws/`, in any combination of
+    #   uppercase and lowercase letters, are reserved. Alias names are case
+    #   sensitive.
+    #
+    #   The alias name must be unique among resources of the same type in
+    #   your account and Region. If another resource of the same type
+    #   already has the alias, the request fails with a
+    #   `ValidationException`. An invalid or reserved alias name also causes
+    #   a `ValidationException`.
+    #
+    #   If you omit this parameter or specify an empty string, the resource
+    #   is created without an alias.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ImportCrlRequest AWS API Documentation
@@ -321,7 +432,8 @@ module Aws::RolesAnywhere
       :crl_data,
       :enabled,
       :tags,
-      :trust_anchor_arn)
+      :trust_anchor_arn,
+      :alias_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -665,6 +777,31 @@ module Aws::RolesAnywhere
     #   A mapping applied to the authenticating end-entity certificate.
     #   @return [Array<Types::AttributeMapping>]
     #
+    # @!attribute [rw] alias_name
+    #   The alias of the profile. Present only if the profile has an alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_arn
+    #   The alias ARN of the profile, in the form
+    #   `arn:partition:rolesanywhere:region:account:alias/profile/alias-name
+    #   `. Present only if the profile has an alias.
+    #
+    #   You can use the alias ARN in place of the resource ID or ARN in the
+    #   request parameters whose descriptions say that they accept an alias
+    #   ARN. Don't use the alias ARN in Identity and Access Management
+    #   (IAM) policies. A policy statement that names an alias ARN doesn't
+    #   apply to the resource that holds the alias. Write policies with the
+    #   ARN that contains the resource ID instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_alias_name
+    #   The alias that the resource had before the update request. IAM Roles
+    #   Anywhere returns this value only in the response to an update
+    #   request that changed or removed an existing alias. It isn't
+    #   returned when the alias was unchanged, when the resource had no
+    #   alias before the request, or by other operations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ProfileDetail AWS API Documentation
     #
     class ProfileDetail < Struct.new(
@@ -681,7 +818,10 @@ module Aws::RolesAnywhere
       :updated_at,
       :duration_seconds,
       :accept_role_session_name,
-      :attribute_mappings)
+      :attribute_mappings,
+      :alias_name,
+      :alias_arn,
+      :previous_alias_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -699,7 +839,15 @@ module Aws::RolesAnywhere
     end
 
     # @!attribute [rw] profile_id
-    #   The unique identifier of the profile.
+    #   The profile to act on. You can specify one of the following:
+    #
+    #   * The profile ID.
+    #
+    #   * The profile ARN.
+    #
+    #   * The alias ARN of the profile.
+    #
+    #   An ARN must be for a profile in your account and Region.
     #   @return [String]
     #
     # @!attribute [rw] certificate_field
@@ -808,7 +956,16 @@ module Aws::RolesAnywhere
     end
 
     # @!attribute [rw] crl_id
-    #   The unique identifier of the certificate revocation list (CRL).
+    #   The certificate revocation list (CRL) to act on. You can specify one
+    #   of the following:
+    #
+    #   * The CRL ID.
+    #
+    #   * The CRL ARN.
+    #
+    #   * The alias ARN of the CRL.
+    #
+    #   An ARN must be for a CRL in your account and Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ScalarCrlRequest AWS API Documentation
@@ -820,7 +977,15 @@ module Aws::RolesAnywhere
     end
 
     # @!attribute [rw] profile_id
-    #   The unique identifier of the profile.
+    #   The profile to act on. You can specify one of the following:
+    #
+    #   * The profile ID.
+    #
+    #   * The profile ARN.
+    #
+    #   * The alias ARN of the profile.
+    #
+    #   An ARN must be for a profile in your account and Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ScalarProfileRequest AWS API Documentation
@@ -844,7 +1009,15 @@ module Aws::RolesAnywhere
     end
 
     # @!attribute [rw] trust_anchor_id
-    #   The unique identifier of the trust anchor.
+    #   The trust anchor to act on. You can specify one of the following:
+    #
+    #   * The trust anchor ID.
+    #
+    #   * The trust anchor ARN.
+    #
+    #   * The alias ARN of the trust anchor.
+    #
+    #   An ARN must be for a trust anchor in your account and Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ScalarTrustAnchorRequest AWS API Documentation
@@ -1133,6 +1306,32 @@ module Aws::RolesAnywhere
     #   anchor.
     #   @return [Array<Types::NotificationSettingDetail>]
     #
+    # @!attribute [rw] alias_name
+    #   The alias of the trust anchor. Present only if the trust anchor has
+    #   an alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_arn
+    #   The alias ARN of the trust anchor, in the form
+    #   `arn:partition:rolesanywhere:region:account:alias/trust-anchor/alias-name
+    #   `. Present only if the trust anchor has an alias.
+    #
+    #   You can use the alias ARN in place of the resource ID or ARN in the
+    #   request parameters whose descriptions say that they accept an alias
+    #   ARN. Don't use the alias ARN in Identity and Access Management
+    #   (IAM) policies. A policy statement that names an alias ARN doesn't
+    #   apply to the resource that holds the alias. Write policies with the
+    #   ARN that contains the resource ID instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_alias_name
+    #   The alias that the resource had before the update request. IAM Roles
+    #   Anywhere returns this value only in the response to an update
+    #   request that changed or removed an existing alias. It isn't
+    #   returned when the alias was unchanged, when the resource had no
+    #   alias before the request, or by other operations.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/TrustAnchorDetail AWS API Documentation
     #
     class TrustAnchorDetail < Struct.new(
@@ -1144,7 +1343,10 @@ module Aws::RolesAnywhere
       :crl_dp_revocation_enabled,
       :created_at,
       :updated_at,
-      :notification_settings)
+      :notification_settings,
+      :alias_name,
+      :alias_arn,
+      :previous_alias_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1183,7 +1385,16 @@ module Aws::RolesAnywhere
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] crl_id
-    #   The unique identifier of the certificate revocation list (CRL).
+    #   The certificate revocation list (CRL) to act on. You can specify one
+    #   of the following:
+    #
+    #   * The CRL ID.
+    #
+    #   * The CRL ARN.
+    #
+    #   * The alias ARN of the CRL.
+    #
+    #   An ARN must be for a CRL in your account and Region.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1194,18 +1405,58 @@ module Aws::RolesAnywhere
     #   The x509 v3 specified certificate revocation list (CRL).
     #   @return [String]
     #
+    # @!attribute [rw] alias_name
+    #   The alias for the certificate revocation list (CRL).
+    #
+    #   You can use this parameter in the following ways:
+    #
+    #   * To set or change the alias, specify the new alias name. After the
+    #     change, the previous alias ARN no longer identifies the resource.
+    #     You can then assign the previous alias to another resource of the
+    #     same type. A change can take a short time to take effect for
+    #     requests that use an alias ARN.
+    #
+    #   * To remove the alias, specify an empty string.
+    #
+    #   * To keep the current alias, omit this parameter.
+    #
+    #   An alias name contains 1 to 256 characters. It must begin with a
+    #   letter (A-Z or a-z). It can contain only letters (A-Z and a-z),
+    #   numbers (0-9), underscores (\_), hyphens (-), and forward slashes
+    #   (/). A forward slash can appear only between two other characters,
+    #   so an alias name can't end with a forward slash or contain two in a
+    #   row. Alias names that begin with `aws/`, in any combination of
+    #   uppercase and lowercase letters, are reserved. Alias names are case
+    #   sensitive.
+    #
+    #   The alias name must be unique among resources of the same type in
+    #   your account and Region. If another resource of the same type
+    #   already has the alias, the request fails with a
+    #   `ValidationException`. An invalid or reserved alias name also causes
+    #   a `ValidationException`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/UpdateCrlRequest AWS API Documentation
     #
     class UpdateCrlRequest < Struct.new(
       :crl_id,
       :name,
-      :crl_data)
+      :crl_data,
+      :alias_name)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] profile_id
-    #   The unique identifier of the profile.
+    #   The profile to act on. You can specify one of the following:
+    #
+    #   * The profile ID.
+    #
+    #   * The profile ARN.
+    #
+    #   * The alias ARN of the profile.
+    #
+    #   An ARN must be for a profile in your account and Region.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1243,6 +1494,37 @@ module Aws::RolesAnywhere
     #   a temporary credential request.
     #   @return [Boolean]
     #
+    # @!attribute [rw] alias_name
+    #   The alias for the profile.
+    #
+    #   You can use this parameter in the following ways:
+    #
+    #   * To set or change the alias, specify the new alias name. After the
+    #     change, the previous alias ARN no longer identifies the resource.
+    #     You can then assign the previous alias to another resource of the
+    #     same type. A change can take a short time to take effect for
+    #     requests that use an alias ARN.
+    #
+    #   * To remove the alias, specify an empty string.
+    #
+    #   * To keep the current alias, omit this parameter.
+    #
+    #   An alias name contains 1 to 256 characters. It must begin with a
+    #   letter (A-Z or a-z). It can contain only letters (A-Z and a-z),
+    #   numbers (0-9), underscores (\_), hyphens (-), and forward slashes
+    #   (/). A forward slash can appear only between two other characters,
+    #   so an alias name can't end with a forward slash or contain two in a
+    #   row. Alias names that begin with `aws/`, in any combination of
+    #   uppercase and lowercase letters, are reserved. Alias names are case
+    #   sensitive.
+    #
+    #   The alias name must be unique among resources of the same type in
+    #   your account and Region. If another resource of the same type
+    #   already has the alias, the request fails with a
+    #   `ValidationException`. An invalid or reserved alias name also causes
+    #   a `ValidationException`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/UpdateProfileRequest AWS API Documentation
     #
     class UpdateProfileRequest < Struct.new(
@@ -1252,13 +1534,22 @@ module Aws::RolesAnywhere
       :role_arns,
       :managed_policy_arns,
       :duration_seconds,
-      :accept_role_session_name)
+      :accept_role_session_name,
+      :alias_name)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] trust_anchor_id
-    #   The unique identifier of the trust anchor.
+    #   The trust anchor to act on. You can specify one of the following:
+    #
+    #   * The trust anchor ID.
+    #
+    #   * The trust anchor ARN.
+    #
+    #   * The alias ARN of the trust anchor.
+    #
+    #   An ARN must be for a trust anchor in your account and Region.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1274,13 +1565,45 @@ module Aws::RolesAnywhere
     #   status against CRL distribution points.
     #   @return [Boolean]
     #
+    # @!attribute [rw] alias_name
+    #   The alias for the trust anchor.
+    #
+    #   You can use this parameter in the following ways:
+    #
+    #   * To set or change the alias, specify the new alias name. After the
+    #     change, the previous alias ARN no longer identifies the resource.
+    #     You can then assign the previous alias to another resource of the
+    #     same type. A change can take a short time to take effect for
+    #     requests that use an alias ARN.
+    #
+    #   * To remove the alias, specify an empty string.
+    #
+    #   * To keep the current alias, omit this parameter.
+    #
+    #   An alias name contains 1 to 256 characters. It must begin with a
+    #   letter (A-Z or a-z). It can contain only letters (A-Z and a-z),
+    #   numbers (0-9), underscores (\_), hyphens (-), and forward slashes
+    #   (/). A forward slash can appear only between two other characters,
+    #   so an alias name can't end with a forward slash or contain two in a
+    #   row. Alias names that begin with `aws/`, in any combination of
+    #   uppercase and lowercase letters, are reserved. Alias names are case
+    #   sensitive.
+    #
+    #   The alias name must be unique among resources of the same type in
+    #   your account and Region. If another resource of the same type
+    #   already has the alias, the request fails with a
+    #   `ValidationException`. An invalid or reserved alias name also causes
+    #   a `ValidationException`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/UpdateTrustAnchorRequest AWS API Documentation
     #
     class UpdateTrustAnchorRequest < Struct.new(
       :trust_anchor_id,
       :name,
       :source,
-      :crl_dp_revocation_enabled)
+      :crl_dp_revocation_enabled,
+      :alias_name)
       SENSITIVE = []
       include Aws::Structure
     end

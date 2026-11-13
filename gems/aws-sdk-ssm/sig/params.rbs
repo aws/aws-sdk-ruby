@@ -49,8 +49,23 @@ module Aws
       }?
     }
 
+      type gcp_configuration = {
+      organization_id: ::String?,
+      workload_identity_pool_provider: ::String,
+      service_account_email: ::String,
+      targets: {
+        projects: Array[
+          {
+            project_id: ::String,
+            project_display_name: ::String?
+          }
+        ]?
+      }?
+    }
+
       type cloud_connector_configuration = {
-      azure_configuration: Params::azure_configuration?
+      azure_configuration: Params::azure_configuration?,
+      gcp_configuration: Params::gcp_configuration?
     }
 
       type patch_rule_group = {

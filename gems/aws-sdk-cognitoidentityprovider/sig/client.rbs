@@ -759,6 +759,13 @@ module Aws
                                   custom_auth_mode: ("AUDIT" | "ENFORCED")?
                                 }?
                               },
+                              ?dcr_configuration: {
+                                enable_status: ("Enabled" | "Disabled")?,
+                                open_dcr_enabled: bool?,
+                                authenticated_grant_types: Array[("code" | "implicit" | "client_credentials")]?,
+                                open_dcr_grant_types: Array[("code" | "implicit" | "client_credentials")]?,
+                                allowed_scopes: Array[::String]?
+                              },
                               ?username_configuration: {
                                 case_sensitive: bool
                               },
@@ -1458,7 +1465,8 @@ module Aws
       def list_user_pool_clients: (
                                     user_pool_id: ::String,
                                     ?max_results: ::Integer,
-                                    ?next_token: ::String
+                                    ?next_token: ::String,
+                                    ?client_type: ("REGULAR" | "DCR")
                                   ) -> _ListUserPoolClientsResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUserPoolClientsResponseSuccess
 
@@ -2071,6 +2079,13 @@ module Aws
                                 advanced_security_additional_flows: {
                                   custom_auth_mode: ("AUDIT" | "ENFORCED")?
                                 }?
+                              },
+                              ?dcr_configuration: {
+                                enable_status: ("Enabled" | "Disabled")?,
+                                open_dcr_enabled: bool?,
+                                authenticated_grant_types: Array[("code" | "implicit" | "client_credentials")]?,
+                                open_dcr_grant_types: Array[("code" | "implicit" | "client_credentials")]?,
+                                allowed_scopes: Array[::String]?
                               },
                               ?account_recovery_setting: {
                                 recovery_mechanisms: Array[

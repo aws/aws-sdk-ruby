@@ -136,6 +136,12 @@ module Aws::ConnectCampaignsV2
     #   Communication limits config
     #   @return [Types::CommunicationLimitsConfig]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp of the most recent modification to the campaign or its
+    #   configuration. Null for campaigns created before this field was
+    #   introduced.
+    #   @return [Time]
+    #
     # @!attribute [rw] tags
     #   Tag map with key and value.
     #   @return [Hash<String,String>]
@@ -155,6 +161,7 @@ module Aws::ConnectCampaignsV2
       :entry_limits_config,
       :communication_time_config,
       :communication_limits_override,
+      :last_modified_time,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -212,6 +219,12 @@ module Aws::ConnectCampaignsV2
     #   Amazon Resource Names(ARN)
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp of the most recent modification to the campaign or its
+    #   configuration. Null for campaigns created before this field was
+    #   introduced.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/CampaignSummary AWS API Documentation
     #
     class CampaignSummary < Struct.new(
@@ -223,7 +236,8 @@ module Aws::ConnectCampaignsV2
       :type,
       :schedule,
       :entry_limits_config,
-      :connect_campaign_flow_arn)
+      :connect_campaign_flow_arn,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end

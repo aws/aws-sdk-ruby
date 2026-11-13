@@ -8,6 +8,17 @@
 module Aws
   module NetworkFirewall
     module Params
+      type proxy_settings = {
+      listener_properties: Array[
+        {
+          port: ::Integer?,
+          type: ("HTTP" | "HTTPS")?
+        }
+      ],
+      certificate_arn: ::String?,
+      domain_name: ::String?
+    }
+
       type route_53_resolved_ip_validation = {
       action: ("REJECT" | "DROP" | "ALERT"),
       dns_firewall_rule_group_id: ::String,
@@ -184,33 +195,6 @@ module Aws
       }?
     }
 
-      type proxy_rule = {
-      proxy_rule_name: ::String?,
-      description: ::String?,
-      action: ("ALLOW" | "DENY" | "ALERT")?,
-      conditions: Array[
-        {
-          condition_operator: ::String?,
-          condition_key: ::String?,
-          condition_values: Array[::String]?
-        }
-      ]?
-    }
-
-      type create_proxy_rule = {
-      proxy_rule_name: ::String?,
-      description: ::String?,
-      action: ("ALLOW" | "DENY" | "ALERT")?,
-      conditions: Array[
-        {
-          condition_operator: ::String?,
-          condition_key: ::String?,
-          condition_values: Array[::String]?
-        }
-      ]?,
-      insert_position: ::Integer?
-    }
-
       type stateless_rules_and_custom_actions = {
       stateless_rules: Array[
         Params::stateless_rule
@@ -327,7 +311,8 @@ module Aws
       check_certificate_revocation_status: {
         revoked_status_action: ("PASS" | "DROP" | "REJECT")?,
         unknown_status_action: ("PASS" | "DROP" | "REJECT")?
-      }?
+      }?,
+      default_decryption_behavior: ("DECRYPT" | "BYPASS")?
     }
 
       type server_certificate_scope = {
@@ -353,7 +338,12 @@ module Aws
           to_port: ::Integer
         }
       ]?,
-      protocols: Array[::Integer]?
+      protocols: Array[::Integer]?,
+      domain_match: {
+        domains: Array[::String]
+      }?,
+      decryption_action: ("DECRYPT" | "BYPASS")?,
+      deployment_mode: ("TRANSPARENT_FIREWALL_ONLY" | "EXPLICIT_PROXY_ONLY" | "ALL")?
     }
 
       type flow_filter = {

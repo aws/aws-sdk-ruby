@@ -935,7 +935,9 @@ module Aws::QConnect
       attr_accessor billing_province: ::String
       attr_accessor billing_state: ::String
       attr_accessor custom: ::Hash[::String, ::String]
-      SENSITIVE: [:profile_id, :profile_arn, :first_name, :middle_name, :last_name, :account_number, :email_address, :phone_number, :additional_information, :party_type, :business_name, :birth_date, :gender, :mobile_phone_number, :home_phone_number, :business_phone_number, :business_email_address, :address1, :address2, :address3, :address4, :city, :county, :country, :postal_code, :province, :state, :shipping_address_1, :shipping_address_2, :shipping_address_3, :shipping_address_4, :shipping_city, :shipping_county, :shipping_country, :shipping_postal_code, :shipping_province, :shipping_state, :mailing_address_1, :mailing_address_2, :mailing_address_3, :mailing_address_4, :mailing_city, :mailing_county, :mailing_country, :mailing_postal_code, :mailing_province, :mailing_state, :billing_address_1, :billing_address_2, :billing_address_3, :billing_address_4, :billing_city, :billing_county, :billing_country, :billing_postal_code, :billing_province, :billing_state, :custom]
+      attr_accessor recommendations: ::Array[Types::ProfileRecommendation]
+      attr_accessor calculated_attributes: ::Hash[::String, ::String]
+      SENSITIVE: [:profile_id, :profile_arn, :first_name, :middle_name, :last_name, :account_number, :email_address, :phone_number, :additional_information, :party_type, :business_name, :birth_date, :gender, :mobile_phone_number, :home_phone_number, :business_phone_number, :business_email_address, :address1, :address2, :address3, :address4, :city, :county, :country, :postal_code, :province, :state, :shipping_address_1, :shipping_address_2, :shipping_address_3, :shipping_address_4, :shipping_city, :shipping_county, :shipping_country, :shipping_postal_code, :shipping_province, :shipping_state, :mailing_address_1, :mailing_address_2, :mailing_address_3, :mailing_address_4, :mailing_city, :mailing_county, :mailing_country, :mailing_postal_code, :mailing_province, :mailing_state, :billing_address_1, :billing_address_2, :billing_address_3, :billing_address_4, :billing_city, :billing_county, :billing_country, :billing_postal_code, :billing_province, :billing_state, :custom, :calculated_attributes]
     end
 
     class DataDetails
@@ -1261,7 +1263,7 @@ module Aws::QConnect
       attr_accessor source_configuration_summary: Types::MessageTemplateSourceConfigurationSummary
       attr_accessor grouping_configuration: Types::GroupingConfiguration
       attr_accessor default_attributes: Types::MessageTemplateAttributes
-      attr_accessor attribute_types: ::Array[("SYSTEM" | "AGENT" | "CUSTOMER_PROFILE" | "CUSTOM")]
+      attr_accessor attribute_types: ::Array[("SYSTEM" | "AGENT" | "CUSTOMER_PROFILE" | "CUSTOM" | "CASE")]
       attr_accessor attachments: ::Array[Types::MessageTemplateAttachment]
       attr_accessor is_active: bool
       attr_accessor version_number: ::Integer
@@ -2018,7 +2020,8 @@ module Aws::QConnect
       attr_accessor agent_attributes: Types::AgentAttributes
       attr_accessor customer_profile_attributes: Types::CustomerProfileAttributes
       attr_accessor custom_attributes: ::Hash[::String, ::String]
-      SENSITIVE: [:custom_attributes]
+      attr_accessor case_attributes: ::Hash[::String, ::String]
+      SENSITIVE: [:custom_attributes, :case_attributes]
     end
 
     class MessageTemplateBodyContentProvider
@@ -2069,7 +2072,7 @@ module Aws::QConnect
       attr_accessor source_configuration_summary: Types::MessageTemplateSourceConfigurationSummary
       attr_accessor grouping_configuration: Types::GroupingConfiguration
       attr_accessor default_attributes: Types::MessageTemplateAttributes
-      attr_accessor attribute_types: ::Array[("SYSTEM" | "AGENT" | "CUSTOMER_PROFILE" | "CUSTOM")]
+      attr_accessor attribute_types: ::Array[("SYSTEM" | "AGENT" | "CUSTOMER_PROFILE" | "CUSTOM" | "CASE")]
       attr_accessor message_template_content_sha_256: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:channel]
@@ -2300,6 +2303,29 @@ module Aws::QConnect
     class ProactiveRecommendationDataDetails
       attr_accessor next_message_token: ::String
       SENSITIVE: []
+    end
+
+    class ProfileCatalogItem
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor code: ::String
+      attr_accessor type: ::String
+      attr_accessor category: ::String
+      attr_accessor description: ::String
+      attr_accessor additional_information: ::String
+      attr_accessor image_link: ::String
+      attr_accessor link: ::String
+      attr_accessor created_at: ::String
+      attr_accessor updated_at: ::String
+      attr_accessor price: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: [:id, :name, :code, :type, :category, :description, :additional_information, :image_link, :link, :created_at, :updated_at, :price, :attributes]
+    end
+
+    class ProfileRecommendation
+      attr_accessor score: ::Float
+      attr_accessor catalog_item: Types::ProfileCatalogItem
+      SENSITIVE: [:score]
     end
 
     class PushADMMessageTemplateContent

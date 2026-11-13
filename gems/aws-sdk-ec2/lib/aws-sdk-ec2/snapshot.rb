@@ -388,7 +388,7 @@ module Aws::EC2
     #     source_region: "String", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, declarative-policies-report, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, image-usage-report, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, outpost-lag, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, service-link-virtual-interface, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-metering-policy, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, vpc-encryption-control, route-server, route-server-endpoint, route-server-peer, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, verified-access-endpoint-target, ipam-external-resource-verification-token, capacity-block, mac-modification-task, ipam-prefix-list-resolver, ipam-policy, ipam-prefix-list-resolver-target, ipam-internet-registry-association, secondary-interface, secondary-network, secondary-subnet, capacity-manager-data-export, vpn-concentrator, ipam-pool-allocation, capacity-reservation-cancellation-quote, application-status-check, capacity-reservation-modification-quote, metric-category
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, declarative-policies-report, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fca-policy, fleet, fpga-image, host-reservation, image, image-usage-report, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, outpost-lag, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, service-link-virtual-interface, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-metering-policy, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, vpc-encryption-control, route-server, route-server-endpoint, route-server-peer, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, verified-access-endpoint-target, ipam-external-resource-verification-token, capacity-block, mac-modification-task, ipam-prefix-list-resolver, ipam-policy, ipam-prefix-list-resolver-target, ipam-internet-registry-association, secondary-interface, secondary-network, secondary-subnet, capacity-manager-data-export, vpn-concentrator, ipam-pool-allocation, capacity-reservation-cancellation-quote, application-status-check, capacity-reservation-modification-quote, metric-category
     #         tags: [
     #           {
     #             key: "String",
@@ -419,15 +419,7 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#copy-snapshots
     # @option options [String] :destination_region
-    #   The destination Region to use in the `PresignedUrl` parameter of a
-    #   snapshot copy operation. This parameter is only valid for specifying
-    #   the destination Region in a `PresignedUrl` parameter, where it is
-    #   required.
-    #
-    #   The snapshot copy is sent to the regional endpoint that you sent the
-    #   HTTP request to (for example, `ec2.us-east-1.amazonaws.com`). With the
-    #   CLI, this is specified using the `--region` parameter or the default
-    #   Region in your Amazon Web Services configuration file.
+    #   Deprecated.
     # @option options [Boolean] :encrypted
     #   To encrypt a copy of an unencrypted snapshot if encryption by default
     #   is not enabled, enable encryption using this parameter. Otherwise,
@@ -460,25 +452,7 @@ module Aws::EC2
     #   Therefore, if you specify an ID, alias, or ARN that is not valid, the
     #   action can appear to complete, but eventually fails.
     # @option options [String] :presigned_url
-    #   When you copy an encrypted source snapshot using the Amazon EC2 Query
-    #   API, you must supply a pre-signed URL. This parameter is optional for
-    #   unencrypted snapshots. For more information, see [Query requests][1].
-    #
-    #   The `PresignedUrl` should use the snapshot source endpoint, the
-    #   `CopySnapshot` action, and include the `SourceRegion`,
-    #   `SourceSnapshotId`, and `DestinationRegion` parameters. The
-    #   `PresignedUrl` must be signed using Amazon Web Services Signature
-    #   Version 4. Because EBS snapshots are stored in Amazon S3, the signing
-    #   algorithm for this parameter uses the same logic that is described in
-    #   [ Authenticating Requests: Using Query Parameters (Amazon Web Services
-    #   Signature Version 4)][2] in the *Amazon S3 API Reference*. An invalid
-    #   or improperly signed `PresignedUrl` will cause the copy operation to
-    #   fail asynchronously, and the snapshot will move to an `error` state.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    #   Deprecated.
     # @option options [required, String] :source_region
     #   The ID of the Region that contains the snapshot to be copied.
     # @option options [Array<Types::TagSpecification>] :tag_specifications

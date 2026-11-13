@@ -2111,6 +2111,10 @@ module Aws::AppStream
     #
     #    </note>
     #
+    # @option params [Types::ImageBuilderAgentAccessConfig] :agent_access_config
+    #   The configuration for agent access on the image builder. If specified,
+    #   agent access is enabled for the image builder.
+    #
     # @return [Types::CreateImageBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateImageBuilderResult#image_builder #image_builder} => Types::ImageBuilder
@@ -2150,6 +2154,19 @@ module Aws::AppStream
     #     softwares_to_install: ["String"],
     #     softwares_to_uninstall: ["String"],
     #     disable_imdsv1: false,
+    #     agent_access_config: {
+    #       settings: [ # required
+    #         {
+    #           agent_action: "COMPUTER_VISION", # required, accepts COMPUTER_VISION, COMPUTER_INPUT, FORWARD_MCP_TOOLS
+    #           permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         },
+    #       ],
+    #       s3_bucket_arn: "S3BucketArn",
+    #       screenshots_upload_enabled: false,
+    #       screen_resolution: "W_1280xH_720", # required, accepts W_1280xH_720
+    #       screen_image_format: "PNG", # required, accepts PNG, JPEG
+    #       user_control_mode: "VIEW_ONLY", # accepts VIEW_ONLY, VIEW_STOP, DISABLED
+    #     },
     #   })
     #
     # @example Response structure
@@ -2188,6 +2205,14 @@ module Aws::AppStream
     #   resp.image_builder.root_volume_config.volume_size_in_gb #=> Integer
     #   resp.image_builder.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
     #   resp.image_builder.disable_imdsv1 #=> Boolean
+    #   resp.image_builder.agent_access_config.settings #=> Array
+    #   resp.image_builder.agent_access_config.settings[0].agent_action #=> String, one of "COMPUTER_VISION", "COMPUTER_INPUT", "FORWARD_MCP_TOOLS"
+    #   resp.image_builder.agent_access_config.settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.image_builder.agent_access_config.s3_bucket_arn #=> String
+    #   resp.image_builder.agent_access_config.screenshots_upload_enabled #=> Boolean
+    #   resp.image_builder.agent_access_config.screen_resolution #=> String, one of "W_1280xH_720"
+    #   resp.image_builder.agent_access_config.screen_image_format #=> String, one of "PNG", "JPEG"
+    #   resp.image_builder.agent_access_config.user_control_mode #=> String, one of "VIEW_ONLY", "VIEW_STOP", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilder AWS API Documentation
     #
@@ -2530,6 +2555,8 @@ module Aws::AppStream
     #       ],
     #       s3_bucket_arn: "S3BucketArn",
     #       screenshots_upload_enabled: false,
+    #       replay_session_enabled: false,
+    #       kms_key_arn: "KmsKeyArn",
     #       screen_resolution: "W_1280xH_720", # required, accepts W_1280xH_720
     #       screen_image_format: "PNG", # required, accepts PNG, JPEG
     #       user_control_mode: "VIEW_ONLY", # accepts VIEW_ONLY, VIEW_STOP, DISABLED
@@ -2579,6 +2606,8 @@ module Aws::AppStream
     #   resp.stack.agent_access_config.settings[0].permission #=> String, one of "ENABLED", "DISABLED"
     #   resp.stack.agent_access_config.s3_bucket_arn #=> String
     #   resp.stack.agent_access_config.screenshots_upload_enabled #=> Boolean
+    #   resp.stack.agent_access_config.replay_session_enabled #=> Boolean
+    #   resp.stack.agent_access_config.kms_key_arn #=> String
     #   resp.stack.agent_access_config.screen_resolution #=> String, one of "W_1280xH_720"
     #   resp.stack.agent_access_config.screen_image_format #=> String, one of "PNG", "JPEG"
     #   resp.stack.agent_access_config.user_control_mode #=> String, one of "VIEW_ONLY", "VIEW_STOP", "DISABLED"
@@ -3212,6 +3241,14 @@ module Aws::AppStream
     #   resp.image_builder.root_volume_config.volume_size_in_gb #=> Integer
     #   resp.image_builder.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
     #   resp.image_builder.disable_imdsv1 #=> Boolean
+    #   resp.image_builder.agent_access_config.settings #=> Array
+    #   resp.image_builder.agent_access_config.settings[0].agent_action #=> String, one of "COMPUTER_VISION", "COMPUTER_INPUT", "FORWARD_MCP_TOOLS"
+    #   resp.image_builder.agent_access_config.settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.image_builder.agent_access_config.s3_bucket_arn #=> String
+    #   resp.image_builder.agent_access_config.screenshots_upload_enabled #=> Boolean
+    #   resp.image_builder.agent_access_config.screen_resolution #=> String, one of "W_1280xH_720"
+    #   resp.image_builder.agent_access_config.screen_image_format #=> String, one of "PNG", "JPEG"
+    #   resp.image_builder.agent_access_config.user_control_mode #=> String, one of "VIEW_ONLY", "VIEW_STOP", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageBuilder AWS API Documentation
     #
@@ -3867,6 +3904,9 @@ module Aws::AppStream
     # if the image builder names are provided. Otherwise, all image builders
     # in the account are described.
     #
+    # The description of each image builder includes its agent access
+    # configuration, if agent access is enabled.
+    #
     # @option params [Array<String>] :names
     #   The names of the image builders to describe.
     #
@@ -3927,6 +3967,14 @@ module Aws::AppStream
     #   resp.image_builders[0].root_volume_config.volume_size_in_gb #=> Integer
     #   resp.image_builders[0].latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
     #   resp.image_builders[0].disable_imdsv1 #=> Boolean
+    #   resp.image_builders[0].agent_access_config.settings #=> Array
+    #   resp.image_builders[0].agent_access_config.settings[0].agent_action #=> String, one of "COMPUTER_VISION", "COMPUTER_INPUT", "FORWARD_MCP_TOOLS"
+    #   resp.image_builders[0].agent_access_config.settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.image_builders[0].agent_access_config.s3_bucket_arn #=> String
+    #   resp.image_builders[0].agent_access_config.screenshots_upload_enabled #=> Boolean
+    #   resp.image_builders[0].agent_access_config.screen_resolution #=> String, one of "W_1280xH_720"
+    #   resp.image_builders[0].agent_access_config.screen_image_format #=> String, one of "PNG", "JPEG"
+    #   resp.image_builders[0].agent_access_config.user_control_mode #=> String, one of "VIEW_ONLY", "VIEW_STOP", "DISABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImageBuilders AWS API Documentation
@@ -4283,6 +4331,8 @@ module Aws::AppStream
     #   resp.stacks[0].agent_access_config.settings[0].permission #=> String, one of "ENABLED", "DISABLED"
     #   resp.stacks[0].agent_access_config.s3_bucket_arn #=> String
     #   resp.stacks[0].agent_access_config.screenshots_upload_enabled #=> Boolean
+    #   resp.stacks[0].agent_access_config.replay_session_enabled #=> Boolean
+    #   resp.stacks[0].agent_access_config.kms_key_arn #=> String
     #   resp.stacks[0].agent_access_config.screen_resolution #=> String, one of "W_1280xH_720"
     #   resp.stacks[0].agent_access_config.screen_image_format #=> String, one of "PNG", "JPEG"
     #   resp.stacks[0].agent_access_config.user_control_mode #=> String, one of "VIEW_ONLY", "VIEW_STOP", "DISABLED"
@@ -5185,6 +5235,14 @@ module Aws::AppStream
     #   resp.image_builder.root_volume_config.volume_size_in_gb #=> Integer
     #   resp.image_builder.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
     #   resp.image_builder.disable_imdsv1 #=> Boolean
+    #   resp.image_builder.agent_access_config.settings #=> Array
+    #   resp.image_builder.agent_access_config.settings[0].agent_action #=> String, one of "COMPUTER_VISION", "COMPUTER_INPUT", "FORWARD_MCP_TOOLS"
+    #   resp.image_builder.agent_access_config.settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.image_builder.agent_access_config.s3_bucket_arn #=> String
+    #   resp.image_builder.agent_access_config.screenshots_upload_enabled #=> Boolean
+    #   resp.image_builder.agent_access_config.screen_resolution #=> String, one of "W_1280xH_720"
+    #   resp.image_builder.agent_access_config.screen_image_format #=> String, one of "PNG", "JPEG"
+    #   resp.image_builder.agent_access_config.user_control_mode #=> String, one of "VIEW_ONLY", "VIEW_STOP", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartImageBuilder AWS API Documentation
     #
@@ -5350,6 +5408,14 @@ module Aws::AppStream
     #   resp.image_builder.root_volume_config.volume_size_in_gb #=> Integer
     #   resp.image_builder.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
     #   resp.image_builder.disable_imdsv1 #=> Boolean
+    #   resp.image_builder.agent_access_config.settings #=> Array
+    #   resp.image_builder.agent_access_config.settings[0].agent_action #=> String, one of "COMPUTER_VISION", "COMPUTER_INPUT", "FORWARD_MCP_TOOLS"
+    #   resp.image_builder.agent_access_config.settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.image_builder.agent_access_config.s3_bucket_arn #=> String
+    #   resp.image_builder.agent_access_config.screenshots_upload_enabled #=> Boolean
+    #   resp.image_builder.agent_access_config.screen_resolution #=> String, one of "W_1280xH_720"
+    #   resp.image_builder.agent_access_config.screen_image_format #=> String, one of "PNG", "JPEG"
+    #   resp.image_builder.agent_access_config.user_control_mode #=> String, one of "VIEW_ONLY", "VIEW_STOP", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopImageBuilder AWS API Documentation
     #
@@ -6177,6 +6243,106 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Updates the specified fields for the specified image builder. The
+    # image builder must be in the STOPPED state.
+    #
+    # @option params [required, String] :name
+    #   The name of the image builder.
+    #
+    # @option params [String] :description
+    #   The description to display.
+    #
+    # @option params [String] :display_name
+    #   The image builder name to display.
+    #
+    # @option params [Types::ImageBuilderAgentAccessConfigForUpdate] :agent_access_config
+    #   The configuration for agent access on the image builder. Specify this
+    #   to update agent access settings. To remove agent access, use
+    #   AttributesToDelete with the AGENT\_ACCESS\_CONFIG value.
+    #
+    # @option params [Array<String>] :attributes_to_delete
+    #   The image builder attributes to delete.
+    #
+    # @return [Types::UpdateImageBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateImageBuilderResult#image_builder #image_builder} => Types::ImageBuilder
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_image_builder({
+    #     name: "Name", # required
+    #     description: "Description",
+    #     display_name: "DisplayName",
+    #     agent_access_config: {
+    #       settings: [
+    #         {
+    #           agent_action: "COMPUTER_VISION", # required, accepts COMPUTER_VISION, COMPUTER_INPUT, FORWARD_MCP_TOOLS
+    #           permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         },
+    #       ],
+    #       s3_bucket_arn: "S3BucketArn",
+    #       screenshots_upload_enabled: false,
+    #       screen_resolution: "W_1280xH_720", # accepts W_1280xH_720
+    #       screen_image_format: "PNG", # accepts PNG, JPEG
+    #       user_control_mode: "VIEW_ONLY", # accepts VIEW_ONLY, VIEW_STOP, DISABLED
+    #     },
+    #     attributes_to_delete: ["AGENT_ACCESS_CONFIG"], # accepts AGENT_ACCESS_CONFIG
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_builder.name #=> String
+    #   resp.image_builder.arn #=> String
+    #   resp.image_builder.image_arn #=> String
+    #   resp.image_builder.description #=> String
+    #   resp.image_builder.display_name #=> String
+    #   resp.image_builder.vpc_config.subnet_ids #=> Array
+    #   resp.image_builder.vpc_config.subnet_ids[0] #=> String
+    #   resp.image_builder.vpc_config.security_group_ids #=> Array
+    #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
+    #   resp.image_builder.instance_type #=> String
+    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "WINDOWS_11", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
+    #   resp.image_builder.iam_role_arn #=> String
+    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS", "PENDING_IMAGE_IMPORT"
+    #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
+    #   resp.image_builder.state_change_reason.message #=> String
+    #   resp.image_builder.created_time #=> Time
+    #   resp.image_builder.enable_default_internet_access #=> Boolean
+    #   resp.image_builder.domain_join_info.directory_name #=> String
+    #   resp.image_builder.domain_join_info.organizational_unit_distinguished_name #=> String
+    #   resp.image_builder.network_access_configuration.eni_private_ip_address #=> String
+    #   resp.image_builder.network_access_configuration.eni_ipv_6_addresses #=> Array
+    #   resp.image_builder.network_access_configuration.eni_ipv_6_addresses[0] #=> String
+    #   resp.image_builder.network_access_configuration.eni_id #=> String
+    #   resp.image_builder.image_builder_errors #=> Array
+    #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "MACHINE_ROLE_IS_MISSING", "STS_DISABLED_IN_REGION", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "FLEET_STOPPED", "FLEET_INSTANCE_PROVISIONING_FAILURE", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR", "VALIDATION_ERROR"
+    #   resp.image_builder.image_builder_errors[0].error_message #=> String
+    #   resp.image_builder.image_builder_errors[0].error_timestamp #=> Time
+    #   resp.image_builder.appstream_agent_version #=> String
+    #   resp.image_builder.access_endpoints #=> Array
+    #   resp.image_builder.access_endpoints[0].endpoint_type #=> String, one of "STREAMING"
+    #   resp.image_builder.access_endpoints[0].vpce_id #=> String
+    #   resp.image_builder.root_volume_config.volume_size_in_gb #=> Integer
+    #   resp.image_builder.latest_appstream_agent_version #=> String, one of "TRUE", "FALSE"
+    #   resp.image_builder.disable_imdsv1 #=> Boolean
+    #   resp.image_builder.agent_access_config.settings #=> Array
+    #   resp.image_builder.agent_access_config.settings[0].agent_action #=> String, one of "COMPUTER_VISION", "COMPUTER_INPUT", "FORWARD_MCP_TOOLS"
+    #   resp.image_builder.agent_access_config.settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.image_builder.agent_access_config.s3_bucket_arn #=> String
+    #   resp.image_builder.agent_access_config.screenshots_upload_enabled #=> Boolean
+    #   resp.image_builder.agent_access_config.screen_resolution #=> String, one of "W_1280xH_720"
+    #   resp.image_builder.agent_access_config.screen_image_format #=> String, one of "PNG", "JPEG"
+    #   resp.image_builder.agent_access_config.user_control_mode #=> String, one of "VIEW_ONLY", "VIEW_STOP", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateImageBuilder AWS API Documentation
+    #
+    # @overload update_image_builder(params = {})
+    # @param [Hash] params ({})
+    def update_image_builder(params = {}, options = {})
+      req = build_request(:update_image_builder, params)
+      req.send_request(options)
+    end
+
     # Adds or updates permissions for the specified private image.
     #
     # @option params [required, String] :name
@@ -6304,7 +6470,7 @@ module Aws::AppStream
     #     delete_storage_connectors: false,
     #     redirect_url: "RedirectURL",
     #     feedback_url: "FeedbackURL",
-    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS, STREAMING_EXPERIENCE_SETTINGS, CONTENT_REDIRECTION, AGENT_ACCESS_CONFIG, STORAGE_CONNECTOR_AUTHENTICATION
+    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS, STREAMING_EXPERIENCE_SETTINGS, CONTENT_REDIRECTION, AGENT_ACCESS_CONFIG, STORAGE_CONNECTOR_AUTHENTICATION, AGENT_ACCESS_CONFIG_KMS_KEY_ARN
     #     user_settings: [
     #       {
     #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN, AUTO_TIME_ZONE_REDIRECTION
@@ -6342,6 +6508,8 @@ module Aws::AppStream
     #       ],
     #       s3_bucket_arn: "S3BucketArn",
     #       screenshots_upload_enabled: false,
+    #       replay_session_enabled: false,
+    #       kms_key_arn: "KmsKeyArn",
     #       screen_resolution: "W_1280xH_720", # accepts W_1280xH_720
     #       screen_image_format: "PNG", # accepts PNG, JPEG
     #       user_control_mode: "VIEW_ONLY", # accepts VIEW_ONLY, VIEW_STOP, DISABLED
@@ -6391,6 +6559,8 @@ module Aws::AppStream
     #   resp.stack.agent_access_config.settings[0].permission #=> String, one of "ENABLED", "DISABLED"
     #   resp.stack.agent_access_config.s3_bucket_arn #=> String
     #   resp.stack.agent_access_config.screenshots_upload_enabled #=> Boolean
+    #   resp.stack.agent_access_config.replay_session_enabled #=> Boolean
+    #   resp.stack.agent_access_config.kms_key_arn #=> String
     #   resp.stack.agent_access_config.screen_resolution #=> String, one of "W_1280xH_720"
     #   resp.stack.agent_access_config.screen_image_format #=> String, one of "PNG", "JPEG"
     #   resp.stack.agent_access_config.user_control_mode #=> String, one of "VIEW_ONLY", "VIEW_STOP", "DISABLED"
@@ -6510,7 +6680,7 @@ module Aws::AppStream
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.155.0'
+      context[:gem_version] = '1.156.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

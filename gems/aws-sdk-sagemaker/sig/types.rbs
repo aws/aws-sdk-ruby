@@ -1274,17 +1274,21 @@ module Aws::SageMaker
     end
 
     class ClusterAutoPatchConfig
-      attr_accessor patching_strategy: ("WhenIdle" | "WhenAllIdle")
+      attr_accessor patching_strategy: ("WhenIdle" | "WhenAllIdle" | "DrainFirst")
       attr_accessor patch_schedule: Types::ClusterPatchSchedule
       attr_accessor deployment_config: Types::DeploymentConfiguration
+      attr_accessor idle_wait_window_in_seconds: ::Integer
+      attr_accessor drain_policy: Types::ClusterDrainPolicy
       SENSITIVE: []
     end
 
     class ClusterAutoPatchConfigDetails
-      attr_accessor patching_strategy: ("WhenIdle" | "WhenAllIdle")
+      attr_accessor patching_strategy: ("WhenIdle" | "WhenAllIdle" | "DrainFirst")
       attr_accessor current_patch_schedule: Types::ClusterPatchScheduleDetails
       attr_accessor desired_patch_schedule: Types::ClusterPatchScheduleDetails
       attr_accessor deployment_config: Types::DeploymentConfiguration
+      attr_accessor idle_wait_window_in_seconds: ::Integer
+      attr_accessor drain_policy: Types::ClusterDrainPolicy
       SENSITIVE: []
     end
 
@@ -1308,6 +1312,12 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class ClusterDrainPolicy
+      attr_accessor drain_timeout_in_seconds: ::Integer
+      attr_accessor on_drain_timeout: ("Force" | "Skip")
+      SENSITIVE: []
+    end
+
     class ClusterEbsVolumeConfig
       attr_accessor volume_size_in_gb: ::Integer
       attr_accessor volume_kms_key_id: ::String
@@ -1326,6 +1336,7 @@ module Aws::SageMaker
       attr_accessor event_details: Types::EventDetails
       attr_accessor description: ::String
       attr_accessor event_level: ("Info" | "Warn" | "Error")
+      attr_accessor operation_id: ::String
       SENSITIVE: []
     end
 
@@ -1339,6 +1350,7 @@ module Aws::SageMaker
       attr_accessor event_time: ::Time
       attr_accessor description: ::String
       attr_accessor event_level: ("Info" | "Warn" | "Error")
+      attr_accessor operation_id: ::String
       SENSITIVE: []
     end
 
@@ -1558,6 +1570,30 @@ module Aws::SageMaker
     end
 
     class ClusterOnDemandOptions < Aws::EmptyStructure
+    end
+
+    class ClusterOperationScalingConfiguration
+      attr_accessor current_count: ::Integer
+      attr_accessor target_count: ::Integer
+      attr_accessor min_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ClusterOperationScalingDetails
+      attr_accessor instance_group_name: ::String
+      attr_accessor status: ("InProgress" | "Superseded" | "Done")
+      attr_accessor original: Types::ClusterOperationScalingConfiguration
+      attr_accessor desired: Types::ClusterOperationScalingConfiguration
+      SENSITIVE: []
+    end
+
+    class ClusterOperationSummary
+      attr_accessor operation_id: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor type: ("Scaling" | "DeepHealthCheck")
+      attr_accessor status: ("InProgress" | "Superseded" | "Done")
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
     end
 
     class ClusterOrchestrator
@@ -4066,6 +4102,7 @@ module Aws::SageMaker
     class DescribeClusterExtensionResponse
       attr_accessor extension_details: Types::ExtensionDetails
       attr_accessor node_summary: Types::ExtensionNodeSummary
+      attr_accessor health: Types::ExtensionHealth
       SENSITIVE: []
     end
 
@@ -4078,6 +4115,23 @@ module Aws::SageMaker
 
     class DescribeClusterNodeResponse
       attr_accessor node_details: Types::ClusterNodeDetails
+      SENSITIVE: []
+    end
+
+    class DescribeClusterOperationRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClusterOperationResponse
+      attr_accessor operation_id: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor type: ("Scaling" | "DeepHealthCheck")
+      attr_accessor status: ("InProgress" | "Superseded" | "Done")
+      attr_accessor creation_time: ::Time
+      attr_accessor scaling_details: ::Array[Types::ClusterOperationScalingDetails]
+      attr_accessor deep_health_check_details: ::Array[Types::InstanceGroupHealthCheckConfiguration]
       SENSITIVE: []
     end
 
@@ -6106,6 +6160,18 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class ExtensionHealth
+      attr_accessor issues: ::Array[Types::ExtensionHealthIssue]
+      SENSITIVE: []
+    end
+
+    class ExtensionHealthIssue
+      attr_accessor code: ("InvalidConfiguration" | "ConfigurationConflict" | "AccessDenied" | "ResourceNotFound" | "DependencyUnreachable" | "ExtensionUnhealthy" | "InternalFailure" | "Other")
+      attr_accessor message: ::String
+      attr_accessor node_count: ::Integer
+      SENSITIVE: []
+    end
+
     class ExtensionNodeSummary
       attr_accessor total_count: ::Integer
       attr_accessor active_count: ::Integer
@@ -6118,6 +6184,11 @@ module Aws::SageMaker
       attr_accessor extension_version: ::String
       attr_accessor status: ("Creating" | "Active" | "CreateFailed" | "Updating" | "Deleting" | "DeleteFailed" | "Degraded" | "UpdateFailed")
       attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ExtensionVersionSummary
+      attr_accessor extension_version: ::String
       SENSITIVE: []
     end
 
@@ -7542,6 +7613,7 @@ module Aws::SageMaker
       attr_accessor sort_by: ("EventTime")
       attr_accessor sort_order: ("Ascending" | "Descending")
       attr_accessor resource_type: ("Cluster" | "InstanceGroup" | "Instance")
+      attr_accessor operation_id: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -7550,6 +7622,19 @@ module Aws::SageMaker
     class ListClusterEventsResponse
       attr_accessor next_token: ::String
       attr_accessor events: ::Array[Types::ClusterEventSummary]
+      SENSITIVE: []
+    end
+
+    class ListClusterExtensionVersionsRequest
+      attr_accessor extension_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClusterExtensionVersionsResponse
+      attr_accessor extension_versions: ::Array[Types::ExtensionVersionSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -7584,6 +7669,25 @@ module Aws::SageMaker
     class ListClusterNodesResponse
       attr_accessor next_token: ::String
       attr_accessor cluster_node_summaries: ::Array[Types::ClusterNodeSummary]
+      SENSITIVE: []
+    end
+
+    class ListClusterOperationsRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor status: ("InProgress" | "Superseded" | "Done")
+      attr_accessor type: ("Scaling" | "DeepHealthCheck")
+      attr_accessor creation_time_after: ::Time
+      attr_accessor creation_time_before: ::Time
+      attr_accessor sort_by: ("CreationTime")
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClusterOperationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor cluster_operation_summaries: ::Array[Types::ClusterOperationSummary]
       SENSITIVE: []
     end
 

@@ -281,7 +281,7 @@ module Aws
                                     role_arn: ::String,
                                     ?description: ::String,
                                     configuration: Params::cloud_connector_configuration,
-                                    config_connector_arn: ::String,
+                                    ?config_connector_arn: ::String,
                                     ?tags: Array[
                                       {
                                         key: ::String,
@@ -1844,7 +1844,7 @@ module Aws
                                    ?next_token: ::String,
                                    ?filters: Array[
                                      {
-                                       filter_key: ("SubscriptionId" | "TenantId")?,
+                                       filter_key: ("SubscriptionId" | "TenantId" | "ProjectId" | "OrganizationId")?,
                                        filter_values: Array[::String]?
                                      }
                                    ]

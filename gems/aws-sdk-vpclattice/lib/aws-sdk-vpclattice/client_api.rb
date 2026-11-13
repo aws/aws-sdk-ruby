@@ -1606,6 +1606,7 @@ module Aws::VPCLattice
 
     UpdateResourceGatewayRequest.add_member(:resource_gateway_identifier, Shapes::ShapeRef.new(shape: ResourceGatewayIdentifier, required: true, location: "uri", location_name: "resourceGatewayIdentifier"))
     UpdateResourceGatewayRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: UpdateResourceGatewayRequestSecurityGroupIdsList, location_name: "securityGroupIds"))
+    UpdateResourceGatewayRequest.add_member(:resource_config_dns_resolution, Shapes::ShapeRef.new(shape: ResourceConfigDnsResolution, location_name: "resourceConfigDnsResolution"))
     UpdateResourceGatewayRequest.struct_class = Types::UpdateResourceGatewayRequest
 
     UpdateResourceGatewayRequestSecurityGroupIdsList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
@@ -1618,6 +1619,7 @@ module Aws::VPCLattice
     UpdateResourceGatewayResponse.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetList, location_name: "subnetIds"))
     UpdateResourceGatewayResponse.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupList, location_name: "securityGroupIds"))
     UpdateResourceGatewayResponse.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
+    UpdateResourceGatewayResponse.add_member(:resource_config_dns_resolution, Shapes::ShapeRef.new(shape: ResourceConfigDnsResolution, location_name: "resourceConfigDnsResolution"))
     UpdateResourceGatewayResponse.struct_class = Types::UpdateResourceGatewayResponse
 
     UpdateRuleRequest.add_member(:service_identifier, Shapes::ShapeRef.new(shape: ServiceIdentifier, required: true, location: "uri", location_name: "serviceIdentifier"))

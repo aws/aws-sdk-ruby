@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2026-11-13)
+------------------
+
+* Feature - Releasing Firewall Proxy API and deprecating Egress Proxy API.
+
 1.109.0 (2026-11-11)
 ------------------
 

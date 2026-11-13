@@ -49,12 +49,13 @@ module Aws::LambdaCore
   end
   autoload :Client, 'aws-sdk-lambdacore/client'
   autoload :Errors, 'aws-sdk-lambdacore/errors'
+  autoload :Waiters, 'aws-sdk-lambdacore/waiters'
   autoload :Resource, 'aws-sdk-lambdacore/resource'
   autoload :EndpointParameters, 'aws-sdk-lambdacore/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-lambdacore/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-lambdacore/endpoints'
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.15.0'
 
 end
 
