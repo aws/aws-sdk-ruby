@@ -105,6 +105,26 @@ module Seahorse
           expect(config.build!.proc).to be(value)
         end
 
+        it 'enumerates configuration members and values' do
+          config.add_option(:name, 'John Doe')
+          config.add_option(:color, 'red')
+
+          expect(config.build!.each_pair.to_a).to eq(
+            [[:color, 'red'], [:name, 'John Doe']]
+          )
+        end
+
+        it 'duplicates configuration attributes independently' do
+          config.add_option(:name, 'John Doe')
+          original = config.build!
+          copy = original.dup
+
+          copy.name = 'Jane Doe'
+
+          expect(original.name).to eq('John Doe')
+          expect(copy.name).to eq('Jane Doe')
+        end
+
         it 'resolves defaults in LIFO order until a non-nil value is found' do
           # default cost is 10
           config.add_option(:cost) { 10 }

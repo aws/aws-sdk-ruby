@@ -100,6 +100,21 @@ module Seahorse
           @attributes[name] = value
         end
 
+        def each_pair
+          return enum_for(:each_pair) unless block_given?
+
+          @members.each do |member|
+            yield(member, @attributes[member])
+          end
+          self
+        end
+
+        def initialize_copy(source)
+          super
+          @members = @members.dup
+          @attributes = @attributes.dup
+        end
+
         private
 
         alias_method :write_attribute, :[]=
