@@ -42,6 +42,52 @@ module Aws
         end
       end
 
+      describe '#modeled_invalidating_error?' do
+        def context_with_errors(*refs)
+          operation = Seahorse::Model::Operation.new
+          operation.errors = refs
+          double('context', operation: operation)
+        end
+
+        def error_ref(name, code = nil)
+          shape = Seahorse::Model::Shapes::StructureShape.new(name: name)
+          shape['error'] = { 'code' => code } if code
+          Seahorse::Model::Shapes::ShapeRef.new(shape: shape)
+        end
+
+        it 'returns true when the operation models the error code' do
+          context = context_with_errors(error_ref('ExpiredTokenError', 'ExpiredTokenException'))
+          expect(
+            inspector(RetryErrorsSvc::Errors::ExpiredTokenException)
+              .modeled_invalidating_error?(context)
+          ).to be(true)
+        end
+
+        it 'uses the shape name when the model specifies no code' do
+          context = context_with_errors(error_ref('ExpiredToken'))
+          expect(
+            inspector(RetryErrorsSvc::Errors::ExpiredToken)
+              .modeled_invalidating_error?(context)
+          ).to be(true)
+        end
+
+        it 'returns false when the operation does not model the error' do
+          context = context_with_errors(error_ref('ExpiredTokenException', 'ExpiredTokenException'))
+          expect(
+            inspector(RetryErrorsSvc::Errors::ExpiredToken)
+              .modeled_invalidating_error?(context)
+          ).to be(false)
+        end
+
+        it 'returns false for errors that are not invalidating errors' do
+          context = context_with_errors(error_ref('InvalidClientTokenId', 'InvalidClientTokenId'))
+          expect(
+            inspector(RetryErrorsSvc::Errors::InvalidClientTokenId)
+              .modeled_invalidating_error?(context)
+          ).to be(false)
+        end
+      end
+
       describe '#refreshing_auth_error?' do
         refreshing_errors = [
           RetryErrorsSvc::Errors::InvalidClientTokenId,

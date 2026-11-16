@@ -230,6 +230,19 @@ module Aws
         expect(resp.context.retries).to eq(1)
       end
 
+      it 'does not invalidate or retry an error the operation models' do
+        provider = double('credential_provider', invalidate: nil)
+        config.credentials = provider
+        resp.context[:signing_credentials] = Credentials.new('akid', 'secret')
+        error_shape = Seahorse::Model::Shapes::StructureShape.new(name: 'ExpiredTokenException')
+        operation.errors << Seahorse::Model::Shapes::ShapeRef.new(shape: error_shape)
+
+        expect(provider).not_to receive(:invalidate)
+        resp.error = RetryErrorsSvc::Errors::ExpiredTokenException.new(nil, nil)
+        handle { |_context| resp }
+        expect(resp.context.retries).to eq(0)
+      end
+
       it 'does not invalidate or retry when the provider does not support it' do
         resp.error = RetryErrorsSvc::Errors::ExpiredToken.new(nil, nil)
         handle { |_context| resp }
@@ -260,6 +273,18 @@ module Aws
           resp
         end
         expect(resp.context.retries).to eq(1)
+      end
+
+      it 'does not refresh or retry an error the operation models' do
+        provider = double('refreshing_credential_provider', refresh!: nil)
+        config.credentials = provider
+        error_shape = Seahorse::Model::Shapes::StructureShape.new(name: 'ExpiredTokenException')
+        operation.errors << Seahorse::Model::Shapes::ShapeRef.new(shape: error_shape)
+
+        expect(provider).not_to receive(:refresh!)
+        resp.error = RetryErrorsSvc::Errors::ExpiredTokenException.new(nil, nil)
+        handle { |_context| resp }
+        expect(resp.context.retries).to eq(0)
       end
 
       it 'invalidates instead of refreshing for a rejected-credentials error when the provider implements invalidate' do

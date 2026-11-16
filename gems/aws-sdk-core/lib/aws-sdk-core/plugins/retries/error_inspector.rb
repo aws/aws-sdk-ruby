@@ -92,6 +92,15 @@ module Aws
           REFRESHING_AUTH_ERRORS.include?(@name) || !!(@name =~ /expired/i)
         end
 
+        def modeled_invalidating_error?(context)
+          return false unless invalidating_auth_error?
+
+          operation = context.operation
+          return false if operation.nil?
+
+          operation.errors.any? { |ref| error_code(ref.shape) == @name }
+        end
+
         def throttling_error?
           !!(THROTTLING_ERRORS.include?(@name) ||
             @name.match(/throttl/i) ||
@@ -152,6 +161,7 @@ module Aws
 
         def auth_error_retryable?(context)
           return false unless invalidating_auth_error? || refreshing_auth_error?
+          return false if modeled_invalidating_error?(context)
           return invalidatable_credentials?(context) if context.config.credentials.respond_to?(:invalidate)
 
           refreshing_auth_error? && refreshable_credentials?(context)
@@ -169,6 +179,11 @@ module Aws
         def refreshable_credentials?(context)
           provider = context.config.credentials
           !provider.respond_to?(:invalidate) && provider.respond_to?(:refresh!)
+        end
+
+        def error_code(shape)
+          error = shape['error']
+          (error && error['code']) || shape.name
         end
 
         def extract_name(error)

@@ -544,6 +544,18 @@ module Aws
             expect(resp.context.retries).to eq(0)
           end
 
+          it 'does not invalidate or retry an error the operation models' do
+            error_shape = Seahorse::Model::Shapes::StructureShape.new(name: 'ExpiredTokenException')
+            operation.errors << Seahorse::Model::Shapes::ShapeRef.new(shape: error_shape)
+            expect(provider).not_to receive(:invalidate)
+
+            resp.context.http_response.status_code = 400
+            resp.error = RetryErrorsSvc::Errors::ExpiredTokenException.new(nil, nil)
+            handle { |_context| resp }
+
+            expect(resp.context.retries).to eq(0)
+          end
+
           it 'does not invalidate or retry when the provider does not support it' do
             config.credentials = Credentials.new('akid', 'secret')
 
@@ -591,6 +603,18 @@ module Aws
               }
             ]
             handle_with_retry(test_case_def)
+          end
+
+          it 'does not refresh or retry an error the operation models' do
+            error_shape = Seahorse::Model::Shapes::StructureShape.new(name: 'ExpiredTokenException')
+            operation.errors << Seahorse::Model::Shapes::ShapeRef.new(shape: error_shape)
+            expect(provider).not_to receive(:refresh!)
+
+            resp.context.http_response.status_code = 400
+            resp.error = RetryErrorsSvc::Errors::ExpiredTokenException.new(nil, nil)
+            handle { |_context| resp }
+
+            expect(resp.context.retries).to eq(0)
           end
 
           it 'invalidates instead of refreshing when the provider implements invalidate' do
