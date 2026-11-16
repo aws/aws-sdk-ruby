@@ -132,6 +132,62 @@ module Aws
         end
       end
 
+      context 'invalidated credentials' do
+        let(:signin_resp) do
+          {
+            token_output: {
+              access_token: {
+                access_key_id: 'new_akid',
+                secret_access_key: 'new_secret',
+                session_token: 'new_token'
+              },
+              token_type: 'aws_sigv4',
+              expires_in: 900,
+              refresh_token: 'new_refresh_token',
+              id_token: 'identity_token'
+            }
+          }
+        end
+
+        before do
+          allow_any_instance_of(LoginCredentials).to receive(:warn).with(/WARNING: OpenSSL 3.6.x/)
+        end
+
+        it 'refreshes through Sign-In even though the cached token is valid' do
+          mock_token_file(login_session, cached_token)
+          client.stub_responses(:create_o_auth_2_token, signin_resp)
+          creds = LoginCredentials.new(login_session: login_session, client: client)
+          creds.invalidate(creds.credentials)
+
+          expect(creds.credentials.access_key_id).to eq('new_akid')
+          expect(client.api_requests.size).to eq(1)
+        end
+
+        it 'keeps the cached credentials and applies backoff when the refresh fails' do
+          mock_token_file(login_session, cached_token)
+          client.stub_responses(:create_o_auth_2_token, 'InternalError')
+          creds = LoginCredentials.new(login_session: login_session, client: client)
+          creds.invalidate(creds.credentials)
+
+          allow_any_instance_of(LoginCredentials).to receive(:warn) # the OpenSSL 3.6 notice
+          expect_any_instance_of(LoginCredentials).to receive(:warn).with(/Credential refresh failed/)
+          expect(creds.credentials.access_key_id).to eq('akid')
+          expect(creds.rate_limited?).to be(true)
+        end
+
+        it 'uses a cached token that already holds different credentials without calling Sign-In' do
+          mock_token_file(login_session, cached_token)
+          creds = LoginCredentials.new(login_session: login_session, client: client)
+          creds.invalidate(creds.credentials)
+
+          cached_token['accessToken']['accessKeyId'] = 'new_akid'
+          mock_token_file(login_session, cached_token)
+
+          expect(client).to_not receive(:create_o_auth_2_token)
+          expect(creds.credentials.access_key_id).to eq('new_akid')
+        end
+      end
+
       context 'expired token with refresh token' do
         let(:time) { Time.parse('2026-01-01 00:00:00 UTC') }
         let(:old_expiration) { (time + 60).to_datetime.rfc3339 }

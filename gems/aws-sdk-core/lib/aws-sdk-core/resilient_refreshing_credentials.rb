@@ -50,6 +50,7 @@ module Aws
       @cached_error = nil
       @cached_error_expires_at = nil
       @advisory_window = nil
+      @invalidated_access_key_id = nil
       fetch_initial_credentials
     end
 
@@ -81,6 +82,7 @@ module Aws
       begin
         if @credentials && @credentials.access_key_id == rejected_credentials.access_key_id
           @expiration = Time.now
+          @invalidated_access_key_id = rejected_credentials.access_key_id
         end
       ensure
         @mutex.unlock
@@ -224,7 +226,12 @@ module Aws
       @next_refresh_allowed_at = nil
       @cached_error = nil
       @cached_error_expires_at = nil
+      @invalidated_access_key_id = nil
       @advisory_window = select_advisory_window
+    end
+
+    def invalidated?(access_key_id)
+      !@invalidated_access_key_id.nil? && @invalidated_access_key_id == access_key_id
     end
 
     def refresh_needed?

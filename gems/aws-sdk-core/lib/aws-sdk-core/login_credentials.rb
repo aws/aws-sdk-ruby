@@ -53,9 +53,12 @@ module Aws
     def refresh
       # First reload the token from disk to ensure it hasn't been refreshed externally
       token_json = read_cached_token
-      update_creds(token_json['accessToken'])
-      # if the reloaded token is fresh use it without contacting Sign-In
-      return unless refresh_needed?
+      # A token that still holds credentials rejected by a service must not be reused, even if it is fresh
+      unless invalidated?(token_json['accessToken']['accessKeyId'])
+        update_creds(token_json['accessToken'])
+        # if the reloaded token is fresh use it without contacting Sign-In
+        return unless refresh_needed?
+      end
 
       # Using OpenSSL 3.6.0 may result in errors like "certificate verify failed (unable to get certificate CRL)."
       # A recommended workaround is to use OpenSSL version < 3.6.0 or requiring the openssl gem with a version of at
