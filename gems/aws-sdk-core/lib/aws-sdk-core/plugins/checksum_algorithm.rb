@@ -509,6 +509,7 @@ module Aws
           @chunk_size = Thread.current[:net_http_override_body_stream_chunk] || DEFAULT_TRAILER_CHUNK_SIZE
           @overhead_bytes = calculate_overhead(@chunk_size)
           @base_chunk_size = @chunk_size - @overhead_bytes
+          @full_chunk_size_hex = @base_chunk_size.to_s(HEX_BASE).freeze
           @chunk = ''.b
           @read_chunk = method(buffer_enabled ? :read_chunk_with_buffer : :read_chunk_without_buffer)
           @encoded_buffer = +''
@@ -521,7 +522,7 @@ module Aws
           n_full_chunks = orig_body_size / @base_chunk_size
           partial_bytes = orig_body_size % @base_chunk_size
 
-          full_chunk_overhead = @base_chunk_size.to_s(HEX_BASE).size + CHUNK_OVERHEAD
+          full_chunk_overhead = @full_chunk_size_hex.bytesize + CHUNK_OVERHEAD
           chunked_body_size = n_full_chunks * (@base_chunk_size + full_chunk_overhead)
           unless partial_bytes.zero?
             chunked_body_size += partial_bytes.to_s(HEX_BASE).size + partial_bytes + CHUNK_OVERHEAD
@@ -582,12 +583,16 @@ module Aws
             chunk = @read_chunk.call
             if chunk && !chunk.empty?
               @digest.update(chunk)
-              @encoded_buffer << chunk.bytesize.to_s(HEX_BASE) << "\r\n" << chunk << "\r\n"
+              @encoded_buffer << chunk_size_hex(chunk.bytesize) << "\r\n" << chunk << "\r\n"
             else
               @encoded_buffer << "0\r\n" << trailer_string << "\r\n\r\n"
               @eof = true
             end
           end
+        end
+
+        def chunk_size_hex(bytesize)
+          bytesize == @base_chunk_size ? @full_chunk_size_hex : bytesize.to_s(HEX_BASE)
         end
 
         def trailer_string
