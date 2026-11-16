@@ -80,9 +80,41 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _ConfigureTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfigureTagsResponse]
+        def configured_tag_keys: () -> ::Array[Types::ResourceTagKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#configure_tags-instance_method
+      def configure_tags: (
+                            tag_keys: Array[
+                              {
+                                key: ::String?,
+                                enabled_for_event_bridge: bool?,
+                                status: ("PENDING" | "ACTIVE")?
+                              }
+                            ]
+                          ) -> _ConfigureTagsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConfigureTagsResponseSuccess
+
+      interface _ConfigureTagsForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfigureTagsForOrganizationResponse]
+        def configured_tag_keys: () -> ::Array[Types::TagKeyForOrganization]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#configure_tags_for_organization-instance_method
+      def configure_tags_for_organization: (
+                                             tag_keys: Array[
+                                               {
+                                                 key: ::String?,
+                                                 enabled_for_event_bridge: bool?
+                                               }
+                                             ]
+                                           ) -> _ConfigureTagsForOrganizationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConfigureTagsForOrganizationResponseSuccess
+
       interface _DescribeAffectedAccountsForOrganizationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAffectedAccountsForOrganizationResponse]
         def affected_accounts: () -> ::Array[::String]
+        def affected_account_entities: () -> ::Array[Types::AccountEntity]
         def event_scope_code: () -> ("PUBLIC" | "ACCOUNT_SPECIFIC" | "NONE")
         def next_token: () -> ::String
       end
@@ -90,7 +122,11 @@ module Aws
       def describe_affected_accounts_for_organization: (
                                                          event_arn: ::String,
                                                          ?next_token: ::String,
-                                                         ?max_results: ::Integer
+                                                         ?max_results: ::Integer,
+                                                         ?filter: {
+                                                           event_arn: ::String?,
+                                                           tags: Hash[::String, Array[::String]]?
+                                                         }
                                                        ) -> _DescribeAffectedAccountsForOrganizationResponseSuccess
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAffectedAccountsForOrganizationResponseSuccess
 
@@ -111,9 +147,7 @@ module Aws
                                               to: ::Time?
                                             }
                                           ]?,
-                                          tags: Array[
-                                            Hash[::String, ::String]
-                                          ]?,
+                                          tags: Hash[::String, Array[::String]]?,
                                           status_codes: Array[("IMPAIRED" | "UNIMPAIRED" | "UNKNOWN" | "PENDING" | "RESOLVED")]?
                                         },
                                         ?locale: ::String,
@@ -143,7 +177,8 @@ module Aws
                                                            {
                                                              event_arn: ::String,
                                                              aws_account_id: ::String?,
-                                                             status_codes: Array[("IMPAIRED" | "UNIMPAIRED" | "UNKNOWN" | "PENDING" | "RESOLVED")]?
+                                                             status_codes: Array[("IMPAIRED" | "UNIMPAIRED" | "UNKNOWN" | "PENDING" | "RESOLVED")]?,
+                                                             tags: Hash[::String, Array[::String]]?
                                                            }
                                                          ]
                                                        ) -> _DescribeAffectedEntitiesForOrganizationResponseSuccess
@@ -155,7 +190,10 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_entity_aggregates-instance_method
       def describe_entity_aggregates: (
-                                        ?event_arns: Array[::String]
+                                        ?event_arns: Array[::String],
+                                        ?filter: {
+                                          tags: Hash[::String, Array[::String]]?
+                                        }
                                       ) -> _DescribeEntityAggregatesResponseSuccess
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEntityAggregatesResponseSuccess
 
@@ -166,7 +204,10 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_entity_aggregates_for_organization-instance_method
       def describe_entity_aggregates_for_organization: (
                                                          event_arns: Array[::String],
-                                                         ?aws_account_ids: Array[::String]
+                                                         ?aws_account_ids: Array[::String],
+                                                         ?filter: {
+                                                           tags: Hash[::String, Array[::String]]?
+                                                         }
                                                        ) -> _DescribeEntityAggregatesForOrganizationResponseSuccess
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEntityAggregatesForOrganizationResponseSuccess
 
@@ -276,7 +317,8 @@ module Aws
                                                 entity_values: Array[::String]?,
                                                 event_type_categories: Array[("issue" | "accountNotification" | "scheduledChange" | "investigation")]?,
                                                 event_status_codes: Array[("open" | "closed" | "upcoming")]?,
-                                                personas: Array[("OPERATIONS" | "SECURITY" | "BILLING")]?
+                                                personas: Array[("OPERATIONS" | "SECURITY" | "BILLING")]?,
+                                                tags: Hash[::String, Array[::String]]?
                                               },
                                               ?next_token: ::String,
                                               ?max_results: ::Integer,
@@ -307,13 +349,88 @@ module Aws
                                       ) -> _DescribeServiceLifecycleResponseSuccess
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeServiceLifecycleResponseSuccess
 
+      interface _DescribeTagKeysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTagKeysResponse]
+        def keys: () -> ::Array[Types::ResourceTagKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_tag_keys-instance_method
+      def describe_tag_keys: () -> _DescribeTagKeysResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTagKeysResponseSuccess
+
+      interface _DescribeTagKeysForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTagKeysForOrganizationResponse]
+        def keys: () -> ::Array[Types::OrganizationTagKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_tag_keys_for_organization-instance_method
+      def describe_tag_keys_for_organization: () -> _DescribeTagKeysForOrganizationResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTagKeysForOrganizationResponseSuccess
+
+      interface _DescribeTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTagsResponse]
+        def tags: () -> ::Array[Types::AccountTag]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_tags-instance_method
+      def describe_tags: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _DescribeTagsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTagsResponseSuccess
+
+      interface _DescribeTagsForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTagsForOrganizationResponse]
+        def tags: () -> ::Array[Types::OrganizationTag]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_tags_for_organization-instance_method
+      def describe_tags_for_organization: (
+                                            ?filter: {
+                                              tag_types: Array[("ORGANIZATION_RESOURCE_TAG" | "ORGANIZATION_ACCOUNT_TAG")]?
+                                            },
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer
+                                          ) -> _DescribeTagsForOrganizationResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTagsForOrganizationResponseSuccess
+
+      interface _DescribeTagsOnboardingStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTagsOnboardingStatusResponse]
+        def status: () -> ("ENABLED" | "DISABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_tags_onboarding_status-instance_method
+      def describe_tags_onboarding_status: () -> _DescribeTagsOnboardingStatusResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTagsOnboardingStatusResponseSuccess
+
+      interface _DescribeTagsOnboardingStatusForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTagsOnboardingStatusForOrganizationResponse]
+        def status: () -> ("ENABLED" | "DISABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_tags_onboarding_status_for_organization-instance_method
+      def describe_tags_onboarding_status_for_organization: () -> _DescribeTagsOnboardingStatusForOrganizationResponseSuccess
+                                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTagsOnboardingStatusForOrganizationResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#disable_health_service_access_for_organization-instance_method
       def disable_health_service_access_for_organization: () -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#disable_tags-instance_method
+      def disable_tags: () -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#disable_tags_for_organization-instance_method
+      def disable_tags_for_organization: () -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#enable_health_service_access_for_organization-instance_method
       def enable_health_service_access_for_organization: () -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#enable_tags-instance_method
+      def enable_tags: () -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#enable_tags_for_organization-instance_method
+      def enable_tags_for_organization: () -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
     end
   end
 end

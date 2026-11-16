@@ -36,9 +36,7 @@ module Aws
       entity_arns: Array[::String]?,
       entity_values: Array[::String]?,
       event_type_categories: Array[("issue" | "accountNotification" | "scheduledChange" | "investigation")]?,
-      tags: Array[
-        Hash[::String, ::String]
-      ]?,
+      tags: Hash[::String, Array[::String]]?,
       event_status_codes: Array[("open" | "closed" | "upcoming")]?,
       personas: Array[("OPERATIONS" | "SECURITY" | "BILLING")]?
     }

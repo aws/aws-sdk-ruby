@@ -23,6 +23,25 @@ module Aws::S3Vectors
       include Aws::Structure
     end
 
+    # The raw BM25 relevance score for a single searchable metadata key.
+    #
+    # @!attribute [rw] metadata_key
+    #   The searchable metadata key that the score applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The BM25 relevance score.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/Bm25Score AWS API Documentation
+    #
+    class Bm25Score < Struct.new(
+      :metadata_key,
+      :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request failed because a vector bucket name or a vector index name
     # already exists. Vector bucket names must be unique within your Amazon
     # Web Services account for each Amazon Web Services Region. Vector index
@@ -916,11 +935,11 @@ module Aws::S3Vectors
     #
     # @!attribute [rw] non_filterable_metadata_keys
     #   Non-filterable metadata keys allow you to enrich vectors with
-    #   additional context during storage and retrieval. Unlike default
-    #   metadata keys, these keys can’t be used as query filters.
-    #   Non-filterable metadata keys can be retrieved but can’t be searched,
-    #   queried, or filtered. You can access non-filterable metadata keys of
-    #   your vectors after finding the vectors. For more information about
+    #   additional context during storage and retrieval. You can't use
+    #   these keys in metadata filters. You can still make a non-filterable
+    #   key full-text searchable by configuring it separately in
+    #   `textSearchConfigurations`. You can retrieve non-filterable metadata
+    #   keys after finding the vectors. For more information about
     #   non-filterable metadata keys, see [Vectors][1] and [Limitations and
     #   restrictions][2] in the *Amazon S3 User Guide*.
     #
@@ -930,10 +949,44 @@ module Aws::S3Vectors
     #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-limitations.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] text_search_configurations
+    #   Full-text search configurations for searchable metadata keys.
+    #   @return [Array<Types::TextSearchConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/MetadataConfiguration AWS API Documentation
     #
     class MetadataConfiguration < Struct.new(
-      :non_filterable_metadata_keys)
+      :non_filterable_metadata_keys,
+      :text_search_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Text search configurations to add to a vector index.
+    #
+    # @!attribute [rw] text_search_configurations
+    #   Text search configurations to add. Amazon S3 Vectors begins building
+    #   the corresponding full-text indexes after the update is accepted.
+    #   @return [Array<Types::TextSearchConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/MetadataConfigurationAdd AWS API Documentation
+    #
+    class MetadataConfigurationAdd < Struct.new(
+      :text_search_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Text search configurations to delete from a vector index.
+    #
+    # @!attribute [rw] text_search_configurations
+    #   Searchable metadata keys whose text search configurations to delete.
+    #   @return [Array<Types::TextSearchConfigurationKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/MetadataConfigurationDelete AWS API Documentation
+    #
+    class MetadataConfigurationDelete < Struct.new(
+      :text_search_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1082,15 +1135,21 @@ module Aws::S3Vectors
     #
     class PutVectorsOutput < Aws::EmptyStructure; end
 
-    # The attributes of a vector in the approximate nearest neighbor search.
+    # Contains the key and optional distance, relevance scores, and metadata
+    # for a vector returned by the `QueryVectors` operation.
     #
     # @!attribute [rw] distance
     #   The measure of similarity between the vector in the response and the
     #   query vector.
     #   @return [Float]
     #
+    # @!attribute [rw] scores
+    #   The relevance scores for a full-text-only or hybrid result, when
+    #   requested through `returnScores`.
+    #   @return [Types::QueryScores]
+    #
     # @!attribute [rw] key
-    #   The key of the vector in the approximate nearest neighbor search.
+    #   The key of the matching vector.
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -1101,8 +1160,55 @@ module Aws::S3Vectors
     #
     class QueryOutputVector < Struct.new(
       :distance,
+      :scores,
       :key,
       :metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Relevance scores for a full-text-only or hybrid search result.
+    #
+    # @!attribute [rw] fused
+    #   The Reciprocal Rank Fusion (RRF) score that combines the vector and
+    #   full-text rankings. This field is returned only for hybrid requests.
+    #   @return [Float]
+    #
+    # @!attribute [rw] bm25_scores
+    #   The BM25 scores for the searchable metadata keys that the result
+    #   matched.
+    #   @return [Array<Types::Bm25Score>]
+    #
+    # @!attribute [rw] vector_distance
+    #   The distance from the query vector. This field is returned when a
+    #   hybrid result matches the vector search.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/QueryScores AWS API Documentation
+    #
+    class QueryScores < Struct.new(
+      :fused,
+      :bm25_scores,
+      :vector_distance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A full-text search query for a single metadata key.
+    #
+    # @!attribute [rw] text
+    #   The full-text query string.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_key
+    #   The searchable metadata key to query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/QueryText AWS API Documentation
+    #
+    class QueryText < Struct.new(
+      :text,
+      :metadata_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1124,10 +1230,12 @@ module Aws::S3Vectors
     #   @return [Integer]
     #
     # @!attribute [rw] query_vector
-    #   The query vector. Ensure that the query vector has the same
-    #   dimension as the dimension of the vector index that's being
-    #   queried. For example, if your vector index contains vectors with 384
-    #   dimensions, your query vector must also have 384 dimensions.
+    #   The query vector for vector similarity search. The query vector must
+    #   have the same dimension as the vector index. For example, if the
+    #   vector index has 384 dimensions, the query vector must also have 384
+    #   dimensions. You can omit this parameter when you supply `queryTexts`
+    #   to perform a full-text-only search. A request must include
+    #   `queryVector`, `queryTexts`, or both.
     #   @return [Types::VectorData]
     #
     # @!attribute [rw] filter
@@ -1163,6 +1271,21 @@ module Aws::S3Vectors
     #   The default value is `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] query_texts
+    #   Full-text queries for searchable metadata keys. Omit `queryVector`
+    #   to run a full-text-only search, or provide both fields to run a
+    #   hybrid search. Each entry must target a distinct searchable metadata
+    #   key.
+    #   @return [Array<Types::QueryText>]
+    #
+    # @!attribute [rw] return_scores
+    #   Indicates whether to include relevance scores in the response.
+    #   Full-text-only results can include BM25 scores. Hybrid results can
+    #   also include a Reciprocal Rank Fusion (RRF) score and vector
+    #   distance. This setting doesn't add scores to vector-only requests.
+    #   The default value is `false`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] next_token
     #   Pagination token from a previous request. The value of this field is
     #   empty for an initial request.
@@ -1180,13 +1303,17 @@ module Aws::S3Vectors
       :query_mode,
       :return_metadata,
       :return_distance,
+      :query_texts,
+      :return_scores,
       :next_token)
-      SENSITIVE = []
+      SENSITIVE = [:query_texts]
       include Aws::Structure
     end
 
     # @!attribute [rw] vectors
-    #   The vectors in the approximate nearest neighbor search.
+    #   The matching vector results in ranked order. Results are ranked by
+    #   vector distance for a vector-only search, by BM25 relevance for a
+    #   full-text-only search, and by RRF score for a hybrid search.
     #   @return [Array<Types::QueryOutputVector>]
     #
     # @!attribute [rw] distance_metric
@@ -1279,6 +1406,53 @@ module Aws::S3Vectors
     #
     class TagResourceOutput < Aws::EmptyStructure; end
 
+    # A full-text search configuration for a single metadata key.
+    #
+    # @!attribute [rw] metadata_key
+    #   The metadata key to make full-text searchable.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The language that the text search analyzer uses. Valid values are
+    #   `en` (English), `fr` (French), `es` (Spanish), `pt` (Portuguese),
+    #   `it` (Italian), `de` (German), `nl` (Dutch), `zh` (Chinese), `ja`
+    #   (Japanese), and `ko` (Korean). If you don't specify a language,
+    #   Amazon S3 Vectors uses the default standard analyzer.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The backfill status of the text search configuration. Valid values
+    #   are `ACTIVE`, which indicates that the analyzer is built and serving
+    #   queries, and `BUILDING`, which indicates that the analyzer is being
+    #   backfilled and isn't yet serving queries. This field is returned by
+    #   `GetIndex`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/TextSearchConfiguration AWS API Documentation
+    #
+    class TextSearchConfiguration < Struct.new(
+      :metadata_key,
+      :language,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A searchable metadata key that identifies a text search configuration.
+    #
+    # @!attribute [rw] metadata_key
+    #   The searchable metadata key whose text search configuration to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/TextSearchConfigurationKey AWS API Documentation
+    #
+    class TextSearchConfigurationKey < Struct.new(
+      :metadata_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request was denied due to request throttling.
     #
     # @!attribute [rw] message
@@ -1359,6 +1533,50 @@ module Aws::S3Vectors
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/UpdateIndexModeOutput AWS API Documentation
     #
     class UpdateIndexModeOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] vector_bucket_name
+    #   The name of the vector bucket that contains the vector index.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the vector index to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_arn
+    #   The Amazon Resource Name (ARN) of the vector index to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] add
+    #   Text search configurations to add to the vector index.
+    #   @return [Types::MetadataConfigurationAdd]
+    #
+    # @!attribute [rw] delete
+    #   Text search configurations to delete from the vector index.
+    #   @return [Types::MetadataConfigurationDelete]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/UpdateMetadataConfigurationInput AWS API Documentation
+    #
+    class UpdateMetadataConfigurationInput < Struct.new(
+      :vector_bucket_name,
+      :index_name,
+      :index_arn,
+      :add,
+      :delete)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] index_arn
+    #   The Amazon Resource Name (ARN) of the updated vector index.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3vectors-2025-07-15/UpdateMetadataConfigurationOutput AWS API Documentation
+    #
+    class UpdateMetadataConfigurationOutput < Struct.new(
+      :index_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The requested action isn't valid.
     #

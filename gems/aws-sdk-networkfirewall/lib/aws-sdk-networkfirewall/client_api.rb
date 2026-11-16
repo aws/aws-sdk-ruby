@@ -45,6 +45,7 @@ module Aws::NetworkFirewall
     Attachment = Shapes::StructureShape.new(name: 'Attachment')
     AttachmentId = Shapes::StringShape.new(name: 'AttachmentId')
     AttachmentStatus = Shapes::StringShape.new(name: 'AttachmentStatus')
+    AttachmentType = Shapes::StringShape.new(name: 'AttachmentType')
     AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
     AvailabilityZoneId = Shapes::StringShape.new(name: 'AvailabilityZoneId')
     AvailabilityZoneMapping = Shapes::StructureShape.new(name: 'AvailabilityZoneMapping')
@@ -74,6 +75,17 @@ module Aws::NetworkFirewall
     ContainerMonitoringConfiguration = Shapes::StructureShape.new(name: 'ContainerMonitoringConfiguration')
     ContainerMonitoringConfigurations = Shapes::ListShape.new(name: 'ContainerMonitoringConfigurations')
     ContainerMonitoringType = Shapes::StringShape.new(name: 'ContainerMonitoringType')
+    ContextDefinition = Shapes::StringShape.new(name: 'ContextDefinition')
+    ContextDefinitionList = Shapes::ListShape.new(name: 'ContextDefinitionList')
+    ContextFilters = Shapes::StructureShape.new(name: 'ContextFilters')
+    ContextSet = Shapes::StructureShape.new(name: 'ContextSet')
+    ContextSets = Shapes::MapShape.new(name: 'ContextSets')
+    ContextStore = Shapes::StructureShape.new(name: 'ContextStore')
+    ContextStoreId = Shapes::StringShape.new(name: 'ContextStoreId')
+    ContextStoreSyncState = Shapes::StructureShape.new(name: 'ContextStoreSyncState')
+    ContextStoreSyncStatus = Shapes::StringShape.new(name: 'ContextStoreSyncStatus')
+    ContextStores = Shapes::ListShape.new(name: 'ContextStores')
+    ContextType = Shapes::StringShape.new(name: 'ContextType')
     Count = Shapes::IntegerShape.new(name: 'Count')
     CreateContainerAssociationRequest = Shapes::StructureShape.new(name: 'CreateContainerAssociationRequest')
     CreateContainerAssociationResponse = Shapes::StructureShape.new(name: 'CreateContainerAssociationResponse')
@@ -246,6 +258,8 @@ module Aws::NetworkFirewall
     ListAnalysisReportsResponse = Shapes::StructureShape.new(name: 'ListAnalysisReportsResponse')
     ListContainerAssociationsRequest = Shapes::StructureShape.new(name: 'ListContainerAssociationsRequest')
     ListContainerAssociationsResponse = Shapes::StructureShape.new(name: 'ListContainerAssociationsResponse')
+    ListContextStoresRequest = Shapes::StructureShape.new(name: 'ListContextStoresRequest')
+    ListContextStoresResponse = Shapes::StructureShape.new(name: 'ListContextStoresResponse')
     ListFirewallPoliciesRequest = Shapes::StructureShape.new(name: 'ListFirewallPoliciesRequest')
     ListFirewallPoliciesResponse = Shapes::StructureShape.new(name: 'ListFirewallPoliciesResponse')
     ListFirewallPoliciesV2Request = Shapes::StructureShape.new(name: 'ListFirewallPoliciesV2Request')
@@ -256,6 +270,8 @@ module Aws::NetworkFirewall
     ListFlowOperationResultsResponse = Shapes::StructureShape.new(name: 'ListFlowOperationResultsResponse')
     ListFlowOperationsRequest = Shapes::StructureShape.new(name: 'ListFlowOperationsRequest')
     ListFlowOperationsResponse = Shapes::StructureShape.new(name: 'ListFlowOperationsResponse')
+    ListResourcesInContextStoreRequest = Shapes::StructureShape.new(name: 'ListResourcesInContextStoreRequest')
+    ListResourcesInContextStoreResponse = Shapes::StructureShape.new(name: 'ListResourcesInContextStoreResponse')
     ListRuleGroupsRequest = Shapes::StructureShape.new(name: 'ListRuleGroupsRequest')
     ListRuleGroupsResponse = Shapes::StructureShape.new(name: 'ListRuleGroupsResponse')
     ListTLSInspectionConfigurationsRequest = Shapes::StructureShape.new(name: 'ListTLSInspectionConfigurationsRequest')
@@ -313,14 +329,18 @@ module Aws::NetworkFirewall
     ProxyModifyState = Shapes::StringShape.new(name: 'ProxyModifyState')
     ProxySettings = Shapes::StructureShape.new(name: 'ProxySettings')
     ProxyState = Shapes::StringShape.new(name: 'ProxyState')
+    PublicId = Shapes::StringShape.new(name: 'PublicId')
     PublishMetricAction = Shapes::StructureShape.new(name: 'PublishMetricAction')
     PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
     PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     ReferenceSets = Shapes::StructureShape.new(name: 'ReferenceSets')
+    Region = Shapes::StringShape.new(name: 'Region')
     RejectNetworkFirewallTransitGatewayAttachmentRequest = Shapes::StructureShape.new(name: 'RejectNetworkFirewallTransitGatewayAttachmentRequest')
     RejectNetworkFirewallTransitGatewayAttachmentResponse = Shapes::StructureShape.new(name: 'RejectNetworkFirewallTransitGatewayAttachmentResponse')
     ReportTime = Shapes::TimestampShape.new(name: 'ReportTime')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
+    ResourceContext = Shapes::StructureShape.new(name: 'ResourceContext')
+    ResourceContexts = Shapes::ListShape.new(name: 'ResourceContexts')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceManagedStatus = Shapes::StringShape.new(name: 'ResourceManagedStatus')
     ResourceManagedType = Shapes::StringShape.new(name: 'ResourceManagedType')
@@ -329,6 +349,7 @@ module Aws::NetworkFirewall
     ResourceOwnerCheckException = Shapes::StructureShape.new(name: 'ResourceOwnerCheckException')
     ResourceStatus = Shapes::StringShape.new(name: 'ResourceStatus')
     ResourceStatusMessage = Shapes::StringShape.new(name: 'ResourceStatusMessage')
+    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     RevocationCheckAction = Shapes::StringShape.new(name: 'RevocationCheckAction')
     Route53ResolvedIPValidation = Shapes::StructureShape.new(name: 'Route53ResolvedIPValidation')
     Route53ResolvedIPValidationAction = Shapes::StringShape.new(name: 'Route53ResolvedIPValidationAction')
@@ -616,6 +637,28 @@ module Aws::NetworkFirewall
     ContainerMonitoringConfiguration.struct_class = Types::ContainerMonitoringConfiguration
 
     ContainerMonitoringConfigurations.member = Shapes::ShapeRef.new(shape: ContainerMonitoringConfiguration)
+
+    ContextDefinitionList.member = Shapes::ShapeRef.new(shape: ContextDefinition)
+
+    ContextFilters.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "Region"))
+    ContextFilters.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    ContextFilters.struct_class = Types::ContextFilters
+
+    ContextSet.add_member(:definition, Shapes::ShapeRef.new(shape: ContextDefinitionList, required: true, location_name: "Definition"))
+    ContextSet.struct_class = Types::ContextSet
+
+    ContextSets.key = Shapes::ShapeRef.new(shape: RuleVariableName)
+    ContextSets.value = Shapes::ShapeRef.new(shape: ContextSet)
+
+    ContextStore.add_member(:context_store_id, Shapes::ShapeRef.new(shape: ContextStoreId, required: true, location_name: "ContextStoreId"))
+    ContextStore.add_member(:context_store_owner_account_id, Shapes::ShapeRef.new(shape: AWSAccountId, required: true, location_name: "ContextStoreOwnerAccountId"))
+    ContextStore.struct_class = Types::ContextStore
+
+    ContextStoreSyncState.add_member(:sync_status, Shapes::ShapeRef.new(shape: ContextStoreSyncStatus, location_name: "SyncStatus"))
+    ContextStoreSyncState.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
+    ContextStoreSyncState.struct_class = Types::ContextStoreSyncState
+
+    ContextStores.member = Shapes::ShapeRef.new(shape: ContextStore)
 
     CreateContainerAssociationRequest.add_member(:container_association_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ContainerAssociationName"))
     CreateContainerAssociationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -1040,6 +1083,8 @@ module Aws::NetworkFirewall
     Firewall.add_member(:nat_gateway_create_mappings, Shapes::ShapeRef.new(shape: NatGatewayCreateMappingsList, location_name: "NatGatewayCreateMappings"))
     Firewall.add_member(:proxy_settings, Shapes::ShapeRef.new(shape: ProxySettings, location_name: "ProxySettings"))
     Firewall.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: VpcEndpoint, location_name: "VpcEndpoint"))
+    Firewall.add_member(:context_store_id, Shapes::ShapeRef.new(shape: ContextStoreId, location_name: "ContextStoreId"))
+    Firewall.add_member(:context_store_owner_account_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "ContextStoreOwnerAccountId"))
     Firewall.add_member(:transparent_filtering_nat_scope, Shapes::ShapeRef.new(shape: TransparentFilteringNatScope, location_name: "TransparentFilteringNatScope"))
     Firewall.struct_class = Types::Firewall
 
@@ -1161,6 +1206,7 @@ module Aws::NetworkFirewall
     FirewallStatus.add_member(:sync_states, Shapes::ShapeRef.new(shape: SyncStates, location_name: "SyncStates"))
     FirewallStatus.add_member(:capacity_usage_summary, Shapes::ShapeRef.new(shape: CapacityUsageSummary, location_name: "CapacityUsageSummary"))
     FirewallStatus.add_member(:transit_gateway_attachment_sync_state, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentSyncState, location_name: "TransitGatewayAttachmentSyncState"))
+    FirewallStatus.add_member(:context_store_sync_state, Shapes::ShapeRef.new(shape: ContextStoreSyncState, location_name: "ContextStoreSyncState"))
     FirewallStatus.struct_class = Types::FirewallStatus
 
     Firewalls.member = Shapes::ShapeRef.new(shape: FirewallMetadata)
@@ -1305,6 +1351,14 @@ module Aws::NetworkFirewall
     ListContainerAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListContainerAssociationsResponse.struct_class = Types::ListContainerAssociationsResponse
 
+    ListContextStoresRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListContextStoresRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
+    ListContextStoresRequest.struct_class = Types::ListContextStoresRequest
+
+    ListContextStoresResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListContextStoresResponse.add_member(:context_stores, Shapes::ShapeRef.new(shape: ContextStores, required: true, location_name: "ContextStores"))
+    ListContextStoresResponse.struct_class = Types::ListContextStoresResponse
+
     ListFirewallPoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListFirewallPoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
     ListFirewallPoliciesRequest.struct_class = Types::ListFirewallPoliciesRequest
@@ -1366,6 +1420,16 @@ module Aws::NetworkFirewall
     ListFlowOperationsResponse.add_member(:flow_operations, Shapes::ShapeRef.new(shape: FlowOperations, location_name: "FlowOperations"))
     ListFlowOperationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListFlowOperationsResponse.struct_class = Types::ListFlowOperationsResponse
+
+    ListResourcesInContextStoreRequest.add_member(:context_store_id, Shapes::ShapeRef.new(shape: ContextStoreId, required: true, location_name: "ContextStoreId"))
+    ListResourcesInContextStoreRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ContextFilters, location_name: "Filters"))
+    ListResourcesInContextStoreRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
+    ListResourcesInContextStoreRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListResourcesInContextStoreRequest.struct_class = Types::ListResourcesInContextStoreRequest
+
+    ListResourcesInContextStoreResponse.add_member(:resource_contexts, Shapes::ShapeRef.new(shape: ResourceContexts, required: true, location_name: "ResourceContexts"))
+    ListResourcesInContextStoreResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListResourcesInContextStoreResponse.struct_class = Types::ListResourcesInContextStoreResponse
 
     ListRuleGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListRuleGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
@@ -1501,6 +1565,15 @@ module Aws::NetworkFirewall
     RejectNetworkFirewallTransitGatewayAttachmentResponse.add_member(:transit_gateway_attachment_status, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentStatus, required: true, location_name: "TransitGatewayAttachmentStatus"))
     RejectNetworkFirewallTransitGatewayAttachmentResponse.struct_class = Types::RejectNetworkFirewallTransitGatewayAttachmentResponse
 
+    ResourceContext.add_member(:context_type, Shapes::ShapeRef.new(shape: ContextType, location_name: "ContextType"))
+    ResourceContext.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "Region"))
+    ResourceContext.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
+    ResourceContext.add_member(:attachment_type, Shapes::ShapeRef.new(shape: AttachmentType, location_name: "AttachmentType"))
+    ResourceContext.add_member(:public_id, Shapes::ShapeRef.new(shape: PublicId, required: true, location_name: "PublicId"))
+    ResourceContext.struct_class = Types::ResourceContext
+
+    ResourceContexts.member = Shapes::ShapeRef.new(shape: ResourceContext)
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
@@ -1574,6 +1647,7 @@ module Aws::NetworkFirewall
 
     RuleVariables.add_member(:ip_sets, Shapes::ShapeRef.new(shape: IPSets, location_name: "IPSets"))
     RuleVariables.add_member(:port_sets, Shapes::ShapeRef.new(shape: PortSets, location_name: "PortSets"))
+    RuleVariables.add_member(:context_sets, Shapes::ShapeRef.new(shape: ContextSets, location_name: "ContextSets"))
     RuleVariables.struct_class = Types::RuleVariables
 
     RulesSource.add_member(:rules_string, Shapes::ShapeRef.new(shape: RulesString, location_name: "RulesString"))
@@ -2576,6 +2650,23 @@ module Aws::NetworkFirewall
         )
       end)
 
+      api.add_operation(:list_context_stores, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListContextStores"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListContextStoresRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListContextStoresResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_firewall_policies, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListFirewallPolicies"
         o.http_method = "POST"
@@ -2654,6 +2745,24 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_resources_in_context_store, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResourcesInContextStore"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListResourcesInContextStoreRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListResourcesInContextStoreResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

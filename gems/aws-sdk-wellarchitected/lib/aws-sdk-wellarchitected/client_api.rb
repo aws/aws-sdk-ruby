@@ -62,6 +62,9 @@ module Aws::WellArchitected
     ApplicationType = Shapes::StringShape.new(name: 'ApplicationType')
     AssociateLensesInput = Shapes::StructureShape.new(name: 'AssociateLensesInput')
     AssociateProfilesInput = Shapes::StructureShape.new(name: 'AssociateProfilesInput')
+    AutoRemediation = Shapes::StructureShape.new(name: 'AutoRemediation')
+    AutoRemediationCliCommandString = Shapes::StringShape.new(name: 'AutoRemediationCliCommandString')
+    AutoRemediationDeepLinkString = Shapes::StringShape.new(name: 'AutoRemediationDeepLinkString')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
     Base64String = Shapes::StringShape.new(name: 'Base64String')
@@ -111,6 +114,8 @@ module Aws::WellArchitected
     ContextContentAwsServicesList = Shapes::ListShape.new(name: 'ContextContentAwsServicesList')
     ContextContentAwsServicesListMemberString = Shapes::StringShape.new(name: 'ContextContentAwsServicesListMemberString')
     ContextContentIndustryString = Shapes::StringShape.new(name: 'ContextContentIndustryString')
+    ContextContentOrganizationalUnitIdsList = Shapes::ListShape.new(name: 'ContextContentOrganizationalUnitIdsList')
+    ContextContentOrganizationalUnitIdsListMemberString = Shapes::StringShape.new(name: 'ContextContentOrganizationalUnitIdsListMemberString')
     ContextContentRegionsList = Shapes::ListShape.new(name: 'ContextContentRegionsList')
     ContextContentRegionsListMemberString = Shapes::StringShape.new(name: 'ContextContentRegionsListMemberString')
     ContextContentResourceTagsList = Shapes::ListShape.new(name: 'ContextContentResourceTagsList')
@@ -126,6 +131,11 @@ module Aws::WellArchitected
     ContextSummaryTitleString = Shapes::StringShape.new(name: 'ContextSummaryTitleString')
     ContextType = Shapes::StringShape.new(name: 'ContextType')
     Count = Shapes::IntegerShape.new(name: 'Count')
+    CoverageSummary = Shapes::StructureShape.new(name: 'CoverageSummary')
+    CreateAgentBasicProfileRequest = Shapes::StructureShape.new(name: 'CreateAgentBasicProfileRequest')
+    CreateAgentBasicProfileResponse = Shapes::StructureShape.new(name: 'CreateAgentBasicProfileResponse')
+    CreateAgentBasicProfileResponseCreatedByString = Shapes::StringShape.new(name: 'CreateAgentBasicProfileResponseCreatedByString')
+    CreateAgentBasicProfileResponseLastModifiedByString = Shapes::StringShape.new(name: 'CreateAgentBasicProfileResponseLastModifiedByString')
     CreateAgentContextRequest = Shapes::StructureShape.new(name: 'CreateAgentContextRequest')
     CreateAgentContextRequestClientTokenString = Shapes::StringShape.new(name: 'CreateAgentContextRequestClientTokenString')
     CreateAgentContextRequestTitleString = Shapes::StringShape.new(name: 'CreateAgentContextRequestTitleString')
@@ -135,6 +145,22 @@ module Aws::WellArchitected
     CreateAgentGoalRequestDescriptionString = Shapes::StringShape.new(name: 'CreateAgentGoalRequestDescriptionString')
     CreateAgentGoalRequestTitleString = Shapes::StringShape.new(name: 'CreateAgentGoalRequestTitleString')
     CreateAgentGoalResponse = Shapes::StructureShape.new(name: 'CreateAgentGoalResponse')
+    CreateAgentOrganizationalProfileRequest = Shapes::StructureShape.new(name: 'CreateAgentOrganizationalProfileRequest')
+    CreateAgentOrganizationalProfileRequestBusinessOverviewString = Shapes::StringShape.new(name: 'CreateAgentOrganizationalProfileRequestBusinessOverviewString')
+    CreateAgentOrganizationalProfileRequestClientTokenString = Shapes::StringShape.new(name: 'CreateAgentOrganizationalProfileRequestClientTokenString')
+    CreateAgentOrganizationalProfileRequestDescriptionString = Shapes::StringShape.new(name: 'CreateAgentOrganizationalProfileRequestDescriptionString')
+    CreateAgentOrganizationalProfileRequestDisplayNameString = Shapes::StringShape.new(name: 'CreateAgentOrganizationalProfileRequestDisplayNameString')
+    CreateAgentOrganizationalProfileRequestNameString = Shapes::StringShape.new(name: 'CreateAgentOrganizationalProfileRequestNameString')
+    CreateAgentOrganizationalProfileResponse = Shapes::StructureShape.new(name: 'CreateAgentOrganizationalProfileResponse')
+    CreateAgentOrganizationalProfileResponseBusinessOverviewString = Shapes::StringShape.new(name: 'CreateAgentOrganizationalProfileResponseBusinessOverviewString')
+    CreateAgentOrganizationalProfileResponseCreatedByString = Shapes::StringShape.new(name: 'CreateAgentOrganizationalProfileResponseCreatedByString')
+    CreateAgentOrganizationalProfileResponseDescriptionString = Shapes::StringShape.new(name: 'CreateAgentOrganizationalProfileResponseDescriptionString')
+    CreateAgentOrganizationalProfileResponseDisplayNameString = Shapes::StringShape.new(name: 'CreateAgentOrganizationalProfileResponseDisplayNameString')
+    CreateAgentOrganizationalProfileResponseLastModifiedByString = Shapes::StringShape.new(name: 'CreateAgentOrganizationalProfileResponseLastModifiedByString')
+    CreateAgentOrganizationalProfileResponseNameString = Shapes::StringShape.new(name: 'CreateAgentOrganizationalProfileResponseNameString')
+    CreateAgentOrganizationalReportRequest = Shapes::StructureShape.new(name: 'CreateAgentOrganizationalReportRequest')
+    CreateAgentOrganizationalReportRequestClientTokenString = Shapes::StringShape.new(name: 'CreateAgentOrganizationalReportRequestClientTokenString')
+    CreateAgentOrganizationalReportResponse = Shapes::StructureShape.new(name: 'CreateAgentOrganizationalReportResponse')
     CreateAgentProfileRequest = Shapes::StructureShape.new(name: 'CreateAgentProfileRequest')
     CreateAgentProfileRequestBusinessOverviewString = Shapes::StringShape.new(name: 'CreateAgentProfileRequestBusinessOverviewString')
     CreateAgentProfileRequestClientTokenString = Shapes::StringShape.new(name: 'CreateAgentProfileRequestClientTokenString')
@@ -176,8 +202,14 @@ module Aws::WellArchitected
     DeleteAgentContextResponse = Shapes::StructureShape.new(name: 'DeleteAgentContextResponse')
     DeleteAgentGoalRequest = Shapes::StructureShape.new(name: 'DeleteAgentGoalRequest')
     DeleteAgentGoalResponse = Shapes::StructureShape.new(name: 'DeleteAgentGoalResponse')
+    DeleteAgentOrganizationalReportRequest = Shapes::StructureShape.new(name: 'DeleteAgentOrganizationalReportRequest')
+    DeleteAgentOrganizationalReportResponse = Shapes::StructureShape.new(name: 'DeleteAgentOrganizationalReportResponse')
+    DeleteAgentProfilePolicyRequest = Shapes::StructureShape.new(name: 'DeleteAgentProfilePolicyRequest')
+    DeleteAgentProfilePolicyResponse = Shapes::StructureShape.new(name: 'DeleteAgentProfilePolicyResponse')
     DeleteAgentProfileRequest = Shapes::StructureShape.new(name: 'DeleteAgentProfileRequest')
     DeleteAgentProfileResponse = Shapes::StructureShape.new(name: 'DeleteAgentProfileResponse')
+    DeleteAgentRecommendationPolicyRequest = Shapes::StructureShape.new(name: 'DeleteAgentRecommendationPolicyRequest')
+    DeleteAgentRecommendationPolicyResponse = Shapes::StructureShape.new(name: 'DeleteAgentRecommendationPolicyResponse')
     DeleteLensInput = Shapes::StructureShape.new(name: 'DeleteLensInput')
     DeleteLensShareInput = Shapes::StructureShape.new(name: 'DeleteLensShareInput')
     DeleteProfileInput = Shapes::StructureShape.new(name: 'DeleteProfileInput')
@@ -200,16 +232,30 @@ module Aws::WellArchitected
     ExceptionResourceType = Shapes::StringShape.new(name: 'ExceptionResourceType')
     ExportLensInput = Shapes::StructureShape.new(name: 'ExportLensInput')
     ExportLensOutput = Shapes::StructureShape.new(name: 'ExportLensOutput')
+    FailedAccount = Shapes::StructureShape.new(name: 'FailedAccount')
+    FailedAccountList = Shapes::ListShape.new(name: 'FailedAccountList')
+    FailedOrganizationalUnit = Shapes::StructureShape.new(name: 'FailedOrganizationalUnit')
+    FailedOrganizationalUnitList = Shapes::ListShape.new(name: 'FailedOrganizationalUnitList')
     FeedbackCategory = Shapes::StringShape.new(name: 'FeedbackCategory')
     FieldErrorMessage = Shapes::StringShape.new(name: 'FieldErrorMessage')
     FieldErrorPath = Shapes::StringShape.new(name: 'FieldErrorPath')
     FieldErrors = Shapes::MapShape.new(name: 'FieldErrors')
     FlaggedResources = Shapes::IntegerShape.new(name: 'FlaggedResources')
+    GenerationRecommendationTypes = Shapes::ListShape.new(name: 'GenerationRecommendationTypes')
     GenerationStatus = Shapes::StringShape.new(name: 'GenerationStatus')
+    GenerationType = Shapes::StringShape.new(name: 'GenerationType')
     GetAgentContextRequest = Shapes::StructureShape.new(name: 'GetAgentContextRequest')
     GetAgentContextResponse = Shapes::StructureShape.new(name: 'GetAgentContextResponse')
     GetAgentGoalRequest = Shapes::StructureShape.new(name: 'GetAgentGoalRequest')
     GetAgentGoalResponse = Shapes::StructureShape.new(name: 'GetAgentGoalResponse')
+    GetAgentOrganizationalReportDataRequest = Shapes::StructureShape.new(name: 'GetAgentOrganizationalReportDataRequest')
+    GetAgentOrganizationalReportDataResponse = Shapes::StructureShape.new(name: 'GetAgentOrganizationalReportDataResponse')
+    GetAgentOrganizationalReportRequest = Shapes::StructureShape.new(name: 'GetAgentOrganizationalReportRequest')
+    GetAgentOrganizationalReportResponse = Shapes::StructureShape.new(name: 'GetAgentOrganizationalReportResponse')
+    GetAgentPreferencesRequest = Shapes::StructureShape.new(name: 'GetAgentPreferencesRequest')
+    GetAgentPreferencesResponse = Shapes::StructureShape.new(name: 'GetAgentPreferencesResponse')
+    GetAgentProfilePolicyRequest = Shapes::StructureShape.new(name: 'GetAgentProfilePolicyRequest')
+    GetAgentProfilePolicyResponse = Shapes::StructureShape.new(name: 'GetAgentProfilePolicyResponse')
     GetAgentProfileRequest = Shapes::StructureShape.new(name: 'GetAgentProfileRequest')
     GetAgentProfileResponse = Shapes::StructureShape.new(name: 'GetAgentProfileResponse')
     GetAgentProfileResponseBusinessOverviewString = Shapes::StringShape.new(name: 'GetAgentProfileResponseBusinessOverviewString')
@@ -222,6 +268,8 @@ module Aws::WellArchitected
     GetAgentRecommendationGenerationResponse = Shapes::StructureShape.new(name: 'GetAgentRecommendationGenerationResponse')
     GetAgentRecommendationGenerationResponseCreatedByString = Shapes::StringShape.new(name: 'GetAgentRecommendationGenerationResponseCreatedByString')
     GetAgentRecommendationGenerationResponseLastModifiedByString = Shapes::StringShape.new(name: 'GetAgentRecommendationGenerationResponseLastModifiedByString')
+    GetAgentRecommendationPolicyRequest = Shapes::StructureShape.new(name: 'GetAgentRecommendationPolicyRequest')
+    GetAgentRecommendationPolicyResponse = Shapes::StructureShape.new(name: 'GetAgentRecommendationPolicyResponse')
     GetAgentRecommendationRequest = Shapes::StructureShape.new(name: 'GetAgentRecommendationRequest')
     GetAgentRecommendationResponse = Shapes::StructureShape.new(name: 'GetAgentRecommendationResponse')
     GetAgentRecommendationResponseCreatedByString = Shapes::StringShape.new(name: 'GetAgentRecommendationResponseCreatedByString')
@@ -331,6 +379,11 @@ module Aws::WellArchitected
     ListAgentGoalsRequestNextTokenString = Shapes::StringShape.new(name: 'ListAgentGoalsRequestNextTokenString')
     ListAgentGoalsResponse = Shapes::StructureShape.new(name: 'ListAgentGoalsResponse')
     ListAgentGoalsResponseNextTokenString = Shapes::StringShape.new(name: 'ListAgentGoalsResponseNextTokenString')
+    ListAgentOrganizationalReportsRequest = Shapes::StructureShape.new(name: 'ListAgentOrganizationalReportsRequest')
+    ListAgentOrganizationalReportsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAgentOrganizationalReportsRequestMaxResultsInteger')
+    ListAgentOrganizationalReportsRequestNextTokenString = Shapes::StringShape.new(name: 'ListAgentOrganizationalReportsRequestNextTokenString')
+    ListAgentOrganizationalReportsResponse = Shapes::StructureShape.new(name: 'ListAgentOrganizationalReportsResponse')
+    ListAgentOrganizationalReportsResponseNextTokenString = Shapes::StringShape.new(name: 'ListAgentOrganizationalReportsResponseNextTokenString')
     ListAgentProfilesRequest = Shapes::StructureShape.new(name: 'ListAgentProfilesRequest')
     ListAgentProfilesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAgentProfilesRequestMaxResultsInteger')
     ListAgentProfilesRequestNextTokenString = Shapes::StringShape.new(name: 'ListAgentProfilesRequestNextTokenString')
@@ -407,6 +460,7 @@ module Aws::WellArchitected
     ListWorkloadsInput = Shapes::StructureShape.new(name: 'ListWorkloadsInput')
     ListWorkloadsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListWorkloadsInputMaxResultsInteger')
     ListWorkloadsOutput = Shapes::StructureShape.new(name: 'ListWorkloadsOutput')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     MaxSelectedProfileChoices = Shapes::IntegerShape.new(name: 'MaxSelectedProfileChoices')
     MetricType = Shapes::StringShape.new(name: 'MetricType')
     Milestone = Shapes::StructureShape.new(name: 'Milestone')
@@ -421,13 +475,30 @@ module Aws::WellArchitected
     NotificationSummary = Shapes::StructureShape.new(name: 'NotificationSummary')
     NotificationType = Shapes::StringShape.new(name: 'NotificationType')
     OrganizationSharingStatus = Shapes::StringShape.new(name: 'OrganizationSharingStatus')
+    OrganizationalAccountEntry = Shapes::StructureShape.new(name: 'OrganizationalAccountEntry')
+    OrganizationalAccountEntryList = Shapes::ListShape.new(name: 'OrganizationalAccountEntryList')
+    OrganizationalAggregationConfiguration = Shapes::StructureShape.new(name: 'OrganizationalAggregationConfiguration')
+    OrganizationalNodeId = Shapes::StringShape.new(name: 'OrganizationalNodeId')
+    OrganizationalReportAccountIdList = Shapes::ListShape.new(name: 'OrganizationalReportAccountIdList')
+    OrganizationalReportFilters = Shapes::StructureShape.new(name: 'OrganizationalReportFilters')
+    OrganizationalReportFormat = Shapes::StringShape.new(name: 'OrganizationalReportFormat')
+    OrganizationalReportState = Shapes::StringShape.new(name: 'OrganizationalReportState')
+    OrganizationalReportSummary = Shapes::StructureShape.new(name: 'OrganizationalReportSummary')
+    OrganizationalReportSummaryList = Shapes::ListShape.new(name: 'OrganizationalReportSummaryList')
+    OrganizationalUnitEntry = Shapes::StructureShape.new(name: 'OrganizationalUnitEntry')
+    OrganizationalUnitEntryList = Shapes::ListShape.new(name: 'OrganizationalUnitEntryList')
+    OrganizationalUnitId = Shapes::StringShape.new(name: 'OrganizationalUnitId')
+    OrganizationalUnitIdList = Shapes::ListShape.new(name: 'OrganizationalUnitIdList')
     PermissionType = Shapes::StringShape.new(name: 'PermissionType')
     Pillar = Shapes::StringShape.new(name: 'Pillar')
+    PillarCount = Shapes::StructureShape.new(name: 'PillarCount')
+    PillarCountList = Shapes::ListShape.new(name: 'PillarCountList')
     PillarDifference = Shapes::StructureShape.new(name: 'PillarDifference')
     PillarDifferences = Shapes::ListShape.new(name: 'PillarDifferences')
     PillarId = Shapes::StringShape.new(name: 'PillarId')
     PillarItem = Shapes::StructureShape.new(name: 'PillarItem')
     PillarItems = Shapes::ListShape.new(name: 'PillarItems')
+    PillarList = Shapes::ListShape.new(name: 'PillarList')
     PillarMetric = Shapes::StructureShape.new(name: 'PillarMetric')
     PillarMetrics = Shapes::ListShape.new(name: 'PillarMetrics')
     PillarName = Shapes::StringShape.new(name: 'PillarName')
@@ -435,7 +506,18 @@ module Aws::WellArchitected
     PillarReviewSummaries = Shapes::ListShape.new(name: 'PillarReviewSummaries')
     PillarReviewSummary = Shapes::StructureShape.new(name: 'PillarReviewSummary')
     Pillars = Shapes::ListShape.new(name: 'Pillars')
+    PreferenceEntries = Shapes::ListShape.new(name: 'PreferenceEntries')
+    PreferenceEntry = Shapes::StructureShape.new(name: 'PreferenceEntry')
+    PreferenceEntryDetailString = Shapes::StringShape.new(name: 'PreferenceEntryDetailString')
+    PreferenceKey = Shapes::StringShape.new(name: 'PreferenceKey')
+    PreferenceState = Shapes::StringShape.new(name: 'PreferenceState')
+    PreferenceStatus = Shapes::StringShape.new(name: 'PreferenceStatus')
+    PreferenceUpdate = Shapes::StructureShape.new(name: 'PreferenceUpdate')
+    PreferenceUpdates = Shapes::ListShape.new(name: 'PreferenceUpdates')
     Priority = Shapes::StringShape.new(name: 'Priority')
+    PriorityCount = Shapes::StructureShape.new(name: 'PriorityCount')
+    PriorityCountList = Shapes::ListShape.new(name: 'PriorityCountList')
+    PriorityList = Shapes::ListShape.new(name: 'PriorityList')
     Profile = Shapes::StructureShape.new(name: 'Profile')
     ProfileArn = Shapes::StringShape.new(name: 'ProfileArn')
     ProfileArns = Shapes::ListShape.new(name: 'ProfileArns')
@@ -460,11 +542,18 @@ module Aws::WellArchitected
     ProfileTemplateChoice = Shapes::StructureShape.new(name: 'ProfileTemplateChoice')
     ProfileTemplateQuestion = Shapes::StructureShape.new(name: 'ProfileTemplateQuestion')
     ProfileTemplateQuestionChoices = Shapes::ListShape.new(name: 'ProfileTemplateQuestionChoices')
+    ProfileType = Shapes::StringShape.new(name: 'ProfileType')
     ProfileVersion = Shapes::StringShape.new(name: 'ProfileVersion')
     Progress = Shapes::StructureShape.new(name: 'Progress')
+    PutAgentPreferencesRequest = Shapes::StructureShape.new(name: 'PutAgentPreferencesRequest')
+    PutAgentPreferencesResponse = Shapes::StructureShape.new(name: 'PutAgentPreferencesResponse')
+    PutAgentProfilePolicyRequest = Shapes::StructureShape.new(name: 'PutAgentProfilePolicyRequest')
+    PutAgentProfilePolicyResponse = Shapes::StructureShape.new(name: 'PutAgentProfilePolicyResponse')
     PutAgentRecommendationFeedbackRequest = Shapes::StructureShape.new(name: 'PutAgentRecommendationFeedbackRequest')
     PutAgentRecommendationFeedbackRequestCommentsString = Shapes::StringShape.new(name: 'PutAgentRecommendationFeedbackRequestCommentsString')
     PutAgentRecommendationFeedbackResponse = Shapes::StructureShape.new(name: 'PutAgentRecommendationFeedbackResponse')
+    PutAgentRecommendationPolicyRequest = Shapes::StructureShape.new(name: 'PutAgentRecommendationPolicyRequest')
+    PutAgentRecommendationPolicyResponse = Shapes::StructureShape.new(name: 'PutAgentRecommendationPolicyResponse')
     Question = Shapes::StringShape.new(name: 'Question')
     QuestionCounts = Shapes::MapShape.new(name: 'QuestionCounts')
     QuestionDescription = Shapes::StringShape.new(name: 'QuestionDescription')
@@ -486,7 +575,9 @@ module Aws::WellArchitected
     RecommendationSourceList = Shapes::ListShape.new(name: 'RecommendationSourceList')
     RecommendationState = Shapes::StringShape.new(name: 'RecommendationState')
     RecommendationStatus = Shapes::StringShape.new(name: 'RecommendationStatus')
+    RecommendationStatusList = Shapes::ListShape.new(name: 'RecommendationStatusList')
     RecommendationType = Shapes::StringShape.new(name: 'RecommendationType')
+    RecommendationTypeList = Shapes::ListShape.new(name: 'RecommendationTypeList')
     RecommendationTypes = Shapes::ListShape.new(name: 'RecommendationTypes')
     RecommendedFixStep = Shapes::StringShape.new(name: 'RecommendedFixStep')
     RecommendedFixSteps = Shapes::ListShape.new(name: 'RecommendedFixSteps')
@@ -500,12 +591,14 @@ module Aws::WellArchitected
     RemediationSummaryRecommendationString = Shapes::StringShape.new(name: 'RemediationSummaryRecommendationString')
     RemediationType = Shapes::StringShape.new(name: 'RemediationType')
     ReportFormat = Shapes::StringShape.new(name: 'ReportFormat')
+    ReportLabel = Shapes::StringShape.new(name: 'ReportLabel')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceLink = Shapes::StructureShape.new(name: 'ResourceLink')
     ResourceLinkTitleString = Shapes::StringShape.new(name: 'ResourceLinkTitleString')
     ResourceLinkUrlString = Shapes::StringShape.new(name: 'ResourceLinkUrlString')
     ResourceLinks = Shapes::ListShape.new(name: 'ResourceLinks')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourcePolicy = Shapes::StringShape.new(name: 'ResourcePolicy')
     ReviewTemplate = Shapes::StructureShape.new(name: 'ReviewTemplate')
     ReviewTemplateAnswer = Shapes::StructureShape.new(name: 'ReviewTemplateAnswer')
     ReviewTemplateAnswerStatus = Shapes::StringShape.new(name: 'ReviewTemplateAnswerStatus')
@@ -527,6 +620,8 @@ module Aws::WellArchitected
     RoiDetailString = Shapes::StringShape.new(name: 'RoiDetailString')
     RoiEstimateString = Shapes::StringShape.new(name: 'RoiEstimateString')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    S3BucketArn = Shapes::StringShape.new(name: 'S3BucketArn')
+    S3ObjectKey = Shapes::StringShape.new(name: 'S3ObjectKey')
     Scope = Shapes::StructureShape.new(name: 'Scope')
     SelectedChoiceIds = Shapes::ListShape.new(name: 'SelectedChoiceIds')
     SelectedChoices = Shapes::ListShape.new(name: 'SelectedChoices')
@@ -535,6 +630,9 @@ module Aws::WellArchitected
     SelectedProfileChoiceIds = Shapes::ListShape.new(name: 'SelectedProfileChoiceIds')
     SelectedQuestionId = Shapes::StringShape.new(name: 'SelectedQuestionId')
     SelectedQuestionIds = Shapes::ListShape.new(name: 'SelectedQuestionIds')
+    SendAgentOrganizationalReportDataToS3Request = Shapes::StructureShape.new(name: 'SendAgentOrganizationalReportDataToS3Request')
+    SendAgentOrganizationalReportDataToS3Response = Shapes::StructureShape.new(name: 'SendAgentOrganizationalReportDataToS3Response')
+    SensitiveDocument = Shapes::DocumentShape.new(name: 'SensitiveDocument', document: true)
     ServiceCode = Shapes::StringShape.new(name: 'ServiceCode')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ShareId = Shapes::StringShape.new(name: 'ShareId')
@@ -575,6 +673,7 @@ module Aws::WellArchitected
     TemplateShareSummaries = Shapes::ListShape.new(name: 'TemplateShareSummaries')
     TemplateShareSummary = Shapes::StructureShape.new(name: 'TemplateShareSummary')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TimeWindow = Shapes::StructureShape.new(name: 'TimeWindow')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TradeOff = Shapes::StructureShape.new(name: 'TradeOff')
     TradeOffDescriptionString = Shapes::StringShape.new(name: 'TradeOffDescriptionString')
@@ -595,6 +694,18 @@ module Aws::WellArchitected
     UpdateAgentGoalRequestDescriptionString = Shapes::StringShape.new(name: 'UpdateAgentGoalRequestDescriptionString')
     UpdateAgentGoalRequestTitleString = Shapes::StringShape.new(name: 'UpdateAgentGoalRequestTitleString')
     UpdateAgentGoalResponse = Shapes::StructureShape.new(name: 'UpdateAgentGoalResponse')
+    UpdateAgentOrganizationalProfileRequest = Shapes::StructureShape.new(name: 'UpdateAgentOrganizationalProfileRequest')
+    UpdateAgentOrganizationalProfileRequestBusinessOverviewString = Shapes::StringShape.new(name: 'UpdateAgentOrganizationalProfileRequestBusinessOverviewString')
+    UpdateAgentOrganizationalProfileRequestClientTokenString = Shapes::StringShape.new(name: 'UpdateAgentOrganizationalProfileRequestClientTokenString')
+    UpdateAgentOrganizationalProfileRequestDescriptionString = Shapes::StringShape.new(name: 'UpdateAgentOrganizationalProfileRequestDescriptionString')
+    UpdateAgentOrganizationalProfileRequestDisplayNameString = Shapes::StringShape.new(name: 'UpdateAgentOrganizationalProfileRequestDisplayNameString')
+    UpdateAgentOrganizationalProfileResponse = Shapes::StructureShape.new(name: 'UpdateAgentOrganizationalProfileResponse')
+    UpdateAgentOrganizationalProfileResponseBusinessOverviewString = Shapes::StringShape.new(name: 'UpdateAgentOrganizationalProfileResponseBusinessOverviewString')
+    UpdateAgentOrganizationalProfileResponseCreatedByString = Shapes::StringShape.new(name: 'UpdateAgentOrganizationalProfileResponseCreatedByString')
+    UpdateAgentOrganizationalProfileResponseDescriptionString = Shapes::StringShape.new(name: 'UpdateAgentOrganizationalProfileResponseDescriptionString')
+    UpdateAgentOrganizationalProfileResponseDisplayNameString = Shapes::StringShape.new(name: 'UpdateAgentOrganizationalProfileResponseDisplayNameString')
+    UpdateAgentOrganizationalProfileResponseLastModifiedByString = Shapes::StringShape.new(name: 'UpdateAgentOrganizationalProfileResponseLastModifiedByString')
+    UpdateAgentOrganizationalProfileResponseNameString = Shapes::StringShape.new(name: 'UpdateAgentOrganizationalProfileResponseNameString')
     UpdateAgentProfileRequest = Shapes::StructureShape.new(name: 'UpdateAgentProfileRequest')
     UpdateAgentProfileRequestBusinessOverviewString = Shapes::StringShape.new(name: 'UpdateAgentProfileRequestBusinessOverviewString')
     UpdateAgentProfileRequestClientTokenString = Shapes::StringShape.new(name: 'UpdateAgentProfileRequestClientTokenString')
@@ -705,19 +816,20 @@ module Aws::WellArchitected
     AgentProfileSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: AgentProfileSummaryDisplayNameString, location_name: "displayName"))
     AgentProfileSummary.add_member(:description, Shapes::ShapeRef.new(shape: AgentProfileSummaryDescriptionString, location_name: "description"))
     AgentProfileSummary.add_member(:business_overview, Shapes::ShapeRef.new(shape: AgentProfileSummaryBusinessOverviewString, location_name: "businessOverview"))
-    AgentProfileSummary.add_member(:pillars, Shapes::ShapeRef.new(shape: Pillars, required: true, location_name: "pillars"))
+    AgentProfileSummary.add_member(:pillars, Shapes::ShapeRef.new(shape: Pillars, location_name: "pillars"))
     AgentProfileSummary.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "deletionProtection"))
-    AgentProfileSummary.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "executionRoleArn"))
-    AgentProfileSummary.add_member(:aggregation_configuration, Shapes::ShapeRef.new(shape: AggregationConfigurations, required: true, location_name: "aggregationConfiguration"))
+    AgentProfileSummary.add_member(:profile_type, Shapes::ShapeRef.new(shape: ProfileType, location_name: "profileType"))
+    AgentProfileSummary.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "executionRoleArn"))
+    AgentProfileSummary.add_member(:aggregation_configuration, Shapes::ShapeRef.new(shape: AggregationConfigurations, location_name: "aggregationConfiguration"))
     AgentProfileSummary.add_member(:arn, Shapes::ShapeRef.new(shape: AgentProfileArn, required: true, location_name: "arn"))
     AgentProfileSummary.add_member(:eligible_for_scheduled_generation, Shapes::ShapeRef.new(shape: Boolean, location_name: "eligibleForScheduledGeneration"))
     AgentProfileSummary.add_member(:eligible_for_architecture_generation, Shapes::ShapeRef.new(shape: Boolean, location_name: "eligibleForArchitectureGeneration"))
     AgentProfileSummary.add_member(:field_errors, Shapes::ShapeRef.new(shape: FieldErrors, location_name: "fieldErrors"))
-    AgentProfileSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     AgentProfileSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: AgentProfileSummaryCreatedByString, required: true, location_name: "createdBy"))
     AgentProfileSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
     AgentProfileSummary.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: AgentProfileSummaryLastModifiedByString, location_name: "lastModifiedBy"))
     AgentProfileSummary.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastModifiedAt"))
+    AgentProfileSummary.add_member(:organizational_aggregation_configuration, Shapes::ShapeRef.new(shape: OrganizationalAggregationConfiguration, location_name: "organizationalAggregationConfiguration"))
     AgentProfileSummary.struct_class = Types::AgentProfileSummary
 
     AgentRecommendationGenerationSummaries.member = Shapes::ShapeRef.new(shape: AgentRecommendationGenerationSummary)
@@ -731,6 +843,11 @@ module Aws::WellArchitected
     AgentRecommendationGenerationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
     AgentRecommendationGenerationSummary.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: AgentRecommendationGenerationSummaryLastModifiedByString, location_name: "lastModifiedBy"))
     AgentRecommendationGenerationSummary.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastModifiedAt"))
+    AgentRecommendationGenerationSummary.add_member(:generation_type, Shapes::ShapeRef.new(shape: GenerationType, location_name: "generationType"))
+    AgentRecommendationGenerationSummary.add_member(:generation_recommendation_types, Shapes::ShapeRef.new(shape: GenerationRecommendationTypes, location_name: "generationRecommendationTypes"))
+    AgentRecommendationGenerationSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "startedAt"))
+    AgentRecommendationGenerationSummary.add_member(:ended_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "endedAt"))
+    AgentRecommendationGenerationSummary.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errorDetails"))
     AgentRecommendationGenerationSummary.struct_class = Types::AgentRecommendationGenerationSummary
 
     AgentRecommendationItemSummaries.member = Shapes::ShapeRef.new(shape: AgentRecommendationItemSummary)
@@ -743,6 +860,7 @@ module Aws::WellArchitected
     AgentRecommendationItemSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
     AgentRecommendationItemSummary.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: AgentRecommendationItemSummaryLastModifiedByString, location_name: "lastModifiedBy"))
     AgentRecommendationItemSummary.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastModifiedAt"))
+    AgentRecommendationItemSummary.add_member(:auto_remediation, Shapes::ShapeRef.new(shape: AutoRemediation, location_name: "autoRemediation"))
     AgentRecommendationItemSummary.struct_class = Types::AgentRecommendationItemSummary
 
     AgentRecommendationRemediation.add_member(:recommendation_arn, Shapes::ShapeRef.new(shape: RecommendationArn, required: true, location_name: "recommendationArn"))
@@ -829,6 +947,10 @@ module Aws::WellArchitected
     AssociateProfilesInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
     AssociateProfilesInput.add_member(:profile_arns, Shapes::ShapeRef.new(shape: ProfileArns, required: true, location_name: "ProfileArns"))
     AssociateProfilesInput.struct_class = Types::AssociateProfilesInput
+
+    AutoRemediation.add_member(:deep_link, Shapes::ShapeRef.new(shape: AutoRemediationDeepLinkString, location_name: "deepLink"))
+    AutoRemediation.add_member(:cli_command, Shapes::ShapeRef.new(shape: AutoRemediationCliCommandString, location_name: "cliCommand"))
+    AutoRemediation.struct_class = Types::AutoRemediation
 
     BestPractice.add_member(:choice_id, Shapes::ShapeRef.new(shape: ChoiceId, location_name: "ChoiceId"))
     BestPractice.add_member(:choice_title, Shapes::ShapeRef.new(shape: ChoiceTitle, location_name: "ChoiceTitle"))
@@ -934,6 +1056,7 @@ module Aws::WellArchitected
     ContextContent.add_member(:aws_services, Shapes::ShapeRef.new(shape: ContextContentAwsServicesList, location_name: "awsServices"))
     ContextContent.add_member(:resource_types, Shapes::ShapeRef.new(shape: ContextContentResourceTypesList, location_name: "resourceTypes"))
     ContextContent.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ContextContentResourceTagsList, location_name: "resourceTags"))
+    ContextContent.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: ContextContentOrganizationalUnitIdsList, location_name: "organizationalUnitIds"))
     ContextContent.add_member(:application_overview, Shapes::ShapeRef.new(shape: ContextContentApplicationOverviewString, location_name: "applicationOverview"))
     ContextContent.add_member(:industry, Shapes::ShapeRef.new(shape: ContextContentIndustryString, location_name: "industry"))
     ContextContent.add_member(:application_type, Shapes::ShapeRef.new(shape: ApplicationType, location_name: "applicationType"))
@@ -945,6 +1068,8 @@ module Aws::WellArchitected
     ContextContentAccountIdsList.member = Shapes::ShapeRef.new(shape: ContextContentAccountIdsListMemberString)
 
     ContextContentAwsServicesList.member = Shapes::ShapeRef.new(shape: ContextContentAwsServicesListMemberString)
+
+    ContextContentOrganizationalUnitIdsList.member = Shapes::ShapeRef.new(shape: ContextContentOrganizationalUnitIdsListMemberString)
 
     ContextContentRegionsList.member = Shapes::ShapeRef.new(shape: ContextContentRegionsListMemberString)
 
@@ -971,6 +1096,28 @@ module Aws::WellArchitected
     ContextSummary.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastModifiedAt"))
     ContextSummary.struct_class = Types::ContextSummary
 
+    CoverageSummary.add_member(:total_accounts_in_scope, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "totalAccountsInScope"))
+    CoverageSummary.add_member(:accounts_with_profile, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "accountsWithProfile"))
+    CoverageSummary.add_member(:accounts_without_profile, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "accountsWithoutProfile"))
+    CoverageSummary.add_member(:failed_account_count, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "failedAccountCount"))
+    CoverageSummary.add_member(:total_profiles, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "totalProfiles"))
+    CoverageSummary.add_member(:total_recommendations, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "totalRecommendations"))
+    CoverageSummary.add_member(:recommendation_count_by_pillar, Shapes::ShapeRef.new(shape: PillarCountList, location_name: "recommendationCountByPillar"))
+    CoverageSummary.add_member(:recommendation_count_by_priority, Shapes::ShapeRef.new(shape: PriorityCountList, location_name: "recommendationCountByPriority"))
+    CoverageSummary.add_member(:failed_accounts, Shapes::ShapeRef.new(shape: FailedAccountList, location_name: "failedAccounts"))
+    CoverageSummary.add_member(:failed_organizational_units, Shapes::ShapeRef.new(shape: FailedOrganizationalUnitList, location_name: "failedOrganizationalUnits"))
+    CoverageSummary.struct_class = Types::CoverageSummary
+
+    CreateAgentBasicProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateAgentBasicProfileRequest.struct_class = Types::CreateAgentBasicProfileRequest
+
+    CreateAgentBasicProfileResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: CreateAgentBasicProfileResponseCreatedByString, required: true, location_name: "createdBy"))
+    CreateAgentBasicProfileResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    CreateAgentBasicProfileResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: CreateAgentBasicProfileResponseLastModifiedByString, location_name: "lastModifiedBy"))
+    CreateAgentBasicProfileResponse.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastModifiedAt"))
+    CreateAgentBasicProfileResponse.add_member(:arn, Shapes::ShapeRef.new(shape: AgentProfileArn, required: true, location_name: "arn"))
+    CreateAgentBasicProfileResponse.struct_class = Types::CreateAgentBasicProfileResponse
+
     CreateAgentContextRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateAgentContextRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAgentContextRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: AgentProfileArn, required: true, location: "uri", location_name: "profileArn"))
     CreateAgentContextRequest.add_member(:title, Shapes::ShapeRef.new(shape: CreateAgentContextRequestTitleString, required: true, location_name: "title"))
@@ -990,6 +1137,45 @@ module Aws::WellArchitected
 
     CreateAgentGoalResponse.add_member(:goal, Shapes::ShapeRef.new(shape: GoalSummary, required: true, location_name: "goal"))
     CreateAgentGoalResponse.struct_class = Types::CreateAgentGoalResponse
+
+    CreateAgentOrganizationalProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: CreateAgentOrganizationalProfileRequestNameString, required: true, location_name: "name"))
+    CreateAgentOrganizationalProfileRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: CreateAgentOrganizationalProfileRequestDisplayNameString, location_name: "displayName"))
+    CreateAgentOrganizationalProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: CreateAgentOrganizationalProfileRequestDescriptionString, location_name: "description"))
+    CreateAgentOrganizationalProfileRequest.add_member(:business_overview, Shapes::ShapeRef.new(shape: CreateAgentOrganizationalProfileRequestBusinessOverviewString, location_name: "businessOverview"))
+    CreateAgentOrganizationalProfileRequest.add_member(:pillars, Shapes::ShapeRef.new(shape: Pillars, required: true, location_name: "pillars"))
+    CreateAgentOrganizationalProfileRequest.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "deletionProtection"))
+    CreateAgentOrganizationalProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateAgentOrganizationalProfileRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateAgentOrganizationalProfileRequest.add_member(:organizational_aggregation_configuration, Shapes::ShapeRef.new(shape: OrganizationalAggregationConfiguration, location_name: "organizationalAggregationConfiguration"))
+    CreateAgentOrganizationalProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateAgentOrganizationalProfileRequest.struct_class = Types::CreateAgentOrganizationalProfileRequest
+
+    CreateAgentOrganizationalProfileResponse.add_member(:name, Shapes::ShapeRef.new(shape: CreateAgentOrganizationalProfileResponseNameString, required: true, location_name: "name"))
+    CreateAgentOrganizationalProfileResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: CreateAgentOrganizationalProfileResponseDisplayNameString, location_name: "displayName"))
+    CreateAgentOrganizationalProfileResponse.add_member(:description, Shapes::ShapeRef.new(shape: CreateAgentOrganizationalProfileResponseDescriptionString, location_name: "description"))
+    CreateAgentOrganizationalProfileResponse.add_member(:business_overview, Shapes::ShapeRef.new(shape: CreateAgentOrganizationalProfileResponseBusinessOverviewString, location_name: "businessOverview"))
+    CreateAgentOrganizationalProfileResponse.add_member(:pillars, Shapes::ShapeRef.new(shape: Pillars, required: true, location_name: "pillars"))
+    CreateAgentOrganizationalProfileResponse.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "deletionProtection"))
+    CreateAgentOrganizationalProfileResponse.add_member(:organization_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "organizationId"))
+    CreateAgentOrganizationalProfileResponse.add_member(:organizational_aggregation_configuration, Shapes::ShapeRef.new(shape: OrganizationalAggregationConfiguration, location_name: "organizationalAggregationConfiguration"))
+    CreateAgentOrganizationalProfileResponse.add_member(:arn, Shapes::ShapeRef.new(shape: AgentProfileArn, required: true, location_name: "arn"))
+    CreateAgentOrganizationalProfileResponse.add_member(:eligible_for_scheduled_generation, Shapes::ShapeRef.new(shape: Boolean, location_name: "eligibleForScheduledGeneration"))
+    CreateAgentOrganizationalProfileResponse.add_member(:eligible_for_architecture_generation, Shapes::ShapeRef.new(shape: Boolean, location_name: "eligibleForArchitectureGeneration"))
+    CreateAgentOrganizationalProfileResponse.add_member(:field_errors, Shapes::ShapeRef.new(shape: FieldErrors, location_name: "fieldErrors"))
+    CreateAgentOrganizationalProfileResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateAgentOrganizationalProfileResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: CreateAgentOrganizationalProfileResponseCreatedByString, required: true, location_name: "createdBy"))
+    CreateAgentOrganizationalProfileResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    CreateAgentOrganizationalProfileResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: CreateAgentOrganizationalProfileResponseLastModifiedByString, location_name: "lastModifiedBy"))
+    CreateAgentOrganizationalProfileResponse.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastModifiedAt"))
+    CreateAgentOrganizationalProfileResponse.struct_class = Types::CreateAgentOrganizationalProfileResponse
+
+    CreateAgentOrganizationalReportRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateAgentOrganizationalReportRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateAgentOrganizationalReportRequest.add_member(:label, Shapes::ShapeRef.new(shape: ReportLabel, location_name: "label"))
+    CreateAgentOrganizationalReportRequest.add_member(:filters, Shapes::ShapeRef.new(shape: OrganizationalReportFilters, location_name: "filters"))
+    CreateAgentOrganizationalReportRequest.struct_class = Types::CreateAgentOrganizationalReportRequest
+
+    CreateAgentOrganizationalReportResponse.add_member(:report_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "reportId"))
+    CreateAgentOrganizationalReportResponse.add_member(:state, Shapes::ShapeRef.new(shape: OrganizationalReportState, required: true, location_name: "state"))
+    CreateAgentOrganizationalReportResponse.struct_class = Types::CreateAgentOrganizationalReportResponse
 
     CreateAgentProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: CreateAgentProfileRequestNameString, required: true, location_name: "name"))
     CreateAgentProfileRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: CreateAgentProfileRequestDisplayNameString, location_name: "displayName"))
@@ -1145,10 +1331,25 @@ module Aws::WellArchitected
 
     DeleteAgentGoalResponse.struct_class = Types::DeleteAgentGoalResponse
 
+    DeleteAgentOrganizationalReportRequest.add_member(:report_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "reportId"))
+    DeleteAgentOrganizationalReportRequest.struct_class = Types::DeleteAgentOrganizationalReportRequest
+
+    DeleteAgentOrganizationalReportResponse.struct_class = Types::DeleteAgentOrganizationalReportResponse
+
+    DeleteAgentProfilePolicyRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: AgentProfileArn, required: true, location: "uri", location_name: "profileArn"))
+    DeleteAgentProfilePolicyRequest.struct_class = Types::DeleteAgentProfilePolicyRequest
+
+    DeleteAgentProfilePolicyResponse.struct_class = Types::DeleteAgentProfilePolicyResponse
+
     DeleteAgentProfileRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: AgentProfileArn, required: true, location: "uri", location_name: "profileArn"))
     DeleteAgentProfileRequest.struct_class = Types::DeleteAgentProfileRequest
 
     DeleteAgentProfileResponse.struct_class = Types::DeleteAgentProfileResponse
+
+    DeleteAgentRecommendationPolicyRequest.add_member(:recommendation_arn, Shapes::ShapeRef.new(shape: AgentRecommendationArn, required: true, location: "uri", location_name: "recommendationArn"))
+    DeleteAgentRecommendationPolicyRequest.struct_class = Types::DeleteAgentRecommendationPolicyRequest
+
+    DeleteAgentRecommendationPolicyResponse.struct_class = Types::DeleteAgentRecommendationPolicyResponse
 
     DeleteLensInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
     DeleteLensInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
@@ -1206,8 +1407,22 @@ module Aws::WellArchitected
     ExportLensOutput.add_member(:lens_json, Shapes::ShapeRef.new(shape: LensJSON, location_name: "LensJSON"))
     ExportLensOutput.struct_class = Types::ExportLensOutput
 
+    FailedAccount.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    FailedAccount.add_member(:reason, Shapes::ShapeRef.new(shape: String, required: true, location_name: "reason"))
+    FailedAccount.struct_class = Types::FailedAccount
+
+    FailedAccountList.member = Shapes::ShapeRef.new(shape: FailedAccount)
+
+    FailedOrganizationalUnit.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, required: true, location_name: "organizationalUnitId"))
+    FailedOrganizationalUnit.add_member(:reason, Shapes::ShapeRef.new(shape: String, required: true, location_name: "reason"))
+    FailedOrganizationalUnit.struct_class = Types::FailedOrganizationalUnit
+
+    FailedOrganizationalUnitList.member = Shapes::ShapeRef.new(shape: FailedOrganizationalUnit)
+
     FieldErrors.key = Shapes::ShapeRef.new(shape: FieldErrorPath)
     FieldErrors.value = Shapes::ShapeRef.new(shape: FieldErrorMessage)
+
+    GenerationRecommendationTypes.member = Shapes::ShapeRef.new(shape: RecommendationType)
 
     GetAgentContextRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: AgentProfileArn, required: true, location: "uri", location_name: "profileArn"))
     GetAgentContextRequest.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "id"))
@@ -1223,6 +1438,39 @@ module Aws::WellArchitected
     GetAgentGoalResponse.add_member(:goal, Shapes::ShapeRef.new(shape: GoalSummary, required: true, location_name: "goal"))
     GetAgentGoalResponse.struct_class = Types::GetAgentGoalResponse
 
+    GetAgentOrganizationalReportDataRequest.add_member(:report_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "reportId"))
+    GetAgentOrganizationalReportDataRequest.add_member(:format, Shapes::ShapeRef.new(shape: OrganizationalReportFormat, required: true, location: "querystring", location_name: "format"))
+    GetAgentOrganizationalReportDataRequest.struct_class = Types::GetAgentOrganizationalReportDataRequest
+
+    GetAgentOrganizationalReportDataResponse.add_member(:download_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "downloadUrl"))
+    GetAgentOrganizationalReportDataResponse.add_member(:expires_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "expiresAt"))
+    GetAgentOrganizationalReportDataResponse.struct_class = Types::GetAgentOrganizationalReportDataResponse
+
+    GetAgentOrganizationalReportRequest.add_member(:report_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "reportId"))
+    GetAgentOrganizationalReportRequest.struct_class = Types::GetAgentOrganizationalReportRequest
+
+    GetAgentOrganizationalReportResponse.add_member(:report_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "reportId"))
+    GetAgentOrganizationalReportResponse.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "ownerAccountId"))
+    GetAgentOrganizationalReportResponse.add_member(:organization_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "organizationId"))
+    GetAgentOrganizationalReportResponse.add_member(:label, Shapes::ShapeRef.new(shape: ReportLabel, location_name: "label"))
+    GetAgentOrganizationalReportResponse.add_member(:state, Shapes::ShapeRef.new(shape: OrganizationalReportState, required: true, location_name: "state"))
+    GetAgentOrganizationalReportResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    GetAgentOrganizationalReportResponse.add_member(:filters, Shapes::ShapeRef.new(shape: OrganizationalReportFilters, location_name: "filters"))
+    GetAgentOrganizationalReportResponse.add_member(:coverage_summary, Shapes::ShapeRef.new(shape: CoverageSummary, location_name: "coverageSummary"))
+    GetAgentOrganizationalReportResponse.struct_class = Types::GetAgentOrganizationalReportResponse
+
+    GetAgentPreferencesRequest.struct_class = Types::GetAgentPreferencesRequest
+
+    GetAgentPreferencesResponse.add_member(:preferences, Shapes::ShapeRef.new(shape: PreferenceEntries, required: true, location_name: "preferences"))
+    GetAgentPreferencesResponse.struct_class = Types::GetAgentPreferencesResponse
+
+    GetAgentProfilePolicyRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: AgentProfileArn, required: true, location: "uri", location_name: "profileArn"))
+    GetAgentProfilePolicyRequest.struct_class = Types::GetAgentProfilePolicyRequest
+
+    GetAgentProfilePolicyResponse.add_member(:profile_arn, Shapes::ShapeRef.new(shape: AgentProfileArn, required: true, location_name: "profileArn"))
+    GetAgentProfilePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicy, required: true, location_name: "policy"))
+    GetAgentProfilePolicyResponse.struct_class = Types::GetAgentProfilePolicyResponse
+
     GetAgentProfileRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: AgentProfileArn, required: true, location: "uri", location_name: "profileArn"))
     GetAgentProfileRequest.struct_class = Types::GetAgentProfileRequest
 
@@ -1230,10 +1478,11 @@ module Aws::WellArchitected
     GetAgentProfileResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: GetAgentProfileResponseDisplayNameString, location_name: "displayName"))
     GetAgentProfileResponse.add_member(:description, Shapes::ShapeRef.new(shape: GetAgentProfileResponseDescriptionString, location_name: "description"))
     GetAgentProfileResponse.add_member(:business_overview, Shapes::ShapeRef.new(shape: GetAgentProfileResponseBusinessOverviewString, location_name: "businessOverview"))
-    GetAgentProfileResponse.add_member(:pillars, Shapes::ShapeRef.new(shape: Pillars, required: true, location_name: "pillars"))
+    GetAgentProfileResponse.add_member(:pillars, Shapes::ShapeRef.new(shape: Pillars, location_name: "pillars"))
     GetAgentProfileResponse.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "deletionProtection"))
-    GetAgentProfileResponse.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "executionRoleArn"))
-    GetAgentProfileResponse.add_member(:aggregation_configuration, Shapes::ShapeRef.new(shape: AggregationConfigurations, required: true, location_name: "aggregationConfiguration"))
+    GetAgentProfileResponse.add_member(:profile_type, Shapes::ShapeRef.new(shape: ProfileType, location_name: "profileType"))
+    GetAgentProfileResponse.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "executionRoleArn"))
+    GetAgentProfileResponse.add_member(:aggregation_configuration, Shapes::ShapeRef.new(shape: AggregationConfigurations, location_name: "aggregationConfiguration"))
     GetAgentProfileResponse.add_member(:arn, Shapes::ShapeRef.new(shape: AgentProfileArn, required: true, location_name: "arn"))
     GetAgentProfileResponse.add_member(:eligible_for_scheduled_generation, Shapes::ShapeRef.new(shape: Boolean, location_name: "eligibleForScheduledGeneration"))
     GetAgentProfileResponse.add_member(:eligible_for_architecture_generation, Shapes::ShapeRef.new(shape: Boolean, location_name: "eligibleForArchitectureGeneration"))
@@ -1243,6 +1492,7 @@ module Aws::WellArchitected
     GetAgentProfileResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
     GetAgentProfileResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: GetAgentProfileResponseLastModifiedByString, location_name: "lastModifiedBy"))
     GetAgentProfileResponse.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastModifiedAt"))
+    GetAgentProfileResponse.add_member(:organizational_aggregation_configuration, Shapes::ShapeRef.new(shape: OrganizationalAggregationConfiguration, location_name: "organizationalAggregationConfiguration"))
     GetAgentProfileResponse.struct_class = Types::GetAgentProfileResponse
 
     GetAgentRecommendationGenerationRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: AgentProfileArn, required: true, location: "uri", location_name: "profileArn"))
@@ -1258,13 +1508,22 @@ module Aws::WellArchitected
     GetAgentRecommendationGenerationResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
     GetAgentRecommendationGenerationResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: GetAgentRecommendationGenerationResponseLastModifiedByString, location_name: "lastModifiedBy"))
     GetAgentRecommendationGenerationResponse.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastModifiedAt"))
-    GetAgentRecommendationGenerationResponse.add_member(:additional_context, Shapes::ShapeRef.new(shape: Document, location_name: "additionalContext"))
-    GetAgentRecommendationGenerationResponse.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "scope"))
+    GetAgentRecommendationGenerationResponse.add_member(:generation_type, Shapes::ShapeRef.new(shape: GenerationType, location_name: "generationType"))
+    GetAgentRecommendationGenerationResponse.add_member(:generation_recommendation_types, Shapes::ShapeRef.new(shape: GenerationRecommendationTypes, location_name: "generationRecommendationTypes"))
     GetAgentRecommendationGenerationResponse.add_member(:started_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "startedAt"))
     GetAgentRecommendationGenerationResponse.add_member(:ended_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "endedAt"))
-    GetAgentRecommendationGenerationResponse.add_member(:progress, Shapes::ShapeRef.new(shape: Progress, location_name: "progress"))
     GetAgentRecommendationGenerationResponse.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errorDetails"))
+    GetAgentRecommendationGenerationResponse.add_member(:additional_context, Shapes::ShapeRef.new(shape: SensitiveDocument, location_name: "additionalContext"))
+    GetAgentRecommendationGenerationResponse.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "scope"))
+    GetAgentRecommendationGenerationResponse.add_member(:progress, Shapes::ShapeRef.new(shape: Progress, location_name: "progress"))
     GetAgentRecommendationGenerationResponse.struct_class = Types::GetAgentRecommendationGenerationResponse
+
+    GetAgentRecommendationPolicyRequest.add_member(:recommendation_arn, Shapes::ShapeRef.new(shape: AgentRecommendationArn, required: true, location: "uri", location_name: "recommendationArn"))
+    GetAgentRecommendationPolicyRequest.struct_class = Types::GetAgentRecommendationPolicyRequest
+
+    GetAgentRecommendationPolicyResponse.add_member(:recommendation_arn, Shapes::ShapeRef.new(shape: AgentRecommendationArn, required: true, location_name: "recommendationArn"))
+    GetAgentRecommendationPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicy, required: true, location_name: "policy"))
+    GetAgentRecommendationPolicyResponse.struct_class = Types::GetAgentRecommendationPolicyResponse
 
     GetAgentRecommendationRequest.add_member(:recommendation_arn, Shapes::ShapeRef.new(shape: AgentRecommendationArn, required: true, location: "uri", location_name: "recommendationArn"))
     GetAgentRecommendationRequest.add_member(:remediation_type, Shapes::ShapeRef.new(shape: RemediationType, location: "querystring", location_name: "remediationType"))
@@ -1582,6 +1841,15 @@ module Aws::WellArchitected
     ListAgentGoalsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ListAgentGoalsResponseNextTokenString, location_name: "nextToken"))
     ListAgentGoalsResponse.struct_class = Types::ListAgentGoalsResponse
 
+    ListAgentOrganizationalReportsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAgentOrganizationalReportsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListAgentOrganizationalReportsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListAgentOrganizationalReportsRequestNextTokenString, location: "querystring", location_name: "nextToken"))
+    ListAgentOrganizationalReportsRequest.add_member(:state, Shapes::ShapeRef.new(shape: OrganizationalReportState, location: "querystring", location_name: "state"))
+    ListAgentOrganizationalReportsRequest.struct_class = Types::ListAgentOrganizationalReportsRequest
+
+    ListAgentOrganizationalReportsResponse.add_member(:items, Shapes::ShapeRef.new(shape: OrganizationalReportSummaryList, required: true, location_name: "items"))
+    ListAgentOrganizationalReportsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ListAgentOrganizationalReportsResponseNextTokenString, location_name: "nextToken"))
+    ListAgentOrganizationalReportsResponse.struct_class = Types::ListAgentOrganizationalReportsResponse
+
     ListAgentProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAgentProfilesRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListAgentProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListAgentProfilesRequestNextTokenString, location: "querystring", location_name: "nextToken"))
     ListAgentProfilesRequest.struct_class = Types::ListAgentProfilesRequest
@@ -1858,6 +2126,52 @@ module Aws::WellArchitected
     NotificationSummary.add_member(:lens_upgrade_summary, Shapes::ShapeRef.new(shape: LensUpgradeSummary, location_name: "LensUpgradeSummary"))
     NotificationSummary.struct_class = Types::NotificationSummary
 
+    OrganizationalAccountEntry.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    OrganizationalAccountEntry.add_member(:regions, Shapes::ShapeRef.new(shape: Regions, required: true, location_name: "regions"))
+    OrganizationalAccountEntry.struct_class = Types::OrganizationalAccountEntry
+
+    OrganizationalAccountEntryList.member = Shapes::ShapeRef.new(shape: OrganizationalAccountEntry)
+
+    OrganizationalAggregationConfiguration.add_member(:organizational_units, Shapes::ShapeRef.new(shape: OrganizationalUnitEntryList, location_name: "organizationalUnits"))
+    OrganizationalAggregationConfiguration.add_member(:accounts, Shapes::ShapeRef.new(shape: OrganizationalAccountEntryList, location_name: "accounts"))
+    OrganizationalAggregationConfiguration.struct_class = Types::OrganizationalAggregationConfiguration
+
+    OrganizationalReportAccountIdList.member = Shapes::ShapeRef.new(shape: AccountId)
+
+    OrganizationalReportFilters.add_member(:account_ids, Shapes::ShapeRef.new(shape: OrganizationalReportAccountIdList, location_name: "accountIds"))
+    OrganizationalReportFilters.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationalUnitIdList, location_name: "organizationalUnitIds"))
+    OrganizationalReportFilters.add_member(:pillars, Shapes::ShapeRef.new(shape: PillarList, location_name: "pillars"))
+    OrganizationalReportFilters.add_member(:recommendation_types, Shapes::ShapeRef.new(shape: RecommendationTypeList, location_name: "recommendationTypes"))
+    OrganizationalReportFilters.add_member(:statuses, Shapes::ShapeRef.new(shape: RecommendationStatusList, location_name: "statuses"))
+    OrganizationalReportFilters.add_member(:priorities, Shapes::ShapeRef.new(shape: PriorityList, location_name: "priorities"))
+    OrganizationalReportFilters.add_member(:created_at_range, Shapes::ShapeRef.new(shape: TimeWindow, location_name: "createdAtRange"))
+    OrganizationalReportFilters.add_member(:updated_at_range, Shapes::ShapeRef.new(shape: TimeWindow, location_name: "updatedAtRange"))
+    OrganizationalReportFilters.struct_class = Types::OrganizationalReportFilters
+
+    OrganizationalReportSummary.add_member(:report_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "reportId"))
+    OrganizationalReportSummary.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "ownerAccountId"))
+    OrganizationalReportSummary.add_member(:organization_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "organizationId"))
+    OrganizationalReportSummary.add_member(:label, Shapes::ShapeRef.new(shape: ReportLabel, location_name: "label"))
+    OrganizationalReportSummary.add_member(:state, Shapes::ShapeRef.new(shape: OrganizationalReportState, required: true, location_name: "state"))
+    OrganizationalReportSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    OrganizationalReportSummary.struct_class = Types::OrganizationalReportSummary
+
+    OrganizationalReportSummaryList.member = Shapes::ShapeRef.new(shape: OrganizationalReportSummary)
+
+    OrganizationalUnitEntry.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalNodeId, required: true, location_name: "organizationalUnitId"))
+    OrganizationalUnitEntry.add_member(:regions, Shapes::ShapeRef.new(shape: Regions, required: true, location_name: "regions"))
+    OrganizationalUnitEntry.struct_class = Types::OrganizationalUnitEntry
+
+    OrganizationalUnitEntryList.member = Shapes::ShapeRef.new(shape: OrganizationalUnitEntry)
+
+    OrganizationalUnitIdList.member = Shapes::ShapeRef.new(shape: OrganizationalUnitId)
+
+    PillarCount.add_member(:pillar, Shapes::ShapeRef.new(shape: Pillar, required: true, location_name: "pillar"))
+    PillarCount.add_member(:count, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "count"))
+    PillarCount.struct_class = Types::PillarCount
+
+    PillarCountList.member = Shapes::ShapeRef.new(shape: PillarCount)
+
     PillarDifference.add_member(:pillar_id, Shapes::ShapeRef.new(shape: PillarId, location_name: "PillarId"))
     PillarDifference.add_member(:pillar_name, Shapes::ShapeRef.new(shape: PillarName, location_name: "PillarName"))
     PillarDifference.add_member(:difference_status, Shapes::ShapeRef.new(shape: DifferenceStatus, location_name: "DifferenceStatus"))
@@ -1871,6 +2185,8 @@ module Aws::WellArchitected
     PillarItem.struct_class = Types::PillarItem
 
     PillarItems.member = Shapes::ShapeRef.new(shape: PillarItem)
+
+    PillarList.member = Shapes::ShapeRef.new(shape: Pillar)
 
     PillarMetric.add_member(:pillar_id, Shapes::ShapeRef.new(shape: PillarId, location_name: "PillarId"))
     PillarMetric.add_member(:risk_counts, Shapes::ShapeRef.new(shape: RiskCounts, location_name: "RiskCounts"))
@@ -1892,6 +2208,27 @@ module Aws::WellArchitected
     PillarReviewSummary.struct_class = Types::PillarReviewSummary
 
     Pillars.member = Shapes::ShapeRef.new(shape: Pillar)
+
+    PreferenceEntries.member = Shapes::ShapeRef.new(shape: PreferenceEntry)
+
+    PreferenceEntry.add_member(:key, Shapes::ShapeRef.new(shape: PreferenceKey, required: true, location_name: "key"))
+    PreferenceEntry.add_member(:status, Shapes::ShapeRef.new(shape: PreferenceStatus, required: true, location_name: "status"))
+    PreferenceEntry.add_member(:detail, Shapes::ShapeRef.new(shape: PreferenceEntryDetailString, location_name: "detail"))
+    PreferenceEntry.struct_class = Types::PreferenceEntry
+
+    PreferenceUpdate.add_member(:key, Shapes::ShapeRef.new(shape: PreferenceKey, required: true, location_name: "key"))
+    PreferenceUpdate.add_member(:state, Shapes::ShapeRef.new(shape: PreferenceState, required: true, location_name: "state"))
+    PreferenceUpdate.struct_class = Types::PreferenceUpdate
+
+    PreferenceUpdates.member = Shapes::ShapeRef.new(shape: PreferenceUpdate)
+
+    PriorityCount.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, required: true, location_name: "priority"))
+    PriorityCount.add_member(:count, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "count"))
+    PriorityCount.struct_class = Types::PriorityCount
+
+    PriorityCountList.member = Shapes::ShapeRef.new(shape: PriorityCount)
+
+    PriorityList.member = Shapes::ShapeRef.new(shape: Priority)
 
     Profile.add_member(:profile_arn, Shapes::ShapeRef.new(shape: ProfileArn, location_name: "ProfileArn"))
     Profile.add_member(:profile_version, Shapes::ShapeRef.new(shape: ProfileVersion, location_name: "ProfileVersion"))
@@ -1987,6 +2324,17 @@ module Aws::WellArchitected
     Progress.add_member(:completion_percentage, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "completionPercentage"))
     Progress.struct_class = Types::Progress
 
+    PutAgentPreferencesRequest.add_member(:preferences, Shapes::ShapeRef.new(shape: PreferenceUpdates, required: true, location_name: "preferences"))
+    PutAgentPreferencesRequest.struct_class = Types::PutAgentPreferencesRequest
+
+    PutAgentPreferencesResponse.struct_class = Types::PutAgentPreferencesResponse
+
+    PutAgentProfilePolicyRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: AgentProfileArn, required: true, location: "uri", location_name: "profileArn"))
+    PutAgentProfilePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicy, required: true, location_name: "policy"))
+    PutAgentProfilePolicyRequest.struct_class = Types::PutAgentProfilePolicyRequest
+
+    PutAgentProfilePolicyResponse.struct_class = Types::PutAgentProfilePolicyResponse
+
     PutAgentRecommendationFeedbackRequest.add_member(:recommendation_arn, Shapes::ShapeRef.new(shape: AgentRecommendationArn, required: true, location: "uri", location_name: "recommendationArn"))
     PutAgentRecommendationFeedbackRequest.add_member(:type, Shapes::ShapeRef.new(shape: RecommendationFeedbackType, required: true, location_name: "type"))
     PutAgentRecommendationFeedbackRequest.add_member(:feedback_category, Shapes::ShapeRef.new(shape: FeedbackCategory, location_name: "feedbackCategory"))
@@ -1994,6 +2342,12 @@ module Aws::WellArchitected
     PutAgentRecommendationFeedbackRequest.struct_class = Types::PutAgentRecommendationFeedbackRequest
 
     PutAgentRecommendationFeedbackResponse.struct_class = Types::PutAgentRecommendationFeedbackResponse
+
+    PutAgentRecommendationPolicyRequest.add_member(:recommendation_arn, Shapes::ShapeRef.new(shape: AgentRecommendationArn, required: true, location: "uri", location_name: "recommendationArn"))
+    PutAgentRecommendationPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicy, required: true, location_name: "policy"))
+    PutAgentRecommendationPolicyRequest.struct_class = Types::PutAgentRecommendationPolicyRequest
+
+    PutAgentRecommendationPolicyResponse.struct_class = Types::PutAgentRecommendationPolicyResponse
 
     QuestionCounts.key = Shapes::ShapeRef.new(shape: Question)
     QuestionCounts.value = Shapes::ShapeRef.new(shape: Count)
@@ -2018,6 +2372,10 @@ module Aws::WellArchitected
     RecommendationGoals.member = Shapes::ShapeRef.new(shape: RecommendationGoal)
 
     RecommendationSourceList.member = Shapes::ShapeRef.new(shape: RecommendationSource)
+
+    RecommendationStatusList.member = Shapes::ShapeRef.new(shape: RecommendationStatus)
+
+    RecommendationTypeList.member = Shapes::ShapeRef.new(shape: RecommendationType)
 
     RecommendationTypes.member = Shapes::ShapeRef.new(shape: RecommendationType)
 
@@ -2152,6 +2510,15 @@ module Aws::WellArchitected
 
     SelectedQuestionIds.member = Shapes::ShapeRef.new(shape: SelectedQuestionId)
 
+    SendAgentOrganizationalReportDataToS3Request.add_member(:report_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "reportId"))
+    SendAgentOrganizationalReportDataToS3Request.add_member(:format, Shapes::ShapeRef.new(shape: OrganizationalReportFormat, required: true, location_name: "format"))
+    SendAgentOrganizationalReportDataToS3Request.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, required: true, location_name: "bucketArn"))
+    SendAgentOrganizationalReportDataToS3Request.add_member(:object_key, Shapes::ShapeRef.new(shape: S3ObjectKey, required: true, location_name: "objectKey"))
+    SendAgentOrganizationalReportDataToS3Request.struct_class = Types::SendAgentOrganizationalReportDataToS3Request
+
+    SendAgentOrganizationalReportDataToS3Response.add_member(:delivered_to, Shapes::ShapeRef.new(shape: String, required: true, location_name: "deliveredTo"))
+    SendAgentOrganizationalReportDataToS3Response.struct_class = Types::SendAgentOrganizationalReportDataToS3Response
+
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "Message"))
     ServiceQuotaExceededException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ExceptionResourceId, location_name: "ResourceId"))
     ServiceQuotaExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ExceptionResourceType, location_name: "ResourceType"))
@@ -2188,8 +2555,8 @@ module Aws::WellArchitected
     StartAgentRecommendationGenerationRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: AgentProfileArn, required: true, location: "uri", location_name: "profileArn"))
     StartAgentRecommendationGenerationRequest.add_member(:types, Shapes::ShapeRef.new(shape: RecommendationTypes, required: true, location_name: "types"))
     StartAgentRecommendationGenerationRequest.add_member(:name, Shapes::ShapeRef.new(shape: StartAgentRecommendationGenerationRequestNameString, location_name: "name"))
-    StartAgentRecommendationGenerationRequest.add_member(:additional_context, Shapes::ShapeRef.new(shape: Document, location_name: "additionalContext"))
-    StartAgentRecommendationGenerationRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "scope"))
+    StartAgentRecommendationGenerationRequest.add_member(:additional_context, Shapes::ShapeRef.new(shape: SensitiveDocument, location_name: "additionalContext"))
+    StartAgentRecommendationGenerationRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "scope"))
     StartAgentRecommendationGenerationRequest.struct_class = Types::StartAgentRecommendationGenerationRequest
 
     StartAgentRecommendationGenerationResponse.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
@@ -2237,6 +2604,10 @@ module Aws::WellArchitected
     ThrottlingException.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, location_name: "ServiceCode"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    TimeWindow.add_member(:from, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "from"))
+    TimeWindow.add_member(:to, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "to"))
+    TimeWindow.struct_class = Types::TimeWindow
+
     TradeOff.add_member(:pillar, Shapes::ShapeRef.new(shape: Pillar, required: true, location_name: "pillar"))
     TradeOff.add_member(:title, Shapes::ShapeRef.new(shape: TradeOffTitleString, required: true, location_name: "title"))
     TradeOff.add_member(:description, Shapes::ShapeRef.new(shape: TradeOffDescriptionString, required: true, location_name: "description"))
@@ -2274,6 +2645,34 @@ module Aws::WellArchitected
     UpdateAgentGoalResponse.add_member(:goal, Shapes::ShapeRef.new(shape: GoalSummary, required: true, location_name: "goal"))
     UpdateAgentGoalResponse.struct_class = Types::UpdateAgentGoalResponse
 
+    UpdateAgentOrganizationalProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: UpdateAgentOrganizationalProfileRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    UpdateAgentOrganizationalProfileRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: AgentProfileArn, required: true, location: "uri", location_name: "profileArn"))
+    UpdateAgentOrganizationalProfileRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: UpdateAgentOrganizationalProfileRequestDisplayNameString, location_name: "displayName"))
+    UpdateAgentOrganizationalProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: UpdateAgentOrganizationalProfileRequestDescriptionString, location_name: "description"))
+    UpdateAgentOrganizationalProfileRequest.add_member(:business_overview, Shapes::ShapeRef.new(shape: UpdateAgentOrganizationalProfileRequestBusinessOverviewString, location_name: "businessOverview"))
+    UpdateAgentOrganizationalProfileRequest.add_member(:pillars, Shapes::ShapeRef.new(shape: Pillars, location_name: "pillars"))
+    UpdateAgentOrganizationalProfileRequest.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "deletionProtection"))
+    UpdateAgentOrganizationalProfileRequest.add_member(:organizational_aggregation_configuration, Shapes::ShapeRef.new(shape: OrganizationalAggregationConfiguration, location_name: "organizationalAggregationConfiguration"))
+    UpdateAgentOrganizationalProfileRequest.struct_class = Types::UpdateAgentOrganizationalProfileRequest
+
+    UpdateAgentOrganizationalProfileResponse.add_member(:name, Shapes::ShapeRef.new(shape: UpdateAgentOrganizationalProfileResponseNameString, required: true, location_name: "name"))
+    UpdateAgentOrganizationalProfileResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: UpdateAgentOrganizationalProfileResponseDisplayNameString, location_name: "displayName"))
+    UpdateAgentOrganizationalProfileResponse.add_member(:description, Shapes::ShapeRef.new(shape: UpdateAgentOrganizationalProfileResponseDescriptionString, location_name: "description"))
+    UpdateAgentOrganizationalProfileResponse.add_member(:business_overview, Shapes::ShapeRef.new(shape: UpdateAgentOrganizationalProfileResponseBusinessOverviewString, location_name: "businessOverview"))
+    UpdateAgentOrganizationalProfileResponse.add_member(:pillars, Shapes::ShapeRef.new(shape: Pillars, required: true, location_name: "pillars"))
+    UpdateAgentOrganizationalProfileResponse.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "deletionProtection"))
+    UpdateAgentOrganizationalProfileResponse.add_member(:organization_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "organizationId"))
+    UpdateAgentOrganizationalProfileResponse.add_member(:organizational_aggregation_configuration, Shapes::ShapeRef.new(shape: OrganizationalAggregationConfiguration, location_name: "organizationalAggregationConfiguration"))
+    UpdateAgentOrganizationalProfileResponse.add_member(:arn, Shapes::ShapeRef.new(shape: AgentProfileArn, required: true, location_name: "arn"))
+    UpdateAgentOrganizationalProfileResponse.add_member(:eligible_for_scheduled_generation, Shapes::ShapeRef.new(shape: Boolean, location_name: "eligibleForScheduledGeneration"))
+    UpdateAgentOrganizationalProfileResponse.add_member(:eligible_for_architecture_generation, Shapes::ShapeRef.new(shape: Boolean, location_name: "eligibleForArchitectureGeneration"))
+    UpdateAgentOrganizationalProfileResponse.add_member(:field_errors, Shapes::ShapeRef.new(shape: FieldErrors, location_name: "fieldErrors"))
+    UpdateAgentOrganizationalProfileResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: UpdateAgentOrganizationalProfileResponseCreatedByString, required: true, location_name: "createdBy"))
+    UpdateAgentOrganizationalProfileResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    UpdateAgentOrganizationalProfileResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: UpdateAgentOrganizationalProfileResponseLastModifiedByString, location_name: "lastModifiedBy"))
+    UpdateAgentOrganizationalProfileResponse.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastModifiedAt"))
+    UpdateAgentOrganizationalProfileResponse.struct_class = Types::UpdateAgentOrganizationalProfileResponse
+
     UpdateAgentProfileRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: UpdateAgentProfileRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateAgentProfileRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: AgentProfileArn, required: true, location: "uri", location_name: "profileArn"))
     UpdateAgentProfileRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: UpdateAgentProfileRequestDisplayNameString, location_name: "displayName"))
@@ -2297,7 +2696,6 @@ module Aws::WellArchitected
     UpdateAgentProfileResponse.add_member(:eligible_for_scheduled_generation, Shapes::ShapeRef.new(shape: Boolean, location_name: "eligibleForScheduledGeneration"))
     UpdateAgentProfileResponse.add_member(:eligible_for_architecture_generation, Shapes::ShapeRef.new(shape: Boolean, location_name: "eligibleForArchitectureGeneration"))
     UpdateAgentProfileResponse.add_member(:field_errors, Shapes::ShapeRef.new(shape: FieldErrors, location_name: "fieldErrors"))
-    UpdateAgentProfileResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     UpdateAgentProfileResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: UpdateAgentProfileResponseCreatedByString, required: true, location_name: "createdBy"))
     UpdateAgentProfileResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
     UpdateAgentProfileResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: UpdateAgentProfileResponseLastModifiedByString, location_name: "lastModifiedBy"))
@@ -2611,6 +3009,20 @@ module Aws::WellArchitected
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:create_agent_basic_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAgentBasicProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/api/v1/agent-basic-profile"
+        o.input = Shapes::ShapeRef.new(shape: CreateAgentBasicProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAgentBasicProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_agent_context, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateAgentContext"
         o.http_method = "POST"
@@ -2638,6 +3050,35 @@ module Aws::WellArchitected
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_agent_organizational_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAgentOrganizationalProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/api/v1/agent-organizational-profiles"
+        o.input = Shapes::ShapeRef.new(shape: CreateAgentOrganizationalProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAgentOrganizationalProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_agent_organizational_report, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAgentOrganizationalReport"
+        o.http_method = "POST"
+        o.http_request_uri = "/api/v1/agent-organizational-reports"
+        o.input = Shapes::ShapeRef.new(shape: CreateAgentOrganizationalReportRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAgentOrganizationalReportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
@@ -2815,6 +3256,19 @@ module Aws::WellArchitected
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:delete_agent_organizational_report, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAgentOrganizationalReport"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/api/v1/agent-organizational-reports/{reportId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAgentOrganizationalReportRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAgentOrganizationalReportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:delete_agent_profile, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteAgentProfile"
         o.http_method = "DELETE"
@@ -2825,6 +3279,32 @@ module Aws::WellArchitected
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_agent_profile_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAgentProfilePolicy"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/api/v1/agent-profiles/{profileArn}/policy"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAgentProfilePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAgentProfilePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_agent_recommendation_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAgentRecommendationPolicy"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/api/v1/agent-recommendations/{recommendationArn}/policy"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAgentRecommendationPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAgentRecommendationPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
@@ -3008,12 +3488,63 @@ module Aws::WellArchitected
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:get_agent_organizational_report, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAgentOrganizationalReport"
+        o.http_method = "GET"
+        o.http_request_uri = "/api/v1/agent-organizational-reports/{reportId}"
+        o.input = Shapes::ShapeRef.new(shape: GetAgentOrganizationalReportRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAgentOrganizationalReportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_agent_organizational_report_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAgentOrganizationalReportData"
+        o.http_method = "GET"
+        o.http_request_uri = "/api/v1/agent-organizational-reports/{reportId}/data"
+        o.input = Shapes::ShapeRef.new(shape: GetAgentOrganizationalReportDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAgentOrganizationalReportDataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_agent_preferences, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAgentPreferences"
+        o.http_method = "GET"
+        o.http_request_uri = "/api/v1/agent-preferences"
+        o.input = Shapes::ShapeRef.new(shape: GetAgentPreferencesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAgentPreferencesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_agent_profile, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAgentProfile"
         o.http_method = "GET"
         o.http_request_uri = "/api/v1/agent-profiles/{profileArn}"
         o.input = Shapes::ShapeRef.new(shape: GetAgentProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAgentProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_agent_profile_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAgentProfilePolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/api/v1/agent-profiles/{profileArn}/policy"
+        o.input = Shapes::ShapeRef.new(shape: GetAgentProfilePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAgentProfilePolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -3040,6 +3571,19 @@ module Aws::WellArchitected
         o.http_request_uri = "/api/v1/agent-profiles/{profileArn}/generations/{generationId}"
         o.input = Shapes::ShapeRef.new(shape: GetAgentRecommendationGenerationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAgentRecommendationGenerationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_agent_recommendation_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAgentRecommendationPolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/api/v1/agent-recommendations/{recommendationArn}/policy"
+        o.input = Shapes::ShapeRef.new(shape: GetAgentRecommendationPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAgentRecommendationPolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -3273,6 +3817,24 @@ module Aws::WellArchitected
         o.http_request_uri = "/api/v1/agent-profiles/{profileArn}/goals"
         o.input = Shapes::ShapeRef.new(shape: ListAgentGoalsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAgentGoalsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_agent_organizational_reports, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAgentOrganizationalReports"
+        o.http_method = "GET"
+        o.http_request_uri = "/api/v1/agent-organizational-reports"
+        o.input = Shapes::ShapeRef.new(shape: ListAgentOrganizationalReportsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAgentOrganizationalReportsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -3705,12 +4267,64 @@ module Aws::WellArchitected
         )
       end)
 
+      api.add_operation(:put_agent_preferences, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAgentPreferences"
+        o.http_method = "PUT"
+        o.http_request_uri = "/api/v1/agent-preferences"
+        o.input = Shapes::ShapeRef.new(shape: PutAgentPreferencesRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAgentPreferencesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:put_agent_profile_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAgentProfilePolicy"
+        o.http_method = "PUT"
+        o.http_request_uri = "/api/v1/agent-profiles/{profileArn}/policy"
+        o.input = Shapes::ShapeRef.new(shape: PutAgentProfilePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAgentProfilePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:put_agent_recommendation_feedback, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutAgentRecommendationFeedback"
         o.http_method = "PUT"
         o.http_request_uri = "/api/v1/agent-recommendations/{recommendationArn}/feedback"
         o.input = Shapes::ShapeRef.new(shape: PutAgentRecommendationFeedbackRequest)
         o.output = Shapes::ShapeRef.new(shape: PutAgentRecommendationFeedbackResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:put_agent_recommendation_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAgentRecommendationPolicy"
+        o.http_method = "PUT"
+        o.http_request_uri = "/api/v1/agent-recommendations/{recommendationArn}/policy"
+        o.input = Shapes::ShapeRef.new(shape: PutAgentRecommendationPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAgentRecommendationPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:send_agent_organizational_report_data_to_s3, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendAgentOrganizationalReportDataToS3"
+        o.http_method = "POST"
+        o.http_request_uri = "/api/v1/agent-organizational-reports/{reportId}/send-to-s3"
+        o.input = Shapes::ShapeRef.new(shape: SendAgentOrganizationalReportDataToS3Request)
+        o.output = Shapes::ShapeRef.new(shape: SendAgentOrganizationalReportDataToS3Response)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -3778,6 +4392,19 @@ module Aws::WellArchitected
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:update_agent_organizational_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAgentOrganizationalProfile"
+        o.http_method = "PUT"
+        o.http_request_uri = "/api/v1/agent-organizational-profiles/{profileArn}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAgentOrganizationalProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAgentOrganizationalProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:update_agent_profile, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateAgentProfile"
         o.http_method = "PUT"
@@ -3787,6 +4414,7 @@ module Aws::WellArchitected
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)

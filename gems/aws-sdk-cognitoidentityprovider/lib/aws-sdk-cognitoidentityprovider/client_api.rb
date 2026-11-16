@@ -117,6 +117,8 @@ module Aws::CognitoIdentityProvider
     AttributeType = Shapes::StructureShape.new(name: 'AttributeType')
     AttributeValueType = Shapes::StringShape.new(name: 'AttributeValueType')
     AttributesRequireVerificationBeforeUpdateType = Shapes::ListShape.new(name: 'AttributesRequireVerificationBeforeUpdateType')
+    AudienceListType = Shapes::ListShape.new(name: 'AudienceListType')
+    AudienceType = Shapes::StringShape.new(name: 'AudienceType')
     AuthEventType = Shapes::StructureShape.new(name: 'AuthEventType')
     AuthEventsType = Shapes::ListShape.new(name: 'AuthEventsType')
     AuthFactorType = Shapes::StringShape.new(name: 'AuthFactorType')
@@ -306,6 +308,9 @@ module Aws::CognitoIdentityProvider
     GetCSVHeaderResponse = Shapes::StructureShape.new(name: 'GetCSVHeaderResponse')
     GetClientTokenRequest = Shapes::StructureShape.new(name: 'GetClientTokenRequest')
     GetClientTokenResponse = Shapes::StructureShape.new(name: 'GetClientTokenResponse')
+    GetDerivedTokenRequest = Shapes::StructureShape.new(name: 'GetDerivedTokenRequest')
+    GetDerivedTokenResponse = Shapes::StructureShape.new(name: 'GetDerivedTokenResponse')
+    GetDerivedTokenTokenModelType = Shapes::StringShape.new(name: 'GetDerivedTokenTokenModelType')
     GetDeviceRequest = Shapes::StructureShape.new(name: 'GetDeviceRequest')
     GetDeviceResponse = Shapes::StructureShape.new(name: 'GetDeviceResponse')
     GetGroupRequest = Shapes::StructureShape.new(name: 'GetGroupRequest')
@@ -367,6 +372,7 @@ module Aws::CognitoIdentityProvider
     InvalidSmsRoleAccessPolicyException = Shapes::StructureShape.new(name: 'InvalidSmsRoleAccessPolicyException')
     InvalidSmsRoleTrustRelationshipException = Shapes::StructureShape.new(name: 'InvalidSmsRoleTrustRelationshipException')
     InvalidUserPoolConfigurationException = Shapes::StructureShape.new(name: 'InvalidUserPoolConfigurationException')
+    IssuedTokenTypeIdentifierType = Shapes::StringShape.new(name: 'IssuedTokenTypeIdentifierType')
     IssuerConfigurationType = Shapes::StructureShape.new(name: 'IssuerConfigurationType')
     IssuerType = Shapes::StringShape.new(name: 'IssuerType')
     KeyConfigurationType = Shapes::StructureShape.new(name: 'KeyConfigurationType')
@@ -435,6 +441,7 @@ module Aws::CognitoIdentityProvider
     NumberAttributeConstraintsType = Shapes::StructureShape.new(name: 'NumberAttributeConstraintsType')
     OAuthFlowType = Shapes::StringShape.new(name: 'OAuthFlowType')
     OAuthFlowsType = Shapes::ListShape.new(name: 'OAuthFlowsType')
+    OAuthTokenTypeType = Shapes::StringShape.new(name: 'OAuthTokenTypeType')
     OperationNotEnabledException = Shapes::StructureShape.new(name: 'OperationNotEnabledException')
     OptionalArnType = Shapes::StringShape.new(name: 'OptionalArnType')
     PaginationKey = Shapes::StringShape.new(name: 'PaginationKey')
@@ -478,6 +485,7 @@ module Aws::CognitoIdentityProvider
     ResendConfirmationCodeRequest = Shapes::StructureShape.new(name: 'ResendConfirmationCodeRequest')
     ResendConfirmationCodeResponse = Shapes::StructureShape.new(name: 'ResendConfirmationCodeResponse')
     ResourceIdType = Shapes::StringShape.new(name: 'ResourceIdType')
+    ResourceListType = Shapes::ListShape.new(name: 'ResourceListType')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceServerIdentifierType = Shapes::StringShape.new(name: 'ResourceServerIdentifierType')
     ResourceServerManagedByType = Shapes::StringShape.new(name: 'ResourceServerManagedByType')
@@ -583,6 +591,7 @@ module Aws::CognitoIdentityProvider
     TierChangeNotAllowedException = Shapes::StructureShape.new(name: 'TierChangeNotAllowedException')
     TimeUnitsType = Shapes::StringShape.new(name: 'TimeUnitsType')
     TokenModelType = Shapes::StringShape.new(name: 'TokenModelType')
+    TokenTypeIdentifierType = Shapes::StringShape.new(name: 'TokenTypeIdentifierType')
     TokenValidityUnitsType = Shapes::StructureShape.new(name: 'TokenValidityUnitsType')
     TooManyFailedAttemptsException = Shapes::StructureShape.new(name: 'TooManyFailedAttemptsException')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
@@ -1041,6 +1050,8 @@ module Aws::CognitoIdentityProvider
     AttributeType.struct_class = Types::AttributeType
 
     AttributesRequireVerificationBeforeUpdateType.member = Shapes::ShapeRef.new(shape: VerifiedAttributeType)
+
+    AudienceListType.member = Shapes::ShapeRef.new(shape: AudienceType)
 
     AuthEventType.add_member(:event_id, Shapes::ShapeRef.new(shape: StringType, location_name: "EventId"))
     AuthEventType.add_member(:event_type, Shapes::ShapeRef.new(shape: EventType, location_name: "EventType"))
@@ -1622,6 +1633,27 @@ module Aws::CognitoIdentityProvider
     GetClientTokenResponse.add_member(:client_authentication_result, Shapes::ShapeRef.new(shape: ClientAuthenticationResultType, location_name: "ClientAuthenticationResult"))
     GetClientTokenResponse.struct_class = Types::GetClientTokenResponse
 
+    GetDerivedTokenRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, required: true, location_name: "ClientId"))
+    GetDerivedTokenRequest.add_member(:client_secret, Shapes::ShapeRef.new(shape: ClientSecretType, location_name: "ClientSecret"))
+    GetDerivedTokenRequest.add_member(:subject_token, Shapes::ShapeRef.new(shape: GetDerivedTokenTokenModelType, required: true, location_name: "SubjectToken"))
+    GetDerivedTokenRequest.add_member(:subject_token_type, Shapes::ShapeRef.new(shape: TokenTypeIdentifierType, required: true, location_name: "SubjectTokenType"))
+    GetDerivedTokenRequest.add_member(:subject_token_provider_name, Shapes::ShapeRef.new(shape: ProviderNameType, location_name: "SubjectTokenProviderName"))
+    GetDerivedTokenRequest.add_member(:actor_token, Shapes::ShapeRef.new(shape: GetDerivedTokenTokenModelType, location_name: "ActorToken"))
+    GetDerivedTokenRequest.add_member(:actor_token_type, Shapes::ShapeRef.new(shape: TokenTypeIdentifierType, location_name: "ActorTokenType"))
+    GetDerivedTokenRequest.add_member(:actor_token_provider_name, Shapes::ShapeRef.new(shape: ProviderNameType, location_name: "ActorTokenProviderName"))
+    GetDerivedTokenRequest.add_member(:scopes, Shapes::ShapeRef.new(shape: ScopeListType, location_name: "Scopes"))
+    GetDerivedTokenRequest.add_member(:audiences, Shapes::ShapeRef.new(shape: AudienceListType, location_name: "Audiences"))
+    GetDerivedTokenRequest.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceListType, location_name: "Resources"))
+    GetDerivedTokenRequest.add_member(:requested_token_type, Shapes::ShapeRef.new(shape: IssuedTokenTypeIdentifierType, location_name: "RequestedTokenType"))
+    GetDerivedTokenRequest.struct_class = Types::GetDerivedTokenRequest
+
+    GetDerivedTokenResponse.add_member(:issued_token, Shapes::ShapeRef.new(shape: TokenModelType, required: true, location_name: "IssuedToken"))
+    GetDerivedTokenResponse.add_member(:issued_token_type, Shapes::ShapeRef.new(shape: IssuedTokenTypeIdentifierType, required: true, location_name: "IssuedTokenType"))
+    GetDerivedTokenResponse.add_member(:token_type, Shapes::ShapeRef.new(shape: OAuthTokenTypeType, required: true, location_name: "TokenType"))
+    GetDerivedTokenResponse.add_member(:expires_in, Shapes::ShapeRef.new(shape: IntegerType, location_name: "ExpiresIn"))
+    GetDerivedTokenResponse.add_member(:scopes, Shapes::ShapeRef.new(shape: ScopeListType, location_name: "Scopes"))
+    GetDerivedTokenResponse.struct_class = Types::GetDerivedTokenResponse
+
     GetDeviceRequest.add_member(:device_key, Shapes::ShapeRef.new(shape: DeviceKeyType, required: true, location_name: "DeviceKey"))
     GetDeviceRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken"))
     GetDeviceRequest.struct_class = Types::GetDeviceRequest
@@ -2128,6 +2160,8 @@ module Aws::CognitoIdentityProvider
 
     ResendConfirmationCodeResponse.add_member(:code_delivery_details, Shapes::ShapeRef.new(shape: CodeDeliveryDetailsType, location_name: "CodeDeliveryDetails"))
     ResendConfirmationCodeResponse.struct_class = Types::ResendConfirmationCodeResponse
+
+    ResourceListType.member = Shapes::ShapeRef.new(shape: ResourceServerIdentifierType)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -4180,6 +4214,25 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
+      api.add_operation(:get_derived_token, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDerivedToken"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDerivedTokenRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDerivedTokenResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UserNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
+        o.errors << Shapes::ShapeRef.new(shape: UserLambdaValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

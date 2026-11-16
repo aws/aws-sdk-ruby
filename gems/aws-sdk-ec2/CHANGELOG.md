@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.671.0 (2026-11-16)
+------------------
+
+* Feature - Adds a new Transit Gateway Attachment type called Network Function. Launches associated KMS Keys for EBS Snapshots - associated KMS keys enable customers to share and copy snapshots encrypted with AWS Managed Keys across AWS accounts.
+
 1.670.0 (2026-11-13)
 ------------------
 

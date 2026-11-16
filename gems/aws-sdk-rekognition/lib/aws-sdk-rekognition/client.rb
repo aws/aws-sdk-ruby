@@ -8666,7 +8666,7 @@ module Aws::Rekognition
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.147.0'
+      context[:gem_version] = '1.148.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

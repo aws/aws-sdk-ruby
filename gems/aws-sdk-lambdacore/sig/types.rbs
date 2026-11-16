@@ -146,6 +146,11 @@ module Aws::LambdaCore
     class DeleteRuntimeVersionResponse < Aws::EmptyStructure
     end
 
+    class ElasticIpConfiguration
+      attr_accessor type: ("None" | "ServiceManaged")
+      SENSITIVE: []
+    end
+
     class GetNetworkConnectorRequest
       attr_accessor identifier: ::String
       SENSITIVE: []
@@ -163,10 +168,10 @@ module Aws::LambdaCore
       attr_accessor operator_role: ::String
       attr_accessor state: ("PENDING" | "ACTIVE" | "INACTIVE" | "FAILED" | "DELETING" | "DELETE_FAILED")
       attr_accessor state_reason: ::String
-      attr_accessor state_reason_code: ("DisallowedByVpcEncryptionControl" | "Ec2RequestLimitExceeded" | "InsufficientRolePermissions" | "InternalError" | "InvalidSecurityGroup" | "InvalidSubnet" | "SecurityGroupsPerInterfaceLimitExceeded" | "SubnetOutOfIPAddresses")
+      attr_accessor state_reason_code: ("DisallowedByVpcEncryptionControl" | "Ec2RequestLimitExceeded" | "InsufficientRolePermissions" | "InternalError" | "InternetGatewayNotAttached" | "InvalidSecurityGroup" | "InvalidSubnet" | "SecurityGroupsPerInterfaceLimitExceeded" | "SubnetOutOfIPAddresses")
       attr_accessor last_update_status: ("Successful" | "Failed" | "InProgress")
       attr_accessor last_update_status_reason: ::String
-      attr_accessor last_update_status_reason_code: ("DisallowedByVpcEncryptionControl" | "Ec2RequestLimitExceeded" | "InsufficientRolePermissions" | "InternalError" | "InvalidSecurityGroup" | "InvalidSubnet" | "SecurityGroupsPerInterfaceLimitExceeded" | "SubnetOutOfIPAddresses")
+      attr_accessor last_update_status_reason_code: ("DisallowedByVpcEncryptionControl" | "Ec2RequestLimitExceeded" | "InsufficientRolePermissions" | "InternalError" | "InternetGatewayNotAttached" | "InvalidSecurityGroup" | "InvalidSubnet" | "SecurityGroupsPerInterfaceLimitExceeded" | "SubnetOutOfIPAddresses")
       attr_accessor last_modified: ::Time
       SENSITIVE: []
     end
@@ -339,7 +344,7 @@ module Aws::LambdaCore
       attr_accessor version: ::Integer
       attr_accessor state: ("PENDING" | "ACTIVE" | "INACTIVE" | "FAILED" | "DELETING" | "DELETE_FAILED")
       attr_accessor state_reason: ::String
-      attr_accessor state_reason_code: ("DisallowedByVpcEncryptionControl" | "Ec2RequestLimitExceeded" | "InsufficientRolePermissions" | "InternalError" | "InvalidSecurityGroup" | "InvalidSubnet" | "SecurityGroupsPerInterfaceLimitExceeded" | "SubnetOutOfIPAddresses")
+      attr_accessor state_reason_code: ("DisallowedByVpcEncryptionControl" | "Ec2RequestLimitExceeded" | "InsufficientRolePermissions" | "InternalError" | "InternetGatewayNotAttached" | "InvalidSecurityGroup" | "InvalidSubnet" | "SecurityGroupsPerInterfaceLimitExceeded" | "SubnetOutOfIPAddresses")
       attr_accessor last_modified: ::Time
       SENSITIVE: []
     end
@@ -349,6 +354,7 @@ module Aws::LambdaCore
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor network_protocol: ("IPv4" | "DualStack")
       attr_accessor associated_compute_resource_types: ::Array[("MicroVm" | "WebFunction")]
+      attr_accessor elastic_ip_configuration: Types::ElasticIpConfiguration
       SENSITIVE: []
     end
 

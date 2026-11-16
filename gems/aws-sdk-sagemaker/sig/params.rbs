@@ -823,7 +823,7 @@ module Aws
       enable_ssm_access: bool?,
       managed_instance_scaling: Params::production_variant_managed_instance_scaling?,
       routing_config: {
-        routing_strategy: ("LEAST_OUTSTANDING_REQUESTS" | "RANDOM" | "PREFIX_AWARE"),
+        routing_strategy: ("LEAST_OUTSTANDING_REQUESTS" | "RANDOM" | "PREFIX_AWARE" | "KV_AWARE"),
         prefix_aware_routing_config: {
           prefix_length: ::Integer?,
           concurrency_threshold: ::Integer?
@@ -1013,6 +1013,35 @@ module Aws
         csv_content_types: Array[::String]?,
         json_content_types: Array[::String]?
       }?
+    }
+
+      type routing_target_async_inference_output_config = {
+      s3_output_path: ::String,
+      s3_failure_path: ::String,
+      kms_key_id: ::String?,
+      notification_config: {
+        success_topic: ::String?,
+        error_topic: ::String?
+      }?
+    }
+
+      type routing_target_async_inference_config = {
+      output_config: Params::routing_target_async_inference_output_config,
+      client_config: {
+        max_time_in_backlog_seconds: ::Integer?
+      }?
+    }
+
+      type routing_target = {
+      name: ::String,
+      destinations: Array[
+        {
+          resource_arn: ::String,
+          routing_status: ("Routable" | "Unroutable" | "Unknown")?
+        }
+      ],
+      async_inference_config: Params::routing_target_async_inference_config?,
+      routing_preference: ("LocalRegionFirst" | "InstancePoolOrder")?
     }
 
       type container_definition = {

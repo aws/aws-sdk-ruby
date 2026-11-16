@@ -18,12 +18,25 @@ module Aws::ConnectHealth
     ActivateSubscriptionInput = Shapes::StructureShape.new(name: 'ActivateSubscriptionInput')
     ActivateSubscriptionOutput = Shapes::StructureShape.new(name: 'ActivateSubscriptionOutput')
     ArtifactDetails = Shapes::StructureShape.new(name: 'ArtifactDetails')
+    ArtifactSourceId = Shapes::StringShape.new(name: 'ArtifactSourceId')
     AudioChunk = Shapes::BlobShape.new(name: 'AudioChunk')
     AudioOffset = Shapes::FloatShape.new(name: 'AudioOffset')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BoundedSafeString = Shapes::StringShape.new(name: 'BoundedSafeString')
+    Checklist = Shapes::StructureShape.new(name: 'Checklist')
+    ChecklistId = Shapes::StringShape.new(name: 'ChecklistId')
+    ChecklistItem = Shapes::StructureShape.new(name: 'ChecklistItem')
+    ChecklistItemKey = Shapes::StringShape.new(name: 'ChecklistItemKey')
+    ChecklistItemList = Shapes::ListShape.new(name: 'ChecklistItemList')
+    ChecklistItemStatus = Shapes::StringShape.new(name: 'ChecklistItemStatus')
+    ChecklistList = Shapes::ListShape.new(name: 'ChecklistList')
     ClinicalNoteGenerationResult = Shapes::StructureShape.new(name: 'ClinicalNoteGenerationResult')
     ClinicalNoteGenerationSettings = Shapes::StructureShape.new(name: 'ClinicalNoteGenerationSettings')
     ClinicalNoteGenerationSettingsResponse = Shapes::StructureShape.new(name: 'ClinicalNoteGenerationSettingsResponse')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CreateDatasetInput = Shapes::StructureShape.new(name: 'CreateDatasetInput')
+    CreateDatasetInputClientTokenString = Shapes::StringShape.new(name: 'CreateDatasetInputClientTokenString')
+    CreateDatasetOutput = Shapes::StructureShape.new(name: 'CreateDatasetOutput')
     CreateDomainInput = Shapes::StructureShape.new(name: 'CreateDomainInput')
     CreateDomainOutput = Shapes::StructureShape.new(name: 'CreateDomainOutput')
     CreateSubscriptionInput = Shapes::StructureShape.new(name: 'CreateSubscriptionInput')
@@ -35,8 +48,18 @@ module Aws::ConnectHealth
     CustomTemplate = Shapes::StructureShape.new(name: 'CustomTemplate')
     CustomTemplateBase = Shapes::StringShape.new(name: 'CustomTemplateBase')
     CustomTemplateResponse = Shapes::StructureShape.new(name: 'CustomTemplateResponse')
+    DatasetArn = Shapes::StringShape.new(name: 'DatasetArn')
+    DatasetArtifacts = Shapes::UnionShape.new(name: 'DatasetArtifacts')
+    DatasetConfig = Shapes::UnionShape.new(name: 'DatasetConfig')
+    DatasetId = Shapes::StringShape.new(name: 'DatasetId')
+    DatasetStatus = Shapes::StringShape.new(name: 'DatasetStatus')
+    DatasetSummary = Shapes::StructureShape.new(name: 'DatasetSummary')
+    DatasetSummaryList = Shapes::ListShape.new(name: 'DatasetSummaryList')
+    DatasetType = Shapes::StringShape.new(name: 'DatasetType')
     DeactivateSubscriptionInput = Shapes::StructureShape.new(name: 'DeactivateSubscriptionInput')
     DeactivateSubscriptionOutput = Shapes::StructureShape.new(name: 'DeactivateSubscriptionOutput')
+    DeleteDatasetInput = Shapes::StructureShape.new(name: 'DeleteDatasetInput')
+    DeleteDatasetOutput = Shapes::StructureShape.new(name: 'DeleteDatasetOutput')
     DeleteDomainInput = Shapes::StructureShape.new(name: 'DeleteDomainInput')
     DeleteDomainOutput = Shapes::StructureShape.new(name: 'DeleteDomainOutput')
     DomainArn = Shapes::StringShape.new(name: 'DomainArn')
@@ -46,19 +69,27 @@ module Aws::ConnectHealth
     DomainSummary = Shapes::StructureShape.new(name: 'DomainSummary')
     DomainSummaryList = Shapes::ListShape.new(name: 'DomainSummaryList')
     EncounterContext = Shapes::StructureShape.new(name: 'EncounterContext')
+    EncounterType = Shapes::StringShape.new(name: 'EncounterType')
     EncryptionContext = Shapes::StructureShape.new(name: 'EncryptionContext')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     FHIRServer = Shapes::StructureShape.new(name: 'FHIRServer')
     FHIRServerFhirEndpointString = Shapes::StringShape.new(name: 'FHIRServerFhirEndpointString')
+    FeedbackArtifactType = Shapes::StringShape.new(name: 'FeedbackArtifactType')
+    FeedbackComments = Shapes::StringShape.new(name: 'FeedbackComments')
+    GetDatasetInput = Shapes::StructureShape.new(name: 'GetDatasetInput')
+    GetDatasetOutput = Shapes::StructureShape.new(name: 'GetDatasetOutput')
     GetDomainInput = Shapes::StructureShape.new(name: 'GetDomainInput')
     GetDomainOutput = Shapes::StructureShape.new(name: 'GetDomainOutput')
+    GetMedicalCodingJobRequest = Shapes::StructureShape.new(name: 'GetMedicalCodingJobRequest')
+    GetMedicalCodingJobResponse = Shapes::StructureShape.new(name: 'GetMedicalCodingJobResponse')
     GetMedicalScribeListeningSessionInput = Shapes::StructureShape.new(name: 'GetMedicalScribeListeningSessionInput')
     GetMedicalScribeListeningSessionOutput = Shapes::StructureShape.new(name: 'GetMedicalScribeListeningSessionOutput')
     GetPatientInsightsJobRequest = Shapes::StructureShape.new(name: 'GetPatientInsightsJobRequest')
     GetPatientInsightsJobResponse = Shapes::StructureShape.new(name: 'GetPatientInsightsJobResponse')
     GetSubscriptionInput = Shapes::StructureShape.new(name: 'GetSubscriptionInput')
     GetSubscriptionOutput = Shapes::StructureShape.new(name: 'GetSubscriptionOutput')
+    IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     InputDataConfig = Shapes::StructureShape.new(name: 'InputDataConfig')
     InsightsContext = Shapes::StructureShape.new(name: 'InsightsContext')
     InsightsOutput = Shapes::StructureShape.new(name: 'InsightsOutput')
@@ -68,6 +99,9 @@ module Aws::ConnectHealth
     JobId = Shapes::StringShape.new(name: 'JobId')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
+    ListDatasetsInput = Shapes::StructureShape.new(name: 'ListDatasetsInput')
+    ListDatasetsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListDatasetsInputMaxResultsInteger')
+    ListDatasetsOutput = Shapes::StructureShape.new(name: 'ListDatasetsOutput')
     ListDomainsInput = Shapes::StructureShape.new(name: 'ListDomainsInput')
     ListDomainsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListDomainsInputMaxResultsInteger')
     ListDomainsOutput = Shapes::StructureShape.new(name: 'ListDomainsOutput')
@@ -76,14 +110,30 @@ module Aws::ConnectHealth
     ListSubscriptionsOutput = Shapes::StructureShape.new(name: 'ListSubscriptionsOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     ManagedNoteTemplate = Shapes::StringShape.new(name: 'ManagedNoteTemplate')
     ManagedTemplate = Shapes::StructureShape.new(name: 'ManagedTemplate')
     ManagedTemplateResponse = Shapes::StructureShape.new(name: 'ManagedTemplateResponse')
+    MedicalCodeGenerationResult = Shapes::StructureShape.new(name: 'MedicalCodeGenerationResult')
+    MedicalCodeGenerationSettings = Shapes::StructureShape.new(name: 'MedicalCodeGenerationSettings')
+    MedicalCodeGenerationSettingsResponse = Shapes::StructureShape.new(name: 'MedicalCodeGenerationSettingsResponse')
+    MedicalCodesEncounterContext = Shapes::StructureShape.new(name: 'MedicalCodesEncounterContext')
+    MedicalCodesEncounterContextEncounterDurationMinutesInteger = Shapes::IntegerShape.new(name: 'MedicalCodesEncounterContextEncounterDurationMinutesInteger')
+    MedicalCodesEncounterContextEncounterReasonString = Shapes::StringShape.new(name: 'MedicalCodesEncounterContextEncounterReasonString')
+    MedicalCodesPatientContext = Shapes::StructureShape.new(name: 'MedicalCodesPatientContext')
+    MedicalCodingContext = Shapes::StructureShape.new(name: 'MedicalCodingContext')
+    MedicalCodingContextEncounterReasonString = Shapes::StringShape.new(name: 'MedicalCodingContextEncounterReasonString')
+    MedicalCodingDatasetArtifacts = Shapes::StructureShape.new(name: 'MedicalCodingDatasetArtifacts')
+    MedicalCodingDatasetConfig = Shapes::StructureShape.new(name: 'MedicalCodingDatasetConfig')
+    MedicalCodingJobArn = Shapes::StringShape.new(name: 'MedicalCodingJobArn')
+    MedicalCodingOutput = Shapes::StructureShape.new(name: 'MedicalCodingOutput')
+    MedicalCodingOutputDataConfig = Shapes::StructureShape.new(name: 'MedicalCodingOutputDataConfig')
     MedicalScribeAudioEvent = Shapes::StructureShape.new(name: 'MedicalScribeAudioEvent')
     MedicalScribeBinaryAudioEvent = Shapes::StructureShape.new(name: 'MedicalScribeBinaryAudioEvent')
     MedicalScribeChannelDefinition = Shapes::StructureShape.new(name: 'MedicalScribeChannelDefinition')
     MedicalScribeChannelDefinitions = Shapes::ListShape.new(name: 'MedicalScribeChannelDefinitions')
     MedicalScribeChannelId = Shapes::IntegerShape.new(name: 'MedicalScribeChannelId')
+    MedicalScribeChecklistEvent = Shapes::StructureShape.new(name: 'MedicalScribeChecklistEvent')
     MedicalScribeConfigurationEvent = Shapes::StructureShape.new(name: 'MedicalScribeConfigurationEvent')
     MedicalScribeInputStream = Shapes::StructureShape.new(name: 'MedicalScribeInputStream')
     MedicalScribeLanguageCode = Shapes::StringShape.new(name: 'MedicalScribeLanguageCode')
@@ -92,6 +142,7 @@ module Aws::ConnectHealth
     MedicalScribeMediaSampleRateHertz = Shapes::IntegerShape.new(name: 'MedicalScribeMediaSampleRateHertz')
     MedicalScribeOutputStream = Shapes::StructureShape.new(name: 'MedicalScribeOutputStream')
     MedicalScribeParticipantRole = Shapes::StringShape.new(name: 'MedicalScribeParticipantRole')
+    MedicalScribePeriodontalChartEvent = Shapes::StructureShape.new(name: 'MedicalScribePeriodontalChartEvent')
     MedicalScribePostStreamActionSettings = Shapes::StructureShape.new(name: 'MedicalScribePostStreamActionSettings')
     MedicalScribePostStreamActionSettingsResponse = Shapes::StructureShape.new(name: 'MedicalScribePostStreamActionSettingsResponse')
     MedicalScribePostStreamActionsResult = Shapes::StructureShape.new(name: 'MedicalScribePostStreamActionsResult')
@@ -108,6 +159,20 @@ module Aws::ConnectHealth
     PatientInsightsEncounterContext = Shapes::StructureShape.new(name: 'PatientInsightsEncounterContext')
     PatientInsightsEncounterContextEncounterReasonString = Shapes::StringShape.new(name: 'PatientInsightsEncounterContextEncounterReasonString')
     PatientInsightsPatientContext = Shapes::StructureShape.new(name: 'PatientInsightsPatientContext')
+    PatientStatus = Shapes::StringShape.new(name: 'PatientStatus')
+    PeriodontalGrade = Shapes::IntegerShape.new(name: 'PeriodontalGrade')
+    PeriodontalProbingDepthMillimeters = Shapes::IntegerShape.new(name: 'PeriodontalProbingDepthMillimeters')
+    PeriodontalRecessionMillimeters = Shapes::IntegerShape.new(name: 'PeriodontalRecessionMillimeters')
+    PeriodontalReview = Shapes::StructureShape.new(name: 'PeriodontalReview')
+    PeriodontalReviewList = Shapes::ListShape.new(name: 'PeriodontalReviewList')
+    PeriodontalReviewReason = Shapes::StringShape.new(name: 'PeriodontalReviewReason')
+    PeriodontalSite = Shapes::StructureShape.new(name: 'PeriodontalSite')
+    PeriodontalSiteList = Shapes::ListShape.new(name: 'PeriodontalSiteList')
+    PeriodontalSiteName = Shapes::StringShape.new(name: 'PeriodontalSiteName')
+    PeriodontalSiteNameList = Shapes::ListShape.new(name: 'PeriodontalSiteNameList')
+    PeriodontalTooth = Shapes::StructureShape.new(name: 'PeriodontalTooth')
+    PeriodontalToothList = Shapes::ListShape.new(name: 'PeriodontalToothList')
+    PeriodontalToothNumber = Shapes::IntegerShape.new(name: 'PeriodontalToothNumber')
     PostStreamArtifactGenerationStatus = Shapes::StringShape.new(name: 'PostStreamArtifactGenerationStatus')
     Pronouns = Shapes::StringShape.new(name: 'Pronouns')
     ProviderRole = Shapes::StringShape.new(name: 'ProviderRole')
@@ -122,12 +187,17 @@ module Aws::ConnectHealth
     SensitiveSectionHeaderString = Shapes::StringShape.new(name: 'SensitiveSectionHeaderString')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SessionId = Shapes::StringShape.new(name: 'SessionId')
+    Sex = Shapes::StringShape.new(name: 'Sex')
     Specialty = Shapes::StringShape.new(name: 'Specialty')
+    StartMedicalCodingJobRequest = Shapes::StructureShape.new(name: 'StartMedicalCodingJobRequest')
+    StartMedicalCodingJobResponse = Shapes::StructureShape.new(name: 'StartMedicalCodingJobResponse')
     StartMedicalScribeListeningSessionInput = Shapes::StructureShape.new(name: 'StartMedicalScribeListeningSessionInput')
     StartMedicalScribeListeningSessionOutput = Shapes::StructureShape.new(name: 'StartMedicalScribeListeningSessionOutput')
     StartPatientInsightsJobRequest = Shapes::StructureShape.new(name: 'StartPatientInsightsJobRequest')
     StartPatientInsightsJobResponse = Shapes::StructureShape.new(name: 'StartPatientInsightsJobResponse')
     String = Shapes::StringShape.new(name: 'String')
+    SubmitFeedbackRequest = Shapes::StructureShape.new(name: 'SubmitFeedbackRequest')
+    SubmitFeedbackResponse = Shapes::StructureShape.new(name: 'SubmitFeedbackResponse')
     SubscriptionArn = Shapes::StringShape.new(name: 'SubscriptionArn')
     SubscriptionDescription = Shapes::StructureShape.new(name: 'SubscriptionDescription')
     SubscriptionId = Shapes::StringShape.new(name: 'SubscriptionId')
@@ -168,6 +238,18 @@ module Aws::ConnectHealth
     ArtifactDetails.add_member(:failure_reason, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "failureReason"))
     ArtifactDetails.struct_class = Types::ArtifactDetails
 
+    Checklist.add_member(:checklist_id, Shapes::ShapeRef.new(shape: ChecklistId, required: true, location_name: "checklistId"))
+    Checklist.add_member(:items, Shapes::ShapeRef.new(shape: ChecklistItemList, required: true, location_name: "items"))
+    Checklist.struct_class = Types::Checklist
+
+    ChecklistItem.add_member(:item_key, Shapes::ShapeRef.new(shape: ChecklistItemKey, required: true, location_name: "itemKey"))
+    ChecklistItem.add_member(:status, Shapes::ShapeRef.new(shape: ChecklistItemStatus, required: true, location_name: "status"))
+    ChecklistItem.struct_class = Types::ChecklistItem
+
+    ChecklistItemList.member = Shapes::ShapeRef.new(shape: ChecklistItem)
+
+    ChecklistList.member = Shapes::ShapeRef.new(shape: Checklist)
+
     ClinicalNoteGenerationResult.add_member(:note_result, Shapes::ShapeRef.new(shape: ArtifactDetails, location_name: "noteResult"))
     ClinicalNoteGenerationResult.add_member(:transcript_result, Shapes::ShapeRef.new(shape: ArtifactDetails, location_name: "transcriptResult"))
     ClinicalNoteGenerationResult.add_member(:after_visit_summary_result, Shapes::ShapeRef.new(shape: ArtifactDetails, location_name: "afterVisitSummaryResult"))
@@ -181,6 +263,19 @@ module Aws::ConnectHealth
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
+
+    CreateDatasetInput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    CreateDatasetInput.add_member(:name, Shapes::ShapeRef.new(shape: BoundedSafeString, required: true, location_name: "name"))
+    CreateDatasetInput.add_member(:config, Shapes::ShapeRef.new(shape: DatasetConfig, required: true, location_name: "config"))
+    CreateDatasetInput.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateDatasetInputClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateDatasetInput.struct_class = Types::CreateDatasetInput
+
+    CreateDatasetOutput.add_member(:arn, Shapes::ShapeRef.new(shape: DatasetArn, required: true, location_name: "arn"))
+    CreateDatasetOutput.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location_name: "datasetId"))
+    CreateDatasetOutput.add_member(:type, Shapes::ShapeRef.new(shape: DatasetType, required: true, location_name: "type"))
+    CreateDatasetOutput.add_member(:status, Shapes::ShapeRef.new(shape: DatasetStatus, required: true, location_name: "status"))
+    CreateDatasetOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    CreateDatasetOutput.struct_class = Types::CreateDatasetOutput
 
     CreateDomainInput.add_member(:name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "name"))
     CreateDomainInput.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
@@ -224,12 +319,45 @@ module Aws::ConnectHealth
     CustomTemplateResponse.add_member(:template_type, Shapes::ShapeRef.new(shape: CustomTemplateBase, location_name: "templateType"))
     CustomTemplateResponse.struct_class = Types::CustomTemplateResponse
 
+    DatasetArtifacts.add_member(:medical_coding, Shapes::ShapeRef.new(shape: MedicalCodingDatasetArtifacts, location_name: "medicalCoding"))
+    DatasetArtifacts.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DatasetArtifacts.add_member_subclass(:medical_coding, Types::DatasetArtifacts::MedicalCoding)
+    DatasetArtifacts.add_member_subclass(:unknown, Types::DatasetArtifacts::Unknown)
+    DatasetArtifacts.struct_class = Types::DatasetArtifacts
+
+    DatasetConfig.add_member(:medical_coding, Shapes::ShapeRef.new(shape: MedicalCodingDatasetConfig, location_name: "medicalCoding"))
+    DatasetConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DatasetConfig.add_member_subclass(:medical_coding, Types::DatasetConfig::MedicalCoding)
+    DatasetConfig.add_member_subclass(:unknown, Types::DatasetConfig::Unknown)
+    DatasetConfig.struct_class = Types::DatasetConfig
+
+    DatasetSummary.add_member(:arn, Shapes::ShapeRef.new(shape: DatasetArn, required: true, location_name: "arn"))
+    DatasetSummary.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location_name: "datasetId"))
+    DatasetSummary.add_member(:name, Shapes::ShapeRef.new(shape: BoundedSafeString, required: true, location_name: "name"))
+    DatasetSummary.add_member(:type, Shapes::ShapeRef.new(shape: DatasetType, required: true, location_name: "type"))
+    DatasetSummary.add_member(:status, Shapes::ShapeRef.new(shape: DatasetStatus, required: true, location_name: "status"))
+    DatasetSummary.add_member(:status_details, Shapes::ShapeRef.new(shape: BoundedSafeString, location_name: "statusDetails"))
+    DatasetSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    DatasetSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    DatasetSummary.struct_class = Types::DatasetSummary
+
+    DatasetSummaryList.member = Shapes::ShapeRef.new(shape: DatasetSummary)
+
     DeactivateSubscriptionInput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
     DeactivateSubscriptionInput.add_member(:subscription_id, Shapes::ShapeRef.new(shape: SubscriptionId, required: true, location: "uri", location_name: "subscriptionId"))
     DeactivateSubscriptionInput.struct_class = Types::DeactivateSubscriptionInput
 
     DeactivateSubscriptionOutput.add_member(:subscription, Shapes::ShapeRef.new(shape: SubscriptionDescription, location_name: "subscription"))
     DeactivateSubscriptionOutput.struct_class = Types::DeactivateSubscriptionOutput
+
+    DeleteDatasetInput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    DeleteDatasetInput.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location: "uri", location_name: "datasetId"))
+    DeleteDatasetInput.struct_class = Types::DeleteDatasetInput
+
+    DeleteDatasetOutput.add_member(:arn, Shapes::ShapeRef.new(shape: DatasetArn, required: true, location_name: "arn"))
+    DeleteDatasetOutput.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location_name: "datasetId"))
+    DeleteDatasetOutput.add_member(:status, Shapes::ShapeRef.new(shape: DatasetStatus, required: true, location_name: "status"))
+    DeleteDatasetOutput.struct_class = Types::DeleteDatasetOutput
 
     DeleteDomainInput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
     DeleteDomainInput.struct_class = Types::DeleteDomainInput
@@ -249,6 +377,7 @@ module Aws::ConnectHealth
     DomainSummaryList.member = Shapes::ShapeRef.new(shape: DomainSummary)
 
     EncounterContext.add_member(:unstructured_context, Shapes::ShapeRef.new(shape: SensitiveMarkdownString, location_name: "unstructuredContext"))
+    EncounterContext.add_member(:medical_coding_context, Shapes::ShapeRef.new(shape: MedicalCodingContext, location_name: "medicalCodingContext"))
     EncounterContext.struct_class = Types::EncounterContext
 
     EncryptionContext.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "encryptionType"))
@@ -258,6 +387,22 @@ module Aws::ConnectHealth
     FHIRServer.add_member(:fhir_endpoint, Shapes::ShapeRef.new(shape: FHIRServerFhirEndpointString, required: true, location_name: "fhirEndpoint"))
     FHIRServer.add_member(:oauth_token, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "oauthToken"))
     FHIRServer.struct_class = Types::FHIRServer
+
+    GetDatasetInput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    GetDatasetInput.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location: "uri", location_name: "datasetId"))
+    GetDatasetInput.struct_class = Types::GetDatasetInput
+
+    GetDatasetOutput.add_member(:arn, Shapes::ShapeRef.new(shape: DatasetArn, required: true, location_name: "arn"))
+    GetDatasetOutput.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location_name: "datasetId"))
+    GetDatasetOutput.add_member(:name, Shapes::ShapeRef.new(shape: BoundedSafeString, required: true, location_name: "name"))
+    GetDatasetOutput.add_member(:type, Shapes::ShapeRef.new(shape: DatasetType, required: true, location_name: "type"))
+    GetDatasetOutput.add_member(:config, Shapes::ShapeRef.new(shape: DatasetConfig, required: true, location_name: "config"))
+    GetDatasetOutput.add_member(:status, Shapes::ShapeRef.new(shape: DatasetStatus, required: true, location_name: "status"))
+    GetDatasetOutput.add_member(:status_details, Shapes::ShapeRef.new(shape: BoundedSafeString, location_name: "statusDetails"))
+    GetDatasetOutput.add_member(:artifacts, Shapes::ShapeRef.new(shape: DatasetArtifacts, location_name: "artifacts"))
+    GetDatasetOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    GetDatasetOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    GetDatasetOutput.struct_class = Types::GetDatasetOutput
 
     GetDomainInput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
     GetDomainInput.struct_class = Types::GetDomainInput
@@ -273,6 +418,24 @@ module Aws::ConnectHealth
     GetDomainOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     GetDomainOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetDomainOutput.struct_class = Types::GetDomainOutput
+
+    GetMedicalCodingJobRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    GetMedicalCodingJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
+    GetMedicalCodingJobRequest.struct_class = Types::GetMedicalCodingJobRequest
+
+    GetMedicalCodingJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "jobId"))
+    GetMedicalCodingJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: MedicalCodingJobArn, required: true, location_name: "jobArn"))
+    GetMedicalCodingJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, required: true, location_name: "jobStatus"))
+    GetMedicalCodingJobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "creationTime"))
+    GetMedicalCodingJobResponse.add_member(:updated_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedTime"))
+    GetMedicalCodingJobResponse.add_member(:text, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, required: true, location_name: "text"))
+    GetMedicalCodingJobResponse.add_member(:patient_context, Shapes::ShapeRef.new(shape: MedicalCodesPatientContext, location_name: "patientContext"))
+    GetMedicalCodingJobResponse.add_member(:encounter_context, Shapes::ShapeRef.new(shape: MedicalCodesEncounterContext, location_name: "encounterContext"))
+    GetMedicalCodingJobResponse.add_member(:output_data_config, Shapes::ShapeRef.new(shape: MedicalCodingOutputDataConfig, required: true, location_name: "outputDataConfig"))
+    GetMedicalCodingJobResponse.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, location_name: "datasetId"))
+    GetMedicalCodingJobResponse.add_member(:medical_coding_output, Shapes::ShapeRef.new(shape: MedicalCodingOutput, location_name: "medicalCodingOutput"))
+    GetMedicalCodingJobResponse.add_member(:status_details, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "statusDetails"))
+    GetMedicalCodingJobResponse.struct_class = Types::GetMedicalCodingJobResponse
 
     GetMedicalScribeListeningSessionInput.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location: "uri", location_name: "sessionId"))
     GetMedicalScribeListeningSessionInput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
@@ -321,6 +484,16 @@ module Aws::ConnectHealth
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    ListDatasetsInput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    ListDatasetsInput.add_member(:type, Shapes::ShapeRef.new(shape: DatasetType, location: "querystring", location_name: "type"))
+    ListDatasetsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListDatasetsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDatasetsInputMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListDatasetsInput.struct_class = Types::ListDatasetsInput
+
+    ListDatasetsOutput.add_member(:items, Shapes::ShapeRef.new(shape: DatasetSummaryList, required: true, location_name: "items"))
+    ListDatasetsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListDatasetsOutput.struct_class = Types::ListDatasetsOutput
+
     ListDomainsInput.add_member(:status, Shapes::ShapeRef.new(shape: DomainStatus, location: "querystring", location_name: "status"))
     ListDomainsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDomainsInputMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListDomainsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
@@ -351,6 +524,51 @@ module Aws::ConnectHealth
     ManagedTemplateResponse.add_member(:template_type, Shapes::ShapeRef.new(shape: ManagedNoteTemplate, location_name: "templateType"))
     ManagedTemplateResponse.struct_class = Types::ManagedTemplateResponse
 
+    MedicalCodeGenerationResult.add_member(:medical_codes_result, Shapes::ShapeRef.new(shape: ArtifactDetails, location_name: "medicalCodesResult"))
+    MedicalCodeGenerationResult.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
+    MedicalCodeGenerationResult.struct_class = Types::MedicalCodeGenerationResult
+
+    MedicalCodeGenerationSettings.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
+    MedicalCodeGenerationSettings.struct_class = Types::MedicalCodeGenerationSettings
+
+    MedicalCodeGenerationSettingsResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: NonNullBoolean, location_name: "enabled"))
+    MedicalCodeGenerationSettingsResponse.struct_class = Types::MedicalCodeGenerationSettingsResponse
+
+    MedicalCodesEncounterContext.add_member(:encounter_type, Shapes::ShapeRef.new(shape: EncounterType, location_name: "encounterType"))
+    MedicalCodesEncounterContext.add_member(:encounter_reason, Shapes::ShapeRef.new(shape: MedicalCodesEncounterContextEncounterReasonString, location_name: "encounterReason"))
+    MedicalCodesEncounterContext.add_member(:after_hours, Shapes::ShapeRef.new(shape: Boolean, location_name: "afterHours"))
+    MedicalCodesEncounterContext.add_member(:encounter_date, Shapes::ShapeRef.new(shape: SensitiveIsoDateString, location_name: "encounterDate"))
+    MedicalCodesEncounterContext.add_member(:encounter_duration_minutes, Shapes::ShapeRef.new(shape: MedicalCodesEncounterContextEncounterDurationMinutesInteger, location_name: "encounterDurationMinutes"))
+    MedicalCodesEncounterContext.struct_class = Types::MedicalCodesEncounterContext
+
+    MedicalCodesPatientContext.add_member(:sex, Shapes::ShapeRef.new(shape: Sex, location_name: "sex"))
+    MedicalCodesPatientContext.add_member(:status, Shapes::ShapeRef.new(shape: PatientStatus, location_name: "status"))
+    MedicalCodesPatientContext.add_member(:date_of_birth, Shapes::ShapeRef.new(shape: SensitiveIsoDateString, location_name: "dateOfBirth"))
+    MedicalCodesPatientContext.add_member(:insurance, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "insurance"))
+    MedicalCodesPatientContext.struct_class = Types::MedicalCodesPatientContext
+
+    MedicalCodingContext.add_member(:sex, Shapes::ShapeRef.new(shape: Sex, location_name: "sex"))
+    MedicalCodingContext.add_member(:status, Shapes::ShapeRef.new(shape: PatientStatus, location_name: "status"))
+    MedicalCodingContext.add_member(:date_of_birth, Shapes::ShapeRef.new(shape: SensitiveIsoDateString, location_name: "dateOfBirth"))
+    MedicalCodingContext.add_member(:encounter_type, Shapes::ShapeRef.new(shape: EncounterType, location_name: "encounterType"))
+    MedicalCodingContext.add_member(:encounter_reason, Shapes::ShapeRef.new(shape: MedicalCodingContextEncounterReasonString, location_name: "encounterReason"))
+    MedicalCodingContext.add_member(:after_hours, Shapes::ShapeRef.new(shape: Boolean, location_name: "afterHours"))
+    MedicalCodingContext.add_member(:encounter_date, Shapes::ShapeRef.new(shape: SensitiveIsoDateString, location_name: "encounterDate"))
+    MedicalCodingContext.struct_class = Types::MedicalCodingContext
+
+    MedicalCodingDatasetArtifacts.add_member(:evaluation_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "evaluationS3Uri"))
+    MedicalCodingDatasetArtifacts.struct_class = Types::MedicalCodingDatasetArtifacts
+
+    MedicalCodingDatasetConfig.add_member(:s3_input_path, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "s3InputPath"))
+    MedicalCodingDatasetConfig.add_member(:s3_output_path, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "s3OutputPath"))
+    MedicalCodingDatasetConfig.struct_class = Types::MedicalCodingDatasetConfig
+
+    MedicalCodingOutput.add_member(:uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "uri"))
+    MedicalCodingOutput.struct_class = Types::MedicalCodingOutput
+
+    MedicalCodingOutputDataConfig.add_member(:s3_output_path, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "s3OutputPath"))
+    MedicalCodingOutputDataConfig.struct_class = Types::MedicalCodingOutputDataConfig
+
     MedicalScribeAudioEvent.add_member(:audio_chunk, Shapes::ShapeRef.new(shape: AudioChunk, required: true, location_name: "audioChunk"))
     MedicalScribeAudioEvent.struct_class = Types::MedicalScribeAudioEvent
 
@@ -362,6 +580,10 @@ module Aws::ConnectHealth
     MedicalScribeChannelDefinition.struct_class = Types::MedicalScribeChannelDefinition
 
     MedicalScribeChannelDefinitions.member = Shapes::ShapeRef.new(shape: MedicalScribeChannelDefinition)
+
+    MedicalScribeChecklistEvent.add_member(:snapshot_version, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "snapshotVersion"))
+    MedicalScribeChecklistEvent.add_member(:checklists, Shapes::ShapeRef.new(shape: ChecklistList, required: true, location_name: "checklists"))
+    MedicalScribeChecklistEvent.struct_class = Types::MedicalScribeChecklistEvent
 
     MedicalScribeConfigurationEvent.add_member(:post_stream_action_settings, Shapes::ShapeRef.new(shape: MedicalScribePostStreamActionSettings, required: true, location_name: "postStreamActionSettings"))
     MedicalScribeConfigurationEvent.add_member(:channel_definitions, Shapes::ShapeRef.new(shape: MedicalScribeChannelDefinitions, location_name: "channelDefinitions"))
@@ -384,6 +606,7 @@ module Aws::ConnectHealth
     MedicalScribeListeningSessionDetails.add_member(:post_stream_action_settings, Shapes::ShapeRef.new(shape: MedicalScribePostStreamActionSettingsResponse, location_name: "postStreamActionSettings"))
     MedicalScribeListeningSessionDetails.add_member(:post_stream_action_result, Shapes::ShapeRef.new(shape: MedicalScribePostStreamActionsResult, location_name: "postStreamActionResult"))
     MedicalScribeListeningSessionDetails.add_member(:encounter_context_provided, Shapes::ShapeRef.new(shape: NonNullBoolean, location_name: "encounterContextProvided"))
+    MedicalScribeListeningSessionDetails.add_member(:medical_coding_context_provided, Shapes::ShapeRef.new(shape: NonNullBoolean, location_name: "medicalCodingContextProvided"))
     MedicalScribeListeningSessionDetails.add_member(:stream_status, Shapes::ShapeRef.new(shape: MedicalScribeStreamStatus, location_name: "streamStatus"))
     MedicalScribeListeningSessionDetails.add_member(:stream_creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "streamCreationTime"))
     MedicalScribeListeningSessionDetails.add_member(:stream_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "streamEndTime"))
@@ -392,17 +615,27 @@ module Aws::ConnectHealth
     MedicalScribeOutputStream.add_member(:transcript_event, Shapes::ShapeRef.new(shape: MedicalScribeTranscriptEvent, event: true, location_name: "transcriptEvent"))
     MedicalScribeOutputStream.add_member(:internal_failure_exception, Shapes::ShapeRef.new(shape: InternalServerException, event: true, location_name: "internalFailureException"))
     MedicalScribeOutputStream.add_member(:validation_exception, Shapes::ShapeRef.new(shape: ValidationException, event: true, location_name: "validationException"))
+    MedicalScribeOutputStream.add_member(:periodontal_chart_event, Shapes::ShapeRef.new(shape: MedicalScribePeriodontalChartEvent, event: true, location_name: "periodontalChartEvent"))
+    MedicalScribeOutputStream.add_member(:checklist_event, Shapes::ShapeRef.new(shape: MedicalScribeChecklistEvent, event: true, location_name: "checklistEvent"))
     MedicalScribeOutputStream.struct_class = Types::MedicalScribeOutputStream
+
+    MedicalScribePeriodontalChartEvent.add_member(:snapshot_version, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "snapshotVersion"))
+    MedicalScribePeriodontalChartEvent.add_member(:teeth, Shapes::ShapeRef.new(shape: PeriodontalToothList, required: true, location_name: "teeth"))
+    MedicalScribePeriodontalChartEvent.add_member(:review_items, Shapes::ShapeRef.new(shape: PeriodontalReviewList, location_name: "reviewItems"))
+    MedicalScribePeriodontalChartEvent.struct_class = Types::MedicalScribePeriodontalChartEvent
 
     MedicalScribePostStreamActionSettings.add_member(:output_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "outputS3Uri"))
     MedicalScribePostStreamActionSettings.add_member(:clinical_note_generation_settings, Shapes::ShapeRef.new(shape: ClinicalNoteGenerationSettings, required: true, location_name: "clinicalNoteGenerationSettings"))
+    MedicalScribePostStreamActionSettings.add_member(:medical_code_generation_settings, Shapes::ShapeRef.new(shape: MedicalCodeGenerationSettings, location_name: "medicalCodeGenerationSettings"))
     MedicalScribePostStreamActionSettings.struct_class = Types::MedicalScribePostStreamActionSettings
 
     MedicalScribePostStreamActionSettingsResponse.add_member(:output_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "outputS3Uri"))
     MedicalScribePostStreamActionSettingsResponse.add_member(:clinical_note_generation_settings, Shapes::ShapeRef.new(shape: ClinicalNoteGenerationSettingsResponse, required: true, location_name: "clinicalNoteGenerationSettings"))
+    MedicalScribePostStreamActionSettingsResponse.add_member(:medical_code_generation_settings, Shapes::ShapeRef.new(shape: MedicalCodeGenerationSettingsResponse, location_name: "medicalCodeGenerationSettings"))
     MedicalScribePostStreamActionSettingsResponse.struct_class = Types::MedicalScribePostStreamActionSettingsResponse
 
     MedicalScribePostStreamActionsResult.add_member(:clinical_note_generation_result, Shapes::ShapeRef.new(shape: ClinicalNoteGenerationResult, location_name: "clinicalNoteGenerationResult"))
+    MedicalScribePostStreamActionsResult.add_member(:medical_code_generation_result, Shapes::ShapeRef.new(shape: MedicalCodeGenerationResult, location_name: "medicalCodeGenerationResult"))
     MedicalScribePostStreamActionsResult.struct_class = Types::MedicalScribePostStreamActionsResult
 
     MedicalScribeSessionControlEvent.add_member(:type, Shapes::ShapeRef.new(shape: MedicalScribeSessionControlEventType, location_name: "type"))
@@ -446,6 +679,33 @@ module Aws::ConnectHealth
     PatientInsightsPatientContext.add_member(:pronouns, Shapes::ShapeRef.new(shape: Pronouns, location_name: "pronouns"))
     PatientInsightsPatientContext.struct_class = Types::PatientInsightsPatientContext
 
+    PeriodontalReview.add_member(:reason, Shapes::ShapeRef.new(shape: PeriodontalReviewReason, required: true, location_name: "reason"))
+    PeriodontalReview.add_member(:tooth_number, Shapes::ShapeRef.new(shape: PeriodontalToothNumber, location_name: "toothNumber"))
+    PeriodontalReview.add_member(:sites, Shapes::ShapeRef.new(shape: PeriodontalSiteNameList, location_name: "sites"))
+    PeriodontalReview.struct_class = Types::PeriodontalReview
+
+    PeriodontalReviewList.member = Shapes::ShapeRef.new(shape: PeriodontalReview)
+
+    PeriodontalSite.add_member(:site, Shapes::ShapeRef.new(shape: PeriodontalSiteName, required: true, location_name: "site"))
+    PeriodontalSite.add_member(:probing_depth, Shapes::ShapeRef.new(shape: PeriodontalProbingDepthMillimeters, location_name: "probingDepth"))
+    PeriodontalSite.add_member(:recession, Shapes::ShapeRef.new(shape: PeriodontalRecessionMillimeters, location_name: "recession"))
+    PeriodontalSite.add_member(:bleeding, Shapes::ShapeRef.new(shape: Boolean, location_name: "bleeding"))
+    PeriodontalSite.add_member(:suppuration, Shapes::ShapeRef.new(shape: Boolean, location_name: "suppuration"))
+    PeriodontalSite.struct_class = Types::PeriodontalSite
+
+    PeriodontalSiteList.member = Shapes::ShapeRef.new(shape: PeriodontalSite)
+
+    PeriodontalSiteNameList.member = Shapes::ShapeRef.new(shape: PeriodontalSiteName)
+
+    PeriodontalTooth.add_member(:tooth_number, Shapes::ShapeRef.new(shape: PeriodontalToothNumber, required: true, location_name: "toothNumber"))
+    PeriodontalTooth.add_member(:missing, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "missing"))
+    PeriodontalTooth.add_member(:mobility, Shapes::ShapeRef.new(shape: PeriodontalGrade, location_name: "mobility"))
+    PeriodontalTooth.add_member(:furcation, Shapes::ShapeRef.new(shape: PeriodontalGrade, location_name: "furcation"))
+    PeriodontalTooth.add_member(:sites, Shapes::ShapeRef.new(shape: PeriodontalSiteList, location_name: "sites"))
+    PeriodontalTooth.struct_class = Types::PeriodontalTooth
+
+    PeriodontalToothList.member = Shapes::ShapeRef.new(shape: PeriodontalTooth)
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
@@ -456,6 +716,20 @@ module Aws::ConnectHealth
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    StartMedicalCodingJobRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    StartMedicalCodingJobRequest.add_member(:text, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, required: true, location_name: "text"))
+    StartMedicalCodingJobRequest.add_member(:patient_context, Shapes::ShapeRef.new(shape: MedicalCodesPatientContext, location_name: "patientContext"))
+    StartMedicalCodingJobRequest.add_member(:encounter_context, Shapes::ShapeRef.new(shape: MedicalCodesEncounterContext, location_name: "encounterContext"))
+    StartMedicalCodingJobRequest.add_member(:output_data_config, Shapes::ShapeRef.new(shape: MedicalCodingOutputDataConfig, required: true, location_name: "outputDataConfig"))
+    StartMedicalCodingJobRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, location_name: "datasetId"))
+    StartMedicalCodingJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    StartMedicalCodingJobRequest.struct_class = Types::StartMedicalCodingJobRequest
+
+    StartMedicalCodingJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: MedicalCodingJobArn, required: true, location_name: "jobArn"))
+    StartMedicalCodingJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "jobId"))
+    StartMedicalCodingJobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "creationTime"))
+    StartMedicalCodingJobResponse.struct_class = Types::StartMedicalCodingJobResponse
 
     StartMedicalScribeListeningSessionInput.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location: "header", location_name: "x-amzn-medscribe-session-id"))
     StartMedicalScribeListeningSessionInput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "header", location_name: "x-amzn-medscribe-domain-id"))
@@ -494,6 +768,18 @@ module Aws::ConnectHealth
     StartPatientInsightsJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "jobId"))
     StartPatientInsightsJobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "creationTime"))
     StartPatientInsightsJobResponse.struct_class = Types::StartPatientInsightsJobResponse
+
+    SubmitFeedbackRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
+    SubmitFeedbackRequest.add_member(:artifact_source_id, Shapes::ShapeRef.new(shape: ArtifactSourceId, required: true, location_name: "artifactSourceId"))
+    SubmitFeedbackRequest.add_member(:subscription_id, Shapes::ShapeRef.new(shape: SubscriptionId, location_name: "subscriptionId"))
+    SubmitFeedbackRequest.add_member(:artifact_type, Shapes::ShapeRef.new(shape: FeedbackArtifactType, required: true, location_name: "artifactType"))
+    SubmitFeedbackRequest.add_member(:signed_artifact_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "signedArtifactS3Uri"))
+    SubmitFeedbackRequest.add_member(:generated_artifact_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "generatedArtifactS3Uri"))
+    SubmitFeedbackRequest.add_member(:comments, Shapes::ShapeRef.new(shape: FeedbackComments, location_name: "comments"))
+    SubmitFeedbackRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    SubmitFeedbackRequest.struct_class = Types::SubmitFeedbackRequest
+
+    SubmitFeedbackResponse.struct_class = Types::SubmitFeedbackResponse
 
     SubscriptionDescription.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
     SubscriptionDescription.add_member(:subscription_id, Shapes::ShapeRef.new(shape: SubscriptionId, required: true, location_name: "subscriptionId"))
@@ -574,6 +860,21 @@ module Aws::ConnectHealth
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:create_dataset, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDataset"
+        o.http_method = "POST"
+        o.http_request_uri = "/domains/{domainId}/datasets"
+        o.input = Shapes::ShapeRef.new(shape: CreateDatasetInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateDatasetOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:create_domain, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDomain"
         o.http_method = "POST"
@@ -608,6 +909,20 @@ module Aws::ConnectHealth
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:delete_dataset, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDataset"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/domains/{domainId}/datasets/{datasetId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDatasetInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDatasetOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:delete_domain, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDomain"
         o.http_method = "DELETE"
@@ -617,6 +932,19 @@ module Aws::ConnectHealth
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_dataset, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataset"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{domainId}/datasets/{datasetId}"
+        o.input = Shapes::ShapeRef.new(shape: GetDatasetInput)
+        o.output = Shapes::ShapeRef.new(shape: GetDatasetOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_domain, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetDomain"
         o.http_method = "GET"
@@ -624,6 +952,22 @@ module Aws::ConnectHealth
         o.input = Shapes::ShapeRef.new(shape: GetDomainInput)
         o.output = Shapes::ShapeRef.new(shape: GetDomainOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_medical_coding_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMedicalCodingJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/domain/{domainId}/medical-coding-job/{jobId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "runtime.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetMedicalCodingJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMedicalCodingJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_medical_scribe_listening_session, Seahorse::Model::Operation.new.tap do |o|
@@ -670,6 +1014,25 @@ module Aws::ConnectHealth
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:list_datasets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDatasets"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{domainId}/datasets"
+        o.input = Shapes::ShapeRef.new(shape: ListDatasetsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListDatasetsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_domains, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDomains"
         o.http_method = "GET"
@@ -710,6 +1073,23 @@ module Aws::ConnectHealth
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
       end)
 
+      api.add_operation(:start_medical_coding_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMedicalCodingJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/domain/{domainId}/medical-coding-job"
+        o.endpoint_pattern = {
+          "hostPrefix" => "runtime.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: StartMedicalCodingJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartMedicalCodingJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:start_medical_scribe_listening_session, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartMedicalScribeListeningSession"
         o.http_method = "POST"
@@ -743,6 +1123,22 @@ module Aws::ConnectHealth
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:submit_feedback, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SubmitFeedback"
+        o.http_method = "POST"
+        o.http_request_uri = "/domain/{domainId}/feedback"
+        o.endpoint_pattern = {
+          "hostPrefix" => "runtime.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: SubmitFeedbackRequest)
+        o.output = Shapes::ShapeRef.new(shape: SubmitFeedbackResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

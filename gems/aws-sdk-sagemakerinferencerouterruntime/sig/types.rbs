@@ -1,0 +1,103 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SageMakerInferenceRouterRuntime
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalDependencyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalFailure
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvokeInferenceRouterAsyncInput
+      attr_accessor inference_router_name: ::String
+      attr_accessor routing_target_name: ::String
+      attr_accessor content_type: ::String
+      attr_accessor accept: ::String
+      attr_accessor custom_attributes: ::String
+      attr_accessor inference_id: ::String
+      attr_accessor input_location: ::String
+      attr_accessor s3_output_path_extension: ::String
+      attr_accessor filename: ::String
+      attr_accessor request_ttl_seconds: ::Integer
+      attr_accessor invocation_timeout_seconds: ::Integer
+      SENSITIVE: [:custom_attributes]
+    end
+
+    class InvokeInferenceRouterAsyncOutput
+      attr_accessor inference_id: ::String
+      attr_accessor output_location: ::String
+      attr_accessor failure_location: ::String
+      SENSITIVE: []
+    end
+
+    class InvokeInferenceRouterInput
+      attr_accessor inference_router_name: ::String
+      attr_accessor routing_target_name: ::String
+      attr_accessor content_type: ::String
+      attr_accessor accept: ::String
+      attr_accessor inference_id: ::String
+      attr_accessor prefix_aware_id: ::String
+      attr_accessor custom_attributes: ::String
+      attr_accessor body: ::String
+      SENSITIVE: [:custom_attributes, :body]
+    end
+
+    class InvokeInferenceRouterOutput
+      attr_accessor body: ::String
+      attr_accessor content_type: ::String
+      attr_accessor invoked_routed_resource_arn: ::String
+      attr_accessor routing_reason: ::String
+      attr_accessor invoked_production_variant: ::String
+      attr_accessor custom_attributes: ::String
+      SENSITIVE: [:body, :custom_attributes]
+    end
+
+    class ModelError
+      attr_accessor message: ::String
+      attr_accessor original_status_code: ::Integer
+      attr_accessor original_message: ::String
+      attr_accessor log_stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ModelNotReadyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RequestTimeoutException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

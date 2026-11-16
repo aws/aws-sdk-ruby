@@ -1394,6 +1394,17 @@ module Aws
                                       ) -> _DeactivateEvaluationFormResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeactivateEvaluationFormResponseSuccess
 
+      interface _DeleteAllEntitySessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAllEntitySessionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#delete_all_entity_sessions-instance_method
+      def delete_all_entity_sessions: (
+                                        instance_id: ::String,
+                                        entity_id: ::String,
+                                        entity_type: ("USER")
+                                      ) -> _DeleteAllEntitySessionsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAllEntitySessionsResponseSuccess
+
       interface _DeleteAttachedFileResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAttachedFileResponse]
       end

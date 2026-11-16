@@ -89,6 +89,7 @@ module Aws
         def encryption_details: () -> Types::EncryptionDetails
         def deletion_protection_enabled: () -> bool
         def endpoint: () -> ::String
+        def metric_groups: () -> ::Array[Types::MetricGroupResponse]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#create_cluster-instance_method
       def create_cluster: (
@@ -101,6 +102,11 @@ module Aws
                               clusters: Array[::String]?
                             },
                             ?policy: ::String,
+                            ?metric_groups: Array[
+                              {
+                                metric_group: ("STATEMENT_STATISTICS")
+                              }
+                            ],
                             ?bypass_policy_lockout_safety_check: bool
                           ) -> _CreateClusterResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
@@ -184,6 +190,7 @@ module Aws
         def tags: () -> ::Hash[::String, ::String]
         def encryption_details: () -> Types::EncryptionDetails
         def endpoint: () -> ::String
+        def metric_groups: () -> ::Array[Types::MetricGroupResponse]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#get_cluster-instance_method
       def get_cluster: (
@@ -312,7 +319,12 @@ module Aws
                             ?multi_region_properties: {
                               witness_region: ::String?,
                               clusters: Array[::String]?
-                            }
+                            },
+                            ?metric_groups: Array[
+                              {
+                                metric_group: ("STATEMENT_STATISTICS")
+                              }
+                            ]
                           ) -> _UpdateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterResponseSuccess
 

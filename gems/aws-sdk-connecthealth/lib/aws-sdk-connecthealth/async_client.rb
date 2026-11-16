@@ -473,6 +473,12 @@ module Aws::ConnectHealth
     #     out_stream.on_validation_exception_event do |event|
     #       event # => Aws::ConnectHealth::Types::validationException
     #     end
+    #     out_stream.on_periodontal_chart_event_event do |event|
+    #       event # => Aws::ConnectHealth::Types::periodontalChartEvent
+    #     end
+    #     out_stream.on_checklist_event_event do |event|
+    #       event # => Aws::ConnectHealth::Types::checklistEvent
+    #     end
     #   end
     #   # => Aws::Seahorse::Client::AsyncResponse
     #
@@ -513,6 +519,12 @@ module Aws::ConnectHealth
     #   end
     #   output_stream.on_validation_exception_event do |event|
     #     event # => Aws::ConnectHealth::Types::validationException
+    #   end
+    #   output_stream.on_periodontal_chart_event_event do |event|
+    #     event # => Aws::ConnectHealth::Types::periodontalChartEvent
+    #   end
+    #   output_stream.on_checklist_event_event do |event|
+    #     event # => Aws::ConnectHealth::Types::checklistEvent
     #   end
     #   output_stream.on_error_event do |event|
     #     # catch unmodeled error event in the stream
@@ -561,7 +573,7 @@ module Aws::ConnectHealth
     #   resp.media_encoding #=> String, one of "pcm", "flac"
     #   # All events are available at resp.response_stream:
     #   resp.response_stream #=> Enumerator
-    #   resp.response_stream.event_types #=> [:transcript_event, :internal_failure_exception, :validation_exception]
+    #   resp.response_stream.event_types #=> [:transcript_event, :internal_failure_exception, :validation_exception, :periodontal_chart_event, :checklist_event]
     #
     #   # For :transcript_event event available at #on_transcript_event_event callback and response eventstream enumerator:
     #   event.transcript_segment.segment_id #=> String
@@ -576,6 +588,33 @@ module Aws::ConnectHealth
     #
     #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
+    #
+    #   # For :periodontal_chart_event event available at #on_periodontal_chart_event_event callback and response eventstream enumerator:
+    #   event.snapshot_version #=> Integer
+    #   event.teeth #=> Array
+    #   event.teeth[0].tooth_number #=> Integer
+    #   event.teeth[0].missing #=> Boolean
+    #   event.teeth[0].mobility #=> Integer
+    #   event.teeth[0].furcation #=> Integer
+    #   event.teeth[0].sites #=> Array
+    #   event.teeth[0].sites[0].site #=> String, one of "DB", "B", "MB", "DL", "L", "ML"
+    #   event.teeth[0].sites[0].probing_depth #=> Integer
+    #   event.teeth[0].sites[0].recession #=> Integer
+    #   event.teeth[0].sites[0].bleeding #=> Boolean
+    #   event.teeth[0].sites[0].suppuration #=> Boolean
+    #   event.review_items #=> Array
+    #   event.review_items[0].reason #=> String, one of "SITE_NOT_CHARTED", "VALUE_NOT_CHARTED", "READING_COUNT_MISMATCH", "LINE_UNCLEAR", "TOOTH_UNCLEAR", "MISSING_TOOTH_CONFLICT", "MEASUREMENT_NOT_CHARTED", "SESSION_ISSUE"
+    #   event.review_items[0].tooth_number #=> Integer
+    #   event.review_items[0].sites #=> Array
+    #   event.review_items[0].sites[0] #=> String, one of "DB", "B", "MB", "DL", "L", "ML"
+    #
+    #   # For :checklist_event event available at #on_checklist_event_event callback and response eventstream enumerator:
+    #   event.snapshot_version #=> Integer
+    #   event.checklists #=> Array
+    #   event.checklists[0].checklist_id #=> String
+    #   event.checklists[0].items #=> Array
+    #   event.checklists[0].items[0].item_key #=> String
+    #   event.checklists[0].items[0].status #=> String, one of "DISCUSSED", "PARTIALLY_DISCUSSED", "NOT_DISCUSSED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connecthealth-2025-01-29/StartMedicalScribeListeningSession AWS API Documentation
     #
@@ -625,7 +664,7 @@ module Aws::ConnectHealth
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connecthealth'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

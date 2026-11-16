@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.213.0 (2026-11-16)
+------------------
+
+* Feature - Adds support for GPU instances on Lambda Managed Instances in the CreateFunction and UpdateFunctionConfiguration APIs. Lambda Event Functions on Lambda Managed Instances can now set the accelerator memory using the new AcceleratorConfig parameter and run on capacity providers with GPU instances.
+
 1.212.0 (2026-11-13)
 ------------------
 

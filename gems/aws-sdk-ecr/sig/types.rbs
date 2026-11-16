@@ -229,6 +229,11 @@ module Aws::ECR
       SENSITIVE: []
     end
 
+    class DeleteReplication
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
     class DeleteRepositoryCreationTemplateRequest
       attr_accessor prefix: ::String
       SENSITIVE: []
@@ -1178,6 +1183,7 @@ module Aws::ECR
     class ReplicationRule
       attr_accessor destinations: ::Array[Types::ReplicationDestination]
       attr_accessor repository_filters: ::Array[Types::RepositoryFilter]
+      attr_accessor delete_replication: Types::DeleteReplication
       SENSITIVE: []
     end
 

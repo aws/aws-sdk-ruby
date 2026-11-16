@@ -356,6 +356,9 @@
   "ConnectParticipant": {
     "models": "connectparticipant/2018-09-07"
   },
+  "ConnectScheduling": {
+    "models": "connectscheduling/2026-07-16"
+  },
   "ConnectWisdomService": {
     "models": "wisdom/2020-10-19"
   },
@@ -935,6 +938,9 @@
   "Omics": {
     "models": "omics/2022-11-28"
   },
+  "OpenSearchMemory": {
+    "models": "opensearchmemory/2026-08-24"
+  },
   "OpenSearchServerless": {
     "models": "opensearchserverless/2021-11-01"
   },
@@ -1221,6 +1227,9 @@
   },
   "SageMakerGeospatial": {
     "models": "sagemaker-geospatial/2020-05-27"
+  },
+  "SageMakerInferenceRouterRuntime": {
+    "models": "sagemaker-inference-router-runtime/2026-01-01"
   },
   "SageMakerMetrics": {
     "models": "sagemaker-metrics/2022-09-30"

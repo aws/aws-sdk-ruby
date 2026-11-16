@@ -1228,6 +1228,7 @@ module Aws
                                           ?workspace_directory_name: ::String,
                                           ?workspace_directory_description: ::String,
                                           ?user_identity_type: ("CUSTOMER_MANAGED" | "AWS_DIRECTORY_SERVICE" | "AWS_IAM_IDENTITY_CENTER"),
+                                          ?workspace_os_user_mode: ("LOCAL_USER" | "DOMAIN_JOIN" | "ENTRA_JOIN" | "SELF_MANAGED"),
                                           ?idc_instance_arn: ::String,
                                           ?microsoft_entra_config: {
                                             tenant_id: ::String?,

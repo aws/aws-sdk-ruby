@@ -26,9 +26,21 @@ module Aws::ConnectHealth
 
     class ArtifactDetails
       attr_accessor output_location: ::String
-      attr_accessor status: ("IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor status: ("IN_PROGRESS" | "FAILED" | "COMPLETED" | "PENDING" | "SKIPPED")
       attr_accessor failure_reason: ::String
       SENSITIVE: []
+    end
+
+    class Checklist
+      attr_accessor checklist_id: ::String
+      attr_accessor items: ::Array[Types::ChecklistItem]
+      SENSITIVE: []
+    end
+
+    class ChecklistItem
+      attr_accessor item_key: ::String
+      attr_accessor status: ("DISCUSSED" | "PARTIALLY_DISCUSSED" | "NOT_DISCUSSED")
+      SENSITIVE: [:item_key]
     end
 
     class ClinicalNoteGenerationResult
@@ -50,6 +62,23 @@ module Aws::ConnectHealth
 
     class ConflictException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDatasetInput
+      attr_accessor domain_id: ::String
+      attr_accessor name: ::String
+      attr_accessor config: Types::DatasetConfig
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDatasetOutput
+      attr_accessor arn: ::String
+      attr_accessor dataset_id: ::String
+      attr_accessor type: ("MEDICAL_CODING")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "CREATE_FAILED" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      attr_accessor created_at: ::Time
       SENSITIVE: []
     end
 
@@ -109,6 +138,40 @@ module Aws::ConnectHealth
       SENSITIVE: []
     end
 
+    class DatasetArtifacts
+      attr_accessor medical_coding: Types::MedicalCodingDatasetArtifacts
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MedicalCoding < DatasetArtifacts
+      end
+      class Unknown < DatasetArtifacts
+      end
+    end
+
+    class DatasetConfig
+      attr_accessor medical_coding: Types::MedicalCodingDatasetConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MedicalCoding < DatasetConfig
+      end
+      class Unknown < DatasetConfig
+      end
+    end
+
+    class DatasetSummary
+      attr_accessor arn: ::String
+      attr_accessor dataset_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("MEDICAL_CODING")
+      attr_accessor status: ("CREATING" | "ACTIVE" | "CREATE_FAILED" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      attr_accessor status_details: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class DeactivateSubscriptionInput
       attr_accessor domain_id: ::String
       attr_accessor subscription_id: ::String
@@ -117,6 +180,19 @@ module Aws::ConnectHealth
 
     class DeactivateSubscriptionOutput
       attr_accessor subscription: Types::SubscriptionDescription
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetInput
+      attr_accessor domain_id: ::String
+      attr_accessor dataset_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetOutput
+      attr_accessor arn: ::String
+      attr_accessor dataset_id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "CREATE_FAILED" | "DELETING" | "DELETE_FAILED" | "DELETED")
       SENSITIVE: []
     end
 
@@ -143,6 +219,7 @@ module Aws::ConnectHealth
 
     class EncounterContext
       attr_accessor unstructured_context: ::String
+      attr_accessor medical_coding_context: Types::MedicalCodingContext
       SENSITIVE: [:unstructured_context]
     end
 
@@ -156,6 +233,26 @@ module Aws::ConnectHealth
       attr_accessor fhir_endpoint: ::String
       attr_accessor oauth_token: ::String
       SENSITIVE: [:oauth_token]
+    end
+
+    class GetDatasetInput
+      attr_accessor domain_id: ::String
+      attr_accessor dataset_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDatasetOutput
+      attr_accessor arn: ::String
+      attr_accessor dataset_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("MEDICAL_CODING")
+      attr_accessor config: Types::DatasetConfig
+      attr_accessor status: ("CREATING" | "ACTIVE" | "CREATE_FAILED" | "DELETING" | "DELETE_FAILED" | "DELETED")
+      attr_accessor status_details: ::String
+      attr_accessor artifacts: Types::DatasetArtifacts
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
     end
 
     class GetDomainInput
@@ -175,6 +272,28 @@ module Aws::ConnectHealth
       attr_accessor created_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
+    end
+
+    class GetMedicalCodingJobRequest
+      attr_accessor domain_id: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMedicalCodingJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "FAILED" | "SUCCEEDED")
+      attr_accessor creation_time: ::Time
+      attr_accessor updated_time: ::Time
+      attr_accessor text: ::String
+      attr_accessor patient_context: Types::MedicalCodesPatientContext
+      attr_accessor encounter_context: Types::MedicalCodesEncounterContext
+      attr_accessor output_data_config: Types::MedicalCodingOutputDataConfig
+      attr_accessor dataset_id: ::String
+      attr_accessor medical_coding_output: Types::MedicalCodingOutput
+      attr_accessor status_details: ::String
+      SENSITIVE: [:text]
     end
 
     class GetMedicalScribeListeningSessionInput
@@ -245,6 +364,20 @@ module Aws::ConnectHealth
       SENSITIVE: []
     end
 
+    class ListDatasetsInput
+      attr_accessor domain_id: ::String
+      attr_accessor type: ("MEDICAL_CODING")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDatasetsOutput
+      attr_accessor items: ::Array[Types::DatasetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListDomainsInput
       attr_accessor status: ("ACTIVE" | "DELETING" | "DELETED")
       attr_accessor max_results: ::Integer
@@ -291,6 +424,71 @@ module Aws::ConnectHealth
       SENSITIVE: []
     end
 
+    class MedicalCodeGenerationResult
+      attr_accessor medical_codes_result: Types::ArtifactDetails
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class MedicalCodeGenerationSettings
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class MedicalCodeGenerationSettingsResponse
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class MedicalCodesEncounterContext
+      attr_accessor encounter_type: ("TELEHEALTH" | "IN_PERSON")
+      attr_accessor encounter_reason: ::String
+      attr_accessor after_hours: bool
+      attr_accessor encounter_date: ::String
+      attr_accessor encounter_duration_minutes: ::Integer
+      SENSITIVE: [:encounter_reason, :encounter_date, :encounter_duration_minutes]
+    end
+
+    class MedicalCodesPatientContext
+      attr_accessor sex: ("MALE" | "FEMALE" | "NON_BINARY" | "UNKNOWN")
+      attr_accessor status: ("NEW" | "ESTABLISHED")
+      attr_accessor date_of_birth: ::String
+      attr_accessor insurance: ::String
+      SENSITIVE: [:sex, :status, :date_of_birth, :insurance]
+    end
+
+    class MedicalCodingContext
+      attr_accessor sex: ("MALE" | "FEMALE" | "NON_BINARY" | "UNKNOWN")
+      attr_accessor status: ("NEW" | "ESTABLISHED")
+      attr_accessor date_of_birth: ::String
+      attr_accessor encounter_type: ("TELEHEALTH" | "IN_PERSON")
+      attr_accessor encounter_reason: ::String
+      attr_accessor after_hours: bool
+      attr_accessor encounter_date: ::String
+      SENSITIVE: [:sex, :status, :date_of_birth, :encounter_reason, :encounter_date]
+    end
+
+    class MedicalCodingDatasetArtifacts
+      attr_accessor evaluation_s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class MedicalCodingDatasetConfig
+      attr_accessor s3_input_path: ::String
+      attr_accessor s3_output_path: ::String
+      SENSITIVE: []
+    end
+
+    class MedicalCodingOutput
+      attr_accessor uri: ::String
+      SENSITIVE: []
+    end
+
+    class MedicalCodingOutputDataConfig
+      attr_accessor s3_output_path: ::String
+      SENSITIVE: []
+    end
+
     class MedicalScribeAudioEvent
       attr_accessor audio_chunk: ::String
       attr_accessor event_type: untyped
@@ -306,6 +504,13 @@ module Aws::ConnectHealth
     class MedicalScribeChannelDefinition
       attr_accessor channel_id: ::Integer
       attr_accessor participant_role: ("PATIENT" | "CLINICIAN")
+      SENSITIVE: []
+    end
+
+    class MedicalScribeChecklistEvent
+      attr_accessor snapshot_version: ::Integer
+      attr_accessor checklists: ::Array[Types::Checklist]
+      attr_accessor event_type: untyped
       SENSITIVE: []
     end
 
@@ -328,26 +533,38 @@ module Aws::ConnectHealth
       attr_accessor post_stream_action_settings: Types::MedicalScribePostStreamActionSettingsResponse
       attr_accessor post_stream_action_result: Types::MedicalScribePostStreamActionsResult
       attr_accessor encounter_context_provided: bool
+      attr_accessor medical_coding_context_provided: bool
       attr_accessor stream_status: ("IN_PROGRESS" | "PAUSED" | "FAILED" | "COMPLETED")
       attr_accessor stream_creation_time: ::Time
       attr_accessor stream_end_time: ::Time
       SENSITIVE: []
     end
 
+    class MedicalScribePeriodontalChartEvent
+      attr_accessor snapshot_version: ::Integer
+      attr_accessor teeth: ::Array[Types::PeriodontalTooth]
+      attr_accessor review_items: ::Array[Types::PeriodontalReview]
+      attr_accessor event_type: untyped
+      SENSITIVE: [:teeth, :review_items]
+    end
+
     class MedicalScribePostStreamActionSettings
       attr_accessor output_s3_uri: ::String
       attr_accessor clinical_note_generation_settings: Types::ClinicalNoteGenerationSettings
+      attr_accessor medical_code_generation_settings: Types::MedicalCodeGenerationSettings
       SENSITIVE: []
     end
 
     class MedicalScribePostStreamActionSettingsResponse
       attr_accessor output_s3_uri: ::String
       attr_accessor clinical_note_generation_settings: Types::ClinicalNoteGenerationSettingsResponse
+      attr_accessor medical_code_generation_settings: Types::MedicalCodeGenerationSettingsResponse
       SENSITIVE: []
     end
 
     class MedicalScribePostStreamActionsResult
       attr_accessor clinical_note_generation_result: Types::ClinicalNoteGenerationResult
+      attr_accessor medical_code_generation_result: Types::MedicalCodeGenerationResult
       SENSITIVE: []
     end
 
@@ -418,6 +635,31 @@ module Aws::ConnectHealth
       SENSITIVE: [:patient_id, :date_of_birth, :pronouns]
     end
 
+    class PeriodontalReview
+      attr_accessor reason: ("SITE_NOT_CHARTED" | "VALUE_NOT_CHARTED" | "READING_COUNT_MISMATCH" | "LINE_UNCLEAR" | "TOOTH_UNCLEAR" | "MISSING_TOOTH_CONFLICT" | "MEASUREMENT_NOT_CHARTED" | "SESSION_ISSUE")
+      attr_accessor tooth_number: ::Integer
+      attr_accessor sites: ::Array[("DB" | "B" | "MB" | "DL" | "L" | "ML")]
+      SENSITIVE: []
+    end
+
+    class PeriodontalSite
+      attr_accessor site: ("DB" | "B" | "MB" | "DL" | "L" | "ML")
+      attr_accessor probing_depth: ::Integer
+      attr_accessor recession: ::Integer
+      attr_accessor bleeding: bool
+      attr_accessor suppuration: bool
+      SENSITIVE: []
+    end
+
+    class PeriodontalTooth
+      attr_accessor tooth_number: ::Integer
+      attr_accessor missing: bool
+      attr_accessor mobility: ::Integer
+      attr_accessor furcation: ::Integer
+      attr_accessor sites: ::Array[Types::PeriodontalSite]
+      SENSITIVE: [:sites]
+    end
+
     class ResourceNotFoundException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -430,6 +672,24 @@ module Aws::ConnectHealth
 
     class ServiceQuotaExceededException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartMedicalCodingJobRequest
+      attr_accessor domain_id: ::String
+      attr_accessor text: ::String
+      attr_accessor patient_context: Types::MedicalCodesPatientContext
+      attr_accessor encounter_context: Types::MedicalCodesEncounterContext
+      attr_accessor output_data_config: Types::MedicalCodingOutputDataConfig
+      attr_accessor dataset_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: [:text]
+    end
+
+    class StartMedicalCodingJobResponse
+      attr_accessor job_arn: ::String
+      attr_accessor job_id: ::String
+      attr_accessor creation_time: ::Time
       SENSITIVE: []
     end
 
@@ -473,6 +733,21 @@ module Aws::ConnectHealth
       attr_accessor job_id: ::String
       attr_accessor creation_time: ::Time
       SENSITIVE: []
+    end
+
+    class SubmitFeedbackRequest
+      attr_accessor domain_id: ::String
+      attr_accessor artifact_source_id: ::String
+      attr_accessor subscription_id: ::String
+      attr_accessor artifact_type: ("CLINICAL_DOC" | "MEDICAL_CODES")
+      attr_accessor signed_artifact_s3_uri: ::String
+      attr_accessor generated_artifact_s3_uri: ::String
+      attr_accessor comments: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: [:comments]
+    end
+
+    class SubmitFeedbackResponse < Aws::EmptyStructure
     end
 
     class SubscriptionDescription
@@ -535,7 +810,7 @@ module Aws::ConnectHealth
     end
 
     class MedicalScribeOutputStream < Enumerator[untyped, untyped]
-      def event_types: () -> [:transcript_event, :internal_failure_exception, :validation_exception]
+      def event_types: () -> [:transcript_event, :internal_failure_exception, :validation_exception, :periodontal_chart_event, :checklist_event]
     end
   end
 end

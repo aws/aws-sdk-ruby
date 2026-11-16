@@ -55,7 +55,7 @@ module Aws::SupportAuthZ
   autoload :EndpointProvider, 'aws-sdk-supportauthz/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-supportauthz/endpoints'
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.14.0'
 
 end
 

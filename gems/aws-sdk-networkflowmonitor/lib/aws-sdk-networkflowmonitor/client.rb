@@ -599,6 +599,88 @@ module Aws::NetworkFlowMonitor
       req.send_request(options)
     end
 
+    # Create a performance monitor to monitor the traffic of the Amazon
+    # Virtual Private Clouds (VPCs) that you specify as targets, to
+    # determine whether the Amazon Web Services network is causing issues
+    # for your workloads. With a performance monitor, you can identify
+    # network degradation across paths between Availability Zones and across
+    # Amazon Web Services Regions.
+    #
+    # @option params [required, String] :monitor_name
+    #   The name of the performance monitor.
+    #
+    # @option params [String] :scope_arn
+    #   The Amazon Resource Name (ARN) of the scope for the performance
+    #   monitor.
+    #
+    # @option params [required, Array<Types::PerformanceMonitorTarget>] :targets
+    #   The resources to monitor. Each target identifies a resource, currently
+    #   a VPC, for which you can track network performance. For a VPC, specify
+    #   the VPC ARN.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive string of up to 64 ASCII characters that you
+    #   specify to make an idempotent API request. If the token matches a
+    #   previous request, the service ignores the request without returning an
+    #   error. Don't reuse the same client token for other API requests.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags for a performance monitor. You can add a maximum of 200 tags.
+    #
+    # @return [Types::CreatePerformanceMonitorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePerformanceMonitorOutput#monitor_arn #monitor_arn} => String
+    #   * {Types::CreatePerformanceMonitorOutput#monitor_name #monitor_name} => String
+    #   * {Types::CreatePerformanceMonitorOutput#monitor_status #monitor_status} => String
+    #   * {Types::CreatePerformanceMonitorOutput#monitor_type #monitor_type} => String
+    #   * {Types::CreatePerformanceMonitorOutput#targets #targets} => Array&lt;Types::PerformanceMonitorTarget&gt;
+    #   * {Types::CreatePerformanceMonitorOutput#created_at #created_at} => Time
+    #   * {Types::CreatePerformanceMonitorOutput#modified_at #modified_at} => Time
+    #   * {Types::CreatePerformanceMonitorOutput#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_performance_monitor({
+    #     monitor_name: "ResourceName", # required
+    #     scope_arn: "Arn",
+    #     targets: [ # required
+    #       {
+    #         type: "AWS::EC2::VPC", # required, accepts AWS::EC2::VPC
+    #         identifier: "PerformanceMonitorTargetIdentifierString", # required
+    #       },
+    #     ],
+    #     client_token: "UuidString",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.monitor_arn #=> String
+    #   resp.monitor_name #=> String
+    #   resp.monitor_status #=> String, one of "PENDING", "ACTIVE", "INACTIVE", "ERROR", "DELETING"
+    #   resp.monitor_type #=> String, one of "VPC"
+    #   resp.targets #=> Array
+    #   resp.targets[0].type #=> String, one of "AWS::EC2::VPC"
+    #   resp.targets[0].identifier #=> String
+    #   resp.created_at #=> Time
+    #   resp.modified_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/CreatePerformanceMonitor AWS API Documentation
+    #
+    # @overload create_performance_monitor(params = {})
+    # @param [Hash] params ({})
+    def create_performance_monitor(params = {}, options = {})
+      req = build_request(:create_performance_monitor, params)
+      req.send_request(options)
+    end
+
     # In Network Flow Monitor, you specify a scope for the service to
     # generate metrics for. By using the scope, Network Flow Monitor can
     # generate a topology of all the resources to measure performance
@@ -705,6 +787,29 @@ module Aws::NetworkFlowMonitor
       req.send_request(options)
     end
 
+    # Delete a performance monitor. Network Flow Monitor stops tracking
+    # network performance for the resources that the monitor included.
+    #
+    # @option params [required, String] :monitor_name
+    #   The name of the performance monitor.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_performance_monitor({
+    #     monitor_name: "ResourceName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/DeletePerformanceMonitor AWS API Documentation
+    #
+    # @overload delete_performance_monitor(params = {})
+    # @param [Hash] params ({})
+    def delete_performance_monitor(params = {}, options = {})
+      req = build_request(:delete_performance_monitor, params)
+      req.send_request(options)
+    end
+
     # Deletes a scope that has been defined.
     #
     # @option params [required, String] :scope_id
@@ -779,6 +884,105 @@ module Aws::NetworkFlowMonitor
       req.send_request(options)
     end
 
+    # Returns the accounts that are sending traffic to, or receiving traffic
+    # from, resources in a monitor, but that aren't included in the
+    # monitoring scope for the monitor. By adding the suggested accounts to
+    # your scope, you enable Network Flow Monitor to resolve the network
+    # paths for that traffic.
+    #
+    # @option params [required, String] :monitor_arn
+    #   The Amazon Resource Name (ARN) of the monitor that you want to return
+    #   scope suggestions for.
+    #
+    # @option params [Integer] :max_results
+    #   The number of query results that you want to return with this call.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #
+    # @return [Types::GetMonitorScopeSuggestionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMonitorScopeSuggestionsOutput#status #status} => String
+    #   * {Types::GetMonitorScopeSuggestionsOutput#accounts_to_add #accounts_to_add} => Array&lt;Types::AccountToAdd&gt;
+    #   * {Types::GetMonitorScopeSuggestionsOutput#next_token #next_token} => String
+    #   * {Types::GetMonitorScopeSuggestionsOutput#updated_at #updated_at} => Time
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_monitor_scope_suggestions({
+    #     monitor_arn: "MonitorArn", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "COMPLETE", "INCOMPLETE", "PENDING", "STALE"
+    #   resp.accounts_to_add #=> Array
+    #   resp.accounts_to_add[0].account_id #=> String
+    #   resp.accounts_to_add[0].region #=> String
+    #   resp.accounts_to_add[0].membership #=> String, one of "IN_ORG", "NOT_IN_ORG", "UNKNOWN"
+    #   resp.next_token #=> String
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/GetMonitorScopeSuggestions AWS API Documentation
+    #
+    # @overload get_monitor_scope_suggestions(params = {})
+    # @param [Hash] params ({})
+    def get_monitor_scope_suggestions(params = {}, options = {})
+      req = build_request(:get_monitor_scope_suggestions, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a performance monitor, including the
+    # resources that it monitors, its status, and the tags for the monitor.
+    #
+    # @option params [required, String] :monitor_name
+    #   The name of the performance monitor.
+    #
+    # @return [Types::GetPerformanceMonitorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPerformanceMonitorOutput#monitor_arn #monitor_arn} => String
+    #   * {Types::GetPerformanceMonitorOutput#monitor_name #monitor_name} => String
+    #   * {Types::GetPerformanceMonitorOutput#monitor_status #monitor_status} => String
+    #   * {Types::GetPerformanceMonitorOutput#monitor_type #monitor_type} => String
+    #   * {Types::GetPerformanceMonitorOutput#targets #targets} => Array&lt;Types::PerformanceMonitorTarget&gt;
+    #   * {Types::GetPerformanceMonitorOutput#created_at #created_at} => Time
+    #   * {Types::GetPerformanceMonitorOutput#modified_at #modified_at} => Time
+    #   * {Types::GetPerformanceMonitorOutput#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_performance_monitor({
+    #     monitor_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.monitor_arn #=> String
+    #   resp.monitor_name #=> String
+    #   resp.monitor_status #=> String, one of "PENDING", "ACTIVE", "INACTIVE", "ERROR", "DELETING"
+    #   resp.monitor_type #=> String, one of "VPC"
+    #   resp.targets #=> Array
+    #   resp.targets[0].type #=> String, one of "AWS::EC2::VPC"
+    #   resp.targets[0].identifier #=> String
+    #   resp.created_at #=> Time
+    #   resp.modified_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/GetPerformanceMonitor AWS API Documentation
+    #
+    # @overload get_performance_monitor(params = {})
+    # @param [Hash] params ({})
+    def get_performance_monitor(params = {}, options = {})
+      req = build_request(:get_performance_monitor, params)
+      req.send_request(options)
+    end
+
     # Return the data for a query with the Network Flow Monitor query
     # interface. You specify the query that you want to return results for
     # by providing a query ID and a monitor name. This query returns the top
@@ -838,7 +1042,7 @@ module Aws::NetworkFlowMonitor
     #   resp.top_contributors[0].local_az #=> String
     #   resp.top_contributors[0].local_subnet_id #=> String
     #   resp.top_contributors[0].target_port #=> Integer
-    #   resp.top_contributors[0].destination_category #=> String, one of "INTRA_AZ", "INTER_AZ", "INTER_VPC", "UNCLASSIFIED", "AMAZON_S3", "AMAZON_DYNAMODB", "INTER_REGION"
+    #   resp.top_contributors[0].destination_category #=> String, one of "INTRA_AZ", "INTER_AZ", "INTER_VPC", "UNCLASSIFIED", "AMAZON_S3", "AMAZON_DYNAMODB", "INTER_REGION", "INTERNET", "AWS_SERVICE", "LOCAL_ZONE", "TRANSIT_GATEWAY"
     #   resp.top_contributors[0].remote_vpc_id #=> String
     #   resp.top_contributors[0].remote_region #=> String
     #   resp.top_contributors[0].remote_az #=> String
@@ -864,6 +1068,11 @@ module Aws::NetworkFlowMonitor
     #   resp.top_contributors[0].remote_instance_arn #=> String
     #   resp.top_contributors[0].remote_subnet_arn #=> String
     #   resp.top_contributors[0].remote_vpc_arn #=> String
+    #   resp.top_contributors[0].additional_flow_info.network.as_name #=> String
+    #   resp.top_contributors[0].additional_flow_info.network.as_number #=> Integer
+    #   resp.top_contributors[0].additional_flow_info.client_location.city #=> String
+    #   resp.top_contributors[0].additional_flow_info.client_location.subdivision #=> String
+    #   resp.top_contributors[0].additional_flow_info.client_location.country #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/GetQueryResultsMonitorTopContributors AWS API Documentation
@@ -872,6 +1081,68 @@ module Aws::NetworkFlowMonitor
     # @param [Hash] params ({})
     def get_query_results_monitor_top_contributors(params = {}, options = {})
       req = build_request(:get_query_results_monitor_top_contributors, params)
+      req.send_request(options)
+    end
+
+    # Returns the results of a query for the Network Flow Monitor query
+    # interface, for a specified query ID and performance monitor. This call
+    # returns the top paths for a performance monitor.
+    #
+    # Create a query with [ StartQueryPerformanceMonitor][1], and then use
+    # the query ID with this call to return the results.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/networkflowmonitor/2.0/APIReference/API_StartQueryPerformanceMonitor.html
+    #
+    # @option params [required, String] :monitor_name
+    #   The name of the performance monitor.
+    #
+    # @option params [required, String] :query_id
+    #   The identifier for the query. A query ID is an internally-generated
+    #   identifier for a specific query returned from an API call to start a
+    #   query.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #
+    # @option params [Integer] :max_results
+    #   The number of query results that you want to return with this call.
+    #
+    # @return [Types::GetQueryResultsPerformanceMonitorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQueryResultsPerformanceMonitorOutput#fields #fields} => Array&lt;Types::QueryField&gt;
+    #   * {Types::GetQueryResultsPerformanceMonitorOutput#data #data} => Array&lt;Array&lt;String&gt;&gt;
+    #   * {Types::GetQueryResultsPerformanceMonitorOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_query_results_performance_monitor({
+    #     monitor_name: "ResourceName", # required
+    #     query_id: "String", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fields #=> Array
+    #   resp.fields[0].name #=> String
+    #   resp.fields[0].type #=> String
+    #   resp.data #=> Array
+    #   resp.data[0] #=> Array
+    #   resp.data[0][0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/GetQueryResultsPerformanceMonitor AWS API Documentation
+    #
+    # @overload get_query_results_performance_monitor(params = {})
+    # @param [Hash] params ({})
+    def get_query_results_performance_monitor(params = {}, options = {})
+      req = build_request(:get_query_results_performance_monitor, params)
       req.send_request(options)
     end
 
@@ -1070,6 +1341,48 @@ module Aws::NetworkFlowMonitor
     # @param [Hash] params ({})
     def get_query_status_monitor_top_contributors(params = {}, options = {})
       req = build_request(:get_query_status_monitor_top_contributors, params)
+      req.send_request(options)
+    end
+
+    # Returns the current status of a query for the Network Flow Monitor
+    # query interface, for a specified query ID and performance monitor.
+    # This call returns the query status for the top paths for a performance
+    # monitor.
+    #
+    # When you run a query, use this call to check the status of the query
+    # to make sure that the query has `SUCCEEDED` before you review the
+    # results. Use the same query ID that you used for the corresponding API
+    # call to start (create) the query, `StartQueryPerformanceMonitor`.
+    #
+    # @option params [required, String] :monitor_name
+    #   The name of the performance monitor.
+    #
+    # @option params [required, String] :query_id
+    #   The identifier for the query. A query ID is an internally-generated
+    #   identifier for a specific query returned from an API call to start a
+    #   query.
+    #
+    # @return [Types::GetQueryStatusPerformanceMonitorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQueryStatusPerformanceMonitorOutput#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_query_status_performance_monitor({
+    #     monitor_name: "ResourceName", # required
+    #     query_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "QUEUED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/GetQueryStatusPerformanceMonitor AWS API Documentation
+    #
+    # @overload get_query_status_performance_monitor(params = {})
+    # @param [Hash] params ({})
+    def get_query_status_performance_monitor(params = {}, options = {})
+      req = build_request(:get_query_status_performance_monitor, params)
       req.send_request(options)
     end
 
@@ -1277,6 +1590,68 @@ module Aws::NetworkFlowMonitor
       req.send_request(options)
     end
 
+    # Returns a list of the performance monitors in an account. You can
+    # optionally return only the monitors that have a specific status or
+    # type.
+    #
+    # Results are paginated. Use the `nextToken` parameter to return
+    # additional results.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #
+    # @option params [Integer] :max_results
+    #   The number of performance monitors that you want to return with this
+    #   call. If you don't specify a value, the default is 25.
+    #
+    # @option params [String] :monitor_status
+    #   The status of the performance monitors that you want to return. If you
+    #   don't specify a status, Network Flow Monitor returns performance
+    #   monitors with any status.
+    #
+    # @option params [String] :monitor_type
+    #   The type of the performance monitors that you want to return. If you
+    #   don't specify a type, Network Flow Monitor returns performance
+    #   monitors of any type.
+    #
+    # @return [Types::ListPerformanceMonitorsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPerformanceMonitorsOutput#monitors #monitors} => Array&lt;Types::PerformanceMonitorSummary&gt;
+    #   * {Types::ListPerformanceMonitorsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_performance_monitors({
+    #     next_token: "String",
+    #     max_results: 1,
+    #     monitor_status: "PENDING", # accepts PENDING, ACTIVE, INACTIVE, ERROR, DELETING
+    #     monitor_type: "VPC", # accepts VPC
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.monitors #=> Array
+    #   resp.monitors[0].monitor_arn #=> String
+    #   resp.monitors[0].monitor_name #=> String
+    #   resp.monitors[0].monitor_status #=> String, one of "PENDING", "ACTIVE", "INACTIVE", "ERROR", "DELETING"
+    #   resp.monitors[0].monitor_type #=> String, one of "VPC"
+    #   resp.monitors[0].targets #=> Array
+    #   resp.monitors[0].targets[0].type #=> String, one of "AWS::EC2::VPC"
+    #   resp.monitors[0].targets[0].identifier #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/ListPerformanceMonitors AWS API Documentation
+    #
+    # @overload list_performance_monitors(params = {})
+    # @param [Hash] params ({})
+    def list_performance_monitors(params = {}, options = {})
+      req = build_request(:list_performance_monitors, params)
+      req.send_request(options)
+    end
+
     # List all the scopes for an account.
     #
     # @option params [String] :next_token
@@ -1418,7 +1793,7 @@ module Aws::NetworkFlowMonitor
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
     #     metric_name: "ROUND_TRIP_TIME", # required, accepts ROUND_TRIP_TIME, TIMEOUTS, RETRANSMISSIONS, DATA_TRANSFERRED
-    #     destination_category: "INTRA_AZ", # required, accepts INTRA_AZ, INTER_AZ, INTER_VPC, UNCLASSIFIED, AMAZON_S3, AMAZON_DYNAMODB, INTER_REGION
+    #     destination_category: "INTRA_AZ", # required, accepts INTRA_AZ, INTER_AZ, INTER_VPC, UNCLASSIFIED, AMAZON_S3, AMAZON_DYNAMODB, INTER_REGION, INTERNET, AWS_SERVICE, LOCAL_ZONE, TRANSIT_GATEWAY
     #     limit: 1,
     #   })
     #
@@ -1432,6 +1807,94 @@ module Aws::NetworkFlowMonitor
     # @param [Hash] params ({})
     def start_query_monitor_top_contributors(params = {}, options = {})
       req = build_request(:start_query_monitor_top_contributors, params)
+      req.send_request(options)
+    end
+
+    # Create a query that you can use with the Network Flow Monitor query
+    # interface to return the top paths for a performance monitor. Specify
+    # the performance monitor that you want to create the query for.
+    #
+    # The call returns a query ID that you can use with [
+    # GetQueryResultsPerformanceMonitor][1] to return the results of the
+    # query.
+    #
+    # Top paths in Network Flow Monitor are the network paths used by the
+    # traffic for the resources that a performance monitor tracks, ranked by
+    # impact score and then by traffic volume. Each path includes the
+    # traffic and round-trip time for the path, together with a breakdown of
+    # the subnet pairs that the path includes.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/networkflowmonitor/2.0/APIReference/API_GetQueryResultsPerformanceMonitor.html
+    #
+    # @option params [required, String] :monitor_name
+    #   The name of the performance monitor.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The timestamp that is the date and time that is the beginning of the
+    #   period that you want to retrieve results for with your query.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   The timestamp that is the date and time end of the period that you
+    #   want to retrieve results for with your query.
+    #
+    # @option params [required, String] :query_type
+    #   The type of query that you want to create. Specify `TOP_PATHS` to
+    #   return the top paths for the performance monitor.
+    #
+    # @option params [Array<Types::FilterParameter>] :filter_parameters
+    #   The filters for the query, to return a subset of the top paths. For a
+    #   `TOP_PATHS` query, you can filter on the following fields:
+    #
+    #   * `local_az_id`: The Availability Zone ID of the local end of a path
+    #
+    #   * `remote_az_id`: The Availability Zone ID of the remote end of a path
+    #
+    #   * `impact_level`: The impact level of a path
+    #
+    #   When you filter on `impact_level`, Network Flow Monitor compares the
+    #   filter with the most severe impact level for the path over the time
+    #   period of the query, and the traffic and round-trip time that Network
+    #   Flow Monitor returns for each path still cover the full time period.
+    #   Paths that have no impact data don't match an `impact_level` filter,
+    #   including a `NOT_EQUALS` filter. Network Flow Monitor doesn't filter
+    #   the subnet pairs within a path by impact level.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of top paths that you want the query to return.
+    #
+    # @return [Types::StartQueryPerformanceMonitorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartQueryPerformanceMonitorOutput#query_id #query_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_query_performance_monitor({
+    #     monitor_name: "ResourceName", # required
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     query_type: "TOP_PATHS", # required, accepts TOP_PATHS
+    #     filter_parameters: [
+    #       {
+    #         field: "String", # required
+    #         operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, IN, CONTAINS
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/StartQueryPerformanceMonitor AWS API Documentation
+    #
+    # @overload start_query_performance_monitor(params = {})
+    # @param [Hash] params ({})
+    def start_query_performance_monitor(params = {}, options = {})
+      req = build_request(:start_query_performance_monitor, params)
       req.send_request(options)
     end
 
@@ -1507,7 +1970,7 @@ module Aws::NetworkFlowMonitor
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
     #     metric_name: "TIMEOUTS", # required, accepts TIMEOUTS, RETRANSMISSIONS, DATA_TRANSFERRED
-    #     destination_category: "INTRA_AZ", # required, accepts INTRA_AZ, INTER_AZ, INTER_VPC, UNCLASSIFIED, AMAZON_S3, AMAZON_DYNAMODB, INTER_REGION
+    #     destination_category: "INTRA_AZ", # required, accepts INTRA_AZ, INTER_AZ, INTER_VPC, UNCLASSIFIED, AMAZON_S3, AMAZON_DYNAMODB, INTER_REGION, INTERNET, AWS_SERVICE, LOCAL_ZONE, TRANSIT_GATEWAY
     #     limit: 1,
     #   })
     #
@@ -1593,7 +2056,7 @@ module Aws::NetworkFlowMonitor
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
     #     metric_name: "TIMEOUTS", # required, accepts TIMEOUTS, RETRANSMISSIONS, DATA_TRANSFERRED
-    #     destination_category: "INTRA_AZ", # required, accepts INTRA_AZ, INTER_AZ, INTER_VPC, UNCLASSIFIED, AMAZON_S3, AMAZON_DYNAMODB, INTER_REGION
+    #     destination_category: "INTRA_AZ", # required, accepts INTRA_AZ, INTER_AZ, INTER_VPC, UNCLASSIFIED, AMAZON_S3, AMAZON_DYNAMODB, INTER_REGION, INTERNET, AWS_SERVICE, LOCAL_ZONE, TRANSIT_GATEWAY
     #   })
     #
     # @example Response structure
@@ -1641,6 +2104,37 @@ module Aws::NetworkFlowMonitor
     # @param [Hash] params ({})
     def stop_query_monitor_top_contributors(params = {}, options = {})
       req = build_request(:stop_query_monitor_top_contributors, params)
+      req.send_request(options)
+    end
+
+    # Stop a query for the Network Flow Monitor query interface, for a
+    # specified query ID and performance monitor. Use the same query ID that
+    # you used for the corresponding API call to start the query,
+    # `StartQueryPerformanceMonitor`.
+    #
+    # @option params [required, String] :monitor_name
+    #   The name of the performance monitor.
+    #
+    # @option params [required, String] :query_id
+    #   The identifier for the query. A query ID is an internally-generated
+    #   identifier for a specific query returned from an API call to start a
+    #   query.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_query_performance_monitor({
+    #     monitor_name: "ResourceName", # required
+    #     query_id: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/StopQueryPerformanceMonitor AWS API Documentation
+    #
+    # @overload stop_query_performance_monitor(params = {})
+    # @param [Hash] params ({})
+    def stop_query_performance_monitor(params = {}, options = {})
+      req = build_request(:stop_query_performance_monitor, params)
       req.send_request(options)
     end
 
@@ -1878,6 +2372,80 @@ module Aws::NetworkFlowMonitor
       req.send_request(options)
     end
 
+    # Update a performance monitor, to add or remove the resources that the
+    # monitor tracks network performance for.
+    #
+    # @option params [required, String] :monitor_name
+    #   The name of the performance monitor.
+    #
+    # @option params [Array<Types::PerformanceMonitorTarget>] :targets_to_add
+    #   The resources to add to the performance monitor.
+    #
+    # @option params [Array<Types::PerformanceMonitorTarget>] :targets_to_remove
+    #   The resources to remove from the performance monitor.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive string of up to 64 ASCII characters that you
+    #   specify to make an idempotent API request. If the token matches a
+    #   previous request, the service ignores the request without returning an
+    #   error. Don't reuse the same client token for other API requests.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdatePerformanceMonitorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePerformanceMonitorOutput#monitor_arn #monitor_arn} => String
+    #   * {Types::UpdatePerformanceMonitorOutput#monitor_name #monitor_name} => String
+    #   * {Types::UpdatePerformanceMonitorOutput#monitor_status #monitor_status} => String
+    #   * {Types::UpdatePerformanceMonitorOutput#monitor_type #monitor_type} => String
+    #   * {Types::UpdatePerformanceMonitorOutput#targets #targets} => Array&lt;Types::PerformanceMonitorTarget&gt;
+    #   * {Types::UpdatePerformanceMonitorOutput#created_at #created_at} => Time
+    #   * {Types::UpdatePerformanceMonitorOutput#modified_at #modified_at} => Time
+    #   * {Types::UpdatePerformanceMonitorOutput#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_performance_monitor({
+    #     monitor_name: "ResourceName", # required
+    #     targets_to_add: [
+    #       {
+    #         type: "AWS::EC2::VPC", # required, accepts AWS::EC2::VPC
+    #         identifier: "PerformanceMonitorTargetIdentifierString", # required
+    #       },
+    #     ],
+    #     targets_to_remove: [
+    #       {
+    #         type: "AWS::EC2::VPC", # required, accepts AWS::EC2::VPC
+    #         identifier: "PerformanceMonitorTargetIdentifierString", # required
+    #       },
+    #     ],
+    #     client_token: "UuidString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.monitor_arn #=> String
+    #   resp.monitor_name #=> String
+    #   resp.monitor_status #=> String, one of "PENDING", "ACTIVE", "INACTIVE", "ERROR", "DELETING"
+    #   resp.monitor_type #=> String, one of "VPC"
+    #   resp.targets #=> Array
+    #   resp.targets[0].type #=> String, one of "AWS::EC2::VPC"
+    #   resp.targets[0].identifier #=> String
+    #   resp.created_at #=> Time
+    #   resp.modified_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkflowmonitor-2023-04-19/UpdatePerformanceMonitor AWS API Documentation
+    #
+    # @overload update_performance_monitor(params = {})
+    # @param [Hash] params ({})
+    def update_performance_monitor(params = {}, options = {})
+      req = build_request(:update_performance_monitor, params)
+      req.send_request(options)
+    end
+
     # Update a scope to add or remove resources that you want to be
     # available for Network Flow Monitor to generate metrics for, when you
     # have active agents on those resources sending metrics reports to the
@@ -1964,7 +2532,7 @@ module Aws::NetworkFlowMonitor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkflowmonitor'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

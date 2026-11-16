@@ -51,6 +51,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#full_snapshot_size_in_bytes-instance_method
       def full_snapshot_size_in_bytes: () -> ::Integer
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#associated_kms_keys-instance_method
+      def associated_kms_keys: () -> ::Array[Types::AssociatedKmsKey]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Snapshot.html#volume_id-instance_method
       def volume_id: () -> ::String
 

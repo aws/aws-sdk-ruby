@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.136.0 (2026-11-16)
+------------------
+
+* Feature - Adds an optional AttributesToGet parameter to ListDatabases and ListTableMetadata to return only requested database or table names (and table types) from the AWS Glue Data Catalog, reducing response time for large catalogs.
+
 1.135.0 (2026-11-11)
 ------------------
 

@@ -316,6 +316,9 @@ module Aws
       health_check: Params::gateway_connector_health_check?,
       filters: {
         access_types: Array[("PUBLIC" | "PRIVATE")]?
+      }?,
+      deregistration_delay: {
+        timeout_seconds: ::Integer?
       }?
     }
 

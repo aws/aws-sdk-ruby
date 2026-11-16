@@ -2921,6 +2921,9 @@ module Aws::ECS
     #         filters: {
     #           access_types: ["PUBLIC"], # accepts PUBLIC, PRIVATE
     #         },
+    #         deregistration_delay: {
+    #           timeout_seconds: 1,
+    #         },
     #       },
     #     ],
     #     monitoring: {
@@ -7309,6 +7312,7 @@ module Aws::ECS
     #   resp.service_revisions[0].gateway_connectors[0].health_check.matcher.grpc_code #=> String
     #   resp.service_revisions[0].gateway_connectors[0].filters.access_types #=> Array
     #   resp.service_revisions[0].gateway_connectors[0].filters.access_types[0] #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.service_revisions[0].gateway_connectors[0].deregistration_delay.timeout_seconds #=> Integer
     #   resp.service_revisions[0].monitoring.metric_configurations #=> Array
     #   resp.service_revisions[0].monitoring.metric_configurations[0].metric_names #=> Array
     #   resp.service_revisions[0].monitoring.metric_configurations[0].metric_names[0] #=> String
@@ -16866,6 +16870,9 @@ module Aws::ECS
     #         filters: {
     #           access_types: ["PUBLIC"], # accepts PUBLIC, PRIVATE
     #         },
+    #         deregistration_delay: {
+    #           timeout_seconds: 1,
+    #         },
     #       },
     #     ],
     #     monitoring: {
@@ -17593,7 +17600,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.259.0'
+      context[:gem_version] = '1.260.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

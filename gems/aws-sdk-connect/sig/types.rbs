@@ -2391,6 +2391,16 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class DeleteAllEntitySessionsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor entity_type: ("USER")
+      SENSITIVE: []
+    end
+
+    class DeleteAllEntitySessionsResponse < Aws::EmptyStructure
+    end
+
     class DeleteAttachedFileRequest
       attr_accessor instance_id: ::String
       attr_accessor file_id: ::String

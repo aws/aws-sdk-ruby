@@ -8,6 +8,11 @@
 module Aws::Lambda
   module Types
 
+    class AcceleratorConfig
+      attr_accessor accelerator_memory_size: ::Integer
+      SENSITIVE: []
+    end
+
     class AccountLimit
       attr_accessor total_code_size: ::Integer
       attr_accessor code_size_unzipped: ::Integer
@@ -443,6 +448,7 @@ module Aws::Lambda
       attr_accessor capacity_provider_config: Types::CapacityProviderConfig
       attr_accessor durable_config: Types::DurableConfig
       attr_accessor runtime_config: Types::FunctionRuntimeConfig
+      attr_accessor accelerator_config: Types::AcceleratorConfig
       SENSITIVE: []
     end
 
@@ -877,10 +883,10 @@ module Aws::Lambda
       attr_accessor layers: ::Array[Types::Layer]
       attr_accessor state: ("Pending" | "Active" | "Inactive" | "Failed" | "Deactivating" | "Deactivated" | "ActiveNonInvocable" | "Deleting")
       attr_accessor state_reason: ::String
-      attr_accessor state_reason_code: ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "DrainingDurableExecutions" | "DependencyError")
+      attr_accessor state_reason_code: ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "DrainingDurableExecutions" | "IncompatibleAcceleratorInstanceTypes" | "DependencyError")
       attr_accessor last_update_status: ("Successful" | "Failed" | "InProgress")
       attr_accessor last_update_status_reason: ::String
-      attr_accessor last_update_status_reason_code: ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "DependencyError")
+      attr_accessor last_update_status_reason_code: ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "ServiceQuotaExceededException" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl" | "IncompatibleAcceleratorInstanceTypes" | "DependencyError")
       attr_accessor file_system_configs: ::Array[Types::FileSystemConfig]
       attr_accessor signing_profile_version_arn: ::String
       attr_accessor signing_job_arn: ::String
@@ -896,6 +902,7 @@ module Aws::Lambda
       attr_accessor config_sha_256: ::String
       attr_accessor durable_config: Types::DurableConfig
       attr_accessor runtime_config: Types::FunctionRuntimeConfig
+      attr_accessor accelerator_config: Types::AcceleratorConfig
       SENSITIVE: []
     end
 
@@ -2164,7 +2171,7 @@ module Aws::Lambda
     end
 
     class TargetTrackingScalingPolicy
-      attr_accessor predefined_metric_type: ("LambdaCapacityProviderAverageCPUUtilization")
+      attr_accessor predefined_metric_type: ("LambdaCapacityProviderAverageCPUUtilization" | "LambdaCapacityProviderAverageGPUUtilization")
       attr_accessor target_value: ::Float
       SENSITIVE: []
     end
@@ -2311,6 +2318,7 @@ module Aws::Lambda
       attr_accessor capacity_provider_config: Types::CapacityProviderConfig
       attr_accessor durable_config: Types::DurableConfig
       attr_accessor runtime_config: Types::FunctionRuntimeConfig
+      attr_accessor accelerator_config: Types::AcceleratorConfig
       SENSITIVE: []
     end
 

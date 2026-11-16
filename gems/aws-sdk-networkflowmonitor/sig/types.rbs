@@ -13,6 +13,26 @@ module Aws::NetworkFlowMonitor
       SENSITIVE: []
     end
 
+    class AccountToAdd
+      attr_accessor account_id: ::String
+      attr_accessor region: ::String
+      attr_accessor membership: ("IN_ORG" | "NOT_IN_ORG" | "UNKNOWN")
+      SENSITIVE: []
+    end
+
+    class AdditionalFlowInfo
+      attr_accessor network: Types::Network
+      attr_accessor client_location: Types::ClientLocation
+      SENSITIVE: []
+    end
+
+    class ClientLocation
+      attr_accessor city: ::String
+      attr_accessor subdivision: ::String
+      attr_accessor country: ::String
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -34,6 +54,27 @@ module Aws::NetworkFlowMonitor
       attr_accessor monitor_status: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR" | "DELETING")
       attr_accessor local_resources: ::Array[Types::MonitorLocalResource]
       attr_accessor remote_resources: ::Array[Types::MonitorRemoteResource]
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePerformanceMonitorInput
+      attr_accessor monitor_name: ::String
+      attr_accessor scope_arn: ::String
+      attr_accessor targets: ::Array[Types::PerformanceMonitorTarget]
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePerformanceMonitorOutput
+      attr_accessor monitor_arn: ::String
+      attr_accessor monitor_name: ::String
+      attr_accessor monitor_status: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR" | "DELETING")
+      attr_accessor monitor_type: ("VPC")
+      attr_accessor targets: ::Array[Types::PerformanceMonitorTarget]
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
@@ -63,12 +104,27 @@ module Aws::NetworkFlowMonitor
     class DeleteMonitorOutput < Aws::EmptyStructure
     end
 
+    class DeletePerformanceMonitorInput
+      attr_accessor monitor_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePerformanceMonitorOutput < Aws::EmptyStructure
+    end
+
     class DeleteScopeInput
       attr_accessor scope_id: ::String
       SENSITIVE: []
     end
 
     class DeleteScopeOutput < Aws::EmptyStructure
+    end
+
+    class FilterParameter
+      attr_accessor field: ::String
+      attr_accessor operator: ("EQUALS" | "NOT_EQUALS" | "IN" | "CONTAINS")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
     end
 
     class GetMonitorInput
@@ -88,6 +144,38 @@ module Aws::NetworkFlowMonitor
       SENSITIVE: []
     end
 
+    class GetMonitorScopeSuggestionsInput
+      attr_accessor monitor_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetMonitorScopeSuggestionsOutput
+      attr_accessor status: ("COMPLETE" | "INCOMPLETE" | "PENDING" | "STALE")
+      attr_accessor accounts_to_add: ::Array[Types::AccountToAdd]
+      attr_accessor next_token: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetPerformanceMonitorInput
+      attr_accessor monitor_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetPerformanceMonitorOutput
+      attr_accessor monitor_arn: ::String
+      attr_accessor monitor_name: ::String
+      attr_accessor monitor_status: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR" | "DELETING")
+      attr_accessor monitor_type: ("VPC")
+      attr_accessor targets: ::Array[Types::PerformanceMonitorTarget]
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class GetQueryResultsMonitorTopContributorsInput
       attr_accessor monitor_name: ::String
       attr_accessor query_id: ::String
@@ -99,6 +187,21 @@ module Aws::NetworkFlowMonitor
     class GetQueryResultsMonitorTopContributorsOutput
       attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
       attr_accessor top_contributors: ::Array[Types::MonitorTopContributorsRow]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetQueryResultsPerformanceMonitorInput
+      attr_accessor monitor_name: ::String
+      attr_accessor query_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetQueryResultsPerformanceMonitorOutput
+      attr_accessor fields: ::Array[Types::QueryField]
+      attr_accessor data: ::Array[::Array[::String]]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -139,6 +242,17 @@ module Aws::NetworkFlowMonitor
     end
 
     class GetQueryStatusMonitorTopContributorsOutput
+      attr_accessor status: ("QUEUED" | "RUNNING" | "SUCCEEDED" | "FAILED" | "CANCELED")
+      SENSITIVE: []
+    end
+
+    class GetQueryStatusPerformanceMonitorInput
+      attr_accessor monitor_name: ::String
+      attr_accessor query_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetQueryStatusPerformanceMonitorOutput
       attr_accessor status: ("QUEUED" | "RUNNING" | "SUCCEEDED" | "FAILED" | "CANCELED")
       SENSITIVE: []
     end
@@ -207,6 +321,20 @@ module Aws::NetworkFlowMonitor
       SENSITIVE: []
     end
 
+    class ListPerformanceMonitorsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor monitor_status: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR" | "DELETING")
+      attr_accessor monitor_type: ("VPC")
+      SENSITIVE: []
+    end
+
+    class ListPerformanceMonitorsOutput
+      attr_accessor monitors: ::Array[Types::PerformanceMonitorSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListScopesInput
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -257,7 +385,7 @@ module Aws::NetworkFlowMonitor
       attr_accessor local_az: ::String
       attr_accessor local_subnet_id: ::String
       attr_accessor target_port: ::Integer
-      attr_accessor destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB" | "INTER_REGION")
+      attr_accessor destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB" | "INTER_REGION" | "INTERNET" | "AWS_SERVICE" | "LOCAL_ZONE" | "TRANSIT_GATEWAY")
       attr_accessor remote_vpc_id: ::String
       attr_accessor remote_region: ::String
       attr_accessor remote_az: ::String
@@ -274,6 +402,34 @@ module Aws::NetworkFlowMonitor
       attr_accessor remote_instance_arn: ::String
       attr_accessor remote_subnet_arn: ::String
       attr_accessor remote_vpc_arn: ::String
+      attr_accessor additional_flow_info: Types::AdditionalFlowInfo
+      SENSITIVE: []
+    end
+
+    class Network
+      attr_accessor as_name: ::String
+      attr_accessor as_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class PerformanceMonitorSummary
+      attr_accessor monitor_arn: ::String
+      attr_accessor monitor_name: ::String
+      attr_accessor monitor_status: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR" | "DELETING")
+      attr_accessor monitor_type: ("VPC")
+      attr_accessor targets: ::Array[Types::PerformanceMonitorTarget]
+      SENSITIVE: []
+    end
+
+    class PerformanceMonitorTarget
+      attr_accessor type: ("AWS::EC2::VPC")
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class QueryField
+      attr_accessor name: ::String
+      attr_accessor type: ::String
       SENSITIVE: []
     end
 
@@ -299,7 +455,7 @@ module Aws::NetworkFlowMonitor
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor metric_name: ("ROUND_TRIP_TIME" | "TIMEOUTS" | "RETRANSMISSIONS" | "DATA_TRANSFERRED")
-      attr_accessor destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB" | "INTER_REGION")
+      attr_accessor destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB" | "INTER_REGION" | "INTERNET" | "AWS_SERVICE" | "LOCAL_ZONE" | "TRANSIT_GATEWAY")
       attr_accessor limit: ::Integer
       SENSITIVE: []
     end
@@ -309,12 +465,27 @@ module Aws::NetworkFlowMonitor
       SENSITIVE: []
     end
 
+    class StartQueryPerformanceMonitorInput
+      attr_accessor monitor_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor query_type: ("TOP_PATHS")
+      attr_accessor filter_parameters: ::Array[Types::FilterParameter]
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartQueryPerformanceMonitorOutput
+      attr_accessor query_id: ::String
+      SENSITIVE: []
+    end
+
     class StartQueryWorkloadInsightsTopContributorsDataInput
       attr_accessor scope_id: ::String
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor metric_name: ("TIMEOUTS" | "RETRANSMISSIONS" | "DATA_TRANSFERRED")
-      attr_accessor destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB" | "INTER_REGION")
+      attr_accessor destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB" | "INTER_REGION" | "INTERNET" | "AWS_SERVICE" | "LOCAL_ZONE" | "TRANSIT_GATEWAY")
       SENSITIVE: []
     end
 
@@ -328,7 +499,7 @@ module Aws::NetworkFlowMonitor
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor metric_name: ("TIMEOUTS" | "RETRANSMISSIONS" | "DATA_TRANSFERRED")
-      attr_accessor destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB" | "INTER_REGION")
+      attr_accessor destination_category: ("INTRA_AZ" | "INTER_AZ" | "INTER_VPC" | "UNCLASSIFIED" | "AMAZON_S3" | "AMAZON_DYNAMODB" | "INTER_REGION" | "INTERNET" | "AWS_SERVICE" | "LOCAL_ZONE" | "TRANSIT_GATEWAY")
       attr_accessor limit: ::Integer
       SENSITIVE: []
     end
@@ -345,6 +516,15 @@ module Aws::NetworkFlowMonitor
     end
 
     class StopQueryMonitorTopContributorsOutput < Aws::EmptyStructure
+    end
+
+    class StopQueryPerformanceMonitorInput
+      attr_accessor monitor_name: ::String
+      attr_accessor query_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopQueryPerformanceMonitorOutput < Aws::EmptyStructure
     end
 
     class StopQueryWorkloadInsightsTopContributorsDataInput
@@ -435,6 +615,26 @@ module Aws::NetworkFlowMonitor
       attr_accessor monitor_status: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR" | "DELETING")
       attr_accessor local_resources: ::Array[Types::MonitorLocalResource]
       attr_accessor remote_resources: ::Array[Types::MonitorRemoteResource]
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdatePerformanceMonitorInput
+      attr_accessor monitor_name: ::String
+      attr_accessor targets_to_add: ::Array[Types::PerformanceMonitorTarget]
+      attr_accessor targets_to_remove: ::Array[Types::PerformanceMonitorTarget]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePerformanceMonitorOutput
+      attr_accessor monitor_arn: ::String
+      attr_accessor monitor_name: ::String
+      attr_accessor monitor_status: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR" | "DELETING")
+      attr_accessor monitor_type: ("VPC")
+      attr_accessor targets: ::Array[Types::PerformanceMonitorTarget]
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]

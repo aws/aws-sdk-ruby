@@ -1187,6 +1187,8 @@ module Aws::NetworkFirewall
     #   resp.firewall.vpc_endpoint.subnet_mappings #=> Array
     #   resp.firewall.vpc_endpoint.subnet_mappings[0].subnet_id #=> String
     #   resp.firewall.vpc_endpoint.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
+    #   resp.firewall.context_store_id #=> String
+    #   resp.firewall.context_store_owner_account_id #=> String
     #   resp.firewall.transparent_filtering_nat_scope #=> String, one of "NAT_ALL", "NAT_NONE"
     #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED"
     #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
@@ -1211,6 +1213,8 @@ module Aws::NetworkFirewall
     #   resp.firewall_status.transit_gateway_attachment_sync_state.attachment_id #=> String
     #   resp.firewall_status.transit_gateway_attachment_sync_state.transit_gateway_attachment_status #=> String, one of "CREATING", "DELETING", "DELETED", "FAILED", "ERROR", "READY", "PENDING_ACCEPTANCE", "REJECTING", "REJECTED"
     #   resp.firewall_status.transit_gateway_attachment_sync_state.status_message #=> String
+    #   resp.firewall_status.context_store_sync_state.sync_status #=> String, one of "SYNCING", "PARTIALLY_RESOLVED", "FULLY_RESOLVED", "SYNC_FAILED", "UNRESOLVED"
+    #   resp.firewall_status.context_store_sync_state.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateFirewall AWS API Documentation
     #
@@ -1487,6 +1491,11 @@ module Aws::NetworkFirewall
     #                   definition: ["VariableDefinition"],
     #                 },
     #               },
+    #               context_sets: {
+    #                 "RuleVariableName" => {
+    #                   definition: ["ContextDefinition"], # required
+    #                 },
+    #               },
     #             },
     #             reference_sets: {
     #               ip_set_references: {
@@ -1514,6 +1523,11 @@ module Aws::NetworkFirewall
     #               port_sets: {
     #                 "RuleVariableName" => {
     #                   definition: ["VariableDefinition"],
+    #                 },
+    #               },
+    #               context_sets: {
+    #                 "RuleVariableName" => {
+    #                   definition: ["ContextDefinition"], # required
     #                 },
     #               },
     #             },
@@ -1782,6 +1796,11 @@ module Aws::NetworkFirewall
     #             definition: ["VariableDefinition"],
     #           },
     #         },
+    #         context_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["ContextDefinition"], # required
+    #           },
+    #         },
     #       },
     #       reference_sets: {
     #         ip_set_references: {
@@ -1921,6 +1940,11 @@ module Aws::NetworkFirewall
     #             definition: ["VariableDefinition"],
     #           },
     #         },
+    #         context_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["ContextDefinition"], # required
+    #           },
+    #         },
     #       },
     #       reference_sets: {
     #         ip_set_references: {
@@ -1943,6 +1967,11 @@ module Aws::NetworkFirewall
     #         port_sets: {
     #           "RuleVariableName" => {
     #             definition: ["VariableDefinition"],
+    #           },
+    #         },
+    #         context_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["ContextDefinition"], # required
     #           },
     #         },
     #       },
@@ -2424,6 +2453,8 @@ module Aws::NetworkFirewall
     #   resp.firewall.vpc_endpoint.subnet_mappings #=> Array
     #   resp.firewall.vpc_endpoint.subnet_mappings[0].subnet_id #=> String
     #   resp.firewall.vpc_endpoint.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
+    #   resp.firewall.context_store_id #=> String
+    #   resp.firewall.context_store_owner_account_id #=> String
     #   resp.firewall.transparent_filtering_nat_scope #=> String, one of "NAT_ALL", "NAT_NONE"
     #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED"
     #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
@@ -2448,6 +2479,8 @@ module Aws::NetworkFirewall
     #   resp.firewall_status.transit_gateway_attachment_sync_state.attachment_id #=> String
     #   resp.firewall_status.transit_gateway_attachment_sync_state.transit_gateway_attachment_status #=> String, one of "CREATING", "DELETING", "DELETED", "FAILED", "ERROR", "READY", "PENDING_ACCEPTANCE", "REJECTING", "REJECTED"
     #   resp.firewall_status.transit_gateway_attachment_sync_state.status_message #=> String
+    #   resp.firewall_status.context_store_sync_state.sync_status #=> String, one of "SYNCING", "PARTIALLY_RESOLVED", "FULLY_RESOLVED", "SYNC_FAILED", "UNRESOLVED"
+    #   resp.firewall_status.context_store_sync_state.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteFirewall AWS API Documentation
     #
@@ -3001,6 +3034,8 @@ module Aws::NetworkFirewall
     #   resp.firewall.vpc_endpoint.subnet_mappings #=> Array
     #   resp.firewall.vpc_endpoint.subnet_mappings[0].subnet_id #=> String
     #   resp.firewall.vpc_endpoint.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
+    #   resp.firewall.context_store_id #=> String
+    #   resp.firewall.context_store_owner_account_id #=> String
     #   resp.firewall.transparent_filtering_nat_scope #=> String, one of "NAT_ALL", "NAT_NONE"
     #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED"
     #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
@@ -3025,6 +3060,8 @@ module Aws::NetworkFirewall
     #   resp.firewall_status.transit_gateway_attachment_sync_state.attachment_id #=> String
     #   resp.firewall_status.transit_gateway_attachment_sync_state.transit_gateway_attachment_status #=> String, one of "CREATING", "DELETING", "DELETED", "FAILED", "ERROR", "READY", "PENDING_ACCEPTANCE", "REJECTING", "REJECTED"
     #   resp.firewall_status.transit_gateway_attachment_sync_state.status_message #=> String
+    #   resp.firewall_status.context_store_sync_state.sync_status #=> String, one of "SYNCING", "PARTIALLY_RESOLVED", "FULLY_RESOLVED", "SYNC_FAILED", "UNRESOLVED"
+    #   resp.firewall_status.context_store_sync_state.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFirewall AWS API Documentation
     #
@@ -3263,6 +3300,9 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rule_variables.port_sets #=> Hash
     #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rule_variables.port_sets["RuleVariableName"].definition #=> Array
     #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rule_variables.port_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rule_variables.context_sets #=> Hash
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rule_variables.context_sets["RuleVariableName"].definition #=> Array
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rule_variables.context_sets["RuleVariableName"].definition[0] #=> String
     #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.reference_sets.ip_set_references #=> Hash
     #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.reference_sets.ip_set_references["IPSetReferenceName"].reference_arn #=> String
     #   resp.firewall_policy_v2.ips_rule_group_entries #=> Array
@@ -3274,6 +3314,9 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.rule_variables.port_sets #=> Hash
     #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.rule_variables.port_sets["RuleVariableName"].definition #=> Array
     #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.rule_variables.port_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.rule_variables.context_sets #=> Hash
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.rule_variables.context_sets["RuleVariableName"].definition #=> Array
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.rule_variables.context_sets["RuleVariableName"].definition[0] #=> String
     #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.reference_sets.ip_set_references #=> Hash
     #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.reference_sets.ip_set_references["IPSetReferenceName"].reference_arn #=> String
     #   resp.firewall_policy_v2.ips_rule_group_entries[0].override.action #=> String, one of "DROP_TO_ALERT"
@@ -3603,6 +3646,9 @@ module Aws::NetworkFirewall
     #   resp.rule_group.rule_variables.port_sets #=> Hash
     #   resp.rule_group.rule_variables.port_sets["RuleVariableName"].definition #=> Array
     #   resp.rule_group.rule_variables.port_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.rule_group.rule_variables.context_sets #=> Hash
+    #   resp.rule_group.rule_variables.context_sets["RuleVariableName"].definition #=> Array
+    #   resp.rule_group.rule_variables.context_sets["RuleVariableName"].definition[0] #=> String
     #   resp.rule_group.reference_sets.ip_set_references #=> Hash
     #   resp.rule_group.reference_sets.ip_set_references["IPSetReferenceName"].reference_arn #=> String
     #   resp.rule_group.rules_source.rules_string #=> String
@@ -3679,6 +3725,9 @@ module Aws::NetworkFirewall
     #   resp.firewall_rule_group.rule_variables.port_sets #=> Hash
     #   resp.firewall_rule_group.rule_variables.port_sets["RuleVariableName"].definition #=> Array
     #   resp.firewall_rule_group.rule_variables.port_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.firewall_rule_group.rule_variables.context_sets #=> Hash
+    #   resp.firewall_rule_group.rule_variables.context_sets["RuleVariableName"].definition #=> Array
+    #   resp.firewall_rule_group.rule_variables.context_sets["RuleVariableName"].definition[0] #=> String
     #   resp.firewall_rule_group.reference_sets.ip_set_references #=> Hash
     #   resp.firewall_rule_group.reference_sets.ip_set_references["IPSetReferenceName"].reference_arn #=> String
     #   resp.ips_rule_group.rules_source.rules_string #=> String
@@ -3688,6 +3737,9 @@ module Aws::NetworkFirewall
     #   resp.ips_rule_group.rule_variables.port_sets #=> Hash
     #   resp.ips_rule_group.rule_variables.port_sets["RuleVariableName"].definition #=> Array
     #   resp.ips_rule_group.rule_variables.port_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.ips_rule_group.rule_variables.context_sets #=> Hash
+    #   resp.ips_rule_group.rule_variables.context_sets["RuleVariableName"].definition #=> Array
+    #   resp.ips_rule_group.rule_variables.context_sets["RuleVariableName"].definition[0] #=> String
     #   resp.ips_rule_group.reference_sets.ip_set_references #=> Hash
     #   resp.ips_rule_group.reference_sets.ip_set_references["IPSetReferenceName"].reference_arn #=> String
     #   resp.rule_group_response.rule_group_arn #=> String
@@ -4348,6 +4400,60 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Lists the active context stores that are associated with your
+    # firewalls. A context store records network resources that can be used
+    # to evaluate context-aware rules. You can list the following resource
+    # types: VPCs, subnets, security groups, and transit gateway
+    # attachments.
+    #
+    # When using a small page size, a single call might not return the full
+    # list. A response can contain fewer than `MaxResults` results, or none,
+    # and still include a `NextToken`. Keep making requests until the
+    # response does not include a `NextToken`.
+    #
+    # @option params [String] :next_token
+    #   When you request a list of objects with a `MaxResults` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   maximum you requested, Network Firewall returns a `NextToken` value in
+    #   the response. To retrieve the next batch of objects, use the token
+    #   returned from the prior request in your next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Network Firewall to return
+    #   for this request. If more objects are available, in the response,
+    #   Network Firewall provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    # @return [Types::ListContextStoresResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContextStoresResponse#next_token #next_token} => String
+    #   * {Types::ListContextStoresResponse#context_stores #context_stores} => Array&lt;Types::ContextStore&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_context_stores({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.context_stores #=> Array
+    #   resp.context_stores[0].context_store_id #=> String
+    #   resp.context_stores[0].context_store_owner_account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListContextStores AWS API Documentation
+    #
+    # @overload list_context_stores(params = {})
+    # @param [Hash] params ({})
+    def list_context_stores(params = {}, options = {})
+      req = build_request(:list_context_stores, params)
+      req.send_request(options)
+    end
+
     # Retrieves the metadata for the firewall policies that you have
     # defined. Depending on your setting for max results and the number of
     # firewall policies, a single call might not return the full list.
@@ -4702,6 +4808,80 @@ module Aws::NetworkFirewall
     # @param [Hash] params ({})
     def list_flow_operations(params = {}, options = {})
       req = build_request(:list_flow_operations, params)
+      req.send_request(options)
+    end
+
+    # Lists the resources that a context store records. The context store
+    # must be associated with a transit gateway that your firewall is
+    # attached to. You can filter the results by Region, resource type, or
+    # both.
+    #
+    # When using a small page size, a single call might not return the full
+    # list. A response can contain fewer than `MaxResults` results, or none,
+    # and still include a `NextToken`. Keep making requests until the
+    # response does not include a `NextToken`.
+    #
+    # @option params [required, String] :context_store_id
+    #   The unique identifier of the context store. To get the identifiers of
+    #   the context stores that are associated with your firewalls, call
+    #   `ListContextStores`.
+    #
+    # @option params [Types::ContextFilters] :filters
+    #   Optional filters that limit the results to resources in a specific
+    #   Region, of a specific resource type, or both. If you specify both
+    #   filters, Network Firewall returns only the resources that match both.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Network Firewall to return
+    #   for this request. If more objects are available, in the response,
+    #   Network Firewall provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    # @option params [String] :next_token
+    #   When you request a list of objects with a `MaxResults` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   maximum you requested, Network Firewall returns a `NextToken` value in
+    #   the response. To retrieve the next batch of objects, use the token
+    #   returned from the prior request in your next request.
+    #
+    #   A token is valid only for the same `ContextStoreId` and filters as the
+    #   request that returned it.
+    #
+    # @return [Types::ListResourcesInContextStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourcesInContextStoreResponse#resource_contexts #resource_contexts} => Array&lt;Types::ResourceContext&gt;
+    #   * {Types::ListResourcesInContextStoreResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resources_in_context_store({
+    #     context_store_id: "ContextStoreId", # required
+    #     filters: {
+    #       region: "Region",
+    #       resource_type: "SecurityGroup", # accepts SecurityGroup, VPC, Subnet, TGWAttachment
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_contexts #=> Array
+    #   resp.resource_contexts[0].context_type #=> String, one of "ResourceId", "SegmentId", "Subnet", "Attachment"
+    #   resp.resource_contexts[0].region #=> String
+    #   resp.resource_contexts[0].availability_zone #=> String
+    #   resp.resource_contexts[0].attachment_type #=> String
+    #   resp.resource_contexts[0].public_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListResourcesInContextStore AWS API Documentation
+    #
+    # @overload list_resources_in_context_store(params = {})
+    # @param [Hash] params ({})
+    def list_resources_in_context_store(params = {}, options = {})
+      req = build_request(:list_resources_in_context_store, params)
       req.send_request(options)
     end
 
@@ -6230,6 +6410,11 @@ module Aws::NetworkFirewall
     #                   definition: ["VariableDefinition"],
     #                 },
     #               },
+    #               context_sets: {
+    #                 "RuleVariableName" => {
+    #                   definition: ["ContextDefinition"], # required
+    #                 },
+    #               },
     #             },
     #             reference_sets: {
     #               ip_set_references: {
@@ -6257,6 +6442,11 @@ module Aws::NetworkFirewall
     #               port_sets: {
     #                 "RuleVariableName" => {
     #                   definition: ["VariableDefinition"],
+    #                 },
+    #               },
+    #               context_sets: {
+    #                 "RuleVariableName" => {
+    #                   definition: ["ContextDefinition"], # required
     #                 },
     #               },
     #             },
@@ -6681,6 +6871,11 @@ module Aws::NetworkFirewall
     #             definition: ["VariableDefinition"],
     #           },
     #         },
+    #         context_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["ContextDefinition"], # required
+    #           },
+    #         },
     #       },
     #       reference_sets: {
     #         ip_set_references: {
@@ -6820,6 +7015,11 @@ module Aws::NetworkFirewall
     #             definition: ["VariableDefinition"],
     #           },
     #         },
+    #         context_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["ContextDefinition"], # required
+    #           },
+    #         },
     #       },
     #       reference_sets: {
     #         ip_set_references: {
@@ -6842,6 +7042,11 @@ module Aws::NetworkFirewall
     #         port_sets: {
     #           "RuleVariableName" => {
     #             definition: ["VariableDefinition"],
+    #           },
+    #         },
+    #         context_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["ContextDefinition"], # required
     #           },
     #         },
     #       },
@@ -7161,7 +7366,7 @@ module Aws::NetworkFirewall
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

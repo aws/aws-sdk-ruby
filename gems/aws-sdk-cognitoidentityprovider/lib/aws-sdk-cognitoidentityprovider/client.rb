@@ -6369,6 +6369,15 @@ module Aws::CognitoIdentityProvider
     #
     #   * `ALLOW_REFRESH_TOKEN_AUTH`: Enable authflow to refresh tokens.
     #
+    #   * `ALLOW_TOKEN_EXCHANGE_IMPERSONATION` – Use this flow to request
+    #     `GetDerivedToken` token exchanges without an `ActorToken`. The
+    #     issued token represents the subject user directly.
+    #
+    #   * `ALLOW_TOKEN_EXCHANGE_DELEGATION` – Use this flow to request
+    #     `GetDerivedToken` token exchanges that include an `ActorToken`. The
+    #     issued token carries an `act` claim that identifies the intermediary
+    #     acting on the behalf of the subject.
+    #
     #   In some environments, you will see the values `ADMIN_NO_SRP_AUTH`,
     #   `CUSTOM_AUTH_FLOW_ONLY`, or `USER_PASSWORD_AUTH`. You can't assign
     #   these legacy `ExplicitAuthFlows` values to user pool clients at the
@@ -6721,7 +6730,7 @@ module Aws::CognitoIdentityProvider
     #     },
     #     read_attributes: ["ClientPermissionType"],
     #     write_attributes: ["ClientPermissionType"],
-    #     explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH, ALLOW_USER_AUTH
+    #     explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH, ALLOW_USER_AUTH, ALLOW_TOKEN_EXCHANGE_DELEGATION, ALLOW_TOKEN_EXCHANGE_IMPERSONATION
     #     supported_identity_providers: ["ProviderNameType"],
     #     callback_urls: ["RedirectUrlType"],
     #     logout_urls: ["RedirectUrlType"],
@@ -6765,7 +6774,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.write_attributes #=> Array
     #   resp.user_pool_client.write_attributes[0] #=> String
     #   resp.user_pool_client.explicit_auth_flows #=> Array
-    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY", "USER_PASSWORD_AUTH", "ALLOW_ADMIN_USER_PASSWORD_AUTH", "ALLOW_CUSTOM_AUTH", "ALLOW_USER_PASSWORD_AUTH", "ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH", "ALLOW_USER_AUTH"
+    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY", "USER_PASSWORD_AUTH", "ALLOW_ADMIN_USER_PASSWORD_AUTH", "ALLOW_CUSTOM_AUTH", "ALLOW_USER_PASSWORD_AUTH", "ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH", "ALLOW_USER_AUTH", "ALLOW_TOKEN_EXCHANGE_DELEGATION", "ALLOW_TOKEN_EXCHANGE_IMPERSONATION"
     #   resp.user_pool_client.supported_identity_providers #=> Array
     #   resp.user_pool_client.supported_identity_providers[0] #=> String
     #   resp.user_pool_client.callback_urls #=> Array
@@ -8272,7 +8281,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.write_attributes #=> Array
     #   resp.user_pool_client.write_attributes[0] #=> String
     #   resp.user_pool_client.explicit_auth_flows #=> Array
-    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY", "USER_PASSWORD_AUTH", "ALLOW_ADMIN_USER_PASSWORD_AUTH", "ALLOW_CUSTOM_AUTH", "ALLOW_USER_PASSWORD_AUTH", "ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH", "ALLOW_USER_AUTH"
+    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY", "USER_PASSWORD_AUTH", "ALLOW_ADMIN_USER_PASSWORD_AUTH", "ALLOW_CUSTOM_AUTH", "ALLOW_USER_PASSWORD_AUTH", "ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH", "ALLOW_USER_AUTH", "ALLOW_TOKEN_EXCHANGE_DELEGATION", "ALLOW_TOKEN_EXCHANGE_IMPERSONATION"
     #   resp.user_pool_client.supported_identity_providers #=> Array
     #   resp.user_pool_client.supported_identity_providers[0] #=> String
     #   resp.user_pool_client.callback_urls #=> Array
@@ -8765,6 +8774,187 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def get_client_token(params = {}, options = {})
       req = build_request(:get_client_token, params)
+      req.send_request(options)
+    end
+
+    # Exchanges an existing token for a new token that is scoped and
+    # audience-bound for a specific downstream service, following the OAuth
+    # 2.0 Token Exchange grant type. For more information about the OAuth
+    # 2.0 Token Exchange grant type, see [RFC 8693 - OAuth 2.0 Token
+    # Exchange][1] on the IETF website. Present a `SubjectToken`, the
+    # credential that you already hold, to receive a new token appropriate
+    # for calling a specific resource server or audience.
+    #
+    # If you also present an `ActorToken` that identifies an intermediary
+    # service, the issued token carries an `act` claim that identifies the
+    # intermediary, and downstream services can distinguish a user acting
+    # directly from an intermediary acting on the user's behalf. If you
+    # don't present an `ActorToken`, the issued token appears as if the
+    # user acted directly.
+    #
+    # To use this operation, you must have IAM credentials, or you must
+    # present the requesting app client's `ClientId` and, if the client has
+    # a secret, `ClientSecret`, in the request.
+    #
+    # The requesting app client must have
+    # `ALLOW_TOKEN_EXCHANGE_IMPERSONATION` or
+    # `ALLOW_TOKEN_EXCHANGE_DELEGATION` in its `ExplicitAuthFlows`
+    # (depending on whether you include an `ActorToken`), or the request
+    # fails.
+    #
+    #
+    #
+    # [1]: https://tools.ietf.org/html/rfc8693
+    #
+    # @option params [required, String] :client_id
+    #   The ID of the app client that requests the token exchange.
+    #
+    # @option params [String] :client_secret
+    #   The client secret of the requested app client, if the client has a
+    #   secret.
+    #
+    # @option params [required, String] :subject_token
+    #   The token that you want to exchange for a new token. This is the
+    #   credential that represents the identity of the party on behalf of whom
+    #   the request is being made.
+    #
+    # @option params [required, String] :subject_token_type
+    #   The type of the `SubjectToken` that you want to exchange. Valid
+    #   values:
+    #
+    #   * `ACCESS_TOKEN` – The subject token is an access token.
+    #
+    #   * `ID_TOKEN` – The subject token is an ID token.
+    #
+    #   * `SAML2` – The subject token is a SAML 2.0 assertion.
+    #
+    # @option params [String] :subject_token_provider_name
+    #   The name of the third-party identity provider that issued the
+    #   `SubjectToken`, if the subject token isn't a Amazon Cognito token.
+    #   Provide this value when your `SubjectToken` came from a SAML or OIDC
+    #   provider that you registered with your user pool, so that Amazon
+    #   Cognito can validate it against that provider's configuration. Omit
+    #   this parameter for a Amazon Cognito ID or access token.
+    #
+    # @option params [String] :actor_token
+    #   A token that identifies the intermediary service that is exchanging
+    #   the token on behalf of the user. When you provide an `ActorToken`, the
+    #   token that Amazon Cognito issues carries an `act` claim that
+    #   identifies the intermediary, so that downstream services can
+    #   distinguish a user acting directly from an intermediary acting on the
+    #   user's behalf.
+    #
+    # @option params [String] :actor_token_type
+    #   The type of the `ActorToken` that you provide. Required when you
+    #   provide an `ActorToken`. Valid values:
+    #
+    #   * `ACCESS_TOKEN` – The actor token is an access token.
+    #
+    #   * `ID_TOKEN` – The actor token is an ID token.
+    #
+    #   * `SAML2` – The actor token is a SAML 2.0 assertion.
+    #
+    # @option params [String] :actor_token_provider_name
+    #   The name of the third-party identity provider that issued the
+    #   `ActorToken`, if the actor token isn't a Amazon Cognito token.
+    #
+    # @option params [Array<String>] :scopes
+    #   The scopes that you want the new token to have. Amazon Cognito issues
+    #   a token with the intersection of these requested scopes, the scopes of
+    #   your `SubjectToken`, and the scopes that are allowed for the
+    #   requesting app client. If you don't specify any scopes, Amazon
+    #   Cognito issues a token with the same scopes as your `SubjectToken`.
+    #
+    # @option params [Array<String>] :audiences
+    #   The logical name of the target service where you intend to use the
+    #   issued token. You can't request both `Audiences` and `Resources` in
+    #   the same request.
+    #
+    # @option params [Array<String>] :resources
+    #   The identifier of a resource server in your user pool where you intend
+    #   to use the issued token. You can't request both `Resources` and
+    #   `Audiences` in the same request.
+    #
+    # @option params [String] :requested_token_type
+    #   The type of token that you want Amazon Cognito to issue. Valid values:
+    #
+    #   * `ACCESS_TOKEN` – Issues an access token.
+    #
+    #   * `ID_TOKEN` – Issues an ID token.
+    #
+    #   Amazon Cognito can't issue a SAML assertion, so `SAML2` isn't a
+    #   valid value for this parameter.
+    #
+    # @return [Types::GetDerivedTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDerivedTokenResponse#issued_token #issued_token} => String
+    #   * {Types::GetDerivedTokenResponse#issued_token_type #issued_token_type} => String
+    #   * {Types::GetDerivedTokenResponse#token_type #token_type} => String
+    #   * {Types::GetDerivedTokenResponse#expires_in #expires_in} => Integer
+    #   * {Types::GetDerivedTokenResponse#scopes #scopes} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: Example exchange a subject token for an audience-bound access token
+    #
+    #   # The following example exchanges an access token for a new access token that is scoped and audience-bound for the
+    #   # solar-system-data resource server.
+    #
+    #   resp = client.get_derived_token({
+    #     audiences: [
+    #       "solar-system-data", 
+    #     ], 
+    #     client_id: "1example23456789", 
+    #     client_secret: "13ka4h7u28d9oo44tqpq9djqsfvhvu8rk4d2ighvpu0k8fj1c2r9", 
+    #     scopes: [
+    #       "solar-system-data/asteroids.read", 
+    #     ], 
+    #     subject_token: "eyJra456defEXAMPLE", 
+    #     subject_token_type: "ACCESS_TOKEN", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     expires_in: 3600, 
+    #     issued_token: "eyJra789ghiEXAMPLE", 
+    #     issued_token_type: "ACCESS_TOKEN", 
+    #     scopes: [
+    #       "solar-system-data/asteroids.read", 
+    #     ], 
+    #     token_type: "Bearer", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_derived_token({
+    #     client_id: "ClientIdType", # required
+    #     client_secret: "ClientSecretType",
+    #     subject_token: "GetDerivedTokenTokenModelType", # required
+    #     subject_token_type: "ACCESS_TOKEN", # required, accepts ACCESS_TOKEN, ID_TOKEN, SAML2
+    #     subject_token_provider_name: "ProviderNameType",
+    #     actor_token: "GetDerivedTokenTokenModelType",
+    #     actor_token_type: "ACCESS_TOKEN", # accepts ACCESS_TOKEN, ID_TOKEN, SAML2
+    #     actor_token_provider_name: "ProviderNameType",
+    #     scopes: ["ScopeType"],
+    #     audiences: ["AudienceType"],
+    #     resources: ["ResourceServerIdentifierType"],
+    #     requested_token_type: "ACCESS_TOKEN", # accepts ACCESS_TOKEN, ID_TOKEN
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.issued_token #=> String
+    #   resp.issued_token_type #=> String, one of "ACCESS_TOKEN", "ID_TOKEN"
+    #   resp.token_type #=> String, one of "Bearer", "N_A"
+    #   resp.expires_in #=> Integer
+    #   resp.scopes #=> Array
+    #   resp.scopes[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetDerivedToken AWS API Documentation
+    #
+    # @overload get_derived_token(params = {})
+    # @param [Hash] params ({})
+    def get_derived_token(params = {}, options = {})
+      req = build_request(:get_derived_token, params)
       req.send_request(options)
     end
 
@@ -14909,6 +15099,15 @@ module Aws::CognitoIdentityProvider
     #
     #   * `ALLOW_REFRESH_TOKEN_AUTH`: Enable authflow to refresh tokens.
     #
+    #   * `ALLOW_TOKEN_EXCHANGE_IMPERSONATION` – Use this flow to request
+    #     `GetDerivedToken` token exchanges without an `ActorToken`. The
+    #     issued token represents the subject user directly.
+    #
+    #   * `ALLOW_TOKEN_EXCHANGE_DELEGATION` – Use this flow to request
+    #     `GetDerivedToken` token exchanges that include an `ActorToken`. The
+    #     issued token carries an `act` claim that identifies the intermediary
+    #     acting on the behalf of the subject.
+    #
     #   In some environments, you will see the values `ADMIN_NO_SRP_AUTH`,
     #   `CUSTOM_AUTH_FLOW_ONLY`, or `USER_PASSWORD_AUTH`. You can't assign
     #   these legacy `ExplicitAuthFlows` values to user pool clients at the
@@ -15126,7 +15325,7 @@ module Aws::CognitoIdentityProvider
     #     },
     #     read_attributes: ["ClientPermissionType"],
     #     write_attributes: ["ClientPermissionType"],
-    #     explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH, ALLOW_USER_AUTH
+    #     explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH, ALLOW_USER_AUTH, ALLOW_TOKEN_EXCHANGE_DELEGATION, ALLOW_TOKEN_EXCHANGE_IMPERSONATION
     #     supported_identity_providers: ["ProviderNameType"],
     #     callback_urls: ["RedirectUrlType"],
     #     logout_urls: ["RedirectUrlType"],
@@ -15170,7 +15369,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.write_attributes #=> Array
     #   resp.user_pool_client.write_attributes[0] #=> String
     #   resp.user_pool_client.explicit_auth_flows #=> Array
-    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY", "USER_PASSWORD_AUTH", "ALLOW_ADMIN_USER_PASSWORD_AUTH", "ALLOW_CUSTOM_AUTH", "ALLOW_USER_PASSWORD_AUTH", "ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH", "ALLOW_USER_AUTH"
+    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY", "USER_PASSWORD_AUTH", "ALLOW_ADMIN_USER_PASSWORD_AUTH", "ALLOW_CUSTOM_AUTH", "ALLOW_USER_PASSWORD_AUTH", "ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH", "ALLOW_USER_AUTH", "ALLOW_TOKEN_EXCHANGE_DELEGATION", "ALLOW_TOKEN_EXCHANGE_IMPERSONATION"
     #   resp.user_pool_client.supported_identity_providers #=> Array
     #   resp.user_pool_client.supported_identity_providers[0] #=> String
     #   resp.user_pool_client.callback_urls #=> Array
@@ -15543,7 +15742,7 @@ module Aws::CognitoIdentityProvider
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.165.0'
+      context[:gem_version] = '1.166.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

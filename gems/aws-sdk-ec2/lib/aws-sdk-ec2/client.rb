@@ -854,6 +854,16 @@ module Aws::EC2
     # @option params [required, Array<String>] :vpc_endpoint_ids
     #   The IDs of the interface VPC endpoints.
     #
+    #   You must specify either `VpcEndpointIds` or
+    #   `TransitGatewayAttachmentIds`, but not both.
+    #
+    # @option params [Array<String>] :transit_gateway_attachment_ids
+    #   The IDs of the transit gateway attachments to accept. This parameter
+    #   is supported only for Gateway Load Balancer endpoint services.
+    #
+    #   You must specify either `VpcEndpointIds` or
+    #   `TransitGatewayAttachmentIds`, but not both.
+    #
     # @return [Types::AcceptVpcEndpointConnectionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AcceptVpcEndpointConnectionsResult#unsuccessful #unsuccessful} => Array&lt;Types::UnsuccessfulItem&gt;
@@ -864,6 +874,7 @@ module Aws::EC2
     #     dry_run: false,
     #     service_id: "VpcEndpointServiceId", # required
     #     vpc_endpoint_ids: ["VpcEndpointId"], # required
+    #     transit_gateway_attachment_ids: ["TransitGatewayAttachmentId"],
     #   })
     #
     # @example Response structure
@@ -2592,6 +2603,57 @@ module Aws::EC2
     # @param [Hash] params ({})
     def associate_ipam_resource_discovery(params = {}, options = {})
       req = build_request(:associate_ipam_resource_discovery, params)
+      req.send_request(options)
+    end
+
+    # Associates an additional KMS key with an encrypted Amazon EBS
+    # snapshot. With the associated key, you have a second, independent way
+    # to access the snapshot's data, in addition to the key the snapshot is
+    # already encrypted under. Associating a key doesn't re-encrypt the
+    # snapshot or grant access to its original key.
+    #
+    # For more information, see [Associated KMS keys][1] in the *Amazon EBS
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/associated-kms-keys.html
+    #
+    # @option params [String] :snapshot_id
+    #   The ID of the Amazon EBS snapshot.
+    #
+    # @option params [required, String] :kms_key_id
+    #   The ID, alias, or ARN of the KMS key to associate with the snapshot.
+    #   You can specify a key ID, key alias, key ARN, or alias ARN.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::AssociateKmsKeyIdResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateKmsKeyIdResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_kms_key_id({
+    #     snapshot_id: "SnapshotId",
+    #     kms_key_id: "KmsKeyId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateKmsKeyId AWS API Documentation
+    #
+    # @overload associate_kms_key_id(params = {})
+    # @param [Hash] params ({})
+    def associate_kms_key_id(params = {}, options = {})
+      req = build_request(:associate_kms_key_id, params)
       req.send_request(options)
     end
 
@@ -16401,6 +16463,7 @@ module Aws::EC2
     #   * {Types::Snapshot#completion_duration_minutes #completion_duration_minutes} => Integer
     #   * {Types::Snapshot#completion_time #completion_time} => Time
     #   * {Types::Snapshot#full_snapshot_size_in_bytes #full_snapshot_size_in_bytes} => Integer
+    #   * {Types::Snapshot#associated_kms_keys #associated_kms_keys} => Array&lt;Types::AssociatedKmsKey&gt;
     #   * {Types::Snapshot#snapshot_id #snapshot_id} => String
     #   * {Types::Snapshot#volume_id #volume_id} => String
     #   * {Types::Snapshot#state #state} => String
@@ -16474,6 +16537,8 @@ module Aws::EC2
     #   resp.completion_duration_minutes #=> Integer
     #   resp.completion_time #=> Time
     #   resp.full_snapshot_size_in_bytes #=> Integer
+    #   resp.associated_kms_keys #=> Array
+    #   resp.associated_kms_keys[0].kms_key_id #=> String
     #   resp.snapshot_id #=> String
     #   resp.volume_id #=> String
     #   resp.state #=> String, one of "pending", "completed", "error", "recoverable", "recovering"
@@ -18138,6 +18203,96 @@ module Aws::EC2
     # @param [Hash] params ({})
     def create_transit_gateway_multicast_domain(params = {}, options = {})
       req = build_request(:create_transit_gateway_multicast_domain, params)
+      req.send_request(options)
+    end
+
+    # Creates a network function attachment that connects the specified
+    # transit gateway to a Gateway Load Balancer endpoint service. Traffic
+    # that you route to the attachment is sent to the network function
+    # appliances behind the endpoint service. To use this operation, you
+    # must be the owner of the transit gateway.
+    #
+    # You can create one network function attachment for each combination of
+    # transit gateway and endpoint service. The attachment remains in the
+    # `pendingAcceptance` state until the endpoint service owner accepts the
+    # endpoint connection.
+    #
+    # @option params [required, String] :transit_gateway_id
+    #   The ID of the transit gateway. The transit gateway must be in the
+    #   `available` state.
+    #
+    # @option params [required, String] :service_name
+    #   The name of the Gateway Load Balancer endpoint service.
+    #
+    # @option params [Array<String>] :availability_zones
+    #   The names of the Availability Zones for the attachment. You must
+    #   specify at least one Availability Zone, using this parameter,
+    #   `AvailabilityZoneIds`, or both. Each Availability Zone must be
+    #   supported by both the transit gateway and the endpoint service.
+    #
+    # @option params [Array<String>] :availability_zone_ids
+    #   The IDs of the Availability Zones for the attachment. You must specify
+    #   at least one Availability Zone, using this parameter,
+    #   `AvailabilityZones`, or both. Each Availability Zone must be supported
+    #   by both the transit gateway and the endpoint service.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the network function attachment.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CreateTransitGatewayNetworkFunctionAttachmentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTransitGatewayNetworkFunctionAttachmentResult#transit_gateway_network_function_attachment #transit_gateway_network_function_attachment} => Types::TransitGatewayNetworkFunctionAttachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_transit_gateway_network_function_attachment({
+    #     transit_gateway_id: "TransitGatewayId", # required
+    #     service_name: "String", # required
+    #     availability_zones: ["String"],
+    #     availability_zone_ids: ["String"],
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, declarative-policies-report, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fca-policy, fleet, fpga-image, host-reservation, image, image-usage-report, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, outpost-lag, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, service-link-virtual-interface, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-metering-policy, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, vpc-encryption-control, route-server, route-server-endpoint, route-server-peer, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, verified-access-endpoint-target, ipam-external-resource-verification-token, capacity-block, mac-modification-task, ipam-prefix-list-resolver, ipam-policy, ipam-prefix-list-resolver-target, ipam-internet-registry-association, secondary-interface, secondary-network, secondary-subnet, capacity-manager-data-export, vpn-concentrator, ipam-pool-allocation, capacity-reservation-cancellation-quote, application-status-check, capacity-reservation-modification-quote, metric-category
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_network_function_attachment.transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_network_function_attachment.transit_gateway_id #=> String
+    #   resp.transit_gateway_network_function_attachment.transit_gateway_owner_id #=> String
+    #   resp.transit_gateway_network_function_attachment.resource_owner_id #=> String
+    #   resp.transit_gateway_network_function_attachment.resource_id #=> String
+    #   resp.transit_gateway_network_function_attachment.availability_zones #=> Array
+    #   resp.transit_gateway_network_function_attachment.availability_zones[0] #=> String
+    #   resp.transit_gateway_network_function_attachment.availability_zone_ids #=> Array
+    #   resp.transit_gateway_network_function_attachment.availability_zone_ids[0] #=> String
+    #   resp.transit_gateway_network_function_attachment.state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_network_function_attachment.creation_time #=> Time
+    #   resp.transit_gateway_network_function_attachment.tags #=> Array
+    #   resp.transit_gateway_network_function_attachment.tags[0].key #=> String
+    #   resp.transit_gateway_network_function_attachment.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayNetworkFunctionAttachment AWS API Documentation
+    #
+    # @overload create_transit_gateway_network_function_attachment(params = {})
+    # @param [Hash] params ({})
+    def create_transit_gateway_network_function_attachment(params = {}, options = {})
+      req = build_request(:create_transit_gateway_network_function_attachment, params)
       req.send_request(options)
     end
 
@@ -24975,6 +25130,55 @@ module Aws::EC2
     # @param [Hash] params ({})
     def delete_transit_gateway_multicast_domain(params = {}, options = {})
       req = build_request(:delete_transit_gateway_multicast_domain, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified network function attachment. The attachment must
+    # be in the `available` or `pendingAcceptance` state.
+    #
+    # @option params [required, String] :transit_gateway_attachment_id
+    #   The ID of the network function attachment.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DeleteTransitGatewayNetworkFunctionAttachmentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTransitGatewayNetworkFunctionAttachmentResult#transit_gateway_network_function_attachment #transit_gateway_network_function_attachment} => Types::TransitGatewayNetworkFunctionAttachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_transit_gateway_network_function_attachment({
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_network_function_attachment.transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_network_function_attachment.transit_gateway_id #=> String
+    #   resp.transit_gateway_network_function_attachment.transit_gateway_owner_id #=> String
+    #   resp.transit_gateway_network_function_attachment.resource_owner_id #=> String
+    #   resp.transit_gateway_network_function_attachment.resource_id #=> String
+    #   resp.transit_gateway_network_function_attachment.availability_zones #=> Array
+    #   resp.transit_gateway_network_function_attachment.availability_zones[0] #=> String
+    #   resp.transit_gateway_network_function_attachment.availability_zone_ids #=> Array
+    #   resp.transit_gateway_network_function_attachment.availability_zone_ids[0] #=> String
+    #   resp.transit_gateway_network_function_attachment.state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_network_function_attachment.creation_time #=> Time
+    #   resp.transit_gateway_network_function_attachment.tags #=> Array
+    #   resp.transit_gateway_network_function_attachment.tags[0].key #=> String
+    #   resp.transit_gateway_network_function_attachment.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayNetworkFunctionAttachment AWS API Documentation
+    #
+    # @overload delete_transit_gateway_network_function_attachment(params = {})
+    # @param [Hash] params ({})
+    def delete_transit_gateway_network_function_attachment(params = {}, options = {})
+      req = build_request(:delete_transit_gateway_network_function_attachment, params)
       req.send_request(options)
     end
 
@@ -44569,6 +44773,8 @@ module Aws::EC2
     #   resp.snapshots[0].completion_duration_minutes #=> Integer
     #   resp.snapshots[0].completion_time #=> Time
     #   resp.snapshots[0].full_snapshot_size_in_bytes #=> Integer
+    #   resp.snapshots[0].associated_kms_keys #=> Array
+    #   resp.snapshots[0].associated_kms_keys[0].kms_key_id #=> String
     #   resp.snapshots[0].snapshot_id #=> String
     #   resp.snapshots[0].volume_id #=> String
     #   resp.snapshots[0].state #=> String, one of "pending", "completed", "error", "recoverable", "recovering"
@@ -47091,6 +47297,90 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes one or more network function attachments. You can describe
+    # attachments that you own or that are attached to a transit gateway
+    # that you own.
+    #
+    # @option params [Array<String>] :transit_gateway_attachment_ids
+    #   The IDs of the network function attachments.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `service-name` - The name of the Gateway Load Balancer endpoint
+    #     service.
+    #
+    #   * `state` - The state of the attachment. Valid values are `available`
+    #     \| `deleted` \| `deleting` \| `failed` \| `failing` \| `modifying`
+    #     \| `pendingAcceptance` \| `pending` \| `rollingBack` \| `rejected`
+    #     \| `rejecting`.
+    #
+    #   * `transit-gateway-attachment-id` - The ID of the attachment.
+    #
+    #   * `transit-gateway-id` - The ID of the transit gateway.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeTransitGatewayNetworkFunctionAttachmentsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTransitGatewayNetworkFunctionAttachmentsResult#transit_gateway_network_function_attachments #transit_gateway_network_function_attachments} => Array&lt;Types::TransitGatewayNetworkFunctionAttachment&gt;
+    #   * {Types::DescribeTransitGatewayNetworkFunctionAttachmentsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_transit_gateway_network_function_attachments({
+    #     transit_gateway_attachment_ids: ["TransitGatewayAttachmentId"],
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_network_function_attachments #=> Array
+    #   resp.transit_gateway_network_function_attachments[0].transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_network_function_attachments[0].transit_gateway_id #=> String
+    #   resp.transit_gateway_network_function_attachments[0].transit_gateway_owner_id #=> String
+    #   resp.transit_gateway_network_function_attachments[0].resource_owner_id #=> String
+    #   resp.transit_gateway_network_function_attachments[0].resource_id #=> String
+    #   resp.transit_gateway_network_function_attachments[0].availability_zones #=> Array
+    #   resp.transit_gateway_network_function_attachments[0].availability_zones[0] #=> String
+    #   resp.transit_gateway_network_function_attachments[0].availability_zone_ids #=> Array
+    #   resp.transit_gateway_network_function_attachments[0].availability_zone_ids[0] #=> String
+    #   resp.transit_gateway_network_function_attachments[0].state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_network_function_attachments[0].creation_time #=> Time
+    #   resp.transit_gateway_network_function_attachments[0].tags #=> Array
+    #   resp.transit_gateway_network_function_attachments[0].tags[0].key #=> String
+    #   resp.transit_gateway_network_function_attachments[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTransitGatewayNetworkFunctionAttachments AWS API Documentation
+    #
+    # @overload describe_transit_gateway_network_function_attachments(params = {})
+    # @param [Hash] params ({})
+    def describe_transit_gateway_network_function_attachments(params = {}, options = {})
+      req = build_request(:describe_transit_gateway_network_function_attachments, params)
+      req.send_request(options)
+    end
+
     # Describes your transit gateway peering attachments.
     #
     # @option params [Array<String>] :transit_gateway_attachment_ids
@@ -49497,6 +49787,9 @@ module Aws::EC2
     #
     #   * `service-id` - The ID of the service.
     #
+    #   * `transit-gateway-attachment-id` - The ID of the transit gateway
+    #     attachment.
+    #
     #   * `vpc-endpoint-owner` - The ID of the Amazon Web Services account ID
     #     that owns the endpoint.
     #
@@ -49564,6 +49857,8 @@ module Aws::EC2
     #   resp.vpc_endpoint_connections[0].payer_responsibilities #=> Array
     #   resp.vpc_endpoint_connections[0].payer_responsibilities[0].scope #=> String, one of "vpc-endpoint-charges", "resource-gateway-charges"
     #   resp.vpc_endpoint_connections[0].payer_responsibilities[0].payer_responsibility_type #=> String, one of "vpc-endpoint-account", "resource-gateway-account", "vpc-endpoint-service-account"
+    #   resp.vpc_endpoint_connections[0].transit_gateway_attachment_id #=> String
+    #   resp.vpc_endpoint_connections[0].transit_gateway_attachment_owner #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointConnections AWS API Documentation
@@ -49704,6 +49999,9 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
+    #   * `permission-type` - The permission type (`vpc-endpoint` \|
+    #     `transit-gateway-attachment`).
+    #
     #   * `principal` - The ARN of the principal.
     #
     #   * `principal-type` - The principal type (`All` \| `Service` \|
@@ -49751,6 +50049,7 @@ module Aws::EC2
     #   resp.allowed_principals[0].tags[0].key #=> String
     #   resp.allowed_principals[0].tags[0].value #=> String
     #   resp.allowed_principals[0].service_id #=> String
+    #   resp.allowed_principals[0].permission_type #=> String, one of "vpc-endpoint", "transit-gateway-attachment"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServicePermissions AWS API Documentation
@@ -52826,6 +53125,49 @@ module Aws::EC2
     # @param [Hash] params ({})
     def disassociate_ipam_resource_discovery(params = {}, options = {})
       req = build_request(:disassociate_ipam_resource_discovery, params)
+      req.send_request(options)
+    end
+
+    # Removes an associated KMS key from an Amazon EBS snapshot. After you
+    # disassociate the key, it can no longer be used to access the
+    # snapshot's data. The snapshot's original encryption key is
+    # unaffected.
+    #
+    # @option params [String] :snapshot_id
+    #   The ID of the Amazon EBS snapshot.
+    #
+    # @option params [required, String] :kms_key_id
+    #   The ID, alias, or ARN of the associated KMS key to remove from the
+    #   snapshot.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisassociateKmsKeyIdResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateKmsKeyIdResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_kms_key_id({
+    #     snapshot_id: "SnapshotId",
+    #     kms_key_id: "KmsKeyId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateKmsKeyId AWS API Documentation
+    #
+    # @overload disassociate_kms_key_id(params = {})
+    # @param [Hash] params ({})
+    def disassociate_kms_key_id(params = {}, options = {})
+      req = build_request(:disassociate_kms_key_id, params)
       req.send_request(options)
     end
 
@@ -68358,6 +68700,84 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Adds Availability Zones to or removes Availability Zones from the
+    # specified network function attachment. The attachment must be in the
+    # `available` state. You must specify at least one Availability Zone to
+    # add or remove, and the attachment must keep at least one Availability
+    # Zone.
+    #
+    # Adding an Availability Zone provisions a new Gateway Load Balancer
+    # endpoint in that Availability Zone. If the endpoint service doesn't
+    # automatically accept connection requests, the endpoint service owner
+    # must accept the endpoint connection for each Availability Zone that
+    # you add.
+    #
+    # @option params [required, String] :transit_gateway_attachment_id
+    #   The ID of the network function attachment.
+    #
+    # @option params [Array<String>] :add_availability_zones
+    #   The names of the Availability Zones to add to the attachment. You
+    #   can't add and remove the same Availability Zone in a single request.
+    #
+    # @option params [Array<String>] :add_availability_zone_ids
+    #   The IDs of the Availability Zones to add to the attachment. You can't
+    #   add and remove the same Availability Zone in a single request.
+    #
+    # @option params [Array<String>] :remove_availability_zones
+    #   The names of the Availability Zones to remove from the attachment.
+    #   Each Availability Zone must be currently in the attachment.
+    #
+    # @option params [Array<String>] :remove_availability_zone_ids
+    #   The IDs of the Availability Zones to remove from the attachment. Each
+    #   Availability Zone must be currently in the attachment.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyTransitGatewayNetworkFunctionAttachmentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyTransitGatewayNetworkFunctionAttachmentResult#transit_gateway_network_function_attachment #transit_gateway_network_function_attachment} => Types::TransitGatewayNetworkFunctionAttachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_transit_gateway_network_function_attachment({
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #     add_availability_zones: ["String"],
+    #     add_availability_zone_ids: ["String"],
+    #     remove_availability_zones: ["String"],
+    #     remove_availability_zone_ids: ["String"],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_network_function_attachment.transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_network_function_attachment.transit_gateway_id #=> String
+    #   resp.transit_gateway_network_function_attachment.transit_gateway_owner_id #=> String
+    #   resp.transit_gateway_network_function_attachment.resource_owner_id #=> String
+    #   resp.transit_gateway_network_function_attachment.resource_id #=> String
+    #   resp.transit_gateway_network_function_attachment.availability_zones #=> Array
+    #   resp.transit_gateway_network_function_attachment.availability_zones[0] #=> String
+    #   resp.transit_gateway_network_function_attachment.availability_zone_ids #=> Array
+    #   resp.transit_gateway_network_function_attachment.availability_zone_ids[0] #=> String
+    #   resp.transit_gateway_network_function_attachment.state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_network_function_attachment.creation_time #=> Time
+    #   resp.transit_gateway_network_function_attachment.tags #=> Array
+    #   resp.transit_gateway_network_function_attachment.tags[0].key #=> String
+    #   resp.transit_gateway_network_function_attachment.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayNetworkFunctionAttachment AWS API Documentation
+    #
+    # @overload modify_transit_gateway_network_function_attachment(params = {})
+    # @param [Hash] params ({})
+    def modify_transit_gateway_network_function_attachment(params = {}, options = {})
+      req = build_request(:modify_transit_gateway_network_function_attachment, params)
+      req.send_request(options)
+    end
+
     # Modifies the specified transit gateway policy table entry.
     #
     # @option params [required, String] :transit_gateway_policy_table_id
@@ -70103,6 +70523,14 @@ module Aws::EC2
     # attach an endpoint. If the service does not require manual approval,
     # attachments are automatically approved.
     #
+    # By default, principals that you grant permissions to can create VPC
+    # endpoints that connect to your endpoint service. For Gateway Load
+    # Balancer endpoint services, you can instead grant permissions so that
+    # principals can create transit gateway attachments that connect to your
+    # endpoint service. To do so, specify `transit-gateway-attachment` for
+    # `PermissionType`. The two permission types are independent. A
+    # principal can have either or both.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -70121,6 +70549,23 @@ module Aws::EC2
     #   The Amazon Resource Names (ARN) of the principals. Permissions are
     #   revoked for principals in this list.
     #
+    # @option params [String] :permission_type
+    #   The type of permission to add or remove. The permission type applies
+    #   to all principals in `AddAllowedPrincipals` and
+    #   `RemoveAllowedPrincipals`.
+    #
+    #   * `vpc-endpoint` - Principals can create VPC endpoints that connect to
+    #     the endpoint service.
+    #
+    #   * `transit-gateway-attachment` - Principals can create transit gateway
+    #     attachments that connect to the endpoint service. This permission
+    #     type is supported only for Gateway Load Balancer endpoint services.
+    #     You can grant it only to Amazon Web Services accounts
+    #     (`arn:aws:iam::account-id:root`). You can't grant it to users, IAM
+    #     roles, organizations, organizational units, or all principals (*).
+    #
+    #   Default: `vpc-endpoint`
+    #
     # @return [Types::ModifyVpcEndpointServicePermissionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyVpcEndpointServicePermissionsResult#added_principals #added_principals} => Array&lt;Types::AddedPrincipal&gt;
@@ -70133,6 +70578,7 @@ module Aws::EC2
     #     service_id: "VpcEndpointServiceId", # required
     #     add_allowed_principals: ["String"],
     #     remove_allowed_principals: ["String"],
+    #     permission_type: "vpc-endpoint", # accepts vpc-endpoint, transit-gateway-attachment
     #   })
     #
     # @example Response structure
@@ -70142,6 +70588,7 @@ module Aws::EC2
     #   resp.added_principals[0].principal #=> String
     #   resp.added_principals[0].service_permission_id #=> String
     #   resp.added_principals[0].service_id #=> String
+    #   resp.added_principals[0].permission_type #=> String, one of "vpc-endpoint", "transit-gateway-attachment"
     #   resp.return_value #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServicePermissions AWS API Documentation
@@ -72820,6 +73267,16 @@ module Aws::EC2
     # @option params [required, Array<String>] :vpc_endpoint_ids
     #   The IDs of the VPC endpoints.
     #
+    #   You must specify either `VpcEndpointIds` or
+    #   `TransitGatewayAttachmentIds`, but not both.
+    #
+    # @option params [Array<String>] :transit_gateway_attachment_ids
+    #   The IDs of the transit gateway attachments to reject. This parameter
+    #   is supported only for Gateway Load Balancer endpoint services.
+    #
+    #   You must specify either `VpcEndpointIds` or
+    #   `TransitGatewayAttachmentIds`, but not both.
+    #
     # @return [Types::RejectVpcEndpointConnectionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RejectVpcEndpointConnectionsResult#unsuccessful #unsuccessful} => Array&lt;Types::UnsuccessfulItem&gt;
@@ -72830,6 +73287,7 @@ module Aws::EC2
     #     dry_run: false,
     #     service_id: "VpcEndpointServiceId", # required
     #     vpc_endpoint_ids: ["VpcEndpointId"], # required
+    #     transit_gateway_attachment_ids: ["TransitGatewayAttachmentId"],
     #   })
     #
     # @example Response structure
@@ -79694,7 +80152,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.670.0'
+      context[:gem_version] = '1.671.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

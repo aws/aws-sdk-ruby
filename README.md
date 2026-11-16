@@ -539,6 +539,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Connect Contact Lens                           | Aws::ConnectContactLens                  | aws-sdk-connectcontactlens                  | 2020-08-21  |
 | Amazon Connect Customer Profiles                      | Aws::CustomerProfiles                    | aws-sdk-customerprofiles                    | 2020-08-15  |
 | Amazon Connect Participant Service                    | Aws::ConnectParticipant                  | aws-sdk-connectparticipant                  | 2018-09-07  |
+| Amazon Connect Scheduling                             | Aws::ConnectScheduling                   | aws-sdk-connectscheduling                   | 2026-07-16  |
 | Amazon Connect Service                                | Aws::Connect                             | aws-sdk-connect                             | 2017-08-08  |
 | Amazon Connect Wisdom Service                         | Aws::ConnectWisdomService                | aws-sdk-connectwisdomservice                | 2020-10-19  |
 | Amazon Data Lifecycle Manager                         | Aws::DLM                                 | aws-sdk-dlm                                 | 2018-01-12  |
@@ -615,6 +616,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon NeptuneData                                    | Aws::Neptunedata                         | aws-sdk-neptunedata                         | 2023-08-01  |
 | Amazon Omics                                          | Aws::Omics                               | aws-sdk-omics                               | 2022-11-28  |
 | Amazon OpenSearch Ingestion                           | Aws::OSIS                                | aws-sdk-osis                                | 2022-01-01  |
+| Amazon OpenSearch Memory                              | Aws::OpenSearchMemory                    | aws-sdk-opensearchmemory                    | 2026-08-24  |
 | Amazon OpenSearch Service                             | Aws::OpenSearchService                   | aws-sdk-opensearchservice                   | 2021-01-01  |
 | Amazon Personalize                                    | Aws::Personalize                         | aws-sdk-personalize                         | 2018-05-22  |
 | Amazon Personalize Events                             | Aws::PersonalizeEvents                   | aws-sdk-personalizeevents                   | 2018-03-22  |
@@ -640,6 +642,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon S3 Vectors                                     | Aws::S3Vectors                           | aws-sdk-s3vectors                           | 2025-07-15  |
 | Amazon S3 on Outposts                                 | Aws::S3Outposts                          | aws-sdk-s3outposts                          | 2017-07-25  |
 | Amazon SageMaker Feature Store Runtime                | Aws::SageMakerFeatureStoreRuntime        | aws-sdk-sagemakerfeaturestoreruntime        | 2020-07-01  |
+| Amazon SageMaker Inference Router Runtime             | Aws::SageMakerInferenceRouterRuntime     | aws-sdk-sagemakerinferencerouterruntime     | 2026-01-01  |
 | Amazon SageMaker Metrics Service                      | Aws::SageMakerMetrics                    | aws-sdk-sagemakermetrics                    | 2022-09-30  |
 | Amazon SageMaker Runtime                              | Aws::SageMakerRuntime                    | aws-sdk-sagemakerruntime                    | 2017-05-13  |
 | Amazon SageMaker Runtime HTTP2                        | Aws::SageMakerRuntimeHTTP2               | aws-sdk-sagemakerruntimehttp2               | 2025-10-01  |

@@ -2720,6 +2720,20 @@ module Aws::Athena
     #   Required if requesting an IAM Identity Center enabled Glue Data
     #   Catalog.
     #
+    # @option params [Array<String>] :attributes_to_get
+    #   Specifies the database properties returned by the `ListDatabases`
+    #   call. The only valid value is `NAME`, which returns only the name of
+    #   each database and omits the remaining properties. If you omit this
+    #   parameter or specify an empty list, all database properties are
+    #   returned.
+    #
+    #   Requesting only names can reduce response time for catalogs that
+    #   contain many databases, especially resource links to databases shared
+    #   from other accounts.
+    #
+    #   This parameter applies only to the Glue Data Catalog. For other data
+    #   catalog types, it is ignored.
+    #
     # @return [Types::ListDatabasesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListDatabasesOutput#database_list #database_list} => Array&lt;Types::Database&gt;
@@ -2734,6 +2748,7 @@ module Aws::Athena
     #     next_token: "Token",
     #     max_results: 1,
     #     work_group: "WorkGroupName",
+    #     attributes_to_get: ["NAME"], # accepts NAME
     #   })
     #
     # @example Response structure
@@ -3260,6 +3275,21 @@ module Aws::Athena
     #   Required if requesting an IAM Identity Center enabled Glue Data
     #   Catalog.
     #
+    # @option params [Array<String>] :attributes_to_get
+    #   Specifies the table properties returned by the `ListTableMetadata`
+    #   call. This parameter doesn't accept an empty list, and the request
+    #   must include `NAME`. The valid combinations of values are `NAME`,
+    #   which returns the name of each table, and `NAME` and `TABLE_TYPE`,
+    #   which return the name and table type of each table. The remaining
+    #   properties are omitted. If you omit this parameter, all table
+    #   properties are returned.
+    #
+    #   Requesting only the properties you need can reduce response time for
+    #   databases that contain many tables.
+    #
+    #   This parameter applies only to the Glue Data Catalog. For other data
+    #   catalog types, it is ignored.
+    #
     # @return [Types::ListTableMetadataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTableMetadataOutput#table_metadata_list #table_metadata_list} => Array&lt;Types::TableMetadata&gt;
@@ -3276,6 +3306,7 @@ module Aws::Athena
     #     next_token: "Token",
     #     max_results: 1,
     #     work_group: "WorkGroupName",
+    #     attributes_to_get: ["NAME"], # accepts NAME, TABLE_TYPE
     #   })
     #
     # @example Response structure
@@ -4365,7 +4396,7 @@ module Aws::Athena
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.135.0'
+      context[:gem_version] = '1.136.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

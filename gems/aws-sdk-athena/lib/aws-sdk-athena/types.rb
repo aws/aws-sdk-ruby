@@ -2702,13 +2702,29 @@ module Aws::Athena
     #   Catalog.
     #   @return [String]
     #
+    # @!attribute [rw] attributes_to_get
+    #   Specifies the database properties returned by the `ListDatabases`
+    #   call. The only valid value is `NAME`, which returns only the name of
+    #   each database and omits the remaining properties. If you omit this
+    #   parameter or specify an empty list, all database properties are
+    #   returned.
+    #
+    #   Requesting only names can reduce response time for catalogs that
+    #   contain many databases, especially resource links to databases
+    #   shared from other accounts.
+    #
+    #   This parameter applies only to the Glue Data Catalog. For other data
+    #   catalog types, it is ignored.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListDatabasesInput AWS API Documentation
     #
     class ListDatabasesInput < Struct.new(
       :catalog_name,
       :next_token,
       :max_results,
-      :work_group)
+      :work_group,
+      :attributes_to_get)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3213,6 +3229,22 @@ module Aws::Athena
     #   Catalog.
     #   @return [String]
     #
+    # @!attribute [rw] attributes_to_get
+    #   Specifies the table properties returned by the `ListTableMetadata`
+    #   call. This parameter doesn't accept an empty list, and the request
+    #   must include `NAME`. The valid combinations of values are `NAME`,
+    #   which returns the name of each table, and `NAME` and `TABLE_TYPE`,
+    #   which return the name and table type of each table. The remaining
+    #   properties are omitted. If you omit this parameter, all table
+    #   properties are returned.
+    #
+    #   Requesting only the properties you need can reduce response time for
+    #   databases that contain many tables.
+    #
+    #   This parameter applies only to the Glue Data Catalog. For other data
+    #   catalog types, it is ignored.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListTableMetadataInput AWS API Documentation
     #
     class ListTableMetadataInput < Struct.new(
@@ -3221,7 +3253,8 @@ module Aws::Athena
       :expression,
       :next_token,
       :max_results,
-      :work_group)
+      :work_group,
+      :attributes_to_get)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5706,8 +5739,6 @@ module Aws::Athena
     #
     # @!attribute [rw] engine_version
     #   The engine version that all queries running on the workgroup use.
-    #   Queries on the `AmazonAthenaPreviewFunctionality` workgroup run on
-    #   the preview engine regardless of this setting.
     #   @return [Types::EngineVersion]
     #
     # @!attribute [rw] additional_configuration
@@ -5862,8 +5893,6 @@ module Aws::Athena
     #   The engine version requested when a workgroup is updated. After the
     #   update, all queries on the workgroup run on the requested engine
     #   version. If no value was previously set, the default is Auto.
-    #   Queries on the `AmazonAthenaPreviewFunctionality` workgroup run on
-    #   the preview engine regardless of this setting.
     #   @return [Types::EngineVersion]
     #
     # @!attribute [rw] remove_customer_content_encryption_configuration
@@ -5971,9 +6000,7 @@ module Aws::Athena
     #   @return [Time]
     #
     # @!attribute [rw] engine_version
-    #   The engine version setting for all queries on the workgroup. Queries
-    #   on the `AmazonAthenaPreviewFunctionality` workgroup run on the
-    #   preview engine regardless of this setting.
+    #   The engine version setting for all queries on the workgroup.
     #   @return [Types::EngineVersion]
     #
     # @!attribute [rw] identity_center_application_arn

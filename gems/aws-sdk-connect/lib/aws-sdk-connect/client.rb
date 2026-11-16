@@ -6630,6 +6630,52 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Deletes all active sessions for the specified entity in the specified
+    # Connect Customer instance. The operation supports only the `USER`
+    # entity type, so you can use it to sign out all of a user's active
+    # sessions. Use it when you need to end a user's access right away, for
+    # example when they leave your organization or you suspect that their
+    # credentials are compromised.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :entity_id
+    #   The identifier of the entity whose sessions you want to delete. For
+    #   `USER`, use the user ID or the user ARN.
+    #
+    # @option params [required, String] :entity_type
+    #   The type of entity whose sessions you want to delete.
+    #
+    #   <note markdown="1"> The only valid value is `USER`, which signs out a user in your Connect
+    #   Customer instance.
+    #
+    #    </note>
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_all_entity_sessions({
+    #     instance_id: "InstanceId", # required
+    #     entity_id: "EntityId", # required
+    #     entity_type: "USER", # required, accepts USER
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteAllEntitySessions AWS API Documentation
+    #
+    # @overload delete_all_entity_sessions(params = {})
+    # @param [Hash] params ({})
+    def delete_all_entity_sessions(params = {}, options = {})
+      req = build_request(:delete_all_entity_sessions, params)
+      req.send_request(options)
+    end
+
     # Deletes an attached file along with the underlying S3 Object.
     #
     # The attached file is **permanently deleted** if S3 bucket versioning
@@ -32515,7 +32561,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.299.0'
+      context[:gem_version] = '1.300.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

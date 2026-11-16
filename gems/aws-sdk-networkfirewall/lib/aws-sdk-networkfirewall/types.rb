@@ -919,6 +919,120 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # Filters for `ListResourcesInContextStore`. Both filters are optional.
+    # If you specify both, Network Firewall returns only the resources that
+    # match both.
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region of the resources to return, for
+    #   example `us-east-1`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource to return. Each resource type corresponds to
+    #   the `ContextType` that Network Firewall reports for the resource:
+    #
+    #   * `SecurityGroup` - Security groups. Reported with the `SegmentId`
+    #     context type.
+    #
+    #   * `VPC` - VPCs. Reported with the `ResourceId` context type.
+    #
+    #   * `Subnet` - Subnets. Reported with the `Subnet` context type.
+    #
+    #   * `TGWAttachment` - Transit gateway attachments. Reported with the
+    #     `Attachment` context type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ContextFilters AWS API Documentation
+    #
+    class ContextFilters < Struct.new(
+      :region,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of resource identifiers from the context store that is
+    # associated with the firewall. Use a context set to write stateful
+    # rules against Amazon Web Services resources instead of IP addresses.
+    # This is part of a RuleVariables.
+    #
+    # @!attribute [rw] definition
+    #   The list of resource identifiers. Each entry is the ID of a resource
+    #   that the context store records, for example `vpc-1234567890abcdef0`,
+    #   `subnet-1234567890abcdef0`, `sg-1234567890abcdef0`, or
+    #   `tgw-attach-1234567890abcdef0`. You can specify 1-1,000 entries.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ContextSet AWS API Documentation
+    #
+    class ContextSet < Struct.new(
+      :definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a context store, including its unique
+    # identifier and the account that owns it.
+    #
+    # @!attribute [rw] context_store_id
+    #   The unique identifier of the context store. Use this value in
+    #   `ListResourcesInContextStore` to list the resources that the context
+    #   store records.
+    #   @return [String]
+    #
+    # @!attribute [rw] context_store_owner_account_id
+    #   The ID of the Amazon Web Services account that owns the context
+    #   store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ContextStore AWS API Documentation
+    #
+    class ContextStore < Struct.new(
+      :context_store_id,
+      :context_store_owner_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The synchronization state of a firewall's context sets with its
+    # context store. This indicates whether the resource identifiers in the
+    # firewall's context sets resolve to resources that the context store
+    # records.
+    #
+    # @!attribute [rw] sync_status
+    #   The synchronization status of the firewall's context sets. Valid
+    #   values:
+    #
+    #   * `SYNCING` - The firewall is applying the latest context store
+    #     data.
+    #
+    #   * `FULLY_RESOLVED` - All resource identifiers in the firewall's
+    #     context sets resolve to resources in the context store.
+    #
+    #   * `PARTIALLY_RESOLVED` - Some resource identifiers in the
+    #     firewall's context sets don't resolve to resources in the
+    #     context store.
+    #
+    #   * `SYNC_FAILED` - The firewall couldn't sync with the context
+    #     store. For details, see `StatusMessage`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A message that provides additional information about the
+    #   synchronization status, particularly when the status is not
+    #   `FULLY_RESOLVED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ContextStoreSyncState AWS API Documentation
+    #
+    class ContextStoreSyncState < Struct.new(
+      :sync_status,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] container_association_name
     #   The descriptive name of the container association. You can't change
     #   the name of a container association after you create it.
@@ -3815,6 +3929,19 @@ module Aws::NetworkFirewall
     #   The VPC and subnets for the endpoints of a proxy mode firewall.
     #   @return [Types::VpcEndpoint]
     #
+    # @!attribute [rw] context_store_id
+    #   The unique identifier of the context store that the firewall uses to
+    #   resolve context sets in its rule groups. Network Firewall discovers
+    #   the context store from the transit gateway association in Network
+    #   Manager. This field is only present for transit gateway-attached
+    #   firewalls whose transit gateway is associated with a context store.
+    #   @return [String]
+    #
+    # @!attribute [rw] context_store_owner_account_id
+    #   The Amazon Web Services account ID that owns the context store. This
+    #   may be different from the firewall owner's account ID.
+    #   @return [String]
+    #
     # @!attribute [rw] transparent_filtering_nat_scope
     #   How a proxy mode firewall handles traffic that isn't sent to its
     #   proxy listener. `NAT_ALL` sends this traffic out through the
@@ -3846,6 +3973,8 @@ module Aws::NetworkFirewall
       :nat_gateway_create_mappings,
       :proxy_settings,
       :vpc_endpoint,
+      :context_store_id,
+      :context_store_owner_account_id,
       :transparent_filtering_nat_scope)
       SENSITIVE = []
       include Aws::Structure
@@ -4780,6 +4909,13 @@ module Aws::NetworkFirewall
     #   transit gateway configuration changes have been applied.
     #   @return [Types::TransitGatewayAttachmentSyncState]
     #
+    # @!attribute [rw] context_store_sync_state
+    #   The synchronization state of the context sets in the firewall's
+    #   rule groups with the firewall's context store. This field is only
+    #   present when the firewall has a context store and its rule groups
+    #   reference context sets.
+    #   @return [Types::ContextStoreSyncState]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FirewallStatus AWS API Documentation
     #
     class FirewallStatus < Struct.new(
@@ -4787,7 +4923,8 @@ module Aws::NetworkFirewall
       :configuration_sync_state_summary,
       :sync_states,
       :capacity_usage_summary,
-      :transit_gateway_attachment_sync_state)
+      :transit_gateway_attachment_sync_state,
+      :context_store_sync_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5607,6 +5744,51 @@ module Aws::NetworkFirewall
     #   use in a subsequent call to get the next batch of objects.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListContextStoresRequest AWS API Documentation
+    #
+    class ListContextStoresRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Network Firewall returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] context_stores
+    #   The context stores that are associated with your firewalls.
+    #   @return [Array<Types::ContextStore>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListContextStoresResponse AWS API Documentation
+    #
+    class ListContextStoresResponse < Struct.new(
+      :next_token,
+      :context_stores)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Network Firewall returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that you want Network Firewall to
+    #   return for this request. If more objects are available, in the
+    #   response, Network Firewall provides a `NextToken` value that you can
+    #   use in a subsequent call to get the next batch of objects.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListFirewallPoliciesRequest AWS API Documentation
     #
     class ListFirewallPoliciesRequest < Struct.new(
@@ -5974,6 +6156,70 @@ module Aws::NetworkFirewall
     #
     class ListFlowOperationsResponse < Struct.new(
       :flow_operations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] context_store_id
+    #   The unique identifier of the context store. To get the identifiers
+    #   of the context stores that are associated with your firewalls, call
+    #   `ListContextStores`.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Optional filters that limit the results to resources in a specific
+    #   Region, of a specific resource type, or both. If you specify both
+    #   filters, Network Firewall returns only the resources that match
+    #   both.
+    #   @return [Types::ContextFilters]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that you want Network Firewall to
+    #   return for this request. If more objects are available, in the
+    #   response, Network Firewall provides a `NextToken` value that you can
+    #   use in a subsequent call to get the next batch of objects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Network Firewall returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #
+    #   A token is valid only for the same `ContextStoreId` and filters as
+    #   the request that returned it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListResourcesInContextStoreRequest AWS API Documentation
+    #
+    class ListResourcesInContextStoreRequest < Struct.new(
+      :context_store_id,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_contexts
+    #   The resources that the context store records and that match your
+    #   filters.
+    #   @return [Array<Types::ResourceContext>]
+    #
+    # @!attribute [rw] next_token
+    #   When you request a list of objects with a `MaxResults` setting, if
+    #   the number of objects that are still available for retrieval exceeds
+    #   the maximum you requested, Network Firewall returns a `NextToken`
+    #   value in the response. To retrieve the next batch of objects, use
+    #   the token returned from the prior request in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListResourcesInContextStoreResponse AWS API Documentation
+    #
+    class ListResourcesInContextStoreResponse < Struct.new(
+      :resource_contexts,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -6764,6 +7010,52 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # A resource that a context store records, which
+    # `ListResourcesInContextStore` returns.
+    #
+    # @!attribute [rw] context_type
+    #   The kind of context that the context store records for the resource.
+    #   Valid values:
+    #
+    #   * `ResourceId` - A VPC.
+    #
+    #   * `SegmentId` - A security group.
+    #
+    #   * `Subnet` - A subnet.
+    #
+    #   * `Attachment` - A transit gateway attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone of the resource. Present for subnets.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_type
+    #   The type of the transit gateway attachment. Present for attachments.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_id
+    #   The identifier of the resource, for example `vpc-1234567890abcdef0`,
+    #   `subnet-1234567890abcdef0`, `sg-1234567890abcdef0`, or
+    #   `tgw-attach-1234567890abcdef0`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ResourceContext AWS API Documentation
+    #
+    class ResourceContext < Struct.new(
+      :context_type,
+      :region,
+      :availability_zone,
+      :attachment_type,
+      :public_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Unable to locate a resource using the parameters that you provided.
     #
     # @!attribute [rw] message
@@ -7299,11 +7591,17 @@ module Aws::NetworkFirewall
     #   A list of port ranges.
     #   @return [Hash<String,Types::PortSet>]
     #
+    # @!attribute [rw] context_sets
+    #   A list of context sets. Each context set lists resources from the
+    #   context store that is associated with the firewall.
+    #   @return [Hash<String,Types::ContextSet>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/RuleVariables AWS API Documentation
     #
     class RuleVariables < Struct.new(
       :ip_sets,
-      :port_sets)
+      :port_sets,
+      :context_sets)
       SENSITIVE = []
       include Aws::Structure
     end

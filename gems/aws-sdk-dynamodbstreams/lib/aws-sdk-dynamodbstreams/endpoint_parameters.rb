@@ -10,6 +10,11 @@
 module Aws::DynamoDBStreams
   # Endpoint parameters used to influence endpoints per request.
   #
+  # @!attribute region
+  #   The AWS region used to dispatch the request.
+  #
+  #   @return [string]
+  #
   # @!attribute use_dual_stack
   #   When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.
   #
@@ -25,44 +30,73 @@ module Aws::DynamoDBStreams
   #
   #   @return [string]
   #
-  # @!attribute region
-  #   The AWS region used to dispatch the request.
+  # @!attribute account_id
+  #   The AWS AccountId used for the request.
+  #
+  #   @return [string]
+  #
+  # @!attribute account_id_endpoint_mode
+  #   The AccountId Endpoint Mode.
+  #
+  #   @return [string]
+  #
+  # @!attribute stream_arn
+  #   The ARN of the stream for the request.
+  #
+  #   @return [string]
+  #
+  # @!attribute shard_iterator
+  #   The shard iterator for the GetRecords request.
   #
   #   @return [string]
   #
   EndpointParameters = Struct.new(
+    :region,
     :use_dual_stack,
     :use_fips,
     :endpoint,
-    :region,
+    :account_id,
+    :account_id_endpoint_mode,
+    :stream_arn,
+    :shard_iterator,
   ) do
     include Aws::Structure
 
     # @api private
     class << self
       PARAM_MAP = {
+        'Region' => :region,
         'UseDualStack' => :use_dual_stack,
         'UseFIPS' => :use_fips,
         'Endpoint' => :endpoint,
-        'Region' => :region,
+        'AccountId' => :account_id,
+        'AccountIdEndpointMode' => :account_id_endpoint_mode,
+        'StreamArn' => :stream_arn,
+        'ShardIterator' => :shard_iterator,
       }.freeze
     end
 
     def initialize(options = {})
+      self[:region] = options[:region]
       self[:use_dual_stack] = options[:use_dual_stack]
       self[:use_dual_stack] = false if self[:use_dual_stack].nil?
       self[:use_fips] = options[:use_fips]
       self[:use_fips] = false if self[:use_fips].nil?
       self[:endpoint] = options[:endpoint]
-      self[:region] = options[:region]
+      self[:account_id] = options[:account_id]
+      self[:account_id_endpoint_mode] = options[:account_id_endpoint_mode]
+      self[:stream_arn] = options[:stream_arn]
+      self[:shard_iterator] = options[:shard_iterator]
     end
 
     def self.create(config, options={})
       new({
+        region: config.region,
         use_dual_stack: config.use_dualstack_endpoint,
         use_fips: config.use_fips_endpoint,
         endpoint: (config.endpoint.to_s unless config.regional_endpoint),
-        region: config.region,
+        account_id: config.credentials.credentials.account_id,
+        account_id_endpoint_mode: config.account_id_endpoint_mode,
       }.merge(options))
     end
   end

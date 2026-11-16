@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.300.0 (2026-11-16)
+------------------
+
+* Feature - Adds the DeleteAllEntitySessions API, which signs a user out of all of their active sessions in an Amazon Connect instance.
+
 1.299.0 (2026-11-12)
 ------------------
 

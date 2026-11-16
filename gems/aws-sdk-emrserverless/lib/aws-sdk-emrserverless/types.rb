@@ -616,6 +616,21 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
+    # The Amazon EMR Serverless Flex settings for the job run.
+    #
+    # @!attribute [rw] enabled
+    #   Enables Amazon EMR Serverless Flex capacity for the job run and
+    #   defaults to false. If set to true, the job run uses Flex capacity.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/FlexExecution AWS API Documentation
+    #
+    class FlexExecution < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] application_id
     #   The ID of the application that will be described.
     #   @return [String]
@@ -1222,6 +1237,10 @@ module Aws::EMRServerless
     #   applicationLevelDigestResolution is false for the application.
     #   @return [Hash<String,Types::WorkerTypeSpecification>]
     #
+    # @!attribute [rw] flex_execution
+    #   The Amazon EMR Serverless Flex settings for the job run.
+    #   @return [Types::FlexExecution]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/JobRun AWS API Documentation
     #
     class JobRun < Struct.new(
@@ -1254,7 +1273,8 @@ module Aws::EMRServerless
       :ended_at,
       :queued_duration_milliseconds,
       :image_configuration,
-      :worker_type_specifications)
+      :worker_type_specifications,
+      :flex_execution)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1322,6 +1342,10 @@ module Aws::EMRServerless
     #   The attempt number of the job run execution.
     #   @return [Integer]
     #
+    # @!attribute [rw] flex_execution
+    #   The Amazon EMR Serverless Flex settings for the job run attempt.
+    #   @return [Types::FlexExecution]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/JobRunAttemptSummary AWS API Documentation
     #
     class JobRunAttemptSummary < Struct.new(
@@ -1339,7 +1363,8 @@ module Aws::EMRServerless
       :state_details,
       :release_label,
       :type,
-      :attempt)
+      :attempt,
+      :flex_execution)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1433,6 +1458,10 @@ module Aws::EMRServerless
     #   The date and time of when the job run attempt was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] flex_execution
+    #   The Amazon EMR Serverless Flex settings for the job run.
+    #   @return [Types::FlexExecution]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/JobRunSummary AWS API Documentation
     #
     class JobRunSummary < Struct.new(
@@ -1451,7 +1480,8 @@ module Aws::EMRServerless
       :type,
       :attempt,
       :attempt_created_at,
-      :attempt_updated_at)
+      :attempt_updated_at,
+      :flex_execution)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2224,6 +2254,12 @@ module Aws::EMRServerless
     #   The retry policy when job run starts.
     #   @return [Types::RetryPolicy]
     #
+    # @!attribute [rw] flex_execution
+    #   The Amazon EMR Serverless Flex settings for the job run. If you
+    #   don't specify these settings, the job run doesn't use Flex
+    #   capacity.
+    #   @return [Types::FlexExecution]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/StartJobRunRequest AWS API Documentation
     #
     class StartJobRunRequest < Struct.new(
@@ -2237,7 +2273,8 @@ module Aws::EMRServerless
       :execution_timeout_minutes,
       :name,
       :mode,
-      :retry_policy)
+      :retry_policy,
+      :flex_execution)
       SENSITIVE = []
       include Aws::Structure
     end

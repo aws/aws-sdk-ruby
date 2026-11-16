@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.269.0 (2026-11-16)
+------------------
+
 * Feature - Reduce memory usage of loaded service APIs by allocating shape metadata Hashes on first write.
 
 * Feature - Reuse the chunk size header of full chunks when streaming request bodies with checksum trailers.

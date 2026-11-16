@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2026-11-16)
+------------------
+
+* Feature - Generate account-based endpoints for DynamoDB Streams requests when the account ID is available
+
 1.107.0 (2026-11-11)
 ------------------
 

@@ -13,6 +13,12 @@ module Aws::S3Vectors
       SENSITIVE: []
     end
 
+    class Bm25Score
+      attr_accessor metadata_key: ::String
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -262,6 +268,17 @@ module Aws::S3Vectors
 
     class MetadataConfiguration
       attr_accessor non_filterable_metadata_keys: ::Array[::String]
+      attr_accessor text_search_configurations: ::Array[Types::TextSearchConfiguration]
+      SENSITIVE: []
+    end
+
+    class MetadataConfigurationAdd
+      attr_accessor text_search_configurations: ::Array[Types::TextSearchConfiguration]
+      SENSITIVE: []
+    end
+
+    class MetadataConfigurationDelete
+      attr_accessor text_search_configurations: ::Array[Types::TextSearchConfigurationKey]
       SENSITIVE: []
     end
 
@@ -310,8 +327,22 @@ module Aws::S3Vectors
 
     class QueryOutputVector
       attr_accessor distance: ::Float
+      attr_accessor scores: Types::QueryScores
       attr_accessor key: ::String
       attr_accessor metadata: untyped
+      SENSITIVE: []
+    end
+
+    class QueryScores
+      attr_accessor fused: ::Float
+      attr_accessor bm25_scores: ::Array[Types::Bm25Score]
+      attr_accessor vector_distance: ::Float
+      SENSITIVE: []
+    end
+
+    class QueryText
+      attr_accessor text: ::String
+      attr_accessor metadata_key: ::String
       SENSITIVE: []
     end
 
@@ -325,8 +356,10 @@ module Aws::S3Vectors
       attr_accessor query_mode: ("CLASSIC" | "ENHANCED")
       attr_accessor return_metadata: bool
       attr_accessor return_distance: bool
+      attr_accessor query_texts: ::Array[Types::QueryText]
+      attr_accessor return_scores: bool
       attr_accessor next_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:query_texts]
     end
 
     class QueryVectorsOutput
@@ -360,6 +393,18 @@ module Aws::S3Vectors
     class TagResourceOutput < Aws::EmptyStructure
     end
 
+    class TextSearchConfiguration
+      attr_accessor metadata_key: ::String
+      attr_accessor language: ("en" | "fr" | "es" | "pt" | "it" | "de" | "nl" | "zh" | "ja" | "ko")
+      attr_accessor status: ("ACTIVE" | "BUILDING")
+      SENSITIVE: []
+    end
+
+    class TextSearchConfigurationKey
+      attr_accessor metadata_key: ::String
+      SENSITIVE: []
+    end
+
     class TooManyRequestsException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -383,6 +428,20 @@ module Aws::S3Vectors
     end
 
     class UpdateIndexModeOutput < Aws::EmptyStructure
+    end
+
+    class UpdateMetadataConfigurationInput
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor index_arn: ::String
+      attr_accessor add: Types::MetadataConfigurationAdd
+      attr_accessor delete: Types::MetadataConfigurationDelete
+      SENSITIVE: []
+    end
+
+    class UpdateMetadataConfigurationOutput
+      attr_accessor index_arn: ::String
+      SENSITIVE: []
     end
 
     class ValidationException

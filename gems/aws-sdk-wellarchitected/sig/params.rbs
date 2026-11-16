@@ -19,12 +19,28 @@ module Aws
           value: ::String
         }
       ]?,
+      organizational_unit_ids: Array[::String]?,
       application_overview: ::String?,
       industry: ::String?,
       application_type: ("SAS" | "DESKTOP_APPLICATION" | "OTHER")?,
       criticality: ("MISSION_CRITICAL" | "BUSINESS_CRITICAL" | "NON_CRITICAL" | "TEST_DEVELOPMENT")?,
       architecture_overview: ::String?,
       additional_context: ::String?
+    }
+
+      type organizational_aggregation_configuration = {
+      organizational_units: Array[
+        {
+          organizational_unit_id: ::String,
+          regions: Array[::String]
+        }
+      ]?,
+      accounts: Array[
+        {
+          account_id: ::String,
+          regions: Array[::String]
+        }
+      ]?
     }
 
     end

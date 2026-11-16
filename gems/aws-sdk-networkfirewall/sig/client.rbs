@@ -791,6 +791,18 @@ module Aws
                                        ) -> _ListContainerAssociationsResponseSuccess
                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContainerAssociationsResponseSuccess
 
+      interface _ListContextStoresResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContextStoresResponse]
+        def next_token: () -> ::String
+        def context_stores: () -> ::Array[Types::ContextStore]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#list_context_stores-instance_method
+      def list_context_stores: (
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _ListContextStoresResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContextStoresResponseSuccess
+
       interface _ListFirewallPoliciesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListFirewallPoliciesResponse]
         def next_token: () -> ::String
@@ -872,6 +884,23 @@ module Aws
                                   ?max_results: ::Integer
                                 ) -> _ListFlowOperationsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFlowOperationsResponseSuccess
+
+      interface _ListResourcesInContextStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourcesInContextStoreResponse]
+        def resource_contexts: () -> ::Array[Types::ResourceContext]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#list_resources_in_context_store-instance_method
+      def list_resources_in_context_store: (
+                                             context_store_id: ::String,
+                                             ?filters: {
+                                               region: ::String?,
+                                               resource_type: ("SecurityGroup" | "VPC" | "Subnet" | "TGWAttachment")?
+                                             },
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _ListResourcesInContextStoreResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourcesInContextStoreResponseSuccess
 
       interface _ListRuleGroupsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRuleGroupsResponse]

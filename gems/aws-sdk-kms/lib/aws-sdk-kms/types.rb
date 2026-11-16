@@ -3759,7 +3759,7 @@ module Aws::KMS
     end
 
     # @!attribute [rw] key_id
-    #   Gets the key policy for the specified KMS key.
+    #   Identifies the KMS key whose key policy you want to get.
     #
     #   Specify the key ID or key ARN of the KMS key.
     #
@@ -3776,8 +3776,12 @@ module Aws::KMS
     #
     # @!attribute [rw] policy_name
     #   Specifies the name of the key policy. If no policy name is
-    #   specified, the default value is `default`. The only valid name is
-    #   `default`. To get the names of key policies, use ListKeyPolicies.
+    #   specified, the default value is `default`. Valid values are
+    #   `default` and `AWS_RAM`. Use `AWS_RAM` to get the key policy that
+    #   RAM manages for a KMS key that you share through RAM. If the KMS key
+    #   doesn't have an `AWS_RAM` key policy, the request fails with a
+    #   `NotFoundException`. To get the names of key policies, use
+    #   ListKeyPolicies.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyPolicyRequest AWS API Documentation
@@ -3794,7 +3798,16 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] policy_name
-    #   The name of the key policy. The only valid value is `default`.
+    #   The name of the key policy. Valid values are:
+    #
+    #   default
+    #
+    #   : The key policy that you manage.
+    #
+    #   AWS\_RAM
+    #
+    #   : The key policy that RAM manages for KMS keys that you share
+    #     through RAM.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyPolicyResponse AWS API Documentation
@@ -5310,7 +5323,8 @@ module Aws::KMS
     #   and 1000, inclusive. If you do not include a value, it defaults to
     #   100.
     #
-    #   Only one policy can be attached to a key.
+    #   A KMS key can have at most two key policies, `default` and
+    #   `AWS_RAM`.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -5330,7 +5344,16 @@ module Aws::KMS
     end
 
     # @!attribute [rw] policy_names
-    #   A list of key policy names. The only valid value is `default`.
+    #   A list of key policy names. Valid values are:
+    #
+    #   default
+    #
+    #   : The key policy that you manage.
+    #
+    #   AWS\_RAM
+    #
+    #   : The key policy that RAM manages for KMS keys that you share
+    #     through RAM.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_marker
@@ -5455,17 +5478,61 @@ module Aws::KMS
     #   from the truncated response you just received.
     #   @return [String]
     #
+    # @!attribute [rw] resource_owners
+    #   Specifies whose KMS keys to list. Use this parameter to list KMS
+    #   keys that other Amazon Web Services accounts shared with your Amazon
+    #   Web Services account through Resource Access Manager (RAM).
+    #
+    #   Specify one or two values. Valid values are:
+    #
+    #   SELF
+    #
+    #   : Lists the KMS keys in your Amazon Web Services account and Region.
+    #
+    #   OTHER\_ACCOUNTS\_VIA\_RAM
+    #
+    #   : Lists the KMS keys in the Region that other Amazon Web Services
+    #     accounts currently share with your Amazon Web Services account
+    #     through RAM. This list doesn't include KMS keys that your Amazon
+    #     Web Services account owns. For each of these KMS keys, the key ARN
+    #     in the response contains the account ID of the Amazon Web Services
+    #     account that owns the KMS key.
+    #
+    #   If you omit this parameter, `ListKeys` lists only the KMS keys in
+    #   your Amazon Web Services account. If you specify both values, in
+    #   either order, `ListKeys` returns the KMS keys in your Amazon Web
+    #   Services account first, and then the KMS keys that other Amazon Web
+    #   Services accounts shared with you. A single response doesn't
+    #   contain both kinds of KMS keys.
+    #
+    #   When `ResourceOwners` includes `OTHER_ACCOUNTS_VIA_RAM`, a response
+    #   can contain fewer KMS keys than the `Limit` value, or none, even
+    #   when `Truncated` is true. To get all of the KMS keys, continue
+    #   calling `ListKeys` with the `NextMarker` value from each response
+    #   until `Truncated` is false. Use a `NextMarker` value only in a
+    #   request that has the same `ResourceOwners` value as the request that
+    #   returned it. Otherwise, the request can fail with an
+    #   `InvalidMarkerException`.
+    #
+    #   KMS keys that other Amazon Web Services accounts share with you can
+    #   take some time to appear in or disappear from the results after
+    #   changes to resource shares.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeysRequest AWS API Documentation
     #
     class ListKeysRequest < Struct.new(
       :limit,
-      :marker)
+      :marker,
+      :resource_owners)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] keys
-    #   A list of KMS keys.
+    #   A list of KMS keys. For a KMS key that another Amazon Web Services
+    #   account shared with you through RAM, the key ARN contains the
+    #   account ID of the Amazon Web Services account that owns the KMS key.
     #   @return [Array<Types::KeyListEntry>]
     #
     # @!attribute [rw] next_marker
@@ -5725,7 +5792,12 @@ module Aws::KMS
     #
     # @!attribute [rw] policy_name
     #   The name of the key policy. If no policy name is specified, the
-    #   default value is `default`. The only valid value is `default`.
+    #   default value is `default`. Valid values are `default` and
+    #   `AWS_RAM`, but you can set only the `default` key policy. RAM
+    #   manages the `AWS_RAM` key policy for KMS keys that you share through
+    #   RAM. If you specify `AWS_RAM`, the request fails with a
+    #   `ValidationException`, or with an `AccessDeniedException` if you
+    #   don't have permission to call `PutKeyPolicy` with that policy name.
     #   @return [String]
     #
     # @!attribute [rw] policy
@@ -5806,6 +5878,12 @@ module Aws::KMS
     #   Use this parameter only when you intend to prevent the principal
     #   that is making the request from making a subsequent
     #   [PutKeyPolicy][2] request on the KMS key.
+    #
+    #   The key policy lockout safety check and the
+    #   `BypassPolicyLockoutSafetyCheck` parameter apply only to the
+    #   `default` key policy. The check evaluates only the new `default` key
+    #   policy, with `kms:PolicyName` set to `default`. It doesn't consider
+    #   permissions in the `AWS_RAM` key policy.
     #
     #
     #

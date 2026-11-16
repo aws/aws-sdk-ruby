@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+1.1306.0 (2026-11-16)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SageMakerInferenceRouterRuntime`.
+
+* Feature - Added support for enumerating regions for `Aws::OpenSearchMemory`.
+
+* Feature - Added support for enumerating regions for `Aws::ConnectScheduling`.
+
 1.1305.0 (2026-11-11)
 ------------------
 

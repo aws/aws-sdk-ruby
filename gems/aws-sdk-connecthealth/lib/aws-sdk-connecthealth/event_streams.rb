@@ -77,6 +77,14 @@ module Aws::ConnectHealth
         @event_emitter.on(:validation_exception, block) if block_given?
       end
 
+      def on_periodontal_chart_event_event(&block)
+        @event_emitter.on(:periodontal_chart_event, block) if block_given?
+      end
+
+      def on_checklist_event_event(&block)
+        @event_emitter.on(:checklist_event, block) if block_given?
+      end
+
       def on_error_event(&block)
         @event_emitter.on(:error, block) if block_given?
       end
@@ -93,6 +101,8 @@ module Aws::ConnectHealth
         on_transcript_event_event(&block)
         on_internal_failure_exception_event(&block)
         on_validation_exception_event(&block)
+        on_periodontal_chart_event_event(&block)
+        on_checklist_event_event(&block)
         on_error_event(&block)
         on_initial_response_event(&block)
         on_unknown_event(&block)

@@ -54,7 +54,7 @@ module Aws::Athena
   autoload :EndpointProvider, 'aws-sdk-athena/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-athena/endpoints'
 
-  GEM_VERSION = '1.135.0'
+  GEM_VERSION = '1.136.0'
 
 end
 

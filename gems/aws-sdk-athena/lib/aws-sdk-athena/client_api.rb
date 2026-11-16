@@ -90,6 +90,8 @@ module Aws::Athena
     DataCatalogSummaryList = Shapes::ListShape.new(name: 'DataCatalogSummaryList')
     DataCatalogType = Shapes::StringShape.new(name: 'DataCatalogType')
     Database = Shapes::StructureShape.new(name: 'Database')
+    DatabaseAttributes = Shapes::StringShape.new(name: 'DatabaseAttributes')
+    DatabaseAttributesList = Shapes::ListShape.new(name: 'DatabaseAttributesList')
     DatabaseList = Shapes::ListShape.new(name: 'DatabaseList')
     DatabaseString = Shapes::StringShape.new(name: 'DatabaseString')
     Date = Shapes::TimestampShape.new(name: 'Date')
@@ -334,6 +336,8 @@ module Aws::Athena
     SystemTableStatus = Shapes::StructureShape.new(name: 'SystemTableStatus')
     SystemTableStatusList = Shapes::ListShape.new(name: 'SystemTableStatusList')
     SystemTableType = Shapes::StringShape.new(name: 'SystemTableType')
+    TableAttributes = Shapes::StringShape.new(name: 'TableAttributes')
+    TableAttributesList = Shapes::ListShape.new(name: 'TableAttributesList')
     TableMetadata = Shapes::StructureShape.new(name: 'TableMetadata')
     TableMetadataList = Shapes::ListShape.new(name: 'TableMetadataList')
     TableTypeString = Shapes::StringShape.new(name: 'TableTypeString')
@@ -612,6 +616,8 @@ module Aws::Athena
     Database.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     Database.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
     Database.struct_class = Types::Database
+
+    DatabaseAttributesList.member = Shapes::ShapeRef.new(shape: DatabaseAttributes)
 
     DatabaseList.member = Shapes::ShapeRef.new(shape: Database)
 
@@ -912,6 +918,7 @@ module Aws::Athena
     ListDatabasesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListDatabasesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxDatabasesCount, location_name: "MaxResults"))
     ListDatabasesInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
+    ListDatabasesInput.add_member(:attributes_to_get, Shapes::ShapeRef.new(shape: DatabaseAttributesList, location_name: "AttributesToGet"))
     ListDatabasesInput.struct_class = Types::ListDatabasesInput
 
     ListDatabasesOutput.add_member(:database_list, Shapes::ShapeRef.new(shape: DatabaseList, location_name: "DatabaseList"))
@@ -1007,6 +1014,7 @@ module Aws::Athena
     ListTableMetadataInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListTableMetadataInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxTableMetadataCount, location_name: "MaxResults"))
     ListTableMetadataInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
+    ListTableMetadataInput.add_member(:attributes_to_get, Shapes::ShapeRef.new(shape: TableAttributesList, location_name: "AttributesToGet"))
     ListTableMetadataInput.struct_class = Types::ListTableMetadataInput
 
     ListTableMetadataOutput.add_member(:table_metadata_list, Shapes::ShapeRef.new(shape: TableMetadataList, location_name: "TableMetadataList"))
@@ -1338,6 +1346,8 @@ module Aws::Athena
     SystemTableStatus.struct_class = Types::SystemTableStatus
 
     SystemTableStatusList.member = Shapes::ShapeRef.new(shape: SystemTableStatus)
+
+    TableAttributesList.member = Shapes::ShapeRef.new(shape: TableAttributes)
 
     TableMetadata.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     TableMetadata.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTime"))

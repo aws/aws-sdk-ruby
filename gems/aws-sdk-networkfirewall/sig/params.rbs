@@ -132,6 +132,9 @@ module Aws
         }]?,
       port_sets: Hash[::String, {
           definition: Array[::String]?
+        }]?,
+      context_sets: Hash[::String, {
+          definition: Array[::String]
         }]?
     }
 

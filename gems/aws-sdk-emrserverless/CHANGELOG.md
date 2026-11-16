@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2026-11-16)
+------------------
+
+* Feature - Amazon EMR Serverless now supports Flex, a new execution option for running data processing jobs on spare compute capacity at a discount.
+
 1.83.0 (2026-11-11)
 ------------------
 

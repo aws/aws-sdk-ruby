@@ -67,6 +67,8 @@ module Aws::ECR
     DeletePullThroughCacheRuleResponse = Shapes::StructureShape.new(name: 'DeletePullThroughCacheRuleResponse')
     DeleteRegistryPolicyRequest = Shapes::StructureShape.new(name: 'DeleteRegistryPolicyRequest')
     DeleteRegistryPolicyResponse = Shapes::StructureShape.new(name: 'DeleteRegistryPolicyResponse')
+    DeleteReplication = Shapes::StructureShape.new(name: 'DeleteReplication')
+    DeleteReplicationFlag = Shapes::BooleanShape.new(name: 'DeleteReplicationFlag')
     DeleteRepositoryCreationTemplateRequest = Shapes::StructureShape.new(name: 'DeleteRepositoryCreationTemplateRequest')
     DeleteRepositoryCreationTemplateResponse = Shapes::StructureShape.new(name: 'DeleteRepositoryCreationTemplateResponse')
     DeleteRepositoryPolicyRequest = Shapes::StructureShape.new(name: 'DeleteRepositoryPolicyRequest')
@@ -619,6 +621,9 @@ module Aws::ECR
     DeleteRegistryPolicyResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     DeleteRegistryPolicyResponse.add_member(:policy_text, Shapes::ShapeRef.new(shape: RegistryPolicyText, location_name: "policyText"))
     DeleteRegistryPolicyResponse.struct_class = Types::DeleteRegistryPolicyResponse
+
+    DeleteReplication.add_member(:enabled, Shapes::ShapeRef.new(shape: DeleteReplicationFlag, required: true, location_name: "enabled"))
+    DeleteReplication.struct_class = Types::DeleteReplication
 
     DeleteRepositoryCreationTemplateRequest.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, required: true, location_name: "prefix"))
     DeleteRepositoryCreationTemplateRequest.struct_class = Types::DeleteRepositoryCreationTemplateRequest
@@ -1350,6 +1355,7 @@ module Aws::ECR
 
     ReplicationRule.add_member(:destinations, Shapes::ShapeRef.new(shape: ReplicationDestinationList, required: true, location_name: "destinations"))
     ReplicationRule.add_member(:repository_filters, Shapes::ShapeRef.new(shape: RepositoryFilterList, location_name: "repositoryFilters"))
+    ReplicationRule.add_member(:delete_replication, Shapes::ShapeRef.new(shape: DeleteReplication, location_name: "deleteReplication"))
     ReplicationRule.struct_class = Types::ReplicationRule
 
     ReplicationRuleList.member = Shapes::ShapeRef.new(shape: ReplicationRule)

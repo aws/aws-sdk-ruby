@@ -336,6 +336,8 @@ module Aws::ECS
     GatewayConnectionList = Shapes::ListShape.new(name: 'GatewayConnectionList')
     GatewayConnectionResources = Shapes::UnionShape.new(name: 'GatewayConnectionResources')
     GatewayConnector = Shapes::StructureShape.new(name: 'GatewayConnector')
+    GatewayConnectorDeregistrationDelay = Shapes::StructureShape.new(name: 'GatewayConnectorDeregistrationDelay')
+    GatewayConnectorDeregistrationDelayTimeoutSecondsInteger = Shapes::IntegerShape.new(name: 'GatewayConnectorDeregistrationDelayTimeoutSecondsInteger')
     GatewayConnectorFilters = Shapes::StructureShape.new(name: 'GatewayConnectorFilters')
     GatewayConnectorHealthCheck = Shapes::StructureShape.new(name: 'GatewayConnectorHealthCheck')
     GatewayConnectorHealthCheckMatcher = Shapes::StructureShape.new(name: 'GatewayConnectorHealthCheckMatcher')
@@ -2021,7 +2023,11 @@ module Aws::ECS
     GatewayConnector.add_member(:port_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "portName"))
     GatewayConnector.add_member(:health_check, Shapes::ShapeRef.new(shape: GatewayConnectorHealthCheck, location_name: "healthCheck"))
     GatewayConnector.add_member(:filters, Shapes::ShapeRef.new(shape: GatewayConnectorFilters, location_name: "filters"))
+    GatewayConnector.add_member(:deregistration_delay, Shapes::ShapeRef.new(shape: GatewayConnectorDeregistrationDelay, location_name: "deregistrationDelay"))
     GatewayConnector.struct_class = Types::GatewayConnector
+
+    GatewayConnectorDeregistrationDelay.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: GatewayConnectorDeregistrationDelayTimeoutSecondsInteger, location_name: "timeoutSeconds"))
+    GatewayConnectorDeregistrationDelay.struct_class = Types::GatewayConnectorDeregistrationDelay
 
     GatewayConnectorFilters.add_member(:access_types, Shapes::ShapeRef.new(shape: AccessTypeList, location_name: "accessTypes"))
     GatewayConnectorFilters.struct_class = Types::GatewayConnectorFilters

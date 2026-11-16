@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2026-11-16)
+------------------
+
+* Feature - Context Sharing with Firewalls
+
 1.95.0 (2026-11-11)
 ------------------
 

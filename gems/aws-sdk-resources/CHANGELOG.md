@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.280.0 (2026-11-16)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-sagemakerinferencerouterruntime` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-opensearchmemory` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-connectscheduling` gem.
+
 3.279.0 (2026-11-05)
 ------------------
 

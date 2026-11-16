@@ -9055,12 +9055,34 @@ module Aws::ECS
     #   applies to.
     #   @return [Types::GatewayConnectorFilters]
     #
+    # @!attribute [rw] deregistration_delay
+    #   The deregistration delay settings for the targets of this connector.
+    #   @return [Types::GatewayConnectorDeregistrationDelay]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayConnector AWS API Documentation
     #
     class GatewayConnector < Struct.new(
       :port_name,
       :health_check,
-      :filters)
+      :filters,
+      :deregistration_delay)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The amount of time to allow in-flight requests to complete before a
+    # deregistering target is removed.
+    #
+    # @!attribute [rw] timeout_seconds
+    #   The amount of time, in seconds, to wait before a deregistering
+    #   target is removed. A value of `0` removes the target immediately.
+    #   The valid range is 0-3600 seconds. The default value is 300 seconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GatewayConnectorDeregistrationDelay AWS API Documentation
+    #
+    class GatewayConnectorDeregistrationDelay < Struct.new(
+      :timeout_seconds)
       SENSITIVE = []
       include Aws::Structure
     end

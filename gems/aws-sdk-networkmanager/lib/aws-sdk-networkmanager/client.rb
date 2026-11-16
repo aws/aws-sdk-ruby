@@ -596,6 +596,48 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Associates a transit gateway with a context store. The transit gateway
+    # must be registered with the global network of the context store, and
+    # can't be associated with more than one context store. The context
+    # store must be in the `AVAILABLE` state.
+    #
+    # The association is in the `ASSOCIATING` state when it's created, and
+    # changes to `ASSOCIATED` when it's complete.
+    #
+    # @option params [required, String] :context_store_id
+    #   The ID of the context store.
+    #
+    # @option params [String] :transit_gateway_arn
+    #   The Amazon Resource Name (ARN) of the transit gateway to associate
+    #   with the context store.
+    #
+    # @return [Types::AssociateContextStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateContextStoreResponse#context_store_association #context_store_association} => Types::ContextStoreAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_context_store({
+    #     context_store_id: "ContextStoreId", # required
+    #     transit_gateway_arn: "TransitGatewayArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.context_store_association.context_store_id #=> String
+    #   resp.context_store_association.transit_gateway_arn #=> String
+    #   resp.context_store_association.created_at #=> Time
+    #   resp.context_store_association.state #=> String, one of "ASSOCIATING", "ASSOCIATED", "DISASSOCIATING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AssociateContextStore AWS API Documentation
+    #
+    # @overload associate_context_store(params = {})
+    # @param [Hash] params ({})
+    def associate_context_store(params = {}, options = {})
+      req = build_request(:associate_context_store, params)
+      req.send_request(options)
+    end
+
     # Associates a customer gateway with a device and optionally, with a
     # link. If you specify a link, it must be associated with the specified
     # device.
@@ -1044,6 +1086,72 @@ module Aws::NetworkManager
     # @param [Hash] params ({})
     def create_connection(params = {}, options = {})
       req = build_request(:create_connection, params)
+      req.send_request(options)
+    end
+
+    # Creates a context store in a global network. A context store maintains
+    # context entries, such as security groups, subnets, and attachments,
+    # for the resources connected to the transit gateways that you associate
+    # with it.
+    #
+    # The context store is in the `PENDING` state when it's created, and
+    # changes to `AVAILABLE` when it's ready to use.
+    #
+    # @option params [required, String] :global_network_id
+    #   The ID of the global network to create the context store in.
+    #
+    # @option params [String] :description
+    #   A description of the context store.
+    #
+    #   Constraints: Maximum length of 256 characters. Only printable ASCII
+    #   characters are allowed.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to apply to the context store during creation.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateContextStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateContextStoreResponse#context_store #context_store} => Types::ContextStore
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_context_store({
+    #     global_network_id: "GlobalNetworkId", # required
+    #     description: "ConstrainedString",
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.context_store.global_network_id #=> String
+    #   resp.context_store.context_store_id #=> String
+    #   resp.context_store.context_store_arn #=> String
+    #   resp.context_store.description #=> String
+    #   resp.context_store.created_at #=> Time
+    #   resp.context_store.state #=> String, one of "PENDING", "AVAILABLE", "UPDATING", "DELETING", "DELETED"
+    #   resp.context_store.tags #=> Array
+    #   resp.context_store.tags[0].key #=> String
+    #   resp.context_store.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateContextStore AWS API Documentation
+    #
+    # @overload create_context_store(params = {})
+    # @param [Hash] params ({})
+    def create_context_store(params = {}, options = {})
+      req = build_request(:create_context_store, params)
       req.send_request(options)
     end
 
@@ -2156,6 +2264,44 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Deletes a context store. The context store must be in the `AVAILABLE`
+    # state. You must disassociate all transit gateways from the context
+    # store before you can delete it.
+    #
+    # @option params [required, String] :context_store_id
+    #   The ID of the context store to delete.
+    #
+    # @return [Types::DeleteContextStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteContextStoreResponse#context_store #context_store} => Types::ContextStore
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_context_store({
+    #     context_store_id: "ContextStoreId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.context_store.global_network_id #=> String
+    #   resp.context_store.context_store_id #=> String
+    #   resp.context_store.context_store_arn #=> String
+    #   resp.context_store.description #=> String
+    #   resp.context_store.created_at #=> Time
+    #   resp.context_store.state #=> String, one of "PENDING", "AVAILABLE", "UPDATING", "DELETING", "DELETED"
+    #   resp.context_store.tags #=> Array
+    #   resp.context_store.tags[0].key #=> String
+    #   resp.context_store.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteContextStore AWS API Documentation
+    #
+    # @overload delete_context_store(params = {})
+    # @param [Hash] params ({})
+    def delete_context_store(params = {}, options = {})
+      req = build_request(:delete_context_store, params)
+      req.send_request(options)
+    end
+
     # Deletes a core network along with all core network policies. This can
     # only be done if there are no attachments on a core network.
     #
@@ -2661,6 +2807,44 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Disassociates a transit gateway from a context store. The association
+    # must be in the `ASSOCIATED` or `FAILED` state. The association stays
+    # in the `DISASSOCIATING` state until the disassociation completes.
+    #
+    # @option params [required, String] :context_store_id
+    #   The ID of the context store.
+    #
+    # @option params [required, String] :transit_gateway_arn
+    #   The Amazon Resource Name (ARN) of the transit gateway to disassociate
+    #   from the context store.
+    #
+    # @return [Types::DisassociateContextStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateContextStoreResponse#context_store_association #context_store_association} => Types::ContextStoreAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_context_store({
+    #     context_store_id: "ContextStoreId", # required
+    #     transit_gateway_arn: "TransitGatewayArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.context_store_association.context_store_id #=> String
+    #   resp.context_store_association.transit_gateway_arn #=> String
+    #   resp.context_store_association.created_at #=> Time
+    #   resp.context_store_association.state #=> String, one of "ASSOCIATING", "ASSOCIATED", "DISASSOCIATING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DisassociateContextStore AWS API Documentation
+    #
+    # @overload disassociate_context_store(params = {})
+    # @param [Hash] params ({})
+    def disassociate_context_store(params = {}, options = {})
+      req = build_request(:disassociate_context_store, params)
+      req.send_request(options)
+    end
+
     # Disassociates a customer gateway from a device and a link.
     #
     # @option params [required, String] :global_network_id
@@ -3024,6 +3208,107 @@ module Aws::NetworkManager
     # @param [Hash] params ({})
     def get_connections(params = {}, options = {})
       req = build_request(:get_connections, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a context store.
+    #
+    # @option params [required, String] :context_store_id
+    #   The ID of the context store.
+    #
+    # @return [Types::GetContextStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetContextStoreResponse#context_store #context_store} => Types::ContextStore
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_context_store({
+    #     context_store_id: "ContextStoreId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.context_store.global_network_id #=> String
+    #   resp.context_store.context_store_id #=> String
+    #   resp.context_store.context_store_arn #=> String
+    #   resp.context_store.description #=> String
+    #   resp.context_store.created_at #=> Time
+    #   resp.context_store.state #=> String, one of "PENDING", "AVAILABLE", "UPDATING", "DELETING", "DELETED"
+    #   resp.context_store.tags #=> Array
+    #   resp.context_store.tags[0].key #=> String
+    #   resp.context_store.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetContextStore AWS API Documentation
+    #
+    # @overload get_context_store(params = {})
+    # @param [Hash] params ({})
+    def get_context_store(params = {}, options = {})
+      req = build_request(:get_context_store, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the association between a context store and
+    # a transit gateway.
+    #
+    # @option params [required, String] :context_store_id
+    #   The ID of the context store.
+    #
+    # @option params [required, String] :transit_gateway_arn
+    #   The Amazon Resource Name (ARN) of the transit gateway.
+    #
+    # @return [Types::GetContextStoreAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetContextStoreAssociationResponse#context_store_association #context_store_association} => Types::ContextStoreAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_context_store_association({
+    #     context_store_id: "ContextStoreId", # required
+    #     transit_gateway_arn: "TransitGatewayArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.context_store_association.context_store_id #=> String
+    #   resp.context_store_association.transit_gateway_arn #=> String
+    #   resp.context_store_association.created_at #=> Time
+    #   resp.context_store_association.state #=> String, one of "ASSOCIATING", "ASSOCIATED", "DISASSOCIATING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetContextStoreAssociation AWS API Documentation
+    #
+    # @overload get_context_store_association(params = {})
+    # @param [Hash] params ({})
+    def get_context_store_association(params = {}, options = {})
+      req = build_request(:get_context_store_association, params)
+      req.send_request(options)
+    end
+
+    # Returns the current version of the context entries of a context store.
+    # The context store must be in the `AVAILABLE` state.
+    #
+    # @option params [required, String] :context_store_id
+    #   The ID of the context store.
+    #
+    # @return [Types::GetContextVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetContextVersionResponse#version_id #version_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_context_version({
+    #     context_store_id: "ContextStoreId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.version_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetContextVersion AWS API Documentation
+    #
+    # @overload get_context_version(params = {})
+    # @param [Hash] params ({})
+    def get_context_version(params = {}, options = {})
+      req = build_request(:get_context_version, params)
       req.send_request(options)
     end
 
@@ -4911,6 +5196,216 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Returns the context entries that were added to or removed from a
+    # context store after the specified version. The context store must be
+    # in the `AVAILABLE` state.
+    #
+    # @option params [required, String] :context_store_id
+    #   The ID of the context store.
+    #
+    # @option params [required, String] :from_version_id
+    #   The version to return changes from. Specify a version returned by
+    #   `ListContexts`, `GetContextVersion`, or the `ToVersionId` of a
+    #   previous `ListContextChanges` request. If the version is no longer
+    #   available, the request fails, and you must call `ListContexts` to get
+    #   the current context entries.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListContextChangesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContextChangesResponse#context_changes #context_changes} => Array&lt;Types::ContextChange&gt;
+    #   * {Types::ListContextChangesResponse#from_version_id #from_version_id} => String
+    #   * {Types::ListContextChangesResponse#to_version_id #to_version_id} => String
+    #   * {Types::ListContextChangesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_context_changes({
+    #     context_store_id: "ContextStoreId", # required
+    #     from_version_id: "ConstrainedString", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.context_changes #=> Array
+    #   resp.context_changes[0].change_type #=> String, one of "ADDED", "REMOVED"
+    #   resp.context_changes[0].context.context_id #=> String
+    #   resp.context_changes[0].context.context_type #=> String
+    #   resp.context_changes[0].context.segment_type #=> String
+    #   resp.context_changes[0].context.public_id #=> String
+    #   resp.context_changes[0].context.region #=> String
+    #   resp.context_changes[0].context.availability_zone #=> String
+    #   resp.context_changes[0].context.attachment_type #=> String
+    #   resp.from_version_id #=> String
+    #   resp.to_version_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListContextChanges AWS API Documentation
+    #
+    # @overload list_context_changes(params = {})
+    # @param [Hash] params ({})
+    def list_context_changes(params = {}, options = {})
+      req = build_request(:list_context_changes, params)
+      req.send_request(options)
+    end
+
+    # Returns the transit gateway associations of a context store.
+    #
+    # @option params [required, String] :context_store_id
+    #   The ID of the context store.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListContextStoreAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContextStoreAssociationsResponse#context_store_associations #context_store_associations} => Array&lt;Types::ContextStoreAssociation&gt;
+    #   * {Types::ListContextStoreAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_context_store_associations({
+    #     context_store_id: "ContextStoreId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.context_store_associations #=> Array
+    #   resp.context_store_associations[0].context_store_id #=> String
+    #   resp.context_store_associations[0].transit_gateway_arn #=> String
+    #   resp.context_store_associations[0].created_at #=> Time
+    #   resp.context_store_associations[0].state #=> String, one of "ASSOCIATING", "ASSOCIATED", "DISASSOCIATING", "FAILED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListContextStoreAssociations AWS API Documentation
+    #
+    # @overload list_context_store_associations(params = {})
+    # @param [Hash] params ({})
+    def list_context_store_associations(params = {}, options = {})
+      req = build_request(:list_context_store_associations, params)
+      req.send_request(options)
+    end
+
+    # Returns the context stores in your account. You can optionally return
+    # only the context stores in a specific global network.
+    #
+    # @option params [String] :global_network_id
+    #   The ID of a global network. If you specify this parameter, only the
+    #   context stores in the global network are returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListContextStoresResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContextStoresResponse#context_stores #context_stores} => Array&lt;Types::ContextStore&gt;
+    #   * {Types::ListContextStoresResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_context_stores({
+    #     global_network_id: "GlobalNetworkId",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.context_stores #=> Array
+    #   resp.context_stores[0].global_network_id #=> String
+    #   resp.context_stores[0].context_store_id #=> String
+    #   resp.context_stores[0].context_store_arn #=> String
+    #   resp.context_stores[0].description #=> String
+    #   resp.context_stores[0].created_at #=> Time
+    #   resp.context_stores[0].state #=> String, one of "PENDING", "AVAILABLE", "UPDATING", "DELETING", "DELETED"
+    #   resp.context_stores[0].tags #=> Array
+    #   resp.context_stores[0].tags[0].key #=> String
+    #   resp.context_stores[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListContextStores AWS API Documentation
+    #
+    # @overload list_context_stores(params = {})
+    # @param [Hash] params ({})
+    def list_context_stores(params = {}, options = {})
+      req = build_request(:list_context_stores, params)
+      req.send_request(options)
+    end
+
+    # Returns the context entries of a context store, and the version of the
+    # context entries. To get the context entries that were added or removed
+    # after this version, specify the returned `VersionId` in a
+    # `ListContextChanges` request. The context store must be in the
+    # `AVAILABLE` state.
+    #
+    # @option params [required, String] :context_store_id
+    #   The ID of the context store.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListContextsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContextsResponse#contexts #contexts} => Array&lt;Types::ContextEntry&gt;
+    #   * {Types::ListContextsResponse#next_token #next_token} => String
+    #   * {Types::ListContextsResponse#version_id #version_id} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_contexts({
+    #     context_store_id: "ContextStoreId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contexts #=> Array
+    #   resp.contexts[0].context_id #=> String
+    #   resp.contexts[0].context_type #=> String
+    #   resp.contexts[0].segment_type #=> String
+    #   resp.contexts[0].public_id #=> String
+    #   resp.contexts[0].region #=> String
+    #   resp.contexts[0].availability_zone #=> String
+    #   resp.contexts[0].attachment_type #=> String
+    #   resp.next_token #=> String
+    #   resp.version_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListContexts AWS API Documentation
+    #
+    # @overload list_contexts(params = {})
+    # @param [Hash] params ({})
+    def list_contexts(params = {}, options = {})
+      req = build_request(:list_contexts, params)
+      req.send_request(options)
+    end
+
     # Returns a list of core network policy versions.
     #
     # @option params [required, String] :core_network_id
@@ -5987,6 +6482,50 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Updates the description of a context store. The context store must be
+    # in the `AVAILABLE` state.
+    #
+    # @option params [required, String] :context_store_id
+    #   The ID of the context store.
+    #
+    # @option params [String] :description
+    #   The new description of the context store.
+    #
+    #   Constraints: Maximum length of 256 characters. Only printable ASCII
+    #   characters are allowed.
+    #
+    # @return [Types::UpdateContextStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateContextStoreResponse#context_store #context_store} => Types::ContextStore
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_context_store({
+    #     context_store_id: "ContextStoreId", # required
+    #     description: "ConstrainedString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.context_store.global_network_id #=> String
+    #   resp.context_store.context_store_id #=> String
+    #   resp.context_store.context_store_arn #=> String
+    #   resp.context_store.description #=> String
+    #   resp.context_store.created_at #=> Time
+    #   resp.context_store.state #=> String, one of "PENDING", "AVAILABLE", "UPDATING", "DELETING", "DELETED"
+    #   resp.context_store.tags #=> Array
+    #   resp.context_store.tags[0].key #=> String
+    #   resp.context_store.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateContextStore AWS API Documentation
+    #
+    # @overload update_context_store(params = {})
+    # @param [Hash] params ({})
+    def update_context_store(params = {}, options = {})
+      req = build_request(:update_context_store, params)
+      req.send_request(options)
+    end
+
     # Updates the description of a core network.
     #
     # @option params [required, String] :core_network_id
@@ -6538,7 +7077,7 @@ module Aws::NetworkManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkmanager'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -8,13 +8,18 @@
 module Aws
   module LambdaCore
     module Params
-      type network_connector_configuration = {
-      vpc_egress_configuration: {
-        subnet_ids: Array[::String]?,
-        security_group_ids: Array[::String]?,
-        network_protocol: ("IPv4" | "DualStack")?,
-        associated_compute_resource_types: Array[("MicroVm" | "WebFunction")]?
+      type network_connector_vpc_egress_configuration = {
+      subnet_ids: Array[::String]?,
+      security_group_ids: Array[::String]?,
+      network_protocol: ("IPv4" | "DualStack")?,
+      associated_compute_resource_types: Array[("MicroVm" | "WebFunction")]?,
+      elastic_ip_configuration: {
+        type: ("None" | "ServiceManaged")
       }?
+    }
+
+      type network_connector_configuration = {
+      vpc_egress_configuration: Params::network_connector_vpc_egress_configuration?
     }
 
     end

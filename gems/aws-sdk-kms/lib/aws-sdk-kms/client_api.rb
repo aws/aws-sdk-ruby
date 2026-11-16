@@ -214,6 +214,8 @@ module Aws::KMS
     RegionType = Shapes::StringShape.new(name: 'RegionType')
     ReplicateKeyRequest = Shapes::StructureShape.new(name: 'ReplicateKeyRequest')
     ReplicateKeyResponse = Shapes::StructureShape.new(name: 'ReplicateKeyResponse')
+    ResourceOwnerType = Shapes::StringShape.new(name: 'ResourceOwnerType')
+    ResourceOwnersList = Shapes::ListShape.new(name: 'ResourceOwnersList')
     RetireGrantRequest = Shapes::StructureShape.new(name: 'RetireGrantRequest')
     RevokeGrantRequest = Shapes::StructureShape.new(name: 'RevokeGrantRequest')
     RotateKeyOnDemandRequest = Shapes::StructureShape.new(name: 'RotateKeyOnDemandRequest')
@@ -844,6 +846,7 @@ module Aws::KMS
 
     ListKeysRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitType, location_name: "Limit"))
     ListKeysRequest.add_member(:marker, Shapes::ShapeRef.new(shape: MarkerType, location_name: "Marker"))
+    ListKeysRequest.add_member(:resource_owners, Shapes::ShapeRef.new(shape: ResourceOwnersList, location_name: "ResourceOwners"))
     ListKeysRequest.struct_class = Types::ListKeysRequest
 
     ListKeysResponse.add_member(:keys, Shapes::ShapeRef.new(shape: KeyList, location_name: "Keys"))
@@ -931,6 +934,8 @@ module Aws::KMS
     ReplicateKeyResponse.add_member(:replica_policy, Shapes::ShapeRef.new(shape: PolicyType, location_name: "ReplicaPolicy"))
     ReplicateKeyResponse.add_member(:replica_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "ReplicaTags"))
     ReplicateKeyResponse.struct_class = Types::ReplicateKeyResponse
+
+    ResourceOwnersList.member = Shapes::ShapeRef.new(shape: ResourceOwnerType)
 
     RetireGrantRequest.add_member(:grant_token, Shapes::ShapeRef.new(shape: GrantTokenType, location_name: "GrantToken"))
     RetireGrantRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))

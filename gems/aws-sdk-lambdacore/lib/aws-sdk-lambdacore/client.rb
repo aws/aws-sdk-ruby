@@ -551,6 +551,9 @@ module Aws::LambdaCore
     #         security_group_ids: ["NetworkConnectorSecurityGroupId"],
     #         network_protocol: "IPv4", # accepts IPv4, DualStack
     #         associated_compute_resource_types: ["MicroVm"], # accepts MicroVm, WebFunction
+    #         elastic_ip_configuration: {
+    #           type: "None", # required, accepts None, ServiceManaged
+    #         },
     #       },
     #     },
     #     operator_role: "NetworkConnectorRoleArn",
@@ -574,6 +577,7 @@ module Aws::LambdaCore
     #   resp.configuration.vpc_egress_configuration.network_protocol #=> String, one of "IPv4", "DualStack"
     #   resp.configuration.vpc_egress_configuration.associated_compute_resource_types #=> Array
     #   resp.configuration.vpc_egress_configuration.associated_compute_resource_types[0] #=> String, one of "MicroVm", "WebFunction"
+    #   resp.configuration.vpc_egress_configuration.elastic_ip_configuration.type #=> String, one of "None", "ServiceManaged"
     #   resp.operator_role #=> String
     #   resp.state #=> String, one of "PENDING", "ACTIVE", "INACTIVE", "FAILED", "DELETING", "DELETE_FAILED"
     #
@@ -946,6 +950,7 @@ module Aws::LambdaCore
     #   resp.configuration.vpc_egress_configuration.network_protocol #=> String, one of "IPv4", "DualStack"
     #   resp.configuration.vpc_egress_configuration.associated_compute_resource_types #=> Array
     #   resp.configuration.vpc_egress_configuration.associated_compute_resource_types[0] #=> String, one of "MicroVm", "WebFunction"
+    #   resp.configuration.vpc_egress_configuration.elastic_ip_configuration.type #=> String, one of "None", "ServiceManaged"
     #   resp.operator_role #=> String
     #   resp.state #=> String, one of "PENDING", "ACTIVE", "INACTIVE", "FAILED", "DELETING", "DELETE_FAILED"
     #
@@ -1158,13 +1163,14 @@ module Aws::LambdaCore
     #   resp.configuration.vpc_egress_configuration.network_protocol #=> String, one of "IPv4", "DualStack"
     #   resp.configuration.vpc_egress_configuration.associated_compute_resource_types #=> Array
     #   resp.configuration.vpc_egress_configuration.associated_compute_resource_types[0] #=> String, one of "MicroVm", "WebFunction"
+    #   resp.configuration.vpc_egress_configuration.elastic_ip_configuration.type #=> String, one of "None", "ServiceManaged"
     #   resp.operator_role #=> String
     #   resp.state #=> String, one of "PENDING", "ACTIVE", "INACTIVE", "FAILED", "DELETING", "DELETE_FAILED"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "DisallowedByVpcEncryptionControl", "Ec2RequestLimitExceeded", "InsufficientRolePermissions", "InternalError", "InvalidSecurityGroup", "InvalidSubnet", "SecurityGroupsPerInterfaceLimitExceeded", "SubnetOutOfIPAddresses"
+    #   resp.state_reason_code #=> String, one of "DisallowedByVpcEncryptionControl", "Ec2RequestLimitExceeded", "InsufficientRolePermissions", "InternalError", "InternetGatewayNotAttached", "InvalidSecurityGroup", "InvalidSubnet", "SecurityGroupsPerInterfaceLimitExceeded", "SubnetOutOfIPAddresses"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "DisallowedByVpcEncryptionControl", "Ec2RequestLimitExceeded", "InsufficientRolePermissions", "InternalError", "InvalidSecurityGroup", "InvalidSubnet", "SecurityGroupsPerInterfaceLimitExceeded", "SubnetOutOfIPAddresses"
+    #   resp.last_update_status_reason_code #=> String, one of "DisallowedByVpcEncryptionControl", "Ec2RequestLimitExceeded", "InsufficientRolePermissions", "InternalError", "InternetGatewayNotAttached", "InvalidSecurityGroup", "InvalidSubnet", "SecurityGroupsPerInterfaceLimitExceeded", "SubnetOutOfIPAddresses"
     #   resp.last_modified #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-core-2026-04-30/GetNetworkConnector AWS API Documentation
@@ -1507,7 +1513,7 @@ module Aws::LambdaCore
     #   resp.network_connector_versions[0].version #=> Integer
     #   resp.network_connector_versions[0].state #=> String, one of "PENDING", "ACTIVE", "INACTIVE", "FAILED", "DELETING", "DELETE_FAILED"
     #   resp.network_connector_versions[0].state_reason #=> String
-    #   resp.network_connector_versions[0].state_reason_code #=> String, one of "DisallowedByVpcEncryptionControl", "Ec2RequestLimitExceeded", "InsufficientRolePermissions", "InternalError", "InvalidSecurityGroup", "InvalidSubnet", "SecurityGroupsPerInterfaceLimitExceeded", "SubnetOutOfIPAddresses"
+    #   resp.network_connector_versions[0].state_reason_code #=> String, one of "DisallowedByVpcEncryptionControl", "Ec2RequestLimitExceeded", "InsufficientRolePermissions", "InternalError", "InternetGatewayNotAttached", "InvalidSecurityGroup", "InvalidSubnet", "SecurityGroupsPerInterfaceLimitExceeded", "SubnetOutOfIPAddresses"
     #   resp.network_connector_versions[0].last_modified #=> Time
     #   resp.next_marker #=> String
     #
@@ -1981,6 +1987,9 @@ module Aws::LambdaCore
     #         security_group_ids: ["NetworkConnectorSecurityGroupId"],
     #         network_protocol: "IPv4", # accepts IPv4, DualStack
     #         associated_compute_resource_types: ["MicroVm"], # accepts MicroVm, WebFunction
+    #         elastic_ip_configuration: {
+    #           type: "None", # required, accepts None, ServiceManaged
+    #         },
     #       },
     #     },
     #     operator_role: "NetworkConnectorRoleArn",
@@ -2002,6 +2011,7 @@ module Aws::LambdaCore
     #   resp.configuration.vpc_egress_configuration.network_protocol #=> String, one of "IPv4", "DualStack"
     #   resp.configuration.vpc_egress_configuration.associated_compute_resource_types #=> Array
     #   resp.configuration.vpc_egress_configuration.associated_compute_resource_types[0] #=> String, one of "MicroVm", "WebFunction"
+    #   resp.configuration.vpc_egress_configuration.elastic_ip_configuration.type #=> String, one of "None", "ServiceManaged"
     #   resp.state #=> String, one of "PENDING", "ACTIVE", "INACTIVE", "FAILED", "DELETING", "DELETE_FAILED"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
@@ -2310,7 +2320,7 @@ module Aws::LambdaCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambdacore'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

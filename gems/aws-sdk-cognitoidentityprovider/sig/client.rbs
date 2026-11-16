@@ -811,7 +811,7 @@ module Aws
                                      },
                                      ?read_attributes: Array[::String],
                                      ?write_attributes: Array[::String],
-                                     ?explicit_auth_flows: Array[("ADMIN_NO_SRP_AUTH" | "CUSTOM_AUTH_FLOW_ONLY" | "USER_PASSWORD_AUTH" | "ALLOW_ADMIN_USER_PASSWORD_AUTH" | "ALLOW_CUSTOM_AUTH" | "ALLOW_USER_PASSWORD_AUTH" | "ALLOW_USER_SRP_AUTH" | "ALLOW_REFRESH_TOKEN_AUTH" | "ALLOW_USER_AUTH")],
+                                     ?explicit_auth_flows: Array[("ADMIN_NO_SRP_AUTH" | "CUSTOM_AUTH_FLOW_ONLY" | "USER_PASSWORD_AUTH" | "ALLOW_ADMIN_USER_PASSWORD_AUTH" | "ALLOW_CUSTOM_AUTH" | "ALLOW_USER_PASSWORD_AUTH" | "ALLOW_USER_SRP_AUTH" | "ALLOW_REFRESH_TOKEN_AUTH" | "ALLOW_USER_AUTH" | "ALLOW_TOKEN_EXCHANGE_DELEGATION" | "ALLOW_TOKEN_EXCHANGE_IMPERSONATION")],
                                      ?supported_identity_providers: Array[::String],
                                      ?callback_urls: Array[::String],
                                      ?logout_urls: Array[::String],
@@ -1151,6 +1151,31 @@ module Aws
                               ?client_metadata: Hash[::String, ::String]
                             ) -> _GetClientTokenResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetClientTokenResponseSuccess
+
+      interface _GetDerivedTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDerivedTokenResponse]
+        def issued_token: () -> ::String
+        def issued_token_type: () -> ("ACCESS_TOKEN" | "ID_TOKEN")
+        def token_type: () -> ("Bearer" | "N_A")
+        def expires_in: () -> ::Integer
+        def scopes: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoIdentityProvider/Client.html#get_derived_token-instance_method
+      def get_derived_token: (
+                               client_id: ::String,
+                               ?client_secret: ::String,
+                               subject_token: ::String,
+                               subject_token_type: ("ACCESS_TOKEN" | "ID_TOKEN" | "SAML2"),
+                               ?subject_token_provider_name: ::String,
+                               ?actor_token: ::String,
+                               ?actor_token_type: ("ACCESS_TOKEN" | "ID_TOKEN" | "SAML2"),
+                               ?actor_token_provider_name: ::String,
+                               ?scopes: Array[::String],
+                               ?audiences: Array[::String],
+                               ?resources: Array[::String],
+                               ?requested_token_type: ("ACCESS_TOKEN" | "ID_TOKEN")
+                             ) -> _GetDerivedTokenResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDerivedTokenResponseSuccess
 
       interface _GetDeviceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDeviceResponse]
@@ -2129,7 +2154,7 @@ module Aws
                                      },
                                      ?read_attributes: Array[::String],
                                      ?write_attributes: Array[::String],
-                                     ?explicit_auth_flows: Array[("ADMIN_NO_SRP_AUTH" | "CUSTOM_AUTH_FLOW_ONLY" | "USER_PASSWORD_AUTH" | "ALLOW_ADMIN_USER_PASSWORD_AUTH" | "ALLOW_CUSTOM_AUTH" | "ALLOW_USER_PASSWORD_AUTH" | "ALLOW_USER_SRP_AUTH" | "ALLOW_REFRESH_TOKEN_AUTH" | "ALLOW_USER_AUTH")],
+                                     ?explicit_auth_flows: Array[("ADMIN_NO_SRP_AUTH" | "CUSTOM_AUTH_FLOW_ONLY" | "USER_PASSWORD_AUTH" | "ALLOW_ADMIN_USER_PASSWORD_AUTH" | "ALLOW_CUSTOM_AUTH" | "ALLOW_USER_PASSWORD_AUTH" | "ALLOW_USER_SRP_AUTH" | "ALLOW_REFRESH_TOKEN_AUTH" | "ALLOW_USER_AUTH" | "ALLOW_TOKEN_EXCHANGE_DELEGATION" | "ALLOW_TOKEN_EXCHANGE_IMPERSONATION")],
                                      ?supported_identity_providers: Array[::String],
                                      ?callback_urls: Array[::String],
                                      ?logout_urls: Array[::String],

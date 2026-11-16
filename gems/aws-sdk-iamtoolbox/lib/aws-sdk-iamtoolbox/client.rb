@@ -490,6 +490,9 @@ module Aws::IAMToolbox
     # services include an authorization ID in the access denied error
     # message. Pass that ID to this operation to retrieve the details.
     #
+    # To retrieve the content for a policy in the `policies` list, call
+    # `GetRequestAuthorizationPolicy`.
+    #
     # Authorization details are available for at least 24 hours after the
     # denial.
     #
@@ -516,7 +519,7 @@ module Aws::IAMToolbox
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_request_authorization_details({
-    #     authorization_id: "GetRequestAuthorizationDetailsInputAuthorizationIdString", # required
+    #     authorization_id: "AuthorizationId", # required
     #     next_token: "String",
     #   })
     #
@@ -533,12 +536,25 @@ module Aws::IAMToolbox
     #   resp.evaluations[0].matched_policies[0].matched_statements #=> Array
     #   resp.evaluations[0].matched_policies[0].matched_statements[0].sid #=> String
     #   resp.evaluations[0].matched_policies[0].matched_statements[0].evaluated_effect #=> String, one of "ALLOW", "DENY"
+    #   resp.evaluations[0].checks #=> Array
+    #   resp.evaluations[0].checks[0].check_type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "VPC_ENDPOINT", "RESOURCE", "PRINCIPAL", "PERMISSIONS_BOUNDARY", "SESSION"
+    #   resp.evaluations[0].checks[0].evaluated_effect #=> String, one of "ALLOW", "NO_IMPACT", "IMPLICIT_DENY", "EXPLICIT_DENY"
+    #   resp.evaluations[0].checks[0].target_arn #=> String
+    #   resp.evaluations[0].checks[0].relevant_policy_types #=> Array
+    #   resp.evaluations[0].checks[0].relevant_policy_types[0] #=> String, one of "IDENTITY_BASED_POLICY", "RESOURCE_BASED_POLICY", "PERMISSIONS_BOUNDARY", "SESSION_POLICY", "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "VPC_ENDPOINT_POLICY"
+    #   resp.evaluations[0].checks[0].matched_policies #=> Array
+    #   resp.evaluations[0].checks[0].matched_policies[0].uri #=> String
+    #   resp.evaluations[0].checks[0].matched_policies[0].matched_statements #=> Array
+    #   resp.evaluations[0].checks[0].matched_policies[0].matched_statements[0].sid #=> String
+    #   resp.evaluations[0].checks[0].matched_policies[0].matched_statements[0].evaluated_effect #=> String, one of "ALLOW", "DENY"
     #   resp.policies #=> Array
     #   resp.policies[0].type #=> String, one of "IDENTITY_BASED_POLICY", "RESOURCE_BASED_POLICY", "PERMISSIONS_BOUNDARY", "SESSION_POLICY", "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "VPC_ENDPOINT_POLICY"
     #   resp.policies[0].inline #=> Boolean
     #   resp.policies[0].uri #=> String
     #   resp.policies[0].attached_to #=> Array
     #   resp.policies[0].attached_to[0].arn #=> String
+    #   resp.policies[0].policy_source #=> Hash
+    #   resp.policies[0].policy_source["String"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-toolbox-2018-05-10/GetRequestAuthorizationDetails AWS API Documentation
@@ -547,6 +563,60 @@ module Aws::IAMToolbox
     # @param [Hash] params ({})
     def get_request_authorization_details(params = {}, options = {})
       req = build_request(:get_request_authorization_details, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a policy that was evaluated for a specific access denied
+    # request. The operation returns the structured JSON document of the
+    # policy that was captured with the original authorization request. It
+    # doesn't retrieve the current version of the policy.
+    #
+    # For some AWS services and policy types, the returned policy document
+    # includes all actions relevant to the service that processed the denied
+    # request, but might omit actions for other services.
+    #
+    # Specify the authorization ID from the access denied error message and
+    # the policy URI returned by `GetRequestAuthorizationDetails` for the
+    # same authorization ID.
+    #
+    # Access depends on the account and organization recorded for the
+    # principal that made the denied request. If an organization was
+    # recorded, the calling principal must belong to that organization.
+    # Otherwise, the calling principal must belong to the recorded account.
+    #
+    # To use this operation, you must have the
+    # `iam:GetRequestAuthorizationPolicy` permission.
+    #
+    # @option params [required, String] :authorization_id
+    #   The authorization ID received in the access denied error message. This
+    #   ID identifies the request whose evaluated policy you want to retrieve.
+    #
+    # @option params [required, String] :policy_uri
+    #   The URI of the policy to retrieve. Use the `uri` value from the
+    #   `policies` list returned by `GetRequestAuthorizationDetails` for the
+    #   same authorization ID.
+    #
+    # @return [Types::GetRequestAuthorizationPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRequestAuthorizationPolicyOutput#policy_document #policy_document} => Hash,Array,String,Numeric,Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_request_authorization_policy({
+    #     authorization_id: "AuthorizationId", # required
+    #     policy_uri: "PolicyUri", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-toolbox-2018-05-10/GetRequestAuthorizationPolicy AWS API Documentation
+    #
+    # @overload get_request_authorization_policy(params = {})
+    # @param [Hash] params ({})
+    def get_request_authorization_policy(params = {}, options = {})
+      req = build_request(:get_request_authorization_policy, params)
       req.send_request(options)
     end
 
@@ -568,7 +638,7 @@ module Aws::IAMToolbox
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iamtoolbox'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

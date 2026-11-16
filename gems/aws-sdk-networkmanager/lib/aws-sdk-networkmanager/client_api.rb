@@ -25,6 +25,8 @@ module Aws::NetworkManager
     Action = Shapes::StringShape.new(name: 'Action')
     AssociateConnectPeerRequest = Shapes::StructureShape.new(name: 'AssociateConnectPeerRequest')
     AssociateConnectPeerResponse = Shapes::StructureShape.new(name: 'AssociateConnectPeerResponse')
+    AssociateContextStoreRequest = Shapes::StructureShape.new(name: 'AssociateContextStoreRequest')
+    AssociateContextStoreResponse = Shapes::StructureShape.new(name: 'AssociateContextStoreResponse')
     AssociateCustomerGatewayRequest = Shapes::StructureShape.new(name: 'AssociateCustomerGatewayRequest')
     AssociateCustomerGatewayResponse = Shapes::StructureShape.new(name: 'AssociateCustomerGatewayResponse')
     AssociateLinkRequest = Shapes::StructureShape.new(name: 'AssociateLinkRequest')
@@ -81,6 +83,19 @@ module Aws::NetworkManager
     ConnectionType = Shapes::StringShape.new(name: 'ConnectionType')
     ConstrainedString = Shapes::StringShape.new(name: 'ConstrainedString')
     ConstrainedStringList = Shapes::ListShape.new(name: 'ConstrainedStringList')
+    ContextChange = Shapes::StructureShape.new(name: 'ContextChange')
+    ContextChangeList = Shapes::ListShape.new(name: 'ContextChangeList')
+    ContextChangeType = Shapes::StringShape.new(name: 'ContextChangeType')
+    ContextEntry = Shapes::StructureShape.new(name: 'ContextEntry')
+    ContextList = Shapes::ListShape.new(name: 'ContextList')
+    ContextStore = Shapes::StructureShape.new(name: 'ContextStore')
+    ContextStoreArn = Shapes::StringShape.new(name: 'ContextStoreArn')
+    ContextStoreAssociation = Shapes::StructureShape.new(name: 'ContextStoreAssociation')
+    ContextStoreAssociationList = Shapes::ListShape.new(name: 'ContextStoreAssociationList')
+    ContextStoreAssociationState = Shapes::StringShape.new(name: 'ContextStoreAssociationState')
+    ContextStoreId = Shapes::StringShape.new(name: 'ContextStoreId')
+    ContextStoreList = Shapes::ListShape.new(name: 'ContextStoreList')
+    ContextStoreState = Shapes::StringShape.new(name: 'ContextStoreState')
     CoreNetwork = Shapes::StructureShape.new(name: 'CoreNetwork')
     CoreNetworkArn = Shapes::StringShape.new(name: 'CoreNetworkArn')
     CoreNetworkChange = Shapes::StructureShape.new(name: 'CoreNetworkChange')
@@ -117,6 +132,8 @@ module Aws::NetworkManager
     CreateConnectPeerResponse = Shapes::StructureShape.new(name: 'CreateConnectPeerResponse')
     CreateConnectionRequest = Shapes::StructureShape.new(name: 'CreateConnectionRequest')
     CreateConnectionResponse = Shapes::StructureShape.new(name: 'CreateConnectionResponse')
+    CreateContextStoreRequest = Shapes::StructureShape.new(name: 'CreateContextStoreRequest')
+    CreateContextStoreResponse = Shapes::StructureShape.new(name: 'CreateContextStoreResponse')
     CreateCoreNetworkPrefixListAssociationRequest = Shapes::StructureShape.new(name: 'CreateCoreNetworkPrefixListAssociationRequest')
     CreateCoreNetworkPrefixListAssociationResponse = Shapes::StructureShape.new(name: 'CreateCoreNetworkPrefixListAssociationResponse')
     CreateCoreNetworkRequest = Shapes::StructureShape.new(name: 'CreateCoreNetworkRequest')
@@ -151,6 +168,8 @@ module Aws::NetworkManager
     DeleteConnectPeerResponse = Shapes::StructureShape.new(name: 'DeleteConnectPeerResponse')
     DeleteConnectionRequest = Shapes::StructureShape.new(name: 'DeleteConnectionRequest')
     DeleteConnectionResponse = Shapes::StructureShape.new(name: 'DeleteConnectionResponse')
+    DeleteContextStoreRequest = Shapes::StructureShape.new(name: 'DeleteContextStoreRequest')
+    DeleteContextStoreResponse = Shapes::StructureShape.new(name: 'DeleteContextStoreResponse')
     DeleteCoreNetworkPolicyVersionRequest = Shapes::StructureShape.new(name: 'DeleteCoreNetworkPolicyVersionRequest')
     DeleteCoreNetworkPolicyVersionResponse = Shapes::StructureShape.new(name: 'DeleteCoreNetworkPolicyVersionResponse')
     DeleteCoreNetworkPrefixListAssociationRequest = Shapes::StructureShape.new(name: 'DeleteCoreNetworkPrefixListAssociationRequest')
@@ -183,6 +202,8 @@ module Aws::NetworkManager
     DirectConnectGatewayAttachment = Shapes::StructureShape.new(name: 'DirectConnectGatewayAttachment')
     DisassociateConnectPeerRequest = Shapes::StructureShape.new(name: 'DisassociateConnectPeerRequest')
     DisassociateConnectPeerResponse = Shapes::StructureShape.new(name: 'DisassociateConnectPeerResponse')
+    DisassociateContextStoreRequest = Shapes::StructureShape.new(name: 'DisassociateContextStoreRequest')
+    DisassociateContextStoreResponse = Shapes::StructureShape.new(name: 'DisassociateContextStoreResponse')
     DisassociateCustomerGatewayRequest = Shapes::StructureShape.new(name: 'DisassociateCustomerGatewayRequest')
     DisassociateCustomerGatewayResponse = Shapes::StructureShape.new(name: 'DisassociateCustomerGatewayResponse')
     DisassociateLinkRequest = Shapes::StructureShape.new(name: 'DisassociateLinkRequest')
@@ -211,6 +232,12 @@ module Aws::NetworkManager
     GetConnectPeerResponse = Shapes::StructureShape.new(name: 'GetConnectPeerResponse')
     GetConnectionsRequest = Shapes::StructureShape.new(name: 'GetConnectionsRequest')
     GetConnectionsResponse = Shapes::StructureShape.new(name: 'GetConnectionsResponse')
+    GetContextStoreAssociationRequest = Shapes::StructureShape.new(name: 'GetContextStoreAssociationRequest')
+    GetContextStoreAssociationResponse = Shapes::StructureShape.new(name: 'GetContextStoreAssociationResponse')
+    GetContextStoreRequest = Shapes::StructureShape.new(name: 'GetContextStoreRequest')
+    GetContextStoreResponse = Shapes::StructureShape.new(name: 'GetContextStoreResponse')
+    GetContextVersionRequest = Shapes::StructureShape.new(name: 'GetContextVersionRequest')
+    GetContextVersionResponse = Shapes::StructureShape.new(name: 'GetContextVersionResponse')
     GetCoreNetworkChangeEventsRequest = Shapes::StructureShape.new(name: 'GetCoreNetworkChangeEventsRequest')
     GetCoreNetworkChangeEventsResponse = Shapes::StructureShape.new(name: 'GetCoreNetworkChangeEventsResponse')
     GetCoreNetworkChangeSetRequest = Shapes::StructureShape.new(name: 'GetCoreNetworkChangeSetRequest')
@@ -283,6 +310,14 @@ module Aws::NetworkManager
     ListAttachmentsResponse = Shapes::StructureShape.new(name: 'ListAttachmentsResponse')
     ListConnectPeersRequest = Shapes::StructureShape.new(name: 'ListConnectPeersRequest')
     ListConnectPeersResponse = Shapes::StructureShape.new(name: 'ListConnectPeersResponse')
+    ListContextChangesRequest = Shapes::StructureShape.new(name: 'ListContextChangesRequest')
+    ListContextChangesResponse = Shapes::StructureShape.new(name: 'ListContextChangesResponse')
+    ListContextStoreAssociationsRequest = Shapes::StructureShape.new(name: 'ListContextStoreAssociationsRequest')
+    ListContextStoreAssociationsResponse = Shapes::StructureShape.new(name: 'ListContextStoreAssociationsResponse')
+    ListContextStoresRequest = Shapes::StructureShape.new(name: 'ListContextStoresRequest')
+    ListContextStoresResponse = Shapes::StructureShape.new(name: 'ListContextStoresResponse')
+    ListContextsRequest = Shapes::StructureShape.new(name: 'ListContextsRequest')
+    ListContextsResponse = Shapes::StructureShape.new(name: 'ListContextsResponse')
     ListCoreNetworkPolicyVersionsRequest = Shapes::StructureShape.new(name: 'ListCoreNetworkPolicyVersionsRequest')
     ListCoreNetworkPolicyVersionsResponse = Shapes::StructureShape.new(name: 'ListCoreNetworkPolicyVersionsResponse')
     ListCoreNetworkPrefixListAssociationsRequest = Shapes::StructureShape.new(name: 'ListCoreNetworkPrefixListAssociationsRequest')
@@ -437,6 +472,8 @@ module Aws::NetworkManager
     UpdateAttachmentNatConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateAttachmentNatConfigurationResponse')
     UpdateConnectionRequest = Shapes::StructureShape.new(name: 'UpdateConnectionRequest')
     UpdateConnectionResponse = Shapes::StructureShape.new(name: 'UpdateConnectionResponse')
+    UpdateContextStoreRequest = Shapes::StructureShape.new(name: 'UpdateContextStoreRequest')
+    UpdateContextStoreResponse = Shapes::StructureShape.new(name: 'UpdateContextStoreResponse')
     UpdateCoreNetworkRequest = Shapes::StructureShape.new(name: 'UpdateCoreNetworkRequest')
     UpdateCoreNetworkResponse = Shapes::StructureShape.new(name: 'UpdateCoreNetworkResponse')
     UpdateDeviceRequest = Shapes::StructureShape.new(name: 'UpdateDeviceRequest')
@@ -493,6 +530,13 @@ module Aws::NetworkManager
 
     AssociateConnectPeerResponse.add_member(:connect_peer_association, Shapes::ShapeRef.new(shape: ConnectPeerAssociation, location_name: "ConnectPeerAssociation"))
     AssociateConnectPeerResponse.struct_class = Types::AssociateConnectPeerResponse
+
+    AssociateContextStoreRequest.add_member(:context_store_id, Shapes::ShapeRef.new(shape: ContextStoreId, required: true, location: "uri", location_name: "contextStoreId"))
+    AssociateContextStoreRequest.add_member(:transit_gateway_arn, Shapes::ShapeRef.new(shape: TransitGatewayArn, location_name: "TransitGatewayArn"))
+    AssociateContextStoreRequest.struct_class = Types::AssociateContextStoreRequest
+
+    AssociateContextStoreResponse.add_member(:context_store_association, Shapes::ShapeRef.new(shape: ContextStoreAssociation, location_name: "ContextStoreAssociation"))
+    AssociateContextStoreResponse.struct_class = Types::AssociateContextStoreResponse
 
     AssociateCustomerGatewayRequest.add_member(:customer_gateway_arn, Shapes::ShapeRef.new(shape: CustomerGatewayArn, required: true, location_name: "CustomerGatewayArn"))
     AssociateCustomerGatewayRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: GlobalNetworkId, required: true, location: "uri", location_name: "globalNetworkId"))
@@ -669,6 +713,42 @@ module Aws::NetworkManager
     ConnectionList.member = Shapes::ShapeRef.new(shape: Connection)
 
     ConstrainedStringList.member = Shapes::ShapeRef.new(shape: ConstrainedString)
+
+    ContextChange.add_member(:change_type, Shapes::ShapeRef.new(shape: ContextChangeType, location_name: "ChangeType"))
+    ContextChange.add_member(:context, Shapes::ShapeRef.new(shape: ContextEntry, location_name: "Context"))
+    ContextChange.struct_class = Types::ContextChange
+
+    ContextChangeList.member = Shapes::ShapeRef.new(shape: ContextChange)
+
+    ContextEntry.add_member(:context_id, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "ContextId"))
+    ContextEntry.add_member(:context_type, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "ContextType"))
+    ContextEntry.add_member(:segment_type, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "SegmentType"))
+    ContextEntry.add_member(:public_id, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "PublicId"))
+    ContextEntry.add_member(:region, Shapes::ShapeRef.new(shape: ExternalRegionCode, location_name: "Region"))
+    ContextEntry.add_member(:availability_zone, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "AvailabilityZone"))
+    ContextEntry.add_member(:attachment_type, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "AttachmentType"))
+    ContextEntry.struct_class = Types::ContextEntry
+
+    ContextList.member = Shapes::ShapeRef.new(shape: ContextEntry)
+
+    ContextStore.add_member(:global_network_id, Shapes::ShapeRef.new(shape: GlobalNetworkId, location_name: "GlobalNetworkId"))
+    ContextStore.add_member(:context_store_id, Shapes::ShapeRef.new(shape: ContextStoreId, location_name: "ContextStoreId"))
+    ContextStore.add_member(:context_store_arn, Shapes::ShapeRef.new(shape: ContextStoreArn, location_name: "ContextStoreArn"))
+    ContextStore.add_member(:description, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "Description"))
+    ContextStore.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedAt"))
+    ContextStore.add_member(:state, Shapes::ShapeRef.new(shape: ContextStoreState, location_name: "State"))
+    ContextStore.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ContextStore.struct_class = Types::ContextStore
+
+    ContextStoreAssociation.add_member(:context_store_id, Shapes::ShapeRef.new(shape: ContextStoreId, location_name: "ContextStoreId"))
+    ContextStoreAssociation.add_member(:transit_gateway_arn, Shapes::ShapeRef.new(shape: TransitGatewayArn, location_name: "TransitGatewayArn"))
+    ContextStoreAssociation.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedAt"))
+    ContextStoreAssociation.add_member(:state, Shapes::ShapeRef.new(shape: ContextStoreAssociationState, location_name: "State"))
+    ContextStoreAssociation.struct_class = Types::ContextStoreAssociation
+
+    ContextStoreAssociationList.member = Shapes::ShapeRef.new(shape: ContextStoreAssociation)
+
+    ContextStoreList.member = Shapes::ShapeRef.new(shape: ContextStore)
 
     CoreNetwork.add_member(:global_network_id, Shapes::ShapeRef.new(shape: GlobalNetworkId, location_name: "GlobalNetworkId"))
     CoreNetwork.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, location_name: "CoreNetworkId"))
@@ -853,6 +933,15 @@ module Aws::NetworkManager
     CreateConnectionResponse.add_member(:connection, Shapes::ShapeRef.new(shape: Connection, location_name: "Connection"))
     CreateConnectionResponse.struct_class = Types::CreateConnectionResponse
 
+    CreateContextStoreRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: GlobalNetworkId, required: true, location: "uri", location_name: "globalNetworkId"))
+    CreateContextStoreRequest.add_member(:description, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "Description"))
+    CreateContextStoreRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateContextStoreRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateContextStoreRequest.struct_class = Types::CreateContextStoreRequest
+
+    CreateContextStoreResponse.add_member(:context_store, Shapes::ShapeRef.new(shape: ContextStore, location_name: "ContextStore"))
+    CreateContextStoreResponse.struct_class = Types::CreateContextStoreResponse
+
     CreateCoreNetworkPrefixListAssociationRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location_name: "CoreNetworkId"))
     CreateCoreNetworkPrefixListAssociationRequest.add_member(:prefix_list_arn, Shapes::ShapeRef.new(shape: PrefixListArn, required: true, location_name: "PrefixListArn"))
     CreateCoreNetworkPrefixListAssociationRequest.add_member(:prefix_list_alias, Shapes::ShapeRef.new(shape: ConstrainedString, required: true, location_name: "PrefixListAlias"))
@@ -1007,6 +1096,12 @@ module Aws::NetworkManager
     DeleteConnectionResponse.add_member(:connection, Shapes::ShapeRef.new(shape: Connection, location_name: "Connection"))
     DeleteConnectionResponse.struct_class = Types::DeleteConnectionResponse
 
+    DeleteContextStoreRequest.add_member(:context_store_id, Shapes::ShapeRef.new(shape: ContextStoreId, required: true, location: "uri", location_name: "contextStoreId"))
+    DeleteContextStoreRequest.struct_class = Types::DeleteContextStoreRequest
+
+    DeleteContextStoreResponse.add_member(:context_store, Shapes::ShapeRef.new(shape: ContextStore, location_name: "ContextStore"))
+    DeleteContextStoreResponse.struct_class = Types::DeleteContextStoreResponse
+
     DeleteCoreNetworkPolicyVersionRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location: "uri", location_name: "coreNetworkId"))
     DeleteCoreNetworkPolicyVersionRequest.add_member(:policy_version_id, Shapes::ShapeRef.new(shape: Integer, required: true, location: "uri", location_name: "policyVersionId"))
     DeleteCoreNetworkPolicyVersionRequest.struct_class = Types::DeleteCoreNetworkPolicyVersionRequest
@@ -1113,6 +1208,13 @@ module Aws::NetworkManager
     DisassociateConnectPeerResponse.add_member(:connect_peer_association, Shapes::ShapeRef.new(shape: ConnectPeerAssociation, location_name: "ConnectPeerAssociation"))
     DisassociateConnectPeerResponse.struct_class = Types::DisassociateConnectPeerResponse
 
+    DisassociateContextStoreRequest.add_member(:context_store_id, Shapes::ShapeRef.new(shape: ContextStoreId, required: true, location: "uri", location_name: "contextStoreId"))
+    DisassociateContextStoreRequest.add_member(:transit_gateway_arn, Shapes::ShapeRef.new(shape: TransitGatewayArn, required: true, location: "uri", location_name: "transitGatewayArn"))
+    DisassociateContextStoreRequest.struct_class = Types::DisassociateContextStoreRequest
+
+    DisassociateContextStoreResponse.add_member(:context_store_association, Shapes::ShapeRef.new(shape: ContextStoreAssociation, location_name: "ContextStoreAssociation"))
+    DisassociateContextStoreResponse.struct_class = Types::DisassociateContextStoreResponse
+
     DisassociateCustomerGatewayRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: GlobalNetworkId, required: true, location: "uri", location_name: "globalNetworkId"))
     DisassociateCustomerGatewayRequest.add_member(:customer_gateway_arn, Shapes::ShapeRef.new(shape: CustomerGatewayArn, required: true, location: "uri", location_name: "customerGatewayArn"))
     DisassociateCustomerGatewayRequest.struct_class = Types::DisassociateCustomerGatewayRequest
@@ -1191,6 +1293,25 @@ module Aws::NetworkManager
     GetConnectionsResponse.add_member(:connections, Shapes::ShapeRef.new(shape: ConnectionList, location_name: "Connections"))
     GetConnectionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetConnectionsResponse.struct_class = Types::GetConnectionsResponse
+
+    GetContextStoreAssociationRequest.add_member(:context_store_id, Shapes::ShapeRef.new(shape: ContextStoreId, required: true, location: "uri", location_name: "contextStoreId"))
+    GetContextStoreAssociationRequest.add_member(:transit_gateway_arn, Shapes::ShapeRef.new(shape: TransitGatewayArn, required: true, location: "uri", location_name: "transitGatewayArn"))
+    GetContextStoreAssociationRequest.struct_class = Types::GetContextStoreAssociationRequest
+
+    GetContextStoreAssociationResponse.add_member(:context_store_association, Shapes::ShapeRef.new(shape: ContextStoreAssociation, location_name: "ContextStoreAssociation"))
+    GetContextStoreAssociationResponse.struct_class = Types::GetContextStoreAssociationResponse
+
+    GetContextStoreRequest.add_member(:context_store_id, Shapes::ShapeRef.new(shape: ContextStoreId, required: true, location: "uri", location_name: "contextStoreId"))
+    GetContextStoreRequest.struct_class = Types::GetContextStoreRequest
+
+    GetContextStoreResponse.add_member(:context_store, Shapes::ShapeRef.new(shape: ContextStore, location_name: "ContextStore"))
+    GetContextStoreResponse.struct_class = Types::GetContextStoreResponse
+
+    GetContextVersionRequest.add_member(:context_store_id, Shapes::ShapeRef.new(shape: ContextStoreId, required: true, location: "uri", location_name: "contextStoreId"))
+    GetContextVersionRequest.struct_class = Types::GetContextVersionRequest
+
+    GetContextVersionResponse.add_member(:version_id, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "VersionId"))
+    GetContextVersionResponse.struct_class = Types::GetContextVersionResponse
 
     GetCoreNetworkChangeEventsRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location: "uri", location_name: "coreNetworkId"))
     GetCoreNetworkChangeEventsRequest.add_member(:policy_version_id, Shapes::ShapeRef.new(shape: Integer, required: true, location: "uri", location_name: "policyVersionId"))
@@ -1505,6 +1626,46 @@ module Aws::NetworkManager
     ListConnectPeersResponse.add_member(:connect_peers, Shapes::ShapeRef.new(shape: ConnectPeerSummaryList, location_name: "ConnectPeers"))
     ListConnectPeersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListConnectPeersResponse.struct_class = Types::ListConnectPeersResponse
+
+    ListContextChangesRequest.add_member(:context_store_id, Shapes::ShapeRef.new(shape: ContextStoreId, required: true, location: "uri", location_name: "contextStoreId"))
+    ListContextChangesRequest.add_member(:from_version_id, Shapes::ShapeRef.new(shape: ConstrainedString, required: true, location: "querystring", location_name: "fromVersionId"))
+    ListContextChangesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListContextChangesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListContextChangesRequest.struct_class = Types::ListContextChangesRequest
+
+    ListContextChangesResponse.add_member(:context_changes, Shapes::ShapeRef.new(shape: ContextChangeList, location_name: "ContextChanges"))
+    ListContextChangesResponse.add_member(:from_version_id, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "FromVersionId"))
+    ListContextChangesResponse.add_member(:to_version_id, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "ToVersionId"))
+    ListContextChangesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListContextChangesResponse.struct_class = Types::ListContextChangesResponse
+
+    ListContextStoreAssociationsRequest.add_member(:context_store_id, Shapes::ShapeRef.new(shape: ContextStoreId, required: true, location: "uri", location_name: "contextStoreId"))
+    ListContextStoreAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListContextStoreAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListContextStoreAssociationsRequest.struct_class = Types::ListContextStoreAssociationsRequest
+
+    ListContextStoreAssociationsResponse.add_member(:context_store_associations, Shapes::ShapeRef.new(shape: ContextStoreAssociationList, location_name: "ContextStoreAssociations"))
+    ListContextStoreAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListContextStoreAssociationsResponse.struct_class = Types::ListContextStoreAssociationsResponse
+
+    ListContextStoresRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: GlobalNetworkId, location: "querystring", location_name: "globalNetworkId"))
+    ListContextStoresRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListContextStoresRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListContextStoresRequest.struct_class = Types::ListContextStoresRequest
+
+    ListContextStoresResponse.add_member(:context_stores, Shapes::ShapeRef.new(shape: ContextStoreList, location_name: "ContextStores"))
+    ListContextStoresResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListContextStoresResponse.struct_class = Types::ListContextStoresResponse
+
+    ListContextsRequest.add_member(:context_store_id, Shapes::ShapeRef.new(shape: ContextStoreId, required: true, location: "uri", location_name: "contextStoreId"))
+    ListContextsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListContextsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListContextsRequest.struct_class = Types::ListContextsRequest
+
+    ListContextsResponse.add_member(:contexts, Shapes::ShapeRef.new(shape: ContextList, location_name: "Contexts"))
+    ListContextsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListContextsResponse.add_member(:version_id, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "VersionId"))
+    ListContextsResponse.struct_class = Types::ListContextsResponse
 
     ListCoreNetworkPolicyVersionsRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location: "uri", location_name: "coreNetworkId"))
     ListCoreNetworkPolicyVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -1987,6 +2148,13 @@ module Aws::NetworkManager
     UpdateConnectionResponse.add_member(:connection, Shapes::ShapeRef.new(shape: Connection, location_name: "Connection"))
     UpdateConnectionResponse.struct_class = Types::UpdateConnectionResponse
 
+    UpdateContextStoreRequest.add_member(:context_store_id, Shapes::ShapeRef.new(shape: ContextStoreId, required: true, location: "uri", location_name: "contextStoreId"))
+    UpdateContextStoreRequest.add_member(:description, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "Description"))
+    UpdateContextStoreRequest.struct_class = Types::UpdateContextStoreRequest
+
+    UpdateContextStoreResponse.add_member(:context_store, Shapes::ShapeRef.new(shape: ContextStore, location_name: "ContextStore"))
+    UpdateContextStoreResponse.struct_class = Types::UpdateContextStoreResponse
+
     UpdateCoreNetworkRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location: "uri", location_name: "coreNetworkId"))
     UpdateCoreNetworkRequest.add_member(:description, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "Description"))
     UpdateCoreNetworkRequest.struct_class = Types::UpdateCoreNetworkRequest
@@ -2144,6 +2312,20 @@ module Aws::NetworkManager
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:associate_context_store, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateContextStore"
+        o.http_method = "POST"
+        o.http_request_uri = "/context-stores/{contextStoreId}/associations"
+        o.input = Shapes::ShapeRef.new(shape: AssociateContextStoreRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateContextStoreResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:associate_customer_gateway, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateCustomerGateway"
         o.http_method = "POST"
@@ -2227,6 +2409,21 @@ module Aws::NetworkManager
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_context_store, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateContextStore"
+        o.http_method = "POST"
+        o.http_request_uri = "/global-networks/{globalNetworkId}/context-stores"
+        o.input = Shapes::ShapeRef.new(shape: CreateContextStoreRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateContextStoreResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
@@ -2432,6 +2629,20 @@ module Aws::NetworkManager
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_context_store, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteContextStore"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/context-stores/{contextStoreId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteContextStoreRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteContextStoreResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_core_network, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteCoreNetwork"
         o.http_method = "DELETE"
@@ -2605,6 +2816,20 @@ module Aws::NetworkManager
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:disassociate_context_store, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateContextStore"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/context-stores/{contextStoreId}/associations/{transitGatewayArn}"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateContextStoreRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateContextStoreResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:disassociate_customer_gateway, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateCustomerGateway"
         o.http_method = "DELETE"
@@ -2724,6 +2949,45 @@ module Aws::NetworkManager
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_context_store, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetContextStore"
+        o.http_method = "GET"
+        o.http_request_uri = "/context-stores/{contextStoreId}"
+        o.input = Shapes::ShapeRef.new(shape: GetContextStoreRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetContextStoreResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_context_store_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetContextStoreAssociation"
+        o.http_method = "GET"
+        o.http_request_uri = "/context-stores/{contextStoreId}/associations/{transitGatewayArn}"
+        o.input = Shapes::ShapeRef.new(shape: GetContextStoreAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetContextStoreAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_context_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetContextVersion"
+        o.http_method = "GET"
+        o.http_request_uri = "/context-stores/{contextStoreId}/context-version"
+        o.input = Shapes::ShapeRef.new(shape: GetContextVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetContextVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:get_core_network, Seahorse::Model::Operation.new.tap do |o|
@@ -3183,6 +3447,82 @@ module Aws::NetworkManager
         )
       end)
 
+      api.add_operation(:list_context_changes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListContextChanges"
+        o.http_method = "GET"
+        o.http_request_uri = "/context-stores/{contextStoreId}/context-changes"
+        o.input = Shapes::ShapeRef.new(shape: ListContextChangesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListContextChangesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_context_store_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListContextStoreAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/context-stores/{contextStoreId}/associations"
+        o.input = Shapes::ShapeRef.new(shape: ListContextStoreAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListContextStoreAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_context_stores, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListContextStores"
+        o.http_method = "GET"
+        o.http_request_uri = "/context-stores"
+        o.input = Shapes::ShapeRef.new(shape: ListContextStoresRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListContextStoresResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_contexts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListContexts"
+        o.http_method = "GET"
+        o.http_request_uri = "/context-stores/{contextStoreId}/contexts"
+        o.input = Shapes::ShapeRef.new(shape: ListContextsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListContextsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_core_network_policy_versions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListCoreNetworkPolicyVersions"
         o.http_method = "GET"
@@ -3476,6 +3816,20 @@ module Aws::NetworkManager
         o.http_request_uri = "/global-networks/{globalNetworkId}/connections/{connectionId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateConnectionRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateConnectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_context_store, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateContextStore"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/context-stores/{contextStoreId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateContextStoreRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateContextStoreResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

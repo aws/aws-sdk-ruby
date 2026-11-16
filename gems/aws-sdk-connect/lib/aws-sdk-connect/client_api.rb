@@ -567,6 +567,8 @@ module Aws::Connect
     DefaultVocabulary = Shapes::StructureShape.new(name: 'DefaultVocabulary')
     DefaultVocabularyList = Shapes::ListShape.new(name: 'DefaultVocabularyList')
     Delay = Shapes::IntegerShape.new(name: 'Delay')
+    DeleteAllEntitySessionsRequest = Shapes::StructureShape.new(name: 'DeleteAllEntitySessionsRequest')
+    DeleteAllEntitySessionsResponse = Shapes::StructureShape.new(name: 'DeleteAllEntitySessionsResponse')
     DeleteAttachedFileRequest = Shapes::StructureShape.new(name: 'DeleteAttachedFileRequest')
     DeleteAttachedFileResponse = Shapes::StructureShape.new(name: 'DeleteAttachedFileResponse')
     DeleteContactDataRequest = Shapes::StructureShape.new(name: 'DeleteContactDataRequest')
@@ -1976,6 +1978,7 @@ module Aws::Connect
     SentimentConfiguration = Shapes::StructureShape.new(name: 'SentimentConfiguration')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceQuotaExceededExceptionReason = Shapes::UnionShape.new(name: 'ServiceQuotaExceededExceptionReason')
+    SessionEntityType = Shapes::StringShape.new(name: 'SessionEntityType')
     SessionId = Shapes::StringShape.new(name: 'SessionId')
     SessionInactivityDurationMinutes = Shapes::IntegerShape.new(name: 'SessionInactivityDurationMinutes')
     SignInConfig = Shapes::StructureShape.new(name: 'SignInConfig')
@@ -4431,6 +4434,13 @@ module Aws::Connect
     DefaultVocabulary.struct_class = Types::DefaultVocabulary
 
     DefaultVocabularyList.member = Shapes::ShapeRef.new(shape: DefaultVocabulary)
+
+    DeleteAllEntitySessionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    DeleteAllEntitySessionsRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "EntityId"))
+    DeleteAllEntitySessionsRequest.add_member(:entity_type, Shapes::ShapeRef.new(shape: SessionEntityType, required: true, location_name: "EntityType"))
+    DeleteAllEntitySessionsRequest.struct_class = Types::DeleteAllEntitySessionsRequest
+
+    DeleteAllEntitySessionsResponse.struct_class = Types::DeleteAllEntitySessionsResponse
 
     DeleteAttachedFileRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteAttachedFileRequest.add_member(:file_id, Shapes::ShapeRef.new(shape: FileId, required: true, location: "uri", location_name: "FileId"))
@@ -11772,6 +11782,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+      end)
+
+      api.add_operation(:delete_all_entity_sessions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAllEntitySessions"
+        o.http_method = "POST"
+        o.http_request_uri = "/auth/sessions/delete-all-entity-sessions"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAllEntitySessionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAllEntitySessionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:delete_attached_file, Seahorse::Model::Operation.new.tap do |o|

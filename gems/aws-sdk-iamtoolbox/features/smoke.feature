@@ -18,3 +18,15 @@ Feature: Smoke tests for IAMToolbox
 {"authorization_id":"aaaaaaaaaaaaaaaaaaaa"}
       """
     Then I expect a 'Aws::IAMToolbox::Errors::ValidationException' was raised
+
+  @iamtoolbox @smoke
+  Scenario: GetRequestAuthorizationPolicyInvalidId
+    Given I create a 'Aws::IAMToolbox' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'get_request_authorization_policy' with params:
+      """
+{"authorization_id":"aaaaaaaaaaaaaaaaaaaa","policy_uri":"inline:0000000000000000"}
+      """
+    Then I expect a 'Aws::IAMToolbox::Errors::ValidationException' was raised

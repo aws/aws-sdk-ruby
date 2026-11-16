@@ -367,6 +367,17 @@ module Aws::EC2
     #
     # @!attribute [rw] vpc_endpoint_ids
     #   The IDs of the interface VPC endpoints.
+    #
+    #   You must specify either `VpcEndpointIds` or
+    #   `TransitGatewayAttachmentIds`, but not both.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] transit_gateway_attachment_ids
+    #   The IDs of the transit gateway attachments to accept. This parameter
+    #   is supported only for Gateway Load Balancer endpoint services.
+    #
+    #   You must specify either `VpcEndpointIds` or
+    #   `TransitGatewayAttachmentIds`, but not both.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptVpcEndpointConnectionsRequest AWS API Documentation
@@ -374,7 +385,8 @@ module Aws::EC2
     class AcceptVpcEndpointConnectionsRequest < Struct.new(
       :dry_run,
       :service_id,
-      :vpc_endpoint_ids)
+      :vpc_endpoint_ids,
+      :transit_gateway_attachment_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -855,13 +867,18 @@ module Aws::EC2
     #   The ID of the service.
     #   @return [String]
     #
+    # @!attribute [rw] permission_type
+    #   The type of permission granted to the principal.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AddedPrincipal AWS API Documentation
     #
     class AddedPrincipal < Struct.new(
       :principal_type,
       :principal,
       :service_permission_id,
-      :service_id)
+      :service_id,
+      :permission_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1567,6 +1584,10 @@ module Aws::EC2
     #   The ID of the service.
     #   @return [String]
     #
+    # @!attribute [rw] permission_type
+    #   The type of permission granted to the principal.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllowedPrincipal AWS API Documentation
     #
     class AllowedPrincipal < Struct.new(
@@ -1574,7 +1595,8 @@ module Aws::EC2
       :principal,
       :service_permission_id,
       :tags,
-      :service_id)
+      :service_id,
+      :permission_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3102,6 +3124,45 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] snapshot_id
+    #   The ID of the Amazon EBS snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID, alias, or ARN of the KMS key to associate with the snapshot.
+    #   You can specify a key ID, key alias, key ARN, or alias ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateKmsKeyIdRequest AWS API Documentation
+    #
+    class AssociateKmsKeyIdRequest < Struct.new(
+      :snapshot_id,
+      :kms_key_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateKmsKeyIdResult AWS API Documentation
+    #
+    class AssociateKmsKeyIdResult < Struct.new(
+      :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] nat_gateway_id
     #   The ID of the NAT gateway.
     #   @return [String]
@@ -3731,6 +3792,23 @@ module Aws::EC2
       :ipv_6_cidr_block_association,
       :cidr_block_association,
       :vpc_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an KMS key that is associated with an Amazon EBS snapshot,
+    # in addition to the key the snapshot is encrypted under. An associated
+    # key provides a second way to access the snapshot's data for
+    # cross-account sharing and copying.
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Resource Name (ARN) of the associated KMS key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociatedKmsKey AWS API Documentation
+    #
+    class AssociatedKmsKey < Struct.new(
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17260,6 +17338,65 @@ module Aws::EC2
     end
 
     # @!attribute [rw] transit_gateway_id
+    #   The ID of the transit gateway. The transit gateway must be in the
+    #   `available` state.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the Gateway Load Balancer endpoint service.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zones
+    #   The names of the Availability Zones for the attachment. You must
+    #   specify at least one Availability Zone, using this parameter,
+    #   `AvailabilityZoneIds`, or both. Each Availability Zone must be
+    #   supported by both the transit gateway and the endpoint service.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] availability_zone_ids
+    #   The IDs of the Availability Zones for the attachment. You must
+    #   specify at least one Availability Zone, using this parameter,
+    #   `AvailabilityZones`, or both. Each Availability Zone must be
+    #   supported by both the transit gateway and the endpoint service.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the network function attachment.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayNetworkFunctionAttachmentRequest AWS API Documentation
+    #
+    class CreateTransitGatewayNetworkFunctionAttachmentRequest < Struct.new(
+      :transit_gateway_id,
+      :service_name,
+      :availability_zones,
+      :availability_zone_ids,
+      :tag_specifications,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_network_function_attachment
+    #   Information about the network function attachment.
+    #   @return [Types::TransitGatewayNetworkFunctionAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayNetworkFunctionAttachmentResult AWS API Documentation
+    #
+    class CreateTransitGatewayNetworkFunctionAttachmentResult < Struct.new(
+      :transit_gateway_network_function_attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_id
     #   The ID of the transit gateway.
     #   @return [String]
     #
@@ -22594,6 +22731,38 @@ module Aws::EC2
     #
     class DeleteTransitGatewayMulticastDomainResult < Struct.new(
       :transit_gateway_multicast_domain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the network function attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayNetworkFunctionAttachmentRequest AWS API Documentation
+    #
+    class DeleteTransitGatewayNetworkFunctionAttachmentRequest < Struct.new(
+      :transit_gateway_attachment_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_network_function_attachment
+    #   Information about the deleted network function attachment.
+    #   @return [Types::TransitGatewayNetworkFunctionAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayNetworkFunctionAttachmentResult AWS API Documentation
+    #
+    class DeleteTransitGatewayNetworkFunctionAttachmentResult < Struct.new(
+      :transit_gateway_network_function_attachment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36769,6 +36938,73 @@ module Aws::EC2
     end
 
     # @!attribute [rw] transit_gateway_attachment_ids
+    #   The IDs of the network function attachments.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `service-name` - The name of the Gateway Load Balancer endpoint
+    #     service.
+    #
+    #   * `state` - The state of the attachment. Valid values are
+    #     `available` \| `deleted` \| `deleting` \| `failed` \| `failing` \|
+    #     `modifying` \| `pendingAcceptance` \| `pending` \| `rollingBack`
+    #     \| `rejected` \| `rejecting`.
+    #
+    #   * `transit-gateway-attachment-id` - The ID of the attachment.
+    #
+    #   * `transit-gateway-id` - The ID of the transit gateway.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTransitGatewayNetworkFunctionAttachmentsRequest AWS API Documentation
+    #
+    class DescribeTransitGatewayNetworkFunctionAttachmentsRequest < Struct.new(
+      :transit_gateway_attachment_ids,
+      :filters,
+      :max_results,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_network_function_attachments
+    #   Information about the network function attachments.
+    #   @return [Array<Types::TransitGatewayNetworkFunctionAttachment>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTransitGatewayNetworkFunctionAttachmentsResult AWS API Documentation
+    #
+    class DescribeTransitGatewayNetworkFunctionAttachmentsResult < Struct.new(
+      :transit_gateway_network_function_attachments,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_attachment_ids
     #   One or more IDs of the transit gateway peering attachments.
     #   @return [Array<String>]
     #
@@ -38411,6 +38647,9 @@ module Aws::EC2
     #
     #   * `service-id` - The ID of the service.
     #
+    #   * `transit-gateway-attachment-id` - The ID of the transit gateway
+    #     attachment.
+    #
     #   * `vpc-endpoint-owner` - The ID of the Amazon Web Services account
     #     ID that owns the endpoint.
     #
@@ -38555,6 +38794,9 @@ module Aws::EC2
     #
     # @!attribute [rw] filters
     #   The filters.
+    #
+    #   * `permission-type` - The permission type (`vpc-endpoint` \|
+    #     `transit-gateway-attachment`).
     #
     #   * `principal` - The ARN of the principal.
     #
@@ -41022,6 +41264,45 @@ module Aws::EC2
     #
     class DisassociateIpamResourceDiscoveryResult < Struct.new(
       :ipam_resource_discovery_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_id
+    #   The ID of the Amazon EBS snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID, alias, or ARN of the associated KMS key to remove from the
+    #   snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateKmsKeyIdRequest AWS API Documentation
+    #
+    class DisassociateKmsKeyIdRequest < Struct.new(
+      :snapshot_id,
+      :kms_key_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateKmsKeyIdResult AWS API Documentation
+    #
+    class DisassociateKmsKeyIdResult < Struct.new(
+      :return)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -70595,6 +70876,64 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the network function attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] add_availability_zones
+    #   The names of the Availability Zones to add to the attachment. You
+    #   can't add and remove the same Availability Zone in a single
+    #   request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] add_availability_zone_ids
+    #   The IDs of the Availability Zones to add to the attachment. You
+    #   can't add and remove the same Availability Zone in a single
+    #   request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remove_availability_zones
+    #   The names of the Availability Zones to remove from the attachment.
+    #   Each Availability Zone must be currently in the attachment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remove_availability_zone_ids
+    #   The IDs of the Availability Zones to remove from the attachment.
+    #   Each Availability Zone must be currently in the attachment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayNetworkFunctionAttachmentRequest AWS API Documentation
+    #
+    class ModifyTransitGatewayNetworkFunctionAttachmentRequest < Struct.new(
+      :transit_gateway_attachment_id,
+      :add_availability_zones,
+      :add_availability_zone_ids,
+      :remove_availability_zones,
+      :remove_availability_zone_ids,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_network_function_attachment
+    #   Information about the network function attachment.
+    #   @return [Types::TransitGatewayNetworkFunctionAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayNetworkFunctionAttachmentResult AWS API Documentation
+    #
+    class ModifyTransitGatewayNetworkFunctionAttachmentResult < Struct.new(
+      :transit_gateway_network_function_attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The transit gateway options.
     #
     # @!attribute [rw] add_transit_gateway_cidr_blocks
@@ -72348,13 +72687,33 @@ module Aws::EC2
     #   revoked for principals in this list.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] permission_type
+    #   The type of permission to add or remove. The permission type applies
+    #   to all principals in `AddAllowedPrincipals` and
+    #   `RemoveAllowedPrincipals`.
+    #
+    #   * `vpc-endpoint` - Principals can create VPC endpoints that connect
+    #     to the endpoint service.
+    #
+    #   * `transit-gateway-attachment` - Principals can create transit
+    #     gateway attachments that connect to the endpoint service. This
+    #     permission type is supported only for Gateway Load Balancer
+    #     endpoint services. You can grant it only to Amazon Web Services
+    #     accounts (`arn:aws:iam::account-id:root`). You can't grant it to
+    #     users, IAM roles, organizations, organizational units, or all
+    #     principals (*).
+    #
+    #   Default: `vpc-endpoint`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServicePermissionsRequest AWS API Documentation
     #
     class ModifyVpcEndpointServicePermissionsRequest < Struct.new(
       :dry_run,
       :service_id,
       :add_allowed_principals,
-      :remove_allowed_principals)
+      :remove_allowed_principals,
+      :permission_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -78164,6 +78523,17 @@ module Aws::EC2
     #
     # @!attribute [rw] vpc_endpoint_ids
     #   The IDs of the VPC endpoints.
+    #
+    #   You must specify either `VpcEndpointIds` or
+    #   `TransitGatewayAttachmentIds`, but not both.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] transit_gateway_attachment_ids
+    #   The IDs of the transit gateway attachments to reject. This parameter
+    #   is supported only for Gateway Load Balancer endpoint services.
+    #
+    #   You must specify either `VpcEndpointIds` or
+    #   `TransitGatewayAttachmentIds`, but not both.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectVpcEndpointConnectionsRequest AWS API Documentation
@@ -78171,7 +78541,8 @@ module Aws::EC2
     class RejectVpcEndpointConnectionsRequest < Struct.new(
       :dry_run,
       :service_id,
-      :vpc_endpoint_ids)
+      :vpc_endpoint_ids,
+      :transit_gateway_attachment_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -85577,6 +85948,10 @@ module Aws::EC2
     #   created.
     #   @return [Integer]
     #
+    # @!attribute [rw] associated_kms_keys
+    #   The additional KMS keys that are associated with the snapshot.
+    #   @return [Array<Types::AssociatedKmsKey>]
+    #
     # @!attribute [rw] snapshot_id
     #   The ID of the snapshot. Each snapshot receives a unique identifier
     #   when it is created.
@@ -85655,6 +86030,7 @@ module Aws::EC2
       :completion_duration_minutes,
       :completion_time,
       :full_snapshot_size_in_bytes,
+      :associated_kms_keys,
       :snapshot_id,
       :volume_id,
       :state,
@@ -90352,6 +90728,69 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Contains information about a transit gateway network function
+    # attachment, including the attachment ID, the transit gateway, the
+    # endpoint service, the Availability Zones, and the state of the
+    # attachment.
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_id
+    #   The ID of the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_owner_id
+    #   The ID of the Amazon Web Services account that owns the transit
+    #   gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_id
+    #   The ID of the Amazon Web Services account that owns the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The name of the Gateway Load Balancer endpoint service.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zones
+    #   The names of the Availability Zones for the attachment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] availability_zone_ids
+    #   The IDs of the Availability Zones for the attachment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] state
+    #   The state of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time the attachment was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the attachment.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayNetworkFunctionAttachment AWS API Documentation
+    #
+    class TransitGatewayNetworkFunctionAttachment < Struct.new(
+      :transit_gateway_attachment_id,
+      :transit_gateway_id,
+      :transit_gateway_owner_id,
+      :resource_owner_id,
+      :resource_id,
+      :availability_zones,
+      :availability_zone_ids,
+      :state,
+      :creation_time,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the options for a transit gateway.
     #
     # @!attribute [rw] amazon_side_asn
@@ -94854,6 +95293,17 @@ module Aws::EC2
     #   The payer responsibility settings for the endpoint.
     #   @return [Array<Types::PayerResponsibilityEntry>]
     #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the transit gateway attachment, if the connection is for a
+    #   transit gateway attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_attachment_owner
+    #   The ID of the Amazon Web Services account that owns the transit
+    #   gateway attachment, if the connection is for a transit gateway
+    #   attachment.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEndpointConnection AWS API Documentation
     #
     class VpcEndpointConnection < Struct.new(
@@ -94869,7 +95319,9 @@ module Aws::EC2
       :vpc_endpoint_connection_id,
       :tags,
       :vpc_endpoint_region,
-      :payer_responsibilities)
+      :payer_responsibilities,
+      :transit_gateway_attachment_id,
+      :transit_gateway_attachment_owner)
       SENSITIVE = []
       include Aws::Structure
     end

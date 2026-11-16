@@ -726,7 +726,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor token_validity_units: Types::TokenValidityUnitsType
       attr_accessor read_attributes: ::Array[::String]
       attr_accessor write_attributes: ::Array[::String]
-      attr_accessor explicit_auth_flows: ::Array[("ADMIN_NO_SRP_AUTH" | "CUSTOM_AUTH_FLOW_ONLY" | "USER_PASSWORD_AUTH" | "ALLOW_ADMIN_USER_PASSWORD_AUTH" | "ALLOW_CUSTOM_AUTH" | "ALLOW_USER_PASSWORD_AUTH" | "ALLOW_USER_SRP_AUTH" | "ALLOW_REFRESH_TOKEN_AUTH" | "ALLOW_USER_AUTH")]
+      attr_accessor explicit_auth_flows: ::Array[("ADMIN_NO_SRP_AUTH" | "CUSTOM_AUTH_FLOW_ONLY" | "USER_PASSWORD_AUTH" | "ALLOW_ADMIN_USER_PASSWORD_AUTH" | "ALLOW_CUSTOM_AUTH" | "ALLOW_USER_PASSWORD_AUTH" | "ALLOW_USER_SRP_AUTH" | "ALLOW_REFRESH_TOKEN_AUTH" | "ALLOW_USER_AUTH" | "ALLOW_TOKEN_EXCHANGE_DELEGATION" | "ALLOW_TOKEN_EXCHANGE_IMPERSONATION")]
       attr_accessor supported_identity_providers: ::Array[::String]
       attr_accessor callback_urls: ::Array[::String]
       attr_accessor logout_urls: ::Array[::String]
@@ -1230,6 +1230,31 @@ module Aws::CognitoIdentityProvider
     class GetClientTokenResponse
       attr_accessor client_authentication_result: Types::ClientAuthenticationResultType
       SENSITIVE: []
+    end
+
+    class GetDerivedTokenRequest
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor subject_token: ::String
+      attr_accessor subject_token_type: ("ACCESS_TOKEN" | "ID_TOKEN" | "SAML2")
+      attr_accessor subject_token_provider_name: ::String
+      attr_accessor actor_token: ::String
+      attr_accessor actor_token_type: ("ACCESS_TOKEN" | "ID_TOKEN" | "SAML2")
+      attr_accessor actor_token_provider_name: ::String
+      attr_accessor scopes: ::Array[::String]
+      attr_accessor audiences: ::Array[::String]
+      attr_accessor resources: ::Array[::String]
+      attr_accessor requested_token_type: ("ACCESS_TOKEN" | "ID_TOKEN")
+      SENSITIVE: [:client_id, :client_secret, :subject_token, :actor_token]
+    end
+
+    class GetDerivedTokenResponse
+      attr_accessor issued_token: ::String
+      attr_accessor issued_token_type: ("ACCESS_TOKEN" | "ID_TOKEN")
+      attr_accessor token_type: ("Bearer" | "N_A")
+      attr_accessor expires_in: ::Integer
+      attr_accessor scopes: ::Array[::String]
+      SENSITIVE: [:issued_token]
     end
 
     class GetDeviceRequest
@@ -2494,7 +2519,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor token_validity_units: Types::TokenValidityUnitsType
       attr_accessor read_attributes: ::Array[::String]
       attr_accessor write_attributes: ::Array[::String]
-      attr_accessor explicit_auth_flows: ::Array[("ADMIN_NO_SRP_AUTH" | "CUSTOM_AUTH_FLOW_ONLY" | "USER_PASSWORD_AUTH" | "ALLOW_ADMIN_USER_PASSWORD_AUTH" | "ALLOW_CUSTOM_AUTH" | "ALLOW_USER_PASSWORD_AUTH" | "ALLOW_USER_SRP_AUTH" | "ALLOW_REFRESH_TOKEN_AUTH" | "ALLOW_USER_AUTH")]
+      attr_accessor explicit_auth_flows: ::Array[("ADMIN_NO_SRP_AUTH" | "CUSTOM_AUTH_FLOW_ONLY" | "USER_PASSWORD_AUTH" | "ALLOW_ADMIN_USER_PASSWORD_AUTH" | "ALLOW_CUSTOM_AUTH" | "ALLOW_USER_PASSWORD_AUTH" | "ALLOW_USER_SRP_AUTH" | "ALLOW_REFRESH_TOKEN_AUTH" | "ALLOW_USER_AUTH" | "ALLOW_TOKEN_EXCHANGE_DELEGATION" | "ALLOW_TOKEN_EXCHANGE_IMPERSONATION")]
       attr_accessor supported_identity_providers: ::Array[::String]
       attr_accessor callback_urls: ::Array[::String]
       attr_accessor logout_urls: ::Array[::String]
@@ -2656,7 +2681,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor token_validity_units: Types::TokenValidityUnitsType
       attr_accessor read_attributes: ::Array[::String]
       attr_accessor write_attributes: ::Array[::String]
-      attr_accessor explicit_auth_flows: ::Array[("ADMIN_NO_SRP_AUTH" | "CUSTOM_AUTH_FLOW_ONLY" | "USER_PASSWORD_AUTH" | "ALLOW_ADMIN_USER_PASSWORD_AUTH" | "ALLOW_CUSTOM_AUTH" | "ALLOW_USER_PASSWORD_AUTH" | "ALLOW_USER_SRP_AUTH" | "ALLOW_REFRESH_TOKEN_AUTH" | "ALLOW_USER_AUTH")]
+      attr_accessor explicit_auth_flows: ::Array[("ADMIN_NO_SRP_AUTH" | "CUSTOM_AUTH_FLOW_ONLY" | "USER_PASSWORD_AUTH" | "ALLOW_ADMIN_USER_PASSWORD_AUTH" | "ALLOW_CUSTOM_AUTH" | "ALLOW_USER_PASSWORD_AUTH" | "ALLOW_USER_SRP_AUTH" | "ALLOW_REFRESH_TOKEN_AUTH" | "ALLOW_USER_AUTH" | "ALLOW_TOKEN_EXCHANGE_DELEGATION" | "ALLOW_TOKEN_EXCHANGE_IMPERSONATION")]
       attr_accessor supported_identity_providers: ::Array[::String]
       attr_accessor callback_urls: ::Array[::String]
       attr_accessor logout_urls: ::Array[::String]

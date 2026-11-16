@@ -12,6 +12,15 @@ module Aws::WellArchitected
   # @api private
   module Endpoints
 
+    class CreateAgentBasicProfile
+      def self.build(context)
+        Aws::WellArchitected::EndpointParameters.create(
+          context.config,
+          sub_service_type: "AGENT",
+        )
+      end
+    end
+
     class CreateAgentContext
       def self.build(context)
         Aws::WellArchitected::EndpointParameters.create(
@@ -22,6 +31,24 @@ module Aws::WellArchitected
     end
 
     class CreateAgentGoal
+      def self.build(context)
+        Aws::WellArchitected::EndpointParameters.create(
+          context.config,
+          sub_service_type: "AGENT",
+        )
+      end
+    end
+
+    class CreateAgentOrganizationalProfile
+      def self.build(context)
+        Aws::WellArchitected::EndpointParameters.create(
+          context.config,
+          sub_service_type: "AGENT",
+        )
+      end
+    end
+
+    class CreateAgentOrganizationalReport
       def self.build(context)
         Aws::WellArchitected::EndpointParameters.create(
           context.config,
@@ -57,7 +84,34 @@ module Aws::WellArchitected
       end
     end
 
+    class DeleteAgentOrganizationalReport
+      def self.build(context)
+        Aws::WellArchitected::EndpointParameters.create(
+          context.config,
+          sub_service_type: "AGENT",
+        )
+      end
+    end
+
     class DeleteAgentProfile
+      def self.build(context)
+        Aws::WellArchitected::EndpointParameters.create(
+          context.config,
+          sub_service_type: "AGENT",
+        )
+      end
+    end
+
+    class DeleteAgentProfilePolicy
+      def self.build(context)
+        Aws::WellArchitected::EndpointParameters.create(
+          context.config,
+          sub_service_type: "AGENT",
+        )
+      end
+    end
+
+    class DeleteAgentRecommendationPolicy
       def self.build(context)
         Aws::WellArchitected::EndpointParameters.create(
           context.config,
@@ -84,7 +138,43 @@ module Aws::WellArchitected
       end
     end
 
+    class GetAgentOrganizationalReport
+      def self.build(context)
+        Aws::WellArchitected::EndpointParameters.create(
+          context.config,
+          sub_service_type: "AGENT",
+        )
+      end
+    end
+
+    class GetAgentOrganizationalReportData
+      def self.build(context)
+        Aws::WellArchitected::EndpointParameters.create(
+          context.config,
+          sub_service_type: "AGENT",
+        )
+      end
+    end
+
+    class GetAgentPreferences
+      def self.build(context)
+        Aws::WellArchitected::EndpointParameters.create(
+          context.config,
+          sub_service_type: "AGENT",
+        )
+      end
+    end
+
     class GetAgentProfile
+      def self.build(context)
+        Aws::WellArchitected::EndpointParameters.create(
+          context.config,
+          sub_service_type: "AGENT",
+        )
+      end
+    end
+
+    class GetAgentProfilePolicy
       def self.build(context)
         Aws::WellArchitected::EndpointParameters.create(
           context.config,
@@ -111,6 +201,15 @@ module Aws::WellArchitected
       end
     end
 
+    class GetAgentRecommendationPolicy
+      def self.build(context)
+        Aws::WellArchitected::EndpointParameters.create(
+          context.config,
+          sub_service_type: "AGENT",
+        )
+      end
+    end
+
     class ListAgentContexts
       def self.build(context)
         Aws::WellArchitected::EndpointParameters.create(
@@ -121,6 +220,15 @@ module Aws::WellArchitected
     end
 
     class ListAgentGoals
+      def self.build(context)
+        Aws::WellArchitected::EndpointParameters.create(
+          context.config,
+          sub_service_type: "AGENT",
+        )
+      end
+    end
+
+    class ListAgentOrganizationalReports
       def self.build(context)
         Aws::WellArchitected::EndpointParameters.create(
           context.config,
@@ -165,7 +273,43 @@ module Aws::WellArchitected
       end
     end
 
+    class PutAgentPreferences
+      def self.build(context)
+        Aws::WellArchitected::EndpointParameters.create(
+          context.config,
+          sub_service_type: "AGENT",
+        )
+      end
+    end
+
+    class PutAgentProfilePolicy
+      def self.build(context)
+        Aws::WellArchitected::EndpointParameters.create(
+          context.config,
+          sub_service_type: "AGENT",
+        )
+      end
+    end
+
     class PutAgentRecommendationFeedback
+      def self.build(context)
+        Aws::WellArchitected::EndpointParameters.create(
+          context.config,
+          sub_service_type: "AGENT",
+        )
+      end
+    end
+
+    class PutAgentRecommendationPolicy
+      def self.build(context)
+        Aws::WellArchitected::EndpointParameters.create(
+          context.config,
+          sub_service_type: "AGENT",
+        )
+      end
+    end
+
+    class SendAgentOrganizationalReportDataToS3
       def self.build(context)
         Aws::WellArchitected::EndpointParameters.create(
           context.config,
@@ -201,6 +345,15 @@ module Aws::WellArchitected
       end
     end
 
+    class UpdateAgentOrganizationalProfile
+      def self.build(context)
+        Aws::WellArchitected::EndpointParameters.create(
+          context.config,
+          sub_service_type: "AGENT",
+        )
+      end
+    end
+
     class UpdateAgentProfile
       def self.build(context)
         Aws::WellArchitected::EndpointParameters.create(
@@ -222,32 +375,56 @@ module Aws::WellArchitected
 
     def self.parameters_for_operation(context)
       case context.operation_name
+      when :create_agent_basic_profile
+        CreateAgentBasicProfile.build(context)
       when :create_agent_context
         CreateAgentContext.build(context)
       when :create_agent_goal
         CreateAgentGoal.build(context)
+      when :create_agent_organizational_profile
+        CreateAgentOrganizationalProfile.build(context)
+      when :create_agent_organizational_report
+        CreateAgentOrganizationalReport.build(context)
       when :create_agent_profile
         CreateAgentProfile.build(context)
       when :delete_agent_context
         DeleteAgentContext.build(context)
       when :delete_agent_goal
         DeleteAgentGoal.build(context)
+      when :delete_agent_organizational_report
+        DeleteAgentOrganizationalReport.build(context)
       when :delete_agent_profile
         DeleteAgentProfile.build(context)
+      when :delete_agent_profile_policy
+        DeleteAgentProfilePolicy.build(context)
+      when :delete_agent_recommendation_policy
+        DeleteAgentRecommendationPolicy.build(context)
       when :get_agent_context
         GetAgentContext.build(context)
       when :get_agent_goal
         GetAgentGoal.build(context)
+      when :get_agent_organizational_report
+        GetAgentOrganizationalReport.build(context)
+      when :get_agent_organizational_report_data
+        GetAgentOrganizationalReportData.build(context)
+      when :get_agent_preferences
+        GetAgentPreferences.build(context)
       when :get_agent_profile
         GetAgentProfile.build(context)
+      when :get_agent_profile_policy
+        GetAgentProfilePolicy.build(context)
       when :get_agent_recommendation
         GetAgentRecommendation.build(context)
       when :get_agent_recommendation_generation
         GetAgentRecommendationGeneration.build(context)
+      when :get_agent_recommendation_policy
+        GetAgentRecommendationPolicy.build(context)
       when :list_agent_contexts
         ListAgentContexts.build(context)
       when :list_agent_goals
         ListAgentGoals.build(context)
+      when :list_agent_organizational_reports
+        ListAgentOrganizationalReports.build(context)
       when :list_agent_profiles
         ListAgentProfiles.build(context)
       when :list_agent_recommendation_generations
@@ -256,14 +433,24 @@ module Aws::WellArchitected
         ListAgentRecommendationItems.build(context)
       when :list_agent_recommendations
         ListAgentRecommendations.build(context)
+      when :put_agent_preferences
+        PutAgentPreferences.build(context)
+      when :put_agent_profile_policy
+        PutAgentProfilePolicy.build(context)
       when :put_agent_recommendation_feedback
         PutAgentRecommendationFeedback.build(context)
+      when :put_agent_recommendation_policy
+        PutAgentRecommendationPolicy.build(context)
+      when :send_agent_organizational_report_data_to_s3
+        SendAgentOrganizationalReportDataToS3.build(context)
       when :start_agent_recommendation_generation
         StartAgentRecommendationGeneration.build(context)
       when :update_agent_context
         UpdateAgentContext.build(context)
       when :update_agent_goal
         UpdateAgentGoal.build(context)
+      when :update_agent_organizational_profile
+        UpdateAgentOrganizationalProfile.build(context)
       when :update_agent_profile
         UpdateAgentProfile.build(context)
       when :update_agent_recommendation_status

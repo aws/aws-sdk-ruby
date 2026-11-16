@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2026-11-16)
+------------------
+
+* Feature - Updated CreateDeviceProfile to accept MaxEirp values up to 36 dBm in LoRaWANDeviceProfile. Previously the maximum value was 15.
+
 1.103.0 (2026-11-11)
 ------------------
 

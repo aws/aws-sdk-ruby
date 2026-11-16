@@ -10,6 +10,27 @@
 module Aws::Health
   module Types
 
+    # An entity representing an affected account, including its account ID
+    # and associated tags.
+    #
+    # @!attribute [rw] account_id
+    #   The 12-digit Amazon Web Services account numbers that contains the
+    #   affected entities.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_tags
+    #   A map of tag key-value pairs attached to the affected account.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/AccountEntity AWS API Documentation
+    #
+    class AccountEntity < Struct.new(
+      :account_id,
+      :account_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The number of entities in an account that are impacted by a specific
     # event aggregated by the entity status codes.
     #
@@ -34,6 +55,62 @@ module Aws::Health
       :account_id,
       :count,
       :statuses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tag key-value pair associated with a resource in an account.
+    #
+    # @!attribute [rw] key
+    #   The tag key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag value.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of tag (resource tag or account tag).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/AccountTag AWS API Documentation
+    #
+    class AccountTag < Struct.new(
+      :key,
+      :value,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter for narrowing down affected accounts in an organization
+    # event.
+    #
+    # @!attribute [rw] event_arn
+    #   The unique identifier for the event. The event ARN has the
+    #   `arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+    #   ` format.
+    #
+    #   For example, an event ARN might look like the following:
+    #
+    #   `arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456`
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map of tag keys to lists of tag values. A tag matches when its key
+    #   is in the map and its value is one of the values listed for that
+    #   key. Matching is case sensitive, and the filter matches when at
+    #   least one key in the map matches.
+    #
+    #   An account is returned when its own tags, or the tags of one of its
+    #   affected resources, match.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/AffectedAccountFilter AWS API Documentation
+    #
+    class AffectedAccountFilter < Struct.new(
+      :event_arn,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -80,8 +157,19 @@ module Aws::Health
     #   and `RESOLVED`.
     #   @return [String]
     #
+    # @!attribute [rw] resource_tags
+    #   A map of resource tag key-value pairs attached to the affected
+    #   entity.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] account_tags
+    #   A map of account tag key-value pairs attached to the affected
+    #   entity.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] tags
-    #   A map of entity tags attached to the affected entity.
+    #   A map of resource tag key-value pairs attached to the affected
+    #   entity.
     #
     #   <note markdown="1"> Currently, the `tags` property isn't supported.
     #
@@ -102,6 +190,8 @@ module Aws::Health
       :aws_account_id,
       :last_updated_time,
       :status_code,
+      :resource_tags,
+      :account_tags,
       :tags,
       :entity_metadata)
       SENSITIVE = []
@@ -125,6 +215,57 @@ module Aws::Health
     #
     class ConcurrentModificationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tag_keys
+    #   The list of tag keys to configure for Health event tracking across
+    #   the organization.
+    #   @return [Array<Types::TagKeyForOrganization>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/ConfigureTagsForOrganizationRequest AWS API Documentation
+    #
+    class ConfigureTagsForOrganizationRequest < Struct.new(
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configured_tag_keys
+    #   The list of tag keys that were successfully configured for the
+    #   organization.
+    #   @return [Array<Types::TagKeyForOrganization>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/ConfigureTagsForOrganizationResponse AWS API Documentation
+    #
+    class ConfigureTagsForOrganizationResponse < Struct.new(
+      :configured_tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tag_keys
+    #   The list of resource tag keys to configure for Health event
+    #   tracking.
+    #   @return [Array<Types::ResourceTagKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/ConfigureTagsRequest AWS API Documentation
+    #
+    class ConfigureTagsRequest < Struct.new(
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configured_tag_keys
+    #   The list of resource tag keys that were successfully configured.
+    #   @return [Array<Types::ResourceTagKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/ConfigureTagsResponse AWS API Documentation
+    #
+    class ConfigureTagsResponse < Struct.new(
+      :configured_tag_keys)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -182,12 +323,17 @@ module Aws::Health
     #   100, inclusive.
     #   @return [Integer]
     #
+    # @!attribute [rw] filter
+    #   Values to narrow the results returned.
+    #   @return [Types::AffectedAccountFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeAffectedAccountsForOrganizationRequest AWS API Documentation
     #
     class DescribeAffectedAccountsForOrganizationRequest < Struct.new(
       :event_arn,
       :next_token,
-      :max_results)
+      :max_results,
+      :filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -195,6 +341,11 @@ module Aws::Health
     # @!attribute [rw] affected_accounts
     #   A JSON set of elements of the affected accounts.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] affected_account_entities
+    #   The list of affected account entities, including account IDs and
+    #   their associated tags.
+    #   @return [Array<Types::AccountEntity>]
     #
     # @!attribute [rw] event_scope_code
     #   This parameter specifies if the Health event is a public Amazon Web
@@ -226,6 +377,7 @@ module Aws::Health
     #
     class DescribeAffectedAccountsForOrganizationResponse < Struct.new(
       :affected_accounts,
+      :affected_account_entities,
       :event_scope_code,
       :next_token)
       SENSITIVE = []
@@ -367,11 +519,16 @@ module Aws::Health
     #   the affected entities.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] filter
+    #   Values to narrow the results returned.
+    #   @return [Types::OrganizationEntityAggregateFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEntityAggregatesForOrganizationRequest AWS API Documentation
     #
     class DescribeEntityAggregatesForOrganizationRequest < Struct.new(
       :event_arns,
-      :aws_account_ids)
+      :aws_account_ids,
+      :filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -395,10 +552,15 @@ module Aws::Health
     #   "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"`
     #   @return [Array<String>]
     #
+    # @!attribute [rw] filter
+    #   Values to narrow the results returned.
+    #   @return [Types::EntityAggregateFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEntityAggregatesRequest AWS API Documentation
     #
     class DescribeEntityAggregatesRequest < Struct.new(
-      :event_arns)
+      :event_arns,
+      :filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -743,8 +905,8 @@ module Aws::Health
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in one batch, between 1 and
-    #   20, inclusive.
+    #   The maximum number of items to return in one batch, between 10 and
+    #   100, inclusive.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeServiceLifecycleRequest AWS API Documentation
@@ -778,6 +940,163 @@ module Aws::Health
       include Aws::Structure
     end
 
+    # @!attribute [rw] keys
+    #   The list of configured tag keys for the organization and their
+    #   status.
+    #   @return [Array<Types::OrganizationTagKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeTagKeysForOrganizationResponse AWS API Documentation
+    #
+    class DescribeTagKeysForOrganizationResponse < Struct.new(
+      :keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] keys
+    #   The list of configured resource tag keys and their status.
+    #   @return [Array<Types::ResourceTagKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeTagKeysResponse AWS API Documentation
+    #
+    class DescribeTagKeysResponse < Struct.new(
+      :keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter for narrowing down the tags returned by
+    # DescribeTagsForOrganization.
+    #
+    # @!attribute [rw] tag_types
+    #   The types of tags to include in the results.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeTagsForOrganizationFilter AWS API Documentation
+    #
+    class DescribeTagsForOrganizationFilter < Struct.new(
+      :tag_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter
+    #   Values to narrow the results returned.
+    #   @return [Types::DescribeTagsForOrganizationFilter]
+    #
+    # @!attribute [rw] next_token
+    #   If the results of a search are large, only a portion of the results
+    #   are returned, and a `nextToken` pagination token is returned in the
+    #   response. To retrieve the next batch of results, reissue the search
+    #   request and include the returned token. When all results have been
+    #   returned, the response does not contain a pagination token value.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return in one batch, between 10 and
+    #   100, inclusive.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeTagsForOrganizationRequest AWS API Documentation
+    #
+    class DescribeTagsForOrganizationRequest < Struct.new(
+      :filter,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tags associated with Health events across the
+    #   organization.
+    #   @return [Array<Types::OrganizationTag>]
+    #
+    # @!attribute [rw] next_token
+    #   If the results of a search are large, only a portion of the results
+    #   are returned, and a `nextToken` pagination token is returned in the
+    #   response. To retrieve the next batch of results, reissue the search
+    #   request and include the returned token. When all results have been
+    #   returned, the response does not contain a pagination token value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeTagsForOrganizationResponse AWS API Documentation
+    #
+    class DescribeTagsForOrganizationResponse < Struct.new(
+      :tags,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current onboarding status of the tags feature for the
+    #   organization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeTagsOnboardingStatusForOrganizationResponse AWS API Documentation
+    #
+    class DescribeTagsOnboardingStatusForOrganizationResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current onboarding status of the tags feature for the account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeTagsOnboardingStatusResponse AWS API Documentation
+    #
+    class DescribeTagsOnboardingStatusResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If the results of a search are large, only a portion of the results
+    #   are returned, and a `nextToken` pagination token is returned in the
+    #   response. To retrieve the next batch of results, reissue the search
+    #   request and include the returned token. When all results have been
+    #   returned, the response does not contain a pagination token value.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return in one batch, between 10 and
+    #   100, inclusive.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeTagsRequest AWS API Documentation
+    #
+    class DescribeTagsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of resource tags associated with Health events.
+    #   @return [Array<Types::AccountTag>]
+    #
+    # @!attribute [rw] next_token
+    #   If the results of a search are large, only a portion of the results
+    #   are returned, and a `nextToken` pagination token is returned in the
+    #   response. To retrieve the next batch of results, reissue the search
+    #   request and include the returned token. When all results have been
+    #   returned, the response does not contain a pagination token value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeTagsResponse AWS API Documentation
+    #
+    class DescribeTagsResponse < Struct.new(
+      :tags,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A JSON set of elements including the `awsAccountId`, `eventArn` and a
     # set of `statusCodes`.
     #
@@ -800,12 +1119,25 @@ module Aws::Health
     #   A list of entity status codes.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   A map of tag keys to lists of tag values. A tag matches when its key
+    #   is in the map and its value is one of the values listed for that
+    #   key. Matching is case sensitive, and the filter matches when at
+    #   least one key in the map matches.
+    #
+    #   An entity is returned when the tags of the resource, or of the
+    #   account it belongs to, match. When you specify several filters in
+    #   `organizationEntityAccountFilters`, the tags must be identical in
+    #   every filter.
+    #   @return [Hash<String,Array<String>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EntityAccountFilter AWS API Documentation
     #
     class EntityAccountFilter < Struct.new(
       :event_arn,
       :aws_account_id,
-      :status_codes)
+      :status_codes,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -847,6 +1179,26 @@ module Aws::Health
       include Aws::Structure
     end
 
+    # A filter for narrowing down the entity aggregates returned by
+    # DescribeEntityAggregates.
+    #
+    # @!attribute [rw] tags
+    #   A map of tag keys to lists of tag values. A tag matches when its key
+    #   is in the map and its value is one of the values listed for that
+    #   key. Matching is case sensitive, and the filter matches when at
+    #   least one key in the map matches.
+    #
+    #   Only entities whose tags match are included in the aggregates.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EntityAggregateFilter AWS API Documentation
+    #
+    class EntityAggregateFilter < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The values to use to filter results from the
     # [DescribeAffectedEntities][1] operation.
     #
@@ -874,12 +1226,12 @@ module Aws::Health
     #   @return [Array<Types::DateTimeRange>]
     #
     # @!attribute [rw] tags
-    #   A map of entity tags attached to the affected entity.
+    #   A map of resource tag key-value pairs to filter affected entities.
     #
     #   <note markdown="1"> Currently, the `tags` property isn't supported.
     #
     #    </note>
-    #   @return [Array<Hash<String,String>>]
+    #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] status_codes
     #   A list of entity status codes (`IMPAIRED`, `UNIMPAIRED`, or
@@ -1243,12 +1595,12 @@ module Aws::Health
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   A map of entity tags attached to the affected entity.
+    #   A map of resource tag key-value pairs to filter affected entities.
     #
     #   <note markdown="1"> Currently, the `tags` property isn't supported.
     #
     #    </note>
-    #   @return [Array<Hash<String,String>>]
+    #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] event_status_codes
     #   A list of event status codes.
@@ -1531,6 +1883,26 @@ module Aws::Health
       include Aws::Structure
     end
 
+    # A filter for narrowing down the entity aggregates returned by
+    # DescribeEntityAggregatesForOrganization.
+    #
+    # @!attribute [rw] tags
+    #   A map of tag keys to lists of tag values. A tag matches when its key
+    #   is in the map and its value is one of the values listed for that
+    #   key. Matching is case sensitive, and the filter matches when at
+    #   least one key in the map matches.
+    #
+    #   Only entities whose tags match are included in the aggregates.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/OrganizationEntityAggregateFilter AWS API Documentation
+    #
+    class OrganizationEntityAggregateFilter < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Summary information about an event, returned by the
     # [DescribeEventsForOrganization][1] operation.
     #
@@ -1759,8 +2131,9 @@ module Aws::Health
     #
     #   * Your Amazon Web Services account doesn't include the Amazon Web
     #     Services Support plan required to use the Health API. You must
-    #     have either a Business, Enterprise On-Ramp, or Enterprise Support
-    #     plan.
+    #     have either a Amazon Web Services Business Support+, Amazon Web
+    #     Services Enterprise Support, or Amazon Web Services Unified
+    #     Operations plan.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/OrganizationEventDetailsErrorItem AWS API Documentation
@@ -1877,6 +2250,16 @@ module Aws::Health
     #   `BILLING`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   A map of tag keys to lists of tag values. A tag matches when its key
+    #   is in the map and its value is one of the values listed for that
+    #   key. Matching is case sensitive, and the filter matches when at
+    #   least one key in the map matches.
+    #
+    #   An event is returned when one of its affected accounts, or one of
+    #   the entities of those accounts, has tags that match.
+    #   @return [Hash<String,Array<String>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/OrganizationEventFilter AWS API Documentation
     #
     class OrganizationEventFilter < Struct.new(
@@ -1892,7 +2275,81 @@ module Aws::Health
       :entity_values,
       :event_type_categories,
       :event_status_codes,
-      :personas)
+      :personas,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tag key-value pair associated with a resource across an
+    # organization.
+    #
+    # @!attribute [rw] key
+    #   The tag key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag value.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of organization tag.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/OrganizationTag AWS API Documentation
+    #
+    class OrganizationTag < Struct.new(
+      :key,
+      :value,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tag key configured for Health event tracking across an organization.
+    #
+    # @!attribute [rw] key
+    #   The tag key name.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_for_event_bridge
+    #   Whether this tag key is enabled for EventBridge notifications.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   The current status of the tag key configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/OrganizationTagKey AWS API Documentation
+    #
+    class OrganizationTagKey < Struct.new(
+      :key,
+      :enabled_for_event_bridge,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A resource tag key configured for Health event tracking.
+    #
+    # @!attribute [rw] key
+    #   The tag key name.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_for_event_bridge
+    #   Whether this tag key is enabled for EventBridge notifications.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   The current status of the tag key configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/ResourceTagKey AWS API Documentation
+    #
+    class ResourceTagKey < Struct.new(
+      :key,
+      :enabled_for_event_bridge,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1942,6 +2399,25 @@ module Aws::Health
     #
     class ServiceLifecycleFilter < Struct.new(
       :service)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tag key configured for an organization.
+    #
+    # @!attribute [rw] key
+    #   The tag key name.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_for_event_bridge
+    #   Whether this tag key is enabled for EventBridge notifications.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/TagKeyForOrganization AWS API Documentation
+    #
+    class TagKeyForOrganization < Struct.new(
+      :key,
+      :enabled_for_event_bridge)
       SENSITIVE = []
       include Aws::Structure
     end

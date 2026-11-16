@@ -532,6 +532,86 @@ module Aws::ConnectHealth
       req.send_request(options)
     end
 
+    # Creates a Dataset in a Domain and starts building it. A new dataset
+    # has the status CREATING. When it's ready to use, its status changes
+    # to ACTIVE, or to CREATE\_FAILED if it fails to build. To check the
+    # status, call GetDataset.
+    #
+    # This operation is idempotent: if you retry a request with the same
+    # clientToken, it returns the dataset that the first request created.
+    #
+    # For a medical coding dataset, Amazon Connect Health uses the coded
+    # examples that are in the s3InputPath when you create the dataset, and
+    # writes evaluation scores to the s3OutputPath. Later changes to the
+    # s3InputPath don't change the dataset. To use this operation, you must
+    # have s3:GetObject and s3:ListBucket permissions for the input location
+    # and s3:PutObject permission for the output location, and kms:Decrypt
+    # and kms:GenerateDataKey permissions if you encrypt the locations with
+    # an AWS KMS key.
+    #
+    # Datasets are in preview release and are subject to change.
+    #
+    # @option params [required, String] :domain_id
+    #   The unique identifier of the parent Domain.
+    #
+    # @option params [required, String] :name
+    #   A name for the dataset.
+    #
+    # @option params [required, Types::DatasetConfig] :config
+    #   The configuration of the dataset. The member that you set determines
+    #   the dataset type. You can't change the configuration after you create
+    #   the dataset.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, the operation returns the dataset that the first request
+    #   created. If you reuse a clientToken with different parameters, the
+    #   request fails with ConflictException. Use a new clientToken for a
+    #   request with different parameters.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateDatasetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDatasetOutput#arn #arn} => String
+    #   * {Types::CreateDatasetOutput#dataset_id #dataset_id} => String
+    #   * {Types::CreateDatasetOutput#type #type} => String
+    #   * {Types::CreateDatasetOutput#status #status} => String
+    #   * {Types::CreateDatasetOutput#created_at #created_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_dataset({
+    #     domain_id: "DomainId", # required
+    #     name: "BoundedSafeString", # required
+    #     config: { # required
+    #       medical_coding: {
+    #         s3_input_path: "S3Uri", # required
+    #         s3_output_path: "S3Uri", # required
+    #       },
+    #     },
+    #     client_token: "CreateDatasetInputClientTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.dataset_id #=> String
+    #   resp.type #=> String, one of "MEDICAL_CODING"
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "DELETED"
+    #   resp.created_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connecthealth-2025-01-29/CreateDataset AWS API Documentation
+    #
+    # @overload create_dataset(params = {})
+    # @param [Hash] params ({})
+    def create_dataset(params = {}, options = {})
+      req = build_request(:create_dataset, params)
+      req.send_request(options)
+    end
+
     # Creates a new Domain for managing HealthAgent resources.
     #
     # @option params [required, String] :name
@@ -680,6 +760,51 @@ module Aws::ConnectHealth
       req.send_request(options)
     end
 
+    # Starts deleting a Dataset and the resources that Amazon Connect Health
+    # built for it. You can delete a dataset whose status is ACTIVE,
+    # CREATE\_FAILED, or DELETE\_FAILED. The dataset moves to DELETING, and
+    # then to DELETED. If the delete fails, the dataset moves to
+    # DELETE\_FAILED, and you can call DeleteDataset again.
+    #
+    # Medical coding jobs that already use the dataset finish. Amazon
+    # Connect Health rejects new requests that specify the dataset.
+    #
+    # Datasets are in preview release and are subject to change.
+    #
+    # @option params [required, String] :domain_id
+    #   The unique identifier of the parent Domain.
+    #
+    # @option params [required, String] :dataset_id
+    #   The unique identifier of the dataset to delete.
+    #
+    # @return [Types::DeleteDatasetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDatasetOutput#arn #arn} => String
+    #   * {Types::DeleteDatasetOutput#dataset_id #dataset_id} => String
+    #   * {Types::DeleteDatasetOutput#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_dataset({
+    #     domain_id: "DomainId", # required
+    #     dataset_id: "DatasetId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.dataset_id #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "DELETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connecthealth-2025-01-29/DeleteDataset AWS API Documentation
+    #
+    # @overload delete_dataset(params = {})
+    # @param [Hash] params ({})
+    def delete_dataset(params = {}, options = {})
+      req = build_request(:delete_dataset, params)
+      req.send_request(options)
+    end
+
     # Deletes a Domain and all associated resources.
     #
     # @option params [required, String] :domain_id
@@ -709,6 +834,61 @@ module Aws::ConnectHealth
     # @param [Hash] params ({})
     def delete_domain(params = {}, options = {})
       req = build_request(:delete_domain, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a Dataset, including its status and, after
+    # it is built, its results. A dataset whose status is DELETED returns
+    # ResourceNotFoundException.
+    #
+    # Datasets are in preview release and are subject to change.
+    #
+    # @option params [required, String] :domain_id
+    #   The unique identifier of the parent Domain.
+    #
+    # @option params [required, String] :dataset_id
+    #   The unique identifier of the dataset.
+    #
+    # @return [Types::GetDatasetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDatasetOutput#arn #arn} => String
+    #   * {Types::GetDatasetOutput#dataset_id #dataset_id} => String
+    #   * {Types::GetDatasetOutput#name #name} => String
+    #   * {Types::GetDatasetOutput#type #type} => String
+    #   * {Types::GetDatasetOutput#config #config} => Types::DatasetConfig
+    #   * {Types::GetDatasetOutput#status #status} => String
+    #   * {Types::GetDatasetOutput#status_details #status_details} => String
+    #   * {Types::GetDatasetOutput#artifacts #artifacts} => Types::DatasetArtifacts
+    #   * {Types::GetDatasetOutput#created_at #created_at} => Time
+    #   * {Types::GetDatasetOutput#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_dataset({
+    #     domain_id: "DomainId", # required
+    #     dataset_id: "DatasetId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.dataset_id #=> String
+    #   resp.name #=> String
+    #   resp.type #=> String, one of "MEDICAL_CODING"
+    #   resp.config.medical_coding.s3_input_path #=> String
+    #   resp.config.medical_coding.s3_output_path #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "DELETED"
+    #   resp.status_details #=> String
+    #   resp.artifacts.medical_coding.evaluation_s3_uri #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connecthealth-2025-01-29/GetDataset AWS API Documentation
+    #
+    # @overload get_dataset(params = {})
+    # @param [Hash] params ({})
+    def get_dataset(params = {}, options = {})
+      req = build_request(:get_dataset, params)
       req.send_request(options)
     end
 
@@ -762,6 +942,70 @@ module Aws::ConnectHealth
       req.send_request(options)
     end
 
+    # Retrieves information about a medical coding job, including its status
+    # and, when it succeeds, the location of its results.
+    #
+    # Medical coding jobs are in preview release and are subject to change.
+    #
+    # @option params [required, String] :domain_id
+    #   The unique identifier of the parent Domain.
+    #
+    # @option params [required, String] :job_id
+    #   The unique identifier of the medical coding job.
+    #
+    # @return [Types::GetMedicalCodingJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMedicalCodingJobResponse#job_id #job_id} => String
+    #   * {Types::GetMedicalCodingJobResponse#job_arn #job_arn} => String
+    #   * {Types::GetMedicalCodingJobResponse#job_status #job_status} => String
+    #   * {Types::GetMedicalCodingJobResponse#creation_time #creation_time} => Time
+    #   * {Types::GetMedicalCodingJobResponse#updated_time #updated_time} => Time
+    #   * {Types::GetMedicalCodingJobResponse#text #text} => String
+    #   * {Types::GetMedicalCodingJobResponse#patient_context #patient_context} => Types::MedicalCodesPatientContext
+    #   * {Types::GetMedicalCodingJobResponse#encounter_context #encounter_context} => Types::MedicalCodesEncounterContext
+    #   * {Types::GetMedicalCodingJobResponse#output_data_config #output_data_config} => Types::MedicalCodingOutputDataConfig
+    #   * {Types::GetMedicalCodingJobResponse#dataset_id #dataset_id} => String
+    #   * {Types::GetMedicalCodingJobResponse#medical_coding_output #medical_coding_output} => Types::MedicalCodingOutput
+    #   * {Types::GetMedicalCodingJobResponse#status_details #status_details} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_medical_coding_job({
+    #     domain_id: "DomainId", # required
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_arn #=> String
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "FAILED", "SUCCEEDED"
+    #   resp.creation_time #=> Time
+    #   resp.updated_time #=> Time
+    #   resp.text #=> String
+    #   resp.patient_context.sex #=> String, one of "MALE", "FEMALE", "NON_BINARY", "UNKNOWN"
+    #   resp.patient_context.status #=> String, one of "NEW", "ESTABLISHED"
+    #   resp.patient_context.date_of_birth #=> String
+    #   resp.patient_context.insurance #=> String
+    #   resp.encounter_context.encounter_type #=> String, one of "TELEHEALTH", "IN_PERSON"
+    #   resp.encounter_context.encounter_reason #=> String
+    #   resp.encounter_context.after_hours #=> Boolean
+    #   resp.encounter_context.encounter_date #=> String
+    #   resp.encounter_context.encounter_duration_minutes #=> Integer
+    #   resp.output_data_config.s3_output_path #=> String
+    #   resp.dataset_id #=> String
+    #   resp.medical_coding_output.uri #=> String
+    #   resp.status_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connecthealth-2025-01-29/GetMedicalCodingJob AWS API Documentation
+    #
+    # @overload get_medical_coding_job(params = {})
+    # @param [Hash] params ({})
+    def get_medical_coding_job(params = {}, options = {})
+      req = build_request(:get_medical_coding_job, params)
+      req.send_request(options)
+    end
+
     # Retrieves details about an existing Medical Scribe listening session
     #
     # @option params [required, String] :session_id
@@ -799,16 +1043,22 @@ module Aws::ConnectHealth
     #   resp.medical_scribe_listening_session_details.post_stream_action_settings.output_s3_uri #=> String
     #   resp.medical_scribe_listening_session_details.post_stream_action_settings.clinical_note_generation_settings.note_template_settings.managed_template.template_type #=> String, one of "HISTORY_AND_PHYSICAL", "GIRPP", "DAP", "SIRP", "BIRP", "BEHAVIORAL_SOAP", "PHYSICAL_SOAP"
     #   resp.medical_scribe_listening_session_details.post_stream_action_settings.clinical_note_generation_settings.note_template_settings.custom_template.template_type #=> String, one of "HISTORY_AND_PHYSICAL", "GIRPP", "DAP", "SIRP", "BIRP", "BEHAVIORAL_SOAP"
+    #   resp.medical_scribe_listening_session_details.post_stream_action_settings.medical_code_generation_settings.enabled #=> Boolean
     #   resp.medical_scribe_listening_session_details.post_stream_action_result.clinical_note_generation_result.note_result.output_location #=> String
-    #   resp.medical_scribe_listening_session_details.post_stream_action_result.clinical_note_generation_result.note_result.status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.medical_scribe_listening_session_details.post_stream_action_result.clinical_note_generation_result.note_result.status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED", "PENDING", "SKIPPED"
     #   resp.medical_scribe_listening_session_details.post_stream_action_result.clinical_note_generation_result.note_result.failure_reason #=> String
     #   resp.medical_scribe_listening_session_details.post_stream_action_result.clinical_note_generation_result.transcript_result.output_location #=> String
-    #   resp.medical_scribe_listening_session_details.post_stream_action_result.clinical_note_generation_result.transcript_result.status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.medical_scribe_listening_session_details.post_stream_action_result.clinical_note_generation_result.transcript_result.status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED", "PENDING", "SKIPPED"
     #   resp.medical_scribe_listening_session_details.post_stream_action_result.clinical_note_generation_result.transcript_result.failure_reason #=> String
     #   resp.medical_scribe_listening_session_details.post_stream_action_result.clinical_note_generation_result.after_visit_summary_result.output_location #=> String
-    #   resp.medical_scribe_listening_session_details.post_stream_action_result.clinical_note_generation_result.after_visit_summary_result.status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.medical_scribe_listening_session_details.post_stream_action_result.clinical_note_generation_result.after_visit_summary_result.status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED", "PENDING", "SKIPPED"
     #   resp.medical_scribe_listening_session_details.post_stream_action_result.clinical_note_generation_result.after_visit_summary_result.failure_reason #=> String
+    #   resp.medical_scribe_listening_session_details.post_stream_action_result.medical_code_generation_result.medical_codes_result.output_location #=> String
+    #   resp.medical_scribe_listening_session_details.post_stream_action_result.medical_code_generation_result.medical_codes_result.status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED", "PENDING", "SKIPPED"
+    #   resp.medical_scribe_listening_session_details.post_stream_action_result.medical_code_generation_result.medical_codes_result.failure_reason #=> String
+    #   resp.medical_scribe_listening_session_details.post_stream_action_result.medical_code_generation_result.job_id #=> String
     #   resp.medical_scribe_listening_session_details.encounter_context_provided #=> Boolean
+    #   resp.medical_scribe_listening_session_details.medical_coding_context_provided #=> Boolean
     #   resp.medical_scribe_listening_session_details.stream_status #=> String, one of "IN_PROGRESS", "PAUSED", "FAILED", "COMPLETED"
     #   resp.medical_scribe_listening_session_details.stream_creation_time #=> Time
     #   resp.medical_scribe_listening_session_details.stream_end_time #=> Time
@@ -919,6 +1169,67 @@ module Aws::ConnectHealth
     # @param [Hash] params ({})
     def get_subscription(params = {}, options = {})
       req = build_request(:get_subscription, params)
+      req.send_request(options)
+    end
+
+    # Lists the Datasets in a Domain. You can list only the datasets of one
+    # type. The operation doesn't return datasets whose status is DELETED,
+    # and the order of the results isn't specified. We recommend using
+    # pagination to ensure that the operation returns quickly and
+    # successfully.
+    #
+    # Datasets are in preview release and are subject to change.
+    #
+    # @option params [required, String] :domain_id
+    #   The unique identifier of the parent Domain.
+    #
+    # @option params [String] :type
+    #   Returns only datasets of this type.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results, from a previous ListDatasets
+    #   response. If you don't specify a value, the operation returns the
+    #   first page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of datasets to return in one page. The default is
+    #   100.
+    #
+    # @return [Types::ListDatasetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDatasetsOutput#items #items} => Array&lt;Types::DatasetSummary&gt;
+    #   * {Types::ListDatasetsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_datasets({
+    #     domain_id: "DomainId", # required
+    #     type: "MEDICAL_CODING", # accepts MEDICAL_CODING
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].dataset_id #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].type #=> String, one of "MEDICAL_CODING"
+    #   resp.items[0].status #=> String, one of "CREATING", "ACTIVE", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "DELETED"
+    #   resp.items[0].status_details #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connecthealth-2025-01-29/ListDatasets AWS API Documentation
+    #
+    # @overload list_datasets(params = {})
+    # @param [Hash] params ({})
+    def list_datasets(params = {}, options = {})
+      req = build_request(:list_datasets, params)
       req.send_request(options)
     end
 
@@ -1044,6 +1355,93 @@ module Aws::ConnectHealth
       req.send_request(options)
     end
 
+    # Starts an asynchronous job that generates medical codes (ICD-10 and
+    # CPT) for clinical text. Call GetMedicalCodingJob to check the status
+    # of the job. When the job succeeds, Amazon Connect Health writes the
+    # results to the output Amazon S3 location.
+    #
+    # To tailor the codes to your organization, specify an ACTIVE medical
+    # coding dataset in the Domain. If you don't specify a dataset, the job
+    # uses the general medical coding knowledge base.
+    #
+    # Medical coding jobs are in preview release and are subject to change.
+    #
+    # @option params [required, String] :domain_id
+    #   The unique identifier of the parent Domain.
+    #
+    # @option params [required, String] :text
+    #   The clinical text to generate medical codes for, such as a clinical
+    #   note.
+    #
+    # @option params [Types::MedicalCodesPatientContext] :patient_context
+    #   Patient context for the job. Providing this information can improve
+    #   the accuracy of the medical codes.
+    #
+    # @option params [Types::MedicalCodesEncounterContext] :encounter_context
+    #   Encounter context for the job. Providing this information can improve
+    #   the accuracy of the medical codes.
+    #
+    # @option params [required, Types::MedicalCodingOutputDataConfig] :output_data_config
+    #   The output configuration for the job.
+    #
+    # @option params [String] :dataset_id
+    #   The unique identifier of an ACTIVE medical coding dataset in the
+    #   Domain to code against. If you don't specify a dataset, the job uses
+    #   the general medical coding knowledge base.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartMedicalCodingJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMedicalCodingJobResponse#job_arn #job_arn} => String
+    #   * {Types::StartMedicalCodingJobResponse#job_id #job_id} => String
+    #   * {Types::StartMedicalCodingJobResponse#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_medical_coding_job({
+    #     domain_id: "DomainId", # required
+    #     text: "SensitiveNonEmptyString", # required
+    #     patient_context: {
+    #       sex: "MALE", # accepts MALE, FEMALE, NON_BINARY, UNKNOWN
+    #       status: "NEW", # accepts NEW, ESTABLISHED
+    #       date_of_birth: "SensitiveIsoDateString",
+    #       insurance: "SensitiveNonEmptyString",
+    #     },
+    #     encounter_context: {
+    #       encounter_type: "TELEHEALTH", # accepts TELEHEALTH, IN_PERSON
+    #       encounter_reason: "MedicalCodesEncounterContextEncounterReasonString",
+    #       after_hours: false,
+    #       encounter_date: "SensitiveIsoDateString",
+    #       encounter_duration_minutes: 1,
+    #     },
+    #     output_data_config: { # required
+    #       s3_output_path: "S3Uri", # required
+    #     },
+    #     dataset_id: "DatasetId",
+    #     client_token: "NonEmptyString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_arn #=> String
+    #   resp.job_id #=> String
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connecthealth-2025-01-29/StartMedicalCodingJob AWS API Documentation
+    #
+    # @overload start_medical_coding_job(params = {})
+    # @param [Hash] params ({})
+    def start_medical_coding_job(params = {}, options = {})
+      req = build_request(:start_medical_coding_job, params)
+      req.send_request(options)
+    end
+
     # Starts a new patient insights job.
     #
     # @option params [required, String] :domain_id
@@ -1125,6 +1523,74 @@ module Aws::ConnectHealth
       req.send_request(options)
     end
 
+    # Submits feedback on a clinical document or a set of medical codes that
+    # Amazon Connect Health generated.
+    #
+    # @option params [required, String] :domain_id
+    #   The unique identifier of the parent Domain.
+    #
+    # @option params [required, String] :artifact_source_id
+    #   The identifier of the artifact source. For a clinical document, this
+    #   is the session ID. For a set of medical codes, this is the medical
+    #   coding job ID.
+    #
+    # @option params [String] :subscription_id
+    #   The unique identifier of the Subscription.
+    #
+    # @option params [required, String] :artifact_type
+    #   The type of artifact that you submit feedback for. The following
+    #   values are valid:
+    #
+    #   * CLINICAL\_DOC is the clinical document generated for an ambient
+    #     documentation session.
+    #
+    #   * MEDICAL\_CODES is the set of medical codes generated by a medical
+    #     coding job.
+    #
+    # @option params [required, String] :signed_artifact_s3_uri
+    #   The Amazon Simple Storage Service (Amazon S3) URI of the final
+    #   artifact that the clinician signed.
+    #
+    # @option params [String] :generated_artifact_s3_uri
+    #   The Amazon S3 URI of the clinical document or set of medical codes
+    #   that Amazon Connect Health generated.
+    #
+    # @option params [String] :comments
+    #   Optional comments about the feedback.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request but does not return
+    #   an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.submit_feedback({
+    #     domain_id: "DomainId", # required
+    #     artifact_source_id: "ArtifactSourceId", # required
+    #     subscription_id: "SubscriptionId",
+    #     artifact_type: "CLINICAL_DOC", # required, accepts CLINICAL_DOC, MEDICAL_CODES
+    #     signed_artifact_s3_uri: "S3Uri", # required
+    #     generated_artifact_s3_uri: "S3Uri",
+    #     comments: "FeedbackComments",
+    #     client_token: "IdempotencyToken",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connecthealth-2025-01-29/SubmitFeedback AWS API Documentation
+    #
+    # @overload submit_feedback(params = {})
+    # @param [Hash] params ({})
+    def submit_feedback(params = {}, options = {})
+      req = build_request(:submit_feedback, params)
+      req.send_request(options)
+    end
+
     # Associates the specified tags with the specified resource
     #
     # @option params [required, String] :resource_arn
@@ -1197,7 +1663,7 @@ module Aws::ConnectHealth
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connecthealth'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

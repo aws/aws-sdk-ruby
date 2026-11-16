@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.178.0 (2026-11-16)
+------------------
+
+* Feature - Adds the WorkspaceOsUserMode parameter to RegisterWorkspaceDirectory and DescribeWorkspaceDirectories, so customers can register an IAM Identity Center directory whose WorkSpaces use local operating system users instead of joining a domain.
+
 1.177.0 (2026-11-11)
 ------------------
 

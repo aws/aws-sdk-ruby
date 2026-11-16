@@ -28,6 +28,7 @@ module Aws::SageMaker
   #
   # ## Error Classes
   # * {ConflictException}
+  # * {ResourceAlreadyExists}
   # * {ResourceInUse}
   # * {ResourceLimitExceeded}
   # * {ResourceNotFound}
@@ -43,6 +44,21 @@ module Aws::SageMaker
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SageMaker::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ResourceAlreadyExists < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SageMaker::Types::ResourceAlreadyExists] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -576,6 +576,12 @@ module Aws::DSQL
     #   An optional resource-based policy document in JSON format that defines
     #   access permissions for the cluster.
     #
+    # @option params [Array<Types::MetricGroupRequest>] :metric_groups
+    #   The metric groups to enable for advanced monitoring on the cluster.
+    #   Advanced monitoring collects detailed, query-level database metrics to
+    #   help you analyze and resolve performance issues. If you omit this
+    #   parameter, no metric groups are enabled.
+    #
     # @option params [Boolean] :bypass_policy_lockout_safety_check
     #   An optional field that controls whether to bypass the lockout
     #   prevention check. When set to true, this parameter allows you to apply
@@ -591,6 +597,7 @@ module Aws::DSQL
     #   * {Types::CreateClusterOutput#encryption_details #encryption_details} => Types::EncryptionDetails
     #   * {Types::CreateClusterOutput#deletion_protection_enabled #deletion_protection_enabled} => Boolean
     #   * {Types::CreateClusterOutput#endpoint #endpoint} => String
+    #   * {Types::CreateClusterOutput#metric_groups #metric_groups} => Array&lt;Types::MetricGroupResponse&gt;
     #
     #
     # @example Example: Create Cluster
@@ -616,6 +623,11 @@ module Aws::DSQL
     #       clusters: ["ClusterArn"],
     #     },
     #     policy: "PolicyDocument",
+    #     metric_groups: [
+    #       {
+    #         metric_group: "STATEMENT_STATISTICS", # required, accepts STATEMENT_STATISTICS
+    #       },
+    #     ],
     #     bypass_policy_lockout_safety_check: false,
     #   })
     #
@@ -633,6 +645,8 @@ module Aws::DSQL
     #   resp.encryption_details.encryption_status #=> String, one of "ENABLED", "UPDATING", "KMS_KEY_INACCESSIBLE", "ENABLING"
     #   resp.deletion_protection_enabled #=> Boolean
     #   resp.endpoint #=> String
+    #   resp.metric_groups #=> Array
+    #   resp.metric_groups[0].metric_group #=> String, one of "STATEMENT_STATISTICS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/CreateCluster AWS API Documentation
     #
@@ -918,6 +932,7 @@ module Aws::DSQL
     #   * {Types::GetClusterOutput#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetClusterOutput#encryption_details #encryption_details} => Types::EncryptionDetails
     #   * {Types::GetClusterOutput#endpoint #endpoint} => String
+    #   * {Types::GetClusterOutput#metric_groups #metric_groups} => Array&lt;Types::MetricGroupResponse&gt;
     #
     #
     # @example Example: Get Cluster
@@ -948,6 +963,8 @@ module Aws::DSQL
     #   resp.encryption_details.kms_key_arn #=> String
     #   resp.encryption_details.encryption_status #=> String, one of "ENABLED", "UPDATING", "KMS_KEY_INACCESSIBLE", "ENABLING"
     #   resp.endpoint #=> String
+    #   resp.metric_groups #=> Array
+    #   resp.metric_groups[0].metric_group #=> String, one of "STATEMENT_STATISTICS"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1466,6 +1483,15 @@ module Aws::DSQL
     #   The new multi-Region cluster configuration settings to be applied
     #   during an update operation.
     #
+    # @option params [Array<Types::MetricGroupRequest>] :metric_groups
+    #   The complete set of metric groups to enable for advanced monitoring on
+    #   the cluster. This list replaces the current set, so any metric group
+    #   that you don't include is disabled. To disable all metric groups,
+    #   specify an empty list (`[]`). If you omit this parameter, the current
+    #   setting doesn't change.
+    #
+    #   To view the metric groups enabled on a cluster, use *GetCluster*.
+    #
     # @return [Types::UpdateClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateClusterOutput#identifier #identifier} => String
@@ -1492,6 +1518,11 @@ module Aws::DSQL
     #       witness_region: "Region",
     #       clusters: ["ClusterArn"],
     #     },
+    #     metric_groups: [
+    #       {
+    #         metric_group: "STATEMENT_STATISTICS", # required, accepts STATEMENT_STATISTICS
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1528,7 +1559,7 @@ module Aws::DSQL
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dsql'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -530,6 +530,20 @@ module Aws::LambdaCore
     #
     class DeleteRuntimeVersionResponse < Aws::EmptyStructure; end
 
+    # How the connector's network interfaces get an Elastic IP address.
+    #
+    # @!attribute [rw] type
+    #   The Elastic IP type for the connector's network interfaces.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-core-2026-04-30/ElasticIpConfiguration AWS API Documentation
+    #
+    class ElasticIpConfiguration < Struct.new(
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] identifier
     #   The identifier of the network connector to retrieve. You can specify
     #   the connector ID, name, or ARN. Provide an unqualified ARN (or an ID
@@ -1316,13 +1330,21 @@ module Aws::LambdaCore
     #   value.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] elastic_ip_configuration
+    #   The Elastic IP configuration for the connector's ENIs. Specify
+    #   `ServiceManaged` to have Lambda assign a service-managed Elastic IP
+    #   address to each ENI. The operator role must allow
+    #   `ec2:AllocateAddress` and `ec2:AssociateAddress`.
+    #   @return [Types::ElasticIpConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-core-2026-04-30/NetworkConnectorVpcEgressConfiguration AWS API Documentation
     #
     class NetworkConnectorVpcEgressConfiguration < Struct.new(
       :subnet_ids,
       :security_group_ids,
       :network_protocol,
-      :associated_compute_resource_types)
+      :associated_compute_resource_types,
+      :elastic_ip_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

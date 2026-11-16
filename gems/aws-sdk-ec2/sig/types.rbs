@@ -117,6 +117,7 @@ module Aws::EC2
       attr_accessor dry_run: bool
       attr_accessor service_id: ::String
       attr_accessor vpc_endpoint_ids: ::Array[::String]
+      attr_accessor transit_gateway_attachment_ids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -234,6 +235,7 @@ module Aws::EC2
       attr_accessor principal: ::String
       attr_accessor service_permission_id: ::String
       attr_accessor service_id: ::String
+      attr_accessor permission_type: ("vpc-endpoint" | "transit-gateway-attachment")
       SENSITIVE: []
     end
 
@@ -371,6 +373,7 @@ module Aws::EC2
       attr_accessor service_permission_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor service_id: ::String
+      attr_accessor permission_type: ("vpc-endpoint" | "transit-gateway-attachment")
       SENSITIVE: []
     end
 
@@ -739,6 +742,18 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class AssociateKmsKeyIdRequest
+      attr_accessor snapshot_id: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class AssociateKmsKeyIdResult
+      attr_accessor return: bool
+      SENSITIVE: []
+    end
+
     class AssociateNatGatewayAddressRequest
       attr_accessor nat_gateway_id: ::String
       attr_accessor allocation_ids: ::Array[::String]
@@ -894,6 +909,11 @@ module Aws::EC2
       attr_accessor ipv_6_cidr_block_association: Types::VpcIpv6CidrBlockAssociation
       attr_accessor cidr_block_association: Types::VpcCidrBlockAssociation
       attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociatedKmsKey
+      attr_accessor kms_key_id: ::String
       SENSITIVE: []
     end
 
@@ -3690,6 +3710,21 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class CreateTransitGatewayNetworkFunctionAttachmentRequest
+      attr_accessor transit_gateway_id: ::String
+      attr_accessor service_name: ::String
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor availability_zone_ids: ::Array[::String]
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class CreateTransitGatewayNetworkFunctionAttachmentResult
+      attr_accessor transit_gateway_network_function_attachment: Types::TransitGatewayNetworkFunctionAttachment
+      SENSITIVE: []
+    end
+
     class CreateTransitGatewayPeeringAttachmentRequest
       attr_accessor transit_gateway_id: ::String
       attr_accessor peer_transit_gateway_id: ::String
@@ -5107,6 +5142,17 @@ module Aws::EC2
 
     class DeleteTransitGatewayMulticastDomainResult
       attr_accessor transit_gateway_multicast_domain: Types::TransitGatewayMulticastDomain
+      SENSITIVE: []
+    end
+
+    class DeleteTransitGatewayNetworkFunctionAttachmentRequest
+      attr_accessor transit_gateway_attachment_id: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DeleteTransitGatewayNetworkFunctionAttachmentResult
+      attr_accessor transit_gateway_network_function_attachment: Types::TransitGatewayNetworkFunctionAttachment
       SENSITIVE: []
     end
 
@@ -7931,6 +7977,21 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class DescribeTransitGatewayNetworkFunctionAttachmentsRequest
+      attr_accessor transit_gateway_attachment_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DescribeTransitGatewayNetworkFunctionAttachmentsResult
+      attr_accessor transit_gateway_network_function_attachments: ::Array[Types::TransitGatewayNetworkFunctionAttachment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class DescribeTransitGatewayPeeringAttachmentsRequest
       attr_accessor transit_gateway_attachment_ids: ::Array[::String]
       attr_accessor filters: ::Array[Types::Filter]
@@ -8952,6 +9013,18 @@ module Aws::EC2
 
     class DisassociateIpamResourceDiscoveryResult
       attr_accessor ipam_resource_discovery_association: Types::IpamResourceDiscoveryAssociation
+      SENSITIVE: []
+    end
+
+    class DisassociateKmsKeyIdRequest
+      attr_accessor snapshot_id: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DisassociateKmsKeyIdResult
+      attr_accessor return: bool
       SENSITIVE: []
     end
 
@@ -15158,6 +15231,21 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class ModifyTransitGatewayNetworkFunctionAttachmentRequest
+      attr_accessor transit_gateway_attachment_id: ::String
+      attr_accessor add_availability_zones: ::Array[::String]
+      attr_accessor add_availability_zone_ids: ::Array[::String]
+      attr_accessor remove_availability_zones: ::Array[::String]
+      attr_accessor remove_availability_zone_ids: ::Array[::String]
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class ModifyTransitGatewayNetworkFunctionAttachmentResult
+      attr_accessor transit_gateway_network_function_attachment: Types::TransitGatewayNetworkFunctionAttachment
+      SENSITIVE: []
+    end
+
     class ModifyTransitGatewayOptions
       attr_accessor add_transit_gateway_cidr_blocks: ::Array[::String]
       attr_accessor remove_transit_gateway_cidr_blocks: ::Array[::String]
@@ -15574,6 +15662,7 @@ module Aws::EC2
       attr_accessor service_id: ::String
       attr_accessor add_allowed_principals: ::Array[::String]
       attr_accessor remove_allowed_principals: ::Array[::String]
+      attr_accessor permission_type: ("vpc-endpoint" | "transit-gateway-attachment")
       SENSITIVE: []
     end
 
@@ -16909,6 +16998,7 @@ module Aws::EC2
       attr_accessor dry_run: bool
       attr_accessor service_id: ::String
       attr_accessor vpc_endpoint_ids: ::Array[::String]
+      attr_accessor transit_gateway_attachment_ids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -18404,6 +18494,7 @@ module Aws::EC2
       attr_accessor completion_duration_minutes: ::Integer
       attr_accessor completion_time: ::Time
       attr_accessor full_snapshot_size_in_bytes: ::Integer
+      attr_accessor associated_kms_keys: ::Array[Types::AssociatedKmsKey]
       attr_accessor snapshot_id: ::String
       attr_accessor volume_id: ::String
       attr_accessor state: ("pending" | "completed" | "error" | "recoverable" | "recovering")
@@ -19386,6 +19477,20 @@ module Aws::EC2
       attr_accessor rule_number: ::Integer
       attr_accessor match_source_cidr: ::String
       attr_accessor nat_cidr: ::String
+      SENSITIVE: []
+    end
+
+    class TransitGatewayNetworkFunctionAttachment
+      attr_accessor transit_gateway_attachment_id: ::String
+      attr_accessor transit_gateway_id: ::String
+      attr_accessor transit_gateway_owner_id: ::String
+      attr_accessor resource_owner_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor availability_zone_ids: ::Array[::String]
+      attr_accessor state: ("initiating" | "initiatingRequest" | "pendingAcceptance" | "rollingBack" | "pending" | "available" | "modifying" | "deleting" | "deleted" | "failed" | "rejected" | "rejecting" | "failing")
+      attr_accessor creation_time: ::Time
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
@@ -20464,6 +20569,8 @@ module Aws::EC2
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor vpc_endpoint_region: ::String
       attr_accessor payer_responsibilities: ::Array[Types::PayerResponsibilityEntry]
+      attr_accessor transit_gateway_attachment_id: ::String
+      attr_accessor transit_gateway_attachment_owner: ::String
       SENSITIVE: []
     end
 

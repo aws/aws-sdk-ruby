@@ -183,7 +183,8 @@ module Aws
       def accept_vpc_endpoint_connections: (
                                              ?dry_run: bool,
                                              service_id: ::String,
-                                             vpc_endpoint_ids: Array[::String]
+                                             vpc_endpoint_ids: Array[::String],
+                                             ?transit_gateway_attachment_ids: Array[::String]
                                            ) -> _AcceptVpcEndpointConnectionsResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptVpcEndpointConnectionsResponseSuccess
 
@@ -524,6 +525,18 @@ module Aws
                                                ?client_token: ::String
                                              ) -> _AssociateIpamResourceDiscoveryResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateIpamResourceDiscoveryResponseSuccess
+
+      interface _AssociateKmsKeyIdResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateKmsKeyIdResult]
+        def return: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#associate_kms_key_id-instance_method
+      def associate_kms_key_id: (
+                                  ?snapshot_id: ::String,
+                                  kms_key_id: ::String,
+                                  ?dry_run: bool
+                                ) -> _AssociateKmsKeyIdResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateKmsKeyIdResponseSuccess
 
       interface _AssociateNatGatewayAddressResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateNatGatewayAddressResult]
@@ -3172,6 +3185,7 @@ module Aws
         def completion_duration_minutes: () -> ::Integer
         def completion_time: () -> ::Time
         def full_snapshot_size_in_bytes: () -> ::Integer
+        def associated_kms_keys: () -> ::Array[Types::AssociatedKmsKey]
         def snapshot_id: () -> ::String
         def volume_id: () -> ::String
         def state: () -> ("pending" | "completed" | "error" | "recoverable" | "recovering")
@@ -3613,6 +3627,31 @@ module Aws
                                                      ?dry_run: bool
                                                    ) -> _CreateTransitGatewayMulticastDomainResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTransitGatewayMulticastDomainResponseSuccess
+
+      interface _CreateTransitGatewayNetworkFunctionAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTransitGatewayNetworkFunctionAttachmentResult]
+        def transit_gateway_network_function_attachment: () -> Types::TransitGatewayNetworkFunctionAttachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#create_transit_gateway_network_function_attachment-instance_method
+      def create_transit_gateway_network_function_attachment: (
+                                                                transit_gateway_id: ::String,
+                                                                service_name: ::String,
+                                                                ?availability_zones: Array[::String],
+                                                                ?availability_zone_ids: Array[::String],
+                                                                ?tag_specifications: Array[
+                                                                  {
+                                                                    resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "declarative-policies-report" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fca-policy" | "fleet" | "fpga-image" | "host-reservation" | "image" | "image-usage-report" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "outpost-lag" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "service-link-virtual-interface" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-metering-policy" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "vpc-encryption-control" | "route-server" | "route-server-endpoint" | "route-server-peer" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint" | "verified-access-endpoint-target" | "ipam-external-resource-verification-token" | "capacity-block" | "mac-modification-task" | "ipam-prefix-list-resolver" | "ipam-policy" | "ipam-prefix-list-resolver-target" | "ipam-internet-registry-association" | "secondary-interface" | "secondary-network" | "secondary-subnet" | "capacity-manager-data-export" | "vpn-concentrator" | "ipam-pool-allocation" | "capacity-reservation-cancellation-quote" | "application-status-check" | "capacity-reservation-modification-quote" | "metric-category")?,
+                                                                    tags: Array[
+                                                                      {
+                                                                        key: ::String?,
+                                                                        value: ::String?
+                                                                      }
+                                                                    ]?
+                                                                  }
+                                                                ],
+                                                                ?dry_run: bool
+                                                              ) -> _CreateTransitGatewayNetworkFunctionAttachmentResponseSuccess
+                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTransitGatewayNetworkFunctionAttachmentResponseSuccess
 
       interface _CreateTransitGatewayPeeringAttachmentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateTransitGatewayPeeringAttachmentResult]
@@ -5203,6 +5242,17 @@ module Aws
                                                      ?dry_run: bool
                                                    ) -> _DeleteTransitGatewayMulticastDomainResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTransitGatewayMulticastDomainResponseSuccess
+
+      interface _DeleteTransitGatewayNetworkFunctionAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTransitGatewayNetworkFunctionAttachmentResult]
+        def transit_gateway_network_function_attachment: () -> Types::TransitGatewayNetworkFunctionAttachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#delete_transit_gateway_network_function_attachment-instance_method
+      def delete_transit_gateway_network_function_attachment: (
+                                                                transit_gateway_attachment_id: ::String,
+                                                                ?dry_run: bool
+                                                              ) -> _DeleteTransitGatewayNetworkFunctionAttachmentResponseSuccess
+                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTransitGatewayNetworkFunctionAttachmentResponseSuccess
 
       interface _DeleteTransitGatewayPeeringAttachmentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTransitGatewayPeeringAttachmentResult]
@@ -8691,6 +8741,26 @@ module Aws
                                                       ) -> _DescribeTransitGatewayMulticastDomainsResponseSuccess
                                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTransitGatewayMulticastDomainsResponseSuccess
 
+      interface _DescribeTransitGatewayNetworkFunctionAttachmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTransitGatewayNetworkFunctionAttachmentsResult]
+        def transit_gateway_network_function_attachments: () -> ::Array[Types::TransitGatewayNetworkFunctionAttachment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#describe_transit_gateway_network_function_attachments-instance_method
+      def describe_transit_gateway_network_function_attachments: (
+                                                                   ?transit_gateway_attachment_ids: Array[::String],
+                                                                   ?filters: Array[
+                                                                     {
+                                                                       name: ::String?,
+                                                                       values: Array[::String]?
+                                                                     }
+                                                                   ],
+                                                                   ?max_results: ::Integer,
+                                                                   ?next_token: ::String,
+                                                                   ?dry_run: bool
+                                                                 ) -> _DescribeTransitGatewayNetworkFunctionAttachmentsResponseSuccess
+                                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTransitGatewayNetworkFunctionAttachmentsResponseSuccess
+
       interface _DescribeTransitGatewayPeeringAttachmentsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTransitGatewayPeeringAttachmentsResult]
         def transit_gateway_peering_attachments: () -> ::Array[Types::TransitGatewayPeeringAttachment]
@@ -9799,6 +9869,18 @@ module Aws
                                                   ipam_resource_discovery_association_id: ::String
                                                 ) -> _DisassociateIpamResourceDiscoveryResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateIpamResourceDiscoveryResponseSuccess
+
+      interface _DisassociateKmsKeyIdResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateKmsKeyIdResult]
+        def return: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#disassociate_kms_key_id-instance_method
+      def disassociate_kms_key_id: (
+                                     ?snapshot_id: ::String,
+                                     kms_key_id: ::String,
+                                     ?dry_run: bool
+                                   ) -> _DisassociateKmsKeyIdResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateKmsKeyIdResponseSuccess
 
       interface _DisassociateNatGatewayAddressResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateNatGatewayAddressResult]
@@ -13136,6 +13218,21 @@ module Aws
                                                   ) -> _ModifyTransitGatewayMeteringPolicyResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyTransitGatewayMeteringPolicyResponseSuccess
 
+      interface _ModifyTransitGatewayNetworkFunctionAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyTransitGatewayNetworkFunctionAttachmentResult]
+        def transit_gateway_network_function_attachment: () -> Types::TransitGatewayNetworkFunctionAttachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#modify_transit_gateway_network_function_attachment-instance_method
+      def modify_transit_gateway_network_function_attachment: (
+                                                                transit_gateway_attachment_id: ::String,
+                                                                ?add_availability_zones: Array[::String],
+                                                                ?add_availability_zone_ids: Array[::String],
+                                                                ?remove_availability_zones: Array[::String],
+                                                                ?remove_availability_zone_ids: Array[::String],
+                                                                ?dry_run: bool
+                                                              ) -> _ModifyTransitGatewayNetworkFunctionAttachmentResponseSuccess
+                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyTransitGatewayNetworkFunctionAttachmentResponseSuccess
+
       interface _ModifyTransitGatewayPolicyTableEntryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ModifyTransitGatewayPolicyTableEntryResult]
         def transit_gateway_policy_table_entry: () -> Types::TransitGatewayPolicyTableEntry
@@ -13560,7 +13657,8 @@ module Aws
                                                      ?dry_run: bool,
                                                      service_id: ::String,
                                                      ?add_allowed_principals: Array[::String],
-                                                     ?remove_allowed_principals: Array[::String]
+                                                     ?remove_allowed_principals: Array[::String],
+                                                     ?permission_type: ("vpc-endpoint" | "transit-gateway-attachment")
                                                    ) -> _ModifyVpcEndpointServicePermissionsResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyVpcEndpointServicePermissionsResponseSuccess
 
@@ -14088,7 +14186,8 @@ module Aws
       def reject_vpc_endpoint_connections: (
                                              ?dry_run: bool,
                                              service_id: ::String,
-                                             vpc_endpoint_ids: Array[::String]
+                                             vpc_endpoint_ids: Array[::String],
+                                             ?transit_gateway_attachment_ids: Array[::String]
                                            ) -> _RejectVpcEndpointConnectionsResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectVpcEndpointConnectionsResponseSuccess
 

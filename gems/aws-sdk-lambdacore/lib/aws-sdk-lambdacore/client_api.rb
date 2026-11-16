@@ -40,6 +40,8 @@ module Aws::LambdaCore
     DeleteRuntimeVersionRequest = Shapes::StructureShape.new(name: 'DeleteRuntimeVersionRequest')
     DeleteRuntimeVersionRequestRecoveryWindowInDaysInteger = Shapes::IntegerShape.new(name: 'DeleteRuntimeVersionRequestRecoveryWindowInDaysInteger')
     DeleteRuntimeVersionResponse = Shapes::StructureShape.new(name: 'DeleteRuntimeVersionResponse')
+    ElasticIpConfiguration = Shapes::StructureShape.new(name: 'ElasticIpConfiguration')
+    ElasticIpType = Shapes::StringShape.new(name: 'ElasticIpType')
     GetNetworkConnectorRequest = Shapes::StructureShape.new(name: 'GetNetworkConnectorRequest')
     GetNetworkConnectorResponse = Shapes::StructureShape.new(name: 'GetNetworkConnectorResponse')
     GetRuntimeAliasRequest = Shapes::StructureShape.new(name: 'GetRuntimeAliasRequest')
@@ -245,6 +247,9 @@ module Aws::LambdaCore
 
     DeleteRuntimeVersionResponse.struct_class = Types::DeleteRuntimeVersionResponse
 
+    ElasticIpConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: ElasticIpType, required: true, location_name: "Type"))
+    ElasticIpConfiguration.struct_class = Types::ElasticIpConfiguration
+
     GetNetworkConnectorRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: NetworkConnectorIdentifier, required: true, location: "uri", location_name: "Identifier"))
     GetNetworkConnectorRequest.struct_class = Types::GetNetworkConnectorRequest
 
@@ -409,6 +414,7 @@ module Aws::LambdaCore
     NetworkConnectorVpcEgressConfiguration.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: NetworkConnectorSecurityGroupIds, location_name: "SecurityGroupIds"))
     NetworkConnectorVpcEgressConfiguration.add_member(:network_protocol, Shapes::ShapeRef.new(shape: NetworkProtocol, location_name: "NetworkProtocol"))
     NetworkConnectorVpcEgressConfiguration.add_member(:associated_compute_resource_types, Shapes::ShapeRef.new(shape: AssociatedComputeResourceTypesList, location_name: "AssociatedComputeResourceTypes"))
+    NetworkConnectorVpcEgressConfiguration.add_member(:elastic_ip_configuration, Shapes::ShapeRef.new(shape: ElasticIpConfiguration, location_name: "ElasticIpConfiguration"))
     NetworkConnectorVpcEgressConfiguration.struct_class = Types::NetworkConnectorVpcEgressConfiguration
 
     NetworkConnectorsList.member = Shapes::ShapeRef.new(shape: NetworkConnectorSummary)

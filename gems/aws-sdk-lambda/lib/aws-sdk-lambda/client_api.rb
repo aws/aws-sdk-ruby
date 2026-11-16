@@ -14,6 +14,8 @@ module Aws::Lambda
 
     include Seahorse::Model
 
+    AcceleratorConfig = Shapes::StructureShape.new(name: 'AcceleratorConfig')
+    AcceleratorMemoryGB = Shapes::IntegerShape.new(name: 'AcceleratorMemoryGB')
     AccountLimit = Shapes::StructureShape.new(name: 'AccountLimit')
     AccountUsage = Shapes::StructureShape.new(name: 'AccountUsage')
     Action = Shapes::StringShape.new(name: 'Action')
@@ -611,6 +613,9 @@ module Aws::Lambda
     WorkingDirectory = Shapes::StringShape.new(name: 'WorkingDirectory')
     XAmznTraceId = Shapes::StringShape.new(name: 'XAmznTraceId')
 
+    AcceleratorConfig.add_member(:accelerator_memory_size, Shapes::ShapeRef.new(shape: AcceleratorMemoryGB, required: true, location_name: "AcceleratorMemorySize"))
+    AcceleratorConfig.struct_class = Types::AcceleratorConfig
+
     AccountLimit.add_member(:total_code_size, Shapes::ShapeRef.new(shape: Long, location_name: "TotalCodeSize"))
     AccountLimit.add_member(:code_size_unzipped, Shapes::ShapeRef.new(shape: Long, location_name: "CodeSizeUnzipped"))
     AccountLimit.add_member(:code_size_zipped, Shapes::ShapeRef.new(shape: Long, location_name: "CodeSizeZipped"))
@@ -957,6 +962,7 @@ module Aws::Lambda
     CreateFunctionRequest.add_member(:capacity_provider_config, Shapes::ShapeRef.new(shape: CapacityProviderConfig, location_name: "CapacityProviderConfig"))
     CreateFunctionRequest.add_member(:durable_config, Shapes::ShapeRef.new(shape: DurableConfig, location_name: "DurableConfig"))
     CreateFunctionRequest.add_member(:runtime_config, Shapes::ShapeRef.new(shape: FunctionRuntimeConfig, location_name: "RuntimeConfig"))
+    CreateFunctionRequest.add_member(:accelerator_config, Shapes::ShapeRef.new(shape: AcceleratorConfig, location_name: "AcceleratorConfig"))
     CreateFunctionRequest.struct_class = Types::CreateFunctionRequest
 
     CreateFunctionUrlConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionUrlFunctionName, required: true, location: "uri", location_name: "FunctionName"))
@@ -1319,6 +1325,7 @@ module Aws::Lambda
     FunctionConfiguration.add_member(:config_sha_256, Shapes::ShapeRef.new(shape: String, location_name: "ConfigSha256"))
     FunctionConfiguration.add_member(:durable_config, Shapes::ShapeRef.new(shape: DurableConfig, location_name: "DurableConfig"))
     FunctionConfiguration.add_member(:runtime_config, Shapes::ShapeRef.new(shape: FunctionRuntimeConfig, location_name: "RuntimeConfig"))
+    FunctionConfiguration.add_member(:accelerator_config, Shapes::ShapeRef.new(shape: AcceleratorConfig, location_name: "AcceleratorConfig"))
     FunctionConfiguration.struct_class = Types::FunctionConfiguration
 
     FunctionEventInvokeConfig.add_member(:last_modified, Shapes::ShapeRef.new(shape: Date, location_name: "LastModified"))
@@ -2405,6 +2412,7 @@ module Aws::Lambda
     UpdateFunctionConfigurationRequest.add_member(:capacity_provider_config, Shapes::ShapeRef.new(shape: CapacityProviderConfig, location_name: "CapacityProviderConfig"))
     UpdateFunctionConfigurationRequest.add_member(:durable_config, Shapes::ShapeRef.new(shape: DurableConfig, location_name: "DurableConfig"))
     UpdateFunctionConfigurationRequest.add_member(:runtime_config, Shapes::ShapeRef.new(shape: FunctionRuntimeConfig, location_name: "RuntimeConfig"))
+    UpdateFunctionConfigurationRequest.add_member(:accelerator_config, Shapes::ShapeRef.new(shape: AcceleratorConfig, location_name: "AcceleratorConfig"))
     UpdateFunctionConfigurationRequest.struct_class = Types::UpdateFunctionConfigurationRequest
 
     UpdateFunctionEventInvokeConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location: "uri", location_name: "FunctionName"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2026-11-16)
+------------------
+
+* Feature - Adds support for context-aware stateful rule groups, letting rules reference AWS resource IDs through ContextSets sourced from a Network Manager context store.
+
 1.110.0 (2026-11-13)
 ------------------
 

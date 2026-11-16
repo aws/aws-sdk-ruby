@@ -14,10 +14,30 @@ module Aws::Health
 
     include Seahorse::Model
 
+    AccountEntity = Shapes::StructureShape.new(name: 'AccountEntity')
     AccountEntityAggregate = Shapes::StructureShape.new(name: 'AccountEntityAggregate')
     AccountEntityAggregatesList = Shapes::ListShape.new(name: 'AccountEntityAggregatesList')
+    AccountTag = Shapes::StructureShape.new(name: 'AccountTag')
+    AccountTagKey = Shapes::StringShape.new(name: 'AccountTagKey')
+    AccountTagList = Shapes::ListShape.new(name: 'AccountTagList')
+    AccountTagSet = Shapes::MapShape.new(name: 'AccountTagSet')
+    AccountTagType = Shapes::StringShape.new(name: 'AccountTagType')
+    AccountTagValue = Shapes::StringShape.new(name: 'AccountTagValue')
+    AffectedAccountEntityList = Shapes::ListShape.new(name: 'AffectedAccountEntityList')
+    AffectedAccountFilter = Shapes::StructureShape.new(name: 'AffectedAccountFilter')
+    AffectedAccountsForOrganizationTagFilter = Shapes::MapShape.new(name: 'AffectedAccountsForOrganizationTagFilter')
+    AffectedAccountsForOrganizationTagValueList = Shapes::ListShape.new(name: 'AffectedAccountsForOrganizationTagValueList')
+    AffectedEntitiesForOrganizationTagFilter = Shapes::MapShape.new(name: 'AffectedEntitiesForOrganizationTagFilter')
+    AffectedEntitiesForOrganizationTagValueList = Shapes::ListShape.new(name: 'AffectedEntitiesForOrganizationTagValueList')
     AffectedEntity = Shapes::StructureShape.new(name: 'AffectedEntity')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    ConfigureTagsForOrganizationRequest = Shapes::StructureShape.new(name: 'ConfigureTagsForOrganizationRequest')
+    ConfigureTagsForOrganizationResponse = Shapes::StructureShape.new(name: 'ConfigureTagsForOrganizationResponse')
+    ConfigureTagsForOrganizationTagKeyList = Shapes::ListShape.new(name: 'ConfigureTagsForOrganizationTagKeyList')
+    ConfigureTagsRequest = Shapes::StructureShape.new(name: 'ConfigureTagsRequest')
+    ConfigureTagsResourceTagKeyList = Shapes::ListShape.new(name: 'ConfigureTagsResourceTagKeyList')
+    ConfigureTagsResponse = Shapes::StructureShape.new(name: 'ConfigureTagsResponse')
     DateTimeRange = Shapes::StructureShape.new(name: 'DateTimeRange')
     DescribeAffectedAccountsForOrganizationRequest = Shapes::StructureShape.new(name: 'DescribeAffectedAccountsForOrganizationRequest')
     DescribeAffectedAccountsForOrganizationResponse = Shapes::StructureShape.new(name: 'DescribeAffectedAccountsForOrganizationResponse')
@@ -26,10 +46,14 @@ module Aws::Health
     DescribeAffectedEntitiesForOrganizationResponse = Shapes::StructureShape.new(name: 'DescribeAffectedEntitiesForOrganizationResponse')
     DescribeAffectedEntitiesRequest = Shapes::StructureShape.new(name: 'DescribeAffectedEntitiesRequest')
     DescribeAffectedEntitiesResponse = Shapes::StructureShape.new(name: 'DescribeAffectedEntitiesResponse')
+    DescribeAffectedEntitiesTagFilter = Shapes::MapShape.new(name: 'DescribeAffectedEntitiesTagFilter')
+    DescribeAffectedEntitiesTagValueList = Shapes::ListShape.new(name: 'DescribeAffectedEntitiesTagValueList')
     DescribeEntityAggregatesForOrganizationRequest = Shapes::StructureShape.new(name: 'DescribeEntityAggregatesForOrganizationRequest')
     DescribeEntityAggregatesForOrganizationResponse = Shapes::StructureShape.new(name: 'DescribeEntityAggregatesForOrganizationResponse')
     DescribeEntityAggregatesRequest = Shapes::StructureShape.new(name: 'DescribeEntityAggregatesRequest')
     DescribeEntityAggregatesResponse = Shapes::StructureShape.new(name: 'DescribeEntityAggregatesResponse')
+    DescribeEntityAggregatesTagFilter = Shapes::MapShape.new(name: 'DescribeEntityAggregatesTagFilter')
+    DescribeEntityAggregatesTagValueList = Shapes::ListShape.new(name: 'DescribeEntityAggregatesTagValueList')
     DescribeEventAggregatesRequest = Shapes::StructureShape.new(name: 'DescribeEventAggregatesRequest')
     DescribeEventAggregatesResponse = Shapes::StructureShape.new(name: 'DescribeEventAggregatesResponse')
     DescribeEventDetailsFailedSet = Shapes::ListShape.new(name: 'DescribeEventDetailsFailedSet')
@@ -46,11 +70,23 @@ module Aws::Health
     DescribeEventsForOrganizationResponse = Shapes::StructureShape.new(name: 'DescribeEventsForOrganizationResponse')
     DescribeEventsRequest = Shapes::StructureShape.new(name: 'DescribeEventsRequest')
     DescribeEventsResponse = Shapes::StructureShape.new(name: 'DescribeEventsResponse')
+    DescribeEventsTagFilter = Shapes::MapShape.new(name: 'DescribeEventsTagFilter')
+    DescribeEventsTagValueList = Shapes::ListShape.new(name: 'DescribeEventsTagValueList')
     DescribeHealthServiceStatusForOrganizationResponse = Shapes::StructureShape.new(name: 'DescribeHealthServiceStatusForOrganizationResponse')
     DescribeServiceLifecycleRequest = Shapes::StructureShape.new(name: 'DescribeServiceLifecycleRequest')
     DescribeServiceLifecycleResponse = Shapes::StructureShape.new(name: 'DescribeServiceLifecycleResponse')
+    DescribeTagKeysForOrganizationResponse = Shapes::StructureShape.new(name: 'DescribeTagKeysForOrganizationResponse')
+    DescribeTagKeysResponse = Shapes::StructureShape.new(name: 'DescribeTagKeysResponse')
+    DescribeTagsForOrganizationFilter = Shapes::StructureShape.new(name: 'DescribeTagsForOrganizationFilter')
+    DescribeTagsForOrganizationRequest = Shapes::StructureShape.new(name: 'DescribeTagsForOrganizationRequest')
+    DescribeTagsForOrganizationResponse = Shapes::StructureShape.new(name: 'DescribeTagsForOrganizationResponse')
+    DescribeTagsOnboardingStatusForOrganizationResponse = Shapes::StructureShape.new(name: 'DescribeTagsOnboardingStatusForOrganizationResponse')
+    DescribeTagsOnboardingStatusResponse = Shapes::StructureShape.new(name: 'DescribeTagsOnboardingStatusResponse')
+    DescribeTagsRequest = Shapes::StructureShape.new(name: 'DescribeTagsRequest')
+    DescribeTagsResponse = Shapes::StructureShape.new(name: 'DescribeTagsResponse')
     EntityAccountFilter = Shapes::StructureShape.new(name: 'EntityAccountFilter')
     EntityAggregate = Shapes::StructureShape.new(name: 'EntityAggregate')
+    EntityAggregateFilter = Shapes::StructureShape.new(name: 'EntityAggregateFilter')
     EntityAggregateList = Shapes::ListShape.new(name: 'EntityAggregateList')
     EntityFilter = Shapes::StructureShape.new(name: 'EntityFilter')
     EntityList = Shapes::ListShape.new(name: 'EntityList')
@@ -86,6 +122,9 @@ module Aws::Health
     OrganizationAffectedEntitiesErrorItem = Shapes::StructureShape.new(name: 'OrganizationAffectedEntitiesErrorItem')
     OrganizationEntityAccountFiltersList = Shapes::ListShape.new(name: 'OrganizationEntityAccountFiltersList')
     OrganizationEntityAggregate = Shapes::StructureShape.new(name: 'OrganizationEntityAggregate')
+    OrganizationEntityAggregateFilter = Shapes::StructureShape.new(name: 'OrganizationEntityAggregateFilter')
+    OrganizationEntityAggregateTagFilter = Shapes::MapShape.new(name: 'OrganizationEntityAggregateTagFilter')
+    OrganizationEntityAggregateTagValueList = Shapes::ListShape.new(name: 'OrganizationEntityAggregateTagValueList')
     OrganizationEntityAggregatesList = Shapes::ListShape.new(name: 'OrganizationEntityAggregatesList')
     OrganizationEntityFiltersList = Shapes::ListShape.new(name: 'OrganizationEntityFiltersList')
     OrganizationEvent = Shapes::StructureShape.new(name: 'OrganizationEvent')
@@ -95,9 +134,27 @@ module Aws::Health
     OrganizationEventDetailsErrorItem = Shapes::StructureShape.new(name: 'OrganizationEventDetailsErrorItem')
     OrganizationEventFilter = Shapes::StructureShape.new(name: 'OrganizationEventFilter')
     OrganizationEventList = Shapes::ListShape.new(name: 'OrganizationEventList')
+    OrganizationEventTagFilter = Shapes::MapShape.new(name: 'OrganizationEventTagFilter')
+    OrganizationEventTagValueList = Shapes::ListShape.new(name: 'OrganizationEventTagValueList')
+    OrganizationTag = Shapes::StructureShape.new(name: 'OrganizationTag')
+    OrganizationTagKey = Shapes::StructureShape.new(name: 'OrganizationTagKey')
+    OrganizationTagKeyList = Shapes::ListShape.new(name: 'OrganizationTagKeyList')
+    OrganizationTagList = Shapes::ListShape.new(name: 'OrganizationTagList')
+    OrganizationTagType = Shapes::StringShape.new(name: 'OrganizationTagType')
+    OrganizationTagTypeFilter = Shapes::ListShape.new(name: 'OrganizationTagTypeFilter')
+    ResourceTagKey = Shapes::StructureShape.new(name: 'ResourceTagKey')
+    ResourceTagKeyList = Shapes::ListShape.new(name: 'ResourceTagKeyList')
+    ResourceTagSet = Shapes::MapShape.new(name: 'ResourceTagSet')
+    ResourceTagValue = Shapes::StringShape.new(name: 'ResourceTagValue')
     ServiceLifecycle = Shapes::StructureShape.new(name: 'ServiceLifecycle')
     ServiceLifecycleFilter = Shapes::StructureShape.new(name: 'ServiceLifecycleFilter')
     ServiceLifecycleList = Shapes::ListShape.new(name: 'ServiceLifecycleList')
+    TagFilterKey = Shapes::StringShape.new(name: 'TagFilterKey')
+    TagFilterValue = Shapes::StringShape.new(name: 'TagFilterValue')
+    TagKeyForOrganization = Shapes::StructureShape.new(name: 'TagKeyForOrganization')
+    TagKeyStatus = Shapes::StringShape.new(name: 'TagKeyStatus')
+    TagsOnboardingStatus = Shapes::StringShape.new(name: 'TagsOnboardingStatus')
+    TagsOnboardingStatusForOrganization = Shapes::StringShape.new(name: 'TagsOnboardingStatusForOrganization')
     UnsupportedLocale = Shapes::StructureShape.new(name: 'UnsupportedLocale')
     accountId = Shapes::StringShape.new(name: 'accountId')
     affectedAccountsList = Shapes::ListShape.new(name: 'affectedAccountsList')
@@ -138,16 +195,21 @@ module Aws::Health
     metadataKey = Shapes::StringShape.new(name: 'metadataKey')
     metadataValue = Shapes::StringShape.new(name: 'metadataValue')
     nextToken = Shapes::StringShape.new(name: 'nextToken')
+    organizationTagKey = Shapes::StringShape.new(name: 'organizationTagKey')
     region = Shapes::StringShape.new(name: 'region')
     regionList = Shapes::ListShape.new(name: 'regionList')
+    resourceTagKey = Shapes::StringShape.new(name: 'resourceTagKey')
     service = Shapes::StringShape.new(name: 'service')
     serviceList = Shapes::ListShape.new(name: 'serviceList')
     string = Shapes::StringShape.new(name: 'string')
-    tagFilter = Shapes::ListShape.new(name: 'tagFilter')
     tagKey = Shapes::StringShape.new(name: 'tagKey')
     tagSet = Shapes::MapShape.new(name: 'tagSet')
     tagValue = Shapes::StringShape.new(name: 'tagValue')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
+
+    AccountEntity.add_member(:account_id, Shapes::ShapeRef.new(shape: accountId, location_name: "accountId"))
+    AccountEntity.add_member(:account_tags, Shapes::ShapeRef.new(shape: AccountTagSet, location_name: "accountTags"))
+    AccountEntity.struct_class = Types::AccountEntity
 
     AccountEntityAggregate.add_member(:account_id, Shapes::ShapeRef.new(shape: eventArn, location_name: "accountId"))
     AccountEntityAggregate.add_member(:count, Shapes::ShapeRef.new(shape: count, location_name: "count"))
@@ -156,6 +218,32 @@ module Aws::Health
 
     AccountEntityAggregatesList.member = Shapes::ShapeRef.new(shape: AccountEntityAggregate)
 
+    AccountTag.add_member(:key, Shapes::ShapeRef.new(shape: tagKey, location_name: "key"))
+    AccountTag.add_member(:value, Shapes::ShapeRef.new(shape: tagValue, location_name: "value"))
+    AccountTag.add_member(:type, Shapes::ShapeRef.new(shape: AccountTagType, location_name: "type"))
+    AccountTag.struct_class = Types::AccountTag
+
+    AccountTagList.member = Shapes::ShapeRef.new(shape: AccountTag)
+
+    AccountTagSet.key = Shapes::ShapeRef.new(shape: AccountTagKey)
+    AccountTagSet.value = Shapes::ShapeRef.new(shape: AccountTagValue)
+
+    AffectedAccountEntityList.member = Shapes::ShapeRef.new(shape: AccountEntity)
+
+    AffectedAccountFilter.add_member(:event_arn, Shapes::ShapeRef.new(shape: eventArn, location_name: "eventArn"))
+    AffectedAccountFilter.add_member(:tags, Shapes::ShapeRef.new(shape: AffectedAccountsForOrganizationTagFilter, location_name: "tags"))
+    AffectedAccountFilter.struct_class = Types::AffectedAccountFilter
+
+    AffectedAccountsForOrganizationTagFilter.key = Shapes::ShapeRef.new(shape: TagFilterKey)
+    AffectedAccountsForOrganizationTagFilter.value = Shapes::ShapeRef.new(shape: AffectedAccountsForOrganizationTagValueList)
+
+    AffectedAccountsForOrganizationTagValueList.member = Shapes::ShapeRef.new(shape: TagFilterValue)
+
+    AffectedEntitiesForOrganizationTagFilter.key = Shapes::ShapeRef.new(shape: TagFilterKey)
+    AffectedEntitiesForOrganizationTagFilter.value = Shapes::ShapeRef.new(shape: AffectedEntitiesForOrganizationTagValueList)
+
+    AffectedEntitiesForOrganizationTagValueList.member = Shapes::ShapeRef.new(shape: TagFilterValue)
+
     AffectedEntity.add_member(:entity_arn, Shapes::ShapeRef.new(shape: entityArn, location_name: "entityArn"))
     AffectedEntity.add_member(:event_arn, Shapes::ShapeRef.new(shape: eventArn, location_name: "eventArn"))
     AffectedEntity.add_member(:entity_value, Shapes::ShapeRef.new(shape: entityValue, location_name: "entityValue"))
@@ -163,12 +251,30 @@ module Aws::Health
     AffectedEntity.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: accountId, location_name: "awsAccountId"))
     AffectedEntity.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "lastUpdatedTime"))
     AffectedEntity.add_member(:status_code, Shapes::ShapeRef.new(shape: entityStatusCode, location_name: "statusCode"))
+    AffectedEntity.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagSet, location_name: "resourceTags"))
+    AffectedEntity.add_member(:account_tags, Shapes::ShapeRef.new(shape: AccountTagSet, location_name: "accountTags"))
     AffectedEntity.add_member(:tags, Shapes::ShapeRef.new(shape: tagSet, location_name: "tags"))
     AffectedEntity.add_member(:entity_metadata, Shapes::ShapeRef.new(shape: entityMetadata, location_name: "entityMetadata"))
     AffectedEntity.struct_class = Types::AffectedEntity
 
     ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
     ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
+    ConfigureTagsForOrganizationRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: ConfigureTagsForOrganizationTagKeyList, required: true, location_name: "tagKeys"))
+    ConfigureTagsForOrganizationRequest.struct_class = Types::ConfigureTagsForOrganizationRequest
+
+    ConfigureTagsForOrganizationResponse.add_member(:configured_tag_keys, Shapes::ShapeRef.new(shape: ConfigureTagsForOrganizationTagKeyList, location_name: "configuredTagKeys"))
+    ConfigureTagsForOrganizationResponse.struct_class = Types::ConfigureTagsForOrganizationResponse
+
+    ConfigureTagsForOrganizationTagKeyList.member = Shapes::ShapeRef.new(shape: TagKeyForOrganization)
+
+    ConfigureTagsRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: ConfigureTagsResourceTagKeyList, required: true, location_name: "tagKeys"))
+    ConfigureTagsRequest.struct_class = Types::ConfigureTagsRequest
+
+    ConfigureTagsResourceTagKeyList.member = Shapes::ShapeRef.new(shape: ResourceTagKey)
+
+    ConfigureTagsResponse.add_member(:configured_tag_keys, Shapes::ShapeRef.new(shape: ConfigureTagsResourceTagKeyList, location_name: "configuredTagKeys"))
+    ConfigureTagsResponse.struct_class = Types::ConfigureTagsResponse
 
     DateTimeRange.add_member(:from, Shapes::ShapeRef.new(shape: timestamp, location_name: "from"))
     DateTimeRange.add_member(:to, Shapes::ShapeRef.new(shape: timestamp, location_name: "to"))
@@ -177,9 +283,11 @@ module Aws::Health
     DescribeAffectedAccountsForOrganizationRequest.add_member(:event_arn, Shapes::ShapeRef.new(shape: eventArn, required: true, location_name: "eventArn"))
     DescribeAffectedAccountsForOrganizationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
     DescribeAffectedAccountsForOrganizationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxResults, location_name: "maxResults"))
+    DescribeAffectedAccountsForOrganizationRequest.add_member(:filter, Shapes::ShapeRef.new(shape: AffectedAccountFilter, location_name: "filter"))
     DescribeAffectedAccountsForOrganizationRequest.struct_class = Types::DescribeAffectedAccountsForOrganizationRequest
 
     DescribeAffectedAccountsForOrganizationResponse.add_member(:affected_accounts, Shapes::ShapeRef.new(shape: affectedAccountsList, location_name: "affectedAccounts"))
+    DescribeAffectedAccountsForOrganizationResponse.add_member(:affected_account_entities, Shapes::ShapeRef.new(shape: AffectedAccountEntityList, location_name: "affectedAccountEntities"))
     DescribeAffectedAccountsForOrganizationResponse.add_member(:event_scope_code, Shapes::ShapeRef.new(shape: eventScopeCode, location_name: "eventScopeCode"))
     DescribeAffectedAccountsForOrganizationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
     DescribeAffectedAccountsForOrganizationResponse.struct_class = Types::DescribeAffectedAccountsForOrganizationResponse
@@ -208,18 +316,30 @@ module Aws::Health
     DescribeAffectedEntitiesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
     DescribeAffectedEntitiesResponse.struct_class = Types::DescribeAffectedEntitiesResponse
 
+    DescribeAffectedEntitiesTagFilter.key = Shapes::ShapeRef.new(shape: TagFilterKey)
+    DescribeAffectedEntitiesTagFilter.value = Shapes::ShapeRef.new(shape: DescribeAffectedEntitiesTagValueList)
+
+    DescribeAffectedEntitiesTagValueList.member = Shapes::ShapeRef.new(shape: TagFilterValue)
+
     DescribeEntityAggregatesForOrganizationRequest.add_member(:event_arns, Shapes::ShapeRef.new(shape: OrganizationEventArnsList, required: true, location_name: "eventArns"))
     DescribeEntityAggregatesForOrganizationRequest.add_member(:aws_account_ids, Shapes::ShapeRef.new(shape: OrganizationAccountIdsList, location_name: "awsAccountIds"))
+    DescribeEntityAggregatesForOrganizationRequest.add_member(:filter, Shapes::ShapeRef.new(shape: OrganizationEntityAggregateFilter, location_name: "filter"))
     DescribeEntityAggregatesForOrganizationRequest.struct_class = Types::DescribeEntityAggregatesForOrganizationRequest
 
     DescribeEntityAggregatesForOrganizationResponse.add_member(:organization_entity_aggregates, Shapes::ShapeRef.new(shape: OrganizationEntityAggregatesList, location_name: "organizationEntityAggregates"))
     DescribeEntityAggregatesForOrganizationResponse.struct_class = Types::DescribeEntityAggregatesForOrganizationResponse
 
     DescribeEntityAggregatesRequest.add_member(:event_arns, Shapes::ShapeRef.new(shape: EventArnsList, location_name: "eventArns"))
+    DescribeEntityAggregatesRequest.add_member(:filter, Shapes::ShapeRef.new(shape: EntityAggregateFilter, location_name: "filter"))
     DescribeEntityAggregatesRequest.struct_class = Types::DescribeEntityAggregatesRequest
 
     DescribeEntityAggregatesResponse.add_member(:entity_aggregates, Shapes::ShapeRef.new(shape: EntityAggregateList, location_name: "entityAggregates"))
     DescribeEntityAggregatesResponse.struct_class = Types::DescribeEntityAggregatesResponse
+
+    DescribeEntityAggregatesTagFilter.key = Shapes::ShapeRef.new(shape: TagFilterKey)
+    DescribeEntityAggregatesTagFilter.value = Shapes::ShapeRef.new(shape: DescribeEntityAggregatesTagValueList)
+
+    DescribeEntityAggregatesTagValueList.member = Shapes::ShapeRef.new(shape: TagFilterValue)
 
     DescribeEventAggregatesRequest.add_member(:filter, Shapes::ShapeRef.new(shape: EventFilter, location_name: "filter"))
     DescribeEventAggregatesRequest.add_member(:aggregate_field, Shapes::ShapeRef.new(shape: eventAggregateField, required: true, location_name: "aggregateField"))
@@ -285,6 +405,11 @@ module Aws::Health
     DescribeEventsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
     DescribeEventsResponse.struct_class = Types::DescribeEventsResponse
 
+    DescribeEventsTagFilter.key = Shapes::ShapeRef.new(shape: TagFilterKey)
+    DescribeEventsTagFilter.value = Shapes::ShapeRef.new(shape: DescribeEventsTagValueList)
+
+    DescribeEventsTagValueList.member = Shapes::ShapeRef.new(shape: TagFilterValue)
+
     DescribeHealthServiceStatusForOrganizationResponse.add_member(:health_service_access_status_for_organization, Shapes::ShapeRef.new(shape: healthServiceAccessStatusForOrganization, location_name: "healthServiceAccessStatusForOrganization"))
     DescribeHealthServiceStatusForOrganizationResponse.struct_class = Types::DescribeHealthServiceStatusForOrganizationResponse
 
@@ -297,9 +422,42 @@ module Aws::Health
     DescribeServiceLifecycleResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
     DescribeServiceLifecycleResponse.struct_class = Types::DescribeServiceLifecycleResponse
 
+    DescribeTagKeysForOrganizationResponse.add_member(:keys, Shapes::ShapeRef.new(shape: OrganizationTagKeyList, location_name: "keys"))
+    DescribeTagKeysForOrganizationResponse.struct_class = Types::DescribeTagKeysForOrganizationResponse
+
+    DescribeTagKeysResponse.add_member(:keys, Shapes::ShapeRef.new(shape: ResourceTagKeyList, location_name: "keys"))
+    DescribeTagKeysResponse.struct_class = Types::DescribeTagKeysResponse
+
+    DescribeTagsForOrganizationFilter.add_member(:tag_types, Shapes::ShapeRef.new(shape: OrganizationTagTypeFilter, location_name: "tagTypes"))
+    DescribeTagsForOrganizationFilter.struct_class = Types::DescribeTagsForOrganizationFilter
+
+    DescribeTagsForOrganizationRequest.add_member(:filter, Shapes::ShapeRef.new(shape: DescribeTagsForOrganizationFilter, location_name: "filter"))
+    DescribeTagsForOrganizationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
+    DescribeTagsForOrganizationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxResultsLowerRange, location_name: "maxResults"))
+    DescribeTagsForOrganizationRequest.struct_class = Types::DescribeTagsForOrganizationRequest
+
+    DescribeTagsForOrganizationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: OrganizationTagList, location_name: "tags"))
+    DescribeTagsForOrganizationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
+    DescribeTagsForOrganizationResponse.struct_class = Types::DescribeTagsForOrganizationResponse
+
+    DescribeTagsOnboardingStatusForOrganizationResponse.add_member(:status, Shapes::ShapeRef.new(shape: TagsOnboardingStatusForOrganization, location_name: "status"))
+    DescribeTagsOnboardingStatusForOrganizationResponse.struct_class = Types::DescribeTagsOnboardingStatusForOrganizationResponse
+
+    DescribeTagsOnboardingStatusResponse.add_member(:status, Shapes::ShapeRef.new(shape: TagsOnboardingStatus, location_name: "status"))
+    DescribeTagsOnboardingStatusResponse.struct_class = Types::DescribeTagsOnboardingStatusResponse
+
+    DescribeTagsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
+    DescribeTagsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxResultsLowerRange, location_name: "maxResults"))
+    DescribeTagsRequest.struct_class = Types::DescribeTagsRequest
+
+    DescribeTagsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: AccountTagList, location_name: "tags"))
+    DescribeTagsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
+    DescribeTagsResponse.struct_class = Types::DescribeTagsResponse
+
     EntityAccountFilter.add_member(:event_arn, Shapes::ShapeRef.new(shape: eventArn, required: true, location_name: "eventArn"))
     EntityAccountFilter.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: accountId, location_name: "awsAccountId"))
     EntityAccountFilter.add_member(:status_codes, Shapes::ShapeRef.new(shape: entityStatusCodeList, location_name: "statusCodes"))
+    EntityAccountFilter.add_member(:tags, Shapes::ShapeRef.new(shape: AffectedEntitiesForOrganizationTagFilter, location_name: "tags"))
     EntityAccountFilter.struct_class = Types::EntityAccountFilter
 
     EntityAggregate.add_member(:event_arn, Shapes::ShapeRef.new(shape: eventArn, location_name: "eventArn"))
@@ -307,13 +465,16 @@ module Aws::Health
     EntityAggregate.add_member(:statuses, Shapes::ShapeRef.new(shape: entityStatuses, location_name: "statuses"))
     EntityAggregate.struct_class = Types::EntityAggregate
 
+    EntityAggregateFilter.add_member(:tags, Shapes::ShapeRef.new(shape: DescribeEntityAggregatesTagFilter, location_name: "tags"))
+    EntityAggregateFilter.struct_class = Types::EntityAggregateFilter
+
     EntityAggregateList.member = Shapes::ShapeRef.new(shape: EntityAggregate)
 
     EntityFilter.add_member(:event_arns, Shapes::ShapeRef.new(shape: eventArnList, required: true, location_name: "eventArns"))
     EntityFilter.add_member(:entity_arns, Shapes::ShapeRef.new(shape: entityArnList, location_name: "entityArns"))
     EntityFilter.add_member(:entity_values, Shapes::ShapeRef.new(shape: entityValueList, location_name: "entityValues"))
     EntityFilter.add_member(:last_updated_times, Shapes::ShapeRef.new(shape: dateTimeRangeList, location_name: "lastUpdatedTimes"))
-    EntityFilter.add_member(:tags, Shapes::ShapeRef.new(shape: tagFilter, location_name: "tags"))
+    EntityFilter.add_member(:tags, Shapes::ShapeRef.new(shape: DescribeAffectedEntitiesTagFilter, location_name: "tags"))
     EntityFilter.add_member(:status_codes, Shapes::ShapeRef.new(shape: entityStatusCodeList, location_name: "statusCodes"))
     EntityFilter.struct_class = Types::EntityFilter
 
@@ -373,7 +534,7 @@ module Aws::Health
     EventFilter.add_member(:entity_arns, Shapes::ShapeRef.new(shape: entityArnList, location_name: "entityArns"))
     EventFilter.add_member(:entity_values, Shapes::ShapeRef.new(shape: entityValueList, location_name: "entityValues"))
     EventFilter.add_member(:event_type_categories, Shapes::ShapeRef.new(shape: eventTypeCategoryList, location_name: "eventTypeCategories"))
-    EventFilter.add_member(:tags, Shapes::ShapeRef.new(shape: tagFilter, location_name: "tags"))
+    EventFilter.add_member(:tags, Shapes::ShapeRef.new(shape: DescribeEventsTagFilter, location_name: "tags"))
     EventFilter.add_member(:event_status_codes, Shapes::ShapeRef.new(shape: eventStatusCodeList, location_name: "eventStatusCodes"))
     EventFilter.add_member(:personas, Shapes::ShapeRef.new(shape: EventPersonaList, location_name: "personas"))
     EventFilter.struct_class = Types::EventFilter
@@ -436,6 +597,14 @@ module Aws::Health
     OrganizationEntityAggregate.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountEntityAggregatesList, location_name: "accounts"))
     OrganizationEntityAggregate.struct_class = Types::OrganizationEntityAggregate
 
+    OrganizationEntityAggregateFilter.add_member(:tags, Shapes::ShapeRef.new(shape: OrganizationEntityAggregateTagFilter, location_name: "tags"))
+    OrganizationEntityAggregateFilter.struct_class = Types::OrganizationEntityAggregateFilter
+
+    OrganizationEntityAggregateTagFilter.key = Shapes::ShapeRef.new(shape: TagFilterKey)
+    OrganizationEntityAggregateTagFilter.value = Shapes::ShapeRef.new(shape: OrganizationEntityAggregateTagValueList)
+
+    OrganizationEntityAggregateTagValueList.member = Shapes::ShapeRef.new(shape: TagFilterValue)
+
     OrganizationEntityAggregatesList.member = Shapes::ShapeRef.new(shape: OrganizationEntityAggregate)
 
     OrganizationEntityFiltersList.member = Shapes::ShapeRef.new(shape: EventAccountFilter)
@@ -483,9 +652,41 @@ module Aws::Health
     OrganizationEventFilter.add_member(:event_type_categories, Shapes::ShapeRef.new(shape: eventTypeCategoryList, location_name: "eventTypeCategories"))
     OrganizationEventFilter.add_member(:event_status_codes, Shapes::ShapeRef.new(shape: eventStatusCodeList, location_name: "eventStatusCodes"))
     OrganizationEventFilter.add_member(:personas, Shapes::ShapeRef.new(shape: EventPersonaList, location_name: "personas"))
+    OrganizationEventFilter.add_member(:tags, Shapes::ShapeRef.new(shape: OrganizationEventTagFilter, location_name: "tags"))
     OrganizationEventFilter.struct_class = Types::OrganizationEventFilter
 
     OrganizationEventList.member = Shapes::ShapeRef.new(shape: OrganizationEvent)
+
+    OrganizationEventTagFilter.key = Shapes::ShapeRef.new(shape: TagFilterKey)
+    OrganizationEventTagFilter.value = Shapes::ShapeRef.new(shape: OrganizationEventTagValueList)
+
+    OrganizationEventTagValueList.member = Shapes::ShapeRef.new(shape: TagFilterValue)
+
+    OrganizationTag.add_member(:key, Shapes::ShapeRef.new(shape: tagKey, location_name: "key"))
+    OrganizationTag.add_member(:value, Shapes::ShapeRef.new(shape: tagValue, location_name: "value"))
+    OrganizationTag.add_member(:type, Shapes::ShapeRef.new(shape: OrganizationTagType, location_name: "type"))
+    OrganizationTag.struct_class = Types::OrganizationTag
+
+    OrganizationTagKey.add_member(:key, Shapes::ShapeRef.new(shape: organizationTagKey, location_name: "key"))
+    OrganizationTagKey.add_member(:enabled_for_event_bridge, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabledForEventBridge"))
+    OrganizationTagKey.add_member(:status, Shapes::ShapeRef.new(shape: TagKeyStatus, location_name: "status"))
+    OrganizationTagKey.struct_class = Types::OrganizationTagKey
+
+    OrganizationTagKeyList.member = Shapes::ShapeRef.new(shape: OrganizationTagKey)
+
+    OrganizationTagList.member = Shapes::ShapeRef.new(shape: OrganizationTag)
+
+    OrganizationTagTypeFilter.member = Shapes::ShapeRef.new(shape: OrganizationTagType)
+
+    ResourceTagKey.add_member(:key, Shapes::ShapeRef.new(shape: resourceTagKey, location_name: "key"))
+    ResourceTagKey.add_member(:enabled_for_event_bridge, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabledForEventBridge"))
+    ResourceTagKey.add_member(:status, Shapes::ShapeRef.new(shape: TagKeyStatus, location_name: "status"))
+    ResourceTagKey.struct_class = Types::ResourceTagKey
+
+    ResourceTagKeyList.member = Shapes::ShapeRef.new(shape: ResourceTagKey)
+
+    ResourceTagSet.key = Shapes::ShapeRef.new(shape: resourceTagKey)
+    ResourceTagSet.value = Shapes::ShapeRef.new(shape: ResourceTagValue)
 
     ServiceLifecycle.add_member(:service, Shapes::ShapeRef.new(shape: service, location_name: "service"))
     ServiceLifecycle.add_member(:version, Shapes::ShapeRef.new(shape: string, location_name: "version"))
@@ -498,6 +699,10 @@ module Aws::Health
     ServiceLifecycleFilter.struct_class = Types::ServiceLifecycleFilter
 
     ServiceLifecycleList.member = Shapes::ShapeRef.new(shape: ServiceLifecycle)
+
+    TagKeyForOrganization.add_member(:key, Shapes::ShapeRef.new(shape: organizationTagKey, location_name: "key"))
+    TagKeyForOrganization.add_member(:enabled_for_event_bridge, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabledForEventBridge"))
+    TagKeyForOrganization.struct_class = Types::TagKeyForOrganization
 
     UnsupportedLocale.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
     UnsupportedLocale.struct_class = Types::UnsupportedLocale
@@ -537,8 +742,6 @@ module Aws::Health
 
     serviceList.member = Shapes::ShapeRef.new(shape: service)
 
-    tagFilter.member = Shapes::ShapeRef.new(shape: tagSet)
-
     tagSet.key = Shapes::ShapeRef.new(shape: tagKey)
     tagSet.value = Shapes::ShapeRef.new(shape: tagValue)
 
@@ -562,6 +765,22 @@ module Aws::Health
         "targetPrefix" => "AWSHealth_20160804",
         "uid" => "health-2016-08-04",
       }
+
+      api.add_operation(:configure_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ConfigureTags"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ConfigureTagsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ConfigureTagsResponse)
+      end)
+
+      api.add_operation(:configure_tags_for_organization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ConfigureTagsForOrganization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ConfigureTagsForOrganizationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ConfigureTagsForOrganizationResponse)
+      end)
 
       api.add_operation(:describe_affected_accounts_for_organization, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeAffectedAccountsForOrganization"
@@ -730,6 +949,68 @@ module Aws::Health
         )
       end)
 
+      api.add_operation(:describe_tag_keys, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTagKeys"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: DescribeTagKeysResponse)
+      end)
+
+      api.add_operation(:describe_tag_keys_for_organization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTagKeysForOrganization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: DescribeTagKeysForOrganizationResponse)
+      end)
+
+      api.add_operation(:describe_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTags"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTagsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTagsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_tags_for_organization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTagsForOrganization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTagsForOrganizationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTagsForOrganizationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationToken)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_tags_onboarding_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTagsOnboardingStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: DescribeTagsOnboardingStatusResponse)
+      end)
+
+      api.add_operation(:describe_tags_onboarding_status_for_organization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTagsOnboardingStatusForOrganization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: DescribeTagsOnboardingStatusForOrganizationResponse)
+      end)
+
       api.add_operation(:disable_health_service_access_for_organization, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisableHealthServiceAccessForOrganization"
         o.http_method = "POST"
@@ -739,6 +1020,22 @@ module Aws::Health
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
+      api.add_operation(:disable_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableTags"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:disable_tags_for_organization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableTagsForOrganization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
       api.add_operation(:enable_health_service_access_for_organization, Seahorse::Model::Operation.new.tap do |o|
         o.name = "EnableHealthServiceAccessForOrganization"
         o.http_method = "POST"
@@ -746,6 +1043,22 @@ module Aws::Health
         o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:enable_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableTags"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:enable_tags_for_organization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableTagsForOrganization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.146.0 (2026-11-16)
+------------------
+
+* Feature - ECR feature support for replicating image deletion and untagging.
+
 1.145.0 (2026-11-11)
 ------------------
 

@@ -19,14 +19,20 @@ module Aws::IAMToolbox
     AttachedToArnString = Shapes::StringShape.new(name: 'AttachedToArnString')
     AttachedToList = Shapes::ListShape.new(name: 'AttachedToList')
     AuthorizationContext = Shapes::MapShape.new(name: 'AuthorizationContext')
+    AuthorizationId = Shapes::StringShape.new(name: 'AuthorizationId')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    Check = Shapes::StructureShape.new(name: 'Check')
+    CheckEffect = Shapes::StringShape.new(name: 'CheckEffect')
+    CheckList = Shapes::ListShape.new(name: 'CheckList')
+    CheckType = Shapes::StringShape.new(name: 'CheckType')
     Document = Shapes::DocumentShape.new(name: 'Document', document: true)
     EvaluatedEffect = Shapes::StringShape.new(name: 'EvaluatedEffect')
     Evaluation = Shapes::StructureShape.new(name: 'Evaluation')
     Evaluations = Shapes::ListShape.new(name: 'Evaluations')
     GetRequestAuthorizationDetailsInput = Shapes::StructureShape.new(name: 'GetRequestAuthorizationDetailsInput')
-    GetRequestAuthorizationDetailsInputAuthorizationIdString = Shapes::StringShape.new(name: 'GetRequestAuthorizationDetailsInputAuthorizationIdString')
     GetRequestAuthorizationDetailsOutput = Shapes::StructureShape.new(name: 'GetRequestAuthorizationDetailsOutput')
+    GetRequestAuthorizationPolicyInput = Shapes::StructureShape.new(name: 'GetRequestAuthorizationPolicyInput')
+    GetRequestAuthorizationPolicyOutput = Shapes::StructureShape.new(name: 'GetRequestAuthorizationPolicyOutput')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     MatchedPolicy = Shapes::StructureShape.new(name: 'MatchedPolicy')
     MatchedPolicyList = Shapes::ListShape.new(name: 'MatchedPolicyList')
@@ -34,7 +40,10 @@ module Aws::IAMToolbox
     MatchedStatementList = Shapes::ListShape.new(name: 'MatchedStatementList')
     PolicyInfo = Shapes::StructureShape.new(name: 'PolicyInfo')
     PolicyInfoList = Shapes::ListShape.new(name: 'PolicyInfoList')
+    PolicySource = Shapes::MapShape.new(name: 'PolicySource')
     PolicyType = Shapes::StringShape.new(name: 'PolicyType')
+    PolicyTypeList = Shapes::ListShape.new(name: 'PolicyTypeList')
+    PolicyUri = Shapes::StringShape.new(name: 'PolicyUri')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     StatementEffect = Shapes::StringShape.new(name: 'StatementEffect')
     String = Shapes::StringShape.new(name: 'String')
@@ -51,16 +60,26 @@ module Aws::IAMToolbox
     AuthorizationContext.key = Shapes::ShapeRef.new(shape: String)
     AuthorizationContext.value = Shapes::ShapeRef.new(shape: Document)
 
+    Check.add_member(:check_type, Shapes::ShapeRef.new(shape: CheckType, required: true, location_name: "checkType"))
+    Check.add_member(:evaluated_effect, Shapes::ShapeRef.new(shape: CheckEffect, required: true, location_name: "evaluatedEffect"))
+    Check.add_member(:target_arn, Shapes::ShapeRef.new(shape: String, location_name: "targetArn"))
+    Check.add_member(:relevant_policy_types, Shapes::ShapeRef.new(shape: PolicyTypeList, location_name: "relevantPolicyTypes"))
+    Check.add_member(:matched_policies, Shapes::ShapeRef.new(shape: MatchedPolicyList, location_name: "matchedPolicies"))
+    Check.struct_class = Types::Check
+
+    CheckList.member = Shapes::ShapeRef.new(shape: Check)
+
     Evaluation.add_member(:action, Shapes::ShapeRef.new(shape: String, required: true, location_name: "action"))
     Evaluation.add_member(:resource, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resource"))
     Evaluation.add_member(:context, Shapes::ShapeRef.new(shape: AuthorizationContext, location_name: "context"))
     Evaluation.add_member(:evaluated_effect, Shapes::ShapeRef.new(shape: EvaluatedEffect, location_name: "evaluatedEffect"))
-    Evaluation.add_member(:matched_policies, Shapes::ShapeRef.new(shape: MatchedPolicyList, location_name: "matchedPolicies"))
+    Evaluation.add_member(:matched_policies, Shapes::ShapeRef.new(shape: MatchedPolicyList, deprecated: true, location_name: "matchedPolicies", metadata: {"deprecatedMessage" => "Use checks, which group matched policies by the requirement they apply to.", "deprecatedSince" => "2026-11-13"}))
+    Evaluation.add_member(:checks, Shapes::ShapeRef.new(shape: CheckList, location_name: "checks"))
     Evaluation.struct_class = Types::Evaluation
 
     Evaluations.member = Shapes::ShapeRef.new(shape: Evaluation)
 
-    GetRequestAuthorizationDetailsInput.add_member(:authorization_id, Shapes::ShapeRef.new(shape: GetRequestAuthorizationDetailsInputAuthorizationIdString, required: true, location: "uri", location_name: "authorizationId"))
+    GetRequestAuthorizationDetailsInput.add_member(:authorization_id, Shapes::ShapeRef.new(shape: AuthorizationId, required: true, location: "uri", location_name: "authorizationId"))
     GetRequestAuthorizationDetailsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     GetRequestAuthorizationDetailsInput.struct_class = Types::GetRequestAuthorizationDetailsInput
 
@@ -69,6 +88,13 @@ module Aws::IAMToolbox
     GetRequestAuthorizationDetailsOutput.add_member(:policies, Shapes::ShapeRef.new(shape: PolicyInfoList, required: true, location_name: "policies"))
     GetRequestAuthorizationDetailsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     GetRequestAuthorizationDetailsOutput.struct_class = Types::GetRequestAuthorizationDetailsOutput
+
+    GetRequestAuthorizationPolicyInput.add_member(:authorization_id, Shapes::ShapeRef.new(shape: AuthorizationId, required: true, location: "uri", location_name: "authorizationId"))
+    GetRequestAuthorizationPolicyInput.add_member(:policy_uri, Shapes::ShapeRef.new(shape: PolicyUri, required: true, location: "querystring", location_name: "policyUri"))
+    GetRequestAuthorizationPolicyInput.struct_class = Types::GetRequestAuthorizationPolicyInput
+
+    GetRequestAuthorizationPolicyOutput.add_member(:policy_document, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "policyDocument"))
+    GetRequestAuthorizationPolicyOutput.struct_class = Types::GetRequestAuthorizationPolicyOutput
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
@@ -89,9 +115,15 @@ module Aws::IAMToolbox
     PolicyInfo.add_member(:inline, Shapes::ShapeRef.new(shape: Boolean, location_name: "inline"))
     PolicyInfo.add_member(:uri, Shapes::ShapeRef.new(shape: String, location_name: "uri"))
     PolicyInfo.add_member(:attached_to, Shapes::ShapeRef.new(shape: AttachedToList, location_name: "attachedTo"))
+    PolicyInfo.add_member(:policy_source, Shapes::ShapeRef.new(shape: PolicySource, location_name: "policySource"))
     PolicyInfo.struct_class = Types::PolicyInfo
 
     PolicyInfoList.member = Shapes::ShapeRef.new(shape: PolicyInfo)
+
+    PolicySource.key = Shapes::ShapeRef.new(shape: String)
+    PolicySource.value = Shapes::ShapeRef.new(shape: String)
+
+    PolicyTypeList.member = Shapes::ShapeRef.new(shape: PolicyType)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -133,6 +165,18 @@ module Aws::IAMToolbox
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_request_authorization_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRequestAuthorizationPolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/authorization-details/{authorizationId}/policy"
+        o.input = Shapes::ShapeRef.new(shape: GetRequestAuthorizationPolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: GetRequestAuthorizationPolicyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
     end
 

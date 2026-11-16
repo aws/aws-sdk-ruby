@@ -1290,6 +1290,7 @@ module Aws::WorkSpaces
       attr_accessor workspace_directory_name: ::String
       attr_accessor workspace_directory_description: ::String
       attr_accessor user_identity_type: ("CUSTOMER_MANAGED" | "AWS_DIRECTORY_SERVICE" | "AWS_IAM_IDENTITY_CENTER")
+      attr_accessor workspace_os_user_mode: ("LOCAL_USER" | "DOMAIN_JOIN" | "ENTRA_JOIN" | "SELF_MANAGED")
       attr_accessor idc_instance_arn: ::String
       attr_accessor microsoft_entra_config: Types::MicrosoftEntraConfig
       attr_accessor workspace_type: ("PERSONAL" | "POOLS")
@@ -1740,6 +1741,7 @@ module Aws::WorkSpaces
       attr_accessor idc_config: Types::IDCConfig
       attr_accessor active_directory_config: Types::ActiveDirectoryConfig
       attr_accessor streaming_properties: Types::StreamingProperties
+      attr_accessor workspace_os_user_mode: ("LOCAL_USER" | "DOMAIN_JOIN" | "ENTRA_JOIN" | "SELF_MANAGED")
       attr_accessor error_message: ::String
       SENSITIVE: []
     end

@@ -14,6 +14,9 @@ module Aws
       class ConflictException < ServiceError
         def message: () -> ::String
       end
+      class ResourceAlreadyExists < ServiceError
+        def message: () -> ::String
+      end
       class ResourceInUse < ServiceError
         def message: () -> ::String
       end

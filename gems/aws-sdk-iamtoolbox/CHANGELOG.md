@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2026-11-16)
+------------------
+
+* Feature - AWS IAM adds the GetRequestAuthorizationPolicy operation, per-check authorization results (checks) and extra policy metadata for resource-based policies (policySource) in GetRequestAuthorizationDetails for Access Troubleshooter.
+
 1.12.0 (2026-11-11)
 ------------------
 

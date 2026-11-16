@@ -139,6 +139,12 @@ module Aws::EC2
       data[:full_snapshot_size_in_bytes]
     end
 
+    # The additional KMS keys that are associated with the snapshot.
+    # @return [Array<Types::AssociatedKmsKey>]
+    def associated_kms_keys
+      data[:associated_kms_keys]
+    end
+
     # The ID of the volume that was used to create the snapshot. Snapshots
     # created by a copy snapshot operation have an arbitrary volume ID that
     # you should not use for any purpose.

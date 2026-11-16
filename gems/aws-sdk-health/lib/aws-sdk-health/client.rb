@@ -489,6 +489,85 @@ module Aws::Health
 
     # @!group API Operations
 
+    # Configures which resource tag keys are tracked by Health for your
+    # account. This operation replaces the existing configuration with the
+    # specified tag keys. Only configured tag keys will appear in Health
+    # event data.
+    #
+    # @option params [required, Array<Types::ResourceTagKey>] :tag_keys
+    #   The list of resource tag keys to configure for Health event tracking.
+    #
+    # @return [Types::ConfigureTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ConfigureTagsResponse#configured_tag_keys #configured_tag_keys} => Array&lt;Types::ResourceTagKey&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.configure_tags({
+    #     tag_keys: [ # required
+    #       {
+    #         key: "resourceTagKey",
+    #         enabled_for_event_bridge: false,
+    #         status: "PENDING", # accepts PENDING, ACTIVE
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configured_tag_keys #=> Array
+    #   resp.configured_tag_keys[0].key #=> String
+    #   resp.configured_tag_keys[0].enabled_for_event_bridge #=> Boolean
+    #   resp.configured_tag_keys[0].status #=> String, one of "PENDING", "ACTIVE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/ConfigureTags AWS API Documentation
+    #
+    # @overload configure_tags(params = {})
+    # @param [Hash] params ({})
+    def configure_tags(params = {}, options = {})
+      req = build_request(:configure_tags, params)
+      req.send_request(options)
+    end
+
+    # Configures which tag keys are tracked by Health for all accounts in
+    # your organization. This operation replaces the existing configuration
+    # with the specified tag keys. Only configured tag keys will appear in
+    # Health event data across the organization.
+    #
+    # @option params [required, Array<Types::TagKeyForOrganization>] :tag_keys
+    #   The list of tag keys to configure for Health event tracking across the
+    #   organization.
+    #
+    # @return [Types::ConfigureTagsForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ConfigureTagsForOrganizationResponse#configured_tag_keys #configured_tag_keys} => Array&lt;Types::TagKeyForOrganization&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.configure_tags_for_organization({
+    #     tag_keys: [ # required
+    #       {
+    #         key: "organizationTagKey",
+    #         enabled_for_event_bridge: false,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configured_tag_keys #=> Array
+    #   resp.configured_tag_keys[0].key #=> String
+    #   resp.configured_tag_keys[0].enabled_for_event_bridge #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/ConfigureTagsForOrganization AWS API Documentation
+    #
+    # @overload configure_tags_for_organization(params = {})
+    # @param [Hash] params ({})
+    def configure_tags_for_organization(params = {}, options = {})
+      req = build_request(:configure_tags_for_organization, params)
+      req.send_request(options)
+    end
+
     # Returns a list of accounts in the organization from Organizations that
     # are affected by the provided event. For more information about the
     # different types of Health events, see [Event][1].
@@ -528,9 +607,13 @@ module Aws::Health
     #   The maximum number of items to return in one batch, between 10 and
     #   100, inclusive.
     #
+    # @option params [Types::AffectedAccountFilter] :filter
+    #   Values to narrow the results returned.
+    #
     # @return [Types::DescribeAffectedAccountsForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeAffectedAccountsForOrganizationResponse#affected_accounts #affected_accounts} => Array&lt;String&gt;
+    #   * {Types::DescribeAffectedAccountsForOrganizationResponse#affected_account_entities #affected_account_entities} => Array&lt;Types::AccountEntity&gt;
     #   * {Types::DescribeAffectedAccountsForOrganizationResponse#event_scope_code #event_scope_code} => String
     #   * {Types::DescribeAffectedAccountsForOrganizationResponse#next_token #next_token} => String
     #
@@ -542,12 +625,22 @@ module Aws::Health
     #     event_arn: "eventArn", # required
     #     next_token: "nextToken",
     #     max_results: 1,
+    #     filter: {
+    #       event_arn: "eventArn",
+    #       tags: {
+    #         "TagFilterKey" => ["TagFilterValue"],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.affected_accounts #=> Array
     #   resp.affected_accounts[0] #=> String
+    #   resp.affected_account_entities #=> Array
+    #   resp.affected_account_entities[0].account_id #=> String
+    #   resp.affected_account_entities[0].account_tags #=> Hash
+    #   resp.affected_account_entities[0].account_tags["AccountTagKey"] #=> String
     #   resp.event_scope_code #=> String, one of "PUBLIC", "ACCOUNT_SPECIFIC", "NONE"
     #   resp.next_token #=> String
     #
@@ -623,11 +716,9 @@ module Aws::Health
     #           to: Time.now,
     #         },
     #       ],
-    #       tags: [
-    #         {
-    #           "tagKey" => "tagValue",
-    #         },
-    #       ],
+    #       tags: {
+    #         "TagFilterKey" => ["TagFilterValue"],
+    #       },
     #       status_codes: ["IMPAIRED"], # accepts IMPAIRED, UNIMPAIRED, UNKNOWN, PENDING, RESOLVED
     #     },
     #     locale: "locale",
@@ -645,6 +736,10 @@ module Aws::Health
     #   resp.entities[0].aws_account_id #=> String
     #   resp.entities[0].last_updated_time #=> Time
     #   resp.entities[0].status_code #=> String, one of "IMPAIRED", "UNIMPAIRED", "UNKNOWN", "PENDING", "RESOLVED"
+    #   resp.entities[0].resource_tags #=> Hash
+    #   resp.entities[0].resource_tags["resourceTagKey"] #=> String
+    #   resp.entities[0].account_tags #=> Hash
+    #   resp.entities[0].account_tags["AccountTagKey"] #=> String
     #   resp.entities[0].tags #=> Hash
     #   resp.entities[0].tags["tagKey"] #=> String
     #   resp.entities[0].entity_metadata #=> Hash
@@ -737,6 +832,9 @@ module Aws::Health
     #         event_arn: "eventArn", # required
     #         aws_account_id: "accountId",
     #         status_codes: ["IMPAIRED"], # accepts IMPAIRED, UNIMPAIRED, UNKNOWN, PENDING, RESOLVED
+    #         tags: {
+    #           "TagFilterKey" => ["TagFilterValue"],
+    #         },
     #       },
     #     ],
     #   })
@@ -751,6 +849,10 @@ module Aws::Health
     #   resp.entities[0].aws_account_id #=> String
     #   resp.entities[0].last_updated_time #=> Time
     #   resp.entities[0].status_code #=> String, one of "IMPAIRED", "UNIMPAIRED", "UNKNOWN", "PENDING", "RESOLVED"
+    #   resp.entities[0].resource_tags #=> Hash
+    #   resp.entities[0].resource_tags["resourceTagKey"] #=> String
+    #   resp.entities[0].account_tags #=> Hash
+    #   resp.entities[0].account_tags["AccountTagKey"] #=> String
     #   resp.entities[0].tags #=> Hash
     #   resp.entities[0].tags["tagKey"] #=> String
     #   resp.entities[0].entity_metadata #=> Hash
@@ -779,6 +881,9 @@ module Aws::Health
     #   `"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456",
     #   "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"`
     #
+    # @option params [Types::EntityAggregateFilter] :filter
+    #   Values to narrow the results returned.
+    #
     # @return [Types::DescribeEntityAggregatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeEntityAggregatesResponse#entity_aggregates #entity_aggregates} => Array&lt;Types::EntityAggregate&gt;
@@ -787,6 +892,11 @@ module Aws::Health
     #
     #   resp = client.describe_entity_aggregates({
     #     event_arns: ["eventArn"],
+    #     filter: {
+    #       tags: {
+    #         "TagFilterKey" => ["TagFilterValue"],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -818,6 +928,9 @@ module Aws::Health
     #   A list of 12-digit Amazon Web Services account numbers that contains
     #   the affected entities.
     #
+    # @option params [Types::OrganizationEntityAggregateFilter] :filter
+    #   Values to narrow the results returned.
+    #
     # @return [Types::DescribeEntityAggregatesForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeEntityAggregatesForOrganizationResponse#organization_entity_aggregates #organization_entity_aggregates} => Array&lt;Types::OrganizationEntityAggregate&gt;
@@ -827,6 +940,11 @@ module Aws::Health
     #   resp = client.describe_entity_aggregates_for_organization({
     #     event_arns: ["eventArn"], # required
     #     aws_account_ids: ["accountId"],
+    #     filter: {
+    #       tags: {
+    #         "TagFilterKey" => ["TagFilterValue"],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -915,11 +1033,9 @@ module Aws::Health
     #       entity_arns: ["entityArn"],
     #       entity_values: ["entityValue"],
     #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
-    #       tags: [
-    #         {
-    #           "tagKey" => "tagValue",
-    #         },
-    #       ],
+    #       tags: {
+    #         "TagFilterKey" => ["TagFilterValue"],
+    #       },
     #       event_status_codes: ["open"], # accepts open, closed, upcoming
     #       personas: ["OPERATIONS"], # accepts OPERATIONS, SECURITY, BILLING
     #     },
@@ -1299,11 +1415,9 @@ module Aws::Health
     #       entity_arns: ["entityArn"],
     #       entity_values: ["entityValue"],
     #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
-    #       tags: [
-    #         {
-    #           "tagKey" => "tagValue",
-    #         },
-    #       ],
+    #       tags: {
+    #         "TagFilterKey" => ["TagFilterValue"],
+    #       },
     #       event_status_codes: ["open"], # accepts open, closed, upcoming
     #       personas: ["OPERATIONS"], # accepts OPERATIONS, SECURITY, BILLING
     #     },
@@ -1429,6 +1543,9 @@ module Aws::Health
     #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
     #       event_status_codes: ["open"], # accepts open, closed, upcoming
     #       personas: ["OPERATIONS"], # accepts OPERATIONS, SECURITY, BILLING
+    #       tags: {
+    #         "TagFilterKey" => ["TagFilterValue"],
+    #       },
     #     },
     #     next_token: "nextToken",
     #     max_results: 1,
@@ -1498,8 +1615,8 @@ module Aws::Health
     #   returned, the response does not contain a pagination token value.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in one batch, between 1 and 20,
-    #   inclusive.
+    #   The maximum number of items to return in one batch, between 10 and
+    #   100, inclusive.
     #
     # @return [Types::DescribeServiceLifecycleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1607,6 +1724,189 @@ module Aws::Health
       req.send_request(options)
     end
 
+    # Returns the list of resource tag keys configured for Health event
+    # tracking in your account.
+    #
+    # @return [Types::DescribeTagKeysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTagKeysResponse#keys #keys} => Array&lt;Types::ResourceTagKey&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.keys #=> Array
+    #   resp.keys[0].key #=> String
+    #   resp.keys[0].enabled_for_event_bridge #=> Boolean
+    #   resp.keys[0].status #=> String, one of "PENDING", "ACTIVE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeTagKeys AWS API Documentation
+    #
+    # @overload describe_tag_keys(params = {})
+    # @param [Hash] params ({})
+    def describe_tag_keys(params = {}, options = {})
+      req = build_request(:describe_tag_keys, params)
+      req.send_request(options)
+    end
+
+    # Returns the list of tag keys configured for Health event tracking
+    # across your organization.
+    #
+    # @return [Types::DescribeTagKeysForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTagKeysForOrganizationResponse#keys #keys} => Array&lt;Types::OrganizationTagKey&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.keys #=> Array
+    #   resp.keys[0].key #=> String
+    #   resp.keys[0].enabled_for_event_bridge #=> Boolean
+    #   resp.keys[0].status #=> String, one of "PENDING", "ACTIVE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeTagKeysForOrganization AWS API Documentation
+    #
+    # @overload describe_tag_keys_for_organization(params = {})
+    # @param [Hash] params ({})
+    def describe_tag_keys_for_organization(params = {}, options = {})
+      req = build_request(:describe_tag_keys_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Returns the resource tags associated with Health events for your
+    # account. Use this operation to retrieve the actual tag key-value pairs
+    # attached to affected entities.
+    #
+    # @option params [String] :next_token
+    #   If the results of a search are large, only a portion of the results
+    #   are returned, and a `nextToken` pagination token is returned in the
+    #   response. To retrieve the next batch of results, reissue the search
+    #   request and include the returned token. When all results have been
+    #   returned, the response does not contain a pagination token value.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return in one batch, between 10 and
+    #   100, inclusive.
+    #
+    # @return [Types::DescribeTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTagsResponse#tags #tags} => Array&lt;Types::AccountTag&gt;
+    #   * {Types::DescribeTagsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_tags({
+    #     next_token: "nextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.tags[0].type #=> String, one of "ACCOUNT_RESOURCE_TAG"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeTags AWS API Documentation
+    #
+    # @overload describe_tags(params = {})
+    # @param [Hash] params ({})
+    def describe_tags(params = {}, options = {})
+      req = build_request(:describe_tags, params)
+      req.send_request(options)
+    end
+
+    # Returns the tags associated with Health events across all accounts in
+    # your organization.
+    #
+    # @option params [Types::DescribeTagsForOrganizationFilter] :filter
+    #   Values to narrow the results returned.
+    #
+    # @option params [String] :next_token
+    #   If the results of a search are large, only a portion of the results
+    #   are returned, and a `nextToken` pagination token is returned in the
+    #   response. To retrieve the next batch of results, reissue the search
+    #   request and include the returned token. When all results have been
+    #   returned, the response does not contain a pagination token value.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return in one batch, between 10 and
+    #   100, inclusive.
+    #
+    # @return [Types::DescribeTagsForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTagsForOrganizationResponse#tags #tags} => Array&lt;Types::OrganizationTag&gt;
+    #   * {Types::DescribeTagsForOrganizationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_tags_for_organization({
+    #     filter: {
+    #       tag_types: ["ORGANIZATION_RESOURCE_TAG"], # accepts ORGANIZATION_RESOURCE_TAG, ORGANIZATION_ACCOUNT_TAG
+    #     },
+    #     next_token: "nextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.tags[0].type #=> String, one of "ORGANIZATION_RESOURCE_TAG", "ORGANIZATION_ACCOUNT_TAG"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeTagsForOrganization AWS API Documentation
+    #
+    # @overload describe_tags_for_organization(params = {})
+    # @param [Hash] params ({})
+    def describe_tags_for_organization(params = {}, options = {})
+      req = build_request(:describe_tags_for_organization, params)
+      req.send_request(options)
+    end
+
+    # Returns the current onboarding status of the Health tags feature for
+    # your account.
+    #
+    # @return [Types::DescribeTagsOnboardingStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTagsOnboardingStatusResponse#status #status} => String
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeTagsOnboardingStatus AWS API Documentation
+    #
+    # @overload describe_tags_onboarding_status(params = {})
+    # @param [Hash] params ({})
+    def describe_tags_onboarding_status(params = {}, options = {})
+      req = build_request(:describe_tags_onboarding_status, params)
+      req.send_request(options)
+    end
+
+    # Returns the current onboarding status of the Health tags feature for
+    # your organization.
+    #
+    # @return [Types::DescribeTagsOnboardingStatusForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTagsOnboardingStatusForOrganizationResponse#status #status} => String
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeTagsOnboardingStatusForOrganization AWS API Documentation
+    #
+    # @overload describe_tags_onboarding_status_for_organization(params = {})
+    # @param [Hash] params ({})
+    def describe_tags_onboarding_status_for_organization(params = {}, options = {})
+      req = build_request(:describe_tags_onboarding_status_for_organization, params)
+      req.send_request(options)
+    end
+
     # Disables Health from working with Organizations. To call this
     # operation, you must sign in to the organization's management account.
     # For more information, see [Aggregating Health events][1] in the
@@ -1645,6 +1945,35 @@ module Aws::Health
       req.send_request(options)
     end
 
+    # Disables the Health tags feature for your account. After disabling,
+    # Health events will no longer include resource tag information.
+    # Previously configured tag keys are discarded.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DisableTags AWS API Documentation
+    #
+    # @overload disable_tags(params = {})
+    # @param [Hash] params ({})
+    def disable_tags(params = {}, options = {})
+      req = build_request(:disable_tags, params)
+      req.send_request(options)
+    end
+
+    # Disables the Health tags feature for all accounts in your
+    # organization.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DisableTagsForOrganization AWS API Documentation
+    #
+    # @overload disable_tags_for_organization(params = {})
+    # @param [Hash] params ({})
+    def disable_tags_for_organization(params = {}, options = {})
+      req = build_request(:disable_tags_for_organization, params)
+      req.send_request(options)
+    end
+
     # Enables Health to work with Organizations. You can use the
     # organizational view feature to aggregate events from all Amazon Web
     # Services accounts in your organization in a centralized location.
@@ -1654,11 +1983,14 @@ module Aws::Health
     #
     # <note markdown="1"> To call this operation, you must meet the following requirements:
     #
-    #  * You must have a Business, Enterprise On-Ramp, or Enterprise Support
-    #   plan from [Amazon Web Services Support][1] to use the Health API. If
-    #   you call the Health API from an Amazon Web Services account that
-    #   doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
-    #   plan, you receive a `SubscriptionRequiredException` error.
+    #  * You must have a Amazon Web Services Business Support+, Amazon Web
+    #   Services Enterprise Support, or Amazon Web Services Unified
+    #   Operations plan from [Amazon Web Services Support][1] to use the
+    #   Health API. If you call the Health API from an Amazon Web Services
+    #   account that doesn't have a Amazon Web Services Business Support+,
+    #   Amazon Web Services Enterprise Support, or Amazon Web Services
+    #   Unified Operations plan, you receive a
+    #   `SubscriptionRequiredException` error.
     #
     # * You must have permission to call this operation from the
     #   organization's management account. For example IAM policies, see
@@ -1688,6 +2020,36 @@ module Aws::Health
       req.send_request(options)
     end
 
+    # Enables the Health tags feature for your account. Once enabled, Health
+    # events will include resource tag information for affected entities. If
+    # the feature is already enabled, this operation has no effect.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EnableTags AWS API Documentation
+    #
+    # @overload enable_tags(params = {})
+    # @param [Hash] params ({})
+    def enable_tags(params = {}, options = {})
+      req = build_request(:enable_tags, params)
+      req.send_request(options)
+    end
+
+    # Enables the Health tags feature for all accounts in your organization.
+    # Once enabled, Health events will include resource tag information for
+    # affected entities across your organization.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EnableTagsForOrganization AWS API Documentation
+    #
+    # @overload enable_tags_for_organization(params = {})
+    # @param [Hash] params ({})
+    def enable_tags_for_organization(params = {}, options = {})
+      req = build_request(:enable_tags_for_organization, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1706,7 +2068,7 @@ module Aws::Health
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-health'
-      context[:gem_version] = '1.116.0'
+      context[:gem_version] = '1.117.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -11310,6 +11310,20 @@ module Aws::SageMaker
     #   The configuration parameters for utilization metrics.
     #   @return [Types::MetricsConfig]
     #
+    # @!attribute [rw] cross_region_traffic_config
+    #   The cross-Region traffic cap for the endpoint. The cap limits the
+    #   requests per second that the endpoint accepts from inference routers
+    #   in other Amazon Web Services Regions. If you don't specify it,
+    #   these requests aren't limited. You can't specify it with
+    #   serverless variants or with `AsyncInferenceConfig`. For information
+    #   about the cross-Region traffic cap, see [Limit requests from other
+    #   Regions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/inference-router.html#inference-router-cross-region-limit
+    #   @return [Types::CrossRegionTrafficConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointConfigInput AWS API Documentation
     #
     class CreateEndpointConfigInput < Struct.new(
@@ -11324,7 +11338,8 @@ module Aws::SageMaker
       :execution_role_arn,
       :vpc_config,
       :enable_network_isolation,
-      :metrics_config)
+      :metrics_config,
+      :cross_region_traffic_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12481,6 +12496,60 @@ module Aws::SageMaker
     #
     class CreateInferenceRecommendationsJobResponse < Struct.new(
       :job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_router_name
+    #   The name of the inference router. The name must be unique within
+    #   your account in the current Amazon Web Services Region. The name is
+    #   case sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_targets
+    #   The routing targets of the inference router. Each routing target is
+    #   a model that callers name when they invoke the router, and the
+    #   destinations that serve it.
+    #   @return [Array<Types::RoutingTarget>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you reuse a client token, use the
+    #   same request parameters. Otherwise, the request fails.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs to apply to the inference router. For
+    #   information about tagging, see [Tagging Amazon Web Services
+    #   resources][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateInferenceRouterInput AWS API Documentation
+    #
+    class CreateInferenceRouterInput < Struct.new(
+      :inference_router_name,
+      :routing_targets,
+      :client_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_router_arn
+    #   The Amazon Resource Name (ARN) of the inference router.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateInferenceRouterOutput AWS API Documentation
+    #
+    class CreateInferenceRouterOutput < Struct.new(
+      :inference_router_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15773,6 +15842,36 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The cross-Region traffic cap for an endpoint. The cap limits the
+    # requests per second that the endpoint accepts from inference routers
+    # in other Amazon Web Services Regions. The cap is
+    # `MaxCrossRegionPercentPerEndpoint` percent of
+    # `MaxInvocationsPerSecondPerInstance` multiplied by the number of
+    # `InService` instances, rounded up. All production variants and
+    # inference components of the endpoint share it. Requests that you send
+    # to the endpoint directly aren't counted. A request over the cap fails
+    # with a `ThrottlingException`.
+    #
+    # @!attribute [rw] max_invocations_per_second_per_instance
+    #   The number of invocations per second that you expect one `InService`
+    #   instance to serve. One value applies to every production variant,
+    #   whatever its instance type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_cross_region_percent_per_endpoint
+    #   The percentage of the endpoint's capacity that requests from
+    #   inference routers in other Amazon Web Services Regions can use.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CrossRegionTrafficConfig AWS API Documentation
+    #
+    class CrossRegionTrafficConfig < Struct.new(
+      :max_invocations_per_second_per_instance,
+      :max_cross_region_percent_per_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A file system, created by you, that you assign to a user profile or
     # space for an Amazon SageMaker AI Domain. Permitted users can access
     # this file system in Amazon SageMaker AI Studio.
@@ -17011,6 +17110,23 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] endpoint_name
+    #   The name of the endpoint. The endpoint must be in your account and
+    #   in the current Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpointPolicyRequest AWS API Documentation
+    #
+    class DeleteEndpointPolicyRequest < Struct.new(
+      :endpoint_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpointPolicyResponse AWS API Documentation
+    #
+    class DeleteEndpointPolicyResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] experiment_name
     #   The name of the experiment to delete.
     #   @return [String]
@@ -17231,6 +17347,18 @@ module Aws::SageMaker
     #
     class DeleteInferenceExperimentResponse < Struct.new(
       :inference_experiment_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_router_name
+    #   The name of the inference router to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteInferenceRouterInput AWS API Documentation
+    #
+    class DeleteInferenceRouterInput < Struct.new(
+      :inference_router_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20337,6 +20465,11 @@ module Aws::SageMaker
     #   The configuration parameters for utilization metrics.
     #   @return [Types::MetricsConfig]
     #
+    # @!attribute [rw] cross_region_traffic_config
+    #   The cross-Region traffic cap, if the endpoint configuration sets
+    #   one.
+    #   @return [Types::CrossRegionTrafficConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfigOutput AWS API Documentation
     #
     class DescribeEndpointConfigOutput < Struct.new(
@@ -20352,7 +20485,8 @@ module Aws::SageMaker
       :execution_role_arn,
       :vpc_config,
       :enable_network_isolation,
-      :metrics_config)
+      :metrics_config,
+      :cross_region_traffic_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20498,6 +20632,11 @@ module Aws::SageMaker
     #   The configuration parameters for utilization metrics.
     #   @return [Types::MetricsConfig]
     #
+    # @!attribute [rw] cross_region_traffic_config
+    #   The cross-Region traffic cap, if the endpoint configuration sets
+    #   one.
+    #   @return [Types::CrossRegionTrafficConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointOutput AWS API Documentation
     #
     class DescribeEndpointOutput < Struct.new(
@@ -20515,7 +20654,8 @@ module Aws::SageMaker
       :pending_deployment_summary,
       :explainer_config,
       :shadow_production_variants,
-      :metrics_config)
+      :metrics_config,
+      :cross_region_traffic_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21864,6 +22004,63 @@ module Aws::SageMaker
       :stopping_conditions,
       :inference_recommendations,
       :endpoint_performances)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_router_name
+    #   The name of the inference router to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeInferenceRouterInput AWS API Documentation
+    #
+    class DescribeInferenceRouterInput < Struct.new(
+      :inference_router_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_router_name
+    #   The name of the inference router.
+    #   @return [String]
+    #
+    # @!attribute [rw] inference_router_arn
+    #   The Amazon Resource Name (ARN) of the inference router.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_targets
+    #   The routing targets of the inference router. Each destination
+    #   includes its `RoutingStatus`. You can send these routing targets
+    #   back in an `UpdateInferenceRouter` request without changes.
+    #   @return [Array<Types::RoutingTarget>]
+    #
+    # @!attribute [rw] status
+    #   The status of the inference router.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   If the status is `Failed`, the reason that the inference router
+    #   failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the inference router was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the inference router was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeInferenceRouterOutput AWS API Documentation
+    #
+    class DescribeInferenceRouterOutput < Struct.new(
+      :inference_router_name,
+      :inference_router_arn,
+      :routing_targets,
+      :status,
+      :status_reason,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25921,6 +26118,51 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # An endpoint or inference component that serves a routing target.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the endpoint or inference
+    #   component. The destination can be in any account, and in any Amazon
+    #   Web Services Region in the same partition as the inference router.
+    #   To use a destination in another account, its owner must allow your
+    #   account to invoke it through your router, in an endpoint policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_status
+    #   Whether the inference router can send requests to the destination,
+    #   as checked when you called `DescribeInferenceRouter`. This value
+    #   isn't the destination's own status. SageMaker AI ignores this
+    #   field in `CreateInferenceRouter` and `UpdateInferenceRouter`
+    #   requests.
+    #
+    #   Routable
+    #
+    #   : The destination is serving and the router can send it requests. A
+    #     routable destination can still be overloaded.
+    #
+    #   Unroutable
+    #
+    #   : The destination can't serve requests. For example, it's being
+    #     created or has failed, or it has no capacity and no way to get
+    #     any. A destination in your account that doesn't exist is also
+    #     `Unroutable`.
+    #
+    #   Unknown
+    #
+    #   : SageMaker AI couldn't check the destination, for example because
+    #     you aren't allowed to describe it or the check timed out. The
+    #     destination might still be serving.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Destination AWS API Documentation
+    #
+    class Destination < Struct.new(
+      :resource_arn,
+      :routing_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_arn
     #   The Amazon Resource Name (ARN) of your SageMaker HyperPod cluster
     #   containing the target node. Your cluster must use EKS as the
@@ -29257,6 +29499,41 @@ module Aws::SageMaker
       :device_stats,
       :agent_versions,
       :model_stats)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] endpoint_name
+    #   The name of the endpoint. The endpoint must be in your account and
+    #   in the current Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetEndpointPolicyRequest AWS API Documentation
+    #
+    class GetEndpointPolicyRequest < Struct.new(
+      :endpoint_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] endpoint_name
+    #   The name of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_arn
+    #   The Amazon Resource Name (ARN) of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_policy
+    #   The endpoint policy, as a JSON policy document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetEndpointPolicyResponse AWS API Documentation
+    #
+    class GetEndpointPolicyResponse < Struct.new(
+      :endpoint_name,
+      :endpoint_arn,
+      :resource_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33540,6 +33817,35 @@ module Aws::SageMaker
       :job_name,
       :status,
       :inference_benchmark)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of an inference router.
+    #
+    # @!attribute [rw] inference_router_name
+    #   The name of the inference router.
+    #   @return [String]
+    #
+    # @!attribute [rw] inference_router_arn
+    #   The Amazon Resource Name (ARN) of the inference router.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the inference router was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the inference router was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceRouterSummary AWS API Documentation
+    #
+    class InferenceRouterSummary < Struct.new(
+      :inference_router_name,
+      :inference_router_arn,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38697,6 +39003,42 @@ module Aws::SageMaker
     #
     class ListInferenceRecommendationsJobsResponse < Struct.new(
       :inference_recommendations_jobs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of inference routers to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was truncated, you receive this token. To
+    #   get the next set of inference routers, use it in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceRoutersInput AWS API Documentation
+    #
+    class ListInferenceRoutersInput < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_routers
+    #   A list of summaries of the inference routers.
+    #   @return [Array<Types::InferenceRouterSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, SageMaker AI returns this token. To
+    #   get the next set of inference routers, use it in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceRoutersOutput AWS API Documentation
+    #
+    class ListInferenceRoutersOutput < Struct.new(
+      :inference_routers,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -49274,6 +49616,17 @@ module Aws::SageMaker
     #     endpoint routes the request to another copy on that instance or to
     #     another instance. The endpoint applies prefix-aware routing only
     #     when two or more instances can serve the request.
+    #
+    #   * `KV_AWARE`: The endpoint routes each request to an instance that
+    #     already holds the start of the request's prompt in its key-value
+    #     (KV) cache, and weighs the length of that match against how busy
+    #     each instance is. On an endpoint with inference components, the
+    #     endpoint chooses among the copies of the invoked inference
+    #     component in the same way. When the endpoint can't find an
+    #     instance or copy that holds the start of the prompt and isn't too
+    #     busy, it chooses an instance as it does with
+    #     `LEAST_OUTSTANDING_REQUESTS`. `KV_AWARE` works only with supported
+    #     containers, such as the SageMaker AI vLLM Deep Learning Container.
     #   @return [String]
     #
     # @!attribute [rw] prefix_aware_routing_config
@@ -50066,6 +50419,42 @@ module Aws::SageMaker
     #
     class PublicWorkforceTaskPrice < Struct.new(
       :amount_in_usd)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] endpoint_name
+    #   The name of the endpoint. The endpoint must be in your account and
+    #   in the current Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_policy
+    #   The endpoint policy, as a JSON policy document. The policy can
+    #   contain only ASCII characters. For information about the policy
+    #   rules, see [Use destinations in other accounts][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/inference-router-cross-account.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PutEndpointPolicyRequest AWS API Documentation
+    #
+    class PutEndpointPolicyRequest < Struct.new(
+      :endpoint_name,
+      :resource_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] endpoint_arn
+    #   The Amazon Resource Name (ARN) of the endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PutEndpointPolicyResponse AWS API Documentation
+    #
+    class PutEndpointPolicyResponse < Struct.new(
+      :endpoint_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -51414,6 +51803,21 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The resource that you are trying to create already exists. Use a
+    # different resource name, or delete the existing resource before
+    # retrying.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceAlreadyExists AWS API Documentation
+    #
+    class ResourceAlreadyExists < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A resource catalog containing all of the resources of a specific
     # resource type within a resource owner account. For an example on
     # sharing the Amazon SageMaker Feature Store
@@ -51959,6 +52363,194 @@ module Aws::SageMaker
       :wait_interval_in_seconds,
       :maximum_execution_timeout_in_seconds,
       :rollback_maximum_batch_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A model that an inference router serves, and the destinations that can
+    # serve it. When you invoke the router, you name the routing target, and
+    # the router sends the request to one of its destinations.
+    #
+    # Every destination in a routing target must serve the same model, with
+    # the same request and response format.
+    #
+    # @!attribute [rw] name
+    #   The name of the routing target. Callers specify this name in the
+    #   `RoutingTargetName` parameter when they invoke the inference router.
+    #   The name must be unique within the router.
+    #   @return [String]
+    #
+    # @!attribute [rw] destinations
+    #   The endpoints and inference components that serve the routing
+    #   target. Each destination can appear only once in a routing target.
+    #
+    #   In an asynchronous routing target, every destination must be an
+    #   asynchronous inference endpoint. In a real-time routing target, no
+    #   destination can be one. SageMaker AI checks an endpoint in another
+    #   account with your credentials, so both your IAM policy and the
+    #   endpoint policy must allow `sagemaker:DescribeEndpoint`. If an
+    #   endpoint can't be checked, for example because it isn't found or
+    #   can't be read in time, it's accepted, and requests to it fail if
+    #   it's the wrong mode.
+    #   @return [Array<Types::Destination>]
+    #
+    # @!attribute [rw] async_inference_config
+    #   The asynchronous inference settings of the routing target. Specify
+    #   this setting to make the routing target asynchronous. If you omit
+    #   it, the routing target serves real-time requests.
+    #
+    #   Asynchronous routing targets aren't available in all Amazon Web
+    #   Services Regions. For information about asynchronous routing targets
+    #   and Region availability, see [Send asynchronous requests through an
+    #   inference router][1].
+    #
+    #   Because `UpdateInferenceRouter` replaces all routing targets,
+    #   include this setting in every update of an asynchronous routing
+    #   target.
+    #
+    #   For information about asynchronous routing targets, see [Send
+    #   asynchronous requests through an inference router][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/inference-router-async.html
+    #   @return [Types::RoutingTargetAsyncInferenceConfig]
+    #
+    # @!attribute [rw] routing_preference
+    #   How the inference router chooses among the routing target's
+    #   destinations. The default is `LocalRegionFirst`.
+    #
+    #   LocalRegionFirst
+    #
+    #   : The router uses destinations in its own Region first. When the
+    #     request leaves the Region, the router spreads it across healthy
+    #     destinations in other Regions.
+    #
+    #   InstancePoolOrder
+    #
+    #   : The router prefers destinations by instance type first and by
+    #     Region second. Every destination must be an endpoint that lists
+    #     the same two or more instance types, each with a different
+    #     priority, in the same priority order. This value is supported only
+    #     for asynchronous routing targets.
+    #
+    #   With either value, the router uses destinations whose health or
+    #   capacity is reduced after the others, but doesn't exclude them.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RoutingTarget AWS API Documentation
+    #
+    class RoutingTarget < Struct.new(
+      :name,
+      :destinations,
+      :async_inference_config,
+      :routing_preference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # How the inference router submits asynchronous requests to the
+    # destinations of a routing target.
+    #
+    # @!attribute [rw] max_time_in_backlog_seconds
+    #   The maximum time, in seconds, that a request can wait at a
+    #   destination before the inference router moves it to another
+    #   destination. The default is 900 seconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RoutingTargetAsyncInferenceClientConfig AWS API Documentation
+    #
+    class RoutingTargetAsyncInferenceClientConfig < Struct.new(
+      :max_time_in_backlog_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The asynchronous inference settings of a routing target.
+    #
+    # @!attribute [rw] output_config
+    #   The Amazon S3 locations for the results of asynchronous requests,
+    #   and the notification settings.
+    #   @return [Types::RoutingTargetAsyncInferenceOutputConfig]
+    #
+    # @!attribute [rw] client_config
+    #   How the inference router submits requests to destinations.
+    #   @return [Types::RoutingTargetAsyncInferenceClientConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RoutingTargetAsyncInferenceConfig AWS API Documentation
+    #
+    class RoutingTargetAsyncInferenceConfig < Struct.new(
+      :output_config,
+      :client_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon SNS topics that the inference router publishes to. The
+    # router publishes one notification for each request. The notification
+    # contains the location of the result, not the result itself. The
+    # destination endpoints also send their own notifications, if they're
+    # configured to.
+    #
+    # @!attribute [rw] success_topic
+    #   The ARN of the Amazon SNS topic to publish to when a request
+    #   completes. The topic must be a standard topic, and can be in any
+    #   Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_topic
+    #   The ARN of the Amazon SNS topic to publish to when a request fails,
+    #   or when the router can't place it on any destination. The topic
+    #   must be a standard topic, and can be in any Amazon Web Services
+    #   Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RoutingTargetAsyncInferenceNotificationConfig AWS API Documentation
+    #
+    class RoutingTargetAsyncInferenceNotificationConfig < Struct.new(
+      :success_topic,
+      :error_topic)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The output settings for the asynchronous requests of a routing target.
+    # Every destination writes to the same locations.
+    # `CreateInferenceRouter` and `UpdateInferenceRouter` don't check who
+    # owns the buckets. If another account owns the output bucket, requests
+    # fail.
+    #
+    # @!attribute [rw] s3_output_path
+    #   The Amazon S3 location for the results of successful requests. The
+    #   bucket must be in the inference router's Amazon Web Services Region
+    #   and owned by the router's account.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_failure_path
+    #   The Amazon S3 location for the failure details of failed requests.
+    #   The bucket must be in the inference router's Amazon Web Services
+    #   Region and owned by the router's account.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The KMS key that encrypts the results in Amazon S3. You can specify
+    #   a key ID, key ARN, alias name, or alias ARN. If any destination is
+    #   in a different account or Amazon Web Services Region from the
+    #   inference router, specify a key ARN or an alias ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_config
+    #   The Amazon SNS topics that the inference router publishes to when a
+    #   request completes or fails.
+    #   @return [Types::RoutingTargetAsyncInferenceNotificationConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RoutingTargetAsyncInferenceOutputConfig AWS API Documentation
+    #
+    class RoutingTargetAsyncInferenceOutputConfig < Struct.new(
+      :s3_output_path,
+      :s3_failure_path,
+      :kms_key_id,
+      :notification_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -60041,6 +60633,36 @@ module Aws::SageMaker
     #
     class UpdateInferenceExperimentResponse < Struct.new(
       :inference_experiment_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_router_name
+    #   The name of the inference router to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_targets
+    #   The complete list of routing targets for the inference router. To
+    #   remove the last routing target, delete the router.
+    #   @return [Array<Types::RoutingTarget>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateInferenceRouterInput AWS API Documentation
+    #
+    class UpdateInferenceRouterInput < Struct.new(
+      :inference_router_name,
+      :routing_targets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_router_arn
+    #   The Amazon Resource Name (ARN) of the inference router.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateInferenceRouterOutput AWS API Documentation
+    #
+    class UpdateInferenceRouterOutput < Struct.new(
+      :inference_router_arn)
       SENSITIVE = []
       include Aws::Structure
     end

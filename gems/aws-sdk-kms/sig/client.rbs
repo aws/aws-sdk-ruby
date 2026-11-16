@@ -634,7 +634,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#list_keys-instance_method
       def list_keys: (
                        ?limit: ::Integer,
-                       ?marker: ::String
+                       ?marker: ::String,
+                       ?resource_owners: Array[("SELF" | "OTHER_ACCOUNTS_VIA_RAM")]
                      ) -> _ListKeysResponseSuccess
                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListKeysResponseSuccess
 

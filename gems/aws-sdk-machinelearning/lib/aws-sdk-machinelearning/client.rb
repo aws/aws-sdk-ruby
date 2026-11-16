@@ -2521,7 +2521,7 @@ module Aws::MachineLearning
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-machinelearning'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

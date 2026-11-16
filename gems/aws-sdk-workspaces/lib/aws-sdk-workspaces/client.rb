@@ -2716,6 +2716,7 @@ module Aws::WorkSpaces
     #   resp.directories[0].streaming_properties.storage_connectors[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.directories[0].streaming_properties.global_accelerator.mode #=> String, one of "ENABLED_AUTO", "DISABLED"
     #   resp.directories[0].streaming_properties.global_accelerator.preferred_protocol #=> String, one of "TCP", "NONE"
+    #   resp.directories[0].workspace_os_user_mode #=> String, one of "LOCAL_USER", "DOMAIN_JOIN", "ENTRA_JOIN", "SELF_MANAGED"
     #   resp.directories[0].error_message #=> String
     #   resp.next_token #=> String
     #
@@ -4385,6 +4386,11 @@ module Aws::WorkSpaces
     # @option params [String] :user_identity_type
     #   The type of identity management the user is using.
     #
+    # @option params [String] :workspace_os_user_mode
+    #   Indicates how users are set up on the WorkSpace operating system. To
+    #   use local users with an AWS IAM Identity Center directory, specify
+    #   `LOCAL_USER`.
+    #
     # @option params [String] :idc_instance_arn
     #   The Amazon Resource Name (ARN) of the identity center instance.
     #
@@ -4419,6 +4425,7 @@ module Aws::WorkSpaces
     #     workspace_directory_name: "WorkspaceDirectoryName",
     #     workspace_directory_description: "WorkspaceDirectoryDescription",
     #     user_identity_type: "CUSTOMER_MANAGED", # accepts CUSTOMER_MANAGED, AWS_DIRECTORY_SERVICE, AWS_IAM_IDENTITY_CENTER
+    #     workspace_os_user_mode: "LOCAL_USER", # accepts LOCAL_USER, DOMAIN_JOIN, ENTRA_JOIN, SELF_MANAGED
     #     idc_instance_arn: "ARN",
     #     microsoft_entra_config: {
     #       tenant_id: "MicrosoftEntraConfigTenantId",
@@ -5173,7 +5180,7 @@ module Aws::WorkSpaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.177.0'
+      context[:gem_version] = '1.178.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

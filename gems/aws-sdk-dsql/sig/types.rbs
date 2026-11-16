@@ -33,6 +33,7 @@ module Aws::DSQL
       attr_accessor client_token: ::String
       attr_accessor multi_region_properties: Types::MultiRegionProperties
       attr_accessor policy: ::String
+      attr_accessor metric_groups: ::Array[Types::MetricGroupRequest]
       attr_accessor bypass_policy_lockout_safety_check: bool
       SENSITIVE: []
     end
@@ -46,6 +47,7 @@ module Aws::DSQL
       attr_accessor encryption_details: Types::EncryptionDetails
       attr_accessor deletion_protection_enabled: bool
       attr_accessor endpoint: ::String
+      attr_accessor metric_groups: ::Array[Types::MetricGroupResponse]
       SENSITIVE: []
     end
 
@@ -134,6 +136,7 @@ module Aws::DSQL
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor encryption_details: Types::EncryptionDetails
       attr_accessor endpoint: ::String
+      attr_accessor metric_groups: ::Array[Types::MetricGroupResponse]
       SENSITIVE: []
     end
 
@@ -226,6 +229,16 @@ module Aws::DSQL
       SENSITIVE: []
     end
 
+    class MetricGroupRequest
+      attr_accessor metric_group: ("STATEMENT_STATISTICS")
+      SENSITIVE: []
+    end
+
+    class MetricGroupResponse
+      attr_accessor metric_group: ("STATEMENT_STATISTICS")
+      SENSITIVE: []
+    end
+
     class MultiRegionProperties
       attr_accessor witness_region: ::String
       attr_accessor clusters: ::Array[::String]
@@ -314,6 +327,7 @@ module Aws::DSQL
       attr_accessor kms_encryption_key: ::String
       attr_accessor client_token: ::String
       attr_accessor multi_region_properties: Types::MultiRegionProperties
+      attr_accessor metric_groups: ::Array[Types::MetricGroupRequest]
       SENSITIVE: []
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2026-11-16)
+------------------
+
+* Feature - This release adds AWS Organizations integration, on-demand reports, recommendation and profile sharing, and automated basic profiles to the Well-Architected Agent.
+
 1.85.0 (2026-11-11)
 ------------------
 

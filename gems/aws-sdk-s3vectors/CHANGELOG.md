@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2026-11-16)
+------------------
+
+* Feature - Amazon S3 Vectors now supports hybrid search, providing metadata text search along with vector search.
+
 1.33.0 (2026-11-11)
 ------------------
 

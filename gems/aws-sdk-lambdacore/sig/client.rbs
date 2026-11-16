@@ -236,10 +236,10 @@ module Aws
         def operator_role: () -> ::String
         def state: () -> ("PENDING" | "ACTIVE" | "INACTIVE" | "FAILED" | "DELETING" | "DELETE_FAILED")
         def state_reason: () -> ::String
-        def state_reason_code: () -> ("DisallowedByVpcEncryptionControl" | "Ec2RequestLimitExceeded" | "InsufficientRolePermissions" | "InternalError" | "InvalidSecurityGroup" | "InvalidSubnet" | "SecurityGroupsPerInterfaceLimitExceeded" | "SubnetOutOfIPAddresses")
+        def state_reason_code: () -> ("DisallowedByVpcEncryptionControl" | "Ec2RequestLimitExceeded" | "InsufficientRolePermissions" | "InternalError" | "InternetGatewayNotAttached" | "InvalidSecurityGroup" | "InvalidSubnet" | "SecurityGroupsPerInterfaceLimitExceeded" | "SubnetOutOfIPAddresses")
         def last_update_status: () -> ("Successful" | "Failed" | "InProgress")
         def last_update_status_reason: () -> ::String
-        def last_update_status_reason_code: () -> ("DisallowedByVpcEncryptionControl" | "Ec2RequestLimitExceeded" | "InsufficientRolePermissions" | "InternalError" | "InvalidSecurityGroup" | "InvalidSubnet" | "SecurityGroupsPerInterfaceLimitExceeded" | "SubnetOutOfIPAddresses")
+        def last_update_status_reason_code: () -> ("DisallowedByVpcEncryptionControl" | "Ec2RequestLimitExceeded" | "InsufficientRolePermissions" | "InternalError" | "InternetGatewayNotAttached" | "InvalidSecurityGroup" | "InvalidSubnet" | "SecurityGroupsPerInterfaceLimitExceeded" | "SubnetOutOfIPAddresses")
         def last_modified: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LambdaCore/Client.html#get_network_connector-instance_method

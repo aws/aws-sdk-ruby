@@ -92,7 +92,14 @@ module Aws
                           dimension: ::Integer,
                           distance_metric: ("euclidean" | "cosine"),
                           ?metadata_configuration: {
-                            non_filterable_metadata_keys: Array[::String]
+                            non_filterable_metadata_keys: Array[::String]?,
+                            text_search_configurations: Array[
+                              {
+                                metadata_key: ::String,
+                                language: ("en" | "fr" | "es" | "pt" | "it" | "de" | "nl" | "zh" | "ja" | "ko")?,
+                                status: ("ACTIVE" | "BUILDING")?
+                              }
+                            ]?
                           },
                           ?encryption_configuration: {
                             sse_type: ("AES256" | "aws:kms")?,
@@ -321,7 +328,7 @@ module Aws
                            ?index_name: ::String,
                            ?index_arn: ::String,
                            top_k: ::Integer,
-                           query_vector: {
+                           ?query_vector: {
                              float32: Array[::Float]?
                            },
                            ?filter: {
@@ -329,6 +336,13 @@ module Aws
                            ?query_mode: ("CLASSIC" | "ENHANCED"),
                            ?return_metadata: bool,
                            ?return_distance: bool,
+                           ?query_texts: Array[
+                             {
+                               text: ::String,
+                               metadata_key: ::String
+                             }
+                           ],
+                           ?return_scores: bool,
                            ?next_token: ::String
                          ) -> _QueryVectorsResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _QueryVectorsResponseSuccess
@@ -364,6 +378,34 @@ module Aws
                                index_mode: ("CLASSIC" | "ENHANCED")
                              ) -> _UpdateIndexModeResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIndexModeResponseSuccess
+
+      interface _UpdateMetadataConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMetadataConfigurationOutput]
+        def index_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#update_metadata_configuration-instance_method
+      def update_metadata_configuration: (
+                                           ?vector_bucket_name: ::String,
+                                           ?index_name: ::String,
+                                           ?index_arn: ::String,
+                                           ?add: {
+                                             text_search_configurations: Array[
+                                               {
+                                                 metadata_key: ::String,
+                                                 language: ("en" | "fr" | "es" | "pt" | "it" | "de" | "nl" | "zh" | "ja" | "ko")?,
+                                                 status: ("ACTIVE" | "BUILDING")?
+                                               }
+                                             ]?
+                                           },
+                                           ?delete: {
+                                             text_search_configurations: Array[
+                                               {
+                                                 metadata_key: ::String
+                                               }
+                                             ]?
+                                           }
+                                         ) -> _UpdateMetadataConfigurationResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMetadataConfigurationResponseSuccess
     end
   end
 end

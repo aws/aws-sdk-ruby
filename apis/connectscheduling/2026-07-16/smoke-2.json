@@ -1,0 +1,21 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "GetTimeOffFailure",
+    "operationName" : "GetTimeOff",
+    "input" : {
+      "InstanceId" : "00000000-0000-0000-0000-000000000000",
+      "UserId" : "00000000-0000-0000-0000-000000000000",
+      "TimeOffId" : "00000000-0000-0000-0000-000000000000"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

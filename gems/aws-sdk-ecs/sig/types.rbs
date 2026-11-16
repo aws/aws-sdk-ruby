@@ -1543,6 +1543,12 @@ module Aws::ECS
       attr_accessor port_name: ::String
       attr_accessor health_check: Types::GatewayConnectorHealthCheck
       attr_accessor filters: Types::GatewayConnectorFilters
+      attr_accessor deregistration_delay: Types::GatewayConnectorDeregistrationDelay
+      SENSITIVE: []
+    end
+
+    class GatewayConnectorDeregistrationDelay
+      attr_accessor timeout_seconds: ::Integer
       SENSITIVE: []
     end
 

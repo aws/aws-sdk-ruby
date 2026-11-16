@@ -769,6 +769,7 @@ module Aws::KMS
     class ListKeysRequest
       attr_accessor limit: ::Integer
       attr_accessor marker: ::String
+      attr_accessor resource_owners: ::Array[("SELF" | "OTHER_ACCOUNTS_VIA_RAM")]
       SENSITIVE: []
     end
 

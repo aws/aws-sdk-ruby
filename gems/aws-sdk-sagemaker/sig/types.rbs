@@ -2287,6 +2287,7 @@ module Aws::SageMaker
       attr_accessor vpc_config: Types::VpcConfig
       attr_accessor enable_network_isolation: bool
       attr_accessor metrics_config: Types::MetricsConfig
+      attr_accessor cross_region_traffic_config: Types::CrossRegionTrafficConfig
       SENSITIVE: []
     end
 
@@ -2518,10 +2519,23 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class CreateInferenceRouterInput
+      attr_accessor inference_router_name: ::String
+      attr_accessor routing_targets: ::Array[Types::RoutingTarget]
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateInferenceRouterOutput
+      attr_accessor inference_router_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateJobRequest
       attr_accessor job_name: ::String
       attr_accessor role_arn: ::String
-      attr_accessor job_category: ("AgentRFT" | "AgentRFTEvaluation")
+      attr_accessor job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation")
       attr_accessor job_config_schema_version: ::String
       attr_accessor job_config_document: ::String
       attr_accessor tags: ::Array[Types::Tag]
@@ -3151,6 +3165,12 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class CrossRegionTrafficConfig
+      attr_accessor max_invocations_per_second_per_instance: ::Integer
+      attr_accessor max_cross_region_percent_per_endpoint: ::Integer
+      SENSITIVE: []
+    end
+
     class CustomFileSystem
       attr_accessor efs_file_system: Types::EFSFileSystem
       attr_accessor f_sx_lustre_file_system: Types::FSxLustreFileSystem
@@ -3510,6 +3530,14 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class DeleteEndpointPolicyRequest
+      attr_accessor endpoint_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEndpointPolicyResponse < Aws::EmptyStructure
+    end
+
     class DeleteExperimentRequest
       attr_accessor experiment_name: ::String
       SENSITIVE: []
@@ -3599,9 +3627,14 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class DeleteInferenceRouterInput
+      attr_accessor inference_router_name: ::String
+      SENSITIVE: []
+    end
+
     class DeleteJobRequest
       attr_accessor job_name: ::String
-      attr_accessor job_category: ("AgentRFT" | "AgentRFTEvaluation")
+      attr_accessor job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation")
       SENSITIVE: []
     end
 
@@ -4426,6 +4459,7 @@ module Aws::SageMaker
       attr_accessor vpc_config: Types::VpcConfig
       attr_accessor enable_network_isolation: bool
       attr_accessor metrics_config: Types::MetricsConfig
+      attr_accessor cross_region_traffic_config: Types::CrossRegionTrafficConfig
       SENSITIVE: []
     end
 
@@ -4450,6 +4484,7 @@ module Aws::SageMaker
       attr_accessor explainer_config: Types::ExplainerConfig
       attr_accessor shadow_production_variants: ::Array[Types::ProductionVariantSummary]
       attr_accessor metrics_config: Types::MetricsConfig
+      attr_accessor cross_region_traffic_config: Types::CrossRegionTrafficConfig
       SENSITIVE: []
     end
 
@@ -4747,9 +4782,25 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class DescribeInferenceRouterInput
+      attr_accessor inference_router_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInferenceRouterOutput
+      attr_accessor inference_router_name: ::String
+      attr_accessor inference_router_arn: ::String
+      attr_accessor routing_targets: ::Array[Types::RoutingTarget]
+      attr_accessor status: ("InService" | "Creating" | "Updating" | "Failed" | "Deleting")
+      attr_accessor status_reason: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
     class DescribeJobRequest
       attr_accessor job_name: ::String
-      attr_accessor job_category: ("AgentRFT" | "AgentRFTEvaluation")
+      attr_accessor job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation")
       SENSITIVE: []
     end
 
@@ -4757,14 +4808,14 @@ module Aws::SageMaker
       attr_accessor job_name: ::String
       attr_accessor job_arn: ::String
       attr_accessor role_arn: ::String
-      attr_accessor job_category: ("AgentRFT" | "AgentRFTEvaluation")
+      attr_accessor job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation")
       attr_accessor job_config_schema_version: ::String
       attr_accessor job_config_document: ::String
       attr_accessor creation_time: ::Time
       attr_accessor last_modified_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor job_status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped" | "Deleting" | "DeleteFailed")
-      attr_accessor secondary_status: ("Starting" | "Downloading" | "Training" | "Uploading" | "Stopping" | "Stopped" | "MaxRuntimeExceeded" | "Interrupted" | "Failed" | "Completed" | "Restarting" | "Pending" | "Evaluating" | "Deleting" | "DeleteFailed")
+      attr_accessor secondary_status: ("Starting" | "Downloading" | "Training" | "Uploading" | "Stopping" | "Stopped" | "MaxRuntimeExceeded" | "Interrupted" | "Failed" | "Completed" | "Restarting" | "Pending" | "Generating" | "PartialGeneration" | "Evaluating" | "Validating" | "Preparing" | "Executing" | "Publishing" | "Finalizing" | "Transforming" | "Deleting" | "DeleteFailed")
       attr_accessor secondary_status_transitions: ::Array[Types::JobSecondaryStatusTransition]
       attr_accessor failure_reason: ::String
       attr_accessor tags: ::Array[Types::Tag]
@@ -4772,13 +4823,13 @@ module Aws::SageMaker
     end
 
     class DescribeJobSchemaVersionRequest
-      attr_accessor job_category: ("AgentRFT" | "AgentRFTEvaluation")
+      attr_accessor job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation")
       attr_accessor job_config_schema_version: ::String
       SENSITIVE: []
     end
 
     class DescribeJobSchemaVersionResponse
-      attr_accessor job_category: ("AgentRFT" | "AgentRFTEvaluation")
+      attr_accessor job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation")
       attr_accessor job_config_schema_version: ::String
       attr_accessor job_config_schema: ::String
       SENSITIVE: []
@@ -5601,6 +5652,12 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class Destination
+      attr_accessor resource_arn: ::String
+      attr_accessor routing_status: ("Routable" | "Unroutable" | "Unknown")
+      SENSITIVE: []
+    end
+
     class DetachClusterNodeVolumeRequest
       attr_accessor cluster_arn: ::String
       attr_accessor node_id: ::String
@@ -6367,6 +6424,18 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class GetEndpointPolicyRequest
+      attr_accessor endpoint_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetEndpointPolicyResponse
+      attr_accessor endpoint_name: ::String
+      attr_accessor endpoint_arn: ::String
+      attr_accessor resource_policy: ::String
+      SENSITIVE: []
+    end
+
     class GetLineageGroupPolicyRequest
       attr_accessor lineage_group_name: ::String
       SENSITIVE: []
@@ -7040,6 +7109,14 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class InferenceRouterSummary
+      attr_accessor inference_router_name: ::String
+      attr_accessor inference_router_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
     class InferenceSpecification
       attr_accessor containers: ::Array[Types::ModelPackageContainerDefinition]
       attr_accessor supported_transform_instance_types: ::Array[("ml.m4.xlarge" | "ml.m4.2xlarge" | "ml.m4.4xlarge" | "ml.m4.10xlarge" | "ml.m4.16xlarge" | "ml.c4.xlarge" | "ml.c4.2xlarge" | "ml.c4.4xlarge" | "ml.c4.8xlarge" | "ml.p2.xlarge" | "ml.p2.8xlarge" | "ml.p2.16xlarge" | "ml.p3.2xlarge" | "ml.p3.8xlarge" | "ml.p3.16xlarge" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.12xlarge" | "ml.m5.24xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.c7i.large" | "ml.c7i.xlarge" | "ml.c7i.2xlarge" | "ml.c7i.4xlarge" | "ml.c7i.8xlarge" | "ml.c7i.12xlarge" | "ml.c7i.16xlarge" | "ml.c7i.24xlarge" | "ml.c7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge" | "ml.g4dn.xlarge" | "ml.g4dn.2xlarge" | "ml.g4dn.4xlarge" | "ml.g4dn.8xlarge" | "ml.g4dn.12xlarge" | "ml.g4dn.16xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.12xlarge" | "ml.g6e.16xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge")]
@@ -7167,14 +7244,14 @@ module Aws::SageMaker
       attr_accessor job_name: ::String
       attr_accessor job_arn: ::String
       attr_accessor role_arn: ::String
-      attr_accessor job_category: ("AgentRFT" | "AgentRFTEvaluation")
+      attr_accessor job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation")
       attr_accessor job_config_schema_version: ::String
       attr_accessor job_config_document: ::String
       attr_accessor creation_time: ::Time
       attr_accessor last_modified_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor job_status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped" | "Deleting" | "DeleteFailed")
-      attr_accessor secondary_status: ("Starting" | "Downloading" | "Training" | "Uploading" | "Stopping" | "Stopped" | "MaxRuntimeExceeded" | "Interrupted" | "Failed" | "Completed" | "Restarting" | "Pending" | "Evaluating" | "Deleting" | "DeleteFailed")
+      attr_accessor secondary_status: ("Starting" | "Downloading" | "Training" | "Uploading" | "Stopping" | "Stopped" | "MaxRuntimeExceeded" | "Interrupted" | "Failed" | "Completed" | "Restarting" | "Pending" | "Generating" | "PartialGeneration" | "Evaluating" | "Validating" | "Preparing" | "Executing" | "Publishing" | "Finalizing" | "Transforming" | "Deleting" | "DeleteFailed")
       attr_accessor secondary_status_transitions: ::Array[Types::JobSecondaryStatusTransition]
       attr_accessor failure_reason: ::String
       attr_accessor tags: ::Array[Types::Tag]
@@ -7187,7 +7264,7 @@ module Aws::SageMaker
     end
 
     class JobSecondaryStatusTransition
-      attr_accessor status: ("Starting" | "Downloading" | "Training" | "Uploading" | "Stopping" | "Stopped" | "MaxRuntimeExceeded" | "Interrupted" | "Failed" | "Completed" | "Restarting" | "Pending" | "Evaluating" | "Deleting" | "DeleteFailed")
+      attr_accessor status: ("Starting" | "Downloading" | "Training" | "Uploading" | "Stopping" | "Stopped" | "MaxRuntimeExceeded" | "Interrupted" | "Failed" | "Completed" | "Restarting" | "Pending" | "Generating" | "PartialGeneration" | "Evaluating" | "Validating" | "Preparing" | "Executing" | "Publishing" | "Finalizing" | "Transforming" | "Deleting" | "DeleteFailed")
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor status_message: ::String
@@ -7202,9 +7279,9 @@ module Aws::SageMaker
     class JobSummary
       attr_accessor job_arn: ::String
       attr_accessor job_name: ::String
-      attr_accessor job_category: ("AgentRFT" | "AgentRFTEvaluation")
+      attr_accessor job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation")
       attr_accessor job_status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped" | "Deleting" | "DeleteFailed")
-      attr_accessor job_secondary_status: ("Starting" | "Downloading" | "Training" | "Uploading" | "Stopping" | "Stopped" | "MaxRuntimeExceeded" | "Interrupted" | "Failed" | "Completed" | "Restarting" | "Pending" | "Evaluating" | "Deleting" | "DeleteFailed")
+      attr_accessor job_secondary_status: ("Starting" | "Downloading" | "Training" | "Uploading" | "Stopping" | "Stopped" | "MaxRuntimeExceeded" | "Interrupted" | "Failed" | "Completed" | "Restarting" | "Pending" | "Generating" | "PartialGeneration" | "Evaluating" | "Validating" | "Preparing" | "Executing" | "Publishing" | "Finalizing" | "Transforming" | "Deleting" | "DeleteFailed")
       attr_accessor creation_time: ::Time
       attr_accessor last_modified_time: ::Time
       attr_accessor end_time: ::Time
@@ -8209,8 +8286,20 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class ListInferenceRoutersInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInferenceRoutersOutput
+      attr_accessor inference_routers: ::Array[Types::InferenceRouterSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListJobSchemaVersionsRequest
-      attr_accessor job_category: ("AgentRFT" | "AgentRFTEvaluation")
+      attr_accessor job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -8223,7 +8312,7 @@ module Aws::SageMaker
     end
 
     class ListJobsRequest
-      attr_accessor job_category: ("AgentRFT" | "AgentRFTEvaluation")
+      attr_accessor job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       attr_accessor creation_time_after: ::Time
@@ -10556,7 +10645,7 @@ module Aws::SageMaker
     end
 
     class ProductionVariantRoutingConfig
-      attr_accessor routing_strategy: ("LEAST_OUTSTANDING_REQUESTS" | "RANDOM" | "PREFIX_AWARE")
+      attr_accessor routing_strategy: ("LEAST_OUTSTANDING_REQUESTS" | "RANDOM" | "PREFIX_AWARE" | "KV_AWARE")
       attr_accessor prefix_aware_routing_config: Types::PrefixAwareRoutingConfig
       SENSITIVE: []
     end
@@ -10680,6 +10769,17 @@ module Aws::SageMaker
 
     class PublicWorkforceTaskPrice
       attr_accessor amount_in_usd: Types::USD
+      SENSITIVE: []
+    end
+
+    class PutEndpointPolicyRequest
+      attr_accessor endpoint_name: ::String
+      attr_accessor resource_policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutEndpointPolicyResponse
+      attr_accessor endpoint_arn: ::String
       SENSITIVE: []
     end
 
@@ -10969,6 +11069,11 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class ResourceAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ResourceCatalog
       attr_accessor resource_catalog_arn: ::String
       attr_accessor resource_catalog_name: ::String
@@ -11075,6 +11180,39 @@ module Aws::SageMaker
       attr_accessor wait_interval_in_seconds: ::Integer
       attr_accessor maximum_execution_timeout_in_seconds: ::Integer
       attr_accessor rollback_maximum_batch_size: Types::CapacitySize
+      SENSITIVE: []
+    end
+
+    class RoutingTarget
+      attr_accessor name: ::String
+      attr_accessor destinations: ::Array[Types::Destination]
+      attr_accessor async_inference_config: Types::RoutingTargetAsyncInferenceConfig
+      attr_accessor routing_preference: ("LocalRegionFirst" | "InstancePoolOrder")
+      SENSITIVE: []
+    end
+
+    class RoutingTargetAsyncInferenceClientConfig
+      attr_accessor max_time_in_backlog_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class RoutingTargetAsyncInferenceConfig
+      attr_accessor output_config: Types::RoutingTargetAsyncInferenceOutputConfig
+      attr_accessor client_config: Types::RoutingTargetAsyncInferenceClientConfig
+      SENSITIVE: []
+    end
+
+    class RoutingTargetAsyncInferenceNotificationConfig
+      attr_accessor success_topic: ::String
+      attr_accessor error_topic: ::String
+      SENSITIVE: []
+    end
+
+    class RoutingTargetAsyncInferenceOutputConfig
+      attr_accessor s3_output_path: ::String
+      attr_accessor s3_failure_path: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor notification_config: Types::RoutingTargetAsyncInferenceNotificationConfig
       SENSITIVE: []
     end
 
@@ -11593,7 +11731,7 @@ module Aws::SageMaker
 
     class StopJobRequest
       attr_accessor job_name: ::String
-      attr_accessor job_category: ("AgentRFT" | "AgentRFTEvaluation")
+      attr_accessor job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation")
       SENSITIVE: []
     end
 
@@ -12747,6 +12885,17 @@ module Aws::SageMaker
 
     class UpdateInferenceExperimentResponse
       attr_accessor inference_experiment_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateInferenceRouterInput
+      attr_accessor inference_router_name: ::String
+      attr_accessor routing_targets: ::Array[Types::RoutingTarget]
+      SENSITIVE: []
+    end
+
+    class UpdateInferenceRouterOutput
+      attr_accessor inference_router_arn: ::String
       SENSITIVE: []
     end
 

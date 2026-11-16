@@ -55,7 +55,7 @@ module Aws::NeptuneGraph
   autoload :EndpointProvider, 'aws-sdk-neptunegraph/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-neptunegraph/endpoints'
 
-  GEM_VERSION = '1.66.0'
+  GEM_VERSION = '1.67.0'
 
 end
 

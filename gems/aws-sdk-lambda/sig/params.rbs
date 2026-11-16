@@ -13,7 +13,7 @@ module Aws
       scaling_mode: ("Auto" | "Manual")?,
       scaling_policies: Array[
         {
-          predefined_metric_type: ("LambdaCapacityProviderAverageCPUUtilization"),
+          predefined_metric_type: ("LambdaCapacityProviderAverageCPUUtilization" | "LambdaCapacityProviderAverageGPUUtilization"),
           target_value: ::Float
         }
       ]?

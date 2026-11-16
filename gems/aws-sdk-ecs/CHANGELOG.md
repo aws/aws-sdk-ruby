@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.260.0 (2026-11-16)
+------------------
+
+* Feature - Amazon ECS gateway connectors now support a configurable deregistration delay (0-3600 seconds, default 300 seconds).
+
 1.259.0 (2026-11-11)
 ------------------
 

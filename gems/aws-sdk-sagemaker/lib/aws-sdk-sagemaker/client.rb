@@ -4947,6 +4947,18 @@ module Aws::SageMaker
     # @option params [Types::MetricsConfig] :metrics_config
     #   The configuration parameters for utilization metrics.
     #
+    # @option params [Types::CrossRegionTrafficConfig] :cross_region_traffic_config
+    #   The cross-Region traffic cap for the endpoint. The cap limits the
+    #   requests per second that the endpoint accepts from inference routers
+    #   in other Amazon Web Services Regions. If you don't specify it, these
+    #   requests aren't limited. You can't specify it with serverless
+    #   variants or with `AsyncInferenceConfig`. For information about the
+    #   cross-Region traffic cap, see [Limit requests from other Regions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/inference-router.html#inference-router-cross-region-limit
+    #
     # @return [Types::CreateEndpointConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEndpointConfigOutput#endpoint_config_arn #endpoint_config_arn} => String
@@ -4995,7 +5007,7 @@ module Aws::SageMaker
     #           },
     #         },
     #         routing_config: {
-    #           routing_strategy: "LEAST_OUTSTANDING_REQUESTS", # required, accepts LEAST_OUTSTANDING_REQUESTS, RANDOM, PREFIX_AWARE
+    #           routing_strategy: "LEAST_OUTSTANDING_REQUESTS", # required, accepts LEAST_OUTSTANDING_REQUESTS, RANDOM, PREFIX_AWARE, KV_AWARE
     #           prefix_aware_routing_config: {
     #             prefix_length: 1,
     #             concurrency_threshold: 1,
@@ -5122,7 +5134,7 @@ module Aws::SageMaker
     #           },
     #         },
     #         routing_config: {
-    #           routing_strategy: "LEAST_OUTSTANDING_REQUESTS", # required, accepts LEAST_OUTSTANDING_REQUESTS, RANDOM, PREFIX_AWARE
+    #           routing_strategy: "LEAST_OUTSTANDING_REQUESTS", # required, accepts LEAST_OUTSTANDING_REQUESTS, RANDOM, PREFIX_AWARE, KV_AWARE
     #           prefix_aware_routing_config: {
     #             prefix_length: 1,
     #             concurrency_threshold: 1,
@@ -5150,6 +5162,10 @@ module Aws::SageMaker
     #       enable_enhanced_metrics: false,
     #       enable_detailed_observability: false,
     #       metric_publish_frequency_in_seconds: 1,
+    #     },
+    #     cross_region_traffic_config: {
+    #       max_invocations_per_second_per_instance: 1, # required
+    #       max_cross_region_percent_per_endpoint: 1, # required
     #     },
     #   })
     #
@@ -7048,17 +7064,149 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Creates an inference router. An inference router is a Regional
+    # SageMaker AI resource that sends each inference request to one of the
+    # endpoints or inference components that you list for a routing target.
+    # These destinations can be in any Amazon Web Services account, and in
+    # any Amazon Web Services Region in the same partition as the router.
+    #
+    # The router's status is `Creating` until it's ready to use. SageMaker
+    # AI checks that each endpoint is a real-time or asynchronous endpoint,
+    # as the routing target requires, and rejects one of the wrong type. It
+    # checks endpoints in other accounts with your credentials, so the
+    # endpoint policy must allow `sagemaker:DescribeEndpoint`. SageMaker AI
+    # accepts an endpoint that it can't check, for example one that
+    # doesn't exist. Requests to it fail if it's the wrong type or
+    # doesn't exist. To see the status of each destination, call
+    # [DescribeInferenceRouter][1] and see the `RoutingStatus` of each
+    # destination.
+    #
+    # To invoke the router, use `InvokeInferenceRouter` or
+    # `InvokeInferenceRouterAsync`. For information about inference routers,
+    # see [Route requests across Regions with inference routers][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeInferenceRouter.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/inference-router.html
+    #
+    # @option params [required, String] :inference_router_name
+    #   The name of the inference router. The name must be unique within your
+    #   account in the current Amazon Web Services Region. The name is case
+    #   sensitive.
+    #
+    # @option params [required, Array<Types::RoutingTarget>] :routing_targets
+    #   The routing targets of the inference router. Each routing target is a
+    #   model that callers name when they invoke the router, and the
+    #   destinations that serve it.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you reuse a client token, use the same
+    #   request parameters. Otherwise, the request fails.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs to apply to the inference router. For
+    #   information about tagging, see [Tagging Amazon Web Services
+    #   resources][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @return [Types::CreateInferenceRouterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateInferenceRouterOutput#inference_router_arn #inference_router_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_inference_router({
+    #     inference_router_name: "InferenceRouterName", # required
+    #     routing_targets: [ # required
+    #       {
+    #         name: "RoutingTargetName", # required
+    #         destinations: [ # required
+    #           {
+    #             resource_arn: "DestinationResourceArn", # required
+    #             routing_status: "Routable", # accepts Routable, Unroutable, Unknown
+    #           },
+    #         ],
+    #         async_inference_config: {
+    #           output_config: { # required
+    #             s3_output_path: "InferenceRouterS3Uri", # required
+    #             s3_failure_path: "InferenceRouterS3Uri", # required
+    #             kms_key_id: "KmsKeyId",
+    #             notification_config: {
+    #               success_topic: "InferenceRouterSnsTopicArn",
+    #               error_topic: "InferenceRouterSnsTopicArn",
+    #             },
+    #           },
+    #           client_config: {
+    #             max_time_in_backlog_seconds: 1,
+    #           },
+    #         },
+    #         routing_preference: "LocalRegionFirst", # accepts LocalRegionFirst, InstancePoolOrder
+    #       },
+    #     ],
+    #     client_token: "InferenceRouterClientToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_router_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateInferenceRouter AWS API Documentation
+    #
+    # @overload create_inference_router(params = {})
+    # @param [Hash] params ({})
+    def create_inference_router(params = {}, options = {})
+      req = build_request(:create_inference_router, params)
+      req.send_request(options)
+    end
+
     # Creates a model customization job in Amazon SageMaker. A job runs a
     # workload based on the job category and configuration you provide. You
     # specify the job category, a schema-versioned configuration document,
     # and an IAM role that grants Amazon SageMaker permission to access
     # resources on your behalf.
     #
-    # Use the `AgentRFT` category to fine-tune a model using multi-turn
-    # reinforcement learning with reward signals. Use the
-    # `AgentRFTEvaluation` category to evaluate a fine-tuned or base model
-    # by running multi-turn rollouts against a held-out prompt dataset and
-    # computing metrics such as pass@k and mean reward.
+    # Specify one of the following job categories, which determines the type
+    # of workload that the job runs:
+    #
+    # AgentRFT
+    #
+    # : Fine-tune a model using multi-turn reinforcement learning with
+    #   reward signals.
+    #
+    # AgentRFTEvaluation
+    #
+    # : Evaluate a fine-tuned or base model by running multi-turn rollouts
+    #   against a held-out prompt dataset. This category computes metrics
+    #   such as pass@k and mean reward.
+    #
+    # DataQualityEvaluation
+    #
+    # : Evaluate the quality of a generated or bring-your-own dataset using
+    #   quality metrics or your own specification.
+    #
+    # DataTransformation
+    #
+    # : Transform datasets into the format you need, for example for model
+    #   customization.
+    #
+    # SyntheticDataGeneration
+    #
+    # : Generate synthetic training and testing datasets from your context
+    #   data and specifications.
     #
     # Before creating a job, call `ListJobSchemaVersions` and
     # `DescribeJobSchemaVersion` to retrieve the configuration schema for
@@ -7119,7 +7267,7 @@ module Aws::SageMaker
     #   resp = client.create_job({
     #     job_name: "JobName", # required
     #     role_arn: "RoleArn", # required
-    #     job_category: "AgentRFT", # required, accepts AgentRFT, AgentRFTEvaluation
+    #     job_category: "AgentRFT", # required, accepts AgentRFT, SyntheticDataGeneration, DataQualityEvaluation, AgentRFTEvaluation, DataTransformation
     #     job_config_schema_version: "JobSchemaVersion", # required
     #     job_config_document: "JobConfigDocument", # required
     #     tags: [
@@ -13184,6 +13332,42 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Deletes the resource-based policy that is attached to an endpoint.
+    # After you delete the policy, other accounts can no longer send
+    # requests to the endpoint through an inference router. The endpoint
+    # continues to serve requests from your account. If the endpoint
+    # doesn't have a policy, the operation succeeds.
+    #
+    # The change typically takes effect within 30 seconds, and can take up
+    # to 5 minutes. To revoke access for one account only, use
+    # [PutEndpointPolicy][1] to replace the policy with one that doesn't
+    # include that account.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_PutEndpointPolicy.html
+    #
+    # @option params [required, String] :endpoint_name
+    #   The name of the endpoint. The endpoint must be in your account and in
+    #   the current Amazon Web Services Region.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_endpoint_policy({
+    #     endpoint_name: "EndpointName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpointPolicy AWS API Documentation
+    #
+    # @overload delete_endpoint_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_endpoint_policy(params = {}, options = {})
+      req = build_request(:delete_endpoint_policy, params)
+      req.send_request(options)
+    end
+
     # Deletes an SageMaker experiment. All trials associated with the
     # experiment must be deleted first. Use the [ListTrials][1] API to get a
     # list of the trials associated with the experiment.
@@ -13529,6 +13713,32 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Deletes an inference router. The endpoints and inference components
+    # that the router sends requests to aren't deleted.
+    #
+    # If the router is being created, updated, or deleted, you get a
+    # `ConflictException`.
+    #
+    # @option params [required, String] :inference_router_name
+    #   The name of the inference router to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_inference_router({
+    #     inference_router_name: "InferenceRouterName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteInferenceRouter AWS API Documentation
+    #
+    # @overload delete_inference_router(params = {})
+    # @param [Hash] params ({})
+    def delete_inference_router(params = {}, options = {})
+      req = build_request(:delete_inference_router, params)
+      req.send_request(options)
+    end
+
     # Deletes a job. This operation is idempotent. If the job is currently
     # running, you must stop it before deleting it by calling `StopJob`.
     #
@@ -13552,7 +13762,7 @@ module Aws::SageMaker
     #
     #   resp = client.delete_job({
     #     job_name: "JobName", # required
-    #     job_category: "AgentRFT", # required, accepts AgentRFT, AgentRFTEvaluation
+    #     job_category: "AgentRFT", # required, accepts AgentRFT, SyntheticDataGeneration, DataQualityEvaluation, AgentRFTEvaluation, DataTransformation
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteJob AWS API Documentation
@@ -16878,6 +17088,7 @@ module Aws::SageMaker
     #   * {Types::DescribeEndpointOutput#explainer_config #explainer_config} => Types::ExplainerConfig
     #   * {Types::DescribeEndpointOutput#shadow_production_variants #shadow_production_variants} => Array&lt;Types::ProductionVariantSummary&gt;
     #   * {Types::DescribeEndpointOutput#metrics_config #metrics_config} => Types::MetricsConfig
+    #   * {Types::DescribeEndpointOutput#cross_region_traffic_config #cross_region_traffic_config} => Types::CrossRegionTrafficConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -16919,7 +17130,7 @@ module Aws::SageMaker
     #   resp.production_variants[0].managed_instance_scaling.scale_in_policy.strategy #=> String, one of "IDLE_RELEASE", "CONSOLIDATION"
     #   resp.production_variants[0].managed_instance_scaling.scale_in_policy.maximum_step_size #=> Integer
     #   resp.production_variants[0].managed_instance_scaling.scale_in_policy.cooldown_in_minutes #=> Integer
-    #   resp.production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE"
+    #   resp.production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE", "KV_AWARE"
     #   resp.production_variants[0].routing_config.prefix_aware_routing_config.prefix_length #=> Integer
     #   resp.production_variants[0].routing_config.prefix_aware_routing_config.concurrency_threshold #=> Integer
     #   resp.production_variants[0].capacity_reservation_config.ml_reservation_arn #=> String
@@ -17000,7 +17211,7 @@ module Aws::SageMaker
     #   resp.pending_deployment_summary.production_variants[0].managed_instance_scaling.scale_in_policy.strategy #=> String, one of "IDLE_RELEASE", "CONSOLIDATION"
     #   resp.pending_deployment_summary.production_variants[0].managed_instance_scaling.scale_in_policy.maximum_step_size #=> Integer
     #   resp.pending_deployment_summary.production_variants[0].managed_instance_scaling.scale_in_policy.cooldown_in_minutes #=> Integer
-    #   resp.pending_deployment_summary.production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE"
+    #   resp.pending_deployment_summary.production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE", "KV_AWARE"
     #   resp.pending_deployment_summary.production_variants[0].routing_config.prefix_aware_routing_config.prefix_length #=> Integer
     #   resp.pending_deployment_summary.production_variants[0].routing_config.prefix_aware_routing_config.concurrency_threshold #=> Integer
     #   resp.pending_deployment_summary.production_variants[0].accelerator_partition_layouts #=> Array
@@ -17038,7 +17249,7 @@ module Aws::SageMaker
     #   resp.pending_deployment_summary.shadow_production_variants[0].managed_instance_scaling.scale_in_policy.strategy #=> String, one of "IDLE_RELEASE", "CONSOLIDATION"
     #   resp.pending_deployment_summary.shadow_production_variants[0].managed_instance_scaling.scale_in_policy.maximum_step_size #=> Integer
     #   resp.pending_deployment_summary.shadow_production_variants[0].managed_instance_scaling.scale_in_policy.cooldown_in_minutes #=> Integer
-    #   resp.pending_deployment_summary.shadow_production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE"
+    #   resp.pending_deployment_summary.shadow_production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE", "KV_AWARE"
     #   resp.pending_deployment_summary.shadow_production_variants[0].routing_config.prefix_aware_routing_config.prefix_length #=> Integer
     #   resp.pending_deployment_summary.shadow_production_variants[0].routing_config.prefix_aware_routing_config.concurrency_threshold #=> Integer
     #   resp.pending_deployment_summary.shadow_production_variants[0].accelerator_partition_layouts #=> Array
@@ -17096,7 +17307,7 @@ module Aws::SageMaker
     #   resp.shadow_production_variants[0].managed_instance_scaling.scale_in_policy.strategy #=> String, one of "IDLE_RELEASE", "CONSOLIDATION"
     #   resp.shadow_production_variants[0].managed_instance_scaling.scale_in_policy.maximum_step_size #=> Integer
     #   resp.shadow_production_variants[0].managed_instance_scaling.scale_in_policy.cooldown_in_minutes #=> Integer
-    #   resp.shadow_production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE"
+    #   resp.shadow_production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE", "KV_AWARE"
     #   resp.shadow_production_variants[0].routing_config.prefix_aware_routing_config.prefix_length #=> Integer
     #   resp.shadow_production_variants[0].routing_config.prefix_aware_routing_config.concurrency_threshold #=> Integer
     #   resp.shadow_production_variants[0].capacity_reservation_config.ml_reservation_arn #=> String
@@ -17115,6 +17326,8 @@ module Aws::SageMaker
     #   resp.metrics_config.enable_enhanced_metrics #=> Boolean
     #   resp.metrics_config.enable_detailed_observability #=> Boolean
     #   resp.metrics_config.metric_publish_frequency_in_seconds #=> Integer
+    #   resp.cross_region_traffic_config.max_invocations_per_second_per_instance #=> Integer
+    #   resp.cross_region_traffic_config.max_cross_region_percent_per_endpoint #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -17152,6 +17365,7 @@ module Aws::SageMaker
     #   * {Types::DescribeEndpointConfigOutput#vpc_config #vpc_config} => Types::VpcConfig
     #   * {Types::DescribeEndpointConfigOutput#enable_network_isolation #enable_network_isolation} => Boolean
     #   * {Types::DescribeEndpointConfigOutput#metrics_config #metrics_config} => Types::MetricsConfig
+    #   * {Types::DescribeEndpointConfigOutput#cross_region_traffic_config #cross_region_traffic_config} => Types::CrossRegionTrafficConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -17190,7 +17404,7 @@ module Aws::SageMaker
     #   resp.production_variants[0].managed_instance_scaling.scale_in_policy.strategy #=> String, one of "IDLE_RELEASE", "CONSOLIDATION"
     #   resp.production_variants[0].managed_instance_scaling.scale_in_policy.maximum_step_size #=> Integer
     #   resp.production_variants[0].managed_instance_scaling.scale_in_policy.cooldown_in_minutes #=> Integer
-    #   resp.production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE"
+    #   resp.production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE", "KV_AWARE"
     #   resp.production_variants[0].routing_config.prefix_aware_routing_config.prefix_length #=> Integer
     #   resp.production_variants[0].routing_config.prefix_aware_routing_config.concurrency_threshold #=> Integer
     #   resp.production_variants[0].inference_ami_version #=> String, one of "al2-ami-sagemaker-inference-gpu-2", "al2-ami-sagemaker-inference-gpu-2-1", "al2-ami-sagemaker-inference-gpu-3-1", "al2-ami-sagemaker-inference-neuron-2", "al2023-ami-sagemaker-inference-gpu-4-1"
@@ -17269,7 +17483,7 @@ module Aws::SageMaker
     #   resp.shadow_production_variants[0].managed_instance_scaling.scale_in_policy.strategy #=> String, one of "IDLE_RELEASE", "CONSOLIDATION"
     #   resp.shadow_production_variants[0].managed_instance_scaling.scale_in_policy.maximum_step_size #=> Integer
     #   resp.shadow_production_variants[0].managed_instance_scaling.scale_in_policy.cooldown_in_minutes #=> Integer
-    #   resp.shadow_production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE"
+    #   resp.shadow_production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE", "KV_AWARE"
     #   resp.shadow_production_variants[0].routing_config.prefix_aware_routing_config.prefix_length #=> Integer
     #   resp.shadow_production_variants[0].routing_config.prefix_aware_routing_config.concurrency_threshold #=> Integer
     #   resp.shadow_production_variants[0].inference_ami_version #=> String, one of "al2-ami-sagemaker-inference-gpu-2", "al2-ami-sagemaker-inference-gpu-2-1", "al2-ami-sagemaker-inference-gpu-3-1", "al2-ami-sagemaker-inference-neuron-2", "al2023-ami-sagemaker-inference-gpu-4-1"
@@ -17287,6 +17501,8 @@ module Aws::SageMaker
     #   resp.metrics_config.enable_enhanced_metrics #=> Boolean
     #   resp.metrics_config.enable_detailed_observability #=> Boolean
     #   resp.metrics_config.metric_publish_frequency_in_seconds #=> Integer
+    #   resp.cross_region_traffic_config.max_invocations_per_second_per_instance #=> Integer
+    #   resp.cross_region_traffic_config.max_cross_region_percent_per_endpoint #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfig AWS API Documentation
     #
@@ -18505,6 +18721,67 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Returns information about an inference router, including the routing
+    # status of each destination.
+    #
+    # SageMaker AI checks each destination with your permissions when you
+    # call this operation, so callers with different permissions can see a
+    # different `RoutingStatus`. To get the router's tags, use
+    # [ListTags][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListTags.html
+    #
+    # @option params [required, String] :inference_router_name
+    #   The name of the inference router to describe.
+    #
+    # @return [Types::DescribeInferenceRouterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInferenceRouterOutput#inference_router_name #inference_router_name} => String
+    #   * {Types::DescribeInferenceRouterOutput#inference_router_arn #inference_router_arn} => String
+    #   * {Types::DescribeInferenceRouterOutput#routing_targets #routing_targets} => Array&lt;Types::RoutingTarget&gt;
+    #   * {Types::DescribeInferenceRouterOutput#status #status} => String
+    #   * {Types::DescribeInferenceRouterOutput#status_reason #status_reason} => String
+    #   * {Types::DescribeInferenceRouterOutput#creation_time #creation_time} => Time
+    #   * {Types::DescribeInferenceRouterOutput#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_inference_router({
+    #     inference_router_name: "InferenceRouterName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_router_name #=> String
+    #   resp.inference_router_arn #=> String
+    #   resp.routing_targets #=> Array
+    #   resp.routing_targets[0].name #=> String
+    #   resp.routing_targets[0].destinations #=> Array
+    #   resp.routing_targets[0].destinations[0].resource_arn #=> String
+    #   resp.routing_targets[0].destinations[0].routing_status #=> String, one of "Routable", "Unroutable", "Unknown"
+    #   resp.routing_targets[0].async_inference_config.output_config.s3_output_path #=> String
+    #   resp.routing_targets[0].async_inference_config.output_config.s3_failure_path #=> String
+    #   resp.routing_targets[0].async_inference_config.output_config.kms_key_id #=> String
+    #   resp.routing_targets[0].async_inference_config.output_config.notification_config.success_topic #=> String
+    #   resp.routing_targets[0].async_inference_config.output_config.notification_config.error_topic #=> String
+    #   resp.routing_targets[0].async_inference_config.client_config.max_time_in_backlog_seconds #=> Integer
+    #   resp.routing_targets[0].routing_preference #=> String, one of "LocalRegionFirst", "InstancePoolOrder"
+    #   resp.status #=> String, one of "InService", "Creating", "Updating", "Failed", "Deleting"
+    #   resp.status_reason #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeInferenceRouter AWS API Documentation
+    #
+    # @overload describe_inference_router(params = {})
+    # @param [Hash] params ({})
+    def describe_inference_router(params = {}, options = {})
+      req = build_request(:describe_inference_router, params)
+      req.send_request(options)
+    end
+
     # Returns detailed information about a job, including its current
     # status, secondary status, configuration, and timestamps. Use
     # `SecondaryStatus` for granular progress tracking and
@@ -18548,7 +18825,7 @@ module Aws::SageMaker
     #
     #   resp = client.describe_job({
     #     job_name: "JobName", # required
-    #     job_category: "AgentRFT", # required, accepts AgentRFT, AgentRFTEvaluation
+    #     job_category: "AgentRFT", # required, accepts AgentRFT, SyntheticDataGeneration, DataQualityEvaluation, AgentRFTEvaluation, DataTransformation
     #   })
     #
     # @example Response structure
@@ -18556,16 +18833,16 @@ module Aws::SageMaker
     #   resp.job_name #=> String
     #   resp.job_arn #=> String
     #   resp.role_arn #=> String
-    #   resp.job_category #=> String, one of "AgentRFT", "AgentRFTEvaluation"
+    #   resp.job_category #=> String, one of "AgentRFT", "SyntheticDataGeneration", "DataQualityEvaluation", "AgentRFTEvaluation", "DataTransformation"
     #   resp.job_config_schema_version #=> String
     #   resp.job_config_document #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
     #   resp.end_time #=> Time
     #   resp.job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped", "Deleting", "DeleteFailed"
-    #   resp.secondary_status #=> String, one of "Starting", "Downloading", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Interrupted", "Failed", "Completed", "Restarting", "Pending", "Evaluating", "Deleting", "DeleteFailed"
+    #   resp.secondary_status #=> String, one of "Starting", "Downloading", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Interrupted", "Failed", "Completed", "Restarting", "Pending", "Generating", "PartialGeneration", "Evaluating", "Validating", "Preparing", "Executing", "Publishing", "Finalizing", "Transforming", "Deleting", "DeleteFailed"
     #   resp.secondary_status_transitions #=> Array
-    #   resp.secondary_status_transitions[0].status #=> String, one of "Starting", "Downloading", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Interrupted", "Failed", "Completed", "Restarting", "Pending", "Evaluating", "Deleting", "DeleteFailed"
+    #   resp.secondary_status_transitions[0].status #=> String, one of "Starting", "Downloading", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Interrupted", "Failed", "Completed", "Restarting", "Pending", "Generating", "PartialGeneration", "Evaluating", "Validating", "Preparing", "Executing", "Publishing", "Finalizing", "Transforming", "Deleting", "DeleteFailed"
     #   resp.secondary_status_transitions[0].start_time #=> Time
     #   resp.secondary_status_transitions[0].end_time #=> Time
     #   resp.secondary_status_transitions[0].status_message #=> String
@@ -18611,13 +18888,13 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_job_schema_version({
-    #     job_category: "AgentRFT", # required, accepts AgentRFT, AgentRFTEvaluation
+    #     job_category: "AgentRFT", # required, accepts AgentRFT, SyntheticDataGeneration, DataQualityEvaluation, AgentRFTEvaluation, DataTransformation
     #     job_config_schema_version: "JobSchemaVersion",
     #   })
     #
     # @example Response structure
     #
-    #   resp.job_category #=> String, one of "AgentRFT", "AgentRFTEvaluation"
+    #   resp.job_category #=> String, one of "AgentRFT", "SyntheticDataGeneration", "DataQualityEvaluation", "AgentRFTEvaluation", "DataTransformation"
     #   resp.job_config_schema_version #=> String
     #   resp.job_config_schema #=> String
     #
@@ -22097,6 +22374,40 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def get_device_fleet_report(params = {}, options = {})
       req = build_request(:get_device_fleet_report, params)
+      req.send_request(options)
+    end
+
+    # Returns the resource-based policy that is attached to an endpoint. If
+    # the endpoint doesn't have a policy, you get a `ValidationException`.
+    #
+    # @option params [required, String] :endpoint_name
+    #   The name of the endpoint. The endpoint must be in your account and in
+    #   the current Amazon Web Services Region.
+    #
+    # @return [Types::GetEndpointPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEndpointPolicyResponse#endpoint_name #endpoint_name} => String
+    #   * {Types::GetEndpointPolicyResponse#endpoint_arn #endpoint_arn} => String
+    #   * {Types::GetEndpointPolicyResponse#resource_policy #resource_policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_endpoint_policy({
+    #     endpoint_name: "EndpointName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoint_name #=> String
+    #   resp.endpoint_arn #=> String
+    #   resp.resource_policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetEndpointPolicy AWS API Documentation
+    #
+    # @overload get_endpoint_policy(params = {})
+    # @param [Hash] params ({})
+    def get_endpoint_policy(params = {}, options = {})
+      req = build_request(:get_endpoint_policy, params)
       req.send_request(options)
     end
 
@@ -25985,6 +26296,49 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Lists the inference routers in your account in the current Amazon Web
+    # Services Region. A router that you just created might not appear in
+    # the list right away.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of inference routers to return in the response.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was truncated, you receive this token. To get
+    #   the next set of inference routers, use it in your next request.
+    #
+    # @return [Types::ListInferenceRoutersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInferenceRoutersOutput#inference_routers #inference_routers} => Array&lt;Types::InferenceRouterSummary&gt;
+    #   * {Types::ListInferenceRoutersOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_inference_routers({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_routers #=> Array
+    #   resp.inference_routers[0].inference_router_name #=> String
+    #   resp.inference_routers[0].inference_router_arn #=> String
+    #   resp.inference_routers[0].creation_time #=> Time
+    #   resp.inference_routers[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceRouters AWS API Documentation
+    #
+    # @overload list_inference_routers(params = {})
+    # @param [Hash] params ({})
+    def list_inference_routers(params = {}, options = {})
+      req = build_request(:list_inference_routers, params)
+      req.send_request(options)
+    end
+
     # Lists available configuration schema versions for a specified job
     # category. Use the schema versions with `DescribeJobSchemaVersion` to
     # retrieve the full schema document.
@@ -26016,7 +26370,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_job_schema_versions({
-    #     job_category: "AgentRFT", # required, accepts AgentRFT, AgentRFTEvaluation
+    #     job_category: "AgentRFT", # required, accepts AgentRFT, SyntheticDataGeneration, DataQualityEvaluation, AgentRFTEvaluation, DataTransformation
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -26094,7 +26448,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_jobs({
-    #     job_category: "AgentRFT", # required, accepts AgentRFT, AgentRFTEvaluation
+    #     job_category: "AgentRFT", # required, accepts AgentRFT, SyntheticDataGeneration, DataQualityEvaluation, AgentRFTEvaluation, DataTransformation
     #     next_token: "NextToken",
     #     max_results: 1,
     #     creation_time_after: Time.now,
@@ -26113,9 +26467,9 @@ module Aws::SageMaker
     #   resp.job_summaries #=> Array
     #   resp.job_summaries[0].job_arn #=> String
     #   resp.job_summaries[0].job_name #=> String
-    #   resp.job_summaries[0].job_category #=> String, one of "AgentRFT", "AgentRFTEvaluation"
+    #   resp.job_summaries[0].job_category #=> String, one of "AgentRFT", "SyntheticDataGeneration", "DataQualityEvaluation", "AgentRFTEvaluation", "DataTransformation"
     #   resp.job_summaries[0].job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped", "Deleting", "DeleteFailed"
-    #   resp.job_summaries[0].job_secondary_status #=> String, one of "Starting", "Downloading", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Interrupted", "Failed", "Completed", "Restarting", "Pending", "Evaluating", "Deleting", "DeleteFailed"
+    #   resp.job_summaries[0].job_secondary_status #=> String, one of "Starting", "Downloading", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Interrupted", "Failed", "Completed", "Restarting", "Pending", "Generating", "PartialGeneration", "Evaluating", "Validating", "Preparing", "Executing", "Publishing", "Finalizing", "Transforming", "Deleting", "DeleteFailed"
     #   resp.job_summaries[0].creation_time #=> Time
     #   resp.job_summaries[0].last_modified_time #=> Time
     #   resp.job_summaries[0].end_time #=> Time
@@ -29763,6 +30117,62 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Attaches a resource-based policy to an endpoint. With an endpoint
+    # policy, you can allow other Amazon Web Services accounts to send
+    # requests to your endpoint, or to inference components on it, through
+    # an inference router. The policy that you specify replaces the
+    # endpoint's existing policy, if it has one.
+    #
+    # You can't attach a policy to an endpoint whose status is `Deleting`
+    # or `Failed`. SageMaker AI rejects a policy that doesn't follow the
+    # endpoint policy rules. For information about the policy rules, see
+    # [Use destinations in other accounts][1].
+    #
+    # Policy changes typically take effect within 30 seconds, and can take
+    # up to 5 minutes. If you delete the endpoint, its policy is also
+    # deleted, and a new endpoint with the same name has no policy.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/inference-router-cross-account.html
+    #
+    # @option params [required, String] :endpoint_name
+    #   The name of the endpoint. The endpoint must be in your account and in
+    #   the current Amazon Web Services Region.
+    #
+    # @option params [required, String] :resource_policy
+    #   The endpoint policy, as a JSON policy document. The policy can contain
+    #   only ASCII characters. For information about the policy rules, see
+    #   [Use destinations in other accounts][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/inference-router-cross-account.html
+    #
+    # @return [Types::PutEndpointPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutEndpointPolicyResponse#endpoint_arn #endpoint_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_endpoint_policy({
+    #     endpoint_name: "EndpointName", # required
+    #     resource_policy: "EndpointPolicyDocument", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoint_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PutEndpointPolicy AWS API Documentation
+    #
+    # @overload put_endpoint_policy(params = {})
+    # @param [Hash] params ({})
+    def put_endpoint_policy(params = {}, options = {})
+      req = build_request(:put_endpoint_policy, params)
+      req.send_request(options)
+    end
+
     # Adds a resouce policy to control access to a model group. For
     # information about resoure policies, see [Identity-based policies and
     # resource-based policies][1] in the *Amazon Web Services Identity and
@@ -31023,7 +31433,7 @@ module Aws::SageMaker
     #
     #   resp = client.stop_job({
     #     job_name: "JobName", # required
-    #     job_category: "AgentRFT", # required, accepts AgentRFT, AgentRFTEvaluation
+    #     job_category: "AgentRFT", # required, accepts AgentRFT, SyntheticDataGeneration, DataQualityEvaluation, AgentRFTEvaluation, DataTransformation
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopJob AWS API Documentation
@@ -33707,6 +34117,80 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Updates the routing targets of an inference router. The routing
+    # targets that you specify replace all of the router's existing routing
+    # targets. To change one routing target, call
+    # [DescribeInferenceRouter][1], edit the routing targets, and send all
+    # of them.
+    #
+    # The update is applied in full or not at all, and each request uses
+    # either the previous configuration or the new one. Updates typically
+    # take effect within about 2 minutes.
+    #
+    # If the router is being created, updated, or deleted, or another
+    # request changes it at the same time, you get a `ConflictException`.
+    # Describe the router, and then send your update again.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeInferenceRouter.html
+    #
+    # @option params [required, String] :inference_router_name
+    #   The name of the inference router to update.
+    #
+    # @option params [required, Array<Types::RoutingTarget>] :routing_targets
+    #   The complete list of routing targets for the inference router. To
+    #   remove the last routing target, delete the router.
+    #
+    # @return [Types::UpdateInferenceRouterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateInferenceRouterOutput#inference_router_arn #inference_router_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_inference_router({
+    #     inference_router_name: "InferenceRouterName", # required
+    #     routing_targets: [ # required
+    #       {
+    #         name: "RoutingTargetName", # required
+    #         destinations: [ # required
+    #           {
+    #             resource_arn: "DestinationResourceArn", # required
+    #             routing_status: "Routable", # accepts Routable, Unroutable, Unknown
+    #           },
+    #         ],
+    #         async_inference_config: {
+    #           output_config: { # required
+    #             s3_output_path: "InferenceRouterS3Uri", # required
+    #             s3_failure_path: "InferenceRouterS3Uri", # required
+    #             kms_key_id: "KmsKeyId",
+    #             notification_config: {
+    #               success_topic: "InferenceRouterSnsTopicArn",
+    #               error_topic: "InferenceRouterSnsTopicArn",
+    #             },
+    #           },
+    #           client_config: {
+    #             max_time_in_backlog_seconds: 1,
+    #           },
+    #         },
+    #         routing_preference: "LocalRegionFirst", # accepts LocalRegionFirst, InstancePoolOrder
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_router_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateInferenceRouter AWS API Documentation
+    #
+    # @overload update_inference_router(params = {})
+    # @param [Hash] params ({})
+    def update_inference_router(params = {}, options = {})
+      req = build_request(:update_inference_router, params)
+      req.send_request(options)
+    end
+
     # Updates an MLflow App.
     #
     # @option params [required, String] :arn
@@ -35809,7 +36293,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.415.0'
+      context[:gem_version] = '1.416.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

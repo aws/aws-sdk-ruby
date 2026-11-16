@@ -92,6 +92,17 @@ module Aws
                                                ?next_token: ::String
                                              ) -> _GetRequestAuthorizationDetailsResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRequestAuthorizationDetailsResponseSuccess
+
+      interface _GetRequestAuthorizationPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRequestAuthorizationPolicyOutput]
+        def policy_document: () -> untyped
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAMToolbox/Client.html#get_request_authorization_policy-instance_method
+      def get_request_authorization_policy: (
+                                              authorization_id: ::String,
+                                              policy_uri: ::String
+                                            ) -> _GetRequestAuthorizationPolicyResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRequestAuthorizationPolicyResponseSuccess
     end
   end
 end

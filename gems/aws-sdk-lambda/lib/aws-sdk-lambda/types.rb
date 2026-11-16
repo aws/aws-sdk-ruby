@@ -10,6 +10,23 @@
 module Aws::Lambda
   module Types
 
+    # The accelerator resource settings for a Lambda execution environment,
+    # including the amount of accelerator memory to allocate.
+    #
+    # @!attribute [rw] accelerator_memory_size
+    #   The minimum amount of memory (in GB) of each accelerator device
+    #   exposed to the execution environment. Lambda might allocate more,
+    #   depending on the accelerator instance types available.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AcceleratorConfig AWS API Documentation
+    #
+    class AcceleratorConfig < Struct.new(
+      :accelerator_memory_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Limits that are related to concurrency and storage. All file and
     # storage sizes are in bytes.
     #
@@ -1991,7 +2008,8 @@ module Aws::Lambda
     # @!attribute [rw] ephemeral_storage
     #   The size of the function's `/tmp` directory in MB. The default
     #   value is 512, but can be any whole number between 512 and 10,240 MB.
-    #   For more information, see [Configuring ephemeral storage
+    #   For functions that use `AcceleratorConfig`, the maximum is 32,768
+    #   MB. For more information, see [Configuring ephemeral storage
     #   (console)][1].
     #
     #
@@ -2034,6 +2052,11 @@ module Aws::Lambda
     #   your function uses.
     #   @return [Types::FunctionRuntimeConfig]
     #
+    # @!attribute [rw] accelerator_config
+    #   The accelerator resource settings for a Lambda execution
+    #   environment.
+    #   @return [Types::AcceleratorConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionRequest AWS API Documentation
     #
     class CreateFunctionRequest < Struct.new(
@@ -2065,7 +2088,8 @@ module Aws::Lambda
       :tenancy_config,
       :capacity_provider_config,
       :durable_config,
-      :runtime_config)
+      :runtime_config,
+      :accelerator_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2883,6 +2907,7 @@ module Aws::Lambda
 
     # The size of the function's `/tmp` directory in MB. The default value
     # is 512, but can be any whole number between 512 and 10,240 MB. For
+    # functions that use `AcceleratorConfig`, the maximum is 32,768 MB. For
     # more information, see [Configuring ephemeral storage (console)][1].
     #
     #
@@ -4108,7 +4133,8 @@ module Aws::Lambda
     # @!attribute [rw] ephemeral_storage
     #   The size of the function's `/tmp` directory in MB. The default
     #   value is 512, but can be any whole number between 512 and 10,240 MB.
-    #   For more information, see [Configuring ephemeral storage
+    #   For functions that use `AcceleratorConfig`, the maximum is 32,768
+    #   MB. For more information, see [Configuring ephemeral storage
     #   (console)][1].
     #
     #
@@ -4161,6 +4187,11 @@ module Aws::Lambda
     #   your function uses.
     #   @return [Types::FunctionRuntimeConfig]
     #
+    # @!attribute [rw] accelerator_config
+    #   The accelerator resource settings for a Lambda execution
+    #   environment.
+    #   @return [Types::AcceleratorConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration AWS API Documentation
     #
     class FunctionConfiguration < Struct.new(
@@ -4204,7 +4235,8 @@ module Aws::Lambda
       :capacity_provider_config,
       :config_sha_256,
       :durable_config,
-      :runtime_config)
+      :runtime_config,
+      :accelerator_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10440,7 +10472,8 @@ module Aws::Lambda
     # @!attribute [rw] ephemeral_storage
     #   The size of the function's `/tmp` directory in MB. The default
     #   value is 512, but can be any whole number between 512 and 10,240 MB.
-    #   For more information, see [Configuring ephemeral storage
+    #   For functions that use `AcceleratorConfig`, the maximum is 32,768
+    #   MB. For more information, see [Configuring ephemeral storage
     #   (console)][1].
     #
     #
@@ -10483,6 +10516,11 @@ module Aws::Lambda
     #   your function uses.
     #   @return [Types::FunctionRuntimeConfig]
     #
+    # @!attribute [rw] accelerator_config
+    #   The accelerator resource settings for a Lambda execution
+    #   environment.
+    #   @return [Types::AcceleratorConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfigurationRequest AWS API Documentation
     #
     class UpdateFunctionConfigurationRequest < Struct.new(
@@ -10507,7 +10545,8 @@ module Aws::Lambda
       :logging_config,
       :capacity_provider_config,
       :durable_config,
-      :runtime_config)
+      :runtime_config,
+      :accelerator_config)
       SENSITIVE = []
       include Aws::Structure
     end

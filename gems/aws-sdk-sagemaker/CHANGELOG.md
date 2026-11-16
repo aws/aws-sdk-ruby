@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.416.0 (2026-11-16)
+------------------
+
+* Feature - Amazon SageMaker adds Synthetic Data Generation, Auto-labeling, Data Quality Evaluation, and Data Transformation capabilities, Cross-Region Inference Routing, KV Aware routing for realtime inference endpoints.
+
 1.415.0 (2026-11-13)
 ------------------
 

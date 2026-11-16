@@ -59,6 +59,7 @@ module Aws::EMRServerless
     EntryPointArgument = Shapes::StringShape.new(name: 'EntryPointArgument')
     EntryPointArguments = Shapes::ListShape.new(name: 'EntryPointArguments')
     EntryPointPath = Shapes::StringShape.new(name: 'EntryPointPath')
+    FlexExecution = Shapes::StructureShape.new(name: 'FlexExecution')
     GetApplicationRequest = Shapes::StructureShape.new(name: 'GetApplicationRequest')
     GetApplicationResponse = Shapes::StructureShape.new(name: 'GetApplicationResponse')
     GetDashboardForJobRunRequest = Shapes::StructureShape.new(name: 'GetDashboardForJobRunRequest')
@@ -318,6 +319,9 @@ module Aws::EMRServerless
 
     EntryPointArguments.member = Shapes::ShapeRef.new(shape: EntryPointArgument)
 
+    FlexExecution.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    FlexExecution.struct_class = Types::FlexExecution
+
     GetApplicationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
     GetApplicationRequest.struct_class = Types::GetApplicationRequest
 
@@ -447,6 +451,7 @@ module Aws::EMRServerless
     JobRun.add_member(:queued_duration_milliseconds, Shapes::ShapeRef.new(shape: Long, location_name: "queuedDurationMilliseconds"))
     JobRun.add_member(:image_configuration, Shapes::ShapeRef.new(shape: ImageConfiguration, location_name: "imageConfiguration"))
     JobRun.add_member(:worker_type_specifications, Shapes::ShapeRef.new(shape: WorkerTypeSpecificationMap, location_name: "workerTypeSpecifications"))
+    JobRun.add_member(:flex_execution, Shapes::ShapeRef.new(shape: FlexExecution, location_name: "flexExecution"))
     JobRun.struct_class = Types::JobRun
 
     JobRunAttemptSummary.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "applicationId"))
@@ -464,6 +469,7 @@ module Aws::EMRServerless
     JobRunAttemptSummary.add_member(:release_label, Shapes::ShapeRef.new(shape: ReleaseLabel, required: true, location_name: "releaseLabel"))
     JobRunAttemptSummary.add_member(:type, Shapes::ShapeRef.new(shape: JobRunType, location_name: "type"))
     JobRunAttemptSummary.add_member(:attempt, Shapes::ShapeRef.new(shape: AttemptNumber, location_name: "attempt"))
+    JobRunAttemptSummary.add_member(:flex_execution, Shapes::ShapeRef.new(shape: FlexExecution, location_name: "flexExecution"))
     JobRunAttemptSummary.struct_class = Types::JobRunAttemptSummary
 
     JobRunAttempts.member = Shapes::ShapeRef.new(shape: JobRunAttemptSummary)
@@ -490,6 +496,7 @@ module Aws::EMRServerless
     JobRunSummary.add_member(:attempt, Shapes::ShapeRef.new(shape: AttemptNumber, location_name: "attempt"))
     JobRunSummary.add_member(:attempt_created_at, Shapes::ShapeRef.new(shape: Date, location_name: "attemptCreatedAt"))
     JobRunSummary.add_member(:attempt_updated_at, Shapes::ShapeRef.new(shape: Date, location_name: "attemptUpdatedAt"))
+    JobRunSummary.add_member(:flex_execution, Shapes::ShapeRef.new(shape: FlexExecution, location_name: "flexExecution"))
     JobRunSummary.struct_class = Types::JobRunSummary
 
     JobRuns.member = Shapes::ShapeRef.new(shape: JobRunSummary)
@@ -665,6 +672,7 @@ module Aws::EMRServerless
     StartJobRunRequest.add_member(:name, Shapes::ShapeRef.new(shape: String256, location_name: "name"))
     StartJobRunRequest.add_member(:mode, Shapes::ShapeRef.new(shape: JobRunMode, location_name: "mode"))
     StartJobRunRequest.add_member(:retry_policy, Shapes::ShapeRef.new(shape: RetryPolicy, location_name: "retryPolicy"))
+    StartJobRunRequest.add_member(:flex_execution, Shapes::ShapeRef.new(shape: FlexExecution, location_name: "flexExecution"))
     StartJobRunRequest.struct_class = Types::StartJobRunRequest
 
     StartJobRunResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "applicationId"))

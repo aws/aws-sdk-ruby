@@ -586,6 +586,9 @@ module Aws::ECR
     #       {
     #         image_tag: "precise", 
     #       }, 
+    #       {
+    #         image_tag: "trusty", 
+    #       }, 
     #     ], 
     #     repository_name: "ubuntu", 
     #   })
@@ -2131,6 +2134,7 @@ module Aws::ECR
     #   resp.replication_configuration.rules[0].repository_filters #=> Array
     #   resp.replication_configuration.rules[0].repository_filters[0].filter #=> String
     #   resp.replication_configuration.rules[0].repository_filters[0].filter_type #=> String, one of "PREFIX_MATCH"
+    #   resp.replication_configuration.rules[0].delete_replication.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRegistry AWS API Documentation
     #
@@ -3885,6 +3889,9 @@ module Aws::ECR
     #               filter_type: "PREFIX_MATCH", # required, accepts PREFIX_MATCH
     #             },
     #           ],
+    #           delete_replication: {
+    #             enabled: false, # required
+    #           },
     #         },
     #       ],
     #     },
@@ -3899,6 +3906,7 @@ module Aws::ECR
     #   resp.replication_configuration.rules[0].repository_filters #=> Array
     #   resp.replication_configuration.rules[0].repository_filters[0].filter #=> String
     #   resp.replication_configuration.rules[0].repository_filters[0].filter_type #=> String, one of "PREFIX_MATCH"
+    #   resp.replication_configuration.rules[0].delete_replication.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutReplicationConfiguration AWS API Documentation
     #
@@ -4838,7 +4846,7 @@ module Aws::ECR
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.145.0'
+      context[:gem_version] = '1.146.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

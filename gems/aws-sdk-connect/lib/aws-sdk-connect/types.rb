@@ -10133,6 +10133,43 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The identifier of the entity whose sessions you want to delete. For
+    #   `USER`, use the user ID or the user ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of entity whose sessions you want to delete.
+    #
+    #   <note markdown="1"> The only valid value is `USER`, which signs out a user in your
+    #   Connect Customer instance.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteAllEntitySessionsRequest AWS API Documentation
+    #
+    class DeleteAllEntitySessionsRequest < Struct.new(
+      :instance_id,
+      :entity_id,
+      :entity_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteAllEntitySessionsResponse AWS API Documentation
+    #
+    class DeleteAllEntitySessionsResponse < Aws::EmptyStructure; end
+
     # Request to DeleteAttachedFile API
     #
     # @!attribute [rw] instance_id

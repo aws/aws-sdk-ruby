@@ -721,6 +721,8 @@ module Aws::SageMaker
     CreateInferenceExperimentResponse = Shapes::StructureShape.new(name: 'CreateInferenceExperimentResponse')
     CreateInferenceRecommendationsJobRequest = Shapes::StructureShape.new(name: 'CreateInferenceRecommendationsJobRequest')
     CreateInferenceRecommendationsJobResponse = Shapes::StructureShape.new(name: 'CreateInferenceRecommendationsJobResponse')
+    CreateInferenceRouterInput = Shapes::StructureShape.new(name: 'CreateInferenceRouterInput')
+    CreateInferenceRouterOutput = Shapes::StructureShape.new(name: 'CreateInferenceRouterOutput')
     CreateJobRequest = Shapes::StructureShape.new(name: 'CreateJobRequest')
     CreateJobResponse = Shapes::StructureShape.new(name: 'CreateJobResponse')
     CreateLabelingJobRequest = Shapes::StructureShape.new(name: 'CreateLabelingJobRequest')
@@ -798,6 +800,9 @@ module Aws::SageMaker
     CreationTime = Shapes::TimestampShape.new(name: 'CreationTime')
     CronScheduleExpression = Shapes::StringShape.new(name: 'CronScheduleExpression')
     CrossAccountFilterOption = Shapes::StringShape.new(name: 'CrossAccountFilterOption')
+    CrossRegionMaxInvocationsPerSecondPerInstance = Shapes::IntegerShape.new(name: 'CrossRegionMaxInvocationsPerSecondPerInstance')
+    CrossRegionPercentPerEndpoint = Shapes::IntegerShape.new(name: 'CrossRegionPercentPerEndpoint')
+    CrossRegionTrafficConfig = Shapes::StructureShape.new(name: 'CrossRegionTrafficConfig')
     CsvContentType = Shapes::StringShape.new(name: 'CsvContentType')
     CsvContentTypes = Shapes::ListShape.new(name: 'CsvContentTypes')
     CurrencyCode = Shapes::StringShape.new(name: 'CurrencyCode')
@@ -881,6 +886,8 @@ module Aws::SageMaker
     DeleteEdgeDeploymentStageRequest = Shapes::StructureShape.new(name: 'DeleteEdgeDeploymentStageRequest')
     DeleteEndpointConfigInput = Shapes::StructureShape.new(name: 'DeleteEndpointConfigInput')
     DeleteEndpointInput = Shapes::StructureShape.new(name: 'DeleteEndpointInput')
+    DeleteEndpointPolicyRequest = Shapes::StructureShape.new(name: 'DeleteEndpointPolicyRequest')
+    DeleteEndpointPolicyResponse = Shapes::StructureShape.new(name: 'DeleteEndpointPolicyResponse')
     DeleteExperimentRequest = Shapes::StructureShape.new(name: 'DeleteExperimentRequest')
     DeleteExperimentResponse = Shapes::StructureShape.new(name: 'DeleteExperimentResponse')
     DeleteFeatureGroupRequest = Shapes::StructureShape.new(name: 'DeleteFeatureGroupRequest')
@@ -899,6 +906,7 @@ module Aws::SageMaker
     DeleteInferenceComponentInput = Shapes::StructureShape.new(name: 'DeleteInferenceComponentInput')
     DeleteInferenceExperimentRequest = Shapes::StructureShape.new(name: 'DeleteInferenceExperimentRequest')
     DeleteInferenceExperimentResponse = Shapes::StructureShape.new(name: 'DeleteInferenceExperimentResponse')
+    DeleteInferenceRouterInput = Shapes::StructureShape.new(name: 'DeleteInferenceRouterInput')
     DeleteJobRequest = Shapes::StructureShape.new(name: 'DeleteJobRequest')
     DeleteJobResponse = Shapes::StructureShape.new(name: 'DeleteJobResponse')
     DeleteMlflowAppRequest = Shapes::StructureShape.new(name: 'DeleteMlflowAppRequest')
@@ -1035,6 +1043,8 @@ module Aws::SageMaker
     DescribeInferenceExperimentResponse = Shapes::StructureShape.new(name: 'DescribeInferenceExperimentResponse')
     DescribeInferenceRecommendationsJobRequest = Shapes::StructureShape.new(name: 'DescribeInferenceRecommendationsJobRequest')
     DescribeInferenceRecommendationsJobResponse = Shapes::StructureShape.new(name: 'DescribeInferenceRecommendationsJobResponse')
+    DescribeInferenceRouterInput = Shapes::StructureShape.new(name: 'DescribeInferenceRouterInput')
+    DescribeInferenceRouterOutput = Shapes::StructureShape.new(name: 'DescribeInferenceRouterOutput')
     DescribeJobRequest = Shapes::StructureShape.new(name: 'DescribeJobRequest')
     DescribeJobResponse = Shapes::StructureShape.new(name: 'DescribeJobResponse')
     DescribeJobSchemaVersionRequest = Shapes::StructureShape.new(name: 'DescribeJobSchemaVersionRequest')
@@ -1114,6 +1124,9 @@ module Aws::SageMaker
     Description = Shapes::StringShape.new(name: 'Description')
     DesiredWeightAndCapacity = Shapes::StructureShape.new(name: 'DesiredWeightAndCapacity')
     DesiredWeightAndCapacityList = Shapes::ListShape.new(name: 'DesiredWeightAndCapacityList')
+    Destination = Shapes::StructureShape.new(name: 'Destination')
+    DestinationList = Shapes::ListShape.new(name: 'DestinationList')
+    DestinationResourceArn = Shapes::StringShape.new(name: 'DestinationResourceArn')
     DestinationS3Uri = Shapes::StringShape.new(name: 'DestinationS3Uri')
     DetachClusterNodeVolumeRequest = Shapes::StructureShape.new(name: 'DetachClusterNodeVolumeRequest')
     DetachClusterNodeVolumeResponse = Shapes::StructureShape.new(name: 'DetachClusterNodeVolumeResponse')
@@ -1244,6 +1257,7 @@ module Aws::SageMaker
     EndpointOutputConfiguration = Shapes::StructureShape.new(name: 'EndpointOutputConfiguration')
     EndpointPerformance = Shapes::StructureShape.new(name: 'EndpointPerformance')
     EndpointPerformances = Shapes::ListShape.new(name: 'EndpointPerformances')
+    EndpointPolicyDocument = Shapes::StringShape.new(name: 'EndpointPolicyDocument')
     EndpointSortKey = Shapes::StringShape.new(name: 'EndpointSortKey')
     EndpointStatus = Shapes::StringShape.new(name: 'EndpointStatus')
     EndpointStepMetadata = Shapes::StructureShape.new(name: 'EndpointStepMetadata')
@@ -1387,6 +1401,8 @@ module Aws::SageMaker
     GenerativeAiSettings = Shapes::StructureShape.new(name: 'GenerativeAiSettings')
     GetDeviceFleetReportRequest = Shapes::StructureShape.new(name: 'GetDeviceFleetReportRequest')
     GetDeviceFleetReportResponse = Shapes::StructureShape.new(name: 'GetDeviceFleetReportResponse')
+    GetEndpointPolicyRequest = Shapes::StructureShape.new(name: 'GetEndpointPolicyRequest')
+    GetEndpointPolicyResponse = Shapes::StructureShape.new(name: 'GetEndpointPolicyResponse')
     GetLineageGroupPolicyRequest = Shapes::StructureShape.new(name: 'GetLineageGroupPolicyRequest')
     GetLineageGroupPolicyResponse = Shapes::StructureShape.new(name: 'GetLineageGroupPolicyResponse')
     GetModelPackageGroupPolicyInput = Shapes::StructureShape.new(name: 'GetModelPackageGroupPolicyInput')
@@ -1599,6 +1615,17 @@ module Aws::SageMaker
     InferenceRecommendationsJobStep = Shapes::StructureShape.new(name: 'InferenceRecommendationsJobStep')
     InferenceRecommendationsJobSteps = Shapes::ListShape.new(name: 'InferenceRecommendationsJobSteps')
     InferenceRecommendationsJobs = Shapes::ListShape.new(name: 'InferenceRecommendationsJobs')
+    InferenceRouterArn = Shapes::StringShape.new(name: 'InferenceRouterArn')
+    InferenceRouterClientToken = Shapes::StringShape.new(name: 'InferenceRouterClientToken')
+    InferenceRouterMaxTimeInBacklogSeconds = Shapes::IntegerShape.new(name: 'InferenceRouterMaxTimeInBacklogSeconds')
+    InferenceRouterName = Shapes::StringShape.new(name: 'InferenceRouterName')
+    InferenceRouterRoutingPreference = Shapes::StringShape.new(name: 'InferenceRouterRoutingPreference')
+    InferenceRouterS3Uri = Shapes::StringShape.new(name: 'InferenceRouterS3Uri')
+    InferenceRouterSnsTopicArn = Shapes::StringShape.new(name: 'InferenceRouterSnsTopicArn')
+    InferenceRouterStatus = Shapes::StringShape.new(name: 'InferenceRouterStatus')
+    InferenceRouterStatusReason = Shapes::StringShape.new(name: 'InferenceRouterStatusReason')
+    InferenceRouterSummary = Shapes::StructureShape.new(name: 'InferenceRouterSummary')
+    InferenceRouterSummaryList = Shapes::ListShape.new(name: 'InferenceRouterSummaryList')
     InferenceSpecification = Shapes::StructureShape.new(name: 'InferenceSpecification')
     InferenceSpecificationName = Shapes::StringShape.new(name: 'InferenceSpecificationName')
     InfraCheckConfig = Shapes::StructureShape.new(name: 'InfraCheckConfig')
@@ -1820,6 +1847,8 @@ module Aws::SageMaker
     ListInferenceRecommendationsJobsRequest = Shapes::StructureShape.new(name: 'ListInferenceRecommendationsJobsRequest')
     ListInferenceRecommendationsJobsResponse = Shapes::StructureShape.new(name: 'ListInferenceRecommendationsJobsResponse')
     ListInferenceRecommendationsJobsSortBy = Shapes::StringShape.new(name: 'ListInferenceRecommendationsJobsSortBy')
+    ListInferenceRoutersInput = Shapes::StructureShape.new(name: 'ListInferenceRoutersInput')
+    ListInferenceRoutersOutput = Shapes::StructureShape.new(name: 'ListInferenceRoutersOutput')
     ListJobSchemaVersionsRequest = Shapes::StructureShape.new(name: 'ListJobSchemaVersionsRequest')
     ListJobSchemaVersionsResponse = Shapes::StructureShape.new(name: 'ListJobSchemaVersionsResponse')
     ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
@@ -2451,6 +2480,8 @@ module Aws::SageMaker
     ProvisioningParameterValue = Shapes::StringShape.new(name: 'ProvisioningParameterValue')
     ProvisioningParameters = Shapes::ListShape.new(name: 'ProvisioningParameters')
     PublicWorkforceTaskPrice = Shapes::StructureShape.new(name: 'PublicWorkforceTaskPrice')
+    PutEndpointPolicyRequest = Shapes::StructureShape.new(name: 'PutEndpointPolicyRequest')
+    PutEndpointPolicyResponse = Shapes::StructureShape.new(name: 'PutEndpointPolicyResponse')
     PutModelPackageGroupPolicyInput = Shapes::StructureShape.new(name: 'PutModelPackageGroupPolicyInput')
     PutModelPackageGroupPolicyOutput = Shapes::StructureShape.new(name: 'PutModelPackageGroupPolicyOutput')
     QProfileArn = Shapes::StringShape.new(name: 'QProfileArn')
@@ -2546,6 +2577,7 @@ module Aws::SageMaker
     ReservedCapacitySummary = Shapes::StructureShape.new(name: 'ReservedCapacitySummary')
     ReservedCapacityType = Shapes::StringShape.new(name: 'ReservedCapacityType')
     ResolvedAttributes = Shapes::StructureShape.new(name: 'ResolvedAttributes')
+    ResourceAlreadyExists = Shapes::StructureShape.new(name: 'ResourceAlreadyExists')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceCatalog = Shapes::StructureShape.new(name: 'ResourceCatalog')
     ResourceCatalogArn = Shapes::StringShape.new(name: 'ResourceCatalogArn')
@@ -2582,7 +2614,15 @@ module Aws::SageMaker
     RollingDeploymentPolicy = Shapes::StructureShape.new(name: 'RollingDeploymentPolicy')
     RollingUpdatePolicy = Shapes::StructureShape.new(name: 'RollingUpdatePolicy')
     RootAccess = Shapes::StringShape.new(name: 'RootAccess')
+    RoutingStatus = Shapes::StringShape.new(name: 'RoutingStatus')
     RoutingStrategy = Shapes::StringShape.new(name: 'RoutingStrategy')
+    RoutingTarget = Shapes::StructureShape.new(name: 'RoutingTarget')
+    RoutingTargetAsyncInferenceClientConfig = Shapes::StructureShape.new(name: 'RoutingTargetAsyncInferenceClientConfig')
+    RoutingTargetAsyncInferenceConfig = Shapes::StructureShape.new(name: 'RoutingTargetAsyncInferenceConfig')
+    RoutingTargetAsyncInferenceNotificationConfig = Shapes::StructureShape.new(name: 'RoutingTargetAsyncInferenceNotificationConfig')
+    RoutingTargetAsyncInferenceOutputConfig = Shapes::StructureShape.new(name: 'RoutingTargetAsyncInferenceOutputConfig')
+    RoutingTargetList = Shapes::ListShape.new(name: 'RoutingTargetList')
+    RoutingTargetName = Shapes::StringShape.new(name: 'RoutingTargetName')
     RuleConfigurationName = Shapes::StringShape.new(name: 'RuleConfigurationName')
     RuleEvaluationStatus = Shapes::StringShape.new(name: 'RuleEvaluationStatus')
     RuleParameters = Shapes::MapShape.new(name: 'RuleParameters')
@@ -3061,6 +3101,8 @@ module Aws::SageMaker
     UpdateInferenceComponentRuntimeConfigOutput = Shapes::StructureShape.new(name: 'UpdateInferenceComponentRuntimeConfigOutput')
     UpdateInferenceExperimentRequest = Shapes::StructureShape.new(name: 'UpdateInferenceExperimentRequest')
     UpdateInferenceExperimentResponse = Shapes::StructureShape.new(name: 'UpdateInferenceExperimentResponse')
+    UpdateInferenceRouterInput = Shapes::StructureShape.new(name: 'UpdateInferenceRouterInput')
+    UpdateInferenceRouterOutput = Shapes::StructureShape.new(name: 'UpdateInferenceRouterOutput')
     UpdateMlflowAppRequest = Shapes::StructureShape.new(name: 'UpdateMlflowAppRequest')
     UpdateMlflowAppResponse = Shapes::StructureShape.new(name: 'UpdateMlflowAppResponse')
     UpdateMlflowTrackingServerRequest = Shapes::StructureShape.new(name: 'UpdateMlflowTrackingServerRequest')
@@ -5086,6 +5128,7 @@ module Aws::SageMaker
     CreateEndpointConfigInput.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     CreateEndpointConfigInput.add_member(:enable_network_isolation, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableNetworkIsolation", metadata: {"box" => true}))
     CreateEndpointConfigInput.add_member(:metrics_config, Shapes::ShapeRef.new(shape: MetricsConfig, location_name: "MetricsConfig"))
+    CreateEndpointConfigInput.add_member(:cross_region_traffic_config, Shapes::ShapeRef.new(shape: CrossRegionTrafficConfig, location_name: "CrossRegionTrafficConfig"))
     CreateEndpointConfigInput.struct_class = Types::CreateEndpointConfigInput
 
     CreateEndpointConfigOutput.add_member(:endpoint_config_arn, Shapes::ShapeRef.new(shape: EndpointConfigArn, required: true, location_name: "EndpointConfigArn"))
@@ -5257,6 +5300,15 @@ module Aws::SageMaker
 
     CreateInferenceRecommendationsJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: RecommendationJobArn, required: true, location_name: "JobArn"))
     CreateInferenceRecommendationsJobResponse.struct_class = Types::CreateInferenceRecommendationsJobResponse
+
+    CreateInferenceRouterInput.add_member(:inference_router_name, Shapes::ShapeRef.new(shape: InferenceRouterName, required: true, location_name: "InferenceRouterName"))
+    CreateInferenceRouterInput.add_member(:routing_targets, Shapes::ShapeRef.new(shape: RoutingTargetList, required: true, location_name: "RoutingTargets"))
+    CreateInferenceRouterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: InferenceRouterClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateInferenceRouterInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateInferenceRouterInput.struct_class = Types::CreateInferenceRouterInput
+
+    CreateInferenceRouterOutput.add_member(:inference_router_arn, Shapes::ShapeRef.new(shape: InferenceRouterArn, required: true, location_name: "InferenceRouterArn"))
+    CreateInferenceRouterOutput.struct_class = Types::CreateInferenceRouterOutput
 
     CreateJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "JobName"))
     CreateJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
@@ -5747,6 +5799,10 @@ module Aws::SageMaker
     CreateWorkteamResponse.add_member(:workteam_arn, Shapes::ShapeRef.new(shape: WorkteamArn, location_name: "WorkteamArn"))
     CreateWorkteamResponse.struct_class = Types::CreateWorkteamResponse
 
+    CrossRegionTrafficConfig.add_member(:max_invocations_per_second_per_instance, Shapes::ShapeRef.new(shape: CrossRegionMaxInvocationsPerSecondPerInstance, required: true, location_name: "MaxInvocationsPerSecondPerInstance"))
+    CrossRegionTrafficConfig.add_member(:max_cross_region_percent_per_endpoint, Shapes::ShapeRef.new(shape: CrossRegionPercentPerEndpoint, required: true, location_name: "MaxCrossRegionPercentPerEndpoint"))
+    CrossRegionTrafficConfig.struct_class = Types::CrossRegionTrafficConfig
+
     CsvContentTypes.member = Shapes::ShapeRef.new(shape: CsvContentType)
 
     CustomFileSystem.add_member(:efs_file_system, Shapes::ShapeRef.new(shape: EFSFileSystem, location_name: "EFSFileSystem"))
@@ -6018,6 +6074,11 @@ module Aws::SageMaker
     DeleteEndpointInput.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "EndpointName"))
     DeleteEndpointInput.struct_class = Types::DeleteEndpointInput
 
+    DeleteEndpointPolicyRequest.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "EndpointName"))
+    DeleteEndpointPolicyRequest.struct_class = Types::DeleteEndpointPolicyRequest
+
+    DeleteEndpointPolicyResponse.struct_class = Types::DeleteEndpointPolicyResponse
+
     DeleteExperimentRequest.add_member(:experiment_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, required: true, location_name: "ExperimentName"))
     DeleteExperimentRequest.struct_class = Types::DeleteExperimentRequest
 
@@ -6074,6 +6135,9 @@ module Aws::SageMaker
 
     DeleteInferenceExperimentResponse.add_member(:inference_experiment_arn, Shapes::ShapeRef.new(shape: InferenceExperimentArn, required: true, location_name: "InferenceExperimentArn"))
     DeleteInferenceExperimentResponse.struct_class = Types::DeleteInferenceExperimentResponse
+
+    DeleteInferenceRouterInput.add_member(:inference_router_name, Shapes::ShapeRef.new(shape: InferenceRouterName, required: true, location_name: "InferenceRouterName"))
+    DeleteInferenceRouterInput.struct_class = Types::DeleteInferenceRouterInput
 
     DeleteJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "JobName"))
     DeleteJobRequest.add_member(:job_category, Shapes::ShapeRef.new(shape: JobCategory, required: true, location_name: "JobCategory"))
@@ -6709,6 +6773,7 @@ module Aws::SageMaker
     DescribeEndpointConfigOutput.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     DescribeEndpointConfigOutput.add_member(:enable_network_isolation, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableNetworkIsolation", metadata: {"box" => true}))
     DescribeEndpointConfigOutput.add_member(:metrics_config, Shapes::ShapeRef.new(shape: MetricsConfig, location_name: "MetricsConfig"))
+    DescribeEndpointConfigOutput.add_member(:cross_region_traffic_config, Shapes::ShapeRef.new(shape: CrossRegionTrafficConfig, location_name: "CrossRegionTrafficConfig"))
     DescribeEndpointConfigOutput.struct_class = Types::DescribeEndpointConfigOutput
 
     DescribeEndpointInput.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "EndpointName"))
@@ -6729,6 +6794,7 @@ module Aws::SageMaker
     DescribeEndpointOutput.add_member(:explainer_config, Shapes::ShapeRef.new(shape: ExplainerConfig, location_name: "ExplainerConfig"))
     DescribeEndpointOutput.add_member(:shadow_production_variants, Shapes::ShapeRef.new(shape: ProductionVariantSummaryList, location_name: "ShadowProductionVariants"))
     DescribeEndpointOutput.add_member(:metrics_config, Shapes::ShapeRef.new(shape: MetricsConfig, location_name: "MetricsConfig"))
+    DescribeEndpointOutput.add_member(:cross_region_traffic_config, Shapes::ShapeRef.new(shape: CrossRegionTrafficConfig, location_name: "CrossRegionTrafficConfig"))
     DescribeEndpointOutput.struct_class = Types::DescribeEndpointOutput
 
     DescribeExperimentRequest.add_member(:experiment_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, required: true, location_name: "ExperimentName"))
@@ -6972,6 +7038,18 @@ module Aws::SageMaker
     DescribeInferenceRecommendationsJobResponse.add_member(:inference_recommendations, Shapes::ShapeRef.new(shape: InferenceRecommendations, location_name: "InferenceRecommendations"))
     DescribeInferenceRecommendationsJobResponse.add_member(:endpoint_performances, Shapes::ShapeRef.new(shape: EndpointPerformances, location_name: "EndpointPerformances"))
     DescribeInferenceRecommendationsJobResponse.struct_class = Types::DescribeInferenceRecommendationsJobResponse
+
+    DescribeInferenceRouterInput.add_member(:inference_router_name, Shapes::ShapeRef.new(shape: InferenceRouterName, required: true, location_name: "InferenceRouterName"))
+    DescribeInferenceRouterInput.struct_class = Types::DescribeInferenceRouterInput
+
+    DescribeInferenceRouterOutput.add_member(:inference_router_name, Shapes::ShapeRef.new(shape: InferenceRouterName, required: true, location_name: "InferenceRouterName"))
+    DescribeInferenceRouterOutput.add_member(:inference_router_arn, Shapes::ShapeRef.new(shape: InferenceRouterArn, required: true, location_name: "InferenceRouterArn"))
+    DescribeInferenceRouterOutput.add_member(:routing_targets, Shapes::ShapeRef.new(shape: RoutingTargetList, required: true, location_name: "RoutingTargets"))
+    DescribeInferenceRouterOutput.add_member(:status, Shapes::ShapeRef.new(shape: InferenceRouterStatus, required: true, location_name: "Status"))
+    DescribeInferenceRouterOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: InferenceRouterStatusReason, location_name: "StatusReason"))
+    DescribeInferenceRouterOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    DescribeInferenceRouterOutput.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedTime"))
+    DescribeInferenceRouterOutput.struct_class = Types::DescribeInferenceRouterOutput
 
     DescribeJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "JobName"))
     DescribeJobRequest.add_member(:job_category, Shapes::ShapeRef.new(shape: JobCategory, required: true, location_name: "JobCategory"))
@@ -7675,6 +7753,12 @@ module Aws::SageMaker
 
     DesiredWeightAndCapacityList.member = Shapes::ShapeRef.new(shape: DesiredWeightAndCapacity)
 
+    Destination.add_member(:resource_arn, Shapes::ShapeRef.new(shape: DestinationResourceArn, required: true, location_name: "ResourceArn"))
+    Destination.add_member(:routing_status, Shapes::ShapeRef.new(shape: RoutingStatus, location_name: "RoutingStatus"))
+    Destination.struct_class = Types::Destination
+
+    DestinationList.member = Shapes::ShapeRef.new(shape: Destination)
+
     DetachClusterNodeVolumeRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
     DetachClusterNodeVolumeRequest.add_member(:node_id, Shapes::ShapeRef.new(shape: ClusterNodeId, required: true, location_name: "NodeId"))
     DetachClusterNodeVolumeRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
@@ -8328,6 +8412,14 @@ module Aws::SageMaker
     GetDeviceFleetReportResponse.add_member(:model_stats, Shapes::ShapeRef.new(shape: EdgeModelStats, location_name: "ModelStats"))
     GetDeviceFleetReportResponse.struct_class = Types::GetDeviceFleetReportResponse
 
+    GetEndpointPolicyRequest.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "EndpointName"))
+    GetEndpointPolicyRequest.struct_class = Types::GetEndpointPolicyRequest
+
+    GetEndpointPolicyResponse.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, location_name: "EndpointName"))
+    GetEndpointPolicyResponse.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: EndpointArn, location_name: "EndpointArn"))
+    GetEndpointPolicyResponse.add_member(:resource_policy, Shapes::ShapeRef.new(shape: EndpointPolicyDocument, location_name: "ResourcePolicy"))
+    GetEndpointPolicyResponse.struct_class = Types::GetEndpointPolicyResponse
+
     GetLineageGroupPolicyRequest.add_member(:lineage_group_name, Shapes::ShapeRef.new(shape: LineageGroupNameOrArn, required: true, location_name: "LineageGroupName"))
     GetLineageGroupPolicyRequest.struct_class = Types::GetLineageGroupPolicyRequest
 
@@ -8912,6 +9004,14 @@ module Aws::SageMaker
     InferenceRecommendationsJobSteps.member = Shapes::ShapeRef.new(shape: InferenceRecommendationsJobStep)
 
     InferenceRecommendationsJobs.member = Shapes::ShapeRef.new(shape: InferenceRecommendationsJob)
+
+    InferenceRouterSummary.add_member(:inference_router_name, Shapes::ShapeRef.new(shape: InferenceRouterName, required: true, location_name: "InferenceRouterName"))
+    InferenceRouterSummary.add_member(:inference_router_arn, Shapes::ShapeRef.new(shape: InferenceRouterArn, required: true, location_name: "InferenceRouterArn"))
+    InferenceRouterSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    InferenceRouterSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedTime"))
+    InferenceRouterSummary.struct_class = Types::InferenceRouterSummary
+
+    InferenceRouterSummaryList.member = Shapes::ShapeRef.new(shape: InferenceRouterSummary)
 
     InferenceSpecification.add_member(:containers, Shapes::ShapeRef.new(shape: ModelPackageContainerDefinitionList, required: true, location_name: "Containers"))
     InferenceSpecification.add_member(:supported_transform_instance_types, Shapes::ShapeRef.new(shape: TransformInstanceTypes, location_name: "SupportedTransformInstanceTypes"))
@@ -9848,6 +9948,14 @@ module Aws::SageMaker
     ListInferenceRecommendationsJobsResponse.add_member(:inference_recommendations_jobs, Shapes::ShapeRef.new(shape: InferenceRecommendationsJobs, required: true, location_name: "InferenceRecommendationsJobs"))
     ListInferenceRecommendationsJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListInferenceRecommendationsJobsResponse.struct_class = Types::ListInferenceRecommendationsJobsResponse
+
+    ListInferenceRoutersInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListInferenceRoutersInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListInferenceRoutersInput.struct_class = Types::ListInferenceRoutersInput
+
+    ListInferenceRoutersOutput.add_member(:inference_routers, Shapes::ShapeRef.new(shape: InferenceRouterSummaryList, required: true, location_name: "InferenceRouters"))
+    ListInferenceRoutersOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListInferenceRoutersOutput.struct_class = Types::ListInferenceRoutersOutput
 
     ListJobSchemaVersionsRequest.add_member(:job_category, Shapes::ShapeRef.new(shape: JobCategory, required: true, location_name: "JobCategory"))
     ListJobSchemaVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -11906,6 +12014,13 @@ module Aws::SageMaker
     PublicWorkforceTaskPrice.add_member(:amount_in_usd, Shapes::ShapeRef.new(shape: USD, location_name: "AmountInUsd"))
     PublicWorkforceTaskPrice.struct_class = Types::PublicWorkforceTaskPrice
 
+    PutEndpointPolicyRequest.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "EndpointName"))
+    PutEndpointPolicyRequest.add_member(:resource_policy, Shapes::ShapeRef.new(shape: EndpointPolicyDocument, required: true, location_name: "ResourcePolicy"))
+    PutEndpointPolicyRequest.struct_class = Types::PutEndpointPolicyRequest
+
+    PutEndpointPolicyResponse.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: EndpointArn, location_name: "EndpointArn"))
+    PutEndpointPolicyResponse.struct_class = Types::PutEndpointPolicyResponse
+
     PutModelPackageGroupPolicyInput.add_member(:model_package_group_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelPackageGroupName"))
     PutModelPackageGroupPolicyInput.add_member(:resource_policy, Shapes::ShapeRef.new(shape: PolicyString, required: true, location_name: "ResourcePolicy"))
     PutModelPackageGroupPolicyInput.struct_class = Types::PutModelPackageGroupPolicyInput
@@ -12153,6 +12268,9 @@ module Aws::SageMaker
     ResolvedAttributes.add_member(:completion_criteria, Shapes::ShapeRef.new(shape: AutoMLJobCompletionCriteria, location_name: "CompletionCriteria"))
     ResolvedAttributes.struct_class = Types::ResolvedAttributes
 
+    ResourceAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: FailureReason, location_name: "Message"))
+    ResourceAlreadyExists.struct_class = Types::ResourceAlreadyExists
+
     ResourceCatalog.add_member(:resource_catalog_arn, Shapes::ShapeRef.new(shape: ResourceCatalogArn, required: true, location_name: "ResourceCatalogArn"))
     ResourceCatalog.add_member(:resource_catalog_name, Shapes::ShapeRef.new(shape: ResourceCatalogName, required: true, location_name: "ResourceCatalogName"))
     ResourceCatalog.add_member(:description, Shapes::ShapeRef.new(shape: ResourceCatalogDescription, required: true, location_name: "Description"))
@@ -12235,6 +12353,31 @@ module Aws::SageMaker
     RollingUpdatePolicy.add_member(:maximum_execution_timeout_in_seconds, Shapes::ShapeRef.new(shape: MaximumExecutionTimeoutInSeconds, location_name: "MaximumExecutionTimeoutInSeconds"))
     RollingUpdatePolicy.add_member(:rollback_maximum_batch_size, Shapes::ShapeRef.new(shape: CapacitySize, location_name: "RollbackMaximumBatchSize"))
     RollingUpdatePolicy.struct_class = Types::RollingUpdatePolicy
+
+    RoutingTarget.add_member(:name, Shapes::ShapeRef.new(shape: RoutingTargetName, required: true, location_name: "Name"))
+    RoutingTarget.add_member(:destinations, Shapes::ShapeRef.new(shape: DestinationList, required: true, location_name: "Destinations"))
+    RoutingTarget.add_member(:async_inference_config, Shapes::ShapeRef.new(shape: RoutingTargetAsyncInferenceConfig, location_name: "AsyncInferenceConfig"))
+    RoutingTarget.add_member(:routing_preference, Shapes::ShapeRef.new(shape: InferenceRouterRoutingPreference, location_name: "RoutingPreference"))
+    RoutingTarget.struct_class = Types::RoutingTarget
+
+    RoutingTargetAsyncInferenceClientConfig.add_member(:max_time_in_backlog_seconds, Shapes::ShapeRef.new(shape: InferenceRouterMaxTimeInBacklogSeconds, location_name: "MaxTimeInBacklogSeconds"))
+    RoutingTargetAsyncInferenceClientConfig.struct_class = Types::RoutingTargetAsyncInferenceClientConfig
+
+    RoutingTargetAsyncInferenceConfig.add_member(:output_config, Shapes::ShapeRef.new(shape: RoutingTargetAsyncInferenceOutputConfig, required: true, location_name: "OutputConfig"))
+    RoutingTargetAsyncInferenceConfig.add_member(:client_config, Shapes::ShapeRef.new(shape: RoutingTargetAsyncInferenceClientConfig, location_name: "ClientConfig"))
+    RoutingTargetAsyncInferenceConfig.struct_class = Types::RoutingTargetAsyncInferenceConfig
+
+    RoutingTargetAsyncInferenceNotificationConfig.add_member(:success_topic, Shapes::ShapeRef.new(shape: InferenceRouterSnsTopicArn, location_name: "SuccessTopic"))
+    RoutingTargetAsyncInferenceNotificationConfig.add_member(:error_topic, Shapes::ShapeRef.new(shape: InferenceRouterSnsTopicArn, location_name: "ErrorTopic"))
+    RoutingTargetAsyncInferenceNotificationConfig.struct_class = Types::RoutingTargetAsyncInferenceNotificationConfig
+
+    RoutingTargetAsyncInferenceOutputConfig.add_member(:s3_output_path, Shapes::ShapeRef.new(shape: InferenceRouterS3Uri, required: true, location_name: "S3OutputPath"))
+    RoutingTargetAsyncInferenceOutputConfig.add_member(:s3_failure_path, Shapes::ShapeRef.new(shape: InferenceRouterS3Uri, required: true, location_name: "S3FailurePath"))
+    RoutingTargetAsyncInferenceOutputConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    RoutingTargetAsyncInferenceOutputConfig.add_member(:notification_config, Shapes::ShapeRef.new(shape: RoutingTargetAsyncInferenceNotificationConfig, location_name: "NotificationConfig"))
+    RoutingTargetAsyncInferenceOutputConfig.struct_class = Types::RoutingTargetAsyncInferenceOutputConfig
+
+    RoutingTargetList.member = Shapes::ShapeRef.new(shape: RoutingTarget)
 
     RuleParameters.key = Shapes::ShapeRef.new(shape: ConfigKey)
     RuleParameters.value = Shapes::ShapeRef.new(shape: ConfigValue)
@@ -13570,6 +13713,13 @@ module Aws::SageMaker
     UpdateInferenceExperimentResponse.add_member(:inference_experiment_arn, Shapes::ShapeRef.new(shape: InferenceExperimentArn, required: true, location_name: "InferenceExperimentArn"))
     UpdateInferenceExperimentResponse.struct_class = Types::UpdateInferenceExperimentResponse
 
+    UpdateInferenceRouterInput.add_member(:inference_router_name, Shapes::ShapeRef.new(shape: InferenceRouterName, required: true, location_name: "InferenceRouterName"))
+    UpdateInferenceRouterInput.add_member(:routing_targets, Shapes::ShapeRef.new(shape: RoutingTargetList, required: true, location_name: "RoutingTargets"))
+    UpdateInferenceRouterInput.struct_class = Types::UpdateInferenceRouterInput
+
+    UpdateInferenceRouterOutput.add_member(:inference_router_arn, Shapes::ShapeRef.new(shape: InferenceRouterArn, required: true, location_name: "InferenceRouterArn"))
+    UpdateInferenceRouterOutput.struct_class = Types::UpdateInferenceRouterOutput
+
     UpdateMlflowAppRequest.add_member(:arn, Shapes::ShapeRef.new(shape: MlflowAppArn, required: true, location_name: "Arn"))
     UpdateMlflowAppRequest.add_member(:name, Shapes::ShapeRef.new(shape: MlflowAppName, location_name: "Name"))
     UpdateMlflowAppRequest.add_member(:artifact_store_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "ArtifactStoreUri"))
@@ -14416,6 +14566,17 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
       end)
 
+      api.add_operation(:create_inference_router, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateInferenceRouter"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateInferenceRouterInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateInferenceRouterOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+      end)
+
       api.add_operation(:create_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateJob"
         o.http_method = "POST"
@@ -14977,6 +15138,15 @@ module Aws::SageMaker
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
+      api.add_operation(:delete_endpoint_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEndpointPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEndpointPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteEndpointPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
       api.add_operation(:delete_experiment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteExperiment"
         o.http_method = "POST"
@@ -15085,6 +15255,16 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteInferenceExperimentRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteInferenceExperimentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:delete_inference_router, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteInferenceRouter"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteInferenceRouterInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
@@ -15725,6 +15905,15 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
+      api.add_operation(:describe_inference_router, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInferenceRouter"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInferenceRouterInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInferenceRouterOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
       api.add_operation(:describe_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeJob"
         o.http_method = "POST"
@@ -16114,6 +16303,15 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetDeviceFleetReportRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDeviceFleetReportResponse)
+      end)
+
+      api.add_operation(:get_endpoint_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEndpointPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetEndpointPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEndpointPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
       api.add_operation(:get_lineage_group_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -16787,6 +16985,20 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListInferenceRecommendationsJobsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListInferenceRecommendationsJobsResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_inference_routers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListInferenceRouters"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListInferenceRoutersInput)
+        o.output = Shapes::ShapeRef.new(shape: ListInferenceRoutersOutput)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -17495,6 +17707,15 @@ module Aws::SageMaker
         )
       end)
 
+      api.add_operation(:put_endpoint_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutEndpointPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutEndpointPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutEndpointPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
       api.add_operation(:put_model_package_group_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutModelPackageGroupPolicy"
         o.http_method = "POST"
@@ -18100,6 +18321,17 @@ module Aws::SageMaker
         o.output = Shapes::ShapeRef.new(shape: UpdateInferenceExperimentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:update_inference_router, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateInferenceRouter"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateInferenceRouterInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateInferenceRouterOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
       end)
 
       api.add_operation(:update_mlflow_app, Seahorse::Model::Operation.new.tap do |o|

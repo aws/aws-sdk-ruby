@@ -163,6 +163,29 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class ContextFilters
+      attr_accessor region: ::String
+      attr_accessor resource_type: ("SecurityGroup" | "VPC" | "Subnet" | "TGWAttachment")
+      SENSITIVE: []
+    end
+
+    class ContextSet
+      attr_accessor definition: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ContextStore
+      attr_accessor context_store_id: ::String
+      attr_accessor context_store_owner_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ContextStoreSyncState
+      attr_accessor sync_status: ("SYNCING" | "PARTIALLY_RESOLVED" | "FULLY_RESOLVED" | "SYNC_FAILED" | "UNRESOLVED")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
     class CreateContainerAssociationRequest
       attr_accessor container_association_name: ::String
       attr_accessor description: ::String
@@ -722,6 +745,8 @@ module Aws::NetworkFirewall
       attr_accessor nat_gateway_create_mappings: ::Array[Types::NatGatewayCreateMapping]
       attr_accessor proxy_settings: Types::ProxySettings
       attr_accessor vpc_endpoint: Types::VpcEndpoint
+      attr_accessor context_store_id: ::String
+      attr_accessor context_store_owner_account_id: ::String
       attr_accessor transparent_filtering_nat_scope: ("NAT_ALL" | "NAT_NONE")
       SENSITIVE: []
     end
@@ -859,6 +884,7 @@ module Aws::NetworkFirewall
       attr_accessor sync_states: ::Hash[::String, Types::SyncState]
       attr_accessor capacity_usage_summary: Types::CapacityUsageSummary
       attr_accessor transit_gateway_attachment_sync_state: Types::TransitGatewayAttachmentSyncState
+      attr_accessor context_store_sync_state: Types::ContextStoreSyncState
       SENSITIVE: []
     end
 
@@ -1037,6 +1063,18 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class ListContextStoresRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListContextStoresResponse
+      attr_accessor next_token: ::String
+      attr_accessor context_stores: ::Array[Types::ContextStore]
+      SENSITIVE: []
+    end
+
     class ListFirewallPoliciesRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -1115,6 +1153,20 @@ module Aws::NetworkFirewall
 
     class ListFlowOperationsResponse
       attr_accessor flow_operations: ::Array[Types::FlowOperationMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourcesInContextStoreRequest
+      attr_accessor context_store_id: ::String
+      attr_accessor filters: Types::ContextFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourcesInContextStoreResponse
+      attr_accessor resource_contexts: ::Array[Types::ResourceContext]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1280,6 +1332,15 @@ module Aws::NetworkFirewall
       SENSITIVE: []
     end
 
+    class ResourceContext
+      attr_accessor context_type: ("ResourceId" | "SegmentId" | "Subnet" | "Attachment")
+      attr_accessor region: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor attachment_type: ::String
+      attr_accessor public_id: ::String
+      SENSITIVE: []
+    end
+
     class ResourceNotFoundException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1362,6 +1423,7 @@ module Aws::NetworkFirewall
     class RuleVariables
       attr_accessor ip_sets: ::Hash[::String, Types::IPSet]
       attr_accessor port_sets: ::Hash[::String, Types::PortSet]
+      attr_accessor context_sets: ::Hash[::String, Types::ContextSet]
       SENSITIVE: []
     end
 

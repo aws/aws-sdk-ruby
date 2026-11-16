@@ -1254,6 +1254,10 @@ module Aws
                                       enable_enhanced_metrics: bool?,
                                       enable_detailed_observability: bool?,
                                       metric_publish_frequency_in_seconds: ::Integer?
+                                    },
+                                    ?cross_region_traffic_config: {
+                                      max_invocations_per_second_per_instance: ::Integer,
+                                      max_cross_region_percent_per_endpoint: ::Integer
                                     }
                                   ) -> _CreateEndpointConfigResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEndpointConfigResponseSuccess
@@ -1722,6 +1726,26 @@ module Aws
                                                 ) -> _CreateInferenceRecommendationsJobResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInferenceRecommendationsJobResponseSuccess
 
+      interface _CreateInferenceRouterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateInferenceRouterOutput]
+        def inference_router_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#create_inference_router-instance_method
+      def create_inference_router: (
+                                     inference_router_name: ::String,
+                                     routing_targets: Array[
+                                       Params::routing_target
+                                     ],
+                                     ?client_token: ::String,
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       }
+                                     ]
+                                   ) -> _CreateInferenceRouterResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInferenceRouterResponseSuccess
+
       interface _CreateJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateJobResponse]
         def job_arn: () -> ::String
@@ -1730,7 +1754,7 @@ module Aws
       def create_job: (
                         job_name: ::String,
                         role_arn: ::String,
-                        job_category: ("AgentRFT" | "AgentRFTEvaluation"),
+                        job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation"),
                         job_config_schema_version: ::String,
                         job_config_document: ::String,
                         ?tags: Array[
@@ -3291,6 +3315,15 @@ module Aws
                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _DeleteEndpointPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEndpointPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_endpoint_policy-instance_method
+      def delete_endpoint_policy: (
+                                    endpoint_name: ::String
+                                  ) -> _DeleteEndpointPolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEndpointPolicyResponseSuccess
+
       interface _DeleteExperimentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteExperimentResponse]
         def experiment_arn: () -> ::String
@@ -3390,13 +3423,19 @@ module Aws
                                        ) -> _DeleteInferenceExperimentResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInferenceExperimentResponseSuccess
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_inference_router-instance_method
+      def delete_inference_router: (
+                                     inference_router_name: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _DeleteJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteJobResponse]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_job-instance_method
       def delete_job: (
                         job_name: ::String,
-                        job_category: ("AgentRFT" | "AgentRFTEvaluation")
+                        job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation")
                       ) -> _DeleteJobResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteJobResponseSuccess
 
@@ -4191,6 +4230,7 @@ module Aws
         def explainer_config: () -> Types::ExplainerConfig
         def shadow_production_variants: () -> ::Array[Types::ProductionVariantSummary]
         def metrics_config: () -> Types::MetricsConfig
+        def cross_region_traffic_config: () -> Types::CrossRegionTrafficConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_endpoint-instance_method
       def describe_endpoint: (
@@ -4213,6 +4253,7 @@ module Aws
         def vpc_config: () -> Types::VpcConfig
         def enable_network_isolation: () -> bool
         def metrics_config: () -> Types::MetricsConfig
+        def cross_region_traffic_config: () -> Types::CrossRegionTrafficConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_endpoint_config-instance_method
       def describe_endpoint_config: (
@@ -4514,19 +4555,35 @@ module Aws
                                                   ) -> _DescribeInferenceRecommendationsJobResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInferenceRecommendationsJobResponseSuccess
 
+      interface _DescribeInferenceRouterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInferenceRouterOutput]
+        def inference_router_name: () -> ::String
+        def inference_router_arn: () -> ::String
+        def routing_targets: () -> ::Array[Types::RoutingTarget]
+        def status: () -> ("InService" | "Creating" | "Updating" | "Failed" | "Deleting")
+        def status_reason: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_inference_router-instance_method
+      def describe_inference_router: (
+                                       inference_router_name: ::String
+                                     ) -> _DescribeInferenceRouterResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInferenceRouterResponseSuccess
+
       interface _DescribeJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeJobResponse]
         def job_name: () -> ::String
         def job_arn: () -> ::String
         def role_arn: () -> ::String
-        def job_category: () -> ("AgentRFT" | "AgentRFTEvaluation")
+        def job_category: () -> ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation")
         def job_config_schema_version: () -> ::String
         def job_config_document: () -> ::String
         def creation_time: () -> ::Time
         def last_modified_time: () -> ::Time
         def end_time: () -> ::Time
         def job_status: () -> ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped" | "Deleting" | "DeleteFailed")
-        def secondary_status: () -> ("Starting" | "Downloading" | "Training" | "Uploading" | "Stopping" | "Stopped" | "MaxRuntimeExceeded" | "Interrupted" | "Failed" | "Completed" | "Restarting" | "Pending" | "Evaluating" | "Deleting" | "DeleteFailed")
+        def secondary_status: () -> ("Starting" | "Downloading" | "Training" | "Uploading" | "Stopping" | "Stopped" | "MaxRuntimeExceeded" | "Interrupted" | "Failed" | "Completed" | "Restarting" | "Pending" | "Generating" | "PartialGeneration" | "Evaluating" | "Validating" | "Preparing" | "Executing" | "Publishing" | "Finalizing" | "Transforming" | "Deleting" | "DeleteFailed")
         def secondary_status_transitions: () -> ::Array[Types::JobSecondaryStatusTransition]
         def failure_reason: () -> ::String
         def tags: () -> ::Array[Types::Tag]
@@ -4534,19 +4591,19 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_job-instance_method
       def describe_job: (
                           job_name: ::String,
-                          job_category: ("AgentRFT" | "AgentRFTEvaluation")
+                          job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation")
                         ) -> _DescribeJobResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeJobResponseSuccess
 
       interface _DescribeJobSchemaVersionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeJobSchemaVersionResponse]
-        def job_category: () -> ("AgentRFT" | "AgentRFTEvaluation")
+        def job_category: () -> ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation")
         def job_config_schema_version: () -> ::String
         def job_config_schema: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_job_schema_version-instance_method
       def describe_job_schema_version: (
-                                         job_category: ("AgentRFT" | "AgentRFTEvaluation"),
+                                         job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation"),
                                          ?job_config_schema_version: ::String
                                        ) -> _DescribeJobSchemaVersionResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeJobSchemaVersionResponseSuccess
@@ -5430,6 +5487,18 @@ module Aws
                                      device_fleet_name: ::String
                                    ) -> _GetDeviceFleetReportResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeviceFleetReportResponseSuccess
+
+      interface _GetEndpointPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEndpointPolicyResponse]
+        def endpoint_name: () -> ::String
+        def endpoint_arn: () -> ::String
+        def resource_policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#get_endpoint_policy-instance_method
+      def get_endpoint_policy: (
+                                 endpoint_name: ::String
+                               ) -> _GetEndpointPolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEndpointPolicyResponseSuccess
 
       interface _GetLineageGroupPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetLineageGroupPolicyResponse]
@@ -6346,6 +6415,18 @@ module Aws
                                                ) -> _ListInferenceRecommendationsJobsResponseSuccess
                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInferenceRecommendationsJobsResponseSuccess
 
+      interface _ListInferenceRoutersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInferenceRoutersOutput]
+        def inference_routers: () -> ::Array[Types::InferenceRouterSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_inference_routers-instance_method
+      def list_inference_routers: (
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListInferenceRoutersResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInferenceRoutersResponseSuccess
+
       interface _ListJobSchemaVersionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListJobSchemaVersionsResponse]
         def next_token: () -> ::String
@@ -6353,7 +6434,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_job_schema_versions-instance_method
       def list_job_schema_versions: (
-                                      job_category: ("AgentRFT" | "AgentRFTEvaluation"),
+                                      job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation"),
                                       ?next_token: ::String,
                                       ?max_results: ::Integer
                                     ) -> _ListJobSchemaVersionsResponseSuccess
@@ -6366,7 +6447,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_jobs-instance_method
       def list_jobs: (
-                       job_category: ("AgentRFT" | "AgentRFTEvaluation"),
+                       job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation"),
                        ?next_token: ::String,
                        ?max_results: ::Integer,
                        ?creation_time_after: ::Time,
@@ -7214,6 +7295,17 @@ module Aws
                           ) -> _ListWorkteamsResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkteamsResponseSuccess
 
+      interface _PutEndpointPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutEndpointPolicyResponse]
+        def endpoint_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#put_endpoint_policy-instance_method
+      def put_endpoint_policy: (
+                                 endpoint_name: ::String,
+                                 resource_policy: ::String
+                               ) -> _PutEndpointPolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEndpointPolicyResponseSuccess
+
       interface _PutModelPackageGroupPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutModelPackageGroupPolicyOutput]
         def model_package_group_arn: () -> ::String
@@ -7555,7 +7647,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#stop_job-instance_method
       def stop_job: (
                       job_name: ::String,
-                      job_category: ("AgentRFT" | "AgentRFTEvaluation")
+                      job_category: ("AgentRFT" | "SyntheticDataGeneration" | "DataQualityEvaluation" | "AgentRFTEvaluation" | "DataTransformation")
                     ) -> _StopJobResponseSuccess
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopJobResponseSuccess
 
@@ -8113,6 +8205,19 @@ module Aws
                                          }
                                        ) -> _UpdateInferenceExperimentResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInferenceExperimentResponseSuccess
+
+      interface _UpdateInferenceRouterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateInferenceRouterOutput]
+        def inference_router_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#update_inference_router-instance_method
+      def update_inference_router: (
+                                     inference_router_name: ::String,
+                                     routing_targets: Array[
+                                       Params::routing_target
+                                     ]
+                                   ) -> _UpdateInferenceRouterResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInferenceRouterResponseSuccess
 
       interface _UpdateMlflowAppResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMlflowAppResponse]
