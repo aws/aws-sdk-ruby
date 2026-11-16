@@ -156,6 +156,15 @@ module Aws
                                 ) -> _DeleteInsightRulesResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInsightRulesResponseSuccess
 
+      interface _DeleteMetricDataQueryDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMetricDataQueryDefinitionOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#delete_metric_data_query_definition-instance_method
+      def delete_metric_data_query_definition: (
+                                                 id: ::String
+                                               ) -> _DeleteMetricDataQueryDefinitionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMetricDataQueryDefinitionResponseSuccess
+
       interface _DeleteMetricStreamResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMetricStreamOutput]
       end
@@ -408,6 +417,22 @@ module Aws
                            ) -> _GetMetricDataResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMetricDataResponseSuccess
 
+      interface _GetMetricDataQueryDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMetricDataQueryDefinitionOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def path: () -> ::String
+        def expression: () -> ::String
+        def type: () -> ("PROMQL" | "SQL" | "METRIC_MATH")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#get_metric_data_query_definition-instance_method
+      def get_metric_data_query_definition: (
+                                              id: ::String
+                                            ) -> _GetMetricDataQueryDefinitionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMetricDataQueryDefinitionResponseSuccess
+
       interface _GetMetricStatisticsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetMetricStatisticsOutput]
         def label: () -> ::String
@@ -525,6 +550,18 @@ module Aws
                                         ?max_results: ::Integer
                                       ) -> _ListManagedInsightRulesResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListManagedInsightRulesResponseSuccess
+
+      interface _ListMetricDataQueryDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMetricDataQueryDefinitionsOutput]
+        def items: () -> ::Array[Types::MetricDataQueryDefinitionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#list_metric_data_query_definitions-instance_method
+      def list_metric_data_query_definitions: (
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String
+                                              ) -> _ListMetricDataQueryDefinitionsResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMetricDataQueryDefinitionsResponseSuccess
 
       interface _ListMetricStreamsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListMetricStreamsOutput]
@@ -852,6 +889,31 @@ module Aws
                              ?strict_entity_validation: bool
                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _PutMetricDataQueryDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutMetricDataQueryDefinitionOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def path: () -> ::String
+        def expression: () -> ::String
+        def type: () -> ("PROMQL" | "SQL" | "METRIC_MATH")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#put_metric_data_query_definition-instance_method
+      def put_metric_data_query_definition: (
+                                              ?id: ::String,
+                                              path: ::String,
+                                              expression: ::String,
+                                              type: ("PROMQL" | "SQL" | "METRIC_MATH"),
+                                              ?tags: Array[
+                                                {
+                                                  key: ::String,
+                                                  value: ::String
+                                                }
+                                              ]
+                                            ) -> _PutMetricDataQueryDefinitionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutMetricDataQueryDefinitionResponseSuccess
 
       interface _PutMetricStreamResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutMetricStreamOutput]

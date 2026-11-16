@@ -741,6 +741,12 @@ module Aws::Batch
       SENSITIVE: []
     end
 
+    class EksContainerLinuxCapabilities
+      attr_accessor add: ::Array[::String]
+      attr_accessor drop: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class EksContainerOverride
       attr_accessor name: ::String
       attr_accessor image: ::String
@@ -764,6 +770,8 @@ module Aws::Batch
       attr_accessor allow_privilege_escalation: bool
       attr_accessor read_only_root_filesystem: bool
       attr_accessor run_as_non_root: bool
+      attr_accessor capabilities: Types::EksContainerLinuxCapabilities
+      attr_accessor seccomp_profile: Types::EksSeccompProfile
       SENSITIVE: []
     end
 
@@ -809,6 +817,7 @@ module Aws::Batch
       attr_accessor volumes: ::Array[Types::EksVolume]
       attr_accessor metadata: Types::EksMetadata
       attr_accessor share_process_namespace: bool
+      attr_accessor security_context: Types::EksPodSecurityContext
       SENSITIVE: []
     end
 
@@ -824,6 +833,7 @@ module Aws::Batch
       attr_accessor node_name: ::String
       attr_accessor metadata: Types::EksMetadata
       attr_accessor share_process_namespace: bool
+      attr_accessor security_context: Types::EksPodSecurityContext
       SENSITIVE: []
     end
 
@@ -831,6 +841,15 @@ module Aws::Batch
       attr_accessor containers: ::Array[Types::EksContainerOverride]
       attr_accessor init_containers: ::Array[Types::EksContainerOverride]
       attr_accessor metadata: Types::EksMetadata
+      SENSITIVE: []
+    end
+
+    class EksPodSecurityContext
+      attr_accessor run_as_user: ::Integer
+      attr_accessor run_as_group: ::Integer
+      attr_accessor run_as_non_root: bool
+      attr_accessor seccomp_profile: Types::EksSeccompProfile
+      attr_accessor fs_group: ::Integer
       SENSITIVE: []
     end
 
@@ -846,6 +865,12 @@ module Aws::Batch
 
     class EksPropertiesOverride
       attr_accessor pod_properties: Types::EksPodPropertiesOverride
+      SENSITIVE: []
+    end
+
+    class EksSeccompProfile
+      attr_accessor type: ("RuntimeDefault" | "Localhost" | "Unconfined")
+      attr_accessor localhost_profile: ::String
       SENSITIVE: []
     end
 

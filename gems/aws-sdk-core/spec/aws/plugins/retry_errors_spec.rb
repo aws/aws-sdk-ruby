@@ -8,16 +8,13 @@ module Aws
     describe RetryErrors do
       let(:client) { RetryErrorsSvc::Client.new(stub_responses: true) }
 
-      it 'defaults config.retry_mode to standard when new retries enabled' do
-        allow(RetryErrors).to receive(:new_retries?).and_return(true)
-        client = RetryErrorsSvc::Client.new(stub_responses: true)
+      it 'defaults config.retry_mode to standard' do
         expect(client.config.retry_mode).to eq('standard')
       end
 
-      it 'defaults config.retry_mode to legacy when new retries disabled' do
-        allow(RetryErrors).to receive(:new_retries?).and_return(false)
-        client = RetryErrorsSvc::Client.new(stub_responses: true)
-        expect(client.config.retry_mode).to eq('legacy')
+      it 'ignores AWS_NEW_RETRIES_2026 when resolving retry_mode' do
+        ENV['AWS_NEW_RETRIES_2026'] = 'false'
+        expect(client.config.retry_mode).to eq('standard')
       end
 
       it 'can configure retry_mode with shared config' do
@@ -60,6 +57,20 @@ module Aws
         )
         expect(client.handlers.entries.map(&:handler_class))
           .to include(RetryErrors::Handler)
+      end
+
+      it 'defaults config.max_attempts to 4 for DynamoDB' do
+        svc = ApiHelper.sample_service(metadata: { 'serviceId' => 'DynamoDB' })
+        client = svc::Client.new(stub_responses: true)
+        expect(client.config.max_attempts).to eq(4)
+      end
+
+      it 'defaults config.max_attempts to 4 for DynamoDB Streams' do
+        svc = ApiHelper.sample_service(
+          metadata: { 'serviceId' => 'DynamoDB Streams' }
+        )
+        client = svc::Client.new(stub_responses: true)
+        expect(client.config.max_attempts).to eq(4)
       end
 
       it 'defaults config.max_attempts to 3' do
@@ -148,6 +159,81 @@ module Aws
         )
         expect(c.config.disable_clock_skew_correction).to eq(true)
       end
+
+      context 'clock skew correction through a client' do
+        let(:now) { Time.utc(2026, 1, 1) }
+        let(:send_handler) { double('send handler') }
+        let(:client) do
+          Aws::STS::Client.new(
+            region: 'us-east-1', retry_mode: 'standard',
+            credentials: Credentials.new('akid', 'secret')
+          )
+        end
+        let(:endpoint) { 'https://sts.us-east-1.amazonaws.com' }
+
+        before do
+          allow(Time).to receive(:now).and_return(now)
+          allow(Kernel).to receive(:sleep)
+          send_handler = self.send_handler
+          client.handle(step: :send) { |context| send_handler.call(context) }
+        end
+
+        def respond(context, received_at:, server_time:, body_finished_at: received_at, error_code: nil)
+          allow(Time).to receive(:now).and_return(received_at)
+          context.http_response.signal_headers(
+            error_code ? 403 : 200, 'date' => server_time.httpdate
+          )
+          allow(Time).to receive(:now).and_return(body_finished_at)
+          body = if error_code
+                   '<ErrorResponse><Error><Type>Sender</Type>' \
+                     "<Code>#{error_code}</Code><Message>m</Message></Error>" \
+                     '<RequestId>id</RequestId></ErrorResponse>'
+                 else
+                   '<GetCallerIdentityResponse><GetCallerIdentityResult>' \
+                     '<Account>123456789012</Account></GetCallerIdentityResult>' \
+                     '</GetCallerIdentityResponse>'
+                 end
+          context.http_response.signal_data(body)
+          context.http_response.signal_done
+          Seahorse::Client::Response.new(context: context)
+        end
+
+        it 'replaces a stale correction with zero after a long-running request' do
+          clock_skew = client.config.clock_skew
+          clock_skew.send(:set_clock_correction, endpoint, -300)
+          expect(clock_skew.clock_correction(endpoint)).to eq(-300)
+
+          allow(send_handler).to receive(:call) do |context|
+            respond(context, received_at: now + 620, server_time: now + 620)
+          end
+
+          client.get_caller_identity
+
+          expect(client.config.clock_skew.clock_correction(endpoint)).to eq(0)
+        end
+
+        it 'signs the retry and later operations using headers arrival despite a delayed error body' do
+          expect(send_handler).to receive(:call).ordered do |context|
+            expect(context.http_request.headers['X-Amz-Date']).to eq('20260101T000000Z')
+            respond(
+              context, received_at: now + 2, server_time: now + 302,
+              body_finished_at: now + 20, error_code: 'RequestTimeTooSkewed'
+            )
+          end
+          expect(send_handler).to receive(:call).ordered do |context|
+            expect(context.http_request.headers['X-Amz-Date']).to eq('20260101T000520Z')
+            respond(context, received_at: now + 22, server_time: now + 322)
+          end
+          expect(send_handler).to receive(:call).ordered do |context|
+            expect(context.http_request.headers['X-Amz-Date']).to eq('20260101T000600Z')
+            respond(context, received_at: now + 62, server_time: now + 362)
+          end
+
+          client.get_caller_identity
+          allow(Time).to receive(:now).and_return(now + 60)
+          client.get_caller_identity
+        end
+      end
     end
 
     describe RetryErrors::Handler do
@@ -184,9 +270,43 @@ module Aws
         resp.context.operation = operation
       end
 
+      it 'corrects clock skew using headers arrival before the response body finishes' do
+        t = Time.utc(2026, 1, 1)
+        handle do |context|
+          allow(Time).to receive(:now).and_return((t + 2).getlocal)
+          context.http_response.signal_headers(200, 'date' => (t + 3602).httpdate)
+          allow(Time).to receive(:now).and_return((t + 10).getlocal)
+          context.http_response.signal_data('body')
+          context.http_response.signal_done
+          resp
+        end
+
+        expect(config.clock_skew.clock_correction(resp.context.http_request.endpoint)).to eq(3600)
+      end
+
+      it 'clears the previous attempt timestamp before receiving retry headers' do
+        t = Time.utc(2026, 1, 1)
+        handle do |context|
+          expect(context.metadata[:response_received_at]).to be_nil
+          if context.retries.zero?
+            allow(Time).to receive(:now).and_return((t + 2).getlocal)
+            context.http_response.signal_headers(500, {})
+            resp.error = service_error
+          else
+            allow(Time).to receive(:now).and_return((t + 5).getlocal)
+            context.http_response.signal_headers(200, {})
+            resp.error = nil
+          end
+          context.http_response.signal_done
+          resp
+        end
+
+        expect(resp.context.retries).to eq(1)
+        expect(resp.context.metadata[:response_received_at]).to eq(t + 5)
+      end
+
       context 'standard mode' do
         before(:each) do
-          allow(RetryErrors).to receive(:new_retries?).and_return(true)
           config.retry_mode = 'standard'
           allow(Kernel).to receive(:rand).and_return(1)
         end
@@ -795,198 +915,6 @@ module Aws
           handle_with_retry(test_case_def)
         end
 
-      end
-
-      # TODO: Remove this context when new retries become default
-      context 'standard mode (old retries)' do
-        before(:each) do
-          allow(RetryErrors).to receive(:new_retries?).and_return(false)
-          config.retry_mode = 'standard'
-          allow(Kernel).to receive(:rand).and_return(1)
-        end
-
-        it 'retry eventually succeeds' do
-          test_case_def = [
-            {
-              response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 495, retries: 1, delay: 1 }
-            },
-            {
-              response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 490, retries: 2, delay: 2 }
-            },
-            {
-              response: { status_code: 200, error: nil },
-              expect: { available_capacity: 495, retries: 2 }
-            }
-          ]
-
-          handle_with_retry(test_case_def)
-        end
-
-        it 'fails due to max attempts reached' do
-          test_case_def = [
-            {
-              response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 495, retries: 1, delay: 1 }
-            },
-            {
-              response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 490, retries: 2, delay: 2 }
-            },
-            {
-              response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 490, retries: 2 }
-            }
-          ]
-
-          handle_with_retry(test_case_def)
-        end
-
-        it 'fails due to retry quota reached after a single retry' do
-          config.retry_quota.instance_variable_set(:@available_capacity, 5)
-
-          test_case_def = [
-            {
-              response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 0, retries: 1, delay: 1 }
-            },
-            {
-              response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 0, retries: 1 }
-            }
-          ]
-
-          handle_with_retry(test_case_def)
-        end
-
-        it 'does not retry if the retry quota is 0' do
-          config.retry_quota.instance_variable_set(:@available_capacity, 0)
-
-          test_case_def = [
-            {
-              response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 0, retries: 0 }
-            }
-          ]
-
-          handle_with_retry(test_case_def)
-        end
-
-        it 'uses exponential backoff timing' do
-          config.max_attempts = 5
-
-          test_case_def = [
-            {
-              response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 495, retries: 1, delay: 1 }
-            },
-            {
-              response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 490, retries: 2, delay: 2 }
-            },
-            {
-              response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 485, retries: 3, delay: 4 }
-            },
-            {
-              response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 480, retries: 4, delay: 8 }
-            },
-            {
-              response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 480, retries: 4 }
-            }
-          ]
-
-          handle_with_retry(test_case_def)
-        end
-
-        it 'does not exceed the max backoff time' do
-          config.max_attempts = 5
-          stub_const('Aws::Plugins::RetryErrors::Handler::MAX_BACKOFF', 3)
-
-          test_case_def = [
-            {
-              response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 495, retries: 1, delay: 1 }
-            },
-            {
-              response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 490, retries: 2, delay: 2 }
-            },
-            {
-              response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 485, retries: 3, delay: 3 }
-            },
-            {
-              response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 480, retries: 4, delay: 3 }
-            },
-            {
-              response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 480, retries: 4 }
-            }
-          ]
-
-          handle_with_retry(test_case_def)
-        end
-
-        it 'fails due to retry quota bucket exhaustion' do
-          config.max_attempts = 5
-          config.retry_quota.instance_variable_set(:@available_capacity, 10)
-
-          test_case_def = [
-            {
-              response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 5, retries: 1, delay: 1 }
-            },
-            {
-              response: { status_code: 502, error: service_error },
-              expect: { available_capacity: 0, retries: 2, delay: 2 }
-            },
-            {
-              response: { status_code: 503, error: service_error },
-              expect: { available_capacity: 0, retries: 2 }
-            }
-          ]
-
-          handle_with_retry(test_case_def)
-        end
-
-        it 'recovers after successful responses' do
-          config.max_attempts = 5
-          config.retry_quota.instance_variable_set(:@available_capacity, 15)
-
-          test_case_def = [
-            {
-              response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 10, retries: 1, delay: 1 }
-            },
-            {
-              response: { status_code: 502, error: service_error },
-              expect: { available_capacity: 5, retries: 2, delay: 2 }
-            },
-            {
-              response: { status_code: 200, error: nil },
-              expect: { available_capacity: 10, retries: 2 }
-            }
-          ]
-          handle_with_retry(test_case_def)
-
-          test_case_post_success = [
-            {
-              response: { status_code: 500, error: service_error },
-              expect: { available_capacity: 5, retries: 1, delay: 1 }
-            },
-            {
-              response: { status_code: 200, error: nil },
-              expect: { available_capacity: 10, retries: 1 }
-            }
-          ]
-          reset_request
-          handle_with_retry(test_case_post_success)
-        end
       end
 
       context 'adaptive mode' do

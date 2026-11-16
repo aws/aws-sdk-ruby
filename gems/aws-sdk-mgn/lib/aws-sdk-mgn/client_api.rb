@@ -692,6 +692,7 @@ module Aws::Mgn
     CreateLaunchConfigurationTemplateRequest.add_member(:parameters_encryption_key, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "parametersEncryptionKey"))
     CreateLaunchConfigurationTemplateRequest.struct_class = Types::CreateLaunchConfigurationTemplateRequest
 
+    CreateNetworkMigrationDefinitionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientIdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateNetworkMigrationDefinitionRequest.add_member(:name, Shapes::ShapeRef.new(shape: NetworkMigrationDefinitionName, required: true, location_name: "name"))
     CreateNetworkMigrationDefinitionRequest.add_member(:description, Shapes::ShapeRef.new(shape: NetworkMigrationDefinitionDescription, location_name: "description"))
     CreateNetworkMigrationDefinitionRequest.add_member(:source_configurations, Shapes::ShapeRef.new(shape: SourceConfigurationList, location_name: "sourceConfigurations"))

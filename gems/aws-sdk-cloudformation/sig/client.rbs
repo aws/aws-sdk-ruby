@@ -1356,6 +1356,12 @@ module Aws
                          ) -> _RegisterTypeResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterTypeResponseSuccess
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#remove_alias-instance_method
+      def remove_alias: (
+                          alias_name: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _RollbackStackResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RollbackStackOutput]
         def stack_id: () -> ::String
@@ -1373,6 +1379,13 @@ module Aws
                             }
                           ) -> _RollbackStackResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RollbackStackResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#set_alias-instance_method
+      def set_alias: (
+                       stack_name: ::String,
+                       alias_name: ::String
+                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#set_stack_policy-instance_method
       def set_stack_policy: (

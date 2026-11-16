@@ -16,6 +16,7 @@ module Aws::MarketplaceMetering
 
     AgreementId = Shapes::StringShape.new(name: 'AgreementId')
     AllocatedUsageQuantity = Shapes::IntegerShape.new(name: 'AllocatedUsageQuantity')
+    AllocatedUsageQuantityAsDecimalString = Shapes::StringShape.new(name: 'AllocatedUsageQuantityAsDecimalString')
     BatchMeterUsageRequest = Shapes::StructureShape.new(name: 'BatchMeterUsageRequest')
     BatchMeterUsageResult = Shapes::StructureShape.new(name: 'BatchMeterUsageResult')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -62,6 +63,7 @@ module Aws::MarketplaceMetering
     UsageAllocations = Shapes::ListShape.new(name: 'UsageAllocations')
     UsageDimension = Shapes::StringShape.new(name: 'UsageDimension')
     UsageQuantity = Shapes::IntegerShape.new(name: 'UsageQuantity')
+    UsageQuantityAsDecimalString = Shapes::StringShape.new(name: 'UsageQuantityAsDecimalString')
     UsageRecord = Shapes::StructureShape.new(name: 'UsageRecord')
     UsageRecordList = Shapes::ListShape.new(name: 'UsageRecordList')
     UsageRecordResult = Shapes::StructureShape.new(name: 'UsageRecordResult')
@@ -132,7 +134,8 @@ module Aws::MarketplaceMetering
     MeterUsageRequest.add_member(:product_code, Shapes::ShapeRef.new(shape: ProductCode, required: true, location_name: "ProductCode"))
     MeterUsageRequest.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
     MeterUsageRequest.add_member(:usage_dimension, Shapes::ShapeRef.new(shape: UsageDimension, required: true, location_name: "UsageDimension"))
-    MeterUsageRequest.add_member(:usage_quantity, Shapes::ShapeRef.new(shape: UsageQuantity, location_name: "UsageQuantity"))
+    MeterUsageRequest.add_member(:usage_quantity, Shapes::ShapeRef.new(shape: UsageQuantity, deprecated: true, location_name: "UsageQuantity", metadata: {"deprecatedMessage" => "Use UsageQuantityAsDecimal instead.", "deprecatedSince" => "2026-10-20"}))
+    MeterUsageRequest.add_member(:usage_quantity_as_decimal, Shapes::ShapeRef.new(shape: UsageQuantityAsDecimalString, location_name: "UsageQuantityAsDecimal"))
     MeterUsageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     MeterUsageRequest.add_member(:usage_allocations, Shapes::ShapeRef.new(shape: UsageAllocations, location_name: "UsageAllocations"))
     MeterUsageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
@@ -175,7 +178,8 @@ module Aws::MarketplaceMetering
     TimestampOutOfBoundsException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     TimestampOutOfBoundsException.struct_class = Types::TimestampOutOfBoundsException
 
-    UsageAllocation.add_member(:allocated_usage_quantity, Shapes::ShapeRef.new(shape: AllocatedUsageQuantity, required: true, location_name: "AllocatedUsageQuantity"))
+    UsageAllocation.add_member(:allocated_usage_quantity, Shapes::ShapeRef.new(shape: AllocatedUsageQuantity, deprecated: true, location_name: "AllocatedUsageQuantity", metadata: {"deprecatedMessage" => "Use AllocatedUsageQuantityAsDecimal instead.", "deprecatedSince" => "2026-10-20"}))
+    UsageAllocation.add_member(:allocated_usage_quantity_as_decimal, Shapes::ShapeRef.new(shape: AllocatedUsageQuantityAsDecimalString, location_name: "AllocatedUsageQuantityAsDecimal"))
     UsageAllocation.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     UsageAllocation.struct_class = Types::UsageAllocation
 
@@ -184,7 +188,8 @@ module Aws::MarketplaceMetering
     UsageRecord.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
     UsageRecord.add_member(:customer_identifier, Shapes::ShapeRef.new(shape: CustomerIdentifier, location_name: "CustomerIdentifier"))
     UsageRecord.add_member(:dimension, Shapes::ShapeRef.new(shape: UsageDimension, required: true, location_name: "Dimension"))
-    UsageRecord.add_member(:quantity, Shapes::ShapeRef.new(shape: UsageQuantity, location_name: "Quantity"))
+    UsageRecord.add_member(:quantity, Shapes::ShapeRef.new(shape: UsageQuantity, deprecated: true, location_name: "Quantity", metadata: {"deprecatedMessage" => "Use QuantityAsDecimal instead.", "deprecatedSince" => "2026-10-20"}))
+    UsageRecord.add_member(:quantity_as_decimal, Shapes::ShapeRef.new(shape: UsageQuantityAsDecimalString, location_name: "QuantityAsDecimal"))
     UsageRecord.add_member(:usage_allocations, Shapes::ShapeRef.new(shape: UsageAllocations, location_name: "UsageAllocations"))
     UsageRecord.add_member(:customer_aws_account_id, Shapes::ShapeRef.new(shape: CustomerAWSAccountId, location_name: "CustomerAWSAccountId"))
     UsageRecord.add_member(:license_arn, Shapes::ShapeRef.new(shape: LicenseArn, location_name: "LicenseArn"))

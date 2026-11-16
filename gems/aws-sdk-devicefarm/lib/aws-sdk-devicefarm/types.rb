@@ -148,6 +148,8 @@ module Aws::DeviceFarm
     #   * CUSTOMER\_ARTIFACT\_LOG
     #
     #   * TESTSPEC\_OUTPUT
+    #
+    #   * DEVICE\_CONNECT\_COMMAND\_LOG
     #   @return [String]
     #
     # @!attribute [rw] extension
@@ -534,8 +536,9 @@ module Aws::DeviceFarm
     #   remote access session.
     #
     #   * `appium:version`: The major version of the Appium server to use
-    #     for the session (for example, 2 or 3). The service may reject the
-    #     selected version if it is not available for the selected device.
+    #     for the session (for example, 2 or 3). The service might reject
+    #     the selected version if it is not available for the selected
+    #     device.
     #
     #   ^
     #   @return [Hash<String,String>]
@@ -4962,6 +4965,12 @@ module Aws::DeviceFarm
     #   The ARN of the YAML-formatted test specification for the run.
     #   @return [String]
     #
+    # @!attribute [rw] test_package_arn
+    #   The ARN of the test package the run was scheduled with. This field
+    #   is not returned for test types that do not use a test package, such
+    #   as `BUILTIN_FUZZ`.
+    #   @return [String]
+    #
     # @!attribute [rw] device_selection_result
     #   The results of a device filter used to select the devices for a test
     #   run.
@@ -5023,6 +5032,7 @@ module Aws::DeviceFarm
       :web_url,
       :skip_app_resign,
       :test_spec_arn,
+      :test_package_arn,
       :device_selection_result,
       :vpc_config,
       :execution_role_arn,
@@ -5188,11 +5198,14 @@ module Aws::DeviceFarm
     #   @return [String]
     #
     # @!attribute [rw] insights_types
-    #   The types of insights to generate for a run. Specify one or more
-    #   values to opt in to insights generation when scheduling a run.
+    #   The types of insights to generate for a run. If you do not specify a
+    #   value, the default is `TEST_REPORT` for runs that support insights.
     #
-    #   Insights are currently supported for custom mode runs with
-    #   Instrumentation, Appium Java TestNG, and XCTest UI test types.
+    #   Specify `NONE` if you do not want the service to generate insights
+    #   for the run. You cannot combine `NONE` with any other value.
+    #
+    #   Insights are supported for custom mode runs of all test types except
+    #   Appium Ruby and Appium Web Ruby.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRunConfiguration AWS API Documentation

@@ -372,7 +372,7 @@ module Aws::ConfigService
       attr_accessor name: ::String
       attr_accessor service_principal: ::String
       attr_accessor recording_scope: ("INTERNAL" | "PAID")
-      attr_accessor provider: ("AZURE")
+      attr_accessor provider: ("AZURE" | "GCP")
       SENSITIVE: []
     end
 
@@ -471,6 +471,7 @@ module Aws::ConfigService
 
     class ConnectorConfiguration
       attr_accessor azure: Types::AzureConnectorConfiguration
+      attr_accessor gcp: Types::GcpConnectorConfiguration
       SENSITIVE: []
     end
 
@@ -483,8 +484,10 @@ module Aws::ConfigService
     class ConnectorSummary
       attr_accessor arn: ::String
       attr_accessor name: ::String
-      attr_accessor provider: ("AZURE")
+      attr_accessor provider: ("AZURE" | "GCP")
       attr_accessor tenant_identifier: ::String
+      attr_accessor gcp_organization_id: ::String
+      attr_accessor service_account_email: ::String
       attr_accessor created_time: ::Time
       SENSITIVE: []
     end
@@ -1061,6 +1064,13 @@ module Aws::ConfigService
 
     class FieldInfo
       attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GcpConnectorConfiguration
+      attr_accessor gcp_organization_id: ::String
+      attr_accessor service_account_email: ::String
+      attr_accessor workload_identity_pool_provider: ::String
       SENSITIVE: []
     end
 

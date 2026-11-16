@@ -35,6 +35,7 @@ module Aws::Polly
   # * {InvalidSampleRateException}
   # * {InvalidSnsTopicArnException}
   # * {InvalidSsmlException}
+  # * {InvalidTagParameterException}
   # * {InvalidTaskIdException}
   # * {LanguageNotSupportedException}
   # * {LexiconNotFoundException}
@@ -42,9 +43,11 @@ module Aws::Polly
   # * {MarksNotSupportedForFormatException}
   # * {MaxLexemeLengthExceededException}
   # * {MaxLexiconsNumberExceededException}
+  # * {ResourceNotFoundException}
   # * {SsmlMarksNotSupportedForTextTypeException}
   # * {SynthesisTaskNotFoundException}
   # * {TextLengthExceededException}
+  # * {TooManyTagsException}
   # * {UnsupportedPlsAlphabetException}
   # * {UnsupportedPlsLanguageException}
   #
@@ -174,6 +177,21 @@ module Aws::Polly
       end
     end
 
+    class InvalidTagParameterException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Polly::Types::InvalidTagParameterException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class InvalidTaskIdException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -279,6 +297,31 @@ module Aws::Polly
       end
     end
 
+    class ResourceNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Polly::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_id
+        @data[:resource_id]
+      end
+
+      # @return [String]
+      def resource_type
+        @data[:resource_type]
+      end
+    end
+
     class SsmlMarksNotSupportedForTextTypeException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -314,6 +357,21 @@ module Aws::Polly
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Polly::Types::TextLengthExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyTagsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Polly::Types::TooManyTagsException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

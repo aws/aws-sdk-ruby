@@ -898,6 +898,8 @@ module Aws::DataZone
     OAuth2ClientApplicationUserManagedClientApplicationClientIdString = Shapes::StringShape.new(name: 'OAuth2ClientApplicationUserManagedClientApplicationClientIdString')
     OAuth2GrantType = Shapes::StringShape.new(name: 'OAuth2GrantType')
     OAuth2Properties = Shapes::StructureShape.new(name: 'OAuth2Properties')
+    OAuth2PropertiesPatch = Shapes::StructureShape.new(name: 'OAuth2PropertiesPatch')
+    OAuth2PropertiesPatchTokenUrlString = Shapes::StringShape.new(name: 'OAuth2PropertiesPatchTokenUrlString')
     OAuth2PropertiesTokenUrlString = Shapes::StringShape.new(name: 'OAuth2PropertiesTokenUrlString')
     OpenLineageRunEventSummary = Shapes::StructureShape.new(name: 'OpenLineageRunEventSummary')
     OpenLineageRunState = Shapes::StringShape.new(name: 'OpenLineageRunState')
@@ -1720,6 +1722,7 @@ module Aws::DataZone
 
     AuthenticationConfigurationPatch.add_member(:secret_arn, Shapes::ShapeRef.new(shape: AuthenticationConfigurationPatchSecretArnString, location_name: "secretArn"))
     AuthenticationConfigurationPatch.add_member(:basic_authentication_credentials, Shapes::ShapeRef.new(shape: BasicAuthenticationCredentials, location_name: "basicAuthenticationCredentials"))
+    AuthenticationConfigurationPatch.add_member(:o_auth_2_properties, Shapes::ShapeRef.new(shape: OAuth2PropertiesPatch, location_name: "oAuth2Properties"))
     AuthenticationConfigurationPatch.struct_class = Types::AuthenticationConfigurationPatch
 
     AuthorizationCodeProperties.add_member(:authorization_code, Shapes::ShapeRef.new(shape: AuthorizationCodePropertiesAuthorizationCodeString, location_name: "authorizationCode"))
@@ -5285,6 +5288,12 @@ module Aws::DataZone
     OAuth2Properties.add_member(:authorization_code_properties, Shapes::ShapeRef.new(shape: AuthorizationCodeProperties, location_name: "authorizationCodeProperties"))
     OAuth2Properties.add_member(:o_auth_2_credentials, Shapes::ShapeRef.new(shape: GlueOAuth2Credentials, location_name: "oAuth2Credentials"))
     OAuth2Properties.struct_class = Types::OAuth2Properties
+
+    OAuth2PropertiesPatch.add_member(:o_auth_2_grant_type, Shapes::ShapeRef.new(shape: OAuth2GrantType, location_name: "oAuth2GrantType"))
+    OAuth2PropertiesPatch.add_member(:o_auth_2_client_application, Shapes::ShapeRef.new(shape: OAuth2ClientApplication, location_name: "oAuth2ClientApplication"))
+    OAuth2PropertiesPatch.add_member(:token_url, Shapes::ShapeRef.new(shape: OAuth2PropertiesPatchTokenUrlString, location_name: "tokenUrl"))
+    OAuth2PropertiesPatch.add_member(:token_url_parameters_map, Shapes::ShapeRef.new(shape: TokenUrlParametersMap, location_name: "tokenUrlParametersMap"))
+    OAuth2PropertiesPatch.struct_class = Types::OAuth2PropertiesPatch
 
     OpenLineageRunEventSummary.add_member(:event_type, Shapes::ShapeRef.new(shape: OpenLineageRunState, location_name: "eventType"))
     OpenLineageRunEventSummary.add_member(:run_id, Shapes::ShapeRef.new(shape: String, location_name: "runId"))

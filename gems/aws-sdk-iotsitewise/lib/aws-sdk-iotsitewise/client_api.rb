@@ -302,6 +302,8 @@ module Aws::IoTSiteWise
     DatasetEnrichmentStatus = Shapes::StringShape.new(name: 'DatasetEnrichmentStatus')
     DatasetExportJobFilter = Shapes::StringShape.new(name: 'DatasetExportJobFilter')
     DatasetExportJobId = Shapes::StringShape.new(name: 'DatasetExportJobId')
+    DatasetExportJobName = Shapes::StringShape.new(name: 'DatasetExportJobName')
+    DatasetExportJobNameInput = Shapes::StringShape.new(name: 'DatasetExportJobNameInput')
     DatasetExportJobStatus = Shapes::StringShape.new(name: 'DatasetExportJobStatus')
     DatasetId = Shapes::StringShape.new(name: 'DatasetId')
     DatasetItem = Shapes::StructureShape.new(name: 'DatasetItem')
@@ -1764,6 +1766,7 @@ module Aws::IoTSiteWise
     CreateDatasetExportJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDatasetExportJobRequest.add_member(:destination_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "destinationS3Uri"))
     CreateDatasetExportJobRequest.add_member(:input, Shapes::ShapeRef.new(shape: ProcessingInput, required: true, location_name: "input"))
+    CreateDatasetExportJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: DatasetExportJobNameInput, location_name: "jobName"))
     CreateDatasetExportJobRequest.add_member(:error_report_location, Shapes::ShapeRef.new(shape: ExportErrorReportLocation, required: true, location_name: "errorReportLocation"))
     CreateDatasetExportJobRequest.struct_class = Types::CreateDatasetExportJobRequest
 
@@ -2311,6 +2314,7 @@ module Aws::IoTSiteWise
 
     DescribeDatasetExportJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: DatasetExportJobId, required: true, location_name: "jobId"))
     DescribeDatasetExportJobResponse.add_member(:workspace_name, Shapes::ShapeRef.new(shape: WorkspaceName, required: true, location_name: "workspaceName"))
+    DescribeDatasetExportJobResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: DatasetExportJobName, location_name: "jobName"))
     DescribeDatasetExportJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: DatasetExportJobStatus, required: true, location_name: "status"))
     DescribeDatasetExportJobResponse.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startedAt"))
     DescribeDatasetExportJobResponse.add_member(:completed_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "completedAt"))
@@ -2698,6 +2702,7 @@ module Aws::IoTSiteWise
     ExportErrorReportLocation.struct_class = Types::ExportErrorReportLocation
 
     ExportJobSummary.add_member(:job_id, Shapes::ShapeRef.new(shape: DatasetExportJobId, required: true, location_name: "jobId"))
+    ExportJobSummary.add_member(:job_name, Shapes::ShapeRef.new(shape: DatasetExportJobName, location_name: "jobName"))
     ExportJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: DatasetExportJobStatus, required: true, location_name: "status"))
     ExportJobSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startedAt"))
     ExportJobSummary.add_member(:completed_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "completedAt"))

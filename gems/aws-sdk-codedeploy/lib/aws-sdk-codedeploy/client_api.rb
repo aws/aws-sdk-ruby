@@ -1459,14 +1459,15 @@ module Aws::CodeDeploy
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "codedeploy",
         "jsonVersion" => "1.1",
-        "protocol" => "json",
-        "protocols" => ["json"],
+        "protocol" => "smithy-rpc-v2-cbor",
+        "protocols" => ["smithy-rpc-v2-cbor", "json"],
         "serviceAbbreviation" => "CodeDeploy",
         "serviceFullName" => "AWS CodeDeploy",
         "serviceId" => "CodeDeploy",
         "signatureVersion" => "v4",
         "targetPrefix" => "CodeDeploy_20141006",
         "uid" => "codedeploy-2014-10-06",
+        "xmlNamespace" => "http://codedeploy.amazonaws.com/doc/2014-10-06/",
       }
 
       api.add_operation(:add_tags_to_on_premises_instances, Seahorse::Model::Operation.new.tap do |o|

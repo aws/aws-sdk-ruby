@@ -100,6 +100,20 @@ module Aws
                                           ) -> _AssociateIamRoleToResourceResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateIamRoleToResourceResponseSuccess
 
+      interface _AssociateVirtualMachinesToCloudVmClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateVirtualMachinesToCloudVmClusterOutput]
+        def display_name: () -> ::String
+        def status: () -> ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+        def status_reason: () -> ::String
+        def cloud_vm_cluster_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#associate_virtual_machines_to_cloud_vm_cluster-instance_method
+      def associate_virtual_machines_to_cloud_vm_cluster: (
+                                                            cloud_vm_cluster_id: ::String,
+                                                            db_servers: Array[::String]
+                                                          ) -> _AssociateVirtualMachinesToCloudVmClusterResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateVirtualMachinesToCloudVmClusterResponseSuccess
+
       interface _AssociateVirtualMachinesToExadbVmClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateVirtualMachinesToExadbVmClusterOutput]
         def display_name: () -> ::String
@@ -576,6 +590,20 @@ module Aws
                                                  resource_arn: ::String
                                                ) -> _DisassociateIamRoleFromResourceResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateIamRoleFromResourceResponseSuccess
+
+      interface _DisassociateVirtualMachinesFromCloudVmClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateVirtualMachinesFromCloudVmClusterOutput]
+        def display_name: () -> ::String
+        def status: () -> ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+        def status_reason: () -> ::String
+        def cloud_vm_cluster_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#disassociate_virtual_machines_from_cloud_vm_cluster-instance_method
+      def disassociate_virtual_machines_from_cloud_vm_cluster: (
+                                                                 cloud_vm_cluster_id: ::String,
+                                                                 db_servers: Array[::String]
+                                                               ) -> _DisassociateVirtualMachinesFromCloudVmClusterResponseSuccess
+                                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateVirtualMachinesFromCloudVmClusterResponseSuccess
 
       interface _DisassociateVirtualMachinesFromExadbVmClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateVirtualMachinesFromExadbVmClusterOutput]
@@ -1305,6 +1333,26 @@ module Aws
                                              ) -> _UpdateAutonomousDatabaseBackupResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAutonomousDatabaseBackupResponseSuccess
 
+      interface _UpdateCloudAutonomousVmClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCloudAutonomousVmClusterOutput]
+        def display_name: () -> ::String
+        def status: () -> ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+        def status_reason: () -> ::String
+        def cloud_autonomous_vm_cluster_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#update_cloud_autonomous_vm_cluster-instance_method
+      def update_cloud_autonomous_vm_cluster: (
+                                                cloud_autonomous_vm_cluster_id: ::String,
+                                                ?autonomous_data_storage_size_in_t_bs: ::Float,
+                                                ?cpu_core_count_per_node: ::Integer,
+                                                ?description: ::String,
+                                                ?display_name: ::String,
+                                                ?license_model: ("BRING_YOUR_OWN_LICENSE" | "LICENSE_INCLUDED"),
+                                                ?maintenance_window: Params::maintenance_window,
+                                                ?total_container_databases: ::Integer
+                                              ) -> _UpdateCloudAutonomousVmClusterResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCloudAutonomousVmClusterResponseSuccess
+
       interface _UpdateCloudExadataInfrastructureResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCloudExadataInfrastructureOutput]
         def display_name: () -> ::String
@@ -1315,9 +1363,51 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#update_cloud_exadata_infrastructure-instance_method
       def update_cloud_exadata_infrastructure: (
                                                  cloud_exadata_infrastructure_id: ::String,
-                                                 ?maintenance_window: Params::maintenance_window
+                                                 ?display_name: ::String,
+                                                 ?compute_count: ::Integer,
+                                                 ?maintenance_window: Params::maintenance_window,
+                                                 ?storage_count: ::Integer
                                                ) -> _UpdateCloudExadataInfrastructureResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCloudExadataInfrastructureResponseSuccess
+
+      interface _UpdateCloudExadataInfrastructureStorageCapacityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCloudExadataInfrastructureStorageCapacityOutput]
+        def display_name: () -> ::String
+        def status: () -> ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+        def status_reason: () -> ::String
+        def cloud_exadata_infrastructure_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#update_cloud_exadata_infrastructure_storage_capacity-instance_method
+      def update_cloud_exadata_infrastructure_storage_capacity: (
+                                                                  cloud_exadata_infrastructure_id: ::String
+                                                                ) -> _UpdateCloudExadataInfrastructureStorageCapacityResponseSuccess
+                                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCloudExadataInfrastructureStorageCapacityResponseSuccess
+
+      interface _UpdateCloudVmClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCloudVmClusterOutput]
+        def display_name: () -> ::String
+        def status: () -> ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+        def status_reason: () -> ::String
+        def cloud_vm_cluster_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#update_cloud_vm_cluster-instance_method
+      def update_cloud_vm_cluster: (
+                                     cloud_vm_cluster_id: ::String,
+                                     ?cpu_core_count: ::Integer,
+                                     ?data_collection_options: {
+                                       is_diagnostics_events_enabled: bool?,
+                                       is_health_monitoring_enabled: bool?,
+                                       is_incident_logs_enabled: bool?
+                                     },
+                                     ?data_storage_size_in_t_bs: ::Float,
+                                     ?db_node_storage_size_in_g_bs: ::Integer,
+                                     ?display_name: ::String,
+                                     ?ssh_public_keys: Array[::String],
+                                     ?license_model: ("BRING_YOUR_OWN_LICENSE" | "LICENSE_INCLUDED"),
+                                     ?memory_size_in_g_bs: ::Integer,
+                                     ?storage_size_in_g_bs: ::Integer
+                                   ) -> _UpdateCloudVmClusterResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCloudVmClusterResponseSuccess
 
       interface _UpdateExadbVmClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateExadbVmClusterOutput]

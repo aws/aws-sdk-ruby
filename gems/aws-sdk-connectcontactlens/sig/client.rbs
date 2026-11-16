@@ -89,7 +89,36 @@ module Aws
                                                      instance_id: ::String,
                                                      contact_id: ::String,
                                                      ?max_results: ::Integer,
-                                                     ?next_token: ::String
+                                                     ?next_token: ::String,
+                                                     ?list_filter: {
+                                                       categories_attribute_filter: {
+                                                         or_conditions: Array[
+                                                           {
+                                                             tag_conditions: Array[
+                                                               {
+                                                                 tag_key: ::String?,
+                                                                 tag_value: ::String?,
+                                                                 comparison_type: ("EQUALS" | "NOT_EQUALS")?
+                                                               }
+                                                             ]?
+                                                           }
+                                                         ]?,
+                                                         and_condition: {
+                                                           tag_conditions: Array[
+                                                             {
+                                                               tag_key: ::String?,
+                                                               tag_value: ::String?,
+                                                               comparison_type: ("EQUALS" | "NOT_EQUALS")?
+                                                             }
+                                                           ]?
+                                                         }?,
+                                                         tag_condition: {
+                                                           tag_key: ::String?,
+                                                           tag_value: ::String?,
+                                                           comparison_type: ("EQUALS" | "NOT_EQUALS")?
+                                                         }?
+                                                       }?
+                                                     }
                                                    ) -> _ListRealtimeContactAnalysisSegmentsResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRealtimeContactAnalysisSegmentsResponseSuccess
     end

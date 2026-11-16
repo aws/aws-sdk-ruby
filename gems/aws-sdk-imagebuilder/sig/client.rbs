@@ -213,13 +213,7 @@ module Aws
                           ?enhanced_image_metadata_enabled: bool,
                           ?tags: Hash[::String, ::String],
                           client_token: ::String,
-                          ?image_scanning_configuration: {
-                            image_scanning_enabled: bool?,
-                            ecr_configuration: {
-                              repository_name: ::String?,
-                              container_tags: Array[::String]?
-                            }?
-                          },
+                          ?image_scanning_configuration: Params::image_scanning_configuration,
                           ?workflows: Array[
                             Params::workflow_configuration
                           ],
@@ -254,13 +248,7 @@ module Aws
                                    ?tags: Hash[::String, ::String],
                                    ?image_tags: Hash[::String, ::String],
                                    client_token: ::String,
-                                   ?image_scanning_configuration: {
-                                     image_scanning_enabled: bool?,
-                                     ecr_configuration: {
-                                       repository_name: ::String?,
-                                       container_tags: Array[::String]?
-                                     }?
-                                   },
+                                   ?image_scanning_configuration: Params::image_scanning_configuration,
                                    ?workflows: Array[
                                      Params::workflow_configuration
                                    ],
@@ -1378,13 +1366,7 @@ module Aws
                                    ?schedule: Params::schedule,
                                    ?status: ("DISABLED" | "ENABLED"),
                                    client_token: ::String,
-                                   ?image_scanning_configuration: {
-                                     image_scanning_enabled: bool?,
-                                     ecr_configuration: {
-                                       repository_name: ::String?,
-                                       container_tags: Array[::String]?
-                                     }?
-                                   },
+                                   ?image_scanning_configuration: Params::image_scanning_configuration,
                                    ?workflows: Array[
                                      Params::workflow_configuration
                                    ],
@@ -1468,6 +1450,12 @@ module Aws
                                      client_token: ::String
                                    ) -> _UpdateLifecyclePolicyResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLifecyclePolicyResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#wait_until-instance_method
+      def wait_until: (:image_available waiter_name, 
+                    image_build_version_arn: ::String
+                  ) -> Client::_GetImageResponseSuccess
+                    | (:image_available waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetImageResponseSuccess
     end
   end
 end

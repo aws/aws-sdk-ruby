@@ -31,6 +31,16 @@ module Aws
           post = bucket.presigned_post(use_accelerate_endpoint: true)
           expect(post.url).to eq('https://bucket.s3-accelerate.amazonaws.com')
         end
+
+        it 'passes tagging to the presigned post' do
+          bucket = Bucket.new('bucket', stub_responses: true)
+          post = bucket.presigned_post(
+            key: 'foo', tagging: { tag_set: [{ key: 'project', value: 'test' }] }
+          )
+          expect(post.fields['tagging']).to include(
+            '<Tag><Key>project</Key><Value>test</Value></Tag>'
+          )
+        end
       end
     end
   end

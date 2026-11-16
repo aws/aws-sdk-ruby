@@ -29,7 +29,7 @@ module Aws::ChimeSDKVoice
       attr_accessor voice_connector_group_id: ::String
       attr_accessor e164_phone_numbers: ::Array[::String]
       attr_accessor force_associate: bool
-      SENSITIVE: []
+      SENSITIVE: [:e164_phone_numbers]
     end
 
     class AssociatePhoneNumbersWithVoiceConnectorGroupResponse
@@ -41,7 +41,7 @@ module Aws::ChimeSDKVoice
       attr_accessor voice_connector_id: ::String
       attr_accessor e164_phone_numbers: ::Array[::String]
       attr_accessor force_associate: bool
-      SENSITIVE: []
+      SENSITIVE: [:e164_phone_numbers]
     end
 
     class AssociatePhoneNumbersWithVoiceConnectorResponse
@@ -97,7 +97,7 @@ module Aws::ChimeSDKVoice
       attr_accessor product_type: ("VoiceConnector" | "SipMediaApplicationDialIn")
       attr_accessor e164_phone_numbers: ::Array[::String]
       attr_accessor name: ::String
-      SENSITIVE: [:name]
+      SENSITIVE: [:e164_phone_numbers, :name]
     end
 
     class CreatePhoneNumberOrderResponse
@@ -114,7 +114,7 @@ module Aws::ChimeSDKVoice
       attr_accessor number_selection_behavior: ("PreferSticky" | "AvoidSticky")
       attr_accessor geo_match_level: ("Country" | "AreaCode")
       attr_accessor geo_match_params: Types::GeoMatchParams
-      SENSITIVE: [:name]
+      SENSITIVE: [:participant_phone_numbers, :name]
     end
 
     class CreateProxySessionResponse
@@ -128,7 +128,7 @@ module Aws::ChimeSDKVoice
       attr_accessor sip_media_application_id: ::String
       attr_accessor sip_headers: ::Hash[::String, ::String]
       attr_accessor arguments_map: ::Hash[::String, ::String]
-      SENSITIVE: [:from_phone_number, :to_phone_number]
+      SENSITIVE: [:from_phone_number, :to_phone_number, :sip_headers, :arguments_map]
     end
 
     class CreateSipMediaApplicationCallResponse
@@ -286,7 +286,7 @@ module Aws::ChimeSDKVoice
     class DeleteVoiceConnectorTerminationCredentialsRequest
       attr_accessor voice_connector_id: ::String
       attr_accessor usernames: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:usernames]
     end
 
     class DeleteVoiceConnectorTerminationRequest
@@ -307,7 +307,7 @@ module Aws::ChimeSDKVoice
     class DisassociatePhoneNumbersFromVoiceConnectorGroupRequest
       attr_accessor voice_connector_group_id: ::String
       attr_accessor e164_phone_numbers: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:e164_phone_numbers]
     end
 
     class DisassociatePhoneNumbersFromVoiceConnectorGroupResponse
@@ -318,7 +318,7 @@ module Aws::ChimeSDKVoice
     class DisassociatePhoneNumbersFromVoiceConnectorRequest
       attr_accessor voice_connector_id: ::String
       attr_accessor e164_phone_numbers: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:e164_phone_numbers]
     end
 
     class DisassociatePhoneNumbersFromVoiceConnectorResponse
@@ -685,7 +685,7 @@ module Aws::ChimeSDKVoice
 
     class ListVoiceConnectorTerminationCredentialsResponse
       attr_accessor usernames: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:usernames]
     end
 
     class ListVoiceConnectorsRequest
@@ -991,7 +991,7 @@ module Aws::ChimeSDKVoice
     class SearchAvailablePhoneNumbersResponse
       attr_accessor e164_phone_numbers: ::Array[::String]
       attr_accessor next_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:e164_phone_numbers]
     end
 
     class ServerSideEncryptionConfiguration
@@ -1019,7 +1019,7 @@ module Aws::ChimeSDKVoice
     class SipMediaApplicationAlexaSkillConfiguration
       attr_accessor alexa_skill_status: ("ACTIVE" | "INACTIVE")
       attr_accessor alexa_skill_ids: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:alexa_skill_ids]
     end
 
     class SipMediaApplicationCall
@@ -1171,7 +1171,7 @@ module Aws::ChimeSDKVoice
     class UntagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
-      SENSITIVE: [:resource_arn]
+      SENSITIVE: [:resource_arn, :tag_keys]
     end
 
     class UpdateGlobalSettingsRequest
@@ -1222,7 +1222,7 @@ module Aws::ChimeSDKVoice
       attr_accessor sip_media_application_id: ::String
       attr_accessor transaction_id: ::String
       attr_accessor arguments: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:arguments]
     end
 
     class UpdateSipMediaApplicationCallResponse

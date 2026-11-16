@@ -4162,6 +4162,33 @@ module Aws::DevOpsAgent
       include Aws::Structure
     end
 
+    # Configuration for bidirectional communication with a Microsoft Teams
+    # channel. When enabled, the agent receives and responds to mentions in
+    # the configured channel in addition to sending notifications.
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the agent
+    #   assumes to exchange messages with the Microsoft Teams team for this
+    #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether bidirectional communication is enabled for this
+    #   association. If you set this value to `true`, you can mention the
+    #   agent in the configured Microsoft Teams channel and it responds in
+    #   that channel. If you omit this parameter or set it to `false`, the
+    #   agent only sends one-way notifications.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/MSTeamsBidirectionalConfiguration AWS API Documentation
+    #
+    class MSTeamsBidirectionalConfiguration < Struct.new(
+      :role_arn,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a channel in a Microsoft Teams team that the DevOps Agent
     # service can send notifications to.
     #
@@ -4201,12 +4228,20 @@ module Aws::DevOpsAgent
     #   The Microsoft Teams channels that receive agent notifications.
     #   @return [Types::MSTeamsTransmissionTarget]
     #
+    # @!attribute [rw] bidirectional
+    #   The bidirectional communication configuration for the Microsoft
+    #   Teams integration. Provide this configuration with `enabled` set to
+    #   `true` to allow users to interact with the agent directly from
+    #   Microsoft Teams.
+    #   @return [Types::MSTeamsBidirectionalConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/MSTeamsConfiguration AWS API Documentation
     #
     class MSTeamsConfiguration < Struct.new(
       :team_id,
       :team_name,
-      :transmission_target)
+      :transmission_target,
+      :bidirectional)
       SENSITIVE = []
       include Aws::Structure
     end

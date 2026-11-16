@@ -49,6 +49,9 @@ module Aws::MWAA
     Hostname = Shapes::StringShape.new(name: 'Hostname')
     IamIdentity = Shapes::StringShape.new(name: 'IamIdentity')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
+    IdentityCenterConfiguration = Shapes::StructureShape.new(name: 'IdentityCenterConfiguration')
+    IdentityCenterIdentityStoreId = Shapes::StringShape.new(name: 'IdentityCenterIdentityStoreId')
+    IdentityCenterStartUrl = Shapes::StringShape.new(name: 'IdentityCenterStartUrl')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvokeRestApiRequest = Shapes::StructureShape.new(name: 'InvokeRestApiRequest')
@@ -100,6 +103,10 @@ module Aws::MWAA
     TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
     TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TeamConfig = Shapes::StructureShape.new(name: 'TeamConfig')
+    TeamMap = Shapes::MapShape.new(name: 'TeamMap')
+    TeamNameList = Shapes::ListShape.new(name: 'TeamNameList')
+    TeamNameString = Shapes::StringShape.new(name: 'TeamNameString')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Token = Shapes::StringShape.new(name: 'Token')
     Unit = Shapes::StringShape.new(name: 'Unit')
@@ -112,6 +119,7 @@ module Aws::MWAA
     UpdateNetworkConfigurationInput = Shapes::StructureShape.new(name: 'UpdateNetworkConfigurationInput')
     UpdateSource = Shapes::StringShape.new(name: 'UpdateSource')
     UpdateStatus = Shapes::StringShape.new(name: 'UpdateStatus')
+    UpdateTeamsInput = Shapes::StructureShape.new(name: 'UpdateTeamsInput')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     VpcEndpointServiceName = Shapes::StringShape.new(name: 'VpcEndpointServiceName')
     WebserverAccessMode = Shapes::StringShape.new(name: 'WebserverAccessMode')
@@ -157,6 +165,8 @@ module Aws::MWAA
     CreateEnvironmentInput.add_member(:endpoint_management, Shapes::ShapeRef.new(shape: EndpointManagement, location_name: "EndpointManagement"))
     CreateEnvironmentInput.add_member(:min_webservers, Shapes::ShapeRef.new(shape: MinWebservers, location_name: "MinWebservers"))
     CreateEnvironmentInput.add_member(:max_webservers, Shapes::ShapeRef.new(shape: MaxWebservers, location_name: "MaxWebservers"))
+    CreateEnvironmentInput.add_member(:identity_center_configuration, Shapes::ShapeRef.new(shape: IdentityCenterConfiguration, location_name: "IdentityCenterConfiguration"))
+    CreateEnvironmentInput.add_member(:teams, Shapes::ShapeRef.new(shape: TeamMap, location_name: "Teams"))
     CreateEnvironmentInput.struct_class = Types::CreateEnvironmentInput
 
     CreateEnvironmentOutput.add_member(:arn, Shapes::ShapeRef.new(shape: EnvironmentArn, location_name: "Arn"))
@@ -216,6 +226,8 @@ module Aws::MWAA
     Environment.add_member(:endpoint_management, Shapes::ShapeRef.new(shape: EndpointManagement, location_name: "EndpointManagement"))
     Environment.add_member(:min_webservers, Shapes::ShapeRef.new(shape: MinWebservers, location_name: "MinWebservers"))
     Environment.add_member(:max_webservers, Shapes::ShapeRef.new(shape: MaxWebservers, location_name: "MaxWebservers"))
+    Environment.add_member(:identity_center_configuration, Shapes::ShapeRef.new(shape: IdentityCenterConfiguration, location_name: "IdentityCenterConfiguration"))
+    Environment.add_member(:teams, Shapes::ShapeRef.new(shape: TeamMap, location_name: "Teams"))
     Environment.struct_class = Types::Environment
 
     EnvironmentList.member = Shapes::ShapeRef.new(shape: EnvironmentName)
@@ -225,6 +237,10 @@ module Aws::MWAA
 
     GetEnvironmentOutput.add_member(:environment, Shapes::ShapeRef.new(shape: Environment, location_name: "Environment"))
     GetEnvironmentOutput.struct_class = Types::GetEnvironmentOutput
+
+    IdentityCenterConfiguration.add_member(:start_url, Shapes::ShapeRef.new(shape: IdentityCenterStartUrl, location_name: "StartUrl"))
+    IdentityCenterConfiguration.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityCenterIdentityStoreId, location_name: "IdentityStoreId"))
+    IdentityCenterConfiguration.struct_class = Types::IdentityCenterConfiguration
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
@@ -339,6 +355,15 @@ module Aws::MWAA
 
     TagResourceOutput.struct_class = Types::TagResourceOutput
 
+    TeamConfig.add_member(:source_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, required: true, location_name: "SourceBucketArn"))
+    TeamConfig.add_member(:dag_s3_path, Shapes::ShapeRef.new(shape: RelativePath, required: true, location_name: "DagS3Path"))
+    TeamConfig.struct_class = Types::TeamConfig
+
+    TeamMap.key = Shapes::ShapeRef.new(shape: TeamNameString)
+    TeamMap.value = Shapes::ShapeRef.new(shape: TeamConfig)
+
+    TeamNameList.member = Shapes::ShapeRef.new(shape: TeamNameString)
+
     UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: EnvironmentArn, required: true, location: "uri", location_name: "ResourceArn"))
     UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceInput.struct_class = Types::UntagResourceInput
@@ -368,6 +393,8 @@ module Aws::MWAA
     UpdateEnvironmentInput.add_member(:startup_script_s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "StartupScriptS3ObjectVersion"))
     UpdateEnvironmentInput.add_member(:webserver_access_mode, Shapes::ShapeRef.new(shape: WebserverAccessMode, location_name: "WebserverAccessMode"))
     UpdateEnvironmentInput.add_member(:weekly_maintenance_window_start, Shapes::ShapeRef.new(shape: WeeklyMaintenanceWindowStart, location_name: "WeeklyMaintenanceWindowStart"))
+    UpdateEnvironmentInput.add_member(:identity_center_configuration, Shapes::ShapeRef.new(shape: IdentityCenterConfiguration, location_name: "IdentityCenterConfiguration"))
+    UpdateEnvironmentInput.add_member(:teams, Shapes::ShapeRef.new(shape: UpdateTeamsInput, location_name: "Teams"))
     UpdateEnvironmentInput.struct_class = Types::UpdateEnvironmentInput
 
     UpdateEnvironmentOutput.add_member(:arn, Shapes::ShapeRef.new(shape: EnvironmentArn, location_name: "Arn"))
@@ -379,6 +406,10 @@ module Aws::MWAA
 
     UpdateNetworkConfigurationInput.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupList, required: true, location_name: "SecurityGroupIds"))
     UpdateNetworkConfigurationInput.struct_class = Types::UpdateNetworkConfigurationInput
+
+    UpdateTeamsInput.add_member(:add_or_update, Shapes::ShapeRef.new(shape: TeamMap, location_name: "AddOrUpdate"))
+    UpdateTeamsInput.add_member(:remove, Shapes::ShapeRef.new(shape: TeamNameList, location_name: "Remove"))
+    UpdateTeamsInput.struct_class = Types::UpdateTeamsInput
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException

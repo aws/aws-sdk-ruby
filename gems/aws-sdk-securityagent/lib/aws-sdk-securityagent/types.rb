@@ -2894,7 +2894,9 @@ module Aws::SecurityAgent
     #   @return [String]
     #
     # @!attribute [rw] member_type
-    #   The type of member. Currently, only USER is supported.
+    #   The type of member. Use USER for an individual user or GROUP for an
+    #   IAM Identity Center group. All members of a group have access to the
+    #   agent space.
     #   @return [String]
     #
     # @!attribute [rw] config
@@ -2960,6 +2962,11 @@ module Aws::SecurityAgent
     #   AUTOMATIC and DISABLED.
     #   @return [String]
     #
+    # @!attribute [rw] clean_up_strategy
+    #   The strategy for cleaning up resources after pentest job completion.
+    #   Valid values are BEST\_EFFORT\_DELETE and RETAIN\_ALL.
+    #   @return [String]
+    #
     # @!attribute [rw] disable_managed_skills
     #   A list of managed skills to disable for this pentest. Valid values
     #   include FINDING\_PERSONALIZATION and LOGIN\_OPTIMIZATION.
@@ -3000,6 +3007,7 @@ module Aws::SecurityAgent
       :vpc_config,
       :network_traffic_config,
       :code_remediation_strategy,
+      :clean_up_strategy,
       :disable_managed_skills,
       :max_task_hours,
       :report_destination,
@@ -4951,6 +4959,26 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
+    # Contains metadata about an IAM Identity Center group member, including
+    # the group display name and description.
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/GroupMetadata AWS API Documentation
+    #
+    class GroupMetadata < Struct.new(
+      :display_name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains HTTP route verification details for a target domain,
     # including the route path and token to serve for domain ownership
     # verification.
@@ -6839,16 +6867,22 @@ module Aws::SecurityAgent
     #   The user metadata for the member.
     #   @return [Types::UserMetadata]
     #
+    # @!attribute [rw] group
+    #   The group metadata for the member.
+    #   @return [Types::GroupMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/MemberMetadata AWS API Documentation
     #
     class MemberMetadata < Struct.new(
       :user,
+      :group,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class User < MemberMetadata; end
+      class Group < MemberMetadata; end
       class Unknown < MemberMetadata; end
     end
 
@@ -9726,6 +9760,11 @@ module Aws::SecurityAgent
     #   The updated code remediation strategy for the pentest.
     #   @return [String]
     #
+    # @!attribute [rw] clean_up_strategy
+    #   The updated strategy for cleaning up resources after pentest job
+    #   completion.
+    #   @return [String]
+    #
     # @!attribute [rw] disable_managed_skills
     #   The updated list of managed skills to disable for this pentest.
     #   Valid values include FINDING\_PERSONALIZATION and
@@ -9767,6 +9806,7 @@ module Aws::SecurityAgent
       :vpc_config,
       :network_traffic_config,
       :code_remediation_strategy,
+      :clean_up_strategy,
       :disable_managed_skills,
       :max_task_hours,
       :report_destination,

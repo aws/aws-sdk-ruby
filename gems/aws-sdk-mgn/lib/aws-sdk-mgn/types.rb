@@ -554,6 +554,14 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the network migration definition.
     #   @return [String]
@@ -603,6 +611,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateNetworkMigrationDefinitionRequest AWS API Documentation
     #
     class CreateNetworkMigrationDefinitionRequest < Struct.new(
+      :client_token,
       :name,
       :description,
       :source_configurations,

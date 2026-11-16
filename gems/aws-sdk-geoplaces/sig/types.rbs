@@ -106,7 +106,7 @@ module Aws::GeoPlaces
       attr_accessor circle: Types::FilterCircle
       attr_accessor include_countries: ::Array[::String]
       attr_accessor include_place_types: ::Array[("Locality" | "PostalCode" | "Street" | "Intersection" | "PointAddress" | "InterpolatedAddress" | "Country" | "Region")]
-      SENSITIVE: [:bounding_box, :circle]
+      SENSITIVE: [:bounding_box, :circle, :include_countries]
     end
 
     class AutocompleteHighlights
@@ -219,7 +219,7 @@ module Aws::GeoPlaces
     class GeocodeFilter
       attr_accessor include_countries: ::Array[::String]
       attr_accessor include_place_types: ::Array[("Locality" | "PostalCode" | "Intersection" | "Street" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress" | "PointOfInterest" | "Country" | "Region")]
-      SENSITIVE: []
+      SENSITIVE: [:include_countries, :include_place_types]
     end
 
     class GeocodeParsedQuery
@@ -342,7 +342,7 @@ module Aws::GeoPlaces
       attr_accessor place_attributes: ::Array[("DriveThrough")]
       attr_accessor estimated_point_address: bool
       attr_accessor cross_references: ::Array[Types::CrossReference]
-      SENSITIVE: [:place_id, :place_type, :title, :address_number_corrected, :position, :map_view, :political_view, :estimated_point_address]
+      SENSITIVE: [:place_id, :place_type, :title, :address_number_corrected, :position, :map_view, :political_view, :place_attributes, :estimated_point_address]
     end
 
     class Highlight
@@ -380,7 +380,7 @@ module Aws::GeoPlaces
       attr_accessor open_now: bool
       attr_accessor components: ::Array[Types::OpeningHoursComponents]
       attr_accessor categories: ::Array[Types::Category]
-      SENSITIVE: [:open_now]
+      SENSITIVE: [:display, :open_now]
     end
 
     class OpeningHoursComponents
@@ -515,7 +515,7 @@ module Aws::GeoPlaces
       attr_accessor exclude_business_chains: ::Array[::String]
       attr_accessor include_food_types: ::Array[::String]
       attr_accessor exclude_food_types: ::Array[::String]
-      SENSITIVE: [:bounding_box]
+      SENSITIVE: [:bounding_box, :include_countries, :include_categories, :exclude_categories, :include_business_chains, :exclude_business_chains, :include_food_types, :exclude_food_types]
     end
 
     class SearchNearbyRequest
@@ -560,14 +560,14 @@ module Aws::GeoPlaces
       attr_accessor phonemes: Types::PhonemeDetails
       attr_accessor place_attributes: ::Array[("DriveThrough")]
       attr_accessor cross_references: ::Array[Types::CrossReference]
-      SENSITIVE: [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view]
+      SENSITIVE: [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view, :place_attributes]
     end
 
     class SearchTextFilter
       attr_accessor bounding_box: ::Array[::Float]
       attr_accessor circle: Types::FilterCircle
       attr_accessor include_countries: ::Array[::String]
-      SENSITIVE: [:bounding_box, :circle]
+      SENSITIVE: [:bounding_box, :circle, :include_countries]
     end
 
     class SearchTextRequest
@@ -614,7 +614,7 @@ module Aws::GeoPlaces
       attr_accessor phonemes: Types::PhonemeDetails
       attr_accessor place_attributes: ::Array[("DriveThrough")]
       attr_accessor cross_references: ::Array[Types::CrossReference]
-      SENSITIVE: [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view]
+      SENSITIVE: [:place_id, :place_type, :title, :address_number_corrected, :position, :distance, :map_view, :political_view, :place_attributes]
     end
 
     class SecondaryAddressComponent
@@ -661,7 +661,7 @@ module Aws::GeoPlaces
       attr_accessor bounding_box: ::Array[::Float]
       attr_accessor circle: Types::FilterCircle
       attr_accessor include_countries: ::Array[::String]
-      SENSITIVE: [:bounding_box, :circle]
+      SENSITIVE: [:bounding_box, :circle, :include_countries]
     end
 
     class SuggestHighlights
@@ -687,7 +687,7 @@ module Aws::GeoPlaces
       attr_accessor phonemes: Types::PhonemeDetails
       attr_accessor place_attributes: ::Array[("DriveThrough")]
       attr_accessor cross_references: ::Array[Types::CrossReference]
-      SENSITIVE: [:place_id, :place_type, :position, :distance, :map_view, :political_view]
+      SENSITIVE: [:place_id, :place_type, :position, :distance, :map_view, :political_view, :place_attributes]
     end
 
     class SuggestQueryResult

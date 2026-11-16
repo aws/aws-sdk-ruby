@@ -31,6 +31,20 @@ module Aws::MWAAServerless
       SENSITIVE: []
     end
 
+    class CreateAirflowUiUrlRequest
+      attr_accessor expires_in_seconds: ::Integer
+      attr_accessor session_duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateAirflowUiUrlResponse
+      attr_accessor authorized_url: ::String
+      attr_accessor session_id: ::String
+      attr_accessor url_expires_at: ::Time
+      attr_accessor session_expires_at: ::Time
+      SENSITIVE: [:authorized_url, :session_id]
+    end
+
     class CreateWorkflowRequest
       attr_accessor name: ::String
       attr_accessor client_token: ::String
@@ -42,6 +56,7 @@ module Aws::MWAAServerless
       attr_accessor logging_configuration: Types::LoggingConfiguration
       attr_accessor engine_version: ::Integer
       attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor environment: Types::Environment
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor trigger_mode: ::String
       SENSITIVE: []
@@ -81,6 +96,11 @@ module Aws::MWAAServerless
       attr_accessor type: ("AWS_MANAGED_KEY" | "CUSTOMER_MANAGED_KEY")
       attr_accessor kms_key_id: ::String
       SENSITIVE: []
+    end
+
+    class Environment
+      attr_accessor variables: ::Hash[::String, ::String]
+      SENSITIVE: [:variables]
     end
 
     class GetTaskInstanceRequest
@@ -132,6 +152,7 @@ module Aws::MWAAServerless
       attr_accessor schedule_configuration: Types::ScheduleConfiguration
       attr_accessor role_arn: ::String
       attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor environment: Types::Environment
       attr_accessor trigger_mode: ::String
       attr_accessor workflow_definition: ::String
       SENSITIVE: []
@@ -349,6 +370,7 @@ module Aws::MWAAServerless
       attr_accessor logging_configuration: Types::LoggingConfiguration
       attr_accessor engine_version: ::Integer
       attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor environment: Types::Environment
       attr_accessor trigger_mode: ::String
       SENSITIVE: []
     end

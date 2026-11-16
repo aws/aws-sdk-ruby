@@ -706,6 +706,12 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class DomainFilter
+      attr_accessor include: ::Array[::String]
+      attr_accessor exclude: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class DuplicateIdException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -723,7 +729,7 @@ module Aws::BedrockAgentCore
       attr_accessor linked_accounts: ::Array[Types::LinkedAccount]
       attr_accessor wallet_address: ::String
       attr_accessor redirect_url: ::String
-      SENSITIVE: []
+      SENSITIVE: [:linked_accounts]
     end
 
     class EvaluateRequest
@@ -1222,7 +1228,7 @@ module Aws::BedrockAgentCore
       attr_accessor custom_state: ::String
       attr_accessor resources: ::Array[::String]
       attr_accessor audiences: ::Array[::String]
-      SENSITIVE: [:workload_identity_token, :custom_state]
+      SENSITIVE: [:workload_identity_token, :custom_parameters, :custom_state]
     end
 
     class GetResourceOauth2TokenResponse
@@ -1560,7 +1566,22 @@ module Aws::BedrockAgentCore
     class HarnessRemoteMcpConfig
       attr_accessor url: ::String
       attr_accessor headers: ::Hash[::String, ::String]
+      attr_accessor outbound_auth: Types::HarnessRemoteMcpOutboundAuth
       SENSITIVE: [:url, :headers]
+    end
+
+    class HarnessRemoteMcpOutboundAuth
+      attr_accessor aws_iam: Types::IamCredentialProvider
+      attr_accessor none: Types::Unit
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AwsIam < HarnessRemoteMcpOutboundAuth
+      end
+      class None < HarnessRemoteMcpOutboundAuth
+      end
+      class Unknown < HarnessRemoteMcpOutboundAuth
+      end
     end
 
     class HarnessSkill
@@ -1730,6 +1751,12 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class IamCredentialProvider
+      attr_accessor service: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
     class IngestDataInput
       attr_accessor memory_id: ::String
       attr_accessor source: Types::ContentSource
@@ -1878,6 +1905,7 @@ module Aws::BedrockAgentCore
 
     class InvokeAgentRuntimeResponse
       attr_accessor runtime_session_id: ::String
+      attr_accessor session_endpoint_url: ::String
       attr_accessor mcp_session_id: ::String
       attr_accessor mcp_protocol_version: ::String
       attr_accessor trace_id: ::String
@@ -1943,6 +1971,19 @@ module Aws::BedrockAgentCore
 
     class InvokeHarnessResponse
       attr_accessor stream: Types::InvokeHarnessStreamOutput
+      SENSITIVE: []
+    end
+
+    class InvokeWebSearchInput
+      attr_accessor web_search_id: ::String
+      attr_accessor search_query: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: Types::WebSearchFilters
+      SENSITIVE: []
+    end
+
+    class InvokeWebSearchOutput
+      attr_accessor results: ::Array[Types::WebSearchResult]
       SENSITIVE: []
     end
 
@@ -2458,7 +2499,7 @@ module Aws::BedrockAgentCore
       attr_accessor custom_parameters: ::Hash[::String, ::String]
       attr_accessor grant_type: ("CLIENT_CREDENTIALS" | "AUTHORIZATION_CODE" | "TOKEN_EXCHANGE")
       attr_accessor default_return_url: ::String
-      SENSITIVE: []
+      SENSITIVE: [:custom_parameters]
     end
 
     class OnlineEvaluationConfigSource
@@ -2678,6 +2719,12 @@ module Aws::BedrockAgentCore
       end
       class Unknown < ProxyCredentials
       end
+    end
+
+    class PublishedDateFilter
+      attr_accessor published_after: ::Time
+      attr_accessor published_before: ::Time
+      SENSITIVE: []
     end
 
     class RecommendationConfig
@@ -2938,6 +2985,12 @@ module Aws::BedrockAgentCore
     class ServiceQuotaExceededException
       attr_accessor message: ::String
       attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
       SENSITIVE: []
     end
 
@@ -3506,6 +3559,20 @@ module Aws::BedrockAgentCore
     class ViewPort
       attr_accessor width: ::Integer
       attr_accessor height: ::Integer
+      SENSITIVE: []
+    end
+
+    class WebSearchFilters
+      attr_accessor domain_filter: Types::DomainFilter
+      attr_accessor published_date_filter: Types::PublishedDateFilter
+      SENSITIVE: []
+    end
+
+    class WebSearchResult
+      attr_accessor title: ::String
+      attr_accessor url: ::String
+      attr_accessor text: ::String
+      attr_accessor published_at: ::Time
       SENSITIVE: []
     end
 

@@ -380,6 +380,10 @@ module Aws::BedrockAgentRuntime
 
     # An action taken during agentic retrieval.
     #
+    # @!attribute [rw] code_execution
+    #   The details of code that the agent chose to run.
+    #   @return [Types::AgenticRetrieveCodeExecutionDetails]
+    #
     # @!attribute [rw] full_document_expansion
     #   Details of a full document expansion action.
     #   @return [Types::AgenticRetrieveFullDocExpansionDetails]
@@ -396,6 +400,7 @@ module Aws::BedrockAgentRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/AgenticRetrieveAction AWS API Documentation
     #
     class AgenticRetrieveAction < Struct.new(
+      :code_execution,
       :full_document_expansion,
       :memory_retrieve,
       :retrieve)
@@ -528,6 +533,42 @@ module Aws::BedrockAgentRuntime
     #
     class AgenticRetrieveCitationReference < Struct.new(
       :result_index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of code that the agent chose to run in an isolated
+    # sandbox. The record includes the documents that the code reads. The
+    # corresponding CodeExecution step reports the outcome.
+    #
+    # @!attribute [rw] documents
+    #   The documents that the code reads. This field is present when the
+    #   code reads documents.
+    #   @return [Array<Types::AgenticRetrieveCodeExecutionDocument>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/AgenticRetrieveCodeExecutionDetails AWS API Documentation
+    #
+    class AgenticRetrieveCodeExecutionDetails < Struct.new(
+      :documents)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A document that a code execution action reads.
+    #
+    # @!attribute [rw] document_id
+    #   The identifier of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_retriever
+    #   The source retriever associated with the document.
+    #   @return [Types::AgenticRetrieveSourceRetriever]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/AgenticRetrieveCodeExecutionDocument AWS API Documentation
+    #
+    class AgenticRetrieveCodeExecutionDocument < Struct.new(
+      :document_id,
+      :source_retriever)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4192,10 +4233,30 @@ module Aws::BedrockAgentRuntime
     #   document.
     #   @return [String]
     #
+    # @!attribute [rw] media_id
+    #   The unique identifier (in UUID format) of an image embedded in the
+    #   specified document. Set this parameter to the `_media_id` value in
+    #   the metadata of the corresponding `Retrieve` result. If you specify
+    #   this parameter, the response contains a pre-signed URL for the image
+    #   instead of the document, and you must omit `outputFormat` or set it
+    #   to `RAW`.
+    #   @return [String]
+    #
     # @!attribute [rw] output_format
-    #   The output format for the document content. `RAW` returns the
-    #   original file. `EXTRACTED` returns parsed text as JSON. Defaults to
-    #   `RAW`.
+    #   The output format for the content. You can specify one of the
+    #   following values:
+    #
+    #   RAW
+    #
+    #   : Returns the original document, or the selected image if you
+    #     specify `mediaId`.
+    #
+    #   EXTRACTED
+    #
+    #   : Returns parsed document text as JSON.
+    #
+    #   If you omit this parameter, the default is `RAW`. You can't use
+    #   `EXTRACTED` with `mediaId`.
     #   @return [String]
     #
     # @!attribute [rw] user_context
@@ -4210,6 +4271,7 @@ module Aws::BedrockAgentRuntime
       :data_source_id,
       :document_id,
       :knowledge_base_id,
+      :media_id,
       :output_format,
       :user_context)
       SENSITIVE = [:user_context]
@@ -4217,19 +4279,20 @@ module Aws::BedrockAgentRuntime
     end
 
     # @!attribute [rw] document_content_length
-    #   The size of the document content in bytes available at the
-    #   pre-signed URL.
+    #   The size, in bytes, of the content available at the pre-signed URL.
     #   @return [Integer]
     #
     # @!attribute [rw] mime_type
-    #   The MIME type of the document content. For `RAW` format, this is the
-    #   original file type (for example, `application/pdf`). For `EXTRACTED`
-    #   format, this is always `application/json`.
+    #   The MIME type of the returned content. For `RAW` format, this is the
+    #   original file type (for example, `application/pdf`), or the image
+    #   type (for example, `image/png`) if you specify `mediaId`. For
+    #   `EXTRACTED` format, this is always `application/json`.
     #   @return [String]
     #
     # @!attribute [rw] presigned_url
-    #   A pre-signed URL for downloading the document content. The URL
-    #   expires after 5 minutes.
+    #   A pre-signed URL for downloading the document content, or the
+    #   selected image if you specify `mediaId`. The URL expires after 5
+    #   minutes.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GetDocumentContentResponse AWS API Documentation

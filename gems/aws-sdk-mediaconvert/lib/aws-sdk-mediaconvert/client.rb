@@ -264,7 +264,8 @@ module Aws::MediaConvert
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::MediaConvert
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -548,6 +549,9 @@ module Aws::MediaConvert
     #   Prevent duplicate jobs from being created and ensure idempotency for your requests. A client request token can be any string that includes up to 64 ASCII characters. If you reuse a client request token within one minute of a successful request, the API returns the job details of the original request instead. For more information see https://docs.aws.amazon.com/mediaconvert/latest/apireference/idempotency.html.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Types::ElementalInferenceSettings] :elemental_inference_settings
+    #   The Elemental Inference settings used in this job.
+    #
     # @option params [Array<Types::HopDestination>] :hop_destinations
     #   Optional. Use queue hopping to avoid overly long waits in the backlog
     #   of the queue that you submit your job to. Specify an alternate queue
@@ -643,6 +647,9 @@ module Aws::MediaConvert
     #
     # @option params [String] :description
     #   Optional. A description of the job template you are creating.
+    #
+    # @option params [Types::ElementalInferenceSettings] :elemental_inference_settings
+    #   The Elemental Inference settings used in this job.
     #
     # @option params [Array<Types::HopDestination>] :hop_destinations
     #   Optional. Use queue hopping to avoid overly long waits in the backlog
@@ -4899,6 +4906,9 @@ module Aws::MediaConvert
     # @option params [String] :description
     #   The new description for the job template, if you are changing it.
     #
+    # @option params [Types::ElementalInferenceSettings] :elemental_inference_settings
+    #   The Elemental Inference settings used in this job.
+    #
     # @option params [Array<Types::HopDestination>] :hop_destinations
     #   Optional list of hop destinations.
     #
@@ -6690,7 +6700,7 @@ module Aws::MediaConvert
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.199.0'
+      context[:gem_version] = '1.205.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

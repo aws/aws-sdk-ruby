@@ -3426,7 +3426,7 @@ module Aws::LocationService
       :circle,
       :geobuf,
       :multi_polygon)
-      SENSITIVE = [:circle, :geobuf]
+      SENSITIVE = [:polygon, :circle, :geobuf, :multi_polygon]
       include Aws::Structure
     end
 
@@ -7117,7 +7117,7 @@ module Aws::LocationService
     #
     class TrackingFilterGeometry < Struct.new(
       :polygon)
-      SENSITIVE = []
+      SENSITIVE = [:polygon]
       include Aws::Structure
     end
 

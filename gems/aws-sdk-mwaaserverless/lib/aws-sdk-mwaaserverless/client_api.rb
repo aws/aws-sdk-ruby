@@ -15,8 +15,11 @@ module Aws::MWAAServerless
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AuthorizedUrlString = Shapes::StringShape.new(name: 'AuthorizedUrlString')
     Code = Shapes::UnionShape.new(name: 'Code')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CreateAirflowUiUrlRequest = Shapes::StructureShape.new(name: 'CreateAirflowUiUrlRequest')
+    CreateAirflowUiUrlResponse = Shapes::StructureShape.new(name: 'CreateAirflowUiUrlResponse')
     CreateWorkflowRequest = Shapes::StructureShape.new(name: 'CreateWorkflowRequest')
     CreateWorkflowResponse = Shapes::StructureShape.new(name: 'CreateWorkflowResponse')
     DefinitionS3Location = Shapes::StructureShape.new(name: 'DefinitionS3Location')
@@ -27,7 +30,12 @@ module Aws::MWAAServerless
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     EngineVersion = Shapes::IntegerShape.new(name: 'EngineVersion')
+    Environment = Shapes::StructureShape.new(name: 'Environment')
+    EnvironmentVariableKey = Shapes::StringShape.new(name: 'EnvironmentVariableKey')
+    EnvironmentVariableValue = Shapes::StringShape.new(name: 'EnvironmentVariableValue')
+    EnvironmentVariablesMap = Shapes::MapShape.new(name: 'EnvironmentVariablesMap')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ExpiresInSecondsInteger = Shapes::IntegerShape.new(name: 'ExpiresInSecondsInteger')
     GenericMap = Shapes::MapShape.new(name: 'GenericMap')
     GenericString = Shapes::StringShape.new(name: 'GenericString')
     GetTaskInstanceRequest = Shapes::StructureShape.new(name: 'GetTaskInstanceRequest')
@@ -72,6 +80,8 @@ module Aws::MWAAServerless
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SecurityGroupString = Shapes::StringShape.new(name: 'SecurityGroupString')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SessionDurationInSecondsInteger = Shapes::IntegerShape.new(name: 'SessionDurationInSecondsInteger')
+    SessionIdString = Shapes::StringShape.new(name: 'SessionIdString')
     StartWorkflowRunRequest = Shapes::StructureShape.new(name: 'StartWorkflowRunRequest')
     StartWorkflowRunResponse = Shapes::StructureShape.new(name: 'StartWorkflowRunResponse')
     StopWorkflowRunRequest = Shapes::StructureShape.new(name: 'StopWorkflowRunRequest')
@@ -128,6 +138,16 @@ module Aws::MWAAServerless
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceType"))
     ConflictException.struct_class = Types::ConflictException
 
+    CreateAirflowUiUrlRequest.add_member(:expires_in_seconds, Shapes::ShapeRef.new(shape: ExpiresInSecondsInteger, location_name: "ExpiresInSeconds"))
+    CreateAirflowUiUrlRequest.add_member(:session_duration_in_seconds, Shapes::ShapeRef.new(shape: SessionDurationInSecondsInteger, location_name: "SessionDurationInSeconds"))
+    CreateAirflowUiUrlRequest.struct_class = Types::CreateAirflowUiUrlRequest
+
+    CreateAirflowUiUrlResponse.add_member(:authorized_url, Shapes::ShapeRef.new(shape: AuthorizedUrlString, required: true, location_name: "AuthorizedUrl"))
+    CreateAirflowUiUrlResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionIdString, required: true, location_name: "SessionId"))
+    CreateAirflowUiUrlResponse.add_member(:url_expires_at, Shapes::ShapeRef.new(shape: TimestampValue, required: true, location_name: "UrlExpiresAt"))
+    CreateAirflowUiUrlResponse.add_member(:session_expires_at, Shapes::ShapeRef.new(shape: TimestampValue, required: true, location_name: "SessionExpiresAt"))
+    CreateAirflowUiUrlResponse.struct_class = Types::CreateAirflowUiUrlResponse
+
     CreateWorkflowRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     CreateWorkflowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyTokenString, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateWorkflowRequest.add_member(:definition_s3_location, Shapes::ShapeRef.new(shape: DefinitionS3Location, required: true, location_name: "DefinitionS3Location"))
@@ -138,6 +158,7 @@ module Aws::MWAAServerless
     CreateWorkflowRequest.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
     CreateWorkflowRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
     CreateWorkflowRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
+    CreateWorkflowRequest.add_member(:environment, Shapes::ShapeRef.new(shape: Environment, location_name: "Environment"))
     CreateWorkflowRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateWorkflowRequest.add_member(:trigger_mode, Shapes::ShapeRef.new(shape: GenericString, location_name: "TriggerMode"))
     CreateWorkflowRequest.struct_class = Types::CreateWorkflowRequest
@@ -167,6 +188,12 @@ module Aws::MWAAServerless
     EncryptionConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "Type"))
     EncryptionConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
+
+    Environment.add_member(:variables, Shapes::ShapeRef.new(shape: EnvironmentVariablesMap, location_name: "Variables"))
+    Environment.struct_class = Types::Environment
+
+    EnvironmentVariablesMap.key = Shapes::ShapeRef.new(shape: EnvironmentVariableKey)
+    EnvironmentVariablesMap.value = Shapes::ShapeRef.new(shape: EnvironmentVariableValue)
 
     GenericMap.key = Shapes::ShapeRef.new(shape: GenericString)
     GenericMap.value = Shapes::ShapeRef.new(shape: GenericString)
@@ -213,6 +240,7 @@ module Aws::MWAAServerless
     GetWorkflowResponse.add_member(:schedule_configuration, Shapes::ShapeRef.new(shape: ScheduleConfiguration, location_name: "ScheduleConfiguration"))
     GetWorkflowResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleArn"))
     GetWorkflowResponse.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
+    GetWorkflowResponse.add_member(:environment, Shapes::ShapeRef.new(shape: Environment, location_name: "Environment"))
     GetWorkflowResponse.add_member(:trigger_mode, Shapes::ShapeRef.new(shape: GenericString, location_name: "TriggerMode"))
     GetWorkflowResponse.add_member(:workflow_definition, Shapes::ShapeRef.new(shape: GenericString, location_name: "WorkflowDefinition"))
     GetWorkflowResponse.struct_class = Types::GetWorkflowResponse
@@ -384,6 +412,7 @@ module Aws::MWAAServerless
     UpdateWorkflowRequest.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
     UpdateWorkflowRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
     UpdateWorkflowRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
+    UpdateWorkflowRequest.add_member(:environment, Shapes::ShapeRef.new(shape: Environment, location_name: "Environment"))
     UpdateWorkflowRequest.add_member(:trigger_mode, Shapes::ShapeRef.new(shape: GenericString, location_name: "TriggerMode"))
     UpdateWorkflowRequest.struct_class = Types::UpdateWorkflowRequest
 
@@ -473,6 +502,20 @@ module Aws::MWAAServerless
         "targetPrefix" => "AmazonMWAAServerless",
         "uid" => "mwaa-serverless-2024-07-26",
       }
+
+      api.add_operation(:create_airflow_ui_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAirflowUiUrl"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateAirflowUiUrlRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAirflowUiUrlResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
 
       api.add_operation(:create_workflow, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateWorkflow"

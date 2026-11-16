@@ -922,7 +922,7 @@ module Aws::States
       attr_accessor output_details: Types::HistoryEventExecutionDataDetails
       attr_accessor assigned_variables: ::Hash[::String, ::String]
       attr_accessor assigned_variables_details: Types::AssignedVariablesDetails
-      SENSITIVE: [:output]
+      SENSITIVE: [:output, :assigned_variables]
     end
 
     class StateMachineAliasListItem

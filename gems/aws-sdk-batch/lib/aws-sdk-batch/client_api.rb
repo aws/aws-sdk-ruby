@@ -136,6 +136,9 @@ module Aws::Batch
     EksContainerDetails = Shapes::ListShape.new(name: 'EksContainerDetails')
     EksContainerEnvironmentVariable = Shapes::StructureShape.new(name: 'EksContainerEnvironmentVariable')
     EksContainerEnvironmentVariables = Shapes::ListShape.new(name: 'EksContainerEnvironmentVariables')
+    EksContainerLinuxCapabilities = Shapes::StructureShape.new(name: 'EksContainerLinuxCapabilities')
+    EksContainerLinuxCapability = Shapes::StringShape.new(name: 'EksContainerLinuxCapability')
+    EksContainerLinuxCapabilityList = Shapes::ListShape.new(name: 'EksContainerLinuxCapabilityList')
     EksContainerOverride = Shapes::StructureShape.new(name: 'EksContainerOverride')
     EksContainerOverrideList = Shapes::ListShape.new(name: 'EksContainerOverrideList')
     EksContainerResourceRequirements = Shapes::StructureShape.new(name: 'EksContainerResourceRequirements')
@@ -152,10 +155,14 @@ module Aws::Batch
     EksPodProperties = Shapes::StructureShape.new(name: 'EksPodProperties')
     EksPodPropertiesDetail = Shapes::StructureShape.new(name: 'EksPodPropertiesDetail')
     EksPodPropertiesOverride = Shapes::StructureShape.new(name: 'EksPodPropertiesOverride')
+    EksPodSecurityContext = Shapes::StructureShape.new(name: 'EksPodSecurityContext')
     EksProperties = Shapes::StructureShape.new(name: 'EksProperties')
     EksPropertiesDetail = Shapes::StructureShape.new(name: 'EksPropertiesDetail')
     EksPropertiesOverride = Shapes::StructureShape.new(name: 'EksPropertiesOverride')
     EksRequests = Shapes::MapShape.new(name: 'EksRequests')
+    EksSeccompLocalhostProfile = Shapes::StringShape.new(name: 'EksSeccompLocalhostProfile')
+    EksSeccompProfile = Shapes::StructureShape.new(name: 'EksSeccompProfile')
+    EksSeccompProfileType = Shapes::StringShape.new(name: 'EksSeccompProfileType')
     EksSecret = Shapes::StructureShape.new(name: 'EksSecret')
     EksVolume = Shapes::StructureShape.new(name: 'EksVolume')
     EksVolumes = Shapes::ListShape.new(name: 'EksVolumes')
@@ -998,6 +1005,12 @@ module Aws::Batch
 
     EksContainerEnvironmentVariables.member = Shapes::ShapeRef.new(shape: EksContainerEnvironmentVariable)
 
+    EksContainerLinuxCapabilities.add_member(:add, Shapes::ShapeRef.new(shape: EksContainerLinuxCapabilityList, location_name: "add"))
+    EksContainerLinuxCapabilities.add_member(:drop, Shapes::ShapeRef.new(shape: EksContainerLinuxCapabilityList, location_name: "drop"))
+    EksContainerLinuxCapabilities.struct_class = Types::EksContainerLinuxCapabilities
+
+    EksContainerLinuxCapabilityList.member = Shapes::ShapeRef.new(shape: EksContainerLinuxCapability)
+
     EksContainerOverride.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     EksContainerOverride.add_member(:image, Shapes::ShapeRef.new(shape: String, location_name: "image"))
     EksContainerOverride.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
@@ -1018,6 +1031,8 @@ module Aws::Batch
     EksContainerSecurityContext.add_member(:allow_privilege_escalation, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowPrivilegeEscalation"))
     EksContainerSecurityContext.add_member(:read_only_root_filesystem, Shapes::ShapeRef.new(shape: Boolean, location_name: "readOnlyRootFilesystem"))
     EksContainerSecurityContext.add_member(:run_as_non_root, Shapes::ShapeRef.new(shape: Boolean, location_name: "runAsNonRoot"))
+    EksContainerSecurityContext.add_member(:capabilities, Shapes::ShapeRef.new(shape: EksContainerLinuxCapabilities, location_name: "capabilities"))
+    EksContainerSecurityContext.add_member(:seccomp_profile, Shapes::ShapeRef.new(shape: EksSeccompProfile, location_name: "seccompProfile"))
     EksContainerSecurityContext.struct_class = Types::EksContainerSecurityContext
 
     EksContainerVolumeMount.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
@@ -1061,6 +1076,7 @@ module Aws::Batch
     EksPodProperties.add_member(:volumes, Shapes::ShapeRef.new(shape: EksVolumes, location_name: "volumes"))
     EksPodProperties.add_member(:metadata, Shapes::ShapeRef.new(shape: EksMetadata, location_name: "metadata"))
     EksPodProperties.add_member(:share_process_namespace, Shapes::ShapeRef.new(shape: Boolean, location_name: "shareProcessNamespace"))
+    EksPodProperties.add_member(:security_context, Shapes::ShapeRef.new(shape: EksPodSecurityContext, location_name: "securityContext"))
     EksPodProperties.struct_class = Types::EksPodProperties
 
     EksPodPropertiesDetail.add_member(:service_account_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceAccountName"))
@@ -1074,12 +1090,20 @@ module Aws::Batch
     EksPodPropertiesDetail.add_member(:node_name, Shapes::ShapeRef.new(shape: String, location_name: "nodeName"))
     EksPodPropertiesDetail.add_member(:metadata, Shapes::ShapeRef.new(shape: EksMetadata, location_name: "metadata"))
     EksPodPropertiesDetail.add_member(:share_process_namespace, Shapes::ShapeRef.new(shape: Boolean, location_name: "shareProcessNamespace"))
+    EksPodPropertiesDetail.add_member(:security_context, Shapes::ShapeRef.new(shape: EksPodSecurityContext, location_name: "securityContext"))
     EksPodPropertiesDetail.struct_class = Types::EksPodPropertiesDetail
 
     EksPodPropertiesOverride.add_member(:containers, Shapes::ShapeRef.new(shape: EksContainerOverrideList, location_name: "containers"))
     EksPodPropertiesOverride.add_member(:init_containers, Shapes::ShapeRef.new(shape: EksContainerOverrideList, location_name: "initContainers"))
     EksPodPropertiesOverride.add_member(:metadata, Shapes::ShapeRef.new(shape: EksMetadata, location_name: "metadata"))
     EksPodPropertiesOverride.struct_class = Types::EksPodPropertiesOverride
+
+    EksPodSecurityContext.add_member(:run_as_user, Shapes::ShapeRef.new(shape: Long, location_name: "runAsUser"))
+    EksPodSecurityContext.add_member(:run_as_group, Shapes::ShapeRef.new(shape: Long, location_name: "runAsGroup"))
+    EksPodSecurityContext.add_member(:run_as_non_root, Shapes::ShapeRef.new(shape: Boolean, location_name: "runAsNonRoot"))
+    EksPodSecurityContext.add_member(:seccomp_profile, Shapes::ShapeRef.new(shape: EksSeccompProfile, location_name: "seccompProfile"))
+    EksPodSecurityContext.add_member(:fs_group, Shapes::ShapeRef.new(shape: Long, location_name: "fsGroup"))
+    EksPodSecurityContext.struct_class = Types::EksPodSecurityContext
 
     EksProperties.add_member(:pod_properties, Shapes::ShapeRef.new(shape: EksPodProperties, location_name: "podProperties"))
     EksProperties.struct_class = Types::EksProperties
@@ -1092,6 +1116,10 @@ module Aws::Batch
 
     EksRequests.key = Shapes::ShapeRef.new(shape: String)
     EksRequests.value = Shapes::ShapeRef.new(shape: Quantity)
+
+    EksSeccompProfile.add_member(:type, Shapes::ShapeRef.new(shape: EksSeccompProfileType, required: true, location_name: "type"))
+    EksSeccompProfile.add_member(:localhost_profile, Shapes::ShapeRef.new(shape: EksSeccompLocalhostProfile, location_name: "localhostProfile"))
+    EksSeccompProfile.struct_class = Types::EksSeccompProfile
 
     EksSecret.add_member(:secret_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "secretName"))
     EksSecret.add_member(:optional, Shapes::ShapeRef.new(shape: Boolean, location_name: "optional"))

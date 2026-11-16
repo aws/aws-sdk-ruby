@@ -444,6 +444,12 @@
       "output_token": "NextToken",
       "result_key": "PrefixLists"
     },
+    "DescribeMetricCategories": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "MetricCategories"
+    },
     "DescribeMovingAddresses": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
@@ -497,6 +503,18 @@
       "limit_key": "MaxResults",
       "output_token": "NextToken",
       "result_key": "NetworkInterfaces"
+    },
+    "DescribeNetworkingFlexCostAllocationPolicies": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "FlexCostAllocationPolicies"
+    },
+    "DescribeNetworkingFlexCostAllocationPolicyAssociations": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "FcaPolicyAssociations"
     },
     "DescribePlacementGroups": {
       "result_key": "PlacementGroups"

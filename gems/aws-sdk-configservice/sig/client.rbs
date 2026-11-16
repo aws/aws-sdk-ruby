@@ -1244,6 +1244,11 @@ module Aws
                              azure: {
                                tenant_identifier: ::String,
                                client_identifier: ::String
+                             }?,
+                             gcp: {
+                               gcp_organization_id: ::String?,
+                               service_account_email: ::String,
+                               workload_identity_pool_provider: ::String
                              }?
                            },
                            ?tags: Array[

@@ -1635,6 +1635,13 @@ module Aws::EMR
       attr_accessor execution_role_arn: ::String
       attr_accessor log_uri: ::String
       attr_accessor encryption_key_arn: ::String
+      attr_accessor additional_info: Types::StepAdditionalInfo
+      SENSITIVE: []
+    end
+
+    class StepAdditionalInfo
+      attr_accessor resource_manager_application_ids: ::Array[::String]
+      attr_accessor resource_manager: ::String
       SENSITIVE: []
     end
 
@@ -1688,6 +1695,7 @@ module Aws::EMR
       attr_accessor status: Types::StepStatus
       attr_accessor log_uri: ::String
       attr_accessor encryption_key_arn: ::String
+      attr_accessor additional_info: Types::StepAdditionalInfo
       SENSITIVE: []
     end
 

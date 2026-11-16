@@ -260,6 +260,7 @@ module Aws
             'AccessAnalyzer' => 'access-analyzer',
             'Account' => 'account',
             'AccountAccess' => 'account-access',
+            'AccountAccessRuntime' => 'account-access-runtime',
             'AgentRegistry' => 'agent-registry',
             'AgentRegistryControl' => 'agent-registry-control',
             'Amplify' => 'amplify',

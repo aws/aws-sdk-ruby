@@ -317,7 +317,7 @@ module Aws::SNS
     class ListPhoneNumbersOptedOutResponse
       attr_accessor phone_numbers: ::Array[::String]
       attr_accessor next_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:phone_numbers]
     end
 
     class ListPlatformApplicationsInput

@@ -93,6 +93,19 @@ module Aws
       account_id: ::String?
     }
 
+      type image_scanning_configuration = {
+      image_scanning_enabled: bool?,
+      ecr_configuration: {
+        repository_name: ::String?,
+        container_tags: Array[::String]?
+      }?,
+      image_scanning_types: Array[("TEST_INSTANCE_CVE" | "ON_DEMAND_AMI_CVE")]?,
+      scan_result_condition: {
+        maximum_severity_label: ("INFORMATIONAL" | "LOW" | "MEDIUM" | "HIGH"),
+        fix_available: bool?
+      }?
+    }
+
       type workflow_configuration = {
       workflow_arn: ::String,
       parameters: Array[

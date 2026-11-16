@@ -429,6 +429,19 @@
         {"shape":"ResourcePolicyNotFoundException"}
       ]
     },
+    "DeregisterDefaultHostManagementConfiguration":{
+      "name":"DeregisterDefaultHostManagementConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeregisterDefaultHostManagementConfigurationRequest"},
+      "output":{"shape":"DeregisterDefaultHostManagementConfigurationResult"},
+      "errors":[
+        {"shape":"InternalServerError"}
+      ],
+      "idempotent":true
+    },
     "DeregisterManagedInstance":{
       "name":"DeregisterManagedInstance",
       "http":{
@@ -1743,6 +1756,19 @@
         {"shape":"ResourcePolicyNotFoundException"}
       ]
     },
+    "RegisterDefaultHostManagementConfiguration":{
+      "name":"RegisterDefaultHostManagementConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RegisterDefaultHostManagementConfigurationRequest"},
+      "output":{"shape":"RegisterDefaultHostManagementConfigurationResult"},
+      "errors":[
+        {"shape":"InternalServerError"}
+      ],
+      "idempotent":true
+    },
     "RegisterDefaultPatchBaseline":{
       "name":"RegisterDefaultPatchBaseline",
       "http":{
@@ -2070,6 +2096,7 @@
       "errors":[
         {"shape":"InternalServerError"},
         {"shape":"ResourceNotFoundException"},
+        {"shape":"ServiceQuotaExceededException"},
         {"shape":"ConflictException"}
       ]
     },
@@ -2958,7 +2985,7 @@
     },
     "AutomationActionName":{
       "type":"string",
-      "pattern":"^aws:[a-zA-Z]{3,25}$"
+      "pattern":"^aws:[a-zA-Z]{3,40}$"
     },
     "AutomationDefinitionNotApprovedException":{
       "type":"structure",
@@ -3022,7 +3049,8 @@
         "OpsItemId":{"shape":"String"},
         "AssociationId":{"shape":"String"},
         "ChangeRequestName":{"shape":"ChangeRequestName"},
-        "Variables":{"shape":"AutomationParameterMap"}
+        "Variables":{"shape":"AutomationParameterMap"},
+        "TargetsSummary":{"shape":"TargetsSummary"}
       }
     },
     "AutomationExecutionFilter":{
@@ -3412,7 +3440,8 @@
     "CloudConnectorConfiguration":{
       "type":"structure",
       "members":{
-        "AzureConfiguration":{"shape":"AzureConfiguration"}
+        "AzureConfiguration":{"shape":"AzureConfiguration"},
+        "GcpConfiguration":{"shape":"GcpConfiguration"}
       },
       "union":true
     },
@@ -3433,7 +3462,9 @@
       "type":"string",
       "enum":[
         "SubscriptionId",
-        "TenantId"
+        "TenantId",
+        "ProjectId",
+        "OrganizationId"
       ]
     },
     "CloudConnectorFilterList":{
@@ -3478,7 +3509,9 @@
         "Description":{"shape":"CloudConnectorDescription"},
         "RoleArn":{"shape":"CloudConnectorIamRoleArn"},
         "CreatedAt":{"shape":"DateTime"},
-        "UpdatedAt":{"shape":"DateTime"}
+        "UpdatedAt":{"shape":"DateTime"},
+        "Provider":{"shape":"Provider"},
+        "ConfigConnectorArn":{"shape":"ConfigConnectorArn"}
       }
     },
     "CloudConnectorSummaryList":{
@@ -4019,8 +4052,7 @@
       "required":[
         "DisplayName",
         "RoleArn",
-        "Configuration",
-        "ConfigConnectorArn"
+        "Configuration"
       ],
       "members":{
         "DisplayName":{"shape":"DisplayName"},
@@ -4215,6 +4247,19 @@
       },
       "exception":true
     },
+    "DHMCPermissionModel":{
+      "type":"string",
+      "enum":[
+        "SERVICE_MANAGED",
+        "SELF_MANAGED"
+      ]
+    },
+    "DHMCRoleArn":{
+      "type":"string",
+      "max":2048,
+      "min":20,
+      "pattern":"^arn:aws[a-z0-9-]*:iam::\\d{12}:role/[\\w+=,.@/-]+$"
+    },
     "DateTime":{"type":"timestamp"},
     "DefaultBaseline":{"type":"boolean"},
     "DefaultInstanceName":{
@@ -4405,6 +4450,14 @@
       ]
     },
     "DeliveryTimedOutCount":{"type":"integer"},
+    "DeregisterDefaultHostManagementConfigurationRequest":{
+      "type":"structure",
+      "members":{}
+    },
+    "DeregisterDefaultHostManagementConfigurationResult":{
+      "type":"structure",
+      "members":{}
+    },
     "DeregisterManagedInstanceRequest":{
       "type":"structure",
       "required":["InstanceId"],
@@ -5715,6 +5768,70 @@
         "Message":{"shape":"String"}
       },
       "exception":true
+    },
+    "GcpConfiguration":{
+      "type":"structure",
+      "required":[
+        "WorkloadIdentityPoolProvider",
+        "ServiceAccountEmail"
+      ],
+      "members":{
+        "OrganizationId":{"shape":"GcpOrganizationId"},
+        "WorkloadIdentityPoolProvider":{"shape":"GcpWorkloadIdentityPoolProvider"},
+        "ServiceAccountEmail":{"shape":"GcpServiceAccountEmail"},
+        "Targets":{"shape":"GcpConfigurationTargets"}
+      }
+    },
+    "GcpConfigurationTargets":{
+      "type":"structure",
+      "members":{
+        "Projects":{"shape":"GcpProjectList"}
+      },
+      "union":true
+    },
+    "GcpOrganizationId":{
+      "type":"string",
+      "max":19,
+      "min":1,
+      "pattern":"^[1-9][0-9]{0,18}$"
+    },
+    "GcpProject":{
+      "type":"structure",
+      "required":["ProjectId"],
+      "members":{
+        "ProjectId":{"shape":"GcpProjectId"},
+        "ProjectDisplayName":{"shape":"GcpProjectDisplayName"}
+      }
+    },
+    "GcpProjectDisplayName":{
+      "type":"string",
+      "max":128,
+      "min":0,
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}\\p{P}\\p{M}]*)$"
+    },
+    "GcpProjectId":{
+      "type":"string",
+      "max":30,
+      "min":6,
+      "pattern":"^[a-z][a-z0-9-]{4,28}[a-z0-9]$"
+    },
+    "GcpProjectList":{
+      "type":"list",
+      "member":{"shape":"GcpProject"},
+      "max":75,
+      "min":1
+    },
+    "GcpServiceAccountEmail":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"^[a-z][a-z0-9\\-]*[a-z0-9]@[a-z][a-z0-9\\-]*[a-z0-9]\\.iam\\.gserviceaccount\\.com$"
+    },
+    "GcpWorkloadIdentityPoolProvider":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"^projects/[1-9][0-9]{0,18}/locations/global/workloadIdentityPools\\/[a-z0-9-]{4,32}/providers/[a-z0-9-]{4,32}$"
     },
     "GetAccessTokenRequest":{
       "type":"structure",
@@ -10147,6 +10264,13 @@
         "TimedOutSteps":{"shape":"Integer"}
       }
     },
+    "Provider":{
+      "type":"string",
+      "enum":[
+        "Azure",
+        "GCP"
+      ]
+    },
     "PutComplianceItemsRequest":{
       "type":"structure",
       "required":[
@@ -10260,6 +10384,21 @@
       "member":{"shape":"Region"},
       "max":50,
       "min":1
+    },
+    "RegisterDefaultHostManagementConfigurationRequest":{
+      "type":"structure",
+      "required":["PermissionModel"],
+      "members":{
+        "PermissionModel":{"shape":"DHMCPermissionModel"},
+        "RoleArn":{"shape":"DHMCRoleArn"},
+        "Overwrite":{"shape":"Boolean"}
+      }
+    },
+    "RegisterDefaultHostManagementConfigurationResult":{
+      "type":"structure",
+      "members":{
+        "RoleArn":{"shape":"DHMCRoleArn"}
+      }
     },
     "RegisterDefaultPatchBaselineRequest":{
       "type":"structure",
@@ -11187,7 +11326,8 @@
         "AWS::EC2::Instance",
         "AWS::IoT::Thing",
         "AWS::SSM::ManagedInstance",
-        "Microsoft.Compute/virtualMachines"
+        "Microsoft.Compute/virtualMachines",
+        "compute.googleapis.com/Instance"
       ]
     },
     "StandardErrorContent":{
@@ -11641,6 +11781,16 @@
       "member":{"shape":"Target"},
       "max":5,
       "min":0
+    },
+    "TargetsSummary":{
+      "type":"structure",
+      "members":{
+        "TotalCount":{"shape":"Integer"},
+        "StartedCount":{"shape":"Integer"},
+        "CompletedCount":{"shape":"Integer"},
+        "SuccessfulCount":{"shape":"Integer"},
+        "FailedCount":{"shape":"Integer"}
+      }
     },
     "TerminateSessionRequest":{
       "type":"structure",
@@ -12253,6 +12403,8 @@
       "enum":[
         "TargetInaccessible",
         "TargetUnusable",
+        "TargetMissingPermissions",
+        "TargetApiDisabled",
         "TargetStateWarning",
         "AwsRoleAssumptionFailed",
         "WebIdentityTokenFailed",
@@ -12277,7 +12429,9 @@
       "type":"string",
       "enum":[
         "azure:tenant",
-        "azure:subscription"
+        "azure:subscription",
+        "gcp:organization",
+        "gcp:project"
       ]
     },
     "ValidationFindingType":{

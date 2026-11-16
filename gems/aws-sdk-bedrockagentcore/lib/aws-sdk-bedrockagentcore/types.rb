@@ -2364,6 +2364,28 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # The domains to include in or exclude from the results. A root domain
+    # also matches its subdomains. For example, `example.com` also matches
+    # `docs.example.com`.
+    #
+    # @!attribute [rw] include
+    #   The domains to return results from. Results from other domains are
+    #   not returned.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclude
+    #   The domains to never return results from.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DomainFilter AWS API Documentation
+    #
+    class DomainFilter < Struct.new(
+      :include,
+      :exclude)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An exception thrown when attempting to create a resource with an
     # identifier that already exists.
     #
@@ -5188,13 +5210,48 @@ module Aws::BedrockAgentCore
     #   Custom headers to include when connecting to the remote MCP server.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] outbound_auth
+    #   How the harness authenticates to this MCP server. Defaults to no
+    #   authentication.
+    #   @return [Types::HarnessRemoteMcpOutboundAuth]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/HarnessRemoteMcpConfig AWS API Documentation
     #
     class HarnessRemoteMcpConfig < Struct.new(
       :url,
-      :headers)
+      :headers,
+      :outbound_auth)
       SENSITIVE = [:url, :headers]
       include Aws::Structure
+    end
+
+    # Authentication method for calling a remote MCP server.
+    #
+    # @note HarnessRemoteMcpOutboundAuth is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] aws_iam
+    #   Sign requests to the remote MCP server with Signature Version 4
+    #   (SigV4) using the harness execution role. If you don't specify a
+    #   Region, the harness Region is used.
+    #   @return [Types::IamCredentialProvider]
+    #
+    # @!attribute [rw] none
+    #   No authentication.
+    #   @return [Types::Unit]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/HarnessRemoteMcpOutboundAuth AWS API Documentation
+    #
+    class HarnessRemoteMcpOutboundAuth < Struct.new(
+      :aws_iam,
+      :none,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AwsIam < HarnessRemoteMcpOutboundAuth; end
+      class None < HarnessRemoteMcpOutboundAuth; end
+      class Unknown < HarnessRemoteMcpOutboundAuth; end
     end
 
     # A skill available to the agent.
@@ -5640,6 +5697,31 @@ module Aws::BedrockAgentCore
       :name,
       :type,
       :server_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An IAM credential provider for authenticating requests. This structure
+    # contains the configuration for authenticating with a target endpoint
+    # using IAM credentials and SigV4 signing.
+    #
+    # @!attribute [rw] service
+    #   The name of the Amazon Web Services service used for SigV4 signing.
+    #   This value identifies the service to authenticate with when sending
+    #   requests to the target endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region used for SigV4 signing. If not
+    #   specified, defaults to the Region of the resource that makes the
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/IamCredentialProvider AWS API Documentation
+    #
+    class IamCredentialProvider < Struct.new(
+      :service,
+      :region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6249,6 +6331,14 @@ module Aws::BedrockAgentCore
     #   The identifier of the runtime session.
     #   @return [String]
     #
+    # @!attribute [rw] session_endpoint_url
+    #   The HTTPS endpoint that addresses this runtime session directly.
+    #   This value is returned only when the agent runtime is configured
+    #   with allowed ports and direct runtime access is available for the
+    #   session. If this value is not present, use `InvokeAgentRuntime` to
+    #   communicate with the session.
+    #   @return [String]
+    #
     # @!attribute [rw] mcp_session_id
     #   The identifier of the MCP session.
     #   @return [String]
@@ -6296,6 +6386,7 @@ module Aws::BedrockAgentCore
     #
     class InvokeAgentRuntimeResponse < Struct.new(
       :runtime_session_id,
+      :session_endpoint_url,
       :mcp_session_id,
       :mcp_protocol_version,
       :trace_id,
@@ -6543,6 +6634,50 @@ module Aws::BedrockAgentCore
     #
     class InvokeHarnessResponse < Struct.new(
       :stream)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request for the `InvokeWebSearch` operation.
+    #
+    # @!attribute [rw] web_search_id
+    #   The identifier of the web search tool to invoke. The Amazon Web
+    #   Services-managed web search tool is `web-search.v1`.
+    #   @return [String]
+    #
+    # @!attribute [rw] search_query
+    #   The text to search for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. Defaults to 25.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   The filters to apply to the search results.
+    #   @return [Types::WebSearchFilters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/InvokeWebSearchInput AWS API Documentation
+    #
+    class InvokeWebSearchInput < Struct.new(
+      :web_search_id,
+      :search_query,
+      :max_results,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response for the `InvokeWebSearch` operation.
+    #
+    # @!attribute [rw] results
+    #   The search results, in ranked order.
+    #   @return [Array<Types::WebSearchResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/InvokeWebSearchOutput AWS API Documentation
+    #
+    class InvokeWebSearchOutput < Struct.new(
+      :results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8931,6 +9066,30 @@ module Aws::BedrockAgentCore
       class Unknown < ProxyCredentials; end
     end
 
+    # A publication time range for the results. Both bounds are optional,
+    # and both are inclusive. If `publishedAfter` is later than
+    # `publishedBefore`, the request fails with a `ValidationException`.
+    #
+    # @!attribute [rw] published_after
+    #   The earliest publication time of the results, inclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] published_before
+    #   The latest publication time of the results, inclusive. A date
+    #   without a time, such as one passed to the AWS CLI, means midnight
+    #   UTC. To include a whole day, use the last second of that day, for
+    #   example `2026-01-31T23:59:59Z`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PublishedDateFilter AWS API Documentation
+    #
+    class PublishedDateFilter < Struct.new(
+      :published_after,
+      :published_before)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for a recommendation, varying by recommendation
     # type.
     #
@@ -9793,6 +9952,27 @@ module Aws::BedrockAgentCore
     class ServiceQuotaExceededException < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The service can't handle the request right now. Retry the request. If
+    # the response includes `retryAfterSeconds`, wait that many seconds
+    # before you retry.
+    #
+    # @!attribute [rw] message
+    #   A message that describes the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   The number of seconds to wait before you retry the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message,
+      :retry_after_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11876,6 +12056,55 @@ module Aws::BedrockAgentCore
     class ViewPort < Struct.new(
       :width,
       :height)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filters to apply to a web search.
+    #
+    # @!attribute [rw] domain_filter
+    #   The domains to include in or exclude from the results.
+    #   @return [Types::DomainFilter]
+    #
+    # @!attribute [rw] published_date_filter
+    #   The publication time range of the results.
+    #   @return [Types::PublishedDateFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/WebSearchFilters AWS API Documentation
+    #
+    class WebSearchFilters < Struct.new(
+      :domain_filter,
+      :published_date_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A web search result.
+    #
+    # @!attribute [rw] title
+    #   The title of the page.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL of the page.
+    #   @return [String]
+    #
+    # @!attribute [rw] text
+    #   A text extract from the page.
+    #   @return [String]
+    #
+    # @!attribute [rw] published_at
+    #   The time the page was published. This field is absent when the
+    #   publication time is not known.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/WebSearchResult AWS API Documentation
+    #
+    class WebSearchResult < Struct.new(
+      :title,
+      :url,
+      :text,
+      :published_at)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -16,6 +16,9 @@ module Aws::ConnectContactLens
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     Categories = Shapes::StructureShape.new(name: 'Categories')
+    CategoriesAttributeAndCondition = Shapes::StructureShape.new(name: 'CategoriesAttributeAndCondition')
+    CategoriesAttributeFilter = Shapes::StructureShape.new(name: 'CategoriesAttributeFilter')
+    CategoriesAttributeOrConditionList = Shapes::ListShape.new(name: 'CategoriesAttributeOrConditionList')
     CategoryDetails = Shapes::StructureShape.new(name: 'CategoryDetails')
     CategoryName = Shapes::StringShape.new(name: 'CategoryName')
     CharacterOffset = Shapes::IntegerShape.new(name: 'CharacterOffset')
@@ -50,10 +53,17 @@ module Aws::ConnectContactLens
     PostContactSummaryContent = Shapes::StringShape.new(name: 'PostContactSummaryContent')
     PostContactSummaryFailureCode = Shapes::StringShape.new(name: 'PostContactSummaryFailureCode')
     PostContactSummaryStatus = Shapes::StringShape.new(name: 'PostContactSummaryStatus')
+    RealTimeContactAnalysisSegmentsFilter = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisSegmentsFilter')
     RealtimeContactAnalysisSegment = Shapes::StructureShape.new(name: 'RealtimeContactAnalysisSegment')
     RealtimeContactAnalysisSegments = Shapes::ListShape.new(name: 'RealtimeContactAnalysisSegments')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RuleId = Shapes::StringShape.new(name: 'RuleId')
     SentimentValue = Shapes::StringShape.new(name: 'SentimentValue')
+    TagAndConditionList = Shapes::ListShape.new(name: 'TagAndConditionList')
+    TagComparisonType = Shapes::StringShape.new(name: 'TagComparisonType')
+    TagCondition = Shapes::StructureShape.new(name: 'TagCondition')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Transcript = Shapes::StructureShape.new(name: 'Transcript')
     TranscriptContent = Shapes::StringShape.new(name: 'TranscriptContent')
@@ -66,7 +76,18 @@ module Aws::ConnectContactLens
     Categories.add_member(:matched_details, Shapes::ShapeRef.new(shape: MatchedDetails, required: true, location_name: "MatchedDetails"))
     Categories.struct_class = Types::Categories
 
+    CategoriesAttributeAndCondition.add_member(:tag_conditions, Shapes::ShapeRef.new(shape: TagAndConditionList, location_name: "TagConditions"))
+    CategoriesAttributeAndCondition.struct_class = Types::CategoriesAttributeAndCondition
+
+    CategoriesAttributeFilter.add_member(:or_conditions, Shapes::ShapeRef.new(shape: CategoriesAttributeOrConditionList, location_name: "OrConditions"))
+    CategoriesAttributeFilter.add_member(:and_condition, Shapes::ShapeRef.new(shape: CategoriesAttributeAndCondition, location_name: "AndCondition"))
+    CategoriesAttributeFilter.add_member(:tag_condition, Shapes::ShapeRef.new(shape: TagCondition, location_name: "TagCondition"))
+    CategoriesAttributeFilter.struct_class = Types::CategoriesAttributeFilter
+
+    CategoriesAttributeOrConditionList.member = Shapes::ShapeRef.new(shape: CategoriesAttributeAndCondition)
+
     CategoryDetails.add_member(:points_of_interest, Shapes::ShapeRef.new(shape: PointsOfInterest, required: true, location_name: "PointsOfInterest"))
+    CategoryDetails.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, location_name: "RuleId"))
     CategoryDetails.struct_class = Types::CategoryDetails
 
     CharacterOffsets.add_member(:begin_offset_char, Shapes::ShapeRef.new(shape: CharacterOffset, required: true, location_name: "BeginOffsetChar"))
@@ -101,6 +122,7 @@ module Aws::ConnectContactLens
     ListRealtimeContactAnalysisSegmentsRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
     ListRealtimeContactAnalysisSegmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListRealtimeContactAnalysisSegmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListRealtimeContactAnalysisSegmentsRequest.add_member(:list_filter, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSegmentsFilter, location_name: "ListFilter"))
     ListRealtimeContactAnalysisSegmentsRequest.struct_class = Types::ListRealtimeContactAnalysisSegmentsRequest
 
     ListRealtimeContactAnalysisSegmentsResponse.add_member(:segments, Shapes::ShapeRef.new(shape: RealtimeContactAnalysisSegments, required: true, location_name: "Segments"))
@@ -123,6 +145,9 @@ module Aws::ConnectContactLens
     PostContactSummary.add_member(:failure_code, Shapes::ShapeRef.new(shape: PostContactSummaryFailureCode, location_name: "FailureCode"))
     PostContactSummary.struct_class = Types::PostContactSummary
 
+    RealTimeContactAnalysisSegmentsFilter.add_member(:categories_attribute_filter, Shapes::ShapeRef.new(shape: CategoriesAttributeFilter, location_name: "CategoriesAttributeFilter"))
+    RealTimeContactAnalysisSegmentsFilter.struct_class = Types::RealTimeContactAnalysisSegmentsFilter
+
     RealtimeContactAnalysisSegment.add_member(:transcript, Shapes::ShapeRef.new(shape: Transcript, location_name: "Transcript"))
     RealtimeContactAnalysisSegment.add_member(:categories, Shapes::ShapeRef.new(shape: Categories, location_name: "Categories"))
     RealtimeContactAnalysisSegment.add_member(:post_contact_summary, Shapes::ShapeRef.new(shape: PostContactSummary, location_name: "PostContactSummary"))
@@ -133,6 +158,13 @@ module Aws::ConnectContactLens
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    TagAndConditionList.member = Shapes::ShapeRef.new(shape: TagCondition)
+
+    TagCondition.add_member(:tag_key, Shapes::ShapeRef.new(shape: TagKey, location_name: "TagKey"))
+    TagCondition.add_member(:tag_value, Shapes::ShapeRef.new(shape: TagValue, location_name: "TagValue"))
+    TagCondition.add_member(:comparison_type, Shapes::ShapeRef.new(shape: TagComparisonType, location_name: "ComparisonType"))
+    TagCondition.struct_class = Types::TagCondition
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException

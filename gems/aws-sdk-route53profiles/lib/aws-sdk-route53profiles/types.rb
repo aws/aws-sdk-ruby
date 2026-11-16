@@ -24,10 +24,6 @@ module Aws::Route53Profiles
       include Aws::Structure
     end
 
-    # @!attribute [rw] name
-    #   A name for the association.
-    #   @return [String]
-    #
     # @!attribute [rw] profile_id
     #   ID of the Profile.
     #   @return [String]
@@ -36,26 +32,42 @@ module Aws::Route53Profiles
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   A name for the association.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of the tag keys and values that you want to identify the
     #   Profile association.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] priority
+    #   The priority of the Profile association. Route 53 VPC Resolver
+    #   evaluates the Profile associations for a VPC in priority order,
+    #   starting with the lowest value.
+    #
+    #   When the VPC already has a Profile association, you must specify a
+    #   priority that no other Profile association for the VPC uses. If you
+    #   omit the priority for the first association with a VPC, the
+    #   association gets priority 100.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/AssociateProfileRequest AWS API Documentation
     #
     class AssociateProfileRequest < Struct.new(
-      :name,
       :profile_id,
       :resource_id,
-      :tags)
+      :name,
+      :tags,
+      :priority)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] profile_association
     #   The association that you just created. The association has an ID
-    #   that you can use to identify it in other requests, like update and
-    #   delete.
+    #   that you can use to identify it in other requests, such as update
+    #   and delete.
     #   @return [Types::ProfileAssociation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/AssociateProfileResponse AWS API Documentation
@@ -66,16 +78,18 @@ module Aws::Route53Profiles
       include Aws::Structure
     end
 
-    # @!attribute [rw] name
-    #   Name for the resource association.
-    #   @return [String]
-    #
     # @!attribute [rw] profile_id
     #   ID of the Profile.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   Amazon resource number, ARN, of the DNS resource.
+    #   Amazon resource number, ARN, of the resource to associate. Either a
+    #   private hosted zone, DNS Firewall rule group, Resolver rule, or an
+    #   interface VPC endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Name for the resource association.
     #   @return [String]
     #
     # @!attribute [rw] resource_properties
@@ -89,9 +103,9 @@ module Aws::Route53Profiles
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/AssociateResourceToProfileRequest AWS API Documentation
     #
     class AssociateResourceToProfileRequest < Struct.new(
-      :name,
       :profile_id,
       :resource_arn,
+      :name,
       :resource_properties)
       SENSITIVE = []
       include Aws::Structure
@@ -123,6 +137,10 @@ module Aws::Route53Profiles
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   A name for the Profile.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   `ClientToken` is an idempotency token that ensures a call to
     #   `CreateProfile` completes only once. You choose the value to pass.
@@ -134,10 +152,6 @@ module Aws::Route53Profiles
     #   not need to pass this option.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   A name for the Profile.
-    #   @return [String]
-    #
     # @!attribute [rw] tags
     #   A list of the tag keys and values that you want to associate with
     #   the Route 53 Profile.
@@ -146,8 +160,8 @@ module Aws::Route53Profiles
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/CreateProfileRequest AWS API Documentation
     #
     class CreateProfileRequest < Struct.new(
-      :client_token,
       :name,
+      :client_token,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -352,18 +366,18 @@ module Aws::Route53Profiles
 
     # One or more parameters in this request are not valid.
     #
-    # @!attribute [rw] field_name
-    #   The parameter field name for the invalid parameter exception.
+    # @!attribute [rw] message
     #   @return [String]
     #
-    # @!attribute [rw] message
+    # @!attribute [rw] field_name
+    #   The parameter field name for the invalid parameter exception.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/InvalidParameterException AWS API Documentation
     #
     class InvalidParameterException < Struct.new(
-      :field_name,
-      :message)
+      :message,
+      :field_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -386,6 +400,14 @@ module Aws::Route53Profiles
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_id
+    #   ID of the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_id
+    #   ID of the Profile.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of objects that you want to return for this
     #   request. If more objects are available, in the response, a
@@ -406,25 +428,22 @@ module Aws::Route53Profiles
     #   for the prior request in your next request.
     #   @return [String]
     #
-    # @!attribute [rw] profile_id
-    #   ID of the Profile.
-    #   @return [String]
-    #
-    # @!attribute [rw] resource_id
-    #   ID of the VPC.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/ListProfileAssociationsRequest AWS API Documentation
     #
     class ListProfileAssociationsRequest < Struct.new(
-      :max_results,
-      :next_token,
+      :resource_id,
       :profile_id,
-      :resource_id)
+      :max_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] profile_associations
+    #   A complex type that containts settings information about the
+    #   profile's VPC associations.
+    #   @return [Array<Types::ProfileAssociation>]
+    #
     # @!attribute [rw] next_token
     #   If more than `MaxResults` profile associations match the specified
     #   criteria, you can submit another `ListProfileAssociations` request
@@ -432,40 +451,15 @@ module Aws::Route53Profiles
     #   value of `NextToken` from the previous response.
     #   @return [String]
     #
-    # @!attribute [rw] profile_associations
-    #   A complex type that containts settings information about the
-    #   profile's VPC associations.
-    #   @return [Array<Types::ProfileAssociation>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/ListProfileAssociationsResponse AWS API Documentation
     #
     class ListProfileAssociationsResponse < Struct.new(
-      :next_token,
-      :profile_associations)
+      :profile_associations,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] max_results
-    #   The maximum number of objects that you want to return for this
-    #   request. If more objects are available, in the response, a
-    #   `NextToken` value, which you can use in a subsequent call to get the
-    #   next batch of objects, is provided.
-    #
-    #   If you don't specify a value for `MaxResults`, up to 100 objects
-    #   are returned.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
-    #   For the first call to this list request, omit this value.
-    #
-    #   When you request a list of objects, at most the number of objects
-    #   specified by `MaxResults` is returned. If more objects are available
-    #   for retrieval, a `NextToken` value is returned in the response. To
-    #   retrieve the next batch of objects, use the token that was returned
-    #   for the prior request in your next request.
-    #   @return [String]
-    #
     # @!attribute [rw] profile_id
     #   The ID of the Profile.
     #   @return [String]
@@ -474,17 +468,48 @@ module Aws::Route53Profiles
     #   ID of a resource if you want information on only one type.
     #   @return [String]
     #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of a resource. If you specify this
+    #   parameter, only the association with that resource is returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that you want to return for this
+    #   request. If more objects are available, in the response, a
+    #   `NextToken` value, which you can use in a subsequent call to get the
+    #   next batch of objects, is provided.
+    #
+    #   If you don't specify a value for `MaxResults`, up to 100 objects
+    #   are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   For the first call to this list request, omit this value.
+    #
+    #   When you request a list of objects, at most the number of objects
+    #   specified by `MaxResults` is returned. If more objects are available
+    #   for retrieval, a `NextToken` value is returned in the response. To
+    #   retrieve the next batch of objects, use the token that was returned
+    #   for the prior request in your next request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/ListProfileResourceAssociationsRequest AWS API Documentation
     #
     class ListProfileResourceAssociationsRequest < Struct.new(
-      :max_results,
-      :next_token,
       :profile_id,
-      :resource_type)
+      :resource_type,
+      :resource_arn,
+      :max_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] profile_resource_associations
+    #   Information about the profile resource association that you
+    #   specified in a `GetProfileResourceAssociation` request.
+    #   @return [Array<Types::ProfileResourceAssociation>]
+    #
     # @!attribute [rw] next_token
     #   If more than `MaxResults` resource associations match the specified
     #   criteria, you can submit another `ListProfileResourceAssociations`
@@ -492,16 +517,11 @@ module Aws::Route53Profiles
     #   specify the value of `NextToken` from the previous response.
     #   @return [String]
     #
-    # @!attribute [rw] profile_resource_associations
-    #   Information about the profile resource association that you
-    #   specified in a `GetProfileResourceAssociation` request.
-    #   @return [Array<Types::ProfileResourceAssociation>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/ListProfileResourceAssociationsResponse AWS API Documentation
     #
     class ListProfileResourceAssociationsResponse < Struct.new(
-      :next_token,
-      :profile_resource_associations)
+      :profile_resource_associations,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -535,6 +555,10 @@ module Aws::Route53Profiles
       include Aws::Structure
     end
 
+    # @!attribute [rw] profile_summaries
+    #   Summary information about the Profiles.
+    #   @return [Array<Types::ProfileSummary>]
+    #
     # @!attribute [rw] next_token
     #   If more than `MaxResults` resource associations match the specified
     #   criteria, you can submit another `ListProfiles` request to get the
@@ -542,15 +566,11 @@ module Aws::Route53Profiles
     #   `NextToken` from the previous response.
     #   @return [String]
     #
-    # @!attribute [rw] profile_summaries
-    #   Summary information about the Profiles.
-    #   @return [Array<Types::ProfileSummary>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/ListProfilesResponse AWS API Documentation
     #
     class ListProfilesResponse < Struct.new(
-      :next_token,
-      :profile_summaries)
+      :profile_summaries,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -583,28 +603,13 @@ module Aws::Route53Profiles
 
     # A complex type that includes settings for a Route 53 Profile.
     #
-    # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the Profile.
-    #   @return [String]
-    #
-    # @!attribute [rw] client_token
-    #   The `ClientToken` value that was assigned when the Profile was
-    #   created.
-    #   @return [String]
-    #
-    # @!attribute [rw] creation_time
-    #   The date and time that the Profile was created, in Unix time format
-    #   and Coordinated Universal Time (UTC).
-    #   @return [Time]
-    #
     # @!attribute [rw] id
     #   ID of the Profile.
     #   @return [String]
     #
-    # @!attribute [rw] modification_time
-    #   The date and time that the Profile was modified, in Unix time format
-    #   and Coordinated Universal Time (UTC).
-    #   @return [Time]
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Profile.
+    #   @return [String]
     #
     # @!attribute [rw] name
     #   Name of the Profile.
@@ -612,10 +617,6 @@ module Aws::Route53Profiles
     #
     # @!attribute [rw] owner_id
     #   Amazon Web Services account ID of the Profile owner.
-    #   @return [String]
-    #
-    # @!attribute [rw] share_status
-    #   Sharing status for the Profile.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -627,38 +628,47 @@ module Aws::Route53Profiles
     #   Profile.
     #   @return [String]
     #
+    # @!attribute [rw] share_status
+    #   Sharing status for the Profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the Profile was created, in Unix time format
+    #   and Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] modification_time
+    #   The date and time that the Profile was modified, in Unix time format
+    #   and Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] client_token
+    #   The `ClientToken` value that was assigned when the Profile was
+    #   created.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/Profile AWS API Documentation
     #
     class Profile < Struct.new(
-      :arn,
-      :client_token,
-      :creation_time,
       :id,
-      :modification_time,
+      :arn,
       :name,
       :owner_id,
-      :share_status,
       :status,
-      :status_message)
+      :status_message,
+      :share_status,
+      :creation_time,
+      :modification_time,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # An association between a Route 53 Profile and a VPC.
     #
-    # @!attribute [rw] creation_time
-    #   The date and time that the Profile association was created, in Unix
-    #   time format and Coordinated Universal Time (UTC).
-    #   @return [Time]
-    #
     # @!attribute [rw] id
     #   ID of the Profile association.
     #   @return [String]
-    #
-    # @!attribute [rw] modification_time
-    #   The date and time that the Profile association was modified, in Unix
-    #   time format and Coordinated Universal Time (UTC).
-    #   @return [Time]
     #
     # @!attribute [rw] name
     #   Name of the Profile association.
@@ -684,37 +694,45 @@ module Aws::Route53Profiles
     #   Additional information about the Profile association.
     #   @return [String]
     #
+    # @!attribute [rw] creation_time
+    #   The date and time that the Profile association was created, in Unix
+    #   time format and Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] modification_time
+    #   The date and time that the Profile association was modified, in Unix
+    #   time format and Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] priority
+    #   The priority of the Profile association. Route 53 VPC Resolver
+    #   evaluates the Profile associations for a VPC in priority order,
+    #   starting with the lowest value. Associations created without a
+    #   priority have priority 100.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/ProfileAssociation AWS API Documentation
     #
     class ProfileAssociation < Struct.new(
-      :creation_time,
       :id,
-      :modification_time,
       :name,
       :owner_id,
       :profile_id,
       :resource_id,
       :status,
-      :status_message)
+      :status_message,
+      :creation_time,
+      :modification_time,
+      :priority)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The association between a Route 53 Profile and resources.
     #
-    # @!attribute [rw] creation_time
-    #   The date and time that the Profile resource association was created,
-    #   in Unix time format and Coordinated Universal Time (UTC).
-    #   @return [Time]
-    #
     # @!attribute [rw] id
     #   ID of the Profile resource association.
     #   @return [String]
-    #
-    # @!attribute [rw] modification_time
-    #   The date and time that the Profile resource association was
-    #   modified, in Unix time format and Coordinated Universal Time (UTC).
-    #   @return [Time]
     #
     # @!attribute [rw] name
     #   Name of the Profile resource association.
@@ -733,14 +751,15 @@ module Aws::Route53Profiles
     #   The Amazon Resource Name (ARN) of the resource association.
     #   @return [String]
     #
+    # @!attribute [rw] resource_type
+    #   Resource type, such as a private hosted zone, interface VPC
+    #   endpoint, Resolver query log configuration, or DNS Firewall rule
+    #   group.
+    #   @return [String]
+    #
     # @!attribute [rw] resource_properties
     #   If the DNS resource is a DNS Firewall rule group, this indicates the
     #   priority.
-    #   @return [String]
-    #
-    # @!attribute [rw] resource_type
-    #   Resource type, such as a private hosted zone, or DNS Firewall rule
-    #   group.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -751,32 +770,42 @@ module Aws::Route53Profiles
     #   Additional information about the Profile resource association.
     #   @return [String]
     #
+    # @!attribute [rw] creation_time
+    #   The date and time that the Profile resource association was created,
+    #   in Unix time format and Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] modification_time
+    #   The date and time that the Profile resource association was
+    #   modified, in Unix time format and Coordinated Universal Time (UTC).
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/ProfileResourceAssociation AWS API Documentation
     #
     class ProfileResourceAssociation < Struct.new(
-      :creation_time,
       :id,
-      :modification_time,
       :name,
       :owner_id,
       :profile_id,
       :resource_arn,
-      :resource_properties,
       :resource_type,
+      :resource_properties,
       :status,
-      :status_message)
+      :status_message,
+      :creation_time,
+      :modification_time)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Summary information about a Route 53 Profile.
     #
-    # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the Profile.
-    #   @return [String]
-    #
     # @!attribute [rw] id
     #   ID of the Profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Profile.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -790,8 +819,8 @@ module Aws::Route53Profiles
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/ProfileSummary AWS API Documentation
     #
     class ProfileSummary < Struct.new(
-      :arn,
       :id,
+      :arn,
       :name,
       :share_status)
       SENSITIVE = []
@@ -910,12 +939,52 @@ module Aws::Route53Profiles
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # @!attribute [rw] name
-    #   Name of the resource association.
+    # @!attribute [rw] profile_association_id
+    #   The ID of the Profile association to update.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The name of the Profile association.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The new priority of the Profile association. Route 53 VPC Resolver
+    #   evaluates the Profile associations for a VPC in priority order,
+    #   starting with the lowest value.
+    #
+    #   The priority must be unique among the Profile associations for the
+    #   VPC.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/UpdateProfileAssociationRequest AWS API Documentation
+    #
+    class UpdateProfileAssociationRequest < Struct.new(
+      :profile_association_id,
+      :name,
+      :priority)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profile_association
+    #   Information about the `UpdateProfileAssociation` request, including
+    #   a status message.
+    #   @return [Types::ProfileAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/UpdateProfileAssociationResponse AWS API Documentation
+    #
+    class UpdateProfileAssociationResponse < Struct.new(
+      :profile_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] profile_resource_association_id
     #   ID of the resource association.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Name of the resource association.
     #   @return [String]
     #
     # @!attribute [rw] resource_properties
@@ -929,8 +998,8 @@ module Aws::Route53Profiles
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53profiles-2018-05-10/UpdateProfileResourceAssociationRequest AWS API Documentation
     #
     class UpdateProfileResourceAssociationRequest < Struct.new(
-      :name,
       :profile_resource_association_id,
+      :name,
       :resource_properties)
       SENSITIVE = []
       include Aws::Structure

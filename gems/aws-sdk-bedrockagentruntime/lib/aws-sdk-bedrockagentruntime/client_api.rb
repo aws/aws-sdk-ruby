@@ -59,6 +59,9 @@ module Aws::BedrockAgentRuntime
     AgenticRetrieveCitationList = Shapes::ListShape.new(name: 'AgenticRetrieveCitationList')
     AgenticRetrieveCitationReference = Shapes::StructureShape.new(name: 'AgenticRetrieveCitationReference')
     AgenticRetrieveCitationReferenceList = Shapes::ListShape.new(name: 'AgenticRetrieveCitationReferenceList')
+    AgenticRetrieveCodeExecutionDetails = Shapes::StructureShape.new(name: 'AgenticRetrieveCodeExecutionDetails')
+    AgenticRetrieveCodeExecutionDocument = Shapes::StructureShape.new(name: 'AgenticRetrieveCodeExecutionDocument')
+    AgenticRetrieveCodeExecutionDocumentList = Shapes::ListShape.new(name: 'AgenticRetrieveCodeExecutionDocumentList')
     AgenticRetrieveConfiguration = Shapes::StructureShape.new(name: 'AgenticRetrieveConfiguration')
     AgenticRetrieveConfigurationMaxAgentIterationInteger = Shapes::IntegerShape.new(name: 'AgenticRetrieveConfigurationMaxAgentIterationInteger')
     AgenticRetrieveFailure = Shapes::StructureShape.new(name: 'AgenticRetrieveFailure')
@@ -454,6 +457,7 @@ module Aws::BedrockAgentRuntime
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxTokens = Shapes::IntegerShape.new(name: 'MaxTokens')
     MaximumLength = Shapes::IntegerShape.new(name: 'MaximumLength')
+    MediaId = Shapes::StringShape.new(name: 'MediaId')
     Memories = Shapes::ListShape.new(name: 'Memories')
     Memory = Shapes::UnionShape.new(name: 'Memory')
     MemoryId = Shapes::StringShape.new(name: 'MemoryId')
@@ -793,6 +797,7 @@ module Aws::BedrockAgentRuntime
 
     AgentTraces.member = Shapes::ShapeRef.new(shape: TracePart, event: true)
 
+    AgenticRetrieveAction.add_member(:code_execution, Shapes::ShapeRef.new(shape: AgenticRetrieveCodeExecutionDetails, location_name: "codeExecution"))
     AgenticRetrieveAction.add_member(:full_document_expansion, Shapes::ShapeRef.new(shape: AgenticRetrieveFullDocExpansionDetails, location_name: "fullDocumentExpansion"))
     AgenticRetrieveAction.add_member(:memory_retrieve, Shapes::ShapeRef.new(shape: AgenticRetrieveMemoryRetrieveDetails, location_name: "memoryRetrieve"))
     AgenticRetrieveAction.add_member(:retrieve, Shapes::ShapeRef.new(shape: AgenticRetrieveActionDetails, location_name: "retrieve"))
@@ -829,6 +834,15 @@ module Aws::BedrockAgentRuntime
     AgenticRetrieveCitationReference.struct_class = Types::AgenticRetrieveCitationReference
 
     AgenticRetrieveCitationReferenceList.member = Shapes::ShapeRef.new(shape: AgenticRetrieveCitationReference)
+
+    AgenticRetrieveCodeExecutionDetails.add_member(:documents, Shapes::ShapeRef.new(shape: AgenticRetrieveCodeExecutionDocumentList, location_name: "documents"))
+    AgenticRetrieveCodeExecutionDetails.struct_class = Types::AgenticRetrieveCodeExecutionDetails
+
+    AgenticRetrieveCodeExecutionDocument.add_member(:document_id, Shapes::ShapeRef.new(shape: String, location_name: "documentId"))
+    AgenticRetrieveCodeExecutionDocument.add_member(:source_retriever, Shapes::ShapeRef.new(shape: AgenticRetrieveSourceRetriever, location_name: "sourceRetriever"))
+    AgenticRetrieveCodeExecutionDocument.struct_class = Types::AgenticRetrieveCodeExecutionDocument
+
+    AgenticRetrieveCodeExecutionDocumentList.member = Shapes::ShapeRef.new(shape: AgenticRetrieveCodeExecutionDocument)
 
     AgenticRetrieveConfiguration.add_member(:foundation_model_configuration, Shapes::ShapeRef.new(shape: FoundationModelConfiguration, location_name: "foundationModelConfiguration"))
     AgenticRetrieveConfiguration.add_member(:foundation_model_type, Shapes::ShapeRef.new(shape: FoundationModelType, location_name: "foundationModelType"))
@@ -1645,6 +1659,7 @@ module Aws::BedrockAgentRuntime
     GetDocumentContentRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location: "uri", location_name: "dataSourceId"))
     GetDocumentContentRequest.add_member(:document_id, Shapes::ShapeRef.new(shape: DocumentId, required: true, location: "uri", location_name: "documentId"))
     GetDocumentContentRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: KnowledgeBaseIdentifier, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    GetDocumentContentRequest.add_member(:media_id, Shapes::ShapeRef.new(shape: MediaId, location_name: "mediaId"))
     GetDocumentContentRequest.add_member(:output_format, Shapes::ShapeRef.new(shape: DocumentOutputFormat, location_name: "outputFormat"))
     GetDocumentContentRequest.add_member(:user_context, Shapes::ShapeRef.new(shape: UserContext, location_name: "userContext"))
     GetDocumentContentRequest.struct_class = Types::GetDocumentContentRequest

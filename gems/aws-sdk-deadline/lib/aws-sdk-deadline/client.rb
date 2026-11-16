@@ -264,7 +264,8 @@ module Aws::Deadline
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::Deadline
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -2121,7 +2122,7 @@ module Aws::Deadline
     #           accelerator_capabilities: {
     #             selections: [ # required
     #               {
-    #                 name: "t4", # required, accepts t4, a10g, l4, l40s, rtx-pro-server-6000
+    #                 name: "t4", # required, accepts t4, a10g, l4, l40s, rtx-pro-server-6000, rtx-pro-4500
     #                 runtime: "AcceleratorRuntime",
     #               },
     #             ],
@@ -2856,7 +2857,7 @@ module Aws::Deadline
     end
 
     # Creates a worker. A worker tells your instance how much processing
-    # power (vCPU), and memory (GiB) you’ll need to assemble the digital
+    # power (vCPU), and memory (GiB) you'll need to assemble the digital
     # assets held within a particular instance. You can specify certain
     # instance types to use, or let the worker know which instances types to
     # exclude.
@@ -3642,7 +3643,7 @@ module Aws::Deadline
     #   resp.configuration.service_managed_ec2.instance_capabilities.root_ebs_volume.iops #=> Integer
     #   resp.configuration.service_managed_ec2.instance_capabilities.root_ebs_volume.throughput_mi_b #=> Integer
     #   resp.configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.selections #=> Array
-    #   resp.configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.selections[0].name #=> String, one of "t4", "a10g", "l4", "l40s", "rtx-pro-server-6000"
+    #   resp.configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.selections[0].name #=> String, one of "t4", "a10g", "l4", "l40s", "rtx-pro-server-6000", "rtx-pro-4500"
     #   resp.configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.selections[0].runtime #=> String
     #   resp.configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.count.min #=> Integer
     #   resp.configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.count.max #=> Integer
@@ -5214,7 +5215,7 @@ module Aws::Deadline
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.root_ebs_volume.iops #=> Integer
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.root_ebs_volume.throughput_mi_b #=> Integer
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.selections #=> Array
-    #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.selections[0].name #=> String, one of "t4", "a10g", "l4", "l40s", "rtx-pro-server-6000"
+    #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.selections[0].name #=> String, one of "t4", "a10g", "l4", "l40s", "rtx-pro-server-6000", "rtx-pro-4500"
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.selections[0].runtime #=> String
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.count.min #=> Integer
     #   resp.fleets[0].configuration.service_managed_ec2.instance_capabilities.accelerator_capabilities.count.max #=> Integer
@@ -5971,11 +5972,11 @@ module Aws::Deadline
     # @option params [String] :status
     #   The status of the queues listed.
     #
-    #   * `ACTIVE`–The queues are active.
+    #   * `ACTIVE` - The queues are active.
     #
-    #   * `SCHEDULING`–The queues are scheduling.
+    #   * `SCHEDULING` - The queues are scheduling.
     #
-    #   * `SCHEDULING_BLOCKED`–The queue scheduling is blocked for these
+    #   * `SCHEDULING_BLOCKED` - The queue scheduling is blocked for these
     #     queues.
     #
     # @return [Types::ListQueuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -7399,9 +7400,9 @@ module Aws::Deadline
     # @option params [String] :status
     #   Updates the status of the budget.
     #
-    #   * `ACTIVE`–The budget is being evaluated.
+    #   * `ACTIVE` - The budget is being evaluated.
     #
-    #   * `INACTIVE`–The budget is inactive. This can include Expired,
+    #   * `INACTIVE` - The budget is inactive. This can include Expired,
     #     Canceled, or deleted Deleted statuses.
     #
     # @option params [Float] :approximate_dollar_limit
@@ -7562,7 +7563,9 @@ module Aws::Deadline
     #   resulting in 11 total workers.
     #
     # @option params [Types::FleetConfiguration] :configuration
-    #   The fleet configuration to update.
+    #   The fleet configuration to update. The new configuration replaces the
+    #   existing one, so include every setting you want to keep. Settings that
+    #   you omit revert to their defaults.
     #
     # @option params [Types::HostConfiguration] :host_configuration
     #   Provides a script that runs as a worker is starting up that you can
@@ -7646,7 +7649,7 @@ module Aws::Deadline
     #           accelerator_capabilities: {
     #             selections: [ # required
     #               {
-    #                 name: "t4", # required, accepts t4, a10g, l4, l40s, rtx-pro-server-6000
+    #                 name: "t4", # required, accepts t4, a10g, l4, l40s, rtx-pro-server-6000, rtx-pro-4500
     #                 runtime: "AcceleratorRuntime",
     #               },
     #             ],
@@ -8578,7 +8581,7 @@ module Aws::Deadline
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-deadline'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

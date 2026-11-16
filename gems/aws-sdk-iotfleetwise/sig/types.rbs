@@ -1185,7 +1185,7 @@ module Aws::IoTFleetWise
       attr_accessor signal_fetch_config: Types::SignalFetchConfig
       attr_accessor condition_language_version: ::Integer
       attr_accessor actions: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:actions]
     end
 
     class SignalInformation

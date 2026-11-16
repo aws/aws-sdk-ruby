@@ -59,6 +59,8 @@ module Aws::WAFV2
     CaptchaResponse = Shapes::StructureShape.new(name: 'CaptchaResponse')
     ChallengeAction = Shapes::StructureShape.new(name: 'ChallengeAction')
     ChallengeConfig = Shapes::StructureShape.new(name: 'ChallengeConfig')
+    ChallengeJavascriptSdkInjection = Shapes::MapShape.new(name: 'ChallengeJavascriptSdkInjection')
+    ChallengeJavascriptSdkInjectionConfig = Shapes::StructureShape.new(name: 'ChallengeJavascriptSdkInjectionConfig')
     ChallengeResponse = Shapes::StructureShape.new(name: 'ChallengeResponse')
     CheckCapacityRequest = Shapes::StructureShape.new(name: 'CheckCapacityRequest')
     CheckCapacityResponse = Shapes::StructureShape.new(name: 'CheckCapacityResponse')
@@ -67,6 +69,15 @@ module Aws::WAFV2
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
     Condition = Shapes::StructureShape.new(name: 'Condition')
     Conditions = Shapes::ListShape.new(name: 'Conditions')
+    ConnectedAccountArn = Shapes::StringShape.new(name: 'ConnectedAccountArn')
+    ConnectedAccountChain = Shapes::StringShape.new(name: 'ConnectedAccountChain')
+    ConnectedAccountChainConfig = Shapes::StructureShape.new(name: 'ConnectedAccountChainConfig')
+    ConnectedAccountConfig = Shapes::StructureShape.new(name: 'ConnectedAccountConfig')
+    ConnectedAccountConfigs = Shapes::ListShape.new(name: 'ConnectedAccountConfigs')
+    ConnectedAccountPaymentNetworks = Shapes::ListShape.new(name: 'ConnectedAccountPaymentNetworks')
+    ConnectedAccountPrice = Shapes::StructureShape.new(name: 'ConnectedAccountPrice')
+    ConnectedAccountPriceAmount = Shapes::StringShape.new(name: 'ConnectedAccountPriceAmount')
+    ConnectedAccountPrices = Shapes::ListShape.new(name: 'ConnectedAccountPrices')
     ConsumedCapacity = Shapes::IntegerShape.new(name: 'ConsumedCapacity')
     CookieMatchPattern = Shapes::StructureShape.new(name: 'CookieMatchPattern')
     CookieNames = Shapes::ListShape.new(name: 'CookieNames')
@@ -597,6 +608,7 @@ module Aws::WAFV2
     AssociateWebACLResponse.struct_class = Types::AssociateWebACLResponse
 
     AssociationConfig.add_member(:request_body, Shapes::ShapeRef.new(shape: RequestBody, location_name: "RequestBody"))
+    AssociationConfig.add_member(:challenge_javascript_sdk_injection, Shapes::ShapeRef.new(shape: ChallengeJavascriptSdkInjection, location_name: "ChallengeJavascriptSdkInjection"))
     AssociationConfig.struct_class = Types::AssociationConfig
 
     AttributeValues.member = Shapes::ShapeRef.new(shape: AttributeValue)
@@ -638,6 +650,11 @@ module Aws::WAFV2
     ChallengeConfig.add_member(:immunity_time_property, Shapes::ShapeRef.new(shape: ImmunityTimeProperty, location_name: "ImmunityTimeProperty"))
     ChallengeConfig.struct_class = Types::ChallengeConfig
 
+    ChallengeJavascriptSdkInjection.key = Shapes::ShapeRef.new(shape: AssociatedResourceType)
+    ChallengeJavascriptSdkInjection.value = Shapes::ShapeRef.new(shape: ChallengeJavascriptSdkInjectionConfig)
+
+    ChallengeJavascriptSdkInjectionConfig.struct_class = Types::ChallengeJavascriptSdkInjectionConfig
+
     ChallengeResponse.add_member(:response_code, Shapes::ShapeRef.new(shape: ResponseCode, location_name: "ResponseCode"))
     ChallengeResponse.add_member(:solve_timestamp, Shapes::ShapeRef.new(shape: SolveTimestamp, location_name: "SolveTimestamp"))
     ChallengeResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
@@ -663,6 +680,24 @@ module Aws::WAFV2
     Condition.struct_class = Types::Condition
 
     Conditions.member = Shapes::ShapeRef.new(shape: Condition)
+
+    ConnectedAccountChainConfig.add_member(:chain, Shapes::ShapeRef.new(shape: ConnectedAccountChain, required: true, location_name: "Chain"))
+    ConnectedAccountChainConfig.add_member(:prices, Shapes::ShapeRef.new(shape: ConnectedAccountPrices, required: true, location_name: "Prices"))
+    ConnectedAccountChainConfig.struct_class = Types::ConnectedAccountChainConfig
+
+    ConnectedAccountConfig.add_member(:connected_account_arn, Shapes::ShapeRef.new(shape: ConnectedAccountArn, required: true, location_name: "ConnectedAccountArn"))
+    ConnectedAccountConfig.add_member(:payment_networks, Shapes::ShapeRef.new(shape: ConnectedAccountPaymentNetworks, required: true, location_name: "PaymentNetworks"))
+    ConnectedAccountConfig.struct_class = Types::ConnectedAccountConfig
+
+    ConnectedAccountConfigs.member = Shapes::ShapeRef.new(shape: ConnectedAccountConfig)
+
+    ConnectedAccountPaymentNetworks.member = Shapes::ShapeRef.new(shape: ConnectedAccountChainConfig)
+
+    ConnectedAccountPrice.add_member(:amount, Shapes::ShapeRef.new(shape: ConnectedAccountPriceAmount, required: true, location_name: "Amount"))
+    ConnectedAccountPrice.add_member(:currency, Shapes::ShapeRef.new(shape: CryptoCurrency, required: true, location_name: "Currency"))
+    ConnectedAccountPrice.struct_class = Types::ConnectedAccountPrice
+
+    ConnectedAccountPrices.member = Shapes::ShapeRef.new(shape: ConnectedAccountPrice)
 
     CookieMatchPattern.add_member(:all, Shapes::ShapeRef.new(shape: All, location_name: "All"))
     CookieMatchPattern.add_member(:included_cookies, Shapes::ShapeRef.new(shape: CookieNames, location_name: "IncludedCookies"))
@@ -1446,6 +1481,7 @@ module Aws::WAFV2
     MobileSdkRelease.struct_class = Types::MobileSdkRelease
 
     MonetizationConfig.add_member(:crypto_config, Shapes::ShapeRef.new(shape: CryptoConfig, location_name: "CryptoConfig"))
+    MonetizationConfig.add_member(:connected_account_configs, Shapes::ShapeRef.new(shape: ConnectedAccountConfigs, location_name: "ConnectedAccountConfigs"))
     MonetizationConfig.add_member(:currency_mode, Shapes::ShapeRef.new(shape: CurrencyMode, location_name: "CurrencyMode"))
     MonetizationConfig.struct_class = Types::MonetizationConfig
 

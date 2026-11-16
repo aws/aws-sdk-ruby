@@ -80,6 +80,21 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _AssociateCrossAccountReplicaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateCrossAccountReplicaResponse]
+        def arn: () -> ::String
+        def cross_account_replica_arn: () -> ::String
+        def replication_status: () -> ("InSync" | "Failed" | "InProgress" | "Pending" | "Detached")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecretsManager/Client.html#associate_cross_account_replica-instance_method
+      def associate_cross_account_replica: (
+                                             secret_id: ::String,
+                                             cross_account_replica_arn: ::String,
+                                             ?replica_restriction: ("SameOrg" | "NoRestriction"),
+                                             ?replication_role_arn: ::String
+                                           ) -> _AssociateCrossAccountReplicaResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateCrossAccountReplicaResponseSuccess
+
       interface _BatchGetSecretValueResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetSecretValueResponse]
         def secret_values: () -> ::Array[Types::SecretValueEntry]
@@ -140,7 +155,8 @@ module Aws
                              }
                            ],
                            ?force_overwrite_replica_secret: bool,
-                           ?type: ::String
+                           ?type: ::String,
+                           ?cross_account_primary_arn: ::String
                          ) -> _CreateSecretResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSecretResponseSuccess
 
@@ -148,10 +164,12 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcePolicyResponse]
         def arn: () -> ::String
         def name: () -> ::String
+        def policy_name: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecretsManager/Client.html#delete_resource_policy-instance_method
       def delete_resource_policy: (
-                                    secret_id: ::String
+                                    secret_id: ::String,
+                                    ?policy_name: ::String
                                   ) -> _DeleteResourcePolicyResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
 
@@ -192,12 +210,26 @@ module Aws
         def created_date: () -> ::Time
         def primary_region: () -> ::String
         def replication_status: () -> ::Array[Types::ReplicationStatusType]
+        def cross_account_primary: () -> Types::CrossAccountPrimaryType
+        def cross_account_replicas: () -> ::Array[Types::CrossAccountReplicaEntry]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecretsManager/Client.html#describe_secret-instance_method
       def describe_secret: (
                              secret_id: ::String
                            ) -> _DescribeSecretResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSecretResponseSuccess
+
+      interface _DisassociateCrossAccountReplicaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateCrossAccountReplicaResponse]
+        def arn: () -> ::String
+        def cross_account_replica_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecretsManager/Client.html#disassociate_cross_account_replica-instance_method
+      def disassociate_cross_account_replica: (
+                                                secret_id: ::String,
+                                                cross_account_replica_arn: ::String
+                                              ) -> _DisassociateCrossAccountReplicaResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateCrossAccountReplicaResponseSuccess
 
       interface _GetRandomPasswordResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRandomPasswordResponse]
@@ -221,10 +253,12 @@ module Aws
         def arn: () -> ::String
         def name: () -> ::String
         def resource_policy: () -> ::String
+        def policy_name: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecretsManager/Client.html#get_resource_policy-instance_method
       def get_resource_policy: (
-                                 secret_id: ::String
+                                 secret_id: ::String,
+                                 ?policy_name: ::String
                                ) -> _GetResourcePolicyResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
 
@@ -245,6 +279,19 @@ module Aws
                               ?version_stage: ::String
                             ) -> _GetSecretValueResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSecretValueResponseSuccess
+
+      interface _ListResourcePoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourcePoliciesResponse]
+        def resource_policies: () -> ::Array[Types::ResourcePolicySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecretsManager/Client.html#list_resource_policies-instance_method
+      def list_resource_policies: (
+                                    secret_id: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListResourcePoliciesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourcePoliciesResponseSuccess
 
       interface _ListSecretVersionIdsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSecretVersionIdsResponse]
@@ -287,11 +334,13 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
         def arn: () -> ::String
         def name: () -> ::String
+        def policy_name: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecretsManager/Client.html#put_resource_policy-instance_method
       def put_resource_policy: (
                                  secret_id: ::String,
                                  resource_policy: ::String,
+                                 ?policy_name: ::String,
                                  ?block_public_policy: bool
                                ) -> _PutResourcePolicyResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess

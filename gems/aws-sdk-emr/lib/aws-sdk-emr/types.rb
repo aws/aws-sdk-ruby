@@ -7297,6 +7297,12 @@ module Aws::EMR
     #   destination.
     #   @return [String]
     #
+    # @!attribute [rw] additional_info
+    #   Additional information about the step, including the YARN
+    #   application IDs associated with the step and the resource manager
+    #   that processed it.
+    #   @return [Types::StepAdditionalInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Step AWS API Documentation
     #
     class Step < Struct.new(
@@ -7307,7 +7313,28 @@ module Aws::EMR
       :status,
       :execution_role_arn,
       :log_uri,
-      :encryption_key_arn)
+      :encryption_key_arn,
+      :additional_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Additional information about a step's execution, available after the
+    # step has started running.
+    #
+    # @!attribute [rw] resource_manager_application_ids
+    #   The YARN application IDs associated with the step.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_manager
+    #   The address of the YARN resource manager that processed the step.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StepAdditionalInfo AWS API Documentation
+    #
+    class StepAdditionalInfo < Struct.new(
+      :resource_manager_application_ids,
+      :resource_manager)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7521,6 +7548,12 @@ module Aws::EMR
     #   destination.
     #   @return [String]
     #
+    # @!attribute [rw] additional_info
+    #   Additional information about the step, including the YARN
+    #   application IDs associated with the step and the resource manager
+    #   that processed it.
+    #   @return [Types::StepAdditionalInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StepSummary AWS API Documentation
     #
     class StepSummary < Struct.new(
@@ -7530,7 +7563,8 @@ module Aws::EMR
       :action_on_failure,
       :status,
       :log_uri,
-      :encryption_key_arn)
+      :encryption_key_arn,
+      :additional_info)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -2738,6 +2738,25 @@ module Aws::GameLiftStreams
     #   The configuration for the stream session's virtual monitor.
     #   @return [Types::DisplayConfiguration]
     #
+    # @!attribute [rw] application_started_at
+    #   A timestamp that indicates when the application launched for this
+    #   stream session. Timestamps are expressed using in ISO8601 format,
+    #   such as: `2022-12-27T22:29:40+00:00` (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] streaming_started_at
+    #   A timestamp that indicates when streaming started for this stream
+    #   session, which is when a client connected to the stream session.
+    #   Timestamps are expressed using in ISO8601 format, such as:
+    #   `2022-12-27T22:29:40+00:00` (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] streaming_ended_at
+    #   A timestamp that indicates when streaming ended for this stream
+    #   session. Timestamps are expressed using in ISO8601 format, such as:
+    #   `2022-12-27T22:29:40+00:00` (UTC).
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/GetStreamSessionOutput AWS API Documentation
     #
     class GetStreamSessionOutput < Struct.new(
@@ -2763,7 +2782,10 @@ module Aws::GameLiftStreams
       :application_arn,
       :export_files_metadata,
       :role_arn,
-      :display_configuration)
+      :display_configuration,
+      :application_started_at,
+      :streaming_started_at,
+      :streaming_ended_at)
       SENSITIVE = [:signal_request, :signal_response, :role_arn]
       include Aws::Structure
     end
@@ -3365,6 +3387,12 @@ module Aws::GameLiftStreams
     # types. To update the capacity for an existing stream group, call
     # [UpdateStreamGroup][1]. To add a new location and specify its
     # capacity, call [AddStreamGroupLocations][2].
+    #
+    # When you modify capacity for an existing location, always specify
+    # `AlwaysOnCapacity`, `MaximumCapacity`, and `TargetIdleCapacity` in the
+    # same request. If you omit one or more of these values, the service
+    # applies internal defaults for the missing values. These defaults might
+    # not match what you intend.
     #
     #
     #
@@ -4281,6 +4309,25 @@ module Aws::GameLiftStreams
     #   The configuration for the stream session's virtual monitor.
     #   @return [Types::DisplayConfiguration]
     #
+    # @!attribute [rw] application_started_at
+    #   A timestamp that indicates when the application launched for this
+    #   stream session. Timestamps are expressed using in ISO8601 format,
+    #   such as: `2022-12-27T22:29:40+00:00` (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] streaming_started_at
+    #   A timestamp that indicates when streaming started for this stream
+    #   session, which is when a client connected to the stream session.
+    #   Timestamps are expressed using in ISO8601 format, such as:
+    #   `2022-12-27T22:29:40+00:00` (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] streaming_ended_at
+    #   A timestamp that indicates when streaming ended for this stream
+    #   session. Timestamps are expressed using in ISO8601 format, such as:
+    #   `2022-12-27T22:29:40+00:00` (UTC).
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/StartStreamSessionOutput AWS API Documentation
     #
     class StartStreamSessionOutput < Struct.new(
@@ -4306,7 +4353,10 @@ module Aws::GameLiftStreams
       :application_arn,
       :export_files_metadata,
       :role_arn,
-      :display_configuration)
+      :display_configuration,
+      :application_started_at,
+      :streaming_started_at,
+      :streaming_ended_at)
       SENSITIVE = [:signal_request, :signal_response, :role_arn]
       include Aws::Structure
     end

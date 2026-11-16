@@ -1089,6 +1089,7 @@ module Aws::Omics
       attr_accessor vpc_config: Types::VpcConfigResponse
       attr_accessor engine_settings: untyped
       attr_accessor session_policy: ::String
+      attr_accessor output_uri_prefix_mode: ("SERVICE_DEFINED" | "NONE_WITH_OVERWRITE")
       SENSITIVE: []
     end
 
@@ -2266,6 +2267,7 @@ module Aws::Omics
       attr_accessor configuration_name: ::String
       attr_accessor session_policy: ::String
       attr_accessor engine_settings: untyped
+      attr_accessor output_uri_prefix_mode: ("SERVICE_DEFINED" | "NONE_WITH_OVERWRITE")
       SENSITIVE: []
     end
 

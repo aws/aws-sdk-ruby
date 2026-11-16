@@ -1396,6 +1396,23 @@ module Aws::CloudWatchOmni
       include Aws::Structure
     end
 
+    # One requested scope: an explicit list of actions for one service. All
+    # actions in an entry share one service prefix. The same service may
+    # appear in more than one entry.
+    #
+    # @!attribute [rw] actions
+    #   The actions of one service, each with its service prefix, for
+    #   example "logs:StartQuery".
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudwatchomni-2025-01-01/DataAccessTarget AWS API Documentation
+    #
+    class DataAccessTarget < Struct.new(
+      :actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] grant_id
     #   The ID of the access grant to delete.
     #   @return [String]
@@ -2327,6 +2344,46 @@ module Aws::CloudWatchOmni
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudwatchomni-2025-01-01/GetSpaceCredentialsForOrganizationOutput AWS API Documentation
     #
     class GetSpaceCredentialsForOrganizationOutput < Struct.new(
+      :credentials)
+      SENSITIVE = [:credentials]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_id
+    #   The unique ID of the space to return credentials for.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_scopes
+    #   The actions to include in the credentials, grouped by service.
+    #   @return [Array<Types::DataAccessTarget>]
+    #
+    # @!attribute [rw] duration_seconds
+    #   The lifetime of the credentials, in seconds. Defaults to 3600.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] audit_context
+    #   Caller-supplied key-value pairs that are recorded for auditing. They
+    #   do not affect authorization or the permissions of the credentials.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudwatchomni-2025-01-01/GetSpaceDataAccessInput AWS API Documentation
+    #
+    class GetSpaceDataAccessInput < Struct.new(
+      :space_id,
+      :target_scopes,
+      :duration_seconds,
+      :audit_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] credentials
+    #   The temporary AWS credentials for the space.
+    #   @return [Types::AwsCredentials]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudwatchomni-2025-01-01/GetSpaceDataAccessOutput AWS API Documentation
+    #
+    class GetSpaceDataAccessOutput < Struct.new(
       :credentials)
       SENSITIVE = [:credentials]
       include Aws::Structure
@@ -3324,7 +3381,7 @@ module Aws::CloudWatchOmni
       include Aws::Structure
     end
 
-    # A single metric observed on a context graph node.
+    # A single metric observed on a context graph node or edge.
     #
     # @!attribute [rw] name
     #   The metric name as emitted, such as "Duration".
@@ -3346,18 +3403,32 @@ module Aws::CloudWatchOmni
     #   telemetry. Keys are the metric store's own label names, not bare
     #   OTel attribute names: service identity arrives as
     #   "@resource.service.name" and "@resource.service.namespace", and the
-    #   instrumentation scope as "@instrumentation.@name", while
-    #   span-derived metrics label the service as a bare "service.name".
-    #   Cloud provider, account and region are not repeated per metric —
-    #   read those from the node. Values are RAW, deliberately NOT the
-    #   node's normalized or merged identity, so a selector built from them
-    #   matches the emitted series. A merged node can carry different values
-    #   per metric, which is why these live here rather than on the node.
+    #   instrumentation scope as "@instrumentation.@name". Span-derived
+    #   metrics can additionally carry the service as a bare data point
+    #   "service.name" label. Cloud provider, account and region are not
+    #   repeated per metric — read those from the node. Values are RAW,
+    #   deliberately NOT the node's merged identity, so a selector built
+    #   from them matches the emitted series. A merged node can carry
+    #   different values per metric, which is why these live here rather
+    #   than on the node.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] semantics
     #   What the metric means and the unit it is reported in.
     #   @return [Types::MetricSemantics]
+    #
+    # @!attribute [rw] aggregation_temporality
+    #   Aggregation temporality for the selected metric stream represented
+    #   by this metadata entry. Present when known, including cumulative for
+    #   OTel Summary metrics. Absent for Gauge metrics or when the
+    #   information is unavailable.
+    #   @return [String]
+    #
+    # @!attribute [rw] monotonicity
+    #   Whether the selected Sum metric stream represented by this metadata
+    #   entry is a non-negative accumulation. Absent for metrics other than
+    #   Sum or when the information is unavailable.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudwatchomni-2025-01-01/MetricMetadata AWS API Documentation
     #
@@ -3366,7 +3437,9 @@ module Aws::CloudWatchOmni
       :preferred_stat,
       :metric_type,
       :attributes,
-      :semantics)
+      :semantics,
+      :aggregation_temporality,
+      :monotonicity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4095,6 +4168,21 @@ module Aws::CloudWatchOmni
     #
     class PartialResults < Struct.new(
       :partial_results_detected)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The requested actions produce a credential that exceeds the maximum
+    # size. Request fewer actions.
+    #
+    # @!attribute [rw] message
+    #   A description of the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudwatchomni-2025-01-01/PolicyTooLargeException AWS API Documentation
+    #
+    class PolicyTooLargeException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

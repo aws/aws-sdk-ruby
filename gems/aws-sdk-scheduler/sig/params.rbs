@@ -9,65 +9,72 @@ module Aws
   module Scheduler
     module Params
       type ecs_parameters = {
+      task_definition_arn: ::String,
+      task_count: ::Integer?,
+      launch_type: ("EC2" | "FARGATE" | "EXTERNAL")?,
+      network_configuration: {
+        awsvpc_configuration: {
+          subnets: Array[::String],
+          security_groups: Array[::String]?,
+          assign_public_ip: ("ENABLED" | "DISABLED")?
+        }?
+      }?,
+      platform_version: ::String?,
+      group: ::String?,
       capacity_provider_strategy: Array[
         {
-          base: ::Integer?,
           capacity_provider: ::String,
-          weight: ::Integer?
+          weight: ::Integer?,
+          base: ::Integer?
         }
       ]?,
       enable_ecs_managed_tags: bool?,
       enable_execute_command: bool?,
-      group: ::String?,
-      launch_type: ("EC2" | "FARGATE" | "EXTERNAL")?,
-      network_configuration: {
-        awsvpc_configuration: {
-          assign_public_ip: ("ENABLED" | "DISABLED")?,
-          security_groups: Array[::String]?,
-          subnets: Array[::String]
-        }?
-      }?,
       placement_constraints: Array[
         {
-          expression: ::String?,
-          type: ("distinctInstance" | "memberOf")?
+          type: ("distinctInstance" | "memberOf")?,
+          expression: ::String?
         }
       ]?,
       placement_strategy: Array[
         {
-          field: ::String?,
-          type: ("random" | "spread" | "binpack")?
+          type: ("random" | "spread" | "binpack")?,
+          field: ::String?
         }
       ]?,
-      platform_version: ::String?,
       propagate_tags: ("TASK_DEFINITION")?,
       reference_id: ::String?,
       tags: Array[
         Hash[::String, ::String]
-      ]?,
-      task_count: ::Integer?,
-      task_definition_arn: ::String
+      ]?
     }
 
       type target = {
       arn: ::String,
+      role_arn: ::String,
       dead_letter_config: {
         arn: ::String?
-      }?,
-      ecs_parameters: Params::ecs_parameters?,
-      event_bridge_parameters: {
-        detail_type: ::String,
-        source: ::String
-      }?,
-      input: ::String?,
-      kinesis_parameters: {
-        partition_key: ::String
       }?,
       retry_policy: {
         maximum_event_age_in_seconds: ::Integer?,
         maximum_retry_attempts: ::Integer?
       }?,
-      role_arn: ::String,
+      input: ::String?,
+      ecs_parameters: Params::ecs_parameters?,
+      event_bridge_parameters: {
+        detail_type: ::String,
+        source: ::String
+      }?,
+      event_bridge_put_events_v2_parameters: {
+        detail_type: ::String,
+        source: ::String
+      }?,
+      event_bridge_put_raw_events_parameters: {
+        metadata: Hash[::String, ::String]?
+      }?,
+      kinesis_parameters: {
+        partition_key: ::String
+      }?,
       sage_maker_pipeline_parameters: {
         pipeline_parameter_list: Array[
           {

@@ -115,6 +115,12 @@ module Aws
       def associate_resource_share_permission: (
                                                  resource_share_arn: ::String,
                                                  permission_arn: ::String,
+                                                 ?permission_template_parameters: Array[
+                                                   {
+                                                     name: ::String?,
+                                                     values: Array[::String]?
+                                                   }
+                                                 ],
                                                  ?replace: bool,
                                                  ?client_token: ::String,
                                                  ?permission_version: ::Integer
@@ -131,6 +137,13 @@ module Aws
                                name: ::String,
                                resource_type: ::String,
                                policy_template: ::String,
+                               ?permission_template_parameters: Array[
+                                 {
+                                   name: ::String?,
+                                   type: ("STRING" | "STRING_LIST")?,
+                                   description: ::String?
+                                 }
+                               ],
                                ?client_token: ::String,
                                ?tags: Array[
                                  {
@@ -150,6 +163,13 @@ module Aws
       def create_permission_version: (
                                        permission_arn: ::String,
                                        policy_template: ::String,
+                                       ?permission_template_parameters: Array[
+                                         {
+                                           name: ::String?,
+                                           type: ("STRING" | "STRING_LIST")?,
+                                           description: ::String?
+                                         }
+                                       ],
                                        ?client_token: ::String
                                      ) -> _CreatePermissionVersionResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePermissionVersionResponseSuccess
@@ -174,6 +194,17 @@ module Aws
                                    ?client_token: ::String,
                                    ?permission_arns: Array[::String],
                                    ?sources: Array[::String],
+                                   ?permission_template_parameters: Array[
+                                     {
+                                       permission_arn: ::String?,
+                                       permission_template_parameters: Array[
+                                         {
+                                           name: ::String?,
+                                           values: Array[::String]?
+                                         }
+                                       ]?
+                                     }
+                                   ],
                                    ?resource_share_configuration: {
                                      retain_sharing_on_account_leave_organization: bool?
                                    }
@@ -184,7 +215,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DeletePermissionResponse]
         def return_value: () -> bool
         def client_token: () -> ::String
-        def permission_status: () -> ("ATTACHABLE" | "UNATTACHABLE" | "DELETING" | "DELETED")
+        def permission_status: () -> ("ATTACHABLE" | "UNATTACHABLE" | "DELETING" | "DELETED" | "DEPRECATED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#delete_permission-instance_method
       def delete_permission: (
@@ -197,7 +228,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DeletePermissionVersionResponse]
         def return_value: () -> bool
         def client_token: () -> ::String
-        def permission_status: () -> ("ATTACHABLE" | "UNATTACHABLE" | "DELETING" | "DELETED")
+        def permission_status: () -> ("ATTACHABLE" | "UNATTACHABLE" | "DELETING" | "DELETED" | "DEPRECATED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#delete_permission_version-instance_method
       def delete_permission_version: (
@@ -263,7 +294,13 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#get_permission-instance_method
       def get_permission: (
                             permission_arn: ::String,
-                            ?permission_version: ::Integer
+                            ?permission_version: ::Integer,
+                            ?permission_template_parameters: Array[
+                              {
+                                name: ::String?,
+                                values: Array[::String]?
+                              }
+                            ]
                           ) -> _GetPermissionResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPermissionResponseSuccess
 
@@ -363,6 +400,8 @@ module Aws
                                           ?resource_type: ::String,
                                           ?feature_set: ("CREATED_FROM_POLICY" | "PROMOTING_TO_STANDARD" | "STANDARD"),
                                           ?default_version: bool,
+                                          ?resource_owner: ("SELF" | "OTHER-ACCOUNTS"),
+                                          ?resource_share_arn: ::String,
                                           ?next_token: ::String,
                                           ?max_results: ::Integer
                                         ) -> _ListPermissionAssociationsResponseSuccess
@@ -389,9 +428,11 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#list_permissions-instance_method
       def list_permissions: (
                               ?resource_type: ::String,
+                              ?resource_owner: ("SELF" | "OTHER-ACCOUNTS"),
                               ?next_token: ::String,
                               ?max_results: ::Integer,
-                              ?permission_type: ("ALL" | "AWS_MANAGED" | "CUSTOMER_MANAGED")
+                              ?permission_type: ("ALL" | "AWS_MANAGED" | "CUSTOMER_MANAGED"),
+                              ?permission_status: ("ATTACHABLE" | "UNATTACHABLE" | "DELETING" | "DELETED" | "DEPRECATED")
                             ) -> _ListPermissionsResponseSuccess
                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPermissionsResponseSuccess
 
@@ -531,6 +572,12 @@ module Aws
                                              from_permission_arn: ::String,
                                              ?from_permission_version: ::Integer,
                                              to_permission_arn: ::String,
+                                             ?permission_template_parameters: Array[
+                                               {
+                                                 name: ::String?,
+                                                 values: Array[::String]?
+                                               }
+                                             ],
                                              ?client_token: ::String
                                            ) -> _ReplacePermissionAssociationsResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReplacePermissionAssociationsResponseSuccess
@@ -574,6 +621,19 @@ module Aws
                             ?resource_arn: ::String
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdatePermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePermissionResponse]
+        def client_token: () -> ::String
+        def permission_status: () -> ("ATTACHABLE" | "DEPRECATED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RAM/Client.html#update_permission-instance_method
+      def update_permission: (
+                               permission_arn: ::String,
+                               status: ("ATTACHABLE" | "DEPRECATED"),
+                               ?client_token: ::String
+                             ) -> _UpdatePermissionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePermissionResponseSuccess
 
       interface _UpdateResourceShareResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResourceShareResponse]

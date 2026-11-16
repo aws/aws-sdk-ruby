@@ -708,6 +708,13 @@ module Aws::ARCRegionswitch
       SENSITIVE: []
     end
 
+    class RetryableConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
     class Route53HealthCheck
       attr_accessor hosted_zone_id: ::String
       attr_accessor record_name: ::String

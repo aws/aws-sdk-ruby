@@ -1,0 +1,24 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MarketplaceMetering
+    module Params
+      type usage_allocation = {
+      allocated_usage_quantity: ::Integer?,
+      allocated_usage_quantity_as_decimal: ::String?,
+      tags: Array[
+        {
+          key: ::String,
+          value: ::String
+        }
+      ]?
+    }
+
+    end
+  end
+end

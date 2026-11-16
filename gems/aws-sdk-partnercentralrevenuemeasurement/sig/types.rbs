@@ -281,7 +281,7 @@ module Aws::PartnerCentralRevenueMeasurement
       attr_accessor revenue_attribution_revision: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:customer_aws_account_id_filters]
     end
 
     class ListRevenueAttributionAllocationsOutput

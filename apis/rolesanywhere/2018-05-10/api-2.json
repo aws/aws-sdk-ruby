@@ -24,7 +24,8 @@
       "output":{"shape":"ProfileDetailResponse"},
       "errors":[
         {"shape":"ValidationException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ]
     },
     "CreateTrustAnchor":{
@@ -38,7 +39,8 @@
       "output":{"shape":"TrustAnchorDetailResponse"},
       "errors":[
         {"shape":"ValidationException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ]
     },
     "DeleteAttributeMapping":{
@@ -53,7 +55,8 @@
       "errors":[
         {"shape":"ValidationException"},
         {"shape":"ResourceNotFoundException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "idempotent":true
     },
@@ -68,7 +71,8 @@
       "output":{"shape":"CrlDetailResponse"},
       "errors":[
         {"shape":"ResourceNotFoundException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "idempotent":true
     },
@@ -83,7 +87,8 @@
       "output":{"shape":"ProfileDetailResponse"},
       "errors":[
         {"shape":"ResourceNotFoundException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "idempotent":true
     },
@@ -98,7 +103,8 @@
       "output":{"shape":"TrustAnchorDetailResponse"},
       "errors":[
         {"shape":"ResourceNotFoundException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "idempotent":true
     },
@@ -113,7 +119,8 @@
       "output":{"shape":"CrlDetailResponse"},
       "errors":[
         {"shape":"ResourceNotFoundException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ]
     },
     "DisableProfile":{
@@ -127,7 +134,8 @@
       "output":{"shape":"ProfileDetailResponse"},
       "errors":[
         {"shape":"ResourceNotFoundException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ]
     },
     "DisableTrustAnchor":{
@@ -141,7 +149,8 @@
       "output":{"shape":"TrustAnchorDetailResponse"},
       "errors":[
         {"shape":"ResourceNotFoundException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ]
     },
     "EnableCrl":{
@@ -155,7 +164,8 @@
       "output":{"shape":"CrlDetailResponse"},
       "errors":[
         {"shape":"ResourceNotFoundException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ]
     },
     "EnableProfile":{
@@ -169,7 +179,8 @@
       "output":{"shape":"ProfileDetailResponse"},
       "errors":[
         {"shape":"ResourceNotFoundException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ]
     },
     "EnableTrustAnchor":{
@@ -183,7 +194,8 @@
       "output":{"shape":"TrustAnchorDetailResponse"},
       "errors":[
         {"shape":"ResourceNotFoundException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ]
     },
     "GetCrl":{
@@ -196,7 +208,8 @@
       "input":{"shape":"ScalarCrlRequest"},
       "output":{"shape":"CrlDetailResponse"},
       "errors":[
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "readonly":true
     },
@@ -211,7 +224,8 @@
       "output":{"shape":"ProfileDetailResponse"},
       "errors":[
         {"shape":"ResourceNotFoundException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "readonly":true
     },
@@ -226,7 +240,8 @@
       "output":{"shape":"SubjectDetailResponse"},
       "errors":[
         {"shape":"ResourceNotFoundException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "readonly":true
     },
@@ -242,7 +257,8 @@
       "errors":[
         {"shape":"ValidationException"},
         {"shape":"ResourceNotFoundException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "readonly":true
     },
@@ -257,7 +273,8 @@
       "output":{"shape":"CrlDetailResponse"},
       "errors":[
         {"shape":"ValidationException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ]
     },
     "ListCrls":{
@@ -271,7 +288,8 @@
       "output":{"shape":"ListCrlsResponse"},
       "errors":[
         {"shape":"ValidationException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "readonly":true
     },
@@ -286,7 +304,8 @@
       "output":{"shape":"ListProfilesResponse"},
       "errors":[
         {"shape":"ValidationException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "readonly":true
     },
@@ -301,7 +320,8 @@
       "output":{"shape":"ListSubjectsResponse"},
       "errors":[
         {"shape":"ValidationException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "readonly":true
     },
@@ -317,7 +337,8 @@
       "errors":[
         {"shape":"ValidationException"},
         {"shape":"ResourceNotFoundException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "readonly":true
     },
@@ -332,7 +353,8 @@
       "output":{"shape":"ListTrustAnchorsResponse"},
       "errors":[
         {"shape":"ValidationException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "readonly":true
     },
@@ -348,7 +370,8 @@
       "errors":[
         {"shape":"ValidationException"},
         {"shape":"ResourceNotFoundException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "idempotent":true
     },
@@ -364,7 +387,8 @@
       "errors":[
         {"shape":"ValidationException"},
         {"shape":"ResourceNotFoundException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ]
     },
     "ResetNotificationSettings":{
@@ -379,7 +403,8 @@
       "errors":[
         {"shape":"ValidationException"},
         {"shape":"ResourceNotFoundException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ]
     },
     "TagResource":{
@@ -395,6 +420,7 @@
         {"shape":"ValidationException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"},
         {"shape":"TooManyTagsException"}
       ]
     },
@@ -410,7 +436,8 @@
       "errors":[
         {"shape":"ValidationException"},
         {"shape":"ResourceNotFoundException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ]
     },
     "UpdateCrl":{
@@ -425,7 +452,8 @@
       "errors":[
         {"shape":"ValidationException"},
         {"shape":"ResourceNotFoundException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ]
     },
     "UpdateProfile":{
@@ -440,7 +468,8 @@
       "errors":[
         {"shape":"ValidationException"},
         {"shape":"ResourceNotFoundException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "idempotent":true
     },
@@ -456,7 +485,8 @@
       "errors":[
         {"shape":"ValidationException"},
         {"shape":"ResourceNotFoundException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"ServiceUnavailableException"}
       ],
       "idempotent":true
     }
@@ -472,6 +502,12 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "AliasName":{
+      "type":"string",
+      "max":256,
+      "min":0,
+      "pattern":"(?!.*//)([A-Za-z]([A-Za-z0-9_/-]*[A-Za-z0-9_-])?)?"
     },
     "AmazonResourceName":{
       "type":"string",
@@ -517,7 +553,8 @@
         "durationSeconds":{"shape":"CreateProfileRequestDurationSecondsInteger"},
         "enabled":{"shape":"Boolean"},
         "tags":{"shape":"TagList"},
-        "acceptRoleSessionName":{"shape":"Boolean"}
+        "acceptRoleSessionName":{"shape":"Boolean"},
+        "aliasName":{"shape":"AliasName"}
       }
     },
     "CreateProfileRequestDurationSecondsInteger":{
@@ -536,8 +573,10 @@
         "name":{"shape":"ResourceName"},
         "source":{"shape":"Source"},
         "enabled":{"shape":"Boolean"},
+        "crlDpRevocationEnabled":{"shape":"Boolean"},
         "tags":{"shape":"TagList"},
-        "notificationSettings":{"shape":"NotificationSettings"}
+        "notificationSettings":{"shape":"NotificationSettings"},
+        "aliasName":{"shape":"AliasName"}
       }
     },
     "CredentialSummaries":{
@@ -555,17 +594,26 @@
         "failed":{"shape":"Boolean"}
       }
     },
+    "CrlAliasArn":{
+      "type":"string",
+      "max":1011,
+      "min":1,
+      "pattern":"arn:aws(-[^:]+)?:rolesanywhere(:.*){2}(:alias/crl/.*)"
+    },
     "CrlDetail":{
       "type":"structure",
       "members":{
         "crlId":{"shape":"Uuid"},
-        "crlArn":{"shape":"String"},
+        "crlArn":{"shape":"CrlResourceArn"},
         "name":{"shape":"String"},
         "enabled":{"shape":"Boolean"},
         "crlData":{"shape":"Blob"},
-        "trustAnchorArn":{"shape":"String"},
+        "trustAnchorArn":{"shape":"TrustAnchorResourceArn"},
         "createdAt":{"shape":"SyntheticTimestamp_date_time"},
-        "updatedAt":{"shape":"SyntheticTimestamp_date_time"}
+        "updatedAt":{"shape":"SyntheticTimestamp_date_time"},
+        "aliasName":{"shape":"AliasName"},
+        "aliasArn":{"shape":"CrlAliasArn"},
+        "previousAliasName":{"shape":"AliasName"}
       }
     },
     "CrlDetailResponse":{
@@ -579,6 +627,18 @@
       "type":"list",
       "member":{"shape":"CrlDetail"}
     },
+    "CrlIdentifier":{
+      "type":"string",
+      "max":1011,
+      "min":1,
+      "pattern":"([a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}|arn:aws(-[^:]+)?:rolesanywhere(:.*){2}:(crl|alias/crl)/.*)"
+    },
+    "CrlResourceArn":{
+      "type":"string",
+      "max":1011,
+      "min":1,
+      "pattern":"arn:aws(-[^:]+)?:rolesanywhere(:.*){2}(:crl/.*)"
+    },
     "DeleteAttributeMappingRequest":{
       "type":"structure",
       "required":[
@@ -587,7 +647,7 @@
       ],
       "members":{
         "profileId":{
-          "shape":"Uuid",
+          "shape":"ProfileIdentifier",
           "location":"uri",
           "locationName":"profileId"
         },
@@ -622,7 +682,8 @@
         "crlData":{"shape":"ImportCrlRequestCrlDataBlob"},
         "enabled":{"shape":"Boolean"},
         "tags":{"shape":"TagList"},
-        "trustAnchorArn":{"shape":"TrustAnchorArn"}
+        "trustAnchorArn":{"shape":"TrustAnchorIdentifierArn"},
+        "aliasName":{"shape":"AliasName"}
       }
     },
     "ImportCrlRequestCrlDataBlob":{
@@ -836,17 +897,17 @@
       "max":50,
       "min":0
     },
-    "ProfileArn":{
+    "ProfileAliasArn":{
       "type":"string",
       "max":1011,
       "min":1,
-      "pattern":"arn:aws(-[^:]+)?:rolesanywhere(:.*){2}(:profile.*)"
+      "pattern":"arn:aws(-[^:]+)?:rolesanywhere(:.*){2}(:alias/profile/.*)"
     },
     "ProfileDetail":{
       "type":"structure",
       "members":{
         "profileId":{"shape":"Uuid"},
-        "profileArn":{"shape":"ProfileArn"},
+        "profileArn":{"shape":"ProfileResourceArn"},
         "name":{"shape":"ResourceName"},
         "requireInstanceProperties":{"shape":"Boolean"},
         "enabled":{"shape":"Boolean"},
@@ -858,7 +919,10 @@
         "updatedAt":{"shape":"SyntheticTimestamp_date_time"},
         "durationSeconds":{"shape":"Integer"},
         "acceptRoleSessionName":{"shape":"Boolean"},
-        "attributeMappings":{"shape":"AttributeMappings"}
+        "attributeMappings":{"shape":"AttributeMappings"},
+        "aliasName":{"shape":"AliasName"},
+        "aliasArn":{"shape":"ProfileAliasArn"},
+        "previousAliasName":{"shape":"AliasName"}
       }
     },
     "ProfileDetailResponse":{
@@ -871,6 +935,18 @@
       "type":"list",
       "member":{"shape":"ProfileDetail"}
     },
+    "ProfileIdentifier":{
+      "type":"string",
+      "max":1011,
+      "min":1,
+      "pattern":"([a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}|arn:aws(-[^:]+)?:rolesanywhere(:.*){2}:(profile|alias/profile)/.*)"
+    },
+    "ProfileResourceArn":{
+      "type":"string",
+      "max":1011,
+      "min":1,
+      "pattern":"arn:aws(-[^:]+)?:rolesanywhere(:.*){2}(:profile/.*)"
+    },
     "PutAttributeMappingRequest":{
       "type":"structure",
       "required":[
@@ -880,7 +956,7 @@
       ],
       "members":{
         "profileId":{
-          "shape":"Uuid",
+          "shape":"ProfileIdentifier",
           "location":"uri",
           "locationName":"profileId"
         },
@@ -965,7 +1041,7 @@
       "required":["crlId"],
       "members":{
         "crlId":{
-          "shape":"Uuid",
+          "shape":"CrlIdentifier",
           "location":"uri",
           "locationName":"crlId"
         }
@@ -976,7 +1052,7 @@
       "required":["profileId"],
       "members":{
         "profileId":{
-          "shape":"Uuid",
+          "shape":"ProfileIdentifier",
           "location":"uri",
           "locationName":"profileId"
         }
@@ -998,11 +1074,23 @@
       "required":["trustAnchorId"],
       "members":{
         "trustAnchorId":{
-          "shape":"Uuid",
+          "shape":"TrustAnchorIdentifier",
           "location":"uri",
           "locationName":"trustAnchorId"
         }
       }
+    },
+    "ServiceUnavailableException":{
+      "type":"structure",
+      "required":["message"],
+      "members":{
+        "message":{"shape":"String"},
+        "retryAfterSeconds":{"shape":"Integer"}
+      },
+      "error":{"httpStatusCode":503},
+      "exception":true,
+      "fault":true,
+      "retryable":{"throttling":false}
     },
     "Source":{
       "type":"structure",
@@ -1132,23 +1220,27 @@
       },
       "exception":true
     },
-    "TrustAnchorArn":{
+    "TrustAnchorAliasArn":{
       "type":"string",
       "max":1011,
       "min":1,
-      "pattern":"arn:aws(-[^:]+)?:rolesanywhere(:.*){2}(:trust-anchor.*)"
+      "pattern":"arn:aws(-[^:]+)?:rolesanywhere(:.*){2}(:alias/trust-anchor/.*)"
     },
     "TrustAnchorDetail":{
       "type":"structure",
       "members":{
         "trustAnchorId":{"shape":"Uuid"},
-        "trustAnchorArn":{"shape":"String"},
+        "trustAnchorArn":{"shape":"TrustAnchorResourceArn"},
         "name":{"shape":"ResourceName"},
         "source":{"shape":"Source"},
         "enabled":{"shape":"Boolean"},
+        "crlDpRevocationEnabled":{"shape":"Boolean"},
         "createdAt":{"shape":"SyntheticTimestamp_date_time"},
         "updatedAt":{"shape":"SyntheticTimestamp_date_time"},
-        "notificationSettings":{"shape":"NotificationSettingDetails"}
+        "notificationSettings":{"shape":"NotificationSettingDetails"},
+        "aliasName":{"shape":"AliasName"},
+        "aliasArn":{"shape":"TrustAnchorAliasArn"},
+        "previousAliasName":{"shape":"AliasName"}
       }
     },
     "TrustAnchorDetailResponse":{
@@ -1161,6 +1253,24 @@
     "TrustAnchorDetails":{
       "type":"list",
       "member":{"shape":"TrustAnchorDetail"}
+    },
+    "TrustAnchorIdentifier":{
+      "type":"string",
+      "max":1011,
+      "min":1,
+      "pattern":"([a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}|arn:aws(-[^:]+)?:rolesanywhere(:.*){2}:(trust-anchor|alias/trust-anchor)/.*)"
+    },
+    "TrustAnchorIdentifierArn":{
+      "type":"string",
+      "max":1011,
+      "min":1,
+      "pattern":"arn:aws(-[^:]+)?:rolesanywhere(:.*){2}(:trust-anchor.*|:alias/trust-anchor/.*)"
+    },
+    "TrustAnchorResourceArn":{
+      "type":"string",
+      "max":1011,
+      "min":1,
+      "pattern":"arn:aws(-[^:]+)?:rolesanywhere(:.*){2}(:trust-anchor/.*)"
     },
     "TrustAnchorType":{
       "type":"string",
@@ -1190,12 +1300,13 @@
       "required":["crlId"],
       "members":{
         "crlId":{
-          "shape":"Uuid",
+          "shape":"CrlIdentifier",
           "location":"uri",
           "locationName":"crlId"
         },
         "name":{"shape":"ResourceName"},
-        "crlData":{"shape":"UpdateCrlRequestCrlDataBlob"}
+        "crlData":{"shape":"UpdateCrlRequestCrlDataBlob"},
+        "aliasName":{"shape":"AliasName"}
       }
     },
     "UpdateCrlRequestCrlDataBlob":{
@@ -1208,7 +1319,7 @@
       "required":["profileId"],
       "members":{
         "profileId":{
-          "shape":"Uuid",
+          "shape":"ProfileIdentifier",
           "location":"uri",
           "locationName":"profileId"
         },
@@ -1217,7 +1328,8 @@
         "roleArns":{"shape":"RoleArnList"},
         "managedPolicyArns":{"shape":"ManagedPolicyList"},
         "durationSeconds":{"shape":"UpdateProfileRequestDurationSecondsInteger"},
-        "acceptRoleSessionName":{"shape":"Boolean"}
+        "acceptRoleSessionName":{"shape":"Boolean"},
+        "aliasName":{"shape":"AliasName"}
       }
     },
     "UpdateProfileRequestDurationSecondsInteger":{
@@ -1236,12 +1348,14 @@
       "required":["trustAnchorId"],
       "members":{
         "trustAnchorId":{
-          "shape":"Uuid",
+          "shape":"TrustAnchorIdentifier",
           "location":"uri",
           "locationName":"trustAnchorId"
         },
         "name":{"shape":"ResourceName"},
-        "source":{"shape":"Source"}
+        "source":{"shape":"Source"},
+        "crlDpRevocationEnabled":{"shape":"Boolean"},
+        "aliasName":{"shape":"AliasName"}
       }
     },
     "Uuid":{

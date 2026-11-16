@@ -174,7 +174,7 @@ module Aws::LambdaMicrovms
     #
     # @!attribute [rw] egress_network_connectors
     #   The list of egress network connectors available to the MicroVM at
-    #   runtime.
+    #   image build time.
     #   @return [Array<String>]
     #
     # @!attribute [rw] cpu_configurations
@@ -295,7 +295,7 @@ module Aws::LambdaMicrovms
     #
     # @!attribute [rw] egress_network_connectors
     #   The list of egress network connectors available to the MicroVM at
-    #   runtime.
+    #   image build time.
     #   @return [Array<String>]
     #
     # @!attribute [rw] cpu_configurations
@@ -644,7 +644,7 @@ module Aws::LambdaMicrovms
     #
     # @!attribute [rw] egress_network_connectors
     #   The list of egress network connectors available to the MicroVM at
-    #   runtime.
+    #   image build time.
     #   @return [Array<String>]
     #
     # @!attribute [rw] cpu_configurations
@@ -794,7 +794,8 @@ module Aws::LambdaMicrovms
     #   @return [Array<String>]
     #
     # @!attribute [rw] egress_network_connectors
-    #   The list of egress network connectors configured for the MicroVM.
+    #   The list of egress network connectors available to the MicroVM at
+    #   runtime.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-microvms-2025-09-09/GetMicrovmResponse AWS API Documentation
@@ -1299,6 +1300,10 @@ module Aws::LambdaMicrovms
     #   (the version is deprecated; do not use it for new MicroVM images).
     #   @return [String]
     #
+    # @!attribute [rw] supported_cpu_configurations
+    #   CPU configurations supported by this managed base image version.
+    #   @return [Array<Types::CpuConfiguration>]
+    #
     # @!attribute [rw] created_at
     #   The timestamp when the version was created.
     #   @return [Time]
@@ -1313,6 +1318,7 @@ module Aws::LambdaMicrovms
       :image_arn,
       :image_version,
       :status,
+      :supported_cpu_configurations,
       :created_at,
       :updated_at)
       SENSITIVE = []
@@ -1521,7 +1527,7 @@ module Aws::LambdaMicrovms
     #
     # @!attribute [rw] egress_network_connectors
     #   The list of egress network connectors available to the MicroVM at
-    #   runtime.
+    #   image build time.
     #   @return [Array<String>]
     #
     # @!attribute [rw] cpu_configurations
@@ -1769,7 +1775,8 @@ module Aws::LambdaMicrovms
     #   @return [Array<String>]
     #
     # @!attribute [rw] egress_network_connectors
-    #   The list of egress network connectors to configure for the MicroVM.
+    #   The list of egress network connectors available to the MicroVM at
+    #   runtime.
     #   @return [Array<String>]
     #
     # @!attribute [rw] image_identifier
@@ -1883,7 +1890,8 @@ module Aws::LambdaMicrovms
     #   @return [Array<String>]
     #
     # @!attribute [rw] egress_network_connectors
-    #   The list of egress network connectors configured for the MicroVM.
+    #   The list of egress network connectors available to the MicroVM at
+    #   runtime.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-microvms-2025-09-09/RunMicrovmResponse AWS API Documentation
@@ -2130,7 +2138,7 @@ module Aws::LambdaMicrovms
     #
     # @!attribute [rw] egress_network_connectors
     #   The list of egress network connectors available to the MicroVM at
-    #   runtime.
+    #   image build time.
     #   @return [Array<String>]
     #
     # @!attribute [rw] cpu_configurations
@@ -2241,7 +2249,7 @@ module Aws::LambdaMicrovms
     #
     # @!attribute [rw] egress_network_connectors
     #   The list of egress network connectors available to the MicroVM at
-    #   runtime.
+    #   image build time.
     #   @return [Array<String>]
     #
     # @!attribute [rw] cpu_configurations
@@ -2348,7 +2356,7 @@ module Aws::LambdaMicrovms
     #
     # @!attribute [rw] egress_network_connectors
     #   The list of egress network connectors available to the MicroVM at
-    #   runtime.
+    #   image build time.
     #   @return [Array<String>]
     #
     # @!attribute [rw] cpu_configurations

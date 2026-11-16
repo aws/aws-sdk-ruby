@@ -329,6 +329,7 @@ module Aws::RDS
       attr_accessor snapshot_target: ::String
       attr_accessor copy_option_group: bool
       attr_accessor snapshot_availability_zone: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor source_region: ::String
       SENSITIVE: [:pre_signed_url]
     end
@@ -3427,6 +3428,7 @@ module Aws::RDS
       attr_accessor source_option_group: ::String
       attr_accessor source_account_id: ::String
       attr_accessor copy_timestamp: ::Time
+      attr_accessor source_region: ::String
       SENSITIVE: []
     end
 
@@ -3460,6 +3462,7 @@ module Aws::RDS
       attr_accessor option_group_option_settings: ::Array[Types::OptionGroupOptionSetting]
       attr_accessor option_group_option_versions: ::Array[Types::OptionVersion]
       attr_accessor copyable_cross_account: bool
+      attr_accessor copyable_cross_region: bool
       SENSITIVE: []
     end
 

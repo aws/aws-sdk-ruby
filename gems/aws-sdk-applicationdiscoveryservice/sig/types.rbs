@@ -26,7 +26,7 @@ module Aws::ApplicationDiscoveryService
       attr_accessor collection_status: ::String
       attr_accessor agent_type: ::String
       attr_accessor registered_time: ::String
-      SENSITIVE: []
+      SENSITIVE: [:agent_network_info_list]
     end
 
     class AgentNetworkInfo

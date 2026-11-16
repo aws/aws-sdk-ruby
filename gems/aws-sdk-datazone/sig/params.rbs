@@ -358,6 +358,25 @@ module Aws
       }?
     }
 
+      type o_auth_2_properties_patch = {
+      o_auth_2_grant_type: ("AUTHORIZATION_CODE" | "CLIENT_CREDENTIALS" | "JWT_BEARER")?,
+      o_auth_2_client_application: {
+        user_managed_client_application_client_id: ::String?,
+        a_ws_managed_client_application_reference: ::String?
+      }?,
+      token_url: ::String?,
+      token_url_parameters_map: Hash[::String, ::String]?
+    }
+
+      type authentication_configuration_patch = {
+      secret_arn: ::String?,
+      basic_authentication_credentials: {
+        user_name: ::String?,
+        password: ::String?
+      }?,
+      o_auth_2_properties: Params::o_auth_2_properties_patch?
+    }
+
     end
   end
 end

@@ -77,7 +77,7 @@ module Aws::AppRunner
       attr_accessor port: ::String
       attr_accessor runtime_environment_variables: ::Hash[::String, ::String]
       attr_accessor runtime_environment_secrets: ::Hash[::String, ::String]
-      SENSITIVE: [:build_command, :start_command]
+      SENSITIVE: [:build_command, :start_command, :runtime_environment_variables, :runtime_environment_secrets]
     end
 
     class CodeRepository
@@ -365,7 +365,7 @@ module Aws::AppRunner
       attr_accessor start_command: ::String
       attr_accessor port: ::String
       attr_accessor runtime_environment_secrets: ::Hash[::String, ::String]
-      SENSITIVE: [:start_command]
+      SENSITIVE: [:runtime_environment_variables, :start_command, :runtime_environment_secrets]
     end
 
     class ImageRepository

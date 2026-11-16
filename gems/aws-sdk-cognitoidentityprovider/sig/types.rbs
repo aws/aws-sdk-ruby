@@ -282,6 +282,19 @@ module Aws::CognitoIdentityProvider
       SENSITIVE: []
     end
 
+    class AdminListUserSessionsRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: [:username]
+    end
+
+    class AdminListUserSessionsResponse
+      attr_accessor sessions: ::Array[Types::SessionDescriptionType]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class AdminRemoveUserFromGroupRequest
       attr_accessor user_pool_id: ::String
       attr_accessor username: ::String
@@ -318,6 +331,17 @@ module Aws::CognitoIdentityProvider
       attr_accessor authentication_result: Types::AuthenticationResultType
       attr_accessor available_challenges: ::Array[("SMS_MFA" | "EMAIL_OTP" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "SELECT_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED" | "SMS_OTP" | "PASSWORD" | "WEB_AUTHN" | "PASSWORD_SRP")]
       SENSITIVE: [:session]
+    end
+
+    class AdminRevokeUserSessionRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      attr_accessor session_id: ::String
+      attr_accessor revoke_associated_sessions: ("NONE" | "LINKED")
+      SENSITIVE: [:username]
+    end
+
+    class AdminRevokeUserSessionResponse < Aws::EmptyStructure
     end
 
     class AdminSetUserMFAPreferenceRequest
@@ -490,6 +514,11 @@ module Aws::CognitoIdentityProvider
       attr_accessor expires_in: ::Integer
       attr_accessor token_type: ::String
       SENSITIVE: [:access_token]
+    end
+
+    class ClientSSOSessionConfigType
+      attr_accessor max_validity_minutes: ::Integer
+      SENSITIVE: []
     end
 
     class ClientSecretDescriptorType
@@ -769,6 +798,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor admin_create_user_config: Types::AdminCreateUserConfigType
       attr_accessor schema: ::Array[Types::SchemaAttributeType]
       attr_accessor user_pool_add_ons: Types::UserPoolAddOnsType
+      attr_accessor dcr_configuration: Types::DcrConfigurationType
       attr_accessor username_configuration: Types::UsernameConfigurationType
       attr_accessor account_recovery_setting: Types::AccountRecoverySettingType
       attr_accessor user_pool_tier: ("LITE" | "ESSENTIALS" | "PLUS")
@@ -798,6 +828,15 @@ module Aws::CognitoIdentityProvider
     class CustomSMSLambdaVersionConfigType
       attr_accessor lambda_version: ("V1_0")
       attr_accessor lambda_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DcrConfigurationType
+      attr_accessor enable_status: ("Enabled" | "Disabled")
+      attr_accessor open_dcr_enabled: bool
+      attr_accessor authenticated_grant_types: ::Array[("code" | "implicit" | "client_credentials")]
+      attr_accessor open_dcr_grant_types: ::Array[("code" | "implicit" | "client_credentials")]
+      attr_accessor allowed_scopes: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1306,6 +1345,19 @@ module Aws::CognitoIdentityProvider
       SENSITIVE: [:username]
     end
 
+    class GetUserPoolClientSessionConfigurationRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor client_id: ::String
+      SENSITIVE: [:client_id]
+    end
+
+    class GetUserPoolClientSessionConfigurationResponse
+      attr_accessor user_pool_id: ::String
+      attr_accessor client_id: ::String
+      attr_accessor sso_session: Types::ClientSSOSessionConfigType
+      SENSITIVE: [:client_id]
+    end
+
     class GetUserPoolMfaConfigRequest
       attr_accessor user_pool_id: ::String
       SENSITIVE: []
@@ -1317,6 +1369,18 @@ module Aws::CognitoIdentityProvider
       attr_accessor email_mfa_configuration: Types::EmailMfaConfigType
       attr_accessor mfa_configuration: ("OFF" | "ON" | "OPTIONAL")
       attr_accessor web_authn_configuration: Types::WebAuthnConfigurationType
+      SENSITIVE: []
+    end
+
+    class GetUserPoolSessionConfigurationRequest
+      attr_accessor user_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetUserPoolSessionConfigurationResponse
+      attr_accessor user_pool_id: ::String
+      attr_accessor user_session_tracking: ("ENABLED" | "DISABLED")
+      attr_accessor token_session: Types::UserPoolTokenSessionConfigType
       SENSITIVE: []
     end
 
@@ -1607,6 +1671,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor user_pool_id: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor client_type: ("REGULAR" | "DCR")
       SENSITIVE: []
     end
 
@@ -1636,6 +1701,18 @@ module Aws::CognitoIdentityProvider
 
     class ListUserPoolsResponse
       attr_accessor user_pools: ::Array[Types::UserPoolDescriptionType]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUserSessionsRequest
+      attr_accessor access_token: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: [:access_token]
+    end
+
+    class ListUserSessionsResponse
+      attr_accessor sessions: ::Array[Types::SessionDescriptionType]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1865,6 +1942,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor identifier: ::String
       attr_accessor name: ::String
       attr_accessor scopes: ::Array[Types::ResourceServerScopeType]
+      attr_accessor managed_by: ("COGNITO")
       SENSITIVE: []
     end
 
@@ -1892,10 +1970,21 @@ module Aws::CognitoIdentityProvider
       attr_accessor token: ::String
       attr_accessor client_id: ::String
       attr_accessor client_secret: ::String
+      attr_accessor revoke_associated_sessions: ("NONE" | "LINKED")
       SENSITIVE: [:token, :client_id, :client_secret]
     end
 
     class RevokeTokenResponse < Aws::EmptyStructure
+    end
+
+    class RevokeUserSessionRequest
+      attr_accessor access_token: ::String
+      attr_accessor session_id: ::String
+      attr_accessor revoke_associated_sessions: ("NONE" | "LINKED")
+      SENSITIVE: [:access_token]
+    end
+
+    class RevokeUserSessionResponse < Aws::EmptyStructure
     end
 
     class RiskConfigurationType
@@ -1951,6 +2040,26 @@ module Aws::CognitoIdentityProvider
       SENSITIVE: []
     end
 
+    class SessionDescriptionType
+      attr_accessor session_id: ::String
+      attr_accessor session_type: ("TOKEN" | "SSO")
+      attr_accessor client_id: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor last_active_date: ::Time
+      attr_accessor device_type: ::String
+      attr_accessor last_ip_address: ::String
+      attr_accessor last_location: Types::SessionLocationType
+      attr_accessor origin_session_id: ::String
+      attr_accessor is_current_session: bool
+      SENSITIVE: [:client_id, :last_ip_address]
+    end
+
+    class SessionLocationType
+      attr_accessor city: ::String
+      attr_accessor country: ::String
+      SENSITIVE: []
+    end
+
     class SetLogDeliveryConfigurationRequest
       attr_accessor user_pool_id: ::String
       attr_accessor log_configurations: ::Array[Types::LogConfigurationType]
@@ -2001,6 +2110,20 @@ module Aws::CognitoIdentityProvider
     class SetUserMFAPreferenceResponse < Aws::EmptyStructure
     end
 
+    class SetUserPoolClientSessionConfigurationRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor client_id: ::String
+      attr_accessor sso_session: Types::ClientSSOSessionConfigType
+      SENSITIVE: [:client_id]
+    end
+
+    class SetUserPoolClientSessionConfigurationResponse
+      attr_accessor user_pool_id: ::String
+      attr_accessor client_id: ::String
+      attr_accessor sso_session: Types::ClientSSOSessionConfigType
+      SENSITIVE: [:client_id]
+    end
+
     class SetUserPoolMfaConfigRequest
       attr_accessor user_pool_id: ::String
       attr_accessor sms_mfa_configuration: Types::SmsMfaConfigType
@@ -2017,6 +2140,20 @@ module Aws::CognitoIdentityProvider
       attr_accessor email_mfa_configuration: Types::EmailMfaConfigType
       attr_accessor mfa_configuration: ("OFF" | "ON" | "OPTIONAL")
       attr_accessor web_authn_configuration: Types::WebAuthnConfigurationType
+      SENSITIVE: []
+    end
+
+    class SetUserPoolSessionConfigurationRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor user_session_tracking: ("ENABLED" | "DISABLED")
+      attr_accessor token_session: Types::UserPoolTokenSessionConfigType
+      SENSITIVE: []
+    end
+
+    class SetUserPoolSessionConfigurationResponse
+      attr_accessor user_pool_id: ::String
+      attr_accessor user_session_tracking: ("ENABLED" | "DISABLED")
+      attr_accessor token_session: Types::UserPoolTokenSessionConfigType
       SENSITIVE: []
     end
 
@@ -2426,6 +2563,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor user_pool_tags: ::Hash[::String, ::String]
       attr_accessor admin_create_user_config: Types::AdminCreateUserConfigType
       attr_accessor user_pool_add_ons: Types::UserPoolAddOnsType
+      attr_accessor dcr_configuration: Types::DcrConfigurationType
       attr_accessor account_recovery_setting: Types::AccountRecoverySettingType
       attr_accessor pool_name: ::String
       attr_accessor user_pool_tier: ("LITE" | "ESSENTIALS" | "PLUS")
@@ -2532,6 +2670,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor enable_propagate_additional_user_context_data: bool
       attr_accessor auth_session_validity: ::Integer
       attr_accessor refresh_token_rotation: Types::RefreshTokenRotationType
+      attr_accessor client_type: ("REGULAR" | "DCR")
       SENSITIVE: [:client_id, :client_secret]
     end
 
@@ -2562,6 +2701,11 @@ module Aws::CognitoIdentityProvider
 
     class UserPoolTaggingException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UserPoolTokenSessionConfigType
+      attr_accessor max_per_user: ::Integer
       SENSITIVE: []
     end
 
@@ -2596,6 +2740,7 @@ module Aws::CognitoIdentityProvider
       attr_accessor custom_domain: ::String
       attr_accessor admin_create_user_config: Types::AdminCreateUserConfigType
       attr_accessor user_pool_add_ons: Types::UserPoolAddOnsType
+      attr_accessor dcr_configuration: Types::DcrConfigurationType
       attr_accessor username_configuration: Types::UsernameConfigurationType
       attr_accessor arn: ::String
       attr_accessor account_recovery_setting: Types::AccountRecoverySettingType

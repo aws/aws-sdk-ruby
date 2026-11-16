@@ -14,7 +14,7 @@ module Aws::PersonalizeRuntime
       attr_accessor num_results: ::Integer
       attr_accessor filter_arn: ::String
       attr_accessor filter_values: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:filter_values]
     end
 
     class GetActionRecommendationsResponse
@@ -31,7 +31,7 @@ module Aws::PersonalizeRuntime
       attr_accessor filter_arn: ::String
       attr_accessor filter_values: ::Hash[::String, ::String]
       attr_accessor metadata_columns: ::Hash[::String, ::Array[::String]]
-      SENSITIVE: []
+      SENSITIVE: [:context, :filter_values]
     end
 
     class GetPersonalizedRankingResponse
@@ -51,7 +51,7 @@ module Aws::PersonalizeRuntime
       attr_accessor recommender_arn: ::String
       attr_accessor promotions: ::Array[Types::Promotion]
       attr_accessor metadata_columns: ::Hash[::String, ::Array[::String]]
-      SENSITIVE: []
+      SENSITIVE: [:context, :filter_values]
     end
 
     class GetRecommendationsResponse
@@ -85,7 +85,7 @@ module Aws::PersonalizeRuntime
       attr_accessor percent_promoted_items: ::Integer
       attr_accessor filter_arn: ::String
       attr_accessor filter_values: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:filter_values]
     end
 
     class ResourceNotFoundException

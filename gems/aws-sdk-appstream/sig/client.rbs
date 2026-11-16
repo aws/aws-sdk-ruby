@@ -397,7 +397,20 @@ module Aws
                                   },
                                   ?softwares_to_install: Array[::String],
                                   ?softwares_to_uninstall: Array[::String],
-                                  ?disable_imdsv1: bool
+                                  ?disable_imdsv1: bool,
+                                  ?agent_access_config: {
+                                    settings: Array[
+                                      {
+                                        agent_action: ("COMPUTER_VISION" | "COMPUTER_INPUT" | "FORWARD_MCP_TOOLS"),
+                                        permission: ("ENABLED" | "DISABLED")
+                                      }
+                                    ],
+                                    s3_bucket_arn: ::String?,
+                                    screenshots_upload_enabled: bool?,
+                                    screen_resolution: ("W_1280xH_720"),
+                                    screen_image_format: ("PNG" | "JPEG"),
+                                    user_control_mode: ("VIEW_ONLY" | "VIEW_STOP" | "DISABLED")?
+                                  }
                                 ) -> _CreateImageBuilderResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateImageBuilderResponseSuccess
 
@@ -502,6 +515,8 @@ module Aws
                             ],
                             s3_bucket_arn: ::String?,
                             screenshots_upload_enabled: bool?,
+                            replay_session_enabled: bool?,
+                            kms_key_arn: ::String?,
                             screen_resolution: ("W_1280xH_720"),
                             screen_image_format: ("PNG" | "JPEG"),
                             user_control_mode: ("VIEW_ONLY" | "VIEW_STOP" | "DISABLED")?
@@ -1355,6 +1370,32 @@ module Aws
                         ) -> _UpdateFleetResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFleetResponseSuccess
 
+      interface _UpdateImageBuilderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateImageBuilderResult]
+        def image_builder: () -> Types::ImageBuilder
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#update_image_builder-instance_method
+      def update_image_builder: (
+                                  name: ::String,
+                                  ?description: ::String,
+                                  ?display_name: ::String,
+                                  ?agent_access_config: {
+                                    settings: Array[
+                                      {
+                                        agent_action: ("COMPUTER_VISION" | "COMPUTER_INPUT" | "FORWARD_MCP_TOOLS"),
+                                        permission: ("ENABLED" | "DISABLED")
+                                      }
+                                    ]?,
+                                    s3_bucket_arn: ::String?,
+                                    screenshots_upload_enabled: bool?,
+                                    screen_resolution: ("W_1280xH_720")?,
+                                    screen_image_format: ("PNG" | "JPEG")?,
+                                    user_control_mode: ("VIEW_ONLY" | "VIEW_STOP" | "DISABLED")?
+                                  },
+                                  ?attributes_to_delete: Array[("AGENT_ACCESS_CONFIG")]
+                                ) -> _UpdateImageBuilderResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateImageBuilderResponseSuccess
+
       interface _UpdateImagePermissionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateImagePermissionsResult]
       end
@@ -1389,7 +1430,7 @@ module Aws
                           ?delete_storage_connectors: bool,
                           ?redirect_url: ::String,
                           ?feedback_url: ::String,
-                          ?attributes_to_delete: Array[("STORAGE_CONNECTORS" | "STORAGE_CONNECTOR_HOMEFOLDERS" | "STORAGE_CONNECTOR_GOOGLE_DRIVE" | "STORAGE_CONNECTOR_ONE_DRIVE" | "REDIRECT_URL" | "FEEDBACK_URL" | "THEME_NAME" | "USER_SETTINGS" | "EMBED_HOST_DOMAINS" | "IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "STREAMING_EXPERIENCE_SETTINGS" | "CONTENT_REDIRECTION" | "AGENT_ACCESS_CONFIG" | "STORAGE_CONNECTOR_AUTHENTICATION")],
+                          ?attributes_to_delete: Array[("STORAGE_CONNECTORS" | "STORAGE_CONNECTOR_HOMEFOLDERS" | "STORAGE_CONNECTOR_GOOGLE_DRIVE" | "STORAGE_CONNECTOR_ONE_DRIVE" | "REDIRECT_URL" | "FEEDBACK_URL" | "THEME_NAME" | "USER_SETTINGS" | "EMBED_HOST_DOMAINS" | "IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "STREAMING_EXPERIENCE_SETTINGS" | "CONTENT_REDIRECTION" | "AGENT_ACCESS_CONFIG" | "STORAGE_CONNECTOR_AUTHENTICATION" | "AGENT_ACCESS_CONFIG_KMS_KEY_ARN")],
                           ?user_settings: Array[
                             {
                               action: ("CLIPBOARD_COPY_FROM_LOCAL_DEVICE" | "CLIPBOARD_COPY_TO_LOCAL_DEVICE" | "FILE_UPLOAD" | "FILE_DOWNLOAD" | "PRINTING_TO_LOCAL_DEVICE" | "DOMAIN_PASSWORD_SIGNIN" | "DOMAIN_SMART_CARD_SIGNIN" | "AUTO_TIME_ZONE_REDIRECTION"),
@@ -1427,6 +1468,8 @@ module Aws
                             ]?,
                             s3_bucket_arn: ::String?,
                             screenshots_upload_enabled: bool?,
+                            replay_session_enabled: bool?,
+                            kms_key_arn: ::String?,
                             screen_resolution: ("W_1280xH_720")?,
                             screen_image_format: ("PNG" | "JPEG")?,
                             user_control_mode: ("VIEW_ONLY" | "VIEW_STOP" | "DISABLED")?

@@ -69,6 +69,7 @@ module Aws::DynamoDB
   #
   # | waiter_name                          | params                                          | :delay   | :max_attempts |
   # | ------------------------------------ | ----------------------------------------------- | -------- | ------------- |
+  # | bulk_operation_completed             | {Client#describe_bulk_operation}                | 20       | 180           |
   # | contributor_insights_enabled         | {Client#describe_contributor_insights}          | 20       | 30            |
   # | export_completed                     | {Client#describe_export}                        | 20       | 60            |
   # | import_completed                     | {Client#describe_import}                        | 20       | 60            |
@@ -77,6 +78,63 @@ module Aws::DynamoDB
   # | table_not_exists                     | {Client#describe_table}                         | 20       | 25            |
   #
   module Waiters
+
+    # Wait until a bulk operation is completed.
+    class BulkOperationCompleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (180)
+      # @option options [Integer] :delay (20)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 180,
+          delay: 20,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_bulk_operation,
+            acceptors: [
+              {
+                "expected" => "COMPLETED",
+                "matcher" => "path",
+                "state" => "success",
+                "argument" => "bulk_operation_description.bulk_operation_status"
+              },
+              {
+                "expected" => "COMPLETED_WITH_ERRORS",
+                "matcher" => "path",
+                "state" => "success",
+                "argument" => "bulk_operation_description.bulk_operation_status"
+              },
+              {
+                "expected" => "CANCELLED",
+                "matcher" => "path",
+                "state" => "failure",
+                "argument" => "bulk_operation_description.bulk_operation_status"
+              },
+              {
+                "expected" => "FAILED",
+                "matcher" => "path",
+                "state" => "failure",
+                "argument" => "bulk_operation_description.bulk_operation_status"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_bulk_operation)
+      # @return (see Client#describe_bulk_operation)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
 
     class ContributorInsightsEnabled
 

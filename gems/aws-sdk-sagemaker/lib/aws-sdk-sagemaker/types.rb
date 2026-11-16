@@ -883,6 +883,32 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A layout of accelerator partitions for a production variant. On NVIDIA
+    # GPUs, the partitions are Multi-Instance GPU (MIG) instances. SageMaker
+    # applies the layout to every accelerator on the variant's instance
+    # type. You can't change the layout of a running endpoint. To use a
+    # different layout, create a new endpoint.
+    #
+    # @!attribute [rw] accelerator_partition_types
+    #   The list of partition profiles to carve on each accelerator that
+    #   this layout applies to. On NVIDIA GPUs these are Multi-Instance GPU
+    #   (MIG) profiles, for example `["mig-3g.40gb", "mig-4g.40gb"]`. The
+    #   order of the profiles doesn't change how the accelerator is
+    #   partitioned. However, when you update an endpoint, a layout with the
+    #   same profiles in a different order counts as a different layout, and
+    #   the update is rejected. Repeat a profile to request more than one
+    #   partition of that size: for example, `["mig-3g.40gb",
+    #   "mig-3g.40gb"]` requests two `mig-3g.40gb` partitions.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AcceleratorPartitionLayout AWS API Documentation
+    #
+    class AcceleratorPartitionLayout < Struct.new(
+      :accelerator_partition_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure describing the source of an action.
     #
     # @!attribute [rw] source_uri
@@ -1558,6 +1584,29 @@ module Aws::SageMaker
     class AlgorithmValidationSpecification < Struct.new(
       :validation_role,
       :validation_profiles)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The aliases to add to and remove from a pipeline version. An alias
+    # can't appear in both lists. After the update, the version can have up
+    # to 10 aliases.
+    #
+    # @!attribute [rw] add
+    #   The aliases to add to the pipeline version. If you assigned an alias
+    #   to another version of the same pipeline, you must remove it from
+    #   that version before you add it here.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remove
+    #   The aliases to remove from the pipeline version.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AliasOperations AWS API Documentation
+    #
+    class AliasOperations < Struct.new(
+      :add,
+      :remove)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6292,6 +6341,14 @@ module Aws::SageMaker
     #     idle before patching. All instances are uncordoned after patching
     #     completes. If not all instances become idle, no patching occurs
     #     and all instances remain on the previous AMI version.
+    #
+    #   * `DrainFirst`: Designed for workloads that never become idle, such
+    #     as inference. Cordons instances, evicts the running pods, and then
+    #     patches each instance in batches. Each instance is uncordoned
+    #     after patching. Use `DrainPolicy` to control how long to wait for
+    #     pods to drain and what happens if the drain times out. Requires
+    #     `MaximumBatchSize` in `DeploymentConfig`. Available only for
+    #     clusters that use Amazon EKS as the orchestrator.
     #   @return [String]
     #
     # @!attribute [rw] patch_schedule
@@ -6304,12 +6361,30 @@ module Aws::SageMaker
     #   rolling patching strategy.
     #   @return [Types::DeploymentConfiguration]
     #
+    # @!attribute [rw] idle_wait_window_in_seconds
+    #   The maximum time, in seconds, that automatic patching waits for
+    #   instances to become idle after a scheduled patch starts. Automatic
+    #   patching uncordons instances that don't become idle within this
+    #   window, and they remain on the previous AMI version. Valid values
+    #   are from 3600 (1 hour) to 2160000 (25 days). The default is 86400
+    #   (24 hours). This setting applies only to the `WhenIdle` and
+    #   `WhenAllIdle` strategies.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] drain_policy
+    #   The policy that controls how pods are evicted from an instance
+    #   before it is patched. Valid only when `PatchingStrategy` is
+    #   `DrainFirst`.
+    #   @return [Types::ClusterDrainPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterAutoPatchConfig AWS API Documentation
     #
     class ClusterAutoPatchConfig < Struct.new(
       :patching_strategy,
       :patch_schedule,
-      :deployment_config)
+      :deployment_config,
+      :idle_wait_window_in_seconds,
+      :drain_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6331,6 +6406,14 @@ module Aws::SageMaker
     #     idle before patching. All instances are uncordoned after patching
     #     completes. If not all instances become idle, no patching occurs
     #     and all instances remain on the previous AMI version.
+    #
+    #   * `DrainFirst`: Designed for workloads that never become idle, such
+    #     as inference. Cordons instances, evicts the running pods, and then
+    #     patches each instance in batches. Each instance is uncordoned
+    #     after patching. Use `DrainPolicy` to control how long to wait for
+    #     pods to drain and what happens if the drain times out. Requires
+    #     `MaximumBatchSize` in `DeploymentConfig`. Available only for
+    #     clusters that use Amazon EKS as the orchestrator.
     #   @return [String]
     #
     # @!attribute [rw] current_patch_schedule
@@ -6346,13 +6429,29 @@ module Aws::SageMaker
     #   The deployment configuration for rolling patch updates.
     #   @return [Types::DeploymentConfiguration]
     #
+    # @!attribute [rw] idle_wait_window_in_seconds
+    #   The maximum time, in seconds, that automatic patching waits for
+    #   instances to become idle after a scheduled patch starts. Automatic
+    #   patching uncordons instances that don't become idle within this
+    #   window, and they remain on the previous AMI version. The default is
+    #   86400 (24 hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] drain_policy
+    #   The policy that controls how pods are evicted from an instance
+    #   before it is patched. Applies only when `PatchingStrategy` is
+    #   `DrainFirst`.
+    #   @return [Types::ClusterDrainPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterAutoPatchConfigDetails AWS API Documentation
     #
     class ClusterAutoPatchConfigDetails < Struct.new(
       :patching_strategy,
       :current_patch_schedule,
       :desired_patch_schedule,
-      :deployment_config)
+      :deployment_config,
+      :idle_wait_window_in_seconds,
+      :drain_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6427,6 +6526,39 @@ module Aws::SageMaker
     class ClusterCapacityRequirements < Struct.new(
       :spot,
       :on_demand)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies how pods are evicted from an instance before it is patched
+    # with the `DrainFirst` strategy. By default, evictions respect
+    # Kubernetes Pod Disruption Budgets.
+    #
+    # @!attribute [rw] drain_timeout_in_seconds
+    #   The maximum time, in seconds, to wait for the pods on an instance to
+    #   drain. Valid values are from 0 to 5400 (90 minutes). The default is
+    #   3600 (1 hour).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] on_drain_timeout
+    #   The action to take if the pods on an instance don't drain within
+    #   `DrainTimeoutInSeconds`. The default is `Skip`.
+    #
+    #   * `Skip`: Doesn't patch the instance. The instance is uncordoned
+    #     and remains on the previous AMI version. This can leave the
+    #     instance group partially patched. You can then use
+    #     UpdateClusterSoftware with the desired ImageReleaseVersion to
+    #     manually update the remaining instances.
+    #
+    #   * `Force`: Deletes the remaining pods without respecting Pod
+    #     Disruption Budgets, and then patches the instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterDrainPolicy AWS API Documentation
+    #
+    class ClusterDrainPolicy < Struct.new(
+      :drain_timeout_in_seconds,
+      :on_drain_timeout)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6539,6 +6671,12 @@ module Aws::SageMaker
     #   and `Error`.
     #   @return [String]
     #
+    # @!attribute [rw] operation_id
+    #   The unique identifier (UUID) of the cluster operation that the event
+    #   is associated with, such as a scaling operation. This field is not
+    #   returned when the event is not associated with an operation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterEventDetail AWS API Documentation
     #
     class ClusterEventDetail < Struct.new(
@@ -6551,7 +6689,8 @@ module Aws::SageMaker
       :event_time,
       :event_details,
       :description,
-      :event_level)
+      :event_level,
+      :operation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6599,6 +6738,12 @@ module Aws::SageMaker
     #   and `Error`.
     #   @return [String]
     #
+    # @!attribute [rw] operation_id
+    #   The unique identifier (UUID) of the cluster operation that the event
+    #   is associated with, such as a scaling operation. This field is not
+    #   returned when the event is not associated with an operation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterEventSummary AWS API Documentation
     #
     class ClusterEventSummary < Struct.new(
@@ -6610,7 +6755,8 @@ module Aws::SageMaker
       :resource_type,
       :event_time,
       :description,
-      :event_level)
+      :event_level,
+      :operation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7727,6 +7873,107 @@ module Aws::SageMaker
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterOnDemandOptions AWS API Documentation
     #
     class ClusterOnDemandOptions < Aws::EmptyStructure; end
+
+    # A point-in-time snapshot of an instance group's scaling
+    # configuration. This structure represents both the original
+    # configuration before the operation and the desired configuration
+    # requested by the operation.
+    #
+    # @!attribute [rw] current_count
+    #   The number of instances that were in the instance group at the time
+    #   of the operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_count
+    #   The target number of instances for the instance group.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_count
+    #   The minimum number of instances that must be available in the
+    #   instance group of a HyperPod cluster before it transitions to
+    #   `InService` status.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterOperationScalingConfiguration AWS API Documentation
+    #
+    class ClusterOperationScalingConfiguration < Struct.new(
+      :current_count,
+      :target_count,
+      :min_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scaling details for a single instance group that is affected by a
+    # cluster operation.
+    #
+    # @!attribute [rw] instance_group_name
+    #   The name of the instance group being scaled.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the scaling operation for this instance group. Valid
+    #   values are `InProgress`, `Superseded`, or `Done`.
+    #   @return [String]
+    #
+    # @!attribute [rw] original
+    #   The scaling configuration of the instance group before the scaling
+    #   operation was applied, including its current, target, and minimum
+    #   instance counts.
+    #   @return [Types::ClusterOperationScalingConfiguration]
+    #
+    # @!attribute [rw] desired
+    #   The desired scaling configuration of the instance group for the
+    #   scaling operation, including its target and minimum instance counts.
+    #   @return [Types::ClusterOperationScalingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterOperationScalingDetails AWS API Documentation
+    #
+    class ClusterOperationScalingDetails < Struct.new(
+      :instance_group_name,
+      :status,
+      :original,
+      :desired)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of an operation performed on a HyperPod cluster.
+    #
+    # @!attribute [rw] operation_id
+    #   The unique identifier (UUID) of the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the HyperPod cluster associated
+    #   with the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the operation. Valid values are `Scaling` or
+    #   `DeepHealthCheck`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the operation. Valid values are `InProgress`,
+    #   `Superseded`, or `Done`.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp when the operation was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterOperationSummary AWS API Documentation
+    #
+    class ClusterOperationSummary < Struct.new(
+      :operation_id,
+      :cluster_arn,
+      :type,
+      :status,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The type of orchestrator used for the SageMaker HyperPod cluster.
     #
@@ -9984,6 +10231,88 @@ module Aws::SageMaker
     #
     class CreateAutoMLJobV2Response < Struct.new(
       :auto_ml_job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on
+    #   which to install the extension. The cluster must use Slurm as the
+    #   orchestrator and have `NodeProvisioningMode` set to `Continuous`.
+    #   @return [String]
+    #
+    # @!attribute [rw] extension_name
+    #   The name of the extension to install, for example
+    #   `sagemaker-observability`.
+    #   @return [String]
+    #
+    # @!attribute [rw] extension_version
+    #   The version of the extension to install, in `MAJOR.MINOR.PATCH`
+    #   format, for example `1.0.0`. If you don't specify a version,
+    #   SageMaker HyperPod installs the latest available version of the
+    #   extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_values
+    #   The configuration settings for the extension, as a JSON object
+    #   serialized as a string, for example
+    #   `{"metricsProvider":{"nodeMetrics":{"level":"ADVANCED"}}}`. Each
+    #   extension version defines which settings it accepts. SageMaker
+    #   HyperPod validates the settings against that definition, and rejects
+    #   the request if a setting is unknown or has an invalid value.
+    #   Settings that you omit use the extension's default values. If you
+    #   omit `ConfigurationValues`, all settings use their default values.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Custom tags for managing the extension as an Amazon Web Services
+    #   resource. You can add tags to your extension in the same way you add
+    #   them in other Amazon Web Services services that support tagging. To
+    #   learn more about tagging Amazon Web Services resources in general,
+    #   see [Tagging Amazon Web Services Resources User Guide][1]. To use
+    #   this operation to add tags when you create an extension, you must
+    #   have the `sagemaker:AddTags` permission.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide so that the
+    #   operation completes no more than one time. This token is valid for 8
+    #   hours. If you retry the request with the same client token and the
+    #   same parameters within this time, the API returns the Amazon
+    #   Resource Name (ARN) of the extension that the original request
+    #   created, without creating a duplicate. If you use the same client
+    #   token with different parameters, the request fails.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateClusterExtensionRequest AWS API Documentation
+    #
+    class CreateClusterExtensionRequest < Struct.new(
+      :cluster_arn,
+      :extension_name,
+      :extension_version,
+      :configuration_values,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] extension_arn
+    #   The Amazon Resource Name (ARN) of the extension that you created.
+    #   Use this ARN to describe, update, or delete the extension.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateClusterExtensionResponse AWS API Documentation
+    #
+    class CreateClusterExtensionResponse < Struct.new(
+      :extension_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13951,6 +14280,16 @@ module Aws::SageMaker
     #   default.
     #   @return [Types::ParallelismConfiguration]
     #
+    # @!attribute [rw] pipeline_version_aliases
+    #   The aliases to assign to the first version of the pipeline. You can
+    #   use an alias instead of a pipeline version ID to start an execution,
+    #   describe the pipeline, or list its executions. Each alias can
+    #   contain 1-128 letters, numbers, periods (.), hyphens (-), and
+    #   underscores (\_), and can't consist of numbers only. An alias must
+    #   be unique within the pipeline, and a version can have up to 10
+    #   aliases.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreatePipelineRequest AWS API Documentation
     #
     class CreatePipelineRequest < Struct.new(
@@ -13962,7 +14301,8 @@ module Aws::SageMaker
       :client_request_token,
       :role_arn,
       :tags,
-      :parallelism_configuration)
+      :parallelism_configuration,
+      :pipeline_version_aliases)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16445,6 +16785,37 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on
+    #   which the extension is installed.
+    #   @return [String]
+    #
+    # @!attribute [rw] extension_arn
+    #   The Amazon Resource Name (ARN) of the extension to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteClusterExtensionRequest AWS API Documentation
+    #
+    class DeleteClusterExtensionRequest < Struct.new(
+      :cluster_arn,
+      :extension_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] extension_arn
+    #   The Amazon Resource Name (ARN) of the extension that is being
+    #   deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteClusterExtensionResponse AWS API Documentation
+    #
+    class DeleteClusterExtensionResponse < Struct.new(
+      :extension_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_name
     #   The string name or the Amazon Resource Name (ARN) of the SageMaker
     #   HyperPod cluster to delete.
@@ -18577,6 +18948,58 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on
+    #   which the extension is installed.
+    #   @return [String]
+    #
+    # @!attribute [rw] extension_arn
+    #   The Amazon Resource Name (ARN) of the extension to describe.
+    #   `CreateClusterExtension` returns this ARN, and
+    #   `ListClusterExtensions` lists it. If you delete an extension and
+    #   create it again, the new extension has a new ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterExtensionRequest AWS API Documentation
+    #
+    class DescribeClusterExtensionRequest < Struct.new(
+      :cluster_arn,
+      :extension_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] extension_details
+    #   The details of the extension.
+    #   @return [Types::ExtensionDetails]
+    #
+    # @!attribute [rw] node_summary
+    #   A summary of how many nodes in your cluster the extension targets,
+    #   and how many of them run the extension's current version and
+    #   configuration.
+    #   @return [Types::ExtensionNodeSummary]
+    #
+    # @!attribute [rw] health
+    #   The problems that affect the extension on the cluster's nodes,
+    #   grouped by cause, with the number of nodes that each problem
+    #   affects. Use it to find out why `ActiveCount` is lower than
+    #   `TotalCount`, or why the status is `Degraded`, `CreateFailed`, or
+    #   `UpdateFailed`. SageMaker HyperPod omits `Health` when no node has a
+    #   problem. Nodes where SageMaker HyperPod hasn't finished installing
+    #   or updating the extension aren't counted in any issue, unless an
+    #   earlier attempt failed on them.
+    #   @return [Types::ExtensionHealth]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterExtensionResponse AWS API Documentation
+    #
+    class DescribeClusterExtensionResponse < Struct.new(
+      :extension_details,
+      :node_summary,
+      :health)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_name
     #   The string name or the Amazon Resource Name (ARN) of the SageMaker
     #   HyperPod cluster in which the node is.
@@ -18611,6 +19034,72 @@ module Aws::SageMaker
     #
     class DescribeClusterNodeResponse < Struct.new(
       :node_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name or Amazon Resource Name (ARN) of the HyperPod cluster
+    #   associated with the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_id
+    #   The unique identifier (UUID) of the operation to describe. This ID
+    #   can be obtained from the `ListClusterOperations` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterOperationRequest AWS API Documentation
+    #
+    class DescribeClusterOperationRequest < Struct.new(
+      :cluster_name,
+      :operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_id
+    #   The unique identifier (UUID) of the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the HyperPod cluster associated
+    #   with the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the operation. Valid values are `Scaling` or
+    #   `DeepHealthCheck`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the operation. Valid values are `InProgress`,
+    #   `Superseded`, or `Done`.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp when the operation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] scaling_details
+    #   The per-instance-group scaling details for the operation. This field
+    #   is populated when the operation `Type` is `Scaling`.
+    #   @return [Array<Types::ClusterOperationScalingDetails>]
+    #
+    # @!attribute [rw] deep_health_check_details
+    #   The deep health check details for the operation. This field is
+    #   populated when the operation `Type` is `DeepHealthCheck`.
+    #   @return [Array<Types::InstanceGroupHealthCheckConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterOperationResponse AWS API Documentation
+    #
+    class DescribeClusterOperationResponse < Struct.new(
+      :operation_id,
+      :cluster_arn,
+      :type,
+      :status,
+      :creation_time,
+      :scaling_details,
+      :deep_health_check_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20514,6 +21003,14 @@ module Aws::SageMaker
     #   The last modified time of the hub content.
     #   @return [Time]
     #
+    # @!attribute [rw] created_by
+    #   Information about the user who created the hub content.
+    #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Information about the user who last modified the hub content.
+    #   @return [Types::UserContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHubContentResponse AWS API Documentation
     #
     class DescribeHubContentResponse < Struct.new(
@@ -20536,7 +21033,9 @@ module Aws::SageMaker
       :hub_content_status,
       :failure_reason,
       :creation_time,
-      :last_modified_time)
+      :last_modified_time,
+      :created_by,
+      :last_modified_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20593,6 +21092,14 @@ module Aws::SageMaker
     #   The date and time that the hub was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] created_by
+    #   Information about the user who created the hub.
+    #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Information about the user who last modified the hub.
+    #   @return [Types::UserContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHubResponse AWS API Documentation
     #
     class DescribeHubResponse < Struct.new(
@@ -20605,7 +21112,9 @@ module Aws::SageMaker
       :hub_status,
       :failure_reason,
       :creation_time,
-      :last_modified_time)
+      :last_modified_time,
+      :created_by,
+      :last_modified_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23587,6 +24096,17 @@ module Aws::SageMaker
     #   The MLflow configuration of the pipeline execution.
     #   @return [Types::MLflowConfiguration]
     #
+    # @!attribute [rw] pipeline_version_aliases
+    #   The aliases currently assigned to the pipeline version that the
+    #   execution ran.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the execution
+    #   uses. SageMaker returns this value only for executions of pipelines
+    #   that Amazon Web Services manages.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineExecutionResponse AWS API Documentation
     #
     class DescribePipelineExecutionResponse < Struct.new(
@@ -23604,7 +24124,9 @@ module Aws::SageMaker
       :parallelism_configuration,
       :selective_execution_config,
       :pipeline_version_id,
-      :m_lflow_config)
+      :m_lflow_config,
+      :pipeline_version_aliases,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23614,14 +24136,24 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] pipeline_version_id
-    #   The ID of the pipeline version to describe.
+    #   The ID of the pipeline version to describe. You can't specify this
+    #   with `PipelineVersionAlias`.
     #   @return [Integer]
+    #
+    # @!attribute [rw] pipeline_version_alias
+    #   The alias of the pipeline version to describe. You can't specify
+    #   this with `PipelineVersionId`. If no version of the pipeline has
+    #   this alias, the request fails with a `ResourceNotFound` error. If
+    #   you specify neither, SageMaker describes the latest version of the
+    #   pipeline.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineRequest AWS API Documentation
     #
     class DescribePipelineRequest < Struct.new(
       :pipeline_name,
-      :pipeline_version_id)
+      :pipeline_version_id,
+      :pipeline_version_alias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23688,6 +24220,10 @@ module Aws::SageMaker
     #   The description of the pipeline version.
     #   @return [String]
     #
+    # @!attribute [rw] pipeline_version_aliases
+    #   The aliases assigned to the pipeline version.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineResponse AWS API Documentation
     #
     class DescribePipelineResponse < Struct.new(
@@ -23705,7 +24241,8 @@ module Aws::SageMaker
       :last_modified_by,
       :parallelism_configuration,
       :pipeline_version_display_name,
-      :pipeline_version_description)
+      :pipeline_version_description,
+      :pipeline_version_aliases)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27595,6 +28132,229 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Details of an extension installed on a SageMaker HyperPod cluster.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on
+    #   which the extension is installed.
+    #   @return [String]
+    #
+    # @!attribute [rw] extension_arn
+    #   The Amazon Resource Name (ARN) of the extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] extension_name
+    #   The name of the extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] extension_version
+    #   The version of the extension. While SageMaker HyperPod creates or
+    #   updates the extension, some nodes might still run a different
+    #   version. To see how many nodes run this version, see `NodeSummary`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the extension can be one of the following values:
+    #
+    #   Creating
+    #
+    #   : SageMaker HyperPod is installing the extension on the cluster's
+    #     nodes.
+    #
+    #   Active
+    #
+    #   : The extension runs its current version and configuration on all of
+    #     the cluster's nodes.
+    #
+    #   Updating
+    #
+    #   : SageMaker HyperPod is applying a configuration change or version
+    #     update to the cluster's nodes.
+    #
+    #   Degraded
+    #
+    #   : The extension runs its current version and configuration on some
+    #     of the cluster's nodes but not all of them. Or, at least one node
+    #     recently reported that the extension is unhealthy.
+    #
+    #   CreateFailed
+    #
+    #   : SageMaker HyperPod couldn't install the extension on any of the
+    #     cluster's nodes.
+    #
+    #   UpdateFailed
+    #
+    #   : SageMaker HyperPod couldn't apply the update on any of the
+    #     cluster's nodes.
+    #
+    #   Deleting
+    #
+    #   : SageMaker HyperPod is removing the extension from the cluster's
+    #     nodes.
+    #
+    #   DeleteFailed
+    #
+    #   : SageMaker HyperPod couldn't remove the extension from any of the
+    #     cluster's nodes.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_values
+    #   The configuration of the extension, as a JSON object serialized as a
+    #   string. The configuration includes the default value of every
+    #   setting that you didn't specify.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the extension was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time when the extension was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ExtensionDetails AWS API Documentation
+    #
+    class ExtensionDetails < Struct.new(
+      :cluster_arn,
+      :extension_arn,
+      :extension_name,
+      :extension_version,
+      :status,
+      :configuration_values,
+      :creation_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the problems that affect an extension on
+    # the nodes of a SageMaker HyperPod cluster, including how many nodes
+    # each problem affects. `DescribeClusterExtension` returns
+    # `ExtensionHealth` only when at least one node has a problem.
+    #
+    # @!attribute [rw] issues
+    #   The problems that affect the extension, grouped by cause, from the
+    #   problem that affects the most nodes to the one that affects the
+    #   fewest. SageMaker HyperPod counts each node in at most one issue.
+    #   The list contains at most 20 issues. If more than 20 different
+    #   problems exist, the list shows the 19 that affect the most nodes,
+    #   and the 20th issue has the code `Other` and counts the nodes that
+    #   the remaining problems affect.
+    #   @return [Array<Types::ExtensionHealthIssue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ExtensionHealth AWS API Documentation
+    #
+    class ExtensionHealth < Struct.new(
+      :issues)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a problem that affects an extension on one or more
+    # nodes of a SageMaker HyperPod cluster, including the number of nodes
+    # that it affects.
+    #
+    # @!attribute [rw] code
+    #   A code that describes the type of issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the problem, for example the setting or component
+    #   to check. Every node with the same problem has the same message.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_count
+    #   The number of nodes that have this problem.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ExtensionHealthIssue AWS API Documentation
+    #
+    class ExtensionHealthIssue < Struct.new(
+      :code,
+      :message,
+      :node_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of an extension's installation across the nodes of a
+    # SageMaker HyperPod cluster.
+    #
+    # @!attribute [rw] total_count
+    #   The number of nodes in your cluster that the extension targets.
+    #   SageMaker HyperPod targets every running node in your cluster,
+    #   including nodes that you add after you create the extension.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] active_count
+    #   The number of nodes that are running the extension's current
+    #   version and configuration. Nodes that report the extension as
+    #   unhealthy aren't counted. While SageMaker HyperPod creates or
+    #   updates the extension, `ActiveCount` is lower than `TotalCount`. To
+    #   see why nodes aren't counted, see `Health` in
+    #   `DescribeClusterExtension`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ExtensionNodeSummary AWS API Documentation
+    #
+    class ExtensionNodeSummary < Struct.new(
+      :total_count,
+      :active_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of an extension installed on a SageMaker HyperPod cluster.
+    #
+    # @!attribute [rw] extension_arn
+    #   The Amazon Resource Name (ARN) of the extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] extension_name
+    #   The name of the extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] extension_version
+    #   The version of the extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the extension. For the meaning of each status, see
+    #   `ExtensionDetails`.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the extension was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ExtensionSummary AWS API Documentation
+    #
+    class ExtensionSummary < Struct.new(
+      :extension_arn,
+      :extension_name,
+      :extension_version,
+      :status,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A version of an extension that you can install on a SageMaker HyperPod
+    # cluster.
+    #
+    # @!attribute [rw] extension_version
+    #   The version of the extension, in `MAJOR.MINOR.PATCH` format, for
+    #   example `1.0.0`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ExtensionVersionSummary AWS API Documentation
+    #
+    class ExtensionVersionSummary < Struct.new(
+      :extension_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration settings for an Amazon FSx for Lustre file system to be
     # used with the cluster.
     #
@@ -28903,6 +29663,14 @@ module Aws::SageMaker
     #   The last modified time of the hub content.
     #   @return [Time]
     #
+    # @!attribute [rw] created_by
+    #   Information about the user who created the hub content.
+    #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Information about the user who last modified the hub content.
+    #   @return [Types::UserContext]
+    #
     # @!attribute [rw] tags
     #   Any tags associated with the hub content.
     #   @return [Array<Types::Tag>]
@@ -28930,6 +29698,8 @@ module Aws::SageMaker
       :failure_reason,
       :creation_time,
       :last_modified_time,
+      :created_by,
+      :last_modified_by,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -29026,6 +29796,27 @@ module Aws::SageMaker
       :hub_content_status,
       :creation_time,
       :original_creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The hub and the hub content that a HubContent step imported.
+    #
+    # @!attribute [rw] hub_arn
+    #   The Amazon Resource Name (ARN) of the hub that the step imported the
+    #   content into.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_arn
+    #   The Amazon Resource Name (ARN) of the hub content that was imported
+    #   by this step execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HubContentStepMetadata AWS API Documentation
+    #
+    class HubContentStepMetadata < Struct.new(
+      :hub_arn,
+      :hub_content_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31884,13 +32675,25 @@ module Aws::SageMaker
     #   to an inference component.
     #   @return [Integer]
     #
+    # @!attribute [rw] accelerator_partition_type
+    #   The accelerator partition profile this inference component occupies;
+    #   on NVIDIA GPUs this is a Multi-Instance GPU (MIG) profile such as
+    #   `mig-3g.40gb`. It must be one of the partition profiles declared in
+    #   the target endpoint's accelerator partition layout, and when set,
+    #   `NumberOfAcceleratorDevicesRequired` must be `1`. This field is
+    #   required when the endpoint's production variant has an accelerator
+    #   partition layout. For endpoints without a layout, omit this field to
+    #   place the inference component on a whole accelerator.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceComponentComputeResourceRequirements AWS API Documentation
     #
     class InferenceComponentComputeResourceRequirements < Struct.new(
       :number_of_cpu_cores_required,
       :number_of_accelerator_devices_required,
       :min_memory_required_in_mb,
-      :max_memory_required_in_mb)
+      :max_memory_required_in_mb,
+      :accelerator_partition_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35395,6 +36198,13 @@ module Aws::SageMaker
     #   `Cluster`, `InstanceGroup`, or `Instance`.
     #   @return [String]
     #
+    # @!attribute [rw] operation_id
+    #   The unique identifier (UUID) of a cluster operation for which to
+    #   filter events. If specified, only events associated with this
+    #   operation are returned. This ID can be obtained from the
+    #   `ListClusterOperations` operation.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of events to return in the response. Valid range
     #   is 1 to 100.
@@ -35416,6 +36226,7 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       :resource_type,
+      :operation_id,
       :max_results,
       :next_token)
       SENSITIVE = []
@@ -35436,6 +36247,114 @@ module Aws::SageMaker
     class ListClusterEventsResponse < Struct.new(
       :next_token,
       :events)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] extension_name
+    #   The name of the extension whose versions you want to list, for
+    #   example `sagemaker-observability`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of versions to return in the response. If you
+    #   don't specify a value, SageMaker HyperPod returns up to 100
+    #   versions.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous `ListClusterExtensionVersions` request
+    #   was truncated, the response includes a `NextToken`. To retrieve the
+    #   next set of versions, use the token in the next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterExtensionVersionsRequest AWS API Documentation
+    #
+    class ListClusterExtensionVersionsRequest < Struct.new(
+      :extension_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] extension_versions
+    #   The versions of the extension that you can install, from the highest
+    #   version to the lowest.
+    #   @return [Array<Types::ExtensionVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, a token that you can use in the next
+    #   request to retrieve the next set of versions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterExtensionVersionsResponse AWS API Documentation
+    #
+    class ListClusterExtensionVersionsResponse < Struct.new(
+      :extension_versions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster
+    #   whose extensions you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of extensions to return in the response. If you
+    #   don't specify a value, SageMaker HyperPod returns up to 100
+    #   extensions.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous `ListClusterExtensions` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of extensions, use the token in the next request. When you use
+    #   the `CreationTimeAfter` or `CreationTimeBefore` filters, a response
+    #   can contain fewer extensions than `MaxResults`, or none, and still
+    #   include a `NextToken`. Continue until the response doesn't include
+    #   a `NextToken`.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time_after
+    #   A filter that returns extensions created at or after the specified
+    #   time. Timestamps are formatted according to the ISO 8601 standard.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   A filter that returns extensions created at or before the specified
+    #   time. The acceptable formats are the same as the timestamp formats
+    #   for `CreationTimeAfter`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterExtensionsRequest AWS API Documentation
+    #
+    class ListClusterExtensionsRequest < Struct.new(
+      :cluster_arn,
+      :max_results,
+      :next_token,
+      :creation_time_after,
+      :creation_time_before)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] extensions
+    #   The list of extensions installed on the cluster.
+    #   @return [Array<Types::ExtensionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The next token specified for listing extensions on a SageMaker
+    #   HyperPod cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterExtensionsResponse AWS API Documentation
+    #
+    class ListClusterExtensionsResponse < Struct.new(
+      :extensions,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35545,6 +36464,87 @@ module Aws::SageMaker
     class ListClusterNodesResponse < Struct.new(
       :next_token,
       :cluster_node_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name or Amazon Resource Name (ARN) of the HyperPod cluster for
+    #   which to list operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The operation status to filter by. If specified, only operations
+    #   with this status are returned. Valid values are `InProgress`,
+    #   `Superseded`, or `Done`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The operation type to filter by. If specified, only operations of
+    #   this type are returned. Valid values are `Scaling` or
+    #   `DeepHealthCheck`.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time_after
+    #   The start of the time range for filtering operations. Only
+    #   operations created after this time are included in the results.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   The end of the time range for filtering operations. Only operations
+    #   created before this time are included in the results.
+    #   @return [Time]
+    #
+    # @!attribute [rw] sort_by
+    #   The field to use for sorting the operation list. Currently, the only
+    #   supported value is `CreationTime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The order in which to sort the results. Valid values are `Ascending`
+    #   or `Descending` (the default is `Descending`).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of operations to return in the response. Valid
+    #   range is 1 to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to retrieve the next set of results. This token is obtained
+    #   from the output of a previous `ListClusterOperations` call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterOperationsRequest AWS API Documentation
+    #
+    class ListClusterOperationsRequest < Struct.new(
+      :cluster_name,
+      :status,
+      :type,
+      :creation_time_after,
+      :creation_time_before,
+      :sort_by,
+      :sort_order,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token to retrieve the next set of results. Include this token in
+    #   subsequent `ListClusterOperations` calls to fetch more operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_operation_summaries
+    #   A list of operation summaries matching the specified criteria.
+    #   @return [Array<Types::ClusterOperationSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterOperationsResponse AWS API Documentation
+    #
+    class ListClusterOperationsResponse < Struct.new(
+      :next_token,
+      :cluster_operation_summaries)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39693,6 +40693,13 @@ module Aws::SageMaker
     #   The maximum number of pipeline executions to return in the response.
     #   @return [Integer]
     #
+    # @!attribute [rw] pipeline_version_alias
+    #   The alias of a pipeline version. The response includes only the
+    #   executions of the version that has this alias when you make the
+    #   request. If no version of the pipeline has this alias, the request
+    #   fails with a `ResourceNotFound` error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListPipelineExecutionsRequest AWS API Documentation
     #
     class ListPipelineExecutionsRequest < Struct.new(
@@ -39702,7 +40709,8 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       :next_token,
-      :max_results)
+      :max_results,
+      :pipeline_version_alias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39869,6 +40877,13 @@ module Aws::SageMaker
     #   The maximum number of pipelines to return in the response.
     #   @return [Integer]
     #
+    # @!attribute [rw] managed_by
+    #   Filters the pipelines by who manages them. Specify `AWS` to return
+    #   pipelines that Amazon Web Services manages, or `CUSTOMER` to return
+    #   pipelines that you created. If you don't specify a value, the
+    #   response includes both.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListPipelinesRequest AWS API Documentation
     #
     class ListPipelinesRequest < Struct.new(
@@ -39878,7 +40893,8 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       :next_token,
-      :max_results)
+      :max_results,
+      :managed_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46302,6 +47318,14 @@ module Aws::SageMaker
     #   the instances that the endpoint hosts.
     #   @return [Types::ProductionVariantRoutingConfig]
     #
+    # @!attribute [rw] accelerator_partition_layouts
+    #   The accelerator partition layout that SageMaker is applying to this
+    #   production variant. On NVIDIA GPUs, the profiles are Multi-Instance
+    #   GPU (MIG) profiles. SageMaker returns the accelerator partition
+    #   layout as you provided it in the pending deployment configuration,
+    #   without normalization.
+    #   @return [Array<Types::AcceleratorPartitionLayout>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PendingProductionVariantSummary AWS API Documentation
     #
     class PendingProductionVariantSummary < Struct.new(
@@ -46318,7 +47342,8 @@ module Aws::SageMaker
       :current_serverless_config,
       :desired_serverless_config,
       :managed_instance_scaling,
-      :routing_config)
+      :routing_config,
+      :accelerator_partition_layouts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46794,6 +47819,10 @@ module Aws::SageMaker
     #   The metadata for the ForEach step execution.
     #   @return [Types::ForEachStepMetadata]
     #
+    # @!attribute [rw] hub_content
+    #   The metadata for the HubContent step execution.
+    #   @return [Types::HubContentStepMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecutionStepMetadata AWS API Documentation
     #
     class PipelineExecutionStepMetadata < Struct.new(
@@ -46823,7 +47852,8 @@ module Aws::SageMaker
       :job,
       :athena,
       :cleanup,
-      :for_each)
+      :for_each,
+      :hub_content)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46855,6 +47885,11 @@ module Aws::SageMaker
     #   pipeline execution failed.
     #   @return [String]
     #
+    # @!attribute [rw] pipeline_version_aliases
+    #   The aliases currently assigned to the pipeline version that the
+    #   execution ran.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecutionSummary AWS API Documentation
     #
     class PipelineExecutionSummary < Struct.new(
@@ -46863,7 +47898,8 @@ module Aws::SageMaker
       :pipeline_execution_status,
       :pipeline_execution_description,
       :pipeline_execution_display_name,
-      :pipeline_execution_failure_reason)
+      :pipeline_execution_failure_reason,
+      :pipeline_version_aliases)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46987,6 +48023,10 @@ module Aws::SageMaker
     #   pipeline version.
     #   @return [String]
     #
+    # @!attribute [rw] pipeline_version_aliases
+    #   The aliases assigned to the pipeline version.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineVersion AWS API Documentation
     #
     class PipelineVersion < Struct.new(
@@ -47000,7 +48040,8 @@ module Aws::SageMaker
       :last_modified_by,
       :last_executed_pipeline_execution_arn,
       :last_executed_pipeline_execution_display_name,
-      :last_executed_pipeline_execution_status)
+      :last_executed_pipeline_execution_status,
+      :pipeline_version_aliases)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47032,6 +48073,10 @@ module Aws::SageMaker
     #   created from this pipeline version.
     #   @return [String]
     #
+    # @!attribute [rw] pipeline_version_aliases
+    #   The aliases assigned to the pipeline version.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineVersionSummary AWS API Documentation
     #
     class PipelineVersionSummary < Struct.new(
@@ -47040,7 +48085,8 @@ module Aws::SageMaker
       :creation_time,
       :pipeline_version_description,
       :pipeline_version_display_name,
-      :last_execution_pipeline_execution_arn)
+      :last_execution_pipeline_execution_arn,
+      :pipeline_version_aliases)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47097,17 +48143,37 @@ module Aws::SageMaker
     #     characters from the text content of the messages array.
     #
     #   The endpoint routes requests that share the same prefix to the same
-    #   instance. Set this value to cover shared content (such as system
-    #   prompts) plus enough unique content to distribute workloads across
-    #   instances.
+    #   instance and, when that instance hosts more than one copy of the
+    #   invoked inference component, to the same copy. Set this value to
+    #   cover shared content (such as system prompts) plus enough unique
+    #   content to distribute workloads across instances and copies.
     #   @return [Integer]
     #
     # @!attribute [rw] concurrency_threshold
-    #   The maximum number of in-flight requests on the target instance
-    #   before the endpoint routes to another instance. Required when
-    #   `RoutingStrategy` is `PREFIX_AWARE`. When in-flight requests on the
-    #   prefix-selected instance reach this threshold, the endpoint routes
-    #   the request to an instance with more available capacity.
+    #   The number of in-flight requests on the selected instance or
+    #   inference component copy at which the endpoint routes a request to
+    #   another copy or instance. Required when `RoutingStrategy` is
+    #   `PREFIX_AWARE`.
+    #
+    #   On an endpoint without inference components, the endpoint compares
+    #   this threshold with the number of in-flight requests on the selected
+    #   instance. When that number reaches the threshold, the endpoint
+    #   routes the request to another instance.
+    #
+    #   On an endpoint with inference components, the endpoint compares this
+    #   threshold with the number of in-flight requests on the selected copy
+    #   of the invoked inference component. Requests to other inference
+    #   components on the same instance don't count. When the instance
+    #   hosts more than one copy of the inference component, the endpoint
+    #   routes requests that share a prefix to the same copy and, while that
+    #   copy has reached the threshold, to another copy on the instance that
+    #   is under the threshold. When every copy on the instance has reached
+    #   the threshold, the endpoint routes the request to another instance.
+    #
+    #   The threshold applies to every instance and every copy of every
+    #   inference component in the production variant, so choose a value
+    #   that suits the instance or copy that can serve the fewest concurrent
+    #   requests.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PrefixAwareRoutingConfig AWS API Documentation
@@ -47934,6 +49000,17 @@ module Aws::SageMaker
     #   SageMaker AI reserves for an endpoint.
     #   @return [Types::ProductionVariantCapacityReservationConfig]
     #
+    # @!attribute [rw] accelerator_partition_layouts
+    #   The accelerator partition layout for the accelerators backing this
+    #   production variant. A layout lists the partition profiles to carve
+    #   on the accelerators it applies to; on NVIDIA GPUs these are
+    #   Multi-Instance GPU (MIG) profiles such as `mig-3g.40gb`. Specify a
+    #   single layout: SageMaker applies it uniformly to every accelerator
+    #   on the variant's instance type, and you place one inference
+    #   component on each partition. Omit this field to use whole,
+    #   unpartitioned accelerators.
+    #   @return [Array<Types::AcceleratorPartitionLayout>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariant AWS API Documentation
     #
     class ProductionVariant < Struct.new(
@@ -47954,7 +49031,8 @@ module Aws::SageMaker
       :managed_instance_scaling,
       :routing_config,
       :inference_ami_version,
-      :capacity_reservation_config)
+      :capacity_reservation_config,
+      :accelerator_partition_layouts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48189,10 +49267,13 @@ module Aws::SageMaker
     #     instance.
     #
     #   * `PREFIX_AWARE`: The endpoint routes requests that share the same
-    #     prompt prefix to the same instance. When the number of in-flight
-    #     requests on the selected instance reaches the configured
-    #     threshold, the endpoint routes the request to an instance with
-    #     more available capacity.
+    #     prompt prefix to the same instance and, when that instance hosts
+    #     more than one copy of the invoked inference component, to the same
+    #     copy. When the number of in-flight requests on the selected
+    #     instance or copy reaches the `ConcurrencyThreshold` value, the
+    #     endpoint routes the request to another copy on that instance or to
+    #     another instance. The endpoint applies prefix-aware routing only
+    #     when two or more instances can serve the request.
     #   @return [String]
     #
     # @!attribute [rw] prefix_aware_routing_config
@@ -48377,6 +49458,14 @@ module Aws::SageMaker
     #   SageMaker AI reserves for an endpoint.
     #   @return [Types::ProductionVariantCapacityReservationSummary]
     #
+    # @!attribute [rw] accelerator_partition_layouts
+    #   The accelerator partition layout that SageMaker applies to this
+    #   production variant. On NVIDIA GPUs, the profiles are Multi-Instance
+    #   GPU (MIG) profiles. SageMaker returns the accelerator partition
+    #   layout as you provided it when you created the variant, without
+    #   normalization.
+    #   @return [Array<Types::AcceleratorPartitionLayout>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantSummary AWS API Documentation
     #
     class ProductionVariantSummary < Struct.new(
@@ -48392,7 +49481,8 @@ module Aws::SageMaker
       :desired_serverless_config,
       :managed_instance_scaling,
       :routing_config,
-      :capacity_reservation_config)
+      :capacity_reservation_config,
+      :accelerator_partition_layouts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -52155,24 +53245,8 @@ module Aws::SageMaker
     # @!attribute [rw] sequence_length
     #   The maximum sequence length, in tokens, that the customization job
     #   supports. SageMaker uses this value to select a training
-    #   configuration for the base model that you specify. The parameter
-    #   supports the following values:
-    #
-    #   * `1K`
-    #
-    #   * `2K`
-    #
-    #   * `4K`
-    #
-    #   * `8K`
-    #
-    #   * `16K`
-    #
-    #   * `32K`
-    #
-    #   * `64K`
-    #
-    #   * `128K`
+    #   configuration for the base model that you specify. The value must be
+    #   an integer value from `1K` to `1024K` (for example, `32K`).
     #
     #   If you don't specify a value, SageMaker selects a training
     #   configuration based on the other values that you specify. The
@@ -53040,11 +54114,27 @@ module Aws::SageMaker
     #   @return [Types::SelectiveExecutionConfig]
     #
     # @!attribute [rw] pipeline_version_id
-    #   The ID of the pipeline version to start execution from.
+    #   The ID of the pipeline version to start execution from. You can't
+    #   specify this with `PipelineVersionAlias`.
     #   @return [Integer]
     #
     # @!attribute [rw] mlflow_experiment_name
     #   The MLflow experiment name of the pipeline execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_version_alias
+    #   The alias of the pipeline version to start the execution from. You
+    #   can't specify this with `PipelineVersionId`. If no version of the
+    #   pipeline has this alias, the request fails with a `ResourceNotFound`
+    #   error.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the execution
+    #   uses. You must specify this parameter when you start an execution of
+    #   a pipeline that Amazon Web Services manages. You can't specify it
+    #   for a pipeline that you create, because its executions use the
+    #   pipeline's role.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartPipelineExecutionRequest AWS API Documentation
@@ -53058,7 +54148,9 @@ module Aws::SageMaker
       :parallelism_configuration,
       :selective_execution_config,
       :pipeline_version_id,
-      :mlflow_experiment_name)
+      :mlflow_experiment_name,
+      :pipeline_version_alias,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -57707,6 +58799,65 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on
+    #   which the extension is installed.
+    #   @return [String]
+    #
+    # @!attribute [rw] extension_arn
+    #   The Amazon Resource Name (ARN) of the extension to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] extension_version
+    #   The version to update the extension to, in `MAJOR.MINOR.PATCH`
+    #   format. The version must be later than the extension's current
+    #   version. If you omit this parameter, the extension keeps its current
+    #   version.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_values
+    #   The configuration changes to apply, as a JSON object serialized as a
+    #   string. Settings that you include are changed, settings that you
+    #   omit are unchanged, and a setting with the value `null` returns to
+    #   its default value. The resulting configuration must be valid for the
+    #   target extension version. If you omit `ConfigurationValues`, the
+    #   configuration is unchanged.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide so that the
+    #   request is idempotent. If you send the same update more than once,
+    #   SageMaker HyperPod applies it once and doesn't return an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateClusterExtensionRequest AWS API Documentation
+    #
+    class UpdateClusterExtensionRequest < Struct.new(
+      :cluster_arn,
+      :extension_arn,
+      :extension_version,
+      :configuration_values,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] extension_arn
+    #   The Amazon Resource Name (ARN) of the extension that is being
+    #   updated. To track the update, call `DescribeClusterExtension`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateClusterExtensionResponse AWS API Documentation
+    #
+    class UpdateClusterExtensionResponse < Struct.new(
+      :extension_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_name
     #   Specify the name of the SageMaker HyperPod cluster you want to
     #   update.
@@ -59632,6 +60783,17 @@ module Aws::SageMaker
     #   default.
     #   @return [Types::ParallelismConfiguration]
     #
+    # @!attribute [rw] pipeline_version_aliases
+    #   The aliases to assign to the new pipeline version that this update
+    #   creates. You can specify aliases only when the update changes the
+    #   pipeline definition. To change the aliases of an existing version,
+    #   use `UpdatePipelineVersion`.
+    #
+    #   An alias must be unique within the pipeline. To move an alias from
+    #   an existing version to the new version, first remove the alias from
+    #   the existing version with `UpdatePipelineVersion`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdatePipelineRequest AWS API Documentation
     #
     class UpdatePipelineRequest < Struct.new(
@@ -59641,7 +60803,8 @@ module Aws::SageMaker
       :pipeline_definition_s3_location,
       :pipeline_description,
       :role_arn,
-      :parallelism_configuration)
+      :parallelism_configuration,
+      :pipeline_version_aliases)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -59679,13 +60842,18 @@ module Aws::SageMaker
     #   The description of the pipeline version.
     #   @return [String]
     #
+    # @!attribute [rw] pipeline_version_alias_operations
+    #   The aliases to add to or remove from the pipeline version.
+    #   @return [Types::AliasOperations]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdatePipelineVersionRequest AWS API Documentation
     #
     class UpdatePipelineVersionRequest < Struct.new(
       :pipeline_arn,
       :pipeline_version_id,
       :pipeline_version_display_name,
-      :pipeline_version_description)
+      :pipeline_version_description,
+      :pipeline_version_alias_operations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -60190,8 +61358,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] iam_identity
     #   The IAM Identity details associated with the user. These details are
-    #   associated with model package groups, model packages, and project
-    #   entities only.
+    #   associated with model package groups, model packages, project
+    #   entities, hubs, and hub content only.
     #   @return [Types::IamIdentity]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UserContext AWS API Documentation

@@ -56,7 +56,7 @@ module Aws::AuditManager
       attr_accessor delegations: ::Array[Types::Delegation]
       attr_accessor system_evidence_count: ::Integer
       attr_accessor manual_evidence_count: ::Integer
-      SENSITIVE: [:roles]
+      SENSITIVE: [:roles, :delegations]
     end
 
     class AssessmentEvidenceFolder
@@ -135,7 +135,7 @@ module Aws::AuditManager
       attr_accessor delegations: ::Array[Types::Delegation]
       attr_accessor creation_time: ::Time
       attr_accessor last_updated: ::Time
-      SENSITIVE: [:name, :description, :compliance_type, :assessment_reports_destination, :scope, :roles]
+      SENSITIVE: [:name, :description, :compliance_type, :assessment_reports_destination, :scope, :roles, :delegations]
     end
 
     class AssessmentMetadataItem
@@ -147,7 +147,7 @@ module Aws::AuditManager
       attr_accessor delegations: ::Array[Types::Delegation]
       attr_accessor creation_time: ::Time
       attr_accessor last_updated: ::Time
-      SENSITIVE: [:name, :compliance_type, :roles]
+      SENSITIVE: [:name, :compliance_type, :roles, :delegations]
     end
 
     class AssessmentReport
@@ -226,7 +226,7 @@ module Aws::AuditManager
     class BatchCreateDelegationByAssessmentResponse
       attr_accessor delegations: ::Array[Types::Delegation]
       attr_accessor errors: ::Array[Types::BatchCreateDelegationByAssessmentError]
-      SENSITIVE: [:errors]
+      SENSITIVE: [:delegations, :errors]
     end
 
     class BatchDeleteDelegationByAssessmentError

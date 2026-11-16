@@ -5215,6 +5215,35 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # The Linux capabilities for the container. For more information, see
+    # [Set capabilities for a container][1] in the *Kubernetes
+    # documentation*.
+    #
+    #
+    #
+    # [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-capabilities-for-a-container
+    #
+    # @!attribute [rw] add
+    #   The Linux capabilities to add to the default capability set for the
+    #   container. This parameter contains up to 64 values. Specify
+    #   capability names without the `CAP_` prefix.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] drop
+    #   The Linux capabilities to remove from the default capability set for
+    #   the container. This parameter contains up to 64 values. Specify
+    #   capability names without the `CAP_` prefix.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EksContainerLinuxCapabilities AWS API Documentation
+    #
+    class EksContainerLinuxCapabilities < Struct.new(
+      :add,
+      :drop)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Object representing any Kubernetes overrides to a job definition
     # that's used in a [SubmitJob][1] API operation.
     #
@@ -5403,10 +5432,10 @@ module Aws::Batch
     # @!attribute [rw] run_as_user
     #   When this parameter is specified, the container is run as the
     #   specified user ID (`uid`). If this parameter isn't specified, the
-    #   default is the user that's specified in the image metadata. This
-    #   parameter maps to `RunAsUser` and `MustRanAs` policy in the [Users
-    #   and groups pod security policies][1] in the *Kubernetes
-    #   documentation*.
+    #   default is the user that's specified in the image metadata. The
+    #   supported value range is `0` through `2147483647`. This parameter
+    #   maps to `RunAsUser` and `MustRunAs` policy in the [Users and groups
+    #   pod security policies][1] in the *Kubernetes documentation*.
     #
     #
     #
@@ -5416,10 +5445,10 @@ module Aws::Batch
     # @!attribute [rw] run_as_group
     #   When this parameter is specified, the container is run as the
     #   specified group ID (`gid`). If this parameter isn't specified, the
-    #   default is the group that's specified in the image metadata. This
-    #   parameter maps to `RunAsGroup` and `MustRunAs` policy in the [Users
-    #   and groups pod security policies][1] in the *Kubernetes
-    #   documentation*.
+    #   default is the group that's specified in the image metadata. The
+    #   supported value range is `0` through `2147483647`. This parameter
+    #   maps to `RunAsGroup` and `MustRunAs` policy in the [Users and groups
+    #   pod security policies][1] in the *Kubernetes documentation*.
     #
     #
     #
@@ -5469,6 +5498,21 @@ module Aws::Batch
     #   [1]: https://kubernetes.io/docs/concepts/security/pod-security-policy/#users-and-groups
     #   @return [Boolean]
     #
+    # @!attribute [rw] capabilities
+    #   Adds or removes Linux capabilities from the container's default
+    #   capability set. With Linux capabilities, you can grant specific
+    #   privileges without granting full root permissions.
+    #   @return [Types::EksContainerLinuxCapabilities]
+    #
+    # @!attribute [rw] seccomp_profile
+    #   The seccomp profile for the container. A container-level seccomp
+    #   profile overrides the profile in the pod security context, which
+    #   defines security settings that apply to all containers in the pod
+    #   unless a container overrides them. If this parameter isn't
+    #   specified, the container uses the pod security context's seccomp
+    #   profile when one is specified.
+    #   @return [Types::EksSeccompProfile]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EksContainerSecurityContext AWS API Documentation
     #
     class EksContainerSecurityContext < Struct.new(
@@ -5477,7 +5521,9 @@ module Aws::Batch
       :privileged,
       :allow_privilege_escalation,
       :read_only_root_filesystem,
-      :run_as_non_root)
+      :run_as_non_root,
+      :capabilities,
+      :seccomp_profile)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5810,6 +5856,12 @@ module Aws::Batch
     #   [1]: https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/
     #   @return [Boolean]
     #
+    # @!attribute [rw] security_context
+    #   The security context to apply to the pod. The settings apply to all
+    #   containers in the pod unless an individual container specifies an
+    #   overriding value.
+    #   @return [Types::EksPodSecurityContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EksPodProperties AWS API Documentation
     #
     class EksPodProperties < Struct.new(
@@ -5821,7 +5873,8 @@ module Aws::Batch
       :init_containers,
       :volumes,
       :metadata,
-      :share_process_namespace)
+      :share_process_namespace,
+      :security_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5932,6 +5985,12 @@ module Aws::Batch
     #   [1]: https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/
     #   @return [Boolean]
     #
+    # @!attribute [rw] security_context
+    #   The security context applied to the pod. The settings apply to all
+    #   containers in the pod unless an individual container specifies an
+    #   overriding value.
+    #   @return [Types::EksPodSecurityContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EksPodPropertiesDetail AWS API Documentation
     #
     class EksPodPropertiesDetail < Struct.new(
@@ -5945,7 +6004,8 @@ module Aws::Batch
       :pod_name,
       :node_name,
       :metadata,
-      :share_process_namespace)
+      :share_process_namespace,
+      :security_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5982,6 +6042,57 @@ module Aws::Batch
       :containers,
       :init_containers,
       :metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The security context for the pod. The settings apply to all containers
+    # in the pod when the container does not specify an overriding value.
+    # For more information, see [Set the security context for a Pod][1] in
+    # the *Kubernetes documentation*.
+    #
+    #
+    #
+    # [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+    #
+    # @!attribute [rw] run_as_user
+    #   The user ID that runs containers in the pod when a container does
+    #   not specify its own user ID. The supported value range is `0`
+    #   through `2147483647`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] run_as_group
+    #   The primary group ID that runs containers in the pod when a
+    #   container does not specify its own group ID. The supported value
+    #   range is `0` through `2147483647`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] run_as_non_root
+    #   Specifies whether Kubernetes validates that containers in the pod
+    #   don't run as the root user unless a container specifies an
+    #   overriding value.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] seccomp_profile
+    #   The default seccomp profile for containers in the pod. A
+    #   container-level seccomp profile overrides this value.
+    #   @return [Types::EksSeccompProfile]
+    #
+    # @!attribute [rw] fs_group
+    #   A special supplemental group that is applied to all containers in
+    #   the pod. Some volume types allow Kubernetes to change the ownership
+    #   and permissions of the volume contents to this group when the volume
+    #   is mounted. The supported value range is `0` through `2147483647`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EksPodSecurityContext AWS API Documentation
+    #
+    class EksPodSecurityContext < Struct.new(
+      :run_as_user,
+      :run_as_group,
+      :run_as_non_root,
+      :seccomp_profile,
+      :fs_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6027,6 +6138,55 @@ module Aws::Batch
     #
     class EksPropertiesOverride < Struct.new(
       :pod_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Linux seccomp profile for a pod or container. For more
+    # information, see [Restrict a Container's Syscalls with seccomp][1] in
+    # the *Kubernetes documentation*.
+    #
+    #
+    #
+    # [1]: https://kubernetes.io/docs/tutorials/security/seccomp/
+    #
+    # @!attribute [rw] type
+    #   The seccomp profile type can be one of the following values:
+    #
+    #   RuntimeDefault
+    #
+    #   : The `RuntimeDefault` value uses the container runtime's default
+    #     seccomp profile.
+    #
+    #   Unconfined
+    #
+    #   : The `Unconfined` value doesn't filter the container with seccomp.
+    #
+    #   Localhost
+    #
+    #   : The `Localhost` value uses a custom profile at the path specified
+    #     by `localhostProfile`.
+    #   @return [String]
+    #
+    # @!attribute [rw] localhost_profile
+    #   The path of the profile on the node, relative to the configured
+    #   seccomp profile location. You must specify this parameter when
+    #   `type` is `Localhost`. Don't set this parameter for any other type.
+    #   You are responsible for ensuring that the profile exists on every
+    #   eligible worker node. For information about providing files to
+    #   Amazon EKS nodes, see [Use a launch template with Batch on Amazon
+    #   EKS][1] in the *Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/eks-launch-templates.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EksSeccompProfile AWS API Documentation
+    #
+    class EksSeccompProfile < Struct.new(
+      :type,
+      :localhost_profile)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6822,7 +6982,9 @@ module Aws::Batch
     #   `eksProperties`.
     #
     #   <note markdown="1"> If the job runs on Fargate resources, don't specify
-    #   `nodeProperties`. Use `containerProperties` instead.
+    #   `nodeProperties`. We recommend `ecsProperties`, which supports both
+    #   single-container and multi-container jobs. `containerProperties` is
+    #   also supported for single-container jobs.
     #
     #    </note>
     #   @return [Types::NodeProperties]
@@ -9394,9 +9556,16 @@ module Aws::Batch
     #   job definitions.
     #
     #   <note markdown="1"> If the job runs on Fargate resources, then you must not specify
-    #   `nodeProperties`; use only `containerProperties`.
+    #   `nodeProperties`. We recommend `ecsProperties`, which supports both
+    #   single-container and multi-container jobs. `containerProperties` is
+    #   also supported for single-container jobs. For more information, see
+    #   [Multi-container jobs][1] in the *Batch User Guide*.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/multi-container-jobs.html
     #   @return [Types::ContainerProperties]
     #
     # @!attribute [rw] node_properties
@@ -9406,7 +9575,9 @@ module Aws::Batch
     #   Jobs][1] in the *Batch User Guide*.
     #
     #   <note markdown="1"> If the job runs on Fargate resources, then you must not specify
-    #   `nodeProperties`; use `containerProperties` instead.
+    #   `nodeProperties`. We recommend `ecsProperties`, which supports both
+    #   single-container and multi-container jobs. `containerProperties` is
+    #   also supported for single-container jobs.
     #
     #    </note>
     #

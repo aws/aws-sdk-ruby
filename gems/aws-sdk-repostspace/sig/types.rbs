@@ -280,13 +280,13 @@ module Aws::Repostspace
     class SupportedEmailDomainsParameters
       attr_accessor enabled: ("ENABLED" | "DISABLED")
       attr_accessor allowed_domains: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:allowed_domains]
     end
 
     class SupportedEmailDomainsStatus
       attr_accessor enabled: ("ENABLED" | "DISABLED" | "NOT_ALLOWED")
       attr_accessor allowed_domains: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:allowed_domains]
     end
 
     class TagResourceRequest

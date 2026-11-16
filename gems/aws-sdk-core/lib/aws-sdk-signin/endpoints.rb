@@ -12,6 +12,15 @@ module Aws::Signin
   # @api private
   module Endpoints
 
+    class CreateBearerToken
+      def self.build(context)
+        Aws::Signin::EndpointParameters.create(
+          context.config,
+          is_o_auth_endpoint: true,
+        )
+      end
+    end
+
     class CreateOAuth2TokenWithIAM
       def self.build(context)
         Aws::Signin::EndpointParameters.create(
@@ -114,6 +123,8 @@ module Aws::Signin
 
     def self.parameters_for_operation(context)
       case context.operation_name
+      when :create_bearer_token
+        CreateBearerToken.build(context)
       when :create_o_auth_2_token_with_iam
         CreateOAuth2TokenWithIAM.build(context)
       when :create_o_auth_2_token_with_token_exchange

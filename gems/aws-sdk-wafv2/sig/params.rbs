@@ -672,6 +672,9 @@ module Aws
 
       type monetization_config = {
       crypto_config: Params::crypto_config?,
+      connected_account_configs: Array[
+        Params::connected_account_config
+      ]?,
       currency_mode: ("REAL" | "TEST")?
     }
 
@@ -682,6 +685,21 @@ module Aws
         {
           amount: ::String,
           currency: ("USDC")
+        }
+      ]
+    }
+
+      type connected_account_config = {
+      connected_account_arn: ::String,
+      payment_networks: Array[
+        {
+          chain: ("BASE" | "SOLANA"),
+          prices: Array[
+            {
+              amount: ::String,
+              currency: ("USDC")
+            }
+          ]
         }
       ]
     }

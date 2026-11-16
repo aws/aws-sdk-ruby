@@ -180,6 +180,9 @@ module Aws::BedrockAgentCore
     DescriptorType = Shapes::StringShape.new(name: 'DescriptorType')
     Descriptors = Shapes::StructureShape.new(name: 'Descriptors')
     Document = Shapes::DocumentShape.new(name: 'Document', document: true)
+    DomainFilter = Shapes::StructureShape.new(name: 'DomainFilter')
+    DomainList = Shapes::ListShape.new(name: 'DomainList')
+    DomainName = Shapes::StringShape.new(name: 'DomainName')
     DomainPattern = Shapes::StringShape.new(name: 'DomainPattern')
     DomainPatterns = Shapes::ListShape.new(name: 'DomainPatterns')
     Double = Shapes::FloatShape.new(name: 'Double')
@@ -342,6 +345,7 @@ module Aws::BedrockAgentCore
     HarnessReasoningContentBlockDelta = Shapes::UnionShape.new(name: 'HarnessReasoningContentBlockDelta')
     HarnessReasoningTextBlock = Shapes::StructureShape.new(name: 'HarnessReasoningTextBlock')
     HarnessRemoteMcpConfig = Shapes::StructureShape.new(name: 'HarnessRemoteMcpConfig')
+    HarnessRemoteMcpOutboundAuth = Shapes::UnionShape.new(name: 'HarnessRemoteMcpOutboundAuth')
     HarnessRemoteMcpUrl = Shapes::StringShape.new(name: 'HarnessRemoteMcpUrl')
     HarnessSkill = Shapes::UnionShape.new(name: 'HarnessSkill')
     HarnessSkillAwsSkillsSource = Shapes::StructureShape.new(name: 'HarnessSkillAwsSkillsSource')
@@ -385,6 +389,9 @@ module Aws::BedrockAgentCore
     HttpHeaderValue = Shapes::StringShape.new(name: 'HttpHeaderValue')
     HttpHeadersMap = Shapes::MapShape.new(name: 'HttpHeadersMap')
     HttpResponseCode = Shapes::IntegerShape.new(name: 'HttpResponseCode')
+    IamCredentialProvider = Shapes::StructureShape.new(name: 'IamCredentialProvider')
+    IamCredentialProviderRegionString = Shapes::StringShape.new(name: 'IamCredentialProviderRegionString')
+    IamCredentialProviderServiceString = Shapes::StringShape.new(name: 'IamCredentialProviderServiceString')
     IgnoredReferenceInputField = Shapes::StringShape.new(name: 'IgnoredReferenceInputField')
     IgnoredReferenceInputFields = Shapes::ListShape.new(name: 'IgnoredReferenceInputFields')
     IngestDataInput = Shapes::StructureShape.new(name: 'IngestDataInput')
@@ -432,6 +439,7 @@ module Aws::BedrockAgentCore
     InvokeAgentRuntimeRequestTraceParentString = Shapes::StringShape.new(name: 'InvokeAgentRuntimeRequestTraceParentString')
     InvokeAgentRuntimeRequestTraceStateString = Shapes::StringShape.new(name: 'InvokeAgentRuntimeRequestTraceStateString')
     InvokeAgentRuntimeResponse = Shapes::StructureShape.new(name: 'InvokeAgentRuntimeResponse')
+    InvokeAgentRuntimeResponseSessionEndpointUrlString = Shapes::StringShape.new(name: 'InvokeAgentRuntimeResponseSessionEndpointUrlString')
     InvokeBrowserRequest = Shapes::StructureShape.new(name: 'InvokeBrowserRequest')
     InvokeBrowserResponse = Shapes::StructureShape.new(name: 'InvokeBrowserResponse')
     InvokeCodeInterpreterRequest = Shapes::StructureShape.new(name: 'InvokeCodeInterpreterRequest')
@@ -446,6 +454,10 @@ module Aws::BedrockAgentCore
     InvokeHarnessRequestTraceStateString = Shapes::StringShape.new(name: 'InvokeHarnessRequestTraceStateString')
     InvokeHarnessResponse = Shapes::StructureShape.new(name: 'InvokeHarnessResponse')
     InvokeHarnessStreamOutput = Shapes::StructureShape.new(name: 'InvokeHarnessStreamOutput')
+    InvokeWebSearchInput = Shapes::StructureShape.new(name: 'InvokeWebSearchInput')
+    InvokeWebSearchInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'InvokeWebSearchInputMaxResultsInteger')
+    InvokeWebSearchInputSearchQueryString = Shapes::StringShape.new(name: 'InvokeWebSearchInputSearchQueryString')
+    InvokeWebSearchOutput = Shapes::StructureShape.new(name: 'InvokeWebSearchOutput')
     JwtKeyId = Shapes::StringShape.new(name: 'JwtKeyId')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
     KeyPressArguments = Shapes::StructureShape.new(name: 'KeyPressArguments')
@@ -627,6 +639,7 @@ module Aws::BedrockAgentCore
     ProxyConfiguration = Shapes::StructureShape.new(name: 'ProxyConfiguration')
     ProxyConfigurationProxiesList = Shapes::ListShape.new(name: 'ProxyConfigurationProxiesList')
     ProxyCredentials = Shapes::UnionShape.new(name: 'ProxyCredentials')
+    PublishedDateFilter = Shapes::StructureShape.new(name: 'PublishedDateFilter')
     RecommendationArn = Shapes::StringShape.new(name: 'RecommendationArn')
     RecommendationConfig = Shapes::UnionShape.new(name: 'RecommendationConfig')
     RecommendationDescription = Shapes::StringShape.new(name: 'RecommendationDescription')
@@ -715,6 +728,7 @@ module Aws::BedrockAgentCore
     ServiceName = Shapes::StringShape.new(name: 'ServiceName')
     ServiceNameList = Shapes::ListShape.new(name: 'ServiceNameList')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SessionFilter = Shapes::StructureShape.new(name: 'SessionFilter')
     SessionFilterConfig = Shapes::StructureShape.new(name: 'SessionFilterConfig')
     SessionFinding = Shapes::StructureShape.new(name: 'SessionFinding')
@@ -859,6 +873,10 @@ module Aws::BedrockAgentCore
     ViewPort = Shapes::StructureShape.new(name: 'ViewPort')
     ViewPortHeight = Shapes::IntegerShape.new(name: 'ViewPortHeight')
     ViewPortWidth = Shapes::IntegerShape.new(name: 'ViewPortWidth')
+    WebSearchFilters = Shapes::StructureShape.new(name: 'WebSearchFilters')
+    WebSearchId = Shapes::StringShape.new(name: 'WebSearchId')
+    WebSearchResult = Shapes::StructureShape.new(name: 'WebSearchResult')
+    WebSearchResultList = Shapes::ListShape.new(name: 'WebSearchResultList')
     WorkloadIdentityNameType = Shapes::StringShape.new(name: 'WorkloadIdentityNameType')
     WorkloadIdentityTokenType = Shapes::StringShape.new(name: 'WorkloadIdentityTokenType')
     WwwAuthenticateHeader = Shapes::StringShape.new(name: 'WwwAuthenticateHeader')
@@ -1387,6 +1405,12 @@ module Aws::BedrockAgentCore
     Descriptors.add_member(:custom, Shapes::ShapeRef.new(shape: CustomDescriptor, location_name: "custom"))
     Descriptors.add_member(:agent_skills, Shapes::ShapeRef.new(shape: AgentSkillsDescriptor, location_name: "agentSkills"))
     Descriptors.struct_class = Types::Descriptors
+
+    DomainFilter.add_member(:include, Shapes::ShapeRef.new(shape: DomainList, location_name: "include"))
+    DomainFilter.add_member(:exclude, Shapes::ShapeRef.new(shape: DomainList, location_name: "exclude"))
+    DomainFilter.struct_class = Types::DomainFilter
+
+    DomainList.member = Shapes::ShapeRef.new(shape: DomainName)
 
     DomainPatterns.member = Shapes::ShapeRef.new(shape: DomainPattern)
 
@@ -2022,7 +2046,16 @@ module Aws::BedrockAgentCore
 
     HarnessRemoteMcpConfig.add_member(:url, Shapes::ShapeRef.new(shape: HarnessRemoteMcpUrl, required: true, location_name: "url"))
     HarnessRemoteMcpConfig.add_member(:headers, Shapes::ShapeRef.new(shape: HttpHeadersMap, location_name: "headers"))
+    HarnessRemoteMcpConfig.add_member(:outbound_auth, Shapes::ShapeRef.new(shape: HarnessRemoteMcpOutboundAuth, location_name: "outboundAuth"))
     HarnessRemoteMcpConfig.struct_class = Types::HarnessRemoteMcpConfig
+
+    HarnessRemoteMcpOutboundAuth.add_member(:aws_iam, Shapes::ShapeRef.new(shape: IamCredentialProvider, location_name: "awsIam"))
+    HarnessRemoteMcpOutboundAuth.add_member(:none, Shapes::ShapeRef.new(shape: Unit, location_name: "none"))
+    HarnessRemoteMcpOutboundAuth.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    HarnessRemoteMcpOutboundAuth.add_member_subclass(:aws_iam, Types::HarnessRemoteMcpOutboundAuth::AwsIam)
+    HarnessRemoteMcpOutboundAuth.add_member_subclass(:none, Types::HarnessRemoteMcpOutboundAuth::None)
+    HarnessRemoteMcpOutboundAuth.add_member_subclass(:unknown, Types::HarnessRemoteMcpOutboundAuth::Unknown)
+    HarnessRemoteMcpOutboundAuth.struct_class = Types::HarnessRemoteMcpOutboundAuth
 
     HarnessSkill.add_member(:path, Shapes::ShapeRef.new(shape: HarnessSkillPath, location_name: "path"))
     HarnessSkill.add_member(:s3, Shapes::ShapeRef.new(shape: HarnessSkillS3Source, location_name: "s3"))
@@ -2143,6 +2176,10 @@ module Aws::BedrockAgentCore
 
     HttpHeadersMap.key = Shapes::ShapeRef.new(shape: HttpHeaderKey)
     HttpHeadersMap.value = Shapes::ShapeRef.new(shape: HttpHeaderValue)
+
+    IamCredentialProvider.add_member(:service, Shapes::ShapeRef.new(shape: IamCredentialProviderServiceString, required: true, location_name: "service"))
+    IamCredentialProvider.add_member(:region, Shapes::ShapeRef.new(shape: IamCredentialProviderRegionString, location_name: "region"))
+    IamCredentialProvider.struct_class = Types::IamCredentialProvider
 
     IgnoredReferenceInputFields.member = Shapes::ShapeRef.new(shape: IgnoredReferenceInputField)
 
@@ -2288,6 +2325,7 @@ module Aws::BedrockAgentCore
     InvokeAgentRuntimeRequest[:payload_member] = InvokeAgentRuntimeRequest.member(:payload)
 
     InvokeAgentRuntimeResponse.add_member(:runtime_session_id, Shapes::ShapeRef.new(shape: SessionId, location: "header", location_name: "X-Amzn-Bedrock-AgentCore-Runtime-Session-Id"))
+    InvokeAgentRuntimeResponse.add_member(:session_endpoint_url, Shapes::ShapeRef.new(shape: InvokeAgentRuntimeResponseSessionEndpointUrlString, location: "header", location_name: "X-Amzn-Bedrock-AgentCore-Runtime-Session-Endpoint-Url"))
     InvokeAgentRuntimeResponse.add_member(:mcp_session_id, Shapes::ShapeRef.new(shape: SessionId, location: "header", location_name: "Mcp-Session-Id"))
     InvokeAgentRuntimeResponse.add_member(:mcp_protocol_version, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Mcp-Protocol-Version"))
     InvokeAgentRuntimeResponse.add_member(:trace_id, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "X-Amzn-Trace-Id"))
@@ -2360,6 +2398,15 @@ module Aws::BedrockAgentCore
     InvokeHarnessStreamOutput.add_member(:runtime_client_error, Shapes::ShapeRef.new(shape: RuntimeClientError, location_name: "runtimeClientError"))
     InvokeHarnessStreamOutput.add_member(:hook_event, Shapes::ShapeRef.new(shape: HarnessHookEvent, event: true, location_name: "hookEvent"))
     InvokeHarnessStreamOutput.struct_class = Types::InvokeHarnessStreamOutput
+
+    InvokeWebSearchInput.add_member(:web_search_id, Shapes::ShapeRef.new(shape: WebSearchId, required: true, location: "uri", location_name: "webSearchId"))
+    InvokeWebSearchInput.add_member(:search_query, Shapes::ShapeRef.new(shape: InvokeWebSearchInputSearchQueryString, required: true, location_name: "searchQuery"))
+    InvokeWebSearchInput.add_member(:max_results, Shapes::ShapeRef.new(shape: InvokeWebSearchInputMaxResultsInteger, location_name: "maxResults"))
+    InvokeWebSearchInput.add_member(:filters, Shapes::ShapeRef.new(shape: WebSearchFilters, location_name: "filters"))
+    InvokeWebSearchInput.struct_class = Types::InvokeWebSearchInput
+
+    InvokeWebSearchOutput.add_member(:results, Shapes::ShapeRef.new(shape: WebSearchResultList, required: true, location_name: "results"))
+    InvokeWebSearchOutput.struct_class = Types::InvokeWebSearchOutput
 
     KeyList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -2904,6 +2951,10 @@ module Aws::BedrockAgentCore
     ProxyCredentials.add_member_subclass(:unknown, Types::ProxyCredentials::Unknown)
     ProxyCredentials.struct_class = Types::ProxyCredentials
 
+    PublishedDateFilter.add_member(:published_after, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "publishedAfter"))
+    PublishedDateFilter.add_member(:published_before, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "publishedBefore"))
+    PublishedDateFilter.struct_class = Types::PublishedDateFilter
+
     RecommendationConfig.add_member(:system_prompt_recommendation_config, Shapes::ShapeRef.new(shape: SystemPromptRecommendationConfig, location_name: "systemPromptRecommendationConfig"))
     RecommendationConfig.add_member(:tool_description_recommendation_config, Shapes::ShapeRef.new(shape: ToolDescriptionRecommendationConfig, location_name: "toolDescriptionRecommendationConfig"))
     RecommendationConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -3094,6 +3145,10 @@ module Aws::BedrockAgentCore
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ServiceUnavailableException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "retryAfterSeconds"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
     SessionFilter.add_member(:event_filter, Shapes::ShapeRef.new(shape: EventFilterCondition, location_name: "eventFilter"))
     SessionFilter.struct_class = Types::SessionFilter
@@ -3551,6 +3606,18 @@ module Aws::BedrockAgentCore
     ViewPort.add_member(:width, Shapes::ShapeRef.new(shape: ViewPortWidth, required: true, location_name: "width"))
     ViewPort.add_member(:height, Shapes::ShapeRef.new(shape: ViewPortHeight, required: true, location_name: "height"))
     ViewPort.struct_class = Types::ViewPort
+
+    WebSearchFilters.add_member(:domain_filter, Shapes::ShapeRef.new(shape: DomainFilter, location_name: "domainFilter"))
+    WebSearchFilters.add_member(:published_date_filter, Shapes::ShapeRef.new(shape: PublishedDateFilter, location_name: "publishedDateFilter"))
+    WebSearchFilters.struct_class = Types::WebSearchFilters
+
+    WebSearchResult.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
+    WebSearchResult.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "url"))
+    WebSearchResult.add_member(:text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "text"))
+    WebSearchResult.add_member(:published_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "publishedAt"))
+    WebSearchResult.struct_class = Types::WebSearchResult
+
+    WebSearchResultList.member = Shapes::ShapeRef.new(shape: WebSearchResult)
 
     WwwAuthenticateHeaderList.member = Shapes::ShapeRef.new(shape: WwwAuthenticateHeader)
 
@@ -4142,6 +4209,20 @@ module Aws::BedrockAgentCore
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: RuntimeClientError)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:invoke_web_search, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "InvokeWebSearch"
+        o.http_method = "POST"
+        o.http_request_uri = "/web-search/{webSearchId}/invoke"
+        o.input = Shapes::ShapeRef.new(shape: InvokeWebSearchInput)
+        o.output = Shapes::ShapeRef.new(shape: InvokeWebSearchOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.299.0 (2026-11-12)
+------------------
+
+* Feature - This release adds a LastModifiedTime and LastModifiedRegion field to ListIntegrationAssociations so customers can see at what time and in which Region an IntegrationAssociation was last modified in.
+
+1.298.0 (2026-11-11)
+------------------
+
+* Feature - Added support for 96 new languages for AI-powered automated evaluations. Chat interactions support all 96 languages. Voice interactions support 57 languages, those with transcription available through post-call conversational analytics.
+
+1.297.0 (2026-11-10)
+------------------
+
+* Feature - Amazon Connect now returns Contact Lens conversational analytics configuration in the DescribeContact API. Customers can retrieve a contact's analytics, redaction, summarization, and sentiment settings, consistent with the configuration already available in contact trace records and contact events.
+
+1.296.0 (2026-11-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.295.0 (2026-11-06)
+------------------
+
+* Feature - Rules in Amazon Connect now support ending email contacts associated to a case based on case events.
+
+1.294.0 (2026-11-04)
+------------------
+
+* Feature - Adds support for retrieving associated cases in contact responses. The Contact object now includes a Cases field containing case IDs and reference numbers linked to the contact.
+
+1.293.0 (2026-10-30)
+------------------
+
+* Feature - Amazon Connect adds tag-based access control for Contact Lens rules. ListRealtimeContactAnalysisSegmentsV2 adds a ListFilter to return only category segments whose rules match given tags. PreEvaluationFilter now supports contact evaluation resources for OnContactEvaluationSubmit rules.
+
+1.292.0 (2026-10-29)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.291.0 (2026-10-28)
 ------------------
 

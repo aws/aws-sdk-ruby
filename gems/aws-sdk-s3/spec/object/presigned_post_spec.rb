@@ -36,6 +36,16 @@ module Aws
           expect(post.fields['key']).to eq('key')
           expect(post.fields['acl']).to eq('public-read')
         end
+
+        it 'passes tagging to the presigned post' do
+          object = Object.new('bucket', 'key', stub_responses: true)
+          post = object.presigned_post(
+            tagging: { tag_set: [{ key: 'project', value: 'test' }] }
+          )
+          expect(post.fields['tagging']).to include(
+            '<Tag><Key>project</Key><Value>test</Value></Tag>'
+          )
+        end
       end
     end
   end

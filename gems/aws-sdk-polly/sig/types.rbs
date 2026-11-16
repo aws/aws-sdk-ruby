@@ -107,6 +107,11 @@ module Aws::Polly
       SENSITIVE: []
     end
 
+    class InvalidTagParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class InvalidTaskIdException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -173,6 +178,16 @@ module Aws::Polly
       SENSITIVE: []
     end
 
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class MarksNotSupportedForFormatException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -191,10 +206,18 @@ module Aws::Polly
     class PutLexiconInput
       attr_accessor name: ::String
       attr_accessor content: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:content]
     end
 
     class PutLexiconOutput < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("lexicon")
+      SENSITIVE: []
     end
 
     class ServiceFailureException
@@ -303,6 +326,15 @@ module Aws::Polly
       SENSITIVE: []
     end
 
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
     class TextEvent
       attr_accessor text: ::String
       attr_accessor text_type: ("ssml" | "text")
@@ -329,6 +361,11 @@ module Aws::Polly
       SENSITIVE: []
     end
 
+    class TooManyTagsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class UnsupportedPlsAlphabetException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -337,6 +374,15 @@ module Aws::Polly
     class UnsupportedPlsLanguageException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
     end
 
     class ValidationException

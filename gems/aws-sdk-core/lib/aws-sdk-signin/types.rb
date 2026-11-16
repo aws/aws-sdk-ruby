@@ -79,6 +79,60 @@ module Aws::Signin
       include Aws::Structure
     end
 
+    # Input structure for CreateBearerToken operation
+    #
+    # @!attribute [rw] grant_type
+    #   The grant type. Must be "client\_credentials".
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The AWS service the bearer token is for. Example:
+    #   "ecr.amazonaws.com".
+    #   @return [String]
+    #
+    # @!attribute [rw] duration_seconds
+    #   The requested token lifetime in seconds, from 300 (5 minutes) up to
+    #   the maximum allowed for the service, currently 43200 (12 hours). If
+    #   omitted, the token is valid for 12 hours.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/CreateBearerTokenRequest AWS API Documentation
+    #
+    class CreateBearerTokenRequest < Struct.new(
+      :grant_type,
+      :resource,
+      :duration_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output structure for CreateBearerToken operation
+    #
+    # Contains the bearer token, its type, and its lifetime.
+    #
+    # @!attribute [rw] access_token
+    #   The bearer token. Present it to the AWS service named in the
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_type
+    #   The token type. Always "Bearer".
+    #   @return [String]
+    #
+    # @!attribute [rw] expires_in
+    #   Token lifetime in seconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/CreateBearerTokenResponse AWS API Documentation
+    #
+    class CreateBearerTokenResponse < Struct.new(
+      :access_token,
+      :token_type,
+      :expires_in)
+      SENSITIVE = [:access_token]
+      include Aws::Structure
+    end
+
     # Input structure for CreateOAuth2Token operation
     #
     # Contains flattened token operation inputs for both authorization code

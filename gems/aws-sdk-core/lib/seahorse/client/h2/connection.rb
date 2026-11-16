@@ -79,7 +79,14 @@ module Seahorse
                 @socket.hostname = endpoint.host
 
                 debug_output("starting TLS for #{endpoint.host}:#{endpoint.port} ...")
-                @socket.connect
+                begin
+                  @socket.connect
+                  @socket.post_connection_check(endpoint.host) if @ssl_verify_peer
+                rescue StandardError
+                  @socket.close rescue nil
+                  @socket = nil
+                  raise
+                end
                 debug_output('TLS established')
               else
                 @socket = tcp
@@ -215,6 +222,7 @@ module Seahorse
           ssl_ctx = OpenSSL::SSL::SSLContext.new(:TLSv1_2)
           if @ssl_verify_peer
             ssl_ctx.verify_mode = OpenSSL::SSL::VERIFY_PEER
+            ssl_ctx.verify_hostname = true
             ssl_ctx.ca_file = @ssl_ca_bundle || _default_ca_bundle
             ssl_ctx.ca_path = @ssl_ca_directory || _default_ca_directory
             ssl_ctx.cert_store = @ssl_ca_store if @ssl_ca_store

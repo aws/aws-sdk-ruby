@@ -246,14 +246,14 @@ module Aws::CleanRooms
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor schema: Types::AnalysisSchema
-      attr_accessor format: ("SQL" | "PYSPARK_1_0")
+      attr_accessor format: ("SQL" | "PYSPARK_1_0" | "PYSPARK_2_0")
       attr_accessor source: Types::AnalysisSource
       attr_accessor source_metadata: Types::AnalysisSourceMetadata
       attr_accessor analysis_parameters: ::Array[Types::AnalysisParameter]
       attr_accessor validations: ::Array[Types::AnalysisTemplateValidationStatusDetail]
       attr_accessor error_message_configuration: Types::ErrorMessageConfiguration
       attr_accessor synthetic_data_parameters: Types::SyntheticDataParameters
-      SENSITIVE: []
+      SENSITIVE: [:analysis_parameters]
     end
 
     class AnalysisTemplateArtifact
@@ -460,14 +460,14 @@ module Aws::CleanRooms
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor schema: Types::AnalysisSchema
-      attr_accessor format: ("SQL" | "PYSPARK_1_0")
+      attr_accessor format: ("SQL" | "PYSPARK_1_0" | "PYSPARK_2_0")
       attr_accessor source: Types::AnalysisSource
       attr_accessor source_metadata: Types::AnalysisSourceMetadata
       attr_accessor analysis_parameters: ::Array[Types::AnalysisParameter]
       attr_accessor validations: ::Array[Types::AnalysisTemplateValidationStatusDetail]
       attr_accessor error_message_configuration: Types::ErrorMessageConfiguration
       attr_accessor synthetic_data_parameters: Types::SyntheticDataParameters
-      SENSITIVE: []
+      SENSITIVE: [:analysis_parameters]
     end
 
     class CollaborationAnalysisTemplateSummary
@@ -942,14 +942,14 @@ module Aws::CleanRooms
       attr_accessor description: ::String
       attr_accessor membership_identifier: ::String
       attr_accessor name: ::String
-      attr_accessor format: ("SQL" | "PYSPARK_1_0")
+      attr_accessor format: ("SQL" | "PYSPARK_1_0" | "PYSPARK_2_0")
       attr_accessor source: Types::AnalysisSource
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor analysis_parameters: ::Array[Types::AnalysisParameter]
       attr_accessor schema: Types::AnalysisSchema
       attr_accessor error_message_configuration: Types::ErrorMessageConfiguration
       attr_accessor synthetic_data_parameters: Types::SyntheticDataParameters
-      SENSITIVE: []
+      SENSITIVE: [:analysis_parameters]
     end
 
     class CreateAnalysisTemplateOutput
@@ -2728,6 +2728,7 @@ module Aws::CleanRooms
     class ProtectedJobError
       attr_accessor message: ::String
       attr_accessor code: ::String
+      attr_accessor retry: Types::RetryInfo
       SENSITIVE: []
     end
 
@@ -2813,6 +2814,7 @@ module Aws::CleanRooms
     end
 
     class ProtectedJobS3OutputConfigurationInput
+      attr_accessor result_format: ("CSV" | "PARQUET")
       attr_accessor bucket: ::String
       attr_accessor key_prefix: ::String
       SENSITIVE: []
@@ -2898,6 +2900,7 @@ module Aws::CleanRooms
     class ProtectedQueryError
       attr_accessor message: ::String
       attr_accessor code: ::String
+      attr_accessor retry: Types::RetryInfo
       SENSITIVE: []
     end
 
@@ -3027,6 +3030,11 @@ module Aws::CleanRooms
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
       attr_accessor resource_type: ("CONFIGURED_TABLE" | "COLLABORATION" | "MEMBERSHIP" | "CONFIGURED_TABLE_ASSOCIATION")
+      SENSITIVE: []
+    end
+
+    class RetryInfo
+      attr_accessor retryable: bool
       SENSITIVE: []
     end
 

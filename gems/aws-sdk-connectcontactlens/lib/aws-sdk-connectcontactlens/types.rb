@@ -44,16 +44,69 @@ module Aws::ConnectContactLens
       include Aws::Structure
     end
 
+    # A list of tag conditions that the filter evaluates together using AND
+    # logic. A category segment matches only when the tags on its rule
+    # satisfy every tag condition in the list.
+    #
+    # @!attribute [rw] tag_conditions
+    #   A list of tag conditions. All of the tag conditions must be met for
+    #   the condition to match.
+    #   @return [Array<Types::TagCondition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-contact-lens-2020-08-21/CategoriesAttributeAndCondition AWS API Documentation
+    #
+    class CategoriesAttributeAndCondition < Struct.new(
+      :tag_conditions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter that matches category segments based on the tags assigned to
+    # the rules that create the categories. Provide exactly one of
+    # `OrConditions`, `AndCondition`, or `TagCondition`.
+    #
+    # @!attribute [rw] or_conditions
+    #   A list of conditions that the filter evaluates using OR logic. A
+    #   category segment matches when at least one of the conditions in the
+    #   list is met.
+    #   @return [Array<Types::CategoriesAttributeAndCondition>]
+    #
+    # @!attribute [rw] and_condition
+    #   A condition that the filter evaluates using AND logic. A category
+    #   segment matches only when all of the tag conditions in the condition
+    #   are met.
+    #   @return [Types::CategoriesAttributeAndCondition]
+    #
+    # @!attribute [rw] tag_condition
+    #   A single tag condition that a category segment must match. The
+    #   category's rule must have the specified tag.
+    #   @return [Types::TagCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-contact-lens-2020-08-21/CategoriesAttributeFilter AWS API Documentation
+    #
+    class CategoriesAttributeFilter < Struct.new(
+      :or_conditions,
+      :and_condition,
+      :tag_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about the category rule that was matched.
     #
     # @!attribute [rw] points_of_interest
     #   The section of audio where the category rule was detected.
     #   @return [Array<Types::PointOfInterest>]
     #
+    # @!attribute [rw] rule_id
+    #   The unique identifier of the rule that created the matched category.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-contact-lens-2020-08-21/CategoryDetails AWS API Documentation
     #
     class CategoryDetails < Struct.new(
-      :points_of_interest)
+      :points_of_interest,
+      :rule_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -213,13 +266,22 @@ module Aws::ConnectContactLens
     #   results.
     #   @return [String]
     #
+    # @!attribute [rw] list_filter
+    #   A filter that limits the category segments returned by the
+    #   operation. When provided, use `CategoriesAttributeFilter` to return
+    #   only the category segments whose rules have tags that match the
+    #   filter. This enforces tag-based access control on the categories
+    #   that the caller can view.
+    #   @return [Types::RealTimeContactAnalysisSegmentsFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-contact-lens-2020-08-21/ListRealtimeContactAnalysisSegmentsRequest AWS API Documentation
     #
     class ListRealtimeContactAnalysisSegmentsRequest < Struct.new(
       :instance_id,
       :contact_id,
       :max_results,
-      :next_token)
+      :next_token,
+      :list_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -317,6 +379,24 @@ module Aws::ConnectContactLens
       include Aws::Structure
     end
 
+    # A filter that restricts the segments returned by
+    # `ListRealtimeContactAnalysisSegments`. It supports filtering category
+    # segments by the tags on the rules that create them, which enforces
+    # tag-based access control on the categories a caller can view.
+    #
+    # @!attribute [rw] categories_attribute_filter
+    #   A filter applied to category segments based on the tags of the rules
+    #   that create the matched categories.
+    #   @return [Types::CategoriesAttributeFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-contact-lens-2020-08-21/RealTimeContactAnalysisSegmentsFilter AWS API Documentation
+    #
+    class RealTimeContactAnalysisSegmentsFilter < Struct.new(
+      :categories_attribute_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An analyzed segment for a real-time analysis session.
     #
     # @!attribute [rw] transcript
@@ -355,6 +435,32 @@ module Aws::ConnectContactLens
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tag condition that consists of a tag key, a tag value, and a
+    # comparison operator.
+    #
+    # @!attribute [rw] tag_key
+    #   The tag key in the tag condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_value
+    #   The tag value in the tag condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] comparison_type
+    #   The comparison operator for the tag condition. Valid values:
+    #   `EQUALS` \| `NOT_EQUALS`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-contact-lens-2020-08-21/TagCondition AWS API Documentation
+    #
+    class TagCondition < Struct.new(
+      :tag_key,
+      :tag_value,
+      :comparison_type)
       SENSITIVE = []
       include Aws::Structure
     end

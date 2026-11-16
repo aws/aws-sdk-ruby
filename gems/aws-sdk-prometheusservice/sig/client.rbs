@@ -189,11 +189,7 @@ module Aws
                             ?client_token: ::String,
                             ?tags: Hash[::String, ::String],
                             ?exporters: Array[
-                              {
-                                open_search_configuration: {
-                                  domain_arn: ::String
-                                }?
-                              }
+                              Params::exporter_configuration
                             ]
                           ) -> _CreateScraperResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScraperResponseSuccess
@@ -598,11 +594,7 @@ module Aws
                             },
                             ?client_token: ::String,
                             ?exporters: Array[
-                              {
-                                open_search_configuration: {
-                                  domain_arn: ::String
-                                }?
-                              }
+                              Params::exporter_configuration
                             ]
                           ) -> _UpdateScraperResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateScraperResponseSuccess

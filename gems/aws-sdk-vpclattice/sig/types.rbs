@@ -1541,6 +1541,7 @@ module Aws::VPCLattice
     class UpdateResourceGatewayRequest
       attr_accessor resource_gateway_identifier: ::String
       attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor resource_config_dns_resolution: ("IN_VPC" | "PUBLIC")
       SENSITIVE: []
     end
 
@@ -1553,6 +1554,7 @@ module Aws::VPCLattice
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor ip_address_type: ("IPV4" | "IPV6")
+      attr_accessor resource_config_dns_resolution: ("IN_VPC" | "PUBLIC")
       SENSITIVE: []
     end
 

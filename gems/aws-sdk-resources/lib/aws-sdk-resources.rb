@@ -14,6 +14,7 @@ module Aws
   autoload :AccessAnalyzer, 'aws-sdk-accessanalyzer'
   autoload :Account, 'aws-sdk-account'
   autoload :AccountAccess, 'aws-sdk-accountaccess'
+  autoload :AccountAccessRuntime, 'aws-sdk-accountaccessruntime'
   autoload :AgentRegistry, 'aws-sdk-agentregistry'
   autoload :AgentRegistryControl, 'aws-sdk-agentregistrycontrol'
   autoload :Amplify, 'aws-sdk-amplify'

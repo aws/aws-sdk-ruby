@@ -306,6 +306,13 @@ HqOUdKigPDHYLRo=
             }.to raise_error(MessageVerifier::VerificationError, /must not contain newlines/)
           end
 
+          it 'raises when a metadata field contains a carriage return' do
+            msg = sign(base_message('MessageId' => "a\rb"))
+            expect {
+              verifier.authenticate!(Json.dump(msg))
+            }.to raise_error(MessageVerifier::VerificationError, /must not contain newlines/)
+          end
+
           it 'raises when Subject contains a newline' do
             msg = sign(base_message('Subject' => "a\nb"))
             expect {

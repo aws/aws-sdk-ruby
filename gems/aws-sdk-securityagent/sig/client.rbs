@@ -532,7 +532,7 @@ module Aws
                                application_id: ::String,
                                agent_space_id: ::String,
                                membership_id: ::String,
-                               member_type: ("USER"),
+                               member_type: ("USER" | "GROUP"),
                                ?config: {
                                  user: {
                                    role: ("MEMBER")?
@@ -575,6 +575,7 @@ module Aws
                             },
                             ?network_traffic_config: Params::network_traffic_config,
                             ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED"),
+                            ?clean_up_strategy: ("BEST_EFFORT_DELETE" | "RETAIN_ALL"),
                             ?disable_managed_skills: Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")],
                             ?max_task_hours: ::Float,
                             ?report_destination: {
@@ -799,7 +800,7 @@ module Aws
                                application_id: ::String,
                                agent_space_id: ::String,
                                membership_id: ::String,
-                               ?member_type: ("USER")
+                               ?member_type: ("USER" | "GROUP")
                              ) -> _DeleteMembershipResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMembershipResponseSuccess
 
@@ -1135,7 +1136,7 @@ module Aws
       def list_memberships: (
                               application_id: ::String,
                               agent_space_id: ::String,
-                              ?member_type: ("USER" | "ALL"),
+                              ?member_type: ("USER" | "GROUP" | "ALL"),
                               ?max_results: ::Integer,
                               ?next_token: ::String
                             ) -> _ListMembershipsResponseSuccess
@@ -1659,6 +1660,7 @@ module Aws
                             },
                             ?network_traffic_config: Params::network_traffic_config,
                             ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED"),
+                            ?clean_up_strategy: ("BEST_EFFORT_DELETE" | "RETAIN_ALL"),
                             ?disable_managed_skills: Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")],
                             ?max_task_hours: ::Float,
                             ?report_destination: {

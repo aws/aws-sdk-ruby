@@ -82,8 +82,7 @@ module AwsSdkCodeGenerator
         def struct_members(shape)
           return if shape['members'].nil?
           members = shape['members'].map do |member_name, member_ref|
-            sensitive = !!(member_ref['sensitive'] ||
-              @api['shapes'][member_ref['shape']]['sensitive'])
+            sensitive = sensitive_shape_ref?(member_ref, @api)
             StructMember.new(
               member_name: underscore(member_name),
               sensitive: sensitive,

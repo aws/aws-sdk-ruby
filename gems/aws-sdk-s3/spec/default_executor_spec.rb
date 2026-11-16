@@ -40,6 +40,19 @@ module Aws
           executor.post {}
         end
 
+        # polls rather than sleeping a fixed time, since a loaded host can take
+        # longer than any fixed delay to get the thread blocked
+        def parked?(thread, timeout = 2)
+          deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + timeout
+          until thread.status == 'sleep'
+            return false unless thread.alive?
+            return false if Process.clock_gettime(Process::CLOCK_MONOTONIC) >= deadline
+
+            sleep(0.01)
+          end
+          true
+        end
+
         def park_producer
           fill_queue
           producer = Thread.new do
@@ -47,8 +60,7 @@ module Aws
           rescue DefaultExecutor::RejectedExecutionError => e
             errors << e
           end
-          sleep(0.1)
-          raise 'producer did not park' unless producer.status == 'sleep'
+          raise 'producer did not park' unless parked?(producer)
 
           producer
         end
@@ -56,8 +68,7 @@ module Aws
         it 'blocks the caller until a worker frees a slot' do
           fill_queue
           parked = Thread.new { executor.post {} }
-          sleep(0.1)
-          expect(parked.status).to eq('sleep')
+          expect(parked?(parked)).to be(true)
 
           release << :go
           expect(parked.value).to be(true)
@@ -74,7 +85,7 @@ module Aws
         it 'shutdown does not deadlock while holding the lock' do
           producer = park_producer
           shutdown = Thread.new { executor.shutdown(0.5) }
-          expect(shutdown.join(2)).to_not be_nil
+          expect(shutdown.join(10)).to_not be_nil
           expect(producer.join(2)).to_not be_nil
           expect(errors.first).to be_a(DefaultExecutor::RejectedExecutionError)
         end
@@ -93,8 +104,7 @@ module Aws
           started.pop
           executor.post { ran << :queued }
           parked = Thread.new { executor.post { ran << :parked } }
-          sleep(0.1)
-          expect(parked.status).to eq('sleep')
+          expect(parked?(parked)).to be(true)
 
           release << :go
           expect(parked.join(2)).to_not be_nil

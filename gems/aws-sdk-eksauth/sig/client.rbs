@@ -86,6 +86,7 @@ module Aws
         def pod_identity_association: () -> Types::PodIdentityAssociation
         def assumed_role_user: () -> Types::AssumedRoleUser
         def credentials: () -> Types::Credentials
+        def workload_identity_provider_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKSAuth/Client.html#assume_role_for_pod_identity-instance_method
       def assume_role_for_pod_identity: (

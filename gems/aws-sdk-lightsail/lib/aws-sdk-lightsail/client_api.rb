@@ -96,6 +96,8 @@ module Aws::Lightsail
     CertificateStatusList = Shapes::ListShape.new(name: 'CertificateStatusList')
     CertificateSummary = Shapes::StructureShape.new(name: 'CertificateSummary')
     CertificateSummaryList = Shapes::ListShape.new(name: 'CertificateSummaryList')
+    CheckSubdomainAvailabilityRequest = Shapes::StructureShape.new(name: 'CheckSubdomainAvailabilityRequest')
+    CheckSubdomainAvailabilityResult = Shapes::StructureShape.new(name: 'CheckSubdomainAvailabilityResult')
     CloseInstancePublicPortsRequest = Shapes::StructureShape.new(name: 'CloseInstancePublicPortsRequest')
     CloseInstancePublicPortsResult = Shapes::StructureShape.new(name: 'CloseInstancePublicPortsResult')
     CloudFormationStackRecord = Shapes::StructureShape.new(name: 'CloudFormationStackRecord')
@@ -197,6 +199,8 @@ module Aws::Lightsail
     CreateRelationalDatabaseResult = Shapes::StructureShape.new(name: 'CreateRelationalDatabaseResult')
     CreateRelationalDatabaseSnapshotRequest = Shapes::StructureShape.new(name: 'CreateRelationalDatabaseSnapshotRequest')
     CreateRelationalDatabaseSnapshotResult = Shapes::StructureShape.new(name: 'CreateRelationalDatabaseSnapshotResult')
+    CreateSubdomainRequest = Shapes::StructureShape.new(name: 'CreateSubdomainRequest')
+    CreateSubdomainResult = Shapes::StructureShape.new(name: 'CreateSubdomainResult')
     Currency = Shapes::StringShape.new(name: 'Currency')
     DeleteAlarmRequest = Shapes::StructureShape.new(name: 'DeleteAlarmRequest')
     DeleteAlarmResult = Shapes::StructureShape.new(name: 'DeleteAlarmResult')
@@ -240,6 +244,8 @@ module Aws::Lightsail
     DeleteRelationalDatabaseResult = Shapes::StructureShape.new(name: 'DeleteRelationalDatabaseResult')
     DeleteRelationalDatabaseSnapshotRequest = Shapes::StructureShape.new(name: 'DeleteRelationalDatabaseSnapshotRequest')
     DeleteRelationalDatabaseSnapshotResult = Shapes::StructureShape.new(name: 'DeleteRelationalDatabaseSnapshotResult')
+    DeleteSubdomainRequest = Shapes::StructureShape.new(name: 'DeleteSubdomainRequest')
+    DeleteSubdomainResult = Shapes::StructureShape.new(name: 'DeleteSubdomainResult')
     DestinationInfo = Shapes::StructureShape.new(name: 'DestinationInfo')
     DetachCertificateFromDistributionRequest = Shapes::StructureShape.new(name: 'DetachCertificateFromDistributionRequest')
     DetachCertificateFromDistributionResult = Shapes::StructureShape.new(name: 'DetachCertificateFromDistributionResult')
@@ -429,6 +435,8 @@ module Aws::Lightsail
     GetStaticIpResult = Shapes::StructureShape.new(name: 'GetStaticIpResult')
     GetStaticIpsRequest = Shapes::StructureShape.new(name: 'GetStaticIpsRequest')
     GetStaticIpsResult = Shapes::StructureShape.new(name: 'GetStaticIpsResult')
+    GetSubdomainsRequest = Shapes::StructureShape.new(name: 'GetSubdomainsRequest')
+    GetSubdomainsResult = Shapes::StructureShape.new(name: 'GetSubdomainsResult')
     HeaderEnum = Shapes::StringShape.new(name: 'HeaderEnum')
     HeaderForwardList = Shapes::ListShape.new(name: 'HeaderForwardList')
     HeaderObject = Shapes::StructureShape.new(name: 'HeaderObject')
@@ -452,6 +460,12 @@ module Aws::Lightsail
     InstanceHardware = Shapes::StructureShape.new(name: 'InstanceHardware')
     InstanceHealthReason = Shapes::StringShape.new(name: 'InstanceHealthReason')
     InstanceHealthState = Shapes::StringShape.new(name: 'InstanceHealthState')
+    InstanceHealthStatus = Shapes::StructureShape.new(name: 'InstanceHealthStatus')
+    InstanceHealthStatusDetail = Shapes::StructureShape.new(name: 'InstanceHealthStatusDetail')
+    InstanceHealthStatusDetailList = Shapes::ListShape.new(name: 'InstanceHealthStatusDetailList')
+    InstanceHealthStatusDetailName = Shapes::StringShape.new(name: 'InstanceHealthStatusDetailName')
+    InstanceHealthStatusDetailValue = Shapes::StringShape.new(name: 'InstanceHealthStatusDetailValue')
+    InstanceHealthStatusValue = Shapes::StringShape.new(name: 'InstanceHealthStatusValue')
     InstanceHealthSummary = Shapes::StructureShape.new(name: 'InstanceHealthSummary')
     InstanceHealthSummaryList = Shapes::ListShape.new(name: 'InstanceHealthSummaryList')
     InstanceList = Shapes::ListShape.new(name: 'InstanceList')
@@ -483,6 +497,8 @@ module Aws::Lightsail
     KeyPair = Shapes::StructureShape.new(name: 'KeyPair')
     KeyPairList = Shapes::ListShape.new(name: 'KeyPairList')
     LightsailDistribution = Shapes::StructureShape.new(name: 'LightsailDistribution')
+    LightsailDistributionSubdomain = Shapes::StructureShape.new(name: 'LightsailDistributionSubdomain')
+    LightsailDistributionSubdomainStateEnum = Shapes::StringShape.new(name: 'LightsailDistributionSubdomainStateEnum')
     LoadBalancer = Shapes::StructureShape.new(name: 'LoadBalancer')
     LoadBalancerAttributeName = Shapes::StringShape.new(name: 'LoadBalancerAttributeName')
     LoadBalancerConfigurationOptions = Shapes::MapShape.new(name: 'LoadBalancerConfigurationOptions')
@@ -613,6 +629,7 @@ module Aws::Lightsail
     RevocationReason = Shapes::StringShape.new(name: 'RevocationReason')
     SendContactMethodVerificationRequest = Shapes::StructureShape.new(name: 'SendContactMethodVerificationRequest')
     SendContactMethodVerificationResult = Shapes::StructureShape.new(name: 'SendContactMethodVerificationResult')
+    SensitiveBase64 = Shapes::StringShape.new(name: 'SensitiveBase64')
     SensitiveNonEmptyString = Shapes::StringShape.new(name: 'SensitiveNonEmptyString')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     SerialNumber = Shapes::StringShape.new(name: 'SerialNumber')
@@ -653,6 +670,11 @@ module Aws::Lightsail
     StopRelationalDatabaseResult = Shapes::StructureShape.new(name: 'StopRelationalDatabaseResult')
     StringList = Shapes::ListShape.new(name: 'StringList')
     StringMax256 = Shapes::StringShape.new(name: 'StringMax256')
+    Subdomain = Shapes::StructureShape.new(name: 'Subdomain')
+    SubdomainAssociationAction = Shapes::StringShape.new(name: 'SubdomainAssociationAction')
+    SubdomainAttachableResource = Shapes::StructureShape.new(name: 'SubdomainAttachableResource')
+    SubdomainList = Shapes::ListShape.new(name: 'SubdomainList')
+    SubdomainState = Shapes::StringShape.new(name: 'SubdomainState')
     SubjectAlternativeNameList = Shapes::ListShape.new(name: 'SubjectAlternativeNameList')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -692,6 +714,8 @@ module Aws::Lightsail
     UpdateRelationalDatabaseParametersResult = Shapes::StructureShape.new(name: 'UpdateRelationalDatabaseParametersResult')
     UpdateRelationalDatabaseRequest = Shapes::StructureShape.new(name: 'UpdateRelationalDatabaseRequest')
     UpdateRelationalDatabaseResult = Shapes::StructureShape.new(name: 'UpdateRelationalDatabaseResult')
+    UpdateSubdomainAssociationRequest = Shapes::StructureShape.new(name: 'UpdateSubdomainAssociationRequest')
+    UpdateSubdomainAssociationResult = Shapes::StructureShape.new(name: 'UpdateSubdomainAssociationResult')
     ViewerMinimumTlsProtocolVersionEnum = Shapes::StringShape.new(name: 'ViewerMinimumTlsProtocolVersionEnum')
     WafAcfpConfig = Shapes::StructureShape.new(name: 'WafAcfpConfig')
     WafAtpConfig = Shapes::StructureShape.new(name: 'WafAtpConfig')
@@ -719,7 +743,7 @@ module Aws::Lightsail
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AccessKey.add_member(:access_key_id, Shapes::ShapeRef.new(shape: IAMAccessKeyId, location_name: "accessKeyId"))
-    AccessKey.add_member(:secret_access_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "secretAccessKey"))
+    AccessKey.add_member(:secret_access_key, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "secretAccessKey"))
     AccessKey.add_member(:status, Shapes::ShapeRef.new(shape: StatusType, location_name: "status"))
     AccessKey.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
     AccessKey.add_member(:last_used, Shapes::ShapeRef.new(shape: AccessKeyLastUsed, location_name: "lastUsed"))
@@ -1011,6 +1035,15 @@ module Aws::Lightsail
 
     CertificateSummaryList.member = Shapes::ShapeRef.new(shape: CertificateSummary)
 
+    CheckSubdomainAvailabilityRequest.add_member(:subdomain_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "subdomainName"))
+    CheckSubdomainAvailabilityRequest.add_member(:reserve, Shapes::ShapeRef.new(shape: boolean, location_name: "reserve"))
+    CheckSubdomainAvailabilityRequest.struct_class = Types::CheckSubdomainAvailabilityRequest
+
+    CheckSubdomainAvailabilityResult.add_member(:available, Shapes::ShapeRef.new(shape: boolean, location_name: "available"))
+    CheckSubdomainAvailabilityResult.add_member(:reservation_expires_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "reservationExpiresAt"))
+    CheckSubdomainAvailabilityResult.add_member(:subdomain_name, Shapes::ShapeRef.new(shape: string, location_name: "subdomainName"))
+    CheckSubdomainAvailabilityResult.struct_class = Types::CheckSubdomainAvailabilityResult
+
     CloseInstancePublicPortsRequest.add_member(:port_info, Shapes::ShapeRef.new(shape: PortInfo, required: true, location_name: "portInfo"))
     CloseInstancePublicPortsRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
     CloseInstancePublicPortsRequest.struct_class = Types::CloseInstancePublicPortsRequest
@@ -1152,7 +1185,7 @@ module Aws::Lightsail
     ContainerServicePublicDomainsList.member = Shapes::ShapeRef.new(shape: string)
 
     ContainerServiceRegistryLogin.add_member(:username, Shapes::ShapeRef.new(shape: string, location_name: "username"))
-    ContainerServiceRegistryLogin.add_member(:password, Shapes::ShapeRef.new(shape: string, location_name: "password"))
+    ContainerServiceRegistryLogin.add_member(:password, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "password"))
     ContainerServiceRegistryLogin.add_member(:expires_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "expiresAt"))
     ContainerServiceRegistryLogin.add_member(:registry, Shapes::ShapeRef.new(shape: string, location_name: "registry"))
     ContainerServiceRegistryLogin.struct_class = Types::ContainerServiceRegistryLogin
@@ -1299,6 +1332,7 @@ module Aws::Lightsail
     CreateDistributionRequest.add_member(:custom_error_responses, Shapes::ShapeRef.new(shape: DistributionCustomErrorResponseList, location_name: "customErrorResponses"))
     CreateDistributionRequest.add_member(:enable_waf, Shapes::ShapeRef.new(shape: boolean, location_name: "enableWaf"))
     CreateDistributionRequest.add_member(:waf_rules, Shapes::ShapeRef.new(shape: WafRuleList, location_name: "wafRules"))
+    CreateDistributionRequest.add_member(:subdomain_name, Shapes::ShapeRef.new(shape: string, location_name: "subdomainName"))
     CreateDistributionRequest.struct_class = Types::CreateDistributionRequest
 
     CreateDistributionResult.add_member(:distribution, Shapes::ShapeRef.new(shape: LightsailDistribution, location_name: "distribution"))
@@ -1376,7 +1410,7 @@ module Aws::Lightsail
 
     CreateKeyPairResult.add_member(:key_pair, Shapes::ShapeRef.new(shape: KeyPair, location_name: "keyPair"))
     CreateKeyPairResult.add_member(:public_key_base_64, Shapes::ShapeRef.new(shape: Base64, location_name: "publicKeyBase64"))
-    CreateKeyPairResult.add_member(:private_key_base_64, Shapes::ShapeRef.new(shape: Base64, location_name: "privateKeyBase64"))
+    CreateKeyPairResult.add_member(:private_key_base_64, Shapes::ShapeRef.new(shape: SensitiveBase64, location_name: "privateKeyBase64"))
     CreateKeyPairResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))
     CreateKeyPairResult.struct_class = Types::CreateKeyPairResult
 
@@ -1441,6 +1475,14 @@ module Aws::Lightsail
 
     CreateRelationalDatabaseSnapshotResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     CreateRelationalDatabaseSnapshotResult.struct_class = Types::CreateRelationalDatabaseSnapshotResult
+
+    CreateSubdomainRequest.add_member(:subdomain_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "subdomainName"))
+    CreateSubdomainRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateSubdomainRequest.struct_class = Types::CreateSubdomainRequest
+
+    CreateSubdomainResult.add_member(:subdomain, Shapes::ShapeRef.new(shape: Subdomain, location_name: "subdomain"))
+    CreateSubdomainResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))
+    CreateSubdomainResult.struct_class = Types::CreateSubdomainResult
 
     DeleteAlarmRequest.add_member(:alarm_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "alarmName"))
     DeleteAlarmRequest.struct_class = Types::DeleteAlarmRequest
@@ -1577,6 +1619,13 @@ module Aws::Lightsail
 
     DeleteRelationalDatabaseSnapshotResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     DeleteRelationalDatabaseSnapshotResult.struct_class = Types::DeleteRelationalDatabaseSnapshotResult
+
+    DeleteSubdomainRequest.add_member(:subdomain_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "subdomainName"))
+    DeleteSubdomainRequest.struct_class = Types::DeleteSubdomainRequest
+
+    DeleteSubdomainResult.add_member(:subdomain, Shapes::ShapeRef.new(shape: Subdomain, location_name: "subdomain"))
+    DeleteSubdomainResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))
+    DeleteSubdomainResult.struct_class = Types::DeleteSubdomainResult
 
     DestinationInfo.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "id"))
     DestinationInfo.add_member(:service, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "service"))
@@ -1734,7 +1783,7 @@ module Aws::Lightsail
     DownloadDefaultKeyPairRequest.struct_class = Types::DownloadDefaultKeyPairRequest
 
     DownloadDefaultKeyPairResult.add_member(:public_key_base_64, Shapes::ShapeRef.new(shape: Base64, location_name: "publicKeyBase64"))
-    DownloadDefaultKeyPairResult.add_member(:private_key_base_64, Shapes::ShapeRef.new(shape: Base64, location_name: "privateKeyBase64"))
+    DownloadDefaultKeyPairResult.add_member(:private_key_base_64, Shapes::ShapeRef.new(shape: SensitiveBase64, location_name: "privateKeyBase64"))
     DownloadDefaultKeyPairResult.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
     DownloadDefaultKeyPairResult.struct_class = Types::DownloadDefaultKeyPairResult
 
@@ -2054,6 +2103,7 @@ module Aws::Lightsail
     GetInstancePortStatesResult.struct_class = Types::GetInstancePortStatesResult
 
     GetInstanceRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
+    GetInstanceRequest.add_member(:include_health_status, Shapes::ShapeRef.new(shape: boolean, location_name: "includeHealthStatus"))
     GetInstanceRequest.struct_class = Types::GetInstanceRequest
 
     GetInstanceResult.add_member(:instance, Shapes::ShapeRef.new(shape: Instance, location_name: "instance"))
@@ -2079,6 +2129,7 @@ module Aws::Lightsail
     GetInstanceStateResult.struct_class = Types::GetInstanceStateResult
 
     GetInstancesRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
+    GetInstancesRequest.add_member(:include_health_status, Shapes::ShapeRef.new(shape: boolean, location_name: "includeHealthStatus"))
     GetInstancesRequest.struct_class = Types::GetInstancesRequest
 
     GetInstancesResult.add_member(:instances, Shapes::ShapeRef.new(shape: InstanceList, location_name: "instances"))
@@ -2292,6 +2343,14 @@ module Aws::Lightsail
     GetStaticIpsResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
     GetStaticIpsResult.struct_class = Types::GetStaticIpsResult
 
+    GetSubdomainsRequest.add_member(:subdomain_name, Shapes::ShapeRef.new(shape: string, location_name: "subdomainName"))
+    GetSubdomainsRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
+    GetSubdomainsRequest.struct_class = Types::GetSubdomainsRequest
+
+    GetSubdomainsResult.add_member(:subdomains, Shapes::ShapeRef.new(shape: SubdomainList, location_name: "subdomains"))
+    GetSubdomainsResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
+    GetSubdomainsResult.struct_class = Types::GetSubdomainsResult
+
     HeaderForwardList.member = Shapes::ShapeRef.new(shape: HeaderEnum)
 
     HeaderObject.add_member(:option, Shapes::ShapeRef.new(shape: ForwardValues, location_name: "option"))
@@ -2345,15 +2404,17 @@ module Aws::Lightsail
     Instance.add_member(:username, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "username"))
     Instance.add_member(:ssh_key_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "sshKeyName"))
     Instance.add_member(:metadata_options, Shapes::ShapeRef.new(shape: InstanceMetadataOptions, location_name: "metadataOptions"))
+    Instance.add_member(:instance_status, Shapes::ShapeRef.new(shape: InstanceHealthStatus, location_name: "instanceStatus"))
+    Instance.add_member(:system_status, Shapes::ShapeRef.new(shape: InstanceHealthStatus, location_name: "systemStatus"))
     Instance.struct_class = Types::Instance
 
     InstanceAccessDetails.add_member(:cert_key, Shapes::ShapeRef.new(shape: string, location_name: "certKey"))
     InstanceAccessDetails.add_member(:expires_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "expiresAt"))
     InstanceAccessDetails.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "ipAddress"))
     InstanceAccessDetails.add_member(:ipv6_addresses, Shapes::ShapeRef.new(shape: Ipv6AddressList, location_name: "ipv6Addresses"))
-    InstanceAccessDetails.add_member(:password, Shapes::ShapeRef.new(shape: string, location_name: "password"))
+    InstanceAccessDetails.add_member(:password, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "password"))
     InstanceAccessDetails.add_member(:password_data, Shapes::ShapeRef.new(shape: PasswordData, location_name: "passwordData"))
-    InstanceAccessDetails.add_member(:private_key, Shapes::ShapeRef.new(shape: string, location_name: "privateKey"))
+    InstanceAccessDetails.add_member(:private_key, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "privateKey"))
     InstanceAccessDetails.add_member(:protocol, Shapes::ShapeRef.new(shape: InstanceAccessProtocol, location_name: "protocol"))
     InstanceAccessDetails.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "instanceName"))
     InstanceAccessDetails.add_member(:username, Shapes::ShapeRef.new(shape: string, location_name: "username"))
@@ -2376,6 +2437,17 @@ module Aws::Lightsail
     InstanceHardware.add_member(:disks, Shapes::ShapeRef.new(shape: DiskList, location_name: "disks"))
     InstanceHardware.add_member(:ram_size_in_gb, Shapes::ShapeRef.new(shape: float, location_name: "ramSizeInGb"))
     InstanceHardware.struct_class = Types::InstanceHardware
+
+    InstanceHealthStatus.add_member(:status, Shapes::ShapeRef.new(shape: InstanceHealthStatusValue, location_name: "status"))
+    InstanceHealthStatus.add_member(:details, Shapes::ShapeRef.new(shape: InstanceHealthStatusDetailList, location_name: "details"))
+    InstanceHealthStatus.struct_class = Types::InstanceHealthStatus
+
+    InstanceHealthStatusDetail.add_member(:name, Shapes::ShapeRef.new(shape: InstanceHealthStatusDetailName, location_name: "name"))
+    InstanceHealthStatusDetail.add_member(:status, Shapes::ShapeRef.new(shape: InstanceHealthStatusDetailValue, location_name: "status"))
+    InstanceHealthStatusDetail.add_member(:impaired_since, Shapes::ShapeRef.new(shape: IsoDate, location_name: "impairedSince"))
+    InstanceHealthStatusDetail.struct_class = Types::InstanceHealthStatusDetail
+
+    InstanceHealthStatusDetailList.member = Shapes::ShapeRef.new(shape: InstanceHealthStatusDetail)
 
     InstanceHealthSummary.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "instanceName"))
     InstanceHealthSummary.add_member(:instance_health, Shapes::ShapeRef.new(shape: InstanceHealthState, location_name: "instanceHealth"))
@@ -2502,7 +2574,14 @@ module Aws::Lightsail
     LightsailDistribution.add_member(:default_root_object, Shapes::ShapeRef.new(shape: string, location_name: "defaultRootObject"))
     LightsailDistribution.add_member(:custom_error_responses, Shapes::ShapeRef.new(shape: DistributionCustomErrorResponseList, location_name: "customErrorResponses"))
     LightsailDistribution.add_member(:waf, Shapes::ShapeRef.new(shape: WafConfig, location_name: "waf"))
+    LightsailDistribution.add_member(:subdomain, Shapes::ShapeRef.new(shape: LightsailDistributionSubdomain, location_name: "subdomain"))
     LightsailDistribution.struct_class = Types::LightsailDistribution
+
+    LightsailDistributionSubdomain.add_member(:name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "name"))
+    LightsailDistributionSubdomain.add_member(:state, Shapes::ShapeRef.new(shape: LightsailDistributionSubdomainStateEnum, required: true, location_name: "state"))
+    LightsailDistributionSubdomain.add_member(:error_code, Shapes::ShapeRef.new(shape: string, location_name: "errorCode"))
+    LightsailDistributionSubdomain.add_member(:error_details, Shapes::ShapeRef.new(shape: string, location_name: "errorDetails"))
+    LightsailDistributionSubdomain.struct_class = Types::LightsailDistributionSubdomain
 
     LoadBalancer.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     LoadBalancer.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
@@ -2682,7 +2761,7 @@ module Aws::Lightsail
     PartnerInfo.add_member(:status, Shapes::ShapeRef.new(shape: PartnerStatus, required: true, location_name: "status"))
     PartnerInfo.struct_class = Types::PartnerInfo
 
-    PasswordData.add_member(:ciphertext, Shapes::ShapeRef.new(shape: string, location_name: "ciphertext"))
+    PasswordData.add_member(:ciphertext, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "ciphertext"))
     PasswordData.add_member(:key_pair_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "keyPairName"))
     PasswordData.struct_class = Types::PasswordData
 
@@ -2698,7 +2777,7 @@ module Aws::Lightsail
 
     PendingMaintenanceActionList.member = Shapes::ShapeRef.new(shape: PendingMaintenanceAction)
 
-    PendingModifiedRelationalDatabaseValues.add_member(:master_user_password, Shapes::ShapeRef.new(shape: string, location_name: "masterUserPassword"))
+    PendingModifiedRelationalDatabaseValues.add_member(:master_user_password, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "masterUserPassword"))
     PendingModifiedRelationalDatabaseValues.add_member(:engine_version, Shapes::ShapeRef.new(shape: string, location_name: "engineVersion"))
     PendingModifiedRelationalDatabaseValues.add_member(:backup_retention_enabled, Shapes::ShapeRef.new(shape: boolean, location_name: "backupRetentionEnabled"))
     PendingModifiedRelationalDatabaseValues.struct_class = Types::PendingModifiedRelationalDatabaseValues
@@ -3076,6 +3155,27 @@ module Aws::Lightsail
 
     StringList.member = Shapes::ShapeRef.new(shape: string)
 
+    Subdomain.add_member(:subdomain_name, Shapes::ShapeRef.new(shape: string, location_name: "subdomainName"))
+    Subdomain.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
+    Subdomain.add_member(:fqdn, Shapes::ShapeRef.new(shape: string, location_name: "fqdn"))
+    Subdomain.add_member(:depth, Shapes::ShapeRef.new(shape: integer, location_name: "depth"))
+    Subdomain.add_member(:state, Shapes::ShapeRef.new(shape: SubdomainState, location_name: "state"))
+    Subdomain.add_member(:attached_resource, Shapes::ShapeRef.new(shape: SubdomainAttachableResource, location_name: "attachedResource"))
+    Subdomain.add_member(:attaching_resource, Shapes::ShapeRef.new(shape: SubdomainAttachableResource, location_name: "attachingResource"))
+    Subdomain.add_member(:location, Shapes::ShapeRef.new(shape: ResourceLocation, location_name: "location"))
+    Subdomain.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
+    Subdomain.add_member(:parent_fqdn, Shapes::ShapeRef.new(shape: string, location_name: "parentFqdn"))
+    Subdomain.add_member(:children, Shapes::ShapeRef.new(shape: SubdomainList, location_name: "children"))
+    Subdomain.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    Subdomain.struct_class = Types::Subdomain
+
+    SubdomainAttachableResource.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
+    SubdomainAttachableResource.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    SubdomainAttachableResource.add_member(:attached_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "attachedAt"))
+    SubdomainAttachableResource.struct_class = Types::SubdomainAttachableResource
+
+    SubdomainList.member = Shapes::ShapeRef.new(shape: Subdomain)
+
     SubjectAlternativeNameList.member = Shapes::ShapeRef.new(shape: DomainName)
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "key"))
@@ -3228,6 +3328,15 @@ module Aws::Lightsail
     UpdateRelationalDatabaseResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     UpdateRelationalDatabaseResult.struct_class = Types::UpdateRelationalDatabaseResult
 
+    UpdateSubdomainAssociationRequest.add_member(:subdomain_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "subdomainName"))
+    UpdateSubdomainAssociationRequest.add_member(:action, Shapes::ShapeRef.new(shape: SubdomainAssociationAction, required: true, location_name: "action"))
+    UpdateSubdomainAssociationRequest.add_member(:target_resource_arn, Shapes::ShapeRef.new(shape: string, location_name: "targetResourceArn"))
+    UpdateSubdomainAssociationRequest.struct_class = Types::UpdateSubdomainAssociationRequest
+
+    UpdateSubdomainAssociationResult.add_member(:subdomain, Shapes::ShapeRef.new(shape: Subdomain, location_name: "subdomain"))
+    UpdateSubdomainAssociationResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))
+    UpdateSubdomainAssociationResult.struct_class = Types::UpdateSubdomainAssociationResult
+
     WafAcfpConfig.add_member(:payload_type, Shapes::ShapeRef.new(shape: WafPayloadTypeEnum, location_name: "payloadType"))
     WafAcfpConfig.add_member(:creation_path, Shapes::ShapeRef.new(shape: string, location_name: "creationPath"))
     WafAcfpConfig.add_member(:registration_page_path, Shapes::ShapeRef.new(shape: string, location_name: "registrationPagePath"))
@@ -3375,6 +3484,19 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:check_subdomain_availability, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CheckSubdomainAvailability"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CheckSubdomainAvailabilityRequest)
+        o.output = Shapes::ShapeRef.new(shape: CheckSubdomainAvailabilityResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -3776,6 +3898,20 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
+      api.add_operation(:create_subdomain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSubdomain"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateSubdomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSubdomainResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
       api.add_operation(:delete_alarm, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteAlarm"
         o.http_method = "POST"
@@ -4094,6 +4230,20 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:delete_subdomain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSubdomain"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSubdomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSubdomainResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
@@ -5230,6 +5380,19 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
+      api.add_operation(:get_subdomains, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSubdomains"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSubdomainsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSubdomainsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
       api.add_operation(:import_key_pair, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ImportKeyPair"
         o.http_method = "POST"
@@ -5762,6 +5925,20 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:update_subdomain_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSubdomainAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSubdomainAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSubdomainAssociationResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
     end

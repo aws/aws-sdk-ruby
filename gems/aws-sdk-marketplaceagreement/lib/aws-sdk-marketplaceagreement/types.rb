@@ -595,6 +595,14 @@ module Aws::MarketplaceAgreement
     #     number of renewals allowed by its renewal term.
     #   @return [String]
     #
+    # @!attribute [rw] free_trial_end_time
+    #   The date and time when the free trial of the agreement ends. This
+    #   field is present only when the agreement includes a free trial.
+    #
+    #   For an agreement that includes both a free trial and usage-based
+    #   pricing, the agreement converts to paid usage at this time.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AgreementViewSummary AWS API Documentation
     #
     class AgreementViewSummary < Struct.new(
@@ -611,7 +619,8 @@ module Aws::MarketplaceAgreement
       :entitlements,
       :initial_agreement_id,
       :end_time_behavior_type,
-      :end_time_behavior_reason_code)
+      :end_time_behavior_reason_code,
+      :free_trial_end_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1420,6 +1429,11 @@ module Aws::MarketplaceAgreement
     #   an agreement that is no longer active.
     #   @return [Types::EndTimeBehavior]
     #
+    # @!attribute [rw] free_trial_summary
+    #   The free trial details of the agreement. This field is present only
+    #   when the agreement includes a free trial.
+    #   @return [Types::FreeTrialSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/DescribeAgreementOutput AWS API Documentation
     #
     class DescribeAgreementOutput < Struct.new(
@@ -1434,7 +1448,8 @@ module Aws::MarketplaceAgreement
       :proposal_summary,
       :status,
       :initial_agreement_id,
-      :end_time_behavior)
+      :end_time_behavior,
+      :free_trial_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1794,7 +1809,9 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] duration
-    #   Duration of the free trial period (5–31 days).
+    #   Duration of the free trial period. The allowed duration depends on
+    #   the product type. For SaaS products, the free trial lasts 7 to 90
+    #   days.
     #   @return [String]
     #
     # @!attribute [rw] grants
@@ -1809,6 +1826,23 @@ module Aws::MarketplaceAgreement
       :id,
       :duration,
       :grants)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the free trial of an agreement, including when
+    # the free trial ends.
+    #
+    # @!attribute [rw] trial_end_time
+    #   The date and time when the free trial ends. For an agreement that
+    #   includes both a free trial and usage-based pricing, the agreement
+    #   converts to paid usage at this time.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/FreeTrialSummary AWS API Documentation
+    #
+    class FreeTrialSummary < Struct.new(
+      :trial_end_time)
       SENSITIVE = []
       include Aws::Structure
     end

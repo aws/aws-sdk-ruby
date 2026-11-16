@@ -150,6 +150,7 @@ module Aws
       }?,
       dvb_settings: Params::dash_dvb_settings?,
       compactness: ("STANDARD" | "NONE")?,
+      bandwidth_reporting_mode: ("AVERAGE" | "MAX")?,
       audio_timeline_pattern: ("NONE" | "PATTERNED")?,
       subtitle_configuration: {
         ttml_configuration: {

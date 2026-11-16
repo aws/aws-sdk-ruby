@@ -264,7 +264,8 @@ module Aws::MarketplaceDiscovery
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::MarketplaceDiscovery
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -610,6 +611,20 @@ module Aws::MarketplaceDiscovery
     #           source_name: "AWS Marketplace", 
     #           source_url: "https://aws.amazon.com/marketplace/reviews/prodview-sampleSaasId", 
     #           total_reviews: 128, 
+    #         }, 
+    #         {
+    #           average_rating: "4.6", 
+    #           source_id: "G2", 
+    #           source_name: "G2", 
+    #           source_url: "https://www.g2.com/products/sample-product/reviews", 
+    #           total_reviews: 1368, 
+    #         }, 
+    #         {
+    #           average_rating: "4.2", 
+    #           source_id: "PEERSPOT", 
+    #           source_name: "PeerSpot", 
+    #           source_url: "https://www.peerspot.com/products/sample-product-reviews", 
+    #           total_reviews: 19, 
     #         }, 
     #       ], 
     #     }, 
@@ -955,7 +970,7 @@ module Aws::MarketplaceDiscovery
     #   resp.resources[0].display_name #=> String
     #   resp.review_summary.review_source_summaries #=> Array
     #   resp.review_summary.review_source_summaries[0].source_name #=> String
-    #   resp.review_summary.review_source_summaries[0].source_id #=> String, one of "AWS_MARKETPLACE"
+    #   resp.review_summary.review_source_summaries[0].source_id #=> String, one of "AWS_MARKETPLACE", "G2", "PEERSPOT"
     #   resp.review_summary.review_source_summaries[0].source_url #=> String
     #   resp.review_summary.review_source_summaries[0].average_rating #=> String
     #   resp.review_summary.review_source_summaries[0].total_reviews #=> Integer
@@ -2573,35 +2588,6 @@ module Aws::MarketplaceDiscovery
     #     locale: "en-US", 
     #   }
     #
-    # @example Example: List API Fulfillment Options with Dynamic Endpoint
-    #
-    #   resp = client.list_fulfillment_options({
-    #     locale: "en-US", 
-    #     product_id: "prod-sampleApiDynamicId", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     fulfillment_options: [
-    #       {
-    #         api_fulfillment_option: {
-    #           aws_supported_services: [
-    #             {
-    #               description: "A managed service that enables you to develop, deploy, and maintain AI agents seamlessly.", 
-    #               display_name: "Amazon Bedrock AgentCore", 
-    #               supported_service_type: "BEDROCK_AGENTCORE", 
-    #             }, 
-    #           ], 
-    #           fulfillment_option_display_name: "API-Based Agents & Tools", 
-    #           fulfillment_option_id: "fo-sampleApiDynamicId", 
-    #           fulfillment_option_type: "API", 
-    #           usage_instructions: "Deploy to your preferred region using the dynamic endpoint.", 
-    #         }, 
-    #       }, 
-    #     ], 
-    #     locale: "en-US", 
-    #   }
-    #
     # @example Example: List CloudFormation Template Fulfillment Options
     #
     #   resp = client.list_fulfillment_options({
@@ -3645,6 +3631,18 @@ module Aws::MarketplaceDiscovery
     #               source_name: "AWS Marketplace", 
     #               total_reviews: 100, 
     #             }, 
+    #             {
+    #               average_rating: "4.6", 
+    #               source_id: "G2", 
+    #               source_name: "G2", 
+    #               total_reviews: 1368, 
+    #             }, 
+    #             {
+    #               average_rating: "4.2", 
+    #               source_id: "PEERSPOT", 
+    #               source_name: "PeerSpot", 
+    #               total_reviews: 19, 
+    #             }, 
     #           ], 
     #         }, 
     #         short_description: "Advanced computer vision solution for object detection and classification.", 
@@ -3693,7 +3691,7 @@ module Aws::MarketplaceDiscovery
     #   resp.listing_summaries[0].badges[0].badge_type #=> String, one of "AWS_FREE_TIER", "FREE_TRIAL", "DEPLOYED_ON_AWS", "QUICK_LAUNCH", "MULTI_PRODUCT"
     #   resp.listing_summaries[0].review_summary.review_source_summaries #=> Array
     #   resp.listing_summaries[0].review_summary.review_source_summaries[0].source_name #=> String
-    #   resp.listing_summaries[0].review_summary.review_source_summaries[0].source_id #=> String, one of "AWS_MARKETPLACE"
+    #   resp.listing_summaries[0].review_summary.review_source_summaries[0].source_id #=> String, one of "AWS_MARKETPLACE", "G2", "PEERSPOT"
     #   resp.listing_summaries[0].review_summary.review_source_summaries[0].source_url #=> String
     #   resp.listing_summaries[0].review_summary.review_source_summaries[0].average_rating #=> String
     #   resp.listing_summaries[0].review_summary.review_source_summaries[0].total_reviews #=> Integer
@@ -3737,7 +3735,7 @@ module Aws::MarketplaceDiscovery
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacediscovery'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

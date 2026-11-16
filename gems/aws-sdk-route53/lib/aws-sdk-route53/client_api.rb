@@ -84,6 +84,8 @@ module Aws::Route53
     CreateKeySigningKeyResponse = Shapes::StructureShape.new(name: 'CreateKeySigningKeyResponse')
     CreateQueryLoggingConfigRequest = Shapes::StructureShape.new(name: 'CreateQueryLoggingConfigRequest')
     CreateQueryLoggingConfigResponse = Shapes::StructureShape.new(name: 'CreateQueryLoggingConfigResponse')
+    CreateResourceRecordSetProtectionsRequest = Shapes::StructureShape.new(name: 'CreateResourceRecordSetProtectionsRequest')
+    CreateResourceRecordSetProtectionsResponse = Shapes::StructureShape.new(name: 'CreateResourceRecordSetProtectionsResponse')
     CreateReusableDelegationSetRequest = Shapes::StructureShape.new(name: 'CreateReusableDelegationSetRequest')
     CreateReusableDelegationSetResponse = Shapes::StructureShape.new(name: 'CreateReusableDelegationSetResponse')
     CreateTrafficPolicyInstanceRequest = Shapes::StructureShape.new(name: 'CreateTrafficPolicyInstanceRequest')
@@ -118,6 +120,8 @@ module Aws::Route53
     DeleteKeySigningKeyResponse = Shapes::StructureShape.new(name: 'DeleteKeySigningKeyResponse')
     DeleteQueryLoggingConfigRequest = Shapes::StructureShape.new(name: 'DeleteQueryLoggingConfigRequest')
     DeleteQueryLoggingConfigResponse = Shapes::StructureShape.new(name: 'DeleteQueryLoggingConfigResponse')
+    DeleteResourceRecordSetProtectionsRequest = Shapes::StructureShape.new(name: 'DeleteResourceRecordSetProtectionsRequest')
+    DeleteResourceRecordSetProtectionsResponse = Shapes::StructureShape.new(name: 'DeleteResourceRecordSetProtectionsResponse')
     DeleteReusableDelegationSetRequest = Shapes::StructureShape.new(name: 'DeleteReusableDelegationSetRequest')
     DeleteReusableDelegationSetResponse = Shapes::StructureShape.new(name: 'DeleteReusableDelegationSetResponse')
     DeleteTrafficPolicyInstanceRequest = Shapes::StructureShape.new(name: 'DeleteTrafficPolicyInstanceRequest')
@@ -238,6 +242,7 @@ module Aws::Route53
     InvalidKeySigningKeyName = Shapes::StructureShape.new(name: 'InvalidKeySigningKeyName')
     InvalidKeySigningKeyStatus = Shapes::StructureShape.new(name: 'InvalidKeySigningKeyStatus')
     InvalidPaginationToken = Shapes::StructureShape.new(name: 'InvalidPaginationToken')
+    InvalidResourceRecordSetProtectionBatch = Shapes::StructureShape.new(name: 'InvalidResourceRecordSetProtectionBatch')
     InvalidSigningStatus = Shapes::StructureShape.new(name: 'InvalidSigningStatus')
     InvalidTrafficPolicyDocument = Shapes::StructureShape.new(name: 'InvalidTrafficPolicyDocument')
     InvalidVPCId = Shapes::StructureShape.new(name: 'InvalidVPCId')
@@ -272,6 +277,8 @@ module Aws::Route53
     ListHostedZonesResponse = Shapes::StructureShape.new(name: 'ListHostedZonesResponse')
     ListQueryLoggingConfigsRequest = Shapes::StructureShape.new(name: 'ListQueryLoggingConfigsRequest')
     ListQueryLoggingConfigsResponse = Shapes::StructureShape.new(name: 'ListQueryLoggingConfigsResponse')
+    ListResourceRecordSetProtectionsRequest = Shapes::StructureShape.new(name: 'ListResourceRecordSetProtectionsRequest')
+    ListResourceRecordSetProtectionsResponse = Shapes::StructureShape.new(name: 'ListResourceRecordSetProtectionsResponse')
     ListResourceRecordSetsRequest = Shapes::StructureShape.new(name: 'ListResourceRecordSetsRequest')
     ListResourceRecordSetsResponse = Shapes::StructureShape.new(name: 'ListResourceRecordSetsResponse')
     ListReusableDelegationSetsRequest = Shapes::StructureShape.new(name: 'ListReusableDelegationSetsRequest')
@@ -323,6 +330,10 @@ module Aws::Route53
     Period = Shapes::IntegerShape.new(name: 'Period')
     Port = Shapes::IntegerShape.new(name: 'Port')
     PriorRequestNotComplete = Shapes::StructureShape.new(name: 'PriorRequestNotComplete')
+    ProtectionAlreadyExists = Shapes::StructureShape.new(name: 'ProtectionAlreadyExists')
+    ProtectionError = Shapes::StructureShape.new(name: 'ProtectionError')
+    ProtectionErrorCode = Shapes::StringShape.new(name: 'ProtectionErrorCode')
+    ProtectionErrors = Shapes::ListShape.new(name: 'ProtectionErrors')
     PublicZoneVPCAssociation = Shapes::StructureShape.new(name: 'PublicZoneVPCAssociation')
     QueryLoggingConfig = Shapes::StructureShape.new(name: 'QueryLoggingConfig')
     QueryLoggingConfigAlreadyExists = Shapes::StructureShape.new(name: 'QueryLoggingConfigAlreadyExists')
@@ -343,6 +354,12 @@ module Aws::Route53
     ResourceRecordSetFailover = Shapes::StringShape.new(name: 'ResourceRecordSetFailover')
     ResourceRecordSetIdentifier = Shapes::StringShape.new(name: 'ResourceRecordSetIdentifier')
     ResourceRecordSetMultiValueAnswer = Shapes::BooleanShape.new(name: 'ResourceRecordSetMultiValueAnswer')
+    ResourceRecordSetProtection = Shapes::StructureShape.new(name: 'ResourceRecordSetProtection')
+    ResourceRecordSetProtectionConfig = Shapes::StructureShape.new(name: 'ResourceRecordSetProtectionConfig')
+    ResourceRecordSetProtectionConfigBatch = Shapes::ListShape.new(name: 'ResourceRecordSetProtectionConfigBatch')
+    ResourceRecordSetProtectionKey = Shapes::StructureShape.new(name: 'ResourceRecordSetProtectionKey')
+    ResourceRecordSetProtectionKeyBatch = Shapes::ListShape.new(name: 'ResourceRecordSetProtectionKeyBatch')
+    ResourceRecordSetProtections = Shapes::ListShape.new(name: 'ResourceRecordSetProtections')
     ResourceRecordSetRegion = Shapes::StringShape.new(name: 'ResourceRecordSetRegion')
     ResourceRecordSetWeight = Shapes::IntegerShape.new(name: 'ResourceRecordSetWeight')
     ResourceRecordSets = Shapes::ListShape.new(name: 'ResourceRecordSets')
@@ -614,6 +631,12 @@ module Aws::Route53
     CreateQueryLoggingConfigResponse.add_member(:location, Shapes::ShapeRef.new(shape: ResourceURI, required: true, location: "header", location_name: "Location"))
     CreateQueryLoggingConfigResponse.struct_class = Types::CreateQueryLoggingConfigResponse
 
+    CreateResourceRecordSetProtectionsRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
+    CreateResourceRecordSetProtectionsRequest.add_member(:protections, Shapes::ShapeRef.new(shape: ResourceRecordSetProtectionConfigBatch, required: true, location_name: "Protections"))
+    CreateResourceRecordSetProtectionsRequest.struct_class = Types::CreateResourceRecordSetProtectionsRequest
+
+    CreateResourceRecordSetProtectionsResponse.struct_class = Types::CreateResourceRecordSetProtectionsResponse
+
     CreateReusableDelegationSetRequest.add_member(:caller_reference, Shapes::ShapeRef.new(shape: Nonce, required: true, location_name: "CallerReference"))
     CreateReusableDelegationSetRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "HostedZoneId"))
     CreateReusableDelegationSetRequest.struct_class = Types::CreateReusableDelegationSetRequest
@@ -724,6 +747,12 @@ module Aws::Route53
     DeleteQueryLoggingConfigRequest.struct_class = Types::DeleteQueryLoggingConfigRequest
 
     DeleteQueryLoggingConfigResponse.struct_class = Types::DeleteQueryLoggingConfigResponse
+
+    DeleteResourceRecordSetProtectionsRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
+    DeleteResourceRecordSetProtectionsRequest.add_member(:protections, Shapes::ShapeRef.new(shape: ResourceRecordSetProtectionKeyBatch, required: true, location_name: "Protections"))
+    DeleteResourceRecordSetProtectionsRequest.struct_class = Types::DeleteResourceRecordSetProtectionsRequest
+
+    DeleteResourceRecordSetProtectionsResponse.struct_class = Types::DeleteResourceRecordSetProtectionsResponse
 
     DeleteReusableDelegationSetRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
     DeleteReusableDelegationSetRequest.struct_class = Types::DeleteReusableDelegationSetRequest
@@ -1042,6 +1071,10 @@ module Aws::Route53
     InvalidPaginationToken.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidPaginationToken.struct_class = Types::InvalidPaginationToken
 
+    InvalidResourceRecordSetProtectionBatch.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidResourceRecordSetProtectionBatch.add_member(:errors, Shapes::ShapeRef.new(shape: ProtectionErrors, required: true, location_name: "Errors"))
+    InvalidResourceRecordSetProtectionBatch.struct_class = Types::InvalidResourceRecordSetProtectionBatch
+
     InvalidSigningStatus.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidSigningStatus.struct_class = Types::InvalidSigningStatus
 
@@ -1191,6 +1224,17 @@ module Aws::Route53
     ListQueryLoggingConfigsResponse.add_member(:query_logging_configs, Shapes::ShapeRef.new(shape: QueryLoggingConfigs, required: true, location_name: "QueryLoggingConfigs"))
     ListQueryLoggingConfigsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListQueryLoggingConfigsResponse.struct_class = Types::ListQueryLoggingConfigsResponse
+
+    ListResourceRecordSetProtectionsRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
+    ListResourceRecordSetProtectionsRequest.add_member(:start_record_name, Shapes::ShapeRef.new(shape: DNSName, location: "querystring", location_name: "name"))
+    ListResourceRecordSetProtectionsRequest.add_member(:start_record_type, Shapes::ShapeRef.new(shape: RRType, location: "querystring", location_name: "type"))
+    ListResourceRecordSetProtectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxresults"))
+    ListResourceRecordSetProtectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nexttoken"))
+    ListResourceRecordSetProtectionsRequest.struct_class = Types::ListResourceRecordSetProtectionsRequest
+
+    ListResourceRecordSetProtectionsResponse.add_member(:resource_record_set_protections, Shapes::ShapeRef.new(shape: ResourceRecordSetProtections, required: true, location_name: "ResourceRecordSetProtections"))
+    ListResourceRecordSetProtectionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListResourceRecordSetProtectionsResponse.struct_class = Types::ListResourceRecordSetProtectionsResponse
 
     ListResourceRecordSetsRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
     ListResourceRecordSetsRequest.add_member(:start_record_name, Shapes::ShapeRef.new(shape: DNSName, location: "querystring", location_name: "name"))
@@ -1353,6 +1397,18 @@ module Aws::Route53
     PriorRequestNotComplete.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     PriorRequestNotComplete.struct_class = Types::PriorRequestNotComplete
 
+    ProtectionAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ProtectionAlreadyExists.add_member(:errors, Shapes::ShapeRef.new(shape: ProtectionErrors, required: true, location_name: "Errors"))
+    ProtectionAlreadyExists.struct_class = Types::ProtectionAlreadyExists
+
+    ProtectionError.add_member(:record_name, Shapes::ShapeRef.new(shape: DNSName, required: true, location_name: "RecordName"))
+    ProtectionError.add_member(:record_type, Shapes::ShapeRef.new(shape: RRType, required: true, location_name: "RecordType"))
+    ProtectionError.add_member(:code, Shapes::ShapeRef.new(shape: ProtectionErrorCode, required: true, location_name: "Code"))
+    ProtectionError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "Message"))
+    ProtectionError.struct_class = Types::ProtectionError
+
+    ProtectionErrors.member = Shapes::ShapeRef.new(shape: ProtectionError, location_name: "ProtectionError")
+
     PublicZoneVPCAssociation.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     PublicZoneVPCAssociation.struct_class = Types::PublicZoneVPCAssociation
 
@@ -1389,6 +1445,26 @@ module Aws::Route53
     ResourceRecordSet.add_member(:cidr_routing_config, Shapes::ShapeRef.new(shape: CidrRoutingConfig, location_name: "CidrRoutingConfig"))
     ResourceRecordSet.add_member(:geo_proximity_location, Shapes::ShapeRef.new(shape: GeoProximityLocation, location_name: "GeoProximityLocation"))
     ResourceRecordSet.struct_class = Types::ResourceRecordSet
+
+    ResourceRecordSetProtection.add_member(:record_name, Shapes::ShapeRef.new(shape: DNSName, required: true, location_name: "RecordName"))
+    ResourceRecordSetProtection.add_member(:record_type, Shapes::ShapeRef.new(shape: RRType, required: true, location_name: "RecordType"))
+    ResourceRecordSetProtection.add_member(:comment, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Comment"))
+    ResourceRecordSetProtection.struct_class = Types::ResourceRecordSetProtection
+
+    ResourceRecordSetProtectionConfig.add_member(:record_name, Shapes::ShapeRef.new(shape: DNSName, required: true, location_name: "RecordName"))
+    ResourceRecordSetProtectionConfig.add_member(:record_type, Shapes::ShapeRef.new(shape: RRType, required: true, location_name: "RecordType"))
+    ResourceRecordSetProtectionConfig.add_member(:comment, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Comment"))
+    ResourceRecordSetProtectionConfig.struct_class = Types::ResourceRecordSetProtectionConfig
+
+    ResourceRecordSetProtectionConfigBatch.member = Shapes::ShapeRef.new(shape: ResourceRecordSetProtectionConfig, location_name: "ResourceRecordSetProtectionConfig")
+
+    ResourceRecordSetProtectionKey.add_member(:record_name, Shapes::ShapeRef.new(shape: DNSName, required: true, location_name: "RecordName"))
+    ResourceRecordSetProtectionKey.add_member(:record_type, Shapes::ShapeRef.new(shape: RRType, required: true, location_name: "RecordType"))
+    ResourceRecordSetProtectionKey.struct_class = Types::ResourceRecordSetProtectionKey
+
+    ResourceRecordSetProtectionKeyBatch.member = Shapes::ShapeRef.new(shape: ResourceRecordSetProtectionKey, location_name: "ResourceRecordSetProtectionKey")
+
+    ResourceRecordSetProtections.member = Shapes::ShapeRef.new(shape: ResourceRecordSetProtection, location_name: "ResourceRecordSetProtection")
 
     ResourceRecordSets.member = Shapes::ShapeRef.new(shape: ResourceRecordSet, location_name: "ResourceRecordSet")
 
@@ -1771,6 +1847,25 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: InsufficientCloudWatchLogsResourcePolicy)
       end)
 
+      api.add_operation(:create_resource_record_set_protections, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateResourceRecordSetProtections"
+        o.http_method = "POST"
+        o.http_request_uri = "/2013-04-01/hostedzone/{Id}/rrsetprotection"
+        o.input = Shapes::ShapeRef.new(shape: CreateResourceRecordSetProtectionsRequest,
+          location_name: "CreateResourceRecordSetProtectionsRequest",
+          metadata: {
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: CreateResourceRecordSetProtectionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceRecordSetProtectionBatch)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+        o.errors << Shapes::ShapeRef.new(shape: ProtectionAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: LimitsExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: PriorRequestNotComplete)
+      end)
+
       api.add_operation(:create_reusable_delegation_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateReusableDelegationSet"
         o.http_method = "POST"
@@ -1936,6 +2031,23 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModification)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchQueryLoggingConfig)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+      end)
+
+      api.add_operation(:delete_resource_record_set_protections, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourceRecordSetProtections"
+        o.http_method = "POST"
+        o.http_request_uri = "/2013-04-01/hostedzone/{Id}/rrsetprotection/delete"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourceRecordSetProtectionsRequest,
+          location_name: "DeleteResourceRecordSetProtectionsRequest",
+          metadata: {
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: DeleteResourceRecordSetProtectionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceRecordSetProtectionBatch)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+        o.errors << Shapes::ShapeRef.new(shape: PriorRequestNotComplete)
       end)
 
       api.add_operation(:delete_reusable_delegation_set, Seahorse::Model::Operation.new.tap do |o|
@@ -2339,6 +2451,23 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationToken)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_resource_record_set_protections, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResourceRecordSetProtections"
+        o.http_method = "GET"
+        o.http_request_uri = "/2013-04-01/hostedzone/{Id}/rrsetprotection"
+        o.input = Shapes::ShapeRef.new(shape: ListResourceRecordSetProtectionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListResourceRecordSetProtectionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationToken)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

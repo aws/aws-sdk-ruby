@@ -1313,6 +1313,8 @@ module Aws::Organizations
     #
     #   * [GUARDDUTY\_POLICY][14]
     #
+    #   * [SECURITYHUB\_CSPM\_POLICY][15]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -1329,6 +1331,7 @@ module Aws::Organizations
     #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
     #   [13]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   [14]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_guardduty.html
+    #   [15]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub_cspm.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1671,6 +1674,8 @@ module Aws::Organizations
     #
     #   * [GUARDDUTY\_POLICY][12]
     #
+    #   * [SECURITYHUB\_CSPM\_POLICY][13]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
@@ -1685,6 +1690,7 @@ module Aws::Organizations
     #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
     #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_guardduty.html
+    #   [13]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub_cspm.html
     #   @return [String]
     #
     # @!attribute [rw] target_id
@@ -1987,6 +1993,8 @@ module Aws::Organizations
     #
     #   * [GUARDDUTY\_POLICY][14]
     #
+    #   * [SECURITYHUB\_CSPM\_POLICY][15]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -2003,6 +2011,7 @@ module Aws::Organizations
     #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
     #   [13]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   [14]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_guardduty.html
+    #   [15]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub_cspm.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyTypeRequest AWS API Documentation
@@ -2266,6 +2275,8 @@ module Aws::Organizations
     #
     #   * [GUARDDUTY\_POLICY][14]
     #
+    #   * [SECURITYHUB\_CSPM\_POLICY][15]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -2282,6 +2293,7 @@ module Aws::Organizations
     #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
     #   [13]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   [14]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_guardduty.html
+    #   [15]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub_cspm.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyTypeRequest AWS API Documentation
@@ -3185,6 +3197,8 @@ module Aws::Organizations
     #
     #   * [GUARDDUTY\_POLICY][12]
     #
+    #   * [SECURITYHUB\_CSPM\_POLICY][13]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
@@ -3199,6 +3213,7 @@ module Aws::Organizations
     #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
     #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_guardduty.html
+    #   [13]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub_cspm.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3258,6 +3273,8 @@ module Aws::Organizations
     #
     #   * [GUARDDUTY\_POLICY][12]
     #
+    #   * [SECURITYHUB\_CSPM\_POLICY][13]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
@@ -3272,6 +3289,7 @@ module Aws::Organizations
     #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
     #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_guardduty.html
+    #   [13]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub_cspm.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3557,6 +3575,8 @@ module Aws::Organizations
     #
     #   * [GUARDDUTY\_POLICY][12]
     #
+    #   * [SECURITYHUB\_CSPM\_POLICY][13]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
@@ -3571,6 +3591,7 @@ module Aws::Organizations
     #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
     #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_guardduty.html
+    #   [13]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub_cspm.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3630,6 +3651,8 @@ module Aws::Organizations
     #
     #   * [GUARDDUTY\_POLICY][12]
     #
+    #   * [SECURITYHUB\_CSPM\_POLICY][13]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
@@ -3644,6 +3667,7 @@ module Aws::Organizations
     #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
     #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_guardduty.html
+    #   [13]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub_cspm.html
     #   @return [String]
     #
     # @!attribute [rw] path
@@ -4078,6 +4102,8 @@ module Aws::Organizations
     #
     #   * [GUARDDUTY\_POLICY][14]
     #
+    #   * [SECURITYHUB\_CSPM\_POLICY][15]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -4094,6 +4120,7 @@ module Aws::Organizations
     #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
     #   [13]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   [14]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_guardduty.html
+    #   [15]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub_cspm.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4175,6 +4202,8 @@ module Aws::Organizations
     #
     #   * [GUARDDUTY\_POLICY][14]
     #
+    #   * [SECURITYHUB\_CSPM\_POLICY][15]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -4191,6 +4220,7 @@ module Aws::Organizations
     #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
     #   [13]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   [14]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_guardduty.html
+    #   [15]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub_cspm.html
     #   @return [String]
     #
     # @!attribute [rw] next_token

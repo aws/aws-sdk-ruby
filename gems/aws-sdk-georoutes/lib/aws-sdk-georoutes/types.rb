@@ -1112,7 +1112,7 @@ module Aws::GeoRoutes
       :polygon,
       :polyline_corridor,
       :polyline_polygon)
-      SENSITIVE = [:bounding_box, :corridor, :polyline_corridor, :polyline_polygon]
+      SENSITIVE = [:bounding_box, :corridor, :polygon, :polyline_corridor, :polyline_polygon]
       include Aws::Structure
     end
 
@@ -1592,7 +1592,7 @@ module Aws::GeoRoutes
     class IsolineShapeGeometry < Struct.new(
       :polygon,
       :polyline_polygon)
-      SENSITIVE = [:polyline_polygon]
+      SENSITIVE = [:polygon, :polyline_polygon]
       include Aws::Structure
     end
 
@@ -2574,7 +2574,7 @@ module Aws::GeoRoutes
       :polygon,
       :polyline_corridor,
       :polyline_polygon)
-      SENSITIVE = [:corridor, :bounding_box, :polyline_corridor, :polyline_polygon]
+      SENSITIVE = [:corridor, :bounding_box, :polygon, :polyline_corridor, :polyline_polygon]
       include Aws::Structure
     end
 
@@ -3972,7 +3972,7 @@ module Aws::GeoRoutes
       :bounding_box,
       :polygon,
       :polyline_polygon)
-      SENSITIVE = [:bounding_box, :polyline_polygon]
+      SENSITIVE = [:bounding_box, :polygon, :polyline_polygon]
       include Aws::Structure
     end
 
@@ -4144,7 +4144,7 @@ module Aws::GeoRoutes
       :circle,
       :bounding_box,
       :polygon)
-      SENSITIVE = [:circle, :bounding_box]
+      SENSITIVE = [:circle, :bounding_box, :polygon]
       include Aws::Structure
     end
 

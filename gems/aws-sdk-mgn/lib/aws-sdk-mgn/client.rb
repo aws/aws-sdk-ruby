@@ -264,7 +264,8 @@ module Aws::Mgn
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::Mgn
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -1093,6 +1094,13 @@ module Aws::Mgn
     # Creates a new network migration definition that specifies the source
     # and target network configuration for a migration.
     #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @option params [required, String] :name
     #   The name of the network migration definition.
     #
@@ -1204,11 +1212,12 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_network_migration_definition({
+    #     client_token: "ClientIdempotencyToken",
     #     name: "NetworkMigrationDefinitionName", # required
     #     description: "NetworkMigrationDefinitionDescription",
     #     source_configurations: [
     #       {
-    #         source_environment: "NSX", # required, accepts NSX, VSPHERE, FORTIGATE_FIREWALL, PALO_ALTO_FIREWALL, CISCO_ACI, LOGICAL_MODEL, MODELIZE_IT, AWS_DISCOVERY_COLLECTOR
+    #         source_environment: "NSX", # required, accepts NSX, VSPHERE, FORTIGATE_FIREWALL, PALO_ALTO_FIREWALL, CISCO_ACI, LOGICAL_MODEL, MODELIZE_IT, AWS_DISCOVERY_COLLECTOR, MIGRATION_PLANNING_ARTIFACTS
     #         source_s3_configuration: { # required
     #           s3_bucket: "S3BucketName", # required
     #           s3_bucket_owner: "AccountID", # required
@@ -1249,7 +1258,7 @@ module Aws::Mgn
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.source_configurations #=> Array
-    #   resp.source_configurations[0].source_environment #=> String, one of "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT", "AWS_DISCOVERY_COLLECTOR"
+    #   resp.source_configurations[0].source_environment #=> String, one of "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT", "AWS_DISCOVERY_COLLECTOR", "MIGRATION_PLANNING_ARTIFACTS"
     #   resp.source_configurations[0].source_s3_configuration.s3_bucket #=> String
     #   resp.source_configurations[0].source_s3_configuration.s3_bucket_owner #=> String
     #   resp.source_configurations[0].source_s3_configuration.s3_key #=> String
@@ -2257,7 +2266,7 @@ module Aws::Mgn
     # dataReplicationInfo.dataReplicationState will be set to DISCONNECTED;
     # The totalStorageBytes property for each of
     # dataReplicationInfo.replicatedDisks will be set to zero;
-    # dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration
+    # dataReplicationInfo.lagDuration and dataReplicationInfo.etaDateTime
     # will be nullified.
     #
     # @option params [required, String] :source_server_id
@@ -2386,7 +2395,7 @@ module Aws::Mgn
     # DISCONNECTED; The SourceServer.lifeCycle.state will be changed to
     # CUTOVER; The totalStorageBytes property for each of
     # dataReplicationInfo.replicatedDisks will be set to zero;
-    # dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration
+    # dataReplicationInfo.lagDuration and dataReplicationInfo.etaDateTime
     # will be nullified.
     #
     # @option params [required, String] :source_server_id
@@ -2645,7 +2654,7 @@ module Aws::Mgn
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.source_configurations #=> Array
-    #   resp.source_configurations[0].source_environment #=> String, one of "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT", "AWS_DISCOVERY_COLLECTOR"
+    #   resp.source_configurations[0].source_environment #=> String, one of "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT", "AWS_DISCOVERY_COLLECTOR", "MIGRATION_PLANNING_ARTIFACTS"
     #   resp.source_configurations[0].source_s3_configuration.s3_bucket #=> String
     #   resp.source_configurations[0].source_s3_configuration.s3_bucket_owner #=> String
     #   resp.source_configurations[0].source_s3_configuration.s3_key #=> String
@@ -3716,7 +3725,7 @@ module Aws::Mgn
     #   resp.items #=> Array
     #   resp.items[0].network_migration_definition_id #=> String
     #   resp.items[0].name #=> String
-    #   resp.items[0].source_environment #=> String, one of "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT", "AWS_DISCOVERY_COLLECTOR"
+    #   resp.items[0].source_environment #=> String, one of "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT", "AWS_DISCOVERY_COLLECTOR", "MIGRATION_PLANNING_ARTIFACTS"
     #   resp.items[0].arn #=> String
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
@@ -7033,7 +7042,7 @@ module Aws::Mgn
     #     description: "NetworkMigrationDefinitionDescription",
     #     source_configurations: [
     #       {
-    #         source_environment: "NSX", # required, accepts NSX, VSPHERE, FORTIGATE_FIREWALL, PALO_ALTO_FIREWALL, CISCO_ACI, LOGICAL_MODEL, MODELIZE_IT, AWS_DISCOVERY_COLLECTOR
+    #         source_environment: "NSX", # required, accepts NSX, VSPHERE, FORTIGATE_FIREWALL, PALO_ALTO_FIREWALL, CISCO_ACI, LOGICAL_MODEL, MODELIZE_IT, AWS_DISCOVERY_COLLECTOR, MIGRATION_PLANNING_ARTIFACTS
     #         source_s3_configuration: { # required
     #           s3_bucket: "S3BucketName", # required
     #           s3_bucket_owner: "AccountID", # required
@@ -7071,7 +7080,7 @@ module Aws::Mgn
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.source_configurations #=> Array
-    #   resp.source_configurations[0].source_environment #=> String, one of "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT", "AWS_DISCOVERY_COLLECTOR"
+    #   resp.source_configurations[0].source_environment #=> String, one of "NSX", "VSPHERE", "FORTIGATE_FIREWALL", "PALO_ALTO_FIREWALL", "CISCO_ACI", "LOGICAL_MODEL", "MODELIZE_IT", "AWS_DISCOVERY_COLLECTOR", "MIGRATION_PLANNING_ARTIFACTS"
     #   resp.source_configurations[0].source_s3_configuration.s3_bucket #=> String
     #   resp.source_configurations[0].source_s3_configuration.s3_bucket_owner #=> String
     #   resp.source_configurations[0].source_s3_configuration.s3_key #=> String
@@ -7875,7 +7884,7 @@ module Aws::Mgn
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mgn'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

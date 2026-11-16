@@ -264,7 +264,8 @@ module Aws::WAFV2
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::WAFV2
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -2875,6 +2876,22 @@ module Aws::WAFV2
     #           },
     #         ],
     #       },
+    #       connected_account_configs: [
+    #         {
+    #           connected_account_arn: "ConnectedAccountArn", # required
+    #           payment_networks: [ # required
+    #             {
+    #               chain: "BASE", # required, accepts BASE, SOLANA
+    #               prices: [ # required
+    #                 {
+    #                   amount: "ConnectedAccountPriceAmount", # required
+    #                   currency: "USDC", # required, accepts USDC
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #       ],
     #       currency_mode: "REAL", # accepts REAL, TEST
     #     },
     #   })
@@ -3022,6 +3039,11 @@ module Aws::WAFV2
     #
     #   For Application Load Balancer and AppSync, the limit is fixed at 8 KB
     #   (8,192 bytes).
+    #
+    #   You can also use this to have your CloudFront distributions insert the
+    #   WAF challenge JavaScript SDK into the HTML responses that they return.
+    #   For more information, see the `ChallengeJavascriptSdkInjection`
+    #   setting.
     #
     #
     #
@@ -4980,6 +5002,13 @@ module Aws::WAFV2
     #   resp.rule_group.monetization_config.crypto_config.payment_networks[0].prices #=> Array
     #   resp.rule_group.monetization_config.crypto_config.payment_networks[0].prices[0].amount #=> String
     #   resp.rule_group.monetization_config.crypto_config.payment_networks[0].prices[0].currency #=> String, one of "USDC"
+    #   resp.rule_group.monetization_config.connected_account_configs #=> Array
+    #   resp.rule_group.monetization_config.connected_account_configs[0].connected_account_arn #=> String
+    #   resp.rule_group.monetization_config.connected_account_configs[0].payment_networks #=> Array
+    #   resp.rule_group.monetization_config.connected_account_configs[0].payment_networks[0].chain #=> String, one of "BASE", "SOLANA"
+    #   resp.rule_group.monetization_config.connected_account_configs[0].payment_networks[0].prices #=> Array
+    #   resp.rule_group.monetization_config.connected_account_configs[0].payment_networks[0].prices[0].amount #=> String
+    #   resp.rule_group.monetization_config.connected_account_configs[0].payment_networks[0].prices[0].currency #=> String, one of "USDC"
     #   resp.rule_group.monetization_config.currency_mode #=> String, one of "REAL", "TEST"
     #   resp.lock_token #=> String
     #
@@ -8139,6 +8168,22 @@ module Aws::WAFV2
     #           },
     #         ],
     #       },
+    #       connected_account_configs: [
+    #         {
+    #           connected_account_arn: "ConnectedAccountArn", # required
+    #           payment_networks: [ # required
+    #             {
+    #               chain: "BASE", # required, accepts BASE, SOLANA
+    #               prices: [ # required
+    #                 {
+    #                   amount: "ConnectedAccountPriceAmount", # required
+    #                   currency: "USDC", # required, accepts USDC
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #       ],
     #       currency_mode: "REAL", # accepts REAL, TEST
     #     },
     #   })
@@ -8336,6 +8381,11 @@ module Aws::WAFV2
     #   For Application Load Balancer and AppSync, the limit is fixed at 8 KB
     #   (8,192 bytes).
     #
+    #   You can also use this to have your CloudFront distributions insert the
+    #   WAF challenge JavaScript SDK into the HTML responses that they return.
+    #   For more information, see the `ChallengeJavascriptSdkInjection`
+    #   setting.
+    #
     #
     #
     #   [1]: http://aws.amazon.com/waf/pricing/
@@ -8401,7 +8451,7 @@ module Aws::WAFV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.143.0'
+      context[:gem_version] = '1.150.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

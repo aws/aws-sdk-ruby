@@ -242,6 +242,22 @@ module Aws::Athena
       SENSITIVE: []
     end
 
+    class CreateSystemTableConfigurationInput
+      attr_accessor client_request_token: ::String
+      attr_accessor table_name: ("ALL")
+      attr_accessor kms_key_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSystemTableConfigurationOutput
+      attr_accessor table_name: ("ALL")
+      attr_accessor kms_key_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified_at: ::Time
+      SENSITIVE: []
+    end
+
     class CreateWorkGroupInput
       attr_accessor name: ::String
       attr_accessor configuration: Types::WorkGroupConfiguration
@@ -332,6 +348,14 @@ module Aws::Athena
     end
 
     class DeletePreparedStatementOutput < Aws::EmptyStructure
+    end
+
+    class DeleteSystemTableConfigurationInput
+      attr_accessor table_name: ("ALL")
+      SENSITIVE: []
+    end
+
+    class DeleteSystemTableConfigurationOutput < Aws::EmptyStructure
     end
 
     class DeleteWorkGroupInput
@@ -589,6 +613,19 @@ module Aws::Athena
       SENSITIVE: []
     end
 
+    class GetSystemTableConfigurationInput
+      attr_accessor table_name: ("ALL")
+      SENSITIVE: []
+    end
+
+    class GetSystemTableConfigurationOutput
+      attr_accessor table_name: ("ALL")
+      attr_accessor kms_key_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified_at: ::Time
+      SENSITIVE: []
+    end
+
     class GetTableMetadataInput
       attr_accessor catalog_name: ::String
       attr_accessor database_name: ::String
@@ -813,6 +850,18 @@ module Aws::Athena
     class ListSessionsResponse
       attr_accessor next_token: ::String
       attr_accessor sessions: ::Array[Types::SessionSummary]
+      SENSITIVE: []
+    end
+
+    class ListSystemTableStatusesInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSystemTableStatusesOutput
+      attr_accessor items: ::Array[Types::SystemTableStatus]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1216,6 +1265,12 @@ module Aws::Athena
     class StopQueryExecutionOutput < Aws::EmptyStructure
     end
 
+    class SystemTableStatus
+      attr_accessor table_name: ("QUERY_EXECUTIONS")
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
     class TableMetadata
       attr_accessor name: ::String
       attr_accessor create_time: ::Time
@@ -1352,6 +1407,20 @@ module Aws::Athena
     class UpdatePreparedStatementOutput < Aws::EmptyStructure
     end
 
+    class UpdateSystemTableConfigurationInput
+      attr_accessor table_name: ("ALL")
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSystemTableConfigurationOutput
+      attr_accessor table_name: ("ALL")
+      attr_accessor kms_key_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified_at: ::Time
+      SENSITIVE: []
+    end
+
     class UpdateWorkGroupInput
       attr_accessor work_group: ::String
       attr_accessor description: ::String
@@ -1389,6 +1458,7 @@ module Aws::Athena
       attr_accessor enable_minimum_encryption_configuration: bool
       attr_accessor identity_center_configuration: Types::IdentityCenterConfiguration
       attr_accessor query_results_s3_access_grants_configuration: Types::QueryResultsS3AccessGrantsConfiguration
+      attr_accessor system_table_statuses: ::Array[Types::SystemTableStatus]
       SENSITIVE: []
     end
 

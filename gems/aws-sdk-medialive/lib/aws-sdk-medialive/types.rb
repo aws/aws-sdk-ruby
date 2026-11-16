@@ -22598,6 +22598,19 @@ module Aws::MediaLive
     #   Specifies the type of watermarking technology to use.
     #   @return [Types::MediaPackageV2WatermarkingSettings]
     #
+    # @!attribute [rw] caption_language_setting
+    #   Applies only to 608 Embedded output captions. Controls the
+    #   CLOSED-CAPTIONS signaling that MediaPackage v2 writes into the HLS
+    #   manifest it delivers. auto: The default. If captionLanguageMappings
+    #   is non-empty, the HLS manifest includes a CLOSED-CAPTIONS line for
+    #   each mapped caption channel. If captionLanguageMappings is empty,
+    #   the HLS manifest omits any CLOSED-CAPTIONS line. none: The HLS
+    #   manifest carries CLOSED-CAPTIONS=NONE on each EXT-X-STREAM-INF tag,
+    #   which signals to players that the stream has no closed captions, so
+    #   they stop offering a CC track. The API rejects none combined with a
+    #   non-empty captionLanguageMappings.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageV2GroupSettings AWS API Documentation
     #
     class MediaPackageV2GroupSettings < Struct.new(
@@ -22612,7 +22625,8 @@ module Aws::MediaLive
       :timed_metadata_id_3_period,
       :timed_metadata_passthrough,
       :additional_destinations,
-      :watermarking_settings)
+      :watermarking_settings,
+      :caption_language_setting)
       SENSITIVE = []
       include Aws::Structure
     end

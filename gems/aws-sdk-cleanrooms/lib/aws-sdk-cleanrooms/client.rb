@@ -264,7 +264,8 @@ module Aws::CleanRooms
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::CleanRooms
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -518,7 +519,7 @@ module Aws::CleanRooms
     #   resp.collaboration_analysis_templates[0].update_time #=> Time
     #   resp.collaboration_analysis_templates[0].schema.referenced_tables #=> Array
     #   resp.collaboration_analysis_templates[0].schema.referenced_tables[0] #=> String
-    #   resp.collaboration_analysis_templates[0].format #=> String, one of "SQL", "PYSPARK_1_0"
+    #   resp.collaboration_analysis_templates[0].format #=> String, one of "SQL", "PYSPARK_1_0", "PYSPARK_2_0"
     #   resp.collaboration_analysis_templates[0].source.text #=> String
     #   resp.collaboration_analysis_templates[0].source.artifacts.entry_point.location.bucket #=> String
     #   resp.collaboration_analysis_templates[0].source.artifacts.entry_point.location.key #=> String
@@ -861,7 +862,7 @@ module Aws::CleanRooms
     #     description: "ResourceDescription",
     #     membership_identifier: "MembershipIdentifier", # required
     #     name: "TableAlias", # required
-    #     format: "SQL", # required, accepts SQL, PYSPARK_1_0
+    #     format: "SQL", # required, accepts SQL, PYSPARK_1_0, PYSPARK_2_0
     #     source: { # required
     #       text: "AnalysisTemplateText",
     #       artifacts: {
@@ -929,7 +930,7 @@ module Aws::CleanRooms
     #   resp.analysis_template.update_time #=> Time
     #   resp.analysis_template.schema.referenced_tables #=> Array
     #   resp.analysis_template.schema.referenced_tables[0] #=> String
-    #   resp.analysis_template.format #=> String, one of "SQL", "PYSPARK_1_0"
+    #   resp.analysis_template.format #=> String, one of "SQL", "PYSPARK_1_0", "PYSPARK_2_0"
     #   resp.analysis_template.source.text #=> String
     #   resp.analysis_template.source.artifacts.entry_point.location.bucket #=> String
     #   resp.analysis_template.source.artifacts.entry_point.location.key #=> String
@@ -2278,6 +2279,7 @@ module Aws::CleanRooms
     #     default_job_result_configuration: {
     #       output_configuration: { # required
     #         s3: {
+    #           result_format: "CSV", # accepts CSV, PARQUET
     #           bucket: "ProtectedJobS3OutputConfigurationInputBucketString", # required
     #           key_prefix: "KeyPrefix",
     #         },
@@ -2329,6 +2331,7 @@ module Aws::CleanRooms
     #   resp.membership.default_result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.membership.default_result_configuration.output_configuration.s3.single_file_output #=> Boolean
     #   resp.membership.default_result_configuration.role_arn #=> String
+    #   resp.membership.default_job_result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.membership.default_job_result_configuration.output_configuration.s3.bucket #=> String
     #   resp.membership.default_job_result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.membership.default_job_result_configuration.role_arn #=> String
@@ -2943,7 +2946,7 @@ module Aws::CleanRooms
     #   resp.analysis_template.update_time #=> Time
     #   resp.analysis_template.schema.referenced_tables #=> Array
     #   resp.analysis_template.schema.referenced_tables[0] #=> String
-    #   resp.analysis_template.format #=> String, one of "SQL", "PYSPARK_1_0"
+    #   resp.analysis_template.format #=> String, one of "SQL", "PYSPARK_1_0", "PYSPARK_2_0"
     #   resp.analysis_template.source.text #=> String
     #   resp.analysis_template.source.artifacts.entry_point.location.bucket #=> String
     #   resp.analysis_template.source.artifacts.entry_point.location.key #=> String
@@ -3064,7 +3067,7 @@ module Aws::CleanRooms
     #   resp.collaboration_analysis_template.update_time #=> Time
     #   resp.collaboration_analysis_template.schema.referenced_tables #=> Array
     #   resp.collaboration_analysis_template.schema.referenced_tables[0] #=> String
-    #   resp.collaboration_analysis_template.format #=> String, one of "SQL", "PYSPARK_1_0"
+    #   resp.collaboration_analysis_template.format #=> String, one of "SQL", "PYSPARK_1_0", "PYSPARK_2_0"
     #   resp.collaboration_analysis_template.source.text #=> String
     #   resp.collaboration_analysis_template.source.artifacts.entry_point.location.bucket #=> String
     #   resp.collaboration_analysis_template.source.artifacts.entry_point.location.key #=> String
@@ -3921,6 +3924,7 @@ module Aws::CleanRooms
     #   resp.membership.default_result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.membership.default_result_configuration.output_configuration.s3.single_file_output #=> Boolean
     #   resp.membership.default_result_configuration.role_arn #=> String
+    #   resp.membership.default_job_result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.membership.default_job_result_configuration.output_configuration.s3.bucket #=> String
     #   resp.membership.default_job_result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.membership.default_job_result_configuration.role_arn #=> String
@@ -4029,6 +4033,7 @@ module Aws::CleanRooms
     #   resp.protected_job.result.output.member_list[0].account_id #=> String
     #   resp.protected_job.error.message #=> String
     #   resp.protected_job.error.code #=> String
+    #   resp.protected_job.error.retry.retryable #=> Boolean
     #   resp.protected_job.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
     #   resp.protected_job.compute_configuration.worker.number #=> Integer
     #   resp.protected_job.compute_configuration.worker.properties.spark #=> Hash
@@ -4098,6 +4103,7 @@ module Aws::CleanRooms
     #   resp.protected_query.result.output.distribute.member_list[0].account_id #=> String
     #   resp.protected_query.error.message #=> String
     #   resp.protected_query.error.code #=> String
+    #   resp.protected_query.error.retry.retryable #=> Boolean
     #   resp.protected_query.differential_privacy.sensitivity_parameters #=> Array
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_type #=> String, one of "AVG", "COUNT", "COUNT_DISTINCT", "SUM", "STDDEV"
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_expression #=> String
@@ -6086,6 +6092,7 @@ module Aws::CleanRooms
     #   resp.protected_job.result.output.member_list[0].account_id #=> String
     #   resp.protected_job.error.message #=> String
     #   resp.protected_job.error.code #=> String
+    #   resp.protected_job.error.retry.retryable #=> Boolean
     #   resp.protected_job.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
     #   resp.protected_job.compute_configuration.worker.number #=> Integer
     #   resp.protected_job.compute_configuration.worker.properties.spark #=> Hash
@@ -6220,6 +6227,7 @@ module Aws::CleanRooms
     #   resp.protected_query.result.output.distribute.member_list[0].account_id #=> String
     #   resp.protected_query.error.message #=> String
     #   resp.protected_query.error.code #=> String
+    #   resp.protected_query.error.retry.retryable #=> Boolean
     #   resp.protected_query.differential_privacy.sensitivity_parameters #=> Array
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_type #=> String, one of "AVG", "COUNT", "COUNT_DISTINCT", "SUM", "STDDEV"
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_expression #=> String
@@ -6334,7 +6342,7 @@ module Aws::CleanRooms
     #   resp.analysis_template.update_time #=> Time
     #   resp.analysis_template.schema.referenced_tables #=> Array
     #   resp.analysis_template.schema.referenced_tables[0] #=> String
-    #   resp.analysis_template.format #=> String, one of "SQL", "PYSPARK_1_0"
+    #   resp.analysis_template.format #=> String, one of "SQL", "PYSPARK_1_0", "PYSPARK_2_0"
     #   resp.analysis_template.source.text #=> String
     #   resp.analysis_template.source.artifacts.entry_point.location.bucket #=> String
     #   resp.analysis_template.source.artifacts.entry_point.location.key #=> String
@@ -7412,6 +7420,7 @@ module Aws::CleanRooms
     #     default_job_result_configuration: {
     #       output_configuration: { # required
     #         s3: {
+    #           result_format: "CSV", # accepts CSV, PARQUET
     #           bucket: "ProtectedJobS3OutputConfigurationInputBucketString", # required
     #           key_prefix: "KeyPrefix",
     #         },
@@ -7462,6 +7471,7 @@ module Aws::CleanRooms
     #   resp.membership.default_result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.membership.default_result_configuration.output_configuration.s3.single_file_output #=> Boolean
     #   resp.membership.default_result_configuration.role_arn #=> String
+    #   resp.membership.default_job_result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.membership.default_job_result_configuration.output_configuration.s3.bucket #=> String
     #   resp.membership.default_job_result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.membership.default_job_result_configuration.role_arn #=> String
@@ -7599,6 +7609,7 @@ module Aws::CleanRooms
     #   resp.protected_job.result.output.member_list[0].account_id #=> String
     #   resp.protected_job.error.message #=> String
     #   resp.protected_job.error.code #=> String
+    #   resp.protected_job.error.retry.retryable #=> Boolean
     #   resp.protected_job.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
     #   resp.protected_job.compute_configuration.worker.number #=> Integer
     #   resp.protected_job.compute_configuration.worker.properties.spark #=> Hash
@@ -7673,6 +7684,7 @@ module Aws::CleanRooms
     #   resp.protected_query.result.output.distribute.member_list[0].account_id #=> String
     #   resp.protected_query.error.message #=> String
     #   resp.protected_query.error.code #=> String
+    #   resp.protected_query.error.retry.retryable #=> Boolean
     #   resp.protected_query.differential_privacy.sensitivity_parameters #=> Array
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_type #=> String, one of "AVG", "COUNT", "COUNT_DISTINCT", "SUM", "STDDEV"
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].aggregation_expression #=> String
@@ -7712,7 +7724,7 @@ module Aws::CleanRooms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

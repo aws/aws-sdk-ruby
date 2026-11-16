@@ -18,6 +18,7 @@ module Aws::Signin
     AccessToken = Shapes::StructureShape.new(name: 'AccessToken')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AuthorizationCode = Shapes::StringShape.new(name: 'AuthorizationCode')
+    BearerTokenExpiresIn = Shapes::IntegerShape.new(name: 'BearerTokenExpiresIn')
     BearerTokenType = Shapes::StringShape.new(name: 'BearerTokenType')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientCredentialsGrantType = Shapes::StringShape.new(name: 'ClientCredentialsGrantType')
@@ -30,6 +31,8 @@ module Aws::Signin
     ConditionValues = Shapes::ListShape.new(name: 'ConditionValues')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConsolePermissionMaxResults = Shapes::IntegerShape.new(name: 'ConsolePermissionMaxResults')
+    CreateBearerTokenRequest = Shapes::StructureShape.new(name: 'CreateBearerTokenRequest')
+    CreateBearerTokenResponse = Shapes::StructureShape.new(name: 'CreateBearerTokenResponse')
     CreateOAuth2TokenRequest = Shapes::StructureShape.new(name: 'CreateOAuth2TokenRequest')
     CreateOAuth2TokenRequestBody = Shapes::StructureShape.new(name: 'CreateOAuth2TokenRequestBody')
     CreateOAuth2TokenResponse = Shapes::StructureShape.new(name: 'CreateOAuth2TokenResponse')
@@ -94,6 +97,7 @@ module Aws::Signin
     SubjectToken = Shapes::StringShape.new(name: 'SubjectToken')
     SubjectTokenType = Shapes::StringShape.new(name: 'SubjectTokenType')
     TargetId = Shapes::StringShape.new(name: 'TargetId')
+    TokenDuration = Shapes::IntegerShape.new(name: 'TokenDuration')
     TokenExchangeGrantType = Shapes::StringShape.new(name: 'TokenExchangeGrantType')
     TokenExpiresIn = Shapes::IntegerShape.new(name: 'TokenExpiresIn')
     TokenType = Shapes::StringShape.new(name: 'TokenType')
@@ -122,6 +126,16 @@ module Aws::Signin
     ConflictException.add_member(:error, Shapes::ShapeRef.new(shape: OAuth2ErrorCode, required: true, location_name: "error"))
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
+
+    CreateBearerTokenRequest.add_member(:grant_type, Shapes::ShapeRef.new(shape: ClientCredentialsGrantType, required: true, location_name: "grant_type"))
+    CreateBearerTokenRequest.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "resource"))
+    CreateBearerTokenRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: TokenDuration, location_name: "duration"))
+    CreateBearerTokenRequest.struct_class = Types::CreateBearerTokenRequest
+
+    CreateBearerTokenResponse.add_member(:access_token, Shapes::ShapeRef.new(shape: OAuthAccessToken, required: true, location_name: "access_token"))
+    CreateBearerTokenResponse.add_member(:token_type, Shapes::ShapeRef.new(shape: BearerTokenType, required: true, location_name: "token_type"))
+    CreateBearerTokenResponse.add_member(:expires_in, Shapes::ShapeRef.new(shape: BearerTokenExpiresIn, required: true, location_name: "expires_in"))
+    CreateBearerTokenResponse.struct_class = Types::CreateBearerTokenResponse
 
     CreateOAuth2TokenRequest.add_member(:token_input, Shapes::ShapeRef.new(shape: CreateOAuth2TokenRequestBody, required: true, location_name: "tokenInput"))
     CreateOAuth2TokenRequest.struct_class = Types::CreateOAuth2TokenRequest
@@ -325,6 +339,18 @@ module Aws::Signin
         "signingName" => "signin",
         "uid" => "signin-2023-01-01",
       }
+
+      api.add_operation(:create_bearer_token, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateBearerToken"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/token?x-amz-token-request-type=bearer"
+        o.input = Shapes::ShapeRef.new(shape: CreateBearerTokenRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateBearerTokenResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
 
       api.add_operation(:create_o_auth_2_token, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateOAuth2Token"

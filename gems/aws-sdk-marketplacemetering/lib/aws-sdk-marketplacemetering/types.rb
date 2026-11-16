@@ -100,7 +100,9 @@ module Aws::MarketplaceMetering
 
     # A metering record has already been emitted by the same EC2 instance,
     # ECS task, or EKS pod for the given \{`usageDimension`, `timestamp`}
-    # with a different `usageQuantity`.
+    # with a different `usageQuantity`. Quantities are compared by value, so
+    # a whole-number and a decimal quantity with the same value (for
+    # example, `17` and `17.00`) are not different.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -271,7 +273,9 @@ module Aws::MarketplaceMetering
       include Aws::Structure
     end
 
-    # Sum of allocated usage quantities is not equal to the usage quantity.
+    # Sum of allocated usage quantities is not equal to the usage quantity,
+    # or the allocations don't use the same type of quantity (whole number
+    # or decimal) as the usage quantity.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -335,8 +339,29 @@ module Aws::MarketplaceMetering
     #   @return [String]
     #
     # @!attribute [rw] usage_quantity
-    #   Consumption value for the hour. Defaults to `0` if not specified.
+    #   The consumption value for the hour, as a whole number. Defaults to
+    #   `0` if neither `UsageQuantity` nor `UsageQuantityAsDecimal` is
+    #   specified.
+    #
+    #   Use `UsageQuantityAsDecimal` instead. You can't specify both
+    #   `UsageQuantity` and `UsageQuantityAsDecimal`.
     #   @return [Integer]
+    #
+    # @!attribute [rw] usage_quantity_as_decimal
+    #   The consumption value for the hour, as a decimal string. Use this
+    #   instead of `UsageQuantity` to report fractional usage.
+    #
+    #   A non-negative decimal number, for example `17.42`.
+    #
+    #   You can't specify both `UsageQuantity` and
+    #   `UsageQuantityAsDecimal`. If you provide `UsageAllocations`, each
+    #   allocation must use `AllocatedUsageQuantityAsDecimal`.
+    #
+    #   Quantities are compared by value when checking for duplicate or
+    #   retried requests, so `17`, `17.0`, and `17.00` are the same
+    #   quantity, whether you send it in `UsageQuantity` or
+    #   `UsageQuantityAsDecimal`.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the permissions required for the action, but
@@ -348,9 +373,13 @@ module Aws::MarketplaceMetering
     # @!attribute [rw] usage_allocations
     #   The set of `UsageAllocations` to submit.
     #
-    #   The sum of all `UsageAllocation` quantities must equal the
-    #   `UsageQuantity` of the `MeterUsage` request, and each
-    #   `UsageAllocation` must have a unique set of tags (include no tags).
+    #   The sum of all `UsageAllocation` quantities must equal the usage
+    #   quantity of the `MeterUsage` request (`UsageQuantity` or
+    #   `UsageQuantityAsDecimal`), and each `UsageAllocation` must have a
+    #   unique set of tags (include no tags). Allocations must use the same
+    #   type of quantity as the request: `AllocatedUsageQuantity` with
+    #   `UsageQuantity`, or `AllocatedUsageQuantityAsDecimal` with
+    #   `UsageQuantityAsDecimal`.
     #   @return [Array<Types::UsageAllocation>]
     #
     # @!attribute [rw] client_token
@@ -383,6 +412,7 @@ module Aws::MarketplaceMetering
       :timestamp,
       :usage_dimension,
       :usage_quantity,
+      :usage_quantity_as_decimal,
       :dry_run,
       :usage_allocations,
       :client_token)
@@ -599,8 +629,25 @@ module Aws::MarketplaceMetering
     # of tags.
     #
     # @!attribute [rw] allocated_usage_quantity
-    #   The total quantity allocated to this bucket of usage.
+    #   The total quantity allocated to this bucket of usage, as a whole
+    #   number.
+    #
+    #   Use `AllocatedUsageQuantityAsDecimal` instead. Each allocation must
+    #   specify exactly one of `AllocatedUsageQuantity` or
+    #   `AllocatedUsageQuantityAsDecimal`.
     #   @return [Integer]
+    #
+    # @!attribute [rw] allocated_usage_quantity_as_decimal
+    #   The total quantity allocated to this bucket of usage, as a decimal
+    #   string. Use this when the usage quantity of the request or usage
+    #   record is specified as a decimal (`UsageQuantityAsDecimal` or
+    #   `QuantityAsDecimal`).
+    #
+    #   A non-negative decimal number, for example `17.42`.
+    #
+    #   Each allocation must specify exactly one of `AllocatedUsageQuantity`
+    #   or `AllocatedUsageQuantityAsDecimal`.
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   The set of tags that define the bucket of usage. For the bucket of
@@ -611,6 +658,7 @@ module Aws::MarketplaceMetering
     #
     class UsageAllocation < Struct.new(
       :allocated_usage_quantity,
+      :allocated_usage_quantity_as_decimal,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -650,13 +698,38 @@ module Aws::MarketplaceMetering
     #
     # @!attribute [rw] quantity
     #   The quantity of usage consumed by the customer for the given
-    #   dimension and time. Defaults to `0` if not specified.
+    #   dimension and time, as a whole number. Defaults to `0` if neither
+    #   `Quantity` nor `QuantityAsDecimal` is specified.
+    #
+    #   Use `QuantityAsDecimal` instead. You can't specify both `Quantity`
+    #   and `QuantityAsDecimal` in a usage record.
     #   @return [Integer]
+    #
+    # @!attribute [rw] quantity_as_decimal
+    #   The quantity of usage consumed by the customer for the given
+    #   dimension and time, as a decimal string. Use this instead of
+    #   `Quantity` to report fractional usage.
+    #
+    #   A non-negative decimal number, for example `17.42`.
+    #
+    #   You can't specify both `Quantity` and `QuantityAsDecimal` in a
+    #   usage record. If you provide `UsageAllocations`, each allocation
+    #   must use `AllocatedUsageQuantityAsDecimal`. If any usage record
+    #   fails these checks, the entire `BatchMeterUsage` request fails and
+    #   no records are processed.
+    #
+    #   Quantities are compared by value when checking for duplicate
+    #   records, so `17`, `17.0`, and `17.00` are the same quantity, whether
+    #   you send it in `Quantity` or `QuantityAsDecimal`.
+    #   @return [String]
     #
     # @!attribute [rw] usage_allocations
     #   The set of `UsageAllocations` to submit. The sum of all
-    #   `UsageAllocation` quantities must equal the Quantity of the
-    #   `UsageRecord`.
+    #   `UsageAllocation` quantities must equal the quantity of the
+    #   `UsageRecord` (`Quantity` or `QuantityAsDecimal`). Allocations must
+    #   use the same type of quantity as the usage record:
+    #   `AllocatedUsageQuantity` with `Quantity`, or
+    #   `AllocatedUsageQuantityAsDecimal` with `QuantityAsDecimal`.
     #   @return [Array<Types::UsageAllocation>]
     #
     # @!attribute [rw] customer_aws_account_id
@@ -697,6 +770,7 @@ module Aws::MarketplaceMetering
       :customer_identifier,
       :dimension,
       :quantity,
+      :quantity_as_decimal,
       :usage_allocations,
       :customer_aws_account_id,
       :license_arn)

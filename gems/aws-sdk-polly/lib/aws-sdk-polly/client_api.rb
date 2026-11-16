@@ -15,6 +15,7 @@ module Aws::Polly
     include Seahorse::Model
 
     Alphabet = Shapes::StringShape.new(name: 'Alphabet')
+    AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AudioChunk = Shapes::BlobShape.new(name: 'AudioChunk')
     AudioEvent = Shapes::StructureShape.new(name: 'AudioEvent')
     AudioStream = Shapes::BlobShape.new(name: 'AudioStream', streaming: true)
@@ -32,6 +33,7 @@ module Aws::Polly
     EngineList = Shapes::ListShape.new(name: 'EngineList')
     EngineNotSupportedException = Shapes::StructureShape.new(name: 'EngineNotSupportedException')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     FlushStreamConfiguration = Shapes::StructureShape.new(name: 'FlushStreamConfiguration')
     Force = Shapes::BooleanShape.new(name: 'Force')
     Gender = Shapes::StringShape.new(name: 'Gender')
@@ -47,6 +49,7 @@ module Aws::Polly
     InvalidSampleRateException = Shapes::StructureShape.new(name: 'InvalidSampleRateException')
     InvalidSnsTopicArnException = Shapes::StructureShape.new(name: 'InvalidSnsTopicArnException')
     InvalidSsmlException = Shapes::StructureShape.new(name: 'InvalidSsmlException')
+    InvalidTagParameterException = Shapes::StructureShape.new(name: 'InvalidTagParameterException')
     InvalidTaskIdException = Shapes::StructureShape.new(name: 'InvalidTaskIdException')
     LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
     LanguageCodeList = Shapes::ListShape.new(name: 'LanguageCodeList')
@@ -68,6 +71,8 @@ module Aws::Polly
     ListLexiconsOutput = Shapes::StructureShape.new(name: 'ListLexiconsOutput')
     ListSpeechSynthesisTasksInput = Shapes::StructureShape.new(name: 'ListSpeechSynthesisTasksInput')
     ListSpeechSynthesisTasksOutput = Shapes::StructureShape.new(name: 'ListSpeechSynthesisTasksOutput')
+    ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
+    ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     MarksNotSupportedForFormatException = Shapes::StructureShape.new(name: 'MarksNotSupportedForFormatException')
     MaxLexemeLengthExceededException = Shapes::StructureShape.new(name: 'MaxLexemeLengthExceededException')
     MaxLexiconsNumberExceededException = Shapes::StructureShape.new(name: 'MaxLexiconsNumberExceededException')
@@ -81,6 +86,9 @@ module Aws::Polly
     PutLexiconOutput = Shapes::StructureShape.new(name: 'PutLexiconOutput')
     QuotaCode = Shapes::StringShape.new(name: 'QuotaCode')
     RequestCharacters = Shapes::IntegerShape.new(name: 'RequestCharacters')
+    ResourceId = Shapes::StringShape.new(name: 'ResourceId')
+    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     SampleRate = Shapes::StringShape.new(name: 'SampleRate')
     ServiceCode = Shapes::StringShape.new(name: 'ServiceCode')
     ServiceFailureException = Shapes::StructureShape.new(name: 'ServiceFailureException')
@@ -102,6 +110,12 @@ module Aws::Polly
     SynthesisTasks = Shapes::ListShape.new(name: 'SynthesisTasks')
     SynthesizeSpeechInput = Shapes::StructureShape.new(name: 'SynthesizeSpeechInput')
     SynthesizeSpeechOutput = Shapes::StructureShape.new(name: 'SynthesizeSpeechOutput')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagMap = Shapes::MapShape.new(name: 'TagMap')
+    TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
+    TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     TaskId = Shapes::StringShape.new(name: 'TaskId')
     TaskStatus = Shapes::StringShape.new(name: 'TaskStatus')
     TaskStatusReason = Shapes::StringShape.new(name: 'TaskStatusReason')
@@ -112,8 +126,11 @@ module Aws::Polly
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     ThrottlingReason = Shapes::StructureShape.new(name: 'ThrottlingReason')
     ThrottlingReasonList = Shapes::ListShape.new(name: 'ThrottlingReasonList')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UnsupportedPlsAlphabetException = Shapes::StructureShape.new(name: 'UnsupportedPlsAlphabetException')
     UnsupportedPlsLanguageException = Shapes::StructureShape.new(name: 'UnsupportedPlsLanguageException')
+    UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
+    UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -187,6 +204,9 @@ module Aws::Polly
     InvalidSsmlException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidSsmlException.struct_class = Types::InvalidSsmlException
 
+    InvalidTagParameterException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidTagParameterException.struct_class = Types::InvalidTagParameterException
+
     InvalidTaskIdException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidTaskIdException.struct_class = Types::InvalidTaskIdException
 
@@ -237,6 +257,12 @@ module Aws::Polly
     ListSpeechSynthesisTasksOutput.add_member(:synthesis_tasks, Shapes::ShapeRef.new(shape: SynthesisTasks, location_name: "SynthesisTasks"))
     ListSpeechSynthesisTasksOutput.struct_class = Types::ListSpeechSynthesisTasksOutput
 
+    ListTagsForResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "querystring", location_name: "arn"))
+    ListTagsForResourceInput.struct_class = Types::ListTagsForResourceInput
+
+    ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
+
     MarksNotSupportedForFormatException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     MarksNotSupportedForFormatException.struct_class = Types::MarksNotSupportedForFormatException
 
@@ -248,9 +274,15 @@ module Aws::Polly
 
     PutLexiconInput.add_member(:name, Shapes::ShapeRef.new(shape: LexiconName, required: true, location: "uri", location_name: "LexiconName"))
     PutLexiconInput.add_member(:content, Shapes::ShapeRef.new(shape: LexiconContent, required: true, location_name: "Content"))
+    PutLexiconInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     PutLexiconInput.struct_class = Types::PutLexiconInput
 
     PutLexiconOutput.struct_class = Types::PutLexiconOutput
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
+    ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ServiceFailureException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ServiceFailureException.struct_class = Types::ServiceFailureException
@@ -353,6 +385,17 @@ module Aws::Polly
     SynthesizeSpeechOutput[:payload] = :audio_stream
     SynthesizeSpeechOutput[:payload_member] = SynthesizeSpeechOutput.member(:audio_stream)
 
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceArn"))
+    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
+    TagResourceInput.struct_class = Types::TagResourceInput
+
+    TagResourceOutput.struct_class = Types::TagResourceOutput
+
     TextEvent.add_member(:text, Shapes::ShapeRef.new(shape: Text, required: true, location_name: "Text"))
     TextEvent.add_member(:text_type, Shapes::ShapeRef.new(shape: TextType, location_name: "TextType"))
     TextEvent.add_member(:flush_stream_configuration, Shapes::ShapeRef.new(shape: FlushStreamConfiguration, location_name: "FlushStreamConfiguration"))
@@ -371,11 +414,20 @@ module Aws::Polly
 
     ThrottlingReasonList.member = Shapes::ShapeRef.new(shape: ThrottlingReason)
 
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
+
     UnsupportedPlsAlphabetException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     UnsupportedPlsAlphabetException.struct_class = Types::UnsupportedPlsAlphabetException
 
     UnsupportedPlsLanguageException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     UnsupportedPlsLanguageException.struct_class = Types::UnsupportedPlsLanguageException
+
+    UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceArn"))
+    UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceInput.struct_class = Types::UntagResourceInput
+
+    UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, required: true, location_name: "reason"))
@@ -485,6 +537,19 @@ module Aws::Polly
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/listTagsForResource/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:put_lexicon, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutLexicon"
         o.http_method = "PUT"
@@ -497,7 +562,10 @@ module Aws::Polly
         o.errors << Shapes::ShapeRef.new(shape: LexiconSizeExceededException)
         o.errors << Shapes::ShapeRef.new(shape: MaxLexemeLengthExceededException)
         o.errors << Shapes::ShapeRef.new(shape: MaxLexiconsNumberExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagParameterException)
       end)
 
       api.add_operation(:start_speech_synthesis_stream, Seahorse::Model::Operation.new.tap do |o|
@@ -548,6 +616,33 @@ module Aws::Polly
         o.errors << Shapes::ShapeRef.new(shape: SsmlMarksNotSupportedForTextTypeException)
         o.errors << Shapes::ShapeRef.new(shape: LanguageNotSupportedException)
         o.errors << Shapes::ShapeRef.new(shape: EngineNotSupportedException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/tagResource"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/untagResource"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
     end
 

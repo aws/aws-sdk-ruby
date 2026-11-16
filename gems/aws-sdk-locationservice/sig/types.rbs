@@ -30,7 +30,7 @@ module Aws::LocationService
       attr_accessor allow_referers: ::Array[::String]
       attr_accessor allow_android_apps: ::Array[Types::AndroidApp]
       attr_accessor allow_apple_apps: ::Array[Types::AppleApp]
-      SENSITIVE: []
+      SENSITIVE: [:allow_referers]
     end
 
     class AppleApp
@@ -190,7 +190,7 @@ module Aws::LocationService
       attr_accessor car_mode_options: Types::CalculateRouteCarModeOptions
       attr_accessor truck_mode_options: Types::CalculateRouteTruckModeOptions
       attr_accessor key: ::String
-      SENSITIVE: [:departure_time, :depart_now, :key]
+      SENSITIVE: [:departure_positions, :destination_positions, :departure_time, :depart_now, :key]
     end
 
     class CalculateRouteMatrixResponse
@@ -198,7 +198,7 @@ module Aws::LocationService
       attr_accessor snapped_departure_positions: ::Array[::Array[::Float]]
       attr_accessor snapped_destination_positions: ::Array[::Array[::Float]]
       attr_accessor summary: Types::CalculateRouteMatrixSummary
-      SENSITIVE: []
+      SENSITIVE: [:snapped_departure_positions, :snapped_destination_positions]
     end
 
     class CalculateRouteMatrixSummary
@@ -224,7 +224,7 @@ module Aws::LocationService
       attr_accessor arrival_time: ::Time
       attr_accessor optimize_for: ("FastestRoute" | "ShortestRoute")
       attr_accessor key: ::String
-      SENSITIVE: [:departure_position, :destination_position, :departure_time, :depart_now, :include_leg_geometry, :arrival_time, :key]
+      SENSITIVE: [:departure_position, :destination_position, :waypoint_positions, :departure_time, :depart_now, :include_leg_geometry, :arrival_time, :key]
     end
 
     class CalculateRouteResponse
@@ -627,7 +627,7 @@ module Aws::LocationService
       attr_accessor circle: Types::Circle
       attr_accessor geobuf: ::String
       attr_accessor multi_polygon: ::Array[::Array[::Array[::Array[::Float]]]]
-      SENSITIVE: [:circle, :geobuf]
+      SENSITIVE: [:polygon, :circle, :geobuf, :multi_polygon]
     end
 
     class GetDevicePositionHistoryRequest
@@ -825,7 +825,7 @@ module Aws::LocationService
 
     class LegGeometry
       attr_accessor line_string: ::Array[::Array[::Float]]
-      SENSITIVE: []
+      SENSITIVE: [:line_string]
     end
 
     class ListDevicePositionsRequest
@@ -1120,7 +1120,7 @@ module Aws::LocationService
       attr_accessor categories: ::Array[::String]
       attr_accessor supplemental_categories: ::Array[::String]
       attr_accessor sub_municipality: ::String
-      SENSITIVE: [:label, :address_number, :street, :neighborhood, :municipality, :sub_region, :region, :country, :postal_code, :interpolated, :unit_type, :unit_number, :sub_municipality]
+      SENSITIVE: [:label, :address_number, :street, :neighborhood, :municipality, :sub_region, :region, :country, :postal_code, :interpolated, :unit_type, :unit_number, :categories, :supplemental_categories, :sub_municipality]
     end
 
     class PlaceGeometry
@@ -1178,7 +1178,7 @@ module Aws::LocationService
       attr_accessor place_id: ::String
       attr_accessor categories: ::Array[::String]
       attr_accessor supplemental_categories: ::Array[::String]
-      SENSITIVE: [:text, :place_id]
+      SENSITIVE: [:text, :place_id, :categories, :supplemental_categories]
     end
 
     class SearchForTextResult
@@ -1222,7 +1222,7 @@ module Aws::LocationService
       attr_accessor language: ::String
       attr_accessor filter_categories: ::Array[::String]
       attr_accessor key: ::String
-      SENSITIVE: [:text, :bias_position, :filter_b_box, :key]
+      SENSITIVE: [:text, :bias_position, :filter_b_box, :filter_countries, :filter_categories, :key]
     end
 
     class SearchPlaceIndexForSuggestionsResponse
@@ -1240,7 +1240,7 @@ module Aws::LocationService
       attr_accessor data_source: ::String
       attr_accessor language: ::String
       attr_accessor filter_categories: ::Array[::String]
-      SENSITIVE: [:text, :bias_position, :filter_b_box]
+      SENSITIVE: [:text, :bias_position, :filter_b_box, :filter_countries, :filter_categories]
     end
 
     class SearchPlaceIndexForTextRequest
@@ -1253,7 +1253,7 @@ module Aws::LocationService
       attr_accessor language: ::String
       attr_accessor filter_categories: ::Array[::String]
       attr_accessor key: ::String
-      SENSITIVE: [:text, :bias_position, :filter_b_box, :key]
+      SENSITIVE: [:text, :bias_position, :filter_b_box, :filter_countries, :filter_categories, :key]
     end
 
     class SearchPlaceIndexForTextResponse
@@ -1272,7 +1272,7 @@ module Aws::LocationService
       attr_accessor data_source: ::String
       attr_accessor language: ::String
       attr_accessor filter_categories: ::Array[::String]
-      SENSITIVE: [:text, :bias_position, :filter_b_box, :result_b_box]
+      SENSITIVE: [:text, :bias_position, :filter_b_box, :filter_countries, :result_b_box, :filter_categories]
     end
 
     class ServiceQuotaExceededException
@@ -1331,7 +1331,7 @@ module Aws::LocationService
 
     class TrackingFilterGeometry
       attr_accessor polygon: ::Array[::Array[::Array[::Float]]]
-      SENSITIVE: []
+      SENSITIVE: [:polygon]
     end
 
     class TruckDimensions

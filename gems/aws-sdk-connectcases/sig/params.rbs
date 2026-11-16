@@ -8,6 +8,44 @@
 module Aws
   module ConnectCases
     module Params
+      type sla_input_configuration = {
+      name: ::String,
+      type: ("CaseField"),
+      field_id: ::String?,
+      target_field_values: Array[
+        Params::field_value_union
+      ]?,
+      target_sla_minutes: ::Integer
+    }
+
+      type sla_input_content = {
+      sla_input_configuration: Params::sla_input_configuration?
+    }
+
+      type custom_input_content = {
+      fields: Array[
+        Params::field_value
+      ]
+    }
+
+      type related_item_input_content = {
+      contact: {
+        contact_arn: ::String
+      }?,
+      comment: {
+        body: ::String,
+        content_type: ("Text/Plain")
+      }?,
+      file: {
+        file_arn: ::String
+      }?,
+      sla: Params::sla_input_content?,
+      connect_case: {
+        case_id: ::String
+      }?,
+      custom: Params::custom_input_content?
+    }
+
       type field_value_union = {
       string_value: ::String?,
       double_value: ::Float?,

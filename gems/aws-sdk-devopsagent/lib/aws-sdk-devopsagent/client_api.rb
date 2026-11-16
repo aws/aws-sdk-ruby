@@ -318,6 +318,7 @@ module Aws::DevOpsAgent
     MCPToolDetailsList = Shapes::ListShape.new(name: 'MCPToolDetailsList')
     MCPToolsList = Shapes::ListShape.new(name: 'MCPToolsList')
     MCPToolsListMemberString = Shapes::StringShape.new(name: 'MCPToolsListMemberString')
+    MSTeamsBidirectionalConfiguration = Shapes::StructureShape.new(name: 'MSTeamsBidirectionalConfiguration')
     MSTeamsChannel = Shapes::StructureShape.new(name: 'MSTeamsChannel')
     MSTeamsChannelId = Shapes::StringShape.new(name: 'MSTeamsChannelId')
     MSTeamsConfiguration = Shapes::StructureShape.new(name: 'MSTeamsConfiguration')
@@ -1493,6 +1494,10 @@ module Aws::DevOpsAgent
 
     MCPToolsList.member = Shapes::ShapeRef.new(shape: MCPToolsListMemberString)
 
+    MSTeamsBidirectionalConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    MSTeamsBidirectionalConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    MSTeamsBidirectionalConfiguration.struct_class = Types::MSTeamsBidirectionalConfiguration
+
     MSTeamsChannel.add_member(:channel_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "channelName"))
     MSTeamsChannel.add_member(:channel_id, Shapes::ShapeRef.new(shape: MSTeamsChannelId, required: true, location_name: "channelId"))
     MSTeamsChannel.struct_class = Types::MSTeamsChannel
@@ -1500,6 +1505,7 @@ module Aws::DevOpsAgent
     MSTeamsConfiguration.add_member(:team_id, Shapes::ShapeRef.new(shape: Guid, required: true, location_name: "teamId"))
     MSTeamsConfiguration.add_member(:team_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "teamName"))
     MSTeamsConfiguration.add_member(:transmission_target, Shapes::ShapeRef.new(shape: MSTeamsTransmissionTarget, required: true, location_name: "transmissionTarget"))
+    MSTeamsConfiguration.add_member(:bidirectional, Shapes::ShapeRef.new(shape: MSTeamsBidirectionalConfiguration, location_name: "bidirectional"))
     MSTeamsConfiguration.struct_class = Types::MSTeamsConfiguration
 
     MSTeamsTransmissionTarget.add_member(:ops_oncall_target, Shapes::ShapeRef.new(shape: MSTeamsChannel, location_name: "opsOncallTarget"))

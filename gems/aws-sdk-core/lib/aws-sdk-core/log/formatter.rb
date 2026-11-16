@@ -132,8 +132,9 @@ module Aws
 
       def _request_params(response)
         params = response.context.params
-        type = response.context.operation.input.shape.struct_class
-        @param_formatter.summarize(@param_filter.filter(params, type))
+        operation = response.context.operation
+        ref = operation && operation.input
+        @param_formatter.summarize(@param_filter.filter(params, ref))
       end
 
       def _time(response)

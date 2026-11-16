@@ -2689,6 +2689,7 @@
         "vpcConfig":{"shape":"VpcConfig"},
         "networkTrafficConfig":{"shape":"NetworkTrafficConfig"},
         "codeRemediationStrategy":{"shape":"CodeRemediationStrategy"},
+        "cleanUpStrategy":{"shape":"CleanUpStrategy"},
         "disableManagedSkills":{"shape":"SkillTypeList"},
         "maxTaskHours":{"shape":"Double"},
         "reportDestination":{"shape":"ReportDestination"},
@@ -3500,6 +3501,13 @@
         "GROUP"
       ]
     },
+    "GroupMetadata":{
+      "type":"structure",
+      "members":{
+        "displayName":{"shape":"String"},
+        "description":{"shape":"String"}
+      }
+    },
     "HostAddress":{"type":"string"},
     "HttpVerification":{
       "type":"structure",
@@ -4299,7 +4307,8 @@
     "MemberMetadata":{
       "type":"structure",
       "members":{
-        "user":{"shape":"UserMetadata"}
+        "user":{"shape":"UserMetadata"},
+        "group":{"shape":"GroupMetadata"}
       },
       "union":true
     },
@@ -4342,12 +4351,16 @@
     },
     "MembershipType":{
       "type":"string",
-      "enum":["USER"]
+      "enum":[
+        "USER",
+        "GROUP"
+      ]
     },
     "MembershipTypeFilter":{
       "type":"string",
       "enum":[
         "USER",
+        "GROUP",
         "ALL"
       ]
     },
@@ -5859,6 +5872,7 @@
         "vpcConfig":{"shape":"VpcConfig"},
         "networkTrafficConfig":{"shape":"NetworkTrafficConfig"},
         "codeRemediationStrategy":{"shape":"CodeRemediationStrategy"},
+        "cleanUpStrategy":{"shape":"CleanUpStrategy"},
         "disableManagedSkills":{"shape":"SkillTypeList"},
         "maxTaskHours":{"shape":"Double"},
         "reportDestination":{"shape":"ReportDestination"},

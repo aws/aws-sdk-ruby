@@ -264,7 +264,8 @@ module Aws::MWAAServerless
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::MWAAServerless
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -488,6 +489,59 @@ module Aws::MWAAServerless
 
     # @!group API Operations
 
+    # Creates a launch URL that opens the Apache Airflow UI for your
+    # workflows in Amazon Managed Workflows for Apache Airflow Serverless.
+    # The UI shows the workflows in your account in the current AWS Region.
+    # To start a UI session, open the URL in a browser before it expires.
+    #
+    # The UI runs with the permissions of the IAM identity that you use to
+    # call this operation. You see only the workflows, workflow runs, and
+    # logs that the identity can read, and you can start a workflow run only
+    # if the identity has permission to start one.
+    #
+    # The UI session uses the caller's permissions. The session works only
+    # from the network address that opened the URL. It ends at
+    # `SessionExpiresAt` or when you sign out from the UI.
+    #
+    # @option params [Integer] :expires_in_seconds
+    #   Specifies the number of seconds that the launch URL stays valid. This
+    #   value limits only the time to open the URL, not the length of the UI
+    #   session. The default is 300.
+    #
+    # @option params [Integer] :session_duration_in_seconds
+    #   Specifies the number of seconds that the UI session lasts, starting
+    #   from when you call this operation. The default is 43200 (12 hours).
+    #
+    # @return [Types::CreateAirflowUiUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAirflowUiUrlResponse#authorized_url #authorized_url} => String
+    #   * {Types::CreateAirflowUiUrlResponse#session_id #session_id} => String
+    #   * {Types::CreateAirflowUiUrlResponse#url_expires_at #url_expires_at} => Time
+    #   * {Types::CreateAirflowUiUrlResponse#session_expires_at #session_expires_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_airflow_ui_url({
+    #     expires_in_seconds: 1,
+    #     session_duration_in_seconds: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authorized_url #=> String
+    #   resp.session_id #=> String
+    #   resp.url_expires_at #=> Time
+    #   resp.session_expires_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-serverless-2024-07-26/CreateAirflowUiUrl AWS API Documentation
+    #
+    # @overload create_airflow_ui_url(params = {})
+    # @param [Hash] params ({})
+    def create_airflow_ui_url(params = {}, options = {})
+      req = build_request(:create_airflow_ui_url, params)
+      req.send_request(options)
+    end
+
     # Creates a new workflow in Amazon Managed Workflows for Apache Airflow
     # Serverless. This operation initializes a workflow with the specified
     # configuration including the workflow definition, execution role, and
@@ -578,6 +632,11 @@ module Aws::MWAAServerless
     #   customers. This configuration enables secure access to VPC-only
     #   resources like RDS databases or private endpoints.
     #
+    # @option params [Types::Environment] :environment
+    #   The environment variables to set for tasks in the workflow. If you
+    #   don't specify this parameter, the workflow has no environment
+    #   variables.
+    #
     # @option params [Hash<String,String>] :tags
     #   A map of tags to assign to the workflow resource. Tags are key-value
     #   pairs that are used for resource organization and cost allocation.
@@ -625,6 +684,11 @@ module Aws::MWAAServerless
     #     network_configuration: {
     #       security_group_ids: ["SecurityGroupString"],
     #       subnet_ids: ["SubnetString"],
+    #     },
+    #     environment: {
+    #       variables: {
+    #         "EnvironmentVariableKey" => "EnvironmentVariableValue",
+    #       },
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -796,6 +860,7 @@ module Aws::MWAAServerless
     #   * {Types::GetWorkflowResponse#schedule_configuration #schedule_configuration} => Types::ScheduleConfiguration
     #   * {Types::GetWorkflowResponse#role_arn #role_arn} => String
     #   * {Types::GetWorkflowResponse#network_configuration #network_configuration} => Types::NetworkConfiguration
+    #   * {Types::GetWorkflowResponse#environment #environment} => Types::Environment
     #   * {Types::GetWorkflowResponse#trigger_mode #trigger_mode} => String
     #   * {Types::GetWorkflowResponse#workflow_definition #workflow_definition} => String
     #
@@ -832,6 +897,8 @@ module Aws::MWAAServerless
     #   resp.network_configuration.security_group_ids[0] #=> String
     #   resp.network_configuration.subnet_ids #=> Array
     #   resp.network_configuration.subnet_ids[0] #=> String
+    #   resp.environment.variables #=> Hash
+    #   resp.environment.variables["EnvironmentVariableKey"] #=> String
     #   resp.trigger_mode #=> String
     #   resp.workflow_definition #=> String
     #
@@ -1180,8 +1247,8 @@ module Aws::MWAAServerless
     #   definition using standard parameter substitution syntax.
     #
     # @option params [String] :workflow_version
-    #   Optional. The specific version of the workflow to execute. If not
-    #   specified, the latest version is used.
+    #   Optional. The specific version of the workflow to execute. If you
+    #   don't specify a version, we use the latest version.
     #
     # @return [Types::StartWorkflowRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1362,6 +1429,14 @@ module Aws::MWAAServerless
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   Updated network configuration for the workflow execution environment.
     #
+    # @option params [Types::Environment] :environment
+    #   The environment variables to set for tasks in the workflow.
+    #
+    #   The variables that you specify replace all existing environment
+    #   variables for the workflow. If you don't specify this parameter, the
+    #   workflow has no environment variables. To keep existing environment
+    #   variables, include them in the request.
+    #
     # @option params [String] :trigger_mode
     #   The trigger mode for the workflow execution.
     #
@@ -1397,6 +1472,11 @@ module Aws::MWAAServerless
     #     network_configuration: {
     #       security_group_ids: ["SecurityGroupString"],
     #       subnet_ids: ["SubnetString"],
+    #     },
+    #     environment: {
+    #       variables: {
+    #         "EnvironmentVariableKey" => "EnvironmentVariableValue",
+    #       },
     #     },
     #     trigger_mode: "GenericString",
     #   })
@@ -1436,7 +1516,7 @@ module Aws::MWAAServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mwaaserverless'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

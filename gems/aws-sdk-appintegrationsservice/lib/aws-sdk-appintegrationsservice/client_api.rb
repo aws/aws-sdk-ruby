@@ -117,6 +117,7 @@ module Aws::AppIntegrationsService
     PermissionList = Shapes::ListShape.new(name: 'PermissionList')
     Publication = Shapes::StructureShape.new(name: 'Publication')
     PublicationList = Shapes::ListShape.new(name: 'PublicationList')
+    RegionName = Shapes::StringShape.new(name: 'RegionName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceQuotaExceededException = Shapes::StructureShape.new(name: 'ResourceQuotaExceededException')
     ScheduleConfiguration = Shapes::StructureShape.new(name: 'ScheduleConfiguration')
@@ -170,6 +171,7 @@ module Aws::AppIntegrationsService
     ApplicationSummary.add_member(:namespace, Shapes::ShapeRef.new(shape: ApplicationNamespace, location_name: "Namespace"))
     ApplicationSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     ApplicationSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    ApplicationSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     ApplicationSummary.add_member(:is_service, Shapes::ShapeRef.new(shape: Boolean, deprecated: true, location_name: "IsService", metadata: {"deprecatedMessage" => "IsService has been deprecated in favor of ApplicationType", "deprecatedSince" => "2025-12-01"}))
     ApplicationSummary.add_member(:application_type, Shapes::ShapeRef.new(shape: ApplicationType, location_name: "ApplicationType"))
     ApplicationSummary.struct_class = Types::ApplicationSummary
@@ -351,6 +353,7 @@ module Aws::AppIntegrationsService
     GetApplicationResponse.add_member(:publications, Shapes::ShapeRef.new(shape: PublicationList, deprecated: true, location_name: "Publications", metadata: {"deprecatedMessage" => "Publications has been replaced with Permissions"}))
     GetApplicationResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     GetApplicationResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    GetApplicationResponse.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     GetApplicationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     GetApplicationResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionList, location_name: "Permissions"))
     GetApplicationResponse.add_member(:is_service, Shapes::ShapeRef.new(shape: Boolean, deprecated: true, location_name: "IsService", metadata: {"deprecatedMessage" => "IsService has been deprecated in favor of ApplicationType", "deprecatedSince" => "2025-12-01"}))
@@ -830,6 +833,7 @@ module Aws::AppIntegrationsService
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -842,6 +846,8 @@ module Aws::AppIntegrationsService
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -854,6 +860,8 @@ module Aws::AppIntegrationsService
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_application, Seahorse::Model::Operation.new.tap do |o|

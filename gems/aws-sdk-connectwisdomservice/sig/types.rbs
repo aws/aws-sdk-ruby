@@ -232,7 +232,7 @@ module Aws::ConnectWisdomService
       attr_accessor name: ::String
       attr_accessor shortcut_key: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:channels]
     end
 
     class CreateQuickResponseResponse
@@ -435,7 +435,7 @@ module Aws::ConnectWisdomService
     class GroupingConfiguration
       attr_accessor criteria: ::String
       attr_accessor values: ::Array[::String]
-      SENSITIVE: [:criteria]
+      SENSITIVE: [:criteria, :values]
     end
 
     class Highlight
@@ -675,7 +675,7 @@ module Aws::ConnectWisdomService
       attr_accessor shortcut_key: ::String
       attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED")
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:channels]
     end
 
     class QuickResponseDataProvider
@@ -740,7 +740,7 @@ module Aws::ConnectWisdomService
       attr_accessor shortcut_key: ::String
       attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED")
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: [:attributes_interpolated, :attributes_not_interpolated]
+      SENSITIVE: [:attributes_interpolated, :attributes_not_interpolated, :channels]
     end
 
     class QuickResponseSummary
@@ -758,7 +758,7 @@ module Aws::ConnectWisdomService
       attr_accessor quick_response_id: ::String
       attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED")
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:channels]
     end
 
     class RecommendationData
@@ -1010,7 +1010,7 @@ module Aws::ConnectWisdomService
       attr_accessor remove_grouping_configuration: bool
       attr_accessor remove_shortcut_key: bool
       attr_accessor shortcut_key: ::String
-      SENSITIVE: []
+      SENSITIVE: [:channels]
     end
 
     class UpdateQuickResponseResponse

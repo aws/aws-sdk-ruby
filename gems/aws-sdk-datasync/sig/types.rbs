@@ -21,6 +21,18 @@ module Aws::DataSync
       SENSITIVE: [:token]
     end
 
+    class AzureFederatedIdentityConfig
+      attr_accessor aws_iam_role: ::String
+      attr_accessor azure_oidc: Types::AzureOidcConfig
+      SENSITIVE: []
+    end
+
+    class AzureOidcConfig
+      attr_accessor tenant_id: ::String
+      attr_accessor client_id: ::String
+      SENSITIVE: []
+    end
+
     class CancelTaskExecutionRequest
       attr_accessor task_execution_arn: ::String
       SENSITIVE: []
@@ -52,8 +64,9 @@ module Aws::DataSync
 
     class CreateLocationAzureBlobRequest
       attr_accessor container_url: ::String
-      attr_accessor authentication_type: ("SAS" | "NONE")
+      attr_accessor authentication_type: ("SAS" | "NONE" | "OIDC")
       attr_accessor sas_configuration: Types::AzureBlobSasConfiguration
+      attr_accessor federated_identity: Types::AzureFederatedIdentityConfig
       attr_accessor blob_type: ("BLOCK")
       attr_accessor access_tier: ("HOT" | "COOL" | "ARCHIVE")
       attr_accessor subdirectory: ::String
@@ -190,6 +203,7 @@ module Aws::DataSync
       attr_accessor bucket_name: ::String
       attr_accessor access_key: ::String
       attr_accessor secret_key: ::String
+      attr_accessor federated_identity: Types::ObjectStorageFederatedIdentityConfig
       attr_accessor agent_arns: ::Array[::String]
       attr_accessor tags: ::Array[Types::TagListEntry]
       attr_accessor server_certificate: ::String
@@ -318,7 +332,8 @@ module Aws::DataSync
     class DescribeLocationAzureBlobResponse
       attr_accessor location_arn: ::String
       attr_accessor location_uri: ::String
-      attr_accessor authentication_type: ("SAS" | "NONE")
+      attr_accessor authentication_type: ("SAS" | "NONE" | "OIDC")
+      attr_accessor federated_identity: Types::AzureFederatedIdentityConfig
       attr_accessor blob_type: ("BLOCK")
       attr_accessor access_tier: ("HOT" | "COOL" | "ARCHIVE")
       attr_accessor agent_arns: ::Array[::String]
@@ -453,6 +468,7 @@ module Aws::DataSync
       attr_accessor location_arn: ::String
       attr_accessor location_uri: ::String
       attr_accessor access_key: ::String
+      attr_accessor federated_identity: Types::ObjectStorageFederatedIdentityConfig
       attr_accessor server_port: ::Integer
       attr_accessor server_protocol: ("HTTPS" | "HTTP")
       attr_accessor agent_arns: ::Array[::String]
@@ -624,6 +640,14 @@ module Aws::DataSync
       SENSITIVE: [:password]
     end
 
+    class GoogleOidcConfig
+      attr_accessor project_name: ::String
+      attr_accessor project_number: ::String
+      attr_accessor identity_pool_name: ::String
+      attr_accessor identity_provider_name: ::String
+      SENSITIVE: []
+    end
+
     class HdfsNameNode
       attr_accessor hostname: ::String
       attr_accessor port: ::Integer
@@ -734,6 +758,17 @@ module Aws::DataSync
 
     class NfsMountOptions
       attr_accessor version: ("AUTOMATIC" | "NFS3" | "NFS4_0" | "NFS4_1" | "NFS4_2")
+      SENSITIVE: []
+    end
+
+    class ObjectStorageExternalIdentityConfig
+      attr_accessor google_oidc: Types::GoogleOidcConfig
+      SENSITIVE: []
+    end
+
+    class ObjectStorageFederatedIdentityConfig
+      attr_accessor aws_iam_role: ::String
+      attr_accessor external_identity: Types::ObjectStorageExternalIdentityConfig
       SENSITIVE: []
     end
 
@@ -974,8 +1009,9 @@ module Aws::DataSync
     class UpdateLocationAzureBlobRequest
       attr_accessor location_arn: ::String
       attr_accessor subdirectory: ::String
-      attr_accessor authentication_type: ("SAS" | "NONE")
+      attr_accessor authentication_type: ("SAS" | "NONE" | "OIDC")
       attr_accessor sas_configuration: Types::AzureBlobSasConfiguration
+      attr_accessor federated_identity: Types::AzureFederatedIdentityConfig
       attr_accessor blob_type: ("BLOCK")
       attr_accessor access_tier: ("HOT" | "COOL" | "ARCHIVE")
       attr_accessor agent_arns: ::Array[::String]
@@ -1084,6 +1120,7 @@ module Aws::DataSync
       attr_accessor server_hostname: ::String
       attr_accessor access_key: ::String
       attr_accessor secret_key: ::String
+      attr_accessor federated_identity: Types::ObjectStorageFederatedIdentityConfig
       attr_accessor agent_arns: ::Array[::String]
       attr_accessor server_certificate: ::String
       attr_accessor cmk_secret_config: Types::CmkSecretConfig

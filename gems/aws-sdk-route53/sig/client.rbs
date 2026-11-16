@@ -296,6 +296,22 @@ module Aws
                                        ) -> _CreateQueryLoggingConfigResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQueryLoggingConfigResponseSuccess
 
+      interface _CreateResourceRecordSetProtectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateResourceRecordSetProtectionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#create_resource_record_set_protections-instance_method
+      def create_resource_record_set_protections: (
+                                                    hosted_zone_id: ::String,
+                                                    protections: Array[
+                                                      {
+                                                        record_name: ::String,
+                                                        record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS"),
+                                                        comment: ::String?
+                                                      }
+                                                    ]
+                                                  ) -> _CreateResourceRecordSetProtectionsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResourceRecordSetProtectionsResponseSuccess
+
       interface _CreateReusableDelegationSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateReusableDelegationSetResponse]
         def delegation_set: () -> Types::DelegationSet
@@ -422,6 +438,21 @@ module Aws
                                          id: ::String
                                        ) -> _DeleteQueryLoggingConfigResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteQueryLoggingConfigResponseSuccess
+
+      interface _DeleteResourceRecordSetProtectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourceRecordSetProtectionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#delete_resource_record_set_protections-instance_method
+      def delete_resource_record_set_protections: (
+                                                    hosted_zone_id: ::String,
+                                                    protections: Array[
+                                                      {
+                                                        record_name: ::String,
+                                                        record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS")
+                                                      }
+                                                    ]
+                                                  ) -> _DeleteResourceRecordSetProtectionsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourceRecordSetProtectionsResponseSuccess
 
       interface _DeleteReusableDelegationSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReusableDelegationSetResponse]
@@ -820,6 +851,21 @@ module Aws
                                         ?max_results: ::String
                                       ) -> _ListQueryLoggingConfigsResponseSuccess
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQueryLoggingConfigsResponseSuccess
+
+      interface _ListResourceRecordSetProtectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceRecordSetProtectionsResponse]
+        def resource_record_set_protections: () -> ::Array[Types::ResourceRecordSetProtection]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53/Client.html#list_resource_record_set_protections-instance_method
+      def list_resource_record_set_protections: (
+                                                  hosted_zone_id: ::String,
+                                                  ?start_record_name: ::String,
+                                                  ?start_record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS" | "TLSA" | "SSHFP" | "SVCB" | "HTTPS"),
+                                                  ?max_results: ::String,
+                                                  ?next_token: ::String
+                                                ) -> _ListResourceRecordSetProtectionsResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceRecordSetProtectionsResponseSuccess
 
       interface _ListResourceRecordSetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceRecordSetsResponse]

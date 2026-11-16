@@ -8,6 +8,13 @@
 module Aws::LambdaCore
   module Types
 
+    class Compatibility
+      attr_accessor integration_models: ::Array[("RuntimeAPI")]
+      attr_accessor architectures: ::Array[("x86_64" | "arm64")]
+      attr_accessor managed_instances: ("Supported" | "NotSupported")
+      SENSITIVE: []
+    end
+
     class CreateNetworkConnectorRequest
       attr_accessor name: ::String
       attr_accessor configuration: Types::NetworkConnectorConfiguration
@@ -29,6 +36,70 @@ module Aws::LambdaCore
       SENSITIVE: []
     end
 
+    class CreateRuntimeAliasRequest
+      attr_accessor runtime_name: ::String
+      attr_accessor runtime_version: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor release_lifecycle: Types::RuntimeReleaseLifecycle
+      SENSITIVE: []
+    end
+
+    class CreateRuntimeAliasResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor runtime_version: ::String
+      attr_accessor runtime_version_arn: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "PENDING_DELETION")
+      attr_accessor description: ::String
+      attr_accessor release_lifecycle: Types::RuntimeReleaseLifecycle
+      attr_accessor created: ::String
+      attr_accessor last_modified: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRuntimeRequest
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor description: ::String
+      attr_accessor license_info: ::String
+      attr_accessor release_lifecycle: Types::RuntimeReleaseLifecycle
+      SENSITIVE: []
+    end
+
+    class CreateRuntimeResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor license_info: ::String
+      attr_accessor release_lifecycle: Types::RuntimeReleaseLifecycle
+      attr_accessor created: ::String
+      attr_accessor last_modified: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRuntimeVersionRequest
+      attr_accessor runtime_name: ::String
+      attr_accessor image_uri: ::String
+      attr_accessor name: ::String
+      attr_accessor release_notes: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class CreateRuntimeVersionResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor resolved_uri: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "FAILED" | "DELETING" | "PENDING_DELETION")
+      attr_accessor release_notes: ::String
+      attr_accessor platforms: ::Array[Types::Platform]
+      attr_accessor compatibility: Types::Compatibility
+      attr_accessor created: ::String
+      attr_accessor last_modified: ::String
+      SENSITIVE: []
+    end
+
     class DeleteNetworkConnectorRequest
       attr_accessor identifier: ::String
       SENSITIVE: []
@@ -44,6 +115,35 @@ module Aws::LambdaCore
       attr_accessor operator_role: ::String
       attr_accessor state: ("PENDING" | "ACTIVE" | "INACTIVE" | "FAILED" | "DELETING" | "DELETE_FAILED")
       SENSITIVE: []
+    end
+
+    class DeleteRuntimeAliasRequest
+      attr_accessor runtime_name: ::String
+      attr_accessor name: ::String
+      attr_accessor recovery_window_in_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteRuntimeAliasResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRuntimeRequest
+      attr_accessor runtime_name: ::String
+      attr_accessor recovery_window_in_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteRuntimeResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRuntimeVersionRequest
+      attr_accessor runtime_name: ::String
+      attr_accessor name: ::String
+      attr_accessor recovery_window_in_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteRuntimeVersionResponse < Aws::EmptyStructure
     end
 
     class GetNetworkConnectorRequest
@@ -68,6 +168,66 @@ module Aws::LambdaCore
       attr_accessor last_update_status_reason: ::String
       attr_accessor last_update_status_reason_code: ("DisallowedByVpcEncryptionControl" | "Ec2RequestLimitExceeded" | "InsufficientRolePermissions" | "InternalError" | "InvalidSecurityGroup" | "InvalidSubnet" | "SecurityGroupsPerInterfaceLimitExceeded" | "SubnetOutOfIPAddresses")
       attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class GetRuntimeAliasRequest
+      attr_accessor runtime_name: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetRuntimeAliasResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor runtime_version: ::String
+      attr_accessor runtime_version_arn: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "PENDING_DELETION")
+      attr_accessor pending_deletion_at: ::String
+      attr_accessor description: ::String
+      attr_accessor compatibility: Types::Compatibility
+      attr_accessor release_lifecycle: Types::RuntimeReleaseLifecycle
+      attr_accessor created: ::String
+      attr_accessor last_modified: ::String
+      SENSITIVE: []
+    end
+
+    class GetRuntimeRequest
+      attr_accessor runtime_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetRuntimeResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor license_info: ::String
+      attr_accessor release_lifecycle: Types::RuntimeReleaseLifecycle
+      attr_accessor state: ("ACTIVE" | "PENDING_DELETION" | "DELETING" | "FAILED")
+      attr_accessor pending_deletion_at: ::String
+      attr_accessor created: ::String
+      attr_accessor last_modified: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRuntimeVersionRequest
+      attr_accessor runtime_name: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetRuntimeVersionResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor resolved_uri: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "FAILED" | "DELETING" | "PENDING_DELETION")
+      attr_accessor pending_deletion_at: ::String
+      attr_accessor release_notes: ::String
+      attr_accessor platforms: ::Array[Types::Platform]
+      attr_accessor compatibility: Types::Compatibility
+      attr_accessor created: ::String
+      attr_accessor last_modified: ::String
       SENSITIVE: []
     end
 
@@ -101,6 +261,44 @@ module Aws::LambdaCore
     class ListNetworkConnectorsResponse
       attr_accessor network_connectors: ::Array[Types::NetworkConnectorSummary]
       attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListRuntimeAliasesRequest
+      attr_accessor runtime_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRuntimeAliasesResponse
+      attr_accessor items: ::Array[Types::RuntimeAliasInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRuntimeVersionsRequest
+      attr_accessor runtime_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRuntimeVersionsResponse
+      attr_accessor items: ::Array[Types::RuntimeVersionInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRuntimesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRuntimesResponse
+      attr_accessor next_token: ::String
+      attr_accessor items: ::Array[Types::RuntimeInfo]
       SENSITIVE: []
     end
 
@@ -154,6 +352,13 @@ module Aws::LambdaCore
       SENSITIVE: []
     end
 
+    class Platform
+      attr_accessor architecture: ::String
+      attr_accessor os: ::String
+      attr_accessor digest: ::String
+      SENSITIVE: []
+    end
+
     class ResourceConflictException
       attr_accessor type: ::String
       attr_accessor message: ::String
@@ -166,7 +371,79 @@ module Aws::LambdaCore
       SENSITIVE: []
     end
 
+    class RestoreRuntimeRequest
+      attr_accessor runtime_name: ::String
+      attr_accessor runtime_version: ::String
+      attr_accessor runtime_alias: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreRuntimeResponse
+      attr_accessor runtime_name: ::String
+      attr_accessor runtime_version: ::String
+      attr_accessor runtime_alias: ::String
+      attr_accessor arn: ::String
+      attr_accessor state: ("ACTIVE" | "PENDING_DELETION" | "DELETING" | "FAILED")
+      attr_accessor last_modified: ::String
+      SENSITIVE: []
+    end
+
+    class RuntimeAliasInfo
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor runtime_version: ::String
+      attr_accessor runtime_version_arn: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "PENDING_DELETION")
+      attr_accessor pending_deletion_at: ::String
+      attr_accessor description: ::String
+      attr_accessor compatibility: Types::Compatibility
+      attr_accessor release_lifecycle: Types::RuntimeReleaseLifecycle
+      attr_accessor created: ::String
+      attr_accessor last_modified: ::String
+      SENSITIVE: []
+    end
+
+    class RuntimeInfo
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor license_info: ::String
+      attr_accessor release_lifecycle: Types::RuntimeReleaseLifecycle
+      attr_accessor state: ("ACTIVE" | "PENDING_DELETION" | "DELETING" | "FAILED")
+      attr_accessor pending_deletion_at: ::String
+      attr_accessor created: ::String
+      attr_accessor last_modified: ::String
+      SENSITIVE: []
+    end
+
+    class RuntimeReleaseLifecycle
+      attr_accessor release_state: ("PREVIEW" | "GA" | "DEPRECATED")
+      attr_accessor deprecation_date: ::String
+      attr_accessor function_create_block_date: ::String
+      attr_accessor function_update_block_date: ::String
+      SENSITIVE: []
+    end
+
+    class RuntimeVersionInfo
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor resolved_uri: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "FAILED" | "DELETING" | "PENDING_DELETION")
+      attr_accessor pending_deletion_at: ::String
+      attr_accessor release_notes: ::String
+      attr_accessor compatibility: Types::Compatibility
+      attr_accessor created: ::String
+      attr_accessor last_modified: ::String
+      SENSITIVE: []
+    end
+
     class ServiceException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
       attr_accessor type: ::String
       attr_accessor message: ::String
       SENSITIVE: []
@@ -200,6 +477,69 @@ module Aws::LambdaCore
       attr_accessor last_update_status: ("Successful" | "Failed" | "InProgress")
       attr_accessor last_update_status_reason: ::String
       attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateRuntimeAliasRequest
+      attr_accessor runtime_name: ::String
+      attr_accessor name: ::String
+      attr_accessor runtime_version: ::String
+      attr_accessor description: ::String
+      attr_accessor release_lifecycle: Types::RuntimeReleaseLifecycle
+      SENSITIVE: []
+    end
+
+    class UpdateRuntimeAliasResponse
+      attr_accessor runtime_name: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor runtime_version: ::String
+      attr_accessor runtime_version_arn: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "PENDING_DELETION")
+      attr_accessor description: ::String
+      attr_accessor compatibility: Types::Compatibility
+      attr_accessor release_lifecycle: Types::RuntimeReleaseLifecycle
+      attr_accessor created: ::String
+      attr_accessor last_modified: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRuntimeRequest
+      attr_accessor runtime_name: ::String
+      attr_accessor description: ::String
+      attr_accessor license_info: ::String
+      attr_accessor release_lifecycle: Types::RuntimeReleaseLifecycle
+      SENSITIVE: []
+    end
+
+    class UpdateRuntimeResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor license_info: ::String
+      attr_accessor release_lifecycle: Types::RuntimeReleaseLifecycle
+      attr_accessor created: ::String
+      attr_accessor last_modified: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRuntimeVersionRequest
+      attr_accessor runtime_name: ::String
+      attr_accessor name: ::String
+      attr_accessor release_notes: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRuntimeVersionResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor resolved_uri: ::String
+      attr_accessor state: ("CREATING" | "ACTIVE" | "FAILED" | "DELETING" | "PENDING_DELETION")
+      attr_accessor release_notes: ::String
+      attr_accessor platforms: ::Array[Types::Platform]
+      attr_accessor compatibility: Types::Compatibility
+      attr_accessor created: ::String
+      attr_accessor last_modified: ::String
       SENSITIVE: []
     end
   end

@@ -2774,6 +2774,52 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
+    # A `RestoreDomain` request includes the name of the domain that you
+    # want to restore and, optionally, the maximum price that you agree to
+    # pay.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain that you want to restore. The domain must
+    #   have been registered to the Amazon Web Services account that submits
+    #   the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] consent
+    #   Specifies the maximum price that you agree to pay to restore the
+    #   domain name. This element is required if the domain has registry
+    #   premium pricing, and optional if the domain is priced at the
+    #   standard rate for its TLD. If you include it and the restoration
+    #   price is more than `MaxPrice`, the request fails.
+    #   @return [Types::Consent]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RestoreDomainRequest AWS API Documentation
+    #
+    class RestoreDomainRequest < Struct.new(
+      :domain_name,
+      :consent)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `RestoreDomain` response includes the following element.
+    #
+    # @!attribute [rw] operation_id
+    #   Identifier for tracking the progress of the request. To query the
+    #   operation status, use [GetOperationDetail][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RestoreDomainResponse AWS API Documentation
+    #
+    class RestoreDomainResponse < Struct.new(
+      :operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A request for the authorization code for the specified domain. To
     # transfer a domain to another registrar, you provide this value to the
     # new registrar.

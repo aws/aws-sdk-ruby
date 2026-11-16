@@ -19,8 +19,21 @@ module Aws::ConnectContactLens
       SENSITIVE: []
     end
 
+    class CategoriesAttributeAndCondition
+      attr_accessor tag_conditions: ::Array[Types::TagCondition]
+      SENSITIVE: []
+    end
+
+    class CategoriesAttributeFilter
+      attr_accessor or_conditions: ::Array[Types::CategoriesAttributeAndCondition]
+      attr_accessor and_condition: Types::CategoriesAttributeAndCondition
+      attr_accessor tag_condition: Types::TagCondition
+      SENSITIVE: []
+    end
+
     class CategoryDetails
       attr_accessor points_of_interest: ::Array[Types::PointOfInterest]
+      attr_accessor rule_id: ::String
       SENSITIVE: []
     end
 
@@ -65,6 +78,7 @@ module Aws::ConnectContactLens
       attr_accessor contact_id: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor list_filter: Types::RealTimeContactAnalysisSegmentsFilter
       SENSITIVE: []
     end
 
@@ -87,6 +101,11 @@ module Aws::ConnectContactLens
       SENSITIVE: []
     end
 
+    class RealTimeContactAnalysisSegmentsFilter
+      attr_accessor categories_attribute_filter: Types::CategoriesAttributeFilter
+      SENSITIVE: []
+    end
+
     class RealtimeContactAnalysisSegment
       attr_accessor transcript: Types::Transcript
       attr_accessor categories: Types::Categories
@@ -97,6 +116,13 @@ module Aws::ConnectContactLens
 
     class ResourceNotFoundException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagCondition
+      attr_accessor tag_key: ::String
+      attr_accessor tag_value: ::String
+      attr_accessor comparison_type: ("EQUALS" | "NOT_EQUALS")
       SENSITIVE: []
     end
 

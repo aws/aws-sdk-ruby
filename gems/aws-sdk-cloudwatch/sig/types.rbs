@@ -209,6 +209,14 @@ module Aws::CloudWatch
       SENSITIVE: []
     end
 
+    class DeleteMetricDataQueryDefinitionInput
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMetricDataQueryDefinitionOutput < Aws::EmptyStructure
+    end
+
     class DeleteMetricStreamInput
       attr_accessor name: ::String
       SENSITIVE: []
@@ -491,6 +499,22 @@ module Aws::CloudWatch
       SENSITIVE: []
     end
 
+    class GetMetricDataQueryDefinitionInput
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMetricDataQueryDefinitionOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor path: ::String
+      attr_accessor expression: ::String
+      attr_accessor type: ("PROMQL" | "SQL" | "METRIC_MATH")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:expression]
+    end
+
     class GetMetricStatisticsInput
       attr_accessor namespace: ::String
       attr_accessor metric_name: ::String
@@ -691,6 +715,18 @@ module Aws::CloudWatch
       SENSITIVE: []
     end
 
+    class ListMetricDataQueryDefinitionsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMetricDataQueryDefinitionsOutput
+      attr_accessor items: ::Array[Types::MetricDataQueryDefinitionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListMetricStreamsInput
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -843,6 +879,14 @@ module Aws::CloudWatch
       attr_accessor return_data: bool
       attr_accessor period: ::Integer
       attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class MetricDataQueryDefinitionSummary
+      attr_accessor id: ::String
+      attr_accessor path: ::String
+      attr_accessor type: ("PROMQL" | "SQL" | "METRIC_MATH")
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -1071,6 +1115,26 @@ module Aws::CloudWatch
       attr_accessor entity_metric_data: ::Array[Types::EntityMetricData]
       attr_accessor strict_entity_validation: bool
       SENSITIVE: []
+    end
+
+    class PutMetricDataQueryDefinitionInput
+      attr_accessor id: ::String
+      attr_accessor path: ::String
+      attr_accessor expression: ::String
+      attr_accessor type: ("PROMQL" | "SQL" | "METRIC_MATH")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:expression]
+    end
+
+    class PutMetricDataQueryDefinitionOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor path: ::String
+      attr_accessor expression: ::String
+      attr_accessor type: ("PROMQL" | "SQL" | "METRIC_MATH")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:expression]
     end
 
     class PutMetricStreamInput

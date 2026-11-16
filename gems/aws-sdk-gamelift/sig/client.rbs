@@ -404,7 +404,15 @@ module Aws
                                            key: ::String,
                                            value: ::String
                                          }
-                                       ]
+                                       ],
+                                       ?log_configuration: {
+                                         delivery_destinations: Array[
+                                           {
+                                             log_destination: ("CLOUDWATCH" | "S3" | "FIREHOSE"),
+                                             destination_arn: ::String?
+                                           }
+                                         ]
+                                       }
                                      ) -> _CreateGameSessionQueueResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGameSessionQueueResponseSuccess
 
@@ -1855,7 +1863,19 @@ module Aws
                                          location_order: Array[::String]?
                                        },
                                        ?custom_event_data: ::String,
-                                       ?notification_target: ::String
+                                       ?notification_target: ::String,
+                                       ?add_log_delivery_destinations: Array[
+                                         {
+                                           log_destination: ("CLOUDWATCH" | "S3" | "FIREHOSE"),
+                                           destination_arn: ::String?
+                                         }
+                                       ],
+                                       ?remove_log_delivery_destinations: Array[
+                                         {
+                                           log_destination: ("CLOUDWATCH" | "S3" | "FIREHOSE"),
+                                           destination_arn: ::String?
+                                         }
+                                       ]
                                      ) -> _UpdateGameSessionQueueResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGameSessionQueueResponseSuccess
 

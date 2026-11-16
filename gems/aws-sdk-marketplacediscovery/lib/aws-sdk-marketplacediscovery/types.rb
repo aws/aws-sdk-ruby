@@ -2790,11 +2790,25 @@ module Aws::MarketplaceDiscovery
     # and total review count.
     #
     # @!attribute [rw] source_name
-    #   The name of the review source, such as AWS Marketplace.
+    #   The name of the review source. This field has one of the following
+    #   values:
+    #
+    #   * AWS Marketplace
+    #
+    #   * G2
+    #
+    #   * PeerSpot
     #   @return [String]
     #
     # @!attribute [rw] source_id
-    #   The machine-readable identifier of the review source.
+    #   The machine-readable identifier of the review source. This field has
+    #   one of the following values:
+    #
+    #   * `AWS_MARKETPLACE` – The reviews come from AWS Marketplace.
+    #
+    #   * `G2` – The reviews come from G2.
+    #
+    #   * `PEERSPOT` – The reviews come from PeerSpot.
     #   @return [String]
     #
     # @!attribute [rw] source_url
@@ -2825,7 +2839,8 @@ module Aws::MarketplaceDiscovery
     # review source.
     #
     # @!attribute [rw] review_source_summaries
-    #   Review summaries from different sources, such as AWS Marketplace.
+    #   Review summaries from different sources, such as AWS Marketplace,
+    #   G2, and PeerSpot.
     #   @return [Array<Types::ReviewSourceSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/ReviewSummary AWS API Documentation

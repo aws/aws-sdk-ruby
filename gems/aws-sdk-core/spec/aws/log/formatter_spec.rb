@@ -65,6 +65,15 @@ module Aws
           file.close
         end
 
+        it 'filters nested sensitive request parameters' do
+          response.context.params = {
+            nested: { sensitive_string: 'secret', string: 'visible' }
+          }
+          expect(format(':request_params')).to eq(
+            'nested:{sensitive_string:"[FILTERED]",string:"visible"}'
+          )
+        end
+
         it 'provides a :time replacement' do
           now = Time.now
           response.context[:logging_started_at] = now - 1.54321

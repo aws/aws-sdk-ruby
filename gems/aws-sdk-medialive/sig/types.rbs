@@ -5791,6 +5791,7 @@ module Aws::MediaLive
       attr_accessor timed_metadata_passthrough: ("DISABLED" | "ENABLED")
       attr_accessor additional_destinations: ::Array[Types::MediaPackageAdditionalDestinations]
       attr_accessor watermarking_settings: Types::MediaPackageV2WatermarkingSettings
+      attr_accessor caption_language_setting: ("AUTO" | "NONE")
       SENSITIVE: []
     end
 

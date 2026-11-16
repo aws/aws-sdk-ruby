@@ -58,6 +58,8 @@ module Aws::QConnect
       attr_accessor type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION")
       attr_accessor configuration: Types::AIAgentConfiguration
       attr_accessor modified_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       attr_accessor description: ::String
       attr_accessor visibility_status: ("SAVED" | "PUBLISHED")
       attr_accessor tags: ::Hash[::String, ::String]
@@ -74,6 +76,8 @@ module Aws::QConnect
       attr_accessor type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION")
       attr_accessor ai_agent_arn: ::String
       attr_accessor modified_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       attr_accessor visibility_status: ("SAVED" | "PUBLISHED")
       attr_accessor configuration: Types::AIAgentConfiguration
       attr_accessor origin: ("SYSTEM" | "CUSTOMER")
@@ -122,6 +126,8 @@ module Aws::QConnect
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETED")
       attr_accessor modified_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       SENSITIVE: [:blocked_input_messaging, :blocked_outputs_messaging, :description]
     end
 
@@ -138,6 +144,8 @@ module Aws::QConnect
       attr_accessor ai_guardrail_id: ::String
       attr_accessor ai_guardrail_arn: ::String
       attr_accessor modified_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       attr_accessor visibility_status: ("SAVED" | "PUBLISHED")
       attr_accessor description: ::String
       attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETED")
@@ -175,6 +183,8 @@ module Aws::QConnect
       attr_accessor template_configuration: Types::AIPromptTemplateConfiguration
       attr_accessor inference_configuration: Types::AIPromptInferenceConfiguration
       attr_accessor modified_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       attr_accessor description: ::String
       attr_accessor visibility_status: ("SAVED" | "PUBLISHED")
       attr_accessor tags: ::Hash[::String, ::String]
@@ -199,6 +209,8 @@ module Aws::QConnect
       attr_accessor type: ("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION" | "SELF_SERVICE_PRE_PROCESSING" | "SELF_SERVICE_ANSWER_GENERATION" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "EMAIL_QUERY_REFORMULATION" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION")
       attr_accessor ai_prompt_arn: ::String
       attr_accessor modified_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       attr_accessor template_type: ("TEXT")
       attr_accessor model_id: ::String
       attr_accessor api_format: ("ANTHROPIC_CLAUDE_MESSAGES" | "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS" | "MESSAGES" | "TEXT_COMPLETIONS")
@@ -285,7 +297,7 @@ module Aws::QConnect
       attr_accessor association_configurations: ::Array[Types::AssociationConfiguration]
       attr_accessor locale: ::String
       attr_accessor suggested_messages: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:suggested_messages]
     end
 
     class AppIntegrationsConfiguration
@@ -302,6 +314,8 @@ module Aws::QConnect
       attr_accessor association_type: ("KNOWLEDGE_BASE" | "EXTERNAL_BEDROCK_KNOWLEDGE_BASE")
       attr_accessor association_data: Types::AssistantAssociationOutputData
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       SENSITIVE: []
     end
 
@@ -341,6 +355,8 @@ module Aws::QConnect
       attr_accessor association_type: ("KNOWLEDGE_BASE" | "EXTERNAL_BEDROCK_KNOWLEDGE_BASE")
       attr_accessor association_data: Types::AssistantAssociationOutputData
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       SENSITIVE: []
     end
 
@@ -362,6 +378,9 @@ module Aws::QConnect
       attr_accessor capability_configuration: Types::AssistantCapabilityConfiguration
       attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION"), Types::AIAgentConfigurationData]
       attr_accessor orchestrator_configuration_list: ::Array[Types::OrchestratorConfigurationEntry]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      attr_accessor assistant_global_resiliency_status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -383,6 +402,8 @@ module Aws::QConnect
       attr_accessor capability_configuration: Types::AssistantCapabilityConfiguration
       attr_accessor ai_agent_configuration: ::Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION"), Types::AIAgentConfigurationData]
       attr_accessor orchestrator_configuration_list: ::Array[Types::OrchestratorConfigurationEntry]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       SENSITIVE: []
     end
 
@@ -525,6 +546,9 @@ module Aws::QConnect
       attr_accessor link_out_uri: ::String
       attr_accessor url: ::String
       attr_accessor url_expiry: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      attr_accessor file_hash: ::String
       SENSITIVE: [:url]
     end
 
@@ -567,6 +591,9 @@ module Aws::QConnect
       attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETED" | "UPDATE_FAILED")
       attr_accessor metadata: ::Hash[::String, ::String]
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      attr_accessor file_hash: ::String
       SENSITIVE: []
     end
 
@@ -822,7 +849,7 @@ module Aws::QConnect
       attr_accessor language: ::String
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:channels]
     end
 
     class CreateQuickResponseResponse
@@ -908,7 +935,9 @@ module Aws::QConnect
       attr_accessor billing_province: ::String
       attr_accessor billing_state: ::String
       attr_accessor custom: ::Hash[::String, ::String]
-      SENSITIVE: [:profile_id, :profile_arn, :first_name, :middle_name, :last_name, :account_number, :email_address, :phone_number, :additional_information, :party_type, :business_name, :birth_date, :gender, :mobile_phone_number, :home_phone_number, :business_phone_number, :business_email_address, :address1, :address2, :address3, :address4, :city, :county, :country, :postal_code, :province, :state, :shipping_address_1, :shipping_address_2, :shipping_address_3, :shipping_address_4, :shipping_city, :shipping_county, :shipping_country, :shipping_postal_code, :shipping_province, :shipping_state, :mailing_address_1, :mailing_address_2, :mailing_address_3, :mailing_address_4, :mailing_city, :mailing_county, :mailing_country, :mailing_postal_code, :mailing_province, :mailing_state, :billing_address_1, :billing_address_2, :billing_address_3, :billing_address_4, :billing_city, :billing_county, :billing_country, :billing_postal_code, :billing_province, :billing_state, :custom]
+      attr_accessor recommendations: ::Array[Types::ProfileRecommendation]
+      attr_accessor calculated_attributes: ::Hash[::String, ::String]
+      SENSITIVE: [:profile_id, :profile_arn, :first_name, :middle_name, :last_name, :account_number, :email_address, :phone_number, :additional_information, :party_type, :business_name, :birth_date, :gender, :mobile_phone_number, :home_phone_number, :business_phone_number, :business_email_address, :address1, :address2, :address3, :address4, :city, :county, :country, :postal_code, :province, :state, :shipping_address_1, :shipping_address_2, :shipping_address_3, :shipping_address_4, :shipping_city, :shipping_county, :shipping_country, :shipping_postal_code, :shipping_province, :shipping_state, :mailing_address_1, :mailing_address_2, :mailing_address_3, :mailing_address_4, :mailing_city, :mailing_county, :mailing_country, :mailing_postal_code, :mailing_province, :mailing_state, :billing_address_1, :billing_address_2, :billing_address_3, :billing_address_4, :billing_city, :billing_county, :billing_country, :billing_postal_code, :billing_province, :billing_state, :custom, :calculated_attributes]
     end
 
     class DataDetails
@@ -1234,7 +1263,7 @@ module Aws::QConnect
       attr_accessor source_configuration_summary: Types::MessageTemplateSourceConfigurationSummary
       attr_accessor grouping_configuration: Types::GroupingConfiguration
       attr_accessor default_attributes: Types::MessageTemplateAttributes
-      attr_accessor attribute_types: ::Array[("SYSTEM" | "AGENT" | "CUSTOMER_PROFILE" | "CUSTOM")]
+      attr_accessor attribute_types: ::Array[("SYSTEM" | "AGENT" | "CUSTOMER_PROFILE" | "CUSTOM" | "CASE")]
       attr_accessor attachments: ::Array[Types::MessageTemplateAttachment]
       attr_accessor is_active: bool
       attr_accessor version_number: ::Integer
@@ -1481,7 +1510,7 @@ module Aws::QConnect
     class GroupingConfiguration
       attr_accessor criteria: ::String
       attr_accessor values: ::Array[::String]
-      SENSITIVE: [:criteria]
+      SENSITIVE: [:criteria, :values]
     end
 
     class GuardrailContentFilterConfig
@@ -1528,7 +1557,7 @@ module Aws::QConnect
       attr_accessor definition: ::String
       attr_accessor examples: ::Array[::String]
       attr_accessor type: ("DENY")
-      SENSITIVE: [:name, :definition, :type]
+      SENSITIVE: [:name, :definition, :examples, :type]
     end
 
     class GuardrailWordConfig
@@ -1632,6 +1661,8 @@ module Aws::QConnect
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor ingestion_status: ("SYNC_FAILED" | "SYNCING_IN_PROGRESS" | "SYNC_SUCCESS" | "CREATE_IN_PROGRESS")
       attr_accessor ingestion_failure_reasons: ::Array[::String]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       SENSITIVE: []
     end
 
@@ -1647,6 +1678,8 @@ module Aws::QConnect
       attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
       attr_accessor description: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       SENSITIVE: []
     end
 
@@ -1987,7 +2020,8 @@ module Aws::QConnect
       attr_accessor agent_attributes: Types::AgentAttributes
       attr_accessor customer_profile_attributes: Types::CustomerProfileAttributes
       attr_accessor custom_attributes: ::Hash[::String, ::String]
-      SENSITIVE: [:custom_attributes]
+      attr_accessor case_attributes: ::Hash[::String, ::String]
+      SENSITIVE: [:custom_attributes, :case_attributes]
     end
 
     class MessageTemplateBodyContentProvider
@@ -2038,7 +2072,7 @@ module Aws::QConnect
       attr_accessor source_configuration_summary: Types::MessageTemplateSourceConfigurationSummary
       attr_accessor grouping_configuration: Types::GroupingConfiguration
       attr_accessor default_attributes: Types::MessageTemplateAttributes
-      attr_accessor attribute_types: ::Array[("SYSTEM" | "AGENT" | "CUSTOMER_PROFILE" | "CUSTOM")]
+      attr_accessor attribute_types: ::Array[("SYSTEM" | "AGENT" | "CUSTOMER_PROFILE" | "CUSTOM" | "CASE")]
       attr_accessor message_template_content_sha_256: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:channel]
@@ -2157,6 +2191,7 @@ module Aws::QConnect
       attr_accessor model_lifecycle: ("ACTIVE" | "LEGACY")
       attr_accessor legacy_timestamp: ::Time
       attr_accessor end_of_life_timestamp: ::Time
+      attr_accessor global_resiliency_status: ("SUPPORTED" | "UNSUPPORTED")
       SENSITIVE: []
     end
 
@@ -2240,7 +2275,7 @@ module Aws::QConnect
       attr_accessor locale: ::String
       attr_accessor input_schemas: ::Array[untyped]
       attr_accessor output_schemas: ::Array[untyped]
-      SENSITIVE: []
+      SENSITIVE: [:input_schemas, :output_schemas]
     end
 
     class OrchestratorConfigurationEntry
@@ -2268,6 +2303,29 @@ module Aws::QConnect
     class ProactiveRecommendationDataDetails
       attr_accessor next_message_token: ::String
       SENSITIVE: []
+    end
+
+    class ProfileCatalogItem
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor code: ::String
+      attr_accessor type: ::String
+      attr_accessor category: ::String
+      attr_accessor description: ::String
+      attr_accessor additional_information: ::String
+      attr_accessor image_link: ::String
+      attr_accessor link: ::String
+      attr_accessor created_at: ::String
+      attr_accessor updated_at: ::String
+      attr_accessor price: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: [:id, :name, :code, :type, :category, :description, :additional_information, :image_link, :link, :created_at, :updated_at, :price, :attributes]
+    end
+
+    class ProfileRecommendation
+      attr_accessor score: ::Float
+      attr_accessor catalog_item: Types::ProfileCatalogItem
+      SENSITIVE: [:score]
     end
 
     class PushADMMessageTemplateContent
@@ -2435,6 +2493,7 @@ module Aws::QConnect
       attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED")
       attr_accessor created_time: ::Time
       attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       attr_accessor contents: Types::QuickResponseContents
       attr_accessor description: ::String
       attr_accessor grouping_configuration: Types::GroupingConfiguration
@@ -2444,7 +2503,7 @@ module Aws::QConnect
       attr_accessor channels: ::Array[::String]
       attr_accessor language: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:channels]
     end
 
     class QuickResponseDataProvider
@@ -2499,6 +2558,7 @@ module Aws::QConnect
       attr_accessor contents: Types::QuickResponseContents
       attr_accessor created_time: ::Time
       attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       attr_accessor is_active: bool
       attr_accessor description: ::String
       attr_accessor grouping_configuration: Types::GroupingConfiguration
@@ -2509,7 +2569,7 @@ module Aws::QConnect
       attr_accessor attributes_not_interpolated: ::Array[::String]
       attr_accessor attributes_interpolated: ::Array[::String]
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: [:attributes_not_interpolated, :attributes_interpolated]
+      SENSITIVE: [:channels, :attributes_not_interpolated, :attributes_interpolated]
     end
 
     class QuickResponseSummary
@@ -2522,12 +2582,13 @@ module Aws::QConnect
       attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED")
       attr_accessor created_time: ::Time
       attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       attr_accessor description: ::String
       attr_accessor last_modified_by: ::String
       attr_accessor is_active: bool
       attr_accessor channels: ::Array[::String]
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:channels]
     end
 
     class RankingData
@@ -2566,6 +2627,30 @@ module Aws::QConnect
       end
     end
 
+    class RegisterAssistantReplicaKeyRequest
+      attr_accessor assistant_id: ::String
+      attr_accessor replica_kms_key: Types::ReplicaKmsKey
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterAssistantReplicaKeyResponse
+      attr_accessor assistant: Types::AssistantData
+      SENSITIVE: []
+    end
+
+    class RegisterKnowledgeBaseReplicaKeyRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor replica_kms_key: Types::ReplicaKmsKey
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterKnowledgeBaseReplicaKeyResponse
+      attr_accessor knowledge_base: Types::KnowledgeBaseData
+      SENSITIVE: []
+    end
+
     class RemoveAssistantAIAgentRequest
       attr_accessor assistant_id: ::String
       attr_accessor ai_agent_type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION")
@@ -2601,6 +2686,11 @@ module Aws::QConnect
 
     class RenderingConfiguration
       attr_accessor template_uri: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicaKmsKey
+      attr_accessor arn: ::String
       SENSITIVE: []
     end
 
@@ -2848,6 +2938,7 @@ module Aws::QConnect
 
     class ServerSideEncryptionConfiguration
       attr_accessor kms_key_id: ::String
+      attr_accessor replica_kms_keys: ::Array[Types::ReplicaKmsKey]
       SENSITIVE: []
     end
 
@@ -3223,6 +3314,7 @@ module Aws::QConnect
 
     class UnprocessableContentException
       attr_accessor message: ::String
+      attr_accessor reason: ("ORCHESTRATION_ERROR" | "AI_INFERENCE_MODEL_UNAVAILABLE")
       SENSITIVE: []
     end
 
@@ -3373,7 +3465,7 @@ module Aws::QConnect
       attr_accessor is_active: bool
       attr_accessor channels: ::Array[::String]
       attr_accessor language: ::String
-      SENSITIVE: []
+      SENSITIVE: [:channels]
     end
 
     class UpdateQuickResponseResponse

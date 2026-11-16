@@ -332,7 +332,7 @@ module Aws::BedrockAgent
       attr_accessor system: ::Array[Types::SystemContentBlock]
       attr_accessor input_variables: ::Array[Types::PromptInputVariable]
       attr_accessor tool_configuration: Types::ToolConfiguration
-      SENSITIVE: [:input_variables]
+      SENSITIVE: [:system, :input_variables]
     end
 
     class ChunkingConfiguration
@@ -989,7 +989,7 @@ module Aws::BedrockAgent
       attr_accessor inline_attributes: ::Array[Types::MetadataAttribute]
       attr_accessor s3_location: Types::CustomS3Location
       attr_accessor access_control_list: ::Array[Types::DocumentAccessControlEntry]
-      SENSITIVE: []
+      SENSITIVE: [:access_control_list]
     end
 
     class DuplicateConditionExpressionFlowValidationDetails
@@ -1725,6 +1725,7 @@ module Aws::BedrockAgent
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor failure_reasons: ::Array[::String]
+      attr_accessor metadata_configurations: ::Array[Types::MetadataConfiguration]
       SENSITIVE: []
     end
 
@@ -2106,7 +2107,7 @@ module Aws::BedrockAgent
     class Message
       attr_accessor role: ("user" | "assistant")
       attr_accessor content: ::Array[Types::ContentBlock]
-      SENSITIVE: []
+      SENSITIVE: [:content]
     end
 
     class MetadataAttribute
@@ -2121,7 +2122,14 @@ module Aws::BedrockAgent
       attr_accessor boolean_value: bool
       attr_accessor string_value: ::String
       attr_accessor string_list_value: ::Array[::String]
-      SENSITIVE: [:number_value, :string_value]
+      SENSITIVE: [:number_value, :string_value, :string_list_value]
+    end
+
+    class MetadataConfiguration
+      attr_accessor name: ::String
+      attr_accessor type: ("STRING" | "STRING_LIST")
+      attr_accessor searchability: ("ENABLED" | "DISABLED")
+      SENSITIVE: [:name]
     end
 
     class MetadataConfigurationForReranking
@@ -2702,7 +2710,7 @@ module Aws::BedrockAgent
       attr_accessor bucket_arn: ::String
       attr_accessor inclusion_prefixes: ::Array[::String]
       attr_accessor bucket_owner_account_id: ::String
-      SENSITIVE: []
+      SENSITIVE: [:inclusion_prefixes]
     end
 
     class S3Identifier
@@ -3224,6 +3232,7 @@ module Aws::BedrockAgent
       attr_accessor role_arn: ::String
       attr_accessor knowledge_base_configuration: Types::KnowledgeBaseConfiguration
       attr_accessor storage_configuration: Types::StorageConfiguration
+      attr_accessor metadata_configurations: ::Array[Types::MetadataConfiguration]
       SENSITIVE: []
     end
 

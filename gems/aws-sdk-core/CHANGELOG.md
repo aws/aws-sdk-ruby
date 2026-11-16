@@ -3,6 +3,56 @@ Unreleased Changes
 
 * Feature - Supported AWS credential providers now continue using cached credentials after refresh failures and retry refresh with backoff. This improves resilience to temporary credential source outages and standardizes credential refresh timing. During an outage, requests may reach the service and return authentication errors instead of failing client-side during credential refresh. See https://docs.aws.amazon.com/sdkref/latest/guide/feature-credential-refresh.html for details and the full list of providers. `AssumeRoleCredentials`, `AssumeRoleWebIdentityCredentials`, `SSOCredentials`, `LoginCredentials`, `InstanceProfileCredentials`, and `ECSCredentials` are updated accordingly, and requests rejected with an invalid credentials error such as `ExpiredToken` or `ExpiredTokenException` now invalidate the credentials that signed them and are retried, with the refresh subject to the backoff. `ProcessCredentials`, S3 Express, and customer-provided credential providers are out of scope and keep their existing behavior. `InstanceProfileCredentials` and `ECSCredentials` constructed directly now raise instead of silently returning unset credentials when the metadata endpoint is unreachable or returns no credentials on the first fetch.
 
+* Feature - Reduce memory usage of loaded service APIs by allocating shape metadata Hashes on first write.
+
+* Feature - Reuse the chunk size header of full chunks when streaming request bodies with checksum trailers.
+
+3.268.0 (2026-11-11)
+------------------
+
+* Feature - Reuse read buffers to reduce allocations when calculating request checksums sent in headers.
+
+3.267.0 (2026-11-10)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Updated Aws::Signin::Client with the latest API changes.
+
+* Feature - AWS SDK clients now use `standard` retry mode by default, providing consistent retry quotas and backoff behavior across AWS services. To continue using the previous behavior, set the client's `retry_mode` to `legacy` or set `AWS_RETRY_MODE=legacy`. The `AWS_NEW_RETRIES_2026` environment variable is no longer used.
+
+3.266.0 (2026-11-09)
+------------------
+
+* Feature - Updated Aws::Signin::Client with the latest API changes.
+
+* Feature - Adds the CreateBearerToken API, which exchanges your IAM credentials for a bearer token that can be used to access supported AWS services.
+
+* Feature - Reduce memory allocations when streaming request bodies with checksum trailers while preserving compatibility with custom IO bodies.
+
+3.265.0 (2026-11-06)
+------------------
+
+* Feature - Improve model-aware filtering of nested request parameters and sensitivity detection for nested collections.
+
+3.264.0 (2026-11-04)
+------------------
+
+* Feature - Support refreshing login credentials in the cached sign-in region, falling back to the configured region when missing or empty.
+
+* Issue - Fix clock skew correction for long-running requests and slow response downloads by using the time response headers are received.
+
+3.263.0 (2026-10-29)
+------------------
+
+* Feature - Reduce object allocation overhead for SDK responses. SDK clients now return `Aws::Response`, a subclass of `Seahorse::Client::Response`.
+
+* Issue - Verify the server certificate hostname for `AsyncClient` HTTP/2 connections when `ssl_verify_peer` is enabled. Connections now fail if the server certificate does not match the endpoint hostname.
+
 3.262.0 (2026-10-28)
 ------------------
 

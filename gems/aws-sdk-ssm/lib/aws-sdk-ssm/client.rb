@@ -264,7 +264,8 @@ module Aws::SSM
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::SSM
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -1541,9 +1542,10 @@ module Aws::SSM
     #   The configuration details for connecting to the third-party cloud
     #   environment.
     #
-    # @option params [required, String] :config_connector_arn
-    #   The ARN of the Amazon Web Services Config connector associated with
-    #   this cloud connector.
+    # @option params [String] :config_connector_arn
+    #   The ARN of the Amazon Web Services Config connector to associate with
+    #   this cloud connector. If you omit it, the cloud connector is created
+    #   without Amazon Web Services Config integration.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Optional metadata that you assign to a resource. Tags enable you to
@@ -1575,8 +1577,21 @@ module Aws::SSM
     #           ],
     #         },
     #       },
+    #       gcp_configuration: {
+    #         organization_id: "GcpOrganizationId",
+    #         workload_identity_pool_provider: "GcpWorkloadIdentityPoolProvider", # required
+    #         service_account_email: "GcpServiceAccountEmail", # required
+    #         targets: {
+    #           projects: [
+    #             {
+    #               project_id: "GcpProjectId", # required
+    #               project_display_name: "GcpProjectDisplayName",
+    #             },
+    #           ],
+    #         },
+    #       },
     #     },
-    #     config_connector_arn: "ConfigConnectorArn", # required
+    #     config_connector_arn: "ConfigConnectorArn",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -2859,6 +2874,18 @@ module Aws::SSM
     # Delete a parameter from the system. After deleting a parameter, wait
     # for at least 30 seconds to create a parameter with the same name.
     #
+    # <note markdown="1"> This operation is authorized against the `ssm:DeleteParameter` action.
+    # Denying that action alone doesn't restrict DeleteParameters, which is
+    # authorized against its own action. For more information, see
+    # [Restricting access to specific parameters and paths][1] in the
+    # *Amazon Web Services Systems Manager User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-restrict-parameter-access.html
+    #
     # @option params [required, String] :name
     #   The name of the parameter to delete.
     #
@@ -2886,6 +2913,17 @@ module Aws::SSM
 
     # Delete a list of parameters. After deleting a parameter, wait for at
     # least 30 seconds to create a parameter with the same name.
+    #
+    # This operation is authorized against the `ssm:DeleteParameters`
+    # action, not against `ssm:DeleteParameter`. Denying
+    # `ssm:DeleteParameter` for a parameter doesn't prevent a principal
+    # from deleting that parameter with this operation. For more
+    # information, see [Restricting access to specific parameters and
+    # paths][1] in the *Amazon Web Services Systems Manager User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-restrict-parameter-access.html
     #
     # @option params [required, Array<String>] :names
     #   The names of the parameters to delete. After deleting a parameter,
@@ -3043,6 +3081,35 @@ module Aws::SSM
     # @param [Hash] params ({})
     def delete_resource_policy(params = {}, options = {})
       req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Removes the Default Host Management Configuration (DHMC) for an Amazon
+    # Web Services account and Amazon Web Services Region. After you
+    # deregister DHMC, Amazon EC2 instances are no longer automatically
+    # managed as managed nodes by Amazon Web Services Systems Manager.
+    #
+    # To use this operation, you must have the following permissions:
+    #
+    # * You need the `ssm:GetServiceSetting` and `ssm:ResetServiceSetting`
+    #   permissions for the
+    #   `/ssm/managed-instance/default-ec2-instance-management-role` service
+    #   setting.
+    #
+    # ^
+    #
+    # If the registered role is service-managed, you also need the
+    # `iam:DeleteRole` permission so that Amazon Web Services Systems
+    # Manager can remove the role it created.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterDefaultHostManagementConfiguration AWS API Documentation
+    #
+    # @overload deregister_default_host_management_configuration(params = {})
+    # @param [Hash] params ({})
+    def deregister_default_host_management_configuration(params = {}, options = {})
+      req = build_request(:deregister_default_host_management_configuration, params)
       req.send_request(options)
     end
 
@@ -4357,7 +4424,7 @@ module Aws::SSM
     #   resp.instance_information_list[0].association_overview.instance_association_status_aggregated_count #=> Hash
     #   resp.instance_information_list[0].association_overview.instance_association_status_aggregated_count["StatusName"] #=> Integer
     #   resp.instance_information_list[0].source_id #=> String
-    #   resp.instance_information_list[0].source_type #=> String, one of "AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance", "Microsoft.Compute/virtualMachines"
+    #   resp.instance_information_list[0].source_type #=> String, one of "AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance", "Microsoft.Compute/virtualMachines", "compute.googleapis.com/Instance"
     #   resp.instance_information_list[0].source_location #=> String
     #   resp.next_token #=> String
     #
@@ -4678,7 +4745,7 @@ module Aws::SSM
     #   resp.instance_properties[0].association_overview.instance_association_status_aggregated_count #=> Hash
     #   resp.instance_properties[0].association_overview.instance_association_status_aggregated_count["StatusName"] #=> Integer
     #   resp.instance_properties[0].source_id #=> String
-    #   resp.instance_properties[0].source_type #=> String, one of "AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance", "Microsoft.Compute/virtualMachines"
+    #   resp.instance_properties[0].source_type #=> String, one of "AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance", "Microsoft.Compute/virtualMachines", "compute.googleapis.com/Instance"
     #   resp.instance_properties[0].source_location #=> String
     #   resp.instance_properties[0].availability_zone #=> String
     #   resp.next_token #=> String
@@ -6181,6 +6248,11 @@ module Aws::SSM
     #   resp.automation_execution.variables #=> Hash
     #   resp.automation_execution.variables["AutomationParameterKey"] #=> Array
     #   resp.automation_execution.variables["AutomationParameterKey"][0] #=> String
+    #   resp.automation_execution.targets_summary.total_count #=> Integer
+    #   resp.automation_execution.targets_summary.started_count #=> Integer
+    #   resp.automation_execution.targets_summary.completed_count #=> Integer
+    #   resp.automation_execution.targets_summary.successful_count #=> Integer
+    #   resp.automation_execution.targets_summary.failed_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetAutomationExecution AWS API Documentation
     #
@@ -6290,6 +6362,12 @@ module Aws::SSM
     #   resp.configuration.azure_configuration.targets.subscriptions #=> Array
     #   resp.configuration.azure_configuration.targets.subscriptions[0].id #=> String
     #   resp.configuration.azure_configuration.targets.subscriptions[0].display_name #=> String
+    #   resp.configuration.gcp_configuration.organization_id #=> String
+    #   resp.configuration.gcp_configuration.workload_identity_pool_provider #=> String
+    #   resp.configuration.gcp_configuration.service_account_email #=> String
+    #   resp.configuration.gcp_configuration.targets.projects #=> Array
+    #   resp.configuration.gcp_configuration.targets.projects[0].project_id #=> String
+    #   resp.configuration.gcp_configuration.targets.projects[0].project_display_name #=> String
     #   resp.config_connector_arn #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
@@ -7442,6 +7520,15 @@ module Aws::SSM
     #
     #  </note>
     #
+    # <note markdown="1"> This operation is authorized against the `ssm:GetParameter` action.
+    # Denying that action alone doesn't restrict GetParameters,
+    # GetParameterHistory, or GetParametersByPath, each of which is
+    # authorized against its own action. For more information, see [How
+    # Parameter Store authorizes parameter retrieval][1] in the *Amazon Web
+    # Services Systems Manager User Guide*.
+    #
+    #  </note>
+    #
     # <note markdown="1"> Parameter Store throughput defines the number of API transactions per
     # second (TPS) that Systems Manager can process. This applies to
     # `GetParameter`, `GetParameters`, and `PutParameter` API calls for your
@@ -7457,13 +7544,14 @@ module Aws::SSM
     # and workloads that need concurrent access to multiple parameters. If
     # you experience `ThrottlingException: Rate exceeded` errors, enable
     # higher throughput. For more information, see [Changing Parameter Store
-    # throughput][1].
+    # throughput][2].
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-retrieval-authorization.html
+    # [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html
     #
     # @option params [required, String] :name
     #   The name or Amazon Resource Name (ARN) of the parameter that you want
@@ -7528,6 +7616,20 @@ module Aws::SSM
     # parameter, then you must also update the key alias the parameter uses
     # to reference KMS. Otherwise, `GetParameterHistory` retrieves whatever
     # the original key alias was referencing.
+    #
+    # This operation is authorized against the `ssm:GetParameterHistory`
+    # action, not against `ssm:GetParameter`. Because parameter history
+    # includes every version of a parameter, including the current one, a
+    # principal who is denied `ssm:GetParameter`, `ssm:GetParameters`, and
+    # `ssm:GetParametersByPath` but allowed `ssm:GetParameterHistory` can
+    # still read the current value. To restrict access to a parameter value,
+    # deny every action that can return it. For more information, see [How
+    # Parameter Store authorizes parameter retrieval][1] in the *Amazon Web
+    # Services Systems Manager User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-retrieval-authorization.html
     #
     # @option params [required, String] :name
     #   The name or Amazon Resource Name (ARN) of the parameter for which you
@@ -7602,6 +7704,14 @@ module Aws::SSM
     #
     #  </note>
     #
+    # This operation is authorized against the `ssm:GetParameters` action,
+    # not against `ssm:GetParameter`. Denying `ssm:GetParameter` for a
+    # parameter doesn't prevent a principal from retrieving that parameter
+    # with this operation. To restrict access to a parameter value, deny
+    # every action that can return it. For more information, see [How
+    # Parameter Store authorizes parameter retrieval][1] in the *Amazon Web
+    # Services Systems Manager User Guide*.
+    #
     # Parameter names can't contain spaces. The service removes any spaces
     # specified for the beginning or end of a parameter name. If the
     # specified name for a parameter contains spaces between characters, the
@@ -7622,13 +7732,14 @@ module Aws::SSM
     # and workloads that need concurrent access to multiple parameters. If
     # you experience `ThrottlingException: Rate exceeded` errors, enable
     # higher throughput. For more information, see [Changing Parameter Store
-    # throughput][1].
+    # throughput][2].
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-retrieval-authorization.html
+    # [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html
     #
     # @option params [required, Array<String>] :names
     #   The names or Amazon Resource Names (ARNs) of the parameters that you
@@ -7695,6 +7806,21 @@ module Aws::SSM
     # Retrieve information about one or more parameters under a specified
     # level in a hierarchy.
     #
+    # This operation is authorized against the `ssm:GetParametersByPath`
+    # action for the path that you specify in the request. It isn't
+    # authorized against the individual parameters that it returns, and it
+    # isn't authorized against `ssm:GetParameter`. A principal who is
+    # allowed to call this operation for the path `/a` with `Recursive` set
+    # to `true` receives every parameter under that path, including `/a/b`,
+    # even if a policy explicitly denies access to `/a/b`.
+    #
+    #  To prevent a parameter from being returned by this operation, deny
+    # the
+    # `ssm:GetParametersByPath` action on every ancestor path that could
+    # include the parameter in its results. For more information, see
+    # [Restricting access to specific parameters and paths][1] in the
+    # *Amazon Web Services Systems Manager User Guide*.
+    #
     # Request results are returned on a best-effort basis. If you specify
     # `MaxResults` in the request, the response includes information up to
     # the limit specified. The number of items returned, however, can be
@@ -7709,6 +7835,10 @@ module Aws::SSM
     # specified name for a parameter contains spaces between characters, the
     # request fails with a `ValidationException` error.
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-restrict-parameter-access.html
+    #
     # @option params [required, String] :path
     #   The hierarchy for the parameter. Hierarchies start with a forward
     #   slash (/). The hierarchy is the parameter name except the last part of
@@ -7719,13 +7849,6 @@ module Aws::SSM
     #
     # @option params [Boolean] :recursive
     #   Retrieve all parameters within a hierarchy.
-    #
-    #   If a user has access to a path, then the user can access all levels of
-    #   that path. For example, if a user has permission to access path `/a`,
-    #   then the user can also access `/a/b`. Even if a user has explicitly
-    #   been denied access in IAM for parameter `/a/b`, they can still call
-    #   the GetParametersByPath API operation recursively for `/a` and view
-    #   `/a/b`.
     #
     # @option params [Array<Types::ParameterStringFilter>] :parameter_filters
     #   Filters to limit the request results.
@@ -8325,7 +8448,7 @@ module Aws::SSM
     #     next_token: "NextToken",
     #     filters: [
     #       {
-    #         filter_key: "SubscriptionId", # accepts SubscriptionId, TenantId
+    #         filter_key: "SubscriptionId", # accepts SubscriptionId, TenantId, ProjectId, OrganizationId
     #         filter_values: ["CloudConnectorFilterValue"],
     #       },
     #     ],
@@ -8340,6 +8463,8 @@ module Aws::SSM
     #   resp.cloud_connectors[0].role_arn #=> String
     #   resp.cloud_connectors[0].created_at #=> Time
     #   resp.cloud_connectors[0].updated_at #=> Time
+    #   resp.cloud_connectors[0].provider #=> String, one of "Azure", "GCP"
+    #   resp.cloud_connectors[0].config_connector_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCloudConnectors AWS API Documentation
@@ -9103,7 +9228,7 @@ module Aws::SSM
     #   resp.nodes[0].node_type.instance.platform_name #=> String
     #   resp.nodes[0].node_type.instance.platform_version #=> String
     #   resp.nodes[0].node_type.instance.resource_type #=> String, one of "ManagedInstance", "EC2Instance"
-    #   resp.nodes[0].node_type.instance.source_type #=> String, one of "AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance", "Microsoft.Compute/virtualMachines"
+    #   resp.nodes[0].node_type.instance.source_type #=> String, one of "AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance", "Microsoft.Compute/virtualMachines", "compute.googleapis.com/Instance"
     #   resp.nodes[0].node_type.instance.source_id #=> String
     #   resp.nodes[0].node_type.instance.source_location #=> String
     #   resp.nodes[0].node_type.instance.availability_zone #=> String
@@ -10074,6 +10199,8 @@ module Aws::SSM
     #
     #   * The parameter uses a parameter policy.
     #
+    #   * The parameter uses the `url`, `json`, or `jsonc` data type.
+    #
     #   * More than 10,000 parameters already exist in your Amazon Web
     #     Services account in the current Amazon Web Services Region.
     #
@@ -10116,8 +10243,9 @@ module Aws::SSM
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html
     #
     # @option params [String] :data_type
-    #   The data type for a `String` parameter. Supported data types include
-    #   plain text and Amazon Machine Image (AMI) IDs.
+    #   The data type of the parameter value. Parameter Store validates the
+    #   value against the data type when you create or update the parameter.
+    #   The default is `text`, which performs no validation.
     #
     #   **The following data type values are supported.**
     #
@@ -10126,6 +10254,45 @@ module Aws::SSM
     #   * `aws:ec2:image`
     #
     #   * `aws:ssm:integration`
+    #
+    #   * `aws:region`
+    #
+    #   * `aws:account:id`
+    #
+    #   * `boolean`
+    #
+    #   * `integer`
+    #
+    #   * `float`
+    #
+    #   * `binary`
+    #
+    #   * `hostname`
+    #
+    #   * `email`
+    #
+    #   * `ipv4-address`
+    #
+    #   * `ipv6-address`
+    #
+    #   * `url`
+    #
+    #   * `json`
+    #
+    #   * `jsonc`
+    #
+    #   For more information about the supported data types, see [Working with
+    #   parameter data types in Parameter Store][1].
+    #
+    #   <note markdown="1"> Regardless of a parameter's data type, the Parameter Store API
+    #   operations that retrieve parameters, such as `GetParameter`,
+    #   `GetParameters`, and `GetParametersByPath`, return the parameter value
+    #   as a string. For example, if a parameter has the data type `integer`
+    #   and the value `443`, `GetParameter` returns the value as the string
+    #   `"443"`. Convert the value to the type your application needs after
+    #   you retrieve it.
+    #
+    #    </note>
     #
     #   When you create a `String` parameter and specify `aws:ec2:image`,
     #   Amazon Web Services Systems Manager validates the parameter value is
@@ -10143,16 +10310,17 @@ module Aws::SSM
     #   success, but the asynchronous validation will fail and the parameter
     #   will not be created or updated. To monitor whether your
     #   `aws:ec2:image` parameters are created successfully, see [Setting up
-    #   notifications or trigger actions based on Parameter Store events][1].
+    #   notifications or trigger actions based on Parameter Store events][2].
     #   For more information about AMI format validation , see [Native
-    #   parameter support for Amazon Machine Image IDs][2].
+    #   parameter support for Amazon Machine Image IDs][3].
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-cwe.html
-    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-data-types.html
+    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-cwe.html
+    #   [3]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html
     #
     # @return [Types::PutParameterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10300,6 +10468,84 @@ module Aws::SSM
     # @param [Hash] params ({})
     def put_resource_policy(params = {}, options = {})
       req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Enables Default Host Management Configuration (DHMC) for the current
+    # Amazon Web Services account and Amazon Web Services Region. With DHMC
+    # enabled, you don't need to configure additional resources, such as an
+    # instance profile, to use your Amazon EC2 instances as managed nodes in
+    # Amazon Web Services Systems Manager.
+    #
+    # To use this operation, you must have the following permissions:
+    #
+    # * You need the `ssm:GetServiceSetting` and `ssm:UpdateServiceSetting`
+    #   permissions for the
+    #   `/ssm/managed-instance/default-ec2-instance-management-role` service
+    #   setting.
+    #
+    # * You need the `iam:GetRole` and `iam:PassRole` permissions for the
+    #   role used for Default Host Management Configuration.
+    #
+    # If `PermissionModel` is `SERVICE_MANAGED`, you also need the
+    # `iam:CreateRole` and `iam:AttachRolePolicy` permissions so that Amazon
+    # Web Services Systems Manager can create and configure the role on your
+    # behalf.
+    #
+    # @option params [required, String] :permission_model
+    #   The permission model that determines how the IAM role for Default Host
+    #   Management Configuration is provided.
+    #
+    #   The permission model can be one of the following values:
+    #
+    #   SERVICE\_MANAGED
+    #
+    #   : Amazon Web Services Systems Manager creates and manages the role on
+    #     your behalf.
+    #
+    #   SELF\_MANAGED
+    #
+    #   : You provide the role to register in `RoleArn`.
+    #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of the self-managed IAM role that you
+    #   register for Default Host Management Configuration. The requirement
+    #   for this value depends on the permission model:
+    #
+    #   * If `PermissionModel` is `SELF_MANAGED`, this value is required.
+    #
+    #   * If `PermissionModel` is `SERVICE_MANAGED`, this value must not be
+    #     set.
+    #
+    # @option params [Boolean] :overwrite
+    #   Specifies whether to override the role that is currently registered
+    #   for Default Host Management Configuration. The default is `false`,
+    #   which acts as a guardrail against accidentally replacing an existing
+    #   configuration. Set this to `true` to replace the currently registered
+    #   role.
+    #
+    # @return [Types::RegisterDefaultHostManagementConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterDefaultHostManagementConfigurationResult#role_arn #role_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_default_host_management_configuration({
+    #     permission_model: "SERVICE_MANAGED", # required, accepts SERVICE_MANAGED, SELF_MANAGED
+    #     role_arn: "DHMCRoleArn",
+    #     overwrite: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterDefaultHostManagementConfiguration AWS API Documentation
+    #
+    # @overload register_default_host_management_configuration(params = {})
+    # @param [Hash] params ({})
+    def register_default_host_management_configuration(params = {}, options = {})
+      req = build_request(:register_default_host_management_configuration, params)
       req.send_request(options)
     end
 
@@ -12551,6 +12797,19 @@ module Aws::SSM
     #           ],
     #         },
     #       },
+    #       gcp_configuration: {
+    #         organization_id: "GcpOrganizationId",
+    #         workload_identity_pool_provider: "GcpWorkloadIdentityPoolProvider", # required
+    #         service_account_email: "GcpServiceAccountEmail", # required
+    #         targets: {
+    #           projects: [
+    #             {
+    #               project_id: "GcpProjectId", # required
+    #               project_display_name: "GcpProjectDisplayName",
+    #             },
+    #           ],
+    #         },
+    #       },
     #     },
     #     description: "CloudConnectorDescription",
     #   })
@@ -14050,10 +14309,10 @@ module Aws::SSM
     #
     #   resp.validation_findings #=> Array
     #   resp.validation_findings[0].type #=> String, one of "INFO", "WARN", "ERROR"
-    #   resp.validation_findings[0].code #=> String, one of "TargetInaccessible", "TargetUnusable", "TargetStateWarning", "AwsRoleAssumptionFailed", "WebIdentityTokenFailed", "OutboundWebIdentityFederationDisabled", "ProviderCredentialCreationFailed", "TenantSummary", "SubscriptionAccessible"
+    #   resp.validation_findings[0].code #=> String, one of "TargetInaccessible", "TargetUnusable", "TargetMissingPermissions", "TargetApiDisabled", "TargetStateWarning", "AwsRoleAssumptionFailed", "WebIdentityTokenFailed", "OutboundWebIdentityFederationDisabled", "ProviderCredentialCreationFailed", "TenantSummary", "SubscriptionAccessible"
     #   resp.validation_findings[0].message #=> String
     #   resp.validation_findings[0].provider_message #=> String
-    #   resp.validation_findings[0].scope.type #=> String, one of "azure:tenant", "azure:subscription"
+    #   resp.validation_findings[0].scope.type #=> String, one of "azure:tenant", "azure:subscription", "gcp:organization", "gcp:project"
     #   resp.validation_findings[0].scope.id #=> String
     #   resp.next_token #=> String
     #
@@ -14084,7 +14343,7 @@ module Aws::SSM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.227.0'
+      context[:gem_version] = '1.234.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

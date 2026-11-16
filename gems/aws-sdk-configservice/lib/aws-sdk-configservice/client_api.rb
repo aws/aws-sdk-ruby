@@ -285,6 +285,10 @@ module Aws::ConfigService
     FieldInfoList = Shapes::ListShape.new(name: 'FieldInfoList')
     FieldName = Shapes::StringShape.new(name: 'FieldName')
     FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
+    GcpConnectorConfiguration = Shapes::StructureShape.new(name: 'GcpConnectorConfiguration')
+    GcpOrganizationId = Shapes::StringShape.new(name: 'GcpOrganizationId')
+    GcpServiceAccountEmail = Shapes::StringShape.new(name: 'GcpServiceAccountEmail')
+    GcpWorkloadIdentityPoolProvider = Shapes::StringShape.new(name: 'GcpWorkloadIdentityPoolProvider')
     GetAggregateComplianceDetailsByConfigRuleRequest = Shapes::StructureShape.new(name: 'GetAggregateComplianceDetailsByConfigRuleRequest')
     GetAggregateComplianceDetailsByConfigRuleResponse = Shapes::StructureShape.new(name: 'GetAggregateComplianceDetailsByConfigRuleResponse')
     GetAggregateConfigRuleComplianceSummaryRequest = Shapes::StructureShape.new(name: 'GetAggregateConfigRuleComplianceSummaryRequest')
@@ -1063,6 +1067,7 @@ module Aws::ConfigService
     Connector.struct_class = Types::Connector
 
     ConnectorConfiguration.add_member(:azure, Shapes::ShapeRef.new(shape: AzureConnectorConfiguration, location_name: "azure"))
+    ConnectorConfiguration.add_member(:gcp, Shapes::ShapeRef.new(shape: GcpConnectorConfiguration, location_name: "gcp"))
     ConnectorConfiguration.struct_class = Types::ConnectorConfiguration
 
     ConnectorFilter.add_member(:filter_name, Shapes::ShapeRef.new(shape: ConnectorFilterName, location_name: "filterName"))
@@ -1076,7 +1081,9 @@ module Aws::ConfigService
     ConnectorSummary.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
     ConnectorSummary.add_member(:name, Shapes::ShapeRef.new(shape: ConnectorName, required: true, location_name: "name"))
     ConnectorSummary.add_member(:provider, Shapes::ShapeRef.new(shape: Provider, required: true, location_name: "provider"))
-    ConnectorSummary.add_member(:tenant_identifier, Shapes::ShapeRef.new(shape: AzureTenantIdentifier, required: true, location_name: "tenantIdentifier"))
+    ConnectorSummary.add_member(:tenant_identifier, Shapes::ShapeRef.new(shape: AzureTenantIdentifier, location_name: "tenantIdentifier"))
+    ConnectorSummary.add_member(:gcp_organization_id, Shapes::ShapeRef.new(shape: GcpOrganizationId, location_name: "gcpOrganizationId"))
+    ConnectorSummary.add_member(:service_account_email, Shapes::ShapeRef.new(shape: GcpServiceAccountEmail, location_name: "serviceAccountEmail"))
     ConnectorSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: Date, required: true, location_name: "createdTime"))
     ConnectorSummary.struct_class = Types::ConnectorSummary
 
@@ -1499,6 +1506,11 @@ module Aws::ConfigService
     FieldInfoList.member = Shapes::ShapeRef.new(shape: FieldInfo)
 
     FilterValueList.member = Shapes::ShapeRef.new(shape: String)
+
+    GcpConnectorConfiguration.add_member(:gcp_organization_id, Shapes::ShapeRef.new(shape: GcpOrganizationId, location_name: "gcpOrganizationId"))
+    GcpConnectorConfiguration.add_member(:service_account_email, Shapes::ShapeRef.new(shape: GcpServiceAccountEmail, required: true, location_name: "serviceAccountEmail"))
+    GcpConnectorConfiguration.add_member(:workload_identity_pool_provider, Shapes::ShapeRef.new(shape: GcpWorkloadIdentityPoolProvider, required: true, location_name: "workloadIdentityPoolProvider"))
+    GcpConnectorConfiguration.struct_class = Types::GcpConnectorConfiguration
 
     GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
     GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, required: true, location_name: "ConfigRuleName"))

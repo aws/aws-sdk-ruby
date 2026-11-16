@@ -174,7 +174,7 @@ module Aws::SageMakerGeospatial
     class Geometry
       attr_accessor coordinates: ::Array[::Array[::Array[::Float]]]
       attr_accessor type: ::String
-      SENSITIVE: []
+      SENSITIVE: [:coordinates]
     end
 
     class GetEarthObservationJobInput
@@ -416,7 +416,7 @@ module Aws::SageMakerGeospatial
 
     class MultiPolygonGeometryInput
       attr_accessor coordinates: ::Array[::Array[::Array[::Array[::Float]]]]
-      SENSITIVE: []
+      SENSITIVE: [:coordinates]
     end
 
     class Operation
@@ -456,7 +456,7 @@ module Aws::SageMakerGeospatial
 
     class PolygonGeometryInput
       attr_accessor coordinates: ::Array[::Array[::Array[::Float]]]
-      SENSITIVE: []
+      SENSITIVE: [:coordinates]
     end
 
     class Properties

@@ -121,6 +121,7 @@ module Aws::MediaConvert
     CaptionDestinationSettings = Shapes::StructureShape.new(name: 'CaptionDestinationSettings')
     CaptionDestinationType = Shapes::StringShape.new(name: 'CaptionDestinationType')
     CaptionSelector = Shapes::StructureShape.new(name: 'CaptionSelector')
+    CaptionSource = Shapes::StringShape.new(name: 'CaptionSource')
     CaptionSourceByteRateLimit = Shapes::StringShape.new(name: 'CaptionSourceByteRateLimit')
     CaptionSourceConvertPaintOnToPopOn = Shapes::StringShape.new(name: 'CaptionSourceConvertPaintOnToPopOn')
     CaptionSourceFramerate = Shapes::StructureShape.new(name: 'CaptionSourceFramerate')
@@ -289,7 +290,9 @@ module Aws::MediaConvert
     ElementalInferenceConfiguration = Shapes::StructureShape.new(name: 'ElementalInferenceConfiguration')
     ElementalInferenceFeature = Shapes::StringShape.new(name: 'ElementalInferenceFeature')
     ElementalInferenceFeed = Shapes::StructureShape.new(name: 'ElementalInferenceFeed')
+    ElementalInferenceFeedConfigurationSource = Shapes::StructureShape.new(name: 'ElementalInferenceFeedConfigurationSource')
     ElementalInferenceFeedManagementState = Shapes::StringShape.new(name: 'ElementalInferenceFeedManagementState')
+    ElementalInferenceSettings = Shapes::StructureShape.new(name: 'ElementalInferenceSettings')
     EmbeddedConvert608To708 = Shapes::StringShape.new(name: 'EmbeddedConvert608To708')
     EmbeddedDestinationSettings = Shapes::StructureShape.new(name: 'EmbeddedDestinationSettings')
     EmbeddedSourceSettings = Shapes::StructureShape.new(name: 'EmbeddedSourceSettings')
@@ -1028,6 +1031,7 @@ module Aws::MediaConvert
     __stringPatternAZaZ23AZaZ = Shapes::StringShape.new(name: '__stringPatternAZaZ23AZaZ')
     __stringPatternAZaZ23AZaZ09 = Shapes::StringShape.new(name: '__stringPatternAZaZ23AZaZ09')
     __stringPatternArnAwsAZ09EventsAZ090912ConnectionAZAZ09AF0936 = Shapes::StringShape.new(name: '__stringPatternArnAwsAZ09EventsAZ090912ConnectionAZAZ09AF0936')
+    __stringPatternArnAwsElementalInferenceFeedAZ0919 = Shapes::StringShape.new(name: '__stringPatternArnAwsElementalInferenceFeedAZ0919')
     __stringPatternArnAwsUsGovAcm = Shapes::StringShape.new(name: '__stringPatternArnAwsUsGovAcm')
     __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932 = Shapes::StringShape.new(name: '__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932')
     __stringPatternDD = Shapes::StringShape.new(name: '__stringPatternDD')
@@ -1294,11 +1298,13 @@ module Aws::MediaConvert
 
     CancelJobResponse.struct_class = Types::CancelJobResponse
 
+    CaptionDescription.add_member(:audio_source_names, Shapes::ShapeRef.new(shape: __listOf__stringMin1, location_name: "audioSourceNames"))
     CaptionDescription.add_member(:caption_selector_name, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "captionSelectorName"))
     CaptionDescription.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringPatternAZaZ23AZaZ, location_name: "customLanguageCode"))
     CaptionDescription.add_member(:destination_settings, Shapes::ShapeRef.new(shape: CaptionDestinationSettings, location_name: "destinationSettings"))
     CaptionDescription.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "languageCode"))
     CaptionDescription.add_member(:language_description, Shapes::ShapeRef.new(shape: __string, location_name: "languageDescription"))
+    CaptionDescription.add_member(:source, Shapes::ShapeRef.new(shape: CaptionSource, location_name: "source"))
     CaptionDescription.struct_class = Types::CaptionDescription
 
     CaptionDescriptionPreset.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringPatternAZaZ23AZaZ, location_name: "customLanguageCode"))
@@ -1495,6 +1501,7 @@ module Aws::MediaConvert
     CreateJobRequest.add_member(:acceleration_settings, Shapes::ShapeRef.new(shape: AccelerationSettings, location_name: "accelerationSettings"))
     CreateJobRequest.add_member(:billing_tags_source, Shapes::ShapeRef.new(shape: BillingTagsSource, location_name: "billingTagsSource"))
     CreateJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientRequestToken", metadata: {"idempotencyToken" => true}))
+    CreateJobRequest.add_member(:elemental_inference_settings, Shapes::ShapeRef.new(shape: ElementalInferenceSettings, location_name: "elementalInferenceSettings"))
     CreateJobRequest.add_member(:hop_destinations, Shapes::ShapeRef.new(shape: __listOfHopDestination, location_name: "hopDestinations"))
     CreateJobRequest.add_member(:job_engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "jobEngineVersion"))
     CreateJobRequest.add_member(:job_template, Shapes::ShapeRef.new(shape: __string, location_name: "jobTemplate"))
@@ -1514,6 +1521,7 @@ module Aws::MediaConvert
     CreateJobTemplateRequest.add_member(:acceleration_settings, Shapes::ShapeRef.new(shape: AccelerationSettings, location_name: "accelerationSettings"))
     CreateJobTemplateRequest.add_member(:category, Shapes::ShapeRef.new(shape: __string, location_name: "category"))
     CreateJobTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    CreateJobTemplateRequest.add_member(:elemental_inference_settings, Shapes::ShapeRef.new(shape: ElementalInferenceSettings, location_name: "elementalInferenceSettings"))
     CreateJobTemplateRequest.add_member(:hop_destinations, Shapes::ShapeRef.new(shape: __listOfHopDestination, location_name: "hopDestinations"))
     CreateJobTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     CreateJobTemplateRequest.add_member(:priority, Shapes::ShapeRef.new(shape: __integerMinNegative50Max50, location_name: "priority"))
@@ -1778,6 +1786,12 @@ module Aws::MediaConvert
     ElementalInferenceFeed.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     ElementalInferenceFeed.add_member(:feed_management_state, Shapes::ShapeRef.new(shape: ElementalInferenceFeedManagementState, location_name: "feedManagementState"))
     ElementalInferenceFeed.struct_class = Types::ElementalInferenceFeed
+
+    ElementalInferenceFeedConfigurationSource.add_member(:feed_arn, Shapes::ShapeRef.new(shape: __stringPatternArnAwsElementalInferenceFeedAZ0919, location_name: "feedArn"))
+    ElementalInferenceFeedConfigurationSource.struct_class = Types::ElementalInferenceFeedConfigurationSource
+
+    ElementalInferenceSettings.add_member(:feed_configuration_source, Shapes::ShapeRef.new(shape: ElementalInferenceFeedConfigurationSource, location_name: "feedConfigurationSource"))
+    ElementalInferenceSettings.struct_class = Types::ElementalInferenceSettings
 
     EmbeddedDestinationSettings.add_member(:destination_608_channel_number, Shapes::ShapeRef.new(shape: __integerMin1Max4, location_name: "destination608ChannelNumber"))
     EmbeddedDestinationSettings.add_member(:destination_708_service_number, Shapes::ShapeRef.new(shape: __integerMin1Max6, location_name: "destination708ServiceNumber"))
@@ -2240,6 +2254,7 @@ module Aws::MediaConvert
     Job.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "createdAt"))
     Job.add_member(:current_phase, Shapes::ShapeRef.new(shape: JobPhase, location_name: "currentPhase"))
     Job.add_member(:elemental_inference_configuration, Shapes::ShapeRef.new(shape: ElementalInferenceConfiguration, location_name: "elementalInferenceConfiguration"))
+    Job.add_member(:elemental_inference_settings, Shapes::ShapeRef.new(shape: ElementalInferenceSettings, location_name: "elementalInferenceSettings"))
     Job.add_member(:error_code, Shapes::ShapeRef.new(shape: __integer, location_name: "errorCode"))
     Job.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "errorMessage"))
     Job.add_member(:hop_destinations, Shapes::ShapeRef.new(shape: __listOfHopDestination, location_name: "hopDestinations"))
@@ -2296,6 +2311,7 @@ module Aws::MediaConvert
     JobTemplate.add_member(:category, Shapes::ShapeRef.new(shape: __string, location_name: "category"))
     JobTemplate.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "createdAt"))
     JobTemplate.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    JobTemplate.add_member(:elemental_inference_settings, Shapes::ShapeRef.new(shape: ElementalInferenceSettings, location_name: "elementalInferenceSettings"))
     JobTemplate.add_member(:hop_destinations, Shapes::ShapeRef.new(shape: __listOfHopDestination, location_name: "hopDestinations"))
     JobTemplate.add_member(:last_updated, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "lastUpdated"))
     JobTemplate.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
@@ -3000,6 +3016,7 @@ module Aws::MediaConvert
     UpdateJobTemplateRequest.add_member(:acceleration_settings, Shapes::ShapeRef.new(shape: AccelerationSettings, location_name: "accelerationSettings"))
     UpdateJobTemplateRequest.add_member(:category, Shapes::ShapeRef.new(shape: __string, location_name: "category"))
     UpdateJobTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    UpdateJobTemplateRequest.add_member(:elemental_inference_settings, Shapes::ShapeRef.new(shape: ElementalInferenceSettings, location_name: "elementalInferenceSettings"))
     UpdateJobTemplateRequest.add_member(:hop_destinations, Shapes::ShapeRef.new(shape: __listOfHopDestination, location_name: "hopDestinations"))
     UpdateJobTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "name"))
     UpdateJobTemplateRequest.add_member(:priority, Shapes::ShapeRef.new(shape: __integerMinNegative50Max50, location_name: "priority"))
@@ -3846,8 +3863,8 @@ module Aws::MediaConvert
         o.http_request_uri = "/2017-08-29/probe"
         o.input = Shapes::ShapeRef.new(shape: ProbeRequest)
         o.output = Shapes::ShapeRef.new(shape: ProbeResponse)
-        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

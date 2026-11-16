@@ -264,7 +264,8 @@ module Aws::SageMaker
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::SageMaker
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -2933,7 +2934,7 @@ module Aws::SageMaker
     #         },
     #         image_id: "ImageId",
     #         auto_patch_config: {
-    #           patching_strategy: "WhenIdle", # required, accepts WhenIdle, WhenAllIdle
+    #           patching_strategy: "WhenIdle", # required, accepts WhenIdle, WhenAllIdle, DrainFirst
     #           patch_schedule: {
     #             next_patch_date: Time.now,
     #           },
@@ -2954,6 +2955,11 @@ module Aws::SageMaker
     #                 alarm_name: "AlarmName", # required
     #               },
     #             ],
+    #           },
+    #           idle_wait_window_in_seconds: 1,
+    #           drain_policy: {
+    #             drain_timeout_in_seconds: 1,
+    #             on_drain_timeout: "Force", # accepts Force, Skip
     #           },
     #         },
     #         image_release_version: "ImageReleaseVersion",
@@ -3100,6 +3106,95 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def create_cluster(params = {}, options = {})
       req = build_request(:create_cluster, params)
+      req.send_request(options)
+    end
+
+    # Installs an extension, such as `sagemaker-observability`, on a
+    # SageMaker HyperPod cluster orchestrated by Slurm. The cluster must
+    # have `NodeProvisioningMode` set to `Continuous` and can have only one
+    # extension with a given name. To track the installation, call
+    # `DescribeClusterExtension`.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on
+    #   which to install the extension. The cluster must use Slurm as the
+    #   orchestrator and have `NodeProvisioningMode` set to `Continuous`.
+    #
+    # @option params [required, String] :extension_name
+    #   The name of the extension to install, for example
+    #   `sagemaker-observability`.
+    #
+    # @option params [String] :extension_version
+    #   The version of the extension to install, in `MAJOR.MINOR.PATCH`
+    #   format, for example `1.0.0`. If you don't specify a version,
+    #   SageMaker HyperPod installs the latest available version of the
+    #   extension.
+    #
+    # @option params [String] :configuration_values
+    #   The configuration settings for the extension, as a JSON object
+    #   serialized as a string, for example
+    #   `{"metricsProvider":{"nodeMetrics":{"level":"ADVANCED"}}}`. Each
+    #   extension version defines which settings it accepts. SageMaker
+    #   HyperPod validates the settings against that definition, and rejects
+    #   the request if a setting is unknown or has an invalid value. Settings
+    #   that you omit use the extension's default values. If you omit
+    #   `ConfigurationValues`, all settings use their default values.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Custom tags for managing the extension as an Amazon Web Services
+    #   resource. You can add tags to your extension in the same way you add
+    #   them in other Amazon Web Services services that support tagging. To
+    #   learn more about tagging Amazon Web Services resources in general, see
+    #   [Tagging Amazon Web Services Resources User Guide][1]. To use this
+    #   operation to add tags when you create an extension, you must have the
+    #   `sagemaker:AddTags` permission.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide so that the
+    #   operation completes no more than one time. This token is valid for 8
+    #   hours. If you retry the request with the same client token and the
+    #   same parameters within this time, the API returns the Amazon Resource
+    #   Name (ARN) of the extension that the original request created, without
+    #   creating a duplicate. If you use the same client token with different
+    #   parameters, the request fails.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateClusterExtensionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateClusterExtensionResponse#extension_arn #extension_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_cluster_extension({
+    #     cluster_arn: "ClusterArn", # required
+    #     extension_name: "ExtensionName", # required
+    #     extension_version: "ExtensionVersion",
+    #     configuration_values: "ExtensionConfigurationValues",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     client_token: "CreateClusterExtensionRequestClientTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.extension_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateClusterExtension AWS API Documentation
+    #
+    # @overload create_cluster_extension(params = {})
+    # @param [Hash] params ({})
+    def create_cluster_extension(params = {}, options = {})
+      req = build_request(:create_cluster_extension, params)
       req.send_request(options)
     end
 
@@ -4911,6 +5006,11 @@ module Aws::SageMaker
     #           capacity_reservation_preference: "capacity-reservations-only", # accepts capacity-reservations-only
     #           ml_reservation_arn: "MlReservationArn",
     #         },
+    #         accelerator_partition_layouts: [
+    #           {
+    #             accelerator_partition_types: ["AcceleratorPartitionType"],
+    #           },
+    #         ],
     #       },
     #     ],
     #     data_capture_config: {
@@ -5033,6 +5133,11 @@ module Aws::SageMaker
     #           capacity_reservation_preference: "capacity-reservations-only", # accepts capacity-reservations-only
     #           ml_reservation_arn: "MlReservationArn",
     #         },
+    #         accelerator_partition_layouts: [
+    #           {
+    #             accelerator_partition_types: ["AcceleratorPartitionType"],
+    #           },
+    #         ],
     #       },
     #     ],
     #     execution_role_arn: "RoleArn",
@@ -6500,6 +6605,7 @@ module Aws::SageMaker
     #         number_of_accelerator_devices_required: 1.0,
     #         min_memory_required_in_mb: 1, # required
     #         max_memory_required_in_mb: 1,
+    #         accelerator_partition_type: "AcceleratorPartitionType",
     #       },
     #       base_inference_component_name: "InferenceComponentName",
     #       data_cache_config: {
@@ -6541,6 +6647,7 @@ module Aws::SageMaker
     #           number_of_accelerator_devices_required: 1.0,
     #           min_memory_required_in_mb: 1, # required
     #           max_memory_required_in_mb: 1,
+    #           accelerator_partition_type: "AcceleratorPartitionType",
     #         },
     #         base_inference_component_name: "InferenceComponentName",
     #         data_cache_config: {
@@ -9884,6 +9991,14 @@ module Aws::SageMaker
     #   pipeline. If specified, it applies to all runs of this pipeline by
     #   default.
     #
+    # @option params [Array<String>] :pipeline_version_aliases
+    #   The aliases to assign to the first version of the pipeline. You can
+    #   use an alias instead of a pipeline version ID to start an execution,
+    #   describe the pipeline, or list its executions. Each alias can contain
+    #   1-128 letters, numbers, periods (.), hyphens (-), and underscores
+    #   (\_), and can't consist of numbers only. An alias must be unique
+    #   within the pipeline, and a version can have up to 10 aliases.
+    #
     # @return [Types::CreatePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePipelineResponse#pipeline_arn #pipeline_arn} => String
@@ -9911,6 +10026,7 @@ module Aws::SageMaker
     #     parallelism_configuration: {
     #       max_parallel_execution_steps: 1, # required
     #     },
+    #     pipeline_version_aliases: ["PipelineVersionAlias"],
     #   })
     #
     # @example Response structure
@@ -12705,6 +12821,48 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Deletes an extension from a SageMaker HyperPod cluster. SageMaker
+    # HyperPod removes the extension's software from every node in the
+    # cluster. While SageMaker HyperPod removes the extension, its status is
+    # `Deleting`. After SageMaker HyperPod removes the extension from all
+    # nodes, it no longer appears in `ListClusterExtensions`, and
+    # `DescribeClusterExtension` returns a `ResourceNotFound` error.
+    #
+    # Deleting an extension doesn't delete data that the extension sent to
+    # other Amazon Web Services services, such as metrics in Amazon
+    # CloudWatch or Amazon Managed Service for Prometheus.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on
+    #   which the extension is installed.
+    #
+    # @option params [required, String] :extension_arn
+    #   The Amazon Resource Name (ARN) of the extension to delete.
+    #
+    # @return [Types::DeleteClusterExtensionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteClusterExtensionResponse#extension_arn #extension_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_cluster_extension({
+    #     cluster_arn: "ClusterArn", # required
+    #     extension_arn: "ExtensionArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.extension_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteClusterExtension AWS API Documentation
+    #
+    # @overload delete_cluster_extension(params = {})
+    # @param [Hash] params ({})
+    def delete_cluster_extension(params = {}, options = {})
+      req = build_request(:delete_cluster_extension, params)
+      req.send_request(options)
+    end
+
     # Deletes the cluster policy of the cluster.
     #
     # @option params [required, String] :cluster_scheduler_config_id
@@ -15329,7 +15487,7 @@ module Aws::SageMaker
     #   resp.instance_groups[0].scheduled_update_config.deployment_config.wait_interval_in_seconds #=> Integer
     #   resp.instance_groups[0].scheduled_update_config.deployment_config.auto_rollback_configuration #=> Array
     #   resp.instance_groups[0].scheduled_update_config.deployment_config.auto_rollback_configuration[0].alarm_name #=> String
-    #   resp.instance_groups[0].auto_patch_config.patching_strategy #=> String, one of "WhenIdle", "WhenAllIdle"
+    #   resp.instance_groups[0].auto_patch_config.patching_strategy #=> String, one of "WhenIdle", "WhenAllIdle", "DrainFirst"
     #   resp.instance_groups[0].auto_patch_config.current_patch_schedule.next_patch_date #=> Time
     #   resp.instance_groups[0].auto_patch_config.desired_patch_schedule.next_patch_date #=> Time
     #   resp.instance_groups[0].auto_patch_config.deployment_config.rolling_update_policy.maximum_batch_size.type #=> String, one of "INSTANCE_COUNT", "CAPACITY_PERCENTAGE"
@@ -15339,6 +15497,9 @@ module Aws::SageMaker
     #   resp.instance_groups[0].auto_patch_config.deployment_config.wait_interval_in_seconds #=> Integer
     #   resp.instance_groups[0].auto_patch_config.deployment_config.auto_rollback_configuration #=> Array
     #   resp.instance_groups[0].auto_patch_config.deployment_config.auto_rollback_configuration[0].alarm_name #=> String
+    #   resp.instance_groups[0].auto_patch_config.idle_wait_window_in_seconds #=> Integer
+    #   resp.instance_groups[0].auto_patch_config.drain_policy.drain_timeout_in_seconds #=> Integer
+    #   resp.instance_groups[0].auto_patch_config.drain_policy.on_drain_timeout #=> String, one of "Force", "Skip"
     #   resp.instance_groups[0].current_image_id #=> String
     #   resp.instance_groups[0].desired_image_id #=> String
     #   resp.instance_groups[0].current_image_release_version #=> String
@@ -15510,6 +15671,7 @@ module Aws::SageMaker
     #   resp.event_details.event_details.event_metadata.slurm_health.reason #=> String, one of "DaemonDown", "DaemonDisabled", "DbUnreachable"
     #   resp.event_details.description #=> String
     #   resp.event_details.event_level #=> String, one of "Info", "Warn", "Error"
+    #   resp.event_details.operation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterEvent AWS API Documentation
     #
@@ -15517,6 +15679,62 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def describe_cluster_event(params = {}, options = {})
       req = build_request(:describe_cluster_event, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about an extension installed on a SageMaker
+    # HyperPod cluster. The information includes the extension's version,
+    # configuration, and status, and a summary of how many cluster nodes are
+    # running the current version and configuration of the extension. If the
+    # extension has problems on some nodes, the response also lists the
+    # problems and how many nodes each one affects.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on
+    #   which the extension is installed.
+    #
+    # @option params [required, String] :extension_arn
+    #   The Amazon Resource Name (ARN) of the extension to describe.
+    #   `CreateClusterExtension` returns this ARN, and `ListClusterExtensions`
+    #   lists it. If you delete an extension and create it again, the new
+    #   extension has a new ARN.
+    #
+    # @return [Types::DescribeClusterExtensionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeClusterExtensionResponse#extension_details #extension_details} => Types::ExtensionDetails
+    #   * {Types::DescribeClusterExtensionResponse#node_summary #node_summary} => Types::ExtensionNodeSummary
+    #   * {Types::DescribeClusterExtensionResponse#health #health} => Types::ExtensionHealth
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_cluster_extension({
+    #     cluster_arn: "ClusterArn", # required
+    #     extension_arn: "ExtensionArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.extension_details.cluster_arn #=> String
+    #   resp.extension_details.extension_arn #=> String
+    #   resp.extension_details.extension_name #=> String
+    #   resp.extension_details.extension_version #=> String
+    #   resp.extension_details.status #=> String, one of "Creating", "Active", "CreateFailed", "Updating", "Deleting", "DeleteFailed", "Degraded", "UpdateFailed"
+    #   resp.extension_details.configuration_values #=> String
+    #   resp.extension_details.creation_time #=> Time
+    #   resp.extension_details.last_modified_time #=> Time
+    #   resp.node_summary.total_count #=> Integer
+    #   resp.node_summary.active_count #=> Integer
+    #   resp.health.issues #=> Array
+    #   resp.health.issues[0].code #=> String, one of "InvalidConfiguration", "ConfigurationConflict", "AccessDenied", "ResourceNotFound", "DependencyUnreachable", "ExtensionUnhealthy", "InternalFailure", "Other"
+    #   resp.health.issues[0].message #=> String
+    #   resp.health.issues[0].node_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterExtension AWS API Documentation
+    #
+    # @overload describe_cluster_extension(params = {})
+    # @param [Hash] params ({})
+    def describe_cluster_extension(params = {}, options = {})
+      req = build_request(:describe_cluster_extension, params)
       req.send_request(options)
     end
 
@@ -15608,6 +15826,68 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def describe_cluster_node(params = {}, options = {})
       req = build_request(:describe_cluster_node, params)
+      req.send_request(options)
+    end
+
+    # Retrieves detailed information about a specific operation for a given
+    # HyperPod cluster, such as a scaling operation or a deep health check.
+    # Use the `OperationId` returned by the `ListClusterOperations`
+    # operation to identify the operation to describe.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name or Amazon Resource Name (ARN) of the HyperPod cluster
+    #   associated with the operation.
+    #
+    # @option params [required, String] :operation_id
+    #   The unique identifier (UUID) of the operation to describe. This ID can
+    #   be obtained from the `ListClusterOperations` operation.
+    #
+    # @return [Types::DescribeClusterOperationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeClusterOperationResponse#operation_id #operation_id} => String
+    #   * {Types::DescribeClusterOperationResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::DescribeClusterOperationResponse#type #type} => String
+    #   * {Types::DescribeClusterOperationResponse#status #status} => String
+    #   * {Types::DescribeClusterOperationResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeClusterOperationResponse#scaling_details #scaling_details} => Array&lt;Types::ClusterOperationScalingDetails&gt;
+    #   * {Types::DescribeClusterOperationResponse#deep_health_check_details #deep_health_check_details} => Array&lt;Types::InstanceGroupHealthCheckConfiguration&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_cluster_operation({
+    #     cluster_name: "ClusterNameOrArn", # required
+    #     operation_id: "ClusterOperationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_id #=> String
+    #   resp.cluster_arn #=> String
+    #   resp.type #=> String, one of "Scaling", "DeepHealthCheck"
+    #   resp.status #=> String, one of "InProgress", "Superseded", "Done"
+    #   resp.creation_time #=> Time
+    #   resp.scaling_details #=> Array
+    #   resp.scaling_details[0].instance_group_name #=> String
+    #   resp.scaling_details[0].status #=> String, one of "InProgress", "Superseded", "Done"
+    #   resp.scaling_details[0].original.current_count #=> Integer
+    #   resp.scaling_details[0].original.target_count #=> Integer
+    #   resp.scaling_details[0].original.min_count #=> Integer
+    #   resp.scaling_details[0].desired.current_count #=> Integer
+    #   resp.scaling_details[0].desired.target_count #=> Integer
+    #   resp.scaling_details[0].desired.min_count #=> Integer
+    #   resp.deep_health_check_details #=> Array
+    #   resp.deep_health_check_details[0].instance_group_name #=> String
+    #   resp.deep_health_check_details[0].instance_ids #=> Array
+    #   resp.deep_health_check_details[0].instance_ids[0] #=> String
+    #   resp.deep_health_check_details[0].deep_health_checks #=> Array
+    #   resp.deep_health_check_details[0].deep_health_checks[0] #=> String, one of "InstanceStress", "InstanceConnectivity", "MultiNodeTrainingValidation"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterOperation AWS API Documentation
+    #
+    # @overload describe_cluster_operation(params = {})
+    # @param [Hash] params ({})
+    def describe_cluster_operation(params = {}, options = {})
+      req = build_request(:describe_cluster_operation, params)
       req.send_request(options)
     end
 
@@ -16652,6 +16932,9 @@ module Aws::SageMaker
     #   resp.production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].total_instance_count #=> Integer
     #   resp.production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].available_instance_count #=> Integer
     #   resp.production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].used_by_current_endpoint #=> Integer
+    #   resp.production_variants[0].accelerator_partition_layouts #=> Array
+    #   resp.production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types #=> Array
+    #   resp.production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types[0] #=> String
     #   resp.data_capture_config.enable_capture #=> Boolean
     #   resp.data_capture_config.capture_status #=> String, one of "Started", "Stopped"
     #   resp.data_capture_config.current_sampling_percentage #=> Integer
@@ -16720,6 +17003,9 @@ module Aws::SageMaker
     #   resp.pending_deployment_summary.production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE"
     #   resp.pending_deployment_summary.production_variants[0].routing_config.prefix_aware_routing_config.prefix_length #=> Integer
     #   resp.pending_deployment_summary.production_variants[0].routing_config.prefix_aware_routing_config.concurrency_threshold #=> Integer
+    #   resp.pending_deployment_summary.production_variants[0].accelerator_partition_layouts #=> Array
+    #   resp.pending_deployment_summary.production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types #=> Array
+    #   resp.pending_deployment_summary.production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types[0] #=> String
     #   resp.pending_deployment_summary.start_time #=> Time
     #   resp.pending_deployment_summary.shadow_production_variants #=> Array
     #   resp.pending_deployment_summary.shadow_production_variants[0].variant_name #=> String
@@ -16755,6 +17041,9 @@ module Aws::SageMaker
     #   resp.pending_deployment_summary.shadow_production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE"
     #   resp.pending_deployment_summary.shadow_production_variants[0].routing_config.prefix_aware_routing_config.prefix_length #=> Integer
     #   resp.pending_deployment_summary.shadow_production_variants[0].routing_config.prefix_aware_routing_config.concurrency_threshold #=> Integer
+    #   resp.pending_deployment_summary.shadow_production_variants[0].accelerator_partition_layouts #=> Array
+    #   resp.pending_deployment_summary.shadow_production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types #=> Array
+    #   resp.pending_deployment_summary.shadow_production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types[0] #=> String
     #   resp.explainer_config.clarify_explainer_config.enable_explanations #=> String
     #   resp.explainer_config.clarify_explainer_config.inference_config.features_attribute #=> String
     #   resp.explainer_config.clarify_explainer_config.inference_config.content_template #=> String
@@ -16820,6 +17109,9 @@ module Aws::SageMaker
     #   resp.shadow_production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].total_instance_count #=> Integer
     #   resp.shadow_production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].available_instance_count #=> Integer
     #   resp.shadow_production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].used_by_current_endpoint #=> Integer
+    #   resp.shadow_production_variants[0].accelerator_partition_layouts #=> Array
+    #   resp.shadow_production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types #=> Array
+    #   resp.shadow_production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types[0] #=> String
     #   resp.metrics_config.enable_enhanced_metrics #=> Boolean
     #   resp.metrics_config.enable_detailed_observability #=> Boolean
     #   resp.metrics_config.metric_publish_frequency_in_seconds #=> Integer
@@ -16904,6 +17196,9 @@ module Aws::SageMaker
     #   resp.production_variants[0].inference_ami_version #=> String, one of "al2-ami-sagemaker-inference-gpu-2", "al2-ami-sagemaker-inference-gpu-2-1", "al2-ami-sagemaker-inference-gpu-3-1", "al2-ami-sagemaker-inference-neuron-2", "al2023-ami-sagemaker-inference-gpu-4-1"
     #   resp.production_variants[0].capacity_reservation_config.capacity_reservation_preference #=> String, one of "capacity-reservations-only"
     #   resp.production_variants[0].capacity_reservation_config.ml_reservation_arn #=> String
+    #   resp.production_variants[0].accelerator_partition_layouts #=> Array
+    #   resp.production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types #=> Array
+    #   resp.production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types[0] #=> String
     #   resp.data_capture_config.enable_capture #=> Boolean
     #   resp.data_capture_config.initial_sampling_percentage #=> Integer
     #   resp.data_capture_config.destination_s3_uri #=> String
@@ -16980,6 +17275,9 @@ module Aws::SageMaker
     #   resp.shadow_production_variants[0].inference_ami_version #=> String, one of "al2-ami-sagemaker-inference-gpu-2", "al2-ami-sagemaker-inference-gpu-2-1", "al2-ami-sagemaker-inference-gpu-3-1", "al2-ami-sagemaker-inference-neuron-2", "al2023-ami-sagemaker-inference-gpu-4-1"
     #   resp.shadow_production_variants[0].capacity_reservation_config.capacity_reservation_preference #=> String, one of "capacity-reservations-only"
     #   resp.shadow_production_variants[0].capacity_reservation_config.ml_reservation_arn #=> String
+    #   resp.shadow_production_variants[0].accelerator_partition_layouts #=> Array
+    #   resp.shadow_production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types #=> Array
+    #   resp.shadow_production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types[0] #=> String
     #   resp.execution_role_arn #=> String
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
@@ -17267,6 +17565,8 @@ module Aws::SageMaker
     #   * {Types::DescribeHubResponse#failure_reason #failure_reason} => String
     #   * {Types::DescribeHubResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeHubResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeHubResponse#created_by #created_by} => Types::UserContext
+    #   * {Types::DescribeHubResponse#last_modified_by #last_modified_by} => Types::UserContext
     #
     # @example Request syntax with placeholder values
     #
@@ -17287,6 +17587,18 @@ module Aws::SageMaker
     #   resp.failure_reason #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
+    #   resp.created_by.user_profile_arn #=> String
+    #   resp.created_by.user_profile_name #=> String
+    #   resp.created_by.domain_id #=> String
+    #   resp.created_by.iam_identity.arn #=> String
+    #   resp.created_by.iam_identity.principal_id #=> String
+    #   resp.created_by.iam_identity.source_identity #=> String
+    #   resp.last_modified_by.user_profile_arn #=> String
+    #   resp.last_modified_by.user_profile_name #=> String
+    #   resp.last_modified_by.domain_id #=> String
+    #   resp.last_modified_by.iam_identity.arn #=> String
+    #   resp.last_modified_by.iam_identity.principal_id #=> String
+    #   resp.last_modified_by.iam_identity.source_identity #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHub AWS API Documentation
     #
@@ -17333,6 +17645,8 @@ module Aws::SageMaker
     #   * {Types::DescribeHubContentResponse#failure_reason #failure_reason} => String
     #   * {Types::DescribeHubContentResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeHubContentResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeHubContentResponse#created_by #created_by} => Types::UserContext
+    #   * {Types::DescribeHubContentResponse#last_modified_by #last_modified_by} => Types::UserContext
     #
     # @example Request syntax with placeholder values
     #
@@ -17368,6 +17682,18 @@ module Aws::SageMaker
     #   resp.failure_reason #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
+    #   resp.created_by.user_profile_arn #=> String
+    #   resp.created_by.user_profile_name #=> String
+    #   resp.created_by.domain_id #=> String
+    #   resp.created_by.iam_identity.arn #=> String
+    #   resp.created_by.iam_identity.principal_id #=> String
+    #   resp.created_by.iam_identity.source_identity #=> String
+    #   resp.last_modified_by.user_profile_arn #=> String
+    #   resp.last_modified_by.user_profile_name #=> String
+    #   resp.last_modified_by.domain_id #=> String
+    #   resp.last_modified_by.iam_identity.arn #=> String
+    #   resp.last_modified_by.iam_identity.principal_id #=> String
+    #   resp.last_modified_by.iam_identity.source_identity #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHubContent AWS API Documentation
     #
@@ -17918,6 +18244,7 @@ module Aws::SageMaker
     #   resp.specification.compute_resource_requirements.number_of_accelerator_devices_required #=> Float
     #   resp.specification.compute_resource_requirements.min_memory_required_in_mb #=> Integer
     #   resp.specification.compute_resource_requirements.max_memory_required_in_mb #=> Integer
+    #   resp.specification.compute_resource_requirements.accelerator_partition_type #=> String
     #   resp.specification.base_inference_component_name #=> String
     #   resp.specification.data_cache_config.enable_caching #=> Boolean
     #   resp.specification.scheduling_config.placement_strategy #=> String, one of "SPREAD", "BINPACK"
@@ -17941,6 +18268,7 @@ module Aws::SageMaker
     #   resp.specifications[0].compute_resource_requirements.number_of_accelerator_devices_required #=> Float
     #   resp.specifications[0].compute_resource_requirements.min_memory_required_in_mb #=> Integer
     #   resp.specifications[0].compute_resource_requirements.max_memory_required_in_mb #=> Integer
+    #   resp.specifications[0].compute_resource_requirements.accelerator_partition_type #=> String
     #   resp.specifications[0].base_inference_component_name #=> String
     #   resp.specifications[0].data_cache_config.enable_caching #=> Boolean
     #   resp.specifications[0].scheduling_config.placement_strategy #=> String, one of "SPREAD", "BINPACK"
@@ -19924,7 +20252,15 @@ module Aws::SageMaker
     #   The name or Amazon Resource Name (ARN) of the pipeline to describe.
     #
     # @option params [Integer] :pipeline_version_id
-    #   The ID of the pipeline version to describe.
+    #   The ID of the pipeline version to describe. You can't specify this
+    #   with `PipelineVersionAlias`.
+    #
+    # @option params [String] :pipeline_version_alias
+    #   The alias of the pipeline version to describe. You can't specify this
+    #   with `PipelineVersionId`. If no version of the pipeline has this
+    #   alias, the request fails with a `ResourceNotFound` error. If you
+    #   specify neither, SageMaker describes the latest version of the
+    #   pipeline.
     #
     # @return [Types::DescribePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -19943,12 +20279,14 @@ module Aws::SageMaker
     #   * {Types::DescribePipelineResponse#parallelism_configuration #parallelism_configuration} => Types::ParallelismConfiguration
     #   * {Types::DescribePipelineResponse#pipeline_version_display_name #pipeline_version_display_name} => String
     #   * {Types::DescribePipelineResponse#pipeline_version_description #pipeline_version_description} => String
+    #   * {Types::DescribePipelineResponse#pipeline_version_aliases #pipeline_version_aliases} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_pipeline({
     #     pipeline_name: "PipelineNameOrArn", # required
     #     pipeline_version_id: 1,
+    #     pipeline_version_alias: "PipelineVersionAlias",
     #   })
     #
     # @example Response structure
@@ -19978,6 +20316,8 @@ module Aws::SageMaker
     #   resp.parallelism_configuration.max_parallel_execution_steps #=> Integer
     #   resp.pipeline_version_display_name #=> String
     #   resp.pipeline_version_description #=> String
+    #   resp.pipeline_version_aliases #=> Array
+    #   resp.pipeline_version_aliases[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipeline AWS API Documentation
     #
@@ -20040,6 +20380,8 @@ module Aws::SageMaker
     #   * {Types::DescribePipelineExecutionResponse#selective_execution_config #selective_execution_config} => Types::SelectiveExecutionConfig
     #   * {Types::DescribePipelineExecutionResponse#pipeline_version_id #pipeline_version_id} => Integer
     #   * {Types::DescribePipelineExecutionResponse#m_lflow_config #m_lflow_config} => Types::MLflowConfiguration
+    #   * {Types::DescribePipelineExecutionResponse#pipeline_version_aliases #pipeline_version_aliases} => Array&lt;String&gt;
+    #   * {Types::DescribePipelineExecutionResponse#role_arn #role_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -20078,6 +20420,9 @@ module Aws::SageMaker
     #   resp.pipeline_version_id #=> Integer
     #   resp.m_lflow_config.mlflow_resource_arn #=> String
     #   resp.m_lflow_config.mlflow_experiment_name #=> String
+    #   resp.pipeline_version_aliases #=> Array
+    #   resp.pipeline_version_aliases[0] #=> String
+    #   resp.role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineExecution AWS API Documentation
     #
@@ -23008,6 +23353,12 @@ module Aws::SageMaker
     #   The type of resource for which to filter events. Valid values are
     #   `Cluster`, `InstanceGroup`, or `Instance`.
     #
+    # @option params [String] :operation_id
+    #   The unique identifier (UUID) of a cluster operation for which to
+    #   filter events. If specified, only events associated with this
+    #   operation are returned. This ID can be obtained from the
+    #   `ListClusterOperations` operation.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of events to return in the response. Valid range is
     #   1 to 100.
@@ -23034,6 +23385,7 @@ module Aws::SageMaker
     #     sort_by: "EventTime", # accepts EventTime
     #     sort_order: "Ascending", # accepts Ascending, Descending
     #     resource_type: "Cluster", # accepts Cluster, InstanceGroup, Instance
+    #     operation_id: "ClusterOperationId",
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -23051,6 +23403,7 @@ module Aws::SageMaker
     #   resp.events[0].event_time #=> Time
     #   resp.events[0].description #=> String
     #   resp.events[0].event_level #=> String, one of "Info", "Warn", "Error"
+    #   resp.events[0].operation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterEvents AWS API Documentation
     #
@@ -23058,6 +23411,124 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def list_cluster_events(params = {}, options = {})
       req = build_request(:list_cluster_events, params)
+      req.send_request(options)
+    end
+
+    # Lists the versions of an extension that you can install on a SageMaker
+    # HyperPod cluster, from the highest version to the lowest. Use a
+    # version from this list as the `ExtensionVersion` in
+    # `CreateClusterExtension` or `UpdateClusterExtension`.
+    #
+    # The list contains only versions that you can install. Versions that
+    # SageMaker HyperPod no longer offers for new installations don't
+    # appear. If SageMaker HyperPod doesn't offer an extension with the
+    # name that you specify, the response contains an empty list.
+    #
+    # @option params [required, String] :extension_name
+    #   The name of the extension whose versions you want to list, for example
+    #   `sagemaker-observability`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of versions to return in the response. If you
+    #   don't specify a value, SageMaker HyperPod returns up to 100 versions.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous `ListClusterExtensionVersions` request
+    #   was truncated, the response includes a `NextToken`. To retrieve the
+    #   next set of versions, use the token in the next request.
+    #
+    # @return [Types::ListClusterExtensionVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListClusterExtensionVersionsResponse#extension_versions #extension_versions} => Array&lt;Types::ExtensionVersionSummary&gt;
+    #   * {Types::ListClusterExtensionVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cluster_extension_versions({
+    #     extension_name: "ExtensionName", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.extension_versions #=> Array
+    #   resp.extension_versions[0].extension_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterExtensionVersions AWS API Documentation
+    #
+    # @overload list_cluster_extension_versions(params = {})
+    # @param [Hash] params ({})
+    def list_cluster_extension_versions(params = {}, options = {})
+      req = build_request(:list_cluster_extension_versions, params)
+      req.send_request(options)
+    end
+
+    # Lists the extensions installed on a SageMaker HyperPod cluster.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster whose
+    #   extensions you want to list.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of extensions to return in the response. If you
+    #   don't specify a value, SageMaker HyperPod returns up to 100
+    #   extensions.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous `ListClusterExtensions` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of extensions, use the token in the next request. When you use the
+    #   `CreationTimeAfter` or `CreationTimeBefore` filters, a response can
+    #   contain fewer extensions than `MaxResults`, or none, and still include
+    #   a `NextToken`. Continue until the response doesn't include a
+    #   `NextToken`.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   A filter that returns extensions created at or after the specified
+    #   time. Timestamps are formatted according to the ISO 8601 standard.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   A filter that returns extensions created at or before the specified
+    #   time. The acceptable formats are the same as the timestamp formats for
+    #   `CreationTimeAfter`.
+    #
+    # @return [Types::ListClusterExtensionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListClusterExtensionsResponse#extensions #extensions} => Array&lt;Types::ExtensionSummary&gt;
+    #   * {Types::ListClusterExtensionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cluster_extensions({
+    #     cluster_arn: "ClusterArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.extensions #=> Array
+    #   resp.extensions[0].extension_arn #=> String
+    #   resp.extensions[0].extension_name #=> String
+    #   resp.extensions[0].extension_version #=> String
+    #   resp.extensions[0].status #=> String, one of "Creating", "Active", "CreateFailed", "Updating", "Deleting", "DeleteFailed", "Degraded", "UpdateFailed"
+    #   resp.extensions[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterExtensions AWS API Documentation
+    #
+    # @overload list_cluster_extensions(params = {})
+    # @param [Hash] params ({})
+    def list_cluster_extensions(params = {}, options = {})
+      req = build_request(:list_cluster_extensions, params)
       req.send_request(options)
     end
 
@@ -23175,6 +23646,87 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def list_cluster_nodes(params = {}, options = {})
       req = build_request(:list_cluster_nodes, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of operation summaries for a specified HyperPod
+    # cluster, such as scaling operations and deep health checks. The
+    # operation supports filtering, sorting, and pagination of results.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name or Amazon Resource Name (ARN) of the HyperPod cluster for
+    #   which to list operations.
+    #
+    # @option params [String] :status
+    #   The operation status to filter by. If specified, only operations with
+    #   this status are returned. Valid values are `InProgress`, `Superseded`,
+    #   or `Done`.
+    #
+    # @option params [String] :type
+    #   The operation type to filter by. If specified, only operations of this
+    #   type are returned. Valid values are `Scaling` or `DeepHealthCheck`.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   The start of the time range for filtering operations. Only operations
+    #   created after this time are included in the results.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   The end of the time range for filtering operations. Only operations
+    #   created before this time are included in the results.
+    #
+    # @option params [String] :sort_by
+    #   The field to use for sorting the operation list. Currently, the only
+    #   supported value is `CreationTime`.
+    #
+    # @option params [String] :sort_order
+    #   The order in which to sort the results. Valid values are `Ascending`
+    #   or `Descending` (the default is `Descending`).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of operations to return in the response. Valid
+    #   range is 1 to 100.
+    #
+    # @option params [String] :next_token
+    #   A token to retrieve the next set of results. This token is obtained
+    #   from the output of a previous `ListClusterOperations` call.
+    #
+    # @return [Types::ListClusterOperationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListClusterOperationsResponse#next_token #next_token} => String
+    #   * {Types::ListClusterOperationsResponse#cluster_operation_summaries #cluster_operation_summaries} => Array&lt;Types::ClusterOperationSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cluster_operations({
+    #     cluster_name: "ClusterNameOrArn", # required
+    #     status: "InProgress", # accepts InProgress, Superseded, Done
+    #     type: "Scaling", # accepts Scaling, DeepHealthCheck
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     sort_by: "CreationTime", # accepts CreationTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.cluster_operation_summaries #=> Array
+    #   resp.cluster_operation_summaries[0].operation_id #=> String
+    #   resp.cluster_operation_summaries[0].cluster_arn #=> String
+    #   resp.cluster_operation_summaries[0].type #=> String, one of "Scaling", "DeepHealthCheck"
+    #   resp.cluster_operation_summaries[0].status #=> String, one of "InProgress", "Superseded", "Done"
+    #   resp.cluster_operation_summaries[0].creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListClusterOperations AWS API Documentation
+    #
+    # @overload list_cluster_operations(params = {})
+    # @param [Hash] params ({})
+    def list_cluster_operations(params = {}, options = {})
+      req = build_request(:list_cluster_operations, params)
       req.send_request(options)
     end
 
@@ -27506,6 +28058,8 @@ module Aws::SageMaker
     #   resp.pipeline_execution_steps[0].metadata.for_each.stopped_step_count #=> Integer
     #   resp.pipeline_execution_steps[0].metadata.for_each.selector.step_name #=> String
     #   resp.pipeline_execution_steps[0].metadata.for_each.selector.index #=> Integer
+    #   resp.pipeline_execution_steps[0].metadata.hub_content.hub_arn #=> String
+    #   resp.pipeline_execution_steps[0].metadata.hub_content.hub_content_arn #=> String
     #   resp.pipeline_execution_steps[0].attempt_count #=> Integer
     #   resp.pipeline_execution_steps[0].selective_execution_result.source_pipeline_execution_arn #=> String
     #   resp.pipeline_execution_steps[0].iteration_context.parent_step_name #=> String
@@ -27549,6 +28103,12 @@ module Aws::SageMaker
     # @option params [Integer] :max_results
     #   The maximum number of pipeline executions to return in the response.
     #
+    # @option params [String] :pipeline_version_alias
+    #   The alias of a pipeline version. The response includes only the
+    #   executions of the version that has this alias when you make the
+    #   request. If no version of the pipeline has this alias, the request
+    #   fails with a `ResourceNotFound` error.
+    #
     # @return [Types::ListPipelineExecutionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListPipelineExecutionsResponse#pipeline_execution_summaries #pipeline_execution_summaries} => Array&lt;Types::PipelineExecutionSummary&gt;
@@ -27566,6 +28126,7 @@ module Aws::SageMaker
     #     sort_order: "Ascending", # accepts Ascending, Descending
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     pipeline_version_alias: "PipelineVersionAlias",
     #   })
     #
     # @example Response structure
@@ -27577,6 +28138,8 @@ module Aws::SageMaker
     #   resp.pipeline_execution_summaries[0].pipeline_execution_description #=> String
     #   resp.pipeline_execution_summaries[0].pipeline_execution_display_name #=> String
     #   resp.pipeline_execution_summaries[0].pipeline_execution_failure_reason #=> String
+    #   resp.pipeline_execution_summaries[0].pipeline_version_aliases #=> Array
+    #   resp.pipeline_execution_summaries[0].pipeline_version_aliases[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListPipelineExecutions AWS API Documentation
@@ -27684,6 +28247,8 @@ module Aws::SageMaker
     #   resp.pipeline_version_summaries[0].pipeline_version_description #=> String
     #   resp.pipeline_version_summaries[0].pipeline_version_display_name #=> String
     #   resp.pipeline_version_summaries[0].last_execution_pipeline_execution_arn #=> String
+    #   resp.pipeline_version_summaries[0].pipeline_version_aliases #=> Array
+    #   resp.pipeline_version_summaries[0].pipeline_version_aliases[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListPipelineVersions AWS API Documentation
@@ -27722,6 +28287,12 @@ module Aws::SageMaker
     # @option params [Integer] :max_results
     #   The maximum number of pipelines to return in the response.
     #
+    # @option params [String] :managed_by
+    #   Filters the pipelines by who manages them. Specify `AWS` to return
+    #   pipelines that Amazon Web Services manages, or `CUSTOMER` to return
+    #   pipelines that you created. If you don't specify a value, the
+    #   response includes both.
+    #
     # @return [Types::ListPipelinesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListPipelinesResponse#pipeline_summaries #pipeline_summaries} => Array&lt;Types::PipelineSummary&gt;
@@ -27739,6 +28310,7 @@ module Aws::SageMaker
     #     sort_order: "Ascending", # accepts Ascending, Descending
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     managed_by: "AWS", # accepts AWS, CUSTOMER
     #   })
     #
     # @example Response structure
@@ -30043,10 +30615,24 @@ module Aws::SageMaker
     #   The selective execution configuration applied to the pipeline run.
     #
     # @option params [Integer] :pipeline_version_id
-    #   The ID of the pipeline version to start execution from.
+    #   The ID of the pipeline version to start execution from. You can't
+    #   specify this with `PipelineVersionAlias`.
     #
     # @option params [String] :mlflow_experiment_name
     #   The MLflow experiment name of the pipeline execution.
+    #
+    # @option params [String] :pipeline_version_alias
+    #   The alias of the pipeline version to start the execution from. You
+    #   can't specify this with `PipelineVersionId`. If no version of the
+    #   pipeline has this alias, the request fails with a `ResourceNotFound`
+    #   error.
+    #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the execution
+    #   uses. You must specify this parameter when you start an execution of a
+    #   pipeline that Amazon Web Services manages. You can't specify it for a
+    #   pipeline that you create, because its executions use the pipeline's
+    #   role.
     #
     # @return [Types::StartPipelineExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -30078,6 +30664,8 @@ module Aws::SageMaker
     #     },
     #     pipeline_version_id: 1,
     #     mlflow_experiment_name: "MlflowExperimentEntityName",
+    #     pipeline_version_alias: "PipelineVersionAlias",
+    #     role_arn: "RoleArn",
     #   })
     #
     # @example Response structure
@@ -31037,7 +31625,7 @@ module Aws::SageMaker
     #         },
     #         image_id: "ImageId",
     #         auto_patch_config: {
-    #           patching_strategy: "WhenIdle", # required, accepts WhenIdle, WhenAllIdle
+    #           patching_strategy: "WhenIdle", # required, accepts WhenIdle, WhenAllIdle, DrainFirst
     #           patch_schedule: {
     #             next_patch_date: Time.now,
     #           },
@@ -31058,6 +31646,11 @@ module Aws::SageMaker
     #                 alarm_name: "AlarmName", # required
     #               },
     #             ],
+    #           },
+    #           idle_wait_window_in_seconds: 1,
+    #           drain_policy: {
+    #             drain_timeout_in_seconds: 1,
+    #             on_drain_timeout: "Force", # accepts Force, Skip
     #           },
     #         },
     #         image_release_version: "ImageReleaseVersion",
@@ -31195,6 +31788,82 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def update_cluster(params = {}, options = {})
       req = build_request(:update_cluster, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration or the version of an extension installed on
+    # a SageMaker HyperPod cluster. SageMaker HyperPod applies the change to
+    # every node in the cluster. You can change the configuration, the
+    # version, or both in one request.
+    #
+    # * **Configuration:** You can change settings by sending
+    #   `ConfigurationValues`. Settings that you include are changed.
+    #   Settings that you omit keep their current values. A setting with the
+    #   value `null` is removed and returns to its default value.
+    #
+    # * **Version:** You can update to a later version. You can't update to
+    #   an earlier version. To use an earlier version, delete the extension
+    #   and create it again with that version.
+    #
+    # To retry the operation on nodes where it failed, fix the cause that
+    # `DescribeClusterExtension` reports in `Health`, and then send an
+    # `UpdateClusterExtension` request that doesn't change the version or
+    # the configuration.
+    #
+    # You can't update an extension while it is being deleted.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on
+    #   which the extension is installed.
+    #
+    # @option params [required, String] :extension_arn
+    #   The Amazon Resource Name (ARN) of the extension to update.
+    #
+    # @option params [String] :extension_version
+    #   The version to update the extension to, in `MAJOR.MINOR.PATCH` format.
+    #   The version must be later than the extension's current version. If
+    #   you omit this parameter, the extension keeps its current version.
+    #
+    # @option params [String] :configuration_values
+    #   The configuration changes to apply, as a JSON object serialized as a
+    #   string. Settings that you include are changed, settings that you omit
+    #   are unchanged, and a setting with the value `null` returns to its
+    #   default value. The resulting configuration must be valid for the
+    #   target extension version. If you omit `ConfigurationValues`, the
+    #   configuration is unchanged.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide so that the
+    #   request is idempotent. If you send the same update more than once,
+    #   SageMaker HyperPod applies it once and doesn't return an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateClusterExtensionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateClusterExtensionResponse#extension_arn #extension_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cluster_extension({
+    #     cluster_arn: "ClusterArn", # required
+    #     extension_arn: "ExtensionArn", # required
+    #     extension_version: "ExtensionVersion",
+    #     configuration_values: "ExtensionConfigurationValues",
+    #     client_token: "UpdateClusterExtensionRequestClientTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.extension_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateClusterExtension AWS API Documentation
+    #
+    # @overload update_cluster_extension(params = {})
+    # @param [Hash] params ({})
+    def update_cluster_extension(params = {}, options = {})
+      req = build_request(:update_cluster_extension, params)
       req.send_request(options)
     end
 
@@ -32812,6 +33481,7 @@ module Aws::SageMaker
     #         number_of_accelerator_devices_required: 1.0,
     #         min_memory_required_in_mb: 1, # required
     #         max_memory_required_in_mb: 1,
+    #         accelerator_partition_type: "AcceleratorPartitionType",
     #       },
     #       base_inference_component_name: "InferenceComponentName",
     #       data_cache_config: {
@@ -32853,6 +33523,7 @@ module Aws::SageMaker
     #           number_of_accelerator_devices_required: 1.0,
     #           min_memory_required_in_mb: 1, # required
     #           max_memory_required_in_mb: 1,
+    #           accelerator_partition_type: "AcceleratorPartitionType",
     #         },
     #         base_inference_component_name: "InferenceComponentName",
     #         data_cache_config: {
@@ -34027,6 +34698,16 @@ module Aws::SageMaker
     #   If specified, it applies to all executions of this pipeline by
     #   default.
     #
+    # @option params [Array<String>] :pipeline_version_aliases
+    #   The aliases to assign to the new pipeline version that this update
+    #   creates. You can specify aliases only when the update changes the
+    #   pipeline definition. To change the aliases of an existing version, use
+    #   `UpdatePipelineVersion`.
+    #
+    #   An alias must be unique within the pipeline. To move an alias from an
+    #   existing version to the new version, first remove the alias from the
+    #   existing version with `UpdatePipelineVersion`.
+    #
     # @return [Types::UpdatePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePipelineResponse#pipeline_arn #pipeline_arn} => String
@@ -34048,6 +34729,7 @@ module Aws::SageMaker
     #     parallelism_configuration: {
     #       max_parallel_execution_steps: 1, # required
     #     },
+    #     pipeline_version_aliases: ["PipelineVersionAlias"],
     #   })
     #
     # @example Response structure
@@ -34121,6 +34803,9 @@ module Aws::SageMaker
     # @option params [String] :pipeline_version_description
     #   The description of the pipeline version.
     #
+    # @option params [Types::AliasOperations] :pipeline_version_alias_operations
+    #   The aliases to add to or remove from the pipeline version.
+    #
     # @return [Types::UpdatePipelineVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePipelineVersionResponse#pipeline_arn #pipeline_arn} => String
@@ -34133,6 +34818,10 @@ module Aws::SageMaker
     #     pipeline_version_id: 1, # required
     #     pipeline_version_display_name: "PipelineVersionName",
     #     pipeline_version_description: "PipelineVersionDescription",
+    #     pipeline_version_alias_operations: {
+    #       add: ["PipelineVersionAlias"],
+    #       remove: ["PipelineVersionAlias"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -35120,7 +35809,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.405.0'
+      context[:gem_version] = '1.415.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

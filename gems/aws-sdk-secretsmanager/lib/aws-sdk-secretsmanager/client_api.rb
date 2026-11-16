@@ -17,6 +17,8 @@ module Aws::SecretsManager
     APIErrorListType = Shapes::ListShape.new(name: 'APIErrorListType')
     APIErrorType = Shapes::StructureShape.new(name: 'APIErrorType')
     AddReplicaRegionListType = Shapes::ListShape.new(name: 'AddReplicaRegionListType')
+    AssociateCrossAccountReplicaRequest = Shapes::StructureShape.new(name: 'AssociateCrossAccountReplicaRequest')
+    AssociateCrossAccountReplicaResponse = Shapes::StructureShape.new(name: 'AssociateCrossAccountReplicaResponse')
     AutomaticallyRotateAfterDaysType = Shapes::IntegerShape.new(name: 'AutomaticallyRotateAfterDaysType')
     BatchGetSecretValueRequest = Shapes::StructureShape.new(name: 'BatchGetSecretValueRequest')
     BatchGetSecretValueResponse = Shapes::StructureShape.new(name: 'BatchGetSecretValueResponse')
@@ -27,6 +29,9 @@ module Aws::SecretsManager
     CreateSecretRequest = Shapes::StructureShape.new(name: 'CreateSecretRequest')
     CreateSecretResponse = Shapes::StructureShape.new(name: 'CreateSecretResponse')
     CreatedDateType = Shapes::TimestampShape.new(name: 'CreatedDateType')
+    CrossAccountPrimaryType = Shapes::StructureShape.new(name: 'CrossAccountPrimaryType')
+    CrossAccountReplicaEntry = Shapes::StructureShape.new(name: 'CrossAccountReplicaEntry')
+    CrossAccountReplicaListType = Shapes::ListShape.new(name: 'CrossAccountReplicaListType')
     DecryptionFailure = Shapes::StructureShape.new(name: 'DecryptionFailure')
     DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
     DeleteResourcePolicyResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResponse')
@@ -37,6 +42,8 @@ module Aws::SecretsManager
     DescribeSecretRequest = Shapes::StructureShape.new(name: 'DescribeSecretRequest')
     DescribeSecretResponse = Shapes::StructureShape.new(name: 'DescribeSecretResponse')
     DescriptionType = Shapes::StringShape.new(name: 'DescriptionType')
+    DisassociateCrossAccountReplicaRequest = Shapes::StructureShape.new(name: 'DisassociateCrossAccountReplicaRequest')
+    DisassociateCrossAccountReplicaResponse = Shapes::StructureShape.new(name: 'DisassociateCrossAccountReplicaResponse')
     DurationType = Shapes::StringShape.new(name: 'DurationType')
     EncryptionFailure = Shapes::StructureShape.new(name: 'EncryptionFailure')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
@@ -72,6 +79,8 @@ module Aws::SecretsManager
     LastChangedDateType = Shapes::TimestampShape.new(name: 'LastChangedDateType')
     LastRotatedDateType = Shapes::TimestampShape.new(name: 'LastRotatedDateType')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListResourcePoliciesRequest = Shapes::StructureShape.new(name: 'ListResourcePoliciesRequest')
+    ListResourcePoliciesResponse = Shapes::StructureShape.new(name: 'ListResourcePoliciesResponse')
     ListSecretVersionIdsRequest = Shapes::StructureShape.new(name: 'ListSecretVersionIdsRequest')
     ListSecretVersionIdsResponse = Shapes::StructureShape.new(name: 'ListSecretVersionIdsResponse')
     ListSecretsRequest = Shapes::StructureShape.new(name: 'ListSecretsRequest')
@@ -99,6 +108,7 @@ module Aws::SecretsManager
     RemoveRegionsFromReplicationResponse = Shapes::StructureShape.new(name: 'RemoveRegionsFromReplicationResponse')
     RemoveReplicaRegionListType = Shapes::ListShape.new(name: 'RemoveReplicaRegionListType')
     ReplicaRegionType = Shapes::StructureShape.new(name: 'ReplicaRegionType')
+    ReplicaRestrictionType = Shapes::StringShape.new(name: 'ReplicaRestrictionType')
     ReplicateSecretToRegionsRequest = Shapes::StructureShape.new(name: 'ReplicateSecretToRegionsRequest')
     ReplicateSecretToRegionsResponse = Shapes::StructureShape.new(name: 'ReplicateSecretToRegionsResponse')
     ReplicationStatusListType = Shapes::ListShape.new(name: 'ReplicationStatusListType')
@@ -106,6 +116,9 @@ module Aws::SecretsManager
     RequireEachIncludedTypeType = Shapes::BooleanShape.new(name: 'RequireEachIncludedTypeType')
     ResourceExistsException = Shapes::StructureShape.new(name: 'ResourceExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourcePolicyNameType = Shapes::StringShape.new(name: 'ResourcePolicyNameType')
+    ResourcePolicySummary = Shapes::StructureShape.new(name: 'ResourcePolicySummary')
+    ResourcePolicySummaryListType = Shapes::ListShape.new(name: 'ResourcePolicySummaryListType')
     RestoreSecretRequest = Shapes::StructureShape.new(name: 'RestoreSecretRequest')
     RestoreSecretResponse = Shapes::StructureShape.new(name: 'RestoreSecretResponse')
     RoleARNType = Shapes::StringShape.new(name: 'RoleARNType')
@@ -164,6 +177,17 @@ module Aws::SecretsManager
 
     AddReplicaRegionListType.member = Shapes::ShapeRef.new(shape: ReplicaRegionType)
 
+    AssociateCrossAccountReplicaRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
+    AssociateCrossAccountReplicaRequest.add_member(:cross_account_replica_arn, Shapes::ShapeRef.new(shape: SecretARNType, required: true, location_name: "CrossAccountReplicaARN"))
+    AssociateCrossAccountReplicaRequest.add_member(:replica_restriction, Shapes::ShapeRef.new(shape: ReplicaRestrictionType, location_name: "ReplicaRestriction"))
+    AssociateCrossAccountReplicaRequest.add_member(:replication_role_arn, Shapes::ShapeRef.new(shape: RoleARNType, location_name: "ReplicationRoleARN"))
+    AssociateCrossAccountReplicaRequest.struct_class = Types::AssociateCrossAccountReplicaRequest
+
+    AssociateCrossAccountReplicaResponse.add_member(:arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
+    AssociateCrossAccountReplicaResponse.add_member(:cross_account_replica_arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "CrossAccountReplicaARN"))
+    AssociateCrossAccountReplicaResponse.add_member(:replication_status, Shapes::ShapeRef.new(shape: StatusType, location_name: "ReplicationStatus"))
+    AssociateCrossAccountReplicaResponse.struct_class = Types::AssociateCrossAccountReplicaResponse
+
     BatchGetSecretValueRequest.add_member(:secret_id_list, Shapes::ShapeRef.new(shape: SecretIdListType, location_name: "SecretIdList"))
     BatchGetSecretValueRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FiltersListType, location_name: "Filters"))
     BatchGetSecretValueRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsBatchType, location_name: "MaxResults", metadata: {"box" => true}))
@@ -193,6 +217,7 @@ module Aws::SecretsManager
     CreateSecretRequest.add_member(:add_replica_regions, Shapes::ShapeRef.new(shape: AddReplicaRegionListType, location_name: "AddReplicaRegions"))
     CreateSecretRequest.add_member(:force_overwrite_replica_secret, Shapes::ShapeRef.new(shape: BooleanType, location_name: "ForceOverwriteReplicaSecret"))
     CreateSecretRequest.add_member(:type, Shapes::ShapeRef.new(shape: MedeaTypeType, location_name: "Type"))
+    CreateSecretRequest.add_member(:cross_account_primary_arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "CrossAccountPrimaryARN"))
     CreateSecretRequest.struct_class = Types::CreateSecretRequest
 
     CreateSecretResponse.add_member(:arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
@@ -201,14 +226,29 @@ module Aws::SecretsManager
     CreateSecretResponse.add_member(:replication_status, Shapes::ShapeRef.new(shape: ReplicationStatusListType, location_name: "ReplicationStatus"))
     CreateSecretResponse.struct_class = Types::CreateSecretResponse
 
+    CrossAccountPrimaryType.add_member(:primary_secret_arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "PrimarySecretARN"))
+    CrossAccountPrimaryType.add_member(:replication_status, Shapes::ShapeRef.new(shape: StatusType, location_name: "ReplicationStatus"))
+    CrossAccountPrimaryType.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessageType, location_name: "StatusMessage"))
+    CrossAccountPrimaryType.struct_class = Types::CrossAccountPrimaryType
+
+    CrossAccountReplicaEntry.add_member(:replica_secret_arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ReplicaSecretARN"))
+    CrossAccountReplicaEntry.add_member(:replication_role_arn, Shapes::ShapeRef.new(shape: RoleARNType, location_name: "ReplicationRoleARN"))
+    CrossAccountReplicaEntry.add_member(:replication_status, Shapes::ShapeRef.new(shape: StatusType, location_name: "ReplicationStatus"))
+    CrossAccountReplicaEntry.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessageType, location_name: "StatusMessage"))
+    CrossAccountReplicaEntry.struct_class = Types::CrossAccountReplicaEntry
+
+    CrossAccountReplicaListType.member = Shapes::ShapeRef.new(shape: CrossAccountReplicaEntry)
+
     DecryptionFailure.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     DecryptionFailure.struct_class = Types::DecryptionFailure
 
     DeleteResourcePolicyRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
+    DeleteResourcePolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: ResourcePolicyNameType, location_name: "PolicyName"))
     DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
 
     DeleteResourcePolicyResponse.add_member(:arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
     DeleteResourcePolicyResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameType, location_name: "Name"))
+    DeleteResourcePolicyResponse.add_member(:policy_name, Shapes::ShapeRef.new(shape: ResourcePolicyNameType, location_name: "PolicyName"))
     DeleteResourcePolicyResponse.struct_class = Types::DeleteResourcePolicyResponse
 
     DeleteSecretRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
@@ -245,7 +285,17 @@ module Aws::SecretsManager
     DescribeSecretResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampType, location_name: "CreatedDate", metadata: {"box" => true}))
     DescribeSecretResponse.add_member(:primary_region, Shapes::ShapeRef.new(shape: RegionType, location_name: "PrimaryRegion"))
     DescribeSecretResponse.add_member(:replication_status, Shapes::ShapeRef.new(shape: ReplicationStatusListType, location_name: "ReplicationStatus"))
+    DescribeSecretResponse.add_member(:cross_account_primary, Shapes::ShapeRef.new(shape: CrossAccountPrimaryType, location_name: "CrossAccountPrimary"))
+    DescribeSecretResponse.add_member(:cross_account_replicas, Shapes::ShapeRef.new(shape: CrossAccountReplicaListType, location_name: "CrossAccountReplicas"))
     DescribeSecretResponse.struct_class = Types::DescribeSecretResponse
+
+    DisassociateCrossAccountReplicaRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
+    DisassociateCrossAccountReplicaRequest.add_member(:cross_account_replica_arn, Shapes::ShapeRef.new(shape: SecretARNType, required: true, location_name: "CrossAccountReplicaARN"))
+    DisassociateCrossAccountReplicaRequest.struct_class = Types::DisassociateCrossAccountReplicaRequest
+
+    DisassociateCrossAccountReplicaResponse.add_member(:arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
+    DisassociateCrossAccountReplicaResponse.add_member(:cross_account_replica_arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "CrossAccountReplicaARN"))
+    DisassociateCrossAccountReplicaResponse.struct_class = Types::DisassociateCrossAccountReplicaResponse
 
     EncryptionFailure.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     EncryptionFailure.struct_class = Types::EncryptionFailure
@@ -278,11 +328,13 @@ module Aws::SecretsManager
     GetRandomPasswordResponse.struct_class = Types::GetRandomPasswordResponse
 
     GetResourcePolicyRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
+    GetResourcePolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: ResourcePolicyNameType, location_name: "PolicyName"))
     GetResourcePolicyRequest.struct_class = Types::GetResourcePolicyRequest
 
     GetResourcePolicyResponse.add_member(:arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
     GetResourcePolicyResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameType, location_name: "Name"))
     GetResourcePolicyResponse.add_member(:resource_policy, Shapes::ShapeRef.new(shape: NonEmptyResourcePolicyType, location_name: "ResourcePolicy"))
+    GetResourcePolicyResponse.add_member(:policy_name, Shapes::ShapeRef.new(shape: ResourcePolicyNameType, location_name: "PolicyName"))
     GetResourcePolicyResponse.struct_class = Types::GetResourcePolicyResponse
 
     GetSecretValueRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
@@ -315,6 +367,15 @@ module Aws::SecretsManager
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
+
+    ListResourcePoliciesRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
+    ListResourcePoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "MaxResults", metadata: {"box" => true}))
+    ListResourcePoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenType, location_name: "NextToken"))
+    ListResourcePoliciesRequest.struct_class = Types::ListResourcePoliciesRequest
+
+    ListResourcePoliciesResponse.add_member(:resource_policies, Shapes::ShapeRef.new(shape: ResourcePolicySummaryListType, required: true, location_name: "ResourcePolicies"))
+    ListResourcePoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenType, location_name: "NextToken"))
+    ListResourcePoliciesResponse.struct_class = Types::ListResourcePoliciesResponse
 
     ListSecretVersionIdsRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
     ListSecretVersionIdsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsType, location_name: "MaxResults", metadata: {"box" => true}))
@@ -351,11 +412,13 @@ module Aws::SecretsManager
 
     PutResourcePolicyRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
     PutResourcePolicyRequest.add_member(:resource_policy, Shapes::ShapeRef.new(shape: NonEmptyResourcePolicyType, required: true, location_name: "ResourcePolicy"))
+    PutResourcePolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: ResourcePolicyNameType, location_name: "PolicyName"))
     PutResourcePolicyRequest.add_member(:block_public_policy, Shapes::ShapeRef.new(shape: BooleanType, location_name: "BlockPublicPolicy", metadata: {"box" => true}))
     PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
 
     PutResourcePolicyResponse.add_member(:arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
     PutResourcePolicyResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameType, location_name: "Name"))
+    PutResourcePolicyResponse.add_member(:policy_name, Shapes::ShapeRef.new(shape: ResourcePolicyNameType, location_name: "PolicyName"))
     PutResourcePolicyResponse.struct_class = Types::PutResourcePolicyResponse
 
     PutSecretValueRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
@@ -409,6 +472,11 @@ module Aws::SecretsManager
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourcePolicySummary.add_member(:policy_name, Shapes::ShapeRef.new(shape: ResourcePolicyNameType, location_name: "PolicyName"))
+    ResourcePolicySummary.struct_class = Types::ResourcePolicySummary
+
+    ResourcePolicySummaryListType.member = Shapes::ShapeRef.new(shape: ResourcePolicySummary)
 
     RestoreSecretRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
     RestoreSecretRequest.struct_class = Types::RestoreSecretRequest
@@ -568,6 +636,19 @@ module Aws::SecretsManager
         "uid" => "secretsmanager-2017-10-17",
       }
 
+      api.add_operation(:associate_cross_account_replica, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateCrossAccountReplica"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateCrossAccountReplicaRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateCrossAccountReplicaResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+      end)
+
       api.add_operation(:batch_get_secret_value, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchGetSecretValue"
         o.http_method = "POST"
@@ -653,6 +734,18 @@ module Aws::SecretsManager
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
+      api.add_operation(:disassociate_cross_account_replica, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateCrossAccountReplica"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateCrossAccountReplicaRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateCrossAccountReplicaResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+      end)
+
       api.add_operation(:get_random_password, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetRandomPassword"
         o.http_method = "POST"
@@ -687,6 +780,25 @@ module Aws::SecretsManager
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: DecryptionFailure)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+      end)
+
+      api.add_operation(:list_resource_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResourcePolicies"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListResourcePoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListResourcePoliciesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_secret_version_ids, Seahorse::Model::Operation.new.tap do |o|

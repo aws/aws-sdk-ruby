@@ -91,6 +91,13 @@ module Aws::RAM
     #   [2]: https://console.aws.amazon.com/ram/home#Permissions:
     #   @return [String]
     #
+    # @!attribute [rw] permission_template_parameters
+    #   Specifies the template parameter values for the permission being
+    #   associated. You must provide values for all parameters declared in
+    #   the permission template. This parameter is required only if the
+    #   specified permission has template parameters.
+    #   @return [Array<Types::PermissionTemplateParameterInput>]
+    #
     # @!attribute [rw] replace
     #   Specifies whether the specified permission should replace the
     #   existing permission associated with the resource share. Use `true`
@@ -147,6 +154,7 @@ module Aws::RAM
     class AssociateResourceSharePermissionRequest < Struct.new(
       :resource_share_arn,
       :permission_arn,
+      :permission_template_parameters,
       :replace,
       :client_token,
       :permission_version)
@@ -338,6 +346,10 @@ module Aws::RAM
     #     deleted.
     #
     #   * `DELETED` – This permission or version is deleted.
+    #
+    #   * `DEPRECATED` – The permission owner deprecated this permission. It
+    #     can't be associated with new resource shares, but existing
+    #     associations continue to function.
     #   @return [String]
     #
     # @!attribute [rw] feature_set
@@ -381,6 +393,13 @@ module Aws::RAM
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
+    # @!attribute [rw] permission_template_parameters
+    #   The template parameter values provided when the permission was
+    #   associated with this resource share. If the permission has no
+    #   declared template parameters, this member doesn't appear in the
+    #   response.
+    #   @return [Array<Types::PermissionTemplateParameter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AssociatedPermission AWS API Documentation
     #
     class AssociatedPermission < Struct.new(
@@ -391,7 +410,8 @@ module Aws::RAM
       :status,
       :feature_set,
       :last_updated_time,
-      :resource_share_arn)
+      :resource_share_arn,
+      :permission_template_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -493,6 +513,16 @@ module Aws::RAM
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html
     #   @return [String]
     #
+    # @!attribute [rw] permission_template_parameters
+    #   Specifies a list of template parameter declarations for this
+    #   permission. Each declaration defines a named placeholder that can be
+    #   used in the policy template using the syntax `@{parameterName}`.
+    #   Template parameters can only appear in Condition Key and Condition
+    #   Value fields of the policy. When you associate this permission with
+    #   a resource share, you must provide values for all declared
+    #   parameters.
+    #   @return [Array<Types::PermissionTemplateParameterDeclaration>]
+    #
     # @!attribute [rw] client_token
     #   Specifies a unique, case-sensitive identifier that you provide to
     #   ensure the idempotency of the request. This lets you safely retry
@@ -524,6 +554,7 @@ module Aws::RAM
       :name,
       :resource_type,
       :policy_template,
+      :permission_template_parameters,
       :client_token,
       :tags)
       SENSITIVE = []
@@ -592,6 +623,14 @@ module Aws::RAM
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html
     #   @return [String]
     #
+    # @!attribute [rw] permission_template_parameters
+    #   Specifies a list of template parameter declarations for this version
+    #   of the permission. Each declaration defines a named placeholder that
+    #   can be used in the policy template. Because each version is
+    #   independent, you can define the same or a different set of template
+    #   parameters for each version.
+    #   @return [Array<Types::PermissionTemplateParameterDeclaration>]
+    #
     # @!attribute [rw] client_token
     #   Specifies a unique, case-sensitive identifier that you provide to
     #   ensure the idempotency of the request. This lets you safely retry
@@ -617,13 +656,20 @@ module Aws::RAM
     class CreatePermissionVersionRequest < Struct.new(
       :permission_arn,
       :policy_template,
+      :permission_template_parameters,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] permission
-    #   Information about a RAM managed permission.
+    #   The details of the new permission version, including its [Amazon
+    #   Resource Name (ARN)][1], version number, status, and policy
+    #   document.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Types::ResourceSharePermissionDetail]
     #
     # @!attribute [rw] client_token
@@ -746,6 +792,14 @@ module Aws::RAM
     #   service principals can access resources from.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] permission_template_parameters
+    #   Specifies the template parameter values for each permission being
+    #   associated that has template parameters. Each entry maps a
+    #   permission ARN to the parameter values to use when rendering the
+    #   permission template for this resource share. You must provide values
+    #   for all parameters declared in each permission template.
+    #   @return [Array<Types::PermissionArnAndTemplateParameters>]
+    #
     # @!attribute [rw] resource_share_configuration
     #   Specifies the configuration of this resource share.
     #   @return [Types::ResourceShareConfiguration]
@@ -761,6 +815,7 @@ module Aws::RAM
       :client_token,
       :permission_arns,
       :sources,
+      :permission_template_parameters,
       :resource_share_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -1225,11 +1280,27 @@ module Aws::RAM
     #   To see the list of available versions, use ListPermissionVersions.
     #   @return [Integer]
     #
+    # @!attribute [rw] permission_template_parameters
+    #   Specifies the template parameter values to use when rendering the
+    #   permission's policy template. Each entry supplies a parameter name
+    #   and its values. When you provide this parameter, the response
+    #   contains the rendered policy with the specified values in place of
+    #   the template parameter placeholders.
+    #
+    #   For `STRING` type parameters, provide a single value. For
+    #   `STRING_LIST` type parameters, provide one or more values.
+    #
+    #   You can specify this parameter only for permissions that declare
+    #   template parameters. You must provide values for all parameters
+    #   declared in the permission template.
+    #   @return [Array<Types::PermissionTemplateParameterInput>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetPermissionRequest AWS API Documentation
     #
     class GetPermissionRequest < Struct.new(
       :permission_arn,
-      :permission_version)
+      :permission_version,
+      :permission_template_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1837,6 +1908,28 @@ module Aws::RAM
     #   shares that use any version of the specified managed permission.
     #   @return [Boolean]
     #
+    # @!attribute [rw] resource_owner
+    #   Specifies that you want to list only those associations with
+    #   resource shares owned by a specific entity:
+    #
+    #   * `SELF` – returns only associations with resource shares owned by
+    #     the calling account.
+    #
+    #   * `OTHER-ACCOUNTS` – returns only associations with resource shares
+    #     owned by other Amazon Web Services accounts.
+    #
+    #   If you don't specify this parameter, the default is `SELF`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_share_arn
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the resource share
+    #   for which you want to retrieve permission associations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   Specifies that you want to receive the next page of results. Valid
     #   only if you received a `NextToken` response in the previous request.
@@ -1867,6 +1960,8 @@ module Aws::RAM
       :resource_type,
       :feature_set,
       :default_version,
+      :resource_owner,
+      :resource_share_arn,
       :next_token,
       :max_results)
       SENSITIVE = []
@@ -1969,6 +2064,16 @@ module Aws::RAM
     #   operation to get the specific string required.
     #   @return [String]
     #
+    # @!attribute [rw] resource_owner
+    #   Specifies that you want to list only permissions owned by a specific
+    #   entity:
+    #
+    #   * `SELF` – returns only permissions owned by the calling account.
+    #
+    #   * `OTHER-ACCOUNTS` – returns only permissions shared with the
+    #     calling account by other accounts.
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   Specifies that you want to receive the next page of results. Valid
     #   only if you received a `NextToken` response in the previous request.
@@ -2003,13 +2108,22 @@ module Aws::RAM
     #   If you don't specify this parameter, the default is `All`.
     #   @return [String]
     #
+    # @!attribute [rw] permission_status
+    #   Specifies that you want to filter the results to include only
+    #   permissions with the specified status. For example, use `ATTACHABLE`
+    #   to list only permissions that can be associated with resource
+    #   shares, or `DEPRECATED` to list only deprecated permissions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPermissionsRequest AWS API Documentation
     #
     class ListPermissionsRequest < Struct.new(
       :resource_type,
+      :resource_owner,
       :next_token,
       :max_results,
-      :permission_type)
+      :permission_type,
+      :permission_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2617,6 +2731,34 @@ module Aws::RAM
       include Aws::Structure
     end
 
+    # Contains a permission ARN and its associated template parameter
+    # values. The CreateResourceShare operation uses this structure when
+    # associating permissions that have template parameters.
+    #
+    # @!attribute [rw] permission_arn
+    #   The [Amazon Resource Name (ARN)][1] of the permission to associate
+    #   with the resource share.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_template_parameters
+    #   The list of template parameter values to assign for this permission.
+    #   You must provide values for all parameters declared in the
+    #   permission template.
+    #   @return [Array<Types::PermissionTemplateParameterInput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/PermissionArnAndTemplateParameters AWS API Documentation
+    #
+    class PermissionArnAndTemplateParameters < Struct.new(
+      :permission_arn,
+      :permission_template_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The operation failed because it would exceed the maximum number of
     # permissions you can create in each Amazon Web Services Region. To view
     # the limits for your Amazon Web Services account, see the [RAM page in
@@ -2633,6 +2775,104 @@ module Aws::RAM
     #
     class PermissionLimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the declaration of a template parameter for a customer
+    # managed permission. When returned in the context of a permission
+    # association, it also includes the values assigned to that parameter.
+    #
+    # @!attribute [rw] name
+    #   The name of the template parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the template parameter. This can be one of the following
+    #   values:
+    #
+    #   * `STRING` – A single string value.
+    #
+    #   * `STRING_LIST` – One or more string values.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the template parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values assigned to this template parameter in the context of a
+    #   permission association. This field is present only when the
+    #   parameter has been assigned values (for example, in the response
+    #   from ListPermissionAssociations or ListResourceSharePermissions).
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/PermissionTemplateParameter AWS API Documentation
+    #
+    class PermissionTemplateParameter < Struct.new(
+      :name,
+      :type,
+      :description,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a template parameter declaration for a customer managed
+    # permission. Each declaration defines a named placeholder that can be
+    # used in the permission's policy template.
+    #
+    # @!attribute [rw] name
+    #   The name of the template parameter. This name is used as the
+    #   placeholder in the policy template using the syntax
+    #   `@{parameterName}`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the template parameter. This can be one of the following
+    #   values:
+    #
+    #   * `STRING` – A single string value that is substituted directly into
+    #     the template.
+    #
+    #   * `STRING_LIST` – One or more string values that expand to an array
+    #     in the rendered policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the template parameter that helps consumers
+    #   understand what value to provide.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/PermissionTemplateParameterDeclaration AWS API Documentation
+    #
+    class PermissionTemplateParameterDeclaration < Struct.new(
+      :name,
+      :type,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the name and values to assign to a template parameter when
+    # associating a permission template with a resource share.
+    #
+    # @!attribute [rw] name
+    #   The name of the template parameter to assign a value to. This must
+    #   match a parameter name declared in the permission template.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values to assign to the template parameter. For `STRING` type
+    #   parameters, provide a single value. For `STRING_LIST` type
+    #   parameters, provide one or more values.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/PermissionTemplateParameterInput AWS API Documentation
+    #
+    class PermissionTemplateParameterInput < Struct.new(
+      :name,
+      :values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2751,7 +2991,12 @@ module Aws::RAM
     end
 
     # @!attribute [rw] permission
-    #   Information about an RAM permission.
+    #   The details of the promoted customer managed permission, including
+    #   its [Amazon Resource Name (ARN)][1], version, and status.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Types::ResourceSharePermissionSummary]
     #
     # @!attribute [rw] client_token
@@ -2884,6 +3129,13 @@ module Aws::RAM
     #   default for the specified managed permission.
     #   @return [String]
     #
+    # @!attribute [rw] permission_template_parameters
+    #   Specifies the template parameter values to apply when replacing the
+    #   permission. You must provide values for all parameters declared in
+    #   the target permission template. This parameter is required only if
+    #   the target permission (`toPermissionArn`) has template parameters.
+    #   @return [Array<Types::PermissionTemplateParameterInput>]
+    #
     # @!attribute [rw] client_token
     #   Specifies a unique, case-sensitive identifier that you provide to
     #   ensure the idempotency of the request. This lets you safely retry
@@ -2910,6 +3162,7 @@ module Aws::RAM
       :from_permission_arn,
       :from_permission_version,
       :to_permission_arn,
+      :permission_template_parameters,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2974,6 +3227,12 @@ module Aws::RAM
     #   that is currently the default for this managed permission.
     #   @return [String]
     #
+    # @!attribute [rw] permission_template_parameters
+    #   The template parameter values to apply when replacing the
+    #   permission. This field is present only if the target permission is a
+    #   template with declared parameters.
+    #   @return [Array<Types::PermissionTemplateParameter>]
+    #
     # @!attribute [rw] status
     #   Specifies the current status of the background tasks for the
     #   specified ID. The output is one of the following strings:
@@ -3008,6 +3267,7 @@ module Aws::RAM
       :from_permission_version,
       :to_permission_arn,
       :to_permission_version,
+      :permission_template_parameters,
       :status,
       :status_message,
       :creation_time,
@@ -3493,6 +3753,13 @@ module Aws::RAM
     #   denied access.
     #   @return [String]
     #
+    # @!attribute [rw] permission_template_parameters
+    #   The list of template parameter declarations defined for this
+    #   permission. Each declaration includes the parameter name, type, and
+    #   description. This field is present only if the permission is a
+    #   template with declared parameters.
+    #   @return [Array<Types::PermissionTemplateParameterDeclaration>]
+    #
     # @!attribute [rw] creation_time
     #   The date and time when the permission was created.
     #   @return [Time]
@@ -3562,11 +3829,25 @@ module Aws::RAM
     #     deleted.
     #
     #   * `DELETED` – This permission or version is deleted.
+    #
+    #   * `DEPRECATED` – The permission owner deprecated this permission. It
+    #     can't be associated with new resource shares, but existing
+    #     associations continue to function.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   The tag key and value pairs attached to the resource share.
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] resource_owner
+    #   The owner of the permission. This can be one of the following
+    #   values:
+    #
+    #   * `SELF` – The permission is owned by the current account.
+    #
+    #   * `OTHER-ACCOUNTS` – The permission is owned by another account and
+    #     shared with the current account.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceSharePermissionDetail AWS API Documentation
     #
@@ -3577,13 +3858,15 @@ module Aws::RAM
       :name,
       :resource_type,
       :permission,
+      :permission_template_parameters,
       :creation_time,
       :last_updated_time,
       :is_resource_type_default,
       :permission_type,
       :feature_set,
       :status,
-      :tags)
+      :tags,
+      :resource_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3678,10 +3961,28 @@ module Aws::RAM
     #     in progress. This value changes to `STANDARD` when complete.
     #   @return [String]
     #
+    # @!attribute [rw] permission_template_parameters
+    #   The list of template parameters defined for this permission,
+    #   including their names, types, descriptions, and values. This field
+    #   is present only if the permission is a template with declared
+    #   parameters. When returned in the context of a permission
+    #   association, the values are also included.
+    #   @return [Array<Types::PermissionTemplateParameter>]
+    #
     # @!attribute [rw] tags
     #   A list of the tag key value pairs currently attached to the
     #   permission.
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] resource_owner
+    #   The owner of the permission. This can be one of the following
+    #   values:
+    #
+    #   * `SELF` – The permission is owned by the current account.
+    #
+    #   * `OTHER-ACCOUNTS` – The permission is owned by another account and
+    #     shared with the current account.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceSharePermissionSummary AWS API Documentation
     #
@@ -3697,7 +3998,9 @@ module Aws::RAM
       :is_resource_type_default,
       :permission_type,
       :feature_set,
-      :tags)
+      :permission_template_parameters,
+      :tags,
+      :resource_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4040,6 +4343,77 @@ module Aws::RAM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] permission_arn
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the customer
+    #   managed permission that you want to update.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Specifies the new status for the permission. This can be one of the
+    #   following values:
+    #
+    #   * `ATTACHABLE` – Restores a previously deprecated permission so it
+    #     can be associated with resource shares again.
+    #
+    #   * `DEPRECATED` – Deprecates the permission so it can no longer be
+    #     associated with new resource shares.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry
+    #   the request without accidentally performing the same operation a
+    #   second time. Passing the same value to a later call to an operation
+    #   requires that you also pass the same value for all other parameters.
+    #   We recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates
+    #   a random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/UpdatePermissionRequest AWS API Documentation
+    #
+    class UpdatePermissionRequest < Struct.new(
+      :permission_arn,
+      :status,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   The idempotency identifier associated with this request. If you want
+    #   to repeat the same operation in an idempotent manner then you must
+    #   include this value in the `clientToken` request parameter of that
+    #   later call. All other parameters must also have the same values that
+    #   you used in the first call.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_status
+    #   The updated status of the permission.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/UpdatePermissionResponse AWS API Documentation
+    #
+    class UpdatePermissionResponse < Struct.new(
+      :client_token,
+      :permission_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] resource_share_arn
     #   Specifies the [Amazon Resource Name (ARN)][1] of the resource share

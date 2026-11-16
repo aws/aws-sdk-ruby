@@ -12,7 +12,7 @@ module Aws::Lex
       attr_accessor name: ::String
       attr_accessor time_to_live: Types::ActiveContextTimeToLive
       attr_accessor parameters: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:parameters]
     end
 
     class ActiveContextTimeToLive

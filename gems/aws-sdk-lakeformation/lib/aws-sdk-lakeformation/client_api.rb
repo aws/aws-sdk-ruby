@@ -23,6 +23,8 @@ module Aws::LakeFormation
     AdditionalContextMap = Shapes::MapShape.new(name: 'AdditionalContextMap')
     AllRowsWildcard = Shapes::StructureShape.new(name: 'AllRowsWildcard')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
+    AnyResource = Shapes::StructureShape.new(name: 'AnyResource')
+    AnyResourceSupportedTypes = Shapes::StringShape.new(name: 'AnyResourceSupportedTypes')
     ApplicationArn = Shapes::StringShape.new(name: 'ApplicationArn')
     ApplicationStatus = Shapes::StringShape.new(name: 'ApplicationStatus')
     AssumeDecoratedRoleWithSAMLRequest = Shapes::StructureShape.new(name: 'AssumeDecoratedRoleWithSAMLRequest')
@@ -138,6 +140,8 @@ module Aws::LakeFormation
     GetDataLakeSettingsResponse = Shapes::StructureShape.new(name: 'GetDataLakeSettingsResponse')
     GetEffectivePermissionsForPathRequest = Shapes::StructureShape.new(name: 'GetEffectivePermissionsForPathRequest')
     GetEffectivePermissionsForPathResponse = Shapes::StructureShape.new(name: 'GetEffectivePermissionsForPathResponse')
+    GetGlueFunctionSessionContextRequest = Shapes::StructureShape.new(name: 'GetGlueFunctionSessionContextRequest')
+    GetGlueFunctionSessionContextResponse = Shapes::StructureShape.new(name: 'GetGlueFunctionSessionContextResponse')
     GetLFTagExpressionRequest = Shapes::StructureShape.new(name: 'GetLFTagExpressionRequest')
     GetLFTagExpressionResponse = Shapes::StructureShape.new(name: 'GetLFTagExpressionResponse')
     GetLFTagRequest = Shapes::StructureShape.new(name: 'GetLFTagRequest')
@@ -156,6 +160,8 @@ module Aws::LakeFormation
     GetTableObjectsResponse = Shapes::StructureShape.new(name: 'GetTableObjectsResponse')
     GetTemporaryDataLocationCredentialsRequest = Shapes::StructureShape.new(name: 'GetTemporaryDataLocationCredentialsRequest')
     GetTemporaryDataLocationCredentialsResponse = Shapes::StructureShape.new(name: 'GetTemporaryDataLocationCredentialsResponse')
+    GetTemporaryGlueFunctionCredentialsRequest = Shapes::StructureShape.new(name: 'GetTemporaryGlueFunctionCredentialsRequest')
+    GetTemporaryGlueFunctionCredentialsResponse = Shapes::StructureShape.new(name: 'GetTemporaryGlueFunctionCredentialsResponse')
     GetTemporaryGluePartitionCredentialsRequest = Shapes::StructureShape.new(name: 'GetTemporaryGluePartitionCredentialsRequest')
     GetTemporaryGluePartitionCredentialsResponse = Shapes::StructureShape.new(name: 'GetTemporaryGluePartitionCredentialsResponse')
     GetTemporaryGlueTableCredentialsRequest = Shapes::StructureShape.new(name: 'GetTemporaryGlueTableCredentialsRequest')
@@ -268,6 +274,7 @@ module Aws::LakeFormation
     RemoveLFTagsFromResourceRequest = Shapes::StructureShape.new(name: 'RemoveLFTagsFromResourceRequest')
     RemoveLFTagsFromResourceResponse = Shapes::StructureShape.new(name: 'RemoveLFTagsFromResourceResponse')
     Resource = Shapes::StructureShape.new(name: 'Resource')
+    ResourceArnList = Shapes::ListShape.new(name: 'ResourceArnList')
     ResourceArnString = Shapes::StringShape.new(name: 'ResourceArnString')
     ResourceInfo = Shapes::StructureShape.new(name: 'ResourceInfo')
     ResourceInfoList = Shapes::ListShape.new(name: 'ResourceInfoList')
@@ -293,6 +300,8 @@ module Aws::LakeFormation
     ServiceAuthorization = Shapes::StringShape.new(name: 'ServiceAuthorization')
     ServiceIntegrationList = Shapes::ListShape.new(name: 'ServiceIntegrationList')
     ServiceIntegrationUnion = Shapes::UnionShape.new(name: 'ServiceIntegrationUnion')
+    SessionContextIdString = Shapes::StringShape.new(name: 'SessionContextIdString')
+    SessionDurationSecondInteger = Shapes::IntegerShape.new(name: 'SessionDurationSecondInteger')
     SessionTokenString = Shapes::StringShape.new(name: 'SessionTokenString')
     StartQueryPlanningRequest = Shapes::StructureShape.new(name: 'StartQueryPlanningRequest')
     StartQueryPlanningResponse = Shapes::StructureShape.new(name: 'StartQueryPlanningResponse')
@@ -352,6 +361,8 @@ module Aws::LakeFormation
     UpdateTableObjectsResponse = Shapes::StructureShape.new(name: 'UpdateTableObjectsResponse')
     UpdateTableStorageOptimizerRequest = Shapes::StructureShape.new(name: 'UpdateTableStorageOptimizerRequest')
     UpdateTableStorageOptimizerResponse = Shapes::StructureShape.new(name: 'UpdateTableStorageOptimizerResponse')
+    UserDefinedFunctionResource = Shapes::StructureShape.new(name: 'UserDefinedFunctionResource')
+    UserDefinedFunctionWildcard = Shapes::StructureShape.new(name: 'UserDefinedFunctionWildcard')
     ValueString = Shapes::StringShape.new(name: 'ValueString')
     ValueStringList = Shapes::ListShape.new(name: 'ValueStringList')
     VerificationStatus = Shapes::StringShape.new(name: 'VerificationStatus')
@@ -390,6 +401,10 @@ module Aws::LakeFormation
 
     AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     AlreadyExistsException.struct_class = Types::AlreadyExistsException
+
+    AnyResource.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    AnyResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: AnyResourceSupportedTypes, required: true, location_name: "ResourceType"))
+    AnyResource.struct_class = Types::AnyResource
 
     AssumeDecoratedRoleWithSAMLRequest.add_member(:saml_assertion, Shapes::ShapeRef.new(shape: SAMLAssertionString, required: true, location_name: "SAMLAssertion"))
     AssumeDecoratedRoleWithSAMLRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "RoleArn"))
@@ -731,6 +746,14 @@ module Aws::LakeFormation
     GetEffectivePermissionsForPathResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetEffectivePermissionsForPathResponse.struct_class = Types::GetEffectivePermissionsForPathResponse
 
+    GetGlueFunctionSessionContextRequest.add_member(:user_defined_function_arns, Shapes::ShapeRef.new(shape: ResourceArnList, required: true, location_name: "UserDefinedFunctionArns"))
+    GetGlueFunctionSessionContextRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: SessionDurationSecondInteger, location_name: "DurationSeconds"))
+    GetGlueFunctionSessionContextRequest.struct_class = Types::GetGlueFunctionSessionContextRequest
+
+    GetGlueFunctionSessionContextResponse.add_member(:session_context_id, Shapes::ShapeRef.new(shape: SessionContextIdString, location_name: "SessionContextId"))
+    GetGlueFunctionSessionContextResponse.add_member(:expiration, Shapes::ShapeRef.new(shape: ExpirationTimestamp, location_name: "Expiration"))
+    GetGlueFunctionSessionContextResponse.struct_class = Types::GetGlueFunctionSessionContextResponse
+
     GetLFTagExpressionRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     GetLFTagExpressionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetLFTagExpressionRequest.struct_class = Types::GetLFTagExpressionRequest
@@ -805,6 +828,16 @@ module Aws::LakeFormation
     GetTemporaryDataLocationCredentialsResponse.add_member(:accessible_data_locations, Shapes::ShapeRef.new(shape: PathStringList, location_name: "AccessibleDataLocations"))
     GetTemporaryDataLocationCredentialsResponse.add_member(:credentials_scope, Shapes::ShapeRef.new(shape: CredentialsScope, location_name: "CredentialsScope"))
     GetTemporaryDataLocationCredentialsResponse.struct_class = Types::GetTemporaryDataLocationCredentialsResponse
+
+    GetTemporaryGlueFunctionCredentialsRequest.add_member(:user_defined_function_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "UserDefinedFunctionArn"))
+    GetTemporaryGlueFunctionCredentialsRequest.add_member(:audit_context, Shapes::ShapeRef.new(shape: AuditContext, location_name: "AuditContext"))
+    GetTemporaryGlueFunctionCredentialsRequest.struct_class = Types::GetTemporaryGlueFunctionCredentialsRequest
+
+    GetTemporaryGlueFunctionCredentialsResponse.add_member(:access_key_id, Shapes::ShapeRef.new(shape: AccessKeyIdString, location_name: "AccessKeyId"))
+    GetTemporaryGlueFunctionCredentialsResponse.add_member(:secret_access_key, Shapes::ShapeRef.new(shape: SecretAccessKeyString, location_name: "SecretAccessKey"))
+    GetTemporaryGlueFunctionCredentialsResponse.add_member(:session_token, Shapes::ShapeRef.new(shape: SessionTokenString, location_name: "SessionToken"))
+    GetTemporaryGlueFunctionCredentialsResponse.add_member(:expiration, Shapes::ShapeRef.new(shape: ExpirationTimestamp, location_name: "Expiration"))
+    GetTemporaryGlueFunctionCredentialsResponse.struct_class = Types::GetTemporaryGlueFunctionCredentialsResponse
 
     GetTemporaryGluePartitionCredentialsRequest.add_member(:table_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "TableArn"))
     GetTemporaryGluePartitionCredentialsRequest.add_member(:partition, Shapes::ShapeRef.new(shape: PartitionValueList, required: true, location_name: "Partition"))
@@ -1150,6 +1183,7 @@ module Aws::LakeFormation
     RemoveLFTagsFromResourceResponse.add_member(:failures, Shapes::ShapeRef.new(shape: LFTagErrors, location_name: "Failures"))
     RemoveLFTagsFromResourceResponse.struct_class = Types::RemoveLFTagsFromResourceResponse
 
+    Resource.add_member(:any_resource, Shapes::ShapeRef.new(shape: AnyResource, location_name: "AnyResource"))
     Resource.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogResource, location_name: "Catalog"))
     Resource.add_member(:database, Shapes::ShapeRef.new(shape: DatabaseResource, location_name: "Database"))
     Resource.add_member(:table, Shapes::ShapeRef.new(shape: TableResource, location_name: "Table"))
@@ -1160,7 +1194,10 @@ module Aws::LakeFormation
     Resource.add_member(:lf_tag_policy, Shapes::ShapeRef.new(shape: LFTagPolicyResource, location_name: "LFTagPolicy"))
     Resource.add_member(:lf_tag_expression, Shapes::ShapeRef.new(shape: LFTagExpressionResource, location_name: "LFTagExpression"))
     Resource.add_member(:rls_policy, Shapes::ShapeRef.new(shape: RLSPolicyResource, location_name: "RLSPolicy"))
+    Resource.add_member(:user_defined_function, Shapes::ShapeRef.new(shape: UserDefinedFunctionResource, location_name: "UserDefinedFunction"))
     Resource.struct_class = Types::Resource
+
+    ResourceArnList.member = Shapes::ShapeRef.new(shape: ResourceArnString)
 
     ResourceInfo.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, location_name: "ResourceArn"))
     ResourceInfo.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "RoleArn"))
@@ -1385,6 +1422,14 @@ module Aws::LakeFormation
 
     UpdateTableStorageOptimizerResponse.add_member(:result, Shapes::ShapeRef.new(shape: Result, location_name: "Result"))
     UpdateTableStorageOptimizerResponse.struct_class = Types::UpdateTableStorageOptimizerResponse
+
+    UserDefinedFunctionResource.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    UserDefinedFunctionResource.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    UserDefinedFunctionResource.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    UserDefinedFunctionResource.add_member(:user_defined_function_wildcard, Shapes::ShapeRef.new(shape: UserDefinedFunctionWildcard, location_name: "UserDefinedFunctionWildcard"))
+    UserDefinedFunctionResource.struct_class = Types::UserDefinedFunctionResource
+
+    UserDefinedFunctionWildcard.struct_class = Types::UserDefinedFunctionWildcard
 
     ValueStringList.member = Shapes::ShapeRef.new(shape: ValueString)
 
@@ -1837,6 +1882,19 @@ module Aws::LakeFormation
         )
       end)
 
+      api.add_operation(:get_glue_function_session_context, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetGlueFunctionSessionContext"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetGlueFunctionSessionContext"
+        o.input = Shapes::ShapeRef.new(shape: GetGlueFunctionSessionContextRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetGlueFunctionSessionContextResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_lf_tag, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetLFTag"
         o.http_method = "POST"
@@ -1955,6 +2013,20 @@ module Aws::LakeFormation
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:get_temporary_glue_function_credentials, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTemporaryGlueFunctionCredentials"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetTemporaryGlueFunctionCredentials"
+        o.input = Shapes::ShapeRef.new(shape: GetTemporaryGlueFunctionCredentialsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTemporaryGlueFunctionCredentialsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:get_temporary_glue_partition_credentials, Seahorse::Model::Operation.new.tap do |o|

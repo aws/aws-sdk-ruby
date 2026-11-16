@@ -135,6 +135,7 @@ module Aws::MediaPackageV2
       attr_accessor program_information: Types::DashProgramInformation
       attr_accessor dvb_settings: Types::DashDvbSettings
       attr_accessor compactness: ("STANDARD" | "NONE")
+      attr_accessor bandwidth_reporting_mode: ("AVERAGE" | "MAX")
       attr_accessor audio_timeline_pattern: ("NONE" | "PATTERNED")
       attr_accessor subtitle_configuration: Types::DashSubtitleConfiguration
       attr_accessor uri_path_type: ("LEAF" | "ROOT")
@@ -478,6 +479,7 @@ module Aws::MediaPackageV2
       attr_accessor program_information: Types::DashProgramInformation
       attr_accessor dvb_settings: Types::DashDvbSettings
       attr_accessor compactness: ("STANDARD" | "NONE")
+      attr_accessor bandwidth_reporting_mode: ("AVERAGE" | "MAX")
       attr_accessor audio_timeline_pattern: ("NONE" | "PATTERNED")
       attr_accessor subtitle_configuration: Types::DashSubtitleConfiguration
       attr_accessor uri_path_type: ("LEAF" | "ROOT")

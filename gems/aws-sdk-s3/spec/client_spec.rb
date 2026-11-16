@@ -33,6 +33,35 @@ module Aws
         expect(resp.next_marker).to be(nil)
       end
 
+      describe 'response paging' do
+        let(:client) { Client.new(options.merge(stub_responses: true)) }
+
+        it 'pages through list_objects_v2 results' do
+          client.stub_responses(
+            :list_objects_v2,
+            [
+              { contents: [{ key: 'a' }], is_truncated: true,
+                next_continuation_token: 'token' },
+              { contents: [{ key: 'b' }], is_truncated: false }
+            ]
+          )
+          resp = client.list_objects_v2(bucket: 'b')
+          expect(resp.next_page?).to be(true)
+          keys = resp.each_page.flat_map { |page| page.contents.map(&:key) }
+          expect(keys).to eq(%w[a b])
+          expect(client.api_requests.last[:params])
+            .to include(continuation_token: 'token')
+        end
+
+        it 'returns a single page for nonpaginated operations' do
+          resp = client.head_bucket(bucket: 'b')
+          expect(resp.last_page?).to be(true)
+          expect(resp.each_page.to_a).to eq([resp])
+          expect { resp.next_page }
+            .to raise_error(Aws::PageableResponse::LastPageError)
+        end
+      end
+
       describe 'request ids' do
         it 'populates request id and host id in the response context' do
           options.merge!(stub_responses: true)
@@ -763,10 +792,7 @@ module Aws
         end
       end
 
-      # TODO: Update retries to 2 and remove stub when new retries become default
       describe "200 errors response handling" do
-        before { allow(Aws::Plugins::RetryErrors).to receive(:new_retries?).and_return(false) }
-
         {
           complete_multipart_upload: { upload_id: 'upload-id' },
           copy_object: { copy_source: 'bucket/key' },
@@ -799,7 +825,7 @@ module Aws
               key: 'key'
             }.merge(params))
             expect(resp.error).to be_kind_of(S3::Errors::InternalError)
-            expect(resp.context.retries).to eq(3)
+            expect(resp.context.retries).to eq(2)
             expect(resp.data).to be(nil)
           end
 
@@ -818,7 +844,7 @@ module Aws
               key: 'key'
             }.merge(params))
             expect(resp.error).to be_kind_of(Seahorse::Client::NetworkingError)
-            expect(resp.context.retries).to eq(3)
+            expect(resp.context.retries).to eq(2)
             expect(resp.data).to be(nil)
           end
         end

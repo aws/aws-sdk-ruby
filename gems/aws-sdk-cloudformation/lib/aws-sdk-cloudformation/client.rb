@@ -264,7 +264,8 @@ module Aws::CloudFormation
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::CloudFormation
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -4263,6 +4264,7 @@ module Aws::CloudFormation
     #   resp.stacks[0].last_operations #=> Array
     #   resp.stacks[0].last_operations[0].operation_type #=> String, one of "CREATE_STACK", "UPDATE_STACK", "DELETE_STACK", "CONTINUE_ROLLBACK", "ROLLBACK", "CREATE_CHANGESET"
     #   resp.stacks[0].last_operations[0].operation_id #=> String
+    #   resp.stacks[0].alias_name #=> String
     #   resp.next_token #=> String
     #
     #
@@ -7484,6 +7486,39 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
+    # Removes an alias from a stack. After the alias is removed
+    # successfully, it can no longer be used to reference the stack in API
+    # calls.
+    #
+    # @option params [required, String] :alias_name
+    #   The alias name to remove.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Example – Remove an alias from a stack
+    #
+    #   # The following example removes the alias MyAlias from your stack:
+    #
+    #   resp = client.remove_alias({
+    #     alias_name: "MyAlias", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_alias({
+    #     alias_name: "AliasName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RemoveAlias AWS API Documentation
+    #
+    # @overload remove_alias(params = {})
+    # @param [Hash] params ({})
+    def remove_alias(params = {}, options = {})
+      req = build_request(:remove_alias, params)
+      req.send_request(options)
+    end
+
     # When specifying `RollbackStack`, you preserve the state of previously
     # provisioned resources when an operation fails. You can check the
     # status of the stack through the DescribeStacks operation.
@@ -7555,6 +7590,64 @@ module Aws::CloudFormation
     # @param [Hash] params ({})
     def rollback_stack(params = {}, options = {})
       req = build_request(:rollback_stack, params)
+      req.send_request(options)
+    end
+
+    # Assigns an alias to an existing stack. An alias is an alternative name
+    # for a stack that can be used in place of the stack name in any
+    # CloudFormation API call that accepts the `StackName` parameter. This
+    # enables you to effectively rename a stack without recreating it.
+    #
+    # After setting an alias, both the original stack name and the alias
+    # resolve to the same stack. Setting an alias does not change the
+    # stack's ARN, physical resource IDs, or any deployed resources.
+    #
+    # <note markdown="1"> Each stack can have at most one alias. To change a stack's alias,
+    # first remove the existing alias using RemoveAlias, then set a new one.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :stack_name
+    #   The name or unique stack ID of the stack to assign an alias to.
+    #
+    # @option params [required, String] :alias_name
+    #   The alias to assign to the stack. The alias can then be used in place
+    #   of the stack name in any API call that accepts `StackName`.
+    #
+    #   The name must be unique within the same account and Region. It cannot
+    #   match an existing stack name or another active alias.
+    #
+    #   <note markdown="1"> An alias name can contain only alphanumeric characters
+    #   (case-sensitive) and hyphens. It must start with an alphabetic
+    #   character and can't be longer than 128 characters.
+    #
+    #    </note>
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Example – Set an alias for a stack
+    #
+    #   # The following example assigns the alias MyAlias to the stack MyStack:
+    #
+    #   resp = client.set_alias({
+    #     alias_name: "MyAlias", 
+    #     stack_name: "MyStack", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_alias({
+    #     stack_name: "StackName", # required
+    #     alias_name: "AliasName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SetAlias AWS API Documentation
+    #
+    # @overload set_alias(params = {})
+    # @param [Hash] params ({})
+    def set_alias(params = {}, options = {})
+      req = build_request(:set_alias, params)
       req.send_request(options)
     end
 
@@ -9231,7 +9324,7 @@ module Aws::CloudFormation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.164.0'
+      context[:gem_version] = '1.171.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

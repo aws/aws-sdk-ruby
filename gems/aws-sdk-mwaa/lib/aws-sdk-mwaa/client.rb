@@ -264,7 +264,8 @@ module Aws::MWAA
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::MWAA
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -777,6 +778,24 @@ module Aws::MWAA
     #   from `2` to `5`. Defaults to `2` for all environment sizes except
     #   mw1.micro, which defaults to `1`.
     #
+    # @option params [Types::IdentityCenterConfiguration] :identity_center_configuration
+    #   The Amazon Web Services IAM Identity Center configuration used to
+    #   authenticate users to the Apache Airflow web UI for your environment.
+    #
+    # @option params [Hash<String,Types::TeamConfig>] :teams
+    #   A map of teams to configure for Apache Airflow multi-team support on
+    #   your Amazon MWAA environment. Each entry maps a team name to a object
+    #   that defines the Amazon S3 location of that team's DAG code. The team
+    #   name must match the display name of an Amazon Web Services IAM
+    #   Identity Center group that you associate with your environment, so you
+    #   must configure IAM Identity Center for the environment before you add
+    #   teams. You can configure between `1` and `20` teams. For more
+    #   information, refer to [Apache Airflow multi-team environments][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/multi-team-environments.html
+    #
     # @return [Types::CreateEnvironmentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEnvironmentOutput#arn #arn} => String
@@ -837,6 +856,16 @@ module Aws::MWAA
     #     endpoint_management: "CUSTOMER", # accepts CUSTOMER, SERVICE
     #     min_webservers: 1,
     #     max_webservers: 1,
+    #     identity_center_configuration: {
+    #       start_url: "IdentityCenterStartUrl",
+    #       identity_store_id: "IdentityCenterIdentityStoreId",
+    #     },
+    #     teams: {
+    #       "TeamNameString" => {
+    #         source_bucket_arn: "S3BucketArn", # required
+    #         dag_s3_path: "RelativePath", # required
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -993,6 +1022,11 @@ module Aws::MWAA
     #   resp.environment.endpoint_management #=> String, one of "CUSTOMER", "SERVICE"
     #   resp.environment.min_webservers #=> Integer
     #   resp.environment.max_webservers #=> Integer
+    #   resp.environment.identity_center_configuration.start_url #=> String
+    #   resp.environment.identity_center_configuration.identity_store_id #=> String
+    #   resp.environment.teams #=> Hash
+    #   resp.environment.teams["TeamNameString"].source_bucket_arn #=> String
+    #   resp.environment.teams["TeamNameString"].dag_s3_path #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/GetEnvironment AWS API Documentation
     #
@@ -1507,6 +1541,21 @@ module Aws::MWAA
     #   `TUE:03:30`. You can specify a start time in 30 minute increments
     #   only.
     #
+    # @option params [Types::IdentityCenterConfiguration] :identity_center_configuration
+    #   The Amazon Web Services IAM Identity Center configuration used to
+    #   authenticate users to the Apache Airflow web UI for your environment.
+    #
+    # @option params [Types::UpdateTeamsInput] :teams
+    #   Updates the teams configured for Apache Airflow multi-team support on
+    #   your Amazon MWAA environment. Use `AddOrUpdate` to add new teams or
+    #   change the configuration of existing teams, and `Remove` to remove
+    #   teams by name. For more information, refer to [Apache Airflow
+    #   multi-team environments][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/multi-team-environments.html
+    #
     # @return [Types::UpdateEnvironmentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateEnvironmentOutput#arn #arn} => String
@@ -1562,6 +1611,19 @@ module Aws::MWAA
     #     startup_script_s3_object_version: "S3ObjectVersion",
     #     webserver_access_mode: "PRIVATE_ONLY", # accepts PRIVATE_ONLY, PUBLIC_ONLY, PUBLIC_AND_PRIVATE
     #     weekly_maintenance_window_start: "WeeklyMaintenanceWindowStart",
+    #     identity_center_configuration: {
+    #       start_url: "IdentityCenterStartUrl",
+    #       identity_store_id: "IdentityCenterIdentityStoreId",
+    #     },
+    #     teams: {
+    #       add_or_update: {
+    #         "TeamNameString" => {
+    #           source_bucket_arn: "S3BucketArn", # required
+    #           dag_s3_path: "RelativePath", # required
+    #         },
+    #       },
+    #       remove: ["TeamNameString"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -1595,7 +1657,7 @@ module Aws::MWAA
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mwaa'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

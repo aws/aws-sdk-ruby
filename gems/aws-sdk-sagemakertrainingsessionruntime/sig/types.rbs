@@ -75,7 +75,7 @@ module Aws::SageMakerTrainingSessionRuntime
       attr_accessor loss_fn_name: ("cross_entropy" | "importance_sampling" | "ppo" | "cispo")
       attr_accessor datum_list: ::Array[Types::Datum]
       attr_accessor loss_fn_config: untyped
-      SENSITIVE: []
+      SENSITIVE: [:datum_list]
     end
 
     class ForwardBackwardResult
@@ -90,7 +90,7 @@ module Aws::SageMakerTrainingSessionRuntime
       attr_accessor loss_fn_name: ("cross_entropy" | "importance_sampling" | "ppo" | "cispo")
       attr_accessor datum_list: ::Array[Types::Datum]
       attr_accessor loss_fn_config: untyped
-      SENSITIVE: []
+      SENSITIVE: [:datum_list]
     end
 
     class ForwardResult

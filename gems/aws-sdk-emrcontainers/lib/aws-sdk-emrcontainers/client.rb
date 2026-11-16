@@ -264,7 +264,8 @@ module Aws::EMRContainers
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::EMRContainers
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -860,8 +861,9 @@ module Aws::EMRContainers
     #
     # @option params [Types::SchedulerConfiguration] :scheduler_configuration
     #   The scheduler configuration (concurrency and queue limits) to apply to
-    #   the virtual cluster at creation time. When omitted, no limits are
-    #   applied.
+    #   the virtual cluster at creation time. If you omit this field, the
+    #   service applies a default limit of 1,000 concurrent job runs and does
+    #   not limit queue depth.
     #
     # @return [Types::CreateVirtualClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2058,8 +2060,10 @@ module Aws::EMRContainers
     #
     # @option params [Types::SchedulerConfiguration] :scheduler_configuration
     #   The scheduler configuration to apply to the virtual cluster. The new
-    #   configuration fully replaces the existing one. If you omit a field,
-    #   the corresponding limit is removed.
+    #   configuration fully replaces the existing one. If you omit
+    #   `maxInQueueJobRuns`, the service removes the queue-depth limit. If you
+    #   omit `maxConcurrentJobRuns`, the service applies the default limit of
+    #   1,000 concurrent job runs.
     #
     # @option params [required, String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure that
@@ -2132,7 +2136,7 @@ module Aws::EMRContainers
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-emrcontainers'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

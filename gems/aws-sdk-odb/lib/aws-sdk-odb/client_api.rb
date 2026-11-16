@@ -26,6 +26,8 @@ module Aws::Odb
     AssociateIamRoleToResourceInput = Shapes::StructureShape.new(name: 'AssociateIamRoleToResourceInput')
     AssociateIamRoleToResourceInputResourceArnString = Shapes::StringShape.new(name: 'AssociateIamRoleToResourceInputResourceArnString')
     AssociateIamRoleToResourceOutput = Shapes::StructureShape.new(name: 'AssociateIamRoleToResourceOutput')
+    AssociateVirtualMachinesToCloudVmClusterInput = Shapes::StructureShape.new(name: 'AssociateVirtualMachinesToCloudVmClusterInput')
+    AssociateVirtualMachinesToCloudVmClusterOutput = Shapes::StructureShape.new(name: 'AssociateVirtualMachinesToCloudVmClusterOutput')
     AssociateVirtualMachinesToExadbVmClusterInput = Shapes::StructureShape.new(name: 'AssociateVirtualMachinesToExadbVmClusterInput')
     AssociateVirtualMachinesToExadbVmClusterInputDesiredNodeCountInteger = Shapes::IntegerShape.new(name: 'AssociateVirtualMachinesToExadbVmClusterInputDesiredNodeCountInteger')
     AssociateVirtualMachinesToExadbVmClusterOutput = Shapes::StructureShape.new(name: 'AssociateVirtualMachinesToExadbVmClusterOutput')
@@ -219,6 +221,8 @@ module Aws::Odb
     DisassociateIamRoleFromResourceInput = Shapes::StructureShape.new(name: 'DisassociateIamRoleFromResourceInput')
     DisassociateIamRoleFromResourceInputResourceArnString = Shapes::StringShape.new(name: 'DisassociateIamRoleFromResourceInputResourceArnString')
     DisassociateIamRoleFromResourceOutput = Shapes::StructureShape.new(name: 'DisassociateIamRoleFromResourceOutput')
+    DisassociateVirtualMachinesFromCloudVmClusterInput = Shapes::StructureShape.new(name: 'DisassociateVirtualMachinesFromCloudVmClusterInput')
+    DisassociateVirtualMachinesFromCloudVmClusterOutput = Shapes::StructureShape.new(name: 'DisassociateVirtualMachinesFromCloudVmClusterOutput')
     DisassociateVirtualMachinesFromExadbVmClusterInput = Shapes::StructureShape.new(name: 'DisassociateVirtualMachinesFromExadbVmClusterInput')
     DisassociateVirtualMachinesFromExadbVmClusterOutput = Shapes::StructureShape.new(name: 'DisassociateVirtualMachinesFromExadbVmClusterOutput')
     DisasterRecoveryConfiguration = Shapes::StructureShape.new(name: 'DisasterRecoveryConfiguration')
@@ -538,8 +542,23 @@ module Aws::Odb
     UpdateAutonomousDatabaseInputDbVersionString = Shapes::StringShape.new(name: 'UpdateAutonomousDatabaseInputDbVersionString')
     UpdateAutonomousDatabaseInputLocalAdgAutoFailoverMaxDataLossLimitInteger = Shapes::IntegerShape.new(name: 'UpdateAutonomousDatabaseInputLocalAdgAutoFailoverMaxDataLossLimitInteger')
     UpdateAutonomousDatabaseOutput = Shapes::StructureShape.new(name: 'UpdateAutonomousDatabaseOutput')
+    UpdateCloudAutonomousVmClusterInput = Shapes::StructureShape.new(name: 'UpdateCloudAutonomousVmClusterInput')
+    UpdateCloudAutonomousVmClusterInputAutonomousDataStorageSizeInTBsDouble = Shapes::FloatShape.new(name: 'UpdateCloudAutonomousVmClusterInputAutonomousDataStorageSizeInTBsDouble')
+    UpdateCloudAutonomousVmClusterInputCpuCoreCountPerNodeInteger = Shapes::IntegerShape.new(name: 'UpdateCloudAutonomousVmClusterInputCpuCoreCountPerNodeInteger')
+    UpdateCloudAutonomousVmClusterInputDescriptionString = Shapes::StringShape.new(name: 'UpdateCloudAutonomousVmClusterInputDescriptionString')
+    UpdateCloudAutonomousVmClusterInputTotalContainerDatabasesInteger = Shapes::IntegerShape.new(name: 'UpdateCloudAutonomousVmClusterInputTotalContainerDatabasesInteger')
+    UpdateCloudAutonomousVmClusterOutput = Shapes::StructureShape.new(name: 'UpdateCloudAutonomousVmClusterOutput')
     UpdateCloudExadataInfrastructureInput = Shapes::StructureShape.new(name: 'UpdateCloudExadataInfrastructureInput')
     UpdateCloudExadataInfrastructureOutput = Shapes::StructureShape.new(name: 'UpdateCloudExadataInfrastructureOutput')
+    UpdateCloudExadataInfrastructureStorageCapacityInput = Shapes::StructureShape.new(name: 'UpdateCloudExadataInfrastructureStorageCapacityInput')
+    UpdateCloudExadataInfrastructureStorageCapacityOutput = Shapes::StructureShape.new(name: 'UpdateCloudExadataInfrastructureStorageCapacityOutput')
+    UpdateCloudVmClusterInput = Shapes::StructureShape.new(name: 'UpdateCloudVmClusterInput')
+    UpdateCloudVmClusterInputCpuCoreCountInteger = Shapes::IntegerShape.new(name: 'UpdateCloudVmClusterInputCpuCoreCountInteger')
+    UpdateCloudVmClusterInputDataStorageSizeInTBsDouble = Shapes::FloatShape.new(name: 'UpdateCloudVmClusterInputDataStorageSizeInTBsDouble')
+    UpdateCloudVmClusterInputDbNodeStorageSizeInGBsInteger = Shapes::IntegerShape.new(name: 'UpdateCloudVmClusterInputDbNodeStorageSizeInGBsInteger')
+    UpdateCloudVmClusterInputMemorySizeInGBsInteger = Shapes::IntegerShape.new(name: 'UpdateCloudVmClusterInputMemorySizeInGBsInteger')
+    UpdateCloudVmClusterInputStorageSizeInGBsInteger = Shapes::IntegerShape.new(name: 'UpdateCloudVmClusterInputStorageSizeInGBsInteger')
+    UpdateCloudVmClusterOutput = Shapes::StructureShape.new(name: 'UpdateCloudVmClusterOutput')
     UpdateExadbVmClusterInput = Shapes::StructureShape.new(name: 'UpdateExadbVmClusterInput')
     UpdateExadbVmClusterInputEnabledEcpuCountInteger = Shapes::IntegerShape.new(name: 'UpdateExadbVmClusterInputEnabledEcpuCountInteger')
     UpdateExadbVmClusterInputGridImageIdString = Shapes::StringShape.new(name: 'UpdateExadbVmClusterInputGridImageIdString')
@@ -604,6 +623,16 @@ module Aws::Odb
     AssociateIamRoleToResourceInput.struct_class = Types::AssociateIamRoleToResourceInput
 
     AssociateIamRoleToResourceOutput.struct_class = Types::AssociateIamRoleToResourceOutput
+
+    AssociateVirtualMachinesToCloudVmClusterInput.add_member(:cloud_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "cloudVmClusterId"))
+    AssociateVirtualMachinesToCloudVmClusterInput.add_member(:db_servers, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "dbServers"))
+    AssociateVirtualMachinesToCloudVmClusterInput.struct_class = Types::AssociateVirtualMachinesToCloudVmClusterInput
+
+    AssociateVirtualMachinesToCloudVmClusterOutput.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    AssociateVirtualMachinesToCloudVmClusterOutput.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
+    AssociateVirtualMachinesToCloudVmClusterOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    AssociateVirtualMachinesToCloudVmClusterOutput.add_member(:cloud_vm_cluster_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cloudVmClusterId"))
+    AssociateVirtualMachinesToCloudVmClusterOutput.struct_class = Types::AssociateVirtualMachinesToCloudVmClusterOutput
 
     AssociateVirtualMachinesToExadbVmClusterInput.add_member(:exadb_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "exadbVmClusterId"))
     AssociateVirtualMachinesToExadbVmClusterInput.add_member(:desired_node_count, Shapes::ShapeRef.new(shape: AssociateVirtualMachinesToExadbVmClusterInputDesiredNodeCountInteger, required: true, location_name: "desiredNodeCount"))
@@ -987,6 +1016,7 @@ module Aws::Odb
     CloudAutonomousVmCluster.add_member(:memory_size_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "memorySizeInGBs"))
     CloudAutonomousVmCluster.add_member(:node_count, Shapes::ShapeRef.new(shape: Integer, location_name: "nodeCount"))
     CloudAutonomousVmCluster.add_member(:non_provisionable_autonomous_container_databases, Shapes::ShapeRef.new(shape: Integer, location_name: "nonProvisionableAutonomousContainerDatabases"))
+    CloudAutonomousVmCluster.add_member(:ocpus_lowest_scaled_value, Shapes::ShapeRef.new(shape: Integer, location_name: "ocpusLowestScaledValue"))
     CloudAutonomousVmCluster.add_member(:provisionable_autonomous_container_databases, Shapes::ShapeRef.new(shape: Integer, location_name: "provisionableAutonomousContainerDatabases"))
     CloudAutonomousVmCluster.add_member(:provisioned_autonomous_container_databases, Shapes::ShapeRef.new(shape: Integer, location_name: "provisionedAutonomousContainerDatabases"))
     CloudAutonomousVmCluster.add_member(:provisioned_cpus, Shapes::ShapeRef.new(shape: Float, location_name: "provisionedCpus"))
@@ -1049,6 +1079,7 @@ module Aws::Odb
     CloudAutonomousVmClusterSummary.add_member(:memory_size_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "memorySizeInGBs"))
     CloudAutonomousVmClusterSummary.add_member(:node_count, Shapes::ShapeRef.new(shape: Integer, location_name: "nodeCount"))
     CloudAutonomousVmClusterSummary.add_member(:non_provisionable_autonomous_container_databases, Shapes::ShapeRef.new(shape: Integer, location_name: "nonProvisionableAutonomousContainerDatabases"))
+    CloudAutonomousVmClusterSummary.add_member(:ocpus_lowest_scaled_value, Shapes::ShapeRef.new(shape: Integer, location_name: "ocpusLowestScaledValue"))
     CloudAutonomousVmClusterSummary.add_member(:provisionable_autonomous_container_databases, Shapes::ShapeRef.new(shape: Integer, location_name: "provisionableAutonomousContainerDatabases"))
     CloudAutonomousVmClusterSummary.add_member(:provisioned_autonomous_container_databases, Shapes::ShapeRef.new(shape: Integer, location_name: "provisionedAutonomousContainerDatabases"))
     CloudAutonomousVmClusterSummary.add_member(:provisioned_cpus, Shapes::ShapeRef.new(shape: Float, location_name: "provisionedCpus"))
@@ -1786,6 +1817,16 @@ module Aws::Odb
     DisassociateIamRoleFromResourceInput.struct_class = Types::DisassociateIamRoleFromResourceInput
 
     DisassociateIamRoleFromResourceOutput.struct_class = Types::DisassociateIamRoleFromResourceOutput
+
+    DisassociateVirtualMachinesFromCloudVmClusterInput.add_member(:cloud_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "cloudVmClusterId"))
+    DisassociateVirtualMachinesFromCloudVmClusterInput.add_member(:db_servers, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "dbServers"))
+    DisassociateVirtualMachinesFromCloudVmClusterInput.struct_class = Types::DisassociateVirtualMachinesFromCloudVmClusterInput
+
+    DisassociateVirtualMachinesFromCloudVmClusterOutput.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    DisassociateVirtualMachinesFromCloudVmClusterOutput.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
+    DisassociateVirtualMachinesFromCloudVmClusterOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    DisassociateVirtualMachinesFromCloudVmClusterOutput.add_member(:cloud_vm_cluster_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cloudVmClusterId"))
+    DisassociateVirtualMachinesFromCloudVmClusterOutput.struct_class = Types::DisassociateVirtualMachinesFromCloudVmClusterOutput
 
     DisassociateVirtualMachinesFromExadbVmClusterInput.add_member(:exadb_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "exadbVmClusterId"))
     DisassociateVirtualMachinesFromExadbVmClusterInput.add_member(:db_node_ids, Shapes::ShapeRef.new(shape: ResourceIdList, required: true, location_name: "dbNodeIds"))
@@ -2781,8 +2822,27 @@ module Aws::Odb
     UpdateAutonomousDatabaseOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     UpdateAutonomousDatabaseOutput.struct_class = Types::UpdateAutonomousDatabaseOutput
 
+    UpdateCloudAutonomousVmClusterInput.add_member(:cloud_autonomous_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "cloudAutonomousVmClusterId"))
+    UpdateCloudAutonomousVmClusterInput.add_member(:autonomous_data_storage_size_in_t_bs, Shapes::ShapeRef.new(shape: UpdateCloudAutonomousVmClusterInputAutonomousDataStorageSizeInTBsDouble, location_name: "autonomousDataStorageSizeInTBs"))
+    UpdateCloudAutonomousVmClusterInput.add_member(:cpu_core_count_per_node, Shapes::ShapeRef.new(shape: UpdateCloudAutonomousVmClusterInputCpuCoreCountPerNodeInteger, location_name: "cpuCoreCountPerNode"))
+    UpdateCloudAutonomousVmClusterInput.add_member(:description, Shapes::ShapeRef.new(shape: UpdateCloudAutonomousVmClusterInputDescriptionString, location_name: "description"))
+    UpdateCloudAutonomousVmClusterInput.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceDisplayName, location_name: "displayName"))
+    UpdateCloudAutonomousVmClusterInput.add_member(:license_model, Shapes::ShapeRef.new(shape: LicenseModel, location_name: "licenseModel"))
+    UpdateCloudAutonomousVmClusterInput.add_member(:maintenance_window, Shapes::ShapeRef.new(shape: MaintenanceWindow, location_name: "maintenanceWindow"))
+    UpdateCloudAutonomousVmClusterInput.add_member(:total_container_databases, Shapes::ShapeRef.new(shape: UpdateCloudAutonomousVmClusterInputTotalContainerDatabasesInteger, location_name: "totalContainerDatabases"))
+    UpdateCloudAutonomousVmClusterInput.struct_class = Types::UpdateCloudAutonomousVmClusterInput
+
+    UpdateCloudAutonomousVmClusterOutput.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    UpdateCloudAutonomousVmClusterOutput.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
+    UpdateCloudAutonomousVmClusterOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    UpdateCloudAutonomousVmClusterOutput.add_member(:cloud_autonomous_vm_cluster_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cloudAutonomousVmClusterId"))
+    UpdateCloudAutonomousVmClusterOutput.struct_class = Types::UpdateCloudAutonomousVmClusterOutput
+
     UpdateCloudExadataInfrastructureInput.add_member(:cloud_exadata_infrastructure_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "cloudExadataInfrastructureId"))
+    UpdateCloudExadataInfrastructureInput.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceDisplayName, location_name: "displayName"))
+    UpdateCloudExadataInfrastructureInput.add_member(:compute_count, Shapes::ShapeRef.new(shape: Integer, location_name: "computeCount"))
     UpdateCloudExadataInfrastructureInput.add_member(:maintenance_window, Shapes::ShapeRef.new(shape: MaintenanceWindow, location_name: "maintenanceWindow"))
+    UpdateCloudExadataInfrastructureInput.add_member(:storage_count, Shapes::ShapeRef.new(shape: Integer, location_name: "storageCount"))
     UpdateCloudExadataInfrastructureInput.struct_class = Types::UpdateCloudExadataInfrastructureInput
 
     UpdateCloudExadataInfrastructureOutput.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
@@ -2790,6 +2850,33 @@ module Aws::Odb
     UpdateCloudExadataInfrastructureOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     UpdateCloudExadataInfrastructureOutput.add_member(:cloud_exadata_infrastructure_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cloudExadataInfrastructureId"))
     UpdateCloudExadataInfrastructureOutput.struct_class = Types::UpdateCloudExadataInfrastructureOutput
+
+    UpdateCloudExadataInfrastructureStorageCapacityInput.add_member(:cloud_exadata_infrastructure_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "cloudExadataInfrastructureId"))
+    UpdateCloudExadataInfrastructureStorageCapacityInput.struct_class = Types::UpdateCloudExadataInfrastructureStorageCapacityInput
+
+    UpdateCloudExadataInfrastructureStorageCapacityOutput.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    UpdateCloudExadataInfrastructureStorageCapacityOutput.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
+    UpdateCloudExadataInfrastructureStorageCapacityOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    UpdateCloudExadataInfrastructureStorageCapacityOutput.add_member(:cloud_exadata_infrastructure_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cloudExadataInfrastructureId"))
+    UpdateCloudExadataInfrastructureStorageCapacityOutput.struct_class = Types::UpdateCloudExadataInfrastructureStorageCapacityOutput
+
+    UpdateCloudVmClusterInput.add_member(:cloud_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "cloudVmClusterId"))
+    UpdateCloudVmClusterInput.add_member(:cpu_core_count, Shapes::ShapeRef.new(shape: UpdateCloudVmClusterInputCpuCoreCountInteger, location_name: "cpuCoreCount"))
+    UpdateCloudVmClusterInput.add_member(:data_collection_options, Shapes::ShapeRef.new(shape: DataCollectionOptions, location_name: "dataCollectionOptions"))
+    UpdateCloudVmClusterInput.add_member(:data_storage_size_in_t_bs, Shapes::ShapeRef.new(shape: UpdateCloudVmClusterInputDataStorageSizeInTBsDouble, location_name: "dataStorageSizeInTBs"))
+    UpdateCloudVmClusterInput.add_member(:db_node_storage_size_in_g_bs, Shapes::ShapeRef.new(shape: UpdateCloudVmClusterInputDbNodeStorageSizeInGBsInteger, location_name: "dbNodeStorageSizeInGBs"))
+    UpdateCloudVmClusterInput.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceDisplayName, location_name: "displayName"))
+    UpdateCloudVmClusterInput.add_member(:ssh_public_keys, Shapes::ShapeRef.new(shape: StringList, location_name: "sshPublicKeys"))
+    UpdateCloudVmClusterInput.add_member(:license_model, Shapes::ShapeRef.new(shape: LicenseModel, location_name: "licenseModel"))
+    UpdateCloudVmClusterInput.add_member(:memory_size_in_g_bs, Shapes::ShapeRef.new(shape: UpdateCloudVmClusterInputMemorySizeInGBsInteger, location_name: "memorySizeInGBs"))
+    UpdateCloudVmClusterInput.add_member(:storage_size_in_g_bs, Shapes::ShapeRef.new(shape: UpdateCloudVmClusterInputStorageSizeInGBsInteger, location_name: "storageSizeInGBs"))
+    UpdateCloudVmClusterInput.struct_class = Types::UpdateCloudVmClusterInput
+
+    UpdateCloudVmClusterOutput.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    UpdateCloudVmClusterOutput.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
+    UpdateCloudVmClusterOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    UpdateCloudVmClusterOutput.add_member(:cloud_vm_cluster_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cloudVmClusterId"))
+    UpdateCloudVmClusterOutput.struct_class = Types::UpdateCloudVmClusterOutput
 
     UpdateExadbVmClusterInput.add_member(:exadb_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "exadbVmClusterId"))
     UpdateExadbVmClusterInput.add_member(:data_collection_options, Shapes::ShapeRef.new(shape: DataCollectionOptions, location_name: "dataCollectionOptions"))
@@ -2942,6 +3029,20 @@ module Aws::Odb
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AssociateIamRoleToResourceInput)
         o.output = Shapes::ShapeRef.new(shape: AssociateIamRoleToResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:associate_virtual_machines_to_cloud_vm_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateVirtualMachinesToCloudVmCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateVirtualMachinesToCloudVmClusterInput)
+        o.output = Shapes::ShapeRef.new(shape: AssociateVirtualMachinesToCloudVmClusterOutput)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -3238,6 +3339,20 @@ module Aws::Odb
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DisassociateIamRoleFromResourceInput)
         o.output = Shapes::ShapeRef.new(shape: DisassociateIamRoleFromResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:disassociate_virtual_machines_from_cloud_vm_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateVirtualMachinesFromCloudVmCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateVirtualMachinesFromCloudVmClusterInput)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateVirtualMachinesFromCloudVmClusterOutput)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -4036,12 +4151,54 @@ module Aws::Odb
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:update_cloud_autonomous_vm_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCloudAutonomousVmCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCloudAutonomousVmClusterInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCloudAutonomousVmClusterOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:update_cloud_exadata_infrastructure, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateCloudExadataInfrastructure"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateCloudExadataInfrastructureInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateCloudExadataInfrastructureOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_cloud_exadata_infrastructure_storage_capacity, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCloudExadataInfrastructureStorageCapacity"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCloudExadataInfrastructureStorageCapacityInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCloudExadataInfrastructureStorageCapacityOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_cloud_vm_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCloudVmCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCloudVmClusterInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCloudVmClusterOutput)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

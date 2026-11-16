@@ -250,6 +250,17 @@ module Aws
       stop_timeout: ::Integer?
     }
 
+      type eks_pod_security_context = {
+      run_as_user: ::Integer?,
+      run_as_group: ::Integer?,
+      run_as_non_root: bool?,
+      seccomp_profile: {
+        type: ("RuntimeDefault" | "Localhost" | "Unconfined"),
+        localhost_profile: ::String?
+      }?,
+      fs_group: ::Integer?
+    }
+
       type eks_pod_properties = {
       service_account_name: ::String?,
       host_network: bool?,
@@ -273,7 +284,8 @@ module Aws
         annotations: Hash[::String, ::String]?,
         namespace: ::String?
       }?,
-      share_process_namespace: bool?
+      share_process_namespace: bool?,
+      security_context: Params::eks_pod_security_context?
     }
 
       type eks_properties = {
@@ -286,7 +298,15 @@ module Aws
       privileged: bool?,
       allow_privilege_escalation: bool?,
       read_only_root_filesystem: bool?,
-      run_as_non_root: bool?
+      run_as_non_root: bool?,
+      capabilities: {
+        add: Array[::String]?,
+        drop: Array[::String]?
+      }?,
+      seccomp_profile: {
+        type: ("RuntimeDefault" | "Localhost" | "Unconfined"),
+        localhost_profile: ::String?
+      }?
     }
 
       type eks_container = {

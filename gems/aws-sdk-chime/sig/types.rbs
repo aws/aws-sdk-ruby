@@ -196,7 +196,7 @@ module Aws::Chime
     class CreatePhoneNumberOrderRequest
       attr_accessor product_type: ("BusinessCalling" | "VoiceConnector" | "SipMediaApplicationDialIn")
       attr_accessor e164_phone_numbers: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:e164_phone_numbers]
     end
 
     class CreatePhoneNumberOrderResponse
@@ -435,7 +435,7 @@ module Aws::Chime
       attr_accessor account_id: ::String
       attr_accessor user_email_list: ::Array[::String]
       attr_accessor user_type: ("PrivateUser" | "SharedDevice")
-      SENSITIVE: []
+      SENSITIVE: [:user_email_list]
     end
 
     class InviteUsersResponse
@@ -779,7 +779,7 @@ module Aws::Chime
     class SearchAvailablePhoneNumbersResponse
       attr_accessor e164_phone_numbers: ::Array[::String]
       attr_accessor next_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:e164_phone_numbers]
     end
 
     class ServiceFailureException

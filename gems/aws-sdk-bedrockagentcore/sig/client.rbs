@@ -818,6 +818,7 @@ module Aws
       interface _InvokeAgentRuntimeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::InvokeAgentRuntimeResponse]
         def runtime_session_id: () -> ::String
+        def session_endpoint_url: () -> ::String
         def mcp_session_id: () -> ::String
         def mcp_protocol_version: () -> ::String
         def trace_id: () -> ::String
@@ -1067,7 +1068,15 @@ module Aws
                                 config: {
                                   remote_mcp: {
                                     url: ::String,
-                                    headers: Hash[::String, ::String]?
+                                    headers: Hash[::String, ::String]?,
+                                    outbound_auth: {
+                                      aws_iam: {
+                                        service: ::String,
+                                        region: ::String?
+                                      }?,
+                                      none: {
+                                      }?
+                                    }?
                                   }?,
                                   agent_core_browser: {
                                     browser_arn: ::String?
@@ -1125,6 +1134,28 @@ module Aws
                             ?actor_id: ::String
                           ) ?{ (*untyped) -> void } -> _InvokeHarnessResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeHarnessResponseSuccess
+
+      interface _InvokeWebSearchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeWebSearchOutput]
+        def results: () -> ::Array[Types::WebSearchResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#invoke_web_search-instance_method
+      def invoke_web_search: (
+                               web_search_id: ::String,
+                               search_query: ::String,
+                               ?max_results: ::Integer,
+                               ?filters: {
+                                 domain_filter: {
+                                   include: Array[::String]?,
+                                   exclude: Array[::String]?
+                                 }?,
+                                 published_date_filter: {
+                                   published_after: ::Time?,
+                                   published_before: ::Time?
+                                 }?
+                               }
+                             ) -> _InvokeWebSearchResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeWebSearchResponseSuccess
 
       interface _ListABTestsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListABTestsResponse]

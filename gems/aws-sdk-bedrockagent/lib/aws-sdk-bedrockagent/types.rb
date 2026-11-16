@@ -6896,6 +6896,17 @@ module Aws::BedrockAgent
     #   failed.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] metadata_configurations
+    #   The custom metadata field configurations of the knowledge base. Each
+    #   configuration specifies whether its field is searchable (`ENABLED`
+    #   or `DISABLED`).
+    #
+    #   If the update fails, the knowledge base status becomes
+    #   `UPDATE_UNSUCCESSFUL`, the field configurations revert to their
+    #   previous values, and `failureReasons` describes the cause. You can
+    #   retry the update from `UPDATE_UNSUCCESSFUL`.
+    #   @return [Array<Types::MetadataConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/KnowledgeBase AWS API Documentation
     #
     class KnowledgeBase < Struct.new(
@@ -6909,7 +6920,8 @@ module Aws::BedrockAgent
       :status,
       :created_at,
       :updated_at,
-      :failure_reasons)
+      :failure_reasons,
+      :metadata_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8467,6 +8479,38 @@ module Aws::BedrockAgent
       :string_value,
       :string_list_value)
       SENSITIVE = [:number_value, :string_value, :string_list_value]
+      include Aws::Structure
+    end
+
+    # Contains the configuration of a single custom metadata field in a
+    # knowledge base, including its name, data type, and whether the field
+    # is searchable.
+    #
+    # @!attribute [rw] name
+    #   The name of the custom metadata field.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The data type of the custom metadata field. Valid values are
+    #   `STRING` and `STRING_LIST`.
+    #   @return [String]
+    #
+    # @!attribute [rw] searchability
+    #   Specifies whether the custom metadata field is searchable. Valid
+    #   values:
+    #
+    #   * `ENABLED` – The field is searchable.
+    #
+    #   * `DISABLED` – The field is not searchable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/MetadataConfiguration AWS API Documentation
+    #
+    class MetadataConfiguration < Struct.new(
+      :name,
+      :type,
+      :searchability)
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -12661,6 +12705,17 @@ module Aws::BedrockAgent
     #   knowledge base was created.
     #   @return [Types::StorageConfiguration]
     #
+    # @!attribute [rw] metadata_configurations
+    #   Specifies up to 30 custom metadata field configurations for a
+    #   managed knowledge base.
+    #
+    #   The list that you specify replaces the existing configurations. The
+    #   update removes any configuration that you leave out, and its field
+    #   is no longer searchable. An empty list removes all configurations.
+    #   If you don't specify a list, the existing configurations don't
+    #   change.
+    #   @return [Array<Types::MetadataConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateKnowledgeBaseRequest AWS API Documentation
     #
     class UpdateKnowledgeBaseRequest < Struct.new(
@@ -12669,7 +12724,8 @@ module Aws::BedrockAgent
       :description,
       :role_arn,
       :knowledge_base_configuration,
-      :storage_configuration)
+      :storage_configuration,
+      :metadata_configurations)
       SENSITIVE = []
       include Aws::Structure
     end

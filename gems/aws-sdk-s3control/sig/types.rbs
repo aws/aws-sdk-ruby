@@ -771,6 +771,7 @@ module Aws::S3Control
       attr_accessor privilege: ("Minimal" | "Default")
       attr_accessor target_type: ("Object")
       attr_accessor audit_context: ::String
+      attr_accessor instance_scope: ("SELF" | "ALL")
       SENSITIVE: []
     end
 
@@ -778,6 +779,7 @@ module Aws::S3Control
       attr_accessor credentials: Types::Credentials
       attr_accessor matched_grant_target: ::String
       attr_accessor grantee: Types::Grantee
+      attr_accessor matched_instance_arn: ::String
       SENSITIVE: [:credentials]
     end
 
@@ -1218,6 +1220,7 @@ module Aws::S3Control
       attr_accessor permission: ("READ" | "WRITE" | "READWRITE")
       attr_accessor grant_scope: ::String
       attr_accessor application_arn: ::String
+      attr_accessor access_grants_instance_arn: ::String
       SENSITIVE: []
     end
 
@@ -1227,6 +1230,7 @@ module Aws::S3Control
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       attr_accessor allowed_by_application: bool
+      attr_accessor instance_scope: ("SELF" | "ALL")
       SENSITIVE: []
     end
 

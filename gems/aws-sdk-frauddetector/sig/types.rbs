@@ -205,7 +205,7 @@ module Aws::FraudDetector
       attr_accessor variable_type: ::String
       attr_accessor description: ::String
       attr_accessor tags: ::Array[Types::Tag]
-      SENSITIVE: []
+      SENSITIVE: [:elements]
     end
 
     class CreateListResult < Aws::EmptyStructure
@@ -513,7 +513,7 @@ module Aws::FraudDetector
       attr_accessor current_label: ::String
       attr_accessor label_timestamp: ::String
       attr_accessor entities: ::Array[Types::Entity]
-      SENSITIVE: []
+      SENSITIVE: [:event_variables, :entities]
     end
 
     class EventOrchestration
@@ -726,7 +726,7 @@ module Aws::FraudDetector
       attr_accessor event_timestamp: ::String
       attr_accessor event_variables: ::Hash[::String, ::String]
       attr_accessor external_model_endpoint_data_blobs: ::Hash[::String, Types::ModelEndpointDataBlob]
-      SENSITIVE: [:external_model_endpoint_data_blobs]
+      SENSITIVE: [:entities, :event_variables, :external_model_endpoint_data_blobs]
     end
 
     class GetEventPredictionResult
@@ -757,7 +757,7 @@ module Aws::FraudDetector
     class GetEventTypesResult
       attr_accessor event_types: ::Array[Types::EventType]
       attr_accessor next_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:event_types]
     end
 
     class GetExternalModelsRequest
@@ -801,7 +801,7 @@ module Aws::FraudDetector
     class GetListElementsResult
       attr_accessor elements: ::Array[::String]
       attr_accessor next_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:elements]
     end
 
     class GetListsMetadataRequest
@@ -1217,7 +1217,7 @@ module Aws::FraudDetector
       attr_accessor assigned_label: ::String
       attr_accessor label_timestamp: ::String
       attr_accessor entities: ::Array[Types::Entity]
-      SENSITIVE: []
+      SENSITIVE: [:event_variables, :entities]
     end
 
     class SendEventResult < Aws::EmptyStructure
@@ -1363,7 +1363,7 @@ module Aws::FraudDetector
       attr_accessor description: ::String
       attr_accessor update_mode: ("REPLACE" | "APPEND" | "REMOVE")
       attr_accessor variable_type: ::String
-      SENSITIVE: []
+      SENSITIVE: [:elements]
     end
 
     class UpdateListResult < Aws::EmptyStructure

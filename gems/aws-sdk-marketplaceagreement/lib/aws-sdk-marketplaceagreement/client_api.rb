@@ -118,6 +118,7 @@ module Aws::MarketplaceAgreement
     FixedPercentage = Shapes::StructureShape.new(name: 'FixedPercentage')
     FixedUpfrontPricingTerm = Shapes::StructureShape.new(name: 'FixedUpfrontPricingTerm')
     FreeTrialPricingTerm = Shapes::StructureShape.new(name: 'FreeTrialPricingTerm')
+    FreeTrialSummary = Shapes::StructureShape.new(name: 'FreeTrialSummary')
     GetAgreementCancellationRequestInput = Shapes::StructureShape.new(name: 'GetAgreementCancellationRequestInput')
     GetAgreementCancellationRequestOutput = Shapes::StructureShape.new(name: 'GetAgreementCancellationRequestOutput')
     GetAgreementEntitlementsInput = Shapes::StructureShape.new(name: 'GetAgreementEntitlementsInput')
@@ -370,6 +371,7 @@ module Aws::MarketplaceAgreement
     AgreementViewSummary.add_member(:initial_agreement_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "initialAgreementId"))
     AgreementViewSummary.add_member(:end_time_behavior_type, Shapes::ShapeRef.new(shape: EndTimeBehaviorType, location_name: "endTimeBehaviorType"))
     AgreementViewSummary.add_member(:end_time_behavior_reason_code, Shapes::ShapeRef.new(shape: EndTimeBehaviorReasonCode, location_name: "endTimeBehaviorReasonCode"))
+    AgreementViewSummary.add_member(:free_trial_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "freeTrialEndTime"))
     AgreementViewSummary.struct_class = Types::AgreementViewSummary
 
     AgreementViewSummaryList.member = Shapes::ShapeRef.new(shape: AgreementViewSummary)
@@ -534,6 +536,7 @@ module Aws::MarketplaceAgreement
     DescribeAgreementOutput.add_member(:status, Shapes::ShapeRef.new(shape: AgreementStatus, location_name: "status"))
     DescribeAgreementOutput.add_member(:initial_agreement_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "initialAgreementId"))
     DescribeAgreementOutput.add_member(:end_time_behavior, Shapes::ShapeRef.new(shape: EndTimeBehavior, location_name: "endTimeBehavior"))
+    DescribeAgreementOutput.add_member(:free_trial_summary, Shapes::ShapeRef.new(shape: FreeTrialSummary, location_name: "freeTrialSummary"))
     DescribeAgreementOutput.struct_class = Types::DescribeAgreementOutput
 
     Dimension.add_member(:dimension_key, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "dimensionKey"))
@@ -601,6 +604,9 @@ module Aws::MarketplaceAgreement
     FreeTrialPricingTerm.add_member(:duration, Shapes::ShapeRef.new(shape: BoundedString, location_name: "duration"))
     FreeTrialPricingTerm.add_member(:grants, Shapes::ShapeRef.new(shape: GrantList, location_name: "grants"))
     FreeTrialPricingTerm.struct_class = Types::FreeTrialPricingTerm
+
+    FreeTrialSummary.add_member(:trial_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "trialEndTime"))
+    FreeTrialSummary.struct_class = Types::FreeTrialSummary
 
     GetAgreementCancellationRequestInput.add_member(:agreement_cancellation_request_id, Shapes::ShapeRef.new(shape: AgreementCancellationRequestId, required: true, location_name: "agreementCancellationRequestId"))
     GetAgreementCancellationRequestInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, required: true, location_name: "agreementId"))

@@ -264,7 +264,8 @@ module Aws::MarketplaceMetering
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::MarketplaceMetering
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -549,6 +550,9 @@ module Aws::MarketplaceMetering
     # [BatchMeterUsage with usage allocation tagging code example][7] in the
     # *Amazon Web Services Marketplace Seller Guide*.
     #
+    # To report fractional usage, use `QuantityAsDecimal` instead of
+    # `Quantity` in each `UsageRecord`.
+    #
     # `BatchMeterUsage` returns a list of `UsageRecordResult` objects, which
     # have each `UsageRecord`. It also returns a list of
     # `UnprocessedRecords`, which indicate errors on the service side that
@@ -609,9 +613,11 @@ module Aws::MarketplaceMetering
     #         customer_identifier: "CustomerIdentifier",
     #         dimension: "UsageDimension", # required
     #         quantity: 1,
+    #         quantity_as_decimal: "UsageQuantityAsDecimalString",
     #         usage_allocations: [
     #           {
-    #             allocated_usage_quantity: 1, # required
+    #             allocated_usage_quantity: 1,
+    #             allocated_usage_quantity_as_decimal: "AllocatedUsageQuantityAsDecimalString",
     #             tags: [
     #               {
     #                 key: "TagKey", # required
@@ -634,8 +640,10 @@ module Aws::MarketplaceMetering
     #   resp.results[0].usage_record.customer_identifier #=> String
     #   resp.results[0].usage_record.dimension #=> String
     #   resp.results[0].usage_record.quantity #=> Integer
+    #   resp.results[0].usage_record.quantity_as_decimal #=> String
     #   resp.results[0].usage_record.usage_allocations #=> Array
     #   resp.results[0].usage_record.usage_allocations[0].allocated_usage_quantity #=> Integer
+    #   resp.results[0].usage_record.usage_allocations[0].allocated_usage_quantity_as_decimal #=> String
     #   resp.results[0].usage_record.usage_allocations[0].tags #=> Array
     #   resp.results[0].usage_record.usage_allocations[0].tags[0].key #=> String
     #   resp.results[0].usage_record.usage_allocations[0].tags[0].value #=> String
@@ -648,8 +656,10 @@ module Aws::MarketplaceMetering
     #   resp.unprocessed_records[0].customer_identifier #=> String
     #   resp.unprocessed_records[0].dimension #=> String
     #   resp.unprocessed_records[0].quantity #=> Integer
+    #   resp.unprocessed_records[0].quantity_as_decimal #=> String
     #   resp.unprocessed_records[0].usage_allocations #=> Array
     #   resp.unprocessed_records[0].usage_allocations[0].allocated_usage_quantity #=> Integer
+    #   resp.unprocessed_records[0].usage_allocations[0].allocated_usage_quantity_as_decimal #=> String
     #   resp.unprocessed_records[0].usage_allocations[0].tags #=> Array
     #   resp.unprocessed_records[0].usage_allocations[0].tags[0].key #=> String
     #   resp.unprocessed_records[0].usage_allocations[0].tags[0].value #=> String
@@ -720,6 +730,9 @@ module Aws::MarketplaceMetering
     # records won't be accepted. The timestamp in your request determines
     # when an event is recorded.
     #
+    # To report fractional usage, use `UsageQuantityAsDecimal` instead of
+    # `UsageQuantity`.
+    #
     # You can optionally include multiple usage allocations, to provide
     # customers with usage data split into buckets by tags that you define
     # or allow the customer to define.
@@ -753,7 +766,25 @@ module Aws::MarketplaceMetering
     #   publishing of the product.
     #
     # @option params [Integer] :usage_quantity
-    #   Consumption value for the hour. Defaults to `0` if not specified.
+    #   The consumption value for the hour, as a whole number. Defaults to `0`
+    #   if neither `UsageQuantity` nor `UsageQuantityAsDecimal` is specified.
+    #
+    #   Use `UsageQuantityAsDecimal` instead. You can't specify both
+    #   `UsageQuantity` and `UsageQuantityAsDecimal`.
+    #
+    # @option params [String] :usage_quantity_as_decimal
+    #   The consumption value for the hour, as a decimal string. Use this
+    #   instead of `UsageQuantity` to report fractional usage.
+    #
+    #   A non-negative decimal number, for example `17.42`.
+    #
+    #   You can't specify both `UsageQuantity` and `UsageQuantityAsDecimal`.
+    #   If you provide `UsageAllocations`, each allocation must use
+    #   `AllocatedUsageQuantityAsDecimal`.
+    #
+    #   Quantities are compared by value when checking for duplicate or
+    #   retried requests, so `17`, `17.0`, and `17.00` are the same quantity,
+    #   whether you send it in `UsageQuantity` or `UsageQuantityAsDecimal`.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the permissions required for the action, but
@@ -764,9 +795,13 @@ module Aws::MarketplaceMetering
     # @option params [Array<Types::UsageAllocation>] :usage_allocations
     #   The set of `UsageAllocations` to submit.
     #
-    #   The sum of all `UsageAllocation` quantities must equal the
-    #   `UsageQuantity` of the `MeterUsage` request, and each
-    #   `UsageAllocation` must have a unique set of tags (include no tags).
+    #   The sum of all `UsageAllocation` quantities must equal the usage
+    #   quantity of the `MeterUsage` request (`UsageQuantity` or
+    #   `UsageQuantityAsDecimal`), and each `UsageAllocation` must have a
+    #   unique set of tags (include no tags). Allocations must use the same
+    #   type of quantity as the request: `AllocatedUsageQuantity` with
+    #   `UsageQuantity`, or `AllocatedUsageQuantityAsDecimal` with
+    #   `UsageQuantityAsDecimal`.
     #
     # @option params [String] :client_token
     #   Specifies a unique, case-sensitive identifier that you provide to
@@ -801,10 +836,12 @@ module Aws::MarketplaceMetering
     #     timestamp: Time.now, # required
     #     usage_dimension: "UsageDimension", # required
     #     usage_quantity: 1,
+    #     usage_quantity_as_decimal: "UsageQuantityAsDecimalString",
     #     dry_run: false,
     #     usage_allocations: [
     #       {
-    #         allocated_usage_quantity: 1, # required
+    #         allocated_usage_quantity: 1,
+    #         allocated_usage_quantity_as_decimal: "AllocatedUsageQuantityAsDecimalString",
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -1014,7 +1051,7 @@ module Aws::MarketplaceMetering
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacemetering'
-      context[:gem_version] = '1.111.0'
+      context[:gem_version] = '1.117.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

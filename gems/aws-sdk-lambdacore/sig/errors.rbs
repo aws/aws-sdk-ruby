@@ -31,6 +31,10 @@ module Aws
         def type: () -> ::String
         def message: () -> ::String
       end
+      class ServiceQuotaExceededException < ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
       class TooManyRequestsException < ServiceError
         def retry_after_seconds: () -> ::String
         def type: () -> ::String

@@ -625,6 +625,14 @@ module Aws::EC2
     #   The exclusion configuration for Elastic File System service.
     #   @return [String]
     #
+    # @!attribute [rw] global_accelerator
+    #   The exclusion configuration for AWS Global Accelerator.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_gateway_v2
+    #   The exclusion configuration for Amazon API Gateway V2.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AccountVpcEncryptionControlExclusions AWS API Documentation
     #
     class AccountVpcEncryptionControlExclusions < Struct.new(
@@ -635,7 +643,9 @@ module Aws::EC2
       :vpc_peering,
       :lambda,
       :vpc_lattice,
-      :elastic_file_system)
+      :elastic_file_system,
+      :global_accelerator,
+      :api_gateway_v2)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3163,6 +3173,78 @@ module Aws::EC2
     class AssociateNatGatewayAddressResult < Struct.new(
       :nat_gateway_id,
       :nat_gateway_addresses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fca_policy_id
+    #   The ID of the flex cost allocation policy to associate. This
+    #   parameter is required.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_resource_ids
+    #   The IDs of the network resources to associate with the policy. You
+    #   can specify from 1 to 20 resource IDs.
+    #
+    #   You must specify `NetworkResourceIds`, `NetworkResourceScope`, or
+    #   both. A request can include at most 20 distinct resources in total.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] network_resource_scope
+    #   The scope of network resources to associate with the policy. Use a
+    #   scope to associate the policy with the resources in an account,
+    #   Amazon VPC, or subnet.
+    #
+    #   You must specify `NetworkResourceScope`, `NetworkResourceIds`, or
+    #   both.
+    #   @return [Types::FlexCostAllocationNetworkResourceScope]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateNetworkingFlexCostAllocationPolicyRequest AWS API Documentation
+    #
+    class AssociateNetworkingFlexCostAllocationPolicyRequest < Struct.new(
+      :fca_policy_id,
+      :network_resource_ids,
+      :network_resource_scope,
+      :client_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fca_policy_associations
+    #   Information about the policy associations that were created.
+    #   @return [Array<Types::FlexCostAllocationPolicyAssociationDescription>]
+    #
+    # @!attribute [rw] fca_policy_association_failures
+    #   Information about the network resources that could not be associated
+    #   with the policy.
+    #   @return [Array<Types::FlexCostAllocationOperationFailure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateNetworkingFlexCostAllocationPolicyResult AWS API Documentation
+    #
+    class AssociateNetworkingFlexCostAllocationPolicyResult < Struct.new(
+      :fca_policy_associations,
+      :fca_policy_association_failures)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9533,15 +9615,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] destination_region
-    #   The destination Region to use in the `PresignedUrl` parameter of a
-    #   snapshot copy operation. This parameter is only valid for specifying
-    #   the destination Region in a `PresignedUrl` parameter, where it is
-    #   required.
-    #
-    #   The snapshot copy is sent to the regional endpoint that you sent the
-    #   HTTP request to (for example, `ec2.us-east-1.amazonaws.com`). With
-    #   the CLI, this is specified using the `--region` parameter or the
-    #   default Region in your Amazon Web Services configuration file.
+    #   Deprecated.
     #   @return [String]
     #
     # @!attribute [rw] encrypted
@@ -9582,27 +9656,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] presigned_url
-    #   When you copy an encrypted source snapshot using the Amazon EC2
-    #   Query API, you must supply a pre-signed URL. This parameter is
-    #   optional for unencrypted snapshots. For more information, see [Query
-    #   requests][1].
-    #
-    #   The `PresignedUrl` should use the snapshot source endpoint, the
-    #   `CopySnapshot` action, and include the `SourceRegion`,
-    #   `SourceSnapshotId`, and `DestinationRegion` parameters. The
-    #   `PresignedUrl` must be signed using Amazon Web Services Signature
-    #   Version 4. Because EBS snapshots are stored in Amazon S3, the
-    #   signing algorithm for this parameter uses the same logic that is
-    #   described in [ Authenticating Requests: Using Query Parameters
-    #   (Amazon Web Services Signature Version 4)][2] in the *Amazon S3 API
-    #   Reference*. An invalid or improperly signed `PresignedUrl` will
-    #   cause the copy operation to fail asynchronously, and the snapshot
-    #   will move to an `error` state.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    #   Deprecated.
     #   @return [String]
     #
     # @!attribute [rw] source_region
@@ -11926,7 +11980,8 @@ module Aws::EC2
     # @!attribute [rw] traffic_type
     #   The type of traffic to monitor (accepted traffic, rejected traffic,
     #   or all traffic). This parameter is not supported for transit gateway
-    #   resource types. It is required for the other resource types.
+    #   or Cloud WAN resource types. It is required for the other resource
+    #   types.
     #   @return [String]
     #
     # @!attribute [rw] log_destination_type
@@ -11966,8 +12021,9 @@ module Aws::EC2
     #   flow log is created using the default format. If you specify this
     #   parameter, you must include at least one field. For more information
     #   about the available fields, see [Flow log records][1] in the *Amazon
-    #   VPC User Guide* or [Transit Gateway Flow Log records][2] in the
-    #   *Amazon Web Services Transit Gateway Guide*.
+    #   VPC User Guide*, [Transit Gateway Flow Log records][2] in the
+    #   *Amazon Web Services Transit Gateway Guide*, or [Cloud WAN Flow Log
+    #   records][3] in the *Amazon Web Services Cloud WAN User Guide*.
     #
     #   Specify the fields using the `${field-id}` format, separated by
     #   spaces.
@@ -11976,6 +12032,7 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html
     #   [2]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-flow-logs.html#flow-log-records
+    #   [3]: https://docs.aws.amazon.com/network-manager/latest/cloudwan/cwan-flow-logs.html
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
@@ -11986,7 +12043,8 @@ module Aws::EC2
     #   The maximum interval of time during which a flow of packets is
     #   captured and aggregated into a flow log record. The possible values
     #   are 60 seconds (1 minute) or 600 seconds (10 minutes). This
-    #   parameter must be 60 seconds for transit gateway resource types.
+    #   parameter must be 60 seconds for transit gateway and Cloud WAN
+    #   resource types.
     #
     #   When a network interface is attached to a [Nitro-based instance][1],
     #   the aggregation interval is always 60 seconds or less, regardless of
@@ -12745,7 +12803,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] rir
-    #   The Regional Internet Registry to associate with. Possible values:
+    #   The internet registry to associate with. Possible values:
     #
     #   * `ripe` - RIPE NCC (Europe, the Middle East, and Central Asia).
     #
@@ -12754,6 +12812,8 @@ module Aws::EC2
     #   * `arin` - ARIN (North America).
     #
     #   * `lacnic` - LACNIC (Latin America and the Caribbean).
+    #
+    #   * `nicbr` - NIC.br (Brazil).
     #   @return [String]
     #
     # @!attribute [rw] organization_handle
@@ -14243,6 +14303,64 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] metrics
+    #   The names of the metrics to include in the metric category.
+    #
+    #   Specify each metric by its Amazon CloudWatch metric name or its
+    #   OpenTelemetry metric name. The two names for a measurement are
+    #   separate entries, and you can include both.
+    #
+    #   In Regions where Amazon CloudWatch OpenTelemetry metrics aren't
+    #   available, you can't specify OpenTelemetry metric names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the metric category during creation.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateMetricCategoryRequest AWS API Documentation
+    #
+    class CreateMetricCategoryRequest < Struct.new(
+      :metrics,
+      :tag_specifications,
+      :client_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_category
+    #   Information about the metric category.
+    #   @return [Types::MetricCategory]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateMetricCategoryResult AWS API Documentation
+    #
+    class CreateMetricCategoryResult < Struct.new(
+      :metric_category)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] availability_mode
     #   Specifies whether to create a zonal (single-AZ) or regional
     #   (multi-AZ) NAT gateway. Defaults to `zonal`.
@@ -14944,6 +15062,112 @@ module Aws::EC2
     class CreateNetworkInterfaceResult < Struct.new(
       :network_interface,
       :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_resource_type
+    #   The type of network resource that the policy applies to. This
+    #   parameter is required. Valid values are `natgw` (NAT gateway), `pcx`
+    #   (Amazon VPC peering connection), and `ec2` (EC2 instance).
+    #
+    #   Specify the policy document that matches the resource type:
+    #   `NatFcaPolicyDocument` for `natgw`, `InstanceFcaPolicyDocument` for
+    #   `ec2`, or `PcxFcaPolicyDocument` for `pcx`. Don't specify a policy
+    #   document for a different resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_fca_policy_document
+    #   The policy document that defines cost allocation for NAT gateways.
+    #   Provide this document when `NetworkResourceType` is `natgw`.
+    #   @return [Types::NatFlexCostAllocationPolicyDocument]
+    #
+    # @!attribute [rw] instance_fca_policy_document
+    #   The policy document that defines cost allocation for EC2 instances.
+    #   Provide this document when `NetworkResourceType` is `ec2`.
+    #   @return [Types::InstanceFlexCostAllocationPolicyDocument]
+    #
+    # @!attribute [rw] pcx_fca_policy_document
+    #   The policy document that defines cost allocation for Amazon VPC
+    #   peering connections. Provide this document when
+    #   `NetworkResourceType` is `pcx`.
+    #   @return [Types::PcxFlexCostAllocationPolicyDocument]
+    #
+    # @!attribute [rw] show_back_enabled
+    #   Specifies whether showback reporting is enabled for the policy.
+    #
+    #   Default: `true`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   A description for the policy. The description can be up to 1024
+    #   characters long.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to the policy.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkingFlexCostAllocationPolicyRequest AWS API Documentation
+    #
+    class CreateNetworkingFlexCostAllocationPolicyRequest < Struct.new(
+      :network_resource_type,
+      :nat_fca_policy_document,
+      :instance_fca_policy_document,
+      :pcx_fca_policy_document,
+      :show_back_enabled,
+      :description,
+      :tag_specifications,
+      :client_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fca_policy_id
+    #   The ID of the flex cost allocation policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] fca_policy_arn
+    #   The Amazon Resource Name (ARN) of the flex cost allocation policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the policy was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expected_effective_at
+    #   The date and time when the policy is expected to apply to network
+    #   traffic.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkingFlexCostAllocationPolicyResult AWS API Documentation
+    #
+    class CreateNetworkingFlexCostAllocationPolicyResult < Struct.new(
+      :fca_policy_id,
+      :fca_policy_arn,
+      :created_at,
+      :expected_effective_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21107,6 +21331,38 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] metric_category_id
+    #   The ID of the metric category.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteMetricCategoryRequest AWS API Documentation
+    #
+    class DeleteMetricCategoryRequest < Struct.new(
+      :metric_category_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_category_id
+    #   The ID of the metric category that was deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteMetricCategoryResult AWS API Documentation
+    #
+    class DeleteMetricCategoryResult < Struct.new(
+      :metric_category_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -21377,6 +21633,44 @@ module Aws::EC2
     class DeleteNetworkInterfaceRequest < Struct.new(
       :dry_run,
       :network_interface_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fca_policy_ids
+    #   The IDs of the flex cost allocation policies to delete. You can
+    #   specify up to 50 policy IDs. This parameter is required.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkingFlexCostAllocationPoliciesRequest AWS API Documentation
+    #
+    class DeleteNetworkingFlexCostAllocationPoliciesRequest < Struct.new(
+      :fca_policy_ids,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful
+    #   The IDs of the policies that were successfully deleted.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failed
+    #   Information about the policies that could not be deleted.
+    #   @return [Array<Types::FlexCostAllocationOperationFailure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkingFlexCostAllocationPoliciesResult AWS API Documentation
+    #
+    class DeleteNetworkingFlexCostAllocationPoliciesResult < Struct.new(
+      :successful,
+      :failed)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27492,7 +27786,8 @@ module Aws::EC2
     #     for example, `2025-11-29T*`, which matches an entire day.
     #
     #   * `resource-type` - The resource type (`ec2:Instance` \|
-    #     `ec2:LaunchTemplate`).
+    #     `ec2:LaunchTemplate` \| `imagebuilder:ImageRecipe` \|
+    #     `imagebuilder:ContainerRecipe`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] dry_run
@@ -31603,6 +31898,74 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] metric_category_ids
+    #   The IDs of the metric categories. If you specify IDs, you can't
+    #   specify `MaxResults` or `NextToken`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   The filters.
+    #
+    #   * `metric-name` - The name of a metric in the metric category.
+    #
+    #   ^
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #   Valid range: 5 - 100.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeMetricCategoriesRequest AWS API Documentation
+    #
+    class DescribeMetricCategoriesRequest < Struct.new(
+      :metric_category_ids,
+      :filters,
+      :max_results,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_categories
+    #   Information about the metric categories.
+    #   @return [Array<Types::MetricCategory>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeMetricCategoriesResult AWS API Documentation
+    #
+    class DescribeMetricCategoriesResult < Struct.new(
+      :metric_categories,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -32489,6 +32852,138 @@ module Aws::EC2
     #
     class DescribeNetworkInterfacesResult < Struct.new(
       :network_interfaces,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fca_policy_ids
+    #   The IDs of the flex cost allocation policies to describe.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. The range
+    #   is 5 to 1000. To retrieve the remaining results, make another call
+    #   with the returned `nextToken` value.
+    #
+    #   Default: 100
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   The filters.
+    #
+    #   * `fca-policy-id` - The ID of the policy.
+    #
+    #   * `managed-by` - The entity that manages the policy (`account` \|
+    #     `declarative-policy`).
+    #
+    #   * `network-resource-type` - The type of network resource that the
+    #     policy applies to (`natgw` \| `ec2` \| `pcx`).
+    #
+    #   * `showback-enabled` - Indicates whether showback reporting is
+    #     enabled for the policy (`true` \| `false`).
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkingFlexCostAllocationPoliciesRequest AWS API Documentation
+    #
+    class DescribeNetworkingFlexCostAllocationPoliciesRequest < Struct.new(
+      :fca_policy_ids,
+      :max_results,
+      :filters,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] flex_cost_allocation_policies
+    #   Information about the flex cost allocation policies.
+    #   @return [Array<Types::FlexCostAllocationPolicyDescription>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkingFlexCostAllocationPoliciesResult AWS API Documentation
+    #
+    class DescribeNetworkingFlexCostAllocationPoliciesResult < Struct.new(
+      :flex_cost_allocation_policies,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fca_policy_association_ids
+    #   The IDs of the policy associations to describe.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. The range
+    #   is 5 to 1000. To retrieve the remaining results, make another call
+    #   with the returned `nextToken` value.
+    #
+    #   Default: 100
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   The filters.
+    #
+    #   * `fca-policy-id` - The ID of the policy.
+    #
+    #   * `managed-by` - The entity that manages the association (`account`
+    #     \| `declarative-policy`).
+    #
+    #   * `resource-id` - The ID of the associated network resource.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkingFlexCostAllocationPolicyAssociationsRequest AWS API Documentation
+    #
+    class DescribeNetworkingFlexCostAllocationPolicyAssociationsRequest < Struct.new(
+      :fca_policy_association_ids,
+      :max_results,
+      :filters,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fca_policy_associations
+    #   Information about the policy associations.
+    #   @return [Array<Types::FlexCostAllocationPolicyAssociationDescription>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkingFlexCostAllocationPolicyAssociationsResult AWS API Documentation
+    #
+    class DescribeNetworkingFlexCostAllocationPolicyAssociationsResult < Struct.new(
+      :fca_policy_associations,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -37138,6 +37633,12 @@ module Aws::EC2
     #
     #   * `action.event-id` - The event ID associated with the action.
     #
+    #   * `attachment-status.instance-id` - The ID of the instance that the
+    #     volume is attached to.
+    #
+    #   * `attachment-status.io-performance` - The I/O performance status of
+    #     the volume's attachment to the instance.
+    #
     #   * `availability-zone` - The Availability Zone of the instance.
     #
     #   * `event.description` - A description of the event.
@@ -40571,6 +41072,44 @@ module Aws::EC2
     class DisassociateNatGatewayAddressResult < Struct.new(
       :nat_gateway_id,
       :nat_gateway_addresses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fca_policy_association_ids
+    #   The IDs of the policy associations to remove. You can specify up to
+    #   100 association IDs. This parameter is required.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateNetworkingFlexCostAllocationPolicyRequest AWS API Documentation
+    #
+    class DisassociateNetworkingFlexCostAllocationPolicyRequest < Struct.new(
+      :fca_policy_association_ids,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fca_policy_disassociations
+    #   The IDs of the policy associations that were removed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] fca_policy_disassociation_failures
+    #   Information about the policy associations that could not be removed.
+    #   @return [Array<Types::FlexCostAllocationOperationFailure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateNetworkingFlexCostAllocationPolicyResult AWS API Documentation
+    #
+    class DisassociateNetworkingFlexCostAllocationPolicyResult < Struct.new(
+      :fca_policy_disassociations,
+      :fca_policy_disassociation_failures)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46069,6 +46608,336 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Maps a CIDR range to a label for cost allocation reporting.
+    #
+    # @!attribute [rw] cidr_range
+    #   The CIDR range. This parameter is required.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr_label
+    #   The label to assign to the CIDR range. The label can be up to 64
+    #   characters long. It can contain letters, numbers, hyphens (`-`), and
+    #   underscores (`_`), and must start with a letter or a number. This
+    #   parameter is required.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FlexCostAllocationCidrMapping AWS API Documentation
+    #
+    class FlexCostAllocationCidrMapping < Struct.new(
+      :cidr_range,
+      :cidr_label)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the CIDR ranges and labels to use for cost allocation when
+    # the reporting granularity is `cidr`.
+    #
+    # @!attribute [rw] prefixes_type
+    #   The type of prefixes to use. This parameter is required. Valid
+    #   values are `source-prefixes` and `destination-prefixes`.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefixes
+    #   The CIDR range to label mappings. You can specify from 1 to 100
+    #   mappings. This parameter is required.
+    #   @return [Array<Types::FlexCostAllocationCidrMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FlexCostAllocationCidrRangeSpecifications AWS API Documentation
+    #
+    class FlexCostAllocationCidrRangeSpecifications < Struct.new(
+      :prefixes_type,
+      :prefixes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a scope of network resources for a scope-based policy
+    # association.
+    #
+    # @!attribute [rw] resource_type
+    #   The type of scope. This parameter is required. Valid values are
+    #   `account`, `vpc`, and `subnet`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_ids
+    #   The IDs of the resources owned by you that define the scope. You can
+    #   specify from 1 to 20 IDs. This parameter is required.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FlexCostAllocationNetworkResourceScope AWS API Documentation
+    #
+    class FlexCostAllocationNetworkResourceScope < Struct.new(
+      :resource_type,
+      :resource_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a policy, association, or network resource that a Networking
+    # Flexible Cost Allocation operation failed to process.
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource that could not be processed.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_code
+    #   The code that identifies the type of failure. Possible values are:
+    #
+    #   * `ResourceNotFound` -
+    #     (`DeleteNetworkingFlexCostAllocationPolicies`) The policy doesn't
+    #     exist or isn't owned by your account.
+    #
+    #   * `InvalidResourceState` -
+    #     (`DeleteNetworkingFlexCostAllocationPolicies`) The policy has
+    #     active associations.
+    #
+    #   * `InvalidResource` -
+    #     (`AssociateNetworkingFlexCostAllocationPolicy`) The resource ID is
+    #     malformed, the resource type doesn't match the policy, or the
+    #     scope is an account other than yours.
+    #     (`DisassociateNetworkingFlexCostAllocationPolicy`) The association
+    #     doesn't exist or was already removed.
+    #
+    #   * `ResourceAlreadyAssociated` -
+    #     (`AssociateNetworkingFlexCostAllocationPolicy`) The resource
+    #     already has an active association.
+    #
+    #   * `InternalError` - An internal error occurred. Retry the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason for the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FlexCostAllocationOperationFailure AWS API Documentation
+    #
+    class FlexCostAllocationOperationFailure < Struct.new(
+      :resource_id,
+      :failure_code,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an association between a flex cost allocation policy and a
+    # network resource.
+    #
+    # @!attribute [rw] fca_policy_association_id
+    #   The ID of the policy association.
+    #   @return [String]
+    #
+    # @!attribute [rw] fca_policy_id
+    #   The ID of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_resource_id
+    #   The ID of the associated network resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account
+    #   The ID of the account that owns the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_at
+    #   The date and time when the association was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expected_effective_at
+    #   The date and time when the association is expected to apply to
+    #   network traffic.
+    #   @return [Time]
+    #
+    # @!attribute [rw] association_mode
+    #   The mode of the association. Valid values:
+    #
+    #   * `direct` - The policy is associated with specific resources by
+    #     resource ID.
+    #
+    #   * `scope` - The policy is associated with a scope of resources in an
+    #     account, Amazon VPC, or subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_by
+    #   The entity that manages the association. Valid values are:
+    #
+    #   * `account` - The account that owns the association created it.
+    #
+    #   * `declarative-policy` - An Amazon Web Services Organizations
+    #     declarative policy created the association. You can't remove the
+    #     association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FlexCostAllocationPolicyAssociationDescription AWS API Documentation
+    #
+    class FlexCostAllocationPolicyAssociationDescription < Struct.new(
+      :fca_policy_association_id,
+      :fca_policy_id,
+      :network_resource_id,
+      :owner_account,
+      :associated_at,
+      :expected_effective_at,
+      :association_mode,
+      :managed_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a flex cost allocation policy.
+    #
+    # @!attribute [rw] fca_policy_id
+    #   The ID of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] fca_policy_arn
+    #   The Amazon Resource Name (ARN) of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_resource_type
+    #   The type of network resource that the policy applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_fca_policy_document
+    #   The policy document that defines cost allocation for NAT gateways.
+    #   @return [Types::NatFlexCostAllocationPolicyDocument]
+    #
+    # @!attribute [rw] instance_fca_policy_document
+    #   The policy document that defines cost allocation for EC2 instances.
+    #   @return [Types::InstanceFlexCostAllocationPolicyDocument]
+    #
+    # @!attribute [rw] pcx_fca_policy_document
+    #   The policy document that defines cost allocation for Amazon VPC
+    #   peering connections.
+    #   @return [Types::PcxFlexCostAllocationPolicyDocument]
+    #
+    # @!attribute [rw] show_back_enabled
+    #   Indicates whether showback reporting is enabled for the policy.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] owner_account
+    #   The ID of the account that owns the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version
+    #   The number of the latest version of the policy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] version_expected_effective_at
+    #   The date and time when the latest version of the policy is expected
+    #   to apply to network traffic. The policy configuration in this
+    #   response is from the latest version.
+    #   @return [Time]
+    #
+    # @!attribute [rw] policy_created_at
+    #   The date and time when the policy was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the policy was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] managed_by
+    #   The entity that manages the policy. Valid values are:
+    #
+    #   * `account` - The account that owns the policy created it.
+    #
+    #   * `declarative-policy` - An Amazon Web Services Organizations
+    #     declarative policy created the policy. You can't modify or delete
+    #     the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the policy.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FlexCostAllocationPolicyDescription AWS API Documentation
+    #
+    class FlexCostAllocationPolicyDescription < Struct.new(
+      :fca_policy_id,
+      :fca_policy_arn,
+      :network_resource_type,
+      :nat_fca_policy_document,
+      :instance_fca_policy_document,
+      :pcx_fca_policy_document,
+      :show_back_enabled,
+      :owner_account,
+      :description,
+      :latest_version,
+      :version_expected_effective_at,
+      :policy_created_at,
+      :updated_at,
+      :managed_by,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a version of a flex cost allocation policy.
+    #
+    # @!attribute [rw] fca_policy_id
+    #   The ID of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] network_resource_type
+    #   The type of network resource that the policy applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_fca_policy_document
+    #   The policy document that defines cost allocation for NAT gateways.
+    #   @return [Types::NatFlexCostAllocationPolicyDocument]
+    #
+    # @!attribute [rw] instance_fca_policy_document
+    #   The policy document that defines cost allocation for EC2 instances.
+    #   @return [Types::InstanceFlexCostAllocationPolicyDocument]
+    #
+    # @!attribute [rw] pcx_fca_policy_document
+    #   The policy document that defines cost allocation for Amazon VPC
+    #   peering connections.
+    #   @return [Types::PcxFlexCostAllocationPolicyDocument]
+    #
+    # @!attribute [rw] show_back_enabled
+    #   Indicates whether showback reporting is enabled for this version of
+    #   the policy.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   The description of this version of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_effective_at
+    #   The date and time when this version of the policy is expected to
+    #   apply to network traffic.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when this version of the policy was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FlexCostAllocationPolicyVersion AWS API Documentation
+    #
+    class FlexCostAllocationPolicyVersion < Struct.new(
+      :fca_policy_id,
+      :version,
+      :network_resource_type,
+      :nat_fca_policy_document,
+      :instance_fca_policy_document,
+      :pcx_fca_policy_document,
+      :show_back_enabled,
+      :description,
+      :expected_effective_at,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a flow log.
     #
     # @!attribute [rw] creation_time
@@ -49530,6 +50399,44 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] fca_policy_id
+    #   The ID of the flex cost allocation policy. This parameter is
+    #   required.
+    #   @return [String]
+    #
+    # @!attribute [rw] versions_to_include
+    #   The policy versions to include in the results.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetNetworkingFlexCostAllocationPolicyVersionsRequest AWS API Documentation
+    #
+    class GetNetworkingFlexCostAllocationPolicyVersionsRequest < Struct.new(
+      :fca_policy_id,
+      :versions_to_include,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fca_policy_versions
+    #   Information about the policy versions.
+    #   @return [Array<Types::FlexCostAllocationPolicyVersion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetNetworkingFlexCostAllocationPolicyVersionsResult AWS API Documentation
+    #
+    class GetNetworkingFlexCostAllocationPolicyVersionsResult < Struct.new(
+      :fca_policy_versions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] instance_id
     #   The ID of the Windows instance.
     #   @return [String]
@@ -52929,7 +53836,8 @@ module Aws::EC2
     # type.
     #
     # @!attribute [rw] resource_type
-    #   The type of resource (`ec2:Instance` or `ec2:LaunchTemplate`).
+    #   The type of resource (`ec2:Instance` \| `ec2:LaunchTemplate` \|
+    #   `imagebuilder:ImageRecipe` \| `imagebuilder:ContainerRecipe`).
     #   @return [String]
     #
     # @!attribute [rw] report_id
@@ -52972,7 +53880,8 @@ module Aws::EC2
     # @!attribute [rw] resource_type
     #   The resource type.
     #
-    #   Valid values: `ec2:Instance` \| `ec2:LaunchTemplate`
+    #   Valid values: `ec2:Instance` \| `ec2:LaunchTemplate` \|
+    #   `imagebuilder:ImageRecipe` \| `imagebuilder:ContainerRecipe`
     #   @return [String]
     #
     # @!attribute [rw] resource_type_options
@@ -53040,7 +53949,8 @@ module Aws::EC2
     # @!attribute [rw] resource_type
     #   The resource type.
     #
-    #   Valid values: `ec2:Instance` \| `ec2:LaunchTemplate`
+    #   Valid values: `ec2:Instance` \| `ec2:LaunchTemplate` \|
+    #   `imagebuilder:ImageRecipe` \| `imagebuilder:ContainerRecipe`
     #   @return [String]
     #
     # @!attribute [rw] resource_type_options
@@ -55277,6 +56187,35 @@ module Aws::EC2
     class InstanceFamilyCreditSpecification < Struct.new(
       :instance_family,
       :cpu_credits)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the cost allocation policy document for EC2 instances.
+    #
+    # @!attribute [rw] reporting_granularity
+    #   The resource granularity level at which networking costs are
+    #   allocated. This parameter is required. Specify exactly one value.
+    #   Valid values are `eni`, `ec2`, `subnet`, `vpc`, `account`, and
+    #   `cidr`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dimensions
+    #   The cost dimensions to report. This parameter is required. The only
+    #   valid value is `data-transfer`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cidr_range_specifications
+    #   The CIDR range mappings to use for cost allocation. Specify this
+    #   value when `ReportingGranularity` is `cidr`, and omit it otherwise.
+    #   @return [Types::FlexCostAllocationCidrRangeSpecifications]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceFlexCostAllocationPolicyDocument AWS API Documentation
+    #
+    class InstanceFlexCostAllocationPolicyDocument < Struct.new(
+      :reporting_granularity,
+      :dimensions,
+      :cidr_range_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -59183,7 +60122,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] rir
-    #   The Regional Internet Registry. Possible values:
+    #   The internet registry. Possible values:
     #
     #   * `ripe` - RIPE NCC (Europe, the Middle East, and Central Asia).
     #
@@ -59192,6 +60131,8 @@ module Aws::EC2
     #   * `arin` - ARIN (North America).
     #
     #   * `lacnic` - LACNIC (Latin America and the Caribbean).
+    #
+    #   * `nicbr` - NIC.br (Brazil).
     #   @return [String]
     #
     # @!attribute [rw] organization_handle
@@ -59204,10 +60145,10 @@ module Aws::EC2
     #
     # @!attribute [rw] state
     #   The state of the internet registry association. Valid values:
-    #   `pending-activation` \| `pending-enable` \| `create-in-progress` \|
-    #   `create-failed` \| `enable-in-progress` \| `enable-complete` \|
-    #   `enable-failed` \| `delete-in-progress` \| `delete-complete` \|
-    #   `delete-failed`.
+    #   `pending-enable` \| `create-in-progress` \| `create-failed` \|
+    #   `enable-in-progress` \| `enable-complete` \| `enable-failed` \|
+    #   `disable-in-progress` \| `disable-complete` \| `disable-failed` \|
+    #   `delete-in-progress` \| `delete-complete` \| `delete-failed`.
     #   @return [String]
     #
     # @!attribute [rw] state_message
@@ -61127,7 +62068,7 @@ module Aws::EC2
     #   The state of the routing policy registration. Valid values:
     #   `pending-activate` \| `activate-failed` \| `create-in-progress` \|
     #   `create-complete` \| `update-in-progress` \| `update-complete` \|
-    #   `delete-in-progress` \| `delete-complete`.
+    #   `delete-in-progress` \| `delete-complete` \| `disable-complete`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamRoutingPolicyRegistration AWS API Documentation
@@ -63829,10 +64770,15 @@ module Aws::EC2
     #   monitoring is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] metric_category_ids
+    #   The IDs of the metric categories to associate with the instance.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplatesMonitoring AWS API Documentation
     #
     class LaunchTemplatesMonitoring < Struct.new(
-      :enabled)
+      :enabled,
+      :metric_category_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -63844,10 +64790,16 @@ module Aws::EC2
     #   monitoring is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] metric_category_ids
+    #   The IDs of the metric categories to associate with the instance. To
+    #   specify metric categories, you must also enable detailed monitoring.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplatesMonitoringRequest AWS API Documentation
     #
     class LaunchTemplatesMonitoringRequest < Struct.new(
-      :enabled)
+      :enabled,
+      :metric_category_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -65226,6 +66178,32 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes a metric category. A metric category is a set of additional
+    # metrics that you can associate with an instance that has detailed
+    # monitoring enabled.
+    #
+    # @!attribute [rw] metric_category_id
+    #   The ID of the metric category.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics
+    #   The names of the metrics in the metric category.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the metric category.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MetricCategory AWS API Documentation
+    #
+    class MetricCategory < Struct.new(
+      :metric_category_id,
+      :metrics,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains a single data point from a capacity metrics query, including
     # the dimension values, timestamp, and metric values for that specific
     # combination.
@@ -65439,6 +66417,16 @@ module Aws::EC2
     #   account-level encryption enforcement.
     #   @return [String]
     #
+    # @!attribute [rw] global_accelerator
+    #   Specifies whether to exclude AWS Global Accelerator from
+    #   account-level encryption enforcement.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_gateway_v2
+    #   Specifies whether to exclude Amazon API Gateway V2 from
+    #   account-level encryption enforcement.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyAccountVpcEncryptionControlRequest AWS API Documentation
     #
     class ModifyAccountVpcEncryptionControlRequest < Struct.new(
@@ -65451,7 +66439,9 @@ module Aws::EC2
       :vpc_peering,
       :lambda,
       :vpc_lattice,
-      :elastic_file_system)
+      :elastic_file_system,
+      :global_accelerator,
+      :api_gateway_v2)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -68492,6 +69482,51 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] metric_category_id
+    #   The ID of the metric category.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics
+    #   The names of the metrics for the metric category. These metrics
+    #   replace the existing metrics, and must differ from the current set.
+    #
+    #   Specify each metric by its Amazon CloudWatch metric name or its
+    #   OpenTelemetry metric name. The two names for a measurement are
+    #   separate entries, and you can include both.
+    #
+    #   In Regions where Amazon CloudWatch OpenTelemetry metrics aren't
+    #   available, you can't specify OpenTelemetry metric names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the operation,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyMetricCategoryRequest AWS API Documentation
+    #
+    class ModifyMetricCategoryRequest < Struct.new(
+      :metric_category_id,
+      :metrics,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_category
+    #   Information about the metric category.
+    #   @return [Types::MetricCategory]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyMetricCategoryResult AWS API Documentation
+    #
+    class ModifyMetricCategoryResult < Struct.new(
+      :metric_category)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the parameters for ModifyNetworkInterfaceAttribute.
     #
     # @!attribute [rw] ena_srd_specification
@@ -68583,6 +69618,99 @@ module Aws::EC2
       :source_dest_check,
       :groups,
       :attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fca_policy_id
+    #   The ID of the flex cost allocation policy to modify. This parameter
+    #   is required.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_fca_policy_document
+    #   The updated policy document that defines cost allocation for NAT
+    #   gateways.
+    #   @return [Types::NatFlexCostAllocationPolicyDocument]
+    #
+    # @!attribute [rw] instance_fca_policy_document
+    #   The updated policy document that defines cost allocation for EC2
+    #   instances.
+    #   @return [Types::InstanceFlexCostAllocationPolicyDocument]
+    #
+    # @!attribute [rw] pcx_fca_policy_document
+    #   The updated policy document that defines cost allocation for Amazon
+    #   VPC peering connections.
+    #   @return [Types::PcxFlexCostAllocationPolicyDocument]
+    #
+    # @!attribute [rw] show_back_enabled
+    #   Specifies whether showback reporting is enabled for the policy. If
+    #   you omit this parameter, the current setting is unchanged.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   A description for the policy. The description can be up to 1024
+    #   characters long.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyNetworkingFlexCostAllocationPolicyRequest AWS API Documentation
+    #
+    class ModifyNetworkingFlexCostAllocationPolicyRequest < Struct.new(
+      :fca_policy_id,
+      :nat_fca_policy_document,
+      :instance_fca_policy_document,
+      :pcx_fca_policy_document,
+      :show_back_enabled,
+      :description,
+      :client_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fca_policy_id
+    #   The ID of the flex cost allocation policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the policy was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] version
+    #   The version number of the policy that this modification created.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] version_expected_effective_at
+    #   The date and time when the new version of the policy is expected to
+    #   apply to network traffic.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyNetworkingFlexCostAllocationPolicyResult AWS API Documentation
+    #
+    class ModifyNetworkingFlexCostAllocationPolicyResult < Struct.new(
+      :fca_policy_id,
+      :updated_at,
+      :version,
+      :version_expected_effective_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -70818,6 +71946,16 @@ module Aws::EC2
     #   encryption enforcement.
     #   @return [String]
     #
+    # @!attribute [rw] global_accelerator_exclusion
+    #   Specifies whether to exclude AWS Global Accelerator traffic from
+    #   encryption enforcement.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_gateway_v2_exclusion
+    #   Specifies whether to exclude Amazon API Gateway V2 traffic from
+    #   encryption enforcement.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEncryptionControlRequest AWS API Documentation
     #
     class ModifyVpcEncryptionControlRequest < Struct.new(
@@ -70831,7 +71969,9 @@ module Aws::EC2
       :vpc_peering_exclusion,
       :lambda_exclusion,
       :vpc_lattice_exclusion,
-      :elastic_file_system_exclusion)
+      :elastic_file_system_exclusion,
+      :global_accelerator_exclusion,
+      :api_gateway_v2_exclusion)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -71746,6 +72886,12 @@ module Aws::EC2
     #   The IDs of the instances.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] metric_category_ids
+    #   The IDs of the metric categories to associate with the instances.
+    #   The specified metric categories are added to any metric categories
+    #   that are already associated with the instances.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
@@ -71757,6 +72903,7 @@ module Aws::EC2
     #
     class MonitorInstancesRequest < Struct.new(
       :instance_ids,
+      :metric_category_ids,
       :dry_run)
       SENSITIVE = []
       include Aws::Structure
@@ -71776,6 +72923,11 @@ module Aws::EC2
 
     # Describes the monitoring of an instance.
     #
+    # @!attribute [rw] metric_category_ids
+    #   The IDs of the metric categories that are associated with the
+    #   instance.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] state
     #   Indicates whether detailed monitoring is enabled. Otherwise, basic
     #   monitoring is enabled.
@@ -71784,6 +72936,7 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Monitoring AWS API Documentation
     #
     class Monitoring < Struct.new(
+      :metric_category_ids,
       :state)
       SENSITIVE = []
       include Aws::Structure
@@ -71958,6 +73111,35 @@ module Aws::EC2
     class MovingAddressStatus < Struct.new(
       :move_status,
       :public_ip)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the cost allocation policy document for NAT gateways.
+    #
+    # @!attribute [rw] reporting_granularity
+    #   The resource granularity level at which networking costs are
+    #   allocated. This parameter is required. Specify exactly one value.
+    #   Valid values are `eni`, `ec2`, `subnet`, `vpc`, `account`, and
+    #   `cidr`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dimensions
+    #   The cost dimensions to report. This parameter is required. Valid
+    #   values are `data-transfer` and `data-processing`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cidr_range_specifications
+    #   The CIDR range mappings to use for cost allocation. Specify this
+    #   value when `ReportingGranularity` is `cidr`, and omit it otherwise.
+    #   @return [Types::FlexCostAllocationCidrRangeSpecifications]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NatFlexCostAllocationPolicyDocument AWS API Documentation
+    #
+    class NatFlexCostAllocationPolicyDocument < Struct.new(
+      :reporting_granularity,
+      :dimensions,
+      :cidr_range_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -74244,6 +75426,36 @@ module Aws::EC2
       :vendor_id,
       :subsystem_id,
       :subsystem_vendor_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the cost allocation policy document for Amazon VPC peering
+    # connections.
+    #
+    # @!attribute [rw] reporting_granularity
+    #   The resource granularity level at which networking costs are
+    #   allocated. This parameter is required. Specify exactly one value.
+    #   Valid values are `eni`, `ec2`, `subnet`, `vpc`, `account`,
+    #   `peering-id`, and `cidr`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dimensions
+    #   The cost dimensions to report. This parameter is required. The only
+    #   valid value is `data-transfer`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cidr_range_specifications
+    #   The CIDR range mappings to use for cost allocation. Specify this
+    #   value when `ReportingGranularity` is `cidr`, and omit it otherwise.
+    #   @return [Types::FlexCostAllocationCidrRangeSpecifications]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PcxFlexCostAllocationPolicyDocument AWS API Documentation
+    #
+    class PcxFlexCostAllocationPolicyDocument < Struct.new(
+      :reporting_granularity,
+      :dimensions,
+      :cidr_range_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -81277,6 +82489,11 @@ module Aws::EC2
 
     # Describes the monitoring of an instance.
     #
+    # @!attribute [rw] metric_category_ids
+    #   The IDs of the metric categories to associate with the instance. To
+    #   specify metric categories, you must also enable detailed monitoring.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] enabled
     #   Indicates whether detailed monitoring is enabled. Otherwise, basic
     #   monitoring is enabled.
@@ -81285,6 +82502,7 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstancesMonitoringEnabled AWS API Documentation
     #
     class RunInstancesMonitoringEnabled < Struct.new(
+      :metric_category_ids,
       :enabled)
       SENSITIVE = []
       include Aws::Structure
@@ -90397,6 +91615,14 @@ module Aws::EC2
     #   The IDs of the instances.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] metric_category_ids
+    #   The IDs of the metric categories to remove from the instances. If
+    #   you specify metric categories, only those metric categories are
+    #   removed and detailed monitoring remains enabled. If you don't
+    #   specify metric categories, detailed monitoring and all metric
+    #   categories are turned off.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
@@ -90408,6 +91634,7 @@ module Aws::EC2
     #
     class UnmonitorInstancesRequest < Struct.new(
       :instance_ids,
+      :metric_category_ids,
       :dry_run)
       SENSITIVE = []
       include Aws::Structure
@@ -93182,6 +94409,16 @@ module Aws::EC2
     #   encryption enforcement.
     #   @return [String]
     #
+    # @!attribute [rw] global_accelerator_exclusion
+    #   Specifies whether to exclude AWS Global Accelerator traffic from
+    #   encryption enforcement.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_gateway_v2_exclusion
+    #   Specifies whether to exclude Amazon API Gateway V2 traffic from
+    #   encryption enforcement.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEncryptionControlConfiguration AWS API Documentation
     #
     class VpcEncryptionControlConfiguration < Struct.new(
@@ -93193,7 +94430,9 @@ module Aws::EC2
       :vpc_peering_exclusion,
       :lambda_exclusion,
       :vpc_lattice_exclusion,
-      :elastic_file_system_exclusion)
+      :elastic_file_system_exclusion,
+      :global_accelerator_exclusion,
+      :api_gateway_v2_exclusion)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -93268,6 +94507,14 @@ module Aws::EC2
     #   The exclusion configuration for Elastic File System traffic.
     #   @return [Types::VpcEncryptionControlExclusion]
     #
+    # @!attribute [rw] global_accelerator
+    #   The exclusion configuration for AWS Global Accelerator traffic.
+    #   @return [Types::VpcEncryptionControlExclusion]
+    #
+    # @!attribute [rw] api_gateway_v2
+    #   The exclusion configuration for Amazon API Gateway V2 traffic.
+    #   @return [Types::VpcEncryptionControlExclusion]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEncryptionControlExclusions AWS API Documentation
     #
     class VpcEncryptionControlExclusions < Struct.new(
@@ -93278,7 +94525,9 @@ module Aws::EC2
       :vpc_peering,
       :lambda,
       :vpc_lattice,
-      :elastic_file_system)
+      :elastic_file_system,
+      :global_accelerator,
+      :api_gateway_v2)
       SENSITIVE = []
       include Aws::Structure
     end

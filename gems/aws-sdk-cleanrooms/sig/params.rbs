@@ -218,6 +218,7 @@ module Aws
       type membership_protected_job_result_configuration = {
       output_configuration: {
         s3: {
+          result_format: ("CSV" | "PARQUET")?,
           bucket: ::String,
           key_prefix: ::String?
         }?

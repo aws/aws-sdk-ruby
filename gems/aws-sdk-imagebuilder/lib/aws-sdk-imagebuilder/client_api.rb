@@ -213,6 +213,8 @@ module Aws::Imagebuilder
     ImageScanState = Shapes::StructureShape.new(name: 'ImageScanState')
     ImageScanStatus = Shapes::StringShape.new(name: 'ImageScanStatus')
     ImageScanningConfiguration = Shapes::StructureShape.new(name: 'ImageScanningConfiguration')
+    ImageScanningType = Shapes::StringShape.new(name: 'ImageScanningType')
+    ImageScanningTypeList = Shapes::ListShape.new(name: 'ImageScanningTypeList')
     ImageSource = Shapes::StringShape.new(name: 'ImageSource')
     ImageState = Shapes::StructureShape.new(name: 'ImageState')
     ImageStatus = Shapes::StringShape.new(name: 'ImageStatus')
@@ -345,6 +347,7 @@ module Aws::Imagebuilder
     MarketplaceResourceLocation = Shapes::StringShape.new(name: 'MarketplaceResourceLocation')
     MarketplaceResourceType = Shapes::StringShape.new(name: 'MarketplaceResourceType')
     MaxParallelLaunches = Shapes::IntegerShape.new(name: 'MaxParallelLaunches')
+    MaximumSeverityLabel = Shapes::StringShape.new(name: 'MaximumSeverityLabel')
     NonEmptyMaxLengthString = Shapes::StringShape.new(name: 'NonEmptyMaxLengthString')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NonEmptyStringList = Shapes::ListShape.new(name: 'NonEmptyStringList')
@@ -406,6 +409,7 @@ module Aws::Imagebuilder
     RoleNameOrArn = Shapes::StringShape.new(name: 'RoleNameOrArn')
     S3ExportConfiguration = Shapes::StructureShape.new(name: 'S3ExportConfiguration')
     S3Logs = Shapes::StructureShape.new(name: 'S3Logs')
+    ScanResultCondition = Shapes::StructureShape.new(name: 'ScanResultCondition')
     Schedule = Shapes::StructureShape.new(name: 'Schedule')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SendWorkflowStepActionRequest = Shapes::StructureShape.new(name: 'SendWorkflowStepActionRequest')
@@ -1367,7 +1371,11 @@ module Aws::Imagebuilder
 
     ImageScanningConfiguration.add_member(:image_scanning_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "imageScanningEnabled"))
     ImageScanningConfiguration.add_member(:ecr_configuration, Shapes::ShapeRef.new(shape: EcrConfiguration, location_name: "ecrConfiguration"))
+    ImageScanningConfiguration.add_member(:image_scanning_types, Shapes::ShapeRef.new(shape: ImageScanningTypeList, location_name: "imageScanningTypes"))
+    ImageScanningConfiguration.add_member(:scan_result_condition, Shapes::ShapeRef.new(shape: ScanResultCondition, location_name: "scanResultCondition"))
     ImageScanningConfiguration.struct_class = Types::ImageScanningConfiguration
+
+    ImageScanningTypeList.member = Shapes::ShapeRef.new(shape: ImageScanningType)
 
     ImageState.add_member(:status, Shapes::ShapeRef.new(shape: ImageStatus, location_name: "status"))
     ImageState.add_member(:reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "reason"))
@@ -2052,6 +2060,10 @@ module Aws::Imagebuilder
     S3Logs.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "s3BucketName"))
     S3Logs.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "s3KeyPrefix"))
     S3Logs.struct_class = Types::S3Logs
+
+    ScanResultCondition.add_member(:maximum_severity_label, Shapes::ShapeRef.new(shape: MaximumSeverityLabel, required: true, location_name: "maximumSeverityLabel"))
+    ScanResultCondition.add_member(:fix_available, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "fixAvailable"))
+    ScanResultCondition.struct_class = Types::ScanResultCondition
 
     Schedule.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "scheduleExpression"))
     Schedule.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "timezone"))

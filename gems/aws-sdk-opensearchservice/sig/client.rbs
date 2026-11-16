@@ -1488,6 +1488,31 @@ module Aws
                               ) -> _UpdateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess
 
+      interface _UpdateCloneResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCloneResponse]
+        def domain_name: () -> ::String
+        def change_id: () -> ::String
+        def cutover_options: () -> Types::CutoverOptions
+        def traffic_split_options: () -> Types::TrafficSplitOptions
+        def retention_options: () -> Types::RetentionOptions
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#update_clone-instance_method
+      def update_clone: (
+                          domain_name: ::String,
+                          ?traffic_split_options: {
+                            strategy: ("ShiftReadTrafficPercent"),
+                            clone_read_traffic_percent: ::Integer
+                          },
+                          ?cutover_options: {
+                            target: ("ClonedCluster" | "PrimaryCluster")
+                          },
+                          ?retention_options: {
+                            retention_in_hours: ::Integer?,
+                            retention_action: ("RollbackToPrimaryCluster" | "DeletePrimaryCluster")?
+                          }
+                        ) -> _UpdateCloneResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCloneResponseSuccess
+
       interface _UpdateDataSourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataSourceResponse]
         def message: () -> ::String
@@ -1700,6 +1725,7 @@ module Aws
         def target_version: () -> ::String
         def perform_check_only: () -> bool
         def advanced_options: () -> ::Hash[::String, ::String]
+        def deployment_strategy_options: () -> Types::DeploymentStrategyOverrideOptions
         def change_progress_details: () -> Types::ChangeProgressDetails
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#upgrade_domain-instance_method
@@ -1707,7 +1733,16 @@ module Aws
                             domain_name: ::String,
                             target_version: ::String,
                             ?perform_check_only: bool,
-                            ?advanced_options: Hash[::String, ::String]
+                            ?advanced_options: Hash[::String, ::String],
+                            ?deployment_strategy_options: {
+                              deployment_strategy: ("ClonedBlueGreen"),
+                              cloned_blue_green_options: {
+                                retention_options: {
+                                  retention_in_hours: ::Integer?,
+                                  retention_action: ("RollbackToPrimaryCluster" | "DeletePrimaryCluster")?
+                                }?
+                              }?
+                            }
                           ) -> _UpgradeDomainResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpgradeDomainResponseSuccess
     end

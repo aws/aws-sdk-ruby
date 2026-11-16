@@ -264,7 +264,8 @@ module Aws::SecurityAgent
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::SecurityAgent
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -2484,8 +2485,8 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Creates a new membership, granting a user access to an agent space
-    # within an application.
+    # Creates a new membership, granting a user or group access to an agent
+    # space within an application.
     #
     # @option params [required, String] :application_id
     #   The unique identifier of the application that contains the agent
@@ -2498,7 +2499,9 @@ module Aws::SecurityAgent
     #   The unique identifier for the membership.
     #
     # @option params [required, String] :member_type
-    #   The type of member. Currently, only USER is supported.
+    #   The type of member. Use USER for an individual user or GROUP for an
+    #   IAM Identity Center group. All members of a group have access to the
+    #   agent space.
     #
     # @option params [Types::MembershipConfig] :config
     #   The configuration for the membership, such as the user role.
@@ -2511,7 +2514,7 @@ module Aws::SecurityAgent
     #     application_id: "ApplicationId", # required
     #     agent_space_id: "AgentSpaceId", # required
     #     membership_id: "MembershipId", # required
-    #     member_type: "USER", # required, accepts USER
+    #     member_type: "USER", # required, accepts USER, GROUP
     #     config: {
     #       user: {
     #         role: "MEMBER", # accepts MEMBER
@@ -2561,6 +2564,10 @@ module Aws::SecurityAgent
     # @option params [String] :code_remediation_strategy
     #   The code remediation strategy for the pentest. Valid values are
     #   AUTOMATIC and DISABLED.
+    #
+    # @option params [String] :clean_up_strategy
+    #   The strategy for cleaning up resources after pentest job completion.
+    #   Valid values are BEST\_EFFORT\_DELETE and RETAIN\_ALL.
     #
     # @option params [Array<String>] :disable_managed_skills
     #   A list of managed skills to disable for this pentest. Valid values
@@ -2690,6 +2697,7 @@ module Aws::SecurityAgent
     #       ],
     #     },
     #     code_remediation_strategy: "AUTOMATIC", # accepts AUTOMATIC, DISABLED
+    #     clean_up_strategy: "BEST_EFFORT_DELETE", # accepts BEST_EFFORT_DELETE, RETAIN_ALL
     #     disable_managed_skills: ["FINDING_PERSONALIZATION"], # accepts FINDING_PERSONALIZATION, LOGIN_OPTIMIZATION
     #     max_task_hours: 1.0,
     #     report_destination: {
@@ -3409,7 +3417,8 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Deletes a membership, revoking a user's access to an agent space.
+    # Deletes a membership, revoking a user's or group's access to an
+    # agent space.
     #
     # @option params [required, String] :application_id
     #   The unique identifier of the application that contains the agent
@@ -3432,7 +3441,7 @@ module Aws::SecurityAgent
     #     application_id: "ApplicationId", # required
     #     agent_space_id: "AgentSpaceId", # required
     #     membership_id: "MembershipId", # required
-    #     member_type: "USER", # accepts USER
+    #     member_type: "USER", # accepts USER, GROUP
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/DeleteMembership AWS API Documentation
@@ -4585,7 +4594,7 @@ module Aws::SecurityAgent
     #   resp = client.list_memberships({
     #     application_id: "ApplicationId", # required
     #     agent_space_id: "AgentSpaceId", # required
-    #     member_type: "USER", # accepts USER, ALL
+    #     member_type: "USER", # accepts USER, GROUP, ALL
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -4596,10 +4605,12 @@ module Aws::SecurityAgent
     #   resp.membership_summaries[0].membership_id #=> String
     #   resp.membership_summaries[0].application_id #=> String
     #   resp.membership_summaries[0].agent_space_id #=> String
-    #   resp.membership_summaries[0].member_type #=> String, one of "USER"
+    #   resp.membership_summaries[0].member_type #=> String, one of "USER", "GROUP"
     #   resp.membership_summaries[0].config.user.role #=> String, one of "MEMBER"
     #   resp.membership_summaries[0].metadata.user.username #=> String
     #   resp.membership_summaries[0].metadata.user.email #=> String
+    #   resp.membership_summaries[0].metadata.group.display_name #=> String
+    #   resp.membership_summaries[0].metadata.group.description #=> String
     #   resp.membership_summaries[0].created_at #=> Time
     #   resp.membership_summaries[0].updated_at #=> Time
     #   resp.membership_summaries[0].created_by #=> String
@@ -6189,6 +6200,10 @@ module Aws::SecurityAgent
     # @option params [String] :code_remediation_strategy
     #   The updated code remediation strategy for the pentest.
     #
+    # @option params [String] :clean_up_strategy
+    #   The updated strategy for cleaning up resources after pentest job
+    #   completion.
+    #
     # @option params [Array<String>] :disable_managed_skills
     #   The updated list of managed skills to disable for this pentest. Valid
     #   values include FINDING\_PERSONALIZATION and LOGIN\_OPTIMIZATION.
@@ -6317,6 +6332,7 @@ module Aws::SecurityAgent
     #       ],
     #     },
     #     code_remediation_strategy: "AUTOMATIC", # accepts AUTOMATIC, DISABLED
+    #     clean_up_strategy: "BEST_EFFORT_DELETE", # accepts BEST_EFFORT_DELETE, RETAIN_ALL
     #     disable_managed_skills: ["FINDING_PERSONALIZATION"], # accepts FINDING_PERSONALIZATION, LOGIN_OPTIMIZATION
     #     max_task_hours: 1.0,
     #     report_destination: {
@@ -6966,7 +6982,7 @@ module Aws::SecurityAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityagent'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

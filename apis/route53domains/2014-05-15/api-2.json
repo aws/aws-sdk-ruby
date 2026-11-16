@@ -4,13 +4,17 @@
     "apiVersion":"2014-05-15",
     "endpointPrefix":"route53domains",
     "jsonVersion":"1.1",
-    "protocol":"json",
-    "protocols":["json"],
+    "protocol":"smithy-rpc-v2-cbor",
+    "protocols":[
+      "smithy-rpc-v2-cbor",
+      "json"
+    ],
     "serviceFullName":"Amazon Route 53 Domains",
     "serviceId":"Route 53 Domains",
     "signatureVersion":"v4",
     "targetPrefix":"Route53Domains_v20140515",
     "uid":"route53domains-2014-05-15",
+    "xmlNamespace":"https://route53domains.amazonaws.com/doc/2014-05-15/",
     "auth":["aws.auth#sigv4"]
   },
   "operations":{
@@ -397,6 +401,21 @@
       "errors":[
         {"shape":"InvalidInput"},
         {"shape":"TLDInMaintenance"}
+      ]
+    },
+    "RestoreDomain":{
+      "name":"RestoreDomain",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RestoreDomainRequest"},
+      "output":{"shape":"RestoreDomainResponse"},
+      "errors":[
+        {"shape":"InvalidInput"},
+        {"shape":"DuplicateRequest"},
+        {"shape":"OperationLimitExceeded"},
+        {"shape":"UnsupportedTLD"}
       ]
     },
     "RetrieveDomainAuthCode":{
@@ -1050,6 +1069,7 @@
       "members":{
         "message":{"shape":"ErrorMessage"}
       },
+      "error":{"httpStatusCode":400},
       "exception":true
     },
     "DnssecPublicKey":{
@@ -1089,6 +1109,7 @@
       "members":{
         "message":{"shape":"ErrorMessage"}
       },
+      "error":{"httpStatusCode":400},
       "exception":true
     },
     "DomainName":{
@@ -1157,6 +1178,7 @@
         "requestId":{"shape":"RequestId"},
         "message":{"shape":"ErrorMessage"}
       },
+      "error":{"httpStatusCode":400},
       "exception":true
     },
     "DurationInYears":{
@@ -1397,6 +1419,7 @@
       "members":{
         "message":{"shape":"ErrorMessage"}
       },
+      "error":{"httpStatusCode":400},
       "exception":true
     },
     "InvoiceId":{"type":"string"},
@@ -1510,6 +1533,7 @@
       "members":{
         "message":{"shape":"ErrorMessage"}
       },
+      "error":{"httpStatusCode":400},
       "exception":true
     },
     "OperationStatus":{
@@ -1727,6 +1751,20 @@
         "OperationId":{"shape":"OperationId"}
       }
     },
+    "RestoreDomainRequest":{
+      "type":"structure",
+      "required":["DomainName"],
+      "members":{
+        "DomainName":{"shape":"DomainName"},
+        "Consent":{"shape":"Consent"}
+      }
+    },
+    "RestoreDomainResponse":{
+      "type":"structure",
+      "members":{
+        "OperationId":{"shape":"OperationId"}
+      }
+    },
     "RetrieveDomainAuthCodeRequest":{
       "type":"structure",
       "required":["DomainName"],
@@ -1780,6 +1818,7 @@
         "message":{"shape":"ErrorMessage"},
         "tld":{"shape":"TldName"}
       },
+      "error":{"httpStatusCode":400},
       "exception":true
     },
     "TLDRulesViolation":{
@@ -1787,6 +1826,7 @@
       "members":{
         "message":{"shape":"ErrorMessage"}
       },
+      "error":{"httpStatusCode":400},
       "exception":true
     },
     "Tag":{
@@ -1887,6 +1927,7 @@
       "members":{
         "message":{"shape":"ErrorMessage"}
       },
+      "error":{"httpStatusCode":400},
       "exception":true
     },
     "UpdateDomainContactPrivacyRequest":{

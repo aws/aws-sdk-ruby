@@ -10,6 +10,59 @@ module Seahorse
 
         def request(*args) Request.new(*args) end
 
+        describe '#buffer_supported?' do
+          let(:reader_class) do
+            Class.new(StringIO) do
+              attr_reader :probes
+
+              def initialize(supported)
+                super('payload')
+                @supported = supported
+                @probes = 0
+              end
+
+              def read(length = nil, buffer = nil)
+                @probes += 1 if length == 0
+                @supported ? super(length, buffer) : super(length)
+              end
+            end
+          end
+
+          [true, false].each do |supported|
+            it "caches #{supported} without consuming body bytes" do
+              io = reader_class.new(supported)
+              req = request(body: io)
+              3.times { expect(req.buffer_supported?).to be(supported) }
+              expect(io.probes).to eq(1)
+              expect(io.pos).to eq(0)
+            end
+          end
+
+          it 'checks the new body after assignment' do
+            first = reader_class.new(false)
+            second = reader_class.new(true)
+            req = request(body: first)
+            expect(req.buffer_supported?).to be(false)
+            req.body = second
+            2.times { expect(req.buffer_supported?).to be(true) }
+            expect(first.probes).to eq(1)
+            expect(second.probes).to eq(1)
+          end
+
+          it 'keeps results separate for different requests' do
+            first = reader_class.new(true)
+            second = reader_class.new(false)
+            first_request = request(body: first)
+            second_request = request(body: second)
+            2.times do
+              expect(first_request.buffer_supported?).to be(true)
+              expect(second_request.buffer_supported?).to be(false)
+            end
+            expect(first.probes).to eq(1)
+            expect(second.probes).to eq(1)
+          end
+        end
+
         describe '#endpoint' do
 
           it 'defaults to nil' do

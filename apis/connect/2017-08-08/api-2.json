@@ -6814,6 +6814,7 @@
         "UPDATE_CASE",
         "ASSIGN_SLA",
         "END_ASSOCIATED_TASKS",
+        "END_ASSOCIATED_EMAILS",
         "SUBMIT_AUTO_EVALUATION",
         "EXTRACT_INFORMATION",
         "SEND_IN_APP_NOTIFICATION"
@@ -8735,6 +8736,27 @@
       "max":100,
       "min":1
     },
+    "CaseEntries":{
+      "type":"list",
+      "member":{"shape":"CaseEntry"}
+    },
+    "CaseEntry":{
+      "type":"structure",
+      "members":{
+        "CaseId":{"shape":"CaseId"},
+        "CaseReferenceNumber":{"shape":"CaseReferenceNumber"}
+      }
+    },
+    "CaseId":{
+      "type":"string",
+      "max":36,
+      "min":1
+    },
+    "CaseReferenceNumber":{
+      "type":"string",
+      "max":50,
+      "min":1
+    },
     "CaseSlaConfiguration":{
       "type":"structure",
       "required":[
@@ -8749,6 +8771,24 @@
         "TargetFieldValues":{"shape":"SlaFieldValueUnionList"},
         "TargetSlaMinutes":{"shape":"TargetSlaMinutes"}
       }
+    },
+    "CategoriesAttributeAndCondition":{
+      "type":"structure",
+      "members":{
+        "TagConditions":{"shape":"TagAndConditionList"}
+      }
+    },
+    "CategoriesAttributeFilter":{
+      "type":"structure",
+      "members":{
+        "OrConditions":{"shape":"CategoriesAttributeOrConditionList"},
+        "AndCondition":{"shape":"CategoriesAttributeAndCondition"},
+        "TagCondition":{"shape":"TagCondition"}
+      }
+    },
+    "CategoriesAttributeOrConditionList":{
+      "type":"list",
+      "member":{"shape":"CategoriesAttributeAndCondition"}
     },
     "Channel":{
       "type":"string",
@@ -9096,11 +9136,13 @@
         "DisconnectReason":{"shape":"String"},
         "ContactEvaluations":{"shape":"ContactEvaluations"},
         "TaskTemplateInfo":{"shape":"TaskTemplateInfoV2"},
+        "Cases":{"shape":"CaseEntries"},
         "ContactDetails":{"shape":"ContactDetails"},
         "OutboundStrategy":{"shape":"OutboundStrategy"},
         "Attributes":{"shape":"Attributes"},
         "NextContacts":{"shape":"NextContacts"},
-        "GlobalResiliencyMetadata":{"shape":"GlobalResiliencyMetadata"}
+        "GlobalResiliencyMetadata":{"shape":"GlobalResiliencyMetadata"},
+        "ContactLens":{"shape":"ContactLens"}
       }
     },
     "ContactAnalysis":{
@@ -9118,6 +9160,13 @@
         "Arn":{"shape":"ARN"},
         "AnalyticsMode":{"shape":"AnalyticsMode"},
         "IsRedacted":{"shape":"NullableBoolean"}
+      }
+    },
+    "ContactAnalysisReferenceState":{
+      "type":"structure",
+      "members":{
+        "Status":{"shape":"String"},
+        "StatusReason":{"shape":"String"}
       }
     },
     "ContactConfiguration":{
@@ -9593,6 +9642,51 @@
         "CUSTOMER"
       ]
     },
+    "ContactLens":{
+      "type":"structure",
+      "members":{
+        "ConversationalAnalytics":{"shape":"ConversationalAnalytics"}
+      }
+    },
+    "ContactLensAnalyticsModeList":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
+    "ContactLensChannelConfiguration":{
+      "type":"structure",
+      "members":{
+        "AnalyticsModes":{"shape":"ContactLensAnalyticsModeList"}
+      }
+    },
+    "ContactLensRedactionConfiguration":{
+      "type":"structure",
+      "members":{
+        "Behavior":{"shape":"String"},
+        "Policy":{"shape":"String"},
+        "Entities":{"shape":"ContactLensRedactionEntitiesList"},
+        "MaskMode":{"shape":"String"}
+      }
+    },
+    "ContactLensRedactionEntitiesList":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
+    "ContactLensSentimentConfiguration":{
+      "type":"structure",
+      "members":{
+        "Behavior":{"shape":"String"}
+      }
+    },
+    "ContactLensSummaryConfiguration":{
+      "type":"structure",
+      "members":{
+        "SummaryModes":{"shape":"ContactLensSummaryModeList"}
+      }
+    },
+    "ContactLensSummaryModeList":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
     "ContactMediaProcessingFailureMode":{
       "type":"string",
       "enum":[
@@ -9835,6 +9929,28 @@
         "AndCondition":{"shape":"AttributeAndCondition"},
         "TagCondition":{"shape":"TagCondition"},
         "HierarchyGroupCondition":{"shape":"HierarchyGroupCondition"}
+      }
+    },
+    "ConversationalAnalytics":{
+      "type":"structure",
+      "members":{
+        "Configuration":{"shape":"ConversationalAnalyticsConfiguration"},
+        "ContactAnalysisReferenceState":{"shape":"ContactAnalysisReferenceState"}
+      }
+    },
+    "ConversationalAnalyticsConfiguration":{
+      "type":"structure",
+      "members":{
+        "Enabled":{
+          "shape":"Boolean",
+          "box":true
+        },
+        "LanguageLocale":{"shape":"String"},
+        "LanguageLocales":{"shape":"LanguageLocales"},
+        "ChannelConfiguration":{"shape":"ContactLensChannelConfiguration"},
+        "RedactionConfiguration":{"shape":"ContactLensRedactionConfiguration"},
+        "SummaryConfiguration":{"shape":"ContactLensSummaryConfiguration"},
+        "SentimentConfiguration":{"shape":"ContactLensSentimentConfiguration"}
       }
     },
     "Count":{"type":"integer"},
@@ -14479,6 +14595,10 @@
       "type":"string",
       "enum":["KMS"]
     },
+    "EndAssociatedEmailsActionDefinition":{
+      "type":"structure",
+      "members":{}
+    },
     "EndAssociatedTasksActionDefinition":{
       "type":"structure",
       "members":{}
@@ -14967,7 +15087,103 @@
         "ja-JP",
         "ko-KR",
         "zh-CN",
-        "ms-MY"
+        "ms-MY",
+        "af-ZA",
+        "sq-AL",
+        "am-ET",
+        "ar-AE",
+        "ar-SA",
+        "hy-AM",
+        "eu-ES",
+        "be-BY",
+        "bs-BA",
+        "bg-BG",
+        "ca-ES",
+        "ckb-IR",
+        "ckb-IQ",
+        "zh-TW",
+        "hr-HR",
+        "cs-CZ",
+        "da-DK",
+        "nl-BE",
+        "nl-NL",
+        "en-AU",
+        "en-IN",
+        "en-IE",
+        "en-NZ",
+        "en-AB",
+        "en-SG",
+        "en-ZA",
+        "en-GB",
+        "en-WL",
+        "fa-IR",
+        "fa-AF",
+        "fi-FI",
+        "fr-BE",
+        "fr-CA",
+        "ga-IE",
+        "gl-ES",
+        "ka-GE",
+        "de-AT",
+        "de-CH",
+        "el-GR",
+        "gu-IN",
+        "ht-HT",
+        "he-IL",
+        "hi-IN",
+        "hu-HU",
+        "is-IS",
+        "id-ID",
+        "jv-ID",
+        "km-KH",
+        "kn-IN",
+        "kk-KZ",
+        "lo-LA",
+        "lv-LV",
+        "lt-LT",
+        "mk-MK",
+        "ml-IN",
+        "mr-IN",
+        "ne-NP",
+        "no-NO",
+        "or-IN",
+        "ps-AF",
+        "pl-PL",
+        "pt-PT",
+        "pa-IN",
+        "ro-RO",
+        "ru-RU",
+        "sr-RS",
+        "si-LK",
+        "sk-SK",
+        "sl-SI",
+        "es-MX",
+        "es-US",
+        "su-ID",
+        "sw-BI",
+        "sw-KE",
+        "sw-RW",
+        "sw-TZ",
+        "sw-UG",
+        "sv-SE",
+        "tl-PH",
+        "ta-IN",
+        "te-IN",
+        "th-TH",
+        "tr-TR",
+        "uk-UA",
+        "uz-UZ",
+        "vi-VN",
+        "zu-ZA",
+        "my-MM",
+        "so-SO",
+        "yue-HK",
+        "et-EE",
+        "hmn",
+        "lg-UG",
+        "cy-GB",
+        "xh-ZA",
+        "bn-BD"
       ]
     },
     "EvaluationFormLanguageConfiguration":{
@@ -17518,7 +17734,9 @@
         "IntegrationArn":{"shape":"ARN"},
         "SourceApplicationUrl":{"shape":"URI"},
         "SourceApplicationName":{"shape":"SourceApplicationName"},
-        "SourceType":{"shape":"SourceType"}
+        "SourceType":{"shape":"SourceType"},
+        "LastModifiedTime":{"shape":"Timestamp"},
+        "LastModifiedRegion":{"shape":"RegionName"}
       }
     },
     "IntegrationAssociationSummaryList":{
@@ -17705,6 +17923,12 @@
       }
     },
     "LanguageLocale":{"type":"string"},
+    "LanguageLocales":{
+      "type":"list",
+      "member":{"shape":"LanguageLocale"},
+      "max":5,
+      "min":0
+    },
     "LargeNextToken":{
       "type":"string",
       "max":100000,
@@ -19352,7 +19576,8 @@
         "MaxResults":{"shape":"MaxResult100"},
         "NextToken":{"shape":"LargeNextToken"},
         "OutputType":{"shape":"RealTimeContactAnalysisOutputType"},
-        "SegmentTypes":{"shape":"RealTimeContactAnalysisSegmentTypes"}
+        "SegmentTypes":{"shape":"RealTimeContactAnalysisSegmentTypes"},
+        "ListFilter":{"shape":"RealTimeContactAnalysisSegmentsFilter"}
       }
     },
     "ListRealtimeContactAnalysisSegmentsV2Response":{
@@ -22091,7 +22316,10 @@
     },
     "PreEvaluationFilterResourceType":{
       "type":"string",
-      "enum":["CONTACT"]
+      "enum":[
+        "CONTACT",
+        "CONTACT_EVALUATION"
+      ]
     },
     "PreEvaluationFilterType":{
       "type":"string",
@@ -22773,6 +23001,7 @@
       "type":"structure",
       "required":["PointsOfInterest"],
       "members":{
+        "RuleId":{"shape":"RuleId256"},
         "PointsOfInterest":{"shape":"RealTimeContactAnalysisPointsOfInterest"}
       }
     },
@@ -23012,6 +23241,12 @@
       "type":"list",
       "member":{"shape":"RealTimeContactAnalysisSegmentType"},
       "max":7
+    },
+    "RealTimeContactAnalysisSegmentsFilter":{
+      "type":"structure",
+      "members":{
+        "CategoriesAttributeFilter":{"shape":"CategoriesAttributeFilter"}
+      }
     },
     "RealTimeContactAnalysisSentimentLabel":{
       "type":"string",
@@ -23890,6 +24125,7 @@
         "UpdateCaseAction":{"shape":"UpdateCaseActionDefinition"},
         "AssignSlaAction":{"shape":"AssignSlaActionDefinition"},
         "EndAssociatedTasksAction":{"shape":"EndAssociatedTasksActionDefinition"},
+        "EndAssociatedEmailsAction":{"shape":"EndAssociatedEmailsActionDefinition"},
         "SubmitAutoEvaluationAction":{"shape":"SubmitAutoEvaluationActionDefinition"},
         "ExtractInformationAction":{"shape":"ExtractInformationActionDefinition"},
         "SendInAppNotificationAction":{"shape":"SendInAppNotificationActionDefinition"}
@@ -23927,6 +24163,11 @@
     },
     "RuleFunction":{"type":"string"},
     "RuleId":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
+    "RuleId256":{
       "type":"string",
       "max":256,
       "min":1

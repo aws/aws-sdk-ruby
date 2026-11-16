@@ -25,6 +25,9 @@ module Aws
         def message: () -> ::String
         def error_code: () -> ::String
       end
+      class PolicyTooLargeException < ServiceError
+        def message: () -> ::String
+      end
       class ResourceNotFoundException < ServiceError
         def message: () -> ::String
         def resource_type: () -> ::String

@@ -705,6 +705,27 @@ module Aws::MediaPackageV2
     #   [1]: https://docs.aws.amazon.com/mediapackage/latest/userguide/compacted.html
     #   @return [String]
     #
+    # @!attribute [rw] bandwidth_reporting_mode
+    #   Specifies how MediaPackage calculates the `bandwidth` attribute of
+    #   regular (non-iFrame) video `Representation` elements in the DASH
+    #   manifest. Audio, subtitle, image, and iFrame-only (trick-play)
+    #   representations are unchanged.
+    #
+    #   The allowed values are:
+    #
+    #   * `AVERAGE` – MediaPackage reports the average bitrate of the source
+    #     video track. This is the default.
+    #
+    #   * `MAX` – MediaPackage reports the peak bitrate of the video stream.
+    #
+    #   For information about bandwidth reporting, see [DASH bandwidth
+    #   reporting][1] in the *Elemental MediaPackage v2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediapackage/latest/userguide/dash-bandwidth-reporting.html
+    #   @return [String]
+    #
     # @!attribute [rw] audio_timeline_pattern
     #   How MediaPackage represents the audio timeline in the DASH manifest.
     #   This setting applies DASH Segment Duration Patternization, as
@@ -763,6 +784,7 @@ module Aws::MediaPackageV2
       :program_information,
       :dvb_settings,
       :compactness,
+      :bandwidth_reporting_mode,
       :audio_timeline_pattern,
       :subtitle_configuration,
       :uri_path_type,
@@ -2417,6 +2439,27 @@ module Aws::MediaPackageV2
     #   indicates a full manifest.
     #   @return [String]
     #
+    # @!attribute [rw] bandwidth_reporting_mode
+    #   Specifies how MediaPackage calculates the `bandwidth` attribute of
+    #   regular (non-iFrame) video `Representation` elements in the DASH
+    #   manifest. Audio, subtitle, image, and iFrame-only (trick-play)
+    #   representations are unchanged.
+    #
+    #   The allowed values are:
+    #
+    #   * `AVERAGE` – MediaPackage reports the average bitrate of the source
+    #     video track. This is the default.
+    #
+    #   * `MAX` – MediaPackage reports the peak bitrate of the video stream.
+    #
+    #   For information about bandwidth reporting, see [DASH bandwidth
+    #   reporting][1] in the *Elemental MediaPackage v2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediapackage/latest/userguide/dash-bandwidth-reporting.html
+    #   @return [String]
+    #
     # @!attribute [rw] audio_timeline_pattern
     #   How MediaPackage represents the audio timeline in the DASH manifest,
     #   using DASH Segment Duration Patternization for audio adaptation
@@ -2461,6 +2504,7 @@ module Aws::MediaPackageV2
       :program_information,
       :dvb_settings,
       :compactness,
+      :bandwidth_reporting_mode,
       :audio_timeline_pattern,
       :subtitle_configuration,
       :uri_path_type,

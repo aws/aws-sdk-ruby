@@ -272,7 +272,8 @@ module Aws::DevOpsAgent
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [Proc] :output_event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
@@ -338,15 +339,15 @@ module Aws::DevOpsAgent
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -651,6 +652,10 @@ module Aws::DevOpsAgent
     #             channel_id: "MSTeamsChannelId", # required
     #           },
     #         },
+    #         bidirectional: {
+    #           role_arn: "RoleArn", # required
+    #           enabled: false,
+    #         },
     #       },
     #       release_management: {
     #         name: "DisplayName", # required
@@ -757,6 +762,8 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.msteams.transmission_target.ops_oncall_target.channel_id #=> String
     #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_name #=> String
     #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_id #=> String
+    #   resp.association.configuration.msteams.bidirectional.role_arn #=> String
+    #   resp.association.configuration.msteams.bidirectional.enabled #=> Boolean
     #   resp.association.configuration.release_management.name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.private_connection_name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.runtime_role_arn #=> String
@@ -1931,6 +1938,8 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.msteams.transmission_target.ops_oncall_target.channel_id #=> String
     #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_name #=> String
     #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_id #=> String
+    #   resp.association.configuration.msteams.bidirectional.role_arn #=> String
+    #   resp.association.configuration.msteams.bidirectional.enabled #=> Boolean
     #   resp.association.configuration.release_management.name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.private_connection_name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.runtime_role_arn #=> String
@@ -2605,6 +2614,8 @@ module Aws::DevOpsAgent
     #   resp.associations[0].configuration.msteams.transmission_target.ops_oncall_target.channel_id #=> String
     #   resp.associations[0].configuration.msteams.transmission_target.ops_sre_target.channel_name #=> String
     #   resp.associations[0].configuration.msteams.transmission_target.ops_sre_target.channel_id #=> String
+    #   resp.associations[0].configuration.msteams.bidirectional.role_arn #=> String
+    #   resp.associations[0].configuration.msteams.bidirectional.enabled #=> Boolean
     #   resp.associations[0].configuration.release_management.name #=> String
     #   resp.associations[0].configuration.release_management.network_access.private_access.private_connection_name #=> String
     #   resp.associations[0].configuration.release_management.network_access.private_access.runtime_role_arn #=> String
@@ -4445,6 +4456,10 @@ module Aws::DevOpsAgent
     #             channel_id: "MSTeamsChannelId", # required
     #           },
     #         },
+    #         bidirectional: {
+    #           role_arn: "RoleArn", # required
+    #           enabled: false,
+    #         },
     #       },
     #       release_management: {
     #         name: "DisplayName", # required
@@ -4551,6 +4566,8 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.msteams.transmission_target.ops_oncall_target.channel_id #=> String
     #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_name #=> String
     #   resp.association.configuration.msteams.transmission_target.ops_sre_target.channel_id #=> String
+    #   resp.association.configuration.msteams.bidirectional.role_arn #=> String
+    #   resp.association.configuration.msteams.bidirectional.enabled #=> Boolean
     #   resp.association.configuration.release_management.name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.private_connection_name #=> String
     #   resp.association.configuration.release_management.network_access.private_access.runtime_role_arn #=> String
@@ -4945,7 +4962,7 @@ module Aws::DevOpsAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-devopsagent'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

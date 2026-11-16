@@ -86,19 +86,34 @@ module Aws::AppStream
     #
     # @!attribute [rw] settings
     #   The list of agent access settings that define permissions for each
-    #   agent action. You must specify at least one setting.
+    #   agent action. You must specify at least one setting, and at least
+    #   one agent action must be enabled.
     #   @return [Array<Types::AgentAccessSetting>]
     #
     # @!attribute [rw] s3_bucket_arn
     #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent
-    #   screenshots are stored. Required when ScreenshotsUploadEnabled is
-    #   true.
+    #   screenshots and Replay Session artifacts are stored. Required when
+    #   ScreenshotsUploadEnabled or ReplaySessionEnabled is true.
     #   @return [String]
     #
     # @!attribute [rw] screenshots_upload_enabled
     #   Indicates whether screenshot uploads to Amazon S3 are enabled for
     #   agent sessions.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] replay_session_enabled
+    #   Indicates whether Replay Session is enabled for agent sessions.
+    #   WorkSpaces Applications delivers a video combining session
+    #   screenshots, a transcript, and a report for each session. Requires
+    #   the COMPUTER\_VISION agent action.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer managed symmetric
+    #   encryption KMS key that encrypts Replay Session artifacts while
+    #   WorkSpaces Applications processes them. The key must be in the same
+    #   Region as the stack, and ReplaySessionEnabled must be true.
+    #   @return [String]
     #
     # @!attribute [rw] screen_resolution
     #   The screen resolution for the agent streaming environment.
@@ -119,6 +134,8 @@ module Aws::AppStream
       :settings,
       :s3_bucket_arn,
       :screenshots_upload_enabled,
+      :replay_session_enabled,
+      :kms_key_arn,
       :screen_resolution,
       :screen_image_format,
       :user_control_mode)
@@ -132,18 +149,33 @@ module Aws::AppStream
     #
     # @!attribute [rw] settings
     #   The list of agent access settings that define permissions for each
-    #   agent action.
+    #   agent action. The merged settings must have at least one agent
+    #   action enabled.
     #   @return [Array<Types::AgentAccessSetting>]
     #
     # @!attribute [rw] s3_bucket_arn
     #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent
-    #   screenshots are stored.
+    #   screenshots and Replay Session artifacts are stored.
     #   @return [String]
     #
     # @!attribute [rw] screenshots_upload_enabled
     #   Indicates whether screenshot uploads to Amazon S3 are enabled for
     #   agent sessions.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] replay_session_enabled
+    #   Indicates whether Replay Session is enabled for agent sessions.
+    #   Setting this attribute to false also removes the KmsKeyArn value
+    #   from the stack.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the customer managed symmetric
+    #   encryption KMS key that encrypts Replay Session artifacts while
+    #   WorkSpaces Applications processes them. To remove the key, use
+    #   AttributesToDelete with the AGENT\_ACCESS\_CONFIG\_KMS\_KEY\_ARN
+    #   value.
+    #   @return [String]
     #
     # @!attribute [rw] screen_resolution
     #   The screen resolution for the agent streaming environment.
@@ -164,6 +196,8 @@ module Aws::AppStream
       :settings,
       :s3_bucket_arn,
       :screenshots_upload_enabled,
+      :replay_session_enabled,
+      :kms_key_arn,
       :screen_resolution,
       :screen_image_format,
       :user_control_mode)
@@ -2188,6 +2222,11 @@ module Aws::AppStream
     #    </note>
     #   @return [Boolean]
     #
+    # @!attribute [rw] agent_access_config
+    #   The configuration for agent access on the image builder. If
+    #   specified, agent access is enabled for the image builder.
+    #   @return [Types::ImageBuilderAgentAccessConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderRequest AWS API Documentation
     #
     class CreateImageBuilderRequest < Struct.new(
@@ -2207,7 +2246,8 @@ module Aws::AppStream
       :root_volume_config,
       :softwares_to_install,
       :softwares_to_uninstall,
-      :disable_imdsv1)
+      :disable_imdsv1,
+      :agent_access_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5136,6 +5176,11 @@ module Aws::AppStream
     #   disabled for the image builder.
     #   @return [Boolean]
     #
+    # @!attribute [rw] agent_access_config
+    #   The agent access configuration of the image builder, if agent access
+    #   is enabled.
+    #   @return [Types::ImageBuilderAgentAccessConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageBuilder AWS API Documentation
     #
     class ImageBuilder < Struct.new(
@@ -5159,7 +5204,136 @@ module Aws::AppStream
       :access_endpoints,
       :root_volume_config,
       :latest_appstream_agent_version,
-      :disable_imdsv1)
+      :disable_imdsv1,
+      :agent_access_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for agent access on an image builder. Agent access
+    # enables AI agents to interact with desktop applications during
+    # streaming sessions to the image builder.
+    #
+    # @!attribute [rw] settings
+    #   The list of agent access settings that define permissions for each
+    #   agent action. You must specify at least one setting, and at least
+    #   one agent action must be enabled.
+    #   @return [Array<Types::AgentAccessSetting>]
+    #
+    # @!attribute [rw] s3_bucket_arn
+    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent
+    #   screenshots are stored. Required when ScreenshotsUploadEnabled is
+    #   true.
+    #   @return [String]
+    #
+    # @!attribute [rw] screenshots_upload_enabled
+    #   Specifies whether screenshot uploads to Amazon S3 are enabled for
+    #   agent sessions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] screen_resolution
+    #   The screen resolution for the agent streaming environment.
+    #
+    #   * W\_1280xH\_720 - 1280 x 720 pixels.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] screen_image_format
+    #   The image format for agent screen captures.
+    #
+    #   * PNG - PNG format.
+    #
+    #   * JPEG - JPEG format.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_control_mode
+    #   The user control mode for agent sessions. This setting determines
+    #   how users can interact with agent sessions.
+    #
+    #   * VIEW\_ONLY - Users can view and observe agent actions as they
+    #     happen.
+    #
+    #   * VIEW\_STOP - Users can view agent actions and stop the agent if
+    #     needed.
+    #
+    #   * DISABLED - Users cannot view or stop the agent session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageBuilderAgentAccessConfig AWS API Documentation
+    #
+    class ImageBuilderAgentAccessConfig < Struct.new(
+      :settings,
+      :s3_bucket_arn,
+      :screenshots_upload_enabled,
+      :screen_resolution,
+      :screen_image_format,
+      :user_control_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for updating agent access on an image builder. This
+    # type supports partial updates, so you only need to specify the fields
+    # you want to change. Fields that you omit keep their stored values.
+    #
+    # @!attribute [rw] settings
+    #   The list of agent access settings that define permissions for each
+    #   agent action. These settings are merged with the stored settings by
+    #   agent action. A setting that you specify replaces the stored setting
+    #   for the same agent action. The merged settings must have at least
+    #   one agent action enabled.
+    #   @return [Array<Types::AgentAccessSetting>]
+    #
+    # @!attribute [rw] s3_bucket_arn
+    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent
+    #   screenshots are stored. If ScreenshotsUploadEnabled is false after
+    #   the merge, the stored bucket ARN is removed.
+    #   @return [String]
+    #
+    # @!attribute [rw] screenshots_upload_enabled
+    #   Specifies whether screenshot uploads to Amazon S3 are enabled for
+    #   agent sessions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] screen_resolution
+    #   The screen resolution for the agent streaming environment.
+    #
+    #   * W\_1280xH\_720 - 1280 x 720 pixels.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] screen_image_format
+    #   The image format for agent screen captures.
+    #
+    #   * PNG - PNG format.
+    #
+    #   * JPEG - JPEG format.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_control_mode
+    #   The user control mode for agent sessions. This setting determines
+    #   how users can interact with agent sessions.
+    #
+    #   * VIEW\_ONLY - Users can view and observe agent actions as they
+    #     happen.
+    #
+    #   * VIEW\_STOP - Users can view agent actions and stop the agent if
+    #     needed.
+    #
+    #   * DISABLED - Users cannot view or stop the agent session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageBuilderAgentAccessConfigForUpdate AWS API Documentation
+    #
+    class ImageBuilderAgentAccessConfigForUpdate < Struct.new(
+      :settings,
+      :s3_bucket_arn,
+      :screenshots_upload_enabled,
+      :screen_resolution,
+      :screen_image_format,
+      :user_control_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6987,6 +7161,52 @@ module Aws::AppStream
     #
     class UpdateFleetResult < Struct.new(
       :fleet)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the image builder.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description to display.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The image builder name to display.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_access_config
+    #   The configuration for agent access on the image builder. Specify
+    #   this to update agent access settings. To remove agent access, use
+    #   AttributesToDelete with the AGENT\_ACCESS\_CONFIG value.
+    #   @return [Types::ImageBuilderAgentAccessConfigForUpdate]
+    #
+    # @!attribute [rw] attributes_to_delete
+    #   The image builder attributes to delete.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateImageBuilderRequest AWS API Documentation
+    #
+    class UpdateImageBuilderRequest < Struct.new(
+      :name,
+      :description,
+      :display_name,
+      :agent_access_config,
+      :attributes_to_delete)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_builder
+    #   Information about the image builder.
+    #   @return [Types::ImageBuilder]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateImageBuilderResult AWS API Documentation
+    #
+    class UpdateImageBuilderResult < Struct.new(
+      :image_builder)
       SENSITIVE = []
       include Aws::Structure
     end

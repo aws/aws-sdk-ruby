@@ -119,6 +119,27 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # Represents all resources of the specified type in a Data Catalog,
+    # including resources that are created after the grant.
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog. By default, it's your account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource that the grant covers. The only supported value
+    #   is `TABLE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/AnyResource AWS API Documentation
+    #
+    class AnyResource < Struct.new(
+      :catalog_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] saml_assertion
     #   A SAML assertion consisting of an assertion statement for the user
     #   who needs temporary credentials. This must match the SAML assertion
@@ -1673,6 +1694,44 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # @!attribute [rw] user_defined_function_arns
+    #   The ARNs of one or more user-defined functions to include in the
+    #   session context, each in the format
+    #   `arn:aws:glue:region:account-id:userDefinedFunction/database-name/function-name
+    #   `.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] duration_seconds
+    #   The number of seconds the session context is valid. The default is
+    #   86,400 (24 hours).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetGlueFunctionSessionContextRequest AWS API Documentation
+    #
+    class GetGlueFunctionSessionContextRequest < Struct.new(
+      :user_defined_function_arns,
+      :duration_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session_context_id
+    #   The ID of the session context.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration
+    #   The date and time when the session context expires.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetGlueFunctionSessionContextResponse AWS API Documentation
+    #
+    class GetGlueFunctionSessionContextResponse < Struct.new(
+      :session_context_id,
+      :expiration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name for the LF-Tag expression
     #   @return [String]
@@ -2064,6 +2123,54 @@ module Aws::LakeFormation
       :credentials,
       :accessible_data_locations,
       :credentials_scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_defined_function_arn
+    #   The ARN of the user-defined function whose artifacts you want to
+    #   download, in the format
+    #   `arn:aws:glue:region:account-id:userDefinedFunction/database-name/function-name
+    #   `.
+    #   @return [String]
+    #
+    # @!attribute [rw] audit_context
+    #   Context for the request, such as the column names and query ID, that
+    #   Lake Formation uses for auditing.
+    #   @return [Types::AuditContext]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetTemporaryGlueFunctionCredentialsRequest AWS API Documentation
+    #
+    class GetTemporaryGlueFunctionCredentialsRequest < Struct.new(
+      :user_defined_function_arn,
+      :audit_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_key_id
+    #   The access key ID for the temporary credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_access_key
+    #   The secret key for the temporary credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_token
+    #   The session token for the temporary credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration
+    #   The date and time when the temporary credentials expire.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetTemporaryGlueFunctionCredentialsResponse AWS API Documentation
+    #
+    class GetTemporaryGlueFunctionCredentialsResponse < Struct.new(
+      :access_key_id,
+      :secret_access_key,
+      :session_token,
+      :expiration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3640,6 +3747,13 @@ module Aws::LakeFormation
 
     # A structure for the resource.
     #
+    # @!attribute [rw] any_resource
+    #   All resources of the specified type in a Data Catalog. When you
+    #   grant or revoke permissions on this resource, the principal must be
+    #   a user-defined function whose `GovernanceMode` is `LAKE_FORMATION`,
+    #   and the Data Catalog must be in your account.
+    #   @return [Types::AnyResource]
+    #
     # @!attribute [rw] catalog
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
@@ -3694,9 +3808,27 @@ module Aws::LakeFormation
     #   revoking permissions on a row-level security policy.
     #   @return [Types::RLSPolicyResource]
     #
+    # @!attribute [rw] user_defined_function
+    #   The user-defined function that you want to grant or revoke
+    #   permissions on. The function's `GovernanceMode` must be
+    #   `LAKE_FORMATION`. You can grant the following permissions:
+    #
+    #   * `EXECUTE` – Use the function in a job, and get credentials to
+    #     download its artifacts.
+    #
+    #   * `DESCRIBE` – View the function's definition.
+    #
+    #   * `ALTER` – Update the function.
+    #
+    #   * `DROP` – Delete the function.
+    #
+    #   * `ALL` – All of the preceding permissions.
+    #   @return [Types::UserDefinedFunctionResource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/Resource AWS API Documentation
     #
     class Resource < Struct.new(
+      :any_resource,
       :catalog,
       :database,
       :table,
@@ -3706,7 +3838,8 @@ module Aws::LakeFormation
       :lf_tag,
       :lf_tag_policy,
       :lf_tag_expression,
-      :rls_policy)
+      :rls_policy,
+      :user_defined_function)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4685,6 +4818,56 @@ module Aws::LakeFormation
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Identifies a user-defined function, or all user-defined functions in a
+    # database, as a resource that you can grant permissions on. You can
+    # grant permissions only on functions whose `GovernanceMode` is
+    # `LAKE_FORMATION`.
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog. By default, it's your account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database that contains the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the function.
+    #
+    #   Exactly one of `UserDefinedFunctionResource$Name` or
+    #   `UserDefinedFunctionResource$UserDefinedFunctionWildcard` is
+    #   required.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_defined_function_wildcard
+    #   A wildcard object representing every user-defined function in the
+    #   database, including functions created after the grant.
+    #
+    #   Exactly one of `UserDefinedFunctionResource$Name` or
+    #   `UserDefinedFunctionResource$UserDefinedFunctionWildcard` is
+    #   required.
+    #   @return [Types::UserDefinedFunctionWildcard]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UserDefinedFunctionResource AWS API Documentation
+    #
+    class UserDefinedFunctionResource < Struct.new(
+      :catalog_id,
+      :database_name,
+      :name,
+      :user_defined_function_wildcard)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A wildcard object representing every user-defined function in a
+    # database.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UserDefinedFunctionWildcard AWS API Documentation
+    #
+    class UserDefinedFunctionWildcard < Aws::EmptyStructure; end
 
     # An object that defines an Amazon S3 object to be deleted if a
     # transaction cancels, provided that `VirtualPut` was called before

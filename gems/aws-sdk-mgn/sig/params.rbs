@@ -35,7 +35,7 @@ module Aws
     }
 
       type source_configuration = {
-      source_environment: ("NSX" | "VSPHERE" | "FORTIGATE_FIREWALL" | "PALO_ALTO_FIREWALL" | "CISCO_ACI" | "LOGICAL_MODEL" | "MODELIZE_IT" | "AWS_DISCOVERY_COLLECTOR"),
+      source_environment: ("NSX" | "VSPHERE" | "FORTIGATE_FIREWALL" | "PALO_ALTO_FIREWALL" | "CISCO_ACI" | "LOGICAL_MODEL" | "MODELIZE_IT" | "AWS_DISCOVERY_COLLECTOR" | "MIGRATION_PLANNING_ARTIFACTS"),
       source_s3_configuration: {
         s3_bucket: ::String,
         s3_bucket_owner: ::String,

@@ -250,7 +250,14 @@ module Aws::Connect
     CalculationExpression = Shapes::StringShape.new(name: 'CalculationExpression')
     Campaign = Shapes::StructureShape.new(name: 'Campaign')
     CampaignId = Shapes::StringShape.new(name: 'CampaignId')
+    CaseEntries = Shapes::ListShape.new(name: 'CaseEntries')
+    CaseEntry = Shapes::StructureShape.new(name: 'CaseEntry')
+    CaseId = Shapes::StringShape.new(name: 'CaseId')
+    CaseReferenceNumber = Shapes::StringShape.new(name: 'CaseReferenceNumber')
     CaseSlaConfiguration = Shapes::StructureShape.new(name: 'CaseSlaConfiguration')
+    CategoriesAttributeAndCondition = Shapes::StructureShape.new(name: 'CategoriesAttributeAndCondition')
+    CategoriesAttributeFilter = Shapes::StructureShape.new(name: 'CategoriesAttributeFilter')
+    CategoriesAttributeOrConditionList = Shapes::ListShape.new(name: 'CategoriesAttributeOrConditionList')
     Channel = Shapes::StringShape.new(name: 'Channel')
     ChannelList = Shapes::ListShape.new(name: 'ChannelList')
     ChannelToCountMap = Shapes::MapShape.new(name: 'ChannelToCountMap')
@@ -296,6 +303,7 @@ module Aws::Connect
     Contact = Shapes::StructureShape.new(name: 'Contact')
     ContactAnalysis = Shapes::StructureShape.new(name: 'ContactAnalysis')
     ContactAnalysisReference = Shapes::StructureShape.new(name: 'ContactAnalysisReference')
+    ContactAnalysisReferenceState = Shapes::StructureShape.new(name: 'ContactAnalysisReferenceState')
     ContactConfiguration = Shapes::StructureShape.new(name: 'ContactConfiguration')
     ContactDataRequest = Shapes::StructureShape.new(name: 'ContactDataRequest')
     ContactDataRequestList = Shapes::ListShape.new(name: 'ContactDataRequestList')
@@ -362,6 +370,14 @@ module Aws::Connect
     ContactId = Shapes::StringShape.new(name: 'ContactId')
     ContactInitiationMethod = Shapes::StringShape.new(name: 'ContactInitiationMethod')
     ContactInteractionType = Shapes::StringShape.new(name: 'ContactInteractionType')
+    ContactLens = Shapes::StructureShape.new(name: 'ContactLens')
+    ContactLensAnalyticsModeList = Shapes::ListShape.new(name: 'ContactLensAnalyticsModeList')
+    ContactLensChannelConfiguration = Shapes::StructureShape.new(name: 'ContactLensChannelConfiguration')
+    ContactLensRedactionConfiguration = Shapes::StructureShape.new(name: 'ContactLensRedactionConfiguration')
+    ContactLensRedactionEntitiesList = Shapes::ListShape.new(name: 'ContactLensRedactionEntitiesList')
+    ContactLensSentimentConfiguration = Shapes::StructureShape.new(name: 'ContactLensSentimentConfiguration')
+    ContactLensSummaryConfiguration = Shapes::StructureShape.new(name: 'ContactLensSummaryConfiguration')
+    ContactLensSummaryModeList = Shapes::ListShape.new(name: 'ContactLensSummaryModeList')
     ContactMediaProcessingFailureMode = Shapes::StringShape.new(name: 'ContactMediaProcessingFailureMode')
     ContactMetricInfo = Shapes::StructureShape.new(name: 'ContactMetricInfo')
     ContactMetricName = Shapes::StringShape.new(name: 'ContactMetricName')
@@ -395,6 +411,8 @@ module Aws::Connect
     ControlPlaneAttributeFilter = Shapes::StructureShape.new(name: 'ControlPlaneAttributeFilter')
     ControlPlaneTagFilter = Shapes::StructureShape.new(name: 'ControlPlaneTagFilter')
     ControlPlaneUserAttributeFilter = Shapes::StructureShape.new(name: 'ControlPlaneUserAttributeFilter')
+    ConversationalAnalytics = Shapes::StructureShape.new(name: 'ConversationalAnalytics')
+    ConversationalAnalyticsConfiguration = Shapes::StructureShape.new(name: 'ConversationalAnalyticsConfiguration')
     Count = Shapes::IntegerShape.new(name: 'Count')
     CreateAgentStatusRequest = Shapes::StructureShape.new(name: 'CreateAgentStatusRequest')
     CreateAgentStatusResponse = Shapes::StructureShape.new(name: 'CreateAgentStatusResponse')
@@ -777,6 +795,7 @@ module Aws::Connect
     EnableValueValidationOnAssociation = Shapes::BooleanShape.new(name: 'EnableValueValidationOnAssociation')
     EncryptionConfig = Shapes::StructureShape.new(name: 'EncryptionConfig')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
+    EndAssociatedEmailsActionDefinition = Shapes::StructureShape.new(name: 'EndAssociatedEmailsActionDefinition')
     EndAssociatedTasksActionDefinition = Shapes::StructureShape.new(name: 'EndAssociatedTasksActionDefinition')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EndpointAddress = Shapes::StringShape.new(name: 'EndpointAddress')
@@ -1168,6 +1187,7 @@ module Aws::Connect
     KinesisVideoStreamConfig = Shapes::StructureShape.new(name: 'KinesisVideoStreamConfig')
     LanguageConfiguration = Shapes::StructureShape.new(name: 'LanguageConfiguration')
     LanguageLocale = Shapes::StringShape.new(name: 'LanguageLocale')
+    LanguageLocales = Shapes::ListShape.new(name: 'LanguageLocales')
     LargeNextToken = Shapes::StringShape.new(name: 'LargeNextToken')
     LengthBoundary = Shapes::IntegerShape.new(name: 'LengthBoundary')
     LexBot = Shapes::StructureShape.new(name: 'LexBot')
@@ -1689,6 +1709,7 @@ module Aws::Connect
     RealTimeContactAnalysisSegmentTranscript = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisSegmentTranscript')
     RealTimeContactAnalysisSegmentType = Shapes::StringShape.new(name: 'RealTimeContactAnalysisSegmentType')
     RealTimeContactAnalysisSegmentTypes = Shapes::ListShape.new(name: 'RealTimeContactAnalysisSegmentTypes')
+    RealTimeContactAnalysisSegmentsFilter = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisSegmentsFilter')
     RealTimeContactAnalysisSentimentLabel = Shapes::StringShape.new(name: 'RealTimeContactAnalysisSentimentLabel')
     RealTimeContactAnalysisStatus = Shapes::StringShape.new(name: 'RealTimeContactAnalysisStatus')
     RealTimeContactAnalysisSupportedChannel = Shapes::StringShape.new(name: 'RealTimeContactAnalysisSupportedChannel')
@@ -1812,6 +1833,7 @@ module Aws::Connect
     RuleCapabilityTiers = Shapes::ListShape.new(name: 'RuleCapabilityTiers')
     RuleFunction = Shapes::StringShape.new(name: 'RuleFunction')
     RuleId = Shapes::StringShape.new(name: 'RuleId')
+    RuleId256 = Shapes::StringShape.new(name: 'RuleId256')
     RuleName = Shapes::StringShape.new(name: 'RuleName')
     RulePublishStatus = Shapes::StringShape.new(name: 'RulePublishStatus')
     RuleSearchSummary = Shapes::StructureShape.new(name: 'RuleSearchSummary')
@@ -3107,12 +3129,28 @@ module Aws::Connect
     Campaign.add_member(:campaign_id, Shapes::ShapeRef.new(shape: CampaignId, location_name: "CampaignId"))
     Campaign.struct_class = Types::Campaign
 
+    CaseEntries.member = Shapes::ShapeRef.new(shape: CaseEntry)
+
+    CaseEntry.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, location_name: "CaseId"))
+    CaseEntry.add_member(:case_reference_number, Shapes::ShapeRef.new(shape: CaseReferenceNumber, location_name: "CaseReferenceNumber"))
+    CaseEntry.struct_class = Types::CaseEntry
+
     CaseSlaConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: SlaName, required: true, location_name: "Name"))
     CaseSlaConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: SlaType, required: true, location_name: "Type"))
     CaseSlaConfiguration.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldValueId, location_name: "FieldId"))
     CaseSlaConfiguration.add_member(:target_field_values, Shapes::ShapeRef.new(shape: SlaFieldValueUnionList, location_name: "TargetFieldValues"))
     CaseSlaConfiguration.add_member(:target_sla_minutes, Shapes::ShapeRef.new(shape: TargetSlaMinutes, required: true, location_name: "TargetSlaMinutes"))
     CaseSlaConfiguration.struct_class = Types::CaseSlaConfiguration
+
+    CategoriesAttributeAndCondition.add_member(:tag_conditions, Shapes::ShapeRef.new(shape: TagAndConditionList, location_name: "TagConditions"))
+    CategoriesAttributeAndCondition.struct_class = Types::CategoriesAttributeAndCondition
+
+    CategoriesAttributeFilter.add_member(:or_conditions, Shapes::ShapeRef.new(shape: CategoriesAttributeOrConditionList, location_name: "OrConditions"))
+    CategoriesAttributeFilter.add_member(:and_condition, Shapes::ShapeRef.new(shape: CategoriesAttributeAndCondition, location_name: "AndCondition"))
+    CategoriesAttributeFilter.add_member(:tag_condition, Shapes::ShapeRef.new(shape: TagCondition, location_name: "TagCondition"))
+    CategoriesAttributeFilter.struct_class = Types::CategoriesAttributeFilter
+
+    CategoriesAttributeOrConditionList.member = Shapes::ShapeRef.new(shape: CategoriesAttributeAndCondition)
 
     ChannelList.member = Shapes::ShapeRef.new(shape: Channel)
 
@@ -3258,11 +3296,13 @@ module Aws::Connect
     Contact.add_member(:disconnect_reason, Shapes::ShapeRef.new(shape: String, location_name: "DisconnectReason"))
     Contact.add_member(:contact_evaluations, Shapes::ShapeRef.new(shape: ContactEvaluations, location_name: "ContactEvaluations"))
     Contact.add_member(:task_template_info, Shapes::ShapeRef.new(shape: TaskTemplateInfoV2, location_name: "TaskTemplateInfo"))
+    Contact.add_member(:cases, Shapes::ShapeRef.new(shape: CaseEntries, location_name: "Cases"))
     Contact.add_member(:contact_details, Shapes::ShapeRef.new(shape: ContactDetails, location_name: "ContactDetails"))
     Contact.add_member(:outbound_strategy, Shapes::ShapeRef.new(shape: OutboundStrategy, location_name: "OutboundStrategy"))
     Contact.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
     Contact.add_member(:next_contacts, Shapes::ShapeRef.new(shape: NextContacts, location_name: "NextContacts"))
     Contact.add_member(:global_resiliency_metadata, Shapes::ShapeRef.new(shape: GlobalResiliencyMetadata, location_name: "GlobalResiliencyMetadata"))
+    Contact.add_member(:contact_lens, Shapes::ShapeRef.new(shape: ContactLens, location_name: "ContactLens"))
     Contact.struct_class = Types::Contact
 
     ContactAnalysis.add_member(:transcript, Shapes::ShapeRef.new(shape: Transcript, location_name: "Transcript"))
@@ -3275,6 +3315,10 @@ module Aws::Connect
     ContactAnalysisReference.add_member(:analytics_mode, Shapes::ShapeRef.new(shape: AnalyticsMode, location_name: "AnalyticsMode"))
     ContactAnalysisReference.add_member(:is_redacted, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsRedacted"))
     ContactAnalysisReference.struct_class = Types::ContactAnalysisReference
+
+    ContactAnalysisReferenceState.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    ContactAnalysisReferenceState.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "StatusReason"))
+    ContactAnalysisReferenceState.struct_class = Types::ContactAnalysisReferenceState
 
     ContactConfiguration.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
     ContactConfiguration.add_member(:participant_role, Shapes::ShapeRef.new(shape: ParticipantRole, location_name: "ParticipantRole"))
@@ -3491,6 +3535,30 @@ module Aws::Connect
 
     ContactFlowVersionSummaryList.member = Shapes::ShapeRef.new(shape: ContactFlowVersionSummary)
 
+    ContactLens.add_member(:conversational_analytics, Shapes::ShapeRef.new(shape: ConversationalAnalytics, location_name: "ConversationalAnalytics"))
+    ContactLens.struct_class = Types::ContactLens
+
+    ContactLensAnalyticsModeList.member = Shapes::ShapeRef.new(shape: String)
+
+    ContactLensChannelConfiguration.add_member(:analytics_modes, Shapes::ShapeRef.new(shape: ContactLensAnalyticsModeList, location_name: "AnalyticsModes"))
+    ContactLensChannelConfiguration.struct_class = Types::ContactLensChannelConfiguration
+
+    ContactLensRedactionConfiguration.add_member(:behavior, Shapes::ShapeRef.new(shape: String, location_name: "Behavior"))
+    ContactLensRedactionConfiguration.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "Policy"))
+    ContactLensRedactionConfiguration.add_member(:entities, Shapes::ShapeRef.new(shape: ContactLensRedactionEntitiesList, location_name: "Entities"))
+    ContactLensRedactionConfiguration.add_member(:mask_mode, Shapes::ShapeRef.new(shape: String, location_name: "MaskMode"))
+    ContactLensRedactionConfiguration.struct_class = Types::ContactLensRedactionConfiguration
+
+    ContactLensRedactionEntitiesList.member = Shapes::ShapeRef.new(shape: String)
+
+    ContactLensSentimentConfiguration.add_member(:behavior, Shapes::ShapeRef.new(shape: String, location_name: "Behavior"))
+    ContactLensSentimentConfiguration.struct_class = Types::ContactLensSentimentConfiguration
+
+    ContactLensSummaryConfiguration.add_member(:summary_modes, Shapes::ShapeRef.new(shape: ContactLensSummaryModeList, location_name: "SummaryModes"))
+    ContactLensSummaryConfiguration.struct_class = Types::ContactLensSummaryConfiguration
+
+    ContactLensSummaryModeList.member = Shapes::ShapeRef.new(shape: String)
+
     ContactMetricInfo.add_member(:name, Shapes::ShapeRef.new(shape: ContactMetricName, required: true, location_name: "Name"))
     ContactMetricInfo.struct_class = Types::ContactMetricInfo
 
@@ -3585,6 +3653,19 @@ module Aws::Connect
     ControlPlaneUserAttributeFilter.add_member(:tag_condition, Shapes::ShapeRef.new(shape: TagCondition, location_name: "TagCondition"))
     ControlPlaneUserAttributeFilter.add_member(:hierarchy_group_condition, Shapes::ShapeRef.new(shape: HierarchyGroupCondition, location_name: "HierarchyGroupCondition"))
     ControlPlaneUserAttributeFilter.struct_class = Types::ControlPlaneUserAttributeFilter
+
+    ConversationalAnalytics.add_member(:configuration, Shapes::ShapeRef.new(shape: ConversationalAnalyticsConfiguration, location_name: "Configuration"))
+    ConversationalAnalytics.add_member(:contact_analysis_reference_state, Shapes::ShapeRef.new(shape: ContactAnalysisReferenceState, location_name: "ContactAnalysisReferenceState"))
+    ConversationalAnalytics.struct_class = Types::ConversationalAnalytics
+
+    ConversationalAnalyticsConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled", metadata: {"box" => true}))
+    ConversationalAnalyticsConfiguration.add_member(:language_locale, Shapes::ShapeRef.new(shape: String, location_name: "LanguageLocale"))
+    ConversationalAnalyticsConfiguration.add_member(:language_locales, Shapes::ShapeRef.new(shape: LanguageLocales, location_name: "LanguageLocales"))
+    ConversationalAnalyticsConfiguration.add_member(:channel_configuration, Shapes::ShapeRef.new(shape: ContactLensChannelConfiguration, location_name: "ChannelConfiguration"))
+    ConversationalAnalyticsConfiguration.add_member(:redaction_configuration, Shapes::ShapeRef.new(shape: ContactLensRedactionConfiguration, location_name: "RedactionConfiguration"))
+    ConversationalAnalyticsConfiguration.add_member(:summary_configuration, Shapes::ShapeRef.new(shape: ContactLensSummaryConfiguration, location_name: "SummaryConfiguration"))
+    ConversationalAnalyticsConfiguration.add_member(:sentiment_configuration, Shapes::ShapeRef.new(shape: ContactLensSentimentConfiguration, location_name: "SentimentConfiguration"))
+    ConversationalAnalyticsConfiguration.struct_class = Types::ConversationalAnalyticsConfiguration
 
     CreateAgentStatusRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     CreateAgentStatusRequest.add_member(:name, Shapes::ShapeRef.new(shape: AgentStatusName, required: true, location_name: "Name"))
@@ -5089,6 +5170,8 @@ module Aws::Connect
     EncryptionConfig.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyId, required: true, location_name: "KeyId"))
     EncryptionConfig.struct_class = Types::EncryptionConfig
 
+    EndAssociatedEmailsActionDefinition.struct_class = Types::EndAssociatedEmailsActionDefinition
+
     EndAssociatedTasksActionDefinition.struct_class = Types::EndAssociatedTasksActionDefinition
 
     Endpoint.add_member(:type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "Type"))
@@ -6282,6 +6365,8 @@ module Aws::Connect
     IntegrationAssociationSummary.add_member(:source_application_url, Shapes::ShapeRef.new(shape: URI, location_name: "SourceApplicationUrl"))
     IntegrationAssociationSummary.add_member(:source_application_name, Shapes::ShapeRef.new(shape: SourceApplicationName, location_name: "SourceApplicationName"))
     IntegrationAssociationSummary.add_member(:source_type, Shapes::ShapeRef.new(shape: SourceType, location_name: "SourceType"))
+    IntegrationAssociationSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    IntegrationAssociationSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     IntegrationAssociationSummary.struct_class = Types::IntegrationAssociationSummary
 
     IntegrationAssociationSummaryList.member = Shapes::ShapeRef.new(shape: IntegrationAssociationSummary)
@@ -6340,6 +6425,8 @@ module Aws::Connect
 
     LanguageConfiguration.add_member(:language_locale, Shapes::ShapeRef.new(shape: LanguageLocale, location_name: "LanguageLocale"))
     LanguageConfiguration.struct_class = Types::LanguageConfiguration
+
+    LanguageLocales.member = Shapes::ShapeRef.new(shape: LanguageLocale)
 
     LexBot.add_member(:name, Shapes::ShapeRef.new(shape: BotName, required: true, location_name: "Name"))
     LexBot.add_member(:lex_region, Shapes::ShapeRef.new(shape: LexRegion, required: true, location_name: "LexRegion"))
@@ -6844,6 +6931,7 @@ module Aws::Connect
     ListRealtimeContactAnalysisSegmentsV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: LargeNextToken, location_name: "NextToken"))
     ListRealtimeContactAnalysisSegmentsV2Request.add_member(:output_type, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisOutputType, required: true, location_name: "OutputType"))
     ListRealtimeContactAnalysisSegmentsV2Request.add_member(:segment_types, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSegmentTypes, required: true, location_name: "SegmentTypes"))
+    ListRealtimeContactAnalysisSegmentsV2Request.add_member(:list_filter, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSegmentsFilter, location_name: "ListFilter"))
     ListRealtimeContactAnalysisSegmentsV2Request.struct_class = Types::ListRealtimeContactAnalysisSegmentsV2Request
 
     ListRealtimeContactAnalysisSegmentsV2Response.add_member(:channel, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSupportedChannel, required: true, location_name: "Channel"))
@@ -7865,6 +7953,7 @@ module Aws::Connect
 
     RealTimeContactAnalysisAttachments.member = Shapes::ShapeRef.new(shape: RealTimeContactAnalysisAttachment)
 
+    RealTimeContactAnalysisCategoryDetails.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId256, location_name: "RuleId"))
     RealTimeContactAnalysisCategoryDetails.add_member(:points_of_interest, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisPointsOfInterest, required: true, location_name: "PointsOfInterest"))
     RealTimeContactAnalysisCategoryDetails.struct_class = Types::RealTimeContactAnalysisCategoryDetails
 
@@ -7939,6 +8028,9 @@ module Aws::Connect
     RealTimeContactAnalysisSegmentTranscript.struct_class = Types::RealTimeContactAnalysisSegmentTranscript
 
     RealTimeContactAnalysisSegmentTypes.member = Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSegmentType)
+
+    RealTimeContactAnalysisSegmentsFilter.add_member(:categories_attribute_filter, Shapes::ShapeRef.new(shape: CategoriesAttributeFilter, location_name: "CategoriesAttributeFilter"))
+    RealTimeContactAnalysisSegmentsFilter.struct_class = Types::RealTimeContactAnalysisSegmentsFilter
 
     RealTimeContactAnalysisTimeData.add_member(:absolute_time, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisTimeInstant, location_name: "AbsoluteTime"))
     RealTimeContactAnalysisTimeData.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -8278,6 +8370,7 @@ module Aws::Connect
     RuleAction.add_member(:update_case_action, Shapes::ShapeRef.new(shape: UpdateCaseActionDefinition, location_name: "UpdateCaseAction"))
     RuleAction.add_member(:assign_sla_action, Shapes::ShapeRef.new(shape: AssignSlaActionDefinition, location_name: "AssignSlaAction"))
     RuleAction.add_member(:end_associated_tasks_action, Shapes::ShapeRef.new(shape: EndAssociatedTasksActionDefinition, location_name: "EndAssociatedTasksAction"))
+    RuleAction.add_member(:end_associated_emails_action, Shapes::ShapeRef.new(shape: EndAssociatedEmailsActionDefinition, location_name: "EndAssociatedEmailsAction"))
     RuleAction.add_member(:submit_auto_evaluation_action, Shapes::ShapeRef.new(shape: SubmitAutoEvaluationActionDefinition, location_name: "SubmitAutoEvaluationAction"))
     RuleAction.add_member(:extract_information_action, Shapes::ShapeRef.new(shape: ExtractInformationActionDefinition, location_name: "ExtractInformationAction"))
     RuleAction.add_member(:send_in_app_notification_action, Shapes::ShapeRef.new(shape: SendInAppNotificationActionDefinition, location_name: "SendInAppNotificationAction"))

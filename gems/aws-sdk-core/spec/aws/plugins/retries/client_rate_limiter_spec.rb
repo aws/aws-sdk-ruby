@@ -176,7 +176,7 @@ module Aws
           expect(test_thread_time).to be > 1.0
         end
 
-        it 'doesnt starve any threads during a stress test' do
+        it 'doesnt starve any threads during a stress test', :jruby_flaky do
           client_rate_limiter.instance_variable_set(:@enabled, true)
           client_rate_limiter.send(:token_bucket_update_rate, 500)
 

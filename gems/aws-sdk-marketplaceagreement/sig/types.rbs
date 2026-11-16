@@ -163,6 +163,7 @@ module Aws::MarketplaceAgreement
       attr_accessor initial_agreement_id: ::String
       attr_accessor end_time_behavior_type: ("RENEW" | "REPLACE" | "EXPIRE")
       attr_accessor end_time_behavior_reason_code: ("PROPOSER_RENEW_OPTED_OUT" | "ACCEPTOR_RENEW_OPTED_OUT" | "NO_RENEWAL_TERM" | "RENEWAL_LIMIT_EXHAUSTED")
+      attr_accessor free_trial_end_time: ::Time
       SENSITIVE: []
     end
 
@@ -360,6 +361,7 @@ module Aws::MarketplaceAgreement
       attr_accessor status: ("ACTIVE" | "ARCHIVED" | "CANCELLED" | "EXPIRED" | "RENEWED" | "REPLACED" | "ROLLED_BACK" | "SUPERSEDED" | "TERMINATED")
       attr_accessor initial_agreement_id: ::String
       attr_accessor end_time_behavior: Types::EndTimeBehavior
+      attr_accessor free_trial_summary: Types::FreeTrialSummary
       SENSITIVE: []
     end
 
@@ -436,6 +438,11 @@ module Aws::MarketplaceAgreement
       attr_accessor id: ::String
       attr_accessor duration: ::String
       attr_accessor grants: ::Array[Types::GrantItem]
+      SENSITIVE: []
+    end
+
+    class FreeTrialSummary
+      attr_accessor trial_end_time: ::Time
       SENSITIVE: []
     end
 

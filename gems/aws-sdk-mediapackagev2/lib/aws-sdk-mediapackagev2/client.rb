@@ -264,7 +264,8 @@ module Aws::MediaPackageV2
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::MediaPackageV2
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -2122,6 +2123,7 @@ module Aws::MediaPackageV2
     #           ],
     #         },
     #         compactness: "STANDARD", # accepts STANDARD, NONE
+    #         bandwidth_reporting_mode: "AVERAGE", # accepts AVERAGE, MAX
     #         audio_timeline_pattern: "NONE", # accepts NONE, PATTERNED
     #         subtitle_configuration: {
     #           ttml_configuration: {
@@ -2286,6 +2288,7 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].dvb_settings.error_metrics[0].reporting_url #=> String
     #   resp.dash_manifests[0].dvb_settings.error_metrics[0].probability #=> Integer
     #   resp.dash_manifests[0].compactness #=> String, one of "STANDARD", "NONE"
+    #   resp.dash_manifests[0].bandwidth_reporting_mode #=> String, one of "AVERAGE", "MAX"
     #   resp.dash_manifests[0].audio_timeline_pattern #=> String, one of "NONE", "PATTERNED"
     #   resp.dash_manifests[0].subtitle_configuration.ttml_configuration.ttml_profile #=> String, one of "IMSC_1", "EBU_TT_D_101"
     #   resp.dash_manifests[0].uri_path_type #=> String, one of "LEAF", "ROOT"
@@ -3311,6 +3314,7 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].dvb_settings.error_metrics[0].reporting_url #=> String
     #   resp.dash_manifests[0].dvb_settings.error_metrics[0].probability #=> Integer
     #   resp.dash_manifests[0].compactness #=> String, one of "STANDARD", "NONE"
+    #   resp.dash_manifests[0].bandwidth_reporting_mode #=> String, one of "AVERAGE", "MAX"
     #   resp.dash_manifests[0].audio_timeline_pattern #=> String, one of "NONE", "PATTERNED"
     #   resp.dash_manifests[0].subtitle_configuration.ttml_configuration.ttml_profile #=> String, one of "IMSC_1", "EBU_TT_D_101"
     #   resp.dash_manifests[0].uri_path_type #=> String, one of "LEAF", "ROOT"
@@ -5415,6 +5419,7 @@ module Aws::MediaPackageV2
     #           ],
     #         },
     #         compactness: "STANDARD", # accepts STANDARD, NONE
+    #         bandwidth_reporting_mode: "AVERAGE", # accepts AVERAGE, MAX
     #         audio_timeline_pattern: "NONE", # accepts NONE, PATTERNED
     #         subtitle_configuration: {
     #           ttml_configuration: {
@@ -5598,6 +5603,7 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].dvb_settings.error_metrics[0].reporting_url #=> String
     #   resp.dash_manifests[0].dvb_settings.error_metrics[0].probability #=> Integer
     #   resp.dash_manifests[0].compactness #=> String, one of "STANDARD", "NONE"
+    #   resp.dash_manifests[0].bandwidth_reporting_mode #=> String, one of "AVERAGE", "MAX"
     #   resp.dash_manifests[0].audio_timeline_pattern #=> String, one of "NONE", "PATTERNED"
     #   resp.dash_manifests[0].subtitle_configuration.ttml_configuration.ttml_profile #=> String, one of "IMSC_1", "EBU_TT_D_101"
     #   resp.dash_manifests[0].uri_path_type #=> String, one of "LEAF", "ROOT"
@@ -5630,7 +5636,7 @@ module Aws::MediaPackageV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

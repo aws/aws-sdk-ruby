@@ -264,7 +264,8 @@ module Aws::NetworkFirewall
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::NetworkFirewall
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -699,6 +700,17 @@ module Aws::NetworkFirewall
     # to redirect the traffic that's coming into and going out of the zone
     # through the firewall endpoint.
     #
+    # For a proxy mode firewall, use this operation to add Availability
+    # Zones to the firewall. For each subnet, specify a NAT gateway in
+    # `NatGatewayCreateMappings` in the same Availability Zone. You can't
+    # add an Availability Zone that the firewall already uses. The firewall
+    # keeps working in its other Availability Zones while Network Firewall
+    # sets up the new one. If Network Firewall can't set up the new
+    # Availability Zone, it removes the Availability Zone from the firewall.
+    # It also deletes the NAT gateway that it created there. The
+    # Availability Zone's `Attachment` status shows the reason. You can
+    # then add the Availability Zone again.
+    #
     # @option params [String] :update_token
     #   An optional token that you can use for optimistic locking. Network
     #   Firewall returns a token to your requests that access the firewall.
@@ -732,6 +744,17 @@ module Aws::NetworkFirewall
     # @option params [required, Array<Types::SubnetMapping>] :subnet_mappings
     #   The IDs of the subnets that you want to associate with the firewall.
     #
+    # @option params [Array<Types::NatGatewayCreateMapping>] :nat_gateway_create_mappings
+    #   The NAT gateways that Network Firewall creates for the Availability
+    #   Zones that you add to a proxy mode firewall. For a proxy mode
+    #   firewall, you must specify one mapping for each Availability Zone in
+    #   `SubnetMappings`, and no other Availability Zones. Each NAT gateway
+    #   subnet must be in the firewall's VPC and can't be one of the
+    #   firewall endpoint subnets.
+    #
+    #   You can't specify this for a firewall that isn't a proxy mode
+    #   firewall.
+    #
     # @return [Types::AssociateSubnetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssociateSubnetsResponse#firewall_arn #firewall_arn} => String
@@ -751,6 +774,13 @@ module Aws::NetworkFirewall
     #         ip_address_type: "DUALSTACK", # accepts DUALSTACK, IPV4, IPV6
     #       },
     #     ],
+    #     nat_gateway_create_mappings: [
+    #       {
+    #         subnet_id: "CollectionMember_String", # required
+    #         allocation_ids: ["CollectionMember_String"],
+    #         private_ips: ["CollectionMember_String"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -768,88 +798,6 @@ module Aws::NetworkFirewall
     # @param [Hash] params ({})
     def associate_subnets(params = {}, options = {})
       req = build_request(:associate_subnets, params)
-      req.send_request(options)
-    end
-
-    # Attaches ProxyRuleGroup resources to a ProxyConfiguration
-    #
-    # A Proxy Configuration defines the monitoring and protection behavior
-    # for a Proxy. The details of the behavior are defined in the rule
-    # groups that you add to your configuration.
-    #
-    # @option params [String] :proxy_configuration_name
-    #   The descriptive name of the proxy configuration. You can't change the
-    #   name of a proxy configuration after you create it.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [String] :proxy_configuration_arn
-    #   The Amazon Resource Name (ARN) of a proxy configuration.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [required, Array<Types::ProxyRuleGroupAttachment>] :rule_groups
-    #   The proxy rule group(s) to attach to the proxy configuration
-    #
-    # @option params [required, String] :update_token
-    #   A token used for optimistic locking. Network Firewall returns a token
-    #   to your requests that access the proxy configuration. The token marks
-    #   the state of the proxy configuration resource at the time of the
-    #   request.
-    #
-    #   To make changes to the proxy configuration, you provide the token in
-    #   your request. Network Firewall uses the token to ensure that the proxy
-    #   configuration hasn't changed since you last retrieved it. If it has
-    #   changed, the operation fails with an `InvalidTokenException`. If this
-    #   happens, retrieve the proxy configuration again to get a current copy
-    #   of it with a current token. Reapply your changes as needed, then try
-    #   the operation again using the new token.
-    #
-    # @return [Types::AttachRuleGroupsToProxyConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::AttachRuleGroupsToProxyConfigurationResponse#proxy_configuration #proxy_configuration} => Types::ProxyConfiguration
-    #   * {Types::AttachRuleGroupsToProxyConfigurationResponse#update_token #update_token} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.attach_rule_groups_to_proxy_configuration({
-    #     proxy_configuration_name: "ResourceName",
-    #     proxy_configuration_arn: "ResourceArn",
-    #     rule_groups: [ # required
-    #       {
-    #         proxy_rule_group_name: "ResourceName",
-    #         insert_position: 1,
-    #       },
-    #     ],
-    #     update_token: "UpdateToken", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.proxy_configuration.proxy_configuration_name #=> String
-    #   resp.proxy_configuration.proxy_configuration_arn #=> String
-    #   resp.proxy_configuration.description #=> String
-    #   resp.proxy_configuration.create_time #=> Time
-    #   resp.proxy_configuration.delete_time #=> Time
-    #   resp.proxy_configuration.rule_groups #=> Array
-    #   resp.proxy_configuration.rule_groups[0].proxy_rule_group_name #=> String
-    #   resp.proxy_configuration.rule_groups[0].proxy_rule_group_arn #=> String
-    #   resp.proxy_configuration.rule_groups[0].type #=> String
-    #   resp.proxy_configuration.rule_groups[0].priority #=> Integer
-    #   resp.proxy_configuration.default_rule_phase_actions.pre_dns #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_configuration.default_rule_phase_actions.pre_request #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_configuration.default_rule_phase_actions.post_response #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_configuration.tags #=> Array
-    #   resp.proxy_configuration.tags[0].key #=> String
-    #   resp.proxy_configuration.tags[0].value #=> String
-    #   resp.update_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/AttachRuleGroupsToProxyConfiguration AWS API Documentation
-    #
-    # @overload attach_rule_groups_to_proxy_configuration(params = {})
-    # @param [Hash] params ({})
-    def attach_rule_groups_to_proxy_configuration(params = {}, options = {})
-      req = build_request(:attach_rule_groups_to_proxy_configuration, params)
       req.send_request(options)
     end
 
@@ -970,6 +918,17 @@ module Aws::NetworkFirewall
     # To generate a report on the last 30 days of traffic monitored by a
     # firewall, use StartAnalysisReport.
     #
+    # To create a proxy mode firewall, specify `VpcEndpoint` and
+    # `NatGatewayCreateMappings` instead of `VpcId` and `SubnetMappings`. A
+    # proxy mode firewall is an explicit forward proxy. Your clients send
+    # HTTP and HTTPS proxy requests to the firewall's proxy DNS name, which
+    # `DescribeFirewall` returns in each Availability Zone's `Attachment`.
+    # The firewall evaluates proxy traffic with the stateful rules in its
+    # firewall policy, and sends allowed traffic out through the NAT gateway
+    # in the same Availability Zone. Your clients don't need route table
+    # changes. In each Availability Zone, the firewall has one endpoint and
+    # one NAT gateway, which Network Firewall creates for you.
+    #
     # @option params [required, String] :firewall_name
     #   The descriptive name of the firewall. You can't change the name of a
     #   firewall after you create it.
@@ -1064,39 +1023,59 @@ module Aws::NetworkFirewall
     #
     #   Default value: `FALSE`
     #
-    # @option params [Array<Types::NatGatewayMapping>] :nat_gateway_mappings
-    #   The NAT gateways that the firewall uses to proxy traffic when
-    #   `NoSourcePreservation` is `TRUE`. Network Firewall attaches the
-    #   firewall to each NAT gateway that you specify, so that egress traffic
-    #   is proxied through the NAT gateway.
+    # @option params [Array<Types::NatGatewayCreateMapping>] :nat_gateway_create_mappings
+    #   The NAT gateways that Network Firewall creates for a proxy mode
+    #   firewall, one for each Availability Zone. When you specify this, you
+    #   create a proxy mode firewall. Destinations see the IP address of the
+    #   NAT gateway in the client's Availability Zone as the source of the
+    #   traffic.
+    #
+    #   Specify one mapping for each Availability Zone in `VpcEndpoint`, and
+    #   no other Availability Zones. Each NAT gateway subnet must be in the
+    #   `VpcEndpoint` VPC and can't be one of the firewall endpoint subnets.
+    #
+    #   You need permission to call the Amazon EC2 `CreateNatGateway` action.
+    #
+    #   If Network Firewall can't set up an Availability Zone, for example
+    #   because Amazon EC2 rejects the NAT gateway, it removes the
+    #   Availability Zone from the firewall. It also deletes the NAT gateway
+    #   that it created there. The Availability Zone's `Attachment` status is
+    #   `FAILED`, and its status message explains why. You can add the
+    #   Availability Zone again with `AssociateSubnets`. If no Availability
+    #   Zone can be set up, the firewall status is `FAILED`.
     #
     # @option params [Types::ProxySettings] :proxy_settings
-    #   The listener configuration for a proxy mode firewall, used when
-    #   `NoSourcePreservation` is `TRUE`. This specifies the ports and
-    #   protocols on which the firewall's proxy listens for traffic.
+    #   The proxy settings for a proxy mode firewall: the ports and protocols
+    #   on which the firewall's proxy listens for traffic, and optionally
+    #   your own domain name and certificate. If you don't specify listeners,
+    #   the firewall listens for HTTP on port 3128 and HTTPS on port 8443.
     #
-    # @option params [Boolean] :no_source_preservation
-    #   Optional. Indicates whether the firewall operates in proxy mode, in
-    #   which the source IP address of the traffic is not preserved. When set
-    #   to `TRUE`, the firewall proxies traffic through a NAT gateway and the
-    #   traffic reaching the destination uses the NAT gateway's IP address as
-    #   the source.
-    #
-    #   When you set this to `TRUE`, you must specify `NatGatewayMappings` and
-    #   `VpcEndpoint` instead of a top-level `VpcId` and `SubnetMappings`.
-    #
-    #   You can't change this setting after you create the firewall.
-    #
-    #   Default value: `FALSE`
+    #   To change the listeners later, use `UpdateProxySettings`.
     #
     # @option params [Types::VpcEndpoint] :vpc_endpoint
-    #   The VPC and subnets for the firewall endpoint, used when
-    #   `NoSourcePreservation` is `TRUE`. Network Firewall creates the
-    #   firewall endpoint in the subnets that you specify here.
+    #   The VPC and subnets for the endpoints of a proxy mode firewall.
+    #   Network Firewall creates a firewall endpoint in each subnet that you
+    #   specify. It also creates the firewall's NAT gateways in this VPC, in
+    #   the subnets that you specify in `NatGatewayCreateMappings`.
     #
-    #   For proxy mode firewalls, provide the firewall's VPC and endpoint
-    #   subnets through this parameter instead of the top-level `VpcId` and
-    #   `SubnetMappings`.
+    #   To create a proxy mode firewall, you must specify `VpcEndpoint` and
+    #   `NatGatewayCreateMappings`, and you must not specify the top-level
+    #   `VpcId` and `SubnetMappings`. Specify one subnet for each Availability
+    #   Zone where you want to use the firewall.
+    #
+    # @option params [String] :transparent_filtering_nat_scope
+    #   How a proxy mode firewall handles traffic that isn't sent to its
+    #   proxy listener. If you don't specify a value, the firewall uses
+    #   `NAT_ALL`. You can choose from the following values:
+    #
+    #   * `NAT_ALL` - After inspection, the firewall sends this traffic out
+    #     through its NAT gateway, which translates the source address.
+    #
+    #   * `NAT_NONE` - After inspection, the firewall returns this traffic to
+    #     the firewall endpoint without address translation.
+    #
+    #   You can specify this only for a proxy mode firewall, and you can't
+    #   change it after you create the firewall.
     #
     # @return [Types::CreateFirewallResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1137,9 +1116,11 @@ module Aws::NetworkFirewall
     #       },
     #     ],
     #     availability_zone_change_protection: false,
-    #     nat_gateway_mappings: [
+    #     nat_gateway_create_mappings: [
     #       {
-    #         nat_gateway_id: "NatGatewayId", # required
+    #         subnet_id: "CollectionMember_String", # required
+    #         allocation_ids: ["CollectionMember_String"],
+    #         private_ips: ["CollectionMember_String"],
     #       },
     #     ],
     #     proxy_settings: {
@@ -1149,8 +1130,9 @@ module Aws::NetworkFirewall
     #           type: "HTTP", # accepts HTTP, HTTPS
     #         },
     #       ],
+    #       certificate_arn: "ResourceArn",
+    #       domain_name: "ProxyDomainName",
     #     },
-    #     no_source_preservation: false,
     #     vpc_endpoint: {
     #       vpc_id: "VpcId", # required
     #       subnet_mappings: [ # required
@@ -1160,6 +1142,7 @@ module Aws::NetworkFirewall
     #         },
     #       ],
     #     },
+    #     transparent_filtering_nat_scope: "NAT_ALL", # accepts NAT_ALL, NAT_NONE
     #   })
     #
     # @example Response structure
@@ -1189,16 +1172,22 @@ module Aws::NetworkFirewall
     #   resp.firewall.availability_zone_mappings #=> Array
     #   resp.firewall.availability_zone_mappings[0].availability_zone #=> String
     #   resp.firewall.availability_zone_change_protection #=> Boolean
-    #   resp.firewall.nat_gateway_mappings #=> Array
-    #   resp.firewall.nat_gateway_mappings[0].nat_gateway_id #=> String
+    #   resp.firewall.nat_gateway_create_mappings #=> Array
+    #   resp.firewall.nat_gateway_create_mappings[0].subnet_id #=> String
+    #   resp.firewall.nat_gateway_create_mappings[0].allocation_ids #=> Array
+    #   resp.firewall.nat_gateway_create_mappings[0].allocation_ids[0] #=> String
+    #   resp.firewall.nat_gateway_create_mappings[0].private_ips #=> Array
+    #   resp.firewall.nat_gateway_create_mappings[0].private_ips[0] #=> String
     #   resp.firewall.proxy_settings.listener_properties #=> Array
     #   resp.firewall.proxy_settings.listener_properties[0].port #=> Integer
     #   resp.firewall.proxy_settings.listener_properties[0].type #=> String, one of "HTTP", "HTTPS"
-    #   resp.firewall.no_source_preservation #=> Boolean
+    #   resp.firewall.proxy_settings.certificate_arn #=> String
+    #   resp.firewall.proxy_settings.domain_name #=> String
     #   resp.firewall.vpc_endpoint.vpc_id #=> String
     #   resp.firewall.vpc_endpoint.subnet_mappings #=> Array
     #   resp.firewall.vpc_endpoint.subnet_mappings[0].subnet_id #=> String
     #   resp.firewall.vpc_endpoint.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
+    #   resp.firewall.transparent_filtering_nat_scope #=> String, one of "NAT_ALL", "NAT_NONE"
     #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED"
     #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states #=> Hash
@@ -1394,465 +1383,229 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
-    # Creates an Network Firewall Proxy
+    # Creates a Next Generation policy according to the specifications.
     #
-    # Attaches a Proxy configuration to a NAT Gateway.
+    # A Next Generation policy defines the behavior of a firewall in a
+    # collection of firewall engine and IPS engine rule groups and other
+    # settings. You can use one firewall policy for multiple firewalls. For
+    # more information, see [Next Generation policies][1] in the *Network
+    # Firewall Developer Guide*.
     #
-    # To manage a proxy's tags, use the standard Amazon Web Services
-    # resource tagging operations, ListTagsForResource, TagResource, and
-    # UntagResource.
     #
-    # To retrieve information about proxies, use ListProxies and
-    # DescribeProxy.
     #
-    # @option params [required, String] :proxy_name
-    #   The descriptive name of the proxy. You can't change the name of a
-    #   proxy after you create it.
+    # [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-policies-v2.html
     #
-    # @option params [required, String] :nat_gateway_id
-    #   A unique identifier for the NAT gateway to use with proxy resources.
+    # @option params [required, String] :firewall_policy_v2_name
+    #   The descriptive name of the Next Generation policy. You can't change
+    #   the name of a firewall policy after you create it.
     #
-    # @option params [String] :proxy_configuration_name
-    #   The descriptive name of the proxy configuration. You can't change the
-    #   name of a proxy configuration after you create it.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [String] :proxy_configuration_arn
-    #   The Amazon Resource Name (ARN) of a proxy configuration.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [Array<Types::ListenerPropertyRequest>] :listener_properties
-    #   Listener properties for HTTP and HTTPS traffic.
-    #
-    # @option params [required, Types::TlsInterceptPropertiesRequest] :tls_intercept_properties
-    #   TLS decryption on traffic to filter on attributes in the HTTP header.
-    #
-    # @option params [Array<Types::Tag>] :tags
-    #   The key:value pairs to associate with the resource.
-    #
-    # @return [Types::CreateProxyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::CreateProxyResponse#proxy #proxy} => Types::Proxy
-    #   * {Types::CreateProxyResponse#update_token #update_token} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.create_proxy({
-    #     proxy_name: "ResourceName", # required
-    #     nat_gateway_id: "NatGatewayId", # required
-    #     proxy_configuration_name: "ResourceName",
-    #     proxy_configuration_arn: "ResourceArn",
-    #     listener_properties: [
-    #       {
-    #         port: 1, # required
-    #         type: "HTTP", # required, accepts HTTP, HTTPS
-    #       },
-    #     ],
-    #     tls_intercept_properties: { # required
-    #       pca_arn: "ResourceArn",
-    #       tls_intercept_mode: "ENABLED", # accepts ENABLED, DISABLED
-    #     },
-    #     tags: [
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       },
-    #     ],
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.proxy.create_time #=> Time
-    #   resp.proxy.delete_time #=> Time
-    #   resp.proxy.update_time #=> Time
-    #   resp.proxy.failure_code #=> String
-    #   resp.proxy.failure_message #=> String
-    #   resp.proxy.proxy_state #=> String, one of "ATTACHING", "ATTACHED", "DETACHING", "DETACHED", "ATTACH_FAILED", "DETACH_FAILED"
-    #   resp.proxy.proxy_modify_state #=> String, one of "MODIFYING", "COMPLETED", "FAILED"
-    #   resp.proxy.nat_gateway_id #=> String
-    #   resp.proxy.proxy_configuration_name #=> String
-    #   resp.proxy.proxy_configuration_arn #=> String
-    #   resp.proxy.proxy_name #=> String
-    #   resp.proxy.proxy_arn #=> String
-    #   resp.proxy.listener_properties #=> Array
-    #   resp.proxy.listener_properties[0].port #=> Integer
-    #   resp.proxy.listener_properties[0].type #=> String, one of "HTTP", "HTTPS"
-    #   resp.proxy.tls_intercept_properties.pca_arn #=> String
-    #   resp.proxy.tls_intercept_properties.tls_intercept_mode #=> String, one of "ENABLED", "DISABLED"
-    #   resp.proxy.tags #=> Array
-    #   resp.proxy.tags[0].key #=> String
-    #   resp.proxy.tags[0].value #=> String
-    #   resp.update_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateProxy AWS API Documentation
-    #
-    # @overload create_proxy(params = {})
-    # @param [Hash] params ({})
-    def create_proxy(params = {}, options = {})
-      req = build_request(:create_proxy, params)
-      req.send_request(options)
-    end
-
-    # Creates an Network Firewall ProxyConfiguration
-    #
-    # A Proxy Configuration defines the monitoring and protection behavior
-    # for a Proxy. The details of the behavior are defined in the rule
-    # groups that you add to your configuration.
-    #
-    # To manage a proxy configuration's tags, use the standard Amazon Web
-    # Services resource tagging operations, ListTagsForResource,
-    # TagResource, and UntagResource.
-    #
-    # To retrieve information about proxies, use ListProxyConfigurations and
-    # DescribeProxyConfiguration.
-    #
-    # @option params [required, String] :proxy_configuration_name
-    #   The descriptive name of the proxy configuration. You can't change the
-    #   name of a proxy configuration after you create it.
+    # @option params [required, Types::FirewallPolicyV2] :firewall_policy_v2
+    #   The rule groups and other settings that define the Next Generation
+    #   policy.
     #
     # @option params [String] :description
-    #   A description of the proxy configuration.
-    #
-    # @option params [Array<String>] :rule_group_names
-    #   The proxy rule group name(s) to attach to the proxy configuration.
-    #
-    #   You must specify the ARNs or the names, and you can specify both.
-    #
-    # @option params [Array<String>] :rule_group_arns
-    #   The proxy rule group arn(s) to attach to the proxy configuration.
-    #
-    #   You must specify the ARNs or the names, and you can specify both.
-    #
-    # @option params [required, Types::ProxyConfigDefaultRulePhaseActionsRequest] :default_rule_phase_actions
-    #   Evaluation points in the traffic flow where rules are applied. There
-    #   are three phases in a traffic where the rule match is applied.
+    #   A description of the firewall policy.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The key:value pairs to associate with the resource.
     #
-    # @return [Types::CreateProxyConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    # @option params [Boolean] :dry_run
+    #   Indicates whether you want Network Firewall to just check the validity
+    #   of the request, rather than run the request.
     #
-    #   * {Types::CreateProxyConfigurationResponse#proxy_configuration #proxy_configuration} => Types::ProxyConfiguration
-    #   * {Types::CreateProxyConfigurationResponse#update_token #update_token} => String
+    #   If set to `TRUE`, Network Firewall checks whether the request can run
+    #   successfully, but doesn't actually make the requested changes. The
+    #   call returns the value that the request would return if you ran it
+    #   with dry run set to `FALSE`, but doesn't make additions or changes to
+    #   your resources. This option allows you to make sure that you have the
+    #   required permissions to run the request and that your request
+    #   parameters are valid.
+    #
+    #   If set to `FALSE`, Network Firewall makes the requested changes to
+    #   your resources.
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   A complex type that contains settings for encryption of your firewall
+    #   policy resources.
+    #
+    # @return [Types::CreateFirewallPolicyV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFirewallPolicyV2Response#update_token #update_token} => String
+    #   * {Types::CreateFirewallPolicyV2Response#firewall_policy_v2_response #firewall_policy_v2_response} => Types::FirewallPolicyV2Response
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.create_proxy_configuration({
-    #     proxy_configuration_name: "ResourceName", # required
-    #     description: "Description",
-    #     rule_group_names: ["ResourceName"],
-    #     rule_group_arns: ["ResourceArn"],
-    #     default_rule_phase_actions: { # required
-    #       pre_dns: "ALLOW", # accepts ALLOW, DENY, ALERT
-    #       pre_request: "ALLOW", # accepts ALLOW, DENY, ALERT
-    #       post_response: "ALLOW", # accepts ALLOW, DENY, ALERT
+    #   resp = client.create_firewall_policy_v2({
+    #     firewall_policy_v2_name: "ResourceName", # required
+    #     firewall_policy_v2: { # required
+    #       firewall_rule_group_entries: [
+    #         {
+    #           priority: 1,
+    #           resource_arn: "ResourceArn",
+    #           inline_rule_group: {
+    #             rules_source: { # required
+    #               rules_string: "RulesString",
+    #               firewall_rules: [
+    #                 {
+    #                   action: "ACCEPT", # required, accepts ACCEPT, DROP, REJECT, REJECT_DST, REJECT_BOTH
+    #                   action_scope: "FLOW", # required, accepts FLOW, TX, HOOK, PACKET
+    #                   hook: "TCP_ALL", # required, accepts TCP_ALL, TCP_FLOW_START, TCP_PRE_FLOW, TCP_PRE_STREAM, SCTP_ALL, SCTP_FLOW_START, SCTP_PRE_FLOW, SCTP_PRE_STREAM, IPV6_ALL, IPV6_FLOW_START, IPV6_PRE_FLOW, IPV6_PRE_STREAM, ICMPV6_ALL, ICMPV6_FLOW_START, ICMPV6_PRE_FLOW, ICMPV6_PRE_STREAM, UDP_ALL, UDP_FLOW_START, UDP_PRE_FLOW, UDP_PRE_STREAM, ICMP_ALL, ICMP_FLOW_START, ICMP_PRE_FLOW, ICMP_PRE_STREAM, ICMPV4_ALL, ICMPV4_FLOW_START, ICMPV4_PRE_FLOW, ICMPV4_PRE_STREAM, IP_ALL, IP_FLOW_START, IP_PRE_FLOW, IP_PRE_STREAM, IPV4_ALL, IPV4_FLOW_START, IPV4_PRE_FLOW, IPV4_PRE_STREAM, TLS_CLIENT_STARTED, TLS_CLIENT_HELLO, TLS_CLIENT_CERT, TLS_CLIENT_DATA, TLS_CLIENT_FINISHED, TLS_SERVER_STARTED, TLS_SERVER_HELLO, TLS_SERVER_CERT, TLS_SERVER_DATA, TLS_SERVER_FINISHED, HTTP1_REQUEST_STARTED, HTTP1_REQUEST_LINE, HTTP1_REQUEST_HEADERS, HTTP1_REQUEST_BODY, HTTP1_REQUEST_TRAILER, HTTP1_REQUEST_COMPLETE, HTTP1_RESPONSE_STARTED, HTTP1_RESPONSE_LINE, HTTP1_RESPONSE_HEADERS, HTTP1_RESPONSE_BODY, HTTP1_RESPONSE_TRAILER, HTTP1_RESPONSE_COMPLETE, HTTP2_STREAM_REQUEST_STARTED, HTTP2_STREAM_REQUEST_HEADERS, HTTP2_STREAM_REQUEST_DATA, HTTP2_STREAM_REQUEST_CLOSED, HTTP2_STREAM_REQUEST_COMPLETE, HTTP2_STREAM_RESPONSE_STARTED, HTTP2_STREAM_RESPONSE_HEADERS, HTTP2_STREAM_RESPONSE_DATA, HTTP2_STREAM_RESPONSE_CLOSED, HTTP2_STREAM_RESPONSE_COMPLETE, HTTP2_GLOBAL_REQUEST_STARTED, HTTP2_GLOBAL_REQUEST_COMPLETE, HTTP2_GLOBAL_RESPONSE_STARTED, HTTP2_GLOBAL_RESPONSE_COMPLETE, DOH2_STREAM_REQUEST_STARTED, DOH2_STREAM_REQUEST_HEADERS, DOH2_STREAM_REQUEST_DATA, DOH2_STREAM_REQUEST_CLOSED, DOH2_STREAM_REQUEST_COMPLETE, DOH2_STREAM_RESPONSE_STARTED, DOH2_STREAM_RESPONSE_HEADERS, DOH2_STREAM_RESPONSE_DATA, DOH2_STREAM_RESPONSE_CLOSED, DOH2_STREAM_RESPONSE_COMPLETE, DOH2_GLOBAL_REQUEST_STARTED, DOH2_GLOBAL_REQUEST_COMPLETE, DOH2_GLOBAL_RESPONSE_STARTED, DOH2_GLOBAL_RESPONSE_COMPLETE, DNS_REQUEST_STARTED, DNS_REQUEST_COMPLETE, DNS_RESPONSE_STARTED, DNS_RESPONSE_COMPLETE, SMTP_REQUEST_STARTED, SMTP_REQUEST_DATA, SMTP_REQUEST_COMPLETE, SMTP_RESPONSE_STARTED, SMTP_RESPONSE_DATA, SMTP_RESPONSE_COMPLETE, FTP_REQUEST_STARTED, FTP_REQUEST_COMPLETE, FTP_RESPONSE_STARTED, FTP_RESPONSE_COMPLETE, FTP_DATA_REQUEST_STARTED, FTP_DATA_REQUEST_COMPLETE, FTP_DATA_RESPONSE_STARTED, FTP_DATA_RESPONSE_COMPLETE, SMB_REQUEST_STARTED, SMB_REQUEST_COMPLETE, SMB_RESPONSE_STARTED, SMB_RESPONSE_COMPLETE, DCERPC_REQUEST_STARTED, DCERPC_REQUEST_COMPLETE, DCERPC_RESPONSE_STARTED, DCERPC_RESPONSE_COMPLETE, NFS_REQUEST_STARTED, NFS_REQUEST_COMPLETE, NFS_RESPONSE_STARTED, NFS_RESPONSE_COMPLETE, KRB5_REQUEST_STARTED, KRB5_REQUEST_COMPLETE, KRB5_RESPONSE_STARTED, KRB5_RESPONSE_COMPLETE, IKE_REQUEST_STARTED, IKE_REQUEST_COMPLETE, IKE_RESPONSE_STARTED, IKE_RESPONSE_COMPLETE, TFTP_REQUEST_STARTED, TFTP_REQUEST_COMPLETE, TFTP_RESPONSE_STARTED, TFTP_RESPONSE_COMPLETE, DHCP_REQUEST_STARTED, DHCP_REQUEST_COMPLETE, DHCP_RESPONSE_STARTED, DHCP_RESPONSE_COMPLETE, QUIC_REQUEST_STARTED, QUIC_REQUEST_COMPLETE, QUIC_RESPONSE_STARTED, QUIC_RESPONSE_COMPLETE, RDP_REQUEST_STARTED, RDP_REQUEST_COMPLETE, RDP_RESPONSE_STARTED, RDP_RESPONSE_COMPLETE, RFB_REQUEST_STARTED, RFB_REQUEST_COMPLETE, RFB_RESPONSE_STARTED, RFB_RESPONSE_COMPLETE, MQTT_REQUEST_STARTED, MQTT_REQUEST_COMPLETE, MQTT_RESPONSE_STARTED, MQTT_RESPONSE_COMPLETE, PGSQL_REQUEST_STARTED, PGSQL_REQUEST_COMPLETE, PGSQL_RESPONSE_STARTED, PGSQL_RESPONSE_COMPLETE, SNMP_REQUEST_STARTED, SNMP_REQUEST_COMPLETE, SNMP_RESPONSE_STARTED, SNMP_RESPONSE_COMPLETE, NTP_REQUEST_STARTED, NTP_REQUEST_COMPLETE, NTP_RESPONSE_STARTED, NTP_RESPONSE_COMPLETE, TELNET_REQUEST_STARTED, TELNET_REQUEST_COMPLETE, TELNET_RESPONSE_STARTED, TELNET_RESPONSE_COMPLETE, WEBSOCKET_REQUEST_STARTED, WEBSOCKET_REQUEST_COMPLETE, WEBSOCKET_RESPONSE_STARTED, WEBSOCKET_RESPONSE_COMPLETE, LDAP_REQUEST_STARTED, LDAP_REQUEST_COMPLETE, LDAP_RESPONSE_STARTED, LDAP_RESPONSE_COMPLETE, POP3_REQUEST_STARTED, POP3_REQUEST_COMPLETE, POP3_RESPONSE_STARTED, POP3_RESPONSE_COMPLETE, MDNS_REQUEST_STARTED, MDNS_REQUEST_COMPLETE, MDNS_RESPONSE_STARTED, MDNS_RESPONSE_COMPLETE, BITTORRENT_DHT_REQUEST_STARTED, BITTORRENT_DHT_REQUEST_COMPLETE, BITTORRENT_DHT_RESPONSE_STARTED, BITTORRENT_DHT_RESPONSE_COMPLETE, DNP3_REQUEST_STARTED, DNP3_REQUEST_COMPLETE, DNP3_RESPONSE_STARTED, DNP3_RESPONSE_COMPLETE, SSH_REQUEST_IN_PROGRESS, SSH_REQUEST_BANNER_WAIT_EOL, SSH_REQUEST_BANNER_DONE, SSH_REQUEST_FINISHED, SSH_RESPONSE_IN_PROGRESS, SSH_RESPONSE_BANNER_WAIT_EOL, SSH_RESPONSE_BANNER_DONE, SSH_RESPONSE_FINISHED
+    #                   protocol: "IP", # required, accepts IP, TCP, UDP, ICMP, HTTP, FTP, TLS, SMB, DNS, DCERPC, SSH, SMTP, MSN, KRB5, IKEV2, TFTP, NTP, DHCP, HTTP2, QUIC, ICMPV4, ICMPV6, SCTP, IPV4, IPV6, DOH2, FTP_DATA, NFS, RDP, RFB, MQTT, PGSQL, SNMP, TELNET, WEBSOCKET, LDAP, POP3, MDNS, BITTORRENT_DHT, DNP3
+    #                   source_i_ps: "Source",
+    #                   dest_i_ps: "Destination",
+    #                   source_ports: "Port",
+    #                   dest_ports: "Port",
+    #                   rule_options: [
+    #                     {
+    #                       keyword: "Keyword", # required
+    #                       settings: ["Setting"],
+    #                     },
+    #                   ],
+    #                   accept_prior_hooks: false,
+    #                   alert_enabled: false,
+    #                   bypass_ips_enabled: false,
+    #                   rule_metadata: {
+    #                     rule_enabled: false,
+    #                     rule_description: "RuleDescriptionText",
+    #                   },
+    #                 },
+    #               ],
+    #               rules_source_list: {
+    #                 targets: ["CollectionMember_String"], # required
+    #                 target_types: ["TLS_SNI"], # required, accepts TLS_SNI, HTTP_HOST, AWS_ROUTE_53_RESOLVED_DOMAIN
+    #                 generated_rules_type: "ALLOWLIST", # required, accepts ALLOWLIST, DENYLIST, REJECTLIST, ALERTLIST
+    #               },
+    #             },
+    #             rule_variables: {
+    #               ip_sets: {
+    #                 "RuleVariableName" => {
+    #                   definition: ["VariableDefinition"], # required
+    #                 },
+    #               },
+    #               port_sets: {
+    #                 "RuleVariableName" => {
+    #                   definition: ["VariableDefinition"],
+    #                 },
+    #               },
+    #             },
+    #             reference_sets: {
+    #               ip_set_references: {
+    #                 "IPSetReferenceName" => {
+    #                   reference_arn: "ResourceArn",
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
+    #       ],
+    #       ips_rule_group_entries: [
+    #         {
+    #           resource_arn: "ResourceArn",
+    #           inline_rule_group: {
+    #             rules_source: { # required
+    #               rules_string: "RulesString",
+    #             },
+    #             rule_variables: {
+    #               ip_sets: {
+    #                 "RuleVariableName" => {
+    #                   definition: ["VariableDefinition"], # required
+    #                 },
+    #               },
+    #               port_sets: {
+    #                 "RuleVariableName" => {
+    #                   definition: ["VariableDefinition"],
+    #                 },
+    #               },
+    #             },
+    #             reference_sets: {
+    #               ip_set_references: {
+    #                 "IPSetReferenceName" => {
+    #                   reference_arn: "ResourceArn",
+    #                 },
+    #               },
+    #             },
+    #           },
+    #           override: {
+    #             action: "DROP_TO_ALERT", # accepts DROP_TO_ALERT
+    #           },
+    #         },
+    #       ],
+    #       policy_mode: "ENFORCE", # accepts ENFORCE, MONITOR
+    #       firewall_default_action: "DROP", # accepts DROP, ACCEPT, REJECT, ALERT
+    #       stateful_engine_options: {
+    #         stream_exception_policy: "DROP", # accepts DROP, REJECT
+    #         flow_timeouts: {
+    #           tcp_idle_timeout_seconds: 1,
+    #         },
+    #       },
+    #       tls_inspection_configuration_arn: "ResourceArn",
+    #       policy_variables: {
+    #         rule_variables: {
+    #           "RuleVariableName" => {
+    #             definition: ["VariableDefinition"], # required
+    #           },
+    #         },
+    #       },
+    #       route_53_resolved_ip_validation: {
+    #         action: "REJECT", # required, accepts REJECT, DROP, ALERT
+    #         dns_firewall_rule_group_id: "DNSFirewallRuleGroupId", # required
+    #         dns_expiry_exception_policy: "REJECT", # required, accepts REJECT, DROP, CONTINUE
+    #         bypass_destination_validation_ip_ranges: [
+    #           {
+    #             address_definition: "AddressDefinition", # required
+    #           },
+    #         ],
+    #         source_ip_ranges: [
+    #           {
+    #             address_definition: "AddressDefinition", # required
+    #           },
+    #         ],
+    #       },
     #     },
+    #     description: "Description",
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.proxy_configuration.proxy_configuration_name #=> String
-    #   resp.proxy_configuration.proxy_configuration_arn #=> String
-    #   resp.proxy_configuration.description #=> String
-    #   resp.proxy_configuration.create_time #=> Time
-    #   resp.proxy_configuration.delete_time #=> Time
-    #   resp.proxy_configuration.rule_groups #=> Array
-    #   resp.proxy_configuration.rule_groups[0].proxy_rule_group_name #=> String
-    #   resp.proxy_configuration.rule_groups[0].proxy_rule_group_arn #=> String
-    #   resp.proxy_configuration.rule_groups[0].type #=> String
-    #   resp.proxy_configuration.rule_groups[0].priority #=> Integer
-    #   resp.proxy_configuration.default_rule_phase_actions.pre_dns #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_configuration.default_rule_phase_actions.pre_request #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_configuration.default_rule_phase_actions.post_response #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_configuration.tags #=> Array
-    #   resp.proxy_configuration.tags[0].key #=> String
-    #   resp.proxy_configuration.tags[0].value #=> String
-    #   resp.update_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateProxyConfiguration AWS API Documentation
-    #
-    # @overload create_proxy_configuration(params = {})
-    # @param [Hash] params ({})
-    def create_proxy_configuration(params = {}, options = {})
-      req = build_request(:create_proxy_configuration, params)
-      req.send_request(options)
-    end
-
-    # Creates an Network Firewall ProxyRuleGroup
-    #
-    # Collections of related proxy filtering rules. Rule groups help you
-    # manage and reuse sets of rules across multiple proxy configurations.
-    #
-    # To manage a proxy rule group's tags, use the standard Amazon Web
-    # Services resource tagging operations, ListTagsForResource,
-    # TagResource, and UntagResource.
-    #
-    # To retrieve information about proxy rule groups, use
-    # ListProxyRuleGroups and DescribeProxyRuleGroup.
-    #
-    # To retrieve information about individual proxy rules, use
-    # DescribeProxyRuleGroup and DescribeProxyRule.
-    #
-    # @option params [required, String] :proxy_rule_group_name
-    #   The descriptive name of the proxy rule group. You can't change the
-    #   name of a proxy rule group after you create it.
-    #
-    # @option params [String] :description
-    #   A description of the proxy rule group.
-    #
-    # @option params [Types::ProxyRulesByRequestPhase] :rules
-    #   Individual rules that define match conditions and actions for
-    #   application-layer traffic. Rules specify what to inspect (domains,
-    #   headers, methods) and what action to take (allow, deny, alert).
-    #
-    # @option params [Array<Types::Tag>] :tags
-    #   The key:value pairs to associate with the resource.
-    #
-    # @return [Types::CreateProxyRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::CreateProxyRuleGroupResponse#proxy_rule_group #proxy_rule_group} => Types::ProxyRuleGroup
-    #   * {Types::CreateProxyRuleGroupResponse#update_token #update_token} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.create_proxy_rule_group({
-    #     proxy_rule_group_name: "ResourceName", # required
-    #     description: "Description",
-    #     rules: {
-    #       pre_dns: [
-    #         {
-    #           proxy_rule_name: "ResourceName",
-    #           description: "Description",
-    #           action: "ALLOW", # accepts ALLOW, DENY, ALERT
-    #           conditions: [
-    #             {
-    #               condition_operator: "ConditionOperator",
-    #               condition_key: "ConditionKey",
-    #               condition_values: ["ProxyConditionValue"],
-    #             },
-    #           ],
-    #         },
-    #       ],
-    #       pre_request: [
-    #         {
-    #           proxy_rule_name: "ResourceName",
-    #           description: "Description",
-    #           action: "ALLOW", # accepts ALLOW, DENY, ALERT
-    #           conditions: [
-    #             {
-    #               condition_operator: "ConditionOperator",
-    #               condition_key: "ConditionKey",
-    #               condition_values: ["ProxyConditionValue"],
-    #             },
-    #           ],
-    #         },
-    #       ],
-    #       post_response: [
-    #         {
-    #           proxy_rule_name: "ResourceName",
-    #           description: "Description",
-    #           action: "ALLOW", # accepts ALLOW, DENY, ALERT
-    #           conditions: [
-    #             {
-    #               condition_operator: "ConditionOperator",
-    #               condition_key: "ConditionKey",
-    #               condition_values: ["ProxyConditionValue"],
-    #             },
-    #           ],
-    #         },
-    #       ],
-    #     },
-    #     tags: [
-    #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue", # required
-    #       },
-    #     ],
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.proxy_rule_group.proxy_rule_group_name #=> String
-    #   resp.proxy_rule_group.proxy_rule_group_arn #=> String
-    #   resp.proxy_rule_group.create_time #=> Time
-    #   resp.proxy_rule_group.delete_time #=> Time
-    #   resp.proxy_rule_group.rules.pre_dns #=> Array
-    #   resp.proxy_rule_group.rules.pre_dns[0].proxy_rule_name #=> String
-    #   resp.proxy_rule_group.rules.pre_dns[0].description #=> String
-    #   resp.proxy_rule_group.rules.pre_dns[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_rule_group.rules.pre_dns[0].conditions #=> Array
-    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_operator #=> String
-    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_key #=> String
-    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_values #=> Array
-    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_values[0] #=> String
-    #   resp.proxy_rule_group.rules.pre_request #=> Array
-    #   resp.proxy_rule_group.rules.pre_request[0].proxy_rule_name #=> String
-    #   resp.proxy_rule_group.rules.pre_request[0].description #=> String
-    #   resp.proxy_rule_group.rules.pre_request[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_rule_group.rules.pre_request[0].conditions #=> Array
-    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_operator #=> String
-    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_key #=> String
-    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_values #=> Array
-    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_values[0] #=> String
-    #   resp.proxy_rule_group.rules.post_response #=> Array
-    #   resp.proxy_rule_group.rules.post_response[0].proxy_rule_name #=> String
-    #   resp.proxy_rule_group.rules.post_response[0].description #=> String
-    #   resp.proxy_rule_group.rules.post_response[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_rule_group.rules.post_response[0].conditions #=> Array
-    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_operator #=> String
-    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_key #=> String
-    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_values #=> Array
-    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_values[0] #=> String
-    #   resp.proxy_rule_group.description #=> String
-    #   resp.proxy_rule_group.tags #=> Array
-    #   resp.proxy_rule_group.tags[0].key #=> String
-    #   resp.proxy_rule_group.tags[0].value #=> String
-    #   resp.update_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateProxyRuleGroup AWS API Documentation
-    #
-    # @overload create_proxy_rule_group(params = {})
-    # @param [Hash] params ({})
-    def create_proxy_rule_group(params = {}, options = {})
-      req = build_request(:create_proxy_rule_group, params)
-      req.send_request(options)
-    end
-
-    # Creates Network Firewall ProxyRule resources.
-    #
-    # Attaches new proxy rule(s) to an existing proxy rule group.
-    #
-    # To retrieve information about individual proxy rules, use
-    # DescribeProxyRuleGroup and DescribeProxyRule.
-    #
-    # @option params [String] :proxy_rule_group_arn
-    #   The Amazon Resource Name (ARN) of a proxy rule group.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [String] :proxy_rule_group_name
-    #   The descriptive name of the proxy rule group. You can't change the
-    #   name of a proxy rule group after you create it.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [required, Types::CreateProxyRulesByRequestPhase] :rules
-    #   Individual rules that define match conditions and actions for
-    #   application-layer traffic. Rules specify what to inspect (domains,
-    #   headers, methods) and what action to take (allow, deny, alert).
-    #
-    # @return [Types::CreateProxyRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::CreateProxyRulesResponse#proxy_rule_group #proxy_rule_group} => Types::ProxyRuleGroup
-    #   * {Types::CreateProxyRulesResponse#update_token #update_token} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.create_proxy_rules({
-    #     proxy_rule_group_arn: "ResourceArn",
-    #     proxy_rule_group_name: "ResourceName",
-    #     rules: { # required
-    #       pre_dns: [
-    #         {
-    #           proxy_rule_name: "ResourceName",
-    #           description: "Description",
-    #           action: "ALLOW", # accepts ALLOW, DENY, ALERT
-    #           conditions: [
-    #             {
-    #               condition_operator: "ConditionOperator",
-    #               condition_key: "ConditionKey",
-    #               condition_values: ["ProxyConditionValue"],
-    #             },
-    #           ],
-    #           insert_position: 1,
-    #         },
-    #       ],
-    #       pre_request: [
-    #         {
-    #           proxy_rule_name: "ResourceName",
-    #           description: "Description",
-    #           action: "ALLOW", # accepts ALLOW, DENY, ALERT
-    #           conditions: [
-    #             {
-    #               condition_operator: "ConditionOperator",
-    #               condition_key: "ConditionKey",
-    #               condition_values: ["ProxyConditionValue"],
-    #             },
-    #           ],
-    #           insert_position: 1,
-    #         },
-    #       ],
-    #       post_response: [
-    #         {
-    #           proxy_rule_name: "ResourceName",
-    #           description: "Description",
-    #           action: "ALLOW", # accepts ALLOW, DENY, ALERT
-    #           conditions: [
-    #             {
-    #               condition_operator: "ConditionOperator",
-    #               condition_key: "ConditionKey",
-    #               condition_values: ["ProxyConditionValue"],
-    #             },
-    #           ],
-    #           insert_position: 1,
-    #         },
-    #       ],
+    #     dry_run: false,
+    #     encryption_configuration: {
+    #       key_id: "KeyId",
+    #       type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
     #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.proxy_rule_group.proxy_rule_group_name #=> String
-    #   resp.proxy_rule_group.proxy_rule_group_arn #=> String
-    #   resp.proxy_rule_group.create_time #=> Time
-    #   resp.proxy_rule_group.delete_time #=> Time
-    #   resp.proxy_rule_group.rules.pre_dns #=> Array
-    #   resp.proxy_rule_group.rules.pre_dns[0].proxy_rule_name #=> String
-    #   resp.proxy_rule_group.rules.pre_dns[0].description #=> String
-    #   resp.proxy_rule_group.rules.pre_dns[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_rule_group.rules.pre_dns[0].conditions #=> Array
-    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_operator #=> String
-    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_key #=> String
-    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_values #=> Array
-    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_values[0] #=> String
-    #   resp.proxy_rule_group.rules.pre_request #=> Array
-    #   resp.proxy_rule_group.rules.pre_request[0].proxy_rule_name #=> String
-    #   resp.proxy_rule_group.rules.pre_request[0].description #=> String
-    #   resp.proxy_rule_group.rules.pre_request[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_rule_group.rules.pre_request[0].conditions #=> Array
-    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_operator #=> String
-    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_key #=> String
-    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_values #=> Array
-    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_values[0] #=> String
-    #   resp.proxy_rule_group.rules.post_response #=> Array
-    #   resp.proxy_rule_group.rules.post_response[0].proxy_rule_name #=> String
-    #   resp.proxy_rule_group.rules.post_response[0].description #=> String
-    #   resp.proxy_rule_group.rules.post_response[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_rule_group.rules.post_response[0].conditions #=> Array
-    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_operator #=> String
-    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_key #=> String
-    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_values #=> Array
-    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_values[0] #=> String
-    #   resp.proxy_rule_group.description #=> String
-    #   resp.proxy_rule_group.tags #=> Array
-    #   resp.proxy_rule_group.tags[0].key #=> String
-    #   resp.proxy_rule_group.tags[0].value #=> String
     #   resp.update_token #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_name #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_arn #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_id #=> String
+    #   resp.firewall_policy_v2_response.description #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
+    #   resp.firewall_policy_v2_response.status_message #=> String
+    #   resp.firewall_policy_v2_response.tags #=> Array
+    #   resp.firewall_policy_v2_response.tags[0].key #=> String
+    #   resp.firewall_policy_v2_response.tags[0].value #=> String
+    #   resp.firewall_policy_v2_response.consumed_firewall_rule_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.consumed_ips_rule_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.consumed_ips_domain_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.number_of_associations #=> Integer
+    #   resp.firewall_policy_v2_response.encryption_configuration.key_id #=> String
+    #   resp.firewall_policy_v2_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall_policy_v2_response.errors #=> Array
+    #   resp.firewall_policy_v2_response.errors[0].code #=> String, one of "DNS_FIREWALL_RULE_GROUP_UNAVAILABLE", "ROUTE53_RESOLVED_IP_VALIDATION_MISSING"
+    #   resp.firewall_policy_v2_response.errors[0].message #=> String
+    #   resp.firewall_policy_v2_response.errors[0].resource_id #=> String
+    #   resp.firewall_policy_v2_response.last_modified_time #=> Time
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateProxyRules AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateFirewallPolicyV2 AWS API Documentation
     #
-    # @overload create_proxy_rules(params = {})
+    # @overload create_firewall_policy_v2(params = {})
     # @param [Hash] params ({})
-    def create_proxy_rules(params = {}, options = {})
-      req = build_request(:create_proxy_rules, params)
+    def create_firewall_policy_v2(params = {}, options = {})
+      req = build_request(:create_firewall_policy_v2, params)
       req.send_request(options)
     end
 
@@ -1875,6 +1628,14 @@ module Aws::NetworkFirewall
     #
     #    </note>
     #
+    # @option params [Types::FirewallRuleGroup] :firewall_rule_group
+    #   An object that defines the rules in a firewall engine rule group, for
+    #   use in a Next Generation policy.
+    #
+    # @option params [Types::IpsRuleGroup] :ips_rule_group
+    #   An object that defines the rules in an IPS engine rule group, for use
+    #   in a Next Generation policy.
+    #
     # @option params [String] :rules
     #   A string containing stateful rule group rules specifications in
     #   Suricata flat format, with one rule per line. Use this to import your
@@ -1891,9 +1652,18 @@ module Aws::NetworkFirewall
     #   populated from your string.
     #
     # @option params [required, String] :type
-    #   Indicates whether the rule group is stateless or stateful. If the rule
-    #   group is stateless, it contains stateless rules. If it is stateful, it
-    #   contains stateful rules.
+    #   Indicates the type of the rule group. Valid values are:
+    #
+    #   * `STATELESS` - Stateless rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `STATEFUL` - Stateful rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `FIREWALL` - Firewall engine rules, for use in a Next Generation
+    #     policy.
+    #
+    #   * `IPS` - IPS engine rules, for use in a Next Generation policy.
     #
     # @option params [String] :description
     #   A description of the rule group.
@@ -2106,8 +1876,86 @@ module Aws::NetworkFirewall
     #         rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
     #       },
     #     },
+    #     firewall_rule_group: {
+    #       rules_source: { # required
+    #         rules_string: "RulesString",
+    #         firewall_rules: [
+    #           {
+    #             action: "ACCEPT", # required, accepts ACCEPT, DROP, REJECT, REJECT_DST, REJECT_BOTH
+    #             action_scope: "FLOW", # required, accepts FLOW, TX, HOOK, PACKET
+    #             hook: "TCP_ALL", # required, accepts TCP_ALL, TCP_FLOW_START, TCP_PRE_FLOW, TCP_PRE_STREAM, SCTP_ALL, SCTP_FLOW_START, SCTP_PRE_FLOW, SCTP_PRE_STREAM, IPV6_ALL, IPV6_FLOW_START, IPV6_PRE_FLOW, IPV6_PRE_STREAM, ICMPV6_ALL, ICMPV6_FLOW_START, ICMPV6_PRE_FLOW, ICMPV6_PRE_STREAM, UDP_ALL, UDP_FLOW_START, UDP_PRE_FLOW, UDP_PRE_STREAM, ICMP_ALL, ICMP_FLOW_START, ICMP_PRE_FLOW, ICMP_PRE_STREAM, ICMPV4_ALL, ICMPV4_FLOW_START, ICMPV4_PRE_FLOW, ICMPV4_PRE_STREAM, IP_ALL, IP_FLOW_START, IP_PRE_FLOW, IP_PRE_STREAM, IPV4_ALL, IPV4_FLOW_START, IPV4_PRE_FLOW, IPV4_PRE_STREAM, TLS_CLIENT_STARTED, TLS_CLIENT_HELLO, TLS_CLIENT_CERT, TLS_CLIENT_DATA, TLS_CLIENT_FINISHED, TLS_SERVER_STARTED, TLS_SERVER_HELLO, TLS_SERVER_CERT, TLS_SERVER_DATA, TLS_SERVER_FINISHED, HTTP1_REQUEST_STARTED, HTTP1_REQUEST_LINE, HTTP1_REQUEST_HEADERS, HTTP1_REQUEST_BODY, HTTP1_REQUEST_TRAILER, HTTP1_REQUEST_COMPLETE, HTTP1_RESPONSE_STARTED, HTTP1_RESPONSE_LINE, HTTP1_RESPONSE_HEADERS, HTTP1_RESPONSE_BODY, HTTP1_RESPONSE_TRAILER, HTTP1_RESPONSE_COMPLETE, HTTP2_STREAM_REQUEST_STARTED, HTTP2_STREAM_REQUEST_HEADERS, HTTP2_STREAM_REQUEST_DATA, HTTP2_STREAM_REQUEST_CLOSED, HTTP2_STREAM_REQUEST_COMPLETE, HTTP2_STREAM_RESPONSE_STARTED, HTTP2_STREAM_RESPONSE_HEADERS, HTTP2_STREAM_RESPONSE_DATA, HTTP2_STREAM_RESPONSE_CLOSED, HTTP2_STREAM_RESPONSE_COMPLETE, HTTP2_GLOBAL_REQUEST_STARTED, HTTP2_GLOBAL_REQUEST_COMPLETE, HTTP2_GLOBAL_RESPONSE_STARTED, HTTP2_GLOBAL_RESPONSE_COMPLETE, DOH2_STREAM_REQUEST_STARTED, DOH2_STREAM_REQUEST_HEADERS, DOH2_STREAM_REQUEST_DATA, DOH2_STREAM_REQUEST_CLOSED, DOH2_STREAM_REQUEST_COMPLETE, DOH2_STREAM_RESPONSE_STARTED, DOH2_STREAM_RESPONSE_HEADERS, DOH2_STREAM_RESPONSE_DATA, DOH2_STREAM_RESPONSE_CLOSED, DOH2_STREAM_RESPONSE_COMPLETE, DOH2_GLOBAL_REQUEST_STARTED, DOH2_GLOBAL_REQUEST_COMPLETE, DOH2_GLOBAL_RESPONSE_STARTED, DOH2_GLOBAL_RESPONSE_COMPLETE, DNS_REQUEST_STARTED, DNS_REQUEST_COMPLETE, DNS_RESPONSE_STARTED, DNS_RESPONSE_COMPLETE, SMTP_REQUEST_STARTED, SMTP_REQUEST_DATA, SMTP_REQUEST_COMPLETE, SMTP_RESPONSE_STARTED, SMTP_RESPONSE_DATA, SMTP_RESPONSE_COMPLETE, FTP_REQUEST_STARTED, FTP_REQUEST_COMPLETE, FTP_RESPONSE_STARTED, FTP_RESPONSE_COMPLETE, FTP_DATA_REQUEST_STARTED, FTP_DATA_REQUEST_COMPLETE, FTP_DATA_RESPONSE_STARTED, FTP_DATA_RESPONSE_COMPLETE, SMB_REQUEST_STARTED, SMB_REQUEST_COMPLETE, SMB_RESPONSE_STARTED, SMB_RESPONSE_COMPLETE, DCERPC_REQUEST_STARTED, DCERPC_REQUEST_COMPLETE, DCERPC_RESPONSE_STARTED, DCERPC_RESPONSE_COMPLETE, NFS_REQUEST_STARTED, NFS_REQUEST_COMPLETE, NFS_RESPONSE_STARTED, NFS_RESPONSE_COMPLETE, KRB5_REQUEST_STARTED, KRB5_REQUEST_COMPLETE, KRB5_RESPONSE_STARTED, KRB5_RESPONSE_COMPLETE, IKE_REQUEST_STARTED, IKE_REQUEST_COMPLETE, IKE_RESPONSE_STARTED, IKE_RESPONSE_COMPLETE, TFTP_REQUEST_STARTED, TFTP_REQUEST_COMPLETE, TFTP_RESPONSE_STARTED, TFTP_RESPONSE_COMPLETE, DHCP_REQUEST_STARTED, DHCP_REQUEST_COMPLETE, DHCP_RESPONSE_STARTED, DHCP_RESPONSE_COMPLETE, QUIC_REQUEST_STARTED, QUIC_REQUEST_COMPLETE, QUIC_RESPONSE_STARTED, QUIC_RESPONSE_COMPLETE, RDP_REQUEST_STARTED, RDP_REQUEST_COMPLETE, RDP_RESPONSE_STARTED, RDP_RESPONSE_COMPLETE, RFB_REQUEST_STARTED, RFB_REQUEST_COMPLETE, RFB_RESPONSE_STARTED, RFB_RESPONSE_COMPLETE, MQTT_REQUEST_STARTED, MQTT_REQUEST_COMPLETE, MQTT_RESPONSE_STARTED, MQTT_RESPONSE_COMPLETE, PGSQL_REQUEST_STARTED, PGSQL_REQUEST_COMPLETE, PGSQL_RESPONSE_STARTED, PGSQL_RESPONSE_COMPLETE, SNMP_REQUEST_STARTED, SNMP_REQUEST_COMPLETE, SNMP_RESPONSE_STARTED, SNMP_RESPONSE_COMPLETE, NTP_REQUEST_STARTED, NTP_REQUEST_COMPLETE, NTP_RESPONSE_STARTED, NTP_RESPONSE_COMPLETE, TELNET_REQUEST_STARTED, TELNET_REQUEST_COMPLETE, TELNET_RESPONSE_STARTED, TELNET_RESPONSE_COMPLETE, WEBSOCKET_REQUEST_STARTED, WEBSOCKET_REQUEST_COMPLETE, WEBSOCKET_RESPONSE_STARTED, WEBSOCKET_RESPONSE_COMPLETE, LDAP_REQUEST_STARTED, LDAP_REQUEST_COMPLETE, LDAP_RESPONSE_STARTED, LDAP_RESPONSE_COMPLETE, POP3_REQUEST_STARTED, POP3_REQUEST_COMPLETE, POP3_RESPONSE_STARTED, POP3_RESPONSE_COMPLETE, MDNS_REQUEST_STARTED, MDNS_REQUEST_COMPLETE, MDNS_RESPONSE_STARTED, MDNS_RESPONSE_COMPLETE, BITTORRENT_DHT_REQUEST_STARTED, BITTORRENT_DHT_REQUEST_COMPLETE, BITTORRENT_DHT_RESPONSE_STARTED, BITTORRENT_DHT_RESPONSE_COMPLETE, DNP3_REQUEST_STARTED, DNP3_REQUEST_COMPLETE, DNP3_RESPONSE_STARTED, DNP3_RESPONSE_COMPLETE, SSH_REQUEST_IN_PROGRESS, SSH_REQUEST_BANNER_WAIT_EOL, SSH_REQUEST_BANNER_DONE, SSH_REQUEST_FINISHED, SSH_RESPONSE_IN_PROGRESS, SSH_RESPONSE_BANNER_WAIT_EOL, SSH_RESPONSE_BANNER_DONE, SSH_RESPONSE_FINISHED
+    #             protocol: "IP", # required, accepts IP, TCP, UDP, ICMP, HTTP, FTP, TLS, SMB, DNS, DCERPC, SSH, SMTP, MSN, KRB5, IKEV2, TFTP, NTP, DHCP, HTTP2, QUIC, ICMPV4, ICMPV6, SCTP, IPV4, IPV6, DOH2, FTP_DATA, NFS, RDP, RFB, MQTT, PGSQL, SNMP, TELNET, WEBSOCKET, LDAP, POP3, MDNS, BITTORRENT_DHT, DNP3
+    #             source_i_ps: "Source",
+    #             dest_i_ps: "Destination",
+    #             source_ports: "Port",
+    #             dest_ports: "Port",
+    #             rule_options: [
+    #               {
+    #                 keyword: "Keyword", # required
+    #                 settings: ["Setting"],
+    #               },
+    #             ],
+    #             accept_prior_hooks: false,
+    #             alert_enabled: false,
+    #             bypass_ips_enabled: false,
+    #             rule_metadata: {
+    #               rule_enabled: false,
+    #               rule_description: "RuleDescriptionText",
+    #             },
+    #           },
+    #         ],
+    #         rules_source_list: {
+    #           targets: ["CollectionMember_String"], # required
+    #           target_types: ["TLS_SNI"], # required, accepts TLS_SNI, HTTP_HOST, AWS_ROUTE_53_RESOLVED_DOMAIN
+    #           generated_rules_type: "ALLOWLIST", # required, accepts ALLOWLIST, DENYLIST, REJECTLIST, ALERTLIST
+    #         },
+    #       },
+    #       rule_variables: {
+    #         ip_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["VariableDefinition"], # required
+    #           },
+    #         },
+    #         port_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["VariableDefinition"],
+    #           },
+    #         },
+    #       },
+    #       reference_sets: {
+    #         ip_set_references: {
+    #           "IPSetReferenceName" => {
+    #             reference_arn: "ResourceArn",
+    #           },
+    #         },
+    #       },
+    #     },
+    #     ips_rule_group: {
+    #       rules_source: { # required
+    #         rules_string: "RulesString",
+    #       },
+    #       rule_variables: {
+    #         ip_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["VariableDefinition"], # required
+    #           },
+    #         },
+    #         port_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["VariableDefinition"],
+    #           },
+    #         },
+    #       },
+    #       reference_sets: {
+    #         ip_set_references: {
+    #           "IPSetReferenceName" => {
+    #             reference_arn: "ResourceArn",
+    #           },
+    #         },
+    #       },
+    #     },
     #     rules: "RulesString",
-    #     type: "STATELESS", # required, accepts STATELESS, STATEFUL, STATEFUL_DOMAIN
+    #     type: "STATELESS", # required, accepts STATELESS, STATEFUL, STATEFUL_DOMAIN, FIREWALL, IPS
     #     description: "Description",
     #     capacity: 1, # required
     #     tags: [
@@ -2138,7 +1986,7 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.rule_group_name #=> String
     #   resp.rule_group_response.rule_group_id #=> String
     #   resp.rule_group_response.description #=> String
-    #   resp.rule_group_response.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN"
+    #   resp.rule_group_response.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN", "FIREWALL", "IPS"
     #   resp.rule_group_response.capacity #=> Integer
     #   resp.rule_group_response.rule_group_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
     #   resp.rule_group_response.tags #=> Array
@@ -2290,6 +2138,11 @@ module Aws::NetworkFirewall
     #                 },
     #               ],
     #               protocols: [1],
+    #               domain_match: {
+    #                 domains: ["TLSInspectionDomain"], # required
+    #               },
+    #               decryption_action: "DECRYPT", # accepts DECRYPT, BYPASS
+    #               deployment_mode: "TRANSPARENT_FIREWALL_ONLY", # accepts TRANSPARENT_FIREWALL_ONLY, EXPLICIT_PROXY_ONLY, ALL
     #             },
     #           ],
     #           certificate_authority_arn: "ResourceArn",
@@ -2297,6 +2150,7 @@ module Aws::NetworkFirewall
     #             revoked_status_action: "PASS", # accepts PASS, DROP, REJECT
     #             unknown_status_action: "PASS", # accepts PASS, DROP, REJECT
     #           },
+    #           default_decryption_behavior: "DECRYPT", # accepts DECRYPT, BYPASS
     #         },
     #       ],
     #     },
@@ -2363,9 +2217,9 @@ module Aws::NetworkFirewall
     #
     # @option params [required, Types::SubnetMapping] :subnet_mapping
     #   The ID for a subnet that's used in an association with a firewall.
-    #   This is used in CreateFirewall, AssociateSubnets, and
-    #   CreateVpcEndpointAssociation. Network Firewall creates an instance of
-    #   the associated firewall in each subnet that you specify, to filter
+    #   This is used in `CreateFirewall`, `AssociateSubnets`, and
+    #   `CreateVpcEndpointAssociation`. Network Firewall creates an instance
+    #   of the associated firewall in each subnet that you specify, to filter
     #   traffic in the subnet's Availability Zone.
     #
     # @option params [String] :description
@@ -2485,6 +2339,10 @@ module Aws::NetworkFirewall
     # using UpdateFirewallDeleteProtection, then delete the firewall by
     # calling DeleteFirewall.
     #
+    # Deleting a proxy mode firewall detaches its NAT gateways. To also
+    # delete the NAT gateways that Network Firewall created for the
+    # firewall, specify `DeleteAssociatedNatGateways`.
+    #
     # @option params [String] :firewall_name
     #   The descriptive name of the firewall. You can't change the name of a
     #   firewall after you create it.
@@ -2496,6 +2354,21 @@ module Aws::NetworkFirewall
     #
     #   You must specify the ARN or the name, and you can specify both.
     #
+    # @option params [Boolean] :delete_associated_nat_gateways
+    #   Specifies whether to delete the NAT gateways that Network Firewall
+    #   created for a proxy mode firewall when you delete the firewall. You
+    #   can choose from the following values:
+    #
+    #   * `FALSE` - Network Firewall detaches the NAT gateways from the
+    #     firewall and keeps them. This is the default.
+    #
+    #   * `TRUE` - Network Firewall also deletes the NAT gateways. The
+    #     firewall status stays `DELETING` until they're deleted. You need
+    #     permission to call the Amazon EC2 `DeleteNatGateway` action.
+    #
+    #   You can't specify `TRUE` for a firewall that isn't a proxy mode
+    #   firewall.
+    #
     # @return [Types::DeleteFirewallResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteFirewallResponse#firewall #firewall} => Types::Firewall
@@ -2506,6 +2379,7 @@ module Aws::NetworkFirewall
     #   resp = client.delete_firewall({
     #     firewall_name: "ResourceName",
     #     firewall_arn: "ResourceArn",
+    #     delete_associated_nat_gateways: false,
     #   })
     #
     # @example Response structure
@@ -2535,16 +2409,22 @@ module Aws::NetworkFirewall
     #   resp.firewall.availability_zone_mappings #=> Array
     #   resp.firewall.availability_zone_mappings[0].availability_zone #=> String
     #   resp.firewall.availability_zone_change_protection #=> Boolean
-    #   resp.firewall.nat_gateway_mappings #=> Array
-    #   resp.firewall.nat_gateway_mappings[0].nat_gateway_id #=> String
+    #   resp.firewall.nat_gateway_create_mappings #=> Array
+    #   resp.firewall.nat_gateway_create_mappings[0].subnet_id #=> String
+    #   resp.firewall.nat_gateway_create_mappings[0].allocation_ids #=> Array
+    #   resp.firewall.nat_gateway_create_mappings[0].allocation_ids[0] #=> String
+    #   resp.firewall.nat_gateway_create_mappings[0].private_ips #=> Array
+    #   resp.firewall.nat_gateway_create_mappings[0].private_ips[0] #=> String
     #   resp.firewall.proxy_settings.listener_properties #=> Array
     #   resp.firewall.proxy_settings.listener_properties[0].port #=> Integer
     #   resp.firewall.proxy_settings.listener_properties[0].type #=> String, one of "HTTP", "HTTPS"
-    #   resp.firewall.no_source_preservation #=> Boolean
+    #   resp.firewall.proxy_settings.certificate_arn #=> String
+    #   resp.firewall.proxy_settings.domain_name #=> String
     #   resp.firewall.vpc_endpoint.vpc_id #=> String
     #   resp.firewall.vpc_endpoint.subnet_mappings #=> Array
     #   resp.firewall.vpc_endpoint.subnet_mappings[0].subnet_id #=> String
     #   resp.firewall.vpc_endpoint.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
+    #   resp.firewall.transparent_filtering_nat_scope #=> String, one of "NAT_ALL", "NAT_NONE"
     #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED"
     #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states #=> Hash
@@ -2634,6 +2514,62 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Deletes the specified FirewallPolicyV2.
+    #
+    # @option params [String] :firewall_policy_v2_arn
+    #   The Amazon Resource Name (ARN) of the Next Generation policy.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :firewall_policy_v2_name
+    #   The descriptive name of the Next Generation policy. You can't change
+    #   the name of a firewall policy after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @return [Types::DeleteFirewallPolicyV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteFirewallPolicyV2Response#firewall_policy_v2_response #firewall_policy_v2_response} => Types::FirewallPolicyV2Response
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_firewall_policy_v2({
+    #     firewall_policy_v2_arn: "ResourceArn",
+    #     firewall_policy_v2_name: "ResourceName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_name #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_arn #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_id #=> String
+    #   resp.firewall_policy_v2_response.description #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
+    #   resp.firewall_policy_v2_response.status_message #=> String
+    #   resp.firewall_policy_v2_response.tags #=> Array
+    #   resp.firewall_policy_v2_response.tags[0].key #=> String
+    #   resp.firewall_policy_v2_response.tags[0].value #=> String
+    #   resp.firewall_policy_v2_response.consumed_firewall_rule_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.consumed_ips_rule_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.consumed_ips_domain_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.number_of_associations #=> Integer
+    #   resp.firewall_policy_v2_response.encryption_configuration.key_id #=> String
+    #   resp.firewall_policy_v2_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall_policy_v2_response.errors #=> Array
+    #   resp.firewall_policy_v2_response.errors[0].code #=> String, one of "DNS_FIREWALL_RULE_GROUP_UNAVAILABLE", "ROUTE53_RESOLVED_IP_VALIDATION_MISSING"
+    #   resp.firewall_policy_v2_response.errors[0].message #=> String
+    #   resp.firewall_policy_v2_response.errors[0].resource_id #=> String
+    #   resp.firewall_policy_v2_response.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteFirewallPolicyV2 AWS API Documentation
+    #
+    # @overload delete_firewall_policy_v2(params = {})
+    # @param [Hash] params ({})
+    def delete_firewall_policy_v2(params = {}, options = {})
+      req = build_request(:delete_firewall_policy_v2, params)
+      req.send_request(options)
+    end
+
     # Deletes a transit gateway attachment from a Network Firewall. Either
     # the firewall owner or the transit gateway owner can delete the
     # attachment.
@@ -2673,7 +2609,7 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
-    # Deletes the specified Proxy.
+    # Deletes the specified proxy.
     #
     # Detaches a Proxy configuration from a NAT Gateway.
     #
@@ -2720,160 +2656,6 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
-    # Deletes the specified ProxyConfiguration.
-    #
-    # @option params [String] :proxy_configuration_name
-    #   The descriptive name of the proxy configuration. You can't change the
-    #   name of a proxy configuration after you create it.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [String] :proxy_configuration_arn
-    #   The Amazon Resource Name (ARN) of a proxy configuration.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @return [Types::DeleteProxyConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::DeleteProxyConfigurationResponse#proxy_configuration_name #proxy_configuration_name} => String
-    #   * {Types::DeleteProxyConfigurationResponse#proxy_configuration_arn #proxy_configuration_arn} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.delete_proxy_configuration({
-    #     proxy_configuration_name: "ResourceName",
-    #     proxy_configuration_arn: "ResourceArn",
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.proxy_configuration_name #=> String
-    #   resp.proxy_configuration_arn #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteProxyConfiguration AWS API Documentation
-    #
-    # @overload delete_proxy_configuration(params = {})
-    # @param [Hash] params ({})
-    def delete_proxy_configuration(params = {}, options = {})
-      req = build_request(:delete_proxy_configuration, params)
-      req.send_request(options)
-    end
-
-    # Deletes the specified ProxyRuleGroup.
-    #
-    # @option params [String] :proxy_rule_group_name
-    #   The descriptive name of the proxy rule group. You can't change the
-    #   name of a proxy rule group after you create it.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [String] :proxy_rule_group_arn
-    #   The Amazon Resource Name (ARN) of a proxy rule group.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @return [Types::DeleteProxyRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::DeleteProxyRuleGroupResponse#proxy_rule_group_name #proxy_rule_group_name} => String
-    #   * {Types::DeleteProxyRuleGroupResponse#proxy_rule_group_arn #proxy_rule_group_arn} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.delete_proxy_rule_group({
-    #     proxy_rule_group_name: "ResourceName",
-    #     proxy_rule_group_arn: "ResourceArn",
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.proxy_rule_group_name #=> String
-    #   resp.proxy_rule_group_arn #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteProxyRuleGroup AWS API Documentation
-    #
-    # @overload delete_proxy_rule_group(params = {})
-    # @param [Hash] params ({})
-    def delete_proxy_rule_group(params = {}, options = {})
-      req = build_request(:delete_proxy_rule_group, params)
-      req.send_request(options)
-    end
-
-    # Deletes the specified ProxyRule(s). currently attached to a
-    # ProxyRuleGroup
-    #
-    # @option params [String] :proxy_rule_group_arn
-    #   The Amazon Resource Name (ARN) of a proxy rule group.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [String] :proxy_rule_group_name
-    #   The descriptive name of the proxy rule group. You can't change the
-    #   name of a proxy rule group after you create it.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [required, Array<String>] :rules
-    #   The proxy rule(s) to remove from the existing proxy rule group.
-    #
-    # @return [Types::DeleteProxyRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::DeleteProxyRulesResponse#proxy_rule_group #proxy_rule_group} => Types::ProxyRuleGroup
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.delete_proxy_rules({
-    #     proxy_rule_group_arn: "ResourceArn",
-    #     proxy_rule_group_name: "ResourceName",
-    #     rules: ["ResourceName"], # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.proxy_rule_group.proxy_rule_group_name #=> String
-    #   resp.proxy_rule_group.proxy_rule_group_arn #=> String
-    #   resp.proxy_rule_group.create_time #=> Time
-    #   resp.proxy_rule_group.delete_time #=> Time
-    #   resp.proxy_rule_group.rules.pre_dns #=> Array
-    #   resp.proxy_rule_group.rules.pre_dns[0].proxy_rule_name #=> String
-    #   resp.proxy_rule_group.rules.pre_dns[0].description #=> String
-    #   resp.proxy_rule_group.rules.pre_dns[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_rule_group.rules.pre_dns[0].conditions #=> Array
-    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_operator #=> String
-    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_key #=> String
-    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_values #=> Array
-    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_values[0] #=> String
-    #   resp.proxy_rule_group.rules.pre_request #=> Array
-    #   resp.proxy_rule_group.rules.pre_request[0].proxy_rule_name #=> String
-    #   resp.proxy_rule_group.rules.pre_request[0].description #=> String
-    #   resp.proxy_rule_group.rules.pre_request[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_rule_group.rules.pre_request[0].conditions #=> Array
-    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_operator #=> String
-    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_key #=> String
-    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_values #=> Array
-    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_values[0] #=> String
-    #   resp.proxy_rule_group.rules.post_response #=> Array
-    #   resp.proxy_rule_group.rules.post_response[0].proxy_rule_name #=> String
-    #   resp.proxy_rule_group.rules.post_response[0].description #=> String
-    #   resp.proxy_rule_group.rules.post_response[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_rule_group.rules.post_response[0].conditions #=> Array
-    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_operator #=> String
-    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_key #=> String
-    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_values #=> Array
-    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_values[0] #=> String
-    #   resp.proxy_rule_group.description #=> String
-    #   resp.proxy_rule_group.tags #=> Array
-    #   resp.proxy_rule_group.tags[0].key #=> String
-    #   resp.proxy_rule_group.tags[0].value #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteProxyRules AWS API Documentation
-    #
-    # @overload delete_proxy_rules(params = {})
-    # @param [Hash] params ({})
-    def delete_proxy_rules(params = {}, options = {})
-      req = build_request(:delete_proxy_rules, params)
-      req.send_request(options)
-    end
-
     # Deletes a resource policy that you created in a PutResourcePolicy
     # request.
     #
@@ -2912,9 +2694,18 @@ module Aws::NetworkFirewall
     #   You must specify the ARN or the name, and you can specify both.
     #
     # @option params [String] :type
-    #   Indicates whether the rule group is stateless or stateful. If the rule
-    #   group is stateless, it contains stateless rules. If it is stateful, it
-    #   contains stateful rules.
+    #   Indicates the type of the rule group. Valid values are:
+    #
+    #   * `STATELESS` - Stateless rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `STATEFUL` - Stateful rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `FIREWALL` - Firewall engine rules, for use in a Next Generation
+    #     policy.
+    #
+    #   * `IPS` - IPS engine rules, for use in a Next Generation policy.
     #
     #   <note markdown="1"> This setting is required for requests that do not include the
     #   `RuleGroupARN`.
@@ -2930,7 +2721,7 @@ module Aws::NetworkFirewall
     #   resp = client.delete_rule_group({
     #     rule_group_name: "ResourceName",
     #     rule_group_arn: "ResourceArn",
-    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN
+    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN, FIREWALL, IPS
     #   })
     #
     # @example Response structure
@@ -2939,7 +2730,7 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.rule_group_name #=> String
     #   resp.rule_group_response.rule_group_id #=> String
     #   resp.rule_group_response.description #=> String
-    #   resp.rule_group_response.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN"
+    #   resp.rule_group_response.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN", "FIREWALL", "IPS"
     #   resp.rule_group_response.capacity #=> Integer
     #   resp.rule_group_response.rule_group_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
     #   resp.rule_group_response.tags #=> Array
@@ -3195,16 +2986,22 @@ module Aws::NetworkFirewall
     #   resp.firewall.availability_zone_mappings #=> Array
     #   resp.firewall.availability_zone_mappings[0].availability_zone #=> String
     #   resp.firewall.availability_zone_change_protection #=> Boolean
-    #   resp.firewall.nat_gateway_mappings #=> Array
-    #   resp.firewall.nat_gateway_mappings[0].nat_gateway_id #=> String
+    #   resp.firewall.nat_gateway_create_mappings #=> Array
+    #   resp.firewall.nat_gateway_create_mappings[0].subnet_id #=> String
+    #   resp.firewall.nat_gateway_create_mappings[0].allocation_ids #=> Array
+    #   resp.firewall.nat_gateway_create_mappings[0].allocation_ids[0] #=> String
+    #   resp.firewall.nat_gateway_create_mappings[0].private_ips #=> Array
+    #   resp.firewall.nat_gateway_create_mappings[0].private_ips[0] #=> String
     #   resp.firewall.proxy_settings.listener_properties #=> Array
     #   resp.firewall.proxy_settings.listener_properties[0].port #=> Integer
     #   resp.firewall.proxy_settings.listener_properties[0].type #=> String, one of "HTTP", "HTTPS"
-    #   resp.firewall.no_source_preservation #=> Boolean
+    #   resp.firewall.proxy_settings.certificate_arn #=> String
+    #   resp.firewall.proxy_settings.domain_name #=> String
     #   resp.firewall.vpc_endpoint.vpc_id #=> String
     #   resp.firewall.vpc_endpoint.subnet_mappings #=> Array
     #   resp.firewall.vpc_endpoint.subnet_mappings[0].subnet_id #=> String
     #   resp.firewall.vpc_endpoint.subnet_mappings[0].ip_address_type #=> String, one of "DUALSTACK", "IPV4", "IPV6"
+    #   resp.firewall.transparent_filtering_nat_scope #=> String, one of "NAT_ALL", "NAT_NONE"
     #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY", "FAILED"
     #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC", "CAPACITY_CONSTRAINED"
     #   resp.firewall_status.sync_states #=> Hash
@@ -3372,6 +3169,136 @@ module Aws::NetworkFirewall
     # @param [Hash] params ({})
     def describe_firewall_policy(params = {}, options = {})
       req = build_request(:describe_firewall_policy, params)
+      req.send_request(options)
+    end
+
+    # Returns the data objects for the specified Next Generation policy.
+    #
+    # @option params [String] :firewall_policy_v2_arn
+    #   The Amazon Resource Name (ARN) of the Next Generation policy.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :firewall_policy_v2_name
+    #   The descriptive name of the Next Generation policy. You can't change
+    #   the name of a firewall policy after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :rule_output_format
+    #   The format in which to return the rules of any firewall engine rule
+    #   groups that are embedded in the policy. Specify `FIREWALL_RULES` for
+    #   structured `FirewallRule` objects or `RULES_STRING` for a
+    #   Suricata-compatible firewall-mode rule string. If you don't specify a
+    #   format, Network Firewall returns each embedded rule group in the
+    #   format you provided it in. Referenced rule groups aren't affected.
+    #
+    # @return [Types::DescribeFirewallPolicyV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFirewallPolicyV2Response#update_token #update_token} => String
+    #   * {Types::DescribeFirewallPolicyV2Response#firewall_policy_v2_response #firewall_policy_v2_response} => Types::FirewallPolicyV2Response
+    #   * {Types::DescribeFirewallPolicyV2Response#firewall_policy_v2 #firewall_policy_v2} => Types::FirewallPolicyV2
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_firewall_policy_v2({
+    #     firewall_policy_v2_arn: "ResourceArn",
+    #     firewall_policy_v2_name: "ResourceName",
+    #     rule_output_format: "FIREWALL_RULES", # accepts FIREWALL_RULES, RULES_STRING
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update_token #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_name #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_arn #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_id #=> String
+    #   resp.firewall_policy_v2_response.description #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
+    #   resp.firewall_policy_v2_response.status_message #=> String
+    #   resp.firewall_policy_v2_response.tags #=> Array
+    #   resp.firewall_policy_v2_response.tags[0].key #=> String
+    #   resp.firewall_policy_v2_response.tags[0].value #=> String
+    #   resp.firewall_policy_v2_response.consumed_firewall_rule_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.consumed_ips_rule_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.consumed_ips_domain_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.number_of_associations #=> Integer
+    #   resp.firewall_policy_v2_response.encryption_configuration.key_id #=> String
+    #   resp.firewall_policy_v2_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall_policy_v2_response.errors #=> Array
+    #   resp.firewall_policy_v2_response.errors[0].code #=> String, one of "DNS_FIREWALL_RULE_GROUP_UNAVAILABLE", "ROUTE53_RESOLVED_IP_VALIDATION_MISSING"
+    #   resp.firewall_policy_v2_response.errors[0].message #=> String
+    #   resp.firewall_policy_v2_response.errors[0].resource_id #=> String
+    #   resp.firewall_policy_v2_response.last_modified_time #=> Time
+    #   resp.firewall_policy_v2.firewall_rule_group_entries #=> Array
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].priority #=> Integer
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].resource_arn #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.rules_string #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules #=> Array
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].action #=> String, one of "ACCEPT", "DROP", "REJECT", "REJECT_DST", "REJECT_BOTH"
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].action_scope #=> String, one of "FLOW", "TX", "HOOK", "PACKET"
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].hook #=> String, one of "TCP_ALL", "TCP_FLOW_START", "TCP_PRE_FLOW", "TCP_PRE_STREAM", "SCTP_ALL", "SCTP_FLOW_START", "SCTP_PRE_FLOW", "SCTP_PRE_STREAM", "IPV6_ALL", "IPV6_FLOW_START", "IPV6_PRE_FLOW", "IPV6_PRE_STREAM", "ICMPV6_ALL", "ICMPV6_FLOW_START", "ICMPV6_PRE_FLOW", "ICMPV6_PRE_STREAM", "UDP_ALL", "UDP_FLOW_START", "UDP_PRE_FLOW", "UDP_PRE_STREAM", "ICMP_ALL", "ICMP_FLOW_START", "ICMP_PRE_FLOW", "ICMP_PRE_STREAM", "ICMPV4_ALL", "ICMPV4_FLOW_START", "ICMPV4_PRE_FLOW", "ICMPV4_PRE_STREAM", "IP_ALL", "IP_FLOW_START", "IP_PRE_FLOW", "IP_PRE_STREAM", "IPV4_ALL", "IPV4_FLOW_START", "IPV4_PRE_FLOW", "IPV4_PRE_STREAM", "TLS_CLIENT_STARTED", "TLS_CLIENT_HELLO", "TLS_CLIENT_CERT", "TLS_CLIENT_DATA", "TLS_CLIENT_FINISHED", "TLS_SERVER_STARTED", "TLS_SERVER_HELLO", "TLS_SERVER_CERT", "TLS_SERVER_DATA", "TLS_SERVER_FINISHED", "HTTP1_REQUEST_STARTED", "HTTP1_REQUEST_LINE", "HTTP1_REQUEST_HEADERS", "HTTP1_REQUEST_BODY", "HTTP1_REQUEST_TRAILER", "HTTP1_REQUEST_COMPLETE", "HTTP1_RESPONSE_STARTED", "HTTP1_RESPONSE_LINE", "HTTP1_RESPONSE_HEADERS", "HTTP1_RESPONSE_BODY", "HTTP1_RESPONSE_TRAILER", "HTTP1_RESPONSE_COMPLETE", "HTTP2_STREAM_REQUEST_STARTED", "HTTP2_STREAM_REQUEST_HEADERS", "HTTP2_STREAM_REQUEST_DATA", "HTTP2_STREAM_REQUEST_CLOSED", "HTTP2_STREAM_REQUEST_COMPLETE", "HTTP2_STREAM_RESPONSE_STARTED", "HTTP2_STREAM_RESPONSE_HEADERS", "HTTP2_STREAM_RESPONSE_DATA", "HTTP2_STREAM_RESPONSE_CLOSED", "HTTP2_STREAM_RESPONSE_COMPLETE", "HTTP2_GLOBAL_REQUEST_STARTED", "HTTP2_GLOBAL_REQUEST_COMPLETE", "HTTP2_GLOBAL_RESPONSE_STARTED", "HTTP2_GLOBAL_RESPONSE_COMPLETE", "DOH2_STREAM_REQUEST_STARTED", "DOH2_STREAM_REQUEST_HEADERS", "DOH2_STREAM_REQUEST_DATA", "DOH2_STREAM_REQUEST_CLOSED", "DOH2_STREAM_REQUEST_COMPLETE", "DOH2_STREAM_RESPONSE_STARTED", "DOH2_STREAM_RESPONSE_HEADERS", "DOH2_STREAM_RESPONSE_DATA", "DOH2_STREAM_RESPONSE_CLOSED", "DOH2_STREAM_RESPONSE_COMPLETE", "DOH2_GLOBAL_REQUEST_STARTED", "DOH2_GLOBAL_REQUEST_COMPLETE", "DOH2_GLOBAL_RESPONSE_STARTED", "DOH2_GLOBAL_RESPONSE_COMPLETE", "DNS_REQUEST_STARTED", "DNS_REQUEST_COMPLETE", "DNS_RESPONSE_STARTED", "DNS_RESPONSE_COMPLETE", "SMTP_REQUEST_STARTED", "SMTP_REQUEST_DATA", "SMTP_REQUEST_COMPLETE", "SMTP_RESPONSE_STARTED", "SMTP_RESPONSE_DATA", "SMTP_RESPONSE_COMPLETE", "FTP_REQUEST_STARTED", "FTP_REQUEST_COMPLETE", "FTP_RESPONSE_STARTED", "FTP_RESPONSE_COMPLETE", "FTP_DATA_REQUEST_STARTED", "FTP_DATA_REQUEST_COMPLETE", "FTP_DATA_RESPONSE_STARTED", "FTP_DATA_RESPONSE_COMPLETE", "SMB_REQUEST_STARTED", "SMB_REQUEST_COMPLETE", "SMB_RESPONSE_STARTED", "SMB_RESPONSE_COMPLETE", "DCERPC_REQUEST_STARTED", "DCERPC_REQUEST_COMPLETE", "DCERPC_RESPONSE_STARTED", "DCERPC_RESPONSE_COMPLETE", "NFS_REQUEST_STARTED", "NFS_REQUEST_COMPLETE", "NFS_RESPONSE_STARTED", "NFS_RESPONSE_COMPLETE", "KRB5_REQUEST_STARTED", "KRB5_REQUEST_COMPLETE", "KRB5_RESPONSE_STARTED", "KRB5_RESPONSE_COMPLETE", "IKE_REQUEST_STARTED", "IKE_REQUEST_COMPLETE", "IKE_RESPONSE_STARTED", "IKE_RESPONSE_COMPLETE", "TFTP_REQUEST_STARTED", "TFTP_REQUEST_COMPLETE", "TFTP_RESPONSE_STARTED", "TFTP_RESPONSE_COMPLETE", "DHCP_REQUEST_STARTED", "DHCP_REQUEST_COMPLETE", "DHCP_RESPONSE_STARTED", "DHCP_RESPONSE_COMPLETE", "QUIC_REQUEST_STARTED", "QUIC_REQUEST_COMPLETE", "QUIC_RESPONSE_STARTED", "QUIC_RESPONSE_COMPLETE", "RDP_REQUEST_STARTED", "RDP_REQUEST_COMPLETE", "RDP_RESPONSE_STARTED", "RDP_RESPONSE_COMPLETE", "RFB_REQUEST_STARTED", "RFB_REQUEST_COMPLETE", "RFB_RESPONSE_STARTED", "RFB_RESPONSE_COMPLETE", "MQTT_REQUEST_STARTED", "MQTT_REQUEST_COMPLETE", "MQTT_RESPONSE_STARTED", "MQTT_RESPONSE_COMPLETE", "PGSQL_REQUEST_STARTED", "PGSQL_REQUEST_COMPLETE", "PGSQL_RESPONSE_STARTED", "PGSQL_RESPONSE_COMPLETE", "SNMP_REQUEST_STARTED", "SNMP_REQUEST_COMPLETE", "SNMP_RESPONSE_STARTED", "SNMP_RESPONSE_COMPLETE", "NTP_REQUEST_STARTED", "NTP_REQUEST_COMPLETE", "NTP_RESPONSE_STARTED", "NTP_RESPONSE_COMPLETE", "TELNET_REQUEST_STARTED", "TELNET_REQUEST_COMPLETE", "TELNET_RESPONSE_STARTED", "TELNET_RESPONSE_COMPLETE", "WEBSOCKET_REQUEST_STARTED", "WEBSOCKET_REQUEST_COMPLETE", "WEBSOCKET_RESPONSE_STARTED", "WEBSOCKET_RESPONSE_COMPLETE", "LDAP_REQUEST_STARTED", "LDAP_REQUEST_COMPLETE", "LDAP_RESPONSE_STARTED", "LDAP_RESPONSE_COMPLETE", "POP3_REQUEST_STARTED", "POP3_REQUEST_COMPLETE", "POP3_RESPONSE_STARTED", "POP3_RESPONSE_COMPLETE", "MDNS_REQUEST_STARTED", "MDNS_REQUEST_COMPLETE", "MDNS_RESPONSE_STARTED", "MDNS_RESPONSE_COMPLETE", "BITTORRENT_DHT_REQUEST_STARTED", "BITTORRENT_DHT_REQUEST_COMPLETE", "BITTORRENT_DHT_RESPONSE_STARTED", "BITTORRENT_DHT_RESPONSE_COMPLETE", "DNP3_REQUEST_STARTED", "DNP3_REQUEST_COMPLETE", "DNP3_RESPONSE_STARTED", "DNP3_RESPONSE_COMPLETE", "SSH_REQUEST_IN_PROGRESS", "SSH_REQUEST_BANNER_WAIT_EOL", "SSH_REQUEST_BANNER_DONE", "SSH_REQUEST_FINISHED", "SSH_RESPONSE_IN_PROGRESS", "SSH_RESPONSE_BANNER_WAIT_EOL", "SSH_RESPONSE_BANNER_DONE", "SSH_RESPONSE_FINISHED"
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].protocol #=> String, one of "IP", "TCP", "UDP", "ICMP", "HTTP", "FTP", "TLS", "SMB", "DNS", "DCERPC", "SSH", "SMTP", "MSN", "KRB5", "IKEV2", "TFTP", "NTP", "DHCP", "HTTP2", "QUIC", "ICMPV4", "ICMPV6", "SCTP", "IPV4", "IPV6", "DOH2", "FTP_DATA", "NFS", "RDP", "RFB", "MQTT", "PGSQL", "SNMP", "TELNET", "WEBSOCKET", "LDAP", "POP3", "MDNS", "BITTORRENT_DHT", "DNP3"
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].source_i_ps #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].dest_i_ps #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].source_ports #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].dest_ports #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].rule_options #=> Array
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].rule_options[0].keyword #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].rule_options[0].settings #=> Array
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].rule_options[0].settings[0] #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].accept_prior_hooks #=> Boolean
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].alert_enabled #=> Boolean
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].bypass_ips_enabled #=> Boolean
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].rule_metadata.rule_enabled #=> Boolean
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.firewall_rules[0].rule_metadata.rule_description #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.rules_source_list.targets #=> Array
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.rules_source_list.targets[0] #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.rules_source_list.target_types #=> Array
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.rules_source_list.target_types[0] #=> String, one of "TLS_SNI", "HTTP_HOST", "AWS_ROUTE_53_RESOLVED_DOMAIN"
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rules_source.rules_source_list.generated_rules_type #=> String, one of "ALLOWLIST", "DENYLIST", "REJECTLIST", "ALERTLIST"
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rule_variables.ip_sets #=> Hash
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rule_variables.ip_sets["RuleVariableName"].definition #=> Array
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rule_variables.ip_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rule_variables.port_sets #=> Hash
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rule_variables.port_sets["RuleVariableName"].definition #=> Array
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.rule_variables.port_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.reference_sets.ip_set_references #=> Hash
+    #   resp.firewall_policy_v2.firewall_rule_group_entries[0].inline_rule_group.reference_sets.ip_set_references["IPSetReferenceName"].reference_arn #=> String
+    #   resp.firewall_policy_v2.ips_rule_group_entries #=> Array
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].resource_arn #=> String
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.rules_source.rules_string #=> String
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.rule_variables.ip_sets #=> Hash
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.rule_variables.ip_sets["RuleVariableName"].definition #=> Array
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.rule_variables.ip_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.rule_variables.port_sets #=> Hash
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.rule_variables.port_sets["RuleVariableName"].definition #=> Array
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.rule_variables.port_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.reference_sets.ip_set_references #=> Hash
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].inline_rule_group.reference_sets.ip_set_references["IPSetReferenceName"].reference_arn #=> String
+    #   resp.firewall_policy_v2.ips_rule_group_entries[0].override.action #=> String, one of "DROP_TO_ALERT"
+    #   resp.firewall_policy_v2.policy_mode #=> String, one of "ENFORCE", "MONITOR"
+    #   resp.firewall_policy_v2.firewall_default_action #=> String, one of "DROP", "ACCEPT", "REJECT", "ALERT"
+    #   resp.firewall_policy_v2.stateful_engine_options.stream_exception_policy #=> String, one of "DROP", "REJECT"
+    #   resp.firewall_policy_v2.stateful_engine_options.flow_timeouts.tcp_idle_timeout_seconds #=> Integer
+    #   resp.firewall_policy_v2.tls_inspection_configuration_arn #=> String
+    #   resp.firewall_policy_v2.policy_variables.rule_variables #=> Hash
+    #   resp.firewall_policy_v2.policy_variables.rule_variables["RuleVariableName"].definition #=> Array
+    #   resp.firewall_policy_v2.policy_variables.rule_variables["RuleVariableName"].definition[0] #=> String
+    #   resp.firewall_policy_v2.route_53_resolved_ip_validation.action #=> String, one of "REJECT", "DROP", "ALERT"
+    #   resp.firewall_policy_v2.route_53_resolved_ip_validation.dns_firewall_rule_group_id #=> String
+    #   resp.firewall_policy_v2.route_53_resolved_ip_validation.dns_expiry_exception_policy #=> String, one of "REJECT", "DROP", "CONTINUE"
+    #   resp.firewall_policy_v2.route_53_resolved_ip_validation.bypass_destination_validation_ip_ranges #=> Array
+    #   resp.firewall_policy_v2.route_53_resolved_ip_validation.bypass_destination_validation_ip_ranges[0].address_definition #=> String
+    #   resp.firewall_policy_v2.route_53_resolved_ip_validation.source_ip_ranges #=> Array
+    #   resp.firewall_policy_v2.route_53_resolved_ip_validation.source_ip_ranges[0].address_definition #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFirewallPolicyV2 AWS API Documentation
+    #
+    # @overload describe_firewall_policy_v2(params = {})
+    # @param [Hash] params ({})
+    def describe_firewall_policy_v2(params = {}, options = {})
+      req = build_request(:describe_firewall_policy_v2, params)
       req.send_request(options)
     end
 
@@ -3567,185 +3494,6 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
-    # Returns the data objects for the specified proxy configuration.
-    #
-    # @option params [String] :proxy_configuration_name
-    #   The descriptive name of the proxy configuration. You can't change the
-    #   name of a proxy configuration after you create it.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [String] :proxy_configuration_arn
-    #   The Amazon Resource Name (ARN) of a proxy configuration.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @return [Types::DescribeProxyConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::DescribeProxyConfigurationResponse#proxy_configuration #proxy_configuration} => Types::ProxyConfiguration
-    #   * {Types::DescribeProxyConfigurationResponse#update_token #update_token} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.describe_proxy_configuration({
-    #     proxy_configuration_name: "ResourceName",
-    #     proxy_configuration_arn: "ResourceArn",
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.proxy_configuration.proxy_configuration_name #=> String
-    #   resp.proxy_configuration.proxy_configuration_arn #=> String
-    #   resp.proxy_configuration.description #=> String
-    #   resp.proxy_configuration.create_time #=> Time
-    #   resp.proxy_configuration.delete_time #=> Time
-    #   resp.proxy_configuration.rule_groups #=> Array
-    #   resp.proxy_configuration.rule_groups[0].proxy_rule_group_name #=> String
-    #   resp.proxy_configuration.rule_groups[0].proxy_rule_group_arn #=> String
-    #   resp.proxy_configuration.rule_groups[0].type #=> String
-    #   resp.proxy_configuration.rule_groups[0].priority #=> Integer
-    #   resp.proxy_configuration.default_rule_phase_actions.pre_dns #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_configuration.default_rule_phase_actions.pre_request #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_configuration.default_rule_phase_actions.post_response #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_configuration.tags #=> Array
-    #   resp.proxy_configuration.tags[0].key #=> String
-    #   resp.proxy_configuration.tags[0].value #=> String
-    #   resp.update_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeProxyConfiguration AWS API Documentation
-    #
-    # @overload describe_proxy_configuration(params = {})
-    # @param [Hash] params ({})
-    def describe_proxy_configuration(params = {}, options = {})
-      req = build_request(:describe_proxy_configuration, params)
-      req.send_request(options)
-    end
-
-    # Returns the data objects for the specified proxy configuration for the
-    # specified proxy rule group.
-    #
-    # @option params [required, String] :proxy_rule_name
-    #   The descriptive name of the proxy rule. You can't change the name of
-    #   a proxy rule after you create it.
-    #
-    # @option params [String] :proxy_rule_group_name
-    #   The descriptive name of the proxy rule group. You can't change the
-    #   name of a proxy rule group after you create it.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [String] :proxy_rule_group_arn
-    #   The Amazon Resource Name (ARN) of a proxy rule group.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @return [Types::DescribeProxyRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::DescribeProxyRuleResponse#proxy_rule #proxy_rule} => Types::ProxyRule
-    #   * {Types::DescribeProxyRuleResponse#update_token #update_token} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.describe_proxy_rule({
-    #     proxy_rule_name: "ResourceName", # required
-    #     proxy_rule_group_name: "ResourceName",
-    #     proxy_rule_group_arn: "ResourceArn",
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.proxy_rule.proxy_rule_name #=> String
-    #   resp.proxy_rule.description #=> String
-    #   resp.proxy_rule.action #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_rule.conditions #=> Array
-    #   resp.proxy_rule.conditions[0].condition_operator #=> String
-    #   resp.proxy_rule.conditions[0].condition_key #=> String
-    #   resp.proxy_rule.conditions[0].condition_values #=> Array
-    #   resp.proxy_rule.conditions[0].condition_values[0] #=> String
-    #   resp.update_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeProxyRule AWS API Documentation
-    #
-    # @overload describe_proxy_rule(params = {})
-    # @param [Hash] params ({})
-    def describe_proxy_rule(params = {}, options = {})
-      req = build_request(:describe_proxy_rule, params)
-      req.send_request(options)
-    end
-
-    # Returns the data objects for the specified proxy rule group.
-    #
-    # @option params [String] :proxy_rule_group_name
-    #   The descriptive name of the proxy rule group. You can't change the
-    #   name of a proxy rule group after you create it.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [String] :proxy_rule_group_arn
-    #   The Amazon Resource Name (ARN) of a proxy rule group.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @return [Types::DescribeProxyRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::DescribeProxyRuleGroupResponse#proxy_rule_group #proxy_rule_group} => Types::ProxyRuleGroup
-    #   * {Types::DescribeProxyRuleGroupResponse#update_token #update_token} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.describe_proxy_rule_group({
-    #     proxy_rule_group_name: "ResourceName",
-    #     proxy_rule_group_arn: "ResourceArn",
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.proxy_rule_group.proxy_rule_group_name #=> String
-    #   resp.proxy_rule_group.proxy_rule_group_arn #=> String
-    #   resp.proxy_rule_group.create_time #=> Time
-    #   resp.proxy_rule_group.delete_time #=> Time
-    #   resp.proxy_rule_group.rules.pre_dns #=> Array
-    #   resp.proxy_rule_group.rules.pre_dns[0].proxy_rule_name #=> String
-    #   resp.proxy_rule_group.rules.pre_dns[0].description #=> String
-    #   resp.proxy_rule_group.rules.pre_dns[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_rule_group.rules.pre_dns[0].conditions #=> Array
-    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_operator #=> String
-    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_key #=> String
-    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_values #=> Array
-    #   resp.proxy_rule_group.rules.pre_dns[0].conditions[0].condition_values[0] #=> String
-    #   resp.proxy_rule_group.rules.pre_request #=> Array
-    #   resp.proxy_rule_group.rules.pre_request[0].proxy_rule_name #=> String
-    #   resp.proxy_rule_group.rules.pre_request[0].description #=> String
-    #   resp.proxy_rule_group.rules.pre_request[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_rule_group.rules.pre_request[0].conditions #=> Array
-    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_operator #=> String
-    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_key #=> String
-    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_values #=> Array
-    #   resp.proxy_rule_group.rules.pre_request[0].conditions[0].condition_values[0] #=> String
-    #   resp.proxy_rule_group.rules.post_response #=> Array
-    #   resp.proxy_rule_group.rules.post_response[0].proxy_rule_name #=> String
-    #   resp.proxy_rule_group.rules.post_response[0].description #=> String
-    #   resp.proxy_rule_group.rules.post_response[0].action #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_rule_group.rules.post_response[0].conditions #=> Array
-    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_operator #=> String
-    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_key #=> String
-    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_values #=> Array
-    #   resp.proxy_rule_group.rules.post_response[0].conditions[0].condition_values[0] #=> String
-    #   resp.proxy_rule_group.description #=> String
-    #   resp.proxy_rule_group.tags #=> Array
-    #   resp.proxy_rule_group.tags[0].key #=> String
-    #   resp.proxy_rule_group.tags[0].value #=> String
-    #   resp.update_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeProxyRuleGroup AWS API Documentation
-    #
-    # @overload describe_proxy_rule_group(params = {})
-    # @param [Hash] params ({})
-    def describe_proxy_rule_group(params = {}, options = {})
-      req = build_request(:describe_proxy_rule_group, params)
-      req.send_request(options)
-    end
-
     # Retrieves a resource policy that you created in a PutResourcePolicy
     # request.
     #
@@ -3790,9 +3538,18 @@ module Aws::NetworkFirewall
     #   You must specify the ARN or the name, and you can specify both.
     #
     # @option params [String] :type
-    #   Indicates whether the rule group is stateless or stateful. If the rule
-    #   group is stateless, it contains stateless rules. If it is stateful, it
-    #   contains stateful rules.
+    #   Indicates the type of the rule group. Valid values are:
+    #
+    #   * `STATELESS` - Stateless rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `STATEFUL` - Stateful rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `FIREWALL` - Firewall engine rules, for use in a Next Generation
+    #     policy.
+    #
+    #   * `IPS` - IPS engine rules, for use in a Next Generation policy.
     #
     #   <note markdown="1"> This setting is required for requests that do not include the
     #   `RuleGroupARN`.
@@ -3804,10 +3561,27 @@ module Aws::NetworkFirewall
     #   rules in the rule group for rule behavior such as asymmetric routing.
     #   If set to `TRUE`, Network Firewall runs the analysis.
     #
+    # @option params [String] :rule_output_format
+    #   For a firewall engine rule group, the format in which to return the
+    #   rules. Specify one of the following values:
+    #
+    #   * `FIREWALL_RULES` - Returns the rules as structured `FirewallRule`
+    #     objects.
+    #
+    #   * `RULES_STRING` - Returns the rules as a Suricata-compatible
+    #     firewall-mode rule string.
+    #
+    #   If you don't specify a format, Network Firewall returns the rules in
+    #   the format you provided them in. This setting applies only to
+    #   `FIREWALL` and `IPS` rule groups; IPS engine rule groups support only
+    #   `RULES_STRING`.
+    #
     # @return [Types::DescribeRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeRuleGroupResponse#update_token #update_token} => String
     #   * {Types::DescribeRuleGroupResponse#rule_group #rule_group} => Types::RuleGroup
+    #   * {Types::DescribeRuleGroupResponse#firewall_rule_group #firewall_rule_group} => Types::FirewallRuleGroup
+    #   * {Types::DescribeRuleGroupResponse#ips_rule_group #ips_rule_group} => Types::IpsRuleGroup
     #   * {Types::DescribeRuleGroupResponse#rule_group_response #rule_group_response} => Types::RuleGroupResponse
     #
     # @example Request syntax with placeholder values
@@ -3815,8 +3589,9 @@ module Aws::NetworkFirewall
     #   resp = client.describe_rule_group({
     #     rule_group_name: "ResourceName",
     #     rule_group_arn: "ResourceArn",
-    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN
+    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN, FIREWALL, IPS
     #     analyze_rule_group: false,
+    #     rule_output_format: "FIREWALL_RULES", # accepts FIREWALL_RULES, RULES_STRING
     #   })
     #
     # @example Response structure
@@ -3874,11 +3649,52 @@ module Aws::NetworkFirewall
     #   resp.rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions[0].action_definition.publish_metric_action.dimensions #=> Array
     #   resp.rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions[0].action_definition.publish_metric_action.dimensions[0].value #=> String
     #   resp.rule_group.stateful_rule_options.rule_order #=> String, one of "DEFAULT_ACTION_ORDER", "STRICT_ORDER"
+    #   resp.firewall_rule_group.rules_source.rules_string #=> String
+    #   resp.firewall_rule_group.rules_source.firewall_rules #=> Array
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].action #=> String, one of "ACCEPT", "DROP", "REJECT", "REJECT_DST", "REJECT_BOTH"
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].action_scope #=> String, one of "FLOW", "TX", "HOOK", "PACKET"
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].hook #=> String, one of "TCP_ALL", "TCP_FLOW_START", "TCP_PRE_FLOW", "TCP_PRE_STREAM", "SCTP_ALL", "SCTP_FLOW_START", "SCTP_PRE_FLOW", "SCTP_PRE_STREAM", "IPV6_ALL", "IPV6_FLOW_START", "IPV6_PRE_FLOW", "IPV6_PRE_STREAM", "ICMPV6_ALL", "ICMPV6_FLOW_START", "ICMPV6_PRE_FLOW", "ICMPV6_PRE_STREAM", "UDP_ALL", "UDP_FLOW_START", "UDP_PRE_FLOW", "UDP_PRE_STREAM", "ICMP_ALL", "ICMP_FLOW_START", "ICMP_PRE_FLOW", "ICMP_PRE_STREAM", "ICMPV4_ALL", "ICMPV4_FLOW_START", "ICMPV4_PRE_FLOW", "ICMPV4_PRE_STREAM", "IP_ALL", "IP_FLOW_START", "IP_PRE_FLOW", "IP_PRE_STREAM", "IPV4_ALL", "IPV4_FLOW_START", "IPV4_PRE_FLOW", "IPV4_PRE_STREAM", "TLS_CLIENT_STARTED", "TLS_CLIENT_HELLO", "TLS_CLIENT_CERT", "TLS_CLIENT_DATA", "TLS_CLIENT_FINISHED", "TLS_SERVER_STARTED", "TLS_SERVER_HELLO", "TLS_SERVER_CERT", "TLS_SERVER_DATA", "TLS_SERVER_FINISHED", "HTTP1_REQUEST_STARTED", "HTTP1_REQUEST_LINE", "HTTP1_REQUEST_HEADERS", "HTTP1_REQUEST_BODY", "HTTP1_REQUEST_TRAILER", "HTTP1_REQUEST_COMPLETE", "HTTP1_RESPONSE_STARTED", "HTTP1_RESPONSE_LINE", "HTTP1_RESPONSE_HEADERS", "HTTP1_RESPONSE_BODY", "HTTP1_RESPONSE_TRAILER", "HTTP1_RESPONSE_COMPLETE", "HTTP2_STREAM_REQUEST_STARTED", "HTTP2_STREAM_REQUEST_HEADERS", "HTTP2_STREAM_REQUEST_DATA", "HTTP2_STREAM_REQUEST_CLOSED", "HTTP2_STREAM_REQUEST_COMPLETE", "HTTP2_STREAM_RESPONSE_STARTED", "HTTP2_STREAM_RESPONSE_HEADERS", "HTTP2_STREAM_RESPONSE_DATA", "HTTP2_STREAM_RESPONSE_CLOSED", "HTTP2_STREAM_RESPONSE_COMPLETE", "HTTP2_GLOBAL_REQUEST_STARTED", "HTTP2_GLOBAL_REQUEST_COMPLETE", "HTTP2_GLOBAL_RESPONSE_STARTED", "HTTP2_GLOBAL_RESPONSE_COMPLETE", "DOH2_STREAM_REQUEST_STARTED", "DOH2_STREAM_REQUEST_HEADERS", "DOH2_STREAM_REQUEST_DATA", "DOH2_STREAM_REQUEST_CLOSED", "DOH2_STREAM_REQUEST_COMPLETE", "DOH2_STREAM_RESPONSE_STARTED", "DOH2_STREAM_RESPONSE_HEADERS", "DOH2_STREAM_RESPONSE_DATA", "DOH2_STREAM_RESPONSE_CLOSED", "DOH2_STREAM_RESPONSE_COMPLETE", "DOH2_GLOBAL_REQUEST_STARTED", "DOH2_GLOBAL_REQUEST_COMPLETE", "DOH2_GLOBAL_RESPONSE_STARTED", "DOH2_GLOBAL_RESPONSE_COMPLETE", "DNS_REQUEST_STARTED", "DNS_REQUEST_COMPLETE", "DNS_RESPONSE_STARTED", "DNS_RESPONSE_COMPLETE", "SMTP_REQUEST_STARTED", "SMTP_REQUEST_DATA", "SMTP_REQUEST_COMPLETE", "SMTP_RESPONSE_STARTED", "SMTP_RESPONSE_DATA", "SMTP_RESPONSE_COMPLETE", "FTP_REQUEST_STARTED", "FTP_REQUEST_COMPLETE", "FTP_RESPONSE_STARTED", "FTP_RESPONSE_COMPLETE", "FTP_DATA_REQUEST_STARTED", "FTP_DATA_REQUEST_COMPLETE", "FTP_DATA_RESPONSE_STARTED", "FTP_DATA_RESPONSE_COMPLETE", "SMB_REQUEST_STARTED", "SMB_REQUEST_COMPLETE", "SMB_RESPONSE_STARTED", "SMB_RESPONSE_COMPLETE", "DCERPC_REQUEST_STARTED", "DCERPC_REQUEST_COMPLETE", "DCERPC_RESPONSE_STARTED", "DCERPC_RESPONSE_COMPLETE", "NFS_REQUEST_STARTED", "NFS_REQUEST_COMPLETE", "NFS_RESPONSE_STARTED", "NFS_RESPONSE_COMPLETE", "KRB5_REQUEST_STARTED", "KRB5_REQUEST_COMPLETE", "KRB5_RESPONSE_STARTED", "KRB5_RESPONSE_COMPLETE", "IKE_REQUEST_STARTED", "IKE_REQUEST_COMPLETE", "IKE_RESPONSE_STARTED", "IKE_RESPONSE_COMPLETE", "TFTP_REQUEST_STARTED", "TFTP_REQUEST_COMPLETE", "TFTP_RESPONSE_STARTED", "TFTP_RESPONSE_COMPLETE", "DHCP_REQUEST_STARTED", "DHCP_REQUEST_COMPLETE", "DHCP_RESPONSE_STARTED", "DHCP_RESPONSE_COMPLETE", "QUIC_REQUEST_STARTED", "QUIC_REQUEST_COMPLETE", "QUIC_RESPONSE_STARTED", "QUIC_RESPONSE_COMPLETE", "RDP_REQUEST_STARTED", "RDP_REQUEST_COMPLETE", "RDP_RESPONSE_STARTED", "RDP_RESPONSE_COMPLETE", "RFB_REQUEST_STARTED", "RFB_REQUEST_COMPLETE", "RFB_RESPONSE_STARTED", "RFB_RESPONSE_COMPLETE", "MQTT_REQUEST_STARTED", "MQTT_REQUEST_COMPLETE", "MQTT_RESPONSE_STARTED", "MQTT_RESPONSE_COMPLETE", "PGSQL_REQUEST_STARTED", "PGSQL_REQUEST_COMPLETE", "PGSQL_RESPONSE_STARTED", "PGSQL_RESPONSE_COMPLETE", "SNMP_REQUEST_STARTED", "SNMP_REQUEST_COMPLETE", "SNMP_RESPONSE_STARTED", "SNMP_RESPONSE_COMPLETE", "NTP_REQUEST_STARTED", "NTP_REQUEST_COMPLETE", "NTP_RESPONSE_STARTED", "NTP_RESPONSE_COMPLETE", "TELNET_REQUEST_STARTED", "TELNET_REQUEST_COMPLETE", "TELNET_RESPONSE_STARTED", "TELNET_RESPONSE_COMPLETE", "WEBSOCKET_REQUEST_STARTED", "WEBSOCKET_REQUEST_COMPLETE", "WEBSOCKET_RESPONSE_STARTED", "WEBSOCKET_RESPONSE_COMPLETE", "LDAP_REQUEST_STARTED", "LDAP_REQUEST_COMPLETE", "LDAP_RESPONSE_STARTED", "LDAP_RESPONSE_COMPLETE", "POP3_REQUEST_STARTED", "POP3_REQUEST_COMPLETE", "POP3_RESPONSE_STARTED", "POP3_RESPONSE_COMPLETE", "MDNS_REQUEST_STARTED", "MDNS_REQUEST_COMPLETE", "MDNS_RESPONSE_STARTED", "MDNS_RESPONSE_COMPLETE", "BITTORRENT_DHT_REQUEST_STARTED", "BITTORRENT_DHT_REQUEST_COMPLETE", "BITTORRENT_DHT_RESPONSE_STARTED", "BITTORRENT_DHT_RESPONSE_COMPLETE", "DNP3_REQUEST_STARTED", "DNP3_REQUEST_COMPLETE", "DNP3_RESPONSE_STARTED", "DNP3_RESPONSE_COMPLETE", "SSH_REQUEST_IN_PROGRESS", "SSH_REQUEST_BANNER_WAIT_EOL", "SSH_REQUEST_BANNER_DONE", "SSH_REQUEST_FINISHED", "SSH_RESPONSE_IN_PROGRESS", "SSH_RESPONSE_BANNER_WAIT_EOL", "SSH_RESPONSE_BANNER_DONE", "SSH_RESPONSE_FINISHED"
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].protocol #=> String, one of "IP", "TCP", "UDP", "ICMP", "HTTP", "FTP", "TLS", "SMB", "DNS", "DCERPC", "SSH", "SMTP", "MSN", "KRB5", "IKEV2", "TFTP", "NTP", "DHCP", "HTTP2", "QUIC", "ICMPV4", "ICMPV6", "SCTP", "IPV4", "IPV6", "DOH2", "FTP_DATA", "NFS", "RDP", "RFB", "MQTT", "PGSQL", "SNMP", "TELNET", "WEBSOCKET", "LDAP", "POP3", "MDNS", "BITTORRENT_DHT", "DNP3"
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].source_i_ps #=> String
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].dest_i_ps #=> String
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].source_ports #=> String
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].dest_ports #=> String
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].rule_options #=> Array
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].rule_options[0].keyword #=> String
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].rule_options[0].settings #=> Array
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].rule_options[0].settings[0] #=> String
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].accept_prior_hooks #=> Boolean
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].alert_enabled #=> Boolean
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].bypass_ips_enabled #=> Boolean
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].rule_metadata.rule_enabled #=> Boolean
+    #   resp.firewall_rule_group.rules_source.firewall_rules[0].rule_metadata.rule_description #=> String
+    #   resp.firewall_rule_group.rules_source.rules_source_list.targets #=> Array
+    #   resp.firewall_rule_group.rules_source.rules_source_list.targets[0] #=> String
+    #   resp.firewall_rule_group.rules_source.rules_source_list.target_types #=> Array
+    #   resp.firewall_rule_group.rules_source.rules_source_list.target_types[0] #=> String, one of "TLS_SNI", "HTTP_HOST", "AWS_ROUTE_53_RESOLVED_DOMAIN"
+    #   resp.firewall_rule_group.rules_source.rules_source_list.generated_rules_type #=> String, one of "ALLOWLIST", "DENYLIST", "REJECTLIST", "ALERTLIST"
+    #   resp.firewall_rule_group.rule_variables.ip_sets #=> Hash
+    #   resp.firewall_rule_group.rule_variables.ip_sets["RuleVariableName"].definition #=> Array
+    #   resp.firewall_rule_group.rule_variables.ip_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.firewall_rule_group.rule_variables.port_sets #=> Hash
+    #   resp.firewall_rule_group.rule_variables.port_sets["RuleVariableName"].definition #=> Array
+    #   resp.firewall_rule_group.rule_variables.port_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.firewall_rule_group.reference_sets.ip_set_references #=> Hash
+    #   resp.firewall_rule_group.reference_sets.ip_set_references["IPSetReferenceName"].reference_arn #=> String
+    #   resp.ips_rule_group.rules_source.rules_string #=> String
+    #   resp.ips_rule_group.rule_variables.ip_sets #=> Hash
+    #   resp.ips_rule_group.rule_variables.ip_sets["RuleVariableName"].definition #=> Array
+    #   resp.ips_rule_group.rule_variables.ip_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.ips_rule_group.rule_variables.port_sets #=> Hash
+    #   resp.ips_rule_group.rule_variables.port_sets["RuleVariableName"].definition #=> Array
+    #   resp.ips_rule_group.rule_variables.port_sets["RuleVariableName"].definition[0] #=> String
+    #   resp.ips_rule_group.reference_sets.ip_set_references #=> Hash
+    #   resp.ips_rule_group.reference_sets.ip_set_references["IPSetReferenceName"].reference_arn #=> String
     #   resp.rule_group_response.rule_group_arn #=> String
     #   resp.rule_group_response.rule_group_name #=> String
     #   resp.rule_group_response.rule_group_id #=> String
     #   resp.rule_group_response.description #=> String
-    #   resp.rule_group_response.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN"
+    #   resp.rule_group_response.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN", "FIREWALL", "IPS"
     #   resp.rule_group_response.capacity #=> Integer
     #   resp.rule_group_response.rule_group_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
     #   resp.rule_group_response.tags #=> Array
@@ -3927,9 +3743,18 @@ module Aws::NetworkFirewall
     #   You must specify the ARN or the name, and you can specify both.
     #
     # @option params [String] :type
-    #   Indicates whether the rule group is stateless or stateful. If the rule
-    #   group is stateless, it contains stateless rules. If it is stateful, it
-    #   contains stateful rules.
+    #   Indicates the type of the rule group. Valid values are:
+    #
+    #   * `STATELESS` - Stateless rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `STATEFUL` - Stateful rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `FIREWALL` - Firewall engine rules, for use in a Next Generation
+    #     policy.
+    #
+    #   * `IPS` - IPS engine rules, for use in a Next Generation policy.
     #
     #   <note markdown="1"> This setting is required for requests that do not include the
     #   `RuleGroupARN`.
@@ -3954,7 +3779,7 @@ module Aws::NetworkFirewall
     #   resp = client.describe_rule_group_metadata({
     #     rule_group_name: "ResourceName",
     #     rule_group_arn: "ResourceArn",
-    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN
+    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN, FIREWALL, IPS
     #   })
     #
     # @example Response structure
@@ -3962,7 +3787,7 @@ module Aws::NetworkFirewall
     #   resp.rule_group_arn #=> String
     #   resp.rule_group_name #=> String
     #   resp.description #=> String
-    #   resp.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN"
+    #   resp.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN", "FIREWALL", "IPS"
     #   resp.capacity #=> Integer
     #   resp.stateful_rule_options.rule_order #=> String, one of "DEFAULT_ACTION_ORDER", "STRICT_ORDER"
     #   resp.last_modified_time #=> Time
@@ -4021,7 +3846,7 @@ module Aws::NetworkFirewall
     #   resp = client.describe_rule_group_summary({
     #     rule_group_name: "ResourceName",
     #     rule_group_arn: "ResourceArn",
-    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN
+    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN, FIREWALL, IPS
     #   })
     #
     # @example Response structure
@@ -4088,9 +3913,14 @@ module Aws::NetworkFirewall
     #   resp.tls_inspection_configuration.server_certificate_configurations[0].scopes[0].destination_ports[0].to_port #=> Integer
     #   resp.tls_inspection_configuration.server_certificate_configurations[0].scopes[0].protocols #=> Array
     #   resp.tls_inspection_configuration.server_certificate_configurations[0].scopes[0].protocols[0] #=> Integer
+    #   resp.tls_inspection_configuration.server_certificate_configurations[0].scopes[0].domain_match.domains #=> Array
+    #   resp.tls_inspection_configuration.server_certificate_configurations[0].scopes[0].domain_match.domains[0] #=> String
+    #   resp.tls_inspection_configuration.server_certificate_configurations[0].scopes[0].decryption_action #=> String, one of "DECRYPT", "BYPASS"
+    #   resp.tls_inspection_configuration.server_certificate_configurations[0].scopes[0].deployment_mode #=> String, one of "TRANSPARENT_FIREWALL_ONLY", "EXPLICIT_PROXY_ONLY", "ALL"
     #   resp.tls_inspection_configuration.server_certificate_configurations[0].certificate_authority_arn #=> String
     #   resp.tls_inspection_configuration.server_certificate_configurations[0].check_certificate_revocation_status.revoked_status_action #=> String, one of "PASS", "DROP", "REJECT"
     #   resp.tls_inspection_configuration.server_certificate_configurations[0].check_certificate_revocation_status.unknown_status_action #=> String, one of "PASS", "DROP", "REJECT"
+    #   resp.tls_inspection_configuration.server_certificate_configurations[0].default_decryption_behavior #=> String, one of "DECRYPT", "BYPASS"
     #   resp.tls_inspection_configuration_response.tls_inspection_configuration_arn #=> String
     #   resp.tls_inspection_configuration_response.tls_inspection_configuration_name #=> String
     #   resp.tls_inspection_configuration_response.tls_inspection_configuration_id #=> String
@@ -4164,87 +3994,6 @@ module Aws::NetworkFirewall
     # @param [Hash] params ({})
     def describe_vpc_endpoint_association(params = {}, options = {})
       req = build_request(:describe_vpc_endpoint_association, params)
-      req.send_request(options)
-    end
-
-    # Detaches ProxyRuleGroup resources from a ProxyConfiguration
-    #
-    # A Proxy Configuration defines the monitoring and protection behavior
-    # for a Proxy. The details of the behavior are defined in the rule
-    # groups that you add to your configuration.
-    #
-    # @option params [String] :proxy_configuration_name
-    #   The descriptive name of the proxy configuration. You can't change the
-    #   name of a proxy configuration after you create it.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [String] :proxy_configuration_arn
-    #   The Amazon Resource Name (ARN) of a proxy configuration.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [Array<String>] :rule_group_names
-    #   The proxy rule group names to detach from the proxy configuration
-    #
-    # @option params [Array<String>] :rule_group_arns
-    #   The proxy rule group arns to detach from the proxy configuration
-    #
-    # @option params [required, String] :update_token
-    #   A token used for optimistic locking. Network Firewall returns a token
-    #   to your requests that access the proxy configuration. The token marks
-    #   the state of the proxy configuration resource at the time of the
-    #   request.
-    #
-    #   To make changes to the proxy configuration, you provide the token in
-    #   your request. Network Firewall uses the token to ensure that the proxy
-    #   configuration hasn't changed since you last retrieved it. If it has
-    #   changed, the operation fails with an `InvalidTokenException`. If this
-    #   happens, retrieve the proxy configuration again to get a current copy
-    #   of it with a current token. Reapply your changes as needed, then try
-    #   the operation again using the new token.
-    #
-    # @return [Types::DetachRuleGroupsFromProxyConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::DetachRuleGroupsFromProxyConfigurationResponse#proxy_configuration #proxy_configuration} => Types::ProxyConfiguration
-    #   * {Types::DetachRuleGroupsFromProxyConfigurationResponse#update_token #update_token} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.detach_rule_groups_from_proxy_configuration({
-    #     proxy_configuration_name: "ResourceName",
-    #     proxy_configuration_arn: "ResourceArn",
-    #     rule_group_names: ["ResourceName"],
-    #     rule_group_arns: ["ResourceArn"],
-    #     update_token: "UpdateToken", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.proxy_configuration.proxy_configuration_name #=> String
-    #   resp.proxy_configuration.proxy_configuration_arn #=> String
-    #   resp.proxy_configuration.description #=> String
-    #   resp.proxy_configuration.create_time #=> Time
-    #   resp.proxy_configuration.delete_time #=> Time
-    #   resp.proxy_configuration.rule_groups #=> Array
-    #   resp.proxy_configuration.rule_groups[0].proxy_rule_group_name #=> String
-    #   resp.proxy_configuration.rule_groups[0].proxy_rule_group_arn #=> String
-    #   resp.proxy_configuration.rule_groups[0].type #=> String
-    #   resp.proxy_configuration.rule_groups[0].priority #=> Integer
-    #   resp.proxy_configuration.default_rule_phase_actions.pre_dns #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_configuration.default_rule_phase_actions.pre_request #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_configuration.default_rule_phase_actions.post_response #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_configuration.tags #=> Array
-    #   resp.proxy_configuration.tags[0].key #=> String
-    #   resp.proxy_configuration.tags[0].value #=> String
-    #   resp.update_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DetachRuleGroupsFromProxyConfiguration AWS API Documentation
-    #
-    # @overload detach_rule_groups_from_proxy_configuration(params = {})
-    # @param [Hash] params ({})
-    def detach_rule_groups_from_proxy_configuration(params = {}, options = {})
-      req = build_request(:detach_rule_groups_from_proxy_configuration, params)
       req.send_request(options)
     end
 
@@ -4336,6 +4085,13 @@ module Aws::NetworkFirewall
     # Removes the specified subnet associations from the firewall. This
     # removes the firewall endpoints from the subnets and removes any
     # network filtering protections that the endpoints were providing.
+    #
+    # For a proxy mode firewall, this also removes the firewall's proxy DNS
+    # record in the Availability Zone and detaches the Availability Zone's
+    # NAT gateway from the firewall. Network Firewall keeps the NAT gateway.
+    # You can't remove the firewall's last Availability Zone. To do that,
+    # delete the firewall. If a VPC endpoint association exists in the
+    # Availability Zone, delete it first.
     #
     # @option params [String] :update_token
     #   An optional token that you can use for optimistic locking. Network
@@ -4639,6 +4395,53 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Retrieves the metadata for the Next Generation policies that you have
+    # defined. Depending on your setting for max results and the number of
+    # firewall policies, a single call might not return the full list.
+    #
+    # @option params [String] :next_token
+    #   When you request a list of objects with a `MaxResults` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   maximum you requested, Network Firewall returns a `NextToken` value in
+    #   the response. To retrieve the next batch of objects, use the token
+    #   returned from the prior request in your next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that you want Network Firewall to return
+    #   for this request. If more objects are available, in the response,
+    #   Network Firewall provides a `NextToken` value that you can use in a
+    #   subsequent call to get the next batch of objects.
+    #
+    # @return [Types::ListFirewallPoliciesV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFirewallPoliciesV2Response#next_token #next_token} => String
+    #   * {Types::ListFirewallPoliciesV2Response#firewall_policies_v2 #firewall_policies_v2} => Array&lt;Types::FirewallPolicyV2Metadata&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_firewall_policies_v2({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.firewall_policies_v2 #=> Array
+    #   resp.firewall_policies_v2[0].name #=> String
+    #   resp.firewall_policies_v2[0].arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListFirewallPoliciesV2 AWS API Documentation
+    #
+    # @overload list_firewall_policies_v2(params = {})
+    # @param [Hash] params ({})
+    def list_firewall_policies_v2(params = {}, options = {})
+      req = build_request(:list_firewall_policies_v2, params)
+      req.send_request(options)
+    end
+
     # Retrieves the metadata for the firewalls that you have defined. If you
     # provide VPC identifiers in your request, this returns only the
     # firewalls for those VPCs.
@@ -4902,147 +4705,6 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
-    # Retrieves the metadata for the proxies that you have defined.
-    # Depending on your setting for max results and the number of proxies, a
-    # single call might not return the full list.
-    #
-    # @option params [String] :next_token
-    #   When you request a list of objects with a `MaxResults` setting, if the
-    #   number of objects that are still available for retrieval exceeds the
-    #   maximum you requested, Network Firewall returns a `NextToken` value in
-    #   the response. To retrieve the next batch of objects, use the token
-    #   returned from the prior request in your next request.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of objects that you want Network Firewall to return
-    #   for this request. If more objects are available, in the response,
-    #   Network Firewall provides a `NextToken` value that you can use in a
-    #   subsequent call to get the next batch of objects.
-    #
-    # @return [Types::ListProxiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ListProxiesResponse#proxies #proxies} => Array&lt;Types::ProxyMetadata&gt;
-    #   * {Types::ListProxiesResponse#next_token #next_token} => String
-    #
-    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.list_proxies({
-    #     next_token: "PaginationToken",
-    #     max_results: 1,
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.proxies #=> Array
-    #   resp.proxies[0].name #=> String
-    #   resp.proxies[0].arn #=> String
-    #   resp.next_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListProxies AWS API Documentation
-    #
-    # @overload list_proxies(params = {})
-    # @param [Hash] params ({})
-    def list_proxies(params = {}, options = {})
-      req = build_request(:list_proxies, params)
-      req.send_request(options)
-    end
-
-    # Retrieves the metadata for the proxy configuration that you have
-    # defined. Depending on your setting for max results and the number of
-    # proxy configurations, a single call might not return the full list.
-    #
-    # @option params [String] :next_token
-    #   When you request a list of objects with a `MaxResults` setting, if the
-    #   number of objects that are still available for retrieval exceeds the
-    #   maximum you requested, Network Firewall returns a `NextToken` value in
-    #   the response. To retrieve the next batch of objects, use the token
-    #   returned from the prior request in your next request.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of objects that you want Network Firewall to return
-    #   for this request. If more objects are available, in the response,
-    #   Network Firewall provides a `NextToken` value that you can use in a
-    #   subsequent call to get the next batch of objects.
-    #
-    # @return [Types::ListProxyConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ListProxyConfigurationsResponse#proxy_configurations #proxy_configurations} => Array&lt;Types::ProxyConfigurationMetadata&gt;
-    #   * {Types::ListProxyConfigurationsResponse#next_token #next_token} => String
-    #
-    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.list_proxy_configurations({
-    #     next_token: "PaginationToken",
-    #     max_results: 1,
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.proxy_configurations #=> Array
-    #   resp.proxy_configurations[0].name #=> String
-    #   resp.proxy_configurations[0].arn #=> String
-    #   resp.next_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListProxyConfigurations AWS API Documentation
-    #
-    # @overload list_proxy_configurations(params = {})
-    # @param [Hash] params ({})
-    def list_proxy_configurations(params = {}, options = {})
-      req = build_request(:list_proxy_configurations, params)
-      req.send_request(options)
-    end
-
-    # Retrieves the metadata for the proxy rule groups that you have
-    # defined. Depending on your setting for max results and the number of
-    # proxy rule groups, a single call might not return the full list.
-    #
-    # @option params [String] :next_token
-    #   When you request a list of objects with a `MaxResults` setting, if the
-    #   number of objects that are still available for retrieval exceeds the
-    #   maximum you requested, Network Firewall returns a `NextToken` value in
-    #   the response. To retrieve the next batch of objects, use the token
-    #   returned from the prior request in your next request.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of objects that you want Network Firewall to return
-    #   for this request. If more objects are available, in the response,
-    #   Network Firewall provides a `NextToken` value that you can use in a
-    #   subsequent call to get the next batch of objects.
-    #
-    # @return [Types::ListProxyRuleGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ListProxyRuleGroupsResponse#proxy_rule_groups #proxy_rule_groups} => Array&lt;Types::ProxyRuleGroupMetadata&gt;
-    #   * {Types::ListProxyRuleGroupsResponse#next_token #next_token} => String
-    #
-    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.list_proxy_rule_groups({
-    #     next_token: "PaginationToken",
-    #     max_results: 1,
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.proxy_rule_groups #=> Array
-    #   resp.proxy_rule_groups[0].name #=> String
-    #   resp.proxy_rule_groups[0].arn #=> String
-    #   resp.next_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListProxyRuleGroups AWS API Documentation
-    #
-    # @overload list_proxy_rule_groups(params = {})
-    # @param [Hash] params ({})
-    def list_proxy_rule_groups(params = {}, options = {})
-      req = build_request(:list_proxy_rule_groups, params)
-      req.send_request(options)
-    end
-
     # Retrieves the metadata for the rule groups that you have defined.
     # Depending on your setting for max results and the number of rule
     # groups, a single call might not return the full list.
@@ -5094,7 +4756,7 @@ module Aws::NetworkFirewall
     #     scope: "MANAGED", # accepts MANAGED, ACCOUNT
     #     managed_type: "AWS_MANAGED_THREAT_SIGNATURES", # accepts AWS_MANAGED_THREAT_SIGNATURES, AWS_MANAGED_DOMAIN_LISTS, ACTIVE_THREAT_DEFENSE, PARTNER_MANAGED
     #     subscription_status: "NOT_SUBSCRIBED", # accepts NOT_SUBSCRIBED, SUBSCRIBED
-    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN
+    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN, FIREWALL, IPS
     #   })
     #
     # @example Response structure
@@ -6455,6 +6117,235 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Updates the properties of the specified Next Generation policy.
+    #
+    # @option params [required, String] :update_token
+    #   A token used for optimistic locking. Network Firewall returns a token
+    #   to your requests that access the firewall policy. The token marks the
+    #   state of the policy resource at the time of the request.
+    #
+    #   To make changes to the policy, you provide the token in your request.
+    #   Network Firewall uses the token to ensure that the policy hasn't
+    #   changed since you last retrieved it. If it has changed, the operation
+    #   fails with an `InvalidTokenException`. If this happens, retrieve the
+    #   firewall policy again to get a current copy of it with current token.
+    #   Reapply your changes as needed, then try the operation again using the
+    #   new token.
+    #
+    # @option params [String] :firewall_policy_v2_arn
+    #   The Amazon Resource Name (ARN) of the Next Generation policy.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :firewall_policy_v2_name
+    #   The descriptive name of the Next Generation policy. You can't change
+    #   the name of a firewall policy after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [required, Types::FirewallPolicyV2] :firewall_policy_v2
+    #   The updated rule groups and other settings that define the Next
+    #   Generation policy.
+    #
+    # @option params [String] :description
+    #   A description of the firewall policy.
+    #
+    # @option params [Boolean] :dry_run
+    #   Indicates whether you want Network Firewall to just check the validity
+    #   of the request, rather than run the request.
+    #
+    #   If set to `TRUE`, Network Firewall checks whether the request can run
+    #   successfully, but doesn't actually make the requested changes. The
+    #   call returns the value that the request would return if you ran it
+    #   with dry run set to `FALSE`, but doesn't make additions or changes to
+    #   your resources. This option allows you to make sure that you have the
+    #   required permissions to run the request and that your request
+    #   parameters are valid.
+    #
+    #   If set to `FALSE`, Network Firewall makes the requested changes to
+    #   your resources.
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   A complex type that contains settings for encryption of your firewall
+    #   policy resources.
+    #
+    # @return [Types::UpdateFirewallPolicyV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFirewallPolicyV2Response#update_token #update_token} => String
+    #   * {Types::UpdateFirewallPolicyV2Response#firewall_policy_v2_response #firewall_policy_v2_response} => Types::FirewallPolicyV2Response
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_firewall_policy_v2({
+    #     update_token: "UpdateToken", # required
+    #     firewall_policy_v2_arn: "ResourceArn",
+    #     firewall_policy_v2_name: "ResourceName",
+    #     firewall_policy_v2: { # required
+    #       firewall_rule_group_entries: [
+    #         {
+    #           priority: 1,
+    #           resource_arn: "ResourceArn",
+    #           inline_rule_group: {
+    #             rules_source: { # required
+    #               rules_string: "RulesString",
+    #               firewall_rules: [
+    #                 {
+    #                   action: "ACCEPT", # required, accepts ACCEPT, DROP, REJECT, REJECT_DST, REJECT_BOTH
+    #                   action_scope: "FLOW", # required, accepts FLOW, TX, HOOK, PACKET
+    #                   hook: "TCP_ALL", # required, accepts TCP_ALL, TCP_FLOW_START, TCP_PRE_FLOW, TCP_PRE_STREAM, SCTP_ALL, SCTP_FLOW_START, SCTP_PRE_FLOW, SCTP_PRE_STREAM, IPV6_ALL, IPV6_FLOW_START, IPV6_PRE_FLOW, IPV6_PRE_STREAM, ICMPV6_ALL, ICMPV6_FLOW_START, ICMPV6_PRE_FLOW, ICMPV6_PRE_STREAM, UDP_ALL, UDP_FLOW_START, UDP_PRE_FLOW, UDP_PRE_STREAM, ICMP_ALL, ICMP_FLOW_START, ICMP_PRE_FLOW, ICMP_PRE_STREAM, ICMPV4_ALL, ICMPV4_FLOW_START, ICMPV4_PRE_FLOW, ICMPV4_PRE_STREAM, IP_ALL, IP_FLOW_START, IP_PRE_FLOW, IP_PRE_STREAM, IPV4_ALL, IPV4_FLOW_START, IPV4_PRE_FLOW, IPV4_PRE_STREAM, TLS_CLIENT_STARTED, TLS_CLIENT_HELLO, TLS_CLIENT_CERT, TLS_CLIENT_DATA, TLS_CLIENT_FINISHED, TLS_SERVER_STARTED, TLS_SERVER_HELLO, TLS_SERVER_CERT, TLS_SERVER_DATA, TLS_SERVER_FINISHED, HTTP1_REQUEST_STARTED, HTTP1_REQUEST_LINE, HTTP1_REQUEST_HEADERS, HTTP1_REQUEST_BODY, HTTP1_REQUEST_TRAILER, HTTP1_REQUEST_COMPLETE, HTTP1_RESPONSE_STARTED, HTTP1_RESPONSE_LINE, HTTP1_RESPONSE_HEADERS, HTTP1_RESPONSE_BODY, HTTP1_RESPONSE_TRAILER, HTTP1_RESPONSE_COMPLETE, HTTP2_STREAM_REQUEST_STARTED, HTTP2_STREAM_REQUEST_HEADERS, HTTP2_STREAM_REQUEST_DATA, HTTP2_STREAM_REQUEST_CLOSED, HTTP2_STREAM_REQUEST_COMPLETE, HTTP2_STREAM_RESPONSE_STARTED, HTTP2_STREAM_RESPONSE_HEADERS, HTTP2_STREAM_RESPONSE_DATA, HTTP2_STREAM_RESPONSE_CLOSED, HTTP2_STREAM_RESPONSE_COMPLETE, HTTP2_GLOBAL_REQUEST_STARTED, HTTP2_GLOBAL_REQUEST_COMPLETE, HTTP2_GLOBAL_RESPONSE_STARTED, HTTP2_GLOBAL_RESPONSE_COMPLETE, DOH2_STREAM_REQUEST_STARTED, DOH2_STREAM_REQUEST_HEADERS, DOH2_STREAM_REQUEST_DATA, DOH2_STREAM_REQUEST_CLOSED, DOH2_STREAM_REQUEST_COMPLETE, DOH2_STREAM_RESPONSE_STARTED, DOH2_STREAM_RESPONSE_HEADERS, DOH2_STREAM_RESPONSE_DATA, DOH2_STREAM_RESPONSE_CLOSED, DOH2_STREAM_RESPONSE_COMPLETE, DOH2_GLOBAL_REQUEST_STARTED, DOH2_GLOBAL_REQUEST_COMPLETE, DOH2_GLOBAL_RESPONSE_STARTED, DOH2_GLOBAL_RESPONSE_COMPLETE, DNS_REQUEST_STARTED, DNS_REQUEST_COMPLETE, DNS_RESPONSE_STARTED, DNS_RESPONSE_COMPLETE, SMTP_REQUEST_STARTED, SMTP_REQUEST_DATA, SMTP_REQUEST_COMPLETE, SMTP_RESPONSE_STARTED, SMTP_RESPONSE_DATA, SMTP_RESPONSE_COMPLETE, FTP_REQUEST_STARTED, FTP_REQUEST_COMPLETE, FTP_RESPONSE_STARTED, FTP_RESPONSE_COMPLETE, FTP_DATA_REQUEST_STARTED, FTP_DATA_REQUEST_COMPLETE, FTP_DATA_RESPONSE_STARTED, FTP_DATA_RESPONSE_COMPLETE, SMB_REQUEST_STARTED, SMB_REQUEST_COMPLETE, SMB_RESPONSE_STARTED, SMB_RESPONSE_COMPLETE, DCERPC_REQUEST_STARTED, DCERPC_REQUEST_COMPLETE, DCERPC_RESPONSE_STARTED, DCERPC_RESPONSE_COMPLETE, NFS_REQUEST_STARTED, NFS_REQUEST_COMPLETE, NFS_RESPONSE_STARTED, NFS_RESPONSE_COMPLETE, KRB5_REQUEST_STARTED, KRB5_REQUEST_COMPLETE, KRB5_RESPONSE_STARTED, KRB5_RESPONSE_COMPLETE, IKE_REQUEST_STARTED, IKE_REQUEST_COMPLETE, IKE_RESPONSE_STARTED, IKE_RESPONSE_COMPLETE, TFTP_REQUEST_STARTED, TFTP_REQUEST_COMPLETE, TFTP_RESPONSE_STARTED, TFTP_RESPONSE_COMPLETE, DHCP_REQUEST_STARTED, DHCP_REQUEST_COMPLETE, DHCP_RESPONSE_STARTED, DHCP_RESPONSE_COMPLETE, QUIC_REQUEST_STARTED, QUIC_REQUEST_COMPLETE, QUIC_RESPONSE_STARTED, QUIC_RESPONSE_COMPLETE, RDP_REQUEST_STARTED, RDP_REQUEST_COMPLETE, RDP_RESPONSE_STARTED, RDP_RESPONSE_COMPLETE, RFB_REQUEST_STARTED, RFB_REQUEST_COMPLETE, RFB_RESPONSE_STARTED, RFB_RESPONSE_COMPLETE, MQTT_REQUEST_STARTED, MQTT_REQUEST_COMPLETE, MQTT_RESPONSE_STARTED, MQTT_RESPONSE_COMPLETE, PGSQL_REQUEST_STARTED, PGSQL_REQUEST_COMPLETE, PGSQL_RESPONSE_STARTED, PGSQL_RESPONSE_COMPLETE, SNMP_REQUEST_STARTED, SNMP_REQUEST_COMPLETE, SNMP_RESPONSE_STARTED, SNMP_RESPONSE_COMPLETE, NTP_REQUEST_STARTED, NTP_REQUEST_COMPLETE, NTP_RESPONSE_STARTED, NTP_RESPONSE_COMPLETE, TELNET_REQUEST_STARTED, TELNET_REQUEST_COMPLETE, TELNET_RESPONSE_STARTED, TELNET_RESPONSE_COMPLETE, WEBSOCKET_REQUEST_STARTED, WEBSOCKET_REQUEST_COMPLETE, WEBSOCKET_RESPONSE_STARTED, WEBSOCKET_RESPONSE_COMPLETE, LDAP_REQUEST_STARTED, LDAP_REQUEST_COMPLETE, LDAP_RESPONSE_STARTED, LDAP_RESPONSE_COMPLETE, POP3_REQUEST_STARTED, POP3_REQUEST_COMPLETE, POP3_RESPONSE_STARTED, POP3_RESPONSE_COMPLETE, MDNS_REQUEST_STARTED, MDNS_REQUEST_COMPLETE, MDNS_RESPONSE_STARTED, MDNS_RESPONSE_COMPLETE, BITTORRENT_DHT_REQUEST_STARTED, BITTORRENT_DHT_REQUEST_COMPLETE, BITTORRENT_DHT_RESPONSE_STARTED, BITTORRENT_DHT_RESPONSE_COMPLETE, DNP3_REQUEST_STARTED, DNP3_REQUEST_COMPLETE, DNP3_RESPONSE_STARTED, DNP3_RESPONSE_COMPLETE, SSH_REQUEST_IN_PROGRESS, SSH_REQUEST_BANNER_WAIT_EOL, SSH_REQUEST_BANNER_DONE, SSH_REQUEST_FINISHED, SSH_RESPONSE_IN_PROGRESS, SSH_RESPONSE_BANNER_WAIT_EOL, SSH_RESPONSE_BANNER_DONE, SSH_RESPONSE_FINISHED
+    #                   protocol: "IP", # required, accepts IP, TCP, UDP, ICMP, HTTP, FTP, TLS, SMB, DNS, DCERPC, SSH, SMTP, MSN, KRB5, IKEV2, TFTP, NTP, DHCP, HTTP2, QUIC, ICMPV4, ICMPV6, SCTP, IPV4, IPV6, DOH2, FTP_DATA, NFS, RDP, RFB, MQTT, PGSQL, SNMP, TELNET, WEBSOCKET, LDAP, POP3, MDNS, BITTORRENT_DHT, DNP3
+    #                   source_i_ps: "Source",
+    #                   dest_i_ps: "Destination",
+    #                   source_ports: "Port",
+    #                   dest_ports: "Port",
+    #                   rule_options: [
+    #                     {
+    #                       keyword: "Keyword", # required
+    #                       settings: ["Setting"],
+    #                     },
+    #                   ],
+    #                   accept_prior_hooks: false,
+    #                   alert_enabled: false,
+    #                   bypass_ips_enabled: false,
+    #                   rule_metadata: {
+    #                     rule_enabled: false,
+    #                     rule_description: "RuleDescriptionText",
+    #                   },
+    #                 },
+    #               ],
+    #               rules_source_list: {
+    #                 targets: ["CollectionMember_String"], # required
+    #                 target_types: ["TLS_SNI"], # required, accepts TLS_SNI, HTTP_HOST, AWS_ROUTE_53_RESOLVED_DOMAIN
+    #                 generated_rules_type: "ALLOWLIST", # required, accepts ALLOWLIST, DENYLIST, REJECTLIST, ALERTLIST
+    #               },
+    #             },
+    #             rule_variables: {
+    #               ip_sets: {
+    #                 "RuleVariableName" => {
+    #                   definition: ["VariableDefinition"], # required
+    #                 },
+    #               },
+    #               port_sets: {
+    #                 "RuleVariableName" => {
+    #                   definition: ["VariableDefinition"],
+    #                 },
+    #               },
+    #             },
+    #             reference_sets: {
+    #               ip_set_references: {
+    #                 "IPSetReferenceName" => {
+    #                   reference_arn: "ResourceArn",
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
+    #       ],
+    #       ips_rule_group_entries: [
+    #         {
+    #           resource_arn: "ResourceArn",
+    #           inline_rule_group: {
+    #             rules_source: { # required
+    #               rules_string: "RulesString",
+    #             },
+    #             rule_variables: {
+    #               ip_sets: {
+    #                 "RuleVariableName" => {
+    #                   definition: ["VariableDefinition"], # required
+    #                 },
+    #               },
+    #               port_sets: {
+    #                 "RuleVariableName" => {
+    #                   definition: ["VariableDefinition"],
+    #                 },
+    #               },
+    #             },
+    #             reference_sets: {
+    #               ip_set_references: {
+    #                 "IPSetReferenceName" => {
+    #                   reference_arn: "ResourceArn",
+    #                 },
+    #               },
+    #             },
+    #           },
+    #           override: {
+    #             action: "DROP_TO_ALERT", # accepts DROP_TO_ALERT
+    #           },
+    #         },
+    #       ],
+    #       policy_mode: "ENFORCE", # accepts ENFORCE, MONITOR
+    #       firewall_default_action: "DROP", # accepts DROP, ACCEPT, REJECT, ALERT
+    #       stateful_engine_options: {
+    #         stream_exception_policy: "DROP", # accepts DROP, REJECT
+    #         flow_timeouts: {
+    #           tcp_idle_timeout_seconds: 1,
+    #         },
+    #       },
+    #       tls_inspection_configuration_arn: "ResourceArn",
+    #       policy_variables: {
+    #         rule_variables: {
+    #           "RuleVariableName" => {
+    #             definition: ["VariableDefinition"], # required
+    #           },
+    #         },
+    #       },
+    #       route_53_resolved_ip_validation: {
+    #         action: "REJECT", # required, accepts REJECT, DROP, ALERT
+    #         dns_firewall_rule_group_id: "DNSFirewallRuleGroupId", # required
+    #         dns_expiry_exception_policy: "REJECT", # required, accepts REJECT, DROP, CONTINUE
+    #         bypass_destination_validation_ip_ranges: [
+    #           {
+    #             address_definition: "AddressDefinition", # required
+    #           },
+    #         ],
+    #         source_ip_ranges: [
+    #           {
+    #             address_definition: "AddressDefinition", # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     description: "Description",
+    #     dry_run: false,
+    #     encryption_configuration: {
+    #       key_id: "KeyId",
+    #       type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update_token #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_name #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_arn #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_id #=> String
+    #   resp.firewall_policy_v2_response.description #=> String
+    #   resp.firewall_policy_v2_response.firewall_policy_v2_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
+    #   resp.firewall_policy_v2_response.status_message #=> String
+    #   resp.firewall_policy_v2_response.tags #=> Array
+    #   resp.firewall_policy_v2_response.tags[0].key #=> String
+    #   resp.firewall_policy_v2_response.tags[0].value #=> String
+    #   resp.firewall_policy_v2_response.consumed_firewall_rule_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.consumed_ips_rule_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.consumed_ips_domain_capacity #=> Integer
+    #   resp.firewall_policy_v2_response.number_of_associations #=> Integer
+    #   resp.firewall_policy_v2_response.encryption_configuration.key_id #=> String
+    #   resp.firewall_policy_v2_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall_policy_v2_response.errors #=> Array
+    #   resp.firewall_policy_v2_response.errors[0].code #=> String, one of "DNS_FIREWALL_RULE_GROUP_UNAVAILABLE", "ROUTE53_RESOLVED_IP_VALIDATION_MISSING"
+    #   resp.firewall_policy_v2_response.errors[0].message #=> String
+    #   resp.firewall_policy_v2_response.errors[0].resource_id #=> String
+    #   resp.firewall_policy_v2_response.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateFirewallPolicyV2 AWS API Documentation
+    #
+    # @overload update_firewall_policy_v2(params = {})
+    # @param [Hash] params ({})
+    def update_firewall_policy_v2(params = {}, options = {})
+      req = build_request(:update_firewall_policy_v2, params)
+      req.send_request(options)
+    end
+
     # Sets the logging configuration for the specified firewall.
     #
     # To change the logging configuration, retrieve the LoggingConfiguration
@@ -6554,434 +6445,15 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
-    # Updates the properties of the specified proxy.
-    #
-    # @option params [required, String] :nat_gateway_id
-    #   The NAT Gateway the proxy is attached to.
-    #
-    # @option params [String] :proxy_name
-    #   The descriptive name of the proxy. You can't change the name of a
-    #   proxy after you create it.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [String] :proxy_arn
-    #   The Amazon Resource Name (ARN) of a proxy.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [Array<Types::ListenerPropertyRequest>] :listener_properties_to_add
-    #   Listener properties for HTTP and HTTPS traffic to add.
-    #
-    # @option params [Array<Types::ListenerPropertyRequest>] :listener_properties_to_remove
-    #   Listener properties for HTTP and HTTPS traffic to remove.
-    #
-    # @option params [Types::TlsInterceptPropertiesRequest] :tls_intercept_properties
-    #   TLS decryption on traffic to filter on attributes in the HTTP header.
-    #
-    # @option params [required, String] :update_token
-    #   A token used for optimistic locking. Network Firewall returns a token
-    #   to your requests that access the proxy. The token marks the state of
-    #   the proxy resource at the time of the request.
-    #
-    #   To make changes to the proxy, you provide the token in your request.
-    #   Network Firewall uses the token to ensure that the proxy hasn't
-    #   changed since you last retrieved it. If it has changed, the operation
-    #   fails with an `InvalidTokenException`. If this happens, retrieve the
-    #   proxy again to get a current copy of it with a current token. Reapply
-    #   your changes as needed, then try the operation again using the new
-    #   token.
-    #
-    # @return [Types::UpdateProxyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::UpdateProxyResponse#proxy #proxy} => Types::Proxy
-    #   * {Types::UpdateProxyResponse#update_token #update_token} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.update_proxy({
-    #     nat_gateway_id: "NatGatewayId", # required
-    #     proxy_name: "ResourceName",
-    #     proxy_arn: "ResourceArn",
-    #     listener_properties_to_add: [
-    #       {
-    #         port: 1, # required
-    #         type: "HTTP", # required, accepts HTTP, HTTPS
-    #       },
-    #     ],
-    #     listener_properties_to_remove: [
-    #       {
-    #         port: 1, # required
-    #         type: "HTTP", # required, accepts HTTP, HTTPS
-    #       },
-    #     ],
-    #     tls_intercept_properties: {
-    #       pca_arn: "ResourceArn",
-    #       tls_intercept_mode: "ENABLED", # accepts ENABLED, DISABLED
-    #     },
-    #     update_token: "UpdateToken", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.proxy.create_time #=> Time
-    #   resp.proxy.delete_time #=> Time
-    #   resp.proxy.update_time #=> Time
-    #   resp.proxy.failure_code #=> String
-    #   resp.proxy.failure_message #=> String
-    #   resp.proxy.proxy_state #=> String, one of "ATTACHING", "ATTACHED", "DETACHING", "DETACHED", "ATTACH_FAILED", "DETACH_FAILED"
-    #   resp.proxy.proxy_modify_state #=> String, one of "MODIFYING", "COMPLETED", "FAILED"
-    #   resp.proxy.nat_gateway_id #=> String
-    #   resp.proxy.proxy_configuration_name #=> String
-    #   resp.proxy.proxy_configuration_arn #=> String
-    #   resp.proxy.proxy_name #=> String
-    #   resp.proxy.proxy_arn #=> String
-    #   resp.proxy.listener_properties #=> Array
-    #   resp.proxy.listener_properties[0].port #=> Integer
-    #   resp.proxy.listener_properties[0].type #=> String, one of "HTTP", "HTTPS"
-    #   resp.proxy.tls_intercept_properties.pca_arn #=> String
-    #   resp.proxy.tls_intercept_properties.tls_intercept_mode #=> String, one of "ENABLED", "DISABLED"
-    #   resp.proxy.tags #=> Array
-    #   resp.proxy.tags[0].key #=> String
-    #   resp.proxy.tags[0].value #=> String
-    #   resp.update_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateProxy AWS API Documentation
-    #
-    # @overload update_proxy(params = {})
-    # @param [Hash] params ({})
-    def update_proxy(params = {}, options = {})
-      req = build_request(:update_proxy, params)
-      req.send_request(options)
-    end
-
-    # Updates the properties of the specified proxy configuration.
-    #
-    # @option params [String] :proxy_configuration_name
-    #   The descriptive name of the proxy configuration. You can't change the
-    #   name of a proxy configuration after you create it.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [String] :proxy_configuration_arn
-    #   The Amazon Resource Name (ARN) of a proxy configuration.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [required, Types::ProxyConfigDefaultRulePhaseActionsRequest] :default_rule_phase_actions
-    #   Evaluation points in the traffic flow where rules are applied. There
-    #   are three phases in a traffic where the rule match is applied.
-    #
-    # @option params [required, String] :update_token
-    #   A token used for optimistic locking. Network Firewall returns a token
-    #   to your requests that access the proxy configuration. The token marks
-    #   the state of the proxy configuration resource at the time of the
-    #   request.
-    #
-    #   To make changes to the proxy configuration, you provide the token in
-    #   your request. Network Firewall uses the token to ensure that the proxy
-    #   configuration hasn't changed since you last retrieved it. If it has
-    #   changed, the operation fails with an `InvalidTokenException`. If this
-    #   happens, retrieve the proxy configuration again to get a current copy
-    #   of it with a current token. Reapply your changes as needed, then try
-    #   the operation again using the new token.
-    #
-    # @return [Types::UpdateProxyConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::UpdateProxyConfigurationResponse#proxy_configuration #proxy_configuration} => Types::ProxyConfiguration
-    #   * {Types::UpdateProxyConfigurationResponse#update_token #update_token} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.update_proxy_configuration({
-    #     proxy_configuration_name: "ResourceName",
-    #     proxy_configuration_arn: "ResourceArn",
-    #     default_rule_phase_actions: { # required
-    #       pre_dns: "ALLOW", # accepts ALLOW, DENY, ALERT
-    #       pre_request: "ALLOW", # accepts ALLOW, DENY, ALERT
-    #       post_response: "ALLOW", # accepts ALLOW, DENY, ALERT
-    #     },
-    #     update_token: "UpdateToken", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.proxy_configuration.proxy_configuration_name #=> String
-    #   resp.proxy_configuration.proxy_configuration_arn #=> String
-    #   resp.proxy_configuration.description #=> String
-    #   resp.proxy_configuration.create_time #=> Time
-    #   resp.proxy_configuration.delete_time #=> Time
-    #   resp.proxy_configuration.rule_groups #=> Array
-    #   resp.proxy_configuration.rule_groups[0].proxy_rule_group_name #=> String
-    #   resp.proxy_configuration.rule_groups[0].proxy_rule_group_arn #=> String
-    #   resp.proxy_configuration.rule_groups[0].type #=> String
-    #   resp.proxy_configuration.rule_groups[0].priority #=> Integer
-    #   resp.proxy_configuration.default_rule_phase_actions.pre_dns #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_configuration.default_rule_phase_actions.pre_request #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_configuration.default_rule_phase_actions.post_response #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_configuration.tags #=> Array
-    #   resp.proxy_configuration.tags[0].key #=> String
-    #   resp.proxy_configuration.tags[0].value #=> String
-    #   resp.update_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateProxyConfiguration AWS API Documentation
-    #
-    # @overload update_proxy_configuration(params = {})
-    # @param [Hash] params ({})
-    def update_proxy_configuration(params = {}, options = {})
-      req = build_request(:update_proxy_configuration, params)
-      req.send_request(options)
-    end
-
-    # Updates the properties of the specified proxy rule.
-    #
-    # @option params [String] :proxy_rule_group_name
-    #   The descriptive name of the proxy rule group. You can't change the
-    #   name of a proxy rule group after you create it.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [String] :proxy_rule_group_arn
-    #   The Amazon Resource Name (ARN) of a proxy rule group.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [required, String] :proxy_rule_name
-    #   The descriptive name of the proxy rule. You can't change the name of
-    #   a proxy rule after you create it.
-    #
-    # @option params [String] :description
-    #   A description of the proxy rule.
-    #
-    # @option params [String] :action
-    #   Depending on the match action, the proxy either stops the evaluation
-    #   (if the action is terminal - allow or deny), or continues it (if the
-    #   action is alert) until it matches a rule with a terminal action.
-    #
-    # @option params [Array<Types::ProxyRuleCondition>] :add_conditions
-    #   Proxy rule conditions to add. Match criteria that specify what traffic
-    #   attributes to examine. Conditions include operators (StringEquals,
-    #   StringLike) and values to match against.
-    #
-    # @option params [Array<Types::ProxyRuleCondition>] :remove_conditions
-    #   Proxy rule conditions to remove. Match criteria that specify what
-    #   traffic attributes to examine. Conditions include operators
-    #   (StringEquals, StringLike) and values to match against.
-    #
-    # @option params [required, String] :update_token
-    #   A token used for optimistic locking. Network Firewall returns a token
-    #   to your requests that access the proxy rule. The token marks the state
-    #   of the proxy rule resource at the time of the request.
-    #
-    #   To make changes to the proxy rule, you provide the token in your
-    #   request. Network Firewall uses the token to ensure that the proxy rule
-    #   hasn't changed since you last retrieved it. If it has changed, the
-    #   operation fails with an `InvalidTokenException`. If this happens,
-    #   retrieve the proxy rule again to get a current copy of it with a
-    #   current token. Reapply your changes as needed, then try the operation
-    #   again using the new token.
-    #
-    # @return [Types::UpdateProxyRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::UpdateProxyRuleResponse#proxy_rule #proxy_rule} => Types::ProxyRule
-    #   * {Types::UpdateProxyRuleResponse#removed_conditions #removed_conditions} => Array&lt;Types::ProxyRuleCondition&gt;
-    #   * {Types::UpdateProxyRuleResponse#update_token #update_token} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.update_proxy_rule({
-    #     proxy_rule_group_name: "ResourceName",
-    #     proxy_rule_group_arn: "ResourceArn",
-    #     proxy_rule_name: "ResourceName", # required
-    #     description: "Description",
-    #     action: "ALLOW", # accepts ALLOW, DENY, ALERT
-    #     add_conditions: [
-    #       {
-    #         condition_operator: "ConditionOperator",
-    #         condition_key: "ConditionKey",
-    #         condition_values: ["ProxyConditionValue"],
-    #       },
-    #     ],
-    #     remove_conditions: [
-    #       {
-    #         condition_operator: "ConditionOperator",
-    #         condition_key: "ConditionKey",
-    #         condition_values: ["ProxyConditionValue"],
-    #       },
-    #     ],
-    #     update_token: "UpdateToken", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.proxy_rule.proxy_rule_name #=> String
-    #   resp.proxy_rule.description #=> String
-    #   resp.proxy_rule.action #=> String, one of "ALLOW", "DENY", "ALERT"
-    #   resp.proxy_rule.conditions #=> Array
-    #   resp.proxy_rule.conditions[0].condition_operator #=> String
-    #   resp.proxy_rule.conditions[0].condition_key #=> String
-    #   resp.proxy_rule.conditions[0].condition_values #=> Array
-    #   resp.proxy_rule.conditions[0].condition_values[0] #=> String
-    #   resp.removed_conditions #=> Array
-    #   resp.removed_conditions[0].condition_operator #=> String
-    #   resp.removed_conditions[0].condition_key #=> String
-    #   resp.removed_conditions[0].condition_values #=> Array
-    #   resp.removed_conditions[0].condition_values[0] #=> String
-    #   resp.update_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateProxyRule AWS API Documentation
-    #
-    # @overload update_proxy_rule(params = {})
-    # @param [Hash] params ({})
-    def update_proxy_rule(params = {}, options = {})
-      req = build_request(:update_proxy_rule, params)
-      req.send_request(options)
-    end
-
-    # Updates proxy rule group priorities within a proxy configuration.
-    #
-    # @option params [String] :proxy_configuration_name
-    #   The descriptive name of the proxy configuration. You can't change the
-    #   name of a proxy configuration after you create it.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [String] :proxy_configuration_arn
-    #   The Amazon Resource Name (ARN) of a proxy configuration.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [required, Array<Types::ProxyRuleGroupPriority>] :rule_groups
-    #   proxy rule group resources to update to new positions.
-    #
-    # @option params [required, String] :update_token
-    #   A token used for optimistic locking. Network Firewall returns a token
-    #   to your requests that access the proxy configuration. The token marks
-    #   the state of the proxy configuration resource at the time of the
-    #   request.
-    #
-    #   To make changes to the proxy configuration, you provide the token in
-    #   your request. Network Firewall uses the token to ensure that the proxy
-    #   configuration hasn't changed since you last retrieved it. If it has
-    #   changed, the operation fails with an `InvalidTokenException`. If this
-    #   happens, retrieve the proxy configuration again to get a current copy
-    #   of it with a current token. Reapply your changes as needed, then try
-    #   the operation again using the new token.
-    #
-    # @return [Types::UpdateProxyRuleGroupPrioritiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::UpdateProxyRuleGroupPrioritiesResponse#proxy_rule_groups #proxy_rule_groups} => Array&lt;Types::ProxyRuleGroupPriorityResult&gt;
-    #   * {Types::UpdateProxyRuleGroupPrioritiesResponse#update_token #update_token} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.update_proxy_rule_group_priorities({
-    #     proxy_configuration_name: "ResourceName",
-    #     proxy_configuration_arn: "ResourceArn",
-    #     rule_groups: [ # required
-    #       {
-    #         proxy_rule_group_name: "ResourceName",
-    #         new_position: 1,
-    #       },
-    #     ],
-    #     update_token: "UpdateToken", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.proxy_rule_groups #=> Array
-    #   resp.proxy_rule_groups[0].proxy_rule_group_name #=> String
-    #   resp.proxy_rule_groups[0].priority #=> Integer
-    #   resp.update_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateProxyRuleGroupPriorities AWS API Documentation
-    #
-    # @overload update_proxy_rule_group_priorities(params = {})
-    # @param [Hash] params ({})
-    def update_proxy_rule_group_priorities(params = {}, options = {})
-      req = build_request(:update_proxy_rule_group_priorities, params)
-      req.send_request(options)
-    end
-
-    # Updates proxy rule priorities within a proxy rule group.
-    #
-    # @option params [String] :proxy_rule_group_name
-    #   The descriptive name of the proxy rule group. You can't change the
-    #   name of a proxy rule group after you create it.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [String] :proxy_rule_group_arn
-    #   The Amazon Resource Name (ARN) of a proxy rule group.
-    #
-    #   You must specify the ARN or the name, and you can specify both.
-    #
-    # @option params [required, String] :rule_group_request_phase
-    #   Evaluation points in the traffic flow where rules are applied. There
-    #   are three phases in a traffic where the rule match is applied.
-    #
-    # @option params [required, Array<Types::ProxyRulePriority>] :rules
-    #   proxy rule resources to update to new positions.
-    #
-    # @option params [required, String] :update_token
-    #   A token used for optimistic locking. Network Firewall returns a token
-    #   to your requests that access the proxy rule group. The token marks the
-    #   state of the proxy rule group resource at the time of the request.
-    #
-    #   To make changes to the proxy rule group, you provide the token in your
-    #   request. Network Firewall uses the token to ensure that the proxy rule
-    #   group hasn't changed since you last retrieved it. If it has changed,
-    #   the operation fails with an `InvalidTokenException`. If this happens,
-    #   retrieve the proxy rule group again to get a current copy of it with a
-    #   current token. Reapply your changes as needed, then try the operation
-    #   again using the new token.
-    #
-    # @return [Types::UpdateProxyRulePrioritiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::UpdateProxyRulePrioritiesResponse#proxy_rule_group_name #proxy_rule_group_name} => String
-    #   * {Types::UpdateProxyRulePrioritiesResponse#proxy_rule_group_arn #proxy_rule_group_arn} => String
-    #   * {Types::UpdateProxyRulePrioritiesResponse#rule_group_request_phase #rule_group_request_phase} => String
-    #   * {Types::UpdateProxyRulePrioritiesResponse#rules #rules} => Array&lt;Types::ProxyRulePriority&gt;
-    #   * {Types::UpdateProxyRulePrioritiesResponse#update_token #update_token} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.update_proxy_rule_priorities({
-    #     proxy_rule_group_name: "ResourceName",
-    #     proxy_rule_group_arn: "ResourceArn",
-    #     rule_group_request_phase: "PRE_DNS", # required, accepts PRE_DNS, PRE_REQ, POST_RES
-    #     rules: [ # required
-    #       {
-    #         proxy_rule_name: "ResourceName",
-    #         new_position: 1,
-    #       },
-    #     ],
-    #     update_token: "UpdateToken", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.proxy_rule_group_name #=> String
-    #   resp.proxy_rule_group_arn #=> String
-    #   resp.rule_group_request_phase #=> String, one of "PRE_DNS", "PRE_REQ", "POST_RES"
-    #   resp.rules #=> Array
-    #   resp.rules[0].proxy_rule_name #=> String
-    #   resp.rules[0].new_position #=> Integer
-    #   resp.update_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateProxyRulePriorities AWS API Documentation
-    #
-    # @overload update_proxy_rule_priorities(params = {})
-    # @param [Hash] params ({})
-    def update_proxy_rule_priorities(params = {}, options = {})
-      req = build_request(:update_proxy_rule_priorities, params)
-      req.send_request(options)
-    end
-
-    # Modifies the proxy listener configuration of a proxy mode firewall.
-    # Proxy mode firewalls are created with `NoSourcePreservation` set to
-    # `TRUE`. Use this operation to change the ports and protocols on which
-    # the firewall's proxy listens for traffic.
+    # Modifies the proxy settings of a proxy mode firewall. Use this
+    # operation to change the ports and protocols on which the firewall's
+    # proxy listens for traffic. The new listeners take effect without
+    # recreating the firewall.
+    #
+    # The `ProxySettings` that you provide replace the firewall's current
+    # proxy settings. If you created the firewall with your own
+    # `CertificateArn` and `DomainName`, you must specify the same values in
+    # every request. You can't change or remove them.
     #
     # @option params [String] :firewall_arn
     #   The Amazon Resource Name (ARN) of the firewall.
@@ -7014,9 +6486,11 @@ module Aws::NetworkFirewall
     #   again using the new token.
     #
     # @option params [Types::ProxySettings] :proxy_settings
-    #   The proxy listener configuration to set on the firewall. This
-    #   specifies the ports and protocols on which the firewall's proxy
-    #   listens for traffic.
+    #   The proxy settings to set on the firewall. These replace the current
+    #   proxy settings. Specify at least one listener, and at most one HTTP
+    #   listener and one HTTPS listener, on different ports. If the firewall
+    #   uses your own `CertificateArn` and `DomainName`, specify the same
+    #   values that you used to create the firewall.
     #
     # @return [Types::UpdateProxySettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7038,6 +6512,8 @@ module Aws::NetworkFirewall
     #           type: "HTTP", # accepts HTTP, HTTPS
     #         },
     #       ],
+    #       certificate_arn: "ResourceArn",
+    #       domain_name: "ProxyDomainName",
     #     },
     #   })
     #
@@ -7049,6 +6525,8 @@ module Aws::NetworkFirewall
     #   resp.proxy_settings.listener_properties #=> Array
     #   resp.proxy_settings.listener_properties[0].port #=> Integer
     #   resp.proxy_settings.listener_properties[0].type #=> String, one of "HTTP", "HTTPS"
+    #   resp.proxy_settings.certificate_arn #=> String
+    #   resp.proxy_settings.domain_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateProxySettings AWS API Documentation
     #
@@ -7099,6 +6577,14 @@ module Aws::NetworkFirewall
     #
     #    </note>
     #
+    # @option params [Types::FirewallRuleGroup] :firewall_rule_group
+    #   An object that defines the rules in a firewall engine rule group, for
+    #   use in a Next Generation policy.
+    #
+    # @option params [Types::IpsRuleGroup] :ips_rule_group
+    #   An object that defines the rules in an IPS engine rule group, for use
+    #   in a Next Generation policy.
+    #
     # @option params [String] :rules
     #   A string containing stateful rule group rules specifications in
     #   Suricata flat format, with one rule per line. Use this to import your
@@ -7115,9 +6601,18 @@ module Aws::NetworkFirewall
     #   populated from your string.
     #
     # @option params [String] :type
-    #   Indicates whether the rule group is stateless or stateful. If the rule
-    #   group is stateless, it contains stateless rules. If it is stateful, it
-    #   contains stateful rules.
+    #   Indicates the type of the rule group. Valid values are:
+    #
+    #   * `STATELESS` - Stateless rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `STATEFUL` - Stateful rules, for use in a Classic Network Firewall
+    #     policy.
+    #
+    #   * `FIREWALL` - Firewall engine rules, for use in a Next Generation
+    #     policy.
+    #
+    #   * `IPS` - IPS engine rules, for use in a Next Generation policy.
     #
     #   <note markdown="1"> This setting is required for requests that do not include the
     #   `RuleGroupARN`.
@@ -7280,8 +6775,86 @@ module Aws::NetworkFirewall
     #         rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
     #       },
     #     },
+    #     firewall_rule_group: {
+    #       rules_source: { # required
+    #         rules_string: "RulesString",
+    #         firewall_rules: [
+    #           {
+    #             action: "ACCEPT", # required, accepts ACCEPT, DROP, REJECT, REJECT_DST, REJECT_BOTH
+    #             action_scope: "FLOW", # required, accepts FLOW, TX, HOOK, PACKET
+    #             hook: "TCP_ALL", # required, accepts TCP_ALL, TCP_FLOW_START, TCP_PRE_FLOW, TCP_PRE_STREAM, SCTP_ALL, SCTP_FLOW_START, SCTP_PRE_FLOW, SCTP_PRE_STREAM, IPV6_ALL, IPV6_FLOW_START, IPV6_PRE_FLOW, IPV6_PRE_STREAM, ICMPV6_ALL, ICMPV6_FLOW_START, ICMPV6_PRE_FLOW, ICMPV6_PRE_STREAM, UDP_ALL, UDP_FLOW_START, UDP_PRE_FLOW, UDP_PRE_STREAM, ICMP_ALL, ICMP_FLOW_START, ICMP_PRE_FLOW, ICMP_PRE_STREAM, ICMPV4_ALL, ICMPV4_FLOW_START, ICMPV4_PRE_FLOW, ICMPV4_PRE_STREAM, IP_ALL, IP_FLOW_START, IP_PRE_FLOW, IP_PRE_STREAM, IPV4_ALL, IPV4_FLOW_START, IPV4_PRE_FLOW, IPV4_PRE_STREAM, TLS_CLIENT_STARTED, TLS_CLIENT_HELLO, TLS_CLIENT_CERT, TLS_CLIENT_DATA, TLS_CLIENT_FINISHED, TLS_SERVER_STARTED, TLS_SERVER_HELLO, TLS_SERVER_CERT, TLS_SERVER_DATA, TLS_SERVER_FINISHED, HTTP1_REQUEST_STARTED, HTTP1_REQUEST_LINE, HTTP1_REQUEST_HEADERS, HTTP1_REQUEST_BODY, HTTP1_REQUEST_TRAILER, HTTP1_REQUEST_COMPLETE, HTTP1_RESPONSE_STARTED, HTTP1_RESPONSE_LINE, HTTP1_RESPONSE_HEADERS, HTTP1_RESPONSE_BODY, HTTP1_RESPONSE_TRAILER, HTTP1_RESPONSE_COMPLETE, HTTP2_STREAM_REQUEST_STARTED, HTTP2_STREAM_REQUEST_HEADERS, HTTP2_STREAM_REQUEST_DATA, HTTP2_STREAM_REQUEST_CLOSED, HTTP2_STREAM_REQUEST_COMPLETE, HTTP2_STREAM_RESPONSE_STARTED, HTTP2_STREAM_RESPONSE_HEADERS, HTTP2_STREAM_RESPONSE_DATA, HTTP2_STREAM_RESPONSE_CLOSED, HTTP2_STREAM_RESPONSE_COMPLETE, HTTP2_GLOBAL_REQUEST_STARTED, HTTP2_GLOBAL_REQUEST_COMPLETE, HTTP2_GLOBAL_RESPONSE_STARTED, HTTP2_GLOBAL_RESPONSE_COMPLETE, DOH2_STREAM_REQUEST_STARTED, DOH2_STREAM_REQUEST_HEADERS, DOH2_STREAM_REQUEST_DATA, DOH2_STREAM_REQUEST_CLOSED, DOH2_STREAM_REQUEST_COMPLETE, DOH2_STREAM_RESPONSE_STARTED, DOH2_STREAM_RESPONSE_HEADERS, DOH2_STREAM_RESPONSE_DATA, DOH2_STREAM_RESPONSE_CLOSED, DOH2_STREAM_RESPONSE_COMPLETE, DOH2_GLOBAL_REQUEST_STARTED, DOH2_GLOBAL_REQUEST_COMPLETE, DOH2_GLOBAL_RESPONSE_STARTED, DOH2_GLOBAL_RESPONSE_COMPLETE, DNS_REQUEST_STARTED, DNS_REQUEST_COMPLETE, DNS_RESPONSE_STARTED, DNS_RESPONSE_COMPLETE, SMTP_REQUEST_STARTED, SMTP_REQUEST_DATA, SMTP_REQUEST_COMPLETE, SMTP_RESPONSE_STARTED, SMTP_RESPONSE_DATA, SMTP_RESPONSE_COMPLETE, FTP_REQUEST_STARTED, FTP_REQUEST_COMPLETE, FTP_RESPONSE_STARTED, FTP_RESPONSE_COMPLETE, FTP_DATA_REQUEST_STARTED, FTP_DATA_REQUEST_COMPLETE, FTP_DATA_RESPONSE_STARTED, FTP_DATA_RESPONSE_COMPLETE, SMB_REQUEST_STARTED, SMB_REQUEST_COMPLETE, SMB_RESPONSE_STARTED, SMB_RESPONSE_COMPLETE, DCERPC_REQUEST_STARTED, DCERPC_REQUEST_COMPLETE, DCERPC_RESPONSE_STARTED, DCERPC_RESPONSE_COMPLETE, NFS_REQUEST_STARTED, NFS_REQUEST_COMPLETE, NFS_RESPONSE_STARTED, NFS_RESPONSE_COMPLETE, KRB5_REQUEST_STARTED, KRB5_REQUEST_COMPLETE, KRB5_RESPONSE_STARTED, KRB5_RESPONSE_COMPLETE, IKE_REQUEST_STARTED, IKE_REQUEST_COMPLETE, IKE_RESPONSE_STARTED, IKE_RESPONSE_COMPLETE, TFTP_REQUEST_STARTED, TFTP_REQUEST_COMPLETE, TFTP_RESPONSE_STARTED, TFTP_RESPONSE_COMPLETE, DHCP_REQUEST_STARTED, DHCP_REQUEST_COMPLETE, DHCP_RESPONSE_STARTED, DHCP_RESPONSE_COMPLETE, QUIC_REQUEST_STARTED, QUIC_REQUEST_COMPLETE, QUIC_RESPONSE_STARTED, QUIC_RESPONSE_COMPLETE, RDP_REQUEST_STARTED, RDP_REQUEST_COMPLETE, RDP_RESPONSE_STARTED, RDP_RESPONSE_COMPLETE, RFB_REQUEST_STARTED, RFB_REQUEST_COMPLETE, RFB_RESPONSE_STARTED, RFB_RESPONSE_COMPLETE, MQTT_REQUEST_STARTED, MQTT_REQUEST_COMPLETE, MQTT_RESPONSE_STARTED, MQTT_RESPONSE_COMPLETE, PGSQL_REQUEST_STARTED, PGSQL_REQUEST_COMPLETE, PGSQL_RESPONSE_STARTED, PGSQL_RESPONSE_COMPLETE, SNMP_REQUEST_STARTED, SNMP_REQUEST_COMPLETE, SNMP_RESPONSE_STARTED, SNMP_RESPONSE_COMPLETE, NTP_REQUEST_STARTED, NTP_REQUEST_COMPLETE, NTP_RESPONSE_STARTED, NTP_RESPONSE_COMPLETE, TELNET_REQUEST_STARTED, TELNET_REQUEST_COMPLETE, TELNET_RESPONSE_STARTED, TELNET_RESPONSE_COMPLETE, WEBSOCKET_REQUEST_STARTED, WEBSOCKET_REQUEST_COMPLETE, WEBSOCKET_RESPONSE_STARTED, WEBSOCKET_RESPONSE_COMPLETE, LDAP_REQUEST_STARTED, LDAP_REQUEST_COMPLETE, LDAP_RESPONSE_STARTED, LDAP_RESPONSE_COMPLETE, POP3_REQUEST_STARTED, POP3_REQUEST_COMPLETE, POP3_RESPONSE_STARTED, POP3_RESPONSE_COMPLETE, MDNS_REQUEST_STARTED, MDNS_REQUEST_COMPLETE, MDNS_RESPONSE_STARTED, MDNS_RESPONSE_COMPLETE, BITTORRENT_DHT_REQUEST_STARTED, BITTORRENT_DHT_REQUEST_COMPLETE, BITTORRENT_DHT_RESPONSE_STARTED, BITTORRENT_DHT_RESPONSE_COMPLETE, DNP3_REQUEST_STARTED, DNP3_REQUEST_COMPLETE, DNP3_RESPONSE_STARTED, DNP3_RESPONSE_COMPLETE, SSH_REQUEST_IN_PROGRESS, SSH_REQUEST_BANNER_WAIT_EOL, SSH_REQUEST_BANNER_DONE, SSH_REQUEST_FINISHED, SSH_RESPONSE_IN_PROGRESS, SSH_RESPONSE_BANNER_WAIT_EOL, SSH_RESPONSE_BANNER_DONE, SSH_RESPONSE_FINISHED
+    #             protocol: "IP", # required, accepts IP, TCP, UDP, ICMP, HTTP, FTP, TLS, SMB, DNS, DCERPC, SSH, SMTP, MSN, KRB5, IKEV2, TFTP, NTP, DHCP, HTTP2, QUIC, ICMPV4, ICMPV6, SCTP, IPV4, IPV6, DOH2, FTP_DATA, NFS, RDP, RFB, MQTT, PGSQL, SNMP, TELNET, WEBSOCKET, LDAP, POP3, MDNS, BITTORRENT_DHT, DNP3
+    #             source_i_ps: "Source",
+    #             dest_i_ps: "Destination",
+    #             source_ports: "Port",
+    #             dest_ports: "Port",
+    #             rule_options: [
+    #               {
+    #                 keyword: "Keyword", # required
+    #                 settings: ["Setting"],
+    #               },
+    #             ],
+    #             accept_prior_hooks: false,
+    #             alert_enabled: false,
+    #             bypass_ips_enabled: false,
+    #             rule_metadata: {
+    #               rule_enabled: false,
+    #               rule_description: "RuleDescriptionText",
+    #             },
+    #           },
+    #         ],
+    #         rules_source_list: {
+    #           targets: ["CollectionMember_String"], # required
+    #           target_types: ["TLS_SNI"], # required, accepts TLS_SNI, HTTP_HOST, AWS_ROUTE_53_RESOLVED_DOMAIN
+    #           generated_rules_type: "ALLOWLIST", # required, accepts ALLOWLIST, DENYLIST, REJECTLIST, ALERTLIST
+    #         },
+    #       },
+    #       rule_variables: {
+    #         ip_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["VariableDefinition"], # required
+    #           },
+    #         },
+    #         port_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["VariableDefinition"],
+    #           },
+    #         },
+    #       },
+    #       reference_sets: {
+    #         ip_set_references: {
+    #           "IPSetReferenceName" => {
+    #             reference_arn: "ResourceArn",
+    #           },
+    #         },
+    #       },
+    #     },
+    #     ips_rule_group: {
+    #       rules_source: { # required
+    #         rules_string: "RulesString",
+    #       },
+    #       rule_variables: {
+    #         ip_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["VariableDefinition"], # required
+    #           },
+    #         },
+    #         port_sets: {
+    #           "RuleVariableName" => {
+    #             definition: ["VariableDefinition"],
+    #           },
+    #         },
+    #       },
+    #       reference_sets: {
+    #         ip_set_references: {
+    #           "IPSetReferenceName" => {
+    #             reference_arn: "ResourceArn",
+    #           },
+    #         },
+    #       },
+    #     },
     #     rules: "RulesString",
-    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN
+    #     type: "STATELESS", # accepts STATELESS, STATEFUL, STATEFUL_DOMAIN, FIREWALL, IPS
     #     description: "Description",
     #     dry_run: false,
     #     encryption_configuration: {
@@ -7305,7 +6878,7 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.rule_group_name #=> String
     #   resp.rule_group_response.rule_group_id #=> String
     #   resp.rule_group_response.description #=> String
-    #   resp.rule_group_response.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN"
+    #   resp.rule_group_response.type #=> String, one of "STATELESS", "STATEFUL", "STATEFUL_DOMAIN", "FIREWALL", "IPS"
     #   resp.rule_group_response.capacity #=> Integer
     #   resp.rule_group_response.rule_group_status #=> String, one of "ACTIVE", "DELETING", "ERROR", "UPDATING"
     #   resp.rule_group_response.tags #=> Array
@@ -7512,6 +7085,11 @@ module Aws::NetworkFirewall
     #                 },
     #               ],
     #               protocols: [1],
+    #               domain_match: {
+    #                 domains: ["TLSInspectionDomain"], # required
+    #               },
+    #               decryption_action: "DECRYPT", # accepts DECRYPT, BYPASS
+    #               deployment_mode: "TRANSPARENT_FIREWALL_ONLY", # accepts TRANSPARENT_FIREWALL_ONLY, EXPLICIT_PROXY_ONLY, ALL
     #             },
     #           ],
     #           certificate_authority_arn: "ResourceArn",
@@ -7519,6 +7097,7 @@ module Aws::NetworkFirewall
     #             revoked_status_action: "PASS", # accepts PASS, DROP, REJECT
     #             unknown_status_action: "PASS", # accepts PASS, DROP, REJECT
     #           },
+    #           default_decryption_behavior: "DECRYPT", # accepts DECRYPT, BYPASS
     #         },
     #       ],
     #     },
@@ -7582,7 +7161,7 @@ module Aws::NetworkFirewall
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.103.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

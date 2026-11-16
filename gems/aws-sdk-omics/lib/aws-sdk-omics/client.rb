@@ -264,7 +264,8 @@ module Aws::Omics
     #     An integer representing the maximum number attempts that will be made for
     #     a single request, including the initial attempt.  For example,
     #     setting this value to 5 will result in a request being retried up to
-    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #     4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+    #     except for DynamoDB and DynamoDB Streams, which default to 4.
     #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file at `HOME/.aws/credentials`.
@@ -327,15 +328,15 @@ module Aws::Omics
     #     used by the default backoff function. This option is only used in the
     #     `legacy` retry mode.
     #
-    #   @option options [String] :retry_mode ("legacy")
+    #   @option options [String] :retry_mode ("standard")
     #     Specifies which retry algorithm to use. Values are:
     #
-    #     * `legacy` - The pre-existing retry behavior. This is the default
-    #       value if no retry mode is provided.
+    #     * `legacy` - The pre-existing retry behavior.
     #
     #     * `standard` - A standardized set of retry rules across the AWS SDKs.
     #       This includes support for retry quotas, which limit the number of
-    #       unsuccessful retries a client can make.
+    #       unsuccessful retries a client can make. This is the default value
+    #       if no retry mode is provided.
     #
     #     * `adaptive` - A retry mode that includes all the functionality of
     #       `standard` mode along with automatic client side throttling.
@@ -3622,6 +3623,7 @@ module Aws::Omics
     #   * {Types::GetRunResponse#vpc_config #vpc_config} => Types::VpcConfigResponse
     #   * {Types::GetRunResponse#engine_settings #engine_settings} => Hash,Array,String,Numeric,Boolean
     #   * {Types::GetRunResponse#session_policy #session_policy} => String
+    #   * {Types::GetRunResponse#output_uri_prefix_mode #output_uri_prefix_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3683,6 +3685,7 @@ module Aws::Omics
     #   resp.vpc_config.vpc_id #=> String
     #   resp.vpc_config.vpc_owner_account_id #=> String
     #   resp.session_policy #=> String
+    #   resp.output_uri_prefix_mode #=> String, one of "SERVICE_DEFINED", "NONE_WITH_OVERWRITE"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -6569,6 +6572,11 @@ module Aws::Omics
     #   serialized using the same format as its surroundings and requires no
     #   additional encoding or escaping.
     #
+    # @option params [String] :output_uri_prefix_mode
+    #   You can control the path prefixes that the service adds beneath
+    #   `outputUri`. If you don't specify a value, the service uses
+    #   `SERVICE_DEFINED`, which adds a run-specific prefix.
+    #
     # @return [Types::StartRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartRunResponse#arn #arn} => String
@@ -6611,6 +6619,7 @@ module Aws::Omics
     #     session_policy: "SessionPolicy",
     #     engine_settings: {
     #     },
+    #     output_uri_prefix_mode: "SERVICE_DEFINED", # accepts SERVICE_DEFINED, NONE_WITH_OVERWRITE
     #   })
     #
     # @example Response structure
@@ -7439,7 +7448,7 @@ module Aws::Omics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
