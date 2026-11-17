@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.179.0 (2026-11-17)
+------------------
+
+* Feature - Added the NestedVirtualization and EnableEndUserAdvisor self-service permissions. Use them with ModifySelfservicePermissions to turn nested virtualization and End User Advisor on or off for a directory, and view the settings with DescribeWorkspaceDirectories. End User Advisor is on by default.
+
 1.178.0 (2026-11-16)
 ------------------
 

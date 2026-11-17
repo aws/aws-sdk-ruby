@@ -109,7 +109,7 @@ module Aws::Billing
     end
 
     class BillingPreferenceSummary
-      attr_accessor feature: ("RI_SHARING" | "RI_SHARING_HISTORY" | "CREDIT_SHARING" | "CREDIT_SHARING_HISTORY" | "CREDIT_LEVEL_SHARING" | "BILLING_ALERTS" | "CREDIT_PREFERENCE_OPTIONS")
+      attr_accessor feature: ("RI_SHARING" | "RI_SHARING_HISTORY" | "CREDIT_SHARING" | "CREDIT_SHARING_HISTORY" | "CREDIT_LEVEL_SHARING" | "BILLING_ALERTS" | "CREDIT_PREFERENCE_OPTIONS" | "BENEFIT_LEVEL_SHARING")
       attr_accessor key: ::String
       attr_accessor value: ("ENABLED" | "DISABLED")
       attr_accessor account_name: ::String
@@ -231,6 +231,12 @@ module Aws::Billing
     class ChargeAccount
       attr_accessor account_id: ::String
       attr_accessor charge_percentage: ::String
+      SENSITIVE: []
+    end
+
+    class ChildCredit
+      attr_accessor credit_id: ::String
+      attr_accessor amount: ::String
       SENSITIVE: []
     end
 
@@ -395,7 +401,7 @@ module Aws::Billing
     class GetBillingPreferencesRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
-      attr_accessor features: ::Array[("RI_SHARING" | "RI_SHARING_HISTORY" | "CREDIT_SHARING" | "CREDIT_SHARING_HISTORY" | "CREDIT_LEVEL_SHARING" | "BILLING_ALERTS" | "CREDIT_PREFERENCE_OPTIONS")]
+      attr_accessor features: ::Array[("RI_SHARING" | "RI_SHARING_HISTORY" | "CREDIT_SHARING" | "CREDIT_SHARING_HISTORY" | "CREDIT_LEVEL_SHARING" | "BILLING_ALERTS" | "CREDIT_PREFERENCE_OPTIONS" | "BENEFIT_LEVEL_SHARING")]
       attr_accessor filters: ::Array[Types::BillingFeatureFilter]
       SENSITIVE: []
     end
@@ -848,6 +854,27 @@ module Aws::Billing
       SENSITIVE: []
     end
 
+    class SplitCreditRequest
+      attr_accessor credit_id: ::String
+      attr_accessor portions: ::Array[Types::SplitPortion]
+      attr_accessor client_token: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class SplitCreditResponse
+      attr_accessor parent_credit_id: ::String
+      attr_accessor child_credits: ::Array[Types::ChildCredit]
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class SplitPortion
+      attr_accessor amount: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
     class StringSearch
       attr_accessor search_option: ("STARTS_WITH")
       attr_accessor search_value: ::String
@@ -880,6 +907,23 @@ module Aws::Billing
       SENSITIVE: []
     end
 
+    class TransferCreditRequest
+      attr_accessor credit_id: ::String
+      attr_accessor destination_account_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class TransferCreditResponse
+      attr_accessor source_credit_id: ::String
+      attr_accessor new_credit_id: ::String
+      attr_accessor destination_account_id: ::String
+      attr_accessor amount: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
     class UntagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor resource_tag_keys: ::Array[::String]
@@ -890,7 +934,7 @@ module Aws::Billing
     end
 
     class UpdateBillingPreferencesRequest
-      attr_accessor feature: ("RI_SHARING" | "RI_SHARING_HISTORY" | "CREDIT_SHARING" | "CREDIT_SHARING_HISTORY" | "CREDIT_LEVEL_SHARING" | "BILLING_ALERTS" | "CREDIT_PREFERENCE_OPTIONS")
+      attr_accessor feature: ("RI_SHARING" | "RI_SHARING_HISTORY" | "CREDIT_SHARING" | "CREDIT_SHARING_HISTORY" | "CREDIT_LEVEL_SHARING" | "BILLING_ALERTS" | "CREDIT_PREFERENCE_OPTIONS" | "BENEFIT_LEVEL_SHARING")
       attr_accessor billing_preferences_per_key: ::Array[Types::BillingPreferenceForKey]
       SENSITIVE: []
     end

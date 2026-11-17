@@ -140,6 +140,7 @@ module Aws::ConnectContactLens
       attr_accessor end_offset_millis: ::Integer
       attr_accessor sentiment: ("POSITIVE" | "NEUTRAL" | "NEGATIVE")
       attr_accessor issues_detected: ::Array[Types::IssueDetected]
+      attr_accessor language_code: ::String
       SENSITIVE: []
     end
   end

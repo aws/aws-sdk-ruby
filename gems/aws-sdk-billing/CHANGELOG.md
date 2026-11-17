@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2026-11-17)
+------------------
+
+* Feature - Adds the SplitCredit and TransferCredit APIs to split or transfer credits, and adds benefit level sharing for Reserved Instances and Savings Plans to GetBillingPreferences and UpdateBillingPreferences.
+
 1.47.0 (2026-11-16)
 ------------------
 

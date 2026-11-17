@@ -77,12 +77,14 @@ module Aws::DevOpsAgent
     CapabilityConfiguration = Shapes::StructureShape.new(name: 'CapabilityConfiguration')
     CapabilityType = Shapes::StringShape.new(name: 'CapabilityType')
     CertificateString = Shapes::StringShape.new(name: 'CertificateString')
+    ChatArchiveStatus = Shapes::StringShape.new(name: 'ChatArchiveStatus')
     ChatExecution = Shapes::StructureShape.new(name: 'ChatExecution')
     ChatExecutionId = Shapes::StringShape.new(name: 'ChatExecutionId')
     ChatExecutionList = Shapes::ListShape.new(name: 'ChatExecutionList')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientSecret = Shapes::StringShape.new(name: 'ClientSecret')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConflictExceptionReason = Shapes::StringShape.new(name: 'ConflictExceptionReason')
     ContentSizeExceededException = Shapes::StructureShape.new(name: 'ContentSizeExceededException')
     CreateAgentSpaceInput = Shapes::StructureShape.new(name: 'CreateAgentSpaceInput')
     CreateAgentSpaceInputClientTokenString = Shapes::StringShape.new(name: 'CreateAgentSpaceInputClientTokenString')
@@ -173,6 +175,8 @@ module Aws::DevOpsAgent
     GetAssociationOutput = Shapes::StructureShape.new(name: 'GetAssociationOutput')
     GetBacklogTaskRequest = Shapes::StructureShape.new(name: 'GetBacklogTaskRequest')
     GetBacklogTaskResponse = Shapes::StructureShape.new(name: 'GetBacklogTaskResponse')
+    GetChatRequest = Shapes::StructureShape.new(name: 'GetChatRequest')
+    GetChatResponse = Shapes::StructureShape.new(name: 'GetChatResponse')
     GetOperatorAppInput = Shapes::StructureShape.new(name: 'GetOperatorAppInput')
     GetOperatorAppOutput = Shapes::StructureShape.new(name: 'GetOperatorAppOutput')
     GetRecommendationRequest = Shapes::StructureShape.new(name: 'GetRecommendationRequest')
@@ -542,6 +546,10 @@ module Aws::DevOpsAgent
     UpdateBacklogTaskRequest = Shapes::StructureShape.new(name: 'UpdateBacklogTaskRequest')
     UpdateBacklogTaskRequestClientTokenString = Shapes::StringShape.new(name: 'UpdateBacklogTaskRequestClientTokenString')
     UpdateBacklogTaskResponse = Shapes::StructureShape.new(name: 'UpdateBacklogTaskResponse')
+    UpdateChatRequest = Shapes::StructureShape.new(name: 'UpdateChatRequest')
+    UpdateChatRequestClientTokenString = Shapes::StringShape.new(name: 'UpdateChatRequestClientTokenString')
+    UpdateChatRequestSummaryString = Shapes::StringShape.new(name: 'UpdateChatRequestSummaryString')
+    UpdateChatResponse = Shapes::StructureShape.new(name: 'UpdateChatResponse')
     UpdateGoalRequest = Shapes::StructureShape.new(name: 'UpdateGoalRequest')
     UpdateGoalRequestClientTokenString = Shapes::StringShape.new(name: 'UpdateGoalRequestClientTokenString')
     UpdateGoalResponse = Shapes::StructureShape.new(name: 'UpdateGoalResponse')
@@ -777,11 +785,13 @@ module Aws::DevOpsAgent
     ChatExecution.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     ChatExecution.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     ChatExecution.add_member(:summary, Shapes::ShapeRef.new(shape: String, location_name: "summary"))
+    ChatExecution.add_member(:archive_status, Shapes::ShapeRef.new(shape: ChatArchiveStatus, location_name: "archiveStatus"))
     ChatExecution.struct_class = Types::ChatExecution
 
     ChatExecutionList.member = Shapes::ShapeRef.new(shape: ChatExecution)
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ConflictException.add_member(:reason, Shapes::ShapeRef.new(shape: ConflictExceptionReason, location_name: "reason"))
     ConflictException.struct_class = Types::ConflictException
 
     ContentSizeExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -1083,6 +1093,17 @@ module Aws::DevOpsAgent
     GetBacklogTaskResponse.add_member(:task, Shapes::ShapeRef.new(shape: Task, required: true, location_name: "task"))
     GetBacklogTaskResponse.struct_class = Types::GetBacklogTaskResponse
 
+    GetChatRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
+    GetChatRequest.add_member(:execution_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "executionId"))
+    GetChatRequest.struct_class = Types::GetChatRequest
+
+    GetChatResponse.add_member(:execution_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "executionId"))
+    GetChatResponse.add_member(:summary, Shapes::ShapeRef.new(shape: String, location_name: "summary"))
+    GetChatResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    GetChatResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    GetChatResponse.add_member(:archive_status, Shapes::ShapeRef.new(shape: ChatArchiveStatus, required: true, location_name: "archiveStatus"))
+    GetChatResponse.struct_class = Types::GetChatResponse
+
     GetOperatorAppInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location: "uri", location_name: "agentSpaceId"))
     GetOperatorAppInput.struct_class = Types::GetOperatorAppInput
 
@@ -1287,6 +1308,7 @@ module Aws::DevOpsAgent
     ListChatsRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: ResourceId, deprecated: true, location: "querystring", location_name: "userId", metadata: {"deprecatedMessage" => "userId is managed by the service and should not be provided by the caller", "deprecatedSince" => "2026-04-15"}))
     ListChatsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListChatsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListChatsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListChatsRequest.add_member(:archive_status, Shapes::ShapeRef.new(shape: ChatArchiveStatus, location: "querystring", location_name: "archiveStatus"))
     ListChatsRequest.struct_class = Types::ListChatsRequest
 
     ListChatsResponse.add_member(:executions, Shapes::ShapeRef.new(shape: ChatExecutionList, required: true, location_name: "executions"))
@@ -2225,6 +2247,19 @@ module Aws::DevOpsAgent
     UpdateBacklogTaskResponse.add_member(:task, Shapes::ShapeRef.new(shape: Task, required: true, location_name: "task"))
     UpdateBacklogTaskResponse.struct_class = Types::UpdateBacklogTaskResponse
 
+    UpdateChatRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
+    UpdateChatRequest.add_member(:execution_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "executionId"))
+    UpdateChatRequest.add_member(:summary, Shapes::ShapeRef.new(shape: UpdateChatRequestSummaryString, location_name: "summary"))
+    UpdateChatRequest.add_member(:archive_status, Shapes::ShapeRef.new(shape: ChatArchiveStatus, location_name: "archiveStatus"))
+    UpdateChatRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: UpdateChatRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    UpdateChatRequest.struct_class = Types::UpdateChatRequest
+
+    UpdateChatResponse.add_member(:execution_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "executionId"))
+    UpdateChatResponse.add_member(:summary, Shapes::ShapeRef.new(shape: String, location_name: "summary"))
+    UpdateChatResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    UpdateChatResponse.add_member(:archive_status, Shapes::ShapeRef.new(shape: ChatArchiveStatus, required: true, location_name: "archiveStatus"))
+    UpdateChatResponse.struct_class = Types::UpdateChatResponse
+
     UpdateGoalRequest.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceIdentifier, required: true, location: "uri", location_name: "agentSpaceId"))
     UpdateGoalRequest.add_member(:goal_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "goalId"))
     UpdateGoalRequest.add_member(:evaluation_schedule, Shapes::ShapeRef.new(shape: GoalScheduleInput, location_name: "evaluationSchedule"))
@@ -2832,6 +2867,26 @@ module Aws::DevOpsAgent
         }
         o.input = Shapes::ShapeRef.new(shape: GetBacklogTaskRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBacklogTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ContentSizeExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
+      api.add_operation(:get_chat, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetChat"
+        o.http_method = "GET"
+        o.http_request_uri = "/agents/agent-space/{agentSpaceId}/chat/get/{executionId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "dp.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetChatRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetChatResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ContentSizeExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -3544,6 +3599,26 @@ module Aws::DevOpsAgent
         }
         o.input = Shapes::ShapeRef.new(shape: UpdateBacklogTaskRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateBacklogTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ContentSizeExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
+      api.add_operation(:update_chat, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateChat"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/agents/agent-space/{agentSpaceId}/chat/{executionId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "dp.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateChatRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateChatResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ContentSizeExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)

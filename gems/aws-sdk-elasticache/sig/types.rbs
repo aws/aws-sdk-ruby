@@ -500,6 +500,7 @@ module Aws::ElastiCache
       attr_accessor daily_snapshot_time: ::String
       attr_accessor network_type: ("ipv4" | "ipv6" | "dual_stack")
       attr_accessor connection_type: ("vpc" | "public")
+      attr_accessor integrations: ::Array[Types::IntegrationRequest]
       SENSITIVE: []
     end
 
@@ -1064,6 +1065,17 @@ module Aws::ElastiCache
     end
 
     class InsufficientCacheClusterCapacityFault < Aws::EmptyStructure
+    end
+
+    class Integration
+      attr_accessor integration_type: ("dynamodb")
+      attr_accessor status: ("enabled" | "disabled" | "enabling" | "disabling" | "failed")
+      SENSITIVE: []
+    end
+
+    class IntegrationRequest
+      attr_accessor integration_type: ("dynamodb")
+      SENSITIVE: []
     end
 
     class InvalidARNFault < Aws::EmptyStructure
@@ -1715,6 +1727,7 @@ module Aws::ElastiCache
       attr_accessor network_type: ("ipv4" | "ipv6" | "dual_stack")
       attr_accessor connection_type: ("vpc" | "public")
       attr_accessor migration: Types::MigrationSummary
+      attr_accessor integrations: ::Array[Types::Integration]
       SENSITIVE: []
     end
 

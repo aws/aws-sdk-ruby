@@ -489,6 +489,64 @@ module Aws::MarketplaceAgreement
 
     # @!group API Operations
 
+    # Allows the management account or a delegated administrator of the
+    # buyer's AWS organization to approve an agreement approval that is in
+    # `PENDING_APPROVAL` status, as the organization administrator approver
+    # or on behalf of another approver. Once every level is approved, the
+    # agreement approval transitions to `APPROVED` status. You can
+    # optionally provide purchase order references and a note.
+    #
+    # @option params [Types::BuyerAgreementApprovalApproverInput] :buyer_agreement_approval_approver_input
+    #   The approval decision for an agreement approval that the buyer's
+    #   organization requires.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Approve an agreement approval
+    #
+    #   resp = client.accept_agreement_approval({
+    #     buyer_agreement_approval_approver_input: {
+    #       agreement_approval_id: "apr-EXAMPLE9s0t1u2v3w4x", 
+    #       note: "Approved. Budget confirmed for this fiscal year.", 
+    #       purchase_orders: [
+    #         {
+    #           charge_id: "ch-EXAMPLE4b4296145c3EXAMPLE56", 
+    #           purchase_order_reference: "PO-123", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_agreement_approval({
+    #     buyer_agreement_approval_approver_input: {
+    #       agreement_approval_id: "AgreementApprovalId", # required
+    #       purchase_orders: [
+    #         {
+    #           charge_id: "ChargeId", # required
+    #           purchase_order_reference: "PurchaseOrderReference",
+    #         },
+    #       ],
+    #       note: "AgreementApprovalNote",
+    #       approver_outcome_id_to_override: "ApproverOutcomeId",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AcceptAgreementApproval AWS API Documentation
+    #
+    # @overload accept_agreement_approval(params = {})
+    # @param [Hash] params ({})
+    def accept_agreement_approval(params = {}, options = {})
+      req = build_request(:accept_agreement_approval, params)
+      req.send_request(options)
+    end
+
     # Allows buyers (acceptors) to accept a cancellation request that is in
     # `PENDING_APPROVAL` status. Once accepted, the cancellation request
     # transitions to `APPROVED` status and the agreement cancellation will
@@ -897,6 +955,43 @@ module Aws::MarketplaceAgreement
       req.send_request(options)
     end
 
+    # Allows buyers (acceptors) to cancel an agreement request that is in
+    # `PENDING_APPROVAL` status, or in `APPROVED` status when no agreement
+    # has been created from it. Once cancelled, the agreement request
+    # transitions to `CANCELLED` status and its open agreement approvals are
+    # cancelled.
+    #
+    # @option params [required, String] :agreement_request_id
+    #   The unique identifier of the agreement request to cancel.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Cancel an agreement request
+    #
+    #   resp = client.cancel_agreement_request({
+    #     agreement_request_id: "ar-EXAMPLE4a539b123d4EXAMPLE78", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_agreement_request({
+    #     agreement_request_id: "AgreementRequestId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/CancelAgreementRequest AWS API Documentation
+    #
+    # @overload cancel_agreement_request(params = {})
+    # @param [Hash] params ({})
+    def cancel_agreement_request(params = {}, options = {})
+      req = build_request(:cancel_agreement_request, params)
+      req.send_request(options)
+    end
+
     # Creates an agreement request that acts as a quote for the terms you
     # want to accept. The agreement request captures the requested terms,
     # calculates charges, and returns a summary. Use
@@ -943,10 +1038,19 @@ module Aws::MarketplaceAgreement
     # @option params [Types::TaxConfiguration] :tax_configuration
     #   Configuration for tax estimation in the agreement request response.
     #
+    # @option params [Types::AcceptorContact] :acceptor_contact
+    #   The contact information of the acceptor.
+    #
+    #   Don't provide this parameter if the intent is `AMEND`.
+    #
     # @return [Types::CreateAgreementRequestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAgreementRequestOutput#agreement_request_id #agreement_request_id} => String
+    #   * {Types::CreateAgreementRequestOutput#agreement_type #agreement_type} => String
     #   * {Types::CreateAgreementRequestOutput#charge_summary #charge_summary} => Types::ChargeSummary
+    #   * {Types::CreateAgreementRequestOutput#status #status} => String
+    #   * {Types::CreateAgreementRequestOutput#approval_requirement #approval_requirement} => String
+    #   * {Types::CreateAgreementRequestOutput#created_at #created_at} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -981,11 +1085,19 @@ module Aws::MarketplaceAgreement
     #     tax_configuration: {
     #       tax_estimation: "DISABLED", # accepts DISABLED, ENABLED
     #     },
+    #     acceptor_contact: {
+    #       first_name: "PersonName", # required
+    #       last_name: "PersonName", # required
+    #       email_address: "EmailAddress", # required
+    #       company_name: "ContactCompanyName", # required
+    #       country_code: "CountryCode", # required
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.agreement_request_id #=> String
+    #   resp.agreement_type #=> String
     #   resp.charge_summary.currency_code #=> String
     #   resp.charge_summary.new_agreement_value #=> String
     #   resp.charge_summary.new_agreement_value_after_tax #=> String
@@ -994,12 +1106,13 @@ module Aws::MarketplaceAgreement
     #   resp.charge_summary.expected_charges[0].time #=> Time
     #   resp.charge_summary.expected_charges[0].amount #=> String
     #   resp.charge_summary.expected_charges[0].amount_after_tax #=> String
-    #   resp.charge_summary.expected_charges[0].timing #=> String, one of "ON_ACCEPTANCE", "SCHEDULED", "BILLING_PERIOD"
+    #   resp.charge_summary.expected_charges[0].timing #=> String, one of "ON_ACCEPTANCE", "SCHEDULED", "BILLING_PERIOD", "NOT_APPLICABLE"
     #   resp.charge_summary.expected_charges[0].estimated_taxes.breakdown #=> Array
     #   resp.charge_summary.expected_charges[0].estimated_taxes.breakdown[0].amount #=> String
     #   resp.charge_summary.expected_charges[0].estimated_taxes.breakdown[0].rate #=> String
     #   resp.charge_summary.expected_charges[0].estimated_taxes.breakdown[0].type #=> String
     #   resp.charge_summary.expected_charges[0].estimated_taxes.total_amount #=> String
+    #   resp.charge_summary.expected_charges[0].purchase_order_reference #=> String
     #   resp.charge_summary.estimated_taxes.breakdown #=> Array
     #   resp.charge_summary.estimated_taxes.breakdown[0].amount #=> String
     #   resp.charge_summary.estimated_taxes.breakdown[0].rate #=> String
@@ -1013,6 +1126,9 @@ module Aws::MarketplaceAgreement
     #   resp.charge_summary.itemized_charges[0].incremental_charge_amount #=> String
     #   resp.charge_summary.invoicing_entity.legal_name #=> String
     #   resp.charge_summary.invoicing_entity.branch_name #=> String
+    #   resp.status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "ACCEPTED", "REJECTED", "CANCELLED"
+    #   resp.approval_requirement #=> String, one of "REQUIRED", "NOT_REQUIRED"
+    #   resp.created_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/CreateAgreementRequest AWS API Documentation
     #
@@ -1083,6 +1199,158 @@ module Aws::MarketplaceAgreement
       req.send_request(options)
     end
 
+    # Retrieves detailed information about a specific agreement approval,
+    # including its approval levels, the approvers at each level, and the
+    # decision of each approver. The acceptor, or the management account or
+    # a delegated administrator of the acceptor's AWS organization, can
+    # call this operation.
+    #
+    # @option params [required, String] :agreement_approval_id
+    #   The unique identifier of the agreement approval to retrieve.
+    #
+    # @return [Types::GetAgreementApprovalOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAgreementApprovalOutput#buyer_agreement_approval #buyer_agreement_approval} => Types::BuyerAgreementApproval
+    #
+    #
+    # @example Example: Get an agreement approval
+    #
+    #   resp = client.get_agreement_approval({
+    #     agreement_approval_id: "apr-EXAMPLE9s0t1u2v3w4x", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     buyer_agreement_approval: {
+    #       name: "Example Analytics Platform sold by Example Corp", 
+    #       agreement_approval_id: "apr-EXAMPLE9s0t1u2v3w4x", 
+    #       agreement_request_id: "ar-EXAMPLE4a539b123d4EXAMPLE78", 
+    #       approval_needed_by: Time.parse(1739527800), 
+    #       approval_type: "BUYER_AGREEMENT_APPROVAL", 
+    #       created_at: Time.parse(1736935800), 
+    #       expires_at: Time.parse(1739527800), 
+    #       levels: [
+    #         {
+    #           name: "Budget owner review", 
+    #           groups: [
+    #             {
+    #               approval_criteria: {
+    #                 required_approval_count: 1, 
+    #               }, 
+    #               approvers: [
+    #                 {
+    #                   aws_organization_approver_outcome: {
+    #                     approver_outcome_id: "aprout-EXAMPLE1e2f3g4h5i6j", 
+    #                     status: "PENDING_APPROVAL", 
+    #                     updated_at: Time.parse(1737022200), 
+    #                   }, 
+    #                 }, 
+    #               ], 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       ], 
+    #       plan_input: {
+    #         plan_reference: "aplan-EXAMPLE7g8h9i0j1k2l", 
+    #         requester_note: "Annual subscription for the data platform team.", 
+    #       }, 
+    #       proposal_summary: {
+    #         offer_id: "ABCDEFGHIJKLMNOP123", 
+    #         resources: [
+    #           {
+    #             name: "Example Analytics Platform", 
+    #             type: "SaaSProduct", 
+    #             deployed_on_aws: "DEPLOYED", 
+    #             id: "0EXAMPLE-8ce8-4814-bcf1-636EXAMPLEb5", 
+    #           }, 
+    #         ], 
+    #         visibility_scope: "PRIVATE", 
+    #       }, 
+    #       proposer: {
+    #         account_id: "444455556666", 
+    #         legal_name: "Example Corp", 
+    #       }, 
+    #       requester: {
+    #         account_id: "123456789010", 
+    #       }, 
+    #       started_at: Time.parse(1736935800), 
+    #       status: "PENDING_APPROVAL", 
+    #       updated_at: Time.parse(1737022200), 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_agreement_approval({
+    #     agreement_approval_id: "AgreementApprovalId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.buyer_agreement_approval.approval_type #=> String, one of "BUYER_AGREEMENT_APPROVAL"
+    #   resp.buyer_agreement_approval.agreement_approval_id #=> String
+    #   resp.buyer_agreement_approval.name #=> String
+    #   resp.buyer_agreement_approval.agreement_request_id #=> String
+    #   resp.buyer_agreement_approval.status #=> String, one of "PENDING_APPROVAL", "APPROVED", "REJECTED", "EXPIRED", "CANCELLED"
+    #   resp.buyer_agreement_approval.requester.account_id #=> String
+    #   resp.buyer_agreement_approval.created_at #=> Time
+    #   resp.buyer_agreement_approval.updated_at #=> Time
+    #   resp.buyer_agreement_approval.started_at #=> Time
+    #   resp.buyer_agreement_approval.expires_at #=> Time
+    #   resp.buyer_agreement_approval.approval_needed_by #=> Time
+    #   resp.buyer_agreement_approval.levels #=> Array
+    #   resp.buyer_agreement_approval.levels[0].name #=> String
+    #   resp.buyer_agreement_approval.levels[0].groups #=> Array
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approval_criteria.required_approval_count #=> Integer
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers #=> Array
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].email_approver_outcome.note #=> String
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].email_approver_outcome.status #=> String, one of "QUEUED", "PENDING_APPROVAL", "APPROVED", "REJECTED", "EXPIRED", "SKIPPED"
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].email_approver_outcome.updated_at #=> Time
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].email_approver_outcome.approver_outcome_id #=> String
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].email_approver_outcome.email_address #=> String
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].email_approver_outcome.name #=> String
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].email_approver_outcome.purchase_orders #=> Array
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].email_approver_outcome.purchase_orders[0].charge_id #=> String
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].email_approver_outcome.purchase_orders[0].purchase_order_reference #=> String
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].email_approver_outcome.overridden_by.principal_arn #=> String
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].procurement_tool_approver_outcome.note #=> String
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].procurement_tool_approver_outcome.status #=> String, one of "QUEUED", "PENDING_APPROVAL", "APPROVED", "REJECTED", "EXPIRED", "SKIPPED"
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].procurement_tool_approver_outcome.updated_at #=> Time
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].procurement_tool_approver_outcome.approver_outcome_id #=> String
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].procurement_tool_approver_outcome.name #=> String
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].procurement_tool_approver_outcome.purchase_orders #=> Array
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].procurement_tool_approver_outcome.purchase_orders[0].charge_id #=> String
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].procurement_tool_approver_outcome.purchase_orders[0].purchase_order_reference #=> String
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].procurement_tool_approver_outcome.overridden_by.principal_arn #=> String
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].aws_organization_approver_outcome.note #=> String
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].aws_organization_approver_outcome.status #=> String, one of "QUEUED", "PENDING_APPROVAL", "APPROVED", "REJECTED", "EXPIRED", "SKIPPED"
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].aws_organization_approver_outcome.updated_at #=> Time
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].aws_organization_approver_outcome.approver_outcome_id #=> String
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].aws_organization_approver_outcome.purchase_orders #=> Array
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].aws_organization_approver_outcome.purchase_orders[0].charge_id #=> String
+    #   resp.buyer_agreement_approval.levels[0].groups[0].approvers[0].aws_organization_approver_outcome.purchase_orders[0].purchase_order_reference #=> String
+    #   resp.buyer_agreement_approval.plan_input.plan_reference #=> String
+    #   resp.buyer_agreement_approval.plan_input.requester_note #=> String
+    #   resp.buyer_agreement_approval.proposer.account_id #=> String
+    #   resp.buyer_agreement_approval.proposer.legal_name #=> String
+    #   resp.buyer_agreement_approval.proposal_summary.offer_id #=> String
+    #   resp.buyer_agreement_approval.proposal_summary.offer_set_id #=> String
+    #   resp.buyer_agreement_approval.proposal_summary.resources #=> Array
+    #   resp.buyer_agreement_approval.proposal_summary.resources[0].id #=> String
+    #   resp.buyer_agreement_approval.proposal_summary.resources[0].type #=> String
+    #   resp.buyer_agreement_approval.proposal_summary.resources[0].name #=> String
+    #   resp.buyer_agreement_approval.proposal_summary.resources[0].deployed_on_aws #=> String
+    #   resp.buyer_agreement_approval.proposal_summary.visibility_scope #=> String, one of "PUBLIC", "PRIVATE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementApproval AWS API Documentation
+    #
+    # @overload get_agreement_approval(params = {})
+    # @param [Hash] params ({})
+    def get_agreement_approval(params = {}, options = {})
+      req = build_request(:get_agreement_approval, params)
+      req.send_request(options)
+    end
+
     # Retrieves detailed information about a specific agreement cancellation
     # request. Both sellers (proposers) and buyers (acceptors) can use this
     # operation to view cancellation requests associated with their
@@ -1150,6 +1418,65 @@ module Aws::MarketplaceAgreement
     # @param [Hash] params ({})
     def get_agreement_cancellation_request(params = {}, options = {})
       req = build_request(:get_agreement_cancellation_request, params)
+      req.send_request(options)
+    end
+
+    # Obtains details about the acceptor's contact information for an
+    # active agreement that you participate in as the proposer, acceptor, or
+    # manufacturer.
+    #
+    # <note markdown="1"> If the acceptor's contact information isn't available, the operation
+    # succeeds but doesn't return `acceptorContact`. This happens when the
+    # acceptor didn't provide it, the information was removed, or the
+    # agreement isn't active.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :agreement_id
+    #   The unique identifier of the agreement.
+    #
+    # @return [Types::GetAgreementContactsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAgreementContactsOutput#acceptor_contact #acceptor_contact} => Types::AcceptorContact
+    #
+    #
+    # @example Example: Get the contacts captured on an agreement
+    #
+    #   resp = client.get_agreement_contacts({
+    #     agreement_id: "agmt-xxxxxxx", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     acceptor_contact: {
+    #       company_name: "Example Corp", 
+    #       country_code: "US", 
+    #       email_address: "xxx@example.com", 
+    #       first_name: "xx", 
+    #       last_name: "xx", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_agreement_contacts({
+    #     agreement_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.acceptor_contact.first_name #=> String
+    #   resp.acceptor_contact.last_name #=> String
+    #   resp.acceptor_contact.email_address #=> String
+    #   resp.acceptor_contact.company_name #=> String
+    #   resp.acceptor_contact.country_code #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementContacts AWS API Documentation
+    #
+    # @overload get_agreement_contacts(params = {})
+    # @param [Hash] params ({})
+    def get_agreement_contacts(params = {}, options = {})
+      req = build_request(:get_agreement_contacts, params)
       req.send_request(options)
     end
 
@@ -1261,6 +1588,446 @@ module Aws::MarketplaceAgreement
     # @param [Hash] params ({})
     def get_agreement_payment_request(params = {}, options = {})
       req = build_request(:get_agreement_payment_request, params)
+      req.send_request(options)
+    end
+
+    # Retrieves detailed information about a specific agreement request,
+    # including its status, intent, approval requirement, and charges. The
+    # acceptor, or the management account or a delegated administrator of
+    # the acceptor's AWS organization, can call this operation.
+    #
+    # @option params [required, String] :agreement_request_id
+    #   The unique identifier of the agreement request.
+    #
+    # @return [Types::GetAgreementRequestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAgreementRequestOutput#agreement_request_id #agreement_request_id} => String
+    #   * {Types::GetAgreementRequestOutput#agreement_type #agreement_type} => String
+    #   * {Types::GetAgreementRequestOutput#status #status} => String
+    #   * {Types::GetAgreementRequestOutput#approval_requirement #approval_requirement} => String
+    #   * {Types::GetAgreementRequestOutput#agreement_id #agreement_id} => String
+    #   * {Types::GetAgreementRequestOutput#intent #intent} => String
+    #   * {Types::GetAgreementRequestOutput#created_at #created_at} => Time
+    #   * {Types::GetAgreementRequestOutput#charge_summary #charge_summary} => Types::ChargeSummary
+    #   * {Types::GetAgreementRequestOutput#proposer #proposer} => Types::Proposer
+    #   * {Types::GetAgreementRequestOutput#proposal_summary #proposal_summary} => Types::ProposalSummary
+    #
+    #
+    # @example Example: Get an agreement request
+    #
+    #   resp = client.get_agreement_request({
+    #     agreement_request_id: "ar-EXAMPLE4a539b123d4EXAMPLE78", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     agreement_request_id: "ar-EXAMPLE4a539b123d4EXAMPLE78", 
+    #     agreement_type: "PurchaseAgreement", 
+    #     approval_requirement: "REQUIRED", 
+    #     charge_summary: {
+    #       currency_code: "USD", 
+    #       expected_charges: [
+    #         {
+    #           amount: "100", 
+    #           id: "ch-EXAMPLE4b4296145c3EXAMPLE56", 
+    #           purchase_order_reference: "PO-123", 
+    #           timing: "ON_ACCEPTANCE", 
+    #         }, 
+    #       ], 
+    #       itemized_charges: [
+    #         {
+    #           charge_reference: "ch-EXAMPLE4b4296145c3EXAMPLE56", 
+    #           dimension_key: "AdminUsers", 
+    #           incremental_charge_amount: "50", 
+    #           new_quantity: 5, 
+    #           old_quantity: 0, 
+    #         }, 
+    #         {
+    #           charge_reference: "ch-EXAMPLE4b4296145c3EXAMPLE56", 
+    #           dimension_key: "ReadOnlyUsers", 
+    #           incremental_charge_amount: "50", 
+    #           new_quantity: 10, 
+    #           old_quantity: 0, 
+    #         }, 
+    #       ], 
+    #       new_agreement_value: "100", 
+    #     }, 
+    #     created_at: Time.parse(1736935800), 
+    #     intent: "NEW", 
+    #     proposal_summary: {
+    #       offer_id: "ABCDEFGHIJKLMNOP123", 
+    #       resources: [
+    #         {
+    #           type: "SaaSProduct", 
+    #           id: "0EXAMPLE-8ce8-4814-bcf1-636EXAMPLEb5", 
+    #         }, 
+    #       ], 
+    #     }, 
+    #     proposer: {
+    #       account_id: "444455556666", 
+    #     }, 
+    #     status: "PENDING_APPROVAL", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_agreement_request({
+    #     agreement_request_id: "AgreementRequestId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agreement_request_id #=> String
+    #   resp.agreement_type #=> String
+    #   resp.status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "ACCEPTED", "REJECTED", "CANCELLED"
+    #   resp.approval_requirement #=> String, one of "REQUIRED", "NOT_REQUIRED"
+    #   resp.agreement_id #=> String
+    #   resp.intent #=> String, one of "NEW", "AMEND", "REPLACE"
+    #   resp.created_at #=> Time
+    #   resp.charge_summary.currency_code #=> String
+    #   resp.charge_summary.new_agreement_value #=> String
+    #   resp.charge_summary.new_agreement_value_after_tax #=> String
+    #   resp.charge_summary.expected_charges #=> Array
+    #   resp.charge_summary.expected_charges[0].id #=> String
+    #   resp.charge_summary.expected_charges[0].time #=> Time
+    #   resp.charge_summary.expected_charges[0].amount #=> String
+    #   resp.charge_summary.expected_charges[0].amount_after_tax #=> String
+    #   resp.charge_summary.expected_charges[0].timing #=> String, one of "ON_ACCEPTANCE", "SCHEDULED", "BILLING_PERIOD", "NOT_APPLICABLE"
+    #   resp.charge_summary.expected_charges[0].estimated_taxes.breakdown #=> Array
+    #   resp.charge_summary.expected_charges[0].estimated_taxes.breakdown[0].amount #=> String
+    #   resp.charge_summary.expected_charges[0].estimated_taxes.breakdown[0].rate #=> String
+    #   resp.charge_summary.expected_charges[0].estimated_taxes.breakdown[0].type #=> String
+    #   resp.charge_summary.expected_charges[0].estimated_taxes.total_amount #=> String
+    #   resp.charge_summary.expected_charges[0].purchase_order_reference #=> String
+    #   resp.charge_summary.estimated_taxes.breakdown #=> Array
+    #   resp.charge_summary.estimated_taxes.breakdown[0].amount #=> String
+    #   resp.charge_summary.estimated_taxes.breakdown[0].rate #=> String
+    #   resp.charge_summary.estimated_taxes.breakdown[0].type #=> String
+    #   resp.charge_summary.estimated_taxes.total_amount #=> String
+    #   resp.charge_summary.itemized_charges #=> Array
+    #   resp.charge_summary.itemized_charges[0].dimension_key #=> String
+    #   resp.charge_summary.itemized_charges[0].new_quantity #=> Integer
+    #   resp.charge_summary.itemized_charges[0].old_quantity #=> Integer
+    #   resp.charge_summary.itemized_charges[0].charge_reference #=> String
+    #   resp.charge_summary.itemized_charges[0].incremental_charge_amount #=> String
+    #   resp.charge_summary.invoicing_entity.legal_name #=> String
+    #   resp.charge_summary.invoicing_entity.branch_name #=> String
+    #   resp.proposer.account_id #=> String
+    #   resp.proposal_summary.resources #=> Array
+    #   resp.proposal_summary.resources[0].id #=> String
+    #   resp.proposal_summary.resources[0].type #=> String
+    #   resp.proposal_summary.offer_id #=> String
+    #   resp.proposal_summary.offer_set_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementRequest AWS API Documentation
+    #
+    # @overload get_agreement_request(params = {})
+    # @param [Hash] params ({})
+    def get_agreement_request(params = {}, options = {})
+      req = build_request(:get_agreement_request, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the approval plans that apply to an agreement request. Only
+    # the acceptor of the agreement request can call this operation. Each
+    # approval plan lists its approval levels and the approvers at each
+    # level. Pass the `planReference` of an approval plan to
+    # `StartAgreementApprovals` to start an agreement approval for it.
+    #
+    # @option params [required, String] :agreement_request_id
+    #   The unique identifier of the agreement request to retrieve the
+    #   approval plans for.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of approval plans to return in a single response
+    #   (1-50). Default is 10.
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start pagination.
+    #
+    # @return [Types::GetAgreementRequestApprovalPlansOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAgreementRequestApprovalPlansOutput#items #items} => Array&lt;Types::AgreementApprovalPlan&gt;
+    #   * {Types::GetAgreementRequestApprovalPlansOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Get the approval plans of an agreement request
+    #
+    #   resp = client.get_agreement_request_approval_plans({
+    #     agreement_request_id: "ar-EXAMPLE4a539b123d4EXAMPLE78", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         buyer_agreement_approval_plan: {
+    #           name: "Software purchases over 10000 USD", 
+    #           levels: [
+    #             {
+    #               name: "Budget owner review", 
+    #               groups: [
+    #                 {
+    #                   approval_criteria: {
+    #                     required_approval_count: 1, 
+    #                   }, 
+    #                   approvers: [
+    #                     {
+    #                       aws_organization_admin_approver: {
+    #                         organization_id: "o-exampleab12", 
+    #                       }, 
+    #                     }, 
+    #                   ], 
+    #                 }, 
+    #               ], 
+    #             }, 
+    #           ], 
+    #           plan_reference: "aplan-EXAMPLE7g8h9i0j1k2l", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_agreement_request_approval_plans({
+    #     agreement_request_id: "AgreementRequestId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].buyer_agreement_approval_plan.plan_reference #=> String
+    #   resp.items[0].buyer_agreement_approval_plan.name #=> String
+    #   resp.items[0].buyer_agreement_approval_plan.levels #=> Array
+    #   resp.items[0].buyer_agreement_approval_plan.levels[0].name #=> String
+    #   resp.items[0].buyer_agreement_approval_plan.levels[0].groups #=> Array
+    #   resp.items[0].buyer_agreement_approval_plan.levels[0].groups[0].approval_criteria.required_approval_count #=> Integer
+    #   resp.items[0].buyer_agreement_approval_plan.levels[0].groups[0].approvers #=> Array
+    #   resp.items[0].buyer_agreement_approval_plan.levels[0].groups[0].approvers[0].email_approver.email_address #=> String
+    #   resp.items[0].buyer_agreement_approval_plan.levels[0].groups[0].approvers[0].email_approver.name #=> String
+    #   resp.items[0].buyer_agreement_approval_plan.levels[0].groups[0].approvers[0].procurement_tool_approver.name #=> String
+    #   resp.items[0].buyer_agreement_approval_plan.levels[0].groups[0].approvers[0].aws_organization_admin_approver.organization_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementRequestApprovalPlans AWS API Documentation
+    #
+    # @overload get_agreement_request_approval_plans(params = {})
+    # @param [Hash] params ({})
+    def get_agreement_request_approval_plans(params = {}, options = {})
+      req = build_request(:get_agreement_request_approval_plans, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the terms proposed for an agreement request, such as
+    # pricing, legal, and renewal terms. The acceptor, or the management
+    # account or a delegated administrator of the acceptor's AWS
+    # organization, can call this operation. This operation is similar to
+    # `GetAgreementTerms`, but it takes an `agreementRequestId` instead of
+    # an `agreementId`.
+    #
+    # @option params [required, String] :agreement_request_id
+    #   The unique identifier of the agreement request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of terms to return in the response.
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start pagination.
+    #
+    # @return [Types::GetAgreementRequestTermsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAgreementRequestTermsOutput#terms #terms} => Array&lt;Types::AgreementRequestTerm&gt;
+    #   * {Types::GetAgreementRequestTermsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Get the terms of an agreement request
+    #
+    #   resp = client.get_agreement_request_terms({
+    #     agreement_request_id: "ar-EXAMPLE4a539b123d4EXAMPLE78", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     terms: [
+    #       {
+    #         legal_term: {
+    #           type: "LegalTerm", 
+    #           documents: [
+    #             {
+    #               type: "CustomEula", 
+    #               url: "URL", 
+    #             }, 
+    #           ], 
+    #           id: "term-EXAMPLE3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f", 
+    #         }, 
+    #       }, 
+    #       {
+    #         configurable_upfront_pricing_term: {
+    #           type: "ConfigurableUpfrontPricingTerm", 
+    #           configuration: {
+    #             dimensions: [
+    #               {
+    #                 dimension_key: "AdminUsers", 
+    #                 dimension_value: 5, 
+    #               }, 
+    #               {
+    #                 dimension_key: "ReadOnlyUsers", 
+    #                 dimension_value: 10, 
+    #               }, 
+    #             ], 
+    #             selector_value: "P12M", 
+    #           }, 
+    #           currency_code: "USD", 
+    #           id: "term-EXAMPLE1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d", 
+    #           rate_cards: [
+    #             {
+    #               constraints: {
+    #                 multiple_dimension_selection: "Allowed", 
+    #                 quantity_configuration: "Allowed", 
+    #               }, 
+    #               rate_card: [
+    #                 {
+    #                   dimension_key: "AdminUsers", 
+    #                   price: "10", 
+    #                 }, 
+    #                 {
+    #                   dimension_key: "ReadOnlyUsers", 
+    #                   price: "5", 
+    #                 }, 
+    #               ], 
+    #               selector: {
+    #                 type: "Duration", 
+    #                 value: "P12M", 
+    #               }, 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       }, 
+    #       {
+    #         renewal_term: {
+    #           type: "RenewalTerm", 
+    #           configuration: {
+    #             enable_auto_renew: false, 
+    #           }, 
+    #           id: "term-EXAMPLE2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_agreement_request_terms({
+    #     agreement_request_id: "AgreementRequestId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.terms #=> Array
+    #   resp.terms[0].legal_term.type #=> String
+    #   resp.terms[0].legal_term.id #=> String
+    #   resp.terms[0].legal_term.documents #=> Array
+    #   resp.terms[0].legal_term.documents[0].type #=> String
+    #   resp.terms[0].legal_term.documents[0].url #=> String
+    #   resp.terms[0].legal_term.documents[0].version #=> String
+    #   resp.terms[0].support_term.type #=> String
+    #   resp.terms[0].support_term.id #=> String
+    #   resp.terms[0].support_term.refund_policy #=> String
+    #   resp.terms[0].renewal_term.type #=> String
+    #   resp.terms[0].renewal_term.id #=> String
+    #   resp.terms[0].renewal_term.configuration.enable_auto_renew #=> Boolean
+    #   resp.terms[0].renewal_term.lockout_period #=> String
+    #   resp.terms[0].renewal_term.max_renewals #=> Integer
+    #   resp.terms[0].renewal_term.adjustment_deadline #=> String
+    #   resp.terms[0].renewal_term.price_increase.fixed_percentage.value #=> String
+    #   resp.terms[0].renewal_term.price_increase.percentage_range.min_value #=> String
+    #   resp.terms[0].renewal_term.price_increase.percentage_range.max_value #=> String
+    #   resp.terms[0].renewal_term.price_increase.percentage_range.default_value #=> String
+    #   resp.terms[0].renewal_term.term_templates #=> Array
+    #   resp.terms[0].renewal_term.term_templates[0].payment_schedule_term_template.schedule #=> Array
+    #   resp.terms[0].renewal_term.term_templates[0].payment_schedule_term_template.schedule[0].charge_date_offset #=> String
+    #   resp.terms[0].renewal_term.term_templates[0].payment_schedule_term_template.schedule[0].charge_percentage #=> String
+    #   resp.terms[0].renewal_term.term_templates[0].payment_schedule_term_template.schedule[0].day_of_month #=> Integer
+    #   resp.terms[0].usage_based_pricing_term.type #=> String
+    #   resp.terms[0].usage_based_pricing_term.id #=> String
+    #   resp.terms[0].usage_based_pricing_term.currency_code #=> String
+    #   resp.terms[0].usage_based_pricing_term.rate_cards #=> Array
+    #   resp.terms[0].usage_based_pricing_term.rate_cards[0].rate_card #=> Array
+    #   resp.terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].dimension_key #=> String
+    #   resp.terms[0].usage_based_pricing_term.rate_cards[0].rate_card[0].price #=> String
+    #   resp.terms[0].configurable_upfront_pricing_term.type #=> String
+    #   resp.terms[0].configurable_upfront_pricing_term.id #=> String
+    #   resp.terms[0].configurable_upfront_pricing_term.currency_code #=> String
+    #   resp.terms[0].configurable_upfront_pricing_term.rate_cards #=> Array
+    #   resp.terms[0].configurable_upfront_pricing_term.rate_cards[0].selector.type #=> String
+    #   resp.terms[0].configurable_upfront_pricing_term.rate_cards[0].selector.value #=> String
+    #   resp.terms[0].configurable_upfront_pricing_term.rate_cards[0].constraints.multiple_dimension_selection #=> String
+    #   resp.terms[0].configurable_upfront_pricing_term.rate_cards[0].constraints.quantity_configuration #=> String
+    #   resp.terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card #=> Array
+    #   resp.terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].dimension_key #=> String
+    #   resp.terms[0].configurable_upfront_pricing_term.rate_cards[0].rate_card[0].price #=> String
+    #   resp.terms[0].configurable_upfront_pricing_term.configuration.selector_value #=> String
+    #   resp.terms[0].configurable_upfront_pricing_term.configuration.dimensions #=> Array
+    #   resp.terms[0].configurable_upfront_pricing_term.configuration.dimensions[0].dimension_key #=> String
+    #   resp.terms[0].configurable_upfront_pricing_term.configuration.dimensions[0].dimension_value #=> Integer
+    #   resp.terms[0].byol_pricing_term.type #=> String
+    #   resp.terms[0].byol_pricing_term.id #=> String
+    #   resp.terms[0].recurring_payment_term.type #=> String
+    #   resp.terms[0].recurring_payment_term.id #=> String
+    #   resp.terms[0].recurring_payment_term.currency_code #=> String
+    #   resp.terms[0].recurring_payment_term.billing_period #=> String
+    #   resp.terms[0].recurring_payment_term.price #=> String
+    #   resp.terms[0].validity_term.type #=> String
+    #   resp.terms[0].validity_term.id #=> String
+    #   resp.terms[0].validity_term.agreement_duration #=> String
+    #   resp.terms[0].validity_term.agreement_start_date #=> Time
+    #   resp.terms[0].validity_term.agreement_end_date #=> Time
+    #   resp.terms[0].payment_schedule_term.type #=> String
+    #   resp.terms[0].payment_schedule_term.id #=> String
+    #   resp.terms[0].payment_schedule_term.currency_code #=> String
+    #   resp.terms[0].payment_schedule_term.schedule #=> Array
+    #   resp.terms[0].payment_schedule_term.schedule[0].charge_date #=> Time
+    #   resp.terms[0].payment_schedule_term.schedule[0].charge_amount #=> String
+    #   resp.terms[0].free_trial_pricing_term.type #=> String
+    #   resp.terms[0].free_trial_pricing_term.id #=> String
+    #   resp.terms[0].free_trial_pricing_term.duration #=> String
+    #   resp.terms[0].free_trial_pricing_term.grants #=> Array
+    #   resp.terms[0].free_trial_pricing_term.grants[0].dimension_key #=> String
+    #   resp.terms[0].free_trial_pricing_term.grants[0].max_quantity #=> Integer
+    #   resp.terms[0].fixed_upfront_pricing_term.type #=> String
+    #   resp.terms[0].fixed_upfront_pricing_term.id #=> String
+    #   resp.terms[0].fixed_upfront_pricing_term.currency_code #=> String
+    #   resp.terms[0].fixed_upfront_pricing_term.duration #=> String
+    #   resp.terms[0].fixed_upfront_pricing_term.price #=> String
+    #   resp.terms[0].fixed_upfront_pricing_term.grants #=> Array
+    #   resp.terms[0].fixed_upfront_pricing_term.grants[0].dimension_key #=> String
+    #   resp.terms[0].fixed_upfront_pricing_term.grants[0].max_quantity #=> Integer
+    #   resp.terms[0].variable_payment_term.type #=> String
+    #   resp.terms[0].variable_payment_term.id #=> String
+    #   resp.terms[0].variable_payment_term.currency_code #=> String
+    #   resp.terms[0].variable_payment_term.max_total_charge_amount #=> String
+    #   resp.terms[0].variable_payment_term.configuration.payment_request_approval_strategy #=> String, one of "AUTO_APPROVE_ON_EXPIRATION", "WAIT_FOR_APPROVAL"
+    #   resp.terms[0].variable_payment_term.configuration.expiration_duration #=> String
+    #   resp.terms[0].net_payment_term.type #=> String
+    #   resp.terms[0].net_payment_term.id #=> String
+    #   resp.terms[0].net_payment_term.payment_due_period #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementRequestTerms AWS API Documentation
+    #
+    # @overload get_agreement_request_terms(params = {})
+    # @param [Hash] params ({})
+    def get_agreement_request_terms(params = {}, options = {})
+      req = build_request(:get_agreement_request_terms, params)
       req.send_request(options)
     end
 
@@ -1486,6 +2253,114 @@ module Aws::MarketplaceAgreement
     # @param [Hash] params ({})
     def get_billing_adjustment_request(params = {}, options = {})
       req = build_request(:get_billing_adjustment_request, params)
+      req.send_request(options)
+    end
+
+    # Lists agreement approvals available to you as a buyer. Use `REQUESTER`
+    # as the `partyType` to list the agreement approvals that your account
+    # started. Use `AWS_ORGANIZATION_ADMIN` to list the agreement approvals
+    # in your AWS organization, if your account is the management account or
+    # a delegated administrator of the organization. You can filter the
+    # results by agreement request, approval type, and status.
+    #
+    # @option params [String] :catalog
+    #   An optional parameter to filter agreement approvals by catalog (for
+    #   example, `AWSMarketplace`).
+    #
+    # @option params [required, String] :party_type
+    #   The party type for the agreement approvals. Required parameter. Use
+    #   `REQUESTER` to list agreement approvals for agreement requests that
+    #   you created, or `AWS_ORGANIZATION_ADMIN` to list agreement approvals
+    #   as an AWS Organizations administrator.
+    #
+    # @option params [String] :agreement_request_id
+    #   An optional parameter to filter agreement approvals for a specific
+    #   agreement request.
+    #
+    # @option params [String] :approval_type
+    #   An optional parameter to filter agreement approvals by type. The only
+    #   valid value is `BUYER_AGREEMENT_APPROVAL`.
+    #
+    # @option params [String] :status
+    #   An optional parameter to filter agreement approvals by status. Valid
+    #   values include `PENDING_APPROVAL`, `APPROVED`, `REJECTED`, `EXPIRED`,
+    #   and `CANCELLED`. If you don't specify a status, agreement approvals
+    #   of all statuses are returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of agreement approvals to return in a single
+    #   response (1-50). Default is 20.
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start pagination.
+    #
+    # @return [Types::ListAgreementApprovalsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAgreementApprovalsOutput#items #items} => Array&lt;Types::AgreementApprovalSummary&gt;
+    #   * {Types::ListAgreementApprovalsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List agreement approvals
+    #
+    #   resp = client.list_agreement_approvals({
+    #     max_results: 10, 
+    #     party_type: "REQUESTER", 
+    #     status: "PENDING_APPROVAL", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         name: "Example Analytics Platform sold by Example Corp", 
+    #         agreement_approval_id: "apr-EXAMPLE9s0t1u2v3w4x", 
+    #         agreement_request_id: "ar-EXAMPLE4a539b123d4EXAMPLE78", 
+    #         approval_needed_by: Time.parse(1739527800), 
+    #         approval_type: "BUYER_AGREEMENT_APPROVAL", 
+    #         created_at: Time.parse(1736935800), 
+    #         expires_at: Time.parse(1739527800), 
+    #         started_at: Time.parse(1736935800), 
+    #         status: "PENDING_APPROVAL", 
+    #         updated_at: Time.parse(1737022200), 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_agreement_approvals({
+    #     catalog: "Catalog",
+    #     party_type: "REQUESTER", # required, accepts REQUESTER, AWS_ORGANIZATION_ADMIN
+    #     agreement_request_id: "AgreementRequestId",
+    #     approval_type: "BUYER_AGREEMENT_APPROVAL", # accepts BUYER_AGREEMENT_APPROVAL
+    #     status: "PENDING_APPROVAL", # accepts PENDING_APPROVAL, APPROVED, REJECTED, EXPIRED, CANCELLED
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].approval_type #=> String, one of "BUYER_AGREEMENT_APPROVAL"
+    #   resp.items[0].agreement_request_id #=> String
+    #   resp.items[0].agreement_approval_id #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].status #=> String, one of "PENDING_APPROVAL", "APPROVED", "REJECTED", "EXPIRED", "CANCELLED"
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].updated_at #=> Time
+    #   resp.items[0].started_at #=> Time
+    #   resp.items[0].expires_at #=> Time
+    #   resp.items[0].approval_needed_by #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListAgreementApprovals AWS API Documentation
+    #
+    # @overload list_agreement_approvals(params = {})
+    # @param [Hash] params ({})
+    def list_agreement_approvals(params = {}, options = {})
+      req = build_request(:list_agreement_approvals, params)
       req.send_request(options)
     end
 
@@ -1853,6 +2728,98 @@ module Aws::MarketplaceAgreement
       req.send_request(options)
     end
 
+    # Lists agreement requests available to you as a buyer (acceptor). You
+    # can filter the results by `catalog`, `status`, and `resourceId`.
+    #
+    # @option params [String] :catalog
+    #   An optional parameter to list agreement requests by catalog (for
+    #   example, `AWSMarketplace`).
+    #
+    # @option params [String] :status
+    #   An optional parameter to list agreement requests by status. Valid
+    #   values include `DRAFT`, `PENDING_APPROVAL`, `APPROVED`, `ACCEPTED`,
+    #   `REJECTED`, and `CANCELLED`. If you don't specify a status, agreement
+    #   requests of all statuses are returned.
+    #
+    # @option params [String] :resource_id
+    #   An optional parameter to list agreement requests for a specific
+    #   resource, such as a product.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of agreement requests to return in a single
+    #   response (1-50). Default is 20.
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start pagination.
+    #
+    # @return [Types::ListAgreementRequestsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAgreementRequestsOutput#items #items} => Array&lt;Types::AgreementRequestSummary&gt;
+    #   * {Types::ListAgreementRequestsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List agreement requests
+    #
+    #   resp = client.list_agreement_requests({
+    #     max_results: 10, 
+    #     status: "PENDING_APPROVAL", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         agreement_request_id: "ar-EXAMPLE4a539b123d4EXAMPLE78", 
+    #         agreement_type: "PurchaseAgreement", 
+    #         proposal_summary: {
+    #           offer_id: "ABCDEFGHIJKLMNOP123", 
+    #           resources: [
+    #             {
+    #               type: "SaaSProduct", 
+    #               id: "0EXAMPLE-8ce8-4814-bcf1-636EXAMPLEb5", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         status: "PENDING_APPROVAL", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_agreement_requests({
+    #     catalog: "Catalog",
+    #     status: "DRAFT", # accepts DRAFT, PENDING_APPROVAL, APPROVED, ACCEPTED, REJECTED, CANCELLED
+    #     resource_id: "ResourceId",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].agreement_request_id #=> String
+    #   resp.items[0].agreement_type #=> String
+    #   resp.items[0].status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "ACCEPTED", "REJECTED", "CANCELLED"
+    #   resp.items[0].agreement_id #=> String
+    #   resp.items[0].proposal_summary.resources #=> Array
+    #   resp.items[0].proposal_summary.resources[0].id #=> String
+    #   resp.items[0].proposal_summary.resources[0].type #=> String
+    #   resp.items[0].proposal_summary.offer_id #=> String
+    #   resp.items[0].proposal_summary.offer_set_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListAgreementRequests AWS API Documentation
+    #
+    # @overload list_agreement_requests(params = {})
+    # @param [Hash] params ({})
+    def list_agreement_requests(params = {}, options = {})
+      req = build_request(:list_agreement_requests, params)
+      req.send_request(options)
+    end
+
     # Lists billing adjustment requests for a specific agreement. Sellers
     # (proposers) can use this operation to view all billing adjustment
     # requests associated with an agreement.
@@ -1954,6 +2921,52 @@ module Aws::MarketplaceAgreement
     # @param [Hash] params ({})
     def list_billing_adjustment_requests(params = {}, options = {})
       req = build_request(:list_billing_adjustment_requests, params)
+      req.send_request(options)
+    end
+
+    # Allows the management account or a delegated administrator of the
+    # buyer's AWS organization to reject an agreement approval that is in
+    # `PENDING_APPROVAL` status, as the organization administrator approver
+    # or on behalf of another approver. Once rejected, the agreement
+    # approval and its agreement request transition to `REJECTED` status.
+    # You must provide a reason for the rejection.
+    #
+    # @option params [Types::BuyerAgreementApprovalRejectionInput] :buyer_agreement_approval_rejection_input
+    #   The rejection decision for an agreement approval that the buyer's
+    #   organization requires.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Reject an agreement approval
+    #
+    #   resp = client.reject_agreement_approval({
+    #     buyer_agreement_approval_rejection_input: {
+    #       agreement_approval_id: "apr-EXAMPLE9s0t1u2v3w4x", 
+    #       note: "Rejected. This purchase isn't in the approved budget.", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reject_agreement_approval({
+    #     buyer_agreement_approval_rejection_input: {
+    #       agreement_approval_id: "AgreementApprovalId", # required
+    #       note: "AgreementApprovalNote", # required
+    #       approver_outcome_id_to_override: "ApproverOutcomeId",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/RejectAgreementApproval AWS API Documentation
+    #
+    # @overload reject_agreement_approval(params = {})
+    # @param [Hash] params ({})
+    def reject_agreement_approval(params = {}, options = {})
+      req = build_request(:reject_agreement_approval, params)
       req.send_request(options)
     end
 
@@ -2157,6 +3170,9 @@ module Aws::MarketplaceAgreement
     #     Manager license associated with an entitlement granted by the
     #     agreement.
     #
+    #   * `IncludesContactOfType` – The type of contact information on file
+    #     for the agreement. Supported value includes `ACCEPTOR`.
+    #
     #   A proposer can use any combination of the preceding filters along with
     #   `AgreementType`, which is required.
     #
@@ -2264,6 +3280,8 @@ module Aws::MarketplaceAgreement
     #   resp.agreement_view_summaries[0].end_time_behavior_type #=> String, one of "RENEW", "REPLACE", "EXPIRE"
     #   resp.agreement_view_summaries[0].end_time_behavior_reason_code #=> String, one of "PROPOSER_RENEW_OPTED_OUT", "ACCEPTOR_RENEW_OPTED_OUT", "NO_RENEWAL_TERM", "RENEWAL_LIMIT_EXHAUSTED"
     #   resp.agreement_view_summaries[0].free_trial_end_time #=> Time
+    #   resp.agreement_view_summaries[0].includes_contact_of_type #=> Array
+    #   resp.agreement_view_summaries[0].includes_contact_of_type[0] #=> String, one of "ACCEPTOR"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/SearchAgreements AWS API Documentation
@@ -2444,6 +3462,109 @@ module Aws::MarketplaceAgreement
       req.send_request(options)
     end
 
+    # Allows buyers (acceptors) to start the approvals that their
+    # organization requires for an agreement request. You start one
+    # agreement approval for each approval plan that you specify. Use
+    # `GetAgreementRequestApprovalPlans` to retrieve the approval plans of
+    # the agreement request. Once the agreement approvals start, the
+    # agreement request transitions to `PENDING_APPROVAL` status.
+    #
+    # @option params [required, String] :agreement_request_id
+    #   The unique identifier of the agreement request to start approvals for.
+    #
+    # @option params [required, Array<Types::AgreementApprovalPlanInput>] :plan_inputs
+    #   The approval plans to start agreement approvals for.
+    #
+    # @option params [Array<Types::AgreementApprovalPurchaseOrder>] :purchase_orders
+    #   An optional list of purchase order references to associate with
+    #   charges on the agreement request.
+    #
+    # @return [Types::StartAgreementApprovalsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartAgreementApprovalsOutput#approval_summaries #approval_summaries} => Array&lt;Types::AgreementApprovalSummary&gt;
+    #
+    #
+    # @example Example: Start agreement approvals
+    #
+    #   resp = client.start_agreement_approvals({
+    #     agreement_request_id: "ar-EXAMPLE4a539b123d4EXAMPLE78", 
+    #     plan_inputs: [
+    #       {
+    #         buyer_agreement_approval_plan_input: {
+    #           plan_reference: "aplan-EXAMPLE7g8h9i0j1k2l", 
+    #           requester_note: "Annual subscription for the data platform team.", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     purchase_orders: [
+    #       {
+    #         charge_id: "ch-EXAMPLE4b4296145c3EXAMPLE56", 
+    #         purchase_order_reference: "PO-123", 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     approval_summaries: [
+    #       {
+    #         name: "Example Analytics Platform sold by Example Corp", 
+    #         agreement_approval_id: "apr-EXAMPLE9s0t1u2v3w4x", 
+    #         agreement_request_id: "ar-EXAMPLE4a539b123d4EXAMPLE78", 
+    #         approval_needed_by: Time.parse(1739527800), 
+    #         approval_type: "BUYER_AGREEMENT_APPROVAL", 
+    #         created_at: Time.parse(1736935800), 
+    #         expires_at: Time.parse(1739527800), 
+    #         started_at: Time.parse(1736935800), 
+    #         status: "PENDING_APPROVAL", 
+    #         updated_at: Time.parse(1736935800), 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_agreement_approvals({
+    #     agreement_request_id: "AgreementRequestId", # required
+    #     plan_inputs: [ # required
+    #       {
+    #         buyer_agreement_approval_plan_input: {
+    #           plan_reference: "AgreementApprovalPlanReference", # required
+    #           requester_note: "AgreementApprovalNote",
+    #         },
+    #       },
+    #     ],
+    #     purchase_orders: [
+    #       {
+    #         charge_id: "ChargeId", # required
+    #         purchase_order_reference: "PurchaseOrderReference",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.approval_summaries #=> Array
+    #   resp.approval_summaries[0].approval_type #=> String, one of "BUYER_AGREEMENT_APPROVAL"
+    #   resp.approval_summaries[0].agreement_request_id #=> String
+    #   resp.approval_summaries[0].agreement_approval_id #=> String
+    #   resp.approval_summaries[0].name #=> String
+    #   resp.approval_summaries[0].status #=> String, one of "PENDING_APPROVAL", "APPROVED", "REJECTED", "EXPIRED", "CANCELLED"
+    #   resp.approval_summaries[0].created_at #=> Time
+    #   resp.approval_summaries[0].updated_at #=> Time
+    #   resp.approval_summaries[0].started_at #=> Time
+    #   resp.approval_summaries[0].expires_at #=> Time
+    #   resp.approval_summaries[0].approval_needed_by #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/StartAgreementApprovals AWS API Documentation
+    #
+    # @overload start_agreement_approvals(params = {})
+    # @param [Hash] params ({})
+    def start_agreement_approvals(params = {}, options = {})
+      req = build_request(:start_agreement_approvals, params)
+      req.send_request(options)
+    end
+
     # Allows acceptors to associate purchase orders with agreement charges
     # after an agreement is created.
     #
@@ -2492,7 +3613,7 @@ module Aws::MarketplaceAgreement
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplaceagreement'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

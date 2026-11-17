@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.181.0 (2026-11-17)
+------------------
+
+* Feature - Security Hub now supports Google Cloud. Use connector APIs to connect GCP organizations or projects and monitor their security posture. It also infers resource criticality from tags, CloudWatch metrics, and SBOM data to help you prioritize findings
+
 1.180.0 (2026-11-16)
 ------------------
 

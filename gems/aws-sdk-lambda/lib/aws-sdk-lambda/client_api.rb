@@ -125,6 +125,8 @@ module Aws::Lambda
     DeleteCapacityProviderResponse = Shapes::StructureShape.new(name: 'DeleteCapacityProviderResponse')
     DeleteCodeSigningConfigRequest = Shapes::StructureShape.new(name: 'DeleteCodeSigningConfigRequest')
     DeleteCodeSigningConfigResponse = Shapes::StructureShape.new(name: 'DeleteCodeSigningConfigResponse')
+    DeleteDurableExecutionRequest = Shapes::StructureShape.new(name: 'DeleteDurableExecutionRequest')
+    DeleteDurableExecutionResponse = Shapes::StructureShape.new(name: 'DeleteDurableExecutionResponse')
     DeleteEventSourceMappingRequest = Shapes::StructureShape.new(name: 'DeleteEventSourceMappingRequest')
     DeleteFunctionCodeSigningConfigRequest = Shapes::StructureShape.new(name: 'DeleteFunctionCodeSigningConfigRequest')
     DeleteFunctionConcurrencyRequest = Shapes::StructureShape.new(name: 'DeleteFunctionConcurrencyRequest')
@@ -176,7 +178,9 @@ module Aws::Lambda
     EventError = Shapes::StructureShape.new(name: 'EventError')
     EventId = Shapes::IntegerShape.new(name: 'EventId')
     EventInput = Shapes::StructureShape.new(name: 'EventInput')
+    EventPauseReason = Shapes::StructureShape.new(name: 'EventPauseReason')
     EventResult = Shapes::StructureShape.new(name: 'EventResult')
+    EventResumeReason = Shapes::StructureShape.new(name: 'EventResumeReason')
     EventSourceMappingArn = Shapes::StringShape.new(name: 'EventSourceMappingArn')
     EventSourceMappingConfiguration = Shapes::StructureShape.new(name: 'EventSourceMappingConfiguration')
     EventSourceMappingLoggingConfig = Shapes::StructureShape.new(name: 'EventSourceMappingLoggingConfig')
@@ -194,6 +198,8 @@ module Aws::Lambda
     ExecutionDetails = Shapes::StructureShape.new(name: 'ExecutionDetails')
     ExecutionEnvironmentMemoryGiBPerVCpu = Shapes::FloatShape.new(name: 'ExecutionEnvironmentMemoryGiBPerVCpu')
     ExecutionFailedDetails = Shapes::StructureShape.new(name: 'ExecutionFailedDetails')
+    ExecutionPausedDetails = Shapes::StructureShape.new(name: 'ExecutionPausedDetails')
+    ExecutionResumedDetails = Shapes::StructureShape.new(name: 'ExecutionResumedDetails')
     ExecutionStartedDetails = Shapes::StructureShape.new(name: 'ExecutionStartedDetails')
     ExecutionStatus = Shapes::StringShape.new(name: 'ExecutionStatus')
     ExecutionStatusList = Shapes::ListShape.new(name: 'ExecutionStatusList')
@@ -201,6 +207,7 @@ module Aws::Lambda
     ExecutionSucceededDetails = Shapes::StructureShape.new(name: 'ExecutionSucceededDetails')
     ExecutionTimedOutDetails = Shapes::StructureShape.new(name: 'ExecutionTimedOutDetails')
     ExecutionTimeout = Shapes::IntegerShape.new(name: 'ExecutionTimeout')
+    ExecutionTimeoutPaused = Shapes::BooleanShape.new(name: 'ExecutionTimeoutPaused')
     ExecutionTimestamp = Shapes::TimestampShape.new(name: 'ExecutionTimestamp')
     FileSystemArn = Shapes::StringShape.new(name: 'FileSystemArn')
     FileSystemConfig = Shapes::StructureShape.new(name: 'FileSystemConfig')
@@ -432,6 +439,10 @@ module Aws::Lambda
     PackageType = Shapes::StringShape.new(name: 'PackageType')
     ParallelizationFactor = Shapes::IntegerShape.new(name: 'ParallelizationFactor')
     Pattern = Shapes::StringShape.new(name: 'Pattern')
+    PauseDetails = Shapes::StructureShape.new(name: 'PauseDetails')
+    PauseDurableExecutionRequest = Shapes::StructureShape.new(name: 'PauseDurableExecutionRequest')
+    PauseDurableExecutionResponse = Shapes::StructureShape.new(name: 'PauseDurableExecutionResponse')
+    PauseReason = Shapes::StringShape.new(name: 'PauseReason')
     PerExecutionEnvironmentMaxConcurrency = Shapes::IntegerShape.new(name: 'PerExecutionEnvironmentMaxConcurrency')
     PolicyLengthExceededException = Shapes::StructureShape.new(name: 'PolicyLengthExceededException')
     PolicyResourceArn = Shapes::StringShape.new(name: 'PolicyResourceArn')
@@ -485,6 +496,9 @@ module Aws::Lambda
     ResourceNotReadyException = Shapes::StructureShape.new(name: 'ResourceNotReadyException')
     ResourcePolicy = Shapes::StringShape.new(name: 'ResourcePolicy')
     ResponseStreamingInvocationType = Shapes::StringShape.new(name: 'ResponseStreamingInvocationType')
+    ResumeDurableExecutionRequest = Shapes::StructureShape.new(name: 'ResumeDurableExecutionRequest')
+    ResumeDurableExecutionResponse = Shapes::StructureShape.new(name: 'ResumeDurableExecutionResponse')
+    ResumeReason = Shapes::StringShape.new(name: 'ResumeReason')
     RetentionPeriodInDays = Shapes::IntegerShape.new(name: 'RetentionPeriodInDays')
     RetryDetails = Shapes::StructureShape.new(name: 'RetryDetails')
     ReverseOrder = Shapes::BooleanShape.new(name: 'ReverseOrder')
@@ -998,6 +1012,12 @@ module Aws::Lambda
 
     DeleteCodeSigningConfigResponse.struct_class = Types::DeleteCodeSigningConfigResponse
 
+    DeleteDurableExecutionRequest.add_member(:durable_execution_arn, Shapes::ShapeRef.new(shape: DurableExecutionArn, required: true, location: "uri", location_name: "DurableExecutionArn"))
+    DeleteDurableExecutionRequest.struct_class = Types::DeleteDurableExecutionRequest
+
+    DeleteDurableExecutionResponse.add_member(:deletion_request_timestamp, Shapes::ShapeRef.new(shape: ExecutionTimestamp, required: true, location_name: "DeletionRequestTimestamp"))
+    DeleteDurableExecutionResponse.struct_class = Types::DeleteDurableExecutionResponse
+
     DeleteEventSourceMappingRequest.add_member(:uuid, Shapes::ShapeRef.new(shape: UUIDString, required: true, location: "uri", location_name: "UUID"))
     DeleteEventSourceMappingRequest.struct_class = Types::DeleteEventSourceMappingRequest
 
@@ -1150,6 +1170,8 @@ module Aws::Lambda
     Event.add_member(:callback_failed_details, Shapes::ShapeRef.new(shape: CallbackFailedDetails, location_name: "CallbackFailedDetails"))
     Event.add_member(:callback_timed_out_details, Shapes::ShapeRef.new(shape: CallbackTimedOutDetails, location_name: "CallbackTimedOutDetails"))
     Event.add_member(:invocation_completed_details, Shapes::ShapeRef.new(shape: InvocationCompletedDetails, location_name: "InvocationCompletedDetails"))
+    Event.add_member(:execution_paused_details, Shapes::ShapeRef.new(shape: ExecutionPausedDetails, location_name: "ExecutionPausedDetails"))
+    Event.add_member(:execution_resumed_details, Shapes::ShapeRef.new(shape: ExecutionResumedDetails, location_name: "ExecutionResumedDetails"))
     Event.struct_class = Types::Event
 
     EventError.add_member(:payload, Shapes::ShapeRef.new(shape: ErrorObject, location_name: "Payload"))
@@ -1160,9 +1182,17 @@ module Aws::Lambda
     EventInput.add_member(:truncated, Shapes::ShapeRef.new(shape: Truncated, location_name: "Truncated"))
     EventInput.struct_class = Types::EventInput
 
+    EventPauseReason.add_member(:payload, Shapes::ShapeRef.new(shape: PauseReason, location_name: "Payload"))
+    EventPauseReason.add_member(:truncated, Shapes::ShapeRef.new(shape: Truncated, location_name: "Truncated"))
+    EventPauseReason.struct_class = Types::EventPauseReason
+
     EventResult.add_member(:payload, Shapes::ShapeRef.new(shape: OperationPayload, location_name: "Payload"))
     EventResult.add_member(:truncated, Shapes::ShapeRef.new(shape: Truncated, location_name: "Truncated"))
     EventResult.struct_class = Types::EventResult
+
+    EventResumeReason.add_member(:payload, Shapes::ShapeRef.new(shape: ResumeReason, location_name: "Payload"))
+    EventResumeReason.add_member(:truncated, Shapes::ShapeRef.new(shape: Truncated, location_name: "Truncated"))
+    EventResumeReason.struct_class = Types::EventResumeReason
 
     EventSourceMappingConfiguration.add_member(:uuid, Shapes::ShapeRef.new(shape: UUIDString, location_name: "UUID"))
     EventSourceMappingConfiguration.add_member(:starting_position, Shapes::ShapeRef.new(shape: EventSourcePosition, location_name: "StartingPosition"))
@@ -1225,6 +1255,15 @@ module Aws::Lambda
 
     ExecutionFailedDetails.add_member(:error, Shapes::ShapeRef.new(shape: EventError, required: true, location_name: "Error"))
     ExecutionFailedDetails.struct_class = Types::ExecutionFailedDetails
+
+    ExecutionPausedDetails.add_member(:pause_request_timestamp, Shapes::ShapeRef.new(shape: ExecutionTimestamp, required: true, location_name: "PauseRequestTimestamp"))
+    ExecutionPausedDetails.add_member(:reason, Shapes::ShapeRef.new(shape: EventPauseReason, location_name: "Reason"))
+    ExecutionPausedDetails.add_member(:execution_timeout_paused, Shapes::ShapeRef.new(shape: ExecutionTimeoutPaused, required: true, location_name: "ExecutionTimeoutPaused"))
+    ExecutionPausedDetails.struct_class = Types::ExecutionPausedDetails
+
+    ExecutionResumedDetails.add_member(:resume_request_timestamp, Shapes::ShapeRef.new(shape: ExecutionTimestamp, required: true, location_name: "ResumeRequestTimestamp"))
+    ExecutionResumedDetails.add_member(:reason, Shapes::ShapeRef.new(shape: EventResumeReason, location_name: "Reason"))
+    ExecutionResumedDetails.struct_class = Types::ExecutionResumedDetails
 
     ExecutionStartedDetails.add_member(:input, Shapes::ShapeRef.new(shape: EventInput, required: true, location_name: "Input"))
     ExecutionStartedDetails.add_member(:execution_timeout, Shapes::ShapeRef.new(shape: DurationSeconds, required: true, location_name: "ExecutionTimeout"))
@@ -1420,6 +1459,8 @@ module Aws::Lambda
     GetDurableExecutionResponse.add_member(:trace_header, Shapes::ShapeRef.new(shape: TraceHeader, location_name: "TraceHeader"))
     GetDurableExecutionResponse.add_member(:execution_data_included, Shapes::ShapeRef.new(shape: ExecutionDataIncluded, location_name: "ExecutionDataIncluded"))
     GetDurableExecutionResponse.add_member(:durable_config, Shapes::ShapeRef.new(shape: DurableConfig, location_name: "DurableConfig"))
+    GetDurableExecutionResponse.add_member(:pause_details, Shapes::ShapeRef.new(shape: PauseDetails, location_name: "PauseDetails"))
+    GetDurableExecutionResponse.add_member(:expected_execution_timeout_timestamp, Shapes::ShapeRef.new(shape: ExecutionTimestamp, location_name: "ExpectedExecutionTimeoutTimestamp"))
     GetDurableExecutionResponse.struct_class = Types::GetDurableExecutionResponse
 
     GetDurableExecutionStateRequest.add_member(:durable_execution_arn, Shapes::ShapeRef.new(shape: DurableExecutionArn, required: true, location: "uri", location_name: "DurableExecutionArn"))
@@ -1955,6 +1996,19 @@ module Aws::Lambda
 
     Operations.member = Shapes::ShapeRef.new(shape: Operation)
 
+    PauseDetails.add_member(:pause_request_timestamp, Shapes::ShapeRef.new(shape: ExecutionTimestamp, required: true, location_name: "PauseRequestTimestamp"))
+    PauseDetails.add_member(:reason, Shapes::ShapeRef.new(shape: PauseReason, location_name: "Reason"))
+    PauseDetails.add_member(:execution_timeout_paused, Shapes::ShapeRef.new(shape: ExecutionTimeoutPaused, required: true, location_name: "ExecutionTimeoutPaused"))
+    PauseDetails.struct_class = Types::PauseDetails
+
+    PauseDurableExecutionRequest.add_member(:durable_execution_arn, Shapes::ShapeRef.new(shape: DurableExecutionArn, required: true, location: "uri", location_name: "DurableExecutionArn"))
+    PauseDurableExecutionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    PauseDurableExecutionRequest.add_member(:reason, Shapes::ShapeRef.new(shape: PauseReason, location_name: "Reason"))
+    PauseDurableExecutionRequest.add_member(:execution_timeout_paused, Shapes::ShapeRef.new(shape: ExecutionTimeoutPaused, location_name: "ExecutionTimeoutPaused"))
+    PauseDurableExecutionRequest.struct_class = Types::PauseDurableExecutionRequest
+
+    PauseDurableExecutionResponse.struct_class = Types::PauseDurableExecutionResponse
+
     PolicyLengthExceededException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     PolicyLengthExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     PolicyLengthExceededException.struct_class = Types::PolicyLengthExceededException
@@ -2129,6 +2183,13 @@ module Aws::Lambda
     ResourceNotReadyException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     ResourceNotReadyException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotReadyException.struct_class = Types::ResourceNotReadyException
+
+    ResumeDurableExecutionRequest.add_member(:durable_execution_arn, Shapes::ShapeRef.new(shape: DurableExecutionArn, required: true, location: "uri", location_name: "DurableExecutionArn"))
+    ResumeDurableExecutionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    ResumeDurableExecutionRequest.add_member(:reason, Shapes::ShapeRef.new(shape: ResumeReason, location_name: "Reason"))
+    ResumeDurableExecutionRequest.struct_class = Types::ResumeDurableExecutionRequest
+
+    ResumeDurableExecutionResponse.struct_class = Types::ResumeDurableExecutionResponse
 
     RetryDetails.add_member(:current_attempt, Shapes::ShapeRef.new(shape: AttemptCount, location_name: "CurrentAttempt"))
     RetryDetails.add_member(:next_attempt_delay_seconds, Shapes::ShapeRef.new(shape: DurationSeconds, location_name: "NextAttemptDelaySeconds"))
@@ -2646,6 +2707,19 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_durable_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDurableExecution"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2025-12-01/durable-executions/{DurableExecutionArn}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDurableExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDurableExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -3465,6 +3539,23 @@ module Aws::Lambda
         )
       end)
 
+      api.add_operation(:pause_durable_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PauseDurableExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/2025-12-01/durable-executions/{DurableExecutionArn}/pause"
+        o.input = Shapes::ShapeRef.new(shape: PauseDurableExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: PauseDurableExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
+      end)
+
       api.add_operation(:publish_layer_version, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PublishLayerVersion"
         o.http_method = "POST"
@@ -3628,6 +3719,23 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+      end)
+
+      api.add_operation(:resume_durable_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResumeDurableExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/2025-12-01/durable-executions/{DurableExecutionArn}/resume"
+        o.input = Shapes::ShapeRef.new(shape: ResumeDurableExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: ResumeDurableExecutionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
       end)
 
       api.add_operation(:send_durable_execution_callback_failure, Seahorse::Model::Operation.new.tap do |o|

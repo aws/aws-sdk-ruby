@@ -146,11 +146,16 @@ module Aws::ConfigService
     ConformancePackRuleCompliance = Shapes::StructureShape.new(name: 'ConformancePackRuleCompliance')
     ConformancePackRuleComplianceList = Shapes::ListShape.new(name: 'ConformancePackRuleComplianceList')
     ConformancePackRuleEvaluationResultsList = Shapes::ListShape.new(name: 'ConformancePackRuleEvaluationResultsList')
+    ConformancePackScope = Shapes::StructureShape.new(name: 'ConformancePackScope')
+    ConformancePackSource = Shapes::StructureShape.new(name: 'ConformancePackSource')
+    ConformancePackSourceIdentifier = Shapes::StringShape.new(name: 'ConformancePackSourceIdentifier')
     ConformancePackState = Shapes::StringShape.new(name: 'ConformancePackState')
     ConformancePackStatusDetail = Shapes::StructureShape.new(name: 'ConformancePackStatusDetail')
     ConformancePackStatusDetailsList = Shapes::ListShape.new(name: 'ConformancePackStatusDetailsList')
     ConformancePackStatusReason = Shapes::StringShape.new(name: 'ConformancePackStatusReason')
     ConformancePackTemplateValidationException = Shapes::StructureShape.new(name: 'ConformancePackTemplateValidationException')
+    ConformancePackType = Shapes::StringShape.new(name: 'ConformancePackType')
+    ConformancePackTypeList = Shapes::ListShape.new(name: 'ConformancePackTypeList')
     Connector = Shapes::StructureShape.new(name: 'Connector')
     ConnectorConfiguration = Shapes::StructureShape.new(name: 'ConnectorConfiguration')
     ConnectorFilter = Shapes::StructureShape.new(name: 'ConnectorFilter')
@@ -224,6 +229,7 @@ module Aws::ConfigService
     DescribeConformancePackComplianceResponse = Shapes::StructureShape.new(name: 'DescribeConformancePackComplianceResponse')
     DescribeConformancePackStatusRequest = Shapes::StructureShape.new(name: 'DescribeConformancePackStatusRequest')
     DescribeConformancePackStatusResponse = Shapes::StructureShape.new(name: 'DescribeConformancePackStatusResponse')
+    DescribeConformancePacksFilters = Shapes::StructureShape.new(name: 'DescribeConformancePacksFilters')
     DescribeConformancePacksRequest = Shapes::StructureShape.new(name: 'DescribeConformancePacksRequest')
     DescribeConformancePacksResponse = Shapes::StructureShape.new(name: 'DescribeConformancePacksResponse')
     DescribeDeliveryChannelStatusRequest = Shapes::StructureShape.new(name: 'DescribeDeliveryChannelStatusRequest')
@@ -1008,6 +1014,9 @@ module Aws::ConfigService
     ConformancePackDetail.add_member(:last_update_requested_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdateRequestedTime"))
     ConformancePackDetail.add_member(:created_by, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "CreatedBy"))
     ConformancePackDetail.add_member(:template_ssm_document_details, Shapes::ShapeRef.new(shape: TemplateSSMDocumentDetails, location_name: "TemplateSSMDocumentDetails"))
+    ConformancePackDetail.add_member(:type, Shapes::ShapeRef.new(shape: ConformancePackType, location_name: "Type"))
+    ConformancePackDetail.add_member(:source, Shapes::ShapeRef.new(shape: ConformancePackSource, location_name: "Source"))
+    ConformancePackDetail.add_member(:scope, Shapes::ShapeRef.new(shape: ConformancePackScope, location_name: "Scope"))
     ConformancePackDetail.struct_class = Types::ConformancePackDetail
 
     ConformancePackDetailList.member = Shapes::ShapeRef.new(shape: ConformancePackDetail)
@@ -1046,19 +1055,29 @@ module Aws::ConfigService
 
     ConformancePackRuleEvaluationResultsList.member = Shapes::ShapeRef.new(shape: ConformancePackEvaluationResult)
 
+    ConformancePackScope.add_member(:tag_key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "TagKey"))
+    ConformancePackScope.add_member(:tag_value, Shapes::ShapeRef.new(shape: TagValue, location_name: "TagValue"))
+    ConformancePackScope.struct_class = Types::ConformancePackScope
+
+    ConformancePackSource.add_member(:source_identifier, Shapes::ShapeRef.new(shape: ConformancePackSourceIdentifier, required: true, location_name: "SourceIdentifier"))
+    ConformancePackSource.struct_class = Types::ConformancePackSource
+
     ConformancePackStatusDetail.add_member(:conformance_pack_name, Shapes::ShapeRef.new(shape: ConformancePackName, required: true, location_name: "ConformancePackName"))
     ConformancePackStatusDetail.add_member(:conformance_pack_id, Shapes::ShapeRef.new(shape: ConformancePackId, required: true, location_name: "ConformancePackId"))
     ConformancePackStatusDetail.add_member(:conformance_pack_arn, Shapes::ShapeRef.new(shape: ConformancePackArn, required: true, location_name: "ConformancePackArn"))
     ConformancePackStatusDetail.add_member(:conformance_pack_state, Shapes::ShapeRef.new(shape: ConformancePackState, required: true, location_name: "ConformancePackState"))
-    ConformancePackStatusDetail.add_member(:stack_arn, Shapes::ShapeRef.new(shape: StackArn, required: true, location_name: "StackArn"))
+    ConformancePackStatusDetail.add_member(:stack_arn, Shapes::ShapeRef.new(shape: StackArn, location_name: "StackArn"))
     ConformancePackStatusDetail.add_member(:conformance_pack_status_reason, Shapes::ShapeRef.new(shape: ConformancePackStatusReason, location_name: "ConformancePackStatusReason"))
     ConformancePackStatusDetail.add_member(:last_update_requested_time, Shapes::ShapeRef.new(shape: Date, required: true, location_name: "LastUpdateRequestedTime"))
     ConformancePackStatusDetail.add_member(:last_update_completed_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdateCompletedTime"))
+    ConformancePackStatusDetail.add_member(:type, Shapes::ShapeRef.new(shape: ConformancePackType, location_name: "Type"))
     ConformancePackStatusDetail.struct_class = Types::ConformancePackStatusDetail
 
     ConformancePackStatusDetailsList.member = Shapes::ShapeRef.new(shape: ConformancePackStatusDetail)
 
     ConformancePackTemplateValidationException.struct_class = Types::ConformancePackTemplateValidationException
+
+    ConformancePackTypeList.member = Shapes::ShapeRef.new(shape: ConformancePackType)
 
     Connector.add_member(:name, Shapes::ShapeRef.new(shape: ConnectorName, required: true, location_name: "name"))
     Connector.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
@@ -1309,6 +1328,7 @@ module Aws::ConfigService
     DescribeConformancePackComplianceResponse.struct_class = Types::DescribeConformancePackComplianceResponse
 
     DescribeConformancePackStatusRequest.add_member(:conformance_pack_names, Shapes::ShapeRef.new(shape: ConformancePackNamesList, location_name: "ConformancePackNames"))
+    DescribeConformancePackStatusRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DescribeConformancePacksFilters, location_name: "Filters"))
     DescribeConformancePackStatusRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PageSizeLimit, location_name: "Limit"))
     DescribeConformancePackStatusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeConformancePackStatusRequest.struct_class = Types::DescribeConformancePackStatusRequest
@@ -1317,7 +1337,11 @@ module Aws::ConfigService
     DescribeConformancePackStatusResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeConformancePackStatusResponse.struct_class = Types::DescribeConformancePackStatusResponse
 
+    DescribeConformancePacksFilters.add_member(:types, Shapes::ShapeRef.new(shape: ConformancePackTypeList, location_name: "Types"))
+    DescribeConformancePacksFilters.struct_class = Types::DescribeConformancePacksFilters
+
     DescribeConformancePacksRequest.add_member(:conformance_pack_names, Shapes::ShapeRef.new(shape: ConformancePackNamesList, location_name: "ConformancePackNames"))
+    DescribeConformancePacksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DescribeConformancePacksFilters, location_name: "Filters"))
     DescribeConformancePacksRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PageSizeLimit, location_name: "Limit"))
     DescribeConformancePacksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeConformancePacksRequest.struct_class = Types::DescribeConformancePacksRequest
@@ -2042,6 +2066,8 @@ module Aws::ConfigService
     PutConformancePackRequest.add_member(:conformance_pack_input_parameters, Shapes::ShapeRef.new(shape: ConformancePackInputParameters, location_name: "ConformancePackInputParameters"))
     PutConformancePackRequest.add_member(:template_ssm_document_details, Shapes::ShapeRef.new(shape: TemplateSSMDocumentDetails, location_name: "TemplateSSMDocumentDetails"))
     PutConformancePackRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
+    PutConformancePackRequest.add_member(:source, Shapes::ShapeRef.new(shape: ConformancePackSource, location_name: "Source"))
+    PutConformancePackRequest.add_member(:scope, Shapes::ShapeRef.new(shape: ConformancePackScope, location_name: "Scope"))
     PutConformancePackRequest.struct_class = Types::PutConformancePackRequest
 
     PutConformancePackResponse.add_member(:conformance_pack_arn, Shapes::ShapeRef.new(shape: ConformancePackArn, location_name: "ConformancePackArn"))

@@ -306,7 +306,7 @@ module Aws
                                            id: ::String,
                                            partition: ("aws" | "aws-cn" | "aws-us-gov" | "aws-us-iso" | "aws-us-iso-b" | "AzureCloud")?,
                                            region: ::String?,
-                                           provider: ("Azure" | "AWS")?,
+                                           provider: ("Azure" | "AWS" | "GCP")?,
                                            owner: {
                                              account: {
                                                id: ::String?
@@ -3734,6 +3734,8 @@ module Aws
                                                code_security_integration_arn: ::String?
                                              }?,
                                              azure_resource: {
+                                             }?,
+                                             gcp_resource: {
                                              }?
                                            }?,
                                            application_name: ::String?,
@@ -4219,7 +4221,8 @@ module Aws
                               name: ::String,
                               ?description: ::String,
                               provider: {
-                                azure: Params::azure_provider_configuration?
+                                azure: Params::azure_provider_configuration?,
+                                gcp: Params::gcp_provider_configuration?
                               },
                               ?tags: Hash[::String, ::String],
                               ?client_token: ::String
@@ -4246,7 +4249,8 @@ module Aws
                                      instance_name: ::String,
                                      secret_arn: ::String
                                    }?,
-                                   azure: Params::azure_provider_configuration?
+                                   azure: Params::azure_provider_configuration?,
+                                   gcp: Params::gcp_provider_configuration?
                                  },
                                  ?kms_key_arn: ::String,
                                  ?tags: Hash[::String, ::String],
@@ -4498,7 +4502,7 @@ module Aws
       def describe_standards: (
                                 ?next_token: ::String,
                                 ?max_results: ::Integer,
-                                ?providers: Array[("AWS" | "Azure")]
+                                ?providers: Array[("AWS" | "Azure" | "GCP")]
                               ) -> _DescribeStandardsResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStandardsResponseSuccess
 
@@ -4771,7 +4775,7 @@ module Aws
                                    ?standards_subscription_arns: Array[::String],
                                    ?next_token: ::String,
                                    ?max_results: ::Integer,
-                                   ?providers: Array[("AWS" | "Azure")]
+                                   ?providers: Array[("AWS" | "Azure" | "GCP")]
                                  ) -> _GetEnabledStandardsResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnabledStandardsResponseSuccess
 
@@ -5265,7 +5269,7 @@ module Aws
       def list_connectors: (
                              ?next_token: ::String,
                              ?max_results: ::Integer,
-                             ?provider_name: ("AZURE"),
+                             ?provider_name: ("AZURE" | "GCP"),
                              ?connector_status: ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "UNKNOWN"),
                              ?enablement_status: ("ENABLED" | "PENDING_ENABLEMENT" | "PENDING_UPDATE" | "PENDING_DELETION")
                            ) -> _ListConnectorsResponseSuccess
@@ -5280,7 +5284,7 @@ module Aws
       def list_connectors_v2: (
                                 ?next_token: ::String,
                                 ?max_results: ::Integer,
-                                ?provider_name: ("JIRA_CLOUD" | "SERVICENOW" | "AZURE"),
+                                ?provider_name: ("JIRA_CLOUD" | "SERVICENOW" | "AZURE" | "GCP"),
                                 ?connector_status: ("CONNECTED" | "DEGRADED" | "FAILED_TO_CONNECT" | "PENDING_AUTHORIZATION" | "PENDING_CONFIGURATION" | "UNKNOWN"),
                                 ?enablement_status: ("ENABLED" | "PENDING_ENABLEMENT" | "FAILED_TO_ENABLE" | "PENDING_UPDATE" | "FAILED_TO_UPDATE" | "PENDING_DELETION" | "FAILED_TO_DELETE")
                               ) -> _ListConnectorsV2ResponseSuccess
@@ -5404,7 +5408,7 @@ module Aws
                                                ?standards_arn: ::String,
                                                ?next_token: ::String,
                                                ?max_results: ::Integer,
-                                               ?providers: Array[("AWS" | "Azure")]
+                                               ?providers: Array[("AWS" | "Azure" | "GCP")]
                                              ) -> _ListSecurityControlDefinitionsResponseSuccess
                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSecurityControlDefinitionsResponseSuccess
 
@@ -5610,6 +5614,13 @@ module Aws
                                     scope_values: Array[::String]?
                                   },
                                   azure_regions: Array[::String]
+                                }?,
+                                gcp: {
+                                  scope_configuration: {
+                                    scope_type: ("PROJECT" | "ORGANIZATION"),
+                                    scope_values: Array[::String]?
+                                  },
+                                  gcp_regions: Array[::String]
                                 }?
                               }
                             ) -> _UpdateConnectorResponseSuccess
@@ -5637,6 +5648,13 @@ module Aws
                                        scope_values: Array[::String]?
                                      },
                                      azure_regions: Array[::String]
+                                   }?,
+                                   gcp: {
+                                     scope_configuration: {
+                                       scope_type: ("PROJECT" | "ORGANIZATION"),
+                                       scope_values: Array[::String]?
+                                     },
+                                     gcp_regions: Array[::String]
                                    }?
                                  }
                                ) -> _UpdateConnectorV2ResponseSuccess

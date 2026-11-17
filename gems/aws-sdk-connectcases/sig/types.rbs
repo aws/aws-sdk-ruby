@@ -208,6 +208,7 @@ module Aws::ConnectCases
 
     class CaseEventIncludedData
       attr_accessor fields: ::Array[Types::FieldIdentifier]
+      attr_accessor auto_include_fields: ("All" | "System" | "Custom")
       SENSITIVE: []
     end
 

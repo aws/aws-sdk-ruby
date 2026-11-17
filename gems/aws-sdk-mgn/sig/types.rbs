@@ -151,6 +151,7 @@ module Aws::Mgn
       attr_accessor post_launch_actions: Types::PostLaunchActions
       attr_accessor enable_map_auto_tagging: bool
       attr_accessor map_auto_tagging_mpe_id: ::String
+      attr_accessor map_auto_tagging_key: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor launch_disposition: ("STOPPED" | "STARTED")
       attr_accessor target_instance_type_right_sizing_method: ("NONE" | "BASIC")
@@ -172,6 +173,7 @@ module Aws::Mgn
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor source_configurations: ::Array[Types::SourceConfiguration]
+      attr_accessor definition_type: ("MIGRATION" | "NEW_NETWORK")
       attr_accessor target_s3_configuration: Types::TargetS3Configuration
       attr_accessor target_network: Types::TargetNetwork
       attr_accessor target_deployment: ("SINGLE_ACCOUNT" | "MULTI_ACCOUNT")
@@ -180,6 +182,37 @@ module Aws::Mgn
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor scope_tags: ::Hash[::String, ::String]
       SENSITIVE: [:tags, :scope_tags]
+    end
+
+    class CreateOperation
+      attr_accessor name: ::String
+      attr_accessor excluded: bool
+      attr_accessor properties: ::Hash[::String, untyped]
+      attr_accessor configuration: Types::OperationConfigurationUnion
+      SENSITIVE: []
+    end
+
+    class CreateRemoteSourceActionRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor ssm_parameter_name: ::String
+      attr_accessor timeout_seconds: ::Integer
+      attr_accessor operating_system: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor account_id: ::String
+      SENSITIVE: [:tags]
+    end
+
+    class CreateRemoteSourceActionResponse
+      attr_accessor remote_source_action_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor ssm_parameter_name: ::String
+      attr_accessor timeout_seconds: ::Integer
+      attr_accessor operating_system: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
     end
 
     class CreateReplicationConfigurationTemplateRequest
@@ -199,6 +232,7 @@ module Aws::Mgn
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor internet_protocol: ("IPV4" | "IPV6")
       attr_accessor store_snapshot_on_local_zone: bool
+      attr_accessor outpost_snapshot_location: ("OUTPOST" | "REGION")
       attr_accessor storage_configuration: Types::StorageConfiguration
       SENSITIVE: [:staging_area_tags, :tags]
     end
@@ -226,6 +260,7 @@ module Aws::Mgn
       attr_accessor data_replication_error: Types::DataReplicationError
       attr_accessor last_snapshot_date_time: ::String
       attr_accessor replicator_id: ::String
+      attr_accessor staging_outpost_arn: ::String
       SENSITIVE: []
     end
 
@@ -291,6 +326,15 @@ module Aws::Mgn
     end
 
     class DeleteOperation < Aws::EmptyStructure
+    end
+
+    class DeleteRemoteSourceActionRequest
+      attr_accessor remote_source_action_id: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRemoteSourceActionResponse < Aws::EmptyStructure
     end
 
     class DeleteReplicationConfigurationTemplateRequest
@@ -519,6 +563,20 @@ module Aws::Mgn
       SENSITIVE: []
     end
 
+    class GetLaunchConfigurationDefaultsRequest
+      attr_accessor source_server_id: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetLaunchConfigurationDefaultsResponse
+      attr_accessor source_server_id: ::String
+      attr_accessor small_volume_max_size: ::Integer
+      attr_accessor small_volume_configuration: Types::SourceServerVolumeConfiguration
+      attr_accessor large_volume_configuration: Types::SourceServerVolumeConfiguration
+      SENSITIVE: []
+    end
+
     class GetLaunchConfigurationRequest
       attr_accessor source_server_id: ::String
       attr_accessor account_id: ::String
@@ -631,6 +689,13 @@ module Aws::Mgn
     class InitializeServiceResponse < Aws::EmptyStructure
     end
 
+    class InsightMessage
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor topic: ::String
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor message: ::String
       attr_accessor retry_after_seconds: ::Integer
@@ -698,6 +763,7 @@ module Aws::Mgn
       attr_accessor post_launch_actions: Types::PostLaunchActions
       attr_accessor enable_map_auto_tagging: bool
       attr_accessor map_auto_tagging_mpe_id: ::String
+      attr_accessor map_auto_tagging_key: ::String
       SENSITIVE: []
     end
 
@@ -707,6 +773,7 @@ module Aws::Mgn
       attr_accessor post_launch_actions: Types::PostLaunchActions
       attr_accessor enable_map_auto_tagging: bool
       attr_accessor map_auto_tagging_mpe_id: ::String
+      attr_accessor map_auto_tagging_key: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor ec2_launch_template_id: ::String
       attr_accessor launch_disposition: ("STOPPED" | "STARTED")
@@ -1087,6 +1154,29 @@ module Aws::Mgn
       SENSITIVE: []
     end
 
+    class ListNetworkMigrationInsightsFilters
+      attr_accessor insight_types: ::Array[("INTENT_GAP" | "WARNING" | "QUESTION" | "INFO" | "ERROR" | "CONTEXT" | "EXCLUDED" | "BEHAVIOR_CHANGE")]
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationInsightsRequest
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor producer_id: ::String
+      attr_accessor segment_id: ::String
+      attr_accessor construct_id: ::String
+      attr_accessor filters: Types::ListNetworkMigrationInsightsFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworkMigrationInsightsResponse
+      attr_accessor items: ::Array[Types::NetworkMigrationInsight]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListNetworkMigrationMapperSegmentConstructsFilters
       attr_accessor construct_i_ds: ::Array[::String]
       attr_accessor construct_types: ::Array[::String]
@@ -1100,6 +1190,8 @@ module Aws::Mgn
       attr_accessor filters: Types::ListNetworkMigrationMapperSegmentConstructsFilters
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor include_enriched_properties: bool
+      attr_accessor include_configuration: bool
       SENSITIVE: []
     end
 
@@ -1165,6 +1257,80 @@ module Aws::Mgn
 
     class ListNetworkMigrationMappingsResponse
       attr_accessor items: ::Array[Types::NetworkMigrationMappingJobDetails]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRemoteSourceActionInvocationResultsRequest
+      attr_accessor source_server_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListRemoteSourceActionInvocationResultsResponse
+      attr_accessor items: ::Array[Types::RemoteSourceActionInvocationResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRemoteSourceActionInvocationsRequest
+      attr_accessor remote_source_action_job_id: ::String
+      attr_accessor filters: Types::ListRemoteSourceActionInvocationsRequestFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListRemoteSourceActionInvocationsRequestFilters
+      attr_accessor source_server_arns: ::Array[::String]
+      attr_accessor remote_source_action_arns: ::Array[::String]
+      attr_accessor statuses: ::Array[("PENDING" | "IN_PROGRESS" | "DELAYED" | "SUCCESS" | "CANCELLED" | "TIMED_OUT" | "FAILED" | "CANCELLING" | "STALLED")]
+      SENSITIVE: []
+    end
+
+    class ListRemoteSourceActionInvocationsResponse
+      attr_accessor items: ::Array[Types::RemoteSourceActionInvocation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRemoteSourceActionJobsRequest
+      attr_accessor filters: Types::ListRemoteSourceActionJobsRequestFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListRemoteSourceActionJobsRequestFilters
+      attr_accessor remote_source_action_job_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListRemoteSourceActionJobsResponse
+      attr_accessor items: ::Array[Types::RemoteSourceActionJob]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRemoteSourceActionsRequest
+      attr_accessor filters: Types::ListRemoteSourceActionsRequestFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListRemoteSourceActionsRequestFilters
+      attr_accessor remote_source_action_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListRemoteSourceActionsResponse
+      attr_accessor items: ::Array[Types::RemoteSourceAction]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1335,6 +1501,7 @@ module Aws::Mgn
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor source_configurations: ::Array[Types::SourceConfiguration]
+      attr_accessor definition_type: ("MIGRATION" | "NEW_NETWORK")
       attr_accessor target_s3_configuration: Types::TargetS3Configuration
       attr_accessor target_network: Types::TargetNetwork
       attr_accessor target_deployment: ("SINGLE_ACCOUNT" | "MULTI_ACCOUNT")
@@ -1350,10 +1517,11 @@ module Aws::Mgn
     class NetworkMigrationDefinitionSummary
       attr_accessor network_migration_definition_id: ::String
       attr_accessor name: ::String
-      attr_accessor source_environment: ("NSX" | "VSPHERE" | "FORTIGATE_FIREWALL" | "PALO_ALTO_FIREWALL" | "CISCO_ACI" | "LOGICAL_MODEL" | "MODELIZE_IT" | "AWS_DISCOVERY_COLLECTOR" | "MIGRATION_PLANNING_ARTIFACTS")
+      attr_accessor source_environment: ("NSX" | "VSPHERE" | "FORTIGATE_FIREWALL" | "PALO_ALTO_FIREWALL" | "CISCO_ACI" | "LOGICAL_MODEL" | "MODELIZE_IT" | "AWS_DISCOVERY_COLLECTOR" | "MIGRATION_PLANNING_ARTIFACTS" | "F5_BIGIP")
       attr_accessor arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor scope_tags: ::Hash[::String, ::String]
+      attr_accessor definition_type: ("MIGRATION" | "NEW_NETWORK")
       SENSITIVE: [:tags, :scope_tags]
     end
 
@@ -1397,6 +1565,22 @@ module Aws::Mgn
       SENSITIVE: []
     end
 
+    class NetworkMigrationInsight
+      attr_accessor network_migration_definition_id: ::String
+      attr_accessor network_migration_execution_id: ::String
+      attr_accessor producer_id: ::String
+      attr_accessor producer_type: ("JOB" | "API")
+      attr_accessor producer_name: ("MAPPING" | "MAPPING_UPDATE" | "CODE_GENERATION" | "DEPLOY" | "DEPLOYED_STACKS_DELETION" | "ANALYZE")
+      attr_accessor segment_id: ::String
+      attr_accessor construct_id: ::String
+      attr_accessor insight_id: ::String
+      attr_accessor insight_level: ("RUN" | "SEGMENT" | "CONSTRUCT")
+      attr_accessor insight_type: ("INTENT_GAP" | "WARNING" | "QUESTION" | "INFO" | "ERROR" | "CONTEXT" | "EXCLUDED" | "BEHAVIOR_CHANGE")
+      attr_accessor insight_message: Types::InsightMessage
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
     class NetworkMigrationMapperSegment
       attr_accessor job_id: ::String
       attr_accessor network_migration_execution_id: ::String
@@ -1426,6 +1610,8 @@ module Aws::Mgn
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor properties: ::Hash[::String, ::String]
+      attr_accessor enriched_properties: ::Hash[::String, untyped]
+      attr_accessor configuration: Types::OperationConfigurationUnion
       SENSITIVE: []
     end
 
@@ -1456,11 +1642,27 @@ module Aws::Mgn
       SENSITIVE: []
     end
 
+    class OperationConfigurationUnion
+      attr_accessor security_group: Types::SecurityGroupConfiguration
+      attr_accessor security_group_rule: Types::SecurityGroupRuleConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SecurityGroup < OperationConfigurationUnion
+      end
+      class SecurityGroupRule < OperationConfigurationUnion
+      end
+      class Unknown < OperationConfigurationUnion
+      end
+    end
+
     class OperationUnion
       attr_accessor merge: Types::MergeOperation
       attr_accessor split: Types::SplitOperation
       attr_accessor delete: Types::DeleteOperation
       attr_accessor update: Types::UpdateOperation
+      attr_accessor update_v2: Types::UpdateOperationV2
+      attr_accessor create: Types::CreateOperation
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1471,6 +1673,10 @@ module Aws::Mgn
       class Delete < OperationUnion
       end
       class Update < OperationUnion
+      end
+      class UpdateV2 < OperationUnion
+      end
+      class Create < OperationUnion
       end
       class Unknown < OperationUnion
       end
@@ -1541,6 +1747,51 @@ module Aws::Mgn
       SENSITIVE: []
     end
 
+    class RemoteSourceAction
+      attr_accessor remote_source_action_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor ssm_parameter_name: ::String
+      attr_accessor timeout_seconds: ::Integer
+      attr_accessor operating_system: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class RemoteSourceActionInvocation
+      attr_accessor source_server_arn: ::String
+      attr_accessor remote_source_action_arn: ::String
+      attr_accessor ssm_command_invocation_id: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "DELAYED" | "SUCCESS" | "CANCELLED" | "TIMED_OUT" | "FAILED" | "CANCELLING" | "STALLED")
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      SENSITIVE: []
+    end
+
+    class RemoteSourceActionInvocationResult
+      attr_accessor remote_source_action_id: ::String
+      attr_accessor connector_owner_account_id: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "DELAYED" | "SUCCESS" | "CANCELLED" | "TIMED_OUT" | "FAILED" | "CANCELLING" | "STALLED")
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      SENSITIVE: []
+    end
+
+    class RemoteSourceActionJob
+      attr_accessor remote_source_action_job_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("PENDING" | "RUNNING" | "COMPLETED" | "FAILED" | "STALLED")
+      attr_accessor source_server_arns: ::Array[::String]
+      attr_accessor remote_source_action_arns: ::Array[::String]
+      attr_accessor connector_arn: ::String
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor status_reason: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
     class RemoveSourceServerActionRequest
       attr_accessor source_server_id: ::String
       attr_accessor action_id: ::String
@@ -1579,6 +1830,7 @@ module Aws::Mgn
       attr_accessor use_fips_endpoint: bool
       attr_accessor internet_protocol: ("IPV4" | "IPV6")
       attr_accessor store_snapshot_on_local_zone: bool
+      attr_accessor outpost_snapshot_location: ("OUTPOST" | "REGION")
       attr_accessor storage_configuration: Types::StorageConfiguration
       SENSITIVE: [:staging_area_tags]
     end
@@ -1611,6 +1863,7 @@ module Aws::Mgn
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor internet_protocol: ("IPV4" | "IPV6")
       attr_accessor store_snapshot_on_local_zone: bool
+      attr_accessor outpost_snapshot_location: ("OUTPOST" | "REGION")
       attr_accessor storage_configuration: Types::StorageConfiguration
       SENSITIVE: [:staging_area_tags, :tags]
     end
@@ -1649,6 +1902,59 @@ module Aws::Mgn
       SENSITIVE: []
     end
 
+    class SecurityGroupAssociations
+      attr_accessor cidrs: ::Array[::String]
+      attr_accessor vm_uui_ds: ::Array[::String]
+      attr_accessor user_provided_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SecurityGroupConfiguration
+      attr_accessor associations: Types::SecurityGroupAssociations
+      SENSITIVE: []
+    end
+
+    class SecurityGroupRuleConfiguration
+      attr_accessor enable_referencing: bool
+      SENSITIVE: []
+    end
+
+    class SegmentCreateOperation
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor target_account: ::String
+      attr_accessor scope_tags: ::Hash[::String, ::String]
+      SENSITIVE: [:scope_tags]
+    end
+
+    class SegmentDeleteOperation < Aws::EmptyStructure
+    end
+
+    class SegmentOperation
+      attr_accessor create: Types::SegmentCreateOperation
+      attr_accessor update: Types::SegmentUpdateOperation
+      attr_accessor delete: Types::SegmentDeleteOperation
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Create < SegmentOperation
+      end
+      class Update < SegmentOperation
+      end
+      class Delete < SegmentOperation
+      end
+      class Unknown < SegmentOperation
+      end
+    end
+
+    class SegmentUpdateOperation
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor target_account: ::String
+      attr_accessor scope_tags: ::Hash[::String, ::String]
+      SENSITIVE: [:scope_tags]
+    end
+
     class ServiceQuotaExceededException
       attr_accessor message: ::String
       attr_accessor code: ::String
@@ -1661,7 +1967,7 @@ module Aws::Mgn
     end
 
     class SourceConfiguration
-      attr_accessor source_environment: ("NSX" | "VSPHERE" | "FORTIGATE_FIREWALL" | "PALO_ALTO_FIREWALL" | "CISCO_ACI" | "LOGICAL_MODEL" | "MODELIZE_IT" | "AWS_DISCOVERY_COLLECTOR" | "MIGRATION_PLANNING_ARTIFACTS")
+      attr_accessor source_environment: ("NSX" | "VSPHERE" | "FORTIGATE_FIREWALL" | "PALO_ALTO_FIREWALL" | "CISCO_ACI" | "LOGICAL_MODEL" | "MODELIZE_IT" | "AWS_DISCOVERY_COLLECTOR" | "MIGRATION_PLANNING_ARTIFACTS" | "F5_BIGIP")
       attr_accessor source_s3_configuration: Types::SourceS3Configuration
       SENSITIVE: []
     end
@@ -1727,6 +2033,15 @@ module Aws::Mgn
     class SourceServerConnectorAction
       attr_accessor credentials_secret_arn: ::String
       attr_accessor connector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SourceServerVolumeConfiguration
+      attr_accessor volume_type: ("io1" | "io2" | "gp3" | "gp2" | "st1" | "sc1" | "standard")
+      attr_accessor iops: ::Integer
+      attr_accessor throughput: ::Integer
+      attr_accessor volume_initialization_rate: ::Integer
+      attr_accessor delete_on_termination: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -1865,8 +2180,10 @@ module Aws::Mgn
 
     class StartNetworkMigrationMappingUpdateConstruct
       attr_accessor segment_id: ::String
+      attr_accessor segment_logical_id: ::String
       attr_accessor construct_id: ::String
       attr_accessor construct_type: ::String
+      attr_accessor construct_logical_id: ::String
       attr_accessor operation: Types::OperationUnion
       SENSITIVE: []
     end
@@ -1886,9 +2203,26 @@ module Aws::Mgn
 
     class StartNetworkMigrationMappingUpdateSegment
       attr_accessor segment_id: ::String
+      attr_accessor segment_logical_id: ::String
+      attr_accessor operation: Types::SegmentOperation
       attr_accessor target_account: ::String
       attr_accessor scope_tags: ::Hash[::String, ::String]
       SENSITIVE: [:scope_tags]
+    end
+
+    class StartRemoteSourceActionJobRequest
+      attr_accessor remote_source_action_arns: ::Array[::String]
+      attr_accessor connector_arn: ::String
+      attr_accessor source_server_arns: ::Array[::String]
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor account_id: ::String
+      SENSITIVE: [:tags]
+    end
+
+    class StartRemoteSourceActionJobResponse
+      attr_accessor remote_source_action_job: Types::RemoteSourceActionJob
+      SENSITIVE: []
     end
 
     class StartReplicationRequest
@@ -2036,6 +2370,23 @@ module Aws::Mgn
       SENSITIVE: []
     end
 
+    class UpdateLaunchConfigurationDefaultsRequest
+      attr_accessor source_server_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor small_volume_max_size: ::Integer
+      attr_accessor small_volume_configuration: Types::SourceServerVolumeConfiguration
+      attr_accessor large_volume_configuration: Types::SourceServerVolumeConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateLaunchConfigurationDefaultsResponse
+      attr_accessor source_server_id: ::String
+      attr_accessor small_volume_max_size: ::Integer
+      attr_accessor small_volume_configuration: Types::SourceServerVolumeConfiguration
+      attr_accessor large_volume_configuration: Types::SourceServerVolumeConfiguration
+      SENSITIVE: []
+    end
+
     class UpdateLaunchConfigurationRequest
       attr_accessor source_server_id: ::String
       attr_accessor name: ::String
@@ -2048,6 +2399,7 @@ module Aws::Mgn
       attr_accessor post_launch_actions: Types::PostLaunchActions
       attr_accessor enable_map_auto_tagging: bool
       attr_accessor map_auto_tagging_mpe_id: ::String
+      attr_accessor map_auto_tagging_key: ::String
       attr_accessor account_id: ::String
       SENSITIVE: []
     end
@@ -2057,6 +2409,7 @@ module Aws::Mgn
       attr_accessor post_launch_actions: Types::PostLaunchActions
       attr_accessor enable_map_auto_tagging: bool
       attr_accessor map_auto_tagging_mpe_id: ::String
+      attr_accessor map_auto_tagging_key: ::String
       attr_accessor launch_disposition: ("STOPPED" | "STARTED")
       attr_accessor target_instance_type_right_sizing_method: ("NONE" | "BASIC")
       attr_accessor copy_private_ip: bool
@@ -2083,6 +2436,7 @@ module Aws::Mgn
       attr_accessor vpc_provisioning_strategy: ("CREATE_NEW" | "USE_EXISTING")
       attr_accessor cidr_mappings: ::Array[Types::CidrMapping]
       attr_accessor scope_tags: ::Hash[::String, ::String]
+      attr_accessor definition_type: ("MIGRATION" | "NEW_NETWORK")
       SENSITIVE: [:scope_tags]
     end
 
@@ -2099,6 +2453,38 @@ module Aws::Mgn
       attr_accessor excluded: bool
       attr_accessor properties: ::Hash[::String, ::String]
       SENSITIVE: []
+    end
+
+    class UpdateOperationV2
+      attr_accessor name: ::String
+      attr_accessor excluded: bool
+      attr_accessor properties: ::Hash[::String, untyped]
+      attr_accessor properties_to_delete: ::Array[::String]
+      attr_accessor configuration: Types::OperationConfigurationUnion
+      SENSITIVE: []
+    end
+
+    class UpdateRemoteSourceActionRequest
+      attr_accessor remote_source_action_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor ssm_parameter_name: ::String
+      attr_accessor timeout_seconds: ::Integer
+      attr_accessor operating_system: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRemoteSourceActionResponse
+      attr_accessor remote_source_action_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor ssm_parameter_name: ::String
+      attr_accessor timeout_seconds: ::Integer
+      attr_accessor operating_system: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
     end
 
     class UpdateReplicationConfigurationRequest
@@ -2121,6 +2507,7 @@ module Aws::Mgn
       attr_accessor account_id: ::String
       attr_accessor internet_protocol: ("IPV4" | "IPV6")
       attr_accessor store_snapshot_on_local_zone: bool
+      attr_accessor outpost_snapshot_location: ("OUTPOST" | "REGION")
       attr_accessor storage_configuration: Types::StorageConfiguration
       SENSITIVE: [:staging_area_tags]
     end
@@ -2143,6 +2530,7 @@ module Aws::Mgn
       attr_accessor use_fips_endpoint: bool
       attr_accessor internet_protocol: ("IPV4" | "IPV6")
       attr_accessor store_snapshot_on_local_zone: bool
+      attr_accessor outpost_snapshot_location: ("OUTPOST" | "REGION")
       attr_accessor storage_configuration: Types::StorageConfiguration
       SENSITIVE: [:staging_area_tags]
     end

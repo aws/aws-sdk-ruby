@@ -13925,6 +13925,39 @@ module Aws::Connect
     #   "key2":"value2"} }.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] item_enablement_status
+    #   A map of item (section or question) identifiers to their enablement
+    #   status, computed by the service from each item's conditional
+    #   enablement configuration. Disabled items are excluded from scoring.
+    #   Valid values: `ENABLED` \| `DISABLED`.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] source_resolution_status
+    #   The aggregate status of resolving the external source data (such as
+    #   Contact Lens analysis and AI metrics) that is used by conditional
+    #   enablement in the evaluation. Source data is resolved asynchronously
+    #   after the evaluation is started. While a source is pending or after
+    #   it fails to resolve, conditions that depend on it evaluate to the
+    #   item's `DefaultAction`. Valid values:
+    #
+    #   * `PENDING` - One or more sources have not been resolved yet. Call
+    #     `DescribeContactEvaluation` again to get updated
+    #     `ItemEnablementStatus` values.
+    #
+    #   * `RESOLVED` - All sources have been resolved.
+    #
+    #   * `FAILED` - One or more sources could not be resolved. Dependent
+    #     conditions use the item's `DefaultAction`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_values
+    #   The resolved values of the external sources (such as contact data,
+    #   evaluation metadata, form metadata, and AI metrics) that are used by
+    #   the conditions in the evaluation form. You can use these values to
+    #   evaluate the conditions against the current answers without calling
+    #   `DescribeContactEvaluation` again.
+    #   @return [Array<Types::EvaluationResolvedSource>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Evaluation AWS API Documentation
     #
     class Evaluation < Struct.new(
@@ -13938,7 +13971,10 @@ module Aws::Connect
       :created_time,
       :last_modified_time,
       :evaluation_type,
-      :tags)
+      :tags,
+      :item_enablement_status,
+      :source_resolution_status,
+      :source_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14446,7 +14482,7 @@ module Aws::Connect
     #   @return [Array<Types::EvaluationFormItemEnablementConditionOperand>]
     #
     # @!attribute [rw] operator
-    #   The operator to be used to be applied to operands if more than one
+    #   The operator to apply to the operands when more than one operand is
     #   provided.
     #   @return [String]
     #
@@ -14495,11 +14531,13 @@ module Aws::Connect
     #   @return [Types::EvaluationFormItemEnablementCondition]
     #
     # @!attribute [rw] action
-    #   An enablement action that if condition is satisfied.
+    #   The enablement action to apply if the condition is satisfied.
     #   @return [String]
     #
     # @!attribute [rw] default_action
-    #   An enablement action that if condition is not satisfied.
+    #   The enablement action to apply if the condition is not satisfied.
+    #   This action is also applied when the condition depends on an
+    #   external source that is still pending or could not be resolved.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormItemEnablementConfiguration AWS API Documentation
@@ -14524,7 +14562,11 @@ module Aws::Connect
     #   @return [Array<Types::EvaluationFormItemEnablementSourceValue>]
     #
     # @!attribute [rw] comparator
-    #   A comparator to be used against list of values.
+    #   A comparator to be used against a list of values. `IN`, `NOT_IN`,
+    #   `ALL_IN`, and `EXACT` compare sets of values. `GREATER_THAN`,
+    #   `LESS_THAN`, `GREATER_THAN_OR_EQUAL_TO`, and `LESS_THAN_OR_EQUAL_TO`
+    #   compare a single numeric or date and time value. `EQUAL_TO` and
+    #   `NOT_EQUAL_TO` compare a single value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormItemEnablementExpression AWS API Documentation
@@ -14540,37 +14582,108 @@ module Aws::Connect
     # An enablement expression source item.
     #
     # @!attribute [rw] type
-    #   A type of source item.
+    #   A type of source item. Valid values:
+    #
+    #   * `QUESTION_REF_ID` - The answer to another question in the
+    #     evaluation form.
+    #
+    #   * `CONTACT` - Data from the evaluated contact.
+    #
+    #   * `EVALUATION_METADATA` - Metadata of the evaluation, such as the
+    #     evaluation type.
+    #
+    #   * `AI_METRICS` - Metrics about AI agents, AI sessions, and AI tools
+    #     on the contact.
     #   @return [String]
     #
     # @!attribute [rw] ref_id
-    #   A referenceId of the source item.
+    #   A referenceId of the source item. Use when `Type` is
+    #   `QUESTION_REF_ID`.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_field
+    #   The contact field to use as the source, such as `CHANNEL`,
+    #   `QUEUE_ARN`, `OVERALL_CUSTOMER_SENTIMENT_SCORE`, or
+    #   `RECORDING_MEDIA_STREAM_TYPES`. Use when `Type` is `CONTACT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_attribute_key
+    #   The key of the contact attribute to use as the source. Use when
+    #   `Type` is `CONTACT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_attribute_key
+    #   The key of the contact segment attribute to use as the source. Use
+    #   when `Type` is `CONTACT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_metadata_field
+    #   The evaluation metadata field to use as the source. Use when `Type`
+    #   is `EVALUATION_METADATA`.
+    #   @return [String]
+    #
+    # @!attribute [rw] ai_metrics_field
+    #   The AI metrics field to use as the source. Use when `Type` is
+    #   `AI_METRICS`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormItemEnablementSource AWS API Documentation
     #
     class EvaluationFormItemEnablementSource < Struct.new(
       :type,
-      :ref_id)
+      :ref_id,
+      :contact_field,
+      :contact_attribute_key,
+      :segment_attribute_key,
+      :evaluation_metadata_field,
+      :ai_metrics_field)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # An enablement expression source value.
+    # An enablement expression source value. Provide only the value member
+    # that matches the specified `Type`.
     #
     # @!attribute [rw] type
-    #   A type of source item value.
+    #   A type of source item value. Valid values: `OPTION_REF_ID` \|
+    #   `STRING_VALUE` \| `NUMERIC_VALUE` \| `BOOLEAN_VALUE` \|
+    #   `DATETIME_VALUE`.
     #   @return [String]
     #
     # @!attribute [rw] ref_id
-    #   A referenceId of the source value.
+    #   A referenceId of the source value. Use when `Type` is
+    #   `OPTION_REF_ID`.
     #   @return [String]
+    #
+    # @!attribute [rw] string_value
+    #   A string value to compare against the source. Use when `Type` is
+    #   `STRING_VALUE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] numeric_value
+    #   A numeric value to compare against the source. Use when `Type` is
+    #   `NUMERIC_VALUE`.
+    #   @return [Float]
+    #
+    # @!attribute [rw] boolean_value
+    #   A Boolean value to compare against the source. Use when `Type` is
+    #   `BOOLEAN_VALUE`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] date_time_value
+    #   A date and time value to compare against the source. Use when `Type`
+    #   is `DATETIME_VALUE`.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormItemEnablementSourceValue AWS API Documentation
     #
     class EvaluationFormItemEnablementSourceValue < Struct.new(
       :type,
-      :ref_id)
+      :ref_id,
+      :string_value,
+      :numeric_value,
+      :boolean_value,
+      :date_time_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14631,7 +14744,7 @@ module Aws::Connect
     #   @return [Array<String>]
     #
     # @!attribute [rw] answer_source
-    #   A question automation answer.
+    #   Automation answer source.
     #   @return [Types::EvaluationFormQuestionAutomationAnswerSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormMultiSelectQuestionAutomation AWS API Documentation
@@ -14897,7 +15010,15 @@ module Aws::Connect
     # A question automation answer.
     #
     # @!attribute [rw] source_type
-    #   The automation answer source type.
+    #   The automation answer source type. Valid values:
+    #
+    #   * `CONTACT_LENS_DATA` - The answer is based on Contact Lens data,
+    #     such as rule categories and metrics.
+    #
+    #   * `GEN_AI` - The answer is generated by generative AI.
+    #
+    #   * `CONDITION` - The answer is determined by evaluating the
+    #     conditions defined in the automation rules of the question.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormQuestionAutomationAnswerSource AWS API Documentation
@@ -15227,6 +15348,11 @@ module Aws::Connect
     #   The score thresholds for performance categories.
     #   @return [Array<Types::EvaluationFormScoreThreshold>]
     #
+    # @!attribute [rw] enablement
+    #   The conditional enablement configuration of the section. Sections
+    #   use the same enablement model as questions.
+    #   @return [Types::EvaluationFormItemEnablementConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormSection AWS API Documentation
     #
     class EvaluationFormSection < Struct.new(
@@ -15236,7 +15362,8 @@ module Aws::Connect
       :items,
       :weight,
       :is_excluded_from_scoring,
-      :score_thresholds)
+      :score_thresholds,
+      :enablement)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15280,16 +15407,23 @@ module Aws::Connect
     #   question.
     #   @return [Types::SingleSelectQuestionRuleCategoryAutomation]
     #
+    # @!attribute [rw] automation_rule
+    #   The automation option based on a condition for the single select
+    #   question. Use with the `CONDITION` answer source type.
+    #   @return [Types::SingleSelectQuestionAutomationRule]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationFormSingleSelectQuestionAutomationOption AWS API Documentation
     #
     class EvaluationFormSingleSelectQuestionAutomationOption < Struct.new(
       :rule_category,
+      :automation_rule,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class RuleCategory < EvaluationFormSingleSelectQuestionAutomationOption; end
+      class AutomationRule < EvaluationFormSingleSelectQuestionAutomationOption; end
       class Unknown < EvaluationFormSingleSelectQuestionAutomationOption; end
     end
 
@@ -15727,6 +15861,41 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The resolved value of an external source that is used by the
+    # conditions in an evaluation form.
+    #
+    # @!attribute [rw] source
+    #   The external source, such as contact data, evaluation metadata, form
+    #   metadata, or AI metrics.
+    #   @return [Types::EvaluationFormItemEnablementSource]
+    #
+    # @!attribute [rw] status
+    #   The status of resolving the source. Valid values:
+    #
+    #   * `PENDING` - The source has not been resolved yet.
+    #
+    #   * `RESOLVED` - The source has been resolved.
+    #
+    #   * `FAILED` - The source could not be resolved.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The resolved values of the source. Present when `Status` is
+    #   `RESOLVED`. Contains one value for a single-valued source, any
+    #   number of values for a multi-valued source, and no values when the
+    #   source is not present on the contact.
+    #   @return [Array<Types::EvaluationFormItemEnablementSourceValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluationResolvedSource AWS API Documentation
+    #
+    class EvaluationResolvedSource < Struct.new(
+      :source,
+      :status,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration settings for evaluation reviews.
     #
     # @!attribute [rw] review_notification_recipients
@@ -16153,7 +16322,8 @@ module Aws::Connect
     #   @return [Types::EvaluationQuestionInputDetails]
     #
     # @!attribute [rw] analysis_type
-    #   Type of analysis used to provide suggested answer.
+    #   Type of analysis used to provide suggested answer. Valid values:
+    #   `CONTACT_LENS_DATA` \| `GEN_AI` \| `CONDITION`.
     #   @return [String]
     #
     # @!attribute [rw] analysis_details
@@ -28103,7 +28273,7 @@ module Aws::Connect
     end
 
     # Information about the property value used in automation of a numeric
-    # questions. Label values are associated with minimum and maximum values
+    # question. Label values are associated with minimum and maximum values
     # for the numeric question.
     #
     # * Sentiment scores have a minimum value of -5 and maximum value of 5.
@@ -35300,6 +35470,30 @@ module Aws::Connect
     class SignInDistribution < Struct.new(
       :region,
       :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a condition-based automation rule for a single
+    # select question. When the condition is satisfied, the specified answer
+    # option is selected.
+    #
+    # @!attribute [rw] condition
+    #   The condition that must be satisfied for the answer option to be
+    #   selected. The condition uses the same sources, comparators, and
+    #   operators as item enablement conditions.
+    #   @return [Types::EvaluationFormItemEnablementCondition]
+    #
+    # @!attribute [rw] option_ref_id
+    #   The identifier of the answer option to select when the condition is
+    #   satisfied.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SingleSelectQuestionAutomationRule AWS API Documentation
+    #
+    class SingleSelectQuestionAutomationRule < Struct.new(
+      :condition,
+      :option_ref_id)
       SENSITIVE = []
       include Aws::Structure
     end

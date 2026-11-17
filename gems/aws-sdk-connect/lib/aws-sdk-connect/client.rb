@@ -3596,6 +3596,42 @@ module Aws::Connect
     #               max_score_percentage: 1.0,
     #             },
     #           ],
+    #           enablement: {
+    #             condition: { # required
+    #               operands: [ # required
+    #                 {
+    #                   expression: {
+    #                     source: { # required
+    #                       type: "QUESTION_REF_ID", # required, accepts QUESTION_REF_ID, CONTACT, EVALUATION_METADATA, FORM_METADATA, AI_METRICS
+    #                       ref_id: "ReferenceId",
+    #                       contact_field: "CATEGORIES", # accepts CATEGORIES, AGENT_ARN, QUEUE_ARN, ROUTING_PROFILE_ARN, CHANNEL, INITIATION_METHOD, IS_QUEUED, OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION, RECORDING_MEDIA_STREAM_TYPES
+    #                       contact_attribute_key: "EvaluationFormContactAttributeKey",
+    #                       segment_attribute_key: "EvaluationFormSegmentAttributeKey",
+    #                       evaluation_metadata_field: "EVALUATION_TYPE", # accepts EVALUATION_TYPE
+    #                       ai_metrics_field: "AI_SESSION_IS_HANDED_OFF", # accepts AI_SESSION_IS_HANDED_OFF, AI_SESSION_SELF_SERVICE_DURATION, AI_SESSION_GOAL_SUCCESS_RATE, AI_SESSION_COMPLETENESS_SCORE, AI_SESSION_FAITHFULNESS_SCORE, AI_AGENT_MAX_PROMPT_LATENCY, AI_TOOL_MAX_LATENCY, AI_TOOL_SELECTION_ACCURACY, AI_TOOL_PARAMETER_ACCURACY, AI_TOOL_UTILIZATION_ACCURACY
+    #                     },
+    #                     values: [ # required
+    #                       {
+    #                         type: "OPTION_REF_ID", # required, accepts OPTION_REF_ID, STRING_VALUE, NUMERIC_VALUE, BOOLEAN_VALUE, DATETIME_VALUE
+    #                         ref_id: "ReferenceId",
+    #                         string_value: "EvaluationFormEnablementStringValue",
+    #                         numeric_value: 1.0,
+    #                         boolean_value: false,
+    #                         date_time_value: Time.now,
+    #                       },
+    #                     ],
+    #                     comparator: "IN", # required, accepts IN, NOT_IN, ALL_IN, EXACT, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL_TO, LESS_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO
+    #                   },
+    #                   condition: {
+    #                     # recursive EvaluationFormItemEnablementCondition
+    #                   },
+    #                 },
+    #               ],
+    #               operator: "OR", # accepts OR, AND
+    #             },
+    #             action: "DISABLE", # required, accepts DISABLE, ENABLE
+    #             default_action: "DISABLE", # accepts DISABLE, ENABLE
+    #           },
     #         },
     #         question: {
     #           title: "EvaluationFormQuestionTitle", # required
@@ -3624,10 +3660,10 @@ module Aws::Connect
     #               ],
     #               automation: {
     #                 property_value: {
-    #                   label: "OVERALL_CUSTOMER_SENTIMENT_SCORE", # required, accepts OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION
+    #                   label: "OVERALL_CUSTOMER_SENTIMENT_SCORE", # required, accepts OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION, AI_SESSION_SELF_SERVICE_DURATION, AI_SESSION_GOAL_SUCCESS_RATE, AI_SESSION_COMPLETENESS_SCORE, AI_SESSION_FAITHFULNESS_SCORE, AI_AGENT_MAX_PROMPT_LATENCY, AI_TOOL_MAX_LATENCY, AI_TOOL_SELECTION_ACCURACY, AI_TOOL_PARAMETER_ACCURACY, AI_TOOL_UTILIZATION_ACCURACY
     #                 },
     #                 answer_source: {
-    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI
+    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI, CONDITION
     #                 },
     #               },
     #             },
@@ -3656,18 +3692,53 @@ module Aws::Connect
     #                       condition: "PRESENT", # required, accepts PRESENT, NOT_PRESENT
     #                       option_ref_id: "ReferenceId", # required
     #                     },
+    #                     automation_rule: {
+    #                       condition: { # required
+    #                         operands: [ # required
+    #                           {
+    #                             expression: {
+    #                               source: { # required
+    #                                 type: "QUESTION_REF_ID", # required, accepts QUESTION_REF_ID, CONTACT, EVALUATION_METADATA, FORM_METADATA, AI_METRICS
+    #                                 ref_id: "ReferenceId",
+    #                                 contact_field: "CATEGORIES", # accepts CATEGORIES, AGENT_ARN, QUEUE_ARN, ROUTING_PROFILE_ARN, CHANNEL, INITIATION_METHOD, IS_QUEUED, OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION, RECORDING_MEDIA_STREAM_TYPES
+    #                                 contact_attribute_key: "EvaluationFormContactAttributeKey",
+    #                                 segment_attribute_key: "EvaluationFormSegmentAttributeKey",
+    #                                 evaluation_metadata_field: "EVALUATION_TYPE", # accepts EVALUATION_TYPE
+    #                                 ai_metrics_field: "AI_SESSION_IS_HANDED_OFF", # accepts AI_SESSION_IS_HANDED_OFF, AI_SESSION_SELF_SERVICE_DURATION, AI_SESSION_GOAL_SUCCESS_RATE, AI_SESSION_COMPLETENESS_SCORE, AI_SESSION_FAITHFULNESS_SCORE, AI_AGENT_MAX_PROMPT_LATENCY, AI_TOOL_MAX_LATENCY, AI_TOOL_SELECTION_ACCURACY, AI_TOOL_PARAMETER_ACCURACY, AI_TOOL_UTILIZATION_ACCURACY
+    #                               },
+    #                               values: [ # required
+    #                                 {
+    #                                   type: "OPTION_REF_ID", # required, accepts OPTION_REF_ID, STRING_VALUE, NUMERIC_VALUE, BOOLEAN_VALUE, DATETIME_VALUE
+    #                                   ref_id: "ReferenceId",
+    #                                   string_value: "EvaluationFormEnablementStringValue",
+    #                                   numeric_value: 1.0,
+    #                                   boolean_value: false,
+    #                                   date_time_value: Time.now,
+    #                                 },
+    #                               ],
+    #                               comparator: "IN", # required, accepts IN, NOT_IN, ALL_IN, EXACT, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL_TO, LESS_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO
+    #                             },
+    #                             condition: {
+    #                               # recursive EvaluationFormItemEnablementCondition
+    #                             },
+    #                           },
+    #                         ],
+    #                         operator: "OR", # accepts OR, AND
+    #                       },
+    #                       option_ref_id: "ReferenceId", # required
+    #                     },
     #                   },
     #                 ],
     #                 default_option_ref_id: "ReferenceId",
     #                 answer_source: {
-    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI
+    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI, CONDITION
     #                 },
     #               },
     #             },
     #             text: {
     #               automation: {
     #                 answer_source: {
-    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI
+    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI, CONDITION
     #                 },
     #               },
     #             },
@@ -3700,7 +3771,7 @@ module Aws::Connect
     #                 ],
     #                 default_option_ref_ids: ["ReferenceId"],
     #                 answer_source: {
-    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI
+    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI, CONDITION
     #                 },
     #               },
     #             },
@@ -3711,16 +3782,25 @@ module Aws::Connect
     #                 {
     #                   expression: {
     #                     source: { # required
-    #                       type: "QUESTION_REF_ID", # required, accepts QUESTION_REF_ID
+    #                       type: "QUESTION_REF_ID", # required, accepts QUESTION_REF_ID, CONTACT, EVALUATION_METADATA, FORM_METADATA, AI_METRICS
     #                       ref_id: "ReferenceId",
+    #                       contact_field: "CATEGORIES", # accepts CATEGORIES, AGENT_ARN, QUEUE_ARN, ROUTING_PROFILE_ARN, CHANNEL, INITIATION_METHOD, IS_QUEUED, OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION, RECORDING_MEDIA_STREAM_TYPES
+    #                       contact_attribute_key: "EvaluationFormContactAttributeKey",
+    #                       segment_attribute_key: "EvaluationFormSegmentAttributeKey",
+    #                       evaluation_metadata_field: "EVALUATION_TYPE", # accepts EVALUATION_TYPE
+    #                       ai_metrics_field: "AI_SESSION_IS_HANDED_OFF", # accepts AI_SESSION_IS_HANDED_OFF, AI_SESSION_SELF_SERVICE_DURATION, AI_SESSION_GOAL_SUCCESS_RATE, AI_SESSION_COMPLETENESS_SCORE, AI_SESSION_FAITHFULNESS_SCORE, AI_AGENT_MAX_PROMPT_LATENCY, AI_TOOL_MAX_LATENCY, AI_TOOL_SELECTION_ACCURACY, AI_TOOL_PARAMETER_ACCURACY, AI_TOOL_UTILIZATION_ACCURACY
     #                     },
     #                     values: [ # required
     #                       {
-    #                         type: "OPTION_REF_ID", # required, accepts OPTION_REF_ID
+    #                         type: "OPTION_REF_ID", # required, accepts OPTION_REF_ID, STRING_VALUE, NUMERIC_VALUE, BOOLEAN_VALUE, DATETIME_VALUE
     #                         ref_id: "ReferenceId",
+    #                         string_value: "EvaluationFormEnablementStringValue",
+    #                         numeric_value: 1.0,
+    #                         boolean_value: false,
+    #                         date_time_value: Time.now,
     #                       },
     #                     ],
-    #                     comparator: "IN", # required, accepts IN, NOT_IN, ALL_IN, EXACT
+    #                     comparator: "IN", # required, accepts IN, NOT_IN, ALL_IN, EXACT, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL_TO, LESS_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO
     #                   },
     #                   condition: {
     #                     # recursive EvaluationFormItemEnablementCondition
@@ -8630,7 +8710,7 @@ module Aws::Connect
     #   resp.evaluation.answers["ResourceId"].suggested_answers[0].value.not_applicable #=> Boolean
     #   resp.evaluation.answers["ResourceId"].suggested_answers[0].status #=> String, one of "IN_PROGRESS", "FAILED", "SUCCEEDED"
     #   resp.evaluation.answers["ResourceId"].suggested_answers[0].input.transcript_type #=> String, one of "RAW", "REDACTED"
-    #   resp.evaluation.answers["ResourceId"].suggested_answers[0].analysis_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
+    #   resp.evaluation.answers["ResourceId"].suggested_answers[0].analysis_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI", "CONDITION"
     #   resp.evaluation.answers["ResourceId"].suggested_answers[0].analysis_details.gen_ai.justification #=> String
     #   resp.evaluation.answers["ResourceId"].suggested_answers[0].analysis_details.gen_ai.points_of_interest #=> Array
     #   resp.evaluation.answers["ResourceId"].suggested_answers[0].analysis_details.gen_ai.points_of_interest[0].millisecond_offsets.begin_offset_millis #=> Integer
@@ -8657,6 +8737,25 @@ module Aws::Connect
     #   resp.evaluation.evaluation_type #=> String, one of "STANDARD", "CALIBRATION"
     #   resp.evaluation.tags #=> Hash
     #   resp.evaluation.tags["TagKey"] #=> String
+    #   resp.evaluation.item_enablement_status #=> Hash
+    #   resp.evaluation.item_enablement_status["ReferenceId"] #=> String, one of "ENABLED", "DISABLED"
+    #   resp.evaluation.source_resolution_status #=> String, one of "PENDING", "RESOLVED", "FAILED"
+    #   resp.evaluation.source_values #=> Array
+    #   resp.evaluation.source_values[0].source.type #=> String, one of "QUESTION_REF_ID", "CONTACT", "EVALUATION_METADATA", "FORM_METADATA", "AI_METRICS"
+    #   resp.evaluation.source_values[0].source.ref_id #=> String
+    #   resp.evaluation.source_values[0].source.contact_field #=> String, one of "CATEGORIES", "AGENT_ARN", "QUEUE_ARN", "ROUTING_PROFILE_ARN", "CHANNEL", "INITIATION_METHOD", "IS_QUEUED", "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION", "RECORDING_MEDIA_STREAM_TYPES"
+    #   resp.evaluation.source_values[0].source.contact_attribute_key #=> String
+    #   resp.evaluation.source_values[0].source.segment_attribute_key #=> String
+    #   resp.evaluation.source_values[0].source.evaluation_metadata_field #=> String, one of "EVALUATION_TYPE"
+    #   resp.evaluation.source_values[0].source.ai_metrics_field #=> String, one of "AI_SESSION_IS_HANDED_OFF", "AI_SESSION_SELF_SERVICE_DURATION", "AI_SESSION_GOAL_SUCCESS_RATE", "AI_SESSION_COMPLETENESS_SCORE", "AI_SESSION_FAITHFULNESS_SCORE", "AI_AGENT_MAX_PROMPT_LATENCY", "AI_TOOL_MAX_LATENCY", "AI_TOOL_SELECTION_ACCURACY", "AI_TOOL_PARAMETER_ACCURACY", "AI_TOOL_UTILIZATION_ACCURACY"
+    #   resp.evaluation.source_values[0].status #=> String, one of "PENDING", "RESOLVED", "FAILED"
+    #   resp.evaluation.source_values[0].values #=> Array
+    #   resp.evaluation.source_values[0].values[0].type #=> String, one of "OPTION_REF_ID", "STRING_VALUE", "NUMERIC_VALUE", "BOOLEAN_VALUE", "DATETIME_VALUE"
+    #   resp.evaluation.source_values[0].values[0].ref_id #=> String
+    #   resp.evaluation.source_values[0].values[0].string_value #=> String
+    #   resp.evaluation.source_values[0].values[0].numeric_value #=> Float
+    #   resp.evaluation.source_values[0].values[0].boolean_value #=> Boolean
+    #   resp.evaluation.source_values[0].values[0].date_time_value #=> Time
     #   resp.evaluation_form.evaluation_form_version #=> Integer
     #   resp.evaluation_form.evaluation_form_id #=> String
     #   resp.evaluation_form.evaluation_form_arn #=> String
@@ -8673,6 +8772,26 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].section.score_thresholds[0].performance_category #=> String, one of "NEEDS_IMPROVEMENT", "EXCEEDS_EXPECTATIONS"
     #   resp.evaluation_form.items[0].section.score_thresholds[0].min_score_percentage #=> Float
     #   resp.evaluation_form.items[0].section.score_thresholds[0].max_score_percentage #=> Float
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands #=> Array
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.type #=> String, one of "QUESTION_REF_ID", "CONTACT", "EVALUATION_METADATA", "FORM_METADATA", "AI_METRICS"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.ref_id #=> String
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.contact_field #=> String, one of "CATEGORIES", "AGENT_ARN", "QUEUE_ARN", "ROUTING_PROFILE_ARN", "CHANNEL", "INITIATION_METHOD", "IS_QUEUED", "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION", "RECORDING_MEDIA_STREAM_TYPES"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.contact_attribute_key #=> String
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.segment_attribute_key #=> String
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.evaluation_metadata_field #=> String, one of "EVALUATION_TYPE"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.ai_metrics_field #=> String, one of "AI_SESSION_IS_HANDED_OFF", "AI_SESSION_SELF_SERVICE_DURATION", "AI_SESSION_GOAL_SUCCESS_RATE", "AI_SESSION_COMPLETENESS_SCORE", "AI_SESSION_FAITHFULNESS_SCORE", "AI_AGENT_MAX_PROMPT_LATENCY", "AI_TOOL_MAX_LATENCY", "AI_TOOL_SELECTION_ACCURACY", "AI_TOOL_PARAMETER_ACCURACY", "AI_TOOL_UTILIZATION_ACCURACY"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values #=> Array
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].type #=> String, one of "OPTION_REF_ID", "STRING_VALUE", "NUMERIC_VALUE", "BOOLEAN_VALUE", "DATETIME_VALUE"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].ref_id #=> String
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].string_value #=> String
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].numeric_value #=> Float
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].boolean_value #=> Boolean
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].date_time_value #=> Time
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.comparator #=> String, one of "IN", "NOT_IN", "ALL_IN", "EXACT", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN_OR_EQUAL_TO", "EQUAL_TO", "NOT_EQUAL_TO"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].condition #=> Types::EvaluationFormItemEnablementCondition
+    #   resp.evaluation_form.items[0].section.enablement.condition.operator #=> String, one of "OR", "AND"
+    #   resp.evaluation_form.items[0].section.enablement.action #=> String, one of "DISABLE", "ENABLE"
+    #   resp.evaluation_form.items[0].section.enablement.default_action #=> String, one of "DISABLE", "ENABLE"
     #   resp.evaluation_form.items[0].question.title #=> String
     #   resp.evaluation_form.items[0].question.instructions #=> String
     #   resp.evaluation_form.items[0].question.ref_id #=> String
@@ -8688,8 +8807,8 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].automatic_fail_configuration.target_section #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].points_configuration.point_value #=> Integer
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].points_configuration.is_bonus #=> Boolean
-    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.property_value.label #=> String, one of "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION"
-    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.property_value.label #=> String, one of "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION", "AI_SESSION_SELF_SERVICE_DURATION", "AI_SESSION_GOAL_SUCCESS_RATE", "AI_SESSION_COMPLETENESS_SCORE", "AI_SESSION_FAITHFULNESS_SCORE", "AI_AGENT_MAX_PROMPT_LATENCY", "AI_TOOL_MAX_LATENCY", "AI_TOOL_SELECTION_ACCURACY", "AI_TOOL_PARAMETER_ACCURACY", "AI_TOOL_UTILIZATION_ACCURACY"
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI", "CONDITION"
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options #=> Array
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options[0].ref_id #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options[0].text #=> String
@@ -8703,9 +8822,28 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].rule_category.category #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].rule_category.condition #=> String, one of "PRESENT", "NOT_PRESENT"
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].rule_category.option_ref_id #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.type #=> String, one of "QUESTION_REF_ID", "CONTACT", "EVALUATION_METADATA", "FORM_METADATA", "AI_METRICS"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.ref_id #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.contact_field #=> String, one of "CATEGORIES", "AGENT_ARN", "QUEUE_ARN", "ROUTING_PROFILE_ARN", "CHANNEL", "INITIATION_METHOD", "IS_QUEUED", "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION", "RECORDING_MEDIA_STREAM_TYPES"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.contact_attribute_key #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.segment_attribute_key #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.evaluation_metadata_field #=> String, one of "EVALUATION_TYPE"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.ai_metrics_field #=> String, one of "AI_SESSION_IS_HANDED_OFF", "AI_SESSION_SELF_SERVICE_DURATION", "AI_SESSION_GOAL_SUCCESS_RATE", "AI_SESSION_COMPLETENESS_SCORE", "AI_SESSION_FAITHFULNESS_SCORE", "AI_AGENT_MAX_PROMPT_LATENCY", "AI_TOOL_MAX_LATENCY", "AI_TOOL_SELECTION_ACCURACY", "AI_TOOL_PARAMETER_ACCURACY", "AI_TOOL_UTILIZATION_ACCURACY"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].type #=> String, one of "OPTION_REF_ID", "STRING_VALUE", "NUMERIC_VALUE", "BOOLEAN_VALUE", "DATETIME_VALUE"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].ref_id #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].string_value #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].numeric_value #=> Float
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].boolean_value #=> Boolean
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].date_time_value #=> Time
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.comparator #=> String, one of "IN", "NOT_IN", "ALL_IN", "EXACT", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN_OR_EQUAL_TO", "EQUAL_TO", "NOT_EQUAL_TO"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].condition #=> Types::EvaluationFormItemEnablementCondition
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operator #=> String, one of "OR", "AND"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.option_ref_id #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.default_option_ref_id #=> String
-    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
-    #   resp.evaluation_form.items[0].question.question_type_properties.text.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI", "CONDITION"
+    #   resp.evaluation_form.items[0].question.question_type_properties.text.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI", "CONDITION"
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.options #=> Array
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.options[0].ref_id #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.options[0].text #=> String
@@ -8722,14 +8860,23 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.options[0].rule_category.option_ref_ids[0] #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.default_option_ref_ids #=> Array
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.default_option_ref_ids[0] #=> String
-    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI", "CONDITION"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands #=> Array
-    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.type #=> String, one of "QUESTION_REF_ID"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.type #=> String, one of "QUESTION_REF_ID", "CONTACT", "EVALUATION_METADATA", "FORM_METADATA", "AI_METRICS"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.ref_id #=> String
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.contact_field #=> String, one of "CATEGORIES", "AGENT_ARN", "QUEUE_ARN", "ROUTING_PROFILE_ARN", "CHANNEL", "INITIATION_METHOD", "IS_QUEUED", "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION", "RECORDING_MEDIA_STREAM_TYPES"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.contact_attribute_key #=> String
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.segment_attribute_key #=> String
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.evaluation_metadata_field #=> String, one of "EVALUATION_TYPE"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.ai_metrics_field #=> String, one of "AI_SESSION_IS_HANDED_OFF", "AI_SESSION_SELF_SERVICE_DURATION", "AI_SESSION_GOAL_SUCCESS_RATE", "AI_SESSION_COMPLETENESS_SCORE", "AI_SESSION_FAITHFULNESS_SCORE", "AI_AGENT_MAX_PROMPT_LATENCY", "AI_TOOL_MAX_LATENCY", "AI_TOOL_SELECTION_ACCURACY", "AI_TOOL_PARAMETER_ACCURACY", "AI_TOOL_UTILIZATION_ACCURACY"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values #=> Array
-    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].type #=> String, one of "OPTION_REF_ID"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].type #=> String, one of "OPTION_REF_ID", "STRING_VALUE", "NUMERIC_VALUE", "BOOLEAN_VALUE", "DATETIME_VALUE"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].ref_id #=> String
-    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.comparator #=> String, one of "IN", "NOT_IN", "ALL_IN", "EXACT"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].string_value #=> String
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].numeric_value #=> Float
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].boolean_value #=> Boolean
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].date_time_value #=> Time
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.comparator #=> String, one of "IN", "NOT_IN", "ALL_IN", "EXACT", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN_OR_EQUAL_TO", "EQUAL_TO", "NOT_EQUAL_TO"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].condition #=> Types::EvaluationFormItemEnablementCondition
     #   resp.evaluation_form.items[0].question.enablement.condition.operator #=> String, one of "OR", "AND"
     #   resp.evaluation_form.items[0].question.enablement.action #=> String, one of "DISABLE", "ENABLE"
@@ -9214,6 +9361,26 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].section.score_thresholds[0].performance_category #=> String, one of "NEEDS_IMPROVEMENT", "EXCEEDS_EXPECTATIONS"
     #   resp.evaluation_form.items[0].section.score_thresholds[0].min_score_percentage #=> Float
     #   resp.evaluation_form.items[0].section.score_thresholds[0].max_score_percentage #=> Float
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands #=> Array
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.type #=> String, one of "QUESTION_REF_ID", "CONTACT", "EVALUATION_METADATA", "FORM_METADATA", "AI_METRICS"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.ref_id #=> String
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.contact_field #=> String, one of "CATEGORIES", "AGENT_ARN", "QUEUE_ARN", "ROUTING_PROFILE_ARN", "CHANNEL", "INITIATION_METHOD", "IS_QUEUED", "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION", "RECORDING_MEDIA_STREAM_TYPES"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.contact_attribute_key #=> String
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.segment_attribute_key #=> String
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.evaluation_metadata_field #=> String, one of "EVALUATION_TYPE"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.source.ai_metrics_field #=> String, one of "AI_SESSION_IS_HANDED_OFF", "AI_SESSION_SELF_SERVICE_DURATION", "AI_SESSION_GOAL_SUCCESS_RATE", "AI_SESSION_COMPLETENESS_SCORE", "AI_SESSION_FAITHFULNESS_SCORE", "AI_AGENT_MAX_PROMPT_LATENCY", "AI_TOOL_MAX_LATENCY", "AI_TOOL_SELECTION_ACCURACY", "AI_TOOL_PARAMETER_ACCURACY", "AI_TOOL_UTILIZATION_ACCURACY"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values #=> Array
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].type #=> String, one of "OPTION_REF_ID", "STRING_VALUE", "NUMERIC_VALUE", "BOOLEAN_VALUE", "DATETIME_VALUE"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].ref_id #=> String
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].string_value #=> String
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].numeric_value #=> Float
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].boolean_value #=> Boolean
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.values[0].date_time_value #=> Time
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].expression.comparator #=> String, one of "IN", "NOT_IN", "ALL_IN", "EXACT", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN_OR_EQUAL_TO", "EQUAL_TO", "NOT_EQUAL_TO"
+    #   resp.evaluation_form.items[0].section.enablement.condition.operands[0].condition #=> Types::EvaluationFormItemEnablementCondition
+    #   resp.evaluation_form.items[0].section.enablement.condition.operator #=> String, one of "OR", "AND"
+    #   resp.evaluation_form.items[0].section.enablement.action #=> String, one of "DISABLE", "ENABLE"
+    #   resp.evaluation_form.items[0].section.enablement.default_action #=> String, one of "DISABLE", "ENABLE"
     #   resp.evaluation_form.items[0].question.title #=> String
     #   resp.evaluation_form.items[0].question.instructions #=> String
     #   resp.evaluation_form.items[0].question.ref_id #=> String
@@ -9229,8 +9396,8 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].automatic_fail_configuration.target_section #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].points_configuration.point_value #=> Integer
     #   resp.evaluation_form.items[0].question.question_type_properties.numeric.options[0].points_configuration.is_bonus #=> Boolean
-    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.property_value.label #=> String, one of "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION"
-    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.property_value.label #=> String, one of "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION", "AI_SESSION_SELF_SERVICE_DURATION", "AI_SESSION_GOAL_SUCCESS_RATE", "AI_SESSION_COMPLETENESS_SCORE", "AI_SESSION_FAITHFULNESS_SCORE", "AI_AGENT_MAX_PROMPT_LATENCY", "AI_TOOL_MAX_LATENCY", "AI_TOOL_SELECTION_ACCURACY", "AI_TOOL_PARAMETER_ACCURACY", "AI_TOOL_UTILIZATION_ACCURACY"
+    #   resp.evaluation_form.items[0].question.question_type_properties.numeric.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI", "CONDITION"
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options #=> Array
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options[0].ref_id #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.options[0].text #=> String
@@ -9244,9 +9411,28 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].rule_category.category #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].rule_category.condition #=> String, one of "PRESENT", "NOT_PRESENT"
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].rule_category.option_ref_id #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.type #=> String, one of "QUESTION_REF_ID", "CONTACT", "EVALUATION_METADATA", "FORM_METADATA", "AI_METRICS"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.ref_id #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.contact_field #=> String, one of "CATEGORIES", "AGENT_ARN", "QUEUE_ARN", "ROUTING_PROFILE_ARN", "CHANNEL", "INITIATION_METHOD", "IS_QUEUED", "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION", "RECORDING_MEDIA_STREAM_TYPES"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.contact_attribute_key #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.segment_attribute_key #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.evaluation_metadata_field #=> String, one of "EVALUATION_TYPE"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.source.ai_metrics_field #=> String, one of "AI_SESSION_IS_HANDED_OFF", "AI_SESSION_SELF_SERVICE_DURATION", "AI_SESSION_GOAL_SUCCESS_RATE", "AI_SESSION_COMPLETENESS_SCORE", "AI_SESSION_FAITHFULNESS_SCORE", "AI_AGENT_MAX_PROMPT_LATENCY", "AI_TOOL_MAX_LATENCY", "AI_TOOL_SELECTION_ACCURACY", "AI_TOOL_PARAMETER_ACCURACY", "AI_TOOL_UTILIZATION_ACCURACY"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values #=> Array
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].type #=> String, one of "OPTION_REF_ID", "STRING_VALUE", "NUMERIC_VALUE", "BOOLEAN_VALUE", "DATETIME_VALUE"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].ref_id #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].string_value #=> String
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].numeric_value #=> Float
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].boolean_value #=> Boolean
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.values[0].date_time_value #=> Time
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].expression.comparator #=> String, one of "IN", "NOT_IN", "ALL_IN", "EXACT", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN_OR_EQUAL_TO", "EQUAL_TO", "NOT_EQUAL_TO"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operands[0].condition #=> Types::EvaluationFormItemEnablementCondition
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.condition.operator #=> String, one of "OR", "AND"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.options[0].automation_rule.option_ref_id #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.default_option_ref_id #=> String
-    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
-    #   resp.evaluation_form.items[0].question.question_type_properties.text.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
+    #   resp.evaluation_form.items[0].question.question_type_properties.single_select.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI", "CONDITION"
+    #   resp.evaluation_form.items[0].question.question_type_properties.text.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI", "CONDITION"
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.options #=> Array
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.options[0].ref_id #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.options[0].text #=> String
@@ -9263,14 +9449,23 @@ module Aws::Connect
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.options[0].rule_category.option_ref_ids[0] #=> String
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.default_option_ref_ids #=> Array
     #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.default_option_ref_ids[0] #=> String
-    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI"
+    #   resp.evaluation_form.items[0].question.question_type_properties.multi_select.automation.answer_source.source_type #=> String, one of "CONTACT_LENS_DATA", "GEN_AI", "CONDITION"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands #=> Array
-    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.type #=> String, one of "QUESTION_REF_ID"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.type #=> String, one of "QUESTION_REF_ID", "CONTACT", "EVALUATION_METADATA", "FORM_METADATA", "AI_METRICS"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.ref_id #=> String
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.contact_field #=> String, one of "CATEGORIES", "AGENT_ARN", "QUEUE_ARN", "ROUTING_PROFILE_ARN", "CHANNEL", "INITIATION_METHOD", "IS_QUEUED", "OVERALL_CUSTOMER_SENTIMENT_SCORE", "OVERALL_AGENT_SENTIMENT_SCORE", "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", "NON_TALK_TIME", "NON_TALK_TIME_PERCENTAGE", "NUMBER_OF_INTERRUPTIONS", "CONTACT_DURATION", "AGENT_INTERACTION_DURATION", "CUSTOMER_HOLD_TIME", "LONGEST_HOLD_DURATION", "NUMBER_OF_HOLDS", "AGENT_INTERACTION_AND_HOLD_DURATION", "RECORDING_MEDIA_STREAM_TYPES"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.contact_attribute_key #=> String
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.segment_attribute_key #=> String
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.evaluation_metadata_field #=> String, one of "EVALUATION_TYPE"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.source.ai_metrics_field #=> String, one of "AI_SESSION_IS_HANDED_OFF", "AI_SESSION_SELF_SERVICE_DURATION", "AI_SESSION_GOAL_SUCCESS_RATE", "AI_SESSION_COMPLETENESS_SCORE", "AI_SESSION_FAITHFULNESS_SCORE", "AI_AGENT_MAX_PROMPT_LATENCY", "AI_TOOL_MAX_LATENCY", "AI_TOOL_SELECTION_ACCURACY", "AI_TOOL_PARAMETER_ACCURACY", "AI_TOOL_UTILIZATION_ACCURACY"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values #=> Array
-    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].type #=> String, one of "OPTION_REF_ID"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].type #=> String, one of "OPTION_REF_ID", "STRING_VALUE", "NUMERIC_VALUE", "BOOLEAN_VALUE", "DATETIME_VALUE"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].ref_id #=> String
-    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.comparator #=> String, one of "IN", "NOT_IN", "ALL_IN", "EXACT"
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].string_value #=> String
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].numeric_value #=> Float
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].boolean_value #=> Boolean
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.values[0].date_time_value #=> Time
+    #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].expression.comparator #=> String, one of "IN", "NOT_IN", "ALL_IN", "EXACT", "GREATER_THAN", "LESS_THAN", "GREATER_THAN_OR_EQUAL_TO", "LESS_THAN_OR_EQUAL_TO", "EQUAL_TO", "NOT_EQUAL_TO"
     #   resp.evaluation_form.items[0].question.enablement.condition.operands[0].condition #=> Types::EvaluationFormItemEnablementCondition
     #   resp.evaluation_form.items[0].question.enablement.condition.operator #=> String, one of "OR", "AND"
     #   resp.evaluation_form.items[0].question.enablement.action #=> String, one of "DISABLE", "ENABLE"
@@ -29316,6 +29511,42 @@ module Aws::Connect
     #               max_score_percentage: 1.0,
     #             },
     #           ],
+    #           enablement: {
+    #             condition: { # required
+    #               operands: [ # required
+    #                 {
+    #                   expression: {
+    #                     source: { # required
+    #                       type: "QUESTION_REF_ID", # required, accepts QUESTION_REF_ID, CONTACT, EVALUATION_METADATA, FORM_METADATA, AI_METRICS
+    #                       ref_id: "ReferenceId",
+    #                       contact_field: "CATEGORIES", # accepts CATEGORIES, AGENT_ARN, QUEUE_ARN, ROUTING_PROFILE_ARN, CHANNEL, INITIATION_METHOD, IS_QUEUED, OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION, RECORDING_MEDIA_STREAM_TYPES
+    #                       contact_attribute_key: "EvaluationFormContactAttributeKey",
+    #                       segment_attribute_key: "EvaluationFormSegmentAttributeKey",
+    #                       evaluation_metadata_field: "EVALUATION_TYPE", # accepts EVALUATION_TYPE
+    #                       ai_metrics_field: "AI_SESSION_IS_HANDED_OFF", # accepts AI_SESSION_IS_HANDED_OFF, AI_SESSION_SELF_SERVICE_DURATION, AI_SESSION_GOAL_SUCCESS_RATE, AI_SESSION_COMPLETENESS_SCORE, AI_SESSION_FAITHFULNESS_SCORE, AI_AGENT_MAX_PROMPT_LATENCY, AI_TOOL_MAX_LATENCY, AI_TOOL_SELECTION_ACCURACY, AI_TOOL_PARAMETER_ACCURACY, AI_TOOL_UTILIZATION_ACCURACY
+    #                     },
+    #                     values: [ # required
+    #                       {
+    #                         type: "OPTION_REF_ID", # required, accepts OPTION_REF_ID, STRING_VALUE, NUMERIC_VALUE, BOOLEAN_VALUE, DATETIME_VALUE
+    #                         ref_id: "ReferenceId",
+    #                         string_value: "EvaluationFormEnablementStringValue",
+    #                         numeric_value: 1.0,
+    #                         boolean_value: false,
+    #                         date_time_value: Time.now,
+    #                       },
+    #                     ],
+    #                     comparator: "IN", # required, accepts IN, NOT_IN, ALL_IN, EXACT, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL_TO, LESS_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO
+    #                   },
+    #                   condition: {
+    #                     # recursive EvaluationFormItemEnablementCondition
+    #                   },
+    #                 },
+    #               ],
+    #               operator: "OR", # accepts OR, AND
+    #             },
+    #             action: "DISABLE", # required, accepts DISABLE, ENABLE
+    #             default_action: "DISABLE", # accepts DISABLE, ENABLE
+    #           },
     #         },
     #         question: {
     #           title: "EvaluationFormQuestionTitle", # required
@@ -29344,10 +29575,10 @@ module Aws::Connect
     #               ],
     #               automation: {
     #                 property_value: {
-    #                   label: "OVERALL_CUSTOMER_SENTIMENT_SCORE", # required, accepts OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION
+    #                   label: "OVERALL_CUSTOMER_SENTIMENT_SCORE", # required, accepts OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION, AI_SESSION_SELF_SERVICE_DURATION, AI_SESSION_GOAL_SUCCESS_RATE, AI_SESSION_COMPLETENESS_SCORE, AI_SESSION_FAITHFULNESS_SCORE, AI_AGENT_MAX_PROMPT_LATENCY, AI_TOOL_MAX_LATENCY, AI_TOOL_SELECTION_ACCURACY, AI_TOOL_PARAMETER_ACCURACY, AI_TOOL_UTILIZATION_ACCURACY
     #                 },
     #                 answer_source: {
-    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI
+    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI, CONDITION
     #                 },
     #               },
     #             },
@@ -29376,18 +29607,53 @@ module Aws::Connect
     #                       condition: "PRESENT", # required, accepts PRESENT, NOT_PRESENT
     #                       option_ref_id: "ReferenceId", # required
     #                     },
+    #                     automation_rule: {
+    #                       condition: { # required
+    #                         operands: [ # required
+    #                           {
+    #                             expression: {
+    #                               source: { # required
+    #                                 type: "QUESTION_REF_ID", # required, accepts QUESTION_REF_ID, CONTACT, EVALUATION_METADATA, FORM_METADATA, AI_METRICS
+    #                                 ref_id: "ReferenceId",
+    #                                 contact_field: "CATEGORIES", # accepts CATEGORIES, AGENT_ARN, QUEUE_ARN, ROUTING_PROFILE_ARN, CHANNEL, INITIATION_METHOD, IS_QUEUED, OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION, RECORDING_MEDIA_STREAM_TYPES
+    #                                 contact_attribute_key: "EvaluationFormContactAttributeKey",
+    #                                 segment_attribute_key: "EvaluationFormSegmentAttributeKey",
+    #                                 evaluation_metadata_field: "EVALUATION_TYPE", # accepts EVALUATION_TYPE
+    #                                 ai_metrics_field: "AI_SESSION_IS_HANDED_OFF", # accepts AI_SESSION_IS_HANDED_OFF, AI_SESSION_SELF_SERVICE_DURATION, AI_SESSION_GOAL_SUCCESS_RATE, AI_SESSION_COMPLETENESS_SCORE, AI_SESSION_FAITHFULNESS_SCORE, AI_AGENT_MAX_PROMPT_LATENCY, AI_TOOL_MAX_LATENCY, AI_TOOL_SELECTION_ACCURACY, AI_TOOL_PARAMETER_ACCURACY, AI_TOOL_UTILIZATION_ACCURACY
+    #                               },
+    #                               values: [ # required
+    #                                 {
+    #                                   type: "OPTION_REF_ID", # required, accepts OPTION_REF_ID, STRING_VALUE, NUMERIC_VALUE, BOOLEAN_VALUE, DATETIME_VALUE
+    #                                   ref_id: "ReferenceId",
+    #                                   string_value: "EvaluationFormEnablementStringValue",
+    #                                   numeric_value: 1.0,
+    #                                   boolean_value: false,
+    #                                   date_time_value: Time.now,
+    #                                 },
+    #                               ],
+    #                               comparator: "IN", # required, accepts IN, NOT_IN, ALL_IN, EXACT, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL_TO, LESS_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO
+    #                             },
+    #                             condition: {
+    #                               # recursive EvaluationFormItemEnablementCondition
+    #                             },
+    #                           },
+    #                         ],
+    #                         operator: "OR", # accepts OR, AND
+    #                       },
+    #                       option_ref_id: "ReferenceId", # required
+    #                     },
     #                   },
     #                 ],
     #                 default_option_ref_id: "ReferenceId",
     #                 answer_source: {
-    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI
+    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI, CONDITION
     #                 },
     #               },
     #             },
     #             text: {
     #               automation: {
     #                 answer_source: {
-    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI
+    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI, CONDITION
     #                 },
     #               },
     #             },
@@ -29420,7 +29686,7 @@ module Aws::Connect
     #                 ],
     #                 default_option_ref_ids: ["ReferenceId"],
     #                 answer_source: {
-    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI
+    #                   source_type: "CONTACT_LENS_DATA", # required, accepts CONTACT_LENS_DATA, GEN_AI, CONDITION
     #                 },
     #               },
     #             },
@@ -29431,16 +29697,25 @@ module Aws::Connect
     #                 {
     #                   expression: {
     #                     source: { # required
-    #                       type: "QUESTION_REF_ID", # required, accepts QUESTION_REF_ID
+    #                       type: "QUESTION_REF_ID", # required, accepts QUESTION_REF_ID, CONTACT, EVALUATION_METADATA, FORM_METADATA, AI_METRICS
     #                       ref_id: "ReferenceId",
+    #                       contact_field: "CATEGORIES", # accepts CATEGORIES, AGENT_ARN, QUEUE_ARN, ROUTING_PROFILE_ARN, CHANNEL, INITIATION_METHOD, IS_QUEUED, OVERALL_CUSTOMER_SENTIMENT_SCORE, OVERALL_AGENT_SENTIMENT_SCORE, CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT, CUSTOMER_SENTIMENT_SCORE_WITH_AGENT, NON_TALK_TIME, NON_TALK_TIME_PERCENTAGE, NUMBER_OF_INTERRUPTIONS, CONTACT_DURATION, AGENT_INTERACTION_DURATION, CUSTOMER_HOLD_TIME, LONGEST_HOLD_DURATION, NUMBER_OF_HOLDS, AGENT_INTERACTION_AND_HOLD_DURATION, RECORDING_MEDIA_STREAM_TYPES
+    #                       contact_attribute_key: "EvaluationFormContactAttributeKey",
+    #                       segment_attribute_key: "EvaluationFormSegmentAttributeKey",
+    #                       evaluation_metadata_field: "EVALUATION_TYPE", # accepts EVALUATION_TYPE
+    #                       ai_metrics_field: "AI_SESSION_IS_HANDED_OFF", # accepts AI_SESSION_IS_HANDED_OFF, AI_SESSION_SELF_SERVICE_DURATION, AI_SESSION_GOAL_SUCCESS_RATE, AI_SESSION_COMPLETENESS_SCORE, AI_SESSION_FAITHFULNESS_SCORE, AI_AGENT_MAX_PROMPT_LATENCY, AI_TOOL_MAX_LATENCY, AI_TOOL_SELECTION_ACCURACY, AI_TOOL_PARAMETER_ACCURACY, AI_TOOL_UTILIZATION_ACCURACY
     #                     },
     #                     values: [ # required
     #                       {
-    #                         type: "OPTION_REF_ID", # required, accepts OPTION_REF_ID
+    #                         type: "OPTION_REF_ID", # required, accepts OPTION_REF_ID, STRING_VALUE, NUMERIC_VALUE, BOOLEAN_VALUE, DATETIME_VALUE
     #                         ref_id: "ReferenceId",
+    #                         string_value: "EvaluationFormEnablementStringValue",
+    #                         numeric_value: 1.0,
+    #                         boolean_value: false,
+    #                         date_time_value: Time.now,
     #                       },
     #                     ],
-    #                     comparator: "IN", # required, accepts IN, NOT_IN, ALL_IN, EXACT
+    #                     comparator: "IN", # required, accepts IN, NOT_IN, ALL_IN, EXACT, GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL_TO, LESS_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO
     #                   },
     #                   condition: {
     #                     # recursive EvaluationFormItemEnablementCondition
@@ -32561,7 +32836,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.300.0'
+      context[:gem_version] = '1.301.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

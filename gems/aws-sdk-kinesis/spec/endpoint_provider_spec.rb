@@ -1539,7 +1539,7 @@ module Aws::Kinesis
 
     context "ResourceARN as StreamARN test: Invalid ARN: Kinesis ARNs only support stream arn types" do
       let(:expected) do
-        {"error" => "Invalid ARN: Unsupported resource type `accesspoint`. Expected: stream or channel"}
+        {"error" => "Invalid ARN: Unsupported resource type `accesspoint`. Expected: stream, channel, or queue."}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -1880,7 +1880,7 @@ module Aws::Kinesis
 
     context "ResourceARN as ConsumerARN test: Invalid ARN: Kinesis ARNs only support stream arn/consumer arn types" do
       let(:expected) do
-        {"error" => "Invalid ARN: Unsupported resource type `accesspoint`. Expected: stream or channel"}
+        {"error" => "Invalid ARN: Unsupported resource type `accesspoint`. Expected: stream, channel, or queue."}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -2130,7 +2130,7 @@ module Aws::Kinesis
 
     context "ResourceARN as ChannelARN test: Invalid ARN: unsupported resource type" do
       let(:expected) do
-        {"error" => "Invalid ARN: Unsupported resource type `accesspoint`. Expected: stream or channel"}
+        {"error" => "Invalid ARN: Unsupported resource type `accesspoint`. Expected: stream, channel, or queue."}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3300,6 +3300,93 @@ module Aws::Kinesis
       end
     end
 
+    context "ResourceARN with queue type: basic control endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://myQueueId.control-kinesis-queues.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling put_resource_policy' do
+        client = Client.new(
+          region: 'us-east-1',
+          stub_responses: true
+        )
+        resp = client.put_resource_policy(
+          resource_arn: 'arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId',
+          policy: '{}',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "ResourceARN with queue type: FIPS" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://myQueueId.control-kinesis-queues-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ResourceARN with queue type: DualStack" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://myQueueId.control-kinesis-queues.us-west-2.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: true, operation_type: "control", resource_arn: "arn:aws:kinesis:us-west-2:123456789012:queue/myQueueId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling tag_resource' do
+        client = Client.new(
+          region: 'us-west-2',
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.tag_resource(
+          resource_arn: 'arn:aws:kinesis:us-west-2:123456789012:queue/myQueueId',
+          tags: {"key1" => "value1"},
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "ResourceARN with channel type: basic control endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://apu0zt8ge6utbndxe.control-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws:kinesis:us-east-1:298091445058:channel/apu0zt8ge6utbndxe"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
     context "Account Id with account id endpoint mode disabled" do
       let(:expected) do
         {"endpoint" => {"url" => "https://kinesis.us-west-2.amazonaws.com"}}
@@ -4391,6 +4478,1007 @@ module Aws::Kinesis
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "QueueARN: basic endpoint resolution with control operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://myQueueId.control-kinesis-queues.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_type: "queue", queue_arn: "arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling describe_queue' do
+        client = Client.new(
+          region: 'us-east-1',
+          stub_responses: true
+        )
+        resp = client.describe_queue(
+          queue_arn: 'arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "QueueARN: endpoint with FIPS" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://myQueueId.control-kinesis-queues-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", resource_type: "queue", queue_arn: "arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling update_queue' do
+        client = Client.new(
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.update_queue(
+          queue_arn: 'arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId',
+          queue_attributes: {visibility_timeout_seconds: 30},
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "QueueARN: endpoint with DualStack" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://myQueueId.control-kinesis-queues.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: true, operation_type: "control", resource_type: "queue", queue_arn: "arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling delete_queue' do
+        client = Client.new(
+          region: 'us-east-1',
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.delete_queue(
+          queue_arn: 'arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "QueueARN: endpoint with FIPS and DualStack" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://myQueueId.control-kinesis-queues-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: true, operation_type: "control", resource_type: "queue", queue_arn: "arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "QueueARN: data operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://abc123def456.data-kinesis-queues.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "data", resource_type: "queue", queue_arn: "arn:aws:kinesis:us-west-2:123456789012:queue/abc123def456"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling receive_queue_records' do
+        client = Client.new(
+          region: 'us-west-2',
+          stub_responses: true
+        )
+        resp = client.receive_queue_records(
+          queue_arn: 'arn:aws:kinesis:us-west-2:123456789012:queue/abc123def456',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "QueueARN: data operation type with FIPS" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://abc123def456.data-kinesis-queues-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, operation_type: "data", resource_type: "queue", queue_arn: "arn:aws:kinesis:us-east-1:123456789012:queue/abc123def456"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling acknowledge_queue_records' do
+        client = Client.new(
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.acknowledge_queue_records(
+          queue_arn: 'arn:aws:kinesis:us-east-1:123456789012:queue/abc123def456',
+          entries: [{receipt_handle: "handle1"}],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "QueueARN: data operation type with DualStack" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://abc123def456.data-kinesis-queues.us-west-2.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: true, operation_type: "data", resource_type: "queue", queue_arn: "arn:aws:kinesis:us-west-2:123456789012:queue/abc123def456"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling update_queue_records_visibility' do
+        client = Client.new(
+          region: 'us-west-2',
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.update_queue_records_visibility(
+          queue_arn: 'arn:aws:kinesis:us-west-2:123456789012:queue/abc123def456',
+          entries: [{receipt_handle: "handle1", visibility_timeout_seconds: 30}],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "QueueARN: VPCE endpoint override is respected as-is" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://my-vpce-xyz.vpce.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_type: "queue", queue_arn: "arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId", endpoint: "https://my-vpce-xyz.vpce.amazonaws.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Invalid QueueARN: wrong arn type" do
+      let(:expected) do
+        {"error" => "Invalid ARN: QueueARN only supports `queue` ARN types, found: `stream`."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_type: "queue", queue_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/test-stream"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Invalid QueueARN: missing queue id" do
+      let(:expected) do
+        {"error" => "Invalid ARN: Missing queue id."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_type: "queue", queue_arn: "arn:aws:kinesis:us-east-1:123456789012:queue"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Invalid QueueARN: non-kinesis service" do
+      let(:expected) do
+        {"error" => "Invalid ARN: The ARN was not for the Kinesis service, found: sqs."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_type: "queue", queue_arn: "arn:aws:sqs:us-east-1:123456789012:queue/myQueueId"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Queue AccountId: basic endpoint with AccountId" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123456789012.control-kinesis-queues.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred", resource_type: "queue"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling create_queue' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'preferred',
+          stub_responses: true
+        )
+        resp = client.create_queue(
+          queue_name: 'test-queue',
+          stream_configuration_list: [{stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/test-stream"}],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "Queue AccountId: endpoint with FIPS" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123456789012.control-kinesis-queues-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred", resource_type: "queue"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling list_queues' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'preferred',
+          use_fips_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.list_queues(
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "Queue AccountId: endpoint with DualStack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123456789012.control-kinesis-queues.us-west-2.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: true, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred", resource_type: "queue"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Queue AccountId: endpoint with FIPS and DualStack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123456789012.control-kinesis-queues-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: true, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred", resource_type: "queue"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "QueueARN: regular endpoint override is respected as-is" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-queues.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_type: "queue", queue_arn: "arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId", endpoint: "https://kinesis-queues.us-east-1.amazonaws.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Queue AccountId: disabled mode falls back to regional queue endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-queues.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "disabled", resource_type: "queue"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling create_queue' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'disabled',
+          stub_responses: true
+        )
+        resp = client.create_queue(
+          queue_name: 'test-queue',
+          stream_configuration_list: [{stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/test-stream"}],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "Queue AccountId: disabled mode with FIPS falls back to regional queue FIPS endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-queues-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "disabled", resource_type: "queue"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling list_queues' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'disabled',
+          use_fips_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.list_queues(
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "Queue AccountId: disabled mode with DualStack falls back to regional queue DualStack endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-queues.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: true, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "disabled", resource_type: "queue"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling create_queue' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'disabled',
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.create_queue(
+          queue_name: 'test-queue',
+          stream_configuration_list: [{stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/test-stream"}],
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "Queue AccountId: disabled mode with FIPS and DualStack falls back to regional queue FIPS DualStack endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-queues-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: true, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "disabled", resource_type: "queue"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling list_queues' do
+        client = Client.new(
+          region: 'us-east-1',
+          credentials: Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '123456789012'),
+          account_id_endpoint_mode: 'disabled',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          stub_responses: true
+        )
+        resp = client.list_queues(
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "ResourceARN with queue type: missing queue id errors" do
+      let(:expected) do
+        {"error" => "Invalid ARN: Missing queue id."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws:kinesis:us-east-1:123456789012:queue"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "ResourceARN with channel type: missing channel id errors" do
+      let(:expected) do
+        {"error" => "Invalid ARN: Missing channel id."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws:kinesis:us-east-1:123456789012:channel"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "ResourceARN with unsupported type: consumer type is rejected" do
+      let(:expected) do
+        {"error" => "Invalid ARN: Unsupported resource type `consumer`. Expected: stream, channel, or queue."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws:kinesis:us-east-1:123456789012:consumer/test-consumer"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "QueueARN and StreamARN both set: StreamARN wins by rule ordering today (ResourceType is not yet authoritative on the stream path; revisit if a both-ARN API is introduced)" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://123.control-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", stream_arn: "arn:aws:kinesis:us-east-1:123:stream/test-stream", resource_type: "queue", queue_arn: "arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "QueueARN set but ResourceType absent: errors instead of misrouting to the default kinesis endpoint" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: ResourceType must be \"queue\" when QueueARN is set."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", queue_arn: "arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "QueueARN set but ResourceType is not queue:  errors instead of misrouting to the default kinesis endpoint" do
+      let(:expected) do
+        {"error" => "Invalid Configuration: ResourceType must be \"queue\" when QueueARN is set."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_type: "stream", queue_arn: "arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "AccountId without ResourceType: non-queue account endpoint is unchanged (no -queues suffix)" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"metricValues" => ["O"]}, "url" => "https://123456789012.control-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Queue AccountId: required mode with no AccountId errors" do
+      let(:expected) do
+        {"error" => "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", account_id_endpoint_mode: "required", resource_type: "queue"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "QueueARN: OperationType not set errors" do
+      let(:expected) do
+        {"error" => "Operation Type is not set. Please contact service team for resolution."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, resource_type: "queue", queue_arn: "arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "QueueARN: aws-iso region falls back to regional queue endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-queues.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_type: "queue", queue_arn: "arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue/myQueueId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "QueueARN: aws-iso-b region falls back to regional queue endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-queues.us-isob-east-1.sc2s.sgov.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-isob-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_type: "queue", queue_arn: "arn:aws-iso-b:kinesis:us-isob-east-1:123456789012:queue/myQueueId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Queue AccountId in aws-iso: disabled mode falls back to regional queue endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-queues.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "disabled", resource_type: "queue"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ResourceARN with queue type in aws-iso: falls back to regional queue endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-queues.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue/myQueueId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ResourceARN with queue type in aws-iso-b: falls back to regional queue endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-queues.us-isob-east-1.sc2s.sgov.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-isob-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws-iso-b:kinesis:us-isob-east-1:123456789012:queue/myQueueId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Queue AccountId in aws-iso: preferred mode falls back to regional queue endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-queues.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred", resource_type: "queue"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "QueueARN: aws-iso region with FIPS falls back to regional queue FIPS endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-queues-fips.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", resource_type: "queue", queue_arn: "arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue/myQueueId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ResourceARN with queue type in aws-iso with FIPS: falls back to regional queue FIPS endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-queues-fips.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue/myQueueId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "QueueARN: aws-iso region with DualStack falls back to regional queue DualStack endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-queues.us-iso-east-1.api.aws.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: true, operation_type: "control", resource_type: "queue", queue_arn: "arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue/myQueueId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "QueueARN: aws-iso region with FIPS and DualStack falls back to regional queue FIPS DualStack endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-queues-fips.us-iso-east-1.api.aws.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: true, use_dual_stack: true, operation_type: "control", resource_type: "queue", queue_arn: "arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue/myQueueId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ResourceARN with queue type in aws-iso with DualStack: falls back to regional queue DualStack endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-queues.us-iso-east-1.api.aws.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: true, operation_type: "control", resource_arn: "arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue/myQueueId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ResourceARN with queue type in aws-iso with FIPS and DualStack: falls back to regional queue FIPS DualStack endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-queues-fips.us-iso-east-1.api.aws.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: true, use_dual_stack: true, operation_type: "control", resource_arn: "arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue/myQueueId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Queue AccountId in aws-iso: preferred mode with FIPS falls back to regional queue FIPS endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-queues-fips.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "preferred", resource_type: "queue"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Queue AccountId in aws-iso: disabled mode with FIPS falls back to regional queue FIPS endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-queues-fips.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", account_id: "123456789012", account_id_endpoint_mode: "disabled", resource_type: "queue"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ResourceARN with channel type in aws-iso: falls back to default kinesis endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws-iso:kinesis:us-iso-east-1:123456789012:channel/myChannelId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ResourceARN with channel type in aws-iso with FIPS: falls back to default kinesis FIPS endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-fips.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws-iso:kinesis:us-iso-east-1:123456789012:channel/myChannelId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ChannelARN in aws-iso: falls back to default kinesis endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", channel_arn: "arn:aws-iso:kinesis:us-iso-east-1:123456789012:channel/myChannelId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ChannelARN in aws-iso with FIPS: falls back to default kinesis FIPS endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-fips.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: true, use_dual_stack: false, operation_type: "control", channel_arn: "arn:aws-iso:kinesis:us-iso-east-1:123456789012:channel/myChannelId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ResourceARN queue in aws-iso: non-kinesis service should error" do
+      let(:expected) do
+        {"error" => "Invalid ARN: The ARN was not for the Kinesis service, found: sqs."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws-iso:sqs:us-iso-east-1:123456789012:queue/myQueueId"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "ResourceARN queue in aws-iso: partition mismatch should error" do
+      let(:expected) do
+        {"error" => "Partition: aws from ARN doesn't match with partition name: aws-iso."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "ResourceARN queue in aws-iso: missing queue id should error" do
+      let(:expected) do
+        {"error" => "Invalid ARN: Missing queue id."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "ResourceARN queue in aws-iso: invalid account id should error" do
+      let(:expected) do
+        {"error" => "Invalid ARN: Invalid account id."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws-iso:kinesis:us-iso-east-1:invalid..account:queue/myQueueId"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "ResourceARN queue in aws-iso: OperationType not set should error" do
+      let(:expected) do
+        {"error" => "Operation Type is not set. Please contact service team for resolution."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: false, resource_arn: "arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue/myQueueId"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "ResourceARN queue in aws-iso: invalid queue id should error" do
+      let(:expected) do
+        {"error" => "Invalid ARN: Invalid queue id."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_arn: "arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue/invalid.queue.id"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "StreamARN in aws-iso with DualStack: falls back to default kinesis DualStack endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis.us-iso-east-1.api.aws.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: true, operation_type: "control", stream_arn: "arn:aws-iso:kinesis:us-iso-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamARN in aws-iso with FIPS and DualStack: falls back to default kinesis FIPS DualStack endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis-fips.us-iso-east-1.api.aws.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: true, use_dual_stack: true, operation_type: "control", stream_arn: "arn:aws-iso:kinesis:us-iso-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "StreamARN in aws-iso: missing ARN type falls back to default kinesis endpoint" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://kinesis.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", stream_arn: "arn:aws-iso:kinesis:us-iso-east-1:123456789012:"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "QueueARN: partition mismatch errors" do
+      let(:expected) do
+        {"error" => "Partition: aws-cn from ARN doesn't match with partition name: aws."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, operation_type: "control", resource_type: "queue", queue_arn: "arn:aws-cn:kinesis:cn-north-1:123456789012:queue/myQueueId"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "ResourceARN with queue type: FIPS and DualStack" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://myQueueId.control-kinesis-queues-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: true, operation_type: "control", resource_arn: "arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ResourceARN with queue type: data operation type" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://myQueueId.data-kinesis-queues.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, operation_type: "data", resource_arn: "arn:aws:kinesis:us-west-2:123456789012:queue/myQueueId"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
       end
     end
 

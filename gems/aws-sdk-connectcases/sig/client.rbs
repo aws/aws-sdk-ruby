@@ -623,7 +623,8 @@ module Aws
                                                   {
                                                     id: ::String
                                                   }
-                                                ]
+                                                ],
+                                                auto_include_fields: ("All" | "System" | "Custom")?
                                               }?,
                                               related_item_data: {
                                                 include_content: bool

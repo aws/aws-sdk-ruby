@@ -54,6 +54,18 @@ module Aws
       }?
     }
 
+      type evaluator_filter = {
+      evaluator_id: ::String,
+      evaluation_dimension_name: ::String?,
+      operator: ("Equals" | "NotEquals" | "GreaterThan" | "LessThan" | "GreaterThanOrEqual" | "LessThanOrEqual" | "Contains" | "NotContains"),
+      value: {
+        string_value: ::String?,
+        double_value: ::Float?,
+        boolean_value: bool?
+      },
+      aggregation: ("Min" | "Max" | "Mean" | "AllMatch" | "AnyMatch")?
+    }
+
       type cloud_watch_logs_rule = {
       filters: Array[
         Params::cloud_watch_logs_filter

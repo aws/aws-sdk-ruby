@@ -569,6 +569,7 @@ module Aws::ConnectContactLens
     #   resp.segments[0].transcript.issues_detected #=> Array
     #   resp.segments[0].transcript.issues_detected[0].character_offsets.begin_offset_char #=> Integer
     #   resp.segments[0].transcript.issues_detected[0].character_offsets.end_offset_char #=> Integer
+    #   resp.segments[0].transcript.language_code #=> String
     #   resp.segments[0].categories.matched_categories #=> Array
     #   resp.segments[0].categories.matched_categories[0] #=> String
     #   resp.segments[0].categories.matched_details #=> Hash
@@ -617,7 +618,7 @@ module Aws::ConnectContactLens
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcontactlens'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

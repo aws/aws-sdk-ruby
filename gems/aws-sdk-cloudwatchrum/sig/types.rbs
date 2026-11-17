@@ -344,6 +344,7 @@ module Aws::CloudWatchRUM
       attr_accessor user_details: Types::UserDetails
       attr_accessor rum_events: ::Array[Types::RumEvent]
       attr_accessor alias: ::String
+      attr_accessor session_metadata: ::String
       SENSITIVE: []
     end
 

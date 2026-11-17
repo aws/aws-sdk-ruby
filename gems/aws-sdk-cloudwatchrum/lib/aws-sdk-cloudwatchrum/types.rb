@@ -1605,6 +1605,16 @@ module Aws::CloudWatchRUM
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html
     #   @return [String]
     #
+    # @!attribute [rw] session_metadata
+    #   A JSON serialization of attributes that apply to every event in this
+    #   batch, such as the browser, device, and operating system of the end
+    #   user. CloudWatch RUM merges these attributes into each event in the
+    #   batch, so you send them once for the batch instead of once for each
+    #   event. If an attribute appears both here and in an individual
+    #   event's `metadata`, CloudWatch RUM uses the value in the event's
+    #   `metadata`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/PutRumEventsRequest AWS API Documentation
     #
     class PutRumEventsRequest < Struct.new(
@@ -1613,7 +1623,8 @@ module Aws::CloudWatchRUM
       :app_monitor_details,
       :user_details,
       :rum_events,
-      :alias)
+      :alias,
+      :session_metadata)
       SENSITIVE = []
       include Aws::Structure
     end

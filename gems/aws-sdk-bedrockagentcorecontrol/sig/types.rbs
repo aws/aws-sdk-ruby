@@ -55,6 +55,23 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class AgentInsightStoreEncryptionConfiguration
+      attr_accessor mode: ("AWS_OWNED_KMS_KEY" | "CUSTOMER_MANAGED_KMS")
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AgentInsightStoreSummary
+      attr_accessor agent_insight_store_arn: ::String
+      attr_accessor agent_insight_store_id: ::String
+      attr_accessor status: ("ACTIVE" | "UPDATING" | "INACTIVE" | "ERROR")
+      attr_accessor enablement_status: ("ENABLED" | "DISABLED")
+      attr_accessor encryption_configuration: Types::AgentInsightStoreEncryptionConfiguration
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class AgentRuntime
       attr_accessor agent_runtime_arn: ::String
       attr_accessor agent_runtime_id: ::String
@@ -1576,6 +1593,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor draft_status: ("MODIFIED" | "UNMODIFIED")
       attr_accessor schema_type: ("AGENTCORE_EVALUATION_PREDEFINED_V1" | "AGENTCORE_EVALUATION_SIMULATED_V1" | "THIRD_PARTY_EVALUATION_V1")
       attr_accessor example_count: ::Integer
+      attr_accessor example_count_by_field: Types::ExampleCountByField
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -1584,6 +1602,7 @@ module Aws::BedrockAgentCoreControl
     class DatasetVersionSummary
       attr_accessor dataset_version: ::String
       attr_accessor example_count: ::Integer
+      attr_accessor example_count_by_field: Types::ExampleCountByField
       attr_accessor created_at: ::Time
       SENSITIVE: []
     end
@@ -2195,6 +2214,25 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: [:description]
     end
 
+    class ExampleCountByField
+      attr_accessor turns: ::Integer
+      attr_accessor input: ::Integer
+      attr_accessor actor_profile: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExampleCountByFieldCondition
+      attr_accessor any_of: ::Array[("TURNS" | "INPUT" | "ACTOR_PROFILE")]
+      attr_accessor min: ::Integer
+      attr_accessor max: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExampleFieldCondition
+      attr_accessor any_of: ::Array[("TURNS" | "INPUT" | "ACTOR_PROFILE")]
+      SENSITIVE: []
+    end
+
     class ExtractionConfig
       attr_accessor llm_extraction_config: Types::LlmExtractionConfig
       attr_accessor unknown: untyped
@@ -2376,6 +2414,23 @@ module Aws::BedrockAgentCoreControl
       attr_accessor protocol_type: ("MCP" | "HTTP")
       attr_accessor certificate_configurations: ::Array[Types::CertificateConfiguration]
       SENSITIVE: [:name, :description]
+    end
+
+    class GetAgentInsightStoreRequest
+      attr_accessor agent_insight_store_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAgentInsightStoreResponse
+      attr_accessor agent_insight_store_arn: ::String
+      attr_accessor agent_insight_store_id: ::String
+      attr_accessor status: ("ACTIVE" | "UPDATING" | "INACTIVE" | "ERROR")
+      attr_accessor enablement_status: ("ENABLED" | "DISABLED")
+      attr_accessor encryption_configuration: Types::AgentInsightStoreEncryptionConfiguration
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor failure_reason: ::String
+      SENSITIVE: [:failure_reason]
     end
 
     class GetAgentRuntimeEndpointRequest
@@ -2613,6 +2668,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor schema_type: ("AGENTCORE_EVALUATION_PREDEFINED_V1" | "AGENTCORE_EVALUATION_SIMULATED_V1" | "THIRD_PARTY_EVALUATION_V1")
       attr_accessor kms_key_arn: ::String
       attr_accessor example_count: ::Integer
+      attr_accessor example_count_by_field: Types::ExampleCountByField
       attr_accessor download_url: ::String
       attr_accessor download_url_expires_at: ::Time
       attr_accessor created_at: ::Time
@@ -3878,6 +3934,18 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class ListAgentInsightStoresRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAgentInsightStoresResponse
+      attr_accessor agent_insight_stores: ::Array[Types::AgentInsightStoreSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListAgentRuntimeEndpointsRequest
       attr_accessor agent_runtime_id: ::String
       attr_accessor max_results: ::Integer
@@ -4030,9 +4098,16 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class ListDatasetExamplesFilter
+      attr_accessor generation_ids: ::Array[::String]
+      attr_accessor example_fields: ::Array[Types::ExampleFieldCondition]
+      SENSITIVE: []
+    end
+
     class ListDatasetExamplesRequest
       attr_accessor dataset_id: ::String
       attr_accessor dataset_version: ::String
+      attr_accessor filter: Types::ListDatasetExamplesFilter
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -4047,8 +4122,14 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: [:examples]
     end
 
+    class ListDatasetVersionsFilter
+      attr_accessor example_count_by_field: ::Array[Types::ExampleCountByFieldCondition]
+      SENSITIVE: []
+    end
+
     class ListDatasetVersionsRequest
       attr_accessor dataset_id: ::String
+      attr_accessor filter: Types::ListDatasetVersionsFilter
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -4060,7 +4141,13 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class ListDatasetsFilter
+      attr_accessor example_count_by_field: ::Array[Types::ExampleCountByFieldCondition]
+      SENSITIVE: []
+    end
+
     class ListDatasetsRequest
+      attr_accessor filter: Types::ListDatasetsFilter
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -6014,6 +6101,24 @@ module Aws::BedrockAgentCoreControl
     end
 
     class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAgentInsightStoreRequest
+      attr_accessor client_token: ::String
+      attr_accessor agent_insight_store_id: ::String
+      attr_accessor enablement_status: ("ENABLED" | "DISABLED")
+      attr_accessor encryption_configuration: Types::AgentInsightStoreEncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateAgentInsightStoreResponse
+      attr_accessor agent_insight_store_arn: ::String
+      attr_accessor agent_insight_store_id: ::String
+      attr_accessor status: ("ACTIVE" | "UPDATING" | "INACTIVE" | "ERROR")
+      attr_accessor enablement_status: ("ENABLED" | "DISABLED")
+      attr_accessor updated_at: ::Time
+      attr_accessor failure_reason: ::String
+      SENSITIVE: [:failure_reason]
     end
 
     class UpdateAgentRuntimeEndpointRequest

@@ -3664,7 +3664,9 @@ module Aws
                                                        peer_account_id: ::String,
                                                        peer_region: ::String,
                                                        ?options: {
-                                                         dynamic_routing: ("enable" | "disable")?
+                                                         dynamic_routing: ("enable" | "disable")?,
+                                                         allow_multipath_resilience: bool?,
+                                                         multipath_resilience_mode: ("always-on")?
                                                        },
                                                        ?tag_specifications: Array[
                                                          {
@@ -4266,6 +4268,10 @@ module Aws
                                                ]?
                                              }
                                            ],
+                                           ?requester_peering_connection_options: {
+                                             allow_multipath_resilience: bool?,
+                                             multipath_resilience_mode: ("always-on")?
+                                           },
                                            ?dry_run: bool,
                                            vpc_id: ::String,
                                            ?peer_vpc_id: ::String,
@@ -4372,7 +4378,29 @@ module Aws
                                          ]?,
                                          startup_action: ::String?,
                                          log_options: Params::vpn_tunnel_log_options_specification?,
-                                         enable_tunnel_lifecycle_control: bool?
+                                         enable_tunnel_lifecycle_control: bool?,
+                                         phase_1_additional_key_exchanges: Array[
+                                           {
+                                             additional_key_exchange_round: ::Integer,
+                                             key_exchange_methods: Array[
+                                               {
+                                                 value: ::Integer?
+                                               }
+                                             ]?,
+                                             requirement: ("required" | "optional")?
+                                           }
+                                         ]?,
+                                         phase_2_additional_key_exchanges: Array[
+                                           {
+                                             additional_key_exchange_round: ::Integer,
+                                             key_exchange_methods: Array[
+                                               {
+                                                 value: ::Integer?
+                                               }
+                                             ]?,
+                                             requirement: ("required" | "optional")?
+                                           }
+                                         ]?
                                        }
                                      ]?,
                                      local_ipv_4_network_cidr: ::String?,
@@ -5867,7 +5895,12 @@ module Aws
                                                ?max_results: ::Integer,
                                                ?ultraserver_type: ::String,
                                                ?ultraserver_count: ::Integer,
-                                               ?all_availability_zones: bool
+                                               ?all_availability_zones: bool,
+                                               ?instance_type_preferences: Array[
+                                                 {
+                                                   instance_type: ::String?
+                                                 }
+                                               ]
                                              ) -> _DescribeCapacityBlockOfferingsResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCapacityBlockOfferingsResponseSuccess
 
@@ -13233,6 +13266,21 @@ module Aws
                                                               ) -> _ModifyTransitGatewayNetworkFunctionAttachmentResponseSuccess
                                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyTransitGatewayNetworkFunctionAttachmentResponseSuccess
 
+      interface _ModifyTransitGatewayPeeringAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyTransitGatewayPeeringAttachmentResult]
+        def transit_gateway_peering_attachment: () -> Types::TransitGatewayPeeringAttachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#modify_transit_gateway_peering_attachment-instance_method
+      def modify_transit_gateway_peering_attachment: (
+                                                       transit_gateway_attachment_id: ::String,
+                                                       ?options: {
+                                                         allow_multipath_resilience: bool?,
+                                                         multipath_resilience_mode: ("always-on")?
+                                                       },
+                                                       ?dry_run: bool
+                                                     ) -> _ModifyTransitGatewayPeeringAttachmentResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyTransitGatewayPeeringAttachmentResponseSuccess
+
       interface _ModifyTransitGatewayPolicyTableEntryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ModifyTransitGatewayPolicyTableEntryResult]
         def transit_gateway_policy_table_entry: () -> Types::TransitGatewayPolicyTableEntry
@@ -13672,13 +13720,17 @@ module Aws
                                                    ?accepter_peering_connection_options: {
                                                      allow_dns_resolution_from_remote_vpc: bool?,
                                                      allow_egress_from_local_classic_link_to_remote_vpc: bool?,
-                                                     allow_egress_from_local_vpc_to_remote_classic_link: bool?
+                                                     allow_egress_from_local_vpc_to_remote_classic_link: bool?,
+                                                     allow_multipath_resilience: bool?,
+                                                     multipath_resilience_mode: ("always-on")?
                                                    },
                                                    ?dry_run: bool,
                                                    ?requester_peering_connection_options: {
                                                      allow_dns_resolution_from_remote_vpc: bool?,
                                                      allow_egress_from_local_classic_link_to_remote_vpc: bool?,
-                                                     allow_egress_from_local_vpc_to_remote_classic_link: bool?
+                                                     allow_egress_from_local_vpc_to_remote_classic_link: bool?,
+                                                     allow_multipath_resilience: bool?,
+                                                     multipath_resilience_mode: ("always-on")?
                                                    },
                                                    vpc_peering_connection_id: ::String
                                                  ) -> _ModifyVpcPeeringConnectionOptionsResponseSuccess
@@ -13794,7 +13846,29 @@ module Aws
                                          ]?,
                                          startup_action: ::String?,
                                          log_options: Params::vpn_tunnel_log_options_specification?,
-                                         enable_tunnel_lifecycle_control: bool?
+                                         enable_tunnel_lifecycle_control: bool?,
+                                         phase_1_additional_key_exchanges: Array[
+                                           {
+                                             additional_key_exchange_round: ::Integer,
+                                             key_exchange_methods: Array[
+                                               {
+                                                 value: ::Integer?
+                                               }
+                                             ]?,
+                                             requirement: ("required" | "optional")?
+                                           }
+                                         ]?,
+                                         phase_2_additional_key_exchanges: Array[
+                                           {
+                                             additional_key_exchange_round: ::Integer,
+                                             key_exchange_methods: Array[
+                                               {
+                                                 value: ::Integer?
+                                               }
+                                             ]?,
+                                             requirement: ("required" | "optional")?
+                                           }
+                                         ]?
                                        },
                                        ?dry_run: bool,
                                        ?skip_tunnel_replacement: bool,
@@ -13940,6 +14014,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::PurchaseCapacityBlockResult]
         def capacity_reservation: () -> Types::CapacityReservation
         def capacity_blocks: () -> ::Array[Types::CapacityBlock]
+        def capacity_reservations: () -> ::Array[Types::CapacityReservation]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#purchase_capacity_block-instance_method
       def purchase_capacity_block: (

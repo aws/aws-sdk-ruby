@@ -509,6 +509,115 @@ module Aws::Kinesis
 
     # @!group API Operations
 
+    # Acknowledges up to 10 dead-letter records in the specified queue, so
+    # the queue doesn't return them again. The result for each entry is
+    # reported individually in the response.
+    #
+    # Acknowledging a record does not affect the record in the data stream.
+    # That record remains available to stream consumers and to other queues
+    # on the same stream for the rest of its retention period.
+    #
+    # Because the request can result in a combination of successful and
+    # unsuccessful entries, check the `Failed` list even when the call
+    # returns an HTTP status code of `200`.
+    #
+    # @option params [required, String] :queue_arn
+    #   The ARN of the queue whose dead-letter records are acknowledged.
+    #
+    # @option params [required, Array<Types::AcknowledgeDeadLetterQueueRecordsRequestEntry>] :entries
+    #   The dead-letter records to acknowledge, identified by their receipt
+    #   handles.
+    #
+    # @return [Types::AcknowledgeDeadLetterQueueRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcknowledgeDeadLetterQueueRecordsOutput#successful #successful} => Array&lt;Types::AcknowledgeDeadLetterQueueRecordsResultEntry&gt;
+    #   * {Types::AcknowledgeDeadLetterQueueRecordsOutput#failed #failed} => Array&lt;Types::AcknowledgeDeadLetterQueueRecordsErrorEntry&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.acknowledge_dead_letter_queue_records({
+    #     queue_arn: "QueueARN", # required
+    #     entries: [ # required
+    #       {
+    #         receipt_handle: "ReceiptHandle", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0].receipt_handle #=> String
+    #   resp.failed #=> Array
+    #   resp.failed[0].receipt_handle #=> String
+    #   resp.failed[0].error_code #=> String
+    #   resp.failed[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AcknowledgeDeadLetterQueueRecords AWS API Documentation
+    #
+    # @overload acknowledge_dead_letter_queue_records(params = {})
+    # @param [Hash] params ({})
+    def acknowledge_dead_letter_queue_records(params = {}, options = {})
+      req = build_request(:acknowledge_dead_letter_queue_records, params)
+      req.send_request(options)
+    end
+
+    # Acknowledges up to 10 records from the specified queue. After a record
+    # is acknowledged, the queue does not deliver it again. The result for
+    # each entry is reported individually in the response.
+    #
+    # Acknowledging a record does not affect the record in the data stream.
+    # That record remains available to stream consumers and to other queues
+    # on the same stream for the rest of its retention period.
+    #
+    # Because the request can result in a combination of successful and
+    # unsuccessful entries, check the `Failed` list even when the call
+    # returns an HTTP status code of `200`.
+    #
+    # On rare occasions, you can receive a record again after you
+    # acknowledge it. Design your queue consumer to be idempotent, so that
+    # processing the same record more than once is safe.
+    #
+    # @option params [required, String] :queue_arn
+    #   The ARN of the queue the records were received from.
+    #
+    # @option params [required, Array<Types::AcknowledgeQueueRecordsRequestEntry>] :entries
+    #   The records to acknowledge, identified by their receipt handles.
+    #
+    # @return [Types::AcknowledgeQueueRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcknowledgeQueueRecordsOutput#successful #successful} => Array&lt;Types::AcknowledgeQueueRecordsResultEntry&gt;
+    #   * {Types::AcknowledgeQueueRecordsOutput#failed #failed} => Array&lt;Types::AcknowledgeQueueRecordsErrorEntry&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.acknowledge_queue_records({
+    #     queue_arn: "QueueARN", # required
+    #     entries: [ # required
+    #       {
+    #         receipt_handle: "ReceiptHandle", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0].receipt_handle #=> String
+    #   resp.failed #=> Array
+    #   resp.failed[0].receipt_handle #=> String
+    #   resp.failed[0].error_code #=> String
+    #   resp.failed[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AcknowledgeQueueRecords AWS API Documentation
+    #
+    # @overload acknowledge_queue_records(params = {})
+    # @param [Hash] params ({})
+    def acknowledge_queue_records(params = {}, options = {})
+      req = build_request(:acknowledge_queue_records, params)
+      req.send_request(options)
+    end
+
     # Adds or updates tags for the specified Kinesis data stream. You can
     # assign up to 50 tags to a data stream.
     #
@@ -622,197 +731,6 @@ module Aws::Kinesis
     # @return [Types::CreateChannelOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChannelOutput#channel_description #channel_description} => Types::ChannelDescription
-    #
-    #
-    # @example Example: To create an S3 channel
-    #
-    #   resp = client.create_channel({
-    #     channel_name: "my-channel-name", 
-    #     encryption_configuration: {
-    #       encryption_type: "KMS", 
-    #       key_id: "arn:aws:kms:us-east-1:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
-    #     }, 
-    #     logging_configuration: {
-    #       cloud_watch_logs: {
-    #         enabled: true, 
-    #         log_group_name: "/aws/kinesis/my-channel", 
-    #         log_stream_name: "my-channel-log-stream", 
-    #       }, 
-    #     }, 
-    #     s3_destination_configuration: {
-    #       dead_letter_queue_s3_configuration: {
-    #         bucket_arn: "arn:aws:s3:::my-channel-dlq-bucket", 
-    #         expected_bucket_owner: "123456789012", 
-    #       }, 
-    #       storage_configuration: {
-    #         bucket_arn: "arn:aws:s3:::my-channel-bucket", 
-    #         compression_type: "ZSTD", 
-    #         expected_bucket_owner: "123456789012", 
-    #       }, 
-    #     }, 
-    #     service_execution_role_arn: "arn:aws:iam::123456789012:role/my-channel-role", 
-    #     stream_configuration_list: [
-    #       {
-    #         record_configuration: {
-    #           record_format_type: "JSON", 
-    #         }, 
-    #         stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/my-stream-name", 
-    #       }, 
-    #     ], 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     channel_description: {
-    #       channel_arn: "arn:aws:kinesis:us-east-1:123456789012:channel/my-channel-id", 
-    #       channel_creation_timestamp: Time.parse("2024-07-02T00:00:00Z"), 
-    #       channel_id: "my-channel-id", 
-    #       channel_name: "my-channel-name", 
-    #       channel_status: "CREATING", 
-    #       encryption_configuration: {
-    #         encryption_type: "KMS", 
-    #         key_id: "arn:aws:kms:us-east-1:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
-    #       }, 
-    #       logging_configuration: {
-    #         cloud_watch_logs: {
-    #           enabled: true, 
-    #           log_group_name: "/aws/kinesis/my-channel", 
-    #           log_stream_name: "my-channel-log-stream", 
-    #         }, 
-    #       }, 
-    #       s3_destination_configuration: {
-    #         data_freshness_in_seconds: 300, 
-    #         dead_letter_queue_s3_configuration: {
-    #           bucket_arn: "arn:aws:s3:::my-channel-dlq-bucket", 
-    #           error_output_prefix: "kinesis-channel/errors/my-channel/my-channel-id/", 
-    #           expected_bucket_owner: "123456789012", 
-    #         }, 
-    #         storage_configuration: {
-    #           bucket_arn: "arn:aws:s3:::my-channel-bucket", 
-    #           compression_type: "ZSTD", 
-    #           expected_bucket_owner: "123456789012", 
-    #           output_key_template: "kinesis-channel/!{channel-name}/!{channel-id}/!{yyyy}/!{MM}/!{dd}/!{HH}/!{channel-name}-!{channel-id}-!{yyyy}-!{MM}-!{dd}-!{HH}-!{mm}!{extension}", 
-    #           storage_class: "STANDARD", 
-    #         }, 
-    #       }, 
-    #       service_execution_role_arn: "arn:aws:iam::123456789012:role/my-channel-role", 
-    #       stream_configuration_list: [
-    #         {
-    #           record_configuration: {
-    #             record_format_type: "JSON", 
-    #           }, 
-    #           stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/my-stream-name", 
-    #           stream_creation_timestamp: Time.parse("2024-07-01T00:00:00Z"), 
-    #         }, 
-    #       ], 
-    #     }, 
-    #   }
-    #
-    # @example Example: To create an S3 Tables channel
-    #
-    #   resp = client.create_channel({
-    #     channel_name: "my-channel-name", 
-    #     encryption_configuration: {
-    #       encryption_type: "KMS", 
-    #       key_id: "arn:aws:kms:us-east-1:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
-    #     }, 
-    #     logging_configuration: {
-    #       cloud_watch_logs: {
-    #         enabled: true, 
-    #         log_group_name: "/aws/kinesis/my-channel", 
-    #         log_stream_name: "my-channel-log-stream", 
-    #       }, 
-    #     }, 
-    #     s3_tables_destination_configuration: {
-    #       dead_letter_queue_s3_configuration: {
-    #         bucket_arn: "arn:aws:s3:::my-channel-dlq-bucket", 
-    #         expected_bucket_owner: "123456789012", 
-    #       }, 
-    #       s3_tables_configuration_list: [
-    #         {
-    #           compression_type: "ZSTD", 
-    #           namespace: "my_namespace", 
-    #           partition_spec: {
-    #             partition_fields: [
-    #               {
-    #                 source_name: "creation_ts", 
-    #                 transform: "TIME_HOUR", 
-    #               }, 
-    #             ], 
-    #           }, 
-    #           table_bucket_arn: "arn:aws:s3tables:us-east-1:123456789012:bucket/my-table-bucket", 
-    #           table_name: "my_table", 
-    #         }, 
-    #       ], 
-    #     }, 
-    #     service_execution_role_arn: "arn:aws:iam::123456789012:role/my-channel-role", 
-    #     stream_configuration_list: [
-    #       {
-    #         record_configuration: {
-    #           gsr_schema_arn: "arn:aws:glue:us-east-1:123456789012:schema/my-registry/my-schema", 
-    #           record_format_type: "JSON", 
-    #         }, 
-    #         stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/my-stream-name", 
-    #       }, 
-    #     ], 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     channel_description: {
-    #       channel_arn: "arn:aws:kinesis:us-east-1:123456789012:channel/my-channel-id", 
-    #       channel_creation_timestamp: Time.parse("2024-07-02T00:00:00Z"), 
-    #       channel_id: "my-channel-id", 
-    #       channel_name: "my-channel-name", 
-    #       channel_status: "CREATING", 
-    #       encryption_configuration: {
-    #         encryption_type: "KMS", 
-    #         key_id: "arn:aws:kms:us-east-1:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
-    #       }, 
-    #       logging_configuration: {
-    #         cloud_watch_logs: {
-    #           enabled: true, 
-    #           log_group_name: "/aws/kinesis/my-channel", 
-    #           log_stream_name: "my-channel-log-stream", 
-    #         }, 
-    #       }, 
-    #       s3_tables_destination_configuration: {
-    #         data_freshness_in_seconds: 300, 
-    #         dead_letter_queue_s3_configuration: {
-    #           bucket_arn: "arn:aws:s3:::my-channel-dlq-bucket", 
-    #           error_output_prefix: "kinesis-channel/errors/my-channel/my-channel-id/", 
-    #           expected_bucket_owner: "123456789012", 
-    #         }, 
-    #         s3_tables_configuration_list: [
-    #           {
-    #             compression_type: "ZSTD", 
-    #             namespace: "my_namespace", 
-    #             partition_spec: {
-    #               partition_fields: [
-    #                 {
-    #                   source_name: "creation_ts", 
-    #                   transform: "TIME_HOUR", 
-    #                 }, 
-    #               ], 
-    #             }, 
-    #             table_bucket_arn: "arn:aws:s3tables:us-east-1:123456789012:bucket/my-table-bucket", 
-    #             table_name: "my_table", 
-    #           }, 
-    #         ], 
-    #       }, 
-    #       service_execution_role_arn: "arn:aws:iam::123456789012:role/my-channel-role", 
-    #       stream_configuration_list: [
-    #         {
-    #           record_configuration: {
-    #             gsr_schema_arn: "arn:aws:glue:us-east-1:123456789012:schema/my-registry/my-schema", 
-    #             record_format_type: "JSON", 
-    #           }, 
-    #           stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/my-stream-name", 
-    #           stream_creation_timestamp: Time.parse("2024-07-01T00:00:00Z"), 
-    #         }, 
-    #       ], 
-    #     }, 
-    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -930,6 +848,122 @@ module Aws::Kinesis
     # @param [Hash] params ({})
     def create_channel(params = {}, options = {})
       req = build_request(:create_channel, params)
+      req.send_request(options)
+    end
+
+    # Creates a queue on the specified data stream. A queue delivers records
+    # from the stream to a queue consumer, tracks the delivery state of each
+    # record, and redelivers any record that is not acknowledged before its
+    # visibility timeout expires.
+    #
+    # A queue does not extend how long the stream keeps a record. When a
+    # record reaches the end of the data stream's retention period, the
+    # queue stops delivering it.
+    #
+    # Your queue consumer calls ReceiveQueueRecords to receive up to 10
+    # records at a time. After it processes records, it calls
+    # AcknowledgeQueueRecords so the queue does not deliver them again.
+    #
+    # Queues are supported only on data streams in on-demand capacity mode.
+    #
+    # Creating a queue does not change how producers write to the stream,
+    # and it does not change how existing stream consumers read from it. A
+    # queue counts as a registered consumer on the stream and shares the
+    # stream's registered consumer limit with enhanced fan-out consumers:
+    # 20 on On-demand Standard and 50 on On-demand Advantage.
+    #
+    # Use `StartingPosition` to set the position in the stream where
+    # delivery begins. The default is `LATEST`.
+    #
+    # `CreateQueue` is an asynchronous operation. Upon receiving a
+    # `CreateQueue` request, Amazon Kinesis Data Streams immediately returns
+    # a queue description with a `QueueStatus` of `CREATING`. After the
+    # queue is created, Kinesis Data Streams sets the `QueueStatus` to
+    # `ACTIVE`. You can begin receiving records after the queue is `ACTIVE`.
+    # Use DescribeQueue to check the status of the queue.
+    #
+    # Each queue has built-in dead-letter handling. When a record has been
+    # received `MaxReceiveCount` times without being acknowledged, it
+    # becomes a dead-letter record, and ReceiveQueueRecords no longer
+    # returns it. You work with dead-letter records through a separate set
+    # of operations that use the same queue ARN:
+    # ReceiveDeadLetterQueueRecords, AcknowledgeDeadLetterQueueRecords,
+    # UpdateDeadLetterQueueRecordsVisibility, and
+    # RestoreDeadLetterQueueRecords.
+    #
+    # Dead-letter handling is enabled by default, with a `MaxReceiveCount`
+    # of 6. To use a different value, or to turn dead-letter handling off,
+    # specify `DeadLetterConfiguration` in `QueueAttributes`.
+    #
+    # @option params [required, String] :queue_name
+    #   A name for the queue. The name is scoped to the Amazon Web Services
+    #   account and Region used by the request, so two queues in different
+    #   accounts, or in the same account and different Regions, can have the
+    #   same name.
+    #
+    # @option params [required, Array<Types::QueueStreamConfiguration>] :stream_configuration_list
+    #   The data stream the queue delivers records from, and the position in
+    #   that stream where delivery begins. The list must contain exactly one
+    #   entry, because a queue delivers records from a single data stream.
+    #
+    # @option params [Types::QueueAttributes] :queue_attributes
+    #   The configuration attributes for the queue, including its visibility
+    #   timeout and its dead-letter handling configuration.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A set of up to 50 key-value pairs to apply to the queue. You can also
+    #   add, change, and remove tags after the queue is created with
+    #   TagResource and UntagResource.
+    #
+    # @return [Types::CreateQueueOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateQueueOutput#queue_description #queue_description} => Types::QueueDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_queue({
+    #     queue_name: "QueueName", # required
+    #     stream_configuration_list: [ # required
+    #       {
+    #         stream_arn: "StreamARN", # required
+    #         starting_position: {
+    #           type: "TRIM_HORIZON", # required, accepts TRIM_HORIZON, LATEST, AT_TIMESTAMP
+    #           timestamp: Time.now,
+    #         },
+    #       },
+    #     ],
+    #     queue_attributes: {
+    #       visibility_timeout_seconds: 1,
+    #       dead_letter_configuration: {
+    #         target_type: "BUILT_IN", # required, accepts BUILT_IN, NONE
+    #         max_receive_count: 1,
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.queue_description.queue_name #=> String
+    #   resp.queue_description.queue_arn #=> String
+    #   resp.queue_description.queue_status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.queue_description.queue_creation_timestamp #=> Time
+    #   resp.queue_description.stream_configuration_list #=> Array
+    #   resp.queue_description.stream_configuration_list[0].stream_arn #=> String
+    #   resp.queue_description.stream_configuration_list[0].starting_position.type #=> String, one of "TRIM_HORIZON", "LATEST", "AT_TIMESTAMP"
+    #   resp.queue_description.stream_configuration_list[0].starting_position.timestamp #=> Time
+    #   resp.queue_description.queue_attributes.visibility_timeout_seconds #=> Integer
+    #   resp.queue_description.queue_attributes.dead_letter_configuration.target_type #=> String, one of "BUILT_IN", "NONE"
+    #   resp.queue_description.queue_attributes.dead_letter_configuration.max_receive_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateQueue AWS API Documentation
+    #
+    # @overload create_queue(params = {})
+    # @param [Hash] params ({})
+    def create_queue(params = {}, options = {})
+      req = build_request(:create_queue, params)
       req.send_request(options)
     end
 
@@ -1145,17 +1179,6 @@ module Aws::Kinesis
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
-    #
-    # @example Example: To delete a channel
-    #
-    #   resp = client.delete_channel({
-    #     channel_arn: "arn:aws:kinesis:us-east-1:123456789012:channel/my-channel-id", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #   }
-    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_channel({
@@ -1171,16 +1194,56 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
-    # Delete a policy for the specified data stream or consumer. Request
-    # patterns can be one of the following:
+    # Deletes the specified queue. Records that are in flight when you
+    # delete the queue are not delivered again, and receipt handles issued
+    # by the queue stop being valid.
+    #
+    # Deleting a queue does not delete the data stream the queue was created
+    # on, and does not delete any records in that stream. Those records
+    # remain available to stream consumers and to other queues on the same
+    # stream for the rest of their retention period.
+    #
+    # `DeleteQueue` is an asynchronous operation. Upon receiving a
+    # `DeleteQueue` request, Amazon Kinesis Data Streams sets the
+    # `QueueStatus` to `DELETING`. The queue is deleted when the operation
+    # completes. A queue in the `DELETING` state does not deliver records.
+    #
+    # You must delete every queue on a data stream before you can delete the
+    # stream, or switch it from on-demand to provisioned capacity mode.
+    #
+    # @option params [required, String] :queue_arn
+    #   The ARN of the queue to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_queue({
+    #     queue_arn: "QueueARN", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeleteQueue AWS API Documentation
+    #
+    # @overload delete_queue(params = {})
+    # @param [Hash] params ({})
+    def delete_queue(params = {}, options = {})
+      req = build_request(:delete_queue, params)
+      req.send_request(options)
+    end
+
+    # Delete a policy for the specified data stream, consumer, or queue.
+    # Request patterns can be one of the following:
     #
     # * Data stream pattern: `arn:aws.*:kinesis:.*:\d{12}:.*stream/\S+`
     #
     # * Consumer pattern:
     #   `^(arn):aws.*:kinesis:.*:\d{12}:.*stream\/[a-zA-Z0-9_.-]+\/consumer\/[a-zA-Z0-9_.-]+:[0-9]+`
     #
+    # * Queue pattern: `arn:aws.*:kinesis:.*:\d{12}:queue/\S+`
+    #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the data stream or consumer.
+    #   The Amazon Resource Name (ARN) of a data stream, a queue, or an
+    #   enhanced fan-out consumer.
     #
     # @option params [String] :stream_id
     #   Not Implemented. Reserved for future use.
@@ -1225,6 +1288,9 @@ module Aws::Kinesis
     # When you delete a stream, any shards in that stream are also deleted,
     # and any tags are dissociated from the stream.
     #
+    # Before you can delete a data stream that has queues, you must delete
+    # every queue on the stream with DeleteQueue.
+    #
     # You can use the DescribeStreamSummary operation to check the state of
     # the stream, which is returned in `StreamStatus`.
     #
@@ -1235,8 +1301,15 @@ module Aws::Kinesis
     #
     # @option params [Boolean] :enforce_consumer_deletion
     #   If this parameter is unset (`null`) or if you set it to `false`, and
-    #   the stream has registered consumers, the call to `DeleteStream` fails
-    #   with a `ResourceInUseException`.
+    #   the stream has registered enhanced fan-out consumers, the call to
+    #   `DeleteStream` fails with a `ResourceInUseException`.
+    #
+    #   If you set it to `true`, `DeleteStream` deletes the stream and every
+    #   consumer registered with it.
+    #
+    #   This parameter does not apply to queues. A stream that has queues
+    #   cannot be deleted until every queue on it is deleted with DeleteQueue,
+    #   whatever this parameter is set to.
     #
     # @option params [String] :stream_arn
     #   The ARN of the stream.
@@ -1364,60 +1437,6 @@ module Aws::Kinesis
     #
     #   * {Types::DescribeChannelOutput#channel_description #channel_description} => Types::ChannelDescription
     #
-    #
-    # @example Example: To describe a channel
-    #
-    #   resp = client.describe_channel({
-    #     channel_arn: "arn:aws:kinesis:us-east-1:123456789012:channel/my-channel-id", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     channel_description: {
-    #       channel_arn: "arn:aws:kinesis:us-east-1:123456789012:channel/my-channel-id", 
-    #       channel_creation_timestamp: Time.parse("2024-07-02T00:00:00Z"), 
-    #       channel_id: "my-channel-id", 
-    #       channel_name: "my-channel-name", 
-    #       channel_status: "ACTIVE", 
-    #       encryption_configuration: {
-    #         encryption_type: "KMS", 
-    #         key_id: "arn:aws:kms:us-east-1:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
-    #       }, 
-    #       logging_configuration: {
-    #         cloud_watch_logs: {
-    #           enabled: true, 
-    #           log_group_name: "/aws/kinesis/my-channel", 
-    #           log_stream_name: "my-channel-log-stream", 
-    #         }, 
-    #       }, 
-    #       s3_destination_configuration: {
-    #         data_freshness_in_seconds: 300, 
-    #         dead_letter_queue_s3_configuration: {
-    #           bucket_arn: "arn:aws:s3:::my-channel-dlq-bucket", 
-    #           error_output_prefix: "kinesis-channel/errors/my-channel/my-channel-id/", 
-    #           expected_bucket_owner: "123456789012", 
-    #         }, 
-    #         storage_configuration: {
-    #           bucket_arn: "arn:aws:s3:::my-channel-bucket", 
-    #           compression_type: "ZSTD", 
-    #           expected_bucket_owner: "123456789012", 
-    #           output_key_template: "kinesis-channel/!{channel-name}/!{channel-id}/!{yyyy}/!{MM}/!{dd}/!{HH}/!{channel-name}-!{channel-id}-!{yyyy}-!{MM}-!{dd}-!{HH}-!{mm}!{extension}", 
-    #           storage_class: "STANDARD", 
-    #         }, 
-    #       }, 
-    #       service_execution_role_arn: "arn:aws:iam::123456789012:role/my-channel-role", 
-    #       stream_configuration_list: [
-    #         {
-    #           record_configuration: {
-    #             record_format_type: "JSON", 
-    #           }, 
-    #           stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/my-stream-name", 
-    #           stream_creation_timestamp: Time.parse("2024-07-01T00:00:00Z"), 
-    #         }, 
-    #       ], 
-    #     }, 
-    #   }
-    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_channel({
@@ -1510,6 +1529,46 @@ module Aws::Kinesis
     # @param [Hash] params ({})
     def describe_limits(params = {}, options = {})
       req = build_request(:describe_limits, params)
+      req.send_request(options)
+    end
+
+    # Returns a description of the specified queue, including its status,
+    # the data stream it delivers records from, and its configuration
+    # attributes.
+    #
+    # @option params [required, String] :queue_arn
+    #   The ARN of the queue to describe.
+    #
+    # @return [Types::DescribeQueueOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeQueueOutput#queue_description #queue_description} => Types::QueueDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_queue({
+    #     queue_arn: "QueueARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.queue_description.queue_name #=> String
+    #   resp.queue_description.queue_arn #=> String
+    #   resp.queue_description.queue_status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.queue_description.queue_creation_timestamp #=> Time
+    #   resp.queue_description.stream_configuration_list #=> Array
+    #   resp.queue_description.stream_configuration_list[0].stream_arn #=> String
+    #   resp.queue_description.stream_configuration_list[0].starting_position.type #=> String, one of "TRIM_HORIZON", "LATEST", "AT_TIMESTAMP"
+    #   resp.queue_description.stream_configuration_list[0].starting_position.timestamp #=> Time
+    #   resp.queue_description.queue_attributes.visibility_timeout_seconds #=> Integer
+    #   resp.queue_description.queue_attributes.dead_letter_configuration.target_type #=> String, one of "BUILT_IN", "NONE"
+    #   resp.queue_description.queue_attributes.dead_letter_configuration.max_receive_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeQueue AWS API Documentation
+    #
+    # @overload describe_queue(params = {})
+    # @param [Hash] params ({})
+    def describe_queue(params = {}, options = {})
+      req = build_request(:describe_queue, params)
       req.send_request(options)
     end
 
@@ -1754,6 +1813,7 @@ module Aws::Kinesis
     #   resp.stream_description_summary.max_record_size_in_ki_b #=> Integer
     #   resp.stream_description_summary.channel_count #=> Integer
     #   resp.stream_description_summary.record_distribution_strategy #=> String, one of "AUTO", "USER_PARTITION_KEY"
+    #   resp.stream_description_summary.queue_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamSummary AWS API Documentation
     #
@@ -2071,16 +2131,19 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
-    # Returns a policy attached to the specified data stream or consumer.
-    # Request patterns can be one of the following:
+    # Returns a policy attached to the specified data stream, consumer, or
+    # queue. Request patterns can be one of the following:
     #
     # * Data stream pattern: `arn:aws.*:kinesis:.*:\d{12}:.*stream/\S+`
     #
     # * Consumer pattern:
     #   `^(arn):aws.*:kinesis:.*:\d{12}:.*stream\/[a-zA-Z0-9_.-]+\/consumer\/[a-zA-Z0-9_.-]+:[0-9]+`
     #
+    # * Queue pattern: `arn:aws.*:kinesis:.*:\d{12}:queue/\S+`
+    #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the data stream or consumer.
+    #   The Amazon Resource Name (ARN) of a data stream, a queue, or an
+    #   enhanced fan-out consumer.
     #
     # @option params [String] :stream_id
     #   Not Implemented. Reserved for future use.
@@ -2330,64 +2393,6 @@ module Aws::Kinesis
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
-    #
-    # @example Example: To list channels
-    #
-    #   resp = client.list_channels({
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     channel_summaries: [
-    #       {
-    #         channel_arn: "arn:aws:kinesis:us-east-1:123456789012:channel/my-channel-id", 
-    #         channel_creation_timestamp: Time.parse("2024-07-02T00:00:00Z"), 
-    #         channel_destination_type: "S3", 
-    #         channel_id: "my-channel-id", 
-    #         channel_name: "my-channel-name", 
-    #         channel_status: "ACTIVE", 
-    #         streams: [
-    #           {
-    #             stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/my-stream-name", 
-    #             stream_creation_timestamp: Time.parse("2024-07-01T00:00:00Z"), 
-    #           }, 
-    #         ], 
-    #       }, 
-    #     ], 
-    #   }
-    #
-    # @example Example: To list channels filtered by stream
-    #
-    #   resp = client.list_channels({
-    #     max_results: 10, 
-    #     stream_filter: [
-    #       {
-    #         stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/my-stream-name", 
-    #       }, 
-    #     ], 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     channel_summaries: [
-    #       {
-    #         channel_arn: "arn:aws:kinesis:us-east-1:123456789012:channel/my-channel-id", 
-    #         channel_creation_timestamp: Time.parse("2024-07-02T00:00:00Z"), 
-    #         channel_destination_type: "S3", 
-    #         channel_id: "my-channel-id", 
-    #         channel_name: "my-channel-name", 
-    #         channel_status: "ACTIVE", 
-    #         streams: [
-    #           {
-    #             stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/my-stream-name", 
-    #             stream_creation_timestamp: Time.parse("2024-07-01T00:00:00Z"), 
-    #           }, 
-    #         ], 
-    #       }, 
-    #     ], 
-    #     next_token: "AAAAAgAAAAEAAAABbXktbmV4dC1wYWdlLXRva2Vu", 
-    #   }
-    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_channels({
@@ -2422,6 +2427,66 @@ module Aws::Kinesis
     # @param [Hash] params ({})
     def list_channels(params = {}, options = {})
       req = build_request(:list_channels, params)
+      req.send_request(options)
+    end
+
+    # Returns a summary of each queue in the Amazon Web Services account and
+    # Region used by the request. Use `StreamFilter` to list only the queues
+    # on a particular data stream.
+    #
+    # If the response contains a `NextToken`, more queues are available.
+    # Call `ListQueues` again with that value to retrieve the next page.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of queue summaries to return in one response. The
+    #   response might contain fewer summaries than this value, and might
+    #   contain a `NextToken` even when it contains fewer.
+    #
+    # @option params [String] :next_token
+    #   The `NextToken` returned by a previous `ListQueues` request. Use it to
+    #   retrieve the next page of queue summaries.
+    #
+    # @option params [Array<Types::QueueStreamFilter>] :stream_filter
+    #   Lists only the queues created on the specified data stream.
+    #
+    # @return [Types::ListQueuesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListQueuesOutput#queue_summaries #queue_summaries} => Array&lt;Types::QueueSummary&gt;
+    #   * {Types::ListQueuesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_queues({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     stream_filter: [
+    #       {
+    #         stream_arn: "StreamARN", # required
+    #         stream_creation_timestamp: Time.now,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.queue_summaries #=> Array
+    #   resp.queue_summaries[0].queue_name #=> String
+    #   resp.queue_summaries[0].queue_arn #=> String
+    #   resp.queue_summaries[0].queue_status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.queue_summaries[0].queue_creation_timestamp #=> Time
+    #   resp.queue_summaries[0].streams #=> Array
+    #   resp.queue_summaries[0].streams[0].stream_arn #=> String
+    #   resp.queue_summaries[0].streams[0].stream_creation_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListQueues AWS API Documentation
+    #
+    # @overload list_queues(params = {})
+    # @param [Hash] params ({})
+    def list_queues(params = {}, options = {})
+      req = build_request(:list_queues, params)
       req.send_request(options)
     end
 
@@ -2749,6 +2814,9 @@ module Aws::Kinesis
     # List all tags added to the specified Kinesis resource. Each tag is a
     # label consisting of a user-defined key and value. Tags can help you
     # manage, identify, organize, search for, and filter resources.
+    #
+    # The Kinesis resource can be a data stream, a queue, or an enhanced
+    # fan-out consumer.
     #
     # For more information about tagging Kinesis resources, see [Tag your
     # Amazon Kinesis Data Streams resources][1].
@@ -3229,11 +3297,11 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
-    # Attaches a resource-based policy to a data stream or registered
-    # consumer. If you are using an identity other than the root user of the
-    # Amazon Web Services account that owns the resource, the calling
-    # identity must have the `PutResourcePolicy` permissions on the
-    # specified Kinesis Data Streams resource and belong to the owner's
+    # Attaches a resource-based policy to a data stream, a queue, or an
+    # enhanced fan-out consumer. If you are using an identity other than the
+    # root user of the Amazon Web Services account that owns the resource,
+    # the calling identity must have the `PutResourcePolicy` permissions on
+    # the specified Kinesis Data Streams resource and belong to the owner's
     # account in order to use this operation. If you don't have
     # `PutResourcePolicy` permissions, Amazon Kinesis Data Streams returns a
     # `403 Access Denied error`. If you receive a
@@ -3247,6 +3315,8 @@ module Aws::Kinesis
     # * Consumer pattern:
     #   `^(arn):aws.*:kinesis:.*:\d{12}:.*stream\/[a-zA-Z0-9_.-]+\/consumer\/[a-zA-Z0-9_.-]+:[0-9]+`
     #
+    # * Queue pattern: `arn:aws.*:kinesis:.*:\d{12}:queue/\S+`
+    #
     # For more information, see [Controlling Access to Amazon Kinesis Data
     # Streams Resources Using IAM][1].
     #
@@ -3255,7 +3325,8 @@ module Aws::Kinesis
     # [1]: https://docs.aws.amazon.com/streams/latest/dev/controlling-access.html
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the data stream or consumer.
+    #   The Amazon Resource Name (ARN) of a data stream, a queue, or an
+    #   enhanced fan-out consumer.
     #
     # @option params [String] :stream_id
     #   Not Implemented. Reserved for future use.
@@ -3284,6 +3355,154 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
+    # Receives up to 10 dead-letter records from the specified queue. Each
+    # queue has built-in dead-letter handling: when a record has been
+    # received `MaxReceiveCount` times without being acknowledged, it
+    # becomes a dead-letter record, which usually means your queue consumer
+    # could not process it. The dead-letter record stays in the same queue,
+    # and ReceiveQueueRecords no longer returns it.
+    #
+    # Dead-letter records carry the same data and partition key as when they
+    # were first delivered, and are returned with a receipt handle. Use the
+    # receipt handle to acknowledge the record with
+    # AcknowledgeDeadLetterQueueRecords, which discards it, to change its
+    # visibility with UpdateDeadLetterQueueRecordsVisibility, or to restore
+    # it with RestoreDeadLetterQueueRecords, which returns it to the normal
+    # receive path so that ReceiveQueueRecords can return it again.
+    #
+    # Use this operation to inspect the records your queue consumer could
+    # not process, so you can correct the cause and then either acknowledge
+    # or restore them.
+    #
+    # A queue delivers dead-letter records while it is in the `ACTIVE`
+    # state.
+    #
+    # @option params [required, String] :queue_arn
+    #   The ARN of the queue whose dead-letter records are received.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of records to return. The queue never returns more
+    #   dead-letter records than this value, and might return fewer. The
+    #   default is 10.
+    #
+    # @option params [Integer] :wait_time_seconds
+    #   The duration, in seconds, that the call waits for a record to become
+    #   visible before returning. The default is 9.
+    #
+    # @option params [Integer] :visibility_timeout_seconds
+    #   The duration, in seconds, that the records returned by this request
+    #   are in flight and not visible to any consumer instance. If you do not
+    #   specify this value, the queue's visibility timeout is used.
+    #
+    # @return [Types::ReceiveDeadLetterQueueRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ReceiveDeadLetterQueueRecordsOutput#queue_records #queue_records} => Array&lt;Types::QueueRecord&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.receive_dead_letter_queue_records({
+    #     queue_arn: "QueueARN", # required
+    #     limit: 1,
+    #     wait_time_seconds: 1,
+    #     visibility_timeout_seconds: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.queue_records #=> Array
+    #   resp.queue_records[0].receipt_handle #=> String
+    #   resp.queue_records[0].record_id #=> String
+    #   resp.queue_records[0].partition_key #=> String
+    #   resp.queue_records[0].data #=> String
+    #   resp.queue_records[0].approximate_arrival_timestamp #=> Time
+    #   resp.queue_records[0].first_receive_timestamp #=> Time
+    #   resp.queue_records[0].receive_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ReceiveDeadLetterQueueRecords AWS API Documentation
+    #
+    # @overload receive_dead_letter_queue_records(params = {})
+    # @param [Hash] params ({})
+    def receive_dead_letter_queue_records(params = {}, options = {})
+      req = build_request(:receive_dead_letter_queue_records, params)
+      req.send_request(options)
+    end
+
+    # Receives up to 10 records from the specified queue. Each record is
+    # returned with a receipt handle, which is the identifier you use to
+    # acknowledge the record or change its visibility.
+    #
+    # A record returned by `ReceiveQueueRecords` becomes in flight: it is
+    # not visible to any consumer instance for the duration of its
+    # visibility timeout, so subsequent receive requests do not return it
+    # while your queue consumer processes it. Acknowledge the record with
+    # AcknowledgeQueueRecords when you finish processing it. A record that
+    # is not acknowledged before its visibility timeout expires becomes
+    # visible in the queue again and can be received by any consumer
+    # instance.
+    #
+    # Use `WaitTimeSeconds` to control how long the call waits for a record
+    # to become visible before returning. If a record becomes visible
+    # sooner, the call returns sooner. If the wait time expires and no
+    # records are visible, the call returns an empty list of records.
+    #
+    # Records are not necessarily received in the order they were written to
+    # the data stream.
+    #
+    # A queue delivers records while it is in the `ACTIVE` state.
+    #
+    # On rare occasions, a queue can deliver a record more than once. Design
+    # your queue consumer to be idempotent, so that processing the same
+    # record more than once is safe.
+    #
+    # @option params [required, String] :queue_arn
+    #   The ARN of the queue to receive records from.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of records to return. The queue never returns more
+    #   records than this value, and might return fewer. The default is 10.
+    #
+    # @option params [Integer] :wait_time_seconds
+    #   The duration, in seconds, that the call waits for a record to become
+    #   visible before returning. The default is 9.
+    #
+    # @option params [Integer] :visibility_timeout_seconds
+    #   The duration, in seconds, that the records returned by this request
+    #   are in flight and not visible to any consumer instance. If you do not
+    #   specify this value, the queue's visibility timeout is used.
+    #
+    # @return [Types::ReceiveQueueRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ReceiveQueueRecordsOutput#queue_records #queue_records} => Array&lt;Types::QueueRecord&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.receive_queue_records({
+    #     queue_arn: "QueueARN", # required
+    #     limit: 1,
+    #     wait_time_seconds: 1,
+    #     visibility_timeout_seconds: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.queue_records #=> Array
+    #   resp.queue_records[0].receipt_handle #=> String
+    #   resp.queue_records[0].record_id #=> String
+    #   resp.queue_records[0].partition_key #=> String
+    #   resp.queue_records[0].data #=> String
+    #   resp.queue_records[0].approximate_arrival_timestamp #=> Time
+    #   resp.queue_records[0].first_receive_timestamp #=> Time
+    #   resp.queue_records[0].receive_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ReceiveQueueRecords AWS API Documentation
+    #
+    # @overload receive_queue_records(params = {})
+    # @param [Hash] params ({})
+    def receive_queue_records(params = {}, options = {})
+      req = build_request(:receive_queue_records, params)
+      req.send_request(options)
+    end
+
     # Registers a consumer with a Kinesis data stream. When you use this
     # operation, the consumer you register can then call SubscribeToShard to
     # receive data from the stream using enhanced fan-out, at a rate of up
@@ -3300,13 +3519,14 @@ module Aws::Kinesis
     # consumer.
     #
     # With On-demand Advantage streams, you can register up to 50 consumers
-    # per stream to use Enhanced Fan-out. With On-demand Standard and
+    # per stream to use enhanced fan-out. With On-demand Standard and
     # Provisioned streams, you can register up to 20 consumers per stream to
-    # use Enhanced Fan-out. A given consumer can only be registered with one
-    # stream at a time.
+    # use enhanced fan-out. Queues share this limit with enhanced fan-out
+    # consumers: both count as registered consumers on the stream. A given
+    # consumer can only be registered with one stream at a time.
     #
-    # For an example of how to use this operation, see [Enhanced Fan-Out
-    # Using the Kinesis Data Streams API][1].
+    # For an example of how to use this operation, see [Develop enhanced
+    # fan-out consumers with the Amazon Web Services SDK for Java][1].
     #
     # The use of this operation has a limit of five transactions per second
     # per account. Also, only 5 consumers can be created simultaneously. In
@@ -3414,6 +3634,60 @@ module Aws::Kinesis
     # @param [Hash] params ({})
     def remove_tags_from_stream(params = {}, options = {})
       req = build_request(:remove_tags_from_stream, params)
+      req.send_request(options)
+    end
+
+    # Restores up to 10 dead-letter records in the specified queue.
+    # Restoring a record clears its dead-letter state and resets its receive
+    # count, so ReceiveQueueRecords can return it again, up to
+    # `MaxReceiveCount` times before it becomes a dead-letter record again.
+    # The result for each entry is reported individually in the response.
+    #
+    # Restore records after you have corrected the condition that prevented
+    # your queue consumer from processing them.
+    #
+    # Because the request can result in a combination of successful and
+    # unsuccessful entries, check the `Failed` list even when the call
+    # returns an HTTP status code of `200`.
+    #
+    # @option params [required, String] :queue_arn
+    #   The ARN of the queue whose dead-letter records are restored.
+    #
+    # @option params [required, Array<Types::RestoreDeadLetterQueueRecordsRequestEntry>] :entries
+    #   The dead-letter records to restore, identified by their receipt
+    #   handles.
+    #
+    # @return [Types::RestoreDeadLetterQueueRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RestoreDeadLetterQueueRecordsOutput#successful #successful} => Array&lt;Types::RestoreDeadLetterQueueRecordsResultEntry&gt;
+    #   * {Types::RestoreDeadLetterQueueRecordsOutput#failed #failed} => Array&lt;Types::RestoreDeadLetterQueueRecordsErrorEntry&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.restore_dead_letter_queue_records({
+    #     queue_arn: "QueueARN", # required
+    #     entries: [ # required
+    #       {
+    #         receipt_handle: "ReceiptHandle", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0].receipt_handle #=> String
+    #   resp.failed #=> Array
+    #   resp.failed[0].receipt_handle #=> String
+    #   resp.failed[0].error_code #=> String
+    #   resp.failed[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RestoreDeadLetterQueueRecords AWS API Documentation
+    #
+    # @overload restore_dead_letter_queue_records(params = {})
+    # @param [Hash] params ({})
+    def restore_dead_letter_queue_records(params = {}, options = {})
+      req = build_request(:restore_dead_letter_queue_records, params)
       req.send_request(options)
     end
 
@@ -3691,6 +3965,9 @@ module Aws::Kinesis
     # manage, identify, organize, search for, and filter resources. You can
     # assign up to 50 tags to a Kinesis resource.
     #
+    # The Kinesis resource can be a data stream, a queue, or an enhanced
+    # fan-out consumer.
+    #
     # @option params [required, Hash<String,String>] :tags
     #   An array of tags to be added to the Kinesis resource. A tag consists
     #   of a required key and an optional value. You can add up to 50 tags per
@@ -3730,6 +4007,9 @@ module Aws::Kinesis
     # Removes tags from the specified Kinesis resource. Removed tags are
     # deleted and can't be recovered after this operation completes
     # successfully.
+    #
+    # The Kinesis resource can be a data stream, a queue, or an enhanced
+    # fan-out consumer.
     #
     # @option params [required, Array<String>] :tag_keys
     #   A list of tag key-value pairs. Existing tags of the resource whose
@@ -3847,70 +4127,6 @@ module Aws::Kinesis
     #
     #   * {Types::UpdateChannelOutput#channel_description #channel_description} => Types::ChannelDescription
     #
-    #
-    # @example Example: To update a channel
-    #
-    #   resp = client.update_channel({
-    #     channel_arn: "arn:aws:kinesis:us-east-1:123456789012:channel/my-channel-id", 
-    #     logging_configuration: {
-    #       cloud_watch_logs: {
-    #         enabled: true, 
-    #         log_group_name: "/aws/kinesis/my-channel", 
-    #         log_stream_name: "my-channel-log-stream", 
-    #       }, 
-    #     }, 
-    #     s3_destination_configuration: {
-    #       data_freshness_in_seconds: 600, 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     channel_description: {
-    #       channel_arn: "arn:aws:kinesis:us-east-1:123456789012:channel/my-channel-id", 
-    #       channel_creation_timestamp: Time.parse("2024-07-02T00:00:00Z"), 
-    #       channel_id: "my-channel-id", 
-    #       channel_name: "my-channel-name", 
-    #       channel_status: "UPDATING", 
-    #       encryption_configuration: {
-    #         encryption_type: "KMS", 
-    #         key_id: "arn:aws:kms:us-east-1:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
-    #       }, 
-    #       logging_configuration: {
-    #         cloud_watch_logs: {
-    #           enabled: true, 
-    #           log_group_name: "/aws/kinesis/my-channel", 
-    #           log_stream_name: "my-channel-log-stream", 
-    #         }, 
-    #       }, 
-    #       s3_destination_configuration: {
-    #         data_freshness_in_seconds: 600, 
-    #         dead_letter_queue_s3_configuration: {
-    #           bucket_arn: "arn:aws:s3:::my-channel-dlq-bucket", 
-    #           error_output_prefix: "kinesis-channel/errors/my-channel/my-channel-id/", 
-    #           expected_bucket_owner: "123456789012", 
-    #         }, 
-    #         storage_configuration: {
-    #           bucket_arn: "arn:aws:s3:::my-channel-bucket", 
-    #           compression_type: "ZSTD", 
-    #           expected_bucket_owner: "123456789012", 
-    #           output_key_template: "kinesis-channel/!{channel-name}/!{channel-id}/!{yyyy}/!{MM}/!{dd}/!{HH}/!{channel-name}-!{channel-id}-!{yyyy}-!{MM}-!{dd}-!{HH}-!{mm}!{extension}", 
-    #           storage_class: "STANDARD", 
-    #         }, 
-    #       }, 
-    #       service_execution_role_arn: "arn:aws:iam::123456789012:role/my-channel-role", 
-    #       stream_configuration_list: [
-    #         {
-    #           record_configuration: {
-    #             record_format_type: "JSON", 
-    #           }, 
-    #           stream_arn: "arn:aws:kinesis:us-east-1:123456789012:stream/my-stream-name", 
-    #           stream_creation_timestamp: Time.parse("2024-07-01T00:00:00Z"), 
-    #         }, 
-    #       ], 
-    #     }, 
-    #   }
-    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_channel({
@@ -3980,6 +4196,57 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
+    # Changes the visibility timeout of up to 10 dead-letter records that
+    # you have received from the specified queue but not yet acknowledged.
+    # The result for each entry is reported individually in the response.
+    #
+    # Because the request can result in a combination of successful and
+    # unsuccessful entries, check the `Failed` list even when the call
+    # returns an HTTP status code of `200`.
+    #
+    # @option params [required, String] :queue_arn
+    #   The ARN of the queue whose dead-letter records are updated.
+    #
+    # @option params [required, Array<Types::UpdateDeadLetterQueueRecordsVisibilityRequestEntry>] :entries
+    #   The dead-letter records whose visibility timeout is changed,
+    #   identified by their receipt handles, and the new visibility timeout
+    #   for each.
+    #
+    # @return [Types::UpdateDeadLetterQueueRecordsVisibilityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDeadLetterQueueRecordsVisibilityOutput#successful #successful} => Array&lt;Types::UpdateDeadLetterQueueRecordsVisibilityResultEntry&gt;
+    #   * {Types::UpdateDeadLetterQueueRecordsVisibilityOutput#failed #failed} => Array&lt;Types::UpdateDeadLetterQueueRecordsVisibilityErrorEntry&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_dead_letter_queue_records_visibility({
+    #     queue_arn: "QueueARN", # required
+    #     entries: [ # required
+    #       {
+    #         receipt_handle: "ReceiptHandle", # required
+    #         visibility_timeout_seconds: 1, # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0].receipt_handle #=> String
+    #   resp.failed #=> Array
+    #   resp.failed[0].receipt_handle #=> String
+    #   resp.failed[0].error_code #=> String
+    #   resp.failed[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateDeadLetterQueueRecordsVisibility AWS API Documentation
+    #
+    # @overload update_dead_letter_queue_records_visibility(params = {})
+    # @param [Hash] params ({})
+    def update_dead_letter_queue_records_visibility(params = {}, options = {})
+      req = build_request(:update_dead_letter_queue_records_visibility, params)
+      req.send_request(options)
+    end
+
     # This allows you to update the `MaxRecordSize` of a single record that
     # you can write to, and read from a stream. You can ingest and digest
     # single records up to 10240 KiB.
@@ -4013,6 +4280,129 @@ module Aws::Kinesis
     # @param [Hash] params ({})
     def update_max_record_size(params = {}, options = {})
       req = build_request(:update_max_record_size, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration attributes of the specified queue. You can
+    # change the queue's visibility timeout, its dead-letter handling
+    # configuration, or both.
+    #
+    # A new visibility timeout applies to records received after the update
+    # completes. Records that are already in flight keep the visibility
+    # timeout they were received with. To change the visibility timeout of a
+    # record that is already in flight, use UpdateQueueRecordsVisibility.
+    #
+    # `UpdateQueue` is an asynchronous operation. Upon receiving an
+    # `UpdateQueue` request, Amazon Kinesis Data Streams sets the
+    # `QueueStatus` to `UPDATING`, and sets it back to `ACTIVE` when the
+    # update is complete. You can continue to receive and acknowledge
+    # records while the queue is `UPDATING`.
+    #
+    # You can't change the data stream or the starting position of a queue
+    # after you create it. To read from a different stream or position,
+    # create a new queue.
+    #
+    # @option params [required, String] :queue_arn
+    #   The ARN of the queue to update.
+    #
+    # @option params [required, Types::QueueAttributes] :queue_attributes
+    #   The configuration attributes to apply to the queue. Attributes you do
+    #   not specify are left unchanged.
+    #
+    # @return [Types::UpdateQueueOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateQueueOutput#queue_description #queue_description} => Types::QueueDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_queue({
+    #     queue_arn: "QueueARN", # required
+    #     queue_attributes: { # required
+    #       visibility_timeout_seconds: 1,
+    #       dead_letter_configuration: {
+    #         target_type: "BUILT_IN", # required, accepts BUILT_IN, NONE
+    #         max_receive_count: 1,
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.queue_description.queue_name #=> String
+    #   resp.queue_description.queue_arn #=> String
+    #   resp.queue_description.queue_status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.queue_description.queue_creation_timestamp #=> Time
+    #   resp.queue_description.stream_configuration_list #=> Array
+    #   resp.queue_description.stream_configuration_list[0].stream_arn #=> String
+    #   resp.queue_description.stream_configuration_list[0].starting_position.type #=> String, one of "TRIM_HORIZON", "LATEST", "AT_TIMESTAMP"
+    #   resp.queue_description.stream_configuration_list[0].starting_position.timestamp #=> Time
+    #   resp.queue_description.queue_attributes.visibility_timeout_seconds #=> Integer
+    #   resp.queue_description.queue_attributes.dead_letter_configuration.target_type #=> String, one of "BUILT_IN", "NONE"
+    #   resp.queue_description.queue_attributes.dead_letter_configuration.max_receive_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateQueue AWS API Documentation
+    #
+    # @overload update_queue(params = {})
+    # @param [Hash] params ({})
+    def update_queue(params = {}, options = {})
+      req = build_request(:update_queue, params)
+      req.send_request(options)
+    end
+
+    # Changes the visibility timeout of up to 10 records that you have
+    # received from the specified queue but not yet acknowledged. The result
+    # for each entry is reported individually in the response.
+    #
+    # Extend the visibility timeout of a record when your queue consumer
+    # needs more time to finish processing it, so the record does not become
+    # visible and get redelivered while it is still being processed. Set the
+    # visibility timeout to `0` to make a record visible in the queue
+    # immediately, so that it can be received again without waiting for its
+    # current timeout to expire.
+    #
+    # Because the request can result in a combination of successful and
+    # unsuccessful entries, check the `Failed` list even when the call
+    # returns an HTTP status code of `200`.
+    #
+    # @option params [required, String] :queue_arn
+    #   The ARN of the queue the records were received from.
+    #
+    # @option params [required, Array<Types::UpdateQueueRecordsVisibilityRequestEntry>] :entries
+    #   The records whose visibility timeout is changed, identified by their
+    #   receipt handles, and the new visibility timeout for each.
+    #
+    # @return [Types::UpdateQueueRecordsVisibilityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateQueueRecordsVisibilityOutput#successful #successful} => Array&lt;Types::UpdateQueueRecordsVisibilityResultEntry&gt;
+    #   * {Types::UpdateQueueRecordsVisibilityOutput#failed #failed} => Array&lt;Types::UpdateQueueRecordsVisibilityErrorEntry&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_queue_records_visibility({
+    #     queue_arn: "QueueARN", # required
+    #     entries: [ # required
+    #       {
+    #         receipt_handle: "ReceiptHandle", # required
+    #         visibility_timeout_seconds: 1, # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0].receipt_handle #=> String
+    #   resp.failed #=> Array
+    #   resp.failed[0].receipt_handle #=> String
+    #   resp.failed[0].error_code #=> String
+    #   resp.failed[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateQueueRecordsVisibility AWS API Documentation
+    #
+    # @overload update_queue_records_visibility(params = {})
+    # @param [Hash] params ({})
+    def update_queue_records_visibility(params = {}, options = {})
+      req = build_request(:update_queue_records_visibility, params)
       req.send_request(options)
     end
 
@@ -4145,6 +4535,10 @@ module Aws::Kinesis
     # account. Once your account has `MinimumThroughputBillingCommitment`
     # enabled, you can specify the warm throughput in MiB per second that
     # your stream can support in writes.
+    #
+    # You can't switch a data stream from on-demand to provisioned capacity
+    # mode while the stream has one or more queues. Delete the queues with
+    # DeleteQueue before you change the capacity mode.
     #
     # @option params [required, String] :stream_arn
     #   Specifies the ARN of the data stream whose capacity mode you want to
@@ -4370,7 +4764,7 @@ module Aws::Kinesis
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.120.0'
+      context[:gem_version] = '1.121.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

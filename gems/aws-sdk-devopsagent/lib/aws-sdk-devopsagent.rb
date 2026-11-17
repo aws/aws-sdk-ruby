@@ -55,7 +55,7 @@ module Aws::DevOpsAgent
   autoload :Endpoints, 'aws-sdk-devopsagent/endpoints'
   autoload :EventStreams, 'aws-sdk-devopsagent/event_streams'
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.31.0'
 
 end
 

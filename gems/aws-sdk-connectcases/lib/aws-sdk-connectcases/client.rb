@@ -2147,6 +2147,7 @@ module Aws::ConnectCases
     #   resp.event_bridge.enabled #=> Boolean
     #   resp.event_bridge.included_data.case_data.fields #=> Array
     #   resp.event_bridge.included_data.case_data.fields[0].id #=> String
+    #   resp.event_bridge.included_data.case_data.auto_include_fields #=> String, one of "All", "System", "Custom"
     #   resp.event_bridge.included_data.related_item_data.include_content #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/GetCaseEventConfiguration AWS API Documentation
@@ -2810,6 +2811,7 @@ module Aws::ConnectCases
     #               id: "FieldId", # required
     #             },
     #           ],
+    #           auto_include_fields: "All", # accepts All, System, Custom
     #         },
     #         related_item_data: {
     #           include_content: false, # required
@@ -4232,7 +4234,7 @@ module Aws::ConnectCases
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

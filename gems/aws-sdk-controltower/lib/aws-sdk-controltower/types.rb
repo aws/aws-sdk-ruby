@@ -670,10 +670,16 @@ module Aws::ControlTower
     #   parent OU, possibly a new parent OU, if the account is moved.
     #   @return [Types::EnabledBaselineInheritanceDrift]
     #
+    # @!attribute [rw] source
+    #   Source drift occurs when an enabled baseline no longer matches the
+    #   landing zone's configuration.
+    #   @return [Types::EnabledBaselineSourceDrift]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledBaselineDriftTypes AWS API Documentation
     #
     class EnabledBaselineDriftTypes < Struct.new(
-      :inheritance)
+      :inheritance,
+      :source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -704,6 +710,10 @@ module Aws::ControlTower
     #   A list of `EnabledBaselineDriftStatus` items for enabled baselines.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] source_drift_statuses
+    #   A list of `EnabledBaselineDriftStatus` items for enabled baselines.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledBaselineFilter AWS API Documentation
     #
     class EnabledBaselineFilter < Struct.new(
@@ -711,7 +721,8 @@ module Aws::ControlTower
       :baseline_identifiers,
       :parent_identifiers,
       :statuses,
-      :inheritance_drift_statuses)
+      :inheritance_drift_statuses,
+      :source_drift_statuses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -768,6 +779,22 @@ module Aws::ControlTower
     class EnabledBaselineParameterSummary < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source drift summary for the enabled baseline. Source drift occurs
+    # when an enabled baseline no longer matches the landing zone's
+    # configuration.
+    #
+    # @!attribute [rw] status
+    #   The source drift status for the enabled baseline.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledBaselineSourceDrift AWS API Documentation
+    #
+    class EnabledBaselineSourceDrift < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

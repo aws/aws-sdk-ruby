@@ -497,8 +497,8 @@ module Aws
                             ?client_token: ::String,
                             dataset_name: ::String,
                             ?description: ::String,
-                            source: Params::data_source_type,
-                            schema_type: ("AGENTCORE_EVALUATION_PREDEFINED_V1" | "AGENTCORE_EVALUATION_SIMULATED_V1" | "THIRD_PARTY_EVALUATION_V1"),
+                            ?source: Params::data_source_type,
+                            ?schema_type: ("AGENTCORE_EVALUATION_PREDEFINED_V1" | "AGENTCORE_EVALUATION_SIMULATED_V1" | "THIRD_PARTY_EVALUATION_V1"),
                             ?kms_key_arn: ::String,
                             ?tags: Hash[::String, ::String]
                           ) -> _CreateDatasetResponseSuccess
@@ -1412,6 +1412,23 @@ module Aws
                                     ) -> _DeleteWorkloadIdentityResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkloadIdentityResponseSuccess
 
+      interface _GetAgentInsightStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentInsightStoreResponse]
+        def agent_insight_store_arn: () -> ::String
+        def agent_insight_store_id: () -> ::String
+        def status: () -> ("ACTIVE" | "UPDATING" | "INACTIVE" | "ERROR")
+        def enablement_status: () -> ("ENABLED" | "DISABLED")
+        def encryption_configuration: () -> Types::AgentInsightStoreEncryptionConfiguration
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def failure_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_agent_insight_store-instance_method
+      def get_agent_insight_store: (
+                                     agent_insight_store_id: ::String
+                                   ) -> _GetAgentInsightStoreResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentInsightStoreResponseSuccess
+
       interface _GetAgentRuntimeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentRuntimeResponse]
         def agent_runtime_arn: () -> ::String
@@ -1642,6 +1659,7 @@ module Aws
         def schema_type: () -> ("AGENTCORE_EVALUATION_PREDEFINED_V1" | "AGENTCORE_EVALUATION_SIMULATED_V1" | "THIRD_PARTY_EVALUATION_V1")
         def kms_key_arn: () -> ::String
         def example_count: () -> ::Integer
+        def example_count_by_field: () -> Types::ExampleCountByField
         def download_url: () -> ::String
         def download_url_expires_at: () -> ::Time
         def created_at: () -> ::Time
@@ -2105,6 +2123,18 @@ module Aws
                                  ) -> _GetWorkloadIdentityResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkloadIdentityResponseSuccess
 
+      interface _ListAgentInsightStoresResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentInsightStoresResponse]
+        def agent_insight_stores: () -> ::Array[Types::AgentInsightStoreSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_agent_insight_stores-instance_method
+      def list_agent_insight_stores: (
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListAgentInsightStoresResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgentInsightStoresResponseSuccess
+
       interface _ListAgentRuntimeEndpointsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAgentRuntimeEndpointsResponse]
         def runtime_endpoints: () -> ::Array[Types::AgentRuntimeEndpoint]
@@ -2273,6 +2303,14 @@ module Aws
       def list_dataset_examples: (
                                    dataset_id: ::String,
                                    ?dataset_version: ::String,
+                                   ?filter: {
+                                     generation_ids: Array[::String]?,
+                                     example_fields: Array[
+                                       {
+                                         any_of: Array[("TURNS" | "INPUT" | "ACTOR_PROFILE")]?
+                                       }
+                                     ]?
+                                   },
                                    ?max_results: ::Integer,
                                    ?next_token: ::String
                                  ) -> _ListDatasetExamplesResponseSuccess
@@ -2286,6 +2324,15 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_dataset_versions-instance_method
       def list_dataset_versions: (
                                    dataset_id: ::String,
+                                   ?filter: {
+                                     example_count_by_field: Array[
+                                       {
+                                         any_of: Array[("TURNS" | "INPUT" | "ACTOR_PROFILE")]?,
+                                         min: ::Integer?,
+                                         max: ::Integer?
+                                       }
+                                     ]?
+                                   },
                                    ?next_token: ::String,
                                    ?max_results: ::Integer
                                  ) -> _ListDatasetVersionsResponseSuccess
@@ -2298,6 +2345,15 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_datasets-instance_method
       def list_datasets: (
+                           ?filter: {
+                             example_count_by_field: Array[
+                               {
+                                 any_of: Array[("TURNS" | "INPUT" | "ACTOR_PROFILE")]?,
+                                 min: ::Integer?,
+                                 max: ::Integer?
+                               }
+                             ]?
+                           },
                            ?next_token: ::String,
                            ?max_results: ::Integer
                          ) -> _ListDatasetsResponseSuccess
@@ -2752,6 +2808,27 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAgentInsightStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAgentInsightStoreResponse]
+        def agent_insight_store_arn: () -> ::String
+        def agent_insight_store_id: () -> ::String
+        def status: () -> ("ACTIVE" | "UPDATING" | "INACTIVE" | "ERROR")
+        def enablement_status: () -> ("ENABLED" | "DISABLED")
+        def updated_at: () -> ::Time
+        def failure_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_agent_insight_store-instance_method
+      def update_agent_insight_store: (
+                                        ?client_token: ::String,
+                                        agent_insight_store_id: ::String,
+                                        ?enablement_status: ("ENABLED" | "DISABLED"),
+                                        ?encryption_configuration: {
+                                          mode: ("AWS_OWNED_KMS_KEY" | "CUSTOMER_MANAGED_KMS"),
+                                          kms_key_arn: ::String?
+                                        }
+                                      ) -> _UpdateAgentInsightStoreResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentInsightStoreResponseSuccess
 
       interface _UpdateAgentRuntimeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAgentRuntimeResponse]

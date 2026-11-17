@@ -996,6 +996,13 @@ module Aws::SecurityHub
     FreeTrialStatusValue = Shapes::StringShape.new(name: 'FreeTrialStatusValue')
     FreeTrialStatusValueList = Shapes::ListShape.new(name: 'FreeTrialStatusValueList')
     FreeTrialType = Shapes::StringShape.new(name: 'FreeTrialType')
+    GcpDetail = Shapes::StructureShape.new(name: 'GcpDetail')
+    GcpProviderConfiguration = Shapes::StructureShape.new(name: 'GcpProviderConfiguration')
+    GcpRegionList = Shapes::ListShape.new(name: 'GcpRegionList')
+    GcpResourceDetails = Shapes::DocumentShape.new(name: 'GcpResourceDetails', document: true)
+    GcpScopeConfiguration = Shapes::StructureShape.new(name: 'GcpScopeConfiguration')
+    GcpScopeType = Shapes::StringShape.new(name: 'GcpScopeType')
+    GcpUpdateConfiguration = Shapes::StructureShape.new(name: 'GcpUpdateConfiguration')
     GenerateRecommendedPolicyV2Request = Shapes::StructureShape.new(name: 'GenerateRecommendedPolicyV2Request')
     GenerateRecommendedPolicyV2Response = Shapes::StructureShape.new(name: 'GenerateRecommendedPolicyV2Response')
     GeneratorDetails = Shapes::StructureShape.new(name: 'GeneratorDetails')
@@ -6008,14 +6015,18 @@ module Aws::SecurityHub
     CspmHealthCheck.struct_class = Types::CspmHealthCheck
 
     CspmProviderConfiguration.add_member(:azure, Shapes::ShapeRef.new(shape: AzureProviderConfiguration, location_name: "Azure"))
+    CspmProviderConfiguration.add_member(:gcp, Shapes::ShapeRef.new(shape: GcpProviderConfiguration, location_name: "GCP"))
     CspmProviderConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CspmProviderConfiguration.add_member_subclass(:azure, Types::CspmProviderConfiguration::Azure)
+    CspmProviderConfiguration.add_member_subclass(:gcp, Types::CspmProviderConfiguration::Gcp)
     CspmProviderConfiguration.add_member_subclass(:unknown, Types::CspmProviderConfiguration::Unknown)
     CspmProviderConfiguration.struct_class = Types::CspmProviderConfiguration
 
     CspmProviderDetail.add_member(:azure, Shapes::ShapeRef.new(shape: AzureDetail, location_name: "Azure"))
+    CspmProviderDetail.add_member(:gcp, Shapes::ShapeRef.new(shape: GcpDetail, location_name: "GCP"))
     CspmProviderDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CspmProviderDetail.add_member_subclass(:azure, Types::CspmProviderDetail::Azure)
+    CspmProviderDetail.add_member_subclass(:gcp, Types::CspmProviderDetail::Gcp)
     CspmProviderDetail.add_member_subclass(:unknown, Types::CspmProviderDetail::Unknown)
     CspmProviderDetail.struct_class = Types::CspmProviderDetail
 
@@ -6025,8 +6036,10 @@ module Aws::SecurityHub
     CspmProviderSummary.struct_class = Types::CspmProviderSummary
 
     CspmProviderUpdateConfiguration.add_member(:azure, Shapes::ShapeRef.new(shape: AzureUpdateConfiguration, location_name: "Azure"))
+    CspmProviderUpdateConfiguration.add_member(:gcp, Shapes::ShapeRef.new(shape: GcpUpdateConfiguration, location_name: "GCP"))
     CspmProviderUpdateConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CspmProviderUpdateConfiguration.add_member_subclass(:azure, Types::CspmProviderUpdateConfiguration::Azure)
+    CspmProviderUpdateConfiguration.add_member_subclass(:gcp, Types::CspmProviderUpdateConfiguration::Gcp)
     CspmProviderUpdateConfiguration.add_member_subclass(:unknown, Types::CspmProviderUpdateConfiguration::Unknown)
     CspmProviderUpdateConfiguration.struct_class = Types::CspmProviderUpdateConfiguration
 
@@ -6464,6 +6477,26 @@ module Aws::SecurityHub
     FreeTrialStatusList.member = Shapes::ShapeRef.new(shape: FreeTrialStatus)
 
     FreeTrialStatusValueList.member = Shapes::ShapeRef.new(shape: FreeTrialStatusValue)
+
+    GcpDetail.add_member(:aws_config_connector_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AWSConfigConnectorArn"))
+    GcpDetail.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: GcpScopeConfiguration, required: true, location_name: "ScopeConfiguration"))
+    GcpDetail.add_member(:gcp_regions, Shapes::ShapeRef.new(shape: GcpRegionList, required: true, location_name: "GCPRegions"))
+    GcpDetail.struct_class = Types::GcpDetail
+
+    GcpProviderConfiguration.add_member(:aws_config_connector_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AWSConfigConnectorArn"))
+    GcpProviderConfiguration.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: GcpScopeConfiguration, required: true, location_name: "ScopeConfiguration"))
+    GcpProviderConfiguration.add_member(:gcp_regions, Shapes::ShapeRef.new(shape: GcpRegionList, required: true, location_name: "GCPRegions"))
+    GcpProviderConfiguration.struct_class = Types::GcpProviderConfiguration
+
+    GcpRegionList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    GcpScopeConfiguration.add_member(:scope_type, Shapes::ShapeRef.new(shape: GcpScopeType, required: true, location_name: "ScopeType"))
+    GcpScopeConfiguration.add_member(:scope_values, Shapes::ShapeRef.new(shape: ScopeValueList, location_name: "ScopeValues"))
+    GcpScopeConfiguration.struct_class = Types::GcpScopeConfiguration
+
+    GcpUpdateConfiguration.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: GcpScopeConfiguration, required: true, location_name: "ScopeConfiguration"))
+    GcpUpdateConfiguration.add_member(:gcp_regions, Shapes::ShapeRef.new(shape: GcpRegionList, required: true, location_name: "GCPRegions"))
+    GcpUpdateConfiguration.struct_class = Types::GcpUpdateConfiguration
 
     GenerateRecommendedPolicyV2Request.add_member(:metadata_uid, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "MetadataUid"))
     GenerateRecommendedPolicyV2Request.struct_class = Types::GenerateRecommendedPolicyV2Request
@@ -7414,20 +7447,24 @@ module Aws::SecurityHub
     ProviderConfiguration.add_member(:jira_cloud, Shapes::ShapeRef.new(shape: JiraCloudProviderConfiguration, location_name: "JiraCloud"))
     ProviderConfiguration.add_member(:service_now, Shapes::ShapeRef.new(shape: ServiceNowProviderConfiguration, location_name: "ServiceNow"))
     ProviderConfiguration.add_member(:azure, Shapes::ShapeRef.new(shape: AzureProviderConfiguration, location_name: "Azure"))
+    ProviderConfiguration.add_member(:gcp, Shapes::ShapeRef.new(shape: GcpProviderConfiguration, location_name: "GCP"))
     ProviderConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProviderConfiguration.add_member_subclass(:jira_cloud, Types::ProviderConfiguration::JiraCloud)
     ProviderConfiguration.add_member_subclass(:service_now, Types::ProviderConfiguration::ServiceNow)
     ProviderConfiguration.add_member_subclass(:azure, Types::ProviderConfiguration::Azure)
+    ProviderConfiguration.add_member_subclass(:gcp, Types::ProviderConfiguration::Gcp)
     ProviderConfiguration.add_member_subclass(:unknown, Types::ProviderConfiguration::Unknown)
     ProviderConfiguration.struct_class = Types::ProviderConfiguration
 
     ProviderDetail.add_member(:jira_cloud, Shapes::ShapeRef.new(shape: JiraCloudDetail, location_name: "JiraCloud"))
     ProviderDetail.add_member(:service_now, Shapes::ShapeRef.new(shape: ServiceNowDetail, location_name: "ServiceNow"))
     ProviderDetail.add_member(:azure, Shapes::ShapeRef.new(shape: AzureDetail, location_name: "Azure"))
+    ProviderDetail.add_member(:gcp, Shapes::ShapeRef.new(shape: GcpDetail, location_name: "GCP"))
     ProviderDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProviderDetail.add_member_subclass(:jira_cloud, Types::ProviderDetail::JiraCloud)
     ProviderDetail.add_member_subclass(:service_now, Types::ProviderDetail::ServiceNow)
     ProviderDetail.add_member_subclass(:azure, Types::ProviderDetail::Azure)
+    ProviderDetail.add_member_subclass(:gcp, Types::ProviderDetail::Gcp)
     ProviderDetail.add_member_subclass(:unknown, Types::ProviderDetail::Unknown)
     ProviderDetail.struct_class = Types::ProviderDetail
 
@@ -7439,10 +7476,12 @@ module Aws::SecurityHub
     ProviderUpdateConfiguration.add_member(:jira_cloud, Shapes::ShapeRef.new(shape: JiraCloudUpdateConfiguration, location_name: "JiraCloud"))
     ProviderUpdateConfiguration.add_member(:service_now, Shapes::ShapeRef.new(shape: ServiceNowUpdateConfiguration, location_name: "ServiceNow"))
     ProviderUpdateConfiguration.add_member(:azure, Shapes::ShapeRef.new(shape: AzureUpdateConfiguration, location_name: "Azure"))
+    ProviderUpdateConfiguration.add_member(:gcp, Shapes::ShapeRef.new(shape: GcpUpdateConfiguration, location_name: "GCP"))
     ProviderUpdateConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProviderUpdateConfiguration.add_member_subclass(:jira_cloud, Types::ProviderUpdateConfiguration::JiraCloud)
     ProviderUpdateConfiguration.add_member_subclass(:service_now, Types::ProviderUpdateConfiguration::ServiceNow)
     ProviderUpdateConfiguration.add_member_subclass(:azure, Types::ProviderUpdateConfiguration::Azure)
+    ProviderUpdateConfiguration.add_member_subclass(:gcp, Types::ProviderUpdateConfiguration::Gcp)
     ProviderUpdateConfiguration.add_member_subclass(:unknown, Types::ProviderUpdateConfiguration::Unknown)
     ProviderUpdateConfiguration.struct_class = Types::ProviderUpdateConfiguration
 
@@ -7735,6 +7774,7 @@ module Aws::SecurityHub
     ResourceDetails.add_member(:aws_ec2_client_vpn_endpoint, Shapes::ShapeRef.new(shape: AwsEc2ClientVpnEndpointDetails, location_name: "AwsEc2ClientVpnEndpoint"))
     ResourceDetails.add_member(:code_repository, Shapes::ShapeRef.new(shape: CodeRepositoryDetails, location_name: "CodeRepository"))
     ResourceDetails.add_member(:azure_resource, Shapes::ShapeRef.new(shape: AzureResourceDetails, location_name: "AzureResource"))
+    ResourceDetails.add_member(:gcp_resource, Shapes::ShapeRef.new(shape: GcpResourceDetails, location_name: "GcpResource"))
     ResourceDetails.struct_class = Types::ResourceDetails
 
     ResourceFindingsSummary.add_member(:finding_type, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "FindingType"))

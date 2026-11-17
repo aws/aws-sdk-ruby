@@ -16,6 +16,46 @@
     "auth":["aws.auth#sigv4"]
   },
   "operations":{
+    "AcknowledgeDeadLetterQueueRecords":{
+      "name":"AcknowledgeDeadLetterQueueRecords",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AcknowledgeDeadLetterQueueRecordsInput"},
+      "output":{"shape":"AcknowledgeDeadLetterQueueRecordsOutput"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "staticContextParams":{
+        "OperationType":{"value":"data"},
+        "ResourceType":{"value":"queue"}
+      }
+    },
+    "AcknowledgeQueueRecords":{
+      "name":"AcknowledgeQueueRecords",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AcknowledgeQueueRecordsInput"},
+      "output":{"shape":"AcknowledgeQueueRecordsOutput"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "staticContextParams":{
+        "OperationType":{"value":"data"},
+        "ResourceType":{"value":"queue"}
+      }
+    },
     "AddTagsToStream":{
       "name":"AddTagsToStream",
       "http":{
@@ -58,6 +98,28 @@
       ],
       "staticContextParams":{
         "OperationType":{"value":"control"}
+      }
+    },
+    "CreateQueue":{
+      "name":"CreateQueue",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateQueueInput"},
+      "output":{"shape":"CreateQueueOutput"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "staticContextParams":{
+        "OperationType":{"value":"control"},
+        "ResourceType":{"value":"queue"}
       }
     },
     "CreateStream":{
@@ -113,6 +175,26 @@
         "OperationType":{"value":"control"}
       }
     },
+    "DeleteQueue":{
+      "name":"DeleteQueue",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteQueueInput"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "staticContextParams":{
+        "OperationType":{"value":"control"},
+        "ResourceType":{"value":"queue"}
+      }
+    },
     "DeleteResourcePolicy":{
       "name":"DeleteResourcePolicy",
       "http":{
@@ -121,11 +203,13 @@
       },
       "input":{"shape":"DeleteResourcePolicyInput"},
       "errors":[
+        {"shape":"ValidationException"},
         {"shape":"AccessDeniedException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"LimitExceededException"},
         {"shape":"InvalidArgumentException"},
-        {"shape":"ResourceInUseException"}
+        {"shape":"ResourceInUseException"},
+        {"shape":"InternalFailureException"}
       ],
       "staticContextParams":{
         "OperationType":{"value":"control"}
@@ -213,6 +297,27 @@
       ],
       "staticContextParams":{
         "OperationType":{"value":"control"}
+      }
+    },
+    "DescribeQueue":{
+      "name":"DescribeQueue",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeQueueInput"},
+      "output":{"shape":"DescribeQueueOutput"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "staticContextParams":{
+        "OperationType":{"value":"control"},
+        "ResourceType":{"value":"queue"}
       }
     },
     "DescribeStream":{
@@ -342,11 +447,13 @@
       "input":{"shape":"GetResourcePolicyInput"},
       "output":{"shape":"GetResourcePolicyOutput"},
       "errors":[
+        {"shape":"ValidationException"},
         {"shape":"AccessDeniedException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"LimitExceededException"},
         {"shape":"InvalidArgumentException"},
-        {"shape":"ResourceInUseException"}
+        {"shape":"ResourceInUseException"},
+        {"shape":"InternalFailureException"}
       ],
       "staticContextParams":{
         "OperationType":{"value":"control"}
@@ -408,6 +515,27 @@
       "readonly":true,
       "staticContextParams":{
         "OperationType":{"value":"control"}
+      }
+    },
+    "ListQueues":{
+      "name":"ListQueues",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListQueuesInput"},
+      "output":{"shape":"ListQueuesOutput"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ExpiredNextTokenException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "staticContextParams":{
+        "OperationType":{"value":"control"},
+        "ResourceType":{"value":"queue"}
       }
     },
     "ListShards":{
@@ -475,11 +603,13 @@
       "input":{"shape":"ListTagsForResourceInput"},
       "output":{"shape":"ListTagsForResourceOutput"},
       "errors":[
+        {"shape":"ValidationException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ResourceInUseException"},
         {"shape":"InvalidArgumentException"},
         {"shape":"LimitExceededException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalFailureException"}
       ],
       "staticContextParams":{
         "OperationType":{"value":"control"}
@@ -582,14 +712,68 @@
       },
       "input":{"shape":"PutResourcePolicyInput"},
       "errors":[
+        {"shape":"ValidationException"},
         {"shape":"AccessDeniedException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"LimitExceededException"},
         {"shape":"InvalidArgumentException"},
-        {"shape":"ResourceInUseException"}
+        {"shape":"ResourceInUseException"},
+        {"shape":"InternalFailureException"}
       ],
       "staticContextParams":{
         "OperationType":{"value":"control"}
+      }
+    },
+    "ReceiveDeadLetterQueueRecords":{
+      "name":"ReceiveDeadLetterQueueRecords",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ReceiveDeadLetterQueueRecordsInput"},
+      "output":{"shape":"ReceiveDeadLetterQueueRecordsOutput"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"KMSAccessDeniedException"},
+        {"shape":"KMSDisabledException"},
+        {"shape":"KMSInvalidStateException"},
+        {"shape":"KMSNotFoundException"},
+        {"shape":"KMSOptInRequired"},
+        {"shape":"KMSThrottlingException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "staticContextParams":{
+        "OperationType":{"value":"data"},
+        "ResourceType":{"value":"queue"}
+      }
+    },
+    "ReceiveQueueRecords":{
+      "name":"ReceiveQueueRecords",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ReceiveQueueRecordsInput"},
+      "output":{"shape":"ReceiveQueueRecordsOutput"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"KMSAccessDeniedException"},
+        {"shape":"KMSDisabledException"},
+        {"shape":"KMSInvalidStateException"},
+        {"shape":"KMSNotFoundException"},
+        {"shape":"KMSOptInRequired"},
+        {"shape":"KMSThrottlingException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "staticContextParams":{
+        "OperationType":{"value":"data"},
+        "ResourceType":{"value":"queue"}
       }
     },
     "RegisterStreamConsumer":{
@@ -626,6 +810,26 @@
       ],
       "staticContextParams":{
         "OperationType":{"value":"control"}
+      }
+    },
+    "RestoreDeadLetterQueueRecords":{
+      "name":"RestoreDeadLetterQueueRecords",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RestoreDeadLetterQueueRecordsInput"},
+      "output":{"shape":"RestoreDeadLetterQueueRecordsOutput"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "staticContextParams":{
+        "OperationType":{"value":"data"},
+        "ResourceType":{"value":"queue"}
       }
     },
     "SplitShard":{
@@ -717,11 +921,13 @@
       },
       "input":{"shape":"TagResourceInput"},
       "errors":[
+        {"shape":"ValidationException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ResourceInUseException"},
         {"shape":"InvalidArgumentException"},
         {"shape":"LimitExceededException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalFailureException"}
       ],
       "staticContextParams":{
         "OperationType":{"value":"control"}
@@ -735,11 +941,13 @@
       },
       "input":{"shape":"UntagResourceInput"},
       "errors":[
+        {"shape":"ValidationException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ResourceInUseException"},
         {"shape":"InvalidArgumentException"},
         {"shape":"LimitExceededException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalFailureException"}
       ],
       "staticContextParams":{
         "OperationType":{"value":"control"}
@@ -782,6 +990,26 @@
         "OperationType":{"value":"control"}
       }
     },
+    "UpdateDeadLetterQueueRecordsVisibility":{
+      "name":"UpdateDeadLetterQueueRecordsVisibility",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateDeadLetterQueueRecordsVisibilityInput"},
+      "output":{"shape":"UpdateDeadLetterQueueRecordsVisibilityOutput"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "staticContextParams":{
+        "OperationType":{"value":"data"},
+        "ResourceType":{"value":"queue"}
+      }
+    },
     "UpdateMaxRecordSize":{
       "name":"UpdateMaxRecordSize",
       "http":{
@@ -799,6 +1027,48 @@
       ],
       "staticContextParams":{
         "OperationType":{"value":"control"}
+      }
+    },
+    "UpdateQueue":{
+      "name":"UpdateQueue",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateQueueInput"},
+      "output":{"shape":"UpdateQueueOutput"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalFailureException"}
+      ],
+      "staticContextParams":{
+        "OperationType":{"value":"control"},
+        "ResourceType":{"value":"queue"}
+      }
+    },
+    "UpdateQueueRecordsVisibility":{
+      "name":"UpdateQueueRecordsVisibility",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateQueueRecordsVisibilityInput"},
+      "output":{"shape":"UpdateQueueRecordsVisibilityOutput"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "staticContextParams":{
+        "OperationType":{"value":"data"},
+        "ResourceType":{"value":"queue"}
       }
     },
     "UpdateShardCount":{
@@ -887,6 +1157,136 @@
       },
       "exception":true
     },
+    "AcknowledgeDeadLetterQueueRecordsErrorEntry":{
+      "type":"structure",
+      "required":[
+        "ReceiptHandle",
+        "ErrorCode"
+      ],
+      "members":{
+        "ReceiptHandle":{"shape":"ReceiptHandle"},
+        "ErrorCode":{"shape":"ErrorCode"},
+        "ErrorMessage":{"shape":"ErrorMessage"}
+      }
+    },
+    "AcknowledgeDeadLetterQueueRecordsErrorEntryList":{
+      "type":"list",
+      "member":{"shape":"AcknowledgeDeadLetterQueueRecordsErrorEntry"}
+    },
+    "AcknowledgeDeadLetterQueueRecordsInput":{
+      "type":"structure",
+      "required":[
+        "QueueARN",
+        "Entries"
+      ],
+      "members":{
+        "QueueARN":{
+          "shape":"QueueARN",
+          "contextParam":{"name":"QueueARN"}
+        },
+        "Entries":{"shape":"AcknowledgeDeadLetterQueueRecordsRequestEntryList"}
+      }
+    },
+    "AcknowledgeDeadLetterQueueRecordsOutput":{
+      "type":"structure",
+      "required":[
+        "Successful",
+        "Failed"
+      ],
+      "members":{
+        "Successful":{"shape":"AcknowledgeDeadLetterQueueRecordsResultEntryList"},
+        "Failed":{"shape":"AcknowledgeDeadLetterQueueRecordsErrorEntryList"}
+      }
+    },
+    "AcknowledgeDeadLetterQueueRecordsRequestEntry":{
+      "type":"structure",
+      "required":["ReceiptHandle"],
+      "members":{
+        "ReceiptHandle":{"shape":"ReceiptHandle"}
+      }
+    },
+    "AcknowledgeDeadLetterQueueRecordsRequestEntryList":{
+      "type":"list",
+      "member":{"shape":"AcknowledgeDeadLetterQueueRecordsRequestEntry"},
+      "max":10,
+      "min":1
+    },
+    "AcknowledgeDeadLetterQueueRecordsResultEntry":{
+      "type":"structure",
+      "required":["ReceiptHandle"],
+      "members":{
+        "ReceiptHandle":{"shape":"ReceiptHandle"}
+      }
+    },
+    "AcknowledgeDeadLetterQueueRecordsResultEntryList":{
+      "type":"list",
+      "member":{"shape":"AcknowledgeDeadLetterQueueRecordsResultEntry"}
+    },
+    "AcknowledgeQueueRecordsErrorEntry":{
+      "type":"structure",
+      "required":[
+        "ReceiptHandle",
+        "ErrorCode"
+      ],
+      "members":{
+        "ReceiptHandle":{"shape":"ReceiptHandle"},
+        "ErrorCode":{"shape":"ErrorCode"},
+        "ErrorMessage":{"shape":"ErrorMessage"}
+      }
+    },
+    "AcknowledgeQueueRecordsErrorEntryList":{
+      "type":"list",
+      "member":{"shape":"AcknowledgeQueueRecordsErrorEntry"}
+    },
+    "AcknowledgeQueueRecordsInput":{
+      "type":"structure",
+      "required":[
+        "QueueARN",
+        "Entries"
+      ],
+      "members":{
+        "QueueARN":{
+          "shape":"QueueARN",
+          "contextParam":{"name":"QueueARN"}
+        },
+        "Entries":{"shape":"AcknowledgeQueueRecordsRequestEntryList"}
+      }
+    },
+    "AcknowledgeQueueRecordsOutput":{
+      "type":"structure",
+      "required":[
+        "Successful",
+        "Failed"
+      ],
+      "members":{
+        "Successful":{"shape":"AcknowledgeQueueRecordsResultEntryList"},
+        "Failed":{"shape":"AcknowledgeQueueRecordsErrorEntryList"}
+      }
+    },
+    "AcknowledgeQueueRecordsRequestEntry":{
+      "type":"structure",
+      "required":["ReceiptHandle"],
+      "members":{
+        "ReceiptHandle":{"shape":"ReceiptHandle"}
+      }
+    },
+    "AcknowledgeQueueRecordsRequestEntryList":{
+      "type":"list",
+      "member":{"shape":"AcknowledgeQueueRecordsRequestEntry"},
+      "max":10,
+      "min":1
+    },
+    "AcknowledgeQueueRecordsResultEntry":{
+      "type":"structure",
+      "required":["ReceiptHandle"],
+      "members":{
+        "ReceiptHandle":{"shape":"ReceiptHandle"}
+      }
+    },
+    "AcknowledgeQueueRecordsResultEntryList":{
+      "type":"list",
+      "member":{"shape":"AcknowledgeQueueRecordsResultEntry"}
+    },
     "AddTagsToStreamInput":{
       "type":"structure",
       "required":["Tags"],
@@ -903,6 +1303,7 @@
         }
       }
     },
+    "ApproximateArrivalTimestamp":{"type":"timestamp"},
     "BooleanObject":{"type":"boolean"},
     "BucketARN":{
       "type":"string",
@@ -1222,6 +1623,26 @@
         "ChannelDescription":{"shape":"ChannelDescription"}
       }
     },
+    "CreateQueueInput":{
+      "type":"structure",
+      "required":[
+        "QueueName",
+        "StreamConfigurationList"
+      ],
+      "members":{
+        "QueueName":{"shape":"QueueName"},
+        "StreamConfigurationList":{"shape":"QueueStreamConfigurationList"},
+        "QueueAttributes":{"shape":"QueueAttributes"},
+        "Tags":{"shape":"TagMap"}
+      }
+    },
+    "CreateQueueOutput":{
+      "type":"structure",
+      "required":["QueueDescription"],
+      "members":{
+        "QueueDescription":{"shape":"QueueDescription"}
+      }
+    },
     "CreateStreamInput":{
       "type":"structure",
       "required":["StreamName"],
@@ -1241,6 +1662,14 @@
       "min":0
     },
     "DataFreshnessInSeconds":{"type":"integer"},
+    "DeadLetterConfiguration":{
+      "type":"structure",
+      "required":["TargetType"],
+      "members":{
+        "TargetType":{"shape":"TargetType"},
+        "MaxReceiveCount":{"shape":"MaxReceiveCount"}
+      }
+    },
     "DeadLetterQueueS3Configuration":{
       "type":"structure",
       "required":[
@@ -1276,6 +1705,16 @@
         "ChannelARN":{
           "shape":"ChannelARN",
           "contextParam":{"name":"ChannelARN"}
+        }
+      }
+    },
+    "DeleteQueueInput":{
+      "type":"structure",
+      "required":["QueueARN"],
+      "members":{
+        "QueueARN":{
+          "shape":"QueueARN",
+          "contextParam":{"name":"QueueARN"}
         }
       }
     },
@@ -1372,6 +1811,23 @@
         "OnDemandStreamCountLimit":{"shape":"OnDemandStreamCountLimitObject"},
         "ChannelCount":{"shape":"ChannelCountObject"},
         "ChannelCountLimit":{"shape":"ChannelCountObject"}
+      }
+    },
+    "DescribeQueueInput":{
+      "type":"structure",
+      "required":["QueueARN"],
+      "members":{
+        "QueueARN":{
+          "shape":"QueueARN",
+          "contextParam":{"name":"QueueARN"}
+        }
+      }
+    },
+    "DescribeQueueOutput":{
+      "type":"structure",
+      "required":["QueueDescription"],
+      "members":{
+        "QueueDescription":{"shape":"QueueDescription"}
       }
     },
     "DescribeStreamConsumerInput":{
@@ -1535,6 +1991,7 @@
       },
       "exception":true
     },
+    "FirstReceiveTimestamp":{"type":"timestamp"},
     "GSRSchemaARN":{
       "type":"string",
       "max":512,
@@ -1744,6 +2201,27 @@
         "NextToken":{"shape":"NextToken"}
       }
     },
+    "ListQueuesInput":{
+      "type":"structure",
+      "members":{
+        "MaxResults":{"shape":"ListQueuesInputLimit"},
+        "NextToken":{"shape":"NextToken"},
+        "StreamFilter":{"shape":"QueueStreamFilterList"}
+      }
+    },
+    "ListQueuesInputLimit":{
+      "type":"integer",
+      "max":10000,
+      "min":1
+    },
+    "ListQueuesOutput":{
+      "type":"structure",
+      "required":["QueueSummaries"],
+      "members":{
+        "QueueSummaries":{"shape":"QueueSummaryList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
     "ListShardsInput":{
       "type":"structure",
       "members":{
@@ -1881,6 +2359,11 @@
         "Tags":{"shape":"TagList"},
         "HasMoreTags":{"shape":"BooleanObject"}
       }
+    },
+    "MaxReceiveCount":{
+      "type":"integer",
+      "max":1000,
+      "min":1
     },
     "MaxRecordSizeInKiB":{
       "type":"integer",
@@ -2138,6 +2621,222 @@
         "Policy":{"shape":"Policy"}
       }
     },
+    "QueueARN":{
+      "type":"string",
+      "max":2048,
+      "min":1,
+      "pattern":"arn:aws.*:kinesis:.*:\\d{12}:queue/\\S+"
+    },
+    "QueueAttributes":{
+      "type":"structure",
+      "members":{
+        "VisibilityTimeoutSeconds":{"shape":"VisibilityTimeoutSeconds"},
+        "DeadLetterConfiguration":{"shape":"DeadLetterConfiguration"}
+      }
+    },
+    "QueueCountObject":{
+      "type":"integer",
+      "max":1000000,
+      "min":0
+    },
+    "QueueDescription":{
+      "type":"structure",
+      "required":[
+        "QueueName",
+        "QueueARN",
+        "QueueStatus",
+        "QueueCreationTimestamp",
+        "StreamConfigurationList"
+      ],
+      "members":{
+        "QueueName":{"shape":"QueueName"},
+        "QueueARN":{"shape":"QueueARN"},
+        "QueueStatus":{"shape":"QueueStatus"},
+        "QueueCreationTimestamp":{"shape":"Timestamp"},
+        "StreamConfigurationList":{"shape":"QueueStreamConfigurationList"},
+        "QueueAttributes":{"shape":"QueueAttributes"}
+      }
+    },
+    "QueueName":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[a-zA-Z0-9_.-]+"
+    },
+    "QueueRecord":{
+      "type":"structure",
+      "required":[
+        "ReceiptHandle",
+        "RecordId",
+        "Data",
+        "ApproximateArrivalTimestamp",
+        "FirstReceiveTimestamp",
+        "ReceiveCount"
+      ],
+      "members":{
+        "ReceiptHandle":{"shape":"ReceiptHandle"},
+        "RecordId":{"shape":"RecordId"},
+        "PartitionKey":{"shape":"PartitionKey"},
+        "Data":{"shape":"Data"},
+        "ApproximateArrivalTimestamp":{"shape":"ApproximateArrivalTimestamp"},
+        "FirstReceiveTimestamp":{"shape":"FirstReceiveTimestamp"},
+        "ReceiveCount":{"shape":"ReceiveCount"}
+      }
+    },
+    "QueueRecordList":{
+      "type":"list",
+      "member":{"shape":"QueueRecord"}
+    },
+    "QueueStartingPosition":{
+      "type":"structure",
+      "required":["Type"],
+      "members":{
+        "Type":{"shape":"QueueStartingPositionType"},
+        "Timestamp":{"shape":"Timestamp"}
+      }
+    },
+    "QueueStartingPositionType":{
+      "type":"string",
+      "enum":[
+        "TRIM_HORIZON",
+        "LATEST",
+        "AT_TIMESTAMP"
+      ]
+    },
+    "QueueStatus":{
+      "type":"string",
+      "enum":[
+        "CREATING",
+        "ACTIVE",
+        "UPDATING",
+        "DELETING"
+      ]
+    },
+    "QueueStreamConfiguration":{
+      "type":"structure",
+      "required":["StreamARN"],
+      "members":{
+        "StreamARN":{"shape":"StreamARN"},
+        "StartingPosition":{"shape":"QueueStartingPosition"}
+      }
+    },
+    "QueueStreamConfigurationList":{
+      "type":"list",
+      "member":{"shape":"QueueStreamConfiguration"},
+      "max":10000,
+      "min":1
+    },
+    "QueueStreamFilter":{
+      "type":"structure",
+      "required":["StreamARN"],
+      "members":{
+        "StreamARN":{"shape":"StreamARN"},
+        "StreamCreationTimestamp":{"shape":"Timestamp"}
+      }
+    },
+    "QueueStreamFilterList":{
+      "type":"list",
+      "member":{"shape":"QueueStreamFilter"},
+      "max":10000,
+      "min":1
+    },
+    "QueueStreamIdentifier":{
+      "type":"structure",
+      "required":[
+        "StreamARN",
+        "StreamCreationTimestamp"
+      ],
+      "members":{
+        "StreamARN":{"shape":"StreamARN"},
+        "StreamCreationTimestamp":{"shape":"Timestamp"}
+      }
+    },
+    "QueueStreamIdentifierList":{
+      "type":"list",
+      "member":{"shape":"QueueStreamIdentifier"},
+      "max":10000,
+      "min":1
+    },
+    "QueueSummary":{
+      "type":"structure",
+      "required":[
+        "QueueName",
+        "QueueARN",
+        "QueueStatus",
+        "QueueCreationTimestamp",
+        "Streams"
+      ],
+      "members":{
+        "QueueName":{"shape":"QueueName"},
+        "QueueARN":{"shape":"QueueARN"},
+        "QueueStatus":{"shape":"QueueStatus"},
+        "QueueCreationTimestamp":{"shape":"Timestamp"},
+        "Streams":{"shape":"QueueStreamIdentifierList"}
+      }
+    },
+    "QueueSummaryList":{
+      "type":"list",
+      "member":{"shape":"QueueSummary"}
+    },
+    "ReceiptHandle":{
+      "type":"string",
+      "max":1024,
+      "min":1
+    },
+    "ReceiveCount":{
+      "type":"integer",
+      "min":0
+    },
+    "ReceiveDeadLetterQueueRecordsInput":{
+      "type":"structure",
+      "required":["QueueARN"],
+      "members":{
+        "QueueARN":{
+          "shape":"QueueARN",
+          "contextParam":{"name":"QueueARN"}
+        },
+        "Limit":{"shape":"ReceiveQueueRecordsInputLimit"},
+        "WaitTimeSeconds":{"shape":"ReceiveQueueRecordsWaitTimeSeconds"},
+        "VisibilityTimeoutSeconds":{"shape":"VisibilityTimeoutSeconds"}
+      }
+    },
+    "ReceiveDeadLetterQueueRecordsOutput":{
+      "type":"structure",
+      "required":["QueueRecords"],
+      "members":{
+        "QueueRecords":{"shape":"QueueRecordList"}
+      }
+    },
+    "ReceiveQueueRecordsInput":{
+      "type":"structure",
+      "required":["QueueARN"],
+      "members":{
+        "QueueARN":{
+          "shape":"QueueARN",
+          "contextParam":{"name":"QueueARN"}
+        },
+        "Limit":{"shape":"ReceiveQueueRecordsInputLimit"},
+        "WaitTimeSeconds":{"shape":"ReceiveQueueRecordsWaitTimeSeconds"},
+        "VisibilityTimeoutSeconds":{"shape":"VisibilityTimeoutSeconds"}
+      }
+    },
+    "ReceiveQueueRecordsInputLimit":{
+      "type":"integer",
+      "max":10,
+      "min":1
+    },
+    "ReceiveQueueRecordsOutput":{
+      "type":"structure",
+      "required":["QueueRecords"],
+      "members":{
+        "QueueRecords":{"shape":"QueueRecordList"}
+      }
+    },
+    "ReceiveQueueRecordsWaitTimeSeconds":{
+      "type":"integer",
+      "max":20,
+      "min":1
+    },
     "Record":{
       "type":"structure",
       "required":[
@@ -2175,6 +2874,12 @@
         "STRING",
         "BYTE_ARRAY"
       ]
+    },
+    "RecordId":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"^[a-z0-9]+$"
     },
     "RecordList":{
       "type":"list",
@@ -2226,7 +2931,7 @@
       "type":"string",
       "max":2048,
       "min":1,
-      "pattern":"arn:aws.*:kinesis:.*:\\d{12}:.*(stream|channel)/\\S+"
+      "pattern":"arn:aws.*:kinesis:.*:\\d{12}:.*(stream|channel|queue)/\\S+"
     },
     "ResourceInUseException":{
       "type":"structure",
@@ -2241,6 +2946,71 @@
         "message":{"shape":"ErrorMessage"}
       },
       "exception":true
+    },
+    "RestoreDeadLetterQueueRecordsErrorEntry":{
+      "type":"structure",
+      "required":[
+        "ReceiptHandle",
+        "ErrorCode"
+      ],
+      "members":{
+        "ReceiptHandle":{"shape":"ReceiptHandle"},
+        "ErrorCode":{"shape":"ErrorCode"},
+        "ErrorMessage":{"shape":"ErrorMessage"}
+      }
+    },
+    "RestoreDeadLetterQueueRecordsErrorEntryList":{
+      "type":"list",
+      "member":{"shape":"RestoreDeadLetterQueueRecordsErrorEntry"}
+    },
+    "RestoreDeadLetterQueueRecordsInput":{
+      "type":"structure",
+      "required":[
+        "QueueARN",
+        "Entries"
+      ],
+      "members":{
+        "QueueARN":{
+          "shape":"QueueARN",
+          "contextParam":{"name":"QueueARN"}
+        },
+        "Entries":{"shape":"RestoreDeadLetterQueueRecordsRequestEntryList"}
+      }
+    },
+    "RestoreDeadLetterQueueRecordsOutput":{
+      "type":"structure",
+      "required":[
+        "Successful",
+        "Failed"
+      ],
+      "members":{
+        "Successful":{"shape":"RestoreDeadLetterQueueRecordsResultEntryList"},
+        "Failed":{"shape":"RestoreDeadLetterQueueRecordsErrorEntryList"}
+      }
+    },
+    "RestoreDeadLetterQueueRecordsRequestEntry":{
+      "type":"structure",
+      "required":["ReceiptHandle"],
+      "members":{
+        "ReceiptHandle":{"shape":"ReceiptHandle"}
+      }
+    },
+    "RestoreDeadLetterQueueRecordsRequestEntryList":{
+      "type":"list",
+      "member":{"shape":"RestoreDeadLetterQueueRecordsRequestEntry"},
+      "max":10,
+      "min":1
+    },
+    "RestoreDeadLetterQueueRecordsResultEntry":{
+      "type":"structure",
+      "required":["ReceiptHandle"],
+      "members":{
+        "ReceiptHandle":{"shape":"ReceiptHandle"}
+      }
+    },
+    "RestoreDeadLetterQueueRecordsResultEntryList":{
+      "type":"list",
+      "member":{"shape":"RestoreDeadLetterQueueRecordsResultEntry"}
     },
     "RetentionPeriodHours":{"type":"integer"},
     "RoleARN":{
@@ -2608,7 +3378,8 @@
         "WarmThroughput":{"shape":"WarmThroughputObject"},
         "MaxRecordSizeInKiB":{"shape":"MaxRecordSizeInKiB"},
         "ChannelCount":{"shape":"ChannelCountObject"},
-        "RecordDistributionStrategy":{"shape":"RecordDistributionStrategy"}
+        "RecordDistributionStrategy":{"shape":"RecordDistributionStrategy"},
+        "QueueCount":{"shape":"QueueCountObject"}
       }
     },
     "StreamFilter":{
@@ -2804,6 +3575,20 @@
       "max":256,
       "min":0
     },
+    "TargetType":{
+      "type":"string",
+      "enum":[
+        "BUILT_IN",
+        "NONE"
+      ]
+    },
+    "ThrottlingException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "exception":true
+    },
     "Timestamp":{"type":"timestamp"},
     "UntagResourceInput":{
       "type":"structure",
@@ -2856,6 +3641,75 @@
         "ChannelDescription":{"shape":"ChannelDescription"}
       }
     },
+    "UpdateDeadLetterQueueRecordsVisibilityErrorEntry":{
+      "type":"structure",
+      "required":[
+        "ReceiptHandle",
+        "ErrorCode"
+      ],
+      "members":{
+        "ReceiptHandle":{"shape":"ReceiptHandle"},
+        "ErrorCode":{"shape":"ErrorCode"},
+        "ErrorMessage":{"shape":"ErrorMessage"}
+      }
+    },
+    "UpdateDeadLetterQueueRecordsVisibilityErrorEntryList":{
+      "type":"list",
+      "member":{"shape":"UpdateDeadLetterQueueRecordsVisibilityErrorEntry"}
+    },
+    "UpdateDeadLetterQueueRecordsVisibilityInput":{
+      "type":"structure",
+      "required":[
+        "QueueARN",
+        "Entries"
+      ],
+      "members":{
+        "QueueARN":{
+          "shape":"QueueARN",
+          "contextParam":{"name":"QueueARN"}
+        },
+        "Entries":{"shape":"UpdateDeadLetterQueueRecordsVisibilityRequestEntryList"}
+      }
+    },
+    "UpdateDeadLetterQueueRecordsVisibilityOutput":{
+      "type":"structure",
+      "required":[
+        "Successful",
+        "Failed"
+      ],
+      "members":{
+        "Successful":{"shape":"UpdateDeadLetterQueueRecordsVisibilityResultEntryList"},
+        "Failed":{"shape":"UpdateDeadLetterQueueRecordsVisibilityErrorEntryList"}
+      }
+    },
+    "UpdateDeadLetterQueueRecordsVisibilityRequestEntry":{
+      "type":"structure",
+      "required":[
+        "ReceiptHandle",
+        "VisibilityTimeoutSeconds"
+      ],
+      "members":{
+        "ReceiptHandle":{"shape":"ReceiptHandle"},
+        "VisibilityTimeoutSeconds":{"shape":"VisibilityTimeoutSeconds"}
+      }
+    },
+    "UpdateDeadLetterQueueRecordsVisibilityRequestEntryList":{
+      "type":"list",
+      "member":{"shape":"UpdateDeadLetterQueueRecordsVisibilityRequestEntry"},
+      "max":10,
+      "min":1
+    },
+    "UpdateDeadLetterQueueRecordsVisibilityResultEntry":{
+      "type":"structure",
+      "required":["ReceiptHandle"],
+      "members":{
+        "ReceiptHandle":{"shape":"ReceiptHandle"}
+      }
+    },
+    "UpdateDeadLetterQueueRecordsVisibilityResultEntryList":{
+      "type":"list",
+      "member":{"shape":"UpdateDeadLetterQueueRecordsVisibilityResultEntry"}
+    },
     "UpdateMaxRecordSizeInput":{
       "type":"structure",
       "required":["MaxRecordSizeInKiB"],
@@ -2870,6 +3724,96 @@
         },
         "MaxRecordSizeInKiB":{"shape":"MaxRecordSizeInKiB"}
       }
+    },
+    "UpdateQueueInput":{
+      "type":"structure",
+      "required":[
+        "QueueARN",
+        "QueueAttributes"
+      ],
+      "members":{
+        "QueueARN":{
+          "shape":"QueueARN",
+          "contextParam":{"name":"QueueARN"}
+        },
+        "QueueAttributes":{"shape":"QueueAttributes"}
+      }
+    },
+    "UpdateQueueOutput":{
+      "type":"structure",
+      "required":["QueueDescription"],
+      "members":{
+        "QueueDescription":{"shape":"QueueDescription"}
+      }
+    },
+    "UpdateQueueRecordsVisibilityErrorEntry":{
+      "type":"structure",
+      "required":[
+        "ReceiptHandle",
+        "ErrorCode"
+      ],
+      "members":{
+        "ReceiptHandle":{"shape":"ReceiptHandle"},
+        "ErrorCode":{"shape":"ErrorCode"},
+        "ErrorMessage":{"shape":"ErrorMessage"}
+      }
+    },
+    "UpdateQueueRecordsVisibilityErrorEntryList":{
+      "type":"list",
+      "member":{"shape":"UpdateQueueRecordsVisibilityErrorEntry"}
+    },
+    "UpdateQueueRecordsVisibilityInput":{
+      "type":"structure",
+      "required":[
+        "QueueARN",
+        "Entries"
+      ],
+      "members":{
+        "QueueARN":{
+          "shape":"QueueARN",
+          "contextParam":{"name":"QueueARN"}
+        },
+        "Entries":{"shape":"UpdateQueueRecordsVisibilityRequestEntryList"}
+      }
+    },
+    "UpdateQueueRecordsVisibilityOutput":{
+      "type":"structure",
+      "required":[
+        "Successful",
+        "Failed"
+      ],
+      "members":{
+        "Successful":{"shape":"UpdateQueueRecordsVisibilityResultEntryList"},
+        "Failed":{"shape":"UpdateQueueRecordsVisibilityErrorEntryList"}
+      }
+    },
+    "UpdateQueueRecordsVisibilityRequestEntry":{
+      "type":"structure",
+      "required":[
+        "ReceiptHandle",
+        "VisibilityTimeoutSeconds"
+      ],
+      "members":{
+        "ReceiptHandle":{"shape":"ReceiptHandle"},
+        "VisibilityTimeoutSeconds":{"shape":"VisibilityTimeoutSeconds"}
+      }
+    },
+    "UpdateQueueRecordsVisibilityRequestEntryList":{
+      "type":"list",
+      "member":{"shape":"UpdateQueueRecordsVisibilityRequestEntry"},
+      "max":10,
+      "min":1
+    },
+    "UpdateQueueRecordsVisibilityResultEntry":{
+      "type":"structure",
+      "required":["ReceiptHandle"],
+      "members":{
+        "ReceiptHandle":{"shape":"ReceiptHandle"}
+      }
+    },
+    "UpdateQueueRecordsVisibilityResultEntryList":{
+      "type":"list",
+      "member":{"shape":"UpdateQueueRecordsVisibilityResultEntry"}
     },
     "UpdateShardCountInput":{
       "type":"structure",
@@ -2967,6 +3911,11 @@
         "message":{"shape":"ErrorMessage"}
       },
       "exception":true
+    },
+    "VisibilityTimeoutSeconds":{
+      "type":"integer",
+      "max":43200,
+      "min":0
     },
     "WarmThroughputObject":{
       "type":"structure",

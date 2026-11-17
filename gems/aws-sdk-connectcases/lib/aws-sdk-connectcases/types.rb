@@ -727,15 +727,35 @@ module Aws::ConnectCases
     end
 
     # Details of what case data is published through the case event stream.
+    # Use `fields` to include a specific list of fields, and use
+    # `autoIncludeFields` to automatically include a category of fields.
+    # When both are set, the effective field set is the union of the two.
     #
     # @!attribute [rw] fields
-    #   List of field identifiers.
+    #   List of field identifiers to include in case event data.
     #   @return [Array<Types::FieldIdentifier>]
+    #
+    # @!attribute [rw] auto_include_fields
+    #   Automatically include a category of fields in case event data,
+    #   combined as a union with any fields specified in `fields`. Valid
+    #   values are `All` (include all fields on the case), `System` (include
+    #   all system fields), and `Custom` (include all custom fields). When
+    #   this attribute is set, new fields added to the domain are picked up
+    #   automatically without another call to PutCaseEventConfiguration. For
+    #   the full behavior matrix and IAM requirements, see [Case event
+    #   streams in Connect Customer Cases][1] in the *Connect Customer
+    #   Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/case-event-streams.html
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/CaseEventIncludedData AWS API Documentation
     #
     class CaseEventIncludedData < Struct.new(
-      :fields)
+      :fields,
+      :auto_include_fields)
       SENSITIVE = []
       include Aws::Structure
     end

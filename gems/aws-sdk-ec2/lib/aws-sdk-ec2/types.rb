@@ -638,7 +638,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] global_accelerator
-    #   The exclusion configuration for AWS Global Accelerator.
+    #   The exclusion configuration for Amazon Web Services Global
+    #   Accelerator.
     #   @return [String]
     #
     # @!attribute [rw] api_gateway_v2
@@ -694,6 +695,26 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes an additional key exchange round negotiated for an active
+    # VPN tunnel.
+    #
+    # @!attribute [rw] additional_key_exchange_round
+    #   The additional key exchange round number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] key_exchange_method
+    #   The key exchange method number negotiated for this round.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ActiveVpnTunnelAdditionalKeyExchange AWS API Documentation
+    #
+    class ActiveVpnTunnelAdditionalKeyExchange < Struct.new(
+      :additional_key_exchange_round,
+      :key_exchange_method)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the current security configuration of an
     # active VPN tunnel.
     #
@@ -735,6 +756,14 @@ module Aws::EC2
     #   The reason for the current provisioning status.
     #   @return [String]
     #
+    # @!attribute [rw] phase_1_additional_key_exchanges
+    #   The additional key exchanges negotiated in Phase 1 IKE negotiations.
+    #   @return [Array<Types::ActiveVpnTunnelAdditionalKeyExchange>]
+    #
+    # @!attribute [rw] phase_2_additional_key_exchanges
+    #   The additional key exchanges negotiated in Phase 2 IKE negotiations.
+    #   @return [Array<Types::ActiveVpnTunnelAdditionalKeyExchange>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ActiveVpnTunnelStatus AWS API Documentation
     #
     class ActiveVpnTunnelStatus < Struct.new(
@@ -746,7 +775,9 @@ module Aws::EC2
       :phase_2_dh_group,
       :ike_version,
       :provisioning_status,
-      :provisioning_status_reason)
+      :provisioning_status_reason,
+      :phase_1_additional_key_exchanges,
+      :phase_2_additional_key_exchanges)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -933,6 +964,36 @@ module Aws::EC2
       :rule_group_rule_options_pairs,
       :service_name,
       :load_balancers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The key exchange method number that is permitted for an additional key
+    # exchange round.
+    #
+    # @!attribute [rw] value
+    #   The key exchange method number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AdditionalKeyExchangeMethodsListValue AWS API Documentation
+    #
+    class AdditionalKeyExchangeMethodsListValue < Struct.new(
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a key exchange method number that is permitted for an
+    # additional key exchange round.
+    #
+    # @!attribute [rw] value
+    #   The key exchange method number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AdditionalKeyExchangeMethodsRequestListValue AWS API Documentation
+    #
+    class AdditionalKeyExchangeMethodsRequestListValue < Struct.new(
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6287,6 +6348,22 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Instance type preference for a Capacity Block search. Specifies one or
+    # more instance types to evaluate when searching for available Capacity
+    # Blocks.
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type to consider in the Capacity Block search.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityBlockInstanceTypePreference AWS API Documentation
+    #
+    class CapacityBlockInstanceTypePreference < Struct.new(
+      :instance_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The recommended Capacity Block that fits your search requirements.
     #
     # @!attribute [rw] capacity_block_offering_id
@@ -6351,6 +6428,12 @@ module Aws::EC2
     #   The type of zone where the Capacity Block offering is available.
     #   @return [String]
     #
+    # @!attribute [rw] capacity_block_offering_segments
+    #   The individual segments that compose the Capacity Block offering.
+    #   Each segment describes a distinct block of capacity with its own
+    #   Availability Zone, instance type, schedule, and pricing.
+    #   @return [Array<Types::CapacityBlockOfferingSegment>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityBlockOffering AWS API Documentation
     #
     class CapacityBlockOffering < Struct.new(
@@ -6367,6 +6450,78 @@ module Aws::EC2
       :ultraserver_type,
       :ultraserver_count,
       :capacity_block_duration_minutes,
+      :zone_type,
+      :capacity_block_offering_segments)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an individual segment within a Capacity Block offering. Each
+    # segment represents a distinct block of capacity with its own
+    # Availability Zone, instance type, duration, pricing, and schedule.
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type of the Capacity Block offering segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone of the Capacity Block offering segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone for the Capacity Block offering
+    #   segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of instances in the Capacity Block offering segment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_date
+    #   The start date of the Capacity Block offering segment.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The end date of the Capacity Block offering segment.
+    #   @return [Time]
+    #
+    # @!attribute [rw] capacity_block_duration_hours
+    #   The number of hours for the duration of the Capacity Block offering
+    #   segment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] capacity_block_duration_minutes
+    #   The number of minutes for the duration of the Capacity Block
+    #   offering segment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] upfront_fee
+    #   The total price to be paid up front for the Capacity Block offering
+    #   segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency of the payment for the Capacity Block offering segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] zone_type
+    #   The type of zone where the Capacity Block offering segment is
+    #   available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityBlockOfferingSegment AWS API Documentation
+    #
+    class CapacityBlockOfferingSegment < Struct.new(
+      :instance_type,
+      :availability_zone,
+      :availability_zone_id,
+      :instance_count,
+      :start_date,
+      :end_date,
+      :capacity_block_duration_hours,
+      :capacity_block_duration_minutes,
+      :upfront_fee,
+      :currency_code,
       :zone_type)
       SENSITIVE = []
       include Aws::Structure
@@ -15250,6 +15405,43 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The VPC peering connection options to apply to the requester VPC when
+    # you create a VPC peering connection.
+    #
+    # @!attribute [rw] allow_multipath_resilience
+    #   Specifies whether you allow multipath resilience for the requester
+    #   VPC. Multipath resilience is supported only for inter-Region VPC
+    #   peering connections between supported Regions. It takes effect only
+    #   when both the requester and the accepter allow it. Accepting the VPC
+    #   peering connection request also allows multipath resilience for the
+    #   accepter VPC. If you don't specify this parameter, the default is
+    #   `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] multipath_resilience_mode
+    #   The multipath resilience mode. You can specify this parameter only
+    #   if `AllowMultipathResilience` is `true`.
+    #
+    #   The following value is valid:
+    #
+    #   * `always-on` – Replicates traffic across multiple network paths
+    #     while multipath resilience is in effect.
+    #
+    #   ^
+    #
+    #   If `AllowMultipathResilience` is `true` and you don't specify a
+    #   mode, the default is `always-on`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreatePeeringConnectionOptionsRequest AWS API Documentation
+    #
+    class CreatePeeringConnectionOptionsRequest < Struct.new(
+      :allow_multipath_resilience,
+      :multipath_resilience_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] partition_count
     #   The number of partitions. Valid only when **Strategy** is set to
     #   `partition`.
@@ -17450,10 +17642,36 @@ module Aws::EC2
     #   Indicates whether dynamic routing is enabled or disabled.
     #   @return [String]
     #
+    # @!attribute [rw] allow_multipath_resilience
+    #   Specifies whether you allow multipath resilience for the requester
+    #   side of the transit gateway peering attachment. Multipath resilience
+    #   is supported only for inter-Region transit gateway peering
+    #   attachments between supported Regions. It takes effect only when
+    #   both the requester and the accepter allow it. If you don't specify
+    #   this parameter, the default is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] multipath_resilience_mode
+    #   The multipath resilience mode. You can specify this parameter only
+    #   if `AllowMultipathResilience` is `true`.
+    #
+    #   The following value is valid:
+    #
+    #   * `always-on` – Replicates traffic across multiple network paths
+    #     while multipath resilience is in effect.
+    #
+    #   ^
+    #
+    #   If `AllowMultipathResilience` is `true` and you don't specify a
+    #   mode, the default is `always-on`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayPeeringAttachmentRequestOptions AWS API Documentation
     #
     class CreateTransitGatewayPeeringAttachmentRequestOptions < Struct.new(
-      :dynamic_routing)
+      :dynamic_routing,
+      :allow_multipath_resilience,
+      :multipath_resilience_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19226,6 +19444,10 @@ module Aws::EC2
     #   The tags to assign to the peering connection.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] requester_peering_connection_options
+    #   The VPC peering connection options to apply to the requester VPC.
+    #   @return [Types::CreatePeeringConnectionOptionsRequest]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -19254,6 +19476,7 @@ module Aws::EC2
     class CreateVpcPeeringConnectionRequest < Struct.new(
       :peer_region,
       :tag_specifications,
+      :requester_peering_connection_options,
       :dry_run,
       :vpc_id,
       :peer_vpc_id,
@@ -24902,6 +25125,12 @@ module Aws::EC2
     #   Services Region and Local Zones you are opted into.
     #   @return [Boolean]
     #
+    # @!attribute [rw] instance_type_preferences
+    #   List of instance type preferences for the Capacity Block offering
+    #   search. Accepts one or more instance type names. Either this or the
+    #   legacy `InstanceType` parameter is required.
+    #   @return [Array<Types::CapacityBlockInstanceTypePreference>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityBlockOfferingsRequest AWS API Documentation
     #
     class DescribeCapacityBlockOfferingsRequest < Struct.new(
@@ -24915,7 +25144,8 @@ module Aws::EC2
       :max_results,
       :ultraserver_type,
       :ultraserver_count,
-      :all_availability_zones)
+      :all_availability_zones,
+      :instance_type_preferences)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -66699,8 +66929,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] global_accelerator
-    #   Specifies whether to exclude AWS Global Accelerator from
-    #   account-level encryption enforcement.
+    #   Specifies whether to exclude Amazon Web Services Global Accelerator
+    #   from account-level encryption enforcement.
     #   @return [String]
     #
     # @!attribute [rw] api_gateway_v2
@@ -71041,6 +71271,79 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the transit gateway peering attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   The options to modify for the transit gateway peering attachment.
+    #   @return [Types::ModifyTransitGatewayPeeringAttachmentRequestOptions]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayPeeringAttachmentRequest AWS API Documentation
+    #
+    class ModifyTransitGatewayPeeringAttachmentRequest < Struct.new(
+      :transit_gateway_attachment_id,
+      :options,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the options to modify for a transit gateway peering
+    # attachment, including multipath resilience settings.
+    #
+    # @!attribute [rw] allow_multipath_resilience
+    #   Specifies whether you allow multipath resilience for your side of
+    #   the transit gateway peering attachment. Multipath resilience is
+    #   supported only for inter-Region transit gateway peering attachments
+    #   between supported Regions. It takes effect only when both the
+    #   requester and the accepter allow it. If you don't specify this
+    #   parameter, the current setting doesn't change.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] multipath_resilience_mode
+    #   The multipath resilience mode. You can specify this parameter only
+    #   if `AllowMultipathResilience` is `true`.
+    #
+    #   The following value is valid:
+    #
+    #   * `always-on` – Replicates traffic across multiple network paths
+    #     while multipath resilience is in effect.
+    #
+    #   ^
+    #
+    #   If `AllowMultipathResilience` is `true` and you don't specify a
+    #   mode, the default is `always-on`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayPeeringAttachmentRequestOptions AWS API Documentation
+    #
+    class ModifyTransitGatewayPeeringAttachmentRequestOptions < Struct.new(
+      :allow_multipath_resilience,
+      :multipath_resilience_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_peering_attachment
+    #   Information about the transit gateway peering attachment.
+    #   @return [Types::TransitGatewayPeeringAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayPeeringAttachmentResult AWS API Documentation
+    #
+    class ModifyTransitGatewayPeeringAttachmentResult < Struct.new(
+      :transit_gateway_peering_attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] transit_gateway_policy_table_id
     #   The ID of the transit gateway policy table.
     #   @return [String]
@@ -72286,8 +72589,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] global_accelerator_exclusion
-    #   Specifies whether to exclude AWS Global Accelerator traffic from
-    #   encryption enforcement.
+    #   Specifies whether to exclude Amazon Web Services Global Accelerator
+    #   traffic from encryption enforcement.
     #   @return [String]
     #
     # @!attribute [rw] api_gateway_v2_exclusion
@@ -73178,7 +73481,7 @@ module Aws::EC2
     #   VPN tunnel for phase 1 IKE negotiations.
     #
     #   Valid values: `2` \| `14` \| `15` \| `16` \| `17` \| `18` \| `19` \|
-    #   `20` \| `21` \| `22` \| `23` \| `24`
+    #   `20` \| `21` \| `22` \| `23` \| `24` \| `35`
     #   @return [Array<Types::Phase1DHGroupNumbersRequestListValue>]
     #
     # @!attribute [rw] phase_2_dh_group_numbers
@@ -73186,7 +73489,7 @@ module Aws::EC2
     #   VPN tunnel for phase 2 IKE negotiations.
     #
     #   Valid values: `2` \| `5` \| `14` \| `15` \| `16` \| `17` \| `18` \|
-    #   `19` \| `20` \| `21` \| `22` \| `23` \| `24`
+    #   `19` \| `20` \| `21` \| `22` \| `23` \| `24` \| `35` \| `36` \| `37`
     #   @return [Array<Types::Phase2DHGroupNumbersRequestListValue>]
     #
     # @!attribute [rw] ike_versions
@@ -73214,6 +73517,26 @@ module Aws::EC2
     #   Turn on or off tunnel endpoint lifecycle control feature.
     #   @return [Boolean]
     #
+    # @!attribute [rw] phase_1_additional_key_exchanges
+    #   One or more additional key exchange rounds that are permitted for
+    #   the VPN tunnel for phase 1 IKE negotiations. Additional key
+    #   exchanges occur after the initial Diffie-Hellman exchange. Each
+    #   round must have a unique round number.
+    #
+    #   Additional key exchanges are supported only with IKEv2. You can't
+    #   specify a `required` round if `IKEVersions` contains only `ikev1`.
+    #   @return [Array<Types::VpnAdditionalKeyExchangeRequest>]
+    #
+    # @!attribute [rw] phase_2_additional_key_exchanges
+    #   One or more additional key exchange rounds that are permitted for
+    #   the VPN tunnel for phase 2 IKE negotiations. Additional key
+    #   exchanges occur after the initial Diffie-Hellman exchange. Each
+    #   round must have a unique round number.
+    #
+    #   Additional key exchanges are supported only with IKEv2. You can't
+    #   specify a `required` round if `IKEVersions` contains only `ikev1`.
+    #   @return [Array<Types::VpnAdditionalKeyExchangeRequest>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpnTunnelOptionsSpecification AWS API Documentation
     #
     class ModifyVpnTunnelOptionsSpecification < Struct.new(
@@ -73236,7 +73559,9 @@ module Aws::EC2
       :ike_versions,
       :startup_action,
       :log_options,
-      :enable_tunnel_lifecycle_control)
+      :enable_tunnel_lifecycle_control,
+      :phase_1_additional_key_exchanges,
+      :phase_2_additional_key_exchanges)
       SENSITIVE = [:pre_shared_key]
       include Aws::Structure
     end
@@ -75854,12 +76179,25 @@ module Aws::EC2
     #   Deprecated.
     #   @return [Boolean]
     #
+    # @!attribute [rw] allow_multipath_resilience
+    #   Indicates whether this side of the VPC peering connection allows
+    #   multipath resilience.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] multipath_resilience_mode
+    #   The multipath resilience mode for this side of the VPC peering
+    #   connection. This value is present only when this side allows
+    #   multipath resilience.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PeeringConnectionOptions AWS API Documentation
     #
     class PeeringConnectionOptions < Struct.new(
       :allow_dns_resolution_from_remote_vpc,
       :allow_egress_from_local_classic_link_to_remote_vpc,
-      :allow_egress_from_local_vpc_to_remote_classic_link)
+      :allow_egress_from_local_vpc_to_remote_classic_link,
+      :allow_multipath_resilience,
+      :multipath_resilience_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -75879,12 +76217,38 @@ module Aws::EC2
     #   Deprecated.
     #   @return [Boolean]
     #
+    # @!attribute [rw] allow_multipath_resilience
+    #   Specifies whether you allow multipath resilience for this side of
+    #   the VPC peering connection. Multipath resilience is supported only
+    #   for inter-Region VPC peering connections between supported Regions.
+    #   It takes effect only when both the requester and the accepter allow
+    #   it. If you don't specify this parameter, the current setting
+    #   doesn't change.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] multipath_resilience_mode
+    #   The multipath resilience mode. You can specify this parameter only
+    #   if `AllowMultipathResilience` is `true`.
+    #
+    #   The following value is valid:
+    #
+    #   * `always-on` – Replicates traffic across multiple network paths
+    #     while multipath resilience is in effect.
+    #
+    #   ^
+    #
+    #   If `AllowMultipathResilience` is `true` and you don't specify a
+    #   mode, the default is `always-on`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PeeringConnectionOptionsRequest AWS API Documentation
     #
     class PeeringConnectionOptionsRequest < Struct.new(
       :allow_dns_resolution_from_remote_vpc,
       :allow_egress_from_local_classic_link_to_remote_vpc,
-      :allow_egress_from_local_vpc_to_remote_classic_link)
+      :allow_egress_from_local_vpc_to_remote_classic_link,
+      :allow_multipath_resilience,
+      :multipath_resilience_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -77522,11 +77886,18 @@ module Aws::EC2
     #   The Capacity Block.
     #   @return [Array<Types::CapacityBlock>]
     #
+    # @!attribute [rw] capacity_reservations
+    #   The Capacity Reservations created as a result of the Capacity Block
+    #   purchase. When a Capacity Block offering contains multiple segments,
+    #   a separate Capacity Reservation is created for each segment.
+    #   @return [Array<Types::CapacityReservation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseCapacityBlockResult AWS API Documentation
     #
     class PurchaseCapacityBlockResult < Struct.new(
       :capacity_reservation,
-      :capacity_blocks)
+      :capacity_blocks,
+      :capacity_reservations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -90935,10 +91306,49 @@ module Aws::EC2
     #   transit gateway peering attachment.
     #   @return [String]
     #
+    # @!attribute [rw] requester_allow_multipath_resilience
+    #   Indicates whether the requester allows multipath resilience for the
+    #   transit gateway peering attachment.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] requester_multipath_resilience_mode
+    #   The multipath resilience mode for the requester. This value is
+    #   present only when the requester allows multipath resilience.
+    #   @return [String]
+    #
+    # @!attribute [rw] accepter_allow_multipath_resilience
+    #   Indicates whether the accepter allows multipath resilience for the
+    #   transit gateway peering attachment.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] accepter_multipath_resilience_mode
+    #   The multipath resilience mode for the accepter. This value is
+    #   present only when the accepter allows multipath resilience.
+    #   @return [String]
+    #
+    # @!attribute [rw] multipath_resilience_status
+    #   The multipath resilience status of the transit gateway peering
+    #   attachment. The possible values are:
+    #
+    #   * `enabled` – Both the requester and the accepter allow multipath
+    #     resilience.
+    #
+    #   * `pending` – Either the requester or the accepter allows multipath
+    #     resilience, but not both.
+    #
+    #   * `disabled` – Neither the requester nor the accepter allows
+    #     multipath resilience.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayPeeringAttachmentOptions AWS API Documentation
     #
     class TransitGatewayPeeringAttachmentOptions < Struct.new(
-      :dynamic_routing)
+      :dynamic_routing,
+      :requester_allow_multipath_resilience,
+      :requester_multipath_resilience_mode,
+      :accepter_allow_multipath_resilience,
+      :accepter_multipath_resilience_mode,
+      :multipath_resilience_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -91869,6 +92279,16 @@ module Aws::EC2
     #   Status of tunnel endpoint lifecycle control feature.
     #   @return [Boolean]
     #
+    # @!attribute [rw] phase_1_additional_key_exchanges
+    #   The permitted additional key exchange rounds for the VPN tunnel for
+    #   phase 1 IKE negotiations.
+    #   @return [Array<Types::VpnAdditionalKeyExchange>]
+    #
+    # @!attribute [rw] phase_2_additional_key_exchanges
+    #   The permitted additional key exchange rounds for the VPN tunnel for
+    #   phase 2 IKE negotiations.
+    #   @return [Array<Types::VpnAdditionalKeyExchange>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TunnelOption AWS API Documentation
     #
     class TunnelOption < Struct.new(
@@ -91892,7 +92312,9 @@ module Aws::EC2
       :ike_versions,
       :startup_action,
       :log_options,
-      :enable_tunnel_lifecycle_control)
+      :enable_tunnel_lifecycle_control,
+      :phase_1_additional_key_exchanges,
+      :phase_2_additional_key_exchanges)
       SENSITIVE = [:pre_shared_key]
       include Aws::Structure
     end
@@ -94849,8 +95271,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] global_accelerator_exclusion
-    #   Specifies whether to exclude AWS Global Accelerator traffic from
-    #   encryption enforcement.
+    #   Specifies whether to exclude Amazon Web Services Global Accelerator
+    #   traffic from encryption enforcement.
     #   @return [String]
     #
     # @!attribute [rw] api_gateway_v2_exclusion
@@ -94947,7 +95369,8 @@ module Aws::EC2
     #   @return [Types::VpcEncryptionControlExclusion]
     #
     # @!attribute [rw] global_accelerator
-    #   The exclusion configuration for AWS Global Accelerator traffic.
+    #   The exclusion configuration for Amazon Web Services Global
+    #   Accelerator traffic.
     #   @return [Types::VpcEncryptionControlExclusion]
     #
     # @!attribute [rw] api_gateway_v2
@@ -95406,6 +95829,20 @@ module Aws::EC2
     #   The ID of the VPC peering connection.
     #   @return [String]
     #
+    # @!attribute [rw] multipath_resilience_status
+    #   The multipath resilience status of the VPC peering connection. The
+    #   possible values are:
+    #
+    #   * `enabled` – Both the requester and the accepter allow multipath
+    #     resilience.
+    #
+    #   * `pending` – Either the requester or the accepter allows multipath
+    #     resilience, but not both.
+    #
+    #   * `disabled` – Neither the requester nor the accepter allows
+    #     multipath resilience.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcPeeringConnection AWS API Documentation
     #
     class VpcPeeringConnection < Struct.new(
@@ -95414,7 +95851,8 @@ module Aws::EC2
       :requester_vpc_info,
       :status,
       :tags,
-      :vpc_peering_connection_id)
+      :vpc_peering_connection_id,
+      :multipath_resilience_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -95434,12 +95872,25 @@ module Aws::EC2
     #   Deprecated.
     #   @return [Boolean]
     #
+    # @!attribute [rw] allow_multipath_resilience
+    #   Indicates whether this side of the VPC peering connection allows
+    #   multipath resilience.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] multipath_resilience_mode
+    #   The multipath resilience mode for this side of the VPC peering
+    #   connection. This value is present only when this side allows
+    #   multipath resilience.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcPeeringConnectionOptionsDescription AWS API Documentation
     #
     class VpcPeeringConnectionOptionsDescription < Struct.new(
       :allow_dns_resolution_from_remote_vpc,
       :allow_egress_from_local_classic_link_to_remote_vpc,
-      :allow_egress_from_local_vpc_to_remote_classic_link)
+      :allow_egress_from_local_vpc_to_remote_classic_link,
+      :allow_multipath_resilience,
+      :multipath_resilience_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -95505,6 +95956,79 @@ module Aws::EC2
       :peering_options,
       :vpc_id,
       :region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an additional key exchange round that is permitted for the
+    # VPN tunnel.
+    #
+    # @!attribute [rw] additional_key_exchange_round
+    #   The additional key exchange round number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] key_exchange_methods
+    #   The key exchange method numbers permitted for this round.
+    #   @return [Array<Types::AdditionalKeyExchangeMethodsListValue>]
+    #
+    # @!attribute [rw] requirement
+    #   Indicates whether this round is mandatory.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnAdditionalKeyExchange AWS API Documentation
+    #
+    class VpnAdditionalKeyExchange < Struct.new(
+      :additional_key_exchange_round,
+      :key_exchange_methods,
+      :requirement)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies an additional key exchange round for the VPN tunnel, as
+    # defined in RFC 9370.
+    #
+    # @!attribute [rw] additional_key_exchange_round
+    #   The additional key exchange round number.
+    #
+    #   Valid range: Minimum value of 1. Maximum value of 7.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] key_exchange_methods
+    #   The key exchange method numbers that are permitted for this round.
+    #   The method numbers are the IANA IKEv2 key exchange method transform
+    #   IDs.
+    #
+    #   A `required` round must specify at least one method. An `optional`
+    #   round can omit this parameter or specify an empty list. If omitted
+    #   or empty for an optional round, the round is disabled.
+    #
+    #   IKEv2 requires that the initial Diffie-Hellman exchange and each
+    #   required round use a different key exchange method. The permitted
+    #   methods must allow a distinct method to be selected for each of
+    #   them.
+    #
+    #   Valid values: `2` \| `5` \| `14` \| `15` \| `16` \| `17` \| `18` \|
+    #   `19` \| `20` \| `21` \| `22` \| `23` \| `24` \| `35` \| `36` \| `37`
+    #   @return [Array<Types::AdditionalKeyExchangeMethodsRequestListValue>]
+    #
+    # @!attribute [rw] requirement
+    #   Indicates whether this round is mandatory. If `required`, the tunnel
+    #   isn't established unless the customer gateway device negotiates
+    #   this round. If `optional`, the round is negotiated only if the
+    #   customer gateway device supports it.
+    #
+    #   Valid values: `required` \| `optional`
+    #
+    #   Default: `required`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnAdditionalKeyExchangeRequest AWS API Documentation
+    #
+    class VpnAdditionalKeyExchangeRequest < Struct.new(
+      :additional_key_exchange_round,
+      :key_exchange_methods,
+      :requirement)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -96097,7 +96621,7 @@ module Aws::EC2
     #   VPN tunnel for phase 1 IKE negotiations.
     #
     #   Valid values: `2` \| `14` \| `15` \| `16` \| `17` \| `18` \| `19` \|
-    #   `20` \| `21` \| `22` \| `23` \| `24`
+    #   `20` \| `21` \| `22` \| `23` \| `24` \| `35`
     #   @return [Array<Types::Phase1DHGroupNumbersRequestListValue>]
     #
     # @!attribute [rw] phase_2_dh_group_numbers
@@ -96105,7 +96629,7 @@ module Aws::EC2
     #   VPN tunnel for phase 2 IKE negotiations.
     #
     #   Valid values: `2` \| `5` \| `14` \| `15` \| `16` \| `17` \| `18` \|
-    #   `19` \| `20` \| `21` \| `22` \| `23` \| `24`
+    #   `19` \| `20` \| `21` \| `22` \| `23` \| `24` \| `35` \| `36` \| `37`
     #   @return [Array<Types::Phase2DHGroupNumbersRequestListValue>]
     #
     # @!attribute [rw] ike_versions
@@ -96133,6 +96657,26 @@ module Aws::EC2
     #   Turn on or off tunnel endpoint lifecycle control feature.
     #   @return [Boolean]
     #
+    # @!attribute [rw] phase_1_additional_key_exchanges
+    #   One or more additional key exchange rounds that are permitted for
+    #   the VPN tunnel for phase 1 IKE negotiations. Additional key
+    #   exchanges occur after the initial Diffie-Hellman exchange. Each
+    #   round must have a unique round number.
+    #
+    #   Additional key exchanges are supported only with IKEv2. You can't
+    #   specify a `required` round if `IKEVersions` contains only `ikev1`.
+    #   @return [Array<Types::VpnAdditionalKeyExchangeRequest>]
+    #
+    # @!attribute [rw] phase_2_additional_key_exchanges
+    #   One or more additional key exchange rounds that are permitted for
+    #   the VPN tunnel for phase 2 IKE negotiations. Additional key
+    #   exchanges occur after the initial Diffie-Hellman exchange. Each
+    #   round must have a unique round number.
+    #
+    #   Additional key exchanges are supported only with IKEv2. You can't
+    #   specify a `required` round if `IKEVersions` contains only `ikev1`.
+    #   @return [Array<Types::VpnAdditionalKeyExchangeRequest>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnTunnelOptionsSpecification AWS API Documentation
     #
     class VpnTunnelOptionsSpecification < Struct.new(
@@ -96155,7 +96699,9 @@ module Aws::EC2
       :ike_versions,
       :startup_action,
       :log_options,
-      :enable_tunnel_lifecycle_control)
+      :enable_tunnel_lifecycle_control,
+      :phase_1_additional_key_exchanges,
+      :phase_2_additional_key_exchanges)
       SENSITIVE = [:pre_shared_key]
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2026-11-17)
+------------------
+
+* Feature - This release extends vulnerability management to Google Cloud Platform (GCP) Compute Engine virtual machine (VM) instances, container images in Google Artifact Registry (GAR), and Cloud Run functions.
+
 1.96.0 (2026-11-16)
 ------------------
 

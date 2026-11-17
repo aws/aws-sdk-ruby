@@ -20,6 +20,7 @@ module Aws::S3
 
     class AbortMultipartUploadOutput
       attr_accessor request_charged: ("requester")
+      attr_accessor version_id: ::String
       SENSITIVE: []
     end
 
@@ -469,6 +470,7 @@ module Aws::S3
       attr_accessor request_charged: ("requester")
       attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME" | "SHA512" | "MD5" | "XXHASH64" | "XXHASH3" | "XXHASH128")
       attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
+      attr_accessor version_id: ::String
       SENSITIVE: [:ssekms_key_id, :ssekms_encryption_context]
     end
 
@@ -1904,6 +1906,7 @@ module Aws::S3
       attr_accessor request_charged: ("requester")
       attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME" | "SHA512" | "MD5" | "XXHASH64" | "XXHASH3" | "XXHASH128")
       attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
+      attr_accessor version_id: ::String
       SENSITIVE: []
     end
 
@@ -2008,6 +2011,7 @@ module Aws::S3
       attr_accessor initiator: Types::Initiator
       attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME" | "SHA512" | "MD5" | "XXHASH64" | "XXHASH3" | "XXHASH128")
       attr_accessor checksum_type: ("COMPOSITE" | "FULL_OBJECT")
+      attr_accessor version_id: ::String
       SENSITIVE: []
     end
 
@@ -3077,6 +3081,7 @@ module Aws::S3
       attr_accessor ssekms_key_id: ::String
       attr_accessor bucket_key_enabled: bool
       attr_accessor request_charged: ("requester")
+      attr_accessor version_id: ::String
       SENSITIVE: [:ssekms_key_id]
     end
 
@@ -3121,6 +3126,7 @@ module Aws::S3
       attr_accessor ssekms_key_id: ::String
       attr_accessor bucket_key_enabled: bool
       attr_accessor request_charged: ("requester")
+      attr_accessor version_id: ::String
       SENSITIVE: [:ssekms_key_id]
     end
 

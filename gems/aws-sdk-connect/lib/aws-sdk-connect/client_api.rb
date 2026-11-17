@@ -833,15 +833,24 @@ module Aws::Connect
     EvaluationAutomationRuleCategoryList = Shapes::ListShape.new(name: 'EvaluationAutomationRuleCategoryList')
     EvaluationContactLensAnswerAnalysisDetails = Shapes::StructureShape.new(name: 'EvaluationContactLensAnswerAnalysisDetails')
     EvaluationContactParticipant = Shapes::StructureShape.new(name: 'EvaluationContactParticipant')
+    EvaluationEnablementStatus = Shapes::StringShape.new(name: 'EvaluationEnablementStatus')
+    EvaluationEnablementStatusMap = Shapes::MapShape.new(name: 'EvaluationEnablementStatusMap')
     EvaluationForm = Shapes::StructureShape.new(name: 'EvaluationForm')
     EvaluationFormAIVersion = Shapes::StringShape.new(name: 'EvaluationFormAIVersion')
     EvaluationFormAIVersionLifecycle = Shapes::StructureShape.new(name: 'EvaluationFormAIVersionLifecycle')
     EvaluationFormAIVersionStatus = Shapes::StringShape.new(name: 'EvaluationFormAIVersionStatus')
     EvaluationFormAIVersionSummary = Shapes::StructureShape.new(name: 'EvaluationFormAIVersionSummary')
     EvaluationFormAIVersionSummaryList = Shapes::ListShape.new(name: 'EvaluationFormAIVersionSummaryList')
+    EvaluationFormAiMetricsField = Shapes::StringShape.new(name: 'EvaluationFormAiMetricsField')
     EvaluationFormAutoEvaluationConfiguration = Shapes::StructureShape.new(name: 'EvaluationFormAutoEvaluationConfiguration')
+    EvaluationFormContactAttributeKey = Shapes::StringShape.new(name: 'EvaluationFormContactAttributeKey')
+    EvaluationFormContactField = Shapes::StringShape.new(name: 'EvaluationFormContactField')
     EvaluationFormContent = Shapes::StructureShape.new(name: 'EvaluationFormContent')
     EvaluationFormDescription = Shapes::StringShape.new(name: 'EvaluationFormDescription')
+    EvaluationFormEnablementBooleanValue = Shapes::BooleanShape.new(name: 'EvaluationFormEnablementBooleanValue')
+    EvaluationFormEnablementNumericValue = Shapes::FloatShape.new(name: 'EvaluationFormEnablementNumericValue')
+    EvaluationFormEnablementStringValue = Shapes::StringShape.new(name: 'EvaluationFormEnablementStringValue')
+    EvaluationFormEvaluationMetadataField = Shapes::StringShape.new(name: 'EvaluationFormEvaluationMetadataField')
     EvaluationFormId = Shapes::StringShape.new(name: 'EvaluationFormId')
     EvaluationFormItem = Shapes::UnionShape.new(name: 'EvaluationFormItem')
     EvaluationFormItemEnablementAction = Shapes::StringShape.new(name: 'EvaluationFormItemEnablementAction')
@@ -897,6 +906,7 @@ module Aws::Connect
     EvaluationFormSearchSummaryList = Shapes::ListShape.new(name: 'EvaluationFormSearchSummaryList')
     EvaluationFormSection = Shapes::StructureShape.new(name: 'EvaluationFormSection')
     EvaluationFormSectionTitle = Shapes::StringShape.new(name: 'EvaluationFormSectionTitle')
+    EvaluationFormSegmentAttributeKey = Shapes::StringShape.new(name: 'EvaluationFormSegmentAttributeKey')
     EvaluationFormSingleSelectQuestionAutomation = Shapes::StructureShape.new(name: 'EvaluationFormSingleSelectQuestionAutomation')
     EvaluationFormSingleSelectQuestionAutomationOption = Shapes::UnionShape.new(name: 'EvaluationFormSingleSelectQuestionAutomationOption')
     EvaluationFormSingleSelectQuestionAutomationOptionList = Shapes::ListShape.new(name: 'EvaluationFormSingleSelectQuestionAutomationOptionList')
@@ -928,6 +938,7 @@ module Aws::Connect
     EvaluationFormVersionSummaryList = Shapes::ListShape.new(name: 'EvaluationFormVersionSummaryList')
     EvaluationGenAIAnswerAnalysisDetails = Shapes::StructureShape.new(name: 'EvaluationGenAIAnswerAnalysisDetails')
     EvaluationId = Shapes::StringShape.new(name: 'EvaluationId')
+    EvaluationItemResolutionStatus = Shapes::StringShape.new(name: 'EvaluationItemResolutionStatus')
     EvaluationMetadata = Shapes::StructureShape.new(name: 'EvaluationMetadata')
     EvaluationNote = Shapes::StructureShape.new(name: 'EvaluationNote')
     EvaluationNoteString = Shapes::StringShape.new(name: 'EvaluationNoteString')
@@ -935,6 +946,9 @@ module Aws::Connect
     EvaluationQuestionAnswerAnalysisDetails = Shapes::UnionShape.new(name: 'EvaluationQuestionAnswerAnalysisDetails')
     EvaluationQuestionAnswerAnalysisType = Shapes::StringShape.new(name: 'EvaluationQuestionAnswerAnalysisType')
     EvaluationQuestionInputDetails = Shapes::StructureShape.new(name: 'EvaluationQuestionInputDetails')
+    EvaluationResolvedSource = Shapes::StructureShape.new(name: 'EvaluationResolvedSource')
+    EvaluationResolvedSourceList = Shapes::ListShape.new(name: 'EvaluationResolvedSourceList')
+    EvaluationResolvedSourceValueList = Shapes::ListShape.new(name: 'EvaluationResolvedSourceValueList')
     EvaluationReviewConfiguration = Shapes::StructureShape.new(name: 'EvaluationReviewConfiguration')
     EvaluationReviewMetadata = Shapes::StructureShape.new(name: 'EvaluationReviewMetadata')
     EvaluationReviewNotificationRecipient = Shapes::StructureShape.new(name: 'EvaluationReviewNotificationRecipient')
@@ -1985,6 +1999,7 @@ module Aws::Connect
     SignInDistribution = Shapes::StructureShape.new(name: 'SignInDistribution')
     SignInDistributionList = Shapes::ListShape.new(name: 'SignInDistributionList')
     SingleSelectOptions = Shapes::ListShape.new(name: 'SingleSelectOptions')
+    SingleSelectQuestionAutomationRule = Shapes::StructureShape.new(name: 'SingleSelectQuestionAutomationRule')
     SingleSelectQuestionRuleCategoryAutomation = Shapes::StructureShape.new(name: 'SingleSelectQuestionRuleCategoryAutomation')
     SingleSelectQuestionRuleCategoryAutomationCondition = Shapes::StringShape.new(name: 'SingleSelectQuestionRuleCategoryAutomationCondition')
     SingleSelectQuestionRuleCategoryAutomationLabel = Shapes::StringShape.new(name: 'SingleSelectQuestionRuleCategoryAutomationLabel')
@@ -5224,6 +5239,9 @@ module Aws::Connect
     Evaluation.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedTime"))
     Evaluation.add_member(:evaluation_type, Shapes::ShapeRef.new(shape: EvaluationType, location_name: "EvaluationType"))
     Evaluation.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    Evaluation.add_member(:item_enablement_status, Shapes::ShapeRef.new(shape: EvaluationEnablementStatusMap, location_name: "ItemEnablementStatus"))
+    Evaluation.add_member(:source_resolution_status, Shapes::ShapeRef.new(shape: EvaluationItemResolutionStatus, location_name: "SourceResolutionStatus"))
+    Evaluation.add_member(:source_values, Shapes::ShapeRef.new(shape: EvaluationResolvedSourceList, location_name: "SourceValues"))
     Evaluation.struct_class = Types::Evaluation
 
     EvaluationAcknowledgement.add_member(:acknowledged_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "AcknowledgedTime"))
@@ -5279,6 +5297,9 @@ module Aws::Connect
     EvaluationContactParticipant.add_member(:contact_participant_role, Shapes::ShapeRef.new(shape: ContactParticipantRole, location_name: "ContactParticipantRole"))
     EvaluationContactParticipant.add_member(:contact_participant_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ContactParticipantId"))
     EvaluationContactParticipant.struct_class = Types::EvaluationContactParticipant
+
+    EvaluationEnablementStatusMap.key = Shapes::ShapeRef.new(shape: ReferenceId)
+    EvaluationEnablementStatusMap.value = Shapes::ShapeRef.new(shape: EvaluationEnablementStatus)
 
     EvaluationForm.add_member(:evaluation_form_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "EvaluationFormId"))
     EvaluationForm.add_member(:evaluation_form_version, Shapes::ShapeRef.new(shape: VersionNumber, required: true, location_name: "EvaluationFormVersion"))
@@ -5365,10 +5386,19 @@ module Aws::Connect
 
     EvaluationFormItemEnablementSource.add_member(:type, Shapes::ShapeRef.new(shape: EvaluationFormItemEnablementSourceType, required: true, location_name: "Type"))
     EvaluationFormItemEnablementSource.add_member(:ref_id, Shapes::ShapeRef.new(shape: ReferenceId, location_name: "RefId"))
+    EvaluationFormItemEnablementSource.add_member(:contact_field, Shapes::ShapeRef.new(shape: EvaluationFormContactField, location_name: "ContactField"))
+    EvaluationFormItemEnablementSource.add_member(:contact_attribute_key, Shapes::ShapeRef.new(shape: EvaluationFormContactAttributeKey, location_name: "ContactAttributeKey"))
+    EvaluationFormItemEnablementSource.add_member(:segment_attribute_key, Shapes::ShapeRef.new(shape: EvaluationFormSegmentAttributeKey, location_name: "SegmentAttributeKey"))
+    EvaluationFormItemEnablementSource.add_member(:evaluation_metadata_field, Shapes::ShapeRef.new(shape: EvaluationFormEvaluationMetadataField, location_name: "EvaluationMetadataField"))
+    EvaluationFormItemEnablementSource.add_member(:ai_metrics_field, Shapes::ShapeRef.new(shape: EvaluationFormAiMetricsField, location_name: "AiMetricsField"))
     EvaluationFormItemEnablementSource.struct_class = Types::EvaluationFormItemEnablementSource
 
     EvaluationFormItemEnablementSourceValue.add_member(:type, Shapes::ShapeRef.new(shape: EvaluationFormItemEnablementSourceValueType, required: true, location_name: "Type"))
     EvaluationFormItemEnablementSourceValue.add_member(:ref_id, Shapes::ShapeRef.new(shape: ReferenceId, location_name: "RefId"))
+    EvaluationFormItemEnablementSourceValue.add_member(:string_value, Shapes::ShapeRef.new(shape: EvaluationFormEnablementStringValue, location_name: "StringValue"))
+    EvaluationFormItemEnablementSourceValue.add_member(:numeric_value, Shapes::ShapeRef.new(shape: EvaluationFormEnablementNumericValue, location_name: "NumericValue", metadata: {"box" => true}))
+    EvaluationFormItemEnablementSourceValue.add_member(:boolean_value, Shapes::ShapeRef.new(shape: EvaluationFormEnablementBooleanValue, location_name: "BooleanValue", metadata: {"box" => true}))
+    EvaluationFormItemEnablementSourceValue.add_member(:date_time_value, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateTimeValue"))
     EvaluationFormItemEnablementSourceValue.struct_class = Types::EvaluationFormItemEnablementSourceValue
 
     EvaluationFormItemEnablementSourceValueList.member = Shapes::ShapeRef.new(shape: EvaluationFormItemEnablementSourceValue)
@@ -5520,6 +5550,7 @@ module Aws::Connect
     EvaluationFormSection.add_member(:weight, Shapes::ShapeRef.new(shape: EvaluationFormItemWeight, location_name: "Weight"))
     EvaluationFormSection.add_member(:is_excluded_from_scoring, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsExcludedFromScoring"))
     EvaluationFormSection.add_member(:score_thresholds, Shapes::ShapeRef.new(shape: EvaluationFormScoreThresholdList, location_name: "ScoreThresholds"))
+    EvaluationFormSection.add_member(:enablement, Shapes::ShapeRef.new(shape: EvaluationFormItemEnablementConfiguration, location_name: "Enablement"))
     EvaluationFormSection.struct_class = Types::EvaluationFormSection
 
     EvaluationFormSingleSelectQuestionAutomation.add_member(:options, Shapes::ShapeRef.new(shape: EvaluationFormSingleSelectQuestionAutomationOptionList, location_name: "Options"))
@@ -5528,8 +5559,10 @@ module Aws::Connect
     EvaluationFormSingleSelectQuestionAutomation.struct_class = Types::EvaluationFormSingleSelectQuestionAutomation
 
     EvaluationFormSingleSelectQuestionAutomationOption.add_member(:rule_category, Shapes::ShapeRef.new(shape: SingleSelectQuestionRuleCategoryAutomation, location_name: "RuleCategory"))
+    EvaluationFormSingleSelectQuestionAutomationOption.add_member(:automation_rule, Shapes::ShapeRef.new(shape: SingleSelectQuestionAutomationRule, location_name: "AutomationRule"))
     EvaluationFormSingleSelectQuestionAutomationOption.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     EvaluationFormSingleSelectQuestionAutomationOption.add_member_subclass(:rule_category, Types::EvaluationFormSingleSelectQuestionAutomationOption::RuleCategory)
+    EvaluationFormSingleSelectQuestionAutomationOption.add_member_subclass(:automation_rule, Types::EvaluationFormSingleSelectQuestionAutomationOption::AutomationRule)
     EvaluationFormSingleSelectQuestionAutomationOption.add_member_subclass(:unknown, Types::EvaluationFormSingleSelectQuestionAutomationOption::Unknown)
     EvaluationFormSingleSelectQuestionAutomationOption.struct_class = Types::EvaluationFormSingleSelectQuestionAutomationOption
 
@@ -5634,6 +5667,15 @@ module Aws::Connect
 
     EvaluationQuestionInputDetails.add_member(:transcript_type, Shapes::ShapeRef.new(shape: EvaluationTranscriptType, location_name: "TranscriptType"))
     EvaluationQuestionInputDetails.struct_class = Types::EvaluationQuestionInputDetails
+
+    EvaluationResolvedSource.add_member(:source, Shapes::ShapeRef.new(shape: EvaluationFormItemEnablementSource, required: true, location_name: "Source"))
+    EvaluationResolvedSource.add_member(:status, Shapes::ShapeRef.new(shape: EvaluationItemResolutionStatus, required: true, location_name: "Status"))
+    EvaluationResolvedSource.add_member(:values, Shapes::ShapeRef.new(shape: EvaluationResolvedSourceValueList, location_name: "Values"))
+    EvaluationResolvedSource.struct_class = Types::EvaluationResolvedSource
+
+    EvaluationResolvedSourceList.member = Shapes::ShapeRef.new(shape: EvaluationResolvedSource)
+
+    EvaluationResolvedSourceValueList.member = Shapes::ShapeRef.new(shape: EvaluationFormItemEnablementSourceValue)
 
     EvaluationReviewConfiguration.add_member(:review_notification_recipients, Shapes::ShapeRef.new(shape: EvaluationReviewNotificationRecipientList, required: true, location_name: "ReviewNotificationRecipients"))
     EvaluationReviewConfiguration.add_member(:eligibility_days, Shapes::ShapeRef.new(shape: Integer, location_name: "EligibilityDays"))
@@ -9015,6 +9057,10 @@ module Aws::Connect
     SignInDistributionList.member = Shapes::ShapeRef.new(shape: SignInDistribution)
 
     SingleSelectOptions.member = Shapes::ShapeRef.new(shape: TaskTemplateSingleSelectOption)
+
+    SingleSelectQuestionAutomationRule.add_member(:condition, Shapes::ShapeRef.new(shape: EvaluationFormItemEnablementCondition, required: true, location_name: "Condition"))
+    SingleSelectQuestionAutomationRule.add_member(:option_ref_id, Shapes::ShapeRef.new(shape: ReferenceId, required: true, location_name: "OptionRefId"))
+    SingleSelectQuestionAutomationRule.struct_class = Types::SingleSelectQuestionAutomationRule
 
     SingleSelectQuestionRuleCategoryAutomation.add_member(:category, Shapes::ShapeRef.new(shape: SingleSelectQuestionRuleCategoryAutomationLabel, required: true, location_name: "Category"))
     SingleSelectQuestionRuleCategoryAutomation.add_member(:condition, Shapes::ShapeRef.new(shape: SingleSelectQuestionRuleCategoryAutomationCondition, required: true, location_name: "Condition"))

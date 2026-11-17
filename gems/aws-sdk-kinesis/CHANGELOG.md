@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2026-11-17)
+------------------
+
+* Feature - Adds support for queues on on-demand streams with new CreateQueue, UpdateQueue, DeleteQueue, DescribeQueue, ListQueues, ReceiveQueueRecords, AcknowledgeQueueRecords, and UpdateQueueRecordsVisibility APIs, plus four dead-letter APIs, for Amazon Kinesis Data Streams.
+
 1.120.0 (2026-11-16)
 ------------------
 

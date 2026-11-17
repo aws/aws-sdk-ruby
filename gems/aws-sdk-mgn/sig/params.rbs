@@ -35,12 +35,25 @@ module Aws
     }
 
       type source_configuration = {
-      source_environment: ("NSX" | "VSPHERE" | "FORTIGATE_FIREWALL" | "PALO_ALTO_FIREWALL" | "CISCO_ACI" | "LOGICAL_MODEL" | "MODELIZE_IT" | "AWS_DISCOVERY_COLLECTOR" | "MIGRATION_PLANNING_ARTIFACTS"),
+      source_environment: ("NSX" | "VSPHERE" | "FORTIGATE_FIREWALL" | "PALO_ALTO_FIREWALL" | "CISCO_ACI" | "LOGICAL_MODEL" | "MODELIZE_IT" | "AWS_DISCOVERY_COLLECTOR" | "MIGRATION_PLANNING_ARTIFACTS" | "F5_BIGIP"),
       source_s3_configuration: {
         s3_bucket: ::String,
         s3_bucket_owner: ::String,
         s3_key: ::String
       }
+    }
+
+      type operation_configuration_union = {
+      security_group: {
+        associations: {
+          cidrs: Array[::String]?,
+          vm_uui_ds: Array[::String]?,
+          user_provided_i_ds: Array[::String]?
+        }?
+      }?,
+      security_group_rule: {
+        enable_referencing: bool?
+      }?
     }
 
     end

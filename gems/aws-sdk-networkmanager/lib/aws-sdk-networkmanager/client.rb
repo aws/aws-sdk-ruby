@@ -3501,6 +3501,10 @@ module Aws::NetworkManager
     #   resp.core_network_changes[0].previous_values.routing_policy_association_details[0].routing_policy_names[0] #=> String
     #   resp.core_network_changes[0].previous_values.routing_policy_association_details[0].shared_segments #=> Array
     #   resp.core_network_changes[0].previous_values.routing_policy_association_details[0].shared_segments[0] #=> String
+    #   resp.core_network_changes[0].previous_values.multipath_resilience.mode #=> String, one of "best-effort", "disabled"
+    #   resp.core_network_changes[0].previous_values.multipath_resilience.edge_sets #=> Array
+    #   resp.core_network_changes[0].previous_values.multipath_resilience.edge_sets[0] #=> Array
+    #   resp.core_network_changes[0].previous_values.multipath_resilience.edge_sets[0][0] #=> String
     #   resp.core_network_changes[0].new_values.segment_name #=> String
     #   resp.core_network_changes[0].new_values.network_function_group_name #=> String
     #   resp.core_network_changes[0].new_values.edge_locations #=> Array
@@ -3537,6 +3541,10 @@ module Aws::NetworkManager
     #   resp.core_network_changes[0].new_values.routing_policy_association_details[0].routing_policy_names[0] #=> String
     #   resp.core_network_changes[0].new_values.routing_policy_association_details[0].shared_segments #=> Array
     #   resp.core_network_changes[0].new_values.routing_policy_association_details[0].shared_segments[0] #=> String
+    #   resp.core_network_changes[0].new_values.multipath_resilience.mode #=> String, one of "best-effort", "disabled"
+    #   resp.core_network_changes[0].new_values.multipath_resilience.edge_sets #=> Array
+    #   resp.core_network_changes[0].new_values.multipath_resilience.edge_sets[0] #=> Array
+    #   resp.core_network_changes[0].new_values.multipath_resilience.edge_sets[0][0] #=> String
     #   resp.core_network_changes[0].identifier_path #=> String
     #   resp.next_token #=> String
     #
@@ -7077,7 +7085,7 @@ module Aws::NetworkManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkmanager'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

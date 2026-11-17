@@ -10,6 +10,23 @@
 module Aws::MarketplaceAgreement
   module Types
 
+    # @!attribute [rw] buyer_agreement_approval_approver_input
+    #   The approval decision for an agreement approval that the buyer's
+    #   organization requires.
+    #   @return [Types::BuyerAgreementApprovalApproverInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AcceptAgreementApprovalInput AWS API Documentation
+    #
+    class AcceptAgreementApprovalInput < Struct.new(
+      :buyer_agreement_approval_approver_input)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AcceptAgreementApprovalOutput AWS API Documentation
+    #
+    class AcceptAgreementApprovalOutput < Aws::EmptyStructure; end
+
     # @!attribute [rw] agreement_id
     #   The unique identifier of the agreement associated with the
     #   cancellation request.
@@ -246,7 +263,7 @@ module Aws::MarketplaceAgreement
     #   @return [Types::PaymentScheduleTerm]
     #
     # @!attribute [rw] free_trial_pricing_term
-    #   Defines a short-term free pricing model where the buyers aren’t
+    #   Defines a short-term free pricing model where the buyers aren't
     #   charged anything within a specified limit.
     #   @return [Types::FreeTrialPricingTerm]
     #
@@ -318,6 +335,40 @@ module Aws::MarketplaceAgreement
       include Aws::Structure
     end
 
+    # The contact information of the acceptor.
+    #
+    # @!attribute [rw] first_name
+    #   The first name of the acceptor contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_name
+    #   The last name of the acceptor contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_address
+    #   The email address of the acceptor contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] company_name
+    #   The name of the company that the acceptor contact represents.
+    #   @return [String]
+    #
+    # @!attribute [rw] country_code
+    #   The ISO-3166 two-letter country code for the acceptor contact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AcceptorContact AWS API Documentation
+    #
+    class AcceptorContact < Struct.new(
+      :first_name,
+      :last_name,
+      :email_address,
+      :company_name,
+      :country_code)
+      SENSITIVE = [:first_name, :last_name, :email_address, :company_name]
+      include Aws::Structure
+    end
+
     # User does not have sufficient access to perform this action.
     #
     # @!attribute [rw] request_id
@@ -338,6 +389,230 @@ module Aws::MarketplaceAgreement
       :request_id,
       :message,
       :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An approval plan that applies to an agreement request.
+    #
+    # @note AgreementApprovalPlan is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AgreementApprovalPlan corresponding to the set member.
+    #
+    # @!attribute [rw] buyer_agreement_approval_plan
+    #   An approval plan that the buyer's organization requires.
+    #   @return [Types::BuyerAgreementApprovalPlan]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AgreementApprovalPlan AWS API Documentation
+    #
+    class AgreementApprovalPlan < Struct.new(
+      :buyer_agreement_approval_plan,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class BuyerAgreementApprovalPlan < AgreementApprovalPlan; end
+      class Unknown < AgreementApprovalPlan; end
+    end
+
+    # The approval plan to start an agreement approval for.
+    #
+    # @note AgreementApprovalPlanInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] buyer_agreement_approval_plan_input
+    #   An approval plan that the buyer's organization requires.
+    #   @return [Types::BuyerAgreementApprovalPlanInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AgreementApprovalPlanInput AWS API Documentation
+    #
+    class AgreementApprovalPlanInput < Struct.new(
+      :buyer_agreement_approval_plan_input,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class BuyerAgreementApprovalPlanInput < AgreementApprovalPlanInput; end
+      class Unknown < AgreementApprovalPlanInput; end
+    end
+
+    # A summary of the proposal received from the proposer.
+    #
+    # @!attribute [rw] offer_id
+    #   The unique identifier of the offer in AWS Marketplace.
+    #   @return [String]
+    #
+    # @!attribute [rw] offer_set_id
+    #   A unique identifier for the offer set containing this offer.
+    #   @return [String]
+    #
+    # @!attribute [rw] resources
+    #   The list of resources involved in the agreement.
+    #   @return [Array<Types::AgreementApprovalResource>]
+    #
+    # @!attribute [rw] visibility_scope
+    #   The visibility of the offer. Valid values are `PUBLIC` and
+    #   `PRIVATE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AgreementApprovalProposalSummary AWS API Documentation
+    #
+    class AgreementApprovalProposalSummary < Struct.new(
+      :offer_id,
+      :offer_set_id,
+      :resources,
+      :visibility_scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of the party proposing the agreement terms. This is commonly
+    # the seller for `PurchaseAgreement`.
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID of the proposer.
+    #   @return [String]
+    #
+    # @!attribute [rw] legal_name
+    #   The legal name of the proposer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AgreementApprovalProposer AWS API Documentation
+    #
+    class AgreementApprovalProposer < Struct.new(
+      :account_id,
+      :legal_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A purchase order reference for a charge on the agreement request.
+    #
+    # @!attribute [rw] charge_id
+    #   The unique identifier of the charge to associate the purchase order
+    #   with. Use `GetAgreementRequest` to retrieve the charges of the
+    #   agreement request.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_order_reference
+    #   The purchase order reference to associate with the charge.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AgreementApprovalPurchaseOrder AWS API Documentation
+    #
+    class AgreementApprovalPurchaseOrder < Struct.new(
+      :charge_id,
+      :purchase_order_reference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The account that started an agreement approval.
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID of the requester, which is the buyer of the
+    #   agreement request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AgreementApprovalRequester AWS API Documentation
+    #
+    class AgreementApprovalRequester < Struct.new(
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A resource involved in the agreement, such as a product.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Type of the resource, which is the product (for example,
+    #   `SaaSProduct`, `AmiProduct`, `ContainerProduct`).
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the product.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployed_on_aws
+    #   Whether the product is deployed on AWS (for example, `DEPLOYED`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AgreementApprovalResource AWS API Documentation
+    #
+    class AgreementApprovalResource < Struct.new(
+      :id,
+      :type,
+      :name,
+      :deployed_on_aws)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary view of an agreement approval.
+    #
+    # @!attribute [rw] approval_type
+    #   The type of the agreement approval. The only value is
+    #   `BUYER_AGREEMENT_APPROVAL`, an approval that the buyer's
+    #   organization requires before the agreement request can be accepted.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_request_id
+    #   The unique identifier of the agreement request that the agreement
+    #   approval is for.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_approval_id
+    #   The unique identifier of the agreement approval.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The descriptive name of the agreement approval.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the agreement approval. Possible values
+    #   include `PENDING_APPROVAL`, `APPROVED`, `REJECTED`, `EXPIRED`, and
+    #   `CANCELLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the agreement approval was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the agreement approval was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] started_at
+    #   The date and time when approvers could start acting on the agreement
+    #   approval.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expires_at
+    #   The date and time when the agreement approval expires if it isn't
+    #   approved or rejected.
+    #   @return [Time]
+    #
+    # @!attribute [rw] approval_needed_by
+    #   The date and time by which the agreement approval must be completed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AgreementApprovalSummary AWS API Documentation
+    #
+    class AgreementApprovalSummary < Struct.new(
+      :approval_type,
+      :agreement_request_id,
+      :agreement_approval_id,
+      :name,
+      :status,
+      :created_at,
+      :updated_at,
+      :started_at,
+      :expires_at,
+      :approval_needed_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -434,7 +709,7 @@ module Aws::MarketplaceAgreement
       :status,
       :status_reason_code,
       :license_arn)
-      SENSITIVE = []
+      SENSITIVE = [:registration_token]
       include Aws::Structure
     end
 
@@ -482,6 +757,164 @@ module Aws::MarketplaceAgreement
       include Aws::Structure
     end
 
+    # Summary view of an agreement request.
+    #
+    # @!attribute [rw] agreement_request_id
+    #   The unique identifier of the agreement request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_type
+    #   The type of agreement (for example, `PurchaseAgreement`).
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the agreement request. Possible values include
+    #   `DRAFT`, `PENDING_APPROVAL`, `APPROVED`, `ACCEPTED`, `REJECTED`, and
+    #   `CANCELLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement that the agreement request is
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] proposal_summary
+    #   A summary of the proposal received from the proposer.
+    #   @return [Types::ProposalSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AgreementRequestSummary AWS API Documentation
+    #
+    class AgreementRequestSummary < Struct.new(
+      :agreement_request_id,
+      :agreement_type,
+      :status,
+      :agreement_id,
+      :proposal_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A subset of terms proposed by the proposer, which have been requested
+    # by the acceptor as part of the agreement request.
+    #
+    # @note AgreementRequestTerm is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AgreementRequestTerm corresponding to the set member.
+    #
+    # @!attribute [rw] legal_term
+    #   Defines the list of text agreements proposed to the acceptors. An
+    #   example is the end user license agreement (EULA).
+    #   @return [Types::LegalTerm]
+    #
+    # @!attribute [rw] support_term
+    #   Defines the customer support available for the acceptors when they
+    #   purchase the software.
+    #   @return [Types::SupportTerm]
+    #
+    # @!attribute [rw] renewal_term
+    #   Defines that on graceful expiration of the agreement (when the
+    #   agreement ends on its pre-defined end date), a new agreement will be
+    #   created using the accepted terms on the existing agreement. In other
+    #   words, the agreement will be renewed. Presence of `RenewalTerm` in
+    #   the offer document means that auto-renewal is allowed. The acceptor
+    #   will have the option to accept or decline auto-renewal at the offer
+    #   acceptance/agreement creation. The acceptor can also change this
+    #   flag from `True` to `False` or `False` to `True`, within the limits
+    #   set by `LockoutPeriod` and `MaxRenewals`. Setting the flag to `True`
+    #   doesn't by itself guarantee that the agreement renews, because the
+    #   proposer can also opt out.
+    #   @return [Types::RenewalTerm]
+    #
+    # @!attribute [rw] usage_based_pricing_term
+    #   Defines a usage-based pricing model (typically, pay-as-you-go
+    #   pricing), where the customers are charged based on product usage.
+    #   @return [Types::UsageBasedPricingTerm]
+    #
+    # @!attribute [rw] configurable_upfront_pricing_term
+    #   Defines a prepaid payment model that allows buyers to configure the
+    #   entitlements they want to purchase and the duration.
+    #   @return [Types::ConfigurableUpfrontPricingTerm]
+    #
+    # @!attribute [rw] byol_pricing_term
+    #   Enables you and your customers to move your existing agreements to
+    #   AWS Marketplace. The customer won't be charged for product usage in
+    #   AWS Marketplace because they already paid for the product outside of
+    #   AWS Marketplace.
+    #   @return [Types::ByolPricingTerm]
+    #
+    # @!attribute [rw] recurring_payment_term
+    #   Defines a pricing model where customers are charged a fixed
+    #   recurring price at the end of each billing period.
+    #   @return [Types::RecurringPaymentTerm]
+    #
+    # @!attribute [rw] validity_term
+    #   Defines the conditions that will keep an agreement created from this
+    #   offer valid.
+    #   @return [Types::ValidityTerm]
+    #
+    # @!attribute [rw] payment_schedule_term
+    #   Defines an installment-based pricing model where customers are
+    #   charged a fixed price on different dates during the agreement
+    #   validity period. This is used most commonly for flexible payment
+    #   schedule pricing.
+    #   @return [Types::PaymentScheduleTerm]
+    #
+    # @!attribute [rw] free_trial_pricing_term
+    #   Defines a short-term free pricing model where the buyers aren't
+    #   charged anything within a specified limit.
+    #   @return [Types::FreeTrialPricingTerm]
+    #
+    # @!attribute [rw] fixed_upfront_pricing_term
+    #   Defines a pre-paid pricing model where the customers are charged a
+    #   fixed upfront amount.
+    #   @return [Types::FixedUpfrontPricingTerm]
+    #
+    # @!attribute [rw] variable_payment_term
+    #   Defines a payment model where sellers can submit variable payment
+    #   requests up to a maximum charge amount, with configurable approval
+    #   strategies and expiration timelines.
+    #   @return [Types::VariablePaymentTerm]
+    #
+    # @!attribute [rw] net_payment_term
+    #   Defines the net payment due period for the agreement, specifying
+    #   when payment is due after an invoice is issued.
+    #   @return [Types::NetPaymentTerm]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AgreementRequestTerm AWS API Documentation
+    #
+    class AgreementRequestTerm < Struct.new(
+      :legal_term,
+      :support_term,
+      :renewal_term,
+      :usage_based_pricing_term,
+      :configurable_upfront_pricing_term,
+      :byol_pricing_term,
+      :recurring_payment_term,
+      :validity_term,
+      :payment_schedule_term,
+      :free_trial_pricing_term,
+      :fixed_upfront_pricing_term,
+      :variable_payment_term,
+      :net_payment_term,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class LegalTerm < AgreementRequestTerm; end
+      class SupportTerm < AgreementRequestTerm; end
+      class RenewalTerm < AgreementRequestTerm; end
+      class UsageBasedPricingTerm < AgreementRequestTerm; end
+      class ConfigurableUpfrontPricingTerm < AgreementRequestTerm; end
+      class ByolPricingTerm < AgreementRequestTerm; end
+      class RecurringPaymentTerm < AgreementRequestTerm; end
+      class ValidityTerm < AgreementRequestTerm; end
+      class PaymentScheduleTerm < AgreementRequestTerm; end
+      class FreeTrialPricingTerm < AgreementRequestTerm; end
+      class FixedUpfrontPricingTerm < AgreementRequestTerm; end
+      class VariablePaymentTerm < AgreementRequestTerm; end
+      class NetPaymentTerm < AgreementRequestTerm; end
+      class Unknown < AgreementRequestTerm; end
+    end
+
     # A summary of the agreement, including top-level attributes (for
     # example, the agreement ID, proposer, and acceptor).
     #
@@ -499,7 +932,7 @@ module Aws::MarketplaceAgreement
     #
     # @!attribute [rw] end_time
     #   The date and time when the agreement ends. The field is `null` for
-    #   pay-as-you-go agreements, which don’t have end dates.
+    #   pay-as-you-go agreements, which don't have end dates.
     #   @return [Time]
     #
     # @!attribute [rw] last_update_time
@@ -603,6 +1036,13 @@ module Aws::MarketplaceAgreement
     #   pricing, the agreement converts to paid usage at this time.
     #   @return [Time]
     #
+    # @!attribute [rw] includes_contact_of_type
+    #   The types of contact information on file for the agreement. For
+    #   example, `ACCEPTOR` indicates that the acceptor's contact
+    #   information is on file, which you can retrieve with
+    #   `GetAgreementContacts`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AgreementViewSummary AWS API Documentation
     #
     class AgreementViewSummary < Struct.new(
@@ -620,8 +1060,131 @@ module Aws::MarketplaceAgreement
       :initial_agreement_id,
       :end_time_behavior_type,
       :end_time_behavior_reason_code,
-      :free_trial_end_time)
+      :free_trial_end_time,
+      :includes_contact_of_type)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An approver in an approval plan.
+    #
+    # @note Approver is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Approver corresponding to the set member.
+    #
+    # @!attribute [rw] email_approver
+    #   An approver who is identified by an email address.
+    #   @return [Types::EmailApprover]
+    #
+    # @!attribute [rw] procurement_tool_approver
+    #   A procurement system that approves through the buyer's procurement
+    #   integration.
+    #   @return [Types::ProcurementToolApprover]
+    #
+    # @!attribute [rw] aws_organization_admin_approver
+    #   The administrators of the buyer's AWS organization.
+    #   @return [Types::AwsOrganizationAdminApprover]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/Approver AWS API Documentation
+    #
+    class Approver < Struct.new(
+      :email_approver,
+      :procurement_tool_approver,
+      :aws_organization_admin_approver,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class EmailApprover < Approver; end
+      class ProcurementToolApprover < Approver; end
+      class AwsOrganizationAdminApprover < Approver; end
+      class Unknown < Approver; end
+    end
+
+    # An approver in an agreement approval and the approver's decision.
+    #
+    # @note ApproverOutcome is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ApproverOutcome corresponding to the set member.
+    #
+    # @!attribute [rw] email_approver_outcome
+    #   The decision of an approver who is identified by an email address.
+    #   @return [Types::EmailApproverOutcome]
+    #
+    # @!attribute [rw] procurement_tool_approver_outcome
+    #   The decision of a procurement system.
+    #   @return [Types::ProcurementToolApproverOutcome]
+    #
+    # @!attribute [rw] aws_organization_approver_outcome
+    #   The decision of the administrators of the buyer's AWS organization.
+    #   @return [Types::AwsOrganizationApproverOutcome]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ApproverOutcome AWS API Documentation
+    #
+    class ApproverOutcome < Struct.new(
+      :email_approver_outcome,
+      :procurement_tool_approver_outcome,
+      :aws_organization_approver_outcome,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class EmailApproverOutcome < ApproverOutcome; end
+      class ProcurementToolApproverOutcome < ApproverOutcome; end
+      class AwsOrganizationApproverOutcome < ApproverOutcome; end
+      class Unknown < ApproverOutcome; end
+    end
+
+    # An approver that represents the administrators of the buyer's AWS
+    # organization. The management account or a delegated administrator of
+    # the organization can decide for this approver.
+    #
+    # @!attribute [rw] organization_id
+    #   The ID of the AWS organization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AwsOrganizationAdminApprover AWS API Documentation
+    #
+    class AwsOrganizationAdminApprover < Struct.new(
+      :organization_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The decision of the administrators of the buyer's AWS organization.
+    # The management account or a delegated administrator of the
+    # organization makes this decision.
+    #
+    # @!attribute [rw] note
+    #   The note that the approver provided with the decision.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The decision status of the approver. Possible values include
+    #   `QUEUED`, `PENDING_APPROVAL`, `APPROVED`, `REJECTED`, `EXPIRED`, and
+    #   `SKIPPED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the decision was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] approver_outcome_id
+    #   The unique identifier of this approver in the agreement approval.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_orders
+    #   The purchase order references that the approver provided with the
+    #   decision.
+    #   @return [Array<Types::AgreementApprovalPurchaseOrder>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AwsOrganizationApproverOutcome AWS API Documentation
+    #
+    class AwsOrganizationApproverOutcome < Struct.new(
+      :note,
+      :status,
+      :updated_at,
+      :approver_outcome_id,
+      :purchase_orders)
+      SENSITIVE = [:note]
       include Aws::Structure
     end
 
@@ -812,6 +1375,307 @@ module Aws::MarketplaceAgreement
       include Aws::Structure
     end
 
+    # The details of an approval that the buyer's organization requires
+    # before the agreement request can be accepted, including the approval
+    # levels and the decision of each approver.
+    #
+    # @!attribute [rw] approval_type
+    #   The type of the agreement approval, which is
+    #   `BUYER_AGREEMENT_APPROVAL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_approval_id
+    #   The unique identifier of the agreement approval.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The descriptive name of the agreement approval.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_request_id
+    #   The unique identifier of the agreement request that the agreement
+    #   approval is for. Use `GetAgreementRequest` to retrieve the agreement
+    #   request details.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the agreement approval. Possible values
+    #   include `PENDING_APPROVAL`, `APPROVED`, `REJECTED`, `EXPIRED`, and
+    #   `CANCELLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] requester
+    #   The account that started the agreement approval.
+    #   @return [Types::AgreementApprovalRequester]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the agreement approval was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the agreement approval was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] started_at
+    #   The date and time when approvers could start acting on the agreement
+    #   approval.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expires_at
+    #   The date and time when the agreement approval expires if it isn't
+    #   approved or rejected.
+    #   @return [Time]
+    #
+    # @!attribute [rw] approval_needed_by
+    #   The date and time by which the agreement approval must be completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] levels
+    #   The approval levels, in the order they are evaluated. Approvers at a
+    #   level can act only after the previous level is approved. Each level
+    #   lists its approvers and the decision of each one.
+    #   @return [Array<Types::BuyerAgreementApprovalLevel>]
+    #
+    # @!attribute [rw] plan_input
+    #   The approval plan and the note that the requester provided in
+    #   `StartAgreementApprovals`.
+    #   @return [Types::BuyerAgreementApprovalPlanInput]
+    #
+    # @!attribute [rw] proposer
+    #   The details of the party proposing the agreement terms. This is
+    #   commonly the seller for `PurchaseAgreement`.
+    #   @return [Types::AgreementApprovalProposer]
+    #
+    # @!attribute [rw] proposal_summary
+    #   A summary of the proposal received from the proposer.
+    #   @return [Types::AgreementApprovalProposalSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/BuyerAgreementApproval AWS API Documentation
+    #
+    class BuyerAgreementApproval < Struct.new(
+      :approval_type,
+      :agreement_approval_id,
+      :name,
+      :agreement_request_id,
+      :status,
+      :requester,
+      :created_at,
+      :updated_at,
+      :started_at,
+      :expires_at,
+      :approval_needed_by,
+      :levels,
+      :plan_input,
+      :proposer,
+      :proposal_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The approval decision for an agreement approval.
+    #
+    # @!attribute [rw] agreement_approval_id
+    #   The unique identifier of the agreement approval to approve.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_orders
+    #   An optional list of purchase order references to associate with
+    #   charges on the agreement request.
+    #   @return [Array<Types::AgreementApprovalPurchaseOrder>]
+    #
+    # @!attribute [rw] note
+    #   An optional note that explains the decision (1-1000 characters).
+    #   @return [String]
+    #
+    # @!attribute [rw] approver_outcome_id_to_override
+    #   The `approverOutcomeId` of the approver to decide on behalf of. You
+    #   must be the management account or a delegated administrator of your
+    #   AWS organization to set this field. Use `GetAgreementApproval` to
+    #   retrieve the `approverOutcomeId` of each approver.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/BuyerAgreementApprovalApproverInput AWS API Documentation
+    #
+    class BuyerAgreementApprovalApproverInput < Struct.new(
+      :agreement_approval_id,
+      :purchase_orders,
+      :note,
+      :approver_outcome_id_to_override)
+      SENSITIVE = [:note]
+      include Aws::Structure
+    end
+
+    # The approval criteria for a group of approvers.
+    #
+    # @!attribute [rw] required_approval_count
+    #   The number of approvers in the group who must approve before the
+    #   level is approved.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/BuyerAgreementApprovalCriteria AWS API Documentation
+    #
+    class BuyerAgreementApprovalCriteria < Struct.new(
+      :required_approval_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A group of approvers, the number of approvals the group requires, and
+    # the decision of each approver.
+    #
+    # @!attribute [rw] approval_criteria
+    #   The number of approvers in the group who must approve.
+    #   @return [Types::BuyerAgreementApprovalCriteria]
+    #
+    # @!attribute [rw] approvers
+    #   The approvers in the group and the decision of each one.
+    #   @return [Array<Types::ApproverOutcome>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/BuyerAgreementApprovalGroup AWS API Documentation
+    #
+    class BuyerAgreementApprovalGroup < Struct.new(
+      :approval_criteria,
+      :approvers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A level of an agreement approval, with the decision of each approver.
+    #
+    # @!attribute [rw] name
+    #   The name of the level.
+    #   @return [String]
+    #
+    # @!attribute [rw] groups
+    #   The group of approvers at this level.
+    #   @return [Array<Types::BuyerAgreementApprovalGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/BuyerAgreementApprovalLevel AWS API Documentation
+    #
+    class BuyerAgreementApprovalLevel < Struct.new(
+      :name,
+      :groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An approval plan that the buyer's organization requires, with its
+    # approval levels and the approvers at each level.
+    #
+    # @!attribute [rw] plan_reference
+    #   The identifier of the approval plan. Pass it in
+    #   `StartAgreementApprovals` to start an agreement approval for this
+    #   plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the approval plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] levels
+    #   The approval levels of the plan, in the order they are evaluated.
+    #   Approvers at a level can act only after the previous level is
+    #   approved.
+    #   @return [Array<Types::BuyerAgreementApprovalPlanLevel>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/BuyerAgreementApprovalPlan AWS API Documentation
+    #
+    class BuyerAgreementApprovalPlan < Struct.new(
+      :plan_reference,
+      :name,
+      :levels)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A group of approvers and the number of approvals the group requires.
+    #
+    # @!attribute [rw] approval_criteria
+    #   The number of approvers in the group who must approve.
+    #   @return [Types::BuyerAgreementApprovalCriteria]
+    #
+    # @!attribute [rw] approvers
+    #   The approvers in the group.
+    #   @return [Array<Types::Approver>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/BuyerAgreementApprovalPlanGroup AWS API Documentation
+    #
+    class BuyerAgreementApprovalPlanGroup < Struct.new(
+      :approval_criteria,
+      :approvers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The approval plan to start an agreement approval for, and an optional
+    # note for the approvers.
+    #
+    # @!attribute [rw] plan_reference
+    #   The identifier of the approval plan. Use
+    #   `GetAgreementRequestApprovalPlans` to retrieve the approval plans of
+    #   the agreement request.
+    #   @return [String]
+    #
+    # @!attribute [rw] requester_note
+    #   An optional note for the approvers, such as the business reason for
+    #   the purchase (1-1000 characters).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/BuyerAgreementApprovalPlanInput AWS API Documentation
+    #
+    class BuyerAgreementApprovalPlanInput < Struct.new(
+      :plan_reference,
+      :requester_note)
+      SENSITIVE = [:requester_note]
+      include Aws::Structure
+    end
+
+    # A level of an approval plan.
+    #
+    # @!attribute [rw] name
+    #   The name of the level.
+    #   @return [String]
+    #
+    # @!attribute [rw] groups
+    #   The group of approvers at this level.
+    #   @return [Array<Types::BuyerAgreementApprovalPlanGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/BuyerAgreementApprovalPlanLevel AWS API Documentation
+    #
+    class BuyerAgreementApprovalPlanLevel < Struct.new(
+      :name,
+      :groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The rejection decision for an agreement approval.
+    #
+    # @!attribute [rw] agreement_approval_id
+    #   The unique identifier of the agreement approval to reject.
+    #   @return [String]
+    #
+    # @!attribute [rw] note
+    #   The reason for the rejection.
+    #   @return [String]
+    #
+    # @!attribute [rw] approver_outcome_id_to_override
+    #   The `approverOutcomeId` of the approver to decide on behalf of. You
+    #   must be the management account or a delegated administrator of your
+    #   AWS organization to set this field. Use `GetAgreementApproval` to
+    #   retrieve the `approverOutcomeId` of each approver.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/BuyerAgreementApprovalRejectionInput AWS API Documentation
+    #
+    class BuyerAgreementApprovalRejectionInput < Struct.new(
+      :agreement_approval_id,
+      :note,
+      :approver_outcome_id_to_override)
+      SENSITIVE = [:note]
+      include Aws::Structure
+    end
+
     # Enables you and your customers to move your existing agreements to AWS
     # Marketplace. The customer won't be charged for product usage in AWS
     # Marketplace because they already paid for the product outside of AWS
@@ -830,6 +1694,20 @@ module Aws::MarketplaceAgreement
     class ByolPricingTerm < Struct.new(
       :type,
       :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The identity of a caller.
+    #
+    # @!attribute [rw] principal_arn
+    #   The ARN of the IAM principal that made the call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/CallerIdentity AWS API Documentation
+    #
+    class CallerIdentity < Struct.new(
+      :principal_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -998,6 +1876,22 @@ module Aws::MarketplaceAgreement
       include Aws::Structure
     end
 
+    # @!attribute [rw] agreement_request_id
+    #   The unique identifier of the agreement request to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/CancelAgreementRequestInput AWS API Documentation
+    #
+    class CancelAgreementRequestInput < Struct.new(
+      :agreement_request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/CancelAgreementRequestOutput AWS API Documentation
+    #
+    class CancelAgreementRequestOutput < Aws::EmptyStructure; end
+
     # Represents a charge associated with an agreement, including amount,
     # timing, and purchase order details.
     #
@@ -1069,7 +1963,7 @@ module Aws::MarketplaceAgreement
     #  </note>
     #
     # @!attribute [rw] currency_code
-    #   The three-letter currency code for all charges (e.g., USD).
+    #   The three-letter currency code for all charges (for example, USD).
     #   @return [String]
     #
     # @!attribute [rw] new_agreement_value
@@ -1115,7 +2009,7 @@ module Aws::MarketplaceAgreement
     # entitlements they want to purchase and the duration.
     #
     # @!attribute [rw] type
-    #   Category of selector.
+    #   Category of the term.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -1295,6 +2189,12 @@ module Aws::MarketplaceAgreement
     #   Configuration for tax estimation in the agreement request response.
     #   @return [Types::TaxConfiguration]
     #
+    # @!attribute [rw] acceptor_contact
+    #   The contact information of the acceptor.
+    #
+    #   Don't provide this parameter if the intent is `AMEND`.
+    #   @return [Types::AcceptorContact]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/CreateAgreementRequestInput AWS API Documentation
     #
     class CreateAgreementRequestInput < Struct.new(
@@ -1303,8 +2203,9 @@ module Aws::MarketplaceAgreement
       :requested_terms,
       :source_agreement_identifier,
       :agreement_proposal_identifier,
-      :tax_configuration)
-      SENSITIVE = []
+      :tax_configuration,
+      :acceptor_contact)
+      SENSITIVE = [:acceptor_contact]
       include Aws::Structure
     end
 
@@ -1313,17 +2214,60 @@ module Aws::MarketplaceAgreement
     #   identifier with `AcceptAgreementRequest` to accept the agreement.
     #   @return [String]
     #
+    # @!attribute [rw] agreement_type
+    #   The type of agreement (for example, `PurchaseAgreement`).
+    #   @return [String]
+    #
     # @!attribute [rw] charge_summary
     #   Provides details of the charges associated with the agreement
     #   request. This is only applicable when a request is created for
     #   `PurchaseAgreement`.
     #   @return [Types::ChargeSummary]
     #
+    # @!attribute [rw] status
+    #   The current status of the agreement request. Possible values
+    #   include:
+    #
+    #   * `DRAFT` – The agreement request has been created but not yet
+    #     submitted for approval.
+    #
+    #   * `PENDING_APPROVAL` – The agreement request is waiting for one or
+    #     more approvers to decide.
+    #
+    #   * `APPROVED` – All required approvals have been granted, but the
+    #     agreement request wasn't accepted automatically. Call
+    #     `AcceptAgreementRequest` to accept it. If the call fails, its
+    #     error explains why.
+    #
+    #   * `ACCEPTED` – The agreement request has been accepted and the
+    #     resulting agreement has been created.
+    #
+    #   * `REJECTED` – At least one approver rejected the agreement request.
+    #     It won't proceed.
+    #
+    #   * `CANCELLED` – The agreement request was cancelled before
+    #     completion, by the acceptor or because the acceptor's account
+    #     left its AWS organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] approval_requirement
+    #   Indicates whether the agreement request requires approval before it
+    #   can be accepted. Values are `REQUIRED` and `NOT_REQUIRED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the agreement request was created.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/CreateAgreementRequestOutput AWS API Documentation
     #
     class CreateAgreementRequestOutput < Struct.new(
       :agreement_request_id,
-      :charge_summary)
+      :agreement_type,
+      :charge_summary,
+      :status,
+      :approval_requirement,
+      :created_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1498,12 +2442,12 @@ module Aws::MarketplaceAgreement
     #
     #   * `StandardEula` – The Standard Contract for AWS Marketplace (SCMP).
     #     For more information about SCMP, see the AWS Marketplace Seller
-    #     Guide. You don’t provide a URL for this type because it’s managed
-    #     by AWS Marketplace.
+    #     Guide. You don't provide a URL for this type because it's
+    #     managed by AWS Marketplace.
     #
     #   * `StandardDsa` – DSA for AWS Marketplace. For more information
-    #     about the DSA, see the AWS Data Exchange User Guide. You don’t
-    #     provide a URL for this type because it’s managed by AWS
+    #     about the DSA, see the AWS Data Exchange User Guide. You don't
+    #     provide a URL for this type because it's managed by AWS
     #     Marketplace.
     #   @return [String]
     #
@@ -1524,6 +2468,81 @@ module Aws::MarketplaceAgreement
       :url,
       :version)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An approver who is identified by an email address.
+    #
+    # @!attribute [rw] email_address
+    #   The email address of the approver.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the approver.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/EmailApprover AWS API Documentation
+    #
+    class EmailApprover < Struct.new(
+      :email_address,
+      :name)
+      SENSITIVE = [:email_address, :name]
+      include Aws::Structure
+    end
+
+    # The decision of an approver who is identified by an email address.
+    #
+    # @!attribute [rw] note
+    #   The note that the approver provided with the decision.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The decision status of the approver. Possible values include
+    #   `QUEUED`, `PENDING_APPROVAL`, `APPROVED`, `REJECTED`, `EXPIRED`, and
+    #   `SKIPPED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the decision was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] approver_outcome_id
+    #   The unique identifier of this approver in the agreement approval. An
+    #   administrator of the buyer's AWS organization passes it as
+    #   `approverOutcomeIdToOverride` to decide on the approver's behalf.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_address
+    #   The email address of the approver.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the approver.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_orders
+    #   The purchase order references that the approver provided with the
+    #   decision.
+    #   @return [Array<Types::AgreementApprovalPurchaseOrder>]
+    #
+    # @!attribute [rw] overridden_by
+    #   The identity that decided on the approver's behalf. This field is
+    #   empty unless an administrator of the buyer's AWS organization
+    #   decided for the approver.
+    #   @return [Types::CallerIdentity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/EmailApproverOutcome AWS API Documentation
+    #
+    class EmailApproverOutcome < Struct.new(
+      :note,
+      :status,
+      :updated_at,
+      :approver_outcome_id,
+      :email_address,
+      :name,
+      :purchase_orders,
+      :overridden_by)
+      SENSITIVE = [:note, :email_address, :name]
       include Aws::Structure
     end
 
@@ -1705,6 +2724,10 @@ module Aws::MarketplaceAgreement
     #   specific charge.
     #   @return [Types::EstimatedTaxes]
     #
+    # @!attribute [rw] purchase_order_reference
+    #   The purchase order reference associated with the charge, if any.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ExpectedCharge AWS API Documentation
     #
     class ExpectedCharge < Struct.new(
@@ -1713,7 +2736,8 @@ module Aws::MarketplaceAgreement
       :amount,
       :amount_after_tax,
       :timing,
-      :estimated_taxes)
+      :estimated_taxes,
+      :purchase_order_reference)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1797,7 +2821,7 @@ module Aws::MarketplaceAgreement
       include Aws::Structure
     end
 
-    # Defines a short-term free pricing model where the buyers aren’t
+    # Defines a short-term free pricing model where the buyers aren't
     # charged anything within a specified limit.
     #
     # @!attribute [rw] type
@@ -1843,6 +2867,31 @@ module Aws::MarketplaceAgreement
     #
     class FreeTrialSummary < Struct.new(
       :trial_end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_approval_id
+    #   The unique identifier of the agreement approval to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementApprovalInput AWS API Documentation
+    #
+    class GetAgreementApprovalInput < Struct.new(
+      :agreement_approval_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] buyer_agreement_approval
+    #   The details of the agreement approval, when it is a
+    #   `BUYER_AGREEMENT_APPROVAL`.
+    #   @return [Types::BuyerAgreementApproval]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementApprovalOutput AWS API Documentation
+    #
+    class GetAgreementApprovalOutput < Struct.new(
+      :buyer_agreement_approval)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1912,6 +2961,31 @@ module Aws::MarketplaceAgreement
       :created_at,
       :updated_at)
       SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementContactsInput AWS API Documentation
+    #
+    class GetAgreementContactsInput < Struct.new(
+      :agreement_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] acceptor_contact
+    #   The contact information that the acceptor provided when creating the
+    #   agreement.
+    #   @return [Types::AcceptorContact]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementContactsOutput AWS API Documentation
+    #
+    class GetAgreementContactsOutput < Struct.new(
+      :acceptor_contact)
+      SENSITIVE = [:acceptor_contact]
       include Aws::Structure
     end
 
@@ -2052,6 +3126,194 @@ module Aws::MarketplaceAgreement
       :created_at,
       :updated_at)
       SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_request_id
+    #   The unique identifier of the agreement request to retrieve the
+    #   approval plans for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of approval plans to return in a single response
+    #   (1-50). Default is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to specify where to start pagination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementRequestApprovalPlansInput AWS API Documentation
+    #
+    class GetAgreementRequestApprovalPlansInput < Struct.new(
+      :agreement_request_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   An array of `AgreementApprovalPlan` objects, one for each approval
+    #   plan that applies to the agreement request.
+    #   @return [Array<Types::AgreementApprovalPlan>]
+    #
+    # @!attribute [rw] next_token
+    #   The token used for pagination. The field is `null` if there are no
+    #   more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementRequestApprovalPlansOutput AWS API Documentation
+    #
+    class GetAgreementRequestApprovalPlansOutput < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_request_id
+    #   The unique identifier of the agreement request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementRequestInput AWS API Documentation
+    #
+    class GetAgreementRequestInput < Struct.new(
+      :agreement_request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_request_id
+    #   The unique identifier of the agreement request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_type
+    #   The type of agreement (for example, `PurchaseAgreement`).
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the agreement request. Possible values
+    #   include:
+    #
+    #   * `DRAFT` – The agreement request has been created but not yet
+    #     submitted for approval.
+    #
+    #   * `PENDING_APPROVAL` – The agreement request is waiting for one or
+    #     more approvers to decide.
+    #
+    #   * `APPROVED` – All required approvals have been granted, but the
+    #     agreement request wasn't accepted automatically. Call
+    #     `AcceptAgreementRequest` to accept it. If the call fails, its
+    #     error explains why.
+    #
+    #   * `ACCEPTED` – The agreement request has been accepted and the
+    #     resulting agreement has been created.
+    #
+    #   * `REJECTED` – At least one approver rejected the agreement request.
+    #     It won't proceed.
+    #
+    #   * `CANCELLED` – The agreement request was cancelled before
+    #     completion, by the acceptor or because the acceptor's account
+    #     left its AWS organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] approval_requirement
+    #   Indicates whether the agreement request requires approval before it
+    #   can be accepted. Values are `REQUIRED` and `NOT_REQUIRED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement that the agreement request is
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] intent
+    #   The purpose and desired outcome of the agreement request.
+    #
+    #   * `NEW` – Creates a new agreement for terms in the request.
+    #
+    #   * `AMEND` – Modifies an existing agreement with terms that are
+    #     accepted in the request.
+    #
+    #   * `REPLACE` – Creates a new agreement with accepted terms and
+    #     replaces the existing agreement.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the agreement request was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] charge_summary
+    #   Provides details of the charges associated with the agreement
+    #   request. This is only applicable when a request is created for
+    #   `PurchaseAgreement`.
+    #   @return [Types::ChargeSummary]
+    #
+    # @!attribute [rw] proposer
+    #   The details of the party proposing the agreement terms. This is
+    #   commonly the seller for `PurchaseAgreement`.
+    #   @return [Types::Proposer]
+    #
+    # @!attribute [rw] proposal_summary
+    #   A summary of the proposal received from the proposer.
+    #   @return [Types::ProposalSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementRequestOutput AWS API Documentation
+    #
+    class GetAgreementRequestOutput < Struct.new(
+      :agreement_request_id,
+      :agreement_type,
+      :status,
+      :approval_requirement,
+      :agreement_id,
+      :intent,
+      :created_at,
+      :charge_summary,
+      :proposer,
+      :proposal_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_request_id
+    #   The unique identifier of the agreement request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of terms to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to specify where to start pagination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementRequestTermsInput AWS API Documentation
+    #
+    class GetAgreementRequestTermsInput < Struct.new(
+      :agreement_request_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] terms
+    #   The terms proposed for the agreement request. The terms are fixed
+    #   when the agreement request is created.
+    #   @return [Array<Types::AgreementRequestTerm>]
+    #
+    # @!attribute [rw] next_token
+    #   The token used for pagination. The field is `null` if there are no
+    #   more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementRequestTermsOutput AWS API Documentation
+    #
+    class GetAgreementRequestTermsOutput < Struct.new(
+      :terms,
+      :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2309,7 +3571,7 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifer for the term.
+    #   The unique identifier for the term.
     #   @return [String]
     #
     # @!attribute [rw] documents
@@ -2323,6 +3585,77 @@ module Aws::MarketplaceAgreement
       :type,
       :id,
       :documents)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] catalog
+    #   An optional parameter to filter agreement approvals by catalog (for
+    #   example, `AWSMarketplace`).
+    #   @return [String]
+    #
+    # @!attribute [rw] party_type
+    #   The party type for the agreement approvals. Required parameter. Use
+    #   `REQUESTER` to list agreement approvals for agreement requests that
+    #   you created, or `AWS_ORGANIZATION_ADMIN` to list agreement approvals
+    #   as an AWS Organizations administrator.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_request_id
+    #   An optional parameter to filter agreement approvals for a specific
+    #   agreement request.
+    #   @return [String]
+    #
+    # @!attribute [rw] approval_type
+    #   An optional parameter to filter agreement approvals by type. The
+    #   only valid value is `BUYER_AGREEMENT_APPROVAL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   An optional parameter to filter agreement approvals by status. Valid
+    #   values include `PENDING_APPROVAL`, `APPROVED`, `REJECTED`,
+    #   `EXPIRED`, and `CANCELLED`. If you don't specify a status,
+    #   agreement approvals of all statuses are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of agreement approvals to return in a single
+    #   response (1-50). Default is 20.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to specify where to start pagination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListAgreementApprovalsInput AWS API Documentation
+    #
+    class ListAgreementApprovalsInput < Struct.new(
+      :catalog,
+      :party_type,
+      :agreement_request_id,
+      :approval_type,
+      :status,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   An array of `AgreementApprovalSummary` objects containing summary
+    #   information about each agreement approval.
+    #   @return [Array<Types::AgreementApprovalSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token used for pagination. The field is `null` if there are no
+    #   more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListAgreementApprovalsOutput AWS API Documentation
+    #
+    class ListAgreementApprovalsOutput < Struct.new(
+      :items,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2587,6 +3920,63 @@ module Aws::MarketplaceAgreement
     class ListAgreementPaymentRequestsOutput < Struct.new(
       :next_token,
       :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] catalog
+    #   An optional parameter to list agreement requests by catalog (for
+    #   example, `AWSMarketplace`).
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   An optional parameter to list agreement requests by status. Valid
+    #   values include `DRAFT`, `PENDING_APPROVAL`, `APPROVED`, `ACCEPTED`,
+    #   `REJECTED`, and `CANCELLED`. If you don't specify a status,
+    #   agreement requests of all statuses are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   An optional parameter to list agreement requests for a specific
+    #   resource, such as a product.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of agreement requests to return in a single
+    #   response (1-50). Default is 20.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to specify where to start pagination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListAgreementRequestsInput AWS API Documentation
+    #
+    class ListAgreementRequestsInput < Struct.new(
+      :catalog,
+      :status,
+      :resource_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   An array of `AgreementRequestSummary` objects containing summary
+    #   information about each agreement request.
+    #   @return [Array<Types::AgreementRequestSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token used for pagination. The field is `null` if there are no
+    #   more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListAgreementRequestsOutput AWS API Documentation
+    #
+    class ListAgreementRequestsOutput < Struct.new(
+      :items,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2910,7 +4300,8 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] currency_code
-    #   The 3-letter ISO 4217 currency code (e.g., `USD`, `EUR`, `JPY`).
+    #   The 3-letter ISO 4217 currency code (for example, `USD`, `EUR`,
+    #   `JPY`).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/PricingCurrencyAmount AWS API Documentation
@@ -2920,6 +4311,72 @@ module Aws::MarketplaceAgreement
       :max_adjustment_amount,
       :currency_code)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A procurement system that approves through the buyer's procurement
+    # integration.
+    #
+    # @!attribute [rw] name
+    #   The name of the procurement system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ProcurementToolApprover AWS API Documentation
+    #
+    class ProcurementToolApprover < Struct.new(
+      :name)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
+    # The decision of a procurement system.
+    #
+    # @!attribute [rw] note
+    #   The note that the approver provided with the decision.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The decision status of the approver. Possible values include
+    #   `QUEUED`, `PENDING_APPROVAL`, `APPROVED`, `REJECTED`, `EXPIRED`, and
+    #   `SKIPPED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the decision was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] approver_outcome_id
+    #   The unique identifier of this approver in the agreement approval. An
+    #   administrator of the buyer's AWS organization passes it as
+    #   `approverOutcomeIdToOverride` to decide on the approver's behalf.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the procurement system.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_orders
+    #   The purchase order references that the approver provided with the
+    #   decision.
+    #   @return [Array<Types::AgreementApprovalPurchaseOrder>]
+    #
+    # @!attribute [rw] overridden_by
+    #   The identity that decided on the procurement system's behalf. This
+    #   field is empty unless an administrator of the buyer's AWS
+    #   organization decided for the procurement system.
+    #   @return [Types::CallerIdentity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ProcurementToolApproverOutcome AWS API Documentation
+    #
+    class ProcurementToolApproverOutcome < Struct.new(
+      :note,
+      :status,
+      :updated_at,
+      :approver_outcome_id,
+      :name,
+      :purchase_orders,
+      :overridden_by)
+      SENSITIVE = [:note, :name]
       include Aws::Structure
     end
 
@@ -3004,8 +4461,8 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] price
-    #   Per unit price for the product dimension that’s used for calculating
-    #   the amount to be charged.
+    #   Per unit price for the product dimension that's used for
+    #   calculating the amount to be charged.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/RateCardItem AWS API Documentation
@@ -3051,6 +4508,23 @@ module Aws::MarketplaceAgreement
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] buyer_agreement_approval_rejection_input
+    #   The rejection decision for an agreement approval that the buyer's
+    #   organization requires.
+    #   @return [Types::BuyerAgreementApprovalRejectionInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/RejectAgreementApprovalInput AWS API Documentation
+    #
+    class RejectAgreementApprovalInput < Struct.new(
+      :buyer_agreement_approval_rejection_input)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/RejectAgreementApprovalOutput AWS API Documentation
+    #
+    class RejectAgreementApprovalOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] agreement_id
     #   The unique identifier of the agreement associated with the
@@ -3534,6 +5008,9 @@ module Aws::MarketplaceAgreement
     #     Manager license associated with an entitlement granted by the
     #     agreement.
     #
+    #   * `IncludesContactOfType` – The type of contact information on file
+    #     for the agreement. Supported value includes `ACCEPTOR`.
+    #
     #   A proposer can use any combination of the preceding filters along
     #   with `AgreementType`, which is required.
     #
@@ -3887,6 +5364,43 @@ module Aws::MarketplaceAgreement
       include Aws::Structure
     end
 
+    # @!attribute [rw] agreement_request_id
+    #   The unique identifier of the agreement request to start approvals
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] plan_inputs
+    #   The approval plans to start agreement approvals for.
+    #   @return [Array<Types::AgreementApprovalPlanInput>]
+    #
+    # @!attribute [rw] purchase_orders
+    #   An optional list of purchase order references to associate with
+    #   charges on the agreement request.
+    #   @return [Array<Types::AgreementApprovalPurchaseOrder>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/StartAgreementApprovalsInput AWS API Documentation
+    #
+    class StartAgreementApprovalsInput < Struct.new(
+      :agreement_request_id,
+      :plan_inputs,
+      :purchase_orders)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] approval_summaries
+    #   An array of `AgreementApprovalSummary` objects, one for each
+    #   agreement approval that was started.
+    #   @return [Array<Types::AgreementApprovalSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/StartAgreementApprovalsOutput AWS API Documentation
+    #
+    class StartAgreementApprovalsOutput < Struct.new(
+      :approval_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the customer support available for the acceptors when they
     # purchase the software.
     #
@@ -4117,21 +5631,21 @@ module Aws::MarketplaceAgreement
     #
     # @!attribute [rw] agreement_duration
     #   Defines the duration that the agreement remains active. If
-    #   `AgreementStartDate` isn’t provided, the agreement duration is
+    #   `AgreementStartDate` isn't provided, the agreement duration is
     #   relative to the agreement signature time. The duration is
     #   represented in the ISO\_8601 format.
     #   @return [String]
     #
     # @!attribute [rw] agreement_start_date
     #   Defines the date when agreement starts. The agreement starts at
-    #   00:00:00.000 UTC on the date provided. If `AgreementStartDate` isn’t
-    #   provided, the agreement start date is determined based on agreement
-    #   signature time.
+    #   00:00:00.000 UTC on the date provided. If `AgreementStartDate`
+    #   isn't provided, the agreement start date is determined based on
+    #   agreement signature time.
     #   @return [Time]
     #
     # @!attribute [rw] agreement_end_date
     #   Defines the date when the agreement ends. The agreement ends at
-    #   23:59:59.999 UTC on the date provided. If `AgreementEndDate` isn’t
+    #   23:59:59.999 UTC on the date provided. If `AgreementEndDate` isn't
     #   provided, the agreement end date is determined by the validity of
     #   individual terms.
     #   @return [Time]
@@ -4199,7 +5713,7 @@ module Aws::MarketplaceAgreement
     #   approved if no further action is taken. This only applies when the
     #   payment request approval strategy is set to
     #   `AUTO_APPROVE_ON_EXPIRATION`. The duration is represented in the
-    #   ISO\_8601 format (e.g., P10D for 10 days).
+    #   ISO\_8601 format (for example, P10D for 10 days).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/VariablePaymentTermConfiguration AWS API Documentation

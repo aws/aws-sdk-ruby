@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2026-11-17)
+------------------
+
+* Feature - This release adds Microsoft Azure connectors, third-party telemetry enrichment and StartTelemetryPipelineRefresh, to discover Azure resources, enrich their telemetry and refresh external-cloud pipelines.
+
 1.53.0 (2026-11-16)
 ------------------
 

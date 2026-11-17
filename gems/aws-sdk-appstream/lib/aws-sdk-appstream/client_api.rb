@@ -363,6 +363,7 @@ module Aws::AppStream
     StorageConnectorType = Shapes::StringShape.new(name: 'StorageConnectorType')
     StreamView = Shapes::StringShape.new(name: 'StreamView')
     StreamingExperienceSettings = Shapes::StructureShape.new(name: 'StreamingExperienceSettings')
+    StreamingUrl = Shapes::StringShape.new(name: 'StreamingUrl')
     StreamingUrlUserId = Shapes::StringShape.new(name: 'StreamingUrlUserId')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
@@ -673,7 +674,7 @@ module Aws::AppStream
     CreateAppBlockBuilderStreamingURLRequest.add_member(:validity, Shapes::ShapeRef.new(shape: Long, location_name: "Validity"))
     CreateAppBlockBuilderStreamingURLRequest.struct_class = Types::CreateAppBlockBuilderStreamingURLRequest
 
-    CreateAppBlockBuilderStreamingURLResult.add_member(:streaming_url, Shapes::ShapeRef.new(shape: String, location_name: "StreamingURL"))
+    CreateAppBlockBuilderStreamingURLResult.add_member(:streaming_url, Shapes::ShapeRef.new(shape: StreamingUrl, location_name: "StreamingURL"))
     CreateAppBlockBuilderStreamingURLResult.add_member(:expires, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Expires"))
     CreateAppBlockBuilderStreamingURLResult.struct_class = Types::CreateAppBlockBuilderStreamingURLResult
 
@@ -791,7 +792,7 @@ module Aws::AppStream
     CreateImageBuilderStreamingURLRequest.add_member(:validity, Shapes::ShapeRef.new(shape: Long, location_name: "Validity"))
     CreateImageBuilderStreamingURLRequest.struct_class = Types::CreateImageBuilderStreamingURLRequest
 
-    CreateImageBuilderStreamingURLResult.add_member(:streaming_url, Shapes::ShapeRef.new(shape: String, location_name: "StreamingURL"))
+    CreateImageBuilderStreamingURLResult.add_member(:streaming_url, Shapes::ShapeRef.new(shape: StreamingUrl, location_name: "StreamingURL"))
     CreateImageBuilderStreamingURLResult.add_member(:expires, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Expires"))
     CreateImageBuilderStreamingURLResult.struct_class = Types::CreateImageBuilderStreamingURLResult
 
@@ -839,7 +840,7 @@ module Aws::AppStream
     CreateStreamingURLRequest.add_member(:session_context, Shapes::ShapeRef.new(shape: String, location_name: "SessionContext"))
     CreateStreamingURLRequest.struct_class = Types::CreateStreamingURLRequest
 
-    CreateStreamingURLResult.add_member(:streaming_url, Shapes::ShapeRef.new(shape: String, location_name: "StreamingURL"))
+    CreateStreamingURLResult.add_member(:streaming_url, Shapes::ShapeRef.new(shape: StreamingUrl, location_name: "StreamingURL"))
     CreateStreamingURLResult.add_member(:expires, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Expires"))
     CreateStreamingURLResult.struct_class = Types::CreateStreamingURLResult
 

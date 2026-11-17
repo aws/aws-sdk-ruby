@@ -46,15 +46,30 @@ module Aws
 
       type azure_scope_configuration_input = {
       vm_scanning: {
-        scope_type: ("TENANT" | "SUBSCRIPTION"),
+        scope_type: ("TENANT" | "SUBSCRIPTION" | "ORGANIZATION" | "PROJECT"),
         scope_values: Array[::String]?
       }?,
       container_image_scanning: {
-        scope_type: ("TENANT" | "SUBSCRIPTION"),
+        scope_type: ("TENANT" | "SUBSCRIPTION" | "ORGANIZATION" | "PROJECT"),
         scope_values: Array[::String]?
       }?,
       serverless_scanning: {
-        scope_type: ("TENANT" | "SUBSCRIPTION"),
+        scope_type: ("TENANT" | "SUBSCRIPTION" | "ORGANIZATION" | "PROJECT"),
+        scope_values: Array[::String]?
+      }?
+    }
+
+      type gcp_scope_configuration_input = {
+      vm_scanning: {
+        scope_type: ("TENANT" | "SUBSCRIPTION" | "ORGANIZATION" | "PROJECT"),
+        scope_values: Array[::String]?
+      }?,
+      container_image_scanning: {
+        scope_type: ("TENANT" | "SUBSCRIPTION" | "ORGANIZATION" | "PROJECT"),
+        scope_values: Array[::String]?
+      }?,
+      serverless_scanning: {
+        scope_type: ("TENANT" | "SUBSCRIPTION" | "ORGANIZATION" | "PROJECT"),
         scope_values: Array[::String]?
       }?
     }

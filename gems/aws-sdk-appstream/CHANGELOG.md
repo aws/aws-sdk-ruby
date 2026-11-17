@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.158.0 (2026-11-17)
+------------------
+
+* Feature - Adds support for In-Session SmartCard Redirection for Windows Multi-Session fleets
+
 1.157.0 (2026-11-16)
 ------------------
 

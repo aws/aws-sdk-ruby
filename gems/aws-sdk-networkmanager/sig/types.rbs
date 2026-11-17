@@ -357,6 +357,7 @@ module Aws::NetworkManager
       attr_accessor peer_edge_locations: ::Array[::String]
       attr_accessor attachment_id: ::String
       attr_accessor routing_policy_association_details: ::Array[Types::RoutingPolicyAssociationDetail]
+      attr_accessor multipath_resilience: Types::MultipathResilienceChangeValues
       SENSITIVE: []
     end
 
@@ -1607,6 +1608,12 @@ module Aws::NetworkManager
       attr_accessor address: ::String
       attr_accessor latitude: ::String
       attr_accessor longitude: ::String
+      SENSITIVE: []
+    end
+
+    class MultipathResilienceChangeValues
+      attr_accessor mode: ("best-effort" | "disabled")
+      attr_accessor edge_sets: ::Array[::Array[::String]]
       SENSITIVE: []
     end
 

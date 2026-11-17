@@ -335,6 +335,8 @@ module Aws::NetworkManager
     Location = Shapes::StructureShape.new(name: 'Location')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MultipathResilienceChangeValues = Shapes::StructureShape.new(name: 'MultipathResilienceChangeValues')
+    MultipathResilienceMode = Shapes::StringShape.new(name: 'MultipathResilienceMode')
     NatGatewaySupportState = Shapes::StringShape.new(name: 'NatGatewaySupportState')
     NatGatewaySupportValue = Shapes::StringShape.new(name: 'NatGatewaySupportValue')
     NatRule = Shapes::StructureShape.new(name: 'NatRule')
@@ -809,6 +811,7 @@ module Aws::NetworkManager
     CoreNetworkChangeValues.add_member(:peer_edge_locations, Shapes::ShapeRef.new(shape: ExternalRegionCodeList, location_name: "PeerEdgeLocations", metadata: {"box" => true}))
     CoreNetworkChangeValues.add_member(:attachment_id, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "AttachmentId", metadata: {"box" => true}))
     CoreNetworkChangeValues.add_member(:routing_policy_association_details, Shapes::ShapeRef.new(shape: RoutingPolicyAssociationDetailsList, location_name: "RoutingPolicyAssociationDetails", metadata: {"box" => true}))
+    CoreNetworkChangeValues.add_member(:multipath_resilience, Shapes::ShapeRef.new(shape: MultipathResilienceChangeValues, location_name: "MultipathResilience", metadata: {"box" => true}))
     CoreNetworkChangeValues.struct_class = Types::CoreNetworkChangeValues
 
     CoreNetworkEdge.add_member(:edge_location, Shapes::ShapeRef.new(shape: ExternalRegionCode, location_name: "EdgeLocation"))
@@ -1744,6 +1747,10 @@ module Aws::NetworkManager
     Location.add_member(:latitude, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "Latitude"))
     Location.add_member(:longitude, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "Longitude"))
     Location.struct_class = Types::Location
+
+    MultipathResilienceChangeValues.add_member(:mode, Shapes::ShapeRef.new(shape: MultipathResilienceMode, location_name: "Mode"))
+    MultipathResilienceChangeValues.add_member(:edge_sets, Shapes::ShapeRef.new(shape: EdgeSetList, location_name: "EdgeSets", metadata: {"box" => true}))
+    MultipathResilienceChangeValues.struct_class = Types::MultipathResilienceChangeValues
 
     NatRule.add_member(:rule_number, Shapes::ShapeRef.new(shape: NatRuleNumber, location_name: "RuleNumber"))
     NatRule.add_member(:match_source_cidr, Shapes::ShapeRef.new(shape: IPAddress, location_name: "MatchSourceCidr"))

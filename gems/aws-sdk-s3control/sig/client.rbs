@@ -1531,12 +1531,24 @@ module Aws
                                                 s3_bucket_destination: Params::s3_bucket_destination?,
                                                 storage_lens_table_destination: Params::storage_lens_table_destination?
                                               }?,
+                                              cost_and_usage_reports_publish: {
+                                                prefix_level: {
+                                                  is_enabled: bool,
+                                                  selection_criteria: {
+                                                    min_depth: ::Integer?,
+                                                    max_depth: ::Integer?
+                                                  }?
+                                                }?
+                                              }?,
                                               is_enabled: bool,
                                               aws_org: {
                                                 arn: ::String
                                               }?,
                                               storage_lens_arn: ::String?,
-                                              prefix_delimiter: ::String?
+                                              prefix_delimiter: ::String?,
+                                              int_access_tiers: {
+                                                is_enabled: bool?
+                                              }?
                                             },
                                             ?tags: Array[
                                               {

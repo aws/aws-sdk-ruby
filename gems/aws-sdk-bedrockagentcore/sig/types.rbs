@@ -72,6 +72,57 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class AgentCoreRuntimeInvocation
+      attr_accessor agent_runtime_endpoint_arn: ::String
+      attr_accessor request_template: ::String
+      SENSITIVE: []
+    end
+
+    class AgentCoreRuntimeInvocationDetails
+      attr_accessor agent_runtime_endpoint_arn: ::String
+      attr_accessor agent_runtime_version: ::String
+      attr_accessor request_template: ::String
+      SENSITIVE: []
+    end
+
+    class AgentInsightSummary
+      attr_accessor type: ("FAILURE")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor affected_session_count: ::Integer
+      attr_accessor agent_insight_id: ::String
+      attr_accessor application_name: ::String
+      attr_accessor batch_evaluation_id: ::String
+      attr_accessor customer_metadata_status: ("AVAILABLE" | "CUSTOMER_KEY_UNAVAILABLE" | "UNAVAILABLE")
+      attr_accessor updated_at: ::Time
+      attr_accessor archive_status: ("ACTIVE" | "ARCHIVED")
+      attr_accessor last_seen_at: ::Time
+      SENSITIVE: [:name, :description]
+    end
+
+    class AgentInvocationConfig
+      attr_accessor agent_core_runtime: Types::AgentCoreRuntimeInvocation
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AgentCoreRuntime < AgentInvocationConfig
+      end
+      class Unknown < AgentInvocationConfig
+      end
+    end
+
+    class AgentInvocationDetails
+      attr_accessor agent_core_runtime: Types::AgentCoreRuntimeInvocationDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AgentCoreRuntime < AgentInvocationDetails
+      end
+      class Unknown < AgentInvocationDetails
+      end
+    end
+
     class AgentSkillsDescriptor
       attr_accessor skill_md: Types::SkillMdDefinition
       attr_accessor skill_definition: Types::SkillDefinition
@@ -149,6 +200,11 @@ module Aws::BedrockAgentCore
     class BatchDeleteMemoryRecordsOutput
       attr_accessor successful_records: ::Array[Types::MemoryRecordOutput]
       attr_accessor failed_records: ::Array[Types::MemoryRecordOutput]
+      SENSITIVE: []
+    end
+
+    class BatchEvaluationSourceConfig
+      attr_accessor batch_evaluation_arn: ::String
       SENSITIVE: []
     end
 
@@ -334,6 +390,15 @@ module Aws::BedrockAgentCore
       attr_accessor log_group_names: ::Array[::String]
       attr_accessor log_group_name_prefixes: ::Array[::String]
       attr_accessor filter_config: Types::CloudWatchFilterConfig
+      SENSITIVE: []
+    end
+
+    class CloudWatchLogsSourceConfig
+      attr_accessor log_group_names: ::Array[::String]
+      attr_accessor log_group_name_prefixes: ::Array[::String]
+      attr_accessor service_names: ::Array[::String]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
       SENSITIVE: []
     end
 
@@ -581,6 +646,12 @@ module Aws::BedrockAgentCore
       SENSITIVE: [:payload]
     end
 
+    class CustomDataIdentifier
+      attr_accessor name: ::String
+      attr_accessor regex: ::String
+      SENSITIVE: []
+    end
+
     class CustomDescriptor
       attr_accessor inline_content: ::String
       SENSITIVE: []
@@ -598,6 +669,42 @@ module Aws::BedrockAgentCore
       end
       class Unknown < DataSourceConfig
       end
+    end
+
+    class DatasetDetails
+      attr_accessor dataset_id: ::String
+      attr_accessor dataset_version: ::String
+      SENSITIVE: []
+    end
+
+    class DatasetExecutionConfig
+      attr_accessor dataset: Types::DatasetSource
+      attr_accessor agent_invocation: Types::AgentInvocationConfig
+      SENSITIVE: []
+    end
+
+    class DatasetExecutionDetails
+      attr_accessor dataset: Types::DatasetDetails
+      attr_accessor agent_invocation: Types::AgentInvocationDetails
+      SENSITIVE: []
+    end
+
+    class DatasetGenerationSummary
+      attr_accessor generation_id: ::String
+      attr_accessor dataset_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor scenario_type: ("FIXED" | "DYNAMIC")
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED" | "DELETING")
+      attr_accessor created_at: ::Time
+      attr_accessor completed_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DatasetSource
+      attr_accessor dataset_id: ::String
+      attr_accessor dataset_version: ::String
+      SENSITIVE: []
     end
 
     class DeleteABTestRequest
@@ -634,6 +741,18 @@ module Aws::BedrockAgentCore
       attr_accessor capacity_provider_arn: ::String
       attr_accessor session_id: ::String
       attr_accessor status: ("Provisioning" | "Deprovisioning" | "Active" | "Deleting" | "Deleted" | "Stopped")
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetGenerationRequest
+      attr_accessor dataset_id: ::String
+      attr_accessor generation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetGenerationResponse
+      attr_accessor generation_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED" | "DELETING")
       SENSITIVE: []
     end
 
@@ -836,6 +955,15 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class EvaluatorFilter
+      attr_accessor evaluator_id: ::String
+      attr_accessor evaluation_dimension_name: ::String
+      attr_accessor operator: ("Equals" | "NotEquals" | "GreaterThan" | "LessThan" | "GreaterThanOrEqual" | "LessThanOrEqual" | "Contains" | "NotContains")
+      attr_accessor value: Types::GenerationFilterValue
+      attr_accessor aggregation: ("Min" | "Max" | "Mean" | "AllMatch" | "AnyMatch")
+      SENSITIVE: []
+    end
+
     class EvaluatorMetric
       attr_accessor evaluator_arn: ::String
       attr_accessor control_stats: Types::ControlStats
@@ -1003,6 +1131,124 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class GenerationAttributeFilter
+      attr_accessor key: ::String
+      attr_accessor operator: ("Equals" | "NotEquals" | "GreaterThan" | "LessThan" | "GreaterThanOrEqual" | "LessThanOrEqual" | "Contains" | "NotContains")
+      attr_accessor value: Types::GenerationFilterValue
+      SENSITIVE: []
+    end
+
+    class GenerationErrorDetail
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      attr_accessor count: ::Integer
+      attr_accessor session_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GenerationFilterValue
+      attr_accessor string_value: ::String
+      attr_accessor double_value: ::Float
+      attr_accessor boolean_value: bool
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class StringValue < GenerationFilterValue
+      end
+      class DoubleValue < GenerationFilterValue
+      end
+      class BooleanValue < GenerationFilterValue
+      end
+      class Unknown < GenerationFilterValue
+      end
+    end
+
+    class GenerationFilters
+      attr_accessor attribute_filters: ::Array[Types::GenerationAttributeFilter]
+      attr_accessor turn_count: Types::TurnCountRange
+      attr_accessor evaluator_filters: ::Array[Types::EvaluatorFilter]
+      SENSITIVE: []
+    end
+
+    class GenerationIdentifierCounts
+      attr_accessor session_id_count: ::Integer
+      attr_accessor trace_id_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class GenerationIdentifiers
+      attr_accessor session_ids: ::Array[::String]
+      attr_accessor trace_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GenerationResults
+      attr_accessor sessions_matched: ::Integer
+      attr_accessor sessions_selected: ::Integer
+      attr_accessor sessions_unscored: ::Integer
+      attr_accessor sessions_failed: ::Integer
+      attr_accessor scenarios_generated: ::Integer
+      attr_accessor scenarios_deduplicated: ::Integer
+      attr_accessor examples_written: ::Integer
+      attr_accessor examples_with_ground_truth: ::Integer
+      SENSITIVE: []
+    end
+
+    class GenerationSamplingConfig
+      attr_accessor max_scenarios: ::Integer
+      SENSITIVE: []
+    end
+
+    class GenerationSelection
+      attr_accessor filters: Types::GenerationFilters
+      attr_accessor identifiers: Types::GenerationIdentifiers
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Filters < GenerationSelection
+      end
+      class Identifiers < GenerationSelection
+      end
+      class Unknown < GenerationSelection
+      end
+    end
+
+    class GenerationSelectionRecord
+      attr_accessor filters: Types::GenerationFilters
+      attr_accessor identifiers: Types::GenerationIdentifierCounts
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Filters < GenerationSelectionRecord
+      end
+      class Identifiers < GenerationSelectionRecord
+      end
+      class Unknown < GenerationSelectionRecord
+      end
+    end
+
+    class GenerationSource
+      attr_accessor trace_generation: Types::TraceGenerationSource
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class TraceGeneration < GenerationSource
+      end
+      class Unknown < GenerationSource
+      end
+    end
+
+    class GenerationSourceRecord
+      attr_accessor trace_generation: Types::TraceGenerationRecord
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class TraceGeneration < GenerationSourceRecord
+      end
+      class Unknown < GenerationSourceRecord
+      end
+    end
+
     class GetABTestRequest
       attr_accessor ab_test_id: ::String
       SENSITIVE: []
@@ -1045,6 +1291,30 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class GetAgentInsightRequest
+      attr_accessor application_name: ::String
+      attr_accessor agent_insight_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAgentInsightResponse
+      attr_accessor type: ("FAILURE")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor affected_session_count: ::Integer
+      attr_accessor sample_sessions: ::Array[Types::SampleSession]
+      attr_accessor root_causes: ::Array[Types::InsightRootCause]
+      attr_accessor agent_insight_id: ::String
+      attr_accessor application_name: ::String
+      attr_accessor batch_evaluation_id: ::String
+      attr_accessor customer_metadata_status: ("AVAILABLE" | "CUSTOMER_KEY_UNAVAILABLE" | "UNAVAILABLE")
+      attr_accessor updated_at: ::Time
+      attr_accessor archive_status: ("ACTIVE" | "ARCHIVED")
+      attr_accessor last_seen_at: ::Time
+      SENSITIVE: [:name, :description]
+    end
+
     class GetBatchEvaluationRequest
       attr_accessor batch_evaluation_id: ::String
       SENSITIVE: []
@@ -1069,6 +1339,7 @@ module Aws::BedrockAgentCore
       attr_accessor description: ::String
       attr_accessor updated_at: ::Time
       attr_accessor kms_key_arn: ::String
+      attr_accessor dataset_execution_details: Types::DatasetExecutionDetails
       SENSITIVE: []
     end
 
@@ -1113,6 +1384,30 @@ module Aws::BedrockAgentCore
       attr_accessor status: ("READY" | "TERMINATED")
       attr_accessor certificates: ::Array[Types::Certificate]
       attr_accessor filesystem_configurations: ::Array[Types::ToolsFileSystemConfiguration]
+      SENSITIVE: []
+    end
+
+    class GetDatasetGenerationRequest
+      attr_accessor dataset_id: ::String
+      attr_accessor generation_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDatasetGenerationResponse
+      attr_accessor generation_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor dataset_id: ::String
+      attr_accessor scenario_type: ("FIXED" | "DYNAMIC")
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED" | "DELETING")
+      attr_accessor failure_reason: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor completed_at: ::Time
+      attr_accessor source: Types::GenerationSourceRecord
+      attr_accessor generation_results: Types::GenerationResults
+      attr_accessor redaction_summary: Types::RedactionSummary
+      attr_accessor error_details: ::Array[Types::GenerationErrorDetail]
       SENSITIVE: []
     end
 
@@ -1281,6 +1576,12 @@ module Aws::BedrockAgentCore
     class GetWorkloadAccessTokenResponse
       attr_accessor workload_access_token: ::String
       SENSITIVE: [:workload_access_token]
+    end
+
+    class GroundTruthConfig
+      attr_accessor fields: ::Array[("expected_response" | "expected_trajectory")]
+      attr_accessor quality_filters: ::Array[Types::EvaluatorFilter]
+      SENSITIVE: []
     end
 
     class GroundTruthSource
@@ -2116,6 +2417,21 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class ListAgentInsightsRequest
+      attr_accessor application_name: ::String
+      attr_accessor batch_evaluation_id: ::String
+      attr_accessor archive_status: ("ACTIVE" | "ARCHIVED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgentInsightsResponse
+      attr_accessor agent_insights: ::Array[Types::AgentInsightSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListBatchEvaluationsRequest
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -2152,6 +2468,19 @@ module Aws::BedrockAgentCore
 
     class ListCodeInterpreterSessionsResponse
       attr_accessor items: ::Array[Types::CodeInterpreterSessionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatasetGenerationsRequest
+      attr_accessor dataset_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatasetGenerationsResponse
+      attr_accessor dataset_generations: ::Array[Types::DatasetGenerationSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -2508,6 +2837,13 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class OnlineEvaluationSourceConfig
+      attr_accessor online_evaluation_config_arn: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
     class OnlineEvaluationTraceConfig
       attr_accessor online_evaluation_config_arn: ::String
       attr_accessor start_time: ::Time
@@ -2797,6 +3133,18 @@ module Aws::BedrockAgentCore
       end
     end
 
+    class RedactionConfiguration
+      attr_accessor identifiers: ::Array[("ADDRESS" | "AWS_SECRET_KEY" | "BANK_ACCOUNT_NUMBER_DE" | "BANK_ACCOUNT_NUMBER_ES" | "BANK_ACCOUNT_NUMBER_FR" | "BANK_ACCOUNT_NUMBER_GB" | "BANK_ACCOUNT_NUMBER_IT" | "BANK_ACCOUNT_NUMBER_US" | "CEP_CODE_BR" | "CNPJ_BR" | "CPF_CODE_BR" | "CREDIT_CARD_EXPIRATION" | "CREDIT_CARD_MAGNETIC_STRIPE" | "CREDIT_CARD_NUMBER" | "CREDIT_CARD_SECURITY_CODE" | "DATE_OF_BIRTH" | "DRIVERS_LICENSE_AT" | "DRIVERS_LICENSE_AU" | "DRIVERS_LICENSE_BE" | "DRIVERS_LICENSE_BG" | "DRIVERS_LICENSE_CA" | "DRIVERS_LICENSE_CY" | "DRIVERS_LICENSE_CZ" | "DRIVERS_LICENSE_DE" | "DRIVERS_LICENSE_DK" | "DRIVERS_LICENSE_EE" | "DRIVERS_LICENSE_ES" | "DRIVERS_LICENSE_FI" | "DRIVERS_LICENSE_FR" | "DRIVERS_LICENSE_GB" | "DRIVERS_LICENSE_GR" | "DRIVERS_LICENSE_HR" | "DRIVERS_LICENSE_HU" | "DRIVERS_LICENSE_IE" | "DRIVERS_LICENSE_IT" | "DRIVERS_LICENSE_LT" | "DRIVERS_LICENSE_LU" | "DRIVERS_LICENSE_LV" | "DRIVERS_LICENSE_MT" | "DRIVERS_LICENSE_NL" | "DRIVERS_LICENSE_PL" | "DRIVERS_LICENSE_PT" | "DRIVERS_LICENSE_RO" | "DRIVERS_LICENSE_SE" | "DRIVERS_LICENSE_SI" | "DRIVERS_LICENSE_SK" | "DRIVERS_LICENSE_US" | "DRUG_ENFORCEMENT_AGENCY_NUMBER_US" | "ELECTORAL_ROLL_NUMBER_GB" | "EMAIL_ADDRESS" | "HEALTH_INSURANCE_CARD_NUMBER_EU" | "HEALTH_INSURANCE_CLAIM_NUMBER_US" | "HEALTH_INSURANCE_NUMBER_FR" | "HEALTHCARE_PROCEDURE_CODE_US" | "INDIVIDUAL_TAX_IDENTIFICATION_NUMBER_US" | "INSEE_CODE_FR" | "IP_ADDRESS" | "LAT_LONG" | "MEDICARE_BENEFICIARY_NUMBER_US" | "NAME" | "NATIONAL_DRUG_CODE_US" | "NATIONAL_IDENTIFICATION_NUMBER_DE" | "NATIONAL_IDENTIFICATION_NUMBER_ES" | "NATIONAL_IDENTIFICATION_NUMBER_IT" | "NATIONAL_INSURANCE_NUMBER_GB" | "NATIONAL_PROVIDER_ID_US" | "NHS_NUMBER_GB" | "NIE_NUMBER_ES" | "NIF_NUMBER_ES" | "OPEN_SSH_PRIVATE_KEY" | "PASSPORT_NUMBER_CA" | "PASSPORT_NUMBER_DE" | "PASSPORT_NUMBER_ES" | "PASSPORT_NUMBER_FR" | "PASSPORT_NUMBER_GB" | "PASSPORT_NUMBER_IT" | "PASSPORT_NUMBER_US" | "PERMANENT_RESIDENCE_NUMBER_CA" | "PERSONAL_HEALTH_NUMBER_CA" | "PGP_PRIVATE_KEY" | "PHONE_NUMBER_BR" | "PHONE_NUMBER_DE" | "PHONE_NUMBER_ES" | "PHONE_NUMBER_FR" | "PHONE_NUMBER_GB" | "PHONE_NUMBER_IT" | "PHONE_NUMBER_US" | "PKCS_PRIVATE_KEY" | "POSTAL_CODE_CA" | "PUTTY_PRIVATE_KEY" | "RG_NUMBER_BR" | "SOCIAL_INSURANCE_NUMBER_CA" | "SSN_ES" | "SSN_US" | "TAX_ID_DE" | "TAX_ID_ES" | "TAX_ID_FR" | "TAX_ID_GB" | "VEHICLE_IDENTIFICATION_NUMBER" | "ZIP_CODE_US")]
+      attr_accessor custom_data_identifiers: ::Array[Types::CustomDataIdentifier]
+      SENSITIVE: []
+    end
+
+    class RedactionSummary
+      attr_accessor scenarios_scanned: ::Integer
+      attr_accessor finding_counts: ::Hash[::String, ::Integer]
+      SENSITIVE: []
+    end
+
     class RegistryRecordSummary
       attr_accessor registry_arn: ::String
       attr_accessor record_arn: ::String
@@ -3069,6 +3417,7 @@ module Aws::BedrockAgentCore
       attr_accessor kms_key_arn: ::String
       attr_accessor description: ::String
       attr_accessor output_config: Types::OutputConfig
+      attr_accessor dataset_execution_config: Types::DatasetExecutionConfig
       SENSITIVE: []
     end
 
@@ -3127,6 +3476,25 @@ module Aws::BedrockAgentCore
     class StartCodeInterpreterSessionResponse
       attr_accessor code_interpreter_identifier: ::String
       attr_accessor session_id: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class StartDatasetGenerationRequest
+      attr_accessor dataset_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor scenario_type: ("FIXED" | "DYNAMIC")
+      attr_accessor source: Types::GenerationSource
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartDatasetGenerationResponse
+      attr_accessor generation_id: ::String
+      attr_accessor name: ::String
+      attr_accessor dataset_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED" | "DELETING")
       attr_accessor created_at: ::Time
       SENSITIVE: []
     end
@@ -3437,6 +3805,47 @@ module Aws::BedrockAgentCore
       end
     end
 
+    class TraceGenerationRecord
+      attr_accessor source_config: Types::TraceSourceConfig
+      attr_accessor selection: Types::GenerationSelectionRecord
+      attr_accessor sampling: Types::GenerationSamplingConfig
+      attr_accessor ground_truth: Types::GroundTruthConfig
+      attr_accessor redaction_configuration: Types::RedactionConfiguration
+      SENSITIVE: []
+    end
+
+    class TraceGenerationSource
+      attr_accessor source_config: Types::TraceSourceConfig
+      attr_accessor selection: Types::GenerationSelection
+      attr_accessor sampling: Types::GenerationSamplingConfig
+      attr_accessor ground_truth: Types::GroundTruthConfig
+      attr_accessor redaction_configuration: Types::RedactionConfiguration
+      SENSITIVE: []
+    end
+
+    class TraceSourceConfig
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogsSourceConfig
+      attr_accessor online_evaluation: Types::OnlineEvaluationSourceConfig
+      attr_accessor batch_evaluation: Types::BatchEvaluationSourceConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CloudWatchLogs < TraceSourceConfig
+      end
+      class OnlineEvaluation < TraceSourceConfig
+      end
+      class BatchEvaluation < TraceSourceConfig
+      end
+      class Unknown < TraceSourceConfig
+      end
+    end
+
+    class TurnCountRange
+      attr_accessor min: ::Integer
+      attr_accessor max: ::Integer
+      SENSITIVE: []
+    end
+
     class UnauthorizedException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -3463,6 +3872,20 @@ module Aws::BedrockAgentCore
       attr_accessor ab_test_arn: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED" | "FAILED")
       attr_accessor execution_status: ("PAUSED" | "RUNNING" | "STOPPED" | "NOT_STARTED")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateAgentInsightRequest
+      attr_accessor application_name: ::String
+      attr_accessor agent_insight_id: ::String
+      attr_accessor archive_status: ("ACTIVE" | "ARCHIVED")
+      SENSITIVE: []
+    end
+
+    class UpdateAgentInsightResponse
+      attr_accessor agent_insight_id: ::String
+      attr_accessor archive_status: ("ACTIVE" | "ARCHIVED")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end

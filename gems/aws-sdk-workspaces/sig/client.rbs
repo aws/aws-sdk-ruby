@@ -1079,7 +1079,9 @@ module Aws
                                               increase_volume_size: ("ENABLED" | "DISABLED")?,
                                               change_compute_type: ("ENABLED" | "DISABLED")?,
                                               switch_running_mode: ("ENABLED" | "DISABLED")?,
-                                              rebuild_workspace: ("ENABLED" | "DISABLED")?
+                                              rebuild_workspace: ("ENABLED" | "DISABLED")?,
+                                              nested_virtualization: ("ENABLED" | "DISABLED")?,
+                                              enable_end_user_advisor: ("ENABLED" | "DISABLED")?
                                             }
                                           ) -> _ModifySelfservicePermissionsResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifySelfservicePermissionsResponseSuccess

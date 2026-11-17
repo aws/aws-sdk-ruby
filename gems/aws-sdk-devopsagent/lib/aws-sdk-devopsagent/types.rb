@@ -806,13 +806,18 @@ module Aws::DevOpsAgent
     #   Summary or title of the chat
     #   @return [String]
     #
+    # @!attribute [rw] archive_status
+    #   Indicates whether the chat execution is archived or active.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ChatExecution AWS API Documentation
     #
     class ChatExecution < Struct.new(
       :execution_id,
       :created_at,
       :updated_at,
-      :summary)
+      :summary,
+      :archive_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -823,10 +828,18 @@ module Aws::DevOpsAgent
     #   Detailed error message describing the conflict.
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   A machine-readable reason code that explains why the request
+    #   conflicted with the current state of the resource. For example,
+    #   `CHAT_ARCHIVED` indicates that the request acted on a chat that is
+    #   archived. This field is absent when no specific reason applies.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ConflictException AWS API Documentation
     #
     class ConflictException < Struct.new(
-      :message)
+      :message,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2215,6 +2228,56 @@ module Aws::DevOpsAgent
       include Aws::Structure
     end
 
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space that contains the chat
+    #   execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_id
+    #   The unique identifier of the chat execution to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/GetChatRequest AWS API Documentation
+    #
+    class GetChatRequest < Struct.new(
+      :agent_space_id,
+      :execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] execution_id
+    #   The unique identifier of the chat execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] summary
+    #   The summary of the chat execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time at which the chat execution was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time at which the chat execution was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] archive_status
+    #   Indicates whether the chat execution is archived or active.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/GetChatResponse AWS API Documentation
+    #
+    class GetChatResponse < Struct.new(
+      :execution_id,
+      :summary,
+      :created_at,
+      :updated_at,
+      :archive_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Input for retrieving Operator App configuration.
     #
     # @!attribute [rw] agent_space_id
@@ -3218,13 +3281,19 @@ module Aws::DevOpsAgent
     #   Token for pagination
     #   @return [String]
     #
+    # @!attribute [rw] archive_status
+    #   The archive status to filter by. Use this parameter to list only
+    #   archived chat executions or only active ones.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ListChatsRequest AWS API Documentation
     #
     class ListChatsRequest < Struct.new(
       :agent_space_id,
       :user_id,
       :max_results,
-      :next_token)
+      :next_token,
+      :archive_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7333,6 +7402,74 @@ module Aws::DevOpsAgent
     #
     class UpdateBacklogTaskResponse < Struct.new(
       :task)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space that contains the chat
+    #   execution to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_id
+    #   The unique identifier of the chat execution to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] summary
+    #   The new summary to set for the chat execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] archive_status
+    #   The archive status to set for the chat execution. Use this parameter
+    #   to archive the chat execution, hiding it from the default chat list,
+    #   or to unarchive it, restoring it to the default chat list.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, the service ignores the request, but does not return an
+    #   error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/UpdateChatRequest AWS API Documentation
+    #
+    class UpdateChatRequest < Struct.new(
+      :agent_space_id,
+      :execution_id,
+      :summary,
+      :archive_status,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] execution_id
+    #   The unique identifier of the updated chat execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] summary
+    #   The summary of the chat execution after the update.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time at which the chat execution was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] archive_status
+    #   The archive status of the chat execution after the update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/UpdateChatResponse AWS API Documentation
+    #
+    class UpdateChatResponse < Struct.new(
+      :execution_id,
+      :summary,
+      :updated_at,
+      :archive_status)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -2182,6 +2182,11 @@ module Aws::ConfigService
     # @option params [Array<String>] :conformance_pack_names
     #   Comma-separated list of conformance pack names.
     #
+    # @option params [Types::DescribeConformancePacksFilters] :filters
+    #   Returns a filtered list of custom or managed conformance pack
+    #   statuses. By default, if the filter is not defined, Config returns
+    #   details for all your conformance packs.
+    #
     # @option params [Integer] :limit
     #   The maximum number of conformance packs status returned on each page.
     #
@@ -2200,6 +2205,9 @@ module Aws::ConfigService
     #
     #   resp = client.describe_conformance_pack_status({
     #     conformance_pack_names: ["ConformancePackName"],
+    #     filters: {
+    #       types: ["CUSTOM"], # accepts CUSTOM, MANAGED
+    #     },
     #     limit: 1,
     #     next_token: "NextToken",
     #   })
@@ -2210,11 +2218,12 @@ module Aws::ConfigService
     #   resp.conformance_pack_status_details[0].conformance_pack_name #=> String
     #   resp.conformance_pack_status_details[0].conformance_pack_id #=> String
     #   resp.conformance_pack_status_details[0].conformance_pack_arn #=> String
-    #   resp.conformance_pack_status_details[0].conformance_pack_state #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED"
+    #   resp.conformance_pack_status_details[0].conformance_pack_state #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED"
     #   resp.conformance_pack_status_details[0].stack_arn #=> String
     #   resp.conformance_pack_status_details[0].conformance_pack_status_reason #=> String
     #   resp.conformance_pack_status_details[0].last_update_requested_time #=> Time
     #   resp.conformance_pack_status_details[0].last_update_completed_time #=> Time
+    #   resp.conformance_pack_status_details[0].type #=> String, one of "CUSTOM", "MANAGED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePackStatus AWS API Documentation
@@ -2232,6 +2241,11 @@ module Aws::ConfigService
     #   Comma-separated list of conformance pack names for which you want
     #   details. If you do not specify any names, Config returns details for
     #   all your conformance packs.
+    #
+    # @option params [Types::DescribeConformancePacksFilters] :filters
+    #   Returns a filtered list of custom or managed conformance packs. By
+    #   default, if the filter is not defined, Config returns details for all
+    #   your conformance packs.
     #
     # @option params [Integer] :limit
     #   The maximum number of conformance packs returned on each page.
@@ -2251,6 +2265,9 @@ module Aws::ConfigService
     #
     #   resp = client.describe_conformance_packs({
     #     conformance_pack_names: ["ConformancePackName"],
+    #     filters: {
+    #       types: ["CUSTOM"], # accepts CUSTOM, MANAGED
+    #     },
     #     limit: 1,
     #     next_token: "NextToken",
     #   })
@@ -2270,6 +2287,10 @@ module Aws::ConfigService
     #   resp.conformance_pack_details[0].created_by #=> String
     #   resp.conformance_pack_details[0].template_ssm_document_details.document_name #=> String
     #   resp.conformance_pack_details[0].template_ssm_document_details.document_version #=> String
+    #   resp.conformance_pack_details[0].type #=> String, one of "CUSTOM", "MANAGED"
+    #   resp.conformance_pack_details[0].source.source_identifier #=> String
+    #   resp.conformance_pack_details[0].scope.tag_key #=> String
+    #   resp.conformance_pack_details[0].scope.tag_value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePacks AWS API Documentation
@@ -5227,8 +5248,12 @@ module Aws::ConfigService
     # `AWSServiceRoleForConfigConforms` in your account. The service-linked
     # role is created only when the role does not exist in your account.
     #
-    # <note markdown="1"> You must specify only one of the follow parameters: `TemplateS3Uri`,
-    # `TemplateBody` or `TemplateSSMDocumentDetails`.
+    # <note markdown="1"> For custom conformance packs, you must specify only one of
+    # `TemplateS3Uri`, `TemplateBody`, `TemplateSSMDocumentDetails`.
+    #
+    #  For managed conformance packs, you must specify `Source`. Do not
+    # specify `TemplateS3Uri`, `TemplateBody`, `TemplateSSMDocumentDetails`,
+    # `DeliveryS3Bucket`, or `DeliveryS3KeyPrefix`.
     #
     #  </note>
     #
@@ -5298,7 +5323,9 @@ module Aws::ConfigService
     #    </note>
     #
     # @option params [Array<Types::ConformancePackInputParameter>] :conformance_pack_input_parameters
-    #   A list of `ConformancePackInputParameter` objects.
+    #   A list of `ConformancePackInputParameter` objects. Custom conformance
+    #   packs can have at most 60 input parameters. Managed conformance packs
+    #   can have at most 330 input parameters.
     #
     # @option params [Types::TemplateSSMDocumentDetails] :template_ssm_document_details
     #   An object of type `TemplateSSMDocumentDetails`, which contains the
@@ -5309,6 +5336,34 @@ module Aws::ConfigService
     # @option params [Array<Types::Tag>] :tags
     #   The tags for the conformance pack. Each tag consists of a key and an
     #   optional value, both of which you define.
+    #
+    # @option params [Types::ConformancePackSource] :source
+    #   An object of type `ConformancePackSource`, which contains the
+    #   identifier of the managed conformance pack that you want to deploy. If
+    #   you specify a source, Config creates a managed conformance pack.
+    #   Managed conformance packs are predefined collections of Config rules
+    #   that are created and maintained by Amazon Web Services.
+    #
+    #   <note markdown="1"> If you specify a source, you cannot specify `TemplateS3Uri`,
+    #   `TemplateBody`, `TemplateSSMDocumentDetails`, `DeliveryS3Bucket`, or
+    #   `DeliveryS3KeyPrefix`. You cannot convert an existing conformance pack
+    #   between a managed conformance pack and a custom conformance pack. You
+    #   also cannot change the source of an existing managed conformance pack.
+    #
+    #    </note>
+    #
+    # @option params [Types::ConformancePackScope] :scope
+    #   An object of type `ConformancePackScope` that defines which resources
+    #   can trigger an evaluation for Config rules in the conformance pack.
+    #   The scope can include a tag key and optional tag value. Specify a
+    #   scope to constrain the resources that can trigger an evaluation for
+    #   rules in the conformance pack. If you do not specify a scope, all
+    #   rules in the conformance pack are unscoped.
+    #
+    #   <note markdown="1"> This field is optional and is supported only for managed conformance
+    #   packs. If you specify a scope, you must also specify `Source`.
+    #
+    #    </note>
     #
     # @return [Types::PutConformancePackResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5338,6 +5393,13 @@ module Aws::ConfigService
     #         value: "TagValue",
     #       },
     #     ],
+    #     source: {
+    #       source_identifier: "ConformancePackSourceIdentifier", # required
+    #     },
+    #     scope: {
+    #       tag_key: "TagKey", # required
+    #       tag_value: "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -7001,7 +7063,7 @@ module Aws::ConfigService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.169.0'
+      context[:gem_version] = '1.170.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

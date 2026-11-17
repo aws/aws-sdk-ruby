@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.147.0 (2026-11-17)
+------------------
+
+* Feature - Adds a new image scan status for images that exceed the maximum size supported by Amazon ECR enhanced scanning.
+
 1.146.0 (2026-11-16)
 ------------------
 

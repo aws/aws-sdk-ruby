@@ -59,7 +59,10 @@ module Aws::Inspector2
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of resource.
+    #   The type of resource. For Google Cloud Platform (GCP) resources, the
+    #   resource type is `compute.googleapis.com/Instance`,
+    #   `cloudfunctions.googleapis.com/Function`, or
+    #   `artifactregistry.googleapis.com/DockerImage`.
     #   @return [String]
     #
     # @!attribute [rw] sort_order
@@ -422,6 +425,8 @@ module Aws::Inspector2
     #   * `AWS` – Findings from Amazon Web Services resources.
     #
     #   * `AZURE` – Findings from Microsoft Azure resources.
+    #
+    #   * `GCP` – Findings from Google Cloud Platform (GCP) resources.
     #   @return [String]
     #
     # @!attribute [rw] cloud_partition
@@ -444,6 +449,9 @@ module Aws::Inspector2
     #   * An Amazon Web Services Region, such as `us-east-1`.
     #
     #   * An Azure region, such as `eastus`.
+    #
+    #   * A Google Cloud Platform (GCP) location, such as the region
+    #     `us-central1` or the zone `us-central1-a`.
     #   @return [String]
     #
     # @!attribute [rw] cloud_org_id
@@ -2924,6 +2932,16 @@ module Aws::Inspector2
     #   connected resources.
     #   @return [Boolean]
     #
+    # @!attribute [rw] gcp_regions
+    #   The Google Cloud Platform (GCP) locations configured for the
+    #   connector.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] gcp_scope_configuration
+    #   The Google Cloud Platform (GCP) scope configuration for the
+    #   connector.
+    #   @return [Types::GcpScopeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Connector AWS API Documentation
     #
     class Connector < Struct.new(
@@ -2940,7 +2958,9 @@ module Aws::Inspector2
       :aws_config_connector_arn,
       :scope_configuration,
       :tags,
-      :auto_install_vm_scanner)
+      :auto_install_vm_scanner,
+      :gcp_regions,
+      :gcp_scope_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3149,6 +3169,8 @@ module Aws::Inspector2
     #   * `AWS` – Findings from Amazon Web Services resources.
     #
     #   * `AZURE` – Findings from Microsoft Azure resources.
+    #
+    #   * `GCP` – Findings from Google Cloud Platform (GCP) resources.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] cloud_partitions
@@ -3170,6 +3192,9 @@ module Aws::Inspector2
     #   * An Amazon Web Services Region, such as `us-east-1`.
     #
     #   * An Azure region, such as `eastus`.
+    #
+    #   * A Google Cloud Platform (GCP) location, such as the region
+    #     `us-central1` or the zone `us-central1-a`.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] cloud_org_ids
@@ -3232,6 +3257,8 @@ module Aws::Inspector2
     #   * `AWS` – Findings from Amazon Web Services resources.
     #
     #   * `AZURE` – Findings from Microsoft Azure resources.
+    #
+    #   * `GCP` – Findings from Google Cloud Platform (GCP) resources.
     #   @return [String]
     #
     # @!attribute [rw] cloud_account_id
@@ -3258,6 +3285,9 @@ module Aws::Inspector2
     #   * An Amazon Web Services Region, such as `us-east-1`.
     #
     #   * An Azure region, such as `eastus`.
+    #
+    #   * A Google Cloud Platform (GCP) location, such as the region
+    #     `us-central1` or the zone `us-central1-a`.
     #   @return [String]
     #
     # @!attribute [rw] cloud_org_id
@@ -3482,10 +3512,23 @@ module Aws::Inspector2
     #   @return [Array<Types::CoverageStringFilter>]
     #
     # @!attribute [rw] resource_type
-    #   An array of Amazon Web Services resource types to return coverage
-    #   statistics for. The values can be `AWS_EC2_INSTANCE`,
-    #   `AWS_LAMBDA_FUNCTION`, `AWS_ECR_CONTAINER_IMAGE`,
-    #   `AWS_ECR_REPOSITORY` or `AWS_ACCOUNT`.
+    #   An array of resource types to return coverage statistics for. Valid
+    #   values:
+    #
+    #   * Amazon Web Services – `AWS_EC2_INSTANCE`, `AWS_LAMBDA_FUNCTION`,
+    #     `AWS_ECR_CONTAINER_IMAGE`, `AWS_ECR_REPOSITORY`, `MACHINE_IMAGE`,
+    #     `CODE_REPOSITORY`, or `AWS_ACCOUNT`.
+    #
+    #   * Microsoft Azure – `Microsoft.Compute/virtualMachines`,
+    #     `Microsoft.ContainerRegistry/registries`,
+    #     `Microsoft.ContainerRegistry/registry/containerRepository`,
+    #     `Microsoft.ContainerRegistry/registry/containerImage`, or
+    #     `Microsoft.Web/sites`.
+    #
+    #   * Google Cloud Platform (GCP) – `compute.googleapis.com/Instance`,
+    #     `cloudfunctions.googleapis.com/Function`,
+    #     `artifactregistry.googleapis.com/Repository`, or
+    #     `artifactregistry.googleapis.com/DockerImage`.
     #   @return [Array<Types::CoverageStringFilter>]
     #
     # @!attribute [rw] scan_type
@@ -3568,15 +3611,36 @@ module Aws::Inspector2
     #   @return [Array<Types::CoverageStringFilter>]
     #
     # @!attribute [rw] cloud_provider
-    #   The cloud provider to filter coverage results by.
+    #   The cloud provider to filter coverage results by. Valid values:
+    #
+    #   * `AWS` – Amazon Web Services resources.
+    #
+    #   * `AZURE` – Microsoft Azure resources.
+    #
+    #   * `GCP` – Google Cloud Platform (GCP) resources.
     #   @return [Array<Types::CoverageStringFilter>]
     #
     # @!attribute [rw] cloud_provider_account_id
-    #   The cloud provider account ID to filter coverage results by.
+    #   The cloud provider account ID to filter coverage results by. The
+    #   value format depends on the cloud provider:
+    #
+    #   * An Amazon Web Services account ID.
+    #
+    #   * An Azure subscription ID.
+    #
+    #   * A Google Cloud Platform (GCP) project ID, such as `my-project`.
     #   @return [Array<Types::CoverageStringFilter>]
     #
     # @!attribute [rw] cloud_provider_region
-    #   The cloud provider region to filter coverage results by.
+    #   The cloud provider region to filter coverage results by. The value
+    #   format depends on the cloud provider:
+    #
+    #   * An Amazon Web Services Region, such as `us-east-1`.
+    #
+    #   * An Azure region, such as `eastus`.
+    #
+    #   * A Google Cloud Platform (GCP) location, such as the region
+    #     `us-central1` or the zone `us-central1-a`.
     #   @return [Array<Types::CoverageStringFilter>]
     #
     # @!attribute [rw] cloud_vm_instance_tags
@@ -3609,6 +3673,13 @@ module Aws::Inspector2
     #
     # @!attribute [rw] cloud_provider_org_id
     #   The cloud provider organization ID to filter coverage results by.
+    #   The value format depends on the cloud provider:
+    #
+    #   * An Amazon Web Services Organizations organization ID.
+    #
+    #   * An Azure tenant ID.
+    #
+    #   * A numeric Google Cloud Platform (GCP) organization ID.
     #   @return [Array<Types::CoverageStringFilter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CoverageFilterCriteria AWS API Documentation
@@ -3717,7 +3788,22 @@ module Aws::Inspector2
     # Inspector.
     #
     # @!attribute [rw] resource_type
-    #   The type of the covered resource.
+    #   The type of the covered resource. Valid values:
+    #
+    #   * Amazon Web Services – `AWS_EC2_INSTANCE`, `AWS_LAMBDA_FUNCTION`,
+    #     `AWS_ECR_CONTAINER_IMAGE`, `AWS_ECR_REPOSITORY`, `MACHINE_IMAGE`,
+    #     `CODE_REPOSITORY`, or `AWS_ACCOUNT`.
+    #
+    #   * Microsoft Azure – `Microsoft.Compute/virtualMachines`,
+    #     `Microsoft.ContainerRegistry/registries`,
+    #     `Microsoft.ContainerRegistry/registry/containerRepository`,
+    #     `Microsoft.ContainerRegistry/registry/containerImage`, or
+    #     `Microsoft.Web/sites`.
+    #
+    #   * Google Cloud Platform (GCP) – `compute.googleapis.com/Instance`,
+    #     `cloudfunctions.googleapis.com/Function`,
+    #     `artifactregistry.googleapis.com/Repository`, or
+    #     `artifactregistry.googleapis.com/DockerImage`.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -3749,19 +3835,47 @@ module Aws::Inspector2
     #   @return [String]
     #
     # @!attribute [rw] provider
-    #   The cloud provider of the covered resource.
+    #   The cloud provider of the covered resource. Valid values:
+    #
+    #   * `AWS` – Amazon Web Services resources.
+    #
+    #   * `AZURE` – Microsoft Azure resources.
+    #
+    #   * `GCP` – Google Cloud Platform (GCP) resources.
     #   @return [String]
     #
     # @!attribute [rw] provider_account_id
-    #   The cloud provider account ID of the covered resource.
+    #   The cloud provider account ID of the covered resource. The value
+    #   format depends on the cloud provider:
+    #
+    #   * An Amazon Web Services account ID.
+    #
+    #   * An Azure subscription ID.
+    #
+    #   * A Google Cloud Platform (GCP) project ID, such as `my-project`.
     #   @return [String]
     #
     # @!attribute [rw] provider_org_id
-    #   The cloud provider organization ID of the covered resource.
+    #   The cloud provider organization ID of the covered resource. The
+    #   value format depends on the cloud provider:
+    #
+    #   * An Amazon Web Services Organizations organization ID.
+    #
+    #   * An Azure tenant ID.
+    #
+    #   * A numeric Google Cloud Platform (GCP) organization ID.
     #   @return [String]
     #
     # @!attribute [rw] provider_region
-    #   The cloud provider region of the covered resource.
+    #   The cloud provider region of the covered resource. The value format
+    #   depends on the cloud provider:
+    #
+    #   * An Amazon Web Services Region, such as `us-east-1`.
+    #
+    #   * An Azure region, such as `eastus`.
+    #
+    #   * A Google Cloud Platform (GCP) location, such as the region
+    #     `us-central1` or the zone `us-central1-a`.
     #   @return [String]
     #
     # @!attribute [rw] provider_partition
@@ -5365,7 +5479,11 @@ module Aws::Inspector2
     #   @return [Array<Types::NumberFilter>]
     #
     # @!attribute [rw] resource_type
-    #   Details on the resource types used to filter findings.
+    #   Details on the resource types used to filter findings. For Google
+    #   Cloud Platform (GCP) resources, the resource type is
+    #   `compute.googleapis.com/Instance`,
+    #   `cloudfunctions.googleapis.com/Function`, or
+    #   `artifactregistry.googleapis.com/DockerImage`.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] resource_id
@@ -5955,7 +6073,10 @@ module Aws::Inspector2
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The resource type to aggregate.
+    #   The resource type to aggregate. For Google Cloud Platform (GCP)
+    #   resources, the resource type is `compute.googleapis.com/Instance`,
+    #   `cloudfunctions.googleapis.com/Function`, or
+    #   `artifactregistry.googleapis.com/DockerImage`.
     #   @return [String]
     #
     # @!attribute [rw] sort_order
@@ -6003,6 +6124,8 @@ module Aws::Inspector2
     #   * `AWS` – Findings from Amazon Web Services resources.
     #
     #   * `AZURE` – Findings from Microsoft Azure resources.
+    #
+    #   * `GCP` – Findings from Google Cloud Platform (GCP) resources.
     #   @return [String]
     #
     # @!attribute [rw] cloud_account_id
@@ -6020,6 +6143,9 @@ module Aws::Inspector2
     #   * An Amazon Web Services Region, such as `us-east-1`.
     #
     #   * An Azure region, such as `eastus`.
+    #
+    #   * A Google Cloud Platform (GCP) location, such as the region
+    #     `us-central1` or the zone `us-central1-a`.
     #   @return [String]
     #
     # @!attribute [rw] cloud_partition
@@ -6094,7 +6220,14 @@ module Aws::Inspector2
     #   @return [String]
     #
     # @!attribute [rw] cloud_provider
-    #   The cloud provider associated with the free trial information.
+    #   The cloud provider associated with the free trial information. Valid
+    #   values:
+    #
+    #   * `AWS` – Amazon Web Services resources.
+    #
+    #   * `AZURE` – Microsoft Azure resources.
+    #
+    #   * `GCP` – Google Cloud Platform (GCP) resources.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/FreeTrialInfo AWS API Documentation
@@ -6131,6 +6264,181 @@ module Aws::Inspector2
       :account_id,
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scope of Google Cloud Platform (GCP) resources that Amazon
+    # Inspector scans for a single scanning type, including the scope level,
+    # the targeted resources, and the current state.
+    #
+    # @!attribute [rw] scope_type
+    #   The type of scope: `ORGANIZATION`, which scans all projects in the
+    #   GCP organization, or `PROJECT`, which scans only the specified GCP
+    #   projects.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_values
+    #   The GCP project IDs to scan when `scopeType` is `PROJECT`. Not used
+    #   when `scopeType` is `ORGANIZATION`. Amazon Inspector scans the
+    #   organization of the Amazon Web Services Config connector.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] state
+    #   The current state of the scope configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   The reason for the current state of the scope configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GcpCapabilityScope AWS API Documentation
+    #
+    class GcpCapabilityScope < Struct.new(
+      :scope_type,
+      :scope_values,
+      :state,
+      :state_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scope of Google Cloud Platform (GCP) resources to scan for a
+    # single scanning type. Provide this as part of a
+    # `GcpScopeConfigurationInput` when you create or update a connector.
+    #
+    # @!attribute [rw] scope_type
+    #   The type of scope: `ORGANIZATION`, which scans all projects in the
+    #   GCP organization, or `PROJECT`, which scans only the specified GCP
+    #   projects.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_values
+    #   The GCP project IDs to scan. Required when `scopeType` is `PROJECT`.
+    #   Don't specify scope values when `scopeType` is `ORGANIZATION`.
+    #   Amazon Inspector scans the organization of the Amazon Web Services
+    #   Config connector.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GcpCapabilityScopeInput AWS API Documentation
+    #
+    class GcpCapabilityScopeInput < Struct.new(
+      :scope_type,
+      :scope_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration details specific to Google Cloud Platform (GCP) for
+    # creating a connector, including the Amazon Web Services Config
+    # connector association, scan scope, and locations to scan.
+    #
+    # @!attribute [rw] aws_config_connector_arn
+    #   The ARN of the Amazon Web Services Config connector to associate
+    #   with this connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_configuration
+    #   The scope configuration that defines which GCP resources to scan.
+    #   @return [Types::GcpScopeConfigurationInput]
+    #
+    # @!attribute [rw] gcp_regions
+    #   The GCP locations to scan, such as regions, zones, multi-regions, or
+    #   dual-regions. Specify `ALL` to scan all locations.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] auto_install_vm_scanner
+    #   Specifies whether to automatically install the VM scanner on
+    #   connected GCP resources. Defaults to `true`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GcpProviderDetailCreate AWS API Documentation
+    #
+    class GcpProviderDetailCreate < Struct.new(
+      :aws_config_connector_arn,
+      :scope_configuration,
+      :gcp_regions,
+      :auto_install_vm_scanner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration details specific to Google Cloud Platform (GCP) for
+    # updating a connector, including the scan scope and locations to scan.
+    #
+    # @!attribute [rw] gcp_regions
+    #   The updated GCP locations to scan, such as regions, zones,
+    #   multi-regions, or dual-regions. Specify `ALL` to scan all locations.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] scope_configuration
+    #   The updated scope configuration that defines which GCP resources to
+    #   scan.
+    #   @return [Types::GcpScopeConfigurationInput]
+    #
+    # @!attribute [rw] auto_install_vm_scanner
+    #   Specifies whether to automatically install the VM scanner on
+    #   connected GCP resources.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GcpProviderDetailUpdate AWS API Documentation
+    #
+    class GcpProviderDetailUpdate < Struct.new(
+      :gcp_regions,
+      :scope_configuration,
+      :auto_install_vm_scanner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scope of Google Cloud Platform (GCP) resources that Amazon
+    # Inspector scans, defined separately for VM, container image, and
+    # serverless scanning. Returned as part of a connector's configuration.
+    #
+    # @!attribute [rw] vm_scanning
+    #   The scope configuration for VM scanning.
+    #   @return [Types::GcpCapabilityScope]
+    #
+    # @!attribute [rw] container_image_scanning
+    #   The scope configuration for container image scanning.
+    #   @return [Types::GcpCapabilityScope]
+    #
+    # @!attribute [rw] serverless_scanning
+    #   The scope configuration for serverless scanning.
+    #   @return [Types::GcpCapabilityScope]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GcpScopeConfiguration AWS API Documentation
+    #
+    class GcpScopeConfiguration < Struct.new(
+      :vm_scanning,
+      :container_image_scanning,
+      :serverless_scanning)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scope of Google Cloud Platform (GCP) resources to scan, defined
+    # separately for VM, container image, and serverless scanning. Provide
+    # this when you create or update a GCP connector.
+    #
+    # @!attribute [rw] vm_scanning
+    #   The scope configuration input for VM scanning.
+    #   @return [Types::GcpCapabilityScopeInput]
+    #
+    # @!attribute [rw] container_image_scanning
+    #   The scope configuration input for container image scanning.
+    #   @return [Types::GcpCapabilityScopeInput]
+    #
+    # @!attribute [rw] serverless_scanning
+    #   The scope configuration input for serverless scanning.
+    #   @return [Types::GcpCapabilityScopeInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GcpScopeConfigurationInput AWS API Documentation
+    #
+    class GcpScopeConfigurationInput < Struct.new(
+      :vm_scanning,
+      :container_image_scanning,
+      :serverless_scanning)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6889,6 +7197,8 @@ module Aws::Inspector2
     #   * `AWS` – Findings from Amazon Web Services resources.
     #
     #   * `AZURE` – Findings from Microsoft Azure resources.
+    #
+    #   * `GCP` – Findings from Google Cloud Platform (GCP) resources.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] cloud_account_ids
@@ -6906,6 +7216,9 @@ module Aws::Inspector2
     #   * An Amazon Web Services Region, such as `us-east-1`.
     #
     #   * An Azure region, such as `eastus`.
+    #
+    #   * A Google Cloud Platform (GCP) location, such as the region
+    #     `us-central1` or the zone `us-central1-a`.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] cloud_partitions
@@ -6972,6 +7285,8 @@ module Aws::Inspector2
     #   * `AWS` – Findings from Amazon Web Services resources.
     #
     #   * `AZURE` – Findings from Microsoft Azure resources.
+    #
+    #   * `GCP` – Findings from Google Cloud Platform (GCP) resources.
     #   @return [String]
     #
     # @!attribute [rw] cloud_account_id
@@ -6989,6 +7304,9 @@ module Aws::Inspector2
     #   * An Amazon Web Services Region, such as `us-east-1`.
     #
     #   * An Azure region, such as `eastus`.
+    #
+    #   * A Google Cloud Platform (GCP) location, such as the region
+    #     `us-central1` or the zone `us-central1-a`.
     #   @return [String]
     #
     # @!attribute [rw] cloud_partition
@@ -7934,7 +8252,11 @@ module Aws::Inspector2
     #   @return [Types::CoverageFilterCriteria]
     #
     # @!attribute [rw] group_by
-    #   The value to group the results by.
+    #   The value to group the results by. For multi-cloud resources, use
+    #   `PROVIDER`, `PROVIDER_ACCOUNT_ID` (Azure subscription ID or Google
+    #   Cloud Platform (GCP) project ID), `PROVIDER_ORG_ID` (Azure tenant ID
+    #   or Google Cloud Platform (GCP) organization ID), or
+    #   `PROVIDER_REGION`.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -9021,16 +9343,23 @@ module Aws::Inspector2
     #   The Azure-specific details for creating a connector.
     #   @return [Types::AzureProviderDetailCreate]
     #
+    # @!attribute [rw] gcp
+    #   The details specific to Google Cloud Platform (GCP) for creating a
+    #   connector.
+    #   @return [Types::GcpProviderDetailCreate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ProviderDetailCreate AWS API Documentation
     #
     class ProviderDetailCreate < Struct.new(
       :azure,
+      :gcp,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class Azure < ProviderDetailCreate; end
+      class Gcp < ProviderDetailCreate; end
       class Unknown < ProviderDetailCreate; end
     end
 
@@ -9042,16 +9371,23 @@ module Aws::Inspector2
     #   The Azure-specific details for updating a connector.
     #   @return [Types::AzureProviderDetailUpdate]
     #
+    # @!attribute [rw] gcp
+    #   The details specific to Google Cloud Platform (GCP) for updating a
+    #   connector.
+    #   @return [Types::GcpProviderDetailUpdate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ProviderDetailUpdate AWS API Documentation
     #
     class ProviderDetailUpdate < Struct.new(
       :azure,
+      :gcp,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class Azure < ProviderDetailUpdate; end
+      class Gcp < ProviderDetailUpdate; end
       class Unknown < ProviderDetailUpdate; end
     end
 
@@ -9152,6 +9488,8 @@ module Aws::Inspector2
     #   * `AWS` – Findings from Amazon Web Services resources.
     #
     #   * `AZURE` – Findings from Microsoft Azure resources.
+    #
+    #   * `GCP` – Findings from Google Cloud Platform (GCP) resources.
     #   @return [String]
     #
     # @!attribute [rw] cloud_partition
@@ -9174,6 +9512,9 @@ module Aws::Inspector2
     #   * An Amazon Web Services Region, such as `us-east-1`.
     #
     #   * An Azure region, such as `eastus`.
+    #
+    #   * A Google Cloud Platform (GCP) location, such as the region
+    #     `us-central1` or the zone `us-central1-a`.
     #   @return [String]
     #
     # @!attribute [rw] cloud_org_id
@@ -9257,15 +9598,35 @@ module Aws::Inspector2
     #   @return [Types::ResourceDetails]
     #
     # @!attribute [rw] provider
-    #   The cloud provider of the resource.
+    #   The cloud provider of the resource. Valid values:
+    #
+    #   * `AWS` – Amazon Web Services resources.
+    #
+    #   * `AZURE` – Microsoft Azure resources.
+    #
+    #   * `GCP` – Google Cloud Platform (GCP) resources.
     #   @return [String]
     #
     # @!attribute [rw] provider_account_id
-    #   The cloud provider account ID of the resource.
+    #   The cloud provider account ID of the resource. The value format
+    #   depends on the cloud provider:
+    #
+    #   * An Amazon Web Services account ID.
+    #
+    #   * An Azure subscription ID.
+    #
+    #   * A Google Cloud Platform (GCP) project ID, such as `my-project`.
     #   @return [String]
     #
     # @!attribute [rw] provider_org_id
-    #   The cloud provider organization ID of the resource.
+    #   The cloud provider organization ID of the resource. The value format
+    #   depends on the cloud provider:
+    #
+    #   * An Amazon Web Services Organizations organization ID.
+    #
+    #   * An Azure tenant ID.
+    #
+    #   * A numeric Google Cloud Platform (GCP) organization ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Resource AWS API Documentation
@@ -9353,7 +9714,19 @@ module Aws::Inspector2
     #   @return [Array<Types::ResourceStringFilter>]
     #
     # @!attribute [rw] resource_type
-    #   The resource types used as resource filter criteria.
+    #   The resource types used as resource filter criteria. Valid values:
+    #
+    #   * Amazon Web Services – `AWS_EC2_INSTANCE`,
+    #     `AWS_ECR_CONTAINER_IMAGE`, `AWS_LAMBDA_FUNCTION`, or
+    #     `MACHINE_IMAGE`.
+    #
+    #   * Microsoft Azure – `Microsoft.Compute/virtualMachines`,
+    #     `Microsoft.ContainerRegistry/registry/containerImage`, or
+    #     `Microsoft.Web/sites`.
+    #
+    #   * Google Cloud Platform (GCP) – `compute.googleapis.com/Instance`,
+    #     `cloudfunctions.googleapis.com/Function`, or
+    #     `artifactregistry.googleapis.com/DockerImage`.
     #   @return [Array<Types::ResourceStringFilter>]
     #
     # @!attribute [rw] ecr_repository_name
@@ -9379,20 +9752,47 @@ module Aws::Inspector2
     #   @return [Array<Types::ResourceMapFilter>]
     #
     # @!attribute [rw] cloud_provider
-    #   The cloud providers used as resource filter criteria.
+    #   The cloud providers used as resource filter criteria. Valid values:
+    #
+    #   * `AWS` – Amazon Web Services resources.
+    #
+    #   * `AZURE` – Microsoft Azure resources.
+    #
+    #   * `GCP` – Google Cloud Platform (GCP) resources.
     #   @return [Array<Types::ResourceStringFilter>]
     #
     # @!attribute [rw] cloud_provider_account_id
-    #   The cloud provider account IDs used as resource filter criteria.
+    #   The cloud provider account IDs used as resource filter criteria. The
+    #   value format depends on the cloud provider:
+    #
+    #   * An Amazon Web Services account ID.
+    #
+    #   * An Azure subscription ID.
+    #
+    #   * A Google Cloud Platform (GCP) project ID.
     #   @return [Array<Types::ResourceStringFilter>]
     #
     # @!attribute [rw] cloud_provider_org_id
     #   The cloud provider organization IDs used as resource filter
-    #   criteria.
+    #   criteria. The value format depends on the cloud provider:
+    #
+    #   * An Amazon Web Services Organizations organization ID.
+    #
+    #   * An Azure tenant ID.
+    #
+    #   * A Google Cloud Platform (GCP) organization ID.
     #   @return [Array<Types::ResourceStringFilter>]
     #
     # @!attribute [rw] cloud_provider_region
-    #   The cloud provider regions used as resource filter criteria.
+    #   The cloud provider regions used as resource filter criteria. The
+    #   value format depends on the cloud provider:
+    #
+    #   * An Amazon Web Services Region, such as `us-east-1`.
+    #
+    #   * An Azure region, such as `eastus`.
+    #
+    #   * A Google Cloud Platform (GCP) location, such as the region
+    #     `us-central1` or the zone `us-central1-a`.
     #   @return [Array<Types::ResourceStringFilter>]
     #
     # @!attribute [rw] cloud_vm_instance_tags
@@ -9895,9 +10295,9 @@ module Aws::Inspector2
     # update a connector.
     #
     # @!attribute [rw] scope_type
-    #   The type of scope. Valid values are `TENANT`, which scans all
-    #   resources in the Azure tenant, and `SUBSCRIPTION`, which scans only
-    #   the resources in the specified Azure subscriptions.
+    #   The type of scope: `TENANT`, which scans all resources in the Azure
+    #   tenant, or `SUBSCRIPTION`, which scans only the resources in the
+    #   specified Azure subscriptions.
     #   @return [String]
     #
     # @!attribute [rw] scope_values
@@ -10126,6 +10526,8 @@ module Aws::Inspector2
     #   * `AWS` – Findings from Amazon Web Services resources.
     #
     #   * `AZURE` – Findings from Microsoft Azure resources.
+    #
+    #   * `GCP` – Findings from Google Cloud Platform (GCP) resources.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] cloud_partitions
@@ -10147,6 +10549,9 @@ module Aws::Inspector2
     #   * An Amazon Web Services Region, such as `us-east-1`.
     #
     #   * An Azure region, such as `eastus`.
+    #
+    #   * A Google Cloud Platform (GCP) location, such as the region
+    #     `us-central1` or the zone `us-central1-a`.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] cloud_org_ids
@@ -10198,6 +10603,8 @@ module Aws::Inspector2
     #   * `AWS` – Findings from Amazon Web Services resources.
     #
     #   * `AZURE` – Findings from Microsoft Azure resources.
+    #
+    #   * `GCP` – Findings from Google Cloud Platform (GCP) resources.
     #   @return [String]
     #
     # @!attribute [rw] cloud_account_id
@@ -10224,6 +10631,9 @@ module Aws::Inspector2
     #   * An Amazon Web Services Region, such as `us-east-1`.
     #
     #   * An Azure region, such as `eastus`.
+    #
+    #   * A Google Cloud Platform (GCP) location, such as the region
+    #     `us-central1` or the zone `us-central1-a`.
     #   @return [String]
     #
     # @!attribute [rw] cloud_org_id
@@ -10849,7 +11259,10 @@ module Aws::Inspector2
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] resource_type
-    #   The resource type to aggregate on.
+    #   The resource type to aggregate on. For Google Cloud Platform (GCP)
+    #   resources, the resource type is `compute.googleapis.com/Instance`,
+    #   `cloudfunctions.googleapis.com/Function`, or
+    #   `artifactregistry.googleapis.com/DockerImage`.
     #   @return [String]
     #
     # @!attribute [rw] finding_type
@@ -11450,7 +11863,23 @@ module Aws::Inspector2
     # operation.
     #
     # @!attribute [rw] type
-    #   The type scan.
+    #   The type of scan. Valid values:
+    #
+    #   * Amazon Web Services – `EC2_INSTANCE_HOURS`,
+    #     `EC2_AGENTLESS_INSTANCE_HOURS`, `EC2_AMI_HOURS`,
+    #     `EC2_AMI_ONE_SHOT_SCAN`, `ECR_INITIAL_SCAN`, `ECR_RESCAN`,
+    #     `LAMBDA_FUNCTION_HOURS`, `LAMBDA_FUNCTION_CODE_HOURS`,
+    #     `CODE_REPOSITORY_SAST`, `CODE_REPOSITORY_IAC`, or
+    #     `CODE_REPOSITORY_SCA`.
+    #
+    #   * Microsoft Azure – `AZURE_VM_AGENT_BASED_INSTANCE_HOURS`,
+    #     `AZURE_CONTAINER_IMAGE_INITIAL_SCAN`,
+    #     `AZURE_CONTAINER_IMAGE_RESCAN`, or
+    #     `AZURE_SERVERLESS_FUNCTION_HOURS`.
+    #
+    #   * Google Cloud Platform (GCP) – `GCP_VM_AGENT_BASED_INSTANCE_HOURS`,
+    #     `GCP_CONTAINER_IMAGE_INITIAL_SCAN`, `GCP_CONTAINER_IMAGE_RESCAN`,
+    #     or `GCP_CLOUD_RUN_HOURS` (Cloud Run functions).
     #   @return [String]
     #
     # @!attribute [rw] total
@@ -11466,7 +11895,14 @@ module Aws::Inspector2
     #   @return [String]
     #
     # @!attribute [rw] cloud_provider
-    #   The cloud provider associated with the usage information.
+    #   The cloud provider associated with the usage information. Valid
+    #   values:
+    #
+    #   * `AWS` – Amazon Web Services resources.
+    #
+    #   * `AZURE` – Microsoft Azure resources.
+    #
+    #   * `GCP` – Google Cloud Platform (GCP) resources.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Usage AWS API Documentation
@@ -11660,6 +12096,8 @@ module Aws::Inspector2
     #   * `AWS` – Findings from Amazon Web Services resources.
     #
     #   * `AZURE` – Findings from Microsoft Azure resources.
+    #
+    #   * `GCP` – Findings from Google Cloud Platform (GCP) resources.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] cloud_partitions
@@ -11681,6 +12119,9 @@ module Aws::Inspector2
     #   * An Amazon Web Services Region, such as `us-east-1`.
     #
     #   * An Azure region, such as `eastus`.
+    #
+    #   * A Google Cloud Platform (GCP) location, such as the region
+    #     `us-central1` or the zone `us-central1-a`.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] cloud_org_ids
@@ -11732,6 +12173,8 @@ module Aws::Inspector2
     #   * `AWS` – Findings from Amazon Web Services resources.
     #
     #   * `AZURE` – Findings from Microsoft Azure resources.
+    #
+    #   * `GCP` – Findings from Google Cloud Platform (GCP) resources.
     #   @return [String]
     #
     # @!attribute [rw] cloud_account_id
@@ -11758,6 +12201,9 @@ module Aws::Inspector2
     #   * An Amazon Web Services Region, such as `us-east-1`.
     #
     #   * An Azure region, such as `eastus`.
+    #
+    #   * A Google Cloud Platform (GCP) location, such as the region
+    #     `us-central1` or the zone `us-central1-a`.
     #   @return [String]
     #
     # @!attribute [rw] cloud_org_id

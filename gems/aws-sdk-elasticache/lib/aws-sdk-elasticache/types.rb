@@ -3000,6 +3000,18 @@ module Aws::ElastiCache
     #   above.
     #   @return [String]
     #
+    # @!attribute [rw] integrations
+    #   Which serverless cache integrations to enable. Valid values are:
+    #
+    #   * `dynamodb` – DynamoDB integration.
+    #
+    #   ^
+    #
+    #   DynamoDB integration requires the Valkey engine with a major engine
+    #   version of 9 or above. If not specified, no integrations are
+    #   enabled.
+    #   @return [Array<Types::IntegrationRequest>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateServerlessCacheRequest AWS API Documentation
     #
     class CreateServerlessCacheRequest < Struct.new(
@@ -3017,7 +3029,8 @@ module Aws::ElastiCache
       :snapshot_retention_limit,
       :daily_snapshot_time,
       :network_type,
-      :connection_type)
+      :connection_type,
+      :integrations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5537,6 +5550,45 @@ module Aws::ElastiCache
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InsufficientCacheClusterCapacityFault AWS API Documentation
     #
     class InsufficientCacheClusterCapacityFault < Aws::EmptyStructure; end
+
+    # An integration configured on the serverless cache, and its current
+    # status. ElastiCache supports DynamoDB integration.
+    #
+    # @!attribute [rw] integration_type
+    #   The integration type. ElastiCache supports `dynamodb`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the integration. Valid values are:
+    #
+    #   * `enabled` – The integration is enabled.
+    #
+    #   * `disabled` – The integration is disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Integration AWS API Documentation
+    #
+    class Integration < Struct.new(
+      :integration_type,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies an integration to enable on the serverless cache when you
+    # create it.
+    #
+    # @!attribute [rw] integration_type
+    #   The integration type to enable. Must be `dynamodb`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/IntegrationRequest AWS API Documentation
+    #
+    class IntegrationRequest < Struct.new(
+      :integration_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The requested Amazon Resource Name (ARN) does not refer to an existing
     # resource.
@@ -8713,7 +8765,7 @@ module Aws::ElastiCache
     # during migration.
     #
     # @!attribute [rw] secret_arn
-    #   The ARN of the secret in AWS Secrets Manager that contains the
+    #   The ARN of the secret in Secrets Manager that contains the
     #   credentials for authenticating with the source.
     #   @return [String]
     #
@@ -8856,6 +8908,10 @@ module Aws::ElastiCache
     #   Provides a summary of the migration status for the serverless cache.
     #   @return [Types::MigrationSummary]
     #
+    # @!attribute [rw] integrations
+    #   Configured integrations and their status.
+    #   @return [Array<Types::Integration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServerlessCache AWS API Documentation
     #
     class ServerlessCache < Struct.new(
@@ -8879,7 +8935,8 @@ module Aws::ElastiCache
       :daily_snapshot_time,
       :network_type,
       :connection_type,
-      :migration)
+      :migration,
+      :integrations)
       SENSITIVE = []
       include Aws::Structure
     end

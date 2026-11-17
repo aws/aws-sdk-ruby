@@ -91,6 +91,25 @@ module Aws
                                                        ) -> _CreateCentralizationRuleForOrganizationResponseSuccess
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCentralizationRuleForOrganizationResponseSuccess
 
+      interface _CreateConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectorOutput]
+        def connector: () -> Types::Connector
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#create_connector-instance_method
+      def create_connector: (
+                              connector_configuration: {
+                                azure: {
+                                  tenant_identifier: ::String,
+                                  client_identifier: ::String
+                                }?
+                              },
+                              role_arn: ::String,
+                              name: ::String,
+                              ?tags: Hash[::String, ::String],
+                              ?client_token: ::String
+                            ) -> _CreateConnectorResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectorResponseSuccess
+
       interface _CreateDatasetIntegrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetIntegrationOutput]
         def arn: () -> ::String
@@ -164,6 +183,15 @@ module Aws
                                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _DeleteConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConnectorOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#delete_connector-instance_method
+      def delete_connector: (
+                              connector_identifier: ::String
+                            ) -> _DeleteConnectorResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConnectorResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#delete_dataset_integration-instance_method
       def delete_dataset_integration: (
                                         arn: ::String
@@ -217,6 +245,43 @@ module Aws
                                                       rule_identifier: ::String
                                                     ) -> _GetCentralizationRuleForOrganizationResponseSuccess
                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCentralizationRuleForOrganizationResponseSuccess
+
+      interface _GetConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectorOutput]
+        def connector: () -> Types::Connector
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#get_connector-instance_method
+      def get_connector: (
+                           connector_identifier: ::String
+                         ) -> _GetConnectorResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectorResponseSuccess
+
+      interface _GetConnectorTelemetryManifestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectorTelemetryManifestOutput]
+        def manifest: () -> Types::TelemetryManifest
+        def version: () -> ::Integer
+        def last_update_time_stamp: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#get_connector_telemetry_manifest-instance_method
+      def get_connector_telemetry_manifest: (
+                                              connector_identifier: ::String
+                                            ) -> _GetConnectorTelemetryManifestResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectorTelemetryManifestResponseSuccess
+
+      interface _GetConnectorTelemetrySetupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectorTelemetrySetupOutput]
+        def artifacts: () -> ::Array[Types::SetupArtifact]
+        def required_permissions_to_apply: () -> ::Array[::String]
+        def format: () -> ("BICEP")
+        def provider: () -> ("AZURE")
+        def manifest_version: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#get_connector_telemetry_setup-instance_method
+      def get_connector_telemetry_setup: (
+                                           connector_identifier: ::String,
+                                           ?format: ("BICEP")
+                                         ) -> _GetConnectorTelemetrySetupResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectorTelemetrySetupResponseSuccess
 
       interface _GetDatasetIntegrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDatasetIntegrationOutput]
@@ -321,6 +386,21 @@ module Aws
                                                ) -> _GetTelemetryRuleForOrganizationResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTelemetryRuleForOrganizationResponseSuccess
 
+      interface _GetThirdPartyTelemetryEnrichmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetThirdPartyTelemetryEnrichmentOutput]
+        def arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("Initializing" | "Running" | "Stopped" | "Impaired")
+        def status_reason: () -> ::String
+        def telemetry_source_configuration: () -> Types::TelemetrySourceConfigurationOutput
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#get_third_party_telemetry_enrichment-instance_method
+      def get_third_party_telemetry_enrichment: (
+                                                  telemetry_enrichment_identifier: ::String
+                                                ) -> _GetThirdPartyTelemetryEnrichmentResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetThirdPartyTelemetryEnrichmentResponseSuccess
+
       interface _ListCentralizationRulesForOrganizationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCentralizationRulesForOrganizationOutput]
         def centralization_rule_summaries: () -> ::Array[Types::CentralizationRuleSummary]
@@ -334,6 +414,18 @@ module Aws
                                                         ?next_token: ::String
                                                       ) -> _ListCentralizationRulesForOrganizationResponseSuccess
                                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCentralizationRulesForOrganizationResponseSuccess
+
+      interface _ListConnectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectorsOutput]
+        def connector_summaries: () -> ::Array[Types::ConnectorSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#list_connectors-instance_method
+      def list_connectors: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListConnectorsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectorsResponseSuccess
 
       interface _ListDatasetIntegrationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetIntegrationsOutput]
@@ -379,6 +471,63 @@ module Aws
                                                       ?next_token: ::String
                                                     ) -> _ListResourceTelemetryForOrganizationResponseSuccess
                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceTelemetryForOrganizationResponseSuccess
+
+      interface _ListResourcesByConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourcesByConnectorOutput]
+        def results: () -> Types::ConnectorQueryResults
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#list_resources_by_connector-instance_method
+      def list_resources_by_connector: (
+                                         connector_identifier: ::String,
+                                         selector: {
+                                           azure: {
+                                             management_groups: {
+                                               parent_management_group_id: ::String?
+                                             }?,
+                                             subscriptions: {
+                                               management_group_id: ::String?
+                                             }?,
+                                             resource_types: {
+                                               scope: {
+                                                 management_group_id: ::String?,
+                                                 subscription_ids: Array[::String]?
+                                               }?
+                                             }?,
+                                             regions: {
+                                               scope: {
+                                                 management_group_id: ::String?,
+                                                 subscription_ids: Array[::String]?
+                                               }?
+                                             }?,
+                                             resource_ids: {
+                                               scope: {
+                                                 management_group_id: ::String?,
+                                                 subscription_ids: Array[::String]?
+                                               }?,
+                                               resource_type: ::String?,
+                                               region: ::String?,
+                                               tag_filters: Array[
+                                                 {
+                                                   key: ::String,
+                                                   values: Array[::String]
+                                                 }
+                                               ]?
+                                             }?,
+                                             event_hubs: {
+                                               scope: {
+                                                 management_group_id: ::String?,
+                                                 subscription_ids: Array[::String]?
+                                               }?,
+                                               namespace_name: ::String?,
+                                               region: ::String?
+                                             }?
+                                           }?
+                                         },
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListResourcesByConnectorResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourcesByConnectorResponseSuccess
 
       interface _ListS3TableIntegrationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListS3TableIntegrationsOutput]
@@ -442,6 +591,86 @@ module Aws
                                                  ) -> _ListTelemetryRulesForOrganizationResponseSuccess
                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTelemetryRulesForOrganizationResponseSuccess
 
+      interface _ListThirdPartyTelemetryEnrichmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListThirdPartyTelemetryEnrichmentsOutput]
+        def telemetry_enrichments: () -> ::Array[Types::ThirdPartyTelemetryEnrichmentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#list_third_party_telemetry_enrichments-instance_method
+      def list_third_party_telemetry_enrichments: (
+                                                    ?status: ("Initializing" | "Running" | "Stopped" | "Impaired"),
+                                                    ?telemetry_source: ("Azure"),
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String
+                                                  ) -> _ListThirdPartyTelemetryEnrichmentsResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListThirdPartyTelemetryEnrichmentsResponseSuccess
+
+      interface _PutConnectorTelemetryManifestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutConnectorTelemetryManifestOutput]
+        def version: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#put_connector_telemetry_manifest-instance_method
+      def put_connector_telemetry_manifest: (
+                                              connector_identifier: ::String,
+                                              manifest: {
+                                                source: {
+                                                  azure: Array[
+                                                    {
+                                                      telemetry_types: Array[("ResourceLogs" | "Metrics" | "FlowLogs")],
+                                                      scope: {
+                                                        subscriptions: {
+                                                          all: {
+                                                          }?,
+                                                          ids: Array[::String]?
+                                                        }?,
+                                                        regions: Array[::String]?,
+                                                        resource_types: Array[::String]?,
+                                                        tag_filters: Array[
+                                                          {
+                                                            key: ::String,
+                                                            values: Array[::String]
+                                                          }
+                                                        ]?,
+                                                        resources: Array[
+                                                          {
+                                                            region: ::String,
+                                                            resource_ids: Array[::String]
+                                                          }
+                                                        ]?
+                                                      }
+                                                    }
+                                                  ]?
+                                                },
+                                                infrastructure: {
+                                                  azure: {
+                                                    subscription_id: ::String?,
+                                                    event_hubs: Array[
+                                                      {
+                                                        tier: ("Standard" | "Premium"),
+                                                        partition_count: ::Integer
+                                                      }
+                                                    ]?,
+                                                    flow_logs: {
+                                                      customer_managed: {
+                                                        storage_accounts: Array[
+                                                          {
+                                                            region: ::String,
+                                                            storage_account_ids: Array[::String]
+                                                          }
+                                                        ]
+                                                      }?,
+                                                      aws_managed: {
+                                                        retention_days: ::Integer
+                                                      }?
+                                                    }?
+                                                  }?
+                                                }?
+                                              },
+                                              ?expected_version: ::Integer,
+                                              ?client_token: ::String
+                                            ) -> _PutConnectorTelemetryManifestResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConnectorTelemetryManifestResponseSuccess
+
       interface _StartTelemetryEnrichmentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartTelemetryEnrichmentOutput]
         def status: () -> ("Running" | "Stopped" | "Impaired")
@@ -465,6 +694,36 @@ module Aws
                                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _StartTelemetryPipelineRefreshResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartTelemetryPipelineRefreshOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#start_telemetry_pipeline_refresh-instance_method
+      def start_telemetry_pipeline_refresh: (
+                                              pipeline_identifier: ::String
+                                            ) -> _StartTelemetryPipelineRefreshResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTelemetryPipelineRefreshResponseSuccess
+
+      interface _StartThirdPartyTelemetryEnrichmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartThirdPartyTelemetryEnrichmentOutput]
+        def arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("Initializing" | "Running" | "Stopped" | "Impaired")
+        def status_reason: () -> ::String
+        def telemetry_source_configuration: () -> Types::TelemetrySourceConfigurationOutput
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#start_third_party_telemetry_enrichment-instance_method
+      def start_third_party_telemetry_enrichment: (
+                                                    name: ::String,
+                                                    telemetry_source_configuration: {
+                                                      azure: {
+                                                        aws_config_connector_arn: ::String
+                                                      }?
+                                                    },
+                                                    ?tags: Hash[::String, ::String]
+                                                  ) -> _StartThirdPartyTelemetryEnrichmentResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartThirdPartyTelemetryEnrichmentResponseSuccess
+
       interface _StopTelemetryEnrichmentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopTelemetryEnrichmentOutput]
         def status: () -> ("Running" | "Stopped" | "Impaired")
@@ -480,6 +739,19 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#stop_telemetry_evaluation_for_organization-instance_method
       def stop_telemetry_evaluation_for_organization: () -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _StopThirdPartyTelemetryEnrichmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopThirdPartyTelemetryEnrichmentOutput]
+        def name: () -> ::String
+        def telemetry_source: () -> ("Azure")
+        def status: () -> ("Initializing" | "Running" | "Stopped" | "Impaired")
+        def status_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#stop_third_party_telemetry_enrichment-instance_method
+      def stop_third_party_telemetry_enrichment: (
+                                                   telemetry_enrichment_identifier: ::String
+                                                 ) -> _StopThirdPartyTelemetryEnrichmentResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopThirdPartyTelemetryEnrichmentResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ObservabilityAdmin/Client.html#tag_resource-instance_method
       def tag_resource: (

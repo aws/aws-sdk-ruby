@@ -1635,6 +1635,8 @@ module Aws::WorkSpaces
     SelfservicePermissions.add_member(:change_compute_type, Shapes::ShapeRef.new(shape: ReconnectEnum, location_name: "ChangeComputeType"))
     SelfservicePermissions.add_member(:switch_running_mode, Shapes::ShapeRef.new(shape: ReconnectEnum, location_name: "SwitchRunningMode"))
     SelfservicePermissions.add_member(:rebuild_workspace, Shapes::ShapeRef.new(shape: ReconnectEnum, location_name: "RebuildWorkspace"))
+    SelfservicePermissions.add_member(:nested_virtualization, Shapes::ShapeRef.new(shape: ReconnectEnum, location_name: "NestedVirtualization"))
+    SelfservicePermissions.add_member(:enable_end_user_advisor, Shapes::ShapeRef.new(shape: ReconnectEnum, location_name: "EnableEndUserAdvisor"))
     SelfservicePermissions.struct_class = Types::SelfservicePermissions
 
     Snapshot.add_member(:snapshot_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SnapshotTime"))

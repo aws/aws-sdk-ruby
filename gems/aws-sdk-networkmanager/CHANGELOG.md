@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2026-11-17)
+------------------
+
+* Feature - Adds support for Multipath Resilience change values to be delivered when reviewing a core network change set.
+
 1.96.0 (2026-11-16)
 ------------------
 

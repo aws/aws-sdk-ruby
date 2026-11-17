@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2026-11-17)
+------------------
+
+* Feature - AWS Elemental Inference now supports functions, for running your own analysis on feed media, and question sets, for custom decisions on contextual metadata shots and scenes.
+
 1.25.0 (2026-11-16)
 ------------------
 

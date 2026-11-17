@@ -19,6 +19,9 @@ module Aws
       source_metrics_configuration: {
         metrics_selection_criteria: ::String?
       }?,
+      source_profiles_configuration: {
+        profiles_selection_criteria: ::String?
+      }?,
       source_context_graph_configuration: {
       }?
     }
@@ -49,6 +52,11 @@ module Aws
       account: ::String?,
       destination_logs_configuration: Params::destination_logs_configuration?,
       destination_metrics_configuration: {
+        backup_configuration: {
+          region: ::String
+        }?
+      }?,
+      destination_profiles_configuration: {
         backup_configuration: {
           region: ::String
         }?

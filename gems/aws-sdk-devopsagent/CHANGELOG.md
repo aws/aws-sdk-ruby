@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2026-11-17)
+------------------
+
+* Feature - AWS DevOps Agent adds Code Change Risk Analysis capability and task types, and GetChat and UpdateChat operations to rename, archive, and unarchive chats and filter ListChats by archive status.
+
 1.30.0 (2026-11-16)
 ------------------
 

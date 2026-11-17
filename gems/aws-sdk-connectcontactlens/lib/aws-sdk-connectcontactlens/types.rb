@@ -514,6 +514,11 @@ module Aws::ConnectContactLens
     #   List of positions where issues were detected on the transcript.
     #   @return [Array<Types::IssueDetected>]
     #
+    # @!attribute [rw] language_code
+    #   The language code detected for this piece of transcript, for
+    #   example, `en-US`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-contact-lens-2020-08-21/Transcript AWS API Documentation
     #
     class Transcript < Struct.new(
@@ -524,7 +529,8 @@ module Aws::ConnectContactLens
       :begin_offset_millis,
       :end_offset_millis,
       :sentiment,
-      :issues_detected)
+      :issues_detected,
+      :language_code)
       SENSITIVE = []
       include Aws::Structure
     end

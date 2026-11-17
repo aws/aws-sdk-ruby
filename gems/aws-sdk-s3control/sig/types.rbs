@@ -899,6 +899,11 @@ module Aws::S3Control
       SENSITIVE: []
     end
 
+    class IntAccessTiers
+      attr_accessor is_enabled: bool
+      SENSITIVE: []
+    end
+
     class InternalServiceException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1955,10 +1960,29 @@ module Aws::S3Control
       attr_accessor exclude: Types::Exclude
       attr_accessor data_export: Types::StorageLensDataExport
       attr_accessor expanded_prefixes_data_export: Types::StorageLensExpandedPrefixesDataExport
+      attr_accessor cost_and_usage_reports_publish: Types::StorageLensCostAndUsageReportsPublish
       attr_accessor is_enabled: bool
       attr_accessor aws_org: Types::StorageLensAwsOrg
       attr_accessor storage_lens_arn: ::String
       attr_accessor prefix_delimiter: ::String
+      attr_accessor int_access_tiers: Types::IntAccessTiers
+      SENSITIVE: []
+    end
+
+    class StorageLensCostAndUsageReportsPrefixLevel
+      attr_accessor is_enabled: bool
+      attr_accessor selection_criteria: Types::StorageLensCostAndUsageReportsSelectionCriteria
+      SENSITIVE: []
+    end
+
+    class StorageLensCostAndUsageReportsPublish
+      attr_accessor prefix_level: Types::StorageLensCostAndUsageReportsPrefixLevel
+      SENSITIVE: []
+    end
+
+    class StorageLensCostAndUsageReportsSelectionCriteria
+      attr_accessor min_depth: ::Integer
+      attr_accessor max_depth: ::Integer
       SENSITIVE: []
     end
 

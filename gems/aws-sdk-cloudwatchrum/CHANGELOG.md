@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2026-11-17)
+------------------
+
+* Feature - Add SessionMetadata to PutRumEvents for attributes that apply to every event in a batch, such as browser, device, and operating system.
+
 1.73.0 (2026-11-16)
 ------------------
 

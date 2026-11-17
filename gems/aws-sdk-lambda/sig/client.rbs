@@ -518,6 +518,16 @@ module Aws
                                       ) -> _DeleteCodeSigningConfigResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCodeSigningConfigResponseSuccess
 
+      interface _DeleteDurableExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDurableExecutionResponse]
+        def deletion_request_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#delete_durable_execution-instance_method
+      def delete_durable_execution: (
+                                      durable_execution_arn: ::String
+                                    ) -> _DeleteDurableExecutionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDurableExecutionResponseSuccess
+
       interface _DeleteEventSourceMappingResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::EventSourceMappingConfiguration]
         def uuid: () -> ::String
@@ -672,12 +682,14 @@ module Aws
         def input_payload: () -> ::String
         def result: () -> ::String
         def start_timestamp: () -> ::Time
-        def status: () -> ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "STOPPED")
+        def status: () -> ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "STOPPED" | "DELETING" | "PAUSING" | "PAUSED")
         def end_timestamp: () -> ::Time
         def version: () -> ::String
         def trace_header: () -> Types::TraceHeader
         def execution_data_included: () -> bool
         def durable_config: () -> Types::DurableConfig
+        def pause_details: () -> Types::PauseDetails
+        def expected_execution_timeout_timestamp: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_durable_execution-instance_method
       def get_durable_execution: (
@@ -1102,7 +1114,7 @@ module Aws
                                                  function_name: ::String,
                                                  ?qualifier: ::String,
                                                  ?durable_execution_name: ::String,
-                                                 ?statuses: Array[("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "STOPPED")],
+                                                 ?statuses: Array[("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "STOPPED" | "DELETING" | "PAUSING" | "PAUSED")],
                                                  ?started_after: ::Time,
                                                  ?started_before: ::Time,
                                                  ?reverse_order: bool,
@@ -1256,6 +1268,18 @@ module Aws
                                        ?max_items: ::Integer
                                      ) -> _ListVersionsByFunctionResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVersionsByFunctionResponseSuccess
+
+      interface _PauseDurableExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PauseDurableExecutionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#pause_durable_execution-instance_method
+      def pause_durable_execution: (
+                                     durable_execution_arn: ::String,
+                                     ?client_token: ::String,
+                                     ?reason: ::String,
+                                     ?execution_timeout_paused: bool
+                                   ) -> _PauseDurableExecutionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PauseDurableExecutionResponseSuccess
 
       interface _PublishLayerVersionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PublishLayerVersionResponse]
@@ -1470,6 +1494,17 @@ module Aws
                                ?revision_id: ::String
                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _ResumeDurableExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResumeDurableExecutionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#resume_durable_execution-instance_method
+      def resume_durable_execution: (
+                                      durable_execution_arn: ::String,
+                                      ?client_token: ::String,
+                                      ?reason: ::String
+                                    ) -> _ResumeDurableExecutionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResumeDurableExecutionResponseSuccess
 
       interface _SendDurableExecutionCallbackFailureResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SendDurableExecutionCallbackFailureResponse]

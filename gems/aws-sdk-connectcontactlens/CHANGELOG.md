@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2026-11-17)
+------------------
+
+* Feature - Amazon Connect Customer now allows conversational analytics for voice contacts to be analyzed in more than one language. The languages detected will be present in the output.
+
 1.74.0 (2026-11-16)
 ------------------
 

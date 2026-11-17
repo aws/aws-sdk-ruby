@@ -1396,6 +1396,8 @@ module Aws::WorkSpaces
       attr_accessor change_compute_type: ("ENABLED" | "DISABLED")
       attr_accessor switch_running_mode: ("ENABLED" | "DISABLED")
       attr_accessor rebuild_workspace: ("ENABLED" | "DISABLED")
+      attr_accessor nested_virtualization: ("ENABLED" | "DISABLED")
+      attr_accessor enable_end_user_advisor: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 

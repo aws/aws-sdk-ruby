@@ -218,6 +218,196 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # The configuration for invoking an agent hosted on AgentCore Runtime.
+    # Each scenario runs in its own runtime session, and the turns of a
+    # scenario are sent in order within that session. The batch evaluation
+    # uses your credentials to read the agent runtime endpoint and the
+    # dataset, invoke the agent runtime, and read the resulting traces. You
+    # must have permission for these actions.
+    #
+    # @!attribute [rw] agent_runtime_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the agent runtime endpoint to
+    #   invoke. Specify an endpoint in the same account and Region as the
+    #   batch evaluation. The service requires the endpoint and its agent
+    #   runtime version to be ready. The agent runtime must use the HTTP
+    #   protocol and IAM inbound authorization.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_template
+    #   A JSON object template for the request payload sent to the agent for
+    #   each turn. The template must contain the placeholder
+    #   `{{turn.input}}` exactly once, as the complete value of a JSON
+    #   string and not as a field name. The service replaces the placeholder
+    #   with the input of the turn. If the input isn't a string, the
+    #   service inserts it as a JSON value. If you don't specify a
+    #   template, the service uses `{"prompt": "{{turn.input}}"}`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/AgentCoreRuntimeInvocation AWS API Documentation
+    #
+    class AgentCoreRuntimeInvocation < Struct.new(
+      :agent_runtime_endpoint_arn,
+      :request_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the agent hosted on AgentCore Runtime that a batch
+    # evaluation invoked.
+    #
+    # @!attribute [rw] agent_runtime_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the agent runtime endpoint that
+    #   the batch evaluation invoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_runtime_version
+    #   The version of the agent runtime that the endpoint pointed to when
+    #   the batch evaluation started. If you update the endpoint after the
+    #   batch evaluation starts, each later turn uses the version that the
+    #   endpoint points to when the turn runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_template
+    #   The request payload template that the batch evaluation used for each
+    #   turn. If the request didn't specify a template, this is the default
+    #   template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/AgentCoreRuntimeInvocationDetails AWS API Documentation
+    #
+    class AgentCoreRuntimeInvocationDetails < Struct.new(
+      :agent_runtime_endpoint_arn,
+      :agent_runtime_version,
+      :request_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about an Amazon Bedrock AgentCore Agent
+    # Insight, including its label, description, and creation time. This
+    # structure is returned by `ListAgentInsights`; use `GetAgentInsight` to
+    # retrieve the sample sessions and root causes for a specific insight.
+    #
+    # @!attribute [rw] type
+    #   The type of insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A generated display label for the Agent Insight. This is a
+    #   human-readable summary of the detected pattern, not an identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A generated description of the Agent Insight that explains the
+    #   detected pattern and its observed behavior across sessions.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the Agent Insight was first created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] affected_session_count
+    #   The number of sessions affected by the insight pattern.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] agent_insight_id
+    #   The unique identifier of the Agent Insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_name
+    #   The application that the Agent Insight belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] batch_evaluation_id
+    #   The Batch Evaluation that produced this Insight, when applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_metadata_status
+    #   Specifies whether customer-encrypted metadata is available for the
+    #   Agent Insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the Agent Insight was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] archive_status
+    #   Specifies whether the Agent Insight is active or archived. Valid
+    #   values:
+    #
+    #   * `ACTIVE` - The insight is currently active.
+    #
+    #   * `ARCHIVED` - The insight has been archived.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_seen_at
+    #   The most recent date and time when the insight pattern was observed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/AgentInsightSummary AWS API Documentation
+    #
+    class AgentInsightSummary < Struct.new(
+      :type,
+      :name,
+      :description,
+      :created_at,
+      :affected_session_count,
+      :agent_insight_id,
+      :application_name,
+      :batch_evaluation_id,
+      :customer_metadata_status,
+      :updated_at,
+      :archive_status,
+      :last_seen_at)
+      SENSITIVE = [:name, :description]
+      include Aws::Structure
+    end
+
+    # The agent that the batch evaluation invokes with each scenario in the
+    # dataset.
+    #
+    # @note AgentInvocationConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] agent_core_runtime
+    #   The configuration for invoking an agent hosted on AgentCore Runtime.
+    #   @return [Types::AgentCoreRuntimeInvocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/AgentInvocationConfig AWS API Documentation
+    #
+    class AgentInvocationConfig < Struct.new(
+      :agent_core_runtime,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AgentCoreRuntime < AgentInvocationConfig; end
+      class Unknown < AgentInvocationConfig; end
+    end
+
+    # The agent that a batch evaluation invoked with each scenario in the
+    # dataset.
+    #
+    # @note AgentInvocationDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AgentInvocationDetails corresponding to the set member.
+    #
+    # @!attribute [rw] agent_core_runtime
+    #   The details of the agent hosted on AgentCore Runtime that the batch
+    #   evaluation invoked.
+    #   @return [Types::AgentCoreRuntimeInvocationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/AgentInvocationDetails AWS API Documentation
+    #
+    class AgentInvocationDetails < Struct.new(
+      :agent_core_runtime,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AgentCoreRuntime < AgentInvocationDetails; end
+      class Unknown < AgentInvocationDetails; end
+    end
+
     # The agent skills descriptor configuration for a registry record.
     #
     # @!attribute [rw] skill_md
@@ -476,6 +666,22 @@ module Aws::BedrockAgentCore
     class BatchDeleteMemoryRecordsOutput < Struct.new(
       :successful_records,
       :failed_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A batch evaluation source for a dataset generation. The generation
+    # reads the sessions the batch evaluation evaluated, so there is no time
+    # window.
+    #
+    # @!attribute [rw] batch_evaluation_arn
+    #   The Amazon Resource Name (ARN) of the batch evaluation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/BatchEvaluationSourceConfig AWS API Documentation
+    #
+    class BatchEvaluationSourceConfig < Struct.new(
+      :batch_evaluation_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1061,6 +1267,46 @@ module Aws::BedrockAgentCore
       :log_group_names,
       :log_group_name_prefixes,
       :filter_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A CloudWatch Logs source for a dataset generation. Specify either
+    # `logGroupNames` or `logGroupNamePrefixes`.
+    #
+    # @!attribute [rw] log_group_names
+    #   The names of the log groups to read, from 1 to 5. You can't specify
+    #   this together with `logGroupNamePrefixes`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] log_group_name_prefixes
+    #   Prefixes of the names of the log groups to read, from 1 to 5. You
+    #   can't specify this together with `logGroupNames`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] service_names
+    #   The service name of the agent, which matches the `service.name`
+    #   resource attribute in its traces. Specify exactly one.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] start_time
+    #   The start of the time window to read sessions from. The default is 7
+    #   days before `endTime`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end of the time window to read sessions from. The default is the
+    #   time the generation starts.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CloudWatchLogsSourceConfig AWS API Documentation
+    #
+    class CloudWatchLogsSourceConfig < Struct.new(
+      :log_group_names,
+      :log_group_name_prefixes,
+      :service_names,
+      :start_time,
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1983,6 +2229,27 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # A custom data identifier, defined by a regular expression.
+    #
+    # @!attribute [rw] name
+    #   The name of the custom data identifier. It can't be the same as the
+    #   name of a managed data identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] regex
+    #   The regular expression that matches the data to mask. Lookahead and
+    #   lookbehind aren't supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CustomDataIdentifier AWS API Documentation
+    #
+    class CustomDataIdentifier < Struct.new(
+      :name,
+      :regex)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A custom descriptor configuration for a registry record.
     #
     # @!attribute [rw] inline_content
@@ -2024,6 +2291,143 @@ module Aws::BedrockAgentCore
       class CloudWatchLogs < DataSourceConfig; end
       class OnlineEvaluationConfigSource < DataSourceConfig; end
       class Unknown < DataSourceConfig; end
+    end
+
+    # Identifies the dataset and the version of it that a batch evaluation
+    # ran.
+    #
+    # @!attribute [rw] dataset_id
+    #   The unique identifier of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_version
+    #   The version of the dataset that the batch evaluation ran. If the
+    #   request didn't specify a version, this is the latest published
+    #   version when the batch evaluation started.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DatasetDetails AWS API Documentation
+    #
+    class DatasetDetails < Struct.new(
+      :dataset_id,
+      :dataset_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for running the scenarios in a dataset against an
+    # agent as part of a batch evaluation.
+    #
+    # @!attribute [rw] dataset
+    #   The dataset whose scenarios are sent to the agent. The dataset must
+    #   use the predefined evaluation schema, and the version that runs must
+    #   contain between 1 and 1,000 scenarios.
+    #   @return [Types::DatasetSource]
+    #
+    # @!attribute [rw] agent_invocation
+    #   Specifies the agent runtime endpoint and the request template that
+    #   the batch evaluation uses to invoke the agent for each scenario in
+    #   the dataset.
+    #   @return [Types::AgentInvocationConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DatasetExecutionConfig AWS API Documentation
+    #
+    class DatasetExecutionConfig < Struct.new(
+      :dataset,
+      :agent_invocation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the dataset and agent that a batch evaluation ran.
+    #
+    # @!attribute [rw] dataset
+    #   The dataset and the version of it that the batch evaluation ran.
+    #   @return [Types::DatasetDetails]
+    #
+    # @!attribute [rw] agent_invocation
+    #   The agent that the batch evaluation invoked.
+    #   @return [Types::AgentInvocationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DatasetExecutionDetails AWS API Documentation
+    #
+    class DatasetExecutionDetails < Struct.new(
+      :dataset,
+      :agent_invocation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a dataset generation. To get its counts and the request
+    # it was started with, call `GetDatasetGeneration`.
+    #
+    # @!attribute [rw] generation_id
+    #   The unique identifier of the dataset generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_id
+    #   The unique identifier of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the dataset generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the dataset generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] scenario_type
+    #   The type of scenario the generation produces.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the dataset generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the dataset generation started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completed_at
+    #   The time at which the dataset generation finished. Present only when
+    #   the generation has finished.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DatasetGenerationSummary AWS API Documentation
+    #
+    class DatasetGenerationSummary < Struct.new(
+      :generation_id,
+      :dataset_id,
+      :name,
+      :description,
+      :scenario_type,
+      :status,
+      :created_at,
+      :completed_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the dataset and the version of it to run.
+    #
+    # @!attribute [rw] dataset_id
+    #   The unique identifier of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_version
+    #   The number of a published version of the dataset. You can't run the
+    #   `DRAFT` version. If you don't specify a version, the batch
+    #   evaluation uses the latest published version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DatasetSource AWS API Documentation
+    #
+    class DatasetSource < Struct.new(
+      :dataset_id,
+      :dataset_version)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # @!attribute [rw] ab_test_id
@@ -2132,6 +2536,40 @@ module Aws::BedrockAgentCore
     class DeleteCapacityProviderSessionResponse < Struct.new(
       :capacity_provider_arn,
       :session_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_id
+    #   The unique identifier of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] generation_id
+    #   The unique identifier of the dataset generation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DeleteDatasetGenerationRequest AWS API Documentation
+    #
+    class DeleteDatasetGenerationRequest < Struct.new(
+      :dataset_id,
+      :generation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] generation_id
+    #   The unique identifier of the dataset generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the dataset generation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DeleteDatasetGenerationResponse AWS API Documentation
+    #
+    class DeleteDatasetGenerationResponse < Struct.new(
+      :generation_id,
       :status)
       SENSITIVE = []
       include Aws::Structure
@@ -2839,6 +3277,47 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # A condition on a session's evaluation result.
+    #
+    # @!attribute [rw] evaluator_id
+    #   The unique identifier of the evaluator whose result to compare.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_dimension_name
+    #   The dimension of the evaluator's result to compare. Required for an
+    #   evaluator that scores more than one dimension. Don't specify it for
+    #   any other evaluator.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   How to compare the evaluation result with `value`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value to compare the evaluation result with. Use `doubleValue`
+    #   for a score and `stringValue` for a label. `booleanValue` isn't
+    #   supported.
+    #   @return [Types::GenerationFilterValue]
+    #
+    # @!attribute [rw] aggregation
+    #   How to combine the evaluator's per-trace or per-span results into
+    #   one result for the session. Required for an evaluator that scores
+    #   traces or spans. Don't specify it for an evaluator that scores
+    #   sessions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/EvaluatorFilter AWS API Documentation
+    #
+    class EvaluatorFilter < Struct.new(
+      :evaluator_id,
+      :evaluation_dimension_name,
+      :operator,
+      :value,
+      :aggregation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Statistical metrics for a single evaluator comparing control and
     # treatment variants.
     #
@@ -3413,6 +3892,348 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # A condition on a session attribute.
+    #
+    # @!attribute [rw] key
+    #   The attribute key.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   How to compare the attribute with `value`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value to compare the attribute with.
+    #   @return [Types::GenerationFilterValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GenerationAttributeFilter AWS API Documentation
+    #
+    class GenerationAttributeFilter < Struct.new(
+      :key,
+      :operator,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The failures in a dataset generation that share an error code.
+    #
+    # @!attribute [rw] error_code
+    #   The error code, for example `ACCESS_DENIED` or
+    #   `EXPIRED_CREDENTIALS`. New codes can be added.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A description of the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of sessions and traces that failed with this error code.
+    #   Absent for a generation that finished before failures were counted
+    #   by code. In that case, `sessionIds` is a sample.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_ids
+    #   Up to 10 of the sessions that failed with this error code. Each
+    #   entry is a session ID, or the ID of a trace named in the request.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GenerationErrorDetail AWS API Documentation
+    #
+    class GenerationErrorDetail < Struct.new(
+      :error_code,
+      :error_message,
+      :count,
+      :session_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The value a filter compares with. Specify exactly one. Attribute
+    # filters support all three types. Evaluator filters support
+    # `stringValue` and `doubleValue`.
+    #
+    # @note GenerationFilterValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note GenerationFilterValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of GenerationFilterValue corresponding to the set member.
+    #
+    # @!attribute [rw] string_value
+    #   A string value.
+    #   @return [String]
+    #
+    # @!attribute [rw] double_value
+    #   A numeric value.
+    #   @return [Float]
+    #
+    # @!attribute [rw] boolean_value
+    #   A Boolean value.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GenerationFilterValue AWS API Documentation
+    #
+    class GenerationFilterValue < Struct.new(
+      :string_value,
+      :double_value,
+      :boolean_value,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class StringValue < GenerationFilterValue; end
+      class DoubleValue < GenerationFilterValue; end
+      class BooleanValue < GenerationFilterValue; end
+      class Unknown < GenerationFilterValue; end
+    end
+
+    # Conditions that a session must meet to be selected. A session must
+    # meet every condition you specify. Attribute and turn count filters
+    # work with any source. Evaluator filters need a source that has
+    # evaluation results.
+    #
+    # @!attribute [rw] attribute_filters
+    #   Attribute conditions, up to 5. A session must meet all of them. An
+    #   attribute on a span matches when any span in the session meets the
+    #   condition.
+    #   @return [Array<Types::GenerationAttributeFilter>]
+    #
+    # @!attribute [rw] turn_count
+    #   The range of turns a session can have. For example, set `max` to 1
+    #   for single-turn sessions only, or `min` to 2 for multi-turn sessions
+    #   only. Sessions with more than 100 turns are never selected.
+    #   @return [Types::TurnCountRange]
+    #
+    # @!attribute [rw] evaluator_filters
+    #   Conditions on evaluation results, up to 10. A session must meet all
+    #   of them. You can use these only with an `onlineEvaluation` or
+    #   `batchEvaluation` source. A `cloudWatchLogs` source has no
+    #   evaluation results.
+    #   @return [Array<Types::EvaluatorFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GenerationFilters AWS API Documentation
+    #
+    class GenerationFilters < Struct.new(
+      :attribute_filters,
+      :turn_count,
+      :evaluator_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of session and trace IDs a dataset generation was started
+    # with.
+    #
+    # @!attribute [rw] session_id_count
+    #   The number of session IDs in the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] trace_id_count
+    #   The number of trace IDs in the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GenerationIdentifierCounts AWS API Documentation
+    #
+    class GenerationIdentifierCounts < Struct.new(
+      :session_id_count,
+      :trace_id_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The sessions and traces to generate examples from. Specify at least
+    # one session ID or trace ID. A session with more than 100 turns is
+    # reported as an error and produces no example.
+    #
+    # @!attribute [rw] session_ids
+    #   The IDs of the sessions to use, up to 25.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] trace_ids
+    #   The IDs of the traces to use, up to 25.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GenerationIdentifiers AWS API Documentation
+    #
+    class GenerationIdentifiers < Struct.new(
+      :session_ids,
+      :trace_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Counts of the sessions, scenarios and examples a dataset generation
+    # has processed.
+    #
+    # @!attribute [rw] sessions_matched
+    #   The number of sessions that matched the filters or were named in the
+    #   request, before sampling. This includes sessions that later failed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sessions_selected
+    #   The number of sessions left after sampling.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sessions_unscored
+    #   The number of sessions left out because an evaluator filter had no
+    #   result to compare, either because the session wasn't evaluated yet
+    #   or because the evaluation failed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sessions_failed
+    #   The number of sessions dropped because of an error. See
+    #   `errorDetails` for the errors.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scenarios_generated
+    #   The number of scenarios generated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scenarios_deduplicated
+    #   The number of scenarios left out as duplicates, of each other or of
+    #   examples already in the draft.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] examples_written
+    #   The number of examples added to the dataset's draft.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] examples_with_ground_truth
+    #   The number of added examples that have reference fields.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GenerationResults AWS API Documentation
+    #
+    class GenerationResults < Struct.new(
+      :sessions_matched,
+      :sessions_selected,
+      :sessions_unscored,
+      :sessions_failed,
+      :scenarios_generated,
+      :scenarios_deduplicated,
+      :examples_written,
+      :examples_with_ground_truth)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # How many scenarios a dataset generation produces.
+    #
+    # @!attribute [rw] max_scenarios
+    #   The maximum number of scenarios to generate, from 1 to 1,000. The
+    #   default is 100. The generation produces at most one scenario for
+    #   each selected session. The dataset's draft examples plus this value
+    #   can't be more than 1,000.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GenerationSamplingConfig AWS API Documentation
+    #
+    class GenerationSamplingConfig < Struct.new(
+      :max_scenarios)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # How a dataset generation chooses sessions. Specify exactly one:
+    # filters, to have AgentCore find matching sessions, or identifiers, to
+    # name the sessions and traces yourself. Sessions and traces you name
+    # aren't filtered further.
+    #
+    # @note GenerationSelection is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] filters
+    #   Conditions that a session must meet to be selected.
+    #   @return [Types::GenerationFilters]
+    #
+    # @!attribute [rw] identifiers
+    #   The sessions and traces to use.
+    #   @return [Types::GenerationIdentifiers]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GenerationSelection AWS API Documentation
+    #
+    class GenerationSelection < Struct.new(
+      :filters,
+      :identifiers,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Filters < GenerationSelection; end
+      class Identifiers < GenerationSelection; end
+      class Unknown < GenerationSelection; end
+    end
+
+    # How a dataset generation was asked to choose sessions. Filters are
+    # returned as submitted. Session and trace IDs are returned as counts,
+    # and the IDs themselves are never returned.
+    #
+    # @note GenerationSelectionRecord is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of GenerationSelectionRecord corresponding to the set member.
+    #
+    # @!attribute [rw] filters
+    #   The filters the generation was started with.
+    #   @return [Types::GenerationFilters]
+    #
+    # @!attribute [rw] identifiers
+    #   The number of session and trace IDs the generation was started with.
+    #   @return [Types::GenerationIdentifierCounts]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GenerationSelectionRecord AWS API Documentation
+    #
+    class GenerationSelectionRecord < Struct.new(
+      :filters,
+      :identifiers,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Filters < GenerationSelectionRecord; end
+      class Identifiers < GenerationSelectionRecord; end
+      class Unknown < GenerationSelectionRecord; end
+    end
+
+    # The source of a dataset generation.
+    #
+    # @note GenerationSource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] trace_generation
+    #   Generates examples from your agent's traces.
+    #   @return [Types::TraceGenerationSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GenerationSource AWS API Documentation
+    #
+    class GenerationSource < Struct.new(
+      :trace_generation,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class TraceGeneration < GenerationSource; end
+      class Unknown < GenerationSource; end
+    end
+
+    # The source a dataset generation was started with.
+    #
+    # @note GenerationSourceRecord is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of GenerationSourceRecord corresponding to the set member.
+    #
+    # @!attribute [rw] trace_generation
+    #   The trace source the generation was started with.
+    #   @return [Types::TraceGenerationRecord]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GenerationSourceRecord AWS API Documentation
+    #
+    class GenerationSourceRecord < Struct.new(
+      :trace_generation,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class TraceGeneration < GenerationSourceRecord; end
+      class Unknown < GenerationSourceRecord; end
+    end
+
     # @!attribute [rw] ab_test_id
     #   The unique identifier of the A/B test to retrieve.
     #   @return [String]
@@ -3580,6 +4401,112 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # @!attribute [rw] application_name
+    #   The application that the Agent Insight belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_insight_id
+    #   The unique identifier of the Agent Insight to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetAgentInsightRequest AWS API Documentation
+    #
+    class GetAgentInsightRequest < Struct.new(
+      :application_name,
+      :agent_insight_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] type
+    #   The type of insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A generated display label for the Agent Insight. This is a
+    #   human-readable summary of the detected pattern, not an identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A generated description of the Agent Insight that explains the
+    #   detected pattern and its observed behavior across sessions.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the Agent Insight was first created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] affected_session_count
+    #   The number of sessions affected by the insight pattern.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sample_sessions
+    #   A list of sample sessions that illustrate the Agent Insight,
+    #   including per-session findings that point to the relevant spans or
+    #   traces.
+    #   @return [Array<Types::SampleSession>]
+    #
+    # @!attribute [rw] root_causes
+    #   The root causes identified for the Agent Insight, each with an
+    #   explanation, an affected session count, an optional suggested fix,
+    #   and sample sessions that illustrate the root cause.
+    #   @return [Array<Types::InsightRootCause>]
+    #
+    # @!attribute [rw] agent_insight_id
+    #   The unique identifier of the Agent Insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_name
+    #   The application that the Agent Insight belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] batch_evaluation_id
+    #   The Batch Evaluation that produced this Insight, when applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_metadata_status
+    #   Specifies whether customer-encrypted metadata is available for the
+    #   Agent Insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the Agent Insight was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] archive_status
+    #   Specifies whether the Agent Insight is active or archived. Valid
+    #   values:
+    #
+    #   * `ACTIVE` - The insight is currently active.
+    #
+    #   * `ARCHIVED` - The insight has been archived.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_seen_at
+    #   The most recent date and time when the insight pattern was observed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetAgentInsightResponse AWS API Documentation
+    #
+    class GetAgentInsightResponse < Struct.new(
+      :type,
+      :name,
+      :description,
+      :created_at,
+      :affected_session_count,
+      :sample_sessions,
+      :root_causes,
+      :agent_insight_id,
+      :application_name,
+      :batch_evaluation_id,
+      :customer_metadata_status,
+      :updated_at,
+      :archive_status,
+      :last_seen_at)
+      SENSITIVE = [:name, :description]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] batch_evaluation_id
     #   The unique identifier of the batch evaluation to retrieve.
     #   @return [String]
@@ -3674,6 +4601,14 @@ module Aws::BedrockAgentCore
     #   The ARN of the KMS key used to encrypt evaluation data.
     #   @return [String]
     #
+    # @!attribute [rw] dataset_execution_details
+    #   The details of the dataset and agent that the batch evaluation ran,
+    #   including the dataset version and agent runtime version that the
+    #   service resolved when the batch evaluation started. This field is
+    #   present only if the batch evaluation was started with a
+    #   `datasetExecutionConfig`.
+    #   @return [Types::DatasetExecutionDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetBatchEvaluationResponse AWS API Documentation
     #
     class GetBatchEvaluationResponse < Struct.new(
@@ -3694,7 +4629,8 @@ module Aws::BedrockAgentCore
       :error_details,
       :description,
       :updated_at,
-      :kms_key_arn)
+      :kms_key_arn,
+      :dataset_execution_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3881,6 +4817,108 @@ module Aws::BedrockAgentCore
       :status,
       :certificates,
       :filesystem_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_id
+    #   The unique identifier of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] generation_id
+    #   The unique identifier of the dataset generation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetDatasetGenerationRequest AWS API Documentation
+    #
+    class GetDatasetGenerationRequest < Struct.new(
+      :dataset_id,
+      :generation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] generation_id
+    #   The unique identifier of the dataset generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the dataset generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the dataset generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_id
+    #   The unique identifier of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] scenario_type
+    #   The type of scenario the generation produces. This is the value from
+    #   the request, or `DYNAMIC` if the request didn't specify one.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the dataset generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason the dataset generation failed. Present only when the
+    #   status is `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the dataset generation started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time at which the dataset generation last changed status.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completed_at
+    #   The time at which the dataset generation finished. Present only when
+    #   the generation has finished.
+    #   @return [Time]
+    #
+    # @!attribute [rw] source
+    #   The source the generation was started with, including the resolved
+    #   time window. If you selected sessions and traces by ID, the response
+    #   gives the number of IDs instead of the IDs.
+    #   @return [Types::GenerationSourceRecord]
+    #
+    # @!attribute [rw] generation_results
+    #   Counts of the sessions, scenarios and examples the generation has
+    #   processed.
+    #   @return [Types::GenerationResults]
+    #
+    # @!attribute [rw] redaction_summary
+    #   A summary of what redaction found. Present only when the generation
+    #   was started with redaction.
+    #   @return [Types::RedactionSummary]
+    #
+    # @!attribute [rw] error_details
+    #   The errors the generation hit, grouped by error code. The list holds
+    #   the 10 most frequent error codes, most frequent first.
+    #   @return [Array<Types::GenerationErrorDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetDatasetGenerationResponse AWS API Documentation
+    #
+    class GetDatasetGenerationResponse < Struct.new(
+      :generation_id,
+      :name,
+      :description,
+      :dataset_id,
+      :scenario_type,
+      :status,
+      :failure_reason,
+      :created_at,
+      :updated_at,
+      :completed_at,
+      :source,
+      :generation_results,
+      :redaction_summary,
+      :error_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4452,6 +5490,33 @@ module Aws::BedrockAgentCore
     class GetWorkloadAccessTokenResponse < Struct.new(
       :workload_access_token)
       SENSITIVE = [:workload_access_token]
+      include Aws::Structure
+    end
+
+    # Reference fields to copy from the sessions into the generated
+    # examples.
+    #
+    # @!attribute [rw] fields
+    #   The reference fields to copy. Values are copied from the session as
+    #   observed, not generated.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] quality_filters
+    #   Evaluator conditions that a selected session must also meet to have
+    #   reference fields copied. If you don't specify these, the generation
+    #   uses the evaluator filters from `selection`. If the selection names
+    #   sessions and traces by ID, every selected session gets reference
+    #   fields. Specify an empty list to give every selected session
+    #   reference fields. You can't specify quality filters with a
+    #   `cloudWatchLogs` source.
+    #   @return [Array<Types::EvaluatorFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GroundTruthConfig AWS API Documentation
+    #
+    class GroundTruthConfig < Struct.new(
+      :fields,
+      :quality_filters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7037,6 +8102,60 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # @!attribute [rw] application_name
+    #   Filters the results to Agent Insights for an application.
+    #   @return [String]
+    #
+    # @!attribute [rw] batch_evaluation_id
+    #   Filters the results to Agent Insights produced by a batch
+    #   evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] archive_status
+    #   Filters the results by archive status.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of Agent Insight summaries to return in one
+    #   response. If you don't specify a value, the operation returns up to
+    #   50 summaries.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to specify where to start paginating the results. This token
+    #   is returned in a previous response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ListAgentInsightsRequest AWS API Documentation
+    #
+    class ListAgentInsightsRequest < Struct.new(
+      :application_name,
+      :batch_evaluation_id,
+      :archive_status,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agent_insights
+    #   The Agent Insight summaries.
+    #   @return [Array<Types::AgentInsightSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use to retrieve the next page of results. This value is
+    #   present only when additional results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ListAgentInsightsResponse AWS API Documentation
+    #
+    class ListAgentInsightsResponse < Struct.new(
+      :agent_insights,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   The maximum number of results to return in the response. If the
     #   total number of results is greater than this value, use the token
@@ -7186,6 +8305,54 @@ module Aws::BedrockAgentCore
     #
     class ListCodeInterpreterSessionsResponse < Struct.new(
       :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_id
+    #   The unique identifier of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. The default
+    #   is 20. If the total number of results is greater than this value,
+    #   use the token returned in the response in the `nextToken` field when
+    #   making another request to return the next batch of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ListDatasetGenerationsRequest AWS API Documentation
+    #
+    class ListDatasetGenerationsRequest < Struct.new(
+      :dataset_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_generations
+    #   The dataset generations.
+    #   @return [Array<Types::DatasetGenerationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ListDatasetGenerationsResponse AWS API Documentation
+    #
+    class ListDatasetGenerationsResponse < Struct.new(
+      :dataset_generations,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -8429,6 +9596,33 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # An online evaluation source for a dataset generation.
+    #
+    # @!attribute [rw] online_evaluation_config_arn
+    #   The Amazon Resource Name (ARN) of the online evaluation
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start of the time window to read sessions from. The default is 7
+    #   days before `endTime`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end of the time window to read sessions from. The default is the
+    #   time the generation starts.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/OnlineEvaluationSourceConfig AWS API Documentation
+    #
+    class OnlineEvaluationSourceConfig < Struct.new(
+      :online_evaluation_config_arn,
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the configuration for reusing agent traces from an online
     # evaluation configuration for recommendation analysis. Because online
     # evaluation is a continuous stream, a time range specifies which
@@ -9277,6 +10471,50 @@ module Aws::BedrockAgentCore
       class RecordExpiryDurationDays < RecordExpirySpecification; end
       class Action < RecordExpirySpecification; end
       class Unknown < RecordExpirySpecification; end
+    end
+
+    # Sensitive data to mask in generated examples. Nothing is redacted
+    # unless you specify at least one identifier. Each character of a match
+    # is replaced with `*`, so a masked value keeps its length. If detection
+    # fails, the generation fails and no examples are written.
+    #
+    # @!attribute [rw] identifiers
+    #   The managed data identifiers to apply. These match the CloudWatch
+    #   Logs managed data identifiers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] custom_data_identifiers
+    #   Custom data identifiers to apply, up to 10. You can use custom
+    #   identifiers without any managed identifiers.
+    #   @return [Array<Types::CustomDataIdentifier>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/RedactionConfiguration AWS API Documentation
+    #
+    class RedactionConfiguration < Struct.new(
+      :identifiers,
+      :custom_data_identifiers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of what redaction found in a dataset generation. It contains
+    # counts only, never the masked data.
+    #
+    # @!attribute [rw] scenarios_scanned
+    #   The number of scenarios scanned for sensitive data.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] finding_counts
+    #   The number of matches for each data identifier.
+    #   @return [Hash<String,Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/RedactionSummary AWS API Documentation
+    #
+    class RedactionSummary < Struct.new(
+      :scenarios_scanned,
+      :finding_counts)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Summary information about a registry record.
@@ -10263,6 +11501,18 @@ module Aws::BedrockAgentCore
     #   Output destination configuration.
     #   @return [Types::OutputConfig]
     #
+    # @!attribute [rw] dataset_execution_config
+    #   The configuration for running the scenarios in a dataset against an
+    #   agent before evaluating the resulting sessions. When you specify
+    #   this field, the batch evaluation runs each scenario in the dataset
+    #   against the agent. It then evaluates the sessions that the agent
+    #   produces. You must also specify `evaluators` and a
+    #   `dataSourceConfig` that uses `cloudWatchLogs`. Configure
+    #   `cloudWatchLogs` with the service name and log groups that the agent
+    #   uses for its traces. You can't specify `insights` or an
+    #   `onlineEvaluationConfigSource` data source with this field.
+    #   @return [Types::DatasetExecutionConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StartBatchEvaluationRequest AWS API Documentation
     #
     class StartBatchEvaluationRequest < Struct.new(
@@ -10275,7 +11525,8 @@ module Aws::BedrockAgentCore
       :tags,
       :kms_key_arn,
       :description,
-      :output_config)
+      :output_config,
+      :dataset_execution_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10556,6 +11807,85 @@ module Aws::BedrockAgentCore
     class StartCodeInterpreterSessionResponse < Struct.new(
       :code_interpreter_identifier,
       :session_id,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_id
+    #   The unique identifier of the dataset to add the generated examples
+    #   to. The dataset must be `ACTIVE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the dataset generation. The generation ID starts with
+    #   this name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the dataset generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] scenario_type
+    #   The type of scenario to generate. If you don't specify a value, the
+    #   generation produces `DYNAMIC` scenarios.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   Where the generation reads sessions from, and how it selects,
+    #   samples, labels and redacts them.
+    #   @return [Types::GenerationSource]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, the service ignores the request, but does not return an
+    #   error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StartDatasetGenerationRequest AWS API Documentation
+    #
+    class StartDatasetGenerationRequest < Struct.new(
+      :dataset_id,
+      :name,
+      :description,
+      :scenario_type,
+      :source,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] generation_id
+    #   The unique identifier of the dataset generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the dataset generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_id
+    #   The unique identifier of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the dataset generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the dataset generation started.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StartDatasetGenerationResponse AWS API Documentation
+    #
+    class StartDatasetGenerationResponse < Struct.new(
+      :generation_id,
+      :name,
+      :dataset_id,
+      :status,
       :created_at)
       SENSITIVE = []
       include Aws::Structure
@@ -11613,6 +12943,142 @@ module Aws::BedrockAgentCore
       class Unknown < ToolsFileSystemConfiguration; end
     end
 
+    # The trace source a dataset generation was started with.
+    #
+    # @!attribute [rw] source_config
+    #   Where the generation reads sessions from, including the resolved
+    #   time window.
+    #   @return [Types::TraceSourceConfig]
+    #
+    # @!attribute [rw] selection
+    #   How the generation chooses sessions. Filters are returned as
+    #   submitted, with the resolved maximum turn count. Session and trace
+    #   IDs are returned as counts. If this is absent, the request had no
+    #   selection.
+    #   @return [Types::GenerationSelectionRecord]
+    #
+    # @!attribute [rw] sampling
+    #   How many scenarios the generation produces.
+    #   @return [Types::GenerationSamplingConfig]
+    #
+    # @!attribute [rw] ground_truth
+    #   The reference fields the generation copies into the examples. If the
+    #   request didn't specify quality filters, the filters the generation
+    #   applies are returned here.
+    #   @return [Types::GroundTruthConfig]
+    #
+    # @!attribute [rw] redaction_configuration
+    #   The sensitive data the generation masks in the examples.
+    #   @return [Types::RedactionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/TraceGenerationRecord AWS API Documentation
+    #
+    class TraceGenerationRecord < Struct.new(
+      :source_config,
+      :selection,
+      :sampling,
+      :ground_truth,
+      :redaction_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for generating examples from your agent's traces.
+    #
+    # @!attribute [rw] source_config
+    #   Where to read the sessions from.
+    #   @return [Types::TraceSourceConfig]
+    #
+    # @!attribute [rw] selection
+    #   How to choose sessions from the source. If you don't specify a
+    #   selection, the generation uses every session in the source and time
+    #   window that has at most 100 turns.
+    #   @return [Types::GenerationSelection]
+    #
+    # @!attribute [rw] sampling
+    #   How many scenarios to generate from the selected sessions.
+    #   @return [Types::GenerationSamplingConfig]
+    #
+    # @!attribute [rw] ground_truth
+    #   Reference fields to copy from the sessions into the examples. If you
+    #   don't specify this, the examples have no reference fields.
+    #   @return [Types::GroundTruthConfig]
+    #
+    # @!attribute [rw] redaction_configuration
+    #   Sensitive data to mask in the examples. If you don't specify this,
+    #   nothing is redacted.
+    #   @return [Types::RedactionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/TraceGenerationSource AWS API Documentation
+    #
+    class TraceGenerationSource < Struct.new(
+      :source_config,
+      :selection,
+      :sampling,
+      :ground_truth,
+      :redaction_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Where a dataset generation reads sessions from. Specify exactly one
+    # source.
+    #
+    # @note TraceSourceConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note TraceSourceConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TraceSourceConfig corresponding to the set member.
+    #
+    # @!attribute [rw] cloud_watch_logs
+    #   Reads sessions from CloudWatch Logs log groups.
+    #   @return [Types::CloudWatchLogsSourceConfig]
+    #
+    # @!attribute [rw] online_evaluation
+    #   Reads sessions, with their evaluation results, from an online
+    #   evaluation configuration.
+    #   @return [Types::OnlineEvaluationSourceConfig]
+    #
+    # @!attribute [rw] batch_evaluation
+    #   Reads sessions, with their evaluation results, from a batch
+    #   evaluation.
+    #   @return [Types::BatchEvaluationSourceConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/TraceSourceConfig AWS API Documentation
+    #
+    class TraceSourceConfig < Struct.new(
+      :cloud_watch_logs,
+      :online_evaluation,
+      :batch_evaluation,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CloudWatchLogs < TraceSourceConfig; end
+      class OnlineEvaluation < TraceSourceConfig; end
+      class BatchEvaluation < TraceSourceConfig; end
+      class Unknown < TraceSourceConfig; end
+    end
+
+    # A range of turn counts. Each bound is from 1 to 100, and `min` can't
+    # be greater than `max`.
+    #
+    # @!attribute [rw] min
+    #   The minimum number of turns.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum number of turns. The default is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/TurnCountRange AWS API Documentation
+    #
+    class TurnCountRange < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This exception is thrown when the JWT bearer token is invalid or not
     # found for OAuth bearer token based access
     #
@@ -11718,6 +13184,58 @@ module Aws::BedrockAgentCore
       :ab_test_arn,
       :status,
       :execution_status,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_name
+    #   The application that the Agent Insight belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_insight_id
+    #   The unique identifier of the Agent Insight to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] archive_status
+    #   The archive status to apply to the Agent Insight. Valid values:
+    #
+    #   * `ACTIVE` - Marks the insight as active.
+    #
+    #   * `ARCHIVED` - Marks the insight as archived.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/UpdateAgentInsightRequest AWS API Documentation
+    #
+    class UpdateAgentInsightRequest < Struct.new(
+      :application_name,
+      :agent_insight_id,
+      :archive_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agent_insight_id
+    #   The unique identifier of the updated Agent Insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] archive_status
+    #   The archive status of the updated Agent Insight. Valid values:
+    #
+    #   * `ACTIVE` - The insight is active.
+    #
+    #   * `ARCHIVED` - The insight is archived.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the Agent Insight was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/UpdateAgentInsightResponse AWS API Documentation
+    #
+    class UpdateAgentInsightResponse < Struct.new(
+      :agent_insight_id,
+      :archive_status,
       :updated_at)
       SENSITIVE = []
       include Aws::Structure

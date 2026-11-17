@@ -413,6 +413,9 @@ module Aws::ConfigService
       attr_accessor last_update_requested_time: ::Time
       attr_accessor created_by: ::String
       attr_accessor template_ssm_document_details: Types::TemplateSSMDocumentDetails
+      attr_accessor type: ("CUSTOM" | "MANAGED")
+      attr_accessor source: Types::ConformancePackSource
+      attr_accessor scope: Types::ConformancePackScope
       SENSITIVE: []
     end
 
@@ -446,15 +449,27 @@ module Aws::ConfigService
       SENSITIVE: []
     end
 
+    class ConformancePackScope
+      attr_accessor tag_key: ::String
+      attr_accessor tag_value: ::String
+      SENSITIVE: []
+    end
+
+    class ConformancePackSource
+      attr_accessor source_identifier: ::String
+      SENSITIVE: []
+    end
+
     class ConformancePackStatusDetail
       attr_accessor conformance_pack_name: ::String
       attr_accessor conformance_pack_id: ::String
       attr_accessor conformance_pack_arn: ::String
-      attr_accessor conformance_pack_state: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+      attr_accessor conformance_pack_state: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
       attr_accessor stack_arn: ::String
       attr_accessor conformance_pack_status_reason: ::String
       attr_accessor last_update_requested_time: ::Time
       attr_accessor last_update_completed_time: ::Time
+      attr_accessor type: ("CUSTOM" | "MANAGED")
       SENSITIVE: []
     end
 
@@ -806,6 +821,7 @@ module Aws::ConfigService
 
     class DescribeConformancePackStatusRequest
       attr_accessor conformance_pack_names: ::Array[::String]
+      attr_accessor filters: Types::DescribeConformancePacksFilters
       attr_accessor limit: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -817,8 +833,14 @@ module Aws::ConfigService
       SENSITIVE: []
     end
 
+    class DescribeConformancePacksFilters
+      attr_accessor types: ::Array[("CUSTOM" | "MANAGED")]
+      SENSITIVE: []
+    end
+
     class DescribeConformancePacksRequest
       attr_accessor conformance_pack_names: ::Array[::String]
+      attr_accessor filters: Types::DescribeConformancePacksFilters
       attr_accessor limit: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -1777,6 +1799,8 @@ module Aws::ConfigService
       attr_accessor conformance_pack_input_parameters: ::Array[Types::ConformancePackInputParameter]
       attr_accessor template_ssm_document_details: Types::TemplateSSMDocumentDetails
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor source: Types::ConformancePackSource
+      attr_accessor scope: Types::ConformancePackScope
       SENSITIVE: []
     end
 

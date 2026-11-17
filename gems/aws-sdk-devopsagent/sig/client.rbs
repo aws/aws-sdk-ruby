@@ -92,7 +92,7 @@ module Aws
                                agent_space_id: ::String,
                                service_id: ::String,
                                configuration: Params::service_configuration,
-                               ?capabilities: Hash[("RELEASE_READINESS_REVIEW" | "RELEASE_READINESS_REVIEW_AUTOMATED_TESTING"), Params::capability_configuration]
+                               ?capabilities: Hash[("RELEASE_READINESS_REVIEW" | "RELEASE_READINESS_REVIEW_AUTOMATED_TESTING" | "CODE_CHANGE_RISK_ANALYSIS" | "CODE_CHANGE_RISK_ANALYSIS_AUTOMATED_TESTING"), Params::capability_configuration]
                              ) -> _AssociateServiceResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateServiceResponseSuccess
 
@@ -161,7 +161,7 @@ module Aws
                                    reference_url: ::String,
                                    association_id: ::String
                                  },
-                                 task_type: ("INVESTIGATION" | "EVALUATION" | "RELEASE_READINESS_REVIEW" | "RELEASE_TESTING"),
+                                 task_type: ("INVESTIGATION" | "EVALUATION" | "RELEASE_READINESS_REVIEW" | "RELEASE_TESTING" | "CODE_CHANGE_RISK_ANALYSIS"),
                                  title: ::String,
                                  ?description: ::String,
                                  priority: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "MINIMAL"),
@@ -464,6 +464,21 @@ module Aws
                             ) -> _GetBacklogTaskResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBacklogTaskResponseSuccess
 
+      interface _GetChatResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetChatResponse]
+        def execution_id: () -> ::String
+        def summary: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def archive_status: () -> ("ACTIVE" | "ARCHIVED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#get_chat-instance_method
+      def get_chat: (
+                      agent_space_id: ::String,
+                      execution_id: ::String
+                    ) -> _GetChatResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChatResponseSuccess
+
       interface _GetOperatorAppResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetOperatorAppOutput]
         def operator_app_url: () -> ::String
@@ -608,7 +623,7 @@ module Aws
                                   created_before: ::Time?,
                                   priority: Array[("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "MINIMAL")]?,
                                   status: Array[("PENDING_TRIAGE" | "LINKED" | "PENDING_START" | "IN_PROGRESS" | "PENDING_CUSTOMER_APPROVAL" | "COMPLETED" | "FAILED" | "TIMED_OUT" | "CANCELED" | "SKIPPED" | "WAITING")]?,
-                                  task_type: Array[("INVESTIGATION" | "EVALUATION" | "RELEASE_READINESS_REVIEW" | "RELEASE_TESTING")]?,
+                                  task_type: Array[("INVESTIGATION" | "EVALUATION" | "RELEASE_READINESS_REVIEW" | "RELEASE_TESTING" | "CODE_CHANGE_RISK_ANALYSIS")]?,
                                   primary_task_id: ::String?
                                 },
                                 ?limit: ::Integer,
@@ -628,7 +643,8 @@ module Aws
                         agent_space_id: ::String,
                         ?user_id: ::String,
                         ?max_results: ::Integer,
-                        ?next_token: ::String
+                        ?next_token: ::String,
+                        ?archive_status: ("ACTIVE" | "ARCHIVED")
                       ) -> _ListChatsResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChatsResponseSuccess
 
@@ -1037,7 +1053,7 @@ module Aws
                                 agent_space_id: ::String,
                                 association_id: ::String,
                                 configuration: Params::service_configuration,
-                                ?capabilities: Hash[("RELEASE_READINESS_REVIEW" | "RELEASE_READINESS_REVIEW_AUTOMATED_TESTING"), Params::capability_configuration]
+                                ?capabilities: Hash[("RELEASE_READINESS_REVIEW" | "RELEASE_READINESS_REVIEW_AUTOMATED_TESTING" | "CODE_CHANGE_RISK_ANALYSIS" | "CODE_CHANGE_RISK_ANALYSIS_AUTOMATED_TESTING"), Params::capability_configuration]
                               ) -> _UpdateAssociationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssociationResponseSuccess
 
@@ -1053,6 +1069,23 @@ module Aws
                                  ?client_token: ::String
                                ) -> _UpdateBacklogTaskResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBacklogTaskResponseSuccess
+
+      interface _UpdateChatResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChatResponse]
+        def execution_id: () -> ::String
+        def summary: () -> ::String
+        def updated_at: () -> ::Time
+        def archive_status: () -> ("ACTIVE" | "ARCHIVED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#update_chat-instance_method
+      def update_chat: (
+                         agent_space_id: ::String,
+                         execution_id: ::String,
+                         ?summary: ::String,
+                         ?archive_status: ("ACTIVE" | "ARCHIVED"),
+                         ?client_token: ::String
+                       ) -> _UpdateChatResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChatResponseSuccess
 
       interface _UpdateGoalResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGoalResponse]

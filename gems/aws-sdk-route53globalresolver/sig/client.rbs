@@ -172,7 +172,9 @@ module Aws
         def cidr: () -> ::String
         def created_at: () -> ::Time
         def id: () -> ::String
-        def ip_address_type: () -> ("IPV4" | "IPV6")
+        def ip_address_type: () -> ("IPV4" | "IPV6" | "NONE")
+        def core_network_endpoint_id: () -> ::String
+        def segment: () -> ::String
         def name: () -> ::String
         def dns_view_id: () -> ::String
         def protocol: () -> ("DO53" | "DOH" | "DOT")
@@ -181,10 +183,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#create_access_source-instance_method
       def create_access_source: (
-                                  cidr: ::String,
+                                  ?cidr: ::String,
                                   ?client_token: ::String,
-                                  ?ip_address_type: ("IPV4" | "IPV6"),
+                                  ?ip_address_type: ("IPV4" | "IPV6" | "NONE"),
                                   ?name: ::String,
+                                  ?core_network_endpoint_id: ::String,
+                                  ?segment: ::String,
                                   dns_view_id: ::String,
                                   protocol: ("DO53" | "DOH" | "DOT"),
                                   ?tags: Hash[::String, ::String]
@@ -212,6 +216,38 @@ module Aws
                                  ?tags: Hash[::String, ::String]
                                ) -> _CreateAccessTokenResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessTokenResponseSuccess
+
+      interface _CreateCoreNetworkEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCoreNetworkEndpointOutput]
+        def arn: () -> ::String
+        def available_regions: () -> ::Array[::String]
+        def core_network_arn: () -> ::String
+        def created_at: () -> ::Time
+        def global_resolver_id: () -> ::String
+        def id: () -> ::String
+        def ip_addresses: () -> ::Array[Types::CoreNetworkEndpointDnsIpItem]
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#create_core_network_endpoint-instance_method
+      def create_core_network_endpoint: (
+                                          ?client_token: ::String,
+                                          core_network_arn: ::String,
+                                          global_resolver_id: ::String,
+                                          ip_addresses: Array[
+                                            {
+                                              ipv4_address: ::String?,
+                                              ipv6_address: ::String?,
+                                              dns_label: ::String,
+                                              region_scope: ("ALL" | "REGIONAL"),
+                                              regions: Array[::String]?
+                                            }
+                                          ],
+                                          ?name: ::String,
+                                          ?tags: Hash[::String, ::String]
+                                        ) -> _CreateCoreNetworkEndpointResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCoreNetworkEndpointResponseSuccess
 
       interface _CreateDNSViewResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDNSViewOutput]
@@ -311,6 +347,7 @@ module Aws
         def description: () -> ::String
         def dns_name: () -> ::String
         def ip_address_type: () -> ("IPV4" | "DUAL_STACK")
+        def public_ip_status: () -> ("ENABLED_RESERVED" | "DISABLED_RESERVED" | "DISABLED_RELEASED")
         def ipv4_addresses: () -> ::Array[::String]
         def ipv6_addresses: () -> ::Array[::String]
         def name: () -> ::String
@@ -324,6 +361,7 @@ module Aws
                                     ?client_token: ::String,
                                     ?description: ::String,
                                     ?ip_address_type: ("IPV4" | "DUAL_STACK"),
+                                    ?public_ip_status: ("ENABLED_RESERVED" | "DISABLED_RESERVED" | "DISABLED_RELEASED"),
                                     name: ::String,
                                     ?observability_region: ::String,
                                     regions: Array[::String],
@@ -335,12 +373,14 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccessSourceOutput]
         def arn: () -> ::String
         def cidr: () -> ::String
+        def core_network_endpoint_id: () -> ::String
         def created_at: () -> ::Time
         def id: () -> ::String
-        def ip_address_type: () -> ("IPV4" | "IPV6")
+        def ip_address_type: () -> ("IPV4" | "IPV6" | "NONE")
         def name: () -> ::String
         def dns_view_id: () -> ::String
         def protocol: () -> ("DO53" | "DOH" | "DOT")
+        def segment: () -> ::String
         def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
         def updated_at: () -> ::Time
       end
@@ -361,6 +401,25 @@ module Aws
                                  access_token_id: ::String
                                ) -> _DeleteAccessTokenResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccessTokenResponseSuccess
+
+      interface _DeleteCoreNetworkEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCoreNetworkEndpointOutput]
+        def arn: () -> ::String
+        def available_regions: () -> ::Array[::String]
+        def core_network_arn: () -> ::String
+        def created_at: () -> ::Time
+        def global_resolver_id: () -> ::String
+        def id: () -> ::String
+        def ip_addresses: () -> ::Array[Types::CoreNetworkEndpointDnsIpItem]
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#delete_core_network_endpoint-instance_method
+      def delete_core_network_endpoint: (
+                                          core_network_endpoint_id: ::String
+                                        ) -> _DeleteCoreNetworkEndpointResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCoreNetworkEndpointResponseSuccess
 
       interface _DeleteDNSViewResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDNSViewOutput]
@@ -509,12 +568,14 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessSourceOutput]
         def arn: () -> ::String
         def cidr: () -> ::String
+        def core_network_endpoint_id: () -> ::String
         def created_at: () -> ::Time
         def id: () -> ::String
-        def ip_address_type: () -> ("IPV4" | "IPV6")
+        def ip_address_type: () -> ("IPV4" | "IPV6" | "NONE")
         def name: () -> ::String
         def dns_view_id: () -> ::String
         def protocol: () -> ("DO53" | "DOH" | "DOT")
+        def segment: () -> ::String
         def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
         def updated_at: () -> ::Time
       end
@@ -543,6 +604,25 @@ module Aws
                               access_token_id: ::String
                             ) -> _GetAccessTokenResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessTokenResponseSuccess
+
+      interface _GetCoreNetworkEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCoreNetworkEndpointOutput]
+        def arn: () -> ::String
+        def available_regions: () -> ::Array[::String]
+        def core_network_arn: () -> ::String
+        def created_at: () -> ::Time
+        def global_resolver_id: () -> ::String
+        def id: () -> ::String
+        def ip_addresses: () -> ::Array[Types::CoreNetworkEndpointDnsIpItem]
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#get_core_network_endpoint-instance_method
+      def get_core_network_endpoint: (
+                                       core_network_endpoint_id: ::String
+                                     ) -> _GetCoreNetworkEndpointResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCoreNetworkEndpointResponseSuccess
 
       interface _GetDNSViewResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDNSViewOutput]
@@ -627,6 +707,7 @@ module Aws
         def ipv4_addresses: () -> ::Array[::String]
         def ipv6_addresses: () -> ::Array[::String]
         def ip_address_type: () -> ("IPV4" | "DUAL_STACK")
+        def public_ip_status: () -> ("ENABLED_RESERVED" | "DISABLED_RESERVED" | "DISABLED_RELEASED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#get_global_resolver-instance_method
       def get_global_resolver: (
@@ -704,6 +785,19 @@ module Aws
                                 ?filters: Hash[::String, Array[::String]]
                               ) -> _ListAccessTokensResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessTokensResponseSuccess
+
+      interface _ListCoreNetworkEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCoreNetworkEndpointsOutput]
+        def next_token: () -> ::String
+        def core_network_endpoints: () -> ::Array[Types::CoreNetworkEndpointsItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#list_core_network_endpoints-instance_method
+      def list_core_network_endpoints: (
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String,
+                                         ?filters: Hash[::String, Array[::String]]
+                                       ) -> _ListCoreNetworkEndpointsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCoreNetworkEndpointsResponseSuccess
 
       interface _ListDNSViewsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDNSViewsOutput]
@@ -842,12 +936,14 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccessSourceOutput]
         def arn: () -> ::String
         def cidr: () -> ::String
+        def core_network_endpoint_id: () -> ::String
         def created_at: () -> ::Time
         def id: () -> ::String
-        def ip_address_type: () -> ("IPV4" | "IPV6")
+        def ip_address_type: () -> ("IPV4" | "IPV6" | "NONE")
         def name: () -> ::String
         def dns_view_id: () -> ::String
         def protocol: () -> ("DO53" | "DOH" | "DOT")
+        def segment: () -> ::String
         def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
         def updated_at: () -> ::Time
       end
@@ -855,7 +951,8 @@ module Aws
       def update_access_source: (
                                   access_source_id: ::String,
                                   ?cidr: ::String,
-                                  ?ip_address_type: ("IPV4" | "IPV6"),
+                                  ?dns_view_id: ::String,
+                                  ?ip_address_type: ("IPV4" | "IPV6" | "NONE"),
                                   ?name: ::String,
                                   ?protocol: ("DO53" | "DOH" | "DOT")
                                 ) -> _UpdateAccessSourceResponseSuccess
@@ -872,6 +969,36 @@ module Aws
                                  name: ::String
                                ) -> _UpdateAccessTokenResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccessTokenResponseSuccess
+
+      interface _UpdateCoreNetworkEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCoreNetworkEndpointOutput]
+        def arn: () -> ::String
+        def available_regions: () -> ::Array[::String]
+        def core_network_arn: () -> ::String
+        def created_at: () -> ::Time
+        def global_resolver_id: () -> ::String
+        def id: () -> ::String
+        def ip_addresses: () -> ::Array[Types::CoreNetworkEndpointDnsIpItem]
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#update_core_network_endpoint-instance_method
+      def update_core_network_endpoint: (
+                                          core_network_endpoint_id: ::String,
+                                          ?name: ::String,
+                                          ?update_ip_addresses: Array[
+                                            {
+                                              operation: ("ADD" | "REMOVE" | "UPDATE"),
+                                              ipv4_address: ::String?,
+                                              ipv6_address: ::String?,
+                                              dns_label: ::String?,
+                                              region_scope: ("ALL" | "REGIONAL")?,
+                                              regions: Array[::String]?
+                                            }
+                                          ]
+                                        ) -> _UpdateCoreNetworkEndpointResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCoreNetworkEndpointResponseSuccess
 
       interface _UpdateDNSViewResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDNSViewOutput]
@@ -966,6 +1093,7 @@ module Aws
         def ipv4_addresses: () -> ::Array[::String]
         def ipv6_addresses: () -> ::Array[::String]
         def ip_address_type: () -> ("IPV4" | "DUAL_STACK")
+        def public_ip_status: () -> ("ENABLED_RESERVED" | "DISABLED_RESERVED" | "DISABLED_RELEASED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#update_global_resolver-instance_method
       def update_global_resolver: (
@@ -974,6 +1102,7 @@ module Aws
                                     ?observability_region: ::String,
                                     ?description: ::String,
                                     ?ip_address_type: ("IPV4" | "DUAL_STACK"),
+                                    ?public_ip_status: ("ENABLED_RESERVED" | "DISABLED_RESERVED" | "DISABLED_RELEASED"),
                                     ?regions: Array[::String]
                                   ) -> _UpdateGlobalResolverResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGlobalResolverResponseSuccess

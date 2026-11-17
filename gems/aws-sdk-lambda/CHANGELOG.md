@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.214.0 (2026-11-17)
+------------------
+
+* Feature - AWS Lambda durable functions now supports pausing, resuming, and deleting durable executions with the new PauseDurableExecution, ResumeDurableExecution, and DeleteDurableExecution APIs.
+
 1.213.0 (2026-11-16)
 ------------------
 

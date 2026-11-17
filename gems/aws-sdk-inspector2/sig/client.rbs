@@ -277,13 +277,19 @@ module Aws
       def create_connector: (
                               ?client_token: ::String,
                               name: ::String,
-                              provider: ("AZURE"),
+                              provider: ("AZURE" | "GCP"),
                               ?description: ::String,
                               provider_detail: {
                                 azure: {
                                   aws_config_connector_arn: ::String,
                                   scope_configuration: Params::azure_scope_configuration_input,
                                   azure_regions: Array[::String],
+                                  auto_install_vm_scanner: bool?
+                                }?,
+                                gcp: {
+                                  aws_config_connector_arn: ::String,
+                                  scope_configuration: Params::gcp_scope_configuration_input,
+                                  gcp_regions: Array[::String],
                                   auto_install_vm_scanner: bool?
                                 }?
                               },
@@ -747,7 +753,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_encryption_key-instance_method
       def get_encryption_key: (
                                 scan_type: ("NETWORK" | "PACKAGE" | "CODE"),
-                                resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE")
+                                resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE" | "cloudfunctions.googleapis.com/Function" | "compute.googleapis.com/Instance" | "artifactregistry.googleapis.com/DockerImage")
                               ) -> _GetEncryptionKeyResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEncryptionKeyResponseSuccess
 
@@ -1148,7 +1154,7 @@ module Aws
                                provider: Array[
                                  {
                                    comparison: ("EQUALS"),
-                                   value: ("AZURE")
+                                   value: ("AZURE" | "GCP")
                                  }
                                ]?
                              }
@@ -1228,7 +1234,7 @@ module Aws
                                        ?aggregation_request: {
                                          account_aggregation: {
                                            finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")?,
-                                           resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")?,
+                                           resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "cloudfunctions.googleapis.com/Function" | "compute.googleapis.com/Instance" | "artifactregistry.googleapis.com/DockerImage")?,
                                            sort_order: ("ASC" | "DESC")?,
                                            sort_by: ("CRITICAL" | "HIGH" | "ALL")?
                                          }?,
@@ -1320,7 +1326,7 @@ module Aws
                                          }?,
                                          finding_type_aggregation: {
                                            finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")?,
-                                           resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")?,
+                                           resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "cloudfunctions.googleapis.com/Function" | "compute.googleapis.com/Instance" | "artifactregistry.googleapis.com/DockerImage")?,
                                            sort_order: ("ASC" | "DESC")?,
                                            sort_by: ("CRITICAL" | "HIGH" | "ALL")?
                                          }?,
@@ -1409,7 +1415,7 @@ module Aws
                                                value: ::String
                                              }
                                            ]?,
-                                           resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")?,
+                                           resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "cloudfunctions.googleapis.com/Function" | "compute.googleapis.com/Instance" | "artifactregistry.googleapis.com/DockerImage")?,
                                            finding_type: ("NETWORK_REACHABILITY" | "PACKAGE_VULNERABILITY" | "CODE_VULNERABILITY")?,
                                            sort_order: ("ASC" | "DESC")?,
                                            sort_by: ("CRITICAL" | "HIGH" | "ALL")?
@@ -1764,7 +1770,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#reset_encryption_key-instance_method
       def reset_encryption_key: (
                                   scan_type: ("NETWORK" | "PACKAGE" | "CODE"),
-                                  resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE")
+                                  resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE" | "cloudfunctions.googleapis.com/Function" | "compute.googleapis.com/Instance" | "artifactregistry.googleapis.com/DockerImage")
                                 ) -> _ResetEncryptionKeyResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetEncryptionKeyResponseSuccess
 
@@ -1997,6 +2003,11 @@ module Aws
                                   azure_regions: Array[::String]?,
                                   scope_configuration: Params::azure_scope_configuration_input?,
                                   auto_install_vm_scanner: bool?
+                                }?,
+                                gcp: {
+                                  gcp_regions: Array[::String]?,
+                                  scope_configuration: Params::gcp_scope_configuration_input?,
+                                  auto_install_vm_scanner: bool?
                                 }?
                               }
                             ) -> _UpdateConnectorResponseSuccess
@@ -2038,7 +2049,7 @@ module Aws
       def update_encryption_key: (
                                    kms_key_id: ::String,
                                    scan_type: ("NETWORK" | "PACKAGE" | "CODE"),
-                                   resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE")
+                                   resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE" | "cloudfunctions.googleapis.com/Function" | "compute.googleapis.com/Instance" | "artifactregistry.googleapis.com/DockerImage")
                                  ) -> _UpdateEncryptionKeyResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEncryptionKeyResponseSuccess
 
@@ -2115,7 +2126,7 @@ module Aws
                       provider: Array[
                         {
                           comparison: ("EQUALS"),
-                          value: ("AZURE")
+                          value: ("AZURE" | "GCP")
                         }
                       ]?
                     }
@@ -2152,7 +2163,7 @@ module Aws
                       provider: Array[
                         {
                           comparison: ("EQUALS"),
-                          value: ("AZURE")
+                          value: ("AZURE" | "GCP")
                         }
                       ]?
                     }
@@ -2189,7 +2200,7 @@ module Aws
                       provider: Array[
                         {
                           comparison: ("EQUALS"),
-                          value: ("AZURE")
+                          value: ("AZURE" | "GCP")
                         }
                       ]?
                     }

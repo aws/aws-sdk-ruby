@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2026-11-17)
+------------------
+
+* Feature - PutCaseEventConfiguration now supports an optional autoIncludeFields attribute on case event included data. Set it to All, System, or Custom to automatically include a category of case fields in case event data, combined as a union with any fields you list explicitly.
+
 1.84.0 (2026-11-16)
 ------------------
 

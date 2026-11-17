@@ -1,10 +1,10 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "GetFirewallDomainListFailure",
-    "operationName" : "GetFirewallDomainList",
+    "id" : "GetFirewallRuleFailure",
+    "operationName" : "GetFirewallRule",
     "input" : {
-      "firewallDomainListId" : "fdl-doesnotexist1111"
+      "firewallRuleId" : "fr-doesnotexist1111"
     },
     "expectation" : {
       "failure" : {
@@ -18,10 +18,10 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetFirewallRuleFailure",
-    "operationName" : "GetFirewallRule",
+    "id" : "GetAccessSourceFailure",
+    "operationName" : "GetAccessSource",
     "input" : {
-      "firewallRuleId" : "fr-doesnotexist1111"
+      "accessSourceId" : "as-doesnotexist1111"
     },
     "expectation" : {
       "failure" : {
@@ -69,23 +69,6 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetHostedZoneAssociationFailure",
-    "operationName" : "GetHostedZoneAssociation",
-    "input" : {
-      "hostedZoneAssociationId" : "phza-doesnotexist1111"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-2",
-      "useFips" : false,
-      "useDualstack" : true,
-      "useAccountIdRouting" : true
-    }
-  }, {
     "id" : "GetGlobalResolverFailure",
     "operationName" : "GetGlobalResolver",
     "input" : {
@@ -103,10 +86,27 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetAccessSourceFailure",
-    "operationName" : "GetAccessSource",
+    "id" : "GetFirewallDomainListFailure",
+    "operationName" : "GetFirewallDomainList",
     "input" : {
-      "accessSourceId" : "as-doesnotexist1111"
+      "firewallDomainListId" : "fdl-doesnotexist1111"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-2",
+      "useFips" : false,
+      "useDualstack" : true,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetHostedZoneAssociationFailure",
+    "operationName" : "GetHostedZoneAssociation",
+    "input" : {
+      "hostedZoneAssociationId" : "phza-doesnotexist1111"
     },
     "expectation" : {
       "failure" : {

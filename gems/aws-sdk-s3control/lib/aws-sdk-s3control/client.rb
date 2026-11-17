@@ -5096,10 +5096,14 @@ module Aws::S3Control
     #   resp.storage_lens_configuration.expanded_prefixes_data_export.s3_bucket_destination.encryption.ssekms.key_id #=> String
     #   resp.storage_lens_configuration.expanded_prefixes_data_export.storage_lens_table_destination.is_enabled #=> Boolean
     #   resp.storage_lens_configuration.expanded_prefixes_data_export.storage_lens_table_destination.encryption.ssekms.key_id #=> String
+    #   resp.storage_lens_configuration.cost_and_usage_reports_publish.prefix_level.is_enabled #=> Boolean
+    #   resp.storage_lens_configuration.cost_and_usage_reports_publish.prefix_level.selection_criteria.min_depth #=> Integer
+    #   resp.storage_lens_configuration.cost_and_usage_reports_publish.prefix_level.selection_criteria.max_depth #=> Integer
     #   resp.storage_lens_configuration.is_enabled #=> Boolean
     #   resp.storage_lens_configuration.aws_org.arn #=> String
     #   resp.storage_lens_configuration.storage_lens_arn #=> String
     #   resp.storage_lens_configuration.prefix_delimiter #=> String
+    #   resp.storage_lens_configuration.int_access_tiers.is_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetStorageLensConfiguration AWS API Documentation
     #
@@ -7623,12 +7627,24 @@ module Aws::S3Control
     #           },
     #         },
     #       },
+    #       cost_and_usage_reports_publish: {
+    #         prefix_level: {
+    #           is_enabled: false, # required
+    #           selection_criteria: {
+    #             min_depth: 1,
+    #             max_depth: 1,
+    #           },
+    #         },
+    #       },
     #       is_enabled: false, # required
     #       aws_org: {
     #         arn: "AwsOrgArn", # required
     #       },
     #       storage_lens_arn: "StorageLensArn",
     #       prefix_delimiter: "StorageLensPrefixLevelDelimiter",
+    #       int_access_tiers: {
+    #         is_enabled: false,
+    #       },
     #     },
     #     tags: [
     #       {
@@ -8280,7 +8296,7 @@ module Aws::S3Control
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.148.0'
+      context[:gem_version] = '1.149.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

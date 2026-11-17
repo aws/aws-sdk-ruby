@@ -3506,6 +3506,9 @@ module Aws::Connect
       attr_accessor last_modified_time: ::Time
       attr_accessor evaluation_type: ("STANDARD" | "CALIBRATION")
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor item_enablement_status: ::Hash[::String, ("ENABLED" | "DISABLED")]
+      attr_accessor source_resolution_status: ("PENDING" | "RESOLVED" | "FAILED")
+      attr_accessor source_values: ::Array[Types::EvaluationResolvedSource]
       SENSITIVE: []
     end
 
@@ -3679,19 +3682,28 @@ module Aws::Connect
     class EvaluationFormItemEnablementExpression
       attr_accessor source: Types::EvaluationFormItemEnablementSource
       attr_accessor values: ::Array[Types::EvaluationFormItemEnablementSourceValue]
-      attr_accessor comparator: ("IN" | "NOT_IN" | "ALL_IN" | "EXACT")
+      attr_accessor comparator: ("IN" | "NOT_IN" | "ALL_IN" | "EXACT" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL_TO" | "LESS_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO")
       SENSITIVE: []
     end
 
     class EvaluationFormItemEnablementSource
-      attr_accessor type: ("QUESTION_REF_ID")
+      attr_accessor type: ("QUESTION_REF_ID" | "CONTACT" | "EVALUATION_METADATA" | "FORM_METADATA" | "AI_METRICS")
       attr_accessor ref_id: ::String
+      attr_accessor contact_field: ("CATEGORIES" | "AGENT_ARN" | "QUEUE_ARN" | "ROUTING_PROFILE_ARN" | "CHANNEL" | "INITIATION_METHOD" | "IS_QUEUED" | "OVERALL_CUSTOMER_SENTIMENT_SCORE" | "OVERALL_AGENT_SENTIMENT_SCORE" | "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT" | "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT" | "NON_TALK_TIME" | "NON_TALK_TIME_PERCENTAGE" | "NUMBER_OF_INTERRUPTIONS" | "CONTACT_DURATION" | "AGENT_INTERACTION_DURATION" | "CUSTOMER_HOLD_TIME" | "LONGEST_HOLD_DURATION" | "NUMBER_OF_HOLDS" | "AGENT_INTERACTION_AND_HOLD_DURATION" | "RECORDING_MEDIA_STREAM_TYPES")
+      attr_accessor contact_attribute_key: ::String
+      attr_accessor segment_attribute_key: ::String
+      attr_accessor evaluation_metadata_field: ("EVALUATION_TYPE")
+      attr_accessor ai_metrics_field: ("AI_SESSION_IS_HANDED_OFF" | "AI_SESSION_SELF_SERVICE_DURATION" | "AI_SESSION_GOAL_SUCCESS_RATE" | "AI_SESSION_COMPLETENESS_SCORE" | "AI_SESSION_FAITHFULNESS_SCORE" | "AI_AGENT_MAX_PROMPT_LATENCY" | "AI_TOOL_MAX_LATENCY" | "AI_TOOL_SELECTION_ACCURACY" | "AI_TOOL_PARAMETER_ACCURACY" | "AI_TOOL_UTILIZATION_ACCURACY")
       SENSITIVE: []
     end
 
     class EvaluationFormItemEnablementSourceValue
-      attr_accessor type: ("OPTION_REF_ID")
+      attr_accessor type: ("OPTION_REF_ID" | "STRING_VALUE" | "NUMERIC_VALUE" | "BOOLEAN_VALUE" | "DATETIME_VALUE")
       attr_accessor ref_id: ::String
+      attr_accessor string_value: ::String
+      attr_accessor numeric_value: ::Float
+      attr_accessor boolean_value: bool
+      attr_accessor date_time_value: ::Time
       SENSITIVE: []
     end
 
@@ -3788,7 +3800,7 @@ module Aws::Connect
     end
 
     class EvaluationFormQuestionAutomationAnswerSource
-      attr_accessor source_type: ("CONTACT_LENS_DATA" | "GEN_AI")
+      attr_accessor source_type: ("CONTACT_LENS_DATA" | "GEN_AI" | "CONDITION")
       SENSITIVE: []
     end
 
@@ -3878,6 +3890,7 @@ module Aws::Connect
       attr_accessor weight: ::Float
       attr_accessor is_excluded_from_scoring: bool
       attr_accessor score_thresholds: ::Array[Types::EvaluationFormScoreThreshold]
+      attr_accessor enablement: Types::EvaluationFormItemEnablementConfiguration
       SENSITIVE: []
     end
 
@@ -3890,10 +3903,13 @@ module Aws::Connect
 
     class EvaluationFormSingleSelectQuestionAutomationOption
       attr_accessor rule_category: Types::SingleSelectQuestionRuleCategoryAutomation
+      attr_accessor automation_rule: Types::SingleSelectQuestionAutomationRule
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class RuleCategory < EvaluationFormSingleSelectQuestionAutomationOption
+      end
+      class AutomationRule < EvaluationFormSingleSelectQuestionAutomationOption
       end
       class Unknown < EvaluationFormSingleSelectQuestionAutomationOption
       end
@@ -4018,6 +4034,13 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class EvaluationResolvedSource
+      attr_accessor source: Types::EvaluationFormItemEnablementSource
+      attr_accessor status: ("PENDING" | "RESOLVED" | "FAILED")
+      attr_accessor values: ::Array[Types::EvaluationFormItemEnablementSourceValue]
+      SENSITIVE: []
+    end
+
     class EvaluationReviewConfiguration
       attr_accessor review_notification_recipients: ::Array[Types::EvaluationReviewNotificationRecipient]
       attr_accessor eligibility_days: ::Integer
@@ -4122,7 +4145,7 @@ module Aws::Connect
       attr_accessor value: Types::EvaluationAnswerData
       attr_accessor status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")
       attr_accessor input: Types::EvaluationQuestionInputDetails
-      attr_accessor analysis_type: ("CONTACT_LENS_DATA" | "GEN_AI")
+      attr_accessor analysis_type: ("CONTACT_LENS_DATA" | "GEN_AI" | "CONDITION")
       attr_accessor analysis_details: Types::EvaluationQuestionAnswerAnalysisDetails
       SENSITIVE: []
     end
@@ -6385,7 +6408,7 @@ module Aws::Connect
     end
 
     class NumericQuestionPropertyValueAutomation
-      attr_accessor label: ("OVERALL_CUSTOMER_SENTIMENT_SCORE" | "OVERALL_AGENT_SENTIMENT_SCORE" | "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT" | "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT" | "NON_TALK_TIME" | "NON_TALK_TIME_PERCENTAGE" | "NUMBER_OF_INTERRUPTIONS" | "CONTACT_DURATION" | "AGENT_INTERACTION_DURATION" | "CUSTOMER_HOLD_TIME" | "LONGEST_HOLD_DURATION" | "NUMBER_OF_HOLDS" | "AGENT_INTERACTION_AND_HOLD_DURATION")
+      attr_accessor label: ("OVERALL_CUSTOMER_SENTIMENT_SCORE" | "OVERALL_AGENT_SENTIMENT_SCORE" | "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT" | "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT" | "NON_TALK_TIME" | "NON_TALK_TIME_PERCENTAGE" | "NUMBER_OF_INTERRUPTIONS" | "CONTACT_DURATION" | "AGENT_INTERACTION_DURATION" | "CUSTOMER_HOLD_TIME" | "LONGEST_HOLD_DURATION" | "NUMBER_OF_HOLDS" | "AGENT_INTERACTION_AND_HOLD_DURATION" | "AI_SESSION_SELF_SERVICE_DURATION" | "AI_SESSION_GOAL_SUCCESS_RATE" | "AI_SESSION_COMPLETENESS_SCORE" | "AI_SESSION_FAITHFULNESS_SCORE" | "AI_AGENT_MAX_PROMPT_LATENCY" | "AI_TOOL_MAX_LATENCY" | "AI_TOOL_SELECTION_ACCURACY" | "AI_TOOL_PARAMETER_ACCURACY" | "AI_TOOL_UTILIZATION_ACCURACY")
       SENSITIVE: []
     end
 
@@ -8197,6 +8220,12 @@ module Aws::Connect
     class SignInDistribution
       attr_accessor region: ::String
       attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class SingleSelectQuestionAutomationRule
+      attr_accessor condition: Types::EvaluationFormItemEnablementCondition
+      attr_accessor option_ref_id: ::String
       SENSITIVE: []
     end
 

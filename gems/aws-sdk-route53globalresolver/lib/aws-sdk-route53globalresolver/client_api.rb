@@ -51,10 +51,18 @@ module Aws::Route53GlobalResolver
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConfidenceThreshold = Shapes::StringShape.new(name: 'ConfidenceThreshold')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CoreNetworkEndpointDnsIpInputItem = Shapes::StructureShape.new(name: 'CoreNetworkEndpointDnsIpInputItem')
+    CoreNetworkEndpointDnsIpInputItems = Shapes::ListShape.new(name: 'CoreNetworkEndpointDnsIpInputItems')
+    CoreNetworkEndpointDnsIpItem = Shapes::StructureShape.new(name: 'CoreNetworkEndpointDnsIpItem')
+    CoreNetworkEndpointDnsIpItems = Shapes::ListShape.new(name: 'CoreNetworkEndpointDnsIpItems')
+    CoreNetworkEndpoints = Shapes::ListShape.new(name: 'CoreNetworkEndpoints')
+    CoreNetworkEndpointsItem = Shapes::StructureShape.new(name: 'CoreNetworkEndpointsItem')
     CreateAccessSourceInput = Shapes::StructureShape.new(name: 'CreateAccessSourceInput')
     CreateAccessSourceOutput = Shapes::StructureShape.new(name: 'CreateAccessSourceOutput')
     CreateAccessTokenInput = Shapes::StructureShape.new(name: 'CreateAccessTokenInput')
     CreateAccessTokenOutput = Shapes::StructureShape.new(name: 'CreateAccessTokenOutput')
+    CreateCoreNetworkEndpointInput = Shapes::StructureShape.new(name: 'CreateCoreNetworkEndpointInput')
+    CreateCoreNetworkEndpointOutput = Shapes::StructureShape.new(name: 'CreateCoreNetworkEndpointOutput')
     CreateDNSViewInput = Shapes::StructureShape.new(name: 'CreateDNSViewInput')
     CreateDNSViewOutput = Shapes::StructureShape.new(name: 'CreateDNSViewOutput')
     CreateFirewallDomainListInput = Shapes::StructureShape.new(name: 'CreateFirewallDomainListInput')
@@ -69,6 +77,8 @@ module Aws::Route53GlobalResolver
     DeleteAccessSourceOutput = Shapes::StructureShape.new(name: 'DeleteAccessSourceOutput')
     DeleteAccessTokenInput = Shapes::StructureShape.new(name: 'DeleteAccessTokenInput')
     DeleteAccessTokenOutput = Shapes::StructureShape.new(name: 'DeleteAccessTokenOutput')
+    DeleteCoreNetworkEndpointInput = Shapes::StructureShape.new(name: 'DeleteCoreNetworkEndpointInput')
+    DeleteCoreNetworkEndpointOutput = Shapes::StructureShape.new(name: 'DeleteCoreNetworkEndpointOutput')
     DeleteDNSViewInput = Shapes::StructureShape.new(name: 'DeleteDNSViewInput')
     DeleteDNSViewOutput = Shapes::StructureShape.new(name: 'DeleteDNSViewOutput')
     DeleteFirewallDomainListInput = Shapes::StructureShape.new(name: 'DeleteFirewallDomainListInput')
@@ -82,6 +92,8 @@ module Aws::Route53GlobalResolver
     DisassociateHostedZoneInput = Shapes::StructureShape.new(name: 'DisassociateHostedZoneInput')
     DisassociateHostedZoneOutput = Shapes::StructureShape.new(name: 'DisassociateHostedZoneOutput')
     DnsAdvancedProtection = Shapes::StringShape.new(name: 'DnsAdvancedProtection')
+    DnsLabel = Shapes::StringShape.new(name: 'DnsLabel')
+    DnsName = Shapes::StringShape.new(name: 'DnsName')
     DnsProtocol = Shapes::StringShape.new(name: 'DnsProtocol')
     DnsQueryType = Shapes::StringShape.new(name: 'DnsQueryType')
     DnsSecValidationType = Shapes::StringShape.new(name: 'DnsSecValidationType')
@@ -103,6 +115,8 @@ module Aws::Route53GlobalResolver
     GetAccessSourceOutput = Shapes::StructureShape.new(name: 'GetAccessSourceOutput')
     GetAccessTokenInput = Shapes::StructureShape.new(name: 'GetAccessTokenInput')
     GetAccessTokenOutput = Shapes::StructureShape.new(name: 'GetAccessTokenOutput')
+    GetCoreNetworkEndpointInput = Shapes::StructureShape.new(name: 'GetCoreNetworkEndpointInput')
+    GetCoreNetworkEndpointOutput = Shapes::StructureShape.new(name: 'GetCoreNetworkEndpointOutput')
     GetDNSViewInput = Shapes::StructureShape.new(name: 'GetDNSViewInput')
     GetDNSViewOutput = Shapes::StructureShape.new(name: 'GetDNSViewOutput')
     GetFirewallDomainListInput = Shapes::StructureShape.new(name: 'GetFirewallDomainListInput')
@@ -137,6 +151,8 @@ module Aws::Route53GlobalResolver
     ListAccessSourcesOutput = Shapes::StructureShape.new(name: 'ListAccessSourcesOutput')
     ListAccessTokensInput = Shapes::StructureShape.new(name: 'ListAccessTokensInput')
     ListAccessTokensOutput = Shapes::StructureShape.new(name: 'ListAccessTokensOutput')
+    ListCoreNetworkEndpointsInput = Shapes::StructureShape.new(name: 'ListCoreNetworkEndpointsInput')
+    ListCoreNetworkEndpointsOutput = Shapes::StructureShape.new(name: 'ListCoreNetworkEndpointsOutput')
     ListDNSViewsInput = Shapes::StructureShape.new(name: 'ListDNSViewsInput')
     ListDNSViewsOutput = Shapes::StructureShape.new(name: 'ListDNSViewsOutput')
     ListFirewallDomainListsInput = Shapes::StructureShape.new(name: 'ListFirewallDomainListsInput')
@@ -158,7 +174,9 @@ module Aws::Route53GlobalResolver
     ManagedFirewallDomainLists = Shapes::ListShape.new(name: 'ManagedFirewallDomainLists')
     ManagedFirewallDomainListsItem = Shapes::StructureShape.new(name: 'ManagedFirewallDomainListsItem')
     ProfileResourceStatus = Shapes::StringShape.new(name: 'ProfileResourceStatus')
+    PublicIpStatus = Shapes::StringShape.new(name: 'PublicIpStatus')
     Region = Shapes::StringShape.new(name: 'Region')
+    RegionScopeType = Shapes::StringShape.new(name: 'RegionScopeType')
     Regions = Shapes::ListShape.new(name: 'Regions')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceDescription = Shapes::StringShape.new(name: 'ResourceDescription')
@@ -166,6 +184,7 @@ module Aws::Route53GlobalResolver
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNameShort = Shapes::StringShape.new(name: 'ResourceNameShort')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    SegmentName = Shapes::StringShape.new(name: 'SegmentName')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SharedDNSViewSummary = Shapes::StructureShape.new(name: 'SharedDNSViewSummary')
     SharedDNSViews = Shapes::ListShape.new(name: 'SharedDNSViews')
@@ -186,6 +205,8 @@ module Aws::Route53GlobalResolver
     UpdateAccessSourceOutput = Shapes::StructureShape.new(name: 'UpdateAccessSourceOutput')
     UpdateAccessTokenInput = Shapes::StructureShape.new(name: 'UpdateAccessTokenInput')
     UpdateAccessTokenOutput = Shapes::StructureShape.new(name: 'UpdateAccessTokenOutput')
+    UpdateCoreNetworkEndpointInput = Shapes::StructureShape.new(name: 'UpdateCoreNetworkEndpointInput')
+    UpdateCoreNetworkEndpointOutput = Shapes::StructureShape.new(name: 'UpdateCoreNetworkEndpointOutput')
     UpdateDNSViewInput = Shapes::StructureShape.new(name: 'UpdateDNSViewInput')
     UpdateDNSViewOutput = Shapes::StructureShape.new(name: 'UpdateDNSViewOutput')
     UpdateFirewallDomainsInput = Shapes::StructureShape.new(name: 'UpdateFirewallDomainsInput')
@@ -196,6 +217,9 @@ module Aws::Route53GlobalResolver
     UpdateGlobalResolverOutput = Shapes::StructureShape.new(name: 'UpdateGlobalResolverOutput')
     UpdateHostedZoneAssociationInput = Shapes::StructureShape.new(name: 'UpdateHostedZoneAssociationInput')
     UpdateHostedZoneAssociationOutput = Shapes::StructureShape.new(name: 'UpdateHostedZoneAssociationOutput')
+    UpdateIpAddressEntry = Shapes::StructureShape.new(name: 'UpdateIpAddressEntry')
+    UpdateIpAddressList = Shapes::ListShape.new(name: 'UpdateIpAddressList')
+    UpdateIpAddressOperation = Shapes::StringShape.new(name: 'UpdateIpAddressOperation')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -207,13 +231,15 @@ module Aws::Route53GlobalResolver
     AccessSources.member = Shapes::ShapeRef.new(shape: AccessSourcesItem)
 
     AccessSourcesItem.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "arn"))
-    AccessSourcesItem.add_member(:cidr, Shapes::ShapeRef.new(shape: Cidr, required: true, location_name: "cidr"))
+    AccessSourcesItem.add_member(:cidr, Shapes::ShapeRef.new(shape: Cidr, location_name: "cidr"))
+    AccessSourcesItem.add_member(:core_network_endpoint_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "coreNetworkEndpointId"))
     AccessSourcesItem.add_member(:created_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "createdAt"))
     AccessSourcesItem.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
-    AccessSourcesItem.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, required: true, location_name: "ipAddressType"))
+    AccessSourcesItem.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     AccessSourcesItem.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameShort, location_name: "name"))
     AccessSourcesItem.add_member(:dns_view_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "dnsViewId"))
     AccessSourcesItem.add_member(:protocol, Shapes::ShapeRef.new(shape: DnsProtocol, required: true, location_name: "protocol"))
+    AccessSourcesItem.add_member(:segment, Shapes::ShapeRef.new(shape: SegmentName, location_name: "segment"))
     AccessSourcesItem.add_member(:status, Shapes::ShapeRef.new(shape: CRResourceStatus, required: true, location_name: "status"))
     AccessSourcesItem.add_member(:updated_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "updatedAt"))
     AccessSourcesItem.struct_class = Types::AccessSourcesItem
@@ -378,20 +404,57 @@ module Aws::Route53GlobalResolver
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateAccessSourceInput.add_member(:cidr, Shapes::ShapeRef.new(shape: Cidr, required: true, location_name: "cidr"))
+    CoreNetworkEndpointDnsIpInputItem.add_member(:ipv4_address, Shapes::ShapeRef.new(shape: IPv4Address, location_name: "ipv4Address"))
+    CoreNetworkEndpointDnsIpInputItem.add_member(:ipv6_address, Shapes::ShapeRef.new(shape: IPv6Address, location_name: "ipv6Address"))
+    CoreNetworkEndpointDnsIpInputItem.add_member(:dns_label, Shapes::ShapeRef.new(shape: DnsLabel, required: true, location_name: "dnsLabel"))
+    CoreNetworkEndpointDnsIpInputItem.add_member(:region_scope, Shapes::ShapeRef.new(shape: RegionScopeType, required: true, location_name: "regionScope"))
+    CoreNetworkEndpointDnsIpInputItem.add_member(:regions, Shapes::ShapeRef.new(shape: Regions, location_name: "regions"))
+    CoreNetworkEndpointDnsIpInputItem.struct_class = Types::CoreNetworkEndpointDnsIpInputItem
+
+    CoreNetworkEndpointDnsIpInputItems.member = Shapes::ShapeRef.new(shape: CoreNetworkEndpointDnsIpInputItem)
+
+    CoreNetworkEndpointDnsIpItem.add_member(:ipv4_address, Shapes::ShapeRef.new(shape: IPv4Address, location_name: "ipv4Address"))
+    CoreNetworkEndpointDnsIpItem.add_member(:ipv6_address, Shapes::ShapeRef.new(shape: IPv6Address, location_name: "ipv6Address"))
+    CoreNetworkEndpointDnsIpItem.add_member(:dns_label, Shapes::ShapeRef.new(shape: DnsLabel, required: true, location_name: "dnsLabel"))
+    CoreNetworkEndpointDnsIpItem.add_member(:dns_name, Shapes::ShapeRef.new(shape: DnsName, location_name: "dnsName"))
+    CoreNetworkEndpointDnsIpItem.add_member(:region_scope, Shapes::ShapeRef.new(shape: RegionScopeType, required: true, location_name: "regionScope"))
+    CoreNetworkEndpointDnsIpItem.add_member(:regions, Shapes::ShapeRef.new(shape: Regions, location_name: "regions"))
+    CoreNetworkEndpointDnsIpItem.struct_class = Types::CoreNetworkEndpointDnsIpItem
+
+    CoreNetworkEndpointDnsIpItems.member = Shapes::ShapeRef.new(shape: CoreNetworkEndpointDnsIpItem)
+
+    CoreNetworkEndpoints.member = Shapes::ShapeRef.new(shape: CoreNetworkEndpointsItem)
+
+    CoreNetworkEndpointsItem.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "arn"))
+    CoreNetworkEndpointsItem.add_member(:available_regions, Shapes::ShapeRef.new(shape: Regions, required: true, location_name: "availableRegions"))
+    CoreNetworkEndpointsItem.add_member(:core_network_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "coreNetworkArn"))
+    CoreNetworkEndpointsItem.add_member(:created_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "createdAt"))
+    CoreNetworkEndpointsItem.add_member(:global_resolver_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "globalResolverId"))
+    CoreNetworkEndpointsItem.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
+    CoreNetworkEndpointsItem.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: CoreNetworkEndpointDnsIpItems, required: true, location_name: "ipAddresses"))
+    CoreNetworkEndpointsItem.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    CoreNetworkEndpointsItem.add_member(:status, Shapes::ShapeRef.new(shape: CRResourceStatus, required: true, location_name: "status"))
+    CoreNetworkEndpointsItem.add_member(:updated_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "updatedAt"))
+    CoreNetworkEndpointsItem.struct_class = Types::CoreNetworkEndpointsItem
+
+    CreateAccessSourceInput.add_member(:cidr, Shapes::ShapeRef.new(shape: Cidr, location_name: "cidr"))
     CreateAccessSourceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAccessSourceInput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     CreateAccessSourceInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameShort, location_name: "name"))
+    CreateAccessSourceInput.add_member(:core_network_endpoint_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "coreNetworkEndpointId"))
+    CreateAccessSourceInput.add_member(:segment, Shapes::ShapeRef.new(shape: SegmentName, location_name: "segment"))
     CreateAccessSourceInput.add_member(:dns_view_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "dnsViewId"))
     CreateAccessSourceInput.add_member(:protocol, Shapes::ShapeRef.new(shape: DnsProtocol, required: true, location_name: "protocol"))
     CreateAccessSourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateAccessSourceInput.struct_class = Types::CreateAccessSourceInput
 
     CreateAccessSourceOutput.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "arn"))
-    CreateAccessSourceOutput.add_member(:cidr, Shapes::ShapeRef.new(shape: Cidr, required: true, location_name: "cidr"))
+    CreateAccessSourceOutput.add_member(:cidr, Shapes::ShapeRef.new(shape: Cidr, location_name: "cidr"))
     CreateAccessSourceOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "createdAt"))
     CreateAccessSourceOutput.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
-    CreateAccessSourceOutput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, required: true, location_name: "ipAddressType"))
+    CreateAccessSourceOutput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
+    CreateAccessSourceOutput.add_member(:core_network_endpoint_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "coreNetworkEndpointId"))
+    CreateAccessSourceOutput.add_member(:segment, Shapes::ShapeRef.new(shape: SegmentName, location_name: "segment"))
     CreateAccessSourceOutput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameShort, location_name: "name"))
     CreateAccessSourceOutput.add_member(:dns_view_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "dnsViewId"))
     CreateAccessSourceOutput.add_member(:protocol, Shapes::ShapeRef.new(shape: DnsProtocol, required: true, location_name: "protocol"))
@@ -416,6 +479,26 @@ module Aws::Route53GlobalResolver
     CreateAccessTokenOutput.add_member(:status, Shapes::ShapeRef.new(shape: TokenStatus, required: true, location_name: "status"))
     CreateAccessTokenOutput.add_member(:value, Shapes::ShapeRef.new(shape: AccessTokenValue, required: true, location_name: "value"))
     CreateAccessTokenOutput.struct_class = Types::CreateAccessTokenOutput
+
+    CreateCoreNetworkEndpointInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateCoreNetworkEndpointInput.add_member(:core_network_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "coreNetworkArn"))
+    CreateCoreNetworkEndpointInput.add_member(:global_resolver_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "globalResolverId"))
+    CreateCoreNetworkEndpointInput.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: CoreNetworkEndpointDnsIpInputItems, required: true, location_name: "ipAddresses"))
+    CreateCoreNetworkEndpointInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    CreateCoreNetworkEndpointInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateCoreNetworkEndpointInput.struct_class = Types::CreateCoreNetworkEndpointInput
+
+    CreateCoreNetworkEndpointOutput.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "arn"))
+    CreateCoreNetworkEndpointOutput.add_member(:available_regions, Shapes::ShapeRef.new(shape: Regions, required: true, location_name: "availableRegions"))
+    CreateCoreNetworkEndpointOutput.add_member(:core_network_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "coreNetworkArn"))
+    CreateCoreNetworkEndpointOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "createdAt"))
+    CreateCoreNetworkEndpointOutput.add_member(:global_resolver_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "globalResolverId"))
+    CreateCoreNetworkEndpointOutput.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
+    CreateCoreNetworkEndpointOutput.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: CoreNetworkEndpointDnsIpItems, required: true, location_name: "ipAddresses"))
+    CreateCoreNetworkEndpointOutput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    CreateCoreNetworkEndpointOutput.add_member(:status, Shapes::ShapeRef.new(shape: CRResourceStatus, required: true, location_name: "status"))
+    CreateCoreNetworkEndpointOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "updatedAt"))
+    CreateCoreNetworkEndpointOutput.struct_class = Types::CreateCoreNetworkEndpointOutput
 
     CreateDNSViewInput.add_member(:global_resolver_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "globalResolverId"))
     CreateDNSViewInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -497,6 +580,7 @@ module Aws::Route53GlobalResolver
     CreateGlobalResolverInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateGlobalResolverInput.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     CreateGlobalResolverInput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: GlobalResolverIpAddressType, location_name: "ipAddressType"))
+    CreateGlobalResolverInput.add_member(:public_ip_status, Shapes::ShapeRef.new(shape: PublicIpStatus, location_name: "publicIpStatus"))
     CreateGlobalResolverInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     CreateGlobalResolverInput.add_member(:observability_region, Shapes::ShapeRef.new(shape: Region, location_name: "observabilityRegion"))
     CreateGlobalResolverInput.add_member(:regions, Shapes::ShapeRef.new(shape: Regions, required: true, location_name: "regions"))
@@ -510,6 +594,7 @@ module Aws::Route53GlobalResolver
     CreateGlobalResolverOutput.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     CreateGlobalResolverOutput.add_member(:dns_name, Shapes::ShapeRef.new(shape: Sni, required: true, location_name: "dnsName"))
     CreateGlobalResolverOutput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: GlobalResolverIpAddressType, location_name: "ipAddressType"))
+    CreateGlobalResolverOutput.add_member(:public_ip_status, Shapes::ShapeRef.new(shape: PublicIpStatus, location_name: "publicIpStatus"))
     CreateGlobalResolverOutput.add_member(:ipv4_addresses, Shapes::ShapeRef.new(shape: IPv4Addresses, required: true, location_name: "ipv4Addresses"))
     CreateGlobalResolverOutput.add_member(:ipv6_addresses, Shapes::ShapeRef.new(shape: IPv6Addresses, location_name: "ipv6Addresses"))
     CreateGlobalResolverOutput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
@@ -539,13 +624,15 @@ module Aws::Route53GlobalResolver
     DeleteAccessSourceInput.struct_class = Types::DeleteAccessSourceInput
 
     DeleteAccessSourceOutput.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "arn"))
-    DeleteAccessSourceOutput.add_member(:cidr, Shapes::ShapeRef.new(shape: Cidr, required: true, location_name: "cidr"))
+    DeleteAccessSourceOutput.add_member(:cidr, Shapes::ShapeRef.new(shape: Cidr, location_name: "cidr"))
+    DeleteAccessSourceOutput.add_member(:core_network_endpoint_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "coreNetworkEndpointId"))
     DeleteAccessSourceOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "createdAt"))
     DeleteAccessSourceOutput.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
-    DeleteAccessSourceOutput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, required: true, location_name: "ipAddressType"))
+    DeleteAccessSourceOutput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     DeleteAccessSourceOutput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameShort, location_name: "name"))
     DeleteAccessSourceOutput.add_member(:dns_view_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "dnsViewId"))
     DeleteAccessSourceOutput.add_member(:protocol, Shapes::ShapeRef.new(shape: DnsProtocol, required: true, location_name: "protocol"))
+    DeleteAccessSourceOutput.add_member(:segment, Shapes::ShapeRef.new(shape: SegmentName, location_name: "segment"))
     DeleteAccessSourceOutput.add_member(:status, Shapes::ShapeRef.new(shape: CRResourceStatus, required: true, location_name: "status"))
     DeleteAccessSourceOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "updatedAt"))
     DeleteAccessSourceOutput.struct_class = Types::DeleteAccessSourceOutput
@@ -557,6 +644,21 @@ module Aws::Route53GlobalResolver
     DeleteAccessTokenOutput.add_member(:status, Shapes::ShapeRef.new(shape: TokenStatus, required: true, location_name: "status"))
     DeleteAccessTokenOutput.add_member(:deleted_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "deletedAt"))
     DeleteAccessTokenOutput.struct_class = Types::DeleteAccessTokenOutput
+
+    DeleteCoreNetworkEndpointInput.add_member(:core_network_endpoint_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "coreNetworkEndpointId"))
+    DeleteCoreNetworkEndpointInput.struct_class = Types::DeleteCoreNetworkEndpointInput
+
+    DeleteCoreNetworkEndpointOutput.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "arn"))
+    DeleteCoreNetworkEndpointOutput.add_member(:available_regions, Shapes::ShapeRef.new(shape: Regions, required: true, location_name: "availableRegions"))
+    DeleteCoreNetworkEndpointOutput.add_member(:core_network_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "coreNetworkArn"))
+    DeleteCoreNetworkEndpointOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "createdAt"))
+    DeleteCoreNetworkEndpointOutput.add_member(:global_resolver_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "globalResolverId"))
+    DeleteCoreNetworkEndpointOutput.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
+    DeleteCoreNetworkEndpointOutput.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: CoreNetworkEndpointDnsIpItems, required: true, location_name: "ipAddresses"))
+    DeleteCoreNetworkEndpointOutput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    DeleteCoreNetworkEndpointOutput.add_member(:status, Shapes::ShapeRef.new(shape: CRResourceStatus, required: true, location_name: "status"))
+    DeleteCoreNetworkEndpointOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "updatedAt"))
+    DeleteCoreNetworkEndpointOutput.struct_class = Types::DeleteCoreNetworkEndpointOutput
 
     DeleteDNSViewInput.add_member(:dns_view_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "dnsViewId"))
     DeleteDNSViewInput.struct_class = Types::DeleteDNSViewInput
@@ -715,13 +817,15 @@ module Aws::Route53GlobalResolver
     GetAccessSourceInput.struct_class = Types::GetAccessSourceInput
 
     GetAccessSourceOutput.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "arn"))
-    GetAccessSourceOutput.add_member(:cidr, Shapes::ShapeRef.new(shape: Cidr, required: true, location_name: "cidr"))
+    GetAccessSourceOutput.add_member(:cidr, Shapes::ShapeRef.new(shape: Cidr, location_name: "cidr"))
+    GetAccessSourceOutput.add_member(:core_network_endpoint_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "coreNetworkEndpointId"))
     GetAccessSourceOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "createdAt"))
     GetAccessSourceOutput.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
-    GetAccessSourceOutput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, required: true, location_name: "ipAddressType"))
+    GetAccessSourceOutput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     GetAccessSourceOutput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameShort, location_name: "name"))
     GetAccessSourceOutput.add_member(:dns_view_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "dnsViewId"))
     GetAccessSourceOutput.add_member(:protocol, Shapes::ShapeRef.new(shape: DnsProtocol, required: true, location_name: "protocol"))
+    GetAccessSourceOutput.add_member(:segment, Shapes::ShapeRef.new(shape: SegmentName, location_name: "segment"))
     GetAccessSourceOutput.add_member(:status, Shapes::ShapeRef.new(shape: CRResourceStatus, required: true, location_name: "status"))
     GetAccessSourceOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "updatedAt"))
     GetAccessSourceOutput.struct_class = Types::GetAccessSourceOutput
@@ -741,6 +845,21 @@ module Aws::Route53GlobalResolver
     GetAccessTokenOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "updatedAt"))
     GetAccessTokenOutput.add_member(:value, Shapes::ShapeRef.new(shape: AccessTokenValue, required: true, location_name: "value"))
     GetAccessTokenOutput.struct_class = Types::GetAccessTokenOutput
+
+    GetCoreNetworkEndpointInput.add_member(:core_network_endpoint_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "coreNetworkEndpointId"))
+    GetCoreNetworkEndpointInput.struct_class = Types::GetCoreNetworkEndpointInput
+
+    GetCoreNetworkEndpointOutput.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "arn"))
+    GetCoreNetworkEndpointOutput.add_member(:available_regions, Shapes::ShapeRef.new(shape: Regions, required: true, location_name: "availableRegions"))
+    GetCoreNetworkEndpointOutput.add_member(:core_network_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "coreNetworkArn"))
+    GetCoreNetworkEndpointOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "createdAt"))
+    GetCoreNetworkEndpointOutput.add_member(:global_resolver_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "globalResolverId"))
+    GetCoreNetworkEndpointOutput.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
+    GetCoreNetworkEndpointOutput.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: CoreNetworkEndpointDnsIpItems, required: true, location_name: "ipAddresses"))
+    GetCoreNetworkEndpointOutput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    GetCoreNetworkEndpointOutput.add_member(:status, Shapes::ShapeRef.new(shape: CRResourceStatus, required: true, location_name: "status"))
+    GetCoreNetworkEndpointOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "updatedAt"))
+    GetCoreNetworkEndpointOutput.struct_class = Types::GetCoreNetworkEndpointOutput
 
     GetDNSViewInput.add_member(:dns_view_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "dnsViewId"))
     GetDNSViewInput.struct_class = Types::GetDNSViewInput
@@ -814,6 +933,7 @@ module Aws::Route53GlobalResolver
     GetGlobalResolverOutput.add_member(:ipv4_addresses, Shapes::ShapeRef.new(shape: IPv4Addresses, required: true, location_name: "ipv4Addresses"))
     GetGlobalResolverOutput.add_member(:ipv6_addresses, Shapes::ShapeRef.new(shape: IPv6Addresses, location_name: "ipv6Addresses"))
     GetGlobalResolverOutput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: GlobalResolverIpAddressType, location_name: "ipAddressType"))
+    GetGlobalResolverOutput.add_member(:public_ip_status, Shapes::ShapeRef.new(shape: PublicIpStatus, location_name: "publicIpStatus"))
     GetGlobalResolverOutput.struct_class = Types::GetGlobalResolverOutput
 
     GetHostedZoneAssociationInput.add_member(:hosted_zone_association_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "hostedZoneAssociationId"))
@@ -854,6 +974,7 @@ module Aws::Route53GlobalResolver
     GlobalResolversItem.add_member(:ipv4_addresses, Shapes::ShapeRef.new(shape: IPv4Addresses, required: true, location_name: "ipv4Addresses"))
     GlobalResolversItem.add_member(:ipv6_addresses, Shapes::ShapeRef.new(shape: IPv6Addresses, location_name: "ipv6Addresses"))
     GlobalResolversItem.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: GlobalResolverIpAddressType, location_name: "ipAddressType"))
+    GlobalResolversItem.add_member(:public_ip_status, Shapes::ShapeRef.new(shape: PublicIpStatus, location_name: "publicIpStatus"))
     GlobalResolversItem.struct_class = Types::GlobalResolversItem
 
     HostedZoneAssociationSummary.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
@@ -904,6 +1025,15 @@ module Aws::Route53GlobalResolver
     ListAccessTokensOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListAccessTokensOutput.add_member(:access_tokens, Shapes::ShapeRef.new(shape: AccessTokens, location_name: "accessTokens"))
     ListAccessTokensOutput.struct_class = Types::ListAccessTokensOutput
+
+    ListCoreNetworkEndpointsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "max_results"))
+    ListCoreNetworkEndpointsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next_token"))
+    ListCoreNetworkEndpointsInput.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location: "querystring", location_name: "filters"))
+    ListCoreNetworkEndpointsInput.struct_class = Types::ListCoreNetworkEndpointsInput
+
+    ListCoreNetworkEndpointsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListCoreNetworkEndpointsOutput.add_member(:core_network_endpoints, Shapes::ShapeRef.new(shape: CoreNetworkEndpoints, required: true, location_name: "coreNetworkEndpoints"))
+    ListCoreNetworkEndpointsOutput.struct_class = Types::ListCoreNetworkEndpointsOutput
 
     ListDNSViewsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "max_results"))
     ListDNSViewsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next_token"))
@@ -1048,19 +1178,22 @@ module Aws::Route53GlobalResolver
 
     UpdateAccessSourceInput.add_member(:access_source_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "accessSourceId"))
     UpdateAccessSourceInput.add_member(:cidr, Shapes::ShapeRef.new(shape: Cidr, location_name: "cidr"))
+    UpdateAccessSourceInput.add_member(:dns_view_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "dnsViewId"))
     UpdateAccessSourceInput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     UpdateAccessSourceInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameShort, location_name: "name"))
     UpdateAccessSourceInput.add_member(:protocol, Shapes::ShapeRef.new(shape: DnsProtocol, location_name: "protocol"))
     UpdateAccessSourceInput.struct_class = Types::UpdateAccessSourceInput
 
     UpdateAccessSourceOutput.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "arn"))
-    UpdateAccessSourceOutput.add_member(:cidr, Shapes::ShapeRef.new(shape: Cidr, required: true, location_name: "cidr"))
+    UpdateAccessSourceOutput.add_member(:cidr, Shapes::ShapeRef.new(shape: Cidr, location_name: "cidr"))
+    UpdateAccessSourceOutput.add_member(:core_network_endpoint_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "coreNetworkEndpointId"))
     UpdateAccessSourceOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "createdAt"))
     UpdateAccessSourceOutput.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
-    UpdateAccessSourceOutput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, required: true, location_name: "ipAddressType"))
+    UpdateAccessSourceOutput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     UpdateAccessSourceOutput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameShort, location_name: "name"))
     UpdateAccessSourceOutput.add_member(:dns_view_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "dnsViewId"))
     UpdateAccessSourceOutput.add_member(:protocol, Shapes::ShapeRef.new(shape: DnsProtocol, required: true, location_name: "protocol"))
+    UpdateAccessSourceOutput.add_member(:segment, Shapes::ShapeRef.new(shape: SegmentName, location_name: "segment"))
     UpdateAccessSourceOutput.add_member(:status, Shapes::ShapeRef.new(shape: CRResourceStatus, required: true, location_name: "status"))
     UpdateAccessSourceOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "updatedAt"))
     UpdateAccessSourceOutput.struct_class = Types::UpdateAccessSourceOutput
@@ -1072,6 +1205,23 @@ module Aws::Route53GlobalResolver
     UpdateAccessTokenOutput.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
     UpdateAccessTokenOutput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceNameShort, required: true, location_name: "name"))
     UpdateAccessTokenOutput.struct_class = Types::UpdateAccessTokenOutput
+
+    UpdateCoreNetworkEndpointInput.add_member(:core_network_endpoint_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "coreNetworkEndpointId"))
+    UpdateCoreNetworkEndpointInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    UpdateCoreNetworkEndpointInput.add_member(:update_ip_addresses, Shapes::ShapeRef.new(shape: UpdateIpAddressList, location_name: "updateIpAddresses"))
+    UpdateCoreNetworkEndpointInput.struct_class = Types::UpdateCoreNetworkEndpointInput
+
+    UpdateCoreNetworkEndpointOutput.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "arn"))
+    UpdateCoreNetworkEndpointOutput.add_member(:available_regions, Shapes::ShapeRef.new(shape: Regions, required: true, location_name: "availableRegions"))
+    UpdateCoreNetworkEndpointOutput.add_member(:core_network_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "coreNetworkArn"))
+    UpdateCoreNetworkEndpointOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "createdAt"))
+    UpdateCoreNetworkEndpointOutput.add_member(:global_resolver_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "globalResolverId"))
+    UpdateCoreNetworkEndpointOutput.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "id"))
+    UpdateCoreNetworkEndpointOutput.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: CoreNetworkEndpointDnsIpItems, required: true, location_name: "ipAddresses"))
+    UpdateCoreNetworkEndpointOutput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    UpdateCoreNetworkEndpointOutput.add_member(:status, Shapes::ShapeRef.new(shape: CRResourceStatus, required: true, location_name: "status"))
+    UpdateCoreNetworkEndpointOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "updatedAt"))
+    UpdateCoreNetworkEndpointOutput.struct_class = Types::UpdateCoreNetworkEndpointOutput
 
     UpdateDNSViewInput.add_member(:dns_view_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "dnsViewId"))
     UpdateDNSViewInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
@@ -1143,6 +1293,7 @@ module Aws::Route53GlobalResolver
     UpdateGlobalResolverInput.add_member(:observability_region, Shapes::ShapeRef.new(shape: Region, location_name: "observabilityRegion"))
     UpdateGlobalResolverInput.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
     UpdateGlobalResolverInput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: GlobalResolverIpAddressType, location_name: "ipAddressType"))
+    UpdateGlobalResolverInput.add_member(:public_ip_status, Shapes::ShapeRef.new(shape: PublicIpStatus, location_name: "publicIpStatus"))
     UpdateGlobalResolverInput.add_member(:regions, Shapes::ShapeRef.new(shape: Regions, location_name: "regions"))
     UpdateGlobalResolverInput.struct_class = Types::UpdateGlobalResolverInput
 
@@ -1160,6 +1311,7 @@ module Aws::Route53GlobalResolver
     UpdateGlobalResolverOutput.add_member(:ipv4_addresses, Shapes::ShapeRef.new(shape: IPv4Addresses, required: true, location_name: "ipv4Addresses"))
     UpdateGlobalResolverOutput.add_member(:ipv6_addresses, Shapes::ShapeRef.new(shape: IPv6Addresses, location_name: "ipv6Addresses"))
     UpdateGlobalResolverOutput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: GlobalResolverIpAddressType, location_name: "ipAddressType"))
+    UpdateGlobalResolverOutput.add_member(:public_ip_status, Shapes::ShapeRef.new(shape: PublicIpStatus, location_name: "publicIpStatus"))
     UpdateGlobalResolverOutput.struct_class = Types::UpdateGlobalResolverOutput
 
     UpdateHostedZoneAssociationInput.add_member(:hosted_zone_association_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "hostedZoneAssociationId"))
@@ -1175,6 +1327,16 @@ module Aws::Route53GlobalResolver
     UpdateHostedZoneAssociationOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: ISO8601TimeString, required: true, location_name: "updatedAt"))
     UpdateHostedZoneAssociationOutput.add_member(:status, Shapes::ShapeRef.new(shape: HostedZoneAssociationStatus, required: true, location_name: "status"))
     UpdateHostedZoneAssociationOutput.struct_class = Types::UpdateHostedZoneAssociationOutput
+
+    UpdateIpAddressEntry.add_member(:operation, Shapes::ShapeRef.new(shape: UpdateIpAddressOperation, required: true, location_name: "operation"))
+    UpdateIpAddressEntry.add_member(:ipv4_address, Shapes::ShapeRef.new(shape: IPv4Address, location_name: "ipv4Address"))
+    UpdateIpAddressEntry.add_member(:ipv6_address, Shapes::ShapeRef.new(shape: IPv6Address, location_name: "ipv6Address"))
+    UpdateIpAddressEntry.add_member(:dns_label, Shapes::ShapeRef.new(shape: DnsLabel, location_name: "dnsLabel"))
+    UpdateIpAddressEntry.add_member(:region_scope, Shapes::ShapeRef.new(shape: RegionScopeType, location_name: "regionScope"))
+    UpdateIpAddressEntry.add_member(:regions, Shapes::ShapeRef.new(shape: Regions, location_name: "regions"))
+    UpdateIpAddressEntry.struct_class = Types::UpdateIpAddressEntry
+
+    UpdateIpAddressList.member = Shapes::ShapeRef.new(shape: UpdateIpAddressEntry)
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, required: true, location_name: "reason"))
@@ -1287,6 +1449,21 @@ module Aws::Route53GlobalResolver
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:create_core_network_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCoreNetworkEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/core-network-endpoints"
+        o.input = Shapes::ShapeRef.new(shape: CreateCoreNetworkEndpointInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateCoreNetworkEndpointOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:create_dns_view, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDNSView"
         o.http_method = "POST"
@@ -1366,6 +1543,20 @@ module Aws::Route53GlobalResolver
         o.http_request_uri = "/tokens/{accessTokenId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteAccessTokenInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteAccessTokenOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_core_network_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCoreNetworkEndpoint"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/core-network-endpoints/{coreNetworkEndpointId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCoreNetworkEndpointInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCoreNetworkEndpointOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -1500,6 +1691,19 @@ module Aws::Route53GlobalResolver
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_core_network_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCoreNetworkEndpoint"
+        o.http_method = "GET"
+        o.http_request_uri = "/core-network-endpoints/{coreNetworkEndpointId}"
+        o.input = Shapes::ShapeRef.new(shape: GetCoreNetworkEndpointInput)
+        o.output = Shapes::ShapeRef.new(shape: GetCoreNetworkEndpointOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:get_dns_view, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetDNSView"
         o.http_method = "GET"
@@ -1622,6 +1826,24 @@ module Aws::Route53GlobalResolver
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_core_network_endpoints, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCoreNetworkEndpoints"
+        o.http_method = "GET"
+        o.http_request_uri = "/core-network-endpoints"
+        o.input = Shapes::ShapeRef.new(shape: ListCoreNetworkEndpointsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListCoreNetworkEndpointsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1785,7 +2007,10 @@ module Aws::Route53GlobalResolver
         o.http_request_uri = "/get-all-tags"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1794,9 +2019,12 @@ module Aws::Route53GlobalResolver
         o.http_request_uri = "/tag-resource"
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1805,8 +2033,11 @@ module Aws::Route53GlobalResolver
         o.http_request_uri = "/untag-resource"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_access_source, Seahorse::Model::Operation.new.tap do |o|
@@ -1830,6 +2061,21 @@ module Aws::Route53GlobalResolver
         o.http_request_uri = "/tokens/{accessTokenId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateAccessTokenInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateAccessTokenOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_core_network_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCoreNetworkEndpoint"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/core-network-endpoints/{coreNetworkEndpointId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCoreNetworkEndpointInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCoreNetworkEndpointOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

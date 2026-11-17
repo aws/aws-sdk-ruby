@@ -2690,6 +2690,8 @@ module Aws::WorkSpaces
     #   resp.directories[0].selfservice_permissions.change_compute_type #=> String, one of "ENABLED", "DISABLED"
     #   resp.directories[0].selfservice_permissions.switch_running_mode #=> String, one of "ENABLED", "DISABLED"
     #   resp.directories[0].selfservice_permissions.rebuild_workspace #=> String, one of "ENABLED", "DISABLED"
+    #   resp.directories[0].selfservice_permissions.nested_virtualization #=> String, one of "ENABLED", "DISABLED"
+    #   resp.directories[0].selfservice_permissions.enable_end_user_advisor #=> String, one of "ENABLED", "DISABLED"
     #   resp.directories[0].saml_properties.status #=> String, one of "DISABLED", "ENABLED", "ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK"
     #   resp.directories[0].saml_properties.user_access_url #=> String
     #   resp.directories[0].saml_properties.relay_state_parameter_name #=> String
@@ -4010,6 +4012,8 @@ module Aws::WorkSpaces
     #       change_compute_type: "ENABLED", # accepts ENABLED, DISABLED
     #       switch_running_mode: "ENABLED", # accepts ENABLED, DISABLED
     #       rebuild_workspace: "ENABLED", # accepts ENABLED, DISABLED
+    #       nested_virtualization: "ENABLED", # accepts ENABLED, DISABLED
+    #       enable_end_user_advisor: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #   })
     #
@@ -5180,7 +5184,7 @@ module Aws::WorkSpaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.178.0'
+      context[:gem_version] = '1.179.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

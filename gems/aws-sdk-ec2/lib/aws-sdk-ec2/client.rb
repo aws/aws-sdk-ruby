@@ -769,6 +769,11 @@ module Aws::EC2
     #   resp.transit_gateway_peering_attachment.accepter_tgw_info.owner_id #=> String
     #   resp.transit_gateway_peering_attachment.accepter_tgw_info.region #=> String
     #   resp.transit_gateway_peering_attachment.options.dynamic_routing #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_peering_attachment.options.requester_allow_multipath_resilience #=> Boolean
+    #   resp.transit_gateway_peering_attachment.options.requester_multipath_resilience_mode #=> String, one of "always-on"
+    #   resp.transit_gateway_peering_attachment.options.accepter_allow_multipath_resilience #=> Boolean
+    #   resp.transit_gateway_peering_attachment.options.accepter_multipath_resilience_mode #=> String, one of "always-on"
+    #   resp.transit_gateway_peering_attachment.options.multipath_resilience_status #=> String, one of "pending", "enabled", "disabled"
     #   resp.transit_gateway_peering_attachment.status.code #=> String
     #   resp.transit_gateway_peering_attachment.status.message #=> String
     #   resp.transit_gateway_peering_attachment.state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
@@ -901,6 +906,18 @@ module Aws::EC2
     # For an inter-Region VPC peering connection request, you must accept
     # the VPC peering connection in the Region of the accepter VPC.
     #
+    # If the requester allows multipath resilience, accepting the request
+    # also allows multipath resilience for the accepter VPC, and the
+    # `multipathResilienceStatus` of the VPC peering connection becomes
+    # `enabled`. Additional charges apply. For more information, see [Amazon
+    # VPC pricing][1]. To stop allowing multipath resilience for the
+    # accepter VPC, use ModifyVpcPeeringConnectionOptions and set
+    # `AllowMultipathResilience` to `false`.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/vpc/pricing/
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -933,6 +950,8 @@ module Aws::EC2
     #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
     #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
     #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
+    #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_multipath_resilience #=> Boolean
+    #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.multipath_resilience_mode #=> String, one of "always-on"
     #   resp.vpc_peering_connection.accepter_vpc_info.vpc_id #=> String
     #   resp.vpc_peering_connection.accepter_vpc_info.region #=> String
     #   resp.vpc_peering_connection.expiration_time #=> Time
@@ -945,6 +964,8 @@ module Aws::EC2
     #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
     #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
     #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
+    #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_multipath_resilience #=> Boolean
+    #   resp.vpc_peering_connection.requester_vpc_info.peering_options.multipath_resilience_mode #=> String, one of "always-on"
     #   resp.vpc_peering_connection.requester_vpc_info.vpc_id #=> String
     #   resp.vpc_peering_connection.requester_vpc_info.region #=> String
     #   resp.vpc_peering_connection.status.code #=> String, one of "initiating-request", "pending-acceptance", "active", "deleted", "rejected", "failed", "expired", "provisioning", "deleting"
@@ -953,6 +974,7 @@ module Aws::EC2
     #   resp.vpc_peering_connection.tags[0].key #=> String
     #   resp.vpc_peering_connection.tags[0].value #=> String
     #   resp.vpc_peering_connection.vpc_peering_connection_id #=> String
+    #   resp.vpc_peering_connection.multipath_resilience_status #=> String, one of "pending", "enabled", "disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptVpcPeeringConnection AWS API Documentation
     #
@@ -18343,6 +18365,8 @@ module Aws::EC2
     #     peer_region: "String", # required
     #     options: {
     #       dynamic_routing: "enable", # accepts enable, disable
+    #       allow_multipath_resilience: false,
+    #       multipath_resilience_mode: "always-on", # accepts always-on
     #     },
     #     tag_specifications: [
     #       {
@@ -18371,6 +18395,11 @@ module Aws::EC2
     #   resp.transit_gateway_peering_attachment.accepter_tgw_info.owner_id #=> String
     #   resp.transit_gateway_peering_attachment.accepter_tgw_info.region #=> String
     #   resp.transit_gateway_peering_attachment.options.dynamic_routing #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_peering_attachment.options.requester_allow_multipath_resilience #=> Boolean
+    #   resp.transit_gateway_peering_attachment.options.requester_multipath_resilience_mode #=> String, one of "always-on"
+    #   resp.transit_gateway_peering_attachment.options.accepter_allow_multipath_resilience #=> Boolean
+    #   resp.transit_gateway_peering_attachment.options.accepter_multipath_resilience_mode #=> String, one of "always-on"
+    #   resp.transit_gateway_peering_attachment.options.multipath_resilience_status #=> String, one of "pending", "enabled", "disabled"
     #   resp.transit_gateway_peering_attachment.status.code #=> String
     #   resp.transit_gateway_peering_attachment.status.message #=> String
     #   resp.transit_gateway_peering_attachment.state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
@@ -20684,6 +20713,9 @@ module Aws::EC2
     # activate the peering connection. The VPC peering connection request
     # expires after 7 days, after which it cannot be accepted or rejected.
     #
+    # Multipath resilience replicates the traffic of an inter-Region VPC
+    # peering connection across multiple network paths.
+    #
     # If you create a VPC peering connection request between VPCs with
     # overlapping CIDR blocks, the VPC peering connection has a status of
     # `failed`.
@@ -20700,6 +20732,9 @@ module Aws::EC2
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the peering connection.
+    #
+    # @option params [Types::CreatePeeringConnectionOptionsRequest] :requester_peering_connection_options
+    #   The VPC peering connection options to apply to the requester VPC.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -20739,6 +20774,10 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     requester_peering_connection_options: {
+    #       allow_multipath_resilience: false,
+    #       multipath_resilience_mode: "always-on", # accepts always-on
+    #     },
     #     dry_run: false,
     #     vpc_id: "VpcId", # required
     #     peer_vpc_id: "String",
@@ -20756,6 +20795,8 @@ module Aws::EC2
     #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
     #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
     #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
+    #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_multipath_resilience #=> Boolean
+    #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.multipath_resilience_mode #=> String, one of "always-on"
     #   resp.vpc_peering_connection.accepter_vpc_info.vpc_id #=> String
     #   resp.vpc_peering_connection.accepter_vpc_info.region #=> String
     #   resp.vpc_peering_connection.expiration_time #=> Time
@@ -20768,6 +20809,8 @@ module Aws::EC2
     #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
     #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
     #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
+    #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_multipath_resilience #=> Boolean
+    #   resp.vpc_peering_connection.requester_vpc_info.peering_options.multipath_resilience_mode #=> String, one of "always-on"
     #   resp.vpc_peering_connection.requester_vpc_info.vpc_id #=> String
     #   resp.vpc_peering_connection.requester_vpc_info.region #=> String
     #   resp.vpc_peering_connection.status.code #=> String, one of "initiating-request", "pending-acceptance", "active", "deleted", "rejected", "failed", "expired", "provisioning", "deleting"
@@ -20776,6 +20819,7 @@ module Aws::EC2
     #   resp.vpc_peering_connection.tags[0].key #=> String
     #   resp.vpc_peering_connection.tags[0].value #=> String
     #   resp.vpc_peering_connection.vpc_peering_connection_id #=> String
+    #   resp.vpc_peering_connection.multipath_resilience_status #=> String, one of "pending", "enabled", "disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcPeeringConnection AWS API Documentation
     #
@@ -20993,6 +21037,28 @@ module Aws::EC2
     #             },
     #           },
     #           enable_tunnel_lifecycle_control: false,
+    #           phase_1_additional_key_exchanges: [
+    #             {
+    #               additional_key_exchange_round: 1, # required
+    #               key_exchange_methods: [
+    #                 {
+    #                   value: 1,
+    #                 },
+    #               ],
+    #               requirement: "required", # accepts required, optional
+    #             },
+    #           ],
+    #           phase_2_additional_key_exchanges: [
+    #             {
+    #               additional_key_exchange_round: 1, # required
+    #               key_exchange_methods: [
+    #                 {
+    #                   value: 1,
+    #                 },
+    #               ],
+    #               requirement: "required", # accepts required, optional
+    #             },
+    #           ],
     #         },
     #       ],
     #       local_ipv_4_network_cidr: "String",
@@ -21057,6 +21123,16 @@ module Aws::EC2
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.bgp_log_group_arn #=> String
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.bgp_log_output_format #=> String
     #   resp.vpn_connection.options.tunnel_options[0].enable_tunnel_lifecycle_control #=> Boolean
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges[0].additional_key_exchange_round #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges[0].key_exchange_methods #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges[0].key_exchange_methods[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges[0].requirement #=> String, one of "required", "optional"
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges[0].additional_key_exchange_round #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges[0].key_exchange_methods #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges[0].key_exchange_methods[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges[0].requirement #=> String, one of "required", "optional"
     #   resp.vpn_connection.options.tunnel_bandwidth #=> String, one of "standard", "large"
     #   resp.vpn_connection.routes #=> Array
     #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
@@ -25217,6 +25293,11 @@ module Aws::EC2
     #   resp.transit_gateway_peering_attachment.accepter_tgw_info.owner_id #=> String
     #   resp.transit_gateway_peering_attachment.accepter_tgw_info.region #=> String
     #   resp.transit_gateway_peering_attachment.options.dynamic_routing #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_peering_attachment.options.requester_allow_multipath_resilience #=> Boolean
+    #   resp.transit_gateway_peering_attachment.options.requester_multipath_resilience_mode #=> String, one of "always-on"
+    #   resp.transit_gateway_peering_attachment.options.accepter_allow_multipath_resilience #=> Boolean
+    #   resp.transit_gateway_peering_attachment.options.accepter_multipath_resilience_mode #=> String, one of "always-on"
+    #   resp.transit_gateway_peering_attachment.options.multipath_resilience_status #=> String, one of "pending", "enabled", "disabled"
     #   resp.transit_gateway_peering_attachment.status.code #=> String
     #   resp.transit_gateway_peering_attachment.status.message #=> String
     #   resp.transit_gateway_peering_attachment.state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
@@ -28431,6 +28512,11 @@ module Aws::EC2
     #   available offerings from all Availability Zones in the Amazon Web
     #   Services Region and Local Zones you are opted into.
     #
+    # @option params [Array<Types::CapacityBlockInstanceTypePreference>] :instance_type_preferences
+    #   List of instance type preferences for the Capacity Block offering
+    #   search. Accepts one or more instance type names. Either this or the
+    #   legacy `InstanceType` parameter is required.
+    #
     # @return [Types::DescribeCapacityBlockOfferingsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeCapacityBlockOfferingsResult#capacity_block_offerings #capacity_block_offerings} => Array&lt;Types::CapacityBlockOffering&gt;
@@ -28452,6 +28538,11 @@ module Aws::EC2
     #     ultraserver_type: "String",
     #     ultraserver_count: 1,
     #     all_availability_zones: false,
+    #     instance_type_preferences: [
+    #       {
+    #         instance_type: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -28471,6 +28562,18 @@ module Aws::EC2
     #   resp.capacity_block_offerings[0].ultraserver_count #=> Integer
     #   resp.capacity_block_offerings[0].capacity_block_duration_minutes #=> Integer
     #   resp.capacity_block_offerings[0].zone_type #=> String
+    #   resp.capacity_block_offerings[0].capacity_block_offering_segments #=> Array
+    #   resp.capacity_block_offerings[0].capacity_block_offering_segments[0].instance_type #=> String
+    #   resp.capacity_block_offerings[0].capacity_block_offering_segments[0].availability_zone #=> String
+    #   resp.capacity_block_offerings[0].capacity_block_offering_segments[0].availability_zone_id #=> String
+    #   resp.capacity_block_offerings[0].capacity_block_offering_segments[0].instance_count #=> Integer
+    #   resp.capacity_block_offerings[0].capacity_block_offering_segments[0].start_date #=> Time
+    #   resp.capacity_block_offerings[0].capacity_block_offering_segments[0].end_date #=> Time
+    #   resp.capacity_block_offerings[0].capacity_block_offering_segments[0].capacity_block_duration_hours #=> Integer
+    #   resp.capacity_block_offerings[0].capacity_block_offering_segments[0].capacity_block_duration_minutes #=> Integer
+    #   resp.capacity_block_offerings[0].capacity_block_offering_segments[0].upfront_fee #=> String
+    #   resp.capacity_block_offerings[0].capacity_block_offering_segments[0].currency_code #=> String
+    #   resp.capacity_block_offerings[0].capacity_block_offering_segments[0].zone_type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityBlockOfferings AWS API Documentation
@@ -47464,6 +47567,11 @@ module Aws::EC2
     #   resp.transit_gateway_peering_attachments[0].accepter_tgw_info.owner_id #=> String
     #   resp.transit_gateway_peering_attachments[0].accepter_tgw_info.region #=> String
     #   resp.transit_gateway_peering_attachments[0].options.dynamic_routing #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_peering_attachments[0].options.requester_allow_multipath_resilience #=> Boolean
+    #   resp.transit_gateway_peering_attachments[0].options.requester_multipath_resilience_mode #=> String, one of "always-on"
+    #   resp.transit_gateway_peering_attachments[0].options.accepter_allow_multipath_resilience #=> Boolean
+    #   resp.transit_gateway_peering_attachments[0].options.accepter_multipath_resilience_mode #=> String, one of "always-on"
+    #   resp.transit_gateway_peering_attachments[0].options.multipath_resilience_status #=> String, one of "pending", "enabled", "disabled"
     #   resp.transit_gateway_peering_attachments[0].status.code #=> String
     #   resp.transit_gateway_peering_attachments[0].status.message #=> String
     #   resp.transit_gateway_peering_attachments[0].state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
@@ -50429,6 +50537,8 @@ module Aws::EC2
     #   resp.vpc_peering_connections[0].accepter_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
     #   resp.vpc_peering_connections[0].accepter_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
     #   resp.vpc_peering_connections[0].accepter_vpc_info.peering_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
+    #   resp.vpc_peering_connections[0].accepter_vpc_info.peering_options.allow_multipath_resilience #=> Boolean
+    #   resp.vpc_peering_connections[0].accepter_vpc_info.peering_options.multipath_resilience_mode #=> String, one of "always-on"
     #   resp.vpc_peering_connections[0].accepter_vpc_info.vpc_id #=> String
     #   resp.vpc_peering_connections[0].accepter_vpc_info.region #=> String
     #   resp.vpc_peering_connections[0].expiration_time #=> Time
@@ -50441,6 +50551,8 @@ module Aws::EC2
     #   resp.vpc_peering_connections[0].requester_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
     #   resp.vpc_peering_connections[0].requester_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
     #   resp.vpc_peering_connections[0].requester_vpc_info.peering_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
+    #   resp.vpc_peering_connections[0].requester_vpc_info.peering_options.allow_multipath_resilience #=> Boolean
+    #   resp.vpc_peering_connections[0].requester_vpc_info.peering_options.multipath_resilience_mode #=> String, one of "always-on"
     #   resp.vpc_peering_connections[0].requester_vpc_info.vpc_id #=> String
     #   resp.vpc_peering_connections[0].requester_vpc_info.region #=> String
     #   resp.vpc_peering_connections[0].status.code #=> String, one of "initiating-request", "pending-acceptance", "active", "deleted", "rejected", "failed", "expired", "provisioning", "deleting"
@@ -50449,6 +50561,7 @@ module Aws::EC2
     #   resp.vpc_peering_connections[0].tags[0].key #=> String
     #   resp.vpc_peering_connections[0].tags[0].value #=> String
     #   resp.vpc_peering_connections[0].vpc_peering_connection_id #=> String
+    #   resp.vpc_peering_connections[0].multipath_resilience_status #=> String, one of "pending", "enabled", "disabled"
     #   resp.next_token #=> String
     #
     #
@@ -50866,6 +50979,16 @@ module Aws::EC2
     #   resp.vpn_connections[0].options.tunnel_options[0].log_options.cloud_watch_log_options.bgp_log_group_arn #=> String
     #   resp.vpn_connections[0].options.tunnel_options[0].log_options.cloud_watch_log_options.bgp_log_output_format #=> String
     #   resp.vpn_connections[0].options.tunnel_options[0].enable_tunnel_lifecycle_control #=> Boolean
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_1_additional_key_exchanges #=> Array
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_1_additional_key_exchanges[0].additional_key_exchange_round #=> Integer
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_1_additional_key_exchanges[0].key_exchange_methods #=> Array
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_1_additional_key_exchanges[0].key_exchange_methods[0].value #=> Integer
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_1_additional_key_exchanges[0].requirement #=> String, one of "required", "optional"
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_2_additional_key_exchanges #=> Array
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_2_additional_key_exchanges[0].additional_key_exchange_round #=> Integer
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_2_additional_key_exchanges[0].key_exchange_methods #=> Array
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_2_additional_key_exchanges[0].key_exchange_methods[0].value #=> Integer
+    #   resp.vpn_connections[0].options.tunnel_options[0].phase_2_additional_key_exchanges[0].requirement #=> String, one of "required", "optional"
     #   resp.vpn_connections[0].options.tunnel_bandwidth #=> String, one of "standard", "large"
     #   resp.vpn_connections[0].routes #=> Array
     #   resp.vpn_connections[0].routes[0].destination_cidr_block #=> String
@@ -55514,6 +55637,12 @@ module Aws::EC2
     #   resp.active_vpn_tunnel_status.ike_version #=> String
     #   resp.active_vpn_tunnel_status.provisioning_status #=> String, one of "available", "pending", "failed"
     #   resp.active_vpn_tunnel_status.provisioning_status_reason #=> String
+    #   resp.active_vpn_tunnel_status.phase_1_additional_key_exchanges #=> Array
+    #   resp.active_vpn_tunnel_status.phase_1_additional_key_exchanges[0].additional_key_exchange_round #=> Integer
+    #   resp.active_vpn_tunnel_status.phase_1_additional_key_exchanges[0].key_exchange_method #=> Integer
+    #   resp.active_vpn_tunnel_status.phase_2_additional_key_exchanges #=> Array
+    #   resp.active_vpn_tunnel_status.phase_2_additional_key_exchanges[0].additional_key_exchange_round #=> Integer
+    #   resp.active_vpn_tunnel_status.phase_2_additional_key_exchanges[0].key_exchange_method #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetActiveVpnTunnelStatus AWS API Documentation
     #
@@ -62937,8 +63066,8 @@ module Aws::EC2
     #   account-level encryption enforcement.
     #
     # @option params [String] :global_accelerator
-    #   Specifies whether to exclude AWS Global Accelerator from account-level
-    #   encryption enforcement.
+    #   Specifies whether to exclude Amazon Web Services Global Accelerator
+    #   from account-level encryption enforcement.
     #
     # @option params [String] :api_gateway_v2
     #   Specifies whether to exclude Amazon API Gateway V2 from account-level
@@ -68778,6 +68907,82 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Modifies the options for a transit gateway peering attachment. The
+    # peering attachment must be in the `available` state.
+    #
+    # You can allow multipath resilience for your side of an inter-Region
+    # transit gateway peering attachment between supported Regions.
+    # Multipath resilience isn't supported for transit gateway peering
+    # attachments in the same Region. It takes effect only when both the
+    # requester and the accepter allow it. To modify the requester side,
+    # send the request in the Region of the requester transit gateway. To
+    # modify the accepter side, send the request in the Region of the
+    # accepter transit gateway. To check whether multipath resilience is in
+    # effect, use DescribeTransitGatewayPeeringAttachments and check
+    # `multipathResilienceStatus`.
+    #
+    # @option params [required, String] :transit_gateway_attachment_id
+    #   The ID of the transit gateway peering attachment.
+    #
+    # @option params [Types::ModifyTransitGatewayPeeringAttachmentRequestOptions] :options
+    #   The options to modify for the transit gateway peering attachment.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyTransitGatewayPeeringAttachmentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyTransitGatewayPeeringAttachmentResult#transit_gateway_peering_attachment #transit_gateway_peering_attachment} => Types::TransitGatewayPeeringAttachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_transit_gateway_peering_attachment({
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #     options: {
+    #       allow_multipath_resilience: false,
+    #       multipath_resilience_mode: "always-on", # accepts always-on
+    #     },
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_peering_attachment.transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_peering_attachment.accepter_transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_peering_attachment.requester_tgw_info.transit_gateway_id #=> String
+    #   resp.transit_gateway_peering_attachment.requester_tgw_info.core_network_id #=> String
+    #   resp.transit_gateway_peering_attachment.requester_tgw_info.owner_id #=> String
+    #   resp.transit_gateway_peering_attachment.requester_tgw_info.region #=> String
+    #   resp.transit_gateway_peering_attachment.accepter_tgw_info.transit_gateway_id #=> String
+    #   resp.transit_gateway_peering_attachment.accepter_tgw_info.core_network_id #=> String
+    #   resp.transit_gateway_peering_attachment.accepter_tgw_info.owner_id #=> String
+    #   resp.transit_gateway_peering_attachment.accepter_tgw_info.region #=> String
+    #   resp.transit_gateway_peering_attachment.options.dynamic_routing #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_peering_attachment.options.requester_allow_multipath_resilience #=> Boolean
+    #   resp.transit_gateway_peering_attachment.options.requester_multipath_resilience_mode #=> String, one of "always-on"
+    #   resp.transit_gateway_peering_attachment.options.accepter_allow_multipath_resilience #=> Boolean
+    #   resp.transit_gateway_peering_attachment.options.accepter_multipath_resilience_mode #=> String, one of "always-on"
+    #   resp.transit_gateway_peering_attachment.options.multipath_resilience_status #=> String, one of "pending", "enabled", "disabled"
+    #   resp.transit_gateway_peering_attachment.status.code #=> String
+    #   resp.transit_gateway_peering_attachment.status.message #=> String
+    #   resp.transit_gateway_peering_attachment.state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_peering_attachment.creation_time #=> Time
+    #   resp.transit_gateway_peering_attachment.tags #=> Array
+    #   resp.transit_gateway_peering_attachment.tags[0].key #=> String
+    #   resp.transit_gateway_peering_attachment.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayPeeringAttachment AWS API Documentation
+    #
+    # @overload modify_transit_gateway_peering_attachment(params = {})
+    # @param [Hash] params ({})
+    def modify_transit_gateway_peering_attachment(params = {}, options = {})
+      req = build_request(:modify_transit_gateway_peering_attachment, params)
+      req.send_request(options)
+    end
+
     # Modifies the specified transit gateway policy table entry.
     #
     # @option params [required, String] :transit_gateway_policy_table_id
@@ -70102,8 +70307,8 @@ module Aws::EC2
     #   encryption enforcement.
     #
     # @option params [String] :global_accelerator_exclusion
-    #   Specifies whether to exclude AWS Global Accelerator traffic from
-    #   encryption enforcement.
+    #   Specifies whether to exclude Amazon Web Services Global Accelerator
+    #   traffic from encryption enforcement.
     #
     # @option params [String] :api_gateway_v2_exclusion
     #   Specifies whether to exclude Amazon API Gateway V2 traffic from
@@ -70617,6 +70822,19 @@ module Aws::EC2
     # and the requester for a VPC peering connection, use the
     # DescribeVpcPeeringConnections command.
     #
+    # Multipath resilience replicates the traffic of an inter-Region VPC
+    # peering connection across multiple network paths. You can allow
+    # multipath resilience for your side of the connection if both of its
+    # Regions are supported. It takes effect only when both the requester
+    # and the accepter allow it. Additional charges apply when multipath
+    # resilience is in effect. For more information, see [Amazon VPC
+    # pricing][1]. To check whether multipath resilience is in effect, use
+    # DescribeVpcPeeringConnections and check `multipathResilienceStatus`.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/vpc/pricing/
+    #
     # @option params [Types::PeeringConnectionOptionsRequest] :accepter_peering_connection_options
     #   The VPC peering connection options for the accepter VPC.
     #
@@ -70644,12 +70862,16 @@ module Aws::EC2
     #       allow_dns_resolution_from_remote_vpc: false,
     #       allow_egress_from_local_classic_link_to_remote_vpc: false,
     #       allow_egress_from_local_vpc_to_remote_classic_link: false,
+    #       allow_multipath_resilience: false,
+    #       multipath_resilience_mode: "always-on", # accepts always-on
     #     },
     #     dry_run: false,
     #     requester_peering_connection_options: {
     #       allow_dns_resolution_from_remote_vpc: false,
     #       allow_egress_from_local_classic_link_to_remote_vpc: false,
     #       allow_egress_from_local_vpc_to_remote_classic_link: false,
+    #       allow_multipath_resilience: false,
+    #       multipath_resilience_mode: "always-on", # accepts always-on
     #     },
     #     vpc_peering_connection_id: "VpcPeeringConnectionId", # required
     #   })
@@ -70659,9 +70881,13 @@ module Aws::EC2
     #   resp.accepter_peering_connection_options.allow_dns_resolution_from_remote_vpc #=> Boolean
     #   resp.accepter_peering_connection_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
     #   resp.accepter_peering_connection_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
+    #   resp.accepter_peering_connection_options.allow_multipath_resilience #=> Boolean
+    #   resp.accepter_peering_connection_options.multipath_resilience_mode #=> String, one of "always-on"
     #   resp.requester_peering_connection_options.allow_dns_resolution_from_remote_vpc #=> Boolean
     #   resp.requester_peering_connection_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
     #   resp.requester_peering_connection_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
+    #   resp.requester_peering_connection_options.allow_multipath_resilience #=> Boolean
+    #   resp.requester_peering_connection_options.multipath_resilience_mode #=> String, one of "always-on"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcPeeringConnectionOptions AWS API Documentation
     #
@@ -70858,6 +71084,16 @@ module Aws::EC2
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.bgp_log_group_arn #=> String
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.bgp_log_output_format #=> String
     #   resp.vpn_connection.options.tunnel_options[0].enable_tunnel_lifecycle_control #=> Boolean
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges[0].additional_key_exchange_round #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges[0].key_exchange_methods #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges[0].key_exchange_methods[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges[0].requirement #=> String, one of "required", "optional"
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges[0].additional_key_exchange_round #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges[0].key_exchange_methods #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges[0].key_exchange_methods[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges[0].requirement #=> String, one of "required", "optional"
     #   resp.vpn_connection.options.tunnel_bandwidth #=> String, one of "standard", "large"
     #   resp.vpn_connection.routes #=> Array
     #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
@@ -71002,6 +71238,16 @@ module Aws::EC2
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.bgp_log_group_arn #=> String
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.bgp_log_output_format #=> String
     #   resp.vpn_connection.options.tunnel_options[0].enable_tunnel_lifecycle_control #=> Boolean
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges[0].additional_key_exchange_round #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges[0].key_exchange_methods #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges[0].key_exchange_methods[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges[0].requirement #=> String, one of "required", "optional"
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges[0].additional_key_exchange_round #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges[0].key_exchange_methods #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges[0].key_exchange_methods[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges[0].requirement #=> String, one of "required", "optional"
     #   resp.vpn_connection.options.tunnel_bandwidth #=> String, one of "standard", "large"
     #   resp.vpn_connection.routes #=> Array
     #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
@@ -71111,6 +71357,16 @@ module Aws::EC2
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.bgp_log_group_arn #=> String
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.bgp_log_output_format #=> String
     #   resp.vpn_connection.options.tunnel_options[0].enable_tunnel_lifecycle_control #=> Boolean
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges[0].additional_key_exchange_round #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges[0].key_exchange_methods #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges[0].key_exchange_methods[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges[0].requirement #=> String, one of "required", "optional"
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges[0].additional_key_exchange_round #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges[0].key_exchange_methods #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges[0].key_exchange_methods[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges[0].requirement #=> String, one of "required", "optional"
     #   resp.vpn_connection.options.tunnel_bandwidth #=> String, one of "standard", "large"
     #   resp.vpn_connection.routes #=> Array
     #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
@@ -71247,6 +71503,28 @@ module Aws::EC2
     #         },
     #       },
     #       enable_tunnel_lifecycle_control: false,
+    #       phase_1_additional_key_exchanges: [
+    #         {
+    #           additional_key_exchange_round: 1, # required
+    #           key_exchange_methods: [
+    #             {
+    #               value: 1,
+    #             },
+    #           ],
+    #           requirement: "required", # accepts required, optional
+    #         },
+    #       ],
+    #       phase_2_additional_key_exchanges: [
+    #         {
+    #           additional_key_exchange_round: 1, # required
+    #           key_exchange_methods: [
+    #             {
+    #               value: 1,
+    #             },
+    #           ],
+    #           requirement: "required", # accepts required, optional
+    #         },
+    #       ],
     #     },
     #     dry_run: false,
     #     skip_tunnel_replacement: false,
@@ -71304,6 +71582,16 @@ module Aws::EC2
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.bgp_log_group_arn #=> String
     #   resp.vpn_connection.options.tunnel_options[0].log_options.cloud_watch_log_options.bgp_log_output_format #=> String
     #   resp.vpn_connection.options.tunnel_options[0].enable_tunnel_lifecycle_control #=> Boolean
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges[0].additional_key_exchange_round #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges[0].key_exchange_methods #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges[0].key_exchange_methods[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_1_additional_key_exchanges[0].requirement #=> String, one of "required", "optional"
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges[0].additional_key_exchange_round #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges[0].key_exchange_methods #=> Array
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges[0].key_exchange_methods[0].value #=> Integer
+    #   resp.vpn_connection.options.tunnel_options[0].phase_2_additional_key_exchanges[0].requirement #=> String, one of "required", "optional"
     #   resp.vpn_connection.options.tunnel_bandwidth #=> String, one of "standard", "large"
     #   resp.vpn_connection.routes #=> Array
     #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
@@ -72086,6 +72374,7 @@ module Aws::EC2
     #
     #   * {Types::PurchaseCapacityBlockResult#capacity_reservation #capacity_reservation} => Types::CapacityReservation
     #   * {Types::PurchaseCapacityBlockResult#capacity_blocks #capacity_blocks} => Array&lt;Types::CapacityBlock&gt;
+    #   * {Types::PurchaseCapacityBlockResult#capacity_reservations #capacity_reservations} => Array&lt;Types::CapacityReservation&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -72177,6 +72466,62 @@ module Aws::EC2
     #   resp.capacity_blocks[0].tags #=> Array
     #   resp.capacity_blocks[0].tags[0].key #=> String
     #   resp.capacity_blocks[0].tags[0].value #=> String
+    #   resp.capacity_reservations #=> Array
+    #   resp.capacity_reservations[0].capacity_reservation_id #=> String
+    #   resp.capacity_reservations[0].owner_id #=> String
+    #   resp.capacity_reservations[0].capacity_reservation_arn #=> String
+    #   resp.capacity_reservations[0].availability_zone_id #=> String
+    #   resp.capacity_reservations[0].instance_type #=> String
+    #   resp.capacity_reservations[0].instance_platform #=> String, one of "Linux/UNIX", "Red Hat Enterprise Linux", "SUSE Linux", "Windows", "Windows with SQL Server", "Windows with SQL Server Enterprise", "Windows with SQL Server Standard", "Windows with SQL Server Web", "Linux with SQL Server Standard", "Linux with SQL Server Web", "Linux with SQL Server Enterprise", "RHEL with SQL Server Standard", "RHEL with SQL Server Enterprise", "RHEL with SQL Server Web", "RHEL with HA", "RHEL with HA and SQL Server Standard", "RHEL with HA and SQL Server Enterprise", "Ubuntu Pro"
+    #   resp.capacity_reservations[0].availability_zone #=> String
+    #   resp.capacity_reservations[0].tenancy #=> String, one of "default", "dedicated"
+    #   resp.capacity_reservations[0].total_instance_count #=> Integer
+    #   resp.capacity_reservations[0].available_instance_count #=> Integer
+    #   resp.capacity_reservations[0].ebs_optimized #=> Boolean
+    #   resp.capacity_reservations[0].ephemeral_storage #=> Boolean
+    #   resp.capacity_reservations[0].state #=> String, one of "active", "expired", "cancelled", "pending", "failed", "scheduled", "payment-pending", "payment-failed", "assessing", "delayed", "unsupported", "cancelling", "unavailable"
+    #   resp.capacity_reservations[0].start_date #=> Time
+    #   resp.capacity_reservations[0].end_date #=> Time
+    #   resp.capacity_reservations[0].end_date_type #=> String, one of "unlimited", "limited"
+    #   resp.capacity_reservations[0].instance_match_criteria #=> String, one of "open", "targeted"
+    #   resp.capacity_reservations[0].create_date #=> Time
+    #   resp.capacity_reservations[0].tags #=> Array
+    #   resp.capacity_reservations[0].tags[0].key #=> String
+    #   resp.capacity_reservations[0].tags[0].value #=> String
+    #   resp.capacity_reservations[0].outpost_arn #=> String
+    #   resp.capacity_reservations[0].capacity_reservation_fleet_id #=> String
+    #   resp.capacity_reservations[0].placement_group_arn #=> String
+    #   resp.capacity_reservations[0].capacity_allocations #=> Array
+    #   resp.capacity_reservations[0].capacity_allocations[0].allocation_type #=> String, one of "used", "future", "cancelling"
+    #   resp.capacity_reservations[0].capacity_allocations[0].count #=> Integer
+    #   resp.capacity_reservations[0].capacity_allocations[0].allocation_metadata #=> Array
+    #   resp.capacity_reservations[0].capacity_allocations[0].allocation_metadata[0].key #=> String
+    #   resp.capacity_reservations[0].capacity_allocations[0].allocation_metadata[0].value #=> String
+    #   resp.capacity_reservations[0].reservation_type #=> String, one of "default", "capacity-block"
+    #   resp.capacity_reservations[0].unused_reservation_billing_owner_id #=> String
+    #   resp.capacity_reservations[0].commitment_info.committed_instance_count #=> Integer
+    #   resp.capacity_reservations[0].commitment_info.commitment_end_date #=> Time
+    #   resp.capacity_reservations[0].commitment_info.commitment_duration #=> Integer
+    #   resp.capacity_reservations[0].delivery_preference #=> String, one of "fixed", "incremental"
+    #   resp.capacity_reservations[0].capacity_block_id #=> String
+    #   resp.capacity_reservations[0].interruptible #=> Boolean
+    #   resp.capacity_reservations[0].interruptible_capacity_allocation.instance_count #=> Integer
+    #   resp.capacity_reservations[0].interruptible_capacity_allocation.target_instance_count #=> Integer
+    #   resp.capacity_reservations[0].interruptible_capacity_allocation.status #=> String, one of "pending", "active", "updating", "canceling", "canceled", "failed"
+    #   resp.capacity_reservations[0].interruptible_capacity_allocation.interruptible_capacity_reservation_id #=> String
+    #   resp.capacity_reservations[0].interruptible_capacity_allocation.interruption_type #=> String, one of "adhoc"
+    #   resp.capacity_reservations[0].interruptible_capacity_allocation.zero_size_preference #=> String, one of "retain", "default"
+    #   resp.capacity_reservations[0].interruption_info.source_capacity_reservation_id #=> String
+    #   resp.capacity_reservations[0].interruption_info.interruption_type #=> String, one of "adhoc"
+    #   resp.capacity_reservations[0].adjustment_status #=> String, one of "requested", "applied", "rejected"
+    #   resp.capacity_reservations[0].adjustment_details.start_date #=> Time
+    #   resp.capacity_reservations[0].adjustment_details.end_date #=> Time
+    #   resp.capacity_reservations[0].adjustment_details.commitment_end_date #=> Time
+    #   resp.capacity_reservations[0].adjustment_details.end_date_type #=> String
+    #   resp.capacity_reservations[0].adjustment_details.commitment_duration #=> Integer
+    #   resp.capacity_reservations[0].original_start_date #=> Time
+    #   resp.capacity_reservations[0].zero_size_preference #=> String, one of "retain", "default"
+    #   resp.capacity_reservations[0].launch_status #=> String, one of "launchable", "unlaunchable"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseCapacityBlock AWS API Documentation
     #
@@ -73182,6 +73527,11 @@ module Aws::EC2
     #   resp.transit_gateway_peering_attachment.accepter_tgw_info.owner_id #=> String
     #   resp.transit_gateway_peering_attachment.accepter_tgw_info.region #=> String
     #   resp.transit_gateway_peering_attachment.options.dynamic_routing #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_peering_attachment.options.requester_allow_multipath_resilience #=> Boolean
+    #   resp.transit_gateway_peering_attachment.options.requester_multipath_resilience_mode #=> String, one of "always-on"
+    #   resp.transit_gateway_peering_attachment.options.accepter_allow_multipath_resilience #=> Boolean
+    #   resp.transit_gateway_peering_attachment.options.accepter_multipath_resilience_mode #=> String, one of "always-on"
+    #   resp.transit_gateway_peering_attachment.options.multipath_resilience_status #=> String, one of "pending", "enabled", "disabled"
     #   resp.transit_gateway_peering_attachment.status.code #=> String
     #   resp.transit_gateway_peering_attachment.status.message #=> String
     #   resp.transit_gateway_peering_attachment.state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
@@ -80152,7 +80502,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.671.0'
+      context[:gem_version] = '1.672.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

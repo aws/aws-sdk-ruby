@@ -1774,7 +1774,7 @@ module Aws::ECR
     #   resp.repository_name #=> String
     #   resp.image_id.image_digest #=> String
     #   resp.image_id.image_tag #=> String
-    #   resp.image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "UNSUPPORTED_IMAGE", "ACTIVE", "PENDING", "SCAN_ELIGIBILITY_EXPIRED", "FINDINGS_UNAVAILABLE", "LIMIT_EXCEEDED", "IMAGE_ARCHIVED"
+    #   resp.image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "UNSUPPORTED_IMAGE", "ACTIVE", "PENDING", "SCAN_ELIGIBILITY_EXPIRED", "FINDINGS_UNAVAILABLE", "LIMIT_EXCEEDED", "IMAGE_ARCHIVED", "IMAGE_SIZE_EXCEEDED"
     #   resp.image_scan_status.description #=> String
     #   resp.image_scan_findings.image_scan_completed_at #=> Time
     #   resp.image_scan_findings.vulnerability_source_updated_at #=> Time
@@ -2020,7 +2020,7 @@ module Aws::ECR
     #   resp.image_details[0].image_tags[0] #=> String
     #   resp.image_details[0].image_size_in_bytes #=> Integer
     #   resp.image_details[0].image_pushed_at #=> Time
-    #   resp.image_details[0].image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "UNSUPPORTED_IMAGE", "ACTIVE", "PENDING", "SCAN_ELIGIBILITY_EXPIRED", "FINDINGS_UNAVAILABLE", "LIMIT_EXCEEDED", "IMAGE_ARCHIVED"
+    #   resp.image_details[0].image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "UNSUPPORTED_IMAGE", "ACTIVE", "PENDING", "SCAN_ELIGIBILITY_EXPIRED", "FINDINGS_UNAVAILABLE", "LIMIT_EXCEEDED", "IMAGE_ARCHIVED", "IMAGE_SIZE_EXCEEDED"
     #   resp.image_details[0].image_scan_status.description #=> String
     #   resp.image_details[0].image_scan_findings_summary.image_scan_completed_at #=> Time
     #   resp.image_details[0].image_scan_findings_summary.vulnerability_source_updated_at #=> Time
@@ -4135,7 +4135,7 @@ module Aws::ECR
     #   resp.repository_name #=> String
     #   resp.image_id.image_digest #=> String
     #   resp.image_id.image_tag #=> String
-    #   resp.image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "UNSUPPORTED_IMAGE", "ACTIVE", "PENDING", "SCAN_ELIGIBILITY_EXPIRED", "FINDINGS_UNAVAILABLE", "LIMIT_EXCEEDED", "IMAGE_ARCHIVED"
+    #   resp.image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "UNSUPPORTED_IMAGE", "ACTIVE", "PENDING", "SCAN_ELIGIBILITY_EXPIRED", "FINDINGS_UNAVAILABLE", "LIMIT_EXCEEDED", "IMAGE_ARCHIVED", "IMAGE_SIZE_EXCEEDED"
     #   resp.image_scan_status.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StartImageScan AWS API Documentation
@@ -4846,7 +4846,7 @@ module Aws::ECR
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.146.0'
+      context[:gem_version] = '1.147.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

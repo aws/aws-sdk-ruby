@@ -2572,6 +2572,45 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Deletes a completed Lambda [durable execution][1] and its data. The
+    # execution must be in a terminal state (`SUCCEEDED`, `FAILED`,
+    # `STOPPED`, or `TIMED_OUT`). Otherwise, this operation returns a
+    # `ResourceConflictException`.
+    #
+    # The execution has `DELETING` status until the deletion finishes. For
+    # more information, see [Deleting durable executions][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html
+    # [2]: https://docs.aws.amazon.com/lambda/latest/dg/durable-delete.html
+    #
+    # @option params [required, String] :durable_execution_arn
+    #   The Amazon Resource Name (ARN) of the durable execution.
+    #
+    # @return [Types::DeleteDurableExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDurableExecutionResponse#deletion_request_timestamp #deletion_request_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_durable_execution({
+    #     durable_execution_arn: "DurableExecutionArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deletion_request_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteDurableExecution AWS API Documentation
+    #
+    # @overload delete_durable_execution(params = {})
+    # @param [Hash] params ({})
+    def delete_durable_execution(params = {}, options = {})
+      req = build_request(:delete_durable_execution, params)
+      req.send_request(options)
+    end
+
     # Deletes an [event source mapping][1]. You can get the identifier of a
     # mapping from the output of ListEventSourceMappings.
     #
@@ -3343,6 +3382,8 @@ module Aws::Lambda
     #   * {Types::GetDurableExecutionResponse#trace_header #trace_header} => Types::TraceHeader
     #   * {Types::GetDurableExecutionResponse#execution_data_included #execution_data_included} => Boolean
     #   * {Types::GetDurableExecutionResponse#durable_config #durable_config} => Types::DurableConfig
+    #   * {Types::GetDurableExecutionResponse#pause_details #pause_details} => Types::PauseDetails
+    #   * {Types::GetDurableExecutionResponse#expected_execution_timeout_timestamp #expected_execution_timeout_timestamp} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -3364,7 +3405,7 @@ module Aws::Lambda
     #   resp.error.stack_trace #=> Array
     #   resp.error.stack_trace[0] #=> String
     #   resp.start_timestamp #=> Time
-    #   resp.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "TIMED_OUT", "STOPPED"
+    #   resp.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "TIMED_OUT", "STOPPED", "DELETING", "PAUSING", "PAUSED"
     #   resp.end_timestamp #=> Time
     #   resp.version #=> String
     #   resp.trace_header.x_amzn_trace_id #=> String
@@ -3372,6 +3413,10 @@ module Aws::Lambda
     #   resp.durable_config.kms_key_arn #=> String
     #   resp.durable_config.retention_period_in_days #=> Integer
     #   resp.durable_config.execution_timeout #=> Integer
+    #   resp.pause_details.pause_request_timestamp #=> Time
+    #   resp.pause_details.reason #=> String
+    #   resp.pause_details.execution_timeout_paused #=> Boolean
+    #   resp.expected_execution_timeout_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetDurableExecution AWS API Documentation
     #
@@ -3440,7 +3485,7 @@ module Aws::Lambda
     # @example Response structure
     #
     #   resp.events #=> Array
-    #   resp.events[0].event_type #=> String, one of "ExecutionStarted", "ExecutionSucceeded", "ExecutionFailed", "ExecutionTimedOut", "ExecutionStopped", "ContextStarted", "ContextSucceeded", "ContextFailed", "WaitStarted", "WaitSucceeded", "WaitCancelled", "StepStarted", "StepSucceeded", "StepFailed", "ChainedInvokeStarted", "ChainedInvokeSucceeded", "ChainedInvokeFailed", "ChainedInvokeTimedOut", "ChainedInvokeStopped", "CallbackStarted", "CallbackSucceeded", "CallbackFailed", "CallbackTimedOut", "InvocationCompleted"
+    #   resp.events[0].event_type #=> String, one of "ExecutionStarted", "ExecutionSucceeded", "ExecutionFailed", "ExecutionTimedOut", "ExecutionStopped", "ContextStarted", "ContextSucceeded", "ContextFailed", "WaitStarted", "WaitSucceeded", "WaitCancelled", "StepStarted", "StepSucceeded", "StepFailed", "ChainedInvokeStarted", "ChainedInvokeSucceeded", "ChainedInvokeFailed", "ChainedInvokeTimedOut", "ChainedInvokeStopped", "CallbackStarted", "CallbackSucceeded", "CallbackFailed", "CallbackTimedOut", "InvocationCompleted", "ExecutionPaused", "ExecutionResumed"
     #   resp.events[0].sub_type #=> String
     #   resp.events[0].event_id #=> Integer
     #   resp.events[0].id #=> String
@@ -3551,6 +3596,13 @@ module Aws::Lambda
     #   resp.events[0].invocation_completed_details.error.payload.stack_trace #=> Array
     #   resp.events[0].invocation_completed_details.error.payload.stack_trace[0] #=> String
     #   resp.events[0].invocation_completed_details.error.truncated #=> Boolean
+    #   resp.events[0].execution_paused_details.pause_request_timestamp #=> Time
+    #   resp.events[0].execution_paused_details.reason.payload #=> String
+    #   resp.events[0].execution_paused_details.reason.truncated #=> Boolean
+    #   resp.events[0].execution_paused_details.execution_timeout_paused #=> Boolean
+    #   resp.events[0].execution_resumed_details.resume_request_timestamp #=> Time
+    #   resp.events[0].execution_resumed_details.reason.payload #=> String
+    #   resp.events[0].execution_resumed_details.reason.truncated #=> Boolean
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetDurableExecutionHistory AWS API Documentation
@@ -5774,8 +5826,27 @@ module Aws::Lambda
     #   this string are returned.
     #
     # @option params [Array<String>] :statuses
-    #   Filter executions by status. Valid values: RUNNING, SUCCEEDED, FAILED,
-    #   TIMED\_OUT, STOPPED.
+    #   Filters the executions by status. Specify one of the following values:
+    #
+    #   * `RUNNING` – The execution is running or waiting for pending
+    #     operations to complete.
+    #
+    #   * `PAUSING` – The execution is waiting for an in-progress invocation
+    #     to reach its next checkpoint before it pauses.
+    #
+    #   * `PAUSED` – The execution is paused, and Lambda doesn't invoke your
+    #     function.
+    #
+    #   * `SUCCEEDED` – The execution completed successfully.
+    #
+    #   * `FAILED` – The execution completed with an error.
+    #
+    #   * `TIMED_OUT` – The execution exceeded its execution timeout.
+    #
+    #   * `STOPPED` – A `StopDurableExecution` request stopped the execution.
+    #
+    #   * `DELETING` – A `DeleteDurableExecution` request is deleting the
+    #     execution and its data.
     #
     # @option params [Time,DateTime,Date,Integer,String] :started_after
     #   Filter executions that started after this timestamp (ISO 8601 format).
@@ -5808,7 +5879,7 @@ module Aws::Lambda
     #     function_name: "NamespacedFunctionName", # required
     #     qualifier: "NumericLatestPublishedOrAliasQualifier",
     #     durable_execution_name: "DurableExecutionName",
-    #     statuses: ["RUNNING"], # accepts RUNNING, SUCCEEDED, FAILED, TIMED_OUT, STOPPED
+    #     statuses: ["RUNNING"], # accepts RUNNING, SUCCEEDED, FAILED, TIMED_OUT, STOPPED, DELETING, PAUSING, PAUSED
     #     started_after: Time.now,
     #     started_before: Time.now,
     #     reverse_order: false,
@@ -5822,7 +5893,7 @@ module Aws::Lambda
     #   resp.durable_executions[0].durable_execution_arn #=> String
     #   resp.durable_executions[0].durable_execution_name #=> String
     #   resp.durable_executions[0].function_arn #=> String
-    #   resp.durable_executions[0].status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "TIMED_OUT", "STOPPED"
+    #   resp.durable_executions[0].status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "TIMED_OUT", "STOPPED", "DELETING", "PAUSING", "PAUSED"
     #   resp.durable_executions[0].start_timestamp #=> Time
     #   resp.durable_executions[0].end_timestamp #=> Time
     #   resp.durable_executions[0].kms_key_arn #=> String
@@ -7035,6 +7106,65 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Pauses a running [durable execution][1]. While an execution is paused,
+    # Lambda doesn't invoke your function, but pending operations such as
+    # waits and callbacks continue to complete.
+    #
+    # If an invocation is in progress, the execution status changes to
+    # `PAUSING` until the invocation reaches its next checkpoint, and then
+    # changes to `PAUSED`. This operation returns a successful response
+    # while the execution status is still `RUNNING`, and the status changes
+    # when Lambda processes the request. For more information about pausing
+    # executions, see [Pausing and resuming durable executions][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html
+    # [2]: https://docs.aws.amazon.com/lambda/latest/dg/durable-pause-resume.html
+    #
+    # @option params [required, String] :durable_execution_arn
+    #   The Amazon Resource Name (ARN) of the durable execution.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide so that the
+    #   request completes no more than one time. If you repeat a request with
+    #   the same client token and parameters within 15 minutes, Lambda
+    #   doesn't pause the execution again and returns a successful response
+    #   instead of an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :reason
+    #   A description of why you're pausing the execution. Lambda records the
+    #   reason in the execution history.
+    #
+    # @option params [Boolean] :execution_timeout_paused
+    #   Specifies whether to pause the execution timeout while the execution
+    #   is paused. If `true`, Lambda extends the execution timeout by the time
+    #   the execution spends paused. An execution with a paused timeout still
+    #   times out 366 days after it started. The default value is `true`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.pause_durable_execution({
+    #     durable_execution_arn: "DurableExecutionArn", # required
+    #     client_token: "ClientToken",
+    #     reason: "PauseReason",
+    #     execution_timeout_paused: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PauseDurableExecution AWS API Documentation
+    #
+    # @overload pause_durable_execution(params = {})
+    # @param [Hash] params ({})
+    def pause_durable_execution(params = {}, options = {})
+      req = build_request(:pause_durable_execution, params)
+      req.send_request(options)
+    end
+
     # Creates an [Lambda layer][1] from a ZIP archive. Each time you call
     # `PublishLayerVersion` with the same layer name, a new version is
     # created.
@@ -8177,6 +8307,59 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Resumes a paused [durable execution][1]. If the pause interrupted an
+    # invocation, or an operation completed while the execution was paused,
+    # Lambda invokes your function. Otherwise, the execution continues to
+    # wait for its pending operations.
+    #
+    # If the execution status is `PAUSING`, this operation cancels the
+    # pause, and the in-progress invocation continues. This operation
+    # returns a successful response while the execution status is still
+    # `PAUSED` or `PAUSING`, and the status changes to `RUNNING` when Lambda
+    # processes the request. For more information about resuming executions,
+    # see [Pausing and resuming durable executions][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html
+    # [2]: https://docs.aws.amazon.com/lambda/latest/dg/durable-pause-resume.html
+    #
+    # @option params [required, String] :durable_execution_arn
+    #   The Amazon Resource Name (ARN) of the durable execution.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide so that the
+    #   request completes no more than one time. If you repeat a request with
+    #   the same client token and parameters within 15 minutes, Lambda
+    #   doesn't resume the execution again and returns a successful response
+    #   instead of an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :reason
+    #   A description of why you're resuming the execution. Lambda records
+    #   the reason in the execution history.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.resume_durable_execution({
+    #     durable_execution_arn: "DurableExecutionArn", # required
+    #     client_token: "ClientToken",
+    #     reason: "ResumeReason",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ResumeDurableExecution AWS API Documentation
+    #
+    # @overload resume_durable_execution(params = {})
+    # @param [Hash] params ({})
+    def resume_durable_execution(params = {}, options = {})
+      req = build_request(:resume_durable_execution, params)
+      req.send_request(options)
+    end
+
     # Sends a failure response for a callback operation in a durable
     # execution. Use this API when an external system cannot complete a
     # callback operation successfully.
@@ -8264,9 +8447,9 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Stops a running [durable execution][1]. The execution transitions to
-    # STOPPED status and cannot be resumed. Any in-progress operations are
-    # terminated.
+    # Stops a running or paused [durable execution][1]. The execution
+    # transitions to STOPPED status and cannot be resumed. Any in-progress
+    # operations are terminated.
     #
     #
     #
@@ -10153,7 +10336,7 @@ module Aws::Lambda
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.213.0'
+      context[:gem_version] = '1.214.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

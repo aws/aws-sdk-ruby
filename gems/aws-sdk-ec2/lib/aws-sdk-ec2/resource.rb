@@ -1915,6 +1915,10 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     requester_peering_connection_options: {
+    #       allow_multipath_resilience: false,
+    #       multipath_resilience_mode: "always-on", # accepts always-on
+    #     },
     #     dry_run: false,
     #     vpc_id: "VpcId", # required
     #     peer_vpc_id: "String",
@@ -1928,6 +1932,8 @@ module Aws::EC2
     #   Default: The Region in which you make the request.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the peering connection.
+    # @option options [Types::CreatePeeringConnectionOptionsRequest] :requester_peering_connection_options
+    #   The VPC peering connection options to apply to the requester VPC.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

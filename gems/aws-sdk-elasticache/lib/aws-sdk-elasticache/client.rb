@@ -894,6 +894,9 @@ module Aws::ElastiCache
     #   resp.serverless_cache.migration.migration_endpoint.address #=> String
     #   resp.serverless_cache.migration.migration_endpoint.port #=> Integer
     #   resp.serverless_cache.migration.cutover_mode #=> String
+    #   resp.serverless_cache.integrations #=> Array
+    #   resp.serverless_cache.integrations[0].integration_type #=> String, one of "dynamodb"
+    #   resp.serverless_cache.integrations[0].status #=> String, one of "enabled", "disabled", "enabling", "disabling", "failed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CompleteMigration AWS API Documentation
     #
@@ -3079,6 +3082,16 @@ module Aws::ElastiCache
     #   defaults to `vpc`. This value cannot be changed after the serverless
     #   cache is created. Setting this to `public` requires Valkey 9 or above.
     #
+    # @option params [Array<Types::IntegrationRequest>] :integrations
+    #   Which serverless cache integrations to enable. Valid values are:
+    #
+    #   * `dynamodb` – DynamoDB integration.
+    #
+    #   ^
+    #
+    #   DynamoDB integration requires the Valkey engine with a major engine
+    #   version of 9 or above. If not specified, no integrations are enabled.
+    #
     # @return [Types::CreateServerlessCacheResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateServerlessCacheResponse#serverless_cache #serverless_cache} => Types::ServerlessCache
@@ -3116,6 +3129,11 @@ module Aws::ElastiCache
     #     daily_snapshot_time: "String",
     #     network_type: "ipv4", # accepts ipv4, ipv6, dual_stack
     #     connection_type: "vpc", # accepts vpc, public
+    #     integrations: [
+    #       {
+    #         integration_type: "dynamodb", # accepts dynamodb
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3152,6 +3170,9 @@ module Aws::ElastiCache
     #   resp.serverless_cache.migration.migration_endpoint.address #=> String
     #   resp.serverless_cache.migration.migration_endpoint.port #=> Integer
     #   resp.serverless_cache.migration.cutover_mode #=> String
+    #   resp.serverless_cache.integrations #=> Array
+    #   resp.serverless_cache.integrations[0].integration_type #=> String, one of "dynamodb"
+    #   resp.serverless_cache.integrations[0].status #=> String, one of "enabled", "disabled", "enabling", "disabling", "failed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateServerlessCache AWS API Documentation
     #
@@ -4421,6 +4442,9 @@ module Aws::ElastiCache
     #   resp.serverless_cache.migration.migration_endpoint.address #=> String
     #   resp.serverless_cache.migration.migration_endpoint.port #=> Integer
     #   resp.serverless_cache.migration.cutover_mode #=> String
+    #   resp.serverless_cache.integrations #=> Array
+    #   resp.serverless_cache.integrations[0].integration_type #=> String, one of "dynamodb"
+    #   resp.serverless_cache.integrations[0].status #=> String, one of "enabled", "disabled", "enabling", "disabling", "failed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteServerlessCache AWS API Documentation
     #
@@ -8008,6 +8032,9 @@ module Aws::ElastiCache
     #   resp.serverless_caches[0].migration.migration_endpoint.address #=> String
     #   resp.serverless_caches[0].migration.migration_endpoint.port #=> Integer
     #   resp.serverless_caches[0].migration.cutover_mode #=> String
+    #   resp.serverless_caches[0].integrations #=> Array
+    #   resp.serverless_caches[0].integrations[0].integration_type #=> String, one of "dynamodb"
+    #   resp.serverless_caches[0].integrations[0].status #=> String, one of "enabled", "disabled", "enabling", "disabling", "failed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeServerlessCaches AWS API Documentation
     #
@@ -10554,6 +10581,9 @@ module Aws::ElastiCache
     #   resp.serverless_cache.migration.migration_endpoint.address #=> String
     #   resp.serverless_cache.migration.migration_endpoint.port #=> Integer
     #   resp.serverless_cache.migration.cutover_mode #=> String
+    #   resp.serverless_cache.integrations #=> Array
+    #   resp.serverless_cache.integrations[0].integration_type #=> String, one of "dynamodb"
+    #   resp.serverless_cache.integrations[0].status #=> String, one of "enabled", "disabled", "enabling", "disabling", "failed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyServerlessCache AWS API Documentation
     #
@@ -10777,6 +10807,9 @@ module Aws::ElastiCache
     #   resp.serverless_cache.migration.migration_endpoint.address #=> String
     #   resp.serverless_cache.migration.migration_endpoint.port #=> Integer
     #   resp.serverless_cache.migration.cutover_mode #=> String
+    #   resp.serverless_cache.integrations #=> Array
+    #   resp.serverless_cache.integrations[0].integration_type #=> String, one of "dynamodb"
+    #   resp.serverless_cache.integrations[0].status #=> String, one of "enabled", "disabled", "enabling", "disabling", "failed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PrepareMigration AWS API Documentation
     #
@@ -11476,6 +11509,9 @@ module Aws::ElastiCache
     #   resp.serverless_cache.migration.migration_endpoint.address #=> String
     #   resp.serverless_cache.migration.migration_endpoint.port #=> Integer
     #   resp.serverless_cache.migration.cutover_mode #=> String
+    #   resp.serverless_cache.integrations #=> Array
+    #   resp.serverless_cache.integrations[0].integration_type #=> String, one of "dynamodb"
+    #   resp.serverless_cache.integrations[0].status #=> String, one of "enabled", "disabled", "enabling", "disabling", "failed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StartMigration AWS API Documentation
     #
@@ -11538,6 +11574,9 @@ module Aws::ElastiCache
     #   resp.serverless_cache.migration.migration_endpoint.address #=> String
     #   resp.serverless_cache.migration.migration_endpoint.port #=> Integer
     #   resp.serverless_cache.migration.cutover_mode #=> String
+    #   resp.serverless_cache.integrations #=> Array
+    #   resp.serverless_cache.integrations[0].integration_type #=> String, one of "dynamodb"
+    #   resp.serverless_cache.integrations[0].status #=> String, one of "enabled", "disabled", "enabling", "disabling", "failed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StopMigration AWS API Documentation
     #
@@ -11852,7 +11891,7 @@ module Aws::ElastiCache
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.163.0'
+      context[:gem_version] = '1.164.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

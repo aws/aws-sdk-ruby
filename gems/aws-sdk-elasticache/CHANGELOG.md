@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.164.0 (2026-11-17)
+------------------
+
+* Feature - Enables creation of a serverless Valkey cache that supports write-through caching for DynamoDB table data.
+
 1.163.0 (2026-11-16)
 ------------------
 

@@ -452,6 +452,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConfigService/Client.html#describe_conformance_pack_status-instance_method
       def describe_conformance_pack_status: (
                                               ?conformance_pack_names: Array[::String],
+                                              ?filters: {
+                                                types: Array[("CUSTOM" | "MANAGED")]?
+                                              },
                                               ?limit: ::Integer,
                                               ?next_token: ::String
                                             ) -> _DescribeConformancePackStatusResponseSuccess
@@ -465,6 +468,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConfigService/Client.html#describe_conformance_packs-instance_method
       def describe_conformance_packs: (
                                         ?conformance_pack_names: Array[::String],
+                                        ?filters: {
+                                          types: Array[("CUSTOM" | "MANAGED")]?
+                                        },
                                         ?limit: ::Integer,
                                         ?next_token: ::String
                                       ) -> _DescribeConformancePacksResponseSuccess
@@ -1230,7 +1236,14 @@ module Aws
                                       key: ::String?,
                                       value: ::String?
                                     }
-                                  ]
+                                  ],
+                                  ?source: {
+                                    source_identifier: ::String
+                                  },
+                                  ?scope: {
+                                    tag_key: ::String,
+                                    tag_value: ::String?
+                                  }
                                 ) -> _PutConformancePackResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConformancePackResponseSuccess
 

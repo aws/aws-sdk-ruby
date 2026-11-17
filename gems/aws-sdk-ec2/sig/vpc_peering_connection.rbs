@@ -33,6 +33,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/VpcPeeringConnection.html#tags-instance_method
       def tags: () -> ::Array[Types::Tag]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/VpcPeeringConnection.html#multipath_resilience_status-instance_method
+      def multipath_resilience_status: () -> ("pending" | "enabled" | "disabled")
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/VpcPeeringConnection.html#load-instance_method

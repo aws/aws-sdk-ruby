@@ -29,6 +29,7 @@ module Aws::ConnectCases
     AuditEventType = Shapes::StringShape.new(name: 'AuditEventType')
     AuditMergeMetadata = Shapes::StructureShape.new(name: 'AuditMergeMetadata')
     AuditMergeMetadataMergeEventIdString = Shapes::StringShape.new(name: 'AuditMergeMetadataMergeEventIdString')
+    AutoIncludeFields = Shapes::StringShape.new(name: 'AutoIncludeFields')
     BasicLayout = Shapes::StructureShape.new(name: 'BasicLayout')
     BatchCreateRelatedItemErrorEntry = Shapes::StructureShape.new(name: 'BatchCreateRelatedItemErrorEntry')
     BatchCreateRelatedItemErrorEntryList = Shapes::ListShape.new(name: 'BatchCreateRelatedItemErrorEntryList')
@@ -537,6 +538,7 @@ module Aws::ConnectCases
     BooleanOperands.struct_class = Types::BooleanOperands
 
     CaseEventIncludedData.add_member(:fields, Shapes::ShapeRef.new(shape: CaseEventIncludedDataFieldsList, required: true, location_name: "fields"))
+    CaseEventIncludedData.add_member(:auto_include_fields, Shapes::ShapeRef.new(shape: AutoIncludeFields, location_name: "autoIncludeFields"))
     CaseEventIncludedData.struct_class = Types::CaseEventIncludedData
 
     CaseEventIncludedDataFieldsList.member = Shapes::ShapeRef.new(shape: FieldIdentifier)

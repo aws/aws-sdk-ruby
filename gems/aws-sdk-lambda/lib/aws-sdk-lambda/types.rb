@@ -2315,6 +2315,31 @@ module Aws::Lambda
     #
     class DeleteCodeSigningConfigResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] durable_execution_arn
+    #   The Amazon Resource Name (ARN) of the durable execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteDurableExecutionRequest AWS API Documentation
+    #
+    class DeleteDurableExecutionRequest < Struct.new(
+      :durable_execution_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] deletion_request_timestamp
+    #   The timestamp when Lambda accepted the deletion request (ISO 8601
+    #   format).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteDurableExecutionResponse AWS API Documentation
+    #
+    class DeleteDurableExecutionResponse < Struct.new(
+      :deletion_request_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] uuid
     #   The identifier of the event source mapping.
     #   @return [String]
@@ -3094,6 +3119,14 @@ module Aws::Lambda
     #   Details about a function invocation that completed.
     #   @return [Types::InvocationCompletedDetails]
     #
+    # @!attribute [rw] execution_paused_details
+    #   The details of an `ExecutionPaused` event.
+    #   @return [Types::ExecutionPausedDetails]
+    #
+    # @!attribute [rw] execution_resumed_details
+    #   The details of an `ExecutionResumed` event.
+    #   @return [Types::ExecutionResumedDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Event AWS API Documentation
     #
     class Event < Struct.new(
@@ -3127,7 +3160,9 @@ module Aws::Lambda
       :callback_succeeded_details,
       :callback_failed_details,
       :callback_timed_out_details,
-      :invocation_completed_details)
+      :invocation_completed_details,
+      :execution_paused_details,
+      :execution_resumed_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3170,6 +3205,29 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # The reason for pausing a durable execution, as recorded in the
+    # execution history.
+    #
+    # @!attribute [rw] payload
+    #   The reason that you provided when you paused the execution. This
+    #   field is only present if you set `IncludeExecutionData` to `true` in
+    #   the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] truncated
+    #   Specifies whether Lambda omitted the reason from the response
+    #   because `IncludeExecutionData` is `false`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventPauseReason AWS API Documentation
+    #
+    class EventPauseReason < Struct.new(
+      :payload,
+      :truncated)
+      SENSITIVE = [:payload]
+      include Aws::Structure
+    end
+
     # Result information for an event.
     #
     # @!attribute [rw] payload
@@ -3183,6 +3241,29 @@ module Aws::Lambda
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventResult AWS API Documentation
     #
     class EventResult < Struct.new(
+      :payload,
+      :truncated)
+      SENSITIVE = [:payload]
+      include Aws::Structure
+    end
+
+    # The reason for resuming a durable execution, as recorded in the
+    # execution history.
+    #
+    # @!attribute [rw] payload
+    #   The reason that you provided when you resumed the execution. This
+    #   field is only present if you set `IncludeExecutionData` to `true` in
+    #   the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] truncated
+    #   Specifies whether Lambda omitted the reason from the response
+    #   because `IncludeExecutionData` is `false`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventResumeReason AWS API Documentation
+    #
+    class EventResumeReason < Struct.new(
       :payload,
       :truncated)
       SENSITIVE = [:payload]
@@ -3618,6 +3699,69 @@ module Aws::Lambda
     #
     class ExecutionFailedDetails < Struct.new(
       :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a [durable execution][1] that paused. The event
+    # timestamp is when the execution paused.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html
+    #
+    # @!attribute [rw] pause_request_timestamp
+    #   The date and time when you requested the pause, in [ISO-8601
+    #   format][1] (YYYY-MM-DDThh:mm:ss.sTZD).
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/TR/NOTE-datetime
+    #   @return [Time]
+    #
+    # @!attribute [rw] reason
+    #   The reason that you provided when you paused the execution.
+    #   @return [Types::EventPauseReason]
+    #
+    # @!attribute [rw] execution_timeout_paused
+    #   Specifies whether the pause also paused the execution timeout.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ExecutionPausedDetails AWS API Documentation
+    #
+    class ExecutionPausedDetails < Struct.new(
+      :pause_request_timestamp,
+      :reason,
+      :execution_timeout_paused)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a [durable execution][1] that resumed. The event
+    # timestamp is when the execution resumed.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html
+    #
+    # @!attribute [rw] resume_request_timestamp
+    #   The date and time when you requested the resume, in [ISO-8601
+    #   format][1] (YYYY-MM-DDThh:mm:ss.sTZD).
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/TR/NOTE-datetime
+    #   @return [Time]
+    #
+    # @!attribute [rw] reason
+    #   The reason that you provided when you resumed the execution.
+    #   @return [Types::EventResumeReason]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ExecutionResumedDetails AWS API Documentation
+    #
+    class ExecutionResumedDetails < Struct.new(
+      :resume_request_timestamp,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4692,8 +4836,28 @@ module Aws::Lambda
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The current status of the durable execution. Valid values are
-    #   `RUNNING`, `SUCCEEDED`, `FAILED`, `TIMED_OUT`, and `STOPPED`.
+    #   The durable execution has one of the following statuses:
+    #
+    #   * `RUNNING` – The execution is running or waiting for pending
+    #     operations to complete.
+    #
+    #   * `PAUSING` – The execution is waiting for an in-progress invocation
+    #     to reach its next checkpoint before it pauses.
+    #
+    #   * `PAUSED` – The execution is paused, and Lambda doesn't invoke
+    #     your function.
+    #
+    #   * `SUCCEEDED` – The execution completed successfully.
+    #
+    #   * `FAILED` – The execution completed with an error.
+    #
+    #   * `TIMED_OUT` – The execution exceeded its execution timeout.
+    #
+    #   * `STOPPED` – A `StopDurableExecution` request stopped the
+    #     execution.
+    #
+    #   * `DELETING` – A `DeleteDurableExecution` request is deleting the
+    #     execution and its data.
     #   @return [String]
     #
     # @!attribute [rw] end_timestamp
@@ -4727,6 +4891,20 @@ module Aws::Lambda
     #   including input, output, and error payloads.
     #   @return [Types::DurableConfig]
     #
+    # @!attribute [rw] pause_details
+    #   The details of the pause, including when you requested it and
+    #   whether it pauses the execution timeout. This field is only present
+    #   when the execution status is `PAUSING` or `PAUSED`.
+    #   @return [Types::PauseDetails]
+    #
+    # @!attribute [rw] expected_execution_timeout_timestamp
+    #   The date and time when the durable execution will time out, in Unix
+    #   timestamp format. This value includes any extension from time the
+    #   execution spent paused. While the execution is paused with its
+    #   execution timeout paused, this value is 366 days after the start
+    #   time. This field isn't present for completed executions.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetDurableExecutionResponse AWS API Documentation
     #
     class GetDurableExecutionResponse < Struct.new(
@@ -4742,7 +4920,9 @@ module Aws::Lambda
       :version,
       :trace_header,
       :execution_data_included,
-      :durable_config)
+      :durable_config,
+      :pause_details,
+      :expected_execution_timeout_timestamp)
       SENSITIVE = [:input_payload, :result]
       include Aws::Structure
     end
@@ -6745,8 +6925,29 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] statuses
-    #   Filter executions by status. Valid values: RUNNING, SUCCEEDED,
-    #   FAILED, TIMED\_OUT, STOPPED.
+    #   Filters the executions by status. Specify one of the following
+    #   values:
+    #
+    #   * `RUNNING` – The execution is running or waiting for pending
+    #     operations to complete.
+    #
+    #   * `PAUSING` – The execution is waiting for an in-progress invocation
+    #     to reach its next checkpoint before it pauses.
+    #
+    #   * `PAUSED` – The execution is paused, and Lambda doesn't invoke
+    #     your function.
+    #
+    #   * `SUCCEEDED` – The execution completed successfully.
+    #
+    #   * `FAILED` – The execution completed with an error.
+    #
+    #   * `TIMED_OUT` – The execution exceeded its execution timeout.
+    #
+    #   * `STOPPED` – A `StopDurableExecution` request stopped the
+    #     execution.
+    #
+    #   * `DELETING` – A `DeleteDurableExecution` request is deleting the
+    #     execution and its data.
     #   @return [Array<String>]
     #
     # @!attribute [rw] started_after
@@ -7739,6 +7940,84 @@ module Aws::Lambda
       SENSITIVE = [:payload]
       include Aws::Structure
     end
+
+    # Details about a [durable execution][1] that is pausing or paused.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html
+    #
+    # @!attribute [rw] pause_request_timestamp
+    #   The date and time when you requested the pause, in [ISO-8601
+    #   format][1] (YYYY-MM-DDThh:mm:ss.sTZD).
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/TR/NOTE-datetime
+    #   @return [Time]
+    #
+    # @!attribute [rw] reason
+    #   The reason that you provided when you paused the execution. This
+    #   field is only present if you set `IncludeExecutionData` to `true` in
+    #   the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_timeout_paused
+    #   Specifies whether the pause also pauses the execution timeout.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PauseDetails AWS API Documentation
+    #
+    class PauseDetails < Struct.new(
+      :pause_request_timestamp,
+      :reason,
+      :execution_timeout_paused)
+      SENSITIVE = [:reason]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] durable_execution_arn
+    #   The Amazon Resource Name (ARN) of the durable execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide so that the
+    #   request completes no more than one time. If you repeat a request
+    #   with the same client token and parameters within 15 minutes, Lambda
+    #   doesn't pause the execution again and returns a successful response
+    #   instead of an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   A description of why you're pausing the execution. Lambda records
+    #   the reason in the execution history.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_timeout_paused
+    #   Specifies whether to pause the execution timeout while the execution
+    #   is paused. If `true`, Lambda extends the execution timeout by the
+    #   time the execution spends paused. An execution with a paused timeout
+    #   still times out 366 days after it started. The default value is
+    #   `true`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PauseDurableExecutionRequest AWS API Documentation
+    #
+    class PauseDurableExecutionRequest < Struct.new(
+      :durable_execution_arn,
+      :client_token,
+      :reason,
+      :execution_timeout_paused)
+      SENSITIVE = [:reason]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PauseDurableExecutionResponse AWS API Documentation
+    #
+    class PauseDurableExecutionResponse < Aws::EmptyStructure; end
 
     # The permissions policy for the resource is too large. For more
     # information, see [Lambda quotas][1].
@@ -8845,6 +9124,40 @@ module Aws::Lambda
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] durable_execution_arn
+    #   The Amazon Resource Name (ARN) of the durable execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide so that the
+    #   request completes no more than one time. If you repeat a request
+    #   with the same client token and parameters within 15 minutes, Lambda
+    #   doesn't resume the execution again and returns a successful
+    #   response instead of an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   A description of why you're resuming the execution. Lambda records
+    #   the reason in the execution history.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ResumeDurableExecutionRequest AWS API Documentation
+    #
+    class ResumeDurableExecutionRequest < Struct.new(
+      :durable_execution_arn,
+      :client_token,
+      :reason)
+      SENSITIVE = [:reason]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ResumeDurableExecutionResponse AWS API Documentation
+    #
+    class ResumeDurableExecutionResponse < Aws::EmptyStructure; end
 
     # Information about retry attempts for an operation.
     #
@@ -10855,7 +11168,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # Specifies how long to pause the durable execution.
+    # Specifies how long the durable execution waits.
     #
     # @!attribute [rw] wait_seconds
     #   The duration to wait, in seconds.

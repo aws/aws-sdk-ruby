@@ -798,6 +798,15 @@ module Aws
       azure_regions: Array[::String]
     }
 
+      type gcp_provider_configuration = {
+      aws_config_connector_arn: ::String,
+      scope_configuration: {
+        scope_type: ("PROJECT" | "ORGANIZATION"),
+        scope_values: Array[::String]?
+      },
+      gcp_regions: Array[::String]
+    }
+
       type aws_security_finding_filters = {
       product_arn: Array[
         {

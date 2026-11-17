@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.149.0 (2026-11-17)
+------------------
+
+* Feature - Adds support for S3 Intelligent Tiering Access Tier and publishing to AWS Billing and Cost Management in S3 Storage Lens
+
 1.148.0 (2026-11-16)
 ------------------
 

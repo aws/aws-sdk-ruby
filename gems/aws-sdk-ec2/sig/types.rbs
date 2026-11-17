@@ -201,6 +201,12 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class ActiveVpnTunnelAdditionalKeyExchange
+      attr_accessor additional_key_exchange_round: ::Integer
+      attr_accessor key_exchange_method: ::Integer
+      SENSITIVE: []
+    end
+
     class ActiveVpnTunnelStatus
       attr_accessor phase_1_encryption_algorithm: ::String
       attr_accessor phase_2_encryption_algorithm: ::String
@@ -211,6 +217,8 @@ module Aws::EC2
       attr_accessor ike_version: ::String
       attr_accessor provisioning_status: ("available" | "pending" | "failed")
       attr_accessor provisioning_status_reason: ::String
+      attr_accessor phase_1_additional_key_exchanges: ::Array[Types::ActiveVpnTunnelAdditionalKeyExchange]
+      attr_accessor phase_2_additional_key_exchanges: ::Array[Types::ActiveVpnTunnelAdditionalKeyExchange]
       SENSITIVE: []
     end
 
@@ -248,6 +256,16 @@ module Aws::EC2
       attr_accessor rule_group_rule_options_pairs: ::Array[Types::RuleGroupRuleOptionsPair]
       attr_accessor service_name: ::String
       attr_accessor load_balancers: ::Array[Types::AnalysisComponent]
+      SENSITIVE: []
+    end
+
+    class AdditionalKeyExchangeMethodsListValue
+      attr_accessor value: ::Integer
+      SENSITIVE: []
+    end
+
+    class AdditionalKeyExchangeMethodsRequestListValue
+      attr_accessor value: ::Integer
       SENSITIVE: []
     end
 
@@ -1505,6 +1523,11 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class CapacityBlockInstanceTypePreference
+      attr_accessor instance_type: ::String
+      SENSITIVE: []
+    end
+
     class CapacityBlockOffering
       attr_accessor capacity_block_offering_id: ::String
       attr_accessor instance_type: ::String
@@ -1519,6 +1542,22 @@ module Aws::EC2
       attr_accessor ultraserver_type: ::String
       attr_accessor ultraserver_count: ::Integer
       attr_accessor capacity_block_duration_minutes: ::Integer
+      attr_accessor zone_type: ::String
+      attr_accessor capacity_block_offering_segments: ::Array[Types::CapacityBlockOfferingSegment]
+      SENSITIVE: []
+    end
+
+    class CapacityBlockOfferingSegment
+      attr_accessor instance_type: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor instance_count: ::Integer
+      attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      attr_accessor capacity_block_duration_hours: ::Integer
+      attr_accessor capacity_block_duration_minutes: ::Integer
+      attr_accessor upfront_fee: ::String
+      attr_accessor currency_code: ::String
       attr_accessor zone_type: ::String
       SENSITIVE: []
     end
@@ -3245,6 +3284,12 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class CreatePeeringConnectionOptionsRequest
+      attr_accessor allow_multipath_resilience: bool
+      attr_accessor multipath_resilience_mode: ("always-on")
+      SENSITIVE: []
+    end
+
     class CreatePlacementGroupRequest
       attr_accessor partition_count: ::Integer
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
@@ -3738,6 +3783,8 @@ module Aws::EC2
 
     class CreateTransitGatewayPeeringAttachmentRequestOptions
       attr_accessor dynamic_routing: ("enable" | "disable")
+      attr_accessor allow_multipath_resilience: bool
+      attr_accessor multipath_resilience_mode: ("always-on")
       SENSITIVE: []
     end
 
@@ -4133,6 +4180,7 @@ module Aws::EC2
     class CreateVpcPeeringConnectionRequest
       attr_accessor peer_region: ::String
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
+      attr_accessor requester_peering_connection_options: Types::CreatePeeringConnectionOptionsRequest
       attr_accessor dry_run: bool
       attr_accessor vpc_id: ::String
       attr_accessor peer_vpc_id: ::String
@@ -5743,6 +5791,7 @@ module Aws::EC2
       attr_accessor ultraserver_type: ::String
       attr_accessor ultraserver_count: ::Integer
       attr_accessor all_availability_zones: bool
+      attr_accessor instance_type_preferences: ::Array[Types::CapacityBlockInstanceTypePreference]
       SENSITIVE: []
     end
 
@@ -15262,6 +15311,24 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class ModifyTransitGatewayPeeringAttachmentRequest
+      attr_accessor transit_gateway_attachment_id: ::String
+      attr_accessor options: Types::ModifyTransitGatewayPeeringAttachmentRequestOptions
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class ModifyTransitGatewayPeeringAttachmentRequestOptions
+      attr_accessor allow_multipath_resilience: bool
+      attr_accessor multipath_resilience_mode: ("always-on")
+      SENSITIVE: []
+    end
+
+    class ModifyTransitGatewayPeeringAttachmentResult
+      attr_accessor transit_gateway_peering_attachment: Types::TransitGatewayPeeringAttachment
+      SENSITIVE: []
+    end
+
     class ModifyTransitGatewayPolicyTableEntryRequest
       attr_accessor transit_gateway_policy_table_id: ::String
       attr_accessor policy_rule_number: ::String
@@ -15776,6 +15843,8 @@ module Aws::EC2
       attr_accessor startup_action: ::String
       attr_accessor log_options: Types::VpnTunnelLogOptionsSpecification
       attr_accessor enable_tunnel_lifecycle_control: bool
+      attr_accessor phase_1_additional_key_exchanges: ::Array[Types::VpnAdditionalKeyExchangeRequest]
+      attr_accessor phase_2_additional_key_exchanges: ::Array[Types::VpnAdditionalKeyExchangeRequest]
       SENSITIVE: [:pre_shared_key]
     end
 
@@ -16365,6 +16434,8 @@ module Aws::EC2
       attr_accessor allow_dns_resolution_from_remote_vpc: bool
       attr_accessor allow_egress_from_local_classic_link_to_remote_vpc: bool
       attr_accessor allow_egress_from_local_vpc_to_remote_classic_link: bool
+      attr_accessor allow_multipath_resilience: bool
+      attr_accessor multipath_resilience_mode: ("always-on")
       SENSITIVE: []
     end
 
@@ -16372,6 +16443,8 @@ module Aws::EC2
       attr_accessor allow_dns_resolution_from_remote_vpc: bool
       attr_accessor allow_egress_from_local_classic_link_to_remote_vpc: bool
       attr_accessor allow_egress_from_local_vpc_to_remote_classic_link: bool
+      attr_accessor allow_multipath_resilience: bool
+      attr_accessor multipath_resilience_mode: ("always-on")
       SENSITIVE: []
     end
 
@@ -16761,6 +16834,7 @@ module Aws::EC2
     class PurchaseCapacityBlockResult
       attr_accessor capacity_reservation: Types::CapacityReservation
       attr_accessor capacity_blocks: ::Array[Types::CapacityBlock]
+      attr_accessor capacity_reservations: ::Array[Types::CapacityReservation]
       SENSITIVE: []
     end
 
@@ -19525,6 +19599,11 @@ module Aws::EC2
 
     class TransitGatewayPeeringAttachmentOptions
       attr_accessor dynamic_routing: ("enable" | "disable")
+      attr_accessor requester_allow_multipath_resilience: bool
+      attr_accessor requester_multipath_resilience_mode: ("always-on")
+      attr_accessor accepter_allow_multipath_resilience: bool
+      attr_accessor accepter_multipath_resilience_mode: ("always-on")
+      attr_accessor multipath_resilience_status: ("pending" | "enabled" | "disabled")
       SENSITIVE: []
     end
 
@@ -19751,6 +19830,8 @@ module Aws::EC2
       attr_accessor startup_action: ::String
       attr_accessor log_options: Types::VpnTunnelLogOptions
       attr_accessor enable_tunnel_lifecycle_control: bool
+      attr_accessor phase_1_additional_key_exchanges: ::Array[Types::VpnAdditionalKeyExchange]
+      attr_accessor phase_2_additional_key_exchanges: ::Array[Types::VpnAdditionalKeyExchange]
       SENSITIVE: [:pre_shared_key]
     end
 
@@ -20592,6 +20673,7 @@ module Aws::EC2
       attr_accessor status: Types::VpcPeeringConnectionStateReason
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor vpc_peering_connection_id: ::String
+      attr_accessor multipath_resilience_status: ("pending" | "enabled" | "disabled")
       SENSITIVE: []
     end
 
@@ -20599,6 +20681,8 @@ module Aws::EC2
       attr_accessor allow_dns_resolution_from_remote_vpc: bool
       attr_accessor allow_egress_from_local_classic_link_to_remote_vpc: bool
       attr_accessor allow_egress_from_local_vpc_to_remote_classic_link: bool
+      attr_accessor allow_multipath_resilience: bool
+      attr_accessor multipath_resilience_mode: ("always-on")
       SENSITIVE: []
     end
 
@@ -20616,6 +20700,20 @@ module Aws::EC2
       attr_accessor peering_options: Types::VpcPeeringConnectionOptionsDescription
       attr_accessor vpc_id: ::String
       attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class VpnAdditionalKeyExchange
+      attr_accessor additional_key_exchange_round: ::Integer
+      attr_accessor key_exchange_methods: ::Array[Types::AdditionalKeyExchangeMethodsListValue]
+      attr_accessor requirement: ("required" | "optional")
+      SENSITIVE: []
+    end
+
+    class VpnAdditionalKeyExchangeRequest
+      attr_accessor additional_key_exchange_round: ::Integer
+      attr_accessor key_exchange_methods: ::Array[Types::AdditionalKeyExchangeMethodsRequestListValue]
+      attr_accessor requirement: ("required" | "optional")
       SENSITIVE: []
     end
 
@@ -20737,6 +20835,8 @@ module Aws::EC2
       attr_accessor startup_action: ::String
       attr_accessor log_options: Types::VpnTunnelLogOptionsSpecification
       attr_accessor enable_tunnel_lifecycle_control: bool
+      attr_accessor phase_1_additional_key_exchanges: ::Array[Types::VpnAdditionalKeyExchangeRequest]
+      attr_accessor phase_2_additional_key_exchanges: ::Array[Types::VpnAdditionalKeyExchangeRequest]
       SENSITIVE: [:pre_shared_key]
     end
 

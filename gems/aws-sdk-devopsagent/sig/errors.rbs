@@ -16,6 +16,7 @@ module Aws
       end
       class ConflictException < ServiceError
         def message: () -> ::String
+        def reason: () -> ::String
       end
       class ContentSizeExceededException < ServiceError
         def message: () -> ::String

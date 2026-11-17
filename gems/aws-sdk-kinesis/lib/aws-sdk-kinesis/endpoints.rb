@@ -12,6 +12,28 @@ module Aws::Kinesis
   # @api private
   module Endpoints
 
+    class AcknowledgeDeadLetterQueueRecords
+      def self.build(context)
+        Aws::Kinesis::EndpointParameters.create(
+          context.config,
+          operation_type: "data",
+          queue_arn: context.params[:queue_arn],
+          resource_type: "queue",
+        )
+      end
+    end
+
+    class AcknowledgeQueueRecords
+      def self.build(context)
+        Aws::Kinesis::EndpointParameters.create(
+          context.config,
+          operation_type: "data",
+          queue_arn: context.params[:queue_arn],
+          resource_type: "queue",
+        )
+      end
+    end
+
     class AddTagsToStream
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
@@ -28,6 +50,16 @@ module Aws::Kinesis
         Aws::Kinesis::EndpointParameters.create(
           context.config,
           operation_type: "control",
+        )
+      end
+    end
+
+    class CreateQueue
+      def self.build(context)
+        Aws::Kinesis::EndpointParameters.create(
+          context.config,
+          operation_type: "control",
+          resource_type: "queue",
         )
       end
     end
@@ -58,6 +90,17 @@ module Aws::Kinesis
           context.config,
           operation_type: "control",
           channel_arn: context.params[:channel_arn],
+        )
+      end
+    end
+
+    class DeleteQueue
+      def self.build(context)
+        Aws::Kinesis::EndpointParameters.create(
+          context.config,
+          operation_type: "control",
+          queue_arn: context.params[:queue_arn],
+          resource_type: "queue",
         )
       end
     end
@@ -120,6 +163,17 @@ module Aws::Kinesis
         Aws::Kinesis::EndpointParameters.create(
           context.config,
           operation_type: "control",
+        )
+      end
+    end
+
+    class DescribeQueue
+      def self.build(context)
+        Aws::Kinesis::EndpointParameters.create(
+          context.config,
+          operation_type: "control",
+          queue_arn: context.params[:queue_arn],
+          resource_type: "queue",
         )
       end
     end
@@ -233,6 +287,16 @@ module Aws::Kinesis
       end
     end
 
+    class ListQueues
+      def self.build(context)
+        Aws::Kinesis::EndpointParameters.create(
+          context.config,
+          operation_type: "control",
+          resource_type: "queue",
+        )
+      end
+    end
+
     class ListShards
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
@@ -330,6 +394,28 @@ module Aws::Kinesis
       end
     end
 
+    class ReceiveDeadLetterQueueRecords
+      def self.build(context)
+        Aws::Kinesis::EndpointParameters.create(
+          context.config,
+          operation_type: "data",
+          queue_arn: context.params[:queue_arn],
+          resource_type: "queue",
+        )
+      end
+    end
+
+    class ReceiveQueueRecords
+      def self.build(context)
+        Aws::Kinesis::EndpointParameters.create(
+          context.config,
+          operation_type: "data",
+          queue_arn: context.params[:queue_arn],
+          resource_type: "queue",
+        )
+      end
+    end
+
     class RegisterStreamConsumer
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
@@ -348,6 +434,17 @@ module Aws::Kinesis
           operation_type: "control",
           stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
+        )
+      end
+    end
+
+    class RestoreDeadLetterQueueRecords
+      def self.build(context)
+        Aws::Kinesis::EndpointParameters.create(
+          context.config,
+          operation_type: "data",
+          queue_arn: context.params[:queue_arn],
+          resource_type: "queue",
         )
       end
     end
@@ -437,6 +534,17 @@ module Aws::Kinesis
       end
     end
 
+    class UpdateDeadLetterQueueRecordsVisibility
+      def self.build(context)
+        Aws::Kinesis::EndpointParameters.create(
+          context.config,
+          operation_type: "data",
+          queue_arn: context.params[:queue_arn],
+          resource_type: "queue",
+        )
+      end
+    end
+
     class UpdateMaxRecordSize
       def self.build(context)
         Aws::Kinesis::EndpointParameters.create(
@@ -444,6 +552,28 @@ module Aws::Kinesis
           operation_type: "control",
           stream_id: context.params[:stream_id],
           stream_arn: context.params[:stream_arn],
+        )
+      end
+    end
+
+    class UpdateQueue
+      def self.build(context)
+        Aws::Kinesis::EndpointParameters.create(
+          context.config,
+          operation_type: "control",
+          queue_arn: context.params[:queue_arn],
+          resource_type: "queue",
+        )
+      end
+    end
+
+    class UpdateQueueRecordsVisibility
+      def self.build(context)
+        Aws::Kinesis::EndpointParameters.create(
+          context.config,
+          operation_type: "data",
+          queue_arn: context.params[:queue_arn],
+          resource_type: "queue",
         )
       end
     end
@@ -495,16 +625,24 @@ module Aws::Kinesis
 
     def self.parameters_for_operation(context)
       case context.operation_name
+      when :acknowledge_dead_letter_queue_records
+        AcknowledgeDeadLetterQueueRecords.build(context)
+      when :acknowledge_queue_records
+        AcknowledgeQueueRecords.build(context)
       when :add_tags_to_stream
         AddTagsToStream.build(context)
       when :create_channel
         CreateChannel.build(context)
+      when :create_queue
+        CreateQueue.build(context)
       when :create_stream
         CreateStream.build(context)
       when :decrease_stream_retention_period
         DecreaseStreamRetentionPeriod.build(context)
       when :delete_channel
         DeleteChannel.build(context)
+      when :delete_queue
+        DeleteQueue.build(context)
       when :delete_resource_policy
         DeleteResourcePolicy.build(context)
       when :delete_stream
@@ -517,6 +655,8 @@ module Aws::Kinesis
         DescribeChannel.build(context)
       when :describe_limits
         DescribeLimits.build(context)
+      when :describe_queue
+        DescribeQueue.build(context)
       when :describe_stream
         DescribeStream.build(context)
       when :describe_stream_consumer
@@ -537,6 +677,8 @@ module Aws::Kinesis
         IncreaseStreamRetentionPeriod.build(context)
       when :list_channels
         ListChannels.build(context)
+      when :list_queues
+        ListQueues.build(context)
       when :list_shards
         ListShards.build(context)
       when :list_stream_consumers
@@ -555,10 +697,16 @@ module Aws::Kinesis
         PutRecords.build(context)
       when :put_resource_policy
         PutResourcePolicy.build(context)
+      when :receive_dead_letter_queue_records
+        ReceiveDeadLetterQueueRecords.build(context)
+      when :receive_queue_records
+        ReceiveQueueRecords.build(context)
       when :register_stream_consumer
         RegisterStreamConsumer.build(context)
       when :remove_tags_from_stream
         RemoveTagsFromStream.build(context)
+      when :restore_dead_letter_queue_records
+        RestoreDeadLetterQueueRecords.build(context)
       when :split_shard
         SplitShard.build(context)
       when :start_stream_encryption
@@ -575,8 +723,14 @@ module Aws::Kinesis
         UpdateAccountSettings.build(context)
       when :update_channel
         UpdateChannel.build(context)
+      when :update_dead_letter_queue_records_visibility
+        UpdateDeadLetterQueueRecordsVisibility.build(context)
       when :update_max_record_size
         UpdateMaxRecordSize.build(context)
+      when :update_queue
+        UpdateQueue.build(context)
+      when :update_queue_records_visibility
+        UpdateQueueRecordsVisibility.build(context)
       when :update_shard_count
         UpdateShardCount.build(context)
       when :update_stream_mode

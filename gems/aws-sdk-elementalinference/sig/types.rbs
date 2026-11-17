@@ -33,9 +33,30 @@ module Aws::ElementalInference
       SENSITIVE: []
     end
 
+    class BedrockFunctionTarget
+      attr_accessor api: ("INVOKE_MODEL")
+      attr_accessor model: ::String
+      SENSITIVE: []
+    end
+
+    class ChooseOneQuestion
+      attr_accessor name: ::String
+      attr_accessor question: ::String
+      attr_accessor options: ::Array[Types::QuestionOption]
+      SENSITIVE: []
+    end
+
+    class ClipTrigger < Aws::EmptyStructure
+    end
+
     class ClippingConfig
       attr_accessor callback_metadata: ::String
       attr_accessor data_source_configuration: Types::DataSourceConfiguration
+      SENSITIVE: []
+    end
+
+    class ClippingSettings
+      attr_accessor output_name: ::String
       SENSITIVE: []
     end
 
@@ -53,6 +74,12 @@ module Aws::ElementalInference
     class ContextualMetadataConfig
       attr_accessor summary_generation: ("ENABLED" | "DISABLED")
       attr_accessor extended_analysis: ("ENABLED" | "DISABLED")
+      attr_accessor custom_questions: Types::CustomQuestionsConfig
+      SENSITIVE: []
+    end
+
+    class ContextualMetadataSettings
+      attr_accessor output_name: ::String
       SENSITIVE: []
     end
 
@@ -96,11 +123,86 @@ module Aws::ElementalInference
       SENSITIVE: []
     end
 
+    class CreateFunctionRequest
+      attr_accessor name: ::String
+      attr_accessor target: Types::FunctionTarget
+      attr_accessor request_expression: ::String
+      attr_accessor response_expression: ::String
+      attr_accessor description: ::String
+      attr_accessor event_bridge_delivery: ("ENABLED" | "DISABLED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:request_expression, :response_expression, :description]
+    end
+
+    class CreateFunctionResponse
+      attr_accessor name: ::String
+      attr_accessor target: Types::FunctionTarget
+      attr_accessor request_expression: ::String
+      attr_accessor response_expression: ::String
+      attr_accessor description: ::String
+      attr_accessor event_bridge_delivery: ("ENABLED" | "DISABLED")
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "REFERENCED" | "DELETING" | "DELETED")
+      attr_accessor references: ::Array[::String]
+      attr_accessor context_types: ::Array[("FRAMES" | "SUBTITLES" | "CONTEXTUAL_METADATA" | "CLIP_METADATA")]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:request_expression, :response_expression, :description]
+    end
+
     class CreateOutput
       attr_accessor name: ::String
       attr_accessor output_config: Types::OutputConfig
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CreateQuestionSetRequest
+      attr_accessor yes_no: ::Array[Types::YesNoQuestion]
+      attr_accessor yes_no_per_option: ::Array[Types::YesNoPerOptionQuestion]
+      attr_accessor choose_one: ::Array[Types::ChooseOneQuestion]
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateQuestionSetResponse
+      attr_accessor yes_no: ::Array[Types::YesNoQuestion]
+      attr_accessor yes_no_per_option: ::Array[Types::YesNoPerOptionQuestion]
+      attr_accessor choose_one: ::Array[Types::ChooseOneQuestion]
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor description: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor sha256: ::String
+      attr_accessor references: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateQuestionSetVersionRequest
+      attr_accessor id: ::String
+      attr_accessor sha256: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CreateQuestionSetVersionResponse
+      attr_accessor yes_no: ::Array[Types::YesNoQuestion]
+      attr_accessor yes_no_per_option: ::Array[Types::YesNoPerOptionQuestion]
+      attr_accessor choose_one: ::Array[Types::ChooseOneQuestion]
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor description: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor sha256: ::String
+      attr_accessor references: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -123,6 +225,12 @@ module Aws::ElementalInference
 
     class CroppingConfig
       attr_accessor template_groups: ::Array[Types::TemplateGroup]
+      SENSITIVE: []
+    end
+
+    class CustomQuestionsConfig
+      attr_accessor shot: Types::QuestionSetReference
+      attr_accessor scene: Types::QuestionSetReference
       SENSITIVE: []
     end
 
@@ -158,6 +266,38 @@ module Aws::ElementalInference
       attr_accessor id: ::String
       attr_accessor status: ("CREATING" | "AVAILABLE" | "ACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "ARCHIVED")
       SENSITIVE: []
+    end
+
+    class DeleteFunctionRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFunctionResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "REFERENCED" | "DELETING" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class DeleteQuestionSetRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteQuestionSetResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteQuestionSetVersionRequest
+      attr_accessor id: ::String
+      attr_accessor question_set_version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteQuestionSetVersionResponse < Aws::EmptyStructure
     end
 
     class DeleteScheduleActionRequest
@@ -217,6 +357,11 @@ module Aws::ElementalInference
       SENSITIVE: []
     end
 
+    class FixedIntervalTrigger
+      attr_accessor interval_seconds: ::Integer
+      SENSITIVE: []
+    end
+
     class FixedModeScheduleActionStartSettings
       attr_accessor scheduled_at: ::Time
       SENSITIVE: []
@@ -230,6 +375,59 @@ module Aws::ElementalInference
       attr_accessor status: ::String
       attr_accessor competitors: ::Array[Types::Competitor]
       SENSITIVE: []
+    end
+
+    class FrameSamplingStrategy
+      attr_accessor mode: ("FIRST" | "UNIFORM" | "LAST")
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
+    class FrameSettings
+      attr_accessor frame_sampling: Types::FrameSamplingStrategy
+      attr_accessor frame_size: Types::FrameSize
+      SENSITIVE: []
+    end
+
+    class FrameSize
+      attr_accessor width_pixels: ::Integer
+      attr_accessor height_pixels: ::Integer
+      SENSITIVE: []
+    end
+
+    class FunctionConfig
+      attr_accessor function_arn: ::String
+      attr_accessor trigger: Types::Trigger
+      attr_accessor frame_settings: Types::FrameSettings
+      attr_accessor subtitling_settings: Types::SubtitlingSettings
+      attr_accessor contextual_metadata_settings: Types::ContextualMetadataSettings
+      attr_accessor clipping_settings: Types::ClippingSettings
+      SENSITIVE: []
+    end
+
+    class FunctionSummary
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "REFERENCED" | "DELETING" | "DELETED")
+      attr_accessor target: Types::FunctionTarget
+      attr_accessor context_types: ::Array[("FRAMES" | "SUBTITLES" | "CONTEXTUAL_METADATA" | "CLIP_METADATA")]
+      SENSITIVE: [:description]
+    end
+
+    class FunctionTarget
+      attr_accessor bedrock: Types::BedrockFunctionTarget
+      attr_accessor passthrough: Types::PassthroughFunctionTarget
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Bedrock < FunctionTarget
+      end
+      class Passthrough < FunctionTarget
+      end
+      class Unknown < FunctionTarget
+      end
     end
 
     class GatewayTimedOutException
@@ -296,12 +494,55 @@ module Aws::ElementalInference
       SENSITIVE: []
     end
 
+    class GetFunctionRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFunctionResponse
+      attr_accessor name: ::String
+      attr_accessor target: Types::FunctionTarget
+      attr_accessor request_expression: ::String
+      attr_accessor response_expression: ::String
+      attr_accessor description: ::String
+      attr_accessor event_bridge_delivery: ("ENABLED" | "DISABLED")
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "REFERENCED" | "DELETING" | "DELETED")
+      attr_accessor references: ::Array[::String]
+      attr_accessor context_types: ::Array[("FRAMES" | "SUBTITLES" | "CONTEXTUAL_METADATA" | "CLIP_METADATA")]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:request_expression, :response_expression, :description]
+    end
+
     class GetOutput
       attr_accessor name: ::String
       attr_accessor output_config: Types::OutputConfig
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor description: ::String
       attr_accessor from_association: bool
+      SENSITIVE: []
+    end
+
+    class GetQuestionSetRequest
+      attr_accessor id: ::String
+      attr_accessor question_set_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetQuestionSetResponse
+      attr_accessor yes_no: ::Array[Types::YesNoQuestion]
+      attr_accessor yes_no_per_option: ::Array[Types::YesNoPerOptionQuestion]
+      attr_accessor choose_one: ::Array[Types::ChooseOneQuestion]
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor description: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor sha256: ::String
+      attr_accessor references: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -334,6 +575,43 @@ module Aws::ElementalInference
       SENSITIVE: []
     end
 
+    class ListFunctionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFunctionsResponse
+      attr_accessor functions: ::Array[Types::FunctionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListQuestionSetVersionsRequest
+      attr_accessor id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListQuestionSetVersionsResponse
+      attr_accessor versions: ::Array[Types::QuestionSetVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListQuestionSetsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListQuestionSetsResponse
+      attr_accessor question_sets: ::Array[Types::QuestionSetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListScheduleActionsRequest
       attr_accessor id: ::String
       attr_accessor max_results: ::Integer
@@ -362,6 +640,7 @@ module Aws::ElementalInference
       attr_accessor clipping: Types::ClippingConfig
       attr_accessor subtitling: Types::SubtitlingConfig
       attr_accessor contextual_metadata: Types::ContextualMetadataConfig
+      attr_accessor function: Types::FunctionConfig
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -373,8 +652,13 @@ module Aws::ElementalInference
       end
       class ContextualMetadata < OutputConfig
       end
+      class Function < OutputConfig
+      end
       class Unknown < OutputConfig
       end
+    end
+
+    class PassthroughFunctionTarget < Aws::EmptyStructure
     end
 
     class PutFeedPolicyRequest
@@ -386,6 +670,34 @@ module Aws::ElementalInference
     class PutFeedPolicyResponse < Aws::EmptyStructure
     end
 
+    class QuestionOption
+      attr_accessor name: ::String
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class QuestionSetReference
+      attr_accessor question_set_id: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class QuestionSetSummary
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor latest_version: ::String
+      SENSITIVE: []
+    end
+
+    class QuestionSetVersionSummary
+      attr_accessor version: ::String
+      attr_accessor description: ::String
+      attr_accessor sha256: ::String
+      attr_accessor last_modified_at: ::Time
+      SENSITIVE: []
+    end
+
     class RemoveClippingDataSourceConfiguration
       attr_accessor output_name: ::String
       SENSITIVE: []
@@ -394,6 +706,9 @@ module Aws::ElementalInference
     class ResourceNotFoundException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class SceneTrigger < Aws::EmptyStructure
     end
 
     class ScheduleAction
@@ -471,11 +786,19 @@ module Aws::ElementalInference
       SENSITIVE: []
     end
 
+    class ShotTrigger < Aws::EmptyStructure
+    end
+
     class SubtitlingConfig
       attr_accessor language: ("eng" | "eng-au" | "eng-gb" | "eng-us" | "fra" | "ita" | "deu" | "spa" | "por")
       attr_accessor aspect_ratio: Types::AspectRatio
       attr_accessor dictionary: ::String
       attr_accessor profanity_filter: ("DISABLED" | "CENSOR" | "DROP")
+      SENSITIVE: []
+    end
+
+    class SubtitlingSettings
+      attr_accessor output_name: ::String
       SENSITIVE: []
     end
 
@@ -494,6 +817,26 @@ module Aws::ElementalInference
     class TooManyRequestException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class Trigger
+      attr_accessor fixed_interval: Types::FixedIntervalTrigger
+      attr_accessor per_shot: Types::ShotTrigger
+      attr_accessor per_scene: Types::SceneTrigger
+      attr_accessor per_clip: Types::ClipTrigger
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class FixedInterval < Trigger
+      end
+      class PerShot < Trigger
+      end
+      class PerScene < Trigger
+      end
+      class PerClip < Trigger
+      end
+      class Unknown < Trigger
+      end
     end
 
     class UntagResourceRequest
@@ -548,6 +891,33 @@ module Aws::ElementalInference
       SENSITIVE: []
     end
 
+    class UpdateFunctionRequest
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor target: Types::FunctionTarget
+      attr_accessor request_expression: ::String
+      attr_accessor response_expression: ::String
+      attr_accessor description: ::String
+      attr_accessor event_bridge_delivery: ("ENABLED" | "DISABLED")
+      SENSITIVE: [:request_expression, :response_expression, :description]
+    end
+
+    class UpdateFunctionResponse
+      attr_accessor name: ::String
+      attr_accessor target: Types::FunctionTarget
+      attr_accessor request_expression: ::String
+      attr_accessor response_expression: ::String
+      attr_accessor description: ::String
+      attr_accessor event_bridge_delivery: ("ENABLED" | "DISABLED")
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "REFERENCED" | "DELETING" | "DELETED")
+      attr_accessor references: ::Array[::String]
+      attr_accessor context_types: ::Array[("FRAMES" | "SUBTITLES" | "CONTEXTUAL_METADATA" | "CLIP_METADATA")]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:request_expression, :response_expression, :description]
+    end
+
     class UpdateOutput
       attr_accessor name: ::String
       attr_accessor output_config: Types::OutputConfig
@@ -563,8 +933,46 @@ module Aws::ElementalInference
       SENSITIVE: []
     end
 
+    class UpdateQuestionSetRequest
+      attr_accessor id: ::String
+      attr_accessor yes_no: ::Array[Types::YesNoQuestion]
+      attr_accessor yes_no_per_option: ::Array[Types::YesNoPerOptionQuestion]
+      attr_accessor choose_one: ::Array[Types::ChooseOneQuestion]
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateQuestionSetResponse
+      attr_accessor yes_no: ::Array[Types::YesNoQuestion]
+      attr_accessor yes_no_per_option: ::Array[Types::YesNoPerOptionQuestion]
+      attr_accessor choose_one: ::Array[Types::ChooseOneQuestion]
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor description: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor sha256: ::String
+      attr_accessor references: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class ValidationException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class YesNoPerOptionQuestion
+      attr_accessor name: ::String
+      attr_accessor question: ::String
+      attr_accessor options: ::Array[Types::QuestionOption]
+      SENSITIVE: []
+    end
+
+    class YesNoQuestion
+      attr_accessor name: ::String
+      attr_accessor question: ::String
       SENSITIVE: []
     end
   end

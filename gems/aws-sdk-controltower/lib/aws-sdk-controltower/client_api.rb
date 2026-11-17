@@ -66,6 +66,7 @@ module Aws::ControlTower
     EnabledBaselineParameterSummary = Shapes::StructureShape.new(name: 'EnabledBaselineParameterSummary')
     EnabledBaselineParameters = Shapes::ListShape.new(name: 'EnabledBaselineParameters')
     EnabledBaselineParentIdentifiers = Shapes::ListShape.new(name: 'EnabledBaselineParentIdentifiers')
+    EnabledBaselineSourceDrift = Shapes::StructureShape.new(name: 'EnabledBaselineSourceDrift')
     EnabledBaselineSummary = Shapes::StructureShape.new(name: 'EnabledBaselineSummary')
     EnabledBaselineTargetIdentifiers = Shapes::ListShape.new(name: 'EnabledBaselineTargetIdentifiers')
     EnabledBaselines = Shapes::ListShape.new(name: 'EnabledBaselines')
@@ -309,6 +310,7 @@ module Aws::ControlTower
     EnabledBaselineDriftStatuses.member = Shapes::ShapeRef.new(shape: EnabledBaselineDriftStatus)
 
     EnabledBaselineDriftTypes.add_member(:inheritance, Shapes::ShapeRef.new(shape: EnabledBaselineInheritanceDrift, location_name: "inheritance"))
+    EnabledBaselineDriftTypes.add_member(:source, Shapes::ShapeRef.new(shape: EnabledBaselineSourceDrift, location_name: "source"))
     EnabledBaselineDriftTypes.struct_class = Types::EnabledBaselineDriftTypes
 
     EnabledBaselineEnablementStatuses.member = Shapes::ShapeRef.new(shape: EnablementStatus)
@@ -318,6 +320,7 @@ module Aws::ControlTower
     EnabledBaselineFilter.add_member(:parent_identifiers, Shapes::ShapeRef.new(shape: EnabledBaselineParentIdentifiers, location_name: "parentIdentifiers"))
     EnabledBaselineFilter.add_member(:statuses, Shapes::ShapeRef.new(shape: EnabledBaselineEnablementStatuses, location_name: "statuses"))
     EnabledBaselineFilter.add_member(:inheritance_drift_statuses, Shapes::ShapeRef.new(shape: EnabledBaselineDriftStatuses, location_name: "inheritanceDriftStatuses"))
+    EnabledBaselineFilter.add_member(:source_drift_statuses, Shapes::ShapeRef.new(shape: EnabledBaselineDriftStatuses, location_name: "sourceDriftStatuses"))
     EnabledBaselineFilter.struct_class = Types::EnabledBaselineFilter
 
     EnabledBaselineInheritanceDrift.add_member(:status, Shapes::ShapeRef.new(shape: EnabledBaselineDriftStatus, location_name: "status"))
@@ -336,6 +339,9 @@ module Aws::ControlTower
     EnabledBaselineParameters.member = Shapes::ShapeRef.new(shape: EnabledBaselineParameter)
 
     EnabledBaselineParentIdentifiers.member = Shapes::ShapeRef.new(shape: Arn)
+
+    EnabledBaselineSourceDrift.add_member(:status, Shapes::ShapeRef.new(shape: EnabledBaselineDriftStatus, location_name: "status"))
+    EnabledBaselineSourceDrift.struct_class = Types::EnabledBaselineSourceDrift
 
     EnabledBaselineSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
     EnabledBaselineSummary.add_member(:baseline_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "baselineIdentifier"))

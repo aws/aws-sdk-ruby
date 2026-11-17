@@ -80,6 +80,25 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _AcceptAgreementApprovalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptAgreementApprovalOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#accept_agreement_approval-instance_method
+      def accept_agreement_approval: (
+                                       ?buyer_agreement_approval_approver_input: {
+                                         agreement_approval_id: ::String,
+                                         purchase_orders: Array[
+                                           {
+                                             charge_id: ::String,
+                                             purchase_order_reference: ::String?
+                                           }
+                                         ]?,
+                                         note: ::String?,
+                                         approver_outcome_id_to_override: ::String?
+                                       }
+                                     ) -> _AcceptAgreementApprovalResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptAgreementApprovalResponseSuccess
+
       interface _AcceptAgreementCancellationRequestResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AcceptAgreementCancellationRequestOutput]
         def agreement_id: () -> ::String
@@ -203,10 +222,23 @@ module Aws
                                             ) -> _CancelAgreementPaymentRequestResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelAgreementPaymentRequestResponseSuccess
 
+      interface _CancelAgreementRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelAgreementRequestOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#cancel_agreement_request-instance_method
+      def cancel_agreement_request: (
+                                      agreement_request_id: ::String
+                                    ) -> _CancelAgreementRequestResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelAgreementRequestResponseSuccess
+
       interface _CreateAgreementRequestResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateAgreementRequestOutput]
         def agreement_request_id: () -> ::String
+        def agreement_type: () -> ::String
         def charge_summary: () -> Types::ChargeSummary
+        def status: () -> ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "ACCEPTED" | "REJECTED" | "CANCELLED")
+        def approval_requirement: () -> ("REQUIRED" | "NOT_REQUIRED")
+        def created_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#create_agreement_request-instance_method
       def create_agreement_request: (
@@ -239,6 +271,13 @@ module Aws
                                       ?agreement_proposal_identifier: ::String,
                                       ?tax_configuration: {
                                         tax_estimation: ("DISABLED" | "ENABLED")?
+                                      },
+                                      ?acceptor_contact: {
+                                        first_name: ::String,
+                                        last_name: ::String,
+                                        email_address: ::String,
+                                        company_name: ::String,
+                                        country_code: ::String
                                       }
                                     ) -> _CreateAgreementRequestResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgreementRequestResponseSuccess
@@ -265,6 +304,16 @@ module Aws
                               ) -> _DescribeAgreementResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAgreementResponseSuccess
 
+      interface _GetAgreementApprovalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgreementApprovalOutput]
+        def buyer_agreement_approval: () -> Types::BuyerAgreementApproval
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#get_agreement_approval-instance_method
+      def get_agreement_approval: (
+                                    agreement_approval_id: ::String
+                                  ) -> _GetAgreementApprovalResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgreementApprovalResponseSuccess
+
       interface _GetAgreementCancellationRequestResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAgreementCancellationRequestOutput]
         def agreement_cancellation_request_id: () -> ::String
@@ -282,6 +331,16 @@ module Aws
                                                 agreement_id: ::String
                                               ) -> _GetAgreementCancellationRequestResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgreementCancellationRequestResponseSuccess
+
+      interface _GetAgreementContactsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgreementContactsOutput]
+        def acceptor_contact: () -> Types::AcceptorContact
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#get_agreement_contacts-instance_method
+      def get_agreement_contacts: (
+                                    agreement_id: ::String
+                                  ) -> _GetAgreementContactsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgreementContactsResponseSuccess
 
       interface _GetAgreementEntitlementsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAgreementEntitlementsOutput]
@@ -317,6 +376,51 @@ module Aws
                                          ) -> _GetAgreementPaymentRequestResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgreementPaymentRequestResponseSuccess
 
+      interface _GetAgreementRequestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgreementRequestOutput]
+        def agreement_request_id: () -> ::String
+        def agreement_type: () -> ::String
+        def status: () -> ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "ACCEPTED" | "REJECTED" | "CANCELLED")
+        def approval_requirement: () -> ("REQUIRED" | "NOT_REQUIRED")
+        def agreement_id: () -> ::String
+        def intent: () -> ("NEW" | "AMEND" | "REPLACE")
+        def created_at: () -> ::Time
+        def charge_summary: () -> Types::ChargeSummary
+        def proposer: () -> Types::Proposer
+        def proposal_summary: () -> Types::ProposalSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#get_agreement_request-instance_method
+      def get_agreement_request: (
+                                   agreement_request_id: ::String
+                                 ) -> _GetAgreementRequestResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgreementRequestResponseSuccess
+
+      interface _GetAgreementRequestApprovalPlansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgreementRequestApprovalPlansOutput]
+        def items: () -> ::Array[Types::AgreementApprovalPlan]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#get_agreement_request_approval_plans-instance_method
+      def get_agreement_request_approval_plans: (
+                                                  agreement_request_id: ::String,
+                                                  ?max_results: ::Integer,
+                                                  ?next_token: ::String
+                                                ) -> _GetAgreementRequestApprovalPlansResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgreementRequestApprovalPlansResponseSuccess
+
+      interface _GetAgreementRequestTermsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAgreementRequestTermsOutput]
+        def terms: () -> ::Array[Types::AgreementRequestTerm]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#get_agreement_request_terms-instance_method
+      def get_agreement_request_terms: (
+                                         agreement_request_id: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _GetAgreementRequestTermsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgreementRequestTermsResponseSuccess
+
       interface _GetAgreementTermsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAgreementTermsOutput]
         def accepted_terms: () -> ::Array[Types::AcceptedTerm]
@@ -350,6 +454,23 @@ module Aws
                                             billing_adjustment_request_id: ::String
                                           ) -> _GetBillingAdjustmentRequestResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBillingAdjustmentRequestResponseSuccess
+
+      interface _ListAgreementApprovalsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgreementApprovalsOutput]
+        def items: () -> ::Array[Types::AgreementApprovalSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#list_agreement_approvals-instance_method
+      def list_agreement_approvals: (
+                                      ?catalog: ::String,
+                                      party_type: ("REQUESTER" | "AWS_ORGANIZATION_ADMIN"),
+                                      ?agreement_request_id: ::String,
+                                      ?approval_type: ("BUYER_AGREEMENT_APPROVAL"),
+                                      ?status: ("PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "EXPIRED" | "CANCELLED"),
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListAgreementApprovalsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgreementApprovalsResponseSuccess
 
       interface _ListAgreementCancellationRequestsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAgreementCancellationRequestsOutput]
@@ -422,6 +543,21 @@ module Aws
                                            ) -> _ListAgreementPaymentRequestsResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgreementPaymentRequestsResponseSuccess
 
+      interface _ListAgreementRequestsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAgreementRequestsOutput]
+        def items: () -> ::Array[Types::AgreementRequestSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#list_agreement_requests-instance_method
+      def list_agreement_requests: (
+                                     ?catalog: ::String,
+                                     ?status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "ACCEPTED" | "REJECTED" | "CANCELLED"),
+                                     ?resource_id: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListAgreementRequestsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgreementRequestsResponseSuccess
+
       interface _ListBillingAdjustmentRequestsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListBillingAdjustmentRequestsOutput]
         def next_token: () -> ::String
@@ -439,6 +575,19 @@ module Aws
                                               ?next_token: ::String
                                             ) -> _ListBillingAdjustmentRequestsResponseSuccess
                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBillingAdjustmentRequestsResponseSuccess
+
+      interface _RejectAgreementApprovalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectAgreementApprovalOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#reject_agreement_approval-instance_method
+      def reject_agreement_approval: (
+                                       ?buyer_agreement_approval_rejection_input: {
+                                         agreement_approval_id: ::String,
+                                         note: ::String,
+                                         approver_outcome_id_to_override: ::String?
+                                       }
+                                     ) -> _RejectAgreementApprovalResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectAgreementApprovalResponseSuccess
 
       interface _RejectAgreementCancellationRequestResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RejectAgreementCancellationRequestOutput]
@@ -543,6 +692,30 @@ module Aws
                                             ?description: ::String
                                           ) -> _SendAgreementPaymentRequestResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendAgreementPaymentRequestResponseSuccess
+
+      interface _StartAgreementApprovalsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAgreementApprovalsOutput]
+        def approval_summaries: () -> ::Array[Types::AgreementApprovalSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#start_agreement_approvals-instance_method
+      def start_agreement_approvals: (
+                                       agreement_request_id: ::String,
+                                       plan_inputs: Array[
+                                         {
+                                           buyer_agreement_approval_plan_input: {
+                                             plan_reference: ::String,
+                                             requester_note: ::String?
+                                           }?
+                                         }
+                                       ],
+                                       ?purchase_orders: Array[
+                                         {
+                                           charge_id: ::String,
+                                           purchase_order_reference: ::String?
+                                         }
+                                       ]
+                                     ) -> _StartAgreementApprovalsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAgreementApprovalsResponseSuccess
 
       interface _UpdatePurchaseOrdersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePurchaseOrdersOutput]

@@ -412,6 +412,7 @@ module Aws::CloudWatchRUM
     PutRumEventsRequest.add_member(:user_details, Shapes::ShapeRef.new(shape: UserDetails, required: true, location_name: "UserDetails"))
     PutRumEventsRequest.add_member(:rum_events, Shapes::ShapeRef.new(shape: RumEventList, required: true, location_name: "RumEvents"))
     PutRumEventsRequest.add_member(:alias, Shapes::ShapeRef.new(shape: Alias, location_name: "Alias"))
+    PutRumEventsRequest.add_member(:session_metadata, Shapes::ShapeRef.new(shape: JsonValue, location_name: "SessionMetadata", metadata: {"jsonvalue" => true}))
     PutRumEventsRequest.struct_class = Types::PutRumEventsRequest
 
     PutRumEventsResponse.struct_class = Types::PutRumEventsResponse

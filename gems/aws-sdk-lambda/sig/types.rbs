@@ -500,6 +500,16 @@ module Aws::Lambda
     class DeleteCodeSigningConfigResponse < Aws::EmptyStructure
     end
 
+    class DeleteDurableExecutionRequest
+      attr_accessor durable_execution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDurableExecutionResponse
+      attr_accessor deletion_request_timestamp: ::Time
+      SENSITIVE: []
+    end
+
     class DeleteEventSourceMappingRequest
       attr_accessor uuid: ::String
       SENSITIVE: []
@@ -668,7 +678,7 @@ module Aws::Lambda
     end
 
     class Event
-      attr_accessor event_type: ("ExecutionStarted" | "ExecutionSucceeded" | "ExecutionFailed" | "ExecutionTimedOut" | "ExecutionStopped" | "ContextStarted" | "ContextSucceeded" | "ContextFailed" | "WaitStarted" | "WaitSucceeded" | "WaitCancelled" | "StepStarted" | "StepSucceeded" | "StepFailed" | "ChainedInvokeStarted" | "ChainedInvokeSucceeded" | "ChainedInvokeFailed" | "ChainedInvokeTimedOut" | "ChainedInvokeStopped" | "CallbackStarted" | "CallbackSucceeded" | "CallbackFailed" | "CallbackTimedOut" | "InvocationCompleted")
+      attr_accessor event_type: ("ExecutionStarted" | "ExecutionSucceeded" | "ExecutionFailed" | "ExecutionTimedOut" | "ExecutionStopped" | "ContextStarted" | "ContextSucceeded" | "ContextFailed" | "WaitStarted" | "WaitSucceeded" | "WaitCancelled" | "StepStarted" | "StepSucceeded" | "StepFailed" | "ChainedInvokeStarted" | "ChainedInvokeSucceeded" | "ChainedInvokeFailed" | "ChainedInvokeTimedOut" | "ChainedInvokeStopped" | "CallbackStarted" | "CallbackSucceeded" | "CallbackFailed" | "CallbackTimedOut" | "InvocationCompleted" | "ExecutionPaused" | "ExecutionResumed")
       attr_accessor sub_type: ::String
       attr_accessor event_id: ::Integer
       attr_accessor id: ::String
@@ -699,6 +709,8 @@ module Aws::Lambda
       attr_accessor callback_failed_details: Types::CallbackFailedDetails
       attr_accessor callback_timed_out_details: Types::CallbackTimedOutDetails
       attr_accessor invocation_completed_details: Types::InvocationCompletedDetails
+      attr_accessor execution_paused_details: Types::ExecutionPausedDetails
+      attr_accessor execution_resumed_details: Types::ExecutionResumedDetails
       SENSITIVE: []
     end
 
@@ -714,7 +726,19 @@ module Aws::Lambda
       SENSITIVE: [:payload]
     end
 
+    class EventPauseReason
+      attr_accessor payload: ::String
+      attr_accessor truncated: bool
+      SENSITIVE: [:payload]
+    end
+
     class EventResult
+      attr_accessor payload: ::String
+      attr_accessor truncated: bool
+      SENSITIVE: [:payload]
+    end
+
+    class EventResumeReason
       attr_accessor payload: ::String
       attr_accessor truncated: bool
       SENSITIVE: [:payload]
@@ -771,7 +795,7 @@ module Aws::Lambda
       attr_accessor durable_execution_arn: ::String
       attr_accessor durable_execution_name: ::String
       attr_accessor function_arn: ::String
-      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "STOPPED")
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "STOPPED" | "DELETING" | "PAUSING" | "PAUSED")
       attr_accessor start_timestamp: ::Time
       attr_accessor end_timestamp: ::Time
       attr_accessor kms_key_arn: ::String
@@ -785,6 +809,19 @@ module Aws::Lambda
 
     class ExecutionFailedDetails
       attr_accessor error: Types::EventError
+      SENSITIVE: []
+    end
+
+    class ExecutionPausedDetails
+      attr_accessor pause_request_timestamp: ::Time
+      attr_accessor reason: Types::EventPauseReason
+      attr_accessor execution_timeout_paused: bool
+      SENSITIVE: []
+    end
+
+    class ExecutionResumedDetails
+      attr_accessor resume_request_timestamp: ::Time
+      attr_accessor reason: Types::EventResumeReason
       SENSITIVE: []
     end
 
@@ -1014,12 +1051,14 @@ module Aws::Lambda
       attr_accessor result: ::String
       attr_accessor error: Types::ErrorObject
       attr_accessor start_timestamp: ::Time
-      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "STOPPED")
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "STOPPED" | "DELETING" | "PAUSING" | "PAUSED")
       attr_accessor end_timestamp: ::Time
       attr_accessor version: ::String
       attr_accessor trace_header: Types::TraceHeader
       attr_accessor execution_data_included: bool
       attr_accessor durable_config: Types::DurableConfig
+      attr_accessor pause_details: Types::PauseDetails
+      attr_accessor expected_execution_timeout_timestamp: ::Time
       SENSITIVE: [:input_payload, :result]
     end
 
@@ -1498,7 +1537,7 @@ module Aws::Lambda
       attr_accessor function_name: ::String
       attr_accessor qualifier: ::String
       attr_accessor durable_execution_name: ::String
-      attr_accessor statuses: ::Array[("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "STOPPED")]
+      attr_accessor statuses: ::Array[("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "STOPPED" | "DELETING" | "PAUSING" | "PAUSED")]
       attr_accessor started_after: ::Time
       attr_accessor started_before: ::Time
       attr_accessor reverse_order: bool
@@ -1722,6 +1761,24 @@ module Aws::Lambda
       attr_accessor callback_options: Types::CallbackOptions
       attr_accessor chained_invoke_options: Types::ChainedInvokeOptions
       SENSITIVE: [:payload]
+    end
+
+    class PauseDetails
+      attr_accessor pause_request_timestamp: ::Time
+      attr_accessor reason: ::String
+      attr_accessor execution_timeout_paused: bool
+      SENSITIVE: [:reason]
+    end
+
+    class PauseDurableExecutionRequest
+      attr_accessor durable_execution_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor reason: ::String
+      attr_accessor execution_timeout_paused: bool
+      SENSITIVE: [:reason]
+    end
+
+    class PauseDurableExecutionResponse < Aws::EmptyStructure
     end
 
     class PolicyLengthExceededException
@@ -1956,6 +2013,16 @@ module Aws::Lambda
       attr_accessor type: ::String
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class ResumeDurableExecutionRequest
+      attr_accessor durable_execution_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: [:reason]
+    end
+
+    class ResumeDurableExecutionResponse < Aws::EmptyStructure
     end
 
     class RetryDetails

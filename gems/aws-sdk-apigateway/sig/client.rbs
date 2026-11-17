@@ -114,7 +114,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::Authorizer]
         def id: () -> ::String
         def name: () -> ::String
-        def type: () -> ("TOKEN" | "REQUEST" | "COGNITO_USER_POOLS")
+        def type: () -> ("TOKEN" | "REQUEST" | "COGNITO_USER_POOLS" | "JWT")
         def provider_arns: () -> ::Array[::String]
         def auth_type: () -> ::String
         def authorizer_uri: () -> ::String
@@ -122,19 +122,37 @@ module Aws
         def identity_source: () -> ::String
         def identity_validation_expression: () -> ::String
         def authorizer_result_ttl_in_seconds: () -> ::Integer
+        def jwt_configuration: () -> Types::JwtConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#create_authorizer-instance_method
       def create_authorizer: (
                                rest_api_id: ::String,
                                name: ::String,
-                               type: ("TOKEN" | "REQUEST" | "COGNITO_USER_POOLS"),
+                               type: ("TOKEN" | "REQUEST" | "COGNITO_USER_POOLS" | "JWT"),
                                ?provider_arns: Array[::String],
                                ?auth_type: ::String,
                                ?authorizer_uri: ::String,
                                ?authorizer_credentials: ::String,
                                ?identity_source: ::String,
                                ?identity_validation_expression: ::String,
-                               ?authorizer_result_ttl_in_seconds: ::Integer
+                               ?authorizer_result_ttl_in_seconds: ::Integer,
+                               ?jwt_configuration: {
+                                 issuers: Array[
+                                   {
+                                     issuer: ::String,
+                                     audiences: Array[::String],
+                                     additional_claims: Array[
+                                       {
+                                         claim_name: ::String,
+                                         format: ("SINGLE_STRING"),
+                                         required: bool?,
+                                         expected_values: Array[::String]?
+                                       }
+                                     ]?
+                                   }
+                                 ],
+                                 default_algorithms: Array[("RS256" | "RS384" | "RS512" | "ES256" | "ES384" | "ES512")]
+                               }
                              ) -> _CreateAuthorizerResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAuthorizerResponseSuccess
 
@@ -728,7 +746,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::Authorizer]
         def id: () -> ::String
         def name: () -> ::String
-        def type: () -> ("TOKEN" | "REQUEST" | "COGNITO_USER_POOLS")
+        def type: () -> ("TOKEN" | "REQUEST" | "COGNITO_USER_POOLS" | "JWT")
         def provider_arns: () -> ::Array[::String]
         def auth_type: () -> ::String
         def authorizer_uri: () -> ::String
@@ -736,6 +754,7 @@ module Aws
         def identity_source: () -> ::String
         def identity_validation_expression: () -> ::String
         def authorizer_result_ttl_in_seconds: () -> ::Integer
+        def jwt_configuration: () -> Types::JwtConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_authorizer-instance_method
       def get_authorizer: (
@@ -1749,7 +1768,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::Authorizer]
         def id: () -> ::String
         def name: () -> ::String
-        def type: () -> ("TOKEN" | "REQUEST" | "COGNITO_USER_POOLS")
+        def type: () -> ("TOKEN" | "REQUEST" | "COGNITO_USER_POOLS" | "JWT")
         def provider_arns: () -> ::Array[::String]
         def auth_type: () -> ::String
         def authorizer_uri: () -> ::String
@@ -1757,6 +1776,7 @@ module Aws
         def identity_source: () -> ::String
         def identity_validation_expression: () -> ::String
         def authorizer_result_ttl_in_seconds: () -> ::Integer
+        def jwt_configuration: () -> Types::JwtConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_authorizer-instance_method
       def update_authorizer: (

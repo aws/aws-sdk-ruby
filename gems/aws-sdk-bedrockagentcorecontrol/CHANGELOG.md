@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2026-11-17)
+------------------
+
+* Feature - Adds support for agent insight stores that help frame insight evaluators, and dataset source support for batch evaluation
+
 1.93.0 (2026-11-16)
 ------------------
 

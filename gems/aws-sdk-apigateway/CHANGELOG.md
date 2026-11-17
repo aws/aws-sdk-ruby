@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.152.0 (2026-11-17)
+------------------
+
+* Feature - API Gateway now adds support for JWT authorizers on REST APIs.
+
 1.151.0 (2026-11-16)
 ------------------
 

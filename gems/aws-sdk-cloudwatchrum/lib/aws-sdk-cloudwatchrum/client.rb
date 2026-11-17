@@ -1379,6 +1379,18 @@ module Aws::CloudWatchRUM
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html
     #
+    # @option params [String] :session_metadata
+    #   A JSON serialization of attributes that apply to every event in this
+    #   batch, such as the browser, device, and operating system of the end
+    #   user. CloudWatch RUM merges these attributes into each event in the
+    #   batch, so you send them once for the batch instead of once for each
+    #   event. If an attribute appears both here and in an individual event's
+    #   `metadata`, CloudWatch RUM uses the value in the event's `metadata`.
+    #
+    #   **SDK automatically handles json encoding and base64 encoding for you
+    #   when the required value (Hash, Array, etc.) is provided according to
+    #   the description.**
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1405,6 +1417,7 @@ module Aws::CloudWatchRUM
     #       },
     #     ],
     #     alias: "Alias",
+    #     session_metadata: "JsonValue",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/PutRumEvents AWS API Documentation
@@ -1752,7 +1765,7 @@ module Aws::CloudWatchRUM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchrum'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

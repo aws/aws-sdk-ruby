@@ -2138,6 +2138,35 @@ module Aws::ConfigService
     #   pack.
     #   @return [Types::TemplateSSMDocumentDetails]
     #
+    # @!attribute [rw] type
+    #   The type of the conformance pack. Valid values:
+    #
+    #   * `CUSTOM` – A custom conformance pack.
+    #
+    #   * `MANAGED` – A managed conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   Contains the identifier of the managed conformance pack that Config
+    #   deploys in your account.
+    #
+    #   <note markdown="1"> This field applies only to managed conformance packs. Custom
+    #   conformance packs leave it empty.
+    #
+    #    </note>
+    #   @return [Types::ConformancePackSource]
+    #
+    # @!attribute [rw] scope
+    #   An object of type `ConformancePackScope`, which contains the tag key
+    #   and optional tag value that defines which resources trigger an
+    #   evaluation for the Config rules in the managed conformance pack.
+    #
+    #   <note markdown="1"> Managed conformance packs with a scope populate this field. Custom
+    #   conformance packs leave it empty.
+    #
+    #    </note>
+    #   @return [Types::ConformancePackScope]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackDetail AWS API Documentation
     #
     class ConformancePackDetail < Struct.new(
@@ -2149,7 +2178,10 @@ module Aws::ConfigService
       :conformance_pack_input_parameters,
       :last_update_requested_time,
       :created_by,
-      :template_ssm_document_details)
+      :template_ssm_document_details,
+      :type,
+      :source,
+      :scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2233,9 +2265,11 @@ module Aws::ConfigService
     end
 
     # Input parameters in the form of key-value pairs for the conformance
-    # pack, both of which you define. Keys can have a maximum character
-    # length of 255 characters, and values can have a maximum length of 4096
-    # characters.
+    # pack, both of which you define. For managed conformance packs, keys
+    # can have a maximum character length of 255 characters, and values can
+    # have a maximum length of 1024 characters. For custom conformance
+    # packs, keys can have a maximum character length of 255 characters, and
+    # values can have a maximum length of 4096 characters.
     #
     # @!attribute [rw] parameter_name
     #   One part of a key-value pair.
@@ -2283,6 +2317,56 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # Defines which resources trigger an evaluation for the Config rules in
+    # a conformance pack. The scope is a tag key, or a combination of a tag
+    # key and value, that is applied to every rule in the conformance pack.
+    # Specify a scope to constrain which resources trigger an evaluation for
+    # the rules. Otherwise, evaluations of rules in the conformance pack are
+    # triggered when any resource in your recording group changes in
+    # configuration.
+    #
+    # @!attribute [rw] tag_key
+    #   The tag key that applies to only those Amazon Web Services resources
+    #   that you want to trigger an evaluation for the rules in the
+    #   conformance pack. Defines the Scope$TagKey of all Config rules in
+    #   the conformance pack.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_value
+    #   The tag value that applies to only those Amazon Web Services
+    #   resources that you want to trigger an evaluation for the rules in
+    #   the conformance pack. If you do not specify a value for `TagValue`,
+    #   resources that have the tag key `TagKey` trigger an evaluation,
+    #   regardless of the tag value. Defines the Scope$TagValue of all
+    #   Config rules in the conformance pack.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackScope AWS API Documentation
+    #
+    class ConformancePackScope < Struct.new(
+      :tag_key,
+      :tag_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the identifier of the managed conformance pack that Config
+    # deploys in your account.
+    #
+    # @!attribute [rw] source_identifier
+    #   A predefined identifier for a managed conformance pack. The
+    #   identifier specifies which managed conformance pack Config deploys
+    #   in your account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackSource AWS API Documentation
+    #
+    class ConformancePackSource < Struct.new(
+      :source_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Status details of a conformance pack.
     #
     # @!attribute [rw] conformance_pack_name
@@ -2311,6 +2395,15 @@ module Aws::ConfigService
     #   * CREATE\_FAILED when a conformance pack creation failed in your
     #     account.
     #
+    #   * UPDATE\_IN\_PROGRESS when a conformance pack update is in progress
+    #     for an account.
+    #
+    #   * UPDATE\_COMPLETE when a conformance pack has been successfully
+    #     updated in your account.
+    #
+    #   * UPDATE\_FAILED when a conformance pack update failed in your
+    #     account.
+    #
     #   * DELETE\_IN\_PROGRESS when a conformance pack deletion is in
     #     progress.
     #
@@ -2320,6 +2413,11 @@ module Aws::ConfigService
     #
     # @!attribute [rw] stack_arn
     #   Amazon Resource Name (ARN) of CloudFormation stack.
+    #
+    #   <note markdown="1"> Custom conformance packs populate this field. Managed conformance
+    #   packs leave it empty.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] conformance_pack_status_reason
@@ -2334,6 +2432,14 @@ module Aws::ConfigService
     #   Last time when conformation pack creation and update was successful.
     #   @return [Time]
     #
+    # @!attribute [rw] type
+    #   The type of the conformance pack. Valid values:
+    #
+    #   * `CUSTOM` – A custom conformance pack.
+    #
+    #   * `MANAGED` – A managed conformance pack.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConformancePackStatusDetail AWS API Documentation
     #
     class ConformancePackStatusDetail < Struct.new(
@@ -2344,7 +2450,8 @@ module Aws::ConfigService
       :stack_arn,
       :conformance_pack_status_reason,
       :last_update_requested_time,
-      :last_update_completed_time)
+      :last_update_completed_time,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3571,6 +3678,12 @@ module Aws::ConfigService
     #   Comma-separated list of conformance pack names.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] filters
+    #   Returns a filtered list of custom or managed conformance pack
+    #   statuses. By default, if the filter is not defined, Config returns
+    #   details for all your conformance packs.
+    #   @return [Types::DescribeConformancePacksFilters]
+    #
     # @!attribute [rw] limit
     #   The maximum number of conformance packs status returned on each
     #   page.
@@ -3585,6 +3698,7 @@ module Aws::ConfigService
     #
     class DescribeConformancePackStatusRequest < Struct.new(
       :conformance_pack_names,
+      :filters,
       :limit,
       :next_token)
       SENSITIVE = []
@@ -3609,11 +3723,39 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # Filters for filtering results from DescribeConformancePacks and
+    # DescribeConformancePackStatus by conformance pack type.
+    #
+    # @!attribute [rw] types
+    #   Filters results by conformance pack type. Valid values:
+    #
+    #   * `CUSTOM` – A custom conformance pack.
+    #
+    #   * `MANAGED` – A managed conformance pack.
+    #
+    #   If you specify both values, Config returns conformance packs of
+    #   either type.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePacksFilters AWS API Documentation
+    #
+    class DescribeConformancePacksFilters < Struct.new(
+      :types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] conformance_pack_names
     #   Comma-separated list of conformance pack names for which you want
     #   details. If you do not specify any names, Config returns details for
     #   all your conformance packs.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   Returns a filtered list of custom or managed conformance packs. By
+    #   default, if the filter is not defined, Config returns details for
+    #   all your conformance packs.
+    #   @return [Types::DescribeConformancePacksFilters]
     #
     # @!attribute [rw] limit
     #   The maximum number of conformance packs returned on each page.
@@ -3628,6 +3770,7 @@ module Aws::ConfigService
     #
     class DescribeConformancePacksRequest < Struct.new(
       :conformance_pack_names,
+      :filters,
       :limit,
       :next_token)
       SENSITIVE = []
@@ -7433,7 +7576,9 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] conformance_pack_input_parameters
-    #   A list of `ConformancePackInputParameter` objects.
+    #   A list of `ConformancePackInputParameter` objects. Custom
+    #   conformance packs can have at most 60 input parameters. Managed
+    #   conformance packs can have at most 330 input parameters.
     #   @return [Array<Types::ConformancePackInputParameter>]
     #
     # @!attribute [rw] template_ssm_document_details
@@ -7448,6 +7593,37 @@ module Aws::ConfigService
     #   optional value, both of which you define.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] source
+    #   An object of type `ConformancePackSource`, which contains the
+    #   identifier of the managed conformance pack that you want to deploy.
+    #   If you specify a source, Config creates a managed conformance pack.
+    #   Managed conformance packs are predefined collections of Config rules
+    #   that are created and maintained by Amazon Web Services.
+    #
+    #   <note markdown="1"> If you specify a source, you cannot specify `TemplateS3Uri`,
+    #   `TemplateBody`, `TemplateSSMDocumentDetails`, `DeliveryS3Bucket`, or
+    #   `DeliveryS3KeyPrefix`. You cannot convert an existing conformance
+    #   pack between a managed conformance pack and a custom conformance
+    #   pack. You also cannot change the source of an existing managed
+    #   conformance pack.
+    #
+    #    </note>
+    #   @return [Types::ConformancePackSource]
+    #
+    # @!attribute [rw] scope
+    #   An object of type `ConformancePackScope` that defines which
+    #   resources can trigger an evaluation for Config rules in the
+    #   conformance pack. The scope can include a tag key and optional tag
+    #   value. Specify a scope to constrain the resources that can trigger
+    #   an evaluation for rules in the conformance pack. If you do not
+    #   specify a scope, all rules in the conformance pack are unscoped.
+    #
+    #   <note markdown="1"> This field is optional and is supported only for managed conformance
+    #   packs. If you specify a scope, you must also specify `Source`.
+    #
+    #    </note>
+    #   @return [Types::ConformancePackScope]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConformancePackRequest AWS API Documentation
     #
     class PutConformancePackRequest < Struct.new(
@@ -7458,7 +7634,9 @@ module Aws::ConfigService
       :delivery_s3_key_prefix,
       :conformance_pack_input_parameters,
       :template_ssm_document_details,
-      :tags)
+      :tags,
+      :source,
+      :scope)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -213,6 +213,12 @@ module Aws::ElastiCache
     InsufficientCacheClusterCapacityFault = Shapes::StructureShape.new(name: 'InsufficientCacheClusterCapacityFault', error: {"code" => "InsufficientCacheClusterCapacity", "httpStatusCode" => 400, "senderFault" => true})
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerOptional = Shapes::IntegerShape.new(name: 'IntegerOptional')
+    Integration = Shapes::StructureShape.new(name: 'Integration')
+    IntegrationList = Shapes::ListShape.new(name: 'IntegrationList')
+    IntegrationRequest = Shapes::StructureShape.new(name: 'IntegrationRequest')
+    IntegrationRequestList = Shapes::ListShape.new(name: 'IntegrationRequestList')
+    IntegrationStatus = Shapes::StringShape.new(name: 'IntegrationStatus')
+    IntegrationType = Shapes::StringShape.new(name: 'IntegrationType')
     InvalidARNFault = Shapes::StructureShape.new(name: 'InvalidARNFault', error: {"code" => "InvalidARN", "httpStatusCode" => 400, "senderFault" => true})
     InvalidCacheClusterStateFault = Shapes::StructureShape.new(name: 'InvalidCacheClusterStateFault', error: {"code" => "InvalidCacheClusterState", "httpStatusCode" => 400, "senderFault" => true})
     InvalidCacheParameterGroupStateFault = Shapes::StructureShape.new(name: 'InvalidCacheParameterGroupStateFault', error: {"code" => "InvalidCacheParameterGroupState", "httpStatusCode" => 400, "senderFault" => true})
@@ -845,6 +851,7 @@ module Aws::ElastiCache
     CreateServerlessCacheRequest.add_member(:daily_snapshot_time, Shapes::ShapeRef.new(shape: String, location_name: "DailySnapshotTime"))
     CreateServerlessCacheRequest.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     CreateServerlessCacheRequest.add_member(:connection_type, Shapes::ShapeRef.new(shape: ConnectionType, location_name: "ConnectionType"))
+    CreateServerlessCacheRequest.add_member(:integrations, Shapes::ShapeRef.new(shape: IntegrationRequestList, location_name: "Integrations"))
     CreateServerlessCacheRequest.struct_class = Types::CreateServerlessCacheRequest
 
     CreateServerlessCacheResponse.add_member(:serverless_cache, Shapes::ShapeRef.new(shape: ServerlessCache, location_name: "ServerlessCache"))
@@ -1265,6 +1272,17 @@ module Aws::ElastiCache
     IncreaseReplicaCountResult.struct_class = Types::IncreaseReplicaCountResult
 
     InsufficientCacheClusterCapacityFault.struct_class = Types::InsufficientCacheClusterCapacityFault
+
+    Integration.add_member(:integration_type, Shapes::ShapeRef.new(shape: IntegrationType, location_name: "IntegrationType"))
+    Integration.add_member(:status, Shapes::ShapeRef.new(shape: IntegrationStatus, location_name: "Status"))
+    Integration.struct_class = Types::Integration
+
+    IntegrationList.member = Shapes::ShapeRef.new(shape: Integration, location_name: "Integration")
+
+    IntegrationRequest.add_member(:integration_type, Shapes::ShapeRef.new(shape: IntegrationType, location_name: "IntegrationType"))
+    IntegrationRequest.struct_class = Types::IntegrationRequest
+
+    IntegrationRequestList.member = Shapes::ShapeRef.new(shape: IntegrationRequest, location_name: "IntegrationRequest")
 
     InvalidARNFault.struct_class = Types::InvalidARNFault
 
@@ -1829,6 +1847,7 @@ module Aws::ElastiCache
     ServerlessCache.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     ServerlessCache.add_member(:connection_type, Shapes::ShapeRef.new(shape: ConnectionType, location_name: "ConnectionType"))
     ServerlessCache.add_member(:migration, Shapes::ShapeRef.new(shape: MigrationSummary, location_name: "Migration"))
+    ServerlessCache.add_member(:integrations, Shapes::ShapeRef.new(shape: IntegrationList, location_name: "Integrations"))
     ServerlessCache.struct_class = Types::ServerlessCache
 
     ServerlessCacheAlreadyExistsFault.struct_class = Types::ServerlessCacheAlreadyExistsFault

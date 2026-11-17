@@ -1528,6 +1528,18 @@ module Aws::AppStream
     #
     #   * stream.graphics.gr6f.4xlarge
     #
+    #   * stream.graphics.g7.2xlarge
+    #
+    #   * stream.graphics.g7.4xlarge
+    #
+    #   * stream.graphics.g7.8xlarge
+    #
+    #   * stream.graphics.g7.12xlarge
+    #
+    #   * stream.graphics.g7.24xlarge
+    #
+    #   * stream.graphics.g7.48xlarge
+    #
     #   The following instance types are available for Elastic fleets:
     #
     #   * stream.standard.small
@@ -1923,6 +1935,18 @@ module Aws::AppStream
     #   * stream.graphics.g6f.4xlarge
     #
     #   * stream.graphics.gr6f.4xlarge
+    #
+    #   * stream.graphics.g7.2xlarge
+    #
+    #   * stream.graphics.g7.4xlarge
+    #
+    #   * stream.graphics.g7.8xlarge
+    #
+    #   * stream.graphics.g7.12xlarge
+    #
+    #   * stream.graphics.g7.24xlarge
+    #
+    #   * stream.graphics.g7.48xlarge
     #
     # @option params [String] :description
     #   The description to display.
@@ -2517,7 +2541,7 @@ module Aws::AppStream
     #     feedback_url: "FeedbackURL",
     #     user_settings: [
     #       {
-    #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN, AUTO_TIME_ZONE_REDIRECTION
+    #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN, AUTO_TIME_ZONE_REDIRECTION, SMART_CARD_REDIRECTION
     #         permission: "ENABLED", # required, accepts ENABLED, DISABLED
     #         maximum_length: 1,
     #       },
@@ -2584,7 +2608,7 @@ module Aws::AppStream
     #   resp.stack.stack_errors[0].error_code #=> String, one of "STORAGE_CONNECTOR_ERROR", "INTERNAL_SERVICE_ERROR"
     #   resp.stack.stack_errors[0].error_message #=> String
     #   resp.stack.user_settings #=> Array
-    #   resp.stack.user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE", "DOMAIN_PASSWORD_SIGNIN", "DOMAIN_SMART_CARD_SIGNIN", "AUTO_TIME_ZONE_REDIRECTION"
+    #   resp.stack.user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE", "DOMAIN_PASSWORD_SIGNIN", "DOMAIN_SMART_CARD_SIGNIN", "AUTO_TIME_ZONE_REDIRECTION", "SMART_CARD_REDIRECTION"
     #   resp.stack.user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
     #   resp.stack.user_settings[0].maximum_length #=> Integer
     #   resp.stack.application_settings.enabled #=> Boolean
@@ -4309,7 +4333,7 @@ module Aws::AppStream
     #   resp.stacks[0].stack_errors[0].error_code #=> String, one of "STORAGE_CONNECTOR_ERROR", "INTERNAL_SERVICE_ERROR"
     #   resp.stacks[0].stack_errors[0].error_message #=> String
     #   resp.stacks[0].user_settings #=> Array
-    #   resp.stacks[0].user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE", "DOMAIN_PASSWORD_SIGNIN", "DOMAIN_SMART_CARD_SIGNIN", "AUTO_TIME_ZONE_REDIRECTION"
+    #   resp.stacks[0].user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE", "DOMAIN_PASSWORD_SIGNIN", "DOMAIN_SMART_CARD_SIGNIN", "AUTO_TIME_ZONE_REDIRECTION", "SMART_CARD_REDIRECTION"
     #   resp.stacks[0].user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
     #   resp.stacks[0].user_settings[0].maximum_length #=> Integer
     #   resp.stacks[0].application_settings.enabled #=> Boolean
@@ -5992,6 +6016,18 @@ module Aws::AppStream
     #
     #   * stream.graphics.gr6f.4xlarge
     #
+    #   * stream.graphics.g7.2xlarge
+    #
+    #   * stream.graphics.g7.4xlarge
+    #
+    #   * stream.graphics.g7.8xlarge
+    #
+    #   * stream.graphics.g7.12xlarge
+    #
+    #   * stream.graphics.g7.24xlarge
+    #
+    #   * stream.graphics.g7.48xlarge
+    #
     #   The following instance types are available for Elastic fleets:
     #
     #   * stream.standard.small
@@ -6473,7 +6509,7 @@ module Aws::AppStream
     #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS, STREAMING_EXPERIENCE_SETTINGS, CONTENT_REDIRECTION, AGENT_ACCESS_CONFIG, STORAGE_CONNECTOR_AUTHENTICATION, AGENT_ACCESS_CONFIG_KMS_KEY_ARN
     #     user_settings: [
     #       {
-    #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN, AUTO_TIME_ZONE_REDIRECTION
+    #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN, AUTO_TIME_ZONE_REDIRECTION, SMART_CARD_REDIRECTION
     #         permission: "ENABLED", # required, accepts ENABLED, DISABLED
     #         maximum_length: 1,
     #       },
@@ -6537,7 +6573,7 @@ module Aws::AppStream
     #   resp.stack.stack_errors[0].error_code #=> String, one of "STORAGE_CONNECTOR_ERROR", "INTERNAL_SERVICE_ERROR"
     #   resp.stack.stack_errors[0].error_message #=> String
     #   resp.stack.user_settings #=> Array
-    #   resp.stack.user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE", "DOMAIN_PASSWORD_SIGNIN", "DOMAIN_SMART_CARD_SIGNIN", "AUTO_TIME_ZONE_REDIRECTION"
+    #   resp.stack.user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE", "DOMAIN_PASSWORD_SIGNIN", "DOMAIN_SMART_CARD_SIGNIN", "AUTO_TIME_ZONE_REDIRECTION", "SMART_CARD_REDIRECTION"
     #   resp.stack.user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
     #   resp.stack.user_settings[0].maximum_length #=> Integer
     #   resp.stack.application_settings.enabled #=> Boolean
@@ -6680,7 +6716,7 @@ module Aws::AppStream
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.157.0'
+      context[:gem_version] = '1.158.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

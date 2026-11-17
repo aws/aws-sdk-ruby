@@ -1048,7 +1048,7 @@ module Aws::DevOpsAgent
     #       reference_url: "ReferenceInputReferenceUrlString", # required
     #       association_id: "ResourceId", # required
     #     },
-    #     task_type: "INVESTIGATION", # required, accepts INVESTIGATION, EVALUATION, RELEASE_READINESS_REVIEW, RELEASE_TESTING
+    #     task_type: "INVESTIGATION", # required, accepts INVESTIGATION, EVALUATION, RELEASE_READINESS_REVIEW, RELEASE_TESTING, CODE_CHANGE_RISK_ANALYSIS
     #     title: "BacklogTaskTitle", # required
     #     description: "BacklogTaskDescription",
     #     priority: "CRITICAL", # required, accepts CRITICAL, HIGH, MEDIUM, LOW, MINIMAL
@@ -1067,7 +1067,7 @@ module Aws::DevOpsAgent
     #   resp.task.reference.reference_id #=> String
     #   resp.task.reference.reference_url #=> String
     #   resp.task.reference.association_id #=> String
-    #   resp.task.task_type #=> String, one of "INVESTIGATION", "EVALUATION", "RELEASE_READINESS_REVIEW", "RELEASE_TESTING"
+    #   resp.task.task_type #=> String, one of "INVESTIGATION", "EVALUATION", "RELEASE_READINESS_REVIEW", "RELEASE_TESTING", "CODE_CHANGE_RISK_ANALYSIS"
     #   resp.task.priority #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "MINIMAL"
     #   resp.task.status #=> String, one of "PENDING_TRIAGE", "LINKED", "PENDING_START", "IN_PROGRESS", "PENDING_CUSTOMER_APPROVAL", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELED", "SKIPPED", "WAITING"
     #   resp.task.created_at #=> Time
@@ -1991,7 +1991,7 @@ module Aws::DevOpsAgent
     #   resp.task.reference.reference_id #=> String
     #   resp.task.reference.reference_url #=> String
     #   resp.task.reference.association_id #=> String
-    #   resp.task.task_type #=> String, one of "INVESTIGATION", "EVALUATION", "RELEASE_READINESS_REVIEW", "RELEASE_TESTING"
+    #   resp.task.task_type #=> String, one of "INVESTIGATION", "EVALUATION", "RELEASE_READINESS_REVIEW", "RELEASE_TESTING", "CODE_CHANGE_RISK_ANALYSIS"
     #   resp.task.priority #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "MINIMAL"
     #   resp.task.status #=> String, one of "PENDING_TRIAGE", "LINKED", "PENDING_START", "IN_PROGRESS", "PENDING_CUSTOMER_APPROVAL", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELED", "SKIPPED", "WAITING"
     #   resp.task.created_at #=> Time
@@ -2007,6 +2007,48 @@ module Aws::DevOpsAgent
     # @param [Hash] params ({})
     def get_backlog_task(params = {}, options = {})
       req = build_request(:get_backlog_task, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of a chat execution, including its execution ID,
+    # summary, timestamps, and archive status.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The unique identifier of the agent space that contains the chat
+    #   execution.
+    #
+    # @option params [required, String] :execution_id
+    #   The unique identifier of the chat execution to retrieve.
+    #
+    # @return [Types::GetChatResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetChatResponse#execution_id #execution_id} => String
+    #   * {Types::GetChatResponse#summary #summary} => String
+    #   * {Types::GetChatResponse#created_at #created_at} => Time
+    #   * {Types::GetChatResponse#updated_at #updated_at} => Time
+    #   * {Types::GetChatResponse#archive_status #archive_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_chat({
+    #     agent_space_id: "AgentSpaceIdentifier", # required
+    #     execution_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.execution_id #=> String
+    #   resp.summary #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.archive_status #=> String, one of "ACTIVE", "ARCHIVED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/GetChat AWS API Documentation
+    #
+    # @overload get_chat(params = {})
+    # @param [Hash] params ({})
+    def get_chat(params = {}, options = {})
+      req = build_request(:get_chat, params)
       req.send_request(options)
     end
 
@@ -2681,7 +2723,7 @@ module Aws::DevOpsAgent
     #       created_before: Time.now,
     #       priority: ["CRITICAL"], # accepts CRITICAL, HIGH, MEDIUM, LOW, MINIMAL
     #       status: ["PENDING_TRIAGE"], # accepts PENDING_TRIAGE, LINKED, PENDING_START, IN_PROGRESS, PENDING_CUSTOMER_APPROVAL, COMPLETED, FAILED, TIMED_OUT, CANCELED, SKIPPED, WAITING
-    #       task_type: ["INVESTIGATION"], # accepts INVESTIGATION, EVALUATION, RELEASE_READINESS_REVIEW, RELEASE_TESTING
+    #       task_type: ["INVESTIGATION"], # accepts INVESTIGATION, EVALUATION, RELEASE_READINESS_REVIEW, RELEASE_TESTING, CODE_CHANGE_RISK_ANALYSIS
     #       primary_task_id: "ResourceId",
     #     },
     #     limit: 1,
@@ -2703,7 +2745,7 @@ module Aws::DevOpsAgent
     #   resp.tasks[0].reference.reference_id #=> String
     #   resp.tasks[0].reference.reference_url #=> String
     #   resp.tasks[0].reference.association_id #=> String
-    #   resp.tasks[0].task_type #=> String, one of "INVESTIGATION", "EVALUATION", "RELEASE_READINESS_REVIEW", "RELEASE_TESTING"
+    #   resp.tasks[0].task_type #=> String, one of "INVESTIGATION", "EVALUATION", "RELEASE_READINESS_REVIEW", "RELEASE_TESTING", "CODE_CHANGE_RISK_ANALYSIS"
     #   resp.tasks[0].priority #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "MINIMAL"
     #   resp.tasks[0].status #=> String, one of "PENDING_TRIAGE", "LINKED", "PENDING_START", "IN_PROGRESS", "PENDING_CUSTOMER_APPROVAL", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELED", "SKIPPED", "WAITING"
     #   resp.tasks[0].created_at #=> Time
@@ -2739,6 +2781,10 @@ module Aws::DevOpsAgent
     # @option params [String] :next_token
     #   Token for pagination
     #
+    # @option params [String] :archive_status
+    #   The archive status to filter by. Use this parameter to list only
+    #   archived chat executions or only active ones.
+    #
     # @return [Types::ListChatsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListChatsResponse#executions #executions} => Array&lt;Types::ChatExecution&gt;
@@ -2751,6 +2797,7 @@ module Aws::DevOpsAgent
     #     user_id: "ResourceId",
     #     max_results: 1,
     #     next_token: "String",
+    #     archive_status: "ACTIVE", # accepts ACTIVE, ARCHIVED
     #   })
     #
     # @example Response structure
@@ -2760,6 +2807,7 @@ module Aws::DevOpsAgent
     #   resp.executions[0].created_at #=> Time
     #   resp.executions[0].updated_at #=> Time
     #   resp.executions[0].summary #=> String
+    #   resp.executions[0].archive_status #=> String, one of "ACTIVE", "ARCHIVED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ListChats AWS API Documentation
@@ -4635,7 +4683,7 @@ module Aws::DevOpsAgent
     #   resp.task.reference.reference_id #=> String
     #   resp.task.reference.reference_url #=> String
     #   resp.task.reference.association_id #=> String
-    #   resp.task.task_type #=> String, one of "INVESTIGATION", "EVALUATION", "RELEASE_READINESS_REVIEW", "RELEASE_TESTING"
+    #   resp.task.task_type #=> String, one of "INVESTIGATION", "EVALUATION", "RELEASE_READINESS_REVIEW", "RELEASE_TESTING", "CODE_CHANGE_RISK_ANALYSIS"
     #   resp.task.priority #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "MINIMAL"
     #   resp.task.status #=> String, one of "PENDING_TRIAGE", "LINKED", "PENDING_START", "IN_PROGRESS", "PENDING_CUSTOMER_APPROVAL", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELED", "SKIPPED", "WAITING"
     #   resp.task.created_at #=> Time
@@ -4651,6 +4699,69 @@ module Aws::DevOpsAgent
     # @param [Hash] params ({})
     def update_backlog_task(params = {}, options = {})
       req = build_request(:update_backlog_task, params)
+      req.send_request(options)
+    end
+
+    # Updates a chat execution. You can use this operation to change the
+    # chat execution's summary or to archive or unarchive it.
+    #
+    # Archiving a chat execution hides it from the default chat list.
+    # Unarchiving a chat execution restores it to the default chat list.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The unique identifier of the agent space that contains the chat
+    #   execution to update.
+    #
+    # @option params [required, String] :execution_id
+    #   The unique identifier of the chat execution to update.
+    #
+    # @option params [String] :summary
+    #   The new summary to set for the chat execution.
+    #
+    # @option params [String] :archive_status
+    #   The archive status to set for the chat execution. Use this parameter
+    #   to archive the chat execution, hiding it from the default chat list,
+    #   or to unarchive it, restoring it to the default chat list.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. If this token matches a previous
+    #   request, the service ignores the request, but does not return an
+    #   error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateChatResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateChatResponse#execution_id #execution_id} => String
+    #   * {Types::UpdateChatResponse#summary #summary} => String
+    #   * {Types::UpdateChatResponse#updated_at #updated_at} => Time
+    #   * {Types::UpdateChatResponse#archive_status #archive_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_chat({
+    #     agent_space_id: "AgentSpaceIdentifier", # required
+    #     execution_id: "ResourceId", # required
+    #     summary: "UpdateChatRequestSummaryString",
+    #     archive_status: "ACTIVE", # accepts ACTIVE, ARCHIVED
+    #     client_token: "UpdateChatRequestClientTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.execution_id #=> String
+    #   resp.summary #=> String
+    #   resp.updated_at #=> Time
+    #   resp.archive_status #=> String, one of "ACTIVE", "ARCHIVED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/UpdateChat AWS API Documentation
+    #
+    # @overload update_chat(params = {})
+    # @param [Hash] params ({})
+    def update_chat(params = {}, options = {})
+      req = build_request(:update_chat, params)
       req.send_request(options)
     end
 
@@ -4962,7 +5073,7 @@ module Aws::DevOpsAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-devopsagent'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -37,6 +37,7 @@ module Aws::ConnectContactLens
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     IssueDetected = Shapes::StructureShape.new(name: 'IssueDetected')
     IssuesDetected = Shapes::ListShape.new(name: 'IssuesDetected')
+    LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
     ListRealtimeContactAnalysisSegmentsRequest = Shapes::StructureShape.new(name: 'ListRealtimeContactAnalysisSegmentsRequest')
     ListRealtimeContactAnalysisSegmentsResponse = Shapes::StructureShape.new(name: 'ListRealtimeContactAnalysisSegmentsResponse')
     MatchedCategories = Shapes::ListShape.new(name: 'MatchedCategories')
@@ -177,6 +178,7 @@ module Aws::ConnectContactLens
     Transcript.add_member(:end_offset_millis, Shapes::ShapeRef.new(shape: OffsetMillis, required: true, location_name: "EndOffsetMillis"))
     Transcript.add_member(:sentiment, Shapes::ShapeRef.new(shape: SentimentValue, location_name: "Sentiment"))
     Transcript.add_member(:issues_detected, Shapes::ShapeRef.new(shape: IssuesDetected, location_name: "IssuesDetected"))
+    Transcript.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     Transcript.struct_class = Types::Transcript
 
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.672.0 (2026-11-17)
+------------------
+
+* Feature - Adds multipath resilience for inter-Region VPC peering connections and Transit Gateway peering attachments. Adds support for quantum-resistant key exchanges to Site-to-Site VPN. Allows querying multiple instance types in a single DescribeCapacityBlockOfferings request.
+
 1.671.0 (2026-11-16)
 ------------------
 

@@ -161,7 +161,23 @@ module Aws::Billing
     #   @return [String]
     #
     # @!attribute [rw] source_views
-    #   A list of ARNs of the source billing views to associate.
+    #   A list of ARNs of the source billing views to associate. Source
+    #   views can be of the following types:
+    #
+    #   * `PRIMARY` - The billing view that contains all cost management
+    #     data associated with an account.
+    #
+    #   * `CUSTOM` - A billing view that a customer creates from one or more
+    #     source views.
+    #
+    #   * `BILLING_GROUP` - The billing view for an Billing Conductor
+    #     billing group.
+    #
+    #   * `BILLING_TRANSFER` - The billing view for the billing data that a
+    #     bill transfer account is financially responsible for.
+    #
+    #   * `BILLING_TRANSFER_SHOWBACK` - The billing view for billing data
+    #     configured for showback or chargeback purposes.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/AssociateSourceViewsRequest AWS API Documentation
@@ -389,7 +405,22 @@ module Aws::Billing
     #   @return [String]
     #
     # @!attribute [rw] billing_view_type
-    #   The type of billing group.
+    #   The type of billing view. The following values are valid:
+    #
+    #   * `PRIMARY` - The billing view that contains all cost management
+    #     data associated with an account.
+    #
+    #   * `CUSTOM` - A billing view that a customer creates from one or more
+    #     source views.
+    #
+    #   * `BILLING_GROUP` - The billing view for an Billing Conductor
+    #     billing group.
+    #
+    #   * `BILLING_TRANSFER` - The billing view for the billing data that a
+    #     bill transfer account is financially responsible for.
+    #
+    #   * `BILLING_TRANSFER_SHOWBACK` - The billing view for billing data
+    #     configured for showback or chargeback purposes.
     #   @return [String]
     #
     # @!attribute [rw] owner_account_id
@@ -515,7 +546,22 @@ module Aws::Billing
     #   @return [String]
     #
     # @!attribute [rw] billing_view_type
-    #   The type of billing view.
+    #   The type of billing view. The following values are valid:
+    #
+    #   * `PRIMARY` - The billing view that contains all cost management
+    #     data associated with an account.
+    #
+    #   * `CUSTOM` - A billing view that a customer creates from one or more
+    #     source views.
+    #
+    #   * `BILLING_GROUP` - The billing view for an Billing Conductor
+    #     billing group.
+    #
+    #   * `BILLING_TRANSFER` - The billing view for the billing data that a
+    #     bill transfer account is financially responsible for.
+    #
+    #   * `BILLING_TRANSFER_SHOWBACK` - The billing view for billing data
+    #     configured for showback or chargeback purposes.
     #   @return [String]
     #
     # @!attribute [rw] health_status
@@ -855,6 +901,25 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # A new credit that a split created.
+    #
+    # @!attribute [rw] credit_id
+    #   The ID of the new credit. A dry run omits this field.
+    #   @return [String]
+    #
+    # @!attribute [rw] amount
+    #   The amount of the new credit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ChildCredit AWS API Documentation
+    #
+    class ChildCredit < Struct.new(
+      :credit_id,
+      :amount)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The requested operation would cause a conflict with the current state
     # of a service resource associated with the request. Resolve the
     # conflict before retrying this request.
@@ -1001,7 +1066,22 @@ module Aws::Billing
     #
     # @!attribute [rw] source_views
     #   A list of billing views used as the data source for the custom
-    #   billing view.
+    #   billing view. Source views can be of the following types:
+    #
+    #   * `PRIMARY` - The billing view that contains all cost management
+    #     data associated with an account.
+    #
+    #   * `CUSTOM` - A billing view that a customer creates from one or more
+    #     source views.
+    #
+    #   * `BILLING_GROUP` - The billing view for an Billing Conductor
+    #     billing group.
+    #
+    #   * `BILLING_TRANSFER` - The billing view for the billing data that a
+    #     bill transfer account is financially responsible for.
+    #
+    #   * `BILLING_TRANSFER_SHOWBACK` - The billing view for billing data
+    #     configured for showback or chargeback purposes.
     #   @return [Array<String>]
     #
     # @!attribute [rw] data_filter_expression
@@ -1477,13 +1557,17 @@ module Aws::Billing
     #   The feature to retrieve. Specify exactly one value. Valid values:
     #   `BILLING_ALERTS`, `RI_SHARING`, `RI_SHARING_HISTORY`,
     #   `CREDIT_SHARING`, `CREDIT_SHARING_HISTORY`, `CREDIT_LEVEL_SHARING`,
-    #   `CREDIT_PREFERENCE_OPTIONS`.
+    #   `CREDIT_PREFERENCE_OPTIONS`, `BENEFIT_LEVEL_SHARING`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   Filters to narrow results. Specify exactly one filter when supplied.
     #   The supported filter name is `PREFERENCE_KEY`, which accepts 1 to 10
     #   values to match preference keys.
+    #
+    #   For `BENEFIT_LEVEL_SHARING`, this filter is required. Specify
+    #   exactly one value that identifies the Reserved Instance (RI) or
+    #   Savings Plan (SP), in the form `benefit/{ri|sp}/{benefitId}`.
     #   @return [Array<Types::BillingFeatureFilter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/GetBillingPreferencesRequest AWS API Documentation
@@ -1577,13 +1661,18 @@ module Aws::Billing
     #   @return [Integer]
     #
     # @!attribute [rw] start_date
-    #   Inclusive start date as Unix epoch seconds. Must be on or before
-    #   `endDate`. The range from `startDate` to `endDate` cannot exceed 24
-    #   billing months.
+    #   The inclusive start date of the range, in Unix epoch seconds. This
+    #   value must be earlier than `endDate`. You get credit allocations for
+    #   bills whose billing period starts on or after `startDate` and before
+    #   `endDate`. If `startDate` is in the middle of a billing period, that
+    #   period isn't included. The range can't exceed 24 calendar months.
     #   @return [Time]
     #
     # @!attribute [rw] end_date
-    #   Inclusive end date as Unix epoch seconds.
+    #   The exclusive end date of the range, in Unix epoch seconds. To get
+    #   one billing month, set `startDate` to the first day of that month.
+    #   Then set `endDate` to the first day of the next month. Use 00:00 UTC
+    #   for both.
     #   @return [Time]
     #
     # @!attribute [rw] next_token
@@ -3225,6 +3314,94 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # @!attribute [rw] credit_id
+    #   The ID of the credit to split.
+    #   @return [String]
+    #
+    # @!attribute [rw] portions
+    #   The new credits to create, one for each portion, in the order
+    #   listed.
+    #   @return [Array<Types::SplitPortion>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you retry a
+    #   successful request with the same client token and parameters, the
+    #   retry completes without performing any further actions. If you reuse
+    #   a client token with different parameters, the request fails with a
+    #   `ValidationException`.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Specifies whether to validate the request and return the result
+    #   without changing any credit.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/SplitCreditRequest AWS API Documentation
+    #
+    class SplitCreditRequest < Struct.new(
+      :credit_id,
+      :portions,
+      :client_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] parent_credit_id
+    #   The ID of the credit that was split.
+    #   @return [String]
+    #
+    # @!attribute [rw] child_credits
+    #   The new credits, in the order of the requested portions.
+    #   @return [Array<Types::ChildCredit>]
+    #
+    # @!attribute [rw] dry_run
+    #   Specifies whether the request was a dry run. If `true`, the
+    #   operation didn't change any credit.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/SplitCreditResponse AWS API Documentation
+    #
+    class SplitCreditResponse < Struct.new(
+      :parent_credit_id,
+      :child_credits,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One new credit to create from a split.
+    #
+    # @!attribute [rw] amount
+    #   The amount of the new credit, in the currency of the credit that you
+    #   split. The amount must be at least 100.00 in that currency. For
+    #   example, if the credit is in USD, the amount must be at least USD
+    #   $100.00.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the new credit. If you omit it, the new credit
+    #   gets the original credit's description followed by its position in
+    #   the request, for example `MAP credit - 1/3`. If you split that
+    #   credit again, the name extends, for example `MAP credit - 1/3 -
+    #   2/2`. A generated name is at most 93 characters. If it would be
+    #   longer, the name keeps only the beginning of the original
+    #   description.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/SplitPortion AWS API Documentation
+    #
+    class SplitPortion < Struct.new(
+      :amount,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure that defines how to search for string values. You can
     # specify a search option and the value to search for.
     #
@@ -3319,6 +3496,80 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # @!attribute [rw] credit_id
+    #   The ID of the credit to transfer.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_account_id
+    #   The Amazon Web Services account ID that becomes the owner of the
+    #   credit. The account must be in your consolidated billing family and
+    #   must not be the current owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you retry a
+    #   successful request with the same client token and parameters, the
+    #   retry completes without performing any further actions. If you reuse
+    #   a client token with different parameters, the request fails with a
+    #   `ValidationException`.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Specifies whether to validate the request and return the result
+    #   without changing the credit.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/TransferCreditRequest AWS API Documentation
+    #
+    class TransferCreditRequest < Struct.new(
+      :credit_id,
+      :destination_account_id,
+      :client_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_credit_id
+    #   The ID of the transferred credit. The credit keeps this ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_credit_id
+    #   Always the same as `sourceCreditId`, because a transfer moves the
+    #   credit and creates no new one. A dry run omits this field.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_account_id
+    #   The Amazon Web Services account ID that owns the credit after the
+    #   transfer.
+    #   @return [String]
+    #
+    # @!attribute [rw] amount
+    #   The available balance of the credit, which is its remaining balance
+    #   minus any amount reserved for a bill that isn't finalized.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Specifies whether the request was a dry run. If `true`, the
+    #   operation didn't change the credit.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/TransferCreditResponse AWS API Documentation
+    #
+    class TransferCreditResponse < Struct.new(
+      :source_credit_id,
+      :new_credit_id,
+      :destination_account_id,
+      :amount,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -3343,9 +3594,9 @@ module Aws::Billing
     # @!attribute [rw] feature
     #   The feature to update. Valid values: `BILLING_ALERTS`, `RI_SHARING`,
     #   `CREDIT_SHARING`, `CREDIT_LEVEL_SHARING`,
-    #   `CREDIT_PREFERENCE_OPTIONS`. The history features
-    #   (`RI_SHARING_HISTORY` and `CREDIT_SHARING_HISTORY`) are read-only
-    #   and cannot be updated.
+    #   `CREDIT_PREFERENCE_OPTIONS`, `BENEFIT_LEVEL_SHARING`. The history
+    #   features (`RI_SHARING_HISTORY` and `CREDIT_SHARING_HISTORY`) are
+    #   read-only and cannot be updated.
     #   @return [String]
     #
     # @!attribute [rw] billing_preferences_per_key
@@ -3353,6 +3604,46 @@ module Aws::Billing
     #   for the specified `feature` and must not be duplicated. For
     #   `CREDIT_PREFERENCE_OPTIONS`, all keys must reference the same
     #   `creditId`.
+    #
+    #   For `BENEFIT_LEVEL_SHARING`, all keys must reference the same
+    #   Reserved Instance or Savings Plan. To share it with the accounts in
+    #   one Cost Category rule, send these three keys with the value
+    #   `ENABLED`:
+    #
+    #   * `benefit/{ri|sp}/{benefitId}/sharing/costCategoryArn/{costCategoryArn}`
+    #
+    #   * `benefit/{ri|sp}/{benefitId}/sharing/ruleName/{ruleName}`
+    #
+    #   * `benefit/{ri|sp}/{benefitId}/sharing/mode/{prioritized|restricted}`
+    #
+    #   With `prioritized`, any benefit that the rule's accounts don't use
+    #   goes to the rest of your consolidated billing family, following your
+    #   family sharing settings. With `restricted`, only the owner and the
+    #   rule's accounts receive it. The Cost Category must belong to your
+    #   account. To stop sharing, send the same three keys with the value
+    #   `DISABLED`.
+    #
+    #   For `RI_SHARING` and `CREDIT_SHARING`, you can share benefits by
+    #   account group. Each rule in a Cost Category is one group. Send
+    #   exactly one of these group keys with the value `ENABLED`:
+    #
+    #   * `open-sharing` - Share across the whole consolidated billing
+    #     family, with no groups.
+    #
+    #   * `costcategory-prioritized/{costCategoryArn}` - Share within each
+    #     group first, then with the rest of the family.
+    #
+    #   * `costcategory-restricted/{costCategoryArn}` - An account in a
+    #     group shares only with accounts in the same group.
+    #
+    #   For `RI_SHARING`, the `costcategory-` keys use a Cost Category that
+    #   supports the `billing:rispgroupsharing` resource type. To use a Cost
+    #   Category that supports the `billing:benefitgroupsharing` resource
+    #   type, use the `benefitgroup-prioritized/` or
+    #   `benefitgroup-restricted/` prefix instead. For `CREDIT_SHARING`, the
+    #   Cost Category must support the `billing:benefitgroupsharing`
+    #   resource type. The Cost Category must belong to your account.
+    #   `GetBillingPreferences` returns the group key that is in effect.
     #   @return [Array<Types::BillingPreferenceForKey>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/UpdateBillingPreferencesRequest AWS API Documentation

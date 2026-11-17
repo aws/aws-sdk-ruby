@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2026-11-17)
+------------------
+
+* Feature - AWS Control Tower now reports source drift when an enabled baseline no longer matches the landing zone's configuration.
+
 1.76.0 (2026-11-16)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2026-11-17)
+------------------
+
+* Feature - Adds support for continuous insights and automatic dataset generation
+
 1.70.0 (2026-11-16)
 ------------------
 

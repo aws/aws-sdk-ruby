@@ -707,6 +707,10 @@ module Aws
                                                ]?
                                              }
                                            ],
+                                           ?requester_peering_connection_options: {
+                                             allow_multipath_resilience: bool?,
+                                             multipath_resilience_mode: ("always-on")?
+                                           },
                                            ?dry_run: bool,
                                            vpc_id: ::String,
                                            ?peer_vpc_id: ::String,

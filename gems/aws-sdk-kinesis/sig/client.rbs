@@ -84,6 +84,38 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _AcknowledgeDeadLetterQueueRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcknowledgeDeadLetterQueueRecordsOutput]
+        def successful: () -> ::Array[Types::AcknowledgeDeadLetterQueueRecordsResultEntry]
+        def failed: () -> ::Array[Types::AcknowledgeDeadLetterQueueRecordsErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#acknowledge_dead_letter_queue_records-instance_method
+      def acknowledge_dead_letter_queue_records: (
+                                                   queue_arn: ::String,
+                                                   entries: Array[
+                                                     {
+                                                       receipt_handle: ::String
+                                                     }
+                                                   ]
+                                                 ) -> _AcknowledgeDeadLetterQueueRecordsResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcknowledgeDeadLetterQueueRecordsResponseSuccess
+
+      interface _AcknowledgeQueueRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcknowledgeQueueRecordsOutput]
+        def successful: () -> ::Array[Types::AcknowledgeQueueRecordsResultEntry]
+        def failed: () -> ::Array[Types::AcknowledgeQueueRecordsErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#acknowledge_queue_records-instance_method
+      def acknowledge_queue_records: (
+                                       queue_arn: ::String,
+                                       entries: Array[
+                                         {
+                                           receipt_handle: ::String
+                                         }
+                                       ]
+                                     ) -> _AcknowledgeQueueRecordsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcknowledgeQueueRecordsResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#add_tags_to_stream-instance_method
       def add_tags_to_stream: (
                                 ?stream_name: ::String,
@@ -164,6 +196,33 @@ module Aws
                           ) -> _CreateChannelResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelResponseSuccess
 
+      interface _CreateQueueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateQueueOutput]
+        def queue_description: () -> Types::QueueDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#create_queue-instance_method
+      def create_queue: (
+                          queue_name: ::String,
+                          stream_configuration_list: Array[
+                            {
+                              stream_arn: ::String,
+                              starting_position: {
+                                type: ("TRIM_HORIZON" | "LATEST" | "AT_TIMESTAMP"),
+                                timestamp: ::Time?
+                              }?
+                            }
+                          ],
+                          ?queue_attributes: {
+                            visibility_timeout_seconds: ::Integer?,
+                            dead_letter_configuration: {
+                              target_type: ("BUILT_IN" | "NONE"),
+                              max_receive_count: ::Integer?
+                            }?
+                          },
+                          ?tags: Hash[::String, ::String]
+                        ) -> _CreateQueueResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQueueResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#create_stream-instance_method
       def create_stream: (
                            stream_name: ::String,
@@ -192,6 +251,12 @@ module Aws
                             channel_arn: ::String
                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#delete_queue-instance_method
+      def delete_queue: (
+                          queue_arn: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#delete_resource_policy-instance_method
       def delete_resource_policy: (
@@ -250,6 +315,16 @@ module Aws
       def describe_limits: (
                            ) -> _DescribeLimitsResponseSuccess
                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLimitsResponseSuccess
+
+      interface _DescribeQueueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeQueueOutput]
+        def queue_description: () -> Types::QueueDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#describe_queue-instance_method
+      def describe_queue: (
+                            queue_arn: ::String
+                          ) -> _DescribeQueueResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeQueueResponseSuccess
 
       interface _DescribeStreamResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStreamOutput]
@@ -394,6 +469,24 @@ module Aws
                          ) -> _ListChannelsResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelsResponseSuccess
 
+      interface _ListQueuesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListQueuesOutput]
+        def queue_summaries: () -> ::Array[Types::QueueSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#list_queues-instance_method
+      def list_queues: (
+                         ?max_results: ::Integer,
+                         ?next_token: ::String,
+                         ?stream_filter: Array[
+                           {
+                             stream_arn: ::String,
+                             stream_creation_timestamp: ::Time?
+                           }
+                         ]
+                       ) -> _ListQueuesResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQueuesResponseSuccess
+
       interface _ListShardsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListShardsOutput]
         def shards: () -> ::Array[Types::Shard]
@@ -531,6 +624,32 @@ module Aws
                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _ReceiveDeadLetterQueueRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReceiveDeadLetterQueueRecordsOutput]
+        def queue_records: () -> ::Array[Types::QueueRecord]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#receive_dead_letter_queue_records-instance_method
+      def receive_dead_letter_queue_records: (
+                                               queue_arn: ::String,
+                                               ?limit: ::Integer,
+                                               ?wait_time_seconds: ::Integer,
+                                               ?visibility_timeout_seconds: ::Integer
+                                             ) -> _ReceiveDeadLetterQueueRecordsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReceiveDeadLetterQueueRecordsResponseSuccess
+
+      interface _ReceiveQueueRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReceiveQueueRecordsOutput]
+        def queue_records: () -> ::Array[Types::QueueRecord]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#receive_queue_records-instance_method
+      def receive_queue_records: (
+                                   queue_arn: ::String,
+                                   ?limit: ::Integer,
+                                   ?wait_time_seconds: ::Integer,
+                                   ?visibility_timeout_seconds: ::Integer
+                                 ) -> _ReceiveQueueRecordsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReceiveQueueRecordsResponseSuccess
+
       interface _RegisterStreamConsumerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RegisterStreamConsumerOutput]
         def consumer: () -> Types::Consumer
@@ -552,6 +671,22 @@ module Aws
                                      ?stream_id: ::String
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _RestoreDeadLetterQueueRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreDeadLetterQueueRecordsOutput]
+        def successful: () -> ::Array[Types::RestoreDeadLetterQueueRecordsResultEntry]
+        def failed: () -> ::Array[Types::RestoreDeadLetterQueueRecordsErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#restore_dead_letter_queue_records-instance_method
+      def restore_dead_letter_queue_records: (
+                                               queue_arn: ::String,
+                                               entries: Array[
+                                                 {
+                                                   receipt_handle: ::String
+                                                 }
+                                               ]
+                                             ) -> _RestoreDeadLetterQueueRecordsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDeadLetterQueueRecordsResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#split_shard-instance_method
       def split_shard: (
@@ -634,6 +769,23 @@ module Aws
                           ) -> _UpdateChannelResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelResponseSuccess
 
+      interface _UpdateDeadLetterQueueRecordsVisibilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDeadLetterQueueRecordsVisibilityOutput]
+        def successful: () -> ::Array[Types::UpdateDeadLetterQueueRecordsVisibilityResultEntry]
+        def failed: () -> ::Array[Types::UpdateDeadLetterQueueRecordsVisibilityErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#update_dead_letter_queue_records_visibility-instance_method
+      def update_dead_letter_queue_records_visibility: (
+                                                         queue_arn: ::String,
+                                                         entries: Array[
+                                                           {
+                                                             receipt_handle: ::String,
+                                                             visibility_timeout_seconds: ::Integer
+                                                           }
+                                                         ]
+                                                       ) -> _UpdateDeadLetterQueueRecordsVisibilityResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDeadLetterQueueRecordsVisibilityResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#update_max_record_size-instance_method
       def update_max_record_size: (
                                     ?stream_arn: ::String,
@@ -641,6 +793,40 @@ module Aws
                                     max_record_size_in_ki_b: ::Integer
                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateQueueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateQueueOutput]
+        def queue_description: () -> Types::QueueDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#update_queue-instance_method
+      def update_queue: (
+                          queue_arn: ::String,
+                          queue_attributes: {
+                            visibility_timeout_seconds: ::Integer?,
+                            dead_letter_configuration: {
+                              target_type: ("BUILT_IN" | "NONE"),
+                              max_receive_count: ::Integer?
+                            }?
+                          }
+                        ) -> _UpdateQueueResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateQueueResponseSuccess
+
+      interface _UpdateQueueRecordsVisibilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateQueueRecordsVisibilityOutput]
+        def successful: () -> ::Array[Types::UpdateQueueRecordsVisibilityResultEntry]
+        def failed: () -> ::Array[Types::UpdateQueueRecordsVisibilityErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#update_queue_records_visibility-instance_method
+      def update_queue_records_visibility: (
+                                             queue_arn: ::String,
+                                             entries: Array[
+                                               {
+                                                 receipt_handle: ::String,
+                                                 visibility_timeout_seconds: ::Integer
+                                               }
+                                             ]
+                                           ) -> _UpdateQueueRecordsVisibilityResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateQueueRecordsVisibilityResponseSuccess
 
       interface _UpdateShardCountResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateShardCountOutput]

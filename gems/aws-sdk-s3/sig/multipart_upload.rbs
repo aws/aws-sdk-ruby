@@ -47,6 +47,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/MultipartUpload.html#checksum_type-instance_method
       def checksum_type: () -> ("COMPOSITE" | "FULL_OBJECT")
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/MultipartUpload.html#version_id-instance_method
+      def version_id: () -> ::String
+
       def client: () -> Client
 
 

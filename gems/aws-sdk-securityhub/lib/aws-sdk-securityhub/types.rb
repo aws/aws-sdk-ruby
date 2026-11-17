@@ -24115,7 +24115,7 @@ module Aws::SecurityHub
     end
 
     # The cloud provider configuration for creating a connector. This is a
-    # union type that currently supports Azure.
+    # union type that currently supports Azure and GCP.
     #
     # @note CspmProviderConfiguration is a union - when making an API calls you must set exactly one of the members.
     #
@@ -24123,21 +24123,27 @@ module Aws::SecurityHub
     #   The Azure provider configuration.
     #   @return [Types::AzureProviderConfiguration]
     #
+    # @!attribute [rw] gcp
+    #   The GCP provider configuration.
+    #   @return [Types::GcpProviderConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CspmProviderConfiguration AWS API Documentation
     #
     class CspmProviderConfiguration < Struct.new(
       :azure,
+      :gcp,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class Azure < CspmProviderConfiguration; end
+      class Gcp < CspmProviderConfiguration; end
       class Unknown < CspmProviderConfiguration; end
     end
 
     # The detailed cloud provider configuration for a connector. This is a
-    # union type that currently supports Azure.
+    # union type that currently supports Azure and GCP.
     #
     # @note CspmProviderDetail is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CspmProviderDetail corresponding to the set member.
     #
@@ -24145,16 +24151,22 @@ module Aws::SecurityHub
     #   The Azure provider detail.
     #   @return [Types::AzureDetail]
     #
+    # @!attribute [rw] gcp
+    #   The GCP provider detail.
+    #   @return [Types::GcpDetail]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CspmProviderDetail AWS API Documentation
     #
     class CspmProviderDetail < Struct.new(
       :azure,
+      :gcp,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class Azure < CspmProviderDetail; end
+      class Gcp < CspmProviderDetail; end
       class Unknown < CspmProviderDetail; end
     end
 
@@ -24183,7 +24195,7 @@ module Aws::SecurityHub
     end
 
     # The cloud provider configuration for updating a connector. This is a
-    # union type that currently supports Azure.
+    # union type that currently supports Azure and GCP.
     #
     # @note CspmProviderUpdateConfiguration is a union - when making an API calls you must set exactly one of the members.
     #
@@ -24191,16 +24203,22 @@ module Aws::SecurityHub
     #   The Azure update configuration.
     #   @return [Types::AzureUpdateConfiguration]
     #
+    # @!attribute [rw] gcp
+    #   The GCP update configuration.
+    #   @return [Types::GcpUpdateConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CspmProviderUpdateConfiguration AWS API Documentation
     #
     class CspmProviderUpdateConfiguration < Struct.new(
       :azure,
+      :gcp,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class Azure < CspmProviderUpdateConfiguration; end
+      class Gcp < CspmProviderUpdateConfiguration; end
       class Unknown < CspmProviderUpdateConfiguration; end
     end
 
@@ -24974,6 +24992,7 @@ module Aws::SecurityHub
     # @!attribute [rw] providers
     #   A list of cloud providers to filter the standards by. For example,
     #   specify `Azure` to return only standards that evaluate Azure
+    #   resources, or `GCP` to return only standards that evaluate GCP
     #   resources.
     #   @return [Array<String>]
     #
@@ -26322,6 +26341,98 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The detailed GCP configuration for a connector.
+    #
+    # @!attribute [rw] aws_config_connector_arn
+    #   The ARN of the multi-cloud configuration connector used to establish
+    #   the connection to GCP.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_configuration
+    #   The scope configuration that defines which GCP resources are
+    #   monitored.
+    #   @return [Types::GcpScopeConfiguration]
+    #
+    # @!attribute [rw] gcp_regions
+    #   The list of GCP regions being monitored.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GcpDetail AWS API Documentation
+    #
+    class GcpDetail < Struct.new(
+      :aws_config_connector_arn,
+      :scope_configuration,
+      :gcp_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for connecting to a GCP environment.
+    #
+    # @!attribute [rw] aws_config_connector_arn
+    #   The ARN of the multi-cloud configuration connector used to establish
+    #   the connection to GCP.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_configuration
+    #   The scope configuration that defines which GCP resources are
+    #   monitored.
+    #   @return [Types::GcpScopeConfiguration]
+    #
+    # @!attribute [rw] gcp_regions
+    #   The list of GCP regions to monitor.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GcpProviderConfiguration AWS API Documentation
+    #
+    class GcpProviderConfiguration < Struct.new(
+      :aws_config_connector_arn,
+      :scope_configuration,
+      :gcp_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scope configuration for a GCP connector, defining the organization
+    # or project scope.
+    #
+    # @!attribute [rw] scope_type
+    #   The type of scope. Valid values are `ORGANIZATION` and `PROJECT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_values
+    #   The list of scope values. Use an organization ID when the scope type
+    #   is `ORGANIZATION`, or project IDs when the scope type is `PROJECT`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GcpScopeConfiguration AWS API Documentation
+    #
+    class GcpScopeConfiguration < Struct.new(
+      :scope_type,
+      :scope_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for updating a GCP connector's scope and regions.
+    #
+    # @!attribute [rw] scope_configuration
+    #   The updated scope configuration.
+    #   @return [Types::GcpScopeConfiguration]
+    #
+    # @!attribute [rw] gcp_regions
+    #   The updated list of GCP regions to monitor.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GcpUpdateConfiguration AWS API Documentation
+    #
+    class GcpUpdateConfiguration < Struct.new(
+      :scope_configuration,
+      :gcp_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] metadata_uid
     #   The unique identifier (ID) of Security Hub OCSF findings found under
     #   the `metadata.uid` field of the finding.
@@ -26826,7 +26937,8 @@ module Aws::SecurityHub
     # @!attribute [rw] providers
     #   A list of cloud providers to filter the enabled standards by. For
     #   example, specify `Azure` to return only enabled standards that
-    #   evaluate Azure resources.
+    #   evaluate Azure resources, or `GCP` to return only enabled standards
+    #   that evaluate GCP resources.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetEnabledStandardsRequest AWS API Documentation
@@ -29459,7 +29571,8 @@ module Aws::SecurityHub
     # @!attribute [rw] providers
     #   A list of cloud providers to filter the security control definitions
     #   by. For example, specify `Azure` to return only controls that
-    #   evaluate Azure resources.
+    #   evaluate Azure resources, or `GCP` to return only controls that
+    #   evaluate GCP resources.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListSecurityControlDefinitionsRequest AWS API Documentation
@@ -31119,12 +31232,18 @@ module Aws::SecurityHub
     #   with Microsoft Azure.
     #   @return [Types::AzureProviderConfiguration]
     #
+    # @!attribute [rw] gcp
+    #   The configuration settings required to establish a CSPM integration
+    #   with Google Cloud Platform (GCP).
+    #   @return [Types::GcpProviderConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProviderConfiguration AWS API Documentation
     #
     class ProviderConfiguration < Struct.new(
       :jira_cloud,
       :service_now,
       :azure,
+      :gcp,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -31133,6 +31252,7 @@ module Aws::SecurityHub
       class JiraCloud < ProviderConfiguration; end
       class ServiceNow < ProviderConfiguration; end
       class Azure < ProviderConfiguration; end
+      class Gcp < ProviderConfiguration; end
       class Unknown < ProviderConfiguration; end
     end
 
@@ -31152,12 +31272,17 @@ module Aws::SecurityHub
     #   Details about a Microsoft Azure CSPM integration.
     #   @return [Types::AzureDetail]
     #
+    # @!attribute [rw] gcp
+    #   Details about a Google Cloud Platform (GCP) CSPM integration.
+    #   @return [Types::GcpDetail]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProviderDetail AWS API Documentation
     #
     class ProviderDetail < Struct.new(
       :jira_cloud,
       :service_now,
       :azure,
+      :gcp,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -31166,6 +31291,7 @@ module Aws::SecurityHub
       class JiraCloud < ProviderDetail; end
       class ServiceNow < ProviderDetail; end
       class Azure < ProviderDetail; end
+      class Gcp < ProviderDetail; end
       class Unknown < ProviderDetail; end
     end
 
@@ -31213,12 +31339,18 @@ module Aws::SecurityHub
     #   Azure CSPM integration.
     #   @return [Types::AzureUpdateConfiguration]
     #
+    # @!attribute [rw] gcp
+    #   The parameters required to update the configuration for a Google
+    #   Cloud Platform (GCP) CSPM integration.
+    #   @return [Types::GcpUpdateConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProviderUpdateConfiguration AWS API Documentation
     #
     class ProviderUpdateConfiguration < Struct.new(
       :jira_cloud,
       :service_now,
       :azure,
+      :gcp,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -31227,6 +31359,7 @@ module Aws::SecurityHub
       class JiraCloud < ProviderUpdateConfiguration; end
       class ServiceNow < ProviderUpdateConfiguration; end
       class Azure < ProviderUpdateConfiguration; end
+      class Gcp < ProviderUpdateConfiguration; end
       class Unknown < ProviderUpdateConfiguration; end
     end
 
@@ -32604,6 +32737,10 @@ module Aws::SecurityHub
     #   Details about an Azure resource that is related to a finding.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
+    # @!attribute [rw] gcp_resource
+    #   Details about a GCP resource that is related to a finding.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
@@ -32707,7 +32844,8 @@ module Aws::SecurityHub
       :aws_s3_access_point,
       :aws_ec2_client_vpn_endpoint,
       :code_repository,
-      :azure_resource)
+      :azure_resource,
+      :gcp_resource)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34080,7 +34218,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] provider
     #   The cloud provider whose resources the security control evaluates.
-    #   For example, `AWS` or `Azure`.
+    #   For example, `AWS`, `Azure`, or `GCP`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SecurityControl AWS API Documentation
@@ -34183,7 +34321,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] provider
     #   The cloud provider whose resources the security control evaluates.
-    #   For example, `AWS` or `Azure`.
+    #   For example, `AWS`, `Azure`, or `GCP`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SecurityControlDefinition AWS API Documentation
@@ -35133,7 +35271,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] provider
     #   The cloud provider whose resources the standard evaluates. For
-    #   example, `AWS` or `Azure`.
+    #   example, `AWS`, `Azure`, or `GCP`.
     #   @return [String]
     #
     # @!attribute [rw] standards_managed_by
@@ -35519,7 +35657,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] provider
     #   The cloud provider whose resources the standard evaluates. For
-    #   example, `AWS` or `Azure`.
+    #   example, `AWS`, `Azure`, or `GCP`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StandardsSubscription AWS API Documentation

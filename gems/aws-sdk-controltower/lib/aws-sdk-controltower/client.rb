@@ -952,6 +952,7 @@ module Aws::ControlTower
     #   resp.enabled_baseline_details.baseline_identifier #=> String
     #   resp.enabled_baseline_details.baseline_version #=> String
     #   resp.enabled_baseline_details.drift_status_summary.types.inheritance.status #=> String, one of "IN_SYNC", "DRIFTED"
+    #   resp.enabled_baseline_details.drift_status_summary.types.source.status #=> String, one of "IN_SYNC", "DRIFTED"
     #   resp.enabled_baseline_details.target_identifier #=> String
     #   resp.enabled_baseline_details.parent_identifier #=> String
     #   resp.enabled_baseline_details.status_summary.status #=> String, one of "SUCCEEDED", "FAILED", "UNDER_CHANGE"
@@ -1227,6 +1228,7 @@ module Aws::ControlTower
     #       parent_identifiers: ["Arn"],
     #       statuses: ["SUCCEEDED"], # accepts SUCCEEDED, FAILED, UNDER_CHANGE
     #       inheritance_drift_statuses: ["IN_SYNC"], # accepts IN_SYNC, DRIFTED
+    #       source_drift_statuses: ["IN_SYNC"], # accepts IN_SYNC, DRIFTED
     #     },
     #     next_token: "ListEnabledBaselinesNextToken",
     #     max_results: 1,
@@ -1240,6 +1242,7 @@ module Aws::ControlTower
     #   resp.enabled_baselines[0].baseline_identifier #=> String
     #   resp.enabled_baselines[0].baseline_version #=> String
     #   resp.enabled_baselines[0].drift_status_summary.types.inheritance.status #=> String, one of "IN_SYNC", "DRIFTED"
+    #   resp.enabled_baselines[0].drift_status_summary.types.source.status #=> String, one of "IN_SYNC", "DRIFTED"
     #   resp.enabled_baselines[0].target_identifier #=> String
     #   resp.enabled_baselines[0].parent_identifier #=> String
     #   resp.enabled_baselines[0].status_summary.status #=> String, one of "SUCCEEDED", "FAILED", "UNDER_CHANGE"
@@ -1811,7 +1814,7 @@ module Aws::ControlTower
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-controltower'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

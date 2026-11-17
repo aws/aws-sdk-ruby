@@ -28,6 +28,15 @@ module Aws::BedrockAgentCoreControl
     AdvertisedScopeMappingType = Shapes::MapShape.new(name: 'AdvertisedScopeMappingType')
     AgentCardDefinition = Shapes::StructureShape.new(name: 'AgentCardDefinition')
     AgentEndpointDescription = Shapes::StringShape.new(name: 'AgentEndpointDescription')
+    AgentInsightStoreArn = Shapes::StringShape.new(name: 'AgentInsightStoreArn')
+    AgentInsightStoreEnablementStatus = Shapes::StringShape.new(name: 'AgentInsightStoreEnablementStatus')
+    AgentInsightStoreEncryptionConfiguration = Shapes::StructureShape.new(name: 'AgentInsightStoreEncryptionConfiguration')
+    AgentInsightStoreEncryptionMode = Shapes::StringShape.new(name: 'AgentInsightStoreEncryptionMode')
+    AgentInsightStoreFailureReason = Shapes::StringShape.new(name: 'AgentInsightStoreFailureReason')
+    AgentInsightStoreId = Shapes::StringShape.new(name: 'AgentInsightStoreId')
+    AgentInsightStoreStatus = Shapes::StringShape.new(name: 'AgentInsightStoreStatus')
+    AgentInsightStoreSummary = Shapes::StructureShape.new(name: 'AgentInsightStoreSummary')
+    AgentInsightStoreSummaryList = Shapes::ListShape.new(name: 'AgentInsightStoreSummaryList')
     AgentManagedRuntimeType = Shapes::StringShape.new(name: 'AgentManagedRuntimeType')
     AgentRuntime = Shapes::StructureShape.new(name: 'AgentRuntime')
     AgentRuntimeArn = Shapes::StringShape.new(name: 'AgentRuntimeArn')
@@ -326,6 +335,7 @@ module Aws::BedrockAgentCoreControl
     DataSourceType = Shapes::UnionShape.new(name: 'DataSourceType')
     DatasetArn = Shapes::StringShape.new(name: 'DatasetArn')
     DatasetExampleList = Shapes::ListShape.new(name: 'DatasetExampleList')
+    DatasetGenerationId = Shapes::StringShape.new(name: 'DatasetGenerationId')
     DatasetId = Shapes::StringShape.new(name: 'DatasetId')
     DatasetName = Shapes::StringShape.new(name: 'DatasetName')
     DatasetSchemaType = Shapes::StringShape.new(name: 'DatasetSchemaType')
@@ -480,6 +490,15 @@ module Aws::BedrockAgentCoreControl
     EvaluatorSummary = Shapes::StructureShape.new(name: 'EvaluatorSummary')
     EvaluatorSummaryList = Shapes::ListShape.new(name: 'EvaluatorSummaryList')
     EvaluatorType = Shapes::StringShape.new(name: 'EvaluatorType')
+    ExampleCountByField = Shapes::StructureShape.new(name: 'ExampleCountByField')
+    ExampleCountByFieldCondition = Shapes::StructureShape.new(name: 'ExampleCountByFieldCondition')
+    ExampleCountByFieldConditionList = Shapes::ListShape.new(name: 'ExampleCountByFieldConditionList')
+    ExampleCountByFieldConditionMaxLong = Shapes::IntegerShape.new(name: 'ExampleCountByFieldConditionMaxLong')
+    ExampleCountByFieldConditionMinLong = Shapes::IntegerShape.new(name: 'ExampleCountByFieldConditionMinLong')
+    ExampleField = Shapes::StringShape.new(name: 'ExampleField')
+    ExampleFieldCondition = Shapes::StructureShape.new(name: 'ExampleFieldCondition')
+    ExampleFieldConditionList = Shapes::ListShape.new(name: 'ExampleFieldConditionList')
+    ExampleFieldList = Shapes::ListShape.new(name: 'ExampleFieldList')
     ExampleId = Shapes::StringShape.new(name: 'ExampleId')
     ExampleIdList = Shapes::ListShape.new(name: 'ExampleIdList')
     ExceptionLevel = Shapes::StringShape.new(name: 'ExceptionLevel')
@@ -547,6 +566,8 @@ module Aws::BedrockAgentCoreControl
     GatewayTarget = Shapes::StructureShape.new(name: 'GatewayTarget')
     GatewayTargetList = Shapes::ListShape.new(name: 'GatewayTargetList')
     GatewayUrl = Shapes::StringShape.new(name: 'GatewayUrl')
+    GetAgentInsightStoreRequest = Shapes::StructureShape.new(name: 'GetAgentInsightStoreRequest')
+    GetAgentInsightStoreResponse = Shapes::StructureShape.new(name: 'GetAgentInsightStoreResponse')
     GetAgentRuntimeEndpointRequest = Shapes::StructureShape.new(name: 'GetAgentRuntimeEndpointRequest')
     GetAgentRuntimeEndpointResponse = Shapes::StructureShape.new(name: 'GetAgentRuntimeEndpointResponse')
     GetAgentRuntimeRequest = Shapes::StructureShape.new(name: 'GetAgentRuntimeRequest')
@@ -809,6 +830,10 @@ module Aws::BedrockAgentCoreControl
     LimitEntryDimensionsMap = Shapes::MapShape.new(name: 'LimitEntryDimensionsMap')
     LinkedinOauth2ProviderConfigInput = Shapes::StructureShape.new(name: 'LinkedinOauth2ProviderConfigInput')
     LinkedinOauth2ProviderConfigOutput = Shapes::StructureShape.new(name: 'LinkedinOauth2ProviderConfigOutput')
+    ListAgentInsightStoresRequest = Shapes::StructureShape.new(name: 'ListAgentInsightStoresRequest')
+    ListAgentInsightStoresRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAgentInsightStoresRequestMaxResultsInteger')
+    ListAgentInsightStoresRequestNextTokenString = Shapes::StringShape.new(name: 'ListAgentInsightStoresRequestNextTokenString')
+    ListAgentInsightStoresResponse = Shapes::StructureShape.new(name: 'ListAgentInsightStoresResponse')
     ListAgentRuntimeEndpointsRequest = Shapes::StructureShape.new(name: 'ListAgentRuntimeEndpointsRequest')
     ListAgentRuntimeEndpointsResponse = Shapes::StructureShape.new(name: 'ListAgentRuntimeEndpointsResponse')
     ListAgentRuntimeVersionsByCapacityProviderInput = Shapes::StructureShape.new(name: 'ListAgentRuntimeVersionsByCapacityProviderInput')
@@ -836,13 +861,18 @@ module Aws::BedrockAgentCoreControl
     ListConsentPortalsRequest = Shapes::StructureShape.new(name: 'ListConsentPortalsRequest')
     ListConsentPortalsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListConsentPortalsRequestMaxResultsInteger')
     ListConsentPortalsResponse = Shapes::StructureShape.new(name: 'ListConsentPortalsResponse')
+    ListDatasetExamplesFilter = Shapes::StructureShape.new(name: 'ListDatasetExamplesFilter')
+    ListDatasetExamplesFilterGenerationIdsList = Shapes::ListShape.new(name: 'ListDatasetExamplesFilterGenerationIdsList')
     ListDatasetExamplesRequest = Shapes::StructureShape.new(name: 'ListDatasetExamplesRequest')
     ListDatasetExamplesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListDatasetExamplesRequestMaxResultsInteger')
     ListDatasetExamplesRequestNextTokenString = Shapes::StringShape.new(name: 'ListDatasetExamplesRequestNextTokenString')
     ListDatasetExamplesResponse = Shapes::StructureShape.new(name: 'ListDatasetExamplesResponse')
+    ListDatasetVersionsFilter = Shapes::StructureShape.new(name: 'ListDatasetVersionsFilter')
     ListDatasetVersionsRequest = Shapes::StructureShape.new(name: 'ListDatasetVersionsRequest')
     ListDatasetVersionsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListDatasetVersionsRequestMaxResultsInteger')
+    ListDatasetVersionsRequestNextTokenString = Shapes::StringShape.new(name: 'ListDatasetVersionsRequestNextTokenString')
     ListDatasetVersionsResponse = Shapes::StructureShape.new(name: 'ListDatasetVersionsResponse')
+    ListDatasetsFilter = Shapes::StructureShape.new(name: 'ListDatasetsFilter')
     ListDatasetsRequest = Shapes::StructureShape.new(name: 'ListDatasetsRequest')
     ListDatasetsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListDatasetsRequestMaxResultsInteger')
     ListDatasetsRequestNextTokenString = Shapes::StringShape.new(name: 'ListDatasetsRequestNextTokenString')
@@ -1373,6 +1403,8 @@ module Aws::BedrockAgentCoreControl
     Unit = Shapes::StructureShape.new(name: 'Unit')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateAgentInsightStoreRequest = Shapes::StructureShape.new(name: 'UpdateAgentInsightStoreRequest')
+    UpdateAgentInsightStoreResponse = Shapes::StructureShape.new(name: 'UpdateAgentInsightStoreResponse')
     UpdateAgentRuntimeEndpointRequest = Shapes::StructureShape.new(name: 'UpdateAgentRuntimeEndpointRequest')
     UpdateAgentRuntimeEndpointResponse = Shapes::StructureShape.new(name: 'UpdateAgentRuntimeEndpointResponse')
     UpdateAgentRuntimeRequest = Shapes::StructureShape.new(name: 'UpdateAgentRuntimeRequest')
@@ -1531,6 +1563,21 @@ module Aws::BedrockAgentCoreControl
     AgentCardDefinition.add_member(:schema_version, Shapes::ShapeRef.new(shape: SchemaVersion, location_name: "schemaVersion"))
     AgentCardDefinition.add_member(:inline_content, Shapes::ShapeRef.new(shape: InlineContent, location_name: "inlineContent"))
     AgentCardDefinition.struct_class = Types::AgentCardDefinition
+
+    AgentInsightStoreEncryptionConfiguration.add_member(:mode, Shapes::ShapeRef.new(shape: AgentInsightStoreEncryptionMode, required: true, location_name: "mode"))
+    AgentInsightStoreEncryptionConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    AgentInsightStoreEncryptionConfiguration.struct_class = Types::AgentInsightStoreEncryptionConfiguration
+
+    AgentInsightStoreSummary.add_member(:agent_insight_store_arn, Shapes::ShapeRef.new(shape: AgentInsightStoreArn, required: true, location_name: "agentInsightStoreArn"))
+    AgentInsightStoreSummary.add_member(:agent_insight_store_id, Shapes::ShapeRef.new(shape: AgentInsightStoreId, required: true, location_name: "agentInsightStoreId"))
+    AgentInsightStoreSummary.add_member(:status, Shapes::ShapeRef.new(shape: AgentInsightStoreStatus, required: true, location_name: "status"))
+    AgentInsightStoreSummary.add_member(:enablement_status, Shapes::ShapeRef.new(shape: AgentInsightStoreEnablementStatus, required: true, location_name: "enablementStatus"))
+    AgentInsightStoreSummary.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: AgentInsightStoreEncryptionConfiguration, required: true, location_name: "encryptionConfiguration"))
+    AgentInsightStoreSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    AgentInsightStoreSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    AgentInsightStoreSummary.struct_class = Types::AgentInsightStoreSummary
+
+    AgentInsightStoreSummaryList.member = Shapes::ShapeRef.new(shape: AgentInsightStoreSummary)
 
     AgentRuntime.add_member(:agent_runtime_arn, Shapes::ShapeRef.new(shape: AgentRuntimeArn, required: true, location_name: "agentRuntimeArn"))
     AgentRuntime.add_member(:agent_runtime_id, Shapes::ShapeRef.new(shape: AgentRuntimeId, required: true, location_name: "agentRuntimeId"))
@@ -2181,8 +2228,8 @@ module Aws::BedrockAgentCoreControl
     CreateDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDatasetRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location_name: "datasetName"))
     CreateDatasetRequest.add_member(:description, Shapes::ShapeRef.new(shape: CreateDatasetRequestDescriptionString, location_name: "description"))
-    CreateDatasetRequest.add_member(:source, Shapes::ShapeRef.new(shape: DataSourceType, required: true, location_name: "source"))
-    CreateDatasetRequest.add_member(:schema_type, Shapes::ShapeRef.new(shape: DatasetSchemaType, required: true, location_name: "schemaType"))
+    CreateDatasetRequest.add_member(:source, Shapes::ShapeRef.new(shape: DataSourceType, location_name: "source"))
+    CreateDatasetRequest.add_member(:schema_type, Shapes::ShapeRef.new(shape: DatasetSchemaType, location_name: "schemaType"))
     CreateDatasetRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     CreateDatasetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateDatasetRequest.struct_class = Types::CreateDatasetRequest
@@ -2731,8 +2778,9 @@ module Aws::BedrockAgentCoreControl
     DatasetSummary.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     DatasetSummary.add_member(:status, Shapes::ShapeRef.new(shape: DatasetStatus, required: true, location_name: "status"))
     DatasetSummary.add_member(:draft_status, Shapes::ShapeRef.new(shape: DraftStatus, location_name: "draftStatus"))
-    DatasetSummary.add_member(:schema_type, Shapes::ShapeRef.new(shape: DatasetSchemaType, required: true, location_name: "schemaType"))
+    DatasetSummary.add_member(:schema_type, Shapes::ShapeRef.new(shape: DatasetSchemaType, location_name: "schemaType"))
     DatasetSummary.add_member(:example_count, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "exampleCount"))
+    DatasetSummary.add_member(:example_count_by_field, Shapes::ShapeRef.new(shape: ExampleCountByField, location_name: "exampleCountByField"))
     DatasetSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     DatasetSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
     DatasetSummary.struct_class = Types::DatasetSummary
@@ -2741,6 +2789,7 @@ module Aws::BedrockAgentCoreControl
 
     DatasetVersionSummary.add_member(:dataset_version, Shapes::ShapeRef.new(shape: DatasetVersion, required: true, location_name: "datasetVersion"))
     DatasetVersionSummary.add_member(:example_count, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "exampleCount"))
+    DatasetVersionSummary.add_member(:example_count_by_field, Shapes::ShapeRef.new(shape: ExampleCountByField, location_name: "exampleCountByField"))
     DatasetVersionSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     DatasetVersionSummary.struct_class = Types::DatasetVersionSummary
 
@@ -3185,6 +3234,25 @@ module Aws::BedrockAgentCoreControl
 
     EvaluatorSummaryList.member = Shapes::ShapeRef.new(shape: EvaluatorSummary)
 
+    ExampleCountByField.add_member(:turns, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "turns"))
+    ExampleCountByField.add_member(:input, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "input"))
+    ExampleCountByField.add_member(:actor_profile, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "actorProfile"))
+    ExampleCountByField.struct_class = Types::ExampleCountByField
+
+    ExampleCountByFieldCondition.add_member(:any_of, Shapes::ShapeRef.new(shape: ExampleFieldList, location_name: "anyOf"))
+    ExampleCountByFieldCondition.add_member(:min, Shapes::ShapeRef.new(shape: ExampleCountByFieldConditionMinLong, location_name: "min"))
+    ExampleCountByFieldCondition.add_member(:max, Shapes::ShapeRef.new(shape: ExampleCountByFieldConditionMaxLong, location_name: "max"))
+    ExampleCountByFieldCondition.struct_class = Types::ExampleCountByFieldCondition
+
+    ExampleCountByFieldConditionList.member = Shapes::ShapeRef.new(shape: ExampleCountByFieldCondition)
+
+    ExampleFieldCondition.add_member(:any_of, Shapes::ShapeRef.new(shape: ExampleFieldList, location_name: "anyOf"))
+    ExampleFieldCondition.struct_class = Types::ExampleFieldCondition
+
+    ExampleFieldConditionList.member = Shapes::ShapeRef.new(shape: ExampleFieldCondition)
+
+    ExampleFieldList.member = Shapes::ShapeRef.new(shape: ExampleField)
+
     ExampleIdList.member = Shapes::ShapeRef.new(shape: ExampleId)
 
     ExtractionConfig.add_member(:llm_extraction_config, Shapes::ShapeRef.new(shape: LlmExtractionConfig, location_name: "llmExtractionConfig"))
@@ -3339,6 +3407,19 @@ module Aws::BedrockAgentCoreControl
     GatewayTarget.struct_class = Types::GatewayTarget
 
     GatewayTargetList.member = Shapes::ShapeRef.new(shape: GatewayTarget)
+
+    GetAgentInsightStoreRequest.add_member(:agent_insight_store_id, Shapes::ShapeRef.new(shape: AgentInsightStoreId, required: true, location: "uri", location_name: "agentInsightStoreId"))
+    GetAgentInsightStoreRequest.struct_class = Types::GetAgentInsightStoreRequest
+
+    GetAgentInsightStoreResponse.add_member(:agent_insight_store_arn, Shapes::ShapeRef.new(shape: AgentInsightStoreArn, required: true, location_name: "agentInsightStoreArn"))
+    GetAgentInsightStoreResponse.add_member(:agent_insight_store_id, Shapes::ShapeRef.new(shape: AgentInsightStoreId, required: true, location_name: "agentInsightStoreId"))
+    GetAgentInsightStoreResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentInsightStoreStatus, required: true, location_name: "status"))
+    GetAgentInsightStoreResponse.add_member(:enablement_status, Shapes::ShapeRef.new(shape: AgentInsightStoreEnablementStatus, required: true, location_name: "enablementStatus"))
+    GetAgentInsightStoreResponse.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: AgentInsightStoreEncryptionConfiguration, required: true, location_name: "encryptionConfiguration"))
+    GetAgentInsightStoreResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    GetAgentInsightStoreResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    GetAgentInsightStoreResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: AgentInsightStoreFailureReason, location_name: "failureReason"))
+    GetAgentInsightStoreResponse.struct_class = Types::GetAgentInsightStoreResponse
 
     GetAgentRuntimeEndpointRequest.add_member(:agent_runtime_id, Shapes::ShapeRef.new(shape: AgentRuntimeId, required: true, location: "uri", location_name: "agentRuntimeId"))
     GetAgentRuntimeEndpointRequest.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location: "uri", location_name: "endpointName"))
@@ -3529,9 +3610,10 @@ module Aws::BedrockAgentCoreControl
     GetDatasetResponse.add_member(:status, Shapes::ShapeRef.new(shape: DatasetStatus, required: true, location_name: "status"))
     GetDatasetResponse.add_member(:draft_status, Shapes::ShapeRef.new(shape: DraftStatus, location_name: "draftStatus"))
     GetDatasetResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
-    GetDatasetResponse.add_member(:schema_type, Shapes::ShapeRef.new(shape: DatasetSchemaType, required: true, location_name: "schemaType"))
+    GetDatasetResponse.add_member(:schema_type, Shapes::ShapeRef.new(shape: DatasetSchemaType, location_name: "schemaType"))
     GetDatasetResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     GetDatasetResponse.add_member(:example_count, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "exampleCount"))
+    GetDatasetResponse.add_member(:example_count_by_field, Shapes::ShapeRef.new(shape: ExampleCountByField, location_name: "exampleCountByField"))
     GetDatasetResponse.add_member(:download_url, Shapes::ShapeRef.new(shape: DownloadUrl, location_name: "downloadUrl"))
     GetDatasetResponse.add_member(:download_url_expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "downloadUrlExpiresAt"))
     GetDatasetResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
@@ -4488,6 +4570,14 @@ module Aws::BedrockAgentCoreControl
     LinkedinOauth2ProviderConfigOutput.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, location_name: "clientId"))
     LinkedinOauth2ProviderConfigOutput.struct_class = Types::LinkedinOauth2ProviderConfigOutput
 
+    ListAgentInsightStoresRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListAgentInsightStoresRequestNextTokenString, location: "querystring", location_name: "nextToken"))
+    ListAgentInsightStoresRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAgentInsightStoresRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListAgentInsightStoresRequest.struct_class = Types::ListAgentInsightStoresRequest
+
+    ListAgentInsightStoresResponse.add_member(:agent_insight_stores, Shapes::ShapeRef.new(shape: AgentInsightStoreSummaryList, required: true, location_name: "agentInsightStores"))
+    ListAgentInsightStoresResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListAgentInsightStoresResponse.struct_class = Types::ListAgentInsightStoresResponse
+
     ListAgentRuntimeEndpointsRequest.add_member(:agent_runtime_id, Shapes::ShapeRef.new(shape: AgentRuntimeId, required: true, location: "uri", location_name: "agentRuntimeId"))
     ListAgentRuntimeEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListAgentRuntimeEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -4592,10 +4682,17 @@ module Aws::BedrockAgentCoreControl
     ListConsentPortalsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListConsentPortalsResponse.struct_class = Types::ListConsentPortalsResponse
 
+    ListDatasetExamplesFilter.add_member(:generation_ids, Shapes::ShapeRef.new(shape: ListDatasetExamplesFilterGenerationIdsList, location_name: "generationIds"))
+    ListDatasetExamplesFilter.add_member(:example_fields, Shapes::ShapeRef.new(shape: ExampleFieldConditionList, location_name: "exampleFields"))
+    ListDatasetExamplesFilter.struct_class = Types::ListDatasetExamplesFilter
+
+    ListDatasetExamplesFilterGenerationIdsList.member = Shapes::ShapeRef.new(shape: DatasetGenerationId)
+
     ListDatasetExamplesRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location: "uri", location_name: "datasetId"))
-    ListDatasetExamplesRequest.add_member(:dataset_version, Shapes::ShapeRef.new(shape: DatasetVersion, location: "querystring", location_name: "datasetVersion"))
-    ListDatasetExamplesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDatasetExamplesRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
-    ListDatasetExamplesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListDatasetExamplesRequestNextTokenString, location: "querystring", location_name: "nextToken"))
+    ListDatasetExamplesRequest.add_member(:dataset_version, Shapes::ShapeRef.new(shape: DatasetVersion, location_name: "datasetVersion"))
+    ListDatasetExamplesRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ListDatasetExamplesFilter, location_name: "filter"))
+    ListDatasetExamplesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDatasetExamplesRequestMaxResultsInteger, location_name: "maxResults"))
+    ListDatasetExamplesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListDatasetExamplesRequestNextTokenString, location_name: "nextToken"))
     ListDatasetExamplesRequest.struct_class = Types::ListDatasetExamplesRequest
 
     ListDatasetExamplesResponse.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: DatasetArn, required: true, location_name: "datasetArn"))
@@ -4605,17 +4702,25 @@ module Aws::BedrockAgentCoreControl
     ListDatasetExamplesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListDatasetExamplesResponse.struct_class = Types::ListDatasetExamplesResponse
 
+    ListDatasetVersionsFilter.add_member(:example_count_by_field, Shapes::ShapeRef.new(shape: ExampleCountByFieldConditionList, location_name: "exampleCountByField"))
+    ListDatasetVersionsFilter.struct_class = Types::ListDatasetVersionsFilter
+
     ListDatasetVersionsRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location: "uri", location_name: "datasetId"))
-    ListDatasetVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
-    ListDatasetVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDatasetVersionsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListDatasetVersionsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ListDatasetVersionsFilter, location_name: "filter"))
+    ListDatasetVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListDatasetVersionsRequestNextTokenString, location_name: "nextToken"))
+    ListDatasetVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDatasetVersionsRequestMaxResultsInteger, location_name: "maxResults"))
     ListDatasetVersionsRequest.struct_class = Types::ListDatasetVersionsRequest
 
     ListDatasetVersionsResponse.add_member(:versions, Shapes::ShapeRef.new(shape: DatasetVersionSummaryList, required: true, location_name: "versions"))
     ListDatasetVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListDatasetVersionsResponse.struct_class = Types::ListDatasetVersionsResponse
 
-    ListDatasetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListDatasetsRequestNextTokenString, location: "querystring", location_name: "nextToken"))
-    ListDatasetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDatasetsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListDatasetsFilter.add_member(:example_count_by_field, Shapes::ShapeRef.new(shape: ExampleCountByFieldConditionList, location_name: "exampleCountByField"))
+    ListDatasetsFilter.struct_class = Types::ListDatasetsFilter
+
+    ListDatasetsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ListDatasetsFilter, location_name: "filter"))
+    ListDatasetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListDatasetsRequestNextTokenString, location_name: "nextToken"))
+    ListDatasetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDatasetsRequestMaxResultsInteger, location_name: "maxResults"))
     ListDatasetsRequest.struct_class = Types::ListDatasetsRequest
 
     ListDatasetsResponse.add_member(:datasets, Shapes::ShapeRef.new(shape: DatasetSummaryList, required: true, location_name: "datasets"))
@@ -6084,6 +6189,20 @@ module Aws::BedrockAgentCoreControl
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateAgentInsightStoreRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    UpdateAgentInsightStoreRequest.add_member(:agent_insight_store_id, Shapes::ShapeRef.new(shape: AgentInsightStoreId, required: true, location: "uri", location_name: "agentInsightStoreId"))
+    UpdateAgentInsightStoreRequest.add_member(:enablement_status, Shapes::ShapeRef.new(shape: AgentInsightStoreEnablementStatus, location_name: "enablementStatus"))
+    UpdateAgentInsightStoreRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: AgentInsightStoreEncryptionConfiguration, location_name: "encryptionConfiguration"))
+    UpdateAgentInsightStoreRequest.struct_class = Types::UpdateAgentInsightStoreRequest
+
+    UpdateAgentInsightStoreResponse.add_member(:agent_insight_store_arn, Shapes::ShapeRef.new(shape: AgentInsightStoreArn, required: true, location_name: "agentInsightStoreArn"))
+    UpdateAgentInsightStoreResponse.add_member(:agent_insight_store_id, Shapes::ShapeRef.new(shape: AgentInsightStoreId, required: true, location_name: "agentInsightStoreId"))
+    UpdateAgentInsightStoreResponse.add_member(:status, Shapes::ShapeRef.new(shape: AgentInsightStoreStatus, required: true, location_name: "status"))
+    UpdateAgentInsightStoreResponse.add_member(:enablement_status, Shapes::ShapeRef.new(shape: AgentInsightStoreEnablementStatus, required: true, location_name: "enablementStatus"))
+    UpdateAgentInsightStoreResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    UpdateAgentInsightStoreResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: AgentInsightStoreFailureReason, location_name: "failureReason"))
+    UpdateAgentInsightStoreResponse.struct_class = Types::UpdateAgentInsightStoreResponse
 
     UpdateAgentRuntimeEndpointRequest.add_member(:agent_runtime_id, Shapes::ShapeRef.new(shape: AgentRuntimeId, required: true, location: "uri", location_name: "agentRuntimeId"))
     UpdateAgentRuntimeEndpointRequest.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location: "uri", location_name: "endpointName"))
@@ -7661,6 +7780,19 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_agent_insight_store, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAgentInsightStore"
+        o.http_method = "GET"
+        o.http_request_uri = "/agent-insight-stores/{agentInsightStoreId}"
+        o.input = Shapes::ShapeRef.new(shape: GetAgentInsightStoreRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAgentInsightStoreResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_agent_runtime, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAgentRuntime"
         o.http_method = "GET"
@@ -8127,6 +8259,24 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:list_agent_insight_stores, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAgentInsightStores"
+        o.http_method = "POST"
+        o.http_request_uri = "/agent-insight-stores"
+        o.input = Shapes::ShapeRef.new(shape: ListAgentInsightStoresRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAgentInsightStoresResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_agent_runtime_endpoints, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAgentRuntimeEndpoints"
         o.http_method = "POST"
@@ -8350,8 +8500,8 @@ module Aws::BedrockAgentCoreControl
 
       api.add_operation(:list_dataset_examples, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDatasetExamples"
-        o.http_method = "GET"
-        o.http_request_uri = "/datasets/{datasetId}/examples"
+        o.http_method = "POST"
+        o.http_request_uri = "/datasets/{datasetId}/examples/list"
         o.input = Shapes::ShapeRef.new(shape: ListDatasetExamplesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDatasetExamplesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -8370,8 +8520,8 @@ module Aws::BedrockAgentCoreControl
 
       api.add_operation(:list_dataset_versions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDatasetVersions"
-        o.http_method = "GET"
-        o.http_request_uri = "/datasets/{datasetId}/versions"
+        o.http_method = "POST"
+        o.http_request_uri = "/datasets/{datasetId}/versions/list"
         o.input = Shapes::ShapeRef.new(shape: ListDatasetVersionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDatasetVersionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -8389,8 +8539,8 @@ module Aws::BedrockAgentCoreControl
 
       api.add_operation(:list_datasets, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDatasets"
-        o.http_method = "GET"
-        o.http_request_uri = "/datasets"
+        o.http_method = "POST"
+        o.http_request_uri = "/datasets/list"
         o.input = Shapes::ShapeRef.new(shape: ListDatasetsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDatasetsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -8995,6 +9145,21 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_agent_insight_store, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAgentInsightStore"
+        o.http_method = "PUT"
+        o.http_request_uri = "/agent-insight-stores/{agentInsightStoreId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAgentInsightStoreRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAgentInsightStoreResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

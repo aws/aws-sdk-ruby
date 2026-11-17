@@ -710,7 +710,7 @@ module Aws::SecurityHub
     #   resp.standards_subscriptions[0].standards_status #=> String, one of "PENDING", "READY", "FAILED", "DELETING", "INCOMPLETE"
     #   resp.standards_subscriptions[0].standards_controls_updatable #=> String, one of "READY_FOR_UPDATES", "NOT_READY_FOR_UPDATES"
     #   resp.standards_subscriptions[0].standards_status_reason.status_reason_code #=> String, one of "NO_AVAILABLE_CONFIGURATION_RECORDER", "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", "NO_AVAILABLE_MULTICLOUD_CONNECTOR", "INTERNAL_ERROR"
-    #   resp.standards_subscriptions[0].provider #=> String, one of "AWS", "Azure"
+    #   resp.standards_subscriptions[0].provider #=> String, one of "AWS", "Azure", "GCP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchDisableStandards AWS API Documentation
     #
@@ -790,7 +790,7 @@ module Aws::SecurityHub
     #   resp.standards_subscriptions[0].standards_status #=> String, one of "PENDING", "READY", "FAILED", "DELETING", "INCOMPLETE"
     #   resp.standards_subscriptions[0].standards_controls_updatable #=> String, one of "READY_FOR_UPDATES", "NOT_READY_FOR_UPDATES"
     #   resp.standards_subscriptions[0].standards_status_reason.status_reason_code #=> String, one of "NO_AVAILABLE_CONFIGURATION_RECORDER", "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", "NO_AVAILABLE_MULTICLOUD_CONNECTOR", "INTERNAL_ERROR"
-    #   resp.standards_subscriptions[0].provider #=> String, one of "AWS", "Azure"
+    #   resp.standards_subscriptions[0].provider #=> String, one of "AWS", "Azure", "GCP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchEnableStandards AWS API Documentation
     #
@@ -1307,7 +1307,7 @@ module Aws::SecurityHub
     #   resp.security_controls[0].parameters["NonEmptyString"].value.enum_list #=> Array
     #   resp.security_controls[0].parameters["NonEmptyString"].value.enum_list[0] #=> String
     #   resp.security_controls[0].last_update_reason #=> String
-    #   resp.security_controls[0].provider #=> String, one of "AWS", "Azure"
+    #   resp.security_controls[0].provider #=> String, one of "AWS", "Azure", "GCP"
     #   resp.unprocessed_ids #=> Array
     #   resp.unprocessed_ids[0].security_control_id #=> String
     #   resp.unprocessed_ids[0].error_code #=> String, one of "INVALID_INPUT", "ACCESS_DENIED", "NOT_FOUND", "RESOURCE_NOT_FOUND", "LIMIT_EXCEEDED"
@@ -3467,6 +3467,14 @@ module Aws::SecurityHub
     #         },
     #         azure_regions: ["NonEmptyString"], # required
     #       },
+    #       gcp: {
+    #         aws_config_connector_arn: "NonEmptyString", # required
+    #         scope_configuration: { # required
+    #           scope_type: "PROJECT", # required, accepts PROJECT, ORGANIZATION
+    #           scope_values: ["NonEmptyString"],
+    #         },
+    #         gcp_regions: ["NonEmptyString"], # required
+    #       },
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -3542,6 +3550,14 @@ module Aws::SecurityHub
     #           scope_values: ["NonEmptyString"],
     #         },
     #         azure_regions: ["NonEmptyString"], # required
+    #       },
+    #       gcp: {
+    #         aws_config_connector_arn: "NonEmptyString", # required
+    #         scope_configuration: { # required
+    #           scope_type: "PROJECT", # required, accepts PROJECT, ORGANIZATION
+    #           scope_values: ["NonEmptyString"],
+    #         },
+    #         gcp_regions: ["NonEmptyString"], # required
     #       },
     #     },
     #     kms_key_arn: "NonEmptyString",
@@ -5480,6 +5496,7 @@ module Aws::SecurityHub
     # @option params [Array<String>] :providers
     #   A list of cloud providers to filter the standards by. For example,
     #   specify `Azure` to return only standards that evaluate Azure
+    #   resources, or `GCP` to return only standards that evaluate GCP
     #   resources.
     #
     # @return [Types::DescribeStandardsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -5555,6 +5572,17 @@ module Aws::SecurityHub
     #           product: "Security Hub", 
     #         }, 
     #       }, 
+    #       {
+    #         description: "The Center for Internet Security (CIS) Google Cloud Platform Foundation Benchmark v4.0.0 is a set of security configuration best practices for Google Cloud Platform. This Security Hub standard automatically checks your compliance readiness against a subset of CIS requirements.", 
+    #         enabled_by_default: false, 
+    #         name: "CIS Google Cloud Platform Foundation Benchmark v4.0.0", 
+    #         provider: "GCP", 
+    #         standards_arn: "arn:aws:securityhub:us-west-1::standards/cis-gcp-foundation-benchmark/v/4.0.0", 
+    #         standards_managed_by: {
+    #           company: "AWS", 
+    #           product: "Security Hub", 
+    #         }, 
+    #       }, 
     #     ], 
     #   }
     #
@@ -5585,12 +5613,39 @@ module Aws::SecurityHub
     #     ], 
     #   }
     #
+    # @example Example: To get available GCP security standards
+    #
+    #   # The following example returns a list of available security standards from a specified provider.
+    #
+    #   resp = client.describe_standards({
+    #     providers: [
+    #       "GCP", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     standards: [
+    #       {
+    #         description: "The Center for Internet Security (CIS) Google Cloud Platform Foundation Benchmark v4.0.0 is a set of security configuration best practices for Google Cloud Platform. This Security Hub standard automatically checks your compliance readiness against a subset of CIS requirements.", 
+    #         enabled_by_default: false, 
+    #         name: "CIS Google Cloud Platform Foundation Benchmark v4.0.0", 
+    #         provider: "GCP", 
+    #         standards_arn: "arn:aws:securityhub:us-west-1::standards/cis-gcp-foundation-benchmark/v/4.0.0", 
+    #         standards_managed_by: {
+    #           company: "AWS", 
+    #           product: "Security Hub", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_standards({
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     providers: ["AWS"], # accepts AWS, Azure
+    #     providers: ["AWS"], # accepts AWS, Azure, GCP
     #   })
     #
     # @example Response structure
@@ -5600,7 +5655,7 @@ module Aws::SecurityHub
     #   resp.standards[0].name #=> String
     #   resp.standards[0].description #=> String
     #   resp.standards[0].enabled_by_default #=> Boolean
-    #   resp.standards[0].provider #=> String, one of "AWS", "Azure"
+    #   resp.standards[0].provider #=> String, one of "AWS", "Azure", "GCP"
     #   resp.standards[0].standards_managed_by.company #=> String
     #   resp.standards[0].standards_managed_by.product #=> String
     #   resp.next_token #=> String
@@ -6693,6 +6748,12 @@ module Aws::SecurityHub
     #   resp.provider_detail.azure.scope_configuration.scope_values[0] #=> String
     #   resp.provider_detail.azure.azure_regions #=> Array
     #   resp.provider_detail.azure.azure_regions[0] #=> String
+    #   resp.provider_detail.gcp.aws_config_connector_arn #=> String
+    #   resp.provider_detail.gcp.scope_configuration.scope_type #=> String, one of "PROJECT", "ORGANIZATION"
+    #   resp.provider_detail.gcp.scope_configuration.scope_values #=> Array
+    #   resp.provider_detail.gcp.scope_configuration.scope_values[0] #=> String
+    #   resp.provider_detail.gcp.gcp_regions #=> Array
+    #   resp.provider_detail.gcp.gcp_regions[0] #=> String
     #   resp.created_by #=> String
     #   resp.enablement_status #=> String, one of "ENABLED", "PENDING_ENABLEMENT", "PENDING_UPDATE", "PENDING_DELETION"
     #
@@ -6760,6 +6821,12 @@ module Aws::SecurityHub
     #   resp.provider_detail.azure.scope_configuration.scope_values[0] #=> String
     #   resp.provider_detail.azure.azure_regions #=> Array
     #   resp.provider_detail.azure.azure_regions[0] #=> String
+    #   resp.provider_detail.gcp.aws_config_connector_arn #=> String
+    #   resp.provider_detail.gcp.scope_configuration.scope_type #=> String, one of "PROJECT", "ORGANIZATION"
+    #   resp.provider_detail.gcp.scope_configuration.scope_values #=> Array
+    #   resp.provider_detail.gcp.scope_configuration.scope_values[0] #=> String
+    #   resp.provider_detail.gcp.gcp_regions #=> Array
+    #   resp.provider_detail.gcp.gcp_regions[0] #=> String
     #   resp.enablement_status #=> String, one of "ENABLED", "PENDING_ENABLEMENT", "FAILED_TO_ENABLE", "PENDING_UPDATE", "FAILED_TO_UPDATE", "PENDING_DELETION", "FAILED_TO_DELETE"
     #   resp.enablement_status_reason #=> String
     #
@@ -6793,7 +6860,8 @@ module Aws::SecurityHub
     # @option params [Array<String>] :providers
     #   A list of cloud providers to filter the enabled standards by. For
     #   example, specify `Azure` to return only enabled standards that
-    #   evaluate Azure resources.
+    #   evaluate Azure resources, or `GCP` to return only enabled standards
+    #   that evaluate GCP resources.
     #
     # @return [Types::GetEnabledStandardsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6833,7 +6901,7 @@ module Aws::SecurityHub
     #     standards_subscription_arns: ["NonEmptyString"],
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     providers: ["AWS"], # accepts AWS, Azure
+    #     providers: ["AWS"], # accepts AWS, Azure, GCP
     #   })
     #
     # @example Response structure
@@ -6846,7 +6914,7 @@ module Aws::SecurityHub
     #   resp.standards_subscriptions[0].standards_status #=> String, one of "PENDING", "READY", "FAILED", "DELETING", "INCOMPLETE"
     #   resp.standards_subscriptions[0].standards_controls_updatable #=> String, one of "READY_FOR_UPDATES", "NOT_READY_FOR_UPDATES"
     #   resp.standards_subscriptions[0].standards_status_reason.status_reason_code #=> String, one of "NO_AVAILABLE_CONFIGURATION_RECORDER", "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED", "NO_AVAILABLE_MULTICLOUD_CONNECTOR", "INTERNAL_ERROR"
-    #   resp.standards_subscriptions[0].provider #=> String, one of "AWS", "Azure"
+    #   resp.standards_subscriptions[0].provider #=> String, one of "AWS", "Azure", "GCP"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetEnabledStandards AWS API Documentation
@@ -9448,7 +9516,7 @@ module Aws::SecurityHub
     #   resp.items[0].resource.id #=> String
     #   resp.items[0].resource.resource_guid #=> String
     #   resp.items[0].resource.resource_region #=> String
-    #   resp.items[0].resource.cloud_provider #=> String, one of "Azure", "AWS"
+    #   resp.items[0].resource.cloud_provider #=> String, one of "Azure", "AWS", "GCP"
     #   resp.items[0].status #=> String, one of "New", "Updated", "Resolved"
     #   resp.items[0].trait.type #=> String
     #   resp.items[0].trait.title #=> String
@@ -9907,7 +9975,7 @@ module Aws::SecurityHub
     #   resp.resources[0].resource_info.ai_details.self_hosted_total_ai_resource_count #=> Integer
     #   resp.resources[0].resource_criticality #=> String, one of "Very High", "High", "Medium", "Low", "Unknown"
     #   resp.resources[0].criticality_sources #=> Array
-    #   resp.resources[0].criticality_sources[0].source #=> String, one of "AutomationRule", "ResourceName", "TagInference"
+    #   resp.resources[0].criticality_sources[0].source #=> String, one of "AutomationRule", "ResourceName", "TagInference", "CloudWatchTelemetryInference", "InstalledSoftwareAndPackageInference"
     #   resp.resources[0].criticality_sources[0].reason #=> String
     #   resp.next_token #=> String
     #
@@ -10012,7 +10080,7 @@ module Aws::SecurityHub
     #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum_list.max_items #=> Integer
     #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum_list.allowed_values #=> Array
     #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum_list.allowed_values[0] #=> String
-    #   resp.security_control_definition.provider #=> String, one of "AWS", "Azure"
+    #   resp.security_control_definition.provider #=> String, one of "AWS", "Azure", "GCP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSecurityControlDefinition AWS API Documentation
     #
@@ -10876,7 +10944,7 @@ module Aws::SecurityHub
     #   resp = client.list_connectors({
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     provider_name: "AZURE", # accepts AZURE
+    #     provider_name: "AZURE", # accepts AZURE, GCP
     #     connector_status: "CONNECTED", # accepts CONNECTED, DEGRADED, FAILED_TO_CONNECT, UNKNOWN
     #     enablement_status: "ENABLED", # accepts ENABLED, PENDING_ENABLEMENT, PENDING_UPDATE, PENDING_DELETION
     #   })
@@ -10889,7 +10957,7 @@ module Aws::SecurityHub
     #   resp.connectors[0].connector_id #=> String
     #   resp.connectors[0].name #=> String
     #   resp.connectors[0].description #=> String
-    #   resp.connectors[0].provider_summary.provider_name #=> String, one of "AZURE"
+    #   resp.connectors[0].provider_summary.provider_name #=> String, one of "AZURE", "GCP"
     #   resp.connectors[0].provider_summary.connector_status #=> String, one of "CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "UNKNOWN"
     #   resp.connectors[0].provider_summary.provider_configuration.azure.aws_config_connector_arn #=> String
     #   resp.connectors[0].provider_summary.provider_configuration.azure.scope_configuration.scope_type #=> String, one of "TENANT", "SUBSCRIPTION"
@@ -10897,6 +10965,12 @@ module Aws::SecurityHub
     #   resp.connectors[0].provider_summary.provider_configuration.azure.scope_configuration.scope_values[0] #=> String
     #   resp.connectors[0].provider_summary.provider_configuration.azure.azure_regions #=> Array
     #   resp.connectors[0].provider_summary.provider_configuration.azure.azure_regions[0] #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.aws_config_connector_arn #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.scope_configuration.scope_type #=> String, one of "PROJECT", "ORGANIZATION"
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.scope_configuration.scope_values #=> Array
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.scope_configuration.scope_values[0] #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.gcp_regions #=> Array
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.gcp_regions[0] #=> String
     #   resp.connectors[0].created_at #=> Time
     #   resp.connectors[0].created_by #=> String
     #   resp.connectors[0].enablement_status #=> String, one of "ENABLED", "PENDING_ENABLEMENT", "PENDING_UPDATE", "PENDING_DELETION"
@@ -10938,7 +11012,7 @@ module Aws::SecurityHub
     #   resp = client.list_connectors_v2({
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     provider_name: "JIRA_CLOUD", # accepts JIRA_CLOUD, SERVICENOW, AZURE
+    #     provider_name: "JIRA_CLOUD", # accepts JIRA_CLOUD, SERVICENOW, AZURE, GCP
     #     connector_status: "CONNECTED", # accepts CONNECTED, DEGRADED, FAILED_TO_CONNECT, PENDING_AUTHORIZATION, PENDING_CONFIGURATION, UNKNOWN
     #     enablement_status: "ENABLED", # accepts ENABLED, PENDING_ENABLEMENT, FAILED_TO_ENABLE, PENDING_UPDATE, FAILED_TO_UPDATE, PENDING_DELETION, FAILED_TO_DELETE
     #   })
@@ -10951,7 +11025,7 @@ module Aws::SecurityHub
     #   resp.connectors[0].connector_id #=> String
     #   resp.connectors[0].name #=> String
     #   resp.connectors[0].description #=> String
-    #   resp.connectors[0].provider_summary.provider_name #=> String, one of "JIRA_CLOUD", "SERVICENOW", "AZURE"
+    #   resp.connectors[0].provider_summary.provider_name #=> String, one of "JIRA_CLOUD", "SERVICENOW", "AZURE", "GCP"
     #   resp.connectors[0].provider_summary.connector_status #=> String, one of "CONNECTED", "DEGRADED", "FAILED_TO_CONNECT", "PENDING_AUTHORIZATION", "PENDING_CONFIGURATION", "UNKNOWN"
     #   resp.connectors[0].provider_summary.provider_configuration.jira_cloud.cloud_id #=> String
     #   resp.connectors[0].provider_summary.provider_configuration.jira_cloud.project_key #=> String
@@ -10967,6 +11041,12 @@ module Aws::SecurityHub
     #   resp.connectors[0].provider_summary.provider_configuration.azure.scope_configuration.scope_values[0] #=> String
     #   resp.connectors[0].provider_summary.provider_configuration.azure.azure_regions #=> Array
     #   resp.connectors[0].provider_summary.provider_configuration.azure.azure_regions[0] #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.aws_config_connector_arn #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.scope_configuration.scope_type #=> String, one of "PROJECT", "ORGANIZATION"
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.scope_configuration.scope_values #=> Array
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.scope_configuration.scope_values[0] #=> String
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.gcp_regions #=> Array
+    #   resp.connectors[0].provider_summary.provider_configuration.gcp.gcp_regions[0] #=> String
     #   resp.connectors[0].created_at #=> Time
     #   resp.connectors[0].enablement_status #=> String, one of "ENABLED", "PENDING_ENABLEMENT", "FAILED_TO_ENABLE", "PENDING_UPDATE", "FAILED_TO_UPDATE", "PENDING_DELETION", "FAILED_TO_DELETE"
     #   resp.connectors[0].enablement_status_reason #=> String
@@ -11209,7 +11289,7 @@ module Aws::SecurityHub
     #   resp.resource.id #=> String
     #   resp.resource.resource_guid #=> String
     #   resp.resource.resource_region #=> String
-    #   resp.resource.cloud_provider #=> String, one of "Azure", "AWS"
+    #   resp.resource.cloud_provider #=> String, one of "Azure", "AWS", "GCP"
     #   resp.total_count #=> Integer
     #   resp.trait.type #=> String
     #   resp.trait.title #=> String
@@ -11615,7 +11695,8 @@ module Aws::SecurityHub
     # @option params [Array<String>] :providers
     #   A list of cloud providers to filter the security control definitions
     #   by. For example, specify `Azure` to return only controls that evaluate
-    #   Azure resources.
+    #   Azure resources, or `GCP` to return only controls that evaluate GCP
+    #   resources.
     #
     # @return [Types::ListSecurityControlDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11678,10 +11759,21 @@ module Aws::SecurityHub
     #         ], 
     #         description: "This control checks whether Azure Container Apps have managed identity enabled. The control fails if the Container App has a system-assigned or user-assigned managed identity enabled.", 
     #         provider: "Azure", 
-    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/Azure.App.1/remediation", 
+    #         remediation_url: "https://learn.microsoft.com/en-us/azure/container-apps/managed-identity", 
     #         security_control_id: "Azure.App.1", 
     #         severity_rating: "MEDIUM", 
     #         title: "Azure Container Apps with managed identity enabled should follow least privilege", 
+    #       }, 
+    #       {
+    #         current_region_availability: "AVAILABLE", 
+    #         customizable_properties: [
+    #         ], 
+    #         description: "This control checks whether any GCP API keys exist. The control fails if an API key exists.", 
+    #         provider: "GCP", 
+    #         remediation_url: "https://cloud.google.com/sdk/gcloud/reference/services/api-keys/delete", 
+    #         security_control_id: "GCP.ApiKeys.1", 
+    #         severity_rating: "MEDIUM", 
+    #         title: "GCP API keys should not exist", 
     #       }, 
     #     ], 
     #   }
@@ -11707,7 +11799,7 @@ module Aws::SecurityHub
     #         ], 
     #         description: "This control checks whether Azure Container Apps have managed identity enabled. The control fails if the Container App has a system-assigned or user-assigned managed identity enabled.", 
     #         provider: "Azure", 
-    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/Azure.App.1/remediation", 
+    #         remediation_url: "https://learn.microsoft.com/en-us/azure/container-apps/managed-identity", 
     #         security_control_id: "Azure.App.1", 
     #         severity_rating: "MEDIUM", 
     #         title: "Azure Container Apps with managed identity enabled should follow least privilege", 
@@ -11718,7 +11810,7 @@ module Aws::SecurityHub
     #         ], 
     #         description: "This control checks whether an Azure Container App passes Azure SDK credentials as plain-text container environment variables. The control fails if any container (including initContainers) defines AZURE_CLIENT_SECRET, AZURE_CLIENT_CERTIFICATE_PASSWORD, or AZURE_PASSWORD as a plain-text environment variable instead of referencing a secret via secretRef.", 
     #         provider: "Azure", 
-    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/Azure.App.2/remediation", 
+    #         remediation_url: "https://learn.microsoft.com/en-us/azure/container-apps/manage-secrets", 
     #         security_control_id: "Azure.App.2", 
     #         severity_rating: "CRITICAL", 
     #         title: "Azure Container Apps should not pass Azure SDK credentials as environment variables", 
@@ -11729,10 +11821,61 @@ module Aws::SecurityHub
     #         ], 
     #         description: "This control checks whether Azure Container Apps have external ingress configured. The control fails if the Container App ingress is set to accept traffic from anywhere (external).", 
     #         provider: "Azure", 
-    #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/Azure.App.3/remediation", 
+    #         remediation_url: "https://learn.microsoft.com/en-us/azure/container-apps/ingress-how-to", 
     #         security_control_id: "Azure.App.3", 
     #         severity_rating: "HIGH", 
     #         title: "Azure Container Apps should not have external ingress enabled", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To list GCP security control definitions
+    #
+    #   # The following example lists security control definitions for a specified provider.
+    #
+    #   resp = client.list_security_control_definitions({
+    #     max_results: 3, 
+    #     providers: [
+    #       "GCP", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "U2FsdGVkX1...", 
+    #     security_control_definitions: [
+    #       {
+    #         current_region_availability: "AVAILABLE", 
+    #         customizable_properties: [
+    #         ], 
+    #         description: "This control checks whether any GCP API keys exist. The control fails if an API key exists.", 
+    #         provider: "GCP", 
+    #         remediation_url: "https://cloud.google.com/sdk/gcloud/reference/services/api-keys/delete", 
+    #         security_control_id: "GCP.ApiKeys.1", 
+    #         severity_rating: "MEDIUM", 
+    #         title: "GCP API keys should not exist", 
+    #       }, 
+    #       {
+    #         current_region_availability: "AVAILABLE", 
+    #         customizable_properties: [
+    #         ], 
+    #         description: "This control checks whether a GCP API key restricts which hosts or apps may use it. The control fails if the key has no HTTP referrer, IP address, Android app, or iOS app restriction, or if any allowed HTTP referrer or IP address is effectively open. A referrer is effectively open when its host is * or a wildcard over a top-level domain, such as https://* or *.com. An IP address is effectively open when it allows any host, such as 0.0.0.0, 0.0.0.0/0, ::, or ::/0. A single open entry fails the key even when specific entries are also listed, because the key accepts a request that matches any entry.", 
+    #         provider: "GCP", 
+    #         remediation_url: "https://cloud.google.com/docs/authentication/api-keys#adding-application-restrictions", 
+    #         security_control_id: "GCP.ApiKeys.2", 
+    #         severity_rating: "MEDIUM", 
+    #         title: "GCP API keys should be restricted to specified hosts and apps", 
+    #       }, 
+    #       {
+    #         current_region_availability: "AVAILABLE", 
+    #         customizable_properties: [
+    #         ], 
+    #         description: "This control checks whether a GCP API key is restricted to only the specific APIs an application needs. The control fails if the key declares no restrictions.apiTargets entries, or if any entry targets the broad cloudapis.googleapis.com service, which allows the key to call every enabled service.", 
+    #         provider: "GCP", 
+    #         remediation_url: "https://cloud.google.com/docs/authentication/api-keys#adding-api-restrictions", 
+    #         security_control_id: "GCP.ApiKeys.3", 
+    #         severity_rating: "HIGH", 
+    #         title: "GCP API keys should be restricted to only the APIs an application needs", 
     #       }, 
     #     ], 
     #   }
@@ -11743,7 +11886,7 @@ module Aws::SecurityHub
     #     standards_arn: "NonEmptyString",
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     providers: ["AWS"], # accepts AWS, Azure
+    #     providers: ["AWS"], # accepts AWS, Azure, GCP
     #   })
     #
     # @example Response structure
@@ -11787,7 +11930,7 @@ module Aws::SecurityHub
     #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum_list.max_items #=> Integer
     #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum_list.allowed_values #=> Array
     #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum_list.allowed_values[0] #=> String
-    #   resp.security_control_definitions[0].provider #=> String, one of "AWS", "Azure"
+    #   resp.security_control_definitions[0].provider #=> String, one of "AWS", "Azure", "GCP"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListSecurityControlDefinitions AWS API Documentation
@@ -13046,6 +13189,13 @@ module Aws::SecurityHub
     #         },
     #         azure_regions: ["NonEmptyString"], # required
     #       },
+    #       gcp: {
+    #         scope_configuration: { # required
+    #           scope_type: "PROJECT", # required, accepts PROJECT, ORGANIZATION
+    #           scope_values: ["NonEmptyString"],
+    #         },
+    #         gcp_regions: ["NonEmptyString"], # required
+    #       },
     #     },
     #   })
     #
@@ -13098,6 +13248,13 @@ module Aws::SecurityHub
     #           scope_values: ["NonEmptyString"],
     #         },
     #         azure_regions: ["NonEmptyString"], # required
+    #       },
+    #       gcp: {
+    #         scope_configuration: { # required
+    #           scope_type: "PROJECT", # required, accepts PROJECT, ORGANIZATION
+    #           scope_values: ["NonEmptyString"],
+    #         },
+    #         gcp_regions: ["NonEmptyString"], # required
     #       },
     #     },
     #   })
@@ -15061,7 +15218,7 @@ module Aws::SecurityHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.180.0'
+      context[:gem_version] = '1.181.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

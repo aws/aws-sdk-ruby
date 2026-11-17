@@ -574,6 +574,49 @@ module Aws::ElementalInference
     #           contextual_metadata: {
     #             summary_generation: "ENABLED", # accepts ENABLED, DISABLED
     #             extended_analysis: "ENABLED", # accepts ENABLED, DISABLED
+    #             custom_questions: {
+    #               shot: {
+    #                 question_set_id: "QuestionSetId", # required
+    #                 version: "QuestionSetVersion", # required
+    #               },
+    #               scene: {
+    #                 question_set_id: "QuestionSetId", # required
+    #                 version: "QuestionSetVersion", # required
+    #               },
+    #             },
+    #           },
+    #           function: {
+    #             function_arn: "FunctionArn", # required
+    #             trigger: { # required
+    #               fixed_interval: {
+    #                 interval_seconds: 1, # required
+    #               },
+    #               per_shot: {
+    #               },
+    #               per_scene: {
+    #               },
+    #               per_clip: {
+    #               },
+    #             },
+    #             frame_settings: {
+    #               frame_sampling: { # required
+    #                 mode: "FIRST", # required, accepts FIRST, UNIFORM, LAST
+    #                 count: 1,
+    #               },
+    #               frame_size: {
+    #                 width_pixels: 1, # required
+    #                 height_pixels: 1, # required
+    #               },
+    #             },
+    #             subtitling_settings: {
+    #               output_name: "ResourceName", # required
+    #             },
+    #             contextual_metadata_settings: {
+    #               output_name: "ResourceName", # required
+    #             },
+    #             clipping_settings: {
+    #               output_name: "ResourceName", # required
+    #             },
     #           },
     #         },
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
@@ -735,6 +778,49 @@ module Aws::ElementalInference
     #           contextual_metadata: {
     #             summary_generation: "ENABLED", # accepts ENABLED, DISABLED
     #             extended_analysis: "ENABLED", # accepts ENABLED, DISABLED
+    #             custom_questions: {
+    #               shot: {
+    #                 question_set_id: "QuestionSetId", # required
+    #                 version: "QuestionSetVersion", # required
+    #               },
+    #               scene: {
+    #                 question_set_id: "QuestionSetId", # required
+    #                 version: "QuestionSetVersion", # required
+    #               },
+    #             },
+    #           },
+    #           function: {
+    #             function_arn: "FunctionArn", # required
+    #             trigger: { # required
+    #               fixed_interval: {
+    #                 interval_seconds: 1, # required
+    #               },
+    #               per_shot: {
+    #               },
+    #               per_scene: {
+    #               },
+    #               per_clip: {
+    #               },
+    #             },
+    #             frame_settings: {
+    #               frame_sampling: { # required
+    #                 mode: "FIRST", # required, accepts FIRST, UNIFORM, LAST
+    #                 count: 1,
+    #               },
+    #               frame_size: {
+    #                 width_pixels: 1, # required
+    #                 height_pixels: 1, # required
+    #               },
+    #             },
+    #             subtitling_settings: {
+    #               output_name: "ResourceName", # required
+    #             },
+    #             contextual_metadata_settings: {
+    #               output_name: "ResourceName", # required
+    #             },
+    #             clipping_settings: {
+    #               output_name: "ResourceName", # required
+    #             },
     #           },
     #         },
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
@@ -768,6 +854,19 @@ module Aws::ElementalInference
     #   resp.outputs[0].output_config.subtitling.profanity_filter #=> String, one of "DISABLED", "CENSOR", "DROP"
     #   resp.outputs[0].output_config.contextual_metadata.summary_generation #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].output_config.contextual_metadata.extended_analysis #=> String, one of "ENABLED", "DISABLED"
+    #   resp.outputs[0].output_config.contextual_metadata.custom_questions.shot.question_set_id #=> String
+    #   resp.outputs[0].output_config.contextual_metadata.custom_questions.shot.version #=> String
+    #   resp.outputs[0].output_config.contextual_metadata.custom_questions.scene.question_set_id #=> String
+    #   resp.outputs[0].output_config.contextual_metadata.custom_questions.scene.version #=> String
+    #   resp.outputs[0].output_config.function.function_arn #=> String
+    #   resp.outputs[0].output_config.function.trigger.fixed_interval.interval_seconds #=> Integer
+    #   resp.outputs[0].output_config.function.frame_settings.frame_sampling.mode #=> String, one of "FIRST", "UNIFORM", "LAST"
+    #   resp.outputs[0].output_config.function.frame_settings.frame_sampling.count #=> Integer
+    #   resp.outputs[0].output_config.function.frame_settings.frame_size.width_pixels #=> Integer
+    #   resp.outputs[0].output_config.function.frame_settings.frame_size.height_pixels #=> Integer
+    #   resp.outputs[0].output_config.function.subtitling_settings.output_name #=> String
+    #   resp.outputs[0].output_config.function.contextual_metadata_settings.output_name #=> String
+    #   resp.outputs[0].output_config.function.clipping_settings.output_name #=> String
     #   resp.outputs[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].description #=> String
     #   resp.outputs[0].from_association #=> Boolean
@@ -783,6 +882,391 @@ module Aws::ElementalInference
     # @param [Hash] params ({})
     def create_feed(params = {}, options = {})
       req = build_request(:create_feed, params)
+      req.send_request(options)
+    end
+
+    # Creates a function. A function analyzes a feed by building a request
+    # from the feed's media and metadata, optionally sending that request
+    # to an Amazon Bedrock model in your account, and publishing the result
+    # to the feed's metadata timeline.
+    #
+    # A function runs only after you attach it to a feed as a function
+    # output. For more information, see [Using functions][1] in the *AWS
+    # Elemental Inference User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/elemental-inference/latest/userguide/functions.html
+    #
+    # @option params [required, String] :name
+    #   A name for this function.
+    #
+    # @option params [required, Types::FunctionTarget] :target
+    #   The destination for the request that the function builds.
+    #
+    # @option params [required, String] :request_expression
+    #   The JSONata expression that builds the request. Elemental Inference
+    #   evaluates it against the media object of the feed, which holds the
+    #   media and metadata that the function asked for. Maximum length: 5,120
+    #   characters.
+    #
+    #   When you save the function, Elemental Inference evaluates the
+    #   expression against sample media and rejects it if the evaluation
+    #   fails. For a Bedrock target, the result must be a JSON object;
+    #   Elemental Inference doesn't check that the object is a valid request
+    #   body for the model. The expression can reference at most one of
+    #   media.transcript, media.contextual, and media.clip. For a passthrough
+    #   target, it can't reference media.frames.
+    #
+    # @option params [String] :response_expression
+    #   The JSONata expression that selects what to store. Elemental Inference
+    #   evaluates it against the result as its root: the model response for a
+    #   Bedrock target, or the output of the request expression for a
+    #   passthrough target. If a function has no response expression,
+    #   Elemental Inference stores the entire result. Maximum length: 5,120
+    #   characters.
+    #
+    #   When you save the function, Elemental Inference checks that the
+    #   expression is valid JSONata. For a passthrough target, it also
+    #   evaluates the request and response expressions together against sample
+    #   media, and rejects them if they produce no value.
+    #
+    # @option params [String] :description
+    #   The description of the function. Maximum length: 1,024 characters.
+    #
+    # @option params [String] :event_bridge_delivery
+    #   Specifies whether Elemental Inference also sends this function's
+    #   results to Amazon EventBridge. Elemental Inference sends a result only
+    #   when the result is a JSON object with a top-level `eventBridge` field
+    #   set to `true`. It sends the result, unchanged, as a Function Metadata
+    #   Generated event to the default event bus in your account, after the
+    #   result is available from GetMetadata. If the result is larger than 64
+    #   KB, the event has `resultOmitted` set to `true` in place of the
+    #   result.
+    #
+    #   Valid values:
+    #
+    #   * ENABLED – Elemental Inference sends each marked result as an event.
+    #
+    #   * DISABLED (default) – Elemental Inference doesn't send events.
+    #
+    #   For a Bedrock target, ENABLED requires a response expression, because
+    #   the model response itself never has a top-level `eventBridge` field. A
+    #   feed output that runs a function with ENABLED can't use a
+    #   fixedInterval trigger shorter than 4 seconds.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to associate with this function.
+    #
+    # @return [Types::CreateFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFunctionResponse#name #name} => String
+    #   * {Types::CreateFunctionResponse#target #target} => Types::FunctionTarget
+    #   * {Types::CreateFunctionResponse#request_expression #request_expression} => String
+    #   * {Types::CreateFunctionResponse#response_expression #response_expression} => String
+    #   * {Types::CreateFunctionResponse#description #description} => String
+    #   * {Types::CreateFunctionResponse#event_bridge_delivery #event_bridge_delivery} => String
+    #   * {Types::CreateFunctionResponse#arn #arn} => String
+    #   * {Types::CreateFunctionResponse#id #id} => String
+    #   * {Types::CreateFunctionResponse#status #status} => String
+    #   * {Types::CreateFunctionResponse#references #references} => Array&lt;String&gt;
+    #   * {Types::CreateFunctionResponse#context_types #context_types} => Array&lt;String&gt;
+    #   * {Types::CreateFunctionResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_function({
+    #     name: "ResourceName", # required
+    #     target: { # required
+    #       bedrock: {
+    #         api: "INVOKE_MODEL", # required, accepts INVOKE_MODEL
+    #         model: "BedrockFunctionTargetModelString", # required
+    #       },
+    #       passthrough: {
+    #       },
+    #     },
+    #     request_expression: "CreateFunctionRequestRequestExpressionString", # required
+    #     response_expression: "JsonataExpression",
+    #     description: "FunctionDescription",
+    #     event_bridge_delivery: "ENABLED", # accepts ENABLED, DISABLED
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.target.bedrock.api #=> String, one of "INVOKE_MODEL"
+    #   resp.target.bedrock.model #=> String
+    #   resp.request_expression #=> String
+    #   resp.response_expression #=> String
+    #   resp.description #=> String
+    #   resp.event_bridge_delivery #=> String, one of "ENABLED", "DISABLED"
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "REFERENCED", "DELETING", "DELETED"
+    #   resp.references #=> Array
+    #   resp.references[0] #=> String
+    #   resp.context_types #=> Array
+    #   resp.context_types[0] #=> String, one of "FRAMES", "SUBTITLES", "CONTEXTUAL_METADATA", "CLIP_METADATA"
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/CreateFunction AWS API Documentation
+    #
+    # @overload create_function(params = {})
+    # @param [Hash] params ({})
+    def create_function(params = {}, options = {})
+      req = build_request(:create_function, params)
+      req.send_request(options)
+    end
+
+    # Creates a question set. Use a question set to get answers about
+    # content that's specific to your business, in addition to the built-in
+    # contextual metadata classifications. A question set contains your own
+    # questions. You ask Elemental Inference these questions about each shot
+    # or scene of the media in a contextual metadata output, and Elemental
+    # Inference answers each question with scores. To use a question set,
+    # reference it in the customQuestions property of the contextual
+    # metadata configuration of a feed output.
+    #
+    # CreateQuestionSet creates the question set with a DRAFT version that
+    # contains the questions in the request. To change DRAFT, use
+    # UpdateQuestionSet. To publish DRAFT as a numbered version, use
+    # CreateQuestionSetVersion. You can't change a published version.
+    #
+    # A question set can contain the following types of questions. You must
+    # specify at least one question.
+    #
+    # * yesNo – Elemental Inference answers yes or no.
+    #
+    # * yesNoPerOption – Elemental Inference answers yes or no for each
+    #   option.
+    #
+    # * chooseOne – Elemental Inference chooses one of the options.
+    #
+    # A version can contain up to 100 scored items, where each yesNo
+    # question, each option of a yesNoPerOption question, and each chooseOne
+    # question counts as one item. The name of each question must be unique
+    # across all three types.
+    #
+    # @option params [Array<Types::YesNoQuestion>] :yes_no
+    #   An array of questions that Elemental Inference answers with yes or no.
+    #   You can specify up to 50 yesNo questions. An empty array is the same
+    #   as omitting this property.
+    #
+    # @option params [Array<Types::YesNoPerOptionQuestion>] :yes_no_per_option
+    #   An array of questions that you ask about each of their options.
+    #   Elemental Inference answers yes or no for each option. You can specify
+    #   up to 10 yesNoPerOption questions. An empty array is the same as
+    #   omitting this property.
+    #
+    # @option params [Array<Types::ChooseOneQuestion>] :choose_one
+    #   An array of questions that Elemental Inference answers by choosing one
+    #   of their options. You can specify up to 10 chooseOne questions. An
+    #   empty array is the same as omitting this property.
+    #
+    # @option params [required, String] :name
+    #   A user-friendly name for this question set.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Optional tags to associate with the question set. You can also add
+    #   tags later, using TagResource.
+    #
+    # @return [Types::CreateQuestionSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateQuestionSetResponse#yes_no #yes_no} => Array&lt;Types::YesNoQuestion&gt;
+    #   * {Types::CreateQuestionSetResponse#yes_no_per_option #yes_no_per_option} => Array&lt;Types::YesNoPerOptionQuestion&gt;
+    #   * {Types::CreateQuestionSetResponse#choose_one #choose_one} => Array&lt;Types::ChooseOneQuestion&gt;
+    #   * {Types::CreateQuestionSetResponse#arn #arn} => String
+    #   * {Types::CreateQuestionSetResponse#id #id} => String
+    #   * {Types::CreateQuestionSetResponse#name #name} => String
+    #   * {Types::CreateQuestionSetResponse#version #version} => String
+    #   * {Types::CreateQuestionSetResponse#description #description} => String
+    #   * {Types::CreateQuestionSetResponse#latest_version #latest_version} => String
+    #   * {Types::CreateQuestionSetResponse#sha256 #sha256} => String
+    #   * {Types::CreateQuestionSetResponse#references #references} => Array&lt;String&gt;
+    #   * {Types::CreateQuestionSetResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_question_set({
+    #     yes_no: [
+    #       {
+    #         name: "QuestionName", # required
+    #         question: "QuestionText", # required
+    #       },
+    #     ],
+    #     yes_no_per_option: [
+    #       {
+    #         name: "QuestionName", # required
+    #         question: "QuestionText", # required
+    #         options: [ # required
+    #           {
+    #             name: "OptionName", # required
+    #             text: "OptionText", # required
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     choose_one: [
+    #       {
+    #         name: "QuestionName", # required
+    #         question: "QuestionText", # required
+    #         options: [ # required
+    #           {
+    #             name: "OptionName", # required
+    #             text: "OptionText", # required
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     name: "ResourceName", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.yes_no #=> Array
+    #   resp.yes_no[0].name #=> String
+    #   resp.yes_no[0].question #=> String
+    #   resp.yes_no_per_option #=> Array
+    #   resp.yes_no_per_option[0].name #=> String
+    #   resp.yes_no_per_option[0].question #=> String
+    #   resp.yes_no_per_option[0].options #=> Array
+    #   resp.yes_no_per_option[0].options[0].name #=> String
+    #   resp.yes_no_per_option[0].options[0].text #=> String
+    #   resp.choose_one #=> Array
+    #   resp.choose_one[0].name #=> String
+    #   resp.choose_one[0].question #=> String
+    #   resp.choose_one[0].options #=> Array
+    #   resp.choose_one[0].options[0].name #=> String
+    #   resp.choose_one[0].options[0].text #=> String
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.version #=> String
+    #   resp.description #=> String
+    #   resp.latest_version #=> String
+    #   resp.sha256 #=> String
+    #   resp.references #=> Array
+    #   resp.references[0] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/CreateQuestionSet AWS API Documentation
+    #
+    # @overload create_question_set(params = {})
+    # @param [Hash] params ({})
+    def create_question_set(params = {}, options = {})
+      req = build_request(:create_question_set, params)
+      req.send_request(options)
+    end
+
+    # Publishes the DRAFT version of the specified question set as a new
+    # version. The new version has the same name and questions as DRAFT, and
+    # you can't change it. DRAFT doesn't change, so you can continue to
+    # update it.
+    #
+    # Version numbers start at 1, and each new version has the next number.
+    # Elemental Inference never reuses a version number, even after you
+    # delete that version.
+    #
+    # If DRAFT hasn't changed since the latest published version, Elemental
+    # Inference doesn't create a version. Instead, it returns the latest
+    # version. A change to the name of the question set counts as a change
+    # to DRAFT.
+    #
+    # A question set can have a limited number of versions. If the question
+    # set already has the maximum number of versions, Elemental Inference
+    # returns ServiceQuotaExceededException. To free space for a new
+    # version, delete a version that you no longer need, or create a new
+    # question set.
+    #
+    # @option params [required, String] :id
+    #   The ID of the question set whose DRAFT version you want to publish.
+    #
+    # @option params [String] :sha256
+    #   The SHA-256 hash of the DRAFT version that you want to publish, as
+    #   returned by GetQuestionSet or UpdateQuestionSet. If you specify this
+    #   value, Elemental Inference publishes DRAFT only if its current hash
+    #   matches. If it doesn't match, because DRAFT changed after you
+    #   retrieved it, the request fails with ConflictException.
+    #
+    #   If you don't specify this value, Elemental Inference publishes DRAFT
+    #   as it is when it receives the request.
+    #
+    # @option params [String] :description
+    #   A description of the new version. You can't change the description
+    #   after Elemental Inference publishes the version. If DRAFT hasn't
+    #   changed since the latest version, Elemental Inference ignores this
+    #   value and returns the latest version with its existing description.
+    #
+    #   The description can be up to 256 characters. It can contain the
+    #   letters A-Z and a-z, the digits 0-9, underscores, spaces, and the
+    #   following characters: `- . ' , @ : ;`.
+    #
+    # @return [Types::CreateQuestionSetVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateQuestionSetVersionResponse#yes_no #yes_no} => Array&lt;Types::YesNoQuestion&gt;
+    #   * {Types::CreateQuestionSetVersionResponse#yes_no_per_option #yes_no_per_option} => Array&lt;Types::YesNoPerOptionQuestion&gt;
+    #   * {Types::CreateQuestionSetVersionResponse#choose_one #choose_one} => Array&lt;Types::ChooseOneQuestion&gt;
+    #   * {Types::CreateQuestionSetVersionResponse#arn #arn} => String
+    #   * {Types::CreateQuestionSetVersionResponse#id #id} => String
+    #   * {Types::CreateQuestionSetVersionResponse#name #name} => String
+    #   * {Types::CreateQuestionSetVersionResponse#version #version} => String
+    #   * {Types::CreateQuestionSetVersionResponse#description #description} => String
+    #   * {Types::CreateQuestionSetVersionResponse#latest_version #latest_version} => String
+    #   * {Types::CreateQuestionSetVersionResponse#sha256 #sha256} => String
+    #   * {Types::CreateQuestionSetVersionResponse#references #references} => Array&lt;String&gt;
+    #   * {Types::CreateQuestionSetVersionResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_question_set_version({
+    #     id: "QuestionSetId", # required
+    #     sha256: "QuestionSetSha256",
+    #     description: "QuestionSetVersionDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.yes_no #=> Array
+    #   resp.yes_no[0].name #=> String
+    #   resp.yes_no[0].question #=> String
+    #   resp.yes_no_per_option #=> Array
+    #   resp.yes_no_per_option[0].name #=> String
+    #   resp.yes_no_per_option[0].question #=> String
+    #   resp.yes_no_per_option[0].options #=> Array
+    #   resp.yes_no_per_option[0].options[0].name #=> String
+    #   resp.yes_no_per_option[0].options[0].text #=> String
+    #   resp.choose_one #=> Array
+    #   resp.choose_one[0].name #=> String
+    #   resp.choose_one[0].question #=> String
+    #   resp.choose_one[0].options #=> Array
+    #   resp.choose_one[0].options[0].name #=> String
+    #   resp.choose_one[0].options[0].text #=> String
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.version #=> String
+    #   resp.description #=> String
+    #   resp.latest_version #=> String
+    #   resp.sha256 #=> String
+    #   resp.references #=> Array
+    #   resp.references[0] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/CreateQuestionSetVersion AWS API Documentation
+    #
+    # @overload create_question_set_version(params = {})
+    # @param [Hash] params ({})
+    def create_question_set_version(params = {}, options = {})
+      req = build_request(:create_question_set_version, params)
       req.send_request(options)
     end
 
@@ -961,6 +1445,116 @@ module Aws::ElementalInference
     # @param [Hash] params ({})
     def delete_feed_policy(params = {}, options = {})
       req = build_request(:delete_feed_policy, params)
+      req.send_request(options)
+    end
+
+    # Deletes a function. If any feed still references the function, the
+    # operation returns a ConflictException. A disabled function output
+    # still references the function. Use GetFunction to find those feeds,
+    # then remove the function output from each one with UpdateFeed, or
+    # delete the feed, before retrying.
+    #
+    # Deleting a function doesn't delete the metadata that it has already
+    # produced.
+    #
+    # @option params [required, String] :id
+    #   The ID of the function.
+    #
+    # @return [Types::DeleteFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteFunctionResponse#arn #arn} => String
+    #   * {Types::DeleteFunctionResponse#id #id} => String
+    #   * {Types::DeleteFunctionResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_function({
+    #     id: "FunctionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "REFERENCED", "DELETING", "DELETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/DeleteFunction AWS API Documentation
+    #
+    # @overload delete_function(params = {})
+    # @param [Hash] params ({})
+    def delete_function(params = {}, options = {})
+      req = build_request(:delete_function, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified question set, including its DRAFT version and
+    # all its published versions. You can't delete a question set while any
+    # feed references any of its versions, including an archived feed. You
+    # must first remove the question set from the customQuestions
+    # configuration of each feed output that references it, or delete those
+    # feeds.
+    #
+    # @option params [required, String] :id
+    #   The ID of the question set to delete.
+    #
+    # @return [Types::DeleteQuestionSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteQuestionSetResponse#arn #arn} => String
+    #   * {Types::DeleteQuestionSetResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_question_set({
+    #     id: "QuestionSetId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/DeleteQuestionSet AWS API Documentation
+    #
+    # @overload delete_question_set(params = {})
+    # @param [Hash] params ({})
+    def delete_question_set(params = {}, options = {})
+      req = build_request(:delete_question_set, params)
+      req.send_request(options)
+    end
+
+    # Deletes a published version of the specified question set. You can't
+    # delete a version while a feed references it, including an archived
+    # feed. You can't restore a deleted version, and Elemental Inference
+    # doesn't reuse its number.
+    #
+    # You can't delete the DRAFT version on its own. To delete DRAFT,
+    # delete the question set by using DeleteQuestionSet.
+    #
+    # Deleting a version doesn't change the latestVersion of the question
+    # set, even if you delete the highest version.
+    #
+    # @option params [required, String] :id
+    #   The ID of the question set that contains the version.
+    #
+    # @option params [required, String] :question_set_version
+    #   The number of the published version to delete. You can't specify
+    #   DRAFT.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_question_set_version({
+    #     id: "QuestionSetId", # required
+    #     question_set_version: "PublishedQuestionSetVersion", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/DeleteQuestionSetVersion AWS API Documentation
+    #
+    # @overload delete_question_set_version(params = {})
+    # @param [Hash] params ({})
+    def delete_question_set_version(params = {}, options = {})
+      req = build_request(:delete_question_set_version, params)
       req.send_request(options)
     end
 
@@ -1163,6 +1757,19 @@ module Aws::ElementalInference
     #   resp.outputs[0].output_config.subtitling.profanity_filter #=> String, one of "DISABLED", "CENSOR", "DROP"
     #   resp.outputs[0].output_config.contextual_metadata.summary_generation #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].output_config.contextual_metadata.extended_analysis #=> String, one of "ENABLED", "DISABLED"
+    #   resp.outputs[0].output_config.contextual_metadata.custom_questions.shot.question_set_id #=> String
+    #   resp.outputs[0].output_config.contextual_metadata.custom_questions.shot.version #=> String
+    #   resp.outputs[0].output_config.contextual_metadata.custom_questions.scene.question_set_id #=> String
+    #   resp.outputs[0].output_config.contextual_metadata.custom_questions.scene.version #=> String
+    #   resp.outputs[0].output_config.function.function_arn #=> String
+    #   resp.outputs[0].output_config.function.trigger.fixed_interval.interval_seconds #=> Integer
+    #   resp.outputs[0].output_config.function.frame_settings.frame_sampling.mode #=> String, one of "FIRST", "UNIFORM", "LAST"
+    #   resp.outputs[0].output_config.function.frame_settings.frame_sampling.count #=> Integer
+    #   resp.outputs[0].output_config.function.frame_settings.frame_size.width_pixels #=> Integer
+    #   resp.outputs[0].output_config.function.frame_settings.frame_size.height_pixels #=> Integer
+    #   resp.outputs[0].output_config.function.subtitling_settings.output_name #=> String
+    #   resp.outputs[0].output_config.function.contextual_metadata_settings.output_name #=> String
+    #   resp.outputs[0].output_config.function.clipping_settings.output_name #=> String
     #   resp.outputs[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].description #=> String
     #   resp.outputs[0].from_association #=> Boolean
@@ -1253,6 +1860,134 @@ module Aws::ElementalInference
     # @param [Hash] params ({})
     def get_fixture(params = {}, options = {})
       req = build_request(:get_fixture, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of a function, including its expressions, the
+    # media context that Elemental Inference derived from the request
+    # expression, and the feeds that currently reference it.
+    #
+    # @option params [required, String] :id
+    #   The ID of the function.
+    #
+    # @return [Types::GetFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFunctionResponse#name #name} => String
+    #   * {Types::GetFunctionResponse#target #target} => Types::FunctionTarget
+    #   * {Types::GetFunctionResponse#request_expression #request_expression} => String
+    #   * {Types::GetFunctionResponse#response_expression #response_expression} => String
+    #   * {Types::GetFunctionResponse#description #description} => String
+    #   * {Types::GetFunctionResponse#event_bridge_delivery #event_bridge_delivery} => String
+    #   * {Types::GetFunctionResponse#arn #arn} => String
+    #   * {Types::GetFunctionResponse#id #id} => String
+    #   * {Types::GetFunctionResponse#status #status} => String
+    #   * {Types::GetFunctionResponse#references #references} => Array&lt;String&gt;
+    #   * {Types::GetFunctionResponse#context_types #context_types} => Array&lt;String&gt;
+    #   * {Types::GetFunctionResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_function({
+    #     id: "FunctionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.target.bedrock.api #=> String, one of "INVOKE_MODEL"
+    #   resp.target.bedrock.model #=> String
+    #   resp.request_expression #=> String
+    #   resp.response_expression #=> String
+    #   resp.description #=> String
+    #   resp.event_bridge_delivery #=> String, one of "ENABLED", "DISABLED"
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "REFERENCED", "DELETING", "DELETED"
+    #   resp.references #=> Array
+    #   resp.references[0] #=> String
+    #   resp.context_types #=> Array
+    #   resp.context_types[0] #=> String, one of "FRAMES", "SUBTITLES", "CONTEXTUAL_METADATA", "CLIP_METADATA"
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/GetFunction AWS API Documentation
+    #
+    # @overload get_function(params = {})
+    # @param [Hash] params ({})
+    def get_function(params = {}, options = {})
+      req = build_request(:get_function, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about the specified question set at one version.
+    # By default, GetQuestionSet returns the DRAFT version. To retrieve a
+    # published version, specify questionSetVersion.
+    #
+    # @option params [required, String] :id
+    #   The ID of the question set to retrieve.
+    #
+    # @option params [String] :question_set_version
+    #   The version of the question set to retrieve: DRAFT or the number of a
+    #   published version. If you don't specify a version, Elemental
+    #   Inference returns DRAFT.
+    #
+    # @return [Types::GetQuestionSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQuestionSetResponse#yes_no #yes_no} => Array&lt;Types::YesNoQuestion&gt;
+    #   * {Types::GetQuestionSetResponse#yes_no_per_option #yes_no_per_option} => Array&lt;Types::YesNoPerOptionQuestion&gt;
+    #   * {Types::GetQuestionSetResponse#choose_one #choose_one} => Array&lt;Types::ChooseOneQuestion&gt;
+    #   * {Types::GetQuestionSetResponse#arn #arn} => String
+    #   * {Types::GetQuestionSetResponse#id #id} => String
+    #   * {Types::GetQuestionSetResponse#name #name} => String
+    #   * {Types::GetQuestionSetResponse#version #version} => String
+    #   * {Types::GetQuestionSetResponse#description #description} => String
+    #   * {Types::GetQuestionSetResponse#latest_version #latest_version} => String
+    #   * {Types::GetQuestionSetResponse#sha256 #sha256} => String
+    #   * {Types::GetQuestionSetResponse#references #references} => Array&lt;String&gt;
+    #   * {Types::GetQuestionSetResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_question_set({
+    #     id: "QuestionSetId", # required
+    #     question_set_version: "QuestionSetVersion",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.yes_no #=> Array
+    #   resp.yes_no[0].name #=> String
+    #   resp.yes_no[0].question #=> String
+    #   resp.yes_no_per_option #=> Array
+    #   resp.yes_no_per_option[0].name #=> String
+    #   resp.yes_no_per_option[0].question #=> String
+    #   resp.yes_no_per_option[0].options #=> Array
+    #   resp.yes_no_per_option[0].options[0].name #=> String
+    #   resp.yes_no_per_option[0].options[0].text #=> String
+    #   resp.choose_one #=> Array
+    #   resp.choose_one[0].name #=> String
+    #   resp.choose_one[0].question #=> String
+    #   resp.choose_one[0].options #=> Array
+    #   resp.choose_one[0].options[0].name #=> String
+    #   resp.choose_one[0].options[0].text #=> String
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.version #=> String
+    #   resp.description #=> String
+    #   resp.latest_version #=> String
+    #   resp.sha256 #=> String
+    #   resp.references #=> Array
+    #   resp.references[0] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/GetQuestionSet AWS API Documentation
+    #
+    # @overload get_question_set(params = {})
+    # @param [Hash] params ({})
+    def get_question_set(params = {}, options = {})
+      req = build_request(:get_question_set, params)
       req.send_request(options)
     end
 
@@ -1352,6 +2087,148 @@ module Aws::ElementalInference
     # @param [Hash] params ({})
     def list_feeds(params = {}, options = {})
       req = build_request(:list_feeds, params)
+      req.send_request(options)
+    end
+
+    # Lists the functions in this account, in this Region. Each entry is a
+    # summary. To get the expressions of a function, use GetFunction.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of functions to return in one response. Valid
+    #   range: 1 to 100. The default is 100.
+    #
+    # @option params [String] :next_token
+    #   The token that identifies the page of results to return. Use the
+    #   nextToken value from a previous response.
+    #
+    # @return [Types::ListFunctionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFunctionsResponse#functions #functions} => Array&lt;Types::FunctionSummary&gt;
+    #   * {Types::ListFunctionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_functions({
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.functions #=> Array
+    #   resp.functions[0].arn #=> String
+    #   resp.functions[0].id #=> String
+    #   resp.functions[0].name #=> String
+    #   resp.functions[0].description #=> String
+    #   resp.functions[0].status #=> String, one of "CREATING", "AVAILABLE", "REFERENCED", "DELETING", "DELETED"
+    #   resp.functions[0].target.bedrock.api #=> String, one of "INVOKE_MODEL"
+    #   resp.functions[0].target.bedrock.model #=> String
+    #   resp.functions[0].context_types #=> Array
+    #   resp.functions[0].context_types[0] #=> String, one of "FRAMES", "SUBTITLES", "CONTEXTUAL_METADATA", "CLIP_METADATA"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ListFunctions AWS API Documentation
+    #
+    # @overload list_functions(params = {})
+    # @param [Hash] params ({})
+    def list_functions(params = {}, options = {})
+      req = build_request(:list_functions, params)
+      req.send_request(options)
+    end
+
+    # Lists the versions of the specified question set. The list starts with
+    # the DRAFT version, followed by the published versions from the highest
+    # version number to the lowest. The list doesn't include deleted
+    # versions.
+    #
+    # The response doesn't include the questions in each version. To
+    # retrieve them, use GetQuestionSet and specify questionSetVersion.
+    #
+    # @option params [required, String] :id
+    #   The ID of the question set whose versions you want to list.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per API request. Valid range:
+    #   1 to 100.
+    #
+    # @option params [String] :next_token
+    #   The token that identifies the next batch of results to return.
+    #
+    # @return [Types::ListQuestionSetVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListQuestionSetVersionsResponse#versions #versions} => Array&lt;Types::QuestionSetVersionSummary&gt;
+    #   * {Types::ListQuestionSetVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_question_set_versions({
+    #     id: "QuestionSetId", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.versions #=> Array
+    #   resp.versions[0].version #=> String
+    #   resp.versions[0].description #=> String
+    #   resp.versions[0].sha256 #=> String
+    #   resp.versions[0].last_modified_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ListQuestionSetVersions AWS API Documentation
+    #
+    # @overload list_question_set_versions(params = {})
+    # @param [Hash] params ({})
+    def list_question_set_versions(params = {}, options = {})
+      req = build_request(:list_question_set_versions, params)
+      req.send_request(options)
+    end
+
+    # Lists the question sets in your account. The response doesn't include
+    # the questions in each question set. To retrieve them, use
+    # GetQuestionSet.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per API request. Valid range:
+    #   1 to 100.
+    #
+    # @option params [String] :next_token
+    #   The token that identifies the next batch of results to return.
+    #
+    # @return [Types::ListQuestionSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListQuestionSetsResponse#question_sets #question_sets} => Array&lt;Types::QuestionSetSummary&gt;
+    #   * {Types::ListQuestionSetsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_question_sets({
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.question_sets #=> Array
+    #   resp.question_sets[0].arn #=> String
+    #   resp.question_sets[0].id #=> String
+    #   resp.question_sets[0].name #=> String
+    #   resp.question_sets[0].latest_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ListQuestionSets AWS API Documentation
+    #
+    # @overload list_question_sets(params = {})
+    # @param [Hash] params ({})
+    def list_question_sets(params = {}, options = {})
+      req = build_request(:list_question_sets, params)
       req.send_request(options)
     end
 
@@ -1764,6 +2641,49 @@ module Aws::ElementalInference
     #           contextual_metadata: {
     #             summary_generation: "ENABLED", # accepts ENABLED, DISABLED
     #             extended_analysis: "ENABLED", # accepts ENABLED, DISABLED
+    #             custom_questions: {
+    #               shot: {
+    #                 question_set_id: "QuestionSetId", # required
+    #                 version: "QuestionSetVersion", # required
+    #               },
+    #               scene: {
+    #                 question_set_id: "QuestionSetId", # required
+    #                 version: "QuestionSetVersion", # required
+    #               },
+    #             },
+    #           },
+    #           function: {
+    #             function_arn: "FunctionArn", # required
+    #             trigger: { # required
+    #               fixed_interval: {
+    #                 interval_seconds: 1, # required
+    #               },
+    #               per_shot: {
+    #               },
+    #               per_scene: {
+    #               },
+    #               per_clip: {
+    #               },
+    #             },
+    #             frame_settings: {
+    #               frame_sampling: { # required
+    #                 mode: "FIRST", # required, accepts FIRST, UNIFORM, LAST
+    #                 count: 1,
+    #               },
+    #               frame_size: {
+    #                 width_pixels: 1, # required
+    #                 height_pixels: 1, # required
+    #               },
+    #             },
+    #             subtitling_settings: {
+    #               output_name: "ResourceName", # required
+    #             },
+    #             contextual_metadata_settings: {
+    #               output_name: "ResourceName", # required
+    #             },
+    #             clipping_settings: {
+    #               output_name: "ResourceName", # required
+    #             },
     #           },
     #         },
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
@@ -1795,6 +2715,19 @@ module Aws::ElementalInference
     #   resp.outputs[0].output_config.subtitling.profanity_filter #=> String, one of "DISABLED", "CENSOR", "DROP"
     #   resp.outputs[0].output_config.contextual_metadata.summary_generation #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].output_config.contextual_metadata.extended_analysis #=> String, one of "ENABLED", "DISABLED"
+    #   resp.outputs[0].output_config.contextual_metadata.custom_questions.shot.question_set_id #=> String
+    #   resp.outputs[0].output_config.contextual_metadata.custom_questions.shot.version #=> String
+    #   resp.outputs[0].output_config.contextual_metadata.custom_questions.scene.question_set_id #=> String
+    #   resp.outputs[0].output_config.contextual_metadata.custom_questions.scene.version #=> String
+    #   resp.outputs[0].output_config.function.function_arn #=> String
+    #   resp.outputs[0].output_config.function.trigger.fixed_interval.interval_seconds #=> Integer
+    #   resp.outputs[0].output_config.function.frame_settings.frame_sampling.mode #=> String, one of "FIRST", "UNIFORM", "LAST"
+    #   resp.outputs[0].output_config.function.frame_settings.frame_sampling.count #=> Integer
+    #   resp.outputs[0].output_config.function.frame_settings.frame_size.width_pixels #=> Integer
+    #   resp.outputs[0].output_config.function.frame_settings.frame_size.height_pixels #=> Integer
+    #   resp.outputs[0].output_config.function.subtitling_settings.output_name #=> String
+    #   resp.outputs[0].output_config.function.contextual_metadata_settings.output_name #=> String
+    #   resp.outputs[0].output_config.function.clipping_settings.output_name #=> String
     #   resp.outputs[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].description #=> String
     #   resp.outputs[0].from_association #=> Boolean
@@ -1810,6 +2743,248 @@ module Aws::ElementalInference
     # @param [Hash] params ({})
     def update_feed(params = {}, options = {})
       req = build_request(:update_feed, params)
+      req.send_request(options)
+    end
+
+    # Updates a function. Include only the parameters that you want to
+    # change; parameters that you don't include aren't affected. Elemental
+    # Inference validates the updated expressions in the same way as
+    # CreateFunction.
+    #
+    # While a feed references the function, you can change only its
+    # expressions and its description, and you can set eventBridgeDelivery
+    # to DISABLED but not to ENABLED. The request expression must keep
+    # referencing the same media context, as reported in contextTypes.
+    # Changing an expression changes the behavior of every feed that
+    # references the function.
+    #
+    # @option params [required, String] :id
+    #   The ID of the function.
+    #
+    # @option params [String] :name
+    #   A new name for the function. You can't change the name while the
+    #   function is referenced by a feed.
+    #
+    # @option params [Types::FunctionTarget] :target
+    #   A new target for the function. You can't change the target while the
+    #   function is referenced by a feed.
+    #
+    # @option params [String] :request_expression
+    #   A new request expression for the function. Elemental Inference derives
+    #   contextTypes again from the new expression. While a feed references
+    #   the function, the new expression must reference the same media context
+    #   as the current one.
+    #
+    # @option params [String] :response_expression
+    #   A new response expression for the function. To remove the response
+    #   expression, specify an empty string. A function with a Bedrock target
+    #   and eventBridgeDelivery set to ENABLED must keep a response
+    #   expression.
+    #
+    # @option params [String] :description
+    #   A new description for the function.
+    #
+    # @option params [String] :event_bridge_delivery
+    #   Specifies whether Elemental Inference also sends this function's
+    #   marked results to Amazon EventBridge, as described for CreateFunction.
+    #   If you omit this parameter, the current value is kept. While a feed
+    #   references the function, you can change this value to DISABLED, but
+    #   not to ENABLED.
+    #
+    # @return [Types::UpdateFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFunctionResponse#name #name} => String
+    #   * {Types::UpdateFunctionResponse#target #target} => Types::FunctionTarget
+    #   * {Types::UpdateFunctionResponse#request_expression #request_expression} => String
+    #   * {Types::UpdateFunctionResponse#response_expression #response_expression} => String
+    #   * {Types::UpdateFunctionResponse#description #description} => String
+    #   * {Types::UpdateFunctionResponse#event_bridge_delivery #event_bridge_delivery} => String
+    #   * {Types::UpdateFunctionResponse#arn #arn} => String
+    #   * {Types::UpdateFunctionResponse#id #id} => String
+    #   * {Types::UpdateFunctionResponse#status #status} => String
+    #   * {Types::UpdateFunctionResponse#references #references} => Array&lt;String&gt;
+    #   * {Types::UpdateFunctionResponse#context_types #context_types} => Array&lt;String&gt;
+    #   * {Types::UpdateFunctionResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_function({
+    #     id: "FunctionId", # required
+    #     name: "ResourceName",
+    #     target: {
+    #       bedrock: {
+    #         api: "INVOKE_MODEL", # required, accepts INVOKE_MODEL
+    #         model: "BedrockFunctionTargetModelString", # required
+    #       },
+    #       passthrough: {
+    #       },
+    #     },
+    #     request_expression: "UpdateFunctionRequestRequestExpressionString",
+    #     response_expression: "JsonataExpression",
+    #     description: "FunctionDescription",
+    #     event_bridge_delivery: "ENABLED", # accepts ENABLED, DISABLED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.target.bedrock.api #=> String, one of "INVOKE_MODEL"
+    #   resp.target.bedrock.model #=> String
+    #   resp.request_expression #=> String
+    #   resp.response_expression #=> String
+    #   resp.description #=> String
+    #   resp.event_bridge_delivery #=> String, one of "ENABLED", "DISABLED"
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "REFERENCED", "DELETING", "DELETED"
+    #   resp.references #=> Array
+    #   resp.references[0] #=> String
+    #   resp.context_types #=> Array
+    #   resp.context_types[0] #=> String, one of "FRAMES", "SUBTITLES", "CONTEXTUAL_METADATA", "CLIP_METADATA"
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/UpdateFunction AWS API Documentation
+    #
+    # @overload update_function(params = {})
+    # @param [Hash] params ({})
+    def update_function(params = {}, options = {})
+      req = build_request(:update_function, params)
+      req.send_request(options)
+    end
+
+    # Updates the DRAFT version of the specified question set.
+    # UpdateQuestionSet doesn't create a version and doesn't change
+    # published versions. To publish the updated DRAFT as a new version, use
+    # CreateQuestionSetVersion.
+    #
+    # UpdateQuestionSet replaces questions one type at a time. For each of
+    # yesNo, yesNoPerOption, and chooseOne: if you omit the array, DRAFT
+    # keeps its questions of that type. If you include the array, it
+    # replaces all the questions of that type in DRAFT. If you include an
+    # empty array, DRAFT no longer has questions of that type. The updated
+    # DRAFT must follow the same rules as in CreateQuestionSet, and
+    # Elemental Inference applies those rules to the questions that DRAFT
+    # keeps as well as to the questions in the request.
+    #
+    # Feeds that reference the DRAFT version use the updated questions. To
+    # make sure that the questions for a feed don't change, reference a
+    # published version instead.
+    #
+    # @option params [required, String] :id
+    #   The ID of the question set to update.
+    #
+    # @option params [Array<Types::YesNoQuestion>] :yes_no
+    #   An array of questions that Elemental Inference answers with yes or no,
+    #   to replace all the yesNo questions in DRAFT. You can specify up to 50
+    #   yesNo questions. If not specified, the yesNo questions are not
+    #   changed. To remove all the yesNo questions, specify an empty array.
+    #
+    # @option params [Array<Types::YesNoPerOptionQuestion>] :yes_no_per_option
+    #   An array of questions that you ask about each of their options, to
+    #   replace all the yesNoPerOption questions in DRAFT. You can specify up
+    #   to 10 yesNoPerOption questions. If not specified, the yesNoPerOption
+    #   questions are not changed. To remove all the yesNoPerOption questions,
+    #   specify an empty array.
+    #
+    # @option params [Array<Types::ChooseOneQuestion>] :choose_one
+    #   An array of questions that Elemental Inference answers by choosing one
+    #   of their options, to replace all the chooseOne questions in DRAFT. You
+    #   can specify up to 10 chooseOne questions. If not specified, the
+    #   chooseOne questions are not changed. To remove all the chooseOne
+    #   questions, specify an empty array.
+    #
+    # @option params [String] :name
+    #   A new name for the question set. If not specified, the name is not
+    #   changed.
+    #
+    # @return [Types::UpdateQuestionSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateQuestionSetResponse#yes_no #yes_no} => Array&lt;Types::YesNoQuestion&gt;
+    #   * {Types::UpdateQuestionSetResponse#yes_no_per_option #yes_no_per_option} => Array&lt;Types::YesNoPerOptionQuestion&gt;
+    #   * {Types::UpdateQuestionSetResponse#choose_one #choose_one} => Array&lt;Types::ChooseOneQuestion&gt;
+    #   * {Types::UpdateQuestionSetResponse#arn #arn} => String
+    #   * {Types::UpdateQuestionSetResponse#id #id} => String
+    #   * {Types::UpdateQuestionSetResponse#name #name} => String
+    #   * {Types::UpdateQuestionSetResponse#version #version} => String
+    #   * {Types::UpdateQuestionSetResponse#description #description} => String
+    #   * {Types::UpdateQuestionSetResponse#latest_version #latest_version} => String
+    #   * {Types::UpdateQuestionSetResponse#sha256 #sha256} => String
+    #   * {Types::UpdateQuestionSetResponse#references #references} => Array&lt;String&gt;
+    #   * {Types::UpdateQuestionSetResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_question_set({
+    #     id: "QuestionSetId", # required
+    #     yes_no: [
+    #       {
+    #         name: "QuestionName", # required
+    #         question: "QuestionText", # required
+    #       },
+    #     ],
+    #     yes_no_per_option: [
+    #       {
+    #         name: "QuestionName", # required
+    #         question: "QuestionText", # required
+    #         options: [ # required
+    #           {
+    #             name: "OptionName", # required
+    #             text: "OptionText", # required
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     choose_one: [
+    #       {
+    #         name: "QuestionName", # required
+    #         question: "QuestionText", # required
+    #         options: [ # required
+    #           {
+    #             name: "OptionName", # required
+    #             text: "OptionText", # required
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     name: "ResourceName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.yes_no #=> Array
+    #   resp.yes_no[0].name #=> String
+    #   resp.yes_no[0].question #=> String
+    #   resp.yes_no_per_option #=> Array
+    #   resp.yes_no_per_option[0].name #=> String
+    #   resp.yes_no_per_option[0].question #=> String
+    #   resp.yes_no_per_option[0].options #=> Array
+    #   resp.yes_no_per_option[0].options[0].name #=> String
+    #   resp.yes_no_per_option[0].options[0].text #=> String
+    #   resp.choose_one #=> Array
+    #   resp.choose_one[0].name #=> String
+    #   resp.choose_one[0].question #=> String
+    #   resp.choose_one[0].options #=> Array
+    #   resp.choose_one[0].options[0].name #=> String
+    #   resp.choose_one[0].options[0].text #=> String
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.version #=> String
+    #   resp.description #=> String
+    #   resp.latest_version #=> String
+    #   resp.sha256 #=> String
+    #   resp.references #=> Array
+    #   resp.references[0] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/UpdateQuestionSet AWS API Documentation
+    #
+    # @overload update_question_set(params = {})
+    # @param [Hash] params ({})
+    def update_question_set(params = {}, options = {})
+      req = build_request(:update_question_set, params)
       req.send_request(options)
     end
 
@@ -1831,7 +3006,7 @@ module Aws::ElementalInference
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elementalinference'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -219,6 +219,7 @@ module Aws
         def post_launch_actions: () -> Types::PostLaunchActions
         def enable_map_auto_tagging: () -> bool
         def map_auto_tagging_mpe_id: () -> ::String
+        def map_auto_tagging_key: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
         def ec2_launch_template_id: () -> ::String
         def launch_disposition: () -> ("STOPPED" | "STARTED")
@@ -239,6 +240,7 @@ module Aws
                                                   ?post_launch_actions: Params::post_launch_actions,
                                                   ?enable_map_auto_tagging: bool,
                                                   ?map_auto_tagging_mpe_id: ::String,
+                                                  ?map_auto_tagging_key: ::String,
                                                   ?tags: Hash[::String, ::String],
                                                   ?launch_disposition: ("STOPPED" | "STARTED"),
                                                   ?target_instance_type_right_sizing_method: ("NONE" | "BASIC"),
@@ -276,6 +278,7 @@ module Aws
         def name: () -> ::String
         def description: () -> ::String
         def source_configurations: () -> ::Array[Types::SourceConfiguration]
+        def definition_type: () -> ("MIGRATION" | "NEW_NETWORK")
         def target_s3_configuration: () -> Types::TargetS3Configuration
         def target_network: () -> Types::TargetNetwork
         def target_deployment: () -> ("SINGLE_ACCOUNT" | "MULTI_ACCOUNT")
@@ -294,6 +297,7 @@ module Aws
                                                  ?source_configurations: Array[
                                                    Params::source_configuration
                                                  ],
+                                                 ?definition_type: ("MIGRATION" | "NEW_NETWORK"),
                                                  target_s3_configuration: {
                                                    s3_bucket: ::String,
                                                    s3_bucket_owner: ::String
@@ -317,6 +321,29 @@ module Aws
                                                ) -> _CreateNetworkMigrationDefinitionResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNetworkMigrationDefinitionResponseSuccess
 
+      interface _CreateRemoteSourceActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRemoteSourceActionResponse]
+        def remote_source_action_id: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def ssm_parameter_name: () -> ::String
+        def timeout_seconds: () -> ::Integer
+        def operating_system: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#create_remote_source_action-instance_method
+      def create_remote_source_action: (
+                                         name: ::String,
+                                         ?description: ::String,
+                                         ssm_parameter_name: ::String,
+                                         ?timeout_seconds: ::Integer,
+                                         ?operating_system: ::String,
+                                         ?tags: Hash[::String, ::String],
+                                         ?account_id: ::String
+                                       ) -> _CreateRemoteSourceActionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRemoteSourceActionResponseSuccess
+
       interface _CreateReplicationConfigurationTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ReplicationConfigurationTemplate]
         def replication_configuration_template_id: () -> ::String
@@ -337,6 +364,7 @@ module Aws
         def tags: () -> ::Hash[::String, ::String]
         def internet_protocol: () -> ("IPV4" | "IPV6")
         def store_snapshot_on_local_zone: () -> bool
+        def outpost_snapshot_location: () -> ("OUTPOST" | "REGION")
         def storage_configuration: () -> Types::StorageConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#create_replication_configuration_template-instance_method
@@ -357,6 +385,7 @@ module Aws
                                                        ?tags: Hash[::String, ::String],
                                                        ?internet_protocol: ("IPV4" | "IPV6"),
                                                        ?store_snapshot_on_local_zone: bool,
+                                                       ?outpost_snapshot_location: ("OUTPOST" | "REGION"),
                                                        ?storage_configuration: {
                                                          storage_type: ("EBS" | "FSX_ONTAP"),
                                                          fsx_ontap_configuration: {
@@ -431,6 +460,16 @@ module Aws
                                                  network_migration_definition_id: ::String
                                                ) -> _DeleteNetworkMigrationDefinitionResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNetworkMigrationDefinitionResponseSuccess
+
+      interface _DeleteRemoteSourceActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRemoteSourceActionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#delete_remote_source_action-instance_method
+      def delete_remote_source_action: (
+                                         remote_source_action_id: ::String,
+                                         ?account_id: ::String
+                                       ) -> _DeleteRemoteSourceActionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRemoteSourceActionResponseSuccess
 
       interface _DeleteReplicationConfigurationTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReplicationConfigurationTemplateResponse]
@@ -641,6 +680,7 @@ module Aws
         def post_launch_actions: () -> Types::PostLaunchActions
         def enable_map_auto_tagging: () -> bool
         def map_auto_tagging_mpe_id: () -> ::String
+        def map_auto_tagging_key: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#get_launch_configuration-instance_method
       def get_launch_configuration: (
@@ -649,6 +689,20 @@ module Aws
                                     ) -> _GetLaunchConfigurationResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLaunchConfigurationResponseSuccess
 
+      interface _GetLaunchConfigurationDefaultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLaunchConfigurationDefaultsResponse]
+        def source_server_id: () -> ::String
+        def small_volume_max_size: () -> ::Integer
+        def small_volume_configuration: () -> Types::SourceServerVolumeConfiguration
+        def large_volume_configuration: () -> Types::SourceServerVolumeConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#get_launch_configuration_defaults-instance_method
+      def get_launch_configuration_defaults: (
+                                               source_server_id: ::String,
+                                               ?account_id: ::String
+                                             ) -> _GetLaunchConfigurationDefaultsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLaunchConfigurationDefaultsResponseSuccess
+
       interface _GetNetworkMigrationDefinitionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::NetworkMigrationDefinition]
         def arn: () -> ::String
@@ -656,6 +710,7 @@ module Aws
         def name: () -> ::String
         def description: () -> ::String
         def source_configurations: () -> ::Array[Types::SourceConfiguration]
+        def definition_type: () -> ("MIGRATION" | "NEW_NETWORK")
         def target_s3_configuration: () -> Types::TargetS3Configuration
         def target_network: () -> Types::TargetNetwork
         def target_deployment: () -> ("SINGLE_ACCOUNT" | "MULTI_ACCOUNT")
@@ -705,6 +760,7 @@ module Aws
         def use_fips_endpoint: () -> bool
         def internet_protocol: () -> ("IPV4" | "IPV6")
         def store_snapshot_on_local_zone: () -> bool
+        def outpost_snapshot_location: () -> ("OUTPOST" | "REGION")
         def storage_configuration: () -> Types::StorageConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#get_replication_configuration-instance_method
@@ -969,6 +1025,26 @@ module Aws
                                              ) -> _ListNetworkMigrationExecutionsResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkMigrationExecutionsResponseSuccess
 
+      interface _ListNetworkMigrationInsightsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworkMigrationInsightsResponse]
+        def items: () -> ::Array[Types::NetworkMigrationInsight]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#list_network_migration_insights-instance_method
+      def list_network_migration_insights: (
+                                             network_migration_definition_id: ::String,
+                                             ?network_migration_execution_id: ::String,
+                                             ?producer_id: ::String,
+                                             ?segment_id: ::String,
+                                             ?construct_id: ::String,
+                                             ?filters: {
+                                               insight_types: Array[("INTENT_GAP" | "WARNING" | "QUESTION" | "INFO" | "ERROR" | "CONTEXT" | "EXCLUDED" | "BEHAVIOR_CHANGE")]?
+                                             },
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _ListNetworkMigrationInsightsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkMigrationInsightsResponseSuccess
+
       interface _ListNetworkMigrationMapperSegmentConstructsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworkMigrationMapperSegmentConstructsResponse]
         def items: () -> ::Array[Types::NetworkMigrationMapperSegmentConstruct]
@@ -984,7 +1060,9 @@ module Aws
                                                                 construct_types: Array[::String]?
                                                               },
                                                               ?max_results: ::Integer,
-                                                              ?next_token: ::String
+                                                              ?next_token: ::String,
+                                                              ?include_enriched_properties: bool,
+                                                              ?include_configuration: bool
                                                             ) -> _ListNetworkMigrationMapperSegmentConstructsResponseSuccess
                                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkMigrationMapperSegmentConstructsResponseSuccess
 
@@ -1038,6 +1116,71 @@ module Aws
                                              ?next_token: ::String
                                            ) -> _ListNetworkMigrationMappingsResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworkMigrationMappingsResponseSuccess
+
+      interface _ListRemoteSourceActionInvocationResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRemoteSourceActionInvocationResultsResponse]
+        def items: () -> ::Array[Types::RemoteSourceActionInvocationResult]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#list_remote_source_action_invocation_results-instance_method
+      def list_remote_source_action_invocation_results: (
+                                                          source_server_id: ::String,
+                                                          ?max_results: ::Integer,
+                                                          ?next_token: ::String,
+                                                          ?account_id: ::String
+                                                        ) -> _ListRemoteSourceActionInvocationResultsResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRemoteSourceActionInvocationResultsResponseSuccess
+
+      interface _ListRemoteSourceActionInvocationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRemoteSourceActionInvocationsResponse]
+        def items: () -> ::Array[Types::RemoteSourceActionInvocation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#list_remote_source_action_invocations-instance_method
+      def list_remote_source_action_invocations: (
+                                                   remote_source_action_job_id: ::String,
+                                                   ?filters: {
+                                                     source_server_arns: Array[::String]?,
+                                                     remote_source_action_arns: Array[::String]?,
+                                                     statuses: Array[("PENDING" | "IN_PROGRESS" | "DELAYED" | "SUCCESS" | "CANCELLED" | "TIMED_OUT" | "FAILED" | "CANCELLING" | "STALLED")]?
+                                                   },
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String,
+                                                   ?account_id: ::String
+                                                 ) -> _ListRemoteSourceActionInvocationsResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRemoteSourceActionInvocationsResponseSuccess
+
+      interface _ListRemoteSourceActionJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRemoteSourceActionJobsResponse]
+        def items: () -> ::Array[Types::RemoteSourceActionJob]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#list_remote_source_action_jobs-instance_method
+      def list_remote_source_action_jobs: (
+                                            ?filters: {
+                                              remote_source_action_job_i_ds: Array[::String]?
+                                            },
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String,
+                                            ?account_id: ::String
+                                          ) -> _ListRemoteSourceActionJobsResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRemoteSourceActionJobsResponseSuccess
+
+      interface _ListRemoteSourceActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRemoteSourceActionsResponse]
+        def items: () -> ::Array[Types::RemoteSourceAction]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#list_remote_source_actions-instance_method
+      def list_remote_source_actions: (
+                                        ?filters: {
+                                          remote_source_action_i_ds: Array[::String]?
+                                        },
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String,
+                                        ?account_id: ::String
+                                      ) -> _ListRemoteSourceActionsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRemoteSourceActionsResponseSuccess
 
       interface _ListSourceServerActionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSourceServerActionsResponse]
@@ -1417,9 +1560,11 @@ module Aws
                                                     network_migration_definition_id: ::String,
                                                     ?constructs: Array[
                                                       {
-                                                        segment_id: ::String,
-                                                        construct_id: ::String,
+                                                        segment_id: ::String?,
+                                                        segment_logical_id: ::String?,
+                                                        construct_id: ::String?,
                                                         construct_type: ::String,
+                                                        construct_logical_id: ::String?,
                                                         operation: {
                                                           merge: {
                                                             merge_constructs: Array[
@@ -1442,19 +1587,66 @@ module Aws
                                                             name: ::String?,
                                                             excluded: bool?,
                                                             properties: Hash[::String, ::String]?
+                                                          }?,
+                                                          update_v2: {
+                                                            name: ::String?,
+                                                            excluded: bool?,
+                                                            properties: Hash[::String, {
+                                                              }]?,
+                                                            properties_to_delete: Array[::String]?,
+                                                            configuration: Params::operation_configuration_union?
+                                                          }?,
+                                                          create: {
+                                                            name: ::String?,
+                                                            excluded: bool?,
+                                                            properties: Hash[::String, {
+                                                              }]?,
+                                                            configuration: Params::operation_configuration_union?
                                                           }?
                                                         }?
                                                       }
                                                     ],
                                                     ?segments: Array[
                                                       {
-                                                        segment_id: ::String,
+                                                        segment_id: ::String?,
+                                                        segment_logical_id: ::String?,
+                                                        operation: {
+                                                          create: {
+                                                            name: ::String,
+                                                            description: ::String?,
+                                                            target_account: ::String?,
+                                                            scope_tags: Hash[::String, ::String]?
+                                                          }?,
+                                                          update: {
+                                                            name: ::String?,
+                                                            description: ::String?,
+                                                            target_account: ::String?,
+                                                            scope_tags: Hash[::String, ::String]?
+                                                          }?,
+                                                          delete: {
+                                                          }?
+                                                        }?,
                                                         target_account: ::String?,
                                                         scope_tags: Hash[::String, ::String]?
                                                       }
                                                     ]
                                                   ) -> _StartNetworkMigrationMappingUpdateResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartNetworkMigrationMappingUpdateResponseSuccess
+
+      interface _StartRemoteSourceActionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartRemoteSourceActionJobResponse]
+        def remote_source_action_job: () -> Types::RemoteSourceActionJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#start_remote_source_action_job-instance_method
+      def start_remote_source_action_job: (
+                                            remote_source_action_arns: Array[::String],
+                                            connector_arn: ::String,
+                                            source_server_arns: Array[::String],
+                                            ?client_token: ::String,
+                                            ?tags: Hash[::String, ::String],
+                                            ?account_id: ::String
+                                          ) -> _StartRemoteSourceActionJobResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartRemoteSourceActionJobResponseSuccess
 
       interface _StartReplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SourceServer]
@@ -1639,6 +1831,7 @@ module Aws
         def post_launch_actions: () -> Types::PostLaunchActions
         def enable_map_auto_tagging: () -> bool
         def map_auto_tagging_mpe_id: () -> ::String
+        def map_auto_tagging_key: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#update_launch_configuration-instance_method
       def update_launch_configuration: (
@@ -1655,9 +1848,39 @@ module Aws
                                          ?post_launch_actions: Params::post_launch_actions,
                                          ?enable_map_auto_tagging: bool,
                                          ?map_auto_tagging_mpe_id: ::String,
+                                         ?map_auto_tagging_key: ::String,
                                          ?account_id: ::String
                                        ) -> _UpdateLaunchConfigurationResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLaunchConfigurationResponseSuccess
+
+      interface _UpdateLaunchConfigurationDefaultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLaunchConfigurationDefaultsResponse]
+        def source_server_id: () -> ::String
+        def small_volume_max_size: () -> ::Integer
+        def small_volume_configuration: () -> Types::SourceServerVolumeConfiguration
+        def large_volume_configuration: () -> Types::SourceServerVolumeConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#update_launch_configuration_defaults-instance_method
+      def update_launch_configuration_defaults: (
+                                                  source_server_id: ::String,
+                                                  ?account_id: ::String,
+                                                  ?small_volume_max_size: ::Integer,
+                                                  ?small_volume_configuration: {
+                                                    volume_type: ("io1" | "io2" | "gp3" | "gp2" | "st1" | "sc1" | "standard")?,
+                                                    iops: ::Integer?,
+                                                    throughput: ::Integer?,
+                                                    volume_initialization_rate: ::Integer?,
+                                                    delete_on_termination: ("ENABLED" | "DISABLED")?
+                                                  },
+                                                  ?large_volume_configuration: {
+                                                    volume_type: ("io1" | "io2" | "gp3" | "gp2" | "st1" | "sc1" | "standard")?,
+                                                    iops: ::Integer?,
+                                                    throughput: ::Integer?,
+                                                    volume_initialization_rate: ::Integer?,
+                                                    delete_on_termination: ("ENABLED" | "DISABLED")?
+                                                  }
+                                                ) -> _UpdateLaunchConfigurationDefaultsResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLaunchConfigurationDefaultsResponseSuccess
 
       interface _UpdateLaunchConfigurationTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::LaunchConfigurationTemplate]
@@ -1666,6 +1889,7 @@ module Aws
         def post_launch_actions: () -> Types::PostLaunchActions
         def enable_map_auto_tagging: () -> bool
         def map_auto_tagging_mpe_id: () -> ::String
+        def map_auto_tagging_key: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
         def ec2_launch_template_id: () -> ::String
         def launch_disposition: () -> ("STOPPED" | "STARTED")
@@ -1687,6 +1911,7 @@ module Aws
                                                   ?post_launch_actions: Params::post_launch_actions,
                                                   ?enable_map_auto_tagging: bool,
                                                   ?map_auto_tagging_mpe_id: ::String,
+                                                  ?map_auto_tagging_key: ::String,
                                                   ?launch_disposition: ("STOPPED" | "STARTED"),
                                                   ?target_instance_type_right_sizing_method: ("NONE" | "BASIC"),
                                                   ?copy_private_ip: bool,
@@ -1723,6 +1948,7 @@ module Aws
         def name: () -> ::String
         def description: () -> ::String
         def source_configurations: () -> ::Array[Types::SourceConfiguration]
+        def definition_type: () -> ("MIGRATION" | "NEW_NETWORK")
         def target_s3_configuration: () -> Types::TargetS3Configuration
         def target_network: () -> Types::TargetNetwork
         def target_deployment: () -> ("SINGLE_ACCOUNT" | "MULTI_ACCOUNT")
@@ -1759,7 +1985,8 @@ module Aws
                                                      updated_cidr: ::String
                                                    }
                                                  ],
-                                                 ?scope_tags: Hash[::String, ::String]
+                                                 ?scope_tags: Hash[::String, ::String],
+                                                 ?definition_type: ("MIGRATION" | "NEW_NETWORK")
                                                ) -> _UpdateNetworkMigrationDefinitionResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNetworkMigrationDefinitionResponseSuccess
 
@@ -1790,6 +2017,29 @@ module Aws
                                                    ) -> _UpdateNetworkMigrationMapperSegmentResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNetworkMigrationMapperSegmentResponseSuccess
 
+      interface _UpdateRemoteSourceActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRemoteSourceActionResponse]
+        def remote_source_action_id: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def ssm_parameter_name: () -> ::String
+        def timeout_seconds: () -> ::Integer
+        def operating_system: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#update_remote_source_action-instance_method
+      def update_remote_source_action: (
+                                         remote_source_action_id: ::String,
+                                         ?name: ::String,
+                                         ?description: ::String,
+                                         ?ssm_parameter_name: ::String,
+                                         ?timeout_seconds: ::Integer,
+                                         ?operating_system: ::String,
+                                         ?account_id: ::String
+                                       ) -> _UpdateRemoteSourceActionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRemoteSourceActionResponseSuccess
+
       interface _UpdateReplicationConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ReplicationConfiguration]
         def source_server_id: () -> ::String
@@ -1810,6 +2060,7 @@ module Aws
         def use_fips_endpoint: () -> bool
         def internet_protocol: () -> ("IPV4" | "IPV6")
         def store_snapshot_on_local_zone: () -> bool
+        def outpost_snapshot_location: () -> ("OUTPOST" | "REGION")
         def storage_configuration: () -> Types::StorageConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#update_replication_configuration-instance_method
@@ -1841,6 +2092,7 @@ module Aws
                                               ?account_id: ::String,
                                               ?internet_protocol: ("IPV4" | "IPV6"),
                                               ?store_snapshot_on_local_zone: bool,
+                                              ?outpost_snapshot_location: ("OUTPOST" | "REGION"),
                                               ?storage_configuration: {
                                                 storage_type: ("EBS" | "FSX_ONTAP"),
                                                 fsx_ontap_configuration: {
@@ -1871,6 +2123,7 @@ module Aws
         def tags: () -> ::Hash[::String, ::String]
         def internet_protocol: () -> ("IPV4" | "IPV6")
         def store_snapshot_on_local_zone: () -> bool
+        def outpost_snapshot_location: () -> ("OUTPOST" | "REGION")
         def storage_configuration: () -> Types::StorageConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#update_replication_configuration_template-instance_method
@@ -1892,6 +2145,7 @@ module Aws
                                                        ?use_fips_endpoint: bool,
                                                        ?internet_protocol: ("IPV4" | "IPV6"),
                                                        ?store_snapshot_on_local_zone: bool,
+                                                       ?outpost_snapshot_location: ("OUTPOST" | "REGION"),
                                                        ?storage_configuration: {
                                                          storage_type: ("EBS" | "FSX_ONTAP"),
                                                          fsx_ontap_configuration: {

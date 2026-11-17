@@ -59,8 +59,10 @@ module Aws::EC2
     AccountVpcEncryptionControlExclusions = Shapes::StructureShape.new(name: 'AccountVpcEncryptionControlExclusions')
     AccountVpcEncryptionControlMode = Shapes::StringShape.new(name: 'AccountVpcEncryptionControlMode')
     AccountVpcEncryptionControlState = Shapes::StringShape.new(name: 'AccountVpcEncryptionControlState')
+    ActiveAdditionalKeyExchangesList = Shapes::ListShape.new(name: 'ActiveAdditionalKeyExchangesList')
     ActiveInstance = Shapes::StructureShape.new(name: 'ActiveInstance')
     ActiveInstanceSet = Shapes::ListShape.new(name: 'ActiveInstanceSet')
+    ActiveVpnTunnelAdditionalKeyExchange = Shapes::StructureShape.new(name: 'ActiveVpnTunnelAdditionalKeyExchange')
     ActiveVpnTunnelStatus = Shapes::StructureShape.new(name: 'ActiveVpnTunnelStatus')
     ActivityStatus = Shapes::StringShape.new(name: 'ActivityStatus')
     AddIpamOperatingRegion = Shapes::StructureShape.new(name: 'AddIpamOperatingRegion')
@@ -74,6 +76,14 @@ module Aws::EC2
     AdditionalDetail = Shapes::StructureShape.new(name: 'AdditionalDetail')
     AdditionalDetailList = Shapes::ListShape.new(name: 'AdditionalDetailList')
     AdditionalFlexibleNetworkInterfaces = Shapes::IntegerShape.new(name: 'AdditionalFlexibleNetworkInterfaces')
+    AdditionalKeyExchangeMethodsList = Shapes::ListShape.new(name: 'AdditionalKeyExchangeMethodsList')
+    AdditionalKeyExchangeMethodsListValue = Shapes::StructureShape.new(name: 'AdditionalKeyExchangeMethodsListValue')
+    AdditionalKeyExchangeMethodsRequestList = Shapes::ListShape.new(name: 'AdditionalKeyExchangeMethodsRequestList')
+    AdditionalKeyExchangeMethodsRequestListValue = Shapes::StructureShape.new(name: 'AdditionalKeyExchangeMethodsRequestListValue')
+    AdditionalKeyExchangeRequirement = Shapes::StringShape.new(name: 'AdditionalKeyExchangeRequirement')
+    AdditionalKeyExchangeRound = Shapes::IntegerShape.new(name: 'AdditionalKeyExchangeRound')
+    AdditionalKeyExchangesList = Shapes::ListShape.new(name: 'AdditionalKeyExchangesList')
+    AdditionalKeyExchangesRequestSpecification = Shapes::ListShape.new(name: 'AdditionalKeyExchangesRequestSpecification')
     Address = Shapes::StructureShape.new(name: 'Address')
     AddressAttribute = Shapes::StructureShape.new(name: 'AddressAttribute')
     AddressAttributeName = Shapes::StringShape.new(name: 'AddressAttributeName')
@@ -370,8 +380,12 @@ module Aws::EC2
     CapacityBlockExtensionStatus = Shapes::StringShape.new(name: 'CapacityBlockExtensionStatus')
     CapacityBlockId = Shapes::StringShape.new(name: 'CapacityBlockId')
     CapacityBlockIds = Shapes::ListShape.new(name: 'CapacityBlockIds')
+    CapacityBlockInstanceTypePreference = Shapes::StructureShape.new(name: 'CapacityBlockInstanceTypePreference')
+    CapacityBlockInstanceTypePreferenceSet = Shapes::ListShape.new(name: 'CapacityBlockInstanceTypePreferenceSet')
     CapacityBlockInterconnectStatus = Shapes::StringShape.new(name: 'CapacityBlockInterconnectStatus')
     CapacityBlockOffering = Shapes::StructureShape.new(name: 'CapacityBlockOffering')
+    CapacityBlockOfferingSegment = Shapes::StructureShape.new(name: 'CapacityBlockOfferingSegment')
+    CapacityBlockOfferingSegmentSet = Shapes::ListShape.new(name: 'CapacityBlockOfferingSegmentSet')
     CapacityBlockOfferingSet = Shapes::ListShape.new(name: 'CapacityBlockOfferingSet')
     CapacityBlockResourceState = Shapes::StringShape.new(name: 'CapacityBlockResourceState')
     CapacityBlockSet = Shapes::ListShape.new(name: 'CapacityBlockSet')
@@ -686,6 +700,7 @@ module Aws::EC2
     CreateNetworkInterfaceResult = Shapes::StructureShape.new(name: 'CreateNetworkInterfaceResult')
     CreateNetworkingFlexCostAllocationPolicyRequest = Shapes::StructureShape.new(name: 'CreateNetworkingFlexCostAllocationPolicyRequest')
     CreateNetworkingFlexCostAllocationPolicyResult = Shapes::StructureShape.new(name: 'CreateNetworkingFlexCostAllocationPolicyResult')
+    CreatePeeringConnectionOptionsRequest = Shapes::StructureShape.new(name: 'CreatePeeringConnectionOptionsRequest')
     CreatePlacementGroupRequest = Shapes::StructureShape.new(name: 'CreatePlacementGroupRequest')
     CreatePlacementGroupResult = Shapes::StructureShape.new(name: 'CreatePlacementGroupResult')
     CreatePublicIpv4PoolRequest = Shapes::StructureShape.new(name: 'CreatePublicIpv4PoolRequest')
@@ -3046,6 +3061,9 @@ module Aws::EC2
     ModifyTransitGatewayNetworkFunctionAttachmentRequest = Shapes::StructureShape.new(name: 'ModifyTransitGatewayNetworkFunctionAttachmentRequest')
     ModifyTransitGatewayNetworkFunctionAttachmentResult = Shapes::StructureShape.new(name: 'ModifyTransitGatewayNetworkFunctionAttachmentResult')
     ModifyTransitGatewayOptions = Shapes::StructureShape.new(name: 'ModifyTransitGatewayOptions')
+    ModifyTransitGatewayPeeringAttachmentRequest = Shapes::StructureShape.new(name: 'ModifyTransitGatewayPeeringAttachmentRequest')
+    ModifyTransitGatewayPeeringAttachmentRequestOptions = Shapes::StructureShape.new(name: 'ModifyTransitGatewayPeeringAttachmentRequestOptions')
+    ModifyTransitGatewayPeeringAttachmentResult = Shapes::StructureShape.new(name: 'ModifyTransitGatewayPeeringAttachmentResult')
     ModifyTransitGatewayPolicyTableEntryRequest = Shapes::StructureShape.new(name: 'ModifyTransitGatewayPolicyTableEntryRequest')
     ModifyTransitGatewayPolicyTableEntryResult = Shapes::StructureShape.new(name: 'ModifyTransitGatewayPolicyTableEntryResult')
     ModifyTransitGatewayPrefixListReferenceRequest = Shapes::StructureShape.new(name: 'ModifyTransitGatewayPrefixListReferenceRequest')
@@ -3128,6 +3146,8 @@ module Aws::EC2
     MovingAddressStatus = Shapes::StructureShape.new(name: 'MovingAddressStatus')
     MovingAddressStatusSet = Shapes::ListShape.new(name: 'MovingAddressStatusSet')
     MulticastSupportValue = Shapes::StringShape.new(name: 'MulticastSupportValue')
+    MultipathResilienceMode = Shapes::StringShape.new(name: 'MultipathResilienceMode')
+    MultipathResilienceStatus = Shapes::StringShape.new(name: 'MultipathResilienceStatus')
     NatFlexCostAllocationPolicyDocument = Shapes::StructureShape.new(name: 'NatFlexCostAllocationPolicyDocument')
     NatGateway = Shapes::StructureShape.new(name: 'NatGateway')
     NatGatewayAddress = Shapes::StructureShape.new(name: 'NatGatewayAddress')
@@ -4089,6 +4109,8 @@ module Aws::EC2
     TransitGatewayOptions = Shapes::StructureShape.new(name: 'TransitGatewayOptions')
     TransitGatewayPeeringAttachment = Shapes::StructureShape.new(name: 'TransitGatewayPeeringAttachment')
     TransitGatewayPeeringAttachmentList = Shapes::ListShape.new(name: 'TransitGatewayPeeringAttachmentList')
+    TransitGatewayPeeringAttachmentMultipathResilienceMode = Shapes::StringShape.new(name: 'TransitGatewayPeeringAttachmentMultipathResilienceMode')
+    TransitGatewayPeeringAttachmentMultipathResilienceStatus = Shapes::StringShape.new(name: 'TransitGatewayPeeringAttachmentMultipathResilienceStatus')
     TransitGatewayPeeringAttachmentOptions = Shapes::StructureShape.new(name: 'TransitGatewayPeeringAttachmentOptions')
     TransitGatewayPolicyRule = Shapes::StructureShape.new(name: 'TransitGatewayPolicyRule')
     TransitGatewayPolicyRuleMetaData = Shapes::StructureShape.new(name: 'TransitGatewayPolicyRuleMetaData')
@@ -4357,6 +4379,8 @@ module Aws::EC2
     VpcPeeringConnectionVpcInfo = Shapes::StructureShape.new(name: 'VpcPeeringConnectionVpcInfo')
     VpcState = Shapes::StringShape.new(name: 'VpcState')
     VpcTenancy = Shapes::StringShape.new(name: 'VpcTenancy')
+    VpnAdditionalKeyExchange = Shapes::StructureShape.new(name: 'VpnAdditionalKeyExchange')
+    VpnAdditionalKeyExchangeRequest = Shapes::StructureShape.new(name: 'VpnAdditionalKeyExchangeRequest')
     VpnConcentrator = Shapes::StructureShape.new(name: 'VpnConcentrator')
     VpnConcentratorId = Shapes::StringShape.new(name: 'VpnConcentratorId')
     VpnConcentratorIdStringList = Shapes::ListShape.new(name: 'VpnConcentratorIdStringList')
@@ -4550,6 +4574,8 @@ module Aws::EC2
     AccountVpcEncryptionControlExclusions.add_member(:api_gateway_v2, Shapes::ShapeRef.new(shape: VpcEncryptionControlExclusionState, location_name: "apiGatewayV2"))
     AccountVpcEncryptionControlExclusions.struct_class = Types::AccountVpcEncryptionControlExclusions
 
+    ActiveAdditionalKeyExchangesList.member = Shapes::ShapeRef.new(shape: ActiveVpnTunnelAdditionalKeyExchange, location_name: "item")
+
     ActiveInstance.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     ActiveInstance.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
     ActiveInstance.add_member(:spot_instance_request_id, Shapes::ShapeRef.new(shape: String, location_name: "spotInstanceRequestId"))
@@ -4557,6 +4583,10 @@ module Aws::EC2
     ActiveInstance.struct_class = Types::ActiveInstance
 
     ActiveInstanceSet.member = Shapes::ShapeRef.new(shape: ActiveInstance, location_name: "item")
+
+    ActiveVpnTunnelAdditionalKeyExchange.add_member(:additional_key_exchange_round, Shapes::ShapeRef.new(shape: Integer, location_name: "additionalKeyExchangeRound"))
+    ActiveVpnTunnelAdditionalKeyExchange.add_member(:key_exchange_method, Shapes::ShapeRef.new(shape: Integer, location_name: "keyExchangeMethod"))
+    ActiveVpnTunnelAdditionalKeyExchange.struct_class = Types::ActiveVpnTunnelAdditionalKeyExchange
 
     ActiveVpnTunnelStatus.add_member(:phase_1_encryption_algorithm, Shapes::ShapeRef.new(shape: String, location_name: "phase1EncryptionAlgorithm"))
     ActiveVpnTunnelStatus.add_member(:phase_2_encryption_algorithm, Shapes::ShapeRef.new(shape: String, location_name: "phase2EncryptionAlgorithm"))
@@ -4567,6 +4597,8 @@ module Aws::EC2
     ActiveVpnTunnelStatus.add_member(:ike_version, Shapes::ShapeRef.new(shape: String, location_name: "ikeVersion"))
     ActiveVpnTunnelStatus.add_member(:provisioning_status, Shapes::ShapeRef.new(shape: VpnTunnelProvisioningStatus, location_name: "provisioningStatus"))
     ActiveVpnTunnelStatus.add_member(:provisioning_status_reason, Shapes::ShapeRef.new(shape: String, location_name: "provisioningStatusReason"))
+    ActiveVpnTunnelStatus.add_member(:phase_1_additional_key_exchanges, Shapes::ShapeRef.new(shape: ActiveAdditionalKeyExchangesList, location_name: "phase1AdditionalKeyExchangeSet"))
+    ActiveVpnTunnelStatus.add_member(:phase_2_additional_key_exchanges, Shapes::ShapeRef.new(shape: ActiveAdditionalKeyExchangesList, location_name: "phase2AdditionalKeyExchangeSet"))
     ActiveVpnTunnelStatus.struct_class = Types::ActiveVpnTunnelStatus
 
     AddIpamOperatingRegion.add_member(:region_name, Shapes::ShapeRef.new(shape: String, location_name: "RegionName"))
@@ -4605,6 +4637,20 @@ module Aws::EC2
     AdditionalDetail.struct_class = Types::AdditionalDetail
 
     AdditionalDetailList.member = Shapes::ShapeRef.new(shape: AdditionalDetail, location_name: "item")
+
+    AdditionalKeyExchangeMethodsList.member = Shapes::ShapeRef.new(shape: AdditionalKeyExchangeMethodsListValue, location_name: "item")
+
+    AdditionalKeyExchangeMethodsListValue.add_member(:value, Shapes::ShapeRef.new(shape: Integer, location_name: "value"))
+    AdditionalKeyExchangeMethodsListValue.struct_class = Types::AdditionalKeyExchangeMethodsListValue
+
+    AdditionalKeyExchangeMethodsRequestList.member = Shapes::ShapeRef.new(shape: AdditionalKeyExchangeMethodsRequestListValue, location_name: "item")
+
+    AdditionalKeyExchangeMethodsRequestListValue.add_member(:value, Shapes::ShapeRef.new(shape: Integer, location_name: "Value"))
+    AdditionalKeyExchangeMethodsRequestListValue.struct_class = Types::AdditionalKeyExchangeMethodsRequestListValue
+
+    AdditionalKeyExchangesList.member = Shapes::ShapeRef.new(shape: VpnAdditionalKeyExchange, location_name: "item")
+
+    AdditionalKeyExchangesRequestSpecification.member = Shapes::ShapeRef.new(shape: VpnAdditionalKeyExchangeRequest, location_name: "item")
 
     Address.add_member(:allocation_id, Shapes::ShapeRef.new(shape: String, location_name: "allocationId"))
     Address.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "associationId"))
@@ -5646,6 +5692,11 @@ module Aws::EC2
 
     CapacityBlockIds.member = Shapes::ShapeRef.new(shape: CapacityBlockId, location_name: "item")
 
+    CapacityBlockInstanceTypePreference.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "InstanceType"))
+    CapacityBlockInstanceTypePreference.struct_class = Types::CapacityBlockInstanceTypePreference
+
+    CapacityBlockInstanceTypePreferenceSet.member = Shapes::ShapeRef.new(shape: CapacityBlockInstanceTypePreference, location_name: "item")
+
     CapacityBlockOffering.add_member(:capacity_block_offering_id, Shapes::ShapeRef.new(shape: OfferingId, location_name: "capacityBlockOfferingId"))
     CapacityBlockOffering.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
     CapacityBlockOffering.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
@@ -5660,7 +5711,23 @@ module Aws::EC2
     CapacityBlockOffering.add_member(:ultraserver_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "ultraserverCount"))
     CapacityBlockOffering.add_member(:capacity_block_duration_minutes, Shapes::ShapeRef.new(shape: Integer, location_name: "capacityBlockDurationMinutes"))
     CapacityBlockOffering.add_member(:zone_type, Shapes::ShapeRef.new(shape: String, location_name: "zoneType"))
+    CapacityBlockOffering.add_member(:capacity_block_offering_segments, Shapes::ShapeRef.new(shape: CapacityBlockOfferingSegmentSet, location_name: "capacityBlockOfferingSegmentSet"))
     CapacityBlockOffering.struct_class = Types::CapacityBlockOffering
+
+    CapacityBlockOfferingSegment.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
+    CapacityBlockOfferingSegment.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    CapacityBlockOfferingSegment.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
+    CapacityBlockOfferingSegment.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "instanceCount"))
+    CapacityBlockOfferingSegment.add_member(:start_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "startDate"))
+    CapacityBlockOfferingSegment.add_member(:end_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "endDate"))
+    CapacityBlockOfferingSegment.add_member(:capacity_block_duration_hours, Shapes::ShapeRef.new(shape: Integer, location_name: "capacityBlockDurationHours"))
+    CapacityBlockOfferingSegment.add_member(:capacity_block_duration_minutes, Shapes::ShapeRef.new(shape: Integer, location_name: "capacityBlockDurationMinutes"))
+    CapacityBlockOfferingSegment.add_member(:upfront_fee, Shapes::ShapeRef.new(shape: String, location_name: "upfrontFee"))
+    CapacityBlockOfferingSegment.add_member(:currency_code, Shapes::ShapeRef.new(shape: String, location_name: "currencyCode"))
+    CapacityBlockOfferingSegment.add_member(:zone_type, Shapes::ShapeRef.new(shape: String, location_name: "zoneType"))
+    CapacityBlockOfferingSegment.struct_class = Types::CapacityBlockOfferingSegment
+
+    CapacityBlockOfferingSegmentSet.member = Shapes::ShapeRef.new(shape: CapacityBlockOfferingSegment, location_name: "item")
 
     CapacityBlockOfferingSet.member = Shapes::ShapeRef.new(shape: CapacityBlockOffering, location_name: "item")
 
@@ -7088,6 +7155,10 @@ module Aws::EC2
     CreateNetworkingFlexCostAllocationPolicyResult.add_member(:expected_effective_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "expectedEffectiveAt"))
     CreateNetworkingFlexCostAllocationPolicyResult.struct_class = Types::CreateNetworkingFlexCostAllocationPolicyResult
 
+    CreatePeeringConnectionOptionsRequest.add_member(:allow_multipath_resilience, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowMultipathResilience"))
+    CreatePeeringConnectionOptionsRequest.add_member(:multipath_resilience_mode, Shapes::ShapeRef.new(shape: MultipathResilienceMode, location_name: "MultipathResilienceMode"))
+    CreatePeeringConnectionOptionsRequest.struct_class = Types::CreatePeeringConnectionOptionsRequest
+
     CreatePlacementGroupRequest.add_member(:partition_count, Shapes::ShapeRef.new(shape: Integer, location_name: "PartitionCount"))
     CreatePlacementGroupRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreatePlacementGroupRequest.add_member(:spread_level, Shapes::ShapeRef.new(shape: SpreadLevel, location_name: "SpreadLevel"))
@@ -7458,6 +7529,8 @@ module Aws::EC2
     CreateTransitGatewayPeeringAttachmentRequest.struct_class = Types::CreateTransitGatewayPeeringAttachmentRequest
 
     CreateTransitGatewayPeeringAttachmentRequestOptions.add_member(:dynamic_routing, Shapes::ShapeRef.new(shape: DynamicRoutingValue, location_name: "DynamicRouting"))
+    CreateTransitGatewayPeeringAttachmentRequestOptions.add_member(:allow_multipath_resilience, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowMultipathResilience"))
+    CreateTransitGatewayPeeringAttachmentRequestOptions.add_member(:multipath_resilience_mode, Shapes::ShapeRef.new(shape: TransitGatewayPeeringAttachmentMultipathResilienceMode, location_name: "MultipathResilienceMode"))
     CreateTransitGatewayPeeringAttachmentRequestOptions.struct_class = Types::CreateTransitGatewayPeeringAttachmentRequestOptions
 
     CreateTransitGatewayPeeringAttachmentResult.add_member(:transit_gateway_peering_attachment, Shapes::ShapeRef.new(shape: TransitGatewayPeeringAttachment, location_name: "transitGatewayPeeringAttachment"))
@@ -7763,6 +7836,7 @@ module Aws::EC2
 
     CreateVpcPeeringConnectionRequest.add_member(:peer_region, Shapes::ShapeRef.new(shape: String, location_name: "PeerRegion"))
     CreateVpcPeeringConnectionRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateVpcPeeringConnectionRequest.add_member(:requester_peering_connection_options, Shapes::ShapeRef.new(shape: CreatePeeringConnectionOptionsRequest, location_name: "RequesterPeeringConnectionOptions"))
     CreateVpcPeeringConnectionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreateVpcPeeringConnectionRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "vpcId"))
     CreateVpcPeeringConnectionRequest.add_member(:peer_vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "peerVpcId"))
@@ -8879,6 +8953,7 @@ module Aws::EC2
     DescribeCapacityBlockOfferingsRequest.add_member(:ultraserver_type, Shapes::ShapeRef.new(shape: String, location_name: "UltraserverType"))
     DescribeCapacityBlockOfferingsRequest.add_member(:ultraserver_count, Shapes::ShapeRef.new(shape: Integer, location_name: "UltraserverCount"))
     DescribeCapacityBlockOfferingsRequest.add_member(:all_availability_zones, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllAvailabilityZones"))
+    DescribeCapacityBlockOfferingsRequest.add_member(:instance_type_preferences, Shapes::ShapeRef.new(shape: CapacityBlockInstanceTypePreferenceSet, location_name: "InstanceTypePreference"))
     DescribeCapacityBlockOfferingsRequest.struct_class = Types::DescribeCapacityBlockOfferingsRequest
 
     DescribeCapacityBlockOfferingsResult.add_member(:capacity_block_offerings, Shapes::ShapeRef.new(shape: CapacityBlockOfferingSet, location_name: "capacityBlockOfferingSet"))
@@ -16599,6 +16674,18 @@ module Aws::EC2
     ModifyTransitGatewayOptions.add_member(:encryption_support, Shapes::ShapeRef.new(shape: EncryptionSupportOptionValue, location_name: "EncryptionSupport"))
     ModifyTransitGatewayOptions.struct_class = Types::ModifyTransitGatewayOptions
 
+    ModifyTransitGatewayPeeringAttachmentRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
+    ModifyTransitGatewayPeeringAttachmentRequest.add_member(:options, Shapes::ShapeRef.new(shape: ModifyTransitGatewayPeeringAttachmentRequestOptions, location_name: "Options"))
+    ModifyTransitGatewayPeeringAttachmentRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyTransitGatewayPeeringAttachmentRequest.struct_class = Types::ModifyTransitGatewayPeeringAttachmentRequest
+
+    ModifyTransitGatewayPeeringAttachmentRequestOptions.add_member(:allow_multipath_resilience, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowMultipathResilience"))
+    ModifyTransitGatewayPeeringAttachmentRequestOptions.add_member(:multipath_resilience_mode, Shapes::ShapeRef.new(shape: TransitGatewayPeeringAttachmentMultipathResilienceMode, location_name: "MultipathResilienceMode"))
+    ModifyTransitGatewayPeeringAttachmentRequestOptions.struct_class = Types::ModifyTransitGatewayPeeringAttachmentRequestOptions
+
+    ModifyTransitGatewayPeeringAttachmentResult.add_member(:transit_gateway_peering_attachment, Shapes::ShapeRef.new(shape: TransitGatewayPeeringAttachment, location_name: "transitGatewayPeeringAttachment"))
+    ModifyTransitGatewayPeeringAttachmentResult.struct_class = Types::ModifyTransitGatewayPeeringAttachmentResult
+
     ModifyTransitGatewayPolicyTableEntryRequest.add_member(:transit_gateway_policy_table_id, Shapes::ShapeRef.new(shape: TransitGatewayPolicyTableId, required: true, location_name: "TransitGatewayPolicyTableId"))
     ModifyTransitGatewayPolicyTableEntryRequest.add_member(:policy_rule_number, Shapes::ShapeRef.new(shape: String, required: true, location_name: "PolicyRuleNumber"))
     ModifyTransitGatewayPolicyTableEntryRequest.add_member(:policy_rule, Shapes::ShapeRef.new(shape: TransitGatewayRequestPolicyRule, location_name: "PolicyRule"))
@@ -16986,6 +17073,8 @@ module Aws::EC2
     ModifyVpnTunnelOptionsSpecification.add_member(:startup_action, Shapes::ShapeRef.new(shape: String, location_name: "StartupAction"))
     ModifyVpnTunnelOptionsSpecification.add_member(:log_options, Shapes::ShapeRef.new(shape: VpnTunnelLogOptionsSpecification, location_name: "LogOptions"))
     ModifyVpnTunnelOptionsSpecification.add_member(:enable_tunnel_lifecycle_control, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableTunnelLifecycleControl"))
+    ModifyVpnTunnelOptionsSpecification.add_member(:phase_1_additional_key_exchanges, Shapes::ShapeRef.new(shape: AdditionalKeyExchangesRequestSpecification, location_name: "Phase1AdditionalKeyExchange"))
+    ModifyVpnTunnelOptionsSpecification.add_member(:phase_2_additional_key_exchanges, Shapes::ShapeRef.new(shape: AdditionalKeyExchangesRequestSpecification, location_name: "Phase2AdditionalKeyExchange"))
     ModifyVpnTunnelOptionsSpecification.struct_class = Types::ModifyVpnTunnelOptionsSpecification
 
     MonitorInstancesRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, required: true, location_name: "InstanceId"))
@@ -17537,11 +17626,15 @@ module Aws::EC2
     PeeringConnectionOptions.add_member(:allow_dns_resolution_from_remote_vpc, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowDnsResolutionFromRemoteVpc"))
     PeeringConnectionOptions.add_member(:allow_egress_from_local_classic_link_to_remote_vpc, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowEgressFromLocalClassicLinkToRemoteVpc"))
     PeeringConnectionOptions.add_member(:allow_egress_from_local_vpc_to_remote_classic_link, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowEgressFromLocalVpcToRemoteClassicLink"))
+    PeeringConnectionOptions.add_member(:allow_multipath_resilience, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowMultipathResilience"))
+    PeeringConnectionOptions.add_member(:multipath_resilience_mode, Shapes::ShapeRef.new(shape: MultipathResilienceMode, location_name: "multipathResilienceMode"))
     PeeringConnectionOptions.struct_class = Types::PeeringConnectionOptions
 
     PeeringConnectionOptionsRequest.add_member(:allow_dns_resolution_from_remote_vpc, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowDnsResolutionFromRemoteVpc"))
     PeeringConnectionOptionsRequest.add_member(:allow_egress_from_local_classic_link_to_remote_vpc, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowEgressFromLocalClassicLinkToRemoteVpc"))
     PeeringConnectionOptionsRequest.add_member(:allow_egress_from_local_vpc_to_remote_classic_link, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowEgressFromLocalVpcToRemoteClassicLink"))
+    PeeringConnectionOptionsRequest.add_member(:allow_multipath_resilience, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowMultipathResilience"))
+    PeeringConnectionOptionsRequest.add_member(:multipath_resilience_mode, Shapes::ShapeRef.new(shape: MultipathResilienceMode, location_name: "MultipathResilienceMode"))
     PeeringConnectionOptionsRequest.struct_class = Types::PeeringConnectionOptionsRequest
 
     PeeringTgwInfo.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "transitGatewayId"))
@@ -17907,6 +18000,7 @@ module Aws::EC2
 
     PurchaseCapacityBlockResult.add_member(:capacity_reservation, Shapes::ShapeRef.new(shape: CapacityReservation, location_name: "capacityReservation"))
     PurchaseCapacityBlockResult.add_member(:capacity_blocks, Shapes::ShapeRef.new(shape: CapacityBlockSet, location_name: "capacityBlockSet"))
+    PurchaseCapacityBlockResult.add_member(:capacity_reservations, Shapes::ShapeRef.new(shape: CapacityReservationSet, location_name: "capacityReservationSet"))
     PurchaseCapacityBlockResult.struct_class = Types::PurchaseCapacityBlockResult
 
     PurchaseHostReservationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
@@ -20429,6 +20523,11 @@ module Aws::EC2
     TransitGatewayPeeringAttachmentList.member = Shapes::ShapeRef.new(shape: TransitGatewayPeeringAttachment, location_name: "item")
 
     TransitGatewayPeeringAttachmentOptions.add_member(:dynamic_routing, Shapes::ShapeRef.new(shape: DynamicRoutingValue, location_name: "dynamicRouting"))
+    TransitGatewayPeeringAttachmentOptions.add_member(:requester_allow_multipath_resilience, Shapes::ShapeRef.new(shape: Boolean, location_name: "requesterAllowMultipathResilience"))
+    TransitGatewayPeeringAttachmentOptions.add_member(:requester_multipath_resilience_mode, Shapes::ShapeRef.new(shape: TransitGatewayPeeringAttachmentMultipathResilienceMode, location_name: "requesterMultipathResilienceMode"))
+    TransitGatewayPeeringAttachmentOptions.add_member(:accepter_allow_multipath_resilience, Shapes::ShapeRef.new(shape: Boolean, location_name: "accepterAllowMultipathResilience"))
+    TransitGatewayPeeringAttachmentOptions.add_member(:accepter_multipath_resilience_mode, Shapes::ShapeRef.new(shape: TransitGatewayPeeringAttachmentMultipathResilienceMode, location_name: "accepterMultipathResilienceMode"))
+    TransitGatewayPeeringAttachmentOptions.add_member(:multipath_resilience_status, Shapes::ShapeRef.new(shape: TransitGatewayPeeringAttachmentMultipathResilienceStatus, location_name: "multipathResilienceStatus"))
     TransitGatewayPeeringAttachmentOptions.struct_class = Types::TransitGatewayPeeringAttachmentOptions
 
     TransitGatewayPolicyRule.add_member(:source_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "sourceCidrBlock"))
@@ -20645,6 +20744,8 @@ module Aws::EC2
     TunnelOption.add_member(:startup_action, Shapes::ShapeRef.new(shape: String, location_name: "startupAction"))
     TunnelOption.add_member(:log_options, Shapes::ShapeRef.new(shape: VpnTunnelLogOptions, location_name: "logOptions"))
     TunnelOption.add_member(:enable_tunnel_lifecycle_control, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableTunnelLifecycleControl"))
+    TunnelOption.add_member(:phase_1_additional_key_exchanges, Shapes::ShapeRef.new(shape: AdditionalKeyExchangesList, location_name: "phase1AdditionalKeyExchangeSet"))
+    TunnelOption.add_member(:phase_2_additional_key_exchanges, Shapes::ShapeRef.new(shape: AdditionalKeyExchangesList, location_name: "phase2AdditionalKeyExchangeSet"))
     TunnelOption.struct_class = Types::TunnelOption
 
     TunnelOptionsList.member = Shapes::ShapeRef.new(shape: TunnelOption, location_name: "item")
@@ -21428,6 +21529,7 @@ module Aws::EC2
     VpcPeeringConnection.add_member(:status, Shapes::ShapeRef.new(shape: VpcPeeringConnectionStateReason, location_name: "status"))
     VpcPeeringConnection.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     VpcPeeringConnection.add_member(:vpc_peering_connection_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcPeeringConnectionId"))
+    VpcPeeringConnection.add_member(:multipath_resilience_status, Shapes::ShapeRef.new(shape: MultipathResilienceStatus, location_name: "multipathResilienceStatus"))
     VpcPeeringConnection.struct_class = Types::VpcPeeringConnection
 
     VpcPeeringConnectionIdList.member = Shapes::ShapeRef.new(shape: VpcPeeringConnectionId, location_name: "item")
@@ -21437,6 +21539,8 @@ module Aws::EC2
     VpcPeeringConnectionOptionsDescription.add_member(:allow_dns_resolution_from_remote_vpc, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowDnsResolutionFromRemoteVpc"))
     VpcPeeringConnectionOptionsDescription.add_member(:allow_egress_from_local_classic_link_to_remote_vpc, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowEgressFromLocalClassicLinkToRemoteVpc"))
     VpcPeeringConnectionOptionsDescription.add_member(:allow_egress_from_local_vpc_to_remote_classic_link, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowEgressFromLocalVpcToRemoteClassicLink"))
+    VpcPeeringConnectionOptionsDescription.add_member(:allow_multipath_resilience, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowMultipathResilience"))
+    VpcPeeringConnectionOptionsDescription.add_member(:multipath_resilience_mode, Shapes::ShapeRef.new(shape: MultipathResilienceMode, location_name: "multipathResilienceMode"))
     VpcPeeringConnectionOptionsDescription.struct_class = Types::VpcPeeringConnectionOptionsDescription
 
     VpcPeeringConnectionStateReason.add_member(:code, Shapes::ShapeRef.new(shape: VpcPeeringConnectionStateReasonCode, location_name: "code"))
@@ -21451,6 +21555,16 @@ module Aws::EC2
     VpcPeeringConnectionVpcInfo.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
     VpcPeeringConnectionVpcInfo.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "region"))
     VpcPeeringConnectionVpcInfo.struct_class = Types::VpcPeeringConnectionVpcInfo
+
+    VpnAdditionalKeyExchange.add_member(:additional_key_exchange_round, Shapes::ShapeRef.new(shape: Integer, location_name: "additionalKeyExchangeRound"))
+    VpnAdditionalKeyExchange.add_member(:key_exchange_methods, Shapes::ShapeRef.new(shape: AdditionalKeyExchangeMethodsList, location_name: "keyExchangeMethodSet"))
+    VpnAdditionalKeyExchange.add_member(:requirement, Shapes::ShapeRef.new(shape: AdditionalKeyExchangeRequirement, location_name: "requirement"))
+    VpnAdditionalKeyExchange.struct_class = Types::VpnAdditionalKeyExchange
+
+    VpnAdditionalKeyExchangeRequest.add_member(:additional_key_exchange_round, Shapes::ShapeRef.new(shape: AdditionalKeyExchangeRound, required: true, location_name: "AdditionalKeyExchangeRound"))
+    VpnAdditionalKeyExchangeRequest.add_member(:key_exchange_methods, Shapes::ShapeRef.new(shape: AdditionalKeyExchangeMethodsRequestList, location_name: "KeyExchangeMethod"))
+    VpnAdditionalKeyExchangeRequest.add_member(:requirement, Shapes::ShapeRef.new(shape: AdditionalKeyExchangeRequirement, location_name: "Requirement"))
+    VpnAdditionalKeyExchangeRequest.struct_class = Types::VpnAdditionalKeyExchangeRequest
 
     VpnConcentrator.add_member(:vpn_concentrator_id, Shapes::ShapeRef.new(shape: String, location_name: "vpnConcentratorId"))
     VpnConcentrator.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "state"))
@@ -21567,6 +21681,8 @@ module Aws::EC2
     VpnTunnelOptionsSpecification.add_member(:startup_action, Shapes::ShapeRef.new(shape: String, location_name: "StartupAction"))
     VpnTunnelOptionsSpecification.add_member(:log_options, Shapes::ShapeRef.new(shape: VpnTunnelLogOptionsSpecification, location_name: "LogOptions"))
     VpnTunnelOptionsSpecification.add_member(:enable_tunnel_lifecycle_control, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableTunnelLifecycleControl"))
+    VpnTunnelOptionsSpecification.add_member(:phase_1_additional_key_exchanges, Shapes::ShapeRef.new(shape: AdditionalKeyExchangesRequestSpecification, location_name: "Phase1AdditionalKeyExchange"))
+    VpnTunnelOptionsSpecification.add_member(:phase_2_additional_key_exchanges, Shapes::ShapeRef.new(shape: AdditionalKeyExchangesRequestSpecification, location_name: "Phase2AdditionalKeyExchange"))
     VpnTunnelOptionsSpecification.struct_class = Types::VpnTunnelOptionsSpecification
 
     VpnTunnelOptionsSpecificationsList.member = Shapes::ShapeRef.new(shape: VpnTunnelOptionsSpecification)
@@ -28387,6 +28503,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyTransitGatewayNetworkFunctionAttachmentRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyTransitGatewayNetworkFunctionAttachmentResult)
+      end)
+
+      api.add_operation(:modify_transit_gateway_peering_attachment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyTransitGatewayPeeringAttachment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyTransitGatewayPeeringAttachmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyTransitGatewayPeeringAttachmentResult)
       end)
 
       api.add_operation(:modify_transit_gateway_policy_table_entry, Seahorse::Model::Operation.new.tap do |o|

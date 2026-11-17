@@ -32,8 +32,21 @@ module Aws::BedrockAgentCore
     ActorSummaryList = Shapes::ListShape.new(name: 'ActorSummaryList')
     AffectedSession = Shapes::StructureShape.new(name: 'AffectedSession')
     AffectedSessionList = Shapes::ListShape.new(name: 'AffectedSessionList')
+    AgentApplicationName = Shapes::StringShape.new(name: 'AgentApplicationName')
     AgentCard = Shapes::DocumentShape.new(name: 'AgentCard', document: true)
     AgentCardDefinition = Shapes::StructureShape.new(name: 'AgentCardDefinition')
+    AgentCoreRuntimeInvocation = Shapes::StructureShape.new(name: 'AgentCoreRuntimeInvocation')
+    AgentCoreRuntimeInvocationDetails = Shapes::StructureShape.new(name: 'AgentCoreRuntimeInvocationDetails')
+    AgentInsightArchiveStatus = Shapes::StringShape.new(name: 'AgentInsightArchiveStatus')
+    AgentInsightCustomerMetadataStatus = Shapes::StringShape.new(name: 'AgentInsightCustomerMetadataStatus')
+    AgentInsightId = Shapes::StringShape.new(name: 'AgentInsightId')
+    AgentInsightSummary = Shapes::StructureShape.new(name: 'AgentInsightSummary')
+    AgentInsightSummaryAffectedSessionCountInteger = Shapes::IntegerShape.new(name: 'AgentInsightSummaryAffectedSessionCountInteger')
+    AgentInsightSummaryList = Shapes::ListShape.new(name: 'AgentInsightSummaryList')
+    AgentInvocationConfig = Shapes::UnionShape.new(name: 'AgentInvocationConfig')
+    AgentInvocationDetails = Shapes::UnionShape.new(name: 'AgentInvocationDetails')
+    AgentRuntimeEndpointArn = Shapes::StringShape.new(name: 'AgentRuntimeEndpointArn')
+    AgentRuntimeVersion = Shapes::StringShape.new(name: 'AgentRuntimeVersion')
     AgentSkillsDescriptor = Shapes::StructureShape.new(name: 'AgentSkillsDescriptor')
     AgentTracesConfig = Shapes::UnionShape.new(name: 'AgentTracesConfig')
     Amount = Shapes::StructureShape.new(name: 'Amount')
@@ -55,6 +68,7 @@ module Aws::BedrockAgentCore
     BatchEvaluationDescription = Shapes::StringShape.new(name: 'BatchEvaluationDescription')
     BatchEvaluationId = Shapes::StringShape.new(name: 'BatchEvaluationId')
     BatchEvaluationName = Shapes::StringShape.new(name: 'BatchEvaluationName')
+    BatchEvaluationSourceConfig = Shapes::StructureShape.new(name: 'BatchEvaluationSourceConfig')
     BatchEvaluationStatus = Shapes::StringShape.new(name: 'BatchEvaluationStatus')
     BatchEvaluationSummary = Shapes::StructureShape.new(name: 'BatchEvaluationSummary')
     BatchEvaluationSummaryList = Shapes::ListShape.new(name: 'BatchEvaluationSummaryList')
@@ -100,6 +114,9 @@ module Aws::BedrockAgentCore
     CloudWatchLogsFilterOperator = Shapes::StringShape.new(name: 'CloudWatchLogsFilterOperator')
     CloudWatchLogsRule = Shapes::StructureShape.new(name: 'CloudWatchLogsRule')
     CloudWatchLogsSource = Shapes::StructureShape.new(name: 'CloudWatchLogsSource')
+    CloudWatchLogsSourceConfig = Shapes::StructureShape.new(name: 'CloudWatchLogsSourceConfig')
+    CloudWatchLogsSourceConfigLogGroupNamePrefixesList = Shapes::ListShape.new(name: 'CloudWatchLogsSourceConfigLogGroupNamePrefixesList')
+    CloudWatchLogsSourceConfigLogGroupNamesList = Shapes::ListShape.new(name: 'CloudWatchLogsSourceConfigLogGroupNamesList')
     CloudWatchLogsSourceLogGroupNamePrefixesList = Shapes::ListShape.new(name: 'CloudWatchLogsSourceLogGroupNamePrefixesList')
     CloudWatchLogsSourceLogGroupNamesList = Shapes::ListShape.new(name: 'CloudWatchLogsSourceLogGroupNamesList')
     CloudWatchLogsSourceServiceNamesList = Shapes::ListShape.new(name: 'CloudWatchLogsSourceServiceNamesList')
@@ -154,11 +171,26 @@ module Aws::BedrockAgentCore
     CryptoX402PaymentInput = Shapes::StructureShape.new(name: 'CryptoX402PaymentInput')
     CryptoX402PaymentOutput = Shapes::StructureShape.new(name: 'CryptoX402PaymentOutput')
     Currency = Shapes::StringShape.new(name: 'Currency')
+    CustomDataIdentifier = Shapes::StructureShape.new(name: 'CustomDataIdentifier')
+    CustomDataIdentifierNameString = Shapes::StringShape.new(name: 'CustomDataIdentifierNameString')
+    CustomDataIdentifierRegexString = Shapes::StringShape.new(name: 'CustomDataIdentifierRegexString')
     CustomDescriptor = Shapes::StructureShape.new(name: 'CustomDescriptor')
     CustomRequestKeyType = Shapes::StringShape.new(name: 'CustomRequestKeyType')
     CustomRequestParametersType = Shapes::MapShape.new(name: 'CustomRequestParametersType')
     CustomRequestValueType = Shapes::StringShape.new(name: 'CustomRequestValueType')
     DataSourceConfig = Shapes::UnionShape.new(name: 'DataSourceConfig')
+    DatasetDetails = Shapes::StructureShape.new(name: 'DatasetDetails')
+    DatasetExecutionConfig = Shapes::StructureShape.new(name: 'DatasetExecutionConfig')
+    DatasetExecutionDetails = Shapes::StructureShape.new(name: 'DatasetExecutionDetails')
+    DatasetGenerationDescription = Shapes::StringShape.new(name: 'DatasetGenerationDescription')
+    DatasetGenerationId = Shapes::StringShape.new(name: 'DatasetGenerationId')
+    DatasetGenerationName = Shapes::StringShape.new(name: 'DatasetGenerationName')
+    DatasetGenerationStatus = Shapes::StringShape.new(name: 'DatasetGenerationStatus')
+    DatasetGenerationSummary = Shapes::StructureShape.new(name: 'DatasetGenerationSummary')
+    DatasetGenerationSummaryList = Shapes::ListShape.new(name: 'DatasetGenerationSummaryList')
+    DatasetId = Shapes::StringShape.new(name: 'DatasetId')
+    DatasetSource = Shapes::StructureShape.new(name: 'DatasetSource')
+    DatasetVersion = Shapes::StringShape.new(name: 'DatasetVersion')
     DateTimestamp = Shapes::TimestampShape.new(name: 'DateTimestamp', timestampFormat: "iso8601")
     DeleteABTestRequest = Shapes::StructureShape.new(name: 'DeleteABTestRequest')
     DeleteABTestResponse = Shapes::StructureShape.new(name: 'DeleteABTestResponse')
@@ -166,6 +198,8 @@ module Aws::BedrockAgentCore
     DeleteBatchEvaluationResponse = Shapes::StructureShape.new(name: 'DeleteBatchEvaluationResponse')
     DeleteCapacityProviderSessionRequest = Shapes::StructureShape.new(name: 'DeleteCapacityProviderSessionRequest')
     DeleteCapacityProviderSessionResponse = Shapes::StructureShape.new(name: 'DeleteCapacityProviderSessionResponse')
+    DeleteDatasetGenerationRequest = Shapes::StructureShape.new(name: 'DeleteDatasetGenerationRequest')
+    DeleteDatasetGenerationResponse = Shapes::StructureShape.new(name: 'DeleteDatasetGenerationResponse')
     DeleteEventInput = Shapes::StructureShape.new(name: 'DeleteEventInput')
     DeleteEventOutput = Shapes::StructureShape.new(name: 'DeleteEventOutput')
     DeleteMemoryRecordInput = Shapes::StructureShape.new(name: 'DeleteMemoryRecordInput')
@@ -217,6 +251,8 @@ module Aws::BedrockAgentCore
     EvaluationToolNames = Shapes::ListShape.new(name: 'EvaluationToolNames')
     Evaluator = Shapes::StructureShape.new(name: 'Evaluator')
     EvaluatorArn = Shapes::StringShape.new(name: 'EvaluatorArn')
+    EvaluatorFilter = Shapes::StructureShape.new(name: 'EvaluatorFilter')
+    EvaluatorFilterList = Shapes::ListShape.new(name: 'EvaluatorFilterList')
     EvaluatorId = Shapes::StringShape.new(name: 'EvaluatorId')
     EvaluatorList = Shapes::ListShape.new(name: 'EvaluatorList')
     EvaluatorMetric = Shapes::StructureShape.new(name: 'EvaluatorMetric')
@@ -256,21 +292,52 @@ module Aws::BedrockAgentCore
     FilterInput = Shapes::StructureShape.new(name: 'FilterInput')
     FilterStringValue = Shapes::StringShape.new(name: 'FilterStringValue')
     FilterValue = Shapes::UnionShape.new(name: 'FilterValue')
+    FindingCountMap = Shapes::MapShape.new(name: 'FindingCountMap')
     FindingDescription = Shapes::StringShape.new(name: 'FindingDescription')
+    FindingIdentifierKey = Shapes::StringShape.new(name: 'FindingIdentifierKey')
     FindingTargetId = Shapes::StringShape.new(name: 'FindingTargetId')
     FindingTargetType = Shapes::StringShape.new(name: 'FindingTargetType')
     GatewayArn = Shapes::StringShape.new(name: 'GatewayArn')
     GatewayFilter = Shapes::StructureShape.new(name: 'GatewayFilter')
+    GenerationAttributeFilter = Shapes::StructureShape.new(name: 'GenerationAttributeFilter')
+    GenerationAttributeFilterKeyString = Shapes::StringShape.new(name: 'GenerationAttributeFilterKeyString')
+    GenerationAttributeFilterList = Shapes::ListShape.new(name: 'GenerationAttributeFilterList')
+    GenerationErrorCode = Shapes::StringShape.new(name: 'GenerationErrorCode')
+    GenerationErrorDetail = Shapes::StructureShape.new(name: 'GenerationErrorDetail')
+    GenerationErrorDetailCountInteger = Shapes::IntegerShape.new(name: 'GenerationErrorDetailCountInteger')
+    GenerationErrorDetailsList = Shapes::ListShape.new(name: 'GenerationErrorDetailsList')
+    GenerationErrorMessage = Shapes::StringShape.new(name: 'GenerationErrorMessage')
+    GenerationErrorSessionIdList = Shapes::ListShape.new(name: 'GenerationErrorSessionIdList')
+    GenerationFilterOperator = Shapes::StringShape.new(name: 'GenerationFilterOperator')
+    GenerationFilterStringValue = Shapes::StringShape.new(name: 'GenerationFilterStringValue')
+    GenerationFilterValue = Shapes::UnionShape.new(name: 'GenerationFilterValue')
+    GenerationFilters = Shapes::StructureShape.new(name: 'GenerationFilters')
+    GenerationIdentifierCounts = Shapes::StructureShape.new(name: 'GenerationIdentifierCounts')
+    GenerationIdentifiers = Shapes::StructureShape.new(name: 'GenerationIdentifiers')
+    GenerationResults = Shapes::StructureShape.new(name: 'GenerationResults')
+    GenerationSamplingConfig = Shapes::StructureShape.new(name: 'GenerationSamplingConfig')
+    GenerationSamplingConfigMaxScenariosInteger = Shapes::IntegerShape.new(name: 'GenerationSamplingConfigMaxScenariosInteger')
+    GenerationSelection = Shapes::UnionShape.new(name: 'GenerationSelection')
+    GenerationSelectionRecord = Shapes::UnionShape.new(name: 'GenerationSelectionRecord')
+    GenerationSessionIdList = Shapes::ListShape.new(name: 'GenerationSessionIdList')
+    GenerationSource = Shapes::UnionShape.new(name: 'GenerationSource')
+    GenerationSourceRecord = Shapes::UnionShape.new(name: 'GenerationSourceRecord')
+    GenerationTraceIdList = Shapes::ListShape.new(name: 'GenerationTraceIdList')
     GetABTestRequest = Shapes::StructureShape.new(name: 'GetABTestRequest')
     GetABTestResponse = Shapes::StructureShape.new(name: 'GetABTestResponse')
     GetAgentCardRequest = Shapes::StructureShape.new(name: 'GetAgentCardRequest')
     GetAgentCardResponse = Shapes::StructureShape.new(name: 'GetAgentCardResponse')
+    GetAgentInsightRequest = Shapes::StructureShape.new(name: 'GetAgentInsightRequest')
+    GetAgentInsightResponse = Shapes::StructureShape.new(name: 'GetAgentInsightResponse')
+    GetAgentInsightResponseAffectedSessionCountInteger = Shapes::IntegerShape.new(name: 'GetAgentInsightResponseAffectedSessionCountInteger')
     GetBatchEvaluationRequest = Shapes::StructureShape.new(name: 'GetBatchEvaluationRequest')
     GetBatchEvaluationResponse = Shapes::StructureShape.new(name: 'GetBatchEvaluationResponse')
     GetBrowserSessionRequest = Shapes::StructureShape.new(name: 'GetBrowserSessionRequest')
     GetBrowserSessionResponse = Shapes::StructureShape.new(name: 'GetBrowserSessionResponse')
     GetCodeInterpreterSessionRequest = Shapes::StructureShape.new(name: 'GetCodeInterpreterSessionRequest')
     GetCodeInterpreterSessionResponse = Shapes::StructureShape.new(name: 'GetCodeInterpreterSessionResponse')
+    GetDatasetGenerationRequest = Shapes::StructureShape.new(name: 'GetDatasetGenerationRequest')
+    GetDatasetGenerationResponse = Shapes::StructureShape.new(name: 'GetDatasetGenerationResponse')
     GetEventInput = Shapes::StructureShape.new(name: 'GetEventInput')
     GetEventOutput = Shapes::StructureShape.new(name: 'GetEventOutput')
     GetMemoryRecordInput = Shapes::StructureShape.new(name: 'GetMemoryRecordInput')
@@ -295,6 +362,9 @@ module Aws::BedrockAgentCore
     GetWorkloadAccessTokenForUserIdResponse = Shapes::StructureShape.new(name: 'GetWorkloadAccessTokenForUserIdResponse')
     GetWorkloadAccessTokenRequest = Shapes::StructureShape.new(name: 'GetWorkloadAccessTokenRequest')
     GetWorkloadAccessTokenResponse = Shapes::StructureShape.new(name: 'GetWorkloadAccessTokenResponse')
+    GroundTruthConfig = Shapes::StructureShape.new(name: 'GroundTruthConfig')
+    GroundTruthField = Shapes::StringShape.new(name: 'GroundTruthField')
+    GroundTruthFieldList = Shapes::ListShape.new(name: 'GroundTruthFieldList')
     GroundTruthSource = Shapes::UnionShape.new(name: 'GroundTruthSource')
     GroundTruthTurn = Shapes::StructureShape.new(name: 'GroundTruthTurn')
     GroundTruthTurnInput = Shapes::UnionShape.new(name: 'GroundTruthTurnInput')
@@ -483,6 +553,9 @@ module Aws::BedrockAgentCore
     ListABTestsResponse = Shapes::StructureShape.new(name: 'ListABTestsResponse')
     ListActorsInput = Shapes::StructureShape.new(name: 'ListActorsInput')
     ListActorsOutput = Shapes::StructureShape.new(name: 'ListActorsOutput')
+    ListAgentInsightsRequest = Shapes::StructureShape.new(name: 'ListAgentInsightsRequest')
+    ListAgentInsightsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAgentInsightsRequestMaxResultsInteger')
+    ListAgentInsightsResponse = Shapes::StructureShape.new(name: 'ListAgentInsightsResponse')
     ListBatchEvaluationsRequest = Shapes::StructureShape.new(name: 'ListBatchEvaluationsRequest')
     ListBatchEvaluationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListBatchEvaluationsRequestMaxResultsInteger')
     ListBatchEvaluationsResponse = Shapes::StructureShape.new(name: 'ListBatchEvaluationsResponse')
@@ -490,6 +563,9 @@ module Aws::BedrockAgentCore
     ListBrowserSessionsResponse = Shapes::StructureShape.new(name: 'ListBrowserSessionsResponse')
     ListCodeInterpreterSessionsRequest = Shapes::StructureShape.new(name: 'ListCodeInterpreterSessionsRequest')
     ListCodeInterpreterSessionsResponse = Shapes::StructureShape.new(name: 'ListCodeInterpreterSessionsResponse')
+    ListDatasetGenerationsRequest = Shapes::StructureShape.new(name: 'ListDatasetGenerationsRequest')
+    ListDatasetGenerationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListDatasetGenerationsRequestMaxResultsInteger')
+    ListDatasetGenerationsResponse = Shapes::StructureShape.new(name: 'ListDatasetGenerationsResponse')
     ListEventsInput = Shapes::StructureShape.new(name: 'ListEventsInput')
     ListEventsOutput = Shapes::StructureShape.new(name: 'ListEventsOutput')
     ListMemoryExtractionJobsInput = Shapes::StructureShape.new(name: 'ListMemoryExtractionJobsInput')
@@ -593,6 +669,7 @@ module Aws::BedrockAgentCore
     Oauth2FlowType = Shapes::StringShape.new(name: 'Oauth2FlowType')
     OnlineEvaluationConfigArn = Shapes::StringShape.new(name: 'OnlineEvaluationConfigArn')
     OnlineEvaluationConfigSource = Shapes::StructureShape.new(name: 'OnlineEvaluationConfigSource')
+    OnlineEvaluationSourceConfig = Shapes::StructureShape.new(name: 'OnlineEvaluationSourceConfig')
     OnlineEvaluationTraceConfig = Shapes::StructureShape.new(name: 'OnlineEvaluationTraceConfig')
     OperatorType = Shapes::StringShape.new(name: 'OperatorType')
     OptionalLogGroupName = Shapes::StringShape.new(name: 'OptionalLogGroupName')
@@ -661,6 +738,11 @@ module Aws::BedrockAgentCore
     RecordExpiryAction = Shapes::StringShape.new(name: 'RecordExpiryAction')
     RecordExpiryDurationDays = Shapes::IntegerShape.new(name: 'RecordExpiryDurationDays')
     RecordExpirySpecification = Shapes::UnionShape.new(name: 'RecordExpirySpecification')
+    RedactionConfiguration = Shapes::StructureShape.new(name: 'RedactionConfiguration')
+    RedactionConfigurationCustomDataIdentifiersList = Shapes::ListShape.new(name: 'RedactionConfigurationCustomDataIdentifiersList')
+    RedactionIdentifier = Shapes::StringShape.new(name: 'RedactionIdentifier')
+    RedactionIdentifierList = Shapes::ListShape.new(name: 'RedactionIdentifierList')
+    RedactionSummary = Shapes::StructureShape.new(name: 'RedactionSummary')
     RegistryArn = Shapes::StringShape.new(name: 'RegistryArn')
     RegistryIdentifier = Shapes::StringShape.new(name: 'RegistryIdentifier')
     RegistryRecordArn = Shapes::StringShape.new(name: 'RegistryRecordArn')
@@ -671,6 +753,7 @@ module Aws::BedrockAgentCore
     RegistryRecordSummaryList = Shapes::ListShape.new(name: 'RegistryRecordSummaryList')
     RegistryRecordVersion = Shapes::StringShape.new(name: 'RegistryRecordVersion')
     RequestIdentifier = Shapes::StringShape.new(name: 'RequestIdentifier')
+    RequestTemplate = Shapes::StringShape.new(name: 'RequestTemplate')
     RequestUri = Shapes::StringShape.new(name: 'RequestUri')
     ResourceContent = Shapes::StructureShape.new(name: 'ResourceContent')
     ResourceContentType = Shapes::StringShape.new(name: 'ResourceContentType')
@@ -681,6 +764,7 @@ module Aws::BedrockAgentCore
     ResourcesListType = Shapes::ListShape.new(name: 'ResourcesListType')
     ResponseChunk = Shapes::StructureShape.new(name: 'ResponseChunk')
     ResponseStream = Shapes::BlobShape.new(name: 'ResponseStream', streaming: true)
+    ResultAggregation = Shapes::StringShape.new(name: 'ResultAggregation')
     ResultDestination = Shapes::StringShape.new(name: 'ResultDestination')
     RetrieveMemoryRecordsInput = Shapes::StructureShape.new(name: 'RetrieveMemoryRecordsInput')
     RetrieveMemoryRecordsOutput = Shapes::StructureShape.new(name: 'RetrieveMemoryRecordsOutput')
@@ -705,6 +789,7 @@ module Aws::BedrockAgentCore
     SaveBrowserSessionProfileRequestTraceIdString = Shapes::StringShape.new(name: 'SaveBrowserSessionProfileRequestTraceIdString')
     SaveBrowserSessionProfileRequestTraceParentString = Shapes::StringShape.new(name: 'SaveBrowserSessionProfileRequestTraceParentString')
     SaveBrowserSessionProfileResponse = Shapes::StructureShape.new(name: 'SaveBrowserSessionProfileResponse')
+    ScenarioType = Shapes::StringShape.new(name: 'ScenarioType')
     SchemaVersion = Shapes::StringShape.new(name: 'SchemaVersion')
     ScopeType = Shapes::StringShape.new(name: 'ScopeType')
     ScopesListType = Shapes::ListShape.new(name: 'ScopesListType')
@@ -764,6 +849,8 @@ module Aws::BedrockAgentCore
     StartCodeInterpreterSessionRequestTraceIdString = Shapes::StringShape.new(name: 'StartCodeInterpreterSessionRequestTraceIdString')
     StartCodeInterpreterSessionRequestTraceParentString = Shapes::StringShape.new(name: 'StartCodeInterpreterSessionRequestTraceParentString')
     StartCodeInterpreterSessionResponse = Shapes::StructureShape.new(name: 'StartCodeInterpreterSessionResponse')
+    StartDatasetGenerationRequest = Shapes::StructureShape.new(name: 'StartDatasetGenerationRequest')
+    StartDatasetGenerationResponse = Shapes::StructureShape.new(name: 'StartDatasetGenerationResponse')
     StartMemoryExtractionJobInput = Shapes::StructureShape.new(name: 'StartMemoryExtractionJobInput')
     StartMemoryExtractionJobOutput = Shapes::StructureShape.new(name: 'StartMemoryExtractionJobOutput')
     StartRecommendationRequest = Shapes::StructureShape.new(name: 'StartRecommendationRequest')
@@ -839,13 +926,21 @@ module Aws::BedrockAgentCore
     ToolsFileSystemConfigurations = Shapes::ListShape.new(name: 'ToolsFileSystemConfigurations')
     TopK = Shapes::IntegerShape.new(name: 'TopK')
     TopP = Shapes::FloatShape.new(name: 'TopP')
+    TraceGenerationRecord = Shapes::StructureShape.new(name: 'TraceGenerationRecord')
+    TraceGenerationSource = Shapes::StructureShape.new(name: 'TraceGenerationSource')
     TraceId = Shapes::StringShape.new(name: 'TraceId')
     TraceIdList = Shapes::ListShape.new(name: 'TraceIdList')
     TraceIds = Shapes::ListShape.new(name: 'TraceIds')
+    TraceSourceConfig = Shapes::UnionShape.new(name: 'TraceSourceConfig')
+    TurnCountRange = Shapes::StructureShape.new(name: 'TurnCountRange')
+    TurnCountRangeMaxInteger = Shapes::IntegerShape.new(name: 'TurnCountRangeMaxInteger')
+    TurnCountRangeMinInteger = Shapes::IntegerShape.new(name: 'TurnCountRangeMinInteger')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     Unit = Shapes::StructureShape.new(name: 'Unit')
     UpdateABTestRequest = Shapes::StructureShape.new(name: 'UpdateABTestRequest')
     UpdateABTestResponse = Shapes::StructureShape.new(name: 'UpdateABTestResponse')
+    UpdateAgentInsightRequest = Shapes::StructureShape.new(name: 'UpdateAgentInsightRequest')
+    UpdateAgentInsightResponse = Shapes::StructureShape.new(name: 'UpdateAgentInsightResponse')
     UpdateBrowserStreamRequest = Shapes::StructureShape.new(name: 'UpdateBrowserStreamRequest')
     UpdateBrowserStreamResponse = Shapes::StructureShape.new(name: 'UpdateBrowserStreamResponse')
     UserId = Shapes::StringShape.new(name: 'UserId')
@@ -931,6 +1026,43 @@ module Aws::BedrockAgentCore
     AgentCardDefinition.add_member(:inline_content, Shapes::ShapeRef.new(shape: InlineContent, location_name: "inlineContent"))
     AgentCardDefinition.struct_class = Types::AgentCardDefinition
 
+    AgentCoreRuntimeInvocation.add_member(:agent_runtime_endpoint_arn, Shapes::ShapeRef.new(shape: AgentRuntimeEndpointArn, required: true, location_name: "agentRuntimeEndpointArn"))
+    AgentCoreRuntimeInvocation.add_member(:request_template, Shapes::ShapeRef.new(shape: RequestTemplate, location_name: "requestTemplate"))
+    AgentCoreRuntimeInvocation.struct_class = Types::AgentCoreRuntimeInvocation
+
+    AgentCoreRuntimeInvocationDetails.add_member(:agent_runtime_endpoint_arn, Shapes::ShapeRef.new(shape: AgentRuntimeEndpointArn, required: true, location_name: "agentRuntimeEndpointArn"))
+    AgentCoreRuntimeInvocationDetails.add_member(:agent_runtime_version, Shapes::ShapeRef.new(shape: AgentRuntimeVersion, required: true, location_name: "agentRuntimeVersion"))
+    AgentCoreRuntimeInvocationDetails.add_member(:request_template, Shapes::ShapeRef.new(shape: RequestTemplate, location_name: "requestTemplate"))
+    AgentCoreRuntimeInvocationDetails.struct_class = Types::AgentCoreRuntimeInvocationDetails
+
+    AgentInsightSummary.add_member(:type, Shapes::ShapeRef.new(shape: InsightType, required: true, location_name: "type"))
+    AgentInsightSummary.add_member(:name, Shapes::ShapeRef.new(shape: InsightName, required: true, location_name: "name"))
+    AgentInsightSummary.add_member(:description, Shapes::ShapeRef.new(shape: InsightDescription, required: true, location_name: "description"))
+    AgentInsightSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    AgentInsightSummary.add_member(:affected_session_count, Shapes::ShapeRef.new(shape: AgentInsightSummaryAffectedSessionCountInteger, location_name: "affectedSessionCount"))
+    AgentInsightSummary.add_member(:agent_insight_id, Shapes::ShapeRef.new(shape: AgentInsightId, required: true, location_name: "agentInsightId"))
+    AgentInsightSummary.add_member(:application_name, Shapes::ShapeRef.new(shape: AgentApplicationName, required: true, location_name: "applicationName"))
+    AgentInsightSummary.add_member(:batch_evaluation_id, Shapes::ShapeRef.new(shape: BatchEvaluationId, location_name: "batchEvaluationId"))
+    AgentInsightSummary.add_member(:customer_metadata_status, Shapes::ShapeRef.new(shape: AgentInsightCustomerMetadataStatus, required: true, location_name: "customerMetadataStatus"))
+    AgentInsightSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updatedAt"))
+    AgentInsightSummary.add_member(:archive_status, Shapes::ShapeRef.new(shape: AgentInsightArchiveStatus, required: true, location_name: "archiveStatus"))
+    AgentInsightSummary.add_member(:last_seen_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastSeenAt"))
+    AgentInsightSummary.struct_class = Types::AgentInsightSummary
+
+    AgentInsightSummaryList.member = Shapes::ShapeRef.new(shape: AgentInsightSummary)
+
+    AgentInvocationConfig.add_member(:agent_core_runtime, Shapes::ShapeRef.new(shape: AgentCoreRuntimeInvocation, location_name: "agentCoreRuntime"))
+    AgentInvocationConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AgentInvocationConfig.add_member_subclass(:agent_core_runtime, Types::AgentInvocationConfig::AgentCoreRuntime)
+    AgentInvocationConfig.add_member_subclass(:unknown, Types::AgentInvocationConfig::Unknown)
+    AgentInvocationConfig.struct_class = Types::AgentInvocationConfig
+
+    AgentInvocationDetails.add_member(:agent_core_runtime, Shapes::ShapeRef.new(shape: AgentCoreRuntimeInvocationDetails, location_name: "agentCoreRuntime"))
+    AgentInvocationDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AgentInvocationDetails.add_member_subclass(:agent_core_runtime, Types::AgentInvocationDetails::AgentCoreRuntime)
+    AgentInvocationDetails.add_member_subclass(:unknown, Types::AgentInvocationDetails::Unknown)
+    AgentInvocationDetails.struct_class = Types::AgentInvocationDetails
+
     AgentSkillsDescriptor.add_member(:skill_md, Shapes::ShapeRef.new(shape: SkillMdDefinition, required: true, location_name: "skillMd"))
     AgentSkillsDescriptor.add_member(:skill_definition, Shapes::ShapeRef.new(shape: SkillDefinition, location_name: "skillDefinition"))
     AgentSkillsDescriptor.struct_class = Types::AgentSkillsDescriptor
@@ -984,6 +1116,9 @@ module Aws::BedrockAgentCore
     BatchDeleteMemoryRecordsOutput.add_member(:successful_records, Shapes::ShapeRef.new(shape: MemoryRecordsOutputList, required: true, location_name: "successfulRecords"))
     BatchDeleteMemoryRecordsOutput.add_member(:failed_records, Shapes::ShapeRef.new(shape: MemoryRecordsOutputList, required: true, location_name: "failedRecords"))
     BatchDeleteMemoryRecordsOutput.struct_class = Types::BatchDeleteMemoryRecordsOutput
+
+    BatchEvaluationSourceConfig.add_member(:batch_evaluation_arn, Shapes::ShapeRef.new(shape: BatchEvaluationArn, required: true, location_name: "batchEvaluationArn"))
+    BatchEvaluationSourceConfig.struct_class = Types::BatchEvaluationSourceConfig
 
     BatchEvaluationSummary.add_member(:batch_evaluation_id, Shapes::ShapeRef.new(shape: BatchEvaluationId, required: true, location_name: "batchEvaluationId"))
     BatchEvaluationSummary.add_member(:batch_evaluation_arn, Shapes::ShapeRef.new(shape: BatchEvaluationArn, required: true, location_name: "batchEvaluationArn"))
@@ -1122,6 +1257,17 @@ module Aws::BedrockAgentCore
     CloudWatchLogsSource.add_member(:log_group_name_prefixes, Shapes::ShapeRef.new(shape: CloudWatchLogsSourceLogGroupNamePrefixesList, location_name: "logGroupNamePrefixes"))
     CloudWatchLogsSource.add_member(:filter_config, Shapes::ShapeRef.new(shape: CloudWatchFilterConfig, location_name: "filterConfig"))
     CloudWatchLogsSource.struct_class = Types::CloudWatchLogsSource
+
+    CloudWatchLogsSourceConfig.add_member(:log_group_names, Shapes::ShapeRef.new(shape: CloudWatchLogsSourceConfigLogGroupNamesList, location_name: "logGroupNames"))
+    CloudWatchLogsSourceConfig.add_member(:log_group_name_prefixes, Shapes::ShapeRef.new(shape: CloudWatchLogsSourceConfigLogGroupNamePrefixesList, location_name: "logGroupNamePrefixes"))
+    CloudWatchLogsSourceConfig.add_member(:service_names, Shapes::ShapeRef.new(shape: ServiceNameList, required: true, location_name: "serviceNames"))
+    CloudWatchLogsSourceConfig.add_member(:start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "startTime"))
+    CloudWatchLogsSourceConfig.add_member(:end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "endTime"))
+    CloudWatchLogsSourceConfig.struct_class = Types::CloudWatchLogsSourceConfig
+
+    CloudWatchLogsSourceConfigLogGroupNamePrefixesList.member = Shapes::ShapeRef.new(shape: LogGroupNamePrefix)
+
+    CloudWatchLogsSourceConfigLogGroupNamesList.member = Shapes::ShapeRef.new(shape: LogGroupName)
 
     CloudWatchLogsSourceLogGroupNamePrefixesList.member = Shapes::ShapeRef.new(shape: LogGroupNamePrefix)
 
@@ -1320,6 +1466,10 @@ module Aws::BedrockAgentCore
     CryptoX402PaymentOutput.add_member(:payload, Shapes::ShapeRef.new(shape: PaymentDocument, required: true, location_name: "payload"))
     CryptoX402PaymentOutput.struct_class = Types::CryptoX402PaymentOutput
 
+    CustomDataIdentifier.add_member(:name, Shapes::ShapeRef.new(shape: CustomDataIdentifierNameString, required: true, location_name: "name"))
+    CustomDataIdentifier.add_member(:regex, Shapes::ShapeRef.new(shape: CustomDataIdentifierRegexString, required: true, location_name: "regex"))
+    CustomDataIdentifier.struct_class = Types::CustomDataIdentifier
+
     CustomDescriptor.add_member(:inline_content, Shapes::ShapeRef.new(shape: InlineContent, location_name: "inlineContent"))
     CustomDescriptor.struct_class = Types::CustomDescriptor
 
@@ -1333,6 +1483,34 @@ module Aws::BedrockAgentCore
     DataSourceConfig.add_member_subclass(:online_evaluation_config_source, Types::DataSourceConfig::OnlineEvaluationConfigSource)
     DataSourceConfig.add_member_subclass(:unknown, Types::DataSourceConfig::Unknown)
     DataSourceConfig.struct_class = Types::DataSourceConfig
+
+    DatasetDetails.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location_name: "datasetId"))
+    DatasetDetails.add_member(:dataset_version, Shapes::ShapeRef.new(shape: DatasetVersion, required: true, location_name: "datasetVersion"))
+    DatasetDetails.struct_class = Types::DatasetDetails
+
+    DatasetExecutionConfig.add_member(:dataset, Shapes::ShapeRef.new(shape: DatasetSource, required: true, location_name: "dataset"))
+    DatasetExecutionConfig.add_member(:agent_invocation, Shapes::ShapeRef.new(shape: AgentInvocationConfig, required: true, location_name: "agentInvocation"))
+    DatasetExecutionConfig.struct_class = Types::DatasetExecutionConfig
+
+    DatasetExecutionDetails.add_member(:dataset, Shapes::ShapeRef.new(shape: DatasetDetails, required: true, location_name: "dataset"))
+    DatasetExecutionDetails.add_member(:agent_invocation, Shapes::ShapeRef.new(shape: AgentInvocationDetails, required: true, location_name: "agentInvocation"))
+    DatasetExecutionDetails.struct_class = Types::DatasetExecutionDetails
+
+    DatasetGenerationSummary.add_member(:generation_id, Shapes::ShapeRef.new(shape: DatasetGenerationId, required: true, location_name: "generationId"))
+    DatasetGenerationSummary.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location_name: "datasetId"))
+    DatasetGenerationSummary.add_member(:name, Shapes::ShapeRef.new(shape: DatasetGenerationName, required: true, location_name: "name"))
+    DatasetGenerationSummary.add_member(:description, Shapes::ShapeRef.new(shape: DatasetGenerationDescription, location_name: "description"))
+    DatasetGenerationSummary.add_member(:scenario_type, Shapes::ShapeRef.new(shape: ScenarioType, required: true, location_name: "scenarioType"))
+    DatasetGenerationSummary.add_member(:status, Shapes::ShapeRef.new(shape: DatasetGenerationStatus, required: true, location_name: "status"))
+    DatasetGenerationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    DatasetGenerationSummary.add_member(:completed_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "completedAt"))
+    DatasetGenerationSummary.struct_class = Types::DatasetGenerationSummary
+
+    DatasetGenerationSummaryList.member = Shapes::ShapeRef.new(shape: DatasetGenerationSummary)
+
+    DatasetSource.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location_name: "datasetId"))
+    DatasetSource.add_member(:dataset_version, Shapes::ShapeRef.new(shape: DatasetVersion, location_name: "datasetVersion"))
+    DatasetSource.struct_class = Types::DatasetSource
 
     DeleteABTestRequest.add_member(:ab_test_id, Shapes::ShapeRef.new(shape: ABTestId, required: true, location: "uri", location_name: "abTestId"))
     DeleteABTestRequest.struct_class = Types::DeleteABTestRequest
@@ -1358,6 +1536,14 @@ module Aws::BedrockAgentCore
     DeleteCapacityProviderSessionResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location_name: "sessionId"))
     DeleteCapacityProviderSessionResponse.add_member(:status, Shapes::ShapeRef.new(shape: CapacityProviderSessionStatus, required: true, location_name: "status"))
     DeleteCapacityProviderSessionResponse.struct_class = Types::DeleteCapacityProviderSessionResponse
+
+    DeleteDatasetGenerationRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location: "uri", location_name: "datasetId"))
+    DeleteDatasetGenerationRequest.add_member(:generation_id, Shapes::ShapeRef.new(shape: DatasetGenerationId, required: true, location: "uri", location_name: "generationId"))
+    DeleteDatasetGenerationRequest.struct_class = Types::DeleteDatasetGenerationRequest
+
+    DeleteDatasetGenerationResponse.add_member(:generation_id, Shapes::ShapeRef.new(shape: DatasetGenerationId, required: true, location_name: "generationId"))
+    DeleteDatasetGenerationResponse.add_member(:status, Shapes::ShapeRef.new(shape: DatasetGenerationStatus, required: true, location_name: "status"))
+    DeleteDatasetGenerationResponse.struct_class = Types::DeleteDatasetGenerationResponse
 
     DeleteEventInput.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, required: true, location: "uri", location_name: "memoryId"))
     DeleteEventInput.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location: "uri", location_name: "sessionId"))
@@ -1507,6 +1693,15 @@ module Aws::BedrockAgentCore
     Evaluator.add_member(:evaluator_id, Shapes::ShapeRef.new(shape: EvaluatorId, required: true, location_name: "evaluatorId"))
     Evaluator.struct_class = Types::Evaluator
 
+    EvaluatorFilter.add_member(:evaluator_id, Shapes::ShapeRef.new(shape: EvaluatorId, required: true, location_name: "evaluatorId"))
+    EvaluatorFilter.add_member(:evaluation_dimension_name, Shapes::ShapeRef.new(shape: EvaluationDimensionName, location_name: "evaluationDimensionName"))
+    EvaluatorFilter.add_member(:operator, Shapes::ShapeRef.new(shape: GenerationFilterOperator, required: true, location_name: "operator"))
+    EvaluatorFilter.add_member(:value, Shapes::ShapeRef.new(shape: GenerationFilterValue, required: true, location_name: "value"))
+    EvaluatorFilter.add_member(:aggregation, Shapes::ShapeRef.new(shape: ResultAggregation, location_name: "aggregation"))
+    EvaluatorFilter.struct_class = Types::EvaluatorFilter
+
+    EvaluatorFilterList.member = Shapes::ShapeRef.new(shape: EvaluatorFilter)
+
     EvaluatorList.member = Shapes::ShapeRef.new(shape: Evaluator)
 
     EvaluatorMetric.add_member(:evaluator_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "evaluatorArn"))
@@ -1643,8 +1838,96 @@ module Aws::BedrockAgentCore
     FilterValue.add_member_subclass(:unknown, Types::FilterValue::Unknown)
     FilterValue.struct_class = Types::FilterValue
 
+    FindingCountMap.key = Shapes::ShapeRef.new(shape: FindingIdentifierKey)
+    FindingCountMap.value = Shapes::ShapeRef.new(shape: Integer)
+
     GatewayFilter.add_member(:target_paths, Shapes::ShapeRef.new(shape: TargetPathList, location_name: "targetPaths"))
     GatewayFilter.struct_class = Types::GatewayFilter
+
+    GenerationAttributeFilter.add_member(:key, Shapes::ShapeRef.new(shape: GenerationAttributeFilterKeyString, required: true, location_name: "key"))
+    GenerationAttributeFilter.add_member(:operator, Shapes::ShapeRef.new(shape: GenerationFilterOperator, required: true, location_name: "operator"))
+    GenerationAttributeFilter.add_member(:value, Shapes::ShapeRef.new(shape: GenerationFilterValue, required: true, location_name: "value"))
+    GenerationAttributeFilter.struct_class = Types::GenerationAttributeFilter
+
+    GenerationAttributeFilterList.member = Shapes::ShapeRef.new(shape: GenerationAttributeFilter)
+
+    GenerationErrorDetail.add_member(:error_code, Shapes::ShapeRef.new(shape: GenerationErrorCode, location_name: "errorCode"))
+    GenerationErrorDetail.add_member(:error_message, Shapes::ShapeRef.new(shape: GenerationErrorMessage, location_name: "errorMessage"))
+    GenerationErrorDetail.add_member(:count, Shapes::ShapeRef.new(shape: GenerationErrorDetailCountInteger, location_name: "count"))
+    GenerationErrorDetail.add_member(:session_ids, Shapes::ShapeRef.new(shape: GenerationErrorSessionIdList, location_name: "sessionIds"))
+    GenerationErrorDetail.struct_class = Types::GenerationErrorDetail
+
+    GenerationErrorDetailsList.member = Shapes::ShapeRef.new(shape: GenerationErrorDetail)
+
+    GenerationErrorSessionIdList.member = Shapes::ShapeRef.new(shape: SessionId)
+
+    GenerationFilterValue.add_member(:string_value, Shapes::ShapeRef.new(shape: GenerationFilterStringValue, location_name: "stringValue"))
+    GenerationFilterValue.add_member(:double_value, Shapes::ShapeRef.new(shape: Double, location_name: "doubleValue"))
+    GenerationFilterValue.add_member(:boolean_value, Shapes::ShapeRef.new(shape: Boolean, location_name: "booleanValue"))
+    GenerationFilterValue.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    GenerationFilterValue.add_member_subclass(:string_value, Types::GenerationFilterValue::StringValue)
+    GenerationFilterValue.add_member_subclass(:double_value, Types::GenerationFilterValue::DoubleValue)
+    GenerationFilterValue.add_member_subclass(:boolean_value, Types::GenerationFilterValue::BooleanValue)
+    GenerationFilterValue.add_member_subclass(:unknown, Types::GenerationFilterValue::Unknown)
+    GenerationFilterValue.struct_class = Types::GenerationFilterValue
+
+    GenerationFilters.add_member(:attribute_filters, Shapes::ShapeRef.new(shape: GenerationAttributeFilterList, location_name: "attributeFilters"))
+    GenerationFilters.add_member(:turn_count, Shapes::ShapeRef.new(shape: TurnCountRange, location_name: "turnCount"))
+    GenerationFilters.add_member(:evaluator_filters, Shapes::ShapeRef.new(shape: EvaluatorFilterList, location_name: "evaluatorFilters"))
+    GenerationFilters.struct_class = Types::GenerationFilters
+
+    GenerationIdentifierCounts.add_member(:session_id_count, Shapes::ShapeRef.new(shape: Integer, location_name: "sessionIdCount"))
+    GenerationIdentifierCounts.add_member(:trace_id_count, Shapes::ShapeRef.new(shape: Integer, location_name: "traceIdCount"))
+    GenerationIdentifierCounts.struct_class = Types::GenerationIdentifierCounts
+
+    GenerationIdentifiers.add_member(:session_ids, Shapes::ShapeRef.new(shape: GenerationSessionIdList, location_name: "sessionIds"))
+    GenerationIdentifiers.add_member(:trace_ids, Shapes::ShapeRef.new(shape: GenerationTraceIdList, location_name: "traceIds"))
+    GenerationIdentifiers.struct_class = Types::GenerationIdentifiers
+
+    GenerationResults.add_member(:sessions_matched, Shapes::ShapeRef.new(shape: Integer, location_name: "sessionsMatched"))
+    GenerationResults.add_member(:sessions_selected, Shapes::ShapeRef.new(shape: Integer, location_name: "sessionsSelected"))
+    GenerationResults.add_member(:sessions_unscored, Shapes::ShapeRef.new(shape: Integer, location_name: "sessionsUnscored"))
+    GenerationResults.add_member(:sessions_failed, Shapes::ShapeRef.new(shape: Integer, location_name: "sessionsFailed"))
+    GenerationResults.add_member(:scenarios_generated, Shapes::ShapeRef.new(shape: Integer, location_name: "scenariosGenerated"))
+    GenerationResults.add_member(:scenarios_deduplicated, Shapes::ShapeRef.new(shape: Integer, location_name: "scenariosDeduplicated"))
+    GenerationResults.add_member(:examples_written, Shapes::ShapeRef.new(shape: Integer, location_name: "examplesWritten"))
+    GenerationResults.add_member(:examples_with_ground_truth, Shapes::ShapeRef.new(shape: Integer, location_name: "examplesWithGroundTruth"))
+    GenerationResults.struct_class = Types::GenerationResults
+
+    GenerationSamplingConfig.add_member(:max_scenarios, Shapes::ShapeRef.new(shape: GenerationSamplingConfigMaxScenariosInteger, location_name: "maxScenarios"))
+    GenerationSamplingConfig.struct_class = Types::GenerationSamplingConfig
+
+    GenerationSelection.add_member(:filters, Shapes::ShapeRef.new(shape: GenerationFilters, location_name: "filters"))
+    GenerationSelection.add_member(:identifiers, Shapes::ShapeRef.new(shape: GenerationIdentifiers, location_name: "identifiers"))
+    GenerationSelection.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    GenerationSelection.add_member_subclass(:filters, Types::GenerationSelection::Filters)
+    GenerationSelection.add_member_subclass(:identifiers, Types::GenerationSelection::Identifiers)
+    GenerationSelection.add_member_subclass(:unknown, Types::GenerationSelection::Unknown)
+    GenerationSelection.struct_class = Types::GenerationSelection
+
+    GenerationSelectionRecord.add_member(:filters, Shapes::ShapeRef.new(shape: GenerationFilters, location_name: "filters"))
+    GenerationSelectionRecord.add_member(:identifiers, Shapes::ShapeRef.new(shape: GenerationIdentifierCounts, location_name: "identifiers"))
+    GenerationSelectionRecord.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    GenerationSelectionRecord.add_member_subclass(:filters, Types::GenerationSelectionRecord::Filters)
+    GenerationSelectionRecord.add_member_subclass(:identifiers, Types::GenerationSelectionRecord::Identifiers)
+    GenerationSelectionRecord.add_member_subclass(:unknown, Types::GenerationSelectionRecord::Unknown)
+    GenerationSelectionRecord.struct_class = Types::GenerationSelectionRecord
+
+    GenerationSessionIdList.member = Shapes::ShapeRef.new(shape: SessionId)
+
+    GenerationSource.add_member(:trace_generation, Shapes::ShapeRef.new(shape: TraceGenerationSource, location_name: "traceGeneration"))
+    GenerationSource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    GenerationSource.add_member_subclass(:trace_generation, Types::GenerationSource::TraceGeneration)
+    GenerationSource.add_member_subclass(:unknown, Types::GenerationSource::Unknown)
+    GenerationSource.struct_class = Types::GenerationSource
+
+    GenerationSourceRecord.add_member(:trace_generation, Shapes::ShapeRef.new(shape: TraceGenerationRecord, location_name: "traceGeneration"))
+    GenerationSourceRecord.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    GenerationSourceRecord.add_member_subclass(:trace_generation, Types::GenerationSourceRecord::TraceGeneration)
+    GenerationSourceRecord.add_member_subclass(:unknown, Types::GenerationSourceRecord::Unknown)
+    GenerationSourceRecord.struct_class = Types::GenerationSourceRecord
+
+    GenerationTraceIdList.member = Shapes::ShapeRef.new(shape: TraceId)
 
     GetABTestRequest.add_member(:ab_test_id, Shapes::ShapeRef.new(shape: ABTestId, required: true, location: "uri", location_name: "abTestId"))
     GetABTestRequest.struct_class = Types::GetABTestRequest
@@ -1682,6 +1965,26 @@ module Aws::BedrockAgentCore
     GetAgentCardResponse[:payload] = :agent_card
     GetAgentCardResponse[:payload_member] = GetAgentCardResponse.member(:agent_card)
 
+    GetAgentInsightRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: AgentApplicationName, required: true, location: "querystring", location_name: "applicationName"))
+    GetAgentInsightRequest.add_member(:agent_insight_id, Shapes::ShapeRef.new(shape: AgentInsightId, required: true, location: "uri", location_name: "agentInsightId"))
+    GetAgentInsightRequest.struct_class = Types::GetAgentInsightRequest
+
+    GetAgentInsightResponse.add_member(:type, Shapes::ShapeRef.new(shape: InsightType, required: true, location_name: "type"))
+    GetAgentInsightResponse.add_member(:name, Shapes::ShapeRef.new(shape: InsightName, required: true, location_name: "name"))
+    GetAgentInsightResponse.add_member(:description, Shapes::ShapeRef.new(shape: InsightDescription, required: true, location_name: "description"))
+    GetAgentInsightResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    GetAgentInsightResponse.add_member(:affected_session_count, Shapes::ShapeRef.new(shape: GetAgentInsightResponseAffectedSessionCountInteger, location_name: "affectedSessionCount"))
+    GetAgentInsightResponse.add_member(:sample_sessions, Shapes::ShapeRef.new(shape: InsightSampleSessionList, location_name: "sampleSessions"))
+    GetAgentInsightResponse.add_member(:root_causes, Shapes::ShapeRef.new(shape: InsightRootCauseList, location_name: "rootCauses"))
+    GetAgentInsightResponse.add_member(:agent_insight_id, Shapes::ShapeRef.new(shape: AgentInsightId, required: true, location_name: "agentInsightId"))
+    GetAgentInsightResponse.add_member(:application_name, Shapes::ShapeRef.new(shape: AgentApplicationName, required: true, location_name: "applicationName"))
+    GetAgentInsightResponse.add_member(:batch_evaluation_id, Shapes::ShapeRef.new(shape: BatchEvaluationId, location_name: "batchEvaluationId"))
+    GetAgentInsightResponse.add_member(:customer_metadata_status, Shapes::ShapeRef.new(shape: AgentInsightCustomerMetadataStatus, required: true, location_name: "customerMetadataStatus"))
+    GetAgentInsightResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updatedAt"))
+    GetAgentInsightResponse.add_member(:archive_status, Shapes::ShapeRef.new(shape: AgentInsightArchiveStatus, required: true, location_name: "archiveStatus"))
+    GetAgentInsightResponse.add_member(:last_seen_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastSeenAt"))
+    GetAgentInsightResponse.struct_class = Types::GetAgentInsightResponse
+
     GetBatchEvaluationRequest.add_member(:batch_evaluation_id, Shapes::ShapeRef.new(shape: BatchEvaluationId, required: true, location: "uri", location_name: "batchEvaluationId"))
     GetBatchEvaluationRequest.struct_class = Types::GetBatchEvaluationRequest
 
@@ -1703,6 +2006,7 @@ module Aws::BedrockAgentCore
     GetBatchEvaluationResponse.add_member(:description, Shapes::ShapeRef.new(shape: BatchEvaluationDescription, location_name: "description"))
     GetBatchEvaluationResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     GetBatchEvaluationResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    GetBatchEvaluationResponse.add_member(:dataset_execution_details, Shapes::ShapeRef.new(shape: DatasetExecutionDetails, location_name: "datasetExecutionDetails"))
     GetBatchEvaluationResponse.struct_class = Types::GetBatchEvaluationResponse
 
     GetBrowserSessionRequest.add_member(:browser_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "browserIdentifier"))
@@ -1740,6 +2044,26 @@ module Aws::BedrockAgentCore
     GetCodeInterpreterSessionResponse.add_member(:certificates, Shapes::ShapeRef.new(shape: Certificates, location_name: "certificates"))
     GetCodeInterpreterSessionResponse.add_member(:filesystem_configurations, Shapes::ShapeRef.new(shape: ToolsFileSystemConfigurations, location_name: "filesystemConfigurations"))
     GetCodeInterpreterSessionResponse.struct_class = Types::GetCodeInterpreterSessionResponse
+
+    GetDatasetGenerationRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location: "uri", location_name: "datasetId"))
+    GetDatasetGenerationRequest.add_member(:generation_id, Shapes::ShapeRef.new(shape: DatasetGenerationId, required: true, location: "uri", location_name: "generationId"))
+    GetDatasetGenerationRequest.struct_class = Types::GetDatasetGenerationRequest
+
+    GetDatasetGenerationResponse.add_member(:generation_id, Shapes::ShapeRef.new(shape: DatasetGenerationId, required: true, location_name: "generationId"))
+    GetDatasetGenerationResponse.add_member(:name, Shapes::ShapeRef.new(shape: DatasetGenerationName, required: true, location_name: "name"))
+    GetDatasetGenerationResponse.add_member(:description, Shapes::ShapeRef.new(shape: DatasetGenerationDescription, location_name: "description"))
+    GetDatasetGenerationResponse.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location_name: "datasetId"))
+    GetDatasetGenerationResponse.add_member(:scenario_type, Shapes::ShapeRef.new(shape: ScenarioType, required: true, location_name: "scenarioType"))
+    GetDatasetGenerationResponse.add_member(:status, Shapes::ShapeRef.new(shape: DatasetGenerationStatus, required: true, location_name: "status"))
+    GetDatasetGenerationResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
+    GetDatasetGenerationResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    GetDatasetGenerationResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    GetDatasetGenerationResponse.add_member(:completed_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "completedAt"))
+    GetDatasetGenerationResponse.add_member(:source, Shapes::ShapeRef.new(shape: GenerationSourceRecord, location_name: "source"))
+    GetDatasetGenerationResponse.add_member(:generation_results, Shapes::ShapeRef.new(shape: GenerationResults, location_name: "generationResults"))
+    GetDatasetGenerationResponse.add_member(:redaction_summary, Shapes::ShapeRef.new(shape: RedactionSummary, location_name: "redactionSummary"))
+    GetDatasetGenerationResponse.add_member(:error_details, Shapes::ShapeRef.new(shape: GenerationErrorDetailsList, location_name: "errorDetails"))
+    GetDatasetGenerationResponse.struct_class = Types::GetDatasetGenerationResponse
 
     GetEventInput.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, required: true, location: "uri", location_name: "memoryId"))
     GetEventInput.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location: "uri", location_name: "sessionId"))
@@ -1859,6 +2183,12 @@ module Aws::BedrockAgentCore
 
     GetWorkloadAccessTokenResponse.add_member(:workload_access_token, Shapes::ShapeRef.new(shape: WorkloadIdentityTokenType, required: true, location_name: "workloadAccessToken"))
     GetWorkloadAccessTokenResponse.struct_class = Types::GetWorkloadAccessTokenResponse
+
+    GroundTruthConfig.add_member(:fields, Shapes::ShapeRef.new(shape: GroundTruthFieldList, required: true, location_name: "fields"))
+    GroundTruthConfig.add_member(:quality_filters, Shapes::ShapeRef.new(shape: EvaluatorFilterList, location_name: "qualityFilters"))
+    GroundTruthConfig.struct_class = Types::GroundTruthConfig
+
+    GroundTruthFieldList.member = Shapes::ShapeRef.new(shape: GroundTruthField)
 
     GroundTruthSource.add_member(:inline, Shapes::ShapeRef.new(shape: InlineGroundTruth, location_name: "inline"))
     GroundTruthSource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -2493,6 +2823,17 @@ module Aws::BedrockAgentCore
     ListActorsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListActorsOutput.struct_class = Types::ListActorsOutput
 
+    ListAgentInsightsRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: AgentApplicationName, location: "querystring", location_name: "applicationName"))
+    ListAgentInsightsRequest.add_member(:batch_evaluation_id, Shapes::ShapeRef.new(shape: BatchEvaluationId, location: "querystring", location_name: "batchEvaluationId"))
+    ListAgentInsightsRequest.add_member(:archive_status, Shapes::ShapeRef.new(shape: AgentInsightArchiveStatus, location: "querystring", location_name: "archiveStatus"))
+    ListAgentInsightsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAgentInsightsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListAgentInsightsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListAgentInsightsRequest.struct_class = Types::ListAgentInsightsRequest
+
+    ListAgentInsightsResponse.add_member(:agent_insights, Shapes::ShapeRef.new(shape: AgentInsightSummaryList, required: true, location_name: "agentInsights"))
+    ListAgentInsightsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAgentInsightsResponse.struct_class = Types::ListAgentInsightsResponse
+
     ListBatchEvaluationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListBatchEvaluationsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListBatchEvaluationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ListBatchEvaluationsRequest.struct_class = Types::ListBatchEvaluationsRequest
@@ -2520,6 +2861,15 @@ module Aws::BedrockAgentCore
     ListCodeInterpreterSessionsResponse.add_member(:items, Shapes::ShapeRef.new(shape: CodeInterpreterSessionSummaries, required: true, location_name: "items"))
     ListCodeInterpreterSessionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListCodeInterpreterSessionsResponse.struct_class = Types::ListCodeInterpreterSessionsResponse
+
+    ListDatasetGenerationsRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location: "uri", location_name: "datasetId"))
+    ListDatasetGenerationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDatasetGenerationsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListDatasetGenerationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListDatasetGenerationsRequest.struct_class = Types::ListDatasetGenerationsRequest
+
+    ListDatasetGenerationsResponse.add_member(:dataset_generations, Shapes::ShapeRef.new(shape: DatasetGenerationSummaryList, required: true, location_name: "datasetGenerations"))
+    ListDatasetGenerationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListDatasetGenerationsResponse.struct_class = Types::ListDatasetGenerationsResponse
 
     ListEventsInput.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, required: true, location: "uri", location_name: "memoryId"))
     ListEventsInput.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, required: true, location: "uri", location_name: "sessionId"))
@@ -2799,6 +3149,11 @@ module Aws::BedrockAgentCore
     OnlineEvaluationConfigSource.add_member(:time_range, Shapes::ShapeRef.new(shape: SessionFilterConfig, location_name: "timeRange"))
     OnlineEvaluationConfigSource.struct_class = Types::OnlineEvaluationConfigSource
 
+    OnlineEvaluationSourceConfig.add_member(:online_evaluation_config_arn, Shapes::ShapeRef.new(shape: OnlineEvaluationConfigArn, required: true, location_name: "onlineEvaluationConfigArn"))
+    OnlineEvaluationSourceConfig.add_member(:start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "startTime"))
+    OnlineEvaluationSourceConfig.add_member(:end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "endTime"))
+    OnlineEvaluationSourceConfig.struct_class = Types::OnlineEvaluationSourceConfig
+
     OnlineEvaluationTraceConfig.add_member(:online_evaluation_config_arn, Shapes::ShapeRef.new(shape: OnlineEvaluationConfigArn, required: true, location_name: "onlineEvaluationConfigArn"))
     OnlineEvaluationTraceConfig.add_member(:start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "startTime"))
     OnlineEvaluationTraceConfig.add_member(:end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "endTime"))
@@ -3002,6 +3357,18 @@ module Aws::BedrockAgentCore
     RecordExpirySpecification.add_member_subclass(:action, Types::RecordExpirySpecification::Action)
     RecordExpirySpecification.add_member_subclass(:unknown, Types::RecordExpirySpecification::Unknown)
     RecordExpirySpecification.struct_class = Types::RecordExpirySpecification
+
+    RedactionConfiguration.add_member(:identifiers, Shapes::ShapeRef.new(shape: RedactionIdentifierList, location_name: "identifiers"))
+    RedactionConfiguration.add_member(:custom_data_identifiers, Shapes::ShapeRef.new(shape: RedactionConfigurationCustomDataIdentifiersList, location_name: "customDataIdentifiers"))
+    RedactionConfiguration.struct_class = Types::RedactionConfiguration
+
+    RedactionConfigurationCustomDataIdentifiersList.member = Shapes::ShapeRef.new(shape: CustomDataIdentifier)
+
+    RedactionIdentifierList.member = Shapes::ShapeRef.new(shape: RedactionIdentifier)
+
+    RedactionSummary.add_member(:scenarios_scanned, Shapes::ShapeRef.new(shape: Integer, location_name: "scenariosScanned"))
+    RedactionSummary.add_member(:finding_counts, Shapes::ShapeRef.new(shape: FindingCountMap, location_name: "findingCounts"))
+    RedactionSummary.struct_class = Types::RedactionSummary
 
     RegistryRecordSummary.add_member(:registry_arn, Shapes::ShapeRef.new(shape: RegistryArn, required: true, location_name: "registryArn"))
     RegistryRecordSummary.add_member(:record_arn, Shapes::ShapeRef.new(shape: RegistryRecordArn, required: true, location_name: "recordArn"))
@@ -3216,6 +3583,7 @@ module Aws::BedrockAgentCore
     StartBatchEvaluationRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     StartBatchEvaluationRequest.add_member(:description, Shapes::ShapeRef.new(shape: BatchEvaluationDescription, location_name: "description"))
     StartBatchEvaluationRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, location_name: "outputConfig"))
+    StartBatchEvaluationRequest.add_member(:dataset_execution_config, Shapes::ShapeRef.new(shape: DatasetExecutionConfig, location_name: "datasetExecutionConfig"))
     StartBatchEvaluationRequest.struct_class = Types::StartBatchEvaluationRequest
 
     StartBatchEvaluationRequestEvaluatorsList.member = Shapes::ShapeRef.new(shape: Evaluator)
@@ -3270,6 +3638,21 @@ module Aws::BedrockAgentCore
     StartCodeInterpreterSessionResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: CodeInterpreterSessionId, required: true, location_name: "sessionId"))
     StartCodeInterpreterSessionResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     StartCodeInterpreterSessionResponse.struct_class = Types::StartCodeInterpreterSessionResponse
+
+    StartDatasetGenerationRequest.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location: "uri", location_name: "datasetId"))
+    StartDatasetGenerationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DatasetGenerationName, required: true, location_name: "name"))
+    StartDatasetGenerationRequest.add_member(:description, Shapes::ShapeRef.new(shape: DatasetGenerationDescription, location_name: "description"))
+    StartDatasetGenerationRequest.add_member(:scenario_type, Shapes::ShapeRef.new(shape: ScenarioType, location_name: "scenarioType"))
+    StartDatasetGenerationRequest.add_member(:source, Shapes::ShapeRef.new(shape: GenerationSource, required: true, location_name: "source"))
+    StartDatasetGenerationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    StartDatasetGenerationRequest.struct_class = Types::StartDatasetGenerationRequest
+
+    StartDatasetGenerationResponse.add_member(:generation_id, Shapes::ShapeRef.new(shape: DatasetGenerationId, required: true, location_name: "generationId"))
+    StartDatasetGenerationResponse.add_member(:name, Shapes::ShapeRef.new(shape: DatasetGenerationName, required: true, location_name: "name"))
+    StartDatasetGenerationResponse.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, required: true, location_name: "datasetId"))
+    StartDatasetGenerationResponse.add_member(:status, Shapes::ShapeRef.new(shape: DatasetGenerationStatus, required: true, location_name: "status"))
+    StartDatasetGenerationResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    StartDatasetGenerationResponse.struct_class = Types::StartDatasetGenerationResponse
 
     StartMemoryExtractionJobInput.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, required: true, location: "uri", location_name: "memoryId"))
     StartMemoryExtractionJobInput.add_member(:extraction_job, Shapes::ShapeRef.new(shape: ExtractionJob, required: true, location_name: "extractionJob"))
@@ -3502,9 +3885,37 @@ module Aws::BedrockAgentCore
 
     ToolsFileSystemConfigurations.member = Shapes::ShapeRef.new(shape: ToolsFileSystemConfiguration)
 
+    TraceGenerationRecord.add_member(:source_config, Shapes::ShapeRef.new(shape: TraceSourceConfig, location_name: "sourceConfig"))
+    TraceGenerationRecord.add_member(:selection, Shapes::ShapeRef.new(shape: GenerationSelectionRecord, location_name: "selection"))
+    TraceGenerationRecord.add_member(:sampling, Shapes::ShapeRef.new(shape: GenerationSamplingConfig, location_name: "sampling"))
+    TraceGenerationRecord.add_member(:ground_truth, Shapes::ShapeRef.new(shape: GroundTruthConfig, location_name: "groundTruth"))
+    TraceGenerationRecord.add_member(:redaction_configuration, Shapes::ShapeRef.new(shape: RedactionConfiguration, location_name: "redactionConfiguration"))
+    TraceGenerationRecord.struct_class = Types::TraceGenerationRecord
+
+    TraceGenerationSource.add_member(:source_config, Shapes::ShapeRef.new(shape: TraceSourceConfig, required: true, location_name: "sourceConfig"))
+    TraceGenerationSource.add_member(:selection, Shapes::ShapeRef.new(shape: GenerationSelection, location_name: "selection"))
+    TraceGenerationSource.add_member(:sampling, Shapes::ShapeRef.new(shape: GenerationSamplingConfig, location_name: "sampling"))
+    TraceGenerationSource.add_member(:ground_truth, Shapes::ShapeRef.new(shape: GroundTruthConfig, location_name: "groundTruth"))
+    TraceGenerationSource.add_member(:redaction_configuration, Shapes::ShapeRef.new(shape: RedactionConfiguration, location_name: "redactionConfiguration"))
+    TraceGenerationSource.struct_class = Types::TraceGenerationSource
+
     TraceIdList.member = Shapes::ShapeRef.new(shape: TraceId)
 
     TraceIds.member = Shapes::ShapeRef.new(shape: TraceId)
+
+    TraceSourceConfig.add_member(:cloud_watch_logs, Shapes::ShapeRef.new(shape: CloudWatchLogsSourceConfig, location_name: "cloudWatchLogs"))
+    TraceSourceConfig.add_member(:online_evaluation, Shapes::ShapeRef.new(shape: OnlineEvaluationSourceConfig, location_name: "onlineEvaluation"))
+    TraceSourceConfig.add_member(:batch_evaluation, Shapes::ShapeRef.new(shape: BatchEvaluationSourceConfig, location_name: "batchEvaluation"))
+    TraceSourceConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    TraceSourceConfig.add_member_subclass(:cloud_watch_logs, Types::TraceSourceConfig::CloudWatchLogs)
+    TraceSourceConfig.add_member_subclass(:online_evaluation, Types::TraceSourceConfig::OnlineEvaluation)
+    TraceSourceConfig.add_member_subclass(:batch_evaluation, Types::TraceSourceConfig::BatchEvaluation)
+    TraceSourceConfig.add_member_subclass(:unknown, Types::TraceSourceConfig::Unknown)
+    TraceSourceConfig.struct_class = Types::TraceSourceConfig
+
+    TurnCountRange.add_member(:min, Shapes::ShapeRef.new(shape: TurnCountRangeMinInteger, location_name: "min"))
+    TurnCountRange.add_member(:max, Shapes::ShapeRef.new(shape: TurnCountRangeMaxInteger, location_name: "max"))
+    TurnCountRange.struct_class = Types::TurnCountRange
 
     UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     UnauthorizedException.struct_class = Types::UnauthorizedException
@@ -3528,6 +3939,16 @@ module Aws::BedrockAgentCore
     UpdateABTestResponse.add_member(:execution_status, Shapes::ShapeRef.new(shape: ABTestExecutionStatus, required: true, location_name: "executionStatus"))
     UpdateABTestResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
     UpdateABTestResponse.struct_class = Types::UpdateABTestResponse
+
+    UpdateAgentInsightRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: AgentApplicationName, required: true, location: "querystring", location_name: "applicationName"))
+    UpdateAgentInsightRequest.add_member(:agent_insight_id, Shapes::ShapeRef.new(shape: AgentInsightId, required: true, location: "uri", location_name: "agentInsightId"))
+    UpdateAgentInsightRequest.add_member(:archive_status, Shapes::ShapeRef.new(shape: AgentInsightArchiveStatus, required: true, location_name: "archiveStatus"))
+    UpdateAgentInsightRequest.struct_class = Types::UpdateAgentInsightRequest
+
+    UpdateAgentInsightResponse.add_member(:agent_insight_id, Shapes::ShapeRef.new(shape: AgentInsightId, required: true, location_name: "agentInsightId"))
+    UpdateAgentInsightResponse.add_member(:archive_status, Shapes::ShapeRef.new(shape: AgentInsightArchiveStatus, required: true, location_name: "archiveStatus"))
+    UpdateAgentInsightResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updatedAt"))
+    UpdateAgentInsightResponse.struct_class = Types::UpdateAgentInsightResponse
 
     UpdateBrowserStreamRequest.add_member(:browser_identifier, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "browserIdentifier"))
     UpdateBrowserStreamRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: BrowserSessionId, required: true, location: "querystring", location_name: "sessionId"))
@@ -3801,6 +4222,21 @@ module Aws::BedrockAgentCore
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_dataset_generation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDatasetGeneration"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/datasets/{datasetId}/generations/{generationId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDatasetGenerationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDatasetGenerationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_event, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteEvent"
         o.http_method = "DELETE"
@@ -3918,6 +4354,19 @@ module Aws::BedrockAgentCore
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_agent_insight, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAgentInsight"
+        o.http_method = "GET"
+        o.http_request_uri = "/agentinsights/{agentInsightId}"
+        o.input = Shapes::ShapeRef.new(shape: GetAgentInsightRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAgentInsightResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_batch_evaluation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBatchEvaluation"
         o.http_method = "GET"
@@ -3955,6 +4404,20 @@ module Aws::BedrockAgentCore
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_dataset_generation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDatasetGeneration"
+        o.http_method = "GET"
+        o.http_request_uri = "/datasets/{datasetId}/generations/{generationId}"
+        o.input = Shapes::ShapeRef.new(shape: GetDatasetGenerationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDatasetGenerationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -4268,6 +4731,24 @@ module Aws::BedrockAgentCore
         )
       end)
 
+      api.add_operation(:list_agent_insights, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAgentInsights"
+        o.http_method = "GET"
+        o.http_request_uri = "/agentinsights"
+        o.input = Shapes::ShapeRef.new(shape: ListAgentInsightsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAgentInsightsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_batch_evaluations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListBatchEvaluations"
         o.http_method = "GET"
@@ -4311,6 +4792,26 @@ module Aws::BedrockAgentCore
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_dataset_generations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDatasetGenerations"
+        o.http_method = "GET"
+        o.http_request_uri = "/datasets/{datasetId}/generations"
+        o.input = Shapes::ShapeRef.new(shape: ListDatasetGenerationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDatasetGenerationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_events, Seahorse::Model::Operation.new.tap do |o|
@@ -4560,6 +5061,22 @@ module Aws::BedrockAgentCore
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:start_dataset_generation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDatasetGeneration"
+        o.http_method = "POST"
+        o.http_request_uri = "/datasets/{datasetId}/generations"
+        o.input = Shapes::ShapeRef.new(shape: StartDatasetGenerationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartDatasetGenerationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:start_memory_extraction_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartMemoryExtractionJob"
         o.http_method = "POST"
@@ -4659,6 +5176,20 @@ module Aws::BedrockAgentCore
         o.output = Shapes::ShapeRef.new(shape: UpdateABTestResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_agent_insight, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAgentInsight"
+        o.http_method = "PUT"
+        o.http_request_uri = "/agentinsights/{agentInsightId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAgentInsightRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAgentInsightResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

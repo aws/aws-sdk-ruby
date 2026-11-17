@@ -165,6 +165,92 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # Contains the encryption mode and key configuration used to encrypt new
+    # Agent Insights in an Agent Insight Store.
+    #
+    # @!attribute [rw] mode
+    #   Specifies the encryption mode used to protect new Agent Insights.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   Specifies the Amazon Resource Name (ARN) of the customer managed AWS
+    #   KMS key that you use to encrypt new Agent Insights. This field is
+    #   required when `mode` is `CUSTOMER_MANAGED_KMS` and cannot be
+    #   specified when `mode` is `AWS_OWNED_KMS_KEY`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/AgentInsightStoreEncryptionConfiguration AWS API Documentation
+    #
+    class AgentInsightStoreEncryptionConfiguration < Struct.new(
+      :mode,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about an Agent Insight Store.
+    #
+    # @!attribute [rw] agent_insight_store_arn
+    #   The Amazon Resource Name (ARN) of the Agent Insight Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_insight_store_id
+    #   The unique identifier of the Agent Insight Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current lifecycle status of the Agent Insight Store. Valid
+    #   values:
+    #
+    #   ACTIVE
+    #
+    #   : The store is available.
+    #
+    #   UPDATING
+    #
+    #   : The service is applying a requested change.
+    #
+    #   INACTIVE
+    #
+    #   : The store does not accept new Agent Insights.
+    #
+    #   ERROR
+    #
+    #   : The store requires intervention.
+    #   @return [String]
+    #
+    # @!attribute [rw] enablement_status
+    #   Specifies whether the Agent Insight Store accepts new Agent
+    #   Insights. The default value is enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   Specifies the encryption mode and key configuration that encrypts
+    #   new Agent Insights and protects the data at rest.
+    #   @return [Types::AgentInsightStoreEncryptionConfiguration]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the Agent Insight Store was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the Agent Insight Store was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/AgentInsightStoreSummary AWS API Documentation
+    #
+    class AgentInsightStoreSummary < Struct.new(
+      :agent_insight_store_arn,
+      :agent_insight_store_id,
+      :status,
+      :enablement_status,
+      :encryption_configuration,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about an agent runtime. An agent runtime is the
     # execution environment for a Amazon Bedrock AgentCore Agent.
     #
@@ -6108,6 +6194,11 @@ module Aws::BedrockAgentCoreControl
     #   The number of examples in the dataset.
     #   @return [Integer]
     #
+    # @!attribute [rw] example_count_by_field
+    #   The number of examples that have each field, for the DRAFT. Absent
+    #   when the counts are unknown.
+    #   @return [Types::ExampleCountByField]
+    #
     # @!attribute [rw] created_at
     #   The timestamp when the dataset was created.
     #   @return [Time]
@@ -6127,6 +6218,7 @@ module Aws::BedrockAgentCoreControl
       :draft_status,
       :schema_type,
       :example_count,
+      :example_count_by_field,
       :created_at,
       :updated_at)
       SENSITIVE = []
@@ -6143,6 +6235,11 @@ module Aws::BedrockAgentCoreControl
     #   The number of examples in this version.
     #   @return [Integer]
     #
+    # @!attribute [rw] example_count_by_field
+    #   The number of examples that have each field, for this version.
+    #   Absent when the counts are unknown.
+    #   @return [Types::ExampleCountByField]
+    #
     # @!attribute [rw] created_at
     #   The timestamp when this version was published.
     #   @return [Time]
@@ -6152,6 +6249,7 @@ module Aws::BedrockAgentCoreControl
     class DatasetVersionSummary < Struct.new(
       :dataset_version,
       :example_count,
+      :example_count_by_field,
       :created_at)
       SENSITIVE = []
       include Aws::Structure
@@ -8272,6 +8370,73 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The number of examples that have each field. An example can have more
+    # than one of these fields, so the counts can add up to more than
+    # `exampleCount`.
+    #
+    # @!attribute [rw] turns
+    #   The number of examples that have `turns`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] input
+    #   The number of examples that have `input`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] actor_profile
+    #   The number of examples that have `actor_profile`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ExampleCountByField AWS API Documentation
+    #
+    class ExampleCountByField < Struct.new(
+      :turns,
+      :input,
+      :actor_profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A condition on the number of examples that have the given fields. The
+    # count includes each example that has at least one of the fields in
+    # `anyOf`.
+    #
+    # @!attribute [rw] any_of
+    #   The fields to count. An example counts if it has at least one of
+    #   these fields. Required.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] min
+    #   The minimum count, inclusive.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum count, inclusive.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ExampleCountByFieldCondition AWS API Documentation
+    #
+    class ExampleCountByFieldCondition < Struct.new(
+      :any_of,
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A condition on the fields of an example.
+    #
+    # @!attribute [rw] any_of
+    #   Matches examples that have at least one of these fields. Required.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ExampleFieldCondition AWS API Documentation
+    #
+    class ExampleFieldCondition < Struct.new(
+      :any_of)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for metadata extraction from conversational content.
     #
     # @note ExtractionConfig is a union - when making an API calls you must set exactly one of the members.
@@ -8972,6 +9137,86 @@ module Aws::BedrockAgentCoreControl
       :protocol_type,
       :certificate_configurations)
       SENSITIVE = [:name, :description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agent_insight_store_id
+    #   Specifies the unique identifier of the Agent Insight Store to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentInsightStoreRequest AWS API Documentation
+    #
+    class GetAgentInsightStoreRequest < Struct.new(
+      :agent_insight_store_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agent_insight_store_arn
+    #   The Amazon Resource Name (ARN) of the Agent Insight Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_insight_store_id
+    #   The unique identifier of the Agent Insight Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current lifecycle status of the Agent Insight Store. Valid
+    #   values:
+    #
+    #   ACTIVE
+    #
+    #   : The store is available.
+    #
+    #   UPDATING
+    #
+    #   : The service is applying a requested change.
+    #
+    #   INACTIVE
+    #
+    #   : The store does not accept new Agent Insights.
+    #
+    #   ERROR
+    #
+    #   : The store requires intervention.
+    #   @return [String]
+    #
+    # @!attribute [rw] enablement_status
+    #   Specifies whether the Agent Insight Store accepts new Agent
+    #   Insights. The default value is enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   Specifies the encryption mode and key configuration that encrypts
+    #   new Agent Insights and protects the data at rest.
+    #   @return [Types::AgentInsightStoreEncryptionConfiguration]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the Agent Insight Store was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the Agent Insight Store was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   Describes the failure that prevented the Agent Insight Store from
+    #   reaching its requested lifecycle status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentInsightStoreResponse AWS API Documentation
+    #
+    class GetAgentInsightStoreResponse < Struct.new(
+      :agent_insight_store_arn,
+      :agent_insight_store_id,
+      :status,
+      :enablement_status,
+      :encryption_configuration,
+      :created_at,
+      :updated_at,
+      :failure_reason)
+      SENSITIVE = [:failure_reason]
       include Aws::Structure
     end
 
@@ -9905,6 +10150,11 @@ module Aws::BedrockAgentCoreControl
     #   The number of examples in the DRAFT.
     #   @return [Integer]
     #
+    # @!attribute [rw] example_count_by_field
+    #   The number of examples that have each field, for the resolved
+    #   version. Absent when the counts are unknown.
+    #   @return [Types::ExampleCountByField]
+    #
     # @!attribute [rw] download_url
     #   Presigned Amazon S3 URL to download the consolidated dataset file
     #   for the resolved version. Expires after 5 minutes. Omitted if the
@@ -9941,6 +10191,7 @@ module Aws::BedrockAgentCoreControl
       :schema_type,
       :kms_key_arn,
       :example_count,
+      :example_count_by_field,
       :download_url,
       :download_url_expires_at,
       :created_at,
@@ -14366,6 +14617,49 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListAgentInsightStoresRequest AWS API Documentation
+    #
+    class ListAgentInsightStoresRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agent_insight_stores
+    #   The Agent Insight Store summaries.
+    #   @return [Array<Types::AgentInsightStoreSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListAgentInsightStoresResponse AWS API Documentation
+    #
+    class ListAgentInsightStoresResponse < Struct.new(
+      :agent_insight_stores,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] agent_runtime_id
     #   The unique identifier of the AgentCore Runtime to list endpoints
     #   for.
@@ -14862,15 +15156,43 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # A filter for `ListDatasetExamples`.
+    #
+    # @!attribute [rw] generation_ids
+    #   Returns only examples created by this dataset generation. Specify
+    #   one ID.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] example_fields
+    #   Returns only examples that meet at least one of these conditions.
+    #   Examples last written before example field filtering was available
+    #   never match.
+    #   @return [Array<Types::ExampleFieldCondition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListDatasetExamplesFilter AWS API Documentation
+    #
+    class ListDatasetExamplesFilter < Struct.new(
+      :generation_ids,
+      :example_fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dataset_id
     #   The unique identifier of the dataset.
     #   @return [String]
     #
     # @!attribute [rw] dataset_version
     #   Version to paginate: "DRAFT" or a version number. Defaults to
-    #   DRAFT if absent. Only used on the first request; for subsequent
-    #   pages, the version is extracted from the pagination token.
+    #   DRAFT if absent on the first request. With a pagination token, the
+    #   version comes from the token: you can omit this member, and a value
+    #   that differs from the token's version is rejected with a
+    #   `ValidationException`.
     #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A filter to apply to the examples.
+    #   @return [Types::ListDatasetExamplesFilter]
     #
     # @!attribute [rw] max_results
     #   Maximum number of examples to return per page.
@@ -14885,6 +15207,7 @@ module Aws::BedrockAgentCoreControl
     class ListDatasetExamplesRequest < Struct.new(
       :dataset_id,
       :dataset_version,
+      :filter,
       :max_results,
       :next_token)
       SENSITIVE = []
@@ -14926,9 +15249,28 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # A filter for `ListDatasetVersions`.
+    #
+    # @!attribute [rw] example_count_by_field
+    #   Returns only versions whose example counts meet at least one of
+    #   these conditions.
+    #   @return [Array<Types::ExampleCountByFieldCondition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListDatasetVersionsFilter AWS API Documentation
+    #
+    class ListDatasetVersionsFilter < Struct.new(
+      :example_count_by_field)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dataset_id
     #   The unique identifier of the dataset.
     #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A filter to apply to the dataset versions.
+    #   @return [Types::ListDatasetVersionsFilter]
     #
     # @!attribute [rw] next_token
     #   The token for the next page of results.
@@ -14942,6 +15284,7 @@ module Aws::BedrockAgentCoreControl
     #
     class ListDatasetVersionsRequest < Struct.new(
       :dataset_id,
+      :filter,
       :next_token,
       :max_results)
       SENSITIVE = []
@@ -14966,6 +15309,25 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # A filter for `ListDatasets`.
+    #
+    # @!attribute [rw] example_count_by_field
+    #   Returns only datasets whose DRAFT example counts meet at least one
+    #   of these conditions.
+    #   @return [Array<Types::ExampleCountByFieldCondition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListDatasetsFilter AWS API Documentation
+    #
+    class ListDatasetsFilter < Struct.new(
+      :example_count_by_field)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter
+    #   A filter to apply to the datasets.
+    #   @return [Types::ListDatasetsFilter]
+    #
     # @!attribute [rw] next_token
     #   The token for the next page of results.
     #   @return [String]
@@ -14977,6 +15339,7 @@ module Aws::BedrockAgentCoreControl
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListDatasetsRequest AWS API Documentation
     #
     class ListDatasetsRequest < Struct.new(
+      :filter,
       :next_token,
       :max_results)
       SENSITIVE = []
@@ -21737,6 +22100,106 @@ module Aws::BedrockAgentCoreControl
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a
+    #   previous request, the service ignores the request, but doesn't
+    #   return an error. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_insight_store_id
+    #   Specifies the unique identifier of the Agent Insight Store to
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] enablement_status
+    #   Specifies whether the Agent Insight Store accepts new Agent
+    #   Insights. If you don't specify this parameter, the store's current
+    #   enablement setting remains unchanged.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   Specifies the encryption mode and key configuration to use for new
+    #   Agent Insights. If you don't specify this parameter, the store's
+    #   current encryption configuration remains unchanged.
+    #   @return [Types::AgentInsightStoreEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateAgentInsightStoreRequest AWS API Documentation
+    #
+    class UpdateAgentInsightStoreRequest < Struct.new(
+      :client_token,
+      :agent_insight_store_id,
+      :enablement_status,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agent_insight_store_arn
+    #   The Amazon Resource Name (ARN) of the updated Agent Insight Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_insight_store_id
+    #   The unique identifier of the updated Agent Insight Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The lifecycle status of the Agent Insight Store after the update
+    #   request. Valid values:
+    #
+    #   ACTIVE
+    #
+    #   : The store is available.
+    #
+    #   UPDATING
+    #
+    #   : The service is applying a requested change.
+    #
+    #   INACTIVE
+    #
+    #   : The store does not accept new Agent Insights.
+    #
+    #   ERROR
+    #
+    #   : The store requires intervention.
+    #   @return [String]
+    #
+    # @!attribute [rw] enablement_status
+    #   Specifies whether the Agent Insight Store accepts new Agent Insights
+    #   after the update request.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the Agent Insight Store was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   Describes the failure that prevented the Agent Insight Store from
+    #   reaching its requested lifecycle status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateAgentInsightStoreResponse AWS API Documentation
+    #
+    class UpdateAgentInsightStoreResponse < Struct.new(
+      :agent_insight_store_arn,
+      :agent_insight_store_id,
+      :status,
+      :enablement_status,
+      :updated_at,
+      :failure_reason)
+      SENSITIVE = [:failure_reason]
+      include Aws::Structure
+    end
 
     # @!attribute [rw] agent_runtime_id
     #   The unique identifier of the AgentCore Runtime associated with the

@@ -1340,6 +1340,11 @@ module Aws::NetworkManager
     #   the core network change values.
     #   @return [Array<Types::RoutingPolicyAssociationDetail>]
     #
+    # @!attribute [rw] multipath_resilience
+    #   The change in multipath resilience configuration in the core network
+    #   change values.
+    #   @return [Types::MultipathResilienceChangeValues]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkChangeValues AWS API Documentation
     #
     class CoreNetworkChangeValues < Struct.new(
@@ -1359,7 +1364,8 @@ module Aws::NetworkManager
       :routing_policy,
       :peer_edge_locations,
       :attachment_id,
-      :routing_policy_association_details)
+      :routing_policy_association_details,
+      :multipath_resilience)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5613,6 +5619,25 @@ module Aws::NetworkManager
       :address,
       :latitude,
       :longitude)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a change in multipath resilience.
+    #
+    # @!attribute [rw] mode
+    #   The mode (best-effort/disabled) of multipath resilience.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_sets
+    #   A set of two edge locations.
+    #   @return [Array<Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/MultipathResilienceChangeValues AWS API Documentation
+    #
+    class MultipathResilienceChangeValues < Struct.new(
+      :mode,
+      :edge_sets)
       SENSITIVE = []
       include Aws::Structure
     end

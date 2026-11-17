@@ -16,12 +16,14 @@ module Aws::Route53GlobalResolver
     class AccessSourcesItem
       attr_accessor arn: ::String
       attr_accessor cidr: ::String
+      attr_accessor core_network_endpoint_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor id: ::String
-      attr_accessor ip_address_type: ("IPV4" | "IPV6")
+      attr_accessor ip_address_type: ("IPV4" | "IPV6" | "NONE")
       attr_accessor name: ::String
       attr_accessor dns_view_id: ::String
       attr_accessor protocol: ("DO53" | "DOH" | "DOT")
+      attr_accessor segment: ::String
       attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -211,11 +213,46 @@ module Aws::Route53GlobalResolver
       SENSITIVE: []
     end
 
+    class CoreNetworkEndpointDnsIpInputItem
+      attr_accessor ipv4_address: ::String
+      attr_accessor ipv6_address: ::String
+      attr_accessor dns_label: ::String
+      attr_accessor region_scope: ("ALL" | "REGIONAL")
+      attr_accessor regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CoreNetworkEndpointDnsIpItem
+      attr_accessor ipv4_address: ::String
+      attr_accessor ipv6_address: ::String
+      attr_accessor dns_label: ::String
+      attr_accessor dns_name: ::String
+      attr_accessor region_scope: ("ALL" | "REGIONAL")
+      attr_accessor regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CoreNetworkEndpointsItem
+      attr_accessor arn: ::String
+      attr_accessor available_regions: ::Array[::String]
+      attr_accessor core_network_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor global_resolver_id: ::String
+      attr_accessor id: ::String
+      attr_accessor ip_addresses: ::Array[Types::CoreNetworkEndpointDnsIpItem]
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class CreateAccessSourceInput
       attr_accessor cidr: ::String
       attr_accessor client_token: ::String
-      attr_accessor ip_address_type: ("IPV4" | "IPV6")
+      attr_accessor ip_address_type: ("IPV4" | "IPV6" | "NONE")
       attr_accessor name: ::String
+      attr_accessor core_network_endpoint_id: ::String
+      attr_accessor segment: ::String
       attr_accessor dns_view_id: ::String
       attr_accessor protocol: ("DO53" | "DOH" | "DOT")
       attr_accessor tags: ::Hash[::String, ::String]
@@ -227,7 +264,9 @@ module Aws::Route53GlobalResolver
       attr_accessor cidr: ::String
       attr_accessor created_at: ::Time
       attr_accessor id: ::String
-      attr_accessor ip_address_type: ("IPV4" | "IPV6")
+      attr_accessor ip_address_type: ("IPV4" | "IPV6" | "NONE")
+      attr_accessor core_network_endpoint_id: ::String
+      attr_accessor segment: ::String
       attr_accessor name: ::String
       attr_accessor dns_view_id: ::String
       attr_accessor protocol: ("DO53" | "DOH" | "DOT")
@@ -256,6 +295,30 @@ module Aws::Route53GlobalResolver
       attr_accessor status: ("CREATING" | "OPERATIONAL" | "DELETING")
       attr_accessor value: ::String
       SENSITIVE: [:value]
+    end
+
+    class CreateCoreNetworkEndpointInput
+      attr_accessor client_token: ::String
+      attr_accessor core_network_arn: ::String
+      attr_accessor global_resolver_id: ::String
+      attr_accessor ip_addresses: ::Array[Types::CoreNetworkEndpointDnsIpInputItem]
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateCoreNetworkEndpointOutput
+      attr_accessor arn: ::String
+      attr_accessor available_regions: ::Array[::String]
+      attr_accessor core_network_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor global_resolver_id: ::String
+      attr_accessor id: ::String
+      attr_accessor ip_addresses: ::Array[Types::CoreNetworkEndpointDnsIpItem]
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
     end
 
     class CreateDNSViewInput
@@ -351,6 +414,7 @@ module Aws::Route53GlobalResolver
       attr_accessor client_token: ::String
       attr_accessor description: ::String
       attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
+      attr_accessor public_ip_status: ("ENABLED_RESERVED" | "DISABLED_RESERVED" | "DISABLED_RELEASED")
       attr_accessor name: ::String
       attr_accessor observability_region: ::String
       attr_accessor regions: ::Array[::String]
@@ -366,6 +430,7 @@ module Aws::Route53GlobalResolver
       attr_accessor description: ::String
       attr_accessor dns_name: ::String
       attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
+      attr_accessor public_ip_status: ("ENABLED_RESERVED" | "DISABLED_RESERVED" | "DISABLED_RELEASED")
       attr_accessor ipv4_addresses: ::Array[::String]
       attr_accessor ipv6_addresses: ::Array[::String]
       attr_accessor name: ::String
@@ -400,12 +465,14 @@ module Aws::Route53GlobalResolver
     class DeleteAccessSourceOutput
       attr_accessor arn: ::String
       attr_accessor cidr: ::String
+      attr_accessor core_network_endpoint_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor id: ::String
-      attr_accessor ip_address_type: ("IPV4" | "IPV6")
+      attr_accessor ip_address_type: ("IPV4" | "IPV6" | "NONE")
       attr_accessor name: ::String
       attr_accessor dns_view_id: ::String
       attr_accessor protocol: ("DO53" | "DOH" | "DOT")
+      attr_accessor segment: ::String
       attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -420,6 +487,25 @@ module Aws::Route53GlobalResolver
       attr_accessor id: ::String
       attr_accessor status: ("CREATING" | "OPERATIONAL" | "DELETING")
       attr_accessor deleted_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteCoreNetworkEndpointInput
+      attr_accessor core_network_endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCoreNetworkEndpointOutput
+      attr_accessor arn: ::String
+      attr_accessor available_regions: ::Array[::String]
+      attr_accessor core_network_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor global_resolver_id: ::String
+      attr_accessor id: ::String
+      attr_accessor ip_addresses: ::Array[Types::CoreNetworkEndpointDnsIpItem]
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -607,12 +693,14 @@ module Aws::Route53GlobalResolver
     class GetAccessSourceOutput
       attr_accessor arn: ::String
       attr_accessor cidr: ::String
+      attr_accessor core_network_endpoint_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor id: ::String
-      attr_accessor ip_address_type: ("IPV4" | "IPV6")
+      attr_accessor ip_address_type: ("IPV4" | "IPV6" | "NONE")
       attr_accessor name: ::String
       attr_accessor dns_view_id: ::String
       attr_accessor protocol: ("DO53" | "DOH" | "DOT")
+      attr_accessor segment: ::String
       attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -636,6 +724,25 @@ module Aws::Route53GlobalResolver
       attr_accessor updated_at: ::Time
       attr_accessor value: ::String
       SENSITIVE: [:value]
+    end
+
+    class GetCoreNetworkEndpointInput
+      attr_accessor core_network_endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCoreNetworkEndpointOutput
+      attr_accessor arn: ::String
+      attr_accessor available_regions: ::Array[::String]
+      attr_accessor core_network_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor global_resolver_id: ::String
+      attr_accessor id: ::String
+      attr_accessor ip_addresses: ::Array[Types::CoreNetworkEndpointDnsIpItem]
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
     end
 
     class GetDNSViewInput
@@ -725,6 +832,7 @@ module Aws::Route53GlobalResolver
       attr_accessor ipv4_addresses: ::Array[::String]
       attr_accessor ipv6_addresses: ::Array[::String]
       attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
+      attr_accessor public_ip_status: ("ENABLED_RESERVED" | "DISABLED_RESERVED" | "DISABLED_RELEASED")
       SENSITIVE: []
     end
 
@@ -773,6 +881,7 @@ module Aws::Route53GlobalResolver
       attr_accessor ipv4_addresses: ::Array[::String]
       attr_accessor ipv6_addresses: ::Array[::String]
       attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
+      attr_accessor public_ip_status: ("ENABLED_RESERVED" | "DISABLED_RESERVED" | "DISABLED_RELEASED")
       SENSITIVE: []
     end
 
@@ -832,6 +941,19 @@ module Aws::Route53GlobalResolver
     class ListAccessTokensOutput
       attr_accessor next_token: ::String
       attr_accessor access_tokens: ::Array[Types::AccessTokenItem]
+      SENSITIVE: []
+    end
+
+    class ListCoreNetworkEndpointsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class ListCoreNetworkEndpointsOutput
+      attr_accessor next_token: ::String
+      attr_accessor core_network_endpoints: ::Array[Types::CoreNetworkEndpointsItem]
       SENSITIVE: []
     end
 
@@ -1018,7 +1140,8 @@ module Aws::Route53GlobalResolver
     class UpdateAccessSourceInput
       attr_accessor access_source_id: ::String
       attr_accessor cidr: ::String
-      attr_accessor ip_address_type: ("IPV4" | "IPV6")
+      attr_accessor dns_view_id: ::String
+      attr_accessor ip_address_type: ("IPV4" | "IPV6" | "NONE")
       attr_accessor name: ::String
       attr_accessor protocol: ("DO53" | "DOH" | "DOT")
       SENSITIVE: []
@@ -1027,12 +1150,14 @@ module Aws::Route53GlobalResolver
     class UpdateAccessSourceOutput
       attr_accessor arn: ::String
       attr_accessor cidr: ::String
+      attr_accessor core_network_endpoint_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor id: ::String
-      attr_accessor ip_address_type: ("IPV4" | "IPV6")
+      attr_accessor ip_address_type: ("IPV4" | "IPV6" | "NONE")
       attr_accessor name: ::String
       attr_accessor dns_view_id: ::String
       attr_accessor protocol: ("DO53" | "DOH" | "DOT")
+      attr_accessor segment: ::String
       attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -1047,6 +1172,27 @@ module Aws::Route53GlobalResolver
     class UpdateAccessTokenOutput
       attr_accessor id: ::String
       attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCoreNetworkEndpointInput
+      attr_accessor core_network_endpoint_id: ::String
+      attr_accessor name: ::String
+      attr_accessor update_ip_addresses: ::Array[Types::UpdateIpAddressEntry]
+      SENSITIVE: []
+    end
+
+    class UpdateCoreNetworkEndpointOutput
+      attr_accessor arn: ::String
+      attr_accessor available_regions: ::Array[::String]
+      attr_accessor core_network_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor global_resolver_id: ::String
+      attr_accessor id: ::String
+      attr_accessor ip_addresses: ::Array[Types::CoreNetworkEndpointDnsIpItem]
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -1133,6 +1279,7 @@ module Aws::Route53GlobalResolver
       attr_accessor observability_region: ::String
       attr_accessor description: ::String
       attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
+      attr_accessor public_ip_status: ("ENABLED_RESERVED" | "DISABLED_RESERVED" | "DISABLED_RELEASED")
       attr_accessor regions: ::Array[::String]
       SENSITIVE: []
     end
@@ -1152,6 +1299,7 @@ module Aws::Route53GlobalResolver
       attr_accessor ipv4_addresses: ::Array[::String]
       attr_accessor ipv6_addresses: ::Array[::String]
       attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
+      attr_accessor public_ip_status: ("ENABLED_RESERVED" | "DISABLED_RESERVED" | "DISABLED_RELEASED")
       SENSITIVE: []
     end
 
@@ -1170,6 +1318,16 @@ module Aws::Route53GlobalResolver
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor status: ("CREATING" | "OPERATIONAL" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class UpdateIpAddressEntry
+      attr_accessor operation: ("ADD" | "REMOVE" | "UPDATE")
+      attr_accessor ipv4_address: ::String
+      attr_accessor ipv6_address: ::String
+      attr_accessor dns_label: ::String
+      attr_accessor region_scope: ("ALL" | "REGIONAL")
+      attr_accessor regions: ::Array[::String]
       SENSITIVE: []
     end
 

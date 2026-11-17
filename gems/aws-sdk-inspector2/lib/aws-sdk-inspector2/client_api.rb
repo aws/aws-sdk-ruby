@@ -440,6 +440,16 @@ module Aws::Inspector2
     FreeTrialType = Shapes::StringShape.new(name: 'FreeTrialType')
     FrequencyExpression = Shapes::StringShape.new(name: 'FrequencyExpression')
     FunctionName = Shapes::StringShape.new(name: 'FunctionName')
+    GcpCapabilityScope = Shapes::StructureShape.new(name: 'GcpCapabilityScope')
+    GcpCapabilityScopeInput = Shapes::StructureShape.new(name: 'GcpCapabilityScopeInput')
+    GcpProviderDetailCreate = Shapes::StructureShape.new(name: 'GcpProviderDetailCreate')
+    GcpProviderDetailUpdate = Shapes::StructureShape.new(name: 'GcpProviderDetailUpdate')
+    GcpRegion = Shapes::StringShape.new(name: 'GcpRegion')
+    GcpRegionList = Shapes::ListShape.new(name: 'GcpRegionList')
+    GcpScopeConfiguration = Shapes::StructureShape.new(name: 'GcpScopeConfiguration')
+    GcpScopeConfigurationInput = Shapes::StructureShape.new(name: 'GcpScopeConfigurationInput')
+    GcpScopeValue = Shapes::StringShape.new(name: 'GcpScopeValue')
+    GcpScopeValueList = Shapes::ListShape.new(name: 'GcpScopeValueList')
     GetCisScanReportRequest = Shapes::StructureShape.new(name: 'GetCisScanReportRequest')
     GetCisScanReportResponse = Shapes::StructureShape.new(name: 'GetCisScanReportResponse')
     GetCisScanResultDetailsMaxResults = Shapes::IntegerShape.new(name: 'GetCisScanResultDetailsMaxResults')
@@ -1558,6 +1568,8 @@ module Aws::Inspector2
     Connector.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: AzureScopeConfiguration, location_name: "scopeConfiguration"))
     Connector.add_member(:tags, Shapes::ShapeRef.new(shape: ConnectorTagMap, location_name: "tags"))
     Connector.add_member(:auto_install_vm_scanner, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoInstallVMScanner"))
+    Connector.add_member(:gcp_regions, Shapes::ShapeRef.new(shape: GcpRegionList, location_name: "gcpRegions"))
+    Connector.add_member(:gcp_scope_configuration, Shapes::ShapeRef.new(shape: GcpScopeConfiguration, location_name: "gcpScopeConfiguration"))
     Connector.struct_class = Types::Connector
 
     ConnectorArnFilter.add_member(:comparison, Shapes::ShapeRef.new(shape: ConnectorArnComparison, required: true, location_name: "comparison"))
@@ -2252,6 +2264,41 @@ module Aws::Inspector2
 
     FreeTrialInfoList.member = Shapes::ShapeRef.new(shape: FreeTrialInfo)
 
+    GcpCapabilityScope.add_member(:scope_type, Shapes::ShapeRef.new(shape: ScopeType, required: true, location_name: "scopeType"))
+    GcpCapabilityScope.add_member(:scope_values, Shapes::ShapeRef.new(shape: GcpScopeValueList, location_name: "scopeValues"))
+    GcpCapabilityScope.add_member(:state, Shapes::ShapeRef.new(shape: ScopeState, location_name: "state"))
+    GcpCapabilityScope.add_member(:state_reason, Shapes::ShapeRef.new(shape: String, location_name: "stateReason"))
+    GcpCapabilityScope.struct_class = Types::GcpCapabilityScope
+
+    GcpCapabilityScopeInput.add_member(:scope_type, Shapes::ShapeRef.new(shape: ScopeType, required: true, location_name: "scopeType"))
+    GcpCapabilityScopeInput.add_member(:scope_values, Shapes::ShapeRef.new(shape: GcpScopeValueList, location_name: "scopeValues"))
+    GcpCapabilityScopeInput.struct_class = Types::GcpCapabilityScopeInput
+
+    GcpProviderDetailCreate.add_member(:aws_config_connector_arn, Shapes::ShapeRef.new(shape: AwsConfigConnectorArn, required: true, location_name: "awsConfigConnectorArn"))
+    GcpProviderDetailCreate.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: GcpScopeConfigurationInput, required: true, location_name: "scopeConfiguration"))
+    GcpProviderDetailCreate.add_member(:gcp_regions, Shapes::ShapeRef.new(shape: GcpRegionList, required: true, location_name: "gcpRegions"))
+    GcpProviderDetailCreate.add_member(:auto_install_vm_scanner, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoInstallVMScanner"))
+    GcpProviderDetailCreate.struct_class = Types::GcpProviderDetailCreate
+
+    GcpProviderDetailUpdate.add_member(:gcp_regions, Shapes::ShapeRef.new(shape: GcpRegionList, location_name: "gcpRegions"))
+    GcpProviderDetailUpdate.add_member(:scope_configuration, Shapes::ShapeRef.new(shape: GcpScopeConfigurationInput, location_name: "scopeConfiguration"))
+    GcpProviderDetailUpdate.add_member(:auto_install_vm_scanner, Shapes::ShapeRef.new(shape: Boolean, location_name: "autoInstallVMScanner"))
+    GcpProviderDetailUpdate.struct_class = Types::GcpProviderDetailUpdate
+
+    GcpRegionList.member = Shapes::ShapeRef.new(shape: GcpRegion)
+
+    GcpScopeConfiguration.add_member(:vm_scanning, Shapes::ShapeRef.new(shape: GcpCapabilityScope, location_name: "vmScanning"))
+    GcpScopeConfiguration.add_member(:container_image_scanning, Shapes::ShapeRef.new(shape: GcpCapabilityScope, location_name: "containerImageScanning"))
+    GcpScopeConfiguration.add_member(:serverless_scanning, Shapes::ShapeRef.new(shape: GcpCapabilityScope, location_name: "serverlessScanning"))
+    GcpScopeConfiguration.struct_class = Types::GcpScopeConfiguration
+
+    GcpScopeConfigurationInput.add_member(:vm_scanning, Shapes::ShapeRef.new(shape: GcpCapabilityScopeInput, location_name: "vmScanning"))
+    GcpScopeConfigurationInput.add_member(:container_image_scanning, Shapes::ShapeRef.new(shape: GcpCapabilityScopeInput, location_name: "containerImageScanning"))
+    GcpScopeConfigurationInput.add_member(:serverless_scanning, Shapes::ShapeRef.new(shape: GcpCapabilityScopeInput, location_name: "serverlessScanning"))
+    GcpScopeConfigurationInput.struct_class = Types::GcpScopeConfigurationInput
+
+    GcpScopeValueList.member = Shapes::ShapeRef.new(shape: GcpScopeValue)
+
     GetCisScanReportRequest.add_member(:scan_arn, Shapes::ShapeRef.new(shape: CisScanArn, required: true, location_name: "scanArn"))
     GetCisScanReportRequest.add_member(:target_accounts, Shapes::ShapeRef.new(shape: ReportTargetAccounts, location_name: "targetAccounts"))
     GetCisScanReportRequest.add_member(:report_format, Shapes::ShapeRef.new(shape: CisReportFormat, location_name: "reportFormat"))
@@ -2858,14 +2905,18 @@ module Aws::Inspector2
     ProjectPeriodicScanConfigurationList.member = Shapes::ShapeRef.new(shape: ProjectPeriodicScanConfiguration)
 
     ProviderDetailCreate.add_member(:azure, Shapes::ShapeRef.new(shape: AzureProviderDetailCreate, location_name: "azure"))
+    ProviderDetailCreate.add_member(:gcp, Shapes::ShapeRef.new(shape: GcpProviderDetailCreate, location_name: "gcp"))
     ProviderDetailCreate.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProviderDetailCreate.add_member_subclass(:azure, Types::ProviderDetailCreate::Azure)
+    ProviderDetailCreate.add_member_subclass(:gcp, Types::ProviderDetailCreate::Gcp)
     ProviderDetailCreate.add_member_subclass(:unknown, Types::ProviderDetailCreate::Unknown)
     ProviderDetailCreate.struct_class = Types::ProviderDetailCreate
 
     ProviderDetailUpdate.add_member(:azure, Shapes::ShapeRef.new(shape: AzureProviderDetailUpdate, location_name: "azure"))
+    ProviderDetailUpdate.add_member(:gcp, Shapes::ShapeRef.new(shape: GcpProviderDetailUpdate, location_name: "gcp"))
     ProviderDetailUpdate.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProviderDetailUpdate.add_member_subclass(:azure, Types::ProviderDetailUpdate::Azure)
+    ProviderDetailUpdate.add_member_subclass(:gcp, Types::ProviderDetailUpdate::Gcp)
     ProviderDetailUpdate.add_member_subclass(:unknown, Types::ProviderDetailUpdate::Unknown)
     ProviderDetailUpdate.struct_class = Types::ProviderDetailUpdate
 

@@ -1760,11 +1760,11 @@ module Aws::BedrockAgentCoreControl
     # @option params [String] :description
     #   A description of the dataset.
     #
-    # @option params [required, Types::DataSourceType] :source
+    # @option params [Types::DataSourceType] :source
     #   Source of initial examples. Provide either inline examples or an S3
     #   URI pointing to a JSONL file.
     #
-    # @option params [required, String] :schema_type
+    # @option params [String] :schema_type
     #   Versioned schema type governing the structure of examples. Immutable
     #   after creation.
     #
@@ -1788,7 +1788,7 @@ module Aws::BedrockAgentCoreControl
     #     client_token: "ClientToken",
     #     dataset_name: "DatasetName", # required
     #     description: "CreateDatasetRequestDescriptionString",
-    #     source: { # required
+    #     source: {
     #       inline_examples: {
     #         examples: [ # required
     #           {
@@ -1799,7 +1799,7 @@ module Aws::BedrockAgentCoreControl
     #         s3_uri: "S3Uri", # required
     #       },
     #     },
-    #     schema_type: "AGENTCORE_EVALUATION_PREDEFINED_V1", # required, accepts AGENTCORE_EVALUATION_PREDEFINED_V1, AGENTCORE_EVALUATION_SIMULATED_V1, THIRD_PARTY_EVALUATION_V1
+    #     schema_type: "AGENTCORE_EVALUATION_PREDEFINED_V1", # accepts AGENTCORE_EVALUATION_PREDEFINED_V1, AGENTCORE_EVALUATION_SIMULATED_V1, THIRD_PARTY_EVALUATION_V1
     #     kms_key_arn: "KmsKeyArn",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -7316,6 +7316,52 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Returns the account's service-defined default Agent Insight Store.
+    # The logical default exists for every enrolled account; its backing
+    # state may be initialized on first access.
+    #
+    # @option params [required, String] :agent_insight_store_id
+    #   Specifies the unique identifier of the Agent Insight Store to
+    #   retrieve.
+    #
+    # @return [Types::GetAgentInsightStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAgentInsightStoreResponse#agent_insight_store_arn #agent_insight_store_arn} => String
+    #   * {Types::GetAgentInsightStoreResponse#agent_insight_store_id #agent_insight_store_id} => String
+    #   * {Types::GetAgentInsightStoreResponse#status #status} => String
+    #   * {Types::GetAgentInsightStoreResponse#enablement_status #enablement_status} => String
+    #   * {Types::GetAgentInsightStoreResponse#encryption_configuration #encryption_configuration} => Types::AgentInsightStoreEncryptionConfiguration
+    #   * {Types::GetAgentInsightStoreResponse#created_at #created_at} => Time
+    #   * {Types::GetAgentInsightStoreResponse#updated_at #updated_at} => Time
+    #   * {Types::GetAgentInsightStoreResponse#failure_reason #failure_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_agent_insight_store({
+    #     agent_insight_store_id: "AgentInsightStoreId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agent_insight_store_arn #=> String
+    #   resp.agent_insight_store_id #=> String
+    #   resp.status #=> String, one of "ACTIVE", "UPDATING", "INACTIVE", "ERROR"
+    #   resp.enablement_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.encryption_configuration.mode #=> String, one of "AWS_OWNED_KMS_KEY", "CUSTOMER_MANAGED_KMS"
+    #   resp.encryption_configuration.kms_key_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentInsightStore AWS API Documentation
+    #
+    # @overload get_agent_insight_store(params = {})
+    # @param [Hash] params ({})
+    def get_agent_insight_store(params = {}, options = {})
+      req = build_request(:get_agent_insight_store, params)
+      req.send_request(options)
+    end
+
     # Gets an Amazon Bedrock AgentCore Runtime.
     #
     # @option params [required, String] :agent_runtime_id
@@ -8035,6 +8081,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetDatasetResponse#schema_type #schema_type} => String
     #   * {Types::GetDatasetResponse#kms_key_arn #kms_key_arn} => String
     #   * {Types::GetDatasetResponse#example_count #example_count} => Integer
+    #   * {Types::GetDatasetResponse#example_count_by_field #example_count_by_field} => Types::ExampleCountByField
     #   * {Types::GetDatasetResponse#download_url #download_url} => String
     #   * {Types::GetDatasetResponse#download_url_expires_at #download_url_expires_at} => Time
     #   * {Types::GetDatasetResponse#created_at #created_at} => Time
@@ -8061,6 +8108,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.schema_type #=> String, one of "AGENTCORE_EVALUATION_PREDEFINED_V1", "AGENTCORE_EVALUATION_SIMULATED_V1", "THIRD_PARTY_EVALUATION_V1"
     #   resp.kms_key_arn #=> String
     #   resp.example_count #=> Integer
+    #   resp.example_count_by_field.turns #=> Integer
+    #   resp.example_count_by_field.input #=> Integer
+    #   resp.example_count_by_field.actor_profile #=> Integer
     #   resp.download_url #=> String
     #   resp.download_url_expires_at #=> Time
     #   resp.created_at #=> Time
@@ -10138,6 +10188,57 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Lists the account's service-defined default Agent Insight Store. The
+    # singleton backing state may be initialized on first access.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
+    #
+    # @return [Types::ListAgentInsightStoresResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAgentInsightStoresResponse#agent_insight_stores #agent_insight_stores} => Array&lt;Types::AgentInsightStoreSummary&gt;
+    #   * {Types::ListAgentInsightStoresResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_agent_insight_stores({
+    #     next_token: "ListAgentInsightStoresRequestNextTokenString",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agent_insight_stores #=> Array
+    #   resp.agent_insight_stores[0].agent_insight_store_arn #=> String
+    #   resp.agent_insight_stores[0].agent_insight_store_id #=> String
+    #   resp.agent_insight_stores[0].status #=> String, one of "ACTIVE", "UPDATING", "INACTIVE", "ERROR"
+    #   resp.agent_insight_stores[0].enablement_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.agent_insight_stores[0].encryption_configuration.mode #=> String, one of "AWS_OWNED_KMS_KEY", "CUSTOMER_MANAGED_KMS"
+    #   resp.agent_insight_stores[0].encryption_configuration.kms_key_arn #=> String
+    #   resp.agent_insight_stores[0].created_at #=> Time
+    #   resp.agent_insight_stores[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListAgentInsightStores AWS API Documentation
+    #
+    # @overload list_agent_insight_stores(params = {})
+    # @param [Hash] params ({})
+    def list_agent_insight_stores(params = {}, options = {})
+      req = build_request(:list_agent_insight_stores, params)
+      req.send_request(options)
+    end
+
     # Lists all endpoints for a specific Amazon Secure Agent.
     #
     # @option params [required, String] :agent_runtime_id
@@ -10736,15 +10837,22 @@ module Aws::BedrockAgentCoreControl
     # Returns paginated examples from the dataset. The server embeds the
     # resolved version in the pagination token. Once pagination begins, all
     # subsequent pages are pinned to that version regardless of concurrent
-    # mutations.
+    # mutations. A request with a pagination token can omit
+    # `datasetVersion`. If it sets a version that differs from the token's
+    # version, the request fails with a `ValidationException`.
     #
     # @option params [required, String] :dataset_id
     #   The unique identifier of the dataset.
     #
     # @option params [String] :dataset_version
     #   Version to paginate: "DRAFT" or a version number. Defaults to DRAFT
-    #   if absent. Only used on the first request; for subsequent pages, the
-    #   version is extracted from the pagination token.
+    #   if absent on the first request. With a pagination token, the version
+    #   comes from the token: you can omit this member, and a value that
+    #   differs from the token's version is rejected with a
+    #   `ValidationException`.
+    #
+    # @option params [Types::ListDatasetExamplesFilter] :filter
+    #   A filter to apply to the examples.
     #
     # @option params [Integer] :max_results
     #   Maximum number of examples to return per page.
@@ -10767,6 +10875,14 @@ module Aws::BedrockAgentCoreControl
     #   resp = client.list_dataset_examples({
     #     dataset_id: "DatasetId", # required
     #     dataset_version: "DatasetVersion",
+    #     filter: {
+    #       generation_ids: ["DatasetGenerationId"],
+    #       example_fields: [
+    #         {
+    #           any_of: ["TURNS"], # accepts TURNS, INPUT, ACTOR_PROFILE
+    #         },
+    #       ],
+    #     },
     #     max_results: 1,
     #     next_token: "ListDatasetExamplesRequestNextTokenString",
     #   })
@@ -10794,6 +10910,9 @@ module Aws::BedrockAgentCoreControl
     # @option params [required, String] :dataset_id
     #   The unique identifier of the dataset.
     #
+    # @option params [Types::ListDatasetVersionsFilter] :filter
+    #   A filter to apply to the dataset versions.
+    #
     # @option params [String] :next_token
     #   The token for the next page of results.
     #
@@ -10811,7 +10930,16 @@ module Aws::BedrockAgentCoreControl
     #
     #   resp = client.list_dataset_versions({
     #     dataset_id: "DatasetId", # required
-    #     next_token: "String",
+    #     filter: {
+    #       example_count_by_field: [
+    #         {
+    #           any_of: ["TURNS"], # accepts TURNS, INPUT, ACTOR_PROFILE
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #       ],
+    #     },
+    #     next_token: "ListDatasetVersionsRequestNextTokenString",
     #     max_results: 1,
     #   })
     #
@@ -10820,6 +10948,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.versions #=> Array
     #   resp.versions[0].dataset_version #=> String
     #   resp.versions[0].example_count #=> Integer
+    #   resp.versions[0].example_count_by_field.turns #=> Integer
+    #   resp.versions[0].example_count_by_field.input #=> Integer
+    #   resp.versions[0].example_count_by_field.actor_profile #=> Integer
     #   resp.versions[0].created_at #=> Time
     #   resp.next_token #=> String
     #
@@ -10833,6 +10964,9 @@ module Aws::BedrockAgentCoreControl
     end
 
     # Lists all datasets in the caller's account, paginated.
+    #
+    # @option params [Types::ListDatasetsFilter] :filter
+    #   A filter to apply to the datasets.
     #
     # @option params [String] :next_token
     #   The token for the next page of results.
@@ -10850,6 +10984,15 @@ module Aws::BedrockAgentCoreControl
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_datasets({
+    #     filter: {
+    #       example_count_by_field: [
+    #         {
+    #           any_of: ["TURNS"], # accepts TURNS, INPUT, ACTOR_PROFILE
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #       ],
+    #     },
     #     next_token: "ListDatasetsRequestNextTokenString",
     #     max_results: 1,
     #   })
@@ -10865,6 +11008,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.datasets[0].draft_status #=> String, one of "MODIFIED", "UNMODIFIED"
     #   resp.datasets[0].schema_type #=> String, one of "AGENTCORE_EVALUATION_PREDEFINED_V1", "AGENTCORE_EVALUATION_SIMULATED_V1", "THIRD_PARTY_EVALUATION_V1"
     #   resp.datasets[0].example_count #=> Integer
+    #   resp.datasets[0].example_count_by_field.turns #=> Integer
+    #   resp.datasets[0].example_count_by_field.input #=> Integer
+    #   resp.datasets[0].example_count_by_field.actor_profile #=> Integer
     #   resp.datasets[0].created_at #=> Time
     #   resp.datasets[0].updated_at #=> Time
     #   resp.next_token #=> String
@@ -12895,6 +13041,75 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates the enablement status or encryption configuration of an Agent
+    # Insight Store.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a previous
+    #   request, the service ignores the request, but doesn't return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [required, String] :agent_insight_store_id
+    #   Specifies the unique identifier of the Agent Insight Store to update.
+    #
+    # @option params [String] :enablement_status
+    #   Specifies whether the Agent Insight Store accepts new Agent Insights.
+    #   If you don't specify this parameter, the store's current enablement
+    #   setting remains unchanged.
+    #
+    # @option params [Types::AgentInsightStoreEncryptionConfiguration] :encryption_configuration
+    #   Specifies the encryption mode and key configuration to use for new
+    #   Agent Insights. If you don't specify this parameter, the store's
+    #   current encryption configuration remains unchanged.
+    #
+    # @return [Types::UpdateAgentInsightStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAgentInsightStoreResponse#agent_insight_store_arn #agent_insight_store_arn} => String
+    #   * {Types::UpdateAgentInsightStoreResponse#agent_insight_store_id #agent_insight_store_id} => String
+    #   * {Types::UpdateAgentInsightStoreResponse#status #status} => String
+    #   * {Types::UpdateAgentInsightStoreResponse#enablement_status #enablement_status} => String
+    #   * {Types::UpdateAgentInsightStoreResponse#updated_at #updated_at} => Time
+    #   * {Types::UpdateAgentInsightStoreResponse#failure_reason #failure_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_agent_insight_store({
+    #     client_token: "ClientToken",
+    #     agent_insight_store_id: "AgentInsightStoreId", # required
+    #     enablement_status: "ENABLED", # accepts ENABLED, DISABLED
+    #     encryption_configuration: {
+    #       mode: "AWS_OWNED_KMS_KEY", # required, accepts AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KMS
+    #       kms_key_arn: "KmsKeyArn",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agent_insight_store_arn #=> String
+    #   resp.agent_insight_store_id #=> String
+    #   resp.status #=> String, one of "ACTIVE", "UPDATING", "INACTIVE", "ERROR"
+    #   resp.enablement_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.updated_at #=> Time
+    #   resp.failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateAgentInsightStore AWS API Documentation
+    #
+    # @overload update_agent_insight_store(params = {})
+    # @param [Hash] params ({})
+    def update_agent_insight_store(params = {}, options = {})
+      req = build_request(:update_agent_insight_store, params)
       req.send_request(options)
     end
 
@@ -17858,7 +18073,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
