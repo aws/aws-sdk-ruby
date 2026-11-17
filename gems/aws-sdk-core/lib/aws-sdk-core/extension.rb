@@ -49,6 +49,18 @@ module Aws
           end
         end
 
+        # Resolves and caches the AWS HTTP checksum trait for an operation.
+        #
+        # Modeled member names are converted to the Ruby names used in params.
+        def http_checksum(operation)
+          operation.fetch_metadata(:aws_http_checksum) do
+            trait = operation.traits['aws.protocols#httpChecksum']
+            next unless trait
+
+            resolve_http_checksum(operation, trait)
+          end
+        end
+
         # Resolves and caches the AWS SDK service identifier.
         #
         # Example:
@@ -61,6 +73,36 @@ module Aws
         end
 
         private
+
+        def resolve_http_checksum(operation, trait)
+          algorithm_member, algorithm_shape =
+            resolve_http_checksum_member(operation, trait['requestAlgorithmMember'])
+          validation_member, =
+            resolve_http_checksum_member(operation, trait['requestValidationModeMember'])
+
+          {
+            request_algorithm_member: algorithm_member,
+            request_algorithm_header: http_header_name(algorithm_shape),
+            request_checksum_required: !!trait['requestChecksumRequired'],
+            request_validation_mode_member: validation_member,
+            response_algorithms: Array(trait['responseAlgorithms']).freeze
+          }.freeze
+        end
+
+        def resolve_http_checksum_member(operation, modeled_name)
+          return [nil, nil] unless modeled_name
+
+          ruby_name, member = SCHEMA_EXTENSION.wire_index(operation.input)[modeled_name]
+          unless ruby_name
+            raise ArgumentError,
+                  "#{modeled_name} is not a member of #{operation.input.name}"
+          end
+          [ruby_name, member]
+        end
+
+        def http_header_name(member)
+          member&.traits&.dig('smithy.api#httpHeader')
+        end
 
         def json_content_type_value(service)
           if service.traits.key?('aws.protocols#awsJson1_0')
