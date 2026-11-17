@@ -284,6 +284,7 @@ module Aws
         # longPoll trait. To be removed when trait is enabled.
         LONG_POLLING_OPERATIONS = {
           'SQS' => Set[:receive_message],
+          'Kinesis' => Set[:receive_queue_records, :receive_dead_letter_queue_records],
           'SFN' => Set[:get_activity_task],
           'SWF' => Set[:poll_for_activity_task, :poll_for_decision_task]
         }.freeze

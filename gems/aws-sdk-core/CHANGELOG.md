@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Back off on retries of the Kinesis `ReceiveQueueRecords` and `ReceiveDeadLetterQueueRecords` long polling operations even when the retry quota is depleted.
+
 3.269.0 (2026-11-16)
 ------------------
 
