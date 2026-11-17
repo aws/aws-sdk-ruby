@@ -74,6 +74,73 @@ module Seahorse
       end
 
       # @api private
+      class DynamicStruct
+        attr_reader :members
+
+        def initialize(members)
+          @members = members.map(&:to_sym).to_set
+          @attributes = {}
+        end
+
+        def [](name)
+          name = name.to_sym
+          unless @members.include?(name)
+            raise NameError, "No member #{name} in Struct"
+          end
+
+          @attributes[name]
+        end
+
+        def []=(name, value)
+          name = name.to_sym
+          unless @members.include?(name)
+            raise NameError, "No member #{name} in Struct"
+          end
+
+          @attributes[name] = value
+        end
+
+        def each_pair
+          return enum_for(:each_pair) unless block_given?
+
+          @members.each do |member|
+            yield(member, @attributes[member])
+          end
+          self
+        end
+
+        def initialize_copy(source)
+          super
+          @members = @members.dup
+          @attributes = @attributes.dup
+        end
+
+        private
+
+        alias_method :write_attribute, :[]=
+        alias_method :read_attribute, :[]
+
+        def method_missing(name, *args, **kwargs, &block)
+          if name.end_with?('=')
+            attr_name = name[0..-2].to_sym
+            if @members.include?(attr_name)
+              write_attribute(attr_name, *args, **kwargs, &block)
+            else
+              super
+            end
+          elsif @members.include?(name)
+            read_attribute(name, *args, **kwargs, &block)
+          else
+            super
+          end
+        end
+
+        def respond_to_missing?(name, include_private = false)
+          @members.include?(name) || (name.end_with?('=') && @members.include?(name[0..-2].to_sym)) || super
+        end
+      end
+
+      # @api private
       def initialize
         @defaults = Hash.new { |h,k| h[k] = Defaults.new }
       end
@@ -156,7 +223,7 @@ module Seahorse
       private
 
       def empty_struct
-        Struct.new(*@defaults.keys.sort).new
+        DynamicStruct.new(@defaults.keys.sort)
       end
 
       def apply_options(struct, options)

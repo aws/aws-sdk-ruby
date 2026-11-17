@@ -66,7 +66,7 @@ module Seahorse
         it 'returns self so it can be chained' do
           c = config.add_option(:name).add_option(:color)
           expect(c).to be(config)
-          expect(c.build!.members).to eq([:color, :name])
+          expect(c.build!.members).to eq(Set[:color, :name])
         end
 
       end
@@ -74,7 +74,7 @@ module Seahorse
       describe '#build!' do
 
         it 'returns a Struct' do
-          expect(config.add_option(:opt).build!).to be_kind_of(Struct)
+          expect(config.add_option(:opt).build!).to be_kind_of(Configuration::DynamicStruct)
         end
 
         it 'accepts a hash of options' do
@@ -103,6 +103,26 @@ module Seahorse
           value = lambda {}
           config.add_option(:proc, value)
           expect(config.build!.proc).to be(value)
+        end
+
+        it 'enumerates configuration members and values' do
+          config.add_option(:name, 'John Doe')
+          config.add_option(:color, 'red')
+
+          expect(config.build!.each_pair.to_a).to eq(
+            [[:color, 'red'], [:name, 'John Doe']]
+          )
+        end
+
+        it 'duplicates configuration attributes independently' do
+          config.add_option(:name, 'John Doe')
+          original = config.build!
+          copy = original.dup
+
+          copy.name = 'Jane Doe'
+
+          expect(original.name).to eq('John Doe')
+          expect(copy.name).to eq('Jane Doe')
         end
 
         it 'resolves defaults in LIFO order until a non-nil value is found' do
