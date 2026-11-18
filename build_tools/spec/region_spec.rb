@@ -34,11 +34,8 @@ describe 'ensure no hard-coded region' do
       # skip EndpointProviders as they have special cased region logic
       next if File.basename(path) == "endpoint_provider.rb"
 
-      file = File.open(path, 'r', encoding: 'UTF-8', &:read)
-      lines = file.lines.to_a
-
       it "#{path} has no hard-coded region" do
-        lines.each_with_index do |val, idx|
+        File.readlines(path, encoding: 'UTF-8').each_with_index do |val, idx|
           # skip comment code
           next if val.strip[0] == '#'
 

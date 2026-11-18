@@ -11,9 +11,10 @@ module Aws
         Aws::S3Control::Client.new(region: 'us-east-1', stub_responses: true)
       end
 
-      let(:in_five_minutes) { Time.now + 60 * 5 }
+      # outside the async refresh window, so examples do not start refresh threads
+      let(:in_one_hour) { Time.now + 60 * 60 }
 
-      let(:expiration) { in_five_minutes }
+      let(:expiration) { in_one_hour }
 
       let(:credentials) do
         double('credentials',
@@ -64,7 +65,7 @@ module Aws
         expect(c.credentials.access_key_id).to eq('akid')
         expect(c.credentials.secret_access_key).to eq('secret')
         expect(c.credentials.session_token).to eq('session')
-        expect(c.expiration).to eq(in_five_minutes)
+        expect(c.expiration).to eq(in_one_hour)
       end
 
       it 'provides the matched grant target' do

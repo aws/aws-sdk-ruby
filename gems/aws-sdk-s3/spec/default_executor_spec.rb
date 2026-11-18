@@ -75,7 +75,7 @@ module Aws
           executor.shutdown
         end
 
-        it 'kill unblocks the producer instead of silently dropping the task', :jruby_flaky do
+        it 'kill unblocks the producer instead of silently dropping the task' do
           producer = park_producer
           expect(executor.kill).to be(true)
           expect(producer.join(2)).to_not be_nil
