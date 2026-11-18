@@ -31,6 +31,10 @@ more AWS Credentials Configuration Options are available [here](https://github.c
 
       option(:instance_profile_credentials_timeout, 1)
 
+      option(:credential_daemon_connect_timeout, 1)
+
+      option(:credential_daemon_timeout, 5)
+
     end
   end
 end

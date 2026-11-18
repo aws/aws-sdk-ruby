@@ -85,6 +85,10 @@ module Aws
 
       option(:instance_profile_credentials_timeout, 1)
 
+      option(:credential_daemon_connect_timeout, 1)
+
+      option(:credential_daemon_timeout, 5)
+
       option(
         :token_provider,
         doc_type: 'Aws::TokenProvider',

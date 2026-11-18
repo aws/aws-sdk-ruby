@@ -129,6 +129,10 @@ module Aws
 
     def assume_role_web_identity_credentials_from_config(opts = {})
       p = opts[:profile] || @profile_name
+      # a credential daemon profile is resolved, or rejected, by the
+      # credential daemon provider
+      return if credential_daemon_profile?(p)
+
       if @config_enabled && @parsed_config
         entry = @parsed_config.fetch(p, {})
         if entry['web_identity_token_file'] && entry['role_arn']
@@ -164,6 +168,9 @@ module Aws
     # file, if present.
     def sso_token_from_config(opts = {})
       p = opts[:profile] || @profile_name
+      # the credential daemon holds the SSO session of this profile
+      return if credential_daemon_sso_profile?(p)
+
       token = sso_token_from_profile(@parsed_credentials, p)
       if @parsed_config
         token ||= sso_token_from_profile(@parsed_config, p)
@@ -179,6 +186,98 @@ module Aws
       credentials = login_credentials_from_profile(@parsed_credentials, p, opts[:region])
       credentials ||= login_credentials_from_profile(@parsed_config, p, opts[:region]) if @parsed_config
       credentials
+    end
+
+    # @api private
+    # @return [Boolean] `true` when the profile in the shared config file is
+    #   resolved by the credential daemon provider.
+    def credential_daemon_profile?(profile)
+      !credential_daemon_profile_kind(profile).nil?
+    end
+
+    # @api private
+    # @return [Boolean] `true` when the profile in the shared config file
+    #   sources SSO role credentials from the credential daemon.
+    def credential_daemon_sso_profile?(profile)
+      credential_daemon_profile_kind(profile) == :sso
+    end
+
+    # @api private
+    # Builds a {CredentialDaemonCredentials} provider for a profile in the
+    # shared config file that sets `daemon_credential`.
+    #
+    # @param [Hash] opts
+    # @option opts [String] :profile
+    # @option opts [Numeric] :connect_timeout
+    # @option opts [Numeric] :call_timeout
+    # @return [CredentialDaemonCredentials, nil]
+    def credential_daemon_credentials_from_config(opts = {})
+      p = opts[:profile] || @profile_name
+      kind = credential_daemon_profile_kind(p)
+      return unless kind
+
+      if kind == :sso_partial
+        # raises the SSO provider's error for the missing key
+        sso_credentials_from_profile(@parsed_config, p)
+        raise ArgumentError,
+              "Profile #{p} sets daemon_credential with only one of sso_account_id and sso_role_name"
+      end
+
+      prof_config = @parsed_config[p]
+      name = prof_config['daemon_credential']
+      CredentialDaemonCredentials.validate_credential_name!(name, p)
+      cred_config = @parsed_credentials.fetch(p, {})
+      if prof_config['web_identity_token_file'] || cred_config['web_identity_token_file']
+        raise CredentialDaemonCredentials.invalid_config(
+          "profile '#{p}' has two credential sources, daemon_credential and " \
+          'web_identity_token_file; remove one of them'
+        )
+      end
+      if prof_config['role_arn'] || cred_config['role_arn']
+        raise CredentialDaemonCredentials.invalid_config(
+          "profile '#{p}' sets daemon_credential together with role_arn; " \
+          "move the role to its own profile and set source_profile = #{p} there"
+        )
+      end
+
+      daemon_opts = {
+        credential: name,
+        profile: p,
+        connect_timeout: opts[:connect_timeout],
+        call_timeout: opts[:call_timeout]
+      }
+      if kind == :sso
+        daemon_opts[:account_id] = prof_config['sso_account_id']
+        daemon_opts[:role_name] = prof_config['sso_role_name']
+      end
+      CredentialDaemonCredentials.new(daemon_opts)
+    end
+
+    # @api private
+    # @return [Hash] the credential daemon timeouts set on a client config.
+    def credential_daemon_timeouts(chain_config)
+      timeouts = {}
+      if chain_config.respond_to?(:credential_daemon_connect_timeout)
+        timeouts[:connect_timeout] = chain_config.credential_daemon_connect_timeout
+      end
+      if chain_config.respond_to?(:credential_daemon_timeout)
+        timeouts[:call_timeout] = chain_config.credential_daemon_timeout
+      end
+      timeouts
+    end
+
+    # @api private
+    # @return [String, nil] the message for a missing bearer token when the
+    #   client's profile keeps its SSO session in the credential daemon.
+    def credential_daemon_bearer_token_message(config)
+      profile = (config.profile if config.respond_to?(:profile)) ||
+                ENV['AWS_PROFILE'] || ENV['AWS_DEFAULT_PROFILE'] || 'default'
+      return unless credential_daemon_sso_profile?(profile)
+
+      "unable to sign request without token set: profile '#{profile}' keeps its " \
+      'SSO session in the credential daemon; services that use bearer tokens ' \
+      'need an SSO session stored in the shared config and SSO token cache files ' \
+      '(run aws sso login with a profile that does not set daemon_credential)'
     end
 
     # Source a custom configured endpoint from the shared configuration file
@@ -272,7 +371,7 @@ module Aws
             'provide only source_profile or credential_source, not both.'
         elsif opts[:source_profile]
           opts[:visited_profiles] ||= Set.new
-          provider = resolve_source_profile(opts[:source_profile], opts)
+          provider = resolve_source_profile(opts[:source_profile], opts, chain_config)
           if provider && (opts[:credentials] = provider.credentials)
             opts[:role_session_name] ||= prof_cfg['role_session_name']
             opts[:role_session_name] ||= 'default_session'
@@ -333,7 +432,7 @@ module Aws
       end
     end
 
-    def resolve_source_profile(profile, opts = {})
+    def resolve_source_profile(profile, opts = {}, chain_config = nil)
       if opts[:visited_profiles] && opts[:visited_profiles].include?(profile)
         raise Errors::SourceProfileCircularReferenceError
       end
@@ -344,7 +443,10 @@ module Aws
         profile_config ||= @parsed_config[profile]
       end
 
-      if (creds = credentials(profile: profile))
+      daemon_opts = credential_daemon_timeouts(chain_config).merge(profile: profile)
+      if (provider = credential_daemon_credentials_from_config(daemon_opts))
+        provider # a credential daemon profile never uses its other settings
+      elsif (creds = credentials(profile: profile))
         creds # static credentials
       elsif profile_config && profile_config['source_profile']
         opts.delete(:source_profile)
@@ -355,6 +457,25 @@ module Aws
         provider if provider.credentials.set?
       elsif (provider = sso_credentials_from_config_with_metrics(profile))
         provider if provider.credentials.set?
+      end
+    end
+
+    # Returns nil when the profile is not resolved by the credential daemon:
+    # daemon_credential is only read from the shared config file. A profile
+    # with an SSO session or start URL but neither sso_account_id nor
+    # sso_role_name is resolved as if daemon_credential were absent.
+    def credential_daemon_profile_kind(profile)
+      return unless @config_enabled && @parsed_config &&
+                    (prof_config = @parsed_config[profile]) &&
+                    prof_config.key?('daemon_credential')
+
+      if prof_config['sso_session'] || prof_config['sso_start_url']
+        case (prof_config.keys & SSO_CREDENTIAL_PROFILE_KEYS).size
+        when 2 then :sso
+        when 1 then :sso_partial
+        end
+      else
+        :plain
       end
     end
 

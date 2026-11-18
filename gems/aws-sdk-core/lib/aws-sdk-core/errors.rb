@@ -219,10 +219,25 @@ module Aws
     # Raised when a client is unable to sign a request because
     # the bearer token is not configured or available
     class MissingBearerTokenError < RuntimeError
-      def initialize(*args)
-        msg = 'unable to sign request without token set'
+      def initialize(msg = nil)
+        msg ||= 'unable to sign request without token set'
         super(msg)
       end
+    end
+
+    # Raised by {Aws::CredentialDaemonCredentials} when credentials can not
+    # be sourced from the credential daemon. The {#code} attribute holds a
+    # stable error code, which also starts the message.
+    class CredentialDaemonError < RuntimeError
+      # @param [String] code
+      # @param [String] message
+      def initialize(code, message)
+        @code = code
+        super("#{code}: #{message}")
+      end
+
+      # @return [String]
+      attr_reader :code
     end
 
 

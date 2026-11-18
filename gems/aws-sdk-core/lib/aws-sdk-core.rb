@@ -24,6 +24,7 @@ module Aws
   autoload :InstanceProfileCredentials, 'aws-sdk-core/instance_profile_credentials'
   autoload :SharedCredentials, 'aws-sdk-core/shared_credentials'
   autoload :ProcessCredentials, 'aws-sdk-core/process_credentials'
+  autoload :CredentialDaemonCredentials, 'aws-sdk-core/credential_daemon_credentials'
   autoload :SSOCredentials, 'aws-sdk-core/sso_credentials'
   autoload :LoginCredentials, 'aws-sdk-core/login_credentials'
 

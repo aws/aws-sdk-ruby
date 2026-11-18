@@ -59,7 +59,7 @@ will be used to search for tokens configured for your profile in shared configur
           if token_provider && token_provider.set?
             context.http_request.headers['Authorization'] = "Bearer #{token_provider.token.token}"
           else
-            raise Errors::MissingBearerTokenError
+            raise Errors::MissingBearerTokenError, Aws.shared_config.credential_daemon_bearer_token_message(context.config)
           end
           @handler.call(context)
         end
