@@ -49,6 +49,9 @@ module Aws
           * `Aws::ProcessCredentials` - Used for loading credentials from a
             process that outputs to stdout.
 
+          * `Aws::CredentialDaemonCredentials` - Used for loading short-lived
+            credentials from a local credential daemon over a Unix domain socket.
+
           * `Aws::InstanceProfileCredentials` - Used for loading credentials
             from an EC2 IMDS on an EC2 instance.
 
@@ -70,7 +73,8 @@ module Aws
 
           * `~/.aws/credentials`
 
-          * `~/.aws/config`
+          * `~/.aws/config` - A profile that sets `daemon_credential` gets its credentials from
+            the credential daemon, ahead of any other credentials for that profile.
 
           * EC2/ECS IMDS instance profile - When used by default, the timeouts are very aggressive.
             Construct and pass an instance of `Aws::InstanceProfileCredentials` or `Aws::ECSCredentials` to
