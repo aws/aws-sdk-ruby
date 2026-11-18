@@ -98,8 +98,10 @@ module Aws
 
     describe 'connect and timeouts' do
       it 'raises NOT_RUNNING at once when the listen backlog is full' do
-        # macOS accepts a connect even with listen(0), so the backlog never fills.
-        skip 'needs Linux listen backlog behavior' unless RbConfig::CONFIG['host_os'] =~ /linux/
+        # macOS accepts a connect even with listen(0), and JRuby has no Socket#listen.
+        unless RUBY_ENGINE == 'ruby' && RbConfig::CONFIG['host_os'] =~ /linux/
+          skip 'needs CRuby on Linux to fill the listen backlog'
+        end
         dir = Dir.mktmpdir('cd', '/tmp')
         path = File.join(dir, 'd.sock')
         server = Socket.new(:UNIX, :STREAM)
