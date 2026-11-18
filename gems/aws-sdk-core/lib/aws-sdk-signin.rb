@@ -25,7 +25,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:signin)
 # structure.
 #
 #     signin = Aws::Signin::Client.new
-#     resp = signin.create_bearer_token(params)
+#     resp = signin.batch_revoke_sessions(params)
 #
 # See {Client} for more information.
 #
@@ -56,7 +56,7 @@ module Aws::Signin
   autoload :EndpointProvider, 'aws-sdk-signin/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-signin/endpoints'
 
-  GEM_VERSION = '3.269.0'
+  GEM_VERSION = '3.270.0'
 
 end
 

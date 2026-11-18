@@ -5329,10 +5329,11 @@ module Aws::S3
     # Specifies whether Amazon S3 replicates delete markers. If you specify
     # a `Filter` in your replication configuration, you must also include a
     # `DeleteMarkerReplication` element. If your `Filter` includes a `Tag`
-    # element, the `DeleteMarkerReplication` `Status` must be set to
-    # Disabled, because Amazon S3 does not support replicating delete
-    # markers for tag-based rules. For an example configuration, see [Basic
-    # Rule Configuration][1].
+    # element, including within a `Not` or `Or` element, the
+    # `DeleteMarkerReplication` `Status` must be set to Disabled, because
+    # Amazon S3 does not support replicating delete markers for tag-based
+    # rules. For an example configuration, see [Basic Rule
+    # Configuration][1].
     #
     # For more information about delete marker replication, see [Basic Rule
     # Configuration][2].
@@ -6196,10 +6197,16 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     #   @return [String]
     #
+    # @!attribute [rw] use_source_multi_region_key
+    #   Specifies whether Amazon S3 uses the related multi-Region KMS key in
+    #   the destination Amazon Web Services Region to encrypt the replica.
+    #   @return [Types::UseSourceMultiRegionKey]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/EncryptionConfiguration AWS API Documentation
     #
     class EncryptionConfiguration < Struct.new(
-      :replica_kms_key_id)
+      :replica_kms_key_id,
+      :use_source_multi_region_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19586,7 +19593,7 @@ module Aws::S3
     # @!attribute [rw] filter
     #   A filter that identifies the subset of objects to which the
     #   replication rule applies. A `Filter` must specify exactly one
-    #   `Prefix`, `Tag`, or an `And` child element.
+    #   `Prefix`, `Tag`, `And`, or `Not` child element.
     #   @return [Types::ReplicationRuleFilter]
     #
     # @!attribute [rw] status
@@ -19626,10 +19633,11 @@ module Aws::S3
     #   Specifies whether Amazon S3 replicates delete markers. If you
     #   specify a `Filter` in your replication configuration, you must also
     #   include a `DeleteMarkerReplication` element. If your `Filter`
-    #   includes a `Tag` element, the `DeleteMarkerReplication` `Status`
-    #   must be set to Disabled, because Amazon S3 does not support
-    #   replicating delete markers for tag-based rules. For an example
-    #   configuration, see [Basic Rule Configuration][1].
+    #   includes a `Tag` element, including within a `Not` or `Or` element,
+    #   the `DeleteMarkerReplication` `Status` must be set to Disabled,
+    #   because Amazon S3 does not support replicating delete markers for
+    #   tag-based rules. For an example configuration, see [Basic Rule
+    #   Configuration][1].
     #
     #   For more information about delete marker replication, see [Basic
     #   Rule Configuration][2].
@@ -19684,18 +19692,24 @@ module Aws::S3
     #   An array of tags containing key and value pairs.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] not
+    #   A container for specifying filters that exclude matching objects
+    #   from the replication rule.
+    #   @return [Types::ReplicationRuleNotOperator]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRuleAndOperator AWS API Documentation
     #
     class ReplicationRuleAndOperator < Struct.new(
       :prefix,
-      :tags)
+      :tags,
+      :not)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # A filter that identifies the subset of objects to which the
     # replication rule applies. A `Filter` must specify exactly one
-    # `Prefix`, `Tag`, or an `And` child element.
+    # `Prefix`, `Tag`, `And`, or `Not` child element.
     #
     # @!attribute [rw] prefix
     #   An object key name prefix that identifies the subset of objects to
@@ -19728,12 +19742,67 @@ module Aws::S3
     #     elements in an `And` tag.
     #   @return [Types::ReplicationRuleAndOperator]
     #
+    # @!attribute [rw] not
+    #   A container for specifying filters that exclude matching objects
+    #   from the replication rule.
+    #   @return [Types::ReplicationRuleNotOperator]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRuleFilter AWS API Documentation
     #
     class ReplicationRuleFilter < Struct.new(
       :prefix,
       :tag,
-      :and)
+      :and,
+      :not)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for specifying a filter that excludes matching objects
+    # from the replication rule. Specify exactly one `Prefix`, `Tag`, or
+    # `Or` child element.
+    #
+    # @!attribute [rw] prefix
+    #   An object key name prefix that identifies objects to exclude from
+    #   the replication rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag
+    #   A tag key and value that identify objects to exclude from the
+    #   replication rule.
+    #   @return [Types::Tag]
+    #
+    # @!attribute [rw] or
+    #   A container for specifying prefixes and tags. An object is excluded
+    #   from the replication rule if it matches any of the specified
+    #   filters.
+    #   @return [Types::ReplicationRuleOrOperator]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRuleNotOperator AWS API Documentation
+    #
+    class ReplicationRuleNotOperator < Struct.new(
+      :prefix,
+      :tag,
+      :or)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container for specifying one or more prefix or tag filters.
+    #
+    # @!attribute [rw] prefixes
+    #   An array of object key name prefixes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   An array of tags containing key and value pairs.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRuleOrOperator AWS API Documentation
+    #
+    class ReplicationRuleOrOperator < Struct.new(
+      :prefixes,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22457,6 +22526,22 @@ module Aws::S3
       :request_payer,
       :expected_bucket_owner)
       SENSITIVE = [:sse_customer_key]
+      include Aws::Structure
+    end
+
+    # A container for configuring the use of the related multi-Region KMS
+    # key in the destination Amazon Web Services Region for replication.
+    #
+    # @!attribute [rw] status
+    #   Specifies whether Amazon S3 uses the related multi-Region KMS key in
+    #   the destination Amazon Web Services Region to encrypt the replica.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UseSourceMultiRegionKey AWS API Documentation
+    #
+    class UseSourceMultiRegionKey < Struct.new(
+      :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 

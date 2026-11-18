@@ -762,7 +762,7 @@ module Aws::CloudFormation
     # failed update rollback, see [Update rollback failed][2].
     #
     # `ForceRollback` and `ResourcesToSkip` are mutually exclusive. For
-    # details, see ContinueUpdateRollbackInput$ForceRollback.
+    # details, see the `ForceRollback` parameter.
     #
     #
     #
@@ -4065,6 +4065,10 @@ module Aws::CloudFormation
 
     # Returns the description of the specified StackSet operation.
     #
+    # Reports role provisioning and stack instances deployment progress in
+    # `StatusDetails.Stages`. A breakdown for each Amazon Web Services
+    # Region is available in `RegionalStatusDetails`.
+    #
     # <note markdown="1"> This API provides *strongly consistent* reads meaning it will always
     # return the most up-to-date data.
     #
@@ -4145,7 +4149,33 @@ module Aws::CloudFormation
     #   resp.stack_set_operation.stack_set_drift_detection_details.in_progress_stack_instances_count #=> Integer
     #   resp.stack_set_operation.stack_set_drift_detection_details.failed_stack_instances_count #=> Integer
     #   resp.stack_set_operation.status_reason #=> String
+    #   resp.stack_set_operation.status_details.stages.role_provisioning.status #=> String, one of "PENDING", "NOT_APPLICABLE", "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "PARTIAL_SUCCESS", "FAILED"
+    #   resp.stack_set_operation.status_details.stages.role_provisioning.succeeded_accounts_count #=> Integer
+    #   resp.stack_set_operation.status_details.stages.role_provisioning.failed_accounts_count #=> Integer
+    #   resp.stack_set_operation.status_details.stages.role_provisioning.completed_accounts_count #=> Integer
+    #   resp.stack_set_operation.status_details.stages.role_provisioning.pending_accounts_count #=> Integer
+    #   resp.stack_set_operation.status_details.stages.role_provisioning.percentage_completed #=> Float
+    #   resp.stack_set_operation.status_details.stages.stack_instances_deployment.status #=> String, one of "PENDING", "NOT_APPLICABLE", "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "PARTIAL_SUCCESS", "FAILED"
+    #   resp.stack_set_operation.status_details.stages.stack_instances_deployment.succeeded_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.status_details.stages.stack_instances_deployment.failed_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.status_details.stages.stack_instances_deployment.completed_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.status_details.stages.stack_instances_deployment.pending_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.status_details.stages.stack_instances_deployment.cancelled_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.status_details.stages.stack_instances_deployment.skipped_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.status_details.stages.stack_instances_deployment.percentage_completed #=> Float
+    #   resp.stack_set_operation.status_details.total_accounts_count #=> Integer
+    #   resp.stack_set_operation.status_details.total_stack_instances_count #=> Integer
     #   resp.stack_set_operation.status_details.failed_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.regional_status_details #=> Hash
+    #   resp.stack_set_operation.regional_status_details["Region"].stages.regional_stack_instances_deployment.status #=> String, one of "PENDING", "NOT_APPLICABLE", "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "PARTIAL_SUCCESS", "FAILED"
+    #   resp.stack_set_operation.regional_status_details["Region"].stages.regional_stack_instances_deployment.succeeded_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.regional_status_details["Region"].stages.regional_stack_instances_deployment.failed_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.regional_status_details["Region"].stages.regional_stack_instances_deployment.completed_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.regional_status_details["Region"].stages.regional_stack_instances_deployment.pending_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.regional_status_details["Region"].stages.regional_stack_instances_deployment.cancelled_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.regional_status_details["Region"].stages.regional_stack_instances_deployment.skipped_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.regional_status_details["Region"].stages.regional_stack_instances_deployment.total_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.regional_status_details["Region"].stages.regional_stack_instances_deployment.percentage_completed #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetOperation AWS API Documentation
     #
@@ -6577,6 +6607,10 @@ module Aws::CloudFormation
 
     # Returns summary information about operations performed on a StackSet.
     #
+    # Reports role provisioning and stack instances deployment progress in
+    # `StatusDetails.Stages`. The breakdown for each Amazon Web Services
+    # Region is available only from DescribeStackSetOperation.
+    #
     # <note markdown="1"> This API provides *eventually consistent* reads meaning it may take
     # some time but will eventually return the most up-to-date data.
     #
@@ -6643,6 +6677,22 @@ module Aws::CloudFormation
     #   resp.summaries[0].creation_timestamp #=> Time
     #   resp.summaries[0].end_timestamp #=> Time
     #   resp.summaries[0].status_reason #=> String
+    #   resp.summaries[0].status_details.stages.role_provisioning.status #=> String, one of "PENDING", "NOT_APPLICABLE", "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "PARTIAL_SUCCESS", "FAILED"
+    #   resp.summaries[0].status_details.stages.role_provisioning.succeeded_accounts_count #=> Integer
+    #   resp.summaries[0].status_details.stages.role_provisioning.failed_accounts_count #=> Integer
+    #   resp.summaries[0].status_details.stages.role_provisioning.completed_accounts_count #=> Integer
+    #   resp.summaries[0].status_details.stages.role_provisioning.pending_accounts_count #=> Integer
+    #   resp.summaries[0].status_details.stages.role_provisioning.percentage_completed #=> Float
+    #   resp.summaries[0].status_details.stages.stack_instances_deployment.status #=> String, one of "PENDING", "NOT_APPLICABLE", "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "PARTIAL_SUCCESS", "FAILED"
+    #   resp.summaries[0].status_details.stages.stack_instances_deployment.succeeded_stack_instances_count #=> Integer
+    #   resp.summaries[0].status_details.stages.stack_instances_deployment.failed_stack_instances_count #=> Integer
+    #   resp.summaries[0].status_details.stages.stack_instances_deployment.completed_stack_instances_count #=> Integer
+    #   resp.summaries[0].status_details.stages.stack_instances_deployment.pending_stack_instances_count #=> Integer
+    #   resp.summaries[0].status_details.stages.stack_instances_deployment.cancelled_stack_instances_count #=> Integer
+    #   resp.summaries[0].status_details.stages.stack_instances_deployment.skipped_stack_instances_count #=> Integer
+    #   resp.summaries[0].status_details.stages.stack_instances_deployment.percentage_completed #=> Float
+    #   resp.summaries[0].status_details.total_accounts_count #=> Integer
+    #   resp.summaries[0].status_details.total_stack_instances_count #=> Integer
     #   resp.summaries[0].status_details.failed_stack_instances_count #=> Integer
     #   resp.summaries[0].operation_preferences.region_concurrency_type #=> String, one of "SEQUENTIAL", "PARALLEL"
     #   resp.summaries[0].operation_preferences.region_order #=> Array
@@ -9324,7 +9374,7 @@ module Aws::CloudFormation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.172.0'
+      context[:gem_version] = '1.173.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

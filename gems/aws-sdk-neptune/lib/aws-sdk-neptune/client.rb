@@ -1336,6 +1336,7 @@ module Aws::Neptune
     #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.storage_type #=> String
@@ -1444,23 +1445,6 @@ module Aws::Neptune
     # with a running DB cluster, you need to reboot the DB instances in the
     # DB cluster without failover for the new DB cluster parameter group and
     # associated settings to take effect.
-    #
-    # After you create a DB cluster parameter group, you should wait at
-    # least 5 minutes before creating your first DB cluster that uses that
-    # DB cluster parameter group as the default parameter group. This allows
-    # Amazon Neptune to fully complete the create action before the DB
-    # cluster parameter group is used as the default for a new DB cluster.
-    # This is especially important for parameters that are critical when
-    # creating the default database for a DB cluster, such as the character
-    # set for the default database defined by the `character_set_database`
-    # parameter. You can use the *Parameter Groups* option of the [Amazon
-    # Neptune console][1] or the DescribeDBClusterParameters command to
-    # verify that your DB cluster parameter group has been created or
-    # modified.
-    #
-    #
-    #
-    # [1]: https://console.aws.amazon.com/rds/
     #
     # @option params [required, String] :db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group.
@@ -2557,6 +2541,7 @@ module Aws::Neptune
     #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.storage_type #=> String
@@ -3653,6 +3638,7 @@ module Aws::Neptune
     #   resp.db_clusters[0].automatic_restart_time #=> Time
     #   resp.db_clusters[0].serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_clusters[0].serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_clusters[0].serverless_v2_platform_version #=> String
     #   resp.db_clusters[0].global_cluster_identifier #=> String
     #   resp.db_clusters[0].io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_clusters[0].storage_type #=> String
@@ -4859,6 +4845,89 @@ module Aws::Neptune
       req.send_request(options)
     end
 
+    # Describes the properties of specific platform versions for Neptune
+    # Serverless.
+    #
+    # @option params [String] :serverless_v2_platform_version
+    #   A specific platform version to return details for.
+    #
+    #   Example: `3`
+    #
+    # @option params [String] :engine
+    #   The database engine to return platform version details for.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   This parameter isn't currently supported.
+    #
+    # @option params [Boolean] :default_only
+    #   Specifies whether to return only the default platform versions for
+    #   each engine. The default platform version is the version used for new
+    #   DB clusters.
+    #
+    # @option params [Boolean] :include_all
+    #   Specifies whether to also include platform versions which are no
+    #   longer in use.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more than
+    #   the `MaxRecords` value is available, a pagination token called a
+    #   marker is included in the response so you can retrieve the remaining
+    #   results.
+    #
+    #   Default: 20
+    #
+    #   Constraints: Minimum 1, maximum 200.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @return [Types::ServerlessV2PlatformVersionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ServerlessV2PlatformVersionsMessage#marker #marker} => String
+    #   * {Types::ServerlessV2PlatformVersionsMessage#serverless_v2_platform_versions #serverless_v2_platform_versions} => Array&lt;Types::ServerlessV2PlatformVersionInfo&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_serverless_v2_platform_versions({
+    #     serverless_v2_platform_version: "String",
+    #     engine: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     default_only: false,
+    #     include_all: false,
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.serverless_v2_platform_versions #=> Array
+    #   resp.serverless_v2_platform_versions[0].serverless_v2_platform_version #=> String
+    #   resp.serverless_v2_platform_versions[0].serverless_v2_platform_version_description #=> String
+    #   resp.serverless_v2_platform_versions[0].engine #=> String
+    #   resp.serverless_v2_platform_versions[0].serverless_v2_features_support.min_capacity #=> Float
+    #   resp.serverless_v2_platform_versions[0].serverless_v2_features_support.max_capacity #=> Float
+    #   resp.serverless_v2_platform_versions[0].status #=> String
+    #   resp.serverless_v2_platform_versions[0].is_default #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeServerlessV2PlatformVersions AWS API Documentation
+    #
+    # @overload describe_serverless_v2_platform_versions(params = {})
+    # @param [Hash] params ({})
+    def describe_serverless_v2_platform_versions(params = {}, options = {})
+      req = build_request(:describe_serverless_v2_platform_versions, params)
+      req.send_request(options)
+    end
+
     # You can call DescribeValidDBInstanceModifications to learn what
     # modifications you can make to your DB instance. You can use this
     # information when you call ModifyDBInstance.
@@ -5011,6 +5080,7 @@ module Aws::Neptune
     #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.storage_type #=> String
@@ -5483,6 +5553,7 @@ module Aws::Neptune
     #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.storage_type #=> String
@@ -6575,6 +6646,7 @@ module Aws::Neptune
     #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.storage_type #=> String
@@ -7310,6 +7382,7 @@ module Aws::Neptune
     #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.storage_type #=> String
@@ -7613,6 +7686,7 @@ module Aws::Neptune
     #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.storage_type #=> String
@@ -7715,6 +7789,7 @@ module Aws::Neptune
     #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.storage_type #=> String
@@ -7820,6 +7895,7 @@ module Aws::Neptune
     #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.storage_type #=> String
@@ -7926,7 +8002,7 @@ module Aws::Neptune
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.121.0'
+      context[:gem_version] = '1.122.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

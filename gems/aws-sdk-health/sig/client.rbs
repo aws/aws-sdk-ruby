@@ -88,9 +88,8 @@ module Aws
       def configure_tags: (
                             tag_keys: Array[
                               {
-                                key: ::String?,
-                                enabled_for_event_bridge: bool?,
-                                status: ("PENDING" | "ACTIVE")?
+                                key: ::String,
+                                enabled_for_event_bridge: bool?
                               }
                             ]
                           ) -> _ConfigureTagsResponseSuccess
@@ -98,13 +97,13 @@ module Aws
 
       interface _ConfigureTagsForOrganizationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ConfigureTagsForOrganizationResponse]
-        def configured_tag_keys: () -> ::Array[Types::TagKeyForOrganization]
+        def configured_tag_keys: () -> ::Array[Types::OrganizationTagKey]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#configure_tags_for_organization-instance_method
       def configure_tags_for_organization: (
                                              tag_keys: Array[
                                                {
-                                                 key: ::String?,
+                                                 key: ::String,
                                                  enabled_for_event_bridge: bool?
                                                }
                                              ]

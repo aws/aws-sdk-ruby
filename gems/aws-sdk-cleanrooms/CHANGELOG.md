@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2026-11-18)
+------------------
+
+* Feature - Adds support for populating intermediate tables with results from PySpark analysis templates.
+
 1.93.0 (2026-11-16)
 ------------------
 

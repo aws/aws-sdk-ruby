@@ -54,7 +54,7 @@ module Aws::RDSDataService
   autoload :EndpointProvider, 'aws-sdk-rdsdataservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-rdsdataservice/endpoints'
 
-  GEM_VERSION = '1.103.0'
+  GEM_VERSION = '1.104.0'
 
 end
 

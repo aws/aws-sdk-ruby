@@ -247,7 +247,10 @@ module Aws
                                 }
                               ]?
                             },
-                            ?monetization_config: Params::monetization_config
+                            ?monetization_config: Params::monetization_config,
+                            ?analytics_config: {
+                              mode: ("CROSS_REGION" | "DISABLED")
+                            }
                           ) -> _CreateWebACLResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWebACLResponseSuccess
 
@@ -1067,7 +1070,10 @@ module Aws
                                 }
                               ]?
                             },
-                            ?monetization_config: Params::monetization_config
+                            ?monetization_config: Params::monetization_config,
+                            ?analytics_config: {
+                              mode: ("CROSS_REGION" | "DISABLED")
+                            }
                           ) -> _UpdateWebACLResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWebACLResponseSuccess
     end

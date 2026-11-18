@@ -55,7 +55,7 @@ module Aws::Imagebuilder
   autoload :EndpointProvider, 'aws-sdk-imagebuilder/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-imagebuilder/endpoints'
 
-  GEM_VERSION = '1.126.0'
+  GEM_VERSION = '1.127.0'
 
 end
 

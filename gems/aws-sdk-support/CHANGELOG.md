@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2026-11-18)
+------------------
+
+* Feature - Updated endpoint resolution for AWS Support, including FIPS and dual-stack endpoints.
+
 1.108.0 (2026-11-16)
 ------------------
 

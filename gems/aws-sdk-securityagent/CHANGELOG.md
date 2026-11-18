@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2026-11-18)
+------------------
+
+* Feature - This release adds support for resuming a paused penetration test job from its last saved checkpoint.
+
 1.36.0 (2026-11-16)
 ------------------
 

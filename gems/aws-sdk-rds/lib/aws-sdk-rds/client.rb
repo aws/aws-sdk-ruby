@@ -35832,7 +35832,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.335.0'
+      context[:gem_version] = '1.336.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

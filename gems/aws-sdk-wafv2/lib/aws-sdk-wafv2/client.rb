@@ -3067,6 +3067,10 @@ module Aws::WAFV2
     #   The monetization configuration for the web ACL. Provide this when any
     #   rule in the web ACL uses the `Monetize` action.
     #
+    # @option params [Types::AnalyticsConfig] :analytics_config
+    #   Specifies the security analytics configuration for the web ACL. For
+    #   more information, see AnalyticsConfig.
+    #
     # @return [Types::CreateWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWebACLResponse#summary #summary} => Types::WebACLSummary
@@ -8416,6 +8420,10 @@ module Aws::WAFV2
     #   The monetization configuration for the web ACL. Provide this when any
     #   rule in the web ACL uses the `Monetize` action.
     #
+    # @option params [Types::AnalyticsConfig] :analytics_config
+    #   Specifies the security analytics configuration for the web ACL. For
+    #   more information, see AnalyticsConfig.
+    #
     # @return [Types::UpdateWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateWebACLResponse#next_lock_token #next_lock_token} => String
@@ -8451,7 +8459,7 @@ module Aws::WAFV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.151.0'
+      context[:gem_version] = '1.152.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

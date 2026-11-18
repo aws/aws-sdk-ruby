@@ -54,6 +54,8 @@ module Aws::Braket
     DeviceQueueInfoList = Shapes::ListShape.new(name: 'DeviceQueueInfoList')
     DeviceRetiredException = Shapes::StructureShape.new(name: 'DeviceRetiredException')
     DeviceStatus = Shapes::StringShape.new(name: 'DeviceStatus')
+    DeviceStatusReason = Shapes::StructureShape.new(name: 'DeviceStatusReason')
+    DeviceStatusReasonCode = Shapes::StringShape.new(name: 'DeviceStatusReasonCode')
     DeviceSummary = Shapes::StructureShape.new(name: 'DeviceSummary')
     DeviceSummaryList = Shapes::ListShape.new(name: 'DeviceSummaryList')
     DeviceType = Shapes::StringShape.new(name: 'DeviceType')
@@ -282,6 +284,12 @@ module Aws::Braket
     DeviceRetiredException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     DeviceRetiredException.struct_class = Types::DeviceRetiredException
 
+    DeviceStatusReason.add_member(:reason, Shapes::ShapeRef.new(shape: DeviceStatusReasonCode, required: true, location_name: "reason"))
+    DeviceStatusReason.add_member(:started_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "startedAt"))
+    DeviceStatusReason.add_member(:estimated_end_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "estimatedEndAt"))
+    DeviceStatusReason.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updatedAt"))
+    DeviceStatusReason.struct_class = Types::DeviceStatusReason
+
     DeviceSummary.add_member(:device_arn, Shapes::ShapeRef.new(shape: DeviceArn, required: true, location_name: "deviceArn"))
     DeviceSummary.add_member(:device_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "deviceName"))
     DeviceSummary.add_member(:provider_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "providerName"))
@@ -305,6 +313,7 @@ module Aws::Braket
     GetDeviceResponse.add_member(:provider_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "providerName"))
     GetDeviceResponse.add_member(:device_type, Shapes::ShapeRef.new(shape: DeviceType, required: true, location_name: "deviceType"))
     GetDeviceResponse.add_member(:device_status, Shapes::ShapeRef.new(shape: DeviceStatus, required: true, location_name: "deviceStatus"))
+    GetDeviceResponse.add_member(:device_status_reason, Shapes::ShapeRef.new(shape: DeviceStatusReason, location_name: "deviceStatusReason"))
     GetDeviceResponse.add_member(:device_capabilities, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "deviceCapabilities", metadata: {"jsonvalue" => true}))
     GetDeviceResponse.add_member(:device_queue_info, Shapes::ShapeRef.new(shape: DeviceQueueInfoList, location_name: "deviceQueueInfo"))
     GetDeviceResponse.struct_class = Types::GetDeviceResponse

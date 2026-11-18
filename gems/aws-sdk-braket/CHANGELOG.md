@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2026-11-18)
+------------------
+
+* Feature - Supporting a new PAUSED device status and a DeviceStatusReason.
+
 1.87.0 (2026-11-16)
 ------------------
 

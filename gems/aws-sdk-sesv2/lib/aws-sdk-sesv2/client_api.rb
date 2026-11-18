@@ -15,6 +15,7 @@ module Aws::SESV2
     include Seahorse::Model
 
     AccountDetails = Shapes::StructureShape.new(name: 'AccountDetails')
+    AccountSharedPoolDeliveryMode = Shapes::StringShape.new(name: 'AccountSharedPoolDeliveryMode')
     AccountSuspendedException = Shapes::StructureShape.new(name: 'AccountSuspendedException')
     AdditionalContactEmailAddress = Shapes::StringShape.new(name: 'AdditionalContactEmailAddress')
     AdditionalContactEmailAddresses = Shapes::ListShape.new(name: 'AdditionalContactEmailAddresses')
@@ -158,6 +159,7 @@ module Aws::SESV2
     DeliverabilityTestReports = Shapes::ListShape.new(name: 'DeliverabilityTestReports')
     DeliverabilityTestStatus = Shapes::StringShape.new(name: 'DeliverabilityTestStatus')
     DeliverabilityTestSubject = Shapes::StringShape.new(name: 'DeliverabilityTestSubject')
+    DeliveryAttributes = Shapes::StructureShape.new(name: 'DeliveryAttributes')
     DeliveryEventType = Shapes::StringShape.new(name: 'DeliveryEventType')
     DeliveryOptions = Shapes::StructureShape.new(name: 'DeliveryOptions')
     Description = Shapes::StringShape.new(name: 'Description')
@@ -442,6 +444,8 @@ module Aws::SESV2
     ProcessedRecordsCount = Shapes::IntegerShape.new(name: 'ProcessedRecordsCount')
     PutAccountDedicatedIpWarmupAttributesRequest = Shapes::StructureShape.new(name: 'PutAccountDedicatedIpWarmupAttributesRequest')
     PutAccountDedicatedIpWarmupAttributesResponse = Shapes::StructureShape.new(name: 'PutAccountDedicatedIpWarmupAttributesResponse')
+    PutAccountDeliveryAttributesRequest = Shapes::StructureShape.new(name: 'PutAccountDeliveryAttributesRequest')
+    PutAccountDeliveryAttributesResponse = Shapes::StructureShape.new(name: 'PutAccountDeliveryAttributesResponse')
     PutAccountDetailsRequest = Shapes::StructureShape.new(name: 'PutAccountDetailsRequest')
     PutAccountDetailsResponse = Shapes::StructureShape.new(name: 'PutAccountDetailsResponse')
     PutAccountPricingAttributesRequest = Shapes::StructureShape.new(name: 'PutAccountPricingAttributesRequest')
@@ -542,6 +546,7 @@ module Aws::SESV2
     SendingStatus = Shapes::StringShape.new(name: 'SendingStatus')
     SentLast24Hours = Shapes::FloatShape.new(name: 'SentLast24Hours')
     SerialNumber = Shapes::IntegerShape.new(name: 'SerialNumber')
+    SharedPoolDeliveryMode = Shapes::StringShape.new(name: 'SharedPoolDeliveryMode')
     SignatureFormat = Shapes::StringShape.new(name: 'SignatureFormat')
     SigningScheme = Shapes::UnionShape.new(name: 'SigningScheme')
     SmimeSigningScheme = Shapes::StructureShape.new(name: 'SmimeSigningScheme')
@@ -1027,9 +1032,13 @@ module Aws::SESV2
 
     DeliverabilityTestReports.member = Shapes::ShapeRef.new(shape: DeliverabilityTestReport)
 
+    DeliveryAttributes.add_member(:shared_pool_delivery_mode, Shapes::ShapeRef.new(shape: AccountSharedPoolDeliveryMode, location_name: "SharedPoolDeliveryMode"))
+    DeliveryAttributes.struct_class = Types::DeliveryAttributes
+
     DeliveryOptions.add_member(:tls_policy, Shapes::ShapeRef.new(shape: TlsPolicy, location_name: "TlsPolicy"))
     DeliveryOptions.add_member(:sending_pool_name, Shapes::ShapeRef.new(shape: PoolName, location_name: "SendingPoolName"))
     DeliveryOptions.add_member(:max_delivery_seconds, Shapes::ShapeRef.new(shape: MaxDeliverySeconds, location_name: "MaxDeliverySeconds"))
+    DeliveryOptions.add_member(:shared_pool_delivery_mode, Shapes::ShapeRef.new(shape: SharedPoolDeliveryMode, location_name: "SharedPoolDeliveryMode"))
     DeliveryOptions.struct_class = Types::DeliveryOptions
 
     Destination.add_member(:to_addresses, Shapes::ShapeRef.new(shape: EmailAddressList, location_name: "ToAddresses"))
@@ -1220,6 +1229,7 @@ module Aws::SESV2
     GetAccountResponse.add_member(:details, Shapes::ShapeRef.new(shape: AccountDetails, location_name: "Details"))
     GetAccountResponse.add_member(:vdm_attributes, Shapes::ShapeRef.new(shape: VdmAttributes, location_name: "VdmAttributes"))
     GetAccountResponse.add_member(:pricing_attributes, Shapes::ShapeRef.new(shape: PricingAttributes, location_name: "PricingAttributes"))
+    GetAccountResponse.add_member(:delivery_attributes, Shapes::ShapeRef.new(shape: DeliveryAttributes, location_name: "DeliveryAttributes"))
     GetAccountResponse.struct_class = Types::GetAccountResponse
 
     GetBlacklistReportsRequest.add_member(:blacklist_item_names, Shapes::ShapeRef.new(shape: BlacklistItemNames, required: true, location: "querystring", location_name: "BlacklistItemNames"))
@@ -1839,6 +1849,11 @@ module Aws::SESV2
 
     PutAccountDedicatedIpWarmupAttributesResponse.struct_class = Types::PutAccountDedicatedIpWarmupAttributesResponse
 
+    PutAccountDeliveryAttributesRequest.add_member(:shared_pool_delivery_mode, Shapes::ShapeRef.new(shape: AccountSharedPoolDeliveryMode, required: true, location_name: "SharedPoolDeliveryMode"))
+    PutAccountDeliveryAttributesRequest.struct_class = Types::PutAccountDeliveryAttributesRequest
+
+    PutAccountDeliveryAttributesResponse.struct_class = Types::PutAccountDeliveryAttributesResponse
+
     PutAccountDetailsRequest.add_member(:mail_type, Shapes::ShapeRef.new(shape: MailType, required: true, location_name: "MailType"))
     PutAccountDetailsRequest.add_member(:website_url, Shapes::ShapeRef.new(shape: WebsiteURL, required: true, location_name: "WebsiteURL"))
     PutAccountDetailsRequest.add_member(:contact_language, Shapes::ShapeRef.new(shape: ContactLanguage, location_name: "ContactLanguage"))
@@ -1880,6 +1895,7 @@ module Aws::SESV2
     PutConfigurationSetDeliveryOptionsRequest.add_member(:tls_policy, Shapes::ShapeRef.new(shape: TlsPolicy, location_name: "TlsPolicy"))
     PutConfigurationSetDeliveryOptionsRequest.add_member(:sending_pool_name, Shapes::ShapeRef.new(shape: SendingPoolName, location_name: "SendingPoolName"))
     PutConfigurationSetDeliveryOptionsRequest.add_member(:max_delivery_seconds, Shapes::ShapeRef.new(shape: MaxDeliverySeconds, location_name: "MaxDeliverySeconds"))
+    PutConfigurationSetDeliveryOptionsRequest.add_member(:shared_pool_delivery_mode, Shapes::ShapeRef.new(shape: SharedPoolDeliveryMode, location_name: "SharedPoolDeliveryMode"))
     PutConfigurationSetDeliveryOptionsRequest.struct_class = Types::PutConfigurationSetDeliveryOptionsRequest
 
     PutConfigurationSetDeliveryOptionsResponse.struct_class = Types::PutConfigurationSetDeliveryOptionsResponse
@@ -3374,6 +3390,16 @@ module Aws::SESV2
         o.output = Shapes::ShapeRef.new(shape: PutAccountDedicatedIpWarmupAttributesResponse)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:put_account_delivery_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAccountDeliveryAttributes"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/email/account/delivery"
+        o.input = Shapes::ShapeRef.new(shape: PutAccountDeliveryAttributesRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAccountDeliveryAttributesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:put_account_details, Seahorse::Model::Operation.new.tap do |o|

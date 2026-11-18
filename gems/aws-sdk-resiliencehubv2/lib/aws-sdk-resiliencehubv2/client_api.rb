@@ -417,6 +417,7 @@ module Aws::Resiliencehubv2
     TestRunDependencySummaryList = Shapes::ListShape.new(name: 'TestRunDependencySummaryList')
     TestRunDependencySummaryLocationString = Shapes::StringShape.new(name: 'TestRunDependencySummaryLocationString')
     TestRunDependencySummaryProviderString = Shapes::StringShape.new(name: 'TestRunDependencySummaryProviderString')
+    TestRunEffectivePolicyValues = Shapes::StructureShape.new(name: 'TestRunEffectivePolicyValues')
     TestRunEvent = Shapes::StructureShape.new(name: 'TestRunEvent')
     TestRunEventAttributeKey = Shapes::StringShape.new(name: 'TestRunEventAttributeKey')
     TestRunEventAttributeValue = Shapes::StringShape.new(name: 'TestRunEventAttributeValue')
@@ -1260,9 +1261,12 @@ module Aws::Resiliencehubv2
     ListTestSourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListTestSourcesResponse.struct_class = Types::ListTestSourcesResponse
 
+    ListTestTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListTestTemplatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListTestTemplatesRequest.struct_class = Types::ListTestTemplatesRequest
 
     ListTestTemplatesResponse.add_member(:test_templates, Shapes::ShapeRef.new(shape: TestTemplateSummaryList, required: true, location_name: "testTemplates"))
+    ListTestTemplatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListTestTemplatesResponse.struct_class = Types::ListTestTemplatesResponse
 
     ListTestsRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "serviceArn"))
@@ -1949,6 +1953,7 @@ module Aws::Resiliencehubv2
     TestRun.add_member(:test_template_arn, Shapes::ShapeRef.new(shape: ServiceOwnedArn, required: true, location_name: "testTemplateArn"))
     TestRun.add_member(:report_configuration, Shapes::ShapeRef.new(shape: TestRunReportConfiguration, location_name: "reportConfiguration"))
     TestRun.add_member(:policy, Shapes::ShapeRef.new(shape: TestRunPolicySnapshot, location_name: "policy"))
+    TestRun.add_member(:effective_policy_values, Shapes::ShapeRef.new(shape: TestRunEffectivePolicyValues, location_name: "effectivePolicyValues"))
     TestRun.add_member(:report_output, Shapes::ShapeRef.new(shape: ReportGenerationResult, location_name: "reportOutput"))
     TestRun.add_member(:region_switch_plan_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "regionSwitchPlanArn"))
     TestRun.add_member(:region_switch_execution_id, Shapes::ShapeRef.new(shape: RegionSwitchExecutionId, location_name: "regionSwitchExecutionId"))
@@ -1969,6 +1974,16 @@ module Aws::Resiliencehubv2
     TestRunDependencySummary.struct_class = Types::TestRunDependencySummary
 
     TestRunDependencySummaryList.member = Shapes::ShapeRef.new(shape: TestRunDependencySummary)
+
+    TestRunEffectivePolicyValues.add_member(:availability_slo, Shapes::ShapeRef.new(shape: SloSource, location_name: "availabilitySlo"))
+    TestRunEffectivePolicyValues.add_member(:multi_az_rto, Shapes::ShapeRef.new(shape: TargetSource, location_name: "multiAzRto"))
+    TestRunEffectivePolicyValues.add_member(:multi_az_rpo, Shapes::ShapeRef.new(shape: TargetSource, location_name: "multiAzRpo"))
+    TestRunEffectivePolicyValues.add_member(:multi_az_dr_approach, Shapes::ShapeRef.new(shape: DisasterRecoverySource, location_name: "multiAzDrApproach"))
+    TestRunEffectivePolicyValues.add_member(:multi_region_rto, Shapes::ShapeRef.new(shape: TargetSource, location_name: "multiRegionRto"))
+    TestRunEffectivePolicyValues.add_member(:multi_region_rpo, Shapes::ShapeRef.new(shape: TargetSource, location_name: "multiRegionRpo"))
+    TestRunEffectivePolicyValues.add_member(:multi_region_dr_approach, Shapes::ShapeRef.new(shape: DisasterRecoverySource, location_name: "multiRegionDrApproach"))
+    TestRunEffectivePolicyValues.add_member(:data_recovery_time_between_backups, Shapes::ShapeRef.new(shape: TargetSource, location_name: "dataRecoveryTimeBetweenBackups"))
+    TestRunEffectivePolicyValues.struct_class = Types::TestRunEffectivePolicyValues
 
     TestRunEvent.add_member(:event_id, Shapes::ShapeRef.new(shape: TestRunEventEventIdString, required: true, location_name: "eventId"))
     TestRunEvent.add_member(:event_type, Shapes::ShapeRef.new(shape: TestRunEventEventTypeString, required: true, location_name: "eventType"))
@@ -2629,6 +2644,7 @@ module Aws::Resiliencehubv2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
@@ -3086,7 +3102,14 @@ module Aws::Resiliencehubv2
         o.output = Shapes::ShapeRef.new(shape: ListTestTemplatesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tests, Seahorse::Model::Operation.new.tap do |o|

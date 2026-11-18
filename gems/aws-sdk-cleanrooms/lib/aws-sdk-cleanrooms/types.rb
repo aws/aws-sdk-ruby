@@ -7042,16 +7042,23 @@ module Aws::CleanRooms
     #   analysis with the Clean Rooms SQL analytics engine.
     #   @return [Types::WorkerComputeConfiguration]
     #
+    # @!attribute [rw] job_compute_configuration
+    #   Specifies the compute configuration for the PySpark job that
+    #   populates the intermediate table.
+    #   @return [Types::ProtectedJobComputeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/IntermediateTableComputeConfiguration AWS API Documentation
     #
     class IntermediateTableComputeConfiguration < Struct.new(
       :query_compute_configuration,
+      :job_compute_configuration,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class QueryComputeConfiguration < IntermediateTableComputeConfiguration; end
+      class JobComputeConfiguration < IntermediateTableComputeConfiguration; end
       class Unknown < IntermediateTableComputeConfiguration; end
     end
 
@@ -9338,17 +9345,45 @@ module Aws::CleanRooms
     #   string or analysis template ARN.
     #   @return [Types::PopulationAnalysisSqlParameters]
     #
+    # @!attribute [rw] job_parameters
+    #   Specifies the PySpark job parameters for the population analysis.
+    #   Use `jobParameters` instead of `sqlParameters` when you populate the
+    #   intermediate table with results from a PySpark job.
+    #   @return [Types::PopulationAnalysisJobParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PopulationAnalysisConfiguration AWS API Documentation
     #
     class PopulationAnalysisConfiguration < Struct.new(
       :sql_parameters,
+      :job_parameters,
       :unknown)
       SENSITIVE = [:sql_parameters]
       include Aws::Structure
       include Aws::Structure::Union
 
       class SqlParameters < PopulationAnalysisConfiguration; end
+      class JobParameters < PopulationAnalysisConfiguration; end
       class Unknown < PopulationAnalysisConfiguration; end
+    end
+
+    # Contains the PySpark job parameters used to populate an intermediate
+    # table, including the ARN of the analysis template that defines the
+    # job. Use these parameters instead of SQL parameters when the analysis
+    # you use to populate the intermediate table is a PySpark analysis
+    # template.
+    #
+    # @!attribute [rw] analysis_template_arn
+    #   Specifies the ARN of the PySpark analysis template that populates
+    #   the intermediate table. Provide this ARN in `jobParameters` when you
+    #   populate the intermediate table with results from a PySpark job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PopulationAnalysisJobParameters AWS API Documentation
+    #
+    class PopulationAnalysisJobParameters < Struct.new(
+      :analysis_template_arn)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Contains the SQL parameters used to populate an intermediate table.
@@ -10047,11 +10082,19 @@ module Aws::CleanRooms
     #   The member output configuration for a protected job.
     #   @return [Types::ProtectedJobMemberOutputConfigurationOutput]
     #
+    # @!attribute [rw] intermediate_table
+    #   Specifies the intermediate table that the protected job populated,
+    #   identified by its ID, Amazon Resource Name (ARN), and name. This
+    #   field is present when the protected job was triggered by a
+    #   `PopulateIntermediateTable` operation.
+    #   @return [Types::IntermediateTableOutputConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobOutputConfigurationOutput AWS API Documentation
     #
     class ProtectedJobOutputConfigurationOutput < Struct.new(
       :s3,
       :member,
+      :intermediate_table,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -10059,6 +10102,7 @@ module Aws::CleanRooms
 
       class S3 < ProtectedJobOutputConfigurationOutput; end
       class Member < ProtectedJobOutputConfigurationOutput; end
+      class IntermediateTable < ProtectedJobOutputConfigurationOutput; end
       class Unknown < ProtectedJobOutputConfigurationOutput; end
     end
 
@@ -10267,6 +10311,12 @@ module Aws::CleanRooms
     #   The account ID of the member that pays for the job compute costs.
     #   @return [String]
     #
+    # @!attribute [rw] intermediate_table_configuration
+    #   The intermediate table that the protected job populated. This field
+    #   is present when the protected job was triggered by a
+    #   `PopulateIntermediateTable` operation.
+    #   @return [Types::IntermediateTableOutputConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobSummary AWS API Documentation
     #
     class ProtectedJobSummary < Struct.new(
@@ -10276,7 +10326,8 @@ module Aws::CleanRooms
       :create_time,
       :status,
       :receiver_configurations,
-      :job_compute_payer_account_id)
+      :job_compute_payer_account_id,
+      :intermediate_table_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

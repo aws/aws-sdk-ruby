@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.281.0 (2026-11-18)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-abusesignal` gem.
+
 3.280.0 (2026-11-16)
 ------------------
 

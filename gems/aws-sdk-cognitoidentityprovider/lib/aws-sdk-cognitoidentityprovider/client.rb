@@ -3910,6 +3910,73 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Cancels a point-in-time recovery of a user pool before Amazon Cognito
+    # applies any changes. You can cancel a recovery when its status is
+    # `PREVIEW_GENERATING` or `PREVIEW_GENERATED`. When you cancel a
+    # recovery, Amazon Cognito discards the recovery preview, resumes write
+    # operations in the user pool, and sets the status of the recovery to
+    # `PREVIEW_CANCELLED`. Your user pool data doesn't change.
+    #
+    # You can't cancel a recovery after you start it with a request.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that contains the recovery that you want to
+    #   cancel.
+    #
+    # @option params [required, String] :restore_id
+    #   The ID of the recovery that you want to cancel. Amazon Cognito returns
+    #   this ID in the response to an `InitiatePointInTimeRecovery` request.
+    #
+    # @return [Types::CancelPointInTimeRecoveryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelPointInTimeRecoveryResponse#restoration #restoration} => Types::RestorationType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_point_in_time_recovery({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     restore_id: "RestoreIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.restoration.restore_id #=> String
+    #   resp.restoration.restore_status #=> String, one of "PREVIEW_GENERATING", "PREVIEW_GENERATED", "PREVIEW_CANCELLED", "PREVIEW_GENERATION_FAILED", "PREVIEW_EXPIRED", "RESTORING", "RESTORE_COMPLETED", "TEMPORARY_INTERNAL_ERROR_SEE_SUPPORT_CASE", "AWS_ABORTED"
+    #   resp.restoration.restore_timestamp #=> Time
+    #   resp.restoration.trigger_timestamp #=> Time
+    #   resp.restoration.restore_preview #=> Array
+    #   resp.restoration.restore_preview[0].entity #=> String
+    #   resp.restoration.restore_preview[0].create_count #=> Integer
+    #   resp.restoration.restore_preview[0].update_count #=> Integer
+    #   resp.restoration.restore_preview[0].delete_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CancelPointInTimeRecovery AWS API Documentation
+    #
+    # @overload cancel_point_in_time_recovery(params = {})
+    # @param [Hash] params ({})
+    def cancel_point_in_time_recovery(params = {}, options = {})
+      req = build_request(:cancel_point_in_time_recovery, params)
+      req.send_request(options)
+    end
+
     # Changes the password for the currently signed-in user.
     #
     # Authorize this action with a signed-in user's access token. It must
@@ -7750,6 +7817,72 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Returns details about a point-in-time recovery of a user pool,
+    # including its status and the point in time that it restores the user
+    # pool to. After Amazon Cognito generates the recovery preview, the
+    # response also includes the number of entities that the recovery
+    # creates, updates, and deletes. Review the preview before you apply the
+    # recovery with a request or discard it with a request.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that contains the recovery that you want to
+    #   describe.
+    #
+    # @option params [required, String] :restore_id
+    #   The ID of the recovery that you want to describe. Amazon Cognito
+    #   returns this ID in the response to an `InitiatePointInTimeRecovery`
+    #   request.
+    #
+    # @return [Types::DescribePointInTimeRecoveryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePointInTimeRecoveryResponse#restoration #restoration} => Types::RestorationType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_point_in_time_recovery({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     restore_id: "RestoreIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.restoration.restore_id #=> String
+    #   resp.restoration.restore_status #=> String, one of "PREVIEW_GENERATING", "PREVIEW_GENERATED", "PREVIEW_CANCELLED", "PREVIEW_GENERATION_FAILED", "PREVIEW_EXPIRED", "RESTORING", "RESTORE_COMPLETED", "TEMPORARY_INTERNAL_ERROR_SEE_SUPPORT_CASE", "AWS_ABORTED"
+    #   resp.restoration.restore_timestamp #=> Time
+    #   resp.restoration.trigger_timestamp #=> Time
+    #   resp.restoration.restore_preview #=> Array
+    #   resp.restoration.restore_preview[0].entity #=> String
+    #   resp.restoration.restore_preview[0].create_count #=> Integer
+    #   resp.restoration.restore_preview[0].update_count #=> Integer
+    #   resp.restoration.restore_preview[0].delete_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribePointInTimeRecovery AWS API Documentation
+    #
+    # @overload describe_point_in_time_recovery(params = {})
+    # @param [Hash] params ({})
+    def describe_point_in_time_recovery(params = {}, options = {})
+      req = build_request(:describe_point_in_time_recovery, params)
+      req.send_request(options)
+    end
+
     # Describes a resource server. For more information about resource
     # servers, see [Access control with resource servers][1].
     #
@@ -10350,6 +10483,165 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Initiates a point-in-time recovery of a user pool to a time in the
+    # past that you specify. This operation is the first step of a recovery
+    # and doesn't change your user pool data. Amazon Cognito pauses write
+    # operations in the user pool and generates a recovery preview when
+    # capacity is available in the Amazon Web Services Region, so the
+    # preview might not be available immediately. The preview shows the
+    # number of entities that the recovery creates, updates, and deletes. To
+    # check the status of the recovery and review the preview, make a
+    # request. When the status is `PREVIEW_GENERATED`, apply the recovery
+    # with a request or discard it with a request. The time that it takes to
+    # generate the recovery preview doesn't depend on the size of your user
+    # pool.
+    #
+    # Point-in-time recovery is a disaster recovery feature. Use it to
+    # recover from accidental or unauthorized changes that affect your user
+    # data, for example the deletion or corruption of many users. Don't use
+    # point-in-time recovery to remove users that were created recently or
+    # to revert changes to individual users. To delete or update individual
+    # users, use operations like and .
+    #
+    # While a recovery is in progress, Amazon Cognito blocks operations that
+    # write to the user pool, for example user sign-up, user creation, and
+    # attribute updates. Sign-in and read operations continue to work, with
+    # the following exceptions.
+    #
+    # * Users who must set a new password, set up MFA, or respond to a TOTP
+    #   MFA challenge can't complete sign-in. Sign-in with the
+    #   `NEW_PASSWORD_REQUIRED`, `MFA_SETUP`, and `SOFTWARE_TOKEN_MFA`
+    #   challenges fails until the recovery ends.
+    #
+    # * Federated users can sign in only if they have previously signed in
+    #   to the user pool and their attributes from the external identity
+    #   provider haven't changed.
+    #
+    # * You can't create or start user import jobs. Start your import jobs
+    #   after the recovery ends.
+    #
+    # If you don't start or cancel the recovery within 24 hours after you
+    # initiate it, the recovery preview expires. Amazon Cognito then resumes
+    # write operations and doesn't change your user pool data. The 24-hour
+    # period includes the time that Amazon Cognito waits for available
+    # capacity.
+    #
+    # A point-in-time recovery restores user data, including user profiles
+    # and attributes, group memberships, passwords, MFA settings, and
+    # passkeys. It doesn't restore user pool configuration, for example app
+    # clients, the attribute schema, encryption settings, or multi-Region
+    # replication settings. Users who changed their password after the
+    # recovery point keep their current password.
+    #
+    # The following requirements and limits apply to point-in-time recovery.
+    #
+    # * Your user pool must be on the Essentials or Plus [feature plan][1].
+    #   With the Essentials feature plan, you can recover your user pool to
+    #   a point in time up to 1 day in the past. With the Plus feature plan,
+    #   you can recover up to 14 days in the past. Your user pool must have
+    #   been on the required feature plan at the recovery point. For
+    #   example, to recover to a point in time 14 days ago, your user pool
+    #   must have been on the Plus feature plan for the past 14 days.
+    #
+    # * The recovery point must be at least 15 minutes in the past and
+    #   can't be earlier than the creation time of the user pool.
+    #
+    # * A user pool can have only one active recovery at a time.
+    #
+    # * An Amazon Web Services account can have up to five active recoveries
+    #   at a time across all of its user pools. An organization in Amazon
+    #   Web Services Organizations can have up to ten active recoveries at a
+    #   time across all of its accounts.
+    #
+    # * You can complete one recovery of a user pool in a 24-hour period.
+    #
+    # * You can create up to three recovery previews of a user pool, ten
+    #   recovery previews in an Amazon Web Services account, and 15 recovery
+    #   previews in an organization in Amazon Web Services Organizations in
+    #   a 24-hour period. You can create up to ten recovery previews of a
+    #   user pool in a 30-day period.
+    #
+    # * You can't initiate a recovery while a user import job is in
+    #   progress in your user pool. Wait for the import job to complete, or
+    #   stop it with a request, and then initiate the recovery.
+    #
+    # * In a user pool with multi-Region replication, you can initiate a
+    #   recovery only in the primary Amazon Web Services Region, and only
+    #   after replication is complete.
+    #
+    # * If your user pool uses a customer managed key in KMS for encryption,
+    #   the key must remain enabled and accessible to Amazon Cognito for the
+    #   duration of the recovery.
+    #
+    # * Some user pools don't support point-in-time recovery, for example
+    #   some older user pools and user pools that contain user data with
+    #   characters or formats that point-in-time recovery doesn't support.
+    #   If your user pool doesn't support it, Amazon Cognito returns an
+    #   error when you initiate a recovery. To get help with this
+    #   limitation, contact Amazon Web Services Support.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][2]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][3]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sign-in-feature-plans.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [3]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that you want to recover.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :restore_timestamp
+    #   The point in time that you want to recover your user pool to. Amazon
+    #   Cognito reverts changes to user data that occurred after this time.
+    #   The recovery point must be at least 15 minutes in the past and within
+    #   the recovery period of your user pool feature plan: up to 1 day in the
+    #   past with the Essentials feature plan, or up to 14 days in the past
+    #   with the Plus feature plan.
+    #
+    # @return [Types::InitiatePointInTimeRecoveryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InitiatePointInTimeRecoveryResponse#restoration #restoration} => Types::RestorationType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.initiate_point_in_time_recovery({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     restore_timestamp: Time.now, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.restoration.restore_id #=> String
+    #   resp.restoration.restore_status #=> String, one of "PREVIEW_GENERATING", "PREVIEW_GENERATED", "PREVIEW_CANCELLED", "PREVIEW_GENERATION_FAILED", "PREVIEW_EXPIRED", "RESTORING", "RESTORE_COMPLETED", "TEMPORARY_INTERNAL_ERROR_SEE_SUPPORT_CASE", "AWS_ABORTED"
+    #   resp.restoration.restore_timestamp #=> Time
+    #   resp.restoration.trigger_timestamp #=> Time
+    #   resp.restoration.restore_preview #=> Array
+    #   resp.restoration.restore_preview[0].entity #=> String
+    #   resp.restoration.restore_preview[0].create_count #=> Integer
+    #   resp.restoration.restore_preview[0].update_count #=> Integer
+    #   resp.restoration.restore_preview[0].delete_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InitiatePointInTimeRecovery AWS API Documentation
+    #
+    # @overload initiate_point_in_time_recovery(params = {})
+    # @param [Hash] params ({})
+    def initiate_point_in_time_recovery(params = {}, options = {})
+      req = build_request(:initiate_point_in_time_recovery, params)
+      req.send_request(options)
+    end
+
     # Lists the devices that Amazon Cognito has registered to the currently
     # signed-in user. For more information about device authentication, see
     # [Working with user devices in your user pool][1].
@@ -10561,6 +10853,76 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def list_identity_providers(params = {}, options = {})
       req = build_request(:list_identity_providers, params)
+      req.send_request(options)
+    end
+
+    # Lists the point-in-time recoveries of a user pool, including the
+    # active recovery and past recoveries. The response lists the most
+    # recent recoveries first and doesn't include recovery previews. To get
+    # the recovery preview of a recovery, make a request.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool where you want to list point-in-time
+    #   recoveries.
+    #
+    # @option params [String] :next_token
+    #   This API operation returns a limited number of results. The pagination
+    #   token is an identifier that you can present in an additional API
+    #   request with the same parameters. When you include the pagination
+    #   token, Amazon Cognito returns the next set of items after the current
+    #   list. Subsequent requests return a new pagination token. By use of
+    #   this token, you can paginate through the full list of items.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of recoveries that you want Amazon Cognito to
+    #   return in the response. Valid values are 1 through 60. The default
+    #   value is 60.
+    #
+    # @return [Types::ListPointInTimeRecoveriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPointInTimeRecoveriesResponse#restorations #restorations} => Array&lt;Types::RestorationDescriptionType&gt;
+    #   * {Types::ListPointInTimeRecoveriesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_point_in_time_recoveries({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     next_token: "PaginationKeyType",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.restorations #=> Array
+    #   resp.restorations[0].restore_id #=> String
+    #   resp.restorations[0].restore_status #=> String, one of "PREVIEW_GENERATING", "PREVIEW_GENERATED", "PREVIEW_CANCELLED", "PREVIEW_GENERATION_FAILED", "PREVIEW_EXPIRED", "RESTORING", "RESTORE_COMPLETED", "TEMPORARY_INTERNAL_ERROR_SEE_SUPPORT_CASE", "AWS_ABORTED"
+    #   resp.restorations[0].restore_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListPointInTimeRecoveries AWS API Documentation
+    #
+    # @overload list_point_in_time_recoveries(params = {})
+    # @param [Hash] params ({})
+    def list_point_in_time_recoveries(params = {}, options = {})
+      req = build_request(:list_point_in_time_recoveries, params)
       req.send_request(options)
     end
 
@@ -13282,6 +13644,77 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Applies a point-in-time recovery to a user pool. Before you start a
+    # recovery, review the recovery preview in the response to a request.
+    # You can start a recovery when its status is `PREVIEW_GENERATED`.
+    #
+    # When you start a recovery, Amazon Cognito sets its status to
+    # `RESTORING` and restores user data in the user pool to its state at
+    # the recovery point. Write operations in the user pool remain paused
+    # until the recovery is complete. Sign-in and read operations continue
+    # to work. When the status of the recovery changes to
+    # `RESTORE_COMPLETED`, Amazon Cognito resumes write operations.
+    #
+    # You can't cancel a recovery after you start it.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that contains the recovery that you want to
+    #   start.
+    #
+    # @option params [required, String] :restore_id
+    #   The ID of the recovery that you want to start. Amazon Cognito returns
+    #   this ID in the response to an `InitiatePointInTimeRecovery` request.
+    #
+    # @return [Types::StartPointInTimeRecoveryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartPointInTimeRecoveryResponse#restoration #restoration} => Types::RestorationType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_point_in_time_recovery({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     restore_id: "RestoreIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.restoration.restore_id #=> String
+    #   resp.restoration.restore_status #=> String, one of "PREVIEW_GENERATING", "PREVIEW_GENERATED", "PREVIEW_CANCELLED", "PREVIEW_GENERATION_FAILED", "PREVIEW_EXPIRED", "RESTORING", "RESTORE_COMPLETED", "TEMPORARY_INTERNAL_ERROR_SEE_SUPPORT_CASE", "AWS_ABORTED"
+    #   resp.restoration.restore_timestamp #=> Time
+    #   resp.restoration.trigger_timestamp #=> Time
+    #   resp.restoration.restore_preview #=> Array
+    #   resp.restoration.restore_preview[0].entity #=> String
+    #   resp.restoration.restore_preview[0].create_count #=> Integer
+    #   resp.restoration.restore_preview[0].update_count #=> Integer
+    #   resp.restoration.restore_preview[0].delete_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StartPointInTimeRecovery AWS API Documentation
+    #
+    # @overload start_point_in_time_recovery(params = {})
+    # @param [Hash] params ({})
+    def start_point_in_time_recovery(params = {}, options = {})
+      req = build_request(:start_point_in_time_recovery, params)
+      req.send_request(options)
+    end
+
     # Instructs your user pool to start importing users from a CSV file that
     # contains their usernames and attributes. For more information about
     # importing users from a CSV file, see [Importing users from a CSV
@@ -15742,7 +16175,7 @@ module Aws::CognitoIdentityProvider
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.166.0'
+      context[:gem_version] = '1.167.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

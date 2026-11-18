@@ -9246,6 +9246,22 @@ module Aws::S3
     #   resp.replication_configuration.rules[0].filter.and.tags #=> Array
     #   resp.replication_configuration.rules[0].filter.and.tags[0].key #=> String
     #   resp.replication_configuration.rules[0].filter.and.tags[0].value #=> String
+    #   resp.replication_configuration.rules[0].filter.and.not.prefix #=> String
+    #   resp.replication_configuration.rules[0].filter.and.not.tag.key #=> String
+    #   resp.replication_configuration.rules[0].filter.and.not.tag.value #=> String
+    #   resp.replication_configuration.rules[0].filter.and.not.or.prefixes #=> Array
+    #   resp.replication_configuration.rules[0].filter.and.not.or.prefixes[0] #=> String
+    #   resp.replication_configuration.rules[0].filter.and.not.or.tags #=> Array
+    #   resp.replication_configuration.rules[0].filter.and.not.or.tags[0].key #=> String
+    #   resp.replication_configuration.rules[0].filter.and.not.or.tags[0].value #=> String
+    #   resp.replication_configuration.rules[0].filter.not.prefix #=> String
+    #   resp.replication_configuration.rules[0].filter.not.tag.key #=> String
+    #   resp.replication_configuration.rules[0].filter.not.tag.value #=> String
+    #   resp.replication_configuration.rules[0].filter.not.or.prefixes #=> Array
+    #   resp.replication_configuration.rules[0].filter.not.or.prefixes[0] #=> String
+    #   resp.replication_configuration.rules[0].filter.not.or.tags #=> Array
+    #   resp.replication_configuration.rules[0].filter.not.or.tags[0].key #=> String
+    #   resp.replication_configuration.rules[0].filter.not.or.tags[0].value #=> String
     #   resp.replication_configuration.rules[0].status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].source_selection_criteria.sse_kms_encrypted_objects.status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].source_selection_criteria.replica_modifications.status #=> String, one of "Enabled", "Disabled"
@@ -9255,6 +9271,7 @@ module Aws::S3
     #   resp.replication_configuration.rules[0].destination.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR", "SNOW", "EXPRESS_ONEZONE", "FSX_OPENZFS", "FSX_ONTAP", "AWS_BACKUP_WARM", "AWS_BACKUP_LOW_COST_WARM"
     #   resp.replication_configuration.rules[0].destination.access_control_translation.owner #=> String, one of "Destination"
     #   resp.replication_configuration.rules[0].destination.encryption_configuration.replica_kms_key_id #=> String
+    #   resp.replication_configuration.rules[0].destination.encryption_configuration.use_source_multi_region_key.status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].destination.replication_time.status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].destination.replication_time.time.minutes #=> Integer
     #   resp.replication_configuration.rules[0].destination.metrics.status #=> String, one of "Enabled", "Disabled"
@@ -17953,6 +17970,38 @@ module Aws::S3
     #                   value: "Value", # required
     #                 },
     #               ],
+    #               not: {
+    #                 prefix: "Prefix",
+    #                 tag: {
+    #                   key: "ObjectKey", # required
+    #                   value: "Value", # required
+    #                 },
+    #                 or: {
+    #                   prefixes: ["Prefix"],
+    #                   tags: [
+    #                     {
+    #                       key: "ObjectKey", # required
+    #                       value: "Value", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             not: {
+    #               prefix: "Prefix",
+    #               tag: {
+    #                 key: "ObjectKey", # required
+    #                 value: "Value", # required
+    #               },
+    #               or: {
+    #                 prefixes: ["Prefix"],
+    #                 tags: [
+    #                   {
+    #                     key: "ObjectKey", # required
+    #                     value: "Value", # required
+    #                   },
+    #                 ],
+    #               },
     #             },
     #           },
     #           status: "Enabled", # required, accepts Enabled, Disabled
@@ -17976,6 +18025,9 @@ module Aws::S3
     #             },
     #             encryption_configuration: {
     #               replica_kms_key_id: "ReplicaKmsKeyID",
+    #               use_source_multi_region_key: {
+    #                 status: "Enabled", # required, accepts Enabled, Disabled
+    #               },
     #             },
     #             replication_time: {
     #               status: "Enabled", # required, accepts Enabled, Disabled
@@ -24226,7 +24278,7 @@ module Aws::S3
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.244.0'
+      context[:gem_version] = '1.245.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

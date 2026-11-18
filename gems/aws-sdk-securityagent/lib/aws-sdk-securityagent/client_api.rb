@@ -411,6 +411,8 @@ module Aws::SecurityAgent
     ResourceGatewayId = Shapes::StringShape.new(name: 'ResourceGatewayId')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    ResumePentestJobInput = Shapes::StructureShape.new(name: 'ResumePentestJobInput')
+    ResumePentestJobOutput = Shapes::StructureShape.new(name: 'ResumePentestJobOutput')
     RiskLevel = Shapes::StringShape.new(name: 'RiskLevel')
     RiskLevelFilterList = Shapes::ListShape.new(name: 'RiskLevelFilterList')
     RiskType = Shapes::StringShape.new(name: 'RiskType')
@@ -2170,6 +2172,7 @@ module Aws::SecurityAgent
     PentestJob.add_member(:scope_changes, Shapes::ShapeRef.new(shape: ScopeChangeList, location_name: "scopeChanges"))
     PentestJob.add_member(:cicd_configuration, Shapes::ShapeRef.new(shape: CiCdConfiguration, location_name: "cicdConfiguration"))
     PentestJob.add_member(:test_scope, Shapes::ShapeRef.new(shape: TestScope, location_name: "testScope"))
+    PentestJob.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     PentestJob.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     PentestJob.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     PentestJob.struct_class = Types::PentestJob
@@ -2186,6 +2189,7 @@ module Aws::SecurityAgent
     PentestJobSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     PentestJobSummary.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "jobType"))
     PentestJobSummary.add_member(:report_url, Shapes::ShapeRef.new(shape: String, location_name: "reportUrl"))
+    PentestJobSummary.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     PentestJobSummary.struct_class = Types::PentestJobSummary
 
     PentestJobSummaryList.member = Shapes::ShapeRef.new(shape: PentestJobSummary)
@@ -2284,6 +2288,24 @@ module Aws::SecurityAgent
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResumePentestJobInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, location_name: "agentSpaceId"))
+    ResumePentestJobInput.add_member(:pentest_job_id, Shapes::ShapeRef.new(shape: String, location_name: "pentestJobId"))
+    ResumePentestJobInput.add_member(:actors, Shapes::ShapeRef.new(shape: ActorList, location_name: "actors"))
+    ResumePentestJobInput.add_member(:network_traffic_config, Shapes::ShapeRef.new(shape: NetworkTrafficConfig, location_name: "networkTrafficConfig"))
+    ResumePentestJobInput.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    ResumePentestJobInput.add_member(:max_task_hours, Shapes::ShapeRef.new(shape: Double, location_name: "maxTaskHours"))
+    ResumePentestJobInput.add_member(:copy_config_from_pentest, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyConfigFromPentest"))
+    ResumePentestJobInput.struct_class = Types::ResumePentestJobInput
+
+    ResumePentestJobOutput.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
+    ResumePentestJobOutput.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "status"))
+    ResumePentestJobOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    ResumePentestJobOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    ResumePentestJobOutput.add_member(:pentest_id, Shapes::ShapeRef.new(shape: String, location_name: "pentestId"))
+    ResumePentestJobOutput.add_member(:pentest_job_id, Shapes::ShapeRef.new(shape: String, location_name: "pentestJobId"))
+    ResumePentestJobOutput.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
+    ResumePentestJobOutput.struct_class = Types::ResumePentestJobOutput
 
     RiskLevelFilterList.member = Shapes::ShapeRef.new(shape: RiskLevel)
 
@@ -2432,6 +2454,7 @@ module Aws::SecurityAgent
 
     StopPentestJobInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
     StopPentestJobInput.add_member(:pentest_job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "pentestJobId"))
+    StopPentestJobInput.add_member(:pause, Shapes::ShapeRef.new(shape: Boolean, location_name: "pause"))
     StopPentestJobInput.struct_class = Types::StopPentestJobInput
 
     StopPentestJobOutput.struct_class = Types::StopPentestJobOutput
@@ -3876,6 +3899,14 @@ module Aws::SecurityAgent
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:resume_pentest_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResumePentestJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/ResumePentestJob"
+        o.input = Shapes::ShapeRef.new(shape: ResumePentestJobInput)
+        o.output = Shapes::ShapeRef.new(shape: ResumePentestJobOutput)
       end)
 
       api.add_operation(:start_code_remediation, Seahorse::Model::Operation.new.tap do |o|

@@ -494,7 +494,7 @@ module Aws::Health
     # specified tag keys. Only configured tag keys will appear in Health
     # event data.
     #
-    # @option params [required, Array<Types::ResourceTagKey>] :tag_keys
+    # @option params [required, Array<Types::ConfigureTagsTagKey>] :tag_keys
     #   The list of resource tag keys to configure for Health event tracking.
     #
     # @return [Types::ConfigureTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -506,9 +506,8 @@ module Aws::Health
     #   resp = client.configure_tags({
     #     tag_keys: [ # required
     #       {
-    #         key: "resourceTagKey",
+    #         key: "resourceTagKey", # required
     #         enabled_for_event_bridge: false,
-    #         status: "PENDING", # accepts PENDING, ACTIVE
     #       },
     #     ],
     #   })
@@ -540,14 +539,14 @@ module Aws::Health
     #
     # @return [Types::ConfigureTagsForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ConfigureTagsForOrganizationResponse#configured_tag_keys #configured_tag_keys} => Array&lt;Types::TagKeyForOrganization&gt;
+    #   * {Types::ConfigureTagsForOrganizationResponse#configured_tag_keys #configured_tag_keys} => Array&lt;Types::OrganizationTagKey&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.configure_tags_for_organization({
     #     tag_keys: [ # required
     #       {
-    #         key: "organizationTagKey",
+    #         key: "organizationTagKey", # required
     #         enabled_for_event_bridge: false,
     #       },
     #     ],
@@ -558,6 +557,7 @@ module Aws::Health
     #   resp.configured_tag_keys #=> Array
     #   resp.configured_tag_keys[0].key #=> String
     #   resp.configured_tag_keys[0].enabled_for_event_bridge #=> Boolean
+    #   resp.configured_tag_keys[0].status #=> String, one of "PENDING", "ACTIVE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/ConfigureTagsForOrganization AWS API Documentation
     #
@@ -740,8 +740,6 @@ module Aws::Health
     #   resp.entities[0].resource_tags["resourceTagKey"] #=> String
     #   resp.entities[0].account_tags #=> Hash
     #   resp.entities[0].account_tags["AccountTagKey"] #=> String
-    #   resp.entities[0].tags #=> Hash
-    #   resp.entities[0].tags["tagKey"] #=> String
     #   resp.entities[0].entity_metadata #=> Hash
     #   resp.entities[0].entity_metadata["entityMetadataKey"] #=> String
     #   resp.next_token #=> String
@@ -853,8 +851,6 @@ module Aws::Health
     #   resp.entities[0].resource_tags["resourceTagKey"] #=> String
     #   resp.entities[0].account_tags #=> Hash
     #   resp.entities[0].account_tags["AccountTagKey"] #=> String
-    #   resp.entities[0].tags #=> Hash
-    #   resp.entities[0].tags["tagKey"] #=> String
     #   resp.entities[0].entity_metadata #=> Hash
     #   resp.entities[0].entity_metadata["entityMetadataKey"] #=> String
     #   resp.failed_set #=> Array
@@ -2068,7 +2064,7 @@ module Aws::Health
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-health'
-      context[:gem_version] = '1.117.0'
+      context[:gem_version] = '1.118.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

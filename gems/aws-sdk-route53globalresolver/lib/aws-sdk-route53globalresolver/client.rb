@@ -4040,7 +4040,7 @@ module Aws::Route53GlobalResolver
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53globalresolver'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

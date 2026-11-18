@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.245.0 (2026-11-18)
+------------------
+
+* Feature - Adds exclusions and Multi-Region key resolution to S3 Replication. Rule filters support a Not element to exclude prefixes and object tags. Destination EncryptionConfiguration supports UseSourceMultiRegionKey to encrypt replicas with the related replica KMS multi-Region key in the destination Region.
+
 1.244.0 (2026-11-17)
 ------------------
 

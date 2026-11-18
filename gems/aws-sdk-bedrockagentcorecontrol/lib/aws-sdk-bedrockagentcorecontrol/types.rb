@@ -1165,10 +1165,16 @@ module Aws::BedrockAgentCoreControl
     #   the AgentCore Runtime.
     #   @return [String]
     #
+    # @!attribute [rw] operating_system_configuration
+    #   The operating system configuration of the agents that Amazon Bedrock
+    #   AgentCore Runtime runs on the capacity provider.
+    #   @return [Types::OperatingSystemConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CapacityProviderConfiguration AWS API Documentation
     #
     class CapacityProviderConfiguration < Struct.new(
-      :capacity_provider_arn)
+      :capacity_provider_arn,
+      :operating_system_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8649,6 +8655,11 @@ module Aws::BedrockAgentCoreControl
     #   on the capacity provider, referenced by its logical name.
     #   @return [Types::CapacityProviderVolumeConfiguration]
     #
+    # @!attribute [rw] s3_bucket_mount
+    #   Mounts an Amazon S3 bucket as a file system in the AgentCore
+    #   Runtime.
+    #   @return [Types::S3BucketMountConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/FilesystemConfiguration AWS API Documentation
     #
     class FilesystemConfiguration < Struct.new(
@@ -8656,6 +8667,7 @@ module Aws::BedrockAgentCoreControl
       :s3_files_access_point,
       :efs_access_point,
       :capacity_provider_volume,
+      :s3_bucket_mount,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -8665,6 +8677,7 @@ module Aws::BedrockAgentCoreControl
       class S3FilesAccessPoint < FilesystemConfiguration; end
       class EfsAccessPoint < FilesystemConfiguration; end
       class CapacityProviderVolume < FilesystemConfiguration; end
+      class S3BucketMount < FilesystemConfiguration; end
       class Unknown < FilesystemConfiguration; end
     end
 
@@ -14617,6 +14630,30 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # Contains the operating system configuration of agents that run on
+    # Linux instances, such as the privilege mode.
+    #
+    # @!attribute [rw] privilege_mode
+    #   The privilege mode of the agents. If you omit this field, the agents
+    #   run in `STANDARD` privilege mode. The following values are possible:
+    #
+    #   * `STANDARD` – The agent runs without elevated privileges. This is
+    #     the default.
+    #
+    #   * `PRIVILEGED` – The agent runs with elevated privileges on its
+    #     instance. Use this mode for agents that build container images,
+    #     run containers, or install system packages. A session that runs a
+    #     `PRIVILEGED` agent runs only that agent.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/LinuxOperatingSystemConfiguration AWS API Documentation
+    #
+    class LinuxOperatingSystemConfiguration < Struct.new(
+      :privilege_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   If the total number of results is greater than the `maxResults`
     #   value provided in the request, enter the token returned in the
@@ -18204,6 +18241,32 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # Contains the operating system configuration of the agents that
+    # AgentCore Runtime runs on a capacity provider. Specify the member for
+    # the operating system of the capacity provider.
+    #
+    # @note OperatingSystemConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note OperatingSystemConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of OperatingSystemConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] linux
+    #   The operating system configuration of agents that run on Linux
+    #   instances.
+    #   @return [Types::LinuxOperatingSystemConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/OperatingSystemConfiguration AWS API Documentation
+    #
+    class OperatingSystemConfiguration < Struct.new(
+      :linux,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Linux < OperatingSystemConfiguration; end
+      class Unknown < OperatingSystemConfiguration; end
+    end
+
     # The configuration that specifies where evaluation results should be
     # written for monitoring and analysis.
     #
@@ -20125,6 +20188,50 @@ module Aws::BedrockAgentCoreControl
       :arn,
       :qualifier,
       :schema)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Mounts an Amazon S3 bucket in the AgentCore Runtime with Mountpoint
+    # for Amazon S3. Files under the mount path map to objects in the
+    # bucket.
+    #
+    # @!attribute [rw] bucket
+    #   The name of the S3 bucket to mount. You can specify a general
+    #   purpose bucket or a directory bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] mount_path
+    #   The mount path for the S3 bucket inside the AgentCore Runtime. The
+    #   path must be under `/mnt` with exactly one subdirectory level (for
+    #   example, `/mnt/data`).
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The key prefix to mount. Only objects under this prefix are visible
+    #   at the mount path. To give each session its own prefix, include
+    #   `{runtimeSessionId}` (for example, `data/{runtimeSessionId}/`). If
+    #   you omit the prefix, the whole bucket is mounted.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_owner
+    #   The AWS account ID that must own the bucket. If you omit it, the
+    #   bucket must be owned by the account that owns the AgentCore Runtime.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_region
+    #   The AWS Region of the S3 bucket. If you omit it, the bucket must be
+    #   in the same Region as the AgentCore Runtime.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/S3BucketMountConfiguration AWS API Documentation
+    #
+    class S3BucketMountConfiguration < Struct.new(
+      :bucket,
+      :mount_path,
+      :prefix,
+      :s3_bucket_owner,
+      :s3_bucket_region)
       SENSITIVE = []
       include Aws::Structure
     end

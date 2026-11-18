@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2026-11-18)
+------------------
+
+* Feature - Neptune Database Serverless support for graviton3 based r8g instances.
+
 1.121.0 (2026-11-16)
 ------------------
 

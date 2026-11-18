@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2026-11-18)
+------------------
+
+* Feature - This release includes support for adding new field for the effective policy used in test runs and documentation updates.
+
 1.19.0 (2026-11-16)
 ------------------
 

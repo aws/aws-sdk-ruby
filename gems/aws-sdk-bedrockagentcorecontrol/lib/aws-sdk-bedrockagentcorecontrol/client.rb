@@ -897,10 +897,22 @@ module Aws::BedrockAgentCoreControl
     #           volume_name: "CapacityProviderVolumeName", # required
     #           mount_path: "MountPath", # required
     #         },
+    #         s3_bucket_mount: {
+    #           bucket: "S3BucketMountConfigurationBucketString", # required
+    #           mount_path: "MountPath", # required
+    #           prefix: "S3BucketMountConfigurationPrefixString",
+    #           s3_bucket_owner: "S3BucketMountConfigurationS3BucketOwnerString",
+    #           s3_bucket_region: "S3BucketMountConfigurationS3BucketRegionString",
+    #         },
     #       },
     #     ],
     #     capacity_provider_configuration: {
     #       capacity_provider_arn: "CapacityProviderArn", # required
+    #       operating_system_configuration: {
+    #         linux: {
+    #           privilege_mode: "STANDARD", # accepts STANDARD, PRIVILEGED
+    #         },
+    #       },
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -3357,6 +3369,13 @@ module Aws::BedrockAgentCoreControl
     #               volume_name: "CapacityProviderVolumeName", # required
     #               mount_path: "MountPath", # required
     #             },
+    #             s3_bucket_mount: {
+    #               bucket: "S3BucketMountConfigurationBucketString", # required
+    #               mount_path: "MountPath", # required
+    #               prefix: "S3BucketMountConfigurationPrefixString",
+    #               s3_bucket_owner: "S3BucketMountConfigurationS3BucketOwnerString",
+    #               s3_bucket_region: "S3BucketMountConfigurationS3BucketRegionString",
+    #             },
     #           },
     #         ],
     #       },
@@ -3766,6 +3785,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.mount_path #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.volume_name #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.bucket #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.prefix #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.s3_bucket_owner #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.s3_bucket_region #=> String
     #   resp.harness.environment_artifact.container_configuration.container_uri #=> String
     #   resp.harness.environment_variables #=> Hash
     #   resp.harness.environment_variables["EnvironmentVariableKey"] #=> String
@@ -6727,6 +6751,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.mount_path #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.volume_name #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.bucket #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.prefix #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.s3_bucket_owner #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.s3_bucket_region #=> String
     #   resp.harness.environment_artifact.container_configuration.container_uri #=> String
     #   resp.harness.environment_variables #=> Hash
     #   resp.harness.environment_variables["EnvironmentVariableKey"] #=> String
@@ -7497,7 +7526,13 @@ module Aws::BedrockAgentCoreControl
     #   resp.filesystem_configurations[0].efs_access_point.mount_path #=> String
     #   resp.filesystem_configurations[0].capacity_provider_volume.volume_name #=> String
     #   resp.filesystem_configurations[0].capacity_provider_volume.mount_path #=> String
+    #   resp.filesystem_configurations[0].s3_bucket_mount.bucket #=> String
+    #   resp.filesystem_configurations[0].s3_bucket_mount.mount_path #=> String
+    #   resp.filesystem_configurations[0].s3_bucket_mount.prefix #=> String
+    #   resp.filesystem_configurations[0].s3_bucket_mount.s3_bucket_owner #=> String
+    #   resp.filesystem_configurations[0].s3_bucket_mount.s3_bucket_region #=> String
     #   resp.capacity_provider_configuration.capacity_provider_arn #=> String
+    #   resp.capacity_provider_configuration.operating_system_configuration.linux.privilege_mode #=> String, one of "STANDARD", "PRIVILEGED"
     #   resp.platform_version #=> String
     #   resp.allowed_ports #=> Array
     #   resp.allowed_ports[0].port #=> Integer
@@ -8822,6 +8857,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.mount_path #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.volume_name #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.bucket #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.prefix #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.s3_bucket_owner #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.s3_bucket_region #=> String
     #   resp.harness.environment_artifact.container_configuration.container_uri #=> String
     #   resp.harness.environment_variables #=> Hash
     #   resp.harness.environment_variables["EnvironmentVariableKey"] #=> String
@@ -13351,10 +13391,22 @@ module Aws::BedrockAgentCoreControl
     #           volume_name: "CapacityProviderVolumeName", # required
     #           mount_path: "MountPath", # required
     #         },
+    #         s3_bucket_mount: {
+    #           bucket: "S3BucketMountConfigurationBucketString", # required
+    #           mount_path: "MountPath", # required
+    #           prefix: "S3BucketMountConfigurationPrefixString",
+    #           s3_bucket_owner: "S3BucketMountConfigurationS3BucketOwnerString",
+    #           s3_bucket_region: "S3BucketMountConfigurationS3BucketRegionString",
+    #         },
     #       },
     #     ],
     #     capacity_provider_configuration: {
     #       capacity_provider_arn: "CapacityProviderArn", # required
+    #       operating_system_configuration: {
+    #         linux: {
+    #           privilege_mode: "STANDARD", # accepts STANDARD, PRIVILEGED
+    #         },
+    #       },
     #     },
     #     platform_version: "PlatformVersion",
     #     allowed_ports: [
@@ -15292,6 +15344,13 @@ module Aws::BedrockAgentCoreControl
     #               volume_name: "CapacityProviderVolumeName", # required
     #               mount_path: "MountPath", # required
     #             },
+    #             s3_bucket_mount: {
+    #               bucket: "S3BucketMountConfigurationBucketString", # required
+    #               mount_path: "MountPath", # required
+    #               prefix: "S3BucketMountConfigurationPrefixString",
+    #               s3_bucket_owner: "S3BucketMountConfigurationS3BucketOwnerString",
+    #               s3_bucket_region: "S3BucketMountConfigurationS3BucketRegionString",
+    #             },
     #           },
     #         ],
     #       },
@@ -15704,6 +15763,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.mount_path #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.volume_name #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].capacity_provider_volume.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.bucket #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.prefix #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.s3_bucket_owner #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_bucket_mount.s3_bucket_region #=> String
     #   resp.harness.environment_artifact.container_configuration.container_uri #=> String
     #   resp.harness.environment_variables #=> Hash
     #   resp.harness.environment_variables["EnvironmentVariableKey"] #=> String
@@ -18073,7 +18137,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.94.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1857,7 +1857,7 @@ module Aws::CleanRooms
     class IntermediateTableActiveVersion
       attr_accessor version_id: ::String
       attr_accessor analysis_id: ::String
-      attr_accessor analysis_type: ("QUERY")
+      attr_accessor analysis_type: ("QUERY" | "JOB")
       attr_accessor kms_key_arn: ::String
       attr_accessor parameters: ::Hash[::String, ::String]
       attr_accessor inherited_constraints: Types::IntermediateTableInheritedConstraints
@@ -1918,10 +1918,13 @@ module Aws::CleanRooms
 
     class IntermediateTableComputeConfiguration
       attr_accessor query_compute_configuration: Types::WorkerComputeConfiguration
+      attr_accessor job_compute_configuration: Types::ProtectedJobComputeConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class QueryComputeConfiguration < IntermediateTableComputeConfiguration
+      end
+      class JobComputeConfiguration < IntermediateTableComputeConfiguration
       end
       class Unknown < IntermediateTableComputeConfiguration
       end
@@ -1984,7 +1987,7 @@ module Aws::CleanRooms
       attr_accessor create_time: ::Time
       attr_accessor analysis_id: ::String
       attr_accessor status: ("POPULATE_STARTED" | "POPULATE_SUCCESS" | "POPULATE_FAILED" | "RETENTION_PERIOD_EXPIRED")
-      attr_accessor analysis_type: ("QUERY")
+      attr_accessor analysis_type: ("QUERY" | "JOB")
       attr_accessor kms_key_arn: ::String
       attr_accessor expiration_time: ::Time
       SENSITIVE: []
@@ -2528,20 +2531,28 @@ module Aws::CleanRooms
 
     class PopulateIntermediateTableOutput
       attr_accessor analysis_id: ::String
-      attr_accessor analysis_type: ("QUERY")
+      attr_accessor analysis_type: ("QUERY" | "JOB")
       attr_accessor version_id: ::String
       SENSITIVE: []
     end
 
     class PopulationAnalysisConfiguration
       attr_accessor sql_parameters: Types::PopulationAnalysisSqlParameters
+      attr_accessor job_parameters: Types::PopulationAnalysisJobParameters
       attr_accessor unknown: untyped
       SENSITIVE: [:sql_parameters]
 
       class SqlParameters < PopulationAnalysisConfiguration
       end
+      class JobParameters < PopulationAnalysisConfiguration
+      end
       class Unknown < PopulationAnalysisConfiguration
       end
+    end
+
+    class PopulationAnalysisJobParameters
+      attr_accessor analysis_template_arn: ::String
+      SENSITIVE: []
     end
 
     class PopulationAnalysisSqlParameters
@@ -2770,12 +2781,15 @@ module Aws::CleanRooms
     class ProtectedJobOutputConfigurationOutput
       attr_accessor s3: Types::ProtectedJobS3OutputConfigurationOutput
       attr_accessor member: Types::ProtectedJobMemberOutputConfigurationOutput
+      attr_accessor intermediate_table: Types::IntermediateTableOutputConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class S3 < ProtectedJobOutputConfigurationOutput
       end
       class Member < ProtectedJobOutputConfigurationOutput
+      end
+      class IntermediateTable < ProtectedJobOutputConfigurationOutput
       end
       class Unknown < ProtectedJobOutputConfigurationOutput
       end
@@ -2845,6 +2859,7 @@ module Aws::CleanRooms
       attr_accessor status: ("SUBMITTED" | "STARTED" | "CANCELLED" | "CANCELLING" | "FAILED" | "SUCCESS")
       attr_accessor receiver_configurations: ::Array[Types::ProtectedJobReceiverConfiguration]
       attr_accessor job_compute_payer_account_id: ::String
+      attr_accessor intermediate_table_configuration: Types::IntermediateTableOutputConfiguration
       SENSITIVE: []
     end
 

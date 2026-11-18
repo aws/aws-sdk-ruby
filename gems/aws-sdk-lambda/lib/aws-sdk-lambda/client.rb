@@ -10336,7 +10336,7 @@ module Aws::Lambda
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.214.0'
+      context[:gem_version] = '1.215.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

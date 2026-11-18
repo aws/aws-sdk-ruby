@@ -226,7 +226,7 @@ module Aws::SecurityAgent
 
     class BatchDisassociateFindingIssueError
       attr_accessor finding_id: ::String
-      attr_accessor code: ("CLIENT_ERROR" | "INTERNAL_ERROR" | "STOPPED_BY_USER")
+      attr_accessor code: ("CLIENT_ERROR" | "INTERNAL_ERROR" | "STOPPED_BY_USER" | "PAUSED_BY_USER")
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -246,7 +246,7 @@ module Aws::SecurityAgent
 
     class BatchExportFindingError
       attr_accessor finding_id: ::String
-      attr_accessor code: ("CLIENT_ERROR" | "INTERNAL_ERROR" | "STOPPED_BY_USER")
+      attr_accessor code: ("CLIENT_ERROR" | "INTERNAL_ERROR" | "STOPPED_BY_USER" | "PAUSED_BY_USER")
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -601,7 +601,7 @@ module Aws::SecurityAgent
       attr_accessor code_review_id: ::String
       attr_accessor title: ::String
       attr_accessor overview: ::String
-      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "FAILED" | "COMPLETED")
+      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "PAUSING" | "PAUSED" | "FAILED" | "COMPLETED")
       attr_accessor documents: ::Array[Types::DocumentInfo]
       attr_accessor source_code: ::Array[Types::SourceCodeRepository]
       attr_accessor steps: ::Array[Types::Step]
@@ -622,7 +622,7 @@ module Aws::SecurityAgent
       attr_accessor code_review_job_id: ::String
       attr_accessor code_review_id: ::String
       attr_accessor title: ::String
-      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "FAILED" | "COMPLETED")
+      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "PAUSING" | "PAUSED" | "FAILED" | "COMPLETED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -1147,7 +1147,7 @@ module Aws::SecurityAgent
     end
 
     class ErrorInformation
-      attr_accessor code: ("CLIENT_ERROR" | "INTERNAL_ERROR" | "STOPPED_BY_USER")
+      attr_accessor code: ("CLIENT_ERROR" | "INTERNAL_ERROR" | "STOPPED_BY_USER" | "PAUSED_BY_USER")
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -1974,7 +1974,7 @@ module Aws::SecurityAgent
       attr_accessor pentest_id: ::String
       attr_accessor title: ::String
       attr_accessor overview: ::String
-      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "FAILED" | "COMPLETED")
+      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "PAUSING" | "PAUSED" | "FAILED" | "COMPLETED")
       attr_accessor endpoints: ::Array[Types::Endpoint]
       attr_accessor actors: ::Array[Types::Actor]
       attr_accessor documents: ::Array[Types::DocumentInfo]
@@ -2004,6 +2004,7 @@ module Aws::SecurityAgent
       attr_accessor scope_changes: ::Array[Types::ScopeChange]
       attr_accessor cicd_configuration: Types::CiCdConfiguration
       attr_accessor test_scope: Types::TestScope
+      attr_accessor version: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: [:trusted_ca_certificates]
@@ -2013,11 +2014,12 @@ module Aws::SecurityAgent
       attr_accessor pentest_job_id: ::String
       attr_accessor pentest_id: ::String
       attr_accessor title: ::String
-      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "FAILED" | "COMPLETED")
+      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "PAUSING" | "PAUSED" | "FAILED" | "COMPLETED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor job_type: ("FULL" | "REVALIDATION" | "CICD")
       attr_accessor report_url: ::String
+      attr_accessor version: ::String
       SENSITIVE: []
     end
 
@@ -2139,6 +2141,28 @@ module Aws::SecurityAgent
       SENSITIVE: []
     end
 
+    class ResumePentestJobInput
+      attr_accessor agent_space_id: ::String
+      attr_accessor pentest_job_id: ::String
+      attr_accessor actors: ::Array[Types::Actor]
+      attr_accessor network_traffic_config: Types::NetworkTrafficConfig
+      attr_accessor vpc_config: Types::VpcConfig
+      attr_accessor max_task_hours: ::Float
+      attr_accessor copy_config_from_pentest: bool
+      SENSITIVE: []
+    end
+
+    class ResumePentestJobOutput
+      attr_accessor title: ::String
+      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "PAUSING" | "PAUSED" | "FAILED" | "COMPLETED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor pentest_id: ::String
+      attr_accessor pentest_job_id: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
     class ScopeChange
       attr_accessor integration_id: ::String
       attr_accessor provider_resource_id: ::String
@@ -2231,7 +2255,7 @@ module Aws::SecurityAgent
 
     class StartCodeReviewJobOutput
       attr_accessor title: ::String
-      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "FAILED" | "COMPLETED")
+      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "PAUSING" | "PAUSED" | "FAILED" | "COMPLETED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor code_review_id: ::String
@@ -2251,7 +2275,7 @@ module Aws::SecurityAgent
 
     class StartPentestJobOutput
       attr_accessor title: ::String
-      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "FAILED" | "COMPLETED")
+      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "PAUSING" | "PAUSED" | "FAILED" | "COMPLETED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor pentest_id: ::String
@@ -2268,7 +2292,7 @@ module Aws::SecurityAgent
 
     class StartThreatModelJobOutput
       attr_accessor title: ::String
-      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "FAILED" | "COMPLETED")
+      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "PAUSING" | "PAUSED" | "FAILED" | "COMPLETED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor threat_model_id: ::String
@@ -2297,6 +2321,7 @@ module Aws::SecurityAgent
     class StopPentestJobInput
       attr_accessor agent_space_id: ::String
       attr_accessor pentest_job_id: ::String
+      attr_accessor pause: bool
       SENSITIVE: []
     end
 
@@ -2434,7 +2459,7 @@ module Aws::SecurityAgent
       attr_accessor threat_model_id: ::String
       attr_accessor agent_space_id: ::String
       attr_accessor title: ::String
-      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "FAILED" | "COMPLETED")
+      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "PAUSING" | "PAUSED" | "FAILED" | "COMPLETED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor execution_start_time: ::Time
@@ -2454,7 +2479,7 @@ module Aws::SecurityAgent
       attr_accessor threat_model_id: ::String
       attr_accessor agent_space_id: ::String
       attr_accessor title: ::String
-      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "FAILED" | "COMPLETED")
+      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "PAUSING" | "PAUSED" | "FAILED" | "COMPLETED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []

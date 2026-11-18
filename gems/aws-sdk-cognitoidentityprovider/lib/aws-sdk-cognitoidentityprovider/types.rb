@@ -3063,6 +3063,38 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the recovery that you want to
+    #   cancel.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_id
+    #   The ID of the recovery that you want to cancel. Amazon Cognito
+    #   returns this ID in the response to an `InitiatePointInTimeRecovery`
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CancelPointInTimeRecoveryRequest AWS API Documentation
+    #
+    class CancelPointInTimeRecoveryRequest < Struct.new(
+      :user_pool_id,
+      :restore_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] restoration
+    #   The details of the canceled recovery, including its status.
+    #   @return [Types::RestorationType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CancelPointInTimeRecoveryResponse AWS API Documentation
+    #
+    class CancelPointInTimeRecoveryResponse < Struct.new(
+      :restoration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The responses to the challenge that you received in the previous
     # request. Each challenge has its own required response parameters. The
     # following examples are partial JSON request bodies that highlight
@@ -5921,6 +5953,40 @@ module Aws::CognitoIdentityProvider
     end
 
     # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the recovery that you want to
+    #   describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_id
+    #   The ID of the recovery that you want to describe. Amazon Cognito
+    #   returns this ID in the response to an `InitiatePointInTimeRecovery`
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribePointInTimeRecoveryRequest AWS API Documentation
+    #
+    class DescribePointInTimeRecoveryRequest < Struct.new(
+      :user_pool_id,
+      :restore_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] restoration
+    #   The details of the requested recovery, including its status, the
+    #   point in time that it restores the user pool to, and the recovery
+    #   preview.
+    #   @return [Types::RestorationType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribePointInTimeRecoveryResponse AWS API Documentation
+    #
+    class DescribePointInTimeRecoveryResponse < Struct.new(
+      :restoration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
     #   The ID of the user pool that hosts the resource server.
     #   @return [String]
     #
@@ -8706,6 +8772,42 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that you want to recover.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_timestamp
+    #   The point in time that you want to recover your user pool to. Amazon
+    #   Cognito reverts changes to user data that occurred after this time.
+    #   The recovery point must be at least 15 minutes in the past and
+    #   within the recovery period of your user pool feature plan: up to 1
+    #   day in the past with the Essentials feature plan, or up to 14 days
+    #   in the past with the Plus feature plan.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InitiatePointInTimeRecoveryRequest AWS API Documentation
+    #
+    class InitiatePointInTimeRecoveryRequest < Struct.new(
+      :user_pool_id,
+      :restore_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] restoration
+    #   The details of the recovery that you initiated. Includes the
+    #   recovery ID that you can use in later requests to describe, start,
+    #   or cancel the recovery.
+    #   @return [Types::RestorationType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InitiatePointInTimeRecoveryResponse AWS API Documentation
+    #
+    class InitiatePointInTimeRecoveryResponse < Struct.new(
+      :restoration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This exception is thrown when Amazon Cognito encounters an internal
     # error.
     #
@@ -9324,6 +9426,59 @@ module Aws::CognitoIdentityProvider
     #
     class ListIdentityProvidersResponse < Struct.new(
       :providers,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool where you want to list point-in-time
+    #   recoveries.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   This API operation returns a limited number of results. The
+    #   pagination token is an identifier that you can present in an
+    #   additional API request with the same parameters. When you include
+    #   the pagination token, Amazon Cognito returns the next set of items
+    #   after the current list. Subsequent requests return a new pagination
+    #   token. By use of this token, you can paginate through the full list
+    #   of items.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of recoveries that you want Amazon Cognito to
+    #   return in the response. Valid values are 1 through 60. The default
+    #   value is 60.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListPointInTimeRecoveriesRequest AWS API Documentation
+    #
+    class ListPointInTimeRecoveriesRequest < Struct.new(
+      :user_pool_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] restorations
+    #   A summary of each requested recovery, including its ID, status, and
+    #   the point in time that it restores the user pool to.
+    #   @return [Array<Types::RestorationDescriptionType>]
+    #
+    # @!attribute [rw] next_token
+    #   The identifier that Amazon Cognito returned with the previous
+    #   request to this operation. When you include a pagination token in
+    #   your request, Amazon Cognito returns the next set of items in the
+    #   list. By use of this token, you can paginate through the full list
+    #   of items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListPointInTimeRecoveriesResponse AWS API Documentation
+    #
+    class ListPointInTimeRecoveriesResponse < Struct.new(
+      :restorations,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -11408,6 +11563,177 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # A summary of a point-in-time recovery of a user pool.
+    #
+    # @!attribute [rw] restore_id
+    #   The ID of the recovery.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_status
+    #   The status of the recovery. For a description of each status, see
+    #   the `RestoreStatus` parameter of `RestorationType`.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_timestamp
+    #   The point in time that the recovery restores the user pool to.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RestorationDescriptionType AWS API Documentation
+    #
+    class RestorationDescriptionType < Struct.new(
+      :restore_id,
+      :restore_status,
+      :restore_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of a point-in-time recovery of a user pool.
+    #
+    # @!attribute [rw] restore_id
+    #   The ID of the recovery. Use this ID in requests to describe, start,
+    #   or cancel the recovery.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_status
+    #   The status of the recovery. Can be one of the following values.
+    #
+    #   PREVIEW\_GENERATING
+    #
+    #   : Amazon Cognito is waiting for available capacity in the Amazon Web
+    #     Services Region or is generating the recovery preview. Write
+    #     operations in the user pool are paused.
+    #
+    #   PREVIEW\_GENERATED
+    #
+    #   : The recovery preview is ready for review. Write operations in the
+    #     user pool are paused. Within 24 hours after you initiate the
+    #     recovery, apply it with a `StartPointInTimeRecovery` request or
+    #     discard it with a `CancelPointInTimeRecovery` request.
+    #
+    #   PREVIEW\_CANCELLED
+    #
+    #   : You canceled the recovery. Amazon Cognito resumed write operations
+    #     and didn't change your user pool data.
+    #
+    #   PREVIEW\_GENERATION\_FAILED
+    #
+    #   : Amazon Cognito couldn't generate the recovery preview. Amazon
+    #     Cognito resumed write operations and didn't change your user pool
+    #     data. You can initiate a new recovery.
+    #
+    #   PREVIEW\_EXPIRED
+    #
+    #   : You didn't start or cancel the recovery within 24 hours after you
+    #     initiated it. Amazon Cognito resumed write operations and didn't
+    #     change your user pool data.
+    #
+    #   RESTORING
+    #
+    #   : Amazon Cognito is restoring user data in the user pool to its
+    #     state at the recovery point. Write operations in the user pool are
+    #     paused.
+    #
+    #   RESTORE\_COMPLETED
+    #
+    #   : Amazon Cognito restored your user pool to its state at the
+    #     recovery point and resumed write operations.
+    #
+    #   TEMPORARY\_INTERNAL\_ERROR\_SEE\_SUPPORT\_CASE
+    #
+    #   : The recovery encountered an internal error. Write operations in
+    #     the user pool remain paused. Amazon Web Services Support contacts
+    #     you through a support case to resolve the issue.
+    #
+    #   AWS\_ABORTED
+    #
+    #   : Amazon Cognito stopped the recovery because of an internal
+    #     failure. Write operations in the user pool remain paused, and you
+    #     can't cancel or retry the recovery. Amazon Web Services Support
+    #     contacts you through a support case to resolve the issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_timestamp
+    #   The point in time that the recovery restores the user pool to.
+    #   @return [Time]
+    #
+    # @!attribute [rw] trigger_timestamp
+    #   The end of the period of changes that the recovery reverts. This
+    #   time is shortly after the time that you initiated the recovery. The
+    #   recovery reverts changes to user data that occurred between
+    #   `RestoreTimestamp` and `TriggerTimestamp`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] restore_preview
+    #   The recovery preview. For each type of entity, the preview shows the
+    #   number of entities that the recovery creates, updates, and deletes.
+    #   The preview doesn't include user data. Amazon Cognito returns the
+    #   preview when it's available.
+    #   @return [Array<Types::RestorePreviewType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RestorationType AWS API Documentation
+    #
+    class RestorationType < Struct.new(
+      :restore_id,
+      :restore_status,
+      :restore_timestamp,
+      :trigger_timestamp,
+      :restore_preview)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of entities of one type that a point-in-time recovery
+    # creates, updates, and deletes.
+    #
+    # @!attribute [rw] entity
+    #   The type of user pool entity that the recovery changes. Can be one
+    #   of the following values.
+    #
+    #   Users
+    #
+    #   : User profiles, including their attributes.
+    #
+    #   Groups
+    #
+    #   : User pool groups.
+    #
+    #   User MFAs
+    #
+    #   : The MFA settings of users.
+    #
+    #   Passkeys
+    #
+    #   : The passkeys that users registered.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_count
+    #   The number of entities of this type that the recovery creates. These
+    #   entities existed at the recovery point and were deleted after it.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] update_count
+    #   The number of entities of this type that the recovery reverts to
+    #   their state at the recovery point. These entities were modified
+    #   after the recovery point.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] delete_count
+    #   The number of entities of this type that the recovery deletes. These
+    #   entities were created after the recovery point.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RestorePreviewType AWS API Documentation
+    #
+    class RestorePreviewType < Struct.new(
+      :entity,
+      :create_count,
+      :update_count,
+      :delete_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] token
     #   The refresh token that you want to revoke.
     #   @return [String]
@@ -12653,6 +12979,38 @@ module Aws::CognitoIdentityProvider
     class SoftwareTokenMfaSettingsType < Struct.new(
       :enabled,
       :preferred_mfa)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the recovery that you want to
+    #   start.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_id
+    #   The ID of the recovery that you want to start. Amazon Cognito
+    #   returns this ID in the response to an `InitiatePointInTimeRecovery`
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StartPointInTimeRecoveryRequest AWS API Documentation
+    #
+    class StartPointInTimeRecoveryRequest < Struct.new(
+      :user_pool_id,
+      :restore_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] restoration
+    #   The details of the recovery that you started, including its status.
+    #   @return [Types::RestorationType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StartPointInTimeRecoveryResponse AWS API Documentation
+    #
+    class StartPointInTimeRecoveryResponse < Struct.new(
+      :restoration)
       SENSITIVE = []
       include Aws::Structure
     end

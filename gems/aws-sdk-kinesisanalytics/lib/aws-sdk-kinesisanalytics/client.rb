@@ -2087,7 +2087,7 @@ module Aws::KinesisAnalytics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesisanalytics'
-      context[:gem_version] = '1.102.0'
+      context[:gem_version] = '1.103.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

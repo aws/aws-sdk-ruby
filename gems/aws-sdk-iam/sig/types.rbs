@@ -197,6 +197,7 @@ module Aws::IAM
       attr_accessor user_name: ::String
       attr_accessor password: ::String
       attr_accessor password_reset_required: bool
+      attr_accessor max_signin_session_duration: ::Integer
       SENSITIVE: [:password]
     end
 
@@ -251,6 +252,7 @@ module Aws::IAM
       attr_accessor assume_role_policy_document: ::String
       attr_accessor description: ::String
       attr_accessor max_session_duration: ::Integer
+      attr_accessor max_signin_session_duration: ::Integer
       attr_accessor permissions_boundary: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
@@ -1620,6 +1622,7 @@ module Aws::IAM
       attr_accessor user_name: ::String
       attr_accessor create_date: ::Time
       attr_accessor password_reset_required: bool
+      attr_accessor max_signin_session_duration: ::Integer
       SENSITIVE: []
     end
 
@@ -1937,6 +1940,7 @@ module Aws::IAM
       attr_accessor assume_role_policy_document: ::String
       attr_accessor description: ::String
       attr_accessor max_session_duration: ::Integer
+      attr_accessor max_signin_session_duration: ::Integer
       attr_accessor permissions_boundary: Types::AttachedPermissionsBoundary
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor role_last_used: Types::RoleLastUsed
@@ -2356,6 +2360,8 @@ module Aws::IAM
       attr_accessor user_name: ::String
       attr_accessor password: ::String
       attr_accessor password_reset_required: bool
+      attr_accessor max_signin_session_duration: ::Integer
+      attr_accessor reset_max_signin_session_duration: bool
       SENSITIVE: [:password]
     end
 
@@ -2380,6 +2386,8 @@ module Aws::IAM
       attr_accessor role_name: ::String
       attr_accessor description: ::String
       attr_accessor max_session_duration: ::Integer
+      attr_accessor max_signin_session_duration: ::Integer
+      attr_accessor reset_max_signin_session_duration: bool
       SENSITIVE: []
     end
 

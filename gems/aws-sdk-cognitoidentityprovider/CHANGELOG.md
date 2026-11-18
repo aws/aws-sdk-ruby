@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.167.0 (2026-11-18)
+------------------
+
+* Feature - Add support for restoring user pool's user data to point in time.
+
 1.166.0 (2026-11-16)
 ------------------
 

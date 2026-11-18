@@ -843,7 +843,7 @@ module Aws::SecurityAgent
     #
     #   resp.errors #=> Array
     #   resp.errors[0].finding_id #=> String
-    #   resp.errors[0].code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER"
+    #   resp.errors[0].code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER", "PAUSED_BY_USER"
     #   resp.errors[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchDisassociateFindingIssue AWS API Documentation
@@ -907,7 +907,7 @@ module Aws::SecurityAgent
     #   resp.results[0].linked_issue.site_url #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].finding_id #=> String
-    #   resp.errors[0].code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER"
+    #   resp.errors[0].code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER", "PAUSED_BY_USER"
     #   resp.errors[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchExportFindings AWS API Documentation
@@ -1093,7 +1093,7 @@ module Aws::SecurityAgent
     #   resp.code_review_jobs[0].code_review_id #=> String
     #   resp.code_review_jobs[0].title #=> String
     #   resp.code_review_jobs[0].overview #=> String
-    #   resp.code_review_jobs[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
+    #   resp.code_review_jobs[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "PAUSING", "PAUSED", "FAILED", "COMPLETED"
     #   resp.code_review_jobs[0].documents #=> Array
     #   resp.code_review_jobs[0].documents[0].s3_location #=> String
     #   resp.code_review_jobs[0].documents[0].artifact_id #=> String
@@ -1113,7 +1113,7 @@ module Aws::SecurityAgent
     #   resp.code_review_jobs[0].service_role #=> String
     #   resp.code_review_jobs[0].log_config.log_group #=> String
     #   resp.code_review_jobs[0].log_config.log_stream #=> String
-    #   resp.code_review_jobs[0].error_information.code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER"
+    #   resp.code_review_jobs[0].error_information.code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER", "PAUSED_BY_USER"
     #   resp.code_review_jobs[0].error_information.message #=> String
     #   resp.code_review_jobs[0].integrated_repositories #=> Array
     #   resp.code_review_jobs[0].integrated_repositories[0].integration_id #=> String
@@ -1404,7 +1404,7 @@ module Aws::SecurityAgent
     #   resp.pentest_jobs[0].pentest_id #=> String
     #   resp.pentest_jobs[0].title #=> String
     #   resp.pentest_jobs[0].overview #=> String
-    #   resp.pentest_jobs[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
+    #   resp.pentest_jobs[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "PAUSING", "PAUSED", "FAILED", "COMPLETED"
     #   resp.pentest_jobs[0].endpoints #=> Array
     #   resp.pentest_jobs[0].endpoints[0].uri #=> String
     #   resp.pentest_jobs[0].actors #=> Array
@@ -1453,7 +1453,7 @@ module Aws::SecurityAgent
     #   resp.pentest_jobs[0].network_traffic_config.custom_headers #=> Array
     #   resp.pentest_jobs[0].network_traffic_config.custom_headers[0].name #=> String
     #   resp.pentest_jobs[0].network_traffic_config.custom_headers[0].value #=> String
-    #   resp.pentest_jobs[0].error_information.code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER"
+    #   resp.pentest_jobs[0].error_information.code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER", "PAUSED_BY_USER"
     #   resp.pentest_jobs[0].error_information.message #=> String
     #   resp.pentest_jobs[0].integrated_repositories #=> Array
     #   resp.pentest_jobs[0].integrated_repositories[0].integration_id #=> String
@@ -1491,6 +1491,7 @@ module Aws::SecurityAgent
     #   resp.pentest_jobs[0].scope_changes[0].trigger_run_id #=> String
     #   resp.pentest_jobs[0].cicd_configuration.enabled #=> Boolean
     #   resp.pentest_jobs[0].test_scope.type #=> String, one of "WEB_APP", "GENERATIVE_AI_APP"
+    #   resp.pentest_jobs[0].version #=> String
     #   resp.pentest_jobs[0].created_at #=> Time
     #   resp.pentest_jobs[0].updated_at #=> Time
     #   resp.not_found #=> Array
@@ -1784,7 +1785,7 @@ module Aws::SecurityAgent
     #   resp.threat_model_jobs[0].threat_model_id #=> String
     #   resp.threat_model_jobs[0].agent_space_id #=> String
     #   resp.threat_model_jobs[0].title #=> String
-    #   resp.threat_model_jobs[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
+    #   resp.threat_model_jobs[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "PAUSING", "PAUSED", "FAILED", "COMPLETED"
     #   resp.threat_model_jobs[0].created_at #=> Time
     #   resp.threat_model_jobs[0].updated_at #=> Time
     #   resp.threat_model_jobs[0].execution_start_time #=> Time
@@ -1805,7 +1806,7 @@ module Aws::SecurityAgent
     #   resp.threat_model_jobs[0].scope_docs[0].artifact_id #=> String
     #   resp.threat_model_jobs[0].scope_docs[0].integrated_document.integration_id #=> String
     #   resp.threat_model_jobs[0].scope_docs[0].integrated_document.resource_id #=> String
-    #   resp.threat_model_jobs[0].error_information.code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER"
+    #   resp.threat_model_jobs[0].error_information.code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER", "PAUSED_BY_USER"
     #   resp.threat_model_jobs[0].error_information.message #=> String
     #   resp.threat_model_jobs[0].system_overview #=> String
     #   resp.threat_model_jobs[0].report_destination.integration_id #=> String
@@ -4168,7 +4169,7 @@ module Aws::SecurityAgent
     #   resp.code_review_job_summaries[0].code_review_job_id #=> String
     #   resp.code_review_job_summaries[0].code_review_id #=> String
     #   resp.code_review_job_summaries[0].title #=> String
-    #   resp.code_review_job_summaries[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
+    #   resp.code_review_job_summaries[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "PAUSING", "PAUSED", "FAILED", "COMPLETED"
     #   resp.code_review_job_summaries[0].created_at #=> Time
     #   resp.code_review_job_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
@@ -4738,11 +4739,12 @@ module Aws::SecurityAgent
     #   resp.pentest_job_summaries[0].pentest_job_id #=> String
     #   resp.pentest_job_summaries[0].pentest_id #=> String
     #   resp.pentest_job_summaries[0].title #=> String
-    #   resp.pentest_job_summaries[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
+    #   resp.pentest_job_summaries[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "PAUSING", "PAUSED", "FAILED", "COMPLETED"
     #   resp.pentest_job_summaries[0].created_at #=> Time
     #   resp.pentest_job_summaries[0].updated_at #=> Time
     #   resp.pentest_job_summaries[0].job_type #=> String, one of "FULL", "REVALIDATION", "CICD"
     #   resp.pentest_job_summaries[0].report_url #=> String
+    #   resp.pentest_job_summaries[0].version #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListPentestJobsForPentest AWS API Documentation
@@ -5115,7 +5117,7 @@ module Aws::SecurityAgent
     #   resp.threat_model_job_summaries[0].threat_model_id #=> String
     #   resp.threat_model_job_summaries[0].agent_space_id #=> String
     #   resp.threat_model_job_summaries[0].title #=> String
-    #   resp.threat_model_job_summaries[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
+    #   resp.threat_model_job_summaries[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "PAUSING", "PAUSED", "FAILED", "COMPLETED"
     #   resp.threat_model_job_summaries[0].created_at #=> Time
     #   resp.threat_model_job_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
@@ -5233,6 +5235,112 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
+    # Resumes a stopped or paused pentest job from its last saved
+    # checkpoint. The job keeps its pentest job identifier and continues as
+    # a new version, keeping the findings and progress from earlier runs.
+    # You can resume a job within 7 days of when it was created.
+    #
+    # @option params [String] :agent_space_id
+    #   The unique identifier of the agent space.
+    #
+    # @option params [String] :pentest_job_id
+    #   The unique identifier of the pentest job to resume.
+    #
+    # @option params [Array<Types::Actor>] :actors
+    #   The actors to use for the resumed job. When specified, replaces the
+    #   actors the job used before it stopped.
+    #
+    # @option params [Types::NetworkTrafficConfig] :network_traffic_config
+    #   The network traffic configuration to use for the resumed job. When
+    #   specified, replaces the configuration the job used before it stopped.
+    #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   The VPC configuration to use for the resumed job. When specified,
+    #   replaces the configuration the job used before it stopped.
+    #
+    # @option params [Float] :max_task_hours
+    #   The maximum number of task hours for the resumed job. To resume a job
+    #   that stopped because it reached its task hours limit, specify a higher
+    #   value.
+    #
+    # @option params [Boolean] :copy_config_from_pentest
+    #   Specifies whether to copy the current actors, network traffic
+    #   configuration, VPC configuration, and maximum task hours from the
+    #   pentest to the resumed job. The job's scope, such as its target
+    #   endpoints, is never changed. Values you specify in this request take
+    #   precedence over copied values.
+    #
+    # @return [Types::ResumePentestJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResumePentestJobOutput#title #title} => String
+    #   * {Types::ResumePentestJobOutput#status #status} => String
+    #   * {Types::ResumePentestJobOutput#created_at #created_at} => Time
+    #   * {Types::ResumePentestJobOutput#updated_at #updated_at} => Time
+    #   * {Types::ResumePentestJobOutput#pentest_id #pentest_id} => String
+    #   * {Types::ResumePentestJobOutput#pentest_job_id #pentest_job_id} => String
+    #   * {Types::ResumePentestJobOutput#version #version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.resume_pentest_job({
+    #     agent_space_id: "String",
+    #     pentest_job_id: "String",
+    #     actors: [
+    #       {
+    #         identifier: "String",
+    #         uris: ["String"],
+    #         authentication: {
+    #           provider_type: "SECRETS_MANAGER", # accepts SECRETS_MANAGER, AWS_LAMBDA, AWS_IAM_ROLE, AWS_INTERNAL
+    #           value: "String",
+    #         },
+    #         description: "String",
+    #         enable_email_mfa: false,
+    #         mfa_forwarding_address: "SensitiveEmailAddress",
+    #       },
+    #     ],
+    #     network_traffic_config: {
+    #       rules: [
+    #         {
+    #           effect: "ALLOW", # accepts ALLOW, DENY
+    #           pattern: "String",
+    #           network_traffic_rule_type: "URL", # accepts URL
+    #         },
+    #       ],
+    #       custom_headers: [
+    #         {
+    #           name: "String",
+    #           value: "String",
+    #         },
+    #       ],
+    #     },
+    #     vpc_config: {
+    #       vpc_arn: "VpcArn",
+    #       security_group_arns: ["SecurityGroupArn"],
+    #       subnet_arns: ["SubnetArn"],
+    #     },
+    #     max_task_hours: 1.0,
+    #     copy_config_from_pentest: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.title #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "PAUSING", "PAUSED", "FAILED", "COMPLETED"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.pentest_id #=> String
+    #   resp.pentest_job_id #=> String
+    #   resp.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ResumePentestJob AWS API Documentation
+    #
+    # @overload resume_pentest_job(params = {})
+    # @param [Hash] params ({})
+    def resume_pentest_job(params = {}, options = {})
+      req = build_request(:resume_pentest_job, params)
+      req.send_request(options)
+    end
+
     # Initiates code remediation for one or more security findings. This
     # creates pull requests in integrated repositories to fix the identified
     # vulnerabilities.
@@ -5308,7 +5416,7 @@ module Aws::SecurityAgent
     # @example Response structure
     #
     #   resp.title #=> String
-    #   resp.status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
+    #   resp.status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "PAUSING", "PAUSED", "FAILED", "COMPLETED"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.code_review_id #=> String
@@ -5380,7 +5488,7 @@ module Aws::SecurityAgent
     # @example Response structure
     #
     #   resp.title #=> String
-    #   resp.status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
+    #   resp.status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "PAUSING", "PAUSED", "FAILED", "COMPLETED"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.pentest_id #=> String
@@ -5424,7 +5532,7 @@ module Aws::SecurityAgent
     # @example Response structure
     #
     #   resp.title #=> String
-    #   resp.status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
+    #   resp.status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "PAUSING", "PAUSED", "FAILED", "COMPLETED"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.threat_model_id #=> String
@@ -5476,6 +5584,12 @@ module Aws::SecurityAgent
     # @option params [required, String] :pentest_job_id
     #   The unique identifier of the pentest job to stop.
     #
+    # @option params [Boolean] :pause
+    #   Specifies whether to pause the job instead of stopping it. A paused
+    #   job moves to `PAUSING` and then to `PAUSED`, and you can resume it
+    #   later with `ResumePentestJob`. You can pause only a job that is
+    #   `IN_PROGRESS`. The default is false.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -5483,6 +5597,7 @@ module Aws::SecurityAgent
     #   resp = client.stop_pentest_job({
     #     agent_space_id: "String", # required
     #     pentest_job_id: "String", # required
+    #     pause: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/StopPentestJob AWS API Documentation
@@ -6982,7 +7097,7 @@ module Aws::SecurityAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityagent'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

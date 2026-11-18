@@ -54,7 +54,7 @@ module Aws::DynamoDBStreams
   autoload :EndpointProvider, 'aws-sdk-dynamodbstreams/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-dynamodbstreams/endpoints'
 
-  GEM_VERSION = '1.108.0'
+  GEM_VERSION = '1.109.0'
 
 end
 

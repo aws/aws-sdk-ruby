@@ -102,6 +102,18 @@ module Aws::IAM
       data[:max_session_duration]
     end
 
+    # The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    # session for users who sign in with this role. This value is
+    # independent of `MaxSessionDuration`.
+    #
+    # This member is omitted when the setting is unset. In that case, no
+    # default value is returned and the existing sign-in session behavior
+    # applies.
+    # @return [Integer]
+    def max_signin_session_duration
+      data[:max_signin_session_duration]
+    end
+
     # The ARN of the policy used to set the permissions boundary for the
     # role.
     #

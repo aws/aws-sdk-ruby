@@ -30,7 +30,7 @@ module Aws::SESV2
     #
     # @!attribute [rw] contact_language
     #   The language you would prefer for the case. The contact language can
-    #   be one of `ENGLISH` or `JAPANESE`.
+    #   be one of `EN` or `JA`.
     #   @return [String]
     #
     # @!attribute [rw] use_case_description
@@ -426,9 +426,9 @@ module Aws::SESV2
     #
     # @!attribute [rw] replacement_tags
     #   A list of tags, in the form of name/value pairs, to apply to an
-    #   email that you send using the `SendBulkTemplatedEmail` operation.
-    #   Tags correspond to characteristics of the email that you define, so
-    #   that you can publish email sending events.
+    #   email that you send using the `SendBulkEmail` operation. Tags
+    #   correspond to characteristics of the email that you define, so that
+    #   you can publish email sending events.
     #   @return [Array<Types::MessageTag>]
     #
     # @!attribute [rw] replacement_email_content
@@ -473,71 +473,70 @@ module Aws::SESV2
     # `BulkEmailEntry`.
     #
     # @!attribute [rw] status
-    #   The status of a message sent using the `SendBulkTemplatedEmail`
-    #   operation.
+    #   The status of a message sent using the `SendBulkEmail` operation.
     #
     #   Possible values for this parameter include:
     #
-    #   * SUCCESS: Amazon SES accepted the message, and will attempt to
+    #   * `SUCCESS` – Amazon SES accepted the message, and will attempt to
     #     deliver it to the recipients.
     #
-    #   * MESSAGE\_REJECTED: The message was rejected because it contained a
-    #     virus.
+    #   * `MESSAGE_REJECTED` – The message was rejected because it contained
+    #     a virus.
     #
-    #   * MAIL\_FROM\_DOMAIN\_NOT\_VERIFIED: The sender's email address or
+    #   * `MAIL_FROM_DOMAIN_NOT_VERIFIED` – The sender's email address or
     #     domain was not verified.
     #
-    #   * CONFIGURATION\_SET\_DOES\_NOT\_EXIST: The configuration set you
+    #   * `CONFIGURATION_SET_NOT_FOUND` – The configuration set you
     #     specified does not exist.
     #
-    #   * TEMPLATE\_DOES\_NOT\_EXIST: The template you specified does not
-    #     exist.
+    #   * `TEMPLATE_NOT_FOUND` – The template you specified does not exist.
     #
-    #   * ACCOUNT\_SUSPENDED: Your account has been shut down because of
+    #   * `ACCOUNT_SUSPENDED` – Your account has been shut down because of
     #     issues related to your email sending practices.
     #
-    #   * ACCOUNT\_THROTTLED: The number of emails you can send has been
+    #   * `ACCOUNT_THROTTLED` – The number of emails you can send has been
     #     reduced because your account has exceeded its allocated sending
     #     limit.
     #
-    #   * ACCOUNT\_DAILY\_QUOTA\_EXCEEDED: You have reached or exceeded the
+    #   * `ACCOUNT_DAILY_QUOTA_EXCEEDED` – You have reached or exceeded the
     #     maximum number of emails you can send from your account in a
     #     24-hour period.
     #
-    #   * INVALID\_SENDING\_POOL\_NAME: The configuration set you specified
+    #   * `INVALID_SENDING_POOL_NAME` – The configuration set you specified
     #     refers to an IP pool that does not exist.
     #
-    #   * ACCOUNT\_SENDING\_PAUSED: Email sending for the Amazon SES account
-    #     was disabled using the [UpdateAccountSendingEnabled][1] operation.
+    #   * `ACCOUNT_SENDING_PAUSED` – Email sending for the Amazon SES
+    #     account was disabled using the [PutAccountSendingAttributes][1]
+    #     operation.
     #
-    #   * CONFIGURATION\_SET\_SENDING\_PAUSED: Email sending for this
+    #   * `CONFIGURATION_SET_SENDING_PAUSED` – Email sending for this
     #     configuration set was disabled using the
-    #     [UpdateConfigurationSetSendingEnabled][2] operation.
+    #     [PutConfigurationSetSendingOptions][2] operation.
     #
-    #   * INVALID\_PARAMETER\_VALUE: One or more of the parameters you
-    #     specified when calling this operation was invalid. See the error
-    #     message for additional information.
+    #   * `INVALID_PARAMETER` – One or more of the parameters you specified
+    #     when calling this operation was invalid. See the error message for
+    #     additional information.
     #
-    #   * TRANSIENT\_FAILURE: Amazon SES was unable to process your request
-    #     because of a temporary issue.
+    #   * `TRANSIENT_FAILURE` – Amazon SES was unable to process your
+    #     request because of a temporary issue.
     #
-    #   * FAILED: Amazon SES was unable to process your request. See the
+    #   * `FAILED` – Amazon SES was unable to process your request. See the
     #     error message for additional information.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ses/latest/APIReference/API_UpdateAccountSendingEnabled.html
-    #   [2]: https://docs.aws.amazon.com/ses/latest/APIReference/API_UpdateConfigurationSetSendingEnabled.html
+    #   [1]: https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_PutAccountSendingAttributes.html
+    #   [2]: https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_PutConfigurationSetSendingOptions.html
     #   @return [String]
     #
     # @!attribute [rw] error
     #   A description of an error that prevented a message being sent using
-    #   the `SendBulkTemplatedEmail` operation.
+    #   the `SendBulkEmail` operation.
     #   @return [String]
     #
     # @!attribute [rw] message_id
-    #   The unique message identifier returned from the
-    #   `SendBulkTemplatedEmail` operation.
+    #   The unique message identifier returned from the `SendBulkEmail`
+    #   operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/BulkEmailEntryResult AWS API Documentation
@@ -605,9 +604,9 @@ module Aws::SESV2
     #   The location where the Amazon SES API v2 finds the value of a
     #   dimension to publish to Amazon CloudWatch. To use the message tags
     #   that you specify using an `X-SES-MESSAGE-TAGS` header or a parameter
-    #   to the `SendEmail` or `SendRawEmail` API, choose `messageTag`. To
-    #   use your own email headers, choose `emailHeader`. To use link tags,
-    #   choose `linkTags`.
+    #   to the `SendEmail` or `SendBulkEmail` operation, choose
+    #   `MESSAGE_TAG`. To use your own email headers, choose `EMAIL_HEADER`.
+    #   To use link tags, choose `LINK_TAG`.
     #   @return [String]
     #
     # @!attribute [rw] default_dimension_value
@@ -1124,9 +1123,10 @@ module Aws::SESV2
     #   The status of the predictive inbox placement test. If the status is
     #   `IN_PROGRESS`, then the predictive inbox placement test is currently
     #   running. Predictive inbox placement tests are usually complete
-    #   within 24 hours of creating the test. If the status is `COMPLETE`,
+    #   within 24 hours of creating the test. If the status is `COMPLETED`,
     #   then the test is finished, and you can use the
-    #   `GetDeliverabilityTestReport` to view the results of the test.
+    #   `GetDeliverabilityTestReport` operation to view the results of the
+    #   test.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateDeliverabilityTestReportResponse AWS API Documentation
@@ -2113,9 +2113,10 @@ module Aws::SESV2
     #   The status of the predictive inbox placement test. If the status is
     #   `IN_PROGRESS`, then the predictive inbox placement test is currently
     #   running. Predictive inbox placement tests are usually complete
-    #   within 24 hours of creating the test. If the status is `COMPLETE`,
+    #   within 24 hours of creating the test. If the status is `COMPLETED`,
     #   then the test is finished, and you can use the
-    #   `GetDeliverabilityTestReport` to view the results of the test.
+    #   `GetDeliverabilityTestReport` operation to view the results of the
+    #   test.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeliverabilityTestReport AWS API Documentation
@@ -2131,13 +2132,41 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # The delivery attributes that apply to your Amazon SES account in the
+    # current Amazon Web Services Region.
+    #
+    # @!attribute [rw] shared_pool_delivery_mode
+    #   The shared pool delivery mode for your Amazon SES account in the
+    #   current Amazon Web Services Region. This mode applies to email that
+    #   you send from shared IP addresses. Can be one of the following:
+    #
+    #   * `GLOBAL` – Amazon SES delivers from your sending Region first and,
+    #     when it improves your deliverability, also uses Amazon SES shared
+    #     IP addresses with established sending history in other Amazon Web
+    #     Services Regions within the same Amazon Web Services partition.
+    #
+    #   * `REGIONAL` – Amazon SES delivers your email only from shared IP
+    #     addresses in your sending Region.
+    #
+    #   Accounts that start sending in a Region on or after the launch of
+    #   Global Shared Delivery use `GLOBAL` in that Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeliveryAttributes AWS API Documentation
+    #
+    class DeliveryAttributes < Struct.new(
+      :shared_pool_delivery_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Used to associate a configuration set with a dedicated IP pool.
     #
     # @!attribute [rw] tls_policy
     #   Specifies whether messages that use the configuration set are
     #   required to use Transport Layer Security (TLS). If the value is
-    #   `Require`, messages are only delivered if a TLS connection can be
-    #   established. If the value is `Optional`, messages can be delivered
+    #   `REQUIRE`, messages are only delivered if a TLS connection can be
+    #   established. If the value is `OPTIONAL`, messages can be delivered
     #   in plain text if a TLS connection can't be established.
     #   @return [String]
     #
@@ -2153,12 +2182,34 @@ module Aws::SESV2
     #   seconds (840 minutes).
     #   @return [Integer]
     #
+    # @!attribute [rw] shared_pool_delivery_mode
+    #   The shared pool delivery mode for email that you send with the
+    #   configuration set from shared IP addresses. This setting overrides
+    #   the shared pool delivery mode of your account. Can be one of the
+    #   following:
+    #
+    #   * `GLOBAL` – Amazon SES delivers from your sending Region first and,
+    #     when it improves your deliverability, also uses Amazon SES shared
+    #     IP addresses with established sending history in other Amazon Web
+    #     Services Regions within the same Amazon Web Services partition.
+    #
+    #   * `REGIONAL` – Amazon SES delivers your email only from shared IP
+    #     addresses in your sending Region.
+    #
+    #   * `ACCOUNT` – The configuration set uses the shared pool delivery
+    #     mode of your account.
+    #
+    #   If you don't specify a value, the configuration set uses the shared
+    #   pool delivery mode of your account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeliveryOptions AWS API Documentation
     #
     class DeliveryOptions < Struct.new(
       :tls_policy,
       :sending_pool_name,
-      :max_delivery_seconds)
+      :max_delivery_seconds,
+      :shared_pool_delivery_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3350,6 +3401,11 @@ module Aws::SESV2
     #   change.
     #   @return [Types::PricingAttributes]
     #
+    # @!attribute [rw] delivery_attributes
+    #   The delivery attributes that apply to your Amazon SES account in the
+    #   current Amazon Web Services Region.
+    #   @return [Types::DeliveryAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetAccountResponse AWS API Documentation
     #
     class GetAccountResponse < Struct.new(
@@ -3361,7 +3417,8 @@ module Aws::SESV2
       :suppression_attributes,
       :details,
       :vdm_attributes,
-      :pricing_attributes)
+      :pricing_attributes,
+      :delivery_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4775,9 +4832,11 @@ module Aws::SESV2
     #
     #   * `PROCESSING` – Job is processing.
     #
-    #   * `ERROR` – An error occurred during processing.
-    #
     #   * `COMPLETED` – Job has completed processing successfully.
+    #
+    #   * `FAILED` – An error occurred during processing.
+    #
+    #   * `CANCELLED` – Job has been canceled.
     #   @return [String]
     #
     # @!attribute [rw] created_timestamp
@@ -6106,11 +6165,11 @@ module Aws::SESV2
     #   you send an email. When you set this value to `USE_DEFAULT_VALUE`,
     #   the mail is sent using *amazonses.com* as the MAIL FROM domain. When
     #   you set this value to `REJECT_MESSAGE`, the Amazon SES API v2
-    #   returns a `MailFromDomainNotVerified` error, and doesn't attempt to
-    #   deliver the email.
+    #   returns a `MailFromDomainNotVerifiedException` error, and doesn't
+    #   attempt to deliver the email.
     #
     #   These behaviors are taken when the custom MAIL FROM domain
-    #   configuration is in the `Pending`, `Failed`, and `TemporaryFailure`
+    #   configuration is in the `PENDING`, `FAILED`, and `TEMPORARY_FAILURE`
     #   states.
     #   @return [String]
     #
@@ -6674,6 +6733,38 @@ module Aws::SESV2
     #
     class PutAccountDedicatedIpWarmupAttributesResponse < Aws::EmptyStructure; end
 
+    # A request to set the shared pool delivery mode for your Amazon SES
+    # account.
+    #
+    # @!attribute [rw] shared_pool_delivery_mode
+    #   The shared pool delivery mode for your Amazon SES account in the
+    #   current Amazon Web Services Region. This mode applies to email that
+    #   you send from shared IP addresses. Can be one of the following:
+    #
+    #   * `GLOBAL` – Amazon SES delivers from your sending Region first and,
+    #     when it improves your deliverability, also uses Amazon SES shared
+    #     IP addresses with established sending history in other Amazon Web
+    #     Services Regions within the same Amazon Web Services partition.
+    #
+    #   * `REGIONAL` – Amazon SES delivers your email only from shared IP
+    #     addresses in your sending Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutAccountDeliveryAttributesRequest AWS API Documentation
+    #
+    class PutAccountDeliveryAttributesRequest < Struct.new(
+      :shared_pool_delivery_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error response if
+    # the request fails.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutAccountDeliveryAttributesResponse AWS API Documentation
+    #
+    class PutAccountDeliveryAttributesResponse < Aws::EmptyStructure; end
+
     # A request to submit new account details.
     #
     # @!attribute [rw] mail_type
@@ -6686,7 +6777,8 @@ module Aws::SESV2
     #   @return [String]
     #
     # @!attribute [rw] contact_language
-    #   The language you would prefer to be contacted with.
+    #   The language you would prefer to be contacted with. The contact
+    #   language can be one of `EN` or `JA`.
     #   @return [String]
     #
     # @!attribute [rw] use_case_description
@@ -6890,8 +6982,8 @@ module Aws::SESV2
     # @!attribute [rw] tls_policy
     #   Specifies whether messages that use the configuration set are
     #   required to use Transport Layer Security (TLS). If the value is
-    #   `Require`, messages are only delivered if a TLS connection can be
-    #   established. If the value is `Optional`, messages can be delivered
+    #   `REQUIRE`, messages are only delivered if a TLS connection can be
+    #   established. If the value is `OPTIONAL`, messages can be delivered
     #   in plain text if a TLS connection can't be established.
     #   @return [String]
     #
@@ -6907,13 +6999,34 @@ module Aws::SESV2
     #   seconds (840 minutes).
     #   @return [Integer]
     #
+    # @!attribute [rw] shared_pool_delivery_mode
+    #   The shared pool delivery mode for email that you send with the
+    #   configuration set from shared IP addresses. This setting overrides
+    #   the shared pool delivery mode of your account. Can be one of the
+    #   following:
+    #
+    #   * `GLOBAL` – Amazon SES delivers from your sending Region first and,
+    #     when it improves your deliverability, also uses Amazon SES shared
+    #     IP addresses with established sending history in other Amazon Web
+    #     Services Regions within the same Amazon Web Services partition.
+    #
+    #   * `REGIONAL` – Amazon SES delivers your email only from shared IP
+    #     addresses in your sending Region.
+    #
+    #   * `ACCOUNT` – The configuration set uses the shared pool delivery
+    #     mode of your account.
+    #
+    #   If you don't specify a value, the current value doesn't change.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutConfigurationSetDeliveryOptionsRequest AWS API Documentation
     #
     class PutConfigurationSetDeliveryOptionsRequest < Struct.new(
       :configuration_set_name,
       :tls_policy,
       :sending_pool_name,
-      :max_delivery_seconds)
+      :max_delivery_seconds,
+      :shared_pool_delivery_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7484,14 +7597,14 @@ module Aws::SESV2
     #
     # @!attribute [rw] behavior_on_mx_failure
     #   The action to take if the required MX record isn't found when you
-    #   send an email. When you set this value to `UseDefaultValue`, the
+    #   send an email. When you set this value to `USE_DEFAULT_VALUE`, the
     #   mail is sent using *amazonses.com* as the MAIL FROM domain. When you
-    #   set this value to `RejectMessage`, the Amazon SES API v2 returns a
-    #   `MailFromDomainNotVerified` error, and doesn't attempt to deliver
-    #   the email.
+    #   set this value to `REJECT_MESSAGE`, the Amazon SES API v2 returns a
+    #   `MailFromDomainNotVerifiedException` error, and doesn't attempt to
+    #   deliver the email.
     #
     #   These behaviors are taken when the custom MAIL FROM domain
-    #   configuration is in the `Pending`, `Failed`, and `TemporaryFailure`
+    #   configuration is in the `PENDING`, `FAILED`, and `TEMPORARY_FAILURE`
     #   states.
     #   @return [String]
     #
@@ -7684,7 +7797,7 @@ module Aws::SESV2
       include Aws::Structure
     end
 
-    # The `ReplaceEmailContent` object to be used for a specific
+    # The `ReplacementEmailContent` object to be used for a specific
     # `BulkEmailEntry`. The `ReplacementTemplate` can be specified within
     # this object.
     #
@@ -7994,9 +8107,9 @@ module Aws::SESV2
     #
     # @!attribute [rw] default_email_tags
     #   A list of tags, in the form of name/value pairs, to apply to an
-    #   email that you send using the `SendEmail` operation. Tags correspond
-    #   to characteristics of the email that you define, so that you can
-    #   publish email sending events.
+    #   email that you send using the `SendBulkEmail` operation. Tags
+    #   correspond to characteristics of the email that you define, so that
+    #   you can publish email sending events.
     #   @return [Array<Types::MessageTag>]
     #
     # @!attribute [rw] default_content

@@ -44,7 +44,6 @@ module Aws::Health
       attr_accessor status_code: ("IMPAIRED" | "UNIMPAIRED" | "UNKNOWN" | "PENDING" | "RESOLVED")
       attr_accessor resource_tags: ::Hash[::String, ::String]
       attr_accessor account_tags: ::Hash[::String, ::String]
-      attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor entity_metadata: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -60,17 +59,23 @@ module Aws::Health
     end
 
     class ConfigureTagsForOrganizationResponse
-      attr_accessor configured_tag_keys: ::Array[Types::TagKeyForOrganization]
+      attr_accessor configured_tag_keys: ::Array[Types::OrganizationTagKey]
       SENSITIVE: []
     end
 
     class ConfigureTagsRequest
-      attr_accessor tag_keys: ::Array[Types::ResourceTagKey]
+      attr_accessor tag_keys: ::Array[Types::ConfigureTagsTagKey]
       SENSITIVE: []
     end
 
     class ConfigureTagsResponse
       attr_accessor configured_tag_keys: ::Array[Types::ResourceTagKey]
+      SENSITIVE: []
+    end
+
+    class ConfigureTagsTagKey
+      attr_accessor key: ::String
+      attr_accessor enabled_for_event_bridge: bool
       SENSITIVE: []
     end
 

@@ -1087,12 +1087,25 @@ module Aws::IAM
     #   sign-in.
     #   @return [Boolean]
     #
+    # @!attribute [rw] max_signin_session_duration
+    #   The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    #   session for this IAM user. This setting can have a value from 1 hour
+    #   (3600 seconds) to 90 days (7776000 seconds), inclusive. If you do
+    #   not specify a value, the setting remains unset and the existing
+    #   sign-in session behavior applies.
+    #
+    #   <note markdown="1"> This setting is not supported for the root user.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateLoginProfileRequest AWS API Documentation
     #
     class CreateLoginProfileRequest < Struct.new(
       :user_name,
       :password,
-      :password_reset_required)
+      :password_reset_required,
+      :max_signin_session_duration)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -1559,6 +1572,16 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     #   @return [Integer]
     #
+    # @!attribute [rw] max_signin_session_duration
+    #   The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    #   session for users who sign in with this role. This setting can have
+    #   a value from 1 hour (3600 seconds) to 90 days (7776000 seconds),
+    #   inclusive. If you do not specify a value, the setting remains unset
+    #   and the existing sign-in session behavior applies.
+    #
+    #   This setting is independent of `MaxSessionDuration`.
+    #   @return [Integer]
+    #
     # @!attribute [rw] permissions_boundary
     #   The ARN of the managed policy that is used to set the permissions
     #   boundary for the role.
@@ -1604,6 +1627,7 @@ module Aws::IAM
       :assume_role_policy_document,
       :description,
       :max_session_duration,
+      :max_signin_session_duration,
       :permissions_boundary,
       :tags)
       SENSITIVE = []
@@ -8770,12 +8794,22 @@ module Aws::IAM
     #   sign-in.
     #   @return [Boolean]
     #
+    # @!attribute [rw] max_signin_session_duration
+    #   The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    #   session for the user.
+    #
+    #   This member is omitted when the setting is unset. In that case, no
+    #   default value is returned and the existing sign-in session behavior
+    #   applies.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/LoginProfile AWS API Documentation
     #
     class LoginProfile < Struct.new(
       :user_name,
       :create_date,
-      :password_reset_required)
+      :password_reset_required,
+      :max_signin_session_duration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10500,6 +10534,16 @@ module Aws::IAM
     #   `duration-seconds` CLI parameter.
     #   @return [Integer]
     #
+    # @!attribute [rw] max_signin_session_duration
+    #   The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    #   session for users who sign in with this role. This value is
+    #   independent of `MaxSessionDuration`.
+    #
+    #   This member is omitted when the setting is unset. In that case, no
+    #   default value is returned and the existing sign-in session behavior
+    #   applies.
+    #   @return [Integer]
+    #
     # @!attribute [rw] permissions_boundary
     #   The ARN of the policy used to set the permissions boundary for the
     #   role.
@@ -10557,6 +10601,7 @@ module Aws::IAM
       :assume_role_policy_document,
       :description,
       :max_session_duration,
+      :max_signin_session_duration,
       :permissions_boundary,
       :tags,
       :role_last_used,
@@ -13224,12 +13269,47 @@ module Aws::IAM
     #   specified IAM user to set a new password on next sign-in.
     #   @return [Boolean]
     #
+    # @!attribute [rw] max_signin_session_duration
+    #   The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    #   session for the specified IAM user. This setting can have a value
+    #   from 1 hour (3600 seconds) to 90 days (7776000 seconds), inclusive,
+    #   and replaces any value currently configured for the user.
+    #
+    #   If you omit both this parameter and `ResetMaxSigninSessionDuration`,
+    #   the current setting is unchanged. You cannot specify this parameter
+    #   and set `ResetMaxSigninSessionDuration` to `true` in the same
+    #   request. If you update only the sign-in session duration, the
+    #   user's password and `PasswordResetRequired` setting do not change.
+    #
+    #   Changes to this setting apply to new sign-in sessions. Sessions that
+    #   are already established are not affected.
+    #
+    #   <note markdown="1"> This setting is not supported for the root user.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] reset_max_signin_session_duration
+    #   Specifies whether to clear the maximum sign-in session duration for
+    #   the specified IAM user. Set this value to `true` to return the
+    #   setting to its unset state, so that the existing sign-in session
+    #   behavior applies. When the setting is unset, the user's
+    #   `MaxSigninSessionDuration` is omitted from responses.
+    #
+    #   If you set this value to `false` or omit it, the current setting is
+    #   not cleared. You cannot set this value to `true` and specify
+    #   `MaxSigninSessionDuration` in the same request. Clearing a setting
+    #   that is already unset has no effect.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateLoginProfileRequest AWS API Documentation
     #
     class UpdateLoginProfileRequest < Struct.new(
       :user_name,
       :password,
-      :password_reset_required)
+      :password_reset_required,
+      :max_signin_session_duration,
+      :reset_max_signin_session_duration)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -13333,12 +13413,51 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     #   @return [Integer]
     #
+    # @!attribute [rw] max_signin_session_duration
+    #   The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    #   session for users who sign in with the specified role. This setting
+    #   can have a value from 1 hour (3600 seconds) to 90 days (7776000
+    #   seconds), inclusive, and replaces any value currently configured for
+    #   the role. This setting is independent of `MaxSessionDuration`.
+    #
+    #   If you omit both this parameter and `ResetMaxSigninSessionDuration`,
+    #   the current setting is unchanged. You cannot specify this parameter
+    #   and set `ResetMaxSigninSessionDuration` to `true` in the same
+    #   request.
+    #
+    #   Changes to this setting apply to new sign-in sessions. Sessions that
+    #   are already established are not affected.
+    #
+    #   <note markdown="1"> You cannot set this value on a service-linked role.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] reset_max_signin_session_duration
+    #   Specifies whether to clear the role's maximum sign-in session
+    #   duration. Set this value to `true` to return the setting to its
+    #   unset state, so that the existing sign-in session behavior applies.
+    #   When the setting is unset, the role's `MaxSigninSessionDuration` is
+    #   omitted from responses.
+    #
+    #   If you set this value to `false` or omit it, the current setting is
+    #   not cleared. You cannot set this value to `true` and specify
+    #   `MaxSigninSessionDuration` in the same request. Clearing a setting
+    #   that is already unset has no effect.
+    #
+    #   <note markdown="1"> You cannot reset this value on a service-linked role.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRoleRequest AWS API Documentation
     #
     class UpdateRoleRequest < Struct.new(
       :role_name,
       :description,
-      :max_session_duration)
+      :max_session_duration,
+      :max_signin_session_duration,
+      :reset_max_signin_session_duration)
       SENSITIVE = []
       include Aws::Structure
     end

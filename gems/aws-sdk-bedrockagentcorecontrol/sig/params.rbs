@@ -175,6 +175,22 @@ module Aws
       capacity_provider_volume: {
         volume_name: ::String,
         mount_path: ::String
+      }?,
+      s3_bucket_mount: {
+        bucket: ::String,
+        mount_path: ::String,
+        prefix: ::String?,
+        s3_bucket_owner: ::String?,
+        s3_bucket_region: ::String?
+      }?
+    }
+
+      type capacity_provider_configuration = {
+      capacity_provider_arn: ::String,
+      operating_system_configuration: {
+        linux: {
+          privilege_mode: ("STANDARD" | "PRIVILEGED")?
+        }?
       }?
     }
 

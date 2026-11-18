@@ -4234,7 +4234,7 @@ module Aws::ConnectCases
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

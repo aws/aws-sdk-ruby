@@ -55,6 +55,74 @@ module Aws::Signin
       include Aws::Structure
     end
 
+    # A session that could not be revoked
+    #
+    # @!attribute [rw] session_arn
+    #   The session ARN
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The error code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/BatchRevokeSessionError AWS API Documentation
+    #
+    class BatchRevokeSessionError < Struct.new(
+      :session_arn,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input for BatchRevokeSessions operation
+    #
+    # @!attribute [rw] principal_arn
+    #   The identity that owns the sessions. Omit to use the caller. Specify
+    #   arn:aws:iam::\{account-id}:* to revoke any session in the account.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_arns
+    #   The ARNs of the sessions to revoke
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] reason
+    #   The reason for revoking the sessions
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/BatchRevokeSessionsInput AWS API Documentation
+    #
+    class BatchRevokeSessionsInput < Struct.new(
+      :principal_arn,
+      :session_arns,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output for BatchRevokeSessions operation
+    #
+    # @!attribute [rw] revoked_sessions
+    #   Sessions that were revoked
+    #   @return [Array<Types::RevokedSession>]
+    #
+    # @!attribute [rw] errors
+    #   Sessions that could not be revoked
+    #   @return [Array<Types::BatchRevokeSessionError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/BatchRevokeSessionsOutput AWS API Documentation
+    #
+    class BatchRevokeSessionsOutput < Struct.new(
+      :revoked_sessions,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Error thrown when request conflicts with current state
     #
     # HTTP Status Code: 409 Conflict
@@ -292,7 +360,7 @@ module Aws::Signin
     # RFC 6749 §5.1.
     #
     # @!attribute [rw] access_token
-    #   Access token containing principal identity, resource scope, and
+    #   The access token containing principal identity, resource scope, and
     #   session metadata.
     #   @return [String]
     #
@@ -301,7 +369,7 @@ module Aws::Signin
     #   @return [String]
     #
     # @!attribute [rw] expires_in
-    #   Token lifetime in seconds. Value is the minimum of the caller's
+    #   The token lifetime in seconds. Value is the minimum of the caller's
     #   session validity and 1 hour (3600 seconds).
     #   @return [Integer]
     #
@@ -318,8 +386,9 @@ module Aws::Signin
     # Input structure for CreateOAuth2TokenWithTokenExchange operation
     #
     # @!attribute [rw] grant_type
-    #   The OAuth 2.0 grant type. Currently only supports
-    #   "urn:ietf:params:oauth:grant-type:token-exchange".
+    #   The OAuth 2.0 grant type. Currently supports
+    #   "urn:ietf:params:oauth:grant-type:token-exchange" and
+    #   "urn:ietf:params:oauth:grant-type:jwt-bearer".
     #   @return [String]
     #
     # @!attribute [rw] subject_token
@@ -334,17 +403,38 @@ module Aws::Signin
     #   "grant\_type=urn:ietf:params:oauth:grant-type:token-exchange".
     #   @return [String]
     #
+    # @!attribute [rw] assertion
+    #   The JWT authorization grant, as defined in RFC 7523. Required when
+    #   "grant\_type=urn:ietf:params:oauth:grant-type:jwt-bearer".
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The OAuth 2.0 client identifier. If provided with
+    #   "grant\_type=urn:ietf:params:oauth:grant-type:jwt-bearer", must
+    #   match the assertion's "client\_id" claim.
+    #   @return [String]
+    #
     # @!attribute [rw] resource
-    #   The OAuth resource for which the access token is requested. Required
-    #   when "grant\_type=urn:ietf:params:oauth:grant-type:token-exchange".
-    #   Example: "glue.amazonaws.com".
+    #   The OAuth resource for which the access token is requested:
+    #
+    #   * "grant\_type=urn:ietf:params:oauth:grant-type:token-exchange":
+    #     Required. Must be a service principal. Example:
+    #     "glue.amazonaws.com".
+    #   * "grant\_type=urn:ietf:params:oauth:grant-type:jwt-bearer":
+    #     Required when the assertion has no "resource" claim, otherwise
+    #     must match it. Must be a URI. Example:
+    #     "https://aws-mcp.us-east-1.api.aws/mcp".
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   IAM managed policy Amazon Resource Names (ARNs) to apply as session
-    #   policies that further scope down the permissions of the issued
-    #   access token, provided as a space-delimited list. Example:
+    #   The IAM managed policy Amazon Resource Names (ARNs) to apply as
+    #   session policies that further scope down the permissions of the
+    #   issued access token, provided as a space-delimited list. Example:
     #   "arn:aws:iam::444455556666:policy/MyPolicy".
+    #
+    #   If provided with
+    #   "grant\_type=urn:ietf:params:oauth:grant-type:jwt-bearer", must
+    #   match the assertion's "scope" claim.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/CreateOAuth2TokenWithTokenExchangeRequest AWS API Documentation
@@ -353,26 +443,29 @@ module Aws::Signin
       :grant_type,
       :subject_token,
       :subject_token_type,
+      :assertion,
+      :client_id,
       :resource,
       :scope)
-      SENSITIVE = [:subject_token]
+      SENSITIVE = [:subject_token, :assertion]
       include Aws::Structure
     end
 
     # Output structure for CreateOAuth2TokenWithTokenExchange operation.
     #
-    # Contains the access token, issued token type, token type, and
-    # expiration as defined in RFC 6749 §5.1 and RFC 8693 §2.2.1.
+    # Contains the access token, token type, and expiration as defined in
+    # RFC 6749 §5.1, plus fields specific to the grant type.
     #
     # @!attribute [rw] access_token
-    #   Access token containing principal identity, resource scope, and
+    #   The access token containing principal identity, resource scope, and
     #   session metadata.
     #   @return [String]
     #
     # @!attribute [rw] issued_token_type
-    #   The token type of the issued token. Always
-    #   "urn:ietf:params:oauth:token-type:access\_token" as defined in RFC
-    #   8693 §2.2.1.
+    #   The token type of the issued token. Returned when
+    #   "grant\_type=urn:ietf:params:oauth:grant-type:token-exchange". Value
+    #   is "urn:ietf:params:oauth:token-type:access\_token" as defined in
+    #   RFC 8693 §2.2.1.
     #   @return [String]
     #
     # @!attribute [rw] token_type
@@ -381,9 +474,21 @@ module Aws::Signin
     #   @return [String]
     #
     # @!attribute [rw] expires_in
-    #   Token lifetime in seconds. Value is the minimum of the subject
+    #   The token lifetime in seconds. Value is the minimum of the provided
     #   token's validity and 1 hour (3600 seconds).
     #   @return [Integer]
+    #
+    # @!attribute [rw] resource
+    #   The resource the access token is scoped to. Returned when
+    #   "grant\_type=urn:ietf:params:oauth:grant-type:jwt-bearer".
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   The IAM managed policy ARNs applied as session policies, as a
+    #   space-delimited list. Returned when
+    #   "grant\_type=urn:ietf:params:oauth:grant-type:jwt-bearer" and the
+    #   assertion has a scope.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/CreateOAuth2TokenWithTokenExchangeResponse AWS API Documentation
     #
@@ -391,7 +496,9 @@ module Aws::Signin
       :access_token,
       :issued_token_type,
       :token_type,
-      :expires_in)
+      :expires_in,
+      :resource,
+      :scope)
       SENSITIVE = [:access_token]
       include Aws::Structure
     end
@@ -518,6 +625,102 @@ module Aws::Signin
     #
     class GetResourcePolicyOutput < Struct.new(
       :signin_resource_based_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input for GetSession operation
+    #
+    # @!attribute [rw] session_arn
+    #   The ARN of the session to retrieve
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_arn
+    #   The identity that owns the session. Omit to use the caller. Specify
+    #   arn:aws:iam::\{account-id}:* to retrieve any session in the
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/GetSessionInput AWS API Documentation
+    #
+    class GetSessionInput < Struct.new(
+      :session_arn,
+      :principal_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output for GetSession operation
+    #
+    # @!attribute [rw] session_arn
+    #   The session ARN
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_arn
+    #   The IAM identity that owns the session
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The IAM role for the session, when the owner is a role
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The session status
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The OAuth client that created the session
+    #   @return [String]
+    #
+    # @!attribute [rw] client_type
+    #   The type of OAuth client that created the session
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The resource that the session's tokens are bound to
+    #   @return [String]
+    #
+    # @!attribute [rw] issued_at
+    #   The time the session was created, in Unix epoch seconds
+    #   @return [Integer]
+    #
+    # @!attribute [rw] expires_at
+    #   The time the session expires, in Unix epoch seconds
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_used_at
+    #   The time the session was last refreshed, in Unix epoch seconds
+    #   @return [Integer]
+    #
+    # @!attribute [rw] issued_in_region
+    #   The AWS Region where the session was created
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_session_arn
+    #   The ARN of the session this session originated from
+    #   @return [String]
+    #
+    # @!attribute [rw] user_agent
+    #   The user agent captured when the session was created or last
+    #   refreshed
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/GetSessionOutput AWS API Documentation
+    #
+    class GetSessionOutput < Struct.new(
+      :session_arn,
+      :principal_arn,
+      :role,
+      :status,
+      :client_id,
+      :client_type,
+      :resource,
+      :issued_at,
+      :expires_at,
+      :last_used_at,
+      :issued_in_region,
+      :origin_session_arn,
+      :user_agent)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -726,6 +929,73 @@ module Aws::Signin
     #
     class ListResourcePermissionStatementsOutput < Struct.new(
       :permission_statements,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input for ListSessions operation
+    #
+    # @!attribute [rw] principal_arn
+    #   The identity whose sessions to list. Omit to list the caller's own
+    #   sessions. Specify arn:aws:iam::\{account-id}:* to list all sessions
+    #   in the account.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Token for pagination
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Returns only sessions with this status
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   Returns only sessions created by this OAuth client
+    #   @return [String]
+    #
+    # @!attribute [rw] issued_after
+    #   Returns only sessions created at or after this time, in Unix epoch
+    #   seconds
+    #   @return [Integer]
+    #
+    # @!attribute [rw] issued_before
+    #   Returns only sessions created before this time, in Unix epoch
+    #   seconds
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/ListSessionsInput AWS API Documentation
+    #
+    class ListSessionsInput < Struct.new(
+      :principal_arn,
+      :max_results,
+      :next_token,
+      :status,
+      :client_id,
+      :issued_after,
+      :issued_before)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output for ListSessions operation
+    #
+    # @!attribute [rw] items
+    #   List of session summaries
+    #   @return [Array<Types::Session>]
+    #
+    # @!attribute [rw] next_token
+    #   Token for next page of results
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/ListSessionsOutput AWS API Documentation
+    #
+    class ListSessionsOutput < Struct.new(
+      :items,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -941,6 +1211,20 @@ module Aws::Signin
     #
     class RevokeOAuth2TokenWithIAMResponse < Aws::EmptyStructure; end
 
+    # A session that was revoked
+    #
+    # @!attribute [rw] session_arn
+    #   The revoked session ARN
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/RevokedSession AWS API Documentation
+    #
+    class RevokedSession < Struct.new(
+      :session_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Error thrown when service quota is exceeded
     #
     # HTTP Status Code: 402 Payment Required (used as quota exceeded
@@ -982,6 +1266,60 @@ module Aws::Signin
     class ServiceUnavailableException < Struct.new(
       :error,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of a sign-in session
+    #
+    # @!attribute [rw] session_arn
+    #   The session ARN
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_arn
+    #   The IAM identity that owns the session
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The IAM role for the session, when the owner is a role
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The session status
+    #   @return [String]
+    #
+    # @!attribute [rw] issued_at
+    #   The time the session was created, in Unix epoch seconds
+    #   @return [Integer]
+    #
+    # @!attribute [rw] expires_at
+    #   The time the session expires, in Unix epoch seconds
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_id
+    #   The OAuth client that created the session
+    #   @return [String]
+    #
+    # @!attribute [rw] client_type
+    #   The type of OAuth client that created the session
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The resource that the session's tokens are bound to
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/Session AWS API Documentation
+    #
+    class Session < Struct.new(
+      :session_arn,
+      :principal_arn,
+      :role,
+      :status,
+      :issued_at,
+      :expires_at,
+      :client_id,
+      :client_type,
+      :resource)
       SENSITIVE = []
       include Aws::Structure
     end

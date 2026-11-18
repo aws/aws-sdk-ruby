@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.173.0 (2026-11-18)
+------------------
+
+* Feature - AWS CloudFormation StackSets now provides stage-by-stage progress for deployments that span thousands of accounts and AWS Regions, which enables you to see where each deployment stands while it runs
+
 1.172.0 (2026-11-16)
 ------------------
 

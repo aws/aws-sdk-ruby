@@ -1,0 +1,128 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AbuseSignal
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAbuseReportRequest
+      attr_accessor report: Types::ReportData
+      attr_accessor correlation_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: [:report]
+    end
+
+    class CreateAbuseReportResponse
+      attr_accessor report_id: ::String
+      attr_accessor correlation_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAbuseReportStatusRequest
+      attr_accessor report_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAbuseReportStatusResponse
+      attr_accessor report_id: ::String
+      attr_accessor correlation_id: ::String
+      attr_accessor status: ("QUEUED" | "PROCESSING" | "COMPLETED")
+      attr_accessor description: ::String
+      attr_accessor reason_code: ("ACTIONED" | "NOT_RESOLVABLE_TO_AWS" | "REVIEWED_NO_AWS_ACTION" | "CONTENT_DOWN_OR_INACCESSIBLE" | "NEED_MORE_INFORMATION")
+      attr_accessor submitted_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAbuseReportStatusesRequest
+      attr_accessor correlation_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAbuseReportStatusesResponse
+      attr_accessor reports: ::Array[Types::ReportStatusListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ReportData
+      attr_accessor xarf: untyped
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Xarf < ReportData
+      end
+      class Unknown < ReportData
+      end
+    end
+
+    class ReportStatusListItem
+      attr_accessor report_id: ::String
+      attr_accessor correlation_id: ::String
+      attr_accessor status: ("QUEUED" | "PROCESSING" | "COMPLETED")
+      attr_accessor description: ::String
+      attr_accessor reason_code: ("ACTIONED" | "NOT_RESOLVABLE_TO_AWS" | "REVIEWED_NO_AWS_ACTION" | "CONTENT_DOWN_OR_INACCESSIBLE" | "NEED_MORE_INFORMATION")
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class SubmissionRequirement
+      attr_accessor code: ::String
+      attr_accessor path: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SubmissionRequirementException
+      attr_accessor message: ::String
+      attr_accessor unmet_requirements: ::Array[Types::SubmissionRequirement]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor path: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -830,6 +830,7 @@ module Aws::BedrockAgentCoreControl
     LimitEntryDimensionsMap = Shapes::MapShape.new(name: 'LimitEntryDimensionsMap')
     LinkedinOauth2ProviderConfigInput = Shapes::StructureShape.new(name: 'LinkedinOauth2ProviderConfigInput')
     LinkedinOauth2ProviderConfigOutput = Shapes::StructureShape.new(name: 'LinkedinOauth2ProviderConfigOutput')
+    LinuxOperatingSystemConfiguration = Shapes::StructureShape.new(name: 'LinuxOperatingSystemConfiguration')
     ListAgentInsightStoresRequest = Shapes::StructureShape.new(name: 'ListAgentInsightStoresRequest')
     ListAgentInsightStoresRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAgentInsightStoresRequestMaxResultsInteger')
     ListAgentInsightStoresRequestNextTokenString = Shapes::StringShape.new(name: 'ListAgentInsightStoresRequestNextTokenString')
@@ -1067,6 +1068,7 @@ module Aws::BedrockAgentCoreControl
     OpenResponsesEvaluatorModelConfigTemperatureFloat = Shapes::FloatShape.new(name: 'OpenResponsesEvaluatorModelConfigTemperatureFloat')
     OpenResponsesEvaluatorModelConfigTopPFloat = Shapes::FloatShape.new(name: 'OpenResponsesEvaluatorModelConfigTopPFloat')
     OperatingSystem = Shapes::StringShape.new(name: 'OperatingSystem')
+    OperatingSystemConfiguration = Shapes::UnionShape.new(name: 'OperatingSystemConfiguration')
     OptionalLogGroupName = Shapes::StringShape.new(name: 'OptionalLogGroupName')
     OutputConfig = Shapes::StructureShape.new(name: 'OutputConfig')
     OverrideType = Shapes::StringShape.new(name: 'OverrideType')
@@ -1139,6 +1141,7 @@ module Aws::BedrockAgentCoreControl
     PrivateEndpointOverrides = Shapes::ListShape.new(name: 'PrivateEndpointOverrides')
     PrivateKeyJwtConfig = Shapes::StructureShape.new(name: 'PrivateKeyJwtConfig')
     PrivateKeySource = Shapes::UnionShape.new(name: 'PrivateKeySource')
+    PrivilegeMode = Shapes::StringShape.new(name: 'PrivilegeMode')
     Prompt = Shapes::StringShape.new(name: 'Prompt')
     ProtocolConfiguration = Shapes::StructureShape.new(name: 'ProtocolConfiguration')
     Provider = Shapes::StringShape.new(name: 'Provider')
@@ -1222,6 +1225,11 @@ module Aws::BedrockAgentCoreControl
     RuntimeMetadataConfiguration = Shapes::StructureShape.new(name: 'RuntimeMetadataConfiguration')
     RuntimeQualifier = Shapes::StringShape.new(name: 'RuntimeQualifier')
     RuntimeTargetConfiguration = Shapes::StructureShape.new(name: 'RuntimeTargetConfiguration')
+    S3BucketMountConfiguration = Shapes::StructureShape.new(name: 'S3BucketMountConfiguration')
+    S3BucketMountConfigurationBucketString = Shapes::StringShape.new(name: 'S3BucketMountConfigurationBucketString')
+    S3BucketMountConfigurationPrefixString = Shapes::StringShape.new(name: 'S3BucketMountConfigurationPrefixString')
+    S3BucketMountConfigurationS3BucketOwnerString = Shapes::StringShape.new(name: 'S3BucketMountConfigurationS3BucketOwnerString')
+    S3BucketMountConfigurationS3BucketRegionString = Shapes::StringShape.new(name: 'S3BucketMountConfigurationS3BucketRegionString')
     S3BucketUri = Shapes::StringShape.new(name: 'S3BucketUri')
     S3CertificateConfiguration = Shapes::StructureShape.new(name: 'S3CertificateConfiguration')
     S3Configuration = Shapes::StructureShape.new(name: 'S3Configuration')
@@ -1793,6 +1801,7 @@ module Aws::BedrockAgentCoreControl
     BuildLifecycleHooks.struct_class = Types::BuildLifecycleHooks
 
     CapacityProviderConfiguration.add_member(:capacity_provider_arn, Shapes::ShapeRef.new(shape: CapacityProviderArn, required: true, location_name: "capacityProviderArn"))
+    CapacityProviderConfiguration.add_member(:operating_system_configuration, Shapes::ShapeRef.new(shape: OperatingSystemConfiguration, location_name: "operatingSystemConfiguration"))
     CapacityProviderConfiguration.struct_class = Types::CapacityProviderConfiguration
 
     CapacityProviderList.member = Shapes::ShapeRef.new(shape: CapacityProviderSummary)
@@ -3293,11 +3302,13 @@ module Aws::BedrockAgentCoreControl
     FilesystemConfiguration.add_member(:s3_files_access_point, Shapes::ShapeRef.new(shape: S3FilesAccessPointConfiguration, location_name: "s3FilesAccessPoint"))
     FilesystemConfiguration.add_member(:efs_access_point, Shapes::ShapeRef.new(shape: EfsAccessPointConfiguration, location_name: "efsAccessPoint"))
     FilesystemConfiguration.add_member(:capacity_provider_volume, Shapes::ShapeRef.new(shape: CapacityProviderVolumeConfiguration, location_name: "capacityProviderVolume"))
+    FilesystemConfiguration.add_member(:s3_bucket_mount, Shapes::ShapeRef.new(shape: S3BucketMountConfiguration, location_name: "s3BucketMount"))
     FilesystemConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     FilesystemConfiguration.add_member_subclass(:session_storage, Types::FilesystemConfiguration::SessionStorage)
     FilesystemConfiguration.add_member_subclass(:s3_files_access_point, Types::FilesystemConfiguration::S3FilesAccessPoint)
     FilesystemConfiguration.add_member_subclass(:efs_access_point, Types::FilesystemConfiguration::EfsAccessPoint)
     FilesystemConfiguration.add_member_subclass(:capacity_provider_volume, Types::FilesystemConfiguration::CapacityProviderVolume)
+    FilesystemConfiguration.add_member_subclass(:s3_bucket_mount, Types::FilesystemConfiguration::S3BucketMount)
     FilesystemConfiguration.add_member_subclass(:unknown, Types::FilesystemConfiguration::Unknown)
     FilesystemConfiguration.struct_class = Types::FilesystemConfiguration
 
@@ -4570,6 +4581,9 @@ module Aws::BedrockAgentCoreControl
     LinkedinOauth2ProviderConfigOutput.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, location_name: "clientId"))
     LinkedinOauth2ProviderConfigOutput.struct_class = Types::LinkedinOauth2ProviderConfigOutput
 
+    LinuxOperatingSystemConfiguration.add_member(:privilege_mode, Shapes::ShapeRef.new(shape: PrivilegeMode, location_name: "privilegeMode"))
+    LinuxOperatingSystemConfiguration.struct_class = Types::LinuxOperatingSystemConfiguration
+
     ListAgentInsightStoresRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListAgentInsightStoresRequestNextTokenString, location: "querystring", location_name: "nextToken"))
     ListAgentInsightStoresRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAgentInsightStoresRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListAgentInsightStoresRequest.struct_class = Types::ListAgentInsightStoresRequest
@@ -5338,6 +5352,12 @@ module Aws::BedrockAgentCoreControl
     OpenResponsesEvaluatorModelConfig.add_member(:reasoning, Shapes::ShapeRef.new(shape: ReasoningConfiguration, location_name: "reasoning"))
     OpenResponsesEvaluatorModelConfig.struct_class = Types::OpenResponsesEvaluatorModelConfig
 
+    OperatingSystemConfiguration.add_member(:linux, Shapes::ShapeRef.new(shape: LinuxOperatingSystemConfiguration, location_name: "linux"))
+    OperatingSystemConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    OperatingSystemConfiguration.add_member_subclass(:linux, Types::OperatingSystemConfiguration::Linux)
+    OperatingSystemConfiguration.add_member_subclass(:unknown, Types::OperatingSystemConfiguration::Unknown)
+    OperatingSystemConfiguration.struct_class = Types::OperatingSystemConfiguration
+
     OutputConfig.add_member(:cloud_watch_config, Shapes::ShapeRef.new(shape: CloudWatchOutputConfig, required: true, location_name: "cloudWatchConfig"))
     OutputConfig.struct_class = Types::OutputConfig
 
@@ -5743,6 +5763,13 @@ module Aws::BedrockAgentCoreControl
     RuntimeTargetConfiguration.add_member(:qualifier, Shapes::ShapeRef.new(shape: RuntimeQualifier, location_name: "qualifier"))
     RuntimeTargetConfiguration.add_member(:schema, Shapes::ShapeRef.new(shape: HttpApiSchemaConfiguration, location_name: "schema"))
     RuntimeTargetConfiguration.struct_class = Types::RuntimeTargetConfiguration
+
+    S3BucketMountConfiguration.add_member(:bucket, Shapes::ShapeRef.new(shape: S3BucketMountConfigurationBucketString, required: true, location_name: "bucket"))
+    S3BucketMountConfiguration.add_member(:mount_path, Shapes::ShapeRef.new(shape: MountPath, required: true, location_name: "mountPath"))
+    S3BucketMountConfiguration.add_member(:prefix, Shapes::ShapeRef.new(shape: S3BucketMountConfigurationPrefixString, location_name: "prefix"))
+    S3BucketMountConfiguration.add_member(:s3_bucket_owner, Shapes::ShapeRef.new(shape: S3BucketMountConfigurationS3BucketOwnerString, location_name: "s3BucketOwner"))
+    S3BucketMountConfiguration.add_member(:s3_bucket_region, Shapes::ShapeRef.new(shape: S3BucketMountConfigurationS3BucketRegionString, location_name: "s3BucketRegion"))
+    S3BucketMountConfiguration.struct_class = Types::S3BucketMountConfiguration
 
     S3CertificateConfiguration.add_member(:uri, Shapes::ShapeRef.new(shape: CertificateS3Uri, required: true, location_name: "uri"))
     S3CertificateConfiguration.add_member(:bucket_owner_account_id, Shapes::ShapeRef.new(shape: CertificateBucketOwnerAccountId, location_name: "bucketOwnerAccountId"))

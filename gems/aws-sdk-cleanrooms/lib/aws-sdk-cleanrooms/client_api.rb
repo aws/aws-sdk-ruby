@@ -552,6 +552,7 @@ module Aws::CleanRooms
     PopulateIntermediateTableInput = Shapes::StructureShape.new(name: 'PopulateIntermediateTableInput')
     PopulateIntermediateTableOutput = Shapes::StructureShape.new(name: 'PopulateIntermediateTableOutput')
     PopulationAnalysisConfiguration = Shapes::UnionShape.new(name: 'PopulationAnalysisConfiguration')
+    PopulationAnalysisJobParameters = Shapes::StructureShape.new(name: 'PopulationAnalysisJobParameters')
     PopulationAnalysisSqlParameters = Shapes::StructureShape.new(name: 'PopulationAnalysisSqlParameters')
     PopulationAnalysisSqlParametersQueryStringString = Shapes::StringShape.new(name: 'PopulationAnalysisSqlParametersQueryStringString')
     PreviewPrivacyImpactInput = Shapes::StructureShape.new(name: 'PreviewPrivacyImpactInput')
@@ -2284,8 +2285,10 @@ module Aws::CleanRooms
     IntermediateTableColumnList.member = Shapes::ShapeRef.new(shape: IntermediateTableColumn)
 
     IntermediateTableComputeConfiguration.add_member(:query_compute_configuration, Shapes::ShapeRef.new(shape: WorkerComputeConfiguration, location_name: "queryComputeConfiguration"))
+    IntermediateTableComputeConfiguration.add_member(:job_compute_configuration, Shapes::ShapeRef.new(shape: ProtectedJobComputeConfiguration, location_name: "jobComputeConfiguration"))
     IntermediateTableComputeConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     IntermediateTableComputeConfiguration.add_member_subclass(:query_compute_configuration, Types::IntermediateTableComputeConfiguration::QueryComputeConfiguration)
+    IntermediateTableComputeConfiguration.add_member_subclass(:job_compute_configuration, Types::IntermediateTableComputeConfiguration::JobComputeConfiguration)
     IntermediateTableComputeConfiguration.add_member_subclass(:unknown, Types::IntermediateTableComputeConfiguration::Unknown)
     IntermediateTableComputeConfiguration.struct_class = Types::IntermediateTableComputeConfiguration
 
@@ -2744,10 +2747,15 @@ module Aws::CleanRooms
     PopulateIntermediateTableOutput.struct_class = Types::PopulateIntermediateTableOutput
 
     PopulationAnalysisConfiguration.add_member(:sql_parameters, Shapes::ShapeRef.new(shape: PopulationAnalysisSqlParameters, location_name: "sqlParameters"))
+    PopulationAnalysisConfiguration.add_member(:job_parameters, Shapes::ShapeRef.new(shape: PopulationAnalysisJobParameters, location_name: "jobParameters"))
     PopulationAnalysisConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     PopulationAnalysisConfiguration.add_member_subclass(:sql_parameters, Types::PopulationAnalysisConfiguration::SqlParameters)
+    PopulationAnalysisConfiguration.add_member_subclass(:job_parameters, Types::PopulationAnalysisConfiguration::JobParameters)
     PopulationAnalysisConfiguration.add_member_subclass(:unknown, Types::PopulationAnalysisConfiguration::Unknown)
     PopulationAnalysisConfiguration.struct_class = Types::PopulationAnalysisConfiguration
+
+    PopulationAnalysisJobParameters.add_member(:analysis_template_arn, Shapes::ShapeRef.new(shape: AnalysisTemplateArn, required: true, location_name: "analysisTemplateArn"))
+    PopulationAnalysisJobParameters.struct_class = Types::PopulationAnalysisJobParameters
 
     PopulationAnalysisSqlParameters.add_member(:query_string, Shapes::ShapeRef.new(shape: PopulationAnalysisSqlParametersQueryStringString, location_name: "queryString"))
     PopulationAnalysisSqlParameters.add_member(:analysis_template_arn, Shapes::ShapeRef.new(shape: AnalysisTemplateArn, location_name: "analysisTemplateArn"))
@@ -2903,9 +2911,11 @@ module Aws::CleanRooms
 
     ProtectedJobOutputConfigurationOutput.add_member(:s3, Shapes::ShapeRef.new(shape: ProtectedJobS3OutputConfigurationOutput, location_name: "s3"))
     ProtectedJobOutputConfigurationOutput.add_member(:member, Shapes::ShapeRef.new(shape: ProtectedJobMemberOutputConfigurationOutput, location_name: "member"))
+    ProtectedJobOutputConfigurationOutput.add_member(:intermediate_table, Shapes::ShapeRef.new(shape: IntermediateTableOutputConfiguration, location_name: "intermediateTable"))
     ProtectedJobOutputConfigurationOutput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProtectedJobOutputConfigurationOutput.add_member_subclass(:s3, Types::ProtectedJobOutputConfigurationOutput::S3)
     ProtectedJobOutputConfigurationOutput.add_member_subclass(:member, Types::ProtectedJobOutputConfigurationOutput::Member)
+    ProtectedJobOutputConfigurationOutput.add_member_subclass(:intermediate_table, Types::ProtectedJobOutputConfigurationOutput::IntermediateTable)
     ProtectedJobOutputConfigurationOutput.add_member_subclass(:unknown, Types::ProtectedJobOutputConfigurationOutput::Unknown)
     ProtectedJobOutputConfigurationOutput.struct_class = Types::ProtectedJobOutputConfigurationOutput
 
@@ -2956,6 +2966,7 @@ module Aws::CleanRooms
     ProtectedJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: ProtectedJobStatus, required: true, location_name: "status"))
     ProtectedJobSummary.add_member(:receiver_configurations, Shapes::ShapeRef.new(shape: ProtectedJobReceiverConfigurations, required: true, location_name: "receiverConfigurations"))
     ProtectedJobSummary.add_member(:job_compute_payer_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "jobComputePayerAccountId"))
+    ProtectedJobSummary.add_member(:intermediate_table_configuration, Shapes::ShapeRef.new(shape: IntermediateTableOutputConfiguration, location_name: "intermediateTableConfiguration"))
     ProtectedJobSummary.struct_class = Types::ProtectedJobSummary
 
     ProtectedJobSummaryList.member = Shapes::ShapeRef.new(shape: ProtectedJobSummary)

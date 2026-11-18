@@ -257,6 +257,7 @@ module Aws
             'APIGateway' => 'apigateway',
             'ARCRegionswitch' => 'arc-region-switch',
             'ARCZonalShift' => 'arc-zonal-shift',
+            'AbuseSignal' => 'abuse',
             'AccessAnalyzer' => 'access-analyzer',
             'Account' => 'account',
             'AccountAccess' => 'account-access',

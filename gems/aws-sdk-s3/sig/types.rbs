@@ -763,6 +763,7 @@ module Aws::S3
 
     class EncryptionConfiguration
       attr_accessor replica_kms_key_id: ::String
+      attr_accessor use_source_multi_region_key: Types::UseSourceMultiRegionKey
       SENSITIVE: []
     end
 
@@ -2743,6 +2744,7 @@ module Aws::S3
     class ReplicationRuleAndOperator
       attr_accessor prefix: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor not: Types::ReplicationRuleNotOperator
       SENSITIVE: []
     end
 
@@ -2750,6 +2752,20 @@ module Aws::S3
       attr_accessor prefix: ::String
       attr_accessor tag: Types::Tag
       attr_accessor and: Types::ReplicationRuleAndOperator
+      attr_accessor not: Types::ReplicationRuleNotOperator
+      SENSITIVE: []
+    end
+
+    class ReplicationRuleNotOperator
+      attr_accessor prefix: ::String
+      attr_accessor tag: Types::Tag
+      attr_accessor or: Types::ReplicationRuleOrOperator
+      SENSITIVE: []
+    end
+
+    class ReplicationRuleOrOperator
+      attr_accessor prefixes: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
@@ -3155,6 +3171,11 @@ module Aws::S3
       attr_accessor request_payer: ("requester")
       attr_accessor expected_bucket_owner: ::String
       SENSITIVE: [:sse_customer_key]
+    end
+
+    class UseSourceMultiRegionKey
+      attr_accessor status: ("Enabled" | "Disabled")
+      SENSITIVE: []
     end
 
     class VersioningConfiguration

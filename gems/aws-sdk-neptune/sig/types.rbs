@@ -364,6 +364,7 @@ module Aws::Neptune
       attr_accessor cross_account_clone: bool
       attr_accessor automatic_restart_time: ::Time
       attr_accessor serverless_v2_scaling_configuration: Types::ServerlessV2ScalingConfigurationInfo
+      attr_accessor serverless_v2_platform_version: ::String
       attr_accessor global_cluster_identifier: ::String
       attr_accessor io_optimized_next_allowed_modification_time: ::Time
       attr_accessor storage_type: ::String
@@ -980,6 +981,17 @@ module Aws::Neptune
       attr_accessor filters: ::Array[Types::Filter]
       attr_accessor marker: ::String
       attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeServerlessV2PlatformVersionsMessage
+      attr_accessor serverless_v2_platform_version: ::String
+      attr_accessor engine: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor default_only: bool
+      attr_accessor include_all: bool
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
       SENSITIVE: []
     end
 
@@ -1626,6 +1638,28 @@ module Aws::Neptune
     end
 
     class SNSTopicArnNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ServerlessV2FeaturesSupport
+      attr_accessor min_capacity: ::Float
+      attr_accessor max_capacity: ::Float
+      SENSITIVE: []
+    end
+
+    class ServerlessV2PlatformVersionInfo
+      attr_accessor serverless_v2_platform_version: ::String
+      attr_accessor serverless_v2_platform_version_description: ::String
+      attr_accessor engine: ::String
+      attr_accessor serverless_v2_features_support: Types::ServerlessV2FeaturesSupport
+      attr_accessor status: ::String
+      attr_accessor is_default: bool
+      SENSITIVE: []
+    end
+
+    class ServerlessV2PlatformVersionsMessage
+      attr_accessor marker: ::String
+      attr_accessor serverless_v2_platform_versions: ::Array[Types::ServerlessV2PlatformVersionInfo]
+      SENSITIVE: []
     end
 
     class ServerlessV2ScalingConfiguration

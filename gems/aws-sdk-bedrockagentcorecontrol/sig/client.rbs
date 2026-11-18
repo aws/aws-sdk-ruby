@@ -152,9 +152,7 @@ module Aws
                                   ?filesystem_configurations: Array[
                                     Params::filesystem_configuration
                                   ],
-                                  ?capacity_provider_configuration: {
-                                    capacity_provider_arn: ::String
-                                  },
+                                  ?capacity_provider_configuration: Params::capacity_provider_configuration,
                                   ?tags: Hash[::String, ::String],
                                   ?platform_version: ::String,
                                   ?allowed_ports: Array[
@@ -2868,9 +2866,7 @@ module Aws
                                   ?filesystem_configurations: Array[
                                     Params::filesystem_configuration
                                   ],
-                                  ?capacity_provider_configuration: {
-                                    capacity_provider_arn: ::String
-                                  },
+                                  ?capacity_provider_configuration: Params::capacity_provider_configuration,
                                   ?platform_version: ::String,
                                   ?allowed_ports: Array[
                                     {

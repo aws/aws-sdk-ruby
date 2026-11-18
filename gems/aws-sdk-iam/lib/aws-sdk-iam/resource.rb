@@ -434,6 +434,7 @@ module Aws::IAM
     #     assume_role_policy_document: "policyDocumentType", # required
     #     description: "roleDescriptionType",
     #     max_session_duration: 1,
+    #     max_signin_session_duration: 1,
     #     permissions_boundary: "arnType",
     #     tags: [
     #       {
@@ -525,6 +526,14 @@ module Aws::IAM
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    # @option options [Integer] :max_signin_session_duration
+    #   The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    #   session for users who sign in with this role. This setting can have a
+    #   value from 1 hour (3600 seconds) to 90 days (7776000 seconds),
+    #   inclusive. If you do not specify a value, the setting remains unset
+    #   and the existing sign-in session behavior applies.
+    #
+    #   This setting is independent of `MaxSessionDuration`.
     # @option options [String] :permissions_boundary
     #   The ARN of the managed policy that is used to set the permissions
     #   boundary for the role.

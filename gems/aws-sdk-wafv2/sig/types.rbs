@@ -66,6 +66,11 @@ module Aws::WAFV2
       SENSITIVE: []
     end
 
+    class AnalyticsConfig
+      attr_accessor mode: ("CROSS_REGION" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class AndStatement
       attr_accessor statements: ::Array[Types::Statement]
       SENSITIVE: []
@@ -307,6 +312,7 @@ module Aws::WAFV2
       attr_accessor on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig
       attr_accessor application_config: Types::ApplicationConfig
       attr_accessor monetization_config: Types::MonetizationConfig
+      attr_accessor analytics_config: Types::AnalyticsConfig
       SENSITIVE: []
     end
 
@@ -1839,6 +1845,7 @@ module Aws::WAFV2
       attr_accessor on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig
       attr_accessor application_config: Types::ApplicationConfig
       attr_accessor monetization_config: Types::MonetizationConfig
+      attr_accessor analytics_config: Types::AnalyticsConfig
       SENSITIVE: []
     end
 
@@ -2001,6 +2008,7 @@ module Aws::WAFV2
       attr_accessor on_source_d_do_s_protection_config: Types::OnSourceDDoSProtectionConfig
       attr_accessor application_config: Types::ApplicationConfig
       attr_accessor monetization_config: Types::MonetizationConfig
+      attr_accessor analytics_config: Types::AnalyticsConfig
       SENSITIVE: []
     end
 

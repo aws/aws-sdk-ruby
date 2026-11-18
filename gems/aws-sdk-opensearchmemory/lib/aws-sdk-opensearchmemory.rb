@@ -55,7 +55,7 @@ module Aws::OpenSearchMemory
   autoload :EndpointProvider, 'aws-sdk-opensearchmemory/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-opensearchmemory/endpoints'
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.1.0'
 
 end
 

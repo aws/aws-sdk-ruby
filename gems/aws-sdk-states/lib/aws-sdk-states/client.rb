@@ -3577,7 +3577,7 @@ module Aws::States
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.124.0'
+      context[:gem_version] = '1.125.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

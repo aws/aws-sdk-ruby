@@ -59,6 +59,7 @@ module Aws::CloudFormation
     CFNRegistryException = Shapes::StructureShape.new(name: 'CFNRegistryException', error: {"code" => "CFNRegistryException", "httpStatusCode" => 400, "senderFault" => true})
     CallAs = Shapes::StringShape.new(name: 'CallAs')
     CancelUpdateStackInput = Shapes::StructureShape.new(name: 'CancelUpdateStackInput')
+    CancelledStackInstancesCount = Shapes::IntegerShape.new(name: 'CancelledStackInstancesCount')
     Capabilities = Shapes::ListShape.new(name: 'Capabilities')
     CapabilitiesReason = Shapes::StringShape.new(name: 'CapabilitiesReason')
     Capability = Shapes::StringShape.new(name: 'Capability')
@@ -85,6 +86,8 @@ module Aws::CloudFormation
     Changes = Shapes::ListShape.new(name: 'Changes')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    CompletedAccountsCount = Shapes::IntegerShape.new(name: 'CompletedAccountsCount')
+    CompletedStackInstancesCount = Shapes::IntegerShape.new(name: 'CompletedStackInstancesCount')
     ConcurrencyMode = Shapes::StringShape.new(name: 'ConcurrencyMode')
     ConcurrentResourcesLimitExceededException = Shapes::StructureShape.new(name: 'ConcurrentResourcesLimitExceededException', error: {"code" => "ConcurrentResourcesLimitExceeded", "httpStatusCode" => 429, "senderFault" => true})
     ConfigurationSchema = Shapes::StringShape.new(name: 'ConfigurationSchema')
@@ -200,6 +203,7 @@ module Aws::CloudFormation
     ExportName = Shapes::StringShape.new(name: 'ExportName')
     ExportValue = Shapes::StringShape.new(name: 'ExportValue')
     Exports = Shapes::ListShape.new(name: 'Exports')
+    FailedAccountsCount = Shapes::IntegerShape.new(name: 'FailedAccountsCount')
     FailedEventsFilter = Shapes::BooleanShape.new(name: 'FailedEventsFilter')
     FailedStackInstancesCount = Shapes::IntegerShape.new(name: 'FailedStackInstancesCount')
     FailureToleranceCount = Shapes::IntegerShape.new(name: 'FailureToleranceCount')
@@ -366,6 +370,8 @@ module Aws::CloudFormation
     ParameterType = Shapes::StringShape.new(name: 'ParameterType')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     Parameters = Shapes::ListShape.new(name: 'Parameters')
+    PendingAccountsCount = Shapes::IntegerShape.new(name: 'PendingAccountsCount')
+    PendingStackInstancesCount = Shapes::IntegerShape.new(name: 'PendingStackInstancesCount')
     PercentageCompleted = Shapes::FloatShape.new(name: 'PercentageCompleted')
     PermissionModels = Shapes::StringShape.new(name: 'PermissionModels')
     PhysicalResourceId = Shapes::StringShape.new(name: 'PhysicalResourceId')
@@ -396,6 +402,11 @@ module Aws::CloudFormation
     Region = Shapes::StringShape.new(name: 'Region')
     RegionConcurrencyType = Shapes::StringShape.new(name: 'RegionConcurrencyType')
     RegionList = Shapes::ListShape.new(name: 'RegionList')
+    RegionalStackInstancesDeployment = Shapes::StructureShape.new(name: 'RegionalStackInstancesDeployment')
+    RegionalStages = Shapes::StructureShape.new(name: 'RegionalStages')
+    RegionalStatusDetail = Shapes::StructureShape.new(name: 'RegionalStatusDetail')
+    RegionalStatusDetails = Shapes::MapShape.new(name: 'RegionalStatusDetails')
+    RegionalTotalStackInstancesCount = Shapes::IntegerShape.new(name: 'RegionalTotalStackInstancesCount')
     RegisterPublisherInput = Shapes::StructureShape.new(name: 'RegisterPublisherInput')
     RegisterPublisherOutput = Shapes::StructureShape.new(name: 'RegisterPublisherOutput')
     RegisterTypeInput = Shapes::StructureShape.new(name: 'RegisterTypeInput')
@@ -475,6 +486,7 @@ module Aws::CloudFormation
     RetainStacksOnAccountRemovalNullable = Shapes::BooleanShape.new(name: 'RetainStacksOnAccountRemovalNullable')
     RoleARN = Shapes::StringShape.new(name: 'RoleARN')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    RoleProvisioning = Shapes::StructureShape.new(name: 'RoleProvisioning')
     RollbackConfiguration = Shapes::StructureShape.new(name: 'RollbackConfiguration')
     RollbackStackInput = Shapes::StructureShape.new(name: 'RollbackStackInput')
     RollbackStackOutput = Shapes::StructureShape.new(name: 'RollbackStackOutput')
@@ -497,6 +509,7 @@ module Aws::CloudFormation
     SetTypeDefaultVersionInput = Shapes::StructureShape.new(name: 'SetTypeDefaultVersionInput')
     SetTypeDefaultVersionOutput = Shapes::StructureShape.new(name: 'SetTypeDefaultVersionOutput')
     SignalResourceInput = Shapes::StructureShape.new(name: 'SignalResourceInput')
+    SkippedStackInstancesCount = Shapes::IntegerShape.new(name: 'SkippedStackInstancesCount')
     Stack = Shapes::StructureShape.new(name: 'Stack')
     StackDefinition = Shapes::StructureShape.new(name: 'StackDefinition')
     StackDefinitions = Shapes::ListShape.new(name: 'StackDefinitions')
@@ -525,6 +538,8 @@ module Aws::CloudFormation
     StackInstanceStatus = Shapes::StringShape.new(name: 'StackInstanceStatus')
     StackInstanceSummaries = Shapes::ListShape.new(name: 'StackInstanceSummaries')
     StackInstanceSummary = Shapes::StructureShape.new(name: 'StackInstanceSummary')
+    StackInstancesDeployment = Shapes::StructureShape.new(name: 'StackInstancesDeployment')
+    StackInstancesDeploymentFailedStackInstancesCount = Shapes::IntegerShape.new(name: 'StackInstancesDeploymentFailedStackInstancesCount')
     StackName = Shapes::StringShape.new(name: 'StackName')
     StackNameOrId = Shapes::StringShape.new(name: 'StackNameOrId')
     StackNotFoundException = Shapes::StructureShape.new(name: 'StackNotFoundException', error: {"code" => "StackNotFoundException", "httpStatusCode" => 404, "senderFault" => true})
@@ -584,6 +599,7 @@ module Aws::CloudFormation
     StackSetOperationStatusReason = Shapes::StringShape.new(name: 'StackSetOperationStatusReason')
     StackSetOperationSummaries = Shapes::ListShape.new(name: 'StackSetOperationSummaries')
     StackSetOperationSummary = Shapes::StructureShape.new(name: 'StackSetOperationSummary')
+    StackSetOperationTotalStackInstancesCount = Shapes::IntegerShape.new(name: 'StackSetOperationTotalStackInstancesCount')
     StackSetStatus = Shapes::StringShape.new(name: 'StackSetStatus')
     StackSetSummaries = Shapes::ListShape.new(name: 'StackSetSummaries')
     StackSetSummary = Shapes::StructureShape.new(name: 'StackSetSummary')
@@ -594,12 +610,17 @@ module Aws::CloudFormation
     StackSummary = Shapes::StructureShape.new(name: 'StackSummary')
     Stacks = Shapes::ListShape.new(name: 'Stacks')
     StageList = Shapes::ListShape.new(name: 'StageList')
+    StagePercentageCompleted = Shapes::FloatShape.new(name: 'StagePercentageCompleted')
+    StageStatus = Shapes::StringShape.new(name: 'StageStatus')
+    Stages = Shapes::StructureShape.new(name: 'Stages')
     StaleRequestException = Shapes::StructureShape.new(name: 'StaleRequestException', error: {"code" => "StaleRequestException", "httpStatusCode" => 409, "senderFault" => true})
     StartResourceScanInput = Shapes::StructureShape.new(name: 'StartResourceScanInput')
     StartResourceScanOutput = Shapes::StructureShape.new(name: 'StartResourceScanOutput')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
     StopStackSetOperationInput = Shapes::StructureShape.new(name: 'StopStackSetOperationInput')
     StopStackSetOperationOutput = Shapes::StructureShape.new(name: 'StopStackSetOperationOutput')
+    SucceededAccountsCount = Shapes::IntegerShape.new(name: 'SucceededAccountsCount')
+    SucceededStackInstancesCount = Shapes::IntegerShape.new(name: 'SucceededStackInstancesCount')
     SupportedMajorVersion = Shapes::IntegerShape.new(name: 'SupportedMajorVersion')
     SupportedMajorVersions = Shapes::ListShape.new(name: 'SupportedMajorVersions')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -626,6 +647,7 @@ module Aws::CloudFormation
     TimeoutMinutes = Shapes::IntegerShape.new(name: 'TimeoutMinutes')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TokenAlreadyExistsException = Shapes::StructureShape.new(name: 'TokenAlreadyExistsException', error: {"code" => "TokenAlreadyExistsException", "httpStatusCode" => 400, "senderFault" => true})
+    TotalAccountsCount = Shapes::IntegerShape.new(name: 'TotalAccountsCount')
     TotalStackInstancesCount = Shapes::IntegerShape.new(name: 'TotalStackInstancesCount')
     TotalWarnings = Shapes::IntegerShape.new(name: 'TotalWarnings')
     TransformName = Shapes::StringShape.new(name: 'TransformName')
@@ -1760,6 +1782,26 @@ module Aws::CloudFormation
 
     RegionList.member = Shapes::ShapeRef.new(shape: Region)
 
+    RegionalStackInstancesDeployment.add_member(:status, Shapes::ShapeRef.new(shape: StageStatus, location_name: "Status"))
+    RegionalStackInstancesDeployment.add_member(:succeeded_stack_instances_count, Shapes::ShapeRef.new(shape: SucceededStackInstancesCount, location_name: "SucceededStackInstancesCount"))
+    RegionalStackInstancesDeployment.add_member(:failed_stack_instances_count, Shapes::ShapeRef.new(shape: StackInstancesDeploymentFailedStackInstancesCount, location_name: "FailedStackInstancesCount"))
+    RegionalStackInstancesDeployment.add_member(:completed_stack_instances_count, Shapes::ShapeRef.new(shape: CompletedStackInstancesCount, location_name: "CompletedStackInstancesCount"))
+    RegionalStackInstancesDeployment.add_member(:pending_stack_instances_count, Shapes::ShapeRef.new(shape: PendingStackInstancesCount, location_name: "PendingStackInstancesCount"))
+    RegionalStackInstancesDeployment.add_member(:cancelled_stack_instances_count, Shapes::ShapeRef.new(shape: CancelledStackInstancesCount, location_name: "CancelledStackInstancesCount"))
+    RegionalStackInstancesDeployment.add_member(:skipped_stack_instances_count, Shapes::ShapeRef.new(shape: SkippedStackInstancesCount, location_name: "SkippedStackInstancesCount"))
+    RegionalStackInstancesDeployment.add_member(:total_stack_instances_count, Shapes::ShapeRef.new(shape: RegionalTotalStackInstancesCount, location_name: "TotalStackInstancesCount"))
+    RegionalStackInstancesDeployment.add_member(:percentage_completed, Shapes::ShapeRef.new(shape: StagePercentageCompleted, location_name: "PercentageCompleted"))
+    RegionalStackInstancesDeployment.struct_class = Types::RegionalStackInstancesDeployment
+
+    RegionalStages.add_member(:regional_stack_instances_deployment, Shapes::ShapeRef.new(shape: RegionalStackInstancesDeployment, location_name: "RegionalStackInstancesDeployment"))
+    RegionalStages.struct_class = Types::RegionalStages
+
+    RegionalStatusDetail.add_member(:stages, Shapes::ShapeRef.new(shape: RegionalStages, location_name: "Stages"))
+    RegionalStatusDetail.struct_class = Types::RegionalStatusDetail
+
+    RegionalStatusDetails.key = Shapes::ShapeRef.new(shape: Region)
+    RegionalStatusDetails.value = Shapes::ShapeRef.new(shape: RegionalStatusDetail)
+
     RegisterPublisherInput.add_member(:accept_terms_and_conditions, Shapes::ShapeRef.new(shape: AcceptTermsAndConditions, location_name: "AcceptTermsAndConditions"))
     RegisterPublisherInput.add_member(:connection_arn, Shapes::ShapeRef.new(shape: ConnectionArn, location_name: "ConnectionArn"))
     RegisterPublisherInput.struct_class = Types::RegisterPublisherInput
@@ -1906,6 +1948,14 @@ module Aws::CloudFormation
     ResourcesToSkip.member = Shapes::ShapeRef.new(shape: ResourceToSkip)
 
     RetainResources.member = Shapes::ShapeRef.new(shape: LogicalResourceId)
+
+    RoleProvisioning.add_member(:status, Shapes::ShapeRef.new(shape: StageStatus, location_name: "Status"))
+    RoleProvisioning.add_member(:succeeded_accounts_count, Shapes::ShapeRef.new(shape: SucceededAccountsCount, location_name: "SucceededAccountsCount"))
+    RoleProvisioning.add_member(:failed_accounts_count, Shapes::ShapeRef.new(shape: FailedAccountsCount, location_name: "FailedAccountsCount"))
+    RoleProvisioning.add_member(:completed_accounts_count, Shapes::ShapeRef.new(shape: CompletedAccountsCount, location_name: "CompletedAccountsCount"))
+    RoleProvisioning.add_member(:pending_accounts_count, Shapes::ShapeRef.new(shape: PendingAccountsCount, location_name: "PendingAccountsCount"))
+    RoleProvisioning.add_member(:percentage_completed, Shapes::ShapeRef.new(shape: StagePercentageCompleted, location_name: "PercentageCompleted"))
+    RoleProvisioning.struct_class = Types::RoleProvisioning
 
     RollbackConfiguration.add_member(:rollback_triggers, Shapes::ShapeRef.new(shape: RollbackTriggers, location_name: "RollbackTriggers"))
     RollbackConfiguration.add_member(:monitoring_time_in_minutes, Shapes::ShapeRef.new(shape: MonitoringTimeInMinutes, location_name: "MonitoringTimeInMinutes"))
@@ -2105,6 +2155,16 @@ module Aws::CloudFormation
     StackInstanceSummary.add_member(:last_operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "LastOperationId"))
     StackInstanceSummary.struct_class = Types::StackInstanceSummary
 
+    StackInstancesDeployment.add_member(:status, Shapes::ShapeRef.new(shape: StageStatus, location_name: "Status"))
+    StackInstancesDeployment.add_member(:succeeded_stack_instances_count, Shapes::ShapeRef.new(shape: SucceededStackInstancesCount, location_name: "SucceededStackInstancesCount"))
+    StackInstancesDeployment.add_member(:failed_stack_instances_count, Shapes::ShapeRef.new(shape: StackInstancesDeploymentFailedStackInstancesCount, location_name: "FailedStackInstancesCount"))
+    StackInstancesDeployment.add_member(:completed_stack_instances_count, Shapes::ShapeRef.new(shape: CompletedStackInstancesCount, location_name: "CompletedStackInstancesCount"))
+    StackInstancesDeployment.add_member(:pending_stack_instances_count, Shapes::ShapeRef.new(shape: PendingStackInstancesCount, location_name: "PendingStackInstancesCount"))
+    StackInstancesDeployment.add_member(:cancelled_stack_instances_count, Shapes::ShapeRef.new(shape: CancelledStackInstancesCount, location_name: "CancelledStackInstancesCount"))
+    StackInstancesDeployment.add_member(:skipped_stack_instances_count, Shapes::ShapeRef.new(shape: SkippedStackInstancesCount, location_name: "SkippedStackInstancesCount"))
+    StackInstancesDeployment.add_member(:percentage_completed, Shapes::ShapeRef.new(shape: StagePercentageCompleted, location_name: "PercentageCompleted"))
+    StackInstancesDeployment.struct_class = Types::StackInstancesDeployment
+
     StackNotFoundException.struct_class = Types::StackNotFoundException
 
     StackRefactorAction.add_member(:action, Shapes::ShapeRef.new(shape: StackRefactorActionType, location_name: "Action"))
@@ -2261,6 +2321,7 @@ module Aws::CloudFormation
     StackSetOperation.add_member(:stack_set_drift_detection_details, Shapes::ShapeRef.new(shape: StackSetDriftDetectionDetails, location_name: "StackSetDriftDetectionDetails"))
     StackSetOperation.add_member(:status_reason, Shapes::ShapeRef.new(shape: StackSetOperationStatusReason, location_name: "StatusReason"))
     StackSetOperation.add_member(:status_details, Shapes::ShapeRef.new(shape: StackSetOperationStatusDetails, location_name: "StatusDetails"))
+    StackSetOperation.add_member(:regional_status_details, Shapes::ShapeRef.new(shape: RegionalStatusDetails, location_name: "RegionalStatusDetails"))
     StackSetOperation.struct_class = Types::StackSetOperation
 
     StackSetOperationPreferences.add_member(:region_concurrency_type, Shapes::ShapeRef.new(shape: RegionConcurrencyType, location_name: "RegionConcurrencyType"))
@@ -2282,6 +2343,9 @@ module Aws::CloudFormation
     StackSetOperationResultSummary.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: "OrganizationalUnitId"))
     StackSetOperationResultSummary.struct_class = Types::StackSetOperationResultSummary
 
+    StackSetOperationStatusDetails.add_member(:stages, Shapes::ShapeRef.new(shape: Stages, location_name: "Stages"))
+    StackSetOperationStatusDetails.add_member(:total_accounts_count, Shapes::ShapeRef.new(shape: TotalAccountsCount, location_name: "TotalAccountsCount"))
+    StackSetOperationStatusDetails.add_member(:total_stack_instances_count, Shapes::ShapeRef.new(shape: StackSetOperationTotalStackInstancesCount, location_name: "TotalStackInstancesCount"))
     StackSetOperationStatusDetails.add_member(:failed_stack_instances_count, Shapes::ShapeRef.new(shape: FailedStackInstancesCount, location_name: "FailedStackInstancesCount"))
     StackSetOperationStatusDetails.struct_class = Types::StackSetOperationStatusDetails
 
@@ -2331,6 +2395,10 @@ module Aws::CloudFormation
     Stacks.member = Shapes::ShapeRef.new(shape: Stack)
 
     StageList.member = Shapes::ShapeRef.new(shape: TemplateStage)
+
+    Stages.add_member(:role_provisioning, Shapes::ShapeRef.new(shape: RoleProvisioning, location_name: "RoleProvisioning"))
+    Stages.add_member(:stack_instances_deployment, Shapes::ShapeRef.new(shape: StackInstancesDeployment, location_name: "StackInstancesDeployment"))
+    Stages.struct_class = Types::Stages
 
     StaleRequestException.struct_class = Types::StaleRequestException
 

@@ -11,6 +11,7 @@ module Aws
   autoload :APIGateway, 'aws-sdk-apigateway'
   autoload :ARCRegionswitch, 'aws-sdk-arcregionswitch'
   autoload :ARCZonalShift, 'aws-sdk-arczonalshift'
+  autoload :AbuseSignal, 'aws-sdk-abusesignal'
   autoload :AccessAnalyzer, 'aws-sdk-accessanalyzer'
   autoload :Account, 'aws-sdk-account'
   autoload :AccountAccess, 'aws-sdk-accountaccess'

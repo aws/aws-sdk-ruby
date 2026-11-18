@@ -132,6 +132,8 @@ module Aws::CognitoIdentityProvider
     CSSType = Shapes::StringShape.new(name: 'CSSType')
     CSSVersionType = Shapes::StringShape.new(name: 'CSSVersionType')
     CallbackURLsListType = Shapes::ListShape.new(name: 'CallbackURLsListType')
+    CancelPointInTimeRecoveryRequest = Shapes::StructureShape.new(name: 'CancelPointInTimeRecoveryRequest')
+    CancelPointInTimeRecoveryResponse = Shapes::StructureShape.new(name: 'CancelPointInTimeRecoveryResponse')
     ChallengeName = Shapes::StringShape.new(name: 'ChallengeName')
     ChallengeNameType = Shapes::StringShape.new(name: 'ChallengeNameType')
     ChallengeParametersType = Shapes::MapShape.new(name: 'ChallengeParametersType')
@@ -232,6 +234,8 @@ module Aws::CognitoIdentityProvider
     DescribeManagedLoginBrandingByClientResponse = Shapes::StructureShape.new(name: 'DescribeManagedLoginBrandingByClientResponse')
     DescribeManagedLoginBrandingRequest = Shapes::StructureShape.new(name: 'DescribeManagedLoginBrandingRequest')
     DescribeManagedLoginBrandingResponse = Shapes::StructureShape.new(name: 'DescribeManagedLoginBrandingResponse')
+    DescribePointInTimeRecoveryRequest = Shapes::StructureShape.new(name: 'DescribePointInTimeRecoveryRequest')
+    DescribePointInTimeRecoveryResponse = Shapes::StructureShape.new(name: 'DescribePointInTimeRecoveryResponse')
     DescribeResourceServerRequest = Shapes::StructureShape.new(name: 'DescribeResourceServerRequest')
     DescribeResourceServerResponse = Shapes::StructureShape.new(name: 'DescribeResourceServerResponse')
     DescribeRiskConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeRiskConfigurationRequest')
@@ -360,6 +364,8 @@ module Aws::CognitoIdentityProvider
     InboundFederationLambdaVersionType = Shapes::StringShape.new(name: 'InboundFederationLambdaVersionType')
     InitiateAuthRequest = Shapes::StructureShape.new(name: 'InitiateAuthRequest')
     InitiateAuthResponse = Shapes::StructureShape.new(name: 'InitiateAuthResponse')
+    InitiatePointInTimeRecoveryRequest = Shapes::StructureShape.new(name: 'InitiatePointInTimeRecoveryRequest')
+    InitiatePointInTimeRecoveryResponse = Shapes::StructureShape.new(name: 'InitiatePointInTimeRecoveryResponse')
     IntegerType = Shapes::IntegerShape.new(name: 'IntegerType')
     InternalErrorException = Shapes::StructureShape.new(name: 'InternalErrorException')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -391,6 +397,8 @@ module Aws::CognitoIdentityProvider
     ListIdentityProvidersRequest = Shapes::StructureShape.new(name: 'ListIdentityProvidersRequest')
     ListIdentityProvidersResponse = Shapes::StructureShape.new(name: 'ListIdentityProvidersResponse')
     ListOfStringTypes = Shapes::ListShape.new(name: 'ListOfStringTypes')
+    ListPointInTimeRecoveriesRequest = Shapes::StructureShape.new(name: 'ListPointInTimeRecoveriesRequest')
+    ListPointInTimeRecoveriesResponse = Shapes::StructureShape.new(name: 'ListPointInTimeRecoveriesResponse')
     ListProvidersLimitType = Shapes::IntegerShape.new(name: 'ListProvidersLimitType')
     ListResourceServersLimitType = Shapes::IntegerShape.new(name: 'ListResourceServersLimitType')
     ListResourceServersRequest = Shapes::StructureShape.new(name: 'ListResourceServersRequest')
@@ -498,6 +506,13 @@ module Aws::CognitoIdentityProvider
     ResourceServersListType = Shapes::ListShape.new(name: 'ResourceServersListType')
     RespondToAuthChallengeRequest = Shapes::StructureShape.new(name: 'RespondToAuthChallengeRequest')
     RespondToAuthChallengeResponse = Shapes::StructureShape.new(name: 'RespondToAuthChallengeResponse')
+    RestorationDescriptionType = Shapes::StructureShape.new(name: 'RestorationDescriptionType')
+    RestorationListType = Shapes::ListShape.new(name: 'RestorationListType')
+    RestorationType = Shapes::StructureShape.new(name: 'RestorationType')
+    RestoreIdType = Shapes::StringShape.new(name: 'RestoreIdType')
+    RestorePreviewListType = Shapes::ListShape.new(name: 'RestorePreviewListType')
+    RestorePreviewType = Shapes::StructureShape.new(name: 'RestorePreviewType')
+    RestoreStatusType = Shapes::StringShape.new(name: 'RestoreStatusType')
     RetryGracePeriodSecondsType = Shapes::IntegerShape.new(name: 'RetryGracePeriodSecondsType')
     RevokeAssociatedSessionsType = Shapes::StringShape.new(name: 'RevokeAssociatedSessionsType')
     RevokeTokenRequest = Shapes::StructureShape.new(name: 'RevokeTokenRequest')
@@ -564,6 +579,8 @@ module Aws::CognitoIdentityProvider
     SoftwareTokenMFAUserCodeType = Shapes::StringShape.new(name: 'SoftwareTokenMFAUserCodeType')
     SoftwareTokenMfaConfigType = Shapes::StructureShape.new(name: 'SoftwareTokenMfaConfigType')
     SoftwareTokenMfaSettingsType = Shapes::StructureShape.new(name: 'SoftwareTokenMfaSettingsType')
+    StartPointInTimeRecoveryRequest = Shapes::StructureShape.new(name: 'StartPointInTimeRecoveryRequest')
+    StartPointInTimeRecoveryResponse = Shapes::StructureShape.new(name: 'StartPointInTimeRecoveryResponse')
     StartUserImportJobRequest = Shapes::StructureShape.new(name: 'StartUserImportJobRequest')
     StartUserImportJobResponse = Shapes::StructureShape.new(name: 'StartUserImportJobResponse')
     StartWebAuthnRegistrationRequest = Shapes::StructureShape.new(name: 'StartWebAuthnRegistrationRequest')
@@ -1082,6 +1099,13 @@ module Aws::CognitoIdentityProvider
 
     CallbackURLsListType.member = Shapes::ShapeRef.new(shape: RedirectUrlType)
 
+    CancelPointInTimeRecoveryRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    CancelPointInTimeRecoveryRequest.add_member(:restore_id, Shapes::ShapeRef.new(shape: RestoreIdType, required: true, location_name: "RestoreId"))
+    CancelPointInTimeRecoveryRequest.struct_class = Types::CancelPointInTimeRecoveryRequest
+
+    CancelPointInTimeRecoveryResponse.add_member(:restoration, Shapes::ShapeRef.new(shape: RestorationType, location_name: "Restoration"))
+    CancelPointInTimeRecoveryResponse.struct_class = Types::CancelPointInTimeRecoveryResponse
+
     ChallengeParametersType.key = Shapes::ShapeRef.new(shape: StringType)
     ChallengeParametersType.value = Shapes::ShapeRef.new(shape: StringType)
 
@@ -1447,6 +1471,13 @@ module Aws::CognitoIdentityProvider
 
     DescribeManagedLoginBrandingResponse.add_member(:managed_login_branding, Shapes::ShapeRef.new(shape: ManagedLoginBrandingType, location_name: "ManagedLoginBranding"))
     DescribeManagedLoginBrandingResponse.struct_class = Types::DescribeManagedLoginBrandingResponse
+
+    DescribePointInTimeRecoveryRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    DescribePointInTimeRecoveryRequest.add_member(:restore_id, Shapes::ShapeRef.new(shape: RestoreIdType, required: true, location_name: "RestoreId"))
+    DescribePointInTimeRecoveryRequest.struct_class = Types::DescribePointInTimeRecoveryRequest
+
+    DescribePointInTimeRecoveryResponse.add_member(:restoration, Shapes::ShapeRef.new(shape: RestorationType, location_name: "Restoration"))
+    DescribePointInTimeRecoveryResponse.struct_class = Types::DescribePointInTimeRecoveryResponse
 
     DescribeResourceServerRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     DescribeResourceServerRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ResourceServerIdentifierType, required: true, location_name: "Identifier"))
@@ -1822,6 +1853,13 @@ module Aws::CognitoIdentityProvider
     InitiateAuthResponse.add_member(:available_challenges, Shapes::ShapeRef.new(shape: AvailableChallengeListType, location_name: "AvailableChallenges"))
     InitiateAuthResponse.struct_class = Types::InitiateAuthResponse
 
+    InitiatePointInTimeRecoveryRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    InitiatePointInTimeRecoveryRequest.add_member(:restore_timestamp, Shapes::ShapeRef.new(shape: DateType, required: true, location_name: "RestoreTimestamp"))
+    InitiatePointInTimeRecoveryRequest.struct_class = Types::InitiatePointInTimeRecoveryRequest
+
+    InitiatePointInTimeRecoveryResponse.add_member(:restoration, Shapes::ShapeRef.new(shape: RestorationType, location_name: "Restoration"))
+    InitiatePointInTimeRecoveryResponse.struct_class = Types::InitiatePointInTimeRecoveryResponse
+
     InternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
     InternalErrorException.struct_class = Types::InternalErrorException
 
@@ -1920,6 +1958,15 @@ module Aws::CognitoIdentityProvider
     ListIdentityProvidersResponse.struct_class = Types::ListIdentityProvidersResponse
 
     ListOfStringTypes.member = Shapes::ShapeRef.new(shape: StringType)
+
+    ListPointInTimeRecoveriesRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    ListPointInTimeRecoveriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationKeyType, location_name: "NextToken"))
+    ListPointInTimeRecoveriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PoolQueryLimitType, location_name: "MaxResults"))
+    ListPointInTimeRecoveriesRequest.struct_class = Types::ListPointInTimeRecoveriesRequest
+
+    ListPointInTimeRecoveriesResponse.add_member(:restorations, Shapes::ShapeRef.new(shape: RestorationListType, location_name: "Restorations"))
+    ListPointInTimeRecoveriesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationKeyType, location_name: "NextToken"))
+    ListPointInTimeRecoveriesResponse.struct_class = Types::ListPointInTimeRecoveriesResponse
 
     ListResourceServersRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     ListResourceServersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListResourceServersLimitType, location_name: "MaxResults"))
@@ -2197,6 +2244,28 @@ module Aws::CognitoIdentityProvider
     RespondToAuthChallengeResponse.add_member(:available_challenges, Shapes::ShapeRef.new(shape: AvailableChallengeListType, location_name: "AvailableChallenges"))
     RespondToAuthChallengeResponse.struct_class = Types::RespondToAuthChallengeResponse
 
+    RestorationDescriptionType.add_member(:restore_id, Shapes::ShapeRef.new(shape: RestoreIdType, location_name: "RestoreId"))
+    RestorationDescriptionType.add_member(:restore_status, Shapes::ShapeRef.new(shape: RestoreStatusType, location_name: "RestoreStatus"))
+    RestorationDescriptionType.add_member(:restore_timestamp, Shapes::ShapeRef.new(shape: DateType, location_name: "RestoreTimestamp"))
+    RestorationDescriptionType.struct_class = Types::RestorationDescriptionType
+
+    RestorationListType.member = Shapes::ShapeRef.new(shape: RestorationDescriptionType)
+
+    RestorationType.add_member(:restore_id, Shapes::ShapeRef.new(shape: RestoreIdType, location_name: "RestoreId"))
+    RestorationType.add_member(:restore_status, Shapes::ShapeRef.new(shape: RestoreStatusType, location_name: "RestoreStatus"))
+    RestorationType.add_member(:restore_timestamp, Shapes::ShapeRef.new(shape: DateType, location_name: "RestoreTimestamp"))
+    RestorationType.add_member(:trigger_timestamp, Shapes::ShapeRef.new(shape: DateType, location_name: "TriggerTimestamp"))
+    RestorationType.add_member(:restore_preview, Shapes::ShapeRef.new(shape: RestorePreviewListType, location_name: "RestorePreview"))
+    RestorationType.struct_class = Types::RestorationType
+
+    RestorePreviewListType.member = Shapes::ShapeRef.new(shape: RestorePreviewType)
+
+    RestorePreviewType.add_member(:entity, Shapes::ShapeRef.new(shape: StringType, location_name: "Entity"))
+    RestorePreviewType.add_member(:create_count, Shapes::ShapeRef.new(shape: LongType, location_name: "CreateCount"))
+    RestorePreviewType.add_member(:update_count, Shapes::ShapeRef.new(shape: LongType, location_name: "UpdateCount"))
+    RestorePreviewType.add_member(:delete_count, Shapes::ShapeRef.new(shape: LongType, location_name: "DeleteCount"))
+    RestorePreviewType.struct_class = Types::RestorePreviewType
+
     RevokeTokenRequest.add_member(:token, Shapes::ShapeRef.new(shape: TokenModelType, required: true, location_name: "Token"))
     RevokeTokenRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, required: true, location_name: "ClientId"))
     RevokeTokenRequest.add_member(:client_secret, Shapes::ShapeRef.new(shape: ClientSecretType, location_name: "ClientSecret"))
@@ -2390,6 +2459,13 @@ module Aws::CognitoIdentityProvider
     SoftwareTokenMfaSettingsType.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanType, location_name: "Enabled"))
     SoftwareTokenMfaSettingsType.add_member(:preferred_mfa, Shapes::ShapeRef.new(shape: BooleanType, location_name: "PreferredMfa"))
     SoftwareTokenMfaSettingsType.struct_class = Types::SoftwareTokenMfaSettingsType
+
+    StartPointInTimeRecoveryRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    StartPointInTimeRecoveryRequest.add_member(:restore_id, Shapes::ShapeRef.new(shape: RestoreIdType, required: true, location_name: "RestoreId"))
+    StartPointInTimeRecoveryRequest.struct_class = Types::StartPointInTimeRecoveryRequest
+
+    StartPointInTimeRecoveryResponse.add_member(:restoration, Shapes::ShapeRef.new(shape: RestorationType, location_name: "Restoration"))
+    StartPointInTimeRecoveryResponse.struct_class = Types::StartPointInTimeRecoveryResponse
 
     StartUserImportJobRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     StartUserImportJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: UserImportJobIdType, required: true, location_name: "JobId"))
@@ -3494,6 +3570,22 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
       end)
 
+      api.add_operation(:cancel_point_in_time_recovery, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelPointInTimeRecovery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelPointInTimeRecoveryRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelPointInTimeRecoveryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: FeatureUnavailableInTierException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
       api.add_operation(:change_password, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ChangePassword"
         o.http_method = "POST"
@@ -4030,6 +4122,21 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
+      api.add_operation(:describe_point_in_time_recovery, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribePointInTimeRecovery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribePointInTimeRecoveryRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribePointInTimeRecoveryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: FeatureUnavailableInTierException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
       api.add_operation(:describe_resource_server, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeResourceServer"
         o.http_method = "POST"
@@ -4517,6 +4624,23 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)
 
+      api.add_operation(:initiate_point_in_time_recovery, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "InitiatePointInTimeRecovery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: InitiatePointInTimeRecoveryRequest)
+        o.output = Shapes::ShapeRef.new(shape: InitiatePointInTimeRecoveryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: FeatureUnavailableInTierException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
       api.add_operation(:list_devices, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDevices"
         o.http_method = "POST"
@@ -4575,6 +4699,21 @@ module Aws::CognitoIdentityProvider
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_point_in_time_recoveries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPointInTimeRecoveries"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListPointInTimeRecoveriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPointInTimeRecoveriesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: FeatureUnavailableInTierException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
       api.add_operation(:list_resource_servers, Seahorse::Model::Operation.new.tap do |o|
@@ -5038,6 +5177,22 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: CodeDeliveryFailureException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
+      api.add_operation(:start_point_in_time_recovery, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartPointInTimeRecovery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartPointInTimeRecoveryRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartPointInTimeRecoveryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: FeatureUnavailableInTierException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
       api.add_operation(:start_user_import_job, Seahorse::Model::Operation.new.tap do |o|

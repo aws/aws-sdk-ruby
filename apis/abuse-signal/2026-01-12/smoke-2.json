@@ -1,0 +1,34 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "ListAbuseReportStatusesSuccess",
+    "operationName" : "ListAbuseReportStatuses",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetAbuseReportStatusFailure",
+    "operationName" : "GetAbuseReportStatus",
+    "input" : {
+      "reportId" : "nonexistent00000000000"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

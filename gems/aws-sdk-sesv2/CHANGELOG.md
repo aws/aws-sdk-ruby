@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.124.0 (2026-11-18)
+------------------
+
+* Feature - This release adds support for Spillover Routing in Amazon SES.
+
 1.123.0 (2026-11-16)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2026-11-18)
+------------------
+
+* Feature - Adds resource tags functionality to the AWS Health service
+
 1.117.0 (2026-11-16)
 ------------------
 

@@ -150,6 +150,7 @@ module Aws
                          assume_role_policy_document: ::String,
                          ?description: ::String,
                          ?max_session_duration: ::Integer,
+                         ?max_signin_session_duration: ::Integer,
                          ?permissions_boundary: ::String,
                          ?tags: Array[
                            {

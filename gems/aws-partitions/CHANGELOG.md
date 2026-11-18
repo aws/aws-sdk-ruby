@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1308.0 (2026-11-18)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::AbuseSignal`.
+
 1.1307.0 (2026-11-17)
 ------------------
 

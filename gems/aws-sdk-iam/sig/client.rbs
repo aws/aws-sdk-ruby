@@ -234,7 +234,8 @@ module Aws
       def create_login_profile: (
                                   ?user_name: ::String,
                                   ?password: ::String,
-                                  ?password_reset_required: bool
+                                  ?password_reset_required: bool,
+                                  ?max_signin_session_duration: ::Integer
                                 ) -> _CreateLoginProfileResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLoginProfileResponseSuccess
 
@@ -299,6 +300,7 @@ module Aws
                          assume_role_policy_document: ::String,
                          ?description: ::String,
                          ?max_session_duration: ::Integer,
+                         ?max_signin_session_duration: ::Integer,
                          ?permissions_boundary: ::String,
                          ?tags: Array[
                            {
@@ -1924,7 +1926,9 @@ module Aws
       def update_login_profile: (
                                   user_name: ::String,
                                   ?password: ::String,
-                                  ?password_reset_required: bool
+                                  ?password_reset_required: bool,
+                                  ?max_signin_session_duration: ::Integer,
+                                  ?reset_max_signin_session_duration: bool
                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -1942,7 +1946,9 @@ module Aws
       def update_role: (
                          role_name: ::String,
                          ?description: ::String,
-                         ?max_session_duration: ::Integer
+                         ?max_session_duration: ::Integer,
+                         ?max_signin_session_duration: ::Integer,
+                         ?reset_max_signin_session_duration: bool
                        ) -> _UpdateRoleResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRoleResponseSuccess
 

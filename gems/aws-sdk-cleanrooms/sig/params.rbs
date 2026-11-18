@@ -238,6 +238,16 @@ module Aws
       }?
     }
 
+      type protected_job_compute_configuration = {
+      worker: {
+        type: ("CR.1X" | "CR.4X"),
+        number: ::Integer,
+        properties: {
+          spark: Hash[::String, ::String]?
+        }?
+      }?
+    }
+
     end
   end
 end

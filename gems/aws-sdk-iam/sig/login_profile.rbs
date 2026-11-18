@@ -23,6 +23,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/LoginProfile.html#password_reset_required-instance_method
       def password_reset_required: () -> bool
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/LoginProfile.html#max_signin_session_duration-instance_method
+      def max_signin_session_duration: () -> ::Integer
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/LoginProfile.html#load-instance_method
@@ -39,7 +42,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/LoginProfile.html#create-instance_method
       def create: (
                     ?password: ::String,
-                    ?password_reset_required: bool
+                    ?password_reset_required: bool,
+                    ?max_signin_session_duration: ::Integer
                   ) -> LoginProfile
                 | (?Hash[Symbol, untyped]) -> LoginProfile
 
@@ -51,7 +55,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/LoginProfile.html#update-instance_method
       def update: (
                     ?password: ::String,
-                    ?password_reset_required: bool
+                    ?password_reset_required: bool,
+                    ?max_signin_session_duration: ::Integer,
+                    ?reset_max_signin_session_duration: bool
                   ) -> ::Aws::EmptyStructure
                 | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
 

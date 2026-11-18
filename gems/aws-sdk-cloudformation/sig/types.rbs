@@ -1383,6 +1383,29 @@ module Aws::CloudFormation
     class RecordHandlerProgressOutput < Aws::EmptyStructure
     end
 
+    class RegionalStackInstancesDeployment
+      attr_accessor status: ("PENDING" | "NOT_APPLICABLE" | "NOT_STARTED" | "IN_PROGRESS" | "SUCCEEDED" | "PARTIAL_SUCCESS" | "FAILED")
+      attr_accessor succeeded_stack_instances_count: ::Integer
+      attr_accessor failed_stack_instances_count: ::Integer
+      attr_accessor completed_stack_instances_count: ::Integer
+      attr_accessor pending_stack_instances_count: ::Integer
+      attr_accessor cancelled_stack_instances_count: ::Integer
+      attr_accessor skipped_stack_instances_count: ::Integer
+      attr_accessor total_stack_instances_count: ::Integer
+      attr_accessor percentage_completed: ::Float
+      SENSITIVE: []
+    end
+
+    class RegionalStages
+      attr_accessor regional_stack_instances_deployment: Types::RegionalStackInstancesDeployment
+      SENSITIVE: []
+    end
+
+    class RegionalStatusDetail
+      attr_accessor stages: Types::RegionalStages
+      SENSITIVE: []
+    end
+
     class RegisterPublisherInput
       attr_accessor accept_terms_and_conditions: bool
       attr_accessor connection_arn: ::String
@@ -1529,6 +1552,16 @@ module Aws::CloudFormation
       attr_accessor resource_type: ::String
       attr_accessor logical_resource_id: ::String
       attr_accessor resource_identifier: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RoleProvisioning
+      attr_accessor status: ("PENDING" | "NOT_APPLICABLE" | "NOT_STARTED" | "IN_PROGRESS" | "SUCCEEDED" | "PARTIAL_SUCCESS" | "FAILED")
+      attr_accessor succeeded_accounts_count: ::Integer
+      attr_accessor failed_accounts_count: ::Integer
+      attr_accessor completed_accounts_count: ::Integer
+      attr_accessor pending_accounts_count: ::Integer
+      attr_accessor percentage_completed: ::Float
       SENSITIVE: []
     end
 
@@ -1754,6 +1787,18 @@ module Aws::CloudFormation
       SENSITIVE: []
     end
 
+    class StackInstancesDeployment
+      attr_accessor status: ("PENDING" | "NOT_APPLICABLE" | "NOT_STARTED" | "IN_PROGRESS" | "SUCCEEDED" | "PARTIAL_SUCCESS" | "FAILED")
+      attr_accessor succeeded_stack_instances_count: ::Integer
+      attr_accessor failed_stack_instances_count: ::Integer
+      attr_accessor completed_stack_instances_count: ::Integer
+      attr_accessor pending_stack_instances_count: ::Integer
+      attr_accessor cancelled_stack_instances_count: ::Integer
+      attr_accessor skipped_stack_instances_count: ::Integer
+      attr_accessor percentage_completed: ::Float
+      SENSITIVE: []
+    end
+
     class StackNotFoundException < Aws::EmptyStructure
     end
 
@@ -1915,6 +1960,7 @@ module Aws::CloudFormation
       attr_accessor stack_set_drift_detection_details: Types::StackSetDriftDetectionDetails
       attr_accessor status_reason: ::String
       attr_accessor status_details: Types::StackSetOperationStatusDetails
+      attr_accessor regional_status_details: ::Hash[::String, Types::RegionalStatusDetail]
       SENSITIVE: []
     end
 
@@ -1940,6 +1986,9 @@ module Aws::CloudFormation
     end
 
     class StackSetOperationStatusDetails
+      attr_accessor stages: Types::Stages
+      attr_accessor total_accounts_count: ::Integer
+      attr_accessor total_stack_instances_count: ::Integer
       attr_accessor failed_stack_instances_count: ::Integer
       SENSITIVE: []
     end
@@ -1982,6 +2031,12 @@ module Aws::CloudFormation
       attr_accessor root_id: ::String
       attr_accessor drift_information: Types::StackDriftInformationSummary
       attr_accessor last_operations: ::Array[Types::OperationEntry]
+      SENSITIVE: []
+    end
+
+    class Stages
+      attr_accessor role_provisioning: Types::RoleProvisioning
+      attr_accessor stack_instances_deployment: Types::StackInstancesDeployment
       SENSITIVE: []
     end
 

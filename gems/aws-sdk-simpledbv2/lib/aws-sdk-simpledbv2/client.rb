@@ -733,7 +733,7 @@ module Aws::SimpleDBv2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-simpledbv2'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

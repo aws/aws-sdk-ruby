@@ -527,10 +527,16 @@ module Aws::SESV2
       SENSITIVE: []
     end
 
+    class DeliveryAttributes
+      attr_accessor shared_pool_delivery_mode: ("GLOBAL" | "REGIONAL")
+      SENSITIVE: []
+    end
+
     class DeliveryOptions
       attr_accessor tls_policy: ("REQUIRE" | "OPTIONAL")
       attr_accessor sending_pool_name: ::String
       attr_accessor max_delivery_seconds: ::Integer
+      attr_accessor shared_pool_delivery_mode: ("GLOBAL" | "REGIONAL" | "ACCOUNT")
       SENSITIVE: []
     end
 
@@ -737,6 +743,7 @@ module Aws::SESV2
       attr_accessor details: Types::AccountDetails
       attr_accessor vdm_attributes: Types::VdmAttributes
       attr_accessor pricing_attributes: Types::PricingAttributes
+      attr_accessor delivery_attributes: Types::DeliveryAttributes
       SENSITIVE: []
     end
 
@@ -1546,6 +1553,14 @@ module Aws::SESV2
     class PutAccountDedicatedIpWarmupAttributesResponse < Aws::EmptyStructure
     end
 
+    class PutAccountDeliveryAttributesRequest
+      attr_accessor shared_pool_delivery_mode: ("GLOBAL" | "REGIONAL")
+      SENSITIVE: []
+    end
+
+    class PutAccountDeliveryAttributesResponse < Aws::EmptyStructure
+    end
+
     class PutAccountDetailsRequest
       attr_accessor mail_type: ("MARKETING" | "TRANSACTIONAL")
       attr_accessor website_url: ::String
@@ -1606,6 +1621,7 @@ module Aws::SESV2
       attr_accessor tls_policy: ("REQUIRE" | "OPTIONAL")
       attr_accessor sending_pool_name: ::String
       attr_accessor max_delivery_seconds: ::Integer
+      attr_accessor shared_pool_delivery_mode: ("GLOBAL" | "REGIONAL" | "ACCOUNT")
       SENSITIVE: []
     end
 

@@ -54,7 +54,7 @@ module Aws::AgentRegistry
   autoload :EndpointProvider, 'aws-sdk-agentregistry/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-agentregistry/endpoints'
 
-  GEM_VERSION = '1.17.0'
+  GEM_VERSION = '1.18.0'
 
 end
 

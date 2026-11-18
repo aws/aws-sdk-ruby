@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.171.0 (2026-11-18)
+------------------
+
+* Feature - This release adds support for the keyExchange field in CloudTrail tlsDetails, enabling customers to distinguish classical from post-quantum hybrid key exchange for TLS connections on Application Load Balancers.
+
 1.170.0 (2026-11-16)
 ------------------
 

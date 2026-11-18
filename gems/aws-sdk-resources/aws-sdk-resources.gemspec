@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-apigateway', '~> 1')
   spec.add_dependency('aws-sdk-arcregionswitch', '~> 1')
   spec.add_dependency('aws-sdk-arczonalshift', '~> 1')
+  spec.add_dependency('aws-sdk-abusesignal', '~> 1')
   spec.add_dependency('aws-sdk-accessanalyzer', '~> 1')
   spec.add_dependency('aws-sdk-account', '~> 1')
   spec.add_dependency('aws-sdk-accountaccess', '~> 1')

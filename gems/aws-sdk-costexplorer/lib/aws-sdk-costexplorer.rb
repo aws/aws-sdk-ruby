@@ -54,7 +54,7 @@ module Aws::CostExplorer
   autoload :EndpointProvider, 'aws-sdk-costexplorer/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-costexplorer/endpoints'
 
-  GEM_VERSION = '1.168.0'
+  GEM_VERSION = '1.169.0'
 
 end
 

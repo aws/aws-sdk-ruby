@@ -309,6 +309,7 @@ RubyGems.org page under "LINKS" section.
 | ARC - Region switch                                   | Aws::ARCRegionswitch                     | aws-sdk-arcregionswitch                     | 2022-07-26  |
 | AWS AI Ops                                            | Aws::AIOps                               | aws-sdk-aiops                               | 2018-05-10  |
 | AWS ARC - Zonal Shift                                 | Aws::ARCZonalShift                       | aws-sdk-arczonalshift                       | 2022-10-30  |
+| AWS Abuse Signal API                                  | Aws::AbuseSignal                         | aws-sdk-abusesignal                         | 2026-01-12  |
 | AWS Account                                           | Aws::Account                             | aws-sdk-account                             | 2021-02-01  |
 | AWS Amplify                                           | Aws::Amplify                             | aws-sdk-amplify                             | 2017-07-25  |
 | AWS Amplify UI Builder                                | Aws::AmplifyUIBuilder                    | aws-sdk-amplifyuibuilder                    | 2021-08-11  |

@@ -493,6 +493,17 @@ module Aws::CognitoIdentityProvider
       SENSITIVE: [:access_token, :refresh_token, :id_token]
     end
 
+    class CancelPointInTimeRecoveryRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor restore_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelPointInTimeRecoveryResponse
+      attr_accessor restoration: Types::RestorationType
+      SENSITIVE: []
+    end
+
     class ChallengeResponseType
       attr_accessor challenge_name: ("Password" | "Mfa")
       attr_accessor challenge_response: ("Success" | "Failure")
@@ -966,6 +977,17 @@ module Aws::CognitoIdentityProvider
 
     class DescribeManagedLoginBrandingResponse
       attr_accessor managed_login_branding: Types::ManagedLoginBrandingType
+      SENSITIVE: []
+    end
+
+    class DescribePointInTimeRecoveryRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor restore_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePointInTimeRecoveryResponse
+      attr_accessor restoration: Types::RestorationType
       SENSITIVE: []
     end
 
@@ -1492,6 +1514,17 @@ module Aws::CognitoIdentityProvider
       SENSITIVE: [:session]
     end
 
+    class InitiatePointInTimeRecoveryRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor restore_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class InitiatePointInTimeRecoveryResponse
+      attr_accessor restoration: Types::RestorationType
+      SENSITIVE: []
+    end
+
     class InternalErrorException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1626,6 +1659,19 @@ module Aws::CognitoIdentityProvider
 
     class ListIdentityProvidersResponse
       attr_accessor providers: ::Array[Types::ProviderDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPointInTimeRecoveriesRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPointInTimeRecoveriesResponse
+      attr_accessor restorations: ::Array[Types::RestorationDescriptionType]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1991,6 +2037,30 @@ module Aws::CognitoIdentityProvider
       SENSITIVE: [:session]
     end
 
+    class RestorationDescriptionType
+      attr_accessor restore_id: ::String
+      attr_accessor restore_status: ("PREVIEW_GENERATING" | "PREVIEW_GENERATED" | "PREVIEW_CANCELLED" | "PREVIEW_GENERATION_FAILED" | "PREVIEW_EXPIRED" | "RESTORING" | "RESTORE_COMPLETED" | "TEMPORARY_INTERNAL_ERROR_SEE_SUPPORT_CASE" | "AWS_ABORTED")
+      attr_accessor restore_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class RestorationType
+      attr_accessor restore_id: ::String
+      attr_accessor restore_status: ("PREVIEW_GENERATING" | "PREVIEW_GENERATED" | "PREVIEW_CANCELLED" | "PREVIEW_GENERATION_FAILED" | "PREVIEW_EXPIRED" | "RESTORING" | "RESTORE_COMPLETED" | "TEMPORARY_INTERNAL_ERROR_SEE_SUPPORT_CASE" | "AWS_ABORTED")
+      attr_accessor restore_timestamp: ::Time
+      attr_accessor trigger_timestamp: ::Time
+      attr_accessor restore_preview: ::Array[Types::RestorePreviewType]
+      SENSITIVE: []
+    end
+
+    class RestorePreviewType
+      attr_accessor entity: ::String
+      attr_accessor create_count: ::Integer
+      attr_accessor update_count: ::Integer
+      attr_accessor delete_count: ::Integer
+      SENSITIVE: []
+    end
+
     class RevokeTokenRequest
       attr_accessor token: ::String
       attr_accessor client_id: ::String
@@ -2244,6 +2314,17 @@ module Aws::CognitoIdentityProvider
     class SoftwareTokenMfaSettingsType
       attr_accessor enabled: bool
       attr_accessor preferred_mfa: bool
+      SENSITIVE: []
+    end
+
+    class StartPointInTimeRecoveryRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor restore_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartPointInTimeRecoveryResponse
+      attr_accessor restoration: Types::RestorationType
       SENSITIVE: []
     end
 

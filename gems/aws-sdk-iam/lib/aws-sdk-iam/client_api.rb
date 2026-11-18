@@ -527,6 +527,7 @@ module Aws::IAM
     markerType = Shapes::StringShape.new(name: 'markerType')
     maxItemsType = Shapes::IntegerShape.new(name: 'maxItemsType')
     maxPasswordAgeType = Shapes::IntegerShape.new(name: 'maxPasswordAgeType')
+    maxSigninSessionDurationType = Shapes::IntegerShape.new(name: 'maxSigninSessionDurationType')
     mfaDeviceListType = Shapes::ListShape.new(name: 'mfaDeviceListType')
     minimumPasswordLengthType = Shapes::IntegerShape.new(name: 'minimumPasswordLengthType')
     minorVersionType = Shapes::IntegerShape.new(name: 'minorVersionType')
@@ -783,6 +784,7 @@ module Aws::IAM
     CreateLoginProfileRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, location_name: "UserName"))
     CreateLoginProfileRequest.add_member(:password, Shapes::ShapeRef.new(shape: passwordType, location_name: "Password"))
     CreateLoginProfileRequest.add_member(:password_reset_required, Shapes::ShapeRef.new(shape: booleanType, location_name: "PasswordResetRequired"))
+    CreateLoginProfileRequest.add_member(:max_signin_session_duration, Shapes::ShapeRef.new(shape: maxSigninSessionDurationType, location_name: "MaxSigninSessionDuration"))
     CreateLoginProfileRequest.struct_class = Types::CreateLoginProfileRequest
 
     CreateLoginProfileResponse.add_member(:login_profile, Shapes::ShapeRef.new(shape: LoginProfile, required: true, location_name: "LoginProfile"))
@@ -821,6 +823,7 @@ module Aws::IAM
     CreateRoleRequest.add_member(:assume_role_policy_document, Shapes::ShapeRef.new(shape: policyDocumentType, required: true, location_name: "AssumeRolePolicyDocument"))
     CreateRoleRequest.add_member(:description, Shapes::ShapeRef.new(shape: roleDescriptionType, location_name: "Description"))
     CreateRoleRequest.add_member(:max_session_duration, Shapes::ShapeRef.new(shape: roleMaxSessionDurationType, location_name: "MaxSessionDuration"))
+    CreateRoleRequest.add_member(:max_signin_session_duration, Shapes::ShapeRef.new(shape: maxSigninSessionDurationType, location_name: "MaxSigninSessionDuration"))
     CreateRoleRequest.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: arnType, location_name: "PermissionsBoundary"))
     CreateRoleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
     CreateRoleRequest.struct_class = Types::CreateRoleRequest
@@ -1779,6 +1782,7 @@ module Aws::IAM
     LoginProfile.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, required: true, location_name: "UserName"))
     LoginProfile.add_member(:create_date, Shapes::ShapeRef.new(shape: dateType, required: true, location_name: "CreateDate"))
     LoginProfile.add_member(:password_reset_required, Shapes::ShapeRef.new(shape: booleanType, location_name: "PasswordResetRequired"))
+    LoginProfile.add_member(:max_signin_session_duration, Shapes::ShapeRef.new(shape: maxSigninSessionDurationType, location_name: "MaxSigninSessionDuration"))
     LoginProfile.struct_class = Types::LoginProfile
 
     MFADevice.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, required: true, location_name: "UserName"))
@@ -2020,6 +2024,7 @@ module Aws::IAM
     Role.add_member(:assume_role_policy_document, Shapes::ShapeRef.new(shape: policyDocumentType, location_name: "AssumeRolePolicyDocument"))
     Role.add_member(:description, Shapes::ShapeRef.new(shape: roleDescriptionType, location_name: "Description"))
     Role.add_member(:max_session_duration, Shapes::ShapeRef.new(shape: roleMaxSessionDurationType, location_name: "MaxSessionDuration"))
+    Role.add_member(:max_signin_session_duration, Shapes::ShapeRef.new(shape: maxSigninSessionDurationType, location_name: "MaxSigninSessionDuration"))
     Role.add_member(:permissions_boundary, Shapes::ShapeRef.new(shape: AttachedPermissionsBoundary, location_name: "PermissionsBoundary"))
     Role.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, location_name: "Tags"))
     Role.add_member(:role_last_used, Shapes::ShapeRef.new(shape: RoleLastUsed, location_name: "RoleLastUsed"))
@@ -2348,6 +2353,8 @@ module Aws::IAM
     UpdateLoginProfileRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, required: true, location_name: "UserName"))
     UpdateLoginProfileRequest.add_member(:password, Shapes::ShapeRef.new(shape: passwordType, location_name: "Password"))
     UpdateLoginProfileRequest.add_member(:password_reset_required, Shapes::ShapeRef.new(shape: booleanObjectType, location_name: "PasswordResetRequired"))
+    UpdateLoginProfileRequest.add_member(:max_signin_session_duration, Shapes::ShapeRef.new(shape: maxSigninSessionDurationType, location_name: "MaxSigninSessionDuration"))
+    UpdateLoginProfileRequest.add_member(:reset_max_signin_session_duration, Shapes::ShapeRef.new(shape: booleanObjectType, location_name: "ResetMaxSigninSessionDuration"))
     UpdateLoginProfileRequest.struct_class = Types::UpdateLoginProfileRequest
 
     UpdateOpenIDConnectProviderThumbprintRequest.add_member(:open_id_connect_provider_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "OpenIDConnectProviderArn"))
@@ -2364,6 +2371,8 @@ module Aws::IAM
     UpdateRoleRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: roleNameType, required: true, location_name: "RoleName"))
     UpdateRoleRequest.add_member(:description, Shapes::ShapeRef.new(shape: roleDescriptionType, location_name: "Description"))
     UpdateRoleRequest.add_member(:max_session_duration, Shapes::ShapeRef.new(shape: roleMaxSessionDurationType, location_name: "MaxSessionDuration"))
+    UpdateRoleRequest.add_member(:max_signin_session_duration, Shapes::ShapeRef.new(shape: maxSigninSessionDurationType, location_name: "MaxSigninSessionDuration"))
+    UpdateRoleRequest.add_member(:reset_max_signin_session_duration, Shapes::ShapeRef.new(shape: booleanObjectType, location_name: "ResetMaxSigninSessionDuration"))
     UpdateRoleRequest.struct_class = Types::UpdateRoleRequest
 
     UpdateRoleResponse.struct_class = Types::UpdateRoleResponse
@@ -4693,6 +4702,7 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: PasswordPolicyViolationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -4716,6 +4726,7 @@ module Aws::IAM
         o.output = Shapes::ShapeRef.new(shape: UpdateRoleResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnmodifiableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 

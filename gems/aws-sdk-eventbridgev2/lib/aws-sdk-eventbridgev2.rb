@@ -55,7 +55,7 @@ module Aws::EventBridgeV2
   autoload :EndpointProvider, 'aws-sdk-eventbridgev2/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-eventbridgev2/endpoints'
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.12.0'
 
 end
 

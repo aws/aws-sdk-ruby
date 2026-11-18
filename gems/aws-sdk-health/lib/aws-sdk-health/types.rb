@@ -163,17 +163,10 @@ module Aws::Health
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] account_tags
-    #   A map of account tag key-value pairs attached to the affected
-    #   entity.
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] tags
-    #   A map of resource tag key-value pairs attached to the affected
-    #   entity.
-    #
-    #   <note markdown="1"> Currently, the `tags` property isn't supported.
-    #
-    #    </note>
+    #   A map of account tag key-value pairs for the account that owns the
+    #   affected entity. This field is returned only by
+    #   DescribeAffectedEntitiesForOrganization and is not populated by
+    #   DescribeAffectedEntities.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] entity_metadata
@@ -192,7 +185,6 @@ module Aws::Health
       :status_code,
       :resource_tags,
       :account_tags,
-      :tags,
       :entity_metadata)
       SENSITIVE = []
       include Aws::Structure
@@ -234,8 +226,8 @@ module Aws::Health
 
     # @!attribute [rw] configured_tag_keys
     #   The list of tag keys that were successfully configured for the
-    #   organization.
-    #   @return [Array<Types::TagKeyForOrganization>]
+    #   organization, with the current status of each tag key.
+    #   @return [Array<Types::OrganizationTagKey>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/ConfigureTagsForOrganizationResponse AWS API Documentation
     #
@@ -248,7 +240,7 @@ module Aws::Health
     # @!attribute [rw] tag_keys
     #   The list of resource tag keys to configure for Health event
     #   tracking.
-    #   @return [Array<Types::ResourceTagKey>]
+    #   @return [Array<Types::ConfigureTagsTagKey>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/ConfigureTagsRequest AWS API Documentation
     #
@@ -266,6 +258,25 @@ module Aws::Health
     #
     class ConfigureTagsResponse < Struct.new(
       :configured_tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A resource tag key to configure for Health event tracking.
+    #
+    # @!attribute [rw] key
+    #   The tag key name.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_for_event_bridge
+    #   Whether this tag key is enabled for EventBridge notifications.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/ConfigureTagsTagKey AWS API Documentation
+    #
+    class ConfigureTagsTagKey < Struct.new(
+      :key,
+      :enabled_for_event_bridge)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1226,11 +1237,9 @@ module Aws::Health
     #   @return [Array<Types::DateTimeRange>]
     #
     # @!attribute [rw] tags
-    #   A map of resource tag key-value pairs to filter affected entities.
-    #
-    #   <note markdown="1"> Currently, the `tags` property isn't supported.
-    #
-    #    </note>
+    #   A map of tag keys to lists of tag values. A tag matches when its key
+    #   is in the map and its value is one of the values listed for that
+    #   key. The filter matches when at least one key in the map matches.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] status_codes
@@ -1595,11 +1604,9 @@ module Aws::Health
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   A map of resource tag key-value pairs to filter affected entities.
-    #
-    #   <note markdown="1"> Currently, the `tags` property isn't supported.
-    #
-    #    </note>
+    #   A map of tag keys to lists of tag values. A tag matches when its key
+    #   is in the map and its value is one of the values listed for that
+    #   key. The filter matches when at least one key in the map matches.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] event_status_codes

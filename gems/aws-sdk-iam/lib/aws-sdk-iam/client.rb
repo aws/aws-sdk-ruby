@@ -580,6 +580,7 @@ module Aws::IAM
     #   resp.role.assume_role_policy_document #=> String
     #   resp.role.description #=> String
     #   resp.role.max_session_duration #=> Integer
+    #   resp.role.max_signin_session_duration #=> Integer
     #   resp.role.permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.role.permissions_boundary.permissions_boundary_arn #=> String
     #   resp.role.tags #=> Array
@@ -1572,6 +1573,7 @@ module Aws::IAM
     #   resp.instance_profile.roles[0].assume_role_policy_document #=> String
     #   resp.instance_profile.roles[0].description #=> String
     #   resp.instance_profile.roles[0].max_session_duration #=> Integer
+    #   resp.instance_profile.roles[0].max_signin_session_duration #=> Integer
     #   resp.instance_profile.roles[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.instance_profile.roles[0].permissions_boundary.permissions_boundary_arn #=> String
     #   resp.instance_profile.roles[0].tags #=> Array
@@ -1656,6 +1658,17 @@ module Aws::IAM
     #   Specifies whether the user is required to set a new password on next
     #   sign-in.
     #
+    # @option params [Integer] :max_signin_session_duration
+    #   The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    #   session for this IAM user. This setting can have a value from 1 hour
+    #   (3600 seconds) to 90 days (7776000 seconds), inclusive. If you do not
+    #   specify a value, the setting remains unset and the existing sign-in
+    #   session behavior applies.
+    #
+    #   <note markdown="1"> This setting is not supported for the root user.
+    #
+    #    </note>
+    #
     # @return [Types::CreateLoginProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLoginProfileResponse#login_profile #login_profile} => Types::LoginProfile
@@ -1687,6 +1700,7 @@ module Aws::IAM
     #     user_name: "userNameType",
     #     password: "passwordType",
     #     password_reset_required: false,
+    #     max_signin_session_duration: 1,
     #   })
     #
     # @example Response structure
@@ -1694,6 +1708,7 @@ module Aws::IAM
     #   resp.login_profile.user_name #=> String
     #   resp.login_profile.create_date #=> Time
     #   resp.login_profile.password_reset_required #=> Boolean
+    #   resp.login_profile.max_signin_session_duration #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateLoginProfile AWS API Documentation
     #
@@ -2250,6 +2265,15 @@ module Aws::IAM
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     #
+    # @option params [Integer] :max_signin_session_duration
+    #   The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    #   session for users who sign in with this role. This setting can have a
+    #   value from 1 hour (3600 seconds) to 90 days (7776000 seconds),
+    #   inclusive. If you do not specify a value, the setting remains unset
+    #   and the existing sign-in session behavior applies.
+    #
+    #   This setting is independent of `MaxSessionDuration`.
+    #
     # @option params [String] :permissions_boundary
     #   The ARN of the managed policy that is used to set the permissions
     #   boundary for the role.
@@ -2320,6 +2344,7 @@ module Aws::IAM
     #     assume_role_policy_document: "policyDocumentType", # required
     #     description: "roleDescriptionType",
     #     max_session_duration: 1,
+    #     max_signin_session_duration: 1,
     #     permissions_boundary: "arnType",
     #     tags: [
     #       {
@@ -2339,6 +2364,7 @@ module Aws::IAM
     #   resp.role.assume_role_policy_document #=> String
     #   resp.role.description #=> String
     #   resp.role.max_session_duration #=> Integer
+    #   resp.role.max_signin_session_duration #=> Integer
     #   resp.role.permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.role.permissions_boundary.permissions_boundary_arn #=> String
     #   resp.role.tags #=> Array
@@ -2546,6 +2572,7 @@ module Aws::IAM
     #   resp.role.assume_role_policy_document #=> String
     #   resp.role.description #=> String
     #   resp.role.max_session_duration #=> Integer
+    #   resp.role.max_signin_session_duration #=> Integer
     #   resp.role.permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.role.permissions_boundary.permissions_boundary_arn #=> String
     #   resp.role.tags #=> Array
@@ -5148,6 +5175,7 @@ module Aws::IAM
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].assume_role_policy_document #=> String
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].description #=> String
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].max_session_duration #=> Integer
+    #   resp.role_detail_list[0].instance_profile_list[0].roles[0].max_signin_session_duration #=> Integer
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].permissions_boundary.permissions_boundary_arn #=> String
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].tags #=> Array
@@ -5928,6 +5956,7 @@ module Aws::IAM
     #   resp.instance_profile.roles[0].assume_role_policy_document #=> String
     #   resp.instance_profile.roles[0].description #=> String
     #   resp.instance_profile.roles[0].max_session_duration #=> Integer
+    #   resp.instance_profile.roles[0].max_signin_session_duration #=> Integer
     #   resp.instance_profile.roles[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.instance_profile.roles[0].permissions_boundary.permissions_boundary_arn #=> String
     #   resp.instance_profile.roles[0].tags #=> Array
@@ -6021,6 +6050,7 @@ module Aws::IAM
     #   resp.login_profile.user_name #=> String
     #   resp.login_profile.create_date #=> Time
     #   resp.login_profile.password_reset_required #=> Boolean
+    #   resp.login_profile.max_signin_session_duration #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetLoginProfile AWS API Documentation
     #
@@ -6542,6 +6572,7 @@ module Aws::IAM
     #   resp.role.assume_role_policy_document #=> String
     #   resp.role.description #=> String
     #   resp.role.max_session_duration #=> Integer
+    #   resp.role.max_signin_session_duration #=> Integer
     #   resp.role.permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.role.permissions_boundary.permissions_boundary_arn #=> String
     #   resp.role.tags #=> Array
@@ -8601,6 +8632,7 @@ module Aws::IAM
     #   resp.instance_profiles[0].roles[0].assume_role_policy_document #=> String
     #   resp.instance_profiles[0].roles[0].description #=> String
     #   resp.instance_profiles[0].roles[0].max_session_duration #=> Integer
+    #   resp.instance_profiles[0].roles[0].max_signin_session_duration #=> Integer
     #   resp.instance_profiles[0].roles[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.instance_profiles[0].roles[0].permissions_boundary.permissions_boundary_arn #=> String
     #   resp.instance_profiles[0].roles[0].tags #=> Array
@@ -8699,6 +8731,7 @@ module Aws::IAM
     #   resp.instance_profiles[0].roles[0].assume_role_policy_document #=> String
     #   resp.instance_profiles[0].roles[0].description #=> String
     #   resp.instance_profiles[0].roles[0].max_session_duration #=> Integer
+    #   resp.instance_profiles[0].roles[0].max_signin_session_duration #=> Integer
     #   resp.instance_profiles[0].roles[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.instance_profiles[0].roles[0].permissions_boundary.permissions_boundary_arn #=> String
     #   resp.instance_profiles[0].roles[0].tags #=> Array
@@ -9716,6 +9749,7 @@ module Aws::IAM
     #   resp.roles[0].assume_role_policy_document #=> String
     #   resp.roles[0].description #=> String
     #   resp.roles[0].max_session_duration #=> Integer
+    #   resp.roles[0].max_signin_session_duration #=> Integer
     #   resp.roles[0].permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.roles[0].permissions_boundary.permissions_boundary_arn #=> String
     #   resp.roles[0].tags #=> Array
@@ -13961,11 +13995,12 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Changes the password for the specified IAM user. You can use the CLI,
-    # the Amazon Web Services API, or the **Users** page in the IAM console
-    # to change the password for any IAM user. Use [ChangePassword][1] to
-    # change your own password in the **My Security Credentials** page in
-    # the Amazon Web Services Management Console.
+    # Changes the password or the maximum sign-in session duration for the
+    # specified IAM user. You can use the CLI, the Amazon Web Services API,
+    # or the **Users** page in the IAM console to change the password for
+    # any IAM user. Use [ChangePassword][1] to change your own password in
+    # the **My Security Credentials** page in the Amazon Web Services
+    # Management Console.
     #
     # For more information about modifying passwords, see [Managing
     # passwords][2] in the *IAM User Guide*.
@@ -14015,6 +14050,37 @@ module Aws::IAM
     #   Allows this new password to be used only once by requiring the
     #   specified IAM user to set a new password on next sign-in.
     #
+    # @option params [Integer] :max_signin_session_duration
+    #   The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    #   session for the specified IAM user. This setting can have a value from
+    #   1 hour (3600 seconds) to 90 days (7776000 seconds), inclusive, and
+    #   replaces any value currently configured for the user.
+    #
+    #   If you omit both this parameter and `ResetMaxSigninSessionDuration`,
+    #   the current setting is unchanged. You cannot specify this parameter
+    #   and set `ResetMaxSigninSessionDuration` to `true` in the same request.
+    #   If you update only the sign-in session duration, the user's password
+    #   and `PasswordResetRequired` setting do not change.
+    #
+    #   Changes to this setting apply to new sign-in sessions. Sessions that
+    #   are already established are not affected.
+    #
+    #   <note markdown="1"> This setting is not supported for the root user.
+    #
+    #    </note>
+    #
+    # @option params [Boolean] :reset_max_signin_session_duration
+    #   Specifies whether to clear the maximum sign-in session duration for
+    #   the specified IAM user. Set this value to `true` to return the setting
+    #   to its unset state, so that the existing sign-in session behavior
+    #   applies. When the setting is unset, the user's
+    #   `MaxSigninSessionDuration` is omitted from responses.
+    #
+    #   If you set this value to `false` or omit it, the current setting is
+    #   not cleared. You cannot set this value to `true` and specify
+    #   `MaxSigninSessionDuration` in the same request. Clearing a setting
+    #   that is already unset has no effect.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -14033,6 +14099,8 @@ module Aws::IAM
     #     user_name: "userNameType", # required
     #     password: "passwordType",
     #     password_reset_required: false,
+    #     max_signin_session_duration: 1,
+    #     reset_max_signin_session_duration: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateLoginProfile AWS API Documentation
@@ -14114,7 +14182,9 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Updates the description or maximum session duration setting of a role.
+    # Updates the description, maximum session duration, or maximum sign-in
+    # session duration of a role. You cannot change the maximum sign-in
+    # session duration of a service-linked role.
     #
     # @option params [required, String] :role_name
     #   The name of the role that you want to modify.
@@ -14148,6 +14218,40 @@ module Aws::IAM
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     #
+    # @option params [Integer] :max_signin_session_duration
+    #   The maximum duration (in seconds) of an Amazon Web Services Sign-In
+    #   session for users who sign in with the specified role. This setting
+    #   can have a value from 1 hour (3600 seconds) to 90 days (7776000
+    #   seconds), inclusive, and replaces any value currently configured for
+    #   the role. This setting is independent of `MaxSessionDuration`.
+    #
+    #   If you omit both this parameter and `ResetMaxSigninSessionDuration`,
+    #   the current setting is unchanged. You cannot specify this parameter
+    #   and set `ResetMaxSigninSessionDuration` to `true` in the same request.
+    #
+    #   Changes to this setting apply to new sign-in sessions. Sessions that
+    #   are already established are not affected.
+    #
+    #   <note markdown="1"> You cannot set this value on a service-linked role.
+    #
+    #    </note>
+    #
+    # @option params [Boolean] :reset_max_signin_session_duration
+    #   Specifies whether to clear the role's maximum sign-in session
+    #   duration. Set this value to `true` to return the setting to its unset
+    #   state, so that the existing sign-in session behavior applies. When the
+    #   setting is unset, the role's `MaxSigninSessionDuration` is omitted
+    #   from responses.
+    #
+    #   If you set this value to `false` or omit it, the current setting is
+    #   not cleared. You cannot set this value to `true` and specify
+    #   `MaxSigninSessionDuration` in the same request. Clearing a setting
+    #   that is already unset has no effect.
+    #
+    #   <note markdown="1"> You cannot reset this value on a service-linked role.
+    #
+    #    </note>
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -14156,6 +14260,8 @@ module Aws::IAM
     #     role_name: "roleNameType", # required
     #     description: "roleDescriptionType",
     #     max_session_duration: 1,
+    #     max_signin_session_duration: 1,
+    #     reset_max_signin_session_duration: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRole AWS API Documentation
@@ -14204,6 +14310,7 @@ module Aws::IAM
     #   resp.role.assume_role_policy_document #=> String
     #   resp.role.description #=> String
     #   resp.role.max_session_duration #=> Integer
+    #   resp.role.max_signin_session_duration #=> Integer
     #   resp.role.permissions_boundary.permissions_boundary_type #=> String, one of "PermissionsBoundaryPolicy"
     #   resp.role.permissions_boundary.permissions_boundary_arn #=> String
     #   resp.role.tags #=> Array
@@ -15065,7 +15172,7 @@ module Aws::IAM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.166.0'
+      context[:gem_version] = '1.167.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

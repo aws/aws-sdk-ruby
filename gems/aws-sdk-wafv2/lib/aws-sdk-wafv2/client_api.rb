@@ -32,6 +32,8 @@ module Aws::WAFV2
     All = Shapes::StructureShape.new(name: 'All')
     AllQueryArguments = Shapes::StructureShape.new(name: 'AllQueryArguments')
     AllowAction = Shapes::StructureShape.new(name: 'AllowAction')
+    AnalyticsConfig = Shapes::StructureShape.new(name: 'AnalyticsConfig')
+    AnalyticsMode = Shapes::StringShape.new(name: 'AnalyticsMode')
     AndStatement = Shapes::StructureShape.new(name: 'AndStatement')
     ApplicationAttribute = Shapes::StructureShape.new(name: 'ApplicationAttribute')
     ApplicationAttributes = Shapes::ListShape.new(name: 'ApplicationAttributes')
@@ -583,6 +585,9 @@ module Aws::WAFV2
     AllowAction.add_member(:custom_request_handling, Shapes::ShapeRef.new(shape: CustomRequestHandling, location_name: "CustomRequestHandling"))
     AllowAction.struct_class = Types::AllowAction
 
+    AnalyticsConfig.add_member(:mode, Shapes::ShapeRef.new(shape: AnalyticsMode, required: true, location_name: "Mode"))
+    AnalyticsConfig.struct_class = Types::AnalyticsConfig
+
     AndStatement.add_member(:statements, Shapes::ShapeRef.new(shape: Statements, required: true, location_name: "Statements"))
     AndStatement.struct_class = Types::AndStatement
 
@@ -774,6 +779,7 @@ module Aws::WAFV2
     CreateWebACLRequest.add_member(:on_source_d_do_s_protection_config, Shapes::ShapeRef.new(shape: OnSourceDDoSProtectionConfig, location_name: "OnSourceDDoSProtectionConfig"))
     CreateWebACLRequest.add_member(:application_config, Shapes::ShapeRef.new(shape: ApplicationConfig, location_name: "ApplicationConfig"))
     CreateWebACLRequest.add_member(:monetization_config, Shapes::ShapeRef.new(shape: MonetizationConfig, location_name: "MonetizationConfig"))
+    CreateWebACLRequest.add_member(:analytics_config, Shapes::ShapeRef.new(shape: AnalyticsConfig, location_name: "AnalyticsConfig"))
     CreateWebACLRequest.struct_class = Types::CreateWebACLRequest
 
     CreateWebACLResponse.add_member(:summary, Shapes::ShapeRef.new(shape: WebACLSummary, location_name: "Summary"))
@@ -2007,6 +2013,7 @@ module Aws::WAFV2
     UpdateWebACLRequest.add_member(:on_source_d_do_s_protection_config, Shapes::ShapeRef.new(shape: OnSourceDDoSProtectionConfig, location_name: "OnSourceDDoSProtectionConfig"))
     UpdateWebACLRequest.add_member(:application_config, Shapes::ShapeRef.new(shape: ApplicationConfig, location_name: "ApplicationConfig"))
     UpdateWebACLRequest.add_member(:monetization_config, Shapes::ShapeRef.new(shape: MonetizationConfig, location_name: "MonetizationConfig"))
+    UpdateWebACLRequest.add_member(:analytics_config, Shapes::ShapeRef.new(shape: AnalyticsConfig, location_name: "AnalyticsConfig"))
     UpdateWebACLRequest.struct_class = Types::UpdateWebACLRequest
 
     UpdateWebACLResponse.add_member(:next_lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "NextLockToken"))
@@ -2119,6 +2126,7 @@ module Aws::WAFV2
     WebACL.add_member(:on_source_d_do_s_protection_config, Shapes::ShapeRef.new(shape: OnSourceDDoSProtectionConfig, location_name: "OnSourceDDoSProtectionConfig"))
     WebACL.add_member(:application_config, Shapes::ShapeRef.new(shape: ApplicationConfig, location_name: "ApplicationConfig"))
     WebACL.add_member(:monetization_config, Shapes::ShapeRef.new(shape: MonetizationConfig, location_name: "MonetizationConfig"))
+    WebACL.add_member(:analytics_config, Shapes::ShapeRef.new(shape: AnalyticsConfig, location_name: "AnalyticsConfig"))
     WebACL.struct_class = Types::WebACL
 
     WebACLSummaries.member = Shapes::ShapeRef.new(shape: WebACLSummary)

@@ -54,7 +54,7 @@ module Aws::ConnectScheduling
   autoload :EndpointProvider, 'aws-sdk-connectscheduling/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-connectscheduling/endpoints'
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.1.0'
 
 end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.167.0 (2026-11-18)
+------------------
+
+* Feature - Adds MaxSignInSessionDuration to IAM Roles and Login Profiles, allowing customers to configure the maximum Console sign-in session duration per principal. Affects CreateRole, UpdateRole, GetRole and LoginProfile APIs.
+
 1.166.0 (2026-11-16)
 ------------------
 

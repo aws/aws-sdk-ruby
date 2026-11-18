@@ -607,9 +607,12 @@ module Aws::S3
     ReplicaModifications = Shapes::StructureShape.new(name: 'ReplicaModifications')
     ReplicaModificationsStatus = Shapes::StringShape.new(name: 'ReplicaModificationsStatus')
     ReplicationConfiguration = Shapes::StructureShape.new(name: 'ReplicationConfiguration')
+    ReplicationPrefixList = Shapes::ListShape.new(name: 'ReplicationPrefixList')
     ReplicationRule = Shapes::StructureShape.new(name: 'ReplicationRule')
     ReplicationRuleAndOperator = Shapes::StructureShape.new(name: 'ReplicationRuleAndOperator')
     ReplicationRuleFilter = Shapes::StructureShape.new(name: 'ReplicationRuleFilter')
+    ReplicationRuleNotOperator = Shapes::StructureShape.new(name: 'ReplicationRuleNotOperator')
+    ReplicationRuleOrOperator = Shapes::StructureShape.new(name: 'ReplicationRuleOrOperator')
     ReplicationRuleStatus = Shapes::StringShape.new(name: 'ReplicationRuleStatus')
     ReplicationRules = Shapes::ListShape.new(name: 'ReplicationRules', flattened: true)
     ReplicationStatus = Shapes::StringShape.new(name: 'ReplicationStatus')
@@ -727,6 +730,8 @@ module Aws::S3
     UploadPartCopyRequest = Shapes::StructureShape.new(name: 'UploadPartCopyRequest')
     UploadPartOutput = Shapes::StructureShape.new(name: 'UploadPartOutput')
     UploadPartRequest = Shapes::StructureShape.new(name: 'UploadPartRequest')
+    UseSourceMultiRegionKey = Shapes::StructureShape.new(name: 'UseSourceMultiRegionKey')
+    UseSourceMultiRegionKeyStatus = Shapes::StringShape.new(name: 'UseSourceMultiRegionKeyStatus')
     UserMetadata = Shapes::ListShape.new(name: 'UserMetadata')
     Value = Shapes::StringShape.new(name: 'Value')
     VersionCount = Shapes::IntegerShape.new(name: 'VersionCount')
@@ -1364,6 +1369,7 @@ module Aws::S3
     Encryption.struct_class = Types::Encryption
 
     EncryptionConfiguration.add_member(:replica_kms_key_id, Shapes::ShapeRef.new(shape: ReplicaKmsKeyID, location_name: "ReplicaKmsKeyID"))
+    EncryptionConfiguration.add_member(:use_source_multi_region_key, Shapes::ShapeRef.new(shape: UseSourceMultiRegionKey, location_name: "UseSourceMultiRegionKey"))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
 
     EncryptionTypeList.member = Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType")
@@ -3013,6 +3019,8 @@ module Aws::S3
     ReplicationConfiguration.add_member(:rules, Shapes::ShapeRef.new(shape: ReplicationRules, required: true, location_name: "Rule"))
     ReplicationConfiguration.struct_class = Types::ReplicationConfiguration
 
+    ReplicationPrefixList.member = Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix")
+
     ReplicationRule.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "ID"))
     ReplicationRule.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority"))
     ReplicationRule.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, deprecated: true, location_name: "Prefix"))
@@ -3026,12 +3034,23 @@ module Aws::S3
 
     ReplicationRuleAndOperator.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
     ReplicationRuleAndOperator.add_member(:tags, Shapes::ShapeRef.new(shape: TagSet, location_name: "Tag", metadata: {"flattened" => true}))
+    ReplicationRuleAndOperator.add_member(:not, Shapes::ShapeRef.new(shape: ReplicationRuleNotOperator, location_name: "Not"))
     ReplicationRuleAndOperator.struct_class = Types::ReplicationRuleAndOperator
 
     ReplicationRuleFilter.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
     ReplicationRuleFilter.add_member(:tag, Shapes::ShapeRef.new(shape: Tag, location_name: "Tag"))
     ReplicationRuleFilter.add_member(:and, Shapes::ShapeRef.new(shape: ReplicationRuleAndOperator, location_name: "And"))
+    ReplicationRuleFilter.add_member(:not, Shapes::ShapeRef.new(shape: ReplicationRuleNotOperator, location_name: "Not"))
     ReplicationRuleFilter.struct_class = Types::ReplicationRuleFilter
+
+    ReplicationRuleNotOperator.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    ReplicationRuleNotOperator.add_member(:tag, Shapes::ShapeRef.new(shape: Tag, location_name: "Tag"))
+    ReplicationRuleNotOperator.add_member(:or, Shapes::ShapeRef.new(shape: ReplicationRuleOrOperator, location_name: "Or"))
+    ReplicationRuleNotOperator.struct_class = Types::ReplicationRuleNotOperator
+
+    ReplicationRuleOrOperator.add_member(:prefixes, Shapes::ShapeRef.new(shape: ReplicationPrefixList, location_name: "Prefix", metadata: {"flattened" => true}))
+    ReplicationRuleOrOperator.add_member(:tags, Shapes::ShapeRef.new(shape: TagSet, location_name: "Tag", metadata: {"flattened" => true}))
+    ReplicationRuleOrOperator.struct_class = Types::ReplicationRuleOrOperator
 
     ReplicationRules.member = Shapes::ShapeRef.new(shape: ReplicationRule)
 
@@ -3378,6 +3397,9 @@ module Aws::S3
     UploadPartRequest.struct_class = Types::UploadPartRequest
     UploadPartRequest[:payload] = :body
     UploadPartRequest[:payload_member] = UploadPartRequest.member(:body)
+
+    UseSourceMultiRegionKey.add_member(:status, Shapes::ShapeRef.new(shape: UseSourceMultiRegionKeyStatus, required: true, location_name: "Status"))
+    UseSourceMultiRegionKey.struct_class = Types::UseSourceMultiRegionKey
 
     UserMetadata.member = Shapes::ShapeRef.new(shape: MetadataEntry, location_name: "MetadataEntry")
 

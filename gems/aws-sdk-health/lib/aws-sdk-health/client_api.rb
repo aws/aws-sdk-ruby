@@ -34,10 +34,13 @@ module Aws::Health
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     ConfigureTagsForOrganizationRequest = Shapes::StructureShape.new(name: 'ConfigureTagsForOrganizationRequest')
     ConfigureTagsForOrganizationResponse = Shapes::StructureShape.new(name: 'ConfigureTagsForOrganizationResponse')
+    ConfigureTagsForOrganizationResponseTagKeyList = Shapes::ListShape.new(name: 'ConfigureTagsForOrganizationResponseTagKeyList')
     ConfigureTagsForOrganizationTagKeyList = Shapes::ListShape.new(name: 'ConfigureTagsForOrganizationTagKeyList')
     ConfigureTagsRequest = Shapes::StructureShape.new(name: 'ConfigureTagsRequest')
+    ConfigureTagsRequestTagKeyList = Shapes::ListShape.new(name: 'ConfigureTagsRequestTagKeyList')
     ConfigureTagsResourceTagKeyList = Shapes::ListShape.new(name: 'ConfigureTagsResourceTagKeyList')
     ConfigureTagsResponse = Shapes::StructureShape.new(name: 'ConfigureTagsResponse')
+    ConfigureTagsTagKey = Shapes::StructureShape.new(name: 'ConfigureTagsTagKey')
     DateTimeRange = Shapes::StructureShape.new(name: 'DateTimeRange')
     DescribeAffectedAccountsForOrganizationRequest = Shapes::StructureShape.new(name: 'DescribeAffectedAccountsForOrganizationRequest')
     DescribeAffectedAccountsForOrganizationResponse = Shapes::StructureShape.new(name: 'DescribeAffectedAccountsForOrganizationResponse')
@@ -203,7 +206,6 @@ module Aws::Health
     serviceList = Shapes::ListShape.new(name: 'serviceList')
     string = Shapes::StringShape.new(name: 'string')
     tagKey = Shapes::StringShape.new(name: 'tagKey')
-    tagSet = Shapes::MapShape.new(name: 'tagSet')
     tagValue = Shapes::StringShape.new(name: 'tagValue')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
 
@@ -253,7 +255,6 @@ module Aws::Health
     AffectedEntity.add_member(:status_code, Shapes::ShapeRef.new(shape: entityStatusCode, location_name: "statusCode"))
     AffectedEntity.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagSet, location_name: "resourceTags"))
     AffectedEntity.add_member(:account_tags, Shapes::ShapeRef.new(shape: AccountTagSet, location_name: "accountTags"))
-    AffectedEntity.add_member(:tags, Shapes::ShapeRef.new(shape: tagSet, location_name: "tags"))
     AffectedEntity.add_member(:entity_metadata, Shapes::ShapeRef.new(shape: entityMetadata, location_name: "entityMetadata"))
     AffectedEntity.struct_class = Types::AffectedEntity
 
@@ -263,18 +264,26 @@ module Aws::Health
     ConfigureTagsForOrganizationRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: ConfigureTagsForOrganizationTagKeyList, required: true, location_name: "tagKeys"))
     ConfigureTagsForOrganizationRequest.struct_class = Types::ConfigureTagsForOrganizationRequest
 
-    ConfigureTagsForOrganizationResponse.add_member(:configured_tag_keys, Shapes::ShapeRef.new(shape: ConfigureTagsForOrganizationTagKeyList, location_name: "configuredTagKeys"))
+    ConfigureTagsForOrganizationResponse.add_member(:configured_tag_keys, Shapes::ShapeRef.new(shape: ConfigureTagsForOrganizationResponseTagKeyList, location_name: "configuredTagKeys"))
     ConfigureTagsForOrganizationResponse.struct_class = Types::ConfigureTagsForOrganizationResponse
+
+    ConfigureTagsForOrganizationResponseTagKeyList.member = Shapes::ShapeRef.new(shape: OrganizationTagKey)
 
     ConfigureTagsForOrganizationTagKeyList.member = Shapes::ShapeRef.new(shape: TagKeyForOrganization)
 
-    ConfigureTagsRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: ConfigureTagsResourceTagKeyList, required: true, location_name: "tagKeys"))
+    ConfigureTagsRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: ConfigureTagsRequestTagKeyList, required: true, location_name: "tagKeys"))
     ConfigureTagsRequest.struct_class = Types::ConfigureTagsRequest
+
+    ConfigureTagsRequestTagKeyList.member = Shapes::ShapeRef.new(shape: ConfigureTagsTagKey)
 
     ConfigureTagsResourceTagKeyList.member = Shapes::ShapeRef.new(shape: ResourceTagKey)
 
     ConfigureTagsResponse.add_member(:configured_tag_keys, Shapes::ShapeRef.new(shape: ConfigureTagsResourceTagKeyList, location_name: "configuredTagKeys"))
     ConfigureTagsResponse.struct_class = Types::ConfigureTagsResponse
+
+    ConfigureTagsTagKey.add_member(:key, Shapes::ShapeRef.new(shape: resourceTagKey, required: true, location_name: "key"))
+    ConfigureTagsTagKey.add_member(:enabled_for_event_bridge, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabledForEventBridge"))
+    ConfigureTagsTagKey.struct_class = Types::ConfigureTagsTagKey
 
     DateTimeRange.add_member(:from, Shapes::ShapeRef.new(shape: timestamp, location_name: "from"))
     DateTimeRange.add_member(:to, Shapes::ShapeRef.new(shape: timestamp, location_name: "to"))
@@ -700,7 +709,7 @@ module Aws::Health
 
     ServiceLifecycleList.member = Shapes::ShapeRef.new(shape: ServiceLifecycle)
 
-    TagKeyForOrganization.add_member(:key, Shapes::ShapeRef.new(shape: organizationTagKey, location_name: "key"))
+    TagKeyForOrganization.add_member(:key, Shapes::ShapeRef.new(shape: organizationTagKey, required: true, location_name: "key"))
     TagKeyForOrganization.add_member(:enabled_for_event_bridge, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabledForEventBridge"))
     TagKeyForOrganization.struct_class = Types::TagKeyForOrganization
 
@@ -741,9 +750,6 @@ module Aws::Health
     regionList.member = Shapes::ShapeRef.new(shape: region)
 
     serviceList.member = Shapes::ShapeRef.new(shape: service)
-
-    tagSet.key = Shapes::ShapeRef.new(shape: tagKey)
-    tagSet.value = Shapes::ShapeRef.new(shape: tagValue)
 
 
     # @api private

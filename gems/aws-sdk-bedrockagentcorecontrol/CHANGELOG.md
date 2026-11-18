@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.95.0 (2026-11-18)
+------------------
+
+* Feature - Adds s3BucketMount to mount an Amazon S3 bucket as a file system in AgentCore Runtime, with an optional per-session key prefix and adds operatingSystemConfiguration with a Linux privilegeMode (STANDARD or PRIVILEGED) to the capacity provider configuration
+
 1.94.0 (2026-11-17)
 ------------------
 

@@ -429,6 +429,43 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # Specifies the security analytics configuration for the web ACL.
+    # Security analytics shows the web ACL's request log data from multiple
+    # Amazon Web Services Regions in a single dashboard in the WAF console.
+    #
+    # When you enable security analytics, you authorize Amazon Web Services
+    # to transfer and store full request logs outside the Amazon Web
+    # Services Region where the web ACL is hosted. For regional web ACLs,
+    # security analytics is disabled by default when you omit this
+    # configuration. For web ACLs that protect CloudFront distributions
+    # (global web ACLs), security analytics is enabled by default. For more
+    # information, see [Enabling security analytics for a protection pack
+    # (web ACL)][1] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-security-analytics-enabling.html
+    #
+    # @!attribute [rw] mode
+    #   The security analytics mode for the web ACL. Valid values:
+    #
+    #   * `CROSS_REGION` - Enables security analytics. WAF transfers and
+    #     stores the web ACL's request logs outside the Amazon Web Services
+    #     Region where the web ACL is hosted, for aggregation and
+    #     processing.
+    #
+    #   * `DISABLED` - Disables security analytics. WAF stops transferring
+    #     the web ACL's request logs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AnalyticsConfig AWS API Documentation
+    #
+    class AnalyticsConfig < Struct.new(
+      :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A logical rule statement used to combine other rule statements with
     # AND logic. You provide more than one Statement within the
     # `AndStatement`.
@@ -806,9 +843,11 @@ module Aws::WAFV2
     #     request's JA3 fingerprint. The JA3 fingerprint is a 32-character
     #     hash derived from the TLS Client Hello of an incoming request.
     #     This fingerprint serves as a unique identifier for the client's
-    #     TLS configuration. You can use this choice only with a string
-    #     match `ByteMatchStatement` with the `PositionalConstraint` set to
-    #     `EXACTLY`.
+    #     TLS configuration. You can use this choice with a
+    #     `ByteMatchStatement`, `RegexMatchStatement`,
+    #     `RegexPatternSetReferenceStatement`, or `SizeConstraintStatement`.
+    #     You can't use it with `SqliMatchStatement` or
+    #     `XssMatchStatement`.
     #
     #     You can obtain the JA3 fingerprint for client requests from the
     #     web ACL logs. If WAF is able to calculate the fingerprint, it
@@ -1195,9 +1234,8 @@ module Aws::WAFV2
     #
     #     * The managed rule group adds the label
     #       `awswaf:managed:aws:anti-ddos:challengeable-request` to any web
-    #       request whose URL does *NOT* match the regular expressions
-    #       provided in the `ClientSideAction` setting
-    #       `ExemptUriRegularExpressions`.
+    #       request that does not match the regular expressions provided in
+    #       the `ClientSideAction` setting `ExemptUriRegularExpressions`.
     #
     #     * The two rules are evaluated against web requests for protected
     #       resources that are experiencing a DDoS attack. The two rules
@@ -1250,19 +1288,30 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] exempt_uri_regular_expressions
-    #   The regular expression to match against the web request URI, used to
-    #   identify requests that can't handle a silent browser challenge.
-    #   When the `ClientSideAction` setting `UsageOfAction` is enabled, the
-    #   managed rule group uses this setting to determine which requests to
-    #   label with `awswaf:managed:aws:anti-ddos:challengeable-request`. If
+    #   The regular expression to match against the request's host followed
+    #   by its normalized URI path, used to identify requests that can't
+    #   handle a silent browser challenge. When the `ClientSideAction`
+    #   setting `UsageOfAction` is enabled, the managed rule group uses this
+    #   setting to determine which requests to label with
+    #   `awswaf:managed:aws:anti-ddos:challengeable-request`. If
     #   `UsageOfAction` is disabled, this setting has no effect and the
     #   managed rule group doesn't add the label to any requests.
     #
+    #   WAF matches against the host immediately followed by the normalized
+    #   URI path and doesn't include the scheme, the query string, or the
+    #   fragment. For example, `www.example.com/api/orders`. Because the
+    #   match begins with the host, a pattern anchored to the start of the
+    #   path, such as `^/api/`, never matches. WAF normalizes the path
+    #   first, removing empty segments (including a trailing slash) and
+    #   single-dot (`.`) segments and resolving double-dot (`..`) segments,
+    #   so `/api/` is evaluated as `/api`. Only `GET` requests are
+    #   challengeable.
+    #
     #   The anti-DDoS managed rule group doesn't evaluate the rules
     #   `ChallengeDDoSRequests` or `ChallengeAllDuringEvent` for web
-    #   requests whose URIs match this regex. This is true regardless of
-    #   whether you override the rule action for either of the rules in your
-    #   web ACL configuration.
+    #   requests that match this regex. This is true regardless of whether
+    #   you override the rule action for either of the rules in your web ACL
+    #   configuration.
     #
     #   Amazon Web Services recommends using a regular expression.
     #
@@ -1273,7 +1322,7 @@ module Aws::WAFV2
     #   Amazon Web Services recommends starting with the following setting.
     #   Review and update it for your application's needs:
     #
-    #   `\/api\/|\.(acc|avi|css|gif|jpe?g|js|mp[34]|ogg|otf|pdf|png|tiff?|ttf|webm|webp|woff2?)$`
+    #   `\/api(\/|$)|\.(acc|avi|css|gif|jpe?g|js|mp[34]|ogg|otf|pdf|png|tiff?|ttf|webm|webp|woff2?)$`
     #   @return [Array<Types::Regex>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ClientSideAction AWS API Documentation
@@ -2036,6 +2085,11 @@ module Aws::WAFV2
     #   any rule in the web ACL uses the `Monetize` action.
     #   @return [Types::MonetizationConfig]
     #
+    # @!attribute [rw] analytics_config
+    #   Specifies the security analytics configuration for the web ACL. For
+    #   more information, see AnalyticsConfig.
+    #   @return [Types::AnalyticsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CreateWebACLRequest AWS API Documentation
     #
     class CreateWebACLRequest < Struct.new(
@@ -2054,7 +2108,8 @@ module Aws::WAFV2
       :association_config,
       :on_source_d_do_s_protection_config,
       :application_config,
-      :monetization_config)
+      :monetization_config,
+      :analytics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3250,9 +3305,10 @@ module Aws::WAFV2
     #   enough TLS Client Hello information for the calculation. Almost all
     #   web requests include this information.
     #
-    #   <note markdown="1"> You can use this choice only with a string match
-    #   `ByteMatchStatement` with the `PositionalConstraint` set to
-    #   `EXACTLY`.
+    #   <note markdown="1"> You can use this choice with a `ByteMatchStatement`,
+    #   `RegexMatchStatement`, `RegexPatternSetReferenceStatement`, or
+    #   `SizeConstraintStatement`. You can't use it with
+    #   `SqliMatchStatement` or `XssMatchStatement`.
     #
     #    </note>
     #
@@ -3263,7 +3319,8 @@ module Aws::WAFV2
     #
     #   Provide the JA3 fingerprint string from the logs in your string
     #   match statement specification, to match with any future requests
-    #   that have the same TLS configuration.
+    #   that have the same TLS configuration. To match a group of TLS
+    #   configurations with a single pattern, use a regex statement.
     #
     #
     #
@@ -3280,9 +3337,10 @@ module Aws::WAFV2
     #   enough TLS Client Hello information for the calculation. Almost all
     #   web requests include this information.
     #
-    #   <note markdown="1"> You can use this choice only with a string match
-    #   `ByteMatchStatement` with the `PositionalConstraint` set to
-    #   `EXACTLY`.
+    #   <note markdown="1"> You can use this choice with a `ByteMatchStatement`,
+    #   `RegexMatchStatement`, `RegexPatternSetReferenceStatement`, or
+    #   `SizeConstraintStatement`. You can't use it with
+    #   `SqliMatchStatement` or `XssMatchStatement`.
     #
     #    </note>
     #
@@ -3293,7 +3351,8 @@ module Aws::WAFV2
     #
     #   Provide the JA4 fingerprint string from the logs in your string
     #   match statement specification, to match with any future requests
-    #   that have the same TLS configuration.
+    #   that have the same TLS configuration. To match a group of TLS
+    #   configurations with a single pattern, use a regex statement.
     #
     #
     #
@@ -5184,8 +5243,10 @@ module Aws::WAFV2
     # information for the calculation. Almost all web requests include this
     # information.
     #
-    # <note markdown="1"> You can use this choice only with a string match `ByteMatchStatement`
-    # with the `PositionalConstraint` set to `EXACTLY`.
+    # <note markdown="1"> You can use this choice with a `ByteMatchStatement`,
+    # `RegexMatchStatement`, `RegexPatternSetReferenceStatement`, or
+    # `SizeConstraintStatement`. You can't use it with `SqliMatchStatement`
+    # or `XssMatchStatement`.
     #
     #  </note>
     #
@@ -5196,7 +5257,8 @@ module Aws::WAFV2
     #
     # Provide the JA3 fingerprint string from the logs in your string match
     # statement specification, to match with any future requests that have
-    # the same TLS configuration.
+    # the same TLS configuration. To match a group of TLS configurations
+    # with a single pattern, use a regex statement.
     #
     #
     #
@@ -5232,8 +5294,10 @@ module Aws::WAFV2
     # information for the calculation. Almost all web requests include this
     # information.
     #
-    # <note markdown="1"> You can use this choice only with a string match `ByteMatchStatement`
-    # with the `PositionalConstraint` set to `EXACTLY`.
+    # <note markdown="1"> You can use this choice with a `ByteMatchStatement`,
+    # `RegexMatchStatement`, `RegexPatternSetReferenceStatement`, or
+    # `SizeConstraintStatement`. You can't use it with `SqliMatchStatement`
+    # or `XssMatchStatement`.
     #
     #  </note>
     #
@@ -5244,7 +5308,8 @@ module Aws::WAFV2
     #
     # Provide the JA4 fingerprint string from the logs in your string match
     # statement specification, to match with any future requests that have
-    # the same TLS configuration.
+    # the same TLS configuration. To match a group of TLS configurations
+    # with a single pattern, use a regex statement.
     #
     #
     #
@@ -11372,6 +11437,11 @@ module Aws::WAFV2
     #   any rule in the web ACL uses the `Monetize` action.
     #   @return [Types::MonetizationConfig]
     #
+    # @!attribute [rw] analytics_config
+    #   Specifies the security analytics configuration for the web ACL. For
+    #   more information, see AnalyticsConfig.
+    #   @return [Types::AnalyticsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UpdateWebACLRequest AWS API Documentation
     #
     class UpdateWebACLRequest < Struct.new(
@@ -11391,7 +11461,8 @@ module Aws::WAFV2
       :association_config,
       :on_source_d_do_s_protection_config,
       :application_config,
-      :monetization_config)
+      :monetization_config,
+      :analytics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12210,6 +12281,11 @@ module Aws::WAFV2
     #   monetization.
     #   @return [Types::MonetizationConfig]
     #
+    # @!attribute [rw] analytics_config
+    #   The security analytics configuration for the web ACL. For more
+    #   information, see AnalyticsConfig.
+    #   @return [Types::AnalyticsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WebACL AWS API Documentation
     #
     class WebACL < Struct.new(
@@ -12234,7 +12310,8 @@ module Aws::WAFV2
       :retrofitted_by_firewall_manager,
       :on_source_d_do_s_protection_config,
       :application_config,
-      :monetization_config)
+      :monetization_config,
+      :analytics_config)
       SENSITIVE = []
       include Aws::Structure
     end

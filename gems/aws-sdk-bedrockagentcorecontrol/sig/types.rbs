@@ -329,6 +329,7 @@ module Aws::BedrockAgentCoreControl
 
     class CapacityProviderConfiguration
       attr_accessor capacity_provider_arn: ::String
+      attr_accessor operating_system_configuration: Types::OperatingSystemConfiguration
       SENSITIVE: []
     end
 
@@ -2282,6 +2283,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor s3_files_access_point: Types::S3FilesAccessPointConfiguration
       attr_accessor efs_access_point: Types::EfsAccessPointConfiguration
       attr_accessor capacity_provider_volume: Types::CapacityProviderVolumeConfiguration
+      attr_accessor s3_bucket_mount: Types::S3BucketMountConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -2292,6 +2294,8 @@ module Aws::BedrockAgentCoreControl
       class EfsAccessPoint < FilesystemConfiguration
       end
       class CapacityProviderVolume < FilesystemConfiguration
+      end
+      class S3BucketMount < FilesystemConfiguration
       end
       class Unknown < FilesystemConfiguration
       end
@@ -3934,6 +3938,11 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class LinuxOperatingSystemConfiguration
+      attr_accessor privilege_mode: ("STANDARD" | "PRIVILEGED")
+      SENSITIVE: []
+    end
+
     class ListAgentInsightStoresRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -4993,6 +5002,17 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class OperatingSystemConfiguration
+      attr_accessor linux: Types::LinuxOperatingSystemConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Linux < OperatingSystemConfiguration
+      end
+      class Unknown < OperatingSystemConfiguration
+      end
+    end
+
     class OutputConfig
       attr_accessor cloud_watch_config: Types::CloudWatchOutputConfig
       SENSITIVE: []
@@ -5512,6 +5532,15 @@ module Aws::BedrockAgentCoreControl
       attr_accessor arn: ::String
       attr_accessor qualifier: ::String
       attr_accessor schema: Types::HttpApiSchemaConfiguration
+      SENSITIVE: []
+    end
+
+    class S3BucketMountConfiguration
+      attr_accessor bucket: ::String
+      attr_accessor mount_path: ::String
+      attr_accessor prefix: ::String
+      attr_accessor s3_bucket_owner: ::String
+      attr_accessor s3_bucket_region: ::String
       SENSITIVE: []
     end
 

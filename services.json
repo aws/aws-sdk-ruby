@@ -20,6 +20,9 @@
   "ARCZonalShift": {
     "models": "arc-zonal-shift/2022-10-30"
   },
+  "AbuseSignal": {
+    "models": "abuse-signal/2026-01-12"
+  },
   "AccessAnalyzer": {
     "models": "accessanalyzer/2019-11-01"
   },

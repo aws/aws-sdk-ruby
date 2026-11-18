@@ -39,6 +39,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Role.html#max_session_duration-instance_method
       def max_session_duration: () -> ::Integer
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Role.html#max_signin_session_duration-instance_method
+      def max_signin_session_duration: () -> ::Integer
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Role.html#permissions_boundary-instance_method
       def permissions_boundary: () -> Types::AttachedPermissionsBoundary
 

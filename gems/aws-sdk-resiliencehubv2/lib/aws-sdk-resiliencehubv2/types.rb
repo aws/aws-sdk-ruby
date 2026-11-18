@@ -1215,7 +1215,8 @@ module Aws::Resiliencehubv2
     #     usage across the service.
     #
     #   * AWS\_SERVICE - The insight relates to a dependency on an Amazon
-    #     Web Services service.
+    #     Web Services service. Resilience Hub doesn't currently return
+    #     this value.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1296,14 +1297,14 @@ module Aws::Resiliencehubv2
       include Aws::Structure
     end
 
-    # The AWS DevOps Agent (DevOps Agent) integration configuration that you
-    # supply when creating or updating a service. Connecting a service to a
-    # DevOps Agent Agent Space lets DevOps Agent investigate the service's
-    # resilience test runs and attach its analysis to the results. Include
-    # this block with an Agent Space Amazon Resource Name (ARN) to connect
-    # or reconnect the service to an Agent Space. Include it without an
-    # Agent Space ARN to disconnect the service. Omit it to leave the
-    # existing linkage unchanged.
+    # The Amazon Web Services DevOps Agent (DevOps Agent) integration
+    # configuration that you supply when creating or updating a service.
+    # Connecting a service to an Agent Space lets DevOps Agent investigate
+    # the service's resilience test runs and attach its analysis to the
+    # results. Include this block with an Agent Space Amazon Resource Name
+    # (ARN) to connect or reconnect the service to an Agent Space. Include
+    # it without an Agent Space ARN to disconnect the service. Omit it to
+    # leave the existing linkage unchanged.
     #
     # @!attribute [rw] agent_space_arn
     #   The ARN of the DevOps Agent Agent Space to link to this service.
@@ -3437,20 +3438,36 @@ module Aws::Resiliencehubv2
       include Aws::Structure
     end
 
-    # @api private
+    # @!attribute [rw] max_results
+    #   Pagination page size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestTemplatesRequest AWS API Documentation
     #
-    class ListTestTemplatesRequest < Aws::EmptyStructure; end
+    class ListTestTemplatesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] test_templates
     #   The list of test template summaries.
     #   @return [Array<Types::TestTemplateSummary>]
     #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestTemplatesResponse AWS API Documentation
     #
     class ListTestTemplatesResponse < Struct.new(
-      :test_templates)
+      :test_templates,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6291,6 +6308,12 @@ module Aws::Resiliencehubv2
     #   started.
     #   @return [Types::TestRunPolicySnapshot]
     #
+    # @!attribute [rw] effective_policy_values
+    #   The effective resilience policy values snapshotted from the service
+    #   when the run was started. The test run is evaluated against these
+    #   values.
+    #   @return [Types::TestRunEffectivePolicyValues]
+    #
     # @!attribute [rw] report_output
     #   The report generation result for the test run. Present after report
     #   generation completes or fails.
@@ -6343,6 +6366,7 @@ module Aws::Resiliencehubv2
       :test_template_arn,
       :report_configuration,
       :policy,
+      :effective_policy_values,
       :report_output,
       :region_switch_plan_arn,
       :region_switch_execution_id,
@@ -6405,6 +6429,59 @@ module Aws::Resiliencehubv2
       :location,
       :source_regions,
       :provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the effective resilience policy values captured onto a test
+    # run from the service when the run was started.
+    #
+    # @!attribute [rw] availability_slo
+    #   The effective availability SLO value for the test run.
+    #   @return [Types::SloSource]
+    #
+    # @!attribute [rw] multi_az_rto
+    #   The effective multi-AZ RTO value for the test run, in minutes.
+    #   @return [Types::TargetSource]
+    #
+    # @!attribute [rw] multi_az_rpo
+    #   The effective multi-AZ RPO value for the test run, in minutes.
+    #   @return [Types::TargetSource]
+    #
+    # @!attribute [rw] multi_az_dr_approach
+    #   The effective multi-Availability Zone (AZ) disaster recovery
+    #   approach for the test run.
+    #   @return [Types::DisasterRecoverySource]
+    #
+    # @!attribute [rw] multi_region_rto
+    #   The effective multi-Region RTO value for the test run, in minutes.
+    #   @return [Types::TargetSource]
+    #
+    # @!attribute [rw] multi_region_rpo
+    #   The effective multi-Region RPO value for the test run, in minutes.
+    #   @return [Types::TargetSource]
+    #
+    # @!attribute [rw] multi_region_dr_approach
+    #   The effective multi-Region disaster recovery approach for the test
+    #   run.
+    #   @return [Types::DisasterRecoverySource]
+    #
+    # @!attribute [rw] data_recovery_time_between_backups
+    #   The effective data recovery time between backups value for the test
+    #   run.
+    #   @return [Types::TargetSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRunEffectivePolicyValues AWS API Documentation
+    #
+    class TestRunEffectivePolicyValues < Struct.new(
+      :availability_slo,
+      :multi_az_rto,
+      :multi_az_rpo,
+      :multi_az_dr_approach,
+      :multi_region_rto,
+      :multi_region_rpo,
+      :multi_region_dr_approach,
+      :data_recovery_time_between_backups)
       SENSITIVE = []
       include Aws::Structure
     end
