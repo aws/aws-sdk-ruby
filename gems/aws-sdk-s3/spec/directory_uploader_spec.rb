@@ -81,7 +81,8 @@ module Aws
         context 's3 prefix' do
           it 'applies prefixes to all keys when set' do
             uploaded_keys = []
-            allow(client).to receive(:put_object) { |p| uploaded_keys << p[:key] }
+            mutex = Mutex.new
+            allow(client).to receive(:put_object) { |p| mutex.synchronize { uploaded_keys << p[:key] } }
             result = uploader.upload(temp_dir, 'test-bucket', s3_prefix: 'uploads', recursive: true)
 
             expect(uploaded_keys).to all(start_with('uploads/'))
@@ -121,7 +122,8 @@ module Aws
         context 'filter callbacks' do
           it 'excludes files' do
             uploaded_keys = []
-            allow(client).to receive(:put_object) { |p| uploaded_keys << p[:key] }
+            mutex = Mutex.new
+            allow(client).to receive(:put_object) { |p| mutex.synchronize { uploaded_keys << p[:key] } }
             filter_callback = ->(_path, file) { !file.end_with?('.bin') }
             result = uploader.upload(temp_dir, 'test-bucket', filter_callback: filter_callback)
 
@@ -141,7 +143,8 @@ module Aws
         context 'request callbacks', :jruby_flaky do
           it 'modifies upload parameters' do
             uploaded_params = []
-            allow(client).to receive(:put_object) { |p| uploaded_params << p }
+            mutex = Mutex.new
+            allow(client).to receive(:put_object) { |p| mutex.synchronize { uploaded_params << p } }
             request_callback = lambda do |_path, params|
               params[:storage_class] = 'GLACIER'
               params
