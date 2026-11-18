@@ -2,6 +2,7 @@
 
 require_relative '../spec_helper'
 require 'securerandom'
+require 'timeout'
 
 module Aws
   describe CredentialProviderChain do
@@ -226,6 +227,139 @@ module Aws
         validate_credentials(expected_creds)
         validate_metrics('CREDENTIALS_CODE', 'CREDENTIALS_PROFILE')
       end
+    end
+  end
+
+  describe CredentialProviderChain, 'with a credential daemon' do
+    let(:dir) { Dir.mktmpdir('cdchain') }
+    let(:config_path) { File.join(dir, 'config') }
+    let(:credentials_path) { File.join(dir, 'credentials') }
+    let(:config_file) { "[profile dev]\ndaemon_credential = dev\n" }
+    let(:credentials_file) { '' }
+    let(:profile) { nil }
+    let(:config) do
+      double(
+        'config',
+        access_key_id: nil,
+        secret_access_key: nil,
+        session_token: nil,
+        account_id: nil,
+        profile: profile,
+        region: nil,
+        instance_profile_credentials_timeout: 1,
+        instance_profile_credentials_retries: 0
+      )
+    end
+
+    let!(:daemon) { start_credential_daemon }
+
+    around(:each) do |example|
+      Timeout.timeout(10) { example.run }
+    end
+
+    before(:each) do
+      allow(InstanceProfileCredentials).to receive(:new).and_return(double(set?: false))
+      File.write(config_path, config_file)
+      File.write(credentials_path, credentials_file)
+      ENV['AWS_PROFILE'] = 'dev'
+      ENV['AWS_CREDENTIAL_DAEMON_SOCKET'] = daemon.path
+      Aws.shared_config.fresh(
+        config_enabled: true,
+        config_path: config_path,
+        credentials_path: credentials_path
+      )
+    end
+
+    after(:each) do
+      stop_credential_daemons
+      FileUtils.rm_rf(dir)
+    end
+
+    def resolve
+      CredentialProviderChain.new(config).resolve
+    end
+
+    def expect_bearer_signer_error(profile, message)
+      signer = Plugins::Sign::Bearer.new(double('config', token_provider: nil, profile: profile))
+      context = Seahorse::Client::RequestContext.new
+      context.http_request.endpoint = URI('https://example.com')
+      expect { signer.sign(context) }.to raise_error(Errors::MissingBearerTokenError, message)
+    end
+
+    context 'with the profile client option' do
+      let(:profile) { 'dev' }
+
+      it 'resolves from the daemon ahead of env credentials' do
+        ENV.delete('AWS_PROFILE')
+        ENV['AWS_ACCESS_KEY_ID'] = 'AKID_ENV'
+        ENV['AWS_SECRET_ACCESS_KEY'] = 'SECRET_ENV'
+        provider = resolve
+        expect(provider.credentials.access_key_id).to eq('ASIADAEMON')
+        expect(provider.metrics).to eq(%w[CREDENTIAL_DAEMON CREDENTIALS_CODE])
+      end
+    end
+
+    it 'reads the timeouts from a client config' do
+      client = ApiHelper.sample_rest_xml::Client.new(
+        region: 'us-east-1',
+        credential_daemon_connect_timeout: 0.4,
+        credential_daemon_timeout: 0.9
+      )
+      expect(CredentialDaemonCredentials).to receive(:new)
+        .with(hash_including(connect_timeout: 0.4, call_timeout: 0.9))
+        .and_call_original
+      expect(CredentialProviderChain.new(client.config).resolve.credentials.access_key_id).to eq('ASIADAEMON')
+    end
+
+    it 'is not used when the shared config is disabled' do
+      Aws.shared_config.fresh(config_enabled: false, config_path: config_path, credentials_path: credentials_path)
+      expect(resolve).to be_nil
+      expect(daemon.requests).to be_empty
+    end
+
+    context 'with role_arn in the credentials file profile' do
+      let(:credentials_file) { "[dev]\nrole_arn = arn:aws:iam::123456789012:role/foo\n" }
+
+      it 'raises INVALID_CONFIG' do
+        expect { resolve }.to raise_error(Errors::CredentialDaemonError, /INVALID_CONFIG: .*source_profile/)
+        expect(daemon.requests).to be_empty
+      end
+    end
+
+    context 'with an SSO profile' do
+      let(:config_file) do
+        <<~CONFIG
+          [profile dev]
+          daemon_credential = dev
+          sso_session = my-sso
+          sso_account_id = 123456789012
+          sso_role_name = Admin
+
+          [sso-session my-sso]
+          sso_region = us-east-1
+          sso_start_url = https://example.awsapps.com/start
+        CONFIG
+      end
+
+      it 'resolves no SSO token provider' do
+        expect(SSOTokenProvider).not_to receive(:new)
+        expect(TokenProviderChain.new(config).resolve).to be_nil
+      end
+
+      it 'explains a missing bearer token in the signer' do
+        expect_bearer_signer_error('dev', /profile 'dev' keeps its SSO session in the credential daemon/)
+      end
+
+      it 'explains a missing bearer token in the bearer handler' do
+        handler = Plugins::BearerAuthorization::Handler.new(double('handler'))
+        context = Seahorse::Client::RequestContext.new(config: double('config', token_provider: nil, profile: nil))
+        context.http_request.endpoint = URI('https://example.com')
+        expect { handler.call(context) }.to raise_error(Errors::MissingBearerTokenError, /credential daemon/)
+      end
+    end
+
+    it 'keeps the default missing bearer token message for other profiles' do
+      expect_bearer_signer_error('dev', 'unable to sign request without token set')
     end
   end
 end

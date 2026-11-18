@@ -58,6 +58,7 @@ module Aws
           "BEARER_SERVICE_ENV_VARS": "3",
           "CREDENTIALS_PROFILE_LOGIN": "AC",
           "CREDENTIALS_LOGIN": "AD",
+          "CREDENTIAL_DAEMON": "Aq",
           "S3_TRANSFER_UPLOAD_DIRECTORY": "9",
           "S3_TRANSFER_DOWNLOAD_DIRECTORY": "+"
         }

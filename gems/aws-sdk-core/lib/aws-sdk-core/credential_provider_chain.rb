@@ -21,6 +21,7 @@ module Aws
     def providers
       [
         [:static_credentials, {}],
+        [:static_profile_credential_daemon_credentials, {}],
         [:static_profile_assume_role_web_identity_credentials, {}],
         [:static_profile_sso_credentials, {}],
         [:static_profile_assume_role_credentials, {}],
@@ -29,6 +30,7 @@ module Aws
         [:static_profile_process_credentials, {}],
         [:env_credentials, {}],
         [:assume_role_web_identity_credentials, {}],
+        [:credential_daemon_credentials, {}],
         [:sso_credentials, {}],
         [:assume_role_credentials, {}],
         [:shared_credentials, {}],
@@ -51,6 +53,20 @@ module Aws
           account_id: options[:config].account_id
         )
         creds.metrics = ['CREDENTIALS_PROFILE']
+        creds
+      end
+    end
+
+    def static_profile_credential_daemon_credentials(options)
+      return unless Aws.shared_config.config_enabled? && options[:config]&.profile
+
+      with_metrics('CREDENTIALS_CODE') do
+        creds = Aws.shared_config.credential_daemon_credentials_from_config(
+          Aws.shared_config.credential_daemon_timeouts(@config).merge(profile: options[:config].profile)
+        )
+        return unless creds
+
+        creds.metrics << 'CREDENTIALS_CODE'
         creds
       end
     end
@@ -229,6 +245,14 @@ module Aws
           region: region
         )
       end
+    end
+
+    def credential_daemon_credentials(options)
+      return unless Aws.shared_config.config_enabled?
+
+      Aws.shared_config.credential_daemon_credentials_from_config(
+        Aws.shared_config.credential_daemon_timeouts(@config).merge(profile: determine_profile_name(options))
+      )
     end
 
     def instance_profile_credentials(options)

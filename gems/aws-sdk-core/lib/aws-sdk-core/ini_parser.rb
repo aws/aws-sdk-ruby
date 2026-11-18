@@ -3,6 +3,11 @@
 module Aws
   # @api private
   class IniParser
+    # Keys that keep an empty value (`key =` with nothing after it) as `''`.
+    # Other keys with an empty value start a nested section and are dropped
+    # when no nested lines follow.
+    EMPTY_VALUE_KEYS = %w[daemon_credential].freeze
+
     class << self
 
       def ini_parse(raw)
@@ -31,7 +36,9 @@ module Aws
               end
               inner_item = line.match(/^\s*(.+?)\s*=\s*(.+?)\s*$/)
               acc[current_profile] ||= {}
-              acc[current_profile][current_prefix] ||= {}
+              unless acc[current_profile][current_prefix].is_a?(Hash)
+                acc[current_profile][current_prefix] = {}
+              end
               acc[current_profile][current_prefix][inner_item[1]] = inner_item[2]
             elsif item
               current_prefix = nil
@@ -39,6 +46,10 @@ module Aws
               acc[current_profile][item[1]] = item[2]
             elsif prefix
               current_prefix = prefix[1]
+              if EMPTY_VALUE_KEYS.include?(current_prefix)
+                acc[current_profile] ||= {}
+                acc[current_profile][current_prefix] = ''
+              end
             end
           end
           acc

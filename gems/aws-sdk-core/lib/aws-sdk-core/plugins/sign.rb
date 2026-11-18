@@ -73,6 +73,7 @@ module Aws
       # @api private
       class Bearer
         def initialize(config)
+          @config = config
           @token_provider = config.token_provider
         end
 
@@ -82,7 +83,9 @@ module Aws
           if context.http_request.endpoint.scheme != 'https'
             raise ArgumentError, 'Unable to use bearer authorization on non https endpoint.'
           end
-          raise Errors::MissingBearerTokenError unless @token_provider && @token_provider.set?
+          unless @token_provider && @token_provider.set?
+            raise Errors::MissingBearerTokenError, Aws.shared_config.credential_daemon_bearer_token_message(@config)
+          end
 
           context.http_request.headers['Authorization'] = "Bearer #{@token_provider.token.token}"
         end

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add `Aws::CredentialDaemonCredentials`, which sources credentials from a local credential daemon over a Unix domain socket for profiles that set `daemon_credential`.
+
 * Feature - Back off on retries of the Kinesis `ReceiveQueueRecords` and `ReceiveDeadLetterQueueRecords` long polling operations even when the retry quota is depleted.
 
 * Feature - Seahorse::Client::Configuration no longer generate real Ruby Struct at runtime.

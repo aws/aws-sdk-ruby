@@ -182,6 +182,14 @@ module Aws
         end
       end
 
+      it 'adds the CREDENTIAL_DAEMON metric' do
+        resp = Aws::Plugins::UserAgent.metric('CREDENTIAL_DAEMON') do
+          client.example_operation
+        end
+        header = resp.context.http_request.headers['User-Agent']
+        expect(header.match(%r{ m/([A-Za-z0-9+,-]+)})[1].split(',')).to include('Aq')
+      end
+
       context 'test runner' do
         tests = JSON.load_file(
           File.join(File.dirname(__FILE__), 'user_agent_tests.json')
