@@ -45,9 +45,9 @@ module Aws
 
         it 'can be aborted mid-upload' do
           call_count = 0
+          mutex = Mutex.new
           allow(client).to receive(:put_object) do
-            call_count += 1
-            uploader.abort if call_count == 2
+            uploader.abort if mutex.synchronize { (call_count += 1) == 2 }
           end
 
           expect do
