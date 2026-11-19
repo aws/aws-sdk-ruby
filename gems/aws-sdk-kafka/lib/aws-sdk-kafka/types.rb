@@ -43,6 +43,146 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # A single finding from an assessment, describing a specific issue or
+    # observation.
+    #
+    # @!attribute [rw] category
+    #   The category of this finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_id
+    #   A deterministic content-based identifier for this finding. Generated
+    #   from hash(category + resource + check\_type). The same resource with
+    #   the same problem always produces the same findingId across
+    #   assessment runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Human-readable description of what is wrong, why it matters, and
+    #   what to do.
+    #   @return [String]
+    #
+    # @!attribute [rw] remediation
+    #   Guidance for resolving this finding. Absent when no specific
+    #   remediation applies.
+    #   @return [Types::FindingRemediation]
+    #
+    # @!attribute [rw] resource
+    #   The specific resource affected (e.g., topic name). Absent for
+    #   cluster-level findings.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The severity of this finding.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/AssessmentFinding AWS API Documentation
+    #
+    class AssessmentFinding < Struct.new(
+      :category,
+      :finding_id,
+      :message,
+      :remediation,
+      :resource,
+      :severity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about an assessment, returned by ListAssessments.
+    #
+    # @!attribute [rw] assessment_arn
+    #   The Amazon Resource Name (ARN) of the assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] assessment_type
+    #   The type of assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster that was assessed.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the assessment was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags attached to the assessment.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/AssessmentInfo AWS API Documentation
+    #
+    class AssessmentInfo < Struct.new(
+      :assessment_arn,
+      :assessment_type,
+      :cluster_arn,
+      :creation_time,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Type-specific parameters for the assessment. All fields are optional.
+    #
+    # @!attribute [rw] target_instance_type
+    #   The target instance type to assess against (for example,
+    #   express.m7g.large). Optional: when omitted, the assessment reports a
+    #   recommended instance type as a CAPACITY finding. Supply it to assess
+    #   readiness for a specific instance type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/AssessmentParameters AWS API Documentation
+    #
+    class AssessmentParameters < Struct.new(
+      :target_instance_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of assessment findings broken down by category and severity.
+    #
+    # @!attribute [rw] by_category
+    #   Count of findings grouped by category.
+    #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] by_severity
+    #   Count of findings grouped by severity.
+    #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] findings_capped
+    #   True when the assessment detected more findings than it stores.
+    #   Resolve the reported findings and re-run the assessment to surface
+    #   the remaining ones.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_blocking_findings
+    #   True when the assessment detected at least one ERROR-severity
+    #   finding. ERROR findings block the migration until resolved.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] total_findings
+    #   The total number of findings detected by the assessment, including
+    #   any findings beyond the stored-findings cap.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/AssessmentSummary AWS API Documentation
+    #
+    class AssessmentSummary < Struct.new(
+      :by_category,
+      :by_severity,
+      :findings_capped,
+      :has_blocking_findings,
+      :total_findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The authorizer logs configuration for this MSK cluster.
     #
     # @!attribute [rw] cloud_watch_logs
@@ -239,6 +379,13 @@ module Aws::Kafka
     #   The ID of the broker.
     #   @return [Float]
     #
+    # @!attribute [rw] broker_node_type
+    #   Whether this broker is a Standard broker or an Express broker. While
+    #   an UpdateBrokerType operation upgrades a cluster in place from
+    #   Standard brokers to Express brokers, the cluster contains brokers of
+    #   both types and this field tells them apart.
+    #   @return [String]
+    #
     # @!attribute [rw] client_subnet
     #   The client subnet to which this broker node belongs.
     #   @return [String]
@@ -261,6 +408,7 @@ module Aws::Kafka
     class BrokerNodeInfo < Struct.new(
       :attached_eni_id,
       :broker_id,
+      :broker_node_type,
       :client_subnet,
       :client_vpc_ip_address,
       :current_broker_software_info,
@@ -291,6 +439,30 @@ module Aws::Kafka
       :configuration_arn,
       :configuration_revision,
       :kafka_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the topic reassignment of an UpdateBrokerType
+    # operation that upgrades a cluster from Standard brokers to Express
+    # brokers. Present only on the operation that initiated the upgrade.
+    #
+    # @!attribute [rw] topic_reassignment_mode
+    #   How topics are reassigned to the Express brokers.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_reassignment_operation_arn
+    #   The Amazon Resource Name (ARN) of the topic reassignment operation
+    #   that Amazon MSK started for this upgrade. Present once that
+    #   reassignment has started. Under MANUAL you start reassignments
+    #   yourself, so Amazon MSK starts none.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/BrokerTypeUpgradeInfo AWS API Documentation
+    #
+    class BrokerTypeUpgradeInfo < Struct.new(
+      :topic_reassignment_mode,
+      :topic_reassignment_operation_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -375,6 +547,70 @@ module Aws::Kafka
     class ChannelStateInfo < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Creates a new assessment for a cluster. Kicks off an asynchronous scan
+    # and returns immediately with an assessment ARN and status.
+    #
+    # @!attribute [rw] assessment_parameters
+    #   Optional type-specific parameters for the assessment.
+    #   @return [Types::AssessmentParameters]
+    #
+    # @!attribute [rw] assessment_type
+    #   The type of assessment to perform.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster to assess.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to attach to the assessment.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateAssessmentRequest AWS API Documentation
+    #
+    class CreateAssessmentRequest < Struct.new(
+      :assessment_parameters,
+      :assessment_type,
+      :cluster_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about the created assessment.
+    #
+    # @!attribute [rw] assessment_arn
+    #   The Amazon Resource Name (ARN) of the assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] assessment_type
+    #   The type of assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster being assessed.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the assessment was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the assessment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateAssessmentResponse AWS API Documentation
+    #
+    class CreateAssessmentResponse < Struct.new(
+      :assessment_arn,
+      :assessment_type,
+      :cluster_arn,
+      :creation_time,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -625,6 +861,11 @@ module Aws::Kafka
 
     # Returns information about a cluster operation.
     #
+    # @!attribute [rw] broker_type_upgrade_info
+    #   Topic reassignment details of the UpdateBrokerType operation that
+    #   started an upgrade from Standard brokers to Express brokers.
+    #   @return [Types::BrokerTypeUpgradeInfo]
+    #
     # @!attribute [rw] client_request_id
     #   The ID of the API request that triggered this operation.
     #   @return [String]
@@ -677,6 +918,7 @@ module Aws::Kafka
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClusterOperationInfo AWS API Documentation
     #
     class ClusterOperationInfo < Struct.new(
+      :broker_type_upgrade_info,
       :client_request_id,
       :cluster_arn,
       :creation_time,
@@ -776,6 +1018,11 @@ module Aws::Kafka
 
     # Returns information about a provisioned cluster operation.
     #
+    # @!attribute [rw] broker_type_upgrade_info
+    #   Topic reassignment details of the UpdateBrokerType operation that
+    #   started an upgrade from Standard brokers to Express brokers.
+    #   @return [Types::BrokerTypeUpgradeInfo]
+    #
     # @!attribute [rw] operation_steps
     #   @return [Array<Types::ClusterOperationStep>]
     #
@@ -797,6 +1044,7 @@ module Aws::Kafka
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClusterOperationV2Provisioned AWS API Documentation
     #
     class ClusterOperationV2Provisioned < Struct.new(
+      :broker_type_upgrade_info,
       :operation_steps,
       :source_cluster_info,
       :target_cluster_info,
@@ -1590,6 +1838,42 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # @!attribute [rw] assessment_arn
+    #   The Amazon Resource Name (ARN) of the assessment to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteAssessmentRequest AWS API Documentation
+    #
+    class DeleteAssessmentRequest < Struct.new(
+      :assessment_arn,
+      :cluster_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns the result of deleting an assessment.
+    #
+    # @!attribute [rw] assessment_arn
+    #   The Amazon Resource Name (ARN) of the assessment being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the assessment. Will be DELETING.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteAssessmentResponse AWS API Documentation
+    #
+    class DeleteAssessmentResponse < Struct.new(
+      :assessment_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_arn
     #   @return [String]
     #
@@ -1761,6 +2045,85 @@ module Aws::Kafka
     class DeleteVpcConnectionResponse < Struct.new(
       :vpc_connection_arn,
       :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] assessment_arn
+    #   The Amazon Resource Name (ARN) of the assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeAssessmentRequest AWS API Documentation
+    #
+    class DescribeAssessmentRequest < Struct.new(
+      :assessment_arn,
+      :cluster_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns the status and summary of an assessment.
+    #
+    # @!attribute [rw] assessment_arn
+    #   The Amazon Resource Name (ARN) of the assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] assessment_parameters
+    #   The parameters that were provided when creating the assessment.
+    #   @return [Types::AssessmentParameters]
+    #
+    # @!attribute [rw] assessment_type
+    #   The type of assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster that was assessed.
+    #   @return [String]
+    #
+    # @!attribute [rw] completion_time
+    #   The time when the assessment completed. Present only when status is
+    #   COMPLETE or FAILED.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the assessment was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Additional information about the current status. Present when status
+    #   is FAILED.
+    #   @return [String]
+    #
+    # @!attribute [rw] summary
+    #   Summary of findings by category and severity. Present only when
+    #   status is COMPLETE.
+    #   @return [Types::AssessmentSummary]
+    #
+    # @!attribute [rw] tags
+    #   The tags attached to the assessment.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeAssessmentResponse AWS API Documentation
+    #
+    class DescribeAssessmentResponse < Struct.new(
+      :assessment_arn,
+      :assessment_parameters,
+      :assessment_type,
+      :cluster_arn,
+      :completion_time,
+      :creation_time,
+      :status,
+      :status_message,
+      :summary,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2040,6 +2403,97 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_reassignment_operation_arn
+    #   The Amazon Resource Name (ARN) of the topic reassignment operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeTopicReassignmentRequest AWS API Documentation
+    #
+    class DescribeTopicReassignmentRequest < Struct.new(
+      :cluster_arn,
+      :topic_reassignment_operation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns the status and progress of a topic reassignment operation.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] completed_topics
+    #   Number of topics fully migrated to the target broker type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time
+    #   When the operation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] error_info
+    #   Error details. Present only when status is FAILED.
+    #   @return [Types::ErrorInfo]
+    #
+    # @!attribute [rw] last_update_time
+    #   Last time the status or progress counters were updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] migrated_partitions
+    #   Number of partitions confirmed on the target broker type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The current status of the reassignment operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_instance_type
+    #   The target broker instance type for this reassignment.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_reassignment_operation_arn
+    #   The Amazon Resource Name (ARN) of the topic reassignment operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] topics_to_exclude
+    #   The original exclude patterns provided in the request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] topics_to_include
+    #   The original include patterns provided in the request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] total_partitions
+    #   Total number of partitions across all matched topics.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_topics
+    #   Total number of topics matching the selector at resolution time.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeTopicReassignmentResponse AWS API Documentation
+    #
+    class DescribeTopicReassignmentResponse < Struct.new(
+      :cluster_arn,
+      :completed_topics,
+      :creation_time,
+      :error_info,
+      :last_update_time,
+      :migrated_partitions,
+      :status,
+      :target_instance_type,
+      :topic_reassignment_operation_arn,
+      :topics_to_exclude,
+      :topics_to_include,
+      :total_partitions,
+      :total_topics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Request body for DescribeTopic.
     #
     # @!attribute [rw] cluster_arn
@@ -2127,6 +2581,10 @@ module Aws::Kafka
     # @!attribute [rw] status
     #   @return [String]
     #
+    # @!attribute [rw] replica_ids
+    #   The broker IDs hosting replicas of this topic's partitions.
+    #   @return [Array<Integer>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeTopicResponse AWS API Documentation
     #
     class DescribeTopicResponse < Struct.new(
@@ -2135,7 +2593,8 @@ module Aws::Kafka
       :replication_factor,
       :partition_count,
       :configs,
-      :status)
+      :status,
+      :replica_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2501,6 +2960,26 @@ module Aws::Kafka
     class Error < Struct.new(
       :invalid_parameter,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Guidance for resolving a finding.
+    #
+    # @!attribute [rw] action
+    #   The recommended action to resolve this finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] documentation_url
+    #   A link to documentation with more detail about this finding and how
+    #   to resolve it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/FindingRemediation AWS API Documentation
+    #
+    class FindingRemediation < Struct.new(
+      :action,
+      :documentation_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3118,6 +3597,113 @@ module Aws::Kafka
     class KafkaVersion < Struct.new(
       :version,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] assessment_arn
+    #   The Amazon Resource Name (ARN) of the assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] category
+    #   Optional filter. Only return findings matching this category.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of findings to return. Default 100, maximum 500.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, it returns a nextToken. Send this in
+    #   the subsequent request to get the remaining results.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   Optional filter. Only return findings matching this severity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListAssessmentFindingsRequest AWS API Documentation
+    #
+    class ListAssessmentFindingsRequest < Struct.new(
+      :assessment_arn,
+      :category,
+      :cluster_arn,
+      :max_results,
+      :next_token,
+      :severity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns the findings for a completed assessment.
+    #
+    # @!attribute [rw] findings
+    #   A list of findings from the assessment.
+    #   @return [Array<Types::AssessmentFinding>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, it returns a nextToken. Send this in
+    #   the subsequent request to get the remaining results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListAssessmentFindingsResponse AWS API Documentation
+    #
+    class ListAssessmentFindingsResponse < Struct.new(
+      :findings,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] assessment_type
+    #   Optional filter. The type of assessment to filter by.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster to list assessments
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of assessments to return. Default 25, maximum 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, it returns a nextToken. Send this in
+    #   the subsequent request to get the remaining results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListAssessmentsRequest AWS API Documentation
+    #
+    class ListAssessmentsRequest < Struct.new(
+      :assessment_type,
+      :cluster_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns a list of assessments.
+    #
+    # @!attribute [rw] assessments
+    #   A list of assessment summaries.
+    #   @return [Array<Types::AssessmentInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, it returns a nextToken. Send this in
+    #   the subsequent request to get the remaining results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListAssessmentsResponse AWS API Documentation
+    #
+    class ListAssessmentsResponse < Struct.new(
+      :assessments,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4282,6 +4868,55 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of reassignment operations to return. Default 50,
+    #   maximum 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, it returns a nextToken. Send this in
+    #   the subsequent request to get the remaining results.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_filter
+    #   Optional filter. Only return reassignments matching these statuses.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListTopicReassignmentsRequest AWS API Documentation
+    #
+    class ListTopicReassignmentsRequest < Struct.new(
+      :cluster_arn,
+      :max_results,
+      :next_token,
+      :status_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns a list of topic reassignment operations for a cluster.
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, it returns a nextToken. Send this in
+    #   the subsequent request to get the remaining results.
+    #   @return [String]
+    #
+    # @!attribute [rw] reassignments
+    #   A list of topic reassignment operation summaries.
+    #   @return [Array<Types::TopicReassignmentInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListTopicReassignmentsResponse AWS API Documentation
+    #
+    class ListTopicReassignmentsResponse < Struct.new(
+      :next_token,
+      :reassignments)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Request body for ListTopics.
     #
     # @!attribute [rw] cluster_arn
@@ -5018,6 +5653,73 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Initiates topic partition reassignment between broker types in a
+    # mixed-mode cluster.
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you retry a request with the same
+    #   client token within 24 hours, the API returns the original response
+    #   without creating a duplicate operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_instance_type
+    #   Instance type of the target brokers. Must exist in the cluster. Use
+    #   Express instance type (e.g., express.m7g.large) for
+    #   Standard-to-Express migration. Use Standard instance type (e.g.,
+    #   kafka.m7g.large) to move topics back to Standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] topics_to_exclude
+    #   Regex patterns for topics to exclude from reassignment. Evaluated
+    #   after include patterns.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] topics_to_include
+    #   Regex patterns for topics to reassign. Use \['.*'\] for all
+    #   topics. Max 10 patterns.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/StartTopicReassignmentRequest AWS API Documentation
+    #
+    class StartTopicReassignmentRequest < Struct.new(
+      :client_token,
+      :cluster_arn,
+      :target_instance_type,
+      :topics_to_exclude,
+      :topics_to_include)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about the initiated topic reassignment operation.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the reassignment operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_reassignment_operation_arn
+    #   The Amazon Resource Name (ARN) of the topic reassignment operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/StartTopicReassignmentResponse AWS API Documentation
+    #
+    class StartTopicReassignmentResponse < Struct.new(
+      :cluster_arn,
+      :status,
+      :topic_reassignment_operation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the state of the Amazon MSK cluster.
     #
     # @!attribute [rw] code
@@ -5035,6 +5737,43 @@ module Aws::Kafka
     class StateInfo < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_reassignment_operation_arn
+    #   The Amazon Resource Name (ARN) of the topic reassignment operation
+    #   to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/StopTopicReassignmentRequest AWS API Documentation
+    #
+    class StopTopicReassignmentRequest < Struct.new(
+      :cluster_arn,
+      :topic_reassignment_operation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns the result of stopping a topic reassignment operation.
+    #
+    # @!attribute [rw] status
+    #   The current status of the operation. Will be STOPPING.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_reassignment_operation_arn
+    #   The Amazon Resource Name (ARN) of the topic reassignment operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/StopTopicReassignmentResponse AWS API Documentation
+    #
+    class StopTopicReassignmentResponse < Struct.new(
+      :status,
+      :topic_reassignment_operation_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5084,6 +5823,45 @@ module Aws::Kafka
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a topic reassignment operation.
+    #
+    # @!attribute [rw] completed_topics
+    #   Number of topics fully migrated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time
+    #   When the operation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the reassignment operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_instance_type
+    #   The target broker instance type for this reassignment.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_reassignment_operation_arn
+    #   The Amazon Resource Name (ARN) of the topic reassignment operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_topics
+    #   Total number of topics matching the selector.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/TopicReassignmentInfo AWS API Documentation
+    #
+    class TopicReassignmentInfo < Struct.new(
+      :completed_topics,
+      :creation_time,
+      :status,
+      :target_instance_type,
+      :topic_reassignment_operation_arn,
+      :total_topics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5236,6 +6014,10 @@ module Aws::Kafka
     # @!attribute [rw] out_of_sync_replica_count
     #   @return [Integer]
     #
+    # @!attribute [rw] replica_ids
+    #   The broker IDs hosting replicas of this topic's partitions.
+    #   @return [Array<Integer>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/TopicInfo AWS API Documentation
     #
     class TopicInfo < Struct.new(
@@ -5243,7 +6025,8 @@ module Aws::Kafka
       :topic_name,
       :replication_factor,
       :partition_count,
-      :out_of_sync_replica_count)
+      :out_of_sync_replica_count,
+      :replica_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5506,8 +6289,20 @@ module Aws::Kafka
     #   @return [String]
     #
     # @!attribute [rw] target_instance_type
-    #   The Amazon MSK broker type that you want all of the brokers in this
-    #   cluster to be.
+    #   The type of Amazon EC2 instances to use for Kafka brokers. For
+    #   in-place upgrades to Express, use the composite format to initiate
+    #   mixed mode, the Express instance type to complete the upgrade, or
+    #   the Standard instance type to rollback.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_reassignment
+    #   Controls automatic topic reassignment when entering mixed broker
+    #   mode. When set to AUTO, MSK automatically reassigns all topics to
+    #   the target broker type after adding new brokers. When set to MANUAL
+    #   (default), customers manage topic reassignment using the
+    #   StartTopicReassignment API. Only valid when targetInstanceType is a
+    #   composite mixed-mode value. Must be set to MANUAL before completing
+    #   the upgrade or rolling back.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateBrokerTypeRequest AWS API Documentation
@@ -5515,7 +6310,8 @@ module Aws::Kafka
     class UpdateBrokerTypeRequest < Struct.new(
       :cluster_arn,
       :current_version,
-      :target_instance_type)
+      :target_instance_type,
+      :topic_reassignment)
       SENSITIVE = []
       include Aws::Structure
     end

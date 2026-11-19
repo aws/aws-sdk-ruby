@@ -306,6 +306,8 @@ module Aws::AppStream
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
     Platforms = Shapes::ListShape.new(name: 'Platforms')
     PreferredProtocol = Shapes::StringShape.new(name: 'PreferredProtocol')
+    ProcessCompatibilityList = Shapes::ListShape.new(name: 'ProcessCompatibilityList')
+    ProcessImageName = Shapes::StringShape.new(name: 'ProcessImageName')
     RedirectURL = Shapes::StringShape.new(name: 'RedirectURL')
     RegionName = Shapes::StringShape.new(name: 'RegionName')
     RequestLimitExceededException = Shapes::StructureShape.new(name: 'RequestLimitExceededException')
@@ -431,6 +433,7 @@ module Aws::AppStream
     VisibilityType = Shapes::StringShape.new(name: 'VisibilityType')
     VolumeConfig = Shapes::StructureShape.new(name: 'VolumeConfig')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
+    WebAuthnRedirection = Shapes::StructureShape.new(name: 'WebAuthnRedirection')
     WorkspaceImageId = Shapes::StringShape.new(name: 'WorkspaceImageId')
 
     AccessEndpoint.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: AccessEndpointType, required: true, location_name: "EndpointType"))
@@ -825,6 +828,7 @@ module Aws::AppStream
     CreateStackRequest.add_member(:embed_host_domains, Shapes::ShapeRef.new(shape: EmbedHostDomains, location_name: "EmbedHostDomains"))
     CreateStackRequest.add_member(:streaming_experience_settings, Shapes::ShapeRef.new(shape: StreamingExperienceSettings, location_name: "StreamingExperienceSettings"))
     CreateStackRequest.add_member(:content_redirection, Shapes::ShapeRef.new(shape: ContentRedirection, location_name: "ContentRedirection"))
+    CreateStackRequest.add_member(:web_authn_redirection, Shapes::ShapeRef.new(shape: WebAuthnRedirection, location_name: "WebAuthnRedirection"))
     CreateStackRequest.add_member(:agent_access_config, Shapes::ShapeRef.new(shape: AgentAccessConfig, location_name: "AgentAccessConfig"))
     CreateStackRequest.add_member(:storage_connector_authentication, Shapes::ShapeRef.new(shape: StorageConnectorAuthentication, location_name: "StorageConnectorAuthentication"))
     CreateStackRequest.struct_class = Types::CreateStackRequest
@@ -1469,6 +1473,8 @@ module Aws::AppStream
 
     Platforms.member = Shapes::ShapeRef.new(shape: PlatformType)
 
+    ProcessCompatibilityList.member = Shapes::ShapeRef.new(shape: ProcessImageName)
+
     RequestLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     RequestLimitExceededException.struct_class = Types::RequestLimitExceededException
 
@@ -1554,6 +1560,7 @@ module Aws::AppStream
     Stack.add_member(:embed_host_domains, Shapes::ShapeRef.new(shape: EmbedHostDomains, location_name: "EmbedHostDomains"))
     Stack.add_member(:streaming_experience_settings, Shapes::ShapeRef.new(shape: StreamingExperienceSettings, location_name: "StreamingExperienceSettings"))
     Stack.add_member(:content_redirection, Shapes::ShapeRef.new(shape: ContentRedirection, location_name: "ContentRedirection"))
+    Stack.add_member(:web_authn_redirection, Shapes::ShapeRef.new(shape: WebAuthnRedirection, location_name: "WebAuthnRedirection"))
     Stack.add_member(:agent_access_config, Shapes::ShapeRef.new(shape: AgentAccessConfig, location_name: "AgentAccessConfig"))
     Stack.add_member(:storage_connector_authentication, Shapes::ShapeRef.new(shape: StorageConnectorAuthentication, location_name: "StorageConnectorAuthentication"))
     Stack.struct_class = Types::Stack
@@ -1768,6 +1775,7 @@ module Aws::AppStream
     UpdateStackRequest.add_member(:embed_host_domains, Shapes::ShapeRef.new(shape: EmbedHostDomains, location_name: "EmbedHostDomains"))
     UpdateStackRequest.add_member(:streaming_experience_settings, Shapes::ShapeRef.new(shape: StreamingExperienceSettings, location_name: "StreamingExperienceSettings"))
     UpdateStackRequest.add_member(:content_redirection, Shapes::ShapeRef.new(shape: ContentRedirection, location_name: "ContentRedirection"))
+    UpdateStackRequest.add_member(:web_authn_redirection, Shapes::ShapeRef.new(shape: WebAuthnRedirection, location_name: "WebAuthnRedirection"))
     UpdateStackRequest.add_member(:agent_access_config, Shapes::ShapeRef.new(shape: AgentAccessConfigForUpdate, location_name: "AgentAccessConfig"))
     UpdateStackRequest.add_member(:storage_connector_authentication, Shapes::ShapeRef.new(shape: StorageConnectorAuthentication, location_name: "StorageConnectorAuthentication"))
     UpdateStackRequest.struct_class = Types::UpdateStackRequest
@@ -1845,6 +1853,10 @@ module Aws::AppStream
     VpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "SubnetIds"))
     VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "SecurityGroupIds"))
     VpcConfig.struct_class = Types::VpcConfig
+
+    WebAuthnRedirection.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "Enabled"))
+    WebAuthnRedirection.add_member(:process_compatibility_list, Shapes::ShapeRef.new(shape: ProcessCompatibilityList, location_name: "ProcessCompatibilityList"))
+    WebAuthnRedirection.struct_class = Types::WebAuthnRedirection
 
 
     # @api private

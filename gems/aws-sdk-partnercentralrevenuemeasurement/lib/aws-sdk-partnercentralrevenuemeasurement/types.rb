@@ -13,6 +13,7 @@ module Aws::PartnerCentralRevenueMeasurement
     # The request was denied due to insufficient permissions.
     #
     # @!attribute [rw] message
+    #   A human-readable message describing the access denial reason.
     #   @return [String]
     #
     # @!attribute [rw] reason
@@ -88,6 +89,10 @@ module Aws::PartnerCentralRevenueMeasurement
     #   counting both ACTIVE and INACTIVE.
     #   @return [Integer]
     #
+    # @!attribute [rw] context
+    #   Program-defined key-value attributes for the revenue attribution.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/AttributionSummary AWS API Documentation
     #
     class AttributionSummary < Struct.new(
@@ -103,7 +108,8 @@ module Aws::PartnerCentralRevenueMeasurement
       :effective_from,
       :effective_until,
       :total_active_revenue_attribution_allocation_count,
-      :total_revenue_attribution_allocation_count)
+      :total_revenue_attribution_allocation_count,
+      :context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -112,6 +118,7 @@ module Aws::PartnerCentralRevenueMeasurement
     # state of the resource.
     #
     # @!attribute [rw] message
+    #   A human-readable message describing the conflict that occurred.
     #   @return [String]
     #
     # @!attribute [rw] reason
@@ -127,12 +134,33 @@ module Aws::PartnerCentralRevenueMeasurement
       include Aws::Structure
     end
 
+    # Filters revenue attributions by a context key and, optionally, a set
+    # of values.
+    #
+    # @!attribute [rw] key
+    #   The context key to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   Matches when the stored value equals any of these values. When
+    #   omitted, matches when the key is present.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/ContextFilter AWS API Documentation
+    #
+    class ContextFilter < Struct.new(
+      :key,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] catalog
     #   The catalog in which to create the allocation.
     #   @return [String]
     #
-    # @!attribute [rw] product_id
-    #   The AWS Marketplace product identifier for the parent revenue share.
+    # @!attribute [rw] marketplace_revenue_share_identifier
+    #   The parent marketplace revenue share, by ID (mrs-...) or ARN.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -142,6 +170,12 @@ module Aws::PartnerCentralRevenueMeasurement
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] marketplace_revenue_share_revision
+    #   The revision of the parent marketplace revenue share that the caller
+    #   last read, for optimistic concurrency control. A stale value returns
+    #   ConflictException with Reason REVISION\_MISMATCH.
+    #   @return [String]
+    #
     # @!attribute [rw] effective_from
     #   The effective start date for the allocation. Must be the first day
     #   of a month.
@@ -149,7 +183,7 @@ module Aws::PartnerCentralRevenueMeasurement
     #
     # @!attribute [rw] effective_until
     #   The effective end date for the allocation. Must be the last day of a
-    #   month (YYYY-MM-DD). Omit for open-ended allocations.
+    #   month (YYYY-MM-DD).
     #   @return [String]
     #
     # @!attribute [rw] revenue_share_percent
@@ -160,8 +194,9 @@ module Aws::PartnerCentralRevenueMeasurement
     #
     class CreateMarketplaceRevenueShareAllocationInput < Struct.new(
       :catalog,
-      :product_id,
+      :marketplace_revenue_share_identifier,
       :client_token,
+      :marketplace_revenue_share_revision,
       :effective_from,
       :effective_until,
       :revenue_share_percent)
@@ -173,16 +208,8 @@ module Aws::PartnerCentralRevenueMeasurement
     #   The unique identifier of the newly created allocation.
     #   @return [String]
     #
-    # @!attribute [rw] product_id
-    #   The AWS Marketplace product identifier.
-    #   @return [String]
-    #
-    # @!attribute [rw] product_name
-    #   The display name of the AWS Marketplace product.
-    #   @return [String]
-    #
-    # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the allocation.
+    # @!attribute [rw] marketplace_revenue_share_identifier
+    #   The parent marketplace revenue share, short ID form (mrs-...).
     #   @return [String]
     #
     # @!attribute [rw] effective_from
@@ -190,7 +217,7 @@ module Aws::PartnerCentralRevenueMeasurement
     #   @return [String]
     #
     # @!attribute [rw] effective_until
-    #   The effective end date of the allocation, or null if open-ended.
+    #   The effective end date of the allocation.
     #   @return [String]
     #
     # @!attribute [rw] revenue_share_percent
@@ -209,7 +236,12 @@ module Aws::PartnerCentralRevenueMeasurement
     #   The date when the allocation was last modified.
     #   @return [Time]
     #
-    # @!attribute [rw] latest_marketplace_revenue_share_revision
+    # @!attribute [rw] marketplace_revenue_share_revision
+    #   The revision of the parent marketplace revenue share at which the
+    #   allocation was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] marketplace_revenue_share_latest_revision
     #   The latest revision of the parent marketplace revenue share.
     #   @return [String]
     #
@@ -217,16 +249,15 @@ module Aws::PartnerCentralRevenueMeasurement
     #
     class CreateMarketplaceRevenueShareAllocationOutput < Struct.new(
       :marketplace_revenue_share_allocation_id,
-      :product_id,
-      :product_name,
-      :arn,
+      :marketplace_revenue_share_identifier,
       :effective_from,
       :effective_until,
       :revenue_share_percent,
       :status,
       :created_date,
       :last_modified_date,
-      :latest_marketplace_revenue_share_revision)
+      :marketplace_revenue_share_revision,
+      :marketplace_revenue_share_latest_revision)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -242,9 +273,10 @@ module Aws::PartnerCentralRevenueMeasurement
     #   not need to pass this option.
     #   @return [String]
     #
-    # @!attribute [rw] product_id
-    #   The AWS Marketplace product identifier for this revenue share.
-    #   @return [String]
+    # @!attribute [rw] products
+    #   The products in the marketplace revenue share, each with its typed
+    #   account lists. 1 to 25 products.
+    #   @return [Array<Types::MarketplaceRevenueShareProductEntry>]
     #
     # @!attribute [rw] tags
     #   Tags to associate with the marketplace revenue share upon creation.
@@ -255,15 +287,15 @@ module Aws::PartnerCentralRevenueMeasurement
     class CreateMarketplaceRevenueShareInput < Struct.new(
       :catalog,
       :client_token,
-      :product_id,
+      :products,
       :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] product_id
-    #   The AWS Marketplace product identifier of the newly created revenue
-    #   share.
+    # @!attribute [rw] id
+    #   The unique identifier of the newly created marketplace revenue
+    #   share, short ID form (mrs-...).
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -275,13 +307,10 @@ module Aws::PartnerCentralRevenueMeasurement
     #   The catalog that the marketplace revenue share belongs to.
     #   @return [String]
     #
-    # @!attribute [rw] product_code
-    #   The AWS Marketplace product code.
-    #   @return [String]
-    #
-    # @!attribute [rw] product_name
-    #   The display name of the AWS Marketplace product.
-    #   @return [String]
+    # @!attribute [rw] products
+    #   The products in the newly created marketplace revenue share, each
+    #   with per-type account counts.
+    #   @return [Array<Types::MarketplaceRevenueShareProductSummary>]
     #
     # @!attribute [rw] created_date
     #   The date when the marketplace revenue share was created.
@@ -292,17 +321,16 @@ module Aws::PartnerCentralRevenueMeasurement
     #   @return [Time]
     #
     # @!attribute [rw] revision
-    #   The revision number of the newly created marketplace revenue share.
-    #   @return [Integer]
+    #   The revision of the newly created marketplace revenue share.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/CreateMarketplaceRevenueShareOutput AWS API Documentation
     #
     class CreateMarketplaceRevenueShareOutput < Struct.new(
-      :product_id,
+      :id,
       :arn,
       :catalog,
-      :product_code,
-      :product_name,
+      :products,
       :created_date,
       :last_modified_date,
       :revision)
@@ -343,6 +371,10 @@ module Aws::PartnerCentralRevenueMeasurement
     #   Tags to associate with the revenue attribution upon creation.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] context
+    #   Program-defined key-value attributes for the revenue attribution.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/CreateRevenueAttributionInput AWS API Documentation
     #
     class CreateRevenueAttributionInput < Struct.new(
@@ -352,7 +384,8 @@ module Aws::PartnerCentralRevenueMeasurement
       :description,
       :tenancy_model,
       :product_identifier,
-      :tags)
+      :tags,
+      :context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -386,6 +419,10 @@ module Aws::PartnerCentralRevenueMeasurement
     #   The revision of the newly created attribution resource.
     #   @return [String]
     #
+    # @!attribute [rw] context
+    #   Program-defined key-value attributes for the revenue attribution.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/CreateRevenueAttributionOutput AWS API Documentation
     #
     class CreateRevenueAttributionOutput < Struct.new(
@@ -395,7 +432,8 @@ module Aws::PartnerCentralRevenueMeasurement
       :description,
       :tenancy_model,
       :marketplace_product,
-      :revision)
+      :revision,
+      :context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -404,8 +442,8 @@ module Aws::PartnerCentralRevenueMeasurement
     #   The catalog that the allocation belongs to.
     #   @return [String]
     #
-    # @!attribute [rw] product_id
-    #   The AWS Marketplace product identifier of the parent revenue share.
+    # @!attribute [rw] marketplace_revenue_share_identifier
+    #   The parent marketplace revenue share, by ID (mrs-...) or ARN.
     #   @return [String]
     #
     # @!attribute [rw] marketplace_revenue_share_allocation_id
@@ -421,7 +459,7 @@ module Aws::PartnerCentralRevenueMeasurement
     #
     class GetMarketplaceRevenueShareAllocationInput < Struct.new(
       :catalog,
-      :product_id,
+      :marketplace_revenue_share_identifier,
       :marketplace_revenue_share_allocation_id,
       :marketplace_revenue_share_revision)
       SENSITIVE = []
@@ -432,16 +470,8 @@ module Aws::PartnerCentralRevenueMeasurement
     #   The unique identifier of the allocation.
     #   @return [String]
     #
-    # @!attribute [rw] product_id
-    #   The AWS Marketplace product identifier.
-    #   @return [String]
-    #
-    # @!attribute [rw] product_name
-    #   The display name of the AWS Marketplace product.
-    #   @return [String]
-    #
-    # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the allocation.
+    # @!attribute [rw] marketplace_revenue_share_identifier
+    #   The parent marketplace revenue share, short ID form (mrs-...).
     #   @return [String]
     #
     # @!attribute [rw] effective_from
@@ -449,7 +479,7 @@ module Aws::PartnerCentralRevenueMeasurement
     #   @return [String]
     #
     # @!attribute [rw] effective_until
-    #   The effective end date of the allocation, or null if open-ended.
+    #   The effective end date of the allocation.
     #   @return [String]
     #
     # @!attribute [rw] revenue_share_percent
@@ -468,7 +498,12 @@ module Aws::PartnerCentralRevenueMeasurement
     #   The date when the allocation was last modified.
     #   @return [Time]
     #
-    # @!attribute [rw] latest_marketplace_revenue_share_revision
+    # @!attribute [rw] marketplace_revenue_share_revision
+    #   The revision of the parent marketplace revenue share at which the
+    #   allocation was read.
+    #   @return [String]
+    #
+    # @!attribute [rw] marketplace_revenue_share_latest_revision
     #   The latest revision of the parent marketplace revenue share.
     #   @return [String]
     #
@@ -476,16 +511,15 @@ module Aws::PartnerCentralRevenueMeasurement
     #
     class GetMarketplaceRevenueShareAllocationOutput < Struct.new(
       :marketplace_revenue_share_allocation_id,
-      :product_id,
-      :product_name,
-      :arn,
+      :marketplace_revenue_share_identifier,
       :effective_from,
       :effective_until,
       :revenue_share_percent,
       :status,
       :created_date,
       :last_modified_date,
-      :latest_marketplace_revenue_share_revision)
+      :marketplace_revenue_share_revision,
+      :marketplace_revenue_share_latest_revision)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -494,28 +528,28 @@ module Aws::PartnerCentralRevenueMeasurement
     #   The catalog that the marketplace revenue share belongs to.
     #   @return [String]
     #
-    # @!attribute [rw] product_id
-    #   The AWS Marketplace product identifier of the revenue share to
-    #   retrieve.
+    # @!attribute [rw] identifier
+    #   The marketplace revenue share to retrieve, by ID (mrs-...) or ARN.
     #   @return [String]
     #
     # @!attribute [rw] revision
     #   The revision of the marketplace revenue share to retrieve. Omit to
     #   return the latest revision.
-    #   @return [Integer]
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/GetMarketplaceRevenueShareInput AWS API Documentation
     #
     class GetMarketplaceRevenueShareInput < Struct.new(
       :catalog,
-      :product_id,
+      :identifier,
       :revision)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] product_id
-    #   The AWS Marketplace product identifier of the revenue share.
+    # @!attribute [rw] id
+    #   The unique identifier of the marketplace revenue share, short ID
+    #   form (mrs-...).
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -526,13 +560,10 @@ module Aws::PartnerCentralRevenueMeasurement
     #   The catalog that the marketplace revenue share belongs to.
     #   @return [String]
     #
-    # @!attribute [rw] product_code
-    #   The AWS Marketplace product code.
-    #   @return [String]
-    #
-    # @!attribute [rw] product_name
-    #   The display name of the AWS Marketplace product.
-    #   @return [String]
+    # @!attribute [rw] products
+    #   The products in the marketplace revenue share, each with its typed
+    #   account lists and full account IDs. Empty when the share is closed.
+    #   @return [Array<Types::MarketplaceRevenueShareProductDetail>]
     #
     # @!attribute [rw] created_date
     #   The date when the marketplace revenue share was created.
@@ -543,12 +574,24 @@ module Aws::PartnerCentralRevenueMeasurement
     #   @return [Time]
     #
     # @!attribute [rw] revision
-    #   The revision number of the retrieved marketplace revenue share.
-    #   @return [Integer]
+    #   The revision of the retrieved marketplace revenue share.
+    #   @return [String]
     #
     # @!attribute [rw] latest_revision
-    #   The latest revision number of the marketplace revenue share.
-    #   @return [Integer]
+    #   The latest revision of the marketplace revenue share.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_from
+    #   The date from which this share is effective, derived from the
+    #   earliest ACTIVE allocation start date (YYYY-MM-DD). Absent when no
+    #   ACTIVE allocation remains.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_until
+    #   The date until which this share is effective, derived from the
+    #   latest ACTIVE allocation end date (YYYY-MM-DD). Absent when no
+    #   ACTIVE allocation remains.
+    #   @return [String]
     #
     # @!attribute [rw] total_active_marketplace_revenue_share_allocation_count
     #   The number of active allocations under this marketplace revenue
@@ -563,15 +606,16 @@ module Aws::PartnerCentralRevenueMeasurement
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/GetMarketplaceRevenueShareOutput AWS API Documentation
     #
     class GetMarketplaceRevenueShareOutput < Struct.new(
-      :product_id,
+      :id,
       :arn,
       :catalog,
-      :product_code,
-      :product_name,
+      :products,
       :created_date,
       :last_modified_date,
       :revision,
       :latest_revision,
+      :effective_from,
+      :effective_until,
       :total_active_marketplace_revenue_share_allocation_count,
       :total_marketplace_revenue_share_allocation_count)
       SENSITIVE = []
@@ -846,6 +890,10 @@ module Aws::PartnerCentralRevenueMeasurement
     #   counting both ACTIVE and INACTIVE.
     #   @return [Integer]
     #
+    # @!attribute [rw] context
+    #   Program-defined key-value attributes for the revenue attribution.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/GetRevenueAttributionOutput AWS API Documentation
     #
     class GetRevenueAttributionOutput < Struct.new(
@@ -863,7 +911,8 @@ module Aws::PartnerCentralRevenueMeasurement
       :effective_from,
       :effective_until,
       :total_active_revenue_attribution_allocation_count,
-      :total_revenue_attribution_allocation_count)
+      :total_revenue_attribution_allocation_count,
+      :context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -871,6 +920,7 @@ module Aws::PartnerCentralRevenueMeasurement
     # An internal server error occurred. Retry your request.
     #
     # @!attribute [rw] message
+    #   A human-readable message describing the internal server error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/InternalServerException AWS API Documentation
@@ -885,11 +935,11 @@ module Aws::PartnerCentralRevenueMeasurement
     #   The catalog containing the allocations.
     #   @return [String]
     #
-    # @!attribute [rw] product_id
-    #   The AWS Marketplace product identifier for the parent revenue share.
+    # @!attribute [rw] marketplace_revenue_share_identifier
+    #   The parent marketplace revenue share, by ID (mrs-...) or ARN.
     #   @return [String]
     #
-    # @!attribute [rw] status
+    # @!attribute [rw] status_filter
     #   Filter by allocation status.
     #   @return [String]
     #
@@ -902,12 +952,21 @@ module Aws::PartnerCentralRevenueMeasurement
     #   range).
     #   @return [String]
     #
+    # @!attribute [rw] after_effective_until
+    #   Inclusive lower bound for EffectiveUntil date filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_effective_until
+    #   Exclusive upper bound for EffectiveUntil date filter (half-open
+    #   range).
+    #   @return [String]
+    #
     # @!attribute [rw] sort_by
     #   The field to sort marketplace revenue share allocations by.
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   The direction to sort results. Defaults to DESCENDING.
+    #   The direction to sort results. Defaults to ASCENDING.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -927,10 +986,12 @@ module Aws::PartnerCentralRevenueMeasurement
     #
     class ListMarketplaceRevenueShareAllocationsInput < Struct.new(
       :catalog,
-      :product_id,
-      :status,
+      :marketplace_revenue_share_identifier,
+      :status_filter,
       :after_effective_from,
       :before_effective_from,
+      :after_effective_until,
+      :before_effective_until,
       :sort_by,
       :sort_order,
       :max_results,
@@ -961,13 +1022,21 @@ module Aws::PartnerCentralRevenueMeasurement
     #   The catalog to list marketplace revenue shares from.
     #   @return [String]
     #
+    # @!attribute [rw] identifiers
+    #   Filter results to only include these marketplace revenue shares, by
+    #   ID or ARN. 1 to 100 identifiers. When several filters are sent, a
+    #   share must match all of them.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] product_ids
-    #   Filter results to only include shares with these product
-    #   identifiers.
+    #   Filter results to the marketplace revenue shares that contain any of
+    #   these products. 1 to 10 product IDs or product ARNs. Shares the
+    #   caller does not own are never returned.
     #   @return [Array<String>]
     #
     # @!attribute [rw] product_codes
-    #   Filter results to only include shares with these product codes.
+    #   Filter results to the marketplace revenue shares that contain a
+    #   product with any of these product codes. 1 to 10 product codes.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -988,19 +1057,20 @@ module Aws::PartnerCentralRevenueMeasurement
     #   @return [String]
     #
     # @!attribute [rw] created_after
-    #   Filter results to only include marketplace revenue shares created
-    #   after this timestamp.
+    #   Filter results to marketplace revenue shares created at or after
+    #   this timestamp (inclusive).
     #   @return [Time]
     #
     # @!attribute [rw] created_before
-    #   Filter results to only include marketplace revenue shares created
-    #   before this timestamp.
+    #   Filter results to marketplace revenue shares created before this
+    #   timestamp (exclusive).
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/ListMarketplaceRevenueSharesInput AWS API Documentation
     #
     class ListMarketplaceRevenueSharesInput < Struct.new(
       :catalog,
+      :identifiers,
       :product_ids,
       :product_codes,
       :max_results,
@@ -1167,6 +1237,11 @@ module Aws::PartnerCentralRevenueMeasurement
     #   response to retrieve the next page.
     #   @return [String]
     #
+    # @!attribute [rw] context_filters
+    #   Filter results by context. Filters are combined with AND; values
+    #   within a filter are combined with OR.
+    #   @return [Array<Types::ContextFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/ListRevenueAttributionsInput AWS API Documentation
     #
     class ListRevenueAttributionsInput < Struct.new(
@@ -1177,7 +1252,8 @@ module Aws::PartnerCentralRevenueMeasurement
       :sort_by,
       :sort_order,
       :max_results,
-      :next_token)
+      :next_token,
+      :context_filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1255,17 +1331,8 @@ module Aws::PartnerCentralRevenueMeasurement
     #   The unique identifier of the allocation.
     #   @return [String]
     #
-    # @!attribute [rw] product_id
-    #   The AWS Marketplace product identifier.
-    #   @return [String]
-    #
-    # @!attribute [rw] product_name
-    #   The display name of the AWS Marketplace product.
-    #   @return [String]
-    #
-    # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the parent marketplace revenue
-    #   share.
+    # @!attribute [rw] marketplace_revenue_share_identifier
+    #   The parent marketplace revenue share, short ID form (mrs-...).
     #   @return [String]
     #
     # @!attribute [rw] effective_from
@@ -1273,7 +1340,7 @@ module Aws::PartnerCentralRevenueMeasurement
     #   @return [String]
     #
     # @!attribute [rw] effective_until
-    #   The effective end date of the allocation, or null if open-ended.
+    #   The effective end date of the allocation.
     #   @return [String]
     #
     # @!attribute [rw] revenue_share_percent
@@ -1296,9 +1363,7 @@ module Aws::PartnerCentralRevenueMeasurement
     #
     class MarketplaceRevenueShareAllocationSummary < Struct.new(
       :marketplace_revenue_share_allocation_id,
-      :product_id,
-      :product_name,
-      :arn,
+      :marketplace_revenue_share_identifier,
       :effective_from,
       :effective_until,
       :revenue_share_percent,
@@ -1309,10 +1374,100 @@ module Aws::PartnerCentralRevenueMeasurement
       include Aws::Structure
     end
 
-    # Summary information about a marketplace revenue share.
+    # A product in a marketplace revenue share, as returned by
+    # GetMarketplaceRevenueShare, with the full typed account lists.
     #
     # @!attribute [rw] product_id
     #   The AWS Marketplace product identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_code
+    #   The AWS Marketplace product code, resolved by the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_name
+    #   The display name of the AWS Marketplace product, resolved by the
+    #   service.
+    #   @return [String]
+    #
+    # @!attribute [rw] accounts
+    #   The typed account lists for this product, each with its count and
+    #   full list of IDs.
+    #   @return [Array<Types::RevenueShareProductAccountDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/MarketplaceRevenueShareProductDetail AWS API Documentation
+    #
+    class MarketplaceRevenueShareProductDetail < Struct.new(
+      :product_id,
+      :product_code,
+      :product_name,
+      :accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A product and its typed account lists as supplied in a
+    # CreateMarketplaceRevenueShare or UpdateMarketplaceRevenueShare
+    # request.
+    #
+    # @!attribute [rw] product_id
+    #   The AWS Marketplace product ID or product ARN. The share stores and
+    #   returns the product ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] accounts
+    #   The typed account lists for this product. Omit to have the service
+    #   determine the accounts. At most one entry per type; each entry must
+    #   carry at least one account. An empty list is the same as omitting
+    #   the field.
+    #   @return [Array<Types::RevenueShareProductAccountEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/MarketplaceRevenueShareProductEntry AWS API Documentation
+    #
+    class MarketplaceRevenueShareProductEntry < Struct.new(
+      :product_id,
+      :accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A product in a marketplace revenue share, as returned in Create,
+    # Update and List responses, with per-type account counts but no account
+    # IDs.
+    #
+    # @!attribute [rw] product_id
+    #   The AWS Marketplace product identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_code
+    #   The AWS Marketplace product code, resolved by the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_name
+    #   The display name of the AWS Marketplace product, resolved by the
+    #   service.
+    #   @return [String]
+    #
+    # @!attribute [rw] accounts
+    #   Per-type counts of the accounts associated with this product.
+    #   @return [Array<Types::RevenueShareProductAccountSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/MarketplaceRevenueShareProductSummary AWS API Documentation
+    #
+    class MarketplaceRevenueShareProductSummary < Struct.new(
+      :product_id,
+      :product_code,
+      :product_name,
+      :accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a marketplace revenue share.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the marketplace revenue share, short ID
+    #   form (mrs-...).
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -1323,13 +1478,10 @@ module Aws::PartnerCentralRevenueMeasurement
     #   The catalog that the marketplace revenue share belongs to.
     #   @return [String]
     #
-    # @!attribute [rw] product_code
-    #   The AWS Marketplace product code.
-    #   @return [String]
-    #
-    # @!attribute [rw] product_name
-    #   The display name of the AWS Marketplace product.
-    #   @return [String]
+    # @!attribute [rw] products
+    #   The products in the marketplace revenue share, each with per-type
+    #   account counts. Empty when the share is closed.
+    #   @return [Array<Types::MarketplaceRevenueShareProductSummary>]
     #
     # @!attribute [rw] created_date
     #   The date when the marketplace revenue share was created.
@@ -1340,8 +1492,20 @@ module Aws::PartnerCentralRevenueMeasurement
     #   @return [Time]
     #
     # @!attribute [rw] latest_revision
-    #   The latest revision number of the marketplace revenue share.
-    #   @return [Integer]
+    #   The latest revision of the marketplace revenue share.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_from
+    #   The date from which this share is effective, derived from the
+    #   earliest ACTIVE allocation start date (YYYY-MM-DD). Absent when no
+    #   ACTIVE allocation remains.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_until
+    #   The date until which this share is effective, derived from the
+    #   latest ACTIVE allocation end date (YYYY-MM-DD). Absent when no
+    #   ACTIVE allocation remains.
+    #   @return [String]
     #
     # @!attribute [rw] total_active_marketplace_revenue_share_allocation_count
     #   The number of active allocations under this share.
@@ -1354,14 +1518,15 @@ module Aws::PartnerCentralRevenueMeasurement
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/MarketplaceRevenueShareSummary AWS API Documentation
     #
     class MarketplaceRevenueShareSummary < Struct.new(
-      :product_id,
+      :id,
       :arn,
       :catalog,
-      :product_code,
-      :product_name,
+      :products,
       :created_date,
       :last_modified_date,
       :latest_revision,
+      :effective_from,
+      :effective_until,
       :total_active_marketplace_revenue_share_allocation_count,
       :total_marketplace_revenue_share_allocation_count)
       SENSITIVE = []
@@ -1371,6 +1536,7 @@ module Aws::PartnerCentralRevenueMeasurement
     # The specified resource was not found.
     #
     # @!attribute [rw] message
+    #   A human-readable message describing which resource was not found.
     #   @return [String]
     #
     # @!attribute [rw] reason
@@ -1555,9 +1721,78 @@ module Aws::PartnerCentralRevenueMeasurement
       include Aws::Structure
     end
 
+    # A typed account list returned by GetMarketplaceRevenueShare, with its
+    # count and full list of IDs.
+    #
+    # @!attribute [rw] account_type
+    #   The type of account list.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of accounts of this type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] account_ids
+    #   The full list of AWS account identifiers of this type.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/RevenueShareProductAccountDetail AWS API Documentation
+    #
+    class RevenueShareProductAccountDetail < Struct.new(
+      :account_type,
+      :count,
+      :account_ids)
+      SENSITIVE = [:account_ids]
+      include Aws::Structure
+    end
+
+    # A typed account list supplied for a product in a
+    # CreateMarketplaceRevenueShare or UpdateMarketplaceRevenueShare
+    # request.
+    #
+    # @!attribute [rw] account_type
+    #   The type of account list.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_ids
+    #   The AWS account identifiers for this type. Each ID must be a
+    #   12-digit AWS account ID. Account ownership is verified after the
+    #   request is accepted.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/RevenueShareProductAccountEntry AWS API Documentation
+    #
+    class RevenueShareProductAccountEntry < Struct.new(
+      :account_type,
+      :account_ids)
+      SENSITIVE = [:account_ids]
+      include Aws::Structure
+    end
+
+    # A per-type count of accounts associated with a product.
+    #
+    # @!attribute [rw] account_type
+    #   The type of account list.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of accounts of this type.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/RevenueShareProductAccountSummary AWS API Documentation
+    #
+    class RevenueShareProductAccountSummary < Struct.new(
+      :account_type,
+      :count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request would exceed a service quota limit.
     #
     # @!attribute [rw] message
+    #   A human-readable message describing which service quota would be
+    #   exceeded.
     #   @return [String]
     #
     # @!attribute [rw] reason
@@ -1691,6 +1926,8 @@ module Aws::PartnerCentralRevenueMeasurement
     # request.
     #
     # @!attribute [rw] message
+    #   A human-readable message indicating that the request rate limit has
+    #   been exceeded.
     #   @return [String]
     #
     # @!attribute [rw] service_code
@@ -1732,8 +1969,8 @@ module Aws::PartnerCentralRevenueMeasurement
     #   The catalog containing the allocation.
     #   @return [String]
     #
-    # @!attribute [rw] product_id
-    #   The AWS Marketplace product identifier for the parent revenue share.
+    # @!attribute [rw] marketplace_revenue_share_identifier
+    #   The parent marketplace revenue share, by ID (mrs-...) or ARN.
     #   @return [String]
     #
     # @!attribute [rw] marketplace_revenue_share_allocation_id
@@ -1752,16 +1989,6 @@ module Aws::PartnerCentralRevenueMeasurement
     #   not need to pass this option.
     #   @return [String]
     #
-    # @!attribute [rw] effective_from
-    #   The new effective start date. Must be the first day of a month. Only
-    #   modifiable on future-dated allocations.
-    #   @return [String]
-    #
-    # @!attribute [rw] effective_until
-    #   The new effective end date. Must be the last day of a month and on
-    #   or after today.
-    #   @return [String]
-    #
     # @!attribute [rw] revenue_share_percent
     #   The new revenue share percentage. Only modifiable on future-dated
     #   allocations.
@@ -1776,12 +2003,10 @@ module Aws::PartnerCentralRevenueMeasurement
     #
     class UpdateMarketplaceRevenueShareAllocationInput < Struct.new(
       :catalog,
-      :product_id,
+      :marketplace_revenue_share_identifier,
       :marketplace_revenue_share_allocation_id,
       :marketplace_revenue_share_revision,
       :client_token,
-      :effective_from,
-      :effective_until,
       :revenue_share_percent,
       :status)
       SENSITIVE = []
@@ -1792,17 +2017,8 @@ module Aws::PartnerCentralRevenueMeasurement
     #   The unique identifier of the updated allocation.
     #   @return [String]
     #
-    # @!attribute [rw] product_id
-    #   The AWS Marketplace product identifier.
-    #   @return [String]
-    #
-    # @!attribute [rw] product_name
-    #   The display name of the AWS Marketplace product.
-    #   @return [String]
-    #
-    # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the parent marketplace revenue
-    #   share.
+    # @!attribute [rw] marketplace_revenue_share_identifier
+    #   The parent marketplace revenue share, short ID form (mrs-...).
     #   @return [String]
     #
     # @!attribute [rw] effective_from
@@ -1810,7 +2026,7 @@ module Aws::PartnerCentralRevenueMeasurement
     #   @return [String]
     #
     # @!attribute [rw] effective_until
-    #   The effective end date of the allocation, or null if open-ended.
+    #   The effective end date of the allocation.
     #   @return [String]
     #
     # @!attribute [rw] revenue_share_percent
@@ -1829,7 +2045,12 @@ module Aws::PartnerCentralRevenueMeasurement
     #   The date when the allocation was last modified.
     #   @return [Time]
     #
-    # @!attribute [rw] latest_marketplace_revenue_share_revision
+    # @!attribute [rw] marketplace_revenue_share_revision
+    #   The revision of the parent marketplace revenue share at which the
+    #   update was committed.
+    #   @return [String]
+    #
+    # @!attribute [rw] marketplace_revenue_share_latest_revision
     #   The latest revision of the parent marketplace revenue share after
     #   the update.
     #   @return [String]
@@ -1838,16 +2059,91 @@ module Aws::PartnerCentralRevenueMeasurement
     #
     class UpdateMarketplaceRevenueShareAllocationOutput < Struct.new(
       :marketplace_revenue_share_allocation_id,
-      :product_id,
-      :product_name,
-      :arn,
+      :marketplace_revenue_share_identifier,
       :effective_from,
       :effective_until,
       :revenue_share_percent,
       :status,
       :created_date,
       :last_modified_date,
-      :latest_marketplace_revenue_share_revision)
+      :marketplace_revenue_share_revision,
+      :marketplace_revenue_share_latest_revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] catalog
+    #   The catalog that the marketplace revenue share belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The marketplace revenue share to update, by ID (mrs-...) or ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique token to ensure idempotency of the update request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   The current revision of the marketplace revenue share, for
+    #   optimistic concurrency control. A stale value returns
+    #   ConflictException with Reason REVISION\_MISMATCH.
+    #   @return [String]
+    #
+    # @!attribute [rw] products
+    #   The complete desired set of products in the marketplace revenue
+    #   share, each with its typed account lists. 0 to 25 products; an empty
+    #   list closes the marketplace revenue share.
+    #   @return [Array<Types::MarketplaceRevenueShareProductEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/UpdateMarketplaceRevenueShareInput AWS API Documentation
+    #
+    class UpdateMarketplaceRevenueShareInput < Struct.new(
+      :catalog,
+      :identifier,
+      :client_token,
+      :revision,
+      :products)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The unique identifier of the updated marketplace revenue share,
+    #   short ID form (mrs-...).
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the updated marketplace revenue
+    #   share.
+    #   @return [String]
+    #
+    # @!attribute [rw] products
+    #   The products in the marketplace revenue share after the update, each
+    #   with per-type account counts. Empty when the marketplace revenue
+    #   share is closed.
+    #   @return [Array<Types::MarketplaceRevenueShareProductSummary>]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date when the marketplace revenue share was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] latest_revision
+    #   The latest revision of the marketplace revenue share after the
+    #   update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/UpdateMarketplaceRevenueShareOutput AWS API Documentation
+    #
+    class UpdateMarketplaceRevenueShareOutput < Struct.new(
+      :id,
+      :arn,
+      :products,
+      :last_modified_date,
+      :latest_revision)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1877,6 +2173,11 @@ module Aws::PartnerCentralRevenueMeasurement
     #   server's current value.
     #   @return [String]
     #
+    # @!attribute [rw] context
+    #   Full-replacement context map. Omit to leave the stored context
+    #   unchanged; pass an empty map to clear it.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/UpdateRevenueAttributionInput AWS API Documentation
     #
     class UpdateRevenueAttributionInput < Struct.new(
@@ -1884,7 +2185,8 @@ module Aws::PartnerCentralRevenueMeasurement
       :identifier,
       :client_token,
       :description,
-      :revision)
+      :revision,
+      :context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1909,6 +2211,10 @@ module Aws::PartnerCentralRevenueMeasurement
     #   The latest revision of the attribution after the update.
     #   @return [String]
     #
+    # @!attribute [rw] context
+    #   The context stored on the revenue attribution after the update.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-revenue-measurement-2022-07-26/UpdateRevenueAttributionOutput AWS API Documentation
     #
     class UpdateRevenueAttributionOutput < Struct.new(
@@ -1916,7 +2222,8 @@ module Aws::PartnerCentralRevenueMeasurement
       :arn,
       :description,
       :last_modified_date,
-      :latest_revision)
+      :latest_revision,
+      :context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1924,6 +2231,7 @@ module Aws::PartnerCentralRevenueMeasurement
     # The request failed validation due to invalid input parameters.
     #
     # @!attribute [rw] message
+    #   A human-readable message describing the validation failure.
     #   @return [String]
     #
     # @!attribute [rw] reason

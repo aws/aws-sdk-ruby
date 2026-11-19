@@ -23,6 +23,19 @@ module Aws::MarketplaceCatalog
       SENSITIVE: []
     end
 
+    class AdditionalResource
+      attr_accessor type: ::String
+      attr_accessor text: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class AdditionalResourcesAlternative
+      attr_accessor value: ::Array[Types::AdditionalResource]
+      attr_accessor rationale: ::String
+      SENSITIVE: []
+    end
+
     class AmiProductEntityIdFilter
       attr_accessor value_list: ::Array[::String]
       SENSITIVE: []
@@ -85,6 +98,7 @@ module Aws::MarketplaceCatalog
     class AssessmentTargetFilter
       attr_accessor entity_id: ::String
       attr_accessor change_set_id: ::String
+      attr_accessor entity_ids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -120,6 +134,12 @@ module Aws::MarketplaceCatalog
     class CancelChangeSetResponse
       attr_accessor change_set_id: ::String
       attr_accessor change_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CaseStudiesAlternative
+      attr_accessor value: ::Array[Types::ListingCaseStudy]
+      attr_accessor rationale: ::String
       SENSITIVE: []
     end
 
@@ -212,10 +232,43 @@ module Aws::MarketplaceCatalog
       SENSITIVE: []
     end
 
+    class ContentAlternatives
+      attr_accessor text: ::Array[Types::TextAlternative]
+      attr_accessor text_list: ::Array[Types::TextListAlternative]
+      attr_accessor additional_resources: ::Array[Types::AdditionalResourcesAlternative]
+      attr_accessor use_cases: ::Array[Types::UseCasesAlternative]
+      attr_accessor case_studies: ::Array[Types::CaseStudiesAlternative]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < ContentAlternatives
+      end
+      class TextList < ContentAlternatives
+      end
+      class AdditionalResources < ContentAlternatives
+      end
+      class UseCases < ContentAlternatives
+      end
+      class CaseStudies < ContentAlternatives
+      end
+      class Unknown < ContentAlternatives
+      end
+    end
+
+    class ContentRecommendation
+      attr_accessor status: ("GENERATED" | "INSUFFICIENT_CONTEXT")
+      attr_accessor alternatives: Types::ContentAlternatives
+      attr_accessor follow_up_questions: ::Array[Types::FollowUpQuestion]
+      attr_accessor findings: ::Array[Types::ListingFinding]
+      SENSITIVE: []
+    end
+
     class ControlAssessment
       attr_accessor control_id: ::String
       attr_accessor control_assessment_result: ("PASS" | "FAIL" | "NOT_EXECUTED" | "EXEMPTION_PASS")
+      attr_accessor verification_source: ("AWS_VERIFIED" | "SELF_ATTESTED")
       attr_accessor errors: ::Array[Types::ControlError]
+      attr_accessor control_summary: Types::ControlSummary
       SENSITIVE: []
     end
 
@@ -224,6 +277,23 @@ module Aws::MarketplaceCatalog
       attr_accessor message: ::String
       attr_accessor scope: ::Array[Types::ErrorScope]
       SENSITIVE: []
+    end
+
+    class ControlInput
+      attr_accessor control_id: ::String
+      attr_accessor input: untyped
+      SENSITIVE: []
+    end
+
+    class ControlSummary
+      attr_accessor listing_recommendations: Types::ListingRecommendations
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ListingRecommendations < ControlSummary
+      end
+      class Unknown < ControlSummary
+      end
     end
 
     class DataProductEntityIdFilter
@@ -502,9 +572,29 @@ module Aws::MarketplaceCatalog
       SENSITIVE: []
     end
 
+    class FeatureRecommendation
+      attr_accessor feature_id: ("REQUEST_PRIVATE_OFFER" | "REQUEST_A_DEMO" | "PROMOTIONAL_MEDIA" | "FREE_TRIAL" | "QUICK_LAUNCH")
+      attr_accessor action: ::String
+      attr_accessor rationale: ::String
+      attr_accessor severity: ("BLOCKING" | "ADVISORY")
+      attr_accessor status: ("PASS" | "FAIL")
+      SENSITIVE: []
+    end
+
+    class FeatureRecommendations
+      attr_accessor recommendations: ::Array[Types::FeatureRecommendation]
+      SENSITIVE: []
+    end
+
     class Filter
       attr_accessor name: ::String
       attr_accessor value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FollowUpQuestion
+      attr_accessor question: ::String
+      attr_accessor justification: ::String
       SENSITIVE: []
     end
 
@@ -525,12 +615,18 @@ module Aws::MarketplaceCatalog
     class FrameworkSummary
       attr_accessor ami_security_summary: Types::AMISecuritySummary
       attr_accessor container_security_summary: Types::ContainerSecuritySummary
+      attr_accessor listing_quality_summary: Types::ListingQualitySummary
+      attr_accessor listing_recommendations_summary: Types::ListingRecommendationsSummary
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class AmiSecuritySummary < FrameworkSummary
       end
       class ContainerSecuritySummary < FrameworkSummary
+      end
+      class ListingQualitySummary < FrameworkSummary
+      end
+      class ListingRecommendationsSummary < FrameworkSummary
       end
       class Unknown < FrameworkSummary
       end
@@ -612,6 +708,61 @@ module Aws::MarketplaceCatalog
       SENSITIVE: []
     end
 
+    class ListingCaseStudy
+      attr_accessor id: ::String
+      attr_accessor title: ::String
+      attr_accessor rationale: ::String
+      SENSITIVE: []
+    end
+
+    class ListingFinding
+      attr_accessor action: ::String
+      attr_accessor description: ::String
+      attr_accessor severity: ("BLOCKING" | "ADVISORY")
+      attr_accessor status: ("PASS" | "FAIL")
+      SENSITIVE: []
+    end
+
+    class ListingQualitySummary
+      attr_accessor tier: ("NEEDS_IMPROVEMENT" | "BASIC" | "STRONG" | "EXCELLENT")
+      attr_accessor entity_revision: ::String
+      SENSITIVE: []
+    end
+
+    class ListingRecommendations
+      attr_accessor product_content_recommendations: Types::ProductContentRecommendations
+      attr_accessor solution_content_recommendations: Types::SolutionContentRecommendations
+      attr_accessor feature_recommendations: Types::FeatureRecommendations
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ProductContentRecommendations < ListingRecommendations
+      end
+      class SolutionContentRecommendations < ListingRecommendations
+      end
+      class FeatureRecommendations < ListingRecommendations
+      end
+      class Unknown < ListingRecommendations
+      end
+    end
+
+    class ListingRecommendationsSummary
+      attr_accessor tier: ("NEEDS_IMPROVEMENT" | "BASIC" | "STRONG" | "EXCELLENT")
+      attr_accessor entity_revision: ::String
+      SENSITIVE: []
+    end
+
+    class ListingUseCase
+      attr_accessor id: ::String
+      attr_accessor rank: ::Integer
+      attr_accessor name: ::String
+      attr_accessor group: ::String
+      attr_accessor subgroup: ::String
+      attr_accessor use_case_details: ::String
+      attr_accessor rationale: ::String
+      SENSITIVE: []
+    end
+
     class MachineLearningProductEntityIdFilter
       attr_accessor value_list: ::Array[::String]
       SENSITIVE: []
@@ -690,6 +841,7 @@ module Aws::MarketplaceCatalog
       attr_accessor name: Types::OfferNameFilter
       attr_accessor product_id: Types::OfferProductIdFilter
       attr_accessor resale_authorization_id: Types::OfferResaleAuthorizationIdFilter
+      attr_accessor subsidiary_authorization_id: Types::OfferSubsidiaryAuthorizationIdFilter
       attr_accessor release_date: Types::OfferReleaseDateFilter
       attr_accessor availability_end_date: Types::OfferAvailabilityEndDateFilter
       attr_accessor buyer_accounts: Types::OfferBuyerAccountsFilter
@@ -820,7 +972,7 @@ module Aws::MarketplaceCatalog
     end
 
     class OfferSort
-      attr_accessor sort_by: ("EntityId" | "Name" | "ProductId" | "ResaleAuthorizationId" | "ReleaseDate" | "AvailabilityEndDate" | "BuyerAccounts" | "State" | "Targeting" | "LastModifiedDate" | "OfferSetId" | "TargetAgreementId" | "TargetAgreementIntent" | "CreatedBySource")
+      attr_accessor sort_by: ("EntityId" | "Name" | "ProductId" | "ResaleAuthorizationId" | "SubsidiaryAuthorizationId" | "ReleaseDate" | "AvailabilityEndDate" | "BuyerAccounts" | "State" | "Targeting" | "LastModifiedDate" | "OfferSetId" | "TargetAgreementId" | "TargetAgreementIntent" | "CreatedBySource")
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
       SENSITIVE: []
     end
@@ -830,10 +982,16 @@ module Aws::MarketplaceCatalog
       SENSITIVE: []
     end
 
+    class OfferSubsidiaryAuthorizationIdFilter
+      attr_accessor value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class OfferSummary
       attr_accessor name: ::String
       attr_accessor product_id: ::String
       attr_accessor resale_authorization_id: ::String
+      attr_accessor subsidiary_authorization_id: ::String
       attr_accessor release_date: ::String
       attr_accessor availability_end_date: ::String
       attr_accessor buyer_accounts: ::Array[::String]
@@ -861,6 +1019,19 @@ module Aws::MarketplaceCatalog
       SENSITIVE: []
     end
 
+    class ProductContentRecommendations
+      attr_accessor product_title: Types::ContentRecommendation
+      attr_accessor short_description: Types::ContentRecommendation
+      attr_accessor long_description: Types::ContentRecommendation
+      attr_accessor support_description: Types::ContentRecommendation
+      attr_accessor highlights: Types::ContentRecommendation
+      attr_accessor search_keywords: Types::ContentRecommendation
+      attr_accessor categories: Types::ContentRecommendation
+      attr_accessor additional_resources: Types::ContentRecommendation
+      attr_accessor citations: ::Array[Types::RecommendationCitation]
+      SENSITIVE: []
+    end
+
     class PutResourcePolicyRequest
       attr_accessor resource_arn: ::String
       attr_accessor policy: ::String
@@ -868,6 +1039,11 @@ module Aws::MarketplaceCatalog
     end
 
     class PutResourcePolicyResponse < Aws::EmptyStructure
+    end
+
+    class RecommendationCitation
+      attr_accessor url: ::String
+      SENSITIVE: []
     end
 
     class ResaleAuthorizationAvailabilityEndDateFilter
@@ -1088,9 +1264,36 @@ module Aws::MarketplaceCatalog
       SENSITIVE: []
     end
 
+    class SolutionContentRecommendations
+      attr_accessor title: Types::ContentRecommendation
+      attr_accessor short_description: Types::ContentRecommendation
+      attr_accessor long_description: Types::ContentRecommendation
+      attr_accessor integration_details: Types::ContentRecommendation
+      attr_accessor additional_resources: Types::ContentRecommendation
+      attr_accessor use_cases: Types::ContentRecommendation
+      attr_accessor case_studies: Types::ContentRecommendation
+      attr_accessor citations: ::Array[Types::RecommendationCitation]
+      SENSITIVE: []
+    end
+
     class Sort
       attr_accessor sort_by: ::String
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class StartAssessmentRequest
+      attr_accessor catalog: ::String
+      attr_accessor client_token: ::String
+      attr_accessor framework_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor controls: ::Array[Types::ControlInput]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartAssessmentResponse
+      attr_accessor assessment_id: ::String
       SENSITIVE: []
     end
 
@@ -1207,6 +1410,18 @@ module Aws::MarketplaceCatalog
     class TagResourceResponse < Aws::EmptyStructure
     end
 
+    class TextAlternative
+      attr_accessor value: ::String
+      attr_accessor rationale: ::String
+      SENSITIVE: []
+    end
+
+    class TextListAlternative
+      attr_accessor value: ::Array[::String]
+      attr_accessor rationale: ::String
+      SENSITIVE: []
+    end
+
     class ThrottlingException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1219,6 +1434,12 @@ module Aws::MarketplaceCatalog
     end
 
     class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UseCasesAlternative
+      attr_accessor value: ::Array[Types::ListingUseCase]
+      attr_accessor rationale: ::String
+      SENSITIVE: []
     end
 
     class ValidationException

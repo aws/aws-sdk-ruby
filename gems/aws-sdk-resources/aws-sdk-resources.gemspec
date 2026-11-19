@@ -323,6 +323,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-partnercentralaccount', '~> 1')
   spec.add_dependency('aws-sdk-partnercentralbenefits', '~> 1')
   spec.add_dependency('aws-sdk-partnercentralchannel', '~> 1')
+  spec.add_dependency('aws-sdk-partnercentralmarketing', '~> 1')
   spec.add_dependency('aws-sdk-partnercentralrevenuemeasurement', '~> 1')
   spec.add_dependency('aws-sdk-partnercentralselling', '~> 1')
   spec.add_dependency('aws-sdk-paymentcryptography', '~> 1')

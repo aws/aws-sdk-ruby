@@ -2564,6 +2564,49 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # The VPC configuration that Amazon Inspector uses to connect to a
+    # source code repository provider that is hosted in a private network.
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC that Amazon Inspector connects through to reach
+    #   the repository provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The ID of the VPC endpoint used for the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_connections_host_arn
+    #   The Amazon Resource Name (ARN) of the AWS CodeConnections host used
+    #   for the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The IDs of the subnets used for the connection.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_groups
+    #   The IDs of the security groups used for the connection.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tls_certificate
+    #   The TLS certificate used to establish a trusted connection to the
+    #   repository provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CodeSecurityIntegrationVpcConfiguration AWS API Documentation
+    #
+    class CodeSecurityIntegrationVpcConfiguration < Struct.new(
+      :vpc_id,
+      :vpc_endpoint_id,
+      :code_connections_host_arn,
+      :subnet_ids,
+      :security_groups,
+      :tls_certificate)
+      SENSITIVE = [:tls_certificate]
+      include Aws::Structure
+    end
+
     # Identifies a specific resource in a code repository that will be
     # scanned.
     #
@@ -4209,6 +4252,28 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # Contains the details required to create an integration with a GitHub
+    # Enterprise Server instance.
+    #
+    # @!attribute [rw] instance_url
+    #   The URL of the GitHub Enterprise Server instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   The VPC configuration used to connect to the GitHub Enterprise
+    #   Server instance in a private network. For publicly accessible
+    #   instances, omit this field.
+    #   @return [Types::CodeSecurityIntegrationVpcConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateGitHubEnterpriseIntegrationDetail AWS API Documentation
+    #
+    class CreateGitHubEnterpriseIntegrationDetail < Struct.new(
+      :instance_url,
+      :vpc_configuration)
+      SENSITIVE = [:instance_url]
+      include Aws::Structure
+    end
+
     # Contains details required to create an integration with a self-managed
     # GitLab instance.
     #
@@ -4221,11 +4286,18 @@ module Aws::Inspector2
     #   GitLab instance.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_configuration
+    #   The VPC configuration used to connect to the self-managed GitLab
+    #   instance in a private network. For publicly accessible instances,
+    #   omit this field.
+    #   @return [Types::CodeSecurityIntegrationVpcConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateGitLabSelfManagedIntegrationDetail AWS API Documentation
     #
     class CreateGitLabSelfManagedIntegrationDetail < Struct.new(
       :instance_url,
-      :access_token)
+      :access_token,
+      :vpc_configuration)
       SENSITIVE = [:instance_url, :access_token]
       include Aws::Structure
     end
@@ -4240,16 +4312,23 @@ module Aws::Inspector2
     #   GitLab instance.
     #   @return [Types::CreateGitLabSelfManagedIntegrationDetail]
     #
+    # @!attribute [rw] github_enterprise
+    #   Details specific to creating an integration with a GitHub Enterprise
+    #   Server instance.
+    #   @return [Types::CreateGitHubEnterpriseIntegrationDetail]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateIntegrationDetail AWS API Documentation
     #
     class CreateIntegrationDetail < Struct.new(
       :gitlab_self_managed,
+      :github_enterprise,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class GitlabSelfManaged < CreateIntegrationDetail; end
+      class GithubEnterprise < CreateIntegrationDetail; end
       class Unknown < CreateIntegrationDetail; end
     end
 
@@ -6645,6 +6724,16 @@ module Aws::Inspector2
     #   fix a connection issue. Otherwise, it is null.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_configuration
+    #   The VPC configuration associated with the integration, if it
+    #   connects to a repository provider in a private network.
+    #   @return [Types::CodeSecurityIntegrationVpcConfiguration]
+    #
+    # @!attribute [rw] instance_url
+    #   The URL of the self-managed GitLab or GitHub Enterprise Server
+    #   instance associated with the integration.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags associated with the code security integration.
     #   @return [Hash<String,String>]
@@ -6660,8 +6749,10 @@ module Aws::Inspector2
       :created_on,
       :last_update_on,
       :authorization_url,
+      :vpc_configuration,
+      :instance_url,
       :tags)
-      SENSITIVE = [:authorization_url]
+      SENSITIVE = [:authorization_url, :instance_url]
       include Aws::Structure
     end
 
@@ -7113,6 +7204,22 @@ module Aws::Inspector2
       :s3_destination,
       :filter_criteria)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the details required to register the GitHub App on the GitHub
+    # Enterprise Server instance.
+    #
+    # @!attribute [rw] manifest_code
+    #   The manifest code used to register the GitHub App on the GitHub
+    #   Enterprise Server instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GitHubEnterpriseServerAppRegistrationDetail AWS API Documentation
+    #
+    class GitHubEnterpriseServerAppRegistrationDetail < Struct.new(
+      :manifest_code)
+      SENSITIVE = [:manifest_code]
       include Aws::Structure
     end
 
@@ -8699,50 +8806,56 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # Details about a machine image resource scanned directly by Inspector.
+    # Contains details about an Amazon Machine Image (AMI) that Amazon
+    # Inspector scanned directly.
     #
     # @!attribute [rw] machine_image_id
-    #   The machine image ID (e.g., ami-0abcdef1234567890)
+    #   The ID of the machine image, for example `ami-0abcdef1234567890`.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Human-readable image name
+    #   The name of the machine image.
     #   @return [String]
     #
     # @!attribute [rw] owner_account_id
-    #   Account ID that owns the image
+    #   The ID of the account that owns the machine image.
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   OS platform (Linux/Windows)
+    #   The operating system platform of the machine image.
     #   @return [String]
     #
     # @!attribute [rw] architecture
-    #   CPU architecture (x86\_64/arm64)
+    #   The CPU architecture of the machine image, for example `x86_64` or
+    #   `arm64`.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   When the image was created
+    #   The date and time that the machine image was created.
     #   @return [Time]
     #
     # @!attribute [rw] state
-    #   Image state (available/pending/deregistered)
+    #   The state of the machine image, for example `available`, `pending`,
+    #   or `deregistered`.
     #   @return [String]
     #
     # @!attribute [rw] is_public
-    #   Whether the image is publicly shared
+    #   Indicates whether the machine image is shared publicly.
     #   @return [Boolean]
     #
     # @!attribute [rw] root_device_type
-    #   Root device type (ebs/instance-store) — AWS-specific
+    #   The root device type of the machine image, either `ebs` or
+    #   `instance-store`.
     #   @return [String]
     #
     # @!attribute [rw] virtualization_type
-    #   Virtualization type (hvm/paravirtual) — AWS-specific
+    #   The virtualization type of the machine image, either `hvm` or
+    #   `paravirtual`.
     #   @return [String]
     #
     # @!attribute [rw] source_resource_id
-    #   Source resource the image was created from (nullable)
+    #   The ID of the Amazon EC2 instance that the machine image was created
+    #   from, if available.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/MachineImageDetails AWS API Documentation
@@ -9668,8 +9781,8 @@ module Aws::Inspector2
     #   @return [Types::CodeRepositoryDetails]
     #
     # @!attribute [rw] machine_image
-    #   Details about a machine image resource scanned directly by
-    #   Inspector.
+    #   An object that contains details about the Amazon Machine Image (AMI)
+    #   involved in the finding.
     #   @return [Types::MachineImageDetails]
     #
     # @!attribute [rw] vm
@@ -11750,6 +11863,63 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # Contains the details required to complete the GitHub App installation
+    # for a GitHub Enterprise Server integration.
+    #
+    # @!attribute [rw] code
+    #   The authorization code received from GitHub Enterprise Server.
+    #   @return [String]
+    #
+    # @!attribute [rw] installation_id
+    #   The installation ID of the GitHub App associated with the
+    #   integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_token
+    #   The PKCE state token used to validate the authorization request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateGitHubEnterpriseServerAppInstallationDetail AWS API Documentation
+    #
+    class UpdateGitHubEnterpriseServerAppInstallationDetail < Struct.new(
+      :code,
+      :installation_id,
+      :state_token)
+      SENSITIVE = [:code, :state_token]
+      include Aws::Structure
+    end
+
+    # Contains the details required to update an integration with a GitHub
+    # Enterprise Server instance. Provide one of the following, depending on
+    # the step of the setup flow.
+    #
+    # @note UpdateGitHubEnterpriseServerIntegrationDetail is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] app_installation
+    #   Details for completing the GitHub App installation step of the
+    #   GitHub Enterprise Server integration.
+    #   @return [Types::UpdateGitHubEnterpriseServerAppInstallationDetail]
+    #
+    # @!attribute [rw] app_registration
+    #   Details for completing the GitHub App manifest registration step of
+    #   the GitHub Enterprise Server integration.
+    #   @return [Types::GitHubEnterpriseServerAppRegistrationDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateGitHubEnterpriseServerIntegrationDetail AWS API Documentation
+    #
+    class UpdateGitHubEnterpriseServerIntegrationDetail < Struct.new(
+      :app_installation,
+      :app_registration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AppInstallation < UpdateGitHubEnterpriseServerIntegrationDetail; end
+      class AppRegistration < UpdateGitHubEnterpriseServerIntegrationDetail; end
+      class Unknown < UpdateGitHubEnterpriseServerIntegrationDetail; end
+    end
+
     # Contains details required to update an integration with GitHub.
     #
     # @!attribute [rw] code
@@ -11762,12 +11932,17 @@ module Aws::Inspector2
     #   integration.
     #   @return [String]
     #
+    # @!attribute [rw] state_token
+    #   The PKCE state token used to validate the authorization request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateGitHubIntegrationDetail AWS API Documentation
     #
     class UpdateGitHubIntegrationDetail < Struct.new(
       :code,
-      :installation_id)
-      SENSITIVE = [:code]
+      :installation_id,
+      :state_token)
+      SENSITIVE = [:code, :state_token]
       include Aws::Structure
     end
 
@@ -11779,11 +11954,16 @@ module Aws::Inspector2
     #   instance to update the integration.
     #   @return [String]
     #
+    # @!attribute [rw] state_token
+    #   The PKCE state token used to validate the authorization request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateGitLabSelfManagedIntegrationDetail AWS API Documentation
     #
     class UpdateGitLabSelfManagedIntegrationDetail < Struct.new(
-      :auth_code)
-      SENSITIVE = [:auth_code]
+      :auth_code,
+      :state_token)
+      SENSITIVE = [:auth_code, :state_token]
       include Aws::Structure
     end
 
@@ -11801,11 +11981,17 @@ module Aws::Inspector2
     #   Details specific to updating an integration with GitHub.
     #   @return [Types::UpdateGitHubIntegrationDetail]
     #
+    # @!attribute [rw] github_enterprise_server
+    #   Details specific to updating an integration with a GitHub Enterprise
+    #   Server instance.
+    #   @return [Types::UpdateGitHubEnterpriseServerIntegrationDetail]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateIntegrationDetails AWS API Documentation
     #
     class UpdateIntegrationDetails < Struct.new(
       :gitlab_self_managed,
       :github,
+      :github_enterprise_server,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -11813,6 +11999,7 @@ module Aws::Inspector2
 
       class GitlabSelfManaged < UpdateIntegrationDetails; end
       class Github < UpdateIntegrationDetails; end
+      class GithubEnterpriseServer < UpdateIntegrationDetails; end
       class Unknown < UpdateIntegrationDetails; end
     end
 

@@ -1148,6 +1148,53 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
+    # Disassociates a replica table from replication, making it a standalone
+    # writable table. Any in-progress replication to the table stops, and
+    # in-flight commits fail without being committed to the table.
+    # Disassociating a table from replication is permanent and can't be
+    # reversed.
+    #
+    # You can only disassociate a replica table. If you call this operation
+    # on a table that isn't a replica table, including a table that you
+    # have already disassociated, the request fails.
+    #
+    # After you disassociate a table from replication, you can write to the
+    # table as you do any other table. `GetTable` no longer returns
+    # `managedByService` and `managedTableInformation` for the table, and
+    # `ListTables` no longer returns `managedByService` for it. On the
+    # source table, `GetTableReplicationStatus` reports a failure for this
+    # destination the next time replication to it is attempted.
+    #
+    # Disassociating a table from replication doesn't change its
+    # maintenance configuration. Review the maintenance settings of the
+    # table, such as compaction, after you disassociate it.
+    #
+    # Permissions
+    #
+    # : You must have the `s3tables:DisassociateTableReplication` permission
+    #   to use this operation.
+    #
+    # @option params [required, String] :table_arn
+    #   The Amazon Resource Name (ARN) of the replica table to disassociate
+    #   from replication.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_table_replication({
+    #     table_arn: "TableARN", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/DisassociateTableReplication AWS API Documentation
+    #
+    # @overload disassociate_table_replication(params = {})
+    # @param [Hash] params ({})
+    def disassociate_table_replication(params = {}, options = {})
+      req = build_request(:disassociate_table_replication, params)
+      req.send_request(options)
+    end
+
     # Gets details about a namespace. For more information, see [Table
     # namespaces][1] in the *Amazon Simple Storage Service User Guide*.
     #
@@ -3723,7 +3770,7 @@ module Aws::S3Tables
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3tables'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

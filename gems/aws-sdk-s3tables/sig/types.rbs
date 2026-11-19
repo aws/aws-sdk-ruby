@@ -149,6 +149,14 @@ module Aws::S3Tables
       SENSITIVE: []
     end
 
+    class DisassociateTableReplicationRequest
+      attr_accessor table_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateTableReplicationResponse < Aws::EmptyStructure
+    end
+
     class EncryptionConfiguration
       attr_accessor sse_algorithm: ("AES256" | "aws:kms")
       attr_accessor kms_key_arn: ::String

@@ -971,6 +971,9 @@
   "PartnerCentralChannel": {
     "models": "partnercentral-channel/2024-03-18"
   },
+  "PartnerCentralMarketing": {
+    "models": "partnercentral-marketing/2026-05-31"
+  },
   "PartnerCentralRevenueMeasurement": {
     "models": "partnercentral-revenue-measurement/2022-07-26"
   },

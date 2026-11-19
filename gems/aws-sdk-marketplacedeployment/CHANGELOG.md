@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2026-11-19)
+------------------
+
+* Feature - Add support for deployment configurations for Data as a Service products in AWS Marketplace
+
 1.51.0 (2026-11-18)
 ------------------
 

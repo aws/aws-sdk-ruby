@@ -1013,6 +1013,8 @@ module Aws::LakeFormation
       attr_accessor name: ::String
       attr_accessor attachment_columns: ::Array[Types::Column]
       attr_accessor filter_expression: ::String
+      attr_accessor status: ("VALID" | "INVALID")
+      attr_accessor status_reason: ("REFERENCED_UDF_DELETED" | "REFERENCED_LOOKUP_TABLE_DELETED")
       SENSITIVE: []
     end
 

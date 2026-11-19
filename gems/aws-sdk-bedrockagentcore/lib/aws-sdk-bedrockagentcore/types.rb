@@ -550,6 +550,78 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # Optional settings for an AWS Billing payment.
+    #
+    # @!attribute [rw] dpop_jwk
+    #   The agent's public key for Demonstrating Proof of Possession
+    #   (DPoP), as described in RFC 9449. If you specify a key, the payment
+    #   token is bound to it, and the seller can verify that the token is
+    #   presented by the holder of the matching private key. If you don't
+    #   specify a key, the payment token isn't bound to a key.
+    #   @return [Types::DpopJwk]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/AwsBillingPaymentOptions AWS API Documentation
+    #
+    class AwsBillingPaymentOptions < Struct.new(
+      :dpop_jwk)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The input for an AWS Billing x402 payment. The payment pays an AWS
+    # Marketplace seller's x402 (HTTP 402) payment requirement and is
+    # billed to the AWS account that owns the payment manager, through the
+    # payment manager's AWS Billing payment connector.
+    #
+    # @!attribute [rw] version
+    #   The x402 protocol version of the seller's HTTP 402 response, from
+    #   its `x402Version` field. For example, `2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload
+    #   The seller's x402 payment requirement for AWS Billing, passed
+    #   unchanged as a JSON object. The service reads the seller-signed
+    #   quote token from `extra.quoteToken` and returns a
+    #   `ValidationException` if it is missing or invalid. Any change to the
+    #   quote token invalidates its signature.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] options
+    #   Optional settings for the AWS Billing payment.
+    #   @return [Types::AwsBillingPaymentOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/AwsBillingX402PaymentInput AWS API Documentation
+    #
+    class AwsBillingX402PaymentInput < Struct.new(
+      :version,
+      :payload,
+      :options)
+      SENSITIVE = [:payload]
+      include Aws::Structure
+    end
+
+    # The output of an AWS Billing x402 payment.
+    #
+    # @!attribute [rw] version
+    #   The x402 protocol version. This is the same value as the `version`
+    #   in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_token
+    #   The payment token, a signed JSON Web Token (JWT). Include it when
+    #   you retry your request to the seller. Treat the payment token as a
+    #   credential: don't log or share it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/AwsBillingX402PaymentOutput AWS API Documentation
+    #
+    class AwsBillingX402PaymentOutput < Struct.new(
+      :version,
+      :payment_token)
+      SENSITIVE = [:payment_token]
+      include Aws::Structure
+    end
+
     # Configuration for HTTP Basic Authentication using credentials stored
     # in Amazon Web Services Secrets Manager. The secret must contain a JSON
     # object with `username` and `password` string fields. Username allows
@@ -2820,6 +2892,37 @@ module Aws::BedrockAgentCore
     class DomainFilter < Struct.new(
       :include,
       :exclude)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An elliptic curve public key in JSON Web Key (JWK) format, as
+    # described in RFC 7518 section 6.2, used to bind a payment token to the
+    # agent.
+    #
+    # @!attribute [rw] kty
+    #   The key type. The only valid value is `EC`.
+    #   @return [String]
+    #
+    # @!attribute [rw] crv
+    #   The elliptic curve of the key.
+    #   @return [String]
+    #
+    # @!attribute [rw] x
+    #   The x-coordinate of the elliptic curve point, base64url-encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] y
+    #   The y-coordinate of the elliptic curve point, base64url-encoded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DpopJwk AWS API Documentation
+    #
+    class DpopJwk < Struct.new(
+      :kty,
+      :crv,
+      :x,
+      :y)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9728,11 +9831,18 @@ module Aws::BedrockAgentCore
     #   challenge. Provide exactly one challenge per request.
     #   @return [Types::MppPaymentInput]
     #
+    # @!attribute [rw] aws_billing_x402
+    #   Input for an AWS Billing x402 payment, which pays an AWS Marketplace
+    #   seller's quote and charges it to the AWS account that owns the
+    #   payment manager.
+    #   @return [Types::AwsBillingX402PaymentInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PaymentInput AWS API Documentation
     #
     class PaymentInput < Struct.new(
       :crypto_x402,
       :mpp,
+      :aws_billing_x402,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -9740,6 +9850,7 @@ module Aws::BedrockAgentCore
 
       class CryptoX402 < PaymentInput; end
       class Mpp < PaymentInput; end
+      class AwsBillingX402 < PaymentInput; end
       class Unknown < PaymentInput; end
     end
 
@@ -9881,11 +9992,16 @@ module Aws::BedrockAgentCore
     #   Contains the payment credential, ready to retry the request.
     #   @return [Types::MppPaymentOutput]
     #
+    # @!attribute [rw] aws_billing_x402
+    #   Output from an AWS Billing x402 payment.
+    #   @return [Types::AwsBillingX402PaymentOutput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PaymentOutput AWS API Documentation
     #
     class PaymentOutput < Struct.new(
       :crypto_x402,
       :mpp,
+      :aws_billing_x402,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -9893,6 +10009,7 @@ module Aws::BedrockAgentCore
 
       class CryptoX402 < PaymentOutput; end
       class Mpp < PaymentOutput; end
+      class AwsBillingX402 < PaymentOutput; end
       class Unknown < PaymentOutput; end
     end
 
@@ -10078,7 +10195,12 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] payment_instrument_id
-    #   The ID of the payment instrument to use.
+    #   The ID of the payment instrument to use. For the `CRYPTO_X402` and
+    #   `MPP` payment types, specify the ID of a payment instrument that you
+    #   created. For the `AWS_BILLING_X402` payment type, specify the
+    #   service-managed instrument ID `aws.agentcorepayments.awsbilling.v1`.
+    #   You don't create this instrument; it's available for any payment
+    #   manager that has an AWS Billing payment connector.
     #   @return [String]
     #
     # @!attribute [rw] payment_type
@@ -10127,7 +10249,9 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] payment_instrument_id
-    #   The ID of the payment instrument used.
+    #   The ID of the payment instrument used. For the `AWS_BILLING_X402`
+    #   payment type, this is the service-managed instrument ID
+    #   `aws.agentcorepayments.awsbilling.v1`.
     #   @return [String]
     #
     # @!attribute [rw] payment_type

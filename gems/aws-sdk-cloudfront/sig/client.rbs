@@ -226,7 +226,10 @@ module Aws
                                        ]?
                                      },
                                      ?anycast_ip_list_id: ::String,
-                                     ?enabled: bool
+                                     ?enabled: bool,
+                                     ?viewer_fallback: {
+                                       distribution_id: ::String?
+                                     }
                                    ) -> _CreateConnectionGroupResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectionGroupResponseSuccess
 
@@ -265,7 +268,8 @@ module Aws
                                         name: ::String,
                                         domains: Array[
                                           {
-                                            domain: ::String
+                                            domain: ::String,
+                                            serve_on: ("any" | "anycast-ip-list-only")?
                                           }
                                         ],
                                         ?tags: {
@@ -289,7 +293,8 @@ module Aws
                                           primary_domain_name: ::String?,
                                           certificate_transparency_logging_preference: ("enabled" | "disabled")?
                                         },
-                                        ?enabled: bool
+                                        ?enabled: bool,
+                                        ?on_domain_takeover: ("allow" | "reject")
                                       ) -> _CreateDistributionTenantResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDistributionTenantResponseSuccess
 
@@ -1893,7 +1898,10 @@ module Aws
                                      ?ipv_6_enabled: bool,
                                      if_match: ::String,
                                      ?anycast_ip_list_id: ::String,
-                                     ?enabled: bool
+                                     ?enabled: bool,
+                                     ?viewer_fallback: {
+                                       distribution_id: ::String?
+                                     }
                                    ) -> _UpdateConnectionGroupResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectionGroupResponseSuccess
 
@@ -1934,7 +1942,8 @@ module Aws
                                         ?distribution_id: ::String,
                                         ?domains: Array[
                                           {
-                                            domain: ::String
+                                            domain: ::String,
+                                            serve_on: ("any" | "anycast-ip-list-only")?
                                           }
                                         ],
                                         ?customizations: Params::customizations,
@@ -1951,7 +1960,8 @@ module Aws
                                           primary_domain_name: ::String?,
                                           certificate_transparency_logging_preference: ("enabled" | "disabled")?
                                         },
-                                        ?enabled: bool
+                                        ?enabled: bool,
+                                        ?on_domain_takeover: ("allow" | "reject")
                                       ) -> _UpdateDistributionTenantResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDistributionTenantResponseSuccess
 

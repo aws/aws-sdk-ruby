@@ -25,6 +25,9 @@ module Aws::AgentRegistryControl
     AgentSkillsAdditionalData = Shapes::StructureShape.new(name: 'AgentSkillsAdditionalData')
     AgentSkillsDefinitionDescriptor = Shapes::StructureShape.new(name: 'AgentSkillsDefinitionDescriptor')
     AgentSkillsMdDescriptor = Shapes::StructureShape.new(name: 'AgentSkillsMdDescriptor')
+    AgentSkillsPackageDescriptor = Shapes::StructureShape.new(name: 'AgentSkillsPackageDescriptor')
+    AgentSkillsRepositoryProvider = Shapes::StringShape.new(name: 'AgentSkillsRepositoryProvider')
+    AgentSkillsSourceConfiguration = Shapes::UnionShape.new(name: 'AgentSkillsSourceConfiguration')
     AllowedAudience = Shapes::StringShape.new(name: 'AllowedAudience')
     AllowedAudienceList = Shapes::ListShape.new(name: 'AllowedAudienceList')
     AllowedClient = Shapes::StringShape.new(name: 'AllowedClient')
@@ -32,6 +35,9 @@ module Aws::AgentRegistryControl
     AllowedScopeType = Shapes::StringShape.new(name: 'AllowedScopeType')
     AllowedScopesType = Shapes::ListShape.new(name: 'AllowedScopesType')
     ApprovalConfiguration = Shapes::StructureShape.new(name: 'ApprovalConfiguration')
+    ArtifactContent = Shapes::BlobShape.new(name: 'ArtifactContent')
+    AuthorizationAttemptId = Shapes::StringShape.new(name: 'AuthorizationAttemptId')
+    AuthorizationData = Shapes::UnionShape.new(name: 'AuthorizationData')
     AuthorizerConfiguration = Shapes::UnionShape.new(name: 'AuthorizerConfiguration')
     AuthorizingClaimMatchValueType = Shapes::StructureShape.new(name: 'AuthorizingClaimMatchValueType')
     AutoApprovalRule = Shapes::StringShape.new(name: 'AutoApprovalRule')
@@ -82,6 +88,8 @@ module Aws::AgentRegistryControl
     GetRegistryRecordResponse = Shapes::StructureShape.new(name: 'GetRegistryRecordResponse')
     GetRegistryRequest = Shapes::StructureShape.new(name: 'GetRegistryRequest')
     GetRegistryResponse = Shapes::StructureShape.new(name: 'GetRegistryResponse')
+    GitCommitId = Shapes::StringShape.new(name: 'GitCommitId')
+    GitHubSynchronizedSource = Shapes::StructureShape.new(name: 'GitHubSynchronizedSource')
     HttpDescriptor = Shapes::StructureShape.new(name: 'HttpDescriptor')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     IamSigningRegion = Shapes::StringShape.new(name: 'IamSigningRegion')
@@ -105,6 +113,11 @@ module Aws::AgentRegistryControl
     McpToolsDescriptor = Shapes::StructureShape.new(name: 'McpToolsDescriptor')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
+    OAuth2AuthorizationData = Shapes::StructureShape.new(name: 'OAuth2AuthorizationData')
+    OAuthAuthorizationUrl = Shapes::StringShape.new(name: 'OAuthAuthorizationUrl')
+    OAuthReturnUrl = Shapes::StringShape.new(name: 'OAuthReturnUrl')
+    OAuthUserId = Shapes::StringShape.new(name: 'OAuthUserId')
+    PresignedDownloadUrl = Shapes::StringShape.new(name: 'PresignedDownloadUrl')
     PrivateEndpoint = Shapes::UnionShape.new(name: 'PrivateEndpoint')
     PrivateEndpointOverride = Shapes::StructureShape.new(name: 'PrivateEndpointOverride')
     PrivateEndpointOverrideDomain = Shapes::StringShape.new(name: 'PrivateEndpointOverrideDomain')
@@ -127,6 +140,8 @@ module Aws::AgentRegistryControl
     RegistryIdentifier = Shapes::StringShape.new(name: 'RegistryIdentifier')
     RegistryName = Shapes::StringShape.new(name: 'RegistryName')
     RegistryRecordArn = Shapes::StringShape.new(name: 'RegistryRecordArn')
+    RegistryRecordArtifactDownload = Shapes::StructureShape.new(name: 'RegistryRecordArtifactDownload')
+    RegistryRecordArtifactUpload = Shapes::StructureShape.new(name: 'RegistryRecordArtifactUpload')
     RegistryRecordCredentialProviderConfiguration = Shapes::StructureShape.new(name: 'RegistryRecordCredentialProviderConfiguration')
     RegistryRecordCredentialProviderConfigurationList = Shapes::ListShape.new(name: 'RegistryRecordCredentialProviderConfigurationList')
     RegistryRecordCredentialProviderType = Shapes::StringShape.new(name: 'RegistryRecordCredentialProviderType')
@@ -143,6 +158,7 @@ module Aws::AgentRegistryControl
     RegistryRecordStatus = Shapes::StringShape.new(name: 'RegistryRecordStatus')
     RegistryRecordSummary = Shapes::StructureShape.new(name: 'RegistryRecordSummary')
     RegistryRecordSummaryList = Shapes::ListShape.new(name: 'RegistryRecordSummaryList')
+    RegistryRecordSynchronizedSource = Shapes::UnionShape.new(name: 'RegistryRecordSynchronizedSource')
     RegistryRecordVersion = Shapes::StringShape.new(name: 'RegistryRecordVersion')
     RegistryStatus = Shapes::StringShape.new(name: 'RegistryStatus')
     RegistrySummary = Shapes::StructureShape.new(name: 'RegistrySummary')
@@ -152,11 +168,17 @@ module Aws::AgentRegistryControl
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceTagsMap = Shapes::MapShape.new(name: 'ResourceTagsMap')
     RoutingDomain = Shapes::StringShape.new(name: 'RoutingDomain')
+    S3BucketOwnerAccountId = Shapes::StringShape.new(name: 'S3BucketOwnerAccountId')
+    S3ObjectETag = Shapes::StringShape.new(name: 'S3ObjectETag')
+    S3ObjectVersionId = Shapes::StringShape.new(name: 'S3ObjectVersionId')
+    S3SourceConfiguration = Shapes::StructureShape.new(name: 'S3SourceConfiguration')
+    S3SynchronizedSource = Shapes::StructureShape.new(name: 'S3SynchronizedSource')
     ScopeList = Shapes::ListShape.new(name: 'ScopeList')
     SecurityGroupIdentifier = Shapes::StringShape.new(name: 'SecurityGroupIdentifier')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SelfManagedLatticeResource = Shapes::UnionShape.new(name: 'SelfManagedLatticeResource')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    Sha256Hash = Shapes::StringShape.new(name: 'Sha256Hash')
     SourceDetails = Shapes::UnionShape.new(name: 'SourceDetails')
     SourceId = Shapes::StringShape.new(name: 'SourceId')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
@@ -165,6 +187,7 @@ module Aws::AgentRegistryControl
     SubmitRegistryRecordForApprovalResponse = Shapes::StructureShape.new(name: 'SubmitRegistryRecordForApprovalResponse')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
+    SynchronizedSourceUrl = Shapes::StringShape.new(name: 'SynchronizedSourceUrl')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
@@ -191,6 +214,9 @@ module Aws::AgentRegistryControl
     UpdatedAgentSkillsDefinitionDescriptorFields = Shapes::StructureShape.new(name: 'UpdatedAgentSkillsDefinitionDescriptorFields')
     UpdatedAgentSkillsMdDescriptor = Shapes::StructureShape.new(name: 'UpdatedAgentSkillsMdDescriptor')
     UpdatedAgentSkillsMdDescriptorFields = Shapes::StructureShape.new(name: 'UpdatedAgentSkillsMdDescriptorFields')
+    UpdatedAgentSkillsPackageDescriptor = Shapes::StructureShape.new(name: 'UpdatedAgentSkillsPackageDescriptor')
+    UpdatedAgentSkillsRepositoryProvider = Shapes::StructureShape.new(name: 'UpdatedAgentSkillsRepositoryProvider')
+    UpdatedAgentSkillsSourceConfiguration = Shapes::StructureShape.new(name: 'UpdatedAgentSkillsSourceConfiguration')
     UpdatedApprovalConfiguration = Shapes::StructureShape.new(name: 'UpdatedApprovalConfiguration')
     UpdatedAuthorizerConfiguration = Shapes::StructureShape.new(name: 'UpdatedAuthorizerConfiguration')
     UpdatedAutoDetectionConfiguration = Shapes::StructureShape.new(name: 'UpdatedAutoDetectionConfiguration')
@@ -214,6 +240,7 @@ module Aws::AgentRegistryControl
     UpdatedMcpServerDescriptorFields = Shapes::StructureShape.new(name: 'UpdatedMcpServerDescriptorFields')
     UpdatedMcpToolsDescriptor = Shapes::StructureShape.new(name: 'UpdatedMcpToolsDescriptor')
     UpdatedMcpToolsDescriptorFields = Shapes::StructureShape.new(name: 'UpdatedMcpToolsDescriptorFields')
+    UpdatedRegistryRecordArtifact = Shapes::StructureShape.new(name: 'UpdatedRegistryRecordArtifact')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -248,6 +275,9 @@ module Aws::AgentRegistryControl
     AgentCoreRuntimeSourceDetails.struct_class = Types::AgentCoreRuntimeSourceDetails
 
     AgentSkillsAdditionalData.add_member(:skill_md, Shapes::ShapeRef.new(shape: AgentSkillsMdDescriptor, location_name: "skillMd"))
+    AgentSkillsAdditionalData.add_member(:skill_package, Shapes::ShapeRef.new(shape: AgentSkillsPackageDescriptor, location_name: "skillPackage"))
+    AgentSkillsAdditionalData.add_member(:repository_provider, Shapes::ShapeRef.new(shape: AgentSkillsRepositoryProvider, location_name: "repositoryProvider"))
+    AgentSkillsAdditionalData.add_member(:source_configuration, Shapes::ShapeRef.new(shape: AgentSkillsSourceConfiguration, location_name: "sourceConfiguration"))
     AgentSkillsAdditionalData.struct_class = Types::AgentSkillsAdditionalData
 
     AgentSkillsDefinitionDescriptor.add_member(:data, Shapes::ShapeRef.new(shape: DescriptorData, location_name: "data"))
@@ -260,6 +290,15 @@ module Aws::AgentRegistryControl
     AgentSkillsMdDescriptor.add_member(:source, Shapes::ShapeRef.new(shape: DescriptorSource, location_name: "source"))
     AgentSkillsMdDescriptor.struct_class = Types::AgentSkillsMdDescriptor
 
+    AgentSkillsPackageDescriptor.add_member(:source, Shapes::ShapeRef.new(shape: DescriptorSource, location_name: "source"))
+    AgentSkillsPackageDescriptor.struct_class = Types::AgentSkillsPackageDescriptor
+
+    AgentSkillsSourceConfiguration.add_member(:s3, Shapes::ShapeRef.new(shape: S3SourceConfiguration, location_name: "s3"))
+    AgentSkillsSourceConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AgentSkillsSourceConfiguration.add_member_subclass(:s3, Types::AgentSkillsSourceConfiguration::S3)
+    AgentSkillsSourceConfiguration.add_member_subclass(:unknown, Types::AgentSkillsSourceConfiguration::Unknown)
+    AgentSkillsSourceConfiguration.struct_class = Types::AgentSkillsSourceConfiguration
+
     AllowedAudienceList.member = Shapes::ShapeRef.new(shape: AllowedAudience)
 
     AllowedClientsList.member = Shapes::ShapeRef.new(shape: AllowedClient)
@@ -268,6 +307,12 @@ module Aws::AgentRegistryControl
 
     ApprovalConfiguration.add_member(:auto_approval_rules, Shapes::ShapeRef.new(shape: AutoApprovalRuleList, location_name: "autoApprovalRules"))
     ApprovalConfiguration.struct_class = Types::ApprovalConfiguration
+
+    AuthorizationData.add_member(:oauth2, Shapes::ShapeRef.new(shape: OAuth2AuthorizationData, location_name: "oauth2"))
+    AuthorizationData.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AuthorizationData.add_member_subclass(:oauth2, Types::AuthorizationData::Oauth2)
+    AuthorizationData.add_member_subclass(:unknown, Types::AuthorizationData::Unknown)
+    AuthorizationData.struct_class = Types::AuthorizationData
 
     AuthorizerConfiguration.add_member(:custom_jwt_authorizer, Shapes::ShapeRef.new(shape: CustomJWTAuthorizerConfiguration, location_name: "customJWTAuthorizer"))
     AuthorizerConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -307,6 +352,7 @@ module Aws::AgentRegistryControl
     CreateRegistryRecordRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateRegistryRecordRequest.add_member(:record_type, Shapes::ShapeRef.new(shape: RecordType, required: true, location_name: "recordType"))
     CreateRegistryRecordRequest.add_member(:descriptors, Shapes::ShapeRef.new(shape: Descriptors, required: true, location_name: "descriptors"))
+    CreateRegistryRecordRequest.add_member(:artifact, Shapes::ShapeRef.new(shape: RegistryRecordArtifactUpload, location_name: "artifact"))
     CreateRegistryRecordRequest.add_member(:record_version, Shapes::ShapeRef.new(shape: RegistryRecordVersion, location_name: "recordVersion"))
     CreateRegistryRecordRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateRegistryRecordRequest.add_member(:provenance, Shapes::ShapeRef.new(shape: ProvenanceList, location_name: "provenance"))
@@ -316,6 +362,7 @@ module Aws::AgentRegistryControl
 
     CreateRegistryRecordResponse.add_member(:record_arn, Shapes::ShapeRef.new(shape: RegistryRecordArn, required: true, location_name: "recordArn"))
     CreateRegistryRecordResponse.add_member(:status, Shapes::ShapeRef.new(shape: RegistryRecordStatus, required: true, location_name: "status"))
+    CreateRegistryRecordResponse.add_member(:authorization_data, Shapes::ShapeRef.new(shape: AuthorizationData, location_name: "authorizationData"))
     CreateRegistryRecordResponse.struct_class = Types::CreateRegistryRecordResponse
 
     CreateRegistryRequest.add_member(:name, Shapes::ShapeRef.new(shape: RegistryName, required: true, location_name: "name"))
@@ -416,6 +463,8 @@ module Aws::AgentRegistryControl
     GetRegistryRecordResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatorAccountId, location_name: "createdBy"))
     GetRegistryRecordResponse.add_member(:custom_metadata, Shapes::ShapeRef.new(shape: CustomMetadataDocument, location_name: "customMetadata"))
     GetRegistryRecordResponse.add_member(:custom_metadata_schema_compliance_status, Shapes::ShapeRef.new(shape: CustomMetadataSchemaComplianceStatus, location_name: "customMetadataSchemaComplianceStatus"))
+    GetRegistryRecordResponse.add_member(:artifact, Shapes::ShapeRef.new(shape: RegistryRecordArtifactDownload, location_name: "artifact"))
+    GetRegistryRecordResponse.add_member(:synchronized_source, Shapes::ShapeRef.new(shape: RegistryRecordSynchronizedSource, location_name: "synchronizedSource"))
     GetRegistryRecordResponse.struct_class = Types::GetRegistryRecordResponse
 
     GetRegistryRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryIdentifier, required: true, location: "uri", location_name: "registryId"))
@@ -435,6 +484,11 @@ module Aws::AgentRegistryControl
     GetRegistryResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     GetRegistryResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     GetRegistryResponse.struct_class = Types::GetRegistryResponse
+
+    GitHubSynchronizedSource.add_member(:url, Shapes::ShapeRef.new(shape: SynchronizedSourceUrl, required: true, location_name: "url"))
+    GitHubSynchronizedSource.add_member(:synchronized_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "synchronizedAt"))
+    GitHubSynchronizedSource.add_member(:commit_id, Shapes::ShapeRef.new(shape: GitCommitId, required: true, location_name: "commitId"))
+    GitHubSynchronizedSource.struct_class = Types::GitHubSynchronizedSource
 
     HttpDescriptor.add_member(:source, Shapes::ShapeRef.new(shape: DescriptorSource, location_name: "source"))
     HttpDescriptor.struct_class = Types::HttpDescriptor
@@ -490,6 +544,12 @@ module Aws::AgentRegistryControl
     McpToolsDescriptor.add_member(:data_schema_version, Shapes::ShapeRef.new(shape: DataSchemaVersion, location_name: "dataSchemaVersion"))
     McpToolsDescriptor.struct_class = Types::McpToolsDescriptor
 
+    OAuth2AuthorizationData.add_member(:authorization_url, Shapes::ShapeRef.new(shape: OAuthAuthorizationUrl, required: true, location_name: "authorizationUrl"))
+    OAuth2AuthorizationData.add_member(:user_id, Shapes::ShapeRef.new(shape: OAuthUserId, location_name: "userId"))
+    OAuth2AuthorizationData.add_member(:authorization_attempt_id, Shapes::ShapeRef.new(shape: AuthorizationAttemptId, location_name: "authorizationAttemptId"))
+    OAuth2AuthorizationData.add_member(:expires_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "expiresAt"))
+    OAuth2AuthorizationData.struct_class = Types::OAuth2AuthorizationData
+
     PrivateEndpoint.add_member(:self_managed_lattice_resource, Shapes::ShapeRef.new(shape: SelfManagedLatticeResource, location_name: "selfManagedLatticeResource"))
     PrivateEndpoint.add_member(:managed_vpc_resource, Shapes::ShapeRef.new(shape: ManagedVpcResource, location_name: "managedVpcResource"))
     PrivateEndpoint.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -531,6 +591,14 @@ module Aws::AgentRegistryControl
 
     RegistryFilterList.member = Shapes::ShapeRef.new(shape: RegistryFilter)
 
+    RegistryRecordArtifactDownload.add_member(:sha256, Shapes::ShapeRef.new(shape: Sha256Hash, location_name: "sha256"))
+    RegistryRecordArtifactDownload.add_member(:download_url, Shapes::ShapeRef.new(shape: PresignedDownloadUrl, location_name: "downloadUrl"))
+    RegistryRecordArtifactDownload.struct_class = Types::RegistryRecordArtifactDownload
+
+    RegistryRecordArtifactUpload.add_member(:content, Shapes::ShapeRef.new(shape: ArtifactContent, required: true, location_name: "content"))
+    RegistryRecordArtifactUpload.add_member(:sha256, Shapes::ShapeRef.new(shape: Sha256Hash, location_name: "sha256"))
+    RegistryRecordArtifactUpload.struct_class = Types::RegistryRecordArtifactUpload
+
     RegistryRecordCredentialProviderConfiguration.add_member(:credential_provider_type, Shapes::ShapeRef.new(shape: RegistryRecordCredentialProviderType, required: true, location_name: "credentialProviderType"))
     RegistryRecordCredentialProviderConfiguration.add_member(:credential_provider, Shapes::ShapeRef.new(shape: RegistryRecordCredentialProviderUnion, required: true, location_name: "credentialProvider"))
     RegistryRecordCredentialProviderConfiguration.struct_class = Types::RegistryRecordCredentialProviderConfiguration
@@ -560,6 +628,7 @@ module Aws::AgentRegistryControl
     RegistryRecordOAuthCredentialProvider.add_member(:grant_type, Shapes::ShapeRef.new(shape: RegistryRecordOAuthGrantType, location_name: "grantType"))
     RegistryRecordOAuthCredentialProvider.add_member(:scopes, Shapes::ShapeRef.new(shape: ScopeList, location_name: "scopes"))
     RegistryRecordOAuthCredentialProvider.add_member(:custom_parameters, Shapes::ShapeRef.new(shape: CustomParameterMap, location_name: "customParameters"))
+    RegistryRecordOAuthCredentialProvider.add_member(:return_url, Shapes::ShapeRef.new(shape: OAuthReturnUrl, location_name: "returnUrl"))
     RegistryRecordOAuthCredentialProvider.struct_class = Types::RegistryRecordOAuthCredentialProvider
 
     RegistryRecordSummary.add_member(:registry_arn, Shapes::ShapeRef.new(shape: RegistryArn, required: true, location_name: "registryArn"))
@@ -581,6 +650,14 @@ module Aws::AgentRegistryControl
 
     RegistryRecordSummaryList.member = Shapes::ShapeRef.new(shape: RegistryRecordSummary)
 
+    RegistryRecordSynchronizedSource.add_member(:s3, Shapes::ShapeRef.new(shape: S3SynchronizedSource, location_name: "s3"))
+    RegistryRecordSynchronizedSource.add_member(:git_hub, Shapes::ShapeRef.new(shape: GitHubSynchronizedSource, location_name: "gitHub"))
+    RegistryRecordSynchronizedSource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RegistryRecordSynchronizedSource.add_member_subclass(:s3, Types::RegistryRecordSynchronizedSource::S3)
+    RegistryRecordSynchronizedSource.add_member_subclass(:git_hub, Types::RegistryRecordSynchronizedSource::GitHub)
+    RegistryRecordSynchronizedSource.add_member_subclass(:unknown, Types::RegistryRecordSynchronizedSource::Unknown)
+    RegistryRecordSynchronizedSource.struct_class = Types::RegistryRecordSynchronizedSource
+
     RegistrySummary.add_member(:name, Shapes::ShapeRef.new(shape: RegistryName, required: true, location_name: "name"))
     RegistrySummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     RegistrySummary.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, required: true, location_name: "registryId"))
@@ -600,6 +677,15 @@ module Aws::AgentRegistryControl
 
     ResourceTagsMap.key = Shapes::ShapeRef.new(shape: TagKey)
     ResourceTagsMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    S3SourceConfiguration.add_member(:bucket_owner_account_id, Shapes::ShapeRef.new(shape: S3BucketOwnerAccountId, location_name: "bucketOwnerAccountId"))
+    S3SourceConfiguration.struct_class = Types::S3SourceConfiguration
+
+    S3SynchronizedSource.add_member(:url, Shapes::ShapeRef.new(shape: SynchronizedSourceUrl, required: true, location_name: "url"))
+    S3SynchronizedSource.add_member(:synchronized_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "synchronizedAt"))
+    S3SynchronizedSource.add_member(:version_id, Shapes::ShapeRef.new(shape: S3ObjectVersionId, location_name: "versionId"))
+    S3SynchronizedSource.add_member(:e_tag, Shapes::ShapeRef.new(shape: S3ObjectETag, location_name: "eTag"))
+    S3SynchronizedSource.struct_class = Types::S3SynchronizedSource
 
     ScopeList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -662,9 +748,11 @@ module Aws::AgentRegistryControl
     UpdateRegistryRecordRequest.add_member(:description, Shapes::ShapeRef.new(shape: UpdatedDescription, location_name: "description"))
     UpdateRegistryRecordRequest.add_member(:record_type, Shapes::ShapeRef.new(shape: RecordType, location_name: "recordType"))
     UpdateRegistryRecordRequest.add_member(:descriptors, Shapes::ShapeRef.new(shape: UpdatedDescriptors, location_name: "descriptors"))
+    UpdateRegistryRecordRequest.add_member(:artifact, Shapes::ShapeRef.new(shape: UpdatedRegistryRecordArtifact, location_name: "artifact"))
     UpdateRegistryRecordRequest.add_member(:record_version, Shapes::ShapeRef.new(shape: RegistryRecordVersion, location_name: "recordVersion"))
     UpdateRegistryRecordRequest.add_member(:custom_metadata, Shapes::ShapeRef.new(shape: UpdatedCustomMetadataMap, location_name: "customMetadata"))
     UpdateRegistryRecordRequest.add_member(:trigger_synchronization, Shapes::ShapeRef.new(shape: Boolean, location_name: "triggerSynchronization"))
+    UpdateRegistryRecordRequest.add_member(:force_authentication, Shapes::ShapeRef.new(shape: Boolean, location_name: "forceAuthentication"))
     UpdateRegistryRecordRequest.add_member(:provenance, Shapes::ShapeRef.new(shape: ProvenanceList, location_name: "provenance"))
     UpdateRegistryRecordRequest.struct_class = Types::UpdateRegistryRecordRequest
 
@@ -686,6 +774,7 @@ module Aws::AgentRegistryControl
     UpdateRegistryRecordResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatorAccountId, location_name: "createdBy"))
     UpdateRegistryRecordResponse.add_member(:custom_metadata, Shapes::ShapeRef.new(shape: CustomMetadataDocument, location_name: "customMetadata"))
     UpdateRegistryRecordResponse.add_member(:custom_metadata_schema_compliance_status, Shapes::ShapeRef.new(shape: CustomMetadataSchemaComplianceStatus, location_name: "customMetadataSchemaComplianceStatus"))
+    UpdateRegistryRecordResponse.add_member(:authorization_data, Shapes::ShapeRef.new(shape: AuthorizationData, location_name: "authorizationData"))
     UpdateRegistryRecordResponse.struct_class = Types::UpdateRegistryRecordResponse
 
     UpdateRegistryRecordStatusRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryIdentifier, required: true, location: "uri", location_name: "registryId"))
@@ -744,6 +833,9 @@ module Aws::AgentRegistryControl
     UpdatedAgentSkillsAdditionalData.struct_class = Types::UpdatedAgentSkillsAdditionalData
 
     UpdatedAgentSkillsAdditionalDataFields.add_member(:skill_md, Shapes::ShapeRef.new(shape: UpdatedAgentSkillsMdDescriptor, location_name: "skillMd"))
+    UpdatedAgentSkillsAdditionalDataFields.add_member(:skill_package, Shapes::ShapeRef.new(shape: UpdatedAgentSkillsPackageDescriptor, location_name: "skillPackage"))
+    UpdatedAgentSkillsAdditionalDataFields.add_member(:repository_provider, Shapes::ShapeRef.new(shape: UpdatedAgentSkillsRepositoryProvider, location_name: "repositoryProvider"))
+    UpdatedAgentSkillsAdditionalDataFields.add_member(:source_configuration, Shapes::ShapeRef.new(shape: UpdatedAgentSkillsSourceConfiguration, location_name: "sourceConfiguration"))
     UpdatedAgentSkillsAdditionalDataFields.struct_class = Types::UpdatedAgentSkillsAdditionalDataFields
 
     UpdatedAgentSkillsDefinitionDescriptor.add_member(:optional_value, Shapes::ShapeRef.new(shape: UpdatedAgentSkillsDefinitionDescriptorFields, location_name: "optionalValue"))
@@ -761,6 +853,15 @@ module Aws::AgentRegistryControl
     UpdatedAgentSkillsMdDescriptorFields.add_member(:data_schema_version, Shapes::ShapeRef.new(shape: UpdatedDataSchemaVersion, location_name: "dataSchemaVersion"))
     UpdatedAgentSkillsMdDescriptorFields.add_member(:source, Shapes::ShapeRef.new(shape: UpdatedDescriptorSource, location_name: "source"))
     UpdatedAgentSkillsMdDescriptorFields.struct_class = Types::UpdatedAgentSkillsMdDescriptorFields
+
+    UpdatedAgentSkillsPackageDescriptor.add_member(:optional_value, Shapes::ShapeRef.new(shape: AgentSkillsPackageDescriptor, location_name: "optionalValue"))
+    UpdatedAgentSkillsPackageDescriptor.struct_class = Types::UpdatedAgentSkillsPackageDescriptor
+
+    UpdatedAgentSkillsRepositoryProvider.add_member(:optional_value, Shapes::ShapeRef.new(shape: AgentSkillsRepositoryProvider, location_name: "optionalValue"))
+    UpdatedAgentSkillsRepositoryProvider.struct_class = Types::UpdatedAgentSkillsRepositoryProvider
+
+    UpdatedAgentSkillsSourceConfiguration.add_member(:optional_value, Shapes::ShapeRef.new(shape: AgentSkillsSourceConfiguration, location_name: "optionalValue"))
+    UpdatedAgentSkillsSourceConfiguration.struct_class = Types::UpdatedAgentSkillsSourceConfiguration
 
     UpdatedApprovalConfiguration.add_member(:optional_value, Shapes::ShapeRef.new(shape: ApprovalConfiguration, location_name: "optionalValue"))
     UpdatedApprovalConfiguration.struct_class = Types::UpdatedApprovalConfiguration
@@ -839,6 +940,9 @@ module Aws::AgentRegistryControl
     UpdatedMcpToolsDescriptorFields.add_member(:data, Shapes::ShapeRef.new(shape: UpdatedDescriptorData, location_name: "data"))
     UpdatedMcpToolsDescriptorFields.add_member(:data_schema_version, Shapes::ShapeRef.new(shape: UpdatedDataSchemaVersion, location_name: "dataSchemaVersion"))
     UpdatedMcpToolsDescriptorFields.struct_class = Types::UpdatedMcpToolsDescriptorFields
+
+    UpdatedRegistryRecordArtifact.add_member(:optional_value, Shapes::ShapeRef.new(shape: RegistryRecordArtifactUpload, location_name: "optionalValue"))
+    UpdatedRegistryRecordArtifact.struct_class = Types::UpdatedRegistryRecordArtifact
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, required: true, location_name: "reason"))

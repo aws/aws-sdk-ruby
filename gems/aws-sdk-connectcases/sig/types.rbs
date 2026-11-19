@@ -1158,12 +1158,15 @@ module Aws::ConnectCases
     class RelatedItemUpdateContent
       attr_accessor comment: Types::CommentUpdateContent
       attr_accessor custom: Types::CustomUpdateContent
+      attr_accessor sla: Types::SlaUpdateContent
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Comment < RelatedItemUpdateContent
       end
       class Custom < RelatedItemUpdateContent
+      end
+      class Sla < RelatedItemUpdateContent
       end
       class Unknown < RelatedItemUpdateContent
       end
@@ -1333,6 +1336,22 @@ module Aws::ConnectCases
       class SlaInputConfiguration < SlaInputContent
       end
       class Unknown < SlaInputContent
+      end
+    end
+
+    class SlaUpdateConfiguration
+      attr_accessor target_sla_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class SlaUpdateContent
+      attr_accessor sla_update_configuration: Types::SlaUpdateConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SlaUpdateConfiguration < SlaUpdateContent
+      end
+      class Unknown < SlaUpdateContent
       end
     end
 

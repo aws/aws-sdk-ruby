@@ -719,7 +719,7 @@ module Aws::ElasticLoadBalancingV2
     #   The tags to assign to the listener.
     #
     # @option params [Types::MutualAuthenticationAttributes] :mutual_authentication
-    #   \[HTTPS listeners\] The mutual authentication configuration
+    #   \[HTTPS and TLS listeners\] The mutual authentication configuration
     #   information.
     #
     # @return [Types::CreateListenerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -908,6 +908,14 @@ module Aws::ElasticLoadBalancingV2
     #       ignore_client_certificate_expiry: false,
     #       trust_store_association_status: "active", # accepts active, removed
     #       advertise_trust_store_ca_names: "on", # accepts on, off
+    #       client_certificate_identity_filters: [
+    #         {
+    #           field: "subject-cn", # required, accepts subject-cn, subject-ou, san-dns, san-uri
+    #           action: "accept", # required, accepts accept
+    #           match_type: "exact", # required, accepts exact, prefix
+    #           value: "ClientCertificateIdentityFilterValue", # required
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -976,6 +984,11 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].mutual_authentication.ignore_client_certificate_expiry #=> Boolean
     #   resp.listeners[0].mutual_authentication.trust_store_association_status #=> String, one of "active", "removed"
     #   resp.listeners[0].mutual_authentication.advertise_trust_store_ca_names #=> String, one of "on", "off"
+    #   resp.listeners[0].mutual_authentication.client_certificate_identity_filters #=> Array
+    #   resp.listeners[0].mutual_authentication.client_certificate_identity_filters[0].field #=> String, one of "subject-cn", "subject-ou", "san-dns", "san-uri"
+    #   resp.listeners[0].mutual_authentication.client_certificate_identity_filters[0].action #=> String, one of "accept"
+    #   resp.listeners[0].mutual_authentication.client_certificate_identity_filters[0].match_type #=> String, one of "exact", "prefix"
+    #   resp.listeners[0].mutual_authentication.client_certificate_identity_filters[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateListener AWS API Documentation
     #
@@ -1917,11 +1930,12 @@ module Aws::ElasticLoadBalancingV2
     # Creates a trust store.
     #
     # For more information, see [Mutual TLS for Application Load
-    # Balancers][1].
+    # Balancers][1] or [Mutual TLS for Network Load Balancers][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/mutual-authentication.html
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/mutual-authentication.html
     #
     # @option params [required, String] :name
     #   The name of the trust store.
@@ -2581,6 +2595,11 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].mutual_authentication.ignore_client_certificate_expiry #=> Boolean
     #   resp.listeners[0].mutual_authentication.trust_store_association_status #=> String, one of "active", "removed"
     #   resp.listeners[0].mutual_authentication.advertise_trust_store_ca_names #=> String, one of "on", "off"
+    #   resp.listeners[0].mutual_authentication.client_certificate_identity_filters #=> Array
+    #   resp.listeners[0].mutual_authentication.client_certificate_identity_filters[0].field #=> String, one of "subject-cn", "subject-ou", "san-dns", "san-uri"
+    #   resp.listeners[0].mutual_authentication.client_certificate_identity_filters[0].action #=> String, one of "accept"
+    #   resp.listeners[0].mutual_authentication.client_certificate_identity_filters[0].match_type #=> String, one of "exact", "prefix"
+    #   resp.listeners[0].mutual_authentication.client_certificate_identity_filters[0].value #=> String
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeListeners AWS API Documentation
@@ -3984,7 +4003,7 @@ module Aws::ElasticLoadBalancingV2
     #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html#alpn-policies
     #
     # @option params [Types::MutualAuthenticationAttributes] :mutual_authentication
-    #   \[HTTPS listeners\] The mutual authentication configuration
+    #   \[HTTPS and TLS listeners\] The mutual authentication configuration
     #   information.
     #
     # @return [Types::ModifyListenerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4152,6 +4171,14 @@ module Aws::ElasticLoadBalancingV2
     #       ignore_client_certificate_expiry: false,
     #       trust_store_association_status: "active", # accepts active, removed
     #       advertise_trust_store_ca_names: "on", # accepts on, off
+    #       client_certificate_identity_filters: [
+    #         {
+    #           field: "subject-cn", # required, accepts subject-cn, subject-ou, san-dns, san-uri
+    #           action: "accept", # required, accepts accept
+    #           match_type: "exact", # required, accepts exact, prefix
+    #           value: "ClientCertificateIdentityFilterValue", # required
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -4220,6 +4247,11 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].mutual_authentication.ignore_client_certificate_expiry #=> Boolean
     #   resp.listeners[0].mutual_authentication.trust_store_association_status #=> String, one of "active", "removed"
     #   resp.listeners[0].mutual_authentication.advertise_trust_store_ca_names #=> String, one of "on", "off"
+    #   resp.listeners[0].mutual_authentication.client_certificate_identity_filters #=> Array
+    #   resp.listeners[0].mutual_authentication.client_certificate_identity_filters[0].field #=> String, one of "subject-cn", "subject-ou", "san-dns", "san-uri"
+    #   resp.listeners[0].mutual_authentication.client_certificate_identity_filters[0].action #=> String, one of "accept"
+    #   resp.listeners[0].mutual_authentication.client_certificate_identity_filters[0].match_type #=> String, one of "exact", "prefix"
+    #   resp.listeners[0].mutual_authentication.client_certificate_identity_filters[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListener AWS API Documentation
     #
@@ -5698,7 +5730,7 @@ module Aws::ElasticLoadBalancingV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.171.0'
+      context[:gem_version] = '1.172.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

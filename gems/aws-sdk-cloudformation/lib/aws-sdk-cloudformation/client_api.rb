@@ -600,6 +600,8 @@ module Aws::CloudFormation
     StackSetOperationSummaries = Shapes::ListShape.new(name: 'StackSetOperationSummaries')
     StackSetOperationSummary = Shapes::StructureShape.new(name: 'StackSetOperationSummary')
     StackSetOperationTotalStackInstancesCount = Shapes::IntegerShape.new(name: 'StackSetOperationTotalStackInstancesCount')
+    StackSetOutputBucket = Shapes::StringShape.new(name: 'StackSetOutputBucket')
+    StackSetOutputBucketPath = Shapes::StringShape.new(name: 'StackSetOutputBucketPath')
     StackSetStatus = Shapes::StringShape.new(name: 'StackSetStatus')
     StackSetSummaries = Shapes::ListShape.new(name: 'StackSetSummaries')
     StackSetSummary = Shapes::StructureShape.new(name: 'StackSetSummary')
@@ -688,6 +690,7 @@ module Aws::CloudFormation
     UpdateTerminationProtectionInput = Shapes::StructureShape.new(name: 'UpdateTerminationProtectionInput')
     UpdateTerminationProtectionOutput = Shapes::StructureShape.new(name: 'UpdateTerminationProtectionOutput')
     Url = Shapes::StringShape.new(name: 'Url')
+    UseAdminExecutionRoleNullable = Shapes::BooleanShape.new(name: 'UseAdminExecutionRoleNullable')
     UsePreviousTemplate = Shapes::BooleanShape.new(name: 'UsePreviousTemplate')
     UsePreviousValue = Shapes::BooleanShape.new(name: 'UsePreviousValue')
     ValidateTemplateInput = Shapes::StructureShape.new(name: 'ValidateTemplateInput')
@@ -937,6 +940,9 @@ module Aws::CloudFormation
     CreateStackSetInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
     CreateStackSetInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     CreateStackSetInput.add_member(:managed_execution, Shapes::ShapeRef.new(shape: ManagedExecution, location_name: "ManagedExecution"))
+    CreateStackSetInput.add_member(:execution_role_template_body, Shapes::ShapeRef.new(shape: TemplateBody, location_name: "ExecutionRoleTemplateBody"))
+    CreateStackSetInput.add_member(:execution_role_template_url, Shapes::ShapeRef.new(shape: TemplateURL, location_name: "ExecutionRoleTemplateUrl"))
+    CreateStackSetInput.add_member(:stack_set_output_bucket, Shapes::ShapeRef.new(shape: StackSetOutputBucket, location_name: "StackSetOutputBucket"))
     CreateStackSetInput.struct_class = Types::CreateStackSetInput
 
     CreateStackSetOutput.add_member(:stack_set_id, Shapes::ShapeRef.new(shape: StackSetId, location_name: "StackSetId"))
@@ -2283,6 +2289,7 @@ module Aws::CloudFormation
     StackSet.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationalUnitIdList, location_name: "OrganizationalUnitIds"))
     StackSet.add_member(:managed_execution, Shapes::ShapeRef.new(shape: ManagedExecution, location_name: "ManagedExecution"))
     StackSet.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "Regions"))
+    StackSet.add_member(:stack_set_output_bucket_path, Shapes::ShapeRef.new(shape: StackSetOutputBucketPath, location_name: "StackSetOutputBucketPath"))
     StackSet.struct_class = Types::StackSet
 
     StackSetARNList.member = Shapes::ShapeRef.new(shape: StackSetARN)
@@ -2599,6 +2606,10 @@ module Aws::CloudFormation
     UpdateStackSetInput.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "Regions"))
     UpdateStackSetInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
     UpdateStackSetInput.add_member(:managed_execution, Shapes::ShapeRef.new(shape: ManagedExecution, location_name: "ManagedExecution"))
+    UpdateStackSetInput.add_member(:execution_role_template_body, Shapes::ShapeRef.new(shape: TemplateBody, location_name: "ExecutionRoleTemplateBody"))
+    UpdateStackSetInput.add_member(:execution_role_template_url, Shapes::ShapeRef.new(shape: TemplateURL, location_name: "ExecutionRoleTemplateUrl"))
+    UpdateStackSetInput.add_member(:use_admin_execution_role, Shapes::ShapeRef.new(shape: UseAdminExecutionRoleNullable, location_name: "UseAdminExecutionRole"))
+    UpdateStackSetInput.add_member(:stack_set_output_bucket, Shapes::ShapeRef.new(shape: StackSetOutputBucket, location_name: "StackSetOutputBucket"))
     UpdateStackSetInput.struct_class = Types::UpdateStackSetInput
 
     UpdateStackSetOutput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId"))

@@ -236,17 +236,22 @@ module Aws
       interface _CreateCodeSecurityIntegrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateCodeSecurityIntegrationResponse]
         def integration_arn: () -> ::String
-        def status: () -> ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING")
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING" | "ESTABLISHING_CONNECTION_IN_PROGRESS" | "ESTABLISHING_CONNECTION_COMPLETED" | "ESTABLISHING_CONNECTION_FAILED" | "PENDING_MANIFEST_CODE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
         def authorization_url: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#create_code_security_integration-instance_method
       def create_code_security_integration: (
                                               name: ::String,
-                                              type: ("GITLAB_SELF_MANAGED" | "GITHUB"),
+                                              type: ("GITLAB_SELF_MANAGED" | "GITHUB" | "GITHUB_ENTERPRISE_SERVER"),
                                               ?details: {
                                                 gitlab_self_managed: {
                                                   instance_url: ::String,
-                                                  access_token: ::String
+                                                  access_token: ::String,
+                                                  vpc_configuration: Params::code_security_integration_vpc_configuration?
+                                                }?,
+                                                github_enterprise: {
+                                                  instance_url: ::String,
+                                                  vpc_configuration: Params::code_security_integration_vpc_configuration?
                                                 }?
                                               },
                                               ?tags: Hash[::String, ::String]
@@ -661,12 +666,14 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCodeSecurityIntegrationResponse]
         def integration_arn: () -> ::String
         def name: () -> ::String
-        def type: () -> ("GITLAB_SELF_MANAGED" | "GITHUB")
-        def status: () -> ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING")
+        def type: () -> ("GITLAB_SELF_MANAGED" | "GITHUB" | "GITHUB_ENTERPRISE_SERVER")
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING" | "ESTABLISHING_CONNECTION_IN_PROGRESS" | "ESTABLISHING_CONNECTION_COMPLETED" | "ESTABLISHING_CONNECTION_FAILED" | "PENDING_MANIFEST_CODE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
         def status_reason: () -> ::String
         def created_on: () -> ::Time
         def last_update_on: () -> ::Time
         def authorization_url: () -> ::String
+        def vpc_configuration: () -> Types::CodeSecurityIntegrationVpcConfiguration
+        def instance_url: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_code_security_integration-instance_method
@@ -1924,18 +1931,30 @@ module Aws
       interface _UpdateCodeSecurityIntegrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCodeSecurityIntegrationResponse]
         def integration_arn: () -> ::String
-        def status: () -> ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING")
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING" | "ESTABLISHING_CONNECTION_IN_PROGRESS" | "ESTABLISHING_CONNECTION_COMPLETED" | "ESTABLISHING_CONNECTION_FAILED" | "PENDING_MANIFEST_CODE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#update_code_security_integration-instance_method
       def update_code_security_integration: (
                                               integration_arn: ::String,
                                               details: {
                                                 gitlab_self_managed: {
-                                                  auth_code: ::String
+                                                  auth_code: ::String,
+                                                  state_token: ::String?
                                                 }?,
                                                 github: {
                                                   code: ::String,
-                                                  installation_id: ::String
+                                                  installation_id: ::String,
+                                                  state_token: ::String?
+                                                }?,
+                                                github_enterprise_server: {
+                                                  app_installation: {
+                                                    code: ::String,
+                                                    installation_id: ::String,
+                                                    state_token: ::String?
+                                                  }?,
+                                                  app_registration: {
+                                                    manifest_code: ::String
+                                                  }?
                                                 }?
                                               }
                                             ) -> _UpdateCodeSecurityIntegrationResponseSuccess

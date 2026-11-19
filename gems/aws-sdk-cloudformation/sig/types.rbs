@@ -281,6 +281,9 @@ module Aws::CloudFormation
       attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
       attr_accessor client_request_token: ::String
       attr_accessor managed_execution: Types::ManagedExecution
+      attr_accessor execution_role_template_body: ::String
+      attr_accessor execution_role_template_url: ::String
+      attr_accessor stack_set_output_bucket: ::String
       SENSITIVE: []
     end
 
@@ -1918,6 +1921,7 @@ module Aws::CloudFormation
       attr_accessor organizational_unit_ids: ::Array[::String]
       attr_accessor managed_execution: Types::ManagedExecution
       attr_accessor regions: ::Array[::String]
+      attr_accessor stack_set_output_bucket_path: ::String
       SENSITIVE: []
     end
 
@@ -2269,6 +2273,10 @@ module Aws::CloudFormation
       attr_accessor regions: ::Array[::String]
       attr_accessor call_as: ("SELF" | "DELEGATED_ADMIN")
       attr_accessor managed_execution: Types::ManagedExecution
+      attr_accessor execution_role_template_body: ::String
+      attr_accessor execution_role_template_url: ::String
+      attr_accessor use_admin_execution_role: bool
+      attr_accessor stack_set_output_bucket: ::String
       SENSITIVE: []
     end
 

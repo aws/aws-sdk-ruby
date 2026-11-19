@@ -31,8 +31,8 @@ module Aws
         def message: () -> ::String
       end
       class ValidationException < ServiceError
-        def field_name: () -> ::String
         def message: () -> ::String
+        def field_name: () -> ::String
       end
     end
   end

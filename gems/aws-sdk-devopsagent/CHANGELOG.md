@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2026-11-19)
+------------------
+
+* Feature - AWS DevOps Agent adds AWS Organizations support so that agent spaces can monitor member accounts across an organizational unit.
+
 1.32.0 (2026-11-18)
 ------------------
 

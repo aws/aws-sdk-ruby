@@ -1867,7 +1867,7 @@ module Aws::Lambda
     # @option params [Integer] :timeout
     #   The amount of time (in seconds) that Lambda allows a function to run
     #   before stopping it. The default is 3 seconds, and the maximum allowed
-    #   value is 900 seconds. For functions using Lambda Managed Instances,
+    #   value is 1,800 seconds. For functions using Lambda Managed Instances,
     #   asynchronous invocations and event source mapping invocations (except
     #   Amazon MQ and Amazon DocumentDB) support a maximum allowed value of
     #   5,400 seconds (90 minutes). For more information, see [Lambda
@@ -4918,9 +4918,9 @@ module Aws::Lambda
     #   * {Types::GetProvisionedConcurrencyConfigResponse#last_modified #last_modified} => Time
     #
     #
-    # @example Example: To view a provisioned concurrency configuration
+    # @example Example: To get a provisioned concurrency configuration
     #
-    #   # The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified
+    #   # The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified
     #   # function.
     #
     #   resp = client.get_provisioned_concurrency_config({
@@ -4937,9 +4937,9 @@ module Aws::Lambda
     #     status: "READY", 
     #   }
     #
-    # @example Example: To get a provisioned concurrency configuration
+    # @example Example: To view a provisioned concurrency configuration
     #
-    #   # The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified
+    #   # The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified
     #   # function.
     #
     #   resp = client.get_provisioned_concurrency_config({
@@ -5120,7 +5120,9 @@ module Aws::Lambda
     # For functions with a long timeout, your client might disconnect during
     # synchronous invocation while it waits for a response. Configure your
     # HTTP client, SDK, firewall, proxy, or operating system to allow for
-    # long connections with timeout or keep-alive settings.
+    # long connections with timeout or keep-alive settings. Synchronous
+    # invocations can run for up to 30 minutes. Set the read timeout of your
+    # client higher than the function timeout, and turn on TCP keep-alive.
     #
     # This operation requires permission for the [lambda:InvokeFunction][8]
     # action. For details on how to set up permissions for cross-account
@@ -5179,6 +5181,8 @@ module Aws::Lambda
     #   pass to the function in the context object. Lambda passes the
     #   `ClientContext` object to your function for synchronous invocations
     #   only.
+    #
+    #   `ClientContext` is logged to CloudTrail if you turn on data events.
     #
     # @option params [String] :durable_execution_name
     #   A unique name for the durable execution. If you invoke a durable
@@ -5398,6 +5402,8 @@ module Aws::Lambda
     # @option params [String] :client_context
     #   Up to 3,583 bytes of base64-encoded data about the invoking client to
     #   pass to the function in the context object.
+    #
+    #   `ClientContext` is logged to CloudTrail if you turn on data events.
     #
     # @option params [String] :qualifier
     #   The alias name.
@@ -9666,7 +9672,7 @@ module Aws::Lambda
     # @option params [Integer] :timeout
     #   The amount of time (in seconds) that Lambda allows a function to run
     #   before stopping it. The default is 3 seconds, and the maximum allowed
-    #   value is 900 seconds. For functions using Lambda Managed Instances,
+    #   value is 1,800 seconds. For functions using Lambda Managed Instances,
     #   asynchronous invocations and event source mapping invocations (except
     #   Amazon MQ and Amazon DocumentDB) support a maximum allowed value of
     #   5,400 seconds (90 minutes). For more information, see [Lambda
@@ -10336,7 +10342,7 @@ module Aws::Lambda
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.215.0'
+      context[:gem_version] = '1.216.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

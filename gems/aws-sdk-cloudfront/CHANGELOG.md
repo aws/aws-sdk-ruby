@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.170.0 (2026-11-19)
+------------------
+
+* Feature - Amazon CloudFront adds configuration for SNI-less clients on Anycast static IPs, introduces Anycast IP based domain routing for Distribution Tenants, provides automatic domain ownership validation when creating or updating Distribution Tenants, and enables HTTP traffic via DNS validation.
+
 1.169.0 (2026-11-18)
 ------------------
 

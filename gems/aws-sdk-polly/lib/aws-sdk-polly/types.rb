@@ -10,6 +10,22 @@
 module Aws::Polly
   module Types
 
+    # You don't have sufficient permissions to perform this action. For a
+    # custom voice that uses a customer managed key, Amazon Polly also
+    # returns this exception if you don't have the required Amazon Web
+    # Services KMS permissions on the key.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains a chunk of synthesized audio data.
     #
     # @!attribute [rw] audio_chunk
@@ -39,6 +55,155 @@ module Aws::Polly
       include Aws::Structure
     end
 
+    # The request conflicts with the current state of the resource. For a
+    # custom voice, the voice isn't in the status that the operation
+    # requires. Check the status with `GetVoice`, and then try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource that the request conflicts with.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource that the request conflicts with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message,
+      :resource_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the voice. Use the name to identify the voice in your
+    #   application. The name can contain letters, digits, hyphens, and
+    #   underscores, and can be up to 64 characters long. The name doesn't
+    #   have to be unique. The name isn't the voice ID, which Amazon Polly
+    #   assigns.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language of the recordings, for example, `en-US`. Amazon Polly
+    #   doesn't detect the language from the recordings.
+    #   @return [String]
+    #
+    # @!attribute [rw] terms_accepted
+    #   Confirms the following two statements:
+    #
+    #   * "I confirm that I have obtained all necessary consents required
+    #     under any applicable laws and regulations, including biometric
+    #     privacy laws, from the owner of this voice to clone these voice
+    #     samples."
+    #
+    #   * "I confirm that I will not use the generated content for any
+    #     illegal, fraudulent, or harmful purpose and reaffirm my obligation
+    #     to abide by the AWS Service Terms, Biometric Notice and Consent
+    #     Terms, AWS Responsible AI Policy, and AWS Acceptable Use Policy."
+    #
+    #   You can read the [AWS Service Terms][1], the [Biometric Notice and
+    #   Consent Terms][2], the [AWS Responsible AI Policy][3], and the [AWS
+    #   Acceptable Use Policy][4] on the Amazon Web Services website.
+    #
+    #   You must set this parameter to `true` to create a voice. Otherwise,
+    #   the request fails with `ValidationException`.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/service-terms/
+    #   [2]: https://aws.amazon.com/legal/biometric-notice-and-consent-terms/
+    #   [3]: https://aws.amazon.com/ai/responsible-ai/policy/
+    #   [4]: https://aws.amazon.com/aup/
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] voice_creation_data
+    #   The recordings that Amazon Polly uses to create the voice.
+    #   @return [Types::VoiceCreationData]
+    #
+    # @!attribute [rw] customer_managed_encryption
+    #   The customer managed key that you want Amazon Polly to encrypt the
+    #   voice with. If you omit this parameter, Amazon Polly encrypts the
+    #   voice with an Amazon Web Services owned key.
+    #   @return [Types::CustomerManagedEncryption]
+    #
+    # @!attribute [rw] tags
+    #   The tags that you apply to the voice to help you categorize and
+    #   organize it. Each tag consists of a key and an optional value, both
+    #   of which you define.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token,
+    #   the Amazon Web Services SDKs generate one for you. If you retry a
+    #   request that succeeded with the same client token and the same
+    #   parameters, Amazon Polly returns the voice that the first request
+    #   created and doesn't create a second voice.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/CreateVoiceInput AWS API Documentation
+    #
+    class CreateVoiceInput < Struct.new(
+      :name,
+      :language_code,
+      :terms_accepted,
+      :voice_creation_data,
+      :customer_managed_encryption,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice
+    #   The new voice, in `pending` status.
+    #   @return [Types::Voice]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/CreateVoiceOutput AWS API Documentation
+    #
+    class CreateVoiceOutput < Struct.new(
+      :voice)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The customer managed key that encrypts your custom voice. If you
+    # don't specify a key, Amazon Polly encrypts the voice with an Amazon
+    # Web Services owned key.
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the key. The key must be a
+    #   symmetric encryption key in the same Amazon Web Services Region as
+    #   the voice. To create the voice, you need `kms:DescribeKey`,
+    #   `kms:GenerateDataKey`, and `kms:Decrypt` permissions on the key. To
+    #   synthesize speech with the voice, you need `kms:Decrypt` permission
+    #   on the key.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_context
+    #   The key-value pairs that Amazon Polly includes as the encryption
+    #   context when it encrypts or decrypts the voice with the key. You can
+    #   use these pairs in key policy conditions. Don't use keys that start
+    #   with `aws:`, which are reserved.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/CustomerManagedEncryption AWS API Documentation
+    #
+    class CustomerManagedEncryption < Struct.new(
+      :kms_key_arn,
+      :encryption_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the lexicon to delete. Must be an existing lexicon in
     #   the region.
@@ -55,6 +220,23 @@ module Aws::Polly
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DeleteLexiconOutput AWS API Documentation
     #
     class DeleteLexiconOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] voice_id
+    #   The ID of the custom voice to delete, for example, `vc-9a8fa85dd3`.
+    #   You can't specify the ARN of the voice.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DeleteVoiceInput AWS API Documentation
+    #
+    class DeleteVoiceInput < Struct.new(
+      :voice_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DeleteVoiceOutput AWS API Documentation
+    #
+    class DeleteVoiceOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] engine
     #   Specifies the engine (`standard`, `neural`, `long-form` or
@@ -199,6 +381,31 @@ module Aws::Polly
     #
     class GetSpeechSynthesisTaskOutput < Struct.new(
       :synthesis_task)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_id
+    #   The ID of the custom voice that `CreateVoice` returned, for example,
+    #   `vc-9a8fa85dd3`. You can't specify the ARN of the voice.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetVoiceInput AWS API Documentation
+    #
+    class GetVoiceInput < Struct.new(
+      :voice_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice
+    #   The custom voice.
+    #   @return [Types::Voice]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetVoiceOutput AWS API Documentation
+    #
+    class GetVoiceOutput < Struct.new(
+      :voice)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -550,9 +757,8 @@ module Aws::Polly
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) that identifies the resource for
-    #   which to list the tags. Currently, the only supported resource is an
-    #   Amazon Polly lexicon.
+    #   The Amazon Resource Name (ARN) of the resource to list the tags for.
+    #   You can tag Amazon Polly lexicons and custom voices.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListTagsForResourceInput AWS API Documentation
@@ -648,9 +854,59 @@ module Aws::Polly
     #
     class PutLexiconOutput < Aws::EmptyStructure; end
 
+    # A recording of the speaker whose voice you want to create. The
+    # recording specifies its audio format and its audio source.
+    #
+    # @!attribute [rw] format
+    #   The audio format of the recording: `wav`, `flac`, `ogg_vorbis`, or
+    #   `mp3`. The format must match the audio data.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   The audio source of the recording. Specify either an Amazon S3
+    #   object or the audio data.
+    #   @return [Types::RecordingData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/Recording AWS API Documentation
+    #
+    class Recording < Struct.new(
+      :format,
+      :data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The audio source of a recording. In a `CreateVoice` request, specify
+    # exactly one of `S3Url` and `Bytes`. In a response, a recording that
+    # Amazon Polly read from Amazon S3 includes its `S3Url`. A recording
+    # that you passed as `Bytes` includes neither field, because Amazon
+    # Polly doesn't return the audio.
+    #
+    # @!attribute [rw] s3_url
+    #   The Amazon S3 URL of the audio object, in the form
+    #   `s3://bucket/key`. You need `s3:GetObject` permission on the object.
+    #   @return [String]
+    #
+    # @!attribute [rw] bytes
+    #   The audio data, passed directly in the request. The data must be in
+    #   the format that `Format` specifies and can be up to 5 MB. Amazon
+    #   Polly doesn't store the audio after it creates the voice, and
+    #   doesn't return this field in responses.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/RecordingData AWS API Documentation
+    #
+    class RecordingData < Struct.new(
+      :s3_url,
+      :bytes)
+      SENSITIVE = [:bytes]
+      include Aws::Structure
+    end
+
     # Amazon Polly can't find the specified resource. Verify that the
     # resource exists in the Amazon Web Services account and Region of the
-    # request and that its ARN is spelled correctly, and then try again.
+    # request and that its ARN or ID is spelled correctly, and then try
+    # again.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -755,8 +1011,10 @@ module Aws::Polly
     #   @return [String]
     #
     # @!attribute [rw] voice_id
-    #   The voice to use in synthesis. To get a list of available voice IDs,
-    #   use the [DescribeVoices][1] operation.
+    #   The voice ID to use for the synthesis. To get a list of available
+    #   voice IDs, use the [DescribeVoices][1] operation. To use a custom
+    #   voice, specify the voice ID that `CreateVoice` returned, for
+    #   example, `vc-9a8fa85dd3`. You can't specify the ARN of a voice.
     #
     #
     #
@@ -876,7 +1134,9 @@ module Aws::Polly
     #   @return [String]
     #
     # @!attribute [rw] voice_id
-    #   Voice ID to use for the synthesis.
+    #   The voice ID to use for the synthesis. To use a custom voice,
+    #   specify the voice ID that `CreateVoice` returned, for example,
+    #   `vc-9a8fa85dd3`. You can't specify the ARN of a voice.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/StartSpeechSynthesisTaskInput AWS API Documentation
@@ -1150,8 +1410,11 @@ module Aws::Polly
     #   @return [String]
     #
     # @!attribute [rw] voice_id
-    #   Voice ID to use for the synthesis. You can get a list of available
-    #   voice IDs by calling the [DescribeVoices][1] operation.
+    #   The voice ID to use for the synthesis. You can get a list of
+    #   available voice IDs by calling the [DescribeVoices][1] operation. To
+    #   use a custom voice, specify the voice ID that `CreateVoice`
+    #   returned, for example, `vc-9a8fa85dd3`. You can't specify the ARN
+    #   of a voice.
     #
     #
     #
@@ -1220,8 +1483,8 @@ module Aws::Polly
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource to which to add tags.
-    #   Currently, the only supported resource is an Amazon Polly lexicon.
+    #   The Amazon Resource Name (ARN) of the resource to add tags to. You
+    #   can tag Amazon Polly lexicons and custom voices.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1378,9 +1641,8 @@ module Aws::Polly
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource from which to remove
-    #   tags. Currently, the only supported resource is an Amazon Polly
-    #   lexicon.
+    #   The Amazon Resource Name (ARN) of the resource to remove tags from.
+    #   You can tag Amazon Polly lexicons and custom voices.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -1406,7 +1668,19 @@ module Aws::Polly
     #   @return [String]
     #
     # @!attribute [rw] reason
-    #   The reason the request failed validation.
+    #   The reason the request failed validation. If Amazon Polly can't use
+    #   the Amazon Web Services KMS key that you specified in `CreateVoice`,
+    #   `fields` names `CustomerManagedEncryption.KmsKeyArn` and the reason
+    #   is one of the following:
+    #
+    #   kmsKeyNotFound
+    #
+    #   : No key with the specified ARN exists.
+    #
+    #   kmsKeyUnusable
+    #
+    #   : The key is disabled, scheduled for deletion, or missing its key
+    #     material, or it isn't a symmetric encryption key.
     #   @return [String]
     #
     # @!attribute [rw] fields
@@ -1443,15 +1717,28 @@ module Aws::Polly
       include Aws::Structure
     end
 
-    # Description of the voice.
+    # Describes a voice. Amazon Polly provides voices, and you can create
+    # custom voices with `CreateVoice`. `Origin` indicates whether Amazon
+    # Polly provides the voice or you created it. `DescribeVoices` returns a
+    # subset of the fields for each voice. `GetVoice` returns all fields of
+    # a custom voice.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of a custom voice, in the form
+    #   `arn:partition:polly:region:account-id:voice/voice-id`.
+    #   `CreateVoice` and `GetVoice` return this field. Voices that Amazon
+    #   Polly provides don't have an ARN.
+    #   @return [String]
     #
     # @!attribute [rw] gender
-    #   Gender of the voice.
+    #   The gender of the voice. Custom voices don't include this field.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   Amazon Polly assigned voice ID. This is the ID that you specify when
-    #   calling the `SynthesizeSpeech` operation.
+    #   The voice ID that Amazon Polly assigns. You specify this ID when you
+    #   call the `SynthesizeSpeech` operation. For a custom voice, Amazon
+    #   Polly assigns an ID that consists of `vc-` followed by hexadecimal
+    #   characters, for example, `vc-9a8fa85dd3`.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -1463,9 +1750,47 @@ module Aws::Polly
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Name of the voice (for example, Salli, Kendra, etc.). This provides
-    #   a human readable voice name that you might display in your
-    #   application.
+    #   The name of the voice, for example, Salli or Kendra. The name is
+    #   human-readable, and you might display it in your application. For a
+    #   custom voice, this is the `Name` that you specified in
+    #   `CreateVoice`.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin
+    #   Indicates who provides the voice. The origin is one of the
+    #   following:
+    #
+    #   aws
+    #
+    #   : A voice that Amazon Polly provides.
+    #
+    #   customer
+    #
+    #   : A custom voice that you created with `CreateVoice`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of a custom voice. Voices that Amazon Polly provides
+    #   don't include this field. The status is one of the following:
+    #
+    #   pending
+    #
+    #   : Amazon Polly is creating the voice.
+    #
+    #   active
+    #
+    #   : The voice is ready for speech synthesis.
+    #
+    #   failed
+    #
+    #   : Amazon Polly couldn't create the voice. `StatusReason` describes
+    #     why.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the status of a custom voice. When the
+    #   status is `failed`, this field describes why Amazon Polly couldn't
+    #   create the voice.
     #   @return [String]
     #
     # @!attribute [rw] additional_language_codes
@@ -1483,16 +1808,57 @@ module Aws::Polly
     #   `generative`) are supported by a given voice.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] voice_creation_data
+    #   The data from which you created the custom voice. `CreateVoice` and
+    #   `GetVoice` return this field. The response doesn't include the
+    #   audio: a recording that Amazon Polly read from Amazon S3 includes
+    #   its `S3Url`, and a recording that you passed as `Bytes` has no
+    #   fields in `Data`.
+    #   @return [Types::VoiceCreationData]
+    #
+    # @!attribute [rw] customer_managed_encryption
+    #   The customer managed key that encrypts your custom voice.
+    #   `CreateVoice` and `GetVoice` return this field if you specified a
+    #   key in `CreateVoice`.
+    #   @return [Types::CustomerManagedEncryption]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time when you created the custom voice. Voices that
+    #   Amazon Polly provides don't include this field.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/Voice AWS API Documentation
     #
     class Voice < Struct.new(
+      :arn,
       :gender,
       :id,
       :language_code,
       :language_name,
       :name,
+      :origin,
+      :status,
+      :status_reason,
       :additional_language_codes,
-      :supported_engines)
+      :supported_engines,
+      :voice_creation_data,
+      :customer_managed_encryption,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The audio that you provide to create a custom voice.
+    #
+    # @!attribute [rw] recordings
+    #   The recordings of the speaker. Each recording specifies its audio
+    #   format and its audio source.
+    #   @return [Array<Types::Recording>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/VoiceCreationData AWS API Documentation
+    #
+    class VoiceCreationData < Struct.new(
+      :recordings)
       SENSITIVE = []
       include Aws::Structure
     end

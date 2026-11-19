@@ -227,6 +227,15 @@ module Aws
                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _DisassociateTableReplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateTableReplicationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#disassociate_table_replication-instance_method
+      def disassociate_table_replication: (
+                                            table_arn: ::String
+                                          ) -> _DisassociateTableReplicationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateTableReplicationResponseSuccess
+
       interface _GetNamespaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetNamespaceResponse]
         def namespace: () -> ::Array[::String]

@@ -2576,6 +2576,8 @@ module Aws::LakeFormation
     #   resp.rls_policy.attachment_columns[0].name #=> String
     #   resp.rls_policy.attachment_columns[0].type #=> String
     #   resp.rls_policy.filter_expression #=> String
+    #   resp.rls_policy.status #=> String, one of "VALID", "INVALID"
+    #   resp.rls_policy.status_reason #=> String, one of "REFERENCED_UDF_DELETED", "REFERENCED_LOOKUP_TABLE_DELETED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetRLSPolicy AWS API Documentation
     #
@@ -3880,6 +3882,8 @@ module Aws::LakeFormation
     #   resp.rls_policies[0].attachment_columns[0].name #=> String
     #   resp.rls_policies[0].attachment_columns[0].type #=> String
     #   resp.rls_policies[0].filter_expression #=> String
+    #   resp.rls_policies[0].status #=> String, one of "VALID", "INVALID"
+    #   resp.rls_policies[0].status_reason #=> String, one of "REFERENCED_UDF_DELETED", "REFERENCED_LOOKUP_TABLE_DELETED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListRLSPolicies AWS API Documentation
@@ -5245,7 +5249,7 @@ module Aws::LakeFormation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lakeformation'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

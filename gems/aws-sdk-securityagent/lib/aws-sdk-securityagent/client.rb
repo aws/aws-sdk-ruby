@@ -1284,6 +1284,9 @@ module Aws::SecurityAgent
     #   resp.findings[0].code_remediation_task.task_details[0].repo_name #=> String
     #   resp.findings[0].code_remediation_task.task_details[0].code_diff_link #=> String
     #   resp.findings[0].code_remediation_task.task_details[0].pull_request_link #=> String
+    #   resp.findings[0].code_remediation_task.task_details[0].status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED", "NO_CHANGE_REQUIRED", "UNKNOWN"
+    #   resp.findings[0].code_remediation_task.task_details[0].status_code #=> String
+    #   resp.findings[0].code_remediation_task.task_details[0].status_reason #=> String
     #   resp.findings[0].last_updated_by #=> String
     #   resp.findings[0].customer_note #=> String
     #   resp.findings[0].code_locations #=> Array
@@ -7097,7 +7100,7 @@ module Aws::SecurityAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityagent'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

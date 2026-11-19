@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.168.0 (2026-11-19)
+------------------
+
+* Feature - This release adds API support for configuring trusted identity propagation for IAM SAML and OpenIDConnect providers.
+
 1.167.0 (2026-11-18)
 ------------------
 

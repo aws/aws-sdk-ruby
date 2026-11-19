@@ -1146,11 +1146,30 @@ module Aws::Inspector2
     #
     #   resp = client.create_code_security_integration({
     #     name: "IntegrationName", # required
-    #     type: "GITLAB_SELF_MANAGED", # required, accepts GITLAB_SELF_MANAGED, GITHUB
+    #     type: "GITLAB_SELF_MANAGED", # required, accepts GITLAB_SELF_MANAGED, GITHUB, GITHUB_ENTERPRISE_SERVER
     #     details: {
     #       gitlab_self_managed: {
     #         instance_url: "InstanceUrl", # required
     #         access_token: "GitLabAccessToken", # required
+    #         vpc_configuration: {
+    #           vpc_id: "VpcId", # required
+    #           vpc_endpoint_id: "VpcEndpointId", # required
+    #           code_connections_host_arn: "CodeConnectionsHostArn",
+    #           subnet_ids: ["SubnetId"],
+    #           security_groups: ["SecurityGroupId"],
+    #           tls_certificate: "TlsCertificate",
+    #         },
+    #       },
+    #       github_enterprise: {
+    #         instance_url: "InstanceUrl", # required
+    #         vpc_configuration: {
+    #           vpc_id: "VpcId", # required
+    #           vpc_endpoint_id: "VpcEndpointId", # required
+    #           code_connections_host_arn: "CodeConnectionsHostArn",
+    #           subnet_ids: ["SubnetId"],
+    #           security_groups: ["SecurityGroupId"],
+    #           tls_certificate: "TlsCertificate",
+    #         },
     #       },
     #     },
     #     tags: {
@@ -1161,7 +1180,7 @@ module Aws::Inspector2
     # @example Response structure
     #
     #   resp.integration_arn #=> String
-    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "INACTIVE", "DISABLING"
+    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "INACTIVE", "DISABLING", "ESTABLISHING_CONNECTION_IN_PROGRESS", "ESTABLISHING_CONNECTION_COMPLETED", "ESTABLISHING_CONNECTION_FAILED", "PENDING_MANIFEST_CODE", "DELETE_IN_PROGRESS", "DELETE_FAILED"
     #   resp.authorization_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateCodeSecurityIntegration AWS API Documentation
@@ -3176,6 +3195,8 @@ module Aws::Inspector2
     #   * {Types::GetCodeSecurityIntegrationResponse#created_on #created_on} => Time
     #   * {Types::GetCodeSecurityIntegrationResponse#last_update_on #last_update_on} => Time
     #   * {Types::GetCodeSecurityIntegrationResponse#authorization_url #authorization_url} => String
+    #   * {Types::GetCodeSecurityIntegrationResponse#vpc_configuration #vpc_configuration} => Types::CodeSecurityIntegrationVpcConfiguration
+    #   * {Types::GetCodeSecurityIntegrationResponse#instance_url #instance_url} => String
     #   * {Types::GetCodeSecurityIntegrationResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -3191,12 +3212,21 @@ module Aws::Inspector2
     #
     #   resp.integration_arn #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "GITLAB_SELF_MANAGED", "GITHUB"
-    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "INACTIVE", "DISABLING"
+    #   resp.type #=> String, one of "GITLAB_SELF_MANAGED", "GITHUB", "GITHUB_ENTERPRISE_SERVER"
+    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "INACTIVE", "DISABLING", "ESTABLISHING_CONNECTION_IN_PROGRESS", "ESTABLISHING_CONNECTION_COMPLETED", "ESTABLISHING_CONNECTION_FAILED", "PENDING_MANIFEST_CODE", "DELETE_IN_PROGRESS", "DELETE_FAILED"
     #   resp.status_reason #=> String
     #   resp.created_on #=> Time
     #   resp.last_update_on #=> Time
     #   resp.authorization_url #=> String
+    #   resp.vpc_configuration.vpc_id #=> String
+    #   resp.vpc_configuration.vpc_endpoint_id #=> String
+    #   resp.vpc_configuration.code_connections_host_arn #=> String
+    #   resp.vpc_configuration.subnet_ids #=> Array
+    #   resp.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.vpc_configuration.security_groups #=> Array
+    #   resp.vpc_configuration.security_groups[0] #=> String
+    #   resp.vpc_configuration.tls_certificate #=> String
+    #   resp.instance_url #=> String
     #   resp.tags #=> Hash
     #   resp.tags["MapKey"] #=> String
     #
@@ -4538,8 +4568,8 @@ module Aws::Inspector2
     #   resp.integrations #=> Array
     #   resp.integrations[0].integration_arn #=> String
     #   resp.integrations[0].name #=> String
-    #   resp.integrations[0].type #=> String, one of "GITLAB_SELF_MANAGED", "GITHUB"
-    #   resp.integrations[0].status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "INACTIVE", "DISABLING"
+    #   resp.integrations[0].type #=> String, one of "GITLAB_SELF_MANAGED", "GITHUB", "GITHUB_ENTERPRISE_SERVER"
+    #   resp.integrations[0].status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "INACTIVE", "DISABLING", "ESTABLISHING_CONNECTION_IN_PROGRESS", "ESTABLISHING_CONNECTION_COMPLETED", "ESTABLISHING_CONNECTION_FAILED", "PENDING_MANIFEST_CODE", "DELETE_IN_PROGRESS", "DELETE_FAILED"
     #   resp.integrations[0].status_reason #=> String
     #   resp.integrations[0].created_on #=> Time
     #   resp.integrations[0].last_update_on #=> Time
@@ -8049,10 +8079,22 @@ module Aws::Inspector2
     #     details: { # required
     #       gitlab_self_managed: {
     #         auth_code: "GitLabAuthCode", # required
+    #         state_token: "PkceState",
     #       },
     #       github: {
     #         code: "GitHubAuthCode", # required
     #         installation_id: "GitHubInstallationId", # required
+    #         state_token: "PkceState",
+    #       },
+    #       github_enterprise_server: {
+    #         app_installation: {
+    #           code: "GitHubAuthCode", # required
+    #           installation_id: "GitHubInstallationId", # required
+    #           state_token: "PkceState",
+    #         },
+    #         app_registration: {
+    #           manifest_code: "GitHubEnterpriseServerManifestCode", # required
+    #         },
     #       },
     #     },
     #   })
@@ -8060,7 +8102,7 @@ module Aws::Inspector2
     # @example Response structure
     #
     #   resp.integration_arn #=> String
-    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "INACTIVE", "DISABLING"
+    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "INACTIVE", "DISABLING", "ESTABLISHING_CONNECTION_IN_PROGRESS", "ESTABLISHING_CONNECTION_COMPLETED", "ESTABLISHING_CONNECTION_FAILED", "PENDING_MANIFEST_CODE", "DELETE_IN_PROGRESS", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateCodeSecurityIntegration AWS API Documentation
     #
@@ -8999,7 +9041,7 @@ module Aws::Inspector2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

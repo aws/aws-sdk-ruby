@@ -14,6 +14,7 @@ module Aws::DevOpsAgent
       attr_accessor account_type: ("monitor")
       attr_accessor agent_elevated_role_arn: ::String
       attr_accessor agent_elevated_role_arn_status: ("valid" | "invalid" | "pending-confirmation")
+      attr_accessor service_management_role_arn: ::String
       SENSITIVE: []
     end
 
@@ -95,6 +96,7 @@ module Aws::DevOpsAgent
       attr_accessor kms_key_arn: ::String
       attr_accessor agent_space_id: ::String
       attr_accessor preferences: ::Hash[("elevatedActionsEnabled"), bool]
+      attr_accessor aws_source_mode: ("standalone" | "organization")
       SENSITIVE: [:description]
     end
 
@@ -289,6 +291,7 @@ module Aws::DevOpsAgent
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor preferences: ::Hash[("elevatedActionsEnabled"), bool]
+      attr_accessor aws_source_mode: ("standalone" | "organization")
       SENSITIVE: [:description]
     end
 
@@ -1335,6 +1338,21 @@ module Aws::DevOpsAgent
       SENSITIVE: []
     end
 
+    class OrgSourceDeploymentState
+      attr_accessor deployed_account_count: ::Integer
+      attr_accessor issues: ::Array[Types::OrgSourceIssue]
+      attr_accessor last_evaluated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class OrgSourceIssue
+      attr_accessor reason_code: ("accountSuspended" | "accountNotInScope" | "managementAccountNotSupported" | "stackInstanceInoperable" | "accessDenied" | "deploymentFailed" | "secondaryAccountLimitExceeded")
+      attr_accessor account_count: ::Integer
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor message: ::String
+      SENSITIVE: [:message]
+    end
+
     class PagerDutyAuthorizationConfig
       attr_accessor o_auth_client_credentials: Types::PagerDutyOAuthClientCredentialsConfig
       attr_accessor unknown: untyped
@@ -1836,6 +1854,7 @@ module Aws::DevOpsAgent
 
     class ServiceConfiguration
       attr_accessor source_aws: Types::SourceAwsConfiguration
+      attr_accessor source_aws_org: Types::SourceAwsOrgConfiguration
       attr_accessor aws: Types::AWSConfiguration
       attr_accessor github: Types::GitHubConfiguration
       attr_accessor slack: Types::SlackConfiguration
@@ -1860,6 +1879,8 @@ module Aws::DevOpsAgent
       SENSITIVE: []
 
       class SourceAws < ServiceConfiguration
+      end
+      class SourceAwsOrg < ServiceConfiguration
       end
       class Aws < ServiceConfiguration
       end
@@ -2040,6 +2061,19 @@ module Aws::DevOpsAgent
       SENSITIVE: []
     end
 
+    class SourceAwsOrgConfiguration
+      attr_accessor account_type: ("source")
+      attr_accessor organizational_unit: Types::SourceAwsOrgUnit
+      attr_accessor deployment_state: Types::OrgSourceDeploymentState
+      SENSITIVE: []
+    end
+
+    class SourceAwsOrgUnit
+      attr_accessor organizational_unit_id: ::String
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class TagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -2136,6 +2170,7 @@ module Aws::DevOpsAgent
       attr_accessor description: ::String
       attr_accessor locale: ::String
       attr_accessor preferences: ::Hash[("elevatedActionsEnabled"), bool]
+      attr_accessor aws_source_mode: ("standalone" | "organization")
       SENSITIVE: [:description]
     end
 

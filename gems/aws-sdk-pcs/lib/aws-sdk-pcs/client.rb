@@ -581,6 +581,17 @@ module Aws::PCS
     #           parameter_value: "String", # required
     #         },
     #       ],
+    #       job_submit_plugins: [
+    #         {
+    #           name: "JobSubmitPluginNameString", # required
+    #           type: "STARLARK", # required, accepts STARLARK
+    #           script_source: { # required
+    #             script_location: "JobSubmitScriptSourceScriptLocationString", # required
+    #             s3_version_id: "JobSubmitScriptSourceS3VersionIdString",
+    #             checksum: "JobSubmitScriptSourceChecksumString",
+    #           },
+    #         },
+    #       ],
     #       accounting: {
     #         default_purge_time_in_days: 1,
     #         mode: "STANDARD", # required, accepts STANDARD, NONE
@@ -616,6 +627,12 @@ module Aws::PCS
     #   resp.cluster.slurm_configuration.cgroup_custom_settings #=> Array
     #   resp.cluster.slurm_configuration.cgroup_custom_settings[0].parameter_name #=> String
     #   resp.cluster.slurm_configuration.cgroup_custom_settings[0].parameter_value #=> String
+    #   resp.cluster.slurm_configuration.job_submit_plugins #=> Array
+    #   resp.cluster.slurm_configuration.job_submit_plugins[0].name #=> String
+    #   resp.cluster.slurm_configuration.job_submit_plugins[0].type #=> String, one of "STARLARK"
+    #   resp.cluster.slurm_configuration.job_submit_plugins[0].script_source.script_location #=> String
+    #   resp.cluster.slurm_configuration.job_submit_plugins[0].script_source.s3_version_id #=> String
+    #   resp.cluster.slurm_configuration.job_submit_plugins[0].script_source.checksum #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_arn #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_version #=> String
     #   resp.cluster.slurm_configuration.jwt_auth.jwt_key.secret_arn #=> String
@@ -1189,6 +1206,12 @@ module Aws::PCS
     #   resp.cluster.slurm_configuration.cgroup_custom_settings #=> Array
     #   resp.cluster.slurm_configuration.cgroup_custom_settings[0].parameter_name #=> String
     #   resp.cluster.slurm_configuration.cgroup_custom_settings[0].parameter_value #=> String
+    #   resp.cluster.slurm_configuration.job_submit_plugins #=> Array
+    #   resp.cluster.slurm_configuration.job_submit_plugins[0].name #=> String
+    #   resp.cluster.slurm_configuration.job_submit_plugins[0].type #=> String, one of "STARLARK"
+    #   resp.cluster.slurm_configuration.job_submit_plugins[0].script_source.script_location #=> String
+    #   resp.cluster.slurm_configuration.job_submit_plugins[0].script_source.s3_version_id #=> String
+    #   resp.cluster.slurm_configuration.job_submit_plugins[0].script_source.checksum #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_arn #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_version #=> String
     #   resp.cluster.slurm_configuration.jwt_auth.jwt_key.secret_arn #=> String
@@ -1747,6 +1770,17 @@ module Aws::PCS
     #           parameter_value: "String", # required
     #         },
     #       ],
+    #       job_submit_plugins: [
+    #         {
+    #           name: "JobSubmitPluginNameString", # required
+    #           type: "STARLARK", # required, accepts STARLARK
+    #           script_source: { # required
+    #             script_location: "JobSubmitScriptSourceScriptLocationString", # required
+    #             s3_version_id: "JobSubmitScriptSourceS3VersionIdString",
+    #             checksum: "JobSubmitScriptSourceChecksumString",
+    #           },
+    #         },
+    #       ],
     #       accounting: {
     #         default_purge_time_in_days: 1,
     #         mode: "STANDARD", # accepts STANDARD, NONE
@@ -1781,6 +1815,12 @@ module Aws::PCS
     #   resp.cluster.slurm_configuration.cgroup_custom_settings #=> Array
     #   resp.cluster.slurm_configuration.cgroup_custom_settings[0].parameter_name #=> String
     #   resp.cluster.slurm_configuration.cgroup_custom_settings[0].parameter_value #=> String
+    #   resp.cluster.slurm_configuration.job_submit_plugins #=> Array
+    #   resp.cluster.slurm_configuration.job_submit_plugins[0].name #=> String
+    #   resp.cluster.slurm_configuration.job_submit_plugins[0].type #=> String, one of "STARLARK"
+    #   resp.cluster.slurm_configuration.job_submit_plugins[0].script_source.script_location #=> String
+    #   resp.cluster.slurm_configuration.job_submit_plugins[0].script_source.s3_version_id #=> String
+    #   resp.cluster.slurm_configuration.job_submit_plugins[0].script_source.checksum #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_arn #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_version #=> String
     #   resp.cluster.slurm_configuration.jwt_auth.jwt_key.secret_arn #=> String
@@ -2190,7 +2230,7 @@ module Aws::PCS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pcs'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

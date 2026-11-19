@@ -254,6 +254,14 @@ module Aws::PCS
     #   Cgroup settings.
     #   @return [Array<Types::CgroupCustomSetting>]
     #
+    # @!attribute [rw] job_submit_plugins
+    #   The job submit plugins to run on the cluster controller. Use job
+    #   submit plugins to execute custom scripts during job submission and
+    #   job modification to validate or modify the job's configuration.
+    #   Custom scripts can accept or reject jobs based on their
+    #   configuration or modify the configuration before job execution.
+    #   @return [Array<Types::JobSubmitPlugin>]
+    #
     # @!attribute [rw] auth_key
     #   The shared Slurm key for authentication, also known as the **cluster
     #   secret**.
@@ -279,6 +287,7 @@ module Aws::PCS
       :slurm_custom_settings,
       :slurmdbd_custom_settings,
       :cgroup_custom_settings,
+      :job_submit_plugins,
       :auth_key,
       :jwt_auth,
       :accounting,
@@ -310,6 +319,14 @@ module Aws::PCS
     #   Cgroup settings.
     #   @return [Array<Types::CgroupCustomSetting>]
     #
+    # @!attribute [rw] job_submit_plugins
+    #   The job submit plugins to run on the cluster controller. Use job
+    #   submit plugins to execute custom scripts during job submission and
+    #   job modification to validate or modify the job's configuration.
+    #   Custom scripts can accept or reject jobs based on their
+    #   configuration or modify the configuration before job execution.
+    #   @return [Array<Types::JobSubmitPlugin>]
+    #
     # @!attribute [rw] accounting
     #   The accounting configuration includes configurable settings for
     #   Slurm accounting.
@@ -326,6 +343,7 @@ module Aws::PCS
       :slurm_custom_settings,
       :slurmdbd_custom_settings,
       :cgroup_custom_settings,
+      :job_submit_plugins,
       :accounting,
       :slurm_rest)
       SENSITIVE = []
@@ -1377,6 +1395,67 @@ module Aws::PCS
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A job submit plugin configuration, including its name, runtime
+    # language, and script source.
+    #
+    # @!attribute [rw] name
+    #   A unique name for the plugin. The name can be up to 64 characters
+    #   long. Valid characters are letters, numbers, spaces, underscores
+    #   (`_`), and hyphens (`-`). The first character must be a letter or a
+    #   number.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The runtime language used to execute the custom script. Valid
+    #   values:
+    #
+    #   * `STARLARK` – The script uses Starlark syntax.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] script_source
+    #   The source location and integrity information for the script.
+    #   @return [Types::JobSubmitScriptSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/JobSubmitPlugin AWS API Documentation
+    #
+    class JobSubmitPlugin < Struct.new(
+      :name,
+      :type,
+      :script_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source location and integrity information for the script.
+    #
+    # @!attribute [rw] script_location
+    #   The location of the script. Specify an Amazon S3 URI in the format
+    #   `s3://bucket-name/key`.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_version_id
+    #   The Amazon S3 version ID of the script. Use this value to pin the
+    #   script to a specific version in a versioned Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] checksum
+    #   The SHA-256 checksum of the script content, as a 64-character
+    #   hexadecimal string. This value is optional. When specified, PCS uses
+    #   this value to verify the integrity of the downloaded script.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/JobSubmitScriptSource AWS API Documentation
+    #
+    class JobSubmitScriptSource < Struct.new(
+      :script_location,
+      :s3_version_id,
+      :checksum)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2590,6 +2669,14 @@ module Aws::PCS
     #   Cgroup settings.
     #   @return [Array<Types::CgroupCustomSetting>]
     #
+    # @!attribute [rw] job_submit_plugins
+    #   The job submit plugins to run on the cluster controller. Use job
+    #   submit plugins to execute custom scripts during job submission and
+    #   job modification to validate or modify the job's configuration.
+    #   Custom scripts can accept or reject jobs based on their
+    #   configuration or modify the configuration before job execution.
+    #   @return [Array<Types::JobSubmitPlugin>]
+    #
     # @!attribute [rw] accounting
     #   The accounting configuration includes configurable settings for
     #   Slurm accounting.
@@ -2606,6 +2693,7 @@ module Aws::PCS
       :slurm_custom_settings,
       :slurmdbd_custom_settings,
       :cgroup_custom_settings,
+      :job_submit_plugins,
       :accounting,
       :slurm_rest)
       SENSITIVE = []

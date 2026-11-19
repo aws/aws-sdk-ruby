@@ -1521,7 +1521,8 @@ module Aws::Route53
       req.send_request(options)
     end
 
-    # Adds, edits, or deletes tags for a health check or a hosted zone.
+    # Adds, edits, or deletes tags for a health check, a health check
+    # source, or a hosted zone.
     #
     # For information about using tags for cost allocation, see [Using Cost
     # Allocation Tags][1] in the *Billing and Cost Management User Guide*.
@@ -1535,6 +1536,8 @@ module Aws::Route53
     #
     #   * The resource type for health checks is `healthcheck`.
     #
+    #   * The resource type for health check sources is `healthchecksource`.
+    #
     #   * The resource type for hosted zones is `hostedzone`.
     #
     # @option params [required, String] :resource_id
@@ -1546,7 +1549,8 @@ module Aws::Route53
     #   to the specified health check or hosted zone and/or the tags that you
     #   want to edit `Value` for.
     #
-    #   You can add a maximum of 10 tags to a health check or a hosted zone.
+    #   You can add a maximum of 10 tags to a health check, a health check
+    #   source, or a hosted zone.
     #
     # @option params [Array<String>] :remove_tag_keys
     #   A complex type that contains a list of the tags that you want to
@@ -1585,7 +1589,7 @@ module Aws::Route53
     # @example Request syntax with placeholder values
     #
     #   resp = client.change_tags_for_resource({
-    #     resource_type: "healthcheck", # required, accepts healthcheck, hostedzone
+    #     resource_type: "healthcheck", # required, accepts healthcheck, hostedzone, healthchecksource
     #     resource_id: "TagResourceId", # required
     #     add_tags: [
     #       {
@@ -1663,9 +1667,13 @@ module Aws::Route53
     # You can associate health checks with failover resource record sets in
     # a private hosted zone. Note the following:
     #
-    # * Route 53 health checkers are outside the VPC. To check the health of
-    #   an endpoint within a VPC by IP address, you must assign a public IP
-    #   address to the instance in the VPC.
+    # * For a public health check, Route 53 health checkers are outside the
+    #   VPC. To check the health of an endpoint within a VPC by IP address,
+    #   you must assign a public IP address to the instance in the VPC.
+    #
+    # * To check the health of an endpoint within a VPC by using a private
+    #   IP address, use a private endpoint health check (`EndpointType` of
+    #   `PRIVATE`). For more information, see `CreateHealthCheckSource`.
     #
     # * You can configure a health checker to check the health of an
     #   external resource that the instance relies on, such as a database
@@ -1747,6 +1755,8 @@ module Aws::Route53
     #       },
     #       insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
     #       routing_control_arn: "RoutingControlArn",
+    #       endpoint_type: "PUBLIC", # accepts PUBLIC, PRIVATE
+    #       health_check_source_id: "HealthCheckSourceId",
     #     },
     #   })
     #
@@ -1777,6 +1787,8 @@ module Aws::Route53
     #   resp.health_check.health_check_config.alarm_identifier.name #=> String
     #   resp.health_check.health_check_config.insufficient_data_health_status #=> String, one of "Healthy", "Unhealthy", "LastKnownStatus"
     #   resp.health_check.health_check_config.routing_control_arn #=> String
+    #   resp.health_check.health_check_config.endpoint_type #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.health_check.health_check_config.health_check_source_id #=> String
     #   resp.health_check.health_check_version #=> Integer
     #   resp.health_check.cloud_watch_alarm_configuration.evaluation_periods #=> Integer
     #   resp.health_check.cloud_watch_alarm_configuration.threshold #=> Float
@@ -1796,6 +1808,93 @@ module Aws::Route53
     # @param [Hash] params ({})
     def create_health_check(params = {}, options = {})
       req = build_request(:create_health_check, params)
+      req.send_request(options)
+    end
+
+    # Creates a health check source, which defines the virtual private cloud
+    # (VPC), subnets, and security groups from which Route 53 sends private
+    # endpoint health check requests. To use this operation, you must have
+    # the `route53:CreateHealthCheckSource` permission. You must also have
+    # permission to create a service-linked role.
+    #
+    # Specify a VPC, one subnet in each Availability Zone that Route 53 uses
+    # for private endpoint health checks in the Amazon Web Services Region,
+    # and one or more security groups for each subnet. The security groups
+    # must allow outbound traffic to the endpoints that you want to check.
+    #
+    # Route 53 creates a health check source asynchronously, and the initial
+    # `HealthCheckSourceStatus` is `CREATE_PENDING`. Call
+    # `GetHealthCheckSource` until the status is `CREATE_COMPLETED` before
+    # you create health checks that use the source. You can't change the
+    # configuration of a health check source after you create it.
+    #
+    # If AWS Identity and Access Management (IAM) is still deleting the
+    # Route 53 service-linked role for your account, the request fails with
+    # `InvalidInput`. Retry after the deletion completes.
+    #
+    # @option params [String] :caller_reference
+    #   A unique, case-sensitive identifier that ensures that the operation
+    #   completes no more than one time. If you retry a
+    #   `CreateHealthCheckSource` request with the same `CallerReference` and
+    #   the same settings as a previous request, Route 53 returns the existing
+    #   health check source without creating a duplicate. If that health check
+    #   source has a status of `CREATE_FAILED`, Route 53 tries to create it
+    #   again. To create a new health check source after a failure, specify a
+    #   new value for `CallerReference`. If a health check source with the
+    #   same `CallerReference` already exists and the settings differ,
+    #   Route 53 returns a `HealthCheckSourceAlreadyExists` error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::HealthCheckSourceConfig] :health_check_source_config
+    #   A complex type that contains the virtual private cloud (VPC), subnets,
+    #   and security groups for the health check source.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A complex type that contains a list of the tags that you want to apply
+    #   to the health check source when you create it.
+    #
+    # @return [Types::CreateHealthCheckSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateHealthCheckSourceResponse#health_check_source_id #health_check_source_id} => String
+    #   * {Types::CreateHealthCheckSourceResponse#health_check_source_status #health_check_source_status} => String
+    #   * {Types::CreateHealthCheckSourceResponse#location #location} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_health_check_source({
+    #     caller_reference: "HealthCheckNonce",
+    #     health_check_source_config: { # required
+    #       vpc_id: "VPCId", # required
+    #       subnet_configuration_list: [ # required
+    #         {
+    #           subnet_id: "SubnetId", # required
+    #           availability_zone_id: "AvailabilityZoneId", # required
+    #           security_group_id_list: ["SecurityGroupId"], # required
+    #         },
+    #       ],
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.health_check_source_id #=> String
+    #   resp.health_check_source_status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_COMPLETED", "CREATE_FAILED", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_COMPLETED", "DELETE_FAILED"
+    #   resp.location #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHealthCheckSource AWS API Documentation
+    #
+    # @overload create_health_check_source(params = {})
+    # @param [Hash] params ({})
+    def create_health_check_source(params = {}, options = {})
+      req = build_request(:create_health_check_source, params)
       req.send_request(options)
     end
 
@@ -2805,6 +2904,53 @@ module Aws::Route53
       req.send_request(options)
     end
 
+    # Deletes a health check source. Before you delete a health check
+    # source, delete or update any health checks that reference it.
+    # Otherwise, the request fails with `InvalidInput`. The request also
+    # fails with `InvalidInput` if the status of the health check source is
+    # `CREATE_PENDING` or `CREATE_IN_PROGRESS`. Wait until the status is
+    # `CREATE_COMPLETED` or `CREATE_FAILED`, and then try again.
+    #
+    # Route 53 deletes a health check source asynchronously, and the initial
+    # `HealthCheckSourceStatus` is `DELETE_PENDING`. Call
+    # `GetHealthCheckSource` to track progress. After the deletion
+    # completes, `GetHealthCheckSource` returns `NoSuchHealthCheckSource`
+    # and the health check source no longer appears in the results of
+    # `ListHealthCheckSources`. If you delete a health check source that is
+    # already deleted, the request fails with `NoSuchHealthCheckSource`.
+    #
+    # To use this operation, you must have the
+    # `route53:DeleteHealthCheckSource` permission. You must also have
+    # permission to create a service-linked role.
+    #
+    # @option params [required, String] :health_check_source_id
+    #   The ID of the health check source that you want to delete.
+    #
+    # @return [Types::DeleteHealthCheckSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteHealthCheckSourceResponse#health_check_source_id #health_check_source_id} => String
+    #   * {Types::DeleteHealthCheckSourceResponse#health_check_source_status #health_check_source_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_health_check_source({
+    #     health_check_source_id: "HealthCheckSourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.health_check_source_id #=> String
+    #   resp.health_check_source_status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_COMPLETED", "CREATE_FAILED", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_COMPLETED", "DELETE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHealthCheckSource AWS API Documentation
+    #
+    # @overload delete_health_check_source(params = {})
+    # @param [Hash] params ({})
+    def delete_health_check_source(params = {}, options = {})
+      req = build_request(:delete_health_check_source, params)
+      req.send_request(options)
+    end
+
     # Deletes a hosted zone.
     #
     # If the hosted zone was created by another service, such as Cloud Map,
@@ -3351,6 +3497,9 @@ module Aws::Route53
     #   * **MAX\_HEALTH\_CHECKS\_BY\_OWNER**: The maximum number of health
     #     checks that you can create using the current account.
     #
+    #   * **MAX\_HEALTH\_CHECK\_SOURCES\_BY\_OWNER** The maximum number of
+    #     health check sources that you can create using the current account.
+    #
     #   * **MAX\_HOSTED\_ZONES\_BY\_OWNER**: The maximum number of hosted
     #     zones that you can create using the current account.
     #
@@ -3374,12 +3523,12 @@ module Aws::Route53
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_account_limit({
-    #     type: "MAX_HEALTH_CHECKS_BY_OWNER", # required, accepts MAX_HEALTH_CHECKS_BY_OWNER, MAX_HOSTED_ZONES_BY_OWNER, MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER, MAX_REUSABLE_DELEGATION_SETS_BY_OWNER, MAX_TRAFFIC_POLICIES_BY_OWNER
+    #     type: "MAX_HEALTH_CHECKS_BY_OWNER", # required, accepts MAX_HEALTH_CHECKS_BY_OWNER, MAX_HOSTED_ZONES_BY_OWNER, MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER, MAX_REUSABLE_DELEGATION_SETS_BY_OWNER, MAX_TRAFFIC_POLICIES_BY_OWNER, MAX_HEALTH_CHECK_SOURCES_BY_OWNER
     #   })
     #
     # @example Response structure
     #
-    #   resp.limit.type #=> String, one of "MAX_HEALTH_CHECKS_BY_OWNER", "MAX_HOSTED_ZONES_BY_OWNER", "MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER", "MAX_REUSABLE_DELEGATION_SETS_BY_OWNER", "MAX_TRAFFIC_POLICIES_BY_OWNER"
+    #   resp.limit.type #=> String, one of "MAX_HEALTH_CHECKS_BY_OWNER", "MAX_HOSTED_ZONES_BY_OWNER", "MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER", "MAX_REUSABLE_DELEGATION_SETS_BY_OWNER", "MAX_TRAFFIC_POLICIES_BY_OWNER", "MAX_HEALTH_CHECK_SOURCES_BY_OWNER"
     #   resp.limit.value #=> Integer
     #   resp.count #=> Integer
     #
@@ -3655,6 +3804,8 @@ module Aws::Route53
     #   resp.health_check.health_check_config.alarm_identifier.name #=> String
     #   resp.health_check.health_check_config.insufficient_data_health_status #=> String, one of "Healthy", "Unhealthy", "LastKnownStatus"
     #   resp.health_check.health_check_config.routing_control_arn #=> String
+    #   resp.health_check.health_check_config.endpoint_type #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.health_check.health_check_config.health_check_source_id #=> String
     #   resp.health_check.health_check_version #=> Integer
     #   resp.health_check.cloud_watch_alarm_configuration.evaluation_periods #=> Integer
     #   resp.health_check.cloud_watch_alarm_configuration.threshold #=> Float
@@ -3734,6 +3885,52 @@ module Aws::Route53
     # @param [Hash] params ({})
     def get_health_check_last_failure_reason(params = {}, options = {})
       req = build_request(:get_health_check_last_failure_reason, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a specified health check source, including its
+    # status and the virtual private cloud (VPC), subnets, and security
+    # groups that it uses.
+    #
+    # @option params [required, String] :health_check_source_id
+    #   The ID of the health check source that you want to get information
+    #   about.
+    #
+    # @return [Types::GetHealthCheckSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetHealthCheckSourceResponse#health_check_source #health_check_source} => Types::HealthCheckSource
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_health_check_source({
+    #     health_check_source_id: "HealthCheckSourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.health_check_source.health_check_source_id #=> String
+    #   resp.health_check_source.health_check_source_status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_COMPLETED", "CREATE_FAILED", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_COMPLETED", "DELETE_FAILED"
+    #   resp.health_check_source.health_check_source_config.vpc_id #=> String
+    #   resp.health_check_source.health_check_source_config.subnet_configuration_list #=> Array
+    #   resp.health_check_source.health_check_source_config.subnet_configuration_list[0].subnet_id #=> String
+    #   resp.health_check_source.health_check_source_config.subnet_configuration_list[0].availability_zone_id #=> String
+    #   resp.health_check_source.health_check_source_config.subnet_configuration_list[0].security_group_id_list #=> Array
+    #   resp.health_check_source.health_check_source_config.subnet_configuration_list[0].security_group_id_list[0] #=> String
+    #   resp.health_check_source.status_reason_code #=> String, one of "INSUFFICIENT_SUBNET_IPS", "EC2_LIMIT_EXCEEDED", "INVALID_SUBNET", "INVALID_SECURITY_GROUP", "INVALID_CONFIGURATION", "SLR_MISSING_OR_NOT_ASSUMABLE", "INTERNAL_ERROR"
+    #   resp.health_check_source.status_reason #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * health_check_source_created
+    #   * health_check_source_deleted
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckSource AWS API Documentation
+    #
+    # @overload get_health_check_source(params = {})
+    # @param [Hash] params ({})
+    def get_health_check_source(params = {}, options = {})
+      req = build_request(:get_health_check_source, params)
       req.send_request(options)
     end
 
@@ -4406,6 +4603,60 @@ module Aws::Route53
       req.send_request(options)
     end
 
+    # Retrieves a list of the health check sources that are associated with
+    # the current Amazon Web Services account.
+    #
+    # Results are paginated. To get more results, specify the `NextToken`
+    # value from the previous response for `NextToken`.
+    #
+    # @option params [String] :next_token
+    #   The `NextToken` value from the previous response, if it included one.
+    #   Specify it to get the next group of health check sources.
+    #
+    # @option params [String] :max_results
+    #   The maximum number of health check sources that you want
+    #   `ListHealthCheckSources` to return. Route 53 returns a maximum of 100
+    #   health check sources. If you specify a value greater than 100,
+    #   Route 53 returns only the first 100.
+    #
+    # @return [Types::ListHealthCheckSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListHealthCheckSourcesResponse#health_check_sources #health_check_sources} => Array&lt;Types::HealthCheckSource&gt;
+    #   * {Types::ListHealthCheckSourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_health_check_sources({
+    #     next_token: "PageMarker",
+    #     max_results: "MaxResults",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.health_check_sources #=> Array
+    #   resp.health_check_sources[0].health_check_source_id #=> String
+    #   resp.health_check_sources[0].health_check_source_status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_COMPLETED", "CREATE_FAILED", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_COMPLETED", "DELETE_FAILED"
+    #   resp.health_check_sources[0].health_check_source_config.vpc_id #=> String
+    #   resp.health_check_sources[0].health_check_source_config.subnet_configuration_list #=> Array
+    #   resp.health_check_sources[0].health_check_source_config.subnet_configuration_list[0].subnet_id #=> String
+    #   resp.health_check_sources[0].health_check_source_config.subnet_configuration_list[0].availability_zone_id #=> String
+    #   resp.health_check_sources[0].health_check_source_config.subnet_configuration_list[0].security_group_id_list #=> Array
+    #   resp.health_check_sources[0].health_check_source_config.subnet_configuration_list[0].security_group_id_list[0] #=> String
+    #   resp.health_check_sources[0].status_reason_code #=> String, one of "INSUFFICIENT_SUBNET_IPS", "EC2_LIMIT_EXCEEDED", "INVALID_SUBNET", "INVALID_SECURITY_GROUP", "INVALID_CONFIGURATION", "SLR_MISSING_OR_NOT_ASSUMABLE", "INTERNAL_ERROR"
+    #   resp.health_check_sources[0].status_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHealthCheckSources AWS API Documentation
+    #
+    # @overload list_health_check_sources(params = {})
+    # @param [Hash] params ({})
+    def list_health_check_sources(params = {}, options = {})
+      req = build_request(:list_health_check_sources, params)
+      req.send_request(options)
+    end
+
     # Retrieve a list of the health checks that are associated with the
     # current Amazon Web Services account.
     #
@@ -4472,6 +4723,8 @@ module Aws::Route53
     #   resp.health_checks[0].health_check_config.alarm_identifier.name #=> String
     #   resp.health_checks[0].health_check_config.insufficient_data_health_status #=> String, one of "Healthy", "Unhealthy", "LastKnownStatus"
     #   resp.health_checks[0].health_check_config.routing_control_arn #=> String
+    #   resp.health_checks[0].health_check_config.endpoint_type #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.health_checks[0].health_check_config.health_check_source_id #=> String
     #   resp.health_checks[0].health_check_version #=> Integer
     #   resp.health_checks[0].cloud_watch_alarm_configuration.evaluation_periods #=> Integer
     #   resp.health_checks[0].cloud_watch_alarm_configuration.threshold #=> Float
@@ -4494,6 +4747,101 @@ module Aws::Route53
     # @param [Hash] params ({})
     def list_health_checks(params = {}, options = {})
       req = build_request(:list_health_checks, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of the health checks that use a specified health
+    # check source.
+    #
+    # Results are paginated. If `IsTruncated` is `true`, specify the
+    # `NextMarker` value for `marker` to get more results.
+    #
+    # @option params [required, String] :health_check_source_id
+    #   The ID of the health check source whose health checks you want to
+    #   list.
+    #
+    # @option params [String] :marker
+    #   The `NextMarker` value from the previous response, if the value of
+    #   `IsTruncated` was `true`. Specify it to get the next group of health
+    #   checks. If `IsTruncated` was `false`, there are no more health checks
+    #   to get.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of health checks that you want
+    #   `ListHealthChecksBySource` to return. Route 53 returns a maximum of
+    #   1000 health checks. If you specify a value greater than 1000, Route 53
+    #   returns only the first 1000.
+    #
+    # @return [Types::ListHealthChecksBySourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListHealthChecksBySourceResponse#health_checks #health_checks} => Array&lt;Types::HealthCheck&gt;
+    #   * {Types::ListHealthChecksBySourceResponse#marker #marker} => String
+    #   * {Types::ListHealthChecksBySourceResponse#is_truncated #is_truncated} => Boolean
+    #   * {Types::ListHealthChecksBySourceResponse#next_marker #next_marker} => String
+    #   * {Types::ListHealthChecksBySourceResponse#max_items #max_items} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_health_checks_by_source({
+    #     health_check_source_id: "HealthCheckSourceId", # required
+    #     marker: "PageMarker",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.health_checks #=> Array
+    #   resp.health_checks[0].id #=> String
+    #   resp.health_checks[0].caller_reference #=> String
+    #   resp.health_checks[0].linked_service.service_principal #=> String
+    #   resp.health_checks[0].linked_service.description #=> String
+    #   resp.health_checks[0].health_check_config.ip_address #=> String
+    #   resp.health_checks[0].health_check_config.port #=> Integer
+    #   resp.health_checks[0].health_check_config.type #=> String, one of "HTTP", "HTTPS", "HTTP_STR_MATCH", "HTTPS_STR_MATCH", "TCP", "CALCULATED", "CLOUDWATCH_METRIC", "RECOVERY_CONTROL"
+    #   resp.health_checks[0].health_check_config.resource_path #=> String
+    #   resp.health_checks[0].health_check_config.fully_qualified_domain_name #=> String
+    #   resp.health_checks[0].health_check_config.search_string #=> String
+    #   resp.health_checks[0].health_check_config.request_interval #=> Integer
+    #   resp.health_checks[0].health_check_config.failure_threshold #=> Integer
+    #   resp.health_checks[0].health_check_config.measure_latency #=> Boolean
+    #   resp.health_checks[0].health_check_config.inverted #=> Boolean
+    #   resp.health_checks[0].health_check_config.disabled #=> Boolean
+    #   resp.health_checks[0].health_check_config.health_threshold #=> Integer
+    #   resp.health_checks[0].health_check_config.child_health_checks #=> Array
+    #   resp.health_checks[0].health_check_config.child_health_checks[0] #=> String
+    #   resp.health_checks[0].health_check_config.enable_sni #=> Boolean
+    #   resp.health_checks[0].health_check_config.regions #=> Array
+    #   resp.health_checks[0].health_check_config.regions[0] #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1"
+    #   resp.health_checks[0].health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-central-1", "eu-central-2", "eu-west-1", "eu-west-2", "eu-west-3", "ap-east-1", "me-south-1", "me-central-1", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-northwest-1", "cn-north-1", "af-south-1", "eu-south-1", "eu-south-2", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1", "ap-southeast-4", "il-central-1", "ca-west-1", "ap-southeast-5", "mx-central-1", "us-isof-south-1", "us-isof-east-1", "ap-southeast-7", "ap-east-2", "eu-isoe-west-1", "ap-southeast-6", "us-isob-west-1", "eusc-de-east-1"
+    #   resp.health_checks[0].health_check_config.alarm_identifier.name #=> String
+    #   resp.health_checks[0].health_check_config.insufficient_data_health_status #=> String, one of "Healthy", "Unhealthy", "LastKnownStatus"
+    #   resp.health_checks[0].health_check_config.routing_control_arn #=> String
+    #   resp.health_checks[0].health_check_config.endpoint_type #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.health_checks[0].health_check_config.health_check_source_id #=> String
+    #   resp.health_checks[0].health_check_version #=> Integer
+    #   resp.health_checks[0].cloud_watch_alarm_configuration.evaluation_periods #=> Integer
+    #   resp.health_checks[0].cloud_watch_alarm_configuration.threshold #=> Float
+    #   resp.health_checks[0].cloud_watch_alarm_configuration.comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
+    #   resp.health_checks[0].cloud_watch_alarm_configuration.period #=> Integer
+    #   resp.health_checks[0].cloud_watch_alarm_configuration.metric_name #=> String
+    #   resp.health_checks[0].cloud_watch_alarm_configuration.namespace #=> String
+    #   resp.health_checks[0].cloud_watch_alarm_configuration.statistic #=> String, one of "Average", "Sum", "SampleCount", "Maximum", "Minimum"
+    #   resp.health_checks[0].cloud_watch_alarm_configuration.dimensions #=> Array
+    #   resp.health_checks[0].cloud_watch_alarm_configuration.dimensions[0].name #=> String
+    #   resp.health_checks[0].cloud_watch_alarm_configuration.dimensions[0].value #=> String
+    #   resp.marker #=> String
+    #   resp.is_truncated #=> Boolean
+    #   resp.next_marker #=> String
+    #   resp.max_items #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHealthChecksBySource AWS API Documentation
+    #
+    # @overload list_health_checks_by_source(params = {})
+    # @param [Hash] params ({})
+    def list_health_checks_by_source(params = {}, options = {})
+      req = build_request(:list_health_checks_by_source, params)
       req.send_request(options)
     end
 
@@ -5233,6 +5581,8 @@ module Aws::Route53
     #
     #   * The resource type for health checks is `healthcheck`.
     #
+    #   * The resource type for health check sources is `healthchecksource`.
+    #
     #   * The resource type for hosted zones is `hostedzone`.
     #
     # @option params [required, String] :resource_id
@@ -5245,13 +5595,13 @@ module Aws::Route53
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
-    #     resource_type: "healthcheck", # required, accepts healthcheck, hostedzone
+    #     resource_type: "healthcheck", # required, accepts healthcheck, hostedzone, healthchecksource
     #     resource_id: "TagResourceId", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.resource_tag_set.resource_type #=> String, one of "healthcheck", "hostedzone"
+    #   resp.resource_tag_set.resource_type #=> String, one of "healthcheck", "hostedzone", "healthchecksource"
     #   resp.resource_tag_set.resource_id #=> String
     #   resp.resource_tag_set.tags #=> Array
     #   resp.resource_tag_set.tags[0].key #=> String
@@ -5280,6 +5630,8 @@ module Aws::Route53
     #
     #   * The resource type for health checks is `healthcheck`.
     #
+    #   * The resource type for health check sources is `healthchecksource`.
+    #
     #   * The resource type for hosted zones is `hostedzone`.
     #
     # @option params [required, Array<String>] :resource_ids
@@ -5293,14 +5645,14 @@ module Aws::Route53
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resources({
-    #     resource_type: "healthcheck", # required, accepts healthcheck, hostedzone
+    #     resource_type: "healthcheck", # required, accepts healthcheck, hostedzone, healthchecksource
     #     resource_ids: ["TagResourceId"], # required
     #   })
     #
     # @example Response structure
     #
     #   resp.resource_tag_sets #=> Array
-    #   resp.resource_tag_sets[0].resource_type #=> String, one of "healthcheck", "hostedzone"
+    #   resp.resource_tag_sets[0].resource_type #=> String, one of "healthcheck", "hostedzone", "healthchecksource"
     #   resp.resource_tag_sets[0].resource_id #=> String
     #   resp.resource_tag_sets[0].tags #=> Array
     #   resp.resource_tag_sets[0].tags[0].key #=> String
@@ -5969,11 +6321,11 @@ module Aws::Route53
     #     addresses as described in RFC 5952, for example,
     #     `2001:db8:85a3::abcd:1:2345`.
     #
-    #   If the endpoint is an EC2 instance, we recommend that you create an
-    #   Elastic IP address, associate it with your EC2 instance, and specify
-    #   the Elastic IP address for `IPAddress`. This ensures that the IP
-    #   address of your instance never changes. For more information, see the
-    #   applicable documentation:
+    #   For a public health check, if the endpoint is an EC2 instance, we
+    #   recommend that you create an Elastic IP address, associate it with
+    #   your EC2 instance, and specify the Elastic IP address for `IPAddress`.
+    #   This ensures that the IP address of your instance never changes. For
+    #   more information, see the applicable documentation:
     #
     #   * Linux: [Elastic IP Addresses (EIP)][1] in the *Amazon EC2 User Guide
     #     for Linux Instances*
@@ -5989,16 +6341,22 @@ module Aws::Route53
     #
     #   For more information, see [FullyQualifiedDomainName][3].
     #
-    #   Constraints: Route 53 can't check the health of endpoints for which
+    #   Constraints: For a public health check (`EndpointType` of `PUBLIC`,
+    #   the default), Route 53 can't check the health of endpoints for which
     #   the IP address is in local, private, non-routable, or multicast
     #   ranges. For more information about IP addresses for which you can't
-    #   create health checks, see the following documents:
+    #   create public health checks, see the following documents:
     #
     #   * [RFC 5735, Special Use IPv4 Addresses][4]
     #
     #   * [RFC 6598, IANA-Reserved IPv4 Prefix for Shared Address Space][5]
     #
     #   * [RFC 5156, Special-Use IPv6 Addresses][6]
+    #
+    #   For a private endpoint health check (`EndpointType` of `PRIVATE`), if
+    #   you specify `IPAddress`, it must be a private IPv4 or IPv6 address.
+    #   Route 53 sends health checks to it from the health check source that
+    #   you specify in `HealthCheckSourceId`.
     #
     #
     #
@@ -6254,6 +6612,16 @@ module Aws::Route53
     #   [3]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions
     #   [4]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-ResourcePath
     #
+    # @option params [String] :health_check_source_id
+    #   The ID of the health check source from which Route 53 sends requests
+    #   to the endpoint. Applies only to health checks that have an
+    #   `EndpointType` of `PRIVATE`. The health check source must be in the
+    #   same account and have a status of `CREATE_COMPLETED`.
+    #
+    #   Each health check source supports a limited number of active health
+    #   checks. If you reach that limit, specify a different health check
+    #   source.
+    #
     # @return [Types::UpdateHealthCheckResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateHealthCheckResponse#health_check #health_check} => Types::HealthCheck
@@ -6281,6 +6649,7 @@ module Aws::Route53
     #     },
     #     insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
     #     reset_elements: ["FullyQualifiedDomainName"], # accepts FullyQualifiedDomainName, Regions, ResourcePath, ChildHealthChecks
+    #     health_check_source_id: "HealthCheckSourceId",
     #   })
     #
     # @example Response structure
@@ -6310,6 +6679,8 @@ module Aws::Route53
     #   resp.health_check.health_check_config.alarm_identifier.name #=> String
     #   resp.health_check.health_check_config.insufficient_data_health_status #=> String, one of "Healthy", "Unhealthy", "LastKnownStatus"
     #   resp.health_check.health_check_config.routing_control_arn #=> String
+    #   resp.health_check.health_check_config.endpoint_type #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.health_check.health_check_config.health_check_source_id #=> String
     #   resp.health_check.health_check_version #=> Integer
     #   resp.health_check.cloud_watch_alarm_configuration.evaluation_periods #=> Integer
     #   resp.health_check.cloud_watch_alarm_configuration.threshold #=> Float
@@ -6550,7 +6921,7 @@ module Aws::Route53
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.152.0'
+      context[:gem_version] = '1.153.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -6616,9 +6987,11 @@ module Aws::Route53
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                  | params              | :delay   | :max_attempts |
-    # | ---------------------------- | ------------------- | -------- | ------------- |
-    # | resource_record_sets_changed | {Client#get_change} | 30       | 60            |
+    # | waiter_name                  | params                           | :delay   | :max_attempts |
+    # | ---------------------------- | -------------------------------- | -------- | ------------- |
+    # | health_check_source_created  | {Client#get_health_check_source} | 15       | 40            |
+    # | health_check_source_deleted  | {Client#get_health_check_source} | 15       | 40            |
+    # | resource_record_sets_changed | {Client#get_change}              | 30       | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -6669,6 +7042,8 @@ module Aws::Route53
 
     def waiters
       {
+        health_check_source_created: Waiters::HealthCheckSourceCreated,
+        health_check_source_deleted: Waiters::HealthCheckSourceDeleted,
         resource_record_sets_changed: Waiters::ResourceRecordSetsChanged
       }
     end

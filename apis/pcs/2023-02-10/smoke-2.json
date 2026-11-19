@@ -1,6 +1,24 @@
 {
   "version" : 2,
   "testCases" : [ {
+    "id" : "GetQueueFailure_AccessDeniedException",
+    "operationName" : "GetQueue",
+    "input" : {
+      "clusterIdentifier" : "pcs_donotexist",
+      "queueIdentifier" : "pcs_donotexist"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "AccessDeniedException"
+      }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
     "id" : "InstanceArnSuccess",
     "operationName" : "CreateComputeNodeGroup",
     "input" : {
@@ -49,6 +67,24 @@
       "useAccountIdRouting" : true
     }
   }, {
+    "id" : "GetComputeNodeGroup_AccessDeniedException",
+    "operationName" : "GetComputeNodeGroup",
+    "input" : {
+      "clusterIdentifier" : "pcs_donotexist",
+      "computeNodeGroupIdentifier" : "pcs_donotexist"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "AccessDeniedException"
+      }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
     "id" : "GetCluster_AccessDeniedException",
     "operationName" : "GetCluster",
     "input" : {
@@ -66,8 +102,8 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "UpdateCluster_AccessDeniedException",
-    "operationName" : "UpdateCluster",
+    "id" : "ListComputeNodeGroups_AccessDeniedException",
+    "operationName" : "ListComputeNodeGroups",
     "input" : {
       "clusterIdentifier" : "pcs_donotexist"
     },
@@ -96,46 +132,10 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListComputeNodeGroups_AccessDeniedException",
-    "operationName" : "ListComputeNodeGroups",
+    "id" : "UpdateCluster_AccessDeniedException",
+    "operationName" : "UpdateCluster",
     "input" : {
       "clusterIdentifier" : "pcs_donotexist"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "AccessDeniedException"
-      }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetComputeNodeGroup_AccessDeniedException",
-    "operationName" : "GetComputeNodeGroup",
-    "input" : {
-      "clusterIdentifier" : "pcs_donotexist",
-      "computeNodeGroupIdentifier" : "pcs_donotexist"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "AccessDeniedException"
-      }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetQueueFailure_AccessDeniedException",
-    "operationName" : "GetQueue",
-    "input" : {
-      "clusterIdentifier" : "pcs_donotexist",
-      "queueIdentifier" : "pcs_donotexist"
     },
     "expectation" : {
       "failure" : {

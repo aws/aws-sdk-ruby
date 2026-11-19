@@ -1452,6 +1452,9 @@ module Aws::ConnectCases
     # There's a quota for the number of fields allowed in a Custom type
     # related item. See [Connect Customer Cases quotas][1].
     #
+    # There's a quota for the number of SLAs that can be attached to a
+    # case. See [Connect Customer Cases quotas][1].
+    #
     # **Use cases**
     #
     # Following are examples of related items that you may want to associate
@@ -3978,6 +3981,11 @@ module Aws::ConnectCases
     #   a quota for the number of fields allowed in a Custom type related
     #   item. See [Connect Customer Cases quotas][1].
     #
+    # * **Sla** - Update the target duration (`targetSlaMinutes`) of an SLA.
+    #   The new deadline is counted from when the SLA was created. The SLA
+    #   status is recalculated against the new deadline: an open SLA becomes
+    #   Active or Overdue, and a completed SLA becomes Met or NotMet.
+    #
     # **Important things to know**
     #
     # * When updating a Custom related item, all existing and new fields,
@@ -4055,6 +4063,11 @@ module Aws::ConnectCases
     #             },
     #           },
     #         ],
+    #       },
+    #       sla: {
+    #         sla_update_configuration: {
+    #           target_sla_minutes: 1, # required
+    #         },
     #       },
     #     },
     #     performed_by: {
@@ -4234,7 +4247,7 @@ module Aws::ConnectCases
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

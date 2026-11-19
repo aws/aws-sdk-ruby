@@ -40,6 +40,12 @@ module Aws::DevOpsAgent
     #   VALID (role validated), INVALID (validation failed).
     #   @return [String]
     #
+    # @!attribute [rw] service_management_role_arn
+    #   The Amazon Resource Name (ARN) of the Organizations service-managed
+    #   role that AIDevOps uses to deploy and manage resources across the
+    #   accounts in your Amazon Web Services Organization.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/AWSConfiguration AWS API Documentation
     #
     class AWSConfiguration < Struct.new(
@@ -47,7 +53,8 @@ module Aws::DevOpsAgent
       :account_id,
       :account_type,
       :agent_elevated_role_arn,
-      :agent_elevated_role_arn_status)
+      :agent_elevated_role_arn_status,
+      :service_management_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -231,6 +238,13 @@ module Aws::DevOpsAgent
     #   not set take their default values.
     #   @return [Hash<String,Boolean>]
     #
+    # @!attribute [rw] aws_source_mode
+    #   The Amazon Web Services source mode for the AgentSpace, indicating
+    #   whether its Amazon Web Services source configuration targets an
+    #   individual Amazon Web Services account or an Amazon Web Services
+    #   Organization.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/AgentSpace AWS API Documentation
     #
     class AgentSpace < Struct.new(
@@ -241,7 +255,8 @@ module Aws::DevOpsAgent
       :updated_at,
       :kms_key_arn,
       :agent_space_id,
-      :preferences)
+      :preferences,
+      :aws_source_mode)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -896,6 +911,12 @@ module Aws::DevOpsAgent
     #   provided take their default values.
     #   @return [Hash<String,Boolean>]
     #
+    # @!attribute [rw] aws_source_mode
+    #   Specifies whether the AgentSpace's Amazon Web Services source
+    #   configuration targets an individual Amazon Web Services account or
+    #   an Amazon Web Services Organization.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/CreateAgentSpaceInput AWS API Documentation
     #
     class CreateAgentSpaceInput < Struct.new(
@@ -905,7 +926,8 @@ module Aws::DevOpsAgent
       :kms_key_arn,
       :client_token,
       :tags,
-      :preferences)
+      :preferences,
+      :aws_source_mode)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -4492,6 +4514,67 @@ module Aws::DevOpsAgent
       include Aws::Structure
     end
 
+    # Describes the current rollout state of an Amazon Web Services
+    # Organization source configuration, including the number of accounts
+    # that have been deployed to and any issues encountered during
+    # deployment.
+    #
+    # @!attribute [rw] deployed_account_count
+    #   The number of accounts in the targeted Amazon Web Services
+    #   Organization or organizational unit that have successfully been
+    #   deployed to.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] issues
+    #   The issues encountered while deploying the source configuration
+    #   across the accounts in the Amazon Web Services Organization.
+    #   @return [Array<Types::OrgSourceIssue>]
+    #
+    # @!attribute [rw] last_evaluated_at
+    #   The timestamp of the most recent evaluation of the organization-wide
+    #   deployment state.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/OrgSourceDeploymentState AWS API Documentation
+    #
+    class OrgSourceDeploymentState < Struct.new(
+      :deployed_account_count,
+      :issues,
+      :last_evaluated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an issue encountered while deploying or evaluating an Amazon
+    # Web Services Organization source configuration.
+    #
+    # @!attribute [rw] reason_code
+    #   A code that identifies the reason for the issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_count
+    #   The number of accounts affected by this issue.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] account_ids
+    #   The Amazon Web Services account IDs affected by this issue.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] message
+    #   A description of the issue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/OrgSourceIssue AWS API Documentation
+    #
+    class OrgSourceIssue < Struct.new(
+      :reason_code,
+      :account_count,
+      :account_ids,
+      :message)
+      SENSITIVE = [:message]
+      include Aws::Structure
+    end
+
     # Authorization configuration options for PagerDuty service.
     #
     # @note PagerDutyAuthorizationConfig is a union - when making an API calls you must set exactly one of the members.
@@ -6178,6 +6261,12 @@ module Aws::DevOpsAgent
     #   AWS source account configuration for monitoring resources.
     #   @return [Types::SourceAwsConfiguration]
     #
+    # @!attribute [rw] source_aws_org
+    #   The Amazon Web Services Organization source configuration used to
+    #   monitor resources across an entire Amazon Web Services Organization
+    #   or specified organizational units.
+    #   @return [Types::SourceAwsOrgConfiguration]
+    #
     # @!attribute [rw] aws
     #   AWS monitor account configuration.
     #   @return [Types::AWSConfiguration]
@@ -6263,6 +6352,7 @@ module Aws::DevOpsAgent
     #
     class ServiceConfiguration < Struct.new(
       :source_aws,
+      :source_aws_org,
       :aws,
       :github,
       :slack,
@@ -6289,6 +6379,7 @@ module Aws::DevOpsAgent
       include Aws::Structure::Union
 
       class SourceAws < ServiceConfiguration; end
+      class SourceAwsOrg < ServiceConfiguration; end
       class Aws < ServiceConfiguration; end
       class Github < ServiceConfiguration; end
       class Slack < ServiceConfiguration; end
@@ -6722,6 +6813,57 @@ module Aws::DevOpsAgent
       include Aws::Structure
     end
 
+    # Configuration for Amazon Web Services Organization-wide source account
+    # integration. Use this configuration to monitor Amazon Web Services
+    # resources across multiple accounts within an organization or within
+    # targeted organizational units.
+    #
+    # @!attribute [rw] account_type
+    #   The account type for this configuration. For Amazon Web Services
+    #   Organization-level configurations, this value is `source`.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit
+    #   The organizational units within the Amazon Web Services Organization
+    #   that are targeted for source monitoring.
+    #   @return [Types::SourceAwsOrgUnit]
+    #
+    # @!attribute [rw] deployment_state
+    #   The current deployment state of the Amazon Web Services
+    #   Organization-wide source configuration.
+    #   @return [Types::OrgSourceDeploymentState]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/SourceAwsOrgConfiguration AWS API Documentation
+    #
+    class SourceAwsOrgConfiguration < Struct.new(
+      :account_type,
+      :organizational_unit,
+      :deployment_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies an Organizations organizational unit and its member
+    # accounts that are targeted for source monitoring.
+    #
+    # @!attribute [rw] organizational_unit_id
+    #   The identifier of the Organizations organizational unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_ids
+    #   The Amazon Web Services account IDs that belong to this
+    #   organizational unit and are targeted for source monitoring.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/SourceAwsOrgUnit AWS API Documentation
+    #
+    class SourceAwsOrgUnit < Struct.new(
+      :organizational_unit_id,
+      :account_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN of the resource to tag.
     #   @return [String]
@@ -7063,6 +7205,13 @@ module Aws::DevOpsAgent
     #   preferences are left unchanged.
     #   @return [Hash<String,Boolean>]
     #
+    # @!attribute [rw] aws_source_mode
+    #   Specifies whether the AgentSpace's Amazon Web Services source
+    #   configuration targets an individual Amazon Web Services account or
+    #   an Amazon Web Services Organization. Use this parameter to switch an
+    #   existing AgentSpace between source modes.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/UpdateAgentSpaceInput AWS API Documentation
     #
     class UpdateAgentSpaceInput < Struct.new(
@@ -7070,7 +7219,8 @@ module Aws::DevOpsAgent
       :name,
       :description,
       :locale,
-      :preferences)
+      :preferences,
+      :aws_source_mode)
       SENSITIVE = [:description]
       include Aws::Structure
     end

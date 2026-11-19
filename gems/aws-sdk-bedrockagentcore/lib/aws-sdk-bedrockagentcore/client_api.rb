@@ -59,6 +59,10 @@ module Aws::BedrockAgentCore
     AutomationStreamStatus = Shapes::StringShape.new(name: 'AutomationStreamStatus')
     AutomationStreamUpdate = Shapes::StructureShape.new(name: 'AutomationStreamUpdate')
     AvailableLimits = Shapes::StructureShape.new(name: 'AvailableLimits')
+    AwsBillingPaymentOptions = Shapes::StructureShape.new(name: 'AwsBillingPaymentOptions')
+    AwsBillingPaymentToken = Shapes::StringShape.new(name: 'AwsBillingPaymentToken')
+    AwsBillingX402PaymentInput = Shapes::StructureShape.new(name: 'AwsBillingX402PaymentInput')
+    AwsBillingX402PaymentOutput = Shapes::StructureShape.new(name: 'AwsBillingX402PaymentOutput')
     BasicAuth = Shapes::StructureShape.new(name: 'BasicAuth')
     BatchCreateMemoryRecordsInput = Shapes::StructureShape.new(name: 'BatchCreateMemoryRecordsInput')
     BatchCreateMemoryRecordsOutput = Shapes::StructureShape.new(name: 'BatchCreateMemoryRecordsOutput')
@@ -220,6 +224,9 @@ module Aws::BedrockAgentCore
     DomainPattern = Shapes::StringShape.new(name: 'DomainPattern')
     DomainPatterns = Shapes::ListShape.new(name: 'DomainPatterns')
     Double = Shapes::FloatShape.new(name: 'Double')
+    DpopJwk = Shapes::StructureShape.new(name: 'DpopJwk')
+    DpopJwkXString = Shapes::StringShape.new(name: 'DpopJwkXString')
+    DpopJwkYString = Shapes::StringShape.new(name: 'DpopJwkYString')
     DuplicateIdException = Shapes::StructureShape.new(name: 'DuplicateIdException')
     EfsAccessPointArn = Shapes::StringShape.new(name: 'EfsAccessPointArn')
     EfsConfiguration = Shapes::StructureShape.new(name: 'EfsConfiguration')
@@ -528,6 +535,8 @@ module Aws::BedrockAgentCore
     InvokeWebSearchInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'InvokeWebSearchInputMaxResultsInteger')
     InvokeWebSearchInputSearchQueryString = Shapes::StringShape.new(name: 'InvokeWebSearchInputSearchQueryString')
     InvokeWebSearchOutput = Shapes::StructureShape.new(name: 'InvokeWebSearchOutput')
+    JwkEllipticCurve = Shapes::StringShape.new(name: 'JwkEllipticCurve')
+    JwkKeyType = Shapes::StringShape.new(name: 'JwkKeyType')
     JwtKeyId = Shapes::StringShape.new(name: 'JwtKeyId')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
     KeyPressArguments = Shapes::StructureShape.new(name: 'KeyPressArguments')
@@ -1096,6 +1105,18 @@ module Aws::BedrockAgentCore
     AvailableLimits.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "updatedAt"))
     AvailableLimits.struct_class = Types::AvailableLimits
 
+    AwsBillingPaymentOptions.add_member(:dpop_jwk, Shapes::ShapeRef.new(shape: DpopJwk, location_name: "dpopJwk"))
+    AwsBillingPaymentOptions.struct_class = Types::AwsBillingPaymentOptions
+
+    AwsBillingX402PaymentInput.add_member(:version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "version"))
+    AwsBillingX402PaymentInput.add_member(:payload, Shapes::ShapeRef.new(shape: PaymentDocument, required: true, location_name: "payload"))
+    AwsBillingX402PaymentInput.add_member(:options, Shapes::ShapeRef.new(shape: AwsBillingPaymentOptions, location_name: "options"))
+    AwsBillingX402PaymentInput.struct_class = Types::AwsBillingX402PaymentInput
+
+    AwsBillingX402PaymentOutput.add_member(:version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "version"))
+    AwsBillingX402PaymentOutput.add_member(:payment_token, Shapes::ShapeRef.new(shape: AwsBillingPaymentToken, required: true, location_name: "paymentToken"))
+    AwsBillingX402PaymentOutput.struct_class = Types::AwsBillingX402PaymentOutput
+
     BasicAuth.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "secretArn"))
     BasicAuth.struct_class = Types::BasicAuth
 
@@ -1599,6 +1620,12 @@ module Aws::BedrockAgentCore
     DomainList.member = Shapes::ShapeRef.new(shape: DomainName)
 
     DomainPatterns.member = Shapes::ShapeRef.new(shape: DomainPattern)
+
+    DpopJwk.add_member(:kty, Shapes::ShapeRef.new(shape: JwkKeyType, required: true, location_name: "kty"))
+    DpopJwk.add_member(:crv, Shapes::ShapeRef.new(shape: JwkEllipticCurve, required: true, location_name: "crv"))
+    DpopJwk.add_member(:x, Shapes::ShapeRef.new(shape: DpopJwkXString, required: true, location_name: "x"))
+    DpopJwk.add_member(:y, Shapes::ShapeRef.new(shape: DpopJwkYString, required: true, location_name: "y"))
+    DpopJwk.struct_class = Types::DpopJwk
 
     DuplicateIdException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     DuplicateIdException.struct_class = Types::DuplicateIdException
@@ -3179,9 +3206,11 @@ module Aws::BedrockAgentCore
 
     PaymentInput.add_member(:crypto_x402, Shapes::ShapeRef.new(shape: CryptoX402PaymentInput, location_name: "cryptoX402"))
     PaymentInput.add_member(:mpp, Shapes::ShapeRef.new(shape: MppPaymentInput, location_name: "mpp"))
+    PaymentInput.add_member(:aws_billing_x402, Shapes::ShapeRef.new(shape: AwsBillingX402PaymentInput, location_name: "awsBillingX402"))
     PaymentInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     PaymentInput.add_member_subclass(:crypto_x402, Types::PaymentInput::CryptoX402)
     PaymentInput.add_member_subclass(:mpp, Types::PaymentInput::Mpp)
+    PaymentInput.add_member_subclass(:aws_billing_x402, Types::PaymentInput::AwsBillingX402)
     PaymentInput.add_member_subclass(:unknown, Types::PaymentInput::Unknown)
     PaymentInput.struct_class = Types::PaymentInput
 
@@ -3216,9 +3245,11 @@ module Aws::BedrockAgentCore
 
     PaymentOutput.add_member(:crypto_x402, Shapes::ShapeRef.new(shape: CryptoX402PaymentOutput, location_name: "cryptoX402"))
     PaymentOutput.add_member(:mpp, Shapes::ShapeRef.new(shape: MppPaymentOutput, location_name: "mpp"))
+    PaymentOutput.add_member(:aws_billing_x402, Shapes::ShapeRef.new(shape: AwsBillingX402PaymentOutput, location_name: "awsBillingX402"))
     PaymentOutput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     PaymentOutput.add_member_subclass(:crypto_x402, Types::PaymentOutput::CryptoX402)
     PaymentOutput.add_member_subclass(:mpp, Types::PaymentOutput::Mpp)
+    PaymentOutput.add_member_subclass(:aws_billing_x402, Types::PaymentOutput::AwsBillingX402)
     PaymentOutput.add_member_subclass(:unknown, Types::PaymentOutput::Unknown)
     PaymentOutput.struct_class = Types::PaymentOutput
 

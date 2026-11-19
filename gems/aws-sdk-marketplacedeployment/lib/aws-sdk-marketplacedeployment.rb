@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:marketplacedeployment)
 # structure.
 #
 #     marketplace_deployment = Aws::MarketplaceDeployment::Client.new
-#     resp = marketplace_deployment.list_tags_for_resource(params)
+#     resp = marketplace_deployment.get_deployment_configuration(params)
 #
 # See {Client} for more information.
 #
@@ -49,12 +49,13 @@ module Aws::MarketplaceDeployment
   end
   autoload :Client, 'aws-sdk-marketplacedeployment/client'
   autoload :Errors, 'aws-sdk-marketplacedeployment/errors'
+  autoload :Waiters, 'aws-sdk-marketplacedeployment/waiters'
   autoload :Resource, 'aws-sdk-marketplacedeployment/resource'
   autoload :EndpointParameters, 'aws-sdk-marketplacedeployment/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-marketplacedeployment/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-marketplacedeployment/endpoints'
 
-  GEM_VERSION = '1.51.0'
+  GEM_VERSION = '1.52.0'
 
 end
 

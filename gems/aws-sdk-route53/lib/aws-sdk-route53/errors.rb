@@ -42,6 +42,7 @@ module Aws::Route53
   # * {DelegationSetNotReusable}
   # * {HealthCheckAlreadyExists}
   # * {HealthCheckInUse}
+  # * {HealthCheckSourceAlreadyExists}
   # * {HealthCheckVersionMismatch}
   # * {HostedZoneAlreadyExists}
   # * {HostedZoneNotEmpty}
@@ -75,6 +76,7 @@ module Aws::Route53
   # * {NoSuchDelegationSet}
   # * {NoSuchGeoLocation}
   # * {NoSuchHealthCheck}
+  # * {NoSuchHealthCheckSource}
   # * {NoSuchHostedZone}
   # * {NoSuchKeySigningKey}
   # * {NoSuchQueryLoggingConfig}
@@ -86,6 +88,7 @@ module Aws::Route53
   # * {PublicZoneVPCAssociation}
   # * {QueryLoggingConfigAlreadyExists}
   # * {ThrottlingException}
+  # * {TooManyHealthCheckSources}
   # * {TooManyHealthChecks}
   # * {TooManyHostedZones}
   # * {TooManyKeySigningKeys}
@@ -320,6 +323,21 @@ module Aws::Route53
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Route53::Types::HealthCheckInUse] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class HealthCheckSourceAlreadyExists < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::HealthCheckSourceAlreadyExists] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -835,6 +853,21 @@ module Aws::Route53
       end
     end
 
+    class NoSuchHealthCheckSource < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::NoSuchHealthCheckSource] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class NoSuchHostedZone < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -995,6 +1028,21 @@ module Aws::Route53
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Route53::Types::ThrottlingException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyHealthCheckSources < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::TooManyHealthCheckSources] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

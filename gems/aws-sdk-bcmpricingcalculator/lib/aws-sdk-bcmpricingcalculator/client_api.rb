@@ -137,6 +137,17 @@ module Aws::BCMPricingCalculator
     GetBillScenarioResponse = Shapes::StructureShape.new(name: 'GetBillScenarioResponse')
     GetPreferencesRequest = Shapes::StructureShape.new(name: 'GetPreferencesRequest')
     GetPreferencesResponse = Shapes::StructureShape.new(name: 'GetPreferencesResponse')
+    GetUsageLinesEstimatedCostAmount = Shapes::FloatShape.new(name: 'GetUsageLinesEstimatedCostAmount')
+    GetUsageLinesEstimatedCostError = Shapes::StructureShape.new(name: 'GetUsageLinesEstimatedCostError')
+    GetUsageLinesEstimatedCostErrorCode = Shapes::StringShape.new(name: 'GetUsageLinesEstimatedCostErrorCode')
+    GetUsageLinesEstimatedCostErrors = Shapes::ListShape.new(name: 'GetUsageLinesEstimatedCostErrors')
+    GetUsageLinesEstimatedCostEstimatedCost = Shapes::StructureShape.new(name: 'GetUsageLinesEstimatedCostEstimatedCost')
+    GetUsageLinesEstimatedCostInput = Shapes::StructureShape.new(name: 'GetUsageLinesEstimatedCostInput')
+    GetUsageLinesEstimatedCostLineItem = Shapes::StructureShape.new(name: 'GetUsageLinesEstimatedCostLineItem')
+    GetUsageLinesEstimatedCostLineItemList = Shapes::ListShape.new(name: 'GetUsageLinesEstimatedCostLineItemList')
+    GetUsageLinesEstimatedCostRequest = Shapes::StructureShape.new(name: 'GetUsageLinesEstimatedCostRequest')
+    GetUsageLinesEstimatedCostRequestUsageList = Shapes::ListShape.new(name: 'GetUsageLinesEstimatedCostRequestUsageList')
+    GetUsageLinesEstimatedCostResponse = Shapes::StructureShape.new(name: 'GetUsageLinesEstimatedCostResponse')
     GetWorkloadEstimateRequest = Shapes::StructureShape.new(name: 'GetWorkloadEstimateRequest')
     GetWorkloadEstimateResponse = Shapes::StructureShape.new(name: 'GetWorkloadEstimateResponse')
     GroupSharingPreferenceEnum = Shapes::StringShape.new(name: 'GroupSharingPreferenceEnum')
@@ -753,6 +764,51 @@ module Aws::BCMPricingCalculator
     GetPreferencesResponse.add_member(:member_account_rate_type_selections, Shapes::ShapeRef.new(shape: RateTypes, location_name: "memberAccountRateTypeSelections"))
     GetPreferencesResponse.add_member(:standalone_account_rate_type_selections, Shapes::ShapeRef.new(shape: RateTypes, location_name: "standaloneAccountRateTypeSelections"))
     GetPreferencesResponse.struct_class = Types::GetPreferencesResponse
+
+    GetUsageLinesEstimatedCostError.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "key"))
+    GetUsageLinesEstimatedCostError.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, required: true, location_name: "serviceCode"))
+    GetUsageLinesEstimatedCostError.add_member(:usage_type, Shapes::ShapeRef.new(shape: UsageType, required: true, location_name: "usageType"))
+    GetUsageLinesEstimatedCostError.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, required: true, location_name: "operation"))
+    GetUsageLinesEstimatedCostError.add_member(:error_code, Shapes::ShapeRef.new(shape: GetUsageLinesEstimatedCostErrorCode, required: true, location_name: "errorCode"))
+    GetUsageLinesEstimatedCostError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "errorMessage"))
+    GetUsageLinesEstimatedCostError.struct_class = Types::GetUsageLinesEstimatedCostError
+
+    GetUsageLinesEstimatedCostErrors.member = Shapes::ShapeRef.new(shape: GetUsageLinesEstimatedCostError)
+
+    GetUsageLinesEstimatedCostEstimatedCost.add_member(:usage_amount, Shapes::ShapeRef.new(shape: Double, location_name: "usageAmount"))
+    GetUsageLinesEstimatedCostEstimatedCost.add_member(:usage_unit, Shapes::ShapeRef.new(shape: String, location_name: "usageUnit"))
+    GetUsageLinesEstimatedCostEstimatedCost.add_member(:cost, Shapes::ShapeRef.new(shape: Double, location_name: "cost"))
+    GetUsageLinesEstimatedCostEstimatedCost.add_member(:currency, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currency"))
+    GetUsageLinesEstimatedCostEstimatedCost.struct_class = Types::GetUsageLinesEstimatedCostEstimatedCost
+
+    GetUsageLinesEstimatedCostInput.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, required: true, location_name: "serviceCode"))
+    GetUsageLinesEstimatedCostInput.add_member(:usage_type, Shapes::ShapeRef.new(shape: UsageType, required: true, location_name: "usageType"))
+    GetUsageLinesEstimatedCostInput.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, required: true, location_name: "operation"))
+    GetUsageLinesEstimatedCostInput.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "key"))
+    GetUsageLinesEstimatedCostInput.add_member(:amount, Shapes::ShapeRef.new(shape: GetUsageLinesEstimatedCostAmount, required: true, location_name: "amount"))
+    GetUsageLinesEstimatedCostInput.struct_class = Types::GetUsageLinesEstimatedCostInput
+
+    GetUsageLinesEstimatedCostLineItem.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "key"))
+    GetUsageLinesEstimatedCostLineItem.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, location_name: "serviceCode"))
+    GetUsageLinesEstimatedCostLineItem.add_member(:usage_type, Shapes::ShapeRef.new(shape: UsageType, location_name: "usageType"))
+    GetUsageLinesEstimatedCostLineItem.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))
+    GetUsageLinesEstimatedCostLineItem.add_member(:estimated_cost, Shapes::ShapeRef.new(shape: GetUsageLinesEstimatedCostEstimatedCost, location_name: "estimatedCost"))
+    GetUsageLinesEstimatedCostLineItem.struct_class = Types::GetUsageLinesEstimatedCostLineItem
+
+    GetUsageLinesEstimatedCostLineItemList.member = Shapes::ShapeRef.new(shape: GetUsageLinesEstimatedCostLineItem)
+
+    GetUsageLinesEstimatedCostRequest.add_member(:usage, Shapes::ShapeRef.new(shape: GetUsageLinesEstimatedCostRequestUsageList, required: true, location_name: "usage"))
+    GetUsageLinesEstimatedCostRequest.add_member(:rate_type, Shapes::ShapeRef.new(shape: RateType, required: true, location_name: "rateType"))
+    GetUsageLinesEstimatedCostRequest.struct_class = Types::GetUsageLinesEstimatedCostRequest
+
+    GetUsageLinesEstimatedCostRequestUsageList.member = Shapes::ShapeRef.new(shape: GetUsageLinesEstimatedCostInput)
+
+    GetUsageLinesEstimatedCostResponse.add_member(:rate_type, Shapes::ShapeRef.new(shape: RateType, location_name: "rateType"))
+    GetUsageLinesEstimatedCostResponse.add_member(:total_cost, Shapes::ShapeRef.new(shape: Double, location_name: "totalCost"))
+    GetUsageLinesEstimatedCostResponse.add_member(:currency, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currency"))
+    GetUsageLinesEstimatedCostResponse.add_member(:line_items, Shapes::ShapeRef.new(shape: GetUsageLinesEstimatedCostLineItemList, location_name: "lineItems"))
+    GetUsageLinesEstimatedCostResponse.add_member(:errors, Shapes::ShapeRef.new(shape: GetUsageLinesEstimatedCostErrors, location_name: "errors"))
+    GetUsageLinesEstimatedCostResponse.struct_class = Types::GetUsageLinesEstimatedCostResponse
 
     GetWorkloadEstimateRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "identifier"))
     GetWorkloadEstimateRequest.struct_class = Types::GetWorkloadEstimateRequest
@@ -1388,6 +1444,19 @@ module Aws::BCMPricingCalculator
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetPreferencesRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPreferencesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_usage_lines_estimated_cost, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetUsageLinesEstimatedCost"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetUsageLinesEstimatedCostRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetUsageLinesEstimatedCostResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

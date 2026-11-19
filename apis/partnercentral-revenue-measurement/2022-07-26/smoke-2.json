@@ -1,38 +1,6 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "ListRevenueAttributionsFailure",
-    "operationName" : "ListRevenueAttributions",
-    "input" : {
-      "Catalog" : "AWS",
-      "MaxResults" : 1
-    },
-    "expectation" : {
-      "failure" : { }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetRevenueAttributionFailure",
-    "operationName" : "GetRevenueAttribution",
-    "input" : {
-      "Catalog" : "AWS",
-      "Identifier" : "ra-0a1b2c3d4e5f6"
-    },
-    "expectation" : {
-      "failure" : { }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
     "id" : "TagResourceFailureRevenueAttribution",
     "operationName" : "TagResource",
     "input" : {
@@ -55,11 +23,59 @@
     "id" : "TagResourceFailureMarketplaceRevenueShare",
     "operationName" : "TagResource",
     "input" : {
-      "resourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/marketplace-revenue-share/prod-0a1b2c3d4e5f6",
+      "resourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/marketplace-revenue-share/mrs-0a1b2c3d4e5f6",
       "tags" : [ {
         "Key" : "TestKey",
         "Value" : "TestValue"
       } ]
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListTagsForResourceFailureRevenueAttribution",
+    "operationName" : "ListTagsForResource",
+    "input" : {
+      "resourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/revenue-attribution/ra-0a1b2c3d4e5f6"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListTagsForResourceFailureMarketplaceRevenueShare",
+    "operationName" : "ListTagsForResource",
+    "input" : {
+      "resourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/marketplace-revenue-share/mrs-0a1b2c3d4e5f6"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "CreateRevenueAttributionFailure",
+    "operationName" : "CreateRevenueAttribution",
+    "input" : {
+      "Catalog" : "AWS",
+      "ClientToken" : "test-token",
+      "Name" : "TestAttribution",
+      "TenancyModel" : "MULTI_TENANT"
     },
     "expectation" : {
       "failure" : { }
@@ -90,7 +106,7 @@
     "id" : "UntagResourceFailureMarketplaceRevenueShare",
     "operationName" : "UntagResource",
     "input" : {
-      "resourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/marketplace-revenue-share/prod-0a1b2c3d4e5f6",
+      "resourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/marketplace-revenue-share/mrs-0a1b2c3d4e5f6",
       "tagKeys" : [ "TestKey" ]
     },
     "expectation" : {
@@ -103,13 +119,30 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "CreateRevenueAttributionFailure",
-    "operationName" : "CreateRevenueAttribution",
+    "id" : "GetRevenueAttributionFailure",
+    "operationName" : "GetRevenueAttribution",
+    "input" : {
+      "Catalog" : "AWS",
+      "Identifier" : "ra-0a1b2c3d4e5f6"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "CreateMarketplaceRevenueShareFailure",
+    "operationName" : "CreateMarketplaceRevenueShare",
     "input" : {
       "Catalog" : "AWS",
       "ClientToken" : "test-token",
-      "Name" : "TestAttribution",
-      "TenancyModel" : "MULTI_TENANT"
+      "Products" : [ {
+        "ProductId" : "prod-0a1b2c3d4e5f6"
+      } ]
     },
     "expectation" : {
       "failure" : { }
@@ -121,10 +154,11 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListTagsForResourceFailureRevenueAttribution",
-    "operationName" : "ListTagsForResource",
+    "id" : "ListMarketplaceRevenueSharesFailure",
+    "operationName" : "ListMarketplaceRevenueShares",
     "input" : {
-      "resourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/revenue-attribution/ra-0a1b2c3d4e5f6"
+      "Catalog" : "AWS",
+      "MaxResults" : 1
     },
     "expectation" : {
       "failure" : { }
@@ -136,10 +170,16 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListTagsForResourceFailureMarketplaceRevenueShare",
-    "operationName" : "ListTagsForResource",
+    "id" : "UpdateMarketplaceRevenueShareFailure",
+    "operationName" : "UpdateMarketplaceRevenueShare",
     "input" : {
-      "resourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/marketplace-revenue-share/prod-0a1b2c3d4e5f6"
+      "Catalog" : "AWS",
+      "ClientToken" : "test-token",
+      "Identifier" : "mrs-0a1b2c3d4e5f6",
+      "Revision" : "1",
+      "Products" : [ {
+        "ProductId" : "prod-0a1b2c3d4e5f6"
+      } ]
     },
     "expectation" : {
       "failure" : { }
@@ -159,6 +199,38 @@
       "Identifier" : "ra-0a1b2c3d4e5f6",
       "Revision" : "1",
       "Description" : "test"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListRevenueAttributionsFailure",
+    "operationName" : "ListRevenueAttributions",
+    "input" : {
+      "Catalog" : "AWS",
+      "MaxResults" : 1
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetMarketplaceRevenueShareFailure",
+    "operationName" : "GetMarketplaceRevenueShare",
+    "input" : {
+      "Catalog" : "AWS",
+      "Identifier" : "mrs-0a1b2c3d4e5f6"
     },
     "expectation" : {
       "failure" : { }

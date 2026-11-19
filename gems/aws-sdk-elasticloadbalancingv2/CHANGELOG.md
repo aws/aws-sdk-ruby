@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.172.0 (2026-11-19)
+------------------
+
+* Feature - Network Load Balancer now supports mutual TLS (mTLS), letting you authenticate client certificates before granting access. You can configure a trust store of certificate authorities on your Network Load Balancer, which will then verify the client certificate on each inbound connection.
+
 1.171.0 (2026-11-18)
 ------------------
 

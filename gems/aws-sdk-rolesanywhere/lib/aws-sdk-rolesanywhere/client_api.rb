@@ -105,6 +105,10 @@ module Aws::RolesAnywhere
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TipConfiguration = Shapes::StructureShape.new(name: 'TipConfiguration')
+    TipStatus = Shapes::StringShape.new(name: 'TipStatus')
+    TipSubjectSource = Shapes::StringShape.new(name: 'TipSubjectSource')
+    TipSubjectType = Shapes::StringShape.new(name: 'TipSubjectType')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     TrustAnchorAliasArn = Shapes::StringShape.new(name: 'TrustAnchorAliasArn')
     TrustAnchorDetail = Shapes::StructureShape.new(name: 'TrustAnchorDetail')
@@ -144,6 +148,7 @@ module Aws::RolesAnywhere
     CreateProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateProfileRequest.add_member(:accept_role_session_name, Shapes::ShapeRef.new(shape: Boolean, location_name: "acceptRoleSessionName"))
     CreateProfileRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, location_name: "aliasName"))
+    CreateProfileRequest.add_member(:tip_configuration, Shapes::ShapeRef.new(shape: TipConfiguration, location_name: "tipConfiguration"))
     CreateProfileRequest.struct_class = Types::CreateProfileRequest
 
     CreateTrustAnchorRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
@@ -281,6 +286,7 @@ module Aws::RolesAnywhere
     ProfileDetail.add_member(:attribute_mappings, Shapes::ShapeRef.new(shape: AttributeMappings, location_name: "attributeMappings"))
     ProfileDetail.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, location_name: "aliasName"))
     ProfileDetail.add_member(:alias_arn, Shapes::ShapeRef.new(shape: ProfileAliasArn, location_name: "aliasArn"))
+    ProfileDetail.add_member(:tip_configuration, Shapes::ShapeRef.new(shape: TipConfiguration, location_name: "tipConfiguration"))
     ProfileDetail.add_member(:previous_alias_name, Shapes::ShapeRef.new(shape: AliasName, location_name: "previousAliasName"))
     ProfileDetail.struct_class = Types::ProfileDetail
 
@@ -385,6 +391,11 @@ module Aws::RolesAnywhere
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    TipConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: TipStatus, required: true, location_name: "status"))
+    TipConfiguration.add_member(:subject_type, Shapes::ShapeRef.new(shape: TipSubjectType, location_name: "subjectType"))
+    TipConfiguration.add_member(:subject_source, Shapes::ShapeRef.new(shape: TipSubjectSource, location_name: "subjectSource"))
+    TipConfiguration.struct_class = Types::TipConfiguration
+
     TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     TooManyTagsException.struct_class = Types::TooManyTagsException
 
@@ -427,6 +438,7 @@ module Aws::RolesAnywhere
     UpdateProfileRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: UpdateProfileRequestDurationSecondsInteger, location_name: "durationSeconds"))
     UpdateProfileRequest.add_member(:accept_role_session_name, Shapes::ShapeRef.new(shape: Boolean, location_name: "acceptRoleSessionName"))
     UpdateProfileRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, location_name: "aliasName"))
+    UpdateProfileRequest.add_member(:tip_configuration, Shapes::ShapeRef.new(shape: TipConfiguration, location_name: "tipConfiguration"))
     UpdateProfileRequest.struct_class = Types::UpdateProfileRequest
 
     UpdateTrustAnchorRequest.add_member(:trust_anchor_id, Shapes::ShapeRef.new(shape: TrustAnchorIdentifier, required: true, location: "uri", location_name: "trustAnchorId"))

@@ -82,6 +82,35 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _CreateVoiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVoiceOutput]
+        def voice: () -> Types::Voice
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#create_voice-instance_method
+      def create_voice: (
+                          name: ::String,
+                          language_code: ("de-DE" | "en-US" | "es-US" | "fr-FR" | "hi-IN" | "it-IT" | "pt-BR"),
+                          terms_accepted: bool,
+                          voice_creation_data: {
+                            recordings: Array[
+                              {
+                                format: ("wav" | "flac" | "ogg_vorbis" | "mp3"),
+                                data: {
+                                  s3_url: ::String?,
+                                  bytes: ::String?
+                                }
+                              }
+                            ]
+                          },
+                          ?customer_managed_encryption: {
+                            kms_key_arn: ::String,
+                            encryption_context: Hash[::String, ::String]?
+                          },
+                          ?tags: Hash[::String, ::String],
+                          ?client_token: ::String
+                        ) -> _CreateVoiceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVoiceResponseSuccess
+
       interface _DeleteLexiconResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLexiconOutput]
       end
@@ -90,6 +119,15 @@ module Aws
                             name: ::String
                           ) -> _DeleteLexiconResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLexiconResponseSuccess
+
+      interface _DeleteVoiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVoiceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#delete_voice-instance_method
+      def delete_voice: (
+                          voice_id: ::String
+                        ) -> _DeleteVoiceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVoiceResponseSuccess
 
       interface _DescribeVoicesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVoicesOutput]
@@ -125,6 +163,16 @@ module Aws
                                        task_id: ::String
                                      ) -> _GetSpeechSynthesisTaskResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSpeechSynthesisTaskResponseSuccess
+
+      interface _GetVoiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVoiceOutput]
+        def voice: () -> Types::Voice
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#get_voice-instance_method
+      def get_voice: (
+                       voice_id: ::String
+                     ) -> _GetVoiceResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVoiceResponseSuccess
 
       interface _ListLexiconsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListLexiconsOutput]
@@ -231,6 +279,12 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Polly/Client.html#wait_until-instance_method
+      def wait_until: (:voice_active waiter_name, 
+                    voice_id: ::String
+                  ) -> Client::_GetVoiceResponseSuccess
+                    | (:voice_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetVoiceResponseSuccess
     end
   end
 end

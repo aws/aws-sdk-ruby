@@ -3532,13 +3532,30 @@ module Aws::LakeFormation
     #   which rows are returned to the principal.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   Whether the row-level security policy can be evaluated. `VALID`
+    #   means that every lookup table and user-defined function the filter
+    #   expression references exists. `INVALID` means that a lookup table or
+    #   user-defined function the filter expression references was deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason the row-level security policy is `INVALID`.
+    #   `REFERENCED_LOOKUP_TABLE_DELETED` means that a lookup table the
+    #   filter expression references was deleted. `REFERENCED_UDF_DELETED`
+    #   means that a user-defined function the filter expression references
+    #   was deleted. Not returned when the status is `VALID`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RLSPolicy AWS API Documentation
     #
     class RLSPolicy < Struct.new(
       :catalog_id,
       :name,
       :attachment_columns,
-      :filter_expression)
+      :filter_expression,
+      :status,
+      :status_reason)
       SENSITIVE = []
       include Aws::Structure
     end

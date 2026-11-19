@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.134.0 (2026-11-19)
+------------------
+
+* Feature - Amazon MSK now supports in-place migration of provisioned clusters from Standard to Express brokers. This release adds APIs to assess a cluster before migration and to reassign topics, and returns broker type upgrade details in cluster operations.
+
 1.133.0 (2026-11-18)
 ------------------
 

@@ -19,6 +19,10 @@ module Aws::Route53
     #   * **MAX\_HEALTH\_CHECKS\_BY\_OWNER**: The maximum number of health
     #     checks that you can create using the current account.
     #
+    #   * **MAX\_HEALTH\_CHECK\_SOURCES\_BY\_OWNER** The maximum number of
+    #     health check sources that you can create using the current
+    #     account.
+    #
     #   * **MAX\_HOSTED\_ZONES\_BY\_OWNER**: The maximum number of hosted
     #     zones that you can create using the current account.
     #
@@ -811,6 +815,8 @@ module Aws::Route53
     #
     #   * The resource type for health checks is `healthcheck`.
     #
+    #   * The resource type for health check sources is `healthchecksource`.
+    #
     #   * The resource type for hosted zones is `hostedzone`.
     #   @return [String]
     #
@@ -824,7 +830,8 @@ module Aws::Route53
     #   to the specified health check or hosted zone and/or the tags that
     #   you want to edit `Value` for.
     #
-    #   You can add a maximum of 10 tags to a health check or a hosted zone.
+    #   You can add a maximum of 10 tags to a health check, a health check
+    #   source, or a hosted zone.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] remove_tag_keys
@@ -1291,6 +1298,76 @@ module Aws::Route53
     #
     class CreateHealthCheckResponse < Struct.new(
       :health_check,
+      :location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the virtual private cloud (VPC), subnets, and security groups
+    # that are required to create a health check source, and a caller
+    # reference that identifies the request.
+    #
+    # @!attribute [rw] caller_reference
+    #   A unique, case-sensitive identifier that ensures that the operation
+    #   completes no more than one time. If you retry a
+    #   `CreateHealthCheckSource` request with the same `CallerReference`
+    #   and the same settings as a previous request, Route 53 returns the
+    #   existing health check source without creating a duplicate. If that
+    #   health check source has a status of `CREATE_FAILED`, Route 53 tries
+    #   to create it again. To create a new health check source after a
+    #   failure, specify a new value for `CallerReference`. If a health
+    #   check source with the same `CallerReference` already exists and the
+    #   settings differ, Route 53 returns a `HealthCheckSourceAlreadyExists`
+    #   error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_check_source_config
+    #   A complex type that contains the virtual private cloud (VPC),
+    #   subnets, and security groups for the health check source.
+    #   @return [Types::HealthCheckSourceConfig]
+    #
+    # @!attribute [rw] tags
+    #   A complex type that contains a list of the tags that you want to
+    #   apply to the health check source when you create it.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHealthCheckSourceRequest AWS API Documentation
+    #
+    class CreateHealthCheckSourceRequest < Struct.new(
+      :caller_reference,
+      :health_check_source_config,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns the ID, status, and location URL of the new health check
+    # source.
+    #
+    # @!attribute [rw] health_check_source_id
+    #   The ID of the new health check source. Route 53 assigns this ID when
+    #   it creates the source.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_check_source_status
+    #   The current status of the health check source. Immediately after you
+    #   create a health check source, the status is `CREATE_PENDING`. If the
+    #   request is a retry with the same `CallerReference`, the status is
+    #   the current status of the existing health check source.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   The unique URL representing the new health check source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHealthCheckSourceResponse AWS API Documentation
+    #
+    class CreateHealthCheckSourceResponse < Struct.new(
+      :health_check_source_id,
+      :health_check_source_status,
       :location)
       SENSITIVE = []
       include Aws::Structure
@@ -2079,6 +2156,42 @@ module Aws::Route53
     #
     class DeleteHealthCheckResponse < Aws::EmptyStructure; end
 
+    # Contains the ID of the health check source that you want to delete.
+    #
+    # @!attribute [rw] health_check_source_id
+    #   The ID of the health check source that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHealthCheckSourceRequest AWS API Documentation
+    #
+    class DeleteHealthCheckSourceRequest < Struct.new(
+      :health_check_source_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the ID and status of the health check source that
+    # `DeleteHealthCheckSource` deletes.
+    #
+    # @!attribute [rw] health_check_source_id
+    #   The ID of the health check source that is being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_check_source_status
+    #   The status of the health check source after Route 53 accepts the
+    #   delete request. The value is `DELETE_PENDING`, or the current status
+    #   if deletion of the health check source was already in progress.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHealthCheckSourceResponse AWS API Documentation
+    #
+    class DeleteHealthCheckSourceResponse < Struct.new(
+      :health_check_source_id,
+      :health_check_source_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A request to delete a hosted zone.
     #
     # @!attribute [rw] id
@@ -2587,6 +2700,10 @@ module Aws::Route53
     #   * **MAX\_HEALTH\_CHECKS\_BY\_OWNER**: The maximum number of health
     #     checks that you can create using the current account.
     #
+    #   * **MAX\_HEALTH\_CHECK\_SOURCES\_BY\_OWNER** The maximum number of
+    #     health check sources that you can create using the current
+    #     account.
+    #
     #   * **MAX\_HOSTED\_ZONES\_BY\_OWNER**: The maximum number of hosted
     #     zones that you can create using the current account.
     #
@@ -2887,6 +3004,37 @@ module Aws::Route53
     #
     class GetHealthCheckResponse < Struct.new(
       :health_check)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the ID of the health check source that you want to get
+    # information about.
+    #
+    # @!attribute [rw] health_check_source_id
+    #   The ID of the health check source that you want to get information
+    #   about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckSourceRequest AWS API Documentation
+    #
+    class GetHealthCheckSourceRequest < Struct.new(
+      :health_check_source_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the health check source that `GetHealthCheckSource` returns.
+    #
+    # @!attribute [rw] health_check_source
+    #   A complex type that contains information about the specified health
+    #   check source.
+    #   @return [Types::HealthCheckSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckSourceResponse AWS API Documentation
+    #
+    class GetHealthCheckSourceResponse < Struct.new(
+      :health_check_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3341,23 +3489,30 @@ module Aws::Route53
     #     IPv6 addresses as described in RFC 5952, for example,
     #     `2001:db8:85a3::abcd:1:2345`.
     #
-    #   If the endpoint is an EC2 instance, we recommend that you create an
-    #   Elastic IP address, associate it with your EC2 instance, and specify
-    #   the Elastic IP address for `IPAddress`. This ensures that the IP
-    #   address of your instance will never change.
+    #   For a public health check, if the endpoint is an EC2 instance, we
+    #   recommend that you create an Elastic IP address, associate it with
+    #   your EC2 instance, and specify the Elastic IP address for
+    #   `IPAddress`. This ensures that the IP address of your instance will
+    #   never change.
     #
     #   For more information, see [FullyQualifiedDomainName][1].
     #
-    #   Constraints: Route 53 can't check the health of endpoints for which
-    #   the IP address is in local, private, non-routable, or multicast
-    #   ranges. For more information about IP addresses for which you can't
-    #   create health checks, see the following documents:
+    #   Constraints: For a public health check (`EndpointType` of `PUBLIC`,
+    #   the default), Route 53 can't check the health of endpoints for
+    #   which the IP address is in local, private, non-routable, or
+    #   multicast ranges. For more information about IP addresses for which
+    #   you can't create public health checks, see the following documents:
     #
     #   * [RFC 5735, Special Use IPv4 Addresses][2]
     #
     #   * [RFC 6598, IANA-Reserved IPv4 Prefix for Shared Address Space][3]
     #
     #   * [RFC 5156, Special-Use IPv6 Addresses][4]
+    #
+    #   For a private endpoint health check (`EndpointType` of `PRIVATE`),
+    #   if you specify `IPAddress`, it must be a private IPv4 or IPv6
+    #   address. Route 53 sends health checks to it from the health check
+    #   source that you specify in `HealthCheckSourceId`.
     #
     #   When the value of `Type` is `CALCULATED` or `CLOUDWATCH_METRIC`,
     #   omit `IPAddress`.
@@ -3710,6 +3865,36 @@ module Aws::Route53
     #   [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/what-is-route-53-recovery.html
     #   @return [String]
     #
+    # @!attribute [rw] endpoint_type
+    #   Specifies whether the health check targets a public endpoint or a
+    #   private endpoint in a virtual private cloud (VPC). Valid values:
+    #
+    #   * `PUBLIC`: The health check targets an endpoint that is reachable
+    #     over the internet. This is the default.
+    #
+    #   * `PRIVATE`: The health check targets a private endpoint in your
+    #     virtual private cloud. You must also specify
+    #     `HealthCheckSourceId`. `PRIVATE` isn't supported for health
+    #     checks with a `Type` of `CALCULATED`, `CLOUDWATCH_METRIC`, or
+    #     `RECOVERY_CONTROL`.
+    #
+    #   You can't change the value of `EndpointType` after you create a
+    #   health check.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_check_source_id
+    #   The ID of the health check source that Route 53 uses to send health
+    #   checks to a private endpoint. Required when `EndpointType` is
+    #   `PRIVATE`.
+    #
+    #   You can change `HealthCheckSourceId` on an existing private health
+    #   check. You can't add it to a public health check.
+    #
+    #   Each health check source supports a limited number of active health
+    #   checks. If you reach that limit, specify a different health check
+    #   source.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HealthCheckConfig AWS API Documentation
     #
     class HealthCheckConfig < Struct.new(
@@ -3730,7 +3915,9 @@ module Aws::Route53
       :regions,
       :alarm_identifier,
       :insufficient_data_health_status,
-      :routing_control_arn)
+      :routing_control_arn,
+      :endpoint_type,
+      :health_check_source_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3773,6 +3960,164 @@ module Aws::Route53
       :region,
       :ip_address,
       :status_report)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type that contains information about a health check source:
+    # its ID, its status, and the virtual private cloud (VPC), subnets, and
+    # security groups from which Route 53 sends health check requests to
+    # private endpoints.
+    #
+    # @!attribute [rw] health_check_source_id
+    #   The ID of the health check source. Route 53 assigns this ID when it
+    #   creates the source.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_check_source_status
+    #   The current status of the health check source. The health check
+    #   source status can have one of the following values:
+    #
+    #   * `CREATE_PENDING` - Route 53 accepted the request to create the
+    #     source and hasn't started creating it. You can't use the source
+    #     in a health check until its status is `CREATE_COMPLETED`.
+    #
+    #   * `CREATE_IN_PROGRESS` - Route 53 is creating the source. You can't
+    #     use the source in a health check until its status is
+    #     `CREATE_COMPLETED`.
+    #
+    #   * `CREATE_COMPLETED` - The source is ready to use.
+    #
+    #   * `CREATE_FAILED` - Route 53 couldn't create the source.
+    #     `StatusReasonCode` and `StatusReason` explain why.
+    #
+    #   * `DELETE_PENDING` - Route 53 accepted the request to delete the
+    #     source and hasn't started deleting it.
+    #
+    #   * `DELETE_IN_PROGRESS` - Route 53 is deleting the source.
+    #
+    #   * `DELETE_COMPLETED` - Route 53 has deleted the source. You can't
+    #     retrieve a health check source in this status:
+    #     `GetHealthCheckSource` returns `NoSuchHealthCheckSource`.
+    #
+    #   * `DELETE_FAILED` - Route 53 couldn't delete the source.
+    #     `StatusReasonCode` and `StatusReason` explain why.
+    #
+    #   If the status is `CREATE_FAILED`, fix the cause that
+    #   `StatusReasonCode` indicates, and then either retry
+    #   `CreateHealthCheckSource` with the same `CallerReference` and
+    #   settings, or delete the source and create a new one. If the status
+    #   is `DELETE_FAILED`, retry the `DeleteHealthCheckSource` request.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_check_source_config
+    #   The virtual private cloud (VPC), subnets, and security groups for
+    #   the health check source.
+    #   @return [Types::HealthCheckSourceConfig]
+    #
+    # @!attribute [rw] status_reason_code
+    #   A code that indicates why the health check source has a status of
+    #   `CREATE_FAILED` or `DELETE_FAILED`. Route 53 returns this member
+    #   only when the status is one of those values. The code can have one
+    #   of the following values:
+    #
+    #   * `INSUFFICIENT_SUBNET_IPS` - One of the specified subnets doesn't
+    #     have enough free private IP addresses. Check the available IP
+    #     addresses in each subnet, and delete network interfaces that you
+    #     don't need.
+    #
+    #   * `EC2_LIMIT_EXCEEDED` - Your account reached an Amazon virtual
+    #     private cloud (VPC) quota for network interfaces or security
+    #     groups. Delete network interfaces that you don't need, specify
+    #     fewer security groups, or request a quota increase.
+    #
+    #   * `INVALID_SUBNET` - One of the specified subnets doesn't exist or
+    #     isn't valid, or an `AvailabilityZoneId` doesn't match the
+    #     Availability Zone of its subnet. Check that each subnet ID is
+    #     correct, that the subnet exists, and that each
+    #     `AvailabilityZoneId` matches its subnet.
+    #
+    #   * `INVALID_SECURITY_GROUP` - One of the specified security groups
+    #     doesn't exist or isn't valid. Check that each security group ID
+    #     is correct and that the security group exists.
+    #
+    #   * `INVALID_CONFIGURATION` - The combination of VPC, subnets, and
+    #     security groups isn't valid. Check that `VpcId` is correct and
+    #     exists, that each subnet is in that VPC, and that the security
+    #     groups for each subnet are in the same VPC as that subnet.
+    #
+    #   * `SLR_MISSING_OR_NOT_ASSUMABLE` - Route 53 couldn't assume its
+    #     service-linked role in your account. In IAM, check that the
+    #     service-linked role for Route 53 private endpoint health checks
+    #     exists and that no deletion task for it is in progress.
+    #
+    #   * `INTERNAL_ERROR` - Route 53 encountered an internal error. Contact
+    #     Amazon Web Services Support and provide the health check source
+    #     ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   A description of why the health check source has a status of
+    #   `CREATE_FAILED` or `DELETE_FAILED`, and what you can do about it.
+    #   The text corresponds to the value of `StatusReasonCode`. Route 53
+    #   returns this member only when `StatusReasonCode` is present.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HealthCheckSource AWS API Documentation
+    #
+    class HealthCheckSource < Struct.new(
+      :health_check_source_id,
+      :health_check_source_status,
+      :health_check_source_config,
+      :status_reason_code,
+      :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The health check source that you're attempting to create already
+    # exists. Route 53 returns this error when you submit a request that has
+    # the same value for `CallerReference` as an existing health check
+    # source and one or more values that differ from the existing health
+    # check source. To create another health check source, specify a new
+    # value for `CallerReference`. To find the existing health check source,
+    # call `ListHealthCheckSources`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HealthCheckSourceAlreadyExists AWS API Documentation
+    #
+    class HealthCheckSourceAlreadyExists < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type that contains the virtual private cloud (VPC), subnets,
+    # and security groups for a health check source. You can't change these
+    # values after you create the source.
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the virtual private cloud (VPC) that contains the subnets
+    #   for the health check source. All subnets in
+    #   `SubnetConfigurationList` must belong to this VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_configuration_list
+    #   A complex type that contains two or three `SubnetConfiguration`
+    #   elements, one in each Availability Zone that Route 53 uses for
+    #   private endpoint health checks in the Amazon Web Services Region.
+    #   The Availability Zones must be distinct. Route 53 creates network
+    #   interfaces in each subnet and sends health check requests from all
+    #   of them.
+    #   @return [Array<Types::SubnetConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HealthCheckSourceConfig AWS API Documentation
+    #
+    class HealthCheckSourceConfig < Struct.new(
+      :vpc_id,
+      :subnet_configuration_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4870,6 +5215,131 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # Contains the parameters for retrieving a list of the health check
+    # sources that are associated with the current Amazon Web Services
+    # account.
+    #
+    # @!attribute [rw] next_token
+    #   The `NextToken` value from the previous response, if it included
+    #   one. Specify it to get the next group of health check sources.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of health check sources that you want
+    #   `ListHealthCheckSources` to return. Route 53 returns a maximum of
+    #   100 health check sources. If you specify a value greater than 100,
+    #   Route 53 returns only the first 100.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHealthCheckSourcesRequest AWS API Documentation
+    #
+    class ListHealthCheckSourcesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the health check sources and pagination information that
+    # `ListHealthCheckSources` returns.
+    #
+    # @!attribute [rw] health_check_sources
+    #   A complex type that contains one `HealthCheckSource` element for
+    #   each health check source that is associated with the current Amazon
+    #   Web Services account.
+    #   @return [Array<Types::HealthCheckSource>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token. If there are more health check sources to list,
+    #   specify this value for `NextToken` in the next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHealthCheckSourcesResponse AWS API Documentation
+    #
+    class ListHealthCheckSourcesResponse < Struct.new(
+      :health_check_sources,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the parameters for retrieving a list of the health checks
+    # that use a specified health check source.
+    #
+    # @!attribute [rw] health_check_source_id
+    #   The ID of the health check source whose health checks you want to
+    #   list.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   The `NextMarker` value from the previous response, if the value of
+    #   `IsTruncated` was `true`. Specify it to get the next group of health
+    #   checks. If `IsTruncated` was `false`, there are no more health
+    #   checks to get.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of health checks that you want
+    #   `ListHealthChecksBySource` to return. Route 53 returns a maximum of
+    #   1000 health checks. If you specify a value greater than 1000,
+    #   Route 53 returns only the first 1000.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHealthChecksBySourceRequest AWS API Documentation
+    #
+    class ListHealthChecksBySourceRequest < Struct.new(
+      :health_check_source_id,
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the health checks and pagination information that
+    # `ListHealthChecksBySource` returns.
+    #
+    # @!attribute [rw] health_checks
+    #   A complex type that contains one `HealthCheck` element for each
+    #   health check that uses the specified health check source.
+    #   @return [Array<Types::HealthCheck>]
+    #
+    # @!attribute [rw] marker
+    #   The value that you specified for the `marker` parameter in the call
+    #   to `ListHealthChecksBySource` that produced the current response.
+    #   This value is present for the second and subsequent calls to
+    #   `ListHealthChecksBySource`.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_truncated
+    #   Specifies whether there are more health checks to list. If the value
+    #   is `true`, specify the `NextMarker` value for `marker` to get the
+    #   next group of health checks.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] next_marker
+    #   The identifier of the first health check in the next group of health
+    #   checks. If `IsTruncated` is `true`, specify this value in the
+    #   `marker` parameter of another `ListHealthChecksBySource` request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The value that you specified for the `maxitems` parameter in the
+    #   call to `ListHealthChecksBySource` that produced the current
+    #   response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHealthChecksBySourceResponse AWS API Documentation
+    #
+    class ListHealthChecksBySourceResponse < Struct.new(
+      :health_checks,
+      :marker,
+      :is_truncated,
+      :next_marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A request to retrieve a list of the health checks that are associated
     # with the current Amazon Web Services account.
     #
@@ -5591,6 +6061,8 @@ module Aws::Route53
     #
     #   * The resource type for health checks is `healthcheck`.
     #
+    #   * The resource type for health check sources is `healthchecksource`.
+    #
     #   * The resource type for hosted zones is `hostedzone`.
     #   @return [String]
     #
@@ -5630,6 +6102,8 @@ module Aws::Route53
     #   The type of the resources.
     #
     #   * The resource type for health checks is `healthcheck`.
+    #
+    #   * The resource type for health check sources is `healthchecksource`.
     #
     #   * The resource type for hosted zones is `hostedzone`.
     #   @return [String]
@@ -6348,6 +6822,20 @@ module Aws::Route53
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NoSuchHealthCheck AWS API Documentation
     #
     class NoSuchHealthCheck < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # No health check source exists with the specified ID. Verify that the
+    # ID is correct and that the health check source hasn't been deleted.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/NoSuchHealthCheckSource AWS API Documentation
+    #
+    class NoSuchHealthCheckSource < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -7257,6 +7745,8 @@ module Aws::Route53
     #
     #   * The resource type for health checks is `healthcheck`.
     #
+    #   * The resource type for health check sources is `healthchecksource`.
+    #
     #   * The resource type for hosted zones is `hostedzone`.
     #   @return [String]
     #
@@ -7326,6 +7816,38 @@ module Aws::Route53
     class StatusReport < Struct.new(
       :status,
       :checked_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type that identifies one subnet for a health check source
+    # and the security groups that Route 53 associates with the network
+    # interfaces that it creates in that subnet.
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet that Route 53 uses to send health check
+    #   requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone that contains the subnet, for
+    #   example `use1-az1`. Specify the Availability Zone ID, not the
+    #   Availability Zone name.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_id_list
+    #   The IDs of the security groups in the same virtual private cloud
+    #   (VPC) to associate with the network interfaces that Route 53 creates
+    #   in this subnet. The security groups must allow outbound traffic to
+    #   the endpoints that the health checks monitor.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/SubnetConfiguration AWS API Documentation
+    #
+    class SubnetConfiguration < Struct.new(
+      :subnet_id,
+      :availability_zone_id,
+      :security_group_id_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7500,8 +8022,41 @@ module Aws::Route53
       include Aws::Structure
     end
 
+    # You can't create this health check source because the current account
+    # has reached its maximum number of health check sources. The maximum
+    # includes every health check source that hasn't reached
+    # `DELETE_COMPLETED` status, including a health check source with a
+    # status of `CREATE_FAILED`.
+    #
+    # For information about default limits, see [Limits][1] in the *Amazon
+    # Route 53 Developer Guide*.
+    #
+    # For information about how to get the current limit for an account, see
+    # [GetAccountLimit][2]. To request a higher limit, [create a case][3]
+    # with the Amazon Web Services Support Center.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html
+    # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html
+    # [3]: http://aws.amazon.com/route53-request
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TooManyHealthCheckSources AWS API Documentation
+    #
+    class TooManyHealthCheckSources < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This health check can't be created because the current account has
-    # reached the limit on the number of active health checks.
+    # reached the limit on the number of active health checks, or because
+    # the health check source for a private health check has reached its
+    # limit on active health checks. In the second case, specify a different
+    # health check source.
     #
     # For information about default limits, see [Limits][1] in the *Amazon
     # Route 53 Developer Guide*.
@@ -7944,11 +8499,11 @@ module Aws::Route53
     #     IPv6 addresses as described in RFC 5952, for example,
     #     `2001:db8:85a3::abcd:1:2345`.
     #
-    #   If the endpoint is an EC2 instance, we recommend that you create an
-    #   Elastic IP address, associate it with your EC2 instance, and specify
-    #   the Elastic IP address for `IPAddress`. This ensures that the IP
-    #   address of your instance never changes. For more information, see
-    #   the applicable documentation:
+    #   For a public health check, if the endpoint is an EC2 instance, we
+    #   recommend that you create an Elastic IP address, associate it with
+    #   your EC2 instance, and specify the Elastic IP address for
+    #   `IPAddress`. This ensures that the IP address of your instance never
+    #   changes. For more information, see the applicable documentation:
     #
     #   * Linux: [Elastic IP Addresses (EIP)][1] in the *Amazon EC2 User
     #     Guide for Linux Instances*
@@ -7964,16 +8519,22 @@ module Aws::Route53
     #
     #   For more information, see [FullyQualifiedDomainName][3].
     #
-    #   Constraints: Route 53 can't check the health of endpoints for which
-    #   the IP address is in local, private, non-routable, or multicast
-    #   ranges. For more information about IP addresses for which you can't
-    #   create health checks, see the following documents:
+    #   Constraints: For a public health check (`EndpointType` of `PUBLIC`,
+    #   the default), Route 53 can't check the health of endpoints for
+    #   which the IP address is in local, private, non-routable, or
+    #   multicast ranges. For more information about IP addresses for which
+    #   you can't create public health checks, see the following documents:
     #
     #   * [RFC 5735, Special Use IPv4 Addresses][4]
     #
     #   * [RFC 6598, IANA-Reserved IPv4 Prefix for Shared Address Space][5]
     #
     #   * [RFC 5156, Special-Use IPv6 Addresses][6]
+    #
+    #   For a private endpoint health check (`EndpointType` of `PRIVATE`),
+    #   if you specify `IPAddress`, it must be a private IPv4 or IPv6
+    #   address. Route 53 sends health checks to it from the health check
+    #   source that you specify in `HealthCheckSourceId`.
     #
     #
     #
@@ -8246,6 +8807,17 @@ module Aws::Route53
     #   [4]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-ResourcePath
     #   @return [Array<String>]
     #
+    # @!attribute [rw] health_check_source_id
+    #   The ID of the health check source from which Route 53 sends requests
+    #   to the endpoint. Applies only to health checks that have an
+    #   `EndpointType` of `PRIVATE`. The health check source must be in the
+    #   same account and have a status of `CREATE_COMPLETED`.
+    #
+    #   Each health check source supports a limited number of active health
+    #   checks. If you reach that limit, specify a different health check
+    #   source.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHealthCheckRequest AWS API Documentation
     #
     class UpdateHealthCheckRequest < Struct.new(
@@ -8265,7 +8837,8 @@ module Aws::Route53
       :regions,
       :alarm_identifier,
       :insufficient_data_health_status,
-      :reset_elements)
+      :reset_elements,
+      :health_check_source_id)
       SENSITIVE = []
       include Aws::Structure
     end

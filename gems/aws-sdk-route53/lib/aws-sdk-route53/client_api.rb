@@ -30,6 +30,7 @@ module Aws::Route53
     AssociateVPCComment = Shapes::StringShape.new(name: 'AssociateVPCComment')
     AssociateVPCWithHostedZoneRequest = Shapes::StructureShape.new(name: 'AssociateVPCWithHostedZoneRequest')
     AssociateVPCWithHostedZoneResponse = Shapes::StructureShape.new(name: 'AssociateVPCWithHostedZoneResponse')
+    AvailabilityZoneId = Shapes::StringShape.new(name: 'AvailabilityZoneId')
     Bias = Shapes::IntegerShape.new(name: 'Bias')
     Change = Shapes::StructureShape.new(name: 'Change')
     ChangeAction = Shapes::StringShape.new(name: 'ChangeAction')
@@ -78,6 +79,8 @@ module Aws::Route53
     CreateCidrCollectionResponse = Shapes::StructureShape.new(name: 'CreateCidrCollectionResponse')
     CreateHealthCheckRequest = Shapes::StructureShape.new(name: 'CreateHealthCheckRequest')
     CreateHealthCheckResponse = Shapes::StructureShape.new(name: 'CreateHealthCheckResponse')
+    CreateHealthCheckSourceRequest = Shapes::StructureShape.new(name: 'CreateHealthCheckSourceRequest')
+    CreateHealthCheckSourceResponse = Shapes::StructureShape.new(name: 'CreateHealthCheckSourceResponse')
     CreateHostedZoneRequest = Shapes::StructureShape.new(name: 'CreateHostedZoneRequest')
     CreateHostedZoneResponse = Shapes::StructureShape.new(name: 'CreateHostedZoneResponse')
     CreateKeySigningKeyRequest = Shapes::StructureShape.new(name: 'CreateKeySigningKeyRequest')
@@ -114,6 +117,8 @@ module Aws::Route53
     DeleteCidrCollectionResponse = Shapes::StructureShape.new(name: 'DeleteCidrCollectionResponse')
     DeleteHealthCheckRequest = Shapes::StructureShape.new(name: 'DeleteHealthCheckRequest')
     DeleteHealthCheckResponse = Shapes::StructureShape.new(name: 'DeleteHealthCheckResponse')
+    DeleteHealthCheckSourceRequest = Shapes::StructureShape.new(name: 'DeleteHealthCheckSourceRequest')
+    DeleteHealthCheckSourceResponse = Shapes::StructureShape.new(name: 'DeleteHealthCheckSourceResponse')
     DeleteHostedZoneRequest = Shapes::StructureShape.new(name: 'DeleteHostedZoneRequest')
     DeleteHostedZoneResponse = Shapes::StructureShape.new(name: 'DeleteHostedZoneResponse')
     DeleteKeySigningKeyRequest = Shapes::StructureShape.new(name: 'DeleteKeySigningKeyRequest')
@@ -142,6 +147,7 @@ module Aws::Route53
     EnableHostedZoneDNSSECRequest = Shapes::StructureShape.new(name: 'EnableHostedZoneDNSSECRequest')
     EnableHostedZoneDNSSECResponse = Shapes::StructureShape.new(name: 'EnableHostedZoneDNSSECResponse')
     EnableSNI = Shapes::BooleanShape.new(name: 'EnableSNI')
+    EndpointType = Shapes::StringShape.new(name: 'EndpointType')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorMessages = Shapes::ListShape.new(name: 'ErrorMessages')
     EvaluationPeriods = Shapes::IntegerShape.new(name: 'EvaluationPeriods')
@@ -174,6 +180,8 @@ module Aws::Route53
     GetHealthCheckLastFailureReasonResponse = Shapes::StructureShape.new(name: 'GetHealthCheckLastFailureReasonResponse')
     GetHealthCheckRequest = Shapes::StructureShape.new(name: 'GetHealthCheckRequest')
     GetHealthCheckResponse = Shapes::StructureShape.new(name: 'GetHealthCheckResponse')
+    GetHealthCheckSourceRequest = Shapes::StructureShape.new(name: 'GetHealthCheckSourceRequest')
+    GetHealthCheckSourceResponse = Shapes::StructureShape.new(name: 'GetHealthCheckSourceResponse')
     GetHealthCheckStatusRequest = Shapes::StructureShape.new(name: 'GetHealthCheckStatusRequest')
     GetHealthCheckStatusResponse = Shapes::StructureShape.new(name: 'GetHealthCheckStatusResponse')
     GetHostedZoneCountRequest = Shapes::StructureShape.new(name: 'GetHostedZoneCountRequest')
@@ -205,6 +213,14 @@ module Aws::Route53
     HealthCheckObservations = Shapes::ListShape.new(name: 'HealthCheckObservations')
     HealthCheckRegion = Shapes::StringShape.new(name: 'HealthCheckRegion')
     HealthCheckRegionList = Shapes::ListShape.new(name: 'HealthCheckRegionList')
+    HealthCheckSource = Shapes::StructureShape.new(name: 'HealthCheckSource')
+    HealthCheckSourceAlreadyExists = Shapes::StructureShape.new(name: 'HealthCheckSourceAlreadyExists')
+    HealthCheckSourceConfig = Shapes::StructureShape.new(name: 'HealthCheckSourceConfig')
+    HealthCheckSourceId = Shapes::StringShape.new(name: 'HealthCheckSourceId')
+    HealthCheckSourceStatus = Shapes::StringShape.new(name: 'HealthCheckSourceStatus')
+    HealthCheckSourceStatusReason = Shapes::StringShape.new(name: 'HealthCheckSourceStatusReason')
+    HealthCheckSourceStatusReasonCode = Shapes::StringShape.new(name: 'HealthCheckSourceStatusReasonCode')
+    HealthCheckSources = Shapes::ListShape.new(name: 'HealthCheckSources')
     HealthCheckType = Shapes::StringShape.new(name: 'HealthCheckType')
     HealthCheckVersion = Shapes::IntegerShape.new(name: 'HealthCheckVersion')
     HealthCheckVersionMismatch = Shapes::StructureShape.new(name: 'HealthCheckVersionMismatch')
@@ -267,6 +283,10 @@ module Aws::Route53
     ListCidrLocationsResponse = Shapes::StructureShape.new(name: 'ListCidrLocationsResponse')
     ListGeoLocationsRequest = Shapes::StructureShape.new(name: 'ListGeoLocationsRequest')
     ListGeoLocationsResponse = Shapes::StructureShape.new(name: 'ListGeoLocationsResponse')
+    ListHealthCheckSourcesRequest = Shapes::StructureShape.new(name: 'ListHealthCheckSourcesRequest')
+    ListHealthCheckSourcesResponse = Shapes::StructureShape.new(name: 'ListHealthCheckSourcesResponse')
+    ListHealthChecksBySourceRequest = Shapes::StructureShape.new(name: 'ListHealthChecksBySourceRequest')
+    ListHealthChecksBySourceResponse = Shapes::StructureShape.new(name: 'ListHealthChecksBySourceResponse')
     ListHealthChecksRequest = Shapes::StructureShape.new(name: 'ListHealthChecksRequest')
     ListHealthChecksResponse = Shapes::StructureShape.new(name: 'ListHealthChecksResponse')
     ListHostedZonesByNameRequest = Shapes::StructureShape.new(name: 'ListHostedZonesByNameRequest')
@@ -316,6 +336,7 @@ module Aws::Route53
     NoSuchDelegationSet = Shapes::StructureShape.new(name: 'NoSuchDelegationSet')
     NoSuchGeoLocation = Shapes::StructureShape.new(name: 'NoSuchGeoLocation')
     NoSuchHealthCheck = Shapes::StructureShape.new(name: 'NoSuchHealthCheck')
+    NoSuchHealthCheckSource = Shapes::StructureShape.new(name: 'NoSuchHealthCheckSource')
     NoSuchHostedZone = Shapes::StructureShape.new(name: 'NoSuchHostedZone')
     NoSuchKeySigningKey = Shapes::StructureShape.new(name: 'NoSuchKeySigningKey')
     NoSuchQueryLoggingConfig = Shapes::StructureShape.new(name: 'NoSuchQueryLoggingConfig')
@@ -371,6 +392,8 @@ module Aws::Route53
     ReusableDelegationSetLimitType = Shapes::StringShape.new(name: 'ReusableDelegationSetLimitType')
     RoutingControlArn = Shapes::StringShape.new(name: 'RoutingControlArn')
     SearchString = Shapes::StringShape.new(name: 'SearchString')
+    SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
+    SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     ServeSignature = Shapes::StringShape.new(name: 'ServeSignature')
     ServicePrincipal = Shapes::StringShape.new(name: 'ServicePrincipal')
     SigningKeyInteger = Shapes::IntegerShape.new(name: 'SigningKeyInteger')
@@ -382,6 +405,9 @@ module Aws::Route53
     Statistic = Shapes::StringShape.new(name: 'Statistic')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusReport = Shapes::StructureShape.new(name: 'StatusReport')
+    SubnetConfiguration = Shapes::StructureShape.new(name: 'SubnetConfiguration')
+    SubnetConfigurationList = Shapes::ListShape.new(name: 'SubnetConfigurationList')
+    SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetMask = Shapes::StringShape.new(name: 'SubnetMask')
     TTL = Shapes::IntegerShape.new(name: 'TTL')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -397,6 +423,7 @@ module Aws::Route53
     Threshold = Shapes::FloatShape.new(name: 'Threshold')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeStamp = Shapes::TimestampShape.new(name: 'TimeStamp')
+    TooManyHealthCheckSources = Shapes::StructureShape.new(name: 'TooManyHealthCheckSources')
     TooManyHealthChecks = Shapes::StructureShape.new(name: 'TooManyHealthChecks')
     TooManyHostedZones = Shapes::StructureShape.new(name: 'TooManyHostedZones')
     TooManyKeySigningKeys = Shapes::StructureShape.new(name: 'TooManyKeySigningKeys')
@@ -597,6 +624,16 @@ module Aws::Route53
     CreateHealthCheckResponse.add_member(:location, Shapes::ShapeRef.new(shape: ResourceURI, required: true, location: "header", location_name: "Location"))
     CreateHealthCheckResponse.struct_class = Types::CreateHealthCheckResponse
 
+    CreateHealthCheckSourceRequest.add_member(:caller_reference, Shapes::ShapeRef.new(shape: HealthCheckNonce, location_name: "CallerReference", metadata: {"idempotencyToken" => true}))
+    CreateHealthCheckSourceRequest.add_member(:health_check_source_config, Shapes::ShapeRef.new(shape: HealthCheckSourceConfig, required: true, location_name: "HealthCheckSourceConfig"))
+    CreateHealthCheckSourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateHealthCheckSourceRequest.struct_class = Types::CreateHealthCheckSourceRequest
+
+    CreateHealthCheckSourceResponse.add_member(:health_check_source_id, Shapes::ShapeRef.new(shape: HealthCheckSourceId, required: true, location_name: "HealthCheckSourceId"))
+    CreateHealthCheckSourceResponse.add_member(:health_check_source_status, Shapes::ShapeRef.new(shape: HealthCheckSourceStatus, required: true, location_name: "HealthCheckSourceStatus"))
+    CreateHealthCheckSourceResponse.add_member(:location, Shapes::ShapeRef.new(shape: ResourceURI, required: true, location: "header", location_name: "Location"))
+    CreateHealthCheckSourceResponse.struct_class = Types::CreateHealthCheckSourceResponse
+
     CreateHostedZoneRequest.add_member(:name, Shapes::ShapeRef.new(shape: DNSName, required: true, location_name: "Name"))
     CreateHostedZoneRequest.add_member(:vpc, Shapes::ShapeRef.new(shape: VPC, location_name: "VPC"))
     CreateHostedZoneRequest.add_member(:caller_reference, Shapes::ShapeRef.new(shape: Nonce, required: true, location_name: "CallerReference"))
@@ -729,6 +766,13 @@ module Aws::Route53
     DeleteHealthCheckRequest.struct_class = Types::DeleteHealthCheckRequest
 
     DeleteHealthCheckResponse.struct_class = Types::DeleteHealthCheckResponse
+
+    DeleteHealthCheckSourceRequest.add_member(:health_check_source_id, Shapes::ShapeRef.new(shape: HealthCheckSourceId, required: true, location: "uri", location_name: "HealthCheckSourceId"))
+    DeleteHealthCheckSourceRequest.struct_class = Types::DeleteHealthCheckSourceRequest
+
+    DeleteHealthCheckSourceResponse.add_member(:health_check_source_id, Shapes::ShapeRef.new(shape: HealthCheckSourceId, required: true, location_name: "HealthCheckSourceId"))
+    DeleteHealthCheckSourceResponse.add_member(:health_check_source_status, Shapes::ShapeRef.new(shape: HealthCheckSourceStatus, required: true, location_name: "HealthCheckSourceStatus"))
+    DeleteHealthCheckSourceResponse.struct_class = Types::DeleteHealthCheckSourceResponse
 
     DeleteHostedZoneRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
     DeleteHostedZoneRequest.struct_class = Types::DeleteHostedZoneRequest
@@ -875,6 +919,12 @@ module Aws::Route53
     GetHealthCheckResponse.add_member(:health_check, Shapes::ShapeRef.new(shape: HealthCheck, required: true, location_name: "HealthCheck"))
     GetHealthCheckResponse.struct_class = Types::GetHealthCheckResponse
 
+    GetHealthCheckSourceRequest.add_member(:health_check_source_id, Shapes::ShapeRef.new(shape: HealthCheckSourceId, required: true, location: "uri", location_name: "HealthCheckSourceId"))
+    GetHealthCheckSourceRequest.struct_class = Types::GetHealthCheckSourceRequest
+
+    GetHealthCheckSourceResponse.add_member(:health_check_source, Shapes::ShapeRef.new(shape: HealthCheckSource, required: true, location_name: "HealthCheckSource"))
+    GetHealthCheckSourceResponse.struct_class = Types::GetHealthCheckSourceResponse
+
     GetHealthCheckStatusRequest.add_member(:health_check_id, Shapes::ShapeRef.new(shape: HealthCheckId, required: true, location: "uri", location_name: "HealthCheckId"))
     GetHealthCheckStatusRequest.struct_class = Types::GetHealthCheckStatusRequest
 
@@ -969,6 +1019,8 @@ module Aws::Route53
     HealthCheckConfig.add_member(:alarm_identifier, Shapes::ShapeRef.new(shape: AlarmIdentifier, location_name: "AlarmIdentifier"))
     HealthCheckConfig.add_member(:insufficient_data_health_status, Shapes::ShapeRef.new(shape: InsufficientDataHealthStatus, location_name: "InsufficientDataHealthStatus"))
     HealthCheckConfig.add_member(:routing_control_arn, Shapes::ShapeRef.new(shape: RoutingControlArn, location_name: "RoutingControlArn"))
+    HealthCheckConfig.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
+    HealthCheckConfig.add_member(:health_check_source_id, Shapes::ShapeRef.new(shape: HealthCheckSourceId, location_name: "HealthCheckSourceId"))
     HealthCheckConfig.struct_class = Types::HealthCheckConfig
 
     HealthCheckInUse.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -982,6 +1034,22 @@ module Aws::Route53
     HealthCheckObservations.member = Shapes::ShapeRef.new(shape: HealthCheckObservation, location_name: "HealthCheckObservation")
 
     HealthCheckRegionList.member = Shapes::ShapeRef.new(shape: HealthCheckRegion, location_name: "Region")
+
+    HealthCheckSource.add_member(:health_check_source_id, Shapes::ShapeRef.new(shape: HealthCheckSourceId, required: true, location_name: "HealthCheckSourceId"))
+    HealthCheckSource.add_member(:health_check_source_status, Shapes::ShapeRef.new(shape: HealthCheckSourceStatus, required: true, location_name: "HealthCheckSourceStatus"))
+    HealthCheckSource.add_member(:health_check_source_config, Shapes::ShapeRef.new(shape: HealthCheckSourceConfig, required: true, location_name: "HealthCheckSourceConfig"))
+    HealthCheckSource.add_member(:status_reason_code, Shapes::ShapeRef.new(shape: HealthCheckSourceStatusReasonCode, location_name: "StatusReasonCode"))
+    HealthCheckSource.add_member(:status_reason, Shapes::ShapeRef.new(shape: HealthCheckSourceStatusReason, location_name: "StatusReason"))
+    HealthCheckSource.struct_class = Types::HealthCheckSource
+
+    HealthCheckSourceAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    HealthCheckSourceAlreadyExists.struct_class = Types::HealthCheckSourceAlreadyExists
+
+    HealthCheckSourceConfig.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VPCId, required: true, location_name: "VpcId"))
+    HealthCheckSourceConfig.add_member(:subnet_configuration_list, Shapes::ShapeRef.new(shape: SubnetConfigurationList, required: true, location_name: "SubnetConfigurationList"))
+    HealthCheckSourceConfig.struct_class = Types::HealthCheckSourceConfig
+
+    HealthCheckSources.member = Shapes::ShapeRef.new(shape: HealthCheckSource, location_name: "HealthCheckSource")
 
     HealthCheckVersionMismatch.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     HealthCheckVersionMismatch.struct_class = Types::HealthCheckVersionMismatch
@@ -1166,6 +1234,26 @@ module Aws::Route53
     ListGeoLocationsResponse.add_member(:next_subdivision_code, Shapes::ShapeRef.new(shape: GeoLocationSubdivisionCode, location_name: "NextSubdivisionCode"))
     ListGeoLocationsResponse.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, required: true, location_name: "MaxItems"))
     ListGeoLocationsResponse.struct_class = Types::ListGeoLocationsResponse
+
+    ListHealthCheckSourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PageMarker, location: "querystring", location_name: "nexttoken"))
+    ListHealthCheckSourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxresults"))
+    ListHealthCheckSourcesRequest.struct_class = Types::ListHealthCheckSourcesRequest
+
+    ListHealthCheckSourcesResponse.add_member(:health_check_sources, Shapes::ShapeRef.new(shape: HealthCheckSources, required: true, location_name: "HealthCheckSources"))
+    ListHealthCheckSourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PageMarker, location_name: "NextToken"))
+    ListHealthCheckSourcesResponse.struct_class = Types::ListHealthCheckSourcesResponse
+
+    ListHealthChecksBySourceRequest.add_member(:health_check_source_id, Shapes::ShapeRef.new(shape: HealthCheckSourceId, required: true, location: "uri", location_name: "HealthCheckSourceId"))
+    ListHealthChecksBySourceRequest.add_member(:marker, Shapes::ShapeRef.new(shape: PageMarker, location: "querystring", location_name: "marker"))
+    ListHealthChecksBySourceRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, location: "querystring", location_name: "maxitems"))
+    ListHealthChecksBySourceRequest.struct_class = Types::ListHealthChecksBySourceRequest
+
+    ListHealthChecksBySourceResponse.add_member(:health_checks, Shapes::ShapeRef.new(shape: HealthChecks, required: true, location_name: "HealthChecks"))
+    ListHealthChecksBySourceResponse.add_member(:marker, Shapes::ShapeRef.new(shape: PageMarker, location_name: "Marker"))
+    ListHealthChecksBySourceResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: PageTruncated, required: true, location_name: "IsTruncated"))
+    ListHealthChecksBySourceResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: PageMarker, location_name: "NextMarker"))
+    ListHealthChecksBySourceResponse.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, required: true, location_name: "MaxItems"))
+    ListHealthChecksBySourceResponse.struct_class = Types::ListHealthChecksBySourceResponse
 
     ListHealthChecksRequest.add_member(:marker, Shapes::ShapeRef.new(shape: PageMarker, location: "querystring", location_name: "marker"))
     ListHealthChecksRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, location: "querystring", location_name: "maxitems"))
@@ -1376,6 +1464,9 @@ module Aws::Route53
     NoSuchHealthCheck.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     NoSuchHealthCheck.struct_class = Types::NoSuchHealthCheck
 
+    NoSuchHealthCheckSource.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchHealthCheckSource.struct_class = Types::NoSuchHealthCheckSource
+
     NoSuchHostedZone.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     NoSuchHostedZone.struct_class = Types::NoSuchHostedZone
 
@@ -1481,9 +1572,18 @@ module Aws::Route53
     ReusableDelegationSetLimit.add_member(:value, Shapes::ShapeRef.new(shape: LimitValue, required: true, location_name: "Value"))
     ReusableDelegationSetLimit.struct_class = Types::ReusableDelegationSetLimit
 
+    SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "SecurityGroupId")
+
     StatusReport.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
     StatusReport.add_member(:checked_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "CheckedTime"))
     StatusReport.struct_class = Types::StatusReport
+
+    SubnetConfiguration.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "SubnetId"))
+    SubnetConfiguration.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, required: true, location_name: "AvailabilityZoneId"))
+    SubnetConfiguration.add_member(:security_group_id_list, Shapes::ShapeRef.new(shape: SecurityGroupIdList, required: true, location_name: "SecurityGroupIdList"))
+    SubnetConfiguration.struct_class = Types::SubnetConfiguration
+
+    SubnetConfigurationList.member = Shapes::ShapeRef.new(shape: SubnetConfiguration, location_name: "SubnetConfiguration")
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
@@ -1513,6 +1613,9 @@ module Aws::Route53
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TooManyHealthCheckSources.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TooManyHealthCheckSources.struct_class = Types::TooManyHealthCheckSources
 
     TooManyHealthChecks.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     TooManyHealthChecks.struct_class = Types::TooManyHealthChecks
@@ -1593,6 +1696,7 @@ module Aws::Route53
     UpdateHealthCheckRequest.add_member(:alarm_identifier, Shapes::ShapeRef.new(shape: AlarmIdentifier, location_name: "AlarmIdentifier"))
     UpdateHealthCheckRequest.add_member(:insufficient_data_health_status, Shapes::ShapeRef.new(shape: InsufficientDataHealthStatus, location_name: "InsufficientDataHealthStatus"))
     UpdateHealthCheckRequest.add_member(:reset_elements, Shapes::ShapeRef.new(shape: ResettableElementNameList, location_name: "ResetElements"))
+    UpdateHealthCheckRequest.add_member(:health_check_source_id, Shapes::ShapeRef.new(shape: HealthCheckSourceId, location_name: "HealthCheckSourceId"))
     UpdateHealthCheckRequest.struct_class = Types::UpdateHealthCheckRequest
 
     UpdateHealthCheckResponse.add_member(:health_check, Shapes::ShapeRef.new(shape: HealthCheck, required: true, location_name: "HealthCheck"))
@@ -1745,6 +1849,7 @@ module Aws::Route53
         o.output = Shapes::ShapeRef.new(shape: ChangeTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchHealthCheck)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchHealthCheckSource)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
         o.errors << Shapes::ShapeRef.new(shape: PriorRequestNotComplete)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1781,6 +1886,23 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: TooManyHealthChecks)
         o.errors << Shapes::ShapeRef.new(shape: HealthCheckAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+      end)
+
+      api.add_operation(:create_health_check_source, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateHealthCheckSource"
+        o.http_method = "POST"
+        o.http_request_uri = "/2013-04-01/healthchecksource"
+        o.input = Shapes::ShapeRef.new(shape: CreateHealthCheckSourceRequest,
+          location_name: "CreateHealthCheckSourceRequest",
+          metadata: {
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: CreateHealthCheckSourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: HealthCheckSourceAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidVPCId)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyHealthCheckSources)
       end)
 
       api.add_operation(:create_hosted_zone, Seahorse::Model::Operation.new.tap do |o|
@@ -1993,6 +2115,17 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: NoSuchHealthCheck)
         o.errors << Shapes::ShapeRef.new(shape: HealthCheckInUse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+      end)
+
+      api.add_operation(:delete_health_check_source, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteHealthCheckSource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2013-04-01/healthchecksource/{HealthCheckSourceId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteHealthCheckSourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteHealthCheckSourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchHealthCheckSource)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: PriorRequestNotComplete)
       end)
 
       api.add_operation(:delete_hosted_zone, Seahorse::Model::Operation.new.tap do |o|
@@ -2231,6 +2364,16 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
       end)
 
+      api.add_operation(:get_health_check_source, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetHealthCheckSource"
+        o.http_method = "GET"
+        o.http_request_uri = "/2013-04-01/healthchecksource/{HealthCheckSourceId}"
+        o.input = Shapes::ShapeRef.new(shape: GetHealthCheckSourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetHealthCheckSourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchHealthCheckSource)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+      end)
+
       api.add_operation(:get_health_check_status, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetHealthCheckStatus"
         o.http_method = "GET"
@@ -2387,6 +2530,21 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
       end)
 
+      api.add_operation(:list_health_check_sources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListHealthCheckSources"
+        o.http_method = "GET"
+        o.http_request_uri = "/2013-04-01/healthchecksource"
+        o.input = Shapes::ShapeRef.new(shape: ListHealthCheckSourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListHealthCheckSourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_health_checks, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListHealthChecks"
         o.http_method = "GET"
@@ -2395,6 +2553,23 @@ module Aws::Route53
         o.output = Shapes::ShapeRef.new(shape: ListHealthChecksResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersion)
+        o[:pager] = Aws::Pager.new(
+          more_results: "is_truncated",
+          limit_key: "max_items",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:list_health_checks_by_source, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListHealthChecksBySource"
+        o.http_method = "GET"
+        o.http_request_uri = "/2013-04-01/healthchecks/source/{HealthCheckSourceId}"
+        o.input = Shapes::ShapeRef.new(shape: ListHealthChecksBySourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListHealthChecksBySourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchHealthCheckSource)
         o[:pager] = Aws::Pager.new(
           more_results: "is_truncated",
           limit_key: "max_items",
@@ -2512,6 +2687,7 @@ module Aws::Route53
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchHealthCheck)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchHealthCheckSource)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
         o.errors << Shapes::ShapeRef.new(shape: PriorRequestNotComplete)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -2530,6 +2706,7 @@ module Aws::Route53
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourcesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchHealthCheck)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchHealthCheckSource)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
         o.errors << Shapes::ShapeRef.new(shape: PriorRequestNotComplete)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

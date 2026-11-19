@@ -3592,7 +3592,8 @@ module Aws::ConnectCases
     end
 
     # Represents the content of a related item to be updated. This is a
-    # union type that can contain either comment content or custom content.
+    # union type that can contain comment content, custom content, or SLA
+    # content.
     #
     # @note RelatedItemUpdateContent is a union - when making an API calls you must set exactly one of the members.
     #
@@ -3604,11 +3605,16 @@ module Aws::ConnectCases
     #   Represents the updated content of a `Custom` related item.
     #   @return [Types::CustomUpdateContent]
     #
+    # @!attribute [rw] sla
+    #   Represents the content of an SLA to be updated.
+    #   @return [Types::SlaUpdateContent]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/RelatedItemUpdateContent AWS API Documentation
     #
     class RelatedItemUpdateContent < Struct.new(
       :comment,
       :custom,
+      :sla,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -3616,6 +3622,7 @@ module Aws::ConnectCases
 
       class Comment < RelatedItemUpdateContent; end
       class Custom < RelatedItemUpdateContent; end
+      class Sla < RelatedItemUpdateContent; end
       class Unknown < RelatedItemUpdateContent; end
     end
 
@@ -4176,7 +4183,9 @@ module Aws::ConnectCases
     #   @return [String]
     #
     # @!attribute [rw] field_id
-    #   Unique identifier of a field.
+    #   Unique identifier of the case field that the SLA tracks. The field
+    #   must be a single-select field, such as the system `status` field or
+    #   a custom single-select field.
     #   @return [String]
     #
     # @!attribute [rw] target_field_values
@@ -4220,6 +4229,43 @@ module Aws::ConnectCases
 
       class SlaInputConfiguration < SlaInputContent; end
       class Unknown < SlaInputContent; end
+    end
+
+    # Represents the SLA configuration to update.
+    #
+    # @!attribute [rw] target_sla_minutes
+    #   New target duration in minutes within which an SLA should be
+    #   completed. The new deadline is counted from when the SLA was
+    #   created.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/SlaUpdateConfiguration AWS API Documentation
+    #
+    class SlaUpdateConfiguration < Struct.new(
+      :target_sla_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the updated content of an SLA related item.
+    #
+    # @note SlaUpdateContent is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] sla_update_configuration
+    #   Represents the SLA configuration to update.
+    #   @return [Types::SlaUpdateConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/SlaUpdateContent AWS API Documentation
+    #
+    class SlaUpdateContent < Struct.new(
+      :sla_update_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class SlaUpdateConfiguration < SlaUpdateContent; end
+      class Unknown < SlaUpdateContent; end
     end
 
     # A structured set of sort terms.

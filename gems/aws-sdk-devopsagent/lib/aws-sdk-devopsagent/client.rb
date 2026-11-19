@@ -529,12 +529,32 @@ module Aws::DevOpsAgent
     #         agent_elevated_role_arn: "RoleArn",
     #         agent_elevated_role_arn_status: "valid", # accepts valid, invalid, pending-confirmation
     #       },
+    #       source_aws_org: {
+    #         account_type: "source", # required, accepts source
+    #         organizational_unit: { # required
+    #           organizational_unit_id: "OrgUnitId", # required
+    #           account_ids: ["AwsAccountId"],
+    #         },
+    #         deployment_state: {
+    #           deployed_account_count: 1,
+    #           issues: [
+    #             {
+    #               reason_code: "accountSuspended", # required, accepts accountSuspended, accountNotInScope, managementAccountNotSupported, stackInstanceInoperable, accessDenied, deploymentFailed, secondaryAccountLimitExceeded
+    #               account_count: 1, # required
+    #               account_ids: ["AwsAccountId"], # required
+    #               message: "OrgSourceIssueMessage",
+    #             },
+    #           ],
+    #           last_evaluated_at: Time.now,
+    #         },
+    #       },
     #       aws: {
     #         assumable_role_arn: "RoleArn", # required
     #         account_id: "AWSConfigurationAccountIdString", # required
     #         account_type: "monitor", # required, accepts monitor
     #         agent_elevated_role_arn: "RoleArn",
     #         agent_elevated_role_arn_status: "valid", # accepts valid, invalid, pending-confirmation
+    #         service_management_role_arn: "RoleArn",
     #       },
     #       github: {
     #         repo_name: "String", # required
@@ -696,11 +716,24 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.source_aws.external_id #=> String
     #   resp.association.configuration.source_aws.agent_elevated_role_arn #=> String
     #   resp.association.configuration.source_aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
+    #   resp.association.configuration.source_aws_org.account_type #=> String, one of "source"
+    #   resp.association.configuration.source_aws_org.organizational_unit.organizational_unit_id #=> String
+    #   resp.association.configuration.source_aws_org.organizational_unit.account_ids #=> Array
+    #   resp.association.configuration.source_aws_org.organizational_unit.account_ids[0] #=> String
+    #   resp.association.configuration.source_aws_org.deployment_state.deployed_account_count #=> Integer
+    #   resp.association.configuration.source_aws_org.deployment_state.issues #=> Array
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].reason_code #=> String, one of "accountSuspended", "accountNotInScope", "managementAccountNotSupported", "stackInstanceInoperable", "accessDenied", "deploymentFailed", "secondaryAccountLimitExceeded"
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].account_count #=> Integer
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].account_ids #=> Array
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].account_ids[0] #=> String
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].message #=> String
+    #   resp.association.configuration.source_aws_org.deployment_state.last_evaluated_at #=> Time
     #   resp.association.configuration.aws.assumable_role_arn #=> String
     #   resp.association.configuration.aws.account_id #=> String
     #   resp.association.configuration.aws.account_type #=> String, one of "monitor"
     #   resp.association.configuration.aws.agent_elevated_role_arn #=> String
     #   resp.association.configuration.aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
+    #   resp.association.configuration.aws.service_management_role_arn #=> String
     #   resp.association.configuration.github.repo_name #=> String
     #   resp.association.configuration.github.repo_id #=> String
     #   resp.association.configuration.github.owner #=> String
@@ -821,6 +854,11 @@ module Aws::DevOpsAgent
     #   The preferences to configure on the agent space. Preferences not
     #   provided take their default values.
     #
+    # @option params [String] :aws_source_mode
+    #   Specifies whether the AgentSpace's Amazon Web Services source
+    #   configuration targets an individual Amazon Web Services account or an
+    #   Amazon Web Services Organization.
+    #
     # @return [Types::CreateAgentSpaceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAgentSpaceOutput#agent_space #agent_space} => Types::AgentSpace
@@ -840,6 +878,7 @@ module Aws::DevOpsAgent
     #     preferences: {
     #       "elevatedActionsEnabled" => false,
     #     },
+    #     aws_source_mode: "standalone", # accepts standalone, organization
     #   })
     #
     # @example Response structure
@@ -853,6 +892,7 @@ module Aws::DevOpsAgent
     #   resp.agent_space.agent_space_id #=> String
     #   resp.agent_space.preferences #=> Hash
     #   resp.agent_space.preferences["AgentSpacePreferenceKey"] #=> Boolean
+    #   resp.agent_space.aws_source_mode #=> String, one of "standalone", "organization"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1701,6 +1741,7 @@ module Aws::DevOpsAgent
     #   resp.agent_space.agent_space_id #=> String
     #   resp.agent_space.preferences #=> Hash
     #   resp.agent_space.preferences["AgentSpacePreferenceKey"] #=> Boolean
+    #   resp.agent_space.aws_source_mode #=> String, one of "standalone", "organization"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1872,11 +1913,24 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.source_aws.external_id #=> String
     #   resp.association.configuration.source_aws.agent_elevated_role_arn #=> String
     #   resp.association.configuration.source_aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
+    #   resp.association.configuration.source_aws_org.account_type #=> String, one of "source"
+    #   resp.association.configuration.source_aws_org.organizational_unit.organizational_unit_id #=> String
+    #   resp.association.configuration.source_aws_org.organizational_unit.account_ids #=> Array
+    #   resp.association.configuration.source_aws_org.organizational_unit.account_ids[0] #=> String
+    #   resp.association.configuration.source_aws_org.deployment_state.deployed_account_count #=> Integer
+    #   resp.association.configuration.source_aws_org.deployment_state.issues #=> Array
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].reason_code #=> String, one of "accountSuspended", "accountNotInScope", "managementAccountNotSupported", "stackInstanceInoperable", "accessDenied", "deploymentFailed", "secondaryAccountLimitExceeded"
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].account_count #=> Integer
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].account_ids #=> Array
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].account_ids[0] #=> String
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].message #=> String
+    #   resp.association.configuration.source_aws_org.deployment_state.last_evaluated_at #=> Time
     #   resp.association.configuration.aws.assumable_role_arn #=> String
     #   resp.association.configuration.aws.account_id #=> String
     #   resp.association.configuration.aws.account_type #=> String, one of "monitor"
     #   resp.association.configuration.aws.agent_elevated_role_arn #=> String
     #   resp.association.configuration.aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
+    #   resp.association.configuration.aws.service_management_role_arn #=> String
     #   resp.association.configuration.github.repo_name #=> String
     #   resp.association.configuration.github.repo_id #=> String
     #   resp.association.configuration.github.owner #=> String
@@ -2334,6 +2388,7 @@ module Aws::DevOpsAgent
     #   resp.agent_spaces[0].agent_space_id #=> String
     #   resp.agent_spaces[0].preferences #=> Hash
     #   resp.agent_spaces[0].preferences["AgentSpacePreferenceKey"] #=> Boolean
+    #   resp.agent_spaces[0].aws_source_mode #=> String, one of "standalone", "organization"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ListAgentSpaces AWS API Documentation
     #
@@ -2590,11 +2645,24 @@ module Aws::DevOpsAgent
     #   resp.associations[0].configuration.source_aws.external_id #=> String
     #   resp.associations[0].configuration.source_aws.agent_elevated_role_arn #=> String
     #   resp.associations[0].configuration.source_aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
+    #   resp.associations[0].configuration.source_aws_org.account_type #=> String, one of "source"
+    #   resp.associations[0].configuration.source_aws_org.organizational_unit.organizational_unit_id #=> String
+    #   resp.associations[0].configuration.source_aws_org.organizational_unit.account_ids #=> Array
+    #   resp.associations[0].configuration.source_aws_org.organizational_unit.account_ids[0] #=> String
+    #   resp.associations[0].configuration.source_aws_org.deployment_state.deployed_account_count #=> Integer
+    #   resp.associations[0].configuration.source_aws_org.deployment_state.issues #=> Array
+    #   resp.associations[0].configuration.source_aws_org.deployment_state.issues[0].reason_code #=> String, one of "accountSuspended", "accountNotInScope", "managementAccountNotSupported", "stackInstanceInoperable", "accessDenied", "deploymentFailed", "secondaryAccountLimitExceeded"
+    #   resp.associations[0].configuration.source_aws_org.deployment_state.issues[0].account_count #=> Integer
+    #   resp.associations[0].configuration.source_aws_org.deployment_state.issues[0].account_ids #=> Array
+    #   resp.associations[0].configuration.source_aws_org.deployment_state.issues[0].account_ids[0] #=> String
+    #   resp.associations[0].configuration.source_aws_org.deployment_state.issues[0].message #=> String
+    #   resp.associations[0].configuration.source_aws_org.deployment_state.last_evaluated_at #=> Time
     #   resp.associations[0].configuration.aws.assumable_role_arn #=> String
     #   resp.associations[0].configuration.aws.account_id #=> String
     #   resp.associations[0].configuration.aws.account_type #=> String, one of "monitor"
     #   resp.associations[0].configuration.aws.agent_elevated_role_arn #=> String
     #   resp.associations[0].configuration.aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
+    #   resp.associations[0].configuration.aws.service_management_role_arn #=> String
     #   resp.associations[0].configuration.github.repo_name #=> String
     #   resp.associations[0].configuration.github.repo_id #=> String
     #   resp.associations[0].configuration.github.owner #=> String
@@ -4085,6 +4153,12 @@ module Aws::DevOpsAgent
     #   included revert to their default values. When omitted, the current
     #   preferences are left unchanged.
     #
+    # @option params [String] :aws_source_mode
+    #   Specifies whether the AgentSpace's Amazon Web Services source
+    #   configuration targets an individual Amazon Web Services account or an
+    #   Amazon Web Services Organization. Use this parameter to switch an
+    #   existing AgentSpace between source modes.
+    #
     # @return [Types::UpdateAgentSpaceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAgentSpaceOutput#agent_space #agent_space} => Types::AgentSpace
@@ -4099,6 +4173,7 @@ module Aws::DevOpsAgent
     #     preferences: {
     #       "elevatedActionsEnabled" => false,
     #     },
+    #     aws_source_mode: "standalone", # accepts standalone, organization
     #   })
     #
     # @example Response structure
@@ -4112,6 +4187,7 @@ module Aws::DevOpsAgent
     #   resp.agent_space.agent_space_id #=> String
     #   resp.agent_space.preferences #=> Hash
     #   resp.agent_space.preferences["AgentSpacePreferenceKey"] #=> Boolean
+    #   resp.agent_space.aws_source_mode #=> String, one of "standalone", "organization"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/UpdateAgentSpace AWS API Documentation
     #
@@ -4381,12 +4457,32 @@ module Aws::DevOpsAgent
     #         agent_elevated_role_arn: "RoleArn",
     #         agent_elevated_role_arn_status: "valid", # accepts valid, invalid, pending-confirmation
     #       },
+    #       source_aws_org: {
+    #         account_type: "source", # required, accepts source
+    #         organizational_unit: { # required
+    #           organizational_unit_id: "OrgUnitId", # required
+    #           account_ids: ["AwsAccountId"],
+    #         },
+    #         deployment_state: {
+    #           deployed_account_count: 1,
+    #           issues: [
+    #             {
+    #               reason_code: "accountSuspended", # required, accepts accountSuspended, accountNotInScope, managementAccountNotSupported, stackInstanceInoperable, accessDenied, deploymentFailed, secondaryAccountLimitExceeded
+    #               account_count: 1, # required
+    #               account_ids: ["AwsAccountId"], # required
+    #               message: "OrgSourceIssueMessage",
+    #             },
+    #           ],
+    #           last_evaluated_at: Time.now,
+    #         },
+    #       },
     #       aws: {
     #         assumable_role_arn: "RoleArn", # required
     #         account_id: "AWSConfigurationAccountIdString", # required
     #         account_type: "monitor", # required, accepts monitor
     #         agent_elevated_role_arn: "RoleArn",
     #         agent_elevated_role_arn_status: "valid", # accepts valid, invalid, pending-confirmation
+    #         service_management_role_arn: "RoleArn",
     #       },
     #       github: {
     #         repo_name: "String", # required
@@ -4548,11 +4644,24 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.source_aws.external_id #=> String
     #   resp.association.configuration.source_aws.agent_elevated_role_arn #=> String
     #   resp.association.configuration.source_aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
+    #   resp.association.configuration.source_aws_org.account_type #=> String, one of "source"
+    #   resp.association.configuration.source_aws_org.organizational_unit.organizational_unit_id #=> String
+    #   resp.association.configuration.source_aws_org.organizational_unit.account_ids #=> Array
+    #   resp.association.configuration.source_aws_org.organizational_unit.account_ids[0] #=> String
+    #   resp.association.configuration.source_aws_org.deployment_state.deployed_account_count #=> Integer
+    #   resp.association.configuration.source_aws_org.deployment_state.issues #=> Array
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].reason_code #=> String, one of "accountSuspended", "accountNotInScope", "managementAccountNotSupported", "stackInstanceInoperable", "accessDenied", "deploymentFailed", "secondaryAccountLimitExceeded"
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].account_count #=> Integer
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].account_ids #=> Array
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].account_ids[0] #=> String
+    #   resp.association.configuration.source_aws_org.deployment_state.issues[0].message #=> String
+    #   resp.association.configuration.source_aws_org.deployment_state.last_evaluated_at #=> Time
     #   resp.association.configuration.aws.assumable_role_arn #=> String
     #   resp.association.configuration.aws.account_id #=> String
     #   resp.association.configuration.aws.account_type #=> String, one of "monitor"
     #   resp.association.configuration.aws.agent_elevated_role_arn #=> String
     #   resp.association.configuration.aws.agent_elevated_role_arn_status #=> String, one of "valid", "invalid", "pending-confirmation"
+    #   resp.association.configuration.aws.service_management_role_arn #=> String
     #   resp.association.configuration.github.repo_name #=> String
     #   resp.association.configuration.github.repo_id #=> String
     #   resp.association.configuration.github.owner #=> String
@@ -5073,7 +5182,7 @@ module Aws::DevOpsAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-devopsagent'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

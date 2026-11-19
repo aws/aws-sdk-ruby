@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.174.0 (2026-11-19)
+------------------
+
+* Feature - Adds parameters to support custom execution roles for service-managed stack sets to CreateStackSet, UpdateStackSet, and DescribeStackSet, enabling the use of Macros, Transforms, and Nested Stacks.
+
 1.173.0 (2026-11-18)
 ------------------
 

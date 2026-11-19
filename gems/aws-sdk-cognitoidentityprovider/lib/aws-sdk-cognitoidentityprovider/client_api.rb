@@ -129,8 +129,16 @@ module Aws::CognitoIdentityProvider
     AvailableChallengeListType = Shapes::ListShape.new(name: 'AvailableChallengeListType')
     BlockedIPRangeListType = Shapes::ListShape.new(name: 'BlockedIPRangeListType')
     BooleanType = Shapes::BooleanShape.new(name: 'BooleanType')
+    CIMDCacheActionType = Shapes::StringShape.new(name: 'CIMDCacheActionType')
+    CIMDPolicyIdType = Shapes::StringShape.new(name: 'CIMDPolicyIdType')
+    CIMDPolicyNameType = Shapes::StringShape.new(name: 'CIMDPolicyNameType')
+    CIMDPolicySummaryListType = Shapes::ListShape.new(name: 'CIMDPolicySummaryListType')
+    CIMDPolicySummaryType = Shapes::StructureShape.new(name: 'CIMDPolicySummaryType')
+    CIMDPolicyType = Shapes::StructureShape.new(name: 'CIMDPolicyType')
     CSSType = Shapes::StringShape.new(name: 'CSSType')
     CSSVersionType = Shapes::StringShape.new(name: 'CSSVersionType')
+    CacheDurationType = Shapes::IntegerShape.new(name: 'CacheDurationType')
+    CachedCIMDURLDoesNotExistException = Shapes::StructureShape.new(name: 'CachedCIMDURLDoesNotExistException')
     CallbackURLsListType = Shapes::ListShape.new(name: 'CallbackURLsListType')
     CancelPointInTimeRecoveryRequest = Shapes::StructureShape.new(name: 'CancelPointInTimeRecoveryRequest')
     CancelPointInTimeRecoveryResponse = Shapes::StructureShape.new(name: 'CancelPointInTimeRecoveryResponse')
@@ -146,10 +154,13 @@ module Aws::CognitoIdentityProvider
     ClientAuthenticationResultType = Shapes::StructureShape.new(name: 'ClientAuthenticationResultType')
     ClientIdType = Shapes::StringShape.new(name: 'ClientIdType')
     ClientMetadataType = Shapes::MapShape.new(name: 'ClientMetadataType')
+    ClientMetadataURLListType = Shapes::ListShape.new(name: 'ClientMetadataURLListType')
+    ClientMetadataURLType = Shapes::StructureShape.new(name: 'ClientMetadataURLType')
     ClientNameType = Shapes::StringShape.new(name: 'ClientNameType')
     ClientPermissionListType = Shapes::ListShape.new(name: 'ClientPermissionListType')
     ClientPermissionType = Shapes::StringShape.new(name: 'ClientPermissionType')
     ClientSSOSessionConfigType = Shapes::StructureShape.new(name: 'ClientSSOSessionConfigType')
+    ClientSecretArnType = Shapes::StringShape.new(name: 'ClientSecretArnType')
     ClientSecretDescriptorListType = Shapes::ListShape.new(name: 'ClientSecretDescriptorListType')
     ClientSecretDescriptorType = Shapes::StructureShape.new(name: 'ClientSecretDescriptorType')
     ClientSecretIdType = Shapes::StringShape.new(name: 'ClientSecretIdType')
@@ -177,6 +188,8 @@ module Aws::CognitoIdentityProvider
     ConfirmSignUpResponse = Shapes::StructureShape.new(name: 'ConfirmSignUpResponse')
     ConfirmationCodeType = Shapes::StringShape.new(name: 'ConfirmationCodeType')
     ContextDataType = Shapes::StructureShape.new(name: 'ContextDataType')
+    CreateCIMDPolicyRequest = Shapes::StructureShape.new(name: 'CreateCIMDPolicyRequest')
+    CreateCIMDPolicyResponse = Shapes::StructureShape.new(name: 'CreateCIMDPolicyResponse')
     CreateGroupRequest = Shapes::StructureShape.new(name: 'CreateGroupRequest')
     CreateGroupResponse = Shapes::StructureShape.new(name: 'CreateGroupResponse')
     CreateIdentityProviderRequest = Shapes::StructureShape.new(name: 'CreateIdentityProviderRequest')
@@ -207,6 +220,8 @@ module Aws::CognitoIdentityProvider
     DateType = Shapes::TimestampShape.new(name: 'DateType')
     DcrConfigurationType = Shapes::StructureShape.new(name: 'DcrConfigurationType')
     DefaultEmailOptionType = Shapes::StringShape.new(name: 'DefaultEmailOptionType')
+    DeleteCIMDPolicyRequest = Shapes::StructureShape.new(name: 'DeleteCIMDPolicyRequest')
+    DeleteCIMDPolicyResponse = Shapes::StructureShape.new(name: 'DeleteCIMDPolicyResponse')
     DeleteGroupRequest = Shapes::StructureShape.new(name: 'DeleteGroupRequest')
     DeleteIdentityProviderRequest = Shapes::StructureShape.new(name: 'DeleteIdentityProviderRequest')
     DeleteManagedLoginBrandingRequest = Shapes::StructureShape.new(name: 'DeleteManagedLoginBrandingRequest')
@@ -228,6 +243,8 @@ module Aws::CognitoIdentityProvider
     DeletionProtectionType = Shapes::StringShape.new(name: 'DeletionProtectionType')
     DeliveryMediumListType = Shapes::ListShape.new(name: 'DeliveryMediumListType')
     DeliveryMediumType = Shapes::StringShape.new(name: 'DeliveryMediumType')
+    DescribeCIMDPolicyRequest = Shapes::StructureShape.new(name: 'DescribeCIMDPolicyRequest')
+    DescribeCIMDPolicyResponse = Shapes::StructureShape.new(name: 'DescribeCIMDPolicyResponse')
     DescribeIdentityProviderRequest = Shapes::StructureShape.new(name: 'DescribeIdentityProviderRequest')
     DescribeIdentityProviderResponse = Shapes::StructureShape.new(name: 'DescribeIdentityProviderResponse')
     DescribeManagedLoginBrandingByClientRequest = Shapes::StructureShape.new(name: 'DescribeManagedLoginBrandingByClientRequest')
@@ -390,6 +407,10 @@ module Aws::CognitoIdentityProvider
     LimitType = Shapes::StructureShape.new(name: 'LimitType')
     LinkUrlType = Shapes::StringShape.new(name: 'LinkUrlType')
     LinksType = Shapes::MapShape.new(name: 'LinksType')
+    ListCIMDPoliciesRequest = Shapes::StructureShape.new(name: 'ListCIMDPoliciesRequest')
+    ListCIMDPoliciesResponse = Shapes::StructureShape.new(name: 'ListCIMDPoliciesResponse')
+    ListClientMetadataURLsRequest = Shapes::StructureShape.new(name: 'ListClientMetadataURLsRequest')
+    ListClientMetadataURLsResponse = Shapes::StructureShape.new(name: 'ListClientMetadataURLsResponse')
     ListDevicesRequest = Shapes::StructureShape.new(name: 'ListDevicesRequest')
     ListDevicesResponse = Shapes::StructureShape.new(name: 'ListDevicesResponse')
     ListGroupsRequest = Shapes::StructureShape.new(name: 'ListGroupsRequest')
@@ -442,6 +463,7 @@ module Aws::CognitoIdentityProvider
     MessageActionType = Shapes::StringShape.new(name: 'MessageActionType')
     MessageTemplateType = Shapes::StructureShape.new(name: 'MessageTemplateType')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
+    MetadataURLType = Shapes::StringShape.new(name: 'MetadataURLType')
     NewDeviceMetadataType = Shapes::StructureShape.new(name: 'NewDeviceMetadataType')
     NotAuthorizedException = Shapes::StructureShape.new(name: 'NotAuthorizedException')
     NotifyConfigurationType = Shapes::StructureShape.new(name: 'NotifyConfigurationType')
@@ -613,6 +635,8 @@ module Aws::CognitoIdentityProvider
     TooManyFailedAttemptsException = Shapes::StructureShape.new(name: 'TooManyFailedAttemptsException')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UICustomizationType = Shapes::StructureShape.new(name: 'UICustomizationType')
+    URLPatternListType = Shapes::ListShape.new(name: 'URLPatternListType')
+    URLPatternType = Shapes::StringShape.new(name: 'URLPatternType')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UnexpectedLambdaException = Shapes::StructureShape.new(name: 'UnexpectedLambdaException')
     UnsupportedIdentityProviderException = Shapes::StructureShape.new(name: 'UnsupportedIdentityProviderException')
@@ -623,6 +647,10 @@ module Aws::CognitoIdentityProvider
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAuthEventFeedbackRequest = Shapes::StructureShape.new(name: 'UpdateAuthEventFeedbackRequest')
     UpdateAuthEventFeedbackResponse = Shapes::StructureShape.new(name: 'UpdateAuthEventFeedbackResponse')
+    UpdateCIMDPolicyRequest = Shapes::StructureShape.new(name: 'UpdateCIMDPolicyRequest')
+    UpdateCIMDPolicyResponse = Shapes::StructureShape.new(name: 'UpdateCIMDPolicyResponse')
+    UpdateClientMetadataURLStateRequest = Shapes::StructureShape.new(name: 'UpdateClientMetadataURLStateRequest')
+    UpdateClientMetadataURLStateResponse = Shapes::StructureShape.new(name: 'UpdateClientMetadataURLStateResponse')
     UpdateDeviceStatusRequest = Shapes::StructureShape.new(name: 'UpdateDeviceStatusRequest')
     UpdateDeviceStatusResponse = Shapes::StructureShape.new(name: 'UpdateDeviceStatusResponse')
     UpdateGroupRequest = Shapes::StructureShape.new(name: 'UpdateGroupRequest')
@@ -1097,6 +1125,29 @@ module Aws::CognitoIdentityProvider
 
     BlockedIPRangeListType.member = Shapes::ShapeRef.new(shape: StringType)
 
+    CIMDPolicySummaryListType.member = Shapes::ShapeRef.new(shape: CIMDPolicySummaryType)
+
+    CIMDPolicySummaryType.add_member(:cimd_policy_id, Shapes::ShapeRef.new(shape: CIMDPolicyIdType, required: true, location_name: "CIMDPolicyId"))
+    CIMDPolicySummaryType.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId"))
+    CIMDPolicySummaryType.add_member(:policy_name, Shapes::ShapeRef.new(shape: CIMDPolicyNameType, required: true, location_name: "PolicyName"))
+    CIMDPolicySummaryType.add_member(:cache_duration, Shapes::ShapeRef.new(shape: CacheDurationType, location_name: "CacheDuration"))
+    CIMDPolicySummaryType.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
+    CIMDPolicySummaryType.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "LastModifiedDate"))
+    CIMDPolicySummaryType.struct_class = Types::CIMDPolicySummaryType
+
+    CIMDPolicyType.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    CIMDPolicyType.add_member(:cimd_policy_id, Shapes::ShapeRef.new(shape: CIMDPolicyIdType, required: true, location_name: "CIMDPolicyId"))
+    CIMDPolicyType.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId"))
+    CIMDPolicyType.add_member(:policy_name, Shapes::ShapeRef.new(shape: CIMDPolicyNameType, required: true, location_name: "PolicyName"))
+    CIMDPolicyType.add_member(:cache_duration, Shapes::ShapeRef.new(shape: CacheDurationType, location_name: "CacheDuration"))
+    CIMDPolicyType.add_member(:url_patterns, Shapes::ShapeRef.new(shape: URLPatternListType, location_name: "URLPatterns"))
+    CIMDPolicyType.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
+    CIMDPolicyType.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "LastModifiedDate"))
+    CIMDPolicyType.struct_class = Types::CIMDPolicyType
+
+    CachedCIMDURLDoesNotExistException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
+    CachedCIMDURLDoesNotExistException.struct_class = Types::CachedCIMDURLDoesNotExistException
+
     CallbackURLsListType.member = Shapes::ShapeRef.new(shape: RedirectUrlType)
 
     CancelPointInTimeRecoveryRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
@@ -1132,6 +1183,13 @@ module Aws::CognitoIdentityProvider
 
     ClientMetadataType.key = Shapes::ShapeRef.new(shape: StringType)
     ClientMetadataType.value = Shapes::ShapeRef.new(shape: StringType)
+
+    ClientMetadataURLListType.member = Shapes::ShapeRef.new(shape: ClientMetadataURLType)
+
+    ClientMetadataURLType.add_member(:url, Shapes::ShapeRef.new(shape: MetadataURLType, required: true, location_name: "URL"))
+    ClientMetadataURLType.add_member(:cached_date, Shapes::ShapeRef.new(shape: DateType, location_name: "CachedDate"))
+    ClientMetadataURLType.add_member(:expiration_date, Shapes::ShapeRef.new(shape: DateType, location_name: "ExpirationDate"))
+    ClientMetadataURLType.struct_class = Types::ClientMetadataURLType
 
     ClientPermissionListType.member = Shapes::ShapeRef.new(shape: ClientPermissionType)
 
@@ -1221,6 +1279,16 @@ module Aws::CognitoIdentityProvider
     ContextDataType.add_member(:encoded_data, Shapes::ShapeRef.new(shape: StringType, location_name: "EncodedData"))
     ContextDataType.struct_class = Types::ContextDataType
 
+    CreateCIMDPolicyRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    CreateCIMDPolicyRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, required: true, location_name: "ClientId"))
+    CreateCIMDPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: CIMDPolicyNameType, required: true, location_name: "PolicyName"))
+    CreateCIMDPolicyRequest.add_member(:cache_duration, Shapes::ShapeRef.new(shape: CacheDurationType, location_name: "CacheDuration"))
+    CreateCIMDPolicyRequest.add_member(:url_patterns, Shapes::ShapeRef.new(shape: URLPatternListType, required: true, location_name: "URLPatterns"))
+    CreateCIMDPolicyRequest.struct_class = Types::CreateCIMDPolicyRequest
+
+    CreateCIMDPolicyResponse.add_member(:cimd_policy, Shapes::ShapeRef.new(shape: CIMDPolicyType, required: true, location_name: "CIMDPolicy"))
+    CreateCIMDPolicyResponse.struct_class = Types::CreateCIMDPolicyResponse
+
     CreateGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupNameType, required: true, location_name: "GroupName"))
     CreateGroupRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     CreateGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionType, location_name: "Description"))
@@ -1306,6 +1374,7 @@ module Aws::CognitoIdentityProvider
     CreateUserPoolClientRequest.add_member(:enable_propagate_additional_user_context_data, Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "EnablePropagateAdditionalUserContextData"))
     CreateUserPoolClientRequest.add_member(:auth_session_validity, Shapes::ShapeRef.new(shape: AuthSessionValidityType, location_name: "AuthSessionValidity"))
     CreateUserPoolClientRequest.add_member(:refresh_token_rotation, Shapes::ShapeRef.new(shape: RefreshTokenRotationType, location_name: "RefreshTokenRotation"))
+    CreateUserPoolClientRequest.add_member(:publish_secrets_in_aws_secrets_manager, Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "PublishSecretsInAWSSecretsManager"))
     CreateUserPoolClientRequest.struct_class = Types::CreateUserPoolClientRequest
 
     CreateUserPoolClientResponse.add_member(:user_pool_client, Shapes::ShapeRef.new(shape: UserPoolClientType, location_name: "UserPoolClient"))
@@ -1385,6 +1454,12 @@ module Aws::CognitoIdentityProvider
     DcrConfigurationType.add_member(:allowed_scopes, Shapes::ShapeRef.new(shape: ScopeListType, location_name: "AllowedScopes"))
     DcrConfigurationType.struct_class = Types::DcrConfigurationType
 
+    DeleteCIMDPolicyRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    DeleteCIMDPolicyRequest.add_member(:cimd_policy_id, Shapes::ShapeRef.new(shape: CIMDPolicyIdType, required: true, location_name: "CIMDPolicyId"))
+    DeleteCIMDPolicyRequest.struct_class = Types::DeleteCIMDPolicyRequest
+
+    DeleteCIMDPolicyResponse.struct_class = Types::DeleteCIMDPolicyResponse
+
     DeleteGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupNameType, required: true, location_name: "GroupName"))
     DeleteGroupRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     DeleteGroupRequest.struct_class = Types::DeleteGroupRequest
@@ -1448,6 +1523,13 @@ module Aws::CognitoIdentityProvider
     DeleteWebAuthnCredentialResponse.struct_class = Types::DeleteWebAuthnCredentialResponse
 
     DeliveryMediumListType.member = Shapes::ShapeRef.new(shape: DeliveryMediumType)
+
+    DescribeCIMDPolicyRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    DescribeCIMDPolicyRequest.add_member(:cimd_policy_id, Shapes::ShapeRef.new(shape: CIMDPolicyIdType, required: true, location_name: "CIMDPolicyId"))
+    DescribeCIMDPolicyRequest.struct_class = Types::DescribeCIMDPolicyRequest
+
+    DescribeCIMDPolicyResponse.add_member(:cimd_policy, Shapes::ShapeRef.new(shape: CIMDPolicyType, required: true, location_name: "CIMDPolicy"))
+    DescribeCIMDPolicyResponse.struct_class = Types::DescribeCIMDPolicyResponse
 
     DescribeIdentityProviderRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     DescribeIdentityProviderRequest.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderNameType, required: true, location_name: "ProviderName"))
@@ -1929,6 +2011,25 @@ module Aws::CognitoIdentityProvider
 
     LinksType.key = Shapes::ShapeRef.new(shape: LanguageIdType)
     LinksType.value = Shapes::ShapeRef.new(shape: LinkUrlType)
+
+    ListCIMDPoliciesRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    ListCIMDPoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationKeyType, location_name: "NextToken"))
+    ListCIMDPoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PoolQueryLimitType, location_name: "MaxResults"))
+    ListCIMDPoliciesRequest.struct_class = Types::ListCIMDPoliciesRequest
+
+    ListCIMDPoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationKeyType, location_name: "NextToken"))
+    ListCIMDPoliciesResponse.add_member(:cimd_policies, Shapes::ShapeRef.new(shape: CIMDPolicySummaryListType, required: true, location_name: "CIMDPolicies"))
+    ListCIMDPoliciesResponse.struct_class = Types::ListCIMDPoliciesResponse
+
+    ListClientMetadataURLsRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    ListClientMetadataURLsRequest.add_member(:cimd_policy_id, Shapes::ShapeRef.new(shape: CIMDPolicyIdType, required: true, location_name: "CIMDPolicyId"))
+    ListClientMetadataURLsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationKeyType, location_name: "NextToken"))
+    ListClientMetadataURLsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PoolQueryLimitType, location_name: "MaxResults"))
+    ListClientMetadataURLsRequest.struct_class = Types::ListClientMetadataURLsRequest
+
+    ListClientMetadataURLsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationKeyType, location_name: "NextToken"))
+    ListClientMetadataURLsResponse.add_member(:client_metadata_urls, Shapes::ShapeRef.new(shape: ClientMetadataURLListType, required: true, location_name: "ClientMetadataURLs"))
+    ListClientMetadataURLsResponse.struct_class = Types::ListClientMetadataURLsResponse
 
     ListDevicesRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, required: true, location_name: "AccessToken"))
     ListDevicesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: QueryLimitType, location_name: "Limit"))
@@ -2548,6 +2649,8 @@ module Aws::CognitoIdentityProvider
     UICustomizationType.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
     UICustomizationType.struct_class = Types::UICustomizationType
 
+    URLPatternListType.member = Shapes::ShapeRef.new(shape: URLPatternType)
+
     UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
     UnauthorizedException.struct_class = Types::UnauthorizedException
 
@@ -2580,6 +2683,25 @@ module Aws::CognitoIdentityProvider
     UpdateAuthEventFeedbackRequest.struct_class = Types::UpdateAuthEventFeedbackRequest
 
     UpdateAuthEventFeedbackResponse.struct_class = Types::UpdateAuthEventFeedbackResponse
+
+    UpdateCIMDPolicyRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    UpdateCIMDPolicyRequest.add_member(:cimd_policy_id, Shapes::ShapeRef.new(shape: CIMDPolicyIdType, required: true, location_name: "CIMDPolicyId"))
+    UpdateCIMDPolicyRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, required: true, location_name: "ClientId"))
+    UpdateCIMDPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: CIMDPolicyNameType, location_name: "PolicyName"))
+    UpdateCIMDPolicyRequest.add_member(:cache_duration, Shapes::ShapeRef.new(shape: CacheDurationType, location_name: "CacheDuration"))
+    UpdateCIMDPolicyRequest.add_member(:url_patterns, Shapes::ShapeRef.new(shape: URLPatternListType, required: true, location_name: "URLPatterns"))
+    UpdateCIMDPolicyRequest.struct_class = Types::UpdateCIMDPolicyRequest
+
+    UpdateCIMDPolicyResponse.add_member(:cimd_policy, Shapes::ShapeRef.new(shape: CIMDPolicyType, required: true, location_name: "CIMDPolicy"))
+    UpdateCIMDPolicyResponse.struct_class = Types::UpdateCIMDPolicyResponse
+
+    UpdateClientMetadataURLStateRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    UpdateClientMetadataURLStateRequest.add_member(:cimd_policy_id, Shapes::ShapeRef.new(shape: CIMDPolicyIdType, required: true, location_name: "CIMDPolicyId"))
+    UpdateClientMetadataURLStateRequest.add_member(:url, Shapes::ShapeRef.new(shape: MetadataURLType, required: true, location_name: "URL"))
+    UpdateClientMetadataURLStateRequest.add_member(:action, Shapes::ShapeRef.new(shape: CIMDCacheActionType, required: true, location_name: "Action"))
+    UpdateClientMetadataURLStateRequest.struct_class = Types::UpdateClientMetadataURLStateRequest
+
+    UpdateClientMetadataURLStateResponse.struct_class = Types::UpdateClientMetadataURLStateResponse
 
     UpdateDeviceStatusRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, required: true, location_name: "AccessToken"))
     UpdateDeviceStatusRequest.add_member(:device_key, Shapes::ShapeRef.new(shape: DeviceKeyType, required: true, location_name: "DeviceKey"))
@@ -2677,6 +2799,7 @@ module Aws::CognitoIdentityProvider
     UpdateUserPoolClientRequest.add_member(:enable_propagate_additional_user_context_data, Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "EnablePropagateAdditionalUserContextData"))
     UpdateUserPoolClientRequest.add_member(:auth_session_validity, Shapes::ShapeRef.new(shape: AuthSessionValidityType, location_name: "AuthSessionValidity"))
     UpdateUserPoolClientRequest.add_member(:refresh_token_rotation, Shapes::ShapeRef.new(shape: RefreshTokenRotationType, location_name: "RefreshTokenRotation"))
+    UpdateUserPoolClientRequest.add_member(:publish_secrets_in_aws_secrets_manager, Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "PublishSecretsInAWSSecretsManager"))
     UpdateUserPoolClientRequest.struct_class = Types::UpdateUserPoolClientRequest
 
     UpdateUserPoolClientResponse.add_member(:user_pool_client, Shapes::ShapeRef.new(shape: UserPoolClientType, location_name: "UserPoolClient"))
@@ -2788,6 +2911,7 @@ module Aws::CognitoIdentityProvider
     UserPoolClientType.add_member(:client_name, Shapes::ShapeRef.new(shape: ClientNameType, location_name: "ClientName"))
     UserPoolClientType.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId"))
     UserPoolClientType.add_member(:client_secret, Shapes::ShapeRef.new(shape: ClientSecretType, location_name: "ClientSecret"))
+    UserPoolClientType.add_member(:client_secret_arn, Shapes::ShapeRef.new(shape: ClientSecretArnType, location_name: "ClientSecretArn"))
     UserPoolClientType.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "LastModifiedDate"))
     UserPoolClientType.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
     UserPoolClientType.add_member(:refresh_token_validity, Shapes::ShapeRef.new(shape: RefreshTokenValidityType, location_name: "RefreshTokenValidity"))
@@ -3712,6 +3836,23 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)
 
+      api.add_operation(:create_cimd_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCIMDPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateCIMDPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCIMDPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: FeatureUnavailableInTierException)
+      end)
+
       api.add_operation(:create_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateGroup"
         o.http_method = "POST"
@@ -3876,6 +4017,21 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: FeatureUnavailableInTierException)
+      end)
+
+      api.add_operation(:delete_cimd_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCIMDPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCIMDPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCIMDPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
       api.add_operation(:delete_group, Seahorse::Model::Operation.new.tap do |o|
@@ -4079,6 +4235,19 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
+      end)
+
+      api.add_operation(:describe_cimd_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeCIMDPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeCIMDPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeCIMDPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
       api.add_operation(:describe_identity_provider, Seahorse::Model::Operation.new.tap do |o|
@@ -4639,6 +4808,44 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:list_cimd_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCIMDPolicies"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListCIMDPoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCIMDPoliciesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_client_metadata_urls, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListClientMetadataURLs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListClientMetadataURLsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListClientMetadataURLsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_devices, Seahorse::Model::Operation.new.tap do |o|
@@ -5289,6 +5496,39 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: UserPoolAddOnNotEnabledException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:update_cimd_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCIMDPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCIMDPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCIMDPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: FeatureUnavailableInTierException)
+      end)
+
+      api.add_operation(:update_client_metadata_url_state, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateClientMetadataURLState"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateClientMetadataURLStateRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateClientMetadataURLStateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CachedCIMDURLDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: FeatureUnavailableInTierException)
       end)
 
       api.add_operation(:update_device_status, Seahorse::Model::Operation.new.tap do |o|

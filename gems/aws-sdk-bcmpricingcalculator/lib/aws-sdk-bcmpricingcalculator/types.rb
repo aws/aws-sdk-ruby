@@ -10,7 +10,9 @@
 module Aws::BCMPricingCalculator
   module Types
 
-    # You do not have sufficient access to perform this action.
+    # The request is denied because you don't have sufficient permissions
+    # to perform this operation. Verify that you have the required
+    # permissions and try again.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -61,7 +63,7 @@ module Aws::BCMPricingCalculator
     # @!attribute [rw] commitment
     #   The hourly commitment, in the same currency of the
     #   `savingsPlanOfferingId`. This is a value between 0.001 and 1
-    #   million. You cannot specify more than five digits after the decimal
+    #   million. You can't specify more than five digits after the decimal
     #   point.
     #   @return [Float]
     #
@@ -207,7 +209,7 @@ module Aws::BCMPricingCalculator
     #
     # @!attribute [rw] errors
     #   Returns the list of errors reason and the commitment item keys that
-    #   cannot be created in the Bill Scenario.
+    #   can't be created in the Bill Scenario.
     #   @return [Array<Types::BatchCreateBillScenarioCommitmentModificationError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/BatchCreateBillScenarioCommitmentModificationResponse AWS API Documentation
@@ -413,7 +415,7 @@ module Aws::BCMPricingCalculator
     #
     # @!attribute [rw] errors
     #   Returns the list of errors reason and the usage item keys that
-    #   cannot be created in the Bill Scenario.
+    #   can't be created in the Bill Scenario.
     #   @return [Array<Types::BatchCreateBillScenarioUsageModificationError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/BatchCreateBillScenarioUsageModificationResponse AWS API Documentation
@@ -611,7 +613,7 @@ module Aws::BCMPricingCalculator
     #
     # @!attribute [rw] errors
     #   Returns the list of errors reason and the usage item keys that
-    #   cannot be created in the Workload estimate.
+    #   can't be created in the Workload estimate.
     #   @return [Array<Types::BatchCreateWorkloadEstimateUsageError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/BatchCreateWorkloadEstimateUsageResponse AWS API Documentation
@@ -668,7 +670,7 @@ module Aws::BCMPricingCalculator
 
     # @!attribute [rw] errors
     #   Returns the list of errors reason and the commitment item keys that
-    #   cannot be deleted from the Bill Scenario.
+    #   can't be deleted from the Bill Scenario.
     #   @return [Array<Types::BatchDeleteBillScenarioCommitmentModificationError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/BatchDeleteBillScenarioCommitmentModificationResponse AWS API Documentation
@@ -724,7 +726,7 @@ module Aws::BCMPricingCalculator
 
     # @!attribute [rw] errors
     #   Returns the list of errors reason and the usage item keys that
-    #   cannot be deleted from the Bill Scenario.
+    #   can't be deleted from the Bill Scenario.
     #   @return [Array<Types::BatchDeleteBillScenarioUsageModificationError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/BatchDeleteBillScenarioUsageModificationResponse AWS API Documentation
@@ -780,7 +782,7 @@ module Aws::BCMPricingCalculator
 
     # @!attribute [rw] errors
     #   Returns the list of errors reason and the usage item keys that
-    #   cannot be deleted from the Workload estimate.
+    #   can't be deleted from the Workload estimate.
     #   @return [Array<Types::BatchDeleteWorkloadEstimateUsageError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/BatchDeleteWorkloadEstimateUsageResponse AWS API Documentation
@@ -861,7 +863,7 @@ module Aws::BCMPricingCalculator
     #
     # @!attribute [rw] errors
     #   Returns the list of error reasons and commitment line item IDs that
-    #   could not be updated for the Bill Scenario.
+    #   couldn't be updated for the Bill Scenario.
     #   @return [Array<Types::BatchUpdateBillScenarioCommitmentModificationError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/BatchUpdateBillScenarioCommitmentModificationResponse AWS API Documentation
@@ -948,8 +950,8 @@ module Aws::BCMPricingCalculator
     #   @return [Array<Types::BillScenarioUsageModificationItem>]
     #
     # @!attribute [rw] errors
-    #   Returns the list of error reasons and usage line item IDs that could
-    #   not be updated for the Bill Scenario.
+    #   Returns the list of error reasons and usage line item IDs that
+    #   couldn't be updated for the Bill Scenario.
     #   @return [Array<Types::BatchUpdateBillScenarioUsageModificationError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/BatchUpdateBillScenarioUsageModificationResponse AWS API Documentation
@@ -1036,8 +1038,8 @@ module Aws::BCMPricingCalculator
     #   @return [Array<Types::WorkloadEstimateUsageItem>]
     #
     # @!attribute [rw] errors
-    #   Returns the list of error reasons and usage line item IDs that could
-    #   not be updated for the Workload estimate.
+    #   Returns the list of error reasons and usage line item IDs that
+    #   couldn't be updated for the Workload estimate.
     #   @return [Array<Types::BatchUpdateWorkloadEstimateUsageError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/BatchUpdateWorkloadEstimateUsageResponse AWS API Documentation
@@ -1552,18 +1554,19 @@ module Aws::BCMPricingCalculator
       include Aws::Structure
     end
 
-    # The request could not be processed because of conflict in the current
-    # state of the resource.
+    # The request couldn't be processed because the resource is in a
+    # conflicting state. Verify the resource's current state and retry the
+    # request.
     #
     # @!attribute [rw] message
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The identifier of the resource that was not found.
+    #   The identifier of the resource that is in a conflicting state.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of the resource that was not found.
+    #   The type of the resource that is in a conflicting state.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/ConflictException AWS API Documentation
@@ -1717,8 +1720,8 @@ module Aws::BCMPricingCalculator
     #   @return [Time]
     #
     # @!attribute [rw] group_sharing_preference
-    #   The setting for the reserved instance and savings plan group sharing
-    #   used in this estimate.
+    #   The setting for the reserved instance and savings plans group
+    #   sharing used in this estimate.
     #   @return [String]
     #
     # @!attribute [rw] cost_category_group_sharing_preference_arn
@@ -1766,8 +1769,8 @@ module Aws::BCMPricingCalculator
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] group_sharing_preference
-    #   The setting for the reserved instance and savings plan group sharing
-    #   used in this estimate.
+    #   The setting for the reserved instance and savings plans group
+    #   sharing used in this estimate.
     #   @return [String]
     #
     # @!attribute [rw] cost_category_group_sharing_preference_arn
@@ -1816,8 +1819,8 @@ module Aws::BCMPricingCalculator
     #   @return [String]
     #
     # @!attribute [rw] group_sharing_preference
-    #   The setting for the reserved instance and savings plan group sharing
-    #   used in this estimate.
+    #   The setting for the reserved instance and savings plans group
+    #   sharing used in this estimate.
     #   @return [String]
     #
     # @!attribute [rw] cost_category_group_sharing_preference_arn
@@ -1854,7 +1857,10 @@ module Aws::BCMPricingCalculator
     #   @return [String]
     #
     # @!attribute [rw] rate_type
-    #   The type of pricing rates to use for the estimate.
+    #   The type of pricing rates for the estimate. You can only use a rate
+    #   type that your Pricing Calculator rate preferences allow. If you use
+    #   billing transfer as a bill source account, you can only use
+    #   BEFORE\_DISCOUNTS.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2119,8 +2125,8 @@ module Aws::BCMPricingCalculator
     #   @return [Time]
     #
     # @!attribute [rw] group_sharing_preference
-    #   The setting for the reserved instance and savings plan group sharing
-    #   used in this estimate.
+    #   The setting for the reserved instance and savings plans group
+    #   sharing used in this estimate.
     #   @return [String]
     #
     # @!attribute [rw] cost_category_group_sharing_preference_arn
@@ -2192,8 +2198,8 @@ module Aws::BCMPricingCalculator
     #   @return [String]
     #
     # @!attribute [rw] group_sharing_preference
-    #   The setting for the reserved instance and savings plan group sharing
-    #   used in this estimate.
+    #   The setting for the reserved instance and savings plans group
+    #   sharing used in this estimate.
     #   @return [String]
     #
     # @!attribute [rw] cost_category_group_sharing_preference_arn
@@ -2241,6 +2247,203 @@ module Aws::BCMPricingCalculator
       :management_account_rate_type_selections,
       :member_account_rate_type_selections,
       :standalone_account_rate_type_selections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a usage line that couldn't be priced.
+    #
+    # @!attribute [rw] key
+    #   The key of the usage line in the request that couldn't be priced.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   The Amazon Web Services service code of the usage line that
+    #   couldn't be priced.
+    #   @return [String]
+    #
+    # @!attribute [rw] usage_type
+    #   The usage type of the usage line that couldn't be priced.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation
+    #   The operation of the usage line that couldn't be priced.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The code associated with the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The message that describes the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/GetUsageLinesEstimatedCostError AWS API Documentation
+    #
+    class GetUsageLinesEstimatedCostError < Struct.new(
+      :key,
+      :service_code,
+      :usage_type,
+      :operation,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the estimated cost of the usage amount for a usage line.
+    #
+    # @!attribute [rw] usage_amount
+    #   The usage amount that was priced.
+    #   @return [Float]
+    #
+    # @!attribute [rw] usage_unit
+    #   The unit of the usage amount, for example `Hrs` or `GB-Mo`.
+    #   @return [String]
+    #
+    # @!attribute [rw] cost
+    #   The estimated cost for the given usage amount.
+    #   @return [Float]
+    #
+    # @!attribute [rw] currency
+    #   The currency of the estimated cost.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/GetUsageLinesEstimatedCostEstimatedCost AWS API Documentation
+    #
+    class GetUsageLinesEstimatedCostEstimatedCost < Struct.new(
+      :usage_amount,
+      :usage_unit,
+      :cost,
+      :currency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a usage line that you want to estimate.
+    #
+    # @!attribute [rw] service_code
+    #   The Amazon Web Services service code of the usage line, for example
+    #   `AmazonEC2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] usage_type
+    #   The usage type of the usage line, for example `BoxUsage:t3.micro`.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation
+    #   The operation of the usage line, for example `RunInstances`.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   A unique identifier for the usage line in the request. Use the key
+    #   to match the usage line with its result in `lineItems` or `errors`
+    #   in the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] amount
+    #   The usage amount to price for the usage line in the usage type's
+    #   pricing unit. This value must be 0 or greater.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/GetUsageLinesEstimatedCostInput AWS API Documentation
+    #
+    class GetUsageLinesEstimatedCostInput < Struct.new(
+      :service_code,
+      :usage_type,
+      :operation,
+      :key,
+      :amount)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the estimated cost of a usage line that was priced.
+    #
+    # @!attribute [rw] key
+    #   The key of the usage line in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   The Amazon Web Services service code of the usage line.
+    #   @return [String]
+    #
+    # @!attribute [rw] usage_type
+    #   The usage type of the usage line.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation
+    #   The operation of the usage line.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_cost
+    #   The estimated cost of the usage amount in the request.
+    #   @return [Types::GetUsageLinesEstimatedCostEstimatedCost]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/GetUsageLinesEstimatedCostLineItem AWS API Documentation
+    #
+    class GetUsageLinesEstimatedCostLineItem < Struct.new(
+      :key,
+      :service_code,
+      :usage_type,
+      :operation,
+      :estimated_cost)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] usage
+    #   The usage lines that you want to estimate. You can include up to 500
+    #   usage lines in a request.
+    #   @return [Array<Types::GetUsageLinesEstimatedCostInput>]
+    #
+    # @!attribute [rw] rate_type
+    #   The type of pricing rates to use to estimate the cost of the usage
+    #   lines. You can only use a rate type that your Pricing Calculator
+    #   rate preferences allow. If you use billing transfer as a bill source
+    #   account, you can only use BEFORE\_DISCOUNTS
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/GetUsageLinesEstimatedCostRequest AWS API Documentation
+    #
+    class GetUsageLinesEstimatedCostRequest < Struct.new(
+      :usage,
+      :rate_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rate_type
+    #   The type of pricing rates used to estimate the cost of the usage
+    #   lines.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_cost
+    #   The sum of the estimated costs of all usage lines that were priced.
+    #   Usage lines returned in `errors` aren't included.
+    #   @return [Float]
+    #
+    # @!attribute [rw] currency
+    #   The currency of the costs in the response.
+    #   @return [String]
+    #
+    # @!attribute [rw] line_items
+    #   The estimated cost of each usage line that was priced.
+    #   @return [Array<Types::GetUsageLinesEstimatedCostLineItem>]
+    #
+    # @!attribute [rw] errors
+    #   The usage lines that couldn't be priced, and the reason that each
+    #   one couldn't be priced.
+    #   @return [Array<Types::GetUsageLinesEstimatedCostError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/GetUsageLinesEstimatedCostResponse AWS API Documentation
+    #
+    class GetUsageLinesEstimatedCostResponse < Struct.new(
+      :rate_type,
+      :total_cost,
+      :currency,
+      :line_items,
+      :errors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3004,17 +3207,17 @@ module Aws::BCMPricingCalculator
       include Aws::Structure
     end
 
-    # The specified resource was not found.
+    # The specified resource wasn't found.
     #
     # @!attribute [rw] message
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The identifier of the resource that was not found.
+    #   The identifier of the resource that wasn't found.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of the resource that was not found.
+    #   The type of the resource that wasn't found.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/ResourceNotFoundException AWS API Documentation
@@ -3187,8 +3390,8 @@ module Aws::BCMPricingCalculator
     #   @return [Time]
     #
     # @!attribute [rw] group_sharing_preference
-    #   The setting for the reserved instance and savings plan group sharing
-    #   used in this estimate.
+    #   The setting for the reserved instance and savings plans group
+    #   sharing used in this estimate.
     #   @return [String]
     #
     # @!attribute [rw] cost_category_group_sharing_preference_arn
@@ -3232,8 +3435,8 @@ module Aws::BCMPricingCalculator
     #   @return [Time]
     #
     # @!attribute [rw] group_sharing_preference
-    #   The setting for the reserved instance and savings plan group sharing
-    #   used in this estimate.
+    #   The setting for the reserved instance and savings plans group
+    #   sharing used in this estimate.
     #   @return [String]
     #
     # @!attribute [rw] cost_category_group_sharing_preference_arn
@@ -3282,8 +3485,8 @@ module Aws::BCMPricingCalculator
     #   @return [String]
     #
     # @!attribute [rw] group_sharing_preference
-    #   The setting for the reserved instance and savings plan group sharing
-    #   used in this estimate.
+    #   The setting for the reserved instance and savings plans group
+    #   sharing used in this estimate.
     #   @return [String]
     #
     # @!attribute [rw] cost_category_group_sharing_preference_arn

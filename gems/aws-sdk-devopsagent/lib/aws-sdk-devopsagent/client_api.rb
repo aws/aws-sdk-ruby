@@ -17,6 +17,7 @@ module Aws::DevOpsAgent
     AWSConfiguration = Shapes::StructureShape.new(name: 'AWSConfiguration')
     AWSConfigurationAccountIdString = Shapes::StringShape.new(name: 'AWSConfigurationAccountIdString')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccountIdList = Shapes::ListShape.new(name: 'AccountIdList')
     AdditionalServiceDetails = Shapes::UnionShape.new(name: 'AdditionalServiceDetails')
     AdditionalServiceRegistrationStep = Shapes::UnionShape.new(name: 'AdditionalServiceRegistrationStep')
     AgentSpace = Shapes::StructureShape.new(name: 'AgentSpace')
@@ -67,6 +68,8 @@ module Aws::DevOpsAgent
     AssociationId = Shapes::StringShape.new(name: 'AssociationId')
     AssociationsList = Shapes::ListShape.new(name: 'AssociationsList')
     AuthFlow = Shapes::StringShape.new(name: 'AuthFlow')
+    AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
+    AwsSourceMode = Shapes::StringShape.new(name: 'AwsSourceMode')
     AzureConfiguration = Shapes::StructureShape.new(name: 'AzureConfiguration')
     AzureDevOpsConfiguration = Shapes::StructureShape.new(name: 'AzureDevOpsConfiguration')
     BackLogTimestamp = Shapes::TimestampShape.new(name: 'BackLogTimestamp', timestampFormat: "iso8601")
@@ -351,6 +354,14 @@ module Aws::DevOpsAgent
     OAuthScope = Shapes::StringShape.new(name: 'OAuthScope')
     OperatorAppUrl = Shapes::StringShape.new(name: 'OperatorAppUrl')
     OrderType = Shapes::StringShape.new(name: 'OrderType')
+    OrgSourceAccountReasonCode = Shapes::StringShape.new(name: 'OrgSourceAccountReasonCode')
+    OrgSourceDeploymentState = Shapes::StructureShape.new(name: 'OrgSourceDeploymentState')
+    OrgSourceDeploymentStateDeployedAccountCountInteger = Shapes::IntegerShape.new(name: 'OrgSourceDeploymentStateDeployedAccountCountInteger')
+    OrgSourceIssue = Shapes::StructureShape.new(name: 'OrgSourceIssue')
+    OrgSourceIssueAccountCountInteger = Shapes::IntegerShape.new(name: 'OrgSourceIssueAccountCountInteger')
+    OrgSourceIssueList = Shapes::ListShape.new(name: 'OrgSourceIssueList')
+    OrgSourceIssueMessage = Shapes::StringShape.new(name: 'OrgSourceIssueMessage')
+    OrgUnitId = Shapes::StringShape.new(name: 'OrgUnitId')
     PagerDutyAuthorizationConfig = Shapes::UnionShape.new(name: 'PagerDutyAuthorizationConfig')
     PagerDutyConfiguration = Shapes::StructureShape.new(name: 'PagerDutyConfiguration')
     PagerDutyDetails = Shapes::StructureShape.new(name: 'PagerDutyDetails')
@@ -488,6 +499,8 @@ module Aws::DevOpsAgent
     SourceAccountType = Shapes::StringShape.new(name: 'SourceAccountType')
     SourceAwsConfiguration = Shapes::StructureShape.new(name: 'SourceAwsConfiguration')
     SourceAwsConfigurationAccountIdString = Shapes::StringShape.new(name: 'SourceAwsConfigurationAccountIdString')
+    SourceAwsOrgConfiguration = Shapes::StructureShape.new(name: 'SourceAwsOrgConfiguration')
+    SourceAwsOrgUnit = Shapes::StructureShape.new(name: 'SourceAwsOrgUnit')
     String = Shapes::StringShape.new(name: 'String')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
@@ -589,10 +602,13 @@ module Aws::DevOpsAgent
     AWSConfiguration.add_member(:account_type, Shapes::ShapeRef.new(shape: MonitorAccountType, required: true, location_name: "accountType"))
     AWSConfiguration.add_member(:agent_elevated_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "agentElevatedRoleArn"))
     AWSConfiguration.add_member(:agent_elevated_role_arn_status, Shapes::ShapeRef.new(shape: ValidationStatus, location_name: "agentElevatedRoleArnStatus"))
+    AWSConfiguration.add_member(:service_management_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "serviceManagementRoleArn"))
     AWSConfiguration.struct_class = Types::AWSConfiguration
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AccountIdList.member = Shapes::ShapeRef.new(shape: AwsAccountId)
 
     AdditionalServiceDetails.add_member(:github, Shapes::ShapeRef.new(shape: RegisteredGithubServiceDetails, location_name: "github"))
     AdditionalServiceDetails.add_member(:slack, Shapes::ShapeRef.new(shape: RegisteredSlackServiceDetails, location_name: "slack"))
@@ -642,6 +658,7 @@ module Aws::DevOpsAgent
     AgentSpace.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     AgentSpace.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: AgentSpaceId, required: true, location_name: "agentSpaceId"))
     AgentSpace.add_member(:preferences, Shapes::ShapeRef.new(shape: AgentSpacePreferences, location_name: "preferences"))
+    AgentSpace.add_member(:aws_source_mode, Shapes::ShapeRef.new(shape: AwsSourceMode, location_name: "awsSourceMode"))
     AgentSpace.struct_class = Types::AgentSpace
 
     AgentSpaceList.member = Shapes::ShapeRef.new(shape: AgentSpace)
@@ -804,6 +821,7 @@ module Aws::DevOpsAgent
     CreateAgentSpaceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateAgentSpaceInputClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAgentSpaceInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateAgentSpaceInput.add_member(:preferences, Shapes::ShapeRef.new(shape: AgentSpacePreferences, location_name: "preferences"))
+    CreateAgentSpaceInput.add_member(:aws_source_mode, Shapes::ShapeRef.new(shape: AwsSourceMode, location_name: "awsSourceMode"))
     CreateAgentSpaceInput.struct_class = Types::CreateAgentSpaceInput
 
     CreateAgentSpaceOutput.add_member(:agent_space, Shapes::ShapeRef.new(shape: AgentSpace, required: true, location_name: "agentSpace"))
@@ -1577,6 +1595,19 @@ module Aws::DevOpsAgent
     OAuthAdditionalStepDetails.add_member(:authorization_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "authorizationUrl"))
     OAuthAdditionalStepDetails.struct_class = Types::OAuthAdditionalStepDetails
 
+    OrgSourceDeploymentState.add_member(:deployed_account_count, Shapes::ShapeRef.new(shape: OrgSourceDeploymentStateDeployedAccountCountInteger, location_name: "deployedAccountCount"))
+    OrgSourceDeploymentState.add_member(:issues, Shapes::ShapeRef.new(shape: OrgSourceIssueList, location_name: "issues"))
+    OrgSourceDeploymentState.add_member(:last_evaluated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastEvaluatedAt"))
+    OrgSourceDeploymentState.struct_class = Types::OrgSourceDeploymentState
+
+    OrgSourceIssue.add_member(:reason_code, Shapes::ShapeRef.new(shape: OrgSourceAccountReasonCode, required: true, location_name: "reasonCode"))
+    OrgSourceIssue.add_member(:account_count, Shapes::ShapeRef.new(shape: OrgSourceIssueAccountCountInteger, required: true, location_name: "accountCount"))
+    OrgSourceIssue.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, required: true, location_name: "accountIds"))
+    OrgSourceIssue.add_member(:message, Shapes::ShapeRef.new(shape: OrgSourceIssueMessage, location_name: "message"))
+    OrgSourceIssue.struct_class = Types::OrgSourceIssue
+
+    OrgSourceIssueList.member = Shapes::ShapeRef.new(shape: OrgSourceIssue)
+
     PagerDutyAuthorizationConfig.add_member(:o_auth_client_credentials, Shapes::ShapeRef.new(shape: PagerDutyOAuthClientCredentialsConfig, location_name: "oAuthClientCredentials"))
     PagerDutyAuthorizationConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     PagerDutyAuthorizationConfig.add_member_subclass(:o_auth_client_credentials, Types::PagerDutyAuthorizationConfig::OAuthClientCredentials)
@@ -1956,6 +1987,7 @@ module Aws::DevOpsAgent
     SendMessageUsageInfo.struct_class = Types::SendMessageUsageInfo
 
     ServiceConfiguration.add_member(:source_aws, Shapes::ShapeRef.new(shape: SourceAwsConfiguration, location_name: "sourceAws"))
+    ServiceConfiguration.add_member(:source_aws_org, Shapes::ShapeRef.new(shape: SourceAwsOrgConfiguration, location_name: "sourceAwsOrg"))
     ServiceConfiguration.add_member(:aws, Shapes::ShapeRef.new(shape: AWSConfiguration, location_name: "aws"))
     ServiceConfiguration.add_member(:github, Shapes::ShapeRef.new(shape: GitHubConfiguration, location_name: "github"))
     ServiceConfiguration.add_member(:slack, Shapes::ShapeRef.new(shape: SlackConfiguration, location_name: "slack"))
@@ -1978,6 +2010,7 @@ module Aws::DevOpsAgent
     ServiceConfiguration.add_member(:release_management, Shapes::ShapeRef.new(shape: ReleaseManagementConfiguration, location_name: "releaseManagement"))
     ServiceConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ServiceConfiguration.add_member_subclass(:source_aws, Types::ServiceConfiguration::SourceAws)
+    ServiceConfiguration.add_member_subclass(:source_aws_org, Types::ServiceConfiguration::SourceAwsOrg)
     ServiceConfiguration.add_member_subclass(:aws, Types::ServiceConfiguration::Aws)
     ServiceConfiguration.add_member_subclass(:github, Types::ServiceConfiguration::Github)
     ServiceConfiguration.add_member_subclass(:slack, Types::ServiceConfiguration::Slack)
@@ -2095,6 +2128,15 @@ module Aws::DevOpsAgent
     SourceAwsConfiguration.add_member(:agent_elevated_role_arn_status, Shapes::ShapeRef.new(shape: ValidationStatus, location_name: "agentElevatedRoleArnStatus"))
     SourceAwsConfiguration.struct_class = Types::SourceAwsConfiguration
 
+    SourceAwsOrgConfiguration.add_member(:account_type, Shapes::ShapeRef.new(shape: SourceAccountType, required: true, location_name: "accountType"))
+    SourceAwsOrgConfiguration.add_member(:organizational_unit, Shapes::ShapeRef.new(shape: SourceAwsOrgUnit, required: true, location_name: "organizationalUnit"))
+    SourceAwsOrgConfiguration.add_member(:deployment_state, Shapes::ShapeRef.new(shape: OrgSourceDeploymentState, location_name: "deploymentState"))
+    SourceAwsOrgConfiguration.struct_class = Types::SourceAwsOrgConfiguration
+
+    SourceAwsOrgUnit.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrgUnitId, required: true, location_name: "organizationalUnitId"))
+    SourceAwsOrgUnit.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "accountIds"))
+    SourceAwsOrgUnit.struct_class = Types::SourceAwsOrgUnit
+
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TagResourceRequestResourceArnString, required: true, location: "uri", location_name: "resourceArn"))
@@ -2188,6 +2230,7 @@ module Aws::DevOpsAgent
     UpdateAgentSpaceInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateAgentSpaceInput.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     UpdateAgentSpaceInput.add_member(:preferences, Shapes::ShapeRef.new(shape: AgentSpacePreferences, location_name: "preferences"))
+    UpdateAgentSpaceInput.add_member(:aws_source_mode, Shapes::ShapeRef.new(shape: AwsSourceMode, location_name: "awsSourceMode"))
     UpdateAgentSpaceInput.struct_class = Types::UpdateAgentSpaceInput
 
     UpdateAgentSpaceOutput.add_member(:agent_space, Shapes::ShapeRef.new(shape: AgentSpace, required: true, location_name: "agentSpace"))

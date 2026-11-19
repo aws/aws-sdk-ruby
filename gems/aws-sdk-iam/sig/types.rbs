@@ -136,6 +136,20 @@ module Aws::IAM
       SENSITIVE: []
     end
 
+    class ContextProvider
+      attr_accessor key_definition_list: ::Array[Types::ContextProviderKeyDefinition]
+      attr_accessor subject_source_key: ::String
+      attr_accessor subject_type_value: ::String
+      attr_accessor subject_type_source_key: ::String
+      SENSITIVE: []
+    end
+
+    class ContextProviderKeyDefinition
+      attr_accessor source_key: ::String
+      attr_accessor target_key: ::String
+      SENSITIVE: []
+    end
+
     class CreateAccessKeyRequest
       attr_accessor user_name: ::String
       SENSITIVE: []
@@ -211,6 +225,8 @@ module Aws::IAM
       attr_accessor client_id_list: ::Array[::String]
       attr_accessor thumbprint_list: ::Array[::String]
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor context_provider: Types::ContextProvider
+      attr_accessor identity_center_instance_arn: ::String
       SENSITIVE: []
     end
 
@@ -269,6 +285,8 @@ module Aws::IAM
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor assertion_encryption_mode: ("Required" | "Allowed")
       attr_accessor add_private_key: ::String
+      attr_accessor context_provider: Types::ContextProvider
+      attr_accessor identity_center_instance_arn: ::String
       SENSITIVE: [:add_private_key]
     end
 
@@ -839,6 +857,9 @@ module Aws::IAM
       attr_accessor thumbprint_list: ::Array[::String]
       attr_accessor create_date: ::Time
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor context_provider: Types::ContextProvider
+      attr_accessor identity_center_instance_arn: ::String
+      attr_accessor identity_store_arn: ::String
       SENSITIVE: []
     end
 
@@ -932,11 +953,15 @@ module Aws::IAM
     class GetSAMLProviderResponse
       attr_accessor saml_provider_uuid: ::String
       attr_accessor saml_metadata_document: ::String
+      attr_accessor context_provider: Types::ContextProvider
+      attr_accessor saml_key_hashes: ::Array[Types::SAMLKeyHashEntry]
       attr_accessor create_date: ::Time
       attr_accessor valid_until: ::Time
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor assertion_encryption_mode: ("Required" | "Allowed")
       attr_accessor private_key_list: ::Array[Types::SAMLPrivateKey]
+      attr_accessor identity_center_instance_arn: ::String
+      attr_accessor identity_store_arn: ::String
       SENSITIVE: []
     end
 
@@ -1671,6 +1696,7 @@ module Aws::IAM
 
     class OpenIDConnectProviderListEntry
       attr_accessor arn: ::String
+      attr_accessor is_trusted_identity_propagation_enabled: bool
       SENSITIVE: []
     end
 
@@ -2013,6 +2039,12 @@ module Aws::IAM
       SENSITIVE: []
     end
 
+    class SAMLKeyHashEntry
+      attr_accessor issuer_url: ::String
+      attr_accessor key_hashes: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class SAMLPrivateKey
       attr_accessor key_id: ::String
       attr_accessor timestamp: ::Time
@@ -2023,6 +2055,7 @@ module Aws::IAM
       attr_accessor arn: ::String
       attr_accessor valid_until: ::Time
       attr_accessor create_date: ::Time
+      attr_accessor is_trusted_identity_propagation_enabled: bool
       SENSITIVE: []
     end
 
@@ -2365,6 +2398,15 @@ module Aws::IAM
       SENSITIVE: [:password]
     end
 
+    class UpdateOpenIDConnectProviderRequest
+      attr_accessor open_id_connect_provider_arn: ::String
+      attr_accessor context_provider: Types::ContextProvider
+      attr_accessor identity_center_instance_arn: ::String
+      attr_accessor remove_context_provider: bool
+      attr_accessor remove_identity_center_instance: bool
+      SENSITIVE: []
+    end
+
     class UpdateOpenIDConnectProviderThumbprintRequest
       attr_accessor open_id_connect_provider_arn: ::String
       attr_accessor thumbprint_list: ::Array[::String]
@@ -2400,6 +2442,10 @@ module Aws::IAM
       attr_accessor assertion_encryption_mode: ("Required" | "Allowed")
       attr_accessor add_private_key: ::String
       attr_accessor remove_private_key: ::String
+      attr_accessor context_provider: Types::ContextProvider
+      attr_accessor identity_center_instance_arn: ::String
+      attr_accessor remove_context_provider: bool
+      attr_accessor remove_identity_center_instance: bool
       SENSITIVE: [:add_private_key]
     end
 

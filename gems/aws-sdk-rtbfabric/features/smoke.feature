@@ -8,6 +8,30 @@
 Feature: Smoke tests for RTBFabric
 
   @rtbfabric @smoke
+  Scenario: UpdateRequesterGateway
+    Given I create a 'Aws::RTBFabric' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'update_requester_gateway' with params:
+      """
+{"gateway_id":"rtb-gw-12345","description":"Updated test gateway","client_token":"xyz789uvw012"}
+      """
+    Then I expect an error was not raised
+
+  @rtbfabric @smoke
+  Scenario: UpdateLink
+    Given I create a 'Aws::RTBFabric' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'update_link' with params:
+      """
+{"link_id":"link-12345","gateway_id":"rtb-gw-12345"}
+      """
+    Then I expect an error was not raised
+
+  @rtbfabric @smoke
   Scenario: CreateInboundExternalLink
     Given I create a 'Aws::RTBFabric' client with config:
       """
@@ -16,6 +40,18 @@ Feature: Smoke tests for RTBFabric
     When I call the operation 'create_inbound_external_link' with params:
       """
 {"gateway_id":"rtb-gw-12345","client_token":"abc123def456","log_settings":{"application_logs":{"sampling":{"error_log":100.0,"filter_log":0.0}}}}
+      """
+    Then I expect an error was not raised
+
+  @rtbfabric @smoke
+  Scenario: GetOutboundExternalLink
+    Given I create a 'Aws::RTBFabric' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'get_outbound_external_link' with params:
+      """
+{"gateway_id":"rtb-gw-12345","link_id":"link-12345"}
       """
     Then I expect an error was not raised
 
@@ -32,60 +68,72 @@ Feature: Smoke tests for RTBFabric
     Then I expect an error was not raised
 
   @rtbfabric @smoke
-  Scenario: CreateLink
+  Scenario: ListLinks
     Given I create a 'Aws::RTBFabric' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'create_link' with params:
+    When I call the operation 'list_links' with params:
       """
-{"gateway_id":"rtb-gw-12345","peer_gateway_id":"rtb-gw-67890","log_settings":{"application_logs":{"sampling":{"error_log":100.0,"filter_log":0.0}}}}
+{"gateway_id":"rtb-gw-12345"}
       """
     Then I expect an error was not raised
 
   @rtbfabric @smoke
-  Scenario: DeleteLink
+  Scenario: UntagResource_GatewayOnly
     Given I create a 'Aws::RTBFabric' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'delete_link' with params:
+    When I call the operation 'untag_resource' with params:
       """
-{"gateway_id":"rtb-gw-12345","link_id":"link-12345"}
+{"resource_arn":"arn:aws:rtbfabric:us-west-2:123456789012:gateway/rtb-gw-123testapp","tag_keys":["Environment"]}
       """
     Then I expect an error was not raised
 
   @rtbfabric @smoke
-  Scenario: UpdateRequesterGateway
+  Scenario: UntagResource_GatewayWithLink
     Given I create a 'Aws::RTBFabric' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'update_requester_gateway' with params:
+    When I call the operation 'untag_resource' with params:
       """
-{"gateway_id":"rtb-gw-12345","description":"Updated test gateway","client_token":"xyz789uvw012"}
+{"resource_arn":"arn:aws:rtbfabric:us-west-2:123456789012:gateway/rtb-gw-123testapp/link/link-nonexistent","tag_keys":["Environment"]}
       """
     Then I expect an error was not raised
 
   @rtbfabric @smoke
-  Scenario: GetInboundExternalLink
+  Scenario: TagResource_GatewayOnly
     Given I create a 'Aws::RTBFabric' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'get_inbound_external_link' with params:
+    When I call the operation 'tag_resource' with params:
       """
-{"gateway_id":"rtb-gw-12345","link_id":"link-12345"}
+{"resource_arn":"arn:aws:rtbfabric:us-west-2:123456789012:gateway/rtb-gw-123testapp","tags":{"environment":"test","owner":"test-team"}}
       """
     Then I expect an error was not raised
 
   @rtbfabric @smoke
-  Scenario: GetOutboundExternalLink
+  Scenario: TagResource_GatewayWithLink
     Given I create a 'Aws::RTBFabric' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'get_outbound_external_link' with params:
+    When I call the operation 'tag_resource' with params:
+      """
+{"resource_arn":"arn:aws:rtbfabric:us-west-2:123456789012:gateway/rtb-gw-123testapp/link/link-nonexistent","tags":{"environment":"test","owner":"test-team"}}
+      """
+    Then I expect an error was not raised
+
+  @rtbfabric @smoke
+  Scenario: DeleteOutboundExternalLink
+    Given I create a 'Aws::RTBFabric' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'delete_outbound_external_link' with params:
       """
 {"gateway_id":"rtb-gw-12345","link_id":"link-12345"}
       """
@@ -140,90 +188,6 @@ Feature: Smoke tests for RTBFabric
     Then I expect an error was not raised
 
   @rtbfabric @smoke
-  Scenario: DeleteOutboundExternalLink
-    Given I create a 'Aws::RTBFabric' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'delete_outbound_external_link' with params:
-      """
-{"gateway_id":"rtb-gw-12345","link_id":"link-12345"}
-      """
-    Then I expect an error was not raised
-
-  @rtbfabric @smoke
-  Scenario: GetRequesterGateway
-    Given I create a 'Aws::RTBFabric' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'get_requester_gateway' with params:
-      """
-{"gateway_id":"rtb-gw-12345"}
-      """
-    Then I expect an error was not raised
-
-  @rtbfabric @smoke
-  Scenario: UntagResource_GatewayOnly
-    Given I create a 'Aws::RTBFabric' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'untag_resource' with params:
-      """
-{"resource_arn":"arn:aws:rtbfabric:us-west-2:123456789012:gateway/rtb-gw-123testapp","tag_keys":["Environment"]}
-      """
-    Then I expect an error was not raised
-
-  @rtbfabric @smoke
-  Scenario: UntagResource_GatewayWithLink
-    Given I create a 'Aws::RTBFabric' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'untag_resource' with params:
-      """
-{"resource_arn":"arn:aws:rtbfabric:us-west-2:123456789012:gateway/rtb-gw-123testapp/link/link-nonexistent","tag_keys":["Environment"]}
-      """
-    Then I expect an error was not raised
-
-  @rtbfabric @smoke
-  Scenario: GetLink
-    Given I create a 'Aws::RTBFabric' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'get_link' with params:
-      """
-{"link_id":"link-12345","gateway_id":"rtb-gw-12345"}
-      """
-    Then I expect an error was not raised
-
-  @rtbfabric @smoke
-  Scenario: TagResource_GatewayOnly
-    Given I create a 'Aws::RTBFabric' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'tag_resource' with params:
-      """
-{"resource_arn":"arn:aws:rtbfabric:us-west-2:123456789012:gateway/rtb-gw-123testapp","tags":{"environment":"test","owner":"test-team"}}
-      """
-    Then I expect an error was not raised
-
-  @rtbfabric @smoke
-  Scenario: TagResource_GatewayWithLink
-    Given I create a 'Aws::RTBFabric' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'tag_resource' with params:
-      """
-{"resource_arn":"arn:aws:rtbfabric:us-west-2:123456789012:gateway/rtb-gw-123testapp/link/link-nonexistent","tags":{"environment":"test","owner":"test-team"}}
-      """
-    Then I expect an error was not raised
-
-  @rtbfabric @smoke
   Scenario: AcceptLink
     Given I create a 'Aws::RTBFabric' client with config:
       """
@@ -236,14 +200,38 @@ Feature: Smoke tests for RTBFabric
     Then I expect an error was not raised
 
   @rtbfabric @smoke
-  Scenario: ListLinks
+  Scenario: DeleteLink
     Given I create a 'Aws::RTBFabric' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_links' with params:
+    When I call the operation 'delete_link' with params:
       """
-{"gateway_id":"rtb-gw-12345"}
+{"gateway_id":"rtb-gw-12345","link_id":"link-12345"}
+      """
+    Then I expect an error was not raised
+
+  @rtbfabric @smoke
+  Scenario: CreateLink
+    Given I create a 'Aws::RTBFabric' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'create_link' with params:
+      """
+{"gateway_id":"rtb-gw-12345","peer_gateway_id":"rtb-gw-67890","log_settings":{"application_logs":{"sampling":{"error_log":100.0,"filter_log":0.0}}}}
+      """
+    Then I expect an error was not raised
+
+  @rtbfabric @smoke
+  Scenario: UpdateResponderGateway
+    Given I create a 'Aws::RTBFabric' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'update_responder_gateway' with params:
+      """
+{"gateway_id":"rtb-gw-12345","description":"Updated test gateway","protocol":"HTTPS","port":433,"client_token":"xyz789uvw012"}
       """
     Then I expect an error was not raised
 
@@ -260,38 +248,38 @@ Feature: Smoke tests for RTBFabric
     Then I expect an error was not raised
 
   @rtbfabric @smoke
-  Scenario: DeleteResponderGateway
+  Scenario: GetRequesterGateway
     Given I create a 'Aws::RTBFabric' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'delete_responder_gateway' with params:
+    When I call the operation 'get_requester_gateway' with params:
       """
 {"gateway_id":"rtb-gw-12345"}
       """
     Then I expect an error was not raised
 
   @rtbfabric @smoke
-  Scenario: UpdateLink
+  Scenario: GetInboundExternalLink
     Given I create a 'Aws::RTBFabric' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'update_link' with params:
+    When I call the operation 'get_inbound_external_link' with params:
       """
-{"link_id":"link-12345","gateway_id":"rtb-gw-12345"}
+{"gateway_id":"rtb-gw-12345","link_id":"link-12345"}
       """
     Then I expect an error was not raised
 
   @rtbfabric @smoke
-  Scenario: UpdateResponderGateway
+  Scenario: GetLink
     Given I create a 'Aws::RTBFabric' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'update_responder_gateway' with params:
+    When I call the operation 'get_link' with params:
       """
-{"gateway_id":"rtb-gw-12345","description":"Updated test gateway","protocol":"HTTPS","port":433,"client_token":"xyz789uvw012"}
+{"link_id":"link-12345","gateway_id":"rtb-gw-12345"}
       """
     Then I expect an error was not raised
 
@@ -328,6 +316,18 @@ Feature: Smoke tests for RTBFabric
     When I call the operation 'list_tags_for_resource' with params:
       """
 {"resource_arn":"arn:aws:rtbfabric:us-west-2:123456789012:gateway/rtb-gw-123testapp/link/link-nonexistent"}
+      """
+    Then I expect an error was not raised
+
+  @rtbfabric @smoke
+  Scenario: DeleteResponderGateway
+    Given I create a 'Aws::RTBFabric' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'delete_responder_gateway' with params:
+      """
+{"gateway_id":"rtb-gw-12345"}
       """
     Then I expect an error was not raised
 

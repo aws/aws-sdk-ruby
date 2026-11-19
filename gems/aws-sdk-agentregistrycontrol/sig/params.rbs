@@ -73,9 +73,10 @@ module Aws
       type registry_record_credential_provider_union = {
       oauth_credential_provider: {
         provider_arn: ::String,
-        grant_type: ("CLIENT_CREDENTIALS")?,
+        grant_type: ("CLIENT_CREDENTIALS" | "AUTHORIZATION_CODE")?,
         scopes: Array[::String]?,
-        custom_parameters: Hash[::String, ::String]?
+        custom_parameters: Hash[::String, ::String]?,
+        return_url: ::String?
       }?,
       iam_credential_provider: {
         role_arn: ::String?,
@@ -87,6 +88,10 @@ module Aws
       type registry_record_credential_provider_configuration = {
       credential_provider_type: ("OAUTH" | "IAM"),
       credential_provider: Params::registry_record_credential_provider_union
+    }
+
+      type agent_skills_package_descriptor = {
+      source: Params::descriptor_source?
     }
 
       type agent_core_runtime_source_details = {

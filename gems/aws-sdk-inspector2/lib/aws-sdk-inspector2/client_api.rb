@@ -193,6 +193,7 @@ module Aws::Inspector2
     ClusterInformationClusterDetailsList = Shapes::ListShape.new(name: 'ClusterInformationClusterDetailsList')
     ClusterInformationList = Shapes::ListShape.new(name: 'ClusterInformationList')
     ClusterMetadata = Shapes::UnionShape.new(name: 'ClusterMetadata')
+    CodeConnectionsHostArn = Shapes::StringShape.new(name: 'CodeConnectionsHostArn')
     CodeFilePath = Shapes::StructureShape.new(name: 'CodeFilePath')
     CodeLine = Shapes::StructureShape.new(name: 'CodeLine')
     CodeLineContentString = Shapes::StringShape.new(name: 'CodeLineContentString')
@@ -213,6 +214,7 @@ module Aws::Inspector2
     CodeSecurityClientToken = Shapes::StringShape.new(name: 'CodeSecurityClientToken')
     CodeSecurityIntegrationArn = Shapes::StringShape.new(name: 'CodeSecurityIntegrationArn')
     CodeSecurityIntegrationSummary = Shapes::StructureShape.new(name: 'CodeSecurityIntegrationSummary')
+    CodeSecurityIntegrationVpcConfiguration = Shapes::StructureShape.new(name: 'CodeSecurityIntegrationVpcConfiguration')
     CodeSecurityResource = Shapes::UnionShape.new(name: 'CodeSecurityResource')
     CodeSecurityScanConfiguration = Shapes::StructureShape.new(name: 'CodeSecurityScanConfiguration')
     CodeSecurityScanConfigurationAssociationSummaries = Shapes::ListShape.new(name: 'CodeSecurityScanConfigurationAssociationSummaries')
@@ -299,6 +301,7 @@ module Aws::Inspector2
     CreateFilterResponse = Shapes::StructureShape.new(name: 'CreateFilterResponse')
     CreateFindingsReportRequest = Shapes::StructureShape.new(name: 'CreateFindingsReportRequest')
     CreateFindingsReportResponse = Shapes::StructureShape.new(name: 'CreateFindingsReportResponse')
+    CreateGitHubEnterpriseIntegrationDetail = Shapes::StructureShape.new(name: 'CreateGitHubEnterpriseIntegrationDetail')
     CreateGitLabSelfManagedIntegrationDetail = Shapes::StructureShape.new(name: 'CreateGitLabSelfManagedIntegrationDetail')
     CreateIntegrationDetail = Shapes::UnionShape.new(name: 'CreateIntegrationDetail')
     CreateSbomExportRequest = Shapes::StructureShape.new(name: 'CreateSbomExportRequest')
@@ -482,6 +485,8 @@ module Aws::Inspector2
     GetSbomExportRequest = Shapes::StructureShape.new(name: 'GetSbomExportRequest')
     GetSbomExportResponse = Shapes::StructureShape.new(name: 'GetSbomExportResponse')
     GitHubAuthCode = Shapes::StringShape.new(name: 'GitHubAuthCode')
+    GitHubEnterpriseServerAppRegistrationDetail = Shapes::StructureShape.new(name: 'GitHubEnterpriseServerAppRegistrationDetail')
+    GitHubEnterpriseServerManifestCode = Shapes::StringShape.new(name: 'GitHubEnterpriseServerManifestCode')
     GitHubInstallationId = Shapes::StringShape.new(name: 'GitHubInstallationId')
     GitLabAccessToken = Shapes::StringShape.new(name: 'GitLabAccessToken')
     GitLabAuthCode = Shapes::StringShape.new(name: 'GitLabAuthCode')
@@ -636,6 +641,7 @@ module Aws::Inspector2
     PeriodicScanFrequency = Shapes::StringShape.new(name: 'PeriodicScanFrequency')
     Permission = Shapes::StructureShape.new(name: 'Permission')
     Permissions = Shapes::ListShape.new(name: 'Permissions')
+    PkceState = Shapes::StringShape.new(name: 'PkceState')
     Platform = Shapes::StringShape.new(name: 'Platform')
     PlatformFilterList = Shapes::ListShape.new(name: 'PlatformFilterList')
     PlatformVersion = Shapes::StringShape.new(name: 'PlatformVersion')
@@ -804,6 +810,7 @@ module Aws::Inspector2
     TitleAggregationResponse = Shapes::StructureShape.new(name: 'TitleAggregationResponse')
     TitleFilterList = Shapes::ListShape.new(name: 'TitleFilterList')
     TitleSortBy = Shapes::StringShape.new(name: 'TitleSortBy')
+    TlsCertificate = Shapes::StringShape.new(name: 'TlsCertificate')
     Tool = Shapes::StringShape.new(name: 'Tool')
     Tools = Shapes::ListShape.new(name: 'Tools')
     Ttp = Shapes::StringShape.new(name: 'Ttp')
@@ -831,6 +838,8 @@ module Aws::Inspector2
     UpdateEncryptionKeyResponse = Shapes::StructureShape.new(name: 'UpdateEncryptionKeyResponse')
     UpdateFilterRequest = Shapes::StructureShape.new(name: 'UpdateFilterRequest')
     UpdateFilterResponse = Shapes::StructureShape.new(name: 'UpdateFilterResponse')
+    UpdateGitHubEnterpriseServerAppInstallationDetail = Shapes::StructureShape.new(name: 'UpdateGitHubEnterpriseServerAppInstallationDetail')
+    UpdateGitHubEnterpriseServerIntegrationDetail = Shapes::UnionShape.new(name: 'UpdateGitHubEnterpriseServerIntegrationDetail')
     UpdateGitHubIntegrationDetail = Shapes::StructureShape.new(name: 'UpdateGitHubIntegrationDetail')
     UpdateGitLabSelfManagedIntegrationDetail = Shapes::StructureShape.new(name: 'UpdateGitLabSelfManagedIntegrationDetail')
     UpdateIntegrationDetails = Shapes::UnionShape.new(name: 'UpdateIntegrationDetails')
@@ -865,6 +874,7 @@ module Aws::Inspector2
     VmInstanceMetadataVmImageReferenceString = Shapes::StringShape.new(name: 'VmInstanceMetadataVmImageReferenceString')
     VmInstanceSortBy = Shapes::StringShape.new(name: 'VmInstanceSortBy')
     VmPlatform = Shapes::StringShape.new(name: 'VmPlatform')
+    VpcEndpointId = Shapes::StringShape.new(name: 'VpcEndpointId')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
     VulnId = Shapes::StringShape.new(name: 'VulnId')
     VulnIdList = Shapes::ListShape.new(name: 'VulnIdList')
@@ -1490,6 +1500,14 @@ module Aws::Inspector2
     CodeSecurityIntegrationSummary.add_member(:last_update_on, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdateOn"))
     CodeSecurityIntegrationSummary.struct_class = Types::CodeSecurityIntegrationSummary
 
+    CodeSecurityIntegrationVpcConfiguration.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "vpcId"))
+    CodeSecurityIntegrationVpcConfiguration.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, required: true, location_name: "vpcEndpointId"))
+    CodeSecurityIntegrationVpcConfiguration.add_member(:code_connections_host_arn, Shapes::ShapeRef.new(shape: CodeConnectionsHostArn, location_name: "codeConnectionsHostArn"))
+    CodeSecurityIntegrationVpcConfiguration.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "subnetIds"))
+    CodeSecurityIntegrationVpcConfiguration.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroups"))
+    CodeSecurityIntegrationVpcConfiguration.add_member(:tls_certificate, Shapes::ShapeRef.new(shape: TlsCertificate, location_name: "tlsCertificate"))
+    CodeSecurityIntegrationVpcConfiguration.struct_class = Types::CodeSecurityIntegrationVpcConfiguration
+
     CodeSecurityResource.add_member(:project_id, Shapes::ShapeRef.new(shape: ProjectId, location_name: "projectId"))
     CodeSecurityResource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CodeSecurityResource.add_member_subclass(:project_id, Types::CodeSecurityResource::ProjectId)
@@ -1819,13 +1837,20 @@ module Aws::Inspector2
     CreateFindingsReportResponse.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, location_name: "reportId"))
     CreateFindingsReportResponse.struct_class = Types::CreateFindingsReportResponse
 
+    CreateGitHubEnterpriseIntegrationDetail.add_member(:instance_url, Shapes::ShapeRef.new(shape: InstanceUrl, required: true, location_name: "instanceUrl"))
+    CreateGitHubEnterpriseIntegrationDetail.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: CodeSecurityIntegrationVpcConfiguration, location_name: "vpcConfiguration"))
+    CreateGitHubEnterpriseIntegrationDetail.struct_class = Types::CreateGitHubEnterpriseIntegrationDetail
+
     CreateGitLabSelfManagedIntegrationDetail.add_member(:instance_url, Shapes::ShapeRef.new(shape: InstanceUrl, required: true, location_name: "instanceUrl"))
     CreateGitLabSelfManagedIntegrationDetail.add_member(:access_token, Shapes::ShapeRef.new(shape: GitLabAccessToken, required: true, location_name: "accessToken"))
+    CreateGitLabSelfManagedIntegrationDetail.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: CodeSecurityIntegrationVpcConfiguration, location_name: "vpcConfiguration"))
     CreateGitLabSelfManagedIntegrationDetail.struct_class = Types::CreateGitLabSelfManagedIntegrationDetail
 
     CreateIntegrationDetail.add_member(:gitlab_self_managed, Shapes::ShapeRef.new(shape: CreateGitLabSelfManagedIntegrationDetail, location_name: "gitlabSelfManaged"))
+    CreateIntegrationDetail.add_member(:github_enterprise, Shapes::ShapeRef.new(shape: CreateGitHubEnterpriseIntegrationDetail, location_name: "githubEnterprise"))
     CreateIntegrationDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CreateIntegrationDetail.add_member_subclass(:gitlab_self_managed, Types::CreateIntegrationDetail::GitlabSelfManaged)
+    CreateIntegrationDetail.add_member_subclass(:github_enterprise, Types::CreateIntegrationDetail::GithubEnterprise)
     CreateIntegrationDetail.add_member_subclass(:unknown, Types::CreateIntegrationDetail::Unknown)
     CreateIntegrationDetail.struct_class = Types::CreateIntegrationDetail
 
@@ -2343,6 +2368,8 @@ module Aws::Inspector2
     GetCodeSecurityIntegrationResponse.add_member(:created_on, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdOn"))
     GetCodeSecurityIntegrationResponse.add_member(:last_update_on, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdateOn"))
     GetCodeSecurityIntegrationResponse.add_member(:authorization_url, Shapes::ShapeRef.new(shape: AuthorizationUrl, location_name: "authorizationUrl"))
+    GetCodeSecurityIntegrationResponse.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: CodeSecurityIntegrationVpcConfiguration, location_name: "vpcConfiguration"))
+    GetCodeSecurityIntegrationResponse.add_member(:instance_url, Shapes::ShapeRef.new(shape: InstanceUrl, location_name: "instanceUrl"))
     GetCodeSecurityIntegrationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetCodeSecurityIntegrationResponse.struct_class = Types::GetCodeSecurityIntegrationResponse
 
@@ -2443,6 +2470,9 @@ module Aws::Inspector2
     GetSbomExportResponse.add_member(:s3_destination, Shapes::ShapeRef.new(shape: Destination, location_name: "s3Destination"))
     GetSbomExportResponse.add_member(:filter_criteria, Shapes::ShapeRef.new(shape: ResourceFilterCriteria, location_name: "filterCriteria"))
     GetSbomExportResponse.struct_class = Types::GetSbomExportResponse
+
+    GitHubEnterpriseServerAppRegistrationDetail.add_member(:manifest_code, Shapes::ShapeRef.new(shape: GitHubEnterpriseServerManifestCode, required: true, location_name: "manifestCode"))
+    GitHubEnterpriseServerAppRegistrationDetail.struct_class = Types::GitHubEnterpriseServerAppRegistrationDetail
 
     Image.add_member(:repository_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "repositoryName"))
     Image.add_member(:registry, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "registry"))
@@ -3421,18 +3451,35 @@ module Aws::Inspector2
     UpdateFilterResponse.add_member(:arn, Shapes::ShapeRef.new(shape: FilterArn, required: true, location_name: "arn"))
     UpdateFilterResponse.struct_class = Types::UpdateFilterResponse
 
+    UpdateGitHubEnterpriseServerAppInstallationDetail.add_member(:code, Shapes::ShapeRef.new(shape: GitHubAuthCode, required: true, location_name: "code"))
+    UpdateGitHubEnterpriseServerAppInstallationDetail.add_member(:installation_id, Shapes::ShapeRef.new(shape: GitHubInstallationId, required: true, location_name: "installationId"))
+    UpdateGitHubEnterpriseServerAppInstallationDetail.add_member(:state_token, Shapes::ShapeRef.new(shape: PkceState, location_name: "stateToken"))
+    UpdateGitHubEnterpriseServerAppInstallationDetail.struct_class = Types::UpdateGitHubEnterpriseServerAppInstallationDetail
+
+    UpdateGitHubEnterpriseServerIntegrationDetail.add_member(:app_installation, Shapes::ShapeRef.new(shape: UpdateGitHubEnterpriseServerAppInstallationDetail, location_name: "appInstallation"))
+    UpdateGitHubEnterpriseServerIntegrationDetail.add_member(:app_registration, Shapes::ShapeRef.new(shape: GitHubEnterpriseServerAppRegistrationDetail, location_name: "appRegistration"))
+    UpdateGitHubEnterpriseServerIntegrationDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    UpdateGitHubEnterpriseServerIntegrationDetail.add_member_subclass(:app_installation, Types::UpdateGitHubEnterpriseServerIntegrationDetail::AppInstallation)
+    UpdateGitHubEnterpriseServerIntegrationDetail.add_member_subclass(:app_registration, Types::UpdateGitHubEnterpriseServerIntegrationDetail::AppRegistration)
+    UpdateGitHubEnterpriseServerIntegrationDetail.add_member_subclass(:unknown, Types::UpdateGitHubEnterpriseServerIntegrationDetail::Unknown)
+    UpdateGitHubEnterpriseServerIntegrationDetail.struct_class = Types::UpdateGitHubEnterpriseServerIntegrationDetail
+
     UpdateGitHubIntegrationDetail.add_member(:code, Shapes::ShapeRef.new(shape: GitHubAuthCode, required: true, location_name: "code"))
     UpdateGitHubIntegrationDetail.add_member(:installation_id, Shapes::ShapeRef.new(shape: GitHubInstallationId, required: true, location_name: "installationId"))
+    UpdateGitHubIntegrationDetail.add_member(:state_token, Shapes::ShapeRef.new(shape: PkceState, location_name: "stateToken"))
     UpdateGitHubIntegrationDetail.struct_class = Types::UpdateGitHubIntegrationDetail
 
     UpdateGitLabSelfManagedIntegrationDetail.add_member(:auth_code, Shapes::ShapeRef.new(shape: GitLabAuthCode, required: true, location_name: "authCode"))
+    UpdateGitLabSelfManagedIntegrationDetail.add_member(:state_token, Shapes::ShapeRef.new(shape: PkceState, location_name: "stateToken"))
     UpdateGitLabSelfManagedIntegrationDetail.struct_class = Types::UpdateGitLabSelfManagedIntegrationDetail
 
     UpdateIntegrationDetails.add_member(:gitlab_self_managed, Shapes::ShapeRef.new(shape: UpdateGitLabSelfManagedIntegrationDetail, location_name: "gitlabSelfManaged"))
     UpdateIntegrationDetails.add_member(:github, Shapes::ShapeRef.new(shape: UpdateGitHubIntegrationDetail, location_name: "github"))
+    UpdateIntegrationDetails.add_member(:github_enterprise_server, Shapes::ShapeRef.new(shape: UpdateGitHubEnterpriseServerIntegrationDetail, location_name: "githubEnterpriseServer"))
     UpdateIntegrationDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     UpdateIntegrationDetails.add_member_subclass(:gitlab_self_managed, Types::UpdateIntegrationDetails::GitlabSelfManaged)
     UpdateIntegrationDetails.add_member_subclass(:github, Types::UpdateIntegrationDetails::Github)
+    UpdateIntegrationDetails.add_member_subclass(:github_enterprise_server, Types::UpdateIntegrationDetails::GithubEnterpriseServer)
     UpdateIntegrationDetails.add_member_subclass(:unknown, Types::UpdateIntegrationDetails::Unknown)
     UpdateIntegrationDetails.struct_class = Types::UpdateIntegrationDetails
 

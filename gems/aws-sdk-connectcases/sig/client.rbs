@@ -829,6 +829,11 @@ module Aws
                                      fields: Array[
                                        Params::field_value
                                      ]
+                                   }?,
+                                   sla: {
+                                     sla_update_configuration: {
+                                       target_sla_minutes: ::Integer
+                                     }?
                                    }?
                                  },
                                  ?performed_by: {

@@ -72,6 +72,15 @@ module Aws
       eks_endpoints: Params::eks_endpoints_configuration?
     }
 
+      type flow_module = {
+      name: ::String,
+      module_version_arn: ::String,
+      selected_actions: Array[("FILTER" | "ENRICH_REQUEST_EXT" | "ENRICH_REQUEST_HEADERS" | "OBSERVE")]?,
+      failure_mode: ("OPEN" | "CLOSED")?,
+      activation_percentage: ::Float?,
+      configuration_values: ::String?
+    }
+
     end
   end
 end

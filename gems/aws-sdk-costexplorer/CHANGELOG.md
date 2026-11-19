@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.170.0 (2026-11-19)
+------------------
+
+* Feature - This release adds five standardized cost metrics to the Cost Explorer API BilledCost, ListCost, ContractedCost, PublicEquivalentBilledCost and PublicOnDemandCost. Use these metrics with GetCostAndUsage and GetCostAndUsageWithResources. The metrics return values for usage from November 2026 onwards.
+
 1.169.0 (2026-11-18)
 ------------------
 

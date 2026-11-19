@@ -99,7 +99,12 @@ module Aws
                               }
                             ],
                             ?accept_role_session_name: bool,
-                            ?alias_name: ::String
+                            ?alias_name: ::String,
+                            ?tip_configuration: {
+                              status: ("ENABLED" | "DISABLED"),
+                              subject_type: ("user" | "workload")?,
+                              subject_source: ("x509SAN/URI" | "x509Subject/CN")?
+                            }
                           ) -> _CreateProfileResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProfileResponseSuccess
 
@@ -458,7 +463,12 @@ module Aws
                             ?managed_policy_arns: Array[::String],
                             ?duration_seconds: ::Integer,
                             ?accept_role_session_name: bool,
-                            ?alias_name: ::String
+                            ?alias_name: ::String,
+                            ?tip_configuration: {
+                              status: ("ENABLED" | "DISABLED"),
+                              subject_type: ("user" | "workload")?,
+                              subject_source: ("x509SAN/URI" | "x509Subject/CN")?
+                            }
                           ) -> _UpdateProfileResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProfileResponseSuccess
 

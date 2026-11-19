@@ -18,6 +18,10 @@ module Aws::MarketplaceCatalog
     AMISecuritySummary = Shapes::StructureShape.new(name: 'AMISecuritySummary')
     ARN = Shapes::StringShape.new(name: 'ARN')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AdditionalResource = Shapes::StructureShape.new(name: 'AdditionalResource')
+    AdditionalResourceList = Shapes::ListShape.new(name: 'AdditionalResourceList')
+    AdditionalResourcesAlternative = Shapes::StructureShape.new(name: 'AdditionalResourcesAlternative')
+    AdditionalResourcesAlternativeList = Shapes::ListShape.new(name: 'AdditionalResourcesAlternativeList')
     AmiProductEntityIdFilter = Shapes::StructureShape.new(name: 'AmiProductEntityIdFilter')
     AmiProductEntityIdFilterValueList = Shapes::ListShape.new(name: 'AmiProductEntityIdFilterValueList')
     AmiProductEntityIdString = Shapes::StringShape.new(name: 'AmiProductEntityIdString')
@@ -46,6 +50,10 @@ module Aws::MarketplaceCatalog
     BatchDescribeErrorMessageContent = Shapes::StringShape.new(name: 'BatchDescribeErrorMessageContent')
     CancelChangeSetRequest = Shapes::StructureShape.new(name: 'CancelChangeSetRequest')
     CancelChangeSetResponse = Shapes::StructureShape.new(name: 'CancelChangeSetResponse')
+    CaseStudiesAlternative = Shapes::StructureShape.new(name: 'CaseStudiesAlternative')
+    CaseStudiesAlternativeList = Shapes::ListShape.new(name: 'CaseStudiesAlternativeList')
+    CaseStudyList = Shapes::ListShape.new(name: 'CaseStudyList')
+    CaseStudyTitle = Shapes::StringShape.new(name: 'CaseStudyTitle')
     Catalog = Shapes::StringShape.new(name: 'Catalog')
     Change = Shapes::StructureShape.new(name: 'Change')
     ChangeName = Shapes::StringShape.new(name: 'ChangeName')
@@ -56,6 +64,8 @@ module Aws::MarketplaceCatalog
     ChangeStatus = Shapes::StringShape.new(name: 'ChangeStatus')
     ChangeSummary = Shapes::StructureShape.new(name: 'ChangeSummary')
     ChangeType = Shapes::StringShape.new(name: 'ChangeType')
+    CitationList = Shapes::ListShape.new(name: 'CitationList')
+    CitationUrl = Shapes::StringShape.new(name: 'CitationUrl')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ContainerProductEntityIdFilter = Shapes::StructureShape.new(name: 'ContainerProductEntityIdFilter')
     ContainerProductEntityIdFilterValueList = Shapes::ListShape.new(name: 'ContainerProductEntityIdFilterValueList')
@@ -74,11 +84,17 @@ module Aws::MarketplaceCatalog
     ContainerProductVisibilityString = Shapes::StringShape.new(name: 'ContainerProductVisibilityString')
     ContainerSecurityFilters = Shapes::StructureShape.new(name: 'ContainerSecurityFilters')
     ContainerSecuritySummary = Shapes::StructureShape.new(name: 'ContainerSecuritySummary')
+    ContentAlternatives = Shapes::UnionShape.new(name: 'ContentAlternatives')
+    ContentRecommendation = Shapes::StructureShape.new(name: 'ContentRecommendation')
+    ContentRecommendationStatus = Shapes::StringShape.new(name: 'ContentRecommendationStatus')
     ControlAssessment = Shapes::StructureShape.new(name: 'ControlAssessment')
     ControlAssessmentList = Shapes::ListShape.new(name: 'ControlAssessmentList')
     ControlAssessmentResult = Shapes::StringShape.new(name: 'ControlAssessmentResult')
     ControlError = Shapes::StructureShape.new(name: 'ControlError')
     ControlErrorList = Shapes::ListShape.new(name: 'ControlErrorList')
+    ControlInput = Shapes::StructureShape.new(name: 'ControlInput')
+    ControlInputList = Shapes::ListShape.new(name: 'ControlInputList')
+    ControlSummary = Shapes::UnionShape.new(name: 'ControlSummary')
     DataProductEntityIdFilter = Shapes::StructureShape.new(name: 'DataProductEntityIdFilter')
     DataProductEntityIdFilterValueList = Shapes::ListShape.new(name: 'DataProductEntityIdFilterValueList')
     DataProductEntityIdString = Shapes::StringShape.new(name: 'DataProductEntityIdString')
@@ -108,9 +124,11 @@ module Aws::MarketplaceCatalog
     EntityDetail = Shapes::StructureShape.new(name: 'EntityDetail')
     EntityDetails = Shapes::MapShape.new(name: 'EntityDetails')
     EntityId = Shapes::StringShape.new(name: 'EntityId')
+    EntityIdList = Shapes::ListShape.new(name: 'EntityIdList')
     EntityNameString = Shapes::StringShape.new(name: 'EntityNameString')
     EntityRequest = Shapes::StructureShape.new(name: 'EntityRequest')
     EntityRequestList = Shapes::ListShape.new(name: 'EntityRequestList')
+    EntityRevision = Shapes::StringShape.new(name: 'EntityRevision')
     EntitySummary = Shapes::StructureShape.new(name: 'EntitySummary')
     EntitySummaryList = Shapes::ListShape.new(name: 'EntitySummaryList')
     EntityType = Shapes::StringShape.new(name: 'EntityType')
@@ -139,11 +157,23 @@ module Aws::MarketplaceCatalog
     ExpressPrivateOfferConfigurationStateString = Shapes::StringShape.new(name: 'ExpressPrivateOfferConfigurationStateString')
     ExpressPrivateOfferConfigurationSummary = Shapes::StructureShape.new(name: 'ExpressPrivateOfferConfigurationSummary')
     FailureCode = Shapes::StringShape.new(name: 'FailureCode')
+    FeatureRecommendation = Shapes::StructureShape.new(name: 'FeatureRecommendation')
+    FeatureRecommendationList = Shapes::ListShape.new(name: 'FeatureRecommendationList')
+    FeatureRecommendations = Shapes::StructureShape.new(name: 'FeatureRecommendations')
     FieldName = Shapes::StringShape.new(name: 'FieldName')
+    FieldText = Shapes::StringShape.new(name: 'FieldText')
+    FieldTextItem = Shapes::StringShape.new(name: 'FieldTextItem')
+    FieldTextList = Shapes::ListShape.new(name: 'FieldTextList')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterName = Shapes::StringShape.new(name: 'FilterName')
     FilterValueContent = Shapes::StringShape.new(name: 'FilterValueContent')
+    FindingDescription = Shapes::StringShape.new(name: 'FindingDescription')
+    FindingList = Shapes::ListShape.new(name: 'FindingList')
+    FollowUpQuestion = Shapes::StructureShape.new(name: 'FollowUpQuestion')
+    FollowUpQuestionJustification = Shapes::StringShape.new(name: 'FollowUpQuestionJustification')
+    FollowUpQuestionList = Shapes::ListShape.new(name: 'FollowUpQuestionList')
+    FollowUpQuestionText = Shapes::StringShape.new(name: 'FollowUpQuestionText')
     FrameworkFilters = Shapes::UnionShape.new(name: 'FrameworkFilters')
     FrameworkId = Shapes::StringShape.new(name: 'FrameworkId')
     FrameworkSummary = Shapes::UnionShape.new(name: 'FrameworkSummary')
@@ -165,6 +195,14 @@ module Aws::MarketplaceCatalog
     ListEntitiesResponse = Shapes::StructureShape.new(name: 'ListEntitiesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListingCaseStudy = Shapes::StructureShape.new(name: 'ListingCaseStudy')
+    ListingFinding = Shapes::StructureShape.new(name: 'ListingFinding')
+    ListingFindingStatus = Shapes::StringShape.new(name: 'ListingFindingStatus')
+    ListingQualitySummary = Shapes::StructureShape.new(name: 'ListingQualitySummary')
+    ListingQualityTier = Shapes::StringShape.new(name: 'ListingQualityTier')
+    ListingRecommendations = Shapes::UnionShape.new(name: 'ListingRecommendations')
+    ListingRecommendationsSummary = Shapes::StructureShape.new(name: 'ListingRecommendationsSummary')
+    ListingUseCase = Shapes::StructureShape.new(name: 'ListingUseCase')
     MachineLearningProductEntityIdFilter = Shapes::StructureShape.new(name: 'MachineLearningProductEntityIdFilter')
     MachineLearningProductEntityIdFilterValueList = Shapes::ListShape.new(name: 'MachineLearningProductEntityIdFilterValueList')
     MachineLearningProductEntityIdString = Shapes::StringShape.new(name: 'MachineLearningProductEntityIdString')
@@ -239,6 +277,9 @@ module Aws::MarketplaceCatalog
     OfferStateFilter = Shapes::StructureShape.new(name: 'OfferStateFilter')
     OfferStateFilterValueList = Shapes::ListShape.new(name: 'OfferStateFilterValueList')
     OfferStateString = Shapes::StringShape.new(name: 'OfferStateString')
+    OfferSubsidiaryAuthorizationIdFilter = Shapes::StructureShape.new(name: 'OfferSubsidiaryAuthorizationIdFilter')
+    OfferSubsidiaryAuthorizationIdFilterValueList = Shapes::ListShape.new(name: 'OfferSubsidiaryAuthorizationIdFilterValueList')
+    OfferSubsidiaryAuthorizationIdString = Shapes::StringShape.new(name: 'OfferSubsidiaryAuthorizationIdString')
     OfferSummary = Shapes::StructureShape.new(name: 'OfferSummary')
     OfferTargetAgreementIdFilter = Shapes::StructureShape.new(name: 'OfferTargetAgreementIdFilter')
     OfferTargetAgreementIdFilterValueList = Shapes::ListShape.new(name: 'OfferTargetAgreementIdFilterValueList')
@@ -251,8 +292,15 @@ module Aws::MarketplaceCatalog
     OfferTargetingList = Shapes::ListShape.new(name: 'OfferTargetingList')
     OfferTargetingString = Shapes::StringShape.new(name: 'OfferTargetingString')
     OwnershipType = Shapes::StringShape.new(name: 'OwnershipType')
+    ProductContentRecommendations = Shapes::StructureShape.new(name: 'ProductContentRecommendations')
     PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
     PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
+    Rationale = Shapes::StringShape.new(name: 'Rationale')
+    RecommendationCitation = Shapes::StructureShape.new(name: 'RecommendationCitation')
+    RecommendationSeverity = Shapes::StringShape.new(name: 'RecommendationSeverity')
+    RecommendedAction = Shapes::StringShape.new(name: 'RecommendedAction')
+    RecommendedFeatureId = Shapes::StringShape.new(name: 'RecommendedFeatureId')
+    RecommendedFeatureStatus = Shapes::StringShape.new(name: 'RecommendedFeatureStatus')
     RequestedChangeList = Shapes::ListShape.new(name: 'RequestedChangeList')
     ResaleAuthorizationAvailabilityEndDateFilter = Shapes::StructureShape.new(name: 'ResaleAuthorizationAvailabilityEndDateFilter')
     ResaleAuthorizationAvailabilityEndDateFilterDateRange = Shapes::StructureShape.new(name: 'ResaleAuthorizationAvailabilityEndDateFilterDateRange')
@@ -319,6 +367,9 @@ module Aws::MarketplaceCatalog
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceNotSupportedException = Shapes::StructureShape.new(name: 'ResourceNotSupportedException')
     ResourcePolicyJson = Shapes::StringShape.new(name: 'ResourcePolicyJson')
+    ResourceText = Shapes::StringShape.new(name: 'ResourceText')
+    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    ResourceUrl = Shapes::StringShape.new(name: 'ResourceUrl')
     SaaSProductEntityIdFilter = Shapes::StructureShape.new(name: 'SaaSProductEntityIdFilter')
     SaaSProductEntityIdFilterValueList = Shapes::ListShape.new(name: 'SaaSProductEntityIdFilterValueList')
     SaaSProductEntityIdString = Shapes::StringShape.new(name: 'SaaSProductEntityIdString')
@@ -337,9 +388,12 @@ module Aws::MarketplaceCatalog
     ScopeName = Shapes::StringShape.new(name: 'ScopeName')
     ScopeValue = Shapes::StringShape.new(name: 'ScopeValue')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SolutionContentRecommendations = Shapes::StructureShape.new(name: 'SolutionContentRecommendations')
     Sort = Shapes::StructureShape.new(name: 'Sort')
     SortBy = Shapes::StringShape.new(name: 'SortBy')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
+    StartAssessmentRequest = Shapes::StructureShape.new(name: 'StartAssessmentRequest')
+    StartAssessmentResponse = Shapes::StructureShape.new(name: 'StartAssessmentResponse')
     StartChangeSetRequest = Shapes::StructureShape.new(name: 'StartChangeSetRequest')
     StartChangeSetResponse = Shapes::StructureShape.new(name: 'StartChangeSetResponse')
     SubsidiaryAuthorizationCreatedDateFilter = Shapes::StructureShape.new(name: 'SubsidiaryAuthorizationCreatedDateFilter')
@@ -379,17 +433,30 @@ module Aws::MarketplaceCatalog
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagList = Shapes::ListShape.new(name: 'TagList')
+    TagMap = Shapes::MapShape.new(name: 'TagMap')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TextAlternative = Shapes::StructureShape.new(name: 'TextAlternative')
+    TextAlternativeList = Shapes::ListShape.new(name: 'TextAlternativeList')
+    TextListAlternative = Shapes::StructureShape.new(name: 'TextListAlternative')
+    TextListAlternativeList = Shapes::ListShape.new(name: 'TextListAlternativeList')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UseCaseDetails = Shapes::StringShape.new(name: 'UseCaseDetails')
+    UseCaseId = Shapes::StringShape.new(name: 'UseCaseId')
+    UseCaseList = Shapes::ListShape.new(name: 'UseCaseList')
+    UseCaseRank = Shapes::IntegerShape.new(name: 'UseCaseRank')
+    UseCaseTaxonomyValue = Shapes::StringShape.new(name: 'UseCaseTaxonomyValue')
+    UseCasesAlternative = Shapes::StructureShape.new(name: 'UseCasesAlternative')
+    UseCasesAlternativeList = Shapes::ListShape.new(name: 'UseCasesAlternativeList')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
     ValueList = Shapes::ListShape.new(name: 'ValueList')
+    VerificationSource = Shapes::StringShape.new(name: 'VerificationSource')
     VersionedFrameworkId = Shapes::StringShape.new(name: 'VersionedFrameworkId')
     VisibilityValue = Shapes::StringShape.new(name: 'VisibilityValue')
 
@@ -401,6 +468,19 @@ module Aws::MarketplaceCatalog
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AdditionalResource.add_member(:type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "Type"))
+    AdditionalResource.add_member(:text, Shapes::ShapeRef.new(shape: ResourceText, required: true, location_name: "Text"))
+    AdditionalResource.add_member(:url, Shapes::ShapeRef.new(shape: ResourceUrl, required: true, location_name: "Url"))
+    AdditionalResource.struct_class = Types::AdditionalResource
+
+    AdditionalResourceList.member = Shapes::ShapeRef.new(shape: AdditionalResource)
+
+    AdditionalResourcesAlternative.add_member(:value, Shapes::ShapeRef.new(shape: AdditionalResourceList, required: true, location_name: "Value"))
+    AdditionalResourcesAlternative.add_member(:rationale, Shapes::ShapeRef.new(shape: Rationale, required: true, location_name: "Rationale"))
+    AdditionalResourcesAlternative.struct_class = Types::AdditionalResourcesAlternative
+
+    AdditionalResourcesAlternativeList.member = Shapes::ShapeRef.new(shape: AdditionalResourcesAlternative)
 
     AmiProductEntityIdFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: AmiProductEntityIdFilterValueList, location_name: "ValueList"))
     AmiProductEntityIdFilter.struct_class = Types::AmiProductEntityIdFilter
@@ -453,6 +533,7 @@ module Aws::MarketplaceCatalog
 
     AssessmentTargetFilter.add_member(:entity_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "EntityId"))
     AssessmentTargetFilter.add_member(:change_set_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ChangeSetId"))
+    AssessmentTargetFilter.add_member(:entity_ids, Shapes::ShapeRef.new(shape: EntityIdList, location_name: "EntityIds"))
     AssessmentTargetFilter.struct_class = Types::AssessmentTargetFilter
 
     AssessmentTargetSummary.add_member(:entity_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "EntityId"))
@@ -477,6 +558,14 @@ module Aws::MarketplaceCatalog
     CancelChangeSetResponse.add_member(:change_set_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ChangeSetId"))
     CancelChangeSetResponse.add_member(:change_set_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ChangeSetArn"))
     CancelChangeSetResponse.struct_class = Types::CancelChangeSetResponse
+
+    CaseStudiesAlternative.add_member(:value, Shapes::ShapeRef.new(shape: CaseStudyList, required: true, location_name: "Value"))
+    CaseStudiesAlternative.add_member(:rationale, Shapes::ShapeRef.new(shape: Rationale, required: true, location_name: "Rationale"))
+    CaseStudiesAlternative.struct_class = Types::CaseStudiesAlternative
+
+    CaseStudiesAlternativeList.member = Shapes::ShapeRef.new(shape: CaseStudiesAlternative)
+
+    CaseStudyList.member = Shapes::ShapeRef.new(shape: ListingCaseStudy)
 
     Change.add_member(:change_type, Shapes::ShapeRef.new(shape: ChangeType, required: true, location_name: "ChangeType"))
     Change.add_member(:entity, Shapes::ShapeRef.new(shape: Entity, required: true, location_name: "Entity"))
@@ -507,6 +596,8 @@ module Aws::MarketplaceCatalog
     ChangeSummary.add_member(:error_detail_list, Shapes::ShapeRef.new(shape: ErrorDetailList, location_name: "ErrorDetailList"))
     ChangeSummary.add_member(:change_name, Shapes::ShapeRef.new(shape: ChangeName, location_name: "ChangeName"))
     ChangeSummary.struct_class = Types::ChangeSummary
+
+    CitationList.member = Shapes::ShapeRef.new(shape: RecommendationCitation)
 
     ContainerProductEntityIdFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: ContainerProductEntityIdFilterValueList, location_name: "ValueList"))
     ContainerProductEntityIdFilter.struct_class = Types::ContainerProductEntityIdFilter
@@ -551,9 +642,31 @@ module Aws::MarketplaceCatalog
     ContainerSecuritySummary.add_member(:delivery_option_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "DeliveryOptionId"))
     ContainerSecuritySummary.struct_class = Types::ContainerSecuritySummary
 
+    ContentAlternatives.add_member(:text, Shapes::ShapeRef.new(shape: TextAlternativeList, location_name: "Text"))
+    ContentAlternatives.add_member(:text_list, Shapes::ShapeRef.new(shape: TextListAlternativeList, location_name: "TextList"))
+    ContentAlternatives.add_member(:additional_resources, Shapes::ShapeRef.new(shape: AdditionalResourcesAlternativeList, location_name: "AdditionalResources"))
+    ContentAlternatives.add_member(:use_cases, Shapes::ShapeRef.new(shape: UseCasesAlternativeList, location_name: "UseCases"))
+    ContentAlternatives.add_member(:case_studies, Shapes::ShapeRef.new(shape: CaseStudiesAlternativeList, location_name: "CaseStudies"))
+    ContentAlternatives.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ContentAlternatives.add_member_subclass(:text, Types::ContentAlternatives::Text)
+    ContentAlternatives.add_member_subclass(:text_list, Types::ContentAlternatives::TextList)
+    ContentAlternatives.add_member_subclass(:additional_resources, Types::ContentAlternatives::AdditionalResources)
+    ContentAlternatives.add_member_subclass(:use_cases, Types::ContentAlternatives::UseCases)
+    ContentAlternatives.add_member_subclass(:case_studies, Types::ContentAlternatives::CaseStudies)
+    ContentAlternatives.add_member_subclass(:unknown, Types::ContentAlternatives::Unknown)
+    ContentAlternatives.struct_class = Types::ContentAlternatives
+
+    ContentRecommendation.add_member(:status, Shapes::ShapeRef.new(shape: ContentRecommendationStatus, required: true, location_name: "Status"))
+    ContentRecommendation.add_member(:alternatives, Shapes::ShapeRef.new(shape: ContentAlternatives, required: true, location_name: "Alternatives"))
+    ContentRecommendation.add_member(:follow_up_questions, Shapes::ShapeRef.new(shape: FollowUpQuestionList, required: true, location_name: "FollowUpQuestions"))
+    ContentRecommendation.add_member(:findings, Shapes::ShapeRef.new(shape: FindingList, required: true, location_name: "Findings"))
+    ContentRecommendation.struct_class = Types::ContentRecommendation
+
     ControlAssessment.add_member(:control_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ControlId"))
     ControlAssessment.add_member(:control_assessment_result, Shapes::ShapeRef.new(shape: ControlAssessmentResult, location_name: "ControlAssessmentResult"))
+    ControlAssessment.add_member(:verification_source, Shapes::ShapeRef.new(shape: VerificationSource, location_name: "VerificationSource"))
     ControlAssessment.add_member(:errors, Shapes::ShapeRef.new(shape: ControlErrorList, location_name: "Errors"))
+    ControlAssessment.add_member(:control_summary, Shapes::ShapeRef.new(shape: ControlSummary, location_name: "ControlSummary"))
     ControlAssessment.struct_class = Types::ControlAssessment
 
     ControlAssessmentList.member = Shapes::ShapeRef.new(shape: ControlAssessment)
@@ -564,6 +677,18 @@ module Aws::MarketplaceCatalog
     ControlError.struct_class = Types::ControlError
 
     ControlErrorList.member = Shapes::ShapeRef.new(shape: ControlError)
+
+    ControlInput.add_member(:control_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ControlId"))
+    ControlInput.add_member(:input, Shapes::ShapeRef.new(shape: JsonDocumentType, location_name: "Input"))
+    ControlInput.struct_class = Types::ControlInput
+
+    ControlInputList.member = Shapes::ShapeRef.new(shape: ControlInput)
+
+    ControlSummary.add_member(:listing_recommendations, Shapes::ShapeRef.new(shape: ListingRecommendations, location_name: "ListingRecommendations"))
+    ControlSummary.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ControlSummary.add_member_subclass(:listing_recommendations, Types::ControlSummary::ListingRecommendations)
+    ControlSummary.add_member_subclass(:unknown, Types::ControlSummary::Unknown)
+    ControlSummary.struct_class = Types::ControlSummary
 
     DataProductEntityIdFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: DataProductEntityIdFilterValueList, location_name: "ValueList"))
     DataProductEntityIdFilter.struct_class = Types::DataProductEntityIdFilter
@@ -666,6 +791,8 @@ module Aws::MarketplaceCatalog
 
     EntityDetails.key = Shapes::ShapeRef.new(shape: EntityId)
     EntityDetails.value = Shapes::ShapeRef.new(shape: EntityDetail)
+
+    EntityIdList.member = Shapes::ShapeRef.new(shape: ResourceId)
 
     EntityRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "Catalog"))
     EntityRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "EntityId"))
@@ -784,11 +911,33 @@ module Aws::MarketplaceCatalog
     ExpressPrivateOfferConfigurationSummary.add_member(:state, Shapes::ShapeRef.new(shape: ExpressPrivateOfferConfigurationStateString, location_name: "State"))
     ExpressPrivateOfferConfigurationSummary.struct_class = Types::ExpressPrivateOfferConfigurationSummary
 
+    FeatureRecommendation.add_member(:feature_id, Shapes::ShapeRef.new(shape: RecommendedFeatureId, required: true, location_name: "FeatureId"))
+    FeatureRecommendation.add_member(:action, Shapes::ShapeRef.new(shape: RecommendedAction, required: true, location_name: "Action"))
+    FeatureRecommendation.add_member(:rationale, Shapes::ShapeRef.new(shape: Rationale, required: true, location_name: "Rationale"))
+    FeatureRecommendation.add_member(:severity, Shapes::ShapeRef.new(shape: RecommendationSeverity, required: true, location_name: "Severity"))
+    FeatureRecommendation.add_member(:status, Shapes::ShapeRef.new(shape: RecommendedFeatureStatus, required: true, location_name: "Status"))
+    FeatureRecommendation.struct_class = Types::FeatureRecommendation
+
+    FeatureRecommendationList.member = Shapes::ShapeRef.new(shape: FeatureRecommendation)
+
+    FeatureRecommendations.add_member(:recommendations, Shapes::ShapeRef.new(shape: FeatureRecommendationList, required: true, location_name: "Recommendations"))
+    FeatureRecommendations.struct_class = Types::FeatureRecommendations
+
+    FieldTextList.member = Shapes::ShapeRef.new(shape: FieldTextItem)
+
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, location_name: "Name"))
     Filter.add_member(:value_list, Shapes::ShapeRef.new(shape: ValueList, location_name: "ValueList"))
     Filter.struct_class = Types::Filter
 
     FilterList.member = Shapes::ShapeRef.new(shape: Filter)
+
+    FindingList.member = Shapes::ShapeRef.new(shape: ListingFinding)
+
+    FollowUpQuestion.add_member(:question, Shapes::ShapeRef.new(shape: FollowUpQuestionText, required: true, location_name: "Question"))
+    FollowUpQuestion.add_member(:justification, Shapes::ShapeRef.new(shape: FollowUpQuestionJustification, required: true, location_name: "Justification"))
+    FollowUpQuestion.struct_class = Types::FollowUpQuestion
+
+    FollowUpQuestionList.member = Shapes::ShapeRef.new(shape: FollowUpQuestion)
 
     FrameworkFilters.add_member(:ami_security_filters, Shapes::ShapeRef.new(shape: AMISecurityFilters, location_name: "AMISecurityFilters"))
     FrameworkFilters.add_member(:container_security_filters, Shapes::ShapeRef.new(shape: ContainerSecurityFilters, location_name: "ContainerSecurityFilters"))
@@ -800,9 +949,13 @@ module Aws::MarketplaceCatalog
 
     FrameworkSummary.add_member(:ami_security_summary, Shapes::ShapeRef.new(shape: AMISecuritySummary, location_name: "AMISecuritySummary"))
     FrameworkSummary.add_member(:container_security_summary, Shapes::ShapeRef.new(shape: ContainerSecuritySummary, location_name: "ContainerSecuritySummary"))
+    FrameworkSummary.add_member(:listing_quality_summary, Shapes::ShapeRef.new(shape: ListingQualitySummary, location_name: "ListingQualitySummary"))
+    FrameworkSummary.add_member(:listing_recommendations_summary, Shapes::ShapeRef.new(shape: ListingRecommendationsSummary, location_name: "ListingRecommendationsSummary"))
     FrameworkSummary.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     FrameworkSummary.add_member_subclass(:ami_security_summary, Types::FrameworkSummary::AmiSecuritySummary)
     FrameworkSummary.add_member_subclass(:container_security_summary, Types::FrameworkSummary::ContainerSecuritySummary)
+    FrameworkSummary.add_member_subclass(:listing_quality_summary, Types::FrameworkSummary::ListingQualitySummary)
+    FrameworkSummary.add_member_subclass(:listing_recommendations_summary, Types::FrameworkSummary::ListingRecommendationsSummary)
     FrameworkSummary.add_member_subclass(:unknown, Types::FrameworkSummary::Unknown)
     FrameworkSummary.struct_class = Types::FrameworkSummary
 
@@ -859,6 +1012,44 @@ module Aws::MarketplaceCatalog
     ListTagsForResourceResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceArn"))
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    ListingCaseStudy.add_member(:id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "Id"))
+    ListingCaseStudy.add_member(:title, Shapes::ShapeRef.new(shape: CaseStudyTitle, required: true, location_name: "Title"))
+    ListingCaseStudy.add_member(:rationale, Shapes::ShapeRef.new(shape: Rationale, required: true, location_name: "Rationale"))
+    ListingCaseStudy.struct_class = Types::ListingCaseStudy
+
+    ListingFinding.add_member(:action, Shapes::ShapeRef.new(shape: RecommendedAction, required: true, location_name: "Action"))
+    ListingFinding.add_member(:description, Shapes::ShapeRef.new(shape: FindingDescription, required: true, location_name: "Description"))
+    ListingFinding.add_member(:severity, Shapes::ShapeRef.new(shape: RecommendationSeverity, required: true, location_name: "Severity"))
+    ListingFinding.add_member(:status, Shapes::ShapeRef.new(shape: ListingFindingStatus, required: true, location_name: "Status"))
+    ListingFinding.struct_class = Types::ListingFinding
+
+    ListingQualitySummary.add_member(:tier, Shapes::ShapeRef.new(shape: ListingQualityTier, required: true, location_name: "Tier"))
+    ListingQualitySummary.add_member(:entity_revision, Shapes::ShapeRef.new(shape: EntityRevision, location_name: "EntityRevision"))
+    ListingQualitySummary.struct_class = Types::ListingQualitySummary
+
+    ListingRecommendations.add_member(:product_content_recommendations, Shapes::ShapeRef.new(shape: ProductContentRecommendations, location_name: "ProductContentRecommendations"))
+    ListingRecommendations.add_member(:solution_content_recommendations, Shapes::ShapeRef.new(shape: SolutionContentRecommendations, location_name: "SolutionContentRecommendations"))
+    ListingRecommendations.add_member(:feature_recommendations, Shapes::ShapeRef.new(shape: FeatureRecommendations, location_name: "FeatureRecommendations"))
+    ListingRecommendations.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ListingRecommendations.add_member_subclass(:product_content_recommendations, Types::ListingRecommendations::ProductContentRecommendations)
+    ListingRecommendations.add_member_subclass(:solution_content_recommendations, Types::ListingRecommendations::SolutionContentRecommendations)
+    ListingRecommendations.add_member_subclass(:feature_recommendations, Types::ListingRecommendations::FeatureRecommendations)
+    ListingRecommendations.add_member_subclass(:unknown, Types::ListingRecommendations::Unknown)
+    ListingRecommendations.struct_class = Types::ListingRecommendations
+
+    ListingRecommendationsSummary.add_member(:tier, Shapes::ShapeRef.new(shape: ListingQualityTier, required: true, location_name: "Tier"))
+    ListingRecommendationsSummary.add_member(:entity_revision, Shapes::ShapeRef.new(shape: EntityRevision, location_name: "EntityRevision"))
+    ListingRecommendationsSummary.struct_class = Types::ListingRecommendationsSummary
+
+    ListingUseCase.add_member(:id, Shapes::ShapeRef.new(shape: UseCaseId, required: true, location_name: "Id"))
+    ListingUseCase.add_member(:rank, Shapes::ShapeRef.new(shape: UseCaseRank, required: true, location_name: "Rank"))
+    ListingUseCase.add_member(:name, Shapes::ShapeRef.new(shape: UseCaseTaxonomyValue, required: true, location_name: "Name"))
+    ListingUseCase.add_member(:group, Shapes::ShapeRef.new(shape: UseCaseTaxonomyValue, required: true, location_name: "Group"))
+    ListingUseCase.add_member(:subgroup, Shapes::ShapeRef.new(shape: UseCaseTaxonomyValue, required: true, location_name: "Subgroup"))
+    ListingUseCase.add_member(:use_case_details, Shapes::ShapeRef.new(shape: UseCaseDetails, location_name: "UseCaseDetails"))
+    ListingUseCase.add_member(:rationale, Shapes::ShapeRef.new(shape: Rationale, required: true, location_name: "Rationale"))
+    ListingUseCase.struct_class = Types::ListingUseCase
 
     MachineLearningProductEntityIdFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: MachineLearningProductEntityIdFilterValueList, location_name: "ValueList"))
     MachineLearningProductEntityIdFilter.struct_class = Types::MachineLearningProductEntityIdFilter
@@ -923,6 +1114,7 @@ module Aws::MarketplaceCatalog
     OfferFilters.add_member(:name, Shapes::ShapeRef.new(shape: OfferNameFilter, location_name: "Name"))
     OfferFilters.add_member(:product_id, Shapes::ShapeRef.new(shape: OfferProductIdFilter, location_name: "ProductId"))
     OfferFilters.add_member(:resale_authorization_id, Shapes::ShapeRef.new(shape: OfferResaleAuthorizationIdFilter, location_name: "ResaleAuthorizationId"))
+    OfferFilters.add_member(:subsidiary_authorization_id, Shapes::ShapeRef.new(shape: OfferSubsidiaryAuthorizationIdFilter, location_name: "SubsidiaryAuthorizationId"))
     OfferFilters.add_member(:release_date, Shapes::ShapeRef.new(shape: OfferReleaseDateFilter, location_name: "ReleaseDate"))
     OfferFilters.add_member(:availability_end_date, Shapes::ShapeRef.new(shape: OfferAvailabilityEndDateFilter, location_name: "AvailabilityEndDate"))
     OfferFilters.add_member(:buyer_accounts, Shapes::ShapeRef.new(shape: OfferBuyerAccountsFilter, location_name: "BuyerAccounts"))
@@ -1040,9 +1232,15 @@ module Aws::MarketplaceCatalog
 
     OfferStateFilterValueList.member = Shapes::ShapeRef.new(shape: OfferStateString)
 
+    OfferSubsidiaryAuthorizationIdFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: OfferSubsidiaryAuthorizationIdFilterValueList, location_name: "ValueList"))
+    OfferSubsidiaryAuthorizationIdFilter.struct_class = Types::OfferSubsidiaryAuthorizationIdFilter
+
+    OfferSubsidiaryAuthorizationIdFilterValueList.member = Shapes::ShapeRef.new(shape: OfferSubsidiaryAuthorizationIdString)
+
     OfferSummary.add_member(:name, Shapes::ShapeRef.new(shape: OfferNameString, location_name: "Name"))
     OfferSummary.add_member(:product_id, Shapes::ShapeRef.new(shape: OfferProductIdString, location_name: "ProductId"))
     OfferSummary.add_member(:resale_authorization_id, Shapes::ShapeRef.new(shape: OfferResaleAuthorizationIdString, location_name: "ResaleAuthorizationId"))
+    OfferSummary.add_member(:subsidiary_authorization_id, Shapes::ShapeRef.new(shape: OfferSubsidiaryAuthorizationIdString, location_name: "SubsidiaryAuthorizationId"))
     OfferSummary.add_member(:release_date, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "ReleaseDate"))
     OfferSummary.add_member(:availability_end_date, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "AvailabilityEndDate"))
     OfferSummary.add_member(:buyer_accounts, Shapes::ShapeRef.new(shape: OfferBuyerAccountsList, location_name: "BuyerAccounts"))
@@ -1071,11 +1269,25 @@ module Aws::MarketplaceCatalog
 
     OfferTargetingList.member = Shapes::ShapeRef.new(shape: OfferTargetingString)
 
+    ProductContentRecommendations.add_member(:product_title, Shapes::ShapeRef.new(shape: ContentRecommendation, location_name: "ProductTitle"))
+    ProductContentRecommendations.add_member(:short_description, Shapes::ShapeRef.new(shape: ContentRecommendation, location_name: "ShortDescription"))
+    ProductContentRecommendations.add_member(:long_description, Shapes::ShapeRef.new(shape: ContentRecommendation, location_name: "LongDescription"))
+    ProductContentRecommendations.add_member(:support_description, Shapes::ShapeRef.new(shape: ContentRecommendation, location_name: "SupportDescription"))
+    ProductContentRecommendations.add_member(:highlights, Shapes::ShapeRef.new(shape: ContentRecommendation, location_name: "Highlights"))
+    ProductContentRecommendations.add_member(:search_keywords, Shapes::ShapeRef.new(shape: ContentRecommendation, location_name: "SearchKeywords"))
+    ProductContentRecommendations.add_member(:categories, Shapes::ShapeRef.new(shape: ContentRecommendation, location_name: "Categories"))
+    ProductContentRecommendations.add_member(:additional_resources, Shapes::ShapeRef.new(shape: ContentRecommendation, location_name: "AdditionalResources"))
+    ProductContentRecommendations.add_member(:citations, Shapes::ShapeRef.new(shape: CitationList, required: true, location_name: "Citations"))
+    ProductContentRecommendations.struct_class = Types::ProductContentRecommendations
+
     PutResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceArn"))
     PutResourcePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicyJson, required: true, location_name: "Policy"))
     PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
 
     PutResourcePolicyResponse.struct_class = Types::PutResourcePolicyResponse
+
+    RecommendationCitation.add_member(:url, Shapes::ShapeRef.new(shape: CitationUrl, required: true, location_name: "Url"))
+    RecommendationCitation.struct_class = Types::RecommendationCitation
 
     RequestedChangeList.member = Shapes::ShapeRef.new(shape: Change)
 
@@ -1267,9 +1479,30 @@ module Aws::MarketplaceCatalog
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
+    SolutionContentRecommendations.add_member(:title, Shapes::ShapeRef.new(shape: ContentRecommendation, location_name: "Title"))
+    SolutionContentRecommendations.add_member(:short_description, Shapes::ShapeRef.new(shape: ContentRecommendation, location_name: "ShortDescription"))
+    SolutionContentRecommendations.add_member(:long_description, Shapes::ShapeRef.new(shape: ContentRecommendation, location_name: "LongDescription"))
+    SolutionContentRecommendations.add_member(:integration_details, Shapes::ShapeRef.new(shape: ContentRecommendation, location_name: "IntegrationDetails"))
+    SolutionContentRecommendations.add_member(:additional_resources, Shapes::ShapeRef.new(shape: ContentRecommendation, location_name: "AdditionalResources"))
+    SolutionContentRecommendations.add_member(:use_cases, Shapes::ShapeRef.new(shape: ContentRecommendation, location_name: "UseCases"))
+    SolutionContentRecommendations.add_member(:case_studies, Shapes::ShapeRef.new(shape: ContentRecommendation, location_name: "CaseStudies"))
+    SolutionContentRecommendations.add_member(:citations, Shapes::ShapeRef.new(shape: CitationList, required: true, location_name: "Citations"))
+    SolutionContentRecommendations.struct_class = Types::SolutionContentRecommendations
+
     Sort.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortBy, location_name: "SortBy"))
     Sort.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
     Sort.struct_class = Types::Sort
+
+    StartAssessmentRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "Catalog"))
+    StartAssessmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    StartAssessmentRequest.add_member(:framework_id, Shapes::ShapeRef.new(shape: FrameworkId, required: true, location_name: "FrameworkId"))
+    StartAssessmentRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "EntityId"))
+    StartAssessmentRequest.add_member(:controls, Shapes::ShapeRef.new(shape: ControlInputList, location_name: "Controls"))
+    StartAssessmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    StartAssessmentRequest.struct_class = Types::StartAssessmentRequest
+
+    StartAssessmentResponse.add_member(:assessment_id, Shapes::ShapeRef.new(shape: AssessmentIdentifier, location_name: "AssessmentId"))
+    StartAssessmentResponse.struct_class = Types::StartAssessmentResponse
 
     StartChangeSetRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "Catalog"))
     StartChangeSetRequest.add_member(:change_set, Shapes::ShapeRef.new(shape: RequestedChangeList, required: true, location_name: "ChangeSet"))
@@ -1359,11 +1592,26 @@ module Aws::MarketplaceCatalog
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
 
+    TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceArn"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    TextAlternative.add_member(:value, Shapes::ShapeRef.new(shape: FieldText, required: true, location_name: "Value"))
+    TextAlternative.add_member(:rationale, Shapes::ShapeRef.new(shape: Rationale, required: true, location_name: "Rationale"))
+    TextAlternative.struct_class = Types::TextAlternative
+
+    TextAlternativeList.member = Shapes::ShapeRef.new(shape: TextAlternative)
+
+    TextListAlternative.add_member(:value, Shapes::ShapeRef.new(shape: FieldTextList, required: true, location_name: "Value"))
+    TextListAlternative.add_member(:rationale, Shapes::ShapeRef.new(shape: Rationale, required: true, location_name: "Rationale"))
+    TextListAlternative.struct_class = Types::TextListAlternative
+
+    TextListAlternativeList.member = Shapes::ShapeRef.new(shape: TextListAlternative)
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
@@ -1373,6 +1621,14 @@ module Aws::MarketplaceCatalog
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UseCaseList.member = Shapes::ShapeRef.new(shape: ListingUseCase)
+
+    UseCasesAlternative.add_member(:value, Shapes::ShapeRef.new(shape: UseCaseList, required: true, location_name: "Value"))
+    UseCasesAlternative.add_member(:rationale, Shapes::ShapeRef.new(shape: Rationale, required: true, location_name: "Rationale"))
+    UseCasesAlternative.struct_class = Types::UseCasesAlternative
+
+    UseCasesAlternativeList.member = Shapes::ShapeRef.new(shape: UseCasesAlternative)
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessageContent, location_name: "Message"))
     ValidationException.add_member(:validation_exception_field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "ValidationExceptionFieldList"))
@@ -1588,6 +1844,21 @@ module Aws::MarketplaceCatalog
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:start_assessment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartAssessment"
+        o.http_method = "POST"
+        o.http_request_uri = "/StartAssessment"
+        o.input = Shapes::ShapeRef.new(shape: StartAssessmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartAssessmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:start_change_set, Seahorse::Model::Operation.new.tap do |o|

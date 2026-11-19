@@ -36,6 +36,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#endpoint-instance_method
       def endpoint: () -> Types::Endpoint
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#primary_endpoint-instance_method
+      def primary_endpoint: () -> Types::PrimaryEndpoint
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#allocated_storage-instance_method
       def allocated_storage: () -> ::Integer
 
@@ -296,6 +299,9 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#db_capacity_reservation_identifier-instance_method
       def db_capacity_reservation_identifier: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#vpc_networking_enabled-instance_method
+      def vpc_networking_enabled: () -> bool
 
       def client: () -> Client
 

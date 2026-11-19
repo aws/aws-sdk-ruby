@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2026-11-19)
+------------------
+
+* Feature - Adds skill packages and skill source sync for agent skill records. Upload a skill package (ZIP) or sync SKILL.md or the full package from Amazon S3 or GitHub. GetRegistryRecord returns a short-lived download URL and SHA-256 checksum. GitHub sources use OAuth 2.0 user authorization.
+
 1.18.0 (2026-11-18)
 ------------------
 

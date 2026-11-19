@@ -171,7 +171,9 @@ module Aws
                                  }
                                ],
                                ?master_user_authentication_type: ("password" | "iam-db-auth"),
+                               ?enable_vpc_networking: bool,
                                ?with_express_configuration: bool,
+                               ?enable_internet_access_gateway: bool,
                                ?associated_roles: Array[
                                  {
                                    role_arn: ::String,

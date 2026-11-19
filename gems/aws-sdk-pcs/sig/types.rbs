@@ -52,6 +52,7 @@ module Aws::PCS
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
       attr_accessor slurmdbd_custom_settings: ::Array[Types::SlurmdbdCustomSetting]
       attr_accessor cgroup_custom_settings: ::Array[Types::CgroupCustomSetting]
+      attr_accessor job_submit_plugins: ::Array[Types::JobSubmitPlugin]
       attr_accessor auth_key: Types::SlurmAuthKey
       attr_accessor jwt_auth: Types::JwtAuth
       attr_accessor accounting: Types::Accounting
@@ -64,6 +65,7 @@ module Aws::PCS
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
       attr_accessor slurmdbd_custom_settings: ::Array[Types::SlurmdbdCustomSetting]
       attr_accessor cgroup_custom_settings: ::Array[Types::CgroupCustomSetting]
+      attr_accessor job_submit_plugins: ::Array[Types::JobSubmitPlugin]
       attr_accessor accounting: Types::AccountingRequest
       attr_accessor slurm_rest: Types::SlurmRestRequest
       SENSITIVE: []
@@ -287,6 +289,20 @@ module Aws::PCS
 
     class InternalServerException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JobSubmitPlugin
+      attr_accessor name: ::String
+      attr_accessor type: ("STARLARK")
+      attr_accessor script_source: Types::JobSubmitScriptSource
+      SENSITIVE: []
+    end
+
+    class JobSubmitScriptSource
+      attr_accessor script_location: ::String
+      attr_accessor s3_version_id: ::String
+      attr_accessor checksum: ::String
       SENSITIVE: []
     end
 
@@ -571,6 +587,7 @@ module Aws::PCS
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
       attr_accessor slurmdbd_custom_settings: ::Array[Types::SlurmdbdCustomSetting]
       attr_accessor cgroup_custom_settings: ::Array[Types::CgroupCustomSetting]
+      attr_accessor job_submit_plugins: ::Array[Types::JobSubmitPlugin]
       attr_accessor accounting: Types::UpdateAccountingRequest
       attr_accessor slurm_rest: Types::UpdateSlurmRestRequest
       SENSITIVE: []

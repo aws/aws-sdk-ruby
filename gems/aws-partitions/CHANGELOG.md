@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1309.0 (2026-11-19)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::PartnerCentralMarketing`.
+
 1.1308.0 (2026-11-18)
 ------------------
 

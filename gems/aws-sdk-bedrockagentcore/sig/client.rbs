@@ -1451,7 +1451,7 @@ module Aws
         def payment_manager_arn: () -> ::String
         def payment_session_id: () -> ::String
         def payment_instrument_id: () -> ::String
-        def payment_type: () -> ("CRYPTO_X402" | "MPP")
+        def payment_type: () -> ("CRYPTO_X402" | "MPP" | "AWS_BILLING_X402")
         def status: () -> ("PROOF_GENERATED")
         def payment_output: () -> Types::PaymentOutput
         def created_at: () -> ::Time
@@ -1464,7 +1464,7 @@ module Aws
                              payment_manager_arn: ::String,
                              payment_session_id: ::String,
                              payment_instrument_id: ::String,
-                             payment_type: ("CRYPTO_X402" | "MPP"),
+                             payment_type: ("CRYPTO_X402" | "MPP" | "AWS_BILLING_X402"),
                              payment_input: {
                                crypto_x402: {
                                  version: ::String,
@@ -1476,6 +1476,19 @@ module Aws
                                  version: ::String,
                                  www_authenticate_headers: Array[::String],
                                  buyer_pays_gas_fees: bool?
+                               }?,
+                               aws_billing_x402: {
+                                 version: ::String,
+                                 payload: {
+                                 },
+                                 options: {
+                                   dpop_jwk: {
+                                     kty: ("EC"),
+                                     crv: ("P-256" | "P-384" | "P-521"),
+                                     x: ::String,
+                                     y: ::String
+                                   }?
+                                 }?
                                }?
                              },
                              ?client_token: ::String

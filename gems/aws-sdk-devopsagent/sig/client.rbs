@@ -109,7 +109,8 @@ module Aws
                                 ?kms_key_arn: ::String,
                                 ?client_token: ::String,
                                 ?tags: Hash[::String, ::String],
-                                ?preferences: Hash[("elevatedActionsEnabled"), bool]
+                                ?preferences: Hash[("elevatedActionsEnabled"), bool],
+                                ?aws_source_mode: ("standalone" | "organization")
                               ) -> _CreateAgentSpaceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentSpaceResponseSuccess
 
@@ -984,7 +985,8 @@ module Aws
                                 ?name: ::String,
                                 ?description: ::String,
                                 ?locale: ::String,
-                                ?preferences: Hash[("elevatedActionsEnabled"), bool]
+                                ?preferences: Hash[("elevatedActionsEnabled"), bool],
+                                ?aws_source_mode: ("standalone" | "organization")
                               ) -> _UpdateAgentSpaceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentSpaceResponseSuccess
 

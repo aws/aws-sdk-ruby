@@ -313,6 +313,7 @@ module Aws
   autoload :PartnerCentralAccount, 'aws-sdk-partnercentralaccount'
   autoload :PartnerCentralBenefits, 'aws-sdk-partnercentralbenefits'
   autoload :PartnerCentralChannel, 'aws-sdk-partnercentralchannel'
+  autoload :PartnerCentralMarketing, 'aws-sdk-partnercentralmarketing'
   autoload :PartnerCentralRevenueMeasurement, 'aws-sdk-partnercentralrevenuemeasurement'
   autoload :PartnerCentralSelling, 'aws-sdk-partnercentralselling'
   autoload :PaymentCryptography, 'aws-sdk-paymentcryptography'

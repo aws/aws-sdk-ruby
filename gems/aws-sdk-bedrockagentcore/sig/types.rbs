@@ -172,6 +172,24 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class AwsBillingPaymentOptions
+      attr_accessor dpop_jwk: Types::DpopJwk
+      SENSITIVE: []
+    end
+
+    class AwsBillingX402PaymentInput
+      attr_accessor version: ::String
+      attr_accessor payload: untyped
+      attr_accessor options: Types::AwsBillingPaymentOptions
+      SENSITIVE: [:payload]
+    end
+
+    class AwsBillingX402PaymentOutput
+      attr_accessor version: ::String
+      attr_accessor payment_token: ::String
+      SENSITIVE: [:payment_token]
+    end
+
     class BasicAuth
       attr_accessor secret_arn: ::String
       SENSITIVE: []
@@ -828,6 +846,14 @@ module Aws::BedrockAgentCore
     class DomainFilter
       attr_accessor include: ::Array[::String]
       attr_accessor exclude: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DpopJwk
+      attr_accessor kty: ("EC")
+      attr_accessor crv: ("P-256" | "P-384" | "P-521")
+      attr_accessor x: ::String
+      attr_accessor y: ::String
       SENSITIVE: []
     end
 
@@ -2882,12 +2908,15 @@ module Aws::BedrockAgentCore
     class PaymentInput
       attr_accessor crypto_x402: Types::CryptoX402PaymentInput
       attr_accessor mpp: Types::MppPaymentInput
+      attr_accessor aws_billing_x402: Types::AwsBillingX402PaymentInput
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class CryptoX402 < PaymentInput
       end
       class Mpp < PaymentInput
+      end
+      class AwsBillingX402 < PaymentInput
       end
       class Unknown < PaymentInput
       end
@@ -2932,12 +2961,15 @@ module Aws::BedrockAgentCore
     class PaymentOutput
       attr_accessor crypto_x402: Types::CryptoX402PaymentOutput
       attr_accessor mpp: Types::MppPaymentOutput
+      attr_accessor aws_billing_x402: Types::AwsBillingX402PaymentOutput
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class CryptoX402 < PaymentOutput
       end
       class Mpp < PaymentOutput
+      end
+      class AwsBillingX402 < PaymentOutput
       end
       class Unknown < PaymentOutput
       end
@@ -3005,7 +3037,7 @@ module Aws::BedrockAgentCore
       attr_accessor payment_manager_arn: ::String
       attr_accessor payment_session_id: ::String
       attr_accessor payment_instrument_id: ::String
-      attr_accessor payment_type: ("CRYPTO_X402" | "MPP")
+      attr_accessor payment_type: ("CRYPTO_X402" | "MPP" | "AWS_BILLING_X402")
       attr_accessor payment_input: Types::PaymentInput
       attr_accessor client_token: ::String
       SENSITIVE: []
@@ -3016,7 +3048,7 @@ module Aws::BedrockAgentCore
       attr_accessor payment_manager_arn: ::String
       attr_accessor payment_session_id: ::String
       attr_accessor payment_instrument_id: ::String
-      attr_accessor payment_type: ("CRYPTO_X402" | "MPP")
+      attr_accessor payment_type: ("CRYPTO_X402" | "MPP" | "AWS_BILLING_X402")
       attr_accessor status: ("PROOF_GENERATED")
       attr_accessor payment_output: Types::PaymentOutput
       attr_accessor created_at: ::Time

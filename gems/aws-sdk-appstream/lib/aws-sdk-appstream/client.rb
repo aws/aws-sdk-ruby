@@ -2507,6 +2507,11 @@ module Aws::AppStream
     #   session and the local client. Use HostToClient to redirect URLs from
     #   the remote desktop to the local browser.
     #
+    # @option params [Types::WebAuthnRedirection] :web_authn_redirection
+    #   Configuration for WebAuthn redirection between the streaming session
+    #   and the user's local device. Use ProcessCompatibilityList to specify
+    #   which processes can use WebAuthn redirection on Windows fleets.
+    #
     # @option params [Types::AgentAccessConfig] :agent_access_config
     #   The configuration for agent access on the stack. If specified, agent
     #   access is enabled for the stack.
@@ -2570,6 +2575,10 @@ module Aws::AppStream
     #         denied_urls: ["UrlPattern"],
     #       },
     #     },
+    #     web_authn_redirection: {
+    #       enabled: false, # required
+    #       process_compatibility_list: ["ProcessImageName"],
+    #     },
     #     agent_access_config: {
     #       settings: [ # required
     #         {
@@ -2625,6 +2634,9 @@ module Aws::AppStream
     #   resp.stack.content_redirection.host_to_client.allowed_urls[0] #=> String
     #   resp.stack.content_redirection.host_to_client.denied_urls #=> Array
     #   resp.stack.content_redirection.host_to_client.denied_urls[0] #=> String
+    #   resp.stack.web_authn_redirection.enabled #=> Boolean
+    #   resp.stack.web_authn_redirection.process_compatibility_list #=> Array
+    #   resp.stack.web_authn_redirection.process_compatibility_list[0] #=> String
     #   resp.stack.agent_access_config.settings #=> Array
     #   resp.stack.agent_access_config.settings[0].agent_action #=> String, one of "COMPUTER_VISION", "COMPUTER_INPUT", "FORWARD_MCP_TOOLS"
     #   resp.stack.agent_access_config.settings[0].permission #=> String, one of "ENABLED", "DISABLED"
@@ -4350,6 +4362,9 @@ module Aws::AppStream
     #   resp.stacks[0].content_redirection.host_to_client.allowed_urls[0] #=> String
     #   resp.stacks[0].content_redirection.host_to_client.denied_urls #=> Array
     #   resp.stacks[0].content_redirection.host_to_client.denied_urls[0] #=> String
+    #   resp.stacks[0].web_authn_redirection.enabled #=> Boolean
+    #   resp.stacks[0].web_authn_redirection.process_compatibility_list #=> Array
+    #   resp.stacks[0].web_authn_redirection.process_compatibility_list[0] #=> String
     #   resp.stacks[0].agent_access_config.settings #=> Array
     #   resp.stacks[0].agent_access_config.settings[0].agent_action #=> String, one of "COMPUTER_VISION", "COMPUTER_INPUT", "FORWARD_MCP_TOOLS"
     #   resp.stacks[0].agent_access_config.settings[0].permission #=> String, one of "ENABLED", "DISABLED"
@@ -6471,6 +6486,13 @@ module Aws::AppStream
     #   session and the local client. Use HostToClient to redirect URLs from
     #   the remote desktop to the local browser.
     #
+    # @option params [Types::WebAuthnRedirection] :web_authn_redirection
+    #   Configuration for WebAuthn redirection between the streaming session
+    #   and the user's local device. Use ProcessCompatibilityList to specify
+    #   which processes can use WebAuthn redirection on Windows fleets. To
+    #   remove WebAuthn redirection, use AttributesToDelete with the
+    #   WEB\_AUTHN\_REDIRECTION value.
+    #
     # @option params [Types::AgentAccessConfigForUpdate] :agent_access_config
     #   The configuration for agent access on the stack. Specify this to
     #   update agent access settings. To remove agent access, use
@@ -6506,7 +6528,7 @@ module Aws::AppStream
     #     delete_storage_connectors: false,
     #     redirect_url: "RedirectURL",
     #     feedback_url: "FeedbackURL",
-    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS, STREAMING_EXPERIENCE_SETTINGS, CONTENT_REDIRECTION, AGENT_ACCESS_CONFIG, STORAGE_CONNECTOR_AUTHENTICATION, AGENT_ACCESS_CONFIG_KMS_KEY_ARN
+    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS, STREAMING_EXPERIENCE_SETTINGS, CONTENT_REDIRECTION, WEB_AUTHN_REDIRECTION, AGENT_ACCESS_CONFIG, STORAGE_CONNECTOR_AUTHENTICATION, AGENT_ACCESS_CONFIG_KMS_KEY_ARN
     #     user_settings: [
     #       {
     #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN, AUTO_TIME_ZONE_REDIRECTION, SMART_CARD_REDIRECTION
@@ -6534,6 +6556,10 @@ module Aws::AppStream
     #         allowed_urls: ["UrlPattern"],
     #         denied_urls: ["UrlPattern"],
     #       },
+    #     },
+    #     web_authn_redirection: {
+    #       enabled: false, # required
+    #       process_compatibility_list: ["ProcessImageName"],
     #     },
     #     agent_access_config: {
     #       settings: [
@@ -6590,6 +6616,9 @@ module Aws::AppStream
     #   resp.stack.content_redirection.host_to_client.allowed_urls[0] #=> String
     #   resp.stack.content_redirection.host_to_client.denied_urls #=> Array
     #   resp.stack.content_redirection.host_to_client.denied_urls[0] #=> String
+    #   resp.stack.web_authn_redirection.enabled #=> Boolean
+    #   resp.stack.web_authn_redirection.process_compatibility_list #=> Array
+    #   resp.stack.web_authn_redirection.process_compatibility_list[0] #=> String
     #   resp.stack.agent_access_config.settings #=> Array
     #   resp.stack.agent_access_config.settings[0].agent_action #=> String, one of "COMPUTER_VISION", "COMPUTER_INPUT", "FORWARD_MCP_TOOLS"
     #   resp.stack.agent_access_config.settings[0].permission #=> String, one of "ENABLED", "DISABLED"
@@ -6716,7 +6745,7 @@ module Aws::AppStream
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.159.0'
+      context[:gem_version] = '1.160.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -248,6 +248,8 @@ module Aws::RDS
       attr_accessor rds_custom_cluster_configuration: Types::RdsCustomClusterConfiguration
       attr_accessor iops: ::Integer
       attr_accessor certificate_details: Types::CertificateDetails
+      attr_accessor vpc_networking_enabled: bool
+      attr_accessor internet_access_gateway_enabled: bool
       SENSITIVE: [:master_user_password]
     end
 
@@ -481,7 +483,9 @@ module Aws::RDS
       attr_accessor engine_lifecycle_support: ::String
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor master_user_authentication_type: ("password" | "iam-db-auth")
+      attr_accessor enable_vpc_networking: bool
       attr_accessor with_express_configuration: bool
+      attr_accessor enable_internet_access_gateway: bool
       attr_accessor associated_roles: ::Array[Types::DBClusterAssociatedRole]
       attr_accessor source_region: ::String
       SENSITIVE: [:master_user_password, :pre_signed_url]
@@ -1274,6 +1278,7 @@ module Aws::RDS
       attr_accessor master_username: ::String
       attr_accessor db_name: ::String
       attr_accessor endpoint: Types::Endpoint
+      attr_accessor primary_endpoint: Types::PrimaryEndpoint
       attr_accessor allocated_storage: ::Integer
       attr_accessor instance_create_time: ::Time
       attr_accessor preferred_backup_window: ::String
@@ -1361,6 +1366,7 @@ module Aws::RDS
       attr_accessor storage_operation_status: ::String
       attr_accessor storage_operation_percent_progress: ::Integer
       attr_accessor db_capacity_reservation_identifier: ::String
+      attr_accessor vpc_networking_enabled: bool
       SENSITIVE: []
     end
 
@@ -3121,6 +3127,9 @@ module Aws::RDS
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor master_user_authentication_type: ("password" | "iam-db-auth")
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor enable_internet_access_gateway: bool
+      attr_accessor enable_vpc_networking: bool
+      attr_accessor db_subnet_group_name: ::String
       SENSITIVE: [:master_user_password]
     end
 
@@ -3653,6 +3662,12 @@ module Aws::RDS
     end
 
     class PointInTimeRestoreNotEnabledFault < Aws::EmptyStructure
+    end
+
+    class PrimaryEndpoint
+      attr_accessor address: ::String
+      attr_accessor hosted_zone_id: ::String
+      SENSITIVE: []
     end
 
     class ProcessorFeature

@@ -1940,16 +1940,18 @@ module Aws::SecurityAgent
     # security finding.
     #
     # @!attribute [rw] status
-    #   The current status of the code remediation task.
+    #   The current status of the overall code remediation task.
     #   @return [String]
     #
     # @!attribute [rw] status_reason
-    #   The reason for the current status of the code remediation task.
+    #   The reason for the current status of the overall code remediation
+    #   task.
     #   @return [String]
     #
     # @!attribute [rw] task_details
-    #   The list of details for the code remediation task, including
-    #   repository name, code diff link, and pull request link.
+    #   The list of details for a code remediation task, including
+    #   repository names, status of code remediation for each associated
+    #   repository, and generated code diff or pull request links.
     #   @return [Array<Types::CodeRemediationTaskDetails>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CodeRemediationTask AWS API Documentation
@@ -1966,7 +1968,8 @@ module Aws::SecurityAgent
     # code diff and pull request.
     #
     # @!attribute [rw] repo_name
-    #   The name of the repository where the remediation was applied.
+    #   The name of an associated repository where the remediation was
+    #   applied.
     #   @return [String]
     #
     # @!attribute [rw] code_diff_link
@@ -1977,12 +1980,28 @@ module Aws::SecurityAgent
     #   The link to the pull request created for the remediation.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   The current status of the code remediation task for the particular
+    #   repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   A category classifier if a repository's code remediation fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   A descriptive reason when a repository's code remediation fails.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CodeRemediationTaskDetails AWS API Documentation
     #
     class CodeRemediationTaskDetails < Struct.new(
       :repo_name,
       :code_diff_link,
-      :pull_request_link)
+      :pull_request_link,
+      :status,
+      :status_code,
+      :status_reason)
       SENSITIVE = []
       include Aws::Structure
     end

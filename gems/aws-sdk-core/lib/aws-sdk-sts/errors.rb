@@ -33,9 +33,15 @@ module Aws::STS
   #    * This error class is not used. `IDPCommunicationError` is used during parsing instead.
   # * {IDPRejectedClaimException}
   #    * This error class is not used. `IDPRejectedClaim` is used during parsing instead.
+  # * {InsufficientSessionLifetimeException}
+  #    * This error class is not used. `InsufficientSessionLifetime` is used during parsing instead.
   # * {InvalidAuthorizationMessageException}
+  # * {InvalidContextAssertionException}
+  #    * This error class is not used. `InvalidContextAssertion` is used during parsing instead.
   # * {InvalidIdentityTokenException}
   #    * This error class is not used. `InvalidIdentityToken` is used during parsing instead.
+  # * {InvalidSubjectCredentialsException}
+  #    * This error class is not used. `InvalidSubjectCredentials` is used during parsing instead.
   # * {JWTPayloadSizeExceededException}
   # * {MalformedPolicyDocumentException}
   #    * This error class is not used. `MalformedPolicyDocument` is used during parsing instead.
@@ -115,11 +121,45 @@ module Aws::STS
       end
     end
 
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InsufficientSessionLifetime` instead.
+    class InsufficientSessionLifetimeException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::STS::Types::InsufficientSessionLifetimeException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class InvalidAuthorizationMessageException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::STS::Types::InvalidAuthorizationMessageException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidContextAssertion` instead.
+    class InvalidContextAssertionException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::STS::Types::InvalidContextAssertionException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -137,6 +177,23 @@ module Aws::STS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::STS::Types::InvalidIdentityTokenException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    # @deprecated This error class is not used during parsing.
+    #   Please use `InvalidSubjectCredentials` instead.
+    class InvalidSubjectCredentialsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::STS::Types::InvalidSubjectCredentialsException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

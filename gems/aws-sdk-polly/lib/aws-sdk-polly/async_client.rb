@@ -429,6 +429,18 @@ module Aws::Polly
     #
     # ^
     #
+    # To use a custom voice, specify its ID in `VoiceId`. The voice must be
+    # in `active` status. If the voice is in `pending` or `failed` status,
+    # the request fails with `ConflictException`. If no custom voice with
+    # the specified ID exists in your account and Region, the request fails
+    # with `ResourceNotFoundException`. If the custom voice uses a customer
+    # managed key, you need `kms:Decrypt` permission on the key. If you
+    # disabled the key or scheduled it for deletion, the request fails with
+    # `ValidationException`. If you don't have permission to use the key,
+    # the request fails with `AccessDeniedException`. If Amazon Web Services
+    # KMS throttles Amazon Polly's request to use the key, the request
+    # fails with `ThrottlingException`.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html
@@ -458,8 +470,10 @@ module Aws::Polly
     #   The audio frequency, specified in Hz.
     #
     # @option params [required, String] :voice_id
-    #   The voice to use in synthesis. To get a list of available voice IDs,
-    #   use the [DescribeVoices][1] operation.
+    #   The voice ID to use for the synthesis. To get a list of available
+    #   voice IDs, use the [DescribeVoices][1] operation. To use a custom
+    #   voice, specify the voice ID that `CreateVoice` returned, for example,
+    #   `vc-9a8fa85dd3`. You can't specify the ARN of a voice.
     #
     #
     #
@@ -596,14 +610,14 @@ module Aws::Polly
     #
     #   # For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
-    #   event.reason #=> String, one of "unsupportedOperation", "fieldValidationFailed", "other", "invalidInboundEvent"
+    #   event.reason #=> String, one of "unsupportedOperation", "fieldValidationFailed", "other", "invalidInboundEvent", "kmsKeyNotFound", "kmsKeyUnusable"
     #   event.fields #=> Array
     #   event.fields[0].name #=> String
     #   event.fields[0].message #=> String
     #
     #   # For :service_quota_exceeded_exception event available at #on_service_quota_exceeded_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
-    #   event.quota_code #=> String, one of "input-stream-inbound-event-timeout", "input-stream-timeout"
+    #   event.quota_code #=> String, one of "input-stream-inbound-event-timeout", "input-stream-timeout", "custom-voice-max-count"
     #   event.service_code #=> String, one of "polly"
     #
     #   # For :service_failure_exception event available at #on_service_failure_exception_event callback and response eventstream enumerator:
@@ -663,7 +677,7 @@ module Aws::Polly
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-polly'
-      context[:gem_version] = '1.141.0'
+      context[:gem_version] = '1.142.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -346,7 +346,10 @@ module Aws
                                               }?,
                                               ssh_key_name: ::String?,
                                               instance_profile_arn: ::String?,
-                                              propagated_tags: Hash[::String, ::String]?
+                                              propagated_tags: Hash[::String, ::String]?,
+                                              cpu_options: {
+                                                nested_virtualization: ("ENABLED" | "DISABLED")?
+                                              }?
                                             }?
                                           },
                                           vpc_configuration: {
@@ -848,7 +851,7 @@ module Aws
         def payment_connector_id: () -> ::String
         def payment_manager_id: () -> ::String
         def name: () -> ::String
-        def type: () -> ("CoinbaseCDP" | "StripePrivy")
+        def type: () -> ("CoinbaseCDP" | "StripePrivy" | "AwsBilling")
         def credential_provider_configurations: () -> ::Array[Types::CredentialsProviderConfiguration]
         def created_at: () -> ::Time
         def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED" | "PENDING_AUTHENTICATION" | "PROVISIONING" | "AUTHENTICATION_EXPIRED" | "AUTHENTICATION_FAILED")
@@ -859,8 +862,8 @@ module Aws
                                       payment_manager_id: ::String,
                                       name: ::String,
                                       ?description: ::String,
-                                      type: ("CoinbaseCDP" | "StripePrivy"),
-                                      credential_provider_configurations: Array[
+                                      type: ("CoinbaseCDP" | "StripePrivy" | "AwsBilling"),
+                                      ?credential_provider_configurations: Array[
                                         Params::credentials_provider_configuration
                                       ],
                                       ?provision_mode: ("MANUAL" | "QUICK_CREATE"),
@@ -1875,7 +1878,7 @@ module Aws
         def payment_connector_id: () -> ::String
         def name: () -> ::String
         def description: () -> ::String
-        def type: () -> ("CoinbaseCDP" | "StripePrivy")
+        def type: () -> ("CoinbaseCDP" | "StripePrivy" | "AwsBilling")
         def provision_mode: () -> ("MANUAL" | "QUICK_CREATE")
         def credential_provider_configurations: () -> ::Array[Types::CredentialsProviderConfiguration]
         def created_at: () -> ::Time
@@ -3446,7 +3449,7 @@ module Aws
         def payment_connector_id: () -> ::String
         def payment_manager_id: () -> ::String
         def name: () -> ::String
-        def type: () -> ("CoinbaseCDP" | "StripePrivy")
+        def type: () -> ("CoinbaseCDP" | "StripePrivy" | "AwsBilling")
         def credential_provider_configurations: () -> ::Array[Types::CredentialsProviderConfiguration]
         def last_updated_at: () -> ::Time
         def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED" | "PENDING_AUTHENTICATION" | "PROVISIONING" | "AUTHENTICATION_EXPIRED" | "AUTHENTICATION_FAILED")
@@ -3457,7 +3460,7 @@ module Aws
                                       payment_manager_id: ::String,
                                       payment_connector_id: ::String,
                                       ?description: ::String,
-                                      ?type: ("CoinbaseCDP" | "StripePrivy"),
+                                      ?type: ("CoinbaseCDP" | "StripePrivy" | "AwsBilling"),
                                       ?credential_provider_configurations: Array[
                                         Params::credentials_provider_configuration
                                       ],

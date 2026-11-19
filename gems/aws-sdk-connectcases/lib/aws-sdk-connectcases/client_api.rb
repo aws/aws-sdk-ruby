@@ -319,6 +319,8 @@ module Aws::ConnectCases
     SlaStatus = Shapes::StringShape.new(name: 'SlaStatus')
     SlaTargetTime = Shapes::TimestampShape.new(name: 'SlaTargetTime', timestampFormat: "iso8601")
     SlaType = Shapes::StringShape.new(name: 'SlaType')
+    SlaUpdateConfiguration = Shapes::StructureShape.new(name: 'SlaUpdateConfiguration')
+    SlaUpdateContent = Shapes::UnionShape.new(name: 'SlaUpdateContent')
     Sort = Shapes::StructureShape.new(name: 'Sort')
     StartMergeCasesRequest = Shapes::StructureShape.new(name: 'StartMergeCasesRequest')
     StartMergeCasesRequestSecondaryCaseIdsList = Shapes::ListShape.new(name: 'StartMergeCasesRequestSecondaryCaseIdsList')
@@ -1232,9 +1234,11 @@ module Aws::ConnectCases
 
     RelatedItemUpdateContent.add_member(:comment, Shapes::ShapeRef.new(shape: CommentUpdateContent, location_name: "comment"))
     RelatedItemUpdateContent.add_member(:custom, Shapes::ShapeRef.new(shape: CustomUpdateContent, location_name: "custom"))
+    RelatedItemUpdateContent.add_member(:sla, Shapes::ShapeRef.new(shape: SlaUpdateContent, location_name: "sla"))
     RelatedItemUpdateContent.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     RelatedItemUpdateContent.add_member_subclass(:comment, Types::RelatedItemUpdateContent::Comment)
     RelatedItemUpdateContent.add_member_subclass(:custom, Types::RelatedItemUpdateContent::Custom)
+    RelatedItemUpdateContent.add_member_subclass(:sla, Types::RelatedItemUpdateContent::Sla)
     RelatedItemUpdateContent.add_member_subclass(:unknown, Types::RelatedItemUpdateContent::Unknown)
     RelatedItemUpdateContent.struct_class = Types::RelatedItemUpdateContent
 
@@ -1380,6 +1384,15 @@ module Aws::ConnectCases
     SlaInputContent.add_member_subclass(:sla_input_configuration, Types::SlaInputContent::SlaInputConfiguration)
     SlaInputContent.add_member_subclass(:unknown, Types::SlaInputContent::Unknown)
     SlaInputContent.struct_class = Types::SlaInputContent
+
+    SlaUpdateConfiguration.add_member(:target_sla_minutes, Shapes::ShapeRef.new(shape: TargetSlaMinutes, required: true, location_name: "targetSlaMinutes"))
+    SlaUpdateConfiguration.struct_class = Types::SlaUpdateConfiguration
+
+    SlaUpdateContent.add_member(:sla_update_configuration, Shapes::ShapeRef.new(shape: SlaUpdateConfiguration, location_name: "slaUpdateConfiguration"))
+    SlaUpdateContent.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    SlaUpdateContent.add_member_subclass(:sla_update_configuration, Types::SlaUpdateContent::SlaUpdateConfiguration)
+    SlaUpdateContent.add_member_subclass(:unknown, Types::SlaUpdateContent::Unknown)
+    SlaUpdateContent.struct_class = Types::SlaUpdateContent
 
     Sort.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "fieldId"))
     Sort.add_member(:sort_order, Shapes::ShapeRef.new(shape: Order, required: true, location_name: "sortOrder"))

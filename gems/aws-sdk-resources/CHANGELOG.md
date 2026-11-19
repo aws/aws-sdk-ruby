@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.282.0 (2026-11-19)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-partnercentralmarketing` gem.
+
 3.281.0 (2026-11-18)
 ------------------
 

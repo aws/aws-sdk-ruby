@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2026-11-19)
+------------------
+
+* Feature - Adding new API, GetUsageLinesEstimatedCost which can be used to estimate the cost of usage lines.
+
 1.46.0 (2026-11-18)
 ------------------
 

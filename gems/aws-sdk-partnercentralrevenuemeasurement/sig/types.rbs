@@ -28,6 +28,7 @@ module Aws::PartnerCentralRevenueMeasurement
       attr_accessor effective_until: ::String
       attr_accessor total_active_revenue_attribution_allocation_count: ::Integer
       attr_accessor total_revenue_attribution_allocation_count: ::Integer
+      attr_accessor context: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -37,10 +38,17 @@ module Aws::PartnerCentralRevenueMeasurement
       SENSITIVE: []
     end
 
+    class ContextFilter
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class CreateMarketplaceRevenueShareAllocationInput
       attr_accessor catalog: ("AWS" | "Sandbox")
-      attr_accessor product_id: ::String
+      attr_accessor marketplace_revenue_share_identifier: ::String
       attr_accessor client_token: ::String
+      attr_accessor marketplace_revenue_share_revision: ::String
       attr_accessor effective_from: ::String
       attr_accessor effective_until: ::String
       attr_accessor revenue_share_percent: ::String
@@ -49,36 +57,34 @@ module Aws::PartnerCentralRevenueMeasurement
 
     class CreateMarketplaceRevenueShareAllocationOutput
       attr_accessor marketplace_revenue_share_allocation_id: ::String
-      attr_accessor product_id: ::String
-      attr_accessor product_name: ::String
-      attr_accessor arn: ::String
+      attr_accessor marketplace_revenue_share_identifier: ::String
       attr_accessor effective_from: ::String
       attr_accessor effective_until: ::String
       attr_accessor revenue_share_percent: ::String
       attr_accessor status: ("ACTIVE" | "INACTIVE")
       attr_accessor created_date: ::Time
       attr_accessor last_modified_date: ::Time
-      attr_accessor latest_marketplace_revenue_share_revision: ::String
+      attr_accessor marketplace_revenue_share_revision: ::String
+      attr_accessor marketplace_revenue_share_latest_revision: ::String
       SENSITIVE: []
     end
 
     class CreateMarketplaceRevenueShareInput
       attr_accessor catalog: ("AWS" | "Sandbox")
       attr_accessor client_token: ::String
-      attr_accessor product_id: ::String
+      attr_accessor products: ::Array[Types::MarketplaceRevenueShareProductEntry]
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
     class CreateMarketplaceRevenueShareOutput
-      attr_accessor product_id: ::String
+      attr_accessor id: ::String
       attr_accessor arn: ::String
       attr_accessor catalog: ("AWS" | "Sandbox")
-      attr_accessor product_code: ::String
-      attr_accessor product_name: ::String
+      attr_accessor products: ::Array[Types::MarketplaceRevenueShareProductSummary]
       attr_accessor created_date: ::Time
       attr_accessor last_modified_date: ::Time
-      attr_accessor revision: ::Integer
+      attr_accessor revision: ::String
       SENSITIVE: []
     end
 
@@ -90,6 +96,7 @@ module Aws::PartnerCentralRevenueMeasurement
       attr_accessor tenancy_model: ("MULTI_TENANT" | "SINGLE_TENANT")
       attr_accessor product_identifier: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor context: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -101,12 +108,13 @@ module Aws::PartnerCentralRevenueMeasurement
       attr_accessor tenancy_model: ("MULTI_TENANT" | "SINGLE_TENANT")
       attr_accessor marketplace_product: Types::MarketplaceProductSummary
       attr_accessor revision: ::String
+      attr_accessor context: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class GetMarketplaceRevenueShareAllocationInput
       attr_accessor catalog: ("AWS" | "Sandbox")
-      attr_accessor product_id: ::String
+      attr_accessor marketplace_revenue_share_identifier: ::String
       attr_accessor marketplace_revenue_share_allocation_id: ::String
       attr_accessor marketplace_revenue_share_revision: ::String
       SENSITIVE: []
@@ -114,36 +122,36 @@ module Aws::PartnerCentralRevenueMeasurement
 
     class GetMarketplaceRevenueShareAllocationOutput
       attr_accessor marketplace_revenue_share_allocation_id: ::String
-      attr_accessor product_id: ::String
-      attr_accessor product_name: ::String
-      attr_accessor arn: ::String
+      attr_accessor marketplace_revenue_share_identifier: ::String
       attr_accessor effective_from: ::String
       attr_accessor effective_until: ::String
       attr_accessor revenue_share_percent: ::String
       attr_accessor status: ("ACTIVE" | "INACTIVE")
       attr_accessor created_date: ::Time
       attr_accessor last_modified_date: ::Time
-      attr_accessor latest_marketplace_revenue_share_revision: ::String
+      attr_accessor marketplace_revenue_share_revision: ::String
+      attr_accessor marketplace_revenue_share_latest_revision: ::String
       SENSITIVE: []
     end
 
     class GetMarketplaceRevenueShareInput
       attr_accessor catalog: ("AWS" | "Sandbox")
-      attr_accessor product_id: ::String
-      attr_accessor revision: ::Integer
+      attr_accessor identifier: ::String
+      attr_accessor revision: ::String
       SENSITIVE: []
     end
 
     class GetMarketplaceRevenueShareOutput
-      attr_accessor product_id: ::String
+      attr_accessor id: ::String
       attr_accessor arn: ::String
       attr_accessor catalog: ("AWS" | "Sandbox")
-      attr_accessor product_code: ::String
-      attr_accessor product_name: ::String
+      attr_accessor products: ::Array[Types::MarketplaceRevenueShareProductDetail]
       attr_accessor created_date: ::Time
       attr_accessor last_modified_date: ::Time
-      attr_accessor revision: ::Integer
-      attr_accessor latest_revision: ::Integer
+      attr_accessor revision: ::String
+      attr_accessor latest_revision: ::String
+      attr_accessor effective_from: ::String
+      attr_accessor effective_until: ::String
       attr_accessor total_active_marketplace_revenue_share_allocation_count: ::Integer
       attr_accessor total_marketplace_revenue_share_allocation_count: ::Integer
       SENSITIVE: []
@@ -218,6 +226,7 @@ module Aws::PartnerCentralRevenueMeasurement
       attr_accessor effective_until: ::String
       attr_accessor total_active_revenue_attribution_allocation_count: ::Integer
       attr_accessor total_revenue_attribution_allocation_count: ::Integer
+      attr_accessor context: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -228,10 +237,12 @@ module Aws::PartnerCentralRevenueMeasurement
 
     class ListMarketplaceRevenueShareAllocationsInput
       attr_accessor catalog: ("AWS" | "Sandbox")
-      attr_accessor product_id: ::String
-      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor marketplace_revenue_share_identifier: ::String
+      attr_accessor status_filter: ("ACTIVE" | "INACTIVE")
       attr_accessor after_effective_from: ::String
       attr_accessor before_effective_from: ::String
+      attr_accessor after_effective_until: ::String
+      attr_accessor before_effective_until: ::String
       attr_accessor sort_by: ("EffectiveFrom")
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
       attr_accessor max_results: ::Integer
@@ -248,6 +259,7 @@ module Aws::PartnerCentralRevenueMeasurement
 
     class ListMarketplaceRevenueSharesInput
       attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor identifiers: ::Array[::String]
       attr_accessor product_ids: ::Array[::String]
       attr_accessor product_codes: ::Array[::String]
       attr_accessor max_results: ::Integer
@@ -299,6 +311,7 @@ module Aws::PartnerCentralRevenueMeasurement
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor context_filters: ::Array[Types::ContextFilter]
       SENSITIVE: []
     end
 
@@ -327,9 +340,7 @@ module Aws::PartnerCentralRevenueMeasurement
 
     class MarketplaceRevenueShareAllocationSummary
       attr_accessor marketplace_revenue_share_allocation_id: ::String
-      attr_accessor product_id: ::String
-      attr_accessor product_name: ::String
-      attr_accessor arn: ::String
+      attr_accessor marketplace_revenue_share_identifier: ::String
       attr_accessor effective_from: ::String
       attr_accessor effective_until: ::String
       attr_accessor revenue_share_percent: ::String
@@ -339,15 +350,38 @@ module Aws::PartnerCentralRevenueMeasurement
       SENSITIVE: []
     end
 
-    class MarketplaceRevenueShareSummary
+    class MarketplaceRevenueShareProductDetail
       attr_accessor product_id: ::String
-      attr_accessor arn: ::String
-      attr_accessor catalog: ("AWS" | "Sandbox")
       attr_accessor product_code: ::String
       attr_accessor product_name: ::String
+      attr_accessor accounts: ::Array[Types::RevenueShareProductAccountDetail]
+      SENSITIVE: []
+    end
+
+    class MarketplaceRevenueShareProductEntry
+      attr_accessor product_id: ::String
+      attr_accessor accounts: ::Array[Types::RevenueShareProductAccountEntry]
+      SENSITIVE: []
+    end
+
+    class MarketplaceRevenueShareProductSummary
+      attr_accessor product_id: ::String
+      attr_accessor product_code: ::String
+      attr_accessor product_name: ::String
+      attr_accessor accounts: ::Array[Types::RevenueShareProductAccountSummary]
+      SENSITIVE: []
+    end
+
+    class MarketplaceRevenueShareSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor products: ::Array[Types::MarketplaceRevenueShareProductSummary]
       attr_accessor created_date: ::Time
       attr_accessor last_modified_date: ::Time
-      attr_accessor latest_revision: ::Integer
+      attr_accessor latest_revision: ::String
+      attr_accessor effective_from: ::String
+      attr_accessor effective_until: ::String
       attr_accessor total_active_marketplace_revenue_share_allocation_count: ::Integer
       attr_accessor total_marketplace_revenue_share_allocation_count: ::Integer
       SENSITIVE: []
@@ -397,6 +431,25 @@ module Aws::PartnerCentralRevenueMeasurement
       attr_accessor effective_until: ::String
       attr_accessor status: ("ACTIVE" | "INACTIVE")
       SENSITIVE: [:customer_aws_account_id]
+    end
+
+    class RevenueShareProductAccountDetail
+      attr_accessor account_type: ("DEPLOYMENT" | "ORGANIZATION")
+      attr_accessor count: ::Integer
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: [:account_ids]
+    end
+
+    class RevenueShareProductAccountEntry
+      attr_accessor account_type: ("DEPLOYMENT" | "ORGANIZATION")
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: [:account_ids]
+    end
+
+    class RevenueShareProductAccountSummary
+      attr_accessor account_type: ("DEPLOYMENT" | "ORGANIZATION")
+      attr_accessor count: ::Integer
+      SENSITIVE: []
     end
 
     class ServiceQuotaExceededException
@@ -452,12 +505,10 @@ module Aws::PartnerCentralRevenueMeasurement
 
     class UpdateMarketplaceRevenueShareAllocationInput
       attr_accessor catalog: ("AWS" | "Sandbox")
-      attr_accessor product_id: ::String
+      attr_accessor marketplace_revenue_share_identifier: ::String
       attr_accessor marketplace_revenue_share_allocation_id: ::String
       attr_accessor marketplace_revenue_share_revision: ::String
       attr_accessor client_token: ::String
-      attr_accessor effective_from: ::String
-      attr_accessor effective_until: ::String
       attr_accessor revenue_share_percent: ::String
       attr_accessor status: ("ACTIVE" | "INACTIVE")
       SENSITIVE: []
@@ -465,16 +516,33 @@ module Aws::PartnerCentralRevenueMeasurement
 
     class UpdateMarketplaceRevenueShareAllocationOutput
       attr_accessor marketplace_revenue_share_allocation_id: ::String
-      attr_accessor product_id: ::String
-      attr_accessor product_name: ::String
-      attr_accessor arn: ::String
+      attr_accessor marketplace_revenue_share_identifier: ::String
       attr_accessor effective_from: ::String
       attr_accessor effective_until: ::String
       attr_accessor revenue_share_percent: ::String
       attr_accessor status: ("ACTIVE" | "INACTIVE")
       attr_accessor created_date: ::Time
       attr_accessor last_modified_date: ::Time
-      attr_accessor latest_marketplace_revenue_share_revision: ::String
+      attr_accessor marketplace_revenue_share_revision: ::String
+      attr_accessor marketplace_revenue_share_latest_revision: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMarketplaceRevenueShareInput
+      attr_accessor catalog: ("AWS" | "Sandbox")
+      attr_accessor identifier: ::String
+      attr_accessor client_token: ::String
+      attr_accessor revision: ::String
+      attr_accessor products: ::Array[Types::MarketplaceRevenueShareProductEntry]
+      SENSITIVE: []
+    end
+
+    class UpdateMarketplaceRevenueShareOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor products: ::Array[Types::MarketplaceRevenueShareProductSummary]
+      attr_accessor last_modified_date: ::Time
+      attr_accessor latest_revision: ::String
       SENSITIVE: []
     end
 
@@ -484,6 +552,7 @@ module Aws::PartnerCentralRevenueMeasurement
       attr_accessor client_token: ::String
       attr_accessor description: ::String
       attr_accessor revision: ::String
+      attr_accessor context: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -493,6 +562,7 @@ module Aws::PartnerCentralRevenueMeasurement
       attr_accessor description: ::String
       attr_accessor last_modified_date: ::Time
       attr_accessor latest_revision: ::String
+      attr_accessor context: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 

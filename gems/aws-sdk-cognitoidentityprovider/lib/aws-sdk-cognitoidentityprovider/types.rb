@@ -3063,6 +3063,118 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # A summary of a Client ID Metadata Document (CIMD) policy, returned by
+    # .
+    #
+    # @!attribute [rw] cimd_policy_id
+    #   The ID of the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client that the CIMD policy is associated with.
+    #   Amazon Cognito omits this value when the app client no longer
+    #   exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_name
+    #   The friendly name of the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_duration
+    #   The length of time, in seconds, that Amazon Cognito caches a client
+    #   metadata document that it retrieved from a URL that matches the
+    #   policy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time when the CIMD policy was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date and time when the CIMD policy was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CIMDPolicySummaryType AWS API Documentation
+    #
+    class CIMDPolicySummaryType < Struct.new(
+      :cimd_policy_id,
+      :client_id,
+      :policy_name,
+      :cache_duration,
+      :creation_date,
+      :last_modified_date)
+      SENSITIVE = [:client_id]
+      include Aws::Structure
+    end
+
+    # The configuration of a Client ID Metadata Document (CIMD) policy.
+    #
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] cimd_policy_id
+    #   The ID of the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client that the CIMD policy is associated with.
+    #   Amazon Cognito omits this value when the app client no longer
+    #   exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_name
+    #   The friendly name of the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_duration
+    #   The length of time, in seconds, that Amazon Cognito caches a client
+    #   metadata document that it retrieved from a URL that matches the
+    #   policy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] url_patterns
+    #   The HTTPS URL patterns that a client ID metadata document URL must
+    #   match.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time when the CIMD policy was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date and time when the CIMD policy was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CIMDPolicyType AWS API Documentation
+    #
+    class CIMDPolicyType < Struct.new(
+      :user_pool_id,
+      :cimd_policy_id,
+      :client_id,
+      :policy_name,
+      :cache_duration,
+      :url_patterns,
+      :creation_date,
+      :last_modified_date)
+      SENSITIVE = [:client_id]
+      include Aws::Structure
+    end
+
+    # This exception is thrown when Amazon Cognito doesn't have a cached
+    # client metadata document for the URL in the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CachedCIMDURLDoesNotExistException AWS API Documentation
+    #
+    class CachedCIMDURLDoesNotExistException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] user_pool_id
     #   The ID of the user pool that contains the recovery that you want to
     #   cancel.
@@ -3327,6 +3439,32 @@ module Aws::CognitoIdentityProvider
       :expires_in,
       :token_type)
       SENSITIVE = [:access_token]
+      include Aws::Structure
+    end
+
+    # A client metadata document URL that Amazon Cognito has received for a
+    # Client ID Metadata Document (CIMD) policy, with its cache state.
+    #
+    # @!attribute [rw] url
+    #   The client metadata document URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] cached_date
+    #   The date and time when Amazon Cognito cached the client metadata
+    #   document from this URL.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expiration_date
+    #   The date and time when the cached client metadata document expires.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ClientMetadataURLType AWS API Documentation
+    #
+    class ClientMetadataURLType < Struct.new(
+      :url,
+      :cached_date,
+      :expiration_date)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -3911,6 +4049,56 @@ module Aws::CognitoIdentityProvider
       :server_path,
       :http_headers,
       :encoded_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool where you want to create the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client that you want to associate with the CIMD
+    #   policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_name
+    #   A friendly name for the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_duration
+    #   The length of time, in seconds, that Amazon Cognito caches a client
+    #   metadata document that it retrieved from a URL that matches the
+    #   policy. The value must be between 86,400 seconds (one day) and
+    #   31,556,952 seconds (one year).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] url_patterns
+    #   One to five HTTPS URL patterns. Amazon Cognito accepts a client ID
+    #   metadata document URL only when it matches one of these patterns.
+    #   Patterns can contain the `*` wildcard character.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateCIMDPolicyRequest AWS API Documentation
+    #
+    class CreateCIMDPolicyRequest < Struct.new(
+      :user_pool_id,
+      :client_id,
+      :policy_name,
+      :cache_duration,
+      :url_patterns)
+      SENSITIVE = [:client_id]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cimd_policy
+    #   The CIMD policy that you created.
+    #   @return [Types::CIMDPolicyType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateCIMDPolicyResponse AWS API Documentation
+    #
+    class CreateCIMDPolicyResponse < Struct.new(
+      :cimd_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4821,6 +5009,27 @@ module Aws::CognitoIdentityProvider
     #   disabled, token refresh issues only ID and access tokens.
     #   @return [Types::RefreshTokenRotationType]
     #
+    # @!attribute [rw] publish_secrets_in_aws_secrets_manager
+    #   Specifies whether Amazon Cognito stores and manages this app
+    #   client's secret in [Amazon Web Services Secrets Manager][1] instead
+    #   of returning the plaintext value. Applies only when `GenerateSecret`
+    #   is `true`. When you set this parameter to `true`, the response
+    #   returns `ClientSecretArn` instead of `ClientSecret`. Amazon Cognito
+    #   starts the first rotation of the secret right away, and then rotates
+    #   the secret every 7 days by default. You can change the rotation
+    #   schedule in Secrets Manager.
+    #
+    #   Defaults to `false`. If you don't set this parameter, Amazon
+    #   Cognito doesn't manage the secret in Secrets Manager and returns
+    #   the plaintext `ClientSecret` value. The Amazon Cognito console turns
+    #   on this option by default when it creates an app client with a
+    #   generated client secret.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolClientRequest AWS API Documentation
     #
     class CreateUserPoolClientRequest < Struct.new(
@@ -4847,7 +5056,8 @@ module Aws::CognitoIdentityProvider
       :enable_token_revocation,
       :enable_propagate_additional_user_context_data,
       :auth_session_validity,
-      :refresh_token_rotation)
+      :refresh_token_rotation,
+      :publish_secrets_in_aws_secrets_manager)
       SENSITIVE = [:client_secret]
       include Aws::Structure
     end
@@ -5570,6 +5780,27 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] cimd_policy_id
+    #   The ID of the CIMD policy that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteCIMDPolicyRequest AWS API Documentation
+    #
+    class DeleteCIMDPolicyRequest < Struct.new(
+      :user_pool_id,
+      :cimd_policy_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteCIMDPolicyResponse AWS API Documentation
+    #
+    class DeleteCIMDPolicyResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] group_name
     #   The name of the group that you want to delete.
     #   @return [String]
@@ -5844,6 +6075,35 @@ module Aws::CognitoIdentityProvider
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteWebAuthnCredentialResponse AWS API Documentation
     #
     class DeleteWebAuthnCredentialResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] cimd_policy_id
+    #   The ID of the CIMD policy that you want to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeCIMDPolicyRequest AWS API Documentation
+    #
+    class DescribeCIMDPolicyRequest < Struct.new(
+      :user_pool_id,
+      :cimd_policy_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cimd_policy
+    #   The configuration of the requested CIMD policy.
+    #   @return [Types::CIMDPolicyType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeCIMDPolicyResponse AWS API Documentation
+    #
+    class DescribeCIMDPolicyResponse < Struct.new(
+      :cimd_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] user_pool_id
     #   The ID of the user pool that has the IdP that you want to describe..
@@ -9270,6 +9530,113 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool whose CIMD policies you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   This API operation returns a limited number of results. The
+    #   pagination token is an identifier that you can present in an
+    #   additional API request with the same parameters. When you include
+    #   the pagination token, Amazon Cognito returns the next set of items
+    #   after the current list. Subsequent requests return a new pagination
+    #   token. By use of this token, you can paginate through the full list
+    #   of items.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of CIMD policies that you want Amazon Cognito to
+    #   return in the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListCIMDPoliciesRequest AWS API Documentation
+    #
+    class ListCIMDPoliciesRequest < Struct.new(
+      :user_pool_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The identifier that Amazon Cognito returned with the previous
+    #   request to this operation. When you include a pagination token in
+    #   your request, Amazon Cognito returns the next set of items in the
+    #   list. By use of this token, you can paginate through the full list
+    #   of items.
+    #   @return [String]
+    #
+    # @!attribute [rw] cimd_policies
+    #   A summary of each CIMD policy in the user pool.
+    #   @return [Array<Types::CIMDPolicySummaryType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListCIMDPoliciesResponse AWS API Documentation
+    #
+    class ListCIMDPoliciesResponse < Struct.new(
+      :next_token,
+      :cimd_policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] cimd_policy_id
+    #   The ID of the CIMD policy whose client metadata document URLs you
+    #   want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   This API operation returns a limited number of results. The
+    #   pagination token is an identifier that you can present in an
+    #   additional API request with the same parameters. When you include
+    #   the pagination token, Amazon Cognito returns the next set of items
+    #   after the current list. Subsequent requests return a new pagination
+    #   token. By use of this token, you can paginate through the full list
+    #   of items.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of URLs that you want Amazon Cognito to return in
+    #   the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListClientMetadataURLsRequest AWS API Documentation
+    #
+    class ListClientMetadataURLsRequest < Struct.new(
+      :user_pool_id,
+      :cimd_policy_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The identifier that Amazon Cognito returned with the previous
+    #   request to this operation. When you include a pagination token in
+    #   your request, Amazon Cognito returns the next set of items in the
+    #   list. By use of this token, you can paginate through the full list
+    #   of items.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_metadata_urls
+    #   The client metadata document URLs for the CIMD policy, with the
+    #   cache state of each URL.
+    #   @return [Array<Types::ClientMetadataURLType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListClientMetadataURLsResponse AWS API Documentation
+    #
+    class ListClientMetadataURLsResponse < Struct.new(
+      :next_token,
+      :client_metadata_urls)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the request to list the devices.
     #
     # @!attribute [rw] access_token
@@ -11600,9 +11967,9 @@ module Aws::CognitoIdentityProvider
     #
     #   PREVIEW\_GENERATING
     #
-    #   : Amazon Cognito is waiting for available capacity in the Amazon Web
-    #     Services Region or is generating the recovery preview. Write
-    #     operations in the user pool are paused.
+    #   : Amazon Cognito is generating the recovery preview, which might not
+    #     be available immediately. Write operations in the user pool are
+    #     paused.
     #
     #   PREVIEW\_GENERATED
     #
@@ -13583,6 +13950,95 @@ module Aws::CognitoIdentityProvider
     #
     class UpdateAuthEventFeedbackResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] cimd_policy_id
+    #   The ID of the CIMD policy that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The ID of the app client that you want to associate with the CIMD
+    #   policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_name
+    #   A friendly name for the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_duration
+    #   The length of time, in seconds, that Amazon Cognito caches a client
+    #   metadata document that it retrieved from a URL that matches the
+    #   policy. The value must be between 86,400 seconds (one day) and
+    #   31,556,952 seconds (one year).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] url_patterns
+    #   One to five HTTPS URL patterns. Amazon Cognito accepts a client ID
+    #   metadata document URL only when it matches one of these patterns.
+    #   Patterns can contain the `*` wildcard character.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateCIMDPolicyRequest AWS API Documentation
+    #
+    class UpdateCIMDPolicyRequest < Struct.new(
+      :user_pool_id,
+      :cimd_policy_id,
+      :client_id,
+      :policy_name,
+      :cache_duration,
+      :url_patterns)
+      SENSITIVE = [:client_id]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cimd_policy
+    #   The updated CIMD policy.
+    #   @return [Types::CIMDPolicyType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateCIMDPolicyResponse AWS API Documentation
+    #
+    class UpdateCIMDPolicyResponse < Struct.new(
+      :cimd_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] cimd_policy_id
+    #   The ID of the CIMD policy that the URL belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The client metadata document URL whose cache state you want to
+    #   change.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action to take on the cached client metadata document. `REFRESH`
+    #   retrieves the document from the URL again. `INVALIDATE` removes the
+    #   cached document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateClientMetadataURLStateRequest AWS API Documentation
+    #
+    class UpdateClientMetadataURLStateRequest < Struct.new(
+      :user_pool_id,
+      :cimd_policy_id,
+      :url,
+      :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateClientMetadataURLStateResponse AWS API Documentation
+    #
+    class UpdateClientMetadataURLStateResponse < Aws::EmptyStructure; end
+
     # Represents the request to update the device status.
     #
     # @!attribute [rw] access_token
@@ -14559,6 +15015,35 @@ module Aws::CognitoIdentityProvider
     #   disabled, token refresh issues only ID and access tokens.
     #   @return [Types::RefreshTokenRotationType]
     #
+    # @!attribute [rw] publish_secrets_in_aws_secrets_manager
+    #   Specifies whether Amazon Cognito stores and manages this app
+    #   client's secret in [Amazon Web Services Secrets Manager][1] instead
+    #   of returning the plaintext value. When you set this parameter to
+    #   `true`, the response returns `ClientSecretArn` instead of
+    #   `ClientSecret`. By default, Amazon Cognito rotates the secret every
+    #   7 days. You can change the rotation schedule in Secrets Manager.
+    #
+    #   Set to `true` to migrate an existing generated secret into Secrets
+    #   Manager, or `false` to move it back to Amazon Cognito and delete the
+    #   Secrets Manager secret. If you omit this parameter, Amazon Cognito
+    #   doesn't change how it manages the existing secret. Applies only to
+    #   app clients that already have a generated secret.
+    #
+    #   When you set it to `true`, Amazon Cognito starts managing the app
+    #   client's secret in Secrets Manager and rotates it right away. If
+    #   the app client has two secrets, that first rotation deletes the
+    #   older one.
+    #
+    #   When you set this parameter to `false`, Amazon Cognito immediately
+    #   and permanently deletes the Secrets Manager secret. There's no
+    #   recovery window. Applications that read the secret from Secrets
+    #   Manager can no longer get it.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolClientRequest AWS API Documentation
     #
     class UpdateUserPoolClientRequest < Struct.new(
@@ -14584,7 +15069,8 @@ module Aws::CognitoIdentityProvider
       :enable_token_revocation,
       :enable_propagate_additional_user_context_data,
       :auth_session_validity,
-      :refresh_token_rotation)
+      :refresh_token_rotation,
+      :publish_secrets_in_aws_secrets_manager)
       SENSITIVE = [:client_id]
       include Aws::Structure
     end
@@ -15348,6 +15834,22 @@ module Aws::CognitoIdentityProvider
     #   The app client secret.
     #   @return [String]
     #
+    # @!attribute [rw] client_secret_arn
+    #   The Amazon Resource Name (ARN) of the [Amazon Web Services Secrets
+    #   Manager][1] secret that stores this app client's secret, when
+    #   Amazon Cognito manages the secret in Secrets Manager. Retrieve the
+    #   secret from Secrets Manager by this ARN. The `SecretString` value is
+    #   a JSON object with `userPoolId`, `userPoolClientId`, and
+    #   `clientSecretValue` fields. Use `clientSecretValue` as the app
+    #   client secret. Amazon Cognito returns this ARN instead of
+    #   `ClientSecret` for app clients whose secret it manages in Secrets
+    #   Manager.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+    #   @return [String]
+    #
     # @!attribute [rw] last_modified_date
     #   The date and time when the item was modified. Amazon Cognito returns
     #   this timestamp in UNIX epoch time format. Your SDK might render the
@@ -15761,6 +16263,7 @@ module Aws::CognitoIdentityProvider
       :client_name,
       :client_id,
       :client_secret,
+      :client_secret_arn,
       :last_modified_date,
       :creation_date,
       :refresh_token_validity,

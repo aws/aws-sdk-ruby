@@ -487,7 +487,7 @@ module Aws
       contact_flow_id: ::String,
       references: Hash[::String, {
           value: ::String?,
-          type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
+          type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED" | "VOICEMAIL_RECORDING" | "VOICEMAIL_RECORDING_REDACTED" | "VOICEMAIL_ANALYSIS" | "VOICEMAIL_ANALYSIS_REDACTED"),
           status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
           arn: ::String?,
           status_reason: ::String?

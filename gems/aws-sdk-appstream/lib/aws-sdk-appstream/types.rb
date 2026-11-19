@@ -2500,6 +2500,13 @@ module Aws::AppStream
     #   URLs from the remote desktop to the local browser.
     #   @return [Types::ContentRedirection]
     #
+    # @!attribute [rw] web_authn_redirection
+    #   Configuration for WebAuthn redirection between the streaming session
+    #   and the user's local device. Use ProcessCompatibilityList to
+    #   specify which processes can use WebAuthn redirection on Windows
+    #   fleets.
+    #   @return [Types::WebAuthnRedirection]
+    #
     # @!attribute [rw] agent_access_config
     #   The configuration for agent access on the stack. If specified, agent
     #   access is enabled for the stack.
@@ -2530,6 +2537,7 @@ module Aws::AppStream
       :embed_host_domains,
       :streaming_experience_settings,
       :content_redirection,
+      :web_authn_redirection,
       :agent_access_config,
       :storage_connector_authentication)
       SENSITIVE = []
@@ -6233,6 +6241,13 @@ module Aws::AppStream
     #   URLs from the remote desktop to the local browser.
     #   @return [Types::ContentRedirection]
     #
+    # @!attribute [rw] web_authn_redirection
+    #   Configuration for WebAuthn redirection between the streaming session
+    #   and the user's local device. Use ProcessCompatibilityList to
+    #   specify which processes can use WebAuthn redirection on Windows
+    #   fleets.
+    #   @return [Types::WebAuthnRedirection]
+    #
     # @!attribute [rw] agent_access_config
     #   The agent access configuration of the stack, if agent access is
     #   enabled.
@@ -6265,6 +6280,7 @@ module Aws::AppStream
       :embed_host_domains,
       :streaming_experience_settings,
       :content_redirection,
+      :web_authn_redirection,
       :agent_access_config,
       :storage_connector_authentication)
       SENSITIVE = []
@@ -7369,6 +7385,14 @@ module Aws::AppStream
     #   URLs from the remote desktop to the local browser.
     #   @return [Types::ContentRedirection]
     #
+    # @!attribute [rw] web_authn_redirection
+    #   Configuration for WebAuthn redirection between the streaming session
+    #   and the user's local device. Use ProcessCompatibilityList to
+    #   specify which processes can use WebAuthn redirection on Windows
+    #   fleets. To remove WebAuthn redirection, use AttributesToDelete with
+    #   the WEB\_AUTHN\_REDIRECTION value.
+    #   @return [Types::WebAuthnRedirection]
+    #
     # @!attribute [rw] agent_access_config
     #   The configuration for agent access on the stack. Specify this to
     #   update agent access settings. To remove agent access, use
@@ -7402,6 +7426,7 @@ module Aws::AppStream
       :embed_host_domains,
       :streaming_experience_settings,
       :content_redirection,
+      :web_authn_redirection,
       :agent_access_config,
       :storage_connector_authentication)
       SENSITIVE = []
@@ -7817,6 +7842,29 @@ module Aws::AppStream
     class VpcConfig < Struct.new(
       :subnet_ids,
       :security_group_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the WebAuthn redirection configuration for a stack. With
+    # WebAuthn redirection, your users can complete passkey and security-key
+    # authentication from a streaming session by using an authenticator
+    # attached to their local device.
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether WebAuthn redirection is enabled for the stack.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] process_compatibility_list
+    #   The list of process executable names for which you enable WebAuthn
+    #   redirection. For example, chrome.exe.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/WebAuthnRedirection AWS API Documentation
+    #
+    class WebAuthnRedirection < Struct.new(
+      :enabled,
+      :process_compatibility_list)
       SENSITIVE = []
       include Aws::Structure
     end

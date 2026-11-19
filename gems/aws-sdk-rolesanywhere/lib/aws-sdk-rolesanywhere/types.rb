@@ -116,6 +116,14 @@ module Aws::RolesAnywhere
     #   is created without an alias.
     #   @return [String]
     #
+    # @!attribute [rw] tip_configuration
+    #   The trusted identity propagation (TIP) settings for the profile.
+    #   When you enable TIP, sessions from the profile include the identity
+    #   from the certificate in `aws:OriginIdentity` condition keys.
+    #
+    #   If you omit this parameter, the profile doesn't use TIP.
+    #   @return [Types::TipConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/CreateProfileRequest AWS API Documentation
     #
     class CreateProfileRequest < Struct.new(
@@ -128,7 +136,8 @@ module Aws::RolesAnywhere
       :enabled,
       :tags,
       :accept_role_session_name,
-      :alias_name)
+      :alias_name,
+      :tip_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -794,6 +803,10 @@ module Aws::RolesAnywhere
     #   ARN that contains the resource ID instead.
     #   @return [String]
     #
+    # @!attribute [rw] tip_configuration
+    #   The trusted identity propagation (TIP) settings of the profile.
+    #   @return [Types::TipConfiguration]
+    #
     # @!attribute [rw] previous_alias_name
     #   The alias that the resource had before the update request. IAM Roles
     #   Anywhere returns this value only in the response to an update
@@ -821,6 +834,7 @@ module Aws::RolesAnywhere
       :attribute_mappings,
       :alias_name,
       :alias_arn,
+      :tip_configuration,
       :previous_alias_name)
       SENSITIVE = []
       include Aws::Structure
@@ -1253,6 +1267,60 @@ module Aws::RolesAnywhere
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # The trusted identity propagation (TIP) settings of a profile. When you
+    # enable TIP, sessions from the profile include the identity from the
+    # certificate in `aws:OriginIdentity` condition keys, which callers
+    # can't set.
+    #
+    # @!attribute [rw] status
+    #   Specifies whether you use trusted identity propagation (TIP) for the
+    #   profile. This field supports the following values:
+    #
+    #   * `ENABLED` – Sessions from the profile include the
+    #     `aws:OriginIdentity` condition keys.
+    #
+    #   * `DISABLED` – Sessions from the profile don't include these keys.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject_type
+    #   Specifies whether the certificates for the profile identify
+    #   workloads or people. This field supports the following values:
+    #
+    #   * `workload` – The certificates identify workloads.
+    #
+    #   * `user` – The certificates identify people.
+    #
+    #   Sessions include the value in `aws:OriginIdentity/SubjectType`. If
+    #   you omit this field, sessions don't include that key.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject_source
+    #   The certificate field whose value becomes the subject,
+    #   `aws:OriginIdentity/Subject`. This field supports the following
+    #   values:
+    #
+    #   * `x509Subject/CN` (default) – The common name (CN) in the
+    #     certificate's Subject.
+    #
+    #   * `x509SAN/URI` – The first URI in the certificate's Subject
+    #     Alternative Name (SAN) extension.
+    #
+    #   The profile's attribute mappings must include a rule for this
+    #   field, and the default attribute mappings include one for each
+    #   value. If the certificate has no value for the field,
+    #   `CreateSession` denies the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/TipConfiguration AWS API Documentation
+    #
+    class TipConfiguration < Struct.new(
+      :status,
+      :subject_type,
+      :subject_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Too many tags.
     #
     # @!attribute [rw] message
@@ -1525,6 +1593,13 @@ module Aws::RolesAnywhere
     #   a `ValidationException`.
     #   @return [String]
     #
+    # @!attribute [rw] tip_configuration
+    #   The trusted identity propagation (TIP) settings for the profile. The
+    #   settings that you specify replace the current settings, and a field
+    #   that you omit returns to its default. If you omit this parameter,
+    #   the TIP settings don't change.
+    #   @return [Types::TipConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/UpdateProfileRequest AWS API Documentation
     #
     class UpdateProfileRequest < Struct.new(
@@ -1535,7 +1610,8 @@ module Aws::RolesAnywhere
       :managed_policy_arns,
       :duration_seconds,
       :accept_role_session_name,
-      :alias_name)
+      :alias_name,
+      :tip_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

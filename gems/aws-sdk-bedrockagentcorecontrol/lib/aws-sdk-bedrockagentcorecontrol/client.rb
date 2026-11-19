@@ -1399,6 +1399,9 @@ module Aws::BedrockAgentCoreControl
     #             propagated_tags: {
     #               "TagKey" => "TagValue",
     #             },
+    #             cpu_options: {
+    #               nested_virtualization: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
     #           },
     #         },
     #         vpc_configuration: { # required
@@ -5020,10 +5023,15 @@ module Aws::BedrockAgentCoreControl
     #   The type of payment connector, which determines the payment provider
     #   integration.
     #
-    # @option params [required, Array<Types::CredentialsProviderConfiguration>] :credential_provider_configurations
+    # @option params [Array<Types::CredentialsProviderConfiguration>] :credential_provider_configurations
     #   The credential provider configurations for the payment connector.
     #   These configurations specify how the connector authenticates with the
     #   payment provider.
+    #
+    #   For an `AwsBilling` payment connector, omit this parameter or specify
+    #   an empty list. The service uses the AWS Marketplace service-linked
+    #   role in your account, which must exist before you create the
+    #   connector, and you must have permission to call `iam:GetRole` on it.
     #
     # @option params [String] :provision_mode
     #   The provision mode for creating the payment connector. If you don't
@@ -5066,14 +5074,17 @@ module Aws::BedrockAgentCoreControl
     #     payment_manager_id: "PaymentManagerId", # required
     #     name: "PaymentConnectorName", # required
     #     description: "PaymentsDescription",
-    #     type: "CoinbaseCDP", # required, accepts CoinbaseCDP, StripePrivy
-    #     credential_provider_configurations: [ # required
+    #     type: "CoinbaseCDP", # required, accepts CoinbaseCDP, StripePrivy, AwsBilling
+    #     credential_provider_configurations: [
     #       {
     #         coinbase_cdp: {
     #           credential_provider_arn: "PaymentCredentialProviderArn", # required
     #         },
     #         stripe_privy: {
     #           credential_provider_arn: "PaymentCredentialProviderArn", # required
+    #         },
+    #         aws_billing: {
+    #           iam_role_arn: "RoleArn", # required
     #         },
     #       },
     #     ],
@@ -5086,10 +5097,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.payment_connector_id #=> String
     #   resp.payment_manager_id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "CoinbaseCDP", "StripePrivy"
+    #   resp.type #=> String, one of "CoinbaseCDP", "StripePrivy", "AwsBilling"
     #   resp.credential_provider_configurations #=> Array
     #   resp.credential_provider_configurations[0].coinbase_cdp.credential_provider_arn #=> String
     #   resp.credential_provider_configurations[0].stripe_privy.credential_provider_arn #=> String
+    #   resp.credential_provider_configurations[0].aws_billing.iam_role_arn #=> String
     #   resp.created_at #=> Time
     #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED", "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED", "PENDING_AUTHENTICATION", "PROVISIONING", "AUTHENTICATION_EXPIRED", "AUTHENTICATION_FAILED"
     #   resp.authorization_url #=> String
@@ -7825,6 +7837,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.instance_profile_arn #=> String
     #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.propagated_tags #=> Hash
     #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.propagated_tags["TagKey"] #=> String
+    #   resp.compute_configuration.ec2_configuration.launch_template_source.launch_parameters.cpu_options.nested_virtualization #=> String, one of "ENABLED", "DISABLED"
     #   resp.compute_configuration.ec2_configuration.vpc_configuration.subnets #=> Array
     #   resp.compute_configuration.ec2_configuration.vpc_configuration.subnets[0] #=> String
     #   resp.compute_configuration.ec2_configuration.vpc_configuration.security_groups #=> Array
@@ -9429,11 +9442,12 @@ module Aws::BedrockAgentCoreControl
     #   resp.payment_connector_id #=> String
     #   resp.name #=> String
     #   resp.description #=> String
-    #   resp.type #=> String, one of "CoinbaseCDP", "StripePrivy"
+    #   resp.type #=> String, one of "CoinbaseCDP", "StripePrivy", "AwsBilling"
     #   resp.provision_mode #=> String, one of "MANUAL", "QUICK_CREATE"
     #   resp.credential_provider_configurations #=> Array
     #   resp.credential_provider_configurations[0].coinbase_cdp.credential_provider_arn #=> String
     #   resp.credential_provider_configurations[0].stripe_privy.credential_provider_arn #=> String
+    #   resp.credential_provider_configurations[0].aws_billing.iam_role_arn #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED", "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED", "PENDING_AUTHENTICATION", "PROVISIONING", "AUTHENTICATION_EXPIRED", "AUTHENTICATION_FAILED"
@@ -11714,7 +11728,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.payment_connectors #=> Array
     #   resp.payment_connectors[0].payment_connector_id #=> String
     #   resp.payment_connectors[0].name #=> String
-    #   resp.payment_connectors[0].type #=> String, one of "CoinbaseCDP", "StripePrivy"
+    #   resp.payment_connectors[0].type #=> String, one of "CoinbaseCDP", "StripePrivy", "AwsBilling"
     #   resp.payment_connectors[0].provision_mode #=> String, one of "MANUAL", "QUICK_CREATE"
     #   resp.payment_connectors[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED", "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED", "PENDING_AUTHENTICATION", "PROVISIONING", "AUTHENTICATION_EXPIRED", "AUTHENTICATION_FAILED"
     #   resp.payment_connectors[0].last_updated_at #=> Time
@@ -17154,7 +17168,7 @@ module Aws::BedrockAgentCoreControl
     #     payment_manager_id: "PaymentManagerId", # required
     #     payment_connector_id: "PaymentConnectorId", # required
     #     description: "PaymentsDescription",
-    #     type: "CoinbaseCDP", # accepts CoinbaseCDP, StripePrivy
+    #     type: "CoinbaseCDP", # accepts CoinbaseCDP, StripePrivy, AwsBilling
     #     credential_provider_configurations: [
     #       {
     #         coinbase_cdp: {
@@ -17162,6 +17176,9 @@ module Aws::BedrockAgentCoreControl
     #         },
     #         stripe_privy: {
     #           credential_provider_arn: "PaymentCredentialProviderArn", # required
+    #         },
+    #         aws_billing: {
+    #           iam_role_arn: "RoleArn", # required
     #         },
     #       },
     #     ],
@@ -17173,10 +17190,11 @@ module Aws::BedrockAgentCoreControl
     #   resp.payment_connector_id #=> String
     #   resp.payment_manager_id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "CoinbaseCDP", "StripePrivy"
+    #   resp.type #=> String, one of "CoinbaseCDP", "StripePrivy", "AwsBilling"
     #   resp.credential_provider_configurations #=> Array
     #   resp.credential_provider_configurations[0].coinbase_cdp.credential_provider_arn #=> String
     #   resp.credential_provider_configurations[0].stripe_privy.credential_provider_arn #=> String
+    #   resp.credential_provider_configurations[0].aws_billing.iam_role_arn #=> String
     #   resp.last_updated_at #=> Time
     #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED", "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED", "PENDING_AUTHENTICATION", "PROVISIONING", "AUTHENTICATION_EXPIRED", "AUTHENTICATION_FAILED"
     #   resp.authorization_url #=> String
@@ -18137,7 +18155,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

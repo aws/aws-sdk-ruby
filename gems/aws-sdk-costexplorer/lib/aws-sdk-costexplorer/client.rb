@@ -1473,8 +1473,14 @@ module Aws::CostExplorer
     #   appear on some line items in my bill?][1].
     #
     #   Valid values are `AmortizedCost`, `BlendedCost`, `NetAmortizedCost`,
-    #   `NetUnblendedCost`, `NormalizedUsageAmount`, `UnblendedCost`, and
-    #   `UsageQuantity`.
+    #   `NetUnblendedCost`, `NormalizedUsageAmount`, `UnblendedCost`,
+    #   `UsageQuantity`, `BilledCost`, `ContractedCost`, `ListCost`,
+    #   `PublicEquivalentBilledCost`, and `PublicOnDemandCost`.
+    #
+    #   `BilledCost`, `ContractedCost`, `ListCost`,
+    #   `PublicEquivalentBilledCost`, and `PublicOnDemandCost` are cost
+    #   analytics metrics. They use the same definitions as the cost analytics
+    #   columns in Cost and Usage Report (CUR) 2.0.
     #
     #   <note markdown="1"> If you return the `UsageQuantity` metric, the service aggregates all
     #   usage numbers without taking into account the units. For example, if
@@ -1954,8 +1960,14 @@ module Aws::CostExplorer
     #   appear on some line items in my bill?][1].
     #
     #   Valid values are `AmortizedCost`, `BlendedCost`, `NetAmortizedCost`,
-    #   `NetUnblendedCost`, `NormalizedUsageAmount`, `UnblendedCost`, and
-    #   `UsageQuantity`.
+    #   `NetUnblendedCost`, `NormalizedUsageAmount`, `UnblendedCost`,
+    #   `UsageQuantity`, `BilledCost`, `ContractedCost`, `ListCost`,
+    #   `PublicEquivalentBilledCost`, and `PublicOnDemandCost`.
+    #
+    #   `BilledCost`, `ContractedCost`, `ListCost`,
+    #   `PublicEquivalentBilledCost`, and `PublicOnDemandCost` are cost
+    #   analytics metrics. They use the same definitions as the cost analytics
+    #   columns in Cost and Usage Report (CUR) 2.0.
     #
     #   <note markdown="1"> If you return the `UsageQuantity` metric, the service aggregates all
     #   usage numbers without taking the units into account. For example, if
@@ -2231,6 +2243,16 @@ module Aws::CostExplorer
     #   * `UsageQuantity`
     #
     #   * `NormalizedUsageAmount`
+    #
+    #   * `BilledCost`
+    #
+    #   * `ContractedCost`
+    #
+    #   * `ListCost`
+    #
+    #   * `PublicEquivalentBilledCost`
+    #
+    #   * `PublicOnDemandCost`
     #
     #   The supported key values for the `SortOrder` value are `ASCENDING` and
     #   `DESCENDING`.
@@ -2714,7 +2736,7 @@ module Aws::CostExplorer
     #       start: "YearMonthDay", # required
     #       end: "YearMonthDay", # required
     #     },
-    #     metric: "BLENDED_COST", # required, accepts BLENDED_COST, UNBLENDED_COST, AMORTIZED_COST, NET_UNBLENDED_COST, NET_AMORTIZED_COST, USAGE_QUANTITY, NORMALIZED_USAGE_AMOUNT
+    #     metric: "BLENDED_COST", # required, accepts BLENDED_COST, UNBLENDED_COST, AMORTIZED_COST, NET_UNBLENDED_COST, NET_AMORTIZED_COST, USAGE_QUANTITY, NORMALIZED_USAGE_AMOUNT, LIST_COST, CONTRACTED_COST, BILLED_COST, PUBLIC_EQUIVALENT_BILLED_COST, PUBLIC_ON_DEMAND_COST
     #     granularity: "DAILY", # required, accepts DAILY, MONTHLY, HOURLY
     #     filter: {
     #       or: [
@@ -3095,6 +3117,16 @@ module Aws::CostExplorer
     #
     #   * `NormalizedUsageAmount`
     #
+    #   * `BilledCost`
+    #
+    #   * `ContractedCost`
+    #
+    #   * `ListCost`
+    #
+    #   * `PublicEquivalentBilledCost`
+    #
+    #   * `PublicOnDemandCost`
+    #
     #   The supported values for the `SortOrder` key are `ASCENDING` or
     #   `DESCENDING`.
     #
@@ -3208,12 +3240,13 @@ module Aws::CostExplorer
 
     # Retrieves the reservation coverage for your account, which you can use
     # to see how much of your Amazon Elastic Compute Cloud, Amazon
-    # ElastiCache, Amazon Relational Database Service, or Amazon Redshift
-    # usage is covered by a reservation. An organization's management
-    # account can see the coverage of the associated member accounts. This
-    # supports dimensions, cost categories, and nested expressions. For any
-    # time period, you can filter data about reservation usage by the
-    # following dimensions:
+    # Relational Database Service, Amazon ElastiCache, Amazon MemoryDB,
+    # Amazon Redshift, Amazon Elasticsearch Service, or Amazon OpenSearch
+    # Service usage is covered by a reservation. An organization's
+    # management account can see the coverage of the associated member
+    # accounts. This supports dimensions, cost categories, and nested
+    # expressions. For any time period, you can filter data about
+    # reservation usage by the following dimensions:
     #
     # * AZ
     #
@@ -3225,9 +3258,9 @@ module Aws::CostExplorer
     #
     # * INSTANCE\_TYPE
     #
-    # * LINKED\_ACCOUNT
+    # * INSTANCE\_TYPE\_FAMILY
     #
-    # * OPERATING\_SYSTEM
+    # * LINKED\_ACCOUNT
     #
     # * PLATFORM
     #
@@ -3238,6 +3271,9 @@ module Aws::CostExplorer
     # * TAG
     #
     # * TENANCY
+    #
+    # The dimensions that you can use depend on the service in the `SERVICE`
+    # filter. For details, see `Filter`.
     #
     # To determine valid values for a dimension, use the
     # `GetDimensionValues` operation.
@@ -3252,29 +3288,27 @@ module Aws::CostExplorer
     #   not including `2017-05-01`.
     #
     # @option params [Array<Types::GroupDefinition>] :group_by
-    #   You can group the data by the following attributes:
+    #   You can group the data by the following attributes. The attributes
+    #   that you can use depend on the service in the `SERVICE` filter. If you
+    #   don't provide a `SERVICE` filter, Cost Explorer uses Amazon Elastic
+    #   Compute Cloud - Compute.
     #
-    #   * AZ
+    #   * Amazon Elastic Compute Cloud - Compute: `AZ`, `INSTANCE_TYPE`,
+    #     `INSTANCE_TYPE_FAMILY`, `LINKED_ACCOUNT`, `PLATFORM`, `REGION`, and
+    #     `TENANCY`
     #
-    #   * CACHE\_ENGINE
+    #   * Amazon Relational Database Service: `AZ`, `DATABASE_ENGINE`,
+    #     `DEPLOYMENT_OPTION`, `INSTANCE_TYPE`, `LINKED_ACCOUNT`, and `REGION`
     #
-    #   * DATABASE\_ENGINE
+    #   * Amazon ElastiCache and Amazon MemoryDB: `AZ`, `CACHE_ENGINE`,
+    #     `INSTANCE_TYPE`, `LINKED_ACCOUNT`, and `REGION`
     #
-    #   * DEPLOYMENT\_OPTION
+    #   * Amazon Redshift, Amazon Elasticsearch Service, and Amazon OpenSearch
+    #     Service: `AZ`, `INSTANCE_TYPE`, `LINKED_ACCOUNT`, and `REGION`
     #
-    #   * INSTANCE\_TYPE
-    #
-    #   * INVOICING\_ENTITY
-    #
-    #   * LINKED\_ACCOUNT
-    #
-    #   * OPERATING\_SYSTEM
-    #
-    #   * PLATFORM
-    #
-    #   * REGION
-    #
-    #   * TENANCY
+    #   If you specify two `SERVICE` values, use only attributes that both
+    #   services support. You can specify up to four attributes, and only the
+    #   `DIMENSION` type is supported.
     #
     # @option params [String] :granularity
     #   The granularity of the Amazon Web Services cost data for the
@@ -3288,8 +3322,8 @@ module Aws::CostExplorer
     #   `MONTHLY` granularities.
     #
     # @option params [Types::Expression] :filter
-    #   Filters utilization data by dimensions. You can filter by the
-    #   following dimensions:
+    #   Filters coverage data by dimensions. You can filter by the following
+    #   dimensions:
     #
     #   * AZ
     #
@@ -3301,9 +3335,9 @@ module Aws::CostExplorer
     #
     #   * INSTANCE\_TYPE
     #
-    #   * LINKED\_ACCOUNT
+    #   * INSTANCE\_TYPE\_FAMILY
     #
-    #   * OPERATING\_SYSTEM
+    #   * LINKED\_ACCOUNT
     #
     #   * PLATFORM
     #
@@ -3311,9 +3345,25 @@ module Aws::CostExplorer
     #
     #   * SERVICE
     #
+    #     <note markdown="1"> Supported values for `SERVICE` are Amazon Elastic Compute Cloud -
+    #     Compute, Amazon Relational Database Service, Amazon ElastiCache,
+    #     Amazon MemoryDB, Amazon Redshift, Amazon Elasticsearch Service, and
+    #     Amazon OpenSearch Service. You can specify up to two `SERVICE`
+    #     values.
+    #
+    #      </note>
+    #
     #   * TAG
     #
     #   * TENANCY
+    #
+    #   The dimensions that you can use depend on the service in the `SERVICE`
+    #   filter. `CACHE_ENGINE` applies only to Amazon ElastiCache and Amazon
+    #   MemoryDB. `DATABASE_ENGINE` and `DEPLOYMENT_OPTION` apply only to
+    #   Amazon Relational Database Service. `INSTANCE_TYPE_FAMILY`,
+    #   `PLATFORM`, and `TENANCY` apply only to Amazon Elastic Compute Cloud -
+    #   Compute. If you specify two `SERVICE` values, use only dimensions that
+    #   both services support.
     #
     #   `GetReservationCoverage` uses the same [Expression][1] object as the
     #   other operations, but only `AND` is supported among each dimension.
@@ -3333,7 +3383,10 @@ module Aws::CostExplorer
     #   The measurement that you want your reservation coverage reported in.
     #
     #   Valid values are `Hour`, `Unit`, and `Cost`. You can use multiple
-    #   values in a request.
+    #   values in a request. `Hour` returns `CoverageHours`, `Unit` returns
+    #   `CoverageNormalizedUnits`, and `Cost` returns `CoverageCost`. `Unit`
+    #   is supported only for Amazon Elastic Compute Cloud - Compute. If you
+    #   don't specify `Metrics`, the response includes only `CoverageHours`.
     #
     # @option params [String] :next_page_token
     #   The token to retrieve the next set of results. Amazon Web Services
@@ -3822,15 +3875,11 @@ module Aws::CostExplorer
     #
     #   * AZ
     #
-    #   * CACHE\_ENGINE
-    #
-    #   * DEPLOYMENT\_OPTION
-    #
     #   * INSTANCE\_TYPE
     #
-    #   * LINKED\_ACCOUNT
+    #   * INSTANCE\_TYPE\_FAMILY
     #
-    #   * OPERATING\_SYSTEM
+    #   * LINKED\_ACCOUNT
     #
     #   * PLATFORM
     #
@@ -3841,12 +3890,18 @@ module Aws::CostExplorer
     #     <note markdown="1"> If not specified, the `SERVICE` filter defaults to Amazon Elastic
     #     Compute Cloud - Compute. Supported values for `SERVICE` are Amazon
     #     Elastic Compute Cloud - Compute, Amazon Relational Database Service,
-    #     Amazon ElastiCache, Amazon Redshift, and Amazon Elasticsearch
-    #     Service. The value for the `SERVICE` filter should not exceed "1".
+    #     Amazon ElastiCache, Amazon MemoryDB, Amazon Redshift, Amazon
+    #     Elasticsearch Service, and Amazon OpenSearch Service.
     #
     #      </note>
     #
     #   * SCOPE
+    #
+    #   * SUBSCRIPTION\_ID
+    #
+    #     <note markdown="1"> Values for `SUBSCRIPTION_ID` must contain only digits.
+    #
+    #      </note>
     #
     #   * TENANCY
     #
@@ -5187,6 +5242,16 @@ module Aws::CostExplorer
     #
     #   * `NormalizedUsageAmount`
     #
+    #   * `BilledCost`
+    #
+    #   * `ContractedCost`
+    #
+    #   * `ListCost`
+    #
+    #   * `PublicEquivalentBilledCost`
+    #
+    #   * `PublicOnDemandCost`
+    #
     #   The supported values for `SortOrder` are `ASCENDING` and `DESCENDING`.
     #
     #   When you use `SortBy`, `NextPageToken` and `SearchString` aren't
@@ -5399,7 +5464,7 @@ module Aws::CostExplorer
     #       start: "YearMonthDay", # required
     #       end: "YearMonthDay", # required
     #     },
-    #     metric: "BLENDED_COST", # required, accepts BLENDED_COST, UNBLENDED_COST, AMORTIZED_COST, NET_UNBLENDED_COST, NET_AMORTIZED_COST, USAGE_QUANTITY, NORMALIZED_USAGE_AMOUNT
+    #     metric: "BLENDED_COST", # required, accepts BLENDED_COST, UNBLENDED_COST, AMORTIZED_COST, NET_UNBLENDED_COST, NET_AMORTIZED_COST, USAGE_QUANTITY, NORMALIZED_USAGE_AMOUNT, LIST_COST, CONTRACTED_COST, BILLED_COST, PUBLIC_EQUIVALENT_BILLED_COST, PUBLIC_ON_DEMAND_COST
     #     granularity: "DAILY", # required, accepts DAILY, MONTHLY, HOURLY
     #     filter: {
     #       or: [
@@ -6465,7 +6530,7 @@ module Aws::CostExplorer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.169.0'
+      context[:gem_version] = '1.170.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

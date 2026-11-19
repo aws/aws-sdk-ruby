@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.168.0 (2026-11-19)
+------------------
+
+* Feature - Adds support for storing user pool app client secrets in AWS Secrets Manager and adds support OAuth Client ID Metadata Document (CIMD) which lets a client use an HTTPS URL as its client ID instead of registering in advance.
+
 1.167.0 (2026-11-18)
 ------------------
 

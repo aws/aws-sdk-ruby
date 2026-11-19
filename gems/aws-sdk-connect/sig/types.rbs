@@ -470,7 +470,7 @@ module Aws::Connect
       attr_accessor file_size_in_bytes: ::Integer
       attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       attr_accessor created_by: Types::CreatedByInfo
-      attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING")
+      attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING" | "VOICEMAIL_RECORDING" | "VOICEMAIL_RECORDING_REDACTED" | "VOICEMAIL_ANALYSIS" | "VOICEMAIL_ANALYSIS_REDACTED")
       attr_accessor associated_resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -1015,6 +1015,7 @@ module Aws::Connect
       attr_accessor next_contacts: ::Array[Types::NextContactEntry]
       attr_accessor global_resiliency_metadata: Types::GlobalResiliencyMetadata
       attr_accessor contact_lens: Types::ContactLens
+      attr_accessor voicemail_info: Types::VoicemailInfo
       SENSITIVE: [:name, :description]
     end
 
@@ -1442,7 +1443,7 @@ module Aws::Connect
     class CreateAttachedFileRequest
       attr_accessor client_token: ::String
       attr_accessor instance_id: ::String
-      attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING")
+      attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING" | "VOICEMAIL_RECORDING" | "VOICEMAIL_RECORDING_REDACTED" | "VOICEMAIL_ANALYSIS" | "VOICEMAIL_ANALYSIS_REDACTED")
       attr_accessor file_source_uri: ::String
       attr_accessor associated_resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
@@ -4364,7 +4365,7 @@ module Aws::Connect
       attr_accessor file_name: ::String
       attr_accessor file_size_in_bytes: ::Integer
       attr_accessor associated_resource_arn: ::String
-      attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING")
+      attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING" | "VOICEMAIL_RECORDING" | "VOICEMAIL_RECORDING_REDACTED" | "VOICEMAIL_ANALYSIS" | "VOICEMAIL_ANALYSIS_REDACTED")
       attr_accessor created_by: Types::CreatedByInfo
       attr_accessor download_url_metadata: Types::DownloadUrlMetadata
       attr_accessor tags: ::Hash[::String, ::String]
@@ -5266,7 +5267,7 @@ module Aws::Connect
     class ListContactReferencesRequest
       attr_accessor instance_id: ::String
       attr_accessor contact_id: ::String
-      attr_accessor reference_types: ::Array[("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED")]
+      attr_accessor reference_types: ::Array[("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED" | "VOICEMAIL_RECORDING" | "VOICEMAIL_RECORDING_REDACTED" | "VOICEMAIL_ANALYSIS" | "VOICEMAIL_ANALYSIS_REDACTED")]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -7154,7 +7155,7 @@ module Aws::Connect
 
     class Reference
       attr_accessor value: ::String
-      attr_accessor type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED")
+      attr_accessor type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED" | "VOICEMAIL_RECORDING" | "VOICEMAIL_RECORDING_REDACTED" | "VOICEMAIL_ANALYSIS" | "VOICEMAIL_ANALYSIS_REDACTED")
       attr_accessor status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       attr_accessor arn: ::String
       attr_accessor status_reason: ::String
@@ -7173,6 +7174,10 @@ module Aws::Connect
       attr_accessor date: Types::DateReference
       attr_accessor email: Types::EmailReference
       attr_accessor contact_analysis: Types::ContactAnalysisReference
+      attr_accessor voicemail_recording: Types::VoicemailRecordingReference
+      attr_accessor voicemail_recording_redacted: Types::VoicemailRecordingReference
+      attr_accessor voicemail_analysis: Types::VoicemailAnalysisReference
+      attr_accessor voicemail_analysis_redacted: Types::VoicemailAnalysisReference
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -7197,6 +7202,14 @@ module Aws::Connect
       class Email < ReferenceSummary
       end
       class ContactAnalysis < ReferenceSummary
+      end
+      class VoicemailRecording < ReferenceSummary
+      end
+      class VoicemailRecordingRedacted < ReferenceSummary
+      end
+      class VoicemailAnalysis < ReferenceSummary
+      end
+      class VoicemailAnalysisRedacted < ReferenceSummary
       end
       class Unknown < ReferenceSummary
       end
@@ -8274,7 +8287,7 @@ module Aws::Connect
       attr_accessor file_name: ::String
       attr_accessor file_size_in_bytes: ::Integer
       attr_accessor url_expiry_in_seconds: ::Integer
-      attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING")
+      attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING" | "VOICEMAIL_RECORDING" | "VOICEMAIL_RECORDING_REDACTED" | "VOICEMAIL_ANALYSIS" | "VOICEMAIL_ANALYSIS_REDACTED")
       attr_accessor associated_resource_arn: ::String
       attr_accessor created_by: Types::CreatedByInfo
       attr_accessor tags: ::Hash[::String, ::String]
@@ -10089,6 +10102,27 @@ module Aws::Connect
     class VoiceRecordingConfiguration
       attr_accessor voice_recording_track: ("FROM_AGENT" | "TO_AGENT" | "ALL")
       attr_accessor ivr_recording_track: ("ALL")
+      SENSITIVE: []
+    end
+
+    class VoicemailAnalysisReference
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      attr_accessor status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class VoicemailInfo
+      attr_accessor number_of_voicemails: ::Integer
+      SENSITIVE: []
+    end
+
+    class VoicemailRecordingReference
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      attr_accessor status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
+      attr_accessor arn: ::String
       SENSITIVE: []
     end
 

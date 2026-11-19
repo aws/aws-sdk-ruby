@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.153.0 (2026-11-19)
+------------------
+
+* Feature - Route 53 Private Endpoint Health Checks support
+
 1.152.0 (2026-11-18)
 ------------------
 

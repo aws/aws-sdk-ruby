@@ -137,6 +137,7 @@ module Aws::SecurityAgent
     CloudWatchLog = Shapes::StructureShape.new(name: 'CloudWatchLog')
     CodeLocation = Shapes::StructureShape.new(name: 'CodeLocation')
     CodeLocationList = Shapes::ListShape.new(name: 'CodeLocationList')
+    CodeRemediationJobStatus = Shapes::StringShape.new(name: 'CodeRemediationJobStatus')
     CodeRemediationStrategy = Shapes::StringShape.new(name: 'CodeRemediationStrategy')
     CodeRemediationTask = Shapes::StructureShape.new(name: 'CodeRemediationTask')
     CodeRemediationTaskDetails = Shapes::StructureShape.new(name: 'CodeRemediationTaskDetails')
@@ -1028,6 +1029,9 @@ module Aws::SecurityAgent
     CodeRemediationTaskDetails.add_member(:repo_name, Shapes::ShapeRef.new(shape: String, location_name: "repoName"))
     CodeRemediationTaskDetails.add_member(:code_diff_link, Shapes::ShapeRef.new(shape: String, location_name: "codeDiffLink"))
     CodeRemediationTaskDetails.add_member(:pull_request_link, Shapes::ShapeRef.new(shape: String, location_name: "pullRequestLink"))
+    CodeRemediationTaskDetails.add_member(:status, Shapes::ShapeRef.new(shape: CodeRemediationJobStatus, location_name: "status"))
+    CodeRemediationTaskDetails.add_member(:status_code, Shapes::ShapeRef.new(shape: String, location_name: "statusCode"))
+    CodeRemediationTaskDetails.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     CodeRemediationTaskDetails.struct_class = Types::CodeRemediationTaskDetails
 
     CodeRemediationTaskDetailsList.member = Shapes::ShapeRef.new(shape: CodeRemediationTaskDetails)

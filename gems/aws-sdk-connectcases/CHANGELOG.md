@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2026-11-19)
+------------------
+
+* Feature - This release adds support for SLAs that track any single-select field, including custom fields, and for updating the target duration of an SLA with the UpdateRelatedItem API.
+
 1.86.0 (2026-11-18)
 ------------------
 

@@ -154,13 +154,7 @@ module Aws
                                  value: ::String?
                                }
                              ],
-                             ?mutual_authentication: {
-                               mode: ::String?,
-                               trust_store_arn: ::String?,
-                               ignore_client_certificate_expiry: bool?,
-                               trust_store_association_status: ("active" | "removed")?,
-                               advertise_trust_store_ca_names: ("on" | "off")?
-                             }
+                             ?mutual_authentication: Params::mutual_authentication_attributes
                            ) -> _CreateListenerResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateListenerResponseSuccess
 
@@ -642,13 +636,7 @@ module Aws
                                Params::action
                              ],
                              ?alpn_policy: Array[::String],
-                             ?mutual_authentication: {
-                               mode: ::String?,
-                               trust_store_arn: ::String?,
-                               ignore_client_certificate_expiry: bool?,
-                               trust_store_association_status: ("active" | "removed")?,
-                               advertise_trust_store_ca_names: ("on" | "off")?
-                             }
+                             ?mutual_authentication: Params::mutual_authentication_attributes
                            ) -> _ModifyListenerResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyListenerResponseSuccess
 

@@ -557,6 +557,7 @@ module Aws
             'PartnerCentralAccount' => 'partnercentral-account',
             'PartnerCentralBenefits' => 'partnercentral-benefits',
             'PartnerCentralChannel' => 'partnercentral-channel',
+            'PartnerCentralMarketing' => 'partnercentral-marketing',
             'PartnerCentralRevenueMeasurement' => 'partnercentral-prm',
             'PartnerCentralSelling' => 'partnercentral-selling',
             'PaymentCryptography' => 'controlplane.payment-cryptography',

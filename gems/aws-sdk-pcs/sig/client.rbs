@@ -117,6 +117,9 @@ module Aws
                                   parameter_value: ::String
                                 }
                               ]?,
+                              job_submit_plugins: Array[
+                                Params::job_submit_plugin
+                              ]?,
                               accounting: {
                                 default_purge_time_in_days: ::Integer?,
                                 mode: ("STANDARD" | "NONE")
@@ -385,6 +388,9 @@ module Aws
                                   parameter_name: ::String,
                                   parameter_value: ::String
                                 }
+                              ]?,
+                              job_submit_plugins: Array[
+                                Params::job_submit_plugin
                               ]?,
                               accounting: {
                                 default_purge_time_in_days: ::Integer?,

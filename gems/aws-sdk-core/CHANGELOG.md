@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.271.0 (2026-11-19)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - AWS STS adds GetScopedCredentials and expands Trusted Identity Propagation (TIP) to IAM federation and IAM Roles Anywhere. GetScopedCredentials reduces an existing session's permissions and duration. TIP carries verified user or workload identity for authorization and CloudTrail auditing.
+
 3.270.0 (2026-11-18)
 ------------------
 

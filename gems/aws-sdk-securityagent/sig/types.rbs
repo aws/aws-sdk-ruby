@@ -576,6 +576,9 @@ module Aws::SecurityAgent
       attr_accessor repo_name: ::String
       attr_accessor code_diff_link: ::String
       attr_accessor pull_request_link: ::String
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETED" | "FAILED" | "NO_CHANGE_REQUIRED" | "UNKNOWN")
+      attr_accessor status_code: ::String
+      attr_accessor status_reason: ::String
       SENSITIVE: []
     end
 

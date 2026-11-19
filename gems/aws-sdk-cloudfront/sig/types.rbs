@@ -359,6 +359,7 @@ module Aws::CloudFront
       attr_accessor status: ::String
       attr_accessor enabled: bool
       attr_accessor is_default: bool
+      attr_accessor viewer_fallback: Types::ViewerFallback
       SENSITIVE: []
     end
 
@@ -379,6 +380,7 @@ module Aws::CloudFront
       attr_accessor enabled: bool
       attr_accessor status: ::String
       attr_accessor is_default: bool
+      attr_accessor viewer_fallback: Types::ViewerFallback
       SENSITIVE: []
     end
 
@@ -538,6 +540,7 @@ module Aws::CloudFront
       attr_accessor tags: Types::Tags
       attr_accessor anycast_ip_list_id: ::String
       attr_accessor enabled: bool
+      attr_accessor viewer_fallback: Types::ViewerFallback
       SENSITIVE: []
     end
 
@@ -581,6 +584,7 @@ module Aws::CloudFront
       attr_accessor connection_group_id: ::String
       attr_accessor managed_certificate_request: Types::ManagedCertificateRequest
       attr_accessor enabled: bool
+      attr_accessor on_domain_takeover: ("allow" | "reject")
       SENSITIVE: []
     end
 
@@ -1268,12 +1272,14 @@ module Aws::CloudFront
 
     class DomainItem
       attr_accessor domain: ::String
+      attr_accessor serve_on: ("any" | "anycast-ip-list-only")
       SENSITIVE: []
     end
 
     class DomainResult
       attr_accessor domain: ::String
       attr_accessor status: ("active" | "inactive")
+      attr_accessor serve_on: ("any" | "anycast-ip-list-only")
       SENSITIVE: []
     end
 
@@ -3934,6 +3940,7 @@ module Aws::CloudFront
       attr_accessor if_match: ::String
       attr_accessor anycast_ip_list_id: ::String
       attr_accessor enabled: bool
+      attr_accessor viewer_fallback: Types::ViewerFallback
       SENSITIVE: []
     end
 
@@ -3979,6 +3986,7 @@ module Aws::CloudFront
       attr_accessor if_match: ::String
       attr_accessor managed_certificate_request: Types::ManagedCertificateRequest
       attr_accessor enabled: bool
+      attr_accessor on_domain_takeover: ("allow" | "reject")
       SENSITIVE: []
     end
 
@@ -4213,6 +4221,11 @@ module Aws::CloudFront
       attr_accessor minimum_protocol_version: ("SSLv3" | "TLSv1" | "TLSv1_2016" | "TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021" | "TLSv1.3_2025" | "TLSv1.2_2025")
       attr_accessor certificate: ::String
       attr_accessor certificate_source: ("cloudfront" | "iam" | "acm")
+      SENSITIVE: []
+    end
+
+    class ViewerFallback
+      attr_accessor distribution_id: ::String
       SENSITIVE: []
     end
 

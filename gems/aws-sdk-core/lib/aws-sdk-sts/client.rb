@@ -643,15 +643,6 @@ module Aws::STS
     #   about ARNs, see [Amazon Resource Names (ARNs) and Amazon Web Services
     #   Service Namespaces][1] in the Amazon Web Services General Reference.
     #
-    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed inline session
-    #   policy, managed policy ARNs, and session tags into a packed binary
-    #   format that has a separate limit. Your request can fail for this limit
-    #   even if your plaintext meets the other requirements. The
-    #   `PackedPolicySize` response element indicates by percentage how close
-    #   the policies and tags for your request are to the upper size limit.
-    #
-    #    </note>
-    #
     #   Passing policies to this operation returns new temporary credentials.
     #   The resulting session's permissions are the intersection of the
     #   role's identity-based policy and the session policies. You can use
@@ -687,15 +678,6 @@ module Aws::STS
     #   valid character list (\\u0020 through \\u00FF). It can also include
     #   the tab (\\u0009), linefeed (\\u000A), and carriage return (\\u000D)
     #   characters.
-    #
-    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed inline session
-    #   policy, managed policy ARNs, and session tags into a packed binary
-    #   format that has a separate limit. Your request can fail for this limit
-    #   even if your plaintext meets the other requirements. The
-    #   `PackedPolicySize` response element indicates by percentage how close
-    #   the policies and tags for your request are to the upper size limit.
-    #
-    #    </note>
     #
     #   For more information about role session permissions, see [Session
     #   policies][1].
@@ -752,15 +734,6 @@ module Aws::STS
     #   plaintext session tag keys can’t exceed 128 characters, and the values
     #   can’t exceed 256 characters. For these and additional limits, see [IAM
     #   and STS Character Limits][2] in the *IAM User Guide*.
-    #
-    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed inline session
-    #   policy, managed policy ARNs, and session tags into a packed binary
-    #   format that has a separate limit. Your request can fail for this limit
-    #   even if your plaintext meets the other requirements. The
-    #   `PackedPolicySize` response element indicates by percentage how close
-    #   the policies and tags for your request are to the upper size limit.
-    #
-    #    </note>
     #
     #   You can pass a session tag with the same key as a tag that is already
     #   attached to the role. When you do, session tags override a role tag
@@ -1094,15 +1067,6 @@ module Aws::STS
     # characters. For these and additional limits, see [IAM and STS
     # Character Limits][8] in the *IAM User Guide*.
     #
-    # <note markdown="1"> An Amazon Web Services conversion compresses the passed inline session
-    # policy, managed policy ARNs, and session tags into a packed binary
-    # format that has a separate limit. Your request can fail for this limit
-    # even if your plaintext meets the other requirements. The
-    # `PackedPolicySize` response element indicates by percentage how close
-    # the policies and tags for your request are to the upper size limit.
-    #
-    #  </note>
-    #
     # You can pass a session tag with the same key as a tag that is attached
     # to the role. When you do, session tags override the role's tags with
     # the same key.
@@ -1185,15 +1149,6 @@ module Aws::STS
     #   about ARNs, see [Amazon Resource Names (ARNs) and Amazon Web Services
     #   Service Namespaces][1] in the Amazon Web Services General Reference.
     #
-    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed inline session
-    #   policy, managed policy ARNs, and session tags into a packed binary
-    #   format that has a separate limit. Your request can fail for this limit
-    #   even if your plaintext meets the other requirements. The
-    #   `PackedPolicySize` response element indicates by percentage how close
-    #   the policies and tags for your request are to the upper size limit.
-    #
-    #    </note>
-    #
     #   Passing policies to this operation returns new temporary credentials.
     #   The resulting session's permissions are the intersection of the
     #   role's identity-based policy and the session policies. You can use
@@ -1232,15 +1187,6 @@ module Aws::STS
     #
     #   For more information about role session permissions, see [Session
     #   policies][1].
-    #
-    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed inline session
-    #   policy, managed policy ARNs, and session tags into a packed binary
-    #   format that has a separate limit. Your request can fail for this limit
-    #   even if your plaintext meets the other requirements. The
-    #   `PackedPolicySize` response element indicates by percentage how close
-    #   the policies and tags for your request are to the upper size limit.
-    #
-    #    </note>
     #
     #
     #
@@ -1297,6 +1243,7 @@ module Aws::STS
     #   * {Types::AssumeRoleWithSAMLResponse#source_identity #source_identity} => String
     #   * {Types::AssumeRoleWithSAMLResponse#session_token_utilization #session_token_utilization} => Integer
     #   * {Types::AssumeRoleWithSAMLResponse#session_token_size #session_token_size} => Integer
+    #   * {Types::AssumeRoleWithSAMLResponse#trusted_identity_propagation_context #trusted_identity_propagation_context} => Types::TrustedIdentityPropagationContext
     #
     #
     # @example Example: To assume a role using a SAML assertion
@@ -1361,6 +1308,12 @@ module Aws::STS
     #   resp.source_identity #=> String
     #   resp.session_token_utilization #=> Integer
     #   resp.session_token_size #=> Integer
+    #   resp.trusted_identity_propagation_context.origin_identity.subject #=> String
+    #   resp.trusted_identity_propagation_context.origin_identity.subject_type #=> String
+    #   resp.trusted_identity_propagation_context.origin_identity.issuer #=> String
+    #   resp.trusted_identity_propagation_context.origin_identity.federated_provider_arn #=> String
+    #   resp.trusted_identity_propagation_context.transaction_context.identity_provider #=> Hash
+    #   resp.trusted_identity_propagation_context.transaction_context.identity_provider["transactionContextKeyType"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithSAML AWS API Documentation
     #
@@ -1456,15 +1409,6 @@ module Aws::STS
     # can’t exceed 128 characters and the values can’t exceed 256
     # characters. For these and additional limits, see [IAM and STS
     # Character Limits][10] in the *IAM User Guide*.
-    #
-    # <note markdown="1"> An Amazon Web Services conversion compresses the passed inline session
-    # policy, managed policy ARNs, and session tags into a packed binary
-    # format that has a separate limit. Your request can fail for this limit
-    # even if your plaintext meets the other requirements. The
-    # `PackedPolicySize` response element indicates by percentage how close
-    # the policies and tags for your request are to the upper size limit.
-    #
-    #  </note>
     #
     # You can pass a session tag with the same key as a tag that is attached
     # to the role. When you do, the session tag overrides the role tag with
@@ -1605,15 +1549,6 @@ module Aws::STS
     #   about ARNs, see [Amazon Resource Names (ARNs) and Amazon Web Services
     #   Service Namespaces][1] in the Amazon Web Services General Reference.
     #
-    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed inline session
-    #   policy, managed policy ARNs, and session tags into a packed binary
-    #   format that has a separate limit. Your request can fail for this limit
-    #   even if your plaintext meets the other requirements. The
-    #   `PackedPolicySize` response element indicates by percentage how close
-    #   the policies and tags for your request are to the upper size limit.
-    #
-    #    </note>
-    #
     #   Passing policies to this operation returns new temporary credentials.
     #   The resulting session's permissions are the intersection of the
     #   role's identity-based policy and the session policies. You can use
@@ -1652,15 +1587,6 @@ module Aws::STS
     #
     #   For more information about role session permissions, see [Session
     #   policies][1].
-    #
-    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed inline session
-    #   policy, managed policy ARNs, and session tags into a packed binary
-    #   format that has a separate limit. Your request can fail for this limit
-    #   even if your plaintext meets the other requirements. The
-    #   `PackedPolicySize` response element indicates by percentage how close
-    #   the policies and tags for your request are to the upper size limit.
-    #
-    #    </note>
     #
     #
     #
@@ -1712,6 +1638,7 @@ module Aws::STS
     #   * {Types::AssumeRoleWithWebIdentityResponse#source_identity #source_identity} => String
     #   * {Types::AssumeRoleWithWebIdentityResponse#session_token_utilization #session_token_utilization} => Integer
     #   * {Types::AssumeRoleWithWebIdentityResponse#session_token_size #session_token_size} => Integer
+    #   * {Types::AssumeRoleWithWebIdentityResponse#trusted_identity_propagation_context #trusted_identity_propagation_context} => Types::TrustedIdentityPropagationContext
     #
     #
     # @example Example: To assume a role as an OpenID Connect-federated user
@@ -1775,6 +1702,12 @@ module Aws::STS
     #   resp.source_identity #=> String
     #   resp.session_token_utilization #=> Integer
     #   resp.session_token_size #=> Integer
+    #   resp.trusted_identity_propagation_context.origin_identity.subject #=> String
+    #   resp.trusted_identity_propagation_context.origin_identity.subject_type #=> String
+    #   resp.trusted_identity_propagation_context.origin_identity.issuer #=> String
+    #   resp.trusted_identity_propagation_context.origin_identity.federated_provider_arn #=> String
+    #   resp.trusted_identity_propagation_context.transaction_context.identity_provider #=> Hash
+    #   resp.trusted_identity_propagation_context.transaction_context.identity_provider["transactionContextKeyType"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithWebIdentity AWS API Documentation
     #
@@ -2238,7 +2171,8 @@ module Aws::STS
     # * You cannot call any IAM operations using the CLI or the Amazon Web
     #   Services API. This limitation does not apply to console sessions.
     #
-    # * You cannot call any STS operations except `GetCallerIdentity`.
+    # * You cannot call any STS operations except `GetCallerIdentity`,
+    #   `GetScopedCredentials`, or `GetDelegatedAccessToken`.
     #
     # You can use temporary credentials for single sign-on (SSO) to the
     # console.
@@ -2356,15 +2290,6 @@ module Aws::STS
     #   the tab (\\u0009), linefeed (\\u000A), and carriage return (\\u000D)
     #   characters.
     #
-    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed inline session
-    #   policy, managed policy ARNs, and session tags into a packed binary
-    #   format that has a separate limit. Your request can fail for this limit
-    #   even if your plaintext meets the other requirements. The
-    #   `PackedPolicySize` response element indicates by percentage how close
-    #   the policies and tags for your request are to the upper size limit.
-    #
-    #    </note>
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
@@ -2403,15 +2328,6 @@ module Aws::STS
     #   are granted in addition to the permissions that are granted by the
     #   session policies.
     #
-    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed inline session
-    #   policy, managed policy ARNs, and session tags into a packed binary
-    #   format that has a separate limit. Your request can fail for this limit
-    #   even if your plaintext meets the other requirements. The
-    #   `PackedPolicySize` response element indicates by percentage how close
-    #   the policies and tags for your request are to the upper size limit.
-    #
-    #    </note>
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
@@ -2435,15 +2351,6 @@ module Aws::STS
     #   plaintext session tag keys can’t exceed 128 characters and the values
     #   can’t exceed 256 characters. For these and additional limits, see [IAM
     #   and STS Character Limits][2] in the *IAM User Guide*.
-    #
-    #   <note markdown="1"> An Amazon Web Services conversion compresses the passed inline session
-    #   policy, managed policy ARNs, and session tags into a packed binary
-    #   format that has a separate limit. Your request can fail for this limit
-    #   even if your plaintext meets the other requirements. The
-    #   `PackedPolicySize` response element indicates by percentage how close
-    #   the policies and tags for your request are to the upper size limit.
-    #
-    #    </note>
     #
     #   You can pass a session tag with the same key as a tag that is already
     #   attached to the user you are federating. When you do, session tags
@@ -2551,6 +2458,148 @@ module Aws::STS
       req.send_request(options)
     end
 
+    # Returns a set of temporary security credentials that are scoped down
+    # from the caller's existing temporary security credentials.
+    # `GetScopedCredentials` preserves the caller's identity while
+    # narrowing the permissions and optionally shortening the session
+    # lifetime.
+    #
+    # For a comparison of `GetScopedCredentials` with the other API
+    # operations that produce temporary security credentials, see
+    # [Requesting Temporary Security Credentials][1] and [Compare STS
+    # credentials][2] in the IAM User Guide.
+    #
+    # **Credential requirements**
+    #
+    # You can only call `GetScopedCredentials` with temporary security
+    # credentials, for example, credentials from an assumed role or a
+    # federated session. You cannot call it with IAM user credentials or
+    # root credentials. If you want to scope down IAM user credentials,
+    # first call `GetSessionToken` to get temporary security credentials,
+    # and then call `GetScopedCredentials` with those credentials.
+    #
+    # <note markdown="1"> The `GetScopedCredentials` API is not available on the STS Global
+    # endpoint.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_sts-comparison.html
+    #
+    # @option params [String] :policy
+    #   An IAM policy in JSON format that you want to use as a scope down
+    #   policy.
+    #
+    #   A request must provide at least one of `Policy` or `DurationSeconds`.
+    #   Both parameters are optional individually, but you must specify at
+    #   least one of them.
+    #
+    #   The resulting session's permissions are the intersection of the
+    #   calling session's existing permissions and this scope down policy.
+    #   You cannot use this scope down policy to grant more permissions than
+    #   the calling session already has.
+    #
+    #   The plaintext of the scope down policy cannot exceed 2,048 characters.
+    #   The JSON policy characters can be any ASCII character from the space
+    #   character to the end of the valid character list (\\u0020 through
+    #   \\u00FF). It can also include the tab (\\u0009), linefeed (\\u000A),
+    #   and carriage return (\\u000D) characters.
+    #
+    #   <note markdown="1"> An internal conversion compresses the inline scope down policy into a
+    #   packed binary format that has a separate limit. If the packed policy
+    #   exceeds this limit, the request fails with `PackedPolicyTooLarge`.
+    #
+    #    If the document is not valid IAM policy JSON, the request fails with
+    #   `MalformedPolicyDocument`.
+    #
+    #    </note>
+    #
+    # @option params [Integer] :duration_seconds
+    #   The duration, in seconds, of the resulting scoped down credentials.
+    #   The value can range from 1 second to 129,600 seconds (36 hours).
+    #
+    #   If you do not specify this value, the scoped down credentials will
+    #   inherit the calling session's expiration time.
+    #
+    # @option params [Integer] :minimum_session_token_size
+    #   The minimum size, in bytes, of the session token that STS issues for
+    #   the request. STS increases the session token to at least this size,
+    #   regardless of its actual content. The value must not exceed 4,096
+    #   bytes. When set to 0 or not specified, the session token size is
+    #   unchanged.
+    #
+    # @option params [String] :scoped_session_description
+    #   A caller-supplied description of the scoped session. The value cannot
+    #   exceed 256 characters. This description is logged to CloudTrail for
+    #   the request, so you can use it to record the purpose of the scoped
+    #   session.
+    #
+    # @return [Types::GetScopedCredentialsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetScopedCredentialsResponse#credentials #credentials} => Types::Credentials
+    #   * {Types::GetScopedCredentialsResponse#session_info #session_info} => Types::ScopedSession
+    #   * {Types::GetScopedCredentialsResponse#session_token_utilization #session_token_utilization} => Integer
+    #   * {Types::GetScopedCredentialsResponse#session_token_size #session_token_size} => Integer
+    #   * {Types::GetScopedCredentialsResponse#scoped_policies_count #scoped_policies_count} => Integer
+    #   * {Types::GetScopedCredentialsResponse#source_identity #source_identity} => String
+    #
+    #
+    # @example Example: To scope down existing temporary credentials
+    #
+    #   resp = client.get_scoped_credentials({
+    #     duration_seconds: 3600, 
+    #     policy: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":\"s3:GetObject\",\"Resource\":\"arn:aws:s3:::example-bucket/*\"}]}", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     credentials: {
+    #       access_key_id: "AKIAIOSFODNN7EXAMPLE", 
+    #       expiration: Time.parse("2011-07-15T23:28:33.359Z"), 
+    #       secret_access_key: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYzEXAMPLEKEY", 
+    #       session_token: "AQoEXAMPLEH4aoAH0gNCAPyJxz4BlCFFxWNE1OPTgk5TthT+FvwqnKwRcOIfrRh3c/LTo6UDdyJwOOvEVPvLXCrrrUtdnniCEXAMPLE/IvU1dYUg2RVAJBanLiHb4IgRmpRV3zrkuWJOgQs8IZZaIv2BXIa2R4OlgkBN9bkUDNCJiBeb/AXlzBBko7b15fjrBs2+cTQtpZ3CYWFXG8C5zqx37wnOE49mRl/+OtkIKGO7fAE", 
+    #     }, 
+    #     scoped_policies_count: 1, 
+    #     session_info: {
+    #       arn: "arn:aws:sts::123456789012:assumed-role/example-role/example-session", 
+    #       scoped_session_id: "AROAEXAMPLEID:example-session", 
+    #     }, 
+    #     source_identity: "example-source-identity", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_scoped_credentials({
+    #     policy: "sessionPolicyDocumentType",
+    #     duration_seconds: 1,
+    #     minimum_session_token_size: 1,
+    #     scoped_session_description: "scopedSessionDescriptionType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.credentials.access_key_id #=> String
+    #   resp.credentials.secret_access_key #=> String
+    #   resp.credentials.session_token #=> String
+    #   resp.credentials.expiration #=> Time
+    #   resp.session_info.scoped_session_id #=> String
+    #   resp.session_info.arn #=> String
+    #   resp.session_token_utilization #=> Integer
+    #   resp.session_token_size #=> Integer
+    #   resp.scoped_policies_count #=> Integer
+    #   resp.source_identity #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetScopedCredentials AWS API Documentation
+    #
+    # @overload get_scoped_credentials(params = {})
+    # @param [Hash] params ({})
+    def get_scoped_credentials(params = {}, options = {})
+      req = build_request(:get_scoped_credentials, params)
+      req.send_request(options)
+    end
+
     # Returns a set of temporary credentials for an Amazon Web Services
     # account or IAM user. The credentials consist of an access key ID, a
     # secret access key, and a security token. Typically, you use
@@ -2596,8 +2645,9 @@ module Aws::STS
     # * You cannot call any IAM API operations unless MFA authentication
     #   information is included in the request.
     #
-    # * You cannot call any STS API *except* `AssumeRole` or
-    #   `GetCallerIdentity`.
+    # * You cannot call any STS API *except* `AssumeRole`,
+    #   `GetCallerIdentity`, `GetScopedCredentials`, `GetWebIdentityToken`,
+    #   or `GetDelegatedAccessToken`.
     #
     # The credentials that `GetSessionToken` returns are based on
     # permissions associated with the IAM user whose credentials were used
@@ -2721,11 +2771,18 @@ module Aws::STS
     end
 
     # Returns a signed JSON Web Token (JWT) that represents the calling
-    # Amazon Web Services identity. The returned JWT can be used to
-    # authenticate with external services that support OIDC discovery. The
-    # token is signed by Amazon Web Services STS and can be publicly
-    # verified using the verification keys published at the issuer's JWKS
-    # endpoint.
+    # Amazon Web Services identity or, if you set `SubjectMode` to
+    # `OriginIdentity`, the human user or workload on whose behalf the
+    # calling session acts. The returned JWT can be used to authenticate
+    # with external services that support OIDC discovery. The token is
+    # signed by Amazon Web Services STS and can be publicly verified using
+    # the verification keys published at the issuer's JWKS endpoint.
+    #
+    # The `sub` (subject) claim contains the identity that `SubjectMode`
+    # selects. Whichever subject mode you use, the `principal_id` claim
+    # under the `https://sts.amazonaws.com/` namespace contains the ARN of
+    # the principal that requested the token, when that principal has an
+    # ARN. For a role session, this is the ARN of the role.
     #
     # <note markdown="1"> The `GetWebIdentityToken` API is not available on the STS Global
     # endpoint.
@@ -2752,6 +2809,64 @@ module Aws::STS
     #   (JWT). Valid values are RS256 (RSA with SHA-256) and ES384 (ECDSA
     #   using P-384 curve with SHA-384).
     #
+    # @option params [String] :scope
+    #   One or more OAuth 2.0 scope values to include in the JSON Web Token
+    #   (JWT). Amazon Web Services STS copies the value exactly as you send it
+    #   into the top-level `scope` claim of the token. If you don't specify
+    #   `Scope`, the token doesn't include a `scope` claim.
+    #
+    #   Separate multiple values with a single space, as defined in [RFC 6749,
+    #   section 3.3][1] on the IETF website. Don't begin or end `Scope` with
+    #   a space. Each scope value can contain printable ASCII characters
+    #   except spaces, double quotation marks (`"`), commas (`,`), and
+    #   backslashes (``).
+    #
+    #   You can't repeat a scope value. Scope values are case sensitive. This
+    #   means that `read` and `READ` are separate values.
+    #
+    #   You can specify `Scope` only when `SubjectMode` is `OriginIdentity`
+    #   and you request exactly one audience. To specify `Scope`, the calling
+    #   principal must have permission for the `sts:SetWebIdentityTokenScope`
+    #   action in addition to `sts:GetWebIdentityToken`. You can use the
+    #   multivalued `sts:IdentityTokenScope` condition key in a policy to
+    #   control which scope values a principal can request.
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc6749#section-3.3
+    #
+    # @option params [String] :subject_mode
+    #   Specifies which identity STS puts in the `sub` (subject) claim of the
+    #   JSON Web Token (JWT). Valid values are `AWSIdentity` and
+    #   `OriginIdentity`. If you don't specify a value, Amazon Web Services
+    #   STS uses `AWSIdentity`.
+    #
+    #   * `AWSIdentity` – The `sub` claim contains the ARN of the calling
+    #     Amazon Web Services principal.
+    #
+    #   * `OriginIdentity` – The `sub` claim contains the value of the
+    #     `aws:OriginIdentity/Subject` key in the trusted identity propagation
+    #     context of the calling session. For example, this can identify the
+    #     human user or workload on whose behalf the calling session acts.
+    #     Amazon Web Services STS also adds a `subject_mode` claim to the
+    #     token.
+    #
+    #     To use `OriginIdentity`, the trusted identity propagation context of
+    #     the calling session must contain the `aws:OriginIdentity/Subject`
+    #     key and either the `aws:OriginIdentity/Issuer` key or the
+    #     `aws:OriginIdentity/FederatedProviderArn` key. If it doesn't, or if
+    #     the subject is blank, Amazon Web Services STS rejects the request
+    #     with a validation error.
+    #
+    #     Amazon Web Services STS denies the request if the subject begins
+    #     with the text `arn:`, in any combination of uppercase and lowercase
+    #     letters. Amazon Web Services STS also denies the request if the
+    #     subject begins or ends with a space, or contains a control, format,
+    #     or separator character other than a space.
+    #
+    #   You can use the `sts:SubjectMode` condition key in a policy to control
+    #   which subject modes a principal can request.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   An optional list of tags to include in the JSON Web Token (JWT). These
     #   tags are added as custom claims to the JWT and can be used by the
@@ -2768,6 +2883,8 @@ module Aws::STS
     #     audience: ["webIdentityTokenAudienceStringType"], # required
     #     duration_seconds: 1,
     #     signing_algorithm: "jwtAlgorithmType", # required
+    #     scope: "webIdentityTokenScopeType",
+    #     subject_mode: "AWSIdentity", # accepts AWSIdentity, OriginIdentity
     #     tags: [
     #       {
     #         key: "tagKeyType", # required
@@ -2808,7 +2925,7 @@ module Aws::STS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.270.0'
+      context[:gem_version] = '3.271.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

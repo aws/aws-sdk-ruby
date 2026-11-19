@@ -514,7 +514,9 @@ module Aws
                                  }
                                ],
                                ?master_user_authentication_type: ("password" | "iam-db-auth"),
+                               ?enable_vpc_networking: bool,
                                ?with_express_configuration: bool,
+                               ?enable_internet_access_gateway: bool,
                                ?associated_roles: Array[
                                  {
                                    role_arn: ::String,
@@ -2495,7 +2497,10 @@ module Aws
                                ?enable_limitless_database: bool,
                                ?ca_certificate_identifier: ::String,
                                ?master_user_authentication_type: ("password" | "iam-db-auth"),
-                               ?engine_lifecycle_support: ::String
+                               ?engine_lifecycle_support: ::String,
+                               ?enable_internet_access_gateway: bool,
+                               ?enable_vpc_networking: bool,
+                               ?db_subnet_group_name: ::String
                              ) -> _ModifyDBClusterResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDBClusterResponseSuccess
 

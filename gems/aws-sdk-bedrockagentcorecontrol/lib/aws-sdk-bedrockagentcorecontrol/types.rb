@@ -838,6 +838,25 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The configuration for an AWS Billing payment connector. Payments made
+    # through an AWS Billing payment connector are charged to the AWS
+    # account that owns the payment manager, and appear on that account's
+    # AWS bill as AWS Marketplace charges.
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Marketplace service-linked
+    #   role in the account that owns the payment manager. The service sets
+    #   this value when it creates the connector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/AwsBillingConnectorConfiguration AWS API Documentation
+    #
+    class AwsBillingConnectorConfiguration < Struct.new(
+      :iam_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] gateway_identifier
     #   The unique identifier of the gateway.
     #   @return [String]
@@ -2331,6 +2350,29 @@ module Aws::BedrockAgentCoreControl
     class ContentConfiguration < Struct.new(
       :type,
       :level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CPU configuration for capacity provider instances, including
+    # nested virtualization.
+    #
+    # @!attribute [rw] nested_virtualization
+    #   Specifies whether your agents can use hardware virtualization on
+    #   their instances. The following values are possible:
+    #
+    #   * `ENABLED` – Your agents can use hardware virtualization on their
+    #     instances. To use this value, choose the `LINUX_X86_64` operating
+    #     system and instance types that support nested virtualization.
+    #
+    #   * `DISABLED` – Your agents can't use hardware virtualization on
+    #     their instances. This is the default.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CpuOptions AWS API Documentation
+    #
+    class CpuOptions < Struct.new(
+      :nested_virtualization)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4632,6 +4674,12 @@ module Aws::BedrockAgentCoreControl
     #   The credential provider configurations for the payment connector.
     #   These configurations specify how the connector authenticates with
     #   the payment provider.
+    #
+    #   For an `AwsBilling` payment connector, omit this parameter or
+    #   specify an empty list. The service uses the AWS Marketplace
+    #   service-linked role in your account, which must exist before you
+    #   create the connector, and you must have permission to call
+    #   `iam:GetRole` on it.
     #   @return [Array<Types::CredentialsProviderConfiguration>]
     #
     # @!attribute [rw] provision_mode
@@ -5499,9 +5547,9 @@ module Aws::BedrockAgentCoreControl
       class Unknown < CredentialRotationConfig; end
     end
 
-    # The credential provider configuration for a payment connector.
-    # Specifies the payment provider type and its associated credential
-    # provider.
+    # The configuration for a payment connector. Specifies the payment
+    # provider type and either its associated credential provider or, for an
+    # AWS Billing payment connector, its billing configuration.
     #
     # @note CredentialsProviderConfiguration is a union - when making an API calls you must set exactly one of the members.
     #
@@ -5517,11 +5565,19 @@ module Aws::BedrockAgentCoreControl
     #   connector.
     #   @return [Types::PaymentCredentialProviderConfiguration]
     #
+    # @!attribute [rw] aws_billing
+    #   The configuration for an AWS Billing payment connector. The service
+    #   sets this configuration when it creates the connector and returns it
+    #   in responses. Don't specify it when you create an AWS Billing
+    #   payment connector.
+    #   @return [Types::AwsBillingConnectorConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CredentialsProviderConfiguration AWS API Documentation
     #
     class CredentialsProviderConfiguration < Struct.new(
       :coinbase_cdp,
       :stripe_privy,
+      :aws_billing,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -5529,6 +5585,7 @@ module Aws::BedrockAgentCoreControl
 
       class CoinbaseCdp < CredentialsProviderConfiguration; end
       class StripePrivy < CredentialsProviderConfiguration; end
+      class AwsBilling < CredentialsProviderConfiguration; end
       class Unknown < CredentialsProviderConfiguration; end
     end
 
@@ -14407,6 +14464,11 @@ module Aws::BedrockAgentCoreControl
     #   volumes, and network interfaces) that the capacity provider creates.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] cpu_options
+    #   The central processing unit (CPU) options for the instances that the
+    #   capacity provider launches.
+    #   @return [Types::CpuOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/LaunchParameters AWS API Documentation
     #
     class LaunchParameters < Struct.new(
@@ -14418,7 +14480,8 @@ module Aws::BedrockAgentCoreControl
       :capacity_reservation_specification,
       :ssh_key_name,
       :instance_profile_arn,
-      :propagated_tags)
+      :propagated_tags,
+      :cpu_options)
       SENSITIVE = []
       include Aws::Structure
     end

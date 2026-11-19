@@ -16,7 +16,7 @@ module Aws::PartnerCentralSelling
 
     class AccessDeniedException
       attr_accessor message: ::String
-      attr_accessor reason: ("INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE")
+      attr_accessor reason: ("INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE" | "SEARCH_OPPORTUNITIES_NOT_ENABLED" | "SEARCH_OPPORTUNITIES_DATA_NOT_ROUTED_TO_DDB" | "OPPORTUNITY_BULK_JOB_NOT_ENABLED")
       SENSITIVE: []
     end
 
@@ -29,6 +29,22 @@ module Aws::PartnerCentralSelling
       attr_accessor address: Types::Address
       attr_accessor duns: ::String
       SENSITIVE: [:company_name, :website_url, :aws_account_id, :duns]
+    end
+
+    class AccountCustomer
+      attr_accessor industry: ::String
+      attr_accessor company_name: ::String
+      attr_accessor website_url: ::String
+      attr_accessor country_code: ("US" | "AF" | "AX" | "AL" | "DZ" | "AS" | "AD" | "AO" | "AI" | "AQ" | "AG" | "AR" | "AM" | "AW" | "AU" | "AT" | "AZ" | "BS" | "BH" | "BD" | "BB" | "BY" | "BE" | "BZ" | "BJ" | "BM" | "BT" | "BO" | "BQ" | "BA" | "BW" | "BV" | "BR" | "IO" | "BN" | "BG" | "BF" | "BI" | "KH" | "CM" | "CA" | "CV" | "KY" | "CF" | "TD" | "CL" | "CN" | "CX" | "CC" | "CO" | "KM" | "CG" | "CK" | "CR" | "CI" | "HR" | "CU" | "CW" | "CY" | "CZ" | "CD" | "DK" | "DJ" | "DM" | "DO" | "EC" | "EG" | "SV" | "GQ" | "ER" | "EE" | "ET" | "FK" | "FO" | "FJ" | "FI" | "FR" | "GF" | "PF" | "TF" | "GA" | "GM" | "GE" | "DE" | "GH" | "GI" | "GR" | "GL" | "GD" | "GP" | "GU" | "GT" | "GG" | "GN" | "GW" | "GY" | "HT" | "HM" | "VA" | "HN" | "HK" | "HU" | "IS" | "IN" | "ID" | "IR" | "IQ" | "IE" | "IM" | "IL" | "IT" | "JM" | "JP" | "JE" | "JO" | "KZ" | "KE" | "KI" | "KR" | "KW" | "KG" | "LA" | "LV" | "LB" | "LS" | "LR" | "LY" | "LI" | "LT" | "LU" | "MO" | "MK" | "MG" | "MW" | "MY" | "MV" | "ML" | "MT" | "MH" | "MQ" | "MR" | "MU" | "YT" | "MX" | "FM" | "MD" | "MC" | "MN" | "ME" | "MS" | "MA" | "MZ" | "MM" | "NA" | "NR" | "NP" | "NL" | "AN" | "NC" | "NZ" | "NI" | "NE" | "NG" | "NU" | "NF" | "MP" | "NO" | "OM" | "PK" | "PW" | "PS" | "PA" | "PG" | "PY" | "PE" | "PH" | "PN" | "PL" | "PT" | "PR" | "QA" | "RE" | "RO" | "RU" | "RW" | "BL" | "SH" | "KN" | "LC" | "MF" | "PM" | "VC" | "WS" | "SM" | "ST" | "SA" | "SN" | "RS" | "SC" | "SL" | "SG" | "SX" | "SK" | "SI" | "SB" | "SO" | "ZA" | "GS" | "SS" | "ES" | "LK" | "SD" | "SR" | "SJ" | "SZ" | "SE" | "CH" | "SY" | "TW" | "TJ" | "TZ" | "TH" | "TL" | "TG" | "TK" | "TO" | "TT" | "TN" | "TR" | "TM" | "TC" | "TV" | "UG" | "UA" | "AE" | "GB" | "UM" | "UY" | "UZ" | "VU" | "VE" | "VN" | "VG" | "VI" | "WF" | "EH" | "YE" | "ZM" | "ZW")
+      SENSITIVE: [:company_name, :website_url, :country_code]
+    end
+
+    class AccountPlanningInvitationPayload
+      attr_accessor account_identifier: ::String
+      attr_accessor customer: Types::AccountCustomer
+      attr_accessor sender_contacts: ::Array[Types::SenderContact]
+      attr_accessor preferred_contact: Types::PreferredContactWindow
+      SENSITIVE: []
     end
 
     class AccountReceiver
@@ -63,6 +79,18 @@ module Aws::PartnerCentralSelling
       SENSITIVE: [:city, :postal_code, :state_or_region, :country_code]
     end
 
+    class AggregationRequest
+      attr_accessor group_by: ::Array[("ENRICHMENT_STATUS" | "AWS_INDUSTRY" | "SEGMENT" | "REGION" | "SOLUTION_CATEGORY" | "ACCOUNT_PLANNING_QUALIFICATION" | "PROGRAM_ELIGIBILITY" | "MARKETPLACE_ENGAGEMENT_SCORE" | "GEO" | "COUNTRY" | "SOLUTION_SCORE")]
+      SENSITIVE: []
+    end
+
+    class AggregationResult
+      attr_accessor group_by: ::Array[("ENRICHMENT_STATUS" | "AWS_INDUSTRY" | "SEGMENT" | "REGION" | "SOLUTION_CATEGORY" | "ACCOUNT_PLANNING_QUALIFICATION" | "PROGRAM_ELIGIBILITY" | "MARKETPLACE_ENGAGEMENT_SCORE" | "GEO" | "COUNTRY" | "SOLUTION_SCORE")]
+      attr_accessor buckets: ::Array[Types::Bucket]
+      attr_accessor other_count: ::Integer
+      SENSITIVE: []
+    end
+
     class AssignOpportunityRequest
       attr_accessor catalog: ::String
       attr_accessor identifier: ::String
@@ -84,6 +112,59 @@ module Aws::PartnerCentralSelling
       attr_accessor opportunity_identifier: ::String
       attr_accessor related_entity_type: ("Solutions" | "AwsProducts" | "AwsMarketplaceOffers" | "AwsMarketplaceOfferSets" | "AwsMarketplaceSolutions" | "AwsMarketplaceProducts")
       attr_accessor related_entity_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class AwsEnrichment
+      attr_accessor customer: Types::AwsEnrichmentCustomer
+      attr_accessor insights: Types::AwsEnrichmentInsights
+      SENSITIVE: []
+    end
+
+    class AwsEnrichmentCustomer
+      attr_accessor account_name: ::String
+      attr_accessor industry: ::String
+      attr_accessor sub_industry: ::String
+      attr_accessor sector: ::String
+      attr_accessor segment: ::String
+      attr_accessor company_size: ::String
+      attr_accessor region: ::String
+      attr_accessor sub_region: ::String
+      attr_accessor geo: ::String
+      attr_accessor country: ::String
+      attr_accessor customer_account_planning_qualification: ::String
+      attr_accessor eligible_programs: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AwsEnrichmentCustomerSummary
+      attr_accessor industry: ::String
+      attr_accessor account_planning_qualification: ::String
+      attr_accessor eligible_programs: ::Array[::String]
+      attr_accessor geo: ::String
+      attr_accessor country: ::String
+      attr_accessor segment: ::String
+      SENSITIVE: []
+    end
+
+    class AwsEnrichmentInsights
+      attr_accessor marketplace_engagement_score: ::String
+      attr_accessor solution_category: ::String
+      attr_accessor solution_score: ::String
+      attr_accessor solution_sub_category: ::String
+      SENSITIVE: []
+    end
+
+    class AwsEnrichmentInsightsSummary
+      attr_accessor marketplace_engagement_score: ::String
+      attr_accessor solution_category: ::String
+      attr_accessor solution_score: ::String
+      SENSITIVE: []
+    end
+
+    class AwsEnrichmentSummary
+      attr_accessor customer: Types::AwsEnrichmentCustomerSummary
+      attr_accessor insights: Types::AwsEnrichmentInsightsSummary
       SENSITIVE: []
     end
 
@@ -137,6 +218,7 @@ module Aws::PartnerCentralSelling
       attr_accessor customer: Types::AwsOpportunityCustomer
       attr_accessor project: Types::AwsOpportunityProject
       attr_accessor cosell_motion: ::String
+      attr_accessor cosell_motion_reason: ::String
       attr_accessor software_revenue: Types::AwsSoftwareRevenue
       SENSITIVE: []
     end
@@ -197,6 +279,34 @@ module Aws::PartnerCentralSelling
       SENSITIVE: [:email, :first_name, :last_name]
     end
 
+    class BestOutreachWindow
+      attr_accessor day: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")
+      attr_accessor start_time_utc: ::String
+      attr_accessor end_time_utc: ::String
+      SENSITIVE: []
+    end
+
+    class Bucket
+      attr_accessor values: ::Array[::String]
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
+    class BulkJobResult
+      attr_accessor request_id: ::String
+      attr_accessor status: ("SUCCEEDED" | "FAILED")
+      attr_accessor resource_identifier: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelRecommendation
+      attr_accessor recommended_channel: ::String
+      attr_accessor best_outreach_windows: ::Array[Types::BestOutreachWindow]
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -211,11 +321,30 @@ module Aws::PartnerCentralSelling
       SENSITIVE: [:email, :first_name, :last_name, :business_title, :phone]
     end
 
+    class CreateCustomerAccountRequest
+      attr_accessor catalog: ::String
+      attr_accessor account: Types::CustomerAccountData
+      attr_accessor partner_account_identifier: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCustomerAccountResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("PENDING" | "ENRICHED" | "NO_MATCH_FOUND" | "ACTION_REQUIRED")
+      attr_accessor catalog: ::String
+      attr_accessor partner_account_identifier: ::String
+      attr_accessor created_date: ::Time
+      SENSITIVE: []
+    end
+
     class CreateEngagementContextRequest
       attr_accessor catalog: ::String
       attr_accessor engagement_identifier: ::String
       attr_accessor client_token: ::String
-      attr_accessor type: ("CustomerProject" | "Lead" | "ProspectingResult")
+      attr_accessor type: ("CustomerProject" | "Lead" | "ProspectingResult" | "CustomerAccount")
       attr_accessor payload: Types::EngagementContextPayload
       SENSITIVE: []
     end
@@ -328,6 +457,70 @@ module Aws::PartnerCentralSelling
       SENSITIVE: []
     end
 
+    class CustomerAccountBulkJobFilter
+      attr_accessor identifier: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class CustomerAccountBulkJobSummary
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor file_name: ::String
+      attr_accessor total_records: ::Integer
+      attr_accessor processed_records: ::Integer
+      attr_accessor success_count: ::Integer
+      attr_accessor failure_count: ::Integer
+      attr_accessor deleted_count: ::Integer
+      attr_accessor failure_reason: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor completed_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CustomerAccountContext
+      attr_accessor account_identifier: ::String
+      attr_accessor customer: Types::AccountCustomer
+      SENSITIVE: []
+    end
+
+    class CustomerAccountData
+      attr_accessor company_name: ::String
+      attr_accessor website_url: ::String
+      attr_accessor duns: ::String
+      attr_accessor address: Types::Address
+      attr_accessor industry: ::String
+      attr_accessor other_industry: ::String
+      attr_accessor domain: ::String
+      attr_accessor parent_company_name: ::String
+      SENSITIVE: [:company_name, :website_url, :duns, :domain, :parent_company_name]
+    end
+
+    class CustomerAccountDetailsSummary
+      attr_accessor company_name: ::String
+      SENSITIVE: [:company_name]
+    end
+
+    class CustomerAccountSort
+      attr_accessor sort_by: ("COMPANY_NAME" | "CREATED_DATE" | "LAST_MODIFIED_DATE" | "MARKETPLACE_ENGAGEMENT_SCORE" | "SOLUTION_SCORE")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class CustomerAccountSummary
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor catalog: ::String
+      attr_accessor enrichment_status: ("PENDING" | "ENRICHED" | "NO_MATCH_FOUND" | "ACTION_REQUIRED")
+      attr_accessor partner_account_identifier: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor customer_account: Types::CustomerAccountDetailsSummary
+      attr_accessor aws_enrichment: Types::AwsEnrichmentSummary
+      SENSITIVE: []
+    end
+
     class CustomerProjectsContext
       attr_accessor customer: Types::EngagementCustomer
       attr_accessor project: Types::EngagementCustomerProjectDetails
@@ -337,6 +530,15 @@ module Aws::PartnerCentralSelling
     class CustomerSummary
       attr_accessor account: Types::AccountSummary
       SENSITIVE: []
+    end
+
+    class DeleteCustomerAccountRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCustomerAccountResponse < Aws::EmptyStructure
     end
 
     class DeleteResourceSnapshotJobRequest
@@ -355,7 +557,7 @@ module Aws::PartnerCentralSelling
 
     class EngagementContextDetails
       attr_accessor id: ::String
-      attr_accessor type: ("CustomerProject" | "Lead" | "ProspectingResult")
+      attr_accessor type: ("CustomerProject" | "Lead" | "ProspectingResult" | "CustomerAccount")
       attr_accessor payload: Types::EngagementContextPayload
       SENSITIVE: []
     end
@@ -364,6 +566,7 @@ module Aws::PartnerCentralSelling
       attr_accessor customer_project: Types::CustomerProjectsContext
       attr_accessor lead: Types::LeadContext
       attr_accessor prospecting_result: Types::ProspectingResult
+      attr_accessor customer_account: Types::CustomerAccountContext
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -372,6 +575,8 @@ module Aws::PartnerCentralSelling
       class Lead < EngagementContextPayload
       end
       class ProspectingResult < EngagementContextPayload
+      end
+      class CustomerAccount < EngagementContextPayload
       end
       class Unknown < EngagementContextPayload
       end
@@ -392,9 +597,27 @@ module Aws::PartnerCentralSelling
       SENSITIVE: [:business_problem]
     end
 
+    class EngagementGroupSort
+      attr_accessor sort_by: ("Count" | "UpdatedAt")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class EngagementGroupSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor catalog: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor count: ::Integer
+      attr_accessor readiness_level: ("SalesReady" | "MarketingReady" | "LowPotential")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class EngagementInvitationSummary
       attr_accessor arn: ::String
-      attr_accessor payload_type: ("OpportunityInvitation" | "LeadInvitation")
+      attr_accessor payload_type: ("OpportunityInvitation" | "LeadInvitation" | "AccountPlanningInvitation")
       attr_accessor id: ::String
       attr_accessor engagement_id: ::String
       attr_accessor engagement_title: ::String
@@ -440,6 +663,66 @@ module Aws::PartnerCentralSelling
       SENSITIVE: [:created_by]
     end
 
+    class EngagementSearchFilter
+      attr_accessor and_all_filters: ::Array[Types::EngagementSearchFilter]
+      attr_accessor or_all_filters: ::Array[Types::EngagementSearchFilter]
+      attr_accessor not_filter: Types::EngagementSearchFilter
+      attr_accessor equals_to: Types::EngagementSearchPredicate
+      attr_accessor contains_any: Types::EngagementSearchPredicate
+      attr_accessor contains_all: Types::EngagementSearchPredicate
+      attr_accessor greater_than: Types::EngagementSearchPredicate
+      attr_accessor greater_than_or_equals: Types::EngagementSearchPredicate
+      attr_accessor less_than: Types::EngagementSearchPredicate
+      attr_accessor less_than_or_equals: Types::EngagementSearchPredicate
+      SENSITIVE: []
+    end
+
+    class EngagementSearchFilterValue
+      attr_accessor string_value: ::String
+      attr_accessor string_list_value: ::Array[::String]
+      attr_accessor long_value: ::Integer
+      attr_accessor date_value: ::Time
+      attr_accessor unknown: untyped
+      SENSITIVE: [:string_value, :string_list_value]
+
+      class StringValue < EngagementSearchFilterValue
+      end
+      class StringListValue < EngagementSearchFilterValue
+      end
+      class LongValue < EngagementSearchFilterValue
+      end
+      class DateValue < EngagementSearchFilterValue
+      end
+      class Unknown < EngagementSearchFilterValue
+      end
+    end
+
+    class EngagementSearchPredicate
+      attr_accessor key: ("EngagementId" | "Title" | "PartnerId" | "CreatedAt" | "LastModifiedAt" | "MemberCount" | "ProspectingCustomerGeo" | "ProspectingCustomerRegion" | "ProspectingCustomerIndustry" | "ProspectingCustomerSegment" | "ProspectingCustomerCountry" | "ProspectingCustomerCompanySize" | "ProspectingInsightsMarketplaceEngagementScore" | "ProspectingInsightsSolutionCategory" | "ProspectingInsightsSolutionSubCategory" | "LeadQualificationStatus" | "LeadReadinessScore" | "LeadCustomerIndustry" | "LeadCustomerCountryCode" | "LeadCustomerAwsMaturity" | "LeadCustomerMarketSegment" | "LeadInteractionsSourceType" | "LeadCustomerCompanyName" | "LeadInteractionsContactFirstName" | "LeadInteractionsContactLastName" | "LeadInteractionsUsecase" | "LeadInteractionsSourceName" | "LeadInteractionsContactBusinessTitle" | "ContextType")
+      attr_accessor value: Types::EngagementSearchFilterValue
+      SENSITIVE: []
+    end
+
+    class EngagementSearchSort
+      attr_accessor sort_by: ("EngagementId" | "Title" | "PartnerId" | "CreatedAt" | "LastModifiedAt" | "MemberCount" | "ProspectingCustomerGeo" | "ProspectingCustomerRegion" | "ProspectingCustomerIndustry" | "ProspectingCustomerSegment" | "ProspectingCustomerCountry" | "ProspectingCustomerCompanySize" | "ProspectingInsightsMarketplaceEngagementScore" | "ProspectingInsightsSolutionCategory" | "ProspectingInsightsSolutionSubCategory" | "LeadQualificationStatus" | "LeadReadinessScore" | "LeadCustomerIndustry" | "LeadCustomerCountryCode" | "LeadCustomerAwsMaturity" | "LeadCustomerMarketSegment" | "LeadCustomerCompanyName" | "LeadInteractionsContactFirstName" | "LeadInteractionsContactLastName" | "LeadInteractionsUsecase" | "LeadInteractionsContactBusinessTitle")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class EngagementSearchSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor member_count: ::Integer
+      attr_accessor modified_at: ::Time
+      attr_accessor modified_by: ::String
+      attr_accessor contexts: ::Array[Types::EngagementContextDetails]
+      SENSITIVE: [:created_by, :modified_by]
+    end
+
     class EngagementSort
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
       attr_accessor sort_by: ("CreatedDate")
@@ -455,7 +738,7 @@ module Aws::PartnerCentralSelling
       attr_accessor member_count: ::Integer
       attr_accessor modified_at: ::Time
       attr_accessor modified_by: ::String
-      attr_accessor context_types: ::Array[("CustomerProject" | "Lead" | "ProspectingResult")]
+      attr_accessor context_types: ::Array[("CustomerProject" | "Lead" | "ProspectingResult" | "CustomerAccount")]
       SENSITIVE: [:created_by, :modified_by]
     end
 
@@ -480,6 +763,46 @@ module Aws::PartnerCentralSelling
       SENSITIVE: [:amount, :currency_code]
     end
 
+    class Filter
+      attr_accessor and_all_filters: ::Array[Types::Filter]
+      attr_accessor or_all_filters: ::Array[Types::Filter]
+      attr_accessor not_filter: Types::Filter
+      attr_accessor equals_to: Types::FilterCondition
+      attr_accessor contains_any: Types::FilterCondition
+      attr_accessor contains_all: Types::FilterCondition
+      attr_accessor greater_than: Types::FilterCondition
+      attr_accessor greater_than_or_equals: Types::FilterCondition
+      attr_accessor less_than: Types::FilterCondition
+      attr_accessor less_than_or_equals: Types::FilterCondition
+      SENSITIVE: []
+    end
+
+    class FilterCondition
+      attr_accessor key: ("ENRICHMENT_STATUS" | "COMPANY_NAME" | "AWS_INDUSTRY" | "ACCOUNT_PLANNING_QUALIFICATION" | "PROGRAM_ELIGIBILITY" | "IMPORT_ID" | "CREATED_DATE" | "LAST_MODIFIED_DATE" | "GEO" | "COUNTRY" | "SEGMENT" | "SOLUTION_CATEGORY" | "MARKETPLACE_ENGAGEMENT_SCORE" | "SOLUTION_SCORE")
+      attr_accessor value: Types::FilterValue
+      SENSITIVE: []
+    end
+
+    class FilterValue
+      attr_accessor string_value: ::String
+      attr_accessor string_list_value: ::Array[::String]
+      attr_accessor long_value: ::Integer
+      attr_accessor date_value: ::Time
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class StringValue < FilterValue
+      end
+      class StringListValue < FilterValue
+      end
+      class LongValue < FilterValue
+      end
+      class DateValue < FilterValue
+      end
+      class Unknown < FilterValue
+      end
+    end
+
     class GetAwsOpportunitySummaryRequest
       attr_accessor catalog: ::String
       attr_accessor related_opportunity_identifier: ::String
@@ -499,8 +822,85 @@ module Aws::PartnerCentralSelling
       attr_accessor customer: Types::AwsOpportunityCustomer
       attr_accessor project: Types::AwsOpportunityProject
       attr_accessor cosell_motion: ::String
+      attr_accessor cosell_motion_reason: ::String
       attr_accessor software_revenue: Types::AwsSoftwareRevenue
       attr_accessor catalog: ::String
+      SENSITIVE: []
+    end
+
+    class GetCustomerAccountBulkJobReportUrlRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      attr_accessor report_type: ("FAILED_RECORDS" | "ALL_RECORDS")
+      SENSITIVE: []
+    end
+
+    class GetCustomerAccountBulkJobReportUrlResponse
+      attr_accessor report_status: ("NOT_STARTED" | "IN_PROGRESS" | "AVAILABLE" | "FAILED" | "EXPIRED")
+      attr_accessor report_type: ("FAILED_RECORDS" | "ALL_RECORDS")
+      attr_accessor url: ::String
+      attr_accessor expires_at: ::Time
+      attr_accessor failure_reason: ::String
+      SENSITIVE: [:url]
+    end
+
+    class GetCustomerAccountBulkJobRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetCustomerAccountBulkJobResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor file_name: ::String
+      attr_accessor total_records: ::Integer
+      attr_accessor processed_records: ::Integer
+      attr_accessor success_count: ::Integer
+      attr_accessor failure_count: ::Integer
+      attr_accessor deleted_count: ::Integer
+      attr_accessor failure_reason: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor completed_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetCustomerAccountRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetCustomerAccountResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor catalog: ::String
+      attr_accessor enrichment_status: ("PENDING" | "ENRICHED" | "NO_MATCH_FOUND" | "ACTION_REQUIRED")
+      attr_accessor partner_account_identifier: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor issues: ::Array[Types::Issue]
+      attr_accessor aws_enrichment: Types::AwsEnrichment
+      attr_accessor reason_code: ("DUPLICATE_CUSTOMER_MATCH" | "PROCESSING_ERROR")
+      attr_accessor message: ::String
+      attr_accessor existing_customer_account_arn: ::String
+      attr_accessor account: Types::CustomerAccountData
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class GetCustomerAccountStatisticsRequest
+      attr_accessor catalog: ::String
+      attr_accessor filter: Types::Filter
+      attr_accessor aggregations: ::Array[Types::AggregationRequest]
+      attr_accessor include_missing: bool
+      SENSITIVE: []
+    end
+
+    class GetCustomerAccountStatisticsResponse
+      attr_accessor total_count: ::Integer
+      attr_accessor aggregations: ::Array[Types::AggregationResult]
       SENSITIVE: []
     end
 
@@ -512,7 +912,7 @@ module Aws::PartnerCentralSelling
 
     class GetEngagementInvitationResponse
       attr_accessor arn: ::String
-      attr_accessor payload_type: ("OpportunityInvitation" | "LeadInvitation")
+      attr_accessor payload_type: ("OpportunityInvitation" | "LeadInvitation" | "AccountPlanningInvitation")
       attr_accessor id: ::String
       attr_accessor engagement_id: ::String
       attr_accessor engagement_title: ::String
@@ -550,6 +950,24 @@ module Aws::PartnerCentralSelling
       attr_accessor modified_by: ::String
       attr_accessor contexts: ::Array[Types::EngagementContextDetails]
       SENSITIVE: [:created_by, :modified_by]
+    end
+
+    class GetOpportunityBulkJobReportUrlRequest
+      attr_accessor catalog: ::String
+      attr_accessor job_id: ::String
+      attr_accessor report_format: ("CSV")
+      attr_accessor report_type: ("FAILED_RECORDS" | "ALL_RECORDS")
+      SENSITIVE: []
+    end
+
+    class GetOpportunityBulkJobReportUrlResponse
+      attr_accessor report_status: ("NOT_STARTED" | "IN_PROGRESS" | "AVAILABLE" | "FAILED" | "EXPIRED")
+      attr_accessor report_type: ("FAILED_RECORDS" | "ALL_RECORDS")
+      attr_accessor report_format: ("CSV")
+      attr_accessor url: ::String
+      attr_accessor expires_at: ::Time
+      attr_accessor failure_reason: ::String
+      SENSITIVE: [:url]
     end
 
     class GetOpportunityRequest
@@ -670,6 +1088,13 @@ module Aws::PartnerCentralSelling
       SENSITIVE: []
     end
 
+    class Issue
+      attr_accessor severity: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class LastModifiedDate
       attr_accessor after_last_modified_date: ::Time
       attr_accessor before_last_modified_date: ::Time
@@ -713,6 +1138,7 @@ module Aws::PartnerCentralSelling
 
     class LeadInsights
       attr_accessor lead_readiness_score: ::String
+      attr_accessor channel_recommendation: Types::ChannelRecommendation
       SENSITIVE: []
     end
 
@@ -784,6 +1210,35 @@ module Aws::PartnerCentralSelling
       SENSITIVE: [:next_steps]
     end
 
+    class ListCustomerAccountBulkJobResultsRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      attr_accessor status: ("SUCCEEDED" | "FAILED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomerAccountBulkJobResultsResponse
+      attr_accessor results: ::Array[Types::BulkJobResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomerAccountBulkJobsRequest
+      attr_accessor catalog: ::String
+      attr_accessor filter: Types::CustomerAccountBulkJobFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomerAccountBulkJobsResponse
+      attr_accessor items: ::Array[Types::CustomerAccountBulkJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListEngagementByAcceptingInvitationTaskSummary
       attr_accessor task_id: ::String
       attr_accessor task_arn: ::String
@@ -847,12 +1302,28 @@ module Aws::PartnerCentralSelling
       SENSITIVE: []
     end
 
+    class ListEngagementGroupsRequest
+      attr_accessor catalog: ::String
+      attr_accessor readiness_level: ("SalesReady" | "MarketingReady" | "LowPotential")
+      attr_accessor sort: Types::EngagementGroupSort
+      attr_accessor engagement_group_identifiers: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEngagementGroupsResponse
+      attr_accessor engagement_group_summaries: ::Array[Types::EngagementGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListEngagementInvitationsRequest
       attr_accessor catalog: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       attr_accessor sort: Types::OpportunityEngagementInvitationSort
-      attr_accessor payload_type: ::Array[("OpportunityInvitation" | "LeadInvitation")]
+      attr_accessor payload_type: ::Array[("OpportunityInvitation" | "LeadInvitation" | "AccountPlanningInvitation")]
       attr_accessor participant_type: ("SENDER" | "RECEIVER")
       attr_accessor status: ::Array[("ACCEPTED" | "PENDING" | "REJECTED" | "EXPIRED")]
       attr_accessor engagement_identifier: ::Array[::String]
@@ -901,8 +1372,8 @@ module Aws::PartnerCentralSelling
       attr_accessor catalog: ::String
       attr_accessor created_by: ::Array[::String]
       attr_accessor exclude_created_by: ::Array[::String]
-      attr_accessor context_types: ::Array[("CustomerProject" | "Lead" | "ProspectingResult")]
-      attr_accessor exclude_context_types: ::Array[("CustomerProject" | "Lead" | "ProspectingResult")]
+      attr_accessor context_types: ::Array[("CustomerProject" | "Lead" | "ProspectingResult" | "CustomerAccount")]
+      attr_accessor exclude_context_types: ::Array[("CustomerProject" | "Lead" | "ProspectingResult" | "CustomerAccount")]
       attr_accessor sort: Types::EngagementSort
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -933,6 +1404,36 @@ module Aws::PartnerCentralSelling
 
     class ListOpportunitiesResponse
       attr_accessor opportunity_summaries: ::Array[Types::OpportunitySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOpportunityBulkJobResultsRequest
+      attr_accessor catalog: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor job_id: ::String
+      attr_accessor status: ("SUCCEEDED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ListOpportunityBulkJobResultsResponse
+      attr_accessor results: ::Array[Types::BulkJobResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOpportunityBulkJobsRequest
+      attr_accessor catalog: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor job_id: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ListOpportunityBulkJobsResponse
+      attr_accessor opportunity_bulk_job_summaries: ::Array[Types::OpportunityBulkJobSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1077,6 +1578,22 @@ module Aws::PartnerCentralSelling
       SENSITIVE: []
     end
 
+    class OpportunityBulkJobSummary
+      attr_accessor job_id: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor total_records: ::Integer
+      attr_accessor processed_records: ::Integer
+      attr_accessor success_count: ::Integer
+      attr_accessor failure_count: ::Integer
+      attr_accessor created_at: ::Time
+      attr_accessor started_at: ::Time
+      attr_accessor completed_at: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor file_name: ::String
+      attr_accessor operation_type: ("BULK_CREATE" | "BULK_UPDATE")
+      SENSITIVE: []
+    end
+
     class OpportunityEngagementInvitationSort
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
       attr_accessor sort_by: ("InvitationDate")
@@ -1088,6 +1605,7 @@ module Aws::PartnerCentralSelling
       attr_accessor receiver_responsibilities: ::Array[("Distributor" | "Reseller" | "Hardware Partner" | "Managed Service Provider" | "Software Partner" | "Services Partner" | "Training Partner" | "Co-Sell Facilitator" | "Facilitator")]
       attr_accessor customer: Types::EngagementCustomer
       attr_accessor project: Types::ProjectDetails
+      attr_accessor opportunity_type: ("Net New Business" | "Flat Renewal" | "Expansion")
       SENSITIVE: []
     end
 
@@ -1095,6 +1613,143 @@ module Aws::PartnerCentralSelling
       attr_accessor score: ::Integer
       attr_accessor trend: ::String
       SENSITIVE: []
+    end
+
+    class OpportunitySearchAccount
+      attr_accessor company_name: ::String
+      attr_accessor industry: ("Aerospace" | "Agriculture" | "Automotive" | "Computers and Electronics" | "Consumer Goods" | "Education" | "Energy - Oil and Gas" | "Energy - Power and Utilities" | "Financial Services" | "Gaming" | "Government" | "Healthcare" | "Hospitality" | "Life Sciences" | "Manufacturing" | "Marketing and Advertising" | "Media and Entertainment" | "Mining" | "Non-Profit Organization" | "Professional Services" | "Real Estate and Construction" | "Retail" | "Software and Internet" | "Telecommunications" | "Transportation and Logistics" | "Travel" | "Wholesale and Distribution" | "Other")
+      attr_accessor aws_account_id: ::String
+      attr_accessor address: Types::OpportunitySearchAddress
+      SENSITIVE: [:company_name, :aws_account_id]
+    end
+
+    class OpportunitySearchAddress
+      attr_accessor country_code: ("US" | "AF" | "AX" | "AL" | "DZ" | "AS" | "AD" | "AO" | "AI" | "AQ" | "AG" | "AR" | "AM" | "AW" | "AU" | "AT" | "AZ" | "BS" | "BH" | "BD" | "BB" | "BY" | "BE" | "BZ" | "BJ" | "BM" | "BT" | "BO" | "BQ" | "BA" | "BW" | "BV" | "BR" | "IO" | "BN" | "BG" | "BF" | "BI" | "KH" | "CM" | "CA" | "CV" | "KY" | "CF" | "TD" | "CL" | "CN" | "CX" | "CC" | "CO" | "KM" | "CG" | "CK" | "CR" | "CI" | "HR" | "CU" | "CW" | "CY" | "CZ" | "CD" | "DK" | "DJ" | "DM" | "DO" | "EC" | "EG" | "SV" | "GQ" | "ER" | "EE" | "ET" | "FK" | "FO" | "FJ" | "FI" | "FR" | "GF" | "PF" | "TF" | "GA" | "GM" | "GE" | "DE" | "GH" | "GI" | "GR" | "GL" | "GD" | "GP" | "GU" | "GT" | "GG" | "GN" | "GW" | "GY" | "HT" | "HM" | "VA" | "HN" | "HK" | "HU" | "IS" | "IN" | "ID" | "IR" | "IQ" | "IE" | "IM" | "IL" | "IT" | "JM" | "JP" | "JE" | "JO" | "KZ" | "KE" | "KI" | "KR" | "KW" | "KG" | "LA" | "LV" | "LB" | "LS" | "LR" | "LY" | "LI" | "LT" | "LU" | "MO" | "MK" | "MG" | "MW" | "MY" | "MV" | "ML" | "MT" | "MH" | "MQ" | "MR" | "MU" | "YT" | "MX" | "FM" | "MD" | "MC" | "MN" | "ME" | "MS" | "MA" | "MZ" | "MM" | "NA" | "NR" | "NP" | "NL" | "AN" | "NC" | "NZ" | "NI" | "NE" | "NG" | "NU" | "NF" | "MP" | "NO" | "OM" | "PK" | "PW" | "PS" | "PA" | "PG" | "PY" | "PE" | "PH" | "PN" | "PL" | "PT" | "PR" | "QA" | "RE" | "RO" | "RU" | "RW" | "BL" | "SH" | "KN" | "LC" | "MF" | "PM" | "VC" | "WS" | "SM" | "ST" | "SA" | "SN" | "RS" | "SC" | "SL" | "SG" | "SX" | "SK" | "SI" | "SB" | "SO" | "ZA" | "GS" | "SS" | "ES" | "LK" | "SD" | "SR" | "SJ" | "SZ" | "SE" | "CH" | "SY" | "TW" | "TJ" | "TZ" | "TH" | "TL" | "TG" | "TK" | "TO" | "TT" | "TN" | "TR" | "TM" | "TC" | "TV" | "UG" | "UA" | "AE" | "GB" | "UM" | "UY" | "UZ" | "VU" | "VE" | "VN" | "VG" | "VI" | "WF" | "EH" | "YE" | "ZM" | "ZW")
+      SENSITIVE: [:country_code]
+    end
+
+    class OpportunitySearchAwsSummary
+      attr_accessor origin: ("AWS Referral" | "Partner Referral")
+      attr_accessor cosell_motion: ::String
+      attr_accessor insights: Types::OpportunitySearchInsights
+      SENSITIVE: [:cosell_motion]
+    end
+
+    class OpportunitySearchCustomer
+      attr_accessor account: Types::OpportunitySearchAccount
+      SENSITIVE: []
+    end
+
+    class OpportunitySearchExpectedCustomerSpend
+      attr_accessor amount: ::String
+      attr_accessor currency_code: ("USD" | "EUR" | "GBP" | "AUD" | "CAD" | "CNY" | "NZD" | "INR" | "JPY" | "CHF" | "SEK" | "AED" | "AFN" | "ALL" | "AMD" | "ANG" | "AOA" | "ARS" | "AWG" | "AZN" | "BAM" | "BBD" | "BDT" | "BGN" | "BHD" | "BIF" | "BMD" | "BND" | "BOB" | "BOV" | "BRL" | "BSD" | "BTN" | "BWP" | "BYN" | "BZD" | "CDF" | "CHE" | "CHW" | "CLF" | "CLP" | "COP" | "COU" | "CRC" | "CUC" | "CUP" | "CVE" | "CZK" | "DJF" | "DKK" | "DOP" | "DZD" | "EGP" | "ERN" | "ETB" | "FJD" | "FKP" | "GEL" | "GHS" | "GIP" | "GMD" | "GNF" | "GTQ" | "GYD" | "HKD" | "HNL" | "HRK" | "HTG" | "HUF" | "IDR" | "ILS" | "IQD" | "IRR" | "ISK" | "JMD" | "JOD" | "KES" | "KGS" | "KHR" | "KMF" | "KPW" | "KRW" | "KWD" | "KYD" | "KZT" | "LAK" | "LBP" | "LKR" | "LRD" | "LSL" | "LYD" | "MAD" | "MDL" | "MGA" | "MKD" | "MMK" | "MNT" | "MOP" | "MRU" | "MUR" | "MVR" | "MWK" | "MXN" | "MXV" | "MYR" | "MZN" | "NAD" | "NGN" | "NIO" | "NOK" | "NPR" | "OMR" | "PAB" | "PEN" | "PGK" | "PHP" | "PKR" | "PLN" | "PYG" | "QAR" | "RON" | "RSD" | "RUB" | "RWF" | "SAR" | "SBD" | "SCR" | "SDG" | "SGD" | "SHP" | "SLL" | "SOS" | "SRD" | "SSP" | "STN" | "SVC" | "SYP" | "SZL" | "THB" | "TJS" | "TMT" | "TND" | "TOP" | "TRY" | "TTD" | "TWD" | "TZS" | "UAH" | "UGX" | "USN" | "UYI" | "UYU" | "UZS" | "VEF" | "VND" | "VUV" | "WST" | "XAF" | "XCD" | "XDR" | "XOF" | "XPF" | "XSU" | "XUA" | "YER" | "ZAR" | "ZMW" | "ZWL")
+      SENSITIVE: [:amount, :currency_code]
+    end
+
+    class OpportunitySearchFilter
+      attr_accessor and_all_filters: ::Array[Types::OpportunitySearchFilter]
+      attr_accessor or_all_filters: ::Array[Types::OpportunitySearchFilter]
+      attr_accessor not_filter: Types::OpportunitySearchFilter
+      attr_accessor equals_to: Types::OpportunitySearchPredicate
+      attr_accessor contains_any: Types::OpportunitySearchPredicate
+      attr_accessor contains_all: Types::OpportunitySearchPredicate
+      attr_accessor greater_than: Types::OpportunitySearchPredicate
+      attr_accessor greater_than_or_equals: Types::OpportunitySearchPredicate
+      attr_accessor less_than: Types::OpportunitySearchPredicate
+      attr_accessor less_than_or_equals: Types::OpportunitySearchPredicate
+      SENSITIVE: []
+    end
+
+    class OpportunitySearchFilterValue
+      attr_accessor string_value: ::String
+      attr_accessor string_list_value: ::Array[::String]
+      attr_accessor long_value: ::Integer
+      attr_accessor double_value: ::Float
+      attr_accessor date_value: ::Time
+      attr_accessor unknown: untyped
+      SENSITIVE: [:string_value, :string_list_value]
+
+      class StringValue < OpportunitySearchFilterValue
+      end
+      class StringListValue < OpportunitySearchFilterValue
+      end
+      class LongValue < OpportunitySearchFilterValue
+      end
+      class DoubleValue < OpportunitySearchFilterValue
+      end
+      class DateValue < OpportunitySearchFilterValue
+      end
+      class Unknown < OpportunitySearchFilterValue
+      end
+    end
+
+    class OpportunitySearchInsights
+      attr_accessor engagement_score: ("High" | "Medium" | "Low")
+      attr_accessor opportunity_quality: Types::OpportunitySearchOpportunityQuality
+      SENSITIVE: [:engagement_score]
+    end
+
+    class OpportunitySearchLifeCycle
+      attr_accessor review_status: ("Pending Submission" | "Submitted" | "In review" | "Approved" | "Rejected" | "Action Required")
+      attr_accessor stage: ("Prospect" | "Qualified" | "Technical Validation" | "Business Validation" | "Committed" | "Launched" | "Closed Lost")
+      attr_accessor next_steps: ::String
+      attr_accessor target_close_date: ::String
+      SENSITIVE: [:next_steps]
+    end
+
+    class OpportunitySearchOpportunityQuality
+      attr_accessor score: ::Integer
+      SENSITIVE: []
+    end
+
+    class OpportunitySearchPredicate
+      attr_accessor key: ("OpportunityId" | "Stage" | "ReviewStatus" | "CustomerCompanyName" | "LastModifiedDate" | "TargetCloseDate" | "CreatedDate" | "CountryCode" | "PartnerProjectTitle" | "OpportunityType" | "PartnerOpportunityIdentifier" | "Industry" | "AwsAccountId" | "ApnPrograms" | "Origin" | "Tags" | "NextStep" | "OfferId" | "OfferSetId" | "AwsMarketplaceSolution" | "CosellMotion" | "OpportunityOwner" | "EstimatedMrr" | "EngagementScore")
+      attr_accessor value: Types::OpportunitySearchFilterValue
+      SENSITIVE: []
+    end
+
+    class OpportunitySearchProject
+      attr_accessor title: ::String
+      attr_accessor apn_programs: ::Array[::String]
+      attr_accessor expected_customer_spend: ::Array[Types::OpportunitySearchExpectedCustomerSpend]
+      SENSITIVE: [:title]
+    end
+
+    class OpportunitySearchRelatedEntityIdentifiers
+      attr_accessor aws_marketplace_offers: ::Array[::String]
+      attr_accessor aws_marketplace_offer_sets: ::Array[::String]
+      attr_accessor aws_marketplace_solutions: ::Array[::String]
+      attr_accessor solutions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class OpportunitySearchSort
+      attr_accessor sort_by: ("OpportunityId" | "Stage" | "ReviewStatus" | "CustomerCompanyName" | "LastModifiedDate" | "TargetCloseDate" | "CreatedDate" | "CountryCode" | "PartnerProjectTitle" | "OpportunityType" | "PartnerOpportunityIdentifier" | "Industry" | "AwsAccountId" | "Origin" | "NextStep" | "CosellMotion" | "OpportunityOwner" | "EngagementScore" | "EstimatedMrr" | "Tags" | "OfferId" | "OfferSetId" | "ApnPrograms")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class OpportunitySearchSummary
+      attr_accessor id: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor created_date: ::Time
+      attr_accessor opportunity_type: ("Net New Business" | "Flat Renewal" | "Expansion")
+      attr_accessor partner_opportunity_identifier: ::String
+      attr_accessor life_cycle: Types::OpportunitySearchLifeCycle
+      attr_accessor customer: Types::OpportunitySearchCustomer
+      attr_accessor project: Types::OpportunitySearchProject
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor related_entity_identifiers: Types::OpportunitySearchRelatedEntityIdentifiers
+      attr_accessor opportunity_team: ::Array[Types::OpportunitySearchTeamMember]
+      attr_accessor aws_opportunity_summary: Types::OpportunitySearchAwsSummary
+      SENSITIVE: []
+    end
+
+    class OpportunitySearchTeamMember
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor business_title: ::String
+      SENSITIVE: [:first_name, :last_name, :business_title]
     end
 
     class OpportunitySort
@@ -1131,6 +1786,7 @@ module Aws::PartnerCentralSelling
     class Payload
       attr_accessor opportunity_invitation: Types::OpportunityInvitationPayload
       attr_accessor lead_invitation: Types::LeadInvitationPayload
+      attr_accessor account_planning_invitation: Types::AccountPlanningInvitationPayload
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1138,8 +1794,16 @@ module Aws::PartnerCentralSelling
       end
       class LeadInvitation < Payload
       end
+      class AccountPlanningInvitation < Payload
+      end
       class Unknown < Payload
       end
+    end
+
+    class PreferredContactWindow
+      attr_accessor window: ("MORNING" | "AFTERNOON" | "EVENING")
+      attr_accessor timezone: ::String
+      SENSITIVE: []
     end
 
     class ProfileNextStepsHistory
@@ -1332,6 +1996,54 @@ module Aws::PartnerCentralSelling
       SENSITIVE: [:created_by]
     end
 
+    class SearchCustomerAccountsRequest
+      attr_accessor catalog: ::String
+      attr_accessor filter: Types::Filter
+      attr_accessor sort: Types::CustomerAccountSort
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchCustomerAccountsResponse
+      attr_accessor customer_account_summaries: ::Array[Types::CustomerAccountSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchEngagementsRequest
+      attr_accessor catalog: ::String
+      attr_accessor keyword: ::String
+      attr_accessor filter: Types::EngagementSearchFilter
+      attr_accessor group_id: ::String
+      attr_accessor sort: Types::EngagementSearchSort
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:keyword]
+    end
+
+    class SearchEngagementsResponse
+      attr_accessor engagement_search_summaries: ::Array[Types::EngagementSearchSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchOpportunitiesRequest
+      attr_accessor catalog: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor keyword: ::String
+      attr_accessor filter: Types::OpportunitySearchFilter
+      attr_accessor sort: Types::OpportunitySearchSort
+      SENSITIVE: [:keyword]
+    end
+
+    class SearchOpportunitiesResponse
+      attr_accessor opportunity_search_summaries: ::Array[Types::OpportunitySearchSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class SenderContact
       attr_accessor email: ::String
       attr_accessor first_name: ::String
@@ -1378,6 +2090,21 @@ module Aws::PartnerCentralSelling
       SENSITIVE: []
     end
 
+    class StartCustomerAccountBulkJobRequest
+      attr_accessor catalog: ::String
+      attr_accessor client_token: ::String
+      attr_accessor file_uri: ::String
+      SENSITIVE: [:file_uri]
+    end
+
+    class StartCustomerAccountBulkJobResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
     class StartEngagementByAcceptingInvitationTaskRequest
       attr_accessor catalog: ::String
       attr_accessor client_token: ::String
@@ -1419,6 +2146,19 @@ module Aws::PartnerCentralSelling
       attr_accessor resource_snapshot_job_id: ::String
       attr_accessor engagement_id: ::String
       attr_accessor engagement_invitation_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartOpportunityBulkJobRequest
+      attr_accessor catalog: ::String
+      attr_accessor client_token: ::String
+      attr_accessor file_uri: ::String
+      attr_accessor file_format: ("CSV")
+      SENSITIVE: [:file_uri]
+    end
+
+    class StartOpportunityBulkJobResponse
+      attr_accessor job_id: ::String
       SENSITIVE: []
     end
 
@@ -1520,6 +2260,26 @@ module Aws::PartnerCentralSelling
     class UntagResourceResponse < Aws::EmptyStructure
     end
 
+    class UpdateCustomerAccountRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      attr_accessor account: Types::CustomerAccountData
+      attr_accessor partner_account_identifier: ::String
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateCustomerAccountResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("PENDING" | "ENRICHED" | "NO_MATCH_FOUND" | "ACTION_REQUIRED")
+      attr_accessor catalog: ::String
+      attr_accessor partner_account_identifier: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
+    end
+
     class UpdateEngagementContextPayload
       attr_accessor lead: Types::UpdateLeadContext
       attr_accessor customer_project: Types::CustomerProjectsContext
@@ -1542,7 +2302,7 @@ module Aws::PartnerCentralSelling
       attr_accessor engagement_identifier: ::String
       attr_accessor context_identifier: ::String
       attr_accessor engagement_last_modified_at: ::Time
-      attr_accessor type: ("CustomerProject" | "Lead" | "ProspectingResult")
+      attr_accessor type: ("CustomerProject" | "Lead" | "ProspectingResult" | "CustomerAccount")
       attr_accessor payload: Types::UpdateEngagementContextPayload
       SENSITIVE: []
     end

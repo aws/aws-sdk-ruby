@@ -1488,6 +1488,7 @@ module Aws::Connect
     NullableProficiencyLimitValue = Shapes::IntegerShape.new(name: 'NullableProficiencyLimitValue')
     NumberComparisonType = Shapes::StringShape.new(name: 'NumberComparisonType')
     NumberCondition = Shapes::StructureShape.new(name: 'NumberCondition')
+    NumberOfVoicemails = Shapes::IntegerShape.new(name: 'NumberOfVoicemails')
     NumberReference = Shapes::StructureShape.new(name: 'NumberReference')
     NumberValueList = Shapes::ListShape.new(name: 'NumberValueList')
     NumericQuestionPropertyAutomationLabel = Shapes::StringShape.new(name: 'NumericQuestionPropertyAutomationLabel')
@@ -2413,6 +2414,9 @@ module Aws::Connect
     VoiceEnhancementMode = Shapes::StringShape.new(name: 'VoiceEnhancementMode')
     VoiceRecordingConfiguration = Shapes::StructureShape.new(name: 'VoiceRecordingConfiguration')
     VoiceRecordingTrack = Shapes::StringShape.new(name: 'VoiceRecordingTrack')
+    VoicemailAnalysisReference = Shapes::StructureShape.new(name: 'VoicemailAnalysisReference')
+    VoicemailInfo = Shapes::StructureShape.new(name: 'VoicemailInfo')
+    VoicemailRecordingReference = Shapes::StructureShape.new(name: 'VoicemailRecordingReference')
     WebBrowserId = Shapes::StringShape.new(name: 'WebBrowserId')
     WebNotificationContent = Shapes::StructureShape.new(name: 'WebNotificationContent')
     WebNotificationSource = Shapes::StructureShape.new(name: 'WebNotificationSource')
@@ -3321,6 +3325,7 @@ module Aws::Connect
     Contact.add_member(:next_contacts, Shapes::ShapeRef.new(shape: NextContacts, location_name: "NextContacts"))
     Contact.add_member(:global_resiliency_metadata, Shapes::ShapeRef.new(shape: GlobalResiliencyMetadata, location_name: "GlobalResiliencyMetadata"))
     Contact.add_member(:contact_lens, Shapes::ShapeRef.new(shape: ContactLens, location_name: "ContactLens"))
+    Contact.add_member(:voicemail_info, Shapes::ShapeRef.new(shape: VoicemailInfo, location_name: "VoicemailInfo"))
     Contact.struct_class = Types::Contact
 
     ContactAnalysis.add_member(:transcript, Shapes::ShapeRef.new(shape: Transcript, location_name: "Transcript"))
@@ -8195,6 +8200,10 @@ module Aws::Connect
     ReferenceSummary.add_member(:date, Shapes::ShapeRef.new(shape: DateReference, location_name: "Date"))
     ReferenceSummary.add_member(:email, Shapes::ShapeRef.new(shape: EmailReference, location_name: "Email"))
     ReferenceSummary.add_member(:contact_analysis, Shapes::ShapeRef.new(shape: ContactAnalysisReference, location_name: "ContactAnalysis"))
+    ReferenceSummary.add_member(:voicemail_recording, Shapes::ShapeRef.new(shape: VoicemailRecordingReference, location_name: "VoicemailRecording"))
+    ReferenceSummary.add_member(:voicemail_recording_redacted, Shapes::ShapeRef.new(shape: VoicemailRecordingReference, location_name: "VoicemailRecordingRedacted"))
+    ReferenceSummary.add_member(:voicemail_analysis, Shapes::ShapeRef.new(shape: VoicemailAnalysisReference, location_name: "VoicemailAnalysis"))
+    ReferenceSummary.add_member(:voicemail_analysis_redacted, Shapes::ShapeRef.new(shape: VoicemailAnalysisReference, location_name: "VoicemailAnalysisRedacted"))
     ReferenceSummary.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ReferenceSummary.add_member_subclass(:url, Types::ReferenceSummary::Url)
     ReferenceSummary.add_member_subclass(:attachment, Types::ReferenceSummary::Attachment)
@@ -8207,6 +8216,10 @@ module Aws::Connect
     ReferenceSummary.add_member_subclass(:date, Types::ReferenceSummary::Date)
     ReferenceSummary.add_member_subclass(:email, Types::ReferenceSummary::Email)
     ReferenceSummary.add_member_subclass(:contact_analysis, Types::ReferenceSummary::ContactAnalysis)
+    ReferenceSummary.add_member_subclass(:voicemail_recording, Types::ReferenceSummary::VoicemailRecording)
+    ReferenceSummary.add_member_subclass(:voicemail_recording_redacted, Types::ReferenceSummary::VoicemailRecordingRedacted)
+    ReferenceSummary.add_member_subclass(:voicemail_analysis, Types::ReferenceSummary::VoicemailAnalysis)
+    ReferenceSummary.add_member_subclass(:voicemail_analysis_redacted, Types::ReferenceSummary::VoicemailAnalysisRedacted)
     ReferenceSummary.add_member_subclass(:unknown, Types::ReferenceSummary::Unknown)
     ReferenceSummary.struct_class = Types::ReferenceSummary
 
@@ -10570,6 +10583,21 @@ module Aws::Connect
     VoiceRecordingConfiguration.add_member(:voice_recording_track, Shapes::ShapeRef.new(shape: VoiceRecordingTrack, location_name: "VoiceRecordingTrack"))
     VoiceRecordingConfiguration.add_member(:ivr_recording_track, Shapes::ShapeRef.new(shape: IvrRecordingTrack, location_name: "IvrRecordingTrack"))
     VoiceRecordingConfiguration.struct_class = Types::VoiceRecordingConfiguration
+
+    VoicemailAnalysisReference.add_member(:name, Shapes::ShapeRef.new(shape: ReferenceKey, location_name: "Name"))
+    VoicemailAnalysisReference.add_member(:value, Shapes::ShapeRef.new(shape: ReferenceValue, location_name: "Value"))
+    VoicemailAnalysisReference.add_member(:status, Shapes::ShapeRef.new(shape: ReferenceStatus, location_name: "Status"))
+    VoicemailAnalysisReference.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    VoicemailAnalysisReference.struct_class = Types::VoicemailAnalysisReference
+
+    VoicemailInfo.add_member(:number_of_voicemails, Shapes::ShapeRef.new(shape: NumberOfVoicemails, location_name: "NumberOfVoicemails"))
+    VoicemailInfo.struct_class = Types::VoicemailInfo
+
+    VoicemailRecordingReference.add_member(:name, Shapes::ShapeRef.new(shape: ReferenceKey, location_name: "Name"))
+    VoicemailRecordingReference.add_member(:value, Shapes::ShapeRef.new(shape: ReferenceValue, location_name: "Value"))
+    VoicemailRecordingReference.add_member(:status, Shapes::ShapeRef.new(shape: ReferenceStatus, location_name: "Status"))
+    VoicemailRecordingReference.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    VoicemailRecordingReference.struct_class = Types::VoicemailRecordingReference
 
     WebNotificationContent.add_member(:type, Shapes::ShapeRef.new(shape: NotificationType, required: true, location_name: "Type"))
     WebNotificationContent.add_member(:view_arn, Shapes::ShapeRef.new(shape: ViewArn, location_name: "ViewArn"))

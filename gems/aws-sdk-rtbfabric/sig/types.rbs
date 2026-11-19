@@ -20,7 +20,7 @@ module Aws::RTBFabric
     class AcceptLinkResponse
       attr_accessor gateway_id: ::String
       attr_accessor peer_gateway_id: ::String
-      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor direction: ("RESPONSE" | "REQUEST")
@@ -29,6 +29,7 @@ module Aws::RTBFabric
       attr_accessor attributes: Types::LinkAttributes
       attr_accessor log_settings: Types::LinkLogSettings
       attr_accessor connectivity_type: ("DEFAULT" | "PUBLIC_INGRESS" | "PUBLIC_EGRESS" | "EXTERNAL_INBOUND")
+      attr_accessor error_details: ::Array[Types::ErrorDetail]
       attr_accessor link_id: ::String
       SENSITIVE: []
     end
@@ -73,6 +74,24 @@ module Aws::RTBFabric
       SENSITIVE: []
     end
 
+    class AvailableModuleSummary
+      attr_accessor module_id: ::String
+      attr_accessor module_arn: ::String
+      attr_accessor module_name: ::String
+      attr_accessor subscription_type: ("MARKETPLACE" | "PRIVATE" | "AWS_BUILT_IN")
+      attr_accessor subscription_status: ("ACTIVE" | "EXPIRED")
+      attr_accessor marketplace_product_id: ::String
+      SENSITIVE: []
+    end
+
+    class AvailableModuleVersionSummary
+      attr_accessor version: ::String
+      attr_accessor module_version_arn: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DEPRECATED")
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
     class CertificateAssociationSummary
       attr_accessor acm_certificate_arn: ::String
       attr_accessor status: ("PENDING_ASSOCIATION" | "ASSOCIATED" | "PENDING_DISASSOCIATION" | "DISASSOCIATED" | "FAILED")
@@ -98,7 +117,7 @@ module Aws::RTBFabric
     class CreateInboundExternalLinkResponse
       attr_accessor gateway_id: ::String
       attr_accessor link_id: ::String
-      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
       attr_accessor domain_name: ::String
       SENSITIVE: []
     end
@@ -117,7 +136,7 @@ module Aws::RTBFabric
     class CreateLinkResponse
       attr_accessor gateway_id: ::String
       attr_accessor peer_gateway_id: ::String
-      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor direction: ("RESPONSE" | "REQUEST")
@@ -126,6 +145,7 @@ module Aws::RTBFabric
       attr_accessor attributes: Types::LinkAttributes
       attr_accessor log_settings: Types::LinkLogSettings
       attr_accessor connectivity_type: ("DEFAULT" | "PUBLIC_INGRESS" | "PUBLIC_EGRESS" | "EXTERNAL_INBOUND")
+      attr_accessor error_details: ::Array[Types::ErrorDetail]
       attr_accessor link_id: ::String
       attr_accessor customer_provided_id: ::String
       SENSITIVE: []
@@ -143,7 +163,7 @@ module Aws::RTBFabric
 
     class CreateLinkRoutingRuleResponse
       attr_accessor rule_id: ::String
-      attr_accessor status: ("CREATION_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETION_IN_PROGRESS" | "DELETED" | "FAILED")
+      attr_accessor status: ("CREATION_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETION_IN_PROGRESS" | "DELETED" | "FAILED" | "CREATE_FAILED" | "DELETE_FAILED")
       attr_accessor created_at: ::Time
       SENSITIVE: []
     end
@@ -161,7 +181,7 @@ module Aws::RTBFabric
     class CreateOutboundExternalLinkResponse
       attr_accessor gateway_id: ::String
       attr_accessor link_id: ::String
-      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
       SENSITIVE: []
     end
 
@@ -178,7 +198,7 @@ module Aws::RTBFabric
     class CreateRequesterGatewayResponse
       attr_accessor gateway_id: ::String
       attr_accessor domain_name: ::String
-      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
       SENSITIVE: []
     end
 
@@ -202,7 +222,7 @@ module Aws::RTBFabric
 
     class CreateResponderGatewayResponse
       attr_accessor gateway_id: ::String
-      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
       attr_accessor listener_config: Types::ListenerConfig
       attr_accessor external_inbound_endpoint: ::String
       attr_accessor client_routing_policy: ("AVAILABILITY_ZONE_AFFINITY" | "ANY_AVAILABILITY_ZONE")
@@ -217,7 +237,7 @@ module Aws::RTBFabric
 
     class DeleteInboundExternalLinkResponse
       attr_accessor link_id: ::String
-      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
       SENSITIVE: []
     end
 
@@ -229,7 +249,7 @@ module Aws::RTBFabric
 
     class DeleteLinkResponse
       attr_accessor link_id: ::String
-      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
       SENSITIVE: []
     end
 
@@ -242,7 +262,7 @@ module Aws::RTBFabric
 
     class DeleteLinkRoutingRuleResponse
       attr_accessor rule_id: ::String
-      attr_accessor status: ("CREATION_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETION_IN_PROGRESS" | "DELETED" | "FAILED")
+      attr_accessor status: ("CREATION_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETION_IN_PROGRESS" | "DELETED" | "FAILED" | "CREATE_FAILED" | "DELETE_FAILED")
       SENSITIVE: []
     end
 
@@ -254,7 +274,7 @@ module Aws::RTBFabric
 
     class DeleteOutboundExternalLinkResponse
       attr_accessor link_id: ::String
-      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
       SENSITIVE: []
     end
 
@@ -265,7 +285,7 @@ module Aws::RTBFabric
 
     class DeleteRequesterGatewayResponse
       attr_accessor gateway_id: ::String
-      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
       SENSITIVE: []
     end
 
@@ -276,7 +296,7 @@ module Aws::RTBFabric
 
     class DeleteResponderGatewayResponse
       attr_accessor gateway_id: ::String
-      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
       SENSITIVE: []
     end
 
@@ -303,6 +323,13 @@ module Aws::RTBFabric
       SENSITIVE: [:cluster_api_server_ca_certificate_chain]
     end
 
+    class ErrorDetail
+      attr_accessor code: ("VPC_NOT_FOUND" | "EC2_SUBNET_NOT_FOUND" | "EC2_SECURITY_GROUP_NOT_FOUND" | "EC2_SUBNET_IP_EXHAUSTION" | "IAM_ASSUME_ROLE_ACCESS_DENIED" | "INTERNAL_ERROR")
+      attr_accessor message: ::String
+      attr_accessor resource_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class Filter
       attr_accessor criteria: ::Array[Types::FilterCriterion]
       SENSITIVE: []
@@ -311,6 +338,78 @@ module Aws::RTBFabric
     class FilterCriterion
       attr_accessor path: ::String
       attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Flow
+      attr_accessor name: ::String
+      attr_accessor pipeline: Types::FlowPipeline
+      SENSITIVE: []
+    end
+
+    class FlowModule
+      attr_accessor name: ::String
+      attr_accessor module_version_arn: ::String
+      attr_accessor selected_actions: ::Array[("FILTER" | "ENRICH_REQUEST_EXT" | "ENRICH_REQUEST_HEADERS" | "OBSERVE")]
+      attr_accessor failure_mode: ("OPEN" | "CLOSED")
+      attr_accessor activation_percentage: ::Float
+      attr_accessor configuration_values: ::String
+      SENSITIVE: []
+    end
+
+    class FlowPhase
+      attr_accessor modules: ::Array[Types::FlowModule]
+      SENSITIVE: []
+    end
+
+    class FlowPipeline
+      attr_accessor sequential: Types::SequentialPipeline
+      attr_accessor phased: Types::PhasedPipeline
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Sequential < FlowPipeline
+      end
+      class Phased < FlowPipeline
+      end
+      class Unknown < FlowPipeline
+      end
+    end
+
+    class GetAvailableModuleRequest
+      attr_accessor module_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAvailableModuleResponse
+      attr_accessor module_id: ::String
+      attr_accessor module_arn: ::String
+      attr_accessor module_name: ::String
+      attr_accessor description: ::String
+      attr_accessor subscription_type: ("MARKETPLACE" | "PRIVATE" | "AWS_BUILT_IN")
+      attr_accessor subscription_status: ("ACTIVE" | "EXPIRED")
+      attr_accessor marketplace_product_id: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetAvailableModuleVersionRequest
+      attr_accessor module_id: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetAvailableModuleVersionResponse
+      attr_accessor module_id: ::String
+      attr_accessor version: ::String
+      attr_accessor module_version_arn: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DEPRECATED")
+      attr_accessor permissions: ::Array[("READ_REQUEST_BODY" | "READ_REQUEST_HEADERS" | "MUTATE_REQUEST_BODY" | "ENRICH_REQUEST_HEADERS" | "ENRICH_REQUEST_EXT" | "FILTER")]
+      attr_accessor configurable_actions: ::Array[("FILTER" | "ENRICH_REQUEST_EXT" | "ENRICH_REQUEST_HEADERS" | "OBSERVE")]
+      attr_accessor configuration_schema: ::String
+      attr_accessor release_notes: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -326,6 +425,7 @@ module Aws::RTBFabric
       attr_accessor status: ("PENDING_ASSOCIATION" | "ASSOCIATED" | "PENDING_DISASSOCIATION" | "DISASSOCIATED" | "FAILED")
       attr_accessor associated_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor error_details: ::Array[Types::ErrorDetail]
       SENSITIVE: []
     end
 
@@ -338,7 +438,7 @@ module Aws::RTBFabric
     class GetInboundExternalLinkResponse
       attr_accessor gateway_id: ::String
       attr_accessor link_id: ::String
-      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
       attr_accessor domain_name: ::String
       attr_accessor flow_modules: ::Array[Types::ModuleConfiguration]
       attr_accessor pending_flow_modules: ::Array[Types::ModuleConfiguration]
@@ -348,6 +448,9 @@ module Aws::RTBFabric
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor log_settings: Types::LinkLogSettings
       attr_accessor connectivity_type: ("DEFAULT" | "PUBLIC_INGRESS" | "PUBLIC_EGRESS" | "EXTERNAL_INBOUND")
+      attr_accessor error_details: ::Array[Types::ErrorDetail]
+      attr_accessor lock_token: ::String
+      attr_accessor flows: ::Array[Types::Flow]
       SENSITIVE: []
     end
 
@@ -360,7 +463,7 @@ module Aws::RTBFabric
     class GetLinkResponse
       attr_accessor gateway_id: ::String
       attr_accessor peer_gateway_id: ::String
-      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor direction: ("RESPONSE" | "REQUEST")
@@ -369,10 +472,13 @@ module Aws::RTBFabric
       attr_accessor attributes: Types::LinkAttributes
       attr_accessor log_settings: Types::LinkLogSettings
       attr_accessor connectivity_type: ("DEFAULT" | "PUBLIC_INGRESS" | "PUBLIC_EGRESS" | "EXTERNAL_INBOUND")
+      attr_accessor error_details: ::Array[Types::ErrorDetail]
       attr_accessor link_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor http_responder_allowed: bool
       attr_accessor timeout_in_millis: ::Integer
+      attr_accessor lock_token: ::String
+      attr_accessor flows: ::Array[Types::Flow]
       SENSITIVE: []
     end
 
@@ -389,10 +495,11 @@ module Aws::RTBFabric
       attr_accessor rule_id: ::String
       attr_accessor priority: ::Integer
       attr_accessor conditions: Types::RuleCondition
-      attr_accessor status: ("CREATION_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETION_IN_PROGRESS" | "DELETED" | "FAILED")
+      attr_accessor status: ("CREATION_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETION_IN_PROGRESS" | "DELETED" | "FAILED" | "CREATE_FAILED" | "DELETE_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor error_details: ::Array[Types::ErrorDetail]
       SENSITIVE: []
     end
 
@@ -405,7 +512,7 @@ module Aws::RTBFabric
     class GetOutboundExternalLinkResponse
       attr_accessor gateway_id: ::String
       attr_accessor link_id: ::String
-      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
       attr_accessor public_endpoint: ::String
       attr_accessor flow_modules: ::Array[Types::ModuleConfiguration]
       attr_accessor pending_flow_modules: ::Array[Types::ModuleConfiguration]
@@ -415,6 +522,9 @@ module Aws::RTBFabric
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor log_settings: Types::LinkLogSettings
       attr_accessor connectivity_type: ("DEFAULT" | "PUBLIC_INGRESS" | "PUBLIC_EGRESS" | "EXTERNAL_INBOUND")
+      attr_accessor error_details: ::Array[Types::ErrorDetail]
+      attr_accessor lock_token: ::String
+      attr_accessor flows: ::Array[Types::Flow]
       SENSITIVE: []
     end
 
@@ -424,11 +534,12 @@ module Aws::RTBFabric
     end
 
     class GetRequesterGatewayResponse
-      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
       attr_accessor domain_name: ::String
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor error_details: ::Array[Types::ErrorDetail]
       attr_accessor vpc_id: ::String
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor security_group_ids: ::Array[::String]
@@ -448,10 +559,11 @@ module Aws::RTBFabric
       attr_accessor vpc_id: ::String
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor security_group_ids: ::Array[::String]
-      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor error_details: ::Array[Types::ErrorDetail]
       attr_accessor domain_name: ::String
       attr_accessor port: ::Integer
       attr_accessor protocol: ("HTTP" | "HTTPS")
@@ -466,6 +578,17 @@ module Aws::RTBFabric
       attr_accessor gateway_type: ("EXTERNAL" | "INTERNAL")
       attr_accessor external_inbound_endpoint: ::String
       attr_accessor client_routing_policy: ("AVAILABILITY_ZONE_AFFINITY" | "ANY_AVAILABILITY_ZONE")
+      SENSITIVE: []
+    end
+
+    class GetUpdateRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor update_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetUpdateResponse
+      attr_accessor update: Types::Update
       SENSITIVE: []
     end
 
@@ -509,6 +632,26 @@ module Aws::RTBFabric
       SENSITIVE: []
     end
 
+    class LinkConfigParameters
+      attr_accessor log_settings: Types::LinkLogSettings
+      attr_accessor timeout_in_millis: ::Integer
+      SENSITIVE: []
+    end
+
+    class LinkFlowParameters
+      attr_accessor modules: ::Array[Types::ModuleConfiguration]
+      attr_accessor flows: ::Array[Types::Flow]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Modules < LinkFlowParameters
+      end
+      class Flows < LinkFlowParameters
+      end
+      class Unknown < LinkFlowParameters
+      end
+    end
+
     class LinkLogSettings
       attr_accessor application_logs: Types::LinkApplicationLogConfiguration
       SENSITIVE: []
@@ -518,9 +661,43 @@ module Aws::RTBFabric
       attr_accessor rule_id: ::String
       attr_accessor priority: ::Integer
       attr_accessor conditions: Types::RuleCondition
-      attr_accessor status: ("CREATION_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETION_IN_PROGRESS" | "DELETED" | "FAILED")
+      attr_accessor status: ("CREATION_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETION_IN_PROGRESS" | "DELETED" | "FAILED" | "CREATE_FAILED" | "DELETE_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor error_details: ::Array[Types::ErrorDetail]
+      SENSITIVE: []
+    end
+
+    class LinkTarget
+      attr_accessor link_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListAvailableModuleVersionsRequest
+      attr_accessor module_id: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DEPRECATED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAvailableModuleVersionsResponse
+      attr_accessor module_id: ::String
+      attr_accessor versions: ::Array[Types::AvailableModuleVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAvailableModulesRequest
+      attr_accessor subscription_type: ("MARKETPLACE" | "PRIVATE" | "AWS_BUILT_IN")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAvailableModulesResponse
+      attr_accessor modules: ::Array[Types::AvailableModuleSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -567,7 +744,7 @@ module Aws::RTBFabric
     class ListLinksResponseStructure
       attr_accessor gateway_id: ::String
       attr_accessor peer_gateway_id: ::String
-      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor direction: ("RESPONSE" | "REQUEST")
@@ -576,6 +753,7 @@ module Aws::RTBFabric
       attr_accessor attributes: Types::LinkAttributes
       attr_accessor log_settings: Types::LinkLogSettings
       attr_accessor connectivity_type: ("DEFAULT" | "PUBLIC_INGRESS" | "PUBLIC_EGRESS" | "EXTERNAL_INBOUND")
+      attr_accessor error_details: ::Array[Types::ErrorDetail]
       attr_accessor link_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor public_endpoint: ::String
@@ -613,6 +791,23 @@ module Aws::RTBFabric
 
     class ListTagsForResourceResponse
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListUpdatesRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor rule_id: ::String
+      attr_accessor type: ("GATEWAY_CONFIG_UPDATE" | "LINK_CONFIG_UPDATE" | "LINK_FLOW_UPDATE" | "ROUTING_RULE_UPDATE")
+      attr_accessor status: ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListUpdatesResponse
+      attr_accessor updates: ::Array[Types::UpdateSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -680,6 +875,28 @@ module Aws::RTBFabric
       SENSITIVE: []
     end
 
+    class PhasedPipeline
+      attr_accessor phases: ::Array[Types::FlowPhase]
+      SENSITIVE: []
+    end
+
+    class PutLinkFlowsRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor lock_token: ::String
+      attr_accessor flows: ::Array[Types::Flow]
+      SENSITIVE: []
+    end
+
+    class PutLinkFlowsResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
+      attr_accessor update_id: ::String
+      SENSITIVE: []
+    end
+
     class QueryStringKeyValuePair
       attr_accessor key: ::String
       attr_accessor value: ::String
@@ -700,7 +917,7 @@ module Aws::RTBFabric
     class RejectLinkResponse
       attr_accessor gateway_id: ::String
       attr_accessor peer_gateway_id: ::String
-      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor direction: ("RESPONSE" | "REQUEST")
@@ -709,6 +926,7 @@ module Aws::RTBFabric
       attr_accessor attributes: Types::LinkAttributes
       attr_accessor log_settings: Types::LinkLogSettings
       attr_accessor connectivity_type: ("DEFAULT" | "PUBLIC_INGRESS" | "PUBLIC_EGRESS" | "EXTERNAL_INBOUND")
+      attr_accessor error_details: ::Array[Types::ErrorDetail]
       attr_accessor link_id: ::String
       SENSITIVE: []
     end
@@ -726,6 +944,30 @@ module Aws::RTBFabric
       SENSITIVE: []
     end
 
+    class ResponderGatewayConfigParameters
+      attr_accessor description: ::String
+      attr_accessor client_routing_policy: ("AVAILABILITY_ZONE_AFFINITY" | "ANY_AVAILABILITY_ZONE")
+      attr_accessor domain_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor listener_config: Types::ListenerConfig
+      attr_accessor trust_store_configuration: Types::TrustStoreConfiguration
+      attr_accessor managed_endpoint_configuration: Types::ManagedEndpointConfiguration
+      SENSITIVE: []
+    end
+
+    class RoutingRuleParameters
+      attr_accessor priority: ::Integer
+      attr_accessor conditions: Types::RuleCondition
+      SENSITIVE: []
+    end
+
+    class RoutingRuleTarget
+      attr_accessor link_id: ::String
+      attr_accessor rule_id: ::String
+      SENSITIVE: []
+    end
+
     class RuleCondition
       attr_accessor host_header: ::String
       attr_accessor host_header_wildcard: ::String
@@ -733,6 +975,11 @@ module Aws::RTBFabric
       attr_accessor path_exact: ::String
       attr_accessor query_string_equals: Types::QueryStringKeyValuePair
       attr_accessor query_string_exists: ::String
+      SENSITIVE: []
+    end
+
+    class SequentialPipeline
+      attr_accessor modules: ::Array[Types::FlowModule]
       SENSITIVE: []
     end
 
@@ -760,6 +1007,9 @@ module Aws::RTBFabric
       SENSITIVE: [:certificate_authority_certificates]
     end
 
+    class Unit < Aws::EmptyStructure
+    end
+
     class UntagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
@@ -767,6 +1017,17 @@ module Aws::RTBFabric
     end
 
     class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class Update
+      attr_accessor update_id: ::String
+      attr_accessor type: ("GATEWAY_CONFIG_UPDATE" | "LINK_CONFIG_UPDATE" | "LINK_FLOW_UPDATE" | "ROUTING_RULE_UPDATE")
+      attr_accessor status: ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED")
+      attr_accessor target: Types::UpdateTarget
+      attr_accessor created_at: ::Time
+      attr_accessor parameters: Types::UpdateParameters
+      attr_accessor error_details: ::Array[Types::ErrorDetail]
+      SENSITIVE: []
     end
 
     class UpdateLinkModuleFlowRequest
@@ -780,7 +1041,8 @@ module Aws::RTBFabric
     class UpdateLinkModuleFlowResponse
       attr_accessor gateway_id: ::String
       attr_accessor link_id: ::String
-      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
+      attr_accessor update_id: ::String
       SENSITIVE: []
     end
 
@@ -789,12 +1051,14 @@ module Aws::RTBFabric
       attr_accessor link_id: ::String
       attr_accessor log_settings: Types::LinkLogSettings
       attr_accessor timeout_in_millis: ::Integer
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
     class UpdateLinkResponse
       attr_accessor link_id: ::String
-      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
+      attr_accessor update_id: ::String
       SENSITIVE: []
     end
 
@@ -804,14 +1068,36 @@ module Aws::RTBFabric
       attr_accessor rule_id: ::String
       attr_accessor priority: ::Integer
       attr_accessor conditions: Types::RuleCondition
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
     class UpdateLinkRoutingRuleResponse
       attr_accessor rule_id: ::String
-      attr_accessor status: ("CREATION_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETION_IN_PROGRESS" | "DELETED" | "FAILED")
+      attr_accessor status: ("CREATION_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETION_IN_PROGRESS" | "DELETED" | "FAILED" | "CREATE_FAILED" | "DELETE_FAILED")
       attr_accessor updated_at: ::Time
+      attr_accessor update_id: ::String
       SENSITIVE: []
+    end
+
+    class UpdateParameters
+      attr_accessor responder_gateway_config: Types::ResponderGatewayConfigParameters
+      attr_accessor link_config: Types::LinkConfigParameters
+      attr_accessor link_flow: Types::LinkFlowParameters
+      attr_accessor routing_rule: Types::RoutingRuleParameters
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ResponderGatewayConfig < UpdateParameters
+      end
+      class LinkConfig < UpdateParameters
+      end
+      class LinkFlow < UpdateParameters
+      end
+      class RoutingRule < UpdateParameters
+      end
+      class Unknown < UpdateParameters
+      end
     end
 
     class UpdateRequesterGatewayRequest
@@ -823,7 +1109,7 @@ module Aws::RTBFabric
 
     class UpdateRequesterGatewayResponse
       attr_accessor gateway_id: ::String
-      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
       SENSITIVE: []
     end
 
@@ -843,9 +1129,35 @@ module Aws::RTBFabric
 
     class UpdateResponderGatewayResponse
       attr_accessor gateway_id: ::String
-      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION" | "CREATE_FAILED" | "DELETE_FAILED")
       attr_accessor client_routing_policy: ("AVAILABILITY_ZONE_AFFINITY" | "ANY_AVAILABILITY_ZONE")
+      attr_accessor update_id: ::String
       SENSITIVE: []
+    end
+
+    class UpdateSummary
+      attr_accessor update_id: ::String
+      attr_accessor type: ("GATEWAY_CONFIG_UPDATE" | "LINK_CONFIG_UPDATE" | "LINK_FLOW_UPDATE" | "ROUTING_RULE_UPDATE")
+      attr_accessor status: ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED")
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateTarget
+      attr_accessor gateway: Types::Unit
+      attr_accessor link: Types::LinkTarget
+      attr_accessor routing_rule: Types::RoutingRuleTarget
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Gateway < UpdateTarget
+      end
+      class Link < UpdateTarget
+      end
+      class RoutingRule < UpdateTarget
+      end
+      class Unknown < UpdateTarget
+      end
     end
 
     class ValidationException

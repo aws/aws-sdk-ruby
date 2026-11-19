@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:polly)
 # structure.
 #
 #     polly = Aws::Polly::Client.new
-#     resp = polly.delete_lexicon(params)
+#     resp = polly.create_voice(params)
 #
 # See {Client} for more information.
 #
@@ -35,7 +35,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:polly)
 # output event callbacks before waiting on the response.
 #
 #     polly = Aws::Polly::AsyncClient.new
-#     resp = polly.delete_lexicon(
+#     resp = polly.create_voice(
 #       # params and input stream
 #      ) do |output_stream|
 #       # register callbacks for events
@@ -65,6 +65,7 @@ module Aws::Polly
   end
   autoload :Client, 'aws-sdk-polly/client'
   autoload :Errors, 'aws-sdk-polly/errors'
+  autoload :Waiters, 'aws-sdk-polly/waiters'
   autoload :Resource, 'aws-sdk-polly/resource'
   autoload :EndpointParameters, 'aws-sdk-polly/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-polly/endpoint_provider'
@@ -72,7 +73,7 @@ module Aws::Polly
   autoload :AsyncClient, 'aws-sdk-polly/async_client'
   autoload :EventStreams, 'aws-sdk-polly/event_streams'
 
-  GEM_VERSION = '1.141.0'
+  GEM_VERSION = '1.142.0'
 
 end
 

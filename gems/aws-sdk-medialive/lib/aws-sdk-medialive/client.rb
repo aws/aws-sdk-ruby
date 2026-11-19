@@ -1084,6 +1084,10 @@ module Aws::MediaLive
     # @option params [Types::InferenceSettings] :inference_settings
     #   Configures Elemental Inference features in a channel.
     #
+    # @option params [Types::JpegXsInputSpecification] :jpeg_xs_input_specification
+    #   Specification of the JPEG XS input for this channel. Use instead of
+    #   inputSpecification when the input codec is JPEG XS.
+    #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChannelResponse#channel #channel} => Types::Channel
@@ -1706,6 +1710,7 @@ module Aws::MediaLive
     #   * {Types::DeleteChannelResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
     #   * {Types::DeleteChannelResponse#channel_security_groups #channel_security_groups} => Array&lt;String&gt;
     #   * {Types::DeleteChannelResponse#inference_settings #inference_settings} => Types::DescribeInferenceSettings
+    #   * {Types::DeleteChannelResponse#jpeg_xs_input_specification #jpeg_xs_input_specification} => Types::JpegXsInputSpecification
     #
     # @example Request syntax with placeholder values
     #
@@ -1938,8 +1943,8 @@ module Aws::MediaLive
     #   resp.renewal_settings.renewal_count #=> Integer
     #   resp.reservation_id #=> String
     #   resp.resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
-    #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK", "AV1"
-    #   resp.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
+    #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK", "AV1", "JPEGXS"
+    #   resp.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS", "MAX_500_MBPS"
     #   resp.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
     #   resp.resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
     #   resp.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "MULTIPLEX", "CHANNEL"
@@ -2053,6 +2058,7 @@ module Aws::MediaLive
     #   * {Types::DescribeChannelResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
     #   * {Types::DescribeChannelResponse#channel_security_groups #channel_security_groups} => Array&lt;String&gt;
     #   * {Types::DescribeChannelResponse#inference_settings #inference_settings} => Types::DescribeInferenceSettings
+    #   * {Types::DescribeChannelResponse#jpeg_xs_input_specification #jpeg_xs_input_specification} => Types::JpegXsInputSpecification
     #
     # @example Request syntax with placeholder values
     #
@@ -2532,8 +2538,8 @@ module Aws::MediaLive
     #   resp.offering_type #=> String, one of "NO_UPFRONT"
     #   resp.region #=> String
     #   resp.resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
-    #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK", "AV1"
-    #   resp.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
+    #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK", "AV1", "JPEGXS"
+    #   resp.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS", "MAX_500_MBPS"
     #   resp.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
     #   resp.resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
     #   resp.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "MULTIPLEX", "CHANNEL"
@@ -2600,8 +2606,8 @@ module Aws::MediaLive
     #   resp.renewal_settings.renewal_count #=> Integer
     #   resp.reservation_id #=> String
     #   resp.resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
-    #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK", "AV1"
-    #   resp.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
+    #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK", "AV1", "JPEGXS"
+    #   resp.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS", "MAX_500_MBPS"
     #   resp.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
     #   resp.resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
     #   resp.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "MULTIPLEX", "CHANNEL"
@@ -2932,7 +2938,7 @@ module Aws::MediaLive
     #   resp.channels[0].input_attachments[0].input_settings.video_selector.selector_settings.video_selector_program_id.program_id #=> Integer
     #   resp.channels[0].input_attachments[0].logical_interface_names #=> Array
     #   resp.channels[0].input_attachments[0].logical_interface_names[0] #=> String
-    #   resp.channels[0].input_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC"
+    #   resp.channels[0].input_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "JPEGXS"
     #   resp.channels[0].input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.channels[0].input_specification.resolution #=> String, one of "SD", "HD", "UHD"
     #   resp.channels[0].log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
@@ -2974,6 +2980,9 @@ module Aws::MediaLive
     #   resp.channels[0].inference_settings.audio_feed_inputs[0].feed_input #=> String
     #   resp.channels[0].inference_settings.enrichment_methods #=> Array
     #   resp.channels[0].inference_settings.enrichment_methods[0] #=> String, one of "SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS"
+    #   resp.channels[0].jpeg_xs_input_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "JPEGXS"
+    #   resp.channels[0].jpeg_xs_input_specification.maximum_bitrate #=> String, one of "MAX_500_MBPS"
+    #   resp.channels[0].jpeg_xs_input_specification.resolution #=> String, one of "HD"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListChannels AWS API Documentation
@@ -3404,8 +3413,8 @@ module Aws::MediaLive
     #   resp.offerings[0].offering_type #=> String, one of "NO_UPFRONT"
     #   resp.offerings[0].region #=> String
     #   resp.offerings[0].resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
-    #   resp.offerings[0].resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK", "AV1"
-    #   resp.offerings[0].resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
+    #   resp.offerings[0].resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK", "AV1", "JPEGXS"
+    #   resp.offerings[0].resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS", "MAX_500_MBPS"
     #   resp.offerings[0].resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
     #   resp.offerings[0].resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
     #   resp.offerings[0].resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "MULTIPLEX", "CHANNEL"
@@ -3486,8 +3495,8 @@ module Aws::MediaLive
     #   resp.reservations[0].renewal_settings.renewal_count #=> Integer
     #   resp.reservations[0].reservation_id #=> String
     #   resp.reservations[0].resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
-    #   resp.reservations[0].resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK", "AV1"
-    #   resp.reservations[0].resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
+    #   resp.reservations[0].resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK", "AV1", "JPEGXS"
+    #   resp.reservations[0].resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS", "MAX_500_MBPS"
     #   resp.reservations[0].resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
     #   resp.reservations[0].resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
     #   resp.reservations[0].resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "MULTIPLEX", "CHANNEL"
@@ -3594,8 +3603,8 @@ module Aws::MediaLive
     #   resp.reservation.renewal_settings.renewal_count #=> Integer
     #   resp.reservation.reservation_id #=> String
     #   resp.reservation.resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
-    #   resp.reservation.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK", "AV1"
-    #   resp.reservation.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
+    #   resp.reservation.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK", "AV1", "JPEGXS"
+    #   resp.reservation.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS", "MAX_500_MBPS"
     #   resp.reservation.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
     #   resp.reservation.resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
     #   resp.reservation.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "MULTIPLEX", "CHANNEL"
@@ -3694,6 +3703,7 @@ module Aws::MediaLive
     #   * {Types::StartChannelResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
     #   * {Types::StartChannelResponse#channel_security_groups #channel_security_groups} => Array&lt;String&gt;
     #   * {Types::StartChannelResponse#inference_settings #inference_settings} => Types::DescribeInferenceSettings
+    #   * {Types::StartChannelResponse#jpeg_xs_input_specification #jpeg_xs_input_specification} => Types::JpegXsInputSpecification
     #
     # @example Request syntax with placeholder values
     #
@@ -3843,6 +3853,7 @@ module Aws::MediaLive
     #   * {Types::StopChannelResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
     #   * {Types::StopChannelResponse#channel_security_groups #channel_security_groups} => Array&lt;String&gt;
     #   * {Types::StopChannelResponse#inference_settings #inference_settings} => Types::DescribeInferenceSettings
+    #   * {Types::StopChannelResponse#jpeg_xs_input_specification #jpeg_xs_input_specification} => Types::JpegXsInputSpecification
     #
     # @example Request syntax with placeholder values
     #
@@ -4039,6 +4050,10 @@ module Aws::MediaLive
     #   created. This group of settings is set on your behalf by the
     #   MediaConnect Router service using this set of settings. This setting
     #   object can only by used by that service.
+    #
+    # @option params [Types::JpegXsInputSpecification] :jpeg_xs_input_specification
+    #   Specification of the JPEG XS input for this channel. Use instead of
+    #   inputSpecification when the input codec is JPEG XS.
     #
     # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4738,8 +4753,8 @@ module Aws::MediaLive
     #   resp.reservation.renewal_settings.renewal_count #=> Integer
     #   resp.reservation.reservation_id #=> String
     #   resp.reservation.resource_specification.channel_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
-    #   resp.reservation.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK", "AV1"
-    #   resp.reservation.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
+    #   resp.reservation.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO", "LINK", "AV1", "JPEGXS"
+    #   resp.reservation.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS", "MAX_500_MBPS"
     #   resp.reservation.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
     #   resp.reservation.resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
     #   resp.reservation.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "MULTIPLEX", "CHANNEL"
@@ -4794,6 +4809,7 @@ module Aws::MediaLive
     #   * {Types::RestartChannelPipelinesResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
     #   * {Types::RestartChannelPipelinesResponse#channel_security_groups #channel_security_groups} => Array&lt;String&gt;
     #   * {Types::RestartChannelPipelinesResponse#inference_settings #inference_settings} => Types::DescribeInferenceSettings
+    #   * {Types::RestartChannelPipelinesResponse#jpeg_xs_input_specification #jpeg_xs_input_specification} => Types::JpegXsInputSpecification
     #
     # @example Request syntax with placeholder values
     #
@@ -8141,7 +8157,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.212.0'
+      context[:gem_version] = '1.213.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

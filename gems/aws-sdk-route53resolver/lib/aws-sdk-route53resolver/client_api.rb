@@ -26,6 +26,7 @@ module Aws::Route53Resolver
     AssociateResolverQueryLogConfigResponse = Shapes::StructureShape.new(name: 'AssociateResolverQueryLogConfigResponse')
     AssociateResolverRuleRequest = Shapes::StructureShape.new(name: 'AssociateResolverRuleRequest')
     AssociateResolverRuleResponse = Shapes::StructureShape.new(name: 'AssociateResolverRuleResponse')
+    AutoAllowlistConfig = Shapes::StructureShape.new(name: 'AutoAllowlistConfig')
     AutodefinedReverseFlag = Shapes::StringShape.new(name: 'AutodefinedReverseFlag')
     BatchCreateFirewallRuleError = Shapes::StructureShape.new(name: 'BatchCreateFirewallRuleError')
     BatchCreateFirewallRuleErrors = Shapes::ListShape.new(name: 'BatchCreateFirewallRuleErrors')
@@ -118,10 +119,17 @@ module Aws::Route53Resolver
     FirewallDomainListStatus = Shapes::StringShape.new(name: 'FirewallDomainListStatus')
     FirewallDomainName = Shapes::StringShape.new(name: 'FirewallDomainName')
     FirewallDomainRedirectionAction = Shapes::StringShape.new(name: 'FirewallDomainRedirectionAction')
+    FirewallDomainStatus = Shapes::StringShape.new(name: 'FirewallDomainStatus')
+    FirewallDomainStatusFilter = Shapes::StringShape.new(name: 'FirewallDomainStatusFilter')
     FirewallDomainUpdateOperation = Shapes::StringShape.new(name: 'FirewallDomainUpdateOperation')
     FirewallDomains = Shapes::ListShape.new(name: 'FirewallDomains')
     FirewallFailOpenStatus = Shapes::StringShape.new(name: 'FirewallFailOpenStatus')
     FirewallRule = Shapes::StructureShape.new(name: 'FirewallRule')
+    FirewallRuleDomain = Shapes::StructureShape.new(name: 'FirewallRuleDomain')
+    FirewallRuleDomainRequestCount = Shapes::IntegerShape.new(name: 'FirewallRuleDomainRequestCount')
+    FirewallRuleDomainSortBy = Shapes::StringShape.new(name: 'FirewallRuleDomainSortBy')
+    FirewallRuleDomainSortOrder = Shapes::StringShape.new(name: 'FirewallRuleDomainSortOrder')
+    FirewallRuleDomains = Shapes::ListShape.new(name: 'FirewallRuleDomains')
     FirewallRuleGroup = Shapes::StructureShape.new(name: 'FirewallRuleGroup')
     FirewallRuleGroupAssociation = Shapes::StructureShape.new(name: 'FirewallRuleGroupAssociation')
     FirewallRuleGroupAssociationStatus = Shapes::StringShape.new(name: 'FirewallRuleGroupAssociationStatus')
@@ -168,6 +176,7 @@ module Aws::Route53Resolver
     GetResolverRuleResponse = Shapes::StructureShape.new(name: 'GetResolverRuleResponse')
     ImportFirewallDomainsRequest = Shapes::StructureShape.new(name: 'ImportFirewallDomainsRequest')
     ImportFirewallDomainsResponse = Shapes::StructureShape.new(name: 'ImportFirewallDomainsResponse')
+    InitialDataTimeframeHours = Shapes::IntegerShape.new(name: 'InitialDataTimeframeHours')
     InstanceCount = Shapes::IntegerShape.new(name: 'InstanceCount')
     InternalServiceErrorException = Shapes::StructureShape.new(name: 'InternalServiceErrorException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
@@ -194,6 +203,9 @@ module Aws::Route53Resolver
     ListFirewallDomainListsResponse = Shapes::StructureShape.new(name: 'ListFirewallDomainListsResponse')
     ListFirewallDomainsRequest = Shapes::StructureShape.new(name: 'ListFirewallDomainsRequest')
     ListFirewallDomainsResponse = Shapes::StructureShape.new(name: 'ListFirewallDomainsResponse')
+    ListFirewallRuleDomainsQueryOptions = Shapes::StructureShape.new(name: 'ListFirewallRuleDomainsQueryOptions')
+    ListFirewallRuleDomainsRequest = Shapes::StructureShape.new(name: 'ListFirewallRuleDomainsRequest')
+    ListFirewallRuleDomainsResponse = Shapes::StructureShape.new(name: 'ListFirewallRuleDomainsResponse')
     ListFirewallRuleGroupAssociationsRequest = Shapes::StructureShape.new(name: 'ListFirewallRuleGroupAssociationsRequest')
     ListFirewallRuleGroupAssociationsResponse = Shapes::StructureShape.new(name: 'ListFirewallRuleGroupAssociationsResponse')
     ListFirewallRuleGroupsRequest = Shapes::StructureShape.new(name: 'ListFirewallRuleGroupsRequest')
@@ -376,6 +388,11 @@ module Aws::Route53Resolver
 
     AssociateResolverRuleResponse.add_member(:resolver_rule_association, Shapes::ShapeRef.new(shape: ResolverRuleAssociation, location_name: "ResolverRuleAssociation"))
     AssociateResolverRuleResponse.struct_class = Types::AssociateResolverRuleResponse
+
+    AutoAllowlistConfig.add_member(:initial_data_timeframe_hours, Shapes::ShapeRef.new(shape: InitialDataTimeframeHours, required: true, location_name: "InitialDataTimeframeHours"))
+    AutoAllowlistConfig.add_member(:import_from_firewall_domain_list_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ImportFromFirewallDomainListId", metadata: {"box" => true}))
+    AutoAllowlistConfig.add_member(:auto_allowlist_firewall_domain_list_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "AutoAllowlistFirewallDomainListId", metadata: {"box" => true}))
+    AutoAllowlistConfig.struct_class = Types::AutoAllowlistConfig
 
     BatchCreateFirewallRuleError.add_member(:firewall_rule, Shapes::ShapeRef.new(shape: CreateFirewallRuleEntry, location_name: "FirewallRule"))
     BatchCreateFirewallRuleError.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))
@@ -656,6 +673,9 @@ module Aws::Route53Resolver
     FirewallDomainListMetadata.add_member(:managed_owner_name, Shapes::ShapeRef.new(shape: ServicePrinciple, location_name: "ManagedOwnerName"))
     FirewallDomainListMetadata.add_member(:managed_list_type, Shapes::ShapeRef.new(shape: DomainListType, location_name: "ManagedListType"))
     FirewallDomainListMetadata.add_member(:category, Shapes::ShapeRef.new(shape: Category, location_name: "Category"))
+    FirewallDomainListMetadata.add_member(:firewall_rule_group_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallRuleGroupId", metadata: {"box" => true}))
+    FirewallDomainListMetadata.add_member(:firewall_threat_protection_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallThreatProtectionId", metadata: {"box" => true}))
+    FirewallDomainListMetadata.add_member(:status, Shapes::ShapeRef.new(shape: FirewallDomainListStatus, location_name: "Status"))
     FirewallDomainListMetadata.struct_class = Types::FirewallDomainListMetadata
 
     FirewallDomainListMetadataList.member = Shapes::ShapeRef.new(shape: FirewallDomainListMetadata)
@@ -683,6 +703,15 @@ module Aws::Route53Resolver
     FirewallRule.add_member(:status, Shapes::ShapeRef.new(shape: FirewallRuleStatus, location_name: "Status"))
     FirewallRule.add_member(:status_message, Shapes::ShapeRef.new(shape: FirewallRuleStatusMessage, location_name: "StatusMessage"))
     FirewallRule.struct_class = Types::FirewallRule
+
+    FirewallRuleDomain.add_member(:domain_name, Shapes::ShapeRef.new(shape: FirewallDomainName, location_name: "DomainName"))
+    FirewallRuleDomain.add_member(:domain_status, Shapes::ShapeRef.new(shape: FirewallDomainStatus, location_name: "DomainStatus"))
+    FirewallRuleDomain.add_member(:last_24_hour_requests, Shapes::ShapeRef.new(shape: FirewallRuleDomainRequestCount, location_name: "Last24HourRequests", metadata: {"box" => true}))
+    FirewallRuleDomain.add_member(:total_requests, Shapes::ShapeRef.new(shape: FirewallRuleDomainRequestCount, location_name: "TotalRequests", metadata: {"box" => true}))
+    FirewallRuleDomain.add_member(:added_time, Shapes::ShapeRef.new(shape: Rfc3339TimeString, location_name: "AddedTime"))
+    FirewallRuleDomain.struct_class = Types::FirewallRuleDomain
+
+    FirewallRuleDomains.member = Shapes::ShapeRef.new(shape: FirewallRuleDomain)
 
     FirewallRuleGroup.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
     FirewallRuleGroup.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -728,6 +757,7 @@ module Aws::Route53Resolver
     FirewallRuleType.add_member(:firewall_advanced_content_category, Shapes::ShapeRef.new(shape: FirewallAdvancedContentCategoryConfig, location_name: "FirewallAdvancedContentCategory", metadata: {"box" => true}))
     FirewallRuleType.add_member(:firewall_advanced_threat_category, Shapes::ShapeRef.new(shape: FirewallAdvancedThreatCategoryConfig, location_name: "FirewallAdvancedThreatCategory", metadata: {"box" => true}))
     FirewallRuleType.add_member(:dns_threat_protection, Shapes::ShapeRef.new(shape: DnsThreatProtectionRuleTypeConfig, location_name: "DnsThreatProtection", metadata: {"box" => true}))
+    FirewallRuleType.add_member(:auto_allowlist, Shapes::ShapeRef.new(shape: AutoAllowlistConfig, location_name: "AutoAllowlist", metadata: {"box" => true}))
     FirewallRuleType.struct_class = Types::FirewallRuleType
 
     FirewallRuleTypeDefinition.add_member(:rule_type, Shapes::ShapeRef.new(shape: RuleTypeName, location_name: "RuleType"))
@@ -751,6 +781,8 @@ module Aws::Route53Resolver
     GetFirewallDomainListRequest.struct_class = Types::GetFirewallDomainListRequest
 
     GetFirewallDomainListResponse.add_member(:firewall_domain_list, Shapes::ShapeRef.new(shape: FirewallDomainList, location_name: "FirewallDomainList"))
+    GetFirewallDomainListResponse.add_member(:firewall_rule_group_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallRuleGroupId", metadata: {"box" => true}))
+    GetFirewallDomainListResponse.add_member(:firewall_threat_protection_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallThreatProtectionId", metadata: {"box" => true}))
     GetFirewallDomainListResponse.struct_class = Types::GetFirewallDomainListResponse
 
     GetFirewallRuleGroupAssociationRequest.add_member(:firewall_rule_group_association_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "FirewallRuleGroupAssociationId"))
@@ -914,6 +946,24 @@ module Aws::Route53Resolver
     ListFirewallDomainsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListFirewallDomainsResponse.add_member(:domains, Shapes::ShapeRef.new(shape: FirewallDomains, location_name: "Domains"))
     ListFirewallDomainsResponse.struct_class = Types::ListFirewallDomainsResponse
+
+    ListFirewallRuleDomainsQueryOptions.add_member(:domain_status, Shapes::ShapeRef.new(shape: FirewallDomainStatusFilter, location_name: "DomainStatus"))
+    ListFirewallRuleDomainsQueryOptions.add_member(:sort_by, Shapes::ShapeRef.new(shape: FirewallRuleDomainSortBy, location_name: "SortBy"))
+    ListFirewallRuleDomainsQueryOptions.add_member(:sort_order, Shapes::ShapeRef.new(shape: FirewallRuleDomainSortOrder, location_name: "SortOrder"))
+    ListFirewallRuleDomainsQueryOptions.add_member(:domain_name_filter, Shapes::ShapeRef.new(shape: FirewallDomainName, location_name: "DomainNameFilter"))
+    ListFirewallRuleDomainsQueryOptions.struct_class = Types::ListFirewallRuleDomainsQueryOptions
+
+    ListFirewallRuleDomainsRequest.add_member(:firewall_rule_group_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "FirewallRuleGroupId"))
+    ListFirewallRuleDomainsRequest.add_member(:firewall_threat_protection_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallThreatProtectionId"))
+    ListFirewallRuleDomainsRequest.add_member(:firewall_domain_list_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallDomainListId"))
+    ListFirewallRuleDomainsRequest.add_member(:query_options, Shapes::ShapeRef.new(shape: ListFirewallRuleDomainsQueryOptions, location_name: "QueryOptions"))
+    ListFirewallRuleDomainsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
+    ListFirewallRuleDomainsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken", metadata: {"box" => true}))
+    ListFirewallRuleDomainsRequest.struct_class = Types::ListFirewallRuleDomainsRequest
+
+    ListFirewallRuleDomainsResponse.add_member(:domains, Shapes::ShapeRef.new(shape: FirewallRuleDomains, location_name: "Domains"))
+    ListFirewallRuleDomainsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListFirewallRuleDomainsResponse.struct_class = Types::ListFirewallRuleDomainsResponse
 
     ListFirewallRuleGroupAssociationsRequest.add_member(:firewall_rule_group_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallRuleGroupId", metadata: {"box" => true}))
     ListFirewallRuleGroupAssociationsRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VpcId", metadata: {"box" => true}))
@@ -1424,6 +1474,7 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:associate_resolver_query_log_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1456,6 +1507,7 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:batch_create_firewall_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -1665,6 +1717,7 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:delete_resolver_query_log_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1693,6 +1746,7 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:disassociate_firewall_rule_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1721,6 +1775,7 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:disassociate_resolver_query_log_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1748,6 +1803,7 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:get_firewall_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1863,6 +1919,7 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:get_resolver_query_log_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1916,6 +1973,7 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:get_resolver_rule_association, Seahorse::Model::Operation.new.tap do |o|
@@ -1928,6 +1986,7 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:get_resolver_rule_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1999,6 +2058,25 @@ module Aws::Route53Resolver
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListFirewallDomainsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListFirewallDomainsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_firewall_rule_domains, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFirewallRuleDomains"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListFirewallRuleDomainsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFirewallRuleDomainsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -2156,6 +2234,7 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2175,6 +2254,7 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2234,6 +2314,7 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2253,6 +2334,7 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2273,6 +2355,7 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2334,6 +2417,7 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -2347,6 +2431,7 @@ module Aws::Route53Resolver
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:update_firewall_config, Seahorse::Model::Operation.new.tap do |o|

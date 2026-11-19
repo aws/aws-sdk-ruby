@@ -158,13 +158,13 @@ module Aws::MarketplaceDeployment
       end
 
       # @return [String]
-      def field_name
-        @data[:field_name]
+      def message
+        @message || @data[:message]
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
+      def field_name
+        @data[:field_name]
       end
     end
 

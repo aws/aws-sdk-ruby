@@ -248,6 +248,11 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class AwsBillingConnectorConfiguration
+      attr_accessor iam_role_arn: ::String
+      SENSITIVE: []
+    end
+
     class BatchPutGatewayRateLimitsRequest
       attr_accessor gateway_identifier: ::String
       attr_accessor client_token: ::String
@@ -677,6 +682,11 @@ module Aws::BedrockAgentCoreControl
     class ContentConfiguration
       attr_accessor type: ("MEMORY_RECORDS")
       attr_accessor level: ("METADATA_ONLY" | "FULL_CONTENT")
+      SENSITIVE: []
+    end
+
+    class CpuOptions
+      attr_accessor nested_virtualization: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -1166,7 +1176,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor payment_manager_id: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor type: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor type: ("CoinbaseCDP" | "StripePrivy" | "AwsBilling")
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialsProviderConfiguration]
       attr_accessor provision_mode: ("MANUAL" | "QUICK_CREATE")
       attr_accessor client_token: ::String
@@ -1177,7 +1187,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor payment_connector_id: ::String
       attr_accessor payment_manager_id: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor type: ("CoinbaseCDP" | "StripePrivy" | "AwsBilling")
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialsProviderConfiguration]
       attr_accessor created_at: ::Time
       attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED" | "PENDING_AUTHENTICATION" | "PROVISIONING" | "AUTHENTICATION_EXPIRED" | "AUTHENTICATION_FAILED")
@@ -1361,12 +1371,15 @@ module Aws::BedrockAgentCoreControl
     class CredentialsProviderConfiguration
       attr_accessor coinbase_cdp: Types::PaymentCredentialProviderConfiguration
       attr_accessor stripe_privy: Types::PaymentCredentialProviderConfiguration
+      attr_accessor aws_billing: Types::AwsBillingConnectorConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class CoinbaseCdp < CredentialsProviderConfiguration
       end
       class StripePrivy < CredentialsProviderConfiguration
+      end
+      class AwsBilling < CredentialsProviderConfiguration
       end
       class Unknown < CredentialsProviderConfiguration
       end
@@ -2890,7 +2903,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor payment_connector_id: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor type: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor type: ("CoinbaseCDP" | "StripePrivy" | "AwsBilling")
       attr_accessor provision_mode: ("MANUAL" | "QUICK_CREATE")
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialsProviderConfiguration]
       attr_accessor created_at: ::Time
@@ -3875,6 +3888,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor ssh_key_name: ::String
       attr_accessor instance_profile_arn: ::String
       attr_accessor propagated_tags: ::Hash[::String, ::String]
+      attr_accessor cpu_options: Types::CpuOptions
       SENSITIVE: []
     end
 
@@ -5031,7 +5045,7 @@ module Aws::BedrockAgentCoreControl
     class PaymentConnectorSummary
       attr_accessor payment_connector_id: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor type: ("CoinbaseCDP" | "StripePrivy" | "AwsBilling")
       attr_accessor provision_mode: ("MANUAL" | "QUICK_CREATE")
       attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED" | "PENDING_AUTHENTICATION" | "PROVISIONING" | "AUTHENTICATION_EXPIRED" | "AUTHENTICATION_FAILED")
       attr_accessor last_updated_at: ::Time
@@ -6567,7 +6581,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor payment_manager_id: ::String
       attr_accessor payment_connector_id: ::String
       attr_accessor description: ::String
-      attr_accessor type: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor type: ("CoinbaseCDP" | "StripePrivy" | "AwsBilling")
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialsProviderConfiguration]
       attr_accessor client_token: ::String
       SENSITIVE: []
@@ -6577,7 +6591,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor payment_connector_id: ::String
       attr_accessor payment_manager_id: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor type: ("CoinbaseCDP" | "StripePrivy" | "AwsBilling")
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialsProviderConfiguration]
       attr_accessor last_updated_at: ::Time
       attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED" | "PENDING_AUTHENTICATION" | "PROVISIONING" | "AUTHENTICATION_EXPIRED" | "AUTHENTICATION_FAILED")

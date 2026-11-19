@@ -30,6 +30,7 @@ module Aws::RolesAnywhere
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor accept_role_session_name: bool
       attr_accessor alias_name: ::String
+      attr_accessor tip_configuration: Types::TipConfiguration
       SENSITIVE: []
     end
 
@@ -188,6 +189,7 @@ module Aws::RolesAnywhere
       attr_accessor attribute_mappings: ::Array[Types::AttributeMapping]
       attr_accessor alias_name: ::String
       attr_accessor alias_arn: ::String
+      attr_accessor tip_configuration: Types::TipConfiguration
       attr_accessor previous_alias_name: ::String
       SENSITIVE: []
     end
@@ -326,6 +328,13 @@ module Aws::RolesAnywhere
     class TagResourceResponse < Aws::EmptyStructure
     end
 
+    class TipConfiguration
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor subject_type: ("user" | "workload")
+      attr_accessor subject_source: ("x509SAN/URI" | "x509Subject/CN")
+      SENSITIVE: []
+    end
+
     class TooManyTagsException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -378,6 +387,7 @@ module Aws::RolesAnywhere
       attr_accessor duration_seconds: ::Integer
       attr_accessor accept_role_session_name: bool
       attr_accessor alias_name: ::String
+      attr_accessor tip_configuration: Types::TipConfiguration
       SENSITIVE: []
     end
 

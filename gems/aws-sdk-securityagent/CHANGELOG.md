@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2026-11-19)
+------------------
+
+* Feature - This release exposes additional per-job metadata within code remediation tasks.
+
 1.37.0 (2026-11-18)
 ------------------
 

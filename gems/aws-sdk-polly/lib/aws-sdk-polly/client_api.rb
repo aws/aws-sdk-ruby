@@ -14,21 +14,36 @@ module Aws::Polly
 
     include Seahorse::Model
 
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     Alphabet = Shapes::StringShape.new(name: 'Alphabet')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AudioChunk = Shapes::BlobShape.new(name: 'AudioChunk')
     AudioEvent = Shapes::StructureShape.new(name: 'AudioEvent')
+    AudioFormat = Shapes::StringShape.new(name: 'AudioFormat')
     AudioStream = Shapes::BlobShape.new(name: 'AudioStream', streaming: true)
     AvailabilityErrorMessage = Shapes::StringShape.new(name: 'AvailabilityErrorMessage')
+    ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloseStreamEvent = Shapes::StructureShape.new(name: 'CloseStreamEvent')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
     CoralAvailabilityThrottledResource = Shapes::StringShape.new(name: 'CoralAvailabilityThrottledResource')
     CoralAvailabilityThrottlingReason = Shapes::StringShape.new(name: 'CoralAvailabilityThrottlingReason')
+    CreateVoiceInput = Shapes::StructureShape.new(name: 'CreateVoiceInput')
+    CreateVoiceOutput = Shapes::StructureShape.new(name: 'CreateVoiceOutput')
+    CustomVoiceId = Shapes::StringShape.new(name: 'CustomVoiceId')
+    CustomVoiceLanguageCode = Shapes::StringShape.new(name: 'CustomVoiceLanguageCode')
+    CustomVoiceName = Shapes::StringShape.new(name: 'CustomVoiceName')
+    CustomerManagedEncryption = Shapes::StructureShape.new(name: 'CustomerManagedEncryption')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
     DeleteLexiconInput = Shapes::StructureShape.new(name: 'DeleteLexiconInput')
     DeleteLexiconOutput = Shapes::StructureShape.new(name: 'DeleteLexiconOutput')
+    DeleteVoiceInput = Shapes::StructureShape.new(name: 'DeleteVoiceInput')
+    DeleteVoiceOutput = Shapes::StructureShape.new(name: 'DeleteVoiceOutput')
     DescribeVoicesInput = Shapes::StructureShape.new(name: 'DescribeVoicesInput')
     DescribeVoicesOutput = Shapes::StructureShape.new(name: 'DescribeVoicesOutput')
+    EncryptionContext = Shapes::MapShape.new(name: 'EncryptionContext')
+    EncryptionContextKey = Shapes::StringShape.new(name: 'EncryptionContextKey')
+    EncryptionContextValue = Shapes::StringShape.new(name: 'EncryptionContextValue')
     Engine = Shapes::StringShape.new(name: 'Engine')
     EngineList = Shapes::ListShape.new(name: 'EngineList')
     EngineNotSupportedException = Shapes::StructureShape.new(name: 'EngineNotSupportedException')
@@ -41,6 +56,8 @@ module Aws::Polly
     GetLexiconOutput = Shapes::StructureShape.new(name: 'GetLexiconOutput')
     GetSpeechSynthesisTaskInput = Shapes::StructureShape.new(name: 'GetSpeechSynthesisTaskInput')
     GetSpeechSynthesisTaskOutput = Shapes::StructureShape.new(name: 'GetSpeechSynthesisTaskOutput')
+    GetVoiceInput = Shapes::StructureShape.new(name: 'GetVoiceInput')
+    GetVoiceOutput = Shapes::StructureShape.new(name: 'GetVoiceOutput')
     IncludeAdditionalLanguageCodes = Shapes::BooleanShape.new(name: 'IncludeAdditionalLanguageCodes')
     InvalidLexiconException = Shapes::StructureShape.new(name: 'InvalidLexiconException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
@@ -51,6 +68,7 @@ module Aws::Polly
     InvalidSsmlException = Shapes::StructureShape.new(name: 'InvalidSsmlException')
     InvalidTagParameterException = Shapes::StructureShape.new(name: 'InvalidTagParameterException')
     InvalidTaskIdException = Shapes::StructureShape.new(name: 'InvalidTaskIdException')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
     LanguageCodeList = Shapes::ListShape.new(name: 'LanguageCodeList')
     LanguageName = Shapes::StringShape.new(name: 'LanguageName')
@@ -85,12 +103,18 @@ module Aws::Polly
     PutLexiconInput = Shapes::StructureShape.new(name: 'PutLexiconInput')
     PutLexiconOutput = Shapes::StructureShape.new(name: 'PutLexiconOutput')
     QuotaCode = Shapes::StringShape.new(name: 'QuotaCode')
+    Recording = Shapes::StructureShape.new(name: 'Recording')
+    RecordingBytes = Shapes::BlobShape.new(name: 'RecordingBytes')
+    RecordingData = Shapes::StructureShape.new(name: 'RecordingData')
+    RecordingList = Shapes::ListShape.new(name: 'RecordingList')
     RequestCharacters = Shapes::IntegerShape.new(name: 'RequestCharacters')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    S3Url = Shapes::StringShape.new(name: 'S3Url')
     SampleRate = Shapes::StringShape.new(name: 'SampleRate')
     ServiceCode = Shapes::StringShape.new(name: 'ServiceCode')
+    ServiceErrorMessage = Shapes::StringShape.new(name: 'ServiceErrorMessage')
     ServiceFailureException = Shapes::StructureShape.new(name: 'ServiceFailureException')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Size = Shapes::IntegerShape.new(name: 'Size')
@@ -104,6 +128,7 @@ module Aws::Polly
     StartSpeechSynthesisStreamOutput = Shapes::StructureShape.new(name: 'StartSpeechSynthesisStreamOutput')
     StartSpeechSynthesisTaskInput = Shapes::StructureShape.new(name: 'StartSpeechSynthesisTaskInput')
     StartSpeechSynthesisTaskOutput = Shapes::StructureShape.new(name: 'StartSpeechSynthesisTaskOutput')
+    StatusReason = Shapes::StringShape.new(name: 'StatusReason')
     StreamClosedEvent = Shapes::StructureShape.new(name: 'StreamClosedEvent')
     SynthesisTask = Shapes::StructureShape.new(name: 'SynthesisTask')
     SynthesisTaskNotFoundException = Shapes::StructureShape.new(name: 'SynthesisTaskNotFoundException')
@@ -119,6 +144,7 @@ module Aws::Polly
     TaskId = Shapes::StringShape.new(name: 'TaskId')
     TaskStatus = Shapes::StringShape.new(name: 'TaskStatus')
     TaskStatusReason = Shapes::StringShape.new(name: 'TaskStatusReason')
+    TermsAccepted = Shapes::BooleanShape.new(name: 'TermsAccepted')
     Text = Shapes::StringShape.new(name: 'Text')
     TextEvent = Shapes::StructureShape.new(name: 'TextEvent')
     TextLengthExceededException = Shapes::StructureShape.new(name: 'TextLengthExceededException')
@@ -138,19 +164,52 @@ module Aws::Polly
     ValidationExceptionFieldName = Shapes::StringShape.new(name: 'ValidationExceptionFieldName')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
     Voice = Shapes::StructureShape.new(name: 'Voice')
+    VoiceArn = Shapes::StringShape.new(name: 'VoiceArn')
+    VoiceCreationData = Shapes::StructureShape.new(name: 'VoiceCreationData')
     VoiceId = Shapes::StringShape.new(name: 'VoiceId')
     VoiceList = Shapes::ListShape.new(name: 'VoiceList')
     VoiceName = Shapes::StringShape.new(name: 'VoiceName')
+    VoiceOrigin = Shapes::StringShape.new(name: 'VoiceOrigin')
+    VoiceStatus = Shapes::StringShape.new(name: 'VoiceStatus')
+
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ServiceErrorMessage, location_name: "Message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AudioEvent.add_member(:audio_chunk, Shapes::ShapeRef.new(shape: AudioChunk, eventpayload: true, eventpayload_type: 'blob', location_name: "AudioChunk", metadata: {"eventpayload" => true}))
     AudioEvent.struct_class = Types::AudioEvent
 
     CloseStreamEvent.struct_class = Types::CloseStreamEvent
 
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
+    ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
+    ConflictException.struct_class = Types::ConflictException
+
+    CreateVoiceInput.add_member(:name, Shapes::ShapeRef.new(shape: CustomVoiceName, required: true, location_name: "Name"))
+    CreateVoiceInput.add_member(:language_code, Shapes::ShapeRef.new(shape: CustomVoiceLanguageCode, required: true, location_name: "LanguageCode"))
+    CreateVoiceInput.add_member(:terms_accepted, Shapes::ShapeRef.new(shape: TermsAccepted, required: true, location_name: "TermsAccepted"))
+    CreateVoiceInput.add_member(:voice_creation_data, Shapes::ShapeRef.new(shape: VoiceCreationData, required: true, location_name: "VoiceCreationData"))
+    CreateVoiceInput.add_member(:customer_managed_encryption, Shapes::ShapeRef.new(shape: CustomerManagedEncryption, location_name: "CustomerManagedEncryption"))
+    CreateVoiceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateVoiceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateVoiceInput.struct_class = Types::CreateVoiceInput
+
+    CreateVoiceOutput.add_member(:voice, Shapes::ShapeRef.new(shape: Voice, location_name: "Voice"))
+    CreateVoiceOutput.struct_class = Types::CreateVoiceOutput
+
+    CustomerManagedEncryption.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, required: true, location_name: "KmsKeyArn"))
+    CustomerManagedEncryption.add_member(:encryption_context, Shapes::ShapeRef.new(shape: EncryptionContext, location_name: "EncryptionContext"))
+    CustomerManagedEncryption.struct_class = Types::CustomerManagedEncryption
+
     DeleteLexiconInput.add_member(:name, Shapes::ShapeRef.new(shape: LexiconName, required: true, location: "uri", location_name: "LexiconName"))
     DeleteLexiconInput.struct_class = Types::DeleteLexiconInput
 
     DeleteLexiconOutput.struct_class = Types::DeleteLexiconOutput
+
+    DeleteVoiceInput.add_member(:voice_id, Shapes::ShapeRef.new(shape: CustomVoiceId, required: true, location: "uri", location_name: "VoiceId"))
+    DeleteVoiceInput.struct_class = Types::DeleteVoiceInput
+
+    DeleteVoiceOutput.struct_class = Types::DeleteVoiceOutput
 
     DescribeVoicesInput.add_member(:engine, Shapes::ShapeRef.new(shape: Engine, location: "querystring", location_name: "Engine"))
     DescribeVoicesInput.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location: "querystring", location_name: "LanguageCode"))
@@ -161,6 +220,9 @@ module Aws::Polly
     DescribeVoicesOutput.add_member(:voices, Shapes::ShapeRef.new(shape: VoiceList, location_name: "Voices"))
     DescribeVoicesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeVoicesOutput.struct_class = Types::DescribeVoicesOutput
+
+    EncryptionContext.key = Shapes::ShapeRef.new(shape: EncryptionContextKey)
+    EncryptionContext.value = Shapes::ShapeRef.new(shape: EncryptionContextValue)
 
     EngineList.member = Shapes::ShapeRef.new(shape: Engine)
 
@@ -182,6 +244,12 @@ module Aws::Polly
 
     GetSpeechSynthesisTaskOutput.add_member(:synthesis_task, Shapes::ShapeRef.new(shape: SynthesisTask, location_name: "SynthesisTask"))
     GetSpeechSynthesisTaskOutput.struct_class = Types::GetSpeechSynthesisTaskOutput
+
+    GetVoiceInput.add_member(:voice_id, Shapes::ShapeRef.new(shape: CustomVoiceId, required: true, location: "uri", location_name: "VoiceId"))
+    GetVoiceInput.struct_class = Types::GetVoiceInput
+
+    GetVoiceOutput.add_member(:voice, Shapes::ShapeRef.new(shape: Voice, location_name: "Voice"))
+    GetVoiceOutput.struct_class = Types::GetVoiceOutput
 
     InvalidLexiconException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidLexiconException.struct_class = Types::InvalidLexiconException
@@ -278,6 +346,16 @@ module Aws::Polly
     PutLexiconInput.struct_class = Types::PutLexiconInput
 
     PutLexiconOutput.struct_class = Types::PutLexiconOutput
+
+    Recording.add_member(:format, Shapes::ShapeRef.new(shape: AudioFormat, required: true, location_name: "Format"))
+    Recording.add_member(:data, Shapes::ShapeRef.new(shape: RecordingData, required: true, location_name: "Data"))
+    Recording.struct_class = Types::Recording
+
+    RecordingData.add_member(:s3_url, Shapes::ShapeRef.new(shape: S3Url, location_name: "S3Url"))
+    RecordingData.add_member(:bytes, Shapes::ShapeRef.new(shape: RecordingBytes, location_name: "Bytes"))
+    RecordingData.struct_class = Types::RecordingData
+
+    RecordingList.member = Shapes::ShapeRef.new(shape: Recording)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
@@ -440,14 +518,24 @@ module Aws::Polly
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
 
+    Voice.add_member(:arn, Shapes::ShapeRef.new(shape: VoiceArn, location_name: "Arn"))
     Voice.add_member(:gender, Shapes::ShapeRef.new(shape: Gender, location_name: "Gender"))
     Voice.add_member(:id, Shapes::ShapeRef.new(shape: VoiceId, location_name: "Id"))
     Voice.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     Voice.add_member(:language_name, Shapes::ShapeRef.new(shape: LanguageName, location_name: "LanguageName"))
     Voice.add_member(:name, Shapes::ShapeRef.new(shape: VoiceName, location_name: "Name"))
+    Voice.add_member(:origin, Shapes::ShapeRef.new(shape: VoiceOrigin, location_name: "Origin"))
+    Voice.add_member(:status, Shapes::ShapeRef.new(shape: VoiceStatus, location_name: "Status"))
+    Voice.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReason, location_name: "StatusReason"))
     Voice.add_member(:additional_language_codes, Shapes::ShapeRef.new(shape: LanguageCodeList, location_name: "AdditionalLanguageCodes"))
     Voice.add_member(:supported_engines, Shapes::ShapeRef.new(shape: EngineList, location_name: "SupportedEngines"))
+    Voice.add_member(:voice_creation_data, Shapes::ShapeRef.new(shape: VoiceCreationData, location_name: "VoiceCreationData"))
+    Voice.add_member(:customer_managed_encryption, Shapes::ShapeRef.new(shape: CustomerManagedEncryption, location_name: "CustomerManagedEncryption"))
+    Voice.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreationTime"))
     Voice.struct_class = Types::Voice
+
+    VoiceCreationData.add_member(:recordings, Shapes::ShapeRef.new(shape: RecordingList, required: true, location_name: "Recordings"))
+    VoiceCreationData.struct_class = Types::VoiceCreationData
 
     VoiceList.member = Shapes::ShapeRef.new(shape: Voice)
 
@@ -470,6 +558,21 @@ module Aws::Polly
         "uid" => "polly-2016-06-10",
       }
 
+      api.add_operation(:create_voice, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateVoice"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/voices"
+        o.input = Shapes::ShapeRef.new(shape: CreateVoiceInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateVoiceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:delete_lexicon, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteLexicon"
         o.http_method = "DELETE"
@@ -478,6 +581,19 @@ module Aws::Polly
         o.output = Shapes::ShapeRef.new(shape: DeleteLexiconOutput)
         o.errors << Shapes::ShapeRef.new(shape: LexiconNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_voice, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVoice"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/voices/{VoiceId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVoiceInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteVoiceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:describe_voices, Seahorse::Model::Operation.new.tap do |o|
@@ -509,6 +625,18 @@ module Aws::Polly
         o.errors << Shapes::ShapeRef.new(shape: InvalidTaskIdException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
         o.errors << Shapes::ShapeRef.new(shape: SynthesisTaskNotFoundException)
+      end)
+
+      api.add_operation(:get_voice, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetVoice"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/voices/{VoiceId}"
+        o.input = Shapes::ShapeRef.new(shape: GetVoiceInput)
+        o.output = Shapes::ShapeRef.new(shape: GetVoiceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:list_lexicons, Seahorse::Model::Operation.new.tap do |o|
@@ -578,6 +706,8 @@ module Aws::Polly
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.async = true
       end)
 
@@ -599,6 +729,8 @@ module Aws::Polly
         o.errors << Shapes::ShapeRef.new(shape: MarksNotSupportedForFormatException)
         o.errors << Shapes::ShapeRef.new(shape: SsmlMarksNotSupportedForTextTypeException)
         o.errors << Shapes::ShapeRef.new(shape: LanguageNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:synthesize_speech, Seahorse::Model::Operation.new.tap do |o|
@@ -616,6 +748,8 @@ module Aws::Polly
         o.errors << Shapes::ShapeRef.new(shape: SsmlMarksNotSupportedForTextTypeException)
         o.errors << Shapes::ShapeRef.new(shape: LanguageNotSupportedException)
         o.errors << Shapes::ShapeRef.new(shape: EngineNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

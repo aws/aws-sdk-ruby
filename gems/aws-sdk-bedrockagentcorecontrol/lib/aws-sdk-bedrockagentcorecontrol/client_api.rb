@@ -97,6 +97,7 @@ module Aws::BedrockAgentCoreControl
     AuthorizerType = Shapes::StringShape.new(name: 'AuthorizerType')
     AuthorizingClaimMatchValueType = Shapes::StructureShape.new(name: 'AuthorizingClaimMatchValueType')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
+    AwsBillingConnectorConfiguration = Shapes::StructureShape.new(name: 'AwsBillingConnectorConfiguration')
     BatchPutGatewayRateLimitsRequest = Shapes::StructureShape.new(name: 'BatchPutGatewayRateLimitsRequest')
     BatchPutGatewayRateLimitsResponse = Shapes::StructureShape.new(name: 'BatchPutGatewayRateLimitsResponse')
     BatchPutLimitEntries = Shapes::ListShape.new(name: 'BatchPutLimitEntries')
@@ -240,6 +241,7 @@ module Aws::BedrockAgentCoreControl
     ContentConfiguration = Shapes::StructureShape.new(name: 'ContentConfiguration')
     ContentLevel = Shapes::StringShape.new(name: 'ContentLevel')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
+    CpuOptions = Shapes::StructureShape.new(name: 'CpuOptions')
     CreateAgentRuntimeEndpointRequest = Shapes::StructureShape.new(name: 'CreateAgentRuntimeEndpointRequest')
     CreateAgentRuntimeEndpointResponse = Shapes::StructureShape.new(name: 'CreateAgentRuntimeEndpointResponse')
     CreateAgentRuntimeRequest = Shapes::StructureShape.new(name: 'CreateAgentRuntimeRequest')
@@ -1024,6 +1026,7 @@ module Aws::BedrockAgentCoreControl
     NamespaceVariableKey = Shapes::StringShape.new(name: 'NamespaceVariableKey')
     NamespacesList = Shapes::ListShape.new(name: 'NamespacesList')
     NaturalLanguage = Shapes::StringShape.new(name: 'NaturalLanguage')
+    NestedVirtualization = Shapes::StringShape.new(name: 'NestedVirtualization')
     NetworkConfiguration = Shapes::StructureShape.new(name: 'NetworkConfiguration')
     NetworkMode = Shapes::StringShape.new(name: 'NetworkMode')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -1735,6 +1738,9 @@ module Aws::BedrockAgentCoreControl
     AuthorizingClaimMatchValueType.add_member(:claim_match_operator, Shapes::ShapeRef.new(shape: ClaimMatchOperatorType, required: true, location_name: "claimMatchOperator"))
     AuthorizingClaimMatchValueType.struct_class = Types::AuthorizingClaimMatchValueType
 
+    AwsBillingConnectorConfiguration.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "iamRoleArn"))
+    AwsBillingConnectorConfiguration.struct_class = Types::AwsBillingConnectorConfiguration
+
     BatchPutGatewayRateLimitsRequest.add_member(:gateway_identifier, Shapes::ShapeRef.new(shape: GatewayIdentifier, required: true, location: "uri", location_name: "gatewayIdentifier"))
     BatchPutGatewayRateLimitsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     BatchPutGatewayRateLimitsRequest.add_member(:rate_limits, Shapes::ShapeRef.new(shape: BatchPutLimitEntries, required: true, location_name: "rateLimits"))
@@ -2074,6 +2080,9 @@ module Aws::BedrockAgentCoreControl
     ContentConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: ContentType, required: true, location_name: "type"))
     ContentConfiguration.add_member(:level, Shapes::ShapeRef.new(shape: ContentLevel, location_name: "level"))
     ContentConfiguration.struct_class = Types::ContentConfiguration
+
+    CpuOptions.add_member(:nested_virtualization, Shapes::ShapeRef.new(shape: NestedVirtualization, location_name: "nestedVirtualization"))
+    CpuOptions.struct_class = Types::CpuOptions
 
     CreateAgentRuntimeEndpointRequest.add_member(:agent_runtime_id, Shapes::ShapeRef.new(shape: AgentRuntimeId, required: true, location: "uri", location_name: "agentRuntimeId"))
     CreateAgentRuntimeEndpointRequest.add_member(:name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "name"))
@@ -2477,7 +2486,7 @@ module Aws::BedrockAgentCoreControl
     CreatePaymentConnectorRequest.add_member(:name, Shapes::ShapeRef.new(shape: PaymentConnectorName, required: true, location_name: "name"))
     CreatePaymentConnectorRequest.add_member(:description, Shapes::ShapeRef.new(shape: PaymentsDescription, location_name: "description"))
     CreatePaymentConnectorRequest.add_member(:type, Shapes::ShapeRef.new(shape: PaymentConnectorType, required: true, location_name: "type"))
-    CreatePaymentConnectorRequest.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialsProviderConfigurations, required: true, location_name: "credentialProviderConfigurations"))
+    CreatePaymentConnectorRequest.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialsProviderConfigurations, location_name: "credentialProviderConfigurations"))
     CreatePaymentConnectorRequest.add_member(:provision_mode, Shapes::ShapeRef.new(shape: PaymentConnectorProvisionMode, location_name: "provisionMode"))
     CreatePaymentConnectorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreatePaymentConnectorRequest.struct_class = Types::CreatePaymentConnectorRequest
@@ -2627,9 +2636,11 @@ module Aws::BedrockAgentCoreControl
 
     CredentialsProviderConfiguration.add_member(:coinbase_cdp, Shapes::ShapeRef.new(shape: PaymentCredentialProviderConfiguration, location_name: "coinbaseCDP"))
     CredentialsProviderConfiguration.add_member(:stripe_privy, Shapes::ShapeRef.new(shape: PaymentCredentialProviderConfiguration, location_name: "stripePrivy"))
+    CredentialsProviderConfiguration.add_member(:aws_billing, Shapes::ShapeRef.new(shape: AwsBillingConnectorConfiguration, location_name: "awsBilling"))
     CredentialsProviderConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CredentialsProviderConfiguration.add_member_subclass(:coinbase_cdp, Types::CredentialsProviderConfiguration::CoinbaseCdp)
     CredentialsProviderConfiguration.add_member_subclass(:stripe_privy, Types::CredentialsProviderConfiguration::StripePrivy)
+    CredentialsProviderConfiguration.add_member_subclass(:aws_billing, Types::CredentialsProviderConfiguration::AwsBilling)
     CredentialsProviderConfiguration.add_member_subclass(:unknown, Types::CredentialsProviderConfiguration::Unknown)
     CredentialsProviderConfiguration.struct_class = Types::CredentialsProviderConfiguration
 
@@ -4532,6 +4543,7 @@ module Aws::BedrockAgentCoreControl
     LaunchParameters.add_member(:ssh_key_name, Shapes::ShapeRef.new(shape: SSHKeyName, location_name: "sshKeyName"))
     LaunchParameters.add_member(:instance_profile_arn, Shapes::ShapeRef.new(shape: InstanceProfileArn, location_name: "instanceProfileArn"))
     LaunchParameters.add_member(:propagated_tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "propagatedTags"))
+    LaunchParameters.add_member(:cpu_options, Shapes::ShapeRef.new(shape: CpuOptions, location_name: "cpuOptions"))
     LaunchParameters.struct_class = Types::LaunchParameters
 
     LaunchParametersEphemeralVolumesList.member = Shapes::ShapeRef.new(shape: EphemeralBlockDeviceMapping)

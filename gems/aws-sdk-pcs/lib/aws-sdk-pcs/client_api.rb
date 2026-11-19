@@ -81,6 +81,14 @@ module Aws::PCS
     InstanceProfileArn = Shapes::StringShape.new(name: 'InstanceProfileArn')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    JobSubmitPlugin = Shapes::StructureShape.new(name: 'JobSubmitPlugin')
+    JobSubmitPluginList = Shapes::ListShape.new(name: 'JobSubmitPluginList')
+    JobSubmitPluginNameString = Shapes::StringShape.new(name: 'JobSubmitPluginNameString')
+    JobSubmitPluginType = Shapes::StringShape.new(name: 'JobSubmitPluginType')
+    JobSubmitScriptSource = Shapes::StructureShape.new(name: 'JobSubmitScriptSource')
+    JobSubmitScriptSourceChecksumString = Shapes::StringShape.new(name: 'JobSubmitScriptSourceChecksumString')
+    JobSubmitScriptSourceS3VersionIdString = Shapes::StringShape.new(name: 'JobSubmitScriptSourceS3VersionIdString')
+    JobSubmitScriptSourceScriptLocationString = Shapes::StringShape.new(name: 'JobSubmitScriptSourceScriptLocationString')
     JwtAuth = Shapes::StructureShape.new(name: 'JwtAuth')
     JwtKey = Shapes::StructureShape.new(name: 'JwtKey')
     KeyPairName = Shapes::StringShape.new(name: 'KeyPairName')
@@ -223,6 +231,7 @@ module Aws::PCS
     ClusterSlurmConfiguration.add_member(:slurm_custom_settings, Shapes::ShapeRef.new(shape: SlurmCustomSettings, location_name: "slurmCustomSettings"))
     ClusterSlurmConfiguration.add_member(:slurmdbd_custom_settings, Shapes::ShapeRef.new(shape: SlurmdbdCustomSettings, location_name: "slurmdbdCustomSettings"))
     ClusterSlurmConfiguration.add_member(:cgroup_custom_settings, Shapes::ShapeRef.new(shape: CgroupCustomSettings, location_name: "cgroupCustomSettings"))
+    ClusterSlurmConfiguration.add_member(:job_submit_plugins, Shapes::ShapeRef.new(shape: JobSubmitPluginList, location_name: "jobSubmitPlugins"))
     ClusterSlurmConfiguration.add_member(:auth_key, Shapes::ShapeRef.new(shape: SlurmAuthKey, location_name: "authKey"))
     ClusterSlurmConfiguration.add_member(:jwt_auth, Shapes::ShapeRef.new(shape: JwtAuth, location_name: "jwtAuth"))
     ClusterSlurmConfiguration.add_member(:accounting, Shapes::ShapeRef.new(shape: Accounting, location_name: "accounting"))
@@ -233,6 +242,7 @@ module Aws::PCS
     ClusterSlurmConfigurationRequest.add_member(:slurm_custom_settings, Shapes::ShapeRef.new(shape: SlurmCustomSettings, location_name: "slurmCustomSettings"))
     ClusterSlurmConfigurationRequest.add_member(:slurmdbd_custom_settings, Shapes::ShapeRef.new(shape: SlurmdbdCustomSettings, location_name: "slurmdbdCustomSettings"))
     ClusterSlurmConfigurationRequest.add_member(:cgroup_custom_settings, Shapes::ShapeRef.new(shape: CgroupCustomSettings, location_name: "cgroupCustomSettings"))
+    ClusterSlurmConfigurationRequest.add_member(:job_submit_plugins, Shapes::ShapeRef.new(shape: JobSubmitPluginList, location_name: "jobSubmitPlugins"))
     ClusterSlurmConfigurationRequest.add_member(:accounting, Shapes::ShapeRef.new(shape: AccountingRequest, location_name: "accounting"))
     ClusterSlurmConfigurationRequest.add_member(:slurm_rest, Shapes::ShapeRef.new(shape: SlurmRestRequest, location_name: "slurmRest"))
     ClusterSlurmConfigurationRequest.struct_class = Types::ClusterSlurmConfigurationRequest
@@ -415,6 +425,18 @@ module Aws::PCS
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    JobSubmitPlugin.add_member(:name, Shapes::ShapeRef.new(shape: JobSubmitPluginNameString, required: true, location_name: "name"))
+    JobSubmitPlugin.add_member(:type, Shapes::ShapeRef.new(shape: JobSubmitPluginType, required: true, location_name: "type"))
+    JobSubmitPlugin.add_member(:script_source, Shapes::ShapeRef.new(shape: JobSubmitScriptSource, required: true, location_name: "scriptSource"))
+    JobSubmitPlugin.struct_class = Types::JobSubmitPlugin
+
+    JobSubmitPluginList.member = Shapes::ShapeRef.new(shape: JobSubmitPlugin)
+
+    JobSubmitScriptSource.add_member(:script_location, Shapes::ShapeRef.new(shape: JobSubmitScriptSourceScriptLocationString, required: true, location_name: "scriptLocation"))
+    JobSubmitScriptSource.add_member(:s3_version_id, Shapes::ShapeRef.new(shape: JobSubmitScriptSourceS3VersionIdString, location_name: "s3VersionId"))
+    JobSubmitScriptSource.add_member(:checksum, Shapes::ShapeRef.new(shape: JobSubmitScriptSourceChecksumString, location_name: "checksum"))
+    JobSubmitScriptSource.struct_class = Types::JobSubmitScriptSource
 
     JwtAuth.add_member(:jwt_key, Shapes::ShapeRef.new(shape: JwtKey, location_name: "jwtKey"))
     JwtAuth.struct_class = Types::JwtAuth
@@ -638,6 +660,7 @@ module Aws::PCS
     UpdateClusterSlurmConfigurationRequest.add_member(:slurm_custom_settings, Shapes::ShapeRef.new(shape: SlurmCustomSettings, location_name: "slurmCustomSettings"))
     UpdateClusterSlurmConfigurationRequest.add_member(:slurmdbd_custom_settings, Shapes::ShapeRef.new(shape: SlurmdbdCustomSettings, location_name: "slurmdbdCustomSettings"))
     UpdateClusterSlurmConfigurationRequest.add_member(:cgroup_custom_settings, Shapes::ShapeRef.new(shape: CgroupCustomSettings, location_name: "cgroupCustomSettings"))
+    UpdateClusterSlurmConfigurationRequest.add_member(:job_submit_plugins, Shapes::ShapeRef.new(shape: JobSubmitPluginList, location_name: "jobSubmitPlugins"))
     UpdateClusterSlurmConfigurationRequest.add_member(:accounting, Shapes::ShapeRef.new(shape: UpdateAccountingRequest, location_name: "accounting"))
     UpdateClusterSlurmConfigurationRequest.add_member(:slurm_rest, Shapes::ShapeRef.new(shape: UpdateSlurmRestRequest, location_name: "slurmRest"))
     UpdateClusterSlurmConfigurationRequest.struct_class = Types::UpdateClusterSlurmConfigurationRequest

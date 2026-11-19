@@ -638,8 +638,13 @@ module Aws::AgentRegistryControl
 
     # Creates a registry record within a registry. A registry record
     # describes a discoverable resource, such as an MCP server, an agent, an
-    # agent skill, or a custom resource. Creation is asynchronous: the
-    # record is returned with the CREATING status while it is processed.
+    # agent skill, or a custom resource. For an agent skill, you can upload
+    # a skill package in `artifact`, or synchronize the skill from an Amazon
+    # S3 or GitHub source. Creation is asynchronous: the operation returns
+    # the record with the `CREATING` status while the registry processes it.
+    # If a GitHub user must first authorize access to the source, the
+    # operation returns the record with the `CREATE_PENDING_AUTH` status
+    # instead.
     #
     # @option params [required, String] :registry_id
     #   The identifier of the registry in which to create the record (ARN or
@@ -660,6 +665,13 @@ module Aws::AgentRegistryControl
     #
     # @option params [required, Types::Descriptors] :descriptors
     #   The typed descriptor content for the registry record
+    #
+    # @option params [Types::RegistryRecordArtifactUpload] :artifact
+    #   The skill package to store with the record, for a record of type
+    #   `SKILL` with an `agentSkillsDefinition` descriptor. The registry
+    #   validates the package after the operation returns and sets
+    #   `skillMd.data` from the package's SKILL.md. A request that uploads a
+    #   package can't also set a skill source or send new `skillMd.data`.
     #
     # @option params [String] :record_version
     #   The version of the registry record
@@ -692,6 +704,7 @@ module Aws::AgentRegistryControl
     #
     #   * {Types::CreateRegistryRecordResponse#record_arn #record_arn} => String
     #   * {Types::CreateRegistryRecordResponse#status #status} => String
+    #   * {Types::CreateRegistryRecordResponse#authorization_data #authorization_data} => Types::AuthorizationData
     #
     # @example Request syntax with placeholder values
     #
@@ -720,11 +733,12 @@ module Aws::AgentRegistryControl
     #                 credential_provider: { # required
     #                   oauth_credential_provider: {
     #                     provider_arn: "CredentialProviderArn", # required
-    #                     grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS
+    #                     grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
     #                     scopes: ["String"],
     #                     custom_parameters: {
     #                       "String" => "String",
     #                     },
+    #                     return_url: "OAuthReturnUrl",
     #                   },
     #                   iam_credential_provider: {
     #                     role_arn: "IamRoleArn",
@@ -749,11 +763,12 @@ module Aws::AgentRegistryControl
     #                 credential_provider: { # required
     #                   oauth_credential_provider: {
     #                     provider_arn: "CredentialProviderArn", # required
-    #                     grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS
+    #                     grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
     #                     scopes: ["String"],
     #                     custom_parameters: {
     #                       "String" => "String",
     #                     },
+    #                     return_url: "OAuthReturnUrl",
     #                   },
     #                   iam_credential_provider: {
     #                     role_arn: "IamRoleArn",
@@ -782,11 +797,12 @@ module Aws::AgentRegistryControl
     #                     credential_provider: { # required
     #                       oauth_credential_provider: {
     #                         provider_arn: "CredentialProviderArn", # required
-    #                         grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS
+    #                         grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
     #                         scopes: ["String"],
     #                         custom_parameters: {
     #                           "String" => "String",
     #                         },
+    #                         return_url: "OAuthReturnUrl",
     #                       },
     #                       iam_credential_provider: {
     #                         role_arn: "IamRoleArn",
@@ -797,6 +813,40 @@ module Aws::AgentRegistryControl
     #                   },
     #                 ],
     #               },
+    #             },
+    #           },
+    #           skill_package: {
+    #             source: {
+    #               from_url: {
+    #                 url: "DescriptorSourceUrl", # required
+    #                 credential_provider_configurations: [
+    #                   {
+    #                     credential_provider_type: "OAUTH", # required, accepts OAUTH, IAM
+    #                     credential_provider: { # required
+    #                       oauth_credential_provider: {
+    #                         provider_arn: "CredentialProviderArn", # required
+    #                         grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #                         scopes: ["String"],
+    #                         custom_parameters: {
+    #                           "String" => "String",
+    #                         },
+    #                         return_url: "OAuthReturnUrl",
+    #                       },
+    #                       iam_credential_provider: {
+    #                         role_arn: "IamRoleArn",
+    #                         service: "IamSigningServiceName",
+    #                         region: "IamSigningRegion",
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #           repository_provider: "GITHUB", # accepts GITHUB
+    #           source_configuration: {
+    #             s3: {
+    #               bucket_owner_account_id: "S3BucketOwnerAccountId",
     #             },
     #           },
     #         },
@@ -814,11 +864,12 @@ module Aws::AgentRegistryControl
     #                 credential_provider: { # required
     #                   oauth_credential_provider: {
     #                     provider_arn: "CredentialProviderArn", # required
-    #                     grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS
+    #                     grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
     #                     scopes: ["String"],
     #                     custom_parameters: {
     #                       "String" => "String",
     #                     },
+    #                     return_url: "OAuthReturnUrl",
     #                   },
     #                   iam_credential_provider: {
     #                     role_arn: "IamRoleArn",
@@ -841,11 +892,12 @@ module Aws::AgentRegistryControl
     #                 credential_provider: { # required
     #                   oauth_credential_provider: {
     #                     provider_arn: "CredentialProviderArn", # required
-    #                     grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS
+    #                     grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
     #                     scopes: ["String"],
     #                     custom_parameters: {
     #                       "String" => "String",
     #                     },
+    #                     return_url: "OAuthReturnUrl",
     #                   },
     #                   iam_credential_provider: {
     #                     role_arn: "IamRoleArn",
@@ -858,6 +910,10 @@ module Aws::AgentRegistryControl
     #           },
     #         },
     #       },
+    #     },
+    #     artifact: {
+    #       content: "data", # required
+    #       sha256: "Sha256Hash",
     #     },
     #     record_version: "RegistryRecordVersion",
     #     client_token: "ClientToken",
@@ -1007,7 +1063,11 @@ module Aws::AgentRegistryControl
     # @example Response structure
     #
     #   resp.record_arn #=> String
-    #   resp.status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "CREATE_PENDING_AUTH", "UPDATE_PENDING_AUTH"
+    #   resp.authorization_data.oauth2.authorization_url #=> String
+    #   resp.authorization_data.oauth2.user_id #=> String
+    #   resp.authorization_data.oauth2.authorization_attempt_id #=> String
+    #   resp.authorization_data.oauth2.expires_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/CreateRegistryRecord AWS API Documentation
     #
@@ -1173,7 +1233,11 @@ module Aws::AgentRegistryControl
       req.send_request(options)
     end
 
-    # Retrieves the details of a registry record
+    # Retrieves the details of a registry record. The response describes the
+    # record's latest revision, including a revision that isn't approved
+    # yet. For a skill record, the operation also returns the skill package
+    # in `artifact` and the source that the registry last synchronized the
+    # skill from in `synchronizedSource`.
     #
     # @option params [required, String] :registry_id
     #   The identifier of the registry containing the record (ARN or ID)
@@ -1201,6 +1265,8 @@ module Aws::AgentRegistryControl
     #   * {Types::GetRegistryRecordResponse#created_by #created_by} => String
     #   * {Types::GetRegistryRecordResponse#custom_metadata #custom_metadata} => Hash,Array,String,Numeric,Boolean
     #   * {Types::GetRegistryRecordResponse#custom_metadata_schema_compliance_status #custom_metadata_schema_compliance_status} => String
+    #   * {Types::GetRegistryRecordResponse#artifact #artifact} => Types::RegistryRecordArtifactDownload
+    #   * {Types::GetRegistryRecordResponse#synchronized_source #synchronized_source} => Types::RegistryRecordSynchronizedSource
     #
     # @example Request syntax with placeholder values
     #
@@ -1226,11 +1292,12 @@ module Aws::AgentRegistryControl
     #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations #=> Array
     #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider_type #=> String, one of "OAUTH", "IAM"
     #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
-    #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS"
+    #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
     #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes #=> Array
     #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes[0] #=> String
     #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters #=> Hash
     #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters["String"] #=> String
+    #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.return_url #=> String
     #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
     #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
     #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
@@ -1240,11 +1307,12 @@ module Aws::AgentRegistryControl
     #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations #=> Array
     #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider_type #=> String, one of "OAUTH", "IAM"
     #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
-    #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS"
+    #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
     #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes #=> Array
     #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes[0] #=> String
     #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters #=> Hash
     #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters["String"] #=> String
+    #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.return_url #=> String
     #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
     #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
     #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
@@ -1256,24 +1324,41 @@ module Aws::AgentRegistryControl
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations #=> Array
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider_type #=> String, one of "OAUTH", "IAM"
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
-    #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS"
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes #=> Array
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes[0] #=> String
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters #=> Hash
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters["String"] #=> String
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.return_url #=> String
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.url #=> String
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations #=> Array
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider_type #=> String, one of "OAUTH", "IAM"
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes #=> Array
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes[0] #=> String
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters #=> Hash
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters["String"] #=> String
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.return_url #=> String
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
+    #   resp.descriptors.agent_skills_definition.additional_data.repository_provider #=> String, one of "GITHUB"
+    #   resp.descriptors.agent_skills_definition.additional_data.source_configuration.s3.bucket_owner_account_id #=> String
     #   resp.descriptors.custom.data #=> String
     #   resp.descriptors.http.source.from_url.url #=> String
     #   resp.descriptors.http.source.from_url.credential_provider_configurations #=> Array
     #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider_type #=> String, one of "OAUTH", "IAM"
     #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
-    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS"
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
     #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes #=> Array
     #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes[0] #=> String
     #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters #=> Hash
     #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters["String"] #=> String
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.return_url #=> String
     #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
     #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
     #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
@@ -1281,16 +1366,17 @@ module Aws::AgentRegistryControl
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations #=> Array
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider_type #=> String, one of "OAUTH", "IAM"
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
-    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS"
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes #=> Array
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes[0] #=> String
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters #=> Hash
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters["String"] #=> String
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.return_url #=> String
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
     #   resp.record_version #=> String
-    #   resp.status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "CREATE_PENDING_AUTH", "UPDATE_PENDING_AUTH"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.status_reason #=> String
@@ -1378,6 +1464,15 @@ module Aws::AgentRegistryControl
     #   resp.created_by_auto_detection #=> Boolean
     #   resp.created_by #=> String
     #   resp.custom_metadata_schema_compliance_status #=> String, one of "COMPLIANT", "NON_COMPLIANT"
+    #   resp.artifact.sha256 #=> String
+    #   resp.artifact.download_url #=> String
+    #   resp.synchronized_source.s3.url #=> String
+    #   resp.synchronized_source.s3.synchronized_at #=> Time
+    #   resp.synchronized_source.s3.version_id #=> String
+    #   resp.synchronized_source.s3.e_tag #=> String
+    #   resp.synchronized_source.git_hub.url #=> String
+    #   resp.synchronized_source.git_hub.synchronized_at #=> Time
+    #   resp.synchronized_source.git_hub.commit_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1535,7 +1630,7 @@ module Aws::AgentRegistryControl
     #   resp.registry_records[0].description #=> String
     #   resp.registry_records[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY"
     #   resp.registry_records[0].record_version #=> String
-    #   resp.registry_records[0].status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.registry_records[0].status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "CREATE_PENDING_AUTH", "UPDATE_PENDING_AUTH"
     #   resp.registry_records[0].created_at #=> Time
     #   resp.registry_records[0].updated_at #=> Time
     #   resp.registry_records[0].created_by_auto_detection #=> Boolean
@@ -1620,7 +1715,7 @@ module Aws::AgentRegistryControl
     #   resp.registry_arn #=> String
     #   resp.record_arn #=> String
     #   resp.record_id #=> String
-    #   resp.status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "CREATE_PENDING_AUTH", "UPDATE_PENDING_AUTH"
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/SubmitRegistryRecordForApproval AWS API Documentation
@@ -1907,10 +2002,12 @@ module Aws::AgentRegistryControl
       req.send_request(options)
     end
 
-    # Updates a registry record. The update is asynchronous: the record is
-    # returned with the UPDATING status while it is processed. Fields that
-    # use update wrappers follow PATCH semantics: omit the field to leave it
-    # unchanged.
+    # Updates a registry record. The update is asynchronous: the operation
+    # returns the record with the `UPDATING` status while the registry
+    # processes it. If a GitHub user must first authorize access to the
+    # record's skill source, the operation returns the record with the
+    # `UPDATE_PENDING_AUTH` status instead. Fields that use update wrappers
+    # follow PATCH semantics: omit the field to leave it unchanged.
     #
     # @option params [required, String] :registry_id
     #   The identifier of the registry containing the record (ARN or ID)
@@ -1938,6 +2035,15 @@ module Aws::AgentRegistryControl
     #   The updated typed descriptor content for the registry record. Omit to
     #   leave the descriptors unchanged.
     #
+    # @option params [Types::UpdatedRegistryRecordArtifact] :artifact
+    #   The change to the record's uploaded skill package. Omit it to keep
+    #   the current package, specify an empty object to remove an uploaded
+    #   package, or specify `optionalValue` to upload a new package. An empty
+    #   object doesn't remove a package that the record synchronizes from a
+    #   source. To stop that synchronization, remove `skillPackage`. A request
+    #   that changes `skillMd.data` replaces the record's package with that
+    #   text, even if you omit this member.
+    #
     # @option params [String] :record_version
     #   The updated version of the registry record. Omit to leave the version
     #   unchanged.
@@ -1950,8 +2056,23 @@ module Aws::AgentRegistryControl
     #   clear all metadata.
     #
     # @option params [Boolean] :trigger_synchronization
-    #   Whether to trigger synchronization of the record's descriptor content
-    #   from its source
+    #   Specifies whether to synchronize the record's descriptor content from
+    #   its source. For a skill record, the registry reads the stored
+    #   `skillMd.source` or `skillPackage.source` again, because it doesn't
+    #   watch the source for changes. For a GitHub source, the operation also
+    #   returns a new authorization link when one is needed. An update that
+    #   sets a different skill source starts a synchronization even if you
+    #   omit this member.
+    #
+    # @option params [Boolean] :force_authentication
+    #   Specifies whether to ask a GitHub user to authorize access again, even
+    #   when the current authorization still works, for example to use a
+    #   different GitHub account. You can use it only together with
+    #   `triggerSynchronization`, for a GitHub source whose credential
+    #   provider uses the `AUTHORIZATION_CODE` grant. The new authorization
+    #   also replaces the one that the same IAM principal's other records in
+    #   the registry use for the same host, credential provider, scopes, and
+    #   custom parameters.
     #
     # @option params [Array<Types::Provenance>] :provenance
     #   The provenance lineage re-assertion for the registry record. This
@@ -1981,6 +2102,7 @@ module Aws::AgentRegistryControl
     #   * {Types::UpdateRegistryRecordResponse#created_by #created_by} => String
     #   * {Types::UpdateRegistryRecordResponse#custom_metadata #custom_metadata} => Hash,Array,String,Numeric,Boolean
     #   * {Types::UpdateRegistryRecordResponse#custom_metadata_schema_compliance_status #custom_metadata_schema_compliance_status} => String
+    #   * {Types::UpdateRegistryRecordResponse#authorization_data #authorization_data} => Types::AuthorizationData
     #
     # @example Request syntax with placeholder values
     #
@@ -2015,11 +2137,12 @@ module Aws::AgentRegistryControl
     #                       credential_provider: { # required
     #                         oauth_credential_provider: {
     #                           provider_arn: "CredentialProviderArn", # required
-    #                           grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS
+    #                           grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
     #                           scopes: ["String"],
     #                           custom_parameters: {
     #                             "String" => "String",
     #                           },
+    #                           return_url: "OAuthReturnUrl",
     #                         },
     #                         iam_credential_provider: {
     #                           role_arn: "IamRoleArn",
@@ -2066,11 +2189,12 @@ module Aws::AgentRegistryControl
     #                       credential_provider: { # required
     #                         oauth_credential_provider: {
     #                           provider_arn: "CredentialProviderArn", # required
-    #                           grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS
+    #                           grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
     #                           scopes: ["String"],
     #                           custom_parameters: {
     #                             "String" => "String",
     #                           },
+    #                           return_url: "OAuthReturnUrl",
     #                         },
     #                         iam_credential_provider: {
     #                           role_arn: "IamRoleArn",
@@ -2113,11 +2237,12 @@ module Aws::AgentRegistryControl
     #                               credential_provider: { # required
     #                                 oauth_credential_provider: {
     #                                   provider_arn: "CredentialProviderArn", # required
-    #                                   grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS
+    #                                   grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
     #                                   scopes: ["String"],
     #                                   custom_parameters: {
     #                                     "String" => "String",
     #                                   },
+    #                                   return_url: "OAuthReturnUrl",
     #                                 },
     #                                 iam_credential_provider: {
     #                                   role_arn: "IamRoleArn",
@@ -2129,6 +2254,46 @@ module Aws::AgentRegistryControl
     #                           ],
     #                         },
     #                       },
+    #                     },
+    #                   },
+    #                 },
+    #                 skill_package: {
+    #                   optional_value: {
+    #                     source: {
+    #                       from_url: {
+    #                         url: "DescriptorSourceUrl", # required
+    #                         credential_provider_configurations: [
+    #                           {
+    #                             credential_provider_type: "OAUTH", # required, accepts OAUTH, IAM
+    #                             credential_provider: { # required
+    #                               oauth_credential_provider: {
+    #                                 provider_arn: "CredentialProviderArn", # required
+    #                                 grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #                                 scopes: ["String"],
+    #                                 custom_parameters: {
+    #                                   "String" => "String",
+    #                                 },
+    #                                 return_url: "OAuthReturnUrl",
+    #                               },
+    #                               iam_credential_provider: {
+    #                                 role_arn: "IamRoleArn",
+    #                                 service: "IamSigningServiceName",
+    #                                 region: "IamSigningRegion",
+    #                               },
+    #                             },
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                 },
+    #                 repository_provider: {
+    #                   optional_value: "GITHUB", # accepts GITHUB
+    #                 },
+    #                 source_configuration: {
+    #                   optional_value: {
+    #                     s3: {
+    #                       bucket_owner_account_id: "S3BucketOwnerAccountId",
     #                     },
     #                   },
     #                 },
@@ -2155,11 +2320,12 @@ module Aws::AgentRegistryControl
     #                       credential_provider: { # required
     #                         oauth_credential_provider: {
     #                           provider_arn: "CredentialProviderArn", # required
-    #                           grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS
+    #                           grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
     #                           scopes: ["String"],
     #                           custom_parameters: {
     #                             "String" => "String",
     #                           },
+    #                           return_url: "OAuthReturnUrl",
     #                         },
     #                         iam_credential_provider: {
     #                           role_arn: "IamRoleArn",
@@ -2186,11 +2352,12 @@ module Aws::AgentRegistryControl
     #                       credential_provider: { # required
     #                         oauth_credential_provider: {
     #                           provider_arn: "CredentialProviderArn", # required
-    #                           grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS
+    #                           grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
     #                           scopes: ["String"],
     #                           custom_parameters: {
     #                             "String" => "String",
     #                           },
+    #                           return_url: "OAuthReturnUrl",
     #                         },
     #                         iam_credential_provider: {
     #                           role_arn: "IamRoleArn",
@@ -2207,12 +2374,19 @@ module Aws::AgentRegistryControl
     #         },
     #       },
     #     },
+    #     artifact: {
+    #       optional_value: {
+    #         content: "data", # required
+    #         sha256: "Sha256Hash",
+    #       },
+    #     },
     #     record_version: "RegistryRecordVersion",
     #     custom_metadata: {
     #       optional_value: {
     #       },
     #     },
     #     trigger_synchronization: false,
+    #     force_authentication: false,
     #     provenance: [
     #       {
     #         relation: "DETECTED_FROM", # required, accepts DETECTED_FROM
@@ -2368,11 +2542,12 @@ module Aws::AgentRegistryControl
     #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations #=> Array
     #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider_type #=> String, one of "OAUTH", "IAM"
     #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
-    #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS"
+    #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
     #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes #=> Array
     #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes[0] #=> String
     #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters #=> Hash
     #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters["String"] #=> String
+    #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.return_url #=> String
     #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
     #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
     #   resp.descriptors.mcp_server.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
@@ -2382,11 +2557,12 @@ module Aws::AgentRegistryControl
     #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations #=> Array
     #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider_type #=> String, one of "OAUTH", "IAM"
     #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
-    #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS"
+    #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
     #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes #=> Array
     #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes[0] #=> String
     #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters #=> Hash
     #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters["String"] #=> String
+    #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.return_url #=> String
     #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
     #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
     #   resp.descriptors.a2a_agent_card.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
@@ -2398,24 +2574,41 @@ module Aws::AgentRegistryControl
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations #=> Array
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider_type #=> String, one of "OAUTH", "IAM"
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
-    #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS"
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes #=> Array
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes[0] #=> String
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters #=> Hash
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters["String"] #=> String
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.return_url #=> String
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
     #   resp.descriptors.agent_skills_definition.additional_data.skill_md.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.url #=> String
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations #=> Array
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider_type #=> String, one of "OAUTH", "IAM"
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes #=> Array
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes[0] #=> String
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters #=> Hash
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters["String"] #=> String
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.return_url #=> String
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
+    #   resp.descriptors.agent_skills_definition.additional_data.skill_package.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
+    #   resp.descriptors.agent_skills_definition.additional_data.repository_provider #=> String, one of "GITHUB"
+    #   resp.descriptors.agent_skills_definition.additional_data.source_configuration.s3.bucket_owner_account_id #=> String
     #   resp.descriptors.custom.data #=> String
     #   resp.descriptors.http.source.from_url.url #=> String
     #   resp.descriptors.http.source.from_url.credential_provider_configurations #=> Array
     #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider_type #=> String, one of "OAUTH", "IAM"
     #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
-    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS"
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
     #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes #=> Array
     #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes[0] #=> String
     #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters #=> Hash
     #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters["String"] #=> String
+    #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.return_url #=> String
     #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
     #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
     #   resp.descriptors.http.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
@@ -2423,16 +2616,17 @@ module Aws::AgentRegistryControl
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations #=> Array
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider_type #=> String, one of "OAUTH", "IAM"
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.provider_arn #=> String
-    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS"
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.grant_type #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes #=> Array
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.scopes[0] #=> String
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters #=> Hash
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.custom_parameters["String"] #=> String
+    #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.oauth_credential_provider.return_url #=> String
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.role_arn #=> String
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.service #=> String
     #   resp.descriptors.agui.source.from_url.credential_provider_configurations[0].credential_provider.iam_credential_provider.region #=> String
     #   resp.record_version #=> String
-    #   resp.status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "CREATE_PENDING_AUTH", "UPDATE_PENDING_AUTH"
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.status_reason #=> String
@@ -2520,6 +2714,10 @@ module Aws::AgentRegistryControl
     #   resp.created_by_auto_detection #=> Boolean
     #   resp.created_by #=> String
     #   resp.custom_metadata_schema_compliance_status #=> String, one of "COMPLIANT", "NON_COMPLIANT"
+    #   resp.authorization_data.oauth2.authorization_url #=> String
+    #   resp.authorization_data.oauth2.user_id #=> String
+    #   resp.authorization_data.oauth2.authorization_attempt_id #=> String
+    #   resp.authorization_data.oauth2.expires_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdateRegistryRecord AWS API Documentation
     #
@@ -2563,7 +2761,7 @@ module Aws::AgentRegistryControl
     #   resp = client.update_registry_record_status({
     #     registry_id: "RegistryIdentifier", # required
     #     record_id: "RecordIdentifier", # required
-    #     status: "DRAFT", # required, accepts DRAFT, PENDING_APPROVAL, APPROVED, REJECTED, DEPRECATED, CREATING, UPDATING, CREATE_FAILED, UPDATE_FAILED
+    #     status: "DRAFT", # required, accepts DRAFT, PENDING_APPROVAL, APPROVED, REJECTED, DEPRECATED, CREATING, UPDATING, CREATE_FAILED, UPDATE_FAILED, CREATE_PENDING_AUTH, UPDATE_PENDING_AUTH
     #     status_reason: "UpdateRegistryRecordStatusRequestStatusReasonString", # required
     #   })
     #
@@ -2572,7 +2770,7 @@ module Aws::AgentRegistryControl
     #   resp.registry_arn #=> String
     #   resp.record_arn #=> String
     #   resp.record_id #=> String
-    #   resp.status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "CREATE_PENDING_AUTH", "UPDATE_PENDING_AUTH"
     #   resp.status_reason #=> String
     #   resp.updated_at #=> Time
     #
@@ -2603,7 +2801,7 @@ module Aws::AgentRegistryControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-agentregistrycontrol'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

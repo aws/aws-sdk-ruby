@@ -718,6 +718,112 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # Contains the trusted identity propagation context provider
+    # configuration for a SAML or OpenID Connect (OIDC) identity provider.
+    # The context provider defines how the subject is derived and how keys
+    # from the external identity provider's assertion or token are mapped
+    # into trusted context keys.
+    #
+    # This data type is used as a request parameter in the
+    # [CreateOpenIDConnectProvider][1], [UpdateOpenIDConnectProvider][2],
+    # [CreateSAMLProvider][3], and [UpdateSAMLProvider][4] operations, and
+    # as a response element in the [GetOpenIDConnectProvider][5] and
+    # [GetSAMLProvider][6] operations.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateOpenIDConnectProvider.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateOpenIDConnectProvider.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateSAMLProvider.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateSAMLProvider.html
+    # [5]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetOpenIDConnectProvider.html
+    # [6]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetSAMLProvider.html
+    #
+    # @!attribute [rw] key_definition_list
+    #   A list of source-to-target key mappings that define how keys from
+    #   the external identity provider's assertion or token are mapped into
+    #   trusted context keys. You can specify from 0 to 10 mappings.
+    #   @return [Array<Types::ContextProviderKeyDefinition>]
+    #
+    # @!attribute [rw] subject_source_key
+    #   The source key that is used to derive the subject for the injected
+    #   trusted context. This value identifies the claim or attribute in the
+    #   external identity provider's assertion or token that supplies the
+    #   subject.
+    #
+    #   The key can contain only ASCII letters (A-Z, a-z), numbers (0-9),
+    #   single spaces, and the following characters: `_ . : / = + - @ #`. It
+    #   can't start or end with a space or contain two spaces in a row.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject_type_value
+    #   A static value for the subject type, such as `user` or `workload`.
+    #
+    #   This parameter is optional and is mutually exclusive with
+    #   `SubjectTypeSourceKey`. Specify either `SubjectTypeValue` or
+    #   `SubjectTypeSourceKey`, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject_type_source_key
+    #   The source key that supplies the subject type from the external
+    #   identity provider's assertion or token.
+    #
+    #   The key can contain only ASCII letters (A-Z, a-z), numbers (0-9),
+    #   single spaces, and the following characters: `_ . : / = + - @ #`. It
+    #   can't start or end with a space or contain two spaces in a row.
+    #
+    #   This parameter is mutually exclusive with `SubjectTypeValue`.
+    #   Specify either `SubjectTypeSourceKey` or `SubjectTypeValue`, but not
+    #   both.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ContextProvider AWS API Documentation
+    #
+    class ContextProvider < Struct.new(
+      :key_definition_list,
+      :subject_source_key,
+      :subject_type_value,
+      :subject_type_source_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a single mapping from a source key in the external identity
+    # provider's assertion or token to a target trusted context key.
+    #
+    # This data type is used as a member of the [ContextProvider][1] data
+    # type.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
+    #
+    # @!attribute [rw] source_key
+    #   The key in the external identity provider's assertion or token to
+    #   read the value from.
+    #
+    #   The key can contain only ASCII letters (A-Z, a-z), numbers (0-9),
+    #   single spaces, and the following characters: `_ . : / = + - @ #`. It
+    #   can't start or end with a space or contain two spaces in a row.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_key
+    #   The trusted context key to map the source value into.
+    #
+    #   The key can contain only ASCII letters (A-Z, a-z), numbers (0-9),
+    #   single spaces, and the following characters: `_ . : / = + - @ #`. It
+    #   can't start or end with a space or contain two spaces in a row.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ContextProviderKeyDefinition AWS API Documentation
+    #
+    class ContextProviderKeyDefinition < Struct.new(
+      :source_key,
+      :target_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] user_name
     #   The name of the IAM user that the new key will belong to.
     #
@@ -1212,13 +1318,41 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] context_provider
+    #   The trusted identity propagation context provider configuration to
+    #   associate with the OpenID Connect (OIDC) provider. The context
+    #   provider defines how the subject is derived and how keys from the
+    #   provider's token are mapped into trusted context keys. Specifying a
+    #   context provider enables trusted identity propagation for the
+    #   provider. For more information, see [ContextProvider][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
+    #   @return [Types::ContextProvider]
+    #
+    # @!attribute [rw] identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance
+    #   to associate with the OpenID Connect (OIDC) provider. If you specify
+    #   this parameter, you must also specify `ContextProvider`.
+    #
+    #   For the format, see [InstanceMetadata][1] in the *IAM Identity
+    #   Center API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateOpenIDConnectProviderRequest AWS API Documentation
     #
     class CreateOpenIDConnectProviderRequest < Struct.new(
       :url,
       :client_id_list,
       :thumbprint_list,
-      :tags)
+      :tags,
+      :context_provider,
+      :identity_center_instance_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1708,6 +1842,32 @@ module Aws::IAM
     #   encryption algorithm to decrypt SAML assertions.
     #   @return [String]
     #
+    # @!attribute [rw] context_provider
+    #   The trusted identity propagation context provider configuration to
+    #   associate with the SAML provider. The context provider defines how
+    #   the subject is derived and how keys from the provider's SAML
+    #   assertion are mapped into trusted context keys. Specifying a context
+    #   provider enables trusted identity propagation for the provider. For
+    #   more information, see [ContextProvider][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
+    #   @return [Types::ContextProvider]
+    #
+    # @!attribute [rw] identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance
+    #   to associate with the SAML provider. If you specify this parameter,
+    #   you must also specify `ContextProvider`.
+    #
+    #   For the format, see [InstanceMetadata][1] in the *IAM Identity
+    #   Center API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateSAMLProviderRequest AWS API Documentation
     #
     class CreateSAMLProviderRequest < Struct.new(
@@ -1715,7 +1875,9 @@ module Aws::IAM
       :name,
       :tags,
       :assertion_encryption_mode,
-      :add_private_key)
+      :add_private_key,
+      :context_provider,
+      :identity_center_instance_arn)
       SENSITIVE = [:add_private_key]
       include Aws::Structure
     end
@@ -4540,6 +4702,49 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] context_provider
+    #   The trusted identity propagation context provider configuration
+    #   associated with the IAM OIDC provider resource object. For more
+    #   information, see [ContextProvider][1].
+    #
+    #   This element is returned only when a trusted identity propagation
+    #   context provider is configured for the OIDC provider.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
+    #   @return [Types::ContextProvider]
+    #
+    # @!attribute [rw] identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance
+    #   associated with the IAM OIDC provider resource object.
+    #
+    #   For the format, see [InstanceMetadata][1] in the *IAM Identity
+    #   Center API Reference*.
+    #
+    #   This element is returned only when an IAM Identity Center instance
+    #   is associated with the OIDC provider.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_store_arn
+    #   The Amazon Resource Name (ARN) of the identity store that is
+    #   resolved from the associated IAM Identity Center instance.
+    #
+    #   For the format, see [InstanceMetadata][1] in the *IAM Identity
+    #   Center API Reference*.
+    #
+    #   This element is returned only when an IAM Identity Center instance
+    #   is associated with the OIDC provider.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOpenIDConnectProviderResponse AWS API Documentation
     #
     class GetOpenIDConnectProviderResponse < Struct.new(
@@ -4547,7 +4752,10 @@ module Aws::IAM
       :client_id_list,
       :thumbprint_list,
       :create_date,
-      :tags)
+      :tags,
+      :context_provider,
+      :identity_center_instance_arn,
+      :identity_store_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4982,6 +5190,29 @@ module Aws::IAM
     #   identity provider.
     #   @return [String]
     #
+    # @!attribute [rw] context_provider
+    #   The trusted identity propagation context provider configuration
+    #   associated with the SAML provider. For more information, see
+    #   [ContextProvider][1].
+    #
+    #   This element is returned only when a trusted identity propagation
+    #   context provider is configured for the SAML provider.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
+    #   @return [Types::ContextProvider]
+    #
+    # @!attribute [rw] saml_key_hashes
+    #   The key hashes associated with the SAML provider, grouped by
+    #   identity provider issuer. For more information, see
+    #   [SAMLKeyHashEntry][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_SAMLKeyHashEntry.html
+    #   @return [Array<Types::SAMLKeyHashEntry>]
+    #
     # @!attribute [rw] create_date
     #   The date and time when the SAML provider was created.
     #   @return [Time]
@@ -5009,16 +5240,50 @@ module Aws::IAM
     #   The private key metadata for the SAML provider.
     #   @return [Array<Types::SAMLPrivateKey>]
     #
+    # @!attribute [rw] identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance
+    #   associated with the SAML provider.
+    #
+    #   For the format, see [InstanceMetadata][1] in the *IAM Identity
+    #   Center API Reference*.
+    #
+    #   This element is returned only when an IAM Identity Center instance
+    #   is associated with the SAML provider.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_store_arn
+    #   The Amazon Resource Name (ARN) of the identity store that is
+    #   resolved from the associated IAM Identity Center instance.
+    #
+    #   For the format, see [InstanceMetadata][1] in the *IAM Identity
+    #   Center API Reference*.
+    #
+    #   This element is returned only when an IAM Identity Center instance
+    #   is associated with the SAML provider.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSAMLProviderResponse AWS API Documentation
     #
     class GetSAMLProviderResponse < Struct.new(
       :saml_provider_uuid,
       :saml_metadata_document,
+      :context_provider,
+      :saml_key_hashes,
       :create_date,
       :valid_until,
       :tags,
       :assertion_encryption_mode,
-      :private_key_list)
+      :private_key_list,
+      :identity_center_instance_arn,
+      :identity_store_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9054,10 +9319,17 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
+    # @!attribute [rw] is_trusted_identity_propagation_enabled
+    #   Specifies whether trusted identity propagation is enabled for the
+    #   OpenID Connect (OIDC) provider. This is `true` when an IAM Identity
+    #   Center instance is associated with the provider.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/OpenIDConnectProviderListEntry AWS API Documentation
     #
     class OpenIDConnectProviderListEntry < Struct.new(
-      :arn)
+      :arn,
+      :is_trusted_identity_propagation_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11022,6 +11294,34 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # Contains the key hashes that are associated with a SAML identity
+    # provider issuer.
+    #
+    # This data type is used as a response element in the
+    # [GetSAMLProvider][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetSAMLProvider.html
+    #
+    # @!attribute [rw] issuer_url
+    #   The issuer URL of the SAML identity provider that the key hashes are
+    #   associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_hashes
+    #   The list of key hashes for the SAML identity provider issuer.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SAMLKeyHashEntry AWS API Documentation
+    #
+    class SAMLKeyHashEntry < Struct.new(
+      :issuer_url,
+      :key_hashes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the private keys for the SAML provider.
     #
     # This data type is used as a response element in the
@@ -11067,12 +11367,19 @@ module Aws::IAM
     #   The date and time when the SAML provider was created.
     #   @return [Time]
     #
+    # @!attribute [rw] is_trusted_identity_propagation_enabled
+    #   Specifies whether trusted identity propagation is enabled for the
+    #   SAML provider. This is `true` when an IAM Identity Center instance
+    #   is associated with the provider.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SAMLProviderListEntry AWS API Documentation
     #
     class SAMLProviderListEntry < Struct.new(
       :arn,
       :valid_until,
-      :create_date)
+      :create_date,
+      :is_trusted_identity_propagation_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13316,6 +13623,86 @@ module Aws::IAM
 
     # @!attribute [rw] open_id_connect_provider_arn
     #   The Amazon Resource Name (ARN) of the IAM OIDC provider resource
+    #   object to update. You can get a list of OIDC provider resource ARNs
+    #   by using the [ListOpenIDConnectProviders][1] operation.
+    #
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][2] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListOpenIDConnectProviders.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] context_provider
+    #   The trusted identity propagation context provider configuration to
+    #   set on the OIDC provider. This configuration defines the subject
+    #   mapping and the source-to-target key mappings that are used when
+    #   trusted context is injected. For more information, see
+    #   [ContextProvider][1].
+    #
+    #   To remove the existing context provider instead of replacing it, use
+    #   `RemoveContextProvider`. Do not specify both `ContextProvider` and
+    #   `RemoveContextProvider` in the same request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
+    #   @return [Types::ContextProvider]
+    #
+    # @!attribute [rw] identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance
+    #   to associate with the OIDC provider.
+    #
+    #   For the format, see [InstanceMetadata][1] in the *IAM Identity
+    #   Center API Reference*.
+    #
+    #   To disassociate the currently associated instance instead of
+    #   changing it, use `RemoveIdentityCenterInstance`. Do not specify both
+    #   `IdentityCenterInstanceArn` and `RemoveIdentityCenterInstance` in
+    #   the same request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
+    #   @return [String]
+    #
+    # @!attribute [rw] remove_context_provider
+    #   Specifies whether to remove the existing context provider
+    #   configuration from the OIDC provider. Set this value to `true` to
+    #   remove the context provider.
+    #
+    #   This parameter is mutually exclusive with `ContextProvider`. In a
+    #   single request, specify either a new `ContextProvider` value or
+    #   `RemoveContextProvider`, but not both.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] remove_identity_center_instance
+    #   Specifies whether to disassociate the IAM Identity Center instance
+    #   from the OIDC provider. Set this value to `true` to remove the
+    #   association.
+    #
+    #   This parameter is mutually exclusive with
+    #   `IdentityCenterInstanceArn`. In a single request, specify either a
+    #   new `IdentityCenterInstanceArn` value or
+    #   `RemoveIdentityCenterInstance`, but not both.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateOpenIDConnectProviderRequest AWS API Documentation
+    #
+    class UpdateOpenIDConnectProviderRequest < Struct.new(
+      :open_id_connect_provider_arn,
+      :context_provider,
+      :identity_center_instance_arn,
+      :remove_context_provider,
+      :remove_identity_center_instance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] open_id_connect_provider_arn
+    #   The Amazon Resource Name (ARN) of the IAM OIDC provider resource
     #   object for which you want to update the thumbprint. You can get a
     #   list of OIDC provider ARNs by using the
     #   [ListOpenIDConnectProviders][1] operation.
@@ -13500,6 +13887,43 @@ module Aws::IAM
     #   The Key ID of the private key to remove.
     #   @return [String]
     #
+    # @!attribute [rw] context_provider
+    #   The trusted identity propagation context provider configuration to
+    #   associate with the SAML provider. This replaces the existing context
+    #   provider configuration. For more information, see
+    #   [ContextProvider][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
+    #   @return [Types::ContextProvider]
+    #
+    # @!attribute [rw] identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance
+    #   to associate with the SAML provider.
+    #
+    #   For the format, see [InstanceMetadata][1] in the *IAM Identity
+    #   Center API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
+    #   @return [String]
+    #
+    # @!attribute [rw] remove_context_provider
+    #   Specifies whether to remove the existing trusted identity
+    #   propagation context provider configuration from the SAML provider.
+    #   When set to `true`, the context provider is removed. This parameter
+    #   is mutually exclusive with `ContextProvider`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] remove_identity_center_instance
+    #   Specifies whether to disassociate the IAM Identity Center instance
+    #   from the SAML provider. When set to `true`, the instance is
+    #   disassociated. This parameter is mutually exclusive with
+    #   `IdentityCenterInstanceArn`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSAMLProviderRequest AWS API Documentation
     #
     class UpdateSAMLProviderRequest < Struct.new(
@@ -13507,7 +13931,11 @@ module Aws::IAM
       :saml_provider_arn,
       :assertion_encryption_mode,
       :add_private_key,
-      :remove_private_key)
+      :remove_private_key,
+      :context_provider,
+      :identity_center_instance_arn,
+      :remove_context_provider,
+      :remove_identity_center_instance)
       SENSITIVE = [:add_private_key]
       include Aws::Structure
     end

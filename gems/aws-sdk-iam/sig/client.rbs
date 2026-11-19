@@ -254,7 +254,9 @@ module Aws
                                                  key: ::String,
                                                  value: ::String
                                                }
-                                             ]
+                                             ],
+                                             ?context_provider: Params::context_provider,
+                                             ?identity_center_instance_arn: ::String
                                            ) -> _CreateOpenIDConnectProviderResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOpenIDConnectProviderResponseSuccess
 
@@ -327,7 +329,9 @@ module Aws
                                     }
                                   ],
                                   ?assertion_encryption_mode: ("Required" | "Allowed"),
-                                  ?add_private_key: ::String
+                                  ?add_private_key: ::String,
+                                  ?context_provider: Params::context_provider,
+                                  ?identity_center_instance_arn: ::String
                                 ) -> _CreateSAMLProviderResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSAMLProviderResponseSuccess
 
@@ -837,6 +841,9 @@ module Aws
         def thumbprint_list: () -> ::Array[::String]
         def create_date: () -> ::Time
         def tags: () -> ::Array[Types::Tag]
+        def context_provider: () -> Types::ContextProvider
+        def identity_center_instance_arn: () -> ::String
+        def identity_store_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_open_id_connect_provider-instance_method
       def get_open_id_connect_provider: (
@@ -933,11 +940,15 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSAMLProviderResponse]
         def saml_provider_uuid: () -> ::String
         def saml_metadata_document: () -> ::String
+        def context_provider: () -> Types::ContextProvider
+        def saml_key_hashes: () -> ::Array[Types::SAMLKeyHashEntry]
         def create_date: () -> ::Time
         def valid_until: () -> ::Time
         def tags: () -> ::Array[Types::Tag]
         def assertion_encryption_mode: () -> ("Required" | "Allowed")
         def private_key_list: () -> ::Array[Types::SAMLPrivateKey]
+        def identity_center_instance_arn: () -> ::String
+        def identity_store_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#get_saml_provider-instance_method
       def get_saml_provider: (
@@ -1932,6 +1943,16 @@ module Aws
                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#update_open_id_connect_provider-instance_method
+      def update_open_id_connect_provider: (
+                                             open_id_connect_provider_arn: ::String,
+                                             ?context_provider: Params::context_provider,
+                                             ?identity_center_instance_arn: ::String,
+                                             ?remove_context_provider: bool,
+                                             ?remove_identity_center_instance: bool
+                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Client.html#update_open_id_connect_provider_thumbprint-instance_method
       def update_open_id_connect_provider_thumbprint: (
                                                         open_id_connect_provider_arn: ::String,
@@ -1973,7 +1994,11 @@ module Aws
                                   saml_provider_arn: ::String,
                                   ?assertion_encryption_mode: ("Required" | "Allowed"),
                                   ?add_private_key: ::String,
-                                  ?remove_private_key: ::String
+                                  ?remove_private_key: ::String,
+                                  ?context_provider: Params::context_provider,
+                                  ?identity_center_instance_arn: ::String,
+                                  ?remove_context_provider: bool,
+                                  ?remove_identity_center_instance: bool
                                 ) -> _UpdateSAMLProviderResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSAMLProviderResponseSuccess
 

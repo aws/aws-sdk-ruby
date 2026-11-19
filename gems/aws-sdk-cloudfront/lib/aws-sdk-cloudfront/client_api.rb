@@ -542,6 +542,7 @@ module Aws::CloudFront
     NoSuchResource = Shapes::StructureShape.new(name: 'NoSuchResource')
     NoSuchResponseHeadersPolicy = Shapes::StructureShape.new(name: 'NoSuchResponseHeadersPolicy')
     NoSuchStreamingDistribution = Shapes::StructureShape.new(name: 'NoSuchStreamingDistribution')
+    OnDomainTakeover = Shapes::StringShape.new(name: 'OnDomainTakeover')
     Origin = Shapes::StructureShape.new(name: 'Origin')
     OriginAccessControl = Shapes::StructureShape.new(name: 'OriginAccessControl')
     OriginAccessControlAlreadyExists = Shapes::StructureShape.new(name: 'OriginAccessControlAlreadyExists')
@@ -665,6 +666,7 @@ module Aws::CloudFront
     S3OriginConfig = Shapes::StructureShape.new(name: 'S3OriginConfig')
     SSLSupportMethod = Shapes::StringShape.new(name: 'SSLSupportMethod')
     SamplingRate = Shapes::FloatShape.new(name: 'SamplingRate')
+    ServeOn = Shapes::StringShape.new(name: 'ServeOn')
     ServerCertificateId = Shapes::StringShape.new(name: 'ServerCertificateId')
     SessionStickinessConfig = Shapes::StructureShape.new(name: 'SessionStickinessConfig')
     Signer = Shapes::StructureShape.new(name: 'Signer')
@@ -818,6 +820,7 @@ module Aws::CloudFront
     VerifyDnsConfigurationRequest = Shapes::StructureShape.new(name: 'VerifyDnsConfigurationRequest')
     VerifyDnsConfigurationResult = Shapes::StructureShape.new(name: 'VerifyDnsConfigurationResult')
     ViewerCertificate = Shapes::StructureShape.new(name: 'ViewerCertificate')
+    ViewerFallback = Shapes::StructureShape.new(name: 'ViewerFallback')
     ViewerMtlsConfig = Shapes::StructureShape.new(name: 'ViewerMtlsConfig')
     ViewerMtlsMode = Shapes::StringShape.new(name: 'ViewerMtlsMode')
     ViewerProtocolPolicy = Shapes::StringShape.new(name: 'ViewerProtocolPolicy')
@@ -1123,6 +1126,7 @@ module Aws::CloudFront
     ConnectionGroup.add_member(:status, Shapes::ShapeRef.new(shape: string, location_name: "Status"))
     ConnectionGroup.add_member(:enabled, Shapes::ShapeRef.new(shape: boolean, location_name: "Enabled"))
     ConnectionGroup.add_member(:is_default, Shapes::ShapeRef.new(shape: boolean, location_name: "IsDefault"))
+    ConnectionGroup.add_member(:viewer_fallback, Shapes::ShapeRef.new(shape: ViewerFallback, location_name: "ViewerFallback"))
     ConnectionGroup.struct_class = Types::ConnectionGroup
 
     ConnectionGroupAssociationFilter.add_member(:anycast_ip_list_id, Shapes::ShapeRef.new(shape: string, location_name: "AnycastIpListId"))
@@ -1139,6 +1143,7 @@ module Aws::CloudFront
     ConnectionGroupSummary.add_member(:enabled, Shapes::ShapeRef.new(shape: boolean, location_name: "Enabled"))
     ConnectionGroupSummary.add_member(:status, Shapes::ShapeRef.new(shape: string, location_name: "Status"))
     ConnectionGroupSummary.add_member(:is_default, Shapes::ShapeRef.new(shape: boolean, location_name: "IsDefault"))
+    ConnectionGroupSummary.add_member(:viewer_fallback, Shapes::ShapeRef.new(shape: ViewerFallback, location_name: "ViewerFallback"))
     ConnectionGroupSummary.struct_class = Types::ConnectionGroupSummary
 
     ConnectionGroupSummaryList.member = Shapes::ShapeRef.new(shape: ConnectionGroupSummary, location_name: "ConnectionGroupSummary")
@@ -1272,6 +1277,7 @@ module Aws::CloudFront
     CreateConnectionGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateConnectionGroupRequest.add_member(:anycast_ip_list_id, Shapes::ShapeRef.new(shape: string, location_name: "AnycastIpListId"))
     CreateConnectionGroupRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: boolean, location_name: "Enabled"))
+    CreateConnectionGroupRequest.add_member(:viewer_fallback, Shapes::ShapeRef.new(shape: ViewerFallback, location_name: "ViewerFallback"))
     CreateConnectionGroupRequest.struct_class = Types::CreateConnectionGroupRequest
 
     CreateConnectionGroupResult.add_member(:connection_group, Shapes::ShapeRef.new(shape: ConnectionGroup, location_name: "ConnectionGroup"))
@@ -1313,6 +1319,7 @@ module Aws::CloudFront
     CreateDistributionTenantRequest.add_member(:connection_group_id, Shapes::ShapeRef.new(shape: string, location_name: "ConnectionGroupId"))
     CreateDistributionTenantRequest.add_member(:managed_certificate_request, Shapes::ShapeRef.new(shape: ManagedCertificateRequest, location_name: "ManagedCertificateRequest"))
     CreateDistributionTenantRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: boolean, location_name: "Enabled"))
+    CreateDistributionTenantRequest.add_member(:on_domain_takeover, Shapes::ShapeRef.new(shape: OnDomainTakeover, location_name: "OnDomainTakeover"))
     CreateDistributionTenantRequest.struct_class = Types::CreateDistributionTenantRequest
 
     CreateDistributionTenantResult.add_member(:distribution_tenant, Shapes::ShapeRef.new(shape: DistributionTenant, location_name: "DistributionTenant"))
@@ -1895,12 +1902,14 @@ module Aws::CloudFront
     DomainConflictsList.member = Shapes::ShapeRef.new(shape: DomainConflict, location_name: "DomainConflicts")
 
     DomainItem.add_member(:domain, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Domain"))
+    DomainItem.add_member(:serve_on, Shapes::ShapeRef.new(shape: ServeOn, location_name: "ServeOn"))
     DomainItem.struct_class = Types::DomainItem
 
     DomainList.member = Shapes::ShapeRef.new(shape: DomainItem)
 
     DomainResult.add_member(:domain, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Domain"))
     DomainResult.add_member(:status, Shapes::ShapeRef.new(shape: DomainStatus, location_name: "Status"))
+    DomainResult.add_member(:serve_on, Shapes::ShapeRef.new(shape: ServeOn, location_name: "ServeOn"))
     DomainResult.struct_class = Types::DomainResult
 
     DomainResultList.member = Shapes::ShapeRef.new(shape: DomainResult)
@@ -3927,6 +3936,7 @@ module Aws::CloudFront
     UpdateConnectionGroupRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, required: true, location: "header", location_name: "If-Match"))
     UpdateConnectionGroupRequest.add_member(:anycast_ip_list_id, Shapes::ShapeRef.new(shape: string, location_name: "AnycastIpListId"))
     UpdateConnectionGroupRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: boolean, location_name: "Enabled"))
+    UpdateConnectionGroupRequest.add_member(:viewer_fallback, Shapes::ShapeRef.new(shape: ViewerFallback, location_name: "ViewerFallback"))
     UpdateConnectionGroupRequest.struct_class = Types::UpdateConnectionGroupRequest
 
     UpdateConnectionGroupResult.add_member(:connection_group, Shapes::ShapeRef.new(shape: ConnectionGroup, location_name: "ConnectionGroup"))
@@ -3970,6 +3980,7 @@ module Aws::CloudFront
     UpdateDistributionTenantRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, required: true, location: "header", location_name: "If-Match"))
     UpdateDistributionTenantRequest.add_member(:managed_certificate_request, Shapes::ShapeRef.new(shape: ManagedCertificateRequest, location_name: "ManagedCertificateRequest"))
     UpdateDistributionTenantRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: boolean, location_name: "Enabled"))
+    UpdateDistributionTenantRequest.add_member(:on_domain_takeover, Shapes::ShapeRef.new(shape: OnDomainTakeover, location_name: "OnDomainTakeover"))
     UpdateDistributionTenantRequest.struct_class = Types::UpdateDistributionTenantRequest
 
     UpdateDistributionTenantResult.add_member(:distribution_tenant, Shapes::ShapeRef.new(shape: DistributionTenant, location_name: "DistributionTenant"))
@@ -4185,6 +4196,9 @@ module Aws::CloudFront
     ViewerCertificate.add_member(:certificate, Shapes::ShapeRef.new(shape: string, deprecated: true, location_name: "Certificate"))
     ViewerCertificate.add_member(:certificate_source, Shapes::ShapeRef.new(shape: CertificateSource, deprecated: true, location_name: "CertificateSource"))
     ViewerCertificate.struct_class = Types::ViewerCertificate
+
+    ViewerFallback.add_member(:distribution_id, Shapes::ShapeRef.new(shape: string, location_name: "DistributionId"))
+    ViewerFallback.struct_class = Types::ViewerFallback
 
     ViewerMtlsConfig.add_member(:mode, Shapes::ShapeRef.new(shape: ViewerMtlsMode, location_name: "Mode"))
     ViewerMtlsConfig.add_member(:trust_store_config, Shapes::ShapeRef.new(shape: TrustStoreConfig, location_name: "TrustStoreConfig"))
@@ -6567,6 +6581,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: InvalidFunctionAssociation)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithLambdaAssociations)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToKeyGroup)
+        o.errors << Shapes::ShapeRef.new(shape: EntityLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchOrigin)
         o.errors << Shapes::ShapeRef.new(shape: TooManyCacheBehaviors)
       end)
@@ -6678,6 +6693,8 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAssociation)
+        o.errors << Shapes::ShapeRef.new(shape: EntityLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)

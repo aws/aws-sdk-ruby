@@ -28,6 +28,16 @@ module Aws
                   ) -> Client::_DescribeEventBusResponseSuccess
                 | (Hash[Symbol, untyped]) -> Client::_DescribeEventBusResponseSuccess
       end
+
+      class MskSubscriberActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    subscriber_arn: ::String
+                  ) -> Client::_DescribeSubscriberResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeSubscriberResponseSuccess
+      end
     end
   end
 end

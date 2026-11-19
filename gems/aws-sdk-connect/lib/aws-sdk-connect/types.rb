@@ -4150,6 +4150,11 @@ module Aws::Connect
     #   conversational analytics is enabled in the contact flow.
     #   @return [Types::ContactLens]
     #
+    # @!attribute [rw] voicemail_info
+    #   If one or more voicemails were recorded for the contact, this
+    #   contains information about the voicemails.
+    #   @return [Types::VoicemailInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Contact AWS API Documentation
     #
     class Contact < Struct.new(
@@ -4202,7 +4207,8 @@ module Aws::Connect
       :attributes,
       :next_contacts,
       :global_resiliency_metadata,
-      :contact_lens)
+      :contact_lens,
+      :voicemail_info)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -31228,6 +31234,26 @@ module Aws::Connect
     #   `CONTACT_ANALYSIS`. Otherwise, null.
     #   @return [Types::ContactAnalysisReference]
     #
+    # @!attribute [rw] voicemail_recording
+    #   Information about the reference when the `referenceType` is
+    #   `VOICEMAIL_RECORDING`. Otherwise, null.
+    #   @return [Types::VoicemailRecordingReference]
+    #
+    # @!attribute [rw] voicemail_recording_redacted
+    #   Information about the reference when the `referenceType` is
+    #   `VOICEMAIL_RECORDING_REDACTED`. Otherwise, null.
+    #   @return [Types::VoicemailRecordingReference]
+    #
+    # @!attribute [rw] voicemail_analysis
+    #   Information about the reference when the `referenceType` is
+    #   `VOICEMAIL_ANALYSIS`. Otherwise, null.
+    #   @return [Types::VoicemailAnalysisReference]
+    #
+    # @!attribute [rw] voicemail_analysis_redacted
+    #   Information about the reference when the `referenceType` is
+    #   `VOICEMAIL_ANALYSIS_REDACTED`. Otherwise, null.
+    #   @return [Types::VoicemailAnalysisReference]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ReferenceSummary AWS API Documentation
     #
     class ReferenceSummary < Struct.new(
@@ -31242,6 +31268,10 @@ module Aws::Connect
       :date,
       :email,
       :contact_analysis,
+      :voicemail_recording,
+      :voicemail_recording_redacted,
+      :voicemail_analysis,
+      :voicemail_analysis_redacted,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -31258,6 +31288,10 @@ module Aws::Connect
       class Date < ReferenceSummary; end
       class Email < ReferenceSummary; end
       class ContactAnalysis < ReferenceSummary; end
+      class VoicemailRecording < ReferenceSummary; end
+      class VoicemailRecordingRedacted < ReferenceSummary; end
+      class VoicemailAnalysis < ReferenceSummary; end
+      class VoicemailAnalysisRedacted < ReferenceSummary; end
       class Unknown < ReferenceSummary; end
     end
 
@@ -43566,6 +43600,83 @@ module Aws::Connect
     class VoiceRecordingConfiguration < Struct.new(
       :voice_recording_track,
       :ivr_recording_track)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a reference when the `referenceType` is
+    # `VOICEMAIL_ANALYSIS` or `VOICEMAIL_ANALYSIS_REDACTED`. Otherwise,
+    # null.
+    #
+    # @!attribute [rw] name
+    #   Identifier of the voicemail analysis reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The location path of the voicemail analysis reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of the voicemail analysis reference type.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the voicemail analysis reference.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/VoicemailAnalysisReference AWS API Documentation
+    #
+    class VoicemailAnalysisReference < Struct.new(
+      :name,
+      :value,
+      :status,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the voicemails recorded for a voice contact.
+    #
+    # @!attribute [rw] number_of_voicemails
+    #   The number of voicemails recorded for the contact. Valid range is
+    #   1-3.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/VoicemailInfo AWS API Documentation
+    #
+    class VoicemailInfo < Struct.new(
+      :number_of_voicemails)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a reference when the `referenceType` is
+    # `VOICEMAIL_RECORDING` or `VOICEMAIL_RECORDING_REDACTED`. Otherwise,
+    # null.
+    #
+    # @!attribute [rw] name
+    #   Identifier of the voicemail recording reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The location path of the voicemail recording reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of the voicemail recording reference type.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the voicemail recording reference.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/VoicemailRecordingReference AWS API Documentation
+    #
+    class VoicemailRecordingReference < Struct.new(
+      :name,
+      :value,
+      :status,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end

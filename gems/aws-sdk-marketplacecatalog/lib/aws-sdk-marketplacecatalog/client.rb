@@ -646,18 +646,603 @@ module Aws::MarketplaceCatalog
     #   resp.assessment_target_summary.change_set_id #=> String
     #   resp.framework_summary.ami_security_summary.delivery_option_id #=> String
     #   resp.framework_summary.container_security_summary.delivery_option_id #=> String
+    #   resp.framework_summary.listing_quality_summary.tier #=> String, one of "NEEDS_IMPROVEMENT", "BASIC", "STRONG", "EXCELLENT"
+    #   resp.framework_summary.listing_quality_summary.entity_revision #=> String
+    #   resp.framework_summary.listing_recommendations_summary.tier #=> String, one of "NEEDS_IMPROVEMENT", "BASIC", "STRONG", "EXCELLENT"
+    #   resp.framework_summary.listing_recommendations_summary.entity_revision #=> String
     #   resp.assessment_result #=> String, one of "PASS", "FAIL"
     #   resp.created_at #=> String
     #   resp.expires_at #=> String
     #   resp.control_assessments #=> Array
     #   resp.control_assessments[0].control_id #=> String
     #   resp.control_assessments[0].control_assessment_result #=> String, one of "PASS", "FAIL", "NOT_EXECUTED", "EXEMPTION_PASS"
+    #   resp.control_assessments[0].verification_source #=> String, one of "AWS_VERIFIED", "SELF_ATTESTED"
     #   resp.control_assessments[0].errors #=> Array
     #   resp.control_assessments[0].errors[0].code #=> String
     #   resp.control_assessments[0].errors[0].message #=> String
     #   resp.control_assessments[0].errors[0].scope #=> Array
     #   resp.control_assessments[0].errors[0].scope[0].name #=> String
     #   resp.control_assessments[0].errors[0].scope[0].value #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.status #=> String, one of "GENERATED", "INSUFFICIENT_CONTEXT"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.text #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.text[0].value #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.text[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.text_list #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.text_list[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.text_list[0].value[0] #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.text_list[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.additional_resources #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.additional_resources[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.additional_resources[0].value[0].type #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.additional_resources[0].value[0].text #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.additional_resources[0].value[0].url #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.additional_resources[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.use_cases #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.use_cases[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.use_cases[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.use_cases[0].value[0].rank #=> Integer
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.use_cases[0].value[0].name #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.use_cases[0].value[0].group #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.use_cases[0].value[0].subgroup #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.use_cases[0].value[0].use_case_details #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.use_cases[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.use_cases[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.case_studies #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.case_studies[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.case_studies[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.case_studies[0].value[0].title #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.case_studies[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.alternatives.case_studies[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.follow_up_questions #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.follow_up_questions[0].question #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.follow_up_questions[0].justification #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.findings #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.findings[0].action #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.findings[0].description #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.findings[0].severity #=> String, one of "BLOCKING", "ADVISORY"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.product_title.findings[0].status #=> String, one of "PASS", "FAIL"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.status #=> String, one of "GENERATED", "INSUFFICIENT_CONTEXT"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.text #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.text[0].value #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.text[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.text_list #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.text_list[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.text_list[0].value[0] #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.text_list[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.additional_resources #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.additional_resources[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.additional_resources[0].value[0].type #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.additional_resources[0].value[0].text #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.additional_resources[0].value[0].url #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.additional_resources[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.use_cases #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.use_cases[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.use_cases[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.use_cases[0].value[0].rank #=> Integer
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.use_cases[0].value[0].name #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.use_cases[0].value[0].group #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.use_cases[0].value[0].subgroup #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.use_cases[0].value[0].use_case_details #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.use_cases[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.use_cases[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.case_studies #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.case_studies[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.case_studies[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.case_studies[0].value[0].title #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.case_studies[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.alternatives.case_studies[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.follow_up_questions #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.follow_up_questions[0].question #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.follow_up_questions[0].justification #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.findings #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.findings[0].action #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.findings[0].description #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.findings[0].severity #=> String, one of "BLOCKING", "ADVISORY"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.short_description.findings[0].status #=> String, one of "PASS", "FAIL"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.status #=> String, one of "GENERATED", "INSUFFICIENT_CONTEXT"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.text #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.text[0].value #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.text[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.text_list #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.text_list[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.text_list[0].value[0] #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.text_list[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.additional_resources #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.additional_resources[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.additional_resources[0].value[0].type #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.additional_resources[0].value[0].text #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.additional_resources[0].value[0].url #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.additional_resources[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.use_cases #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.use_cases[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.use_cases[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.use_cases[0].value[0].rank #=> Integer
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.use_cases[0].value[0].name #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.use_cases[0].value[0].group #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.use_cases[0].value[0].subgroup #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.use_cases[0].value[0].use_case_details #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.use_cases[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.use_cases[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.case_studies #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.case_studies[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.case_studies[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.case_studies[0].value[0].title #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.case_studies[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.alternatives.case_studies[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.follow_up_questions #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.follow_up_questions[0].question #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.follow_up_questions[0].justification #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.findings #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.findings[0].action #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.findings[0].description #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.findings[0].severity #=> String, one of "BLOCKING", "ADVISORY"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.long_description.findings[0].status #=> String, one of "PASS", "FAIL"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.status #=> String, one of "GENERATED", "INSUFFICIENT_CONTEXT"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.text #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.text[0].value #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.text[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.text_list #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.text_list[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.text_list[0].value[0] #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.text_list[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.additional_resources #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.additional_resources[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.additional_resources[0].value[0].type #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.additional_resources[0].value[0].text #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.additional_resources[0].value[0].url #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.additional_resources[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.use_cases #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.use_cases[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.use_cases[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.use_cases[0].value[0].rank #=> Integer
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.use_cases[0].value[0].name #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.use_cases[0].value[0].group #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.use_cases[0].value[0].subgroup #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.use_cases[0].value[0].use_case_details #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.use_cases[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.use_cases[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.case_studies #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.case_studies[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.case_studies[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.case_studies[0].value[0].title #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.case_studies[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.alternatives.case_studies[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.follow_up_questions #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.follow_up_questions[0].question #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.follow_up_questions[0].justification #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.findings #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.findings[0].action #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.findings[0].description #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.findings[0].severity #=> String, one of "BLOCKING", "ADVISORY"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.support_description.findings[0].status #=> String, one of "PASS", "FAIL"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.status #=> String, one of "GENERATED", "INSUFFICIENT_CONTEXT"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.text #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.text[0].value #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.text[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.text_list #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.text_list[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.text_list[0].value[0] #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.text_list[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.additional_resources #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.additional_resources[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.additional_resources[0].value[0].type #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.additional_resources[0].value[0].text #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.additional_resources[0].value[0].url #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.additional_resources[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.use_cases #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.use_cases[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.use_cases[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.use_cases[0].value[0].rank #=> Integer
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.use_cases[0].value[0].name #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.use_cases[0].value[0].group #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.use_cases[0].value[0].subgroup #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.use_cases[0].value[0].use_case_details #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.use_cases[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.use_cases[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.case_studies #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.case_studies[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.case_studies[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.case_studies[0].value[0].title #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.case_studies[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.alternatives.case_studies[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.follow_up_questions #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.follow_up_questions[0].question #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.follow_up_questions[0].justification #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.findings #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.findings[0].action #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.findings[0].description #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.findings[0].severity #=> String, one of "BLOCKING", "ADVISORY"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.highlights.findings[0].status #=> String, one of "PASS", "FAIL"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.status #=> String, one of "GENERATED", "INSUFFICIENT_CONTEXT"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.text #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.text[0].value #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.text[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.text_list #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.text_list[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.text_list[0].value[0] #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.text_list[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.additional_resources #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.additional_resources[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.additional_resources[0].value[0].type #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.additional_resources[0].value[0].text #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.additional_resources[0].value[0].url #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.additional_resources[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.use_cases #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.use_cases[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.use_cases[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.use_cases[0].value[0].rank #=> Integer
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.use_cases[0].value[0].name #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.use_cases[0].value[0].group #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.use_cases[0].value[0].subgroup #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.use_cases[0].value[0].use_case_details #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.use_cases[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.use_cases[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.case_studies #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.case_studies[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.case_studies[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.case_studies[0].value[0].title #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.case_studies[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.alternatives.case_studies[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.follow_up_questions #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.follow_up_questions[0].question #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.follow_up_questions[0].justification #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.findings #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.findings[0].action #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.findings[0].description #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.findings[0].severity #=> String, one of "BLOCKING", "ADVISORY"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.search_keywords.findings[0].status #=> String, one of "PASS", "FAIL"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.status #=> String, one of "GENERATED", "INSUFFICIENT_CONTEXT"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.text #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.text[0].value #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.text[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.text_list #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.text_list[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.text_list[0].value[0] #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.text_list[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.additional_resources #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.additional_resources[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.additional_resources[0].value[0].type #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.additional_resources[0].value[0].text #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.additional_resources[0].value[0].url #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.additional_resources[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.use_cases #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.use_cases[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.use_cases[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.use_cases[0].value[0].rank #=> Integer
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.use_cases[0].value[0].name #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.use_cases[0].value[0].group #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.use_cases[0].value[0].subgroup #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.use_cases[0].value[0].use_case_details #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.use_cases[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.use_cases[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.case_studies #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.case_studies[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.case_studies[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.case_studies[0].value[0].title #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.case_studies[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.alternatives.case_studies[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.follow_up_questions #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.follow_up_questions[0].question #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.follow_up_questions[0].justification #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.findings #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.findings[0].action #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.findings[0].description #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.findings[0].severity #=> String, one of "BLOCKING", "ADVISORY"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.categories.findings[0].status #=> String, one of "PASS", "FAIL"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.status #=> String, one of "GENERATED", "INSUFFICIENT_CONTEXT"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.text #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.text[0].value #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.text[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.text_list #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.text_list[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.text_list[0].value[0] #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.text_list[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.additional_resources #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.additional_resources[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.additional_resources[0].value[0].type #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.additional_resources[0].value[0].text #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.additional_resources[0].value[0].url #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.additional_resources[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.use_cases #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.use_cases[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.use_cases[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.use_cases[0].value[0].rank #=> Integer
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.use_cases[0].value[0].name #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.use_cases[0].value[0].group #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.use_cases[0].value[0].subgroup #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.use_cases[0].value[0].use_case_details #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.use_cases[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.use_cases[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.case_studies #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.case_studies[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.case_studies[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.case_studies[0].value[0].title #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.case_studies[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.alternatives.case_studies[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.follow_up_questions #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.follow_up_questions[0].question #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.follow_up_questions[0].justification #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.findings #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.findings[0].action #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.findings[0].description #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.findings[0].severity #=> String, one of "BLOCKING", "ADVISORY"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.additional_resources.findings[0].status #=> String, one of "PASS", "FAIL"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.citations #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.product_content_recommendations.citations[0].url #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.status #=> String, one of "GENERATED", "INSUFFICIENT_CONTEXT"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.text #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.text[0].value #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.text[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.text_list #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.text_list[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.text_list[0].value[0] #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.text_list[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.additional_resources #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.additional_resources[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.additional_resources[0].value[0].type #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.additional_resources[0].value[0].text #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.additional_resources[0].value[0].url #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.additional_resources[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.use_cases #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.use_cases[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.use_cases[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.use_cases[0].value[0].rank #=> Integer
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.use_cases[0].value[0].name #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.use_cases[0].value[0].group #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.use_cases[0].value[0].subgroup #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.use_cases[0].value[0].use_case_details #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.use_cases[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.use_cases[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.case_studies #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.case_studies[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.case_studies[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.case_studies[0].value[0].title #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.case_studies[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.alternatives.case_studies[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.follow_up_questions #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.follow_up_questions[0].question #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.follow_up_questions[0].justification #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.findings #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.findings[0].action #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.findings[0].description #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.findings[0].severity #=> String, one of "BLOCKING", "ADVISORY"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.title.findings[0].status #=> String, one of "PASS", "FAIL"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.status #=> String, one of "GENERATED", "INSUFFICIENT_CONTEXT"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.text #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.text[0].value #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.text[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.text_list #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.text_list[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.text_list[0].value[0] #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.text_list[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.additional_resources #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.additional_resources[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.additional_resources[0].value[0].type #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.additional_resources[0].value[0].text #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.additional_resources[0].value[0].url #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.additional_resources[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.use_cases #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.use_cases[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.use_cases[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.use_cases[0].value[0].rank #=> Integer
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.use_cases[0].value[0].name #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.use_cases[0].value[0].group #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.use_cases[0].value[0].subgroup #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.use_cases[0].value[0].use_case_details #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.use_cases[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.use_cases[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.case_studies #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.case_studies[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.case_studies[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.case_studies[0].value[0].title #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.case_studies[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.alternatives.case_studies[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.follow_up_questions #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.follow_up_questions[0].question #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.follow_up_questions[0].justification #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.findings #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.findings[0].action #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.findings[0].description #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.findings[0].severity #=> String, one of "BLOCKING", "ADVISORY"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.short_description.findings[0].status #=> String, one of "PASS", "FAIL"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.status #=> String, one of "GENERATED", "INSUFFICIENT_CONTEXT"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.text #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.text[0].value #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.text[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.text_list #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.text_list[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.text_list[0].value[0] #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.text_list[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.additional_resources #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.additional_resources[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.additional_resources[0].value[0].type #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.additional_resources[0].value[0].text #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.additional_resources[0].value[0].url #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.additional_resources[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.use_cases #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.use_cases[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.use_cases[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.use_cases[0].value[0].rank #=> Integer
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.use_cases[0].value[0].name #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.use_cases[0].value[0].group #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.use_cases[0].value[0].subgroup #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.use_cases[0].value[0].use_case_details #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.use_cases[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.use_cases[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.case_studies #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.case_studies[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.case_studies[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.case_studies[0].value[0].title #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.case_studies[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.alternatives.case_studies[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.follow_up_questions #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.follow_up_questions[0].question #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.follow_up_questions[0].justification #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.findings #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.findings[0].action #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.findings[0].description #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.findings[0].severity #=> String, one of "BLOCKING", "ADVISORY"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.long_description.findings[0].status #=> String, one of "PASS", "FAIL"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.status #=> String, one of "GENERATED", "INSUFFICIENT_CONTEXT"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.text #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.text[0].value #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.text[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.text_list #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.text_list[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.text_list[0].value[0] #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.text_list[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.additional_resources #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.additional_resources[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.additional_resources[0].value[0].type #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.additional_resources[0].value[0].text #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.additional_resources[0].value[0].url #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.additional_resources[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.use_cases #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.use_cases[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.use_cases[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.use_cases[0].value[0].rank #=> Integer
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.use_cases[0].value[0].name #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.use_cases[0].value[0].group #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.use_cases[0].value[0].subgroup #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.use_cases[0].value[0].use_case_details #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.use_cases[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.use_cases[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.case_studies #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.case_studies[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.case_studies[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.case_studies[0].value[0].title #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.case_studies[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.alternatives.case_studies[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.follow_up_questions #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.follow_up_questions[0].question #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.follow_up_questions[0].justification #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.findings #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.findings[0].action #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.findings[0].description #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.findings[0].severity #=> String, one of "BLOCKING", "ADVISORY"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.integration_details.findings[0].status #=> String, one of "PASS", "FAIL"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.status #=> String, one of "GENERATED", "INSUFFICIENT_CONTEXT"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.text #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.text[0].value #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.text[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.text_list #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.text_list[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.text_list[0].value[0] #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.text_list[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.additional_resources #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.additional_resources[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.additional_resources[0].value[0].type #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.additional_resources[0].value[0].text #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.additional_resources[0].value[0].url #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.additional_resources[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.use_cases #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.use_cases[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.use_cases[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.use_cases[0].value[0].rank #=> Integer
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.use_cases[0].value[0].name #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.use_cases[0].value[0].group #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.use_cases[0].value[0].subgroup #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.use_cases[0].value[0].use_case_details #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.use_cases[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.use_cases[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.case_studies #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.case_studies[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.case_studies[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.case_studies[0].value[0].title #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.case_studies[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.alternatives.case_studies[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.follow_up_questions #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.follow_up_questions[0].question #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.follow_up_questions[0].justification #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.findings #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.findings[0].action #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.findings[0].description #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.findings[0].severity #=> String, one of "BLOCKING", "ADVISORY"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.additional_resources.findings[0].status #=> String, one of "PASS", "FAIL"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.status #=> String, one of "GENERATED", "INSUFFICIENT_CONTEXT"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.text #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.text[0].value #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.text[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.text_list #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.text_list[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.text_list[0].value[0] #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.text_list[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.additional_resources #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.additional_resources[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.additional_resources[0].value[0].type #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.additional_resources[0].value[0].text #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.additional_resources[0].value[0].url #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.additional_resources[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.use_cases #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.use_cases[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.use_cases[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.use_cases[0].value[0].rank #=> Integer
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.use_cases[0].value[0].name #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.use_cases[0].value[0].group #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.use_cases[0].value[0].subgroup #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.use_cases[0].value[0].use_case_details #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.use_cases[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.use_cases[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.case_studies #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.case_studies[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.case_studies[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.case_studies[0].value[0].title #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.case_studies[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.alternatives.case_studies[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.follow_up_questions #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.follow_up_questions[0].question #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.follow_up_questions[0].justification #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.findings #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.findings[0].action #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.findings[0].description #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.findings[0].severity #=> String, one of "BLOCKING", "ADVISORY"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.use_cases.findings[0].status #=> String, one of "PASS", "FAIL"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.status #=> String, one of "GENERATED", "INSUFFICIENT_CONTEXT"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.text #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.text[0].value #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.text[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.text_list #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.text_list[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.text_list[0].value[0] #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.text_list[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.additional_resources #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.additional_resources[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.additional_resources[0].value[0].type #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.additional_resources[0].value[0].text #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.additional_resources[0].value[0].url #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.additional_resources[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.use_cases #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.use_cases[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.use_cases[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.use_cases[0].value[0].rank #=> Integer
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.use_cases[0].value[0].name #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.use_cases[0].value[0].group #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.use_cases[0].value[0].subgroup #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.use_cases[0].value[0].use_case_details #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.use_cases[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.use_cases[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.case_studies #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.case_studies[0].value #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.case_studies[0].value[0].id #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.case_studies[0].value[0].title #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.case_studies[0].value[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.alternatives.case_studies[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.follow_up_questions #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.follow_up_questions[0].question #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.follow_up_questions[0].justification #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.findings #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.findings[0].action #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.findings[0].description #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.findings[0].severity #=> String, one of "BLOCKING", "ADVISORY"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.case_studies.findings[0].status #=> String, one of "PASS", "FAIL"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.citations #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.solution_content_recommendations.citations[0].url #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.feature_recommendations.recommendations #=> Array
+    #   resp.control_assessments[0].control_summary.listing_recommendations.feature_recommendations.recommendations[0].feature_id #=> String, one of "REQUEST_PRIVATE_OFFER", "REQUEST_A_DEMO", "PROMOTIONAL_MEDIA", "FREE_TRIAL", "QUICK_LAUNCH"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.feature_recommendations.recommendations[0].action #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.feature_recommendations.recommendations[0].rationale #=> String
+    #   resp.control_assessments[0].control_summary.listing_recommendations.feature_recommendations.recommendations[0].severity #=> String, one of "BLOCKING", "ADVISORY"
+    #   resp.control_assessments[0].control_summary.listing_recommendations.feature_recommendations.recommendations[0].status #=> String, one of "PASS", "FAIL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/DescribeAssessment AWS API Documentation
@@ -819,7 +1404,8 @@ module Aws::MarketplaceCatalog
     # @option params [String] :framework_id
     #   The unique identifier of a framework. When specified, only assessments
     #   performed against this framework are returned. For example,
-    #   `AMISecurity`.
+    #   `AMISecurity`. Required when you use `EntityIds` in
+    #   `AssessmentTargetFilter`.
     #
     # @option params [Types::AssessmentTargetFilter] :assessment_target_filter
     #   Filters the list of assessments to those performed against a specific
@@ -853,6 +1439,7 @@ module Aws::MarketplaceCatalog
     #     assessment_target_filter: {
     #       entity_id: "ResourceId",
     #       change_set_id: "ResourceId",
+    #       entity_ids: ["ResourceId"],
     #     },
     #     framework_filters: {
     #       ami_security_filters: {
@@ -876,6 +1463,10 @@ module Aws::MarketplaceCatalog
     #   resp.assessment_summary_list[0].assessment_target_summary.change_set_id #=> String
     #   resp.assessment_summary_list[0].framework_summary.ami_security_summary.delivery_option_id #=> String
     #   resp.assessment_summary_list[0].framework_summary.container_security_summary.delivery_option_id #=> String
+    #   resp.assessment_summary_list[0].framework_summary.listing_quality_summary.tier #=> String, one of "NEEDS_IMPROVEMENT", "BASIC", "STRONG", "EXCELLENT"
+    #   resp.assessment_summary_list[0].framework_summary.listing_quality_summary.entity_revision #=> String
+    #   resp.assessment_summary_list[0].framework_summary.listing_recommendations_summary.tier #=> String, one of "NEEDS_IMPROVEMENT", "BASIC", "STRONG", "EXCELLENT"
+    #   resp.assessment_summary_list[0].framework_summary.listing_recommendations_summary.entity_revision #=> String
     #   resp.assessment_summary_list[0].assessment_result #=> String, one of "PASS", "FAIL"
     #   resp.assessment_summary_list[0].created_at #=> String
     #   resp.assessment_summary_list[0].expires_at #=> String
@@ -1103,6 +1694,9 @@ module Aws::MarketplaceCatalog
     #         },
     #         resale_authorization_id: {
     #           value_list: ["OfferResaleAuthorizationIdString"],
+    #         },
+    #         subsidiary_authorization_id: {
+    #           value_list: ["OfferSubsidiaryAuthorizationIdString"],
     #         },
     #         release_date: {
     #           date_range: {
@@ -1337,7 +1931,7 @@ module Aws::MarketplaceCatalog
     #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       },
     #       offer_sort: {
-    #         sort_by: "EntityId", # accepts EntityId, Name, ProductId, ResaleAuthorizationId, ReleaseDate, AvailabilityEndDate, BuyerAccounts, State, Targeting, LastModifiedDate, OfferSetId, TargetAgreementId, TargetAgreementIntent, CreatedBySource
+    #         sort_by: "EntityId", # accepts EntityId, Name, ProductId, ResaleAuthorizationId, SubsidiaryAuthorizationId, ReleaseDate, AvailabilityEndDate, BuyerAccounts, State, Targeting, LastModifiedDate, OfferSetId, TargetAgreementId, TargetAgreementIntent, CreatedBySource
     #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       },
     #       container_product_sort: {
@@ -1387,6 +1981,7 @@ module Aws::MarketplaceCatalog
     #   resp.entity_summary_list[0].offer_summary.name #=> String
     #   resp.entity_summary_list[0].offer_summary.product_id #=> String
     #   resp.entity_summary_list[0].offer_summary.resale_authorization_id #=> String
+    #   resp.entity_summary_list[0].offer_summary.subsidiary_authorization_id #=> String
     #   resp.entity_summary_list[0].offer_summary.release_date #=> String
     #   resp.entity_summary_list[0].offer_summary.availability_end_date #=> String
     #   resp.entity_summary_list[0].offer_summary.buyer_accounts #=> Array
@@ -1503,6 +2098,77 @@ module Aws::MarketplaceCatalog
     # @param [Hash] params ({})
     def put_resource_policy(params = {}, options = {})
       req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Starts an assessment of a product entity against a framework. An
+    # *assessment* is the result of evaluating an entity against the
+    # controls of a framework. You choose the controls to run and provide
+    # the input that each control needs.
+    #
+    # The assessment runs asynchronously. This action returns the ID of the
+    # assessment immediately. To get its status and the results of each
+    # control, use the `DescribeAssessment` action. To find assessments that
+    # you started earlier, use the `ListAssessments` action.
+    #
+    # @option params [required, String] :catalog
+    #   The catalog related to the request. Fixed value: `AWSMarketplace`
+    #
+    # @option params [String] :client_token
+    #   A unique token to identify the request to ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :framework_id
+    #   The unique identifier of the framework that defines the controls to
+    #   run.
+    #
+    # @option params [required, String] :entity_id
+    #   The unique ID of the product entity to assess.
+    #
+    # @option params [Array<Types::ControlInput>] :controls
+    #   The controls to provide input for. Every control in the framework is
+    #   included in the assessment, and a control that you don't specify gets
+    #   no input. You can specify 1–100 controls.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map of tags to apply to the assessment when you create it. Each tag
+    #   is a key-value pair. You can specify 1–200 tags.
+    #
+    # @return [Types::StartAssessmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartAssessmentResponse#assessment_id #assessment_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_assessment({
+    #     catalog: "Catalog", # required
+    #     client_token: "ClientRequestToken",
+    #     framework_id: "FrameworkId", # required
+    #     entity_id: "ResourceId", # required
+    #     controls: [
+    #       {
+    #         control_id: "ResourceId", # required
+    #         input: {
+    #         },
+    #       },
+    #     ],
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.assessment_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/StartAssessment AWS API Documentation
+    #
+    # @overload start_assessment(params = {})
+    # @param [Hash] params ({})
+    def start_assessment(params = {}, options = {})
+      req = build_request(:start_assessment, params)
       req.send_request(options)
     end
 
@@ -1711,7 +2377,7 @@ module Aws::MarketplaceCatalog
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacecatalog'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

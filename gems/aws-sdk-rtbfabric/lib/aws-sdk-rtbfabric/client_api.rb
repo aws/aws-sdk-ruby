@@ -19,12 +19,19 @@ module Aws::RTBFabric
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AcmCertificateArn = Shapes::StringShape.new(name: 'AcmCertificateArn')
     Action = Shapes::UnionShape.new(name: 'Action')
+    ActivationPercentage = Shapes::FloatShape.new(name: 'ActivationPercentage')
     AssociateCertificateRequest = Shapes::StructureShape.new(name: 'AssociateCertificateRequest')
     AssociateCertificateResponse = Shapes::StructureShape.new(name: 'AssociateCertificateResponse')
     AutoScalingGroupName = Shapes::StringShape.new(name: 'AutoScalingGroupName')
     AutoScalingGroupNameList = Shapes::ListShape.new(name: 'AutoScalingGroupNameList')
     AutoScalingGroupsConfiguration = Shapes::StructureShape.new(name: 'AutoScalingGroupsConfiguration')
     AutoScalingGroupsConfigurationRoleArnString = Shapes::StringShape.new(name: 'AutoScalingGroupsConfigurationRoleArnString')
+    AvailableModuleSummary = Shapes::StructureShape.new(name: 'AvailableModuleSummary')
+    AvailableModuleSummaryList = Shapes::ListShape.new(name: 'AvailableModuleSummaryList')
+    AvailableModuleVersionSummary = Shapes::StructureShape.new(name: 'AvailableModuleVersionSummary')
+    AvailableModuleVersionSummaryList = Shapes::ListShape.new(name: 'AvailableModuleVersionSummaryList')
+    AwsResourceId = Shapes::StringShape.new(name: 'AwsResourceId')
+    AwsResourceIdList = Shapes::ListShape.new(name: 'AwsResourceIdList')
     Base64EncodedCertificateChain = Shapes::StringShape.new(name: 'Base64EncodedCertificateChain')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CertificateAssociationStatus = Shapes::StringShape.new(name: 'CertificateAssociationStatus')
@@ -32,6 +39,11 @@ module Aws::RTBFabric
     CertificateAssociationSummaryList = Shapes::ListShape.new(name: 'CertificateAssociationSummaryList')
     CertificateAuthorityCertificates = Shapes::ListShape.new(name: 'CertificateAuthorityCertificates')
     ClientRoutingPolicy = Shapes::StringShape.new(name: 'ClientRoutingPolicy')
+    ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    ConfigurableAction = Shapes::StringShape.new(name: 'ConfigurableAction')
+    ConfigurableActionList = Shapes::ListShape.new(name: 'ConfigurableActionList')
+    ConfigurationSchema = Shapes::StringShape.new(name: 'ConfigurationSchema')
+    ConfigurationValues = Shapes::StringShape.new(name: 'ConfigurationValues')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectivityType = Shapes::StringShape.new(name: 'ConnectivityType')
     CreateInboundExternalLinkRequest = Shapes::StructureShape.new(name: 'CreateInboundExternalLinkRequest')
@@ -72,6 +84,11 @@ module Aws::RTBFabric
     DomainName = Shapes::StringShape.new(name: 'DomainName')
     EksEndpointsConfiguration = Shapes::StructureShape.new(name: 'EksEndpointsConfiguration')
     EksEndpointsConfigurationRoleArnString = Shapes::StringShape.new(name: 'EksEndpointsConfigurationRoleArnString')
+    ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
+    ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
+    ErrorDetailMessageString = Shapes::StringShape.new(name: 'ErrorDetailMessageString')
+    ErrorDetails = Shapes::ListShape.new(name: 'ErrorDetails')
+    FailureMode = Shapes::StringShape.new(name: 'FailureMode')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterConfiguration = Shapes::ListShape.new(name: 'FilterConfiguration')
     FilterCriteria = Shapes::ListShape.new(name: 'FilterCriteria')
@@ -79,11 +96,23 @@ module Aws::RTBFabric
     FilterCriterionValuesList = Shapes::ListShape.new(name: 'FilterCriterionValuesList')
     FilterType = Shapes::StringShape.new(name: 'FilterType')
     Float = Shapes::FloatShape.new(name: 'Float')
+    Flow = Shapes::StructureShape.new(name: 'Flow')
+    FlowList = Shapes::ListShape.new(name: 'FlowList')
+    FlowModule = Shapes::StructureShape.new(name: 'FlowModule')
+    FlowModuleList = Shapes::ListShape.new(name: 'FlowModuleList')
     FlowModuleName = Shapes::StringShape.new(name: 'FlowModuleName')
     FlowModuleNameList = Shapes::ListShape.new(name: 'FlowModuleNameList')
+    FlowName = Shapes::StringShape.new(name: 'FlowName')
+    FlowPhase = Shapes::StructureShape.new(name: 'FlowPhase')
+    FlowPhaseList = Shapes::ListShape.new(name: 'FlowPhaseList')
+    FlowPipeline = Shapes::UnionShape.new(name: 'FlowPipeline')
     GatewayId = Shapes::StringShape.new(name: 'GatewayId')
     GatewayIdList = Shapes::ListShape.new(name: 'GatewayIdList')
     GatewayType = Shapes::StringShape.new(name: 'GatewayType')
+    GetAvailableModuleRequest = Shapes::StructureShape.new(name: 'GetAvailableModuleRequest')
+    GetAvailableModuleResponse = Shapes::StructureShape.new(name: 'GetAvailableModuleResponse')
+    GetAvailableModuleVersionRequest = Shapes::StructureShape.new(name: 'GetAvailableModuleVersionRequest')
+    GetAvailableModuleVersionResponse = Shapes::StructureShape.new(name: 'GetAvailableModuleVersionResponse')
     GetCertificateAssociationRequest = Shapes::StructureShape.new(name: 'GetCertificateAssociationRequest')
     GetCertificateAssociationResponse = Shapes::StructureShape.new(name: 'GetCertificateAssociationResponse')
     GetInboundExternalLinkRequest = Shapes::StructureShape.new(name: 'GetInboundExternalLinkRequest')
@@ -105,6 +134,8 @@ module Aws::RTBFabric
     GetResponderGatewayResponsePortInteger = Shapes::IntegerShape.new(name: 'GetResponderGatewayResponsePortInteger')
     GetResponderGatewayResponseSecurityGroupIdsList = Shapes::ListShape.new(name: 'GetResponderGatewayResponseSecurityGroupIdsList')
     GetResponderGatewayResponseSubnetIdsList = Shapes::ListShape.new(name: 'GetResponderGatewayResponseSubnetIdsList')
+    GetUpdateRequest = Shapes::StructureShape.new(name: 'GetUpdateRequest')
+    GetUpdateResponse = Shapes::StructureShape.new(name: 'GetUpdateResponse')
     HeaderTagAction = Shapes::StructureShape.new(name: 'HeaderTagAction')
     HealthCheckConfig = Shapes::StructureShape.new(name: 'HealthCheckConfig')
     HealthCheckConfigHealthyThresholdCountInteger = Shapes::IntegerShape.new(name: 'HealthCheckConfigHealthyThresholdCountInteger')
@@ -123,14 +154,23 @@ module Aws::RTBFabric
     LinkApplicationLogSamplingErrorLogDouble = Shapes::FloatShape.new(name: 'LinkApplicationLogSamplingErrorLogDouble')
     LinkApplicationLogSamplingFilterLogDouble = Shapes::FloatShape.new(name: 'LinkApplicationLogSamplingFilterLogDouble')
     LinkAttributes = Shapes::StructureShape.new(name: 'LinkAttributes')
+    LinkConfigParameters = Shapes::StructureShape.new(name: 'LinkConfigParameters')
     LinkDirection = Shapes::StringShape.new(name: 'LinkDirection')
+    LinkFlowParameters = Shapes::UnionShape.new(name: 'LinkFlowParameters')
     LinkId = Shapes::StringShape.new(name: 'LinkId')
     LinkList = Shapes::ListShape.new(name: 'LinkList')
     LinkLogSettings = Shapes::StructureShape.new(name: 'LinkLogSettings')
     LinkRoutingRuleList = Shapes::ListShape.new(name: 'LinkRoutingRuleList')
     LinkRoutingRuleSummary = Shapes::StructureShape.new(name: 'LinkRoutingRuleSummary')
     LinkStatus = Shapes::StringShape.new(name: 'LinkStatus')
+    LinkTarget = Shapes::StructureShape.new(name: 'LinkTarget')
     LinkTimeoutInMillis = Shapes::IntegerShape.new(name: 'LinkTimeoutInMillis')
+    ListAvailableModuleVersionsRequest = Shapes::StructureShape.new(name: 'ListAvailableModuleVersionsRequest')
+    ListAvailableModuleVersionsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAvailableModuleVersionsRequestMaxResultsInteger')
+    ListAvailableModuleVersionsResponse = Shapes::StructureShape.new(name: 'ListAvailableModuleVersionsResponse')
+    ListAvailableModulesRequest = Shapes::StructureShape.new(name: 'ListAvailableModulesRequest')
+    ListAvailableModulesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAvailableModulesRequestMaxResultsInteger')
+    ListAvailableModulesResponse = Shapes::StructureShape.new(name: 'ListAvailableModulesResponse')
     ListCertificateAssociationsRequest = Shapes::StructureShape.new(name: 'ListCertificateAssociationsRequest')
     ListCertificateAssociationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListCertificateAssociationsRequestMaxResultsInteger')
     ListCertificateAssociationsResponse = Shapes::StructureShape.new(name: 'ListCertificateAssociationsResponse')
@@ -148,11 +188,25 @@ module Aws::RTBFabric
     ListResponderGatewaysResponse = Shapes::StructureShape.new(name: 'ListResponderGatewaysResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListUpdatesRequest = Shapes::StructureShape.new(name: 'ListUpdatesRequest')
+    ListUpdatesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListUpdatesRequestMaxResultsInteger')
+    ListUpdatesRequestNextTokenString = Shapes::StringShape.new(name: 'ListUpdatesRequestNextTokenString')
+    ListUpdatesResponse = Shapes::StructureShape.new(name: 'ListUpdatesResponse')
+    ListUpdatesResponseNextTokenString = Shapes::StringShape.new(name: 'ListUpdatesResponseNextTokenString')
     ListenerConfig = Shapes::StructureShape.new(name: 'ListenerConfig')
+    LockToken = Shapes::StringShape.new(name: 'LockToken')
     ManagedEndpointConfiguration = Shapes::UnionShape.new(name: 'ManagedEndpointConfiguration')
+    ModuleArn = Shapes::StringShape.new(name: 'ModuleArn')
     ModuleConfiguration = Shapes::StructureShape.new(name: 'ModuleConfiguration')
     ModuleConfigurationList = Shapes::ListShape.new(name: 'ModuleConfigurationList')
+    ModuleDescription = Shapes::StringShape.new(name: 'ModuleDescription')
+    ModuleId = Shapes::StringShape.new(name: 'ModuleId')
+    ModuleName = Shapes::StringShape.new(name: 'ModuleName')
     ModuleParameters = Shapes::UnionShape.new(name: 'ModuleParameters')
+    ModulePermission = Shapes::StringShape.new(name: 'ModulePermission')
+    ModulePermissionList = Shapes::ListShape.new(name: 'ModulePermissionList')
+    ModuleVersionArn = Shapes::StringShape.new(name: 'ModuleVersionArn')
+    ModuleVersionStatus = Shapes::StringShape.new(name: 'ModuleVersionStatus')
     NoBidAction = Shapes::StructureShape.new(name: 'NoBidAction')
     NoBidActionNoBidReasonCodeInteger = Shapes::IntegerShape.new(name: 'NoBidActionNoBidReasonCodeInteger')
     NoBidModuleParameters = Shapes::StructureShape.new(name: 'NoBidModuleParameters')
@@ -161,14 +215,18 @@ module Aws::RTBFabric
     NoBidModuleParametersReasonString = Shapes::StringShape.new(name: 'NoBidModuleParametersReasonString')
     OpenRtbAttributeModuleParameters = Shapes::StructureShape.new(name: 'OpenRtbAttributeModuleParameters')
     OpenRtbAttributeModuleParametersHoldbackPercentageFloat = Shapes::FloatShape.new(name: 'OpenRtbAttributeModuleParametersHoldbackPercentageFloat')
+    PhasedPipeline = Shapes::StructureShape.new(name: 'PhasedPipeline')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
     ProtocolList = Shapes::ListShape.new(name: 'ProtocolList')
+    PutLinkFlowsRequest = Shapes::StructureShape.new(name: 'PutLinkFlowsRequest')
+    PutLinkFlowsResponse = Shapes::StructureShape.new(name: 'PutLinkFlowsResponse')
     QueryStringKeyValuePair = Shapes::StructureShape.new(name: 'QueryStringKeyValuePair')
     QueryStringKeyValuePairKeyString = Shapes::StringShape.new(name: 'QueryStringKeyValuePairKeyString')
     QueryStringKeyValuePairValueString = Shapes::StringShape.new(name: 'QueryStringKeyValuePairValueString')
     RateLimiterModuleParameters = Shapes::StructureShape.new(name: 'RateLimiterModuleParameters')
     RejectLinkRequest = Shapes::StructureShape.new(name: 'RejectLinkRequest')
     RejectLinkResponse = Shapes::StructureShape.new(name: 'RejectLinkResponse')
+    ReleaseNotes = Shapes::StringShape.new(name: 'ReleaseNotes')
     RequesterGatewayStatus = Shapes::StringShape.new(name: 'RequesterGatewayStatus')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResponderErrorMasking = Shapes::ListShape.new(name: 'ResponderErrorMasking')
@@ -178,7 +236,10 @@ module Aws::RTBFabric
     ResponderErrorMaskingForHttpCodeResponseLoggingPercentageFloat = Shapes::FloatShape.new(name: 'ResponderErrorMaskingForHttpCodeResponseLoggingPercentageFloat')
     ResponderErrorMaskingLoggingType = Shapes::StringShape.new(name: 'ResponderErrorMaskingLoggingType')
     ResponderErrorMaskingLoggingTypes = Shapes::ListShape.new(name: 'ResponderErrorMaskingLoggingTypes')
+    ResponderGatewayConfigParameters = Shapes::StructureShape.new(name: 'ResponderGatewayConfigParameters')
     ResponderGatewayStatus = Shapes::StringShape.new(name: 'ResponderGatewayStatus')
+    RoutingRuleParameters = Shapes::StructureShape.new(name: 'RoutingRuleParameters')
+    RoutingRuleTarget = Shapes::StructureShape.new(name: 'RoutingRuleTarget')
     RtbTaggableResourceArn = Shapes::StringShape.new(name: 'RtbTaggableResourceArn')
     RuleCondition = Shapes::StructureShape.new(name: 'RuleCondition')
     RuleConditionHostHeaderString = Shapes::StringShape.new(name: 'RuleConditionHostHeaderString')
@@ -190,10 +251,15 @@ module Aws::RTBFabric
     RulePriority = Shapes::IntegerShape.new(name: 'RulePriority')
     RuleStatus = Shapes::StringShape.new(name: 'RuleStatus')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
+    SelectedActionList = Shapes::ListShape.new(name: 'SelectedActionList')
+    SemanticVersion = Shapes::StringShape.new(name: 'SemanticVersion')
+    SequentialPipeline = Shapes::StructureShape.new(name: 'SequentialPipeline')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     StatusCodeMatcher = Shapes::StringShape.new(name: 'StatusCodeMatcher')
     String = Shapes::StringShape.new(name: 'String')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
+    SubscriptionStatus = Shapes::StringShape.new(name: 'SubscriptionStatus')
+    SubscriptionType = Shapes::StringShape.new(name: 'SubscriptionType')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
@@ -205,14 +271,20 @@ module Aws::RTBFabric
     TrustStoreConfiguration = Shapes::StructureShape.new(name: 'TrustStoreConfiguration')
     URI = Shapes::StringShape.new(name: 'URI')
     URL = Shapes::StringShape.new(name: 'URL')
+    Unit = Shapes::StructureShape.new(name: 'Unit')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    Update = Shapes::StructureShape.new(name: 'Update')
+    UpdateId = Shapes::StringShape.new(name: 'UpdateId')
     UpdateLinkModuleFlowRequest = Shapes::StructureShape.new(name: 'UpdateLinkModuleFlowRequest')
     UpdateLinkModuleFlowResponse = Shapes::StructureShape.new(name: 'UpdateLinkModuleFlowResponse')
     UpdateLinkRequest = Shapes::StructureShape.new(name: 'UpdateLinkRequest')
+    UpdateLinkRequestClientTokenString = Shapes::StringShape.new(name: 'UpdateLinkRequestClientTokenString')
     UpdateLinkResponse = Shapes::StructureShape.new(name: 'UpdateLinkResponse')
     UpdateLinkRoutingRuleRequest = Shapes::StructureShape.new(name: 'UpdateLinkRoutingRuleRequest')
+    UpdateLinkRoutingRuleRequestClientTokenString = Shapes::StringShape.new(name: 'UpdateLinkRoutingRuleRequestClientTokenString')
     UpdateLinkRoutingRuleResponse = Shapes::StructureShape.new(name: 'UpdateLinkRoutingRuleResponse')
+    UpdateParameters = Shapes::UnionShape.new(name: 'UpdateParameters')
     UpdateRequesterGatewayRequest = Shapes::StructureShape.new(name: 'UpdateRequesterGatewayRequest')
     UpdateRequesterGatewayRequestDescriptionString = Shapes::StringShape.new(name: 'UpdateRequesterGatewayRequestDescriptionString')
     UpdateRequesterGatewayResponse = Shapes::StructureShape.new(name: 'UpdateRequesterGatewayResponse')
@@ -220,6 +292,11 @@ module Aws::RTBFabric
     UpdateResponderGatewayRequestDescriptionString = Shapes::StringShape.new(name: 'UpdateResponderGatewayRequestDescriptionString')
     UpdateResponderGatewayRequestPortInteger = Shapes::IntegerShape.new(name: 'UpdateResponderGatewayRequestPortInteger')
     UpdateResponderGatewayResponse = Shapes::StructureShape.new(name: 'UpdateResponderGatewayResponse')
+    UpdateStatus = Shapes::StringShape.new(name: 'UpdateStatus')
+    UpdateSummary = Shapes::StructureShape.new(name: 'UpdateSummary')
+    UpdateSummaryList = Shapes::ListShape.new(name: 'UpdateSummaryList')
+    UpdateTarget = Shapes::UnionShape.new(name: 'UpdateTarget')
+    UpdateType = Shapes::StringShape.new(name: 'UpdateType')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Version = Shapes::StringShape.new(name: 'Version')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
@@ -242,6 +319,7 @@ module Aws::RTBFabric
     AcceptLinkResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: LinkAttributes, location_name: "attributes"))
     AcceptLinkResponse.add_member(:log_settings, Shapes::ShapeRef.new(shape: LinkLogSettings, location_name: "logSettings"))
     AcceptLinkResponse.add_member(:connectivity_type, Shapes::ShapeRef.new(shape: ConnectivityType, location_name: "connectivityType"))
+    AcceptLinkResponse.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errorDetails"))
     AcceptLinkResponse.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "linkId"))
     AcceptLinkResponse.struct_class = Types::AcceptLinkResponse
 
@@ -273,6 +351,26 @@ module Aws::RTBFabric
     AutoScalingGroupsConfiguration.add_member(:health_check_config, Shapes::ShapeRef.new(shape: HealthCheckConfig, location_name: "healthCheckConfig"))
     AutoScalingGroupsConfiguration.struct_class = Types::AutoScalingGroupsConfiguration
 
+    AvailableModuleSummary.add_member(:module_id, Shapes::ShapeRef.new(shape: ModuleId, required: true, location_name: "moduleId"))
+    AvailableModuleSummary.add_member(:module_arn, Shapes::ShapeRef.new(shape: ModuleArn, required: true, location_name: "moduleArn"))
+    AvailableModuleSummary.add_member(:module_name, Shapes::ShapeRef.new(shape: ModuleName, required: true, location_name: "moduleName"))
+    AvailableModuleSummary.add_member(:subscription_type, Shapes::ShapeRef.new(shape: SubscriptionType, required: true, location_name: "subscriptionType"))
+    AvailableModuleSummary.add_member(:subscription_status, Shapes::ShapeRef.new(shape: SubscriptionStatus, required: true, location_name: "subscriptionStatus"))
+    AvailableModuleSummary.add_member(:marketplace_product_id, Shapes::ShapeRef.new(shape: String, location_name: "marketplaceProductId"))
+    AvailableModuleSummary.struct_class = Types::AvailableModuleSummary
+
+    AvailableModuleSummaryList.member = Shapes::ShapeRef.new(shape: AvailableModuleSummary)
+
+    AvailableModuleVersionSummary.add_member(:version, Shapes::ShapeRef.new(shape: SemanticVersion, required: true, location_name: "version"))
+    AvailableModuleVersionSummary.add_member(:module_version_arn, Shapes::ShapeRef.new(shape: ModuleVersionArn, required: true, location_name: "moduleVersionArn"))
+    AvailableModuleVersionSummary.add_member(:status, Shapes::ShapeRef.new(shape: ModuleVersionStatus, required: true, location_name: "status"))
+    AvailableModuleVersionSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    AvailableModuleVersionSummary.struct_class = Types::AvailableModuleVersionSummary
+
+    AvailableModuleVersionSummaryList.member = Shapes::ShapeRef.new(shape: AvailableModuleVersionSummary)
+
+    AwsResourceIdList.member = Shapes::ShapeRef.new(shape: AwsResourceId)
+
     CertificateAssociationSummary.add_member(:acm_certificate_arn, Shapes::ShapeRef.new(shape: AcmCertificateArn, required: true, location_name: "acmCertificateArn"))
     CertificateAssociationSummary.add_member(:status, Shapes::ShapeRef.new(shape: CertificateAssociationStatus, required: true, location_name: "status"))
     CertificateAssociationSummary.add_member(:associated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "associatedAt"))
@@ -282,6 +380,8 @@ module Aws::RTBFabric
     CertificateAssociationSummaryList.member = Shapes::ShapeRef.new(shape: CertificateAssociationSummary)
 
     CertificateAuthorityCertificates.member = Shapes::ShapeRef.new(shape: Base64EncodedCertificateChain)
+
+    ConfigurableActionList.member = Shapes::ShapeRef.new(shape: ConfigurableAction)
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
@@ -319,6 +419,7 @@ module Aws::RTBFabric
     CreateLinkResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: LinkAttributes, location_name: "attributes"))
     CreateLinkResponse.add_member(:log_settings, Shapes::ShapeRef.new(shape: LinkLogSettings, location_name: "logSettings"))
     CreateLinkResponse.add_member(:connectivity_type, Shapes::ShapeRef.new(shape: ConnectivityType, location_name: "connectivityType"))
+    CreateLinkResponse.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errorDetails"))
     CreateLinkResponse.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "linkId"))
     CreateLinkResponse.add_member(:customer_provided_id, Shapes::ShapeRef.new(shape: CreateLinkResponseCustomerProvidedIdString, location_name: "customerProvidedId"))
     CreateLinkResponse.struct_class = Types::CreateLinkResponse
@@ -457,6 +558,13 @@ module Aws::RTBFabric
     EksEndpointsConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: EksEndpointsConfigurationRoleArnString, required: true, location_name: "roleArn"))
     EksEndpointsConfiguration.struct_class = Types::EksEndpointsConfiguration
 
+    ErrorDetail.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "code"))
+    ErrorDetail.add_member(:message, Shapes::ShapeRef.new(shape: ErrorDetailMessageString, required: true, location_name: "message"))
+    ErrorDetail.add_member(:resource_ids, Shapes::ShapeRef.new(shape: AwsResourceIdList, location_name: "resourceIds"))
+    ErrorDetail.struct_class = Types::ErrorDetail
+
+    ErrorDetails.member = Shapes::ShapeRef.new(shape: ErrorDetail)
+
     Filter.add_member(:criteria, Shapes::ShapeRef.new(shape: FilterCriteria, required: true, location_name: "criteria"))
     Filter.struct_class = Types::Filter
 
@@ -470,9 +578,67 @@ module Aws::RTBFabric
 
     FilterCriterionValuesList.member = Shapes::ShapeRef.new(shape: String)
 
+    Flow.add_member(:name, Shapes::ShapeRef.new(shape: FlowName, required: true, location_name: "name"))
+    Flow.add_member(:pipeline, Shapes::ShapeRef.new(shape: FlowPipeline, required: true, location_name: "pipeline"))
+    Flow.struct_class = Types::Flow
+
+    FlowList.member = Shapes::ShapeRef.new(shape: Flow)
+
+    FlowModule.add_member(:name, Shapes::ShapeRef.new(shape: ModuleName, required: true, location_name: "name"))
+    FlowModule.add_member(:module_version_arn, Shapes::ShapeRef.new(shape: ModuleVersionArn, required: true, location_name: "moduleVersionArn"))
+    FlowModule.add_member(:selected_actions, Shapes::ShapeRef.new(shape: SelectedActionList, location_name: "selectedActions"))
+    FlowModule.add_member(:failure_mode, Shapes::ShapeRef.new(shape: FailureMode, location_name: "failureMode"))
+    FlowModule.add_member(:activation_percentage, Shapes::ShapeRef.new(shape: ActivationPercentage, location_name: "activationPercentage"))
+    FlowModule.add_member(:configuration_values, Shapes::ShapeRef.new(shape: ConfigurationValues, location_name: "configurationValues"))
+    FlowModule.struct_class = Types::FlowModule
+
+    FlowModuleList.member = Shapes::ShapeRef.new(shape: FlowModule)
+
     FlowModuleNameList.member = Shapes::ShapeRef.new(shape: FlowModuleName)
 
+    FlowPhase.add_member(:modules, Shapes::ShapeRef.new(shape: FlowModuleList, required: true, location_name: "modules"))
+    FlowPhase.struct_class = Types::FlowPhase
+
+    FlowPhaseList.member = Shapes::ShapeRef.new(shape: FlowPhase)
+
+    FlowPipeline.add_member(:sequential, Shapes::ShapeRef.new(shape: SequentialPipeline, location_name: "sequential"))
+    FlowPipeline.add_member(:phased, Shapes::ShapeRef.new(shape: PhasedPipeline, location_name: "phased"))
+    FlowPipeline.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    FlowPipeline.add_member_subclass(:sequential, Types::FlowPipeline::Sequential)
+    FlowPipeline.add_member_subclass(:phased, Types::FlowPipeline::Phased)
+    FlowPipeline.add_member_subclass(:unknown, Types::FlowPipeline::Unknown)
+    FlowPipeline.struct_class = Types::FlowPipeline
+
     GatewayIdList.member = Shapes::ShapeRef.new(shape: GatewayId)
+
+    GetAvailableModuleRequest.add_member(:module_id, Shapes::ShapeRef.new(shape: ModuleId, required: true, location: "uri", location_name: "moduleId"))
+    GetAvailableModuleRequest.struct_class = Types::GetAvailableModuleRequest
+
+    GetAvailableModuleResponse.add_member(:module_id, Shapes::ShapeRef.new(shape: ModuleId, required: true, location_name: "moduleId"))
+    GetAvailableModuleResponse.add_member(:module_arn, Shapes::ShapeRef.new(shape: ModuleArn, required: true, location_name: "moduleArn"))
+    GetAvailableModuleResponse.add_member(:module_name, Shapes::ShapeRef.new(shape: ModuleName, required: true, location_name: "moduleName"))
+    GetAvailableModuleResponse.add_member(:description, Shapes::ShapeRef.new(shape: ModuleDescription, location_name: "description"))
+    GetAvailableModuleResponse.add_member(:subscription_type, Shapes::ShapeRef.new(shape: SubscriptionType, required: true, location_name: "subscriptionType"))
+    GetAvailableModuleResponse.add_member(:subscription_status, Shapes::ShapeRef.new(shape: SubscriptionStatus, required: true, location_name: "subscriptionStatus"))
+    GetAvailableModuleResponse.add_member(:marketplace_product_id, Shapes::ShapeRef.new(shape: String, location_name: "marketplaceProductId"))
+    GetAvailableModuleResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    GetAvailableModuleResponse.struct_class = Types::GetAvailableModuleResponse
+
+    GetAvailableModuleVersionRequest.add_member(:module_id, Shapes::ShapeRef.new(shape: ModuleId, required: true, location: "uri", location_name: "moduleId"))
+    GetAvailableModuleVersionRequest.add_member(:version, Shapes::ShapeRef.new(shape: SemanticVersion, required: true, location: "uri", location_name: "version"))
+    GetAvailableModuleVersionRequest.struct_class = Types::GetAvailableModuleVersionRequest
+
+    GetAvailableModuleVersionResponse.add_member(:module_id, Shapes::ShapeRef.new(shape: ModuleId, required: true, location_name: "moduleId"))
+    GetAvailableModuleVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: SemanticVersion, required: true, location_name: "version"))
+    GetAvailableModuleVersionResponse.add_member(:module_version_arn, Shapes::ShapeRef.new(shape: ModuleVersionArn, required: true, location_name: "moduleVersionArn"))
+    GetAvailableModuleVersionResponse.add_member(:status, Shapes::ShapeRef.new(shape: ModuleVersionStatus, required: true, location_name: "status"))
+    GetAvailableModuleVersionResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ModulePermissionList, required: true, location_name: "permissions"))
+    GetAvailableModuleVersionResponse.add_member(:configurable_actions, Shapes::ShapeRef.new(shape: ConfigurableActionList, required: true, location_name: "configurableActions"))
+    GetAvailableModuleVersionResponse.add_member(:configuration_schema, Shapes::ShapeRef.new(shape: ConfigurationSchema, location_name: "configurationSchema"))
+    GetAvailableModuleVersionResponse.add_member(:release_notes, Shapes::ShapeRef.new(shape: ReleaseNotes, location_name: "releaseNotes"))
+    GetAvailableModuleVersionResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    GetAvailableModuleVersionResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    GetAvailableModuleVersionResponse.struct_class = Types::GetAvailableModuleVersionResponse
 
     GetCertificateAssociationRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
     GetCertificateAssociationRequest.add_member(:acm_certificate_arn, Shapes::ShapeRef.new(shape: AcmCertificateArn, required: true, location: "querystring", location_name: "acmCertificateArn"))
@@ -483,6 +649,7 @@ module Aws::RTBFabric
     GetCertificateAssociationResponse.add_member(:status, Shapes::ShapeRef.new(shape: CertificateAssociationStatus, required: true, location_name: "status"))
     GetCertificateAssociationResponse.add_member(:associated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "associatedAt"))
     GetCertificateAssociationResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    GetCertificateAssociationResponse.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errorDetails"))
     GetCertificateAssociationResponse.struct_class = Types::GetCertificateAssociationResponse
 
     GetInboundExternalLinkRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
@@ -501,6 +668,9 @@ module Aws::RTBFabric
     GetInboundExternalLinkResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     GetInboundExternalLinkResponse.add_member(:log_settings, Shapes::ShapeRef.new(shape: LinkLogSettings, location_name: "logSettings"))
     GetInboundExternalLinkResponse.add_member(:connectivity_type, Shapes::ShapeRef.new(shape: ConnectivityType, location_name: "connectivityType"))
+    GetInboundExternalLinkResponse.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errorDetails"))
+    GetInboundExternalLinkResponse.add_member(:lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "lockToken"))
+    GetInboundExternalLinkResponse.add_member(:flows, Shapes::ShapeRef.new(shape: FlowList, location_name: "flows"))
     GetInboundExternalLinkResponse.struct_class = Types::GetInboundExternalLinkResponse
 
     GetLinkRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
@@ -518,10 +688,13 @@ module Aws::RTBFabric
     GetLinkResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: LinkAttributes, location_name: "attributes"))
     GetLinkResponse.add_member(:log_settings, Shapes::ShapeRef.new(shape: LinkLogSettings, location_name: "logSettings"))
     GetLinkResponse.add_member(:connectivity_type, Shapes::ShapeRef.new(shape: ConnectivityType, location_name: "connectivityType"))
+    GetLinkResponse.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errorDetails"))
     GetLinkResponse.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "linkId"))
     GetLinkResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     GetLinkResponse.add_member(:http_responder_allowed, Shapes::ShapeRef.new(shape: Boolean, location_name: "httpResponderAllowed"))
     GetLinkResponse.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: LinkTimeoutInMillis, location_name: "timeoutInMillis"))
+    GetLinkResponse.add_member(:lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "lockToken"))
+    GetLinkResponse.add_member(:flows, Shapes::ShapeRef.new(shape: FlowList, location_name: "flows"))
     GetLinkResponse.struct_class = Types::GetLinkResponse
 
     GetLinkRoutingRuleRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
@@ -538,6 +711,7 @@ module Aws::RTBFabric
     GetLinkRoutingRuleResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     GetLinkRoutingRuleResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
     GetLinkRoutingRuleResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    GetLinkRoutingRuleResponse.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errorDetails"))
     GetLinkRoutingRuleResponse.struct_class = Types::GetLinkRoutingRuleResponse
 
     GetOutboundExternalLinkRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
@@ -556,6 +730,9 @@ module Aws::RTBFabric
     GetOutboundExternalLinkResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     GetOutboundExternalLinkResponse.add_member(:log_settings, Shapes::ShapeRef.new(shape: LinkLogSettings, location_name: "logSettings"))
     GetOutboundExternalLinkResponse.add_member(:connectivity_type, Shapes::ShapeRef.new(shape: ConnectivityType, location_name: "connectivityType"))
+    GetOutboundExternalLinkResponse.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errorDetails"))
+    GetOutboundExternalLinkResponse.add_member(:lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "lockToken"))
+    GetOutboundExternalLinkResponse.add_member(:flows, Shapes::ShapeRef.new(shape: FlowList, location_name: "flows"))
     GetOutboundExternalLinkResponse.struct_class = Types::GetOutboundExternalLinkResponse
 
     GetRequesterGatewayRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
@@ -566,6 +743,7 @@ module Aws::RTBFabric
     GetRequesterGatewayResponse.add_member(:description, Shapes::ShapeRef.new(shape: GetRequesterGatewayResponseDescriptionString, location_name: "description"))
     GetRequesterGatewayResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     GetRequesterGatewayResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    GetRequesterGatewayResponse.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errorDetails"))
     GetRequesterGatewayResponse.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "vpcId"))
     GetRequesterGatewayResponse.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: GetRequesterGatewayResponseSubnetIdsList, required: true, location_name: "subnetIds"))
     GetRequesterGatewayResponse.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: GetRequesterGatewayResponseSecurityGroupIdsList, required: true, location_name: "securityGroupIds"))
@@ -589,6 +767,7 @@ module Aws::RTBFabric
     GetResponderGatewayResponse.add_member(:description, Shapes::ShapeRef.new(shape: GetResponderGatewayResponseDescriptionString, location_name: "description"))
     GetResponderGatewayResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     GetResponderGatewayResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    GetResponderGatewayResponse.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errorDetails"))
     GetResponderGatewayResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "domainName"))
     GetResponderGatewayResponse.add_member(:port, Shapes::ShapeRef.new(shape: GetResponderGatewayResponsePortInteger, required: true, location_name: "port"))
     GetResponderGatewayResponse.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, required: true, location_name: "protocol"))
@@ -608,6 +787,13 @@ module Aws::RTBFabric
     GetResponderGatewayResponseSecurityGroupIdsList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
     GetResponderGatewayResponseSubnetIdsList.member = Shapes::ShapeRef.new(shape: SubnetId)
+
+    GetUpdateRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
+    GetUpdateRequest.add_member(:update_id, Shapes::ShapeRef.new(shape: UpdateId, required: true, location: "uri", location_name: "updateId"))
+    GetUpdateRequest.struct_class = Types::GetUpdateRequest
+
+    GetUpdateResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, required: true, location_name: "update"))
+    GetUpdateResponse.struct_class = Types::GetUpdateResponse
 
     HeaderTagAction.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     HeaderTagAction.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
@@ -637,6 +823,18 @@ module Aws::RTBFabric
     LinkAttributes.add_member(:customer_provided_id, Shapes::ShapeRef.new(shape: CustomerProvidedId, location_name: "customerProvidedId"))
     LinkAttributes.struct_class = Types::LinkAttributes
 
+    LinkConfigParameters.add_member(:log_settings, Shapes::ShapeRef.new(shape: LinkLogSettings, location_name: "logSettings"))
+    LinkConfigParameters.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: LinkTimeoutInMillis, location_name: "timeoutInMillis"))
+    LinkConfigParameters.struct_class = Types::LinkConfigParameters
+
+    LinkFlowParameters.add_member(:modules, Shapes::ShapeRef.new(shape: ModuleConfigurationList, location_name: "modules"))
+    LinkFlowParameters.add_member(:flows, Shapes::ShapeRef.new(shape: FlowList, location_name: "flows"))
+    LinkFlowParameters.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    LinkFlowParameters.add_member_subclass(:modules, Types::LinkFlowParameters::Modules)
+    LinkFlowParameters.add_member_subclass(:flows, Types::LinkFlowParameters::Flows)
+    LinkFlowParameters.add_member_subclass(:unknown, Types::LinkFlowParameters::Unknown)
+    LinkFlowParameters.struct_class = Types::LinkFlowParameters
+
     LinkList.member = Shapes::ShapeRef.new(shape: ListLinksResponseStructure)
 
     LinkLogSettings.add_member(:application_logs, Shapes::ShapeRef.new(shape: LinkApplicationLogConfiguration, required: true, location_name: "applicationLogs"))
@@ -650,7 +848,31 @@ module Aws::RTBFabric
     LinkRoutingRuleSummary.add_member(:status, Shapes::ShapeRef.new(shape: RuleStatus, required: true, location_name: "status"))
     LinkRoutingRuleSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     LinkRoutingRuleSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    LinkRoutingRuleSummary.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errorDetails"))
     LinkRoutingRuleSummary.struct_class = Types::LinkRoutingRuleSummary
+
+    LinkTarget.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "linkId"))
+    LinkTarget.struct_class = Types::LinkTarget
+
+    ListAvailableModuleVersionsRequest.add_member(:module_id, Shapes::ShapeRef.new(shape: ModuleId, required: true, location: "uri", location_name: "moduleId"))
+    ListAvailableModuleVersionsRequest.add_member(:status, Shapes::ShapeRef.new(shape: ModuleVersionStatus, location: "querystring", location_name: "status"))
+    ListAvailableModuleVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAvailableModuleVersionsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListAvailableModuleVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListAvailableModuleVersionsRequest.struct_class = Types::ListAvailableModuleVersionsRequest
+
+    ListAvailableModuleVersionsResponse.add_member(:module_id, Shapes::ShapeRef.new(shape: ModuleId, required: true, location_name: "moduleId"))
+    ListAvailableModuleVersionsResponse.add_member(:versions, Shapes::ShapeRef.new(shape: AvailableModuleVersionSummaryList, required: true, location_name: "versions"))
+    ListAvailableModuleVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListAvailableModuleVersionsResponse.struct_class = Types::ListAvailableModuleVersionsResponse
+
+    ListAvailableModulesRequest.add_member(:subscription_type, Shapes::ShapeRef.new(shape: SubscriptionType, location: "querystring", location_name: "subscriptionType"))
+    ListAvailableModulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAvailableModulesRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListAvailableModulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListAvailableModulesRequest.struct_class = Types::ListAvailableModulesRequest
+
+    ListAvailableModulesResponse.add_member(:modules, Shapes::ShapeRef.new(shape: AvailableModuleSummaryList, required: true, location_name: "modules"))
+    ListAvailableModulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListAvailableModulesResponse.struct_class = Types::ListAvailableModulesResponse
 
     ListCertificateAssociationsRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
     ListCertificateAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
@@ -691,6 +913,7 @@ module Aws::RTBFabric
     ListLinksResponseStructure.add_member(:attributes, Shapes::ShapeRef.new(shape: LinkAttributes, location_name: "attributes"))
     ListLinksResponseStructure.add_member(:log_settings, Shapes::ShapeRef.new(shape: LinkLogSettings, location_name: "logSettings"))
     ListLinksResponseStructure.add_member(:connectivity_type, Shapes::ShapeRef.new(shape: ConnectivityType, location_name: "connectivityType"))
+    ListLinksResponseStructure.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errorDetails"))
     ListLinksResponseStructure.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "linkId"))
     ListLinksResponseStructure.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     ListLinksResponseStructure.add_member(:public_endpoint, Shapes::ShapeRef.new(shape: URL, location_name: "publicEndpoint"))
@@ -717,6 +940,19 @@ module Aws::RTBFabric
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    ListUpdatesRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
+    ListUpdatesRequest.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, location: "querystring", location_name: "linkId"))
+    ListUpdatesRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, location: "querystring", location_name: "ruleId"))
+    ListUpdatesRequest.add_member(:type, Shapes::ShapeRef.new(shape: UpdateType, location: "querystring", location_name: "type"))
+    ListUpdatesRequest.add_member(:status, Shapes::ShapeRef.new(shape: UpdateStatus, location: "querystring", location_name: "status"))
+    ListUpdatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ListUpdatesRequestNextTokenString, location: "querystring", location_name: "nextToken"))
+    ListUpdatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListUpdatesRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListUpdatesRequest.struct_class = Types::ListUpdatesRequest
+
+    ListUpdatesResponse.add_member(:updates, Shapes::ShapeRef.new(shape: UpdateSummaryList, required: true, location_name: "updates"))
+    ListUpdatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ListUpdatesResponseNextTokenString, location_name: "nextToken"))
+    ListUpdatesResponse.struct_class = Types::ListUpdatesResponse
 
     ListenerConfig.add_member(:protocols, Shapes::ShapeRef.new(shape: ProtocolList, required: true, location_name: "protocols"))
     ListenerConfig.struct_class = Types::ListenerConfig
@@ -747,6 +983,8 @@ module Aws::RTBFabric
     ModuleParameters.add_member_subclass(:unknown, Types::ModuleParameters::Unknown)
     ModuleParameters.struct_class = Types::ModuleParameters
 
+    ModulePermissionList.member = Shapes::ShapeRef.new(shape: ModulePermission)
+
     NoBidAction.add_member(:no_bid_reason_code, Shapes::ShapeRef.new(shape: NoBidActionNoBidReasonCodeInteger, location_name: "noBidReasonCode"))
     NoBidAction.struct_class = Types::NoBidAction
 
@@ -761,7 +999,23 @@ module Aws::RTBFabric
     OpenRtbAttributeModuleParameters.add_member(:holdback_percentage, Shapes::ShapeRef.new(shape: OpenRtbAttributeModuleParametersHoldbackPercentageFloat, required: true, location_name: "holdbackPercentage"))
     OpenRtbAttributeModuleParameters.struct_class = Types::OpenRtbAttributeModuleParameters
 
+    PhasedPipeline.add_member(:phases, Shapes::ShapeRef.new(shape: FlowPhaseList, required: true, location_name: "phases"))
+    PhasedPipeline.struct_class = Types::PhasedPipeline
+
     ProtocolList.member = Shapes::ShapeRef.new(shape: Protocol)
+
+    PutLinkFlowsRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
+    PutLinkFlowsRequest.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location: "uri", location_name: "linkId"))
+    PutLinkFlowsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    PutLinkFlowsRequest.add_member(:lock_token, Shapes::ShapeRef.new(shape: LockToken, required: true, location_name: "lockToken"))
+    PutLinkFlowsRequest.add_member(:flows, Shapes::ShapeRef.new(shape: FlowList, required: true, location_name: "flows"))
+    PutLinkFlowsRequest.struct_class = Types::PutLinkFlowsRequest
+
+    PutLinkFlowsResponse.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location_name: "gatewayId"))
+    PutLinkFlowsResponse.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "linkId"))
+    PutLinkFlowsResponse.add_member(:status, Shapes::ShapeRef.new(shape: LinkStatus, required: true, location_name: "status"))
+    PutLinkFlowsResponse.add_member(:update_id, Shapes::ShapeRef.new(shape: UpdateId, required: true, location_name: "updateId"))
+    PutLinkFlowsResponse.struct_class = Types::PutLinkFlowsResponse
 
     QueryStringKeyValuePair.add_member(:key, Shapes::ShapeRef.new(shape: QueryStringKeyValuePairKeyString, required: true, location_name: "key"))
     QueryStringKeyValuePair.add_member(:value, Shapes::ShapeRef.new(shape: QueryStringKeyValuePairValueString, required: true, location_name: "value"))
@@ -785,6 +1039,7 @@ module Aws::RTBFabric
     RejectLinkResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: LinkAttributes, location_name: "attributes"))
     RejectLinkResponse.add_member(:log_settings, Shapes::ShapeRef.new(shape: LinkLogSettings, location_name: "logSettings"))
     RejectLinkResponse.add_member(:connectivity_type, Shapes::ShapeRef.new(shape: ConnectivityType, location_name: "connectivityType"))
+    RejectLinkResponse.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errorDetails"))
     RejectLinkResponse.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "linkId"))
     RejectLinkResponse.struct_class = Types::RejectLinkResponse
 
@@ -801,6 +1056,24 @@ module Aws::RTBFabric
 
     ResponderErrorMaskingLoggingTypes.member = Shapes::ShapeRef.new(shape: ResponderErrorMaskingLoggingType)
 
+    ResponderGatewayConfigParameters.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    ResponderGatewayConfigParameters.add_member(:client_routing_policy, Shapes::ShapeRef.new(shape: ClientRoutingPolicy, location_name: "clientRoutingPolicy"))
+    ResponderGatewayConfigParameters.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "domainName"))
+    ResponderGatewayConfigParameters.add_member(:port, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "port"))
+    ResponderGatewayConfigParameters.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, required: true, location_name: "protocol"))
+    ResponderGatewayConfigParameters.add_member(:listener_config, Shapes::ShapeRef.new(shape: ListenerConfig, location_name: "listenerConfig"))
+    ResponderGatewayConfigParameters.add_member(:trust_store_configuration, Shapes::ShapeRef.new(shape: TrustStoreConfiguration, location_name: "trustStoreConfiguration"))
+    ResponderGatewayConfigParameters.add_member(:managed_endpoint_configuration, Shapes::ShapeRef.new(shape: ManagedEndpointConfiguration, location_name: "managedEndpointConfiguration"))
+    ResponderGatewayConfigParameters.struct_class = Types::ResponderGatewayConfigParameters
+
+    RoutingRuleParameters.add_member(:priority, Shapes::ShapeRef.new(shape: RulePriority, required: true, location_name: "priority"))
+    RoutingRuleParameters.add_member(:conditions, Shapes::ShapeRef.new(shape: RuleCondition, required: true, location_name: "conditions"))
+    RoutingRuleParameters.struct_class = Types::RoutingRuleParameters
+
+    RoutingRuleTarget.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "linkId"))
+    RoutingRuleTarget.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location_name: "ruleId"))
+    RoutingRuleTarget.struct_class = Types::RoutingRuleTarget
+
     RuleCondition.add_member(:host_header, Shapes::ShapeRef.new(shape: RuleConditionHostHeaderString, location_name: "hostHeader"))
     RuleCondition.add_member(:host_header_wildcard, Shapes::ShapeRef.new(shape: RuleConditionHostHeaderWildcardString, location_name: "hostHeaderWildcard"))
     RuleCondition.add_member(:path_prefix, Shapes::ShapeRef.new(shape: RuleConditionPathPrefixString, location_name: "pathPrefix"))
@@ -808,6 +1081,11 @@ module Aws::RTBFabric
     RuleCondition.add_member(:query_string_equals, Shapes::ShapeRef.new(shape: QueryStringKeyValuePair, location_name: "queryStringEquals"))
     RuleCondition.add_member(:query_string_exists, Shapes::ShapeRef.new(shape: RuleConditionQueryStringExistsString, location_name: "queryStringExists"))
     RuleCondition.struct_class = Types::RuleCondition
+
+    SelectedActionList.member = Shapes::ShapeRef.new(shape: ConfigurableAction)
+
+    SequentialPipeline.add_member(:modules, Shapes::ShapeRef.new(shape: FlowModuleList, required: true, location_name: "modules"))
+    SequentialPipeline.struct_class = Types::SequentialPipeline
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
@@ -829,11 +1107,22 @@ module Aws::RTBFabric
     TrustStoreConfiguration.add_member(:certificate_authority_certificates, Shapes::ShapeRef.new(shape: CertificateAuthorityCertificates, required: true, location_name: "certificateAuthorityCertificates"))
     TrustStoreConfiguration.struct_class = Types::TrustStoreConfiguration
 
+    Unit.struct_class = Types::Unit
+
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: RtbTaggableResourceArn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    Update.add_member(:update_id, Shapes::ShapeRef.new(shape: UpdateId, required: true, location_name: "updateId"))
+    Update.add_member(:type, Shapes::ShapeRef.new(shape: UpdateType, required: true, location_name: "type"))
+    Update.add_member(:status, Shapes::ShapeRef.new(shape: UpdateStatus, required: true, location_name: "status"))
+    Update.add_member(:target, Shapes::ShapeRef.new(shape: UpdateTarget, required: true, location_name: "target"))
+    Update.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    Update.add_member(:parameters, Shapes::ShapeRef.new(shape: UpdateParameters, location_name: "parameters"))
+    Update.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "errorDetails"))
+    Update.struct_class = Types::Update
 
     UpdateLinkModuleFlowRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateLinkModuleFlowRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
@@ -844,16 +1133,19 @@ module Aws::RTBFabric
     UpdateLinkModuleFlowResponse.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location_name: "gatewayId"))
     UpdateLinkModuleFlowResponse.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "linkId"))
     UpdateLinkModuleFlowResponse.add_member(:status, Shapes::ShapeRef.new(shape: LinkStatus, required: true, location_name: "status"))
+    UpdateLinkModuleFlowResponse.add_member(:update_id, Shapes::ShapeRef.new(shape: UpdateId, required: true, location_name: "updateId"))
     UpdateLinkModuleFlowResponse.struct_class = Types::UpdateLinkModuleFlowResponse
 
     UpdateLinkRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
     UpdateLinkRequest.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location: "uri", location_name: "linkId"))
     UpdateLinkRequest.add_member(:log_settings, Shapes::ShapeRef.new(shape: LinkLogSettings, location_name: "logSettings"))
     UpdateLinkRequest.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: LinkTimeoutInMillis, location_name: "timeoutInMillis"))
+    UpdateLinkRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: UpdateLinkRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateLinkRequest.struct_class = Types::UpdateLinkRequest
 
     UpdateLinkResponse.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "linkId"))
     UpdateLinkResponse.add_member(:status, Shapes::ShapeRef.new(shape: LinkStatus, required: true, location_name: "status"))
+    UpdateLinkResponse.add_member(:update_id, Shapes::ShapeRef.new(shape: UpdateId, required: true, location_name: "updateId"))
     UpdateLinkResponse.struct_class = Types::UpdateLinkResponse
 
     UpdateLinkRoutingRuleRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
@@ -861,12 +1153,26 @@ module Aws::RTBFabric
     UpdateLinkRoutingRuleRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location: "uri", location_name: "ruleId"))
     UpdateLinkRoutingRuleRequest.add_member(:priority, Shapes::ShapeRef.new(shape: RulePriority, required: true, location_name: "priority"))
     UpdateLinkRoutingRuleRequest.add_member(:conditions, Shapes::ShapeRef.new(shape: RuleCondition, required: true, location_name: "conditions"))
+    UpdateLinkRoutingRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: UpdateLinkRoutingRuleRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateLinkRoutingRuleRequest.struct_class = Types::UpdateLinkRoutingRuleRequest
 
     UpdateLinkRoutingRuleResponse.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location_name: "ruleId"))
     UpdateLinkRoutingRuleResponse.add_member(:status, Shapes::ShapeRef.new(shape: RuleStatus, required: true, location_name: "status"))
     UpdateLinkRoutingRuleResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    UpdateLinkRoutingRuleResponse.add_member(:update_id, Shapes::ShapeRef.new(shape: UpdateId, required: true, location_name: "updateId"))
     UpdateLinkRoutingRuleResponse.struct_class = Types::UpdateLinkRoutingRuleResponse
+
+    UpdateParameters.add_member(:responder_gateway_config, Shapes::ShapeRef.new(shape: ResponderGatewayConfigParameters, location_name: "responderGatewayConfig"))
+    UpdateParameters.add_member(:link_config, Shapes::ShapeRef.new(shape: LinkConfigParameters, location_name: "linkConfig"))
+    UpdateParameters.add_member(:link_flow, Shapes::ShapeRef.new(shape: LinkFlowParameters, location_name: "linkFlow"))
+    UpdateParameters.add_member(:routing_rule, Shapes::ShapeRef.new(shape: RoutingRuleParameters, location_name: "routingRule"))
+    UpdateParameters.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    UpdateParameters.add_member_subclass(:responder_gateway_config, Types::UpdateParameters::ResponderGatewayConfig)
+    UpdateParameters.add_member_subclass(:link_config, Types::UpdateParameters::LinkConfig)
+    UpdateParameters.add_member_subclass(:link_flow, Types::UpdateParameters::LinkFlow)
+    UpdateParameters.add_member_subclass(:routing_rule, Types::UpdateParameters::RoutingRule)
+    UpdateParameters.add_member_subclass(:unknown, Types::UpdateParameters::Unknown)
+    UpdateParameters.struct_class = Types::UpdateParameters
 
     UpdateRequesterGatewayRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateRequesterGatewayRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
@@ -892,7 +1198,26 @@ module Aws::RTBFabric
     UpdateResponderGatewayResponse.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location_name: "gatewayId"))
     UpdateResponderGatewayResponse.add_member(:status, Shapes::ShapeRef.new(shape: ResponderGatewayStatus, required: true, location_name: "status"))
     UpdateResponderGatewayResponse.add_member(:client_routing_policy, Shapes::ShapeRef.new(shape: ClientRoutingPolicy, location_name: "clientRoutingPolicy"))
+    UpdateResponderGatewayResponse.add_member(:update_id, Shapes::ShapeRef.new(shape: UpdateId, required: true, location_name: "updateId"))
     UpdateResponderGatewayResponse.struct_class = Types::UpdateResponderGatewayResponse
+
+    UpdateSummary.add_member(:update_id, Shapes::ShapeRef.new(shape: UpdateId, required: true, location_name: "updateId"))
+    UpdateSummary.add_member(:type, Shapes::ShapeRef.new(shape: UpdateType, required: true, location_name: "type"))
+    UpdateSummary.add_member(:status, Shapes::ShapeRef.new(shape: UpdateStatus, required: true, location_name: "status"))
+    UpdateSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    UpdateSummary.struct_class = Types::UpdateSummary
+
+    UpdateSummaryList.member = Shapes::ShapeRef.new(shape: UpdateSummary)
+
+    UpdateTarget.add_member(:gateway, Shapes::ShapeRef.new(shape: Unit, location_name: "gateway"))
+    UpdateTarget.add_member(:link, Shapes::ShapeRef.new(shape: LinkTarget, location_name: "link"))
+    UpdateTarget.add_member(:routing_rule, Shapes::ShapeRef.new(shape: RoutingRuleTarget, location_name: "routingRule"))
+    UpdateTarget.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    UpdateTarget.add_member_subclass(:gateway, Types::UpdateTarget::Gateway)
+    UpdateTarget.add_member_subclass(:link, Types::UpdateTarget::Link)
+    UpdateTarget.add_member_subclass(:routing_rule, Types::UpdateTarget::RoutingRule)
+    UpdateTarget.add_member_subclass(:unknown, Types::UpdateTarget::Unknown)
+    UpdateTarget.struct_class = Types::UpdateTarget
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
@@ -1134,6 +1459,32 @@ module Aws::RTBFabric
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:get_available_module, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAvailableModule"
+        o.http_method = "GET"
+        o.http_request_uri = "/available-modules/{moduleId}"
+        o.input = Shapes::ShapeRef.new(shape: GetAvailableModuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAvailableModuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:get_available_module_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAvailableModuleVersion"
+        o.http_method = "GET"
+        o.http_request_uri = "/available-modules/{moduleId}/versions/{version}"
+        o.input = Shapes::ShapeRef.new(shape: GetAvailableModuleVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAvailableModuleVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:get_certificate_association, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetCertificateAssociation"
         o.http_method = "GET"
@@ -1224,6 +1575,56 @@ module Aws::RTBFabric
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:get_update, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetUpdate"
+        o.http_method = "GET"
+        o.http_request_uri = "/gateway/{gatewayId}/updates/{updateId}"
+        o.input = Shapes::ShapeRef.new(shape: GetUpdateRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetUpdateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:list_available_module_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAvailableModuleVersions"
+        o.http_method = "GET"
+        o.http_request_uri = "/available-modules/{moduleId}/versions"
+        o.input = Shapes::ShapeRef.new(shape: ListAvailableModuleVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAvailableModuleVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_available_modules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAvailableModules"
+        o.http_method = "GET"
+        o.http_request_uri = "/available-modules"
+        o.input = Shapes::ShapeRef.new(shape: ListAvailableModulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAvailableModulesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_certificate_associations, Seahorse::Model::Operation.new.tap do |o|
@@ -1324,6 +1725,40 @@ module Aws::RTBFabric
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:list_updates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListUpdates"
+        o.http_method = "GET"
+        o.http_request_uri = "/gateway/{gatewayId}/updates"
+        o.input = Shapes::ShapeRef.new(shape: ListUpdatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListUpdatesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:put_link_flows, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutLinkFlows"
+        o.http_method = "PUT"
+        o.http_request_uri = "/gateway/{gatewayId}/link/{linkId}/flows"
+        o.input = Shapes::ShapeRef.new(shape: PutLinkFlowsRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutLinkFlowsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)

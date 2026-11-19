@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.216.0 (2026-11-19)
+------------------
+
+* Feature - Increase function timeout limit to 30 minutes for Lambda Event Functions.
+
 1.215.0 (2026-11-18)
 ------------------
 

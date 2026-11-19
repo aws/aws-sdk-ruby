@@ -382,7 +382,10 @@ module Aws
                               ?client_request_token: ::String,
                               ?managed_execution: {
                                 active: bool?
-                              }
+                              },
+                              ?execution_role_template_body: ::String,
+                              ?execution_role_template_url: ::String,
+                              ?stack_set_output_bucket: ::String
                             ) -> _CreateStackSetResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStackSetResponseSuccess
 
@@ -1623,7 +1626,11 @@ module Aws
                               ?call_as: ("SELF" | "DELEGATED_ADMIN"),
                               ?managed_execution: {
                                 active: bool?
-                              }
+                              },
+                              ?execution_role_template_body: ::String,
+                              ?execution_role_template_url: ::String,
+                              ?use_admin_execution_role: bool,
+                              ?stack_set_output_bucket: ::String
                             ) -> _UpdateStackSetResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStackSetResponseSuccess
 

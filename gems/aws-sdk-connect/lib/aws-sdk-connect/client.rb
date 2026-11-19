@@ -2064,7 +2064,7 @@ module Aws::Connect
     #   resp.files[0].file_status #=> String, one of "APPROVED", "REJECTED", "PROCESSING", "FAILED", "DRAFTING"
     #   resp.files[0].created_by.connect_user_arn #=> String
     #   resp.files[0].created_by.aws_identity_arn #=> String
-    #   resp.files[0].file_use_case_type #=> String, one of "CONTACT_ANALYSIS", "EMAIL_MESSAGE", "EMAIL_MESSAGE_PLAIN_TEXT", "EMAIL_MESSAGE_REDACTED", "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED", "ATTACHMENT", "VOICE_RECORDING"
+    #   resp.files[0].file_use_case_type #=> String, one of "CONTACT_ANALYSIS", "EMAIL_MESSAGE", "EMAIL_MESSAGE_PLAIN_TEXT", "EMAIL_MESSAGE_REDACTED", "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED", "ATTACHMENT", "VOICE_RECORDING", "VOICEMAIL_RECORDING", "VOICEMAIL_RECORDING_REDACTED", "VOICEMAIL_ANALYSIS", "VOICEMAIL_ANALYSIS_REDACTED"
     #   resp.files[0].associated_resource_arn #=> String
     #   resp.files[0].tags #=> Hash
     #   resp.files[0].tags["TagKey"] #=> String
@@ -2597,7 +2597,7 @@ module Aws::Connect
     #   resp = client.create_attached_file({
     #     client_token: "ClientToken",
     #     instance_id: "InstanceId", # required
-    #     file_use_case_type: "CONTACT_ANALYSIS", # required, accepts CONTACT_ANALYSIS, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_REDACTED, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, ATTACHMENT, VOICE_RECORDING
+    #     file_use_case_type: "CONTACT_ANALYSIS", # required, accepts CONTACT_ANALYSIS, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_REDACTED, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, ATTACHMENT, VOICE_RECORDING, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #     file_source_uri: "FileSourceUri", # required
     #     associated_resource_arn: "ARN", # required
     #     tags: {
@@ -2830,7 +2830,7 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue",
-    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED
+    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #         status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED, DRAFTING
     #         arn: "ReferenceArn",
     #         status_reason: "ReferenceStatusReason",
@@ -5316,7 +5316,7 @@ module Aws::Connect
     #           references: {
     #             "ReferenceKey" => {
     #               value: "ReferenceValue",
-    #               type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED
+    #               type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #               status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED, DRAFTING
     #               arn: "ReferenceArn",
     #               status_reason: "ReferenceStatusReason",
@@ -8620,6 +8620,7 @@ module Aws::Connect
     #   resp.contact.contact_lens.conversational_analytics.configuration.sentiment_configuration.behavior #=> String
     #   resp.contact.contact_lens.conversational_analytics.contact_analysis_reference_state.status #=> String
     #   resp.contact.contact_lens.conversational_analytics.contact_analysis_reference_state.status_reason #=> String
+    #   resp.contact.voicemail_info.number_of_voicemails #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContact AWS API Documentation
     #
@@ -10347,7 +10348,7 @@ module Aws::Connect
     #   resp.rule.actions[0].task_action.contact_flow_id #=> String
     #   resp.rule.actions[0].task_action.references #=> Hash
     #   resp.rule.actions[0].task_action.references["ReferenceKey"].value #=> String
-    #   resp.rule.actions[0].task_action.references["ReferenceKey"].type #=> String, one of "URL", "ATTACHMENT", "CONTACT_ANALYSIS", "NUMBER", "STRING", "DATE", "EMAIL", "EMAIL_MESSAGE", "EMAIL_MESSAGE_PLAIN_TEXT", "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED", "EMAIL_MESSAGE_REDACTED"
+    #   resp.rule.actions[0].task_action.references["ReferenceKey"].type #=> String, one of "URL", "ATTACHMENT", "CONTACT_ANALYSIS", "NUMBER", "STRING", "DATE", "EMAIL", "EMAIL_MESSAGE", "EMAIL_MESSAGE_PLAIN_TEXT", "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED", "EMAIL_MESSAGE_REDACTED", "VOICEMAIL_RECORDING", "VOICEMAIL_RECORDING_REDACTED", "VOICEMAIL_ANALYSIS", "VOICEMAIL_ANALYSIS_REDACTED"
     #   resp.rule.actions[0].task_action.references["ReferenceKey"].status #=> String, one of "AVAILABLE", "DELETED", "APPROVED", "REJECTED", "PROCESSING", "FAILED", "DRAFTING"
     #   resp.rule.actions[0].task_action.references["ReferenceKey"].arn #=> String
     #   resp.rule.actions[0].task_action.references["ReferenceKey"].status_reason #=> String
@@ -12108,7 +12109,7 @@ module Aws::Connect
     #   resp.file_name #=> String
     #   resp.file_size_in_bytes #=> Integer
     #   resp.associated_resource_arn #=> String
-    #   resp.file_use_case_type #=> String, one of "CONTACT_ANALYSIS", "EMAIL_MESSAGE", "EMAIL_MESSAGE_PLAIN_TEXT", "EMAIL_MESSAGE_REDACTED", "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED", "ATTACHMENT", "VOICE_RECORDING"
+    #   resp.file_use_case_type #=> String, one of "CONTACT_ANALYSIS", "EMAIL_MESSAGE", "EMAIL_MESSAGE_PLAIN_TEXT", "EMAIL_MESSAGE_REDACTED", "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED", "ATTACHMENT", "VOICE_RECORDING", "VOICEMAIL_RECORDING", "VOICEMAIL_RECORDING_REDACTED", "VOICEMAIL_ANALYSIS", "VOICEMAIL_ANALYSIS_REDACTED"
     #   resp.created_by.connect_user_arn #=> String
     #   resp.created_by.aws_identity_arn #=> String
     #   resp.download_url_metadata.url #=> String
@@ -17328,7 +17329,7 @@ module Aws::Connect
     #   resp = client.list_contact_references({
     #     instance_id: "InstanceId", # required
     #     contact_id: "ContactId", # required
-    #     reference_types: ["URL"], # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED
+    #     reference_types: ["URL"], # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #     next_token: "NextToken",
     #   })
     #
@@ -17363,6 +17364,22 @@ module Aws::Connect
     #   resp.reference_summary_list[0].contact_analysis.arn #=> String
     #   resp.reference_summary_list[0].contact_analysis.analytics_mode #=> String, one of "PostContact", "RealTime", "ContactLens", "AutomatedInteraction"
     #   resp.reference_summary_list[0].contact_analysis.is_redacted #=> Boolean
+    #   resp.reference_summary_list[0].voicemail_recording.name #=> String
+    #   resp.reference_summary_list[0].voicemail_recording.value #=> String
+    #   resp.reference_summary_list[0].voicemail_recording.status #=> String, one of "AVAILABLE", "DELETED", "APPROVED", "REJECTED", "PROCESSING", "FAILED", "DRAFTING"
+    #   resp.reference_summary_list[0].voicemail_recording.arn #=> String
+    #   resp.reference_summary_list[0].voicemail_recording_redacted.name #=> String
+    #   resp.reference_summary_list[0].voicemail_recording_redacted.value #=> String
+    #   resp.reference_summary_list[0].voicemail_recording_redacted.status #=> String, one of "AVAILABLE", "DELETED", "APPROVED", "REJECTED", "PROCESSING", "FAILED", "DRAFTING"
+    #   resp.reference_summary_list[0].voicemail_recording_redacted.arn #=> String
+    #   resp.reference_summary_list[0].voicemail_analysis.name #=> String
+    #   resp.reference_summary_list[0].voicemail_analysis.value #=> String
+    #   resp.reference_summary_list[0].voicemail_analysis.status #=> String, one of "AVAILABLE", "DELETED", "APPROVED", "REJECTED", "PROCESSING", "FAILED", "DRAFTING"
+    #   resp.reference_summary_list[0].voicemail_analysis.arn #=> String
+    #   resp.reference_summary_list[0].voicemail_analysis_redacted.name #=> String
+    #   resp.reference_summary_list[0].voicemail_analysis_redacted.value #=> String
+    #   resp.reference_summary_list[0].voicemail_analysis_redacted.status #=> String, one of "AVAILABLE", "DELETED", "APPROVED", "REJECTED", "PROCESSING", "FAILED", "DRAFTING"
+    #   resp.reference_summary_list[0].voicemail_analysis_redacted.arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactReferences AWS API Documentation
@@ -25456,7 +25473,7 @@ module Aws::Connect
     #     file_name: "FileName", # required
     #     file_size_in_bytes: 1, # required
     #     url_expiry_in_seconds: 1,
-    #     file_use_case_type: "CONTACT_ANALYSIS", # required, accepts CONTACT_ANALYSIS, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_REDACTED, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, ATTACHMENT, VOICE_RECORDING
+    #     file_use_case_type: "CONTACT_ANALYSIS", # required, accepts CONTACT_ANALYSIS, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_REDACTED, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, ATTACHMENT, VOICE_RECORDING, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #     associated_resource_arn: "ARN", # required
     #     created_by: {
     #       connect_user_arn: "ARN",
@@ -26255,7 +26272,7 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue",
-    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED
+    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #         status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED, DRAFTING
     #         arn: "ReferenceArn",
     #         status_reason: "ReferenceStatusReason",
@@ -26839,7 +26856,7 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue",
-    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED
+    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #         status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED, DRAFTING
     #         arn: "ReferenceArn",
     #         status_reason: "ReferenceStatusReason",
@@ -27128,7 +27145,7 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue",
-    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED
+    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #         status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED, DRAFTING
     #         arn: "ReferenceArn",
     #         status_reason: "ReferenceStatusReason",
@@ -27334,7 +27351,7 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue",
-    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED
+    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #         status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED, DRAFTING
     #         arn: "ReferenceArn",
     #         status_reason: "ReferenceStatusReason",
@@ -28302,7 +28319,7 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue",
-    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED
+    #         type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #         status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED, DRAFTING
     #         arn: "ReferenceArn",
     #         status_reason: "ReferenceStatusReason",
@@ -31375,7 +31392,7 @@ module Aws::Connect
     #           references: {
     #             "ReferenceKey" => {
     #               value: "ReferenceValue",
-    #               type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED
+    #               type: "URL", # required, accepts URL, ATTACHMENT, CONTACT_ANALYSIS, NUMBER, STRING, DATE, EMAIL, EMAIL_MESSAGE, EMAIL_MESSAGE_PLAIN_TEXT, EMAIL_MESSAGE_PLAIN_TEXT_REDACTED, EMAIL_MESSAGE_REDACTED, VOICEMAIL_RECORDING, VOICEMAIL_RECORDING_REDACTED, VOICEMAIL_ANALYSIS, VOICEMAIL_ANALYSIS_REDACTED
     #               status: "AVAILABLE", # accepts AVAILABLE, DELETED, APPROVED, REJECTED, PROCESSING, FAILED, DRAFTING
     #               arn: "ReferenceArn",
     #               status_reason: "ReferenceStatusReason",
@@ -32836,7 +32853,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.302.0'
+      context[:gem_version] = '1.303.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

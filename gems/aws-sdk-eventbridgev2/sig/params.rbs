@@ -17,6 +17,47 @@ module Aws
       }?
     }
 
+      type webhook_hmac_auth_configuration = {
+      algorithm: ("SHA256" | "SHA1"),
+      encoding: ("HEX" | "BASE64"),
+      signature_http_header: ::String,
+      signature_prefix: ::String?,
+      delimiter: ::String?,
+      timestamp_http_header: ::String?,
+      timestamp_prefix: ::String?,
+      timestamp_tolerance_in_seconds: ::Integer?,
+      message_id_http_header: ::String?,
+      signed_message_composition: ("BODY" | "TIMESTAMP_DOT_BODY" | "MESSAGE_ID_DOT_TIMESTAMP_DOT_BODY"),
+      secret_value: ::String?,
+      secret_encoding: ("RAW" | "BASE64")?
+    }
+
+      type webhook_auth_configuration = {
+      static_token_auth_configuration: {
+        token_http_header: ::String,
+        secret_value: ::String?
+      }?,
+      basic_http_auth_configuration: {
+        username: ::String?,
+        password: ::String?
+      }?,
+      hmac_auth_configuration: Params::webhook_hmac_auth_configuration?
+    }
+
+      type webhook_events_source_configuration = {
+      auth_configuration: Params::webhook_auth_configuration,
+      kms_key_identifier: ::String?,
+      role_arn: ::String,
+      metadata_http_headers: Array[::String]?,
+      deduplication_configuration: {
+        deduplication_type: ("CONTENT_BASED")
+      }?,
+      log_configuration: {
+        level: ("OFF" | "ERROR" | "INFO")?,
+        include_payload: ("FULL" | "ON_ERROR_ONLY")?
+      }?
+    }
+
       type event_source_configuration = {
       aws_service_events_configuration: {
         aws_service: ::String,
@@ -25,7 +66,8 @@ module Aws
           arn: ::String?
         }?
       }?,
-      partner_events_configuration: Params::partner_events_source_configuration?
+      partner_events_configuration: Params::partner_events_source_configuration?,
+      webhook_events_configuration: Params::webhook_events_source_configuration?
     }
 
       type sqs_parameters = {
@@ -65,6 +107,21 @@ module Aws
       deduplication_configuration: {
         deduplication_type: ("CONTENT_BASED")
       }?
+    }
+
+      type msk_parameters = {
+      topic_name: ::String,
+      compression: ("NONE" | "GZIP" | "SNAPPY" | "LZ4" | "ZSTD")?,
+      acks: ("ALL" | "LEADER")?,
+      partition_key: ::String?,
+      headers: Array[
+        {
+          key: ::String,
+          value: ::String?
+        }
+      ]?,
+      client_id: ::String?,
+      connectivity: ("PUBLIC" | "PRIVATE")
     }
 
     end

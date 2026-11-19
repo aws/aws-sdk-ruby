@@ -56,6 +56,9 @@ module Aws
       class HealthCheckInUse < ServiceError
         def message: () -> ::String
       end
+      class HealthCheckSourceAlreadyExists < ServiceError
+        def message: () -> ::String
+      end
       class HealthCheckVersionMismatch < ServiceError
         def message: () -> ::String
       end
@@ -157,6 +160,9 @@ module Aws
       class NoSuchHealthCheck < ServiceError
         def message: () -> ::String
       end
+      class NoSuchHealthCheckSource < ServiceError
+        def message: () -> ::String
+      end
       class NoSuchHostedZone < ServiceError
         def message: () -> ::String
       end
@@ -189,6 +195,9 @@ module Aws
         def message: () -> ::String
       end
       class ThrottlingException < ServiceError
+        def message: () -> ::String
+      end
+      class TooManyHealthCheckSources < ServiceError
         def message: () -> ::String
       end
       class TooManyHealthChecks < ServiceError

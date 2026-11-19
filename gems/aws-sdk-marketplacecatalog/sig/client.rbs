@@ -195,7 +195,8 @@ module Aws
                               ?framework_id: ::String,
                               ?assessment_target_filter: {
                                 entity_id: ::String?,
-                                change_set_id: ::String?
+                                change_set_id: ::String?,
+                                entity_ids: Array[::String]?
                               },
                               ?framework_filters: {
                                 ami_security_filters: {
@@ -322,6 +323,9 @@ module Aws
                                  value_list: Array[::String]?
                                }?,
                                resale_authorization_id: {
+                                 value_list: Array[::String]?
+                               }?,
+                               subsidiary_authorization_id: {
                                  value_list: Array[::String]?
                                }?,
                                release_date: {
@@ -557,7 +561,7 @@ module Aws
                                sort_order: ("ASCENDING" | "DESCENDING")?
                              }?,
                              offer_sort: {
-                               sort_by: ("EntityId" | "Name" | "ProductId" | "ResaleAuthorizationId" | "ReleaseDate" | "AvailabilityEndDate" | "BuyerAccounts" | "State" | "Targeting" | "LastModifiedDate" | "OfferSetId" | "TargetAgreementId" | "TargetAgreementIntent" | "CreatedBySource")?,
+                               sort_by: ("EntityId" | "Name" | "ProductId" | "ResaleAuthorizationId" | "SubsidiaryAuthorizationId" | "ReleaseDate" | "AvailabilityEndDate" | "BuyerAccounts" | "State" | "Targeting" | "LastModifiedDate" | "OfferSetId" | "TargetAgreementId" | "TargetAgreementIntent" | "CreatedBySource")?,
                                sort_order: ("ASCENDING" | "DESCENDING")?
                              }?,
                              container_product_sort: {
@@ -608,6 +612,27 @@ module Aws
                                  policy: ::String
                                ) -> _PutResourcePolicyResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _StartAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAssessmentResponse]
+        def assessment_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceCatalog/Client.html#start_assessment-instance_method
+      def start_assessment: (
+                              catalog: ::String,
+                              ?client_token: ::String,
+                              framework_id: ::String,
+                              entity_id: ::String,
+                              ?controls: Array[
+                                {
+                                  control_id: ::String,
+                                  input: {
+                                  }?
+                                }
+                              ],
+                              ?tags: Hash[::String, ::String]
+                            ) -> _StartAssessmentResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAssessmentResponseSuccess
 
       interface _StartChangeSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartChangeSetResponse]

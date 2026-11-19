@@ -79,6 +79,53 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _GetDeploymentConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeploymentConfigurationResponse]
+        def configuration: () -> Types::DeploymentConfigurationDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceDeployment/Client.html#get_deployment_configuration-instance_method
+      def get_deployment_configuration: (
+                                          catalog: ::String,
+                                          product_id: ::String,
+                                          delivery_option_type: ("data-as-a-service")
+                                        ) -> _GetDeploymentConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeploymentConfigurationResponseSuccess
+
+      interface _GetDeploymentConfigurationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeploymentConfigurationJobResponse]
+        def job_id: () -> ::String
+        def configuration: () -> Types::DeploymentConfigurationDetail
+        def status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def created_at: () -> ::Time
+        def configuration_arn: () -> ::String
+        def ended_at: () -> ::Time
+        def error_code: () -> ("FULFILLMENT_URL_UNREACHABLE" | "INTERNAL_ERROR" | "ENDPOINT_INVALID")
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceDeployment/Client.html#get_deployment_configuration_job-instance_method
+      def get_deployment_configuration_job: (
+                                              catalog: ::String,
+                                              product_id: ::String,
+                                              delivery_option_type: ("data-as-a-service"),
+                                              job_id: ::String
+                                            ) -> _GetDeploymentConfigurationJobResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeploymentConfigurationJobResponseSuccess
+
+      interface _ListDeploymentConfigurationJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeploymentConfigurationJobsResponse]
+        def jobs: () -> ::Array[Types::DeploymentConfigurationJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceDeployment/Client.html#list_deployment_configuration_jobs-instance_method
+      def list_deployment_configuration_jobs: (
+                                                catalog: ::String,
+                                                product_id: ::String,
+                                                delivery_option_type: ("data-as-a-service"),
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String
+                                              ) -> _ListDeploymentConfigurationJobsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeploymentConfigurationJobsResponseSuccess
+
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
         def tags: () -> ::Hash[::String, ::String]
@@ -91,25 +138,47 @@ module Aws
 
       interface _PutDeploymentParameterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutDeploymentParameterResponse]
+        def resource_arn: () -> ::String
         def agreement_id: () -> ::String
         def deployment_parameter_id: () -> ::String
-        def resource_arn: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceDeployment/Client.html#put_deployment_parameter-instance_method
       def put_deployment_parameter: (
-                                      agreement_id: ::String,
                                       catalog: ::String,
-                                      ?client_token: ::String,
+                                      product_id: ::String,
+                                      agreement_id: ::String,
                                       deployment_parameter: {
                                         name: ::String,
                                         secret_string: ::String
                                       },
+                                      ?tags: Hash[::String, ::String],
                                       ?expiration_date: ::Time,
-                                      product_id: ::String,
-                                      ?tags: Hash[::String, ::String]
+                                      ?client_token: ::String
                                     ) -> _PutDeploymentParameterResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDeploymentParameterResponseSuccess
+
+      interface _StartDeploymentConfigurationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDeploymentConfigurationJobResponse]
+        def job_id: () -> ::String
+        def configuration: () -> Types::DeploymentConfigurationDetail
+        def status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceDeployment/Client.html#start_deployment_configuration_job-instance_method
+      def start_deployment_configuration_job: (
+                                                catalog: ::String,
+                                                product_id: ::String,
+                                                delivery_option_type: ("data-as-a-service"),
+                                                configuration: {
+                                                  data_as_a_service: {
+                                                    fulfillment_url: ::String
+                                                  }?
+                                                },
+                                                ?tags: Hash[::String, ::String],
+                                                ?client_token: ::String
+                                              ) -> _StartDeploymentConfigurationJobResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDeploymentConfigurationJobResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]

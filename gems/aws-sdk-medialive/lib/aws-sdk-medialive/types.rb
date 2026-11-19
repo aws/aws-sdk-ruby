@@ -1942,6 +1942,10 @@ module Aws::MediaLive
     #   channel.
     #   @return [Types::DescribeInferenceSettings]
     #
+    # @!attribute [rw] jpeg_xs_input_specification
+    #   Specification of JPEG XS inputs for this channel
+    #   @return [Types::JpegXsInputSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Channel AWS API Documentation
     #
     class Channel < Struct.new(
@@ -1967,7 +1971,8 @@ module Aws::MediaLive
       :channel_engine_version,
       :linked_channel_settings,
       :channel_security_groups,
-      :inference_settings)
+      :inference_settings,
+      :jpeg_xs_input_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2093,6 +2098,10 @@ module Aws::MediaLive
     #   channel.
     #   @return [Types::DescribeInferenceSettings]
     #
+    # @!attribute [rw] jpeg_xs_input_specification
+    #   Specification of JPEG XS inputs for this channel
+    #   @return [Types::JpegXsInputSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ChannelSummary AWS API Documentation
     #
     class ChannelSummary < Struct.new(
@@ -2117,7 +2126,8 @@ module Aws::MediaLive
       :used_channel_engine_versions,
       :linked_channel_settings,
       :channel_security_groups,
-      :inference_settings)
+      :inference_settings,
+      :jpeg_xs_input_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2292,6 +2302,10 @@ module Aws::MediaLive
     #   channel.
     #   @return [Types::InferenceSettings]
     #
+    # @!attribute [rw] jpeg_xs_input_specification
+    #   Specification of JPEG XS inputs for this channel
+    #   @return [Types::JpegXsInputSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannel AWS API Documentation
     #
     class CreateChannel < Struct.new(
@@ -2314,7 +2328,8 @@ module Aws::MediaLive
       :dry_run,
       :linked_channel_settings,
       :channel_security_groups,
-      :inference_settings)
+      :inference_settings,
+      :jpeg_xs_input_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2391,6 +2406,11 @@ module Aws::MediaLive
     #   Configures Elemental Inference features in a channel.
     #   @return [Types::InferenceSettings]
     #
+    # @!attribute [rw] jpeg_xs_input_specification
+    #   Specification of the JPEG XS input for this channel. Use instead of
+    #   inputSpecification when the input codec is JPEG XS.
+    #   @return [Types::JpegXsInputSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannelRequest AWS API Documentation
     #
     class CreateChannelRequest < Struct.new(
@@ -2413,7 +2433,8 @@ module Aws::MediaLive
       :dry_run,
       :linked_channel_settings,
       :channel_security_groups,
-      :inference_settings)
+      :inference_settings,
+      :jpeg_xs_input_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3028,6 +3049,11 @@ module Aws::MediaLive
     #   Configures Elemental Inference features in a channel.
     #   @return [Types::DescribeInferenceSettings]
     #
+    # @!attribute [rw] jpeg_xs_input_specification
+    #   Specification of the JPEG XS input for this channel. Use instead of
+    #   inputSpecification when the input codec is JPEG XS.
+    #   @return [Types::JpegXsInputSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannelResponse AWS API Documentation
     #
     class DeleteChannelResponse < Struct.new(
@@ -3053,7 +3079,8 @@ module Aws::MediaLive
       :channel_engine_version,
       :linked_channel_settings,
       :channel_security_groups,
-      :inference_settings)
+      :inference_settings,
+      :jpeg_xs_input_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3439,6 +3466,11 @@ module Aws::MediaLive
     #   Configures Elemental Inference features in a channel.
     #   @return [Types::DescribeInferenceSettings]
     #
+    # @!attribute [rw] jpeg_xs_input_specification
+    #   Specification of the JPEG XS input for this channel. Use instead of
+    #   inputSpecification when the input codec is JPEG XS.
+    #   @return [Types::JpegXsInputSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeChannelResponse AWS API Documentation
     #
     class DescribeChannelResponse < Struct.new(
@@ -3464,7 +3496,8 @@ module Aws::MediaLive
       :channel_engine_version,
       :linked_channel_settings,
       :channel_security_groups,
-      :inference_settings)
+      :inference_settings,
+      :jpeg_xs_input_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12090,6 +12123,11 @@ module Aws::MediaLive
     #   Configures Elemental Inference features in a channel.
     #   @return [Types::DescribeInferenceSettings]
     #
+    # @!attribute [rw] jpeg_xs_input_specification
+    #   Specification of the JPEG XS input for this channel. Use instead of
+    #   inputSpecification when the input codec is JPEG XS.
+    #   @return [Types::JpegXsInputSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannelResponse AWS API Documentation
     #
     class StartChannelResponse < Struct.new(
@@ -12115,7 +12153,8 @@ module Aws::MediaLive
       :channel_engine_version,
       :linked_channel_settings,
       :channel_security_groups,
-      :inference_settings)
+      :inference_settings,
+      :jpeg_xs_input_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12551,6 +12590,11 @@ module Aws::MediaLive
     #   Configures Elemental Inference features in a channel.
     #   @return [Types::DescribeInferenceSettings]
     #
+    # @!attribute [rw] jpeg_xs_input_specification
+    #   Specification of the JPEG XS input for this channel. Use instead of
+    #   inputSpecification when the input codec is JPEG XS.
+    #   @return [Types::JpegXsInputSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopChannelResponse AWS API Documentation
     #
     class StopChannelResponse < Struct.new(
@@ -12576,7 +12620,8 @@ module Aws::MediaLive
       :channel_engine_version,
       :linked_channel_settings,
       :channel_security_groups,
-      :inference_settings)
+      :inference_settings,
+      :jpeg_xs_input_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13214,6 +13259,10 @@ module Aws::MediaLive
     #   object can only by used by that service.
     #   @return [Types::SpecialRouterSettings]
     #
+    # @!attribute [rw] jpeg_xs_input_specification
+    #   Specification of JPEG XS inputs for this channel
+    #   @return [Types::JpegXsInputSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannel AWS API Documentation
     #
     class UpdateChannel < Struct.new(
@@ -13232,7 +13281,8 @@ module Aws::MediaLive
       :linked_channel_settings,
       :channel_security_groups,
       :inference_settings,
-      :special_router_settings)
+      :special_router_settings,
+      :jpeg_xs_input_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13347,6 +13397,11 @@ module Aws::MediaLive
     #   object can only by used by that service.
     #   @return [Types::SpecialRouterSettings]
     #
+    # @!attribute [rw] jpeg_xs_input_specification
+    #   Specification of the JPEG XS input for this channel. Use instead of
+    #   inputSpecification when the input codec is JPEG XS.
+    #   @return [Types::JpegXsInputSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannelRequest AWS API Documentation
     #
     class UpdateChannelRequest < Struct.new(
@@ -13366,7 +13421,8 @@ module Aws::MediaLive
       :linked_channel_settings,
       :channel_security_groups,
       :inference_settings,
-      :special_router_settings)
+      :special_router_settings,
+      :jpeg_xs_input_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14499,6 +14555,11 @@ module Aws::MediaLive
     #   Configures Elemental Inference features in a channel.
     #   @return [Types::DescribeInferenceSettings]
     #
+    # @!attribute [rw] jpeg_xs_input_specification
+    #   Specification of the JPEG XS input for this channel. Use instead of
+    #   inputSpecification when the input codec is JPEG XS.
+    #   @return [Types::JpegXsInputSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RestartChannelPipelinesResponse AWS API Documentation
     #
     class RestartChannelPipelinesResponse < Struct.new(
@@ -14525,7 +14586,8 @@ module Aws::MediaLive
       :channel_engine_version,
       :linked_channel_settings,
       :channel_security_groups,
-      :inference_settings)
+      :inference_settings,
+      :jpeg_xs_input_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23871,6 +23933,31 @@ module Aws::MediaLive
     #
     class PerceptualFilterSettings < Struct.new(
       :strength)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specification of the JPEG XS input for this channel. Use instead of
+    # inputSpecification when the input codec is JPEG XS.
+    #
+    # @!attribute [rw] codec
+    #   Input codec. Must be JPEGXS.
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_bitrate
+    #   Maximum JPEG XS input bitrate
+    #   @return [String]
+    #
+    # @!attribute [rw] resolution
+    #   Maximum JPEG XS input resolution
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/JpegXsInputSpecification AWS API Documentation
+    #
+    class JpegXsInputSpecification < Struct.new(
+      :codec,
+      :maximum_bitrate,
+      :resolution)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -266,6 +266,8 @@ module Aws::LakeFormation
     RLSPolicyAttachmentList = Shapes::ListShape.new(name: 'RLSPolicyAttachmentList')
     RLSPolicyList = Shapes::ListShape.new(name: 'RLSPolicyList')
     RLSPolicyResource = Shapes::StructureShape.new(name: 'RLSPolicyResource')
+    RLSPolicyStatus = Shapes::StringShape.new(name: 'RLSPolicyStatus')
+    RLSPolicyStatusReason = Shapes::StringShape.new(name: 'RLSPolicyStatusReason')
     RedshiftConnect = Shapes::StructureShape.new(name: 'RedshiftConnect')
     RedshiftScopeUnion = Shapes::UnionShape.new(name: 'RedshiftScopeUnion')
     RedshiftServiceIntegrations = Shapes::ListShape.new(name: 'RedshiftServiceIntegrations')
@@ -1135,6 +1137,8 @@ module Aws::LakeFormation
     RLSPolicy.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
     RLSPolicy.add_member(:attachment_columns, Shapes::ShapeRef.new(shape: ColumnList, location_name: "AttachmentColumns"))
     RLSPolicy.add_member(:filter_expression, Shapes::ShapeRef.new(shape: PredicateString, location_name: "FilterExpression"))
+    RLSPolicy.add_member(:status, Shapes::ShapeRef.new(shape: RLSPolicyStatus, location_name: "Status"))
+    RLSPolicy.add_member(:status_reason, Shapes::ShapeRef.new(shape: RLSPolicyStatusReason, location_name: "StatusReason"))
     RLSPolicy.struct_class = Types::RLSPolicy
 
     RLSPolicyAttachment.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))

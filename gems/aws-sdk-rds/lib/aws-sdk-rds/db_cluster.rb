@@ -812,10 +812,11 @@ module Aws::RDS
       data[:engine_lifecycle_support]
     end
 
-    # Indicates whether the DB cluster uses VPC-based networking.
+    # Indicates whether the DB cluster uses VPC-based networking. The value
+    # is `false` only for an Aurora PostgreSQL DB cluster without VPC
+    # networking.
     #
-    # This setting is applicable only for Aurora PostgreSQL clusters created
-    # through express configuration.
+    # Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     # @return [Boolean]
     def vpc_networking_enabled
       data[:vpc_networking_enabled]
@@ -824,8 +825,7 @@ module Aws::RDS
     # Indicates whether the DB cluster has internet-based connectivity
     # enabled through an internet access gateway.
     #
-    # This setting is applicable only for Aurora PostgreSQL clusters created
-    # through express configuration.
+    # Valid for Cluster Type: Aurora PostgreSQL DB clusters only
     # @return [Boolean]
     def internet_access_gateway_enabled
       data[:internet_access_gateway_enabled]
@@ -1059,7 +1059,9 @@ module Aws::RDS
     #       },
     #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
+    #     enable_vpc_networking: false,
     #     with_express_configuration: false,
+    #     enable_internet_access_gateway: false,
     #     associated_roles: [
     #       {
     #         role_arn: "IAMRoleArn", # required
@@ -1137,11 +1139,17 @@ module Aws::RDS
     # @option options [Array<String>] :vpc_security_group_ids
     #   A list of EC2 VPC security groups to associate with this DB cluster.
     #
+    #   Valid only for DB clusters inside a VPC. Don't specify it when you
+    #   set `EnableVPCNetworking` to `false`.
+    #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [String] :db_subnet_group_name
     #   A DB subnet group to associate with this DB cluster.
     #
     #   This setting is required to create a Multi-AZ DB cluster.
+    #
+    #   Valid only for DB clusters inside a VPC. Don't specify it when you
+    #   set `EnableVPCNetworking` to `false`.
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -1699,6 +1707,8 @@ module Aws::RDS
     #   For more information, see [ Working with a DB instance in a VPC][1] in
     #   the *Amazon Aurora User Guide.*
     #
+    #   Don't specify it when you set `EnableVPCNetworking` to `false`.
+    #
     #   Valid for Cluster Type: Aurora DB clusters only
     #
     #   Valid Values: `IPV4 | DUAL`
@@ -1940,13 +1950,54 @@ module Aws::RDS
     #
     #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
     #   engines.
+    # @option options [Boolean] :enable_vpc_networking
+    #   Specifies whether VPC networking is enabled for the DB cluster. Set to
+    #   `false` to create a DB cluster without VPC networking.
+    #
+    #   A DB cluster without VPC networking needs an internet access gateway
+    #   and IAM database authentication. Set `EnableInternetAccessGateway` and
+    #   `EnableIAMDatabaseAuthentication` to `true`, and set
+    #   `MasterUserAuthenticationType` to `iam-db-auth`.
+    #
+    #   Default: `true`. With `WithExpressConfiguration`, the default is
+    #   `false`.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL DB clusters only
     # @option options [Boolean] :with_express_configuration
     #   Specifies to create an Aurora DB Cluster with express configuration in
     #   seconds. Express configuration provides a cluster with a writer
     #   instance and feature specific values set to all other input parameters
     #   of this API.
     #
+    #   By default, a DB cluster with express configuration doesn't use VPC
+    #   networking. You connect to it over the internet through an internet
+    #   access gateway.
+    #
+    #   To create the DB cluster in a VPC instead, set `EnableVPCNetworking`
+    #   to `true` and `EnableInternetAccessGateway` to `false`. You can also
+    #   specify `DBSubnetGroupName`, `VpcSecurityGroupIds`, and `NetworkType`.
+    #   If you don't specify `DBSubnetGroupName`, the DB cluster uses the
+    #   default DB subnet group for your Amazon Web Services account, in your
+    #   default VPC.
+    #
+    #   A DB cluster with express configuration in a VPC takes longer to
+    #   become available than one without VPC networking.
+    #
     #   Valid for Cluster Type: Aurora DB clusters
+    # @option options [Boolean] :enable_internet_access_gateway
+    #   Specifies whether the DB cluster uses an internet access gateway. With
+    #   an internet access gateway, you connect to the DB cluster over the
+    #   internet without a VPC.
+    #
+    #   Set to `true` only when you set `EnableVPCNetworking` to `false`. A DB
+    #   cluster can't use VPC networking and an internet access gateway at
+    #   the same time.
+    #
+    #   Default: `false`. With `WithExpressConfiguration`, the default is
+    #   `true`. To create a DB cluster with express configuration in a VPC,
+    #   set this parameter to `false`.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL DB clusters only
     # @option options [Array<Types::DBClusterAssociatedRole>] :associated_roles
     #   A list of Amazon Web Services Identity and Access Management (IAM)
     #   roles to associate with the DB cluster. Each role grants the DB
@@ -2159,6 +2210,9 @@ module Aws::RDS
     #     ca_certificate_identifier: "String",
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
     #     engine_lifecycle_support: "String",
+    #     enable_internet_access_gateway: false,
+    #     enable_vpc_networking: false,
+    #     db_subnet_group_name: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :new_db_cluster_identifier
@@ -2210,6 +2264,19 @@ module Aws::RDS
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [Array<String>] :vpc_security_group_ids
     #   A list of EC2 VPC security groups to associate with this DB cluster.
+    #
+    #   Valid only for DB clusters inside a VPC. For a DB cluster that uses an
+    #   internet access gateway, specify this parameter only when you
+    #   re-enable VPC networking. Set `EnableVPCNetworking` to `true` and
+    #   `EnableInternetAccessGateway` to `false`.
+    #
+    #   When you move the DB cluster to a different DB subnet group with
+    #   `DBSubnetGroupName`, or re-enable VPC networking, the security groups
+    #   must belong to the VPC of the DB subnet group. If you leave out this
+    #   parameter in those requests, the DB cluster uses the default security
+    #   group of that VPC, even for a move within the same VPC. To keep the
+    #   current security groups, specify their IDs. If the VPC is a shared
+    #   VPC, you must specify this parameter.
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [Integer] :port
@@ -2577,6 +2644,17 @@ module Aws::RDS
     #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
     #   or the IPv4 and the IPv6 protocols (`DUAL`).
     #
+    #   If the subnets in the DB subnet group support only the IPv4 protocol,
+    #   you can't set this parameter to `DUAL`.
+    #
+    #   If you don't specify this parameter when you move the DB cluster to a
+    #   different DB subnet group with `DBSubnetGroupName`, the DB cluster
+    #   uses `IPV4`, even if it currently uses `DUAL`. To keep dual-stack
+    #   mode, specify `DUAL`. The new DB subnet group must support the network
+    #   type.
+    #
+    #   Don't specify it when you set `EnableVPCNetworking` to `false`.
+    #
     #   For more information, see [ Working with a DB instance in a VPC][1] in
     #   the *Amazon Aurora User Guide.*
     #
@@ -2867,6 +2945,116 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    # @option options [Boolean] :enable_internet_access_gateway
+    #   Specifies whether the DB cluster uses an internet access gateway. With
+    #   an internet access gateway, you connect to the DB cluster over the
+    #   internet without a VPC.
+    #
+    #   Set to `true` together with `EnableVPCNetworking` set to `false` to
+    #   move the DB cluster out of its VPC. Set to `false` together with
+    #   `EnableVPCNetworking` set to `true` to move the DB cluster into a VPC.
+    #   A DB cluster can't use VPC networking and an internet access gateway
+    #   at the same time.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL DB clusters only
+    # @option options [Boolean] :enable_vpc_networking
+    #   Specifies whether VPC networking is enabled for the DB cluster. Set to
+    #   `false` to disable VPC networking for the DB cluster.
+    #
+    #   A DB cluster without VPC networking needs an internet access gateway
+    #   and IAM database authentication. Set `EnableInternetAccessGateway` and
+    #   `EnableIAMDatabaseAuthentication` to `true`, and set
+    #   `MasterUserAuthenticationType` to `iam-db-auth`.
+    #
+    #   Set to `true` to re-enable VPC networking for a DB cluster that uses
+    #   an internet access gateway. You can also specify `DBSubnetGroupName`,
+    #   `VpcSecurityGroupIds`, and `NetworkType`.
+    #
+    #   The change is applied during the next maintenance window unless
+    #   `ApplyImmediately` is enabled.
+    #
+    #   To move a DB cluster that already uses VPC networking to a different
+    #   DB subnet group, you don't need to set this parameter. Specify
+    #   `DBSubnetGroupName` instead.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL DB clusters only
+    # @option options [String] :db_subnet_group_name
+    #   The DB subnet group for the DB cluster.
+    #
+    #   Specify this parameter for one of these purposes:
+    #
+    #   * To move an Aurora MySQL or Aurora PostgreSQL DB cluster that uses
+    #     VPC networking to a different DB subnet group. The new DB subnet
+    #     group can be in the same VPC or in a different VPC.
+    #
+    #   * To enable VPC networking for an Aurora PostgreSQL DB cluster that
+    #     uses an internet access gateway. Set `EnableVPCNetworking` to `true`
+    #     and `EnableInternetAccessGateway` to `false`.
+    #
+    #   When you move a DB cluster to a different DB subnet group, you don't
+    #   need to set `EnableVPCNetworking`. If you set it to `false`, Aurora
+    #   rejects the request. Security groups in `VpcSecurityGroupIds` must
+    #   belong to the VPC of the new DB subnet group. If you don't specify
+    #   `VpcSecurityGroupIds`, the DB cluster uses the default security group
+    #   of that VPC. If you don't specify `NetworkType`, the DB cluster uses
+    #   `IPV4`. Both defaults apply even if the DB cluster stays in the same
+    #   VPC.
+    #
+    #   An outage occurs during the move. The DB cluster uses VPC networking
+    #   before, during, and after the move, and the move doesn't turn on an
+    #   internet access gateway. If you specify the DB subnet group that the
+    #   DB cluster already uses, the DB cluster isn't moved. The change is
+    #   applied during the next maintenance window unless `ApplyImmediately`
+    #   is enabled.
+    #
+    #   Aurora rejects the move if the DB cluster:
+    #
+    #   * Is a member of an Aurora global database.
+    #
+    #   * Uses Aurora Limitless Database.
+    #
+    #   * Is a cross-Region or in-Region read replica, or is the source of
+    #     one. Aurora Replicas in the DB cluster don't block the move.
+    #
+    #   * Has enhanced binlog (Aurora MySQL), enhanced logical replication
+    #     (Aurora PostgreSQL), or Babelfish turned on.
+    #
+    #   * Is a target of an RDS Proxy.
+    #
+    #   * Is part of a blue/green deployment.
+    #
+    #   * Is the source of a zero-ETL integration.
+    #
+    #   * Has a database activity stream that isn't stopped.
+    #
+    #   The move also fails if the DB cluster is switching to a different DB
+    #   cluster parameter group, or if a change to enhanced binlog, enhanced
+    #   logical replication, or Babelfish is pending in its DB cluster
+    #   parameter group. Apply the change, and reboot if required, before you
+    #   move the DB cluster.
+    #
+    #   If the move fails, Aurora returns the DB cluster to its original DB
+    #   subnet group and cancels the change. To try again, call
+    #   `ModifyDBCluster` again.
+    #
+    #   Aurora can't always return the DB cluster. If the move fails after
+    #   Aurora starts to update the DB cluster endpoints, or if the rollback
+    #   fails, the change doesn't complete. If Aurora can't restore the
+    #   original network configuration, the DB instances in the DB cluster
+    #   enter the `incompatible-network` state. In these cases, contact Amazon
+    #   Web Services Support.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters only
+    #
+    #   Default: If you don't specify this parameter when you enable VPC
+    #   networking, the DB cluster uses the default DB subnet group for your
+    #   Amazon Web Services account.
+    #
+    #   Constraints: The DB subnet group must contain a subnet in each
+    #   Availability Zone that the DB instances in the DB cluster are located
+    #   in.
+    #
+    #   Example: `mydbsubnetgroup`
     # @return [DBCluster]
     def modify(options = {})
       options = options.merge(db_cluster_identifier: @id)

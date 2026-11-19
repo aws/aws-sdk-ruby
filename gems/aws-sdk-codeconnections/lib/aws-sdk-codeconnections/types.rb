@@ -106,6 +106,13 @@ module Aws::CodeConnections
     #   connection.
     #   @return [String]
     #
+    # @!attribute [rw] provider_endpoint
+    #   The endpoint of the ghe.com tenant where your organization resides.
+    #   This value is populated only for a connection with a `ProviderType`
+    #   of `GitHubEnterpriseCloudDataResidency`. It is empty for all other
+    #   provider types.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeconnections-2023-12-01/Connection AWS API Documentation
     #
     class Connection < Struct.new(
@@ -114,7 +121,8 @@ module Aws::CodeConnections
       :provider_type,
       :owner_account_id,
       :connection_status,
-      :host_arn)
+      :host_arn,
+      :provider_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -137,13 +145,21 @@ module Aws::CodeConnections
     #   connection to be created.
     #   @return [String]
     #
+    # @!attribute [rw] provider_endpoint
+    #   The endpoint of the ghe.com tenant where your organization resides.
+    #   Provide this parameter only when `ProviderType` is
+    #   `GitHubEnterpriseCloudDataResidency`. Leave this parameter empty for
+    #   all other provider types.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeconnections-2023-12-01/CreateConnectionInput AWS API Documentation
     #
     class CreateConnectionInput < Struct.new(
       :provider_type,
       :connection_name,
       :tags,
-      :host_arn)
+      :host_arn,
+      :provider_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -758,14 +774,14 @@ module Aws::CodeConnections
       include Aws::Structure
     end
 
-    # @!attribute [rw] provider_type_filter
-    #   Filters the list of connections to those associated with a specified
-    #   provider, such as Bitbucket.
-    #   @return [String]
-    #
     # @!attribute [rw] host_arn_filter
     #   Filters the list of connections to those associated with a specified
     #   host.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_type_filter
+    #   Filters the list of connections to those associated with a specified
+    #   provider, such as Bitbucket.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -783,8 +799,8 @@ module Aws::CodeConnections
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeconnections-2023-12-01/ListConnectionsInput AWS API Documentation
     #
     class ListConnectionsInput < Struct.new(
-      :provider_type_filter,
       :host_arn_filter,
+      :provider_type_filter,
       :max_results,
       :next_token)
       SENSITIVE = []

@@ -33,6 +33,15 @@ module Aws
       }?
     }
 
+      type code_security_integration_vpc_configuration = {
+      vpc_id: ::String,
+      vpc_endpoint_id: ::String,
+      code_connections_host_arn: ::String?,
+      subnet_ids: Array[::String]?,
+      security_groups: Array[::String]?,
+      tls_certificate: ::String?
+    }
+
       type code_security_scan_configuration = {
       periodic_scan_configuration: {
         frequency: ("WEEKLY" | "MONTHLY" | "NEVER")?,

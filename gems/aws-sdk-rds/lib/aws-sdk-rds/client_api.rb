@@ -643,6 +643,7 @@ module Aws::RDS
     PointInTimeRestoreNotEnabledFault = Shapes::StructureShape.new(name: 'PointInTimeRestoreNotEnabledFault', error: {"code" => "PointInTimeRestoreNotEnabled", "httpStatusCode" => 400, "senderFault" => true})
     PotentiallySensitiveOptionSettingValue = Shapes::StringShape.new(name: 'PotentiallySensitiveOptionSettingValue')
     PotentiallySensitiveParameterValue = Shapes::StringShape.new(name: 'PotentiallySensitiveParameterValue')
+    PrimaryEndpoint = Shapes::StructureShape.new(name: 'PrimaryEndpoint')
     ProcessorFeature = Shapes::StructureShape.new(name: 'ProcessorFeature')
     ProcessorFeatureList = Shapes::ListShape.new(name: 'ProcessorFeatureList')
     PromoteReadReplicaDBClusterMessage = Shapes::StructureShape.new(name: 'PromoteReadReplicaDBClusterMessage')
@@ -1034,6 +1035,8 @@ module Aws::RDS
     ClusterPendingModifiedValues.add_member(:rds_custom_cluster_configuration, Shapes::ShapeRef.new(shape: RdsCustomClusterConfiguration, location_name: "RdsCustomClusterConfiguration"))
     ClusterPendingModifiedValues.add_member(:iops, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Iops"))
     ClusterPendingModifiedValues.add_member(:certificate_details, Shapes::ShapeRef.new(shape: CertificateDetails, location_name: "CertificateDetails"))
+    ClusterPendingModifiedValues.add_member(:vpc_networking_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "VPCNetworkingEnabled"))
+    ClusterPendingModifiedValues.add_member(:internet_access_gateway_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "InternetAccessGatewayEnabled"))
     ClusterPendingModifiedValues.struct_class = Types::ClusterPendingModifiedValues
 
     ConnectionPoolConfiguration.add_member(:max_connections_percent, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxConnectionsPercent"))
@@ -1228,7 +1231,9 @@ module Aws::RDS
     CreateDBClusterMessage.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
     CreateDBClusterMessage.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
     CreateDBClusterMessage.add_member(:master_user_authentication_type, Shapes::ShapeRef.new(shape: MasterUserAuthenticationType, location_name: "MasterUserAuthenticationType"))
+    CreateDBClusterMessage.add_member(:enable_vpc_networking, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableVPCNetworking"))
     CreateDBClusterMessage.add_member(:with_express_configuration, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "WithExpressConfiguration"))
+    CreateDBClusterMessage.add_member(:enable_internet_access_gateway, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableInternetAccessGateway"))
     CreateDBClusterMessage.add_member(:associated_roles, Shapes::ShapeRef.new(shape: DBClusterAssociatedRoles, location_name: "AssociatedRoles"))
     CreateDBClusterMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CreateDBClusterMessage.struct_class = Types::CreateDBClusterMessage
@@ -1909,6 +1914,7 @@ module Aws::RDS
     DBInstance.add_member(:master_username, Shapes::ShapeRef.new(shape: String, location_name: "MasterUsername"))
     DBInstance.add_member(:db_name, Shapes::ShapeRef.new(shape: String, location_name: "DBName"))
     DBInstance.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
+    DBInstance.add_member(:primary_endpoint, Shapes::ShapeRef.new(shape: PrimaryEndpoint, location_name: "PrimaryEndpoint"))
     DBInstance.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: Integer, location_name: "AllocatedStorage"))
     DBInstance.add_member(:instance_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "InstanceCreateTime"))
     DBInstance.add_member(:preferred_backup_window, Shapes::ShapeRef.new(shape: String, location_name: "PreferredBackupWindow"))
@@ -1996,6 +2002,7 @@ module Aws::RDS
     DBInstance.add_member(:storage_operation_status, Shapes::ShapeRef.new(shape: String, location_name: "StorageOperationStatus"))
     DBInstance.add_member(:storage_operation_percent_progress, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageOperationPercentProgress"))
     DBInstance.add_member(:db_capacity_reservation_identifier, Shapes::ShapeRef.new(shape: DBCapacityReservationIdentifier, location_name: "DBCapacityReservationIdentifier"))
+    DBInstance.add_member(:vpc_networking_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "VPCNetworkingEnabled"))
     DBInstance.struct_class = Types::DBInstance
 
     DBInstanceAlreadyExistsFault.struct_class = Types::DBInstanceAlreadyExistsFault
@@ -3398,6 +3405,9 @@ module Aws::RDS
     ModifyDBClusterMessage.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
     ModifyDBClusterMessage.add_member(:master_user_authentication_type, Shapes::ShapeRef.new(shape: MasterUserAuthenticationType, location_name: "MasterUserAuthenticationType"))
     ModifyDBClusterMessage.add_member(:engine_lifecycle_support, Shapes::ShapeRef.new(shape: String, location_name: "EngineLifecycleSupport"))
+    ModifyDBClusterMessage.add_member(:enable_internet_access_gateway, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableInternetAccessGateway"))
+    ModifyDBClusterMessage.add_member(:enable_vpc_networking, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableVPCNetworking"))
+    ModifyDBClusterMessage.add_member(:db_subnet_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBSubnetGroupName"))
     ModifyDBClusterMessage.struct_class = Types::ModifyDBClusterMessage
 
     ModifyDBClusterParameterGroupMessage.add_member(:db_cluster_parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterParameterGroupName"))
@@ -3855,6 +3865,10 @@ module Aws::RDS
     PerformanceIssueDetails.struct_class = Types::PerformanceIssueDetails
 
     PointInTimeRestoreNotEnabledFault.struct_class = Types::PointInTimeRestoreNotEnabledFault
+
+    PrimaryEndpoint.add_member(:address, Shapes::ShapeRef.new(shape: String, location_name: "Address"))
+    PrimaryEndpoint.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "HostedZoneId"))
+    PrimaryEndpoint.struct_class = Types::PrimaryEndpoint
 
     ProcessorFeature.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     ProcessorFeature.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))

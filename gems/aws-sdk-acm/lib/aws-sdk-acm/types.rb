@@ -122,6 +122,18 @@ module Aws::ACM
     #   The ACME account identifier associated with the certificate.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_usage
+    #   The Extended Key Usage profile of the certificate. This value exists
+    #   only for Amazon N2 certificates. If `CertificateUsage` was omitted
+    #   from the request, this value is `CLIENT_AND_SERVER_AUTH`.
+    #   @return [String]
+    #
+    # @!attribute [rw] root_hierarchy_type
+    #   The root hierarchy from which the certificate was issued. This value
+    #   exists only for Amazon N2 certificates, which have a `Type` of
+    #   `AMAZON_ISSUED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AcmCertificateMetadata AWS API Documentation
     #
     class AcmCertificateMetadata < Struct.new(
@@ -140,7 +152,9 @@ module Aws::ACM
       :validation_method,
       :certificate_key_pair_origin,
       :acme_endpoint_arn,
-      :acme_account_id)
+      :acme_account_id,
+      :certificate_usage,
+      :root_hierarchy_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -193,6 +207,11 @@ module Aws::ACM
     #   Filter by ACME account identifier.
     #   @return [String]
     #
+    # @!attribute [rw] root_hierarchy_type
+    #   Filter by root hierarchy type. Specify `N2_AMAZON_MANAGED` or
+    #   `N2_SFG2_AMAZON_MANAGED` to return Amazon N2 certificates.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AcmCertificateMetadataFilter AWS API Documentation
     #
     class AcmCertificateMetadataFilter < Struct.new(
@@ -207,6 +226,7 @@ module Aws::ACM
       :certificate_key_pair_origin,
       :acme_endpoint_arn,
       :acme_account_id,
+      :root_hierarchy_type,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -223,6 +243,7 @@ module Aws::ACM
       class CertificateKeyPairOrigin < AcmCertificateMetadataFilter; end
       class AcmeEndpointArn < AcmCertificateMetadataFilter; end
       class AcmeAccountId < AcmCertificateMetadataFilter; end
+      class RootHierarchyType < AcmCertificateMetadataFilter; end
       class Unknown < AcmCertificateMetadataFilter; end
     end
 
@@ -865,8 +886,8 @@ module Aws::ACM
     #
     # @!attribute [rw] options
     #   Contains the certificate options. Certificate transparency logging
-    #   opt-out is no longer available. All public certificates are recorded
-    #   in a certificate transparency log.
+    #   opt-out is no longer available. ACM records all public certificates
+    #   other than Amazon N2 certificates in a certificate transparency log.
     #   @return [Types::CertificateOptions]
     #
     # @!attribute [rw] update_summary
@@ -885,6 +906,18 @@ module Aws::ACM
     #
     # @!attribute [rw] acme_account_id
     #   The ACME account identifier associated with the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_usage
+    #   The Extended Key Usage profile of the certificate. This value exists
+    #   only for Amazon N2 certificates. If `CertificateUsage` was omitted
+    #   from the request, this value is `CLIENT_AND_SERVER_AUTH`.
+    #   @return [String]
+    #
+    # @!attribute [rw] root_hierarchy_type
+    #   The root hierarchy from which the certificate was issued. This value
+    #   exists only for Amazon N2 certificates, which have a `Type` of
+    #   `AMAZON_ISSUED`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateDetail AWS API Documentation
@@ -920,7 +953,9 @@ module Aws::ACM
       :update_summary,
       :certificate_key_pair_origin,
       :acme_endpoint_arn,
-      :acme_account_id)
+      :acme_account_id,
+      :certificate_usage,
+      :root_hierarchy_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1025,9 +1060,9 @@ module Aws::ACM
     # structure to change the domain validation method or specify whether to
     # export your certificate.
     #
-    # All public certificates are recorded in a certificate transparency
-    # log. For general information, see [Certificate Transparency
-    # Logging][1].
+    # ACM records all public certificates other than Amazon N2 certificates
+    # in a certificate transparency log. For general information, see
+    # [Certificate Transparency Logging][1].
     #
     # You can export public ACM certificates to use with Amazon Web Services
     # services as well as outside Amazon Web Services Cloud. For more
@@ -1041,8 +1076,8 @@ module Aws::ACM
     #
     # @!attribute [rw] certificate_transparency_logging_preference
     #   This parameter has been deprecated. Certificate transparency logging
-    #   opt-out is no longer available. All public certificates are recorded
-    #   in a certificate transparency log.
+    #   opt-out is no longer available. ACM records all public certificates
+    #   other than Amazon N2 certificates in a certificate transparency log.
     #   @return [String]
     #
     # @!attribute [rw] export
@@ -1254,6 +1289,18 @@ module Aws::ACM
     #   The origin of the certificate's key pair.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_usage
+    #   The Extended Key Usage profile of the certificate. This value exists
+    #   only for Amazon N2 certificates. If `CertificateUsage` was omitted
+    #   from the request, this value is `CLIENT_AND_SERVER_AUTH`.
+    #   @return [String]
+    #
+    # @!attribute [rw] root_hierarchy_type
+    #   The root hierarchy from which the certificate was issued. This value
+    #   exists only for Amazon N2 certificates, which have a `Type` of
+    #   `AMAZON_ISSUED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateSummary AWS API Documentation
     #
     class CertificateSummary < Struct.new(
@@ -1277,7 +1324,9 @@ module Aws::ACM
       :imported_at,
       :revoked_at,
       :managed_by,
-      :certificate_key_pair_origin)
+      :certificate_key_pair_origin,
+      :certificate_usage,
+      :root_hierarchy_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2830,6 +2879,15 @@ module Aws::ACM
     #   `CUSTOMER_PROVIDED`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] root_hierarchy_types
+    #   Filter the certificate list by root hierarchy type. Specify one or
+    #   more `RootHierarchyType` values. By default, this action does not
+    #   return certificates with a `RootHierarchyType` of
+    #   `N2_AMAZON_MANAGED` or `N2_SFG2_AMAZON_MANAGED`. To list only Amazon
+    #   N2 certificates, specify one or both of these values in the
+    #   `RootHierarchyTypes` filter.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] includes
     #   Filter the certificate list. For more information, see the Filters
     #   structure.
@@ -2865,6 +2923,7 @@ module Aws::ACM
     class ListCertificatesRequest < Struct.new(
       :certificate_statuses,
       :certificate_key_pair_origins,
+      :root_hierarchy_types,
       :includes,
       :next_token,
       :max_items,
@@ -3231,9 +3290,10 @@ module Aws::ACM
     #   You can use this parameter to specify whether to export your
     #   certificate.
     #
-    #   Certificate transparency logging opt-out is no longer available. All
-    #   public certificates are recorded in a certificate transparency log.
-    #   For more information, see [Certificate Transparency Logging][1].
+    #   Certificate transparency logging opt-out is no longer available. ACM
+    #   records all public certificates other than Amazon N2 certificates in
+    #   a certificate transparency log. For more information, see
+    #   [Certificate Transparency Logging][1].
     #
     #   You can export public ACM certificates to use with Amazon Web
     #   Services services as well as outside the Amazon Web Services Cloud.
@@ -3310,6 +3370,60 @@ module Aws::ACM
     #   certificate issued by ACM.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_usage
+    #   The Extended Key Usage profile of the certificate. You can specify
+    #   this parameter only when `RootHierarchyType` is `N2_AMAZON_MANAGED`
+    #   or `N2_SFG2_AMAZON_MANAGED`. If you specify `CertificateUsage` with
+    #   any other root hierarchy type, or without `RootHierarchyType`, the
+    #   request fails with a `ValidationException`.
+    #
+    #   * `CLIENT_AND_SERVER_AUTH` authenticates both the client and the
+    #     server. Valid for both N2 root hierarchy types.
+    #
+    #   * `CLIENT_AUTH_ONLY` authenticates only the client. Valid only for
+    #     `N2_AMAZON_MANAGED`.
+    #
+    #   Default: CLIENT\_AND\_SERVER\_AUTH
+    #   @return [String]
+    #
+    # @!attribute [rw] root_hierarchy_type
+    #   The root hierarchy from which ACM issues the certificate. Specify
+    #   one of the following values to request an Amazon N2 certificate:
+    #
+    #   * `N2_AMAZON_MANAGED` – An Amazon N2 certificate that chains to an
+    #     Amazon N2 root. The maximum validity period, which is also the
+    #     default, is 395 days.
+    #
+    #   * `N2_SFG2_AMAZON_MANAGED` – An Amazon N2 certificate that chains to
+    #     an Amazon N2 root cross-signed by Starfield G2. The maximum
+    #     validity period, which is also the default, is 98 days.
+    #
+    #   You cannot specify `RootHierarchyType` together with
+    #   `CertificateAuthorityArn`.
+    #
+    #   If you omit this parameter, ACM issues a standard public
+    #   certificate. A request that specifies any value other than
+    #   `N2_AMAZON_MANAGED` or `N2_SFG2_AMAZON_MANAGED` fails with a
+    #   `ValidationException`.
+    #
+    #   An Amazon N2 certificate request must specify a `ValidationMethod`
+    #   of `DNS`. Amazon N2 certificates are not recorded in a certificate
+    #   transparency log.
+    #
+    #   A request for a validity period longer than the maximum fails with a
+    #   `ValidationException`.
+    #
+    #   <note markdown="1"> Algorithms supported for an N2 certificate request include:
+    #
+    #    * `RSA_2048`
+    #
+    #   * `EC_prime256v1`
+    #
+    #   * `EC_secp384r1`
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateRequest AWS API Documentation
     #
     class RequestCertificateRequest < Struct.new(
@@ -3322,7 +3436,9 @@ module Aws::ACM
       :certificate_authority_arn,
       :tags,
       :key_algorithm,
-      :managed_by)
+      :managed_by,
+      :certificate_usage,
+      :root_hierarchy_type)
       SENSITIVE = []
       include Aws::Structure
     end

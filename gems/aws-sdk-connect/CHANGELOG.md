@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.303.0 (2026-11-19)
+------------------
+
+* Feature - Amazon Connect adds voicemail support, with new reference types, file use case types, contact details, and a voicemail task contact subtype for managing voicemail recordings and transcripts.
+
 1.302.0 (2026-11-18)
 ------------------
 

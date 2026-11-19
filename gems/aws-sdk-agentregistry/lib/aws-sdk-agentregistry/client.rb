@@ -484,7 +484,12 @@ module Aws::AgentRegistry
 
     # Retrieves multiple discoverable registry records by ID from a single
     # registry. Records that cannot be retrieved are reported individually
-    # in the `errors` list rather than failing the entire request.
+    # in the `errors` list rather than failing the entire request. For each
+    # skill record that has a skill package, the operation also returns
+    # `artifact`. It contains a short-lived download URL and a SHA-256
+    # checksum for the package of the record's latest approved revision. If
+    # the registry can't create a download URL for a package, the whole
+    # request fails.
     #
     # @option params [required, Array<Types::RegistryRecordsEntry>] :entries
     #   The registry-scoped groups of record IDs to retrieve. Currently, you
@@ -533,9 +538,11 @@ module Aws::AgentRegistry
     #   resp.registry_records[0].descriptors.http.source.from_url.url #=> String
     #   resp.registry_records[0].descriptors.agui.source.from_url.url #=> String
     #   resp.registry_records[0].record_version #=> String
-    #   resp.registry_records[0].status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.registry_records[0].status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "CREATE_PENDING_AUTH", "UPDATE_PENDING_AUTH"
     #   resp.registry_records[0].created_at #=> Time
     #   resp.registry_records[0].updated_at #=> Time
+    #   resp.registry_records[0].artifact.sha256 #=> String
+    #   resp.registry_records[0].artifact.download_url #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].registry_id #=> String
     #   resp.errors[0].record_id #=> String
@@ -602,7 +609,7 @@ module Aws::AgentRegistry
     #   resp.registry_records[0].display_name #=> String
     #   resp.registry_records[0].record_type #=> String, one of "MCP", "AGENT", "CUSTOM", "SKILL", "GATEWAY"
     #   resp.registry_records[0].record_version #=> String
-    #   resp.registry_records[0].status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.registry_records[0].status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "CREATE_PENDING_AUTH", "UPDATE_PENDING_AUTH"
     #   resp.registry_records[0].created_at #=> Time
     #   resp.registry_records[0].updated_at #=> Time
     #   resp.registry_records[0].descriptor_types #=> Array
@@ -622,8 +629,16 @@ module Aws::AgentRegistry
     # natural language query. Returns metadata for the matching records
     # ordered by relevance.
     #
+    # Returns at most 1000 results across all pages when `searchType` is
+    # `KEYWORD`, and at most 20 results when it is `HYBRID` or `SEMANTIC`.
+    # To retrieve more records, refine the query or filters, or use
+    # `ListDiscoverableRegistryRecords` to list every record.
+    #
     # @option params [required, String] :search_query
-    #   The natural language query to search for matching registry records.
+    #   The natural language query to search for matching registry records. If
+    #   you specify an empty string, the operation returns the records that
+    #   match the `filters`, most recently updated first, up to the result
+    #   limit for the `searchType`.
     #
     # @option params [required, Array<String>] :registry_ids
     #   The registry identifiers to search within. Currently, you must specify
@@ -631,8 +646,9 @@ module Aws::AgentRegistry
     #   Amazon Web Services Resource Name (ARN) or the registry ID.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return. Valid values are 1 through
-    #   20. The default value is 10.
+    #   The maximum number of results to return in one page. Valid values are
+    #   1 through 50 when `searchType` is `KEYWORD`, and 1 through 20 when it
+    #   is `HYBRID` or `SEMANTIC`. The default value is 10.
     #
     # @option params [Hash,Array,String,Numeric,Boolean] :filters
     #   An optional structured JSON metadata filter that narrows the search
@@ -651,9 +667,43 @@ module Aws::AgentRegistry
     #   serialized using the same format as its surroundings and requires no
     #   additional encoding or escaping.
     #
+    # @option params [String] :search_type
+    #   Specifies how the service ranks registry records against the search
+    #   query. If you omit this parameter, the service uses `HYBRID` in Amazon
+    #   Web Services Regions that support semantic search and `KEYWORD` in
+    #   Regions that do not. The response reports the search type that the
+    #   service used. Valid values are the following:
+    #
+    #   * `KEYWORD` – Ranks records by keyword match between the query terms
+    #     and the record name, description, descriptors, and custom metadata
+    #     text values. Available in every Amazon Web Services Region.
+    #
+    #   * `SEMANTIC` – Ranks records by semantic similarity to the query and
+    #     returns the most similar records, up to `maxResults`, even when none
+    #     of them closely matches the query.
+    #
+    #   * `HYBRID` – Combines keyword ranking and semantic ranking.
+    #
+    #   `HYBRID` and `SEMANTIC` are available in a limited number of Regions.
+    #   If you specify either one in a Region that does not support semantic
+    #   search, the request fails with a `ValidationException` that has the
+    #   reason `UnsupportedInRegion`.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from a previous response. Use it to retrieve the
+    #   next page of results, and send the same `searchQuery`, `registryIds`,
+    #   `filters`, and `searchType` that you used for the first page. If any
+    #   of them differ, the request fails with a `ValidationException`. A
+    #   pagination token expires 15 minutes after the service returns the
+    #   first page.
+    #
     # @return [Types::SearchDiscoverableRegistryRecordsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SearchDiscoverableRegistryRecordsResponse#registry_records #registry_records} => Array&lt;Types::RegistryRecordSummary&gt;
+    #   * {Types::SearchDiscoverableRegistryRecordsResponse#search_type #search_type} => String
+    #   * {Types::SearchDiscoverableRegistryRecordsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -663,6 +713,8 @@ module Aws::AgentRegistry
     #     max_results: 1,
     #     filters: {
     #     },
+    #     search_type: "HYBRID", # accepts HYBRID, SEMANTIC, KEYWORD
+    #     next_token: "SearchDiscoverableRegistryRecordsRequestNextTokenString",
     #   })
     #
     # @example Response structure
@@ -692,9 +744,13 @@ module Aws::AgentRegistry
     #   resp.registry_records[0].descriptors.http.source.from_url.url #=> String
     #   resp.registry_records[0].descriptors.agui.source.from_url.url #=> String
     #   resp.registry_records[0].record_version #=> String
-    #   resp.registry_records[0].status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.registry_records[0].status #=> String, one of "DRAFT", "PENDING_APPROVAL", "APPROVED", "REJECTED", "DEPRECATED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED", "CREATE_PENDING_AUTH", "UPDATE_PENDING_AUTH"
     #   resp.registry_records[0].created_at #=> Time
     #   resp.registry_records[0].updated_at #=> Time
+    #   resp.registry_records[0].artifact.sha256 #=> String
+    #   resp.registry_records[0].artifact.download_url #=> String
+    #   resp.search_type #=> String, one of "HYBRID", "SEMANTIC", "KEYWORD"
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-2025-12-01/SearchDiscoverableRegistryRecords AWS API Documentation
     #
@@ -723,7 +779,7 @@ module Aws::AgentRegistry
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-agentregistry'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

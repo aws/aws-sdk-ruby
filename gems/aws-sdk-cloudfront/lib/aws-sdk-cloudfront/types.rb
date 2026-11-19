@@ -1870,6 +1870,12 @@ module Aws::CloudFront
     #   distribution tenants.
     #   @return [Boolean]
     #
+    # @!attribute [rw] viewer_fallback
+    #   The distribution whose certificate CloudFront uses for viewer
+    #   requests that arrive on the connection group's Anycast static IPs
+    #   without Server Name Indication (SNI).
+    #   @return [Types::ViewerFallback]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ConnectionGroup AWS API Documentation
     #
     class ConnectionGroup < Struct.new(
@@ -1884,7 +1890,8 @@ module Aws::CloudFront
       :anycast_ip_list_id,
       :status,
       :enabled,
-      :is_default)
+      :is_default,
+      :viewer_fallback)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1952,6 +1959,12 @@ module Aws::CloudFront
     #   distribution tenants.
     #   @return [Boolean]
     #
+    # @!attribute [rw] viewer_fallback
+    #   The distribution whose certificate CloudFront uses for viewer
+    #   requests that arrive on the connection group's Anycast static IPs
+    #   without Server Name Indication (SNI).
+    #   @return [Types::ViewerFallback]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ConnectionGroupSummary AWS API Documentation
     #
     class ConnectionGroupSummary < Struct.new(
@@ -1965,7 +1978,8 @@ module Aws::CloudFront
       :anycast_ip_list_id,
       :enabled,
       :status,
-      :is_default)
+      :is_default,
+      :viewer_fallback)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2620,6 +2634,12 @@ module Aws::CloudFront
     #   Enable the connection group.
     #   @return [Boolean]
     #
+    # @!attribute [rw] viewer_fallback
+    #   The distribution whose certificate CloudFront uses for viewer
+    #   requests that arrive on the connection group's Anycast static IPs
+    #   without Server Name Indication (SNI).
+    #   @return [Types::ViewerFallback]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateConnectionGroupRequest AWS API Documentation
     #
     class CreateConnectionGroupRequest < Struct.new(
@@ -2627,7 +2647,8 @@ module Aws::CloudFront
       :ipv_6_enabled,
       :tags,
       :anycast_ip_list_id,
-      :enabled)
+      :enabled,
+      :viewer_fallback)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2775,6 +2796,20 @@ module Aws::CloudFront
     #   tenant won't serve traffic.
     #   @return [Boolean]
     #
+    # @!attribute [rw] on_domain_takeover
+    #   Specifies whether CloudFront moves a domain in this request to this
+    #   distribution tenant when the domain is already associated with
+    #   another standard distribution or distribution tenant. Valid values
+    #   are:
+    #
+    #   * `allow` – CloudFront moves the domain to this distribution tenant
+    #     when the domain's DNS points to this distribution tenant.
+    #
+    #   * `reject` – CloudFront doesn't move the domain, and the request
+    #     fails if the domain is associated with another resource. This is
+    #     the default if you don't specify a value.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateDistributionTenantRequest AWS API Documentation
     #
     class CreateDistributionTenantRequest < Struct.new(
@@ -2786,7 +2821,8 @@ module Aws::CloudFront
       :parameters,
       :connection_group_id,
       :managed_certificate_request,
-      :enabled)
+      :enabled,
+      :on_domain_takeover)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5991,10 +6027,26 @@ module Aws::CloudFront
     #   The domain name.
     #   @return [String]
     #
+    # @!attribute [rw] serve_on
+    #   Specifies which requests for this domain CloudFront routes to the
+    #   distribution tenant. Valid values are:
+    #
+    #   * `any` – CloudFront routes requests for this domain to the
+    #     distribution tenant regardless of the IP address that they arrive
+    #     on. This is the default if you don't specify a value.
+    #
+    #   * `anycast-ip-list-only` – CloudFront routes requests for this
+    #     domain to the distribution tenant only when they arrive on the
+    #     Anycast static IPs of the distribution tenant's connection group.
+    #     CloudFront treats requests that arrive on other IP addresses as
+    #     requests for an unknown domain.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DomainItem AWS API Documentation
     #
     class DomainItem < Struct.new(
-      :domain)
+      :domain,
+      :serve_on)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6009,11 +6061,27 @@ module Aws::CloudFront
     #   Whether the domain is active or inactive.
     #   @return [String]
     #
+    # @!attribute [rw] serve_on
+    #   Specifies which requests for this domain CloudFront routes to the
+    #   distribution tenant. Valid values are:
+    #
+    #   * `any` – CloudFront routes requests for this domain to the
+    #     distribution tenant regardless of the IP address that they arrive
+    #     on. This is the default if you don't specify a value.
+    #
+    #   * `anycast-ip-list-only` – CloudFront routes requests for this
+    #     domain to the distribution tenant only when they arrive on the
+    #     Anycast static IPs of the distribution tenant's connection group.
+    #     CloudFront treats requests that arrive on other IP addresses as
+    #     requests for an unknown domain.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DomainResult AWS API Documentation
     #
     class DomainResult < Struct.new(
       :domain,
-      :status)
+      :status,
+      :serve_on)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16169,6 +16237,12 @@ module Aws::CloudFront
     #   Whether the connection group is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] viewer_fallback
+    #   The distribution whose certificate CloudFront uses for viewer
+    #   requests that arrive on the connection group's Anycast static IPs
+    #   without Server Name Indication (SNI).
+    #   @return [Types::ViewerFallback]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateConnectionGroupRequest AWS API Documentation
     #
     class UpdateConnectionGroupRequest < Struct.new(
@@ -16176,7 +16250,8 @@ module Aws::CloudFront
       :ipv_6_enabled,
       :if_match,
       :anycast_ip_list_id,
-      :enabled)
+      :enabled,
+      :viewer_fallback)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16336,6 +16411,20 @@ module Aws::CloudFront
     #   enabled, the distribution tenant won't serve traffic.
     #   @return [Boolean]
     #
+    # @!attribute [rw] on_domain_takeover
+    #   Specifies whether CloudFront moves a domain in this request to this
+    #   distribution tenant when the domain is already associated with
+    #   another standard distribution or distribution tenant. Valid values
+    #   are:
+    #
+    #   * `allow` – CloudFront moves the domain to this distribution tenant
+    #     when the domain's DNS points to this distribution tenant.
+    #
+    #   * `reject` – CloudFront doesn't move the domain, and the request
+    #     fails if the domain is associated with another resource. This is
+    #     the default if you don't specify a value.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateDistributionTenantRequest AWS API Documentation
     #
     class UpdateDistributionTenantRequest < Struct.new(
@@ -16347,7 +16436,8 @@ module Aws::CloudFront
       :connection_group_id,
       :if_match,
       :managed_certificate_request,
-      :enabled)
+      :enabled,
+      :on_domain_takeover)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17293,6 +17383,25 @@ module Aws::CloudFront
       :minimum_protocol_version,
       :certificate,
       :certificate_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The distribution whose certificate CloudFront uses for viewer requests
+    # that arrive on the connection group's Anycast static IPs without
+    # Server Name Indication (SNI). You can specify one distribution per
+    # Anycast static IP list.
+    #
+    # @!attribute [rw] distribution_id
+    #   The ID of the distribution whose certificate CloudFront uses to
+    #   establish TLS connections for viewer requests that don't include
+    #   SNI.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ViewerFallback AWS API Documentation
+    #
+    class ViewerFallback < Struct.new(
+      :distribution_id)
       SENSITIVE = []
       include Aws::Structure
     end

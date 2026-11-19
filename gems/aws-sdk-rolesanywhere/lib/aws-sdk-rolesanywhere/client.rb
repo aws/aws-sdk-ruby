@@ -548,6 +548,13 @@ module Aws::RolesAnywhere
     #   If you omit this parameter or specify an empty string, the resource is
     #   created without an alias.
     #
+    # @option params [Types::TipConfiguration] :tip_configuration
+    #   The trusted identity propagation (TIP) settings for the profile. When
+    #   you enable TIP, sessions from the profile include the identity from
+    #   the certificate in `aws:OriginIdentity` condition keys.
+    #
+    #   If you omit this parameter, the profile doesn't use TIP.
+    #
     # @return [Types::ProfileDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ProfileDetailResponse#profile #profile} => Types::ProfileDetail
@@ -570,6 +577,11 @@ module Aws::RolesAnywhere
     #     ],
     #     accept_role_session_name: false,
     #     alias_name: "AliasName",
+    #     tip_configuration: {
+    #       status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       subject_type: "user", # accepts user, workload
+    #       subject_source: "x509SAN/URI", # accepts x509SAN/URI, x509Subject/CN
+    #     },
     #   })
     #
     # @example Response structure
@@ -595,6 +607,9 @@ module Aws::RolesAnywhere
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profile.alias_name #=> String
     #   resp.profile.alias_arn #=> String
+    #   resp.profile.tip_configuration.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.profile.tip_configuration.subject_type #=> String, one of "user", "workload"
+    #   resp.profile.tip_configuration.subject_source #=> String, one of "x509SAN/URI", "x509Subject/CN"
     #   resp.profile.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/CreateProfile AWS API Documentation
@@ -819,6 +834,9 @@ module Aws::RolesAnywhere
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profile.alias_name #=> String
     #   resp.profile.alias_arn #=> String
+    #   resp.profile.tip_configuration.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.profile.tip_configuration.subject_type #=> String, one of "user", "workload"
+    #   resp.profile.tip_configuration.subject_source #=> String, one of "x509SAN/URI", "x509Subject/CN"
     #   resp.profile.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/DeleteAttributeMapping AWS API Documentation
@@ -927,6 +945,9 @@ module Aws::RolesAnywhere
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profile.alias_name #=> String
     #   resp.profile.alias_arn #=> String
+    #   resp.profile.tip_configuration.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.profile.tip_configuration.subject_type #=> String, one of "user", "workload"
+    #   resp.profile.tip_configuration.subject_source #=> String, one of "x509SAN/URI", "x509Subject/CN"
     #   resp.profile.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/DeleteProfile AWS API Documentation
@@ -1092,6 +1113,9 @@ module Aws::RolesAnywhere
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profile.alias_name #=> String
     #   resp.profile.alias_arn #=> String
+    #   resp.profile.tip_configuration.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.profile.tip_configuration.subject_type #=> String, one of "user", "workload"
+    #   resp.profile.tip_configuration.subject_source #=> String, one of "x509SAN/URI", "x509Subject/CN"
     #   resp.profile.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/DisableProfile AWS API Documentation
@@ -1259,6 +1283,9 @@ module Aws::RolesAnywhere
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profile.alias_name #=> String
     #   resp.profile.alias_arn #=> String
+    #   resp.profile.tip_configuration.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.profile.tip_configuration.subject_type #=> String, one of "user", "workload"
+    #   resp.profile.tip_configuration.subject_source #=> String, one of "x509SAN/URI", "x509Subject/CN"
     #   resp.profile.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/EnableProfile AWS API Documentation
@@ -1424,6 +1451,9 @@ module Aws::RolesAnywhere
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profile.alias_name #=> String
     #   resp.profile.alias_arn #=> String
+    #   resp.profile.tip_configuration.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.profile.tip_configuration.subject_type #=> String, one of "user", "workload"
+    #   resp.profile.tip_configuration.subject_source #=> String, one of "x509SAN/URI", "x509Subject/CN"
     #   resp.profile.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/GetProfile AWS API Documentation
@@ -1737,6 +1767,9 @@ module Aws::RolesAnywhere
     #   resp.profiles[0].attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profiles[0].alias_name #=> String
     #   resp.profiles[0].alias_arn #=> String
+    #   resp.profiles[0].tip_configuration.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.profiles[0].tip_configuration.subject_type #=> String, one of "user", "workload"
+    #   resp.profiles[0].tip_configuration.subject_source #=> String, one of "x509SAN/URI", "x509Subject/CN"
     #   resp.profiles[0].previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ListProfiles AWS API Documentation
@@ -1994,6 +2027,9 @@ module Aws::RolesAnywhere
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profile.alias_name #=> String
     #   resp.profile.alias_arn #=> String
+    #   resp.profile.tip_configuration.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.profile.tip_configuration.subject_type #=> String, one of "user", "workload"
+    #   resp.profile.tip_configuration.subject_source #=> String, one of "x509SAN/URI", "x509Subject/CN"
     #   resp.profile.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/PutAttributeMapping AWS API Documentation
@@ -2446,6 +2482,12 @@ module Aws::RolesAnywhere
     #   the alias, the request fails with a `ValidationException`. An invalid
     #   or reserved alias name also causes a `ValidationException`.
     #
+    # @option params [Types::TipConfiguration] :tip_configuration
+    #   The trusted identity propagation (TIP) settings for the profile. The
+    #   settings that you specify replace the current settings, and a field
+    #   that you omit returns to its default. If you omit this parameter, the
+    #   TIP settings don't change.
+    #
     # @return [Types::ProfileDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ProfileDetailResponse#profile #profile} => Types::ProfileDetail
@@ -2461,6 +2503,11 @@ module Aws::RolesAnywhere
     #     duration_seconds: 1,
     #     accept_role_session_name: false,
     #     alias_name: "AliasName",
+    #     tip_configuration: {
+    #       status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       subject_type: "user", # accepts user, workload
+    #       subject_source: "x509SAN/URI", # accepts x509SAN/URI, x509Subject/CN
+    #     },
     #   })
     #
     # @example Response structure
@@ -2486,6 +2533,9 @@ module Aws::RolesAnywhere
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
     #   resp.profile.alias_name #=> String
     #   resp.profile.alias_arn #=> String
+    #   resp.profile.tip_configuration.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.profile.tip_configuration.subject_type #=> String, one of "user", "workload"
+    #   resp.profile.tip_configuration.subject_source #=> String, one of "x509SAN/URI", "x509Subject/CN"
     #   resp.profile.previous_alias_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/UpdateProfile AWS API Documentation
@@ -2625,7 +2675,7 @@ module Aws::RolesAnywhere
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rolesanywhere'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

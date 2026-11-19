@@ -118,7 +118,8 @@ module Aws
       interface _CreateRegistryRecordResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateRegistryRecordResponse]
         def record_arn: () -> ::String
-        def status: () -> ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+        def status: () -> ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "CREATE_PENDING_AUTH" | "UPDATE_PENDING_AUTH")
+        def authorization_data: () -> Types::AuthorizationData
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#create_registry_record-instance_method
       def create_registry_record: (
@@ -152,6 +153,13 @@ module Aws
                                             data: ::String?,
                                             data_schema_version: ::String?,
                                             source: Params::descriptor_source?
+                                          }?,
+                                          skill_package: Params::agent_skills_package_descriptor?,
+                                          repository_provider: ("GITHUB")?,
+                                          source_configuration: {
+                                            s3: {
+                                              bucket_owner_account_id: ::String?
+                                            }?
                                           }?
                                         }?
                                       }?,
@@ -164,6 +172,10 @@ module Aws
                                       agui: {
                                         source: Params::descriptor_source?
                                       }?
+                                    },
+                                    ?artifact: {
+                                      content: ::String,
+                                      sha256: ::String?
                                     },
                                     ?record_version: ::String,
                                     ?client_token: ::String,
@@ -229,7 +241,7 @@ module Aws
         def record_type: () -> ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
         def descriptors: () -> Types::Descriptors
         def record_version: () -> ::String
-        def status: () -> ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+        def status: () -> ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "CREATE_PENDING_AUTH" | "UPDATE_PENDING_AUTH")
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def status_reason: () -> ::String
@@ -238,6 +250,8 @@ module Aws
         def created_by: () -> ::String
         def custom_metadata: () -> untyped
         def custom_metadata_schema_compliance_status: () -> ("COMPLIANT" | "NON_COMPLIANT")
+        def artifact: () -> Types::RegistryRecordArtifactDownload
+        def synchronized_source: () -> Types::RegistryRecordSynchronizedSource
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#get_registry_record-instance_method
       def get_registry_record: (
@@ -298,7 +312,7 @@ module Aws
         def registry_arn: () -> ::String
         def record_arn: () -> ::String
         def record_id: () -> ::String
-        def status: () -> ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+        def status: () -> ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "CREATE_PENDING_AUTH" | "UPDATE_PENDING_AUTH")
         def updated_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#submit_registry_record_for_approval-instance_method
@@ -392,7 +406,7 @@ module Aws
         def record_type: () -> ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
         def descriptors: () -> Types::Descriptors
         def record_version: () -> ::String
-        def status: () -> ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+        def status: () -> ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "CREATE_PENDING_AUTH" | "UPDATE_PENDING_AUTH")
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def status_reason: () -> ::String
@@ -401,6 +415,7 @@ module Aws
         def created_by: () -> ::String
         def custom_metadata: () -> untyped
         def custom_metadata_schema_compliance_status: () -> ("COMPLIANT" | "NON_COMPLIANT")
+        def authorization_data: () -> Types::AuthorizationData
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AgentRegistryControl/Client.html#update_registry_record-instance_method
       def update_registry_record: (
@@ -472,6 +487,19 @@ module Aws
                                                     }?,
                                                     source: Params::updated_descriptor_source?
                                                   }?
+                                                }?,
+                                                skill_package: {
+                                                  optional_value: Params::agent_skills_package_descriptor?
+                                                }?,
+                                                repository_provider: {
+                                                  optional_value: ("GITHUB")?
+                                                }?,
+                                                source_configuration: {
+                                                  optional_value: {
+                                                    s3: {
+                                                      bucket_owner_account_id: ::String?
+                                                    }?
+                                                  }?
                                                 }?
                                               }?
                                             }?
@@ -496,12 +524,19 @@ module Aws
                                         }?
                                       }?
                                     },
+                                    ?artifact: {
+                                      optional_value: {
+                                        content: ::String,
+                                        sha256: ::String?
+                                      }?
+                                    },
                                     ?record_version: ::String,
                                     ?custom_metadata: {
                                       optional_value: {
                                       }?
                                     },
                                     ?trigger_synchronization: bool,
+                                    ?force_authentication: bool,
                                     ?provenance: Array[
                                       Params::provenance
                                     ]
@@ -513,7 +548,7 @@ module Aws
         def registry_arn: () -> ::String
         def record_arn: () -> ::String
         def record_id: () -> ::String
-        def status: () -> ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+        def status: () -> ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "CREATE_PENDING_AUTH" | "UPDATE_PENDING_AUTH")
         def status_reason: () -> ::String
         def updated_at: () -> ::Time
       end
@@ -521,7 +556,7 @@ module Aws
       def update_registry_record_status: (
                                            registry_id: ::String,
                                            record_id: ::String,
-                                           status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED"),
+                                           status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "CREATE_PENDING_AUTH" | "UPDATE_PENDING_AUTH"),
                                            status_reason: ::String
                                          ) -> _UpdateRegistryRecordStatusResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRegistryRecordStatusResponseSuccess

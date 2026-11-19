@@ -1857,7 +1857,7 @@ module Aws::Lambda
     # @!attribute [rw] timeout
     #   The amount of time (in seconds) that Lambda allows a function to run
     #   before stopping it. The default is 3 seconds, and the maximum
-    #   allowed value is 900 seconds. For functions using Lambda Managed
+    #   allowed value is 1,800 seconds. For functions using Lambda Managed
     #   Instances, asynchronous invocations and event source mapping
     #   invocations (except Amazon MQ and Amazon DocumentDB) support a
     #   maximum allowed value of 5,400 seconds (90 minutes). For more
@@ -6063,6 +6063,8 @@ module Aws::Lambda
     #   to pass to the function in the context object. Lambda passes the
     #   `ClientContext` object to your function for synchronous invocations
     #   only.
+    #
+    #   `ClientContext` is logged to CloudTrail if you turn on data events.
     #   @return [String]
     #
     # @!attribute [rw] durable_execution_name
@@ -6268,6 +6270,8 @@ module Aws::Lambda
     # @!attribute [rw] client_context
     #   Up to 3,583 bytes of base64-encoded data about the invoking client
     #   to pass to the function in the context object.
+    #
+    #   `ClientContext` is logged to CloudTrail if you turn on data events.
     #   @return [String]
     #
     # @!attribute [rw] qualifier
@@ -10642,7 +10646,7 @@ module Aws::Lambda
     # @!attribute [rw] timeout
     #   The amount of time (in seconds) that Lambda allows a function to run
     #   before stopping it. The default is 3 seconds, and the maximum
-    #   allowed value is 900 seconds. For functions using Lambda Managed
+    #   allowed value is 1,800 seconds. For functions using Lambda Managed
     #   Instances, asynchronous invocations and event source mapping
     #   invocations (except Amazon MQ and Amazon DocumentDB) support a
     #   maximum allowed value of 5,400 seconds (90 minutes). For more

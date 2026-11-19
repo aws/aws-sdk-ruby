@@ -5599,7 +5599,12 @@ module Aws::BedrockAgentCore
     #   The ID of the payment session.
     #
     # @option params [required, String] :payment_instrument_id
-    #   The ID of the payment instrument to use.
+    #   The ID of the payment instrument to use. For the `CRYPTO_X402` and
+    #   `MPP` payment types, specify the ID of a payment instrument that you
+    #   created. For the `AWS_BILLING_X402` payment type, specify the
+    #   service-managed instrument ID `aws.agentcorepayments.awsbilling.v1`.
+    #   You don't create this instrument; it's available for any payment
+    #   manager that has an AWS Billing payment connector.
     #
     # @option params [required, String] :payment_type
     #   The type of payment to process.
@@ -5634,7 +5639,7 @@ module Aws::BedrockAgentCore
     #     payment_manager_arn: "PaymentManagerArn", # required
     #     payment_session_id: "PaymentSessionId", # required
     #     payment_instrument_id: "PaymentInstrumentId", # required
-    #     payment_type: "CRYPTO_X402", # required, accepts CRYPTO_X402, MPP
+    #     payment_type: "CRYPTO_X402", # required, accepts CRYPTO_X402, MPP, AWS_BILLING_X402
     #     payment_input: { # required
     #       crypto_x402: {
     #         version: "String", # required
@@ -5647,6 +5652,19 @@ module Aws::BedrockAgentCore
     #         www_authenticate_headers: ["WwwAuthenticateHeader"], # required
     #         buyer_pays_gas_fees: false,
     #       },
+    #       aws_billing_x402: {
+    #         version: "Version", # required
+    #         payload: { # required
+    #         },
+    #         options: {
+    #           dpop_jwk: {
+    #             kty: "EC", # required, accepts EC
+    #             crv: "P-256", # required, accepts P-256, P-384, P-521
+    #             x: "DpopJwkXString", # required
+    #             y: "DpopJwkYString", # required
+    #           },
+    #         },
+    #       },
     #     },
     #     client_token: "ClientToken",
     #   })
@@ -5657,12 +5675,14 @@ module Aws::BedrockAgentCore
     #   resp.payment_manager_arn #=> String
     #   resp.payment_session_id #=> String
     #   resp.payment_instrument_id #=> String
-    #   resp.payment_type #=> String, one of "CRYPTO_X402", "MPP"
+    #   resp.payment_type #=> String, one of "CRYPTO_X402", "MPP", "AWS_BILLING_X402"
     #   resp.status #=> String, one of "PROOF_GENERATED"
     #   resp.payment_output.crypto_x402.version #=> String
     #   resp.payment_output.mpp.version #=> String
     #   resp.payment_output.mpp.selected_payment_id #=> String
     #   resp.payment_output.mpp.payment_credential #=> String
+    #   resp.payment_output.aws_billing_x402.version #=> String
+    #   resp.payment_output.aws_billing_x402.payment_token #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #
@@ -7377,7 +7397,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

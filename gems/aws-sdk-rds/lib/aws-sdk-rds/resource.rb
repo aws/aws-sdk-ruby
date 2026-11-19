@@ -126,7 +126,9 @@ module Aws::RDS
     #       },
     #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
+    #     enable_vpc_networking: false,
     #     with_express_configuration: false,
+    #     enable_internet_access_gateway: false,
     #     associated_roles: [
     #       {
     #         role_arn: "IAMRoleArn", # required
@@ -220,11 +222,17 @@ module Aws::RDS
     # @option options [Array<String>] :vpc_security_group_ids
     #   A list of EC2 VPC security groups to associate with this DB cluster.
     #
+    #   Valid only for DB clusters inside a VPC. Don't specify it when you
+    #   set `EnableVPCNetworking` to `false`.
+    #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [String] :db_subnet_group_name
     #   A DB subnet group to associate with this DB cluster.
     #
     #   This setting is required to create a Multi-AZ DB cluster.
+    #
+    #   Valid only for DB clusters inside a VPC. Don't specify it when you
+    #   set `EnableVPCNetworking` to `false`.
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -782,6 +790,8 @@ module Aws::RDS
     #   For more information, see [ Working with a DB instance in a VPC][1] in
     #   the *Amazon Aurora User Guide.*
     #
+    #   Don't specify it when you set `EnableVPCNetworking` to `false`.
+    #
     #   Valid for Cluster Type: Aurora DB clusters only
     #
     #   Valid Values: `IPV4 | DUAL`
@@ -1023,13 +1033,54 @@ module Aws::RDS
     #
     #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
     #   engines.
+    # @option options [Boolean] :enable_vpc_networking
+    #   Specifies whether VPC networking is enabled for the DB cluster. Set to
+    #   `false` to create a DB cluster without VPC networking.
+    #
+    #   A DB cluster without VPC networking needs an internet access gateway
+    #   and IAM database authentication. Set `EnableInternetAccessGateway` and
+    #   `EnableIAMDatabaseAuthentication` to `true`, and set
+    #   `MasterUserAuthenticationType` to `iam-db-auth`.
+    #
+    #   Default: `true`. With `WithExpressConfiguration`, the default is
+    #   `false`.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL DB clusters only
     # @option options [Boolean] :with_express_configuration
     #   Specifies to create an Aurora DB Cluster with express configuration in
     #   seconds. Express configuration provides a cluster with a writer
     #   instance and feature specific values set to all other input parameters
     #   of this API.
     #
+    #   By default, a DB cluster with express configuration doesn't use VPC
+    #   networking. You connect to it over the internet through an internet
+    #   access gateway.
+    #
+    #   To create the DB cluster in a VPC instead, set `EnableVPCNetworking`
+    #   to `true` and `EnableInternetAccessGateway` to `false`. You can also
+    #   specify `DBSubnetGroupName`, `VpcSecurityGroupIds`, and `NetworkType`.
+    #   If you don't specify `DBSubnetGroupName`, the DB cluster uses the
+    #   default DB subnet group for your Amazon Web Services account, in your
+    #   default VPC.
+    #
+    #   A DB cluster with express configuration in a VPC takes longer to
+    #   become available than one without VPC networking.
+    #
     #   Valid for Cluster Type: Aurora DB clusters
+    # @option options [Boolean] :enable_internet_access_gateway
+    #   Specifies whether the DB cluster uses an internet access gateway. With
+    #   an internet access gateway, you connect to the DB cluster over the
+    #   internet without a VPC.
+    #
+    #   Set to `true` only when you set `EnableVPCNetworking` to `false`. A DB
+    #   cluster can't use VPC networking and an internet access gateway at
+    #   the same time.
+    #
+    #   Default: `false`. With `WithExpressConfiguration`, the default is
+    #   `true`. To create a DB cluster with express configuration in a VPC,
+    #   set this parameter to `false`.
+    #
+    #   Valid for Cluster Type: Aurora PostgreSQL DB clusters only
     # @option options [Array<Types::DBClusterAssociatedRole>] :associated_roles
     #   A list of Amazon Web Services Identity and Access Management (IAM)
     #   roles to associate with the DB cluster. Each role grants the DB

@@ -501,6 +501,7 @@ module Aws::MediaLive
       attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       attr_accessor channel_security_groups: ::Array[::String]
       attr_accessor inference_settings: Types::DescribeInferenceSettings
+      attr_accessor jpeg_xs_input_specification: Types::JpegXsInputSpecification
       SENSITIVE: []
     end
 
@@ -538,6 +539,7 @@ module Aws::MediaLive
       attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       attr_accessor channel_security_groups: ::Array[::String]
       attr_accessor inference_settings: Types::DescribeInferenceSettings
+      attr_accessor jpeg_xs_input_specification: Types::JpegXsInputSpecification
       SENSITIVE: []
     end
 
@@ -590,6 +592,7 @@ module Aws::MediaLive
       attr_accessor linked_channel_settings: Types::LinkedChannelSettings
       attr_accessor channel_security_groups: ::Array[::String]
       attr_accessor inference_settings: Types::InferenceSettings
+      attr_accessor jpeg_xs_input_specification: Types::JpegXsInputSpecification
       SENSITIVE: []
     end
 
@@ -614,6 +617,7 @@ module Aws::MediaLive
       attr_accessor linked_channel_settings: Types::LinkedChannelSettings
       attr_accessor channel_security_groups: ::Array[::String]
       attr_accessor inference_settings: Types::InferenceSettings
+      attr_accessor jpeg_xs_input_specification: Types::JpegXsInputSpecification
       SENSITIVE: []
     end
 
@@ -806,6 +810,7 @@ module Aws::MediaLive
       attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       attr_accessor channel_security_groups: ::Array[::String]
       attr_accessor inference_settings: Types::DescribeInferenceSettings
+      attr_accessor jpeg_xs_input_specification: Types::JpegXsInputSpecification
       SENSITIVE: []
     end
 
@@ -943,6 +948,7 @@ module Aws::MediaLive
       attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       attr_accessor channel_security_groups: ::Array[::String]
       attr_accessor inference_settings: Types::DescribeInferenceSettings
+      attr_accessor jpeg_xs_input_specification: Types::JpegXsInputSpecification
       SENSITIVE: []
     end
 
@@ -1935,7 +1941,7 @@ module Aws::MediaLive
     end
 
     class InputSpecification
-      attr_accessor codec: ("MPEG2" | "AVC" | "HEVC")
+      attr_accessor codec: ("MPEG2" | "AVC" | "HEVC" | "JPEGXS")
       attr_accessor maximum_bitrate: ("MAX_10_MBPS" | "MAX_20_MBPS" | "MAX_50_MBPS")
       attr_accessor resolution: ("SD" | "HD" | "UHD")
       SENSITIVE: []
@@ -2794,8 +2800,8 @@ module Aws::MediaLive
 
     class ReservationResourceSpecification
       attr_accessor channel_class: ("STANDARD" | "SINGLE_PIPELINE")
-      attr_accessor codec: ("MPEG2" | "AVC" | "HEVC" | "AUDIO" | "LINK" | "AV1")
-      attr_accessor maximum_bitrate: ("MAX_10_MBPS" | "MAX_20_MBPS" | "MAX_50_MBPS")
+      attr_accessor codec: ("MPEG2" | "AVC" | "HEVC" | "AUDIO" | "LINK" | "AV1" | "JPEGXS")
+      attr_accessor maximum_bitrate: ("MAX_10_MBPS" | "MAX_20_MBPS" | "MAX_50_MBPS" | "MAX_500_MBPS")
       attr_accessor maximum_framerate: ("MAX_30_FPS" | "MAX_60_FPS")
       attr_accessor resolution: ("SD" | "HD" | "FHD" | "UHD")
       attr_accessor resource_type: ("INPUT" | "OUTPUT" | "MULTIPLEX" | "CHANNEL")
@@ -3006,6 +3012,7 @@ module Aws::MediaLive
       attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       attr_accessor channel_security_groups: ::Array[::String]
       attr_accessor inference_settings: Types::DescribeInferenceSettings
+      attr_accessor jpeg_xs_input_specification: Types::JpegXsInputSpecification
       SENSITIVE: []
     end
 
@@ -3126,6 +3133,7 @@ module Aws::MediaLive
       attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       attr_accessor channel_security_groups: ::Array[::String]
       attr_accessor inference_settings: Types::DescribeInferenceSettings
+      attr_accessor jpeg_xs_input_specification: Types::JpegXsInputSpecification
       SENSITIVE: []
     end
 
@@ -3322,6 +3330,7 @@ module Aws::MediaLive
       attr_accessor channel_security_groups: ::Array[::String]
       attr_accessor inference_settings: Types::InferenceSettings
       attr_accessor special_router_settings: Types::SpecialRouterSettings
+      attr_accessor jpeg_xs_input_specification: Types::JpegXsInputSpecification
       SENSITIVE: []
     end
 
@@ -3361,6 +3370,7 @@ module Aws::MediaLive
       attr_accessor channel_security_groups: ::Array[::String]
       attr_accessor inference_settings: Types::InferenceSettings
       attr_accessor special_router_settings: Types::SpecialRouterSettings
+      attr_accessor jpeg_xs_input_specification: Types::JpegXsInputSpecification
       SENSITIVE: []
     end
 
@@ -3676,6 +3686,7 @@ module Aws::MediaLive
       attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       attr_accessor channel_security_groups: ::Array[::String]
       attr_accessor inference_settings: Types::DescribeInferenceSettings
+      attr_accessor jpeg_xs_input_specification: Types::JpegXsInputSpecification
       SENSITIVE: []
     end
 
@@ -6149,6 +6160,13 @@ module Aws::MediaLive
 
     class PerceptualFilterSettings
       attr_accessor strength: ("STRENGTH_1" | "STRENGTH_2")
+      SENSITIVE: []
+    end
+
+    class JpegXsInputSpecification
+      attr_accessor codec: ("MPEG2" | "AVC" | "HEVC" | "JPEGXS")
+      attr_accessor maximum_bitrate: ("MAX_500_MBPS")
+      attr_accessor resolution: ("HD")
       SENSITIVE: []
     end
   end

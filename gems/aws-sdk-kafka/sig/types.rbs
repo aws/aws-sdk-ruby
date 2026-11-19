@@ -19,6 +19,40 @@ module Aws::Kafka
       SENSITIVE: []
     end
 
+    class AssessmentFinding
+      attr_accessor category: ("INFRASTRUCTURE" | "BROKER_CONFIGURATION" | "TOPIC_CONFIGURATION" | "CAPACITY" | "HEALTH")
+      attr_accessor finding_id: ::String
+      attr_accessor message: ::String
+      attr_accessor remediation: Types::FindingRemediation
+      attr_accessor resource: ::String
+      attr_accessor severity: ("ERROR" | "WARNING" | "INFO")
+      SENSITIVE: []
+    end
+
+    class AssessmentInfo
+      attr_accessor assessment_arn: ::String
+      attr_accessor assessment_type: ("UPDATE_BROKER_TYPE")
+      attr_accessor cluster_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETE" | "FAILED" | "DELETING")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class AssessmentParameters
+      attr_accessor target_instance_type: ::String
+      SENSITIVE: []
+    end
+
+    class AssessmentSummary
+      attr_accessor by_category: ::Hash[::String, ::Integer]
+      attr_accessor by_severity: ::Hash[::String, ::Integer]
+      attr_accessor findings_capped: bool
+      attr_accessor has_blocking_findings: bool
+      attr_accessor total_findings: ::Integer
+      SENSITIVE: []
+    end
+
     class AuthorizerLogs
       attr_accessor cloud_watch_logs: Types::CloudWatchLogs
       attr_accessor firehose: Types::Firehose
@@ -72,6 +106,7 @@ module Aws::Kafka
     class BrokerNodeInfo
       attr_accessor attached_eni_id: ::String
       attr_accessor broker_id: ::Float
+      attr_accessor broker_node_type: ("STANDARD" | "EXPRESS")
       attr_accessor client_subnet: ::String
       attr_accessor client_vpc_ip_address: ::String
       attr_accessor current_broker_software_info: Types::BrokerSoftwareInfo
@@ -83,6 +118,12 @@ module Aws::Kafka
       attr_accessor configuration_arn: ::String
       attr_accessor configuration_revision: ::Integer
       attr_accessor kafka_version: ::String
+      SENSITIVE: []
+    end
+
+    class BrokerTypeUpgradeInfo
+      attr_accessor topic_reassignment_mode: ("AUTO" | "MANUAL")
+      attr_accessor topic_reassignment_operation_arn: ::String
       SENSITIVE: []
     end
 
@@ -105,6 +146,23 @@ module Aws::Kafka
     class ChannelStateInfo
       attr_accessor code: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAssessmentRequest
+      attr_accessor assessment_parameters: Types::AssessmentParameters
+      attr_accessor assessment_type: ("UPDATE_BROKER_TYPE")
+      attr_accessor cluster_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateAssessmentResponse
+      attr_accessor assessment_arn: ::String
+      attr_accessor assessment_type: ("UPDATE_BROKER_TYPE")
+      attr_accessor cluster_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETE" | "FAILED" | "DELETING")
       SENSITIVE: []
     end
 
@@ -165,6 +223,7 @@ module Aws::Kafka
     end
 
     class ClusterOperationInfo
+      attr_accessor broker_type_upgrade_info: Types::BrokerTypeUpgradeInfo
       attr_accessor client_request_id: ::String
       attr_accessor cluster_arn: ::String
       attr_accessor creation_time: ::Time
@@ -205,6 +264,7 @@ module Aws::Kafka
     end
 
     class ClusterOperationV2Provisioned
+      attr_accessor broker_type_upgrade_info: Types::BrokerTypeUpgradeInfo
       attr_accessor operation_steps: ::Array[Types::ClusterOperationStep]
       attr_accessor source_cluster_info: Types::MutableClusterInfo
       attr_accessor target_cluster_info: Types::MutableClusterInfo
@@ -418,6 +478,18 @@ module Aws::Kafka
       SENSITIVE: []
     end
 
+    class DeleteAssessmentRequest
+      attr_accessor assessment_arn: ::String
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAssessmentResponse
+      attr_accessor assessment_arn: ::String
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETE" | "FAILED" | "DELETING")
+      SENSITIVE: []
+    end
+
     class DeleteClusterRequest
       attr_accessor cluster_arn: ::String
       attr_accessor current_version: ::String
@@ -474,6 +546,26 @@ module Aws::Kafka
     class DeleteVpcConnectionResponse
       attr_accessor vpc_connection_arn: ::String
       attr_accessor state: ("CREATING" | "AVAILABLE" | "INACTIVE" | "DEACTIVATING" | "DELETING" | "FAILED" | "REJECTED" | "REJECTING")
+      SENSITIVE: []
+    end
+
+    class DescribeAssessmentRequest
+      attr_accessor assessment_arn: ::String
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAssessmentResponse
+      attr_accessor assessment_arn: ::String
+      attr_accessor assessment_parameters: Types::AssessmentParameters
+      attr_accessor assessment_type: ("UPDATE_BROKER_TYPE")
+      attr_accessor cluster_arn: ::String
+      attr_accessor completion_time: ::Time
+      attr_accessor creation_time: ::Time
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETE" | "FAILED" | "DELETING")
+      attr_accessor status_message: ::String
+      attr_accessor summary: Types::AssessmentSummary
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -561,6 +653,29 @@ module Aws::Kafka
       SENSITIVE: []
     end
 
+    class DescribeTopicReassignmentRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor topic_reassignment_operation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTopicReassignmentResponse
+      attr_accessor cluster_arn: ::String
+      attr_accessor completed_topics: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor error_info: Types::ErrorInfo
+      attr_accessor last_update_time: ::Time
+      attr_accessor migrated_partitions: ::Integer
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "STOPPING" | "COMPLETE" | "FAILED" | "STOPPED")
+      attr_accessor target_instance_type: ::String
+      attr_accessor topic_reassignment_operation_arn: ::String
+      attr_accessor topics_to_exclude: ::Array[::String]
+      attr_accessor topics_to_include: ::Array[::String]
+      attr_accessor total_partitions: ::Integer
+      attr_accessor total_topics: ::Integer
+      SENSITIVE: []
+    end
+
     class DescribeTopicRequest
       attr_accessor cluster_arn: ::String
       attr_accessor topic_name: ::String
@@ -589,6 +704,7 @@ module Aws::Kafka
       attr_accessor partition_count: ::Integer
       attr_accessor configs: ::String
       attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE")
+      attr_accessor replica_ids: ::Array[::Integer]
       SENSITIVE: []
     end
 
@@ -690,6 +806,12 @@ module Aws::Kafka
     class Error
       attr_accessor invalid_parameter: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FindingRemediation
+      attr_accessor action: ::String
+      attr_accessor documentation_url: ::String
       SENSITIVE: []
     end
 
@@ -852,6 +974,36 @@ module Aws::Kafka
     class KafkaVersion
       attr_accessor version: ::String
       attr_accessor status: ("ACTIVE" | "DEPRECATED")
+      SENSITIVE: []
+    end
+
+    class ListAssessmentFindingsRequest
+      attr_accessor assessment_arn: ::String
+      attr_accessor category: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor severity: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssessmentFindingsResponse
+      attr_accessor findings: ::Array[Types::AssessmentFinding]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssessmentsRequest
+      attr_accessor assessment_type: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssessmentsResponse
+      attr_accessor assessments: ::Array[Types::AssessmentInfo]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1193,6 +1345,20 @@ module Aws::Kafka
       SENSITIVE: []
     end
 
+    class ListTopicReassignmentsRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor status_filter: ::String
+      SENSITIVE: []
+    end
+
+    class ListTopicReassignmentsResponse
+      attr_accessor next_token: ::String
+      attr_accessor reassignments: ::Array[Types::TopicReassignmentInfo]
+      SENSITIVE: []
+    end
+
     class ListTopicsRequest
       attr_accessor cluster_arn: ::String
       attr_accessor max_results: ::Integer
@@ -1411,9 +1577,37 @@ module Aws::Kafka
       SENSITIVE: []
     end
 
+    class StartTopicReassignmentRequest
+      attr_accessor client_token: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor target_instance_type: ::String
+      attr_accessor topics_to_exclude: ::Array[::String]
+      attr_accessor topics_to_include: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StartTopicReassignmentResponse
+      attr_accessor cluster_arn: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "STOPPING" | "COMPLETE" | "FAILED" | "STOPPED")
+      attr_accessor topic_reassignment_operation_arn: ::String
+      SENSITIVE: []
+    end
+
     class StateInfo
       attr_accessor code: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StopTopicReassignmentRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor topic_reassignment_operation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopTopicReassignmentResponse
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "STOPPING" | "COMPLETE" | "FAILED" | "STOPPED")
+      attr_accessor topic_reassignment_operation_arn: ::String
       SENSITIVE: []
     end
 
@@ -1430,6 +1624,16 @@ module Aws::Kafka
     class TagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TopicReassignmentInfo
+      attr_accessor completed_topics: ::Integer
+      attr_accessor creation_time: ::Time
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "STOPPING" | "COMPLETE" | "FAILED" | "STOPPED")
+      attr_accessor target_instance_type: ::String
+      attr_accessor topic_reassignment_operation_arn: ::String
+      attr_accessor total_topics: ::Integer
       SENSITIVE: []
     end
 
@@ -1472,6 +1676,7 @@ module Aws::Kafka
       attr_accessor replication_factor: ::Integer
       attr_accessor partition_count: ::Integer
       attr_accessor out_of_sync_replica_count: ::Integer
+      attr_accessor replica_ids: ::Array[::Integer]
       SENSITIVE: []
     end
 
@@ -1568,6 +1773,7 @@ module Aws::Kafka
       attr_accessor cluster_arn: ::String
       attr_accessor current_version: ::String
       attr_accessor target_instance_type: ::String
+      attr_accessor topic_reassignment: ("AUTO" | "MANUAL")
       SENSITIVE: []
     end
 

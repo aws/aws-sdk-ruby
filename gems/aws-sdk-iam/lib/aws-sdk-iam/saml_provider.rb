@@ -47,6 +47,32 @@ module Aws::IAM
       data[:saml_metadata_document]
     end
 
+    # The trusted identity propagation context provider configuration
+    # associated with the SAML provider. For more information, see
+    # [ContextProvider][1].
+    #
+    # This element is returned only when a trusted identity propagation
+    # context provider is configured for the SAML provider.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
+    # @return [Types::ContextProvider]
+    def context_provider
+      data[:context_provider]
+    end
+
+    # The key hashes associated with the SAML provider, grouped by identity
+    # provider issuer. For more information, see [SAMLKeyHashEntry][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_SAMLKeyHashEntry.html
+    # @return [Array<Types::SAMLKeyHashEntry>]
+    def saml_key_hashes
+      data[:saml_key_hashes]
+    end
+
     # The date and time when the SAML provider was created.
     # @return [Time]
     def create_date
@@ -81,6 +107,40 @@ module Aws::IAM
     # @return [Array<Types::SAMLPrivateKey>]
     def private_key_list
       data[:private_key_list]
+    end
+
+    # The Amazon Resource Name (ARN) of the IAM Identity Center instance
+    # associated with the SAML provider.
+    #
+    # For the format, see [InstanceMetadata][1] in the *IAM Identity Center
+    # API Reference*.
+    #
+    # This element is returned only when an IAM Identity Center instance is
+    # associated with the SAML provider.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
+    # @return [String]
+    def identity_center_instance_arn
+      data[:identity_center_instance_arn]
+    end
+
+    # The Amazon Resource Name (ARN) of the identity store that is resolved
+    # from the associated IAM Identity Center instance.
+    #
+    # For the format, see [InstanceMetadata][1] in the *IAM Identity Center
+    # API Reference*.
+    #
+    # This element is returned only when an IAM Identity Center instance is
+    # associated with the SAML provider.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
+    # @return [String]
+    def identity_store_arn
+      data[:identity_store_arn]
     end
 
     # @!endgroup
@@ -241,6 +301,20 @@ module Aws::IAM
     #     assertion_encryption_mode: "Required", # accepts Required, Allowed
     #     add_private_key: "privateKeyType",
     #     remove_private_key: "privateKeyIdType",
+    #     context_provider: {
+    #       key_definition_list: [
+    #         {
+    #           source_key: "contextProviderSourceKeyType", # required
+    #           target_key: "contextProviderTargetKeyType",
+    #         },
+    #       ],
+    #       subject_source_key: "contextProviderSourceKeyType", # required
+    #       subject_type_value: "subjectTypeValueType",
+    #       subject_type_source_key: "contextProviderSourceKeyType",
+    #     },
+    #     identity_center_instance_arn: "identityCenterInstanceArnType",
+    #     remove_context_provider: false,
+    #     remove_identity_center_instance: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :saml_metadata_document
@@ -258,6 +332,35 @@ module Aws::IAM
     #   encryption algorithm to decrypt SAML assertions.
     # @option options [String] :remove_private_key
     #   The Key ID of the private key to remove.
+    # @option options [Types::ContextProvider] :context_provider
+    #   The trusted identity propagation context provider configuration to
+    #   associate with the SAML provider. This replaces the existing context
+    #   provider configuration. For more information, see
+    #   [ContextProvider][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
+    # @option options [String] :identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance to
+    #   associate with the SAML provider.
+    #
+    #   For the format, see [InstanceMetadata][1] in the *IAM Identity Center
+    #   API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
+    # @option options [Boolean] :remove_context_provider
+    #   Specifies whether to remove the existing trusted identity propagation
+    #   context provider configuration from the SAML provider. When set to
+    #   `true`, the context provider is removed. This parameter is mutually
+    #   exclusive with `ContextProvider`.
+    # @option options [Boolean] :remove_identity_center_instance
+    #   Specifies whether to disassociate the IAM Identity Center instance
+    #   from the SAML provider. When set to `true`, the instance is
+    #   disassociated. This parameter is mutually exclusive with
+    #   `IdentityCenterInstanceArn`.
     # @return [Types::UpdateSAMLProviderResponse]
     def update(options = {})
       options = options.merge(saml_provider_arn: @arn)

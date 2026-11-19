@@ -86,6 +86,11 @@ module Aws::RTBFabric
     #   The connectivity type of the link.
     #   @return [String]
     #
+    # @!attribute [rw] error_details
+    #   The causes of the failure, such as a deleted subnet. Present only
+    #   when the resource has failed.
+    #   @return [Array<Types::ErrorDetail>]
+    #
     # @!attribute [rw] link_id
     #   The unique identifier of the link.
     #   @return [String]
@@ -104,6 +109,7 @@ module Aws::RTBFabric
       :attributes,
       :log_settings,
       :connectivity_type,
+      :error_details,
       :link_id)
       SENSITIVE = []
       include Aws::Structure
@@ -236,6 +242,80 @@ module Aws::RTBFabric
       :auto_scaling_group_names,
       :role_arn,
       :health_check_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A module that you can attach, as ListAvailableModules returns it.
+    # ListAvailableModules and GetAvailableModule never return how a module
+    # is implemented.
+    #
+    # @!attribute [rw] module_id
+    #   The module's ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] module_arn
+    #   The module's ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] module_name
+    #   A label, not unique: modules can share a name.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_type
+    #   The type of access that you have to the module.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_status
+    #   Specifies whether your access to the module is current.
+    #   @return [String]
+    #
+    # @!attribute [rw] marketplace_product_id
+    #   The Marketplace product the module is sold under. Present only when
+    #   subscriptionType is MARKETPLACE.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/AvailableModuleSummary AWS API Documentation
+    #
+    class AvailableModuleSummary < Struct.new(
+      :module_id,
+      :module_arn,
+      :module_name,
+      :subscription_type,
+      :subscription_status,
+      :marketplace_product_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A version of a module that you can attach, as
+    # ListAvailableModuleVersions returns it. ListAvailableModuleVersions
+    # and GetAvailableModuleVersion never return how a version is
+    # implemented.
+    #
+    # @!attribute [rw] version
+    #   The version.
+    #   @return [String]
+    #
+    # @!attribute [rw] module_version_arn
+    #   The version's ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   ACTIVE or DEPRECATED.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the version was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/AvailableModuleVersionSummary AWS API Documentation
+    #
+    class AvailableModuleVersionSummary < Struct.new(
+      :version,
+      :module_version_arn,
+      :status,
+      :created_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -454,6 +534,11 @@ module Aws::RTBFabric
     #   The connectivity type of the link.
     #   @return [String]
     #
+    # @!attribute [rw] error_details
+    #   The causes of the failure, such as a deleted subnet. Present only
+    #   when the resource has failed.
+    #   @return [Array<Types::ErrorDetail>]
+    #
     # @!attribute [rw] link_id
     #   The unique identifier of the link.
     #   @return [String]
@@ -476,6 +561,7 @@ module Aws::RTBFabric
       :attributes,
       :log_settings,
       :connectivity_type,
+      :error_details,
       :link_id,
       :customer_provided_id)
       SENSITIVE = []
@@ -1169,6 +1255,32 @@ module Aws::RTBFabric
       include Aws::Structure
     end
 
+    # Describes one cause of a failure of a resource or an update, with an
+    # error code, a description, and the IDs of the resources involved.
+    #
+    # @!attribute [rw] code
+    #   The error code for what failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_ids
+    #   The IDs of the resources involved, such as a subnet or security
+    #   group.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/ErrorDetail AWS API Documentation
+    #
+    class ErrorDetail < Struct.new(
+      :code,
+      :message,
+      :resource_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the configuration of a filter.
     #
     # @!attribute [rw] criteria
@@ -1198,6 +1310,265 @@ module Aws::RTBFabric
     class FilterCriterion < Struct.new(
       :path,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One flow on a link: a set of modules that runs on the link's bid
+    # requests.
+    #
+    # @!attribute [rw] name
+    #   The flow's name, unique within the link.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline
+    #   The pipeline that the flow's modules run in. In a sequential
+    #   pipeline, each module sees the previous module's output. In a
+    #   phased pipeline, a phase's modules see the prior phase's output,
+    #   not each other's.
+    #   @return [Types::FlowPipeline]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/Flow AWS API Documentation
+    #
+    class Flow < Struct.new(
+      :name,
+      :pipeline)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A version attached to a flow, with its settings.
+    #
+    # @!attribute [rw] name
+    #   The module's name, unique within the flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] module_version_arn
+    #   The version to attach. It must be ACTIVE and available to you (see
+    #   ListAvailableModuleVersions). You can keep a version that's already
+    #   in the link's flows after it's deprecated, but you can't give it
+    #   a higher share of traffic.
+    #   @return [String]
+    #
+    # @!attribute [rw] selected_actions
+    #   The capabilities to turn on, chosen from the version's
+    #   `configurableActions`. If the version exposes one, it's the
+    #   default. If the version exposes more than one, this field is
+    #   required. If it exposes none, omit this field.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failure_mode
+    #   Specifies what happens when the module fails – when its call fails
+    #   or times out, or when an express module's dataset is stale. The
+    #   default is OPEN.
+    #   @return [String]
+    #
+    # @!attribute [rw] activation_percentage
+    #   The percentage of the flow's requests that the module runs on. The
+    #   flow skips the module on the rest of the requests. The default is
+    #   100.
+    #   @return [Float]
+    #
+    # @!attribute [rw] configuration_values
+    #   RTB Fabric validates the value against the version's
+    #   `configurationSchema` and rejects a value that fails with
+    #   ValidationException. Omit it when the schema is empty or fully
+    #   defaulted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/FlowModule AWS API Documentation
+    #
+    class FlowModule < Struct.new(
+      :name,
+      :module_version_arn,
+      :selected_actions,
+      :failure_mode,
+      :activation_percentage,
+      :configuration_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One phase of a phased pipeline. Its modules run concurrently on the
+    # previous phase's output.
+    #
+    # @!attribute [rw] modules
+    #   At most one MUTATE\_REQUEST\_BODY module.
+    #   @return [Array<Types::FlowModule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/FlowPhase AWS API Documentation
+    #
+    class FlowPhase < Struct.new(
+      :modules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # How a flow's modules run. In `sequential`, each module sees the
+    # previous module's output; in `phased`, a phase's modules see the
+    # prior phase's output, not each other's. Set exactly one. New members
+    # can be added, so handle an unknown one.
+    #
+    # @note FlowPipeline is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note FlowPipeline is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FlowPipeline corresponding to the set member.
+    #
+    # @!attribute [rw] sequential
+    #   Modules run in list order. Use it when each module needs the
+    #   previous module's output.
+    #   @return [Types::SequentialPipeline]
+    #
+    # @!attribute [rw] phased
+    #   Phases run in order; a phase's modules run concurrently on the same
+    #   input. Use it when a phase's modules don't depend on each other.
+    #   @return [Types::PhasedPipeline]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/FlowPipeline AWS API Documentation
+    #
+    class FlowPipeline < Struct.new(
+      :sequential,
+      :phased,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Sequential < FlowPipeline; end
+      class Phased < FlowPipeline; end
+      class Unknown < FlowPipeline; end
+    end
+
+    # @!attribute [rw] module_id
+    #   The module's ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetAvailableModuleRequest AWS API Documentation
+    #
+    class GetAvailableModuleRequest < Struct.new(
+      :module_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] module_id
+    #   The module's ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] module_arn
+    #   The module's ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] module_name
+    #   A label, not unique: modules can share a name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The module's description.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_type
+    #   The type of access that you have to the module.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_status
+    #   Specifies whether your access to the module is current.
+    #   @return [String]
+    #
+    # @!attribute [rw] marketplace_product_id
+    #   The Marketplace product the module is sold under. Present only when
+    #   subscriptionType is MARKETPLACE.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the module was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetAvailableModuleResponse AWS API Documentation
+    #
+    class GetAvailableModuleResponse < Struct.new(
+      :module_id,
+      :module_arn,
+      :module_name,
+      :description,
+      :subscription_type,
+      :subscription_status,
+      :marketplace_product_id,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] module_id
+    #   The module's ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetAvailableModuleVersionRequest AWS API Documentation
+    #
+    class GetAvailableModuleVersionRequest < Struct.new(
+      :module_id,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] module_id
+    #   The module's ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version.
+    #   @return [String]
+    #
+    # @!attribute [rw] module_version_arn
+    #   The version's ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   ACTIVE or DEPRECATED.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   The data-access grants the version holds.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] configurable_actions
+    #   The capabilities that you can turn on when you attach the version.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] configuration_schema
+    #   The JSON Schema for the parameters that you can set in
+    #   `configurationValues` when you attach the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] release_notes
+    #   The vendor's release notes.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The time when the version last changed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetAvailableModuleVersionResponse AWS API Documentation
+    #
+    class GetAvailableModuleVersionResponse < Struct.new(
+      :module_id,
+      :version,
+      :module_version_arn,
+      :status,
+      :permissions,
+      :configurable_actions,
+      :configuration_schema,
+      :release_notes,
+      :created_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1239,6 +1610,11 @@ module Aws::RTBFabric
     #   The timestamp of when the certificate association was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] error_details
+    #   The causes of the failure, such as a deleted subnet. Present only
+    #   when the resource has failed.
+    #   @return [Array<Types::ErrorDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetCertificateAssociationResponse AWS API Documentation
     #
     class GetCertificateAssociationResponse < Struct.new(
@@ -1246,7 +1622,8 @@ module Aws::RTBFabric
       :acm_certificate_arn,
       :status,
       :associated_at,
-      :updated_at)
+      :updated_at,
+      :error_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1317,6 +1694,22 @@ module Aws::RTBFabric
     #   The connectivity type of the link.
     #   @return [String]
     #
+    # @!attribute [rw] error_details
+    #   The causes of the failure, such as a deleted subnet. Present only
+    #   when the resource has failed.
+    #   @return [Array<Types::ErrorDetail>]
+    #
+    # @!attribute [rw] lock_token
+    #   The link's concurrency token. Pass it to PutLinkFlows unchanged; it
+    #   changes whenever the link does.
+    #   @return [String]
+    #
+    # @!attribute [rw] flows
+    #   The link's active flows, in the form PutLinkFlows takes. Empty when
+    #   the link has no modules, and absent when its modules were set with
+    #   UpdateLinkModuleFlow.
+    #   @return [Array<Types::Flow>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetInboundExternalLinkResponse AWS API Documentation
     #
     class GetInboundExternalLinkResponse < Struct.new(
@@ -1331,7 +1724,10 @@ module Aws::RTBFabric
       :updated_at,
       :tags,
       :log_settings,
-      :connectivity_type)
+      :connectivity_type,
+      :error_details,
+      :lock_token,
+      :flows)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1397,6 +1793,11 @@ module Aws::RTBFabric
     #   The connectivity type of the link.
     #   @return [String]
     #
+    # @!attribute [rw] error_details
+    #   The causes of the failure, such as a deleted subnet. Present only
+    #   when the resource has failed.
+    #   @return [Array<Types::ErrorDetail>]
+    #
     # @!attribute [rw] link_id
     #   The unique identifier of the link.
     #   @return [String]
@@ -1414,6 +1815,17 @@ module Aws::RTBFabric
     #   The timeout value in milliseconds.
     #   @return [Integer]
     #
+    # @!attribute [rw] lock_token
+    #   The link's concurrency token. Pass it to PutLinkFlows unchanged; it
+    #   changes whenever the link does.
+    #   @return [String]
+    #
+    # @!attribute [rw] flows
+    #   The link's active flows, in the form PutLinkFlows takes. Empty when
+    #   the link has no modules, and absent when its modules were set with
+    #   UpdateLinkModuleFlow.
+    #   @return [Array<Types::Flow>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetLinkResponse AWS API Documentation
     #
     class GetLinkResponse < Struct.new(
@@ -1428,10 +1840,13 @@ module Aws::RTBFabric
       :attributes,
       :log_settings,
       :connectivity_type,
+      :error_details,
       :link_id,
       :tags,
       :http_responder_allowed,
-      :timeout_in_millis)
+      :timeout_in_millis,
+      :lock_token,
+      :flows)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1495,6 +1910,11 @@ module Aws::RTBFabric
     #   specified resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] error_details
+    #   The causes of the failure, such as a deleted subnet. Present only
+    #   when the resource has failed.
+    #   @return [Array<Types::ErrorDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetLinkRoutingRuleResponse AWS API Documentation
     #
     class GetLinkRoutingRuleResponse < Struct.new(
@@ -1506,7 +1926,8 @@ module Aws::RTBFabric
       :status,
       :created_at,
       :updated_at,
-      :tags)
+      :tags,
+      :error_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1577,6 +1998,22 @@ module Aws::RTBFabric
     #   The connectivity type of the link.
     #   @return [String]
     #
+    # @!attribute [rw] error_details
+    #   The causes of the failure, such as a deleted subnet. Present only
+    #   when the resource has failed.
+    #   @return [Array<Types::ErrorDetail>]
+    #
+    # @!attribute [rw] lock_token
+    #   The link's concurrency token. Pass it to PutLinkFlows unchanged; it
+    #   changes whenever the link does.
+    #   @return [String]
+    #
+    # @!attribute [rw] flows
+    #   The link's active flows, in the form PutLinkFlows takes. Empty when
+    #   the link has no modules, and absent when its modules were set with
+    #   UpdateLinkModuleFlow.
+    #   @return [Array<Types::Flow>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetOutboundExternalLinkResponse AWS API Documentation
     #
     class GetOutboundExternalLinkResponse < Struct.new(
@@ -1591,7 +2028,10 @@ module Aws::RTBFabric
       :updated_at,
       :tags,
       :log_settings,
-      :connectivity_type)
+      :connectivity_type,
+      :error_details,
+      :lock_token,
+      :flows)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1627,6 +2067,11 @@ module Aws::RTBFabric
     # @!attribute [rw] updated_at
     #   The timestamp of when the requester gateway was updated.
     #   @return [Time]
+    #
+    # @!attribute [rw] error_details
+    #   The causes of the failure, such as a deleted subnet. Present only
+    #   when the resource has failed.
+    #   @return [Array<Types::ErrorDetail>]
     #
     # @!attribute [rw] vpc_id
     #   The unique identifier of the Virtual Private Cloud (VPC).
@@ -1665,6 +2110,7 @@ module Aws::RTBFabric
       :description,
       :created_at,
       :updated_at,
+      :error_details,
       :vpc_id,
       :subnet_ids,
       :security_group_ids,
@@ -1715,6 +2161,11 @@ module Aws::RTBFabric
     # @!attribute [rw] updated_at
     #   The timestamp of when the responder gateway was updated.
     #   @return [Time]
+    #
+    # @!attribute [rw] error_details
+    #   The causes of the failure, such as a deleted subnet. Present only
+    #   when the resource has failed.
+    #   @return [Array<Types::ErrorDetail>]
     #
     # @!attribute [rw] domain_name
     #   The domain name of the responder gateway.
@@ -1795,6 +2246,7 @@ module Aws::RTBFabric
       :description,
       :created_at,
       :updated_at,
+      :error_details,
       :domain_name,
       :port,
       :protocol,
@@ -1809,6 +2261,35 @@ module Aws::RTBFabric
       :gateway_type,
       :external_inbound_endpoint,
       :client_routing_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_id
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_id
+    #   The unique identifier of the update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetUpdateRequest AWS API Documentation
+    #
+    class GetUpdateRequest < Struct.new(
+      :gateway_id,
+      :update_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update
+    #   The update.
+    #   @return [Types::Update]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetUpdateResponse AWS API Documentation
+    #
+    class GetUpdateResponse < Struct.new(
+      :update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1957,6 +2438,52 @@ module Aws::RTBFabric
       include Aws::Structure
     end
 
+    # A requested link configuration.
+    #
+    # @!attribute [rw] log_settings
+    #   Describes the settings for a link log.
+    #   @return [Types::LinkLogSettings]
+    #
+    # @!attribute [rw] timeout_in_millis
+    #   The timeout value in milliseconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/LinkConfigParameters AWS API Documentation
+    #
+    class LinkConfigParameters < Struct.new(
+      :log_settings,
+      :timeout_in_millis)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A requested link flow.
+    #
+    # @note LinkFlowParameters is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of LinkFlowParameters corresponding to the set member.
+    #
+    # @!attribute [rw] modules
+    #   The requested modules.
+    #   @return [Array<Types::ModuleConfiguration>]
+    #
+    # @!attribute [rw] flows
+    #   A link's flows: at most one.
+    #   @return [Array<Types::Flow>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/LinkFlowParameters AWS API Documentation
+    #
+    class LinkFlowParameters < Struct.new(
+      :modules,
+      :flows,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Modules < LinkFlowParameters; end
+      class Flows < LinkFlowParameters; end
+      class Unknown < LinkFlowParameters; end
+    end
+
     # Describes the settings for a link log.
     #
     # @!attribute [rw] application_logs
@@ -1997,6 +2524,11 @@ module Aws::RTBFabric
     #   The timestamp of when the routing rule was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] error_details
+    #   The causes of the failure, such as a deleted subnet. Present only
+    #   when the resource has failed.
+    #   @return [Array<Types::ErrorDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/LinkRoutingRuleSummary AWS API Documentation
     #
     class LinkRoutingRuleSummary < Struct.new(
@@ -2005,7 +2537,125 @@ module Aws::RTBFabric
       :conditions,
       :status,
       :created_at,
-      :updated_at)
+      :updated_at,
+      :error_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The link an update targeted.
+    #
+    # @!attribute [rw] link_id
+    #   The unique identifier of the link.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/LinkTarget AWS API Documentation
+    #
+    class LinkTarget < Struct.new(
+      :link_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] module_id
+    #   The module's ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Lists only versions in this status. Only ACTIVE and DEPRECATED
+    #   versions are listed, so another value returns an empty list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results for each page, from 1 to 10. The
+    #   default is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If nextToken is returned, there are more results available. Make the
+    #   call again using the returned token to retrieve the next page. Keep
+    #   all other arguments unchanged. Each pagination token expires after
+    #   24 hours; using an expired token fails with ValidationException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/ListAvailableModuleVersionsRequest AWS API Documentation
+    #
+    class ListAvailableModuleVersionsRequest < Struct.new(
+      :module_id,
+      :status,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] module_id
+    #   The module's ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] versions
+    #   The versions on this page, highest version first.
+    #   @return [Array<Types::AvailableModuleVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If nextToken is returned, there are more results available. Make the
+    #   call again using the returned token to retrieve the next page. Keep
+    #   all other arguments unchanged. Each pagination token expires after
+    #   24 hours; using an expired token fails with ValidationException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/ListAvailableModuleVersionsResponse AWS API Documentation
+    #
+    class ListAvailableModuleVersionsResponse < Struct.new(
+      :module_id,
+      :versions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subscription_type
+    #   Lists only modules that you have access to this way.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results for each page, from 1 to 10. The
+    #   default is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If nextToken is returned, there are more results available. Make the
+    #   call again using the returned token to retrieve the next page. Keep
+    #   all other arguments unchanged. Each pagination token expires after
+    #   24 hours; using an expired token fails with ValidationException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/ListAvailableModulesRequest AWS API Documentation
+    #
+    class ListAvailableModulesRequest < Struct.new(
+      :subscription_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] modules
+    #   The modules on this page, newest first.
+    #   @return [Array<Types::AvailableModuleSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If nextToken is returned, there are more results available. Make the
+    #   call again using the returned token to retrieve the next page. Keep
+    #   all other arguments unchanged. Each pagination token expires after
+    #   24 hours; using an expired token fails with ValidationException.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/ListAvailableModulesResponse AWS API Documentation
+    #
+    class ListAvailableModulesResponse < Struct.new(
+      :modules,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2220,6 +2870,11 @@ module Aws::RTBFabric
     #   The connectivity type of the link.
     #   @return [String]
     #
+    # @!attribute [rw] error_details
+    #   The causes of the failure, such as a deleted subnet. Present only
+    #   when the resource has failed.
+    #   @return [Array<Types::ErrorDetail>]
+    #
     # @!attribute [rw] link_id
     #   The unique identifier of the link.
     #   @return [String]
@@ -2247,6 +2902,7 @@ module Aws::RTBFabric
       :attributes,
       :log_settings,
       :connectivity_type,
+      :error_details,
       :link_id,
       :tags,
       :public_endpoint)
@@ -2372,6 +3028,71 @@ module Aws::RTBFabric
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_id
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_id
+    #   The ID of a link on this gateway, to list only that link's updates.
+    #   Omit both `linkId` and `ruleId` to list the gateway's own updates.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_id
+    #   The ID of a routing rule, to list only that rule's updates.
+    #   Requires `linkId`, because you address a rule through its link. A
+    #   `ruleId` without `linkId` fails with ValidationException.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Lists only updates of this type.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Lists only updates in this status.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If nextToken is returned, there are more results available. Make the
+    #   call again using the returned token to retrieve the next page. Keep
+    #   all other arguments unchanged.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for each call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/ListUpdatesRequest AWS API Documentation
+    #
+    class ListUpdatesRequest < Struct.new(
+      :gateway_id,
+      :link_id,
+      :rule_id,
+      :type,
+      :status,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] updates
+    #   The updates on this page.
+    #   @return [Array<Types::UpdateSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If nextToken is returned, there are more results available. Make the
+    #   call again using the returned token to retrieve the next page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/ListUpdatesResponse AWS API Documentation
+    #
+    class ListUpdatesResponse < Struct.new(
+      :updates,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2552,6 +3273,95 @@ module Aws::RTBFabric
       include Aws::Structure
     end
 
+    # Phases that run in order; each starts after the previous one
+    # completes.
+    #
+    # @!attribute [rw] phases
+    #   At most 8 modules in total across the phases; more fails with
+    #   ValidationException.
+    #   @return [Array<Types::FlowPhase>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/PhasedPipeline AWS API Documentation
+    #
+    class PhasedPipeline < Struct.new(
+      :phases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_id
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_id
+    #   The unique identifier of the link.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you retry with the
+    #   same token and parameters, you get the original response without an
+    #   error. If you retry with the same token but different parameters,
+    #   the call fails with ValidationException. If you don't provide a
+    #   token, the SDK generates one, and RTB Fabric remembers it for 8
+    #   hours. A retry returns the original `updateId` before `lockToken` is
+    #   checked.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] lock_token
+    #   The concurrency token that you read from GetLink. If the link
+    #   changed since that read, by any operation, the call fails with
+    #   ConflictException.
+    #   @return [String]
+    #
+    # @!attribute [rw] flows
+    #   The link's flows, replacing the current ones. An empty list removes
+    #   every flow.
+    #   @return [Array<Types::Flow>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/PutLinkFlowsRequest AWS API Documentation
+    #
+    class PutLinkFlowsRequest < Struct.new(
+      :gateway_id,
+      :link_id,
+      :client_token,
+      :lock_token,
+      :flows)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_id
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_id
+    #   The unique identifier of the link.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The link's status. A successful call returns PENDING\_UPDATE, and
+    #   the link serves its prior flows until the change completes.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_id
+    #   The ID of the update this call started.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/PutLinkFlowsResponse AWS API Documentation
+    #
+    class PutLinkFlowsResponse < Struct.new(
+      :gateway_id,
+      :link_id,
+      :status,
+      :update_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A key-value pair for query string matching in a routing rule
     # condition.
     #
@@ -2649,6 +3459,11 @@ module Aws::RTBFabric
     #   The connectivity type of the link.
     #   @return [String]
     #
+    # @!attribute [rw] error_details
+    #   The causes of the failure, such as a deleted subnet. Present only
+    #   when the resource has failed.
+    #   @return [Array<Types::ErrorDetail>]
+    #
     # @!attribute [rw] link_id
     #   The unique identifier of the link.
     #   @return [String]
@@ -2667,6 +3482,7 @@ module Aws::RTBFabric
       :attributes,
       :log_settings,
       :connectivity_type,
+      :error_details,
       :link_id)
       SENSITIVE = []
       include Aws::Structure
@@ -2715,6 +3531,100 @@ module Aws::RTBFabric
       include Aws::Structure
     end
 
+    # A requested responder gateway configuration.
+    #
+    # @!attribute [rw] description
+    #   The gateway's description.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_routing_policy
+    #   The gateway's client routing policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The gateway's domain name.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The networking port.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The networking protocol.
+    #   @return [String]
+    #
+    # @!attribute [rw] listener_config
+    #   Listener configuration for the protocols (HTTP, HTTPS, or both)
+    #   accepted by the gateway.
+    #   @return [Types::ListenerConfig]
+    #
+    # @!attribute [rw] trust_store_configuration
+    #   Describes the configuration of a trust store.
+    #   @return [Types::TrustStoreConfiguration]
+    #
+    # @!attribute [rw] managed_endpoint_configuration
+    #   Describes the configuration of a managed endpoint.
+    #   @return [Types::ManagedEndpointConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/ResponderGatewayConfigParameters AWS API Documentation
+    #
+    class ResponderGatewayConfigParameters < Struct.new(
+      :description,
+      :client_routing_policy,
+      :domain_name,
+      :port,
+      :protocol,
+      :listener_config,
+      :trust_store_configuration,
+      :managed_endpoint_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A requested routing rule.
+    #
+    # @!attribute [rw] priority
+    #   WAF-style evaluation priority. Lower number = evaluated first
+    #   (priority 1 before 10). Gaps are allowed (1, 10, 20 is valid). Must
+    #   be between 1 and 1000 inclusive. Uniqueness per link among
+    #   non-deleted rules is enforced at the API layer (HTTP 409 on
+    #   conflict).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] conditions
+    #   The conditions for a routing rule. All specified fields must match
+    #   for the rule to apply (AND logic). At least one condition field must
+    #   be set.
+    #   @return [Types::RuleCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/RoutingRuleParameters AWS API Documentation
+    #
+    class RoutingRuleParameters < Struct.new(
+      :priority,
+      :conditions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The routing rule an update targeted.
+    #
+    # @!attribute [rw] link_id
+    #   The unique identifier of the rule's link.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_id
+    #   Identifier for a routing rule
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/RoutingRuleTarget AWS API Documentation
+    #
+    class RoutingRuleTarget < Struct.new(
+      :link_id,
+      :rule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The conditions for a routing rule. All specified fields must match for
     # the rule to apply (AND logic). At least one condition field must be
     # set.
@@ -2756,6 +3666,21 @@ module Aws::RTBFabric
       :path_exact,
       :query_string_equals,
       :query_string_exists)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Modules that run one after another, each on the previous module's
+    # output.
+    #
+    # @!attribute [rw] modules
+    #   In execution order.
+    #   @return [Array<Types::FlowModule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/SequentialPipeline AWS API Documentation
+    #
+    class SequentialPipeline < Struct.new(
+      :modules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2823,6 +3748,10 @@ module Aws::RTBFabric
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/Unit AWS API Documentation
+    #
+    class Unit < Aws::EmptyStructure; end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to
     #   untag.
@@ -2845,6 +3774,50 @@ module Aws::RTBFabric
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # An accepted configuration change and its status.
+    #
+    # @!attribute [rw] update_id
+    #   The unique identifier of the update.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of change.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the update.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The resource that the update targeted.
+    #   @return [Types::UpdateTarget]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the update was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] parameters
+    #   The changes that the update requested.
+    #   @return [Types::UpdateParameters]
+    #
+    # @!attribute [rw] error_details
+    #   The causes of the failure. Present only when the update has failed.
+    #   @return [Array<Types::ErrorDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/Update AWS API Documentation
+    #
+    class Update < Struct.new(
+      :update_id,
+      :type,
+      :status,
+      :target,
+      :created_at,
+      :parameters,
+      :error_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] client_token
     #   Specifies a unique, case-sensitive identifier that you provide to
@@ -2904,12 +3877,17 @@ module Aws::RTBFabric
     #   The status of the request.
     #   @return [String]
     #
+    # @!attribute [rw] update_id
+    #   The ID of the update this call started.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/UpdateLinkModuleFlowResponse AWS API Documentation
     #
     class UpdateLinkModuleFlowResponse < Struct.new(
       :gateway_id,
       :link_id,
-      :status)
+      :status,
+      :update_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2930,13 +3908,22 @@ module Aws::RTBFabric
     #   The timeout value in milliseconds.
     #   @return [Integer]
     #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier for the request. The SDK
+    #   generates one when you don't.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/UpdateLinkRequest AWS API Documentation
     #
     class UpdateLinkRequest < Struct.new(
       :gateway_id,
       :link_id,
       :log_settings,
-      :timeout_in_millis)
+      :timeout_in_millis,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2949,11 +3936,16 @@ module Aws::RTBFabric
     #   The status of the request.
     #   @return [String]
     #
+    # @!attribute [rw] update_id
+    #   The ID of the update this call started.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/UpdateLinkResponse AWS API Documentation
     #
     class UpdateLinkResponse < Struct.new(
       :link_id,
-      :status)
+      :status,
+      :update_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2982,6 +3974,14 @@ module Aws::RTBFabric
     #   be set.
     #   @return [Types::RuleCondition]
     #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier for the request. The SDK
+    #   generates one when you don't.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/UpdateLinkRoutingRuleRequest AWS API Documentation
     #
     class UpdateLinkRoutingRuleRequest < Struct.new(
@@ -2989,7 +3989,8 @@ module Aws::RTBFabric
       :link_id,
       :rule_id,
       :priority,
-      :conditions)
+      :conditions,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3006,14 +4007,58 @@ module Aws::RTBFabric
     #   The timestamp of when the routing rule was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] update_id
+    #   The ID of the update this call started.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/UpdateLinkRoutingRuleResponse AWS API Documentation
     #
     class UpdateLinkRoutingRuleResponse < Struct.new(
       :rule_id,
       :status,
-      :updated_at)
+      :updated_at,
+      :update_id)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # What an update requested.
+    #
+    # @note UpdateParameters is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of UpdateParameters corresponding to the set member.
+    #
+    # @!attribute [rw] responder_gateway_config
+    #   The requested responder gateway configuration.
+    #   @return [Types::ResponderGatewayConfigParameters]
+    #
+    # @!attribute [rw] link_config
+    #   The requested link configuration.
+    #   @return [Types::LinkConfigParameters]
+    #
+    # @!attribute [rw] link_flow
+    #   The requested link flow.
+    #   @return [Types::LinkFlowParameters]
+    #
+    # @!attribute [rw] routing_rule
+    #   The requested routing rule.
+    #   @return [Types::RoutingRuleParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/UpdateParameters AWS API Documentation
+    #
+    class UpdateParameters < Struct.new(
+      :responder_gateway_config,
+      :link_config,
+      :link_flow,
+      :routing_rule,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ResponderGatewayConfig < UpdateParameters; end
+      class LinkConfig < UpdateParameters; end
+      class LinkFlow < UpdateParameters; end
+      class RoutingRule < UpdateParameters; end
+      class Unknown < UpdateParameters; end
     end
 
     # @!attribute [rw] client_token
@@ -3202,14 +4247,81 @@ module Aws::RTBFabric
     #   [1]: https://docs.aws.amazon.com/rtb-fabric/latest/userguide/working-with-responder-gateways.html#configuring-availability-zone-affinity
     #   @return [String]
     #
+    # @!attribute [rw] update_id
+    #   The ID of the update this call started.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/UpdateResponderGatewayResponse AWS API Documentation
     #
     class UpdateResponderGatewayResponse < Struct.new(
       :gateway_id,
       :status,
-      :client_routing_policy)
+      :client_routing_policy,
+      :update_id)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # A summary of an update.
+    #
+    # @!attribute [rw] update_id
+    #   The unique identifier of the update.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of change.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the update.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the update was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/UpdateSummary AWS API Documentation
+    #
+    class UpdateSummary < Struct.new(
+      :update_id,
+      :type,
+      :status,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # What an update targeted.
+    #
+    # @note UpdateTarget is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of UpdateTarget corresponding to the set member.
+    #
+    # @!attribute [rw] gateway
+    #   The gateway itself.
+    #   @return [Types::Unit]
+    #
+    # @!attribute [rw] link
+    #   A link on the gateway.
+    #   @return [Types::LinkTarget]
+    #
+    # @!attribute [rw] routing_rule
+    #   A routing rule on one of the gateway's links.
+    #   @return [Types::RoutingRuleTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/UpdateTarget AWS API Documentation
+    #
+    class UpdateTarget < Struct.new(
+      :gateway,
+      :link,
+      :routing_rule,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Gateway < UpdateTarget; end
+      class Link < UpdateTarget; end
+      class RoutingRule < UpdateTarget; end
+      class Unknown < UpdateTarget; end
     end
 
     # The request could not be completed because it fails satisfy the

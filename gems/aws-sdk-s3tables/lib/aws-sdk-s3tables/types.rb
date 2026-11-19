@@ -559,6 +559,23 @@ module Aws::S3Tables
       include Aws::Structure
     end
 
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) of the replica table to disassociate
+    #   from replication.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/DisassociateTableReplicationRequest AWS API Documentation
+    #
+    class DisassociateTableReplicationRequest < Struct.new(
+      :table_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/DisassociateTableReplicationResponse AWS API Documentation
+    #
+    class DisassociateTableReplicationResponse < Aws::EmptyStructure; end
+
     # Configuration specifying how data should be encrypted. This structure
     # defines the encryption algorithm and optional KMS key to be used for
     # server-side encryption.

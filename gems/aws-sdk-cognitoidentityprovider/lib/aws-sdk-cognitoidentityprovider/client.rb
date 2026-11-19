@@ -4439,6 +4439,86 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Creates a Client ID Metadata Document (CIMD) policy for an app client.
+    # A CIMD policy lets OAuth clients identify themselves to your user pool
+    # with an HTTPS URL as their client ID. Amazon Cognito retrieves the
+    # client metadata document from that URL and accepts the client only
+    # when the URL matches one of the URL patterns in the policy.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool where you want to create the CIMD policy.
+    #
+    # @option params [required, String] :client_id
+    #   The ID of the app client that you want to associate with the CIMD
+    #   policy.
+    #
+    # @option params [required, String] :policy_name
+    #   A friendly name for the CIMD policy.
+    #
+    # @option params [Integer] :cache_duration
+    #   The length of time, in seconds, that Amazon Cognito caches a client
+    #   metadata document that it retrieved from a URL that matches the
+    #   policy. The value must be between 86,400 seconds (one day) and
+    #   31,556,952 seconds (one year).
+    #
+    # @option params [required, Array<String>] :url_patterns
+    #   One to five HTTPS URL patterns. Amazon Cognito accepts a client ID
+    #   metadata document URL only when it matches one of these patterns.
+    #   Patterns can contain the `*` wildcard character.
+    #
+    # @return [Types::CreateCIMDPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCIMDPolicyResponse#cimd_policy #cimd_policy} => Types::CIMDPolicyType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_cimd_policy({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     client_id: "ClientIdType", # required
+    #     policy_name: "CIMDPolicyNameType", # required
+    #     cache_duration: 1,
+    #     url_patterns: ["URLPatternType"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cimd_policy.user_pool_id #=> String
+    #   resp.cimd_policy.cimd_policy_id #=> String
+    #   resp.cimd_policy.client_id #=> String
+    #   resp.cimd_policy.policy_name #=> String
+    #   resp.cimd_policy.cache_duration #=> Integer
+    #   resp.cimd_policy.url_patterns #=> Array
+    #   resp.cimd_policy.url_patterns[0] #=> String
+    #   resp.cimd_policy.creation_date #=> Time
+    #   resp.cimd_policy.last_modified_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateCIMDPolicy AWS API Documentation
+    #
+    # @overload create_cimd_policy(params = {})
+    # @param [Hash] params ({})
+    def create_cimd_policy(params = {}, options = {})
+      req = build_request(:create_cimd_policy, params)
+      req.send_request(options)
+    end
+
     # Creates a new group in the specified user pool. For more information
     # about user pool groups, see [Adding groups to a user pool][1].
     #
@@ -6648,6 +6728,26 @@ module Aws::CognitoIdentityProvider
     #   when users renew their sessions with refresh tokens. When disabled,
     #   token refresh issues only ID and access tokens.
     #
+    # @option params [Boolean] :publish_secrets_in_aws_secrets_manager
+    #   Specifies whether Amazon Cognito stores and manages this app client's
+    #   secret in [Amazon Web Services Secrets Manager][1] instead of
+    #   returning the plaintext value. Applies only when `GenerateSecret` is
+    #   `true`. When you set this parameter to `true`, the response returns
+    #   `ClientSecretArn` instead of `ClientSecret`. Amazon Cognito starts the
+    #   first rotation of the secret right away, and then rotates the secret
+    #   every 7 days by default. You can change the rotation schedule in
+    #   Secrets Manager.
+    #
+    #   Defaults to `false`. If you don't set this parameter, Amazon Cognito
+    #   doesn't manage the secret in Secrets Manager and returns the
+    #   plaintext `ClientSecret` value. The Amazon Cognito console turns on
+    #   this option by default when it creates an app client with a generated
+    #   client secret.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+    #
     # @return [Types::CreateUserPoolClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserPoolClientResponse#user_pool_client #user_pool_client} => Types::UserPoolClientType
@@ -6820,6 +6920,7 @@ module Aws::CognitoIdentityProvider
     #       feature: "ENABLED", # required, accepts ENABLED, DISABLED
     #       retry_grace_period_seconds: 1,
     #     },
+    #     publish_secrets_in_aws_secrets_manager: false,
     #   })
     #
     # @example Response structure
@@ -6828,6 +6929,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.client_name #=> String
     #   resp.user_pool_client.client_id #=> String
     #   resp.user_pool_client.client_secret #=> String
+    #   resp.user_pool_client.client_secret_arn #=> String
     #   resp.user_pool_client.last_modified_date #=> Time
     #   resp.user_pool_client.creation_date #=> Time
     #   resp.user_pool_client.refresh_token_validity #=> Integer
@@ -7087,6 +7189,50 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def create_user_pool_replica(params = {}, options = {})
       req = build_request(:create_user_pool_replica, params)
+      req.send_request(options)
+    end
+
+    # Deletes a Client ID Metadata Document (CIMD) policy.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #
+    # @option params [required, String] :cimd_policy_id
+    #   The ID of the CIMD policy that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_cimd_policy({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     cimd_policy_id: "CIMDPolicyIdType", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteCIMDPolicy AWS API Documentation
+    #
+    # @overload delete_cimd_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_cimd_policy(params = {}, options = {})
+      req = build_request(:delete_cimd_policy, params)
       req.send_request(options)
     end
 
@@ -7665,6 +7811,65 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def delete_web_authn_credential(params = {}, options = {})
       req = build_request(:delete_web_authn_credential, params)
+      req.send_request(options)
+    end
+
+    # Returns the configuration of a Client ID Metadata Document (CIMD)
+    # policy.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #
+    # @option params [required, String] :cimd_policy_id
+    #   The ID of the CIMD policy that you want to describe.
+    #
+    # @return [Types::DescribeCIMDPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCIMDPolicyResponse#cimd_policy #cimd_policy} => Types::CIMDPolicyType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_cimd_policy({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     cimd_policy_id: "CIMDPolicyIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cimd_policy.user_pool_id #=> String
+    #   resp.cimd_policy.cimd_policy_id #=> String
+    #   resp.cimd_policy.client_id #=> String
+    #   resp.cimd_policy.policy_name #=> String
+    #   resp.cimd_policy.cache_duration #=> Integer
+    #   resp.cimd_policy.url_patterns #=> Array
+    #   resp.cimd_policy.url_patterns[0] #=> String
+    #   resp.cimd_policy.creation_date #=> Time
+    #   resp.cimd_policy.last_modified_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeCIMDPolicy AWS API Documentation
+    #
+    # @overload describe_cimd_policy(params = {})
+    # @param [Hash] params ({})
+    def describe_cimd_policy(params = {}, options = {})
+      req = build_request(:describe_cimd_policy, params)
       req.send_request(options)
     end
 
@@ -8401,6 +8606,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.client_name #=> String
     #   resp.user_pool_client.client_id #=> String
     #   resp.user_pool_client.client_secret #=> String
+    #   resp.user_pool_client.client_secret_arn #=> String
     #   resp.user_pool_client.last_modified_date #=> Time
     #   resp.user_pool_client.creation_date #=> Time
     #   resp.user_pool_client.refresh_token_validity #=> Integer
@@ -10486,15 +10692,13 @@ module Aws::CognitoIdentityProvider
     # Initiates a point-in-time recovery of a user pool to a time in the
     # past that you specify. This operation is the first step of a recovery
     # and doesn't change your user pool data. Amazon Cognito pauses write
-    # operations in the user pool and generates a recovery preview when
-    # capacity is available in the Amazon Web Services Region, so the
-    # preview might not be available immediately. The preview shows the
-    # number of entities that the recovery creates, updates, and deletes. To
-    # check the status of the recovery and review the preview, make a
-    # request. When the status is `PREVIEW_GENERATED`, apply the recovery
-    # with a request or discard it with a request. The time that it takes to
-    # generate the recovery preview doesn't depend on the size of your user
-    # pool.
+    # operations in the user pool and generates a recovery preview, which
+    # might not be available immediately. The preview shows the number of
+    # entities that the recovery creates, updates, and deletes. To check the
+    # status of the recovery and review the preview, make a request. When
+    # the status is `PREVIEW_GENERATED`, apply the recovery with a request
+    # or discard it with a request. The time that it takes to generate the
+    # recovery preview doesn't depend on the size of your user pool.
     #
     # Point-in-time recovery is a disaster recovery feature. Use it to
     # recover from accidental or unauthorized changes that affect your user
@@ -10506,7 +10710,7 @@ module Aws::CognitoIdentityProvider
     # While a recovery is in progress, Amazon Cognito blocks operations that
     # write to the user pool, for example user sign-up, user creation, and
     # attribute updates. Sign-in and read operations continue to work, with
-    # the following exceptions.
+    # the following exceptions:
     #
     # * Users who must set a new password, set up MFA, or respond to a TOTP
     #   MFA challenge can't complete sign-in. Sign-in with the
@@ -10523,8 +10727,8 @@ module Aws::CognitoIdentityProvider
     # If you don't start or cancel the recovery within 24 hours after you
     # initiate it, the recovery preview expires. Amazon Cognito then resumes
     # write operations and doesn't change your user pool data. The 24-hour
-    # period includes the time that Amazon Cognito waits for available
-    # capacity.
+    # period includes the time that Amazon Cognito takes to generate the
+    # recovery preview.
     #
     # A point-in-time recovery restores user data, including user profiles
     # and attributes, group memberships, passwords, MFA settings, and
@@ -10533,7 +10737,7 @@ module Aws::CognitoIdentityProvider
     # replication settings. Users who changed their password after the
     # recovery point keep their current password.
     #
-    # The following requirements and limits apply to point-in-time recovery.
+    # The following requirements and limits apply to point-in-time recovery:
     #
     # * Your user pool must be on the Essentials or Plus [feature plan][1].
     #   With the Essentials feature plan, you can recover your user pool to
@@ -10639,6 +10843,150 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def initiate_point_in_time_recovery(params = {}, options = {})
       req = build_request(:initiate_point_in_time_recovery, params)
+      req.send_request(options)
+    end
+
+    # Lists the Client ID Metadata Document (CIMD) policies in a user pool.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool whose CIMD policies you want to list.
+    #
+    # @option params [String] :next_token
+    #   This API operation returns a limited number of results. The pagination
+    #   token is an identifier that you can present in an additional API
+    #   request with the same parameters. When you include the pagination
+    #   token, Amazon Cognito returns the next set of items after the current
+    #   list. Subsequent requests return a new pagination token. By use of
+    #   this token, you can paginate through the full list of items.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of CIMD policies that you want Amazon Cognito to
+    #   return in the response.
+    #
+    # @return [Types::ListCIMDPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCIMDPoliciesResponse#next_token #next_token} => String
+    #   * {Types::ListCIMDPoliciesResponse#cimd_policies #cimd_policies} => Array&lt;Types::CIMDPolicySummaryType&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cimd_policies({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     next_token: "PaginationKeyType",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.cimd_policies #=> Array
+    #   resp.cimd_policies[0].cimd_policy_id #=> String
+    #   resp.cimd_policies[0].client_id #=> String
+    #   resp.cimd_policies[0].policy_name #=> String
+    #   resp.cimd_policies[0].cache_duration #=> Integer
+    #   resp.cimd_policies[0].creation_date #=> Time
+    #   resp.cimd_policies[0].last_modified_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListCIMDPolicies AWS API Documentation
+    #
+    # @overload list_cimd_policies(params = {})
+    # @param [Hash] params ({})
+    def list_cimd_policies(params = {}, options = {})
+      req = build_request(:list_cimd_policies, params)
+      req.send_request(options)
+    end
+
+    # Lists the client ID metadata document URLs that Amazon Cognito has
+    # received for a Client ID Metadata Document (CIMD) policy, with the
+    # cache state of each URL.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #
+    # @option params [required, String] :cimd_policy_id
+    #   The ID of the CIMD policy whose client metadata document URLs you want
+    #   to list.
+    #
+    # @option params [String] :next_token
+    #   This API operation returns a limited number of results. The pagination
+    #   token is an identifier that you can present in an additional API
+    #   request with the same parameters. When you include the pagination
+    #   token, Amazon Cognito returns the next set of items after the current
+    #   list. Subsequent requests return a new pagination token. By use of
+    #   this token, you can paginate through the full list of items.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of URLs that you want Amazon Cognito to return in
+    #   the response.
+    #
+    # @return [Types::ListClientMetadataURLsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListClientMetadataURLsResponse#next_token #next_token} => String
+    #   * {Types::ListClientMetadataURLsResponse#client_metadata_urls #client_metadata_urls} => Array&lt;Types::ClientMetadataURLType&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_client_metadata_urls({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     cimd_policy_id: "CIMDPolicyIdType", # required
+    #     next_token: "PaginationKeyType",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.client_metadata_urls #=> Array
+    #   resp.client_metadata_urls[0].url #=> String
+    #   resp.client_metadata_urls[0].cached_date #=> Time
+    #   resp.client_metadata_urls[0].expiration_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListClientMetadataURLs AWS API Documentation
+    #
+    # @overload list_client_metadata_urls(params = {})
+    # @param [Hash] params ({})
+    def list_client_metadata_urls(params = {}, options = {})
+      req = build_request(:list_client_metadata_urls, params)
       req.send_request(options)
     end
 
@@ -14010,6 +14358,144 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Updates the configuration of a Client ID Metadata Document (CIMD)
+    # policy.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #
+    # @option params [required, String] :cimd_policy_id
+    #   The ID of the CIMD policy that you want to update.
+    #
+    # @option params [required, String] :client_id
+    #   The ID of the app client that you want to associate with the CIMD
+    #   policy.
+    #
+    # @option params [String] :policy_name
+    #   A friendly name for the CIMD policy.
+    #
+    # @option params [Integer] :cache_duration
+    #   The length of time, in seconds, that Amazon Cognito caches a client
+    #   metadata document that it retrieved from a URL that matches the
+    #   policy. The value must be between 86,400 seconds (one day) and
+    #   31,556,952 seconds (one year).
+    #
+    # @option params [required, Array<String>] :url_patterns
+    #   One to five HTTPS URL patterns. Amazon Cognito accepts a client ID
+    #   metadata document URL only when it matches one of these patterns.
+    #   Patterns can contain the `*` wildcard character.
+    #
+    # @return [Types::UpdateCIMDPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCIMDPolicyResponse#cimd_policy #cimd_policy} => Types::CIMDPolicyType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cimd_policy({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     cimd_policy_id: "CIMDPolicyIdType", # required
+    #     client_id: "ClientIdType", # required
+    #     policy_name: "CIMDPolicyNameType",
+    #     cache_duration: 1,
+    #     url_patterns: ["URLPatternType"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cimd_policy.user_pool_id #=> String
+    #   resp.cimd_policy.cimd_policy_id #=> String
+    #   resp.cimd_policy.client_id #=> String
+    #   resp.cimd_policy.policy_name #=> String
+    #   resp.cimd_policy.cache_duration #=> Integer
+    #   resp.cimd_policy.url_patterns #=> Array
+    #   resp.cimd_policy.url_patterns[0] #=> String
+    #   resp.cimd_policy.creation_date #=> Time
+    #   resp.cimd_policy.last_modified_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateCIMDPolicy AWS API Documentation
+    #
+    # @overload update_cimd_policy(params = {})
+    # @param [Hash] params ({})
+    def update_cimd_policy(params = {}, options = {})
+      req = build_request(:update_cimd_policy, params)
+      req.send_request(options)
+    end
+
+    # Changes the cache state of a client metadata document URL for a client
+    # ID metadata document (CIMD) policy. Refresh a URL to make Amazon
+    # Cognito retrieve the client metadata document again, or invalidate it
+    # to remove the cached document.
+    #
+    # <note markdown="1"> Amazon Cognito evaluates Identity and Access Management (IAM) policies
+    # in requests for this API operation. For this operation, you must use
+    # IAM credentials to authorize requests, and you must grant yourself the
+    # corresponding IAM permission in a policy.
+    #
+    #  **Learn more**
+    #
+    #  * [Signing Amazon Web Services API Requests][1]
+    #
+    # * [Using the Amazon Cognito user pools API and user pool endpoints][2]
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+    # [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+    #
+    # @option params [required, String] :user_pool_id
+    #   The ID of the user pool that contains the CIMD policy.
+    #
+    # @option params [required, String] :cimd_policy_id
+    #   The ID of the CIMD policy that the URL belongs to.
+    #
+    # @option params [required, String] :url
+    #   The client metadata document URL whose cache state you want to change.
+    #
+    # @option params [required, String] :action
+    #   The action to take on the cached client metadata document. `REFRESH`
+    #   retrieves the document from the URL again. `INVALIDATE` removes the
+    #   cached document.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_client_metadata_url_state({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     cimd_policy_id: "CIMDPolicyIdType", # required
+    #     url: "MetadataURLType", # required
+    #     action: "REFRESH", # required, accepts REFRESH, INVALIDATE
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateClientMetadataURLState AWS API Documentation
+    #
+    # @overload update_client_metadata_url_state(params = {})
+    # @param [Hash] params ({})
+    def update_client_metadata_url_state(params = {}, options = {})
+      req = build_request(:update_client_metadata_url_state, params)
+      req.send_request(options)
+    end
+
     # Updates the status of a the currently signed-in user's device so that
     # it is marked as remembered or not remembered for the purpose of device
     # authentication. Device authentication is a "remember me" mechanism
@@ -15738,6 +16224,33 @@ module Aws::CognitoIdentityProvider
     #   when users renew their sessions with refresh tokens. When disabled,
     #   token refresh issues only ID and access tokens.
     #
+    # @option params [Boolean] :publish_secrets_in_aws_secrets_manager
+    #   Specifies whether Amazon Cognito stores and manages this app client's
+    #   secret in [Amazon Web Services Secrets Manager][1] instead of
+    #   returning the plaintext value. When you set this parameter to `true`,
+    #   the response returns `ClientSecretArn` instead of `ClientSecret`. By
+    #   default, Amazon Cognito rotates the secret every 7 days. You can
+    #   change the rotation schedule in Secrets Manager.
+    #
+    #   Set to `true` to migrate an existing generated secret into Secrets
+    #   Manager, or `false` to move it back to Amazon Cognito and delete the
+    #   Secrets Manager secret. If you omit this parameter, Amazon Cognito
+    #   doesn't change how it manages the existing secret. Applies only to
+    #   app clients that already have a generated secret.
+    #
+    #   When you set it to `true`, Amazon Cognito starts managing the app
+    #   client's secret in Secrets Manager and rotates it right away. If the
+    #   app client has two secrets, that first rotation deletes the older one.
+    #
+    #   When you set this parameter to `false`, Amazon Cognito immediately and
+    #   permanently deletes the Secrets Manager secret. There's no recovery
+    #   window. Applications that read the secret from Secrets Manager can no
+    #   longer get it.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+    #
     # @return [Types::UpdateUserPoolClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateUserPoolClientResponse#user_pool_client #user_pool_client} => Types::UserPoolClientType
@@ -15781,6 +16294,7 @@ module Aws::CognitoIdentityProvider
     #       feature: "ENABLED", # required, accepts ENABLED, DISABLED
     #       retry_grace_period_seconds: 1,
     #     },
+    #     publish_secrets_in_aws_secrets_manager: false,
     #   })
     #
     # @example Response structure
@@ -15789,6 +16303,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.client_name #=> String
     #   resp.user_pool_client.client_id #=> String
     #   resp.user_pool_client.client_secret #=> String
+    #   resp.user_pool_client.client_secret_arn #=> String
     #   resp.user_pool_client.last_modified_date #=> Time
     #   resp.user_pool_client.creation_date #=> Time
     #   resp.user_pool_client.refresh_token_validity #=> Integer
@@ -16175,7 +16690,7 @@ module Aws::CognitoIdentityProvider
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.167.0'
+      context[:gem_version] = '1.168.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

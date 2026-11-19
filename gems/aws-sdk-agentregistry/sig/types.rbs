@@ -97,7 +97,7 @@ module Aws::AgentRegistry
       attr_accessor display_name: ::String
       attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
       attr_accessor record_version: ::String
-      attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "CREATE_PENDING_AUTH" | "UPDATE_PENDING_AUTH")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor descriptor_types: ::Array[::String]
@@ -147,6 +147,12 @@ module Aws::AgentRegistry
       SENSITIVE: [:data]
     end
 
+    class RegistryRecordArtifactDownload
+      attr_accessor sha256: ::String
+      attr_accessor download_url: ::String
+      SENSITIVE: [:download_url]
+    end
+
     class RegistryRecordFilter
       attr_accessor name: ("recordType" | "descriptorType")
       attr_accessor values: ::Array[::String]
@@ -163,10 +169,11 @@ module Aws::AgentRegistry
       attr_accessor record_type: ("MCP" | "AGENT" | "CUSTOM" | "SKILL" | "GATEWAY")
       attr_accessor descriptors: Types::Descriptors
       attr_accessor record_version: ::String
-      attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "CREATE_PENDING_AUTH" | "UPDATE_PENDING_AUTH")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor custom_metadata: untyped
+      attr_accessor artifact: Types::RegistryRecordArtifactDownload
       SENSITIVE: [:description, :custom_metadata]
     end
 
@@ -186,11 +193,15 @@ module Aws::AgentRegistry
       attr_accessor registry_ids: ::Array[::String]
       attr_accessor max_results: ::Integer
       attr_accessor filters: untyped
+      attr_accessor search_type: ("HYBRID" | "SEMANTIC" | "KEYWORD")
+      attr_accessor next_token: ::String
       SENSITIVE: [:search_query, :filters]
     end
 
     class SearchDiscoverableRegistryRecordsResponse
       attr_accessor registry_records: ::Array[Types::RegistryRecordSummary]
+      attr_accessor search_type: ("HYBRID" | "SEMANTIC" | "KEYWORD")
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -206,7 +217,7 @@ module Aws::AgentRegistry
 
     class ValidationException
       attr_accessor message: ::String
-      attr_accessor reason: ("CannotParse" | "FieldValidationFailed" | "IdempotentParameterMismatchException" | "EventInOtherSession" | "ResourceConflict")
+      attr_accessor reason: ("CannotParse" | "FieldValidationFailed" | "IdempotentParameterMismatchException" | "EventInOtherSession" | "ResourceConflict" | "UnsupportedInRegion")
       attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       SENSITIVE: []
     end

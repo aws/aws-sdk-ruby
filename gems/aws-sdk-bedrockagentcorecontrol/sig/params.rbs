@@ -1276,6 +1276,9 @@ module Aws
       }?,
       stripe_privy: {
         credential_provider_arn: ::String
+      }?,
+      aws_billing: {
+        iam_role_arn: ::String
       }?
     }
 

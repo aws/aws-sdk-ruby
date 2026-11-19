@@ -42,6 +42,8 @@ module Aws::S3Tables
     DeleteTableReplicationRequest = Shapes::StructureShape.new(name: 'DeleteTableReplicationRequest')
     DeleteTableRequest = Shapes::StructureShape.new(name: 'DeleteTableRequest')
     DestinationTable = Shapes::StructureShape.new(name: 'DestinationTable')
+    DisassociateTableReplicationRequest = Shapes::StructureShape.new(name: 'DisassociateTableReplicationRequest')
+    DisassociateTableReplicationResponse = Shapes::StructureShape.new(name: 'DisassociateTableReplicationResponse')
     Document = Shapes::DocumentShape.new(name: 'Document', document: true)
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     EncryptionConfigurationKmsKeyArnString = Shapes::StringShape.new(name: 'EncryptionConfigurationKmsKeyArnString')
@@ -370,6 +372,11 @@ module Aws::S3Tables
     DestinationTable.add_member(:schema, Shapes::ShapeRef.new(shape: IcebergSchemaV2, location_name: "schema"))
     DestinationTable.add_member(:iceberg_sort_order, Shapes::ShapeRef.new(shape: IcebergSortOrder, location_name: "icebergSortOrder"))
     DestinationTable.struct_class = Types::DestinationTable
+
+    DisassociateTableReplicationRequest.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableARN, required: true, location: "querystring", location_name: "tableArn"))
+    DisassociateTableReplicationRequest.struct_class = Types::DisassociateTableReplicationRequest
+
+    DisassociateTableReplicationResponse.struct_class = Types::DisassociateTableReplicationResponse
 
     EncryptionConfiguration.add_member(:sse_algorithm, Shapes::ShapeRef.new(shape: SSEAlgorithm, required: true, location_name: "sseAlgorithm"))
     EncryptionConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: EncryptionConfigurationKmsKeyArnString, location_name: "kmsKeyArn"))
@@ -1274,6 +1281,21 @@ module Aws::S3Tables
         o.http_request_uri = "/table-replication"
         o.input = Shapes::ShapeRef.new(shape: DeleteTableReplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:disassociate_table_replication, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateTableReplication"
+        o.http_method = "PUT"
+        o.http_request_uri = "/table-replication/disassociate"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateTableReplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateTableReplicationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)

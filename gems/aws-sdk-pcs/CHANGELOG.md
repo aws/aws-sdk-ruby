@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2026-11-19)
+------------------
+
+* Feature - Added support for Job Submit Plugins in AWS PCS.
+
 1.67.0 (2026-11-18)
 ------------------
 

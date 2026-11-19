@@ -591,6 +591,18 @@ module Aws::IAM
     #     ],
     #     assertion_encryption_mode: "Required", # accepts Required, Allowed
     #     add_private_key: "privateKeyType",
+    #     context_provider: {
+    #       key_definition_list: [
+    #         {
+    #           source_key: "contextProviderSourceKeyType", # required
+    #           target_key: "contextProviderTargetKeyType",
+    #         },
+    #       ],
+    #       subject_source_key: "contextProviderSourceKeyType", # required
+    #       subject_type_value: "subjectTypeValueType",
+    #       subject_type_source_key: "contextProviderSourceKeyType",
+    #     },
+    #     identity_center_instance_arn: "identityCenterInstanceArnType",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :saml_metadata_document
@@ -639,6 +651,28 @@ module Aws::IAM
     #   The private key generated from your external identity provider. The
     #   private key must be a .pem file that uses AES-GCM or AES-CBC
     #   encryption algorithm to decrypt SAML assertions.
+    # @option options [Types::ContextProvider] :context_provider
+    #   The trusted identity propagation context provider configuration to
+    #   associate with the SAML provider. The context provider defines how the
+    #   subject is derived and how keys from the provider's SAML assertion
+    #   are mapped into trusted context keys. Specifying a context provider
+    #   enables trusted identity propagation for the provider. For more
+    #   information, see [ContextProvider][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
+    # @option options [String] :identity_center_instance_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance to
+    #   associate with the SAML provider. If you specify this parameter, you
+    #   must also specify `ContextProvider`.
+    #
+    #   For the format, see [InstanceMetadata][1] in the *IAM Identity Center
+    #   API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
     # @return [SamlProvider]
     def create_saml_provider(options = {})
       resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do

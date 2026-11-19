@@ -550,7 +550,7 @@ module Aws
       def create_attached_file: (
                                   ?client_token: ::String,
                                   instance_id: ::String,
-                                  file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING"),
+                                  file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING" | "VOICEMAIL_RECORDING" | "VOICEMAIL_RECORDING_REDACTED" | "VOICEMAIL_ANALYSIS" | "VOICEMAIL_ANALYSIS_REDACTED"),
                                   file_source_uri: ::String,
                                   associated_resource_arn: ::String,
                                   ?tags: Hash[::String, ::String]
@@ -591,7 +591,7 @@ module Aws
                             ?attributes: Hash[::String, ::String],
                             ?references: Hash[::String, {
                                 value: ::String?,
-                                type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
+                                type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED" | "VOICEMAIL_RECORDING" | "VOICEMAIL_RECORDING_REDACTED" | "VOICEMAIL_ANALYSIS" | "VOICEMAIL_ANALYSIS_REDACTED"),
                                 status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                 arn: ::String?,
                                 status_reason: ::String?
@@ -2440,7 +2440,7 @@ module Aws
         def file_name: () -> ::String
         def file_size_in_bytes: () -> ::Integer
         def associated_resource_arn: () -> ::String
-        def file_use_case_type: () -> ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING")
+        def file_use_case_type: () -> ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING" | "VOICEMAIL_RECORDING" | "VOICEMAIL_RECORDING_REDACTED" | "VOICEMAIL_ANALYSIS" | "VOICEMAIL_ANALYSIS_REDACTED")
         def created_by: () -> Types::CreatedByInfo
         def download_url_metadata: () -> Types::DownloadUrlMetadata
         def tags: () -> ::Hash[::String, ::String]
@@ -3008,7 +3008,7 @@ module Aws
       def list_contact_references: (
                                      instance_id: ::String,
                                      contact_id: ::String,
-                                     reference_types: Array[("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED")],
+                                     reference_types: Array[("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED" | "VOICEMAIL_RECORDING" | "VOICEMAIL_RECORDING_REDACTED" | "VOICEMAIL_ANALYSIS" | "VOICEMAIL_ANALYSIS_REDACTED")],
                                      ?next_token: ::String
                                    ) -> _ListContactReferencesResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContactReferencesResponseSuccess
@@ -4754,7 +4754,7 @@ module Aws
                                         file_name: ::String,
                                         file_size_in_bytes: ::Integer,
                                         ?url_expiry_in_seconds: ::Integer,
-                                        file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING"),
+                                        file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING" | "VOICEMAIL_RECORDING" | "VOICEMAIL_RECORDING_REDACTED" | "VOICEMAIL_ANALYSIS" | "VOICEMAIL_ANALYSIS_REDACTED"),
                                         associated_resource_arn: ::String,
                                         ?created_by: {
                                           connect_user_arn: ::String?,
@@ -4916,7 +4916,7 @@ module Aws
                                  ?description: ::String,
                                  ?references: Hash[::String, {
                                      value: ::String?,
-                                     type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
+                                     type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED" | "VOICEMAIL_RECORDING" | "VOICEMAIL_RECORDING_REDACTED" | "VOICEMAIL_ANALYSIS" | "VOICEMAIL_ANALYSIS_REDACTED"),
                                      status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                      arn: ::String?,
                                      status_reason: ::String?
@@ -5045,7 +5045,7 @@ module Aws
                                           ?description: ::String,
                                           ?references: Hash[::String, {
                                               value: ::String?,
-                                              type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
+                                              type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED" | "VOICEMAIL_RECORDING" | "VOICEMAIL_RECORDING_REDACTED" | "VOICEMAIL_ANALYSIS" | "VOICEMAIL_ANALYSIS_REDACTED"),
                                               status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                               arn: ::String?,
                                               status_reason: ::String?
@@ -5093,7 +5093,7 @@ module Aws
                                 name: ::String,
                                 ?references: Hash[::String, {
                                     value: ::String?,
-                                    type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
+                                    type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED" | "VOICEMAIL_RECORDING" | "VOICEMAIL_RECORDING_REDACTED" | "VOICEMAIL_ANALYSIS" | "VOICEMAIL_ANALYSIS_REDACTED"),
                                     status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                     arn: ::String?,
                                     status_reason: ::String?
@@ -5157,7 +5157,7 @@ module Aws
                                    ?related_contact_id: ::String,
                                    ?references: Hash[::String, {
                                        value: ::String?,
-                                       type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
+                                       type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED" | "VOICEMAIL_RECORDING" | "VOICEMAIL_RECORDING_REDACTED" | "VOICEMAIL_ANALYSIS" | "VOICEMAIL_ANALYSIS_REDACTED"),
                                        status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                        arn: ::String?,
                                        status_reason: ::String?
@@ -5368,7 +5368,7 @@ module Aws
                             ?description: ::String,
                             ?references: Hash[::String, {
                                 value: ::String?,
-                                type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
+                                type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED" | "VOICEMAIL_RECORDING" | "VOICEMAIL_RECORDING_REDACTED" | "VOICEMAIL_ANALYSIS" | "VOICEMAIL_ANALYSIS_REDACTED"),
                                 status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                 arn: ::String?,
                                 status_reason: ::String?

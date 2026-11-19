@@ -144,17 +144,48 @@ module Aws::AgentRegistryControl
       include Aws::Structure
     end
 
-    # Additional data associated with an agent skills definition descriptor.
+    # Additional data associated with an agent skills definition descriptor:
+    # the skill's SKILL.md and the source that the registry synchronizes
+    # the skill from. A record synchronizes from one source at most, either
+    # `skillMd.source` for SKILL.md only or `skillPackage.source` for the
+    # full skill package. When the record has a skill package or a
+    # synchronized source, the registry sets `skillMd.data` from the
+    # SKILL.md in that package or source.
     #
     # @!attribute [rw] skill_md
     #   The markdown skill content associated with an agent skills
     #   definition.
     #   @return [Types::AgentSkillsMdDescriptor]
     #
+    # @!attribute [rw] skill_package
+    #   The source that the registry synchronizes the full skill package
+    #   from. The registry validates and stores the package, sets
+    #   `skillMd.data` from its SKILL.md, and returns the package in the
+    #   `artifact` member of `GetRegistryRecord`. You can't set both this
+    #   source and `skillMd.source`.
+    #   @return [Types::AgentSkillsPackageDescriptor]
+    #
+    # @!attribute [rw] repository_provider
+    #   The repository provider of the record's skill source. Set it to
+    #   `GITHUB` when `skillMd.source` or `skillPackage.source` is a GitHub
+    #   folder URL. The registry treats an `https://` source as a GitHub
+    #   source only when this member is set. Don't set it for an Amazon S3
+    #   source.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_configuration
+    #   The provider-specific settings of the record's skill source. For an
+    #   Amazon S3 source, `s3.bucketOwnerAccountId` specifies the account
+    #   that owns the source bucket.
+    #   @return [Types::AgentSkillsSourceConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/AgentSkillsAdditionalData AWS API Documentation
     #
     class AgentSkillsAdditionalData < Struct.new(
-      :skill_md)
+      :skill_md,
+      :skill_package,
+      :repository_provider,
+      :source_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -198,8 +229,12 @@ module Aws::AgentRegistryControl
     #   @return [String]
     #
     # @!attribute [rw] source
-    #   The optional source configuration used to synchronize the agent
-    #   skills markdown content.
+    #   The optional source of the skill's SKILL.md only. The registry
+    #   synchronizes the SKILL.md from this source into `data`. Specify an
+    #   `s3://` URL of a SKILL.md object, or a GitHub folder URL together
+    #   with `repositoryProvider` set to `GITHUB`. The registry rejects a
+    #   new `https://` URL without `repositoryProvider`, and you can't set
+    #   both this source and `skillPackage.source`.
     #   @return [Types::DescriptorSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/AgentSkillsMdDescriptor AWS API Documentation
@@ -210,6 +245,50 @@ module Aws::AgentRegistryControl
       :source)
       SENSITIVE = [:data]
       include Aws::Structure
+    end
+
+    # Descriptor that names the source that the registry synchronizes a full
+    # skill package from. It holds only the source. The record's `artifact`
+    # member returns the package that the registry reads from this source.
+    #
+    # @!attribute [rw] source
+    #   The source of the skill package. Specify an `s3://` URL of a ZIP
+    #   object, or a GitHub folder URL together with `repositoryProvider`
+    #   set to `GITHUB`. For a GitHub folder, the registry builds the
+    #   package from every file in the folder.
+    #   @return [Types::DescriptorSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/AgentSkillsPackageDescriptor AWS API Documentation
+    #
+    class AgentSkillsPackageDescriptor < Struct.new(
+      :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The provider-specific settings of a skill source. Specify the member
+    # that matches the source's provider, such as `s3` for an Amazon S3
+    # source.
+    #
+    # @note AgentSkillsSourceConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note AgentSkillsSourceConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AgentSkillsSourceConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] s3
+    #   The settings of an Amazon S3 source.
+    #   @return [Types::S3SourceConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/AgentSkillsSourceConfiguration AWS API Documentation
+    #
+    class AgentSkillsSourceConfiguration < Struct.new(
+      :s3,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3 < AgentSkillsSourceConfiguration; end
+      class Unknown < AgentSkillsSourceConfiguration; end
     end
 
     # Configuration for the registry's record approval workflow. Controls
@@ -230,6 +309,30 @@ module Aws::AgentRegistryControl
       :auto_approval_rules)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The authorization that a user must complete before a registry record
+    # can synchronize from its source. Only `CreateRegistryRecord` and
+    # `UpdateRegistryRecord` return it. `GetRegistryRecord` and
+    # `ListRegistryRecords` never do.
+    #
+    # @note AuthorizationData is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AuthorizationData corresponding to the set member.
+    #
+    # @!attribute [rw] oauth2
+    #   The OAuth 2.0 authorization that a GitHub user must approve.
+    #   @return [Types::OAuth2AuthorizationData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/AuthorizationData AWS API Documentation
+    #
+    class AuthorizationData < Struct.new(
+      :oauth2,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Oauth2 < AuthorizationData; end
+      class Unknown < AuthorizationData; end
     end
 
     # The authorizer configuration for a registry. Exactly one member is
@@ -401,6 +504,14 @@ module Aws::AgentRegistryControl
     #   The typed descriptor content for the registry record
     #   @return [Types::Descriptors]
     #
+    # @!attribute [rw] artifact
+    #   The skill package to store with the record, for a record of type
+    #   `SKILL` with an `agentSkillsDefinition` descriptor. The registry
+    #   validates the package after the operation returns and sets
+    #   `skillMd.data` from the package's SKILL.md. A request that uploads
+    #   a package can't also set a skill source or send new `skillMd.data`.
+    #   @return [Types::RegistryRecordArtifactUpload]
+    #
     # @!attribute [rw] record_version
     #   The version of the registry record
     #   @return [String]
@@ -437,6 +548,7 @@ module Aws::AgentRegistryControl
       :description,
       :record_type,
       :descriptors,
+      :artifact,
       :record_version,
       :client_token,
       :provenance,
@@ -453,15 +565,28 @@ module Aws::AgentRegistryControl
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the registry record, set to CREATING while the
-    #   asynchronous workflow is in progress
+    #   The status of the registry record. `CREATING` means that the
+    #   asynchronous workflow is in progress. `CREATE_PENDING_AUTH` means
+    #   that the record waits for a GitHub user to authorize access before
+    #   it synchronizes from its GitHub source. For the authorization link,
+    #   see `authorizationData`.
     #   @return [String]
+    #
+    # @!attribute [rw] authorization_data
+    #   The authorization that a GitHub user must complete before the
+    #   record's synchronization starts. Present only in this response, and
+    #   only while the status is `CREATE_PENDING_AUTH`. If the status is
+    #   `CREATE_PENDING_AUTH` but this member is absent, call
+    #   `UpdateRegistryRecord` with `triggerSynchronization` to get a new
+    #   authorization link.
+    #   @return [Types::AuthorizationData]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/CreateRegistryRecordResponse AWS API Documentation
     #
     class CreateRegistryRecordResponse < Struct.new(
       :record_arn,
-      :status)
+      :status,
+      :authorization_data)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -739,7 +864,12 @@ module Aws::AgentRegistryControl
     # configurations for authenticated URL retrieval.
     #
     # @!attribute [rw] url
-    #   The URL from which the descriptor content is retrieved.
+    #   The URL from which the descriptor content is retrieved. For an agent
+    #   skill source, specify an `s3://` URL of an object in a bucket in the
+    #   same Amazon Web Services Region as the registry. For a GitHub skill
+    #   source, specify a GitHub folder URL in the form
+    #   `https://host/owner/repo/tree/branch-or-tag/path`. Other descriptor
+    #   sources use `https://` URLs.
     #   @return [String]
     #
     # @!attribute [rw] credential_provider_configurations
@@ -892,7 +1022,9 @@ module Aws::AgentRegistryControl
     #
     # @!attribute [rw] descriptors
     #   The typed descriptors that define the content of the registry
-    #   record.
+    #   record. For a skill record with a skill package or a synchronized
+    #   source, `skillMd.data` contains the SKILL.md that the registry took
+    #   from the package or the source.
     #   @return [Types::Descriptors]
     #
     # @!attribute [rw] record_version
@@ -945,6 +1077,29 @@ module Aws::AgentRegistryControl
     #   against the latest schema.
     #   @return [String]
     #
+    # @!attribute [rw] artifact
+    #   The skill package of the record's latest revision, including a
+    #   revision in `DRAFT` or `PENDING_APPROVAL` status, as a download URL
+    #   and a SHA-256 checksum. While an update of the record is in progress
+    #   or after it fails, this is the last package that passed validation,
+    #   unless the update switches between an uploaded package and a
+    #   synchronized one: then it is absent until the update succeeds.
+    #   Absent while the record is being created or after its creation
+    #   fails, and when the record has no package, for example when its
+    #   content is inline or it synchronizes only SKILL.md.
+    #   @return [Types::RegistryRecordArtifactDownload]
+    #
+    # @!attribute [rw] synchronized_source
+    #   The source that the registry last synchronized the record's skill
+    #   content from, including when the registry read the source and which
+    #   version it read. Absent until the first successful synchronization,
+    #   and after an update replaces the synchronized content, for example
+    #   with an uploaded package. A failed synchronization leaves this
+    #   member unchanged. After you change the source, this member shows the
+    #   previous source until the registry successfully synchronizes from
+    #   the new source.
+    #   @return [Types::RegistryRecordSynchronizedSource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/GetRegistryRecordResponse AWS API Documentation
     #
     class GetRegistryRecordResponse < Struct.new(
@@ -965,7 +1120,9 @@ module Aws::AgentRegistryControl
       :created_by_auto_detection,
       :created_by,
       :custom_metadata,
-      :custom_metadata_schema_compliance_status)
+      :custom_metadata_schema_compliance_status,
+      :artifact,
+      :synchronized_source)
       SENSITIVE = [:description, :custom_metadata]
       include Aws::Structure
     end
@@ -1061,6 +1218,32 @@ module Aws::AgentRegistryControl
       :created_at,
       :updated_at)
       SENSITIVE = [:description, :custom_metadata_schema_configuration]
+      include Aws::Structure
+    end
+
+    # A GitHub source that a skill record's content was synchronized from,
+    # and the commit that the registry read.
+    #
+    # @!attribute [rw] url
+    #   The source URL that the registry read.
+    #   @return [String]
+    #
+    # @!attribute [rw] synchronized_at
+    #   The timestamp when the registry read the source.
+    #   @return [Time]
+    #
+    # @!attribute [rw] commit_id
+    #   The commit that the source's branch or tag pointed to when the
+    #   registry read it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/GitHubSynchronizedSource AWS API Documentation
+    #
+    class GitHubSynchronizedSource < Struct.new(
+      :url,
+      :synchronized_at,
+      :commit_id)
+      SENSITIVE = [:url]
       include Aws::Structure
     end
 
@@ -1323,6 +1506,53 @@ module Aws::AgentRegistryControl
       include Aws::Structure
     end
 
+    # An OAuth 2.0 authorization that waits for a user's approval. The user
+    # opens `authorizationUrl` and approves access on GitHub. Amazon Bedrock
+    # AgentCore Identity then redirects the browser to the source's
+    # `returnUrl`. There, your application completes the authorization by
+    # calling the AgentCore Identity `CompleteResourceTokenAuth` operation
+    # with `userId`. If the source has no `returnUrl`, the user returns to
+    # the Amazon Web Services Agent Registry console, which completes the
+    # authorization. After the authorization completes, the registry
+    # synchronizes the record without another request. If the user doesn't
+    # approve access before `expiresAt`, the record moves to `CREATE_FAILED`
+    # or `UPDATE_FAILED`. To start again, call `UpdateRegistryRecord` with
+    # `triggerSynchronization`.
+    #
+    # @!attribute [rw] authorization_url
+    #   The URL that the user opens to approve access. The link is valid for
+    #   up to 10 minutes. Treat it as sensitive and give it only to the user
+    #   who approves access.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The AgentCore Identity user ID that the authorization is for. Store
+    #   it with your signed-in user and pass it as `userIdentifier.userId`
+    #   when your application calls `CompleteResourceTokenAuth`.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_attempt_id
+    #   The identifier of this authorization attempt.
+    #   @return [String]
+    #
+    # @!attribute [rw] expires_at
+    #   The timestamp when the authorization link expires, 10 minutes after
+    #   the authorization started. A request that joins an authorization in
+    #   progress gets less time, and the link might stop working shortly
+    #   before this time.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/OAuth2AuthorizationData AWS API Documentation
+    #
+    class OAuth2AuthorizationData < Struct.new(
+      :authorization_url,
+      :user_id,
+      :authorization_attempt_id,
+      :expires_at)
+      SENSITIVE = [:authorization_url, :user_id]
+      include Aws::Structure
+    end
+
     # A private network endpoint used to reach a resource over a private
     # path. Exactly one member is set.
     #
@@ -1480,6 +1710,61 @@ module Aws::AgentRegistryControl
       include Aws::Structure
     end
 
+    # The skill package of a registry record, as a short-lived download URL
+    # and the package's SHA-256 checksum. Responses never include the
+    # package bytes.
+    #
+    # @!attribute [rw] sha256
+    #   The SHA-256 checksum of the package, as 64 lowercase hexadecimal
+    #   characters. The download response carries no signature that you can
+    #   check, so compare the checksum of the file that you download with
+    #   this value before you use the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] download_url
+    #   A presigned Amazon S3 URL that downloads the package. The URL is
+    #   valid for up to 5 minutes, and the response doesn't include its
+    #   expiry time. To get a new URL, call the operation again. Anyone who
+    #   has the URL can download the package until it expires, so don't
+    #   log, store, or share it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/RegistryRecordArtifactDownload AWS API Documentation
+    #
+    class RegistryRecordArtifactDownload < Struct.new(
+      :sha256,
+      :download_url)
+      SENSITIVE = [:download_url]
+      include Aws::Structure
+    end
+
+    # A skill package to upload with a registry record: a ZIP archive of a
+    # skill that follows the Agent Skills specification. The registry
+    # validates the package asynchronously, stores it, and sets
+    # `skillMd.data` from the package's SKILL.md.
+    #
+    # @!attribute [rw] content
+    #   The ZIP archive of the skill package, up to 5 MiB (5,242,880 bytes).
+    #   In a JSON request, the content is base64-encoded. The Amazon Web
+    #   Services SDKs encode it for you.
+    #   @return [String]
+    #
+    # @!attribute [rw] sha256
+    #   The optional SHA-256 checksum of the ZIP archive, as 64 lowercase
+    #   hexadecimal characters, computed over the archive's bytes rather
+    #   than its base64 text. If it doesn't match the content, the request
+    #   fails with a `ValidationException`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/RegistryRecordArtifactUpload AWS API Documentation
+    #
+    class RegistryRecordArtifactUpload < Struct.new(
+      :content,
+      :sha256)
+      SENSITIVE = [:content]
+      include Aws::Structure
+    end
+
     # A credential provider configuration that specifies how to authenticate
     # when fetching descriptor content from a registry record's source URL.
     #
@@ -1552,7 +1837,9 @@ module Aws::AgentRegistryControl
 
     # The configuration for an IAM role credential provider that signs
     # requests to a registry record's source with Amazon Web Services
-    # Signature Version 4 (SigV4).
+    # Signature Version 4 (SigV4). For an Amazon S3 skill source (an `s3://`
+    # URL), Amazon Web Services Agent Registry assumes the role to read the
+    # object. The role must be in your Amazon Web Services account.
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role to assume for request
@@ -1561,12 +1848,14 @@ module Aws::AgentRegistryControl
     #
     # @!attribute [rw] service
     #   The service name to use for request signing, such as execute-api.
+    #   For an Amazon S3 skill source, omit it or set it to `s3`.
     #   @return [String]
     #
     # @!attribute [rw] region
     #   The Amazon Web Services Region to use for request signing. If not
     #   specified, the Region is derived from the source URL hostname,
-    #   falling back to the Region of the registry.
+    #   falling back to the Region of the registry. For an Amazon S3 skill
+    #   source, omit it or set it to the Region of the registry.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/RegistryRecordIamCredentialProvider AWS API Documentation
@@ -1588,7 +1877,16 @@ module Aws::AgentRegistryControl
     #   @return [String]
     #
     # @!attribute [rw] grant_type
-    #   The OAuth 2.0 grant type used to obtain access tokens.
+    #   The OAuth 2.0 grant type used to obtain access tokens. A GitHub
+    #   skill source requires `AUTHORIZATION_CODE`. Other sources, such as
+    #   MCP server and A2A agent card sources, use `CLIENT_CREDENTIALS`. A
+    #   GitHub source takes exactly one OAuth credential provider, in the
+    #   registry's Amazon Web Services account and Region. Only an IAM role
+    #   or IAM user in the account that owns the registry can set,
+    #   synchronize, or reauthorize it, and the caller needs
+    #   `bedrock-agentcore:GetWorkloadAccessTokenForUserId` and
+    #   `bedrock-agentcore:GetResourceOauth2Token` on the registry's
+    #   workload identity, `registry-` followed by the registry ID.
     #   @return [String]
     #
     # @!attribute [rw] scopes
@@ -1599,14 +1897,28 @@ module Aws::AgentRegistryControl
     #   Additional parameters to include in the OAuth 2.0 token request.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] return_url
+    #   The URL that the user's browser returns to after the user approves
+    #   access on GitHub, for the `AUTHORIZATION_CODE` grant. There, your
+    #   application completes the authorization by calling the Amazon
+    #   Bedrock AgentCore Identity `CompleteResourceTokenAuth` operation
+    #   with the `userId` from `authorizationData`. If you omit it, the user
+    #   returns to the Amazon Web Services Agent Registry console, which
+    #   completes the authorization when the user is signed in as the IAM
+    #   principal that made the request. A request that joins an
+    #   authorization already in progress uses the return URL of the request
+    #   that started it.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/RegistryRecordOAuthCredentialProvider AWS API Documentation
     #
     class RegistryRecordOAuthCredentialProvider < Struct.new(
       :provider_arn,
       :grant_type,
       :scopes,
-      :custom_parameters)
-      SENSITIVE = []
+      :custom_parameters,
+      :return_url)
+      SENSITIVE = [:custom_parameters]
       include Aws::Structure
     end
 
@@ -1705,6 +2017,34 @@ module Aws::AgentRegistryControl
       include Aws::Structure
     end
 
+    # The source that a skill record's content was last synchronized from.
+    # Exactly one member is set, for the source's provider.
+    #
+    # @note RegistryRecordSynchronizedSource is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RegistryRecordSynchronizedSource corresponding to the set member.
+    #
+    # @!attribute [rw] s3
+    #   The Amazon S3 source that the registry read.
+    #   @return [Types::S3SynchronizedSource]
+    #
+    # @!attribute [rw] git_hub
+    #   The GitHub source that the registry read.
+    #   @return [Types::GitHubSynchronizedSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/RegistryRecordSynchronizedSource AWS API Documentation
+    #
+    class RegistryRecordSynchronizedSource < Struct.new(
+      :s3,
+      :git_hub,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3 < RegistryRecordSynchronizedSource; end
+      class GitHub < RegistryRecordSynchronizedSource; end
+      class Unknown < RegistryRecordSynchronizedSource; end
+    end
+
     # Registry summary for list operations
     #
     # @!attribute [rw] name
@@ -1777,6 +2117,61 @@ module Aws::AgentRegistryControl
     class ResourceNotFoundException < Struct.new(
       :message)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings of a source that the registry reads from Amazon S3.
+    #
+    # @!attribute [rw] bucket_owner_account_id
+    #   The ID of the Amazon Web Services account that owns the source
+    #   bucket. The registry checks that the bucket belongs to this account
+    #   each time it reads the source. If you omit it for a source that uses
+    #   an IAM role, the registry expects the bucket to be in the role's
+    #   account. If you omit it for a source that has no credential
+    #   provider, which the registry reads as a public object, the request
+    #   fails with a `ValidationException`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/S3SourceConfiguration AWS API Documentation
+    #
+    class S3SourceConfiguration < Struct.new(
+      :bucket_owner_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An Amazon S3 source that a skill record's content was synchronized
+    # from, and the object version that the registry read. At most one of
+    # `versionId` and `eTag` is set.
+    #
+    # @!attribute [rw] url
+    #   The source URL that the registry read.
+    #   @return [String]
+    #
+    # @!attribute [rw] synchronized_at
+    #   The timestamp when the registry read the source.
+    #   @return [Time]
+    #
+    # @!attribute [rw] version_id
+    #   The version ID of the object that the registry read. Absent when the
+    #   bucket isn't versioned.
+    #   @return [String]
+    #
+    # @!attribute [rw] e_tag
+    #   The entity tag (ETag) of the object that the registry read, without
+    #   quotes, when the object has no version ID. Not recorded for a
+    #   SKILL.md source on a registry that is encrypted with a customer
+    #   managed key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/S3SynchronizedSource AWS API Documentation
+    #
+    class S3SynchronizedSource < Struct.new(
+      :url,
+      :synchronized_at,
+      :version_id,
+      :e_tag)
+      SENSITIVE = [:url]
       include Aws::Structure
     end
 
@@ -1998,6 +2393,16 @@ module Aws::AgentRegistryControl
     #   to leave the descriptors unchanged.
     #   @return [Types::UpdatedDescriptors]
     #
+    # @!attribute [rw] artifact
+    #   The change to the record's uploaded skill package. Omit it to keep
+    #   the current package, specify an empty object to remove an uploaded
+    #   package, or specify `optionalValue` to upload a new package. An
+    #   empty object doesn't remove a package that the record synchronizes
+    #   from a source. To stop that synchronization, remove `skillPackage`.
+    #   A request that changes `skillMd.data` replaces the record's package
+    #   with that text, even if you omit this member.
+    #   @return [Types::UpdatedRegistryRecordArtifact]
+    #
     # @!attribute [rw] record_version
     #   The updated version of the registry record. Omit to leave the
     #   version unchanged.
@@ -2012,8 +2417,24 @@ module Aws::AgentRegistryControl
     #   @return [Types::UpdatedCustomMetadataMap]
     #
     # @!attribute [rw] trigger_synchronization
-    #   Whether to trigger synchronization of the record's descriptor
-    #   content from its source
+    #   Specifies whether to synchronize the record's descriptor content
+    #   from its source. For a skill record, the registry reads the stored
+    #   `skillMd.source` or `skillPackage.source` again, because it doesn't
+    #   watch the source for changes. For a GitHub source, the operation
+    #   also returns a new authorization link when one is needed. An update
+    #   that sets a different skill source starts a synchronization even if
+    #   you omit this member.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] force_authentication
+    #   Specifies whether to ask a GitHub user to authorize access again,
+    #   even when the current authorization still works, for example to use
+    #   a different GitHub account. You can use it only together with
+    #   `triggerSynchronization`, for a GitHub source whose credential
+    #   provider uses the `AUTHORIZATION_CODE` grant. The new authorization
+    #   also replaces the one that the same IAM principal's other records
+    #   in the registry use for the same host, credential provider, scopes,
+    #   and custom parameters.
     #   @return [Boolean]
     #
     # @!attribute [rw] provenance
@@ -2035,9 +2456,11 @@ module Aws::AgentRegistryControl
       :description,
       :record_type,
       :descriptors,
+      :artifact,
       :record_version,
       :custom_metadata,
       :trigger_synchronization,
+      :force_authentication,
       :provenance)
       SENSITIVE = []
       include Aws::Structure
@@ -2085,7 +2508,10 @@ module Aws::AgentRegistryControl
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The lifecycle status of the registry record.
+    #   The lifecycle status of the registry record. `UPDATE_PENDING_AUTH`
+    #   means that the update waits for a GitHub user to authorize access
+    #   before the record synchronizes from its GitHub source. For the
+    #   authorization link, see `authorizationData`.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -2130,6 +2556,15 @@ module Aws::AgentRegistryControl
     #   against the latest schema.
     #   @return [String]
     #
+    # @!attribute [rw] authorization_data
+    #   The authorization that a GitHub user must complete before the
+    #   record's synchronization starts. Present only in this response, and
+    #   only while the status is `UPDATE_PENDING_AUTH`. If the status is
+    #   `UPDATE_PENDING_AUTH` but this member is absent, call
+    #   `UpdateRegistryRecord` again with `triggerSynchronization` to get a
+    #   new authorization link.
+    #   @return [Types::AuthorizationData]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdateRegistryRecordResponse AWS API Documentation
     #
     class UpdateRegistryRecordResponse < Struct.new(
@@ -2150,7 +2585,8 @@ module Aws::AgentRegistryControl
       :created_by_auto_detection,
       :created_by,
       :custom_metadata,
-      :custom_metadata_schema_compliance_status)
+      :custom_metadata_schema_compliance_status,
+      :authorization_data)
       SENSITIVE = [:description, :custom_metadata]
       include Aws::Structure
     end
@@ -2453,10 +2889,25 @@ module Aws::AgentRegistryControl
     #   The patch for the agent skills markdown descriptor field.
     #   @return [Types::UpdatedAgentSkillsMdDescriptor]
     #
+    # @!attribute [rw] skill_package
+    #   The patch for the skill package source field.
+    #   @return [Types::UpdatedAgentSkillsPackageDescriptor]
+    #
+    # @!attribute [rw] repository_provider
+    #   The patch for the repository provider field.
+    #   @return [Types::UpdatedAgentSkillsRepositoryProvider]
+    #
+    # @!attribute [rw] source_configuration
+    #   The patch for the source configuration field.
+    #   @return [Types::UpdatedAgentSkillsSourceConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdatedAgentSkillsAdditionalDataFields AWS API Documentation
     #
     class UpdatedAgentSkillsAdditionalDataFields < Struct.new(
-      :skill_md)
+      :skill_md,
+      :skill_package,
+      :repository_provider,
+      :source_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2541,6 +2992,61 @@ module Aws::AgentRegistryControl
       :data,
       :data_schema_version,
       :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The skill package source patch wrapper. Omit to leave the source
+    # unchanged; supply an empty object to remove it and stop synchronizing
+    # the package; supply optionalValue to replace it.
+    #
+    # @!attribute [rw] optional_value
+    #   The value to set for this field. Omit the wrapper to leave the field
+    #   unchanged.
+    #   @return [Types::AgentSkillsPackageDescriptor]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdatedAgentSkillsPackageDescriptor AWS API Documentation
+    #
+    class UpdatedAgentSkillsPackageDescriptor < Struct.new(
+      :optional_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The repository provider patch wrapper. Omit to leave the repository
+    # provider unchanged; supply an empty object to remove it; supply
+    # optionalValue to set it. When you remove it, also remove or replace
+    # the GitHub source in the same request.
+    #
+    # @!attribute [rw] optional_value
+    #   The value to set for this field. Omit the wrapper to leave the field
+    #   unchanged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdatedAgentSkillsRepositoryProvider AWS API Documentation
+    #
+    class UpdatedAgentSkillsRepositoryProvider < Struct.new(
+      :optional_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source configuration patch wrapper. Omit to leave the
+    # configuration unchanged; supply an empty object to remove it; supply
+    # optionalValue to replace it. When you move an Amazon S3 source to
+    # another bucket, the record keeps its configuration. In the same
+    # request, specify the new bucket's owner, or specify an empty object
+    # so that the registry expects the bucket in the role's account.
+    #
+    # @!attribute [rw] optional_value
+    #   The value to set for this field. Omit the wrapper to leave the field
+    #   unchanged.
+    #   @return [Types::AgentSkillsSourceConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdatedAgentSkillsSourceConfiguration AWS API Documentation
+    #
+    class UpdatedAgentSkillsSourceConfiguration < Struct.new(
+      :optional_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2960,6 +3466,23 @@ module Aws::AgentRegistryControl
     class UpdatedMcpToolsDescriptorFields < Struct.new(
       :data,
       :data_schema_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The skill package patch wrapper. Omit to leave the package unchanged;
+    # supply an empty object to remove an uploaded package; supply
+    # optionalValue to upload a new package.
+    #
+    # @!attribute [rw] optional_value
+    #   The skill package to upload. It replaces the record's current
+    #   package or its synchronized content.
+    #   @return [Types::RegistryRecordArtifactUpload]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/agent-registry-control-2025-12-01/UpdatedRegistryRecordArtifact AWS API Documentation
+    #
+    class UpdatedRegistryRecordArtifact < Struct.new(
+      :optional_value)
       SENSITIVE = []
       include Aws::Structure
     end

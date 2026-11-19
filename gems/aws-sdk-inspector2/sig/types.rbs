@@ -735,12 +735,22 @@ module Aws::Inspector2
     class CodeSecurityIntegrationSummary
       attr_accessor integration_arn: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("GITLAB_SELF_MANAGED" | "GITHUB")
-      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING")
+      attr_accessor type: ("GITLAB_SELF_MANAGED" | "GITHUB" | "GITHUB_ENTERPRISE_SERVER")
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING" | "ESTABLISHING_CONNECTION_IN_PROGRESS" | "ESTABLISHING_CONNECTION_COMPLETED" | "ESTABLISHING_CONNECTION_FAILED" | "PENDING_MANIFEST_CODE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
       attr_accessor status_reason: ::String
       attr_accessor created_on: ::Time
       attr_accessor last_update_on: ::Time
       SENSITIVE: []
+    end
+
+    class CodeSecurityIntegrationVpcConfiguration
+      attr_accessor vpc_id: ::String
+      attr_accessor vpc_endpoint_id: ::String
+      attr_accessor code_connections_host_arn: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor tls_certificate: ::String
+      SENSITIVE: [:tls_certificate]
     end
 
     class CodeSecurityResource
@@ -1057,7 +1067,7 @@ module Aws::Inspector2
 
     class CreateCodeSecurityIntegrationRequest
       attr_accessor name: ::String
-      attr_accessor type: ("GITLAB_SELF_MANAGED" | "GITHUB")
+      attr_accessor type: ("GITLAB_SELF_MANAGED" | "GITHUB" | "GITHUB_ENTERPRISE_SERVER")
       attr_accessor details: Types::CreateIntegrationDetail
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -1065,7 +1075,7 @@ module Aws::Inspector2
 
     class CreateCodeSecurityIntegrationResponse
       attr_accessor integration_arn: ::String
-      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING")
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING" | "ESTABLISHING_CONNECTION_IN_PROGRESS" | "ESTABLISHING_CONNECTION_COMPLETED" | "ESTABLISHING_CONNECTION_FAILED" | "PENDING_MANIFEST_CODE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
       attr_accessor authorization_url: ::String
       SENSITIVE: [:authorization_url]
     end
@@ -1126,18 +1136,28 @@ module Aws::Inspector2
       SENSITIVE: []
     end
 
+    class CreateGitHubEnterpriseIntegrationDetail
+      attr_accessor instance_url: ::String
+      attr_accessor vpc_configuration: Types::CodeSecurityIntegrationVpcConfiguration
+      SENSITIVE: [:instance_url]
+    end
+
     class CreateGitLabSelfManagedIntegrationDetail
       attr_accessor instance_url: ::String
       attr_accessor access_token: ::String
+      attr_accessor vpc_configuration: Types::CodeSecurityIntegrationVpcConfiguration
       SENSITIVE: [:instance_url, :access_token]
     end
 
     class CreateIntegrationDetail
       attr_accessor gitlab_self_managed: Types::CreateGitLabSelfManagedIntegrationDetail
+      attr_accessor github_enterprise: Types::CreateGitHubEnterpriseIntegrationDetail
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class GitlabSelfManaged < CreateIntegrationDetail
+      end
+      class GithubEnterprise < CreateIntegrationDetail
       end
       class Unknown < CreateIntegrationDetail
       end
@@ -1752,14 +1772,16 @@ module Aws::Inspector2
     class GetCodeSecurityIntegrationResponse
       attr_accessor integration_arn: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("GITLAB_SELF_MANAGED" | "GITHUB")
-      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING")
+      attr_accessor type: ("GITLAB_SELF_MANAGED" | "GITHUB" | "GITHUB_ENTERPRISE_SERVER")
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING" | "ESTABLISHING_CONNECTION_IN_PROGRESS" | "ESTABLISHING_CONNECTION_COMPLETED" | "ESTABLISHING_CONNECTION_FAILED" | "PENDING_MANIFEST_CODE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
       attr_accessor status_reason: ::String
       attr_accessor created_on: ::Time
       attr_accessor last_update_on: ::Time
       attr_accessor authorization_url: ::String
+      attr_accessor vpc_configuration: Types::CodeSecurityIntegrationVpcConfiguration
+      attr_accessor instance_url: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: [:authorization_url]
+      SENSITIVE: [:authorization_url, :instance_url]
     end
 
     class GetCodeSecurityScanConfigurationRequest
@@ -1896,6 +1918,11 @@ module Aws::Inspector2
       attr_accessor s3_destination: Types::Destination
       attr_accessor filter_criteria: Types::ResourceFilterCriteria
       SENSITIVE: []
+    end
+
+    class GitHubEnterpriseServerAppRegistrationDetail
+      attr_accessor manifest_code: ::String
+      SENSITIVE: [:manifest_code]
     end
 
     class Image
@@ -2994,7 +3021,7 @@ module Aws::Inspector2
 
     class UpdateCodeSecurityIntegrationResponse
       attr_accessor integration_arn: ::String
-      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING")
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "INACTIVE" | "DISABLING" | "ESTABLISHING_CONNECTION_IN_PROGRESS" | "ESTABLISHING_CONNECTION_COMPLETED" | "ESTABLISHING_CONNECTION_FAILED" | "PENDING_MANIFEST_CODE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
       SENSITIVE: []
     end
 
@@ -3088,26 +3115,52 @@ module Aws::Inspector2
       SENSITIVE: []
     end
 
+    class UpdateGitHubEnterpriseServerAppInstallationDetail
+      attr_accessor code: ::String
+      attr_accessor installation_id: ::String
+      attr_accessor state_token: ::String
+      SENSITIVE: [:code, :state_token]
+    end
+
+    class UpdateGitHubEnterpriseServerIntegrationDetail
+      attr_accessor app_installation: Types::UpdateGitHubEnterpriseServerAppInstallationDetail
+      attr_accessor app_registration: Types::GitHubEnterpriseServerAppRegistrationDetail
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AppInstallation < UpdateGitHubEnterpriseServerIntegrationDetail
+      end
+      class AppRegistration < UpdateGitHubEnterpriseServerIntegrationDetail
+      end
+      class Unknown < UpdateGitHubEnterpriseServerIntegrationDetail
+      end
+    end
+
     class UpdateGitHubIntegrationDetail
       attr_accessor code: ::String
       attr_accessor installation_id: ::String
-      SENSITIVE: [:code]
+      attr_accessor state_token: ::String
+      SENSITIVE: [:code, :state_token]
     end
 
     class UpdateGitLabSelfManagedIntegrationDetail
       attr_accessor auth_code: ::String
-      SENSITIVE: [:auth_code]
+      attr_accessor state_token: ::String
+      SENSITIVE: [:auth_code, :state_token]
     end
 
     class UpdateIntegrationDetails
       attr_accessor gitlab_self_managed: Types::UpdateGitLabSelfManagedIntegrationDetail
       attr_accessor github: Types::UpdateGitHubIntegrationDetail
+      attr_accessor github_enterprise_server: Types::UpdateGitHubEnterpriseServerIntegrationDetail
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class GitlabSelfManaged < UpdateIntegrationDetails
       end
       class Github < UpdateIntegrationDetails
+      end
+      class GithubEnterpriseServer < UpdateIntegrationDetails
       end
       class Unknown < UpdateIntegrationDetails
       end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.160.0 (2026-11-19)
+------------------
+
+* Feature - Enable stack-level WebAuthn redirection to relay passkey and security-key authentication from a WorkSpaces Applications streaming session to the user's local device.
+
 1.159.0 (2026-11-18)
 ------------------
 
