@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::Organizations
     @identifier = :organizations
 
     add_plugin(::Aws::Organizations::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::Organizations
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::Organizations
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -255,7 +275,7 @@ module Aws::Organizations
     # @param [Hash, Types::AcceptHandshakeRequest] params
     # @option params [String] :handshake_id
     #   <p>ID for the handshake that you want to accept.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-"
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-" 
     #       followed by from 8 to 32 lowercase letters or digits.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -376,18 +396,18 @@ module Aws::Organizations
     # @option params [String] :policy_id
     #   <p>ID for the policy that you want to attach to the target. You can get the ID for the
     #               policy by calling the <a>ListPolicies</a> operation.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed 
     #       by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).</p>
     # @option params [String] :target_id
     #   <p>ID for the root, OU, or account that you want to attach the policy to. You can get the
     #               ID by calling the <a>ListRoots</a>, <a>ListOrganizationalUnitsForParent</a>, or <a>ListAccounts</a>
     #               operations.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the 
     #       following:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or
+    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or 
     #             digits.</p>
     #               </li>
     #               <li>
@@ -396,8 +416,8 @@ module Aws::Organizations
     #               </li>
     #               <li>
     #                  <p>
-    #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32
-    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second
+    #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32 
+    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second 
     #             "-" dash and from 8 to 32 additional lowercase letters or digits.</p>
     #               </li>
     #            </ul>
@@ -445,7 +465,7 @@ module Aws::Organizations
     # @param [Hash, Types::CancelHandshakeRequest] params
     # @option params [String] :handshake_id
     #   <p>ID for the handshake that you want to cancel. You can get the ID from the <a>ListHandshakesForOrganization</a> operation.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-"
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-" 
     #       followed by from 8 to 32 lowercase letters or digits.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -514,12 +534,12 @@ module Aws::Organizations
     #             <ul>
     #                <li>
     #                   <p>Resources remaining within the account after closing will be automatically deleted after 90 days. During this 90-day period,
-    #                         the resources won't be available unless you contact Amazon Web Services Support to reopen the account. After 90 days, you can't reopen an account.
+    #                         the resources won't be available unless you contact Amazon Web Services Support to reopen the account. After 90 days, you can't reopen an account. 
     #                         You might still receive a <a href="https://repost.aws/knowledge-center/closed-account-bill">bill after account closure</a>.
     #                     </p>
     #                </li>
     #                <li>
-    #                   <p>Within a rolling 30 day period you can close the higher of either 250 or 20% of the member accounts in your organization,
+    #                   <p>Within a rolling 30 day period you can close the higher of either 250 or 20% of the member accounts in your organization, 
     #                         up to a maximum of 1,000. This quota is not bound by a calendar month, but
     #                         starts when you close an account. After you reach this limit, you can't
     #                         close additional accounts. For more information, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html">Closing a member
@@ -702,8 +722,8 @@ module Aws::Organizations
     #                  </p>
     #               </li>
     #            </ul>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that
-    #       is used to validate this parameter. The pattern can include uppercase
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that 
+    #       is used to validate this parameter. The pattern can include uppercase 
     #       letters, lowercase letters, digits with no spaces, and any of the following characters: =,.@-</p>
     # @option params [String] :iam_user_access_to_billing
     #   <p>If set to <code>ALLOW</code>, the new account enables IAM users to access account
@@ -976,8 +996,8 @@ module Aws::Organizations
     #                  </p>
     #               </li>
     #            </ul>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that
-    #       is used to validate this parameter. The pattern can include uppercase
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> that 
+    #       is used to validate this parameter. The pattern can include uppercase 
     #       letters, lowercase letters, digits with no spaces, and any of the following characters: =,.@-</p>
     # @option params [String] :iam_user_access_to_billing
     #   <p>If set to <code>ALLOW</code>, the new linked account in the commercial Region enables
@@ -1161,18 +1181,18 @@ module Aws::Organizations
     # @param [Hash, Types::CreateOrganizationalUnitRequest] params
     # @option params [String] :parent_id
     #   <p>ID for the parent root or OU that you want to create the new OU in.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the 
     #       following:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or
+    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or 
     #             digits.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32
-    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second
+    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second 
     #             "-" dash and from 8 to 32 additional lowercase letters or digits.</p>
     #               </li>
     #            </ul>
@@ -1251,8 +1271,8 @@ module Aws::Organizations
     #   <p>An optional description to assign to the policy.</p>
     # @option params [String] :name
     #   <p>The friendly name to assign to the policy.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
-    #       that is used to validate this parameter is a string of any of the characters in the ASCII
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
+    #       that is used to validate this parameter is a string of any of the characters in the ASCII 
     #       character range.</p>
     # @option params [String] :type
     #   <p>The type of policy to create. You can specify one of the following values:</p>
@@ -1404,7 +1424,7 @@ module Aws::Organizations
     # @param [Hash, Types::DeclineHandshakeRequest] params
     # @option params [String] :handshake_id
     #   <p>ID for the handshake that you want to decline. You can get the ID from the <a>ListHandshakesForAccount</a> operation.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-"
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-" 
     #       followed by from 8 to 32 lowercase letters or digits.</p>
     # @example To decline a handshake sent from the master account
     #   # The following example shows Susan declining an invitation to join Bill's organization. The DeclineHandshake operation returns a handshake object, showing that the state is now DECLINED:
@@ -1524,9 +1544,9 @@ module Aws::Organizations
     # @option params [String] :organizational_unit_id
     #   <p>ID for the organizational unit that you want to delete. You can get the ID from the
     #                   <a>ListOrganizationalUnitsForParent</a> operation.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires
-    #       "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that contains the
-    #       OU). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires 
+    #       "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that contains the 
+    #       OU). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters 
     #       or digits.</p>
     # @example To delete an organization unit
     #   # The following example shows how to delete an OU. The example assumes that you previously removed all accounts and other OUs from the OU:
@@ -1560,7 +1580,7 @@ module Aws::Organizations
     # @option params [String] :policy_id
     #   <p>ID for the policy that you want to delete. You can get the ID from the <a>ListPolicies</a> or <a>ListPoliciesForTarget</a>
     #               operations.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed 
     #       by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).</p>
     # @example To delete a policy
     #   # The following example shows how to delete a policy from an organization. The example assumes that you previously detached the policy from all entities:
@@ -1611,8 +1631,8 @@ module Aws::Organizations
     #                 potential impacts.</p>
     #          </important>
     #          <p>You can run this action only for Amazon Web Services services that support this
-    #     feature. For a current list of services that support it, see the column <i>Supports
-    #     Delegated Administrator</i> in the table at <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html">Amazon Web Services Services that you can use with
+    #     feature. For a current list of services that support it, see the column <i>Supports 
+    #     Delegated Administrator</i> in the table at <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html">Amazon Web Services Services that you can use with 
     #     Organizations</a> in the <i>Organizations User Guide.</i>
     #          </p>
     #          <p>You can only call this operation from the management account.</p>
@@ -1701,7 +1721,7 @@ module Aws::Organizations
     #   <p>Specifies the <code>Id</code> value that uniquely identifies the
     #                   <code>CreateAccount</code> request. You can get the value from the
     #                   <code>CreateAccountStatus.Id</code> response in an earlier <a>CreateAccount</a> request, or from the <a>ListCreateAccountStatus</a> operation.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a create account request ID string
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a create account request ID string 
     #       requires "car-" followed by from 8 to 32 lowercase letters or digits.</p>
     # @example To get information about a request to create an account
     #   # The following example shows how to request the status about a previous request to create an account in an organization. This operation can be called only by a principal from the organization's master account. In the example, the specified "createAccountRequestId" comes from the response of the original call to "CreateAccount":
@@ -1855,7 +1875,7 @@ module Aws::Organizations
     # @param [Hash, Types::DescribeHandshakeRequest] params
     # @option params [String] :handshake_id
     #   <p>ID for the handshake that you want information about.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-"
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for  handshake ID string requires "h-" 
     #       followed by from 8 to 32 lowercase letters or digits.</p>
     # @example To get information about a handshake
     #   # The following example shows you how to request details about a handshake. The handshake ID comes either from the original call to "InviteAccountToOrganization", or from a call to "ListHandshakesForAccount" or "ListHandshakesForOrganization":
@@ -2008,9 +2028,9 @@ module Aws::Organizations
     # @option params [String] :organizational_unit_id
     #   <p>ID for the organizational unit that you want details about. You can get the ID from
     #               the <a>ListOrganizationalUnitsForParent</a> operation.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires
-    #       "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that contains the
-    #       OU). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires 
+    #       "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that contains the 
+    #       OU). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters 
     #       or digits.</p>
     # @example To get information about an organizational unit
     #   # The following example shows how to request details about an OU:
@@ -2055,7 +2075,7 @@ module Aws::Organizations
     # @option params [String] :policy_id
     #   <p>ID for the policy that you want details about. You can get the ID from the <a>ListPolicies</a> or <a>ListPoliciesForTarget</a>
     #               operations.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed 
     #       by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).</p>
     # @example To get information about a policy
     #   # The following example shows how to request information about a policy:/n/n
@@ -2188,18 +2208,18 @@ module Aws::Organizations
     # @option params [String] :policy_id
     #   <p>ID for the policy you want to detach. You can get the ID from the <a>ListPolicies</a> or <a>ListPoliciesForTarget</a>
     #               operations.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed 
     #       by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).</p>
     # @option params [String] :target_id
     #   <p>ID for the root, OU, or account that you want to detach the policy from. You can get
     #               the ID from the <a>ListRoots</a>, <a>ListOrganizationalUnitsForParent</a>, or <a>ListAccounts</a>
     #               operations.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the 
     #       following:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or
+    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or 
     #             digits.</p>
     #               </li>
     #               <li>
@@ -2208,8 +2228,8 @@ module Aws::Organizations
     #               </li>
     #               <li>
     #                  <p>
-    #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32
-    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second
+    #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32 
+    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second 
     #             "-" dash and from 8 to 32 additional lowercase letters or digits.</p>
     #               </li>
     #            </ul>
@@ -2330,7 +2350,7 @@ module Aws::Organizations
     # @option params [String] :root_id
     #   <p>ID for the root in which you want to disable a policy type. You can get the ID from
     #               the <a>ListRoots</a> operation.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a root ID string requires "r-" followed by
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a root ID string requires "r-" followed by 
     #       from 4 to 32 lowercase letters or digits.</p>
     # @option params [String] :policy_type
     #   <p>The policy type that you want to disable in this root. You can specify one of the
@@ -2598,7 +2618,7 @@ module Aws::Organizations
     # @option params [String] :root_id
     #   <p>ID for the root in which you want to enable a policy type. You can get the ID from the
     #                   <a>ListRoots</a> operation.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a root ID string requires "r-" followed by
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a root ID string requires "r-" followed by 
     #       from 4 to 32 lowercase letters or digits.</p>
     # @option params [String] :policy_type
     #   <p>The policy type that you want to enable. You can specify one of the following
@@ -3075,10 +3095,10 @@ module Aws::Organizations
     #          <p>You can only call this operation from the management account or a member account that is a delegated administrator.</p>
     # @param [Hash, Types::ListAWSServiceAccessForOrganizationRequest] params
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that you can retrieve the remaining results.</p>
@@ -3116,10 +3136,10 @@ module Aws::Organizations
     #          <p>You can only call this operation from the management account or a member account that is a delegated administrator.</p>
     # @param [Hash, Types::ListAccountsRequest] params
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that you can retrieve the remaining results.</p>
@@ -3170,10 +3190,10 @@ module Aws::Organizations
     #   <p>The unique identifier (ID) for the parent root or organization unit (OU) whose
     #               accounts you want to list.</p>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that you can retrieve the remaining results.</p>
@@ -3311,10 +3331,10 @@ module Aws::Organizations
     #               </li>
     #            </ul>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that you can retrieve the remaining results.</p>
@@ -3396,28 +3416,28 @@ module Aws::Organizations
     # @option params [String] :parent_id
     #   <p>The unique identifier (ID) for the parent root or OU whose children you want to
     #               list.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the 
     #       following:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or
+    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or 
     #             digits.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32
-    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second
+    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second 
     #             "-" dash and from 8 to 32 additional lowercase letters or digits.</p>
     #               </li>
     #            </ul>
     # @option params [String] :child_type
     #   <p>Filters the output to include only the specified child type.</p>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that you can retrieve the remaining results.</p>
@@ -3481,10 +3501,10 @@ module Aws::Organizations
     #   <p>A list of one or more states that you want included in the response. If this parameter
     #               isn't present, all requests are included in the response.</p>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that you can retrieve the remaining results.</p>
@@ -3571,10 +3591,10 @@ module Aws::Organizations
     #            <p>If you don't specify a service principal, the operation lists all delegated
     #               administrators for all services in your organization.</p>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that you can retrieve the remaining results.</p>
@@ -3617,10 +3637,10 @@ module Aws::Organizations
     # @option params [String] :account_id
     #   <p>The account ID number of a delegated administrator account in the organization.</p>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that you can retrieve the remaining results.</p>
@@ -3722,10 +3742,10 @@ module Aws::Organizations
     #               </li>
     #            </ul>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that you can retrieve the remaining results.</p>
@@ -3776,10 +3796,10 @@ module Aws::Organizations
     #   <p>A <code>HandshakeFilter</code> object. Contains the filer used to select the
     #               handshakes for an operation.</p>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that you can retrieve the remaining results.</p>
@@ -3897,10 +3917,10 @@ module Aws::Organizations
     #   <p>A <code>HandshakeFilter</code> object. Contains the filer used to select the
     #               handshakes for an operation.</p>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that you can retrieve the remaining results.</p>
@@ -4058,10 +4078,10 @@ module Aws::Organizations
     # @option params [String] :id
     #   <p>ID for the transfer.</p>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that you can retrieve the remaining results.</p>
@@ -4115,26 +4135,26 @@ module Aws::Organizations
     # @param [Hash, Types::ListOrganizationalUnitsForParentRequest] params
     # @option params [String] :parent_id
     #   <p>ID for the root or OU whose child OUs you want to list.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the 
     #       following:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or
+    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or 
     #             digits.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32
-    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second
+    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second 
     #             "-" dash and from 8 to 32 additional lowercase letters or digits.</p>
     #               </li>
     #            </ul>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that you can retrieve the remaining results.</p>
@@ -4199,10 +4219,10 @@ module Aws::Organizations
     # @option params [String] :type
     #   <p>The type of responsibility. Currently, only <code>BILLING</code> is supported.</p>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that you can retrieve the remaining results.</p>
@@ -4261,7 +4281,7 @@ module Aws::Organizations
     # @option params [String] :child_id
     #   <p>ID for the OU or account whose parent containers you want to list. Don't specify a
     #               root.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a child ID string requires one of the
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a child ID string requires one of the 
     #       following:</p>
     #            <ul>
     #               <li>
@@ -4271,16 +4291,16 @@ module Aws::Organizations
     #               <li>
     #                  <p>
     #                     <b>Organizational unit (OU)</b> - A string that begins with
-    #             "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that
-    #             contains the OU). This string is followed by a second "-" dash and from 8 to 32 additional
+    #             "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that 
+    #             contains the OU). This string is followed by a second "-" dash and from 8 to 32 additional 
     #             lowercase letters or digits.</p>
     #               </li>
     #            </ul>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that you can retrieve the remaining results.</p>
@@ -4409,10 +4429,10 @@ module Aws::Organizations
     #               </li>
     #            </ul>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that you can retrieve the remaining results.</p>
@@ -4494,12 +4514,12 @@ module Aws::Organizations
     # @option params [String] :target_id
     #   <p>ID for the root, organizational unit, or account whose policies you want to
     #               list.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a target ID string requires one of the 
     #       following:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or
+    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or 
     #             digits.</p>
     #               </li>
     #               <li>
@@ -4508,8 +4528,8 @@ module Aws::Organizations
     #               </li>
     #               <li>
     #                  <p>
-    #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32
-    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second
+    #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32 
+    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second 
     #             "-" dash and from 8 to 32 additional lowercase letters or digits.</p>
     #               </li>
     #            </ul>
@@ -4589,10 +4609,10 @@ module Aws::Organizations
     #               </li>
     #            </ul>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that you can retrieve the remaining results.</p>
@@ -4663,10 +4683,10 @@ module Aws::Organizations
     #          </note>
     # @param [Hash, Types::ListRootsRequest] params
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that you can retrieve the remaining results.</p>
@@ -4767,10 +4787,10 @@ module Aws::Organizations
     #               </li>
     #            </ul>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -4807,13 +4827,13 @@ module Aws::Organizations
     # @param [Hash, Types::ListTargetsForPolicyRequest] params
     # @option params [String] :policy_id
     #   <p>ID for the policy whose attachments you want to know.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed 
     #       by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).</p>
     # @option params [String] :next_token
-    #   <p>The parameter for receiving additional results if you receive a
-    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response
-    #       indicates that more output is available. Set this parameter to the value of the previous
-    #       call's <code>NextToken</code> response to indicate where the output should continue
+    #   <p>The parameter for receiving additional results if you receive a 
+    #       <code>NextToken</code> response in a previous request. A <code>NextToken</code> response 
+    #       indicates that more output is available. Set this parameter to the value of the previous 
+    #       call's <code>NextToken</code> response to indicate where the output should continue 
     #       from.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that you can retrieve the remaining results.</p>
@@ -4884,35 +4904,35 @@ module Aws::Organizations
     #       digits.</p>
     # @option params [String] :source_parent_id
     #   <p>ID for the root or organizational unit that you want to move the account from.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the 
     #       following:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or
+    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or 
     #             digits.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32
-    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second
+    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second 
     #             "-" dash and from 8 to 32 additional lowercase letters or digits.</p>
     #               </li>
     #            </ul>
     # @option params [String] :destination_parent_id
     #   <p>ID for the root or organizational unit that you want to move the account to.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a parent ID string requires one of the 
     #       following:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or
+    #                     <b>Root</b> - A string that begins with "r-" followed by from 4 to 32 lowercase letters or 
     #             digits.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <b>Organizational unit (OU)</b> - A string that begins with "ou-" followed by from 4 to 32
-    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second
+    #             lowercase letters or digits (the ID of the root that the OU is in). This string is followed by a second 
     #             "-" dash and from 8 to 32 additional lowercase letters or digits.</p>
     #               </li>
     #            </ul>
@@ -4997,8 +5017,8 @@ module Aws::Organizations
     #             Amazon Web Services service. It grants read-only access to Organizations service data. The account still
     #             requires IAM permissions to access and administer the Amazon Web Services service.</p>
     #          <p>You can run this action only for Amazon Web Services services that support this
-    #     feature. For a current list of services that support it, see the column <i>Supports
-    #     Delegated Administrator</i> in the table at <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html">Amazon Web Services Services that you can use with
+    #     feature. For a current list of services that support it, see the column <i>Supports 
+    #     Delegated Administrator</i> in the table at <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html">Amazon Web Services Services that you can use with 
     #     Organizations</a> in the <i>Organizations User Guide.</i>
     #          </p>
     #          <p>You can only call this operation from the management account.</p>
@@ -5280,14 +5300,14 @@ module Aws::Organizations
     # @param [Hash, Types::UpdateOrganizationalUnitRequest] params
     # @option params [String] :organizational_unit_id
     #   <p>ID for the OU that you want to rename. You can get the ID from the <a>ListOrganizationalUnitsForParent</a> operation.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires
-    #       "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that contains the
-    #       OU). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for an organizational unit ID string requires 
+    #       "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that contains the 
+    #       OU). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters 
     #       or digits.</p>
     # @option params [String] :name
     #   <p>The new name that you want to assign to the OU.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
-    #       that is used to validate this parameter is a string of any of the characters in the ASCII
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
+    #       that is used to validate this parameter is a string of any of the characters in the ASCII 
     #       character range.</p>
     # @example To rename an organizational unit
     #   # The following example shows how to rename an OU. The output confirms the new name:/n/n
@@ -5335,12 +5355,12 @@ module Aws::Organizations
     # @param [Hash, Types::UpdatePolicyRequest] params
     # @option params [String] :policy_id
     #   <p>ID for the policy that you want to update.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> for a policy ID string requires "p-" followed 
     #       by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).</p>
     # @option params [String] :name
     #   <p>If provided, the new name for the policy.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
-    #       that is used to validate this parameter is a string of any of the characters in the ASCII
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
+    #       that is used to validate this parameter is a string of any of the characters in the ASCII 
     #       character range.</p>
     # @option params [String] :description
     #   <p>If provided, the new description for the policy.</p>
@@ -5521,7 +5541,8 @@ module Aws::Organizations
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

@@ -8356,11 +8356,11 @@ module Aws::CloudWatchLogs
     #   <p>An optional list of tag values to filter on.</p>
     #            <ul>
     #               <li>
-    #                  <p>If you specify a filter that contains more than one value for a key,
+    #                  <p>If you specify a filter that contains more than one value for a key, 
     #         the response returns log groups that match any of the specified values for that key.</p>
     #               </li>
     #               <li>
-    #                  <p>If you don't specify values, the response returns all log groups that are
+    #                  <p>If you don't specify values, the response returns all log groups that are 
     #         tagged with that key, with any or no value.</p>
     #               </li>
     #               <li>

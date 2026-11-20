@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::SESv2
     @identifier = :sesv2
 
     add_plugin(::Aws::SESv2::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::SESv2
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::SESv2
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -776,7 +796,7 @@ module Aws::SESv2
     #             permission to send email from the identity.</p>
     #          <p>When you verify an email address, Amazon SES sends an email to the address. Your email
     #             address is verified as soon as you follow the link in the verification email.
-    #
+    #             
     #         </p>
     #          <p>When you verify a domain without specifying the <code>DkimSigningAttributes</code>
     #             object, this operation provides a set of DKIM tokens. You can convert these tokens into
@@ -2576,17 +2596,17 @@ module Aws::SESv2
       request.send_request(options)
     end
 
-    # <p>Retrieve information about a specific reputation entity, including its reputation
-    #             management policy, customer-managed status, Amazon Web Services Amazon SES-managed status, and aggregate
+    # <p>Retrieve information about a specific reputation entity, including its reputation 
+    #             management policy, customer-managed status, Amazon Web Services Amazon SES-managed status, and aggregate 
     #             sending status.</p>
     #          <p>
-    #             <i>Reputation entities</i> represent resources in your Amazon SES account that have reputation
-    #             tracking and management capabilities. The reputation impact reflects the highest
-    #             impact reputation finding for the entity. Reputation findings can be retrieved
+    #             <i>Reputation entities</i> represent resources in your Amazon SES account that have reputation 
+    #             tracking and management capabilities. The reputation impact reflects the highest 
+    #             impact reputation finding for the entity. Reputation findings can be retrieved 
     #             using the <code>ListRecommendations</code> operation.</p>
     # @param [Hash, Types::GetReputationEntityRequest] params
     # @option params [String] :reputation_entity_reference
-    #   <p>The unique identifier for the reputation entity. For resource-type entities,
+    #   <p>The unique identifier for the reputation entity. For resource-type entities, 
     #               this is the Amazon Resource Name (ARN) of the resource.</p>
     # @option params [String] :reputation_entity_type
     #   <p>The type of reputation entity. Currently, only <code>RESOURCE</code> type entities are supported.</p>
@@ -3340,25 +3360,25 @@ module Aws::SESv2
       request.send_request(options)
     end
 
-    # <p>List reputation entities in your Amazon SES account in the current Amazon Web Services Region.
-    #             You can filter the results by entity type, reputation impact, sending status,
+    # <p>List reputation entities in your Amazon SES account in the current Amazon Web Services Region. 
+    #             You can filter the results by entity type, reputation impact, sending status, 
     #             or entity reference prefix.</p>
     #          <p>
-    #             <i>Reputation entities</i> represent resources in your account that have reputation
-    #             tracking and management capabilities. Use this operation to get an overview of
+    #             <i>Reputation entities</i> represent resources in your account that have reputation 
+    #             tracking and management capabilities. Use this operation to get an overview of 
     #             all entities and their current reputation status.</p>
     # @param [Hash, Types::ListReputationEntitiesRequest] params
     # @option params [Hash<String, String>] :filter
-    #   <p>An object that contains filters to apply when listing reputation entities.
-    #               You can filter by entity type, reputation impact, sending status, or entity
+    #   <p>An object that contains filters to apply when listing reputation entities. 
+    #               You can filter by entity type, reputation impact, sending status, or entity 
     #               reference prefix.</p>
     # @option params [String] :next_token
-    #   <p>A token returned from a previous call to <code>ListReputationEntities</code> to indicate
+    #   <p>A token returned from a previous call to <code>ListReputationEntities</code> to indicate 
     #               the position in the list of reputation entities.</p>
     # @option params [Integer] :page_size
-    #   <p>The number of results to show in a single call to <code>ListReputationEntities</code>.
-    #               If the number of results is larger than the number you specified in this parameter,
-    #               then the response includes a <code>NextToken</code> element, which you can use to obtain
+    #   <p>The number of results to show in a single call to <code>ListReputationEntities</code>. 
+    #               If the number of results is larger than the number you specified in this parameter, 
+    #               then the response includes a <code>NextToken</code> element, which you can use to obtain 
     #               additional results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -4069,7 +4089,7 @@ module Aws::SESv2
     #          <note>
     #             <p>The dedicated IP address that you specify must already exist, and must be
     #                 associated with your Amazon Web Services account.
-    #
+    #                 
     #             </p>
     #             <p>The dedicated IP pool you specify must already exist. You can create a new pool by
     #                 using the <code>CreateDedicatedIpPool</code> operation.</p>
@@ -5243,7 +5263,7 @@ module Aws::SESv2
       request.send_request(options)
     end
 
-    # <p>Update the customer-managed sending status for a reputation entity. This allows
+    # <p>Update the customer-managed sending status for a reputation entity. This allows 
     #             you to enable, disable, or reinstate sending for the entity.</p>
     #          <p>The customer-managed status works in conjunction with the Amazon Web Services Amazon SES-managed status
     #         to determine the overall sending capability. When you update the customer-managed status,
@@ -5256,7 +5276,7 @@ module Aws::SESv2
     # @option params [String] :reputation_entity_type
     #   <p>The type of reputation entity. Currently, only <code>RESOURCE</code> type entities are supported.</p>
     # @option params [String] :reputation_entity_reference
-    #   <p>The unique identifier for the reputation entity. For resource-type entities,
+    #   <p>The unique identifier for the reputation entity. For resource-type entities, 
     #               this is the Amazon Resource Name (ARN) of the resource.</p>
     # @option params [String] :sending_status
     #   <p>The new customer-managed sending status for the reputation entity. This can be one of the following:</p>
@@ -5291,8 +5311,8 @@ module Aws::SESv2
       request.send_request(options)
     end
 
-    # <p>Update the reputation management policy for a reputation entity. The policy
-    #             determines how the entity responds to reputation findings, such as automatically
+    # <p>Update the reputation management policy for a reputation entity. The policy 
+    #             determines how the entity responds to reputation findings, such as automatically 
     #             pausing sending when certain thresholds are exceeded.</p>
     #          <p>Reputation management policies are Amazon Web Services Amazon SES-managed (predefined policies).
     #         You can select from none, standard, and strict policies.</p>
@@ -5300,10 +5320,10 @@ module Aws::SESv2
     # @option params [String] :reputation_entity_type
     #   <p>The type of reputation entity. Currently, only <code>RESOURCE</code> type entities are supported.</p>
     # @option params [String] :reputation_entity_reference
-    #   <p>The unique identifier for the reputation entity. For resource-type entities,
+    #   <p>The unique identifier for the reputation entity. For resource-type entities, 
     #               this is the Amazon Resource Name (ARN) of the resource.</p>
     # @option params [String] :reputation_entity_policy
-    #   <p>The Amazon Resource Name (ARN) of the reputation management policy to apply
+    #   <p>The Amazon Resource Name (ARN) of the reputation management policy to apply 
     #               to this entity. This is an Amazon Web Services Amazon SES-managed policy.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -5373,7 +5393,8 @@ module Aws::SESv2
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

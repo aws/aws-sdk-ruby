@@ -1208,13 +1208,13 @@ module Aws::ElasticBeanstalk
     #               <li>
     #                  <p>
     #                     <code>LinkingFrom</code>: Environment is in the process of being linked to by another
-    #             environment.  See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html">Environment links</a>
+    #             environment.  See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html">Environment links</a> 
     #           for details.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>LinkingTo</code>: Environment is in the process of linking to another environment.
-    #             See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html">Environment links</a>
+    #                     <code>LinkingTo</code>: Environment is in the process of linking to another environment.  
+    #             See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html">Environment links</a> 
     #             for details.</p>
     #               </li>
     #               <li>
@@ -2105,13 +2105,13 @@ module Aws::ElasticBeanstalk
     #               <li>
     #                  <p>
     #                     <code>LinkingFrom</code>: Environment is in the process of being linked to by another
-    #             environment.  See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html">Environment links</a>
+    #             environment.  See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html">Environment links</a> 
     #           for details.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>LinkingTo</code>: Environment is in the process of linking to another environment.
-    #             See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html">Environment links</a>
+    #                     <code>LinkingTo</code>: Environment is in the process of linking to another environment.  
+    #             See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html">Environment links</a> 
     #             for details.</p>
     #               </li>
     #               <li>
@@ -3156,7 +3156,7 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     # @!attribute lifecycle_state
     #   <p>The support life cycle state of the platform branch.</p>
-    #            <p>Possible values: <code>beta</code> | <code>supported</code> | <code>deprecated</code> |
+    #            <p>Possible values: <code>beta</code> | <code>supported</code> | <code>deprecated</code> | 
     #         <code>retired</code>
     #            </p>
     #   @return [String]
@@ -3970,7 +3970,7 @@ module Aws::ElasticBeanstalk
     #   <p>CPU utilization metrics for the instance.</p>
     #   @return [Types::CPUUtilization]
     # @!attribute load_average
-    #   <p>Load average in the last 1-minute, 5-minute, and 15-minute periods.
+    #   <p>Load average in the last 1-minute, 5-minute, and 15-minute periods. 
     #         For more information, see
     #           <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-metrics.html#health-enhanced-metrics-os">Operating System Metrics</a>.</p>
     #   @return [Array<Float>]
@@ -4097,13 +4097,13 @@ module Aws::ElasticBeanstalk
     #               <li>
     #                  <p>
     #                     <code>LinkingFrom</code>: Environment is in the process of being linked to by another
-    #             environment.  See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html">Environment links</a>
+    #             environment.  See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html">Environment links</a> 
     #           for details.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>LinkingTo</code>: Environment is in the process of linking to another environment.
-    #             See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html">Environment links</a>
+    #                     <code>LinkingTo</code>: Environment is in the process of linking to another environment.  
+    #             See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html">Environment links</a> 
     #             for details.</p>
     #               </li>
     #               <li>
@@ -4622,13 +4622,13 @@ module Aws::ElasticBeanstalk
     #               <li>
     #                  <p>
     #                     <code>LinkingFrom</code>: Environment is in the process of being linked to by another
-    #             environment.  See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html">Environment links</a>
+    #             environment.  See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html">Environment links</a> 
     #           for details.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>LinkingTo</code>: Environment is in the process of linking to another environment.
-    #             See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html">Environment links</a>
+    #                     <code>LinkingTo</code>: Environment is in the process of linking to another environment.  
+    #             See <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html">Environment links</a> 
     #             for details.</p>
     #               </li>
     #               <li>

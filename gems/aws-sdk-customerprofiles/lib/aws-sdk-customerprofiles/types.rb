@@ -1259,9 +1259,9 @@ module Aws::CustomerProfiles
     #   @return [String]
     # @!attribute matching
     #   <p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly
-    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every
+    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every 
     #   Saturday at 12AM UTC to detect duplicate profiles in your domains. </p>
-    #            <p>After the Identity Resolution Job completes, use the
+    #            <p>After the Identity Resolution Job completes, use the 
     #   <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a>
     #   API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from
     #   S3.</p>
@@ -1313,9 +1313,9 @@ module Aws::CustomerProfiles
     #   @return [String]
     # @!attribute matching
     #   <p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly
-    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every
+    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every 
     #   Saturday at 12AM UTC to detect duplicate profiles in your domains. </p>
-    #            <p>After the Identity Resolution Job completes, use the
+    #            <p>After the Identity Resolution Job completes, use the 
     #   <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a>
     #   API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from
     #   S3.</p>
@@ -3504,9 +3504,9 @@ module Aws::CustomerProfiles
     #   @return [Types::DomainStats]
     # @!attribute matching
     #   <p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly
-    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every
+    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every 
     #   Saturday at 12AM UTC to detect duplicate profiles in your domains. </p>
-    #            <p>After the Identity Resolution Job completes, use the
+    #            <p>After the Identity Resolution Job completes, use the 
     #   <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a>
     #   API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from
     #   S3.</p>
@@ -3796,7 +3796,7 @@ module Aws::CustomerProfiles
     #   @return [Hash<String, String>]
     # @!attribute object_type_names
     #   <p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.
-    #   It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>,
+    #   It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, 
     #   <code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>
     #   @return [Hash<String, String>]
     # @!attribute workflow_id
@@ -3838,7 +3838,7 @@ module Aws::CustomerProfiles
     end
 
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -4450,7 +4450,7 @@ module Aws::CustomerProfiles
     # @!attribute segment_type
     #   <p>The segment type.</p>
     #            <p> Classic : Segments created using traditional SegmentGroup structure</p>
-    #            <p> Enhanced : Segments created using SQL queries
+    #            <p> Enhanced : Segments created using SQL queries   
     #         </p>
     #   @return [String]
     class GetSegmentDefinitionResponse < Struct.new(
@@ -5045,7 +5045,7 @@ module Aws::CustomerProfiles
     #   <p>Unique identifier for the workflow.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -5711,7 +5711,7 @@ module Aws::CustomerProfiles
     #   <p>The unique name of the domain.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -5763,7 +5763,7 @@ module Aws::CustomerProfiles
     #   @return [Hash<String, String>]
     # @!attribute object_type_names
     #   <p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.
-    #   It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>,
+    #   It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, 
     #   <code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>
     #   @return [Hash<String, String>]
     # @!attribute workflow_id
@@ -5963,7 +5963,7 @@ module Aws::CustomerProfiles
     #   <p>Applies a filter to include profile history records only with the specified <code>ObjectTypeName</code> value in the response.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -6541,7 +6541,7 @@ module Aws::CustomerProfiles
     #   <p>Retrieve workflows ended after timestamp.</p>
     #   @return [Time]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     # @!attribute max_results
@@ -7373,7 +7373,7 @@ module Aws::CustomerProfiles
     #   @return [String]
     # @!attribute object_type_names
     #   <p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.
-    #   It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>,
+    #   It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, 
     #   <code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>
     #   @return [Hash<String, String>]
     # @!attribute tags
@@ -7429,7 +7429,7 @@ module Aws::CustomerProfiles
     #   @return [Hash<String, String>]
     # @!attribute object_type_names
     #   <p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.
-    #   It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>,
+    #   It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, 
     #   <code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>
     #   @return [Hash<String, String>]
     # @!attribute workflow_id
@@ -8587,7 +8587,7 @@ module Aws::CustomerProfiles
     # @!attribute segment_type
     #   <p>The segment type.</p>
     #            <p> Classic : Segments created using traditional SegmentGroup structure</p>
-    #            <p> Enhanced : Segments created using SQL queries
+    #            <p> Enhanced : Segments created using SQL queries   
     #         </p>
     #   @return [String]
     class SegmentDefinitionItem < Struct.new(
@@ -9304,9 +9304,9 @@ module Aws::CustomerProfiles
     #   @return [String]
     # @!attribute matching
     #   <p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly
-    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every
+    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every 
     #   Saturday at 12AM UTC to detect duplicate profiles in your domains. </p>
-    #            <p>After the Identity Resolution Job completes, use the
+    #            <p>After the Identity Resolution Job completes, use the 
     #   <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a>
     #   API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from
     #   S3.</p>
@@ -9358,9 +9358,9 @@ module Aws::CustomerProfiles
     #   @return [String]
     # @!attribute matching
     #   <p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly
-    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every
+    #   batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every 
     #   Saturday at 12AM UTC to detect duplicate profiles in your domains. </p>
-    #            <p>After the Identity Resolution Job completes, use the
+    #            <p>After the Identity Resolution Job completes, use the 
     #   <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a>
     #   API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from
     #   S3.</p>

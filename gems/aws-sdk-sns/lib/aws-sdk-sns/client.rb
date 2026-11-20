@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::SNS
     @identifier = :sns
 
     add_plugin(::Aws::SNS::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::SNS
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::SNS
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -447,12 +467,12 @@ module Aws::SNS
     # <p>Adds a destination phone number to an Amazon Web Services account in the SMS sandbox and sends a
     #             one-time password (OTP) to that phone number.</p>
     #          <p>When you start using Amazon SNS to send SMS messages, your Amazon Web Services account is in the
-    #                 <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for
-    #                 you to try Amazon SNS features without risking your reputation as an SMS sender. While your
-    #                 Amazon Web Services account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send
-    #                 SMS messages only to verified destination phone numbers. For more information, including how to
-    #                 move out of the sandbox to send messages without restrictions,
-    #                 see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in
+    #                 <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for 
+    #                 you to try Amazon SNS features without risking your reputation as an SMS sender. While your 
+    #                 Amazon Web Services account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send 
+    #                 SMS messages only to verified destination phone numbers. For more information, including how to 
+    #                 move out of the sandbox to send messages without restrictions, 
+    #                 see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in 
     #                 the <i>Amazon SNS Developer Guide</i>.</p>
     # @param [Hash, Types::CreateSMSSandboxPhoneNumberInput] params
     # @option params [String] :phone_number
@@ -732,7 +752,7 @@ module Aws::SNS
     #            </note>
     # @option params [String] :data_protection_policy
     #   <important>
-    #               <p>Amazon SNS message data protection is no longer available to new customers.
+    #               <p>Amazon SNS message data protection is no longer available to new customers. 
     #     For more information and guidance on alternatives, see
     #   <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-message-data-protection-availability-change.html">Amazon SNS message data protection availability change</a>.</p>
     #            </important>
@@ -817,12 +837,12 @@ module Aws::SNS
     # <p>Deletes an Amazon Web Services account's verified or pending phone number from the SMS
     #             sandbox.</p>
     #          <p>When you start using Amazon SNS to send SMS messages, your Amazon Web Services account is in the
-    #                 <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for
-    #                 you to try Amazon SNS features without risking your reputation as an SMS sender. While your
-    #                 Amazon Web Services account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send
-    #                 SMS messages only to verified destination phone numbers. For more information, including how to
-    #                 move out of the sandbox to send messages without restrictions,
-    #                 see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in
+    #                 <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for 
+    #                 you to try Amazon SNS features without risking your reputation as an SMS sender. While your 
+    #                 Amazon Web Services account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send 
+    #                 SMS messages only to verified destination phone numbers. For more information, including how to 
+    #                 move out of the sandbox to send messages without restrictions, 
+    #                 see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in 
     #                 the <i>Amazon SNS Developer Guide</i>.</p>
     # @param [Hash, Types::DeleteSMSSandboxPhoneNumberInput] params
     # @option params [String] :phone_number
@@ -865,7 +885,7 @@ module Aws::SNS
     end
 
     # <important>
-    #             <p>Amazon SNS message data protection is no longer available to new customers.
+    #             <p>Amazon SNS message data protection is no longer available to new customers. 
     #   For more information and guidance on alternatives, see
     # <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-message-data-protection-availability-change.html">Amazon SNS message data protection availability change</a>.</p>
     #          </important>
@@ -975,12 +995,12 @@ module Aws::SNS
     # <p>Retrieves the SMS sandbox status for the calling Amazon Web Services account in the target
     #             Amazon Web Services Region.</p>
     #          <p>When you start using Amazon SNS to send SMS messages, your Amazon Web Services account is in the
-    #                 <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for
-    #                 you to try Amazon SNS features without risking your reputation as an SMS sender. While your
-    #                 Amazon Web Services account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send
-    #                 SMS messages only to verified destination phone numbers. For more information, including how to
-    #                 move out of the sandbox to send messages without restrictions,
-    #                 see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in
+    #                 <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for 
+    #                 you to try Amazon SNS features without risking your reputation as an SMS sender. While your 
+    #                 Amazon Web Services account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send 
+    #                 SMS messages only to verified destination phone numbers. For more information, including how to 
+    #                 move out of the sandbox to send messages without restrictions, 
+    #                 see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in 
     #                 the <i>Amazon SNS Developer Guide</i>.</p>
     # @param [Hash, Types::GetSMSSandboxAccountStatusInput] params
     # @example Request syntax with placeholder values
@@ -1202,12 +1222,12 @@ module Aws::SNS
     # <p>Lists the calling Amazon Web Services account's current verified and pending destination phone
     #             numbers in the SMS sandbox.</p>
     #          <p>When you start using Amazon SNS to send SMS messages, your Amazon Web Services account is in the
-    #                 <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for
-    #                 you to try Amazon SNS features without risking your reputation as an SMS sender. While your
-    #                 Amazon Web Services account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send
-    #                 SMS messages only to verified destination phone numbers. For more information, including how to
-    #                 move out of the sandbox to send messages without restrictions,
-    #                 see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in
+    #                 <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for 
+    #                 you to try Amazon SNS features without risking your reputation as an SMS sender. While your 
+    #                 Amazon Web Services account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send 
+    #                 SMS messages only to verified destination phone numbers. For more information, including how to 
+    #                 move out of the sandbox to send messages without restrictions, 
+    #                 see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in 
     #                 the <i>Amazon SNS Developer Guide</i>.</p>
     # @param [Hash, Types::ListSMSSandboxPhoneNumbersInput] params
     # @option params [String] :next_token
@@ -1426,7 +1446,7 @@ module Aws::SNS
     #               transport protocols, include the text of the message as a String value. If you want to
     #               send different messages for each transport protocol, set the value of the
     #                   <code>MessageStructure</code> parameter to <code>json</code> and use a JSON object
-    #               for the <code>Message</code> parameter.
+    #               for the <code>Message</code> parameter. 
     #           </p>
     #            <p></p>
     #            <p>Constraints:</p>
@@ -1728,7 +1748,7 @@ module Aws::SNS
     end
 
     # <important>
-    #             <p>Amazon SNS message data protection is no longer available to new customers.
+    #             <p>Amazon SNS message data protection is no longer available to new customers. 
     #   For more information and guidance on alternatives, see
     # <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-message-data-protection-availability-change.html">Amazon SNS message data protection availability change</a>.</p>
     #          </important>
@@ -2140,9 +2160,9 @@ module Aws::SNS
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>RedrivePolicy</code> – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue.
+    #                     <code>RedrivePolicy</code> – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. 
     #       Messages that can't be delivered due to client errors (for example, when the subscribed endpoint is unreachable)
-    #       or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held
+    #       or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held 
     #       in the dead-letter queue for further analysis or reprocessing.</p>
     #               </li>
     #            </ul>
@@ -2159,8 +2179,8 @@ module Aws::SNS
     #                        <p>Amazon SNS listed as a trusted entity</p>
     #                     </li>
     #                  </ul>
-    #                  <p>Specifying a valid ARN for this attribute is required for Firehose delivery stream subscriptions.
-    #                   For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html">Fanout
+    #                  <p>Specifying a valid ARN for this attribute is required for Firehose delivery stream subscriptions. 
+    #                   For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html">Fanout 
     #                       to Firehose delivery streams</a> in the <i>Amazon SNS Developer Guide</i>.</p>
     #               </li>
     #            </ul>
@@ -2594,9 +2614,9 @@ module Aws::SNS
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>RedrivePolicy</code> – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue.
+    #                     <code>RedrivePolicy</code> – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. 
     #       Messages that can't be delivered due to client errors (for example, when the subscribed endpoint is unreachable)
-    #       or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held
+    #       or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held 
     #       in the dead-letter queue for further analysis or reprocessing.</p>
     #               </li>
     #            </ul>
@@ -2613,8 +2633,8 @@ module Aws::SNS
     #                        <p>Amazon SNS listed as a trusted entity</p>
     #                     </li>
     #                  </ul>
-    #                  <p>Specifying a valid ARN for this attribute is required for Firehose delivery stream subscriptions.
-    #                   For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html">Fanout
+    #                  <p>Specifying a valid ARN for this attribute is required for Firehose delivery stream subscriptions. 
+    #                   For more information, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html">Fanout 
     #                       to Firehose delivery streams</a> in the <i>Amazon SNS Developer Guide</i>.</p>
     #               </li>
     #            </ul>
@@ -2791,12 +2811,12 @@ module Aws::SNS
     # <p>Verifies a destination phone number with a one-time password (OTP) for the calling
     #             Amazon Web Services account.</p>
     #          <p>When you start using Amazon SNS to send SMS messages, your Amazon Web Services account is in the
-    #                 <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for
-    #                 you to try Amazon SNS features without risking your reputation as an SMS sender. While your
-    #                 Amazon Web Services account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send
-    #                 SMS messages only to verified destination phone numbers. For more information, including how to
-    #                 move out of the sandbox to send messages without restrictions,
-    #                 see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in
+    #                 <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for 
+    #                 you to try Amazon SNS features without risking your reputation as an SMS sender. While your 
+    #                 Amazon Web Services account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send 
+    #                 SMS messages only to verified destination phone numbers. For more information, including how to 
+    #                 move out of the sandbox to send messages without restrictions, 
+    #                 see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">SMS sandbox</a> in 
     #                 the <i>Amazon SNS Developer Guide</i>.</p>
     # @param [Hash, Types::VerifySMSSandboxPhoneNumberInput] params
     # @option params [String] :phone_number
@@ -2871,7 +2891,8 @@ module Aws::SNS
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

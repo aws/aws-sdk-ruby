@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::AutoScaling
     @identifier = :autoscaling
 
     add_plugin(::Aws::AutoScaling::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::AutoScaling
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::AutoScaling
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -391,7 +411,7 @@ module Aws::AutoScaling
     #             group. </p>
     #          <p>After the operation completes, use the <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeTrafficSources.html">DescribeTrafficSources</a> API to
     #             return details about the state of the attachments between traffic sources and your Auto Scaling
-    #             group. To detach a traffic source from the Auto Scaling group, call the
+    #             group. To detach a traffic source from the Auto Scaling group, call the 
     #             <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DetachTrafficSources.html">DetachTrafficSources</a> API.</p>
     # @param [Hash, Types::AttachTrafficSourcesInput] params
     # @option params [String] :auto_scaling_group_name
@@ -524,9 +544,9 @@ module Aws::AutoScaling
     # @option params [String] :auto_scaling_group_name
     #   <p>The name of the Auto Scaling group.</p>
     # @option params [Boolean] :wait_for_transitioning_instances
-    #   <p>When cancelling an instance refresh, this indicates whether to wait for in-flight launches
+    #   <p>When cancelling an instance refresh, this indicates whether to wait for in-flight launches 
     #               and terminations to complete. The default is true.</p>
-    #            <p>When set to false, Amazon EC2 Auto Scaling cancels the instance refresh
+    #            <p>When set to false, Amazon EC2 Auto Scaling cancels the instance refresh 
     #               without waiting for any pending launches or terminations to complete.</p>
     # @example To cancel an instance refresh
     #   # This example cancels an instance refresh operation in progress.
@@ -884,7 +904,7 @@ module Aws::AutoScaling
     #           </p>
     # @option params [Types::CapacityReservationSpecification] :capacity_reservation_specification
     #   <p>
-    #           The capacity reservation specification for the Auto Scaling group.
+    #           The capacity reservation specification for the Auto Scaling group. 
     #       </p>
     # @option params [Types::InstanceLifecyclePolicy] :instance_lifecycle_policy
     #   <p>
@@ -1270,8 +1290,8 @@ module Aws::AutoScaling
 
     # <p>Creates a launch configuration.</p>
     #          <p>If you exceed your maximum limit of launch configurations, the call fails. To query
-    #             this limit, call the <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeAccountLimits.html">DescribeAccountLimits</a> API.
-    #             For information about updating this limit, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-quotas.html">Quotas for
+    #             this limit, call the <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeAccountLimits.html">DescribeAccountLimits</a> API. 
+    #             For information about updating this limit, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-quotas.html">Quotas for  
     #             Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-configurations.html">Launch
     #                 configurations</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
@@ -1534,11 +1554,11 @@ module Aws::AutoScaling
     #             option to force the deletion in order for it to succeed. The force delete operation will
     #             also terminate the EC2 instances. If the group has a warm pool, the force delete option
     #             also deletes the warm pool.</p>
-    #          <p>To remove instances from the Auto Scaling group before deleting it, call the
+    #          <p>To remove instances from the Auto Scaling group before deleting it, call the 
     #             <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DetachInstances.html">DetachInstances</a> API with the list of instances and the option to
     #             decrement the desired capacity. This ensures that Amazon EC2 Auto Scaling does not launch replacement
     #             instances.</p>
-    #          <p>To terminate all instances before deleting the Auto Scaling group, call the
+    #          <p>To terminate all instances before deleting the Auto Scaling group, call the 
     #             <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_UpdateAutoScalingGroup.html">UpdateAutoScalingGroup</a> API and set the minimum size and desired capacity
     #             of the Auto Scaling group to
     #             zero.</p>
@@ -1925,7 +1945,7 @@ module Aws::AutoScaling
     #             those Auto Scaling groups that meet the filter criteria. If you do not specify group names or
     #             filters, the output includes information for all Auto Scaling groups. </p>
     #          <p>This operation also returns information about instances in Auto Scaling groups. To retrieve
-    #             information about the instances in a warm pool, you must call the
+    #             information about the instances in a warm pool, you must call the 
     #             <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeWarmPool.html">DescribeWarmPool</a> API. </p>
     # @param [Hash, Types::DescribeAutoScalingGroupsInput] params
     # @option params [Array<String>] :auto_scaling_group_names
@@ -3451,7 +3471,7 @@ module Aws::AutoScaling
       request.send_request(options)
     end
 
-    # <p>Describes the scaling process types for use with the <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_ResumeProcesses.html">ResumeProcesses</a>
+    # <p>Describes the scaling process types for use with the <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_ResumeProcesses.html">ResumeProcesses</a> 
     #             and <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_SuspendProcesses.html">SuspendProcesses</a> APIs.</p>
     # @param [Hash, Smithy::Schema::EmptyStructure] params
     # @example To describe the Auto Scaling process types
@@ -3936,7 +3956,7 @@ module Aws::AutoScaling
     #          <p>Detaches one or more target groups from the specified Auto Scaling group.</p>
     #          <p>When you detach a target group, it enters the <code>Removing</code> state while
     #             deregistering the instances in the group. When all instances are deregistered, then you
-    #             can no longer describe the target group using the
+    #             can no longer describe the target group using the 
     #             <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeLoadBalancerTargetGroups.html">DescribeLoadBalancerTargetGroups</a>
     #             API call. The instances remain running.</p>
     #          <note>
@@ -4029,7 +4049,7 @@ module Aws::AutoScaling
     # <p>Detaches one or more traffic sources from the specified Auto Scaling group.</p>
     #          <p>When you detach a traffic source, it enters the <code>Removing</code> state while
     #             deregistering the instances in the group. When all instances are deregistered, then you
-    #             can no longer describe the traffic source using the
+    #             can no longer describe the traffic source using the 
     #             <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeTrafficSources.html">DescribeTrafficSources</a>
     #             API call. The instances continue to run.</p>
     # @param [Hash, Types::DetachTrafficSourcesInput] params
@@ -4719,11 +4739,11 @@ module Aws::AutoScaling
     #           </p>
     # @option params [String] :client_token
     #   <p>
-    #               A unique, case-sensitive identifier to ensure idempotency of the request.
+    #               A unique, case-sensitive identifier to ensure idempotency of the request. 
     #           </p>
     # @option params [Array<String>] :availability_zones
     #   <p>
-    #               The Availability Zones for the instance launch. Must match or be included in the Auto Scaling group's Availability Zone configuration. Either <code>AvailabilityZones</code> or <code>SubnetIds</code> must be specified for groups with multiple Availability Zone configurations.
+    #               The Availability Zones for the instance launch. Must match or be included in the Auto Scaling group's Availability Zone configuration. Either <code>AvailabilityZones</code> or <code>SubnetIds</code> must be specified for groups with multiple Availability Zone configurations. 
     #           </p>
     # @option params [Array<String>] :availability_zone_ids
     #   <p>
@@ -4823,7 +4843,7 @@ module Aws::AutoScaling
     #                 hooks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
     #          <p>If you exceed your maximum limit of lifecycle hooks, which by default is 50 per Auto Scaling
     #             group, the call fails.</p>
-    #          <p>You can view the lifecycle hooks for an Auto Scaling group using the
+    #          <p>You can view the lifecycle hooks for an Auto Scaling group using the 
     #             <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeLifecycleHooks.html">DescribeLifecycleHooks</a> API call. If you are no longer using a lifecycle
     #             hook, you can delete it by calling the <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DeleteLifecycleHook.html">DeleteLifecycleHook</a> API.</p>
     # @param [Hash, Types::PutLifecycleHookInput] params
@@ -4962,7 +4982,7 @@ module Aws::AutoScaling
     #                 policies</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
     #          <p>For more information about using predictive scaling, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-predictive-scaling.html">Predictive
     #                 scaling for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
-    #          <p>You can view the scaling policies for an Auto Scaling group using the
+    #          <p>You can view the scaling policies for an Auto Scaling group using the 
     #             <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribePolicies.html">DescribePolicies</a> API call. If you are no longer using a scaling policy,
     #             you can delete it by calling the <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DeletePolicy.html">DeletePolicy</a> API.</p>
     # @param [Hash, Types::PutScalingPolicyInput] params
@@ -5315,9 +5335,9 @@ module Aws::AutoScaling
     # <p>Creates or updates a scheduled scaling action for an Auto Scaling group.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scheduled-scaling.html">Scheduled scaling</a> in the
     #                 <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
-    #          <p>You can view the scheduled actions for an Auto Scaling group using the
+    #          <p>You can view the scheduled actions for an Auto Scaling group using the 
     #             <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeScheduledActions.html">DescribeScheduledActions</a>
-    #             API call. If you are no longer using a scheduled action, you can delete it by calling the
+    #             API call. If you are no longer using a scheduled action, you can delete it by calling the 
     #             <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DeleteScheduledAction.html">DeleteScheduledAction</a> API.</p>
     #          <p>If you try to schedule your action in the past, Amazon EC2 Auto Scaling returns an error
     #             message.</p>
@@ -5482,7 +5502,7 @@ module Aws::AutoScaling
     end
 
     # <p>Records a heartbeat for the lifecycle action associated with the specified token or
-    #             instance. This extends the timeout by the length of time defined using the
+    #             instance. This extends the timeout by the length of time defined using the 
     #             <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_PutLifecycleHook.html">PutLifecycleHook</a> API call.</p>
     #          <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling
     #             group:</p>
@@ -5666,7 +5686,7 @@ module Aws::AutoScaling
     #             </li>
     #          </ul>
     #          <p>When you receive a successful response from this operation, Amazon EC2 Auto Scaling immediately
-    #             begins replacing instances. You can check the status of this operation through the
+    #             begins replacing instances. You can check the status of this operation through the 
     #             <a href="https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeInstanceRefreshes.html">DescribeInstanceRefreshes</a> API operation. </p>
     # @param [Hash, Types::RollbackInstanceRefreshInput] params
     # @option params [String] :auto_scaling_group_name
@@ -6478,7 +6498,7 @@ module Aws::AutoScaling
     #       </p>
     # @option params [Types::CapacityReservationSpecification] :capacity_reservation_specification
     #   <p>
-    #               The capacity reservation specification for the Auto Scaling group.
+    #               The capacity reservation specification for the Auto Scaling group. 
     #           </p>
     # @option params [Types::InstanceLifecyclePolicy] :instance_lifecycle_policy
     #   <p>
@@ -6737,7 +6757,8 @@ module Aws::AutoScaling
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

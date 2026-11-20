@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::Synthetics
     @identifier = :synthetics
 
     add_plugin(::Aws::Synthetics::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::Synthetics
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::Synthetics
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -215,7 +235,7 @@ module Aws::Synthetics
     #          <p>You must run this operation in the Region where the canary exists.</p>
     # @param [Hash, Types::AssociateResourceRequest] params
     # @option params [String] :group_identifier
-    #   <p>Specifies the group. You can specify the group name, the ARN, or the
+    #   <p>Specifies the group. You can specify the group name, the ARN, or the 
     #            group ID as the <code>GroupIdentifier</code>.</p>
     # @option params [String] :resource_arn
     #   <p>The ARN of the canary that you want to associate with the specified group.</p>
@@ -251,7 +271,7 @@ module Aws::Synthetics
     #             Considerations for Synthetics Canaries</a>.</p>
     # @param [Hash, Types::CreateCanaryRequest] params
     # @option params [String] :name
-    #   <p>The name for this canary. Be sure to give it a descriptive name
+    #   <p>The name for this canary. Be sure to give it a descriptive name 
     #            that distinguishes it from other canaries in your account.</p>
     #            <p>Do not include secrets or proprietary information in your canary names. The canary name
     #            makes up part of the canary ARN, and the ARN is included in outbound calls over the
@@ -259,15 +279,15 @@ module Aws::Synthetics
     #               Considerations for Synthetics Canaries</a>.</p>
     # @option params [Types::CanaryCodeInput] :code
     #   <p>A structure that includes the entry point from which the canary should start
-    #            running your script. If the script is stored in
+    #            running your script. If the script is stored in 
     #            an Amazon S3 bucket, the bucket name, key, and version are also included.
     #         </p>
     # @option params [String] :artifact_s3_location
     #   <p>The location in Amazon S3 where Synthetics stores artifacts from the test runs of this
-    #            canary. Artifacts include the log file, screenshots, and HAR files.  The name of the
+    #            canary. Artifacts include the log file, screenshots, and HAR files.  The name of the 
     #            Amazon S3 bucket can't include a period (.).</p>
     # @option params [String] :execution_role_arn
-    #   <p>The ARN of the IAM role to be used to run the canary. This role must already exist,
+    #   <p>The ARN of the IAM role to be used to run the canary. This role must already exist, 
     #            and must include <code>lambda.amazonaws.com</code> as a principal in the trust
     #            policy. The role must also have the following permissions:</p>
     #            <ul>
@@ -311,23 +331,23 @@ module Aws::Synthetics
     #   <p>A structure that contains information about how often the canary is to run and when
     #            these test runs are to stop.</p>
     # @option params [Types::CanaryRunConfigInput] :run_config
-    #   <p>A structure that contains the configuration for individual canary runs,
+    #   <p>A structure that contains the configuration for individual canary runs, 
     #            such as timeout value and environment variables.</p>
     #            <important>
-    #               <p>Environment variable keys and values are encrypted at rest using Amazon Web Services owned KMS keys. However, the environment variables
+    #               <p>Environment variable keys and values are encrypted at rest using Amazon Web Services owned KMS keys. However, the environment variables 
     #            are not encrypted on the client side. Do not store sensitive information
     #            in them.</p>
     #            </important>
     # @option params [Integer] :success_retention_period_in_days
-    #   <p>The number of days to retain data about successful runs of this canary. If you omit
+    #   <p>The number of days to retain data about successful runs of this canary. If you omit 
     #            this field, the default of 31 days is used. The valid range is 1 to 455 days.</p>
-    #            <p>This setting affects the range of information returned by <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html">GetCanaryRuns</a>, as well as
+    #            <p>This setting affects the range of information returned by <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html">GetCanaryRuns</a>, as well as 
     #            the range of information displayed in the Synthetics console.
     #         </p>
     # @option params [Integer] :failure_retention_period_in_days
-    #   <p>The number of days to retain data about failed runs of this canary. If you omit
+    #   <p>The number of days to retain data about failed runs of this canary. If you omit 
     #            this field, the default of 31 days is used. The valid range is 1 to 455 days.</p>
-    #            <p>This setting affects the range of information returned by <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html">GetCanaryRuns</a>, as well as
+    #            <p>This setting affects the range of information returned by <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html">GetCanaryRuns</a>, as well as 
     #            the range of information displayed in the Synthetics console.
     #         </p>
     # @option params [String] :runtime_version
@@ -337,7 +357,7 @@ module Aws::Synthetics
     #               Canary Runtime Versions</a>.</p>
     # @option params [Types::VpcConfigInput] :vpc_config
     #   <p>If this canary is to test an endpoint in a VPC, this structure contains
-    #         information about the subnet and security groups of the VPC endpoint.
+    #         information about the subnet and security groups of the VPC endpoint. 
     #         For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html">
     #            Running a Canary in a VPC</a>.</p>
     # @option params [Array<String>] :resources_to_replicate_tags
@@ -353,25 +373,25 @@ module Aws::Synthetics
     #            of the <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html">DeleteCanary</a> operation
     #            determines whether the Lambda functions and layers will be deleted.</p>
     # @option params [Array<Types::BrowserConfig>] :browser_configs
-    #   <p>CloudWatch Synthetics now supports multibrowser canaries for <code>syn-nodejs-puppeteer-11.0</code> and <code>syn-nodejs-playwright-3.0</code> runtimes. This feature allows you to run your canaries on both
+    #   <p>CloudWatch Synthetics now supports multibrowser canaries for <code>syn-nodejs-puppeteer-11.0</code> and <code>syn-nodejs-playwright-3.0</code> runtimes. This feature allows you to run your canaries on both 
     #            Firefox and Chrome browsers. To create a multibrowser canary, you need to specify the BrowserConfigs with a list of browsers you want to use.</p>
     #            <note>
     #               <p>If not specified, <code>browserConfigs</code> defaults to Chrome.</p>
     #            </note>
     # @option params [Array<Types::AddReplicaLocationInput>] :add_replica_locations
-    #   <p>A list of locations (Amazon Web Services Regions) to add as replicas for the canary. Each location specifies a Region and optional VPC configuration for the replica.
+    #   <p>A list of locations (Amazon Web Services Regions) to add as replicas for the canary. Each location specifies a Region and optional VPC configuration for the replica. 
     #            You can add up to 50 replica locations.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>A list of key-value pairs to associate with the canary.
+    #   <p>A list of key-value pairs to associate with the canary. 
     #            You can associate as many as 50 tags with a canary.</p>
     #            <p>Tags can help you organize and categorize your
-    #            resources. You can also use them to scope user permissions, by
+    #            resources. You can also use them to scope user permissions, by 
     #            granting a user permission to access or change only the resources that have
     #            certain tag values.</p>
     #            <p>To have the tags that you apply to this canary also be applied to the Lambda function that
     #            the canary uses, specify this parameter with the value <code>lambda-function</code>.</p>
     # @option params [Types::ArtifactConfigInput] :artifact_config
-    #   <p>A structure that contains the configuration for canary artifacts, including
+    #   <p>A structure that contains the configuration for canary artifacts, including 
     #            the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.</p>
     # @option params [String] :kms_key_arn
     #   <p>The Amazon Resource Name (ARN) of the customer-managed AWS Key Management Service (AWS KMS) key used to encrypt the canary's
@@ -587,9 +607,9 @@ module Aws::Synthetics
     #          canaries. Using groups can help you with
     #          managing and automating your canaries, and you can also view aggregated run results and statistics
     #       for all canaries in a group. </p>
-    #          <p>Groups are global resources. When you create a group, it is replicated across Amazon Web Services Regions, and
+    #          <p>Groups are global resources. When you create a group, it is replicated across Amazon Web Services Regions, and 
     #          you can view it and add canaries to it from any Region.
-    #          Although the group ARN format reflects the Region name where it was created, a group is not constrained to any Region.
+    #          Although the group ARN format reflects the Region name where it was created, a group is not constrained to any Region. 
     #          This means that you can put canaries from multiple Regions into the same group, and then use
     #       that group to view and manage all of those canaries in a single view.</p>
     #          <p>Groups are supported in all Regions except the Regions that are disabled by default. For more information
@@ -601,10 +621,10 @@ module Aws::Synthetics
     #   <p>The name for the group. It can include any Unicode characters.</p>
     #            <p>The names for all groups in your account, across all Regions, must be unique.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>A list of key-value pairs to associate with the group.
+    #   <p>A list of key-value pairs to associate with the group. 
     #            You can associate as many as 50 tags with a group.</p>
     #            <p>Tags can help you organize and categorize your
-    #            resources. You can also use them to scope user permissions, by
+    #            resources. You can also use them to scope user permissions, by 
     #            granting a user permission to access or change only the resources that have
     #            certain tag values.</p>
     # @example Request syntax with placeholder values
@@ -637,10 +657,10 @@ module Aws::Synthetics
     end
 
     # <p>Permanently deletes the specified canary.</p>
-    #          <p>If the canary's <code>ProvisionedResourceCleanup</code> field is set to <code>AUTOMATIC</code>
+    #          <p>If the canary's <code>ProvisionedResourceCleanup</code> field is set to <code>AUTOMATIC</code> 
     #          or you specify <code>DeleteLambda</code> in this operation as <code>true</code>, CloudWatch Synthetics also deletes
     #          the Lambda functions and layers that are used by the canary.</p>
-    #          <p>Other resources used and created by the canary are not automatically deleted.
+    #          <p>Other resources used and created by the canary are not automatically deleted. 
     #          After you delete a canary, you
     #       should also delete the following:</p>
     #          <ul>
@@ -677,8 +697,8 @@ module Aws::Synthetics
     # @option params [Boolean] :delete_lambda
     #   <p>Specifies whether to also delete the Lambda functions and layers used by this canary. The default
     #         is <code>false</code>.</p>
-    #            <p>Your setting for this parameter is used only if the canary doesn't have <code>AUTOMATIC</code> for its
-    #          <code>ProvisionedResourceCleanup</code> field. If that field is set to <code>AUTOMATIC</code>, then the
+    #            <p>Your setting for this parameter is used only if the canary doesn't have <code>AUTOMATIC</code> for its 
+    #          <code>ProvisionedResourceCleanup</code> field. If that field is set to <code>AUTOMATIC</code>, then the 
     #          Lambda functions and layers will be deleted when this canary is deleted. </p>
     #            <p>Type: Boolean</p>
     # @example Request syntax with placeholder values
@@ -704,7 +724,7 @@ module Aws::Synthetics
     #       must be made from its home Region. You can find the home Region of a group within its ARN.</p>
     # @param [Hash, Types::DeleteGroupRequest] params
     # @option params [String] :group_identifier
-    #   <p>Specifies which group to delete. You can specify the group name, the ARN, or the
+    #   <p>Specifies which group to delete. You can specify the group name, the ARN, or the 
     #         group ID as the <code>GroupIdentifier</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -723,18 +743,18 @@ module Aws::Synthetics
 
     # <p>This operation returns a list of the canaries in your account, along with full details
     #       about each canary.</p>
-    #          <p>This operation supports resource-level authorization using an IAM policy and
+    #          <p>This operation supports resource-level authorization using an IAM policy and 
     #       the <code>Names</code> parameter. If you specify the <code>Names</code> parameter, the operation is successful only if you have authorization to view
-    #          all the canaries that you specify in your request. If you do not have permission to view any of
+    #          all the canaries that you specify in your request. If you do not have permission to view any of 
     #          the canaries, the request fails with a 403 response.</p>
-    #          <p>You are required to use the <code>Names</code> parameter if you are logged on to a user or role that has an
-    #          IAM policy that restricts which canaries that you are allowed to view. For more information,
+    #          <p>You are required to use the <code>Names</code> parameter if you are logged on to a user or role that has an 
+    #          IAM policy that restricts which canaries that you are allowed to view. For more information, 
     #          see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html">
     #             Limiting a user to viewing specific canaries</a>.</p>
     # @param [Hash, Types::DescribeCanariesRequest] params
     # @option params [String] :next_token
     #   <p>A token that indicates that there is more data
-    #            available. You can use this token in a subsequent operation to retrieve the next
+    #            available. You can use this token in a subsequent operation to retrieve the next 
     #            set of results.</p>
     # @option params [Integer] :max_results
     #   <p>Specify this parameter to limit how many canaries are returned each time you use
@@ -743,10 +763,10 @@ module Aws::Synthetics
     #   <p>Use this parameter to return only canaries that match the names that you specify here. You can
     #            specify as many as five canary names.</p>
     #            <p>If you specify this parameter, the operation is successful only if you have authorization to view
-    #            all the canaries that you specify in your request. If you do not have permission to view any of
+    #            all the canaries that you specify in your request. If you do not have permission to view any of 
     #            the canaries, the request fails with a 403 response.</p>
-    #            <p>You are required to use this parameter if you are logged on to a user or role that has an
-    #            IAM policy that restricts which canaries that you are allowed to view. For more information,
+    #            <p>You are required to use this parameter if you are logged on to a user or role that has an 
+    #            IAM policy that restricts which canaries that you are allowed to view. For more information, 
     #            see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html">
     #               Limiting a user to viewing specific canaries</a>.</p>
     # @example Request syntax with placeholder values
@@ -893,18 +913,18 @@ module Aws::Synthetics
     end
 
     # <p>Use this operation to see information from the most recent run of each canary that you have created.</p>
-    #          <p>This operation supports resource-level authorization using an IAM policy and
+    #          <p>This operation supports resource-level authorization using an IAM policy and 
     #          the <code>Names</code> parameter. If you specify the <code>Names</code> parameter, the operation is successful only if you have authorization to view
-    #          all the canaries that you specify in your request. If you do not have permission to view any of
+    #          all the canaries that you specify in your request. If you do not have permission to view any of 
     #          the canaries, the request fails with a 403 response.</p>
-    #          <p>You are required to use the <code>Names</code> parameter if you are logged on to a user or role that has an
-    #          IAM policy that restricts which canaries that you are allowed to view. For more information,
+    #          <p>You are required to use the <code>Names</code> parameter if you are logged on to a user or role that has an 
+    #          IAM policy that restricts which canaries that you are allowed to view. For more information, 
     #          see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html">
     #             Limiting a user to viewing specific canaries</a>.</p>
     # @param [Hash, Types::DescribeCanariesLastRunRequest] params
     # @option params [String] :next_token
     #   <p>A token that indicates that there is more data
-    #            available. You can use this token in a subsequent <code>DescribeCanariesLastRun</code> operation to retrieve the next
+    #            available. You can use this token in a subsequent <code>DescribeCanariesLastRun</code> operation to retrieve the next 
     #            set of results.</p>
     # @option params [Integer] :max_results
     #   <p>Specify this parameter to limit how many runs are returned each time you use
@@ -913,10 +933,10 @@ module Aws::Synthetics
     #   <p>Use this parameter to return only canaries that match the names that you specify here. You can
     #            specify as many as five canary names.</p>
     #            <p>If you specify this parameter, the operation is successful only if you have authorization to view
-    #            all the canaries that you specify in your request. If you do not have permission to view any of
+    #            all the canaries that you specify in your request. If you do not have permission to view any of 
     #            the canaries, the request fails with a 403 response.</p>
-    #            <p>You are required to use the <code>Names</code> parameter if you are logged on to a user or role that has an
-    #            IAM policy that restricts which canaries that you are allowed to view. For more information,
+    #            <p>You are required to use the <code>Names</code> parameter if you are logged on to a user or role that has an 
+    #            IAM policy that restricts which canaries that you are allowed to view. For more information, 
     #            see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html">
     #               Limiting a user to viewing specific canaries</a>.</p>
     # @option params [String] :browser_type
@@ -969,13 +989,13 @@ module Aws::Synthetics
       request.send_request(options)
     end
 
-    # <p>Returns a list of Synthetics canary runtime versions. For more information,
+    # <p>Returns a list of Synthetics canary runtime versions. For more information, 
     #          see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html">
     #             Canary Runtime Versions</a>.</p>
     # @param [Hash, Types::DescribeRuntimeVersionsRequest] params
     # @option params [String] :next_token
     #   <p>A token that indicates that there is more data
-    #            available. You can use this token in a subsequent <code>DescribeRuntimeVersions</code> operation to retrieve the next
+    #            available. You can use this token in a subsequent <code>DescribeRuntimeVersions</code> operation to retrieve the next 
     #            set of results.</p>
     # @option params [Integer] :max_results
     #   <p>Specify this parameter to limit how many runs are returned each time you use
@@ -1009,7 +1029,7 @@ module Aws::Synthetics
     # <p>Removes a canary from a group. You must run this operation in the Region where the canary exists.</p>
     # @param [Hash, Types::DisassociateResourceRequest] params
     # @option params [String] :group_identifier
-    #   <p>Specifies the group. You can specify the group name, the ARN, or the
+    #   <p>Specifies the group. You can specify the group name, the ARN, or the 
     #            group ID as the <code>GroupIdentifier</code>.</p>
     # @option params [String] :resource_arn
     #   <p>The ARN of the canary that you want to remove from the specified group.</p>
@@ -1182,7 +1202,7 @@ module Aws::Synthetics
     #   <p>The name of the canary that you want to see runs for.</p>
     # @option params [String] :next_token
     #   <p>A token that indicates that there is more data
-    #            available. You can use this token in a subsequent <code>GetCanaryRuns</code> operation to retrieve the next
+    #            available. You can use this token in a subsequent <code>GetCanaryRuns</code> operation to retrieve the next 
     #            set of results.</p>
     #            <note>
     #               <p>When auto retry is enabled for the canary, the first subsequent retry is suffixed with *1 indicating its the first retry and the next subsequent try is suffixed with *2.</p>
@@ -1196,8 +1216,8 @@ module Aws::Synthetics
     #   <ul>
     #               <li>
     #                  <p>When you provide <code>RunType=CANARY_RUN</code> and <code>dryRunId</code>, you will get an exception
-    #
-    #
+    #               
+    #               
     #              </p>
     #               </li>
     #               <li>
@@ -1261,7 +1281,7 @@ module Aws::Synthetics
     #       any Region.</p>
     # @param [Hash, Types::GetGroupRequest] params
     # @option params [String] :group_identifier
-    #   <p>Specifies the group to return information for. You can specify the group name, the ARN, or the
+    #   <p>Specifies the group to return information for. You can specify the group name, the ARN, or the 
     #            group ID as the <code>GroupIdentifier</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1294,7 +1314,7 @@ module Aws::Synthetics
     # @param [Hash, Types::ListAssociatedGroupsRequest] params
     # @option params [String] :next_token
     #   <p>A token that indicates that there is more data
-    #            available. You can use this token in a subsequent operation to retrieve the next
+    #            available. You can use this token in a subsequent operation to retrieve the next 
     #            set of results.</p>
     # @option params [Integer] :max_results
     #   <p>Specify this parameter to limit how many groups are returned each time you use
@@ -1331,13 +1351,13 @@ module Aws::Synthetics
     # @param [Hash, Types::ListGroupResourcesRequest] params
     # @option params [String] :next_token
     #   <p>A token that indicates that there is more data
-    #            available. You can use this token in a subsequent operation to retrieve the next
+    #            available. You can use this token in a subsequent operation to retrieve the next 
     #            set of results.</p>
     # @option params [Integer] :max_results
     #   <p>Specify this parameter to limit how many canary ARNs are returned each time you use
     #            the <code>ListGroupResources</code> operation. If you omit this parameter, the default of 20 is used.</p>
     # @option params [String] :group_identifier
-    #   <p>Specifies the group to return information for. You can specify the group name, the ARN, or the
+    #   <p>Specifies the group to return information for. You can specify the group name, the ARN, or the 
     #            group ID as the <code>GroupIdentifier</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1364,7 +1384,7 @@ module Aws::Synthetics
     # @param [Hash, Types::ListGroupsRequest] params
     # @option params [String] :next_token
     #   <p>A token that indicates that there is more data
-    #            available. You can use this token in a subsequent operation to retrieve the next
+    #            available. You can use this token in a subsequent operation to retrieve the next 
     #            set of results.</p>
     # @option params [Integer] :max_results
     #   <p>Specify this parameter to limit how many groups are returned each time you use
@@ -1424,8 +1444,8 @@ module Aws::Synthetics
       request.send_request(options)
     end
 
-    # <p>Use this operation to run a canary that has already been created.
-    #          The frequency of the canary runs is determined by the value of the canary's <code>Schedule</code>. To see a canary's schedule,
+    # <p>Use this operation to run a canary that has already been created.  
+    #          The frequency of the canary runs is determined by the value of the canary's <code>Schedule</code>. To see a canary's schedule, 
     #          use <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanary.html">GetCanary</a>.</p>
     # @param [Hash, Types::StartCanaryRequest] params
     # @option params [String] :name
@@ -1457,7 +1477,7 @@ module Aws::Synthetics
     #            script is stored in an Amazon S3 bucket, the bucket name, key, and version are also included. If
     #            the script was passed into the canary directly, the script code is contained in the value
     #            of <code>Zipfile</code>. </p>
-    #            <p>If you are uploading your canary scripts with an Amazon S3 bucket, your zip file should include your
+    #            <p>If you are uploading your canary scripts with an Amazon S3 bucket, your zip file should include your 
     #         script in a certain folder structure.</p>
     #            <ul>
     #               <li>
@@ -1475,7 +1495,7 @@ module Aws::Synthetics
     #               </li>
     #            </ul>
     # @option params [String] :runtime_version
-    #   <p>Specifies the runtime version to use for the canary.
+    #   <p>Specifies the runtime version to use for the canary.  
     #            For a list of valid runtime versions and for more information about
     #            runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html">
     #               Canary Runtime Versions</a>.</p>
@@ -1483,23 +1503,23 @@ module Aws::Synthetics
     #   <p>A structure that contains input information for a canary run.</p>
     # @option params [Types::VpcConfigInput] :vpc_config
     #   <p>If this canary is to test an endpoint in a VPC, this structure contains
-    #            information about the subnets and security groups of the VPC endpoint.
+    #            information about the subnets and security groups of the VPC endpoint. 
     #            For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html">
     #               Running a Canary in a VPC</a>.</p>
     # @option params [String] :execution_role_arn
-    #   <p>The ARN of the IAM role to be used to run the canary. This role must already exist,
+    #   <p>The ARN of the IAM role to be used to run the canary. This role must already exist, 
     #            and must include <code>lambda.amazonaws.com</code> as a principal in the trust
     #            policy. The role must also have the following permissions:</p>
     # @option params [Integer] :success_retention_period_in_days
-    #   <p>The number of days to retain data about successful runs of this canary. If you omit
+    #   <p>The number of days to retain data about successful runs of this canary. If you omit 
     #            this field, the default of 31 days is used. The valid range is 1 to 455 days.</p>
-    #            <p>This setting affects the range of information returned by <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html">GetCanaryRuns</a>, as well as
+    #            <p>This setting affects the range of information returned by <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html">GetCanaryRuns</a>, as well as 
     #            the range of information displayed in the Synthetics console.
     #         </p>
     # @option params [Integer] :failure_retention_period_in_days
-    #   <p>The number of days to retain data about failed runs of this canary. If you omit
+    #   <p>The number of days to retain data about failed runs of this canary. If you omit 
     #            this field, the default of 31 days is used. The valid range is 1 to 455 days.</p>
-    #            <p>This setting affects the range of information returned by <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html">GetCanaryRuns</a>, as well as
+    #            <p>This setting affects the range of information returned by <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html">GetCanaryRuns</a>, as well as 
     #            the range of information displayed in the Synthetics console.
     #         </p>
     # @option params [Types::VisualReferenceInput] :visual_reference
@@ -1512,16 +1532,16 @@ module Aws::Synthetics
     #            </p>
     # @option params [String] :artifact_s3_location
     #   <p>The location in Amazon S3 where Synthetics stores artifacts from the test runs of this
-    #
-    #            canary. Artifacts include the log file, screenshots, and HAR files.  The name of the
+    #   
+    #            canary. Artifacts include the log file, screenshots, and HAR files.  The name of the 
     #            Amazon S3 bucket can't include a period (.).</p>
     # @option params [Types::ArtifactConfigInput] :artifact_config
-    #   <p>A structure that contains the configuration for canary artifacts, including the
+    #   <p>A structure that contains the configuration for canary artifacts, including the 
     #            encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.</p>
     # @option params [String] :provisioned_resource_cleanup
     #   <p>Specifies whether to also delete the Lambda functions and layers used by this canary
     #            when the canary is deleted. If you omit this parameter, the default of <code>AUTOMATIC</code> is used, which means
-    #
+    #   
     #            that the Lambda functions and layers will be deleted when the canary is deleted.</p>
     #            <p>If the value of this parameter is <code>OFF</code>, then the value of the <code>DeleteLambda</code> parameter
     #            of the <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html">DeleteCanary</a> operation
@@ -1627,11 +1647,11 @@ module Aws::Synthetics
     # <p>Stops the canary to prevent all future runs. If the canary is currently running,the
     #         run that is in progress completes on its own, publishes metrics, and uploads artifacts, but
     #          it is not recorded in Synthetics as a completed run.</p>
-    #          <p>You can use <code>StartCanary</code> to start it running again
+    #          <p>You can use <code>StartCanary</code> to start it running again 
     #          with the canary’s current schedule at any point in the future.  </p>
     # @param [Hash, Types::StopCanaryRequest] params
     # @option params [String] :name
-    #   <p>The name of the canary that you want to stop. To find the names of your
+    #   <p>The name of the canary that you want to stop. To find the names of your 
     #            canaries, use <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html">ListCanaries</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1653,10 +1673,10 @@ module Aws::Synthetics
     #          resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with
     #          certain tag values.</p>
     #          <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>
-    #          <p>You can use the <code>TagResource</code> action with a resource that already has tags. If you specify a new
-    #          tag key for the resource,
+    #          <p>You can use the <code>TagResource</code> action with a resource that already has tags. If you specify a new 
+    #          tag key for the resource, 
     #          this tag is appended to the list of tags associated
-    #          with the resource. If you specify a tag key that is already associated with the resource, the new tag
+    #          with the resource. If you specify a tag key that is already associated with the resource, the new tag 
     #          value that you specify replaces
     #          the previous value for that tag.</p>
     #          <p>You can associate as many as 50 tags with a canary or group.</p>
@@ -1736,16 +1756,16 @@ module Aws::Synthetics
     #          </note>
     # @param [Hash, Types::UpdateCanaryRequest] params
     # @option params [String] :name
-    #   <p>The name of the canary that you want to update. To find the names of your
+    #   <p>The name of the canary that you want to update. To find the names of your 
     #            canaries, use <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html">DescribeCanaries</a>.</p>
     #            <p>You cannot change the name of a canary that has already been created.</p>
     # @option params [Types::CanaryCodeInput] :code
     #   <p>A structure that includes the entry point from which the canary should start
-    #            running your script. If the script is stored in
+    #            running your script. If the script is stored in 
     #            an Amazon S3 bucket, the bucket name, key, and version are also included.
     #         </p>
     # @option params [String] :execution_role_arn
-    #   <p>The ARN of the IAM role to be used to run the canary. This role must already exist,
+    #   <p>The ARN of the IAM role to be used to run the canary. This role must already exist, 
     #            and must include <code>lambda.amazonaws.com</code> as a principal in the trust
     #            policy. The role must also have the following permissions:</p>
     #            <ul>
@@ -1786,7 +1806,7 @@ module Aws::Synthetics
     #               </li>
     #            </ul>
     # @option params [String] :runtime_version
-    #   <p>Specifies the runtime version to use for the canary.
+    #   <p>Specifies the runtime version to use for the canary.  
     #            For a list of valid runtime versions and for more information about
     #            runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html">
     #               Canary Runtime Versions</a>.</p>
@@ -1794,30 +1814,30 @@ module Aws::Synthetics
     #   <p>A structure that contains information about how often the canary is to run, and when
     #            these runs are to stop.</p>
     # @option params [Types::CanaryRunConfigInput] :run_config
-    #   <p>A structure that contains the timeout value that is used for each individual run of the
+    #   <p>A structure that contains the timeout value that is used for each individual run of the 
     #            canary.</p>
     #            <important>
-    #               <p>Environment variable keys and values are encrypted at rest using Amazon Web Services owned KMS keys. However, the environment variables
+    #               <p>Environment variable keys and values are encrypted at rest using Amazon Web Services owned KMS keys. However, the environment variables 
     #            are not encrypted on the client side. Do not store sensitive information
     #            in them.</p>
     #            </important>
     # @option params [Integer] :success_retention_period_in_days
     #   <p>The number of days to retain data about successful runs of this canary.</p>
-    #            <p>This setting affects the range of information returned by <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html">GetCanaryRuns</a>, as well as
+    #            <p>This setting affects the range of information returned by <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html">GetCanaryRuns</a>, as well as 
     #            the range of information displayed in the Synthetics console.
     #         </p>
     # @option params [Integer] :failure_retention_period_in_days
     #   <p>The number of days to retain data about failed runs of this canary.</p>
-    #            <p>This setting affects the range of information returned by <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html">GetCanaryRuns</a>, as well as
+    #            <p>This setting affects the range of information returned by <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html">GetCanaryRuns</a>, as well as 
     #            the range of information displayed in the Synthetics console.
     #         </p>
     # @option params [Types::VpcConfigInput] :vpc_config
     #   <p>If this canary is to test an endpoint in a VPC, this structure contains
-    #            information about the subnet and security groups of the VPC endpoint.
+    #            information about the subnet and security groups of the VPC endpoint. 
     #            For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html">
     #               Running a Canary in a VPC</a>.</p>
     # @option params [Types::VisualReferenceInput] :visual_reference
-    #   <p>Defines the screenshots to use as the baseline for comparisons during visual monitoring comparisons during future runs of this canary. If you omit this
+    #   <p>Defines the screenshots to use as the baseline for comparisons during visual monitoring comparisons during future runs of this canary. If you omit this 
     #         parameter, no changes are made to any baseline screenshots that the canary might be using already.</p>
     #            <p>Visual monitoring is supported only on canaries running the <b>syn-puppeteer-node-3.2</b>
     #            runtime or later. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html">
@@ -1825,12 +1845,12 @@ module Aws::Synthetics
     #                  Visual monitoring blueprint</a>
     #            </p>
     # @option params [String] :artifact_s3_location
-    #   <p>The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary.
+    #   <p>The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. 
     #            Artifacts include the log file, screenshots, and HAR files. The name of the
     #            Amazon S3 bucket can't include a period (.).</p>
     # @option params [Types::ArtifactConfigInput] :artifact_config
-    #   <p>A structure that contains the configuration for canary artifacts,
-    #            including the encryption-at-rest settings for artifacts that
+    #   <p>A structure that contains the configuration for canary artifacts, 
+    #            including the encryption-at-rest settings for artifacts that 
     #            the canary uploads to Amazon S3.</p>
     # @option params [String] :provisioned_resource_cleanup
     #   <p>Specifies whether to also delete the Lambda functions and layers used by this canary
@@ -1849,9 +1869,9 @@ module Aws::Synthetics
     #               <code>syn-nodejs-puppeteer-11.0</code> and above, and <code>syn-nodejs-playwright-3.0</code> and above, only supports <code>visualReferences</code>. <code>visualReference</code> field is not supported.</p>
     #            <p>Versions older than <code>syn-nodejs-puppeteer-11.0</code> supports both <code>visualReference</code> and <code>visualReferences</code> for backward compatibility. It is recommended to use <code>visualReferences</code>
     #            for consistency and future compatibility.</p>
-    #            <p>For multibrowser visual monitoring,  you can update the baseline for all configured browsers in a single update call by specifying a list of VisualReference objects, one per browser.
+    #            <p>For multibrowser visual monitoring,  you can update the baseline for all configured browsers in a single update call by specifying a list of VisualReference objects, one per browser. 
     #            Each VisualReference object maps to a specific browser configuration, allowing you to manage visual baselines for multiple browsers simultaneously.</p>
-    #            <p>For single configuration canaries using Chrome browser (default browser), use visualReferences for <code>syn-nodejs-puppeteer-11.0</code> and above, and <code>syn-nodejs-playwright-3.0</code> and
+    #            <p>For single configuration canaries using Chrome browser (default browser), use visualReferences for <code>syn-nodejs-puppeteer-11.0</code> and above, and <code>syn-nodejs-playwright-3.0</code> and 
     #            above canaries. The browserType in the visualReference object is not mandatory.</p>
     # @option params [Array<Types::BrowserConfig>] :browser_configs
     #   <p>A structure that specifies the browser type to use for a canary run. CloudWatch Synthetics supports running canaries on both <code>CHROME</code> and <code>FIREFOX</code> browsers.</p>
@@ -1859,10 +1879,10 @@ module Aws::Synthetics
     #               <p>If not specified, <code>browserConfigs</code> defaults to Chrome.</p>
     #            </note>
     # @option params [Array<Types::AddReplicaLocationInput>] :add_replica_locations
-    #   <p>A list of locations (Amazon Web Services Regions) to add as replicas for the canary. Each location specifies a Region and optional VPC configuration for the replica.
+    #   <p>A list of locations (Amazon Web Services Regions) to add as replicas for the canary. Each location specifies a Region and optional VPC configuration for the replica. 
     #            You can add up to 50 replica locations.</p>
     # @option params [Array<String>] :remove_replica_locations
-    #   <p>A list of locations (Amazon Web Services Regions) to remove as replicas for the canary. You must specify at least one location to remove. All replicas can be removed in a single API
+    #   <p>A list of locations (Amazon Web Services Regions) to remove as replicas for the canary. You must specify at least one location to remove. All replicas can be removed in a single API      
     #    call and you cannot remove the primary location.</p>
     # @option params [String] :kms_key_arn
     #   <p>The Amazon Resource Name (ARN) of the customer-managed AWS Key Management Service (AWS KMS) key used to encrypt the canary's
@@ -2024,7 +2044,8 @@ module Aws::Synthetics
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

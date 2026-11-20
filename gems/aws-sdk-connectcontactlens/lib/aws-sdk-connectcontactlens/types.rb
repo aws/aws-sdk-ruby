@@ -183,7 +183,7 @@ module Aws::ConnectContactLens
     #   <p>The maximum number of results to return per page.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous
+    #   <p>The token for the next set of results. Use the value returned in the previous 
     #   response in the next request to retrieve the next set of results.</p>
     #   @return [String]
     class ListRealtimeContactAnalysisSegmentsRequest < Struct.new(

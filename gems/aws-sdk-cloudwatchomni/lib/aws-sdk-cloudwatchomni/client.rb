@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::CloudWatchOmni
     @identifier = :cloudwatchomni
 
     add_plugin(::Aws::CloudWatchOmni::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::CloudWatchOmni
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::CloudWatchOmni
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -211,7 +231,7 @@ module Aws::CloudWatchOmni
 
     # Creates an AccessGrant that authorizes a principal to perform a set of
     # actions on resources in a space.
-    #
+    # 
     # Optionally narrow the grant with scoped actions that limit it to specific
     # resources and fields. Use ListAccessGrants and GetAccessGrant to retrieve
     # grants, and DeleteAccessGrant to remove them.
@@ -415,7 +435,7 @@ module Aws::CloudWatchOmni
     end
 
     # Creates an access profile in a space.
-    #
+    # 
     # Use GetAccessProfile and ListAccessProfiles to retrieve profiles,
     # and UpdateAccessProfile to modify one.
     # @param [Hash, Types::CreateAccessProfileInput] params
@@ -491,7 +511,7 @@ module Aws::CloudWatchOmni
     end
 
     # Creates a new alert within a space.
-    #
+    # 
     # Use GetAlert and ListAlerts to retrieve alerts, UpdateAlert to modify one,
     # and DeleteAlert to remove it.
     # @param [Hash, Types::CreateAlertInput] params
@@ -919,7 +939,7 @@ module Aws::CloudWatchOmni
     end
 
     # Creates a domain with identity provider configuration.
-    #
+    # 
     # Use GetDomain to retrieve the domain, UpdateDomain to change its
     # configuration, and CreateSpace to add spaces within it.
     # @param [Hash, Types::CreateDomainInput] params
@@ -1343,7 +1363,7 @@ module Aws::CloudWatchOmni
     end
 
     # Creates a new dashboard within a space.
-    #
+    # 
     # Use GetOmniDashboard and ListOmniDashboards to retrieve dashboards,
     # UpdateOmniDashboard to modify one, and DeleteOmniDashboard to remove it.
     # @param [Hash, Types::CreateOmniDashboardInput] params
@@ -1427,7 +1447,7 @@ module Aws::CloudWatchOmni
     end
 
     # Generates a one-time code for deep-link authentication.
-    #
+    # 
     # Direct the user's browser to the returned deepLinkUrl before it expires. The code is
     # exchanged for an authenticated, domain-scoped session and can be used only once.
     # @param [Hash, Types::CreateOneTimeDeepLinkCodeInput] params
@@ -1476,7 +1496,7 @@ module Aws::CloudWatchOmni
     end
 
     # Creates a space in a domain.
-    #
+    # 
     # Use GetSpace to retrieve the space, ListSpaces to enumerate spaces,
     # UpdateSpace to modify it, and DeleteSpace to remove it.
     # @param [Hash, Types::CreateSpaceInput] params
@@ -1584,7 +1604,7 @@ module Aws::CloudWatchOmni
     end
 
     # Creates a new SQL view.
-    #
+    # 
     # A view is a named, reusable SQL query that can be referenced from
     # telemetry queries. View names must be unique within the account and
     # region. Only USER views can be created — MANAGED views are provisioned
@@ -1655,7 +1675,7 @@ module Aws::CloudWatchOmni
     end
 
     # Removes an existing AccessGrant, revoking the access it granted.
-    #
+    # 
     # A service-managed grant cannot be deleted.
     # @param [Hash, Types::DeleteAccessGrantInput] params
     # @option params [String] :grant_id
@@ -1685,7 +1705,7 @@ module Aws::CloudWatchOmni
     end
 
     # Removes an access profile.
-    #
+    # 
     # An access profile cannot be deleted while access grants reference it.
     # @param [Hash, Types::DeleteAccessProfileInput] params
     # @option params [String] :space_id
@@ -1719,7 +1739,7 @@ module Aws::CloudWatchOmni
     end
 
     # Deletes an alert by its identifier.
-    #
+    # 
     # Idempotent: deleting an alert that has already been removed succeeds without error.
     # @param [Hash, Types::DeleteAlertInput] params
     # @option params [String] :space_id
@@ -1754,7 +1774,7 @@ module Aws::CloudWatchOmni
 
     # Removes a domain and all of its resources. Call this operation in the Region
     # where the domain was created.
-    #
+    # 
     # A domain cannot be deleted while it contains spaces.
     # @param [Hash, Types::DeleteDomainInput] params
     # @option params [String] :domain_id
@@ -1785,7 +1805,7 @@ module Aws::CloudWatchOmni
 
     # Removes an existing organization access grant, revoking the access it
     # granted.
-    #
+    # 
     # A service-managed grant cannot be deleted.
     # @param [Hash, Types::DeleteDomainAccessGrantForOrganizationInput] params
     # @option params [String] :grant_id
@@ -1816,7 +1836,7 @@ module Aws::CloudWatchOmni
 
     # Removes an organization domain and all of its resources. Call this operation in the
     # Region where the domain was created.
-    #
+    # 
     # A domain cannot be deleted while it contains spaces.
     # @param [Hash, Types::DeleteDomainForOrganizationInput] params
     # @option params [String] :domain_id
@@ -1942,7 +1962,7 @@ module Aws::CloudWatchOmni
     end
 
     # Deletes the specified view.
-    #
+    # 
     # Queries that reference the view fail after it is deleted. Managed views
     # cannot be deleted.
     # @param [Hash, Types::DeleteViewRequest] params
@@ -2086,7 +2106,7 @@ module Aws::CloudWatchOmni
     end
 
     # Retrieves an access profile by ID.
-    #
+    # 
     # The response indicates whether the calling principal is currently allowed to
     # assume the profile.
     # @param [Hash, Types::GetAccessProfileInput] params
@@ -2145,7 +2165,7 @@ module Aws::CloudWatchOmni
     end
 
     # Retrieves a single alert by its identifier.
-    #
+    # 
     # Use ListAlerts to enumerate alerts in the space.
     # @param [Hash, Types::GetAlertInput] params
     # @option params [String] :space_id
@@ -2301,7 +2321,7 @@ module Aws::CloudWatchOmni
     end
 
     # Queries the context graph with filtering, traversal, and pagination support.
-    #
+    # 
     # Pagination note: nodes and edges are returned together as a coherent
     # subgraph. Pagination cursors advance over nodes (the primary collection);
     # each page includes all edges connecting nodes within that page. Callers
@@ -3050,7 +3070,7 @@ module Aws::CloudWatchOmni
 
     # Returns temporary credentials for a space in an organization member account.
     # The credentials are valid for one hour.
-    #
+    # 
     # The caller must be the organization's management account or a delegated
     # administrator with access to the target space. The target account must be an
     # active member of the same organization as the domain, and the space must
@@ -3395,7 +3415,7 @@ module Aws::CloudWatchOmni
 
     # Lists alerts within a space, optionally filtered by exact name(s),
     # a single name prefix, or exact alertId(s), with pagination.
-    #
+    # 
     # Use GetAlert to retrieve a single alert's full detail.
     # @param [Hash, Types::ListAlertsInput] params
     # @option params [String] :space_id
@@ -4000,7 +4020,7 @@ module Aws::CloudWatchOmni
     end
 
     # Lists fields available for telemetry queries.
-    #
+    # 
     # Returns a list of fields included in the specified dataset, granular
     # to telemetry type. Returned field names reflect the exact stored casing
     # and are case-sensitive when referenced in query expressions; the query
@@ -4079,7 +4099,7 @@ module Aws::CloudWatchOmni
     end
 
     # Lists telemetry query sessions.
-    #
+    # 
     # Returns a list of telemetry query sessions owned by the caller.
     # @param [Hash, Types::ListTelemetryQuerySessionsRequest] params
     # @option params [String] :next_token
@@ -4132,7 +4152,7 @@ module Aws::CloudWatchOmni
     end
 
     # Lists the views in the caller's account and region.
-    #
+    # 
     # Returns a summary for each view, optionally filtered by view type. View
     # definitions are not included — use GetView to retrieve them.
     # @param [Hash, Types::ListViewsRequest] params
@@ -4241,7 +4261,7 @@ module Aws::CloudWatchOmni
 
     # Searches Identity Center for users and groups in a domain. The domain must be
     # configured with Identity Center.
-    #
+    # 
     # To grant access to a result, pass its principalId to CreateAccessGrant with a
     # principalType of IDC_USER for a user or IDC_GROUP for a group.
     # @param [Hash, Types::SearchPrincipalsInput] params
@@ -4311,7 +4331,7 @@ module Aws::CloudWatchOmni
     end
 
     # Starts a telemetry query within a session.
-    #
+    # 
     # Submits the provided query string for execution in the specified
     # session. Use GetTelemetryQueryResults to poll for results and check
     # query status.
@@ -4353,7 +4373,7 @@ module Aws::CloudWatchOmni
     end
 
     # Starts a new telemetry query session.
-    #
+    # 
     # A session provides a logical grouping for one or more telemetry queries.
     # The returned session ID is required when starting queries via
     # StartTelemetryQuery.
@@ -4418,7 +4438,7 @@ module Aws::CloudWatchOmni
     end
 
     # Stops a telemetry query session.
-    #
+    # 
     # Terminates the specified session. After a session is stopped it cannot
     # be reused.
     # @param [Hash, Types::StopTelemetryQuerySessionRequest] params
@@ -4449,7 +4469,7 @@ module Aws::CloudWatchOmni
     end
 
     # Updates the name or description of an access profile.
-    #
+    # 
     # Only the provided fields are changed; omitted fields are left unchanged.
     # @param [Hash, Types::UpdateAccessProfileInput] params
     # @option params [String] :space_id
@@ -4513,7 +4533,7 @@ module Aws::CloudWatchOmni
     end
 
     # Updates an existing alert.
-    #
+    # 
     # Only non-null fields overwrite existing values.
     # @param [Hash, Types::UpdateAlertInput] params
     # @option params [String] :space_id
@@ -4622,7 +4642,7 @@ module Aws::CloudWatchOmni
     end
 
     # Updates a domain's name or identity provider configuration.
-    #
+    # 
     # Only the provided fields are changed; omitted fields are left unchanged.
     # Renaming a domain also changes the endpoint URLs derived from its name.
     # @param [Hash, Types::UpdateDomainInput] params
@@ -4712,7 +4732,7 @@ module Aws::CloudWatchOmni
 
     # Updates an organization domain's name or identity provider configuration. Call this
     # operation in the Region where the domain was created.
-    #
+    # 
     # Only the provided fields are changed; omitted fields are left unchanged.
     # Renaming a domain also changes the endpoint URLs derived from its name.
     # @param [Hash, Types::UpdateDomainForOrganizationInput] params
@@ -4903,7 +4923,7 @@ module Aws::CloudWatchOmni
     end
 
     # Updates an existing dashboard within a space.
-    #
+    # 
     # Only the provided fields are changed; omitted fields are left unchanged.
     # @param [Hash, Types::UpdateOmniDashboardInput] params
     # @option params [String] :space_id
@@ -4976,7 +4996,7 @@ module Aws::CloudWatchOmni
     end
 
     # Updates a space.
-    #
+    # 
     # Only the provided fields are changed; omitted fields are left unchanged.
     # @param [Hash, Types::UpdateSpaceInput] params
     # @option params [String] :space_id
@@ -5061,7 +5081,7 @@ module Aws::CloudWatchOmni
     end
 
     # Updates an existing view's definition and/or description.
-    #
+    # 
     # Only the fields you provide are changed. Managed views cannot be
     # updated.
     # @param [Hash, Types::UpdateViewRequest] params
@@ -5165,7 +5185,8 @@ module Aws::CloudWatchOmni
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

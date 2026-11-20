@@ -14,7 +14,7 @@ Aws.const_set('ComputeOptimizer', Module.new) unless Aws.const_defined?('Compute
 # @title AWS Compute Optimizer
 # <p>Compute Optimizer is a service that analyzes the configuration and utilization
 #             metrics of your Amazon Web Services compute resources, such as Amazon EC2
-#             instances, Amazon EC2 Auto Scaling groups, Lambda functions, Amazon EBS volumes, and Amazon ECS services on Fargate.
+#             instances, Amazon EC2 Auto Scaling groups, Lambda functions, Amazon EBS volumes, and Amazon ECS services on Fargate. 
 #             It reports whether your resources are optimal, and generates
 #             optimization recommendations to reduce the cost and improve the performance of your
 #             workloads. Compute Optimizer also provides recent utilization metric data, in addition

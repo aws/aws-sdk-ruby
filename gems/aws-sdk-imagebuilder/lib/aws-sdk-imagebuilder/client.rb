@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::Imagebuilder
     @identifier = :imagebuilder
 
     add_plugin(::Aws::Imagebuilder::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::Imagebuilder
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::Imagebuilder
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -330,15 +350,15 @@ module Aws::Imagebuilder
     #   <p>The semantic version of the component. This version follows the semantic version
     #   			syntax.</p>
     #            <note>
-    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>.
+    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. 
     #   	You can assign values for the first three, and can filter on all of them.</p>
     #               <p>
-    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including
-    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the
+    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including 
+    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the 
     #   	build number to the fourth node.</p>
     #               <p>
-    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for
-    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or
+    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for 
+    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or 
     #   	a date, such as 2021.01.01.</p>
     #            </note>
     # @option params [String] :description
@@ -366,7 +386,7 @@ module Aws::Imagebuilder
     #   				<code>data</code> property. You cannot specify both properties.</p>
     # @option params [String] :kms_key_id
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to encrypt this component.
-    #   			This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a>
+    #   			This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a> 
     #   			in the <i>Key Management Service Developer Guide</i>. If you don't specify a key, Image Builder encrypts the
     #   			component data with a KMS key that Image Builder owns.</p>
     # @option params [Hash<String, String>] :tags
@@ -482,15 +502,15 @@ module Aws::Imagebuilder
     #   <p>The semantic version of the container recipe. This version follows the semantic
     #   			version syntax.</p>
     #            <note>
-    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>.
+    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. 
     #   	You can assign values for the first three, and can filter on all of them.</p>
     #               <p>
-    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including
-    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the
+    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including 
+    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the 
     #   	build number to the fourth node.</p>
     #               <p>
-    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for
-    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or
+    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for 
+    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or 
     #   	a date, such as 2021.01.01.</p>
     #            </note>
     # @option params [Array<Types::ComponentConfiguration>] :components
@@ -533,8 +553,8 @@ module Aws::Imagebuilder
     #   <p>The destination repository for the container image. The Amazon ECR repository
     #   			must already exist in the Amazon Web Services Region where the build runs.</p>
     # @option params [String] :kms_key_id
-    #   <p>The Amazon Resource Name (ARN) that uniquely identifies which KMS key is used to encrypt the Dockerfile
-    #   			template. This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a>
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies which KMS key is used to encrypt the Dockerfile 
+    #   			template. This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a> 
     #   			in the <i>Key Management Service Developer Guide</i>.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier you provide to ensure
@@ -1078,7 +1098,7 @@ module Aws::Imagebuilder
     #   			images created by this container pipeline. You must specify either this
     #   			property or <code>imageRecipeArn</code>, but not both.</p>
     # @option params [String] :infrastructure_configuration_arn
-    #   <p>The Amazon Resource Name (ARN) of the infrastructure configuration that
+    #   <p>The Amazon Resource Name (ARN) of the infrastructure configuration that 
     #   			builds images created by this image pipeline.</p>
     # @option params [String] :distribution_configuration_arn
     #   <p>The Amazon Resource Name (ARN) of the distribution configuration that configures and
@@ -1119,7 +1139,7 @@ module Aws::Imagebuilder
     #   			starts. You must also specify <code>executionRole</code> when you provide
     #   			workflows.</p>
     # @option params [String] :execution_role
-    #   <p>The name or Amazon Resource Name (ARN) for the IAM role you create that grants
+    #   <p>The name or Amazon Resource Name (ARN) for the IAM role you create that grants 
     #   			Image Builder access to perform workflow actions.</p>
     # @option params [Types::PipelineLoggingConfiguration] :logging_configuration
     #   <p>Specifies the logging configuration for the image pipeline. Use this
@@ -1275,15 +1295,15 @@ module Aws::Imagebuilder
     #   <p>The semantic version of the image recipe. This version follows the semantic version
     #   			syntax.</p>
     #            <note>
-    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>.
+    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. 
     #   	You can assign values for the first three, and can filter on all of them.</p>
     #               <p>
-    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including
-    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the
+    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including 
+    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the 
     #   	build number to the fourth node.</p>
     #               <p>
-    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for
-    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or
+    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for 
+    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or 
     #   	a date, such as 2021.01.01.</p>
     #            </note>
     # @option params [Array<Types::ComponentConfiguration>] :components
@@ -1294,7 +1314,7 @@ module Aws::Imagebuilder
     #   			of <code>DEPRECATED</code> or <code>DISABLED</code> can't be added to
     #   			new recipes.</p>
     # @option params [String] :parent_image
-    #   <p>The base image for customizations specified in the image recipe. You can specify the
+    #   <p>The base image for customizations specified in the image recipe. You can specify the 
     #   			parent image using one of the following options:</p>
     #            <ul>
     #               <li>
@@ -1304,14 +1324,14 @@ module Aws::Imagebuilder
     #                  <p>Image Builder image Amazon Resource Name (ARN)</p>
     #               </li>
     #               <li>
-    #                  <p>Amazon Web Services Systems Manager (SSM) Parameter Store Parameter, prefixed by <code>ssm:</code>,
+    #                  <p>Amazon Web Services Systems Manager (SSM) Parameter Store Parameter, prefixed by <code>ssm:</code>, 
     #   					followed by the parameter name or ARN.</p>
     #               </li>
     #               <li>
     #                  <p>Amazon Web Services Marketplace product ID</p>
     #               </li>
     #            </ul>
-    #            <p>If you enter an AMI ID or an SSM parameter that contains the AMI ID, you must have access
+    #            <p>If you enter an AMI ID or an SSM parameter that contains the AMI ID, you must have access 
     #   			to the AMI. The AMI must also be in the Region where you're creating
     #   			the recipe.</p>
     # @option params [Array<Types::InstanceBlockDeviceMapping>] :block_device_mappings
@@ -1576,7 +1596,7 @@ module Aws::Imagebuilder
     #               </li>
     #            </ul>
     # @option params [Hash<String, String>] :tags
-    #   <p>The metadata tags to assign to the infrastructure configuration resource that Image Builder
+    #   <p>The metadata tags to assign to the infrastructure configuration resource that Image Builder 
     #   			creates as output. Tags are formatted as key value pairs.</p>
     # @option params [Types::Placement] :placement
     #   <p>The instance placement settings that define where the build and test
@@ -1914,24 +1934,24 @@ module Aws::Imagebuilder
     #   			identical to the latest build version, the request fails because the
     #   			workflow already exists.</p>
     # @option params [String] :semantic_version
-    #   <p>The semantic version of this workflow resource. The semantic version syntax
+    #   <p>The semantic version of this workflow resource. The semantic version syntax 
     #   			adheres to the following rules.</p>
     #            <note>
-    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>.
+    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. 
     #   	You can assign values for the first three, and can filter on all of them.</p>
     #               <p>
-    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including
-    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the
+    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including 
+    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the 
     #   	build number to the fourth node.</p>
     #               <p>
-    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for
-    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or
+    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for 
+    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or 
     #   	a date, such as 2021.01.01.</p>
     #            </note>
     # @option params [String] :description
     #   <p>Describes the workflow.</p>
     # @option params [String] :change_description
-    #   <p>Describes what change has been made in this version of the workflow, or
+    #   <p>Describes what change has been made in this version of the workflow, or 
     #   			what makes this version different from other versions of the workflow.</p>
     # @option params [String] :data
     #   <p>The UTF-8 encoded YAML document content for the workflow, up to
@@ -1948,7 +1968,7 @@ module Aws::Imagebuilder
     #   			or <code>uri</code> properties.</p>
     # @option params [String] :kms_key_id
     #   <p>The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to encrypt this workflow resource.
-    #   			This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a>
+    #   			This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a> 
     #   			in the <i>Key Management Service Developer Guide</i>. If you don't specify a key, Image Builder encrypts the workflow
     #   			document with a KMS key that Image Builder owns.</p>
     # @option params [Hash<String, String>] :tags
@@ -3978,11 +3998,11 @@ module Aws::Imagebuilder
       request.send_request(options)
     end
 
-    # <p>Retrieves runtime information for a specific runtime instance
+    # <p>Retrieves runtime information for a specific runtime instance 
     # 			of the workflow.</p>
     # @param [Hash, Types::GetWorkflowExecutionRequest] params
     # @option params [String] :workflow_execution_id
-    #   <p>Use the unique identifier for a runtime instance of the workflow to get
+    #   <p>Use the unique identifier for a runtime instance of the workflow to get 
     #   			runtime details.</p>
     # @example Get the runtime details for a workflow execution
     #   # The following example retrieves runtime status and step counts for the build workflow that ran for an image build version, using the workflow execution ID returned by ListWorkflowExecutions.
@@ -4036,7 +4056,7 @@ module Aws::Imagebuilder
       request.send_request(options)
     end
 
-    # <p>Retrieves runtime information for a specific runtime instance of
+    # <p>Retrieves runtime information for a specific runtime instance of 
     # 			the workflow step.</p>
     # @param [Hash, Types::GetWorkflowStepExecutionRequest] params
     # @option params [String] :step_execution_id
@@ -4118,15 +4138,15 @@ module Aws::Imagebuilder
     #   <p>The semantic version of the component. This version follows the semantic version
     #   			syntax.</p>
     #            <note>
-    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>.
+    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. 
     #   	You can assign values for the first three, and can filter on all of them.</p>
     #               <p>
-    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including
-    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the
+    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including 
+    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the 
     #   	build number to the fourth node.</p>
     #               <p>
-    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for
-    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or
+    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for 
+    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or 
     #   	a date, such as 2021.01.01.</p>
     #            </note>
     # @option params [String] :description
@@ -4154,7 +4174,7 @@ module Aws::Imagebuilder
     #   			data within the component.</p>
     # @option params [String] :kms_key_id
     #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt this component.
-    #   			This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a>
+    #   			This can be either the Key ARN or the Alias ARN. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">Key identifiers (KeyId)</a> 
     #   			in the <i>Key Management Service Developer Guide</i>. If you don't specify a key, Image Builder encrypts the
     #   			component data with a KMS key that Image Builder owns.</p>
     # @option params [Hash<String, String>] :tags
@@ -4242,7 +4262,7 @@ module Aws::Imagebuilder
     # @option params [String] :description
     #   <p>The description for your disk image import.</p>
     # @option params [String] :platform
-    #   <p>The operating system platform for the imported image. Allowed values include
+    #   <p>The operating system platform for the imported image. Allowed values include 
     #   			the following: <code>Windows</code>.</p>
     # @option params [String] :os_version
     #   <p>The operating system version for the imported image. The only supported
@@ -4253,7 +4273,7 @@ module Aws::Imagebuilder
     #   			If you don't provide a role, Image Builder uses the Image Builder service-linked role in your
     #   			account, and creates it if it doesn't exist.</p>
     # @option params [String] :infrastructure_configuration_arn
-    #   <p>The Amazon Resource Name (ARN) of the infrastructure configuration resource that's used for
+    #   <p>The Amazon Resource Name (ARN) of the infrastructure configuration resource that's used for 
     #   			launching the EC2 instance on which the ISO image is built.</p>
     # @option params [String] :uri
     #   <p>The <code>uri</code> of the ISO disk file that's stored in Amazon S3, in
@@ -4268,7 +4288,7 @@ module Aws::Imagebuilder
     # @option params [Hash<String, String>] :tags
     #   <p>Tags that are attached to image resources created from the import.</p>
     # @option params [Types::RegisterImageOptions] :register_image_options
-    #   <p>Configures Secure Boot and UEFI settings for the
+    #   <p>Configures Secure Boot and UEFI settings for the 
     #   			imported image.</p>
     # @option params [Types::WindowsConfiguration] :windows_configuration
     #   <p>Specifies Windows settings for ISO imports.</p>
@@ -4357,15 +4377,15 @@ module Aws::Imagebuilder
     #   <p>The semantic version to attach to the base image that was created during the import
     #   			process. This version follows the semantic version syntax.</p>
     #            <note>
-    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>.
+    #               <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. 
     #   	You can assign values for the first three, and can filter on all of them.</p>
     #               <p>
-    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including
-    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the
+    #                  <b>Assignment:</b> For the first three nodes, you can assign any positive integer value, including 
+    #   	zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder automatically assigns the 
     #   	build number to the fourth node.</p>
     #               <p>
-    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for
-    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or
+    #                  <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for 
+    #   	the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or 
     #   	a date, such as 2021.01.01.</p>
     #            </note>
     # @option params [String] :description
@@ -4453,7 +4473,7 @@ module Aws::Imagebuilder
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in a single request.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     # @example List the build versions of a component
     #   # The following example lists the build versions that exist for version 1.0.0 of the specified component. The list returns the most recent build version first.
@@ -4556,11 +4576,11 @@ module Aws::Imagebuilder
     # 			<code>DEPRECATED</code> state. To list deprecated components, use the
     # 			<code>status</code> filter with the value <code>DEPRECATED</code>.</p>
     #          <note>
-    #             <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>.
+    #             <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. 
     # 	You can assign values for the first three, and can filter on all of them.</p>
     #             <p>
-    #                <b>Filtering:</b> You can use wildcards (x) to specify the most recent versions or nodes when
-    # 	selecting the base image or components for your recipe. When you use a wildcard in any node, all nodes
+    #                <b>Filtering:</b> You can use wildcards (x) to specify the most recent versions or nodes when 
+    # 	selecting the base image or components for your recipe. When you use a wildcard in any node, all nodes 
     # 	to the right of the first wildcard must also be wildcards.</p>
     #          </note>
     # @param [Hash, Types::ListComponentsRequest] params
@@ -4622,7 +4642,7 @@ module Aws::Imagebuilder
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in a single request.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     # @example List components that you own
     #   # The following example lists the component versions that your account owns, filtered to components for the Linux platform.
@@ -4762,7 +4782,7 @@ module Aws::Imagebuilder
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in a single request.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     # @example List the container recipes you own
     #   # The following example lists the container recipes that you own.
@@ -4834,7 +4854,7 @@ module Aws::Imagebuilder
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in a single request.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     # @example List distribution configurations that match a name filter
     #   # The following example lists the distribution configurations whose name matches the filter value.
@@ -4943,7 +4963,7 @@ module Aws::Imagebuilder
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in a single request.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     # @example List the build versions of an image
     #   # The following example lists the build versions that exist for version 1.0.0 of the specified image, with the output AMI that each build produced.
@@ -5116,7 +5136,7 @@ module Aws::Imagebuilder
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in a single request.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     # @example List the packages in an image build version
     #   # The following example lists the operating system packages that Image Builder detected in the specified image build version.
@@ -5199,7 +5219,7 @@ module Aws::Imagebuilder
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in a single request.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     # @example List the images that an image pipeline created
     #   # The following example lists the images that the specified pipeline created, including a build that is still in progress.
@@ -5395,7 +5415,7 @@ module Aws::Imagebuilder
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in a single request.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     # @example List image pipelines filtered by name
     #   # The following example lists the image pipelines in your account, using a filter to match a specific pipeline name.
@@ -5529,7 +5549,7 @@ module Aws::Imagebuilder
     # @param [Hash, Types::ListImageRecipesRequest] params
     # @option params [String] :owner
     #   <p>You can specify the recipe owner to filter results by that owner. By default, this request will
-    #   			only show image recipes owned by your account. To filter by a different owner, specify one of the
+    #   			only show image recipes owned by your account. To filter by a different owner, specify one of the 
     #   			<code>Valid Values</code> that are listed for this parameter.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>Use the following filters to streamline results:</p>
@@ -5553,7 +5573,7 @@ module Aws::Imagebuilder
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in a single request.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     # @example List the image recipes that you own
     #   # The following example lists the image recipes that you own.
@@ -5669,7 +5689,7 @@ module Aws::Imagebuilder
     #            </ul>
     #            <p>If you don't specify a filter, Image Builder returns an aggregation for your account.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     # @example List image scan finding aggregations for an image pipeline
     #   # The following example aggregates vulnerability findings for images that the specified pipeline created, with counts grouped by severity level.
@@ -5796,7 +5816,7 @@ module Aws::Imagebuilder
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in a single request.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     # @example List vulnerability findings for an image build
     #   # The following example lists the vulnerability findings that Amazon Inspector detected for the specified image build version.
@@ -5979,7 +5999,7 @@ module Aws::Imagebuilder
     # <p>Returns the list of images that you have access to.</p>
     # @param [Hash, Types::ListImagesRequest] params
     # @option params [String] :owner
-    #   <p>Filters the list to images owned by you, by Amazon, or shared with you by other accounts.
+    #   <p>Filters the list to images owned by you, by Amazon, or shared with you by other accounts. 
     #   		By default, only your account's images are returned.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>Use the following filters to streamline results:</p>
@@ -6018,7 +6038,7 @@ module Aws::Imagebuilder
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in a single request.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     # @option params [Boolean] :include_deprecated
     #   <p>Specifies whether to include deprecated Amazon-managed images in the
@@ -6120,7 +6140,7 @@ module Aws::Imagebuilder
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in a single request.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     # @example List infrastructure configurations by name
     #   # The following example lists your infrastructure configurations, filtered to a specific resource name.
@@ -6219,7 +6239,7 @@ module Aws::Imagebuilder
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in a single request.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     # @example List the resources that a lifecycle execution acted on
     #   # The following example lists the resources that the specified lifecycle execution acted on. For a scheduled resource state update that hasn't started to apply changes yet, the resources list is empty.
@@ -6294,7 +6314,7 @@ module Aws::Imagebuilder
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in a single request.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource for which to list lifecycle executions. Specify a
@@ -6367,7 +6387,7 @@ module Aws::Imagebuilder
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in a single request.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     # @example List enabled lifecycle policies
     #   # The following example lists the lifecycle policies in your account that have ENABLED status.
@@ -6490,7 +6510,7 @@ module Aws::Imagebuilder
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in a single request.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     # @example List workflow steps that are waiting for an action
     #   # The following example lists the workflow steps in your account that are paused at a WaitForAction step, waiting for you to resume or stop the workflow with SendWorkflowStepAction.
@@ -6552,7 +6572,7 @@ module Aws::Imagebuilder
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in a single request.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     # @example List the build versions of a workflow
     #   # The following example lists the build versions that exist for version 1.0.0 of the specified workflow, with the most recent build version first and the change description for each build version showing what changed.
@@ -6630,10 +6650,10 @@ module Aws::Imagebuilder
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in a single request.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     # @option params [String] :image_build_version_arn
-    #   <p>List all workflow runtime instances for the specified image build version
+    #   <p>List all workflow runtime instances for the specified image build version 
     #   			resource ARN.</p>
     # @example List the workflow runtime instances for an image build version
     #   # The following example lists the workflow runtime instances that ran for the specified image build version, which was built with the Image Builder default build and test workflows.
@@ -6714,13 +6734,13 @@ module Aws::Imagebuilder
       request.send_request(options)
     end
 
-    # <p>Returns runtime data for each step in a runtime instance of the workflow
+    # <p>Returns runtime data for each step in a runtime instance of the workflow 
     # 			that you specify in the request.</p>
     # @param [Hash, Types::ListWorkflowStepExecutionsRequest] params
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in a single request.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     # @option params [String] :workflow_execution_id
     #   <p>The unique identifier that Image Builder assigned to keep track of runtime details
@@ -6870,7 +6890,7 @@ module Aws::Imagebuilder
     # @option params [Integer] :max_results
     #   <p>The maximum number of items to return in a single request.</p>
     # @option params [String] :next_token
-    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value
+    #   <p>A token to specify where to start paginating. Use the <code>nextToken</code> value 
     #   	from a previously truncated response.</p>
     # @example List workflows that you own
     #   # The following example lists the workflow versions that you own.
@@ -7241,7 +7261,7 @@ module Aws::Imagebuilder
     #   	   information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a>
     #          in the <i>Amazon EC2 API Reference</i>.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>The tags for Image Builder to apply to the image resource that's created
+    #   <p>The tags for Image Builder to apply to the image resource that's created 
     #   			when pipeline execution starts.</p>
     # @example Start a pipeline build manually
     #   # The following example starts a build for the specified pipeline. The response returns the ARN of the new image build version.
@@ -8129,7 +8149,8 @@ module Aws::Imagebuilder
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

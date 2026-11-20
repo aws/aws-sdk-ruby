@@ -714,7 +714,7 @@ module Aws::S3Control
     #   @return [Types::PublicAccessBlockConfiguration]
     # @!attribute bucket_account_id
     #   <p>The Amazon Web Services account ID associated with the S3 bucket associated with this access point.</p>
-    #            <p>For same account access point when your bucket and access point belong to the same account owner, the <code>BucketAccountId</code> is not required.
+    #            <p>For same account access point when your bucket and access point belong to the same account owner, the <code>BucketAccountId</code> is not required. 
     #            For cross-account access point when your bucket and access point are not in the same account, the <code>BucketAccountId</code> is required.
     #         </p>
     #   @return [String]
@@ -3048,8 +3048,8 @@ module Aws::S3Control
     # @!attribute object_arn
     #   <p>The Amazon Resource Name (ARN) for a manifest object.</p>
     #            <important>
-    #               <p>When you're using XML requests, you must
-    #   replace special characters (such as carriage returns) in object keys with their equivalent XML entity codes.
+    #               <p>When you're using XML requests, you must 
+    #   replace special characters (such as carriage returns) in object keys with their equivalent XML entity codes. 
     #   For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
     #               XML-related object key constraints</a> in the <i>Amazon S3 User Guide</i>.</p>
     #            </important>
@@ -3165,10 +3165,10 @@ module Aws::S3Control
     #   <p>Updates the server-side encryption type of an existing encrypted
     #    object in a general purpose bucket. You can use the <code>UpdateObjectEncryption</code>
     #    operation to change encrypted objects from server-side encryption with
-    #    Amazon S3 managed keys (SSE-S3) to server-side encryption with Key Management Service (KMS)
-    #    keys (SSE-KMS), or to apply S3 Bucket Keys. You can also use the
+    #    Amazon S3 managed keys (SSE-S3) to server-side encryption with Key Management Service (KMS) 
+    #    keys (SSE-KMS), or to apply S3 Bucket Keys. You can also use the 
     #    <code>UpdateObjectEncryption</code> operation to change the customer-managed
-    #    KMS key used to encrypt your data so that you can comply with custom
+    #    KMS key used to encrypt your data so that you can comply with custom 
     #    key-rotation standards.</p>
     #   @return [Types::S3UpdateObjectEncryptionOperation]
     class JobOperation < Struct.new(
@@ -3227,7 +3227,7 @@ module Aws::S3Control
     #            be stored.</p>
     #            <note>
     #               <p>
-    #                  <b>Directory buckets</b> - Directory buckets aren't supported
+    #                  <b>Directory buckets</b> - Directory buckets aren't supported 
     #            as a location for Batch Operations to store job completion reports.</p>
     #            </note>
     #   @return [String]
@@ -3492,8 +3492,8 @@ module Aws::S3Control
     # @!attribute prefix
     #   <p>Prefix identifying one or more objects to which the rule applies.</p>
     #            <important>
-    #               <p>When you're using XML requests, you must
-    #   replace special characters (such as carriage returns) in object keys with their equivalent XML entity codes.
+    #               <p>When you're using XML requests, you must 
+    #   replace special characters (such as carriage returns) in object keys with their equivalent XML entity codes. 
     #   For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
     #               XML-related object key constraints</a> in the <i>Amazon S3 User Guide</i>.</p>
     #            </important>
@@ -4306,7 +4306,7 @@ module Aws::S3Control
 
     # @!attribute tags
     #   <p>
-    #   The Amazon Web Services resource tags that are associated with the resource.
+    #   The Amazon Web Services resource tags that are associated with the resource. 
     #   </p>
     #   @return [Array<Types::Tag>]
     class ListTagsForResourceResult < Struct.new(
@@ -4322,7 +4322,7 @@ module Aws::S3Control
     # </p>
     # @!attribute days_greater_than
     #   <p>
-    #   Specifies the maximum object age in days. Must be a positive whole number, greater than the minimum object age and less than or equal to 2,147,483,647.
+    #   Specifies the maximum object age in days. Must be a positive whole number, greater than the minimum object age and less than or equal to 2,147,483,647. 
     #   </p>
     #   @return [Integer]
     # @!attribute days_less_than
@@ -5413,8 +5413,8 @@ module Aws::S3Control
     #            applies. The maximum prefix length is 1,024 characters. To include all objects in an
     #            Outposts bucket, specify an empty string.</p>
     #            <important>
-    #               <p>When you're using XML requests, you must
-    #   replace special characters (such as carriage returns) in object keys with their equivalent XML entity codes.
+    #               <p>When you're using XML requests, you must 
+    #   replace special characters (such as carriage returns) in object keys with their equivalent XML entity codes. 
     #   For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
     #               XML-related object key constraints</a> in the <i>Amazon S3 User Guide</i>.</p>
     #            </important>
@@ -5516,8 +5516,8 @@ module Aws::S3Control
     #   <p>An object key name prefix that identifies the subset of objects that the rule applies
     #            to.</p>
     #            <important>
-    #               <p>When you're using XML requests, you must
-    #   replace special characters (such as carriage returns) in object keys with their equivalent XML entity codes.
+    #               <p>When you're using XML requests, you must 
+    #   replace special characters (such as carriage returns) in object keys with their equivalent XML entity codes. 
     #   For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
     #               XML-related object key constraints</a> in the <i>Amazon S3 User Guide</i>.</p>
     #            </important>
@@ -5704,7 +5704,7 @@ module Aws::S3Control
     #                  <code>destinationBucket</code> in the Availability Zone identified by the AZ ID <code>usw2-az1</code>, set the <code>TargetResource</code> property to
     #                  <code>arn:aws:s3express:<i>region</i>:<i>account_id</i>:/bucket/<i>destination_bucket_base_name</i>--<i>usw2-az1</i>--x-s3</code>. A directory bucket as a destination bucket can be in Availability Zone or Local Zone. </p>
     #                  <note>
-    #                     <p>Copying objects across different Amazon Web Services Regions isn't supported when the source or destination bucket is in Amazon Web Services Local Zones. The source and destination buckets must have the same parent Amazon Web Services Region. Otherwise,
+    #                     <p>Copying objects across different Amazon Web Services Regions isn't supported when the source or destination bucket is in Amazon Web Services Local Zones. The source and destination buckets must have the same parent Amazon Web Services Region. Otherwise, 
     #                     you get an HTTP <code>400 Bad Request</code> error with the error code <code>InvalidRequest</code>.</p>
     #                  </note>
     #               </li>
@@ -5744,12 +5744,12 @@ module Aws::S3Control
     #            assigns the supplied tags to the new objects.</p>
     #   @return [Types::S3ObjectMetadata]
     # @!attribute new_object_tagging
-    #   <p>Specifies a list of tags to add to the destination objects after they are copied.
+    #   <p>Specifies a list of tags to add to the destination objects after they are copied. 
     #            If <code>NewObjectTagging</code> is not specified, the tags of the source objects are copied to destination objects by default.</p>
     #            <note>
     #               <p>
-    #                  <b>Directory buckets</b> - Tags aren't supported by directory buckets.
-    #            If your source objects have tags and your destination bucket is a directory bucket, specify an empty tag set in the <code>NewObjectTagging</code> field
+    #                  <b>Directory buckets</b> - Tags aren't supported by directory buckets. 
+    #            If your source objects have tags and your destination bucket is a directory bucket, specify an empty tag set in the <code>NewObjectTagging</code> field 
     #            to prevent copying the source object tags to the directory bucket.</p>
     #            </note>
     #   @return [Array<Types::S3Tag>]
@@ -5783,11 +5783,11 @@ module Aws::S3Control
     #            <note>
     #               <p>
     #                  <b>Directory buckets</b> - If you specify <code>SSEAlgorithm</code> with <code>KMS</code>, you must specify the <code>
-    #            SSEAwsKmsKeyId</code> parameter with the ID (Key ID or Key ARN) of the KMS
-    #            symmetric encryption customer managed key to use. Otherwise, you get an HTTP <code>400 Bad Request</code> error. The key alias format of the KMS key isn't supported. To encrypt new object copies in a directory bucket with SSE-KMS, you must specify SSE-KMS as the directory bucket's default encryption configuration with a KMS key (specifically, a <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk">customer managed key</a>).
-    #                           The <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">Amazon Web Services managed key</a> (<code>aws/s3</code>) isn't supported. Your SSE-KMS configuration can only support 1 <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk">customer managed key</a> per directory bucket for the lifetime of the bucket.
-    #   After you specify a customer managed key for SSE-KMS as the bucket default encryption, you can't override the customer managed key for the bucket's SSE-KMS configuration.
-    #   Then, when you specify server-side encryption settings for new object copies with SSE-KMS, you must make sure the encryption key is the same customer managed key that you specified for the directory bucket's default encryption configuration.
+    #            SSEAwsKmsKeyId</code> parameter with the ID (Key ID or Key ARN) of the KMS 
+    #            symmetric encryption customer managed key to use. Otherwise, you get an HTTP <code>400 Bad Request</code> error. The key alias format of the KMS key isn't supported. To encrypt new object copies in a directory bucket with SSE-KMS, you must specify SSE-KMS as the directory bucket's default encryption configuration with a KMS key (specifically, a <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk">customer managed key</a>). 
+    #                           The <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">Amazon Web Services managed key</a> (<code>aws/s3</code>) isn't supported. Your SSE-KMS configuration can only support 1 <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk">customer managed key</a> per directory bucket for the lifetime of the bucket. 
+    #   After you specify a customer managed key for SSE-KMS as the bucket default encryption, you can't override the customer managed key for the bucket's SSE-KMS configuration. 
+    #   Then, when you specify server-side encryption settings for new object copies with SSE-KMS, you must make sure the encryption key is the same customer managed key that you specified for the directory bucket's default encryption configuration.                   
     #    </p>
     #            </note>
     #   @return [String]
@@ -5831,7 +5831,7 @@ module Aws::S3Control
     #               <i>bucket-level</i> settings for S3 Bucket Key.</p>
     #            <note>
     #               <p>
-    #                  <b>Directory buckets</b> - S3 Bucket Keys aren't supported, when you copy SSE-KMS encrypted objects from general purpose buckets
+    #                  <b>Directory buckets</b> - S3 Bucket Keys aren't supported, when you copy SSE-KMS encrypted objects from general purpose buckets  
     #   to directory buckets, from directory buckets to general purpose buckets, or between directory buckets, through <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-objects-Batch-Ops">the Copy operation in Batch Operations</a>. In this case, Amazon S3 makes a call to KMS every time a copy request is made for a KMS-encrypted object.</p>
     #            </note>
     #   @return [Boolean]
@@ -6013,7 +6013,7 @@ module Aws::S3Control
     #   <p>The ARN of the source bucket used by the ManifestGenerator.</p>
     #            <note>
     #               <p>
-    #                  <b>Directory buckets</b> - Directory buckets aren't supported
+    #                  <b>Directory buckets</b> - Directory buckets aren't supported 
     #            as the source buckets used by <code>S3JobManifestGenerator</code> to generate the job manifest.</p>
     #            </note>
     #   @return [String]
@@ -6054,7 +6054,7 @@ module Aws::S3Control
     #   <p>The bucket ARN the generated manifest should be written to.</p>
     #            <note>
     #               <p>
-    #                  <b>Directory buckets</b> - Directory buckets aren't supported
+    #                  <b>Directory buckets</b> - Directory buckets aren't supported 
     #            as the buckets to store the generated manifest.</p>
     #            </note>
     #   @return [String]
@@ -6384,7 +6384,7 @@ module Aws::S3Control
 
     # <p>If <code>SSEKMS</code> is specified for <code>UpdateObjectEncryption</code>,
     #  this data type specifies the Amazon Web Services KMS key Amazon Resource Name (ARN) to use
-    #  and whether to use an S3 Bucket Key for server-side encryption using
+    #  and whether to use an S3 Bucket Key for server-side encryption using 
     #  Key Management Service (KMS) keys (SSE-KMS).</p>
     # @!attribute kms_key_arn
     #   <p>Specifies the Amazon Web Services KMS key Amazon Resource Name (ARN) to use for the
@@ -7014,7 +7014,7 @@ module Aws::S3Control
 
     # @!attribute account_id
     #   <p>
-    #   The Amazon Web Services account ID that created the S3 resource that you're trying to add tags to or the requester's account ID.
+    #   The Amazon Web Services account ID that created the S3 resource that you're trying to add tags to or the requester's account ID. 
     #   </p>
     #   @return [String]
     # @!attribute resource_arn
@@ -7022,7 +7022,7 @@ module Aws::S3Control
     #   @return [String]
     # @!attribute tags
     #   <p>
-    #   The Amazon Web Services resource tags that you want to add to the specified S3 resource.
+    #   The Amazon Web Services resource tags that you want to add to the specified S3 resource. 
     #   </p>
     #   @return [Array<Types::Tag>]
     class TagResourceRequest < Struct.new(

@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::Batch
     @identifier = :batch
 
     add_plugin(::Aws::Batch::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::Batch
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::Batch
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -772,7 +792,7 @@ module Aws::Batch
     # @option params [Integer] :total_quantity
     #   <p>The total amount of the consumable resource that is available. Must be non-negative.</p>
     # @option params [String] :resource_type
-    #   <p>Indicates whether the resource is available to be re-used after a job completes. Can be
+    #   <p>Indicates whether the resource is available to be re-used after a job completes. Can be 
     #               one of: </p>
     #            <ul>
     #               <li>
@@ -3925,14 +3945,14 @@ module Aws::Batch
     # <p>Returns a list of Batch consumable resources.</p>
     # @param [Hash, Types::ListConsumableResourcesRequest] params
     # @option params [Array<Types::KeyValuesPair>] :filters
-    #   <p>The filters to apply to the consumable resource list query. If used, only those consumable
+    #   <p>The filters to apply to the consumable resource list query. If used, only those consumable 
     #               resources that match the filter are listed. Filter names and values can be:</p>
     #            <ul>
     #               <li>
     #                  <p>name: <code>CONSUMABLE_RESOURCE_NAME </code>
     #                  </p>
-    #                  <p>values: case-insensitive matches for the consumable resource name. If a filter
-    #                       value ends with an asterisk (*), it matches any consumable resource name that begins
+    #                  <p>values: case-insensitive matches for the consumable resource name. If a filter 
+    #                       value ends with an asterisk (*), it matches any consumable resource name that begins 
     #                       with the string before the '*'.</p>
     #               </li>
     #            </ul>
@@ -3946,10 +3966,10 @@ module Aws::Batch
     #               used, then <code>ListConsumableResources</code> returns up to 100 results and
     #               a <code>nextToken</code> value if applicable.</p>
     # @option params [String] :next_token
-    #   <p>The <code>nextToken</code> value returned from a previous paginated
-    #               <code>ListConsumableResources</code> request where <code>maxResults</code> was used and the
-    #               results exceeded the value of that parameter. Pagination continues from the end of the previous
-    #               results that returned the <code>nextToken</code> value. This value is <code>null</code> when
+    #   <p>The <code>nextToken</code> value returned from a previous paginated 
+    #               <code>ListConsumableResources</code> request where <code>maxResults</code> was used and the 
+    #               results exceeded the value of that parameter. Pagination continues from the end of the previous 
+    #               results that returned the <code>nextToken</code> value. This value is <code>null</code> when 
     #               there are no more results to return.</p>
     #            <note>
     #               <p>Treat this token as an opaque identifier that's only used to
@@ -4230,7 +4250,7 @@ module Aws::Batch
     # @option params [String] :consumable_resource
     #   <p>The name or ARN of the consumable resource.</p>
     # @option params [Array<Types::KeyValuesPair>] :filters
-    #   <p>The filters to apply to the job list query. If used, only those jobs requiring the specified
+    #   <p>The filters to apply to the job list query. If used, only those jobs requiring the specified 
     #               consumable resource (<code>consumableResource</code>) and that match the value of the filters
     #               are listed. The filter names and values can be:</p>
     #            <ul>
@@ -4243,8 +4263,8 @@ module Aws::Batch
     #               <li>
     #                  <p>name: <code>JOB_NAME </code>
     #                  </p>
-    #                  <p>The values are case-insensitive matches for the job name. If a filter value ends
-    #                       with an asterisk (*), it matches any job name that begins with the string before
+    #                  <p>The values are case-insensitive matches for the job name. If a filter value ends 
+    #                       with an asterisk (*), it matches any job name that begins with the string before 
     #                       the '*'.</p>
     #               </li>
     #            </ul>
@@ -4255,13 +4275,13 @@ module Aws::Batch
     #               element. The remaining results of the initial request can be seen by sending another
     #               <code>ListJobsByConsumableResource</code> request with the returned <code>nextToken</code> value.
     #               This value can be between 1 and 100. If this parameter isn't
-    #               used, then <code>ListJobsByConsumableResource</code> returns up to 100 results
+    #               used, then <code>ListJobsByConsumableResource</code> returns up to 100 results 
     #               and a <code>nextToken</code> value if applicable.</p>
     # @option params [String] :next_token
-    #   <p>The <code>nextToken</code> value returned from a previous paginated
-    #               <code>ListJobsByConsumableResource</code> request where <code>maxResults</code> was used and the
-    #               results exceeded the value of that parameter. Pagination continues from the end of the previous
-    #               results that returned the <code>nextToken</code> value. This value is <code>null</code> when
+    #   <p>The <code>nextToken</code> value returned from a previous paginated 
+    #               <code>ListJobsByConsumableResource</code> request where <code>maxResults</code> was used and the 
+    #               results exceeded the value of that parameter. Pagination continues from the end of the previous 
+    #               results that returned the <code>nextToken</code> value. This value is <code>null</code> when 
     #               there are no more results to return.</p>
     #            <note>
     #               <p>Treat this token as an opaque identifier that's only used to
@@ -5782,9 +5802,9 @@ module Aws::Batch
     #            <p>This string is limited to 255 alphanumeric characters, and can be followed by an asterisk
     #         (*).</p>
     # @option params [Integer] :scheduling_priority_override
-    #   <p>The scheduling priority for the job. This only affects jobs in job queues with a
+    #   <p>The scheduling priority for the job. This only affects jobs in job queues with a 
     #         fair-share policy. Jobs with a higher scheduling priority are scheduled before jobs with a lower
-    #         scheduling priority. This overrides any scheduling priority in the job definition and works only
+    #         scheduling priority. This overrides any scheduling priority in the job definition and works only 
     #         within a single share identifier.</p>
     #            <p>The minimum supported value is 0 and the maximum supported value is 9999.</p>
     # @option params [Types::ArrayProperties] :array_properties
@@ -6720,10 +6740,10 @@ module Aws::Batch
     # @option params [Integer] :quantity
     #   <p>The change in the total quantity of the consumable resource. The <code>operation</code>
     #               parameter determines whether the value specified here will be the new total quantity, or
-    #               the amount by which the total quantity will be increased or reduced. Must be a non-negative
+    #               the amount by which the total quantity will be increased or reduced. Must be a non-negative 
     #               value.</p>
     # @option params [String] :client_token
-    #   <p>If this parameter is specified and two update requests with identical payloads and
+    #   <p>If this parameter is specified and two update requests with identical payloads and 
     #             <code>clientToken</code>s are received, these requests are considered the same request. Both requests will succeed, but the update will only happen once. A <code>clientToken</code> is valid for 8 hours.</p>
     # @example To update a consumable resource
     #   # Updates a consumable resource.
@@ -7049,7 +7069,8 @@ module Aws::Batch
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

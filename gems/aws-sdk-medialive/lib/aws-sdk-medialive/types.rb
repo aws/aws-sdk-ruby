@@ -15,7 +15,7 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute input_type
     #   Set to "broadcasterMixedAd" when input contains pre-mixed main audio + AD (narration) as a stereo pair.  The Audio Type field (audioType) will be set to 3, which signals to downstream systems that this stream contains "broadcaster mixed AD". Note that the input received by the encoder must contain pre-mixed audio; the encoder does not perform the mixing. The values in audioTypeControl and audioType (in AudioDescription) are ignored when set to broadcasterMixedAd.
-    #
+    #   
     #   Leave set to "normal" when input does not contain pre-mixed audio + AD.
     #   @return [String]
     # @!attribute profile
@@ -458,16 +458,16 @@ module Aws::MediaLive
     # Audio Normalization Settings
     # @!attribute algorithm
     #   Choose one of the following audio normalization algorithms:
-    #
+    #   
     #   ITU-R BS.1770-1: Ungated loudness. A measurement of ungated average loudness for an entire piece of content,
     #   suitable for measurement of short-form content under ATSC recommendation A/85. Supports up to 5.1 audio channels.
-    #
+    #   
     #   ITU-R BS.1770-2: Gated loudness. A measurement of gated average loudness compliant with the requirements of
     #   EBU-R128. Supports up to 5.1 audio channels.
-    #
+    #   
     #   ITU-R BS.1770-3: Modified peak. The same loudness measurement algorithm as 1770-2, with an updated true peak
     #   measurement.
-    #
+    #   
     #   ITU-R BS.1770-4: Higher channel count. Allows for more audio channels than the other algorithms, including
     #   configurations such as 7.1.
     #   @return [String]
@@ -504,21 +504,21 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute audio_only_image
     #   Optional. Specifies the .jpg or .png image to use as the cover art for an audio-only output. We recommend a low bit-size file because the image increases the output audio bandwidth.
-    #
+    #   
     #   The image is attached to the audio as an ID3 tag, frame type APIC, picture type 0x10, as per the "ID3 tag version 2.4.0 - Native Frames" standard.
     #   @return [Types::InputLocation]
     # @!attribute audio_track_type
     #   Four types of audio-only tracks are supported:
-    #
+    #   
     #   Audio-Only Variant Stream
     #   The client can play back this audio-only stream instead of video in low-bandwidth scenarios. Represented as an EXT-X-STREAM-INF in the HLS manifest.
-    #
+    #   
     #   Alternate Audio, Auto Select, Default
     #   Alternate rendition that the client should try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=YES, AUTOSELECT=YES
-    #
+    #   
     #   Alternate Audio, Auto Select, Not Default
     #   Alternate rendition that the client may try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=YES
-    #
+    #   
     #   Alternate Audio, not Auto Select
     #   Alternate rendition that the client will not try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=NO
     #   @return [String]
@@ -836,10 +836,10 @@ module Aws::MediaLive
     #   @return [Integer]
     # @!attribute rate_control_mode
     #   Rate control mode.
-    #
+    #   
     #   QVBR: Quality will match the specified quality level except when it is constrained by the
     #   maximum bitrate.  Recommended if you or your viewers pay for bandwidth.
-    #
+    #   
     #   CBR: Quality varies, depending on the video complexity. Recommended only if you distribute
     #   your assets to devices that cannot handle variable bitrates.
     #   @return [String]
@@ -915,7 +915,7 @@ module Aws::MediaLive
     #   @return [Types::AvailSettings]
     # @!attribute scte35_segmentation_scope
     #   Configures whether SCTE 35 passthrough triggers segment breaks in all output groups that use segmented outputs. Insertion of a SCTE 35 message typically results in a segment break, in addition to the regular cadence of breaks. The segment breaks appear in video outputs, audio outputs, and captions outputs (if any).
-    #
+    #   
     #   ALL_OUTPUT_GROUPS: Default. Insert the segment break in in all output groups that have segmented outputs. This is the legacy behavior.
     #   SCTE35_ENABLED_OUTPUT_GROUPS: Insert the segment break only in output groups that have SCTE 35 passthrough enabled. This is the recommended value, because it reduces unnecessary segment breaks.
     #   @return [String]
@@ -976,7 +976,7 @@ module Aws::MediaLive
     # @!attribute post_filter_sharpening
     #   Configures the sharpening control, which is available when the bandwidth reduction filter is enabled. This
     #   control sharpens edges and contours, which produces a specific artistic effect that you might want.
-    #
+    #   
     #   We recommend that you test each of the values (including DISABLED) to observe the sharpening effect on the
     #   content.
     #   @return [String]
@@ -5768,7 +5768,7 @@ module Aws::MediaLive
     #   @return [Types::EmbeddedCaptionPositionSettings]
     # @!attribute style_control
     #   Controls the source of position and style information for the output captions.
-    #
+    #   
     #   - "passthrough": Carry the caption position and style from the source captions. When the source captions are embedded, SCTE-20, or ancillary, the position and style are preserved exactly. When the source captions are another format, the position and any supported style are carried over.
     #   - "manual": Applies the specified styling and positioning. All other styling and positioning is given default values.
     #   @return [String]
@@ -6611,7 +6611,7 @@ module Aws::MediaLive
     #   @return [Types::InputLossBehavior]
     # @!attribute output_locking_mode
     #   Indicates how MediaLive pipelines are synchronized.
-    #
+    #   
     #   PIPELINE_LOCKING - MediaLive will attempt to synchronize the output of each pipeline to the other.
     #   EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipeline to the Unix epoch.
     #   DISABLED - MediaLive will not attempt to synchronize the output of pipelines. We advise against disabling output locking because it has negative side effects in most workflows. For more information, see the section about output locking (pipeline locking) in the Medialive user guide.
@@ -6703,10 +6703,10 @@ module Aws::MediaLive
     # @!attribute filter_settings
     #   Optional. Both filters reduce bandwidth by removing imperceptible details. You can enable one of the filters. We
     #   recommend that you try both filters and observe the results to decide which one to use.
-    #
+    #   
     #   The Temporal Filter reduces bandwidth by removing imperceptible details in the content. It combines perceptual
     #   filtering and motion compensated temporal filtering (MCTF). It operates independently of the compression level.
-    #
+    #   
     #   The Bandwidth Reduction filter is a perceptual filter located within the encoding loop. It adapts to the current
     #   compression level to filter imperceptible signals. This filter works only when the resolution is 1080p or lower.
     #   @return [Types::H264FilterSettings]
@@ -6755,7 +6755,7 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute max_bitrate
     #   For QVBR: See the tooltip for Quality level
-    #
+    #   
     #   For VBR: Set the maximum bitrate in order to accommodate expected spikes in the complexity of the video.
     #   @return [Integer]
     # @!attribute min_i_interval
@@ -6790,16 +6790,16 @@ module Aws::MediaLive
     #   @return [Integer]
     # @!attribute rate_control_mode
     #   Rate control mode.
-    #
+    #   
     #   QVBR: Quality will match the specified quality level except when it is constrained by the
     #   maximum bitrate.  Recommended if you or your viewers pay for bandwidth.
-    #
+    #   
     #   VBR: Quality and bitrate vary, depending on the video complexity. Recommended instead of QVBR
     #   if you want to maintain a specific average bitrate over the duration of the channel.
-    #
+    #   
     #   CBR: Quality varies, depending on the video complexity. Recommended only if you distribute
     #   your assets to devices that cannot handle variable bitrates.
-    #
+    #   
     #   Multiplex: This rate control mode is only supported (and is required) when the video is being
     #   delivered to a MediaLive Multiplex in which case the rate control configuration is controlled
     #   by the properties within the Multiplex Program.
@@ -6809,7 +6809,7 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute scene_change_detect
     #   Scene change detection.
-    #
+    #   
     #   - On: inserts I-frames when scene change is detected.
     #   - Off: does not force an I-frame when scene change is detected.
     #   @return [String]
@@ -6973,10 +6973,10 @@ module Aws::MediaLive
     # @!attribute filter_settings
     #   Optional. Both filters reduce bandwidth by removing imperceptible details. You can enable one of the filters. We
     #   recommend that you try both filters and observe the results to decide which one to use.
-    #
+    #   
     #   The Temporal Filter reduces bandwidth by removing imperceptible details in the content. It combines perceptual
     #   filtering and motion compensated temporal filtering (MCTF). It operates independently of the compression level.
-    #
+    #   
     #   The Bandwidth Reduction filter is a perceptual filter located within the encoding loop. It adapts to the current
     #   compression level to filter imperceptible signals. This filter works only when the resolution is 1080p or lower.
     #   @return [Types::H265FilterSettings]
@@ -7032,13 +7032,13 @@ module Aws::MediaLive
     #   @return [Integer]
     # @!attribute rate_control_mode
     #   Rate control mode.
-    #
+    #   
     #   QVBR: Quality will match the specified quality level except when it is constrained by the
     #   maximum bitrate.  Recommended if you or your viewers pay for bandwidth.
-    #
+    #   
     #   CBR: Quality varies, depending on the video complexity. Recommended only if you distribute
     #   your assets to devices that cannot handle variable bitrates.
-    #
+    #   
     #   Multiplex: This rate control mode is only supported (and is required) when the video is being
     #   delivered to a MediaLive Multiplex in which case the rate control configuration is controlled
     #   by the properties within the Multiplex Program.
@@ -7293,7 +7293,7 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute base_url_content1
     #   Optional. One value per output group.
-    #
+    #   
     #   This field is required only if you are completing Base URL content A, and the downstream system has notified you that the media files for pipeline 1 of all outputs are in a location different from the media files for pipeline 0.
     #   @return [String]
     # @!attribute base_url_manifest
@@ -7301,7 +7301,7 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute base_url_manifest1
     #   Optional. One value per output group.
-    #
+    #   
     #   Complete this field only if you are completing Base URL manifest A, and the downstream system has notified you that the child manifest files for pipeline 1 of all outputs are in a location different from the child manifest files for pipeline 0.
     #   @return [String]
     # @!attribute caption_language_mappings
@@ -7344,7 +7344,7 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute i_frame_only_playlists
     #   DISABLED: Do not create an I-frame-only manifest, but do create the master and media manifests (according to the Output Selection field).
-    #
+    #   
     #   STANDARD: Create an I-frame-only manifest for each output that contains video, as well as the other manifests (according to the Output Selection field). The I-frame manifest contains a #EXT-X-I-FRAMES-ONLY tag to indicate it is I-frame only, and one or more #EXT-X-BYTERANGE entries identifying the I-frame position. For example, #EXT-X-BYTERANGE:160364@1461888"
     #   @return [String]
     # @!attribute incomplete_segment_behavior
@@ -7354,7 +7354,7 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute index_n_segments
     #   Applies only if Mode field is LIVE.
-    #
+    #   
     #   Specifies the maximum number of segments in the media manifest file. After this maximum, older segments are removed from the media manifest. This number must be smaller than the number in the Keep Segments field.
     #   @return [Integer]
     # @!attribute input_loss_action
@@ -7368,9 +7368,9 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute keep_segments
     #   Applies only if Mode field is LIVE.
-    #
+    #   
     #   Specifies the number of media segments to retain in the destination directory. This number should be bigger than indexNSegments (Num segments). We recommend (value = (2 x indexNsegments) + 1).
-    #
+    #   
     #   If this "keep segments" number is too low, the following might happen: the player is still reading a media manifest file that lists this segment, but that segment has been removed from the destination directory (as directed by indexNSegments). This situation would result in a 404 HTTP error on the player.
     #   @return [Integer]
     # @!attribute key_format
@@ -7393,14 +7393,14 @@ module Aws::MediaLive
     #   @return [Integer]
     # @!attribute mode
     #   If "vod", all segments are indexed and kept permanently in the destination and manifest. If "live", only the number segments specified in keepSegments and indexNSegments are kept; newer segments replace older segments, which may prevent players from rewinding all the way to the beginning of the event.
-    #
+    #   
     #   VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, converting it to a "VOD" type manifest on completion of the stream.
     #   @return [String]
     # @!attribute output_selection
     #   MANIFESTS_AND_SEGMENTS: Generates manifests (master manifest, if applicable, and media manifests) for this output group.
-    #
+    #   
     #   VARIANT_MANIFESTS_AND_SEGMENTS: Generates media manifests for this output group, but not a master manifest.
-    #
+    #   
     #   SEGMENTS_ONLY: Does not generate any manifests for this output group.
     #   @return [String]
     # @!attribute program_date_time
@@ -7408,9 +7408,9 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute program_date_time_clock
     #   Specifies the algorithm used to drive the HLS EXT-X-PROGRAM-DATE-TIME clock. Options include:
-    #
+    #   
     #   INITIALIZE_FROM_OUTPUT_TIMECODE: The PDT clock is initialized as a function of the first output timecode, then incremented by the EXTINF duration of each encoded segment.
-    #
+    #   
     #   SYSTEM_CLOCK: The PDT clock is initialized as a function of the UTC wall clock, then incremented by the EXTINF duration of each encoded segment. If the PDT clock diverges from the wall clock by more than 500ms, it is resynchronized to the wall clock.
     #   @return [String]
     # @!attribute program_date_time_period
@@ -7418,9 +7418,9 @@ module Aws::MediaLive
     #   @return [Integer]
     # @!attribute redundant_manifest
     #   ENABLED: The master manifest (.m3u8 file) for each pipeline includes information about both pipelines: first its own media files, then the media files of the other pipeline. This feature allows playout device that support stale manifest detection to switch from one manifest to the other, when the current manifest seems to be stale. There are still two destinations and two master manifests, but both master manifests reference the media files from both pipelines.
-    #
+    #   
     #   DISABLED: The master manifest (.m3u8 file) for each pipeline includes information about its own pipeline only.
-    #
+    #   
     #   For an HLS output group with MediaPackage as the destination, the DISABLED behavior is always followed. MediaPackage regenerates the manifests it serves to players so a redundant manifest from MediaLive is irrelevant.
     #   @return [String]
     # @!attribute segment_length
@@ -7446,7 +7446,7 @@ module Aws::MediaLive
     #   @return [Integer]
     # @!attribute ts_file_mode
     #   SEGMENTED_FILES: Emit the program as segments - multiple .ts media files.
-    #
+    #   
     #   SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts media file. The media manifest includes #EXT-X-BYTERANGE tags to index segments for playback. A typical use for this value is when sending the output to AWS Elemental MediaConvert, which can accept only a single media file. Playback while the channel is running is not guaranteed due to HTTP server caching.
     #   @return [String]
     class HlsGroupSettings < Struct.new(
@@ -9807,9 +9807,9 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute segmentation_style
     #   The segmentation style parameter controls how segmentation markers are inserted into the transport stream. With avails, it is possible that segments may be truncated, which can influence where future segmentation markers are inserted.
-    #
+    #   
     #   When a segmentation style of "resetCadence" is selected and a segment is truncated due to an avail, we will reset the segmentation cadence. This means the subsequent segment will have a duration of $segmentationTime seconds.
-    #
+    #   
     #   When a segmentation style of "maintainCadence" is selected and a segment is truncated due to an avail, we will not reset the segmentation cadence. This means the subsequent segment will likely be truncated as well. However, all segments after that will have a duration of $segmentationTime seconds. Note that EBP lookahead is a slight exception to this rule.
     #   @return [String]
     # @!attribute segmentation_time
@@ -10603,12 +10603,12 @@ module Aws::MediaLive
     #   @return [Types::OutputLocationRef]
     # @!attribute event_id
     #   MS Smooth event ID to be sent to the IIS server.
-    #
+    #   
     #   Should only be specified if eventIdMode is set to useConfigured.
     #   @return [String]
     # @!attribute event_id_mode
     #   Specifies whether or not to send an event ID to the IIS server. If no event ID is sent and the same Live Event is used without changing the publishing point, clients might see cached video from the previous run.
-    #
+    #   
     #   Options:
     #   - "useConfigured" - use the value provided in eventId
     #   - "useTimestamp" - generate and send an event ID based on the current timestamp
@@ -12431,7 +12431,7 @@ module Aws::MediaLive
     #   @return [String]
     # @!attribute input_loss_action
     #   Controls the behavior of this RTMP group if input becomes unavailable.
-    #
+    #   
     #   - emitOutput: Emit a slate until input returns.
     #   - pauseOutput: Stop transmitting data until input returns. This does not close the underlying RTMP connection.
     #   @return [String]
@@ -15815,7 +15815,7 @@ module Aws::MediaLive
     # @!attribute crop_rectangle
     #   Region of the input video to crop before scaling. If not specified, the entire input
     #   frame is used.
-    #
+    #   
     #   Note: Unlike {@link outputPositionRectangle}, the bounds of cropRectangle are validated
     #   at ingest time by the encoder/scaler rather than at the API level, because the input
     #   resolution is not known until the source is probed. Field-level constraints on (x, y,

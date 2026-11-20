@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -44,7 +45,6 @@ module Aws::Snowball
     @identifier = :snowball
 
     add_plugin(::Aws::Snowball::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -64,6 +64,8 @@ module Aws::Snowball
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -140,23 +142,41 @@ module Aws::Snowball
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -431,7 +451,7 @@ module Aws::Snowball
     # @option params [Integer] :initial_cluster_size
     #   <p>If provided, each job will be automatically created and associated with the new cluster. If not provided, will be treated as 0.</p>
     # @option params [Boolean] :force_create_jobs
-    #   <p>Force to create cluster when user attempts to overprovision or underprovision a cluster. A cluster is overprovisioned or underprovisioned if the initial size of the cluster is more (overprovisioned) or less (underprovisioned) than what
+    #   <p>Force to create cluster when user attempts to overprovision or underprovision a cluster. A cluster is overprovisioned or underprovisioned if the initial size of the cluster is more (overprovisioned) or less (underprovisioned) than what 
     #         needed to meet capacity requirement specified with <code>OnDeviceServiceConfiguration</code>.</p>
     # @option params [Array<String>] :long_term_pricing_ids
     #   <p>Lists long-term pricing id that will be used to associate with jobs automatically created for the new cluster.</p>
@@ -1575,11 +1595,11 @@ module Aws::Snowball
     #           <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>
     # @example To get the manifest for a job you've created for AWS Snowball
     #   # Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified JobId value. You can access the manifest file for up to 60 minutes after this request has been made. To access the manifest file after 60 minutes have passed, you'll have to make another call to the GetJobManifest action.
-    # #
+    # # 
     # # The manifest is an encrypted file that you can download after your job enters the WithCustomer status. The manifest is decrypted by using the UnlockCode code value, when you pass both values to the Snowball through the Snowball client when the client is started for the first time.
-    # #
+    # # 
     # # As a best practice, we recommend that you don't save a copy of an UnlockCode value in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job.
-    # #
+    # # 
     # # The credentials of a given job, including its manifest file and unlock code, expire 90 days after the job is created.
     #   params = {
     #     job_id: "JID123e4567-e89b-12d3-a456-426655440000"
@@ -1626,9 +1646,9 @@ module Aws::Snowball
     #         example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>
     # @example To get the unlock code for a job you've created for AWS Snowball
     #   # Returns the UnlockCode code value for the specified job. A particular UnlockCode value can be accessed for up to 90 days after the associated job has been created.
-    # #
+    # # 
     # # The UnlockCode value is a 29-character code with 25 alphanumeric characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed along with the manifest to the Snowball through the Snowball client when the client is started for the first time.
-    # #
+    # # 
     # # As a best practice, we recommend that you don't save a copy of the UnlockCode in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job.
     #   params = {
     #     job_id: "JID123e4567-e89b-12d3-a456-426655440000"
@@ -1663,7 +1683,7 @@ module Aws::Snowball
     # @param [Hash, Types::GetSnowballUsageRequest] params
     # @example To see your Snowball service limit and the number of Snowballs you have in use
     #   # Returns information about the Snowball service limit for your account, and also the number of Snowballs your account has in use.
-    # #
+    # # 
     # # The default service limit for the number of Snowballs that you can have at one time is 1. If you want to increase your service limit, contact AWS Support.
     #   params = {}
     #   options = {}
@@ -1981,7 +2001,7 @@ module Aws::Snowball
     # @option params [Integer] :max_results
     #   <p>The maximum number of <code>ListServiceVersions</code> objects to return.</p>
     # @option params [String] :next_token
-    #   <p>Because HTTP requests are stateless, this is the starting point for the next list of returned
+    #   <p>Because HTTP requests are stateless, this is the starting point for the next list of returned 
     #         <code>ListServiceVersionsRequest</code> versions.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -2388,7 +2408,8 @@ module Aws::Snowball
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

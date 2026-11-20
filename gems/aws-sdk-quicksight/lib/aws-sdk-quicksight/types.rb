@@ -509,7 +509,7 @@ module Aws::QuickSight
     #              these columns will be grouped together.</p>
     #   @return [Array<String>]
     # @!attribute aggregations
-    #   <p>The list of aggregation functions to apply to the grouped data, such as <code>SUM</code>,
+    #   <p>The list of aggregation functions to apply to the grouped data, such as <code>SUM</code>, 
     #              <code>COUNT</code>, or <code>AVERAGE</code>.</p>
     #   @return [Array<Types::Aggregation>]
     class AggregateOperation < Struct.new(
@@ -526,7 +526,7 @@ module Aws::QuickSight
     # <p>Defines an aggregation function to be applied to grouped data, creating a new column with
     #            the calculated result.</p>
     # @!attribute aggregation_function
-    #   <p>The aggregation function to apply, such as <code>SUM</code>, <code>COUNT</code>, <code>AVERAGE</code>,
+    #   <p>The aggregation function to apply, such as <code>SUM</code>, <code>COUNT</code>, <code>AVERAGE</code>, 
     #              <code>MIN</code>, <code>MAX</code>
     #            </p>
     #   @return [Types::DataPrepAggregationFunction]
@@ -4411,7 +4411,7 @@ module Aws::QuickSight
     #   <p>The ability to review and approve sharing requests of Flows.</p>
     #   @return [String]
     # @!attribute use_agent_web_search
-    #   <p>The ability to use internet to enhance results in Chat Agents, Flows, and Quick Research.
+    #   <p>The ability to use internet to enhance results in Chat Agents, Flows, and Quick Research. 
     #   	          Web search queries will be processed securely in an Amazon Web Services region <code>us-east-1</code>.</p>
     #   @return [String]
     # @!attribute knowledge_base
@@ -8815,7 +8815,7 @@ module Aws::QuickSight
     #               analysis in the Amazon Quick Sight console. </p>
     #   @return [String]
     # @!attribute parameters
-    #   <p>The parameter names and override values that you want to use. An analysis can have
+    #   <p>The parameter names and override values that you want to use. An analysis can have 
     #               any parameter type, and some parameters might accept multiple values. </p>
     #   @return [Types::Parameters]
     # @!attribute permissions
@@ -8828,7 +8828,7 @@ module Aws::QuickSight
     # @!attribute source_entity
     #   <p>A source entity to use for the analysis that you're creating. This metadata structure
     #               contains details that describe a source template and one or more datasets or topics.</p>
-    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in
+    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in 
     #               order for the request to be valid.</p>
     #   @return [Types::AnalysisSourceEntity]
     # @!attribute theme_arn
@@ -8842,7 +8842,7 @@ module Aws::QuickSight
     # @!attribute definition
     #   <p>The definition of an analysis.</p>
     #            <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>
-    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in
+    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in 
     #               order for the request to be valid.</p>
     #   @return [Types::AnalysisDefinition]
     # @!attribute validation_strategy
@@ -9277,7 +9277,7 @@ module Aws::QuickSight
     #   <p>A list of resource permissions on the dataset.</p>
     #   @return [Array<Types::ResourcePermission>]
     # @!attribute row_level_permission_data_set
-    #   <p>The row-level security configuration for the data that you want to create. This parameter is
+    #   <p>The row-level security configuration for the data that you want to create. This parameter is 
     #   			used with the legacy data preparation experience.</p>
     #   @deprecated
     #     Only used in the legacy data preparation experience.
@@ -9285,7 +9285,7 @@ module Aws::QuickSight
     #   @return [Types::RowLevelPermissionDataSet]
     # @!attribute row_level_permission_tag_configuration
     #   <p>The configuration of tags on a dataset to set row-level security. Row-level security
-    #   			tags are currently supported for anonymous embedding only. This parameter is
+    #   			tags are currently supported for anonymous embedding only. This parameter is 
     #   			used with the legacy data preparation experience.</p>
     #   @deprecated
     #     Only used in the legacy data preparation experience.
@@ -9730,7 +9730,7 @@ module Aws::QuickSight
     #   <p>The name of the group that you want to add the user to.</p>
     #   @return [String]
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
+    #   <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the 
     #   			Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
@@ -10482,7 +10482,7 @@ module Aws::QuickSight
     #   			in the original. The schema in each dataset must match its placeholder. Use the <code>TopicReferences</code>
     #   			entity to list the replacement topics for the topic placeholders listed in the original.
     #   			The schema in each topic must match its placeholder.</p>
-    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in
+    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in 
     #   			order for the request to be valid.</p>
     #   @return [Types::TemplateSourceEntity]
     # @!attribute tags
@@ -10497,7 +10497,7 @@ module Aws::QuickSight
     # @!attribute definition
     #   <p>The definition of a template.</p>
     #            <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p>
-    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in
+    #            <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in 
     #   			order for the request to be valid.</p>
     #   @return [Types::TemplateVersionDefinition]
     # @!attribute validation_strategy
@@ -12465,7 +12465,7 @@ module Aws::QuickSight
     # <p>Defines the type of aggregation function to apply to data during data preparation, supporting simple
     #           and list aggregations.</p>
     # @!attribute simple_aggregation
-    #   <p>A simple aggregation function such as <code>SUM</code>, <code>COUNT</code>, <code>AVERAGE</code>,
+    #   <p>A simple aggregation function such as <code>SUM</code>, <code>COUNT</code>, <code>AVERAGE</code>, 
     #              <code>MIN</code>, <code>MAX</code>, <code>MEDIAN</code>, <code>VARIANCE</code>, or <code>STANDARD_DEVIATION</code>.</p>
     #   @return [Types::DataPrepSimpleAggregationFunction]
     # @!attribute list_aggregation
@@ -12480,7 +12480,7 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Configuration for data preparation operations, defining the complete pipeline from source tables
+    # <p>Configuration for data preparation operations, defining the complete pipeline from source tables 
     #            through transformations to destination tables.</p>
     # @!attribute source_table_map
     #   <p>A map of source tables that provide information about underlying sources.</p>
@@ -12501,7 +12501,7 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An aggregation function that concatenates values from multiple rows into a single string with a specified
+    # <p>An aggregation function that concatenates values from multiple rows into a single string with a specified 
     #            separator.</p>
     # @!attribute input_column_name
     #   <p>The name of the column containing values to be concatenated.</p>
@@ -12532,7 +12532,7 @@ module Aws::QuickSight
     #   <p>The name of the column on which to perform the aggregation function.</p>
     #   @return [String]
     # @!attribute function_type
-    #   <p>The type of aggregation function to perform, such as <code>COUNT</code>, <code>SUM</code>, <code>AVERAGE</code>,
+    #   <p>The type of aggregation function to perform, such as <code>COUNT</code>, <code>SUM</code>, <code>AVERAGE</code>, 
     #              <code>MIN</code>, <code>MAX</code>, <code>MEDIAN</code>, <code>VARIANCE</code>, or <code>STANDARD_DEVIATION</code>.</p>
     #   @return [String]
     class DataPrepSimpleAggregationFunction < Struct.new(
@@ -12712,10 +12712,10 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A filter condition that compares date values using operators like <code>BEFORE</code>, <code>AFTER</code>, or
+    # <p>A filter condition that compares date values using operators like <code>BEFORE</code>, <code>AFTER</code>, or 
     #            their inclusive variants.</p>
     # @!attribute operator
-    #   <p>The comparison operator to use, such as <code>BEFORE</code>, <code>BEFORE_OR_EQUALS_TO</code>, <code>AFTER</code>,
+    #   <p>The comparison operator to use, such as <code>BEFORE</code>, <code>BEFORE_OR_EQUALS_TO</code>, <code>AFTER</code>, 
     #              or <code>AFTER_OR_EQUALS_TO</code>.</p>
     #   @return [String]
     # @!attribute value
@@ -12808,10 +12808,10 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A filter condition that compares numeric values using operators like <code>EQUALS</code>, <code>GREATER_THAN</code>,
+    # <p>A filter condition that compares numeric values using operators like <code>EQUALS</code>, <code>GREATER_THAN</code>, 
     #            or <code>LESS_THAN</code>.</p>
     # @!attribute operator
-    #   <p>The comparison operator to use, such as <code>EQUALS</code>, <code>GREATER_THAN</code>, <code>LESS_THAN</code>,
+    #   <p>The comparison operator to use, such as <code>EQUALS</code>, <code>GREATER_THAN</code>, <code>LESS_THAN</code>, 
     #              or their variants.</p>
     #   @return [String]
     # @!attribute value
@@ -13017,10 +13017,10 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A filter condition that compares string values using operators like <code>EQUALS</code>, <code>CONTAINS</code>,
+    # <p>A filter condition that compares string values using operators like <code>EQUALS</code>, <code>CONTAINS</code>, 
     #            or <code>STARTS_WITH</code>.</p>
     # @!attribute operator
-    #   <p>The comparison operator to use, such as <code>EQUALS</code>, <code>CONTAINS</code>, <code>STARTS_WITH</code>,
+    #   <p>The comparison operator to use, such as <code>EQUALS</code>, <code>CONTAINS</code>, <code>STARTS_WITH</code>, 
     #              <code>ENDS_WITH</code>, or their negations.</p>
     #   @return [String]
     # @!attribute value
@@ -13069,7 +13069,7 @@ module Aws::QuickSight
 
     # <p>A filter condition that includes or excludes string values from a specified list.</p>
     # @!attribute operator
-    #   <p>The list operator to use, either <code>INCLUDE</code> to match values in the list or <code>EXCLUDE</code> to
+    #   <p>The list operator to use, either <code>INCLUDE</code> to match values in the list or <code>EXCLUDE</code> to 
     #              filter out values in the list.</p>
     #   @return [String]
     # @!attribute values
@@ -16955,7 +16955,7 @@ module Aws::QuickSight
     end
 
     # @!attribute aws_account_id
-    #   <p>The ID of the Amazon Web Services account that contains the analysis. You must be using the
+    #   <p>The ID of the Amazon Web Services account that contains the analysis. You must be using the 
     #               Amazon Web Services account that the analysis is in.</p>
     #   @return [String]
     # @!attribute analysis_id
@@ -18300,7 +18300,7 @@ module Aws::QuickSight
     #   <p>The unique identifier of the flow.</p>
     #   @return [String]
     # @!attribute publish_state
-    #   <p>The publish state of the flow version to describe. Valid values are <code>DRAFT</code>, <code>PUBLISHED</code>,
+    #   <p>The publish state of the flow version to describe. Valid values are <code>DRAFT</code>, <code>PUBLISHED</code>, 
     #               or <code>PENDING_APPROVAL</code>.</p>
     #   @return [String]
     class DescribeFlowRequest < Struct.new(
@@ -18509,7 +18509,7 @@ module Aws::QuickSight
     #   <p>The name of the group that you want to search.</p>
     #   @return [String]
     # @!attribute aws_account_id
-    #   <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
+    #   <p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the 
     #            Amazon Web Services account that contains your Amazon Quick Sight account.</p>
     #   @return [String]
     # @!attribute namespace
@@ -18909,7 +18909,7 @@ module Aws::QuickSight
     end
 
     # @!attribute namespace
-    #   <p>The information about the namespace that you're describing. The response includes
+    #   <p>The information about the namespace that you're describing. The response includes 
     #           the namespace ARN, name, Amazon Web Services Region, creation status, and identity store. <code>DescribeNamespace</code> also
     #           works for namespaces that are in the process of being created. For incomplete namespaces,
     #           this API operation lists the namespace error types and messages associated with the creation process.</p>
@@ -21789,7 +21789,7 @@ module Aws::QuickSight
     #   <p>The description of the flow.</p>
     #   @return [String]
     # @!attribute publish_state
-    #   <p>The publish state of the flow. Valid values are <code>DRAFT</code>, <code>PUBLISHED</code>,
+    #   <p>The publish state of the flow. Valid values are <code>DRAFT</code>, <code>PUBLISHED</code>, 
     #               or <code>PENDING_APPROVAL</code>.</p>
     #   @return [String]
     # @!attribute created_time
@@ -21854,7 +21854,7 @@ module Aws::QuickSight
     #   <p>The identifier of the last principal who updated the flow.</p>
     #   @return [String]
     # @!attribute publish_state
-    #   <p>The publish state for the flow. The valid values are <code>DRAFT</code>, <code>PUBLISHED</code>,
+    #   <p>The publish state for the flow. The valid values are <code>DRAFT</code>, <code>PUBLISHED</code>, 
     #               or <code>PENDING_APPROVAL</code>.</p>
     #   @return [String]
     # @!attribute run_count
@@ -23950,7 +23950,7 @@ module Aws::QuickSight
     #   <p>The description for the flow.</p>
     #   @return [String]
     # @!attribute publish_state
-    #   <p>The publish state for the flow. Valid values are <code>DRAFT</code>, <code>PUBLISHED</code>,
+    #   <p>The publish state for the flow. Valid values are <code>DRAFT</code>, <code>PUBLISHED</code>, 
     #               or <code>PENDING_APPROVAL</code>.</p>
     #   @return [String]
     # @!attribute user_count
@@ -28640,8 +28640,8 @@ module Aws::QuickSight
     end
 
     # @!attribute namespaces
-    #   <p>The information about the namespaces in this Amazon Web Services account. The response includes
-    #           the namespace ARN, name, Amazon Web Services Region, notification email address, creation status, and
+    #   <p>The information about the namespaces in this Amazon Web Services account. The response includes 
+    #           the namespace ARN, name, Amazon Web Services Region, notification email address, creation status, and 
     #           identity store.</p>
     #   @return [Array<Types::NamespaceInfoV2>]
     # @!attribute next_token
@@ -31811,7 +31811,7 @@ module Aws::QuickSight
     #            </ul>
     #   @return [Array<String>]
     # @!attribute principal
-    #   <p>The Amazon Resource Name (ARN) of the principal.
+    #   <p>The Amazon Resource Name (ARN) of the principal. 
     #               This can be an Amazon Quick user, group or namespace associated with the flow.
     #               Namespace principal can only be set as a viewer and will grant everyone in the same namespace viewer permissions.</p>
     #   @return [String]
@@ -32586,7 +32586,7 @@ module Aws::QuickSight
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A flexible visualization type that allows engineers
+    # <p>A flexible visualization type that allows engineers 
     #       to create new custom charts in Quick Sight.</p>
     # @!attribute visual_id
     #   <p>The ID of the visual that you want to use.</p>
@@ -42410,13 +42410,13 @@ module Aws::QuickSight
     end
 
     # <p>This error indicates that you are calling an embedding operation in Amazon Quick Sight
-    # 			without the required pricing plan on your Amazon Web Services account. Before you can use embedding
-    # 			for anonymous users, a Quick Suite administrator needs to add capacity pricing to Quick Sight. You
+    # 			without the required pricing plan on your Amazon Web Services account. Before you can use embedding 
+    # 			for anonymous users, a Quick Suite administrator needs to add capacity pricing to Quick Sight. You 
     # 		    can do this on the <b>Manage Quick Suite</b> page. </p>
-    #          <p>After capacity pricing is added, you can use the
+    #          <p>After capacity pricing is added, you can use the 
     #             <code>
     #                <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GetDashboardEmbedUrl.html">GetDashboardEmbedUrl</a>
-    #             </code> API operation with the
+    #             </code> API operation with the 
     #             <code>--identity-type ANONYMOUS</code> option.</p>
     # @!attribute message
     #   @return [String]
@@ -42973,7 +42973,7 @@ module Aws::QuickSight
     #               analysis in the Amazon Quick Sight console.</p>
     #   @return [String]
     # @!attribute parameters
-    #   <p>The parameter names and override values that you want to use. An analysis can have
+    #   <p>The parameter names and override values that you want to use. An analysis can have 
     #               any parameter type, and some parameters might accept multiple values. </p>
     #   @return [Types::Parameters]
     # @!attribute source_entity
@@ -43762,7 +43762,7 @@ module Aws::QuickSight
     #   <p>The folder that contains fields and nested subfolders for your dataset.</p>
     #   @return [Hash<String, Types::FieldFolder>]
     # @!attribute row_level_permission_data_set
-    #   <p>The row-level security configuration for the data you want to create. This parameter is used
+    #   <p>The row-level security configuration for the data you want to create. This parameter is used 
     #   			with the legacy data preparation experience.</p>
     #   @deprecated
     #     Only used in the legacy data preparation experience.
@@ -43770,7 +43770,7 @@ module Aws::QuickSight
     #   @return [Types::RowLevelPermissionDataSet]
     # @!attribute row_level_permission_tag_configuration
     #   <p>The configuration of tags on a dataset to set row-level security. Row-level security
-    #   			tags are currently supported for anonymous embedding only. This parameter is used with
+    #   			tags are currently supported for anonymous embedding only. This parameter is used with 
     #   		the legacy data preparation experience.</p>
     #   @deprecated
     #     Only used in the legacy data preparation experience.

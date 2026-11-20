@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::LexModelsV2
     @identifier = :lexmodelsv2
 
     add_plugin(::Aws::LexModelsV2::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::LexModelsV2
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::LexModelsV2
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,17 +229,17 @@ module Aws::LexModelsV2
       super
     end
 
-    # <p>Create a batch of custom vocabulary items for a given bot locale's
+    # <p>Create a batch of custom vocabulary items for a given bot locale's 
     #          custom vocabulary.</p>
     # @param [Hash, Types::BatchCreateCustomVocabularyItemRequest] params
     # @option params [String] :bot_id
     #   <p>The identifier of the bot associated with this custom vocabulary.</p>
     # @option params [String] :bot_version
-    #   <p>The identifier of the version of the bot associated with this
+    #   <p>The identifier of the version of the bot associated with this 
     #            custom vocabulary.</p>
     # @option params [String] :locale_id
-    #   <p>The identifier of the language and locale where this custom vocabulary
-    #            is used. The string must match one of the supported locales. For more
+    #   <p>The identifier of the language and locale where this custom vocabulary 
+    #            is used. The string must match one of the supported locales. For more 
     #            information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html"> Supported Languages </a>.</p>
     # @option params [Array<Types::NewCustomVocabularyItem>] :custom_vocabulary_item_list
     #   <p>A list of new custom vocabulary items. Each entry must contain a phrase and
@@ -267,17 +287,17 @@ module Aws::LexModelsV2
       request.send_request(options)
     end
 
-    # <p>Delete a batch of custom vocabulary items for a given bot locale's
+    # <p>Delete a batch of custom vocabulary items for a given bot locale's 
     #          custom vocabulary.</p>
     # @param [Hash, Types::BatchDeleteCustomVocabularyItemRequest] params
     # @option params [String] :bot_id
     #   <p>The identifier of the bot associated with this custom vocabulary.</p>
     # @option params [String] :bot_version
-    #   <p>The identifier of the version of the bot associated with this custom
+    #   <p>The identifier of the version of the bot associated with this custom 
     #            vocabulary.</p>
     # @option params [String] :locale_id
-    #   <p>The identifier of the language and locale where this custom vocabulary is
-    #            used. The string must match one of the supported locales.
+    #   <p>The identifier of the language and locale where this custom vocabulary is 
+    #            used. The string must match one of the supported locales. 
     #            For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html"> Supported Languages </a>.</p>
     # @option params [Array<Types::CustomVocabularyEntryId>] :custom_vocabulary_item_list
     #   <p>A list of custom vocabulary items requested to be deleted.
@@ -323,17 +343,17 @@ module Aws::LexModelsV2
       request.send_request(options)
     end
 
-    # <p>Update a batch of custom vocabulary items for a given bot locale's custom
+    # <p>Update a batch of custom vocabulary items for a given bot locale's custom 
     #          vocabulary.</p>
     # @param [Hash, Types::BatchUpdateCustomVocabularyItemRequest] params
     # @option params [String] :bot_id
     #   <p>The identifier of the bot associated with this custom vocabulary</p>
     # @option params [String] :bot_version
-    #   <p>The identifier of the version of the bot associated with this custom
+    #   <p>The identifier of the version of the bot associated with this custom 
     #            vocabulary.</p>
     # @option params [String] :locale_id
-    #   <p>The identifier of the language and locale where this custom vocabulary
-    #            is used. The string must match one of the supported locales. For more
+    #   <p>The identifier of the language and locale where this custom vocabulary 
+    #            is used. The string must match one of the supported locales. For more 
     #            information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html"> Supported Languages </a>.</p>
     # @option params [Array<Types::CustomVocabularyItem>] :custom_vocabulary_item_list
     #   <p>A list of custom vocabulary items with updated fields. Each entry must contain a phrase
@@ -382,7 +402,7 @@ module Aws::LexModelsV2
       request.send_request(options)
     end
 
-    # <p>Builds a bot, its intents, and its slot types into a specific
+    # <p>Builds a bot, its intents, and its slot types into a specific 
     #          locale. A bot can be built into multiple locales. At runtime the locale
     #          is used to choose a specific build of the bot.</p>
     # @param [Hash, Types::BuildBotLocaleRequest] params
@@ -959,9 +979,9 @@ module Aws::LexModelsV2
       request.send_request(options)
     end
 
-    # <p>Creates an immutable version of the bot. When you create the first
-    #          version of a bot, Amazon Lex sets the version number to 1. Subsequent bot versions increase
-    #          in an increment of 1. The version number will always represent the total number
+    # <p>Creates an immutable version of the bot. When you create the first 
+    #          version of a bot, Amazon Lex sets the version number to 1. Subsequent bot versions increase 
+    #          in an increment of 1. The version number will always represent the total number 
     #          of versions created of the bot, not the current number of versions. If a bot version
     #          is deleted, that bot version number will not be reused.</p>
     # @param [Hash, Types::CreateBotVersionRequest] params
@@ -8868,7 +8888,7 @@ module Aws::LexModelsV2
     #          policy. If a policy doesn't exist, a new policy is created.</p>
     #          <p>You can't create a resource policy statement that allows
     #          cross-account access.</p>
-    #          <p>You need to add the <code>CreateResourcePolicy</code> or <code>UpdateResourcePolicy</code>
+    #          <p>You need to add the <code>CreateResourcePolicy</code> or <code>UpdateResourcePolicy</code> 
     #          action to the bot role in order to call the API.</p>
     # @param [Hash, Types::CreateResourcePolicyStatementRequest] params
     # @option params [String] :resource_arn
@@ -8883,7 +8903,7 @@ module Aws::LexModelsV2
     #   <p>Determines whether the statement allows or denies access to the
     #            resource.</p>
     # @option params [Array<Types::Principal>] :principal
-    #   <p>An IAM principal, such as an IAM user, IAM role,
+    #   <p>An IAM principal, such as an IAM user, IAM role, 
     #            or Amazon Web Services services
     #            that is allowed or denied access to a resource. For more information,
     #            see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html">Amazon Web Services JSON policy elements: Principal</a>.</p>
@@ -8976,13 +8996,13 @@ module Aws::LexModelsV2
     #   <p>The identifier of the intent that contains the slot.</p>
     # @option params [Types::MultipleValuesSetting] :multiple_values_setting
     #   <p>Indicates whether the slot returns multiple values in one response.
-    #            Multi-value slots are only available in the <code>en-US</code> locale.
+    #            Multi-value slots are only available in the <code>en-US</code> locale. 
     #            If you set this value to <code>true</code> in any other locale, Amazon Lex throws a
     #               <code>ValidationException</code>. </p>
     #            <p>If the <code>multipleValuesSetting</code> is not set, the default
     #            value is <code>false</code>.</p>
     # @option params [Types::SubSlotSetting] :sub_slot_setting
-    #   <p>Specifications for the constituent sub slots and the
+    #   <p>Specifications for the constituent sub slots and the  
     #           expression for the composite slot.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -12841,11 +12861,11 @@ module Aws::LexModelsV2
     # @option params [String] :bot_id
     #   <p>The identifier of the bot to delete. </p>
     # @option params [Boolean] :skip_resource_in_use_check
-    #   <p>By default, Amazon Lex checks if any other resource, such as an alias or
-    #            bot network, is using the bot version before it is deleted and throws a
-    #            <code>ResourceInUseException</code> exception if the bot is
+    #   <p>By default, Amazon Lex checks if any other resource, such as an alias or 
+    #            bot network, is using the bot version before it is deleted and throws a 
+    #            <code>ResourceInUseException</code> exception if the bot is 
     #            being used by another resource. Set this parameter to <code>true</code>
-    #            to skip this check and remove the bot even if it is being used by
+    #            to skip this check and remove the bot even if it is being used by 
     #            another resource.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -12874,11 +12894,11 @@ module Aws::LexModelsV2
     #   <p>The unique identifier of the bot associated with the alias to
     #            delete.</p>
     # @option params [Boolean] :skip_resource_in_use_check
-    #   <p>By default, Amazon Lex checks if any other resource, such as a bot network,
-    #            is using the bot alias before it is deleted and throws a
-    #            <code>ResourceInUseException</code> exception if the alias is
+    #   <p>By default, Amazon Lex checks if any other resource, such as a bot network, 
+    #            is using the bot alias before it is deleted and throws a 
+    #            <code>ResourceInUseException</code> exception if the alias is 
     #            being used by another resource. Set this parameter to <code>true</code>
-    #            to skip this check and remove the alias even if it is being used by
+    #            to skip this check and remove the alias even if it is being used by 
     #            another resource.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -12992,11 +13012,11 @@ module Aws::LexModelsV2
     # @option params [String] :bot_version
     #   <p>The version of the bot to delete.</p>
     # @option params [Boolean] :skip_resource_in_use_check
-    #   <p>By default, Amazon Lex checks if any other resource, such as an alias or bot network,
-    #            is using the bot version before it is deleted and throws a
-    #            <code>ResourceInUseException</code> exception if the version is
+    #   <p>By default, Amazon Lex checks if any other resource, such as an alias or bot network, 
+    #            is using the bot version before it is deleted and throws a 
+    #            <code>ResourceInUseException</code> exception if the version is 
     #            being used by another resource. Set this parameter to <code>true</code>
-    #            to skip this check and remove the version even if it is being used by
+    #            to skip this check and remove the version even if it is being used by 
     #            another resource.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -13166,7 +13186,7 @@ module Aws::LexModelsV2
     #          statement ID that doesn't exist in the policy, or if the bot or bot
     #          alias doesn't have a policy attached, Amazon Lex returns an
     #          exception.</p>
-    #          <p>You need to add the <code>DeleteResourcePolicy</code> or <code>UpdateResourcePolicy</code>
+    #          <p>You need to add the <code>DeleteResourcePolicy</code> or <code>UpdateResourcePolicy</code> 
     #          action to the bot role in order to call the API.</p>
     # @param [Hash, Types::DeleteResourcePolicyStatementRequest] params
     # @option params [String] :resource_arn
@@ -13751,9 +13771,9 @@ module Aws::LexModelsV2
       request.send_request(options)
     end
 
-    # <p>Returns information about a request to generate a bot through natural language description, made through
-    #       the <code>StartBotResource</code> API. Use the <code>generatedBotLocaleUrl</code>
-    #       to retrieve the Amazon S3 object containing the bot locale configuration. You can
+    # <p>Returns information about a request to generate a bot through natural language description, made through 
+    #       the <code>StartBotResource</code> API. Use the <code>generatedBotLocaleUrl</code> 
+    #       to retrieve the Amazon S3 object containing the bot locale configuration. You can 
     #       then modify and import this configuration.</p>
     # @param [Hash, Types::DescribeBotResourceGenerationRequest] params
     # @option params [String] :bot_id
@@ -13763,7 +13783,7 @@ module Aws::LexModelsV2
     # @option params [String] :locale_id
     #   <p>The locale of the bot for which to return the generation details.</p>
     # @option params [String] :generation_id
-    #   <p>The unique identifier of the generation request for which to
+    #   <p>The unique identifier of the generation request for which to 
     #            return the generation details.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -20446,23 +20466,23 @@ module Aws::LexModelsV2
     # <p>Lists the generation requests made for a bot locale.</p>
     # @param [Hash, Types::ListBotResourceGenerationsRequest] params
     # @option params [String] :bot_id
-    #   <p>The unique identifier of the bot whose generation
+    #   <p>The unique identifier of the bot whose generation 
     #         requests you want to view.</p>
     # @option params [String] :bot_version
-    #   <p>The version of the bot whose generation
+    #   <p>The version of the bot whose generation 
     #            requests you want to view.</p>
     # @option params [String] :locale_id
-    #   <p>The locale of the bot whose generation
+    #   <p>The locale of the bot whose generation 
     #            requests you want to view.</p>
     # @option params [Types::GenerationSortBy] :sort_by
-    #   <p>An object containing information about the attribute and the
+    #   <p>An object containing information about the attribute and the 
     #         method by which to sort the results</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return in the response.</p>
     # @option params [String] :next_token
-    #   <p>If the total number of results is greater than the number
-    #         specified in the <code>maxResults</code>, the response returns a token
-    #         in the <code>nextToken</code> field. Use this token when making a request to
+    #   <p>If the total number of results is greater than the number 
+    #         specified in the <code>maxResults</code>, the response returns a token 
+    #         in the <code>nextToken</code> field. Use this token when making a request to 
     #         return the next batch of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -20775,24 +20795,24 @@ module Aws::LexModelsV2
       request.send_request(options)
     end
 
-    # <p>Paginated list of custom vocabulary items for a given bot locale's
+    # <p>Paginated list of custom vocabulary items for a given bot locale's 
     #          custom vocabulary.</p>
     # @param [Hash, Types::ListCustomVocabularyItemsRequest] params
     # @option params [String] :bot_id
-    #   <p>The identifier of the version of the bot associated with this custom
+    #   <p>The identifier of the version of the bot associated with this custom 
     #            vocabulary.</p>
     # @option params [String] :bot_version
-    #   <p>The bot version of the bot to the list custom vocabulary
+    #   <p>The bot version of the bot to the list custom vocabulary 
     #            request.</p>
     # @option params [String] :locale_id
-    #   <p>The identifier of the language and locale where this custom vocabulary
-    #            is used. The string must match one of the supported locales. For more
-    #            information, see Supported
+    #   <p>The identifier of the language and locale where this custom vocabulary 
+    #            is used. The string must match one of the supported locales. For more 
+    #            information, see Supported 
     #            languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items returned by the list operation.</p>
     # @option params [String] :next_token
-    #   <p>The nextToken identifier to the list custom vocabulary
+    #   <p>The nextToken identifier to the list custom vocabulary 
     #            request.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -21403,7 +21423,7 @@ module Aws::LexModelsV2
     end
 
     # <p>Gets a list of recommended intents provided by the bot
-    #          recommendation that you can use in your bot. Intents in the
+    #          recommendation that you can use in your bot. Intents in the 
     #          response are ordered by relevance.</p>
     # @param [Hash, Types::ListRecommendedIntentsRequest] params
     # @option params [String] :bot_id
@@ -21925,13 +21945,13 @@ module Aws::LexModelsV2
     # @option params [Types::TestExecutionResultFilterBy] :result_filter_by
     #   <p>The filter for the list of results from the test set execution.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of test execution result items to return in each
-    #         page. If there are fewer results than the max page size, only the actual
+    #   <p>The maximum number of test execution result items to return in each 
+    #         page. If there are fewer results than the max page size, only the actual 
     #         number of results are returned.</p>
     # @option params [String] :next_token
-    #   <p>If the response from the <code>ListTestExecutionResultItems</code> operation
-    #         contains more results than specified in the <code>maxResults</code> parameter,
-    #         a token is returned in the response. Use that token in the <code>nextToken</code>
+    #   <p>If the response from the <code>ListTestExecutionResultItems</code> operation 
+    #         contains more results than specified in the <code>maxResults</code> parameter, 
+    #         a token is returned in the response. Use that token in the <code>nextToken</code> 
     #         parameter to return the next page of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -22159,12 +22179,12 @@ module Aws::LexModelsV2
     # @option params [Types::TestExecutionSortBy] :sort_by
     #   <p>The sort order of the test set executions.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of test executions to return in each page. If there are
-    #         fewer results than the max page size, only the actual number of results are
+    #   <p>The maximum number of test executions to return in each page. If there are 
+    #         fewer results than the max page size, only the actual number of results are 
     #         returned.</p>
     # @option params [String] :next_token
-    #   <p>If the response from the ListTestExecutions operation contains more results
-    #         than specified in the maxResults parameter, a token is returned in the response.
+    #   <p>If the response from the ListTestExecutions operation contains more results 
+    #         than specified in the maxResults parameter, a token is returned in the response. 
     #         Use that token in the nextToken parameter to return the next page of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -22212,12 +22232,12 @@ module Aws::LexModelsV2
     # @option params [String] :test_set_id
     #   <p>The identifier of the test set to list its test set records.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of test set records to return in each page. If there are
-    #         fewer records than the max page size, only the actual number of records are
+    #   <p>The maximum number of test set records to return in each page. If there are 
+    #         fewer records than the max page size, only the actual number of records are 
     #         returned.</p>
     # @option params [String] :next_token
-    #   <p>If the response from the ListTestSetRecords operation contains more results
-    #         than specified in the maxResults parameter, a token is returned in the response.
+    #   <p>If the response from the ListTestSetRecords operation contains more results 
+    #         than specified in the maxResults parameter, a token is returned in the response. 
     #         Use that token in the nextToken parameter to return the next page of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -22318,11 +22338,11 @@ module Aws::LexModelsV2
     # @option params [Types::TestSetSortBy] :sort_by
     #   <p>The sort order for the list of test sets.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of test sets to return in each page. If there are fewer
+    #   <p>The maximum number of test sets to return in each page. If there are fewer 
     #         results than the max page size, only the actual number of results are returned.</p>
     # @option params [String] :next_token
-    #   <p>If the response from the ListTestSets operation contains more results than
-    #         specified in the maxResults parameter, a token is returned in the response. Use
+    #   <p>If the response from the ListTestSets operation contains more results than 
+    #         specified in the maxResults parameter, a token is returned in the response. Use 
     #         that token in the nextToken parameter to return the next page of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -22821,10 +22841,10 @@ module Aws::LexModelsV2
       request.send_request(options)
     end
 
-    # <p>Starts a request for the descriptive bot builder to generate a bot locale configuration
-    #          based on the prompt you provide it. After you make this call, use the <code>DescribeBotResourceGeneration</code>
-    #          operation to check on the status of the generation and for the <code>generatedBotLocaleUrl</code> when the
-    #          generation is complete. Use that value to retrieve the Amazon S3 object containing the bot locale configuration. You can
+    # <p>Starts a request for the descriptive bot builder to generate a bot locale configuration 
+    #          based on the prompt you provide it. After you make this call, use the <code>DescribeBotResourceGeneration</code> 
+    #          operation to check on the status of the generation and for the <code>generatedBotLocaleUrl</code> when the 
+    #          generation is complete. Use that value to retrieve the Amazon S3 object containing the bot locale configuration. You can 
     #          then modify and import this configuration.</p>
     # @param [Hash, Types::StartBotResourceGenerationRequest] params
     # @option params [String] :generation_input_prompt
@@ -23064,9 +23084,9 @@ module Aws::LexModelsV2
     # @option params [Types::TestExecutionTarget] :target
     #   <p>The target bot for the test set execution.</p>
     # @option params [String] :api_mode
-    #   <p>Indicates whether we use streaming or non-streaming APIs for the test set
-    #         execution. For streaming, StartConversation Runtime API is used. Whereas, for
-    #         non-streaming, RecognizeUtterance and RecognizeText Amazon Lex
+    #   <p>Indicates whether we use streaming or non-streaming APIs for the test set 
+    #         execution. For streaming, StartConversation Runtime API is used. Whereas, for 
+    #         non-streaming, RecognizeUtterance and RecognizeText Amazon Lex 
     #         Runtime API are used.</p>
     # @option params [String] :test_execution_modality
     #   <p>Indicates whether audio or text is used.</p>
@@ -23118,7 +23138,7 @@ module Aws::LexModelsV2
     # @option params [Types::TestSetGenerationDataSource] :generation_data_source
     #   <p>The data source for the test set generation.</p>
     # @option params [String] :role_arn
-    #   <p>The roleARN used for any operation in the test set to access
+    #   <p>The roleARN used for any operation in the test set to access 
     #         resources in the Amazon Web Services account.</p>
     # @option params [Hash<String, String>] :test_set_tags
     #   <p>A list of tags to add to the test set. You can only add tags when you import/generate a new test set. You can't use the <code>UpdateTestSet</code> operation to update tags. To update tags, use the <code>TagResource</code> operation.</p>
@@ -23332,7 +23352,7 @@ module Aws::LexModelsV2
     # @option params [String] :bot_type
     #   <p>The type of the bot to be updated.</p>
     # @option params [Array<Types::BotMember>] :bot_members
-    #   <p>The list of bot members in the network associated
+    #   <p>The list of bot members in the network associated 
     #            with the update action.</p>
     # @option params [Types::ErrorLogSettings] :error_log_settings
     #   <p>Allows you to modify how Amazon Lex logs errors during bot interactions, including destinations for error logs and the types of errors to be captured.</p>
@@ -23556,7 +23576,7 @@ module Aws::LexModelsV2
     # @option params [Types::SpeechRecognitionSettings] :speech_recognition_settings
     #   <p>Updated speech-to-text settings to apply to the bot locale.</p>
     # @option params [Types::GenerativeAISettings] :generative_ai_settings
-    #   <p>Contains settings for generative AI features powered by Amazon Bedrock for your bot locale. Use this object to turn generative AI features on and off. Pricing
+    #   <p>Contains settings for generative AI features powered by Amazon Bedrock for your bot locale. Use this object to turn generative AI features on and off. Pricing 
     #         may differ if you turn a feature on. For more information, see LINK.</p>
     # @option params [String] :speech_detection_sensitivity
     #   <p>The new sensitivity level for voice activity detection (VAD) in the bot locale. This setting helps optimize speech recognition accuracy by adjusting how the system responds to background noise during voice interactions.</p>
@@ -31639,7 +31659,7 @@ module Aws::LexModelsV2
     #            <p>If the <code>multipleValuesSetting</code> is not set, the default
     #            value is <code>false</code>.</p>
     # @option params [Types::SubSlotSetting] :sub_slot_setting
-    #   <p>Specifications for the constituent sub slots and the
+    #   <p>Specifications for the constituent sub slots and the  
     #           expression for the composite slot.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -35496,7 +35516,8 @@ module Aws::LexModelsV2
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

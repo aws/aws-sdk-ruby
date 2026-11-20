@@ -90,7 +90,7 @@ module Aws::Glue
     #   @return [Array<String>]
     # @!attribute agg_func
     #   <p>Specifies the aggregation function to apply.</p>
-    #            <p>Possible aggregation functions include: avg countDistinct, count, first, last, kurtosis, max, min, skewness,
+    #            <p>Possible aggregation functions include: avg countDistinct, count, first, last, kurtosis, max, min, skewness, 
     #         stddev_samp, stddev_pop, sum, sumDistinct, var_samp, var_pop</p>
     #   @return [String]
     class AggregateOperation < Struct.new(
@@ -525,7 +525,7 @@ module Aws::Glue
     #   <p>The secret manager ARN to store credentials.</p>
     #   @return [String]
     # @!attribute kms_key_arn
-    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt sensitive authentication information. This key is used to protect credentials
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt sensitive authentication information. This key is used to protect credentials 
     #         and other sensitive data stored within the authentication configuration.</p>
     #   @return [String]
     # @!attribute o_auth2_properties
@@ -590,7 +590,7 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specifies configuration options for automatic data quality evaluation in Glue jobs. This structure enables automated data quality
+    # <p>Specifies configuration options for automatic data quality evaluation in Glue jobs. This structure enables automated data quality 
     #       checks and monitoring during ETL operations, helping to ensure data integrity and reliability without manual intervention.</p>
     # @!attribute is_enabled
     #   <p>Specifies whether automatic data quality evaluation is enabled. When set to <code>true</code>, data quality checks are performed automatically.</p>
@@ -858,7 +858,7 @@ module Aws::Glue
     #         compatibility, this name is entirely lowercase.</p>
     #   @return [String]
     # @!attribute table_name
-    #   <p>The name of the table. For Hive compatibility,
+    #   <p>The name of the table. For Hive compatibility, 
     #         this name is entirely lowercase.</p>
     #   @return [String]
     # @!attribute version_ids
@@ -2156,7 +2156,7 @@ module Aws::Glue
     #   <p>A <code>DataLakeAccessProperties</code> object that specifies properties to configure data lake access for your catalog resource in the Glue Data Catalog.</p>
     #   @return [Types::DataLakeAccessProperties]
     # @!attribute iceberg_optimization_properties
-    #   <p>A structure that specifies Iceberg table optimization properties for the catalog. This includes configuration for compaction, retention, and
+    #   <p>A structure that specifies Iceberg table optimization properties for the catalog. This includes configuration for compaction, retention, and 
     #         orphan file deletion operations that can be applied to Iceberg tables in this catalog.</p>
     #   @return [Types::IcebergOptimizationProperties]
     # @!attribute custom_properties
@@ -2177,7 +2177,7 @@ module Aws::Glue
     #   <p>A <code>DataLakeAccessProperties</code> object with input properties to configure data lake access for your catalog resource in the Glue Data Catalog.</p>
     #   @return [Types::DataLakeAccessPropertiesOutput]
     # @!attribute iceberg_optimization_properties
-    #   <p>An <code>IcebergOptimizationPropertiesOutput</code> object that specifies Iceberg table optimization settings for the catalog, including
+    #   <p>An <code>IcebergOptimizationPropertiesOutput</code> object that specifies Iceberg table optimization settings for the catalog, including 
     #         configurations for compaction, retention, and orphan file deletion operations.</p>
     #   @return [Types::IcebergOptimizationPropertiesOutput]
     # @!attribute custom_properties
@@ -2221,7 +2221,7 @@ module Aws::Glue
     #   @return [String]
     # @!attribute partition_predicate
     #   <p>
-    #         Partitions satisfying this predicate are deleted. Files within the retention period in these partitions are not deleted.
+    #         Partitions satisfying this predicate are deleted. Files within the retention period in these partitions are not deleted. 
     #       </p>
     #   @return [String]
     # @!attribute output_schemas
@@ -3150,7 +3150,7 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The configuration for a compaction optimizer. This configuration defines how data files in your table will be compacted to improve
+    # <p>The configuration for a compaction optimizer. This configuration defines how data files in your table will be compacted to improve 
     #       query performance and reduce storage costs.</p>
     # @!attribute iceberg_configuration
     #   <p>The configuration for an Iceberg compaction optimizer.</p>
@@ -4126,8 +4126,8 @@ module Aws::Glue
     #            </ul>
     #   @return [String]
     # @!attribute data
-    #   <p>A map specifying connection options for the node. You can find standard connection options for the
-    #       corresponding connection type in the
+    #   <p>A map specifying connection options for the node. You can find standard connection options for the 
+    #       corresponding connection type in the 
     #       <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-connect.html">
     #       Connection parameters</a> section of the Glue documentation.</p>
     #   @return [Hash<String, String>]
@@ -4261,7 +4261,7 @@ module Aws::Glue
     #   <p>A description of the crawler.</p>
     #   @return [String]
     # @!attribute classifiers
-    #   <p>A list of UTF-8 strings that specify the custom classifiers that are associated
+    #   <p>A list of UTF-8 strings that specify the custom classifiers that are associated 
     #        with the crawler.</p>
     #   @return [Array<String>]
     # @!attribute recrawl_policy
@@ -5383,7 +5383,7 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The configuration parameters required to create a new Iceberg table in the Glue Data Catalog,
+    # <p>The configuration parameters required to create a new Iceberg table in the Glue Data Catalog, 
     #       including table properties and metadata specifications.</p>
     # @!attribute location
     #   <p>The S3 location where the Iceberg table data will be stored.</p>
@@ -5585,8 +5585,8 @@ module Aws::Glue
     end
 
     # @!attribute resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the target table for which to create integration table properties. Currently, this API only supports creating
-    #         integration table properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for
+    #   <p>The Amazon Resource Name (ARN) of the target table for which to create integration table properties. Currently, this API only supports creating 
+    #         integration table properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for 
     #         creating integration table properties for source connections (using the connection ARN) is not yet implemented and will be added in a future release.
     #       </p>
     #   @return [String]
@@ -5720,8 +5720,8 @@ module Aws::Glue
     #             allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p>
     #               </li>
     #               <li>
-    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache
-    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs.
+    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache 
+    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. 
     #           The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p>
     #               </li>
     #            </ul>
@@ -6315,7 +6315,7 @@ module Aws::Glue
     #   <p>The number of connections to use for the session. </p>
     #   @return [Types::ConnectionsList]
     # @!attribute max_capacity
-    #   <p>The number of Glue data processing units (DPUs) that can be allocated when the job runs.
+    #   <p>The number of Glue data processing units (DPUs) that can be allocated when the job runs. 
     #         A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB memory. </p>
     #   @return [Float]
     # @!attribute number_of_workers
@@ -6346,7 +6346,7 @@ module Aws::Glue
     #   <p>The name of the SecurityConfiguration structure to be used with the session </p>
     #   @return [String]
     # @!attribute glue_version
-    #   <p>The Glue version determines the versions of Apache Spark and Python that Glue supports.
+    #   <p>The Glue version determines the versions of Apache Spark and Python that Glue supports. 
     #         The GlueVersion must be greater than 2.0. </p>
     #   @return [String]
     # @!attribute tags
@@ -6435,7 +6435,7 @@ module Aws::Glue
     #         compatibility, this name is entirely lowercase.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The unique identifier for the table within the specified database that will be
+    #   <p>The unique identifier for the table within the specified database that will be 
     #         created in the Glue Data Catalog.</p>
     #   @return [String]
     # @!attribute table_input
@@ -6828,34 +6828,34 @@ module Aws::Glue
       end
     end
 
-    # <p>Specifies connection options for DynamoDB ELT (Extract, Load, Transform) operations. This structure contains configuration parameters for connecting
+    # <p>Specifies connection options for DynamoDB ELT (Extract, Load, Transform) operations. This structure contains configuration parameters for connecting 
     #       to and extracting data from DynamoDB tables using the ELT connector.</p>
     # @!attribute dynamodb_export
     #   <p>Specifies the export type for DynamoDB data extraction. This parameter determines how data is exported from the DynamoDB table during the ELT process.</p>
     #   @return [String]
     # @!attribute dynamodb_unnest_ddb_json
-    #   <p>A boolean value that specifies whether to unnest DynamoDB JSON format during data extraction. When set to <code>true</code>, the connector will
+    #   <p>A boolean value that specifies whether to unnest DynamoDB JSON format during data extraction. When set to <code>true</code>, the connector will 
     #         flatten nested JSON structures from DynamoDB items. When set to <code>false</code>, the original DynamoDB JSON structure is preserved.</p>
     #   @return [Boolean]
     # @!attribute dynamodb_table_arn
-    #   <p>The Amazon Resource Name (ARN) of the DynamoDB table to extract data from. This parameter specifies the source table for the ELT operation.
+    #   <p>The Amazon Resource Name (ARN) of the DynamoDB table to extract data from. This parameter specifies the source table for the ELT operation. 
     #         </p>
     #   @return [String]
     # @!attribute dynamodb_s3_bucket
-    #   <p>The name of the Amazon S3 bucket used for intermediate storage during the DynamoDB ELT process. This bucket is used to temporarily store exported
+    #   <p>The name of the Amazon S3 bucket used for intermediate storage during the DynamoDB ELT process. This bucket is used to temporarily store exported 
     #         DynamoDB data before it is processed by the ELT job.</p>
     #   @return [String]
     # @!attribute dynamodb_s3_prefix
-    #   <p>The S3 object key prefix for files stored in the intermediate S3 bucket during the DynamoDB ELT process. This prefix helps organize and identify the
+    #   <p>The S3 object key prefix for files stored in the intermediate S3 bucket during the DynamoDB ELT process. This prefix helps organize and identify the 
     #         temporary files created during data extraction.</p>
     #   @return [String]
     # @!attribute dynamodb_s3_bucket_owner
-    #   <p>The Amazon Web Services account ID of the owner of the S3 bucket specified in <code>DynamodbS3Bucket</code>. This parameter is required when the S3 bucket is owned by
+    #   <p>The Amazon Web Services account ID of the owner of the S3 bucket specified in <code>DynamodbS3Bucket</code>. This parameter is required when the S3 bucket is owned by 
     #         a different Amazon Web Services account than the one running the ELT job, enabling cross-account access to the intermediate storage bucket.</p>
     #   @return [String]
     # @!attribute dynamodb_sts_role_arn
-    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Security Token Service (STS) role to assume for accessing DynamoDB and S3 resources during
-    #         the ELT operation.
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Security Token Service (STS) role to assume for accessing DynamoDB and S3 resources during 
+    #         the ELT operation. 
     #         This role must have the necessary permissions to read from the DynamoDB table and write to the intermediate S3 bucket. </p>
     #   @return [String]
     class DDBELTConnectionOptions < Struct.new(
@@ -9027,7 +9027,7 @@ module Aws::Glue
     #         compatibility, this name is entirely lowercase.</p>
     #   @return [String]
     # @!attribute table_name
-    #   <p>The name of the table. For Hive compatibility,
+    #   <p>The name of the table. For Hive compatibility, 
     #         this name is entirely lowercase.</p>
     #   @return [String]
     # @!attribute version_id
@@ -9894,7 +9894,7 @@ module Aws::Glue
     #   <p>The name of the table in the database to read from.</p>
     #   @return [String]
     # @!attribute pitr_enabled
-    #   <p>Specifies whether Point-in-Time Recovery (PITR) is enabled for the DynamoDB table. When set to <code>true</code>,
+    #   <p>Specifies whether Point-in-Time Recovery (PITR) is enabled for the DynamoDB table. When set to <code>true</code>, 
     #         allows reading from a specific point in time. The default value is <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute additional_options
@@ -10316,7 +10316,7 @@ module Aws::Glue
     #   <p>The name of the connection to an external data source, for example a Redshift-federated catalog.</p>
     #   @return [String]
     # @!attribute connection_type
-    #   <p>The type of connection used to access the federated catalog, specifying the protocol or method for connection to the
+    #   <p>The type of connection used to access the federated catalog, specifying the protocol or method for connection to the 
     #       external data source.</p>
     #   @return [String]
     class FederatedCatalog < Struct.new(
@@ -12091,7 +12091,7 @@ module Aws::Glue
     #         account ID is used by default.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name of the database to retrieve. For Hive compatibility, this
+    #   <p>The name of the database to retrieve. For Hive compatibility, this 
     #         should be all lowercase.</p>
     #   @return [String]
     class GetDatabaseRequest < Struct.new(
@@ -12475,8 +12475,8 @@ module Aws::Glue
     end
 
     # @!attribute resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the target table for which to retrieve integration table properties. Currently, this API only supports retrieving
-    #         properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for retrieving integration
+    #   <p>The Amazon Resource Name (ARN) of the target table for which to retrieve integration table properties. Currently, this API only supports retrieving 
+    #         properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for retrieving integration 
     #         table properties for source connections (using the connection ARN) is not yet implemented and will be added in a future release.
     #       </p>
     #   @return [String]
@@ -12493,8 +12493,8 @@ module Aws::Glue
     end
 
     # @!attribute resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the target table for which to retrieve integration table properties. Currently, this API only supports retrieving
-    #         properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for retrieving integration
+    #   <p>The Amazon Resource Name (ARN) of the target table for which to retrieve integration table properties. Currently, this API only supports retrieving 
+    #         properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for retrieving integration 
     #         table properties for source connections (using the connection ARN) is not yet implemented and will be added in a future release.
     #       </p>
     #   @return [String]
@@ -14228,7 +14228,7 @@ module Aws::Glue
     #   <p>A list of column names that the user has been granted access to.</p>
     #   @return [Array<String>]
     # @!attribute is_registered_with_lake_formation
-    #   <p>A Boolean value that indicates whether the partition location is registered
+    #   <p>A Boolean value that indicates whether the partition location is registered 
     #             with Lake Formation.</p>
     #   @return [Boolean]
     class GetUnfilteredPartitionMetadataResponse < Struct.new(
@@ -14250,7 +14250,7 @@ module Aws::Glue
     #   <p>Specified only if the base tables belong to a different Amazon Web Services Region.</p>
     #   @return [String]
     # @!attribute catalog_id
-    #   <p>The ID of the Data Catalog where the partitions in question reside. If none is provided,
+    #   <p>The ID of the Data Catalog where the partitions in question reside. If none is provided, 
     #             the AWS account ID is used by default. </p>
     #   @return [String]
     # @!attribute database_name
@@ -14492,7 +14492,7 @@ module Aws::Glue
     #   <p>A list of column names that the user has been granted access to.</p>
     #   @return [Array<String>]
     # @!attribute is_registered_with_lake_formation
-    #   <p>A Boolean value that indicates whether the partition location is registered
+    #   <p>A Boolean value that indicates whether the partition location is registered 
     #             with Lake Formation.</p>
     #   @return [Boolean]
     # @!attribute cell_filters
@@ -15091,21 +15091,21 @@ module Aws::Glue
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>binpack</code>: Combines small files into larger files, typically targeting sizes over 100MB, while applying any pending deletes.
+    #                     <code>binpack</code>: Combines small files into larger files, typically targeting sizes over 100MB, while applying any pending deletes. 
     #             This is the recommended compaction strategy for most use cases.
     #           </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>sort</code>: Organizes data based on specified columns which are sorted hierarchically during compaction, improving query
-    #           performance for filtered operations. This strategy is recommended when your queries frequently filter on specific columns. To use this strategy,
+    #                     <code>sort</code>: Organizes data based on specified columns which are sorted hierarchically during compaction, improving query 
+    #           performance for filtered operations. This strategy is recommended when your queries frequently filter on specific columns. To use this strategy, 
     #           you must first define a sort order in your Iceberg table properties using the <code>sort_order</code> table property.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>z-order</code>: Optimizes data organization by blending multiple attributes into a single scalar value that can be used for sorting,
-    #             allowing efficient querying across multiple dimensions. This strategy is recommended when you need to query data across multiple dimensions
-    #             simultaneously. To use this strategy, you must first define a sort order in your Iceberg table properties using the
+    #                     <code>z-order</code>: Optimizes data organization by blending multiple attributes into a single scalar value that can be used for sorting, 
+    #             allowing efficient querying across multiple dimensions. This strategy is recommended when you need to query data across multiple dimensions 
+    #             simultaneously. To use this strategy, you must first define a sort order in your Iceberg table properties using the 
     #             <code>sort_order</code> table property.
     #           </p>
     #               </li>
@@ -15197,7 +15197,7 @@ module Aws::Glue
     #   <p>The table version for the Iceberg table. Defaults to 2.</p>
     #   @return [String]
     # @!attribute create_iceberg_table_input
-    #   <p>The configuration parameters required to create a new Iceberg table in the Glue Data Catalog, including table properties
+    #   <p>The configuration parameters required to create a new Iceberg table in the Glue Data Catalog, including table properties 
     #         and metadata specifications.</p>
     #   @return [Types::CreateIcebergTableInput]
     class IcebergInput < Struct.new(
@@ -15234,7 +15234,7 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A structure that contains the output properties of Iceberg table optimization configuration for your catalog resource in the Glue
+    # <p>A structure that contains the output properties of Iceberg table optimization configuration for your catalog resource in the Glue 
     #       Data Catalog.</p>
     # @!attribute role_arn
     #   <p>The Amazon Resource Name (ARN) of the IAM role that is used to perform Iceberg table optimization operations.</p>
@@ -15315,7 +15315,7 @@ module Aws::Glue
       end
     end
 
-    # <p>Defines a single partition field within an Iceberg partition specification, including the source field, transformation function, partition name,
+    # <p>Defines a single partition field within an Iceberg partition specification, including the source field, transformation function, partition name, 
     #       and unique identifier.</p>
     # @!attribute source_id
     #   <p>The identifier of the source field from the table schema that this partition field is based on.</p>
@@ -15491,7 +15491,7 @@ module Aws::Glue
       end
     end
 
-    # <p>Defines the sort order specification for an Iceberg table, determining how data should be ordered within partitions to
+    # <p>Defines the sort order specification for an Iceberg table, determining how data should be ordered within partitions to 
     #       optimize query performance.</p>
     # @!attribute order_id
     #   <p>The unique identifier for this sort order specification within the Iceberg table's metadata.</p>
@@ -15620,7 +15620,7 @@ module Aws::Glue
       end
     end
 
-    # <p>Defines a complete set of updates to be applied to an Iceberg table, including schema changes, partitioning modifications, sort order
+    # <p>Defines a complete set of updates to be applied to an Iceberg table, including schema changes, partitioning modifications, sort order 
     #       adjustments, location updates, and property changes.</p>
     # @!attribute schema
     #   <p>The updated schema definition for the Iceberg table, specifying any changes to field structure, data types, or schema metadata.</p>
@@ -15918,18 +15918,18 @@ module Aws::Glue
 
     # <p>Properties associated with the integration.</p>
     # @!attribute refresh_interval
-    #   <p>Specifies the frequency at which CDC (Change Data Capture) pulls or incremental loads should occur. This parameter provides flexibility to align
-    #         the refresh rate with your specific data update patterns, system load considerations, and performance optimization goals. Time increment can be set from
+    #   <p>Specifies the frequency at which CDC (Change Data Capture) pulls or incremental loads should occur. This parameter provides flexibility to align 
+    #         the refresh rate with your specific data update patterns, system load considerations, and performance optimization goals. Time increment can be set from  
     #       15 minutes to 8640 minutes (six days).</p>
     #   @return [String]
     # @!attribute source_properties
     #   <p>
-    #         A collection of key-value pairs that specify additional properties for the integration source. These properties provide configuration options that
+    #         A collection of key-value pairs that specify additional properties for the integration source. These properties provide configuration options that 
     #         can be used to customize the behavior of the ODB source during data integration operations.
     #       </p>
     #   @return [Hash<String, String>]
     # @!attribute continuous_sync
-    #   <p>Enables continuous synchronization for on-demand data extractions from SaaS applications to Amazon Web Services data services like Amazon Redshift
+    #   <p>Enables continuous synchronization for on-demand data extractions from SaaS applications to Amazon Web Services data services like Amazon Redshift 
     #         and Amazon S3.</p>
     #   @return [Boolean]
     # @!attribute target_namespace
@@ -16005,8 +16005,8 @@ module Aws::Glue
 
     # <p>A structure that describes how data is partitioned on the target.</p>
     # @!attribute field_name
-    #   <p>The field name used to partition data on the target. Avoid using columns that have unique values for each row (for example, `LastModifiedTimestamp`,
-    #         `SystemModTimeStamp`) as the partition column. These columns are not suitable for partitioning because they create a large number of small partitions,
+    #   <p>The field name used to partition data on the target. Avoid using columns that have unique values for each row (for example, `LastModifiedTimestamp`, 
+    #         `SystemModTimeStamp`) as the partition column. These columns are not suitable for partitioning because they create a large number of small partitions, 
     #         which can lead to performance issues.</p>
     #   @return [String]
     # @!attribute function_spec
@@ -16052,7 +16052,7 @@ module Aws::Glue
     #            </ul>
     #            <note>
     #               <p>
-    #           Only specify <code>ConversionSpec</code> when using timestamp-based partition functions (year, month, day, or hour).
+    #           Only specify <code>ConversionSpec</code> when using timestamp-based partition functions (year, month, day, or hour). 
     #           Glue Zero-ETL uses this parameter to correctly transform source data into timestamp format before partitioning.
     #         </p>
     #               <p>
@@ -16613,8 +16613,8 @@ module Aws::Glue
     #             allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p>
     #               </li>
     #               <li>
-    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache
-    #               Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs.
+    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache 
+    #               Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. 
     #               The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p>
     #               </li>
     #            </ul>
@@ -16801,7 +16801,7 @@ module Aws::Glue
     # <p>Specifies code that runs when a job is run.</p>
     # @!attribute name
     #   <p>The name of the job command. For an Apache Spark ETL job, this must be
-    #         <code>glueetl</code>. For a Python shell job, it must be <code>pythonshell</code>.
+    #         <code>glueetl</code>. For a Python shell job, it must be <code>pythonshell</code>. 
     #         For an Apache Spark streaming ETL job, this must be <code>gluestreaming</code>. For a Ray job,
     #         this must be <code>glueray</code>.</p>
     #   @return [String]
@@ -16952,8 +16952,8 @@ module Aws::Glue
     #             allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p>
     #               </li>
     #               <li>
-    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache
-    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs.
+    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache 
+    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. 
     #           The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p>
     #               </li>
     #            </ul>
@@ -17032,7 +17032,7 @@ module Aws::Glue
     #            <p>For example, when a job run is in a WAITING state as a result of job run queuing, the field has the reason why the job run is in that state.</p>
     #   @return [String]
     # @!attribute execution_role_session_policy
-    #   <p>This inline session policy to the StartJobRun API allows you to dynamically restrict the permissions of the specified
+    #   <p>This inline session policy to the StartJobRun API allows you to dynamically restrict the permissions of the specified 
     #         execution role for the scope of the job, without requiring the creation of additional IAM roles.</p>
     #   @return [String]
     class JobRun < Struct.new(
@@ -17182,16 +17182,16 @@ module Aws::Glue
     #             allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p>
     #               </li>
     #               <li>
-    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache
-    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs.
+    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache 
+    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. 
     #           The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p>
     #               </li>
     #            </ul>
     #   @return [Float]
     # @!attribute worker_type
     #   <p>The type of predefined worker that is allocated when a job runs. Accepts a value of
-    #         G.1X, G.2X, G.4X, G.8X or G.025X for Spark jobs. Accepts the value Z.2X for Ray jobs. For more information, see
-    #         <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html#create-job">Defining job properties for Spark jobs
+    #         G.1X, G.2X, G.4X, G.8X or G.025X for Spark jobs. Accepts the value Z.2X for Ray jobs. For more information, see 
+    #         <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html#create-job">Defining job properties for Spark jobs   
     #         </a>
     #            </p>
     #   @return [String]
@@ -17401,8 +17401,8 @@ module Aws::Glue
     #   <p>The desired minimum number of partitions to read from Kafka. The default value is null, which means that the number of spark partitions is equal to the number of Kafka partitions.</p>
     #   @return [Integer]
     # @!attribute include_headers
-    #   <p>Whether to include the Kafka headers. When the option is set to "true", the data output will contain an additional column named "glue_streaming_kafka_headers"
-    #             with type <code>Array[Struct(key: String, value: String)]</code>. The default value is "false".
+    #   <p>Whether to include the Kafka headers. When the option is set to "true", the data output will contain an additional column named "glue_streaming_kafka_headers" 
+    #             with type <code>Array[Struct(key: String, value: String)]</code>. The default value is "false". 
     #         This option is available in Glue version 3.0 or later only.</p>
     #   @return [Boolean]
     # @!attribute add_record_timestamp
@@ -17523,7 +17523,7 @@ module Aws::Glue
     #   <p>The timestamp of the record in the Kinesis data stream to start reading data from. The possible values are a timestamp string in UTC format of the pattern <code>yyyy-mm-ddTHH:MM:SSZ</code> (where Z represents a UTC timezone offset with a +/-. For example: "2023-04-04T08:00:00+08:00"). </p>
     #   @return [Time]
     # @!attribute fanout_consumer_arn
-    #   <p>The Amazon Resource Name (ARN) of the Kinesis Data Streams enhanced fan-out consumer. When specified, enables enhanced fan-out for
+    #   <p>The Amazon Resource Name (ARN) of the Kinesis Data Streams enhanced fan-out consumer. When specified, enables enhanced fan-out for 
     #         dedicated throughput and lower latency data consumption.</p>
     #   @return [String]
     class KinesisStreamingSourceOptions < Struct.new(
@@ -21946,7 +21946,7 @@ module Aws::Glue
     #   <p>A policy that specifies update behavior for the crawler.</p>
     #   @return [Types::CatalogSchemaChangePolicy]
     # @!attribute auto_data_quality
-    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 catalog target.
+    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 catalog target. 
     #         When set to <code>true</code>, data quality checks are performed automatically during the write operation.</p>
     #   @return [Types::AutoDataQuality]
     class S3CatalogTarget < Struct.new(
@@ -22075,7 +22075,7 @@ module Aws::Glue
     #   <p>A policy that specifies update behavior for the crawler.</p>
     #   @return [Types::CatalogSchemaChangePolicy]
     # @!attribute auto_data_quality
-    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 Delta catalog target. When set to <code>true</code>,
+    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 Delta catalog target. When set to <code>true</code>, 
     #         data quality checks are performed automatically during the write operation.</p>
     #   @return [Types::AutoDataQuality]
     # @!attribute output_schemas
@@ -22126,7 +22126,7 @@ module Aws::Glue
     #   <p>A policy that specifies update behavior for the crawler.</p>
     #   @return [Types::DirectSchemaChangePolicy]
     # @!attribute auto_data_quality
-    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 Delta direct target. When set to <code>true</code>,
+    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 Delta direct target. When set to <code>true</code>, 
     #         data quality checks are performed automatically during the write operation.</p>
     #   @return [Types::AutoDataQuality]
     class S3DeltaDirectTarget < Struct.new(
@@ -22224,7 +22224,7 @@ module Aws::Glue
     #   <p>A policy that specifies update behavior for the crawler.</p>
     #   @return [Types::DirectSchemaChangePolicy]
     # @!attribute auto_data_quality
-    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 direct target. When set to <code>true</code>,
+    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 direct target. When set to <code>true</code>, 
     #         data quality checks are performed automatically during the write operation.</p>
     #   @return [Types::AutoDataQuality]
     # @!attribute output_schemas
@@ -22346,7 +22346,7 @@ module Aws::Glue
     #   <p>A policy that specifies update behavior for the crawler.</p>
     #   @return [Types::DirectSchemaChangePolicy]
     # @!attribute auto_data_quality
-    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 Glue Parquet target. When set to <code>true</code>,
+    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 Glue Parquet target. When set to <code>true</code>, 
     #         data quality checks are performed automatically during the write operation.</p>
     #   @return [Types::AutoDataQuality]
     class S3GlueParquetTarget < Struct.new(
@@ -22387,7 +22387,7 @@ module Aws::Glue
     #   <p>A policy that specifies update behavior for the crawler.</p>
     #   @return [Types::CatalogSchemaChangePolicy]
     # @!attribute auto_data_quality
-    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 Hudi catalog target. When set to <code>true</code>,
+    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 Hudi catalog target. When set to <code>true</code>, 
     #         data quality checks are performed automatically during the write operation.</p>
     #   @return [Types::AutoDataQuality]
     # @!attribute output_schemas
@@ -22438,7 +22438,7 @@ module Aws::Glue
     #   <p>A policy that specifies update behavior for the crawler.</p>
     #   @return [Types::DirectSchemaChangePolicy]
     # @!attribute auto_data_quality
-    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 Hudi direct target. When set to <code>true</code>,
+    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 Hudi direct target. When set to <code>true</code>, 
     #         data quality checks are performed automatically during the write operation.</p>
     #   @return [Types::AutoDataQuality]
     class S3HudiDirectTarget < Struct.new(
@@ -22593,7 +22593,7 @@ module Aws::Glue
     #   <p>Defines how schema changes are handled when writing data to the Iceberg table.</p>
     #   @return [Types::DirectSchemaChangePolicy]
     # @!attribute auto_data_quality
-    #   <p>Specifies configuration options for automatic data quality evaluation in Glue jobs. This structure enables automated data quality
+    #   <p>Specifies configuration options for automatic data quality evaluation in Glue jobs. This structure enables automated data quality 
     #         checks and monitoring during ETL operations, helping to ensure data integrity and reliability without manual intervention.</p>
     #   @return [Types::AutoDataQuality]
     # @!attribute compression
@@ -23413,14 +23413,14 @@ module Aws::Glue
     #   <p>The code execution progress of the session.</p>
     #   @return [Float]
     # @!attribute max_capacity
-    #   <p>The number of Glue data processing units (DPUs) that can be allocated when the job runs.
+    #   <p>The number of Glue data processing units (DPUs) that can be allocated when the job runs. 
     #         A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB memory. </p>
     #   @return [Float]
     # @!attribute security_configuration
     #   <p>The name of the SecurityConfiguration structure to be used with the session.</p>
     #   @return [String]
     # @!attribute glue_version
-    #   <p>The Glue version determines the versions of Apache Spark and Python that Glue supports.
+    #   <p>The Glue version determines the versions of Apache Spark and Python that Glue supports. 
     #         The GlueVersion must be greater than 2.0.</p>
     #   @return [String]
     # @!attribute number_of_workers
@@ -23812,7 +23812,7 @@ module Aws::Glue
     #   <p>A condition clause used for row-level filtering. Currently unsupported.</p>
     #   @return [String]
     # @!attribute primary_key
-    #   <p>Provide the primary key set for this table. Currently supported specifically for SAP <code>EntityOf</code> entities upon request. Contact
+    #   <p>Provide the primary key set for this table. Currently supported specifically for SAP <code>EntityOf</code> entities upon request. Contact 
     #         Amazon Web Services Support to make this feature available.</p>
     #   @return [Array<String>]
     # @!attribute record_update_field
@@ -24357,8 +24357,8 @@ module Aws::Glue
     #             allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p>
     #               </li>
     #               <li>
-    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache
-    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs.
+    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache 
+    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. 
     #           The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p>
     #               </li>
     #            </ul>
@@ -25489,8 +25489,8 @@ module Aws::Glue
     #   @return [Types::TableOptimizerRun]
     # @!attribute configuration_source
     #   <p>
-    #         Specifies the source of the optimizer configuration. This indicates how the table optimizer was configured and which entity or service
-    #         initiated the configuration.
+    #         Specifies the source of the optimizer configuration. This indicates how the table optimizer was configured and which entity or service 
+    #         initiated the configuration. 
     #       </p>
     #   @return [String]
     class TableOptimizer < Struct.new(
@@ -25516,7 +25516,7 @@ module Aws::Glue
     #            <p>This configuration is necessary to perform optimization on tables that are in a customer VPC.</p>
     #   @return [Types::TableOptimizerVpcConfiguration]
     # @!attribute compaction_configuration
-    #   <p>The configuration for a compaction optimizer. This configuration defines how data files in your table will be compacted to
+    #   <p>The configuration for a compaction optimizer. This configuration defines how data files in your table will be compacted to 
     #         improve query performance and reduce storage costs.</p>
     #   @return [Types::CompactionConfiguration]
     # @!attribute retention_configuration
@@ -25561,26 +25561,26 @@ module Aws::Glue
     #   <p>A <code>CompactionMetrics</code> object containing metrics for the optimizer run.</p>
     #   @return [Types::CompactionMetrics]
     # @!attribute compaction_strategy
-    #   <p>The strategy used for the compaction run. Indicates which algorithm was applied to determine how files were selected and combined during the
+    #   <p>The strategy used for the compaction run. Indicates which algorithm was applied to determine how files were selected and combined during the 
     #         compaction process. Valid values are:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>binpack</code>: Combines small files into larger files, typically targeting sizes over 100MB, while applying any pending deletes.
+    #                     <code>binpack</code>: Combines small files into larger files, typically targeting sizes over 100MB, while applying any pending deletes. 
     #             This is the recommended compaction strategy for most use cases.
     #           </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>sort</code>: Organizes data based on specified columns which are sorted hierarchically during compaction, improving query
-    #             performance for filtered operations. This strategy is recommended when your queries frequently filter on specific columns. To use this strategy,
+    #                     <code>sort</code>: Organizes data based on specified columns which are sorted hierarchically during compaction, improving query 
+    #             performance for filtered operations. This strategy is recommended when your queries frequently filter on specific columns. To use this strategy, 
     #             you must first define a sort order in your Iceberg table properties using the <code>sort_order</code> table property.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>z-order</code>: Optimizes data organization by blending multiple attributes into a single scalar value that can be used for sorting,
-    #             allowing efficient querying across multiple dimensions. This strategy is recommended when you need to query data across multiple dimensions
-    #             simultaneously. To use this strategy, you must first define a sort order in your Iceberg table properties using the
+    #                     <code>z-order</code>: Optimizes data organization by blending multiple attributes into a single scalar value that can be used for sorting, 
+    #             allowing efficient querying across multiple dimensions. This strategy is recommended when you need to query data across multiple dimensions 
+    #             simultaneously. To use this strategy, you must first define a sort order in your Iceberg table properties using the 
     #             <code>sort_order</code> table property.
     #           </p>
     #               </li>
@@ -27054,12 +27054,12 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Input parameters specific to updating Apache Iceberg tables in Glue Data
-    #       Catalog, containing the update operations to be applied to an existing Iceberg
+    # <p>Input parameters specific to updating Apache Iceberg tables in Glue Data 
+    #       Catalog, containing the update operations to be applied to an existing Iceberg 
     #       table.</p>
     # @!attribute update_iceberg_table_input
-    #   <p>The specific update operations to be applied to the Iceberg table, containing a
-    #         list of updates that define the new state of the table including schema,
+    #   <p>The specific update operations to be applied to the Iceberg table, containing a 
+    #         list of updates that define the new state of the table including schema, 
     #         partitions, and properties.</p>
     #   @return [Types::UpdateIcebergTableInput]
     class UpdateIcebergInput < Struct.new(
@@ -27073,7 +27073,7 @@ module Aws::Glue
     # <p>Contains the update operations to be applied to an existing Iceberg table inGlue Data Catalog, defining the new state of the table metadata.
     #     </p>
     # @!attribute updates
-    #   <p>The list of table update operations that specify the changes to be made to the Iceberg table, including schema modifications, partition
+    #   <p>The list of table update operations that specify the changes to be made to the Iceberg table, including schema modifications, partition 
     #         specifications, and table properties.</p>
     #   @return [Array<Types::IcebergTableUpdate>]
     class UpdateIcebergTableInput < Struct.new(
@@ -27165,9 +27165,9 @@ module Aws::Glue
     #       </p>
     #   @return [String]
     # @!attribute repository_name
-    #   <p>The name of the remote repository that contains the job artifacts.
+    #   <p>The name of the remote repository that contains the job artifacts. 
     #         For BitBucket providers, <code>RepositoryName</code> should include <code>WorkspaceName</code>.
-    #         Use the format <code><WorkspaceName>/<RepositoryName></code>.
+    #         Use the format <code><WorkspaceName>/<RepositoryName></code>. 
     #       </p>
     #   @return [String]
     # @!attribute repository_owner
@@ -27337,11 +27337,11 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Input parameters for updating open table format tables in GlueData Catalog,
+    # <p>Input parameters for updating open table format tables in GlueData Catalog, 
     #       serving as a wrapper for format-specific update operations such as Apache Iceberg.</p>
     # @!attribute update_iceberg_input
-    #   <p>Apache Iceberg-specific update parameters that define the table modifications to
-    #         be applied, including schema changes, partition specifications, and table
+    #   <p>Apache Iceberg-specific update parameters that define the table modifications to 
+    #         be applied, including schema changes, partition specifications, and table 
     #         properties.</p>
     #   @return [Types::UpdateIcebergInput]
     class UpdateOpenTableFormatInput < Struct.new(
@@ -27478,9 +27478,9 @@ module Aws::Glue
     #       </p>
     #   @return [String]
     # @!attribute repository_name
-    #   <p>The name of the remote repository that contains the job artifacts.
+    #   <p>The name of the remote repository that contains the job artifacts. 
     #         For BitBucket providers, <code>RepositoryName</code> should include <code>WorkspaceName</code>.
-    #         Use the format <code><WorkspaceName>/<RepositoryName></code>.
+    #         Use the format <code><WorkspaceName>/<RepositoryName></code>. 
     #       </p>
     #   @return [String]
     # @!attribute repository_owner
@@ -27571,7 +27571,7 @@ module Aws::Glue
     #         compatibility, this name is entirely lowercase.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The unique identifier for the table within the specified database that will be
+    #   <p>The unique identifier for the table within the specified database that will be 
     #         created in the Glue Data Catalog.</p>
     #   @return [String]
     # @!attribute table_input
@@ -27932,7 +27932,7 @@ module Aws::Glue
     #   <p>The version ID of the Apache Iceberg table.</p>
     #   @return [String]
     # @!attribute refresh_seconds
-    #   <p>Auto refresh interval in seconds for the materialized view. If not specified, the view will
+    #   <p>Auto refresh interval in seconds for the materialized view. If not specified, the view will 
     #         not automatically refresh.</p>
     #   @return [Integer]
     # @!attribute last_refresh_type
@@ -28000,11 +28000,11 @@ module Aws::Glue
     #   <p>The version ID of the Apache Iceberg table.</p>
     #   @return [String]
     # @!attribute refresh_seconds
-    #   <p>Auto refresh interval in seconds for the materialized view. If not specified, the view will
+    #   <p>Auto refresh interval in seconds for the materialized view. If not specified, the view will 
     #         not automatically refresh.</p>
     #   @return [Integer]
     # @!attribute last_refresh_type
-    #   <p>The type of the materialized view's last refresh. Valid values: <code>Full</code>,
+    #   <p>The type of the materialized view's last refresh. Valid values: <code>Full</code>, 
     #         <code>Incremental</code>.</p>
     #   @return [String]
     # @!attribute sub_objects
@@ -28144,7 +28144,7 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A workflow is a collection of multiple dependent Glue
+    # <p>A workflow is a collection of multiple dependent Glue 
     #       jobs and crawlers that are run to complete a complex ETL task. A
     #       workflow manages the execution and monitoring of all its jobs and crawlers.</p>
     # @!attribute name

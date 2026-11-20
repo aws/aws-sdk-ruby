@@ -6,7 +6,7 @@ module Aws::DatabaseMigrationService
   # This module contains the types returned by client operations.
   module Types
 
-    # <p>DMS was denied access to the endpoint. Check that the
+    # <p>DMS was denied access to the endpoint. Check that the 
     #             role is correctly configured.</p>
     # @!attribute message
     #   <p></p>
@@ -1097,7 +1097,7 @@ module Aws::DatabaseMigrationService
     #            data provider is created, for examplem <code>us-east-1d</code>.</p>
     #   @return [String]
     # @!attribute kms_key_arn
-    #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt
+    #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt 
     #            the connection parameters for the instance profile.</p>
     #            <p>If you don't specify a value for the <code>KmsKeyArn</code> parameter, then
     #            DMS uses an Amazon Web Services owned encryption key to encrypt your resources.</p>
@@ -1128,7 +1128,7 @@ module Aws::DatabaseMigrationService
     #   <p>A subnet group to associate with the instance profile.</p>
     #   @return [String]
     # @!attribute vpc_security_groups
-    #   <p>Specifies the VPC security group names to be used with the instance profile.
+    #   <p>Specifies the VPC security group names to be used with the instance profile. 
     #            The VPC security group must work with the VPC containing the instance profile.</p>
     #   @return [Array<String>]
     class CreateInstanceProfileMessage < Struct.new(
@@ -1168,8 +1168,8 @@ module Aws::DatabaseMigrationService
     #   <p>Information about the target data provider, including the name, ARN, and Amazon Web Services Secrets Manager parameters.</p>
     #   @return [Array<Types::DataProviderDescriptorDefinition>]
     # @!attribute instance_profile_identifier
-    #   <p>The identifier of the associated instance profile. Identifiers must begin with a letter
-    #            and must contain only ASCII letters, digits, and hyphens. They can't end with
+    #   <p>The identifier of the associated instance profile. Identifiers must begin with a letter 
+    #            and must contain only ASCII letters, digits, and hyphens. They can't end with 
     #            a hyphen, or contain two consecutive hyphens.</p>
     #   @return [String]
     # @!attribute transformation_rules
@@ -1800,8 +1800,8 @@ module Aws::DatabaseMigrationService
     #   <p>The time the data provider was created.</p>
     #   @return [Time]
     # @!attribute description
-    #   <p>A description of the data provider. Descriptions can have up to 31 characters.
-    #            A description can contain only ASCII letters, digits, and hyphens ('-'). Also, it can't
+    #   <p>A description of the data provider. Descriptions can have up to 31 characters. 
+    #            A description can contain only ASCII letters, digits, and hyphens ('-'). Also, it can't 
     #            end with a hyphen or contain two consecutive hyphens, and can only begin with a letter.</p>
     #   @return [String]
     # @!attribute engine
@@ -2678,16 +2678,16 @@ module Aws::DatabaseMigrationService
     #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
+    #   <p>The maximum number of records to include in the response. If more records exist than 
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
     #            in the response so that you can retrieve the remaining results.</p>
     #   @return [Integer]
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     class DescribeDataProvidersMessage < Struct.new(
@@ -2701,11 +2701,11 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute data_providers
@@ -3079,11 +3079,11 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute requests
@@ -3421,8 +3421,8 @@ module Aws::DatabaseMigrationService
     #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
+    #   <p>The maximum number of records to include in the response. If more records exist than 
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
     #            in the response so that you can retrieve the remaining results.</p>
     #   @return [Integer]
     # @!attribute marker
@@ -3444,11 +3444,11 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute instance_profiles
@@ -3505,11 +3505,11 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute requests
@@ -3599,16 +3599,16 @@ module Aws::DatabaseMigrationService
     #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
+    #   <p>The maximum number of records to include in the response. If more records exist than 
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
     #            in the response so that you can retrieve the remaining results.</p>
     #   @return [Integer]
     class DescribeMetadataModelConversionsMessage < Struct.new(
@@ -3623,11 +3623,11 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute requests
@@ -3751,11 +3751,11 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute requests
@@ -3812,11 +3812,11 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute requests
@@ -3876,11 +3876,11 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute requests
@@ -3979,16 +3979,16 @@ module Aws::DatabaseMigrationService
     #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
+    #   <p>The maximum number of records to include in the response. If more records exist than 
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
     #            in the response so that you can retrieve the remaining results.</p>
     #   @return [Integer]
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     class DescribeMigrationProjectsMessage < Struct.new(
@@ -4002,11 +4002,11 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute migration_projects
@@ -4829,7 +4829,7 @@ module Aws::DatabaseMigrationService
     #   <p>The database name on the DocumentDB data provider.</p>
     #   @return [String]
     # @!attribute ssl_mode
-    #   <p>The SSL mode used to connect to the DocumentDB data provider.
+    #   <p>The SSL mode used to connect to the DocumentDB data provider. 
     #            The default value is <code>none</code>.</p>
     #   @return [String]
     # @!attribute certificate_arn
@@ -6023,8 +6023,8 @@ module Aws::DatabaseMigrationService
     #   <p>The user-friendly name for the instance profile.</p>
     #   @return [String]
     # @!attribute description
-    #   <p>A description of the instance profile. Descriptions can have up to 31 characters.
-    #            A description can contain only ASCII letters, digits, and hyphens ('-'). Also, it can't
+    #   <p>A description of the instance profile. Descriptions can have up to 31 characters. 
+    #            A description can contain only ASCII letters, digits, and hyphens ('-'). Also, it can't 
     #            end with a hyphen or contain two consecutive hyphens, and can only begin with a letter.</p>
     #   @return [String]
     # @!attribute instance_profile_creation_time
@@ -6545,7 +6545,7 @@ module Aws::DatabaseMigrationService
     #   <p>The port value for the MariaDB data provider</p>
     #   @return [Integer]
     # @!attribute ssl_mode
-    #   <p>The SSL mode used to connect to the MariaDB data provider.
+    #   <p>The SSL mode used to connect to the MariaDB data provider. 
     #            The default value is <code>none</code>.</p>
     #   @return [String]
     # @!attribute certificate_arn
@@ -6743,7 +6743,7 @@ module Aws::DatabaseMigrationService
     #   <p>The database name on the Microsoft SQL Server data provider.</p>
     #   @return [String]
     # @!attribute ssl_mode
-    #   <p>The SSL mode used to connect to the Microsoft SQL Server data provider.
+    #   <p>The SSL mode used to connect to the Microsoft SQL Server data provider. 
     #            The default value is <code>none</code>.</p>
     #   @return [String]
     # @!attribute certificate_arn
@@ -6917,8 +6917,8 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute data_provider_identifier
-    #   <p>The identifier of the data provider. Identifiers must begin with a letter
-    #            and must contain only ASCII letters, digits, and hyphens. They can't end with
+    #   <p>The identifier of the data provider. Identifiers must begin with a letter 
+    #            and must contain only ASCII letters, digits, and hyphens. They can't end with 
     #            a hyphen, or contain two consecutive hyphens.</p>
     #   @return [String]
     # @!attribute data_provider_name
@@ -6944,11 +6944,11 @@ module Aws::DatabaseMigrationService
     #            attribute is N, the current call to <code>ModifyDataProvider</code> does two things: </p>
     #            <ul>
     #               <li>
-    #                  <p>It replaces any data provider settings that already exist with new values,
+    #                  <p>It replaces any data provider settings that already exist with new values, 
     #               for settings with the same names.</p>
     #               </li>
     #               <li>
-    #                  <p>It creates new data provider settings that you specify in the call,
+    #                  <p>It creates new data provider settings that you specify in the call, 
     #               for settings with different names. </p>
     #               </li>
     #            </ul>
@@ -7283,15 +7283,15 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute instance_profile_identifier
-    #   <p>The identifier of the instance profile. Identifiers must begin with a letter and must contain
-    #            only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two consecutive
+    #   <p>The identifier of the instance profile. Identifiers must begin with a letter and must contain 
+    #            only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two consecutive 
     #            hyphens.</p>
     #   @return [String]
     # @!attribute availability_zone
     #   <p>The Availability Zone where the instance profile runs.</p>
     #   @return [String]
     # @!attribute kms_key_arn
-    #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt
+    #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt 
     #            the connection parameters for the instance profile.</p>
     #            <p>If you don't specify a value for the <code>KmsKeyArn</code> parameter, then
     #            DMS uses an Amazon Web Services owned encryption key to encrypt your resources.</p>
@@ -7319,7 +7319,7 @@ module Aws::DatabaseMigrationService
     #   <p>A subnet group to associate with the instance profile.</p>
     #   @return [String]
     # @!attribute vpc_security_groups
-    #   <p>Specifies the VPC security groups to be used with the instance profile.
+    #   <p>Specifies the VPC security groups to be used with the instance profile. 
     #            The VPC security group must work with the VPC containing the instance profile.</p>
     #   @return [Array<String>]
     class ModifyInstanceProfileMessage < Struct.new(
@@ -7350,8 +7350,8 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute migration_project_identifier
-    #   <p>The identifier of the migration project. Identifiers must begin with a letter
-    #            and must contain only ASCII letters, digits, and hyphens. They can't end with
+    #   <p>The identifier of the migration project. Identifiers must begin with a letter 
+    #            and must contain only ASCII letters, digits, and hyphens. They can't end with 
     #            a hyphen, or contain two consecutive hyphens.</p>
     #   @return [String]
     # @!attribute migration_project_name
@@ -7719,7 +7719,7 @@ module Aws::DatabaseMigrationService
     #   <p>The database name on the MongoDB data provider.</p>
     #   @return [String]
     # @!attribute ssl_mode
-    #   <p>The SSL mode used to connect to the MongoDB data provider.
+    #   <p>The SSL mode used to connect to the MongoDB data provider. 
     #            The default value is <code>none</code>.</p>
     #   @return [String]
     # @!attribute certificate_arn
@@ -8038,7 +8038,7 @@ module Aws::DatabaseMigrationService
     #   <p>The port value for the MySQL data provider.</p>
     #   @return [Integer]
     # @!attribute ssl_mode
-    #   <p>The SSL mode used to connect to the MySQL data provider.
+    #   <p>The SSL mode used to connect to the MySQL data provider. 
     #            The default value is <code>none</code>.</p>
     #   @return [String]
     # @!attribute certificate_arn
@@ -8146,8 +8146,8 @@ module Aws::DatabaseMigrationService
     #            that contains the Oracle ASM connection details.</p>
     #   @return [String]
     # @!attribute secrets_manager_security_db_encryption_secret_id
-    #   <p>The identifier of the secret in Secrets Manager that contains the transparent data encryption (TDE)
-    #            password. DMS requires this password to access Oracle redo logs encrypted by TDE
+    #   <p>The identifier of the secret in Secrets Manager that contains the transparent data encryption (TDE) 
+    #            password. DMS requires this password to access Oracle redo logs encrypted by TDE 
     #            using Binary Reader.</p>
     #   @return [String]
     # @!attribute secrets_manager_security_db_encryption_access_role_arn
@@ -8834,7 +8834,7 @@ module Aws::DatabaseMigrationService
     #   <p>The database name on the PostgreSQL data provider.</p>
     #   @return [String]
     # @!attribute ssl_mode
-    #   <p>The SSL mode used to connect to the PostgreSQL data provider.
+    #   <p>The SSL mode used to connect to the PostgreSQL data provider. 
     #            The default value is <code>none</code>.</p>
     #   @return [String]
     # @!attribute certificate_arn

@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::MemoryDB
     @identifier = :memorydb
 
     add_plugin(::Aws::MemoryDB::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::MemoryDB
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::MemoryDB
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -325,11 +345,11 @@ module Aws::MemoryDB
     #   <p>A name for the snapshot copy. MemoryDB does not permit overwriting a snapshot, therefore this name must be unique within its context - MemoryDB or an Amazon S3 bucket if exporting.</p>
     # @option params [String] :target_bucket
     #   <p>The Amazon S3 bucket to which the snapshot is exported. This parameter is used only when exporting a snapshot for external access.
-    #
-    #          When using this parameter to export a snapshot, be sure MemoryDB has the needed permissions to this S3 bucket. For more information, see
-    #
-    #          <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/snapshots-exporting.html">Step 2: Grant MemoryDB Access to Your Amazon S3 Bucket</a>.
-    #
+    #          
+    #          When using this parameter to export a snapshot, be sure MemoryDB has the needed permissions to this S3 bucket. For more information, see 
+    #          
+    #          <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/snapshots-exporting.html">Step 2: Grant MemoryDB Access to Your Amazon S3 Bucket</a>. 
+    #          
     #        </p>
     # @option params [String] :kms_key_id
     #   <p>The ID of the KMS key used to encrypt the target snapshot.</p>
@@ -534,7 +554,7 @@ module Aws::MemoryDB
     # @option params [Boolean] :auto_minor_version_upgrade
     #   <p>When set to true, the cluster will automatically receive minor engine version upgrades after launch.</p>
     # @option params [Boolean] :data_tiering
-    #   <p>Enables data tiering. Data tiering is only supported for clusters using the r6gd node type.
+    #   <p>Enables data tiering. Data tiering is only supported for clusters using the r6gd node type. 
     #               This parameter must be set when using r6gd nodes. For more information, see <a href="https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html">Data tiering</a>.</p>
     # @option params [String] :network_type
     #   <p>Specifies the IP address type for the cluster. Valid values are 'ipv4', 'ipv6', or 'dual_stack'. When set to 'ipv4', the cluster will only be accessible via IPv4 addresses. When set to 'ipv6', the cluster will only be accessible via IPv6 addresses. When set to 'dual_stack', the cluster will be accessible via both IPv4 and IPv6 addresses. If not specified, the default is 'ipv4'.</p>
@@ -729,9 +749,9 @@ module Aws::MemoryDB
       request.send_request(options)
     end
 
-    # <p>Creates a new MemoryDB parameter group. A parameter group is a collection of parameters and their values that are applied to all of the nodes in any cluster. For
+    # <p>Creates a new MemoryDB parameter group. A parameter group is a collection of parameters and their values that are applied to all of the nodes in any cluster. For 
     #          more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/parametergroups.html">Configuring engine parameters using parameter groups</a>.
-    #
+    #          
     #          </p>
     # @param [Hash, Types::CreateParameterGroupRequest] params
     # @option params [String] :parameter_group_name
@@ -844,8 +864,8 @@ module Aws::MemoryDB
     end
 
     # <p>Creates a subnet group. A subnet group is a collection of subnets (typically private) that you can designate for your clusters running in an Amazon Virtual Private Cloud (VPC) environment.
-    #
-    #          When you create a cluster in an Amazon VPC, you must specify a subnet group. MemoryDB uses that subnet group to choose a subnet and IP addresses within that subnet to associate with your nodes.
+    #          
+    #          When you create a cluster in an Amazon VPC, you must specify a subnet group. MemoryDB uses that subnet group to choose a subnet and IP addresses within that subnet to associate with your nodes. 
     #          For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/subnetgroups.html">Subnets and subnet groups</a>.</p>
     # @param [Hash, Types::CreateSubnetGroupRequest] params
     # @option params [String] :subnet_group_name
@@ -980,7 +1000,7 @@ module Aws::MemoryDB
     # <p>Deletes a cluster. It also deletes all associated nodes and node endpoints.</p>
     #          <note>
     #             <p>
-    #                <code>CreateSnapshot</code> permission is required to create a final snapshot.
+    #                <code>CreateSnapshot</code> permission is required to create a final snapshot. 
     #          Without this permission, the API call will fail with an <code>Access Denied</code> exception.</p>
     #          </note>
     # @param [Hash, Types::DeleteClusterRequest] params
@@ -1122,7 +1142,7 @@ module Aws::MemoryDB
       request.send_request(options)
     end
 
-    # <p>Deletes the specified parameter group. You cannot delete a parameter group if it is associated with any clusters.
+    # <p>Deletes the specified parameter group. You cannot delete a parameter group if it is associated with any clusters. 
     #          You cannot delete the default parameter groups in your account.</p>
     # @param [Hash, Types::DeleteParameterGroupRequest] params
     # @option params [String] :parameter_group_name
@@ -1466,7 +1486,7 @@ module Aws::MemoryDB
     end
 
     # <p>Returns events related to clusters, security groups, and parameter groups. You can obtain events specific to a particular cluster, security group, or parameter group by providing the name as a parameter.
-    #
+    #          
     #          By default, only the events occurring within the last hour are returned; however, you can retrieve up to 14 days' worth of events if necessary.</p>
     # @param [Hash, Types::DescribeEventsRequest] params
     # @option params [String] :source_name
@@ -1475,11 +1495,11 @@ module Aws::MemoryDB
     #   <p>The event source to retrieve events for. If no value is specified, all events are returned.</p>
     # @option params [Time] :start_time
     #   <p>The beginning of the time interval to retrieve events for, specified in ISO 8601 format.
-    #
+    #            
     #            Example: 2017-03-30T07:03:49.555Z</p>
     # @option params [Time] :end_time
     #   <p>The end of the time interval for which to retrieve events, specified in ISO 8601 format.
-    #
+    #            
     #            Example: 2017-03-30T07:03:49.555Z</p>
     # @option params [Integer] :duration
     #   <p>The number of minutes worth of events to retrieve.</p>
@@ -1729,7 +1749,7 @@ module Aws::MemoryDB
     # @option params [String] :duration
     #   <p>The duration filter value, specified in years or seconds. Use this parameter to show only reservations for this duration.</p>
     # @option params [String] :offering_type
-    #   <p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type.
+    #   <p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type. 
     #            Valid values: "All Upfront"|"Partial Upfront"| "No Upfront"</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved.</p>
@@ -1787,7 +1807,7 @@ module Aws::MemoryDB
     # @option params [String] :duration
     #   <p>Duration filter value, specified in years or seconds. Use this parameter to show only reservations for a given duration.</p>
     # @option params [String] :offering_type
-    #   <p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type.
+    #   <p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type. 
     #            Valid values: "All Upfront"|"Partial Upfront"| "No Upfront"</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved.</p>
@@ -1876,7 +1896,7 @@ module Aws::MemoryDB
       request.send_request(options)
     end
 
-    # <p>Returns information about cluster snapshots. By default, DescribeSnapshots lists all of your snapshots; it can optionally describe a single snapshot,
+    # <p>Returns information about cluster snapshots. By default, DescribeSnapshots lists all of your snapshots; it can optionally describe a single snapshot, 
     #          or just the snapshots associated with a particular cluster.</p>
     # @param [Hash, Types::DescribeSnapshotsRequest] params
     # @option params [String] :cluster_name
@@ -2167,7 +2187,7 @@ module Aws::MemoryDB
     end
 
     # <p>Lists all available node types that you can scale to from your cluster's current node type.
-    #
+    #          
     #          When you use the UpdateCluster operation to scale your cluster, the value of the NodeType parameter must be one of the node types returned by this operation.</p>
     # @param [Hash, Types::ListAllowedNodeTypeUpdatesRequest] params
     # @option params [String] :cluster_name
@@ -2305,10 +2325,10 @@ module Aws::MemoryDB
 
     # <p> Use this operation to add tags to a resource. A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your MemoryDB resources. For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html">Tagging your MemoryDB resources</a>.</p>
     #          <p>When you add tags to multi region clusters, you might not immediately see the latest effective tags in the ListTags API response due to it being eventually consistent specifically for multi region clusters. For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html">Tagging your MemoryDB resources</a>.</p>
-    #          <p>You can specify cost-allocation tags for your MemoryDB resources, Amazon generates a cost allocation report as a comma-separated value
-    #           (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories
+    #          <p>You can specify cost-allocation tags for your MemoryDB resources, Amazon generates a cost allocation report as a comma-separated value 
+    #           (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories 
     #           (such as cost centers, application names, or owners) to organize your costs across multiple services.
-    #
+    #          
     #          For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging.html">Using Cost Allocation Tags</a>.</p>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :resource_arn
@@ -2345,10 +2365,10 @@ module Aws::MemoryDB
 
     # <p>Use this operation to remove tags on a resource. A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your MemoryDB resources. For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html">Tagging your MemoryDB resources</a>.</p>
     #          <p>When you remove tags from multi region clusters, you might not immediately see the latest effective tags in the ListTags API response due to it being eventually consistent specifically for multi region clusters. For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html">Tagging your MemoryDB resources</a>.</p>
-    #          <p>You can specify cost-allocation tags for your MemoryDB resources, Amazon generates a cost allocation report as a comma-separated value
-    #          (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories
+    #          <p>You can specify cost-allocation tags for your MemoryDB resources, Amazon generates a cost allocation report as a comma-separated value 
+    #          (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories 
     #          (such as cost centers, application names, or owners) to organize your costs across multiple services.
-    #
+    #          
     #          For more information, see <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging.html">Using Cost Allocation Tags</a>.</p>
     # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :resource_arn
@@ -2831,7 +2851,8 @@ module Aws::MemoryDB
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

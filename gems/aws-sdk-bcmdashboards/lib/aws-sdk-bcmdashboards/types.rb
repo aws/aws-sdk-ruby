@@ -1084,7 +1084,7 @@ module Aws::BCMDashboards
     #   Set to true to clear existing widgetIds.
     #   @return [Boolean]
     # @!attribute clear_widget_date_range_override
-    #   Set to true to clear existing widgetDateRangeOverride.
+    #   Set to true to clear existing widgetDateRangeOverride. 
     #   @return [Boolean]
     class UpdateScheduledReportRequest < Struct.new(
       nil,

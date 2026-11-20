@@ -393,7 +393,7 @@ module Aws::Organizations
     #                <p>MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED: To complete this operation, the
     #                     management account must have an associated account in the Amazon Web Services GovCloud
     #                     (US-West) Region. For more information, see <a href="https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html">Organizations</a>
-    #                     in the
+    #                     in the 
     #                     <i>Amazon Web Services GovCloud User Guide</i>.</p>
     #             </li>
     #             <li>

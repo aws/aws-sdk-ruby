@@ -9157,7 +9157,7 @@ module Aws::DynamoDB
     end
 
     # <p>Represents the specific reason why a DynamoDB request was throttled and the
-    #             ARN of the impacted resource. This helps identify exactly what resource is being throttled,
+    #             ARN of the impacted resource. This helps identify exactly what resource is being throttled, 
     #             what type of operation caused it, and why the throttling occurred.</p>
     # @!attribute reason
     #   <p>The reason for throttling. The throttling reason follows a specific format:

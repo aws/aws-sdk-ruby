@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::DatabaseMigrationService
     @identifier = :databasemigrationservice
 
     add_plugin(::Aws::DatabaseMigrationService::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::DatabaseMigrationService
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::DatabaseMigrationService
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -2072,7 +2092,7 @@ module Aws::DatabaseMigrationService
     #            value is a random, system-chosen Availability Zone in the Amazon Web Services Region where your
     #            data provider is created, for examplem <code>us-east-1d</code>.</p>
     # @option params [String] :kms_key_arn
-    #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt
+    #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt 
     #            the connection parameters for the instance profile.</p>
     #            <p>If you don't specify a value for the <code>KmsKeyArn</code> parameter, then
     #            DMS uses an Amazon Web Services owned encryption key to encrypt your resources.</p>
@@ -2096,7 +2116,7 @@ module Aws::DatabaseMigrationService
     # @option params [String] :subnet_group_identifier
     #   <p>A subnet group to associate with the instance profile.</p>
     # @option params [Array<String>] :vpc_security_groups
-    #   <p>Specifies the VPC security group names to be used with the instance profile.
+    #   <p>Specifies the VPC security group names to be used with the instance profile. 
     #            The VPC security group must work with the VPC containing the instance profile.</p>
     # @example Create an instance profile
     #   # The following example creates an instance profile.
@@ -2186,8 +2206,8 @@ module Aws::DatabaseMigrationService
     # @option params [Array<Types::DataProviderDescriptorDefinition>] :target_data_provider_descriptors
     #   <p>Information about the target data provider, including the name, ARN, and Amazon Web Services Secrets Manager parameters.</p>
     # @option params [String] :instance_profile_identifier
-    #   <p>The identifier of the associated instance profile. Identifiers must begin with a letter
-    #            and must contain only ASCII letters, digits, and hyphens. They can't end with
+    #   <p>The identifier of the associated instance profile. Identifiers must begin with a letter 
+    #            and must contain only ASCII letters, digits, and hyphens. They can't end with 
     #            a hyphen, or contain two consecutive hyphens.</p>
     # @option params [String] :transformation_rules
     #   <p>A JSON string that specifies the transformation rules for the migration project.
@@ -4752,15 +4772,15 @@ module Aws::DatabaseMigrationService
     #               </li>
     #            </ul>
     # @option params [Integer] :max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
+    #   <p>The maximum number of records to include in the response. If more records exist than 
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
     #            in the response so that you can retrieve the remaining results.</p>
     # @option params [String] :marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     # @example Describe data providers with a filter
     #   # The following example retrieves the details of a data provider identified by its ARN.
@@ -6235,8 +6255,8 @@ module Aws::DatabaseMigrationService
     #               </li>
     #            </ul>
     # @option params [Integer] :max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
+    #   <p>The maximum number of records to include in the response. If more records exist than 
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
     #            in the response so that you can retrieve the remaining results.</p>
     # @option params [String] :marker
     #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
@@ -6636,15 +6656,15 @@ module Aws::DatabaseMigrationService
     #               </li>
     #            </ul>
     # @option params [String] :marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     # @option params [Integer] :max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
+    #   <p>The maximum number of records to include in the response. If more records exist than 
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
     #            in the response so that you can retrieve the remaining results.</p>
     # @example Retrieve the status of metadata model conversions
     #   # The following example retrieves the status of metadata model conversion operations identified by their request IDs.
@@ -7325,15 +7345,15 @@ module Aws::DatabaseMigrationService
     #               </li>
     #            </ul>
     # @option params [Integer] :max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
+    #   <p>The maximum number of records to include in the response. If more records exist than 
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
     #            in the response so that you can retrieve the remaining results.</p>
     # @option params [String] :marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     # @example Describe migration projects with a filter
     #   # The following example retrieves the details of a migration project identified by its ARN.
@@ -9072,8 +9092,8 @@ module Aws::DatabaseMigrationService
     #          </note>
     # @param [Hash, Types::ModifyDataProviderMessage] params
     # @option params [String] :data_provider_identifier
-    #   <p>The identifier of the data provider. Identifiers must begin with a letter
-    #            and must contain only ASCII letters, digits, and hyphens. They can't end with
+    #   <p>The identifier of the data provider. Identifiers must begin with a letter 
+    #            and must contain only ASCII letters, digits, and hyphens. They can't end with 
     #            a hyphen, or contain two consecutive hyphens.</p>
     # @option params [String] :data_provider_name
     #   <p>The name of the data provider.</p>
@@ -9094,11 +9114,11 @@ module Aws::DatabaseMigrationService
     #            attribute is N, the current call to <code>ModifyDataProvider</code> does two things: </p>
     #            <ul>
     #               <li>
-    #                  <p>It replaces any data provider settings that already exist with new values,
+    #                  <p>It replaces any data provider settings that already exist with new values, 
     #               for settings with the same names.</p>
     #               </li>
     #               <li>
-    #                  <p>It creates new data provider settings that you specify in the call,
+    #                  <p>It creates new data provider settings that you specify in the call, 
     #               for settings with different names. </p>
     #               </li>
     #            </ul>
@@ -10363,13 +10383,13 @@ module Aws::DatabaseMigrationService
     #          </note>
     # @param [Hash, Types::ModifyInstanceProfileMessage] params
     # @option params [String] :instance_profile_identifier
-    #   <p>The identifier of the instance profile. Identifiers must begin with a letter and must contain
-    #            only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two consecutive
+    #   <p>The identifier of the instance profile. Identifiers must begin with a letter and must contain 
+    #            only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two consecutive 
     #            hyphens.</p>
     # @option params [String] :availability_zone
     #   <p>The Availability Zone where the instance profile runs.</p>
     # @option params [String] :kms_key_arn
-    #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt
+    #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt 
     #            the connection parameters for the instance profile.</p>
     #            <p>If you don't specify a value for the <code>KmsKeyArn</code> parameter, then
     #            DMS uses an Amazon Web Services owned encryption key to encrypt your resources.</p>
@@ -10391,7 +10411,7 @@ module Aws::DatabaseMigrationService
     # @option params [String] :subnet_group_identifier
     #   <p>A subnet group to associate with the instance profile.</p>
     # @option params [Array<String>] :vpc_security_groups
-    #   <p>Specifies the VPC security groups to be used with the instance profile.
+    #   <p>Specifies the VPC security groups to be used with the instance profile. 
     #            The VPC security group must work with the VPC containing the instance profile.</p>
     # @example Modify an instance profile
     #   # The following example updates the description and network type of an instance profile.
@@ -10464,8 +10484,8 @@ module Aws::DatabaseMigrationService
     #          </note>
     # @param [Hash, Types::ModifyMigrationProjectMessage] params
     # @option params [String] :migration_project_identifier
-    #   <p>The identifier of the migration project. Identifiers must begin with a letter
-    #            and must contain only ASCII letters, digits, and hyphens. They can't end with
+    #   <p>The identifier of the migration project. Identifiers must begin with a letter 
+    #            and must contain only ASCII letters, digits, and hyphens. They can't end with 
     #            a hyphen, or contain two consecutive hyphens.</p>
     # @option params [String] :migration_project_name
     #   <p>A user-friendly name for the migration project.</p>
@@ -12885,7 +12905,8 @@ module Aws::DatabaseMigrationService
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

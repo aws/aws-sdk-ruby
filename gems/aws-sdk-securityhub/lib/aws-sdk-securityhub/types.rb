@@ -6219,7 +6219,7 @@ module Aws::SecurityHub
     # @!attribute capacity_reservation_preference
     #   <p>
     #            Indicates the instance's Capacity Reservation preferences. If equal to <code>open</code>, the instance can run in any open Capacity Reservation that has matching attributes (instance type, platform, Availability Zone). If equal to <code>none</code>, the instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.
-    #
+    #   
     #         </p>
     #   @return [String]
     # @!attribute capacity_reservation_target
@@ -17397,7 +17397,7 @@ module Aws::SecurityHub
     #   <p>
     #               Indicates whether a vulnerability is fixed in a newer version of the affected software packages. You can filter
     #               findings by this field only if you use Security Hub CSPM and Amazon Inspector.
-    #
+    #   
     #           </p>
     #   @return [Array<Types::StringFilter>]
     # @!attribute compliance_security_control_parameters_name

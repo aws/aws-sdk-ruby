@@ -263,12 +263,12 @@ module Aws::IAM
 
     # @!attribute instance_profile_name
     #   <p>The name of the instance profile to update.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute role_name
     #   <p>The name of the role to add.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class AddRoleToInstanceProfileRequest < Struct.new(
@@ -282,12 +282,12 @@ module Aws::IAM
 
     # @!attribute group_name
     #   <p>The name of the group to update.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute user_name
     #   <p>The name of the user to add.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class AddUserToGroupRequest < Struct.new(
@@ -312,7 +312,7 @@ module Aws::IAM
 
     # @!attribute group_name
     #   <p>The name (friendly name, not ARN) of the group to attach the policy to.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute policy_arn
@@ -330,7 +330,7 @@ module Aws::IAM
 
     # @!attribute role_name
     #   <p>The name (friendly name, not ARN) of the role to attach the policy to.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute policy_arn
@@ -348,7 +348,7 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name (friendly name, not ARN) of the IAM user to attach the policy to.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute policy_arn
@@ -426,12 +426,12 @@ module Aws::IAM
     # @!attribute new_password
     #   <p>The new password. The new password must conform to the Amazon Web Services account's password
     #               policy, if one exists.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
-    #       that is used to validate this parameter is a string of characters. That string can include almost any printable
-    #       ASCII character from the space (<code>\u0020</code>) through the end of the ASCII character range (<code>\u00FF</code>).
-    #       You can also include the tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and carriage return (<code>\u000D</code>)
-    #       characters. Any of these characters are valid in a password. However, many tools, such
-    #       as the Amazon Web Services Management Console, might restrict the ability to type certain characters because they have
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
+    #       that is used to validate this parameter is a string of characters. That string can include almost any printable 
+    #       ASCII character from the space (<code>\u0020</code>) through the end of the ASCII character range (<code>\u00FF</code>). 
+    #       You can also include the tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and carriage return (<code>\u000D</code>) 
+    #       characters. Any of these characters are valid in a password. However, many tools, such 
+    #       as the Amazon Web Services Management Console, might restrict the ability to type certain characters because they have 
     #       special meaning within that tool.</p>
     #   @return [String]
     class ChangePasswordRequest < Struct.new(
@@ -486,7 +486,7 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the IAM user that the new key will belong to.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class CreateAccessKeyRequest < Struct.new(
@@ -512,8 +512,8 @@ module Aws::IAM
 
     # @!attribute account_alias
     #   <p>The account alias to create.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of
-    #       lowercase letters, digits, and dashes. You cannot start or finish with a dash, nor can you have
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of 
+    #       lowercase letters, digits, and dashes. You cannot start or finish with a dash, nor can you have 
     #       two dashes in a row.</p>
     #   @return [String]
     class CreateAccountAliasRequest < Struct.new(
@@ -610,9 +610,9 @@ module Aws::IAM
     #   <p> The path to the group. For more information about paths, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM
     #                   identifiers</a> in the <i>IAM User Guide</i>.</p>
     #            <p>This parameter is optional. If it is not included, it defaults to a slash (/).</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
     #       of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
-    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
+    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including 
     #       most punctuation characters, digits, and upper and lowercased letters.</p>
     #   @return [String]
     # @!attribute group_name
@@ -644,16 +644,16 @@ module Aws::IAM
 
     # @!attribute instance_profile_name
     #   <p>The name of the instance profile to create.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute path
     #   <p> The path to the instance profile. For more information about paths, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM
     #                   Identifiers</a> in the <i>IAM User Guide</i>.</p>
     #            <p>This parameter is optional. If it is not included, it defaults to a slash (/).</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
     #       of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
-    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
+    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including 
     #       most punctuation characters, digits, and upper and lowercased letters.</p>
     #   @return [String]
     # @!attribute tags
@@ -661,7 +661,7 @@ module Aws::IAM
     #         Each tag consists of a key name and an associated value. For more information about tagging, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html">Tagging IAM resources</a> in the
     #         <i>IAM User Guide</i>.</p>
     #            <note>
-    #               <p>If any one of the tags is invalid or if you exceed the allowed maximum number of tags, then the entire request
+    #               <p>If any one of the tags is invalid or if you exceed the allowed maximum number of tags, then the entire request 
     #      fails and the resource is not created.</p>
     #            </note>
     #   @return [Array<Types::Tag>]
@@ -694,18 +694,18 @@ module Aws::IAM
     #            <p>This parameter is optional. If no user name is included, it defaults to the principal
     #               making the request. When you make this request with root user credentials, you must use
     #               an <a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoot.html">AssumeRoot</a> session to omit the user name.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute password
     #   <p>The new password for the user.</p>
     #            <p>This parameter must be omitted when you make the request with an <a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoot.html">AssumeRoot</a> session. It is required in all other cases.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
-    #       that is used to validate this parameter is a string of characters. That string can include almost any printable
-    #       ASCII character from the space (<code>\u0020</code>) through the end of the ASCII character range (<code>\u00FF</code>).
-    #       You can also include the tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and carriage return (<code>\u000D</code>)
-    #       characters. Any of these characters are valid in a password. However, many tools, such
-    #       as the Amazon Web Services Management Console, might restrict the ability to type certain characters because they have
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
+    #       that is used to validate this parameter is a string of characters. That string can include almost any printable 
+    #       ASCII character from the space (<code>\u0020</code>) through the end of the ASCII character range (<code>\u00FF</code>). 
+    #       You can also include the tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and carriage return (<code>\u000D</code>) 
+    #       characters. Any of these characters are valid in a password. However, many tools, such 
+    #       as the Amazon Web Services Management Console, might restrict the ability to type certain characters because they have 
     #       special meaning within that tool.</p>
     #   @return [String]
     # @!attribute password_reset_required
@@ -787,7 +787,7 @@ module Aws::IAM
     #         Each tag consists of a key name and an associated value. For more information about tagging, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html">Tagging IAM resources</a> in the
     #         <i>IAM User Guide</i>.</p>
     #            <note>
-    #               <p>If any one of the tags is invalid or if you exceed the allowed maximum number of tags, then the entire request
+    #               <p>If any one of the tags is invalid or if you exceed the allowed maximum number of tags, then the entire request 
     #      fails and the resource is not created.</p>
     #            </note>
     #   @return [Array<Types::Tag>]
@@ -832,9 +832,9 @@ module Aws::IAM
     #            <p>For more information about paths, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM identifiers</a> in the
     #                   <i>IAM User Guide</i>.</p>
     #            <p>This parameter is optional. If it is not included, it defaults to a slash (/).</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
     #       of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
-    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
+    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including 
     #       most punctuation characters, digits, and upper and lowercased letters.</p>
     #            <note>
     #               <p>You cannot use an asterisk (*) in the path name.</p>
@@ -850,19 +850,19 @@ module Aws::IAM
     #               including whitespace, is listed below. To view the maximum character counts of a managed policy with no whitespaces, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length">IAM and STS character quotas</a>.</p>
     #            <p>To learn more about JSON policy grammar, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_grammar.html">Grammar of the IAM JSON
     #                   policy language</a> in the <i>IAM User Guide</i>. </p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
     #       used to validate this parameter is a string of characters consisting of the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>Any printable ASCII
+    #                  <p>Any printable ASCII 
     #       character ranging from the space character (<code>\u0020</code>) through the end of the ASCII character range</p>
     #               </li>
     #               <li>
-    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set
+    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set 
     #       (through <code>\u00FF</code>)</p>
     #               </li>
     #               <li>
-    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
+    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and 
     #       carriage return (<code>\u000D</code>)</p>
     #               </li>
     #            </ul>
@@ -879,7 +879,7 @@ module Aws::IAM
     #         Each tag consists of a key name and an associated value. For more information about tagging, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html">Tagging IAM resources</a> in the
     #         <i>IAM User Guide</i>.</p>
     #            <note>
-    #               <p>If any one of the tags is invalid or if you exceed the allowed maximum number of tags, then the entire request
+    #               <p>If any one of the tags is invalid or if you exceed the allowed maximum number of tags, then the entire request 
     #      fails and the resource is not created.</p>
     #            </note>
     #   @return [Array<Types::Tag>]
@@ -920,19 +920,19 @@ module Aws::IAM
     #               IAM.</p>
     #            <p>The maximum length of the policy document that you can pass in this operation,
     #               including whitespace, is listed below. To view the maximum character counts of a managed policy with no whitespaces, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length">IAM and STS character quotas</a>.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
     #       used to validate this parameter is a string of characters consisting of the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>Any printable ASCII
+    #                  <p>Any printable ASCII 
     #       character ranging from the space character (<code>\u0020</code>) through the end of the ASCII character range</p>
     #               </li>
     #               <li>
-    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set
+    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set 
     #       (through <code>\u00FF</code>)</p>
     #               </li>
     #               <li>
-    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
+    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and 
     #       carriage return (<code>\u000D</code>)</p>
     #               </li>
     #            </ul>
@@ -972,9 +972,9 @@ module Aws::IAM
     #   <p> The path to the role. For more information about paths, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM
     #                   Identifiers</a> in the <i>IAM User Guide</i>.</p>
     #            <p>This parameter is optional. If it is not included, it defaults to a slash (/).</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
     #       of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
-    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
+    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including 
     #       most punctuation characters, digits, and upper and lowercased letters.</p>
     #   @return [String]
     # @!attribute role_name
@@ -982,7 +982,7 @@ module Aws::IAM
     #            <p>IAM user, group, role, and policy names must be unique within the account. Names are
     #               not distinguished by case. For example, you cannot create resources named both
     #               "MyResource" and "myresource".</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute assume_role_policy_document
@@ -992,19 +992,19 @@ module Aws::IAM
     #               for CloudFormation templates formatted in YAML, you can provide the policy in JSON or YAML
     #               format. CloudFormation always converts a YAML policy to JSON format before submitting it to
     #               IAM.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
     #       used to validate this parameter is a string of characters consisting of the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>Any printable ASCII
+    #                  <p>Any printable ASCII 
     #       character ranging from the space character (<code>\u0020</code>) through the end of the ASCII character range</p>
     #               </li>
     #               <li>
-    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set
+    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set 
     #       (through <code>\u00FF</code>)</p>
     #               </li>
     #               <li>
-    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
+    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and 
     #       carriage return (<code>\u000D</code>)</p>
     #               </li>
     #            </ul>
@@ -1044,7 +1044,7 @@ module Aws::IAM
     #         For more information about tagging, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html">Tagging IAM resources</a> in the
     #         <i>IAM User Guide</i>.</p>
     #            <note>
-    #               <p>If any one of the tags is invalid or if you exceed the allowed maximum number of tags, then the entire request
+    #               <p>If any one of the tags is invalid or if you exceed the allowed maximum number of tags, then the entire request 
     #      fails and the resource is not created.</p>
     #            </note>
     #   @return [Array<Types::Tag>]
@@ -1086,7 +1086,7 @@ module Aws::IAM
     #   @return [String]
     # @!attribute name
     #   <p>The name of the provider to create.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute tags
@@ -1094,7 +1094,7 @@ module Aws::IAM
     #         Each tag consists of a key name and an associated value. For more information about tagging, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html">Tagging IAM resources</a> in the
     #         <i>IAM User Guide</i>.</p>
     #            <note>
-    #               <p>If any one of the tags is invalid or if you exceed the allowed maximum number of tags, then the entire request
+    #               <p>If any one of the tags is invalid or if you exceed the allowed maximum number of tags, then the entire request 
     #      fails and the resource is not created.</p>
     #            </note>
     #   @return [Array<Types::Tag>]
@@ -1187,7 +1187,7 @@ module Aws::IAM
     #   <p>The name of the IAM user that is to be associated with the credentials. The new
     #               service-specific credentials have the same permissions as the associated user except
     #               that they can be used only to access the specified service.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute service_name
@@ -1233,9 +1233,9 @@ module Aws::IAM
     #   <p> The path for the user name. For more information about paths, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM
     #                   identifiers</a> in the <i>IAM User Guide</i>.</p>
     #            <p>This parameter is optional. If it is not included, it defaults to a slash (/).</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
     #       of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
-    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
+    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including 
     #       most punctuation characters, digits, and upper and lowercased letters.</p>
     #   @return [String]
     # @!attribute user_name
@@ -1260,7 +1260,7 @@ module Aws::IAM
     #         For more information about tagging, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html">Tagging IAM resources</a> in the
     #         <i>IAM User Guide</i>.</p>
     #            <note>
-    #               <p>If any one of the tags is invalid or if you exceed the allowed maximum number of tags, then the entire request
+    #               <p>If any one of the tags is invalid or if you exceed the allowed maximum number of tags, then the entire request 
     #      fails and the resource is not created.</p>
     #            </note>
     #   @return [Array<Types::Tag>]
@@ -1291,15 +1291,15 @@ module Aws::IAM
     #   <p> The path for the virtual MFA device. For more information about paths, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM
     #                   identifiers</a> in the <i>IAM User Guide</i>.</p>
     #            <p>This parameter is optional. If it is not included, it defaults to a slash (/).</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
     #       of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
-    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
+    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including 
     #       most punctuation characters, digits, and upper and lowercased letters.</p>
     #   @return [String]
     # @!attribute virtual_mfa_device_name
     #   <p>The name of the virtual MFA device, which must be unique. Use with path to uniquely
     #               identify a virtual MFA device.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute tags
@@ -1307,7 +1307,7 @@ module Aws::IAM
     #         Each tag consists of a key name and an associated value. For more information about tagging, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html">Tagging IAM resources</a> in the
     #         <i>IAM User Guide</i>.</p>
     #            <note>
-    #               <p>If any one of the tags is invalid or if you exceed the allowed maximum number of tags, then the entire request
+    #               <p>If any one of the tags is invalid or if you exceed the allowed maximum number of tags, then the entire request 
     #      fails and the resource is not created.</p>
     #            </note>
     #   @return [Array<Types::Tag>]
@@ -1376,14 +1376,14 @@ module Aws::IAM
     #            <p>This parameter is optional. If no user name is included, it defaults to the principal
     #               making the request. When you make this request with root user credentials, you must use
     #               an <a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoot.html">AssumeRoot</a> session to omit the user name.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute serial_number
     #   <p>The serial number that uniquely identifies the MFA device. For virtual MFA devices,
     #               the serial number is the device ARN.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
-    #       of upper and lowercase alphanumeric characters with no spaces. You can also include any of the
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
+    #       of upper and lowercase alphanumeric characters with no spaces. You can also include any of the 
     #       following characters: =,.@:/-</p>
     #   @return [String]
     class DeactivateMFADeviceRequest < Struct.new(
@@ -1529,13 +1529,13 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the user whose access key pair you want to delete.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute access_key_id
     #   <p>The access key ID for the access key ID and secret access key you want to
     #               delete.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can 
     #       consist of any upper or lowercased letter or digit.</p>
     #   @return [String]
     class DeleteAccessKeyRequest < Struct.new(
@@ -1549,8 +1549,8 @@ module Aws::IAM
 
     # @!attribute account_alias
     #   <p>The name of the account alias to delete.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of
-    #       lowercase letters, digits, and dashes. You cannot start or finish with a dash, nor can you have
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of 
+    #       lowercase letters, digits, and dashes. You cannot start or finish with a dash, nor can you have 
     #       two dashes in a row.</p>
     #   @return [String]
     class DeleteAccountAliasRequest < Struct.new(
@@ -1576,12 +1576,12 @@ module Aws::IAM
     # @!attribute group_name
     #   <p>The name (friendly name, not ARN) identifying the group that the policy is embedded
     #               in.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute policy_name
     #   <p>The name identifying the policy document to delete.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class DeleteGroupPolicyRequest < Struct.new(
@@ -1595,7 +1595,7 @@ module Aws::IAM
 
     # @!attribute group_name
     #   <p>The name of the IAM group to delete.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class DeleteGroupRequest < Struct.new(
@@ -1608,7 +1608,7 @@ module Aws::IAM
 
     # @!attribute instance_profile_name
     #   <p>The name of the instance profile to delete.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class DeleteInstanceProfileRequest < Struct.new(
@@ -1624,7 +1624,7 @@ module Aws::IAM
     #            <p>This parameter is optional. If no user name is included, it defaults to the principal
     #               making the request. When you make this request with root user credentials, you must use
     #               an <a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoot.html">AssumeRoot</a> session to omit the user name.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class DeleteLoginProfileRequest < Struct.new(
@@ -1666,8 +1666,8 @@ module Aws::IAM
     #   @return [String]
     # @!attribute version_id
     #   <p>The policy version to delete.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that
-    #       consists of the lowercase letter 'v' followed by one or two digits, and optionally
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that 
+    #       consists of the lowercase letter 'v' followed by one or two digits, and optionally 
     #       followed by a period '.' and a string of letters and digits.</p>
     #            <p>For more information about managed policy versions, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html">Versioning for managed
     #                   policies</a> in the <i>IAM User Guide</i>.</p>
@@ -1696,12 +1696,12 @@ module Aws::IAM
     # @!attribute role_name
     #   <p>The name (friendly name, not ARN) identifying the role that the policy is embedded
     #               in.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute policy_name
     #   <p>The name of the inline policy to delete from the specified IAM role.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class DeleteRolePolicyRequest < Struct.new(
@@ -1715,7 +1715,7 @@ module Aws::IAM
 
     # @!attribute role_name
     #   <p>The name of the role to delete.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class DeleteRoleRequest < Struct.new(
@@ -1739,12 +1739,12 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the IAM user associated with the SSH public key.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute ssh_public_key_id
     #   <p>The unique identifier for the SSH public key.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can 
     #       consist of any upper or lowercased letter or digit.</p>
     #   @return [String]
     class DeleteSSHPublicKeyRequest < Struct.new(
@@ -1758,7 +1758,7 @@ module Aws::IAM
 
     # @!attribute server_certificate_name
     #   <p>The name of the server certificate you want to delete.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class DeleteServerCertificateRequest < Struct.new(
@@ -1797,13 +1797,13 @@ module Aws::IAM
     #   <p>The name of the IAM user associated with the service-specific credential. If this
     #               value is not specified, then the operation assumes the user whose credentials are used
     #               to call the operation.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute service_specific_credential_id
     #   <p>The unique identifier of the service-specific credential. You can get this value by
     #               calling <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListServiceSpecificCredentials.html">ListServiceSpecificCredentials</a>.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can 
     #       consist of any upper or lowercased letter or digit.</p>
     #   @return [String]
     class DeleteServiceSpecificCredentialRequest < Struct.new(
@@ -1817,7 +1817,7 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the user the signing certificate belongs to.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute certificate_id
@@ -1849,12 +1849,12 @@ module Aws::IAM
     # @!attribute user_name
     #   <p>The name (friendly name, not ARN) identifying the user that the policy is embedded
     #               in.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute policy_name
     #   <p>The name identifying the policy document to delete.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class DeleteUserPolicyRequest < Struct.new(
@@ -1868,7 +1868,7 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the user to delete.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class DeleteUserRequest < Struct.new(
@@ -1882,8 +1882,8 @@ module Aws::IAM
     # @!attribute serial_number
     #   <p>The serial number that uniquely identifies the MFA device. For virtual MFA devices,
     #               the serial number is the same as the ARN.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
-    #       of upper and lowercase alphanumeric characters with no spaces. You can also include any of the
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
+    #       of upper and lowercase alphanumeric characters with no spaces. You can also include any of the 
     #       following characters: =,.@:/-</p>
     #   @return [String]
     class DeleteVirtualMFADeviceRequest < Struct.new(
@@ -1918,7 +1918,7 @@ module Aws::IAM
 
     # @!attribute group_name
     #   <p>The name (friendly name, not ARN) of the IAM group to detach the policy from.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute policy_arn
@@ -1936,7 +1936,7 @@ module Aws::IAM
 
     # @!attribute role_name
     #   <p>The name (friendly name, not ARN) of the IAM role to detach the policy from.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute policy_arn
@@ -1954,7 +1954,7 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name (friendly name, not ARN) of the IAM user to detach the policy from.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute policy_arn
@@ -2042,14 +2042,14 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the IAM user for whom you want to enable the MFA device.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute serial_number
     #   <p>The serial number that uniquely identifies the MFA device. For virtual MFA devices,
     #               the serial number is the device ARN.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
-    #       of upper and lowercase alphanumeric characters with no spaces. You can also include any of the
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
+    #       of upper and lowercase alphanumeric characters with no spaces. You can also include any of the 
     #       following characters: =,.@:/-</p>
     #   @return [String]
     # @!attribute authentication_code1
@@ -2132,8 +2132,8 @@ module Aws::IAM
     end
 
     # @!attribute issuer_identifier
-    #   <p>A unique issuer URL for your Amazon Web Services account that hosts the OpenID Connect (OIDC) discovery endpoints
-    #               at <code>/.well-known/openid-configuration and /.well-known/jwks.json</code>. The OpenID Connect (OIDC) discovery endpoints contain verification keys and metadata necessary
+    #   <p>A unique issuer URL for your Amazon Web Services account that hosts the OpenID Connect (OIDC) discovery endpoints 
+    #               at <code>/.well-known/openid-configuration and /.well-known/jwks.json</code>. The OpenID Connect (OIDC) discovery endpoints contain verification keys and metadata necessary 
     #               for token verification.</p>
     #   @return [String]
     class EnableOutboundWebIdentityFederationResponse < Struct.new(
@@ -2466,7 +2466,7 @@ module Aws::IAM
 
     # @!attribute access_key_id
     #   <p>The identifier of an access key.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can 
     #       consist of any upper or lowercased letter or digit.</p>
     #   @return [String]
     class GetAccessKeyLastUsedRequest < Struct.new(
@@ -2504,19 +2504,19 @@ module Aws::IAM
     #               Each string value in the list must be one of the valid values listed below.</p>
     #   @return [Array<String>]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     class GetAccountAuthorizationDetailsRequest < Struct.new(
@@ -2543,16 +2543,16 @@ module Aws::IAM
     #   <p>A list containing information about managed policies.</p>
     #   @return [Array<Types::ManagedPolicyDetail>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class GetAccountAuthorizationDetailsResponse < Struct.new(
@@ -2634,19 +2634,19 @@ module Aws::IAM
     #   <p>A list of policies for which you want the list of context keys referenced in those
     #               policies. Each document is specified as a string containing the complete, valid JSON
     #               text of an IAM policy.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
     #       used to validate this parameter is a string of characters consisting of the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>Any printable ASCII
+    #                  <p>Any printable ASCII 
     #       character ranging from the space character (<code>\u0020</code>) through the end of the ASCII character range</p>
     #               </li>
     #               <li>
-    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set
+    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set 
     #       (through <code>\u00FF</code>)</p>
     #               </li>
     #               <li>
-    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
+    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and 
     #       carriage return (<code>\u000D</code>)</p>
     #               </li>
     #            </ul>
@@ -2684,19 +2684,19 @@ module Aws::IAM
     # @!attribute policy_input_list
     #   <p>An optional list of additional policies for which you want the list of context keys
     #               that are referenced.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
     #       used to validate this parameter is a string of characters consisting of the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>Any printable ASCII
+    #                  <p>Any printable ASCII 
     #       character ranging from the space character (<code>\u0020</code>) through the end of the ASCII character range</p>
     #               </li>
     #               <li>
-    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set
+    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set 
     #       (through <code>\u00FF</code>)</p>
     #               </li>
     #               <li>
-    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
+    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and 
     #       carriage return (<code>\u000D</code>)</p>
     #               </li>
     #            </ul>
@@ -2803,12 +2803,12 @@ module Aws::IAM
 
     # @!attribute group_name
     #   <p>The name of the group the policy is associated with.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute policy_name
     #   <p>The name of the policy document to get.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class GetGroupPolicyRequest < Struct.new(
@@ -2846,23 +2846,23 @@ module Aws::IAM
 
     # @!attribute group_name
     #   <p>The name of the group.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class GetGroupRequest < Struct.new(
@@ -2883,16 +2883,16 @@ module Aws::IAM
     #   <p>A list of users in the group.</p>
     #   @return [Array<Types::User>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class GetGroupResponse < Struct.new(
@@ -2954,7 +2954,7 @@ module Aws::IAM
 
     # @!attribute instance_profile_name
     #   <p>The name of the instance profile to get information about.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class GetInstanceProfileRequest < Struct.new(
@@ -2983,7 +2983,7 @@ module Aws::IAM
     #            <p>This parameter is optional. If no user name is included, it defaults to the principal
     #               making the request. When you make this request with root user credentials, you must use
     #               an <a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoot.html">AssumeRoot</a> session to omit the user name.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class GetLoginProfileRequest < Struct.new(
@@ -3101,19 +3101,19 @@ module Aws::IAM
     #   <p>The identifier of the request generated by the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GenerateOrganizationsAccessReport.html">GenerateOrganizationsAccessReport</a> operation.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute sort_key
@@ -3158,16 +3158,16 @@ module Aws::IAM
     #               service.</p>
     #   @return [Array<Types::AccessDetail>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     # @!attribute error_details
@@ -3196,11 +3196,11 @@ module Aws::IAM
     end
 
     # @!attribute issuer_identifier
-    #   <p>A unique issuer URL for your Amazon Web Services account that hosts the OpenID Connect (OIDC) discovery endpoints at
+    #   <p>A unique issuer URL for your Amazon Web Services account that hosts the OpenID Connect (OIDC) discovery endpoints at 
     #               <code>/.well-known/openid-configuration and /.well-known/jwks.json</code>. The OpenID Connect (OIDC) discovery endpoints contain verification keys and metadata necessary for token verification.</p>
     #   @return [String]
     # @!attribute jwt_vending_enabled
-    #   <p>Indicates whether outbound identity federation is currently enabled for your
+    #   <p>Indicates whether outbound identity federation is currently enabled for your 
     #               Amazon Web Services account. When true, IAM principals in the account can call the <code>GetWebIdentityToken</code> API to obtain JSON Web Tokens (JWTs) for authentication with external services. </p>
     #   @return [Boolean]
     class GetOutboundWebIdentityFederationInfoResponse < Struct.new(
@@ -3249,8 +3249,8 @@ module Aws::IAM
     #   @return [String]
     # @!attribute version_id
     #   <p>Identifies the policy version to retrieve.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that
-    #       consists of the lowercase letter 'v' followed by one or two digits, and optionally
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that 
+    #       consists of the lowercase letter 'v' followed by one or two digits, and optionally 
     #       followed by a period '.' and a string of letters and digits.</p>
     #   @return [String]
     class GetPolicyVersionRequest < Struct.new(
@@ -3277,12 +3277,12 @@ module Aws::IAM
 
     # @!attribute role_name
     #   <p>The name of the role associated with the policy.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute policy_name
     #   <p>The name of the policy document to get.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class GetRolePolicyRequest < Struct.new(
@@ -3319,7 +3319,7 @@ module Aws::IAM
 
     # @!attribute role_name
     #   <p>The name of the IAM role to get information about.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class GetRoleRequest < Struct.new(
@@ -3425,12 +3425,12 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the IAM user associated with the SSH public key.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute ssh_public_key_id
     #   <p>The unique identifier for the SSH public key.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can 
     #       consist of any upper or lowercased letter or digit.</p>
     #   @return [String]
     # @!attribute encoding
@@ -3463,7 +3463,7 @@ module Aws::IAM
 
     # @!attribute server_certificate_name
     #   <p>The name of the server certificate you want to retrieve information about.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class GetServerCertificateRequest < Struct.new(
@@ -3494,19 +3494,19 @@ module Aws::IAM
     #                   <code>GetServiceLastAccessedDetail</code>.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     class GetServiceLastAccessedDetailsRequest < Struct.new(
@@ -3542,16 +3542,16 @@ module Aws::IAM
     #               of <code>IN_PROGRESS</code>.</p>
     #   @return [Time]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     # @!attribute error
@@ -3592,19 +3592,19 @@ module Aws::IAM
     #                   service namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     class GetServiceLastAccessedDetailsWithEntitiesRequest < Struct.new(
@@ -3637,16 +3637,16 @@ module Aws::IAM
     #               specified Amazon Web Services service.</p>
     #   @return [Array<Types::EntityDetails>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     # @!attribute error
@@ -3700,12 +3700,12 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the user who the policy is associated with.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute policy_name
     #   <p>The name of the policy document to get.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class GetUserPolicyRequest < Struct.new(
@@ -3743,7 +3743,7 @@ module Aws::IAM
     # @!attribute user_name
     #   <p>The name of the user to get information about.</p>
     #            <p>This parameter is optional. If it is not included, it defaults to the user making the
-    #               request. This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #               request. This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class GetUserRequest < Struct.new(
@@ -4067,23 +4067,23 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the user.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListAccessKeysRequest < Struct.new(
@@ -4102,16 +4102,16 @@ module Aws::IAM
     #   <p>A list of objects containing metadata about the access keys.</p>
     #   @return [Array<Types::AccessKeyMetadata>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListAccessKeysResponse < Struct.new(
@@ -4130,19 +4130,19 @@ module Aws::IAM
     end
 
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListAccountAliasesRequest < Struct.new(
@@ -4161,16 +4161,16 @@ module Aws::IAM
     #               account.</p>
     #   @return [Array<String>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListAccountAliasesResponse < Struct.new(
@@ -4190,31 +4190,31 @@ module Aws::IAM
 
     # @!attribute group_name
     #   <p>The name (friendly name, not ARN) of the group to list attached policies for.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute path_prefix
     #   <p>The path prefix for filtering the results. This parameter is optional. If it is not
     #               included, it defaults to a slash (/), listing all policies.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
     #       of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
-    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
+    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including 
     #       most punctuation characters, digits, and upper and lowercased letters.</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListAttachedGroupPoliciesRequest < Struct.new(
@@ -4233,16 +4233,16 @@ module Aws::IAM
     #   <p>A list of the attached policies.</p>
     #   @return [Array<Types::AttachedPolicy>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListAttachedGroupPoliciesResponse < Struct.new(
@@ -4262,31 +4262,31 @@ module Aws::IAM
 
     # @!attribute role_name
     #   <p>The name (friendly name, not ARN) of the role to list attached policies for.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute path_prefix
     #   <p>The path prefix for filtering the results. This parameter is optional. If it is not
     #               included, it defaults to a slash (/), listing all policies.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
     #       of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
-    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
+    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including 
     #       most punctuation characters, digits, and upper and lowercased letters.</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListAttachedRolePoliciesRequest < Struct.new(
@@ -4305,16 +4305,16 @@ module Aws::IAM
     #   <p>A list of the attached policies.</p>
     #   @return [Array<Types::AttachedPolicy>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListAttachedRolePoliciesResponse < Struct.new(
@@ -4334,31 +4334,31 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name (friendly name, not ARN) of the user to list attached policies for.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute path_prefix
     #   <p>The path prefix for filtering the results. This parameter is optional. If it is not
     #               included, it defaults to a slash (/), listing all policies.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
     #       of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
-    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
+    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including 
     #       most punctuation characters, digits, and upper and lowercased letters.</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListAttachedUserPoliciesRequest < Struct.new(
@@ -4377,16 +4377,16 @@ module Aws::IAM
     #   <p>A list of the attached policies.</p>
     #   @return [Array<Types::AttachedPolicy>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListAttachedUserPoliciesResponse < Struct.new(
@@ -4479,9 +4479,9 @@ module Aws::IAM
     # @!attribute path_prefix
     #   <p>The path prefix for filtering the results. This parameter is optional. If it is not
     #               included, it defaults to a slash (/), listing all entities.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
     #       of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
-    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
+    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including 
     #       most punctuation characters, digits, and upper and lowercased letters.</p>
     #   @return [String]
     # @!attribute policy_usage_filter
@@ -4493,19 +4493,19 @@ module Aws::IAM
     #            <p>This parameter is optional. If it is not included, all policies are returned. </p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListEntitiesForPolicyRequest < Struct.new(
@@ -4533,16 +4533,16 @@ module Aws::IAM
     #   <p>A list of IAM roles that the policy is attached to.</p>
     #   @return [Array<Types::PolicyRole>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListEntitiesForPolicyResponse < Struct.new(
@@ -4564,23 +4564,23 @@ module Aws::IAM
 
     # @!attribute group_name
     #   <p>The name of the group to list policies for.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListGroupPoliciesRequest < Struct.new(
@@ -4597,20 +4597,20 @@ module Aws::IAM
     #     </p>
     # @!attribute policy_names
     #   <p>A list of policy names.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [Array<String>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListGroupPoliciesResponse < Struct.new(
@@ -4630,23 +4630,23 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the user to list groups for.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListGroupsForUserRequest < Struct.new(
@@ -4665,16 +4665,16 @@ module Aws::IAM
     #   <p>A list of groups.</p>
     #   @return [Array<Types::Group>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListGroupsForUserResponse < Struct.new(
@@ -4697,25 +4697,25 @@ module Aws::IAM
     #                   <code>/division_abc/subdivision_xyz/</code> gets all groups whose path starts with
     #                   <code>/division_abc/subdivision_xyz/</code>.</p>
     #            <p>This parameter is optional. If it is not included, it defaults to a slash (/), listing
-    #               all groups. This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+    #               all groups. This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
     #       of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
-    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
+    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including 
     #       most punctuation characters, digits, and upper and lowercased letters.</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListGroupsRequest < Struct.new(
@@ -4733,16 +4733,16 @@ module Aws::IAM
     #   <p>A list of groups.</p>
     #   @return [Array<Types::Group>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListGroupsResponse < Struct.new(
@@ -4762,23 +4762,23 @@ module Aws::IAM
 
     # @!attribute instance_profile_name
     #   <p>The name of the IAM instance profile whose tags you want to see.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListInstanceProfileTagsRequest < Struct.new(
@@ -4795,16 +4795,16 @@ module Aws::IAM
     #   <p>The list of tags that are currently attached to the IAM instance profile. Each tag consists of a key name and an associated value. If no tags are attached to the specified resource, the response contains an empty list.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListInstanceProfileTagsResponse < Struct.new(
@@ -4824,23 +4824,23 @@ module Aws::IAM
 
     # @!attribute role_name
     #   <p>The name of the role to list instance profiles for.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListInstanceProfilesForRoleRequest < Struct.new(
@@ -4858,16 +4858,16 @@ module Aws::IAM
     #   <p>A list of instance profiles.</p>
     #   @return [Array<Types::InstanceProfile>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListInstanceProfilesForRoleResponse < Struct.new(
@@ -4890,25 +4890,25 @@ module Aws::IAM
     #                   <code>/application_abc/component_xyz/</code> gets all instance profiles whose path
     #               starts with <code>/application_abc/component_xyz/</code>.</p>
     #            <p>This parameter is optional. If it is not included, it defaults to a slash (/), listing
-    #               all instance profiles. This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+    #               all instance profiles. This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
     #       of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
-    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
+    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including 
     #       most punctuation characters, digits, and upper and lowercased letters.</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListInstanceProfilesRequest < Struct.new(
@@ -4927,16 +4927,16 @@ module Aws::IAM
     #   <p>A list of instance profiles.</p>
     #   @return [Array<Types::InstanceProfile>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListInstanceProfilesResponse < Struct.new(
@@ -4957,23 +4957,23 @@ module Aws::IAM
     # @!attribute serial_number
     #   <p>The unique identifier for the IAM virtual MFA device whose tags you want to see.
     #         For virtual MFA devices, the serial number is the same as the ARN.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListMFADeviceTagsRequest < Struct.new(
@@ -4990,16 +4990,16 @@ module Aws::IAM
     #   <p>The list of tags that are currently attached to the virtual MFA device. Each tag consists of a key name and an associated value. If no tags are attached to the specified resource, the response contains an empty list.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListMFADeviceTagsResponse < Struct.new(
@@ -5019,23 +5019,23 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the user whose MFA devices you want to list.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListMFADevicesRequest < Struct.new(
@@ -5054,16 +5054,16 @@ module Aws::IAM
     #   <p>A list of MFA devices.</p>
     #   @return [Array<Types::MFADevice>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListMFADevicesResponse < Struct.new(
@@ -5084,23 +5084,23 @@ module Aws::IAM
     # @!attribute open_id_connect_provider_arn
     #   <p>The ARN of the OpenID Connect (OIDC) identity provider whose tags you want to
     #         see.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListOpenIDConnectProviderTagsRequest < Struct.new(
@@ -5118,16 +5118,16 @@ module Aws::IAM
     #         provider. Each tag consists of a key name and an associated value. If no tags are attached to the specified resource, the response contains an empty list.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListOpenIDConnectProviderTagsResponse < Struct.new(
@@ -5212,9 +5212,9 @@ module Aws::IAM
     end
 
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute arn
@@ -5254,7 +5254,7 @@ module Aws::IAM
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListPoliciesGrantingServiceAccessResponse < Struct.new(
@@ -5289,9 +5289,9 @@ module Aws::IAM
     #   @return [Boolean]
     # @!attribute path_prefix
     #   <p>The path prefix for filtering the results. This parameter is optional. If it is not
-    #               included, it defaults to a slash (/), listing all policies. This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+    #               included, it defaults to a slash (/), listing all policies. This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
     #       of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
-    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
+    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including 
     #       most punctuation characters, digits, and upper and lowercased letters.</p>
     #   @return [String]
     # @!attribute policy_usage_filter
@@ -5303,19 +5303,19 @@ module Aws::IAM
     #            <p>This parameter is optional. If it is not included, all policies are returned. </p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListPoliciesRequest < Struct.new(
@@ -5336,16 +5336,16 @@ module Aws::IAM
     #   <p>A list of policies.</p>
     #   @return [Array<Types::Policy>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListPoliciesResponse < Struct.new(
@@ -5365,23 +5365,23 @@ module Aws::IAM
 
     # @!attribute policy_arn
     #   <p>The ARN of the IAM customer managed policy whose tags you want to see.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListPolicyTagsRequest < Struct.new(
@@ -5399,16 +5399,16 @@ module Aws::IAM
     #         Each tag consists of a key name and an associated value. If no tags are attached to the specified resource, the response contains an empty list.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListPolicyTagsResponse < Struct.new(
@@ -5432,19 +5432,19 @@ module Aws::IAM
     #            <p>For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListPolicyVersionsRequest < Struct.new(
@@ -5465,16 +5465,16 @@ module Aws::IAM
     #                   policies</a> in the <i>IAM User Guide</i>.</p>
     #   @return [Array<Types::PolicyVersion>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListPolicyVersionsResponse < Struct.new(
@@ -5494,23 +5494,23 @@ module Aws::IAM
 
     # @!attribute role_name
     #   <p>The name of the role to list policies for.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListRolePoliciesRequest < Struct.new(
@@ -5529,16 +5529,16 @@ module Aws::IAM
     #   <p>A list of policy names.</p>
     #   @return [Array<String>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListRolePoliciesResponse < Struct.new(
@@ -5558,23 +5558,23 @@ module Aws::IAM
 
     # @!attribute role_name
     #   <p>The name of the IAM role for which you want to see the list of tags.</p>
-    #            <p>This parameter accepts (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that consist of upper and lowercase alphanumeric
+    #            <p>This parameter accepts (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that consist of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListRoleTagsRequest < Struct.new(
@@ -5591,16 +5591,16 @@ module Aws::IAM
     #   <p>The list of tags that are currently attached to the role. Each tag consists of a key name and an associated value. If no tags are attached to the specified resource, the response contains an empty list.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListRoleTagsResponse < Struct.new(
@@ -5623,25 +5623,25 @@ module Aws::IAM
     #                   <code>/application_abc/component_xyz/</code> gets all roles whose path starts with
     #                   <code>/application_abc/component_xyz/</code>.</p>
     #            <p>This parameter is optional. If it is not included, it defaults to a slash (/), listing
-    #               all roles. This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+    #               all roles. This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
     #       of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
-    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
+    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including 
     #       most punctuation characters, digits, and upper and lowercased letters.</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListRolesRequest < Struct.new(
@@ -5659,16 +5659,16 @@ module Aws::IAM
     #   <p>A list of roles.</p>
     #   @return [Array<Types::Role>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListRolesResponse < Struct.new(
@@ -5689,23 +5689,23 @@ module Aws::IAM
     # @!attribute saml_provider_arn
     #   <p>The ARN of the Security Assertion Markup Language (SAML) identity provider whose tags
     #         you want to see.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListSAMLProviderTagsRequest < Struct.new(
@@ -5723,16 +5723,16 @@ module Aws::IAM
     #         (SAML) identity provider. Each tag consists of a key name and an associated value. If no tags are attached to the specified resource, the response contains an empty list.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListSAMLProviderTagsResponse < Struct.new(
@@ -5775,23 +5775,23 @@ module Aws::IAM
     #   <p>The name of the IAM user to list SSH public keys for. If none is specified, the
     #                   <code>UserName</code> field is determined implicitly based on the Amazon Web Services access key
     #               used to sign the request.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListSSHPublicKeysRequest < Struct.new(
@@ -5810,16 +5810,16 @@ module Aws::IAM
     #   <p>A list of the SSH public keys assigned to IAM user.</p>
     #   @return [Array<Types::SSHPublicKeyMetadata>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListSSHPublicKeysResponse < Struct.new(
@@ -5839,23 +5839,23 @@ module Aws::IAM
 
     # @!attribute server_certificate_name
     #   <p>The name of the IAM server certificate whose tags you want to see.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListServerCertificateTagsRequest < Struct.new(
@@ -5873,16 +5873,16 @@ module Aws::IAM
     #         Each tag consists of a key name and an associated value. If no tags are attached to the specified resource, the response contains an empty list.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListServerCertificateTagsResponse < Struct.new(
@@ -5905,25 +5905,25 @@ module Aws::IAM
     #                   <code>/company/servercerts</code> would get all server certificates for which the
     #               path starts with <code>/company/servercerts</code>.</p>
     #            <p>This parameter is optional. If it is not included, it defaults to a slash (/), listing
-    #               all server certificates. This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+    #               all server certificates. This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
     #       of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
-    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
+    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including 
     #       most punctuation characters, digits, and upper and lowercased letters.</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListServerCertificatesRequest < Struct.new(
@@ -5942,16 +5942,16 @@ module Aws::IAM
     #   <p>A list of server certificates.</p>
     #   @return [Array<Types::ServerCertificateMetadata>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListServerCertificatesResponse < Struct.new(
@@ -5973,7 +5973,7 @@ module Aws::IAM
     #   <p>The name of the user whose service-specific credentials you want information about. If
     #               this value is not specified, then the operation assumes the user whose credentials are
     #               used to call the operation.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute service_name
@@ -6037,23 +6037,23 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the IAM user whose signing certificates you want to examine.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListSigningCertificatesRequest < Struct.new(
@@ -6071,16 +6071,16 @@ module Aws::IAM
     #   <p>A list of the user's signing certificate information.</p>
     #   @return [Array<Types::SigningCertificate>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListSigningCertificatesResponse < Struct.new(
@@ -6100,23 +6100,23 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the user to list policies for.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListUserPoliciesRequest < Struct.new(
@@ -6135,16 +6135,16 @@ module Aws::IAM
     #   <p>A list of policy names.</p>
     #   @return [Array<String>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListUserPoliciesResponse < Struct.new(
@@ -6164,23 +6164,23 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the IAM user whose tags you want to see.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListUserTagsRequest < Struct.new(
@@ -6197,16 +6197,16 @@ module Aws::IAM
     #   <p>The list of tags that are currently attached to the user. Each tag consists of a key name and an associated value. If no tags are attached to the specified resource, the response contains an empty list.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListUserTagsResponse < Struct.new(
@@ -6229,25 +6229,25 @@ module Aws::IAM
     #                   <code>/division_abc/subdivision_xyz/</code>, which would get all user names whose
     #               path starts with <code>/division_abc/subdivision_xyz/</code>.</p>
     #            <p>This parameter is optional. If it is not included, it defaults to a slash (/), listing
-    #               all user names. This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+    #               all user names. This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
     #       of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
-    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
+    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including 
     #       most punctuation characters, digits, and upper and lowercased letters.</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListUsersRequest < Struct.new(
@@ -6265,16 +6265,16 @@ module Aws::IAM
     #   <p>A list of users.</p>
     #   @return [Array<Types::User>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class ListUsersResponse < Struct.new(
@@ -6299,19 +6299,19 @@ module Aws::IAM
     #               devices.,</p>
     #   @return [String]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     class ListVirtualMFADevicesRequest < Struct.new(
@@ -6331,11 +6331,11 @@ module Aws::IAM
     #                   <code>AssignmentStatus</code> value that was passed in the request.</p>
     #   @return [Array<Types::VirtualMFADevice>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
@@ -7166,12 +7166,12 @@ module Aws::IAM
 
     # @!attribute group_name
     #   <p>The name of the group to associate the policy with.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-.</p>
     #   @return [String]
     # @!attribute policy_name
     #   <p>The name of the policy document.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute policy_document
@@ -7179,19 +7179,19 @@ module Aws::IAM
     #            <p>You must provide policies in JSON format in IAM. However, for CloudFormation templates
     #               formatted in YAML, you can provide the policy in JSON or YAML format. CloudFormation always
     #               converts a YAML policy to JSON format before submitting it to IAM.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
     #       used to validate this parameter is a string of characters consisting of the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>Any printable ASCII
+    #                  <p>Any printable ASCII 
     #       character ranging from the space character (<code>\u0020</code>) through the end of the ASCII character range</p>
     #               </li>
     #               <li>
-    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set
+    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set 
     #       (through <code>\u00FF</code>)</p>
     #               </li>
     #               <li>
-    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
+    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and 
     #       carriage return (<code>\u000D</code>)</p>
     #               </li>
     #            </ul>
@@ -7232,12 +7232,12 @@ module Aws::IAM
 
     # @!attribute role_name
     #   <p>The name of the role to associate the policy with.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute policy_name
     #   <p>The name of the policy document.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute policy_document
@@ -7245,19 +7245,19 @@ module Aws::IAM
     #            <p>You must provide policies in JSON format in IAM. However, for CloudFormation
     #               templates formatted in YAML, you can provide the policy in JSON or YAML format. CloudFormation always converts a YAML policy to JSON format before submitting it to
     #               IAM.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
     #       used to validate this parameter is a string of characters consisting of the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>Any printable ASCII
+    #                  <p>Any printable ASCII 
     #       character ranging from the space character (<code>\u0020</code>) through the end of the ASCII character range</p>
     #               </li>
     #               <li>
-    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set
+    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set 
     #       (through <code>\u00FF</code>)</p>
     #               </li>
     #               <li>
-    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
+    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and 
     #       carriage return (<code>\u000D</code>)</p>
     #               </li>
     #            </ul>
@@ -7298,12 +7298,12 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the user to associate the policy with.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute policy_name
     #   <p>The name of the policy document.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute policy_document
@@ -7311,19 +7311,19 @@ module Aws::IAM
     #            <p>You must provide policies in JSON format in IAM. However, for CloudFormation
     #               templates formatted in YAML, you can provide the policy in JSON or YAML format. CloudFormation always converts a YAML policy to JSON format before submitting it to
     #               IAM.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
     #       used to validate this parameter is a string of characters consisting of the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>Any printable ASCII
+    #                  <p>Any printable ASCII 
     #       character ranging from the space character (<code>\u0020</code>) through the end of the ASCII character range</p>
     #               </li>
     #               <li>
-    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set
+    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set 
     #       (through <code>\u00FF</code>)</p>
     #               </li>
     #               <li>
-    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
+    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and 
     #       carriage return (<code>\u000D</code>)</p>
     #               </li>
     #            </ul>
@@ -7373,12 +7373,12 @@ module Aws::IAM
 
     # @!attribute instance_profile_name
     #   <p>The name of the instance profile to update.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute role_name
     #   <p>The name of the role to remove.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class RemoveRoleFromInstanceProfileRequest < Struct.new(
@@ -7392,12 +7392,12 @@ module Aws::IAM
 
     # @!attribute group_name
     #   <p>The name of the group to update.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute user_name
     #   <p>The name of the user to remove.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class RemoveUserFromGroupRequest < Struct.new(
@@ -7438,12 +7438,12 @@ module Aws::IAM
     #   <p>The name of the IAM user associated with the service-specific credential. If this
     #               value is not specified, then the operation assumes the user whose credentials are used
     #               to call the operation.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute service_specific_credential_id
     #   <p>The unique identifier of the service-specific credential.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can 
     #       consist of any upper or lowercased letter or digit.</p>
     #   @return [String]
     class ResetServiceSpecificCredentialRequest < Struct.new(
@@ -7522,12 +7522,12 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the user whose MFA device you want to resynchronize.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute serial_number
     #   <p>Serial number that uniquely identifies the MFA device.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute authentication_code1
@@ -8352,16 +8352,16 @@ module Aws::IAM
     #   <p>The results of the simulation.</p>
     #   @return [Array<Types::EvaluationResult>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class SimulateCustomPolicyOutput < Struct.new(
@@ -8389,19 +8389,19 @@ module Aws::IAM
     #               restrict what a user can do while using the temporary credentials.</p>
     #            <p>The maximum length of the policy document that you can pass in this operation,
     #               including whitespace, is listed below. To view the maximum character counts of a managed policy with no whitespaces, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length">IAM and STS character quotas</a>.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
     #       used to validate this parameter is a string of characters consisting of the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>Any printable ASCII
+    #                  <p>Any printable ASCII 
     #       character ranging from the space character (<code>\u0020</code>) through the end of the ASCII character range</p>
     #               </li>
     #               <li>
-    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set
+    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set 
     #       (through <code>\u00FF</code>)</p>
     #               </li>
     #               <li>
-    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
+    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and 
     #       carriage return (<code>\u000D</code>)</p>
     #               </li>
     #            </ul>
@@ -8416,19 +8416,19 @@ module Aws::IAM
     #               boundary policy.</p>
     #            <p>The maximum length of the policy document that you can pass in this operation,
     #               including whitespace, is listed below. To view the maximum character counts of a managed policy with no whitespaces, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length">IAM and STS character quotas</a>.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
     #       used to validate this parameter is a string of characters consisting of the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>Any printable ASCII
+    #                  <p>Any printable ASCII 
     #       character ranging from the space character (<code>\u0020</code>) through the end of the ASCII character range</p>
     #               </li>
     #               <li>
-    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set
+    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set 
     #       (through <code>\u00FF</code>)</p>
     #               </li>
     #               <li>
-    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
+    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and 
     #       carriage return (<code>\u000D</code>)</p>
     #               </li>
     #            </ul>
@@ -8472,19 +8472,19 @@ module Aws::IAM
     #               only one resource-based policy in a simulation.</p>
     #            <p>The maximum length of the policy document that you can pass in this operation,
     #               including whitespace, is listed below. To view the maximum character counts of a managed policy with no whitespaces, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length">IAM and STS character quotas</a>.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
     #       used to validate this parameter is a string of characters consisting of the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>Any printable ASCII
+    #                  <p>Any printable ASCII 
     #       character ranging from the space character (<code>\u0020</code>) through the end of the ASCII character range</p>
     #               </li>
     #               <li>
-    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set
+    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set 
     #       (through <code>\u00FF</code>)</p>
     #               </li>
     #               <li>
-    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
+    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and 
     #       carriage return (<code>\u000D</code>)</p>
     #               </li>
     #            </ul>
@@ -8561,19 +8561,19 @@ module Aws::IAM
     #            </ul>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     class SimulateCustomPolicyRequest < Struct.new(
@@ -8601,16 +8601,16 @@ module Aws::IAM
     #   <p>The results of the simulation.</p>
     #   @return [Array<Types::EvaluationResult>]
     # @!attribute is_truncated
-    #   <p>A flag that indicates whether there are more items to return. If your
+    #   <p>A flag that indicates whether there are more items to return. If your 
     #       results were truncated, you can make a subsequent pagination request using the <code>Marker</code>
-    #       request parameter to retrieve more items. Note that IAM might return fewer than the
-    #       <code>MaxItems</code> number of results even when there are more results available. We recommend
-    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your
+    #       request parameter to retrieve more items. Note that IAM might return fewer than the 
+    #       <code>MaxItems</code> number of results even when there are more results available. We recommend 
+    #       that you check <code>IsTruncated</code> after every call to ensure that you receive all your 
     #       results.</p>
     #   @return [Boolean]
     # @!attribute marker
     #   <p>When <code>IsTruncated</code> is <code>true</code>, this element
-    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent
+    #       is present and contains the value to use for the <code>Marker</code> parameter in a subsequent 
     #       pagination request.</p>
     #   @return [String]
     class SimulatePrincipalPolicyOutput < Struct.new(
@@ -8642,19 +8642,19 @@ module Aws::IAM
     #   <p>An optional list of additional policy documents to include in the simulation. Each
     #               document is specified as a string containing the complete, valid JSON text of an IAM
     #               policy.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
     #       used to validate this parameter is a string of characters consisting of the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>Any printable ASCII
+    #                  <p>Any printable ASCII 
     #       character ranging from the space character (<code>\u0020</code>) through the end of the ASCII character range</p>
     #               </li>
     #               <li>
-    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set
+    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set 
     #       (through <code>\u00FF</code>)</p>
     #               </li>
     #               <li>
-    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
+    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and 
     #       carriage return (<code>\u000D</code>)</p>
     #               </li>
     #            </ul>
@@ -8672,19 +8672,19 @@ module Aws::IAM
     #               policy.</p>
     #            <p>The maximum length of the policy document that you can pass in this operation,
     #               including whitespace, is listed below. To view the maximum character counts of a managed policy with no whitespaces, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length">IAM and STS character quotas</a>.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
     #       used to validate this parameter is a string of characters consisting of the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>Any printable ASCII
+    #                  <p>Any printable ASCII 
     #       character ranging from the space character (<code>\u0020</code>) through the end of the ASCII character range</p>
     #               </li>
     #               <li>
-    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set
+    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set 
     #       (through <code>\u00FF</code>)</p>
     #               </li>
     #               <li>
-    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
+    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and 
     #       carriage return (<code>\u000D</code>)</p>
     #               </li>
     #            </ul>
@@ -8729,19 +8729,19 @@ module Aws::IAM
     #               only one resource-based policy in a simulation.</p>
     #            <p>The maximum length of the policy document that you can pass in this operation,
     #               including whitespace, is listed below. To view the maximum character counts of a managed policy with no whitespaces, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length">IAM and STS character quotas</a>.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
     #       used to validate this parameter is a string of characters consisting of the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>Any printable ASCII
+    #                  <p>Any printable ASCII 
     #       character ranging from the space character (<code>\u0020</code>) through the end of the ASCII character range</p>
     #               </li>
     #               <li>
-    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set
+    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set 
     #       (through <code>\u00FF</code>)</p>
     #               </li>
     #               <li>
-    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
+    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and 
     #       carriage return (<code>\u000D</code>)</p>
     #               </li>
     #            </ul>
@@ -8824,19 +8824,19 @@ module Aws::IAM
     #            </ul>
     #   @return [String]
     # @!attribute max_items
-    #   <p>Use this only when paginating results to indicate the
-    #       maximum number of items you want in the response. If additional items exist beyond the maximum
+    #   <p>Use this only when paginating results to indicate the 
+    #       maximum number of items you want in the response. If additional items exist beyond the maximum 
     #       you specify, the <code>IsTruncated</code> response element is <code>true</code>.</p>
     #            <p>If you do not include this parameter, the number of items defaults to 100. Note that
     #       IAM might return fewer results, even when there are more results available. In that case, the
-    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code>
-    #       contains a value to include in the subsequent call that tells the service where to continue
+    #       <code>IsTruncated</code> response element returns <code>true</code>, and <code>Marker</code> 
+    #       contains a value to include in the subsequent call that tells the service where to continue 
     #       from.</p>
     #   @return [Integer]
     # @!attribute marker
-    #   <p>Use this parameter only when paginating results and only after
+    #   <p>Use this parameter only when paginating results and only after 
     #       you receive a response indicating that the results are truncated. Set it to the value of the
-    #       <code>Marker</code> element in the response that you received to indicate where the next call
+    #       <code>Marker</code> element in the response that you received to indicate where the next call 
     #       should start.</p>
     #   @return [String]
     class SimulatePrincipalPolicyRequest < Struct.new(
@@ -8931,7 +8931,7 @@ module Aws::IAM
 
     # @!attribute instance_profile_name
     #   <p>The name of the IAM instance profile to which you want to add tags.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute tags
@@ -8950,7 +8950,7 @@ module Aws::IAM
     # @!attribute serial_number
     #   <p>The unique identifier for the IAM virtual MFA device to which you want to add tags.
     #         For virtual MFA devices, the serial number is the same as the ARN.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute tags
@@ -8968,7 +8968,7 @@ module Aws::IAM
 
     # @!attribute open_id_connect_provider_arn
     #   <p>The ARN of the OIDC identity provider in IAM to which you want to add tags.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute tags
@@ -8986,7 +8986,7 @@ module Aws::IAM
 
     # @!attribute policy_arn
     #   <p>The ARN of the IAM customer managed policy to which you want to add tags.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute tags
@@ -9004,7 +9004,7 @@ module Aws::IAM
 
     # @!attribute role_name
     #   <p>The name of the IAM role to which you want to add tags.</p>
-    #            <p>This parameter accepts (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that consist of upper and lowercase alphanumeric
+    #            <p>This parameter accepts (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that consist of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute tags
@@ -9021,7 +9021,7 @@ module Aws::IAM
 
     # @!attribute saml_provider_arn
     #   <p>The ARN of the SAML identity provider in IAM to which you want to add tags.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute tags
@@ -9039,7 +9039,7 @@ module Aws::IAM
 
     # @!attribute server_certificate_name
     #   <p>The name of the IAM server certificate to which you want to add tags.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute tags
@@ -9075,7 +9075,7 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the IAM user to which you want to add tags.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute tags
@@ -9154,7 +9154,7 @@ module Aws::IAM
 
     # @!attribute instance_profile_name
     #   <p>The name of the IAM instance profile from which you want to remove tags.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute tag_keys
@@ -9173,7 +9173,7 @@ module Aws::IAM
     # @!attribute serial_number
     #   <p>The unique identifier for the IAM virtual MFA device from which you want to remove
     #         tags. For virtual MFA devices, the serial number is the same as the ARN.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute tag_keys
@@ -9191,7 +9191,7 @@ module Aws::IAM
 
     # @!attribute open_id_connect_provider_arn
     #   <p>The ARN of the OIDC provider in IAM from which you want to remove tags.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute tag_keys
@@ -9210,7 +9210,7 @@ module Aws::IAM
     # @!attribute policy_arn
     #   <p>The ARN of the IAM customer managed policy from which you want to remove
     #         tags.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute tag_keys
@@ -9228,7 +9228,7 @@ module Aws::IAM
 
     # @!attribute role_name
     #   <p>The name of the IAM role from which you want to remove tags.</p>
-    #            <p>This parameter accepts (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that consist of upper and lowercase alphanumeric
+    #            <p>This parameter accepts (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that consist of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute tag_keys
@@ -9247,7 +9247,7 @@ module Aws::IAM
     # @!attribute saml_provider_arn
     #   <p>The ARN of the SAML identity provider in IAM from which you want to remove
     #         tags.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute tag_keys
@@ -9265,7 +9265,7 @@ module Aws::IAM
 
     # @!attribute server_certificate_name
     #   <p>The name of the IAM server certificate from which you want to remove tags.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute tag_keys
@@ -9283,7 +9283,7 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the IAM user from which you want to remove tags.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute tag_keys
@@ -9301,12 +9301,12 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the user whose key you want to update.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute access_key_id
     #   <p>The access key ID of the secret access key you want to update.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can 
     #       consist of any upper or lowercased letter or digit.</p>
     #   @return [String]
     # @!attribute status
@@ -9415,7 +9415,7 @@ module Aws::IAM
 
     # @!attribute role_name
     #   <p>The name of the role to update with the new policy.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute policy_document
@@ -9423,19 +9423,19 @@ module Aws::IAM
     #            <p>You must provide policies in JSON format in IAM. However, for CloudFormation
     #               templates formatted in YAML, you can provide the policy in JSON or YAML format. CloudFormation always converts a YAML policy to JSON format before submitting it to
     #               IAM.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
     #       used to validate this parameter is a string of characters consisting of the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>Any printable ASCII
+    #                  <p>Any printable ASCII 
     #       character ranging from the space character (<code>\u0020</code>) through the end of the ASCII character range</p>
     #               </li>
     #               <li>
-    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set
+    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set 
     #       (through <code>\u00FF</code>)</p>
     #               </li>
     #               <li>
-    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
+    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and 
     #       carriage return (<code>\u000D</code>)</p>
     #               </li>
     #            </ul>
@@ -9467,14 +9467,14 @@ module Aws::IAM
     # @!attribute group_name
     #   <p>Name of the IAM group to update. If you're changing the name of the group, this is
     #               the original name.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute new_path
     #   <p>New path for the IAM group. Only include this if changing the group's path.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
     #       of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
-    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
+    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including 
     #       most punctuation characters, digits, and upper and lowercased letters.</p>
     #   @return [String]
     # @!attribute new_group_name
@@ -9495,24 +9495,24 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the user whose password you want to update.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute password
     #   <p>The new password for the specified IAM user.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
     #       used to validate this parameter is a string of characters consisting of the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>Any printable ASCII
+    #                  <p>Any printable ASCII 
     #       character ranging from the space character (<code>\u0020</code>) through the end of the ASCII character range</p>
     #               </li>
     #               <li>
-    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set
+    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set 
     #       (through <code>\u00FF</code>)</p>
     #               </li>
     #               <li>
-    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
+    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and 
     #       carriage return (<code>\u000D</code>)</p>
     #               </li>
     #            </ul>
@@ -9669,12 +9669,12 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the IAM user associated with the SSH public key.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute ssh_public_key_id
     #   <p>The unique identifier for the SSH public key.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can 
     #       consist of any upper or lowercased letter or digit.</p>
     #   @return [String]
     # @!attribute status
@@ -9694,21 +9694,21 @@ module Aws::IAM
 
     # @!attribute server_certificate_name
     #   <p>The name of the server certificate that you want to update.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute new_path
     #   <p>The new path for the server certificate. Include this only if you are updating the
     #               server certificate's path.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
     #       of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
-    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
+    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including 
     #       most punctuation characters, digits, and upper and lowercased letters.</p>
     #   @return [String]
     # @!attribute new_server_certificate_name
     #   <p>The new name for the server certificate. Include this only if you are updating the
     #               server certificate's name. The name of the certificate cannot contain any spaces.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     class UpdateServerCertificateRequest < Struct.new(
@@ -9725,12 +9725,12 @@ module Aws::IAM
     #   <p>The name of the IAM user associated with the service-specific credential. If you do
     #               not specify this value, then the operation assumes the user whose credentials are used
     #               to call the operation.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute service_specific_credential_id
     #   <p>The unique identifier of the service-specific credential.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can 
     #       consist of any upper or lowercased letter or digit.</p>
     #   @return [String]
     # @!attribute status
@@ -9748,12 +9748,12 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the IAM user the signing certificate belongs to.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute certificate_id
     #   <p>The ID of the signing certificate you want to update.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters that can 
     #       consist of any upper or lowercased letter or digit.</p>
     #   @return [String]
     # @!attribute status
@@ -9774,15 +9774,15 @@ module Aws::IAM
     # @!attribute user_name
     #   <p>Name of the user to update. If you're changing the name of the user, this is the
     #               original user name.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute new_path
     #   <p>New path for the IAM user. Include this parameter only if you're changing the user's
     #               path.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
     #       of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
-    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
+    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including 
     #       most punctuation characters, digits, and upper and lowercased letters.</p>
     #   @return [String]
     # @!attribute new_user_name
@@ -9804,26 +9804,26 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the IAM user to associate the SSH public key with.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute ssh_public_key_body
     #   <p>The SSH public key. The public key must be encoded in ssh-rsa format or PEM format.
     #               The minimum bit-length of the public key is 2048 bits. For example, you can generate a
     #               2048-bit key, and the resulting PEM file is 1679 bytes long.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
     #       used to validate this parameter is a string of characters consisting of the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>Any printable ASCII
+    #                  <p>Any printable ASCII 
     #       character ranging from the space character (<code>\u0020</code>) through the end of the ASCII character range</p>
     #               </li>
     #               <li>
-    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set
+    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set 
     #       (through <code>\u00FF</code>)</p>
     #               </li>
     #               <li>
-    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
+    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and 
     #       carriage return (<code>\u000D</code>)</p>
     #               </li>
     #            </ul>
@@ -9854,9 +9854,9 @@ module Aws::IAM
     #   <p>The path for the server certificate. For more information about paths, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM
     #                   identifiers</a> in the <i>IAM User Guide</i>.</p>
     #            <p>This parameter is optional. If it is not included, it defaults to a slash (/).
-    #               This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting
+    #               This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting 
     #       of either a forward slash (/) by itself or a string that must begin and end with forward slashes.
-    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including
+    #       In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including 
     #       most punctuation characters, digits, and upper and lowercased letters.</p>
     #            <note>
     #               <p> If you are uploading a server certificate specifically for use with Amazon
@@ -9868,43 +9868,43 @@ module Aws::IAM
     # @!attribute server_certificate_name
     #   <p>The name for the server certificate. Do not include the path in this value. The name
     #               of the certificate cannot contain any spaces.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute certificate_body
     #   <p>The contents of the public key certificate in PEM-encoded format.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
     #       used to validate this parameter is a string of characters consisting of the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>Any printable ASCII
+    #                  <p>Any printable ASCII 
     #       character ranging from the space character (<code>\u0020</code>) through the end of the ASCII character range</p>
     #               </li>
     #               <li>
-    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set
+    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set 
     #       (through <code>\u00FF</code>)</p>
     #               </li>
     #               <li>
-    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
+    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and 
     #       carriage return (<code>\u000D</code>)</p>
     #               </li>
     #            </ul>
     #   @return [String]
     # @!attribute private_key
     #   <p>The contents of the private key in PEM-encoded format.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
     #       used to validate this parameter is a string of characters consisting of the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>Any printable ASCII
+    #                  <p>Any printable ASCII 
     #       character ranging from the space character (<code>\u0020</code>) through the end of the ASCII character range</p>
     #               </li>
     #               <li>
-    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set
+    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set 
     #       (through <code>\u00FF</code>)</p>
     #               </li>
     #               <li>
-    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
+    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and 
     #       carriage return (<code>\u000D</code>)</p>
     #               </li>
     #            </ul>
@@ -9912,19 +9912,19 @@ module Aws::IAM
     # @!attribute certificate_chain
     #   <p>The contents of the certificate chain. This is typically a concatenation of the
     #               PEM-encoded public key certificates of the chain.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
     #       used to validate this parameter is a string of characters consisting of the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>Any printable ASCII
+    #                  <p>Any printable ASCII 
     #       character ranging from the space character (<code>\u0020</code>) through the end of the ASCII character range</p>
     #               </li>
     #               <li>
-    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set
+    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set 
     #       (through <code>\u00FF</code>)</p>
     #               </li>
     #               <li>
-    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
+    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and 
     #       carriage return (<code>\u000D</code>)</p>
     #               </li>
     #            </ul>
@@ -9934,7 +9934,7 @@ module Aws::IAM
     #         Each tag consists of a key name and an associated value. For more information about tagging, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html">Tagging IAM resources</a> in the
     #         <i>IAM User Guide</i>.</p>
     #            <note>
-    #               <p>If any one of the tags is invalid or if you exceed the allowed maximum number of tags, then the entire request
+    #               <p>If any one of the tags is invalid or if you exceed the allowed maximum number of tags, then the entire request 
     #      fails and the resource is not created.</p>
     #            </note>
     #   @return [Array<Types::Tag>]
@@ -9972,24 +9972,24 @@ module Aws::IAM
 
     # @!attribute user_name
     #   <p>The name of the user the signing certificate is for.</p>
-    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric
+    #            <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric 
     #       characters with no spaces. You can also include any of the following characters: _+=,.@-</p>
     #   @return [String]
     # @!attribute certificate_body
     #   <p>The contents of the signing certificate.</p>
-    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a>
+    #            <p>The <a href="http://wikipedia.org/wiki/regex">regex pattern</a> 
     #       used to validate this parameter is a string of characters consisting of the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>Any printable ASCII
+    #                  <p>Any printable ASCII 
     #       character ranging from the space character (<code>\u0020</code>) through the end of the ASCII character range</p>
     #               </li>
     #               <li>
-    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set
+    #                  <p>The printable characters in the Basic Latin and  Latin-1 Supplement character set 
     #       (through <code>\u00FF</code>)</p>
     #               </li>
     #               <li>
-    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and
+    #                  <p>The special characters tab (<code>\u0009</code>), line feed (<code>\u000A</code>), and 
     #       carriage return (<code>\u000D</code>)</p>
     #               </li>
     #            </ul>

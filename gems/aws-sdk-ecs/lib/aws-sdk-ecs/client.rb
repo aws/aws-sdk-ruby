@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::ECS
     @identifier = :ecs
 
     add_plugin(::Aws::ECS::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::ECS
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::ECS
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -274,8 +294,8 @@ module Aws::ECS
     #   <p>The configuration for the Amazon ECS Managed Instances provider. This configuration specifies how Amazon ECS manages Amazon EC2 instances on your behalf, including the infrastructure role, instance launch template, and tag propagation settings.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>The metadata that you apply to the capacity provider to categorize and organize them more conveniently. Each tag consists of a key and an optional value. You define both of them.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case-sensitive.</p> </li> <li> <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.</p> </li> </ul>
-    # @example To create a capacity provider
-    #   # This example creates a capacity provider that uses the specified Auto Scaling group MyASG and has managed scaling and manager termination protection enabled.
+    # @example To create a capacity provider 
+    #   # This example creates a capacity provider that uses the specified Auto Scaling group MyASG and has managed scaling and manager termination protection enabled. 
     #   params = {
     #     name: "MyCapacityProvider",
     #     auto_scaling_group_provider: {
@@ -2097,7 +2117,7 @@ module Aws::ECS
     # @option params [Array<Types::Attribute>] :attributes
     #   <p>The attributes to delete from your resource. You can specify up to 10 attributes for each request. For custom attributes, specify the attribute name and target ID, but don't specify the value. If you specify the target ID using the short form, you must also specify the target type.</p>
     # @example To delete a custom attribute from an Amazon ECS instance
-    #   # This example deletes an attribute named stack from a container instance.
+    #   # This example deletes an attribute named stack from a container instance. 
     #   params = {
     #     attributes: [
     #       {
@@ -2157,7 +2177,7 @@ module Aws::ECS
     # @option params [String] :cluster
     #   <p>The name of the cluster that contains the capacity provider to delete. Managed instances capacity providers are cluster-scoped and can only be deleted from their associated cluster.</p>
     # @example To delete a specified capacity provider
-    #   # This example deletes a specified capacity provider.
+    #   # This example deletes a specified capacity provider. 
     #   params = {
     #     capacity_provider: "arn:aws:ecs:us-west-2:123456789012:capacity-provider/ExampleCapacityProvider"
     #   }
@@ -2971,7 +2991,7 @@ module Aws::ECS
     # @option params [Array<String>] :task_definitions
     #   <p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or full Amazon Resource Name (ARN) of the task definition to delete. You must specify a <code>revision</code>.</p> <p>You can specify up to 10 task definitions as a comma separated list.</p>
     # @example To delete a task definition that has been deregistered
-    #   # This example deletes a specified deregistered task definition.
+    #   # This example deletes a specified deregistered task definition. 
     #   params = {
     #     task_definitions: [
     #       "Example-task-definition:1"
@@ -3889,7 +3909,7 @@ module Aws::ECS
     # @option params [String] :next_token
     #   <p>The <code>nextToken</code> value returned from a previous paginated <code>DescribeCapacityProviders</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
     # @example To describe all capacity providers
-    #   # This example retrieves details about all capacity providers.
+    #   # This example retrieves details about all capacity providers. 
     #   params = {}
     #   options = {}
     #   response = client.describe_capacity_providers(params, options)
@@ -5042,8 +5062,8 @@ module Aws::ECS
     # @param [Hash, Types::DescribeServiceDeploymentsRequest] params
     # @option params [Array<String>] :service_deployment_arns
     #   <p>The ARN of the service deployment.</p> <p>You can specify a maximum of 20 ARNs.</p>
-    # @example To describe a service deployment
-    #   # This example describes a service deployment for the service sd-example in the example cluster.
+    # @example To describe a service deployment 
+    #   # This example describes a service deployment for the service sd-example in the example cluster. 
     #   params = {
     #     service_deployment_arns: [
     #       "arn:aws:ecs:us-west-2:123456789012:service-deployment/example/sd-example/NCWGC2ZR-taawPAYrIaU5"
@@ -5280,7 +5300,7 @@ module Aws::ECS
     # @param [Hash, Types::DescribeServiceRevisionsRequest] params
     # @option params [Array<String>] :service_revision_arns
     #   <p>The ARN of the service revision. </p> <p>You can specify a maximum of 20 ARNs.</p> <p>You can call <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServiceDeployments.html">ListServiceDeployments</a> to get the ARNs.</p>
-    # @example To describe a service revision
+    # @example To describe a service revision 
     #   # This example describes a service revision with the specified ARN
     #   params = {
     #     service_revision_arns: [
@@ -6511,8 +6531,8 @@ module Aws::ECS
     #   <p>The ID or full Amazon Resource Name (ARN) of task sets to describe.</p>
     # @option params [Array<String>] :include
     #   <p>Specifies whether to see the resource tags for the task set. If <code>TAGS</code> is specified, the tags are included in the response. If this field is omitted, tags aren't included in the response.</p>
-    # @example To describe a task set
-    #   # This example describes a task set in service MyService that uses an EXTERNAL deployment controller.
+    # @example To describe a task set 
+    #   # This example describes a task set in service MyService that uses an EXTERNAL deployment controller. 
     #   params = {
     #     cluster: "MyCluster",
     #     service: "MyService",
@@ -6937,7 +6957,7 @@ module Aws::ECS
     # @option params [String] :task
     #   <p>The Amazon Resource Name (ARN) or ID of the task the container is part of.</p>
     # @example To run a command remotely on a container in a task
-    #   # This example runs an interactive /bin/sh command on a container MyContainer.
+    #   # This example runs an interactive /bin/sh command on a container MyContainer. 
     #   params = {
     #     cluster: "MyCluster",
     #     container: "MyContainer",
@@ -8083,7 +8103,7 @@ module Aws::ECS
     # @option params [Array<Types::CapacityProviderStrategyItem>] :default_capacity_provider_strategy
     #   <p>The capacity provider strategy to use by default for the cluster.</p> <p>When creating a service or running a task on a cluster, if no capacity provider or launch type is specified then the default capacity provider strategy for the cluster is used.</p> <p>A capacity provider strategy consists of one or more capacity providers along with the <code>base</code> and <code>weight</code> to assign to them. A capacity provider must be associated with the cluster to be used in a capacity provider strategy. The <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html">PutClusterCapacityProviders</a> API is used to associate a capacity provider with a cluster. Only capacity providers with an <code>ACTIVE</code> or <code>UPDATING</code> status can be used.</p> <p>If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created. New capacity providers can be created with the <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCapacityProvider.html">CreateCapacityProvider</a> API operation.</p> <p>To use a Fargate capacity provider, specify either the <code>FARGATE</code> or <code>FARGATE_SPOT</code> capacity providers. The Fargate capacity providers are available to all accounts and only need to be associated with a cluster to be used.</p>
     # @example To add an existing capacity provider to a cluuster
-    #   # This example adds an existing capacity provider "MyCapacityProvider2" to a cluster that already has the capacity provider "MyCapacityProvider1" associated with it. Both "MyCapacityProvider2" and "MyCapacityProvider1" need to be specified.
+    #   # This example adds an existing capacity provider "MyCapacityProvider2" to a cluster that already has the capacity provider "MyCapacityProvider1" associated with it. Both "MyCapacityProvider2" and "MyCapacityProvider1" need to be specified. 
     #   params = {
     #     cluster: "MyCluster",
     #     capacity_providers: [
@@ -8175,7 +8195,7 @@ module Aws::ECS
     #     }
     #   }
     # @example To remove a capacity provider from a cluster
-    #   # This example removes a capacity provider "MyCapacityProvider2" from a cluster that has both "MyCapacityProvider2" and "MyCapacityProvider1" associated with it. Only "MyCapacityProvider1" needs to be specified in this scenario.
+    #   # This example removes a capacity provider "MyCapacityProvider2" from a cluster that has both "MyCapacityProvider2" and "MyCapacityProvider1" associated with it. Only "MyCapacityProvider1" needs to be specified in this scenario. 
     #   params = {
     #     cluster: "MyCluster",
     #     capacity_providers: [
@@ -8257,7 +8277,7 @@ module Aws::ECS
     #     }
     #   }
     # @example To remove all capacity providers from a cluster
-    #   # This example removes all capacity providers associated with a cluster.
+    #   # This example removes all capacity providers associated with a cluster. 
     #   params = {
     #     cluster: "MyCluster",
     #     capacity_providers: [
@@ -10930,7 +10950,7 @@ module Aws::ECS
     # @option params [Types::ClusterServiceConnectDefaultsRequest] :service_connect_defaults
     #   <p>Use this parameter to set a default Service Connect namespace. After you set a default Service Connect namespace, any new services with Service Connect turned on that are created in the cluster are added as client services in the namespace. This setting only applies to new services that set the <code>enabled</code> parameter to <code>true</code> in the <code>ServiceConnectConfiguration</code>. You can set the namespace of each service individually in the <code>ServiceConnectConfiguration</code> to override this default parameter.</p> <p>Tasks that run in a namespace can use short names to connect to services in the namespace. Tasks can connect to services across all of the clusters in the namespace. Tasks connect through a managed proxy container that collects logs and metrics for increased visibility. Only the tasks that Amazon ECS services create are supported with Service Connect. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
     # @example To update a cluster's observability settings.
-    #   # This example turns on enhanced containerInsights in an existing cluster.
+    #   # This example turns on enhanced containerInsights in an existing cluster. 
     #   params = {
     #     cluster: "ECS-project-update-cluster",
     #     settings: [
@@ -11018,7 +11038,7 @@ module Aws::ECS
     #     }
     #   }
     # @example To update a cluster's Service Connect defaults.
-    #   # This example sets a default Service Connect namespace.
+    #   # This example sets a default Service Connect namespace. 
     #   params = {
     #     cluster: "ECS-project-update-cluster",
     #     service_connect_defaults: {
@@ -11488,7 +11508,7 @@ module Aws::ECS
     # @option params [String] :status
     #   <p>The container instance state to update the container instance with. The only valid values for this action are <code>ACTIVE</code> and <code>DRAINING</code>. A container instance can only be updated to <code>DRAINING</code> status once it has reached an <code>ACTIVE</code> state. If a container instance is in <code>REGISTERING</code>, <code>DEREGISTERING</code>, or <code>REGISTRATION_FAILED</code> state you can describe the container instance but can't update the container instance state.</p>
     # @example To update the state of a container instance
-    #   # This example updates the state of the specified container instance in the default cluster to DRAINING.
+    #   # This example updates the state of the specified container instance in the default cluster to DRAINING. 
     #   params = {
     #     cluster: "default",
     #     container_instances: [
@@ -12672,7 +12692,7 @@ module Aws::ECS
     # @option params [String] :primary_task_set
     #   <p>The short name or full Amazon Resource Name (ARN) of the task set to set as the primary task set in the deployment.</p>
     # @example To update the primary task set for a service
-    #   # This example updates the primary task set for a service MyService that uses the EXTERNAL deployment controller type.
+    #   # This example updates the primary task set for a service MyService that uses the EXTERNAL deployment controller type. 
     #   params = {
     #     cluster: "MyCluster",
     #     service: "MyService",
@@ -13116,7 +13136,8 @@ module Aws::ECS
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

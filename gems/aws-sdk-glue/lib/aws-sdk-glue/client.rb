@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::Glue
     @identifier = :glue
 
     add_plugin(::Aws::Glue::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::Glue
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::Glue
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -482,7 +502,7 @@ module Aws::Glue
     #   <p>The database in the catalog in which the table resides. For Hive
     #         compatibility, this name is entirely lowercase.</p>
     # @option params [String] :table_name
-    #   <p>The name of the table. For Hive compatibility,
+    #   <p>The name of the table. For Hive compatibility, 
     #         this name is entirely lowercase.</p>
     # @option params [Array<String>] :version_ids
     #   <p>A list of the IDs of versions to be deleted. A <code>VersionId</code> is a string representation of an integer. Each version is incremented by 1.</p>
@@ -1202,7 +1222,7 @@ module Aws::Glue
       request.send_request(options)
     end
 
-    # <p>Returns a list of resource metadata for a given list of job names. After calling the <code>ListJobs</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
+    # <p>Returns a list of resource metadata for a given list of job names. After calling the <code>ListJobs</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags. 
     # </p>
     # @param [Hash, Types::BatchGetJobsRequest] params
     # @option params [Array<String>] :job_names
@@ -4527,7 +4547,7 @@ module Aws::Glue
       request.send_request(options)
     end
 
-    # <p>Creates a new Glue Identity Center configuration to enable integration between Glue and Amazon Web Services IAM
+    # <p>Creates a new Glue Identity Center configuration to enable integration between Glue and Amazon Web Services IAM 
     #       Identity Center for authentication and authorization.</p>
     # @param [Hash, Types::CreateGlueIdentityCenterConfigurationRequest] params
     # @option params [String] :instance_arn
@@ -4700,8 +4720,8 @@ module Aws::Glue
     # <p>This API is used to provide optional override properties for the the tables that need to be replicated. These properties can include properties for filtering and partitioning for the source and target tables. To set both source and target properties the same API need to be invoked with the Glue connection ARN as <code>ResourceArn</code> with <code>SourceTableConfig</code>, and the Glue database ARN as <code>ResourceArn</code> with <code>TargetTableConfig</code> respectively.</p>
     # @param [Hash, Types::CreateIntegrationTablePropertiesRequest] params
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the target table for which to create integration table properties. Currently, this API only supports creating
-    #         integration table properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for
+    #   <p>The Amazon Resource Name (ARN) of the target table for which to create integration table properties. Currently, this API only supports creating 
+    #         integration table properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for 
     #         creating integration table properties for source connections (using the connection ARN) is not yet implemented and will be added in a future release.
     #       </p>
     # @option params [String] :table_name
@@ -4833,8 +4853,8 @@ module Aws::Glue
     #             allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p>
     #               </li>
     #               <li>
-    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache
-    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs.
+    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache 
+    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. 
     #           The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p>
     #               </li>
     #            </ul>
@@ -7046,7 +7066,7 @@ module Aws::Glue
     # @option params [Types::ConnectionsList] :connections
     #   <p>The number of connections to use for the session. </p>
     # @option params [Float] :max_capacity
-    #   <p>The number of Glue data processing units (DPUs) that can be allocated when the job runs.
+    #   <p>The number of Glue data processing units (DPUs) that can be allocated when the job runs. 
     #         A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB memory. </p>
     # @option params [Integer] :number_of_workers
     #   <p>The number of workers of a defined <code>WorkerType</code> to use for the session. </p>
@@ -7073,7 +7093,7 @@ module Aws::Glue
     # @option params [String] :security_configuration
     #   <p>The name of the SecurityConfiguration structure to be used with the session </p>
     # @option params [String] :glue_version
-    #   <p>The Glue version determines the versions of Apache Spark and Python that Glue supports.
+    #   <p>The Glue version determines the versions of Apache Spark and Python that Glue supports. 
     #         The GlueVersion must be greater than 2.0. </p>
     # @option params [Hash<String, String>] :tags
     #   <p>The map of key value pairs (tags) belonging to the session.</p>
@@ -7160,7 +7180,7 @@ module Aws::Glue
     #   <p>The catalog database in which to create the new table. For Hive
     #         compatibility, this name is entirely lowercase.</p>
     # @option params [String] :name
-    #   <p>The unique identifier for the table within the specified database that will be
+    #   <p>The unique identifier for the table within the specified database that will be 
     #         created in the Glue Data Catalog.</p>
     # @option params [Types::TableInput] :table_input
     #   <p>The <code>TableInput</code> object that defines the metadata table
@@ -8071,7 +8091,7 @@ module Aws::Glue
       request.send_request(options)
     end
 
-    # <p>Deletes the existing Glue Identity Center configuration, removing the integration between Glue and
+    # <p>Deletes the existing Glue Identity Center configuration, removing the integration between Glue and 
     #       Amazon Web Services IAM Identity Center.</p>
     # @param [Hash, Types::DeleteGlueIdentityCenterConfigurationRequest] params
     # @example Request syntax with placeholder values
@@ -8521,7 +8541,7 @@ module Aws::Glue
     #   <p>The database in the catalog in which the table resides. For Hive
     #         compatibility, this name is entirely lowercase.</p>
     # @option params [String] :table_name
-    #   <p>The name of the table. For Hive compatibility,
+    #   <p>The name of the table. For Hive compatibility, 
     #         this name is entirely lowercase.</p>
     # @option params [String] :version_id
     #   <p>The ID of the table version to be deleted. A <code>VersionID</code> is a string representation of an integer. Each version is incremented by 1.</p>
@@ -11344,7 +11364,7 @@ module Aws::Glue
     #   <p>The ID of the Data Catalog in which the database resides. If none is provided, the Amazon Web Services
     #         account ID is used by default.</p>
     # @option params [String] :name
-    #   <p>The name of the database to retrieve. For Hive compatibility, this
+    #   <p>The name of the database to retrieve. For Hive compatibility, this 
     #         should be all lowercase.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -11745,7 +11765,7 @@ module Aws::Glue
       request.send_request(options)
     end
 
-    # <p>Retrieves the current Glue Identity Center configuration details, including the associated Identity Center instance and
+    # <p>Retrieves the current Glue Identity Center configuration details, including the associated Identity Center instance and 
     #       application information.</p>
     # @param [Hash, Types::GetGlueIdentityCenterConfigurationRequest] params
     # @example Request syntax with placeholder values
@@ -11800,8 +11820,8 @@ module Aws::Glue
     # <p>This API is used to retrieve optional override properties for the tables that need to be replicated. These properties can include properties for filtering and partition for source and target tables.</p>
     # @param [Hash, Types::GetIntegrationTablePropertiesRequest] params
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the target table for which to retrieve integration table properties. Currently, this API only supports retrieving
-    #         properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for retrieving integration
+    #   <p>The Amazon Resource Name (ARN) of the target table for which to retrieve integration table properties. Currently, this API only supports retrieving 
+    #         properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for retrieving integration 
     #         table properties for source connections (using the connection ARN) is not yet implemented and will be added in a future release.
     #       </p>
     # @option params [String] :table_name
@@ -18149,7 +18169,7 @@ module Aws::Glue
       request.send_request(options)
     end
 
-    # <p>Retrieves partition metadata from the Data Catalog that contains unfiltered
+    # <p>Retrieves partition metadata from the Data Catalog that contains unfiltered 
     #           metadata.</p>
     #          <p>For IAM authorization, the public IAM action associated with this API is <code>glue:GetPartition</code>.</p>
     # @param [Hash, Types::GetUnfilteredPartitionMetadataRequest] params
@@ -18270,14 +18290,14 @@ module Aws::Glue
       request.send_request(options)
     end
 
-    # <p>Retrieves partition metadata from the Data Catalog that contains unfiltered
+    # <p>Retrieves partition metadata from the Data Catalog that contains unfiltered 
     #           metadata.</p>
     #          <p>For IAM authorization, the public IAM action associated with this API is <code>glue:GetPartitions</code>.</p>
     # @param [Hash, Types::GetUnfilteredPartitionsMetadataRequest] params
     # @option params [String] :region
     #   <p>Specified only if the base tables belong to a different Amazon Web Services Region.</p>
     # @option params [String] :catalog_id
-    #   <p>The ID of the Data Catalog where the partitions in question reside. If none is provided,
+    #   <p>The ID of the Data Catalog where the partitions in question reside. If none is provided, 
     #             the AWS account ID is used by default. </p>
     # @option params [String] :database_name
     #   <p>The name of the catalog database where the partitions reside.</p>
@@ -23559,8 +23579,8 @@ module Aws::Glue
     #             allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p>
     #               </li>
     #               <li>
-    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache
-    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs.
+    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache 
+    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. 
     #           The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p>
     #               </li>
     #            </ul>
@@ -26826,9 +26846,9 @@ module Aws::Glue
     #         The provider for the remote repository. Possible values: GITHUB, AWS_CODE_COMMIT, GITLAB, BITBUCKET.
     #       </p>
     # @option params [String] :repository_name
-    #   <p>The name of the remote repository that contains the job artifacts.
+    #   <p>The name of the remote repository that contains the job artifacts. 
     #         For BitBucket providers, <code>RepositoryName</code> should include <code>WorkspaceName</code>.
-    #         Use the format <code><WorkspaceName>/<RepositoryName></code>.
+    #         Use the format <code><WorkspaceName>/<RepositoryName></code>. 
     #       </p>
     # @option params [String] :repository_owner
     #   <p>The owner of the remote repository that contains the job artifacts.</p>
@@ -27127,9 +27147,9 @@ module Aws::Glue
     #         The provider for the remote repository. Possible values: GITHUB, AWS_CODE_COMMIT, GITLAB, BITBUCKET.
     #       </p>
     # @option params [String] :repository_name
-    #   <p>The name of the remote repository that contains the job artifacts.
+    #   <p>The name of the remote repository that contains the job artifacts. 
     #         For BitBucket providers, <code>RepositoryName</code> should include <code>WorkspaceName</code>.
-    #         Use the format <code><WorkspaceName>/<RepositoryName></code>.
+    #         Use the format <code><WorkspaceName>/<RepositoryName></code>. 
     #       </p>
     # @option params [String] :repository_owner
     #   <p>The owner of the remote repository that contains the job artifacts.</p>
@@ -27177,7 +27197,7 @@ module Aws::Glue
     #   <p>The name of the catalog database in which the table resides. For Hive
     #         compatibility, this name is entirely lowercase.</p>
     # @option params [String] :name
-    #   <p>The unique identifier for the table within the specified database that will be
+    #   <p>The unique identifier for the table within the specified database that will be 
     #         created in the Glue Data Catalog.</p>
     # @option params [Types::TableInput] :table_input
     #   <p>An updated <code>TableInput</code> object to define the metadata table
@@ -27728,7 +27748,8 @@ module Aws::Glue
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

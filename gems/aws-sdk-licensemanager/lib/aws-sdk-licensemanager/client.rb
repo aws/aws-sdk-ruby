@@ -3,7 +3,6 @@
 # This is generated code!
 
 require_relative 'plugins/endpoint'
-require 'smithy-client/plugins/checksum_required'
 require 'smithy-client/plugins/content_length'
 require 'smithy-client/plugins/default_params'
 require 'smithy-client/plugins/host_prefix'
@@ -23,6 +22,8 @@ require 'smithy-client/plugins/transfer_encoding'
 require 'aws-sdk-core/plugins/global_configuration'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
+require 'aws-sdk-core/plugins/checksum_algorithm'
+require 'aws-sdk-core/plugins/http_checksum'
 require 'aws-sdk-core/plugins/invocation_id'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/retry_errors'
@@ -43,7 +44,6 @@ module Aws::LicenseManager
     @identifier = :licensemanager
 
     add_plugin(::Aws::LicenseManager::Plugins::Endpoint)
-    add_plugin(Smithy::Client::Plugins::ChecksumRequired)
     add_plugin(Smithy::Client::Plugins::ContentLength)
     add_plugin(Smithy::Client::Plugins::DefaultParams)
     add_plugin(Smithy::Client::Plugins::HostPrefix)
@@ -63,6 +63,8 @@ module Aws::LicenseManager
     add_plugin(Aws::Core::Plugins::GlobalConfiguration)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
+    add_plugin(Aws::Core::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Core::Plugins::HttpChecksum)
     add_plugin(Aws::Core::Plugins::InvocationId)
     add_plugin(Aws::Core::Plugins::RecursionDetection)
     add_plugin(Aws::Core::Plugins::RetryErrors)
@@ -139,23 +141,41 @@ module Aws::LicenseManager
     #  * `ENV['AWS_DEFAULT_REGION']`
     #  * `~/.aws/credentials` as `region` under a profile
     #  * `~/.aws/config` as `region` under a profile
+    # @option options [String] :request_checksum_calculation (when_supported)
+    #  Determines when a checksum is calculated for request payloads. Values are:
+    #  
+    #  * `when_supported` - (default) A checksum is calculated for operations
+    #    modeled with the `httpChecksum` trait when `requestChecksumRequired`
+    #    is `true` or a `requestAlgorithmMember` is modeled.
+    #  * `when_required` - A checksum is calculated only when
+    #    `requestChecksumRequired` is `true`, or when the caller supplies a
+    #    modeled `requestAlgorithmMember`.
     # @option options [Integer] :request_min_compression_size_bytes (10240)
     #  The minimum size in bytes that triggers compression for request bodies.
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
+    # @option options [String] :response_checksum_validation (when_supported)
+    #  Determines when checksum validation is performed for response payloads.
+    #  Values are:
+    #  
+    #  * `when_supported` - (default) Validation is enabled for operations
+    #    modeled with a `requestValidationModeMember` and at least one
+    #    `responseAlgorithms` value supported by the client.
+    #  * `when_required` - Validation is performed only when the caller sets
+    #    the modeled `requestValidationModeMember` to `ENABLED`.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #
+    #  
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #
+    #  
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #
+    #  
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -802,8 +822,8 @@ module Aws::LicenseManager
     # <p>Creates a license configuration.</p>
     #          <p>A license configuration is an abstraction of a customer license agreement that can be
     #          consumed and enforced by License Manager. Components include specifications for the license
-    #          type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy,
-    #          Dedicated Instance, Dedicated Host, or all of these), license affinity  to host (how long a
+    #          type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, 
+    #          Dedicated Instance, Dedicated Host, or all of these), license affinity  to host (how long a 
     #          license must be associated with a host), and the number of licenses purchased and used.</p>
     # @param [Hash, Types::CreateLicenseConfigurationRequest] params
     # @option params [String] :name
@@ -818,7 +838,7 @@ module Aws::LicenseManager
     #   <p>Indicates whether hard or soft license enforcement is used. Exceeding a hard limit
     #            blocks the launch of new instances.</p>
     # @option params [Array<String>] :license_rules
-    #   <p>License rules. The syntax is #name=value (for example, #allowedTenancy=EC2-DedicatedHost). The available rules
+    #   <p>License rules. The syntax is #name=value (for example, #allowedTenancy=EC2-DedicatedHost). The available rules 
     #            vary by dimension, as follows.</p>
     #            <ul>
     #               <li>
@@ -830,28 +850,28 @@ module Aws::LicenseManager
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>Instances</code> dimension: <code>allowedTenancy</code> |
+    #                     <code>Instances</code> dimension: <code>allowedTenancy</code> | 
     #                  <code>maximumVcpus</code> | <code>minimumVcpus</code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>Sockets</code> dimension: <code>allowedTenancy</code> |
+    #                     <code>Sockets</code> dimension: <code>allowedTenancy</code> | 
     #                  <code>licenseAffinityToHost</code> |
     #                  <code>maximumSockets</code> | <code>minimumSockets</code>
     #                  </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>vCPUs</code> dimension: <code>allowedTenancy</code> |
-    #                  <code>honorVcpuOptimization</code> |
+    #                     <code>vCPUs</code> dimension: <code>allowedTenancy</code> | 
+    #                  <code>honorVcpuOptimization</code> | 
     #                  <code>maximumVcpus</code> | <code>minimumVcpus</code>
     #                  </p>
     #               </li>
     #            </ul>
-    #            <p>The unit for <code>licenseAffinityToHost</code> is days and the range is 1 to 180. The possible
-    #            values for <code>allowedTenancy</code> are <code>EC2-Default</code>, <code>EC2-DedicatedHost</code>, and
-    #            <code>EC2-DedicatedInstance</code>. The possible values for <code>honorVcpuOptimization</code> are
+    #            <p>The unit for <code>licenseAffinityToHost</code> is days and the range is 1 to 180. The possible 
+    #            values for <code>allowedTenancy</code> are <code>EC2-Default</code>, <code>EC2-DedicatedHost</code>, and 
+    #            <code>EC2-DedicatedInstance</code>. The possible values for <code>honorVcpuOptimization</code> are 
     #            <code>True</code> and <code>False</code>.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>Tags to add to the license configuration.</p>
@@ -908,8 +928,8 @@ module Aws::LicenseManager
     # @option params [String] :resource_arn
     #   <p>Amazon Resource Name (ARN) of the resource you are converting the license type for.</p>
     # @option params [Types::LicenseConversionContext] :source_license_context
-    #   <p>Information that identifies the license type you are converting from.
-    #
+    #   <p>Information that identifies the license type you are converting from. 
+    #   
     #            For the structure of the source license, see <a href="https://docs.aws.amazon.com/license-manager/latest/userguide/conversion-procedures.html#conversion-cli">Convert a license type using the CLI </a> in the <i>License Manager User Guide</i>.</p>
     # @option params [Types::LicenseConversionContext] :destination_license_context
     #   <p>Information that identifies the license type you are converting to. For the structure of the destination license, see <a href="https://docs.aws.amazon.com/license-manager/latest/userguide/conversion-procedures.html#conversion-cli">Convert a license type using the CLI </a> in the <i>License Manager User Guide</i>.</p>
@@ -1100,14 +1120,14 @@ module Aws::LicenseManager
 
     # <p>Creates a long-lived token.</p>
     #          <p>A refresh token is a JWT token used to get an access token. With an access token,
-    #           you can call AssumeRoleWithWebIdentity to get role credentials that you can use to
+    #           you can call AssumeRoleWithWebIdentity to get role credentials that you can use to 
     #           call License Manager to manage the specified license.</p>
     # @param [Hash, Types::CreateTokenRequest] params
     # @option params [String] :license_arn
     #   <p>Amazon Resource Name (ARN) of the license. The ARN is mapped to the aud claim of the
     #             JWT token.</p>
     # @option params [Array<String>] :role_arns
-    #   <p>Amazon Resource Name (ARN) of the IAM roles to embed in the token.
+    #   <p>Amazon Resource Name (ARN) of the IAM roles to embed in the token. 
     #            License Manager does not check whether the roles are in use.</p>
     # @option params [Integer] :expiration_in_days
     #   <p>Token expiration, in days, counted from token creation. The default is 365 days.</p>
@@ -1903,8 +1923,8 @@ module Aws::LicenseManager
     end
 
     # <p>Lists the resource associations for the specified license configuration.</p>
-    #          <p>Resource associations need not consume licenses from a license configuration.
-    #          For example, an AMI or a stopped instance might not consume a license (depending on
+    #          <p>Resource associations need not consume licenses from a license configuration. 
+    #          For example, an AMI or a stopped instance might not consume a license (depending on 
     #          the license rules).</p>
     # @param [Hash, Types::ListAssociationsForLicenseConfigurationRequest] params
     # @option params [String] :license_configuration_arn
@@ -3192,16 +3212,16 @@ module Aws::LicenseManager
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>application_name</code> - The name of the application.
+    #                     <code>application_name</code> - The name of the application. 
     #                  Logical operators are <code>EQUALS</code> | <code>BEGINS_WITH</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>license_included</code> - The type of license included.
+    #                     <code>license_included</code> - The type of license included. 
     #                  Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.
-    #                  Possible values are <code>sql-server-enterprise</code> |
-    #                  <code>sql-server-standard</code> |
-    #                  <code>sql-server-web</code> |
+    #                  Possible values are <code>sql-server-enterprise</code> | 
+    #                  <code>sql-server-standard</code> | 
+    #                  <code>sql-server-web</code> |  
     #                  <code>windows-server-datacenter</code>.</p>
     #               </li>
     #               <li>
@@ -3211,12 +3231,12 @@ module Aws::LicenseManager
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>resource_id</code> - The ID of the resource.
+    #                     <code>resource_id</code> - The ID of the resource. 
     #                  Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>tag:<key></code> - The key/value combination of a tag assigned
+    #                     <code>tag:<key></code> - The key/value combination of a tag assigned 
     #                  to the resource. Logical operators are <code>EQUALS</code> (single account) or
     #                  <code>EQUALS</code> | <code>NOT_EQUALS</code> (cross account).</p>
     #               </li>
@@ -3362,7 +3382,7 @@ module Aws::LicenseManager
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>resourceType</code> - The resource type (<code>EC2_INSTANCE</code> |
+    #                     <code>resourceType</code> - The resource type (<code>EC2_INSTANCE</code> | 
     #               	<code>EC2_HOST</code> | <code>EC2_AMI</code> | <code>SYSTEMS_MANAGER_MANAGED_INSTANCE</code>).</p>
     #               </li>
     #               <li>
@@ -3834,7 +3854,7 @@ module Aws::LicenseManager
 
     # <p>Adds or removes the specified license configurations for the specified Amazon Web Services resource.</p>
     #          <p>You can update the license specifications of AMIs, instances, and hosts.
-    #          You cannot update the license specifications for launch templates and CloudFormation templates,
+    #          You cannot update the license specifications for launch templates and CloudFormation templates, 
     #          as they send license configurations to the operation that creates the resource.</p>
     # @param [Hash, Types::UpdateLicenseSpecificationsForResourceRequest] params
     # @option params [String] :resource_arn
@@ -3954,7 +3974,8 @@ module Aws::LicenseManager
     # @option options [Integer] :max_wait_time
     # @option options [Integer] :min_delay
     # @option options [Integer] :max_delay
-    # @return [nil] Returns `nil` if the waiter was successful.
+    # @return [Smithy::Client::Response] Returns the successful response
+    #   that satisfied the waiter's success condition.
     # @raise [FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
     #   out of, preventing success.

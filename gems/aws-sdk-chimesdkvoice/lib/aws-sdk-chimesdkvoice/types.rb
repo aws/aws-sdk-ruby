@@ -28,7 +28,7 @@ module Aws::ChimeSDKVoice
     #   <p>The address suffix, such as the <code>N</code> in <code>8th Avenue N</code>.</p>
     #   @return [String]
     # @!attribute post_directional
-    #   <p>An address suffix location, such as the <code>S. Unit A</code> in
+    #   <p>An address suffix location, such as the <code>S. Unit A</code> in 
     #            <code>Central Park S. Unit A</code>.</p>
     #   @return [String]
     # @!attribute pre_directional
@@ -77,7 +77,7 @@ module Aws::ChimeSDKVoice
     #   <p>List of phone numbers, in E.164 format.</p>
     #   @return [Array<String>]
     # @!attribute force_associate
-    #   <p>If true, associates the provided phone numbers with the provided Amazon Chime SDK Voice Connector Group and removes any previously existing associations.
+    #   <p>If true, associates the provided phone numbers with the provided Amazon Chime SDK Voice Connector Group and removes any previously existing associations. 
     #            If false, does not associate any phone numbers that have previously existing associations.</p>
     #   @return [Boolean]
     class AssociatePhoneNumbersWithVoiceConnectorGroupRequest < Struct.new(
@@ -121,7 +121,7 @@ module Aws::ChimeSDKVoice
     end
 
     # @!attribute phone_number_errors
-    #   <p>If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and
+    #   <p>If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and 
     #            error messages.</p>
     #   @return [Array<Types::PhoneNumberError>]
     class AssociatePhoneNumbersWithVoiceConnectorResponse < Struct.new(
@@ -306,7 +306,7 @@ module Aws::ChimeSDKVoice
     #   <p>The proxy session's capabilities.</p>
     #   @return [Array<String>]
     # @!attribute number_selection_behavior
-    #   <p>The preference for proxy phone number reuse, or stickiness, between the same
+    #   <p>The preference for proxy phone number reuse, or stickiness, between the same 
     #               participants across sessions.</p>
     #   @return [String]
     # @!attribute geo_match_level
@@ -342,7 +342,7 @@ module Aws::ChimeSDKVoice
     end
 
     # @!attribute from_phone_number
-    #   <p>The phone number that a user calls from. This is a phone number in your
+    #   <p>The phone number that a user calls from. This is a phone number in your 
     #            Amazon Chime SDK phone number inventory.</p>
     #   @return [String]
     # @!attribute to_phone_number
@@ -420,25 +420,25 @@ module Aws::ChimeSDKVoice
     #   <p>The name of the SIP rule.</p>
     #   @return [String]
     # @!attribute trigger_type
-    #   <p>The type of trigger assigned to the SIP rule in <code>TriggerValue</code>,
+    #   <p>The type of trigger assigned to the SIP rule in <code>TriggerValue</code>, 
     #            currently <code>RequestUriHostname</code> or <code>ToPhoneNumber</code>.</p>
     #   @return [String]
     # @!attribute trigger_value
-    #   <p>If <code>TriggerType</code> is <code>RequestUriHostname</code>, the
-    #            value can be the outbound host name of a Voice Connector. If
-    #            <code>TriggerType</code> is <code>ToPhoneNumber</code>, the value can
-    #            be a customer-owned phone number in the E164 format. The
-    #            <code>SipMediaApplication</code> specified in the <code>SipRule</code> is triggered
-    #            if the request URI in an incoming SIP request matches the
-    #            <code>RequestUriHostname</code>, or if the <code>To</code> header in the
+    #   <p>If <code>TriggerType</code> is <code>RequestUriHostname</code>, the 
+    #            value can be the outbound host name of a Voice Connector. If 
+    #            <code>TriggerType</code> is <code>ToPhoneNumber</code>, the value can 
+    #            be a customer-owned phone number in the E164 format. The 
+    #            <code>SipMediaApplication</code> specified in the <code>SipRule</code> is triggered 
+    #            if the request URI in an incoming SIP request matches the 
+    #            <code>RequestUriHostname</code>, or if the <code>To</code> header in the 
     #            incoming SIP request matches the <code>ToPhoneNumber</code> value.</p>
     #   @return [String]
     # @!attribute disabled
-    #   <p>Disables or enables a SIP rule. You must disable SIP rules
+    #   <p>Disables or enables a SIP rule. You must disable SIP rules 
     #            before you can delete them.</p>
     #   @return [Boolean]
     # @!attribute target_applications
-    #   <p>List of SIP media applications, with priority and AWS Region. Only one SIP
+    #   <p>List of SIP media applications, with priority and AWS Region. Only one SIP 
     #            application per AWS Region can be used.</p>
     #   @return [Array<Types::SipRuleTargetApplication>]
     class CreateSipRuleRequest < Struct.new(
@@ -497,7 +497,7 @@ module Aws::ChimeSDKVoice
     #   <p>The name of the Voice Connector.</p>
     #   @return [String]
     # @!attribute aws_region
-    #   <p>The AWS Region in which the Amazon Chime SDK Voice Connector is created. Default value:
+    #   <p>The AWS Region in which the Amazon Chime SDK Voice Connector is created. Default value: 
     #            <code>us-east-1</code> .</p>
     #   @return [String]
     # @!attribute require_encryption
@@ -630,7 +630,7 @@ module Aws::ChimeSDKVoice
 
     # <p>The SIP credentials used to authenticate requests to an Amazon Chime SDK Voice Connector.</p>
     # @!attribute username
-    #   <p>The RFC2617 compliant user name associated with the SIP credentials, in
+    #   <p>The RFC2617 compliant user name associated with the SIP credentials, in 
     #            US-ASCII format.</p>
     #   @return [String]
     # @!attribute password
@@ -645,8 +645,8 @@ module Aws::ChimeSDKVoice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The Dialed Number Identification Service (DNIS) emergency calling configuration
-    #          details associated with an Amazon Chime SDK Voice Connector's emergency calling
+    # <p>The Dialed Number Identification Service (DNIS) emergency calling configuration 
+    #          details associated with an Amazon Chime SDK Voice Connector's emergency calling 
     #          configuration.</p>
     # @!attribute emergency_phone_number
     #   <p>The DNIS phone number that you route emergency calls to, in E.164 format.</p>
@@ -797,7 +797,7 @@ module Aws::ChimeSDKVoice
     #   <p>The Voice Connector ID.</p>
     #   @return [String]
     # @!attribute usernames
-    #   <p>The RFC2617 compliant username associated with the SIP credentials,
+    #   <p>The RFC2617 compliant username associated with the SIP credentials, 
     #            in US-ASCII format.</p>
     #   @return [Array<String>]
     class DeleteVoiceConnectorTerminationCredentialsRequest < Struct.new(
@@ -858,7 +858,7 @@ module Aws::ChimeSDKVoice
     end
 
     # @!attribute phone_number_errors
-    #   <p>If the action fails for one or more of the phone numbers in the request,
+    #   <p>If the action fails for one or more of the phone numbers in the request, 
     #            a list of the phone numbers is returned, along with error codes and error messages.</p>
     #   @return [Array<Types::PhoneNumberError>]
     class DisassociatePhoneNumbersFromVoiceConnectorGroupResponse < Struct.new(
@@ -885,7 +885,7 @@ module Aws::ChimeSDKVoice
     end
 
     # @!attribute phone_number_errors
-    #   <p>If the action fails for one or more of the phone numbers in the request, a
+    #   <p>If the action fails for one or more of the phone numbers in the request, a 
     #            list of the phone numbers is returned, along with error codes and error messages.</p>
     #   @return [Array<Types::PhoneNumberError>]
     class DisassociatePhoneNumbersFromVoiceConnectorResponse < Struct.new(
@@ -896,10 +896,10 @@ module Aws::ChimeSDKVoice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The emergency calling configuration details associated with an Amazon Chime SDK
+    # <p>The emergency calling configuration details associated with an Amazon Chime SDK 
     #          Voice Connector.</p>
     # @!attribute dnis
-    #   <p>The Dialed Number Identification Service (DNIS) emergency calling configuration
+    #   <p>The Dialed Number Identification Service (DNIS) emergency calling configuration 
     #            details.</p>
     #   @return [Array<Types::DNISEmergencyCallingConfiguration>]
     class EmergencyCallingConfiguration < Struct.new(
@@ -1855,7 +1855,7 @@ module Aws::ChimeSDKVoice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The logging configuration associated with an Amazon Chime SDK Voice Connector.
+    # <p>The logging configuration associated with an Amazon Chime SDK Voice Connector. 
     #          Specifies whether SIP message logs can be sent to Amazon CloudWatch Logs.</p>
     # @!attribute enable_sip_logs
     #   <p>Boolean that enables sending SIP message logs to Amazon CloudWatch.</p>
@@ -1918,21 +1918,21 @@ module Aws::ChimeSDKVoice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Origination settings enable your SIP hosts to receive inbound calls using your
+    # <p>Origination settings enable your SIP hosts to receive inbound calls using your 
     #          Amazon Chime SDK Voice Connector.</p>
     #          <note>
-    #             <p>The parameters listed below are not required, but you must use at least
+    #             <p>The parameters listed below are not required, but you must use at least 
     #          one.</p>
     #          </note>
     # @!attribute routes
-    #   <p>The call distribution properties defined for your SIP hosts. Valid range: Minimum
-    #            value of 1. Maximum value of 20. This parameter is not required, but you must specify
+    #   <p>The call distribution properties defined for your SIP hosts. Valid range: Minimum 
+    #            value of 1. Maximum value of 20. This parameter is not required, but you must specify 
     #            this parameter or <code>Disabled</code>.</p>
     #   @return [Array<Types::OriginationRoute>]
     # @!attribute disabled
-    #   <p>When origination settings are disabled, inbound calls are not enabled for your
-    #            Amazon Chime SDK Voice Connector.
-    #            This parameter is not required, but you must specify this parameter or
+    #   <p>When origination settings are disabled, inbound calls are not enabled for your 
+    #            Amazon Chime SDK Voice Connector. 
+    #            This parameter is not required, but you must specify this parameter or 
     #            <code>Routes</code>.</p>
     #   @return [Boolean]
     class Origination < Struct.new(
@@ -1944,8 +1944,8 @@ module Aws::ChimeSDKVoice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Origination routes define call distribution properties for your SIP hosts to
-    #          receive inbound calls using an Amazon Chime SDK Voice Connector. Limit: Ten origination
+    # <p>Origination routes define call distribution properties for your SIP hosts to 
+    #          receive inbound calls using an Amazon Chime SDK Voice Connector. Limit: Ten origination 
     #          routes for each Voice Connector.</p>
     #          <note>
     #             <p>The parameters listed below are not required, but you must use at least one.</p>
@@ -1957,15 +1957,15 @@ module Aws::ChimeSDKVoice
     #   <p>The designated origination route port. Defaults to 5060.</p>
     #   @return [Integer]
     # @!attribute protocol
-    #   <p>The protocol to use for the origination route. Encryption-enabled Amazon Chime SDK Voice Connectors use
+    #   <p>The protocol to use for the origination route. Encryption-enabled Amazon Chime SDK Voice Connectors use 
     #            TCP protocol by default.</p>
     #   @return [String]
     # @!attribute priority
-    #   <p>The priority associated with the host, with 1 being the highest priority. Higher
+    #   <p>The priority associated with the host, with 1 being the highest priority. Higher 
     #            priority hosts are attempted first.</p>
     #   @return [Integer]
     # @!attribute weight
-    #   <p>The weight assigned to an origination route. When hosts have equal priority,
+    #   <p>The weight assigned to an origination route. When hosts have equal priority, 
     #            calls are distributed between them based on their relative weights.</p>
     #   @return [Integer]
     class OriginationRoute < Struct.new(
@@ -1996,7 +1996,7 @@ module Aws::ChimeSDKVoice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A phone number used to call an Amazon
+    # <p>A phone number used to call an Amazon 
     #          Chime SDK Voice Connector.</p>
     # @!attribute phone_number_id
     #   <p>The phone number's ID.</p>
@@ -2068,7 +2068,7 @@ module Aws::ChimeSDKVoice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The phone number associations, such as an Amazon Chime SDK account ID, user ID,
+    # <p>The phone number associations, such as an Amazon Chime SDK account ID, user ID, 
     #          Voice Connector ID, or Voice Connector group ID.</p>
     # @!attribute value
     #   <p>Contains the ID for the entity specified in Name.</p>
@@ -2089,7 +2089,7 @@ module Aws::ChimeSDKVoice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The phone number capabilities for Amazon Chime SDK phone numbers,
+    # <p>The phone number capabilities for Amazon Chime SDK phone numbers, 
     #          such as enabled inbound and outbound calling, and text messaging.</p>
     # @!attribute inbound_call
     #   <p>Allows or denies inbound calling for the specified phone number.</p>
@@ -2138,7 +2138,7 @@ module Aws::ChimeSDKVoice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>If a phone number action fails for one or more of the phone numbers in a request,
+    # <p>If a phone number action fails for one or more of the phone numbers in a request, 
     #          a list of the failed phone numbers is returned, along with error codes and error messages.</p>
     # @!attribute phone_number_id
     #   <p>The phone number ID for which the action failed.</p>
@@ -2173,7 +2173,7 @@ module Aws::ChimeSDKVoice
     #   <p>The type of phone number being ordered, local or toll-free.</p>
     #   @return [String]
     # @!attribute ordered_phone_numbers
-    #   <p>The ordered phone number details, such as the phone number in E.164 format
+    #   <p>The ordered phone number details, such as the phone number in E.164 format 
     #            and the phone number status.</p>
     #   @return [Array<Types::OrderedPhoneNumber>]
     # @!attribute created_timestamp
@@ -2646,7 +2646,7 @@ module Aws::ChimeSDKVoice
     #             <p>We only support symmetric keys. Do not use asymmetric or HMAC keys, or KMS aliases.</p>
     #          </note>
     # @!attribute kms_key_arn
-    #   <p>The ARN of the KMS key used to encrypt the enrollment data in a voice profile domain.
+    #   <p>The ARN of the KMS key used to encrypt the enrollment data in a voice profile domain. 
     #            Asymmetric customer managed keys are not supported.</p>
     #   @return [String]
     class ServerSideEncryptionConfiguration < Struct.new(
@@ -2685,7 +2685,7 @@ module Aws::ChimeSDKVoice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The details of the SIP media application, including name and endpoints.
+    # <p>The details of the SIP media application, including name and endpoints. 
     #          An AWS account can have multiple SIP media applications.</p>
     # @!attribute sip_media_application_id
     #   <p>A SIP media application's ID.</p>
@@ -2697,7 +2697,7 @@ module Aws::ChimeSDKVoice
     #   <p>The SIP media application's name.</p>
     #   @return [String]
     # @!attribute endpoints
-    #   <p>List of endpoints for a SIP media application. Currently, only one endpoint per
+    #   <p>List of endpoints for a SIP media application. Currently, only one endpoint per 
     #            SIP media application is permitted.</p>
     #   @return [Array<Types::SipMediaApplicationEndpoint>]
     # @!attribute created_timestamp
@@ -2725,7 +2725,7 @@ module Aws::ChimeSDKVoice
 
     # <p>The Alexa Skill configuration of a SIP media application.</p>
     #          <important>
-    #             <p>Due to changes made by the Amazon Alexa service, this data type is no longer available for use. For more information, refer to
+    #             <p>Due to changes made by the Amazon Alexa service, this data type is no longer available for use. For more information, refer to 
     #          the <a href="https://developer.amazon.com/en-US/alexa/alexasmartproperties">Alexa Smart Properties</a> page.</p>
     #          </important>
     # @!attribute alexa_skill_status
@@ -2757,7 +2757,7 @@ module Aws::ChimeSDKVoice
 
     # <p>The endpoint assigned to a SIP media application.</p>
     # @!attribute lambda_arn
-    #   <p>Valid Amazon Resource Name (ARN) of the Lambda function, version, or alias.
+    #   <p>Valid Amazon Resource Name (ARN) of the Lambda function, version, or alias. 
     #            The function must be created in the same AWS Region as the SIP media application.</p>
     #   @return [String]
     class SipMediaApplicationEndpoint < Struct.new(
@@ -2780,7 +2780,7 @@ module Aws::ChimeSDKVoice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The details of a SIP rule, including name, triggers, and target applications.
+    # <p>The details of a SIP rule, including name, triggers, and target applications. 
     #          An AWS account can have multiple SIP rules.</p>
     # @!attribute sip_rule_id
     #   <p>A SIP rule's ID.</p>
@@ -2798,7 +2798,7 @@ module Aws::ChimeSDKVoice
     #   <p>The value set for a SIP rule's trigger type. Either a phone number or a URI hostname.</p>
     #   @return [String]
     # @!attribute target_applications
-    #   <p>The target SIP media application and other details, such as priority and AWS Region,
+    #   <p>The target SIP media application and other details, such as priority and AWS Region, 
     #            to be specified in the SIP rule. Only one SIP rule per AWS Region can be provided.</p>
     #   @return [Array<Types::SipRuleTargetApplication>]
     # @!attribute created_timestamp
@@ -2822,7 +2822,7 @@ module Aws::ChimeSDKVoice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A target SIP media application and other details, such as priority and AWS Region,
+    # <p>A target SIP media application and other details, such as priority and AWS Region, 
     #          to be specified in the SIP rule. Only one SIP rule per AWS Region can be provided.</p>
     # @!attribute sip_media_application_id
     #   <p>The ID of a rule's target SIP media application.</p>
@@ -2880,13 +2880,13 @@ module Aws::ChimeSDKVoice
       end
     end
 
-    # <p>A representation of an asynchronous request to perform speaker search analysis on a
+    # <p>A representation of an asynchronous request to perform speaker search analysis on a 
     #          Voice Connector call.</p>
     # @!attribute speaker_search_task_id
     #   <p>The speaker search task ID.</p>
     #   @return [String]
     # @!attribute speaker_search_task_status
-    #   <p>The status of the speaker search task, <code>IN_QUEUE</code>, <code>IN_PROGRESS</code>, <code>PARTIAL_SUCCESS</code>, <code>SUCCEEDED</code>,
+    #   <p>The status of the speaker search task, <code>IN_QUEUE</code>, <code>IN_PROGRESS</code>, <code>PARTIAL_SUCCESS</code>, <code>SUCCEEDED</code>, 
     #            <code>FAILED</code>, or <code>STOPPED</code>.</p>
     #   @return [String]
     # @!attribute call_details
@@ -2970,7 +2970,7 @@ module Aws::ChimeSDKVoice
     #   <p>The language code.</p>
     #   @return [String]
     # @!attribute client_request_token
-    #   <p>The unique identifier for the client request. Use a different token for different voice tone analysis
+    #   <p>The unique identifier for the client request. Use a different token for different voice tone analysis 
     #            tasks.</p>
     #   @return [String]
     class StartVoiceToneAnalysisTaskRequest < Struct.new(
@@ -3025,8 +3025,8 @@ module Aws::ChimeSDKVoice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The streaming configuration associated with an Amazon Chime SDK Voice Connector.
-    #          Specifies whether media streaming is enabled for sending to Amazon Kinesis, and shows the retention
+    # <p>The streaming configuration associated with an Amazon Chime SDK Voice Connector. 
+    #          Specifies whether media streaming is enabled for sending to Amazon Kinesis, and shows the retention 
     #          period for the Amazon Kinesis data, in hours.</p>
     # @!attribute data_retention_in_hours
     #   <p>The amount of time, in hours, to the Kinesis data.</p>
@@ -3229,7 +3229,7 @@ module Aws::ChimeSDKVoice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The phone number ID, product type, or calling name fields to update,
+    # <p>The phone number ID, product type, or calling name fields to update, 
     #          used with the <a>BatchUpdatePhoneNumber</a> and <a>UpdatePhoneNumber</a> actions.</p>
     # @!attribute phone_number_id
     #   <p>The phone number ID to update.</p>
@@ -3317,7 +3317,7 @@ module Aws::ChimeSDKVoice
     #   <p>The ID of the call transaction.</p>
     #   @return [String]
     # @!attribute arguments
-    #   <p>Arguments made available to the Lambda function as part of the
+    #   <p>Arguments made available to the Lambda function as part of the 
     #            <code>CALL_UPDATE_REQUESTED</code> event. Can contain 0-20 key-value pairs.</p>
     #   @return [Hash<String, String>]
     class UpdateSipMediaApplicationCallRequest < Struct.new(
@@ -3412,7 +3412,7 @@ module Aws::ChimeSDKVoice
     #   <p>The name of the Voice Connector group.</p>
     #   @return [String]
     # @!attribute voice_connector_items
-    #   <p>The <code>VoiceConnectorItems</code> to associate with the Voice Connector
+    #   <p>The <code>VoiceConnectorItems</code> to associate with the Voice Connector 
     #            group.</p>
     #   @return [Array<Types::VoiceConnectorItem>]
     # @!attribute call_distribution_type
@@ -3608,13 +3608,13 @@ module Aws::ChimeSDKVoice
       end
     end
 
-    # <p>The Amazon Chime SDK Voice Connector configuration, including outbound
+    # <p>The Amazon Chime SDK Voice Connector configuration, including outbound 
     #          host name and encryption settings.</p>
     # @!attribute voice_connector_id
     #   <p>The Voice Connector's ID.</p>
     #   @return [String]
     # @!attribute aws_region
-    #   <p>The AWS Region in which the Voice Connector is created.
+    #   <p>The AWS Region in which the Voice Connector is created. 
     #            Default: us-east-1.</p>
     #   @return [String]
     # @!attribute name
@@ -3658,9 +3658,9 @@ module Aws::ChimeSDKVoice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The Amazon Chime SDK Voice Connector group configuration, including
-    #          associated Voice Connectors. You can include Voice Connectors from different
-    #          AWS Regions in a group. This creates a fault tolerant mechanism for
+    # <p>The Amazon Chime SDK Voice Connector group configuration, including 
+    #          associated Voice Connectors. You can include Voice Connectors from different 
+    #          AWS Regions in a group. This creates a fault tolerant mechanism for 
     #          fallback in case of availability events.</p>
     # @!attribute voice_connector_group_id
     #   <p>The ID of a Voice Connector group.</p>
@@ -3696,15 +3696,15 @@ module Aws::ChimeSDKVoice
       include ::Smithy::Schema::Structure
     end
 
-    # <p>For Amazon Chime SDK Voice Connector groups, the Amazon Chime SDK Voice
-    #          Connectors to which you route inbound calls. Includes priority configuration
+    # <p>For Amazon Chime SDK Voice Connector groups, the Amazon Chime SDK Voice 
+    #          Connectors to which you route inbound calls. Includes priority configuration 
     #          settings. Limit: 3 VoiceConnectorItems per Voice Connector group.</p>
     # @!attribute voice_connector_id
     #   <p>The Voice Connector ID.</p>
     #   @return [String]
     # @!attribute priority
-    #   <p>The priority setting of a Voice Connector item. Calls are routed to hosts
-    #              in priority order, with 1 as the highest priority. When hosts have equal priority,
+    #   <p>The priority setting of a Voice Connector item. Calls are routed to hosts 
+    #              in priority order, with 1 as the highest priority. When hosts have equal priority, 
     #              the system distributes calls among them based on their relative weight.</p>
     #   @return [Integer]
     class VoiceConnectorItem < Struct.new(
@@ -3721,7 +3721,7 @@ module Aws::ChimeSDKVoice
       end
     end
 
-    # <p>The Amazon Chime SDK Voice Connector settings. Includes any Amazon
+    # <p>The Amazon Chime SDK Voice Connector settings. Includes any Amazon 
     #          S3 buckets designated for storing call detail records.</p>
     # @!attribute cdr_bucket
     #   <p>The S3 bucket that stores the Voice Connector's call detail records.</p>
@@ -3751,7 +3751,7 @@ module Aws::ChimeSDKVoice
     #   <p>The time at which the voice profile was last updated.</p>
     #   @return [Time]
     # @!attribute expiration_timestamp
-    #   <p>The time at which a voice profile expires unless you re-enroll the caller via the
+    #   <p>The time at which a voice profile expires unless you re-enroll the caller via the 
     #            <code>UpdateVoiceProfile</code> API.</p>
     #   @return [Time]
     class VoiceProfile < Struct.new(
@@ -3872,7 +3872,7 @@ module Aws::ChimeSDKVoice
     #   <p>The ID of the voice tone analysis task.</p>
     #   @return [String]
     # @!attribute voice_tone_analysis_task_status
-    #   <p>The status of a voice tone analysis task, <code>IN_QUEUE</code>, <code>IN_PROGRESS</code>, <code>PARTIAL_SUCCESS</code>, <code>SUCCEEDED</code>,
+    #   <p>The status of a voice tone analysis task, <code>IN_QUEUE</code>, <code>IN_PROGRESS</code>, <code>PARTIAL_SUCCESS</code>, <code>SUCCEEDED</code>, 
     #            <code>FAILED</code>, or <code>STOPPED</code>.</p>
     #   @return [String]
     # @!attribute call_details

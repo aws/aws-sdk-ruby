@@ -241,14 +241,14 @@ module Aws::ResourceGroupsTaggingAPI
     #               supplied, the counts are sorted by those attributes.</p>
     #   @return [Array<String>]
     # @!attribute max_results
-    #   <p>Specifies the maximum number of results to be returned in each page. A
+    #   <p>Specifies the maximum number of results to be returned in each page. A 
     #       query can return fewer than this maximum, even if there are more results still to return. You
     #       should always check the <code>PaginationToken</code> response value to see if there are more
     #       results. You can specify a minimum of 1 and a maximum value of 100.</p>
     #   @return [Integer]
     # @!attribute pagination_token
-    #   <p>Specifies a <code>PaginationToken</code> response value from a
-    #       previous request to indicate that you want the next page of results. Leave this parameter empty
+    #   <p>Specifies a <code>PaginationToken</code> response value from a 
+    #       previous request to indicate that you want the next page of results. Leave this parameter empty 
     #       in your initial request.</p>
     #   @return [String]
     class GetComplianceSummaryInput < Struct.new(
@@ -270,7 +270,7 @@ module Aws::ResourceGroupsTaggingAPI
     #   @return [Array<Types::Summary>]
     # @!attribute pagination_token
     #   <p>A string that indicates that there is more data available than this
-    #       response contains. To receive the next part of the response, specify this response value
+    #       response contains. To receive the next part of the response, specify this response value 
     #       as the <code>PaginationToken</code> value in the request for the next page.</p>
     #   @return [String]
     class GetComplianceSummaryOutput < Struct.new(
@@ -283,8 +283,8 @@ module Aws::ResourceGroupsTaggingAPI
     end
 
     # @!attribute pagination_token
-    #   <p>Specifies a <code>PaginationToken</code> response value from a
-    #       previous request to indicate that you want the next page of results. Leave this parameter empty
+    #   <p>Specifies a <code>PaginationToken</code> response value from a 
+    #       previous request to indicate that you want the next page of results. Leave this parameter empty 
     #       in your initial request.</p>
     #   @return [String]
     # @!attribute tag_filters
@@ -350,7 +350,7 @@ module Aws::ResourceGroupsTaggingAPI
     #            </ul>
     #   @return [Array<Types::TagFilter>]
     # @!attribute resources_per_page
-    #   <p>Specifies the maximum number of results to be returned in each page. A
+    #   <p>Specifies the maximum number of results to be returned in each page. A 
     #       query can return fewer than this maximum, even if there are more results still to return. You
     #       should always check the <code>PaginationToken</code> response value to see if there are more
     #       results. You can specify a minimum of 1 and a maximum value of 100.</p>
@@ -446,11 +446,11 @@ module Aws::ResourceGroupsTaggingAPI
 
     # @!attribute pagination_token
     #   <p>A string that indicates that there is more data available than this
-    #       response contains. To receive the next part of the response, specify this response value
+    #       response contains. To receive the next part of the response, specify this response value 
     #       as the <code>PaginationToken</code> value in the request for the next page.</p>
     #   @return [String]
     # @!attribute resource_tag_mapping_list
-    #   <p>A list of resource ARNs and the tags (keys and values) associated with
+    #   <p>A list of resource ARNs and the tags (keys and values) associated with 
     #       each.</p>
     #   @return [Array<Types::ResourceTagMapping>]
     class GetResourcesOutput < Struct.new(
@@ -463,8 +463,8 @@ module Aws::ResourceGroupsTaggingAPI
     end
 
     # @!attribute pagination_token
-    #   <p>Specifies a <code>PaginationToken</code> response value from a
-    #       previous request to indicate that you want the next page of results. Leave this parameter empty
+    #   <p>Specifies a <code>PaginationToken</code> response value from a 
+    #       previous request to indicate that you want the next page of results. Leave this parameter empty 
     #       in your initial request.</p>
     #   @return [String]
     class GetTagKeysInput < Struct.new(
@@ -477,7 +477,7 @@ module Aws::ResourceGroupsTaggingAPI
 
     # @!attribute pagination_token
     #   <p>A string that indicates that there is more data available than this
-    #       response contains. To receive the next part of the response, specify this response value
+    #       response contains. To receive the next part of the response, specify this response value 
     #       as the <code>PaginationToken</code> value in the request for the next page.</p>
     #   @return [String]
     # @!attribute tag_keys
@@ -493,8 +493,8 @@ module Aws::ResourceGroupsTaggingAPI
     end
 
     # @!attribute pagination_token
-    #   <p>Specifies a <code>PaginationToken</code> response value from a
-    #       previous request to indicate that you want the next page of results. Leave this parameter empty
+    #   <p>Specifies a <code>PaginationToken</code> response value from a 
+    #       previous request to indicate that you want the next page of results. Leave this parameter empty 
     #       in your initial request.</p>
     #   @return [String]
     # @!attribute key
@@ -512,7 +512,7 @@ module Aws::ResourceGroupsTaggingAPI
 
     # @!attribute pagination_token
     #   <p>A string that indicates that there is more data available than this
-    #       response contains. To receive the next part of the response, specify this response value
+    #       response contains. To receive the next part of the response, specify this response value 
     #       as the <code>PaginationToken</code> value in the request for the next page.</p>
     #   @return [String]
     # @!attribute tag_values
@@ -729,11 +729,11 @@ module Aws::ResourceGroupsTaggingAPI
     #             them. Each tag consists of a key and a value, both of which you define. For more
     #             information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> in the <i>Amazon Web Services General Reference</i>.</p>
     # @!attribute key
-    #   <p>One part of a key-value pair that makes up a tag. A key is a general label
+    #   <p>One part of a key-value pair that makes up a tag. A key is a general label 
     #       that acts like a category for more specific tag values.</p>
     #   @return [String]
     # @!attribute value
-    #   <p>One part of a key-value pair that make up a tag. A value acts as a
+    #   <p>One part of a key-value pair that make up a tag. A value acts as a 
     #       descriptor within a tag category (key). The value can be empty or null.</p>
     #   @return [String]
     class Tag < Struct.new(
@@ -748,11 +748,11 @@ module Aws::ResourceGroupsTaggingAPI
     # <p>A list of tags (keys and values) that are used to specify the associated
     #             resources.</p>
     # @!attribute key
-    #   <p>One part of a key-value pair that makes up a tag. A key is a general label
+    #   <p>One part of a key-value pair that makes up a tag. A key is a general label 
     #       that acts like a category for more specific tag values.</p>
     #   @return [String]
     # @!attribute values
-    #   <p>One part of a key-value pair that make up a tag. A value acts as a
+    #   <p>One part of a key-value pair that make up a tag. A value acts as a 
     #       descriptor within a tag category (key). The value can be empty or null.</p>
     #   @return [Array<String>]
     class TagFilter < Struct.new(
